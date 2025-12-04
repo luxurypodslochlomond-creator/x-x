@@ -1,0 +1,1 @@
+import React from 'react'; import PlaceholderPage from '@/components/shared/PlaceholderPage'; export default function PRMaterials() { return <PlaceholderPage title="PR Materials" />; }

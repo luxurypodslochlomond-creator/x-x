@@ -1,0 +1,392 @@
+import React, { useState, useEffect } from 'react';
+import { Card, CardContent } from '@/components/ui/card';
+import { Heart, Clock, Shield, Globe, TrendingUp, Waves, Cpu } from 'lucide-react';
+import P51Symbol from '@/components/shared/P51Symbol';
+import { format } from 'date-fns';
+import { motion } from 'framer-motion';
+
+export default function WhitepaperPage() {
+    const [currentTime, setCurrentTime] = useState(new Date());
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setCurrentTime(new Date());
+        }, 1000);
+
+        return () => clearInterval(timer);
+    }, []);
+
+    return (
+        <div className="min-h-screen bg-[#0a0514] text-[#f5f5f5] p-4 md:p-12">
+            <div className="max-w-4xl mx-auto space-y-8 pb-24">
+                
+                {/* Header */}
+                <header className="text-center space-y-4 py-8">
+                    <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ duration: 0.8 }}>
+                        <Globe className="w-16 h-16 text-green-400 mx-auto" />
+                    </motion.div>
+                    <h1 className="text-3xl md:text-5xl font-black text-white">
+                        UF51: Proof-of-Love Protocol
+                    </h1>
+                    <p className="text-lg text-gray-400">Rewarding Planetary Healing Through Cryptoeconomic Verification</p>
+                    <div className="flex items-center justify-center gap-4 mt-4">
+                        <a href="/TechnicalSpecification" className="inline-flex items-center gap-2 bg-cyan-600 hover:bg-cyan-700 text-white px-4 py-2 rounded-lg font-bold text-sm transition-colors">
+                            <Cpu className="w-4 h-4" />
+                            Technical Spec (Formulas & Math)
+                        </a>
+                    </div>
+                    <div className="text-gray-500 space-y-1 text-sm">
+                        <p>Universal Frequency51 CIC</p>
+                        <p>v2.1 • November 2025</p>
+                        <p>
+                            <a href="https://uf51.love" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:underline">uf51.love</a>
+                        </p>
+                    </div>
+                </header>
+
+                {/* Abstract */}
+                <Card className="bg-gradient-to-br from-green-900/40 to-cyan-900/40 border-2 border-green-500/50">
+                    <CardContent className="p-6">
+                        <h2 className="text-2xl font-black text-green-400 mb-4">Abstract</h2>
+                        <div className="space-y-3 text-gray-300 leading-relaxed text-sm md:text-base">
+                            <p className="text-white font-bold text-lg">
+                                We present a system that pays people to heal Earth.
+                            </p>
+                            <p>
+                                Every year, 8 million tonnes of plastic enter our oceans. Cleanup is unpaid labor. Extraction is rewarded. Regeneration is not.
+                            </p>
+                            <p>
+                                <strong className="text-white">Proof-of-Love</strong> reverses this: verified environmental healing = immediate economic reward through <P51Symbol showTooltip={false} /> (Love Currency). 
+                                This purchasing power flows into an ecosystem where <strong className="text-white">artists receive 90% of revenue automatically</strong> - creating a regenerative economy that heals both planet and creative exploitation.
+                            </p>
+                            <p className="text-green-400 font-bold">
+                                This is not theory. This is working code, processing real cleanups, November 2025.
+                            </p>
+                        </div>
+                    </CardContent>
+                </Card>
+
+                {/* Problem Statement */}
+                <Card className="bg-black/60 border-2 border-red-500/50">
+                    <CardContent className="p-6">
+                        <h2 className="text-2xl font-black text-red-400 mb-4">1. The Crisis</h2>
+                        <div className="space-y-4 text-gray-300 leading-relaxed text-sm">
+                            
+                            <div className="bg-red-900/30 p-4 rounded-xl border border-red-500/30">
+                                <h3 className="text-lg font-bold text-white mb-3">Environmental Collapse</h3>
+                                <ul className="space-y-2 ml-4">
+                                    <li>• <strong className="text-red-300">8 million tonnes</strong> plastic into oceans/year (IUCN, verified)</li>
+                                    <li>• <strong className="text-red-300">400 million tonnes</strong> plastic produced/year (UNEP, 2023)</li>
+                                    <li>• <strong className="text-red-300">Zero economic incentive</strong> for individual cleanup</li>
+                                    <li>• Cleanup = unpaid volunteer labor</li>
+                                </ul>
+                            </div>
+
+                            <div className="bg-orange-900/30 p-4 rounded-xl border border-orange-500/30">
+                                <h3 className="text-lg font-bold text-white mb-3">Economic Model Broken</h3>
+                                <p className="mb-2">Existing systems reward <strong className="text-white">extraction</strong> over <strong className="text-white">regeneration:</strong></p>
+                                <ul className="space-y-2 ml-4">
+                                    <li>• Make plastic = profit</li>
+                                    <li>• Remove plastic = charity</li>
+                                    <li>• No closed loop</li>
+                                </ul>
+                                <p className="text-orange-400 font-bold mt-3">We reverse this: Regeneration = immediate economic reward.</p>
+                            </div>
+
+                        </div>
+                    </CardContent>
+                </Card>
+
+                {/* The Solution */}
+                <Card className="bg-gradient-to-br from-green-900/40 to-emerald-900/40 border-2 border-green-500/50">
+                    <CardContent className="p-6">
+                        <h2 className="text-2xl font-black text-green-400 mb-4">2. How Proof-of-Love Works</h2>
+                        <div className="space-y-4 text-gray-300 leading-relaxed text-sm">
+                            
+                            <div className="bg-black/60 p-4 rounded-xl border border-green-500/30">
+                                <h3 className="text-lg font-bold text-white mb-3">The Mechanism</h3>
+                                <div className="space-y-3">
+                                    <div className="bg-green-900/40 p-3 rounded-lg border-l-4 border-green-400">
+                                        <p className="font-bold text-green-300 mb-1 text-xs">STEP 1: ACTION</p>
+                                        <p className="text-sm">User removes litter, takes GPS-tagged before/after photos</p>
+                                    </div>
+                                    <div className="text-center text-xl text-cyan-400">⬇️</div>
+                                    <div className="bg-cyan-900/40 p-3 rounded-lg border-l-4 border-cyan-400">
+                                        <p className="font-bold text-cyan-300 mb-1 text-xs">STEP 2: VERIFICATION</p>
+                                        <p className="text-sm">AI analyzes authenticity, uniqueness, estimated weight</p>
+                                    </div>
+                                    <div className="text-center text-xl text-pink-400">⬇️</div>
+                                    <div className="bg-pink-900/40 p-3 rounded-lg border-l-4 border-pink-400">
+                                        <p className="font-bold text-pink-300 mb-1 text-xs">STEP 3: REWARD</p>
+                                        <p className="text-base font-mono text-white">1kg litter = 1 <P51Symbol showTooltip={false} /></p>
+                                        <p className="text-xs text-gray-400 mt-1">Instant payment to wallet</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="bg-black/60 p-4 rounded-xl border border-cyan-500/30">
+                                <h3 className="text-lg font-bold text-white mb-3">Why <P51Symbol showTooltip={false} />?</h3>
+                                <p className="mb-2 text-sm">Named in honor of <strong className="text-cyan-400">Rosalind Franklin</strong> and her <strong className="text-cyan-400">Photo 51</strong> - the X-ray crystallography image that revealed DNA's double helix structure (1952). She never received proper credit during her lifetime. We remember.</p>
+                                <ul className="space-y-1 ml-4 text-sm">
+                                    <li>• Proof through photography</li>
+                                    <li>• Healing at molecular level (528Hz DNA repair)</li>
+                                    <li>• Recognition of hidden work - like hers</li>
+                                </ul>
+                            </div>
+
+                            <div className="bg-purple-900/30 p-4 rounded-xl border border-purple-500/30">
+                                <h3 className="text-lg font-bold text-white mb-3">Anti-Fraud (Live)</h3>
+                                <ul className="space-y-2 ml-4 text-sm">
+                                    <li>• <strong className="text-white">Photo hash:</strong> Duplicates auto-rejected</li>
+                                    <li>• <strong className="text-white">GPS verification:</strong> Location embedded in metadata</li>
+                                    <li>• <strong className="text-white">AI vision:</strong> Detects altered/staged photos</li>
+                                    <li>• <strong className="text-white">Cryptographic signing (NEW Nov 2025):</strong> ECDSA P-256 digital signatures. Weight/photo/location tampering = instant detection</li>
+                                </ul>
+                            </div>
+
+                            <div className="bg-green-900/30 p-4 rounded-xl border-2 border-green-500/50">
+                                <h3 className="text-lg font-bold text-green-400 mb-3">🔐 BREAKTHROUGH: Cryptographic Security (Nov 2025)</h3>
+                                <p className="text-sm text-white mb-2">
+                                    Every cleanup is cryptographically signed using <strong>ECDSA P-256</strong> (bank-grade) + <strong>SHA-256</strong> (Bitcoin-level) hashing. 
+                                    Your browser generates a unique keypair. Each submission gets digitally signed with YOUR private key.
+                                </p>
+                                <div className="space-y-2 text-xs text-gray-300 ml-4">
+                                    <p>• Change weight? <strong className="text-red-400">Signature breaks</strong> = CAUGHT</p>
+                                    <p>• Swap photo? <strong className="text-red-400">Hash mismatch</strong> = CAUGHT</p>
+                                    <p>• Fake location? <strong className="text-red-400">GPS coords signed</strong> = CAUGHT</p>
+                                    <p>• Submit twice? <strong className="text-red-400">Hash chain breaks</strong> = CAUGHT</p>
+                                </div>
+                                <p className="text-green-400 text-xs font-bold mt-3">
+                                    More efficient than blockchain. No mining, no fees, instant verification. 
+                                    Can upgrade to quantum-resistant algorithms when needed.
+                                </p>
+                            </div>
+
+                            <div className="bg-cyan-900/30 p-4 rounded-xl border-2 border-cyan-500/50">
+                                <h3 className="text-lg font-bold text-cyan-400 mb-3">🛰️ NEW: IPFS Decentralized Storage (Nov 2025)</h3>
+                                <p className="text-sm text-white mb-2">
+                                    Every cleanup photo + $P51 transaction is now <strong>pinned to IPFS</strong> (InterPlanetary File System) = 
+                                    decentralized storage that survives server shutdowns, government censorship, and quantum attacks.
+                                </p>
+                                <div className="space-y-2 text-xs text-gray-300 ml-4">
+                                    <p>• <strong className="text-cyan-300">Content-addressed:</strong> File hash = file location (tamper-proof)</p>
+                                    <p>• <strong className="text-cyan-300">Distributed network:</strong> No single point of failure</p>
+                                    <p>• <strong className="text-cyan-300">Redundant gateways:</strong> Multiple access points worldwide</p>
+                                    <p>• <strong className="text-cyan-300">Quantum-proof:</strong> SHA-256 hash integrity</p>
+                                </div>
+                                <p className="text-cyan-400 text-xs font-bold mt-3">
+                                    Beyond Bitcoin's blockchain bottleneck. Beyond government control. Data lives forever on distributed network.
+                                    Interplanetary-ready architecture.
+                                </p>
+                            </div>
+
+                        </div>
+                    </CardContent>
+                </Card>
+
+                {/* The Regenerative Loop */}
+                <Card className="bg-gradient-to-br from-cyan-900/40 to-purple-900/40 border-2 border-cyan-500/50">
+                    <CardContent className="p-6">
+                        <h2 className="text-2xl font-black text-cyan-400 mb-4">3. The Regenerative Loop</h2>
+                        <div className="space-y-4 text-gray-300 leading-relaxed text-sm">
+                            
+                            <div className="bg-black/60 p-4 rounded-xl border border-cyan-500/30">
+                                <h3 className="text-lg font-bold text-white mb-3">How Money Flows</h3>
+                                <div className="space-y-3">
+                                    <div className="bg-green-900/40 p-3 rounded-lg">
+                                        <p className="text-xs text-green-300 font-bold mb-1">1. EARN</p>
+                                        <p className="text-sm">Clean Earth → Earn <P51Symbol showTooltip={false} /></p>
+                                    </div>
+                                    <div className="bg-cyan-900/40 p-3 rounded-lg">
+                                        <p className="text-xs text-cyan-300 font-bold mb-1">2. SPEND</p>
+                                        <p className="text-sm">Stream healing music with <P51Symbol showTooltip={false} /></p>
+                                    </div>
+                                    <div className="bg-pink-900/40 p-3 rounded-lg">
+                                        <p className="text-xs text-pink-300 font-bold mb-1">3. ARTISTS RECEIVE</p>
+                                        <p className="text-sm"><strong className="text-white">90%</strong> goes directly to artist (automatic)</p>
+                                    </div>
+                                    <div className="bg-purple-900/40 p-3 rounded-lg">
+                                        <p className="text-xs text-purple-300 font-bold mb-1">4. HEALING CONTINUES</p>
+                                        <p className="text-sm">Artists create more healing content → Loop strengthens</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="bg-gradient-to-r from-green-900/30 to-cyan-900/30 p-4 rounded-xl border-2 border-green-400">
+                                <p className="text-center font-black text-white text-lg mb-2">90% to Artists</p>
+                                <p className="text-xs text-gray-300 text-center">
+                                    Most platforms take 30-50%. We take 10% for infrastructure. 
+                                    <strong className="text-white"> Artists deserve majority value.</strong>
+                                </p>
+                            </div>
+
+                            <div className="bg-black/60 p-4 rounded-xl border border-yellow-500/30">
+                                <h3 className="text-lg font-bold text-white mb-3">Why This Works</h3>
+                                <ul className="space-y-2 ml-4 text-sm">
+                                    <li>• <strong className="text-white">Zero advertising:</strong> Lower costs = higher artist pay</li>
+                                    <li>• <strong className="text-white">Community growth:</strong> Users earn through action, not ads</li>
+                                    <li>• <strong className="text-white">Lean infrastructure:</strong> 2-person team (Phase 1)</li>
+                                    <li>• <strong className="text-white">Asset lock (CIC):</strong> Cannot be sold or captured</li>
+                                </ul>
+                            </div>
+
+                        </div>
+                    </CardContent>
+                </Card>
+
+                {/* Healing Frequencies (Condensed) */}
+                <Card className="bg-gradient-to-br from-pink-900/40 to-purple-900/40 border-2 border-pink-500/50">
+                    <CardContent className="p-6">
+                        <div className="flex items-center gap-3 mb-4">
+                            <Waves className="w-10 h-10 text-pink-400" />
+                            <h2 className="text-2xl font-black text-white">4. Healing Frequencies</h2>
+                        </div>
+                        <div className="space-y-4 text-gray-300 leading-relaxed text-sm">
+                            
+                            <div className="bg-black/60 p-4 rounded-xl border border-pink-500/30">
+                                <p className="mb-3">Music on UF51 uses <strong className="text-white">specific frequencies</strong> (528Hz, 432Hz, 7.83Hz) documented to affect human physiology through resonance.</p>
+                                <p className="text-pink-400 font-bold mb-2">Why FLAC/WAV only:</p>
+                                <p className="text-sm">MP3 compression removes frequencies above 16kHz. Healing depends on PRECISE Hz values. Lossless formats preserve all frequencies exactly.</p>
+                            </div>
+
+                            <div className="bg-red-900/30 p-4 rounded-xl border-2 border-red-500/50">
+                                <p className="text-red-300 font-bold mb-2 text-xs">⚠️ HONEST DISCLAIMER</p>
+                                <p className="text-xs">Healing frequencies are NOT medical treatment. NOT FDA approved. NOT substitutes for healthcare. Physics of resonance = verified. Clinical efficacy = ongoing research.</p>
+                            </div>
+
+                        </div>
+                    </CardContent>
+                </Card>
+
+                {/* Governance (Simplified) */}
+                <Card className="bg-gradient-to-br from-indigo-900/40 to-blue-900/40 border-2 border-indigo-500/50">
+                    <CardContent className="p-6">
+                        <div className="flex items-center gap-3 mb-4">
+                            <Shield className="w-10 h-10 text-indigo-400" />
+                            <h2 className="text-2xl font-black text-white">5. Governance</h2>
+                        </div>
+                        <div className="space-y-4 text-gray-300 leading-relaxed text-sm">
+                            
+                            <div className="bg-yellow-900/30 p-4 rounded-xl border border-yellow-500/30">
+                                <p className="text-yellow-300 font-bold mb-2">⚠️ Current Status: Centralized</p>
+                                <p className="text-sm">Founding team currently manages operations during development phase.</p>
+                                <p className="text-white font-bold mt-2 text-sm">Goal: Transition to community governance when platform is stable.</p>
+                            </div>
+
+                            <div className="bg-cyan-900/30 p-4 rounded-xl border border-cyan-500/30">
+                                <h3 className="font-bold text-white mb-2">Transition Timeline</h3>
+                                <p className="text-sm mb-2">As platform matures:</p>
+                                <ul className="ml-4 space-y-1 text-sm">
+                                    <li>• Founding team transitions to advisory roles</li>
+                                    <li>• Core protocols and mission protected</li>
+                                    <li>• Community members participate in governance</li>
+                                </ul>
+                            </div>
+
+                            <div className="bg-green-900/30 p-4 rounded-xl border border-green-500/30">
+                                <h3 className="font-bold text-white mb-2">Legal Protection: CIC</h3>
+                                <p className="text-sm">Community Interest Company (UK) = asset locked. Cannot be sold. Cannot pay dividends. Mission protected legally + mathematically.</p>
+                            </div>
+
+                        </div>
+                    </CardContent>
+                </Card>
+
+                {/* Status */}
+                <Card className="bg-gradient-to-br from-emerald-900/40 to-teal-900/40 border-2 border-emerald-500/50">
+                    <CardContent className="p-6">
+                        <div className="flex items-center gap-3 mb-4">
+                            <TrendingUp className="w-10 h-10 text-emerald-400" />
+                            <h2 className="text-2xl font-black text-white">6. Current Status</h2>
+                        </div>
+                        <div className="space-y-4 text-gray-300 leading-relaxed text-sm">
+                            
+                            <div className="bg-black/60 p-4 rounded-xl border border-emerald-500/30">
+                                <h3 className="text-lg font-bold text-white mb-3">✅ Live (Nov 2025)</h3>
+                                <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm">
+                                    <li className="bg-green-900/30 p-2 rounded">✅ Cleanup submission</li>
+                                    <li className="bg-green-900/30 p-2 rounded">✅ <P51Symbol showTooltip={false} /> token award</li>
+                                    <li className="bg-green-900/30 p-2 rounded">✅ AI verification</li>
+                                    <li className="bg-green-900/30 p-2 rounded">✅ Music streaming</li>
+                                    <li className="bg-green-900/30 p-2 rounded">✅ 90/10 split</li>
+                                    <li className="bg-green-900/30 p-2 rounded">✅ Artist uploads</li>
+                                    <li className="bg-cyan-900/30 p-2 rounded border-2 border-cyan-500">✅ IPFS decentralized storage</li>
+                                    <li className="bg-cyan-900/30 p-2 rounded border-2 border-cyan-500">✅ Crypto-signed transactions</li>
+                                </ul>
+                            </div>
+
+                            <div className="bg-black/60 p-4 rounded-xl border border-yellow-500/30">
+                                <h3 className="text-lg font-bold text-white mb-3">🔄 In Development (Q1-Q2 2026)</h3>
+                                <ul className="space-y-1 ml-4 text-sm">
+                                    <li>• Fiat bridge (<P51Symbol showTooltip={false} /> ↔ GBP/USD)</li>
+                                    <li>• Community verification</li>
+                                    <li>• Mobile PWA (offline-first)</li>
+                                </ul>
+                            </div>
+
+                        </div>
+                    </CardContent>
+                </Card>
+
+                {/* Conclusion */}
+                <Card className="bg-gradient-to-br from-pink-900/40 to-purple-900/40 border-2 border-pink-500/50">
+                    <CardContent className="p-6">
+                        <h2 className="text-2xl font-black text-pink-400 mb-4">7. Conclusion</h2>
+                        <div className="space-y-3 text-gray-300 leading-relaxed text-sm">
+                            <p className="text-lg text-white font-bold">
+                                Healing Earth must be economically viable.
+                            </p>
+                            <p>
+                                Proof-of-Love creates a system where environmental regeneration = immediate reward, 
+                                flowing into an artist-first economy that rewards healing content creation.
+                            </p>
+                            <p className="text-cyan-400 font-bold">
+                                This is not speculation. This is working code, processing real cleanups, paying real artists, November 2025.
+                            </p>
+                            <p className="text-pink-400 font-bold text-lg">
+                                The question: Will you help it spread?
+                            </p>
+                        </div>
+                    </CardContent>
+                </Card>
+
+                {/* References */}
+                <Card className="bg-black/60 border-2 border-gray-700">
+                    <CardContent className="p-6">
+                        <h2 className="text-xl font-black text-gray-400 mb-4">References</h2>
+                        <div className="space-y-1 text-xs text-gray-500">
+                            <p>1. UNEP (2023): "Plastic Pollution - Global treaty negotiations"</p>
+                            <p>2. IUCN (2021): "Marine Plastic Pollution" - 8M tonnes/year</p>
+                            <p>3. MIT (2016): "40Hz gamma frequency reduces Alzheimer's plaques" - Tsai lab</p>
+                            <p>4. NASA: Schumann Resonance astronaut health effects</p>
+                            <p>5. Planck, M. (1900): "Energy distribution in normal spectrum"</p>
+                            <p>6. Franklin, R. (1953): Photo 51 - DNA X-ray crystallography</p>
+                            <p>7. UK CIC Regulator: Asset Lock requirements</p>
+                        </div>
+                    </CardContent>
+                </Card>
+
+                {/* Footer */}
+                <footer className="text-center py-8 space-y-3 border-t border-gray-800 mt-8">
+                    <div className="flex items-center justify-center gap-2 text-cyan-400 mb-3">
+                        <Clock className="w-4 h-4 animate-pulse" />
+                        <p className="font-mono text-xs">
+                            {format(currentTime, 'EEEE do MMMM yyyy • HH:mm:ss')} GMT
+                        </p>
+                    </div>
+                    <div className="flex items-center justify-center gap-3">
+                        <Heart className="w-5 h-5 text-pink-400 animate-pulse" />
+                    </div>
+                    <p className="text-gray-500 text-xs">
+                        Open source • CC BY-SA 4.0 • Peer review welcome
+                    </p>
+                    <p className="text-gray-600 text-xs">
+                        <a href="https://uf51.love" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:underline">uf51.love</a>
+                    </p>
+                    <p className="text-xs text-cyan-600">v2.1 • November 2025</p>
+                    <p className="text-xs text-gray-600 mt-2">Built on <a href="https://base44.com" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-cyan-400">Base44</a></p>
+                </footer>
+            </div>
+        </div>
+    );
+}
