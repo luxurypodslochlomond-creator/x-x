@@ -174,15 +174,15 @@ const SONGS = [
     },
     {
         id: 13,
-        title: "Our House",
+        title: "Yes and Maybe",
         artist: "Madness",
         difficulty: "Beginner",
         chords: ["C", "F", "G", "Am"],
         capo: null,
         pattern: "Down Down Up Up Down Up (ska bounce)",
         progression: "C – F – G – Am",
-        tips: "Classic Madness! Upbeat ska feel. Fun to play and everyone knows it!",
-        emoji: "🏠"
+        tips: "Classic Madness ska feel! Upbeat and fun. Let the rhythm bounce!",
+        emoji: "🎩"
     },
     {
         id: 14,
