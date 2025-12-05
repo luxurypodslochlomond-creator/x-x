@@ -11,10 +11,10 @@ import EmergencyMode from '@/components/shared/EmergencyMode';
 import AutoBugMonitor from '@/components/shared/AutoBugMonitor';
 import PerformanceOptimizer from '@/components/shared/PerformanceOptimizer';
 import {
-        Menu, X, Heart, Home, LogOut, Sparkles, Music, User, Globe,
-        BookOpen, Shield, Target, FileText, Settings, Brain, Calculator, AlertTriangle, Mic2, Lightbulb, Building, Play, Pause, Atom, Eye, Scale, Users, WifiOff, CheckCircle, ChevronDown, ChevronRight
+        Menu, X, Heart, Home, LogOut, Leaf, Sparkles, Music, Map, User, Globe,
+        BookOpen, Shield, Target, Briefcase, FileText, Settings, Search, Brain, Presentation, Calculator, GraduationCap, Zap, AlertTriangle, Mic2, Lightbulb, Building, Play, Pause, Atom, Eye, Scale, Users, WifiOff, CheckCircle, Waves, ChevronDown, ChevronRight
       } from 'lucide-react';
-import { COOLASFUCKWaves } from '@/components/shared/COOLASFUCKIcon';
+import { COOLASFUCKHeart, COOLASFUCKWaves } from '@/components/shared/COOLASFUCKIcon';
 import LiveClock from '@/components/shared/LiveClock';
 import { AnonymousAuthProvider } from '@/components/shared/AnonymousAuth';
 import { SyncManagerProvider, SyncStatusIndicator } from '@/components/shared/SyncManager';
@@ -208,6 +208,7 @@ const LayoutInner = ({ children, currentPageName }) => {
   const healNav = [
     { title: "Frequency Chamber", url: createPageUrl("FrequencyChamber"), icon: COOLASFUCKWaves, highlight: true, description: "Free healing frequencies" },
     { title: "Radio51", url: createPageUrl("Radio"), icon: Music, description: "Lossless music" },
+    { title: "Learn Guitar", url: createPageUrl("LearnGuitar"), icon: Music, description: "Easy songs & chords" },
   ];
 
   const earnNav = [

@@ -153,6 +153,7 @@ import AdminBudgetDocument from './pages/AdminBudgetDocument';
 import AdminEqualOpportunitiesPolicy from './pages/AdminEqualOpportunitiesPolicy';
 import TunerTogether from './pages/TunerTogether';
 import FrequencyShare from './pages/FrequencyShare';
+import LearnGuitar from './pages/LearnGuitar';
 import __Layout from './Layout.jsx';
 
 
@@ -312,6 +313,7 @@ export const PAGES = {
     "AdminEqualOpportunitiesPolicy": AdminEqualOpportunitiesPolicy,
     "TunerTogether": TunerTogether,
     "FrequencyShare": FrequencyShare,
+    "LearnGuitar": LearnGuitar,
 }
 
 export const pagesConfig = {
