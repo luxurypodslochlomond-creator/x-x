@@ -174,15 +174,15 @@ const SONGS = [
     },
     {
         id: 13,
-        title: "It Must Be Love",
+        title: "Our House",
         artist: "Madness",
         difficulty: "Beginner",
-        chords: ["G", "Em", "C", "D"],
+        chords: ["C", "F", "G", "Am"],
         capo: null,
         pattern: "Down Down Up Up Down Up (ska bounce)",
-        progression: "G – Em – C – D",
-        tips: "Classic! Same 4 chords as many other songs. Slight ska/reggae bounce feel.",
-        emoji: "❤️"
+        progression: "C – F – G – Am",
+        tips: "Classic Madness! Upbeat ska feel. Fun to play and everyone knows it!",
+        emoji: "🏠"
     },
     {
         id: 14,
