@@ -147,6 +147,66 @@ const SONGS = [
         progression: "A – D – A – E",
         tips: "Only 3 chords! Reggae strum = skip the downbeat. Don't worry!",
         emoji: "🐦"
+    },
+    {
+        id: 11,
+        title: "Mull of Kintyre",
+        artist: "Paul McCartney & Wings",
+        difficulty: "Beginner",
+        chords: ["A", "D", "E"],
+        capo: null,
+        pattern: "Waltz feel - Down Down Down (3/4 time)",
+        progression: "A – D – A – E – A",
+        tips: "Beautiful Scottish anthem! 3/4 waltz timing. Gentle strums, let it breathe.",
+        emoji: "🏴󠁧󠁢󠁳󠁣󠁴󠁿"
+    },
+    {
+        id: 12,
+        title: "Watching the Wheels",
+        artist: "John Lennon",
+        difficulty: "Beginner",
+        chords: ["C", "F", "G", "Am"],
+        capo: null,
+        pattern: "Gentle fingerpick or soft strums",
+        progression: "C – F – C – G – Am",
+        tips: "Beautiful reflective song. Take it slow and peaceful. From Double Fantasy album.",
+        emoji: "🎡"
+    },
+    {
+        id: 13,
+        title: "It Must Be Love",
+        artist: "Madness",
+        difficulty: "Beginner",
+        chords: ["G", "Em", "C", "D"],
+        capo: null,
+        pattern: "Down Down Up Up Down Up (ska bounce)",
+        progression: "G – Em – C – D",
+        tips: "Classic! Same 4 chords as many other songs. Slight ska/reggae bounce feel.",
+        emoji: "❤️"
+    },
+    {
+        id: 14,
+        title: "So Far Away",
+        artist: "Dire Straits",
+        difficulty: "Beginner+",
+        chords: ["E", "A", "D", "B7"],
+        capo: null,
+        pattern: "Gentle fingerpick or arpeggios",
+        progression: "E – A – E – B7",
+        tips: "Mark Knopfler classic. Fingerpicking style but can strum gently too. Beautiful melody.",
+        emoji: "🌅"
+    },
+    {
+        id: 15,
+        title: "Shine On You Crazy Diamond",
+        artist: "Pink Floyd",
+        difficulty: "Intermediate",
+        chords: ["Gm", "Bb", "F", "C", "Dm"],
+        capo: null,
+        pattern: "Slow arpeggios, let notes ring",
+        progression: "Gm – Bb – F – C – Gm",
+        tips: "Epic tribute to Syd Barrett. Take it VERY slow, let each chord breathe. Feel the emotion.",
+        emoji: "💎"
     }
 ];
 
@@ -164,6 +224,10 @@ const CHORD_SHAPES = {
     "Dsus4": { frets: ["x", "x", "0", "2", "3", "3"], fingers: "Fingers: x-x-0-1-2-3" },
     "A7sus4": { frets: ["x", "0", "2", "0", "3", "0"], fingers: "Fingers: x-0-1-0-3-0" },
     "Cadd9": { frets: ["x", "3", "2", "0", "3", "0"], fingers: "Fingers: x-2-1-0-3-0" },
+    "B7": { frets: ["x", "2", "1", "2", "0", "2"], fingers: "Fingers: x-2-1-3-0-4" },
+    "Gm": { frets: ["3", "5", "5", "3", "3", "3"], fingers: "Barre chord - index across fret 3" },
+    "Bb": { frets: ["x", "1", "3", "3", "3", "1"], fingers: "Barre chord - index across fret 1" },
+    "Dm": { frets: ["x", "x", "0", "2", "3", "1"], fingers: "Fingers: x-x-0-2-3-1" },
 };
 
 export default function LearnGuitarPage() {
