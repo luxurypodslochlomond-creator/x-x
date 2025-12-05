@@ -1,12 +1,19 @@
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { motion } from 'framer-motion';
-import { Check, X, Heart, Sparkles, Star, Zap, Box } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Calculator, Check, X, ArrowRight, Heart, Sparkles, Star, Zap, Box } from 'lucide-react';
 
 export default function GeorgieMathsPage() {
+    // NOINDEX - Keep private from search engines
+    useEffect(() => {
+        const meta = document.createElement('meta');
+        meta.name = 'robots';
+        meta.content = 'noindex, nofollow';
+        document.head.appendChild(meta);
+        return () => { document.head.removeChild(meta); };
+    }, []);
     const [doublingAnswer, setDoublingAnswer] = useState('');
     const [currentDoublingNum, setCurrentDoublingNum] = useState(null);
     const [showDoublingResult, setShowDoublingResult] = useState(false);

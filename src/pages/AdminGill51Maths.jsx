@@ -1,11 +1,18 @@
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Heart, Zap, Clock, Waves, Activity, Sparkles, Calculator, Eye, Infinity, Home } from 'lucide-react';
+import { Brain, Heart, Zap, Clock, Waves, Activity, Sparkles, Calculator, Eye, Binary, Infinity, Home } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export default function AdminGill51MathsPage() {
+    // NOINDEX - Keep private from search engines
+    useEffect(() => {
+        const meta = document.createElement('meta');
+        meta.name = 'robots';
+        meta.content = 'noindex, nofollow';
+        document.head.appendChild(meta);
+        return () => { document.head.removeChild(meta); };
+    }, []);
     const [view, setView] = useState('home');
 
     // BREADCRUMB NAV COMPONENT
