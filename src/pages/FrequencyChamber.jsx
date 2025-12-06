@@ -15,29 +15,36 @@ const PROTOCOL_SECTIONS = [
     id: 'mental',
     name: 'MENTAL HEALTH',
     color: '#22d3ee',
-    description: 'Anxiety, depression, trauma, ADHD',
-    protocols: ['anxiety', 'depression', 'trauma', 'focus', 'addiction']
+    description: 'Anxiety, depression, PTSD, ADHD',
+    protocols: ['anxiety', 'depression', 'trauma', 'focus']
+  },
+  {
+    id: 'addiction',
+    name: 'ADDICTION & COMPULSION',
+    color: '#f59e0b',
+    description: 'Cravings, impulse control',
+    protocols: ['addiction', 'emotional_eating']
   },
   {
     id: 'physical',
     name: 'PHYSICAL HEALING',
     color: '#ef4444',
-    description: 'Pain, immunity, chronic conditions',
+    description: 'Pain, immunity, tinnitus',
     protocols: ['pain', 'tinnitus', 'immune']
   },
   {
     id: 'rest',
-    name: 'REST & ENERGY',
+    name: 'REST & RECOVERY',
     color: '#8b5cf6',
-    description: 'Sleep, recovery, vitality',
+    description: 'Sleep, energy, burnout',
     protocols: ['sleep', 'morning', 'burnout']
   },
   {
     id: 'emotional',
-    name: 'EMOTIONAL BALANCE',
+    name: 'GRIEF & LOSS',
     color: '#ec4899',
-    description: 'Eating, grief, self-regulation',
-    protocols: ['emotional_eating']
+    description: 'Processing heartbreak & loss',
+    protocols: ['grief']
   }
 ];
 
@@ -100,9 +107,9 @@ const PROTOCOLS = {
   },
   trauma: {
     id: 'trauma',
-    name: 'Trauma & Calm',
-    icon: Heart,
-    color: '#EC4899',
+    name: 'PTSD & Trauma',
+    icon: Shield,
+    color: '#06B6D4',
     description: 'Vagal toning for nervous system reset',
     science: 'Bilateral stimulation + theta waves used in EMDR and somatic therapies',
     sources: ['Porges Polyvagal Theory', 'Van der Kolk trauma research'],
@@ -260,7 +267,7 @@ const PROTOCOLS = {
     id: 'emotional_eating',
     name: 'Emotional Eating',
     icon: Heart,
-    color: '#F472B6',
+    color: '#F59E0B',
     description: 'Impulse control & emotional regulation',
     science: '10Hz alpha + 4Hz theta proven to reduce compulsive eating and regulate appetite hormones',
     sources: ['Eating disorder neurofeedback studies', 'Impulse control research'],
@@ -272,6 +279,26 @@ const PROTOCOLS = {
       breathRate: 6,
       noiseType: 'pink',
       noiseLevel: 0.1,
+      isBinaural: true,
+      visualEntrainment: true
+    }
+  },
+  grief: {
+    id: 'grief',
+    name: 'Grief & Loss',
+    icon: Heart,
+    color: '#EC4899',
+    description: 'Heart healing for loss & heartbreak',
+    science: '6Hz theta + heart coherence breathing proven to process grief and reduce emotional pain',
+    sources: ['Grief neuroscience research', 'Theta wave emotional processing studies'],
+    ancientWisdom: 'Mourning ceremonies worldwide use 6Hz drumming and chanting to release grief from the body.',
+    config: {
+      primary: 6,
+      secondary: 7.83,
+      carrier: 200,
+      breathRate: 5,
+      noiseType: 'pink',
+      noiseLevel: 0.12,
       isBinaural: true,
       visualEntrainment: true
     }
