@@ -135,6 +135,9 @@ export default function BiometricHealing() {
     const [showCamera, setShowCamera] = useState(false);
     const [cameraPermission, setCameraPermission] = useState(null);
     const [healingProgress, setHealingProgress] = useState(0);
+    const [isCalibrating, setIsCalibrating] = useState(false);
+    const [coherence, setCoherence] = useState(null);
+    const [isRequestingCamera, setIsRequestingCamera] = useState(false);
     
     const audioContextRef = useRef(null);
     const oscillatorRef = useRef(null);
@@ -409,7 +412,7 @@ export default function BiometricHealing() {
                                 </button>
                             </div>
 
-                            {/* HRV SCANNER TOGGLE */}
+                            {/* HRV SCANNER TOGGLE - COOLASFUCK 8-BIT */}
                             <button
                                 onClick={() => {
                                     if (showCamera) {
@@ -418,23 +421,72 @@ export default function BiometricHealing() {
                                         startHeartRateDetection();
                                     }
                                 }}
+                                disabled={isRequestingCamera}
                                 className={`w-full mb-4 py-3 border-4 font-black font-mono text-sm transition-all ${
-                                    showCamera 
-                                        ? 'bg-green-600 border-green-400 text-white' 
-                                        : 'bg-black border-cyan-500 text-cyan-400 hover:border-cyan-300'
+                                    isRequestingCamera
+                                        ? 'bg-purple-600 border-purple-400 text-white'
+                                        : showCamera 
+                                            ? 'bg-green-600 border-green-400 text-white' 
+                                            : 'bg-black border-cyan-500 text-cyan-400 hover:border-cyan-300'
                                 }`}
-                                style={showCamera ? { boxShadow: '0 0 20px rgba(34, 197, 94, 0.5)' } : {}}
+                                style={
+                                    isRequestingCamera 
+                                        ? { boxShadow: '0 0 20px rgba(168, 85, 247, 0.6)' }
+                                        : showCamera 
+                                            ? { boxShadow: '0 0 20px rgba(34, 197, 94, 0.5)' } 
+                                            : {}
+                                }
                             >
-                                {showCamera ? '📹 SCANNING YOUR HEART' : '🫀 SCAN YOUR HEART (COVER CAMERA)'}
+                                {isRequestingCamera ? (
+                                    <div className="flex items-center justify-center gap-3">
+                                        <motion.div
+                                            className="w-4 h-4 bg-purple-300"
+                                            animate={{ scale: [1, 1.5, 1], opacity: [1, 0.5, 1] }}
+                                            transition={{ repeat: Infinity, duration: 0.8 }}
+                                            style={{ imageRendering: 'pixelated' }}
+                                        />
+                                        <span>REQUESTING CAMERA ACCESS...</span>
+                                    </div>
+                                ) : showCamera ? (
+                                    '📹 SCANNING YOUR HEART'
+                                ) : (
+                                    '🫀 SCAN YOUR HEART (COVER CAMERA)'
+                                )}
                             </button>
 
-                            {/* CAMERA PERMISSION ERROR */}
+                            {/* CAMERA PERMISSION ERROR - 8-BIT COOLASFUCK */}
                             {cameraPermission === false && (
-                                <div className="bg-red-900/30 border-4 border-red-500 p-3 mb-4">
-                                    <p className="text-red-300 text-sm font-mono text-center">
-                                        Camera access denied. Enable camera to scan heart rate.
+                                <motion.div
+                                    initial={{ opacity: 0, scale: 0.95 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    className="bg-red-900/30 border-4 border-red-500 p-4 mb-4"
+                                    style={{ boxShadow: '0 0 20px rgba(239, 68, 68, 0.4)' }}
+                                >
+                                    <div className="flex items-center gap-3 mb-3">
+                                        <motion.div
+                                            className="w-8 h-8 border-4 border-red-400 bg-black flex items-center justify-center"
+                                            animate={{ rotate: [0, 10, -10, 0] }}
+                                            transition={{ repeat: Infinity, duration: 2 }}
+                                        >
+                                            <span className="text-red-400 text-xl">⚠</span>
+                                        </motion.div>
+                                        <p className="text-red-300 text-sm font-black font-mono">
+                                            CAMERA ACCESS DENIED
+                                        </p>
+                                    </div>
+                                    <p className="text-red-200 text-xs font-mono mb-3">
+                                        To scan your heart, you need to allow camera access in your browser settings.
                                     </p>
-                                </div>
+                                    <button
+                                        onClick={() => {
+                                            setCameraPermission(null);
+                                            startHeartRateDetection();
+                                        }}
+                                        className="w-full py-2 bg-red-600 border-4 border-red-400 text-white font-black font-mono text-xs hover:bg-red-700 transition-all"
+                                    >
+                                        TRY AGAIN
+                                    </button>
+                                </motion.div>
                             )}
 
                             {/* HRV DISPLAY - 8-BIT COOLASFUCK */}
