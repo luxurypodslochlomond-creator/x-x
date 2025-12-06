@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Lock, Lightbulb, Shield, Activity, Zap, CheckCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { COOLASFUCKSparkle } from '@/components/shared/COOLASFUCKIcon';
+import { COOLASFUCKSparkle, COOLASFUCKShield, COOLASFUCKHeart, COOLASFUCKWaves, COOLASFUCKZap, COOLASFUCKGlobe, COOLASFUCKBrain } from '@/components/shared/COOLASFUCKIcon';
 import LiveClock from '@/components/shared/LiveClock';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -841,34 +841,24 @@ export default function AdminPatents() {
 
         {/* SUMMARY - UPDATED */}
         <div className="bg-black border-2 border-green-500 rounded-xl p-6">
-          <h3 className="text-2xl font-black text-green-400 mb-4">TOTAL: 12 Real Innovations</h3>
-          <div className="space-y-3">
-            <div className="flex items-center gap-2">
-              <motion.div
-                animate={{ scale: [1, 1.2, 1] }}
-                transition={{ duration: 1, repeat: Infinity }}
-              >
-                <span className="text-green-400 text-2xl">✓</span>
-              </motion.div>
-              <span className="text-white"><strong>9 WORKING NOW</strong> (live today, use them now - including cryptographic security)</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <motion.div
-                animate={{ scale: [1, 1.3, 1], rotate: [0, 180, 360] }}
-                transition={{ duration: 2, repeat: Infinity }}
-              >
-                <span className="text-cyan-400 text-2xl">🔥</span>
-              </motion.div>
-              <span className="text-white"><strong>2 BUILDING NOW</strong> (Audio Steganography + Hybrid P2P Wallet V2)</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="text-yellow-400 text-2xl">⏳</span>
-              <span className="text-white"><strong>2 THEORY</strong> (know how, need native apps)</span>
-            </div>
+        <h3 className="text-2xl font-black text-green-400 mb-4">TOTAL: 12 Real Innovations</h3>
+        <div className="space-y-3">
+          <div className="flex items-center gap-3">
+            <COOLASFUCKShield size={28} animate={true} />
+            <span className="text-white"><strong>8 WORKING NOW</strong> (live today, use them now - including cryptographic security)</span>
           </div>
+          <div className="flex items-center gap-3">
+            <COOLASFUCKZap size={28} animate={true} />
+            <span className="text-white"><strong>2 BUILDING NOW</strong> (Audio Steganography + Hybrid P2P Wallet V2)</span>
+          </div>
+          <div className="flex items-center gap-3">
+            <COOLASFUCKBrain size={28} animate={false} />
+            <span className="text-white"><strong>2 THEORY</strong> (know how, need native apps)</span>
+          </div>
+        </div>
           <div className="mt-4 p-4 bg-cyan-900/30 border border-cyan-500/50 rounded-lg">
             <p className="text-cyan-300 text-sm">
-              <strong>For grants:</strong> 9 working (including crypto security), 1 in development (Audio Steg), 2 clear paths. 
+              <strong>For grants:</strong> 8 working (including crypto security), 2 in development (Audio Steg + P2P Wallet V2), 2 clear paths. 
               Not "ideas." WORKING CODE + EXISTING TECH + CREDIBLE ROADMAP. 
               OPEN SOURCE. HEALING FIRST. ZERO CARBON.
             </p>
@@ -880,7 +870,10 @@ export default function AdminPatents() {
               animate={{ opacity: 1 }}
               className="mt-6 p-4 bg-green-900/30 border border-green-500/50 rounded-lg"
             >
-              <p className="text-green-300 font-bold mb-3">🌍 REAL-TIME IMPACT:</p>
+              <div className="flex items-center gap-2 mb-3">
+                <COOLASFUCKGlobe size={24} animate={true} />
+                <p className="text-green-300 font-bold">REAL-TIME IMPACT</p>
+              </div>
               <div className="grid grid-cols-2 gap-3 text-xs">
                 <div>
                   <p className="text-gray-400">Earth Healed:</p>
@@ -909,9 +902,13 @@ export default function AdminPatents() {
         {/* NEW: COMPARISON TO EXISTING SYSTEMS */}
         <Card className="bg-gradient-to-br from-black via-purple-900/40 to-black border-4 border-purple-500">
           <CardContent className="p-8">
-            <h3 className="text-3xl font-black text-white mb-6 text-center">
-              💎 COMPARISON: $P51 vs BLOCKCHAIN vs BANKS
-            </h3>
+            <div className="flex items-center justify-center gap-4 mb-6">
+              <COOLASFUCKWaves size={40} animate={true} />
+              <h3 className="text-3xl font-black text-white text-center">
+                COMPARISON: $P51 vs BLOCKCHAIN vs BANKS
+              </h3>
+              <COOLASFUCKWaves size={40} animate={true} />
+            </div>
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
@@ -981,9 +978,13 @@ export default function AdminPatents() {
               </table>
             </div>
             <div className="mt-6 bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-2 border-green-500 rounded-lg p-4">
-              <p className="text-white font-black text-center text-base">
-                💚 RESULT: Faster than banks. Cheaper than blockchain. More secure than both. Zero carbon. P2P. 💚
-              </p>
+              <div className="flex items-center justify-center gap-3">
+                <COOLASFUCKHeart size={24} animate={true} />
+                <p className="text-white font-black text-center text-base">
+                  RESULT: Faster than banks. Cheaper than blockchain. More secure than both. Zero carbon. P2P.
+                </p>
+                <COOLASFUCKHeart size={24} animate={true} />
+              </div>
             </div>
           </CardContent>
         </Card>
@@ -991,9 +992,13 @@ export default function AdminPatents() {
         {/* OPEN SOURCE DECLARATION */}
         <Card className="bg-gradient-to-r from-purple-900/40 to-pink-900/40 border-4 border-purple-500">
           <CardContent className="p-8">
-            <h3 className="text-3xl font-black text-white mb-4 text-center">
-              🌍 OPEN SOURCE DECLARATION 🌍
-            </h3>
+            <div className="flex items-center justify-center gap-4 mb-4">
+              <COOLASFUCKGlobe size={40} animate={true} />
+              <h3 className="text-3xl font-black text-white text-center">
+                OPEN SOURCE DECLARATION
+              </h3>
+              <COOLASFUCKGlobe size={40} animate={true} />
+            </div>
             <div className="space-y-4 text-gray-300">
               <p className="text-lg text-center font-bold text-purple-300">
                 "We don't patent. We share. Healing first. Always."
@@ -1021,15 +1026,23 @@ export default function AdminPatents() {
 
         {/* FOOTER */}
         <div className="text-center py-8 space-y-4">
-          <p className="text-2xl font-mono text-white">
-            ♾️❤️♾️ UF51.LOVE | ZERO.LOSS.QUANTUM ♾️❤️♾️
-          </p>
+          <div className="flex items-center justify-center gap-3">
+            <COOLASFUCKHeart size={32} animate={true} />
+            <p className="text-2xl font-mono text-white">
+              UF51.LOVE | ZERO.LOSS.QUANTUM
+            </p>
+            <COOLASFUCKHeart size={32} animate={true} />
+          </div>
           <p className="text-gray-400">
             Working proof for BRO51 + GILL51 + AI51
           </p>
-          <p className="text-cyan-400 font-bold">
-            Not theory. WORKING CODE. Try it now. 💚
-          </p>
+          <div className="flex items-center justify-center gap-2">
+            <COOLASFUCKShield size={20} animate={true} />
+            <p className="text-cyan-400 font-bold">
+              Not theory. WORKING CODE. Try it now.
+            </p>
+            <COOLASFUCKShield size={20} animate={true} />
+          </div>
           
           <div className="mt-8 pt-8 border-t border-cyan-500/30">
             <LiveClock />
