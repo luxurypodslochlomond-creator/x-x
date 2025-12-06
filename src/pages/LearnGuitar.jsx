@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { COOLASFUCKMusicNote, COOLASFUCKHeart, COOLASFUCKGlobe, COOLASFUCKZap, COOLASFUCKSparkle } from '@/components/shared/COOLASFUCKIcon';
+import InteractiveChordPlayer from '@/components/guitar/InteractiveChordPlayer';
 
 // CHORD DIAGRAMS - Simple visual representation
 const ChordDiagram = ({ name, frets, fingers }) => {
@@ -273,13 +274,30 @@ export default function LearnGuitarPage() {
                     </CardContent>
                 </Card>
 
+                {/* INTERACTIVE CHORD PLAYER */}
+                <Card className="bg-black border-4 border-green-500">
+                    <CardContent className="p-6">
+                        <h2 className="text-2xl font-black font-mono text-green-400 mb-4 text-center" style={{ textShadow: '3px 3px 0px rgba(0,0,0,1)' }}>
+                            🎸 TAP TO HEAR CHORDS
+                        </h2>
+                        <p className="text-green-200 text-center mb-6 font-bold">
+                            Learn through FREQUENCY, not just diagrams. Tap any chord to hear what it sounds like!
+                        </p>
+                        <div className="grid grid-cols-3 md:grid-cols-5 gap-3">
+                            {['G', 'C', 'D', 'Em', 'Am', 'E', 'A', 'F', 'Em7', 'Dsus4'].map(chord => (
+                                <InteractiveChordPlayer key={chord} chordName={chord} />
+                            ))}
+                        </div>
+                    </CardContent>
+                </Card>
+
                 {/* CHORD LIBRARY TOGGLE */}
                 <Button
                     onClick={() => setShowChordLibrary(!showChordLibrary)}
                     className="w-full bg-black border-4 border-cyan-500 hover:bg-cyan-900 text-white font-black font-mono py-4"
                 >
                     {showChordLibrary ? <ChevronUp className="mr-2" /> : <ChevronDown className="mr-2" />}
-                    {showChordLibrary ? "HIDE" : "SHOW"} CHORD LIBRARY
+                    {showChordLibrary ? "HIDE" : "SHOW"} CHORD DIAGRAMS
                 </Button>
 
                 {/* CHORD LIBRARY */}
