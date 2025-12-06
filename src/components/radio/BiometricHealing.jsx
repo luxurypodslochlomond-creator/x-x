@@ -140,6 +140,8 @@ export default function BiometricHealing() {
     const [coherence, setCoherence] = useState(null);
     const [isRequestingCamera, setIsRequestingCamera] = useState(false);
     const [showScienceModal, setShowScienceModal] = useState(false);
+    const [sessionStats, setSessionStats] = useState(null);
+    const [coherenceHistory, setCoherenceHistory] = useState([]);
     
     const audioContextRef = useRef(null);
     const oscillatorRef = useRef(null);
@@ -343,7 +345,9 @@ export default function BiometricHealing() {
                                 const variance = intervals.reduce((sum, i) => sum + Math.pow(i - avgInterval, 2), 0) / intervals.length;
                                 const stdDev = Math.sqrt(variance);
                                 const coherenceScore = Math.max(0, Math.min(100, 100 - (stdDev / 10)));
-                                setCoherence(Math.round(coherenceScore));
+                                const roundedCoherence = Math.round(coherenceScore);
+                                setCoherence(roundedCoherence);
+                                setCoherenceHistory(prev => [...prev, { time: Date.now(), coherence: roundedCoherence }].slice(-60)); // Keep last 60 readings
                             }
                             
                             if (heartRateHistory.length > 5) {
@@ -371,7 +375,27 @@ export default function BiometricHealing() {
         if (videoRef.current && videoRef.current.srcObject) {
             videoRef.current.srcObject.getTracks().forEach(track => track.stop());
         }
+        
+        // Calculate session stats before stopping
+        if (coherenceHistory.length > 5) {
+            const startCoherence = coherenceHistory.slice(0, 5).reduce((a, b) => a + b.coherence, 0) / 5;
+            const endCoherence = coherenceHistory.slice(-5).reduce((a, b) => a + b.coherence, 0) / 5;
+            const improvement = Math.round(endCoherence - startCoherence);
+            const avgCoherence = Math.round(coherenceHistory.reduce((a, b) => a + b.coherence, 0) / coherenceHistory.length);
+            const timeInHighCoherence = coherenceHistory.filter(h => h.coherence > 70).length * 2; // ~2 sec per reading
+            
+            setSessionStats({
+                startCoherence: Math.round(startCoherence),
+                endCoherence: Math.round(endCoherence),
+                improvement,
+                avgCoherence,
+                timeInHighCoherence,
+                totalReadings: coherenceHistory.length
+            });
+        }
+        
         setShowCamera(false);
+        setCoherenceHistory([]);
     };
 
     useEffect(() => {
@@ -709,6 +733,56 @@ export default function BiometricHealing() {
                                     <canvas ref={canvasRef} width={100} height={100} className="hidden" />
                                     </motion.div>
                                     )}
+                                    </AnimatePresence>
+
+                                    {/* SESSION STATS - 8-BIT COOLASFUCK */}
+                                    <AnimatePresence>
+                                        {sessionStats && !showCamera && (
+                                            <motion.div
+                                                initial={{ opacity: 0, y: 20 }}
+                                                animate={{ opacity: 1, y: 0 }}
+                                                exit={{ opacity: 0, y: -20 }}
+                                                className="mt-4 bg-black border-4 border-green-500 p-4"
+                                                style={{ boxShadow: '0 0 20px rgba(34, 197, 94, 0.4)' }}
+                                            >
+                                                <div className="flex items-center gap-2 mb-3">
+                                                    <motion.div
+                                                        animate={{ scale: [1, 1.2, 1] }}
+                                                        transition={{ repeat: 3, duration: 0.5 }}
+                                                    >
+                                                        <COOLASFUCKHeart size={24} animate={false} />
+                                                    </motion.div>
+                                                    <h3 className="text-green-400 font-black font-mono text-sm">SESSION COMPLETE</h3>
+                                                </div>
+
+                                                <div className="grid grid-cols-2 gap-3 mb-3">
+                                                    <div className="bg-black border-2 border-cyan-500/50 p-2">
+                                                        <p className="text-cyan-400 text-xs font-mono">START</p>
+                                                        <p className="text-2xl font-black font-mono text-white">{sessionStats.startCoherence}%</p>
+                                                    </div>
+                                                    <div className="bg-black border-2 border-green-500/50 p-2">
+                                                        <p className="text-green-400 text-xs font-mono">END</p>
+                                                        <p className="text-2xl font-black font-mono text-white">{sessionStats.endCoherence}%</p>
+                                                    </div>
+                                                </div>
+
+                                                <div className="bg-black border-2 border-pink-500/50 p-3 mb-3">
+                                                    <p className="text-pink-400 font-black font-mono text-lg text-center">
+                                                        {sessionStats.improvement > 0 ? `+${sessionStats.improvement}%` : `${sessionStats.improvement}%`} HEALING
+                                                    </p>
+                                                    <p className="text-gray-400 text-xs font-mono text-center mt-1">
+                                                        {sessionStats.timeInHighCoherence}s in high coherence
+                                                    </p>
+                                                </div>
+
+                                                <button
+                                                    onClick={() => setSessionStats(null)}
+                                                    className="w-full py-2 bg-green-600 border-4 border-green-400 text-white font-black font-mono text-sm"
+                                                >
+                                                    CLOSE ✨
+                                                </button>
+                                            </motion.div>
+                                        )}
                                     </AnimatePresence>
 
                                     {/* FOOTER */}
