@@ -741,13 +741,27 @@ export default function FrequencyChamber() {
     <div className="min-h-screen bg-black text-white">
       
       {/* HEADER */}
-      <div className="border-b-4 border-cyan-500 p-6">
+      <div className="border-b-4 border-cyan-500 p-6 md:p-8">
         <div className="max-w-4xl mx-auto">
-          <div className="flex items-center gap-3 mb-2">
-            <COOLASFUCKWaves size={40} animate={true} />
-            <h1 className="text-3xl font-black font-mono text-white">FREQUENCY CHAMBER</h1>
+          <div className="flex items-center justify-center gap-4 mb-4">
+            <motion.div
+              animate={{
+                scale: [1, 1.2, 1],
+                rotate: [0, 5, -5, 0]
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            >
+              <COOLASFUCKWaves size={56} animate={true} />
+            </motion.div>
           </div>
-          <p className="text-gray-400 font-mono text-sm">
+          <h1 className="text-4xl md:text-5xl font-black font-mono text-white text-center mb-3 tracking-wider">
+            FREQUENCY CHAMBER
+          </h1>
+          <p className="text-gray-400 font-mono text-sm text-center">
             Evidence-based healing frequencies • Zero pseudo-science
           </p>
         </div>
