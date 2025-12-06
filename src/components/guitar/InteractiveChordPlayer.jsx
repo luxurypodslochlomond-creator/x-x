@@ -8,42 +8,58 @@ import { motion } from 'framer-motion';
  * Learning through SOUND, not just symbols
  */
 
-// Note frequencies in Hz (standard tuning)
+// Note frequencies in Hz (standard tuning E A D G B E)
 const NOTE_FREQUENCIES = {
-    'E2': 82.41,   // Low E
-    'A2': 110.00,  // A
-    'D3': 146.83,  // D
-    'G3': 196.00,  // G
-    'B3': 246.94,  // B
-    'E4': 329.63,  // High E
-    'A3': 220.00,
-    'C3': 130.81,
-    'C4': 261.63,
-    'F3': 174.61,
-    'F4': 349.23,
+    // Open strings
+    'E2': 82.41,   // 6th string (low E)
+    'A2': 110.00,  // 5th string
+    'D3': 146.83,  // 4th string
+    'G3': 196.00,  // 3rd string
+    'B3': 246.94,  // 2nd string
+    'E4': 329.63,  // 1st string (high E)
+    
+    // Fretted notes we need
+    'F2': 87.31,
+    'Gb2': 92.50,
+    'G2': 98.00,
+    'Ab2': 103.83,
+    'Bb2': 116.54,
     'B2': 123.47,
+    'C3': 130.81,
+    'Db3': 138.59,
+    'Eb3': 155.56,
+    'E3': 164.81,
+    'F3': 174.61,
+    'Gb3': 185.00,
     'Ab3': 207.65,
+    'A3': 220.00,
     'Bb3': 233.08,
+    'C4': 261.63,
+    'Db4': 277.18,
+    'D4': 293.66,
+    'Eb4': 311.13,
+    'F4': 349.23,
+    'Gb4': 369.99,
 };
 
-// Chord to notes mapping (which strings play which notes)
+// Chord to notes mapping [6th, 5th, 4th, 3rd, 2nd, 1st string] - Low to High
 const CHORD_NOTES = {
-    'G': ['G3', 'B3', 'D3', 'G3', 'B3', 'G3'],
-    'C': [null, 'C3', 'E4', 'G3', 'C4', 'E4'],
-    'D': [null, null, 'D3', 'A3', 'D3', 'F4'],
-    'Em': ['E2', 'B3', 'E4', 'G3', 'B3', 'E4'],
-    'Am': [null, 'A2', 'E4', 'A3', 'C4', 'E4'],
-    'E': ['E2', 'B3', 'E4', 'G3', 'B3', 'E4'],
-    'A': [null, 'A2', 'E4', 'A3', 'C4', 'E4'],
-    'F': ['F3', 'A3', 'C4', 'F4', 'A3', 'F4'],
-    'Em7': ['E2', 'B3', 'D3', 'G3', 'B3', 'E4'],
-    'Dsus4': [null, null, 'D3', 'A3', 'D3', 'G3'],
-    'A7sus4': [null, 'A2', 'E4', 'G3', 'D3', 'E4'],
-    'Cadd9': [null, 'C3', 'E4', 'G3', 'D3', 'E4'],
-    'B7': [null, 'B2', 'D3', 'F4', 'B3', 'D3'],
-    'Gm': ['G3', 'D3', 'G3', 'Bb3', 'D3', 'G3'],
-    'Bb': [null, 'Bb3', 'F3', 'Bb3', 'D3', 'F4'],
-    'Dm': [null, null, 'D3', 'A3', 'D3', 'F4'],
+    'G': ['G2', 'B2', 'D3', 'G3', 'B3', 'G3'],           // G major open
+    'C': [null, 'C3', 'E3', 'G3', 'C4', 'E4'],          // C major
+    'D': [null, null, 'D3', 'A3', 'D4', 'Gb4'],         // D major
+    'Em': ['E2', 'B2', 'E3', 'G3', 'B3', 'E4'],         // E minor
+    'Am': [null, 'A2', 'E3', 'A3', 'C4', 'E4'],         // A minor
+    'E': ['E2', 'B2', 'E3', 'Ab3', 'B3', 'E4'],         // E major
+    'A': [null, 'A2', 'E3', 'A3', 'Db4', 'E4'],         // A major
+    'F': ['F2', 'C3', 'F3', 'A3', 'C4', 'F4'],          // F major barre
+    'Em7': ['E2', 'B2', 'E3', 'G3', 'B3', 'E4'],        // E minor 7
+    'Dsus4': [null, null, 'D3', 'A3', 'D4', 'G3'],      // D sus4
+    'A7sus4': [null, 'A2', 'E3', 'G3', 'D4', 'E4'],     // A7sus4
+    'Cadd9': [null, 'C3', 'E3', 'G3', 'D4', 'E4'],      // C add9
+    'B7': [null, 'B2', 'Gb3', 'Ab3', 'B3', 'Eb4'],      // B7
+    'Gm': ['G2', 'D3', 'G3', 'Bb3', 'D4', 'G3'],        // G minor
+    'Bb': [null, 'Bb2', 'F3', 'Bb3', 'D4', 'F4'],       // Bb major
+    'Dm': [null, null, 'D3', 'A3', 'D4', 'F4'],         // D minor
 };
 
 export default function InteractiveChordPlayer({ chordName, size = 'normal' }) {
