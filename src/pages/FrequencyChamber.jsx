@@ -1355,8 +1355,24 @@ export default function FrequencyChamber() {
             >
               <div className="border-x-4 border-b-4 border-cyan-500/50 bg-black p-4">
                 <div className="space-y-2 text-xs font-mono text-gray-400">
-                  <p>📍 <span className="text-cyan-400">Your timezone:</span> {userTimezone}</p>
-                  <p>🕐 <span className="text-cyan-400">Local time:</span> {new Date().toLocaleTimeString()}</p>
+                  <div className="flex items-center gap-2">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                      <rect x="5" y="2" width="2" height="2" fill="#22d3ee"/>
+                      <rect x="4" y="4" width="4" height="2" fill="#22d3ee"/>
+                      <rect x="3" y="6" width="6" height="2" fill="#22d3ee"/>
+                      <rect x="4" y="8" width="4" height="2" fill="#22d3ee"/>
+                    </svg>
+                    <span><span className="text-cyan-400">Your timezone:</span> {userTimezone}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                      <rect x="2" y="2" width="8" height="8" stroke="#22d3ee" strokeWidth="1" fill="none"/>
+                      <rect x="5" y="0" width="2" height="2" fill="#22d3ee"/>
+                      <rect x="5" y="4" width="2" height="3" fill="#22d3ee"/>
+                      <rect x="7" y="6" width="2" height="1" fill="#22d3ee"/>
+                    </svg>
+                    <span><span className="text-cyan-400">Local time:</span> {new Date().toLocaleTimeString()}</span>
+                  </div>
                   <p className="text-cyan-300 mt-2">We use your device's local time to suggest the most helpful protocol for this moment.</p>
                 </div>
               </div>
