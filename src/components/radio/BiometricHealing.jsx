@@ -422,7 +422,11 @@ export default function BiometricHealing() {
                         </div>
                     </div>
                     <button
-                        onClick={() => setShowScienceModal(true)}
+                        onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            setShowScienceModal(true);
+                        }}
                         className="p-2 border-4 border-cyan-500 hover:border-cyan-400 bg-black transition-all"
                         style={{ boxShadow: '0 0 10px rgba(34, 211, 238, 0.3)' }}
                     >
