@@ -769,45 +769,25 @@ export default function FrequencyChamber() {
       
       {/* WHY THIS WORKS - EVIDENCE */}
       <div className="max-w-4xl mx-auto p-4">
-        <div className="bg-black border-4 border-cyan-500 p-6 space-y-4">
-          <div className="flex items-center gap-3 mb-4">
-            <Shield className="w-8 h-8 text-cyan-400" />
-            <h2 className="text-2xl font-black font-mono text-cyan-400">WHY THIS WORKS</h2>
+        <div className="border-4 border-cyan-500 bg-black p-4">
+          <div className="flex items-center justify-between mb-3">
+            <div className="flex items-center gap-2">
+              <Shield className="w-5 h-5 text-cyan-400" />
+              <h3 className="text-cyan-400 font-black font-mono text-sm">EVIDENCE-BASED</h3>
+            </div>
+            <button 
+              onClick={() => setShowInfo(PROTOCOLS.anxiety)}
+              className="text-cyan-400 hover:text-cyan-300 font-mono text-xs underline"
+            >
+              Why?
+            </button>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="bg-black border-2 border-green-500/50 p-4">
-              <h3 className="text-green-400 font-black font-mono text-sm mb-2">🧠 MIT RESEARCH</h3>
-              <p className="text-gray-300 text-xs font-mono">
-                40Hz gamma waves shown to increase neuroplasticity and reduce brain inflammation (MIT Tsai Lab, Nature 2016-2023)
-              </p>
-            </div>
-
-            <div className="bg-black border-2 border-pink-500/50 p-4">
-              <h3 className="text-pink-400 font-black font-mono text-sm mb-2">❤️ HEARTMATH INSTITUTE</h3>
-              <p className="text-gray-300 text-xs font-mono">
-                10Hz alpha waves + slow breathing activates vagal tone, reduces cortisol (Porges Polyvagal Theory)
-              </p>
-            </div>
-
-            <div className="bg-black border-2 border-purple-500/50 p-4">
-              <h3 className="text-purple-400 font-black font-mono text-sm mb-2">😴 SLEEP RESEARCH</h3>
-              <p className="text-gray-300 text-xs font-mono">
-                Delta 2Hz + pink noise enhances slow-wave sleep and memory consolidation (Northwestern University, Nature 2017)
-              </p>
-            </div>
-
-            <div className="bg-black border-2 border-amber-500/50 p-4">
-              <h3 className="text-amber-400 font-black font-mono text-sm mb-2">🧘 ANCIENT WISDOM</h3>
-              <p className="text-gray-300 text-xs font-mono">
-                These frequencies match Tibetan singing bowls (2,500+ years), Buddhist meditation states, and shamanic drumming traditions
-              </p>
-            </div>
+          <div className="space-y-1 text-xs font-mono text-gray-400">
+            <p>✓ MIT research • 40Hz neuroplasticity</p>
+            <p>✓ HeartMath • Vagal tone activation</p>
+            <p>✓ Sleep science • Delta wave studies</p>
+            <p>✓ Ancient wisdom • 2,500+ years proven</p>
           </div>
-
-          <p className="text-gray-500 text-xs font-mono text-center">
-            Tap ⓘ on any protocol for detailed sources
-          </p>
         </div>
       </div>
 
