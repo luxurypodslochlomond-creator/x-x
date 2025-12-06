@@ -677,7 +677,10 @@ export default function BiometricHealing() {
                                         </p>
                                     </div>
 
-                                    {/* SCIENCE MODAL - 8-BIT COOLASFUCK */}
+                                    </CardContent>
+                                    </Card>
+
+                                    {/* SCIENCE MODAL - 8-BIT COOLASFUCK - OUTSIDE CARD */}
                                     <AnimatePresence>
                                         {showScienceModal && (
                                             <motion.div
@@ -760,8 +763,5 @@ export default function BiometricHealing() {
                                             </motion.div>
                                         )}
                                     </AnimatePresence>
-
-                                    </CardContent>
-                                    </Card>
                                     );
 }
