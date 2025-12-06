@@ -329,7 +329,7 @@ const PROTOCOLS = {
     icon: Sun,
     color: '#F97316',
     description: 'Natural vitality as you age',
-    science: '10Hz alpha + 7.83Hz Schumann proven to regulate autonomic nervous system, reducing hot flushes and supporting healthy blood flow',
+    science: '10Hz alpha + 7.83Hz Schumann proven to regulate autonomic nervous system, supporting healthy blood flow and vitality',
     sources: ['Autonomic regulation research', 'Healthy aging studies'],
     ancientWisdom: 'Elders in traditional cultures use breathwork and earth frequencies to age with grace, strength and vitality.',
     config: {
