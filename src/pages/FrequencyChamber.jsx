@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Heart, Moon, Brain, Zap, Shield, Wind, Sun, Volume2, VolumeX, Clock, Info, X, Camera, Activity, Ear, Share2 } from 'lucide-react';
-import { COOLASFUCKWaves } from '@/components/shared/COOLASFUCKIcon';
+import { COOLASFUCKWaves, COOLASFUCKBrain, COOLASFUCKHeart, COOLASFUCKMoon, COOLASFUCKShield } from '@/components/shared/COOLASFUCKIcon';
 import BiometricHealing from '@/components/radio/BiometricHealing';
 
 /**
@@ -782,11 +782,23 @@ export default function FrequencyChamber() {
               Why?
             </button>
           </div>
-          <div className="space-y-1 text-xs font-mono text-gray-400">
-            <p>✓ MIT research • 40Hz neuroplasticity</p>
-            <p>✓ HeartMath • Vagal tone activation</p>
-            <p>✓ Sleep science • Delta wave studies</p>
-            <p>✓ Ancient wisdom • 2,500+ years proven</p>
+          <div className="space-y-2 text-xs font-mono text-gray-400">
+            <div className="flex items-center gap-2">
+              <COOLASFUCKBrain size={16} color="#22c55e" />
+              <span>MIT research • 40Hz neuroplasticity</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <COOLASFUCKHeart size={16} color="#ec4899" />
+              <span>HeartMath • Vagal tone activation</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <COOLASFUCKMoon size={16} color="#a855f7" />
+              <span>Sleep science • Delta wave studies</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <COOLASFUCKShield size={16} color="#fbbf24" />
+              <span>Ancient wisdom • 2,500+ years proven</span>
+            </div>
           </div>
         </div>
       </div>
