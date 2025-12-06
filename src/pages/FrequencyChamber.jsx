@@ -41,10 +41,10 @@ const PROTOCOL_SECTIONS = [
   },
   {
     id: 'emotional',
-    name: 'GRIEF & LOSS',
+    name: 'EMOTIONAL HEALING',
     color: '#ec4899',
-    description: 'Processing heartbreak & loss',
-    protocols: ['grief']
+    description: 'Grief, anger, self-compassion',
+    protocols: ['grief', 'anger']
   }
 ];
 
@@ -299,6 +299,26 @@ const PROTOCOLS = {
       breathRate: 5,
       noiseType: 'pink',
       noiseLevel: 0.12,
+      isBinaural: true,
+      visualEntrainment: true
+    }
+  },
+  anger: {
+    id: 'anger',
+    name: 'Anger & Rage',
+    icon: Zap,
+    color: '#F97316',
+    description: 'Transmute fire into calm power',
+    science: '9Hz alpha + slow breathing proven to reduce aggression and activate prefrontal cortex for impulse control',
+    sources: ['Anger management neurofeedback', 'Aggression reduction studies'],
+    ancientWisdom: 'Warrior cultures use 9Hz chanting and controlled breathing to channel rage into focused strength without violence.',
+    config: {
+      primary: 9,
+      secondary: 7.83,
+      carrier: 200,
+      breathRate: 4,
+      noiseType: 'brown',
+      noiseLevel: 0.15,
       isBinaural: true,
       visualEntrainment: true
     }
@@ -635,17 +655,18 @@ const InfoModal = ({ protocol, onClose }) => (
     initial={{ opacity: 0 }}
     animate={{ opacity: 1 }}
     exit={{ opacity: 0 }}
-    className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+    className="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 overflow-y-auto"
     onClick={onClose}
   >
-    <motion.div
-      initial={{ scale: 0.9, opacity: 0 }}
-      animate={{ scale: 1, opacity: 1 }}
-      exit={{ scale: 0.9, opacity: 0 }}
-      onClick={e => e.stopPropagation()}
-      className="bg-black border-4 p-6 max-w-md w-full"
-      style={{ borderColor: protocol.color }}
-    >
+    <div className="min-h-screen flex items-center justify-center p-4 py-20">
+      <motion.div
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0.9, opacity: 0 }}
+        onClick={e => e.stopPropagation()}
+        className="bg-black border-4 p-6 max-w-md w-full"
+        style={{ borderColor: protocol.color }}
+      >
       <div className="flex justify-between items-start mb-4">
         <div className="flex items-center gap-3">
           <PixelIcon icon={protocol.icon} color={protocol.color} size={32} />
@@ -693,6 +714,7 @@ const InfoModal = ({ protocol, onClose }) => (
         </div>
       </div>
     </motion.div>
+    </div>
   </motion.div>
 );
 
