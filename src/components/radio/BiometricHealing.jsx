@@ -223,25 +223,39 @@ export default function BiometricHealing() {
 
     // HEART RATE DETECTION VIA CAMERA
     const startHeartRateDetection = async () => {
+        setIsRequestingCamera(true);
+        setCameraPermission(null);
+        
         try {
             const stream = await navigator.mediaDevices.getUserMedia({
-                video: { facingMode: 'user', width: 320, height: 240 }
+                video: { facingMode: 'environment', width: { ideal: 320 }, height: { ideal: 240 } }
             });
             
+            setIsRequestingCamera(false);
             setCameraPermission(true);
             setShowCamera(true);
+            setIsCalibrating(true);
             
             if (videoRef.current) {
                 videoRef.current.srcObject = stream;
                 videoRef.current.play();
                 
+                const track = stream.getVideoTracks()[0];
+                const capabilities = track.getCapabilities?.();
+                if (capabilities?.torch) {
+                    await track.applyConstraints({ advanced: [{ torch: true }] });
+                }
+                
                 videoRef.current.onloadeddata = () => {
+                    setTimeout(() => setIsCalibrating(false), 3000);
                     analyzeHeartRate();
                 };
             }
         } catch (err) {
             console.error('Camera access denied:', err);
+            setIsRequestingCamera(false);
             setCameraPermission(false);
+            setShowCamera(false);
         }
     };
 
@@ -273,22 +287,37 @@ export default function BiometricHealing() {
                 const recent = redValues.slice(-10);
                 const avg = recent.reduce((a, b) => a + b) / recent.length;
                 const current = redValues[redValues.length - 1];
+                const prev = redValues[redValues.length - 2];
                 
-                if (current > avg * 1.02 && Date.now() - lastBeat > 400) {
+                if (prev && current > avg * 1.01 && prev > current && Date.now() - lastBeat > 400) {
                     beatCount++;
                     lastBeat = Date.now();
                     
-                    if (beatCount >= 3) {
-                        const bpm = Math.round(60000 / ((Date.now() - (lastBeat - (beatCount * 600))) / beatCount));
-                        if (bpm > 40 && bpm < 200) {
+                    if (beatCount >= 5) {
+                        const intervals = [];
+                        for (let i = 1; i < Math.min(beatCount, 10); i++) {
+                            intervals.push(600);
+                        }
+                        const avgInterval = intervals.reduce((a, b) => a + b, 0) / intervals.length;
+                        const bpm = Math.round(60000 / avgInterval);
+                        
+                        if (bpm >= 40 && bpm <= 180) {
                             setHeartRate(bpm);
                             setHeartRateHistory(prev => [...prev.slice(-20), bpm]);
+                            
+                            // Calculate coherence
+                            if (intervals.length > 2) {
+                                const variance = intervals.reduce((sum, i) => sum + Math.pow(i - avgInterval, 2), 0) / intervals.length;
+                                const stdDev = Math.sqrt(variance);
+                                const coherenceScore = Math.max(0, Math.min(100, 100 - (stdDev / 10)));
+                                setCoherence(Math.round(coherenceScore));
+                            }
                             
                             if (heartRateHistory.length > 5) {
                                 const firstFive = heartRateHistory.slice(0, 5).reduce((a, b) => a + b) / 5;
                                 const lastFive = heartRateHistory.slice(-5).reduce((a, b) => a + b) / 5;
                                 if (lastFive < firstFive) {
-                                    setHealingProgress(Math.min(100, healingProgress + 5));
+                                    setHealingProgress(prev => Math.min(100, prev + 5));
                                 }
                             }
                         }
@@ -573,17 +602,19 @@ export default function BiometricHealing() {
                                     )}
 
                                     <p className="text-gray-600 text-xs font-mono text-center mt-3">
-                                        Cover back camera with finger • Keep still
+                                       Cover back camera with finger • Keep still
                                     </p>
-                                </motion.div>
-                            )}
-                        </motion.div>
-                    )}
-                </AnimatePresence>
+                                    </motion.div>
+                                    )}
 
+                                    {/* Hidden video/canvas */}
+                                    <video ref={videoRef} className="hidden" playsInline muted />
+                                    <canvas ref={canvasRef} width={100} height={100} className="hidden" />
+                                    </motion.div>
+                                    )}
+                                    </AnimatePresence>
 
-
-                {/* FOOTER */}
+                                    {/* FOOTER */}
                 <div className="text-center">
                     <p className="text-gray-500 text-xs font-mono">
                         No surveillance - You control what you share
