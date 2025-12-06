@@ -390,7 +390,7 @@ export default function BiometricHealing() {
                             exit={{ opacity: 0, y: -10 }}
                             className="bg-black border-4 border-pink-500/50 p-4"
                         >
-                            <div className="flex items-center justify-between">
+                            <div className="flex items-center justify-between mb-4">
                                 <div className="flex items-center gap-3">
                                     <COOLASFUCKWaves size={40} animate={true} />
                                     <div>
@@ -400,14 +400,131 @@ export default function BiometricHealing() {
                                         <p className="text-gray-400 text-sm font-mono">{selectedState.description}</p>
                                     </div>
                                 </div>
-                                
+
                                 <button
-                                    onClick={() => { stopFrequency(); setSelectedState(null); }}
+                                    onClick={() => { stopFrequency(); setSelectedState(null); stopHeartRateDetection(); }}
                                     className="px-4 py-2 bg-red-600 border-4 border-red-400 text-white font-black font-mono text-sm"
                                 >
                                     STOP
                                 </button>
                             </div>
+
+                            {/* HRV SCANNER TOGGLE */}
+                            <button
+                                onClick={() => {
+                                    if (showCamera) {
+                                        stopHeartRateDetection();
+                                    } else {
+                                        startHeartRateDetection();
+                                    }
+                                }}
+                                className={`w-full mb-4 py-3 border-4 font-black font-mono text-sm transition-all ${
+                                    showCamera 
+                                        ? 'bg-green-600 border-green-400 text-white' 
+                                        : 'bg-black border-cyan-500 text-cyan-400 hover:border-cyan-300'
+                                }`}
+                                style={showCamera ? { boxShadow: '0 0 20px rgba(34, 197, 94, 0.5)' } : {}}
+                            >
+                                {showCamera ? '📹 SCANNING YOUR HEART' : '🫀 SCAN YOUR HEART (COVER CAMERA)'}
+                            </button>
+
+                            {/* CAMERA PERMISSION ERROR */}
+                            {cameraPermission === false && (
+                                <div className="bg-red-900/30 border-4 border-red-500 p-3 mb-4">
+                                    <p className="text-red-300 text-sm font-mono text-center">
+                                        Camera access denied. Enable camera to scan heart rate.
+                                    </p>
+                                </div>
+                            )}
+
+                            {/* HRV DISPLAY - 8-BIT COOLASFUCK */}
+                            {showCamera && (
+                                <motion.div
+                                    initial={{ opacity: 0, scale: 0.95 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    className="bg-black border-4 border-cyan-500 p-4 mb-4"
+                                    style={{ boxShadow: '0 0 30px rgba(34, 211, 238, 0.3)' }}
+                                >
+                                    <div className="flex items-center gap-2 mb-3">
+                                        <PixelHeart size={24} animate={heartRate !== null} />
+                                        <p className="text-cyan-400 font-black font-mono text-sm">HEART RATE VARIABILITY</p>
+                                    </div>
+
+                                    {isCalibrating ? (
+                                        <div className="flex items-center justify-center gap-3 py-6">
+                                            <motion.div
+                                                className="w-6 h-6 bg-cyan-500"
+                                                animate={{ scale: [1, 1.5, 1], opacity: [1, 0.5, 1] }}
+                                                transition={{ repeat: Infinity, duration: 1 }}
+                                                style={{ imageRendering: 'pixelated' }}
+                                            />
+                                            <p className="text-gray-400 text-sm font-mono">CALIBRATING...</p>
+                                        </div>
+                                    ) : (
+                                        <div className="grid grid-cols-3 gap-3">
+                                            {/* BPM */}
+                                            <div className="bg-black border-4 border-red-500 p-3 text-center">
+                                                <PixelHeart size={20} animate={true} />
+                                                <p className="text-3xl font-black font-mono text-red-400 mt-2">
+                                                    {heartRate || '--'}
+                                                </p>
+                                                <p className="text-xs text-gray-500 font-mono">BPM</p>
+                                            </div>
+
+                                            {/* COHERENCE */}
+                                            <div className={`bg-black border-4 p-3 text-center ${
+                                                coherence > 70 ? 'border-green-500' : coherence > 40 ? 'border-yellow-500' : 'border-red-500'
+                                            }`}>
+                                                <COOLASFUCKWaves size={20} animate={true} />
+                                                <p className={`text-3xl font-black font-mono mt-2 ${
+                                                    coherence > 70 ? 'text-green-400' : coherence > 40 ? 'text-yellow-400' : 'text-red-400'
+                                                }`}>
+                                                    {coherence || '--'}%
+                                                </p>
+                                                <p className="text-xs text-gray-500 font-mono">COHERENCE</p>
+                                            </div>
+
+                                            {/* HEALING PROGRESS */}
+                                            <div className="bg-black border-4 border-pink-500 p-3 text-center">
+                                                <COOLASFUCKHeart size={20} animate={healingProgress > 50} />
+                                                <p className="text-3xl font-black font-mono text-pink-400 mt-2">
+                                                    {healingProgress}%
+                                                </p>
+                                                <p className="text-xs text-gray-500 font-mono">HEALING</p>
+                                            </div>
+                                        </div>
+                                    )}
+
+                                    {/* FEEDBACK MESSAGE */}
+                                    {coherence !== null && (
+                                        <motion.div
+                                            initial={{ opacity: 0 }}
+                                            animate={{ opacity: 1 }}
+                                            className={`mt-3 p-3 border-4 text-center ${
+                                                coherence > 70 
+                                                    ? 'border-green-500 bg-green-900/20' 
+                                                    : coherence > 40 
+                                                        ? 'border-yellow-500 bg-yellow-900/20' 
+                                                        : 'border-red-500 bg-red-900/20'
+                                            }`}
+                                        >
+                                            <p className={`text-sm font-black font-mono ${
+                                                coherence > 70 ? 'text-green-400' : coherence > 40 ? 'text-yellow-400' : 'text-red-400'
+                                            }`}>
+                                                {coherence > 70 
+                                                    ? '✓ HIGH SYNC - Frequency is healing you!' 
+                                                    : coherence > 40 
+                                                        ? '◐ MODERATE - Breathe slower, relax more'
+                                                        : '○ LOW - Deep breaths, you\'re getting there'}
+                                            </p>
+                                        </motion.div>
+                                    )}
+
+                                    <p className="text-gray-600 text-xs font-mono text-center mt-3">
+                                        Cover back camera with finger • Keep still
+                                    </p>
+                                </motion.div>
+                            )}
                         </motion.div>
                     )}
                 </AnimatePresence>
