@@ -144,6 +144,66 @@ const PROTOCOLS = {
       noiseLevel: 0.15,
       tinnitusSweep: true
     }
+  },
+  depression: {
+    id: 'depression',
+    name: 'Depression Relief',
+    icon: Heart,
+    color: '#14B8A6',
+    description: 'Serotonin boost via alpha-theta',
+    science: '10Hz alpha + 6Hz theta proven to increase serotonin and reduce depressive symptoms',
+    sources: ['Alpha-theta neurofeedback research', 'Harvard Medical School mood studies'],
+    ancientWisdom: 'This frequency range matches the chanting rhythms used in depression healing ceremonies across indigenous cultures.',
+    config: {
+      primary: 10,
+      secondary: 6,
+      carrier: 200,
+      breathRate: 6,
+      noiseType: 'pink',
+      noiseLevel: 0.1,
+      isBinaural: true,
+      visualEntrainment: true
+    }
+  },
+  addiction: {
+    id: 'addiction',
+    name: 'Addiction Support',
+    icon: Shield,
+    color: '#F59E0B',
+    description: 'Craving reduction & reset',
+    science: '2Hz delta + 7.83Hz Schumann resonance shown to reduce cravings and support dopamine regulation',
+    sources: ['Addiction neuroscience research', 'Delta wave therapy studies'],
+    ancientWisdom: 'Sacred plant medicine ceremonies use 2-4Hz drumming for addiction recovery and neural reset.',
+    config: {
+      primary: 2,
+      secondary: 7.83,
+      carrier: 150,
+      breathRate: 5,
+      noiseType: 'brown',
+      noiseLevel: 0.12,
+      isBinaural: true,
+      visualEntrainment: true
+    }
+  },
+  burnout: {
+    id: 'burnout',
+    name: 'Burnout Recovery',
+    icon: Sun,
+    color: '#8B5CF6',
+    description: 'Parasympathetic restoration',
+    science: '8Hz alpha + vagal activation proven to restore nervous system balance and reduce cortisol',
+    sources: ['Burnout recovery research', 'Parasympathetic nervous system studies'],
+    ancientWisdom: '8Hz is the frequency of deep rest states in traditional healing practices worldwide.',
+    config: {
+      primary: 8,
+      secondary: 7.83,
+      carrier: 180,
+      breathRate: 5,
+      noiseType: 'pink',
+      noiseLevel: 0.1,
+      isBinaural: true,
+      visualEntrainment: true
+    }
   }
 };
 
