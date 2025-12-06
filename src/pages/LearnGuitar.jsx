@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Music, Guitar, Heart, ChevronDown, ChevronUp, Play, Star } from 'lucide-react';
+import { ChevronDown, ChevronUp } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { COOLASFUCKMusicNote, COOLASFUCKHeart, COOLASFUCKGlobe, COOLASFUCKZap, COOLASFUCKSparkle } from '@/components/shared/COOLASFUCKIcon';
 
 // CHORD DIAGRAMS - Simple visual representation
 const ChordDiagram = ({ name, frets, fingers }) => {
@@ -26,7 +27,7 @@ const ChordDiagram = ({ name, frets, fingers }) => {
     );
 };
 
-// SONG DATA - From Dermid's recommendations
+// SONG DATA
 const SONGS = [
     {
         id: 1,
@@ -38,7 +39,7 @@ const SONGS = [
         pattern: "Down Down Up Up Down Up",
         progression: "Em7 – G – Dsus4 – A7sus4",
         tips: "Keep the same finger shape, just move your fingers slightly between chords. Classic campfire song!",
-        emoji: "🎸"
+        icon: COOLASFUCKMusicNote
     },
     {
         id: 2,
@@ -50,7 +51,7 @@ const SONGS = [
         pattern: "Down Down Down Down (slow)",
         progression: "G – D – Am, G – D – C",
         tips: "Only 4 chords! Perfect first song. Slow strumming.",
-        emoji: "🚪"
+        icon: COOLASFUCKSparkle
     },
     {
         id: 3,
@@ -62,7 +63,7 @@ const SONGS = [
         pattern: "Fingerpick or slow down strums",
         progression: "Verse: Am – C – D – Am | Chorus: Am – F – C – G",
         tips: "Beautiful emotional song. Take it slow, feel every chord.",
-        emoji: "💔"
+        icon: COOLASFUCKHeart
     },
     {
         id: 4,
@@ -74,7 +75,7 @@ const SONGS = [
         pattern: "Down Down Up Up Down Up",
         progression: "Am – C – G – F (verse and chorus)",
         tips: "Beautiful Scottish soul. 4 chords, smooth changes. Let it flow!",
-        emoji: "💙"
+        icon: COOLASFUCKHeart
     },
     {
         id: 5,
@@ -86,7 +87,7 @@ const SONGS = [
         pattern: "Gentle fingerpicking or soft strums",
         progression: "C – Am – Em – F – G",
         tips: "Nice for acoustic and simple picking. The Royle Family theme!",
-        emoji: "🌍"
+        icon: COOLASFUCKGlobe
     },
     {
         id: 6,
@@ -98,7 +99,7 @@ const SONGS = [
         pattern: "Down Down Up Up Down Up",
         progression: "C – F – Am – G",
         tips: "Capo 3rd fret for standard acoustic version. Powerful chorus!",
-        emoji: "🔥"
+        icon: COOLASFUCKZap
     },
     {
         id: 7,
@@ -110,7 +111,7 @@ const SONGS = [
         pattern: "Down Up Down Up (steady)",
         progression: "Em – C – G – D (same progression all the way through!)",
         tips: "One progression the ENTIRE song. Perfect for practice!",
-        emoji: "🧟"
+        icon: COOLASFUCKSparkle
     },
     {
         id: 8,
@@ -122,7 +123,7 @@ const SONGS = [
         pattern: "Fingerpick pattern or gentle strums",
         progression: "C – G – Em – D",
         tips: "Beautiful fingerpicking song. Start with strums, graduate to picking.",
-        emoji: "🚗"
+        icon: COOLASFUCKZap
     },
     {
         id: 9,
@@ -134,7 +135,7 @@ const SONGS = [
         pattern: "Down Down Down Down (steady rhythm)",
         progression: "G – Em – C – D",
         tips: "Easy strumming pattern. Classic song everyone knows!",
-        emoji: "🤝"
+        icon: COOLASFUCKHeart
     },
     {
         id: 10,
@@ -146,7 +147,7 @@ const SONGS = [
         pattern: "Down Up Down Up (reggae feel)",
         progression: "A – D – A – E",
         tips: "Only 3 chords! Reggae strum = skip the downbeat. Don't worry!",
-        emoji: "🐦"
+        icon: COOLASFUCKSparkle
     },
     {
         id: 11,
@@ -158,7 +159,7 @@ const SONGS = [
         pattern: "Waltz feel - Down Down Down (3/4 time)",
         progression: "A – D – A – E – A",
         tips: "Beautiful Scottish anthem! 3/4 waltz timing. Gentle strums, let it breathe.",
-        emoji: "🏴󠁧󠁢󠁳󠁣󠁴󠁿"
+        icon: COOLASFUCKMusicNote
     },
     {
         id: 12,
@@ -170,7 +171,7 @@ const SONGS = [
         pattern: "Gentle fingerpick or soft strums",
         progression: "C – F – C – G – Am",
         tips: "Beautiful reflective song. Take it slow and peaceful. From Double Fantasy album.",
-        emoji: "🎡"
+        icon: COOLASFUCKSparkle
     },
     {
         id: 13,
@@ -182,7 +183,7 @@ const SONGS = [
         pattern: "Down Down Up Up Down Up (ska bounce)",
         progression: "C – F – G – Am",
         tips: "Classic Madness ska feel! Upbeat and fun. Let the rhythm bounce!",
-        emoji: "🎩"
+        icon: COOLASFUCKMusicNote
     },
     {
         id: 14,
@@ -194,7 +195,7 @@ const SONGS = [
         pattern: "Gentle fingerpick or arpeggios",
         progression: "E – A – E – B7",
         tips: "Mark Knopfler classic. Fingerpicking style but can strum gently too. Beautiful melody.",
-        emoji: "🌅"
+        icon: COOLASFUCKSparkle
     },
     {
         id: 15,
@@ -206,7 +207,7 @@ const SONGS = [
         pattern: "Slow arpeggios, let notes ring",
         progression: "Gm – Bb – F – C – Gm",
         tips: "Epic tribute to Syd Barrett. Take it VERY slow, let each chord breathe. Feel the emotion.",
-        emoji: "💎"
+        icon: COOLASFUCKSparkle
     }
 ];
 
@@ -249,7 +250,7 @@ export default function LearnGuitarPage() {
                     className="text-center space-y-4"
                 >
                     <div className="inline-flex items-center justify-center bg-black border-4 border-amber-500 p-4">
-                        <span className="text-6xl">🎸</span>
+                        <COOLASFUCKMusicNote size={64} animate={true} />
                     </div>
                     <h1 className="text-4xl md:text-5xl font-black font-mono text-amber-400" style={{ textShadow: '4px 4px 0px rgba(0,0,0,0.8)' }}>
                         LEARN GUITAR
@@ -327,7 +328,7 @@ export default function LearnGuitarPage() {
                                     {/* SONG HEADER */}
                                     <div className="flex items-center justify-between">
                                         <div className="flex items-center gap-3">
-                                            <span className="text-3xl">{song.emoji}</span>
+                                            <song.icon size={40} animate={true} />
                                             <div>
                                                 <p className="font-black font-mono text-white text-lg">{song.title}</p>
                                                 <p className="text-amber-300 text-sm font-bold">{song.artist}</p>
@@ -414,8 +415,10 @@ export default function LearnGuitarPage() {
                 {/* ENCOURAGEMENT */}
                 <Card className="bg-black border-4 border-pink-500">
                     <CardContent className="p-6 text-center">
-                        <Heart className="w-12 h-12 text-pink-400 mx-auto mb-4" />
-                        <h3 className="text-2xl font-black font-mono text-pink-300 mb-2" style={{ textShadow: '3px 3px 0px rgba(0,0,0,1)' }}>YOU'VE GOT THIS! 💚</h3>
+                        <div className="flex justify-center mb-4">
+                            <COOLASFUCKHeart size={48} animate={true} />
+                        </div>
+                        <h3 className="text-2xl font-black font-mono text-pink-300 mb-2" style={{ textShadow: '3px 3px 0px rgba(0,0,0,1)' }}>YOU'VE GOT THIS!</h3>
                         <p className="text-pink-200 font-bold">
                             Every guitarist started exactly where you are now. 
                             Practice a little every day, and you'll be amazed how fast you improve!
