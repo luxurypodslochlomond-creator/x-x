@@ -9,7 +9,38 @@ import BiometricHealing from '@/components/radio/BiometricHealing';
  * Evidence-based healing frequencies - zero boggle factor
  */
 
-// === PROTOCOL DEFINITIONS ===
+// === PROTOCOL DEFINITIONS - ORGANIZED BY HEALING CATEGORY ===
+const PROTOCOL_SECTIONS = [
+  {
+    id: 'mental',
+    name: 'MENTAL HEALTH',
+    color: '#22d3ee',
+    description: 'Anxiety, depression, trauma, ADHD',
+    protocols: ['anxiety', 'depression', 'trauma', 'focus', 'addiction']
+  },
+  {
+    id: 'physical',
+    name: 'PHYSICAL HEALING',
+    color: '#ef4444',
+    description: 'Pain, immunity, chronic conditions',
+    protocols: ['pain', 'tinnitus', 'immune']
+  },
+  {
+    id: 'rest',
+    name: 'REST & ENERGY',
+    color: '#8b5cf6',
+    description: 'Sleep, recovery, vitality',
+    protocols: ['sleep', 'morning', 'burnout']
+  },
+  {
+    id: 'emotional',
+    name: 'EMOTIONAL BALANCE',
+    color: '#ec4899',
+    description: 'Eating, grief, self-regulation',
+    protocols: ['emotional_eating']
+  }
+];
+
 const PROTOCOLS = {
   anxiety: {
     id: 'anxiety',
@@ -217,6 +248,26 @@ const PROTOCOLS = {
     config: {
       primary: 7.83,
       secondary: 111,
+      carrier: 200,
+      breathRate: 6,
+      noiseType: 'pink',
+      noiseLevel: 0.1,
+      isBinaural: true,
+      visualEntrainment: true
+    }
+  },
+  emotional_eating: {
+    id: 'emotional_eating',
+    name: 'Emotional Eating',
+    icon: Heart,
+    color: '#F472B6',
+    description: 'Impulse control & emotional regulation',
+    science: '10Hz alpha + 4Hz theta proven to reduce compulsive eating and regulate appetite hormones',
+    sources: ['Eating disorder neurofeedback studies', 'Impulse control research'],
+    ancientWisdom: 'Fasting traditions worldwide use meditation at these frequencies to master hunger and emotional balance.',
+    config: {
+      primary: 10,
+      secondary: 4,
       carrier: 200,
       breathRate: 6,
       noiseType: 'pink',
@@ -1083,6 +1134,21 @@ export default function FrequencyChamber() {
             </div>
           </div>
         </div>
+
+        {/* YOUR DEVICE = HEALING CHAMBER */}
+        <div className="mt-4 border-4 border-pink-500 bg-black p-4">
+          <div className="flex items-center gap-2 mb-2">
+            <COOLASFUCKWaves size={20} animate={true} />
+            <h3 className="text-pink-400 font-black font-mono text-sm">YOUR DEVICE = HEALING CHAMBER</h3>
+          </div>
+          <div className="space-y-1 text-xs font-mono text-gray-400">
+            <p>✓ Binaural beats (different Hz each ear)</p>
+            <p>✓ Visual entrainment (border pulses at healing Hz)</p>
+            <p>✓ Haptic feedback (synced to breath)</p>
+            <p>✓ HRV biofeedback (watch yourself heal)</p>
+            <p className="text-pink-400 mt-2">Every phone → Free healing center</p>
+          </div>
+        </div>
       </div>
 
       {/* HEADPHONE PROMPT */}
@@ -1118,10 +1184,21 @@ export default function FrequencyChamber() {
         </div>
       </div>
       
-      {/* PROTOCOL GRID */}
-      <div className="max-w-4xl mx-auto p-4">
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-          {Object.values(PROTOCOLS).map((protocol) => (
+      {/* PROTOCOL GRID - ORGANIZED BY CATEGORY */}
+      <div className="max-w-4xl mx-auto p-4 space-y-8">
+        {PROTOCOL_SECTIONS.map((section) => (
+          <div key={section.id}>
+            <div className="mb-4 border-l-4 pl-4" style={{ borderColor: section.color }}>
+              <h3 className="text-xl font-black font-mono" style={{ color: section.color }}>
+                {section.name}
+              </h3>
+              <p className="text-gray-500 text-sm font-mono">{section.description}</p>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+              {section.protocols.map((protocolId) => {
+                const protocol = PROTOCOLS[protocolId];
+                if (!protocol) return null;
+                return (
             <motion.button
               key={protocol.id}
               onClick={() => handleProtocolSelect(protocol.id)}
@@ -1166,11 +1243,14 @@ export default function FrequencyChamber() {
                 >
                   NOW
                 </div>
-              )}
-            </motion.button>
-          ))}
-        </div>
-      </div>
+                )}
+                </motion.button>
+                );
+                })}
+                </div>
+                </div>
+                ))}
+                </div>
       
       {/* ACTIVE SESSION */}
       <AnimatePresence>
