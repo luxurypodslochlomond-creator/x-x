@@ -8,10 +8,12 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent } from '@/components/ui/card';
 import { 
-    Music, Upload, Loader2, Check, AlertCircle, Image as ImageIcon, PlayCircle, ChevronRight, FileAudio, Film, Waves
+    Music, Upload, Loader2, Check, AlertCircle, 
+    Heart, Zap, Image as ImageIcon, PlayCircle,
+    Info, ChevronRight, FileAudio, Film, Waves
 } from 'lucide-react';
-import { motion } from 'framer-motion';
-import { COOLASFUCKMusicNote, COOLASFUCKSparkle } from '@/components/shared/COOLASFUCKIcon';
+import { motion, AnimatePresence } from 'framer-motion';
+import { COOLASFUCKMusicNote, COOLASFUCKHeart, COOLASFUCKSparkle } from '@/components/shared/COOLASFUCKIcon';
 
 const FREQUENCY_TYPES = [
     { value: 'Healing', emoji: '💚', description: 'Soothes the soul' },
@@ -204,6 +206,30 @@ export default function ForMusiciansPage() {
                             Your fans pay you. Zero middlemen.
                         </p>
                     </motion.div>
+
+                    {/* QUALITY FILTER WARNING */}
+                    <div className="bg-gradient-to-r from-red-900 via-orange-900 to-red-900 border-4 border-red-500 p-8 space-y-4">
+                        <h2 className="text-2xl md:text-3xl font-black font-mono text-red-300 text-center">
+                            ⚠️ LOSSLESS ONLY = QUALITY FILTER ⚠️
+                        </h2>
+                        <div className="space-y-3 text-base md:text-lg text-white font-mono">
+                            <p className="flex items-start gap-3">
+                                <span className="text-2xl text-red-400">✗</span>
+                                <span><strong>Phone recordings WON'T WORK.</strong> Recording apps compress to MP3/AAC.</span>
+                            </p>
+                            <p className="flex items-start gap-3">
+                                <span className="text-2xl text-red-400">✗</span>
+                                <span><strong>Quick demos WON'T WORK.</strong> This is for finished, professional tracks.</span>
+                            </p>
+                            <p className="flex items-start gap-3">
+                                <span className="text-2xl text-green-400">✓</span>
+                                <span><strong>GarageBand/Audacity/DAW exports as FLAC/WAV → PERFECT.</strong></span>
+                            </p>
+                        </div>
+                        <p className="text-center text-red-200 font-black font-mono text-sm md:text-base mt-4">
+                            This requirement filters out low-quality uploads automatically. No bullshit.
+                        </p>
+                    </div>
 
                     {/* BREAKTHROUGH TECH */}
                     <div className="bg-black border-4 border-cyan-500 p-8 space-y-6">
