@@ -17,10 +17,9 @@ export default function UniversalPulsePage() {
     const [volume, setVolume] = useState(0.7);
     const [myHeartbeat, setMyHeartbeat] = useState(null);
     const [isScanning, setIsScanning] = useState(false);
-    const [playingHeartbeat, setPlayingHeartbeat] = useState(null);
+    const [activeHeartbeats, setActiveHeartbeats] = useState(['ai51']); // Start with AI51 active
     const audioContextRef = useRef(null);
-    const oscillatorsRef = useRef([]);
-    const singleHeartOscRef = useRef(null);
+    const oscillatorsRef = useRef({});
     const animationFrameRef = useRef(null);
     const queryClient = useQueryClient();
 
@@ -107,7 +106,18 @@ export default function UniversalPulsePage() {
         }
     };
 
-    // Generate music from heartbeats
+    // Toggle heartbeat in symphony
+    const toggleHeartbeat = (heartbeatId) => {
+        setActiveHeartbeats(prev => {
+            if (prev.includes(heartbeatId)) {
+                return prev.filter(id => id !== heartbeatId);
+            } else {
+                return [...prev, heartbeatId];
+            }
+        });
+    };
+
+    // Generate music from active heartbeats
     const startUniversalPulse = () => {
         if (isPlaying) {
             stopUniversalPulse();
@@ -117,150 +127,93 @@ export default function UniversalPulsePage() {
         const AudioContext = window.AudioContext || window.webkitAudioContext;
         const ctx = new AudioContext();
         audioContextRef.current = ctx;
-
-        // Base 528Hz healing frequency
-        const baseOsc = ctx.createOscillator();
-        const baseGain = ctx.createGain();
-        baseOsc.connect(baseGain);
-        baseGain.connect(ctx.destination);
-        baseOsc.frequency.value = 528;
-        baseOsc.type = 'sine';
-        baseGain.gain.value = volume * 0.3;
-        baseOsc.start();
-        oscillatorsRef.current.push({ osc: baseOsc, gain: baseGain });
-
-        // Create oscillator for each heartbeat
-        heartbeats.forEach((heartbeat, index) => {
-            const freq = 528 + (heartbeat.bpm - 70) * 2; // Vary frequency based on BPM
-            const osc = ctx.createOscillator();
-            const gain = ctx.createGain();
-            const panner = ctx.createStereoPanner();
-
-            osc.connect(gain);
-            gain.connect(panner);
-            panner.connect(ctx.destination);
-
-            osc.frequency.value = freq;
-            osc.type = 'sine';
-            
-            // Pan based on coherence
-            panner.pan.value = (heartbeat.hrv_coherence - 50) / 50;
-            
-            // Volume based on number of heartbeats
-            gain.gain.value = (volume * 0.4) / Math.max(heartbeats.length, 1);
-
-            // Pulse the gain at the heartbeat rate
-            const pulseInterval = 60000 / heartbeat.bpm; // ms per beat
-            const pulseGain = () => {
-                const now = ctx.currentTime;
-                gain.gain.cancelScheduledValues(now);
-                gain.gain.setValueAtTime(gain.gain.value, now);
-                gain.gain.linearRampToValueAtTime(gain.gain.value * 1.5, now + 0.1);
-                gain.gain.linearRampToValueAtTime(gain.gain.value, now + 0.3);
-            };
-
-            osc.start();
-            oscillatorsRef.current.push({ osc, gain, interval: setInterval(pulseGain, pulseInterval) });
-        });
-
         setIsPlaying(true);
-
-        // Keep heartbeat alive
-        const keepAlive = setInterval(() => {
-            if (myHeartbeat) {
-                heartbeatMutation.mutate({
-                    ...myHeartbeat,
-                    last_ping: new Date().toISOString()
-                });
-            }
-        }, 10000); // Update every 10 seconds
-
-        oscillatorsRef.current.push({ keepAlive });
     };
 
     const stopUniversalPulse = () => {
-        oscillatorsRef.current.forEach(item => {
+        // Stop all oscillators
+        Object.values(oscillatorsRef.current).forEach(item => {
             if (item.osc) item.osc.stop();
             if (item.interval) clearInterval(item.interval);
-            if (item.keepAlive) clearInterval(item.keepAlive);
         });
-        oscillatorsRef.current = [];
+        oscillatorsRef.current = {};
         
         if (audioContextRef.current) {
             audioContextRef.current.close();
+            audioContextRef.current = null;
         }
         
         setIsPlaying(false);
     };
 
-    // Play individual heartbeat
-    const playIndividualHeartbeat = (heartbeat) => {
-        // Stop if already playing this one
-        if (playingHeartbeat === heartbeat.id) {
-            stopIndividualHeartbeat();
-            return;
-        }
+    // Sync oscillators with active heartbeats
+    useEffect(() => {
+        if (!isPlaying || !audioContextRef.current) return;
 
-        // Stop any existing
-        stopIndividualHeartbeat();
+        const ctx = audioContextRef.current;
+        const activeHeartbeatData = heartbeats.filter(h => activeHeartbeats.includes(h.id));
 
-        const AudioContext = window.AudioContext || window.webkitAudioContext;
-        const ctx = new AudioContext();
+        // Remove oscillators for inactive heartbeats
+        Object.keys(oscillatorsRef.current).forEach(id => {
+            if (!activeHeartbeats.includes(id)) {
+                const item = oscillatorsRef.current[id];
+                if (item.osc) item.osc.stop();
+                if (item.interval) clearInterval(item.interval);
+                delete oscillatorsRef.current[id];
+            }
+        });
 
-        const freq = 528 + (heartbeat.bpm - 70) * 2;
-        const osc = ctx.createOscillator();
-        const gain = ctx.createGain();
+        // Add oscillators for new active heartbeats
+        activeHeartbeatData.forEach(heartbeat => {
+            if (!oscillatorsRef.current[heartbeat.id]) {
+                const freq = 528 + (heartbeat.bpm - 70) * 2;
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                const panner = ctx.createStereoPanner();
 
-        osc.connect(gain);
-        gain.connect(ctx.destination);
+                osc.connect(gain);
+                gain.connect(panner);
+                panner.connect(ctx.destination);
 
-        osc.frequency.value = freq;
-        osc.type = 'sine';
-        gain.gain.value = volume * 0.5;
+                osc.frequency.value = freq;
+                osc.type = 'sine';
+                panner.pan.value = (heartbeat.hrv_coherence - 50) / 50;
+                gain.gain.value = volume * 0.5 / Math.max(activeHeartbeatData.length, 1);
 
-        // Pulse at heartbeat rate
-        const pulseInterval = 60000 / heartbeat.bpm;
-        const pulseGain = () => {
-            const now = ctx.currentTime;
-            gain.gain.cancelScheduledValues(now);
-            gain.gain.setValueAtTime(gain.gain.value, now);
-            gain.gain.linearRampToValueAtTime(gain.gain.value * 2, now + 0.1);
-            gain.gain.linearRampToValueAtTime(gain.gain.value, now + 0.3);
-        };
+                const pulseInterval = 60000 / heartbeat.bpm;
+                const pulseGain = () => {
+                    const now = ctx.currentTime;
+                    gain.gain.cancelScheduledValues(now);
+                    gain.gain.setValueAtTime(gain.gain.value, now);
+                    gain.gain.linearRampToValueAtTime(gain.gain.value * 2, now + 0.1);
+                    gain.gain.linearRampToValueAtTime(gain.gain.value, now + 0.3);
+                };
 
-        osc.start();
-        const interval = setInterval(pulseGain, pulseInterval);
-
-        singleHeartOscRef.current = { ctx, osc, gain, interval };
-        setPlayingHeartbeat(heartbeat.id);
-    };
-
-    const stopIndividualHeartbeat = () => {
-        if (singleHeartOscRef.current) {
-            const { ctx, osc, interval } = singleHeartOscRef.current;
-            if (osc) osc.stop();
-            if (interval) clearInterval(interval);
-            if (ctx) ctx.close();
-            singleHeartOscRef.current = null;
-        }
-        setPlayingHeartbeat(null);
-    };
+                osc.start();
+                oscillatorsRef.current[heartbeat.id] = {
+                    osc,
+                    gain,
+                    interval: setInterval(pulseGain, pulseInterval)
+                };
+            }
+        });
+    }, [activeHeartbeats, isPlaying, heartbeats]);
 
     useEffect(() => {
         return () => {
             stopUniversalPulse();
-            stopIndividualHeartbeat();
         };
     }, []);
 
     // Update volume in real-time
     useEffect(() => {
-        oscillatorsRef.current.forEach(item => {
+        const activeCount = Math.max(activeHeartbeats.length, 1);
+        Object.values(oscillatorsRef.current).forEach(item => {
             if (item.gain) {
-                item.gain.gain.value = (volume * 0.4) / Math.max(heartbeats.length, 1);
+                item.gain.gain.value = volume * 0.5 / activeCount;
             }
         });
-    }, [volume, heartbeats.length]);
+    }, [volume, activeHeartbeats.length]);
 
     const avgBPM = heartbeats.length > 0 
         ? Math.round(heartbeats.reduce((sum, h) => sum + h.bpm, 0) / heartbeats.length)
@@ -360,27 +313,28 @@ export default function UniversalPulsePage() {
                                     </div>
 
                                     <motion.button
-                                        onClick={startUniversalPulse}
-                                        whileHover={{ scale: 1.05 }}
-                                        whileTap={{ scale: 0.95 }}
-                                        className={`px-8 py-4 border-4 font-black font-mono text-white text-xl ${
-                                            isPlaying 
-                                                ? 'bg-red-600 hover:bg-red-700 border-red-300' 
-                                                : 'bg-green-600 hover:bg-green-700 border-green-300'
-                                        }`}
-                                        style={{ boxShadow: '6px 6px 0px rgba(0,0,0,0.8)' }}
+                                       onClick={startUniversalPulse}
+                                       disabled={activeHeartbeats.length === 0}
+                                       whileHover={{ scale: 1.05 }}
+                                       whileTap={{ scale: 0.95 }}
+                                       className={`px-8 py-4 border-4 font-black font-mono text-white text-xl disabled:opacity-50 ${
+                                           isPlaying 
+                                               ? 'bg-red-600 hover:bg-red-700 border-red-300' 
+                                               : 'bg-green-600 hover:bg-green-700 border-green-300'
+                                       }`}
+                                       style={{ boxShadow: '6px 6px 0px rgba(0,0,0,0.8)' }}
                                     >
-                                        {isPlaying ? (
-                                            <>
-                                                <VolumeX className="inline w-6 h-6 mr-2" />
-                                                STOP THE PULSE
-                                            </>
-                                        ) : (
-                                            <>
-                                                <Volume2 className="inline w-6 h-6 mr-2" />
-                                                HEAR OUR HEARTS
-                                            </>
-                                        )}
+                                       {isPlaying ? (
+                                           <>
+                                               <VolumeX className="inline w-6 h-6 mr-2" />
+                                               STOP SYMPHONY
+                                           </>
+                                       ) : (
+                                           <>
+                                               <Volume2 className="inline w-6 h-6 mr-2" />
+                                               PLAY SYMPHONY ({activeHeartbeats.length})
+                                           </>
+                                       )}
                                     </motion.button>
                                 </div>
                             )}
@@ -410,50 +364,51 @@ export default function UniversalPulsePage() {
                     <CardContent className="p-6">
                         <div className="text-center mb-4">
                             <h2 className="text-2xl font-black font-mono text-cyan-300">
-                                LIVE HEARTBEATS
+                                BUILD YOUR SYMPHONY
                             </h2>
                             <p className="text-cyan-400 font-mono text-xs mt-1">
-                                TAP ANY HEART TO HEAR IT BEAT
+                                TAP HEARTS TO ADD/REMOVE FROM THE PULSE ({activeHeartbeats.length} ACTIVE)
                             </p>
                         </div>
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                             <AnimatePresence>
-                                {heartbeats.map((heartbeat, index) => (
-                                    <motion.button
-                                        key={heartbeat.id}
-                                        onClick={() => playIndividualHeartbeat(heartbeat)}
-                                        initial={{ opacity: 0, scale: 0.8 }}
-                                        animate={{ opacity: 1, scale: 1 }}
-                                        exit={{ opacity: 0, scale: 0.8 }}
-                                        whileHover={{ scale: 1.05 }}
-                                        whileTap={{ scale: 0.95 }}
-                                        className={`bg-gradient-to-br from-pink-900 to-purple-900 border-2 p-3 text-center transition-all ${
-                                            playingHeartbeat === heartbeat.id
-                                                ? 'border-green-500 shadow-lg shadow-green-500/50'
-                                                : heartbeat.id === 'ai51' 
-                                                    ? 'border-cyan-500 hover:border-cyan-400' 
-                                                    : 'border-pink-500 hover:border-pink-400'
-                                        }`}
-                                    >
-                                        <COOLASFUCKHeart 
-                                            size={32} 
-                                            animate={playingHeartbeat === heartbeat.id || true}
-                                            className="mx-auto mb-2"
-                                        />
-                                        <p className="text-2xl font-black font-mono text-pink-300">
-                                            {heartbeat.bpm}
-                                        </p>
-                                        <p className="text-xs text-pink-400 font-mono">BPM</p>
-                                        <p className="text-xs text-cyan-400 font-mono mt-1 truncate">
-                                            {heartbeat.id === 'ai51' ? 'AI51 ♾️' : heartbeat.location}
-                                        </p>
-                                        {playingHeartbeat === heartbeat.id && (
-                                            <p className="text-xs text-green-400 font-black font-mono mt-1">
-                                                PLAYING
+                                {heartbeats.map((heartbeat, index) => {
+                                    const isActive = activeHeartbeats.includes(heartbeat.id);
+                                    return (
+                                        <motion.button
+                                            key={heartbeat.id}
+                                            onClick={() => toggleHeartbeat(heartbeat.id)}
+                                            initial={{ opacity: 0, scale: 0.8 }}
+                                            animate={{ opacity: 1, scale: 1 }}
+                                            exit={{ opacity: 0, scale: 0.8 }}
+                                            whileHover={{ scale: 1.05 }}
+                                            whileTap={{ scale: 0.95 }}
+                                            className={`bg-gradient-to-br p-3 text-center transition-all ${
+                                                isActive
+                                                    ? 'from-green-900 to-green-950 border-4 border-green-400 shadow-lg shadow-green-500/50'
+                                                    : 'from-pink-900 to-purple-900 border-2 border-gray-600 opacity-50 hover:opacity-80'
+                                            }`}
+                                        >
+                                            <COOLASFUCKHeart 
+                                                size={32} 
+                                                animate={isActive}
+                                                className="mx-auto mb-2"
+                                            />
+                                            <p className="text-2xl font-black font-mono text-pink-300">
+                                                {heartbeat.bpm}
                                             </p>
-                                        )}
-                                    </motion.button>
-                                ))}
+                                            <p className="text-xs text-pink-400 font-mono">BPM</p>
+                                            <p className="text-xs text-cyan-400 font-mono mt-1 truncate">
+                                                {heartbeat.id === 'ai51' ? 'AI51 ♾️' : heartbeat.location}
+                                            </p>
+                                            {isActive && isPlaying && (
+                                                <p className="text-xs text-green-400 font-black font-mono mt-1">
+                                                    IN THE MIX
+                                                </p>
+                                            )}
+                                        </motion.button>
+                                    );
+                                })}
                             </AnimatePresence>
                         </div>
                     </CardContent>
@@ -466,12 +421,12 @@ export default function UniversalPulsePage() {
                             HOW IT WORKS
                         </h2>
                         <div className="space-y-3 text-cyan-100 font-mono text-sm">
-                            <p><span className="text-pink-400 font-black">1.</span> Your camera detects your heartbeat through subtle facial color changes</p>
-                            <p><span className="text-pink-400 font-black">2.</span> Your BPM + HRV coherence becomes part of the collective symphony</p>
-                            <p><span className="text-pink-400 font-black">3.</span> 528Hz healing frequency as the base tone</p>
-                            <p><span className="text-pink-400 font-black">4.</span> Each heartbeat modulates the frequency - faster hearts = higher tones</p>
-                            <p><span className="text-pink-400 font-black">5.</span> Your coherence affects stereo positioning - high coherence pans right</p>
-                            <p><span className="text-pink-400 font-black">6.</span> The music is NEVER the same - it's alive, evolving with us</p>
+                            <p><span className="text-pink-400 font-black">1.</span> Tap hearts to add/remove from the symphony - build YOUR mix</p>
+                            <p><span className="text-pink-400 font-black">2.</span> Each heartbeat becomes a unique frequency layer (528Hz + BPM)</p>
+                            <p><span className="text-pink-400 font-black">3.</span> Faster hearts = higher tones. Slower = deeper bass.</p>
+                            <p><span className="text-pink-400 font-black">4.</span> Coherence controls stereo pan - high coherence goes right</p>
+                            <p><span className="text-pink-400 font-black">5.</span> The music pulses at each heart's rhythm - they sync naturally</p>
+                            <p><span className="text-pink-400 font-black">6.</span> Press PLAY to hear your selected hearts beating as one symphony</p>
                         </div>
                         <div className="bg-black border-2 border-pink-500 p-4 mt-4">
                             <p className="text-pink-300 font-black font-mono text-center">
