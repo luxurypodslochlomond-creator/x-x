@@ -962,14 +962,12 @@ export default function FrequencyChamber() {
           onClick={async () => {
             const shareText = `🎵 FREE HEALING FREQUENCIES
 
-      💚 Evidence-based sound therapy
-      🧠 Anxiety, sleep, focus, pain relief
-      🔬 MIT research, zero pseudo-science
-      💸 Free forever. No ads. No bullshit.
+💚 Evidence-based sound therapy
+🧠 Anxiety, sleep, focus, pain relief
+🔬 MIT research, zero pseudo-science
+💸 Free forever. No ads. No bullshit.
 
-      Try it: https://uf51.love/FrequencyChamber
-
-      ♾️❤️♾️`;
+Try it: https://uf51.love/FrequencyChamber`;
 
             try {
               if (navigator.share) {
