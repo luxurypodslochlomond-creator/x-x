@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Heart, Moon, Brain, Zap, Shield, Wind, Sun, Volume2, VolumeX, Clock, Info, X, Camera, Activity, Ear, Share2 } from 'lucide-react';
+import { Heart, Moon, Brain, Zap, Shield, Wind, Sun, Volume2, VolumeX, Clock, Info, X, Camera, Activity, Ear, Share2, Music } from 'lucide-react';
 import { COOLASFUCKWaves, COOLASFUCKBrain, COOLASFUCKHeart, COOLASFUCKMoon, COOLASFUCKShield } from '@/components/shared/COOLASFUCKIcon';
 import BiometricHealing from '@/components/radio/BiometricHealing';
 
@@ -26,7 +26,9 @@ const PROTOCOLS = {
       carrier: 200,
       breathRate: 6,
       noiseType: 'pink',
-      noiseLevel: 0.08
+      noiseLevel: 0.08,
+      isBinaural: true,
+      visualEntrainment: true
     }
   },
   sleep: {
@@ -81,7 +83,9 @@ const PROTOCOLS = {
       breathRate: 5,
       noiseType: 'pink',
       noiseLevel: 0.1,
-      bilateral: true
+      bilateral: true,
+      isBinaural: true,
+      visualEntrainment: true
     }
   },
   pain: {
@@ -99,7 +103,9 @@ const PROTOCOLS = {
       carrier: 180,
       breathRate: 6,
       noiseType: 'brown',
-      noiseLevel: 0.12
+      noiseLevel: 0.12,
+      isBinaural: true,
+      visualEntrainment: true
     }
   },
   morning: {
@@ -538,6 +544,10 @@ export default function FrequencyChamber() {
     const [sessionTime, setSessionTime] = useState(0);
     const [hrvEnabled, setHrvEnabled] = useState(false);
     const [currentHRV, setCurrentHRV] = useState(null);
+    const [hasHeadphones, setHasHeadphones] = useState(false);
+    const [showHeadphonePrompt, setShowHeadphonePrompt] = useState(false);
+    const [visualEntrainment, setVisualEntrainment] = useState(true);
+    const [breathHapticActive, setBreathHapticActive] = useState(true);
 
     // SEO
     useEffect(() => {
@@ -562,6 +572,8 @@ export default function FrequencyChamber() {
   const nodesRef = useRef([]);
   const masterGainRef = useRef(null);
   const sessionTimerRef = useRef(null);
+  const breathHapticIntervalRef = useRef(null);
+  const visualEntrainmentIntervalRef = useRef(null);
   
   const getTimeSuggestion = () => {
     const hour = new Date().getHours();
@@ -579,9 +591,36 @@ export default function FrequencyChamber() {
     }
   }, [volume]);
   
+  // Detect headphones
+  useEffect(() => {
+    const detectHeadphones = async () => {
+      try {
+        const devices = await navigator.mediaDevices.enumerateDevices();
+        const audioOutputs = devices.filter(d => d.kind === 'audiooutput');
+        const hasHeadphoneDevice = audioOutputs.some(d => 
+          d.label.toLowerCase().includes('headphone') || 
+          d.label.toLowerCase().includes('headset') ||
+          d.label.toLowerCase().includes('airpod') ||
+          d.label.toLowerCase().includes('earbud')
+        );
+        setHasHeadphones(hasHeadphoneDevice);
+      } catch (e) {
+        // Can't detect, assume no headphones
+        setHasHeadphones(false);
+      }
+    };
+    detectHeadphones();
+  }, []);
+  
   // Start audio
   const startAudio = async (protocol) => {
     try {
+      // Check headphones for binaural
+      if (protocol.config.isBinaural && !hasHeadphones) {
+        setShowHeadphonePrompt(true);
+        return;
+      }
+      
       const AudioContext = window.AudioContext || window.webkitAudioContext;
       const ctx = new AudioContext();
       ctxRef.current = ctx;
@@ -598,42 +637,74 @@ export default function FrequencyChamber() {
       const nodes = [];
       const config = protocol.config;
       
-      // PRIMARY ISOCHRONIC TONE
-      const primaryOsc = ctx.createOscillator();
-      primaryOsc.type = 'sine';
-      primaryOsc.frequency.value = config.carrier;
+      // PRIMARY FREQUENCY - Binaural or Isochronic
+      if (config.isBinaural) {
+        // BINAURAL BEATS - Left/Right ear different frequencies
+        const leftOsc = ctx.createOscillator();
+        const rightOsc = ctx.createOscillator();
+        const leftGain = ctx.createGain();
+        const rightGain = ctx.createGain();
+        const merger = ctx.createChannelMerger(2);
+        
+        leftOsc.type = 'sine';
+        rightOsc.type = 'sine';
+        leftOsc.frequency.value = config.carrier;
+        rightOsc.frequency.value = config.carrier + config.primary;
+        
+        leftGain.gain.value = 0.25;
+        rightGain.gain.value = 0.25;
+        
+        leftOsc.connect(leftGain);
+        rightOsc.connect(rightGain);
+        leftGain.connect(merger, 0, 0);
+        rightGain.connect(merger, 0, 1);
+        merger.connect(masterGain);
+        
+        leftOsc.start();
+        rightOsc.start();
+        nodes.push(leftOsc, rightOsc, leftGain, rightGain, merger);
+      } else {
+        // ISOCHRONIC TONES - Pulsing on/off
+        const primaryOsc = ctx.createOscillator();
+        primaryOsc.type = 'sine';
+        primaryOsc.frequency.value = config.carrier;
+        
+        const primaryGain = ctx.createGain();
+        primaryGain.gain.value = 0;
+        
+        primaryOsc.connect(primaryGain);
+        primaryGain.connect(masterGain);
+        primaryOsc.start();
+        nodes.push(primaryOsc, primaryGain);
+        
+        const modulateIsochronic = () => {
+          const now = ctx.currentTime;
+          const period = 1 / config.primary;
+          for (let i = 0; i < 100; i++) {
+            primaryGain.gain.setValueAtTime(0.3, now + i * period);
+            primaryGain.gain.setValueAtTime(0, now + i * period + period * 0.5);
+          }
+        };
+        modulateIsochronic();
+        const isochronicInterval = setInterval(modulateIsochronic, 10000);
+        nodes.push({ stop: () => clearInterval(isochronicInterval) });
+      }
       
-      const primaryGain = ctx.createGain();
-      primaryGain.gain.value = 0;
-      
-      primaryOsc.connect(primaryGain);
-      primaryGain.connect(masterGain);
-      primaryOsc.start();
-      nodes.push(primaryOsc, primaryGain);
-      
-      const modulateIsochronic = () => {
-        const now = ctx.currentTime;
-        const period = 1 / config.primary;
-        for (let i = 0; i < 100; i++) {
-          primaryGain.gain.setValueAtTime(0.3, now + i * period);
-          primaryGain.gain.setValueAtTime(0, now + i * period + period * 0.5);
-        }
-      };
-      modulateIsochronic();
-      const isochronicInterval = setInterval(modulateIsochronic, 10000);
-      
-      // SECONDARY FREQUENCY
-      const secondaryOsc = ctx.createOscillator();
-      secondaryOsc.type = 'sine';
-      secondaryOsc.frequency.value = config.carrier + config.secondary;
-      
-      const secondaryGain = ctx.createGain();
-      secondaryGain.gain.value = 0.15;
-      
-      secondaryOsc.connect(secondaryGain);
-      secondaryGain.connect(masterGain);
-      secondaryOsc.start();
-      nodes.push(secondaryOsc, secondaryGain);
+      // SECONDARY & HARMONIC FREQUENCIES - Richer stack
+      const harmonics = [config.secondary, config.secondary * 1.5, config.secondary * 2];
+      harmonics.forEach((harmonic, i) => {
+        const osc = ctx.createOscillator();
+        osc.type = 'sine';
+        osc.frequency.value = config.carrier + harmonic;
+        
+        const gain = ctx.createGain();
+        gain.gain.value = 0.15 / (i + 1); // Decreasing volume for higher harmonics
+        
+        osc.connect(gain);
+        gain.connect(masterGain);
+        osc.start();
+        nodes.push(osc, gain);
+      });
       
       // AMBIENT BED
       const ambientNodes = [];
@@ -745,7 +816,6 @@ export default function FrequencyChamber() {
       }, 100);
       
       nodesRef.current = [...nodes, 
-        { stop: () => clearInterval(isochronicInterval) },
         { stop: () => clearInterval(displayInterval) }
       ];
       
@@ -753,6 +823,27 @@ export default function FrequencyChamber() {
       sessionTimerRef.current = setInterval(() => {
         setSessionTime(t => t + 1);
       }, 1000);
+      
+      // BREATH-SYNCED HAPTIC FEEDBACK
+      if (breathHapticActive && 'vibrate' in navigator) {
+        const breathCycleDuration = (60 / config.breathRate) * 1000; // ms
+        const startBreathHaptic = () => {
+          // Pulse at start of inhale
+          navigator.vibrate([50, 100, 50]);
+        };
+        startBreathHaptic();
+        breathHapticIntervalRef.current = setInterval(startBreathHaptic, breathCycleDuration);
+      }
+      
+      // VISUAL ENTRAINMENT (border flash at frequency)
+      if (visualEntrainment && config.visualEntrainment) {
+        const flashPeriod = 1000 / config.primary; // ms
+        let flashOn = true;
+        visualEntrainmentIntervalRef.current = setInterval(() => {
+          flashOn = !flashOn;
+          document.body.style.outline = flashOn ? `4px solid ${protocol.color}40` : 'none';
+        }, flashPeriod);
+      }
       
       setIsPlaying(true);
     } catch (err) {
@@ -777,6 +868,17 @@ export default function FrequencyChamber() {
     if (sessionTimerRef.current) {
       clearInterval(sessionTimerRef.current);
       sessionTimerRef.current = null;
+    }
+    
+    if (breathHapticIntervalRef.current) {
+      clearInterval(breathHapticIntervalRef.current);
+      breathHapticIntervalRef.current = null;
+    }
+    
+    if (visualEntrainmentIntervalRef.current) {
+      clearInterval(visualEntrainmentIntervalRef.current);
+      visualEntrainmentIntervalRef.current = null;
+      document.body.style.outline = 'none';
     }
     
     masterGainRef.current = null;
@@ -904,6 +1006,29 @@ export default function FrequencyChamber() {
         </div>
       </div>
 
+      {/* HEADPHONE PROMPT */}
+      {showHeadphonePrompt && (
+        <div className="max-w-4xl mx-auto p-4">
+          <div className="bg-amber-900/20 border-4 border-amber-500 p-4">
+            <div className="flex items-center gap-3 mb-2">
+              <Volume2 className="w-6 h-6 text-amber-400" />
+              <h3 className="text-amber-400 font-black font-mono">HEADPHONES NEEDED</h3>
+            </div>
+            <p className="text-amber-200 text-sm mb-3">
+              This protocol uses binaural beats (different frequencies in each ear). Headphones are required for it to work.
+            </p>
+            <div className="flex gap-2">
+              <button 
+                onClick={() => setShowHeadphonePrompt(false)}
+                className="px-4 py-2 bg-amber-600 border-2 border-amber-400 text-white font-black font-mono text-sm"
+              >
+                Got it
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* TIME SUGGESTION */}
       <div className="max-w-4xl mx-auto p-4">
         <div className="bg-cyan-900/20 border-2 border-cyan-500/50 p-3 flex items-center gap-3">
@@ -1020,6 +1145,34 @@ export default function FrequencyChamber() {
               </div>
               
               <HRVBiofeedback isActive={hrvEnabled && isPlaying} onHRVUpdate={handleHRVUpdate} color={selectedProtocol.color} />
+
+              {/* PROTOCOL ENHANCEMENTS */}
+              <div className="grid grid-cols-2 gap-2 mb-4">
+                {selectedProtocol.config.isBinaural && (
+                  <div className="bg-black/40 border border-cyan-500/30 p-2 flex items-center gap-2">
+                    <Volume2 className="w-4 h-4 text-cyan-400" />
+                    <span className="text-xs text-cyan-400 font-mono">BINAURAL ACTIVE</span>
+                  </div>
+                )}
+                {selectedProtocol.config.visualEntrainment && (
+                  <div className="bg-black/40 border border-purple-500/30 p-2 flex items-center gap-2">
+                    <Zap className="w-4 h-4 text-purple-400" />
+                    <span className="text-xs text-purple-400 font-mono">VISUAL SYNC</span>
+                  </div>
+                )}
+                {breathHapticActive && (
+                  <div className="bg-black/40 border border-pink-500/30 p-2 flex items-center gap-2">
+                    <Activity className="w-4 h-4 text-pink-400" />
+                    <span className="text-xs text-pink-400 font-mono">HAPTIC BREATH</span>
+                  </div>
+                )}
+                {selectedProtocol.config.bilateral && (
+                  <div className="bg-black/40 border border-green-500/30 p-2 flex items-center gap-2">
+                    <Wind className="w-4 h-4 text-green-400" />
+                    <span className="text-xs text-green-400 font-mono">BILATERAL</span>
+                  </div>
+                )}
+              </div>
               
               {currentHRV && hrvEnabled && isPlaying && (
                 <div 
