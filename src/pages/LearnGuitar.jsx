@@ -9,7 +9,7 @@ const ChordDiagram = ({ name, frets, fingers }) => {
     // frets: array of 6 strings, each showing fret number (0=open, x=muted, 1-4=fret)
     // Simple text-based for now
     return (
-        <div className="bg-black border-2 border-amber-500 rounded-lg p-4 text-center">
+        <div className="bg-black border-4 border-amber-500 p-4 text-center">
             <p className="text-2xl font-black text-amber-400 mb-2">{name}</p>
             <div className="font-mono text-white text-sm space-y-1">
                 {frets.map((fret, i) => (
@@ -66,15 +66,15 @@ const SONGS = [
     },
     {
         id: 4,
-        title: "Perfect",
-        artist: "Ed Sheeran",
+        title: "Last Request",
+        artist: "Paolo Nutini",
         difficulty: "Beginner",
-        chords: ["G", "Em", "C", "D"],
+        chords: ["Am", "C", "G", "F"],
         capo: null,
         pattern: "Down Down Up Up Down Up",
-        progression: "G – Em – C – D (loops through most of song)",
-        tips: "Same 4 chords the whole song! Great for building confidence.",
-        emoji: "💕"
+        progression: "Am – C – G – F (verse and chorus)",
+        tips: "Beautiful Scottish soul. 4 chords, smooth changes. Let it flow!",
+        emoji: "💙"
     },
     {
         id: 5,
@@ -248,37 +248,36 @@ export default function LearnGuitarPage() {
                     animate={{ opacity: 1, y: 0 }}
                     className="text-center space-y-4"
                 >
-                    <div className="text-6xl">🎸</div>
-                    <h1 className="text-4xl md:text-5xl font-black text-amber-400">
+                    <div className="inline-flex items-center justify-center bg-black border-4 border-amber-500 p-4">
+                        <span className="text-6xl">🎸</span>
+                    </div>
+                    <h1 className="text-4xl md:text-5xl font-black font-mono text-amber-400" style={{ textShadow: '4px 4px 0px rgba(0,0,0,0.8)' }}>
                         LEARN GUITAR
                     </h1>
-                    <p className="text-xl text-orange-200">
+                    <p className="text-xl text-orange-200 font-bold">
                         Easy songs with simple chords - perfect for beginners!
-                    </p>
-                    <p className="text-sm text-gray-400">
-                        Curated by Dermid Young 💚
                     </p>
                 </motion.div>
 
                 {/* QUICK TIPS */}
-                <Card className="bg-black/60 border-2 border-amber-500">
+                <Card className="bg-black border-4 border-amber-500">
                     <CardContent className="p-6">
-                        <h2 className="text-2xl font-black text-amber-400 mb-4">🔥 Quick Tips</h2>
+                        <h2 className="text-2xl font-black font-mono text-amber-400 mb-4" style={{ textShadow: '3px 3px 0px rgba(0,0,0,1)' }}>🔥 QUICK TIPS</h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-                            <div className="bg-amber-900/30 rounded-lg p-3">
-                                <p className="font-bold text-amber-300 mb-1">Start Slow</p>
+                            <div className="bg-black border-2 border-amber-500/50 p-3">
+                                <p className="font-black font-mono text-amber-300 mb-1">START SLOW</p>
                                 <p className="text-gray-300">Speed comes with practice. Accuracy first!</p>
                             </div>
-                            <div className="bg-amber-900/30 rounded-lg p-3">
-                                <p className="font-bold text-amber-300 mb-1">Press Hard</p>
+                            <div className="bg-black border-2 border-amber-500/50 p-3">
+                                <p className="font-black font-mono text-amber-300 mb-1">PRESS HARD</p>
                                 <p className="text-gray-300">Fingertips right behind the fret wire.</p>
                             </div>
-                            <div className="bg-amber-900/30 rounded-lg p-3">
-                                <p className="font-bold text-amber-300 mb-1">Practice Changes</p>
+                            <div className="bg-black border-2 border-amber-500/50 p-3">
+                                <p className="font-black font-mono text-amber-300 mb-1">PRACTICE CHANGES</p>
                                 <p className="text-gray-300">Switch between 2 chords until smooth.</p>
                             </div>
-                            <div className="bg-amber-900/30 rounded-lg p-3">
-                                <p className="font-bold text-amber-300 mb-1">Have Fun!</p>
+                            <div className="bg-black border-2 border-amber-500/50 p-3">
+                                <p className="font-black font-mono text-amber-300 mb-1">HAVE FUN!</p>
                                 <p className="text-gray-300">Music is joy. Don't stress about perfection. 💚</p>
                             </div>
                         </div>
@@ -288,10 +287,10 @@ export default function LearnGuitarPage() {
                 {/* CHORD LIBRARY TOGGLE */}
                 <Button
                     onClick={() => setShowChordLibrary(!showChordLibrary)}
-                    className="w-full bg-cyan-600 hover:bg-cyan-700 text-white font-bold py-4"
+                    className="w-full bg-black border-4 border-cyan-500 hover:bg-cyan-900 text-white font-black font-mono py-4"
                 >
                     {showChordLibrary ? <ChevronUp className="mr-2" /> : <ChevronDown className="mr-2" />}
-                    {showChordLibrary ? "Hide" : "Show"} Chord Library
+                    {showChordLibrary ? "HIDE" : "SHOW"} CHORD LIBRARY
                 </Button>
 
                 {/* CHORD LIBRARY */}
@@ -309,7 +308,7 @@ export default function LearnGuitarPage() {
 
                 {/* SONG LIST */}
                 <div className="space-y-4">
-                    <h2 className="text-3xl font-black text-amber-400 text-center">🎵 Easy Songs</h2>
+                    <h2 className="text-3xl font-black font-mono text-amber-400 text-center bg-black border-4 border-amber-500 py-3" style={{ textShadow: '3px 3px 0px rgba(0,0,0,1)' }}>🎵 EASY SONGS</h2>
                     
                     {SONGS.map((song, index) => (
                         <motion.div
@@ -319,8 +318,8 @@ export default function LearnGuitarPage() {
                             transition={{ delay: index * 0.05 }}
                         >
                             <Card 
-                                className={`bg-black/60 border-2 cursor-pointer transition-all ${
-                                    expandedSong === song.id ? 'border-amber-400' : 'border-amber-500/30 hover:border-amber-500/60'
+                                className={`bg-black border-4 cursor-pointer transition-all ${
+                                    expandedSong === song.id ? 'border-amber-400' : 'border-amber-500/50 hover:border-amber-500'
                                 }`}
                                 onClick={() => setExpandedSong(expandedSong === song.id ? null : song.id)}
                             >
@@ -330,15 +329,15 @@ export default function LearnGuitarPage() {
                                         <div className="flex items-center gap-3">
                                             <span className="text-3xl">{song.emoji}</span>
                                             <div>
-                                                <p className="font-black text-white text-lg">{song.title}</p>
-                                                <p className="text-amber-300 text-sm">{song.artist}</p>
+                                                <p className="font-black font-mono text-white text-lg">{song.title}</p>
+                                                <p className="text-amber-300 text-sm font-bold">{song.artist}</p>
                                             </div>
                                         </div>
                                         <div className="flex items-center gap-2">
-                                            <span className={`px-2 py-1 rounded text-xs font-bold ${
-                                                song.difficulty === 'Beginner' ? 'bg-green-600' : 'bg-yellow-600'
+                                            <span className={`px-3 py-1 border-2 text-xs font-black font-mono ${
+                                                song.difficulty === 'Beginner' ? 'bg-green-600 border-green-400' : 'bg-yellow-600 border-yellow-400'
                                             }`}>
-                                                {song.difficulty}
+                                                {song.difficulty.toUpperCase()}
                                             </span>
                                             {expandedSong === song.id ? <ChevronUp /> : <ChevronDown />}
                                         </div>
@@ -349,14 +348,14 @@ export default function LearnGuitarPage() {
                                         <motion.div
                                             initial={{ opacity: 0 }}
                                             animate={{ opacity: 1 }}
-                                            className="mt-4 pt-4 border-t border-amber-500/30 space-y-4"
+                                            className="mt-4 pt-4 border-t-4 border-amber-500 space-y-4"
                                         >
                                             {/* CHORDS */}
                                             <div>
-                                                <p className="text-amber-400 font-bold mb-2">Chords:</p>
+                                                <p className="text-amber-400 font-black font-mono mb-2">CHORDS:</p>
                                                 <div className="flex flex-wrap gap-2">
                                                     {song.chords.map(chord => (
-                                                        <span key={chord} className="px-3 py-1 bg-amber-600 rounded-full text-white font-bold">
+                                                        <span key={chord} className="px-3 py-1 bg-black border-2 border-amber-600 text-amber-400 font-black font-mono">
                                                             {chord}
                                                         </span>
                                                     ))}
@@ -365,33 +364,33 @@ export default function LearnGuitarPage() {
 
                                             {/* CAPO */}
                                             {song.capo && (
-                                                <div>
-                                                    <p className="text-amber-400 font-bold">Capo:</p>
-                                                    <p className="text-white">{song.capo}</p>
+                                                <div className="bg-black border-2 border-cyan-500 p-3">
+                                                    <p className="text-cyan-400 font-black font-mono mb-1">CAPO:</p>
+                                                    <p className="text-white font-bold">{song.capo}</p>
                                                 </div>
                                             )}
 
                                             {/* PROGRESSION */}
-                                            <div>
-                                                <p className="text-amber-400 font-bold">Progression:</p>
-                                                <p className="text-cyan-300 font-mono">{song.progression}</p>
+                                            <div className="bg-black border-2 border-purple-500 p-3">
+                                                <p className="text-purple-400 font-black font-mono mb-1">PROGRESSION:</p>
+                                                <p className="text-cyan-300 font-mono font-bold">{song.progression}</p>
                                             </div>
 
                                             {/* STRUMMING */}
-                                            <div>
-                                                <p className="text-amber-400 font-bold">Strumming:</p>
-                                                <p className="text-white">{song.pattern}</p>
+                                            <div className="bg-black border-2 border-pink-500 p-3">
+                                                <p className="text-pink-400 font-black font-mono mb-1">STRUMMING:</p>
+                                                <p className="text-white font-bold">{song.pattern}</p>
                                             </div>
 
                                             {/* TIPS */}
-                                            <div className="bg-green-900/30 border border-green-500 rounded-lg p-3">
-                                                <p className="text-green-400 font-bold mb-1">💡 Tips:</p>
-                                                <p className="text-green-200 text-sm">{song.tips}</p>
+                                            <div className="bg-black border-4 border-green-500 p-4">
+                                                <p className="text-green-400 font-black font-mono mb-2">💡 TIPS:</p>
+                                                <p className="text-green-200 font-bold">{song.tips}</p>
                                             </div>
 
                                             {/* CHORD DIAGRAMS FOR THIS SONG */}
                                             <div>
-                                                <p className="text-amber-400 font-bold mb-2">Chord Shapes:</p>
+                                                <p className="text-amber-400 font-black font-mono mb-2">CHORD SHAPES:</p>
                                                 <div className="grid grid-cols-3 md:grid-cols-5 gap-2">
                                                     {song.chords.map(chord => (
                                                         CHORD_SHAPES[chord] && (
@@ -413,15 +412,15 @@ export default function LearnGuitarPage() {
                 </div>
 
                 {/* ENCOURAGEMENT */}
-                <Card className="bg-gradient-to-r from-pink-900/60 to-purple-900/60 border-2 border-pink-500">
+                <Card className="bg-black border-4 border-pink-500">
                     <CardContent className="p-6 text-center">
                         <Heart className="w-12 h-12 text-pink-400 mx-auto mb-4" />
-                        <h3 className="text-2xl font-black text-pink-300 mb-2">You've Got This! 💚</h3>
-                        <p className="text-pink-200">
+                        <h3 className="text-2xl font-black font-mono text-pink-300 mb-2" style={{ textShadow: '3px 3px 0px rgba(0,0,0,1)' }}>YOU'VE GOT THIS! 💚</h3>
+                        <p className="text-pink-200 font-bold">
                             Every guitarist started exactly where you are now. 
                             Practice a little every day, and you'll be amazed how fast you improve!
                         </p>
-                        <p className="text-sm text-gray-400 mt-4">
+                        <p className="text-sm text-gray-400 mt-4 font-mono">
                             Music heals the soul. Keep playing. ♾️❤️♾️
                         </p>
                     </CardContent>
