@@ -427,10 +427,10 @@ export default function BiometricHealing() {
                             e.stopPropagation();
                             setShowScienceModal(true);
                         }}
-                        className="p-2 border-4 border-cyan-500 hover:border-cyan-400 bg-black transition-all"
-                        style={{ boxShadow: '0 0 10px rgba(34, 211, 238, 0.3)' }}
+                        className="p-1 border-2 border-cyan-500 hover:border-cyan-400 bg-black transition-all w-6 h-6 flex items-center justify-center"
+                        style={{ boxShadow: '0 0 8px rgba(34, 211, 238, 0.3)' }}
                     >
-                        <span className="text-cyan-400 font-black font-mono text-lg">i</span>
+                        <span className="text-cyan-400 font-black font-mono text-xs">i</span>
                     </button>
                 </div>
 
