@@ -264,76 +264,101 @@ export default function LearnGuitarPage() {
                     <h1 className="text-4xl md:text-5xl font-black font-mono text-amber-400" style={{ textShadow: '4px 4px 0px rgba(0,0,0,0.8)' }}>
                         CREATE DEMOS
                     </h1>
-                    <p className="text-xl text-orange-200 font-bold">
-                        Jam with tools → Record → Upload → Earn 90%
+                    <p className="text-xl text-orange-200 font-bold font-mono">
+                        JAM → RECORD → UPLOAD → EARN 90%
                     </p>
-                    <Link to={createPageUrl("ForMusicians")} className="inline-block mt-4 px-6 py-3 bg-pink-600 hover:bg-pink-700 border-4 border-pink-400 font-black font-mono text-white">
-                        💚 UPLOAD YOUR MUSIC → EARN 90%
+                    <Link to={createPageUrl("ForMusicians")} className="inline-block mt-4 px-8 py-4 bg-pink-600 hover:bg-pink-700 border-4 border-pink-300 font-black font-mono text-white text-lg" style={{ boxShadow: '6px 6px 0px rgba(0,0,0,0.8)' }}>
+                        💚 UPLOAD → EARN 90%
                     </Link>
                 </motion.div>
 
                 {/* RECORDING STUDIO */}
-                <RecordingStudio />
+                <motion.div
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    style={{ boxShadow: '8px 8px 0px rgba(0,0,0,0.8)' }}
+                >
+                    <RecordingStudio />
+                </motion.div>
 
                 {/* DRUM LOOPS */}
-                <Card className="bg-black border-4 border-purple-500">
-                    <CardContent className="p-4 md:p-6">
-                        <h2 className="text-2xl md:text-3xl font-black font-mono text-purple-400 mb-2" style={{ textShadow: '3px 3px 0px rgba(0,0,0,1)' }}>
-                            🥁 JAM WITH DRUMS
-                        </h2>
-                        <p className="text-purple-200 mb-4 font-bold text-sm md:text-base">
-                            Pick a beat, play along. Old school + modern.
-                        </p>
-                        <DrumLoops />
-                    </CardContent>
-                </Card>
+                <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    style={{ boxShadow: '8px 8px 0px rgba(0,0,0,0.8)' }}
+                >
+                    <Card className="bg-gradient-to-br from-purple-900 to-purple-950 border-4 border-purple-400">
+                        <CardContent className="p-4 md:p-6">
+                            <h2 className="text-2xl md:text-3xl font-black font-mono text-purple-300 mb-2" style={{ textShadow: '4px 4px 0px rgba(0,0,0,1)' }}>
+                                🥁 JAM WITH DRUMS
+                            </h2>
+                            <p className="text-purple-100 mb-4 font-black font-mono text-sm md:text-base">
+                                PICK A BEAT. PLAY ALONG. OLD SCHOOL + MODERN.
+                            </p>
+                            <DrumLoops />
+                        </CardContent>
+                    </Card>
+                </motion.div>
 
                 {/* THE CREATION STUDIO */}
-                <Card className="bg-black border-4 border-pink-500">
-                    <CardContent className="p-6">
-                        <h2 className="text-2xl font-black font-mono text-pink-400 mb-4" style={{ textShadow: '3px 3px 0px rgba(0,0,0,1)' }}>💚 THE STUDIO</h2>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-                            <div className="bg-black border-2 border-pink-500/50 p-3">
-                                <p className="font-black font-mono text-pink-300 mb-1">1. PICK DRUMS</p>
-                                <p className="text-gray-300">Get your rhythm going. Classic or modern.</p>
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    style={{ boxShadow: '8px 8px 0px rgba(0,0,0,0.8)' }}
+                >
+                    <Card className="bg-gradient-to-br from-pink-900 to-pink-950 border-4 border-pink-400">
+                        <CardContent className="p-6">
+                            <h2 className="text-3xl font-black font-mono text-pink-300 mb-6 text-center" style={{ textShadow: '4px 4px 0px rgba(0,0,0,1)' }}>💚 THE STUDIO</h2>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div className="bg-black border-4 border-pink-500 p-4" style={{ boxShadow: '4px 4px 0px rgba(236, 72, 153, 0.5)' }}>
+                                    <p className="font-black font-mono text-pink-300 mb-2 text-lg">1. PICK DRUMS</p>
+                                    <p className="text-pink-100 font-mono text-sm">Get your rhythm going. Classic or modern.</p>
+                                </div>
+                                <div className="bg-black border-4 border-green-500 p-4" style={{ boxShadow: '4px 4px 0px rgba(34, 197, 94, 0.5)' }}>
+                                    <p className="font-black font-mono text-green-300 mb-2 text-lg">2. TAP CHORDS</p>
+                                    <p className="text-green-100 font-mono text-sm">Hear the frequencies. Learn through sound.</p>
+                                </div>
+                                <div className="bg-black border-4 border-cyan-500 p-4" style={{ boxShadow: '4px 4px 0px rgba(34, 211, 238, 0.5)' }}>
+                                    <p className="font-black font-mono text-cyan-300 mb-2 text-lg">3. JAM & RECORD</p>
+                                    <p className="text-cyan-100 font-mono text-sm">Hit record when you're feeling it.</p>
+                                </div>
+                                <div className="bg-black border-4 border-amber-500 p-4" style={{ boxShadow: '4px 4px 0px rgba(245, 158, 11, 0.5)' }}>
+                                    <p className="font-black font-mono text-amber-300 mb-2 text-lg">4. UPLOAD & EARN</p>
+                                    <p className="text-amber-100 font-mono text-sm">Artists keep 90%. No label bullshit. 💚</p>
+                                </div>
                             </div>
-                            <div className="bg-black border-2 border-pink-500/50 p-3">
-                                <p className="font-black font-mono text-pink-300 mb-1">2. TAP CHORDS</p>
-                                <p className="text-gray-300">Hear the frequencies. Learn through sound.</p>
-                            </div>
-                            <div className="bg-black border-2 border-pink-500/50 p-3">
-                                <p className="font-black font-mono text-pink-300 mb-1">3. JAM & RECORD</p>
-                                <p className="text-gray-300">Hit record when you're feeling it.</p>
-                            </div>
-                            <div className="bg-black border-2 border-pink-500/50 p-3">
-                                <p className="font-black font-mono text-pink-300 mb-1">4. UPLOAD & EARN</p>
-                                <p className="text-gray-300">Artists keep 90%. No label bullshit. 💚</p>
-                            </div>
-                        </div>
-                    </CardContent>
-                </Card>
+                        </CardContent>
+                    </Card>
+                </motion.div>
 
                 {/* INTERACTIVE CHORD PLAYER */}
-                <Card className="bg-black border-4 border-green-500">
-                    <CardContent className="p-4 md:p-6">
-                        <h2 className="text-2xl md:text-3xl font-black font-mono text-green-400 mb-2 text-center" style={{ textShadow: '3px 3px 0px rgba(0,0,0,1)' }}>
-                            🎸 TAP TO HEAR CHORDS
-                        </h2>
-                        <p className="text-green-200 text-center mb-4 md:mb-6 font-bold text-sm md:text-base">
-                            Learn through FREQUENCY, not diagrams. Tap = HEAR! ✨
-                        </p>
-                        <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 md:gap-3">
-                            {['G', 'C', 'D', 'Em', 'Am', 'E', 'A', 'F', 'Em7', 'Dsus4', 'A7sus4', 'Cadd9', 'B7', 'Gm', 'Bb', 'Dm'].map(chord => (
-                                <InteractiveChordPlayer key={chord} chordName={chord} size="small" />
-                            ))}
-                        </div>
-                    </CardContent>
-                </Card>
+                <motion.div
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    style={{ boxShadow: '8px 8px 0px rgba(0,0,0,0.8)' }}
+                >
+                    <Card className="bg-gradient-to-br from-green-900 to-green-950 border-4 border-green-400">
+                        <CardContent className="p-4 md:p-6">
+                            <h2 className="text-2xl md:text-3xl font-black font-mono text-green-300 mb-2 text-center" style={{ textShadow: '4px 4px 0px rgba(0,0,0,1)' }}>
+                                🎸 TAP TO HEAR CHORDS
+                            </h2>
+                            <p className="text-green-100 text-center mb-4 md:mb-6 font-black font-mono text-sm md:text-base">
+                                LEARN THROUGH FREQUENCY. TAP = HEAR! ✨
+                            </p>
+                            <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 md:gap-3">
+                                {['G', 'C', 'D', 'Em', 'Am', 'E', 'A', 'F', 'Em7', 'Dsus4', 'A7sus4', 'Cadd9', 'B7', 'Gm', 'Bb', 'Dm'].map(chord => (
+                                    <InteractiveChordPlayer key={chord} chordName={chord} size="small" />
+                                ))}
+                            </div>
+                        </CardContent>
+                    </Card>
+                </motion.div>
 
                 {/* CHORD LIBRARY TOGGLE */}
                 <Button
                     onClick={() => setShowChordLibrary(!showChordLibrary)}
-                    className="w-full bg-black border-4 border-cyan-500 hover:bg-cyan-900 text-white font-black font-mono py-4"
+                    className="w-full bg-black border-4 border-cyan-400 hover:bg-cyan-900 text-cyan-300 font-black font-mono py-4 text-lg"
+                    style={{ boxShadow: '6px 6px 0px rgba(0,0,0,0.8)' }}
                 >
                     {showChordLibrary ? <ChevronUp className="mr-2" /> : <ChevronDown className="mr-2" />}
                     {showChordLibrary ? "HIDE" : "SHOW"} CHORD DIAGRAMS
@@ -352,9 +377,12 @@ export default function LearnGuitarPage() {
                     </motion.div>
                 )}
 
-                {/* SONG LIST */}
+                {/* SONG IDEAS */}
                 <div className="space-y-4">
-                    <h2 className="text-3xl font-black font-mono text-amber-400 text-center bg-black border-4 border-amber-500 py-3" style={{ textShadow: '3px 3px 0px rgba(0,0,0,1)' }}>🎵 SONG IDEAS (or check YouTube for tutorials)</h2>
+                    <div className="bg-gradient-to-br from-amber-900 to-amber-950 border-4 border-amber-400 py-4 px-6 text-center" style={{ boxShadow: '8px 8px 0px rgba(0,0,0,0.8)' }}>
+                        <h2 className="text-3xl font-black font-mono text-amber-300 mb-2" style={{ textShadow: '4px 4px 0px rgba(0,0,0,1)' }}>🎵 SONG IDEAS</h2>
+                        <p className="text-amber-100 font-black font-mono text-sm">(Full tutorials? Check YouTube. We focus on CREATION tools.)</p>
+                    </div>
                     
                     {SONGS.map((song, index) => (
                         <motion.div
@@ -362,9 +390,10 @@ export default function LearnGuitarPage() {
                             initial={{ opacity: 0, x: -20 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ delay: index * 0.05 }}
+                            style={{ boxShadow: expandedSong === song.id ? '8px 8px 0px rgba(245, 158, 11, 0.6)' : '4px 4px 0px rgba(0,0,0,0.5)' }}
                         >
                             <Card 
-                                className={`bg-black border-4 cursor-pointer transition-all ${
+                                className={`bg-gradient-to-br from-black to-gray-900 border-4 cursor-pointer transition-all ${
                                     expandedSong === song.id ? 'border-amber-400' : 'border-amber-500/50 hover:border-amber-500'
                                 }`}
                                 onClick={() => setExpandedSong(expandedSong === song.id ? null : song.id)}
@@ -461,23 +490,30 @@ export default function LearnGuitarPage() {
                 </div>
 
                 {/* UPLOAD CALL TO ACTION */}
-                <Card className="bg-black border-4 border-pink-500">
-                    <CardContent className="p-6 text-center">
-                        <div className="flex justify-center mb-4">
-                            <COOLASFUCKHeart size={48} animate={true} />
-                        </div>
-                        <h3 className="text-2xl font-black font-mono text-pink-300 mb-2" style={{ textShadow: '3px 3px 0px rgba(0,0,0,1)' }}>READY TO SHARE?</h3>
-                        <p className="text-pink-200 font-bold mb-4">
-                            Got a demo? Upload it. Artists earn 90% - no label taking your soul.
-                        </p>
-                        <Link to={createPageUrl("ForMusicians")} className="inline-block px-8 py-4 bg-pink-600 hover:bg-pink-700 border-4 border-pink-400 font-black font-mono text-white text-lg">
-                            💚 UPLOAD NOW
-                        </Link>
-                        <p className="text-sm text-gray-400 mt-4 font-mono">
-                            Music heals. Share your frequency. ♾️❤️♾️
-                        </p>
-                    </CardContent>
-                </Card>
+                <motion.div
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    style={{ boxShadow: '10px 10px 0px rgba(236, 72, 153, 0.8)' }}
+                >
+                    <Card className="bg-gradient-to-br from-pink-900 via-pink-800 to-pink-900 border-4 border-pink-400">
+                        <CardContent className="p-8 text-center">
+                            <div className="flex justify-center mb-4">
+                                <COOLASFUCKHeart size={64} animate={true} />
+                            </div>
+                            <h3 className="text-3xl md:text-4xl font-black font-mono text-pink-200 mb-4" style={{ textShadow: '4px 4px 0px rgba(0,0,0,1)' }}>READY TO SHARE?</h3>
+                            <p className="text-pink-100 font-black font-mono mb-6 text-lg">
+                                GOT A DEMO? UPLOAD IT.<br/>
+                                ARTISTS EARN 90% - NO LABEL BULLSHIT.
+                            </p>
+                            <Link to={createPageUrl("ForMusicians")} className="inline-block px-10 py-5 bg-green-600 hover:bg-green-700 border-4 border-green-300 font-black font-mono text-white text-xl" style={{ boxShadow: '6px 6px 0px rgba(0,0,0,0.8)' }}>
+                                💚 UPLOAD NOW → EARN 90%
+                            </Link>
+                            <p className="text-sm text-pink-200 mt-6 font-black font-mono">
+                                MUSIC HEALS. SHARE YOUR FREQUENCY. ♾️❤️♾️
+                            </p>
+                        </CardContent>
+                    </Card>
+                </motion.div>
 
             </div>
         </div>
