@@ -784,19 +784,19 @@ export default function FrequencyChamber() {
           </div>
           <div className="space-y-2 text-xs font-mono text-gray-400">
             <div className="flex items-center gap-2">
-              <COOLASFUCKBrain size={16} color="#22c55e" />
+              <COOLASFUCKBrain size={16} animate={false} />
               <span>MIT research • 40Hz neuroplasticity</span>
             </div>
             <div className="flex items-center gap-2">
-              <COOLASFUCKHeart size={16} color="#ec4899" />
+              <COOLASFUCKHeart size={16} animate={false} />
               <span>HeartMath • Vagal tone activation</span>
             </div>
             <div className="flex items-center gap-2">
-              <COOLASFUCKMoon size={16} color="#a855f7" />
+              <COOLASFUCKMoon size={16} animate={false} />
               <span>Sleep science • Delta wave studies</span>
             </div>
             <div className="flex items-center gap-2">
-              <COOLASFUCKShield size={16} color="#fbbf24" />
+              <COOLASFUCKShield size={16} animate={false} />
               <span>Ancient wisdom • 2,500+ years proven</span>
             </div>
           </div>
