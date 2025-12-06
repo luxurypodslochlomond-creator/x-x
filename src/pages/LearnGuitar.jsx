@@ -272,6 +272,21 @@ export default function LearnGuitarPage() {
                     </Link>
                 </motion.div>
 
+                {/* HONEST DISCLAIMER */}
+                <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="bg-gradient-to-r from-cyan-900 to-cyan-950 border-4 border-cyan-400 p-4 text-center"
+                    style={{ boxShadow: '6px 6px 0px rgba(0,0,0,0.8)' }}
+                >
+                    <p className="text-cyan-100 font-black font-mono text-sm md:text-base">
+                        ⚡ ROUGH DEMO TOOLS - FOR IDEAS, NOT FINAL PRODUCTIONS ⚡
+                    </p>
+                    <p className="text-cyan-200 font-mono text-xs mt-1">
+                        Want studio quality? Use GarageBand, Audacity, or your DAW. Upload the good stuff to earn 90%.
+                    </p>
+                </motion.div>
+
                 {/* RECORDING STUDIO */}
                 <motion.div
                     initial={{ opacity: 0, scale: 0.95 }}
