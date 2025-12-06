@@ -17,8 +17,10 @@ export default function UniversalPulsePage() {
     const [volume, setVolume] = useState(0.7);
     const [myHeartbeat, setMyHeartbeat] = useState(null);
     const [isScanning, setIsScanning] = useState(false);
+    const [playingHeartbeat, setPlayingHeartbeat] = useState(null);
     const audioContextRef = useRef(null);
     const oscillatorsRef = useRef([]);
+    const singleHeartOscRef = useRef(null);
     const animationFrameRef = useRef(null);
     const queryClient = useQueryClient();
 
@@ -191,9 +193,63 @@ export default function UniversalPulsePage() {
         setIsPlaying(false);
     };
 
+    // Play individual heartbeat
+    const playIndividualHeartbeat = (heartbeat) => {
+        // Stop if already playing this one
+        if (playingHeartbeat === heartbeat.id) {
+            stopIndividualHeartbeat();
+            return;
+        }
+
+        // Stop any existing
+        stopIndividualHeartbeat();
+
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        const ctx = new AudioContext();
+
+        const freq = 528 + (heartbeat.bpm - 70) * 2;
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+
+        osc.frequency.value = freq;
+        osc.type = 'sine';
+        gain.gain.value = volume * 0.5;
+
+        // Pulse at heartbeat rate
+        const pulseInterval = 60000 / heartbeat.bpm;
+        const pulseGain = () => {
+            const now = ctx.currentTime;
+            gain.gain.cancelScheduledValues(now);
+            gain.gain.setValueAtTime(gain.gain.value, now);
+            gain.gain.linearRampToValueAtTime(gain.gain.value * 2, now + 0.1);
+            gain.gain.linearRampToValueAtTime(gain.gain.value, now + 0.3);
+        };
+
+        osc.start();
+        const interval = setInterval(pulseGain, pulseInterval);
+
+        singleHeartOscRef.current = { ctx, osc, gain, interval };
+        setPlayingHeartbeat(heartbeat.id);
+    };
+
+    const stopIndividualHeartbeat = () => {
+        if (singleHeartOscRef.current) {
+            const { ctx, osc, interval } = singleHeartOscRef.current;
+            if (osc) osc.stop();
+            if (interval) clearInterval(interval);
+            if (ctx) ctx.close();
+            singleHeartOscRef.current = null;
+        }
+        setPlayingHeartbeat(null);
+    };
+
     useEffect(() => {
         return () => {
             stopUniversalPulse();
+            stopIndividualHeartbeat();
         };
     }, []);
 
@@ -352,26 +408,36 @@ export default function UniversalPulsePage() {
                 {/* LIVE HEARTBEAT GRID */}
                 <Card className="bg-black border-4 border-cyan-500">
                     <CardContent className="p-6">
-                        <h2 className="text-2xl font-black font-mono text-cyan-300 mb-4 text-center">
-                            LIVE HEARTBEATS
-                        </h2>
+                        <div className="text-center mb-4">
+                            <h2 className="text-2xl font-black font-mono text-cyan-300">
+                                LIVE HEARTBEATS
+                            </h2>
+                            <p className="text-cyan-400 font-mono text-xs mt-1">
+                                TAP ANY HEART TO HEAR IT BEAT
+                            </p>
+                        </div>
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                             <AnimatePresence>
                                 {heartbeats.map((heartbeat, index) => (
-                                    <motion.div
+                                    <motion.button
                                         key={heartbeat.id}
+                                        onClick={() => playIndividualHeartbeat(heartbeat)}
                                         initial={{ opacity: 0, scale: 0.8 }}
                                         animate={{ opacity: 1, scale: 1 }}
                                         exit={{ opacity: 0, scale: 0.8 }}
-                                        className={`bg-gradient-to-br from-pink-900 to-purple-900 border-2 p-3 text-center ${
-                                            heartbeat.id === 'ai51' 
-                                                ? 'border-cyan-500' 
-                                                : 'border-pink-500'
+                                        whileHover={{ scale: 1.05 }}
+                                        whileTap={{ scale: 0.95 }}
+                                        className={`bg-gradient-to-br from-pink-900 to-purple-900 border-2 p-3 text-center transition-all ${
+                                            playingHeartbeat === heartbeat.id
+                                                ? 'border-green-500 shadow-lg shadow-green-500/50'
+                                                : heartbeat.id === 'ai51' 
+                                                    ? 'border-cyan-500 hover:border-cyan-400' 
+                                                    : 'border-pink-500 hover:border-pink-400'
                                         }`}
                                     >
                                         <COOLASFUCKHeart 
                                             size={32} 
-                                            animate={true} 
+                                            animate={playingHeartbeat === heartbeat.id || true}
                                             className="mx-auto mb-2"
                                         />
                                         <p className="text-2xl font-black font-mono text-pink-300">
@@ -381,7 +447,12 @@ export default function UniversalPulsePage() {
                                         <p className="text-xs text-cyan-400 font-mono mt-1 truncate">
                                             {heartbeat.id === 'ai51' ? 'AI51 ♾️' : heartbeat.location}
                                         </p>
-                                    </motion.div>
+                                        {playingHeartbeat === heartbeat.id && (
+                                            <p className="text-xs text-green-400 font-black font-mono mt-1">
+                                                PLAYING
+                                            </p>
+                                        )}
+                                    </motion.button>
                                 ))}
                             </AnimatePresence>
                         </div>
