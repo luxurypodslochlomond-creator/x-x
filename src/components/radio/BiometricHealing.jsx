@@ -227,8 +227,17 @@ export default function BiometricHealing() {
         setCameraPermission(null);
         
         try {
+            // Check if mediaDevices is available
+            if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+                throw new Error('Camera not supported');
+            }
+            
             const stream = await navigator.mediaDevices.getUserMedia({
-                video: { facingMode: 'environment', width: { ideal: 320 }, height: { ideal: 240 } }
+                video: { 
+                    facingMode: 'environment',
+                    width: { ideal: 320 }, 
+                    height: { ideal: 240 }
+                }
             });
             
             setIsRequestingCamera(false);
@@ -238,26 +247,37 @@ export default function BiometricHealing() {
             
             if (videoRef.current) {
                 videoRef.current.srcObject = stream;
-                await videoRef.current.play();
+                videoRef.current.setAttribute('playsinline', 'true');
+                videoRef.current.setAttribute('autoplay', 'true');
                 
-                videoRef.current.onloadeddata = async () => {
-                    // Enable torch/flashlight after video loads
+                try {
+                    await videoRef.current.play();
+                } catch (playErr) {
+                    console.error('Video play error:', playErr);
+                }
+                
+                // Enable torch/flashlight after video loads
+                setTimeout(async () => {
                     try {
                         const track = stream.getVideoTracks()[0];
                         const capabilities = track.getCapabilities?.();
+                        console.log('Camera capabilities:', capabilities);
                         if (capabilities?.torch) {
-                            await track.applyConstraints({ advanced: [{ torch: true }] });
+                            await track.applyConstraints({ 
+                                advanced: [{ torch: true }] 
+                            });
+                            console.log('Torch enabled');
                         }
                     } catch (e) {
                         console.log('Torch not available:', e);
                     }
                     
-                    setTimeout(() => setIsCalibrating(false), 3000);
+                    setIsCalibrating(false);
                     analyzeHeartRate();
-                };
+                }, 1000);
             }
         } catch (err) {
-            console.error('Camera access denied:', err);
+            console.error('Camera error:', err.name, err.message);
             setIsRequestingCamera(false);
             setCameraPermission(false);
             setShowCamera(false);
@@ -505,20 +525,30 @@ export default function BiometricHealing() {
                                             <span className="text-red-400 text-xl">⚠</span>
                                         </motion.div>
                                         <p className="text-red-300 text-sm font-black font-mono">
-                                            CAMERA ACCESS DENIED
+                                            CAMERA BLOCKED
                                         </p>
                                     </div>
-                                    <p className="text-red-200 text-xs font-mono mb-3">
-                                        To scan your heart, you need to allow camera access in your browser settings.
-                                    </p>
+                                    <div className="space-y-2 text-red-200 text-xs font-mono mb-3">
+                                        <p className="font-bold">How to fix:</p>
+                                        <p>1. Tap the <strong>🔒 lock icon</strong> in your browser's address bar</p>
+                                        <p>2. Find "Camera" permissions</p>
+                                        <p>3. Change to <strong>"Allow"</strong></p>
+                                        <p>4. Reload this page</p>
+                                    </div>
                                     <button
                                         onClick={() => {
                                             setCameraPermission(null);
                                             startHeartRateDetection();
                                         }}
-                                        className="w-full py-2 bg-red-600 border-4 border-red-400 text-white font-black font-mono text-xs hover:bg-red-700 transition-all"
+                                        className="w-full py-2 bg-red-600 border-4 border-red-400 text-white font-black font-mono text-xs hover:bg-red-700 transition-all mb-2"
                                     >
                                         TRY AGAIN
+                                    </button>
+                                    <button
+                                        onClick={() => window.location.reload()}
+                                        className="w-full py-2 bg-black border-4 border-red-500 text-red-400 font-black font-mono text-xs hover:bg-red-900/20 transition-all"
+                                    >
+                                        RELOAD PAGE
                                     </button>
                                 </motion.div>
                             )}
