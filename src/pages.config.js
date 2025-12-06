@@ -154,6 +154,7 @@ import AdminEqualOpportunitiesPolicy from './pages/AdminEqualOpportunitiesPolicy
 import TunerTogether from './pages/TunerTogether';
 import FrequencyShare from './pages/FrequencyShare';
 import LearnGuitar from './pages/LearnGuitar';
+import UniversalPulse from './pages/UniversalPulse';
 import __Layout from './Layout.jsx';
 
 
@@ -314,6 +315,7 @@ export const PAGES = {
     "TunerTogether": TunerTogether,
     "FrequencyShare": FrequencyShare,
     "LearnGuitar": LearnGuitar,
+    "UniversalPulse": UniversalPulse,
 }
 
 export const pagesConfig = {
