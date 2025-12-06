@@ -934,17 +934,45 @@ export default function FrequencyChamber() {
               </button>
               
               {isPlaying && (
-                <div className="mt-6 text-center">
-                  <p 
-                    className="text-5xl font-black font-mono"
-                    style={{ color: selectedProtocol.color, textShadow: `0 0 20px ${selectedProtocol.color}` }}
-                  >
-                    {currentHz} Hz
-                  </p>
-                  <p className="text-gray-500 text-sm font-mono mt-2">
-                    {selectedProtocol.config.breathRate} breaths/min • {selectedProtocol.config.noiseType} noise bed
-                  </p>
-                </div>
+                <>
+                  {/* 8-BIT VISUALIZER */}
+                  <div className="mt-6 flex justify-center items-end gap-1 h-24">
+                    {[...Array(16)].map((_, i) => {
+                      const height = 20 + Math.sin((Date.now() / 100) + i) * 30 + Math.random() * 20;
+                      return (
+                        <motion.div
+                          key={i}
+                          className="w-3 md:w-4"
+                          style={{ 
+                            backgroundColor: selectedProtocol.color,
+                            boxShadow: `0 0 10px ${selectedProtocol.color}`,
+                            imageRendering: 'pixelated'
+                          }}
+                          animate={{
+                            height: `${height}%`,
+                          }}
+                          transition={{
+                            duration: 0.15,
+                            repeat: Infinity,
+                            ease: "linear"
+                          }}
+                        />
+                      );
+                    })}
+                  </div>
+
+                  <div className="mt-6 text-center">
+                    <p 
+                      className="text-5xl font-black font-mono"
+                      style={{ color: selectedProtocol.color, textShadow: `0 0 20px ${selectedProtocol.color}` }}
+                    >
+                      {currentHz} Hz
+                    </p>
+                    <p className="text-gray-500 text-sm font-mono mt-2">
+                      {selectedProtocol.config.breathRate} breaths/min • {selectedProtocol.config.noiseType} noise bed
+                    </p>
+                  </div>
+                </>
               )}
             </div>
           </motion.div>
