@@ -138,6 +138,7 @@ export default function BiometricHealing() {
     const [isCalibrating, setIsCalibrating] = useState(false);
     const [coherence, setCoherence] = useState(null);
     const [isRequestingCamera, setIsRequestingCamera] = useState(false);
+    const [showScienceModal, setShowScienceModal] = useState(false);
     
     const audioContextRef = useRef(null);
     const oscillatorRef = useRef(null);
@@ -403,14 +404,22 @@ export default function BiometricHealing() {
             <CardContent className="p-4 md:p-6 space-y-4">
                 
                 {/* HEADER */}
-                <div className="flex items-center gap-3">
-                    <COOLASFUCKHeart size={32} animate={isPlaying} />
-                    <div>
-                        <h2 className="text-xl md:text-2xl font-black font-mono text-pink-400">
-                            BIOMETRIC HEALING
-                        </h2>
-                        <p className="text-gray-400 text-xs font-mono">Tap state - Watch yourself heal</p>
+                <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                        <COOLASFUCKHeart size={32} animate={isPlaying} />
+                        <div>
+                            <h2 className="text-xl md:text-2xl font-black font-mono text-pink-400">
+                                BIOMETRIC HEALING
+                            </h2>
+                            <p className="text-gray-400 text-xs font-mono">Tap state - Watch yourself heal</p>
+                        </div>
                     </div>
+                    <button
+                        onClick={() => setShowScienceModal(true)}
+                        className="p-2 border-2 border-cyan-500/50 hover:border-cyan-400 bg-black transition-all"
+                    >
+                        <Info className="w-5 h-5 text-cyan-400" />
+                    </button>
                 </div>
 
                 {/* 8 STATE BUTTONS - 8-BIT GRID */}
@@ -650,13 +659,97 @@ export default function BiometricHealing() {
                                     </AnimatePresence>
 
                                     {/* FOOTER */}
-                <div className="text-center">
-                    <p className="text-gray-500 text-xs font-mono">
-                        No surveillance - You control what you share
-                    </p>
-                </div>
+                                    <div className="text-center">
+                                        <p className="text-gray-500 text-xs font-mono">
+                                            No surveillance - You control what you share
+                                        </p>
+                                    </div>
 
-            </CardContent>
-        </Card>
-    );
+                                    {/* SCIENCE MODAL - 8-BIT COOLASFUCK */}
+                                    <AnimatePresence>
+                                        {showScienceModal && (
+                                            <motion.div
+                                                initial={{ opacity: 0 }}
+                                                animate={{ opacity: 1 }}
+                                                exit={{ opacity: 0 }}
+                                                className="fixed inset-0 bg-black/90 backdrop-blur-sm z-[9999] overflow-y-auto flex items-center justify-center p-4"
+                                                onClick={() => setShowScienceModal(false)}
+                                            >
+                                                <motion.div
+                                                    initial={{ scale: 0.9, opacity: 0 }}
+                                                    animate={{ scale: 1, opacity: 1 }}
+                                                    exit={{ scale: 0.9, opacity: 0 }}
+                                                    onClick={(e) => e.stopPropagation()}
+                                                    className="bg-black border-4 border-cyan-500 p-6 max-w-md w-full"
+                                                    style={{ boxShadow: '0 0 40px rgba(34, 211, 238, 0.5)' }}
+                                                >
+                                                    <div className="flex items-center justify-between mb-4">
+                                                        <div className="flex items-center gap-2">
+                                                            <COOLASFUCKHeart size={24} animate={true} />
+                                                            <h3 className="text-xl font-black font-mono text-cyan-400">THE SCIENCE</h3>
+                                                        </div>
+                                                        <button onClick={() => setShowScienceModal(false)} className="text-gray-400 hover:text-white">
+                                                            <X size={24} />
+                                                        </button>
+                                                    </div>
+
+                                                    <div className="space-y-4 text-sm font-mono">
+                                                        {/* HRV */}
+                                                        <div className="bg-black border-2 border-pink-500/50 p-3">
+                                                            <p className="text-pink-400 font-black mb-2">WHAT IS HRV?</p>
+                                                            <p className="text-gray-300 text-xs">
+                                                                Heart Rate Variability = the time between heartbeats. High HRV = healthy, flexible nervous system. 
+                                                                Low HRV = stressed, rigid system.
+                                                            </p>
+                                                        </div>
+
+                                                        {/* COHERENCE */}
+                                                        <div className="bg-black border-2 border-cyan-500/50 p-3">
+                                                            <p className="text-cyan-400 font-black mb-2">WHY COHERENCE?</p>
+                                                            <p className="text-gray-300 text-xs">
+                                                                Coherence = your heart & brain syncing. When high, your whole nervous system harmonizes. 
+                                                                HeartMath research shows this reduces stress hormones instantly.
+                                                            </p>
+                                                        </div>
+
+                                                        {/* PERSONALIZED HEALING */}
+                                                        <div className="bg-black border-2 border-green-500/50 p-3">
+                                                            <p className="text-green-400 font-black mb-2">ADAPTIVE HEALING</p>
+                                                            <p className="text-gray-300 text-xs">
+                                                                We watch your heart's response. If coherence drops, we auto-slow the breathing rate. 
+                                                                Your body guides the healing - not a one-size-fits-all protocol.
+                                                            </p>
+                                                        </div>
+
+                                                        {/* HOW IT WORKS */}
+                                                        <div className="bg-cyan-900/20 border-2 border-cyan-500/50 p-3">
+                                                            <p className="text-cyan-400 font-black mb-2">HOW TO USE</p>
+                                                            <ul className="text-gray-300 text-xs space-y-1">
+                                                                <li>• Pick your state (anxious, sad, etc)</li>
+                                                                <li>• Tap "SCAN YOUR HEART"</li>
+                                                                <li>• Cover back camera with fingertip</li>
+                                                                <li>• Watch your coherence rise</li>
+                                                                <li>• Healing % shows progress</li>
+                                                            </ul>
+                                                        </div>
+
+                                                        <p className="text-gray-500 text-xs text-center pt-2">
+                                                            Zero surveillance • Your data stays local ❤️
+                                                        </p>
+                                                    </div>
+
+                                                    <button
+                                                        onClick={() => setShowScienceModal(false)}
+                                                        className="w-full mt-4 py-3 bg-cyan-600 border-4 border-cyan-400 text-white font-black font-mono"
+                                                    >
+                                                        GOT IT ✨
+                                                    </button>
+                                                </motion.div>
+                                            </motion.div>
+                                        )}
+                                    </AnimatePresence>
+
+                                    </CardContent>
+                                    </Card>
+                                    );
 }
