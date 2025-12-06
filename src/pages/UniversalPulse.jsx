@@ -109,63 +109,74 @@ export default function UniversalPulsePage() {
     };
 
     // Toggle heartbeat in symphony
-    const toggleHeartbeat = (heartbeatId) => {
+    const toggleHeartbeat = async (heartbeatId) => {
+        const wasEmpty = activeHeartbeats.length === 0;
+        
         setActiveHeartbeats(prev => {
-            const newActive = prev.includes(heartbeatId)
-                ? prev.filter(id => id !== heartbeatId)
-                : [...prev, heartbeatId];
-            
-            // Auto-start if adding first heart
-            if (newActive.length > 0 && !isPlaying) {
-                setTimeout(() => startUniversalPulse(), 100);
+            if (prev.includes(heartbeatId)) {
+                return prev.filter(id => id !== heartbeatId);
+            } else {
+                return [...prev, heartbeatId];
             }
-            // Auto-stop if removing last heart
-            if (newActive.length === 0 && isPlaying) {
-                setTimeout(() => stopUniversalPulse(), 100);
-            }
-            
-            return newActive;
         });
+        
+        // Start audio immediately on first tap (iOS needs user interaction)
+        if (wasEmpty && !isPlaying) {
+            setTimeout(() => startUniversalPulse(), 50);
+        }
     };
 
     // Generate music from active heartbeats
-    const startUniversalPulse = () => {
+    const startUniversalPulse = async () => {
         if (isPlaying) {
             stopUniversalPulse();
             return;
         }
 
-        const AudioContext = window.AudioContext || window.webkitAudioContext;
-        const ctx = new AudioContext();
-        audioContextRef.current = ctx;
-        
-        // Create analyser for visualization
-        const analyser = ctx.createAnalyser();
-        analyser.fftSize = 64;
-        analyser.connect(ctx.destination);
-        analyserRef.current = analyser;
-        
-        setIsPlaying(true);
-        
-        // Start visualization loop
-        const visualize = () => {
-            if (!analyserRef.current) return;
+        try {
+            const AudioContext = window.AudioContext || window.webkitAudioContext;
+            const ctx = new AudioContext();
             
-            const dataArray = new Uint8Array(analyserRef.current.frequencyBinCount);
-            analyserRef.current.getByteFrequencyData(dataArray);
-            
-            // Convert to 20 bars (8-bit style)
-            const bars = [];
-            const step = Math.floor(dataArray.length / 20);
-            for (let i = 0; i < 20; i++) {
-                const value = dataArray[i * step] || 0;
-                bars.push(Math.floor((value / 255) * 10)); // 0-10 height
+            // CRITICAL: Resume context (iOS requires this after user interaction)
+            if (ctx.state === 'suspended') {
+                await ctx.resume();
             }
-            setVisualBars(bars);
             
-            animationFrameRef.current = requestAnimationFrame(visualize);
-        };
-        visualize();
+            audioContextRef.current = ctx;
+            
+            // Create analyser for visualization
+            const analyser = ctx.createAnalyser();
+            analyser.fftSize = 64;
+            analyser.connect(ctx.destination);
+            analyserRef.current = analyser;
+            
+            setIsPlaying(true);
+            
+            console.log('🎵 Audio started, context state:', ctx.state);
+            
+            // Start visualization loop
+            const visualize = () => {
+                if (!analyserRef.current) return;
+                
+                const dataArray = new Uint8Array(analyserRef.current.frequencyBinCount);
+                analyserRef.current.getByteFrequencyData(dataArray);
+                
+                // Convert to 20 bars (8-bit style)
+                const bars = [];
+                const step = Math.floor(dataArray.length / 20);
+                for (let i = 0; i < 20; i++) {
+                    const value = dataArray[i * step] || 0;
+                    bars.push(Math.floor((value / 255) * 10)); // 0-10 height
+                }
+                setVisualBars(bars);
+                
+                animationFrameRef.current = requestAnimationFrame(visualize);
+            };
+            visualize();
+        } catch (error) {
+            console.error('Audio start error:', error);
+            alert('Audio error: ' + error.message);
+        }
     };
 
     const stopUniversalPulse = () => {
@@ -309,34 +320,48 @@ export default function UniversalPulsePage() {
                 </motion.div>
 
                 {/* 8-BIT VISUALIZER */}
-                {isPlaying && (
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        className="bg-black border-4 border-pink-500 p-6"
-                        style={{ boxShadow: '8px 8px 0px rgba(236, 72, 153, 0.5)' }}
-                    >
-                        <div className="flex items-end justify-center gap-1 h-32">
-                            {visualBars.map((height, i) => (
+                <AnimatePresence>
+                    {isPlaying && (
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.9, y: -20 }}
+                            animate={{ opacity: 1, scale: 1, y: 0 }}
+                            exit={{ opacity: 0, scale: 0.9, y: -20 }}
+                            className="bg-black border-4 border-green-500 p-6"
+                            style={{ boxShadow: '8px 8px 0px rgba(34, 197, 94, 0.5)' }}
+                        >
+                            <div className="flex items-center justify-center gap-2 mb-4">
                                 <motion.div
-                                    key={i}
-                                    className="bg-gradient-to-t from-pink-500 via-cyan-500 to-green-400"
-                                    style={{ 
-                                        width: '4%',
-                                        height: `${Math.max(height * 10, 5)}%`,
-                                    }}
-                                    animate={{ 
-                                        height: `${Math.max(height * 10, 5)}%`,
-                                    }}
-                                    transition={{ duration: 0.1 }}
-                                />
-                            ))}
-                        </div>
-                        <p className="text-center text-pink-400 font-black font-mono text-sm mt-4">
-                            🎵 LIVE SYMPHONY PULSE 🎵
-                        </p>
-                    </motion.div>
-                )}
+                                    animate={{ scale: [1, 1.3, 1] }}
+                                    transition={{ repeat: Infinity, duration: 0.8 }}
+                                >
+                                    <Volume2 className="w-6 h-6 text-green-400" />
+                                </motion.div>
+                                <p className="text-green-400 font-black font-mono text-lg">
+                                    AUDIO PLAYING
+                                </p>
+                            </div>
+                            <div className="flex items-end justify-center gap-1 h-32">
+                                {visualBars.map((height, i) => (
+                                    <motion.div
+                                        key={i}
+                                        className="bg-gradient-to-t from-pink-500 via-cyan-500 to-green-400"
+                                        style={{ 
+                                            width: '4%',
+                                            height: `${Math.max(height * 10, 5)}%`,
+                                        }}
+                                        animate={{ 
+                                            height: `${Math.max(height * 10, 5)}%`,
+                                        }}
+                                        transition={{ duration: 0.1 }}
+                                    />
+                                ))}
+                            </div>
+                            <p className="text-center text-pink-400 font-black font-mono text-sm mt-4">
+                                🎵 {activeHeartbeats.length} HEARTS BEATING AS ONE 🎵
+                            </p>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
 
                 {/* LIVE STATS */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -459,9 +484,21 @@ export default function UniversalPulsePage() {
                             <h2 className="text-2xl font-black font-mono text-cyan-300">
                                 BUILD YOUR SYMPHONY
                             </h2>
-                            <p className="text-cyan-400 font-mono text-xs mt-1">
-                                TAP HEARTS TO ADD/REMOVE FROM THE PULSE ({activeHeartbeats.length} ACTIVE)
-                            </p>
+                            <div className="flex items-center justify-center gap-2 mt-2">
+                                <p className="text-cyan-400 font-mono text-xs">
+                                    TAP HEARTS TO ADD/REMOVE ({activeHeartbeats.length} ACTIVE)
+                                </p>
+                                {isPlaying && (
+                                    <motion.div
+                                        animate={{ scale: [1, 1.2, 1] }}
+                                        transition={{ repeat: Infinity, duration: 1 }}
+                                        className="flex items-center gap-1"
+                                    >
+                                        <Volume2 className="w-4 h-4 text-green-400" />
+                                        <span className="text-green-400 font-black font-mono text-xs">PLAYING</span>
+                                    </motion.div>
+                                )}
+                            </div>
                         </div>
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                             <AnimatePresence>
