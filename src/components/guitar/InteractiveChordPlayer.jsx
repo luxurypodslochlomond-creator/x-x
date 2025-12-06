@@ -114,32 +114,33 @@ export default function InteractiveChordPlayer({ chordName, size = 'normal' }) {
         <motion.button
             onClick={playChord}
             disabled={isPlaying}
-            className={`bg-black border-4 ${isPlaying ? 'border-green-500 animate-pulse' : 'border-amber-500 hover:border-green-500'} 
-                ${sizeClasses[size]} transition-all relative group`}
+            className={`bg-black border-4 ${isPlaying ? 'border-green-500' : 'border-amber-500 hover:border-green-500'} 
+                ${sizeClasses[size]} transition-all relative group w-full`}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
+            style={isPlaying ? { boxShadow: '0 0 20px rgba(34, 197, 94, 0.6)' } : {}}
         >
-            <div className="text-center space-y-2">
-                <p className="text-2xl font-black font-mono text-amber-400">{chordName}</p>
-                <div className="flex items-center justify-center gap-2">
+            <div className="text-center space-y-1">
+                <p className={`${size === 'small' ? 'text-xl' : 'text-2xl'} font-black font-mono text-amber-400`} 
+                   style={{ textShadow: '3px 3px 0px rgba(0,0,0,0.8)' }}>
+                    {chordName}
+                </p>
+                <div className="flex items-center justify-center gap-1">
                     {isPlaying ? (
                         <>
-                            <Volume2 className="w-5 h-5 text-green-400 animate-pulse" />
-                            <span className="text-xs text-green-400 font-bold">PLAYING</span>
+                            <Volume2 className="w-4 h-4 text-green-400 animate-pulse" />
+                            <span className="text-xs text-green-400 font-black font-mono">PLAYING</span>
                         </>
                     ) : (
-                        <>
-                            <VolumeX className="w-5 h-5 text-gray-500" />
-                            <span className="text-xs text-gray-400 font-bold">TAP TO HEAR</span>
-                        </>
+                        <span className="text-xs text-gray-500 font-black font-mono">TAP</span>
                     )}
                 </div>
             </div>
             
-            {/* Tooltip */}
-            <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1 bg-black border-2 border-cyan-500 
-                text-xs text-cyan-300 font-bold whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
-                Hear {chordName} frequency ✨
+            {/* Tooltip - desktop only */}
+            <div className="hidden md:block absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1 bg-black border-2 border-cyan-500 
+                text-xs text-cyan-300 font-black font-mono whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                HEAR {chordName} ✨
             </div>
         </motion.button>
     );

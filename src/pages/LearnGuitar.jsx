@@ -276,16 +276,16 @@ export default function LearnGuitarPage() {
 
                 {/* INTERACTIVE CHORD PLAYER */}
                 <Card className="bg-black border-4 border-green-500">
-                    <CardContent className="p-6">
-                        <h2 className="text-2xl font-black font-mono text-green-400 mb-4 text-center" style={{ textShadow: '3px 3px 0px rgba(0,0,0,1)' }}>
+                    <CardContent className="p-4 md:p-6">
+                        <h2 className="text-2xl md:text-3xl font-black font-mono text-green-400 mb-2 text-center" style={{ textShadow: '3px 3px 0px rgba(0,0,0,1)' }}>
                             🎸 TAP TO HEAR CHORDS
                         </h2>
-                        <p className="text-green-200 text-center mb-6 font-bold">
-                            Learn through FREQUENCY, not just diagrams. Tap any chord to hear what it sounds like!
+                        <p className="text-green-200 text-center mb-4 md:mb-6 font-bold text-sm md:text-base">
+                            Learn through FREQUENCY, not diagrams. Tap = HEAR! ✨
                         </p>
-                        <div className="grid grid-cols-3 md:grid-cols-5 gap-3">
-                            {['G', 'C', 'D', 'Em', 'Am', 'E', 'A', 'F', 'Em7', 'Dsus4'].map(chord => (
-                                <InteractiveChordPlayer key={chord} chordName={chord} />
+                        <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 md:gap-3">
+                            {['G', 'C', 'D', 'Em', 'Am', 'E', 'A', 'F', 'Em7', 'Dsus4', 'A7sus4', 'Cadd9', 'B7', 'Gm', 'Bb', 'Dm'].map(chord => (
+                                <InteractiveChordPlayer key={chord} chordName={chord} size="small" />
                             ))}
                         </div>
                     </CardContent>
