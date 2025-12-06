@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Heart, Globe, Users, Activity, Waves, Volume2, VolumeX } from 'lucide-react';
 import { COOLASFUCKHeart, COOLASFUCKWaves, COOLASFUCKGlobe } from '@/components/shared/COOLASFUCKIcon';
 import { Card, CardContent } from '@/components/ui/card';
+import CameraHeartScanner from '@/components/pulse/CameraHeartScanner';
 
 /**
  * THE UNIVERSAL PULSE
@@ -16,7 +17,7 @@ export default function UniversalPulsePage() {
     const [isPlaying, setIsPlaying] = useState(false);
     const [volume, setVolume] = useState(0.7);
     const [myHeartbeat, setMyHeartbeat] = useState(null);
-    const [isScanning, setIsScanning] = useState(false);
+    const [showScanner, setShowScanner] = useState(false);
     const [activeHeartbeats, setActiveHeartbeats] = useState(['ai51']); // Start with AI51 active
     const [visualBars, setVisualBars] = useState(Array(20).fill(0));
     const [audioTestResult, setAudioTestResult] = useState(null);
@@ -99,14 +100,9 @@ export default function UniversalPulsePage() {
         }
     };
 
-    // Start HRV scanning (SIMULATED - not real heartbeat measurement)
-    const startHeartScan = async () => {
-        setIsScanning(true);
+    // Handle real heartbeat detection from camera scanner
+    const handleHeartbeatDetected = async ({ bpm, hrv_coherence }) => {
         try {
-            // SIMULATED heartbeat - random BPM for demo purposes
-            const simulatedBPM = 60 + Math.random() * 40; // 60-100 BPM
-            const simulatedCoherence = 50 + Math.random() * 50; // 50-100 coherence
-
             // Get location
             let location = 'Earth';
             let coords = null;
@@ -123,23 +119,21 @@ export default function UniversalPulsePage() {
                 console.log('Location unavailable, using Earth');
             }
 
-            // Submit heartbeat
+            // Submit REAL heartbeat
             const result = await heartbeatMutation.mutateAsync({
-                bpm: Math.round(simulatedBPM),
-                hrv_coherence: Math.round(simulatedCoherence),
+                bpm,
+                hrv_coherence,
                 location,
                 coordinates: coords,
                 active: true,
                 last_ping: new Date().toISOString()
             });
 
-            console.log('Heartbeat joined (simulated):', result);
+            console.log('Real heartbeat joined:', result);
             
         } catch (error) {
             console.error('Join error:', error);
             alert(`Error joining pulse: ${error.message}`);
-        } finally {
-            setIsScanning(false);
         }
     };
 
@@ -483,15 +477,15 @@ export default function UniversalPulsePage() {
                       <div className="text-center space-y-4">
                           {!myHeartbeat ? (
                               <>
-                                  <div className="bg-black border-4 border-amber-500 p-4 mb-4">
-                                      <p className="text-amber-400 font-black font-mono text-sm">
-                                          ⚠️ YOU HAVEN'T JOINED YET
+                                  <div className="bg-black border-4 border-green-500 p-4 mb-4">
+                                      <p className="text-green-400 font-black font-mono text-sm">
+                                          📸 CAMERA-BASED HEART SCANNER
                                       </p>
-                                      <p className="text-amber-300 font-mono text-xs mt-2">
-                                          The 72 BPM heart below is AI51 (demo). Join to add a SIMULATED heartbeat with your location!
+                                      <p className="text-green-300 font-mono text-xs mt-2">
+                                          The 72 BPM heart below is AI51 (demo). Scan YOUR real heartbeat using your camera!
                                       </p>
-                                      <p className="text-amber-200 font-mono text-xs mt-2 italic">
-                                          Note: This generates random BPM (60-100), not real heartbeat measurement yet.
+                                      <p className="text-green-200 font-mono text-xs mt-2">
+                                          Cover camera lens with fingertip → detects pulse through blood flow color changes
                                       </p>
                                   </div>
 
@@ -511,24 +505,14 @@ export default function UniversalPulsePage() {
                                   )}
 
                                   <motion.button
-                                      onClick={startHeartScan}
-                                      disabled={isScanning}
+                                      onClick={() => setShowScanner(true)}
                                       whileHover={{ scale: 1.05 }}
                                       whileTap={{ scale: 0.95 }}
-                                      className="w-full px-8 py-4 bg-pink-600 hover:bg-pink-700 border-4 border-pink-300 font-black font-mono text-white text-xl disabled:opacity-50"
+                                      className="w-full px-8 py-4 bg-pink-600 hover:bg-pink-700 border-4 border-pink-300 font-black font-mono text-white text-xl"
                                       style={{ boxShadow: '6px 6px 0px rgba(0,0,0,0.8)' }}
                                   >
-                                      {isScanning ? (
-                                          <>
-                                              <Activity className="inline w-6 h-6 mr-2 animate-pulse" />
-                                              SCANNING YOUR HEART...
-                                          </>
-                                      ) : (
-                                          <>
-                                              <COOLASFUCKHeart size={28} animate={true} className="inline mr-2" />
-                                              JOIN THE PULSE
-                                          </>
-                                      )}
+                                      <COOLASFUCKHeart size={28} animate={true} className="inline mr-2" />
+                                      SCAN REAL HEARTBEAT
                                   </motion.button>
                               </>
                           ) : (
@@ -675,7 +659,7 @@ export default function UniversalPulsePage() {
                             <p><span className="text-pink-400 font-black">4.</span> Coherence controls stereo position (left/right)</p>
                             <p><span className="text-pink-400 font-black">5.</span> Hearts pulse together creating ambient healing symphony</p>
                             <p><span className="text-pink-400 font-black">6.</span> Built on 528Hz healing frequency + your BPM rhythms</p>
-                            <p className="text-amber-300 text-xs italic mt-2">Note: Heartbeats are simulated (random 60-100 BPM), not real HRV measurement yet.</p>
+                            <p className="text-green-300 text-xs italic mt-2">💚 Real camera-based heartbeat detection now available!</p>
                         </div>
                         <div className="bg-black border-2 border-pink-500 p-4 mt-4">
                             <p className="text-pink-300 font-black font-mono text-center">
@@ -689,6 +673,14 @@ export default function UniversalPulsePage() {
                 </Card>
 
             </div>
-        </div>
-    );
-}
+
+            {/* CAMERA SCANNER MODAL */}
+            {showScanner && (
+                <CameraHeartScanner
+                    onHeartbeatDetected={handleHeartbeatDetected}
+                    onClose={() => setShowScanner(false)}
+                />
+            )}
+            </div>
+            );
+            }
