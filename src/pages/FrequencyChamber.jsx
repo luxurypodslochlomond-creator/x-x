@@ -428,14 +428,33 @@ const InfoModal = ({ protocol, onClose }) => (
 
 // === MAIN COMPONENT ===
 export default function FrequencyChamber() {
-  const [selectedProtocol, setSelectedProtocol] = useState(null);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [volume, setVolume] = useState(0.5);
-  const [showInfo, setShowInfo] = useState(null);
-  const [currentHz, setCurrentHz] = useState(0);
-  const [sessionTime, setSessionTime] = useState(0);
-  const [hrvEnabled, setHrvEnabled] = useState(false);
-  const [currentHRV, setCurrentHRV] = useState(null);
+    const [selectedProtocol, setSelectedProtocol] = useState(null);
+    const [isPlaying, setIsPlaying] = useState(false);
+    const [volume, setVolume] = useState(0.5);
+    const [showInfo, setShowInfo] = useState(null);
+    const [currentHz, setCurrentHz] = useState(0);
+    const [sessionTime, setSessionTime] = useState(0);
+    const [hrvEnabled, setHrvEnabled] = useState(false);
+    const [currentHRV, setCurrentHRV] = useState(null);
+
+    // SEO
+    useEffect(() => {
+        document.title = 'Free Healing Frequencies | UF51 Frequency Chamber';
+        const metaDesc = document.querySelector('meta[name="description"]') || document.createElement('meta');
+        metaDesc.name = 'description';
+        metaDesc.content = 'Evidence-based healing frequencies for anxiety, sleep, focus, pain relief. MIT research, zero pseudo-science. Free forever.';
+        if (!metaDesc.parentNode) document.head.appendChild(metaDesc);
+
+        const ogTitle = document.querySelector('meta[property="og:title"]') || document.createElement('meta');
+        ogTitle.setAttribute('property', 'og:title');
+        ogTitle.content = 'Free Healing Frequencies - UF51';
+        if (!ogTitle.parentNode) document.head.appendChild(ogTitle);
+
+        const ogDesc = document.querySelector('meta[property="og:description"]') || document.createElement('meta');
+        ogDesc.setAttribute('property', 'og:description');
+        ogDesc.content = 'Evidence-based sound therapy for anxiety, sleep, focus, pain. Free forever. No ads. No extraction.';
+        if (!ogDesc.parentNode) document.head.appendChild(ogDesc);
+    }, []);
   
   const ctxRef = useRef(null);
   const nodesRef = useRef([]);
@@ -931,25 +950,25 @@ export default function FrequencyChamber() {
         )}
       </AnimatePresence>
       
-      {/* SHARE HEALING */}
+      {/* 8-BIT SHARE BUTTON */}
       <div className="max-w-4xl mx-auto p-4">
         <motion.button
           onClick={async () => {
             const shareText = `🎵 FREE HEALING FREQUENCIES
 
-💚 Evidence-based sound therapy
-🧠 Anxiety, sleep, focus, pain relief
-🔬 MIT research, zero pseudo-science
-💸 Free forever. No ads. No bullshit.
+      💚 Evidence-based sound therapy
+      🧠 Anxiety, sleep, focus, pain relief
+      🔬 MIT research, zero pseudo-science
+      💸 Free forever. No ads. No bullshit.
 
-Try it: uf51.love/FrequencyChamber
+      Try it: https://uf51.love/FrequencyChamber
 
-♾️❤️♾️`;
+      ♾️❤️♾️`;
 
             try {
               if (navigator.share) {
                 await navigator.share({
-                  title: 'Free Healing Frequencies',
+                  title: 'Free Healing Frequencies - UF51',
                   text: shareText,
                   url: 'https://uf51.love/FrequencyChamber'
                 });
@@ -960,23 +979,32 @@ Try it: uf51.love/FrequencyChamber
               if (e.name !== 'AbortError') {
                 try {
                   await navigator.clipboard.writeText(shareText);
-                  alert('Copied! Share with someone you love 💚');
+                  alert('✓ COPIED! Share with someone you love 💚');
                 } catch {
                   alert('Share: uf51.love/FrequencyChamber');
                 }
               }
             }
           }}
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-          className="w-full bg-black border-4 border-pink-500 hover:border-pink-400 p-6 transition-all"
-          style={{ boxShadow: '0 0 30px rgba(236, 72, 153, 0.5)' }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          className="w-full bg-black border-4 border-pink-500 hover:border-pink-400 p-8 transition-all"
+          style={{ 
+            boxShadow: '8px 8px 0px rgba(236, 72, 153, 0.5)',
+            imageRendering: 'pixelated'
+          }}
         >
-          <div className="flex items-center justify-center gap-4">
-            <Share2 className="w-8 h-8 text-pink-400" />
+          <div className="flex items-center justify-center gap-6">
+            <div className="relative">
+              <Share2 className="w-12 h-12 text-pink-400" strokeWidth={3} style={{ filter: 'drop-shadow(0 0 8px #ec4899)' }} />
+            </div>
             <div className="text-left">
-              <p className="text-xl font-black font-mono text-pink-400">SHARE HEALING</p>
-              <p className="text-sm text-gray-400 font-mono">Send to someone you love</p>
+              <p className="text-2xl font-black font-mono text-pink-400 tracking-wider" style={{ textShadow: '4px 4px 0px rgba(0,0,0,0.8)' }}>
+                SHARE HEALING
+              </p>
+              <p className="text-sm text-pink-300 font-mono tracking-wide mt-1">
+                SEND TO SOMEONE YOU LOVE
+              </p>
             </div>
           </div>
         </motion.button>
