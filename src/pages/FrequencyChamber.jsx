@@ -100,7 +100,7 @@ const PROTOCOLS = {
       primary: 40,
       secondary: 14,
       carrier: 400,
-      breathRate: 12,
+      breathRate: 6,
       noiseType: 'brown',
       noiseLevel: 0.05
     }
