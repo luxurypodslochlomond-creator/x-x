@@ -2,9 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { base44 } from '@/api/base44Client';
 import { useQuery } from '@tanstack/react-query';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Lightbulb, Shield, Activity, Zap, CheckCircle } from 'lucide-react';
+import { Lock, Lightbulb, Shield, Activity, Zap, CheckCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { COOLASFUCKSparkle } from '@/components/shared/COOLASFUCKIcon';
 import LiveClock from '@/components/shared/LiveClock';
+import { Link } from 'react-router-dom';
+import { Button } from '@/components/ui/button';
+import { createPageUrl } from '@/utils';
 
 export default function AdminPatents() {
   const [user, setUser] = useState(null);
@@ -77,7 +81,7 @@ export default function AdminPatents() {
             INNOVATIONS
           </h1>
           <p className="text-xl text-gray-300">
-            12 Real Innovations • 9 Working Now
+            12 Real Innovations • 8 Working Now
           </p>
 
           {/* LIVE STATS */}
@@ -144,21 +148,28 @@ export default function AdminPatents() {
           </CardContent>
         </Card>
 
-        {/* INNOVATIONS LIST */}
+        {/* INNOVATIONS LIST - ORDERED BY IMPORTANCE */}
         <div className="space-y-4">
           
-          {/* #1 - TINNITUS AUTO-DETECTOR */}
-          <Card className="bg-black border-2 border-purple-500 shadow-[0_0_40px_rgba(168,85,247,0.8)]">
+          {/* #1 - $P51 QUANTUM WALLET - MOST IMPORTANT */}
+          <Card className="bg-black border-4 border-cyan-500 shadow-[0_0_60px_rgba(6,182,212,1)]">
             <CardContent className="p-6">
               <div className="flex items-center gap-2 mb-2">
                 <motion.div 
-                  className="w-3 h-3 bg-purple-500 rounded-full"
-                  animate={{ scale: [1, 1.3, 1], opacity: [0.6, 1, 0.6] }}
-                  transition={{ duration: 2, repeat: Infinity }}
+                  className="w-4 h-4 bg-cyan-500 rounded-full"
+                  animate={{ 
+                    scale: [1, 1.5, 1],
+                    boxShadow: [
+                      '0 0 20px rgba(6, 182, 212, 0.8)',
+                      '0 0 40px rgba(6, 182, 212, 1)',
+                      '0 0 20px rgba(6, 182, 212, 0.8)'
+                    ]
+                  }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
                 />
-                <span className="text-purple-400 text-xs font-bold">WORKING NOW ✅ (BREAKTHROUGH Nov 2025)</span>
+                <span className="text-cyan-400 text-xs font-bold">WORKING NOW ✅ (QUANTUM TRANSMISSION)</span>
               </div>
-              <h4 className="text-white font-bold text-xl mb-2">1. Automatic Multi-Frequency Tinnitus Detection + Cure</h4>
+              <h4 className="text-white font-bold text-2xl mb-3">1. $P51 Quantum Wallet (Payment Gateway Without Banks)</h4>
               <p className="text-gray-300 text-sm mb-2">
                 <strong className="text-white">What it does:</strong> Microphone listens to YOUR tinnitus. AI detects ALL frequencies automatically (most people have 2-5 buzzes). Generates inverse waves for each one simultaneously. Multi-frequency destructive interference = TOTAL CANCELLATION. 10 seconds. Zero manual searching.
               </p>
