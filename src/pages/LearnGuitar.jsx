@@ -5,6 +5,8 @@ import { ChevronDown, ChevronUp } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { COOLASFUCKMusicNote, COOLASFUCKHeart, COOLASFUCKGlobe, COOLASFUCKZap, COOLASFUCKSparkle } from '@/components/shared/COOLASFUCKIcon';
 import InteractiveChordPlayer from '@/components/guitar/InteractiveChordPlayer';
+import DrumLoops from '@/components/guitar/DrumLoops';
+import LyricsChordDisplay from '@/components/guitar/LyricsChordDisplay';
 
 // CHORD DIAGRAMS - Simple visual representation
 const ChordDiagram = ({ name, frets, fingers }) => {
@@ -40,7 +42,22 @@ const SONGS = [
         pattern: "Down Down Up Up Down Up",
         progression: "Em7 – G – Dsus4 – A7sus4",
         tips: "Keep the same finger shape, just move your fingers slightly between chords. Classic campfire song!",
-        icon: COOLASFUCKMusicNote
+        icon: COOLASFUCKMusicNote,
+        lyrics: [
+            { label: "Intro", lines: [{ chords: "Em7    G      Dsus4    A7sus4", text: "" }] },
+            { label: "Verse 1", lines: [
+                { chords: "Em7           G", text: "Today is gonna be the day" },
+                { chords: "         Dsus4              A7sus4", text: "That they're gonna throw it back to you" },
+                { chords: "Em7              G", text: "By now you should've somehow" },
+                { chords: "          Dsus4           A7sus4", text: "Realized what you gotta do" },
+            ]},
+            { label: "Chorus", lines: [
+                { chords: "Cadd9      Dsus4        Em7", text: "I said maybe" },
+                { chords: "Cadd9         Dsus4      Em7", text: "You're gonna be the one that saves me" },
+                { chords: "Cadd9  Dsus4  Em7  G  Em7  A7sus4", text: "And after all" },
+                { chords: "Cadd9  Dsus4  Em7", text: "You're my wonderwall" },
+            ]}
+        ]
     },
     {
         id: 2,
@@ -249,6 +266,19 @@ export default function LearnGuitarPage() {
                     </p>
                 </motion.div>
 
+                {/* DRUM LOOPS */}
+                <Card className="bg-black border-4 border-purple-500">
+                    <CardContent className="p-4 md:p-6">
+                        <h2 className="text-2xl md:text-3xl font-black font-mono text-purple-400 mb-2" style={{ textShadow: '3px 3px 0px rgba(0,0,0,1)' }}>
+                            🥁 JAM WITH DRUMS
+                        </h2>
+                        <p className="text-purple-200 mb-4 font-bold text-sm md:text-base">
+                            Pick a beat, play along. Old school + modern.
+                        </p>
+                        <DrumLoops />
+                    </CardContent>
+                </Card>
+
                 {/* QUICK TIPS */}
                 <Card className="bg-black border-4 border-amber-500">
                     <CardContent className="p-6">
@@ -394,6 +424,9 @@ export default function LearnGuitarPage() {
                                                 <p className="text-green-400 font-black font-mono mb-2">💡 TIPS:</p>
                                                 <p className="text-green-200 font-bold">{song.tips}</p>
                                             </div>
+
+                                            {/* LYRICS + CHORDS */}
+                                            <LyricsChordDisplay song={song} />
 
                                             {/* CHORD DIAGRAMS FOR THIS SONG */}
                                             <div>
