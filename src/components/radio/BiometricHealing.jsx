@@ -407,8 +407,9 @@ export default function BiometricHealing() {
     };
 
     return (
-        <Card className="bg-black border-4 border-pink-500">
-            <CardContent className="p-4 md:p-6 space-y-4">
+        <>
+            <Card className="bg-black border-4 border-pink-500">
+                <CardContent className="p-4 md:p-6 space-y-4">
                 
                 {/* HEADER */}
                 <div className="flex items-center justify-between">
