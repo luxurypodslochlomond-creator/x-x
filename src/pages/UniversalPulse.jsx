@@ -34,7 +34,21 @@ export default function UniversalPulsePage() {
             const all = await base44.entities.HeartbeatPulse.list('-last_ping', 50);
             // Only show heartbeats from last 5 minutes
             const fiveMinutesAgo = new Date(Date.now() - 5 * 60 * 1000);
-            const active = all.filter(h => h.active && new Date(h.last_ping) > fiveMinutesAgo);
+            
+            // Handle both flattened and nested data structures
+            const active = all.filter(h => {
+                const heartbeat = h.data || h;
+                const isActive = heartbeat.active === true;
+                const lastPing = heartbeat.last_ping;
+                const isRecent = lastPing && new Date(lastPing) > fiveMinutesAgo;
+                return isActive && isRecent;
+            }).map(h => {
+                // Flatten data if needed and include id
+                const heartbeat = h.data || h;
+                return { ...heartbeat, id: h.id };
+            });
+            
+            console.log('Heartbeats found:', active.length, active);
             
             // Always add AI51 heartbeat for demo
             const ai51Heartbeat = {
