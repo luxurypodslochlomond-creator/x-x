@@ -425,10 +425,10 @@ export default function BiometricHealing() {
                         </div>
                         <button
                             onClick={() => setShowScienceModal(!showScienceModal)}
-                            className={`px-3 py-1 border-2 ${showScienceModal ? 'border-cyan-400 bg-cyan-600' : 'border-cyan-500 bg-black'} hover:border-cyan-400 transition-all`}
+                            className={`w-6 h-6 border-2 ${showScienceModal ? 'border-cyan-400 bg-cyan-600' : 'border-cyan-500 bg-black'} hover:border-cyan-400 transition-all flex items-center justify-center`}
                             style={{ boxShadow: '0 0 8px rgba(34, 211, 238, 0.3)' }}
                         >
-                            <span className="text-cyan-400 font-black font-mono text-xs">{showScienceModal ? 'HIDE' : 'INFO'}</span>
+                            <span className="text-cyan-400 font-black font-mono text-xs">?</span>
                         </button>
                     </div>
 
