@@ -615,10 +615,9 @@ export default function FrequencyChamber() {
   // Start audio
   const startAudio = async (protocol) => {
     try {
-      // Check headphones for binaural
+      // Warn about headphones for binaural but don't block
       if (protocol.config.isBinaural && !hasHeadphones) {
         setShowHeadphonePrompt(true);
-        return;
       }
       
       const AudioContext = window.AudioContext || window.webkitAudioContext;
