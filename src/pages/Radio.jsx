@@ -61,9 +61,7 @@ export default function RadioPage() {
 💰 Artists keep 90%
 🌍 10% heals Earth
 
-Listen free at UF51.LOVE
-
-♾️❤️♾️`;
+Listen free at UF51.LOVE`;
 
       await navigator.share({
         title: `${track.title} - ${track.artist}`,
