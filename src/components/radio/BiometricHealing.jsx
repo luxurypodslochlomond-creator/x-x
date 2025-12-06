@@ -149,33 +149,39 @@ export default function BiometricHealing() {
     const animationRef = useRef(null);
 
     // START FREQUENCY
-    const startFrequency = (state) => {
+    const startFrequency = async (state) => {
         if (audioContextRef.current) {
             stopFrequency();
         }
 
         const AudioContext = window.AudioContext || window.webkitAudioContext;
-        audioContextRef.current = new AudioContext();
+        const ctx = new AudioContext();
+        audioContextRef.current = ctx;
+        
+        // Resume context if suspended
+        if (ctx.state === 'suspended') {
+            await ctx.resume();
+        }
         
         if (state.isBinaural) {
             // BINAURAL BEATS FOR SLEEP
             const baseFreq = 200;
-            const osc1 = audioContextRef.current.createOscillator();
-            const osc2 = audioContextRef.current.createOscillator();
-            const gainNode = audioContextRef.current.createGain();
+            const osc1 = ctx.createOscillator();
+            const osc2 = ctx.createOscillator();
+            const gainNode = ctx.createGain();
             
             osc1.type = 'sine';
             osc2.type = 'sine';
-            osc1.frequency.setValueAtTime(baseFreq, audioContextRef.current.currentTime);
-            osc2.frequency.setValueAtTime(baseFreq + state.freq, audioContextRef.current.currentTime);
+            osc1.frequency.setValueAtTime(baseFreq, ctx.currentTime);
+            osc2.frequency.setValueAtTime(baseFreq + state.freq, ctx.currentTime);
             
-            gainNode.gain.setValueAtTime(0.15, audioContextRef.current.currentTime);
+            gainNode.gain.setValueAtTime(0.15, ctx.currentTime);
             
-            const merger = audioContextRef.current.createChannelMerger(2);
+            const merger = ctx.createChannelMerger(2);
             osc1.connect(merger, 0, 0);
             osc2.connect(merger, 0, 1);
             merger.connect(gainNode);
-            gainNode.connect(audioContextRef.current.destination);
+            gainNode.connect(ctx.destination);
             
             osc1.start();
             osc2.start();
@@ -183,15 +189,15 @@ export default function BiometricHealing() {
             gainRef.current = gainNode;
         } else {
             // PURE FREQUENCY
-            const oscillator = audioContextRef.current.createOscillator();
-            const gainNode = audioContextRef.current.createGain();
+            const oscillator = ctx.createOscillator();
+            const gainNode = ctx.createGain();
             
             oscillator.type = 'sine';
-            oscillator.frequency.setValueAtTime(state.freq, audioContextRef.current.currentTime);
-            gainNode.gain.setValueAtTime(0.2, audioContextRef.current.currentTime);
+            oscillator.frequency.setValueAtTime(state.freq, ctx.currentTime);
+            gainNode.gain.setValueAtTime(0.2, ctx.currentTime);
             
             oscillator.connect(gainNode);
-            gainNode.connect(audioContextRef.current.destination);
+            gainNode.connect(ctx.destination);
             oscillator.start();
             
             oscillatorRef.current = oscillator;
@@ -417,9 +423,10 @@ export default function BiometricHealing() {
                     </div>
                     <button
                         onClick={() => setShowScienceModal(true)}
-                        className="p-2 border-2 border-cyan-500/50 hover:border-cyan-400 bg-black transition-all"
+                        className="p-2 border-4 border-cyan-500 hover:border-cyan-400 bg-black transition-all"
+                        style={{ boxShadow: '0 0 10px rgba(34, 211, 238, 0.3)' }}
                     >
-                        <Info className="w-5 h-5 text-cyan-400" />
+                        <span className="text-cyan-400 font-black font-mono text-lg">i</span>
                     </button>
                 </div>
 
