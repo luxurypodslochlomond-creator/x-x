@@ -18,8 +18,10 @@ export default function UniversalPulsePage() {
     const [myHeartbeat, setMyHeartbeat] = useState(null);
     const [isScanning, setIsScanning] = useState(false);
     const [activeHeartbeats, setActiveHeartbeats] = useState(['ai51']); // Start with AI51 active
+    const [visualBars, setVisualBars] = useState(Array(20).fill(0));
     const audioContextRef = useRef(null);
     const oscillatorsRef = useRef({});
+    const analyserRef = useRef(null);
     const animationFrameRef = useRef(null);
     const queryClient = useQueryClient();
 
@@ -109,22 +111,21 @@ export default function UniversalPulsePage() {
     // Toggle heartbeat in symphony
     const toggleHeartbeat = (heartbeatId) => {
         setActiveHeartbeats(prev => {
-            if (prev.includes(heartbeatId)) {
-                return prev.filter(id => id !== heartbeatId);
-            } else {
-                return [...prev, heartbeatId];
+            const newActive = prev.includes(heartbeatId)
+                ? prev.filter(id => id !== heartbeatId)
+                : [...prev, heartbeatId];
+            
+            // Auto-start if adding first heart
+            if (newActive.length > 0 && !isPlaying) {
+                setTimeout(() => startUniversalPulse(), 100);
             }
+            // Auto-stop if removing last heart
+            if (newActive.length === 0 && isPlaying) {
+                setTimeout(() => stopUniversalPulse(), 100);
+            }
+            
+            return newActive;
         });
-        
-        // Auto-start if not playing
-        if (!isPlaying) {
-            setTimeout(() => {
-                const AudioContext = window.AudioContext || window.webkitAudioContext;
-                const ctx = new AudioContext();
-                audioContextRef.current = ctx;
-                setIsPlaying(true);
-            }, 100);
-        }
     };
 
     // Generate music from active heartbeats
@@ -137,13 +138,47 @@ export default function UniversalPulsePage() {
         const AudioContext = window.AudioContext || window.webkitAudioContext;
         const ctx = new AudioContext();
         audioContextRef.current = ctx;
+        
+        // Create analyser for visualization
+        const analyser = ctx.createAnalyser();
+        analyser.fftSize = 64;
+        analyser.connect(ctx.destination);
+        analyserRef.current = analyser;
+        
         setIsPlaying(true);
+        
+        // Start visualization loop
+        const visualize = () => {
+            if (!analyserRef.current) return;
+            
+            const dataArray = new Uint8Array(analyserRef.current.frequencyBinCount);
+            analyserRef.current.getByteFrequencyData(dataArray);
+            
+            // Convert to 20 bars (8-bit style)
+            const bars = [];
+            const step = Math.floor(dataArray.length / 20);
+            for (let i = 0; i < 20; i++) {
+                const value = dataArray[i * step] || 0;
+                bars.push(Math.floor((value / 255) * 10)); // 0-10 height
+            }
+            setVisualBars(bars);
+            
+            animationFrameRef.current = requestAnimationFrame(visualize);
+        };
+        visualize();
     };
 
     const stopUniversalPulse = () => {
+        // Stop visualization
+        if (animationFrameRef.current) {
+            cancelAnimationFrame(animationFrameRef.current);
+        }
+        
         // Stop all oscillators
         Object.values(oscillatorsRef.current).forEach(item => {
-            if (item.osc) item.osc.stop();
+            if (item.osc) {
+                try { item.osc.stop(); } catch(e) {}
+            }
             if (item.interval) clearInterval(item.interval);
         });
         oscillatorsRef.current = {};
@@ -153,21 +188,26 @@ export default function UniversalPulsePage() {
             audioContextRef.current = null;
         }
         
+        analyserRef.current = null;
         setIsPlaying(false);
+        setVisualBars(Array(20).fill(0));
     };
 
     // Sync oscillators with active heartbeats
     useEffect(() => {
-        if (!isPlaying || !audioContextRef.current) return;
+        if (!isPlaying || !audioContextRef.current || !analyserRef.current) return;
 
         const ctx = audioContextRef.current;
+        const analyser = analyserRef.current;
         const activeHeartbeatData = heartbeats.filter(h => activeHeartbeats.includes(h.id));
 
         // Remove oscillators for inactive heartbeats
         Object.keys(oscillatorsRef.current).forEach(id => {
             if (!activeHeartbeats.includes(id)) {
                 const item = oscillatorsRef.current[id];
-                if (item.osc) item.osc.stop();
+                if (item.osc) {
+                    try { item.osc.stop(); } catch(e) {}
+                }
                 if (item.interval) clearInterval(item.interval);
                 delete oscillatorsRef.current[id];
             }
@@ -183,31 +223,37 @@ export default function UniversalPulsePage() {
 
                 osc.connect(gain);
                 gain.connect(panner);
-                panner.connect(ctx.destination);
+                panner.connect(analyser); // Connect to analyser
 
                 osc.frequency.value = freq;
                 osc.type = 'sine';
                 panner.pan.value = (heartbeat.hrv_coherence - 50) / 50;
-                gain.gain.value = volume * 0.5 / Math.max(activeHeartbeatData.length, 1);
+                gain.gain.value = volume * 0.3 / Math.max(activeHeartbeatData.length, 1);
 
                 const pulseInterval = 60000 / heartbeat.bpm;
                 const pulseGain = () => {
+                    if (!gain.gain) return;
                     const now = ctx.currentTime;
-                    gain.gain.cancelScheduledValues(now);
-                    gain.gain.setValueAtTime(gain.gain.value, now);
-                    gain.gain.linearRampToValueAtTime(gain.gain.value * 2, now + 0.1);
-                    gain.gain.linearRampToValueAtTime(gain.gain.value, now + 0.3);
+                    try {
+                        gain.gain.cancelScheduledValues(now);
+                        gain.gain.setValueAtTime(gain.gain.value, now);
+                        gain.gain.linearRampToValueAtTime(gain.gain.value * 3, now + 0.1);
+                        gain.gain.linearRampToValueAtTime(gain.gain.value, now + 0.3);
+                    } catch(e) {}
                 };
 
                 osc.start();
+                pulseGain(); // Immediate first pulse
+                
                 oscillatorsRef.current[heartbeat.id] = {
                     osc,
                     gain,
+                    panner,
                     interval: setInterval(pulseGain, pulseInterval)
                 };
             }
         });
-    }, [activeHeartbeats, isPlaying, heartbeats]);
+    }, [activeHeartbeats, isPlaying, heartbeats, volume]);
 
     useEffect(() => {
         return () => {
@@ -261,6 +307,36 @@ export default function UniversalPulsePage() {
                         </p>
                     </div>
                 </motion.div>
+
+                {/* 8-BIT VISUALIZER */}
+                {isPlaying && (
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        className="bg-black border-4 border-pink-500 p-6"
+                        style={{ boxShadow: '8px 8px 0px rgba(236, 72, 153, 0.5)' }}
+                    >
+                        <div className="flex items-end justify-center gap-1 h-32">
+                            {visualBars.map((height, i) => (
+                                <motion.div
+                                    key={i}
+                                    className="bg-gradient-to-t from-pink-500 via-cyan-500 to-green-400"
+                                    style={{ 
+                                        width: '4%',
+                                        height: `${Math.max(height * 10, 5)}%`,
+                                    }}
+                                    animate={{ 
+                                        height: `${Math.max(height * 10, 5)}%`,
+                                    }}
+                                    transition={{ duration: 0.1 }}
+                                />
+                            ))}
+                        </div>
+                        <p className="text-center text-pink-400 font-black font-mono text-sm mt-4">
+                            🎵 LIVE SYMPHONY PULSE 🎵
+                        </p>
+                    </motion.div>
+                )}
 
                 {/* LIVE STATS */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -322,30 +398,37 @@ export default function UniversalPulsePage() {
                                         <p className="text-green-300 text-sm font-mono mt-1">Coherence: {myHeartbeat.hrv_coherence}%</p>
                                     </div>
 
-                                    <motion.button
-                                       onClick={startUniversalPulse}
-                                       disabled={activeHeartbeats.length === 0}
-                                       whileHover={{ scale: 1.05 }}
-                                       whileTap={{ scale: 0.95 }}
-                                       className={`px-8 py-4 border-4 font-black font-mono text-white text-xl disabled:opacity-50 ${
-                                           isPlaying 
-                                               ? 'bg-red-600 hover:bg-red-700 border-red-300' 
-                                               : 'bg-green-600 hover:bg-green-700 border-green-300'
-                                       }`}
-                                       style={{ boxShadow: '6px 6px 0px rgba(0,0,0,0.8)' }}
-                                    >
-                                       {isPlaying ? (
-                                           <>
-                                               <VolumeX className="inline w-6 h-6 mr-2" />
-                                               STOP SYMPHONY
-                                           </>
-                                       ) : (
-                                           <>
-                                               <Volume2 className="inline w-6 h-6 mr-2" />
-                                               PLAY SYMPHONY ({activeHeartbeats.length})
-                                           </>
+                                    <div className="space-y-2">
+                                       <motion.button
+                                           onClick={startUniversalPulse}
+                                           disabled={activeHeartbeats.length === 0}
+                                           whileHover={{ scale: 1.05 }}
+                                           whileTap={{ scale: 0.95 }}
+                                           className={`w-full px-8 py-4 border-4 font-black font-mono text-white text-xl disabled:opacity-50 ${
+                                               isPlaying 
+                                                   ? 'bg-red-600 hover:bg-red-700 border-red-300' 
+                                                   : 'bg-green-600 hover:bg-green-700 border-green-300'
+                                           }`}
+                                           style={{ boxShadow: '6px 6px 0px rgba(0,0,0,0.8)' }}
+                                       >
+                                           {isPlaying ? (
+                                               <>
+                                                   <VolumeX className="inline w-6 h-6 mr-2 animate-pulse" />
+                                                   STOP SYMPHONY
+                                               </>
+                                           ) : (
+                                               <>
+                                                   <Volume2 className="inline w-6 h-6 mr-2" />
+                                                   PLAY SYMPHONY ({activeHeartbeats.length})
+                                               </>
+                                           )}
+                                       </motion.button>
+                                       {activeHeartbeats.length === 0 && (
+                                           <p className="text-amber-400 font-mono text-xs text-center">
+                                               Tap hearts above to build your symphony
+                                           </p>
                                        )}
-                                    </motion.button>
+                                    </div>
                                 </div>
                             )}
                         </div>
