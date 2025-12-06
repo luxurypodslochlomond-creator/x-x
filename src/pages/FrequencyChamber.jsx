@@ -713,6 +713,7 @@ export default function FrequencyChamber() {
     const [showDeviceInfo, setShowDeviceInfo] = useState(false);
     const [showTimeSuggestion, setShowTimeSuggestion] = useState(false);
     const [userTimezone, setUserTimezone] = useState('');
+    const [openSections, setOpenSections] = useState({ mental: true }); // Default first section open
 
 
     // SEO
@@ -1381,17 +1382,39 @@ export default function FrequencyChamber() {
         </AnimatePresence>
       </div>
       
-      {/* PROTOCOL GRID - ORGANIZED BY CATEGORY */}
-      <div className="max-w-4xl mx-auto p-4 space-y-8">
+      {/* PROTOCOL GRID - ORGANIZED BY CATEGORY - COLLAPSIBLE */}
+      <div className="max-w-4xl mx-auto p-4 space-y-4">
         {PROTOCOL_SECTIONS.map((section) => (
           <div key={section.id}>
-            <div className="mb-4 border-l-4 pl-4" style={{ borderColor: section.color }}>
-              <h3 className="text-xl font-black font-mono" style={{ color: section.color }}>
-                {section.name}
-              </h3>
-              <p className="text-gray-500 text-sm font-mono">{section.description}</p>
-            </div>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+            <button
+              onClick={() => setOpenSections(prev => ({ ...prev, [section.id]: !prev[section.id] }))}
+              className="w-full border-4 bg-black p-4 hover:opacity-80 transition-all"
+              style={{ borderColor: section.color }}
+            >
+              <div className="flex items-center justify-between">
+                <div className="text-left">
+                  <h3 className="text-xl font-black font-mono" style={{ color: section.color }}>
+                    {section.name}
+                  </h3>
+                  <p className="text-gray-500 text-sm font-mono">{section.description}</p>
+                </div>
+                <span className="font-black text-xl ml-4" style={{ color: section.color }}>
+                  {openSections[section.id] ? '−' : '+'}
+                </span>
+              </div>
+            </button>
+
+            <AnimatePresence>
+              {openSections[section.id] && (
+                <motion.div
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: 'auto', opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="overflow-hidden"
+                >
+                  <div className="border-x-4 border-b-4 bg-black p-4" style={{ borderColor: section.color }}>
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
               {section.protocols.map((protocolId) => {
                 const protocol = PROTOCOLS[protocolId];
                 if (!protocol) return null;
@@ -1444,11 +1467,11 @@ export default function FrequencyChamber() {
                 </motion.button>
                 );
                 })}
-                </div>
+                    </div>
 
-                {/* EXPANDED INFO - BELOW GRID */}
-                <AnimatePresence>
-                  {section.protocols.some(pid => expandedInfo === pid) && (
+                    {/* EXPANDED INFO - BELOW GRID */}
+                    <AnimatePresence>
+                      {section.protocols.some(pid => expandedInfo === pid) && (
                     <motion.div
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: 'auto', opacity: 1 }}
@@ -1518,11 +1541,15 @@ export default function FrequencyChamber() {
                         );
                       })}
                     </motion.div>
-                  )}
-                </AnimatePresence>
-                </div>
-                ))}
-                </div>
+                      )}
+                    </AnimatePresence>
+                    </div>
+                    </motion.div>
+                    )}
+                    </AnimatePresence>
+                    </div>
+                    ))}
+                    </div>
       
       {/* ACTIVE SESSION */}
       <AnimatePresence>
