@@ -366,28 +366,27 @@ const EvidenceModal = ({ onClose }) => (
     initial={{ opacity: 0 }}
     animate={{ opacity: 1 }}
     exit={{ opacity: 0 }}
-    className="fixed inset-0 bg-black/95 backdrop-blur-sm z-[9999] overflow-y-auto"
+    className="fixed inset-0 bg-black/95 backdrop-blur-sm z-[9999] flex items-start justify-center p-4 pt-8 pb-20 overflow-y-auto"
     onClick={onClose}
   >
-    <div className="min-h-screen flex items-center justify-center p-4">
-      <motion.div
-        initial={{ scale: 0.9, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        exit={{ scale: 0.9, opacity: 0 }}
-        onClick={e => e.stopPropagation()}
-        className="bg-black border-4 border-cyan-500 p-4 md:p-6 max-w-2xl w-full"
-      >
-        <div className="flex justify-between items-start mb-4 md:mb-6">
-          <div className="flex items-center gap-2 md:gap-3">
-            <Shield className="w-6 h-6 md:w-8 md:h-8 text-cyan-400" />
-            <h3 className="text-xl md:text-2xl font-black font-mono text-cyan-400">THE SCIENCE</h3>
-          </div>
-          <button onClick={onClose} className="text-gray-400 hover:text-white">
-            <X size={24} />
-          </button>
+    <motion.div
+      initial={{ scale: 0.9, opacity: 0 }}
+      animate={{ scale: 1, opacity: 1 }}
+      exit={{ scale: 0.9, opacity: 0 }}
+      onClick={e => e.stopPropagation()}
+      className="bg-black border-4 border-cyan-500 p-4 md:p-6 max-w-2xl w-full"
+    >
+      <div className="flex justify-between items-start mb-4 md:mb-6">
+        <div className="flex items-center gap-2 md:gap-3">
+          <Shield className="w-6 h-6 md:w-8 md:h-8 text-cyan-400" />
+          <h3 className="text-xl md:text-2xl font-black font-mono text-cyan-400">THE SCIENCE</h3>
         </div>
+        <button onClick={onClose} className="text-gray-400 hover:text-white">
+          <X size={24} />
+        </button>
+      </div>
 
-        <div className="space-y-4 md:space-y-6">
+      <div className="space-y-4 md:space-y-6">
           {/* MIT RESEARCH */}
           <div className="bg-black border-2 border-green-500/50 p-4">
           <div className="flex items-center gap-2 mb-3">
@@ -460,7 +459,6 @@ const EvidenceModal = ({ onClose }) => (
           </div>
         </div>
       </motion.div>
-    </div>
   </motion.div>
 );
 
