@@ -115,6 +115,16 @@ export default function UniversalPulsePage() {
                 return [...prev, heartbeatId];
             }
         });
+        
+        // Auto-start if not playing
+        if (!isPlaying) {
+            setTimeout(() => {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                const ctx = new AudioContext();
+                audioContextRef.current = ctx;
+                setIsPlaying(true);
+            }, 100);
+        }
     };
 
     // Generate music from active heartbeats
