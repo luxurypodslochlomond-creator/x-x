@@ -1,16 +1,19 @@
-import React, { useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
+import React, { useState, useEffect } from 'react';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { base44 } from '@/api/base44Client';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import {
-  Music, Heart, Play, Pause, Disc3, Waves, Zap, Globe, Search, Filter, Share2, ListMusic, User, Users, Guitar, Sparkles
+  Music, Radio as RadioIcon, Heart, Play, Pause, SkipForward, SkipBack,
+  Volume2, Disc3, Headphones, Waves, Zap, Globe, Search, Filter,
+  Download, Share2, ListMusic, User, Users, Guitar, Piano, Sparkles
 } from 'lucide-react';
 import { COOLASFUCKHeart, COOLASFUCKMusicNote, COOLASFUCKWaves, COOLASFUCKP2P } from '@/components/shared/COOLASFUCKIcon';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useAudio } from '@/components/shared/AudioProvider';
-import { useNavigate } from 'react-router-dom';
+import P51Symbol from '@/components/shared/P51Symbol';
+import { Link, useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import BiometricHealing from '@/components/radio/BiometricHealing';
 
@@ -22,6 +25,25 @@ export default function RadioPage() {
 
   const { currentTrack, isPlaying, play, pause, next, previous, currentTime } = useAudio();
   const navigate = useNavigate();
+  
+  // SEO
+  useEffect(() => {
+      document.title = 'Radio51 | Lossless Music - Artists Earn 90%';
+      const metaDesc = document.querySelector('meta[name="description"]') || document.createElement('meta');
+      metaDesc.name = 'description';
+      metaDesc.content = 'Stream lossless quality music for free. Artists keep 90% of revenue. Zero ads. FLAC, WAV, MP3-320. Fair music streaming.';
+      if (!metaDesc.parentNode) document.head.appendChild(metaDesc);
+      
+      const ogTitle = document.querySelector('meta[property="og:title"]') || document.createElement('meta');
+      ogTitle.setAttribute('property', 'og:title');
+      ogTitle.content = 'Radio51 - Lossless Music, Artists Earn 90%';
+      if (!ogTitle.parentNode) document.head.appendChild(ogTitle);
+      
+      const ogDesc = document.querySelector('meta[property="og:description"]') || document.createElement('meta');
+      ogDesc.setAttribute('property', 'og:description');
+      ogDesc.content = 'Free lossless music streaming. Artists keep 90%. Zero extraction. Zero ads. Just music.';
+      if (!ogDesc.parentNode) document.head.appendChild(ogDesc);
+  }, []);
 
 
 
@@ -307,10 +329,14 @@ Listen free at UF51.LOVE
                             onClick={() => handleShare(track)}
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
-                            className="w-12 h-12 bg-green-600 hover:bg-green-700 border-2 border-green-400 flex items-center justify-center"
+                            className="w-12 h-12 bg-green-600 hover:bg-green-700 border-4 border-green-400 flex items-center justify-center transition-all"
+                            style={{ 
+                              boxShadow: '4px 4px 0px rgba(34, 197, 94, 0.5)',
+                              imageRendering: 'pixelated'
+                            }}
                             title="Share"
                           >
-                            <Share2 className="w-5 h-5 text-white" />
+                            <Share2 className="w-5 h-5 text-white" strokeWidth={3} style={{ filter: 'drop-shadow(0 0 4px #22c55e)' }} />
                           </motion.button>
                         </div>
                       </div>
