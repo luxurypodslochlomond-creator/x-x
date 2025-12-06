@@ -159,7 +159,7 @@ const PROTOCOLS = {
       primary: 20,
       secondary: 40,
       carrier: 300,
-      breathRate: 15,
+      breathRate: 8,
       noiseType: 'white',
       noiseLevel: 0.03
     }
