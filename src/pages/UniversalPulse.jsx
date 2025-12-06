@@ -99,11 +99,11 @@ export default function UniversalPulsePage() {
         }
     };
 
-    // Start HRV scanning (simplified - just join with simulated data)
+    // Start HRV scanning (SIMULATED - not real heartbeat measurement)
     const startHeartScan = async () => {
         setIsScanning(true);
         try {
-            // Simulate HRV detection
+            // SIMULATED heartbeat - random BPM for demo purposes
             const simulatedBPM = 60 + Math.random() * 40; // 60-100 BPM
             const simulatedCoherence = 50 + Math.random() * 50; // 50-100 coherence
 
@@ -133,7 +133,7 @@ export default function UniversalPulsePage() {
                 last_ping: new Date().toISOString()
             });
 
-            console.log('Heartbeat joined:', result);
+            console.log('Heartbeat joined (simulated):', result);
             
         } catch (error) {
             console.error('Join error:', error);
@@ -220,10 +220,16 @@ export default function UniversalPulsePage() {
             cancelAnimationFrame(animationFrameRef.current);
         }
         
-        // Stop all oscillators
+        // Stop all oscillators (including multi-layer music)
         Object.values(oscillatorsRef.current).forEach(item => {
             if (item.osc) {
                 try { item.osc.stop(); } catch(e) {}
+            }
+            if (item.melodyOsc) {
+                try { item.melodyOsc.stop(); } catch(e) {}
+            }
+            if (item.subOsc) {
+                try { item.subOsc.stop(); } catch(e) {}
             }
             if (item.interval) clearInterval(item.interval);
         });
@@ -254,48 +260,94 @@ export default function UniversalPulsePage() {
                 if (item.osc) {
                     try { item.osc.stop(); } catch(e) {}
                 }
+                if (item.melodyOsc) {
+                    try { item.melodyOsc.stop(); } catch(e) {}
+                }
+                if (item.subOsc) {
+                    try { item.subOsc.stop(); } catch(e) {}
+                }
                 if (item.interval) clearInterval(item.interval);
                 delete oscillatorsRef.current[id];
             }
         });
 
-        // Add oscillators for new active heartbeats
-        activeHeartbeatData.forEach(heartbeat => {
+        // Add MUSICAL oscillators for new active heartbeats
+        activeHeartbeatData.forEach((heartbeat, index) => {
             if (!oscillatorsRef.current[heartbeat.id]) {
-                const freq = 528 + (heartbeat.bpm - 70) * 2;
-                const osc = ctx.createOscillator();
-                const gain = ctx.createGain();
-                const panner = ctx.createStereoPanner();
-
-                osc.connect(gain);
-                gain.connect(panner);
-                panner.connect(analyser); // Connect to analyser
-
-                osc.frequency.value = freq;
-                osc.type = 'sine';
-                panner.pan.value = (heartbeat.hrv_coherence - 50) / 50;
-                gain.gain.value = volume * 0.3 / Math.max(activeHeartbeatData.length, 1);
-
                 const pulseInterval = 60000 / heartbeat.bpm;
-                const pulseGain = () => {
-                    if (!gain.gain) return;
+                
+                // BASS - deep pulsing root note based on BPM
+                const bassFreq = 55 + (heartbeat.bpm - 60) * 0.5; // A1 to C2 range
+                const bassOsc = ctx.createOscillator();
+                const bassGain = ctx.createGain();
+                bassOsc.connect(bassGain);
+                bassGain.connect(analyser);
+                bassOsc.frequency.value = bassFreq;
+                bassOsc.type = 'sine';
+                bassGain.gain.value = 0;
+                
+                // MELODY - 528Hz healing base with harmonic variation
+                const melodyFreq = 528 + (index * 111); // Spread across harmonics
+                const melodyOsc = ctx.createOscillator();
+                const melodyGain = ctx.createGain();
+                const melodyPanner = ctx.createStereoPanner();
+                melodyOsc.connect(melodyGain);
+                melodyGain.connect(melodyPanner);
+                melodyPanner.connect(analyser);
+                melodyOsc.frequency.value = melodyFreq;
+                melodyOsc.type = 'sine';
+                melodyPanner.pan.value = (heartbeat.hrv_coherence - 50) / 50;
+                melodyGain.gain.value = 0;
+                
+                // SUB-HARMONIC - adds warmth
+                const subOsc = ctx.createOscillator();
+                const subGain = ctx.createGain();
+                subOsc.connect(subGain);
+                subGain.connect(analyser);
+                subOsc.frequency.value = melodyFreq / 2;
+                subOsc.type = 'sine';
+                subGain.gain.value = 0;
+                
+                // PULSE RHYTHM - makes it musical
+                const basePulse = () => {
+                    if (!bassGain.gain) return;
                     const now = ctx.currentTime;
+                    const baseVol = volume * 0.4 / Math.max(activeHeartbeatData.length, 1);
                     try {
-                        gain.gain.cancelScheduledValues(now);
-                        gain.gain.setValueAtTime(gain.gain.value, now);
-                        gain.gain.linearRampToValueAtTime(gain.gain.value * 3, now + 0.1);
-                        gain.gain.linearRampToValueAtTime(gain.gain.value, now + 0.3);
+                        // Bass pulse
+                        bassGain.gain.cancelScheduledValues(now);
+                        bassGain.gain.setValueAtTime(0, now);
+                        bassGain.gain.linearRampToValueAtTime(baseVol * 2, now + 0.1);
+                        bassGain.gain.exponentialRampToValueAtTime(0.001, now + 0.4);
+                        
+                        // Melody swell
+                        melodyGain.gain.cancelScheduledValues(now);
+                        melodyGain.gain.setValueAtTime(0, now);
+                        melodyGain.gain.linearRampToValueAtTime(baseVol * 0.8, now + 0.2);
+                        melodyGain.gain.linearRampToValueAtTime(baseVol * 0.3, now + 0.5);
+                        
+                        // Sub harmonic
+                        subGain.gain.cancelScheduledValues(now);
+                        subGain.gain.setValueAtTime(0, now);
+                        subGain.gain.linearRampToValueAtTime(baseVol * 0.5, now + 0.15);
+                        subGain.gain.exponentialRampToValueAtTime(0.001, now + 0.6);
                     } catch(e) {}
                 };
 
-                osc.start();
-                pulseGain(); // Immediate first pulse
+                bassOsc.start();
+                melodyOsc.start();
+                subOsc.start();
+                basePulse(); // Immediate first pulse
                 
                 oscillatorsRef.current[heartbeat.id] = {
-                    osc,
-                    gain,
-                    panner,
-                    interval: setInterval(pulseGain, pulseInterval)
+                    osc: bassOsc,
+                    gain: bassGain,
+                    melodyOsc,
+                    melodyGain,
+                    subOsc,
+                    subGain,
+                    panner: melodyPanner,
+                    interval: setInterval(basePulse, pulseInterval)
                 };
             }
         });
@@ -436,7 +488,10 @@ export default function UniversalPulsePage() {
                                           ⚠️ YOU HAVEN'T JOINED YET
                                       </p>
                                       <p className="text-amber-300 font-mono text-xs mt-2">
-                                          The 72 BPM heart below is AI51 (demo). Join to add YOUR heartbeat!
+                                          The 72 BPM heart below is AI51 (demo). Join to add a SIMULATED heartbeat with your location!
+                                      </p>
+                                      <p className="text-amber-200 font-mono text-xs mt-2 italic">
+                                          Note: This generates random BPM (60-100), not real heartbeat measurement yet.
                                       </p>
                                   </div>
 
@@ -614,12 +669,13 @@ export default function UniversalPulsePage() {
                             HOW IT WORKS
                         </h2>
                         <div className="space-y-3 text-cyan-100 font-mono text-sm">
-                            <p><span className="text-pink-400 font-black">1.</span> Tap hearts to add/remove from the symphony - build YOUR mix</p>
-                            <p><span className="text-pink-400 font-black">2.</span> Each heartbeat becomes a unique frequency layer (528Hz + BPM)</p>
-                            <p><span className="text-pink-400 font-black">3.</span> Faster hearts = higher tones. Slower = deeper bass.</p>
-                            <p><span className="text-pink-400 font-black">4.</span> Coherence controls stereo pan - high coherence goes right</p>
-                            <p><span className="text-pink-400 font-black">5.</span> The music pulses at each heart's rhythm - they sync naturally</p>
-                            <p><span className="text-pink-400 font-black">6.</span> Press PLAY to hear your selected hearts beating as one symphony</p>
+                            <p><span className="text-pink-400 font-black">1.</span> Tap hearts to add/remove - each heart = unique musical layer</p>
+                            <p><span className="text-pink-400 font-black">2.</span> Each BPM creates bass + melody + harmonics (real music!)</p>
+                            <p><span className="text-pink-400 font-black">3.</span> Faster hearts = higher melodies. Slower = deeper bass.</p>
+                            <p><span className="text-pink-400 font-black">4.</span> Coherence controls stereo position (left/right)</p>
+                            <p><span className="text-pink-400 font-black">5.</span> Hearts pulse together creating ambient healing symphony</p>
+                            <p><span className="text-pink-400 font-black">6.</span> Built on 528Hz healing frequency + your BPM rhythms</p>
+                            <p className="text-amber-300 text-xs italic mt-2">Note: Heartbeats are simulated (random 60-100 BPM), not real HRV measurement yet.</p>
                         </div>
                         <div className="bg-black border-2 border-pink-500 p-4 mt-4">
                             <p className="text-pink-300 font-black font-mono text-center">
