@@ -305,11 +305,16 @@ const BreathingPacer = ({ breathRate, isActive, color }) => {
       const cycleProgress = cyclePos / cycleDuration;
       const smoothPhase = (Math.sin(cycleProgress * Math.PI * 2 - Math.PI / 2) + 1) / 2;
       setPhase(smoothPhase);
-      
-      if (smoothPhase > 0.5) {
-        setInstruction(smoothPhase > 0.9 ? 'HOLD' : 'BREATHE IN');
+
+      // Natural breathing cycle: IN → HOLD TOP → OUT → REST BOTTOM
+      if (cycleProgress < 0.4) {
+        setInstruction('BREATHE IN');
+      } else if (cycleProgress < 0.5) {
+        setInstruction('HOLD');
+      } else if (cycleProgress < 0.9) {
+        setInstruction('BREATHE OUT');
       } else {
-        setInstruction(smoothPhase < 0.1 ? 'REST' : 'BREATHE OUT');
+        setInstruction('REST');
       }
     }, 50);
     
