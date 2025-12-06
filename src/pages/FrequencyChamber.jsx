@@ -709,9 +709,7 @@ export default function FrequencyChamber() {
     const [emergencyMode, setEmergencyMode] = useState(false);
     const [panicDetected, setPanicDetected] = useState(false);
     const lastHRVRef = useRef(null);
-    const [showEvidence, setShowEvidence] = useState(false);
-    const [showDeviceInfo, setShowDeviceInfo] = useState(false);
-    const [showTimeSuggestion, setShowTimeSuggestion] = useState(true);
+
 
     // SEO
     useEffect(() => {
@@ -1169,10 +1167,10 @@ export default function FrequencyChamber() {
         </div>
       </div>
       
-      {/* WHY THIS WORKS - EVIDENCE - COLLAPSIBLE */}
+      {/* WHY THIS WORKS - EVIDENCE */}
       <div className="max-w-4xl mx-auto p-4">
-        <div className="border-4 border-cyan-500 bg-black">
-          <div className="flex items-center justify-between p-4 border-b-2 border-cyan-500/30">
+        <div className="border-4 border-cyan-500 bg-black p-4">
+          <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-2">
               <Shield className="w-5 h-5 text-cyan-400" />
               <h3 className="text-cyan-400 font-black font-mono text-sm">EVIDENCE-BASED</h3>
@@ -1184,85 +1182,40 @@ export default function FrequencyChamber() {
               Why?
             </button>
           </div>
-          <button
-            onClick={() => setShowEvidence(!showEvidence)}
-            className="w-full p-3 hover:bg-cyan-500/10 transition-all flex items-center justify-center gap-2"
-          >
-            <span className="text-cyan-400 font-mono text-xs">
-              {showEvidence ? 'Hide details' : 'Show details'}
-            </span>
-            <span className="text-cyan-400 font-black text-xl">{showEvidence ? '−' : '+'}</span>
-          </button>
+          <div className="space-y-2 text-xs font-mono text-gray-400">
+            <div className="flex items-center gap-2">
+              <COOLASFUCKBrain size={16} animate={false} />
+              <span>MIT research • 40Hz neuroplasticity</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <COOLASFUCKHeart size={16} animate={false} />
+              <span>HeartMath • Vagal tone activation</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <COOLASFUCKMoon size={16} animate={false} />
+              <span>Sleep science • Delta wave studies</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <COOLASFUCKShield size={16} animate={false} />
+              <span>Ancient wisdom • 2,500+ years proven</span>
+            </div>
+          </div>
         </div>
 
-        <AnimatePresence>
-          {showEvidence && (
-            <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: 'auto', opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="overflow-hidden"
-            >
-              <div className="border-x-4 border-b-4 border-cyan-500 bg-black p-4">
-                <div className="space-y-2 text-xs font-mono text-gray-400">
-                  <div className="flex items-center gap-2">
-                    <COOLASFUCKBrain size={16} animate={false} />
-                    <span>MIT research • 40Hz neuroplasticity</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <COOLASFUCKHeart size={16} animate={false} />
-                    <span>HeartMath • Vagal tone activation</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <COOLASFUCKMoon size={16} animate={false} />
-                    <span>Sleep science • Delta wave studies</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <COOLASFUCKShield size={16} animate={false} />
-                    <span>Ancient wisdom • 2,500+ years proven</span>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* YOUR DEVICE = HEALING CHAMBER - COLLAPSIBLE */}
-        <button
-          onClick={() => setShowDeviceInfo(!showDeviceInfo)}
-          className="w-full mt-4 border-4 border-pink-500 bg-black p-4 hover:bg-pink-500/10 transition-all"
-        >
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <COOLASFUCKWaves size={20} animate={true} />
-              <h3 className="text-pink-400 font-black font-mono text-sm">YOUR DEVICE = HEALING CHAMBER</h3>
-            </div>
-            <span className="text-pink-400 font-black text-xl">{showDeviceInfo ? '−' : '+'}</span>
+        {/* YOUR DEVICE = HEALING CHAMBER */}
+        <div className="mt-4 border-4 border-pink-500 bg-black p-4">
+          <div className="flex items-center gap-2 mb-2">
+            <COOLASFUCKWaves size={20} animate={true} />
+            <h3 className="text-pink-400 font-black font-mono text-sm">YOUR DEVICE = HEALING CHAMBER</h3>
           </div>
-        </button>
-
-        <AnimatePresence>
-          {showDeviceInfo && (
-            <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: 'auto', opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="overflow-hidden"
-            >
-              <div className="border-x-4 border-b-4 border-pink-500 bg-black p-4">
-                <div className="space-y-1 text-xs font-mono text-gray-400">
-                  <p>✓ Binaural beats (different Hz each ear)</p>
-                  <p>✓ Visual entrainment (border pulses at healing Hz)</p>
-                  <p>✓ Haptic feedback (synced to breath)</p>
-                  <p>✓ HRV biofeedback (watch yourself heal)</p>
-                  <p className="text-pink-400 mt-2">Every phone → Free healing center</p>
-                </div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+          <div className="space-y-1 text-xs font-mono text-gray-400">
+            <p>✓ Binaural beats (different Hz each ear)</p>
+            <p>✓ Visual entrainment (border pulses at healing Hz)</p>
+            <p>✓ Haptic feedback (synced to breath)</p>
+            <p>✓ HRV biofeedback (watch yourself heal)</p>
+            <p className="text-pink-400 mt-2">Every phone → Free healing center</p>
+          </div>
+        </div>
       </div>
 
       {/* EMERGENCY MODE BANNER */}
