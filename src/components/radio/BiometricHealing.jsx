@@ -238,15 +238,20 @@ export default function BiometricHealing() {
             
             if (videoRef.current) {
                 videoRef.current.srcObject = stream;
-                videoRef.current.play();
+                await videoRef.current.play();
                 
-                const track = stream.getVideoTracks()[0];
-                const capabilities = track.getCapabilities?.();
-                if (capabilities?.torch) {
-                    await track.applyConstraints({ advanced: [{ torch: true }] });
-                }
-                
-                videoRef.current.onloadeddata = () => {
+                videoRef.current.onloadeddata = async () => {
+                    // Enable torch/flashlight after video loads
+                    try {
+                        const track = stream.getVideoTracks()[0];
+                        const capabilities = track.getCapabilities?.();
+                        if (capabilities?.torch) {
+                            await track.applyConstraints({ advanced: [{ torch: true }] });
+                        }
+                    } catch (e) {
+                        console.log('Torch not available:', e);
+                    }
+                    
                     setTimeout(() => setIsCalibrating(false), 3000);
                     analyzeHeartRate();
                 };
