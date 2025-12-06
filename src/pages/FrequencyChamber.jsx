@@ -689,81 +689,14 @@ const EvidenceModal = ({ onClose }) => (
   </div>
 );
 
-// === INFO MODAL ===
-const InfoModal = ({ protocol, onClose }) => (
-  <motion.div
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 1 }}
-    exit={{ opacity: 0 }}
-    className="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 overflow-y-auto"
-    onClick={onClose}
-  >
-    <div className="min-h-screen flex items-center justify-center p-4 py-20">
-      <motion.div
-        initial={{ scale: 0.9, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        exit={{ scale: 0.9, opacity: 0 }}
-        onClick={e => e.stopPropagation()}
-        className="bg-black border-4 p-6 max-w-md w-full"
-        style={{ borderColor: protocol.color }}
-      >
-      <div className="flex justify-between items-start mb-4">
-        <div className="flex items-center gap-3">
-          <PixelIcon icon={protocol.icon} color={protocol.color} size={32} />
-          <h3 className="text-xl font-black text-white">{protocol.name}</h3>
-        </div>
-        <button onClick={onClose} className="text-gray-400 hover:text-white">
-          <X size={24} />
-        </button>
-      </div>
-      
-      <div className="space-y-4">
-        <div>
-          <p className="text-gray-400 text-xs font-mono mb-1">THE SCIENCE:</p>
-          <p className="text-white text-sm">{protocol.science}</p>
-        </div>
-        
-        <div>
-          <p className="text-gray-400 text-xs font-mono mb-1">SOURCES:</p>
-          <ul className="space-y-1">
-            {protocol.sources.map((source, i) => (
-              <li key={i} className="text-cyan-400 text-sm font-mono">• {source}</li>
-            ))}
-          </ul>
-        </div>
-        
-        {protocol.ancientWisdom && (
-          <div>
-            <p className="text-gray-400 text-xs font-mono mb-1">ANCIENT WISDOM:</p>
-            <p className="text-amber-400 text-sm italic">{protocol.ancientWisdom}</p>
-          </div>
-        )}
-        
-        <div>
-          <p className="text-gray-400 text-xs font-mono mb-1">FREQUENCIES:</p>
-          <div className="grid grid-cols-2 gap-2 text-sm">
-            <div className="bg-white/5 p-2 border border-white/10">
-              <span className="text-gray-400">Primary:</span>
-              <span className="text-white font-mono ml-2">{protocol.config.primary}Hz</span>
-            </div>
-            <div className="bg-white/5 p-2 border border-white/10">
-              <span className="text-gray-400">Secondary:</span>
-              <span className="text-white font-mono ml-2">{protocol.config.secondary}Hz</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </motion.div>
-    </div>
-  </motion.div>
-);
+
 
 // === MAIN COMPONENT ===
 export default function FrequencyChamber() {
     const [selectedProtocol, setSelectedProtocol] = useState(null);
     const [isPlaying, setIsPlaying] = useState(false);
     const [volume, setVolume] = useState(0.5);
-    const [showInfo, setShowInfo] = useState(null);
+    const [expandedInfo, setExpandedInfo] = useState(null);
     const [showEvidenceModal, setShowEvidenceModal] = useState(false);
     const [currentHz, setCurrentHz] = useState(0);
     const [sessionTime, setSessionTime] = useState(0);
@@ -1366,52 +1299,106 @@ export default function FrequencyChamber() {
                 const protocol = PROTOCOLS[protocolId];
                 if (!protocol) return null;
                 return (
-            <motion.button
-              key={protocol.id}
-              onClick={() => handleProtocolSelect(protocol.id)}
-              className={`relative p-6 border-4 transition-all ${
-                selectedProtocol?.id === protocol.id ? 'bg-white/10' : 'bg-black hover:bg-white/5'
-              }`}
-              style={{
-                borderColor: selectedProtocol?.id === protocol.id ? protocol.color : '#333',
-                boxShadow: selectedProtocol?.id === protocol.id ? `0 0 30px ${protocol.color}40` : 'none'
-              }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <button
-                onClick={(e) => { e.stopPropagation(); setShowInfo(protocol); }}
-                className="absolute top-2 right-2 text-gray-500 hover:text-white"
+            <div key={protocol.id} className="space-y-2">
+              <motion.button
+                onClick={() => handleProtocolSelect(protocol.id)}
+                className={`relative p-6 border-4 transition-all w-full ${
+                  selectedProtocol?.id === protocol.id ? 'bg-white/10' : 'bg-black hover:bg-white/5'
+                }`}
+                style={{
+                  borderColor: selectedProtocol?.id === protocol.id ? protocol.color : '#333',
+                  boxShadow: selectedProtocol?.id === protocol.id ? `0 0 30px ${protocol.color}40` : 'none'
+                }}
+                whileTap={{ scale: 0.98 }}
               >
-                <Info size={16} />
-              </button>
-              
-              <div className="flex flex-col items-center gap-3">
-                <PixelIcon 
-                  icon={protocol.icon} 
-                  color={selectedProtocol?.id === protocol.id ? protocol.color : '#666'} 
-                  size={40}
-                  animate={selectedProtocol?.id === protocol.id && isPlaying}
-                />
-                <p 
-                  className="font-black font-mono text-sm"
-                  style={{ color: selectedProtocol?.id === protocol.id ? protocol.color : '#888' }}
+                <button
+                  onClick={(e) => { e.stopPropagation(); setExpandedInfo(expandedInfo === protocol.id ? null : protocol.id); }}
+                  className="absolute top-2 right-2 text-gray-500 hover:text-white"
                 >
-                  {protocol.name}
-                </p>
-                <p className="text-gray-500 text-xs text-center">
-                  {protocol.description}
-                </p>
-              </div>
-              
-              {protocol.id === suggestedProtocol && (
-                <div 
-                  className="absolute -top-2 -right-2 px-2 py-1 text-xs font-bold"
-                  style={{ backgroundColor: protocol.color, color: 'black' }}
-                >
-                  NOW
+                  <Info size={16} />
+                </button>
+
+                <div className="flex flex-col items-center gap-3">
+                  <PixelIcon 
+                    icon={protocol.icon} 
+                    color={selectedProtocol?.id === protocol.id ? protocol.color : '#666'} 
+                    size={40}
+                    animate={selectedProtocol?.id === protocol.id && isPlaying}
+                  />
+                  <p 
+                    className="font-black font-mono text-sm"
+                    style={{ color: selectedProtocol?.id === protocol.id ? protocol.color : '#888' }}
+                  >
+                    {protocol.name}
+                  </p>
+                  <p className="text-gray-500 text-xs text-center">
+                    {protocol.description}
+                  </p>
                 </div>
+
+                {protocol.id === suggestedProtocol && (
+                  <div 
+                    className="absolute -top-2 -right-2 px-2 py-1 text-xs font-bold"
+                    style={{ backgroundColor: protocol.color, color: 'black' }}
+                  >
+                    NOW
+                  </div>
                 )}
-                </motion.button>
+              </motion.button>
+
+              {/* INLINE INFO - EXPANDABLE */}
+              <AnimatePresence>
+                {expandedInfo === protocol.id && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="overflow-hidden"
+                  >
+                    <div 
+                      className="bg-black border-4 p-4 space-y-3"
+                      style={{ borderColor: protocol.color }}
+                    >
+                      <div>
+                        <p className="text-gray-400 text-xs font-mono mb-1">THE SCIENCE:</p>
+                        <p className="text-white text-sm">{protocol.science}</p>
+                      </div>
+
+                      <div>
+                        <p className="text-gray-400 text-xs font-mono mb-1">SOURCES:</p>
+                        <ul className="space-y-1">
+                          {protocol.sources.map((source, i) => (
+                            <li key={i} className="text-cyan-400 text-sm font-mono">• {source}</li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      {protocol.ancientWisdom && (
+                        <div>
+                          <p className="text-gray-400 text-xs font-mono mb-1">ANCIENT WISDOM:</p>
+                          <p className="text-amber-400 text-sm italic">{protocol.ancientWisdom}</p>
+                        </div>
+                      )}
+
+                      <div>
+                        <p className="text-gray-400 text-xs font-mono mb-1">FREQUENCIES:</p>
+                        <div className="grid grid-cols-2 gap-2 text-sm">
+                          <div className="bg-white/5 p-2 border border-white/10">
+                            <span className="text-gray-400">Primary:</span>
+                            <span className="text-white font-mono ml-2">{protocol.config.primary}Hz</span>
+                          </div>
+                          <div className="bg-white/5 p-2 border border-white/10">
+                            <span className="text-gray-400">Secondary:</span>
+                            <span className="text-white font-mono ml-2">{protocol.config.secondary}Hz</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
                 );
                 })}
                 </div>
@@ -1678,7 +1665,6 @@ Try it: https://uf51.love/FrequencyChamber`;
       </div>
       
       <AnimatePresence>
-        {showInfo && <InfoModal protocol={showInfo} onClose={() => setShowInfo(null)} />}
         {showEvidenceModal && <EvidenceModal onClose={() => setShowEvidenceModal(false)} />}
       </AnimatePresence>
     </div>
