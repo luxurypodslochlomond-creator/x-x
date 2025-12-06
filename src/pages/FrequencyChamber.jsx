@@ -388,8 +388,8 @@ const EvidenceModal = ({ onClose }) => (
         </div>
 
         <div className="space-y-4 md:space-y-6">
-        {/* MIT RESEARCH */}
-        <div className="bg-black border-2 border-green-500/50 p-4">
+          {/* MIT RESEARCH */}
+          <div className="bg-black border-2 border-green-500/50 p-4">
           <div className="flex items-center gap-2 mb-3">
             <COOLASFUCKBrain size={24} animate={false} />
             <h4 className="text-green-400 font-black font-mono">MIT RESEARCH • 40Hz GAMMA</h4>
@@ -400,10 +400,10 @@ const EvidenceModal = ({ onClose }) => (
             <p><strong className="text-white">Why it works:</strong> Gamma oscillations synchronize neurons, clearing toxic proteins and enhancing cognitive function.</p>
             <p className="text-cyan-400 text-xs font-mono">Source: Nature, MIT Picower Institute</p>
           </div>
-        </div>
+          </div>
 
-        {/* HEARTMATH */}
-        <div className="bg-black border-2 border-pink-500/50 p-4">
+          {/* HEARTMATH */}
+          <div className="bg-black border-2 border-pink-500/50 p-4">
           <div className="flex items-center gap-2 mb-3">
             <COOLASFUCKHeart size={24} animate={false} />
             <h4 className="text-pink-400 font-black font-mono">HEARTMATH • VAGAL TONE</h4>
@@ -415,10 +415,10 @@ const EvidenceModal = ({ onClose }) => (
             <p><strong className="text-white">Why it works:</strong> Slow breathing synchronizes your heart and brain rhythms, triggering the parasympathetic nervous system (rest & digest mode).</p>
             <p className="text-cyan-400 text-xs font-mono">Source: HeartMath Institute, Porges Polyvagal Theory</p>
           </div>
-        </div>
+          </div>
 
-        {/* SLEEP SCIENCE */}
-        <div className="bg-black border-2 border-purple-500/50 p-4">
+          {/* SLEEP SCIENCE */}
+          <div className="bg-black border-2 border-purple-500/50 p-4">
           <div className="flex items-center gap-2 mb-3">
             <COOLASFUCKMoon size={24} animate={false} />
             <h4 className="text-purple-400 font-black font-mono">SLEEP SCIENCE • DELTA WAVES</h4>
@@ -430,10 +430,10 @@ const EvidenceModal = ({ onClose }) => (
             <p><strong className="text-white">Why it works:</strong> Pink noise mimics natural sounds (rain, wind) that our brains evolved to find calming. Delta entrainment guides your brain into deep sleep states.</p>
             <p className="text-cyan-400 text-xs font-mono">Source: Nature, Northwestern University, Sleep Research Society</p>
           </div>
-        </div>
+          </div>
 
-        {/* ANCIENT WISDOM */}
-        <div className="bg-black border-2 border-amber-500/50 p-4">
+          {/* ANCIENT WISDOM */}
+          <div className="bg-black border-2 border-amber-500/50 p-4">
           <div className="flex items-center gap-2 mb-3">
             <COOLASFUCKShield size={24} animate={false} />
             <h4 className="text-amber-400 font-black font-mono">ANCIENT WISDOM • 2,500+ YEARS</h4>
@@ -445,10 +445,10 @@ const EvidenceModal = ({ onClose }) => (
             <p><strong className="text-white">Why it matters:</strong> These traditions discovered through experience what science now proves with instruments. The frequencies work because they're tuned to our nervous system.</p>
             <p className="text-cyan-400 text-xs font-mono">Sources: Ethnomusicology journals, neuroscience of meditation</p>
           </div>
-        </div>
+          </div>
 
-        {/* HOW TO USE */}
-        <div className="bg-cyan-900/20 border-2 border-cyan-500/50 p-4">
+          {/* HOW TO USE */}
+          <div className="bg-cyan-900/20 border-2 border-cyan-500/50 p-4">
           <h4 className="text-cyan-400 font-black font-mono mb-2">HOW TO USE THIS</h4>
           <ul className="space-y-1 text-sm text-gray-300">
             <li>• Start with 10-15 minutes daily</li>
@@ -457,6 +457,7 @@ const EvidenceModal = ({ onClose }) => (
             <li>• Consistency matters more than duration</li>
             <li>• Trust the process - effects build over time</li>
           </ul>
+          </div>
         </div>
       </motion.div>
     </div>
