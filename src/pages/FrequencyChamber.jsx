@@ -1171,26 +1171,29 @@ export default function FrequencyChamber() {
       
       {/* WHY THIS WORKS - EVIDENCE - COLLAPSIBLE */}
       <div className="max-w-4xl mx-auto p-4">
-        <button
-          onClick={() => setShowEvidence(!showEvidence)}
-          className="w-full border-4 border-cyan-500 bg-black p-4 hover:bg-cyan-500/10 transition-all"
-        >
-          <div className="flex items-center justify-between">
+        <div className="border-4 border-cyan-500 bg-black">
+          <div className="flex items-center justify-between p-4 border-b-2 border-cyan-500/30">
             <div className="flex items-center gap-2">
               <Shield className="w-5 h-5 text-cyan-400" />
               <h3 className="text-cyan-400 font-black font-mono text-sm">EVIDENCE-BASED</h3>
             </div>
-            <div className="flex items-center gap-2">
-              <button 
-                onClick={(e) => { e.stopPropagation(); setShowEvidenceModal(true); }}
-                className="text-cyan-400 hover:text-cyan-300 font-mono text-xs underline"
-              >
-                Why?
-              </button>
-              <span className="text-cyan-400 font-black text-xl">{showEvidence ? '−' : '+'}</span>
-            </div>
+            <button 
+              onClick={() => setShowEvidenceModal(true)}
+              className="text-cyan-400 hover:text-cyan-300 font-mono text-xs underline"
+            >
+              Why?
+            </button>
           </div>
-        </button>
+          <button
+            onClick={() => setShowEvidence(!showEvidence)}
+            className="w-full p-3 hover:bg-cyan-500/10 transition-all flex items-center justify-center gap-2"
+          >
+            <span className="text-cyan-400 font-mono text-xs">
+              {showEvidence ? 'Hide details' : 'Show details'}
+            </span>
+            <span className="text-cyan-400 font-black text-xl">{showEvidence ? '−' : '+'}</span>
+          </button>
+        </div>
 
         <AnimatePresence>
           {showEvidence && (
@@ -1319,22 +1322,14 @@ export default function FrequencyChamber() {
         </div>
       )}
 
-      {/* TIME SUGGESTION - COLLAPSIBLE */}
+      {/* TIME SUGGESTION */}
       <div className="max-w-4xl mx-auto p-4">
-        <button
-          onClick={() => setShowTimeSuggestion(!showTimeSuggestion)}
-          className="w-full bg-cyan-900/20 border-2 border-cyan-500/50 p-3 hover:bg-cyan-900/30 transition-all"
-        >
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3 flex-1">
-              <Clock className="w-5 h-5 text-cyan-400" />
-              <p className="text-cyan-300 text-sm font-mono">
-                Based on time of day, we suggest: <strong className="text-white">{PROTOCOLS[suggestedProtocol].name}</strong>
-              </p>
-            </div>
-            <span className="text-cyan-400 font-black text-xl ml-2">{showTimeSuggestion ? '−' : '+'}</span>
-          </div>
-        </button>
+        <div className="bg-cyan-900/20 border-2 border-cyan-500/50 p-3 flex items-center gap-3">
+          <Clock className="w-5 h-5 text-cyan-400" />
+          <p className="text-cyan-300 text-sm font-mono">
+            Based on time of day, we suggest: <strong className="text-white">{PROTOCOLS[suggestedProtocol].name}</strong>
+          </p>
+        </div>
       </div>
       
       {/* PROTOCOL GRID - ORGANIZED BY CATEGORY */}
