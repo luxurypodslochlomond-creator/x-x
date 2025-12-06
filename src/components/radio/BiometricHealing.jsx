@@ -369,13 +369,13 @@ export default function BiometricHealing() {
                         }}
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        className={`px-3 py-2 border-4 font-mono font-black text-xs ${
+                        className={`px-3 py-2 border-4 font-mono font-black text-[10px] ${
                             showCamera 
-                                ? 'bg-green-600 border-green-400 text-white' 
+                                ? 'bg-green-600 border-green-400 text-white animate-pulse' 
                                 : 'bg-black border-gray-600 text-gray-400 hover:border-pink-500'
                         }`}
                     >
-                        {showCamera ? 'READING' : 'MEASURE'}
+                        {showCamera ? '📸 READING...' : '📸 HEART RATE'}
                     </motion.button>
                 </div>
 
