@@ -346,37 +346,14 @@ export default function BiometricHealing() {
             <CardContent className="p-4 md:p-6 space-y-4">
                 
                 {/* HEADER */}
-                <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                        <COOLASFUCKHeart size={32} animate={isPlaying} />
-                        <div>
-                            <h2 className="text-xl md:text-2xl font-black font-mono text-pink-400">
-                                BIOMETRIC HEALING
-                            </h2>
-                            <p className="text-gray-400 text-xs font-mono">Tap state - Watch yourself heal</p>
-                        </div>
+                <div className="flex items-center gap-3">
+                    <COOLASFUCKHeart size={32} animate={isPlaying} />
+                    <div>
+                        <h2 className="text-xl md:text-2xl font-black font-mono text-pink-400">
+                            BIOMETRIC HEALING
+                        </h2>
+                        <p className="text-gray-400 text-xs font-mono">Tap state - Watch yourself heal</p>
                     </div>
-                    
-                    {/* CAMERA TOGGLE - 8-BIT STYLE */}
-                    <motion.button
-                        onClick={() => {
-                            playBleep(showCamera ? 440 : 880);
-                            if (showCamera) {
-                                stopHeartRateDetection();
-                            } else {
-                                startHeartRateDetection();
-                            }
-                        }}
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        className={`px-3 py-2 border-4 font-mono font-black text-[10px] ${
-                            showCamera 
-                                ? 'bg-green-600 border-green-400 text-white animate-pulse' 
-                                : 'bg-black border-gray-600 text-gray-400 hover:border-pink-500'
-                        }`}
-                    >
-                        {showCamera ? '📸 READING...' : '📸 HEART RATE'}
-                    </motion.button>
                 </div>
 
                 {/* 8 STATE BUTTONS - 8-BIT GRID */}
@@ -435,68 +412,7 @@ export default function BiometricHealing() {
                     )}
                 </AnimatePresence>
 
-                {/* HEART RATE DISPLAY */}
-                <AnimatePresence>
-                    {showCamera && (
-                        <motion.div
-                            initial={{ opacity: 0, height: 0 }}
-                            animate={{ opacity: 1, height: 'auto' }}
-                            exit={{ opacity: 0, height: 0 }}
-                            className="bg-black border-4 border-green-500 p-4 space-y-3"
-                        >
-                            <div className="flex items-center justify-between">
-                                <p className="text-green-400 font-mono font-black text-sm">
-                                    REAL-TIME BIOMETRICS
-                                </p>
-                                <p className="text-gray-500 text-xs font-mono">
-                                    Finger over camera
-                                </p>
-                            </div>
-                            
-                            <div className="flex items-center gap-4">
-                                <video 
-                                    ref={videoRef} 
-                                    className="w-20 h-20 border-4 border-green-500 object-cover"
-                                    playsInline
-                                    muted
-                                />
-                                <canvas ref={canvasRef} className="hidden" width="100" height="100" />
-                                
-                                <div className="flex-1">
-                                    <div className="flex items-center gap-2">
-                                        <PixelHeart size={32} animate={!!heartRate} />
-                                        <span className="text-4xl font-black font-mono text-white">
-                                            {heartRate || '--'}
-                                        </span>
-                                        <span className="text-gray-400 font-mono text-sm">BPM</span>
-                                    </div>
-                                    
-                                    {healingProgress > 0 && (
-                                        <div className="mt-2">
-                                            <div className="flex justify-between text-xs font-mono mb-1">
-                                                <span className="text-green-400">HEALING</span>
-                                                <span className="text-white">{healingProgress}%</span>
-                                            </div>
-                                            <div className="h-3 bg-black border-2 border-green-500">
-                                                <motion.div
-                                                    className="h-full bg-green-500"
-                                                    initial={{ width: 0 }}
-                                                    animate={{ width: `${healingProgress}%` }}
-                                                />
-                                            </div>
-                                        </div>
-                                    )}
-                                </div>
-                            </div>
-                            
-                            {cameraPermission === false && (
-                                <p className="text-red-400 text-xs font-mono font-black">
-                                    CAMERA ACCESS NEEDED
-                                </p>
-                            )}
-                        </motion.div>
-                    )}
-                </AnimatePresence>
+
 
                 {/* FOOTER */}
                 <div className="text-center">
