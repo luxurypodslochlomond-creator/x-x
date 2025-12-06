@@ -19,6 +19,7 @@ export default function UniversalPulsePage() {
     const [isScanning, setIsScanning] = useState(false);
     const [activeHeartbeats, setActiveHeartbeats] = useState(['ai51']); // Start with AI51 active
     const [visualBars, setVisualBars] = useState(Array(20).fill(0));
+    const [audioTestResult, setAudioTestResult] = useState(null);
     const audioContextRef = useRef(null);
     const oscillatorsRef = useRef({});
     const analyserRef = useRef(null);
@@ -63,6 +64,40 @@ export default function UniversalPulsePage() {
             queryClient.invalidateQueries({ queryKey: ['heartbeats'] });
         }
     });
+
+    // Test audio - simple beep to verify iOS audio works
+    const testAudio = async () => {
+        try {
+            const AudioContext = window.AudioContext || window.webkitAudioContext;
+            const ctx = new AudioContext();
+            
+            if (ctx.state === 'suspended') {
+                await ctx.resume();
+            }
+            
+            setAudioTestResult('Testing... 🎵');
+            
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            
+            osc.frequency.value = 528;
+            osc.type = 'sine';
+            gain.gain.value = 0.3;
+            
+            osc.start();
+            osc.stop(ctx.currentTime + 0.5);
+            
+            setTimeout(() => {
+                setAudioTestResult('✅ Audio works! Now tap a heart.');
+                ctx.close();
+            }, 600);
+            
+        } catch (error) {
+            setAudioTestResult('❌ Audio blocked: ' + error.message);
+        }
+    };
 
     // Start HRV scanning (simplified - just join with simulated data)
     const startHeartScan = async () => {
@@ -392,30 +427,56 @@ export default function UniversalPulsePage() {
 
                 {/* CONTROLS */}
                 <Card className="bg-gradient-to-br from-purple-900 to-pink-900 border-4 border-pink-500">
-                    <CardContent className="p-6 space-y-4">
-                        <div className="text-center space-y-4">
-                            {!myHeartbeat ? (
-                                <motion.button
-                                    onClick={startHeartScan}
-                                    disabled={isScanning}
-                                    whileHover={{ scale: 1.05 }}
-                                    whileTap={{ scale: 0.95 }}
-                                    className="px-8 py-4 bg-pink-600 hover:bg-pink-700 border-4 border-pink-300 font-black font-mono text-white text-xl disabled:opacity-50"
-                                    style={{ boxShadow: '6px 6px 0px rgba(0,0,0,0.8)' }}
-                                >
-                                    {isScanning ? (
-                                        <>
-                                            <Activity className="inline w-6 h-6 mr-2 animate-pulse" />
-                                            SCANNING YOUR HEART...
-                                        </>
-                                    ) : (
-                                        <>
-                                            <COOLASFUCKHeart size={28} animate={true} className="inline mr-2" />
-                                            JOIN THE PULSE
-                                        </>
-                                    )}
-                                </motion.button>
-                            ) : (
+                  <CardContent className="p-6 space-y-4">
+                      <div className="text-center space-y-4">
+                          {!myHeartbeat ? (
+                              <>
+                                  <div className="bg-black border-4 border-amber-500 p-4 mb-4">
+                                      <p className="text-amber-400 font-black font-mono text-sm">
+                                          ⚠️ YOU HAVEN'T JOINED YET
+                                      </p>
+                                      <p className="text-amber-300 font-mono text-xs mt-2">
+                                          The 72 BPM heart below is AI51 (demo). Join to add YOUR heartbeat!
+                                      </p>
+                                  </div>
+
+                                  {/* AUDIO TEST BUTTON */}
+                                  <motion.button
+                                      onClick={testAudio}
+                                      whileHover={{ scale: 1.05 }}
+                                      whileTap={{ scale: 0.95 }}
+                                      className="w-full px-6 py-3 bg-cyan-600 hover:bg-cyan-700 border-4 border-cyan-300 font-black font-mono text-white text-sm"
+                                      style={{ boxShadow: '4px 4px 0px rgba(0,0,0,0.8)' }}
+                                  >
+                                      <Volume2 className="inline w-5 h-5 mr-2" />
+                                      TEST AUDIO (iOS FIX)
+                                  </motion.button>
+                                  {audioTestResult && (
+                                      <p className="text-cyan-300 font-mono text-xs">{audioTestResult}</p>
+                                  )}
+
+                                  <motion.button
+                                      onClick={startHeartScan}
+                                      disabled={isScanning}
+                                      whileHover={{ scale: 1.05 }}
+                                      whileTap={{ scale: 0.95 }}
+                                      className="w-full px-8 py-4 bg-pink-600 hover:bg-pink-700 border-4 border-pink-300 font-black font-mono text-white text-xl disabled:opacity-50"
+                                      style={{ boxShadow: '6px 6px 0px rgba(0,0,0,0.8)' }}
+                                  >
+                                      {isScanning ? (
+                                          <>
+                                              <Activity className="inline w-6 h-6 mr-2 animate-pulse" />
+                                              SCANNING YOUR HEART...
+                                          </>
+                                      ) : (
+                                          <>
+                                              <COOLASFUCKHeart size={28} animate={true} className="inline mr-2" />
+                                              JOIN THE PULSE
+                                          </>
+                                      )}
+                                  </motion.button>
+                              </>
+                          ) : (
                                 <div className="space-y-4">
                                     <div className="bg-black border-4 border-green-500 p-4">
                                         <p className="text-green-400 font-black font-mono mb-2">YOUR HEARTBEAT:</p>
@@ -528,12 +589,14 @@ export default function UniversalPulsePage() {
                                                 {heartbeat.bpm}
                                             </p>
                                             <p className="text-xs text-pink-400 font-mono">BPM</p>
-                                            <p className="text-xs text-cyan-400 font-mono mt-1 truncate">
-                                                {heartbeat.id === 'ai51' ? 'AI51 ♾️' : heartbeat.location}
+                                            <p className={`text-xs font-mono mt-1 truncate ${
+                                                heartbeat.id === 'ai51' ? 'text-amber-400 font-black' : 'text-cyan-400'
+                                            }`}>
+                                                {heartbeat.id === 'ai51' ? '🤖 AI51 DEMO' : heartbeat.location}
                                             </p>
-                                            {isActive && isPlaying && (
+                                            {isActive && (
                                                 <p className="text-xs text-green-400 font-black font-mono mt-1">
-                                                    IN THE MIX
+                                                    {isPlaying ? '🔊 PLAYING' : '✓ ACTIVE'}
                                                 </p>
                                             )}
                                         </motion.button>
