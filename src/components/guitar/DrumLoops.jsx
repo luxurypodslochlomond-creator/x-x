@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Play, Pause, Volume2 } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { COOLASFUCKPlay, COOLASFUCKHeart, COOLASFUCKZap, COOLASFUCKMusicNote } from '@/components/shared/COOLASFUCKIcon';
 
 /**
  * DRUM LOOPS - OLD SCHOOL + MODERN
@@ -10,7 +11,8 @@ import { motion } from 'framer-motion';
 const DRUM_PATTERNS = [
     {
         id: 'basic-rock',
-        name: '🥁 Basic Rock',
+        name: 'Basic Rock',
+        icon: COOLASFUCKPlay,
         bpm: 120,
         type: 'classic',
         pattern: [
@@ -30,7 +32,8 @@ const DRUM_PATTERNS = [
     },
     {
         id: 'ballad',
-        name: '💚 Slow Ballad',
+        name: 'Slow Ballad',
+        icon: COOLASFUCKHeart,
         bpm: 80,
         type: 'classic',
         pattern: [
@@ -46,7 +49,8 @@ const DRUM_PATTERNS = [
     },
     {
         id: 'trap',
-        name: '🔥 Modern Trap',
+        name: 'Modern Trap',
+        icon: COOLASFUCKZap,
         bpm: 140,
         type: 'modern',
         pattern: [
@@ -75,7 +79,8 @@ const DRUM_PATTERNS = [
     },
     {
         id: 'boom-bap',
-        name: '🎤 Boom Bap',
+        name: 'Boom Bap',
+        icon: COOLASFUCKMusicNote,
         bpm: 90,
         type: 'classic',
         pattern: [
@@ -218,22 +223,28 @@ export default function DrumLoops() {
         <div className="space-y-4">
             {/* Pattern Selection */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                {DRUM_PATTERNS.map(pattern => (
-                    <motion.button
-                        key={pattern.id}
-                        onClick={() => handlePatternSelect(pattern.id)}
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        className={`p-3 border-4 transition-all ${
-                            selectedPattern === pattern.id
-                                ? 'bg-purple-900 border-purple-500'
-                                : 'bg-black border-purple-500/50 hover:border-purple-500'
-                        }`}
-                    >
-                        <p className="font-black font-mono text-sm text-purple-300">{pattern.name}</p>
-                        <p className="text-xs text-gray-400 mt-1">{pattern.bpm} BPM</p>
-                    </motion.button>
-                ))}
+                {DRUM_PATTERNS.map(pattern => {
+                    const IconComponent = pattern.icon;
+                    return (
+                        <motion.button
+                            key={pattern.id}
+                            onClick={() => handlePatternSelect(pattern.id)}
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            className={`p-3 border-4 transition-all ${
+                                selectedPattern === pattern.id
+                                    ? 'bg-purple-900 border-purple-500'
+                                    : 'bg-black border-purple-500/50 hover:border-purple-500'
+                            }`}
+                        >
+                            <div className="flex items-center justify-center mb-1">
+                                <IconComponent size={24} animate={selectedPattern === pattern.id} />
+                            </div>
+                            <p className="font-black font-mono text-sm text-purple-300">{pattern.name}</p>
+                            <p className="text-xs text-gray-400 mt-1">{pattern.bpm} BPM</p>
+                        </motion.button>
+                    );
+                })}
             </div>
 
             {/* Controls */}
