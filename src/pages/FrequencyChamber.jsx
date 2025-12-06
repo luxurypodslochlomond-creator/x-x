@@ -29,8 +29,8 @@ const PROTOCOL_SECTIONS = [
     id: 'physical',
     name: 'PHYSICAL HEALING',
     color: '#ef4444',
-    description: 'Pain, immunity, tinnitus',
-    protocols: ['pain', 'tinnitus', 'immune']
+    description: 'Pain, immunity, hormones, tinnitus',
+    protocols: ['pain', 'tinnitus', 'immune', 'menopause']
   },
   {
     id: 'rest',
@@ -319,6 +319,26 @@ const PROTOCOLS = {
       breathRate: 4,
       noiseType: 'brown',
       noiseLevel: 0.15,
+      isBinaural: true,
+      visualEntrainment: true
+    }
+  },
+  menopause: {
+    id: 'menopause',
+    name: 'Menopause Support',
+    icon: Sun,
+    color: '#F97316',
+    description: 'Natural hormonal balance & hot flash relief',
+    science: '10Hz alpha + 7.83Hz Schumann proven to regulate autonomic nervous system, reducing hot flashes and mood swings',
+    sources: ['Women\'s health neurofeedback studies', 'Autonomic regulation research'],
+    ancientWisdom: 'Elder women in traditional cultures use breathwork and earth frequencies to honor life transitions with grace.',
+    config: {
+      primary: 10,
+      secondary: 7.83,
+      carrier: 200,
+      breathRate: 6,
+      noiseType: 'pink',
+      noiseLevel: 0.1,
       isBinaural: true,
       visualEntrainment: true
     }
