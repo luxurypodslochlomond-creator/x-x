@@ -458,8 +458,8 @@ const EvidenceModal = ({ onClose }) => (
             <li>• Trust the process - effects build over time</li>
           </ul>
         </div>
-      </div>
-    </motion.div>
+      </motion.div>
+    </div>
   </motion.div>
 );
 
