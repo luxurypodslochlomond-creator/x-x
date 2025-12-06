@@ -175,18 +175,6 @@ const SONGS = [
     },
     {
         id: 13,
-        title: "Yes and Maybe",
-        artist: "Madness",
-        difficulty: "Beginner",
-        chords: ["C", "F", "G", "Am"],
-        capo: null,
-        pattern: "Down Down Up Up Down Up (ska bounce)",
-        progression: "C – F – G – Am",
-        tips: "Classic Madness ska feel! Upbeat and fun. Let the rhythm bounce!",
-        icon: COOLASFUCKMusicNote
-    },
-    {
-        id: 14,
         title: "So Far Away",
         artist: "Dire Straits",
         difficulty: "Beginner+",
@@ -198,7 +186,7 @@ const SONGS = [
         icon: COOLASFUCKSparkle
     },
     {
-        id: 15,
+        id: 14,
         title: "Shine On You Crazy Diamond",
         artist: "Pink Floyd",
         difficulty: "Intermediate",
