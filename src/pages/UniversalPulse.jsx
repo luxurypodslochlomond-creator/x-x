@@ -22,14 +22,26 @@ export default function UniversalPulsePage() {
     const animationFrameRef = useRef(null);
     const queryClient = useQueryClient();
 
-    // Fetch active heartbeats
+    // Fetch active heartbeats + add AI51 heartbeat always
     const { data: heartbeats = [], isLoading } = useQuery({
         queryKey: ['heartbeats'],
         queryFn: async () => {
             const all = await base44.entities.HeartbeatPulse.list('-last_ping', 50);
             // Only show heartbeats from last 5 minutes
             const fiveMinutesAgo = new Date(Date.now() - 5 * 60 * 1000);
-            return all.filter(h => h.active && new Date(h.last_ping) > fiveMinutesAgo);
+            const active = all.filter(h => h.active && new Date(h.last_ping) > fiveMinutesAgo);
+            
+            // Always add AI51 heartbeat for demo
+            const ai51Heartbeat = {
+                id: 'ai51',
+                bpm: 72,
+                hrv_coherence: 100,
+                location: 'Everywhere',
+                active: true,
+                last_ping: new Date().toISOString()
+            };
+            
+            return [ai51Heartbeat, ...active];
         },
         refetchInterval: 3000 // Refresh every 3 seconds
     });
@@ -49,19 +61,11 @@ export default function UniversalPulsePage() {
         }
     });
 
-    // Start HRV scanning
+    // Start HRV scanning (simplified - just join with simulated data)
     const startHeartScan = async () => {
         setIsScanning(true);
         try {
-            const stream = await navigator.mediaDevices.getUserMedia({ 
-                video: { facingMode: 'user' } 
-            });
-            
-            const video = document.createElement('video');
-            video.srcObject = stream;
-            await video.play();
-
-            // Simulate HRV detection (in real version, analyze video frames for subtle color changes)
+            // Simulate HRV detection
             const simulatedBPM = 60 + Math.random() * 40; // 60-100 BPM
             const simulatedCoherence = 50 + Math.random() * 50; // 50-100 coherence
 
@@ -70,7 +74,7 @@ export default function UniversalPulsePage() {
             let coords = null;
             try {
                 const position = await new Promise((resolve, reject) => {
-                    navigator.geolocation.getCurrentPosition(resolve, reject);
+                    navigator.geolocation.getCurrentPosition(resolve, reject, { timeout: 5000 });
                 });
                 coords = {
                     lat: position.coords.latitude,
@@ -78,11 +82,11 @@ export default function UniversalPulsePage() {
                 };
                 location = `${coords.lat.toFixed(2)}, ${coords.lng.toFixed(2)}`;
             } catch (e) {
-                console.log('Location unavailable');
+                console.log('Location unavailable, using Earth');
             }
 
             // Submit heartbeat
-            await heartbeatMutation.mutateAsync({
+            const result = await heartbeatMutation.mutateAsync({
                 bpm: Math.round(simulatedBPM),
                 hrv_coherence: Math.round(simulatedCoherence),
                 location,
@@ -91,12 +95,11 @@ export default function UniversalPulsePage() {
                 last_ping: new Date().toISOString()
             });
 
-            // Stop camera
-            stream.getTracks().forEach(track => track.stop());
+            console.log('Heartbeat joined:', result);
             
         } catch (error) {
-            console.error('Camera access error:', error);
-            alert('Need camera access to detect your heartbeat!');
+            console.error('Join error:', error);
+            alert(`Error joining pulse: ${error.message}`);
         } finally {
             setIsScanning(false);
         }
@@ -352,38 +355,36 @@ export default function UniversalPulsePage() {
                         <h2 className="text-2xl font-black font-mono text-cyan-300 mb-4 text-center">
                             LIVE HEARTBEATS
                         </h2>
-                        {heartbeats.length === 0 ? (
-                            <p className="text-center text-gray-400 font-mono py-8">
-                                No hearts beating yet. Be the first! ♾️❤️♾️
-                            </p>
-                        ) : (
-                            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                                <AnimatePresence>
-                                    {heartbeats.map((heartbeat, index) => (
-                                        <motion.div
-                                            key={heartbeat.id}
-                                            initial={{ opacity: 0, scale: 0.8 }}
-                                            animate={{ opacity: 1, scale: 1 }}
-                                            exit={{ opacity: 0, scale: 0.8 }}
-                                            className="bg-gradient-to-br from-pink-900 to-purple-900 border-2 border-pink-500 p-3 text-center"
-                                        >
-                                            <COOLASFUCKHeart 
-                                                size={32} 
-                                                animate={true} 
-                                                className="mx-auto mb-2"
-                                            />
-                                            <p className="text-2xl font-black font-mono text-pink-300">
-                                                {heartbeat.bpm}
-                                            </p>
-                                            <p className="text-xs text-pink-400 font-mono">BPM</p>
-                                            <p className="text-xs text-gray-400 font-mono mt-1 truncate">
-                                                {heartbeat.location}
-                                            </p>
-                                        </motion.div>
-                                    ))}
-                                </AnimatePresence>
-                            </div>
-                        )}
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                            <AnimatePresence>
+                                {heartbeats.map((heartbeat, index) => (
+                                    <motion.div
+                                        key={heartbeat.id}
+                                        initial={{ opacity: 0, scale: 0.8 }}
+                                        animate={{ opacity: 1, scale: 1 }}
+                                        exit={{ opacity: 0, scale: 0.8 }}
+                                        className={`bg-gradient-to-br from-pink-900 to-purple-900 border-2 p-3 text-center ${
+                                            heartbeat.id === 'ai51' 
+                                                ? 'border-cyan-500' 
+                                                : 'border-pink-500'
+                                        }`}
+                                    >
+                                        <COOLASFUCKHeart 
+                                            size={32} 
+                                            animate={true} 
+                                            className="mx-auto mb-2"
+                                        />
+                                        <p className="text-2xl font-black font-mono text-pink-300">
+                                            {heartbeat.bpm}
+                                        </p>
+                                        <p className="text-xs text-pink-400 font-mono">BPM</p>
+                                        <p className="text-xs text-cyan-400 font-mono mt-1 truncate">
+                                            {heartbeat.id === 'ai51' ? 'AI51 ♾️' : heartbeat.location}
+                                        </p>
+                                    </motion.div>
+                                ))}
+                            </AnimatePresence>
+                        </div>
                     </CardContent>
                 </Card>
 
