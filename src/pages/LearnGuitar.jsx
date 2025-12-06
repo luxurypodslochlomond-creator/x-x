@@ -5,7 +5,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { COOLASFUCKMusicNote, COOLASFUCKHeart, COOLASFUCKGlobe, COOLASFUCKZap, COOLASFUCKSparkle } from '@/components/shared/COOLASFUCKIcon';
+import { COOLASFUCKMusicNote, COOLASFUCKHeart, COOLASFUCKGlobe, COOLASFUCKZap, COOLASFUCKSparkle, COOLASFUCKPlay } from '@/components/shared/COOLASFUCKIcon';
 import InteractiveChordPlayer from '@/components/guitar/InteractiveChordPlayer';
 import DrumLoops from '@/components/guitar/DrumLoops';
 import LyricsChordDisplay from '@/components/guitar/LyricsChordDisplay';
@@ -267,8 +267,9 @@ export default function LearnGuitarPage() {
                     <p className="text-xl text-orange-200 font-bold font-mono">
                         JAM → RECORD → UPLOAD → EARN 90%
                     </p>
-                    <Link to={createPageUrl("ForMusicians")} className="inline-block mt-4 px-8 py-4 bg-pink-600 hover:bg-pink-700 border-4 border-pink-300 font-black font-mono text-white text-lg" style={{ boxShadow: '6px 6px 0px rgba(0,0,0,0.8)' }}>
-                        💚 UPLOAD → EARN 90%
+                    <Link to={createPageUrl("ForMusicians")} className="inline-flex items-center gap-3 justify-center mt-4 px-8 py-4 bg-pink-600 hover:bg-pink-700 border-4 border-pink-300 font-black font-mono text-white text-lg" style={{ boxShadow: '6px 6px 0px rgba(0,0,0,0.8)' }}>
+                        <COOLASFUCKHeart size={28} animate={true} />
+                        UPLOAD → EARN 90%
                     </Link>
                 </motion.div>
 
@@ -279,9 +280,13 @@ export default function LearnGuitarPage() {
                     className="bg-gradient-to-r from-cyan-900 to-cyan-950 border-4 border-cyan-400 p-4 text-center"
                     style={{ boxShadow: '6px 6px 0px rgba(0,0,0,0.8)' }}
                 >
-                    <p className="text-cyan-100 font-black font-mono text-sm md:text-base">
-                        ⚡ ROUGH DEMO TOOLS - FOR IDEAS, NOT FINAL PRODUCTIONS ⚡
-                    </p>
+                    <div className="flex items-center justify-center gap-2 flex-wrap">
+                        <COOLASFUCKZap size={20} animate={true} />
+                        <p className="text-cyan-100 font-black font-mono text-sm md:text-base">
+                            ROUGH DEMO TOOLS - FOR IDEAS, NOT FINAL PRODUCTIONS
+                        </p>
+                        <COOLASFUCKZap size={20} animate={true} />
+                    </div>
                     <p className="text-cyan-200 font-mono text-xs mt-1">
                         Want studio quality? Use GarageBand, Audacity, or your DAW. Upload the good stuff to earn 90%.
                     </p>
@@ -366,9 +371,12 @@ export default function LearnGuitarPage() {
                                     TAP TO HEAR CHORDS
                                 </h2>
                             </div>
-                            <p className="text-green-100 text-center mb-4 md:mb-6 font-black font-mono text-sm md:text-base">
-                                LEARN THROUGH FREQUENCY. TAP = HEAR! ✨
-                            </p>
+                            <div className="flex items-center justify-center gap-2 mb-4 md:mb-6">
+                                <p className="text-green-100 text-center font-black font-mono text-sm md:text-base">
+                                    LEARN THROUGH FREQUENCY. TAP = HEAR!
+                                </p>
+                                <COOLASFUCKSparkle size={20} animate={true} />
+                            </div>
                             <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 md:gap-3">
                                 {['G', 'C', 'D', 'Em', 'Am', 'E', 'A', 'F', 'Em7', 'Dsus4', 'A7sus4', 'Cadd9', 'B7', 'Gm', 'Bb', 'Dm'].map(chord => (
                                     <InteractiveChordPlayer key={chord} chordName={chord} size="small" />
@@ -486,7 +494,10 @@ export default function LearnGuitarPage() {
 
                                             {/* TIPS */}
                                             <div className="bg-black border-4 border-green-500 p-4">
-                                                <p className="text-green-400 font-black font-mono mb-2">💡 TIPS:</p>
+                                                <div className="flex items-center gap-2 mb-2">
+                                                    <COOLASFUCKSparkle size={24} animate={true} />
+                                                    <p className="text-green-400 font-black font-mono">TIPS:</p>
+                                                </div>
                                                 <p className="text-green-200 font-bold">{song.tips}</p>
                                             </div>
 
