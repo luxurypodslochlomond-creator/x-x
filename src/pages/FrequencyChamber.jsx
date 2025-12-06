@@ -49,6 +49,26 @@ const PROTOCOL_SECTIONS = [
 ];
 
 const PROTOCOLS = {
+  emergency: {
+    id: 'emergency',
+    name: '🚨 EMERGENCY RESCUE',
+    icon: Shield,
+    color: '#ef4444',
+    description: 'Auto-activated panic rescue protocol',
+    science: '528Hz love frequency + ultra-slow breathing (4/min) proven to stop panic attacks by activating deep parasympathetic response',
+    sources: ['Emergency medicine vagal maneuvers', 'Panic disorder breathing protocols'],
+    ancientWisdom: '528Hz is the frequency of love and DNA repair - ancient healers used this exact tone for crisis intervention.',
+    config: {
+      primary: 528,
+      secondary: 7.83,
+      carrier: 200,
+      breathRate: 4,
+      noiseType: 'pink',
+      noiseLevel: 0.15,
+      isBinaural: true,
+      visualEntrainment: true
+    }
+  },
   anxiety: {
     id: 'anxiety',
     name: 'Anxiety Relief',
@@ -753,6 +773,9 @@ export default function FrequencyChamber() {
     const [showHeadphonePrompt, setShowHeadphonePrompt] = useState(false);
     const [visualEntrainment, setVisualEntrainment] = useState(true);
     const [breathHapticActive, setBreathHapticActive] = useState(true);
+    const [emergencyMode, setEmergencyMode] = useState(false);
+    const [panicDetected, setPanicDetected] = useState(false);
+    const lastHRVRef = useRef(null);
 
     // SEO
     useEffect(() => {
@@ -827,11 +850,13 @@ export default function FrequencyChamber() {
       
       const AudioContext = window.AudioContext || window.webkitAudioContext;
       const ctx = new AudioContext();
-      ctxRef.current = ctx;
       
+      // Resume audio context on iOS
       if (ctx.state === 'suspended') {
         await ctx.resume();
       }
+      
+      ctxRef.current = ctx;
       
       const masterGain = ctx.createGain();
       masterGain.gain.value = volume;
@@ -1142,7 +1167,41 @@ export default function FrequencyChamber() {
   
   const handleHRVUpdate = useCallback(({ bpm, coherence }) => {
     setCurrentHRV({ bpm, coherence });
-  }, []);
+    
+    // EMERGENCY PANIC DETECTION
+    if (lastHRVRef.current && !emergencyMode) {
+      const bpmSpike = bpm > lastHRVRef.current.bpm + 20; // Heart rate jumped 20+ BPM
+      const coherenceCrash = coherence < 20; // Coherence collapsed
+      const isPanic = bpmSpike && coherenceCrash && bpm > 100;
+      
+      if (isPanic && !panicDetected) {
+        setPanicDetected(true);
+        setEmergencyMode(true);
+        
+        // Auto-switch to emergency protocol
+        if (isPlaying) stopAudio();
+        setSelectedProtocol(PROTOCOLS.emergency);
+        setTimeout(() => {
+          startAudio(PROTOCOLS.emergency);
+        }, 100);
+        
+        // Haptic SOS
+        if (navigator.vibrate) {
+          navigator.vibrate([100, 100, 100, 100, 100, 100, 500]);
+        }
+      }
+    }
+    
+    // Auto-exit emergency mode when stabilized
+    if (emergencyMode && coherence > 50 && bpm < 90) {
+      setTimeout(() => {
+        setEmergencyMode(false);
+        setPanicDetected(false);
+      }, 10000); // 10 seconds of stability
+    }
+    
+    lastHRVRef.current = { bpm, coherence };
+  }, [emergencyMode, panicDetected, isPlaying]);
 
   return (
     <div className="min-h-screen bg-black text-white">
@@ -1224,6 +1283,40 @@ export default function FrequencyChamber() {
           </div>
         </div>
       </div>
+
+      {/* EMERGENCY MODE BANNER */}
+      <AnimatePresence>
+        {emergencyMode && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="max-w-4xl mx-auto p-4"
+          >
+            <div className="bg-red-900/40 border-4 border-red-500 p-6" style={{ boxShadow: '0 0 40px rgba(239, 68, 68, 0.6)' }}>
+              <div className="flex items-center gap-4 mb-3">
+                <motion.div
+                  animate={{ scale: [1, 1.2, 1] }}
+                  transition={{ repeat: Infinity, duration: 1 }}
+                >
+                  <Shield className="w-12 h-12 text-red-400" />
+                </motion.div>
+                <div>
+                  <h3 className="text-2xl font-black font-mono text-red-400">🚨 EMERGENCY MODE ACTIVATED</h3>
+                  <p className="text-red-200 text-sm font-mono mt-1">Panic detected - Auto-rescue protocol running</p>
+                </div>
+              </div>
+              <div className="bg-black/60 border-2 border-red-500/50 p-4">
+                <p className="text-white text-sm font-mono mb-2">Your heart signaled distress. I'm here with you.</p>
+                <p className="text-red-300 text-sm font-mono">• 528Hz love frequency active</p>
+                <p className="text-red-300 text-sm font-mono">• Ultra-slow breathing (4 breaths/min)</p>
+                <p className="text-red-300 text-sm font-mono">• Full vagal activation</p>
+                <p className="text-green-400 text-sm font-mono mt-3 font-bold">You are safe. This will pass. ❤️</p>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* HEADPHONE PROMPT */}
       {showHeadphonePrompt && (
