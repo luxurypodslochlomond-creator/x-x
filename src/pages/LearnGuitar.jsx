@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { createPageUrl } from '@/utils';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ChevronDown, ChevronUp } from 'lucide-react';
@@ -243,7 +245,7 @@ export default function LearnGuitarPage() {
     const [showChordLibrary, setShowChordLibrary] = useState(false);
 
     useEffect(() => {
-        document.title = "Learn Guitar | UF51";
+        document.title = "Create Demos | UF51";
     }, []);
 
     return (
@@ -260,11 +262,14 @@ export default function LearnGuitarPage() {
                         <COOLASFUCKMusicNote size={64} animate={true} />
                     </div>
                     <h1 className="text-4xl md:text-5xl font-black font-mono text-amber-400" style={{ textShadow: '4px 4px 0px rgba(0,0,0,0.8)' }}>
-                        LEARN GUITAR
+                        CREATE DEMOS
                     </h1>
                     <p className="text-xl text-orange-200 font-bold">
-                        Easy songs with simple chords - perfect for beginners!
+                        Jam with tools → Record → Upload → Earn 90%
                     </p>
+                    <Link to={createPageUrl("ForMusicians")} className="inline-block mt-4 px-6 py-3 bg-pink-600 hover:bg-pink-700 border-4 border-pink-400 font-black font-mono text-white">
+                        💚 UPLOAD YOUR MUSIC → EARN 90%
+                    </Link>
                 </motion.div>
 
                 {/* RECORDING STUDIO */}
@@ -283,26 +288,26 @@ export default function LearnGuitarPage() {
                     </CardContent>
                 </Card>
 
-                {/* QUICK TIPS */}
-                <Card className="bg-black border-4 border-amber-500">
+                {/* THE CREATION STUDIO */}
+                <Card className="bg-black border-4 border-pink-500">
                     <CardContent className="p-6">
-                        <h2 className="text-2xl font-black font-mono text-amber-400 mb-4" style={{ textShadow: '3px 3px 0px rgba(0,0,0,1)' }}>🔥 QUICK TIPS</h2>
+                        <h2 className="text-2xl font-black font-mono text-pink-400 mb-4" style={{ textShadow: '3px 3px 0px rgba(0,0,0,1)' }}>💚 THE STUDIO</h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-                            <div className="bg-black border-2 border-amber-500/50 p-3">
-                                <p className="font-black font-mono text-amber-300 mb-1">START SLOW</p>
-                                <p className="text-gray-300">Speed comes with practice. Accuracy first!</p>
+                            <div className="bg-black border-2 border-pink-500/50 p-3">
+                                <p className="font-black font-mono text-pink-300 mb-1">1. PICK DRUMS</p>
+                                <p className="text-gray-300">Get your rhythm going. Classic or modern.</p>
                             </div>
-                            <div className="bg-black border-2 border-amber-500/50 p-3">
-                                <p className="font-black font-mono text-amber-300 mb-1">PRESS HARD</p>
-                                <p className="text-gray-300">Fingertips right behind the fret wire.</p>
+                            <div className="bg-black border-2 border-pink-500/50 p-3">
+                                <p className="font-black font-mono text-pink-300 mb-1">2. TAP CHORDS</p>
+                                <p className="text-gray-300">Hear the frequencies. Learn through sound.</p>
                             </div>
-                            <div className="bg-black border-2 border-amber-500/50 p-3">
-                                <p className="font-black font-mono text-amber-300 mb-1">PRACTICE CHANGES</p>
-                                <p className="text-gray-300">Switch between 2 chords until smooth.</p>
+                            <div className="bg-black border-2 border-pink-500/50 p-3">
+                                <p className="font-black font-mono text-pink-300 mb-1">3. JAM & RECORD</p>
+                                <p className="text-gray-300">Hit record when you're feeling it.</p>
                             </div>
-                            <div className="bg-black border-2 border-amber-500/50 p-3">
-                                <p className="font-black font-mono text-amber-300 mb-1">HAVE FUN!</p>
-                                <p className="text-gray-300">Music is joy. Don't stress about perfection. 💚</p>
+                            <div className="bg-black border-2 border-pink-500/50 p-3">
+                                <p className="font-black font-mono text-pink-300 mb-1">4. UPLOAD & EARN</p>
+                                <p className="text-gray-300">Artists keep 90%. No label bullshit. 💚</p>
                             </div>
                         </div>
                     </CardContent>
@@ -349,7 +354,7 @@ export default function LearnGuitarPage() {
 
                 {/* SONG LIST */}
                 <div className="space-y-4">
-                    <h2 className="text-3xl font-black font-mono text-amber-400 text-center bg-black border-4 border-amber-500 py-3" style={{ textShadow: '3px 3px 0px rgba(0,0,0,1)' }}>🎵 EASY SONGS</h2>
+                    <h2 className="text-3xl font-black font-mono text-amber-400 text-center bg-black border-4 border-amber-500 py-3" style={{ textShadow: '3px 3px 0px rgba(0,0,0,1)' }}>🎵 SONG IDEAS (or check YouTube for tutorials)</h2>
                     
                     {SONGS.map((song, index) => (
                         <motion.div
@@ -455,19 +460,21 @@ export default function LearnGuitarPage() {
                     ))}
                 </div>
 
-                {/* ENCOURAGEMENT */}
+                {/* UPLOAD CALL TO ACTION */}
                 <Card className="bg-black border-4 border-pink-500">
                     <CardContent className="p-6 text-center">
                         <div className="flex justify-center mb-4">
                             <COOLASFUCKHeart size={48} animate={true} />
                         </div>
-                        <h3 className="text-2xl font-black font-mono text-pink-300 mb-2" style={{ textShadow: '3px 3px 0px rgba(0,0,0,1)' }}>YOU'VE GOT THIS!</h3>
-                        <p className="text-pink-200 font-bold">
-                            Every guitarist started exactly where you are now. 
-                            Practice a little every day, and you'll be amazed how fast you improve!
+                        <h3 className="text-2xl font-black font-mono text-pink-300 mb-2" style={{ textShadow: '3px 3px 0px rgba(0,0,0,1)' }}>READY TO SHARE?</h3>
+                        <p className="text-pink-200 font-bold mb-4">
+                            Got a demo? Upload it. Artists earn 90% - no label taking your soul.
                         </p>
+                        <Link to={createPageUrl("ForMusicians")} className="inline-block px-8 py-4 bg-pink-600 hover:bg-pink-700 border-4 border-pink-400 font-black font-mono text-white text-lg">
+                            💚 UPLOAD NOW
+                        </Link>
                         <p className="text-sm text-gray-400 mt-4 font-mono">
-                            Music heals the soul. Keep playing. ♾️❤️♾️
+                            Music heals. Share your frequency. ♾️❤️♾️
                         </p>
                     </CardContent>
                 </Card>
