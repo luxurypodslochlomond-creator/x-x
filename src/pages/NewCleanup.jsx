@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { base44 } from '@/api/base44Client';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
         Camera, MapPin, Loader2, CheckCircle2, Zap, AlertCircle, ArrowLeft, WifiOff, Sparkles, Eye, Share2, X, Recycle, Globe, Shield
     } from 'lucide-react';
-import { COOLASFUCKHeart, COOLASFUCKSparkle } from '@/components/shared/COOLASFUCKIcon';
+import { COOLASFUCKHeart, COOLASFUCKSparkle, COOLASFUCKMusicNote } from '@/components/shared/COOLASFUCKIcon';
 import { useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import P51Symbol from '@/components/shared/P51Symbol';
@@ -15,7 +17,7 @@ import RealtimeScanningOverlay from '@/components/shared/RealtimeScanningOverlay
 import FraudDetectionModal from '@/components/cleanup/FraudDetectionModal';
 import TechExplainerModal from '@/components/cleanup/TechExplainerModal';
 import CryptoSecurityTooltip from '@/components/cleanup/CryptoSecurityTooltip';
-import { signCleanup, verifyChainIntegrity } from '@/components/security/CryptoSecurity';
+import { signCleanup, verifyChainIntegrity, getPublicKeyForVerification } from '@/components/security/CryptoSecurity';
 import SecurityDashboard from '@/components/security/SecurityDashboard';
 
 export default function NewCleanupPage() {
@@ -1922,52 +1924,136 @@ export default function NewCleanupPage() {
         );
     }
 
-    // SUCCESS - ENHANCED WITH SHARE
+    // SUCCESS - 8-BIT CHOICE SCREEN
     if (step === 'success' || step === 'success_offline') {
         return (
-            <div className="min-h-screen bg-black text-white flex items-center justify-center p-6">
-                <motion.div
-                    initial={{ scale: 0.9, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    className="text-center space-y-6 max-w-md"
-                >
-                    {step === 'success_offline' ? (
-                        <>
-                            <WifiOff className="w-16 h-16 text-amber-500 mx-auto" />
-                            <p className="text-lg text-amber-500 font-mono">
-                                Saved locally
-                            </p>
-                            <p className="text-white/60 text-sm font-mono mb-2">Will sync + AI verify when online</p>
-                            <p className="text-cyan-400 text-xs font-mono">✓ Zero fraud • AI checks photo</p>
-                        </>
-                    ) : (
-                        <>
-                            <CheckCircle2 className="w-16 h-16 text-amber-500 mx-auto" />
-                            <p className="text-2xl text-amber-500 font-mono">
-                                +{formData.tokens_awarded.toFixed(1)} <P51Symbol showTooltip={true} />
-                            </p>
-                            <p className="text-white/60 text-sm font-mono">Verified</p>
+            <div className="min-h-screen bg-black text-white p-6 pt-24 lg:pt-6">
+                <div className="max-w-xl mx-auto space-y-6">
+                    <motion.div
+                        initial={{ scale: 0.9, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        className="space-y-6"
+                    >
+                        {/* SUCCESS HEADER */}
+                        <div className="bg-black border-4 border-green-500 p-6 text-center">
+                            <div className="absolute top-0 left-0 w-4 h-4 bg-green-500" />
+                            <div className="absolute top-0 right-0 w-4 h-4 bg-green-500" />
+                            <div className="absolute bottom-0 left-0 w-4 h-4 bg-green-500" />
+                            <div className="absolute bottom-0 right-0 w-4 h-4 bg-green-500" />
                             
-                            <Button
+                            {step === 'success_offline' ? (
+                                <>
+                                    <WifiOff className="w-16 h-16 text-amber-500 mx-auto mb-4" />
+                                    <p className="text-3xl font-black font-mono text-amber-400 mb-2">
+                                        SAVED OFFLINE
+                                    </p>
+                                    <p className="text-amber-300 font-mono text-sm mb-2">Will sync + AI verify when online</p>
+                                    <p className="text-cyan-400 text-xs font-mono">✓ Zero fraud • AI checks photo</p>
+                                </>
+                            ) : (
+                                <>
+                                    <COOLASFUCKHeart size={64} animate={true} className="mx-auto mb-4" />
+                                    <p className="text-4xl font-black font-mono text-green-400 mb-2">
+                                        +{formData.tokens_awarded.toFixed(1)} <P51Symbol showTooltip={true} />
+                                    </p>
+                                    <p className="text-green-300 font-black font-mono text-sm">CLEANUP VERIFIED</p>
+                                </>
+                            )}
+                        </div>
+
+                        {/* WHAT'S NEXT */}
+                        <div className="bg-black border-4 border-cyan-500 p-6">
+                            <h2 className="text-2xl font-black font-mono text-cyan-400 text-center mb-6">
+                                WHAT'S NEXT?
+                            </h2>
+
+                            <div className="space-y-3">
+                                {/* Another Cleanup */}
+                                <motion.button
+                                    whileHover={{ scale: 1.02 }}
+                                    whileTap={{ scale: 0.98 }}
+                                    onClick={() => {
+                                        setStep('landing');
+                                        setCapturedPhotos([]);
+                                        setFormData({
+                                            location: '',
+                                            county: '',
+                                            coordinates: formData.coordinates,
+                                            litter_weight: 0,
+                                            photo_url: '',
+                                            cleanup_type: 'street',
+                                            weather_conditions: '',
+                                            notes: '',
+                                            tokens_awarded: 0,
+                                            tokens_instant: 0,
+                                            tokens_pending: 0,
+                                            instant_payout_percentage: 100,
+                                            verification_status: 'instant_paid'
+                                        });
+                                        setAiAnalysis(null);
+                                        setAfterPhoto(null);
+                                    }}
+                                    className="w-full bg-green-600 hover:bg-green-700 border-4 border-green-400 text-black py-5 font-black font-mono text-lg flex items-center justify-center gap-3"
+                                >
+                                    <Recycle className="w-6 h-6" />
+                                    ANOTHER CLEANUP
+                                </motion.button>
+
+                                {/* Listen to Music */}
+                                <motion.button
+                                    whileHover={{ scale: 1.02 }}
+                                    whileTap={{ scale: 0.98 }}
+                                    onClick={() => navigate(createPageUrl('Radio'))}
+                                    className="w-full bg-purple-600 hover:bg-purple-700 border-4 border-purple-400 text-white py-5 font-black font-mono text-lg flex items-center justify-center gap-3"
+                                >
+                                    <COOLASFUCKMusicNote size={24} animate={true} />
+                                    LISTEN TO MUSIC
+                                </motion.button>
+
+                                {/* Heal */}
+                                <motion.button
+                                    whileHover={{ scale: 1.02 }}
+                                    whileTap={{ scale: 0.98 }}
+                                    onClick={() => navigate(createPageUrl('FrequencyChamber'))}
+                                    className="w-full bg-pink-600 hover:bg-pink-700 border-4 border-pink-400 text-white py-5 font-black font-mono text-lg flex items-center justify-center gap-3"
+                                >
+                                    <COOLASFUCKHeart size={24} animate={true} />
+                                    HEAL
+                                </motion.button>
+
+                                {/* See Balance */}
+                                <motion.button
+                                    whileHover={{ scale: 1.02 }}
+                                    whileTap={{ scale: 0.98 }}
+                                    onClick={() => navigate(createPageUrl('Profile'))}
+                                    className="w-full bg-amber-600 hover:bg-amber-700 border-4 border-amber-400 text-black py-5 font-black font-mono text-lg flex items-center justify-center gap-3"
+                                >
+                                    <P51Symbol /> SEE BALANCE
+                                </motion.button>
+                            </div>
+                        </div>
+
+                        {/* Share */}
+                        {step === 'success' && (
+                            <motion.button
+                                whileHover={{ scale: 1.02 }}
+                                whileTap={{ scale: 0.98 }}
                                 onClick={handleShare}
-                                className="w-full bg-gradient-to-r from-cyan-600 to-purple-600 hover:from-cyan-700 hover:to-purple-700 py-6 text-lg font-bold flex items-center justify-center gap-2"
+                                className="w-full bg-gradient-to-r from-cyan-600 to-purple-600 hover:from-cyan-700 hover:to-purple-700 border-4 border-cyan-400 text-white py-4 font-black font-mono flex items-center justify-center gap-2"
                             >
                                 <Share2 className="w-5 h-5" />
-                                Share Your Impact
-                            </Button>
-                            
-                            <p className="text-xs text-gray-500">
-                                Share to Instagram/TikTok to inspire others!
-                            </p>
-                        </>
+                                SHARE YOUR IMPACT
+                            </motion.button>
                         )}
-                        </motion.div>
 
-                        <FraudDetectionModal isOpen={showFraudModal} onClose={() => setShowFraudModal(false)} />
-                        <TechExplainerModal isOpen={showTechModal} onClose={() => setShowTechModal(false)} />
-                        </div>
-                        );
-                        }
+                    </motion.div>
+                </div>
+
+                <FraudDetectionModal isOpen={showFraudModal} onClose={() => setShowFraudModal(false)} />
+                <TechExplainerModal isOpen={showTechModal} onClose={() => setShowTechModal(false)} />
+            </div>
+        );
+    }
 
                         return null;
                         }
