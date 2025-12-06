@@ -709,6 +709,9 @@ export default function FrequencyChamber() {
     const [emergencyMode, setEmergencyMode] = useState(false);
     const [panicDetected, setPanicDetected] = useState(false);
     const lastHRVRef = useRef(null);
+    const [showEvidence, setShowEvidence] = useState(false);
+    const [showDeviceInfo, setShowDeviceInfo] = useState(false);
+    const [showTimeSuggestion, setShowTimeSuggestion] = useState(true);
 
     // SEO
     useEffect(() => {
@@ -1166,55 +1169,97 @@ export default function FrequencyChamber() {
         </div>
       </div>
       
-      {/* WHY THIS WORKS - EVIDENCE */}
+      {/* WHY THIS WORKS - EVIDENCE - COLLAPSIBLE */}
       <div className="max-w-4xl mx-auto p-4">
-        <div className="border-4 border-cyan-500 bg-black p-4">
-          <div className="flex items-center justify-between mb-3">
+        <button
+          onClick={() => setShowEvidence(!showEvidence)}
+          className="w-full border-4 border-cyan-500 bg-black p-4 hover:bg-cyan-500/10 transition-all"
+        >
+          <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <Shield className="w-5 h-5 text-cyan-400" />
               <h3 className="text-cyan-400 font-black font-mono text-sm">EVIDENCE-BASED</h3>
             </div>
-            <button 
-              onClick={() => setShowEvidenceModal(true)}
-              className="text-cyan-400 hover:text-cyan-300 font-mono text-xs underline"
-            >
-              Why?
-            </button>
-          </div>
-          <div className="space-y-2 text-xs font-mono text-gray-400">
             <div className="flex items-center gap-2">
-              <COOLASFUCKBrain size={16} animate={false} />
-              <span>MIT research • 40Hz neuroplasticity</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <COOLASFUCKHeart size={16} animate={false} />
-              <span>HeartMath • Vagal tone activation</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <COOLASFUCKMoon size={16} animate={false} />
-              <span>Sleep science • Delta wave studies</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <COOLASFUCKShield size={16} animate={false} />
-              <span>Ancient wisdom • 2,500+ years proven</span>
+              <button 
+                onClick={(e) => { e.stopPropagation(); setShowEvidenceModal(true); }}
+                className="text-cyan-400 hover:text-cyan-300 font-mono text-xs underline"
+              >
+                Why?
+              </button>
+              <span className="text-cyan-400 font-black text-xl">{showEvidence ? '−' : '+'}</span>
             </div>
           </div>
-        </div>
+        </button>
 
-        {/* YOUR DEVICE = HEALING CHAMBER */}
-        <div className="mt-4 border-4 border-pink-500 bg-black p-4">
-          <div className="flex items-center gap-2 mb-2">
-            <COOLASFUCKWaves size={20} animate={true} />
-            <h3 className="text-pink-400 font-black font-mono text-sm">YOUR DEVICE = HEALING CHAMBER</h3>
+        <AnimatePresence>
+          {showEvidence && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'auto', opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="overflow-hidden"
+            >
+              <div className="border-x-4 border-b-4 border-cyan-500 bg-black p-4">
+                <div className="space-y-2 text-xs font-mono text-gray-400">
+                  <div className="flex items-center gap-2">
+                    <COOLASFUCKBrain size={16} animate={false} />
+                    <span>MIT research • 40Hz neuroplasticity</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <COOLASFUCKHeart size={16} animate={false} />
+                    <span>HeartMath • Vagal tone activation</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <COOLASFUCKMoon size={16} animate={false} />
+                    <span>Sleep science • Delta wave studies</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <COOLASFUCKShield size={16} animate={false} />
+                    <span>Ancient wisdom • 2,500+ years proven</span>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* YOUR DEVICE = HEALING CHAMBER - COLLAPSIBLE */}
+        <button
+          onClick={() => setShowDeviceInfo(!showDeviceInfo)}
+          className="w-full mt-4 border-4 border-pink-500 bg-black p-4 hover:bg-pink-500/10 transition-all"
+        >
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <COOLASFUCKWaves size={20} animate={true} />
+              <h3 className="text-pink-400 font-black font-mono text-sm">YOUR DEVICE = HEALING CHAMBER</h3>
+            </div>
+            <span className="text-pink-400 font-black text-xl">{showDeviceInfo ? '−' : '+'}</span>
           </div>
-          <div className="space-y-1 text-xs font-mono text-gray-400">
-            <p>✓ Binaural beats (different Hz each ear)</p>
-            <p>✓ Visual entrainment (border pulses at healing Hz)</p>
-            <p>✓ Haptic feedback (synced to breath)</p>
-            <p>✓ HRV biofeedback (watch yourself heal)</p>
-            <p className="text-pink-400 mt-2">Every phone → Free healing center</p>
-          </div>
-        </div>
+        </button>
+
+        <AnimatePresence>
+          {showDeviceInfo && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'auto', opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="overflow-hidden"
+            >
+              <div className="border-x-4 border-b-4 border-pink-500 bg-black p-4">
+                <div className="space-y-1 text-xs font-mono text-gray-400">
+                  <p>✓ Binaural beats (different Hz each ear)</p>
+                  <p>✓ Visual entrainment (border pulses at healing Hz)</p>
+                  <p>✓ Haptic feedback (synced to breath)</p>
+                  <p>✓ HRV biofeedback (watch yourself heal)</p>
+                  <p className="text-pink-400 mt-2">Every phone → Free healing center</p>
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
 
       {/* EMERGENCY MODE BANNER */}
@@ -1274,14 +1319,22 @@ export default function FrequencyChamber() {
         </div>
       )}
 
-      {/* TIME SUGGESTION */}
+      {/* TIME SUGGESTION - COLLAPSIBLE */}
       <div className="max-w-4xl mx-auto p-4">
-        <div className="bg-cyan-900/20 border-2 border-cyan-500/50 p-3 flex items-center gap-3">
-          <Clock className="w-5 h-5 text-cyan-400" />
-          <p className="text-cyan-300 text-sm font-mono">
-            Based on time of day, we suggest: <strong className="text-white">{PROTOCOLS[suggestedProtocol].name}</strong>
-          </p>
-        </div>
+        <button
+          onClick={() => setShowTimeSuggestion(!showTimeSuggestion)}
+          className="w-full bg-cyan-900/20 border-2 border-cyan-500/50 p-3 hover:bg-cyan-900/30 transition-all"
+        >
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3 flex-1">
+              <Clock className="w-5 h-5 text-cyan-400" />
+              <p className="text-cyan-300 text-sm font-mono">
+                Based on time of day, we suggest: <strong className="text-white">{PROTOCOLS[suggestedProtocol].name}</strong>
+              </p>
+            </div>
+            <span className="text-cyan-400 font-black text-xl ml-2">{showTimeSuggestion ? '−' : '+'}</span>
+          </div>
+        </button>
       </div>
       
       {/* PROTOCOL GRID - ORGANIZED BY CATEGORY */}
