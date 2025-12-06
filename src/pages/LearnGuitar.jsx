@@ -7,6 +7,7 @@ import { COOLASFUCKMusicNote, COOLASFUCKHeart, COOLASFUCKGlobe, COOLASFUCKZap, C
 import InteractiveChordPlayer from '@/components/guitar/InteractiveChordPlayer';
 import DrumLoops from '@/components/guitar/DrumLoops';
 import LyricsChordDisplay from '@/components/guitar/LyricsChordDisplay';
+import RecordingStudio from '@/components/guitar/RecordingStudio';
 
 // CHORD DIAGRAMS - Simple visual representation
 const ChordDiagram = ({ name, frets, fingers }) => {
@@ -265,6 +266,9 @@ export default function LearnGuitarPage() {
                         Easy songs with simple chords - perfect for beginners!
                     </p>
                 </motion.div>
+
+                {/* RECORDING STUDIO */}
+                <RecordingStudio />
 
                 {/* DRUM LOOPS */}
                 <Card className="bg-black border-4 border-purple-500">
