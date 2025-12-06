@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Heart, Moon, Brain, Zap, Shield, Wind, Sun, Volume2, VolumeX, Clock, Info, X, Camera, Activity, Ear, Share2 } from 'lucide-react';
 import { COOLASFUCKWaves } from '@/components/shared/COOLASFUCKIcon';
+import BiometricHealing from '@/components/radio/BiometricHealing';
 
 /**
  * UF51 FREQUENCY CHAMBER
@@ -950,6 +951,11 @@ export default function FrequencyChamber() {
         )}
       </AnimatePresence>
       
+      {/* BIOMETRIC HEALING */}
+      <div className="max-w-4xl mx-auto p-4">
+        <BiometricHealing />
+      </div>
+
       {/* 8-BIT SHARE BUTTON */}
       <div className="max-w-4xl mx-auto p-4">
         <motion.button

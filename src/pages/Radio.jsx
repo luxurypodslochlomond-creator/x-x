@@ -15,7 +15,7 @@ import { useAudio } from '@/components/shared/AudioProvider';
 import P51Symbol from '@/components/shared/P51Symbol';
 import { Link, useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
-import BiometricHealing from '@/components/radio/BiometricHealing';
+
 
 
 export default function RadioPage() {
@@ -348,8 +348,7 @@ Listen free at UF51.LOVE
           )}
         </div>
 
-        {/* BIOMETRIC HEALING */}
-        <BiometricHealing />
+
 
         {/* P2P MESH - 8-BIT */}
         <Card className="bg-black border-4 border-green-500">
