@@ -1149,19 +1149,9 @@ export default function FrequencyChamber() {
   return (
     <div className="min-h-screen bg-black text-white">
       
-      {/* HEADER - ENHANCED 8-BIT STYLE */}
+      {/* HEADER */}
       <div className="border-b-4 border-cyan-500 p-6 md:p-8 bg-black">
         <div className="max-w-4xl mx-auto">
-
-          {/* 8-BIT BRANDING BADGE */}
-          <div className="flex justify-center mb-4">
-            <div className="bg-black border-4 border-pink-500 px-4 py-2 inline-block" style={{ boxShadow: '6px 6px 0px rgba(236, 72, 153, 0.8)', imageRendering: 'pixelated' }}>
-              <p className="text-pink-400 font-black font-mono text-xs tracking-widest">
-                🎮 8-BIT HEALING CHAMBER 🎮
-              </p>
-            </div>
-          </div>
-
           <div className="flex items-center justify-center gap-4 mb-4">
             <motion.div
               animate={{

@@ -718,7 +718,7 @@ export default function AdminPatents() {
               </p>
               
               <p className="text-yellow-300 text-xs mt-2">
-                <strong>Discovered:</strong> BRO51 + AI51 (Nov 7, 2024). Mushroom mycelium electricity → Music as data carrier.
+                <strong>Discovered:</strong> BRO51 + AI51 (Nov 7, 2025). Mushroom mycelium electricity → Music as data carrier.
               </p>
             </CardContent>
           </Card>
