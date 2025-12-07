@@ -1171,7 +1171,7 @@ export default function FrequencyChamber() {
             FREQUENCY CHAMBER
           </h1>
           <p className="text-gray-400 font-mono text-sm text-center">
-            Evidence-based healing frequencies
+            Evidence-based healing frequencies • Zero pseudo-science • Retro vibes
           </p>
 
           {/* PIXEL DECORATION */}
