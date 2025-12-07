@@ -81,7 +81,7 @@ export default function AdminPatents() {
             INNOVATIONS
           </h1>
           <p className="text-xl text-gray-300">
-            14 Real Innovations • 11 Working Now
+            13 Real Innovations • 10 Working Now
           </p>
 
           {/* LIVE STATS */}
@@ -129,7 +129,7 @@ export default function AdminPatents() {
             </div>
             <div className="space-y-4">
               <p className="text-white text-lg">
-                <strong className="text-green-400">11 innovations = LIVE NOW.</strong> You can use them today. Not "coming soon." Not theory. WORKING CODE.
+                <strong className="text-green-400">10 innovations = LIVE NOW.</strong> You can use them today. Not "coming soon." Not theory. WORKING CODE.
               </p>
               <p className="text-gray-300">
                 Open the app → Use the feature → See it work. That's proof.
@@ -352,40 +352,7 @@ export default function AdminPatents() {
             </CardContent>
           </Card>
 
-          {/* #3 - TINNITUS AUTO-DETECTOR */}
-          <Card className="bg-black border-2 border-purple-500 shadow-[0_0_40px_rgba(168,85,247,0.8)]">
-            <CardContent className="p-6">
-              <div className="flex items-center gap-2 mb-2">
-                <motion.div 
-                  className="w-3 h-3 bg-purple-500 rounded-full"
-                  animate={{ scale: [1, 1.3, 1], opacity: [0.6, 1, 0.6] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                />
-                <span className="text-purple-400 text-xs font-bold">WORKING NOW ✅ (BREAKTHROUGH Nov 2025)</span>
-              </div>
-              <h4 className="text-white font-bold text-xl mb-2">3. Automatic Multi-Frequency Tinnitus Detection + Cure</h4>
-              <p className="text-gray-300 text-sm mb-2">
-                <strong className="text-white">What it does:</strong> Microphone listens to YOUR tinnitus. AI detects ALL frequencies automatically (most people have 2-5 buzzes). Generates inverse waves for each one simultaneously. Multi-frequency destructive interference = TOTAL CANCELLATION. 10 seconds. Zero manual searching.
-              </p>
-              
-              <div className="bg-purple-900/40 border border-purple-500/50 rounded-lg p-3 my-3">
-                <p className="text-purple-300 font-bold text-sm mb-2">WHY IT'S A BREAKTHROUGH:</p>
-                <ul className="text-xs text-gray-300 space-y-1">
-                  <li>• Medical tinnitus devices = £2000-5000 (single frequency, manual)</li>
-                  <li>• Our system = FREE (multi-frequency, automatic)</li>
-                  <li>• Detects 2-5 frequencies at once (most people have multiple buzzes)</li>
-                  <li>• Generates simultaneous inverse waves = COMPLETE cancellation</li>
-                  <li>• Nobody else does automatic multi-frequency detection + cure</li>
-                </ul>
-              </div>
-              
-              <p className="text-green-400 text-xs font-bold">
-                STATUS: LIVE NOW (Dec 2025). Open Decompression Chamber → "AUTO-FIND ALL FREQUENCIES" → Grant mic → 10 seconds → SILENCE.
-              </p>
-            </CardContent>
-          </Card>
-
-          {/* #4 - REAL-TIME AI MATERIAL DETECTION */}
+          {/* #3 - REAL-TIME AI MATERIAL DETECTION */}
           <Card className="bg-black border-2 border-green-500">
             <CardContent className="p-6">
               <div className="flex items-center gap-2 mb-2">
@@ -396,7 +363,7 @@ export default function AdminPatents() {
                 />
                 <span className="text-green-400 text-xs font-bold">WORKING NOW ✅</span>
               </div>
-              <h4 className="text-white font-bold text-xl mb-2">4. Real-Time AI Material Detection</h4>
+              <h4 className="text-white font-bold text-xl mb-2">3. Real-Time AI Material Detection</h4>
               <p className="text-gray-300 text-sm mb-2">
                 <strong className="text-white">What it does:</strong> Live camera scanning. AI detects plastic, glass, metal. Estimates weight. Calculates recycling bonus. STRICT mode prevents fake detection.
               </p>
@@ -425,7 +392,7 @@ export default function AdminPatents() {
                 />
                 <span className="text-green-400 text-xs font-bold">WORKING NOW ✅</span>
               </div>
-              <h4 className="text-white font-bold text-xl mb-2">5. Offline-First Architecture</h4>
+              <h4 className="text-white font-bold text-xl mb-2">4. Offline-First Architecture</h4>
               <p className="text-gray-300 text-sm mb-2">
                 <strong className="text-white">What it does:</strong> Use entire app without internet. Actions stored locally. Auto-syncs when online. Works in North Korea, Palestine, anywhere.
               </p>
@@ -446,7 +413,7 @@ export default function AdminPatents() {
                 />
                 <span className="text-pink-400 text-xs font-bold">WORKING NOW ✅ (BREAKTHROUGH Dec 2025)</span>
               </div>
-              <h4 className="text-white font-bold text-xl mb-2">6. HRV Biometric Healing (Camera = Heart Monitor)</h4>
+              <h4 className="text-white font-bold text-xl mb-2">5. HRV Biometric Healing (Camera = Heart Monitor)</h4>
               <p className="text-gray-300 text-sm mb-2">
                 <strong className="text-white">What it does:</strong> Camera detects your heartbeat through finger. Calculates HRV coherence in real-time. Adaptive healing - frequencies adjust to YOUR body's response. Watch yourself heal.
               </p>
@@ -482,7 +449,7 @@ export default function AdminPatents() {
                 />
                 <span className="text-purple-400 text-xs font-bold">WORKING NOW ✅ (BREAKTHROUGH Nov 2025)</span>
               </div>
-              <h4 className="text-white font-bold text-xl mb-2">7. Multi-Modal Healing (Audio + Visual + Haptic + Biometric)</h4>
+              <h4 className="text-white font-bold text-xl mb-2">6. Multi-Modal Healing (Audio + Visual + Haptic + Biometric)</h4>
               <p className="text-gray-300 text-sm mb-2">
                 <strong className="text-white">What it does:</strong> Your phone becomes a healing chamber. Audio (binaural beats), Visual (entrainment flashing), Haptic (breath-synced vibration), Biometric (HRV feedback). All synchronized. All evidence-based.
               </p>
@@ -518,7 +485,7 @@ export default function AdminPatents() {
                 />
                 <span className="text-red-400 text-xs font-bold">WORKING NOW ✅ (BREAKTHROUGH Dec 2025 - LIFE-SAVING)</span>
               </div>
-              <h4 className="text-white font-bold text-xl mb-2">8. Emergency Panic Detection + Auto-Rescue Protocol</h4>
+              <h4 className="text-white font-bold text-xl mb-2">7. Emergency Panic Detection + Auto-Rescue Protocol</h4>
               <p className="text-gray-300 text-sm mb-2">
                 <strong className="text-white">What it does:</strong> HRV biofeedback detects panic attack in real-time (heart rate spike + coherence collapse). Auto-switches to 528Hz emergency rescue. Haptic SOS pattern. Ultra-slow breathing (4/min). Stays with you until stabilized.
               </p>
@@ -554,7 +521,7 @@ export default function AdminPatents() {
                 />
                 <span className="text-green-400 text-xs font-bold">WORKING NOW ✅</span>
               </div>
-              <h4 className="text-white font-bold text-xl mb-2">9. Anonymous Mode (Zero Barriers)</h4>
+              <h4 className="text-white font-bold text-xl mb-2">8. Anonymous Mode (Zero Barriers)</h4>
               <p className="text-gray-300 text-sm mb-2">
                 <strong className="text-white">What it does:</strong> No email required. Local accounts work offline. Upgrade to real account anytime. Universal access.
               </p>
@@ -575,7 +542,7 @@ export default function AdminPatents() {
                 />
                 <span className="text-green-400 text-xs font-bold">WORKING NOW ✅</span>
               </div>
-              <h4 className="text-white font-bold text-xl mb-2">10. Verified Action → Currency</h4>
+              <h4 className="text-white font-bold text-xl mb-2">9. Verified Action → Currency</h4>
               <p className="text-gray-300 text-sm mb-2">
                 <strong className="text-white">What it does:</strong> 1kg litter = 1 $P51. AI verifies. Photo hash prevents duplicates. GPS checks location. Simple, fair, instant.
               </p>
@@ -600,7 +567,7 @@ export default function AdminPatents() {
                 <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
                 <span className="text-yellow-400 text-xs font-bold">THEORY (Phase 2)</span>
               </div>
-              <h4 className="text-white font-bold text-xl mb-2">11. P2P Mesh Music + Artist Payment</h4>
+              <h4 className="text-white font-bold text-xl mb-2">10. P2P Mesh Music + Artist Payment</h4>
               <p className="text-gray-300 text-sm mb-2">
                 <strong className="text-white">What it will do:</strong> Bluetooth/WiFi Direct sharing. Offline playback. Artist gets paid when recipient connects. Stadium-scale viral spread.
               </p>
@@ -621,7 +588,7 @@ export default function AdminPatents() {
                 />
                 <span className="text-green-400 text-xs font-bold">WORKING NOW ✅</span>
               </div>
-              <h4 className="text-white font-bold text-xl mb-2">12. Zero-Loss Audio Streaming</h4>
+              <h4 className="text-white font-bold text-xl mb-2">11. Zero-Loss Audio Streaming</h4>
               <p className="text-gray-300 text-sm mb-2">
                 <strong className="text-white">What it does:</strong> Artist uploads FLAC/WAV. Listener receives FLAC/WAV. No transcoding. No compression. No quality loss.
               </p>
@@ -650,7 +617,7 @@ export default function AdminPatents() {
                 />
                 <span className="text-green-400 text-xs font-bold">WORKING NOW ✅</span>
               </div>
-              <h4 className="text-white font-bold text-xl mb-2">13. Information Library (Offline Truth Network)</h4>
+              <h4 className="text-white font-bold text-xl mb-2">12. Information Library (Offline Truth Network)</h4>
               <p className="text-gray-300 text-sm mb-2">
                 <strong className="text-white">What it does:</strong> Real news, verified education, cited sources. Works offline. Spreads P2P. Zero ads, zero propaganda.
               </p>
@@ -671,7 +638,7 @@ export default function AdminPatents() {
                 />
                 <span className="text-green-400 text-xs font-bold">WORKING NOW ✅</span>
               </div>
-              <h4 className="text-white font-bold text-xl mb-2">14. Artist 90/10 Split Economics</h4>
+              <h4 className="text-white font-bold text-xl mb-2">13. Artist 90/10 Split Economics</h4>
               <p className="text-gray-300 text-sm mb-2">
                 <strong className="text-white">What it does:</strong> Artist keeps 90% of all revenue. 10% to planetary healing fund. Automated, transparent, fair.
               </p>
@@ -692,7 +659,7 @@ export default function AdminPatents() {
                 />
                 <span className="text-cyan-400 text-xs font-bold">BREAKTHROUGH (Dec 2025) 🔥</span>
               </div>
-              <h4 className="text-white font-bold text-xl mb-2">10. Audio Steganography (Music = Money = Truth)</h4>
+              <h4 className="text-white font-bold text-xl mb-2">14. Audio Steganography (Music = Money = Truth)</h4>
               
               <div className="bg-red-900/30 border border-red-500/50 rounded-lg p-4 mb-4">
                 <p className="text-red-300 font-bold mb-2">❌ THE PROBLEM (Before):</p>
@@ -741,7 +708,7 @@ export default function AdminPatents() {
                 />
                 <span className="text-green-400 text-xs font-bold">WORKING NOW ✅ (BREAKTHROUGH Dec 2025)</span>
               </div>
-              <h4 className="text-white font-bold text-2xl mb-3">11. Cryptographic Cleanup Security (Tamper-Proof)</h4>
+              <h4 className="text-white font-bold text-2xl mb-3">15. Cryptographic Cleanup Security (Tamper-Proof)</h4>
               
               <div className="bg-green-900/40 border-2 border-green-500 rounded-lg p-4 mb-4">
                 <p className="text-green-300 font-black mb-3 text-xl">🔐 WHAT IT IS:</p>
@@ -836,7 +803,7 @@ export default function AdminPatents() {
                 />
                 <span className="text-cyan-400 text-xs font-bold">WORKING NOW ✅ (QUANTUM TRANSMISSION)</span>
               </div>
-              <h4 className="text-white font-bold text-2xl mb-3">12. $P51 Quantum Wallet (Payment Gateway Without Banks)</h4>
+              <h4 className="text-white font-bold text-2xl mb-3">16. $P51 Quantum Wallet (Payment Gateway Without Banks)</h4>
               
               <div className="bg-cyan-900/40 border-2 border-cyan-500 rounded-lg p-4 mb-4">
                 <p className="text-cyan-300 font-black mb-3 text-xl">⚡ WHAT IT IS:</p>
@@ -999,11 +966,11 @@ export default function AdminPatents() {
 
         {/* SUMMARY - UPDATED */}
         <div className="bg-black border-2 border-green-500 rounded-xl p-6">
-        <h3 className="text-2xl font-black text-green-400 mb-4">TOTAL: 14 Real Innovations</h3>
+        <h3 className="text-2xl font-black text-green-400 mb-4">TOTAL: 13 Real Innovations</h3>
         <div className="space-y-3">
           <div className="flex items-center gap-3">
             <COOLASFUCKShield size={28} animate={true} />
-            <span className="text-white"><strong>11 WORKING NOW</strong> (live today - wallet, crypto security, tinnitus, HRV biometric, multi-modal healing, AI scanner, offline-first, more)</span>
+            <span className="text-white"><strong>10 WORKING NOW</strong> (live today - wallet, crypto security, HRV biometric, multi-modal healing, emergency panic detection, AI scanner, offline-first, more)</span>
           </div>
           <div className="flex items-center gap-3">
             <COOLASFUCKZap size={28} animate={true} />
@@ -1011,12 +978,12 @@ export default function AdminPatents() {
           </div>
           <div className="flex items-center gap-3">
             <COOLASFUCKBrain size={28} animate={false} />
-            <span className="text-white"><strong>1 THEORY</strong> (Full P2P Mesh - needs native app)</span>
+            <span className="text-white"><strong>2 THEORY</strong> (P2P Mesh needs native app, Crypto duplication needs more duplicates)</span>
           </div>
         </div>
         <div className="mt-4 p-4 bg-cyan-900/30 border border-cyan-500/50 rounded-lg">
           <p className="text-cyan-300 text-sm">
-            <strong>For grants:</strong> 11 working innovations (including 3 breakthroughs: wallet, crypto security, multi-modal healing), 1 in development (Audio Steg), 1 clear path. 
+            <strong>For grants:</strong> 10 working innovations (including 3 breakthroughs: wallet, crypto security, multi-modal healing), 1 in development (Audio Steg), 2 theory (P2P mesh, full crypto wallet duplication). 
             Not "ideas." WORKING CODE + EXISTING TECH + CREDIBLE ROADMAP. 
             OPEN SOURCE. HEALING FIRST. ZERO CARBON.
           </p>
