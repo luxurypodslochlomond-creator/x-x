@@ -81,7 +81,7 @@ export default function AdminPatents() {
             INNOVATIONS
           </h1>
           <p className="text-xl text-gray-300">
-            12 Real Innovations • 8 Working Now
+            13 Real Innovations • 11 Working Now
           </p>
 
           {/* LIVE STATS */}
@@ -385,7 +385,7 @@ export default function AdminPatents() {
             </CardContent>
           </Card>
 
-          {/* #4 - ANONYMOUS MODE */}
+          {/* #4 - REAL-TIME AI MATERIAL DETECTION */}
           <Card className="bg-black border-2 border-green-500">
             <CardContent className="p-6">
               <div className="flex items-center gap-2 mb-2">
@@ -396,7 +396,129 @@ export default function AdminPatents() {
                 />
                 <span className="text-green-400 text-xs font-bold">WORKING NOW ✅</span>
               </div>
-              <h4 className="text-white font-bold text-xl mb-2">4. Anonymous Mode (Zero Barriers)</h4>
+              <h4 className="text-white font-bold text-xl mb-2">4. Real-Time AI Material Detection</h4>
+              <p className="text-gray-300 text-sm mb-2">
+                <strong className="text-white">What it does:</strong> Live camera scanning. AI detects plastic, glass, metal. Estimates weight. Calculates recycling bonus. STRICT mode prevents fake detection.
+              </p>
+              {liveStats && liveStats.totalCleanups > 0 && (
+                <div className="bg-green-900/30 border border-green-500/30 rounded-lg p-2 mt-2">
+                  <p className="text-green-300 text-xs">
+                    <Activity className="w-3 h-3 inline mr-1" />
+                    <strong>{liveStats.totalCleanups} cleanups verified</strong> using AI detection
+                  </p>
+                </div>
+              )}
+              <p className="text-green-400 text-xs font-bold mt-2">
+                STATUS: Live Nov 2025. NewCleanup → "AI51 Real-Time Scan" → Watch it work.
+              </p>
+            </CardContent>
+          </Card>
+
+          {/* #5 - OFFLINE-FIRST ARCHITECTURE */}
+          <Card className="bg-black border-2 border-green-500">
+            <CardContent className="p-6">
+              <div className="flex items-center gap-2 mb-2">
+                <motion.div 
+                  className="w-3 h-3 bg-green-500 rounded-full"
+                  animate={{ scale: [1, 1.2, 1] }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
+                />
+                <span className="text-green-400 text-xs font-bold">WORKING NOW ✅</span>
+              </div>
+              <h4 className="text-white font-bold text-xl mb-2">5. Offline-First Architecture</h4>
+              <p className="text-gray-300 text-sm mb-2">
+                <strong className="text-white">What it does:</strong> Use entire app without internet. Actions stored locally. Auto-syncs when online. Works in North Korea, Palestine, anywhere.
+              </p>
+              <p className="text-green-400 text-xs font-bold">
+                STATUS: Live Nov 2025. Turn off WiFi → Use app → Turn WiFi back on → Watch it sync. Zero loss.
+              </p>
+            </CardContent>
+          </Card>
+
+          {/* #6 - HRV BIOMETRIC HEALING */}
+          <Card className="bg-black border-2 border-pink-500 shadow-[0_0_40px_rgba(236,72,153,0.6)]">
+            <CardContent className="p-6">
+              <div className="flex items-center gap-2 mb-2">
+                <motion.div 
+                  className="w-3 h-3 bg-pink-500 rounded-full"
+                  animate={{ scale: [1, 1.3, 1], opacity: [0.6, 1, 0.6] }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
+                />
+                <span className="text-pink-400 text-xs font-bold">WORKING NOW ✅ (BREAKTHROUGH Nov 2025)</span>
+              </div>
+              <h4 className="text-white font-bold text-xl mb-2">6. HRV Biometric Healing (Camera = Heart Monitor)</h4>
+              <p className="text-gray-300 text-sm mb-2">
+                <strong className="text-white">What it does:</strong> Camera detects your heartbeat through finger. Calculates HRV coherence in real-time. Adaptive healing - frequencies adjust to YOUR body's response. Watch yourself heal.
+              </p>
+              
+              <div className="bg-pink-900/40 border border-pink-500/50 rounded-lg p-3 my-3">
+                <div className="flex items-center gap-2 mb-2">
+                  <COOLASFUCKHeart size={20} animate={true} />
+                  <p className="text-pink-300 font-bold text-sm">WHY IT'S A BREAKTHROUGH:</p>
+                </div>
+                <ul className="text-xs text-gray-300 space-y-1">
+                  <li>• Medical HRV monitors = £200-500 (separate device)</li>
+                  <li>• Our system = FREE (uses your phone camera)</li>
+                  <li>• Real-time feedback shows healing happening</li>
+                  <li>• Emergency panic detection + auto-rescue protocol</li>
+                  <li>• Adaptive - frequencies adjust to YOUR body</li>
+                </ul>
+              </div>
+              
+              <p className="text-green-400 text-xs font-bold">
+                STATUS: Live Nov 2025. Frequency Chamber → "Enable HRV Biofeedback" → Cover camera → Watch coherence rise.
+              </p>
+            </CardContent>
+          </Card>
+
+          {/* #7 - MULTI-MODAL HEALING (Frequency Chamber) */}
+          <Card className="bg-black border-2 border-purple-500 shadow-[0_0_40px_rgba(168,85,247,0.6)]">
+            <CardContent className="p-6">
+              <div className="flex items-center gap-2 mb-2">
+                <motion.div 
+                  className="w-3 h-3 bg-purple-500 rounded-full"
+                  animate={{ scale: [1, 1.3, 1], opacity: [0.6, 1, 0.6] }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
+                />
+                <span className="text-purple-400 text-xs font-bold">WORKING NOW ✅ (BREAKTHROUGH Nov 2025)</span>
+              </div>
+              <h4 className="text-white font-bold text-xl mb-2">7. Multi-Modal Healing (Audio + Visual + Haptic + Biometric)</h4>
+              <p className="text-gray-300 text-sm mb-2">
+                <strong className="text-white">What it does:</strong> Your phone becomes a healing chamber. Audio (binaural beats), Visual (entrainment flashing), Haptic (breath-synced vibration), Biometric (HRV feedback). All synchronized. All evidence-based.
+              </p>
+              
+              <div className="bg-purple-900/40 border border-purple-500/50 rounded-lg p-3 my-3">
+                <div className="flex items-center gap-2 mb-2">
+                  <COOLASFUCKWaves size={20} animate={true} />
+                  <p className="text-purple-300 font-bold text-sm">WHY IT'S UNIQUE:</p>
+                </div>
+                <ul className="text-xs text-gray-300 space-y-1">
+                  <li>• Nobody combines all 4 modalities (audio/visual/haptic/biometric)</li>
+                  <li>• Evidence-based (MIT research, HeartMath, sleep science)</li>
+                  <li>• Adaptive to YOUR body (HRV feedback adjusts protocol)</li>
+                  <li>• FREE (medical devices = thousands)</li>
+                  <li>• Works offline anywhere</li>
+                </ul>
+              </div>
+              
+              <p className="text-green-400 text-xs font-bold">
+                STATUS: Live Nov 2025. Frequency Chamber page = full multi-modal healing system.
+              </p>
+            </CardContent>
+          </Card>
+
+          {/* #8 - ANONYMOUS MODE */}
+          <Card className="bg-black border-2 border-green-500">
+            <CardContent className="p-6">
+              <div className="flex items-center gap-2 mb-2">
+                <motion.div 
+                  className="w-3 h-3 bg-green-500 rounded-full"
+                  animate={{ scale: [1, 1.2, 1] }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
+                />
+                <span className="text-green-400 text-xs font-bold">WORKING NOW ✅</span>
+              </div>
+              <h4 className="text-white font-bold text-xl mb-2">8. Anonymous Mode (Zero Barriers)</h4>
               <p className="text-gray-300 text-sm mb-2">
                 <strong className="text-white">What it does:</strong> No email required. Local accounts work offline. Upgrade to real account anytime. Universal access.
               </p>
@@ -417,7 +539,7 @@ export default function AdminPatents() {
                 />
                 <span className="text-green-400 text-xs font-bold">WORKING NOW ✅</span>
               </div>
-              <h4 className="text-white font-bold text-xl mb-2">5. Verified Action → Currency</h4>
+              <h4 className="text-white font-bold text-xl mb-2">9. Verified Action → Currency</h4>
               <p className="text-gray-300 text-sm mb-2">
                 <strong className="text-white">What it does:</strong> 1kg litter = 1 $P51. AI verifies. Photo hash prevents duplicates. GPS checks location. Simple, fair, instant.
               </p>
@@ -442,7 +564,7 @@ export default function AdminPatents() {
                 <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
                 <span className="text-yellow-400 text-xs font-bold">THEORY (Phase 2)</span>
               </div>
-              <h4 className="text-white font-bold text-xl mb-2">6. P2P Mesh Music + Artist Payment</h4>
+              <h4 className="text-white font-bold text-xl mb-2">10. P2P Mesh Music + Artist Payment</h4>
               <p className="text-gray-300 text-sm mb-2">
                 <strong className="text-white">What it will do:</strong> Bluetooth/WiFi Direct sharing. Offline playback. Artist gets paid when recipient connects. Stadium-scale viral spread.
               </p>
@@ -463,7 +585,7 @@ export default function AdminPatents() {
                 />
                 <span className="text-green-400 text-xs font-bold">WORKING NOW ✅</span>
               </div>
-              <h4 className="text-white font-bold text-xl mb-2">7. Zero-Loss Audio Streaming</h4>
+              <h4 className="text-white font-bold text-xl mb-2">11. Zero-Loss Audio Streaming</h4>
               <p className="text-gray-300 text-sm mb-2">
                 <strong className="text-white">What it does:</strong> Artist uploads FLAC/WAV. Listener receives FLAC/WAV. No transcoding. No compression. No quality loss.
               </p>
@@ -492,7 +614,7 @@ export default function AdminPatents() {
                 />
                 <span className="text-green-400 text-xs font-bold">WORKING NOW ✅</span>
               </div>
-              <h4 className="text-white font-bold text-xl mb-2">8. Information Library (Offline Truth Network)</h4>
+              <h4 className="text-white font-bold text-xl mb-2">12. Information Library (Offline Truth Network)</h4>
               <p className="text-gray-300 text-sm mb-2">
                 <strong className="text-white">What it does:</strong> Real news, verified education, cited sources. Works offline. Spreads P2P. Zero ads, zero propaganda.
               </p>
@@ -513,7 +635,7 @@ export default function AdminPatents() {
                 />
                 <span className="text-green-400 text-xs font-bold">WORKING NOW ✅</span>
               </div>
-              <h4 className="text-white font-bold text-xl mb-2">9. Artist 90/10 Split Economics</h4>
+              <h4 className="text-white font-bold text-xl mb-2">13. Artist 90/10 Split Economics</h4>
               <p className="text-gray-300 text-sm mb-2">
                 <strong className="text-white">What it does:</strong> Artist keeps 90% of all revenue. 10% to planetary healing fund. Automated, transparent, fair.
               </p>
@@ -841,28 +963,28 @@ export default function AdminPatents() {
 
         {/* SUMMARY - UPDATED */}
         <div className="bg-black border-2 border-green-500 rounded-xl p-6">
-        <h3 className="text-2xl font-black text-green-400 mb-4">TOTAL: 12 Real Innovations</h3>
+        <h3 className="text-2xl font-black text-green-400 mb-4">TOTAL: 13 Real Innovations</h3>
         <div className="space-y-3">
           <div className="flex items-center gap-3">
             <COOLASFUCKShield size={28} animate={true} />
-            <span className="text-white"><strong>8 WORKING NOW</strong> (live today, use them now - including cryptographic security)</span>
+            <span className="text-white"><strong>11 WORKING NOW</strong> (live today - wallet, crypto security, tinnitus, HRV biometric, multi-modal healing, AI scanner, offline-first, more)</span>
           </div>
           <div className="flex items-center gap-3">
             <COOLASFUCKZap size={28} animate={true} />
-            <span className="text-white"><strong>2 BUILDING NOW</strong> (Audio Steganography + Hybrid P2P Wallet V2)</span>
+            <span className="text-white"><strong>1 BUILDING NOW</strong> (Audio Steganography - music = money = truth)</span>
           </div>
           <div className="flex items-center gap-3">
             <COOLASFUCKBrain size={28} animate={false} />
-            <span className="text-white"><strong>2 THEORY</strong> (know how, need native apps)</span>
+            <span className="text-white"><strong>1 THEORY</strong> (Full P2P Mesh - needs native app)</span>
           </div>
         </div>
-          <div className="mt-4 p-4 bg-cyan-900/30 border border-cyan-500/50 rounded-lg">
-            <p className="text-cyan-300 text-sm">
-              <strong>For grants:</strong> 8 working (including crypto security), 2 in development (Audio Steg + P2P Wallet V2), 2 clear paths. 
-              Not "ideas." WORKING CODE + EXISTING TECH + CREDIBLE ROADMAP. 
-              OPEN SOURCE. HEALING FIRST. ZERO CARBON.
-            </p>
-          </div>
+        <div className="mt-4 p-4 bg-cyan-900/30 border border-cyan-500/50 rounded-lg">
+          <p className="text-cyan-300 text-sm">
+            <strong>For grants:</strong> 11 working innovations (including 3 breakthroughs: wallet, crypto security, multi-modal healing), 1 in development (Audio Steg), 1 clear path. 
+            Not "ideas." WORKING CODE + EXISTING TECH + CREDIBLE ROADMAP. 
+            OPEN SOURCE. HEALING FIRST. ZERO CARBON.
+          </p>
+        </div>
 
           {liveStats && (
             <motion.div
