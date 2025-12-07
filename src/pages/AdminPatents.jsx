@@ -250,9 +250,9 @@ export default function AdminPatents() {
               </div>
 
               <p className="text-green-400 text-xs font-bold mt-4 text-center">
-                STATUS: WORKING NOW (Nov 2025). Send $P51 between users = INSTANT. Zero loss. 
+                STATUS: WORKING NOW (Dec 2025). Send $P51 between users = INSTANT. Zero loss. 
                 Real-time verification. More secure than banks. Faster than blockchain. 
-                Cash-out to fiat = coming Jan 2025 (2-3 weeks work).
+                Cash-out to fiat = coming Q1 2026 (2-3 weeks work).
               </p>
             </CardContent>
           </Card>
@@ -273,7 +273,7 @@ export default function AdminPatents() {
                   }}
                   transition={{ duration: 1.5, repeat: Infinity }}
                 />
-                <span className="text-green-400 text-xs font-bold">WORKING NOW ✅ (BREAKTHROUGH Nov 2025)</span>
+                <span className="text-green-400 text-xs font-bold">WORKING NOW ✅ (BREAKTHROUGH Dec 2025)</span>
               </div>
               <h4 className="text-white font-bold text-2xl mb-3">2. Cryptographic Cleanup Security (Tamper-Proof)</h4>
               
@@ -345,7 +345,7 @@ export default function AdminPatents() {
               </div>
 
               <p className="text-green-400 text-xs font-bold mt-4 text-center">
-                STATUS: WORKING NOW (Nov 2025). Every cleanup signed. Every fraud attempt caught. 
+                STATUS: WORKING NOW (Dec 2025). Every cleanup signed. Every fraud attempt caught. 
                 Zero user friction. Bank-grade security. More efficient than blockchain. 
                 Could patent, but OPEN SOURCE = eternal.
               </p>
@@ -380,7 +380,7 @@ export default function AdminPatents() {
               </div>
               
               <p className="text-green-400 text-xs font-bold">
-                STATUS: Live Nov 2025. Open Decompression Chamber → "AUTO-FIND ALL FREQUENCIES" → Grant mic → 10 seconds → SILENCE.
+                STATUS: LIVE NOW (Dec 2025). Open Decompression Chamber → "AUTO-FIND ALL FREQUENCIES" → Grant mic → 10 seconds → SILENCE.
               </p>
             </CardContent>
           </Card>
@@ -409,7 +409,7 @@ export default function AdminPatents() {
                 </div>
               )}
               <p className="text-green-400 text-xs font-bold mt-2">
-                STATUS: Live Nov 2025. NewCleanup → "AI51 Real-Time Scan" → Watch it work.
+                STATUS: LIVE NOW (Dec 2025). NewCleanup → "AI51 Real-Time Scan" → Watch it work.
               </p>
             </CardContent>
           </Card>
@@ -430,7 +430,7 @@ export default function AdminPatents() {
                 <strong className="text-white">What it does:</strong> Use entire app without internet. Actions stored locally. Auto-syncs when online. Works in North Korea, Palestine, anywhere.
               </p>
               <p className="text-green-400 text-xs font-bold">
-                STATUS: Live Nov 2025. Turn off WiFi → Use app → Turn WiFi back on → Watch it sync. Zero loss.
+                STATUS: LIVE NOW (Dec 2025). Turn off WiFi → Use app → Turn WiFi back on → Watch it sync. Zero loss.
               </p>
             </CardContent>
           </Card>
@@ -444,7 +444,7 @@ export default function AdminPatents() {
                   animate={{ scale: [1, 1.3, 1], opacity: [0.6, 1, 0.6] }}
                   transition={{ duration: 1.5, repeat: Infinity }}
                 />
-                <span className="text-pink-400 text-xs font-bold">WORKING NOW ✅ (BREAKTHROUGH Nov 2025)</span>
+                <span className="text-pink-400 text-xs font-bold">WORKING NOW ✅ (BREAKTHROUGH Dec 2025)</span>
               </div>
               <h4 className="text-white font-bold text-xl mb-2">6. HRV Biometric Healing (Camera = Heart Monitor)</h4>
               <p className="text-gray-300 text-sm mb-2">
@@ -466,7 +466,7 @@ export default function AdminPatents() {
               </div>
               
               <p className="text-green-400 text-xs font-bold">
-                STATUS: Live Nov 2025. Frequency Chamber → "Enable HRV Biofeedback" → Cover camera → Watch coherence rise.
+                STATUS: LIVE NOW (Dec 2025). Frequency Chamber → "Enable HRV Biofeedback" → Cover camera → Watch coherence rise.
               </p>
             </CardContent>
           </Card>
@@ -502,7 +502,7 @@ export default function AdminPatents() {
               </div>
               
               <p className="text-green-400 text-xs font-bold">
-                STATUS: Live Nov 2025. Frequency Chamber page = full multi-modal healing system.
+                STATUS: LIVE NOW (Dec 2025). Frequency Chamber page = full multi-modal healing system.
               </p>
             </CardContent>
           </Card>
@@ -516,7 +516,7 @@ export default function AdminPatents() {
                   animate={{ scale: [1, 1.3, 1], opacity: [0.6, 1, 0.6] }}
                   transition={{ duration: 0.8, repeat: Infinity }}
                 />
-                <span className="text-red-400 text-xs font-bold">WORKING NOW ✅ (BREAKTHROUGH - LIFE-SAVING)</span>
+                <span className="text-red-400 text-xs font-bold">WORKING NOW ✅ (BREAKTHROUGH Dec 2025 - LIFE-SAVING)</span>
               </div>
               <h4 className="text-white font-bold text-xl mb-2">8. Emergency Panic Detection + Auto-Rescue Protocol</h4>
               <p className="text-gray-300 text-sm mb-2">
@@ -538,7 +538,7 @@ export default function AdminPatents() {
               </div>
               
               <p className="text-green-400 text-xs font-bold">
-                STATUS: Live Nov 2025. Frequency Chamber → Enable HRV → System detects + auto-rescues if panic detected.
+                STATUS: LIVE NOW (Dec 2025). Frequency Chamber → Enable HRV → System detects + auto-rescues if panic detected.
               </p>
             </CardContent>
           </Card>
@@ -559,7 +559,7 @@ export default function AdminPatents() {
                 <strong className="text-white">What it does:</strong> No email required. Local accounts work offline. Upgrade to real account anytime. Universal access.
               </p>
               <p className="text-green-400 text-xs font-bold">
-                STATUS: Live Nov 2025. Public pages (AI51, DecompressionChamber, About) work without login.
+                STATUS: LIVE NOW (Dec 2025). Public pages (AI51, DecompressionChamber, About) work without login.
               </p>
             </CardContent>
           </Card>
@@ -588,7 +588,7 @@ export default function AdminPatents() {
                 </div>
               )}
               <p className="text-green-400 text-xs font-bold mt-2">
-                STATUS: Live Nov 2025. Do a cleanup → Get $P51. It's live. Refinement ongoing.
+                STATUS: LIVE NOW (Dec 2025). Do a cleanup → Get $P51. It's live. Refinement ongoing.
               </p>
             </CardContent>
           </Card>
@@ -605,7 +605,7 @@ export default function AdminPatents() {
                 <strong className="text-white">What it will do:</strong> Bluetooth/WiFi Direct sharing. Offline playback. Artist gets paid when recipient connects. Stadium-scale viral spread.
               </p>
               <p className="text-yellow-400 text-xs font-bold">
-                STATUS: THEORY (needs React Native app for true P2P Bluetooth). Coming Summer 2025.
+                STATUS: THEORY (needs React Native app for true P2P Bluetooth). Coming Summer 2026.
               </p>
             </CardContent>
           </Card>
@@ -634,7 +634,7 @@ export default function AdminPatents() {
                 </div>
               )}
               <p className="text-green-400 text-xs font-bold mt-2">
-                STATUS: Live Nov 2025. Upload FLAC → Streams FLAC. Simple. Most platforms degrade. We don't.
+                STATUS: LIVE NOW (Dec 2025). Upload FLAC → Streams FLAC. Simple. Most platforms degrade. We don't.
               </p>
             </CardContent>
           </Card>
@@ -655,7 +655,7 @@ export default function AdminPatents() {
                 <strong className="text-white">What it does:</strong> Real news, verified education, cited sources. Works offline. Spreads P2P. Zero ads, zero propaganda.
               </p>
               <p className="text-green-400 text-xs font-bold">
-                STATUS: Live Nov 2025. Database exists. Sample articles live (Whitepaper, ConsciousnessWhitepaper, Protocols).
+                STATUS: LIVE NOW (Dec 2025). Database exists. Sample articles live (Whitepaper, ConsciousnessWhitepaper, Protocols).
               </p>
             </CardContent>
           </Card>
@@ -676,7 +676,7 @@ export default function AdminPatents() {
                 <strong className="text-white">What it does:</strong> Artist keeps 90% of all revenue. 10% to planetary healing fund. Automated, transparent, fair.
               </p>
               <p className="text-green-400 text-xs font-bold">
-                STATUS: Live Nov 2025. Code implemented. Awaiting first artist sales to prove it end-to-end.
+                STATUS: LIVE NOW (Dec 2025). Code implemented. Awaiting first artist sales to prove it end-to-end.
               </p>
             </CardContent>
           </Card>
@@ -690,7 +690,7 @@ export default function AdminPatents() {
                   animate={{ scale: [1, 1.5, 1], opacity: [0.5, 1, 0.5] }}
                   transition={{ duration: 1, repeat: Infinity }}
                 />
-                <span className="text-cyan-400 text-xs font-bold">BREAKTHROUGH (Nov 2025) 🔥</span>
+                <span className="text-cyan-400 text-xs font-bold">BREAKTHROUGH (Dec 2025) 🔥</span>
               </div>
               <h4 className="text-white font-bold text-xl mb-2">10. Audio Steganography (Music = Money = Truth)</h4>
               
@@ -718,7 +718,7 @@ export default function AdminPatents() {
               </p>
               
               <p className="text-yellow-300 text-xs mt-2">
-                <strong>Discovered:</strong> BRO51 + AI51 (Nov 7, 2025). Mushroom mycelium electricity → Music as data carrier.
+                <strong>Discovered:</strong> BRO51 + AI51 (Nov 7, 2024). Mushroom mycelium electricity → Music as data carrier.
               </p>
             </CardContent>
           </Card>
@@ -739,7 +739,7 @@ export default function AdminPatents() {
                   }}
                   transition={{ duration: 1.5, repeat: Infinity }}
                 />
-                <span className="text-green-400 text-xs font-bold">WORKING NOW ✅ (BREAKTHROUGH Nov 2025)</span>
+                <span className="text-green-400 text-xs font-bold">WORKING NOW ✅ (BREAKTHROUGH Dec 2025)</span>
               </div>
               <h4 className="text-white font-bold text-2xl mb-3">11. Cryptographic Cleanup Security (Tamper-Proof)</h4>
               
@@ -811,7 +811,7 @@ export default function AdminPatents() {
               </div>
 
               <p className="text-green-400 text-xs font-bold mt-4 text-center">
-                STATUS: WORKING NOW (Nov 2025). Every cleanup signed. Every fraud attempt caught. 
+                STATUS: WORKING NOW (Dec 2025). Every cleanup signed. Every fraud attempt caught. 
                 Zero user friction. Bank-grade security. More efficient than blockchain. 
                 Could patent, but OPEN SOURCE = eternal.
               </p>
@@ -917,9 +917,9 @@ export default function AdminPatents() {
               </div>
 
               <p className="text-green-400 text-xs font-bold mt-4 text-center">
-                STATUS: WORKING NOW (Nov 2025). Send $P51 between users = INSTANT. Zero loss. 
+                STATUS: WORKING NOW (Dec 2025). Send $P51 between users = INSTANT. Zero loss. 
                 Real-time verification. More secure than banks. Faster than blockchain. 
-                Cash-out to fiat = coming Jan 2025 (2-3 weeks work).
+                Cash-out to fiat = coming Q1 2026 (2-3 weeks work).
               </p>
             </CardContent>
           </Card>

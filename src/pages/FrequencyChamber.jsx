@@ -1149,9 +1149,19 @@ export default function FrequencyChamber() {
   return (
     <div className="min-h-screen bg-black text-white">
       
-      {/* HEADER */}
-      <div className="border-b-4 border-cyan-500 p-6 md:p-8">
+      {/* HEADER - ENHANCED 8-BIT STYLE */}
+      <div className="border-b-4 border-cyan-500 p-6 md:p-8 bg-black">
         <div className="max-w-4xl mx-auto">
+
+          {/* 8-BIT BRANDING BADGE */}
+          <div className="flex justify-center mb-4">
+            <div className="bg-black border-4 border-pink-500 px-4 py-2 inline-block" style={{ boxShadow: '6px 6px 0px rgba(236, 72, 153, 0.8)', imageRendering: 'pixelated' }}>
+              <p className="text-pink-400 font-black font-mono text-xs tracking-widest">
+                🎮 8-BIT HEALING CHAMBER 🎮
+              </p>
+            </div>
+          </div>
+
           <div className="flex items-center justify-center gap-4 mb-4">
             <motion.div
               animate={{
@@ -1167,12 +1177,25 @@ export default function FrequencyChamber() {
               <COOLASFUCKWaves size={56} animate={true} />
             </motion.div>
           </div>
-          <h1 className="text-4xl md:text-5xl font-black font-mono text-white text-center mb-3 tracking-wider">
+          <h1 className="text-4xl md:text-5xl font-black font-mono text-white text-center mb-3 tracking-wider" style={{ textShadow: '4px 4px 0px rgba(0,0,0,0.8)' }}>
             FREQUENCY CHAMBER
           </h1>
           <p className="text-gray-400 font-mono text-sm text-center">
-            Evidence-based healing frequencies • Zero pseudo-science
+            Evidence-based healing frequencies • Zero pseudo-science • Retro vibes
           </p>
+
+          {/* PIXEL DECORATION */}
+          <div className="flex justify-center gap-2 mt-4">
+            {[...Array(5)].map((_, i) => (
+              <motion.div
+                key={i}
+                className="w-3 h-3 bg-cyan-500"
+                animate={{ opacity: [0.3, 1, 0.3] }}
+                transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.2 }}
+                style={{ imageRendering: 'pixelated' }}
+              />
+            ))}
+          </div>
         </div>
       </div>
       
