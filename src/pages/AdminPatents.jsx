@@ -129,7 +129,7 @@ export default function AdminPatents() {
             </div>
             <div className="space-y-4">
               <p className="text-white text-lg">
-                <strong className="text-green-400">8 innovations = LIVE NOW.</strong> You can use them today. Not "coming soon." Not theory. WORKING CODE.
+                <strong className="text-green-400">11 innovations = LIVE NOW.</strong> You can use them today. Not "coming soon." Not theory. WORKING CODE.
               </p>
               <p className="text-gray-300">
                 Open the app → Use the feature → See it work. That's proof.
