@@ -1558,7 +1558,10 @@ export default function FrequencyChamber() {
             <Clock className="w-5 h-5 text-cyan-400" />
             <div className="flex-1">
               <p className="text-cyan-300 text-sm font-mono">
-                It's <strong className="text-white">{new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })}</strong> your time
+                It's <strong className="text-white">{new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })}</strong> your time (GMT{(() => {
+                  const offset = -new Date().getTimezoneOffset() / 60;
+                  return offset >= 0 ? `+${offset}` : offset;
+                })()})
               </p>
               <p className="text-gray-500 text-xs font-mono mt-1">
                 We suggest: <strong style={{ color: PROTOCOLS[suggestedProtocol].color }}>{PROTOCOLS[suggestedProtocol].name}</strong> (marked "NOW" below)
