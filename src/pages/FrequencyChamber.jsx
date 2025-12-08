@@ -1686,9 +1686,10 @@ export default function FrequencyChamber() {
 
 
       
-      {/* PROTOCOL GRID - ALL VISIBLE */}
-      <div className="max-w-4xl mx-auto p-4 space-y-6">
-        {PROTOCOL_SECTIONS.map((section) => (
+      {/* PROTOCOL GRID - ALL VISIBLE (hidden when protocol selected) */}
+      {!selectedProtocol && (
+        <div className="max-w-4xl mx-auto p-4 space-y-6">
+          {PROTOCOL_SECTIONS.map((section) => (
           <div key={section.id}>
             <div className="border-4 bg-black p-6" style={{ borderColor: section.color }}>
               <div className="mb-4">
@@ -1828,23 +1829,40 @@ export default function FrequencyChamber() {
               </AnimatePresence>
             </div>
           </div>
-        ))}
-      </div>
-      
-      {/* ACTIVE SESSION */}
+          ))}
+          </div>
+          )}
+
+          {/* ACTIVE SESSION - REPLACES GRID WHEN PROTOCOL SELECTED */}
       <AnimatePresence>
         {selectedProtocol && (
           <motion.div
             id="active-session"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
             className="max-w-4xl mx-auto p-4"
           >
             <div 
               className="border-4 p-8"
               style={{ borderColor: selectedProtocol.color, backgroundColor: `${selectedProtocol.color}10` }}
             >
+              {/* BACK BUTTON */}
+              <button
+                onClick={() => { if (isPlaying) stopAudio(); setSelectedProtocol(null); }}
+                className="mb-6 flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
+              >
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                  <rect x="12" y="8" width="2" height="4"/>
+                  <rect x="10" y="6" width="2" height="2"/>
+                  <rect x="10" y="12" width="2" height="2"/>
+                  <rect x="8" y="4" width="2" height="2"/>
+                  <rect x="8" y="14" width="2" height="2"/>
+                  <rect x="6" y="9" width="2" height="2"/>
+                </svg>
+                <span className="font-mono text-sm">Back to protocols</span>
+              </button>
+
               <div className="flex items-center justify-between mb-8">
                 <div className="flex items-center gap-4">
                   <PixelIcon icon={selectedProtocol.icon} color={selectedProtocol.color} size={48} animate={isPlaying} />
@@ -2024,13 +2042,16 @@ export default function FrequencyChamber() {
         )}
       </AnimatePresence>
       
-      {/* BIOMETRIC HEALING */}
-      <div className="max-w-4xl mx-auto p-4">
-        <BiometricHealing />
-      </div>
+      {/* BIOMETRIC HEALING - only show when no protocol selected */}
+      {!selectedProtocol && (
+        <div className="max-w-4xl mx-auto p-4">
+          <BiometricHealing />
+        </div>
+      )}
 
-      {/* 8-BIT SHARE BUTTON */}
-      <div className="max-w-4xl mx-auto p-4">
+      {/* 8-BIT SHARE BUTTON - only show when no protocol selected */}
+      {!selectedProtocol && (
+        <div className="max-w-4xl mx-auto p-4">
         <motion.button
           onClick={async () => {
             const shareText = `🎵 FREE HEALING FREQUENCIES
@@ -2083,14 +2104,17 @@ Try it: https://uf51.love/FrequencyChamber`;
                 SEND TO SOMEONE YOU LOVE
               </p>
             </div>
-          </div>
-        </motion.button>
-      </div>
+            </div>
+          </motion.button>
+        </div>
+      )}
 
-      {/* Footer */}
-      <div className="max-w-4xl mx-auto p-4 text-center">
-        <p className="text-gray-600 text-sm font-mono">Free forever • No extraction • Just healing</p>
-      </div>
+      {/* Footer - only show when no protocol selected */}
+      {!selectedProtocol && (
+        <div className="max-w-4xl mx-auto p-4 text-center">
+          <p className="text-gray-600 text-sm font-mono">Free forever • No extraction • Just healing</p>
+        </div>
+      )}
       
       <AnimatePresence>
         {showEvidenceModal && <EvidenceModal onClose={() => setShowEvidenceModal(false)} />}
