@@ -130,7 +130,7 @@ export default function AdminOnePager() {
                         </div>
                         <p className="text-xl font-black font-mono">uf51.love</p>
                         <p className="text-sm text-gray-600 font-mono">Making healing accessible to everyone, starting in Scotland</p>
-                        <p className="text-xs text-gray-500 font-mono mt-4">Contact: briandavidjames@gmail.com | Live Demo: uf51.love/FrequencyChamber</p>
+                        <p className="text-xs text-gray-500 font-mono mt-4">Contact: family@uf51.love | Live Demo: uf51.love/FrequencyChamber</p>
                     </div>
 
                 </div>
