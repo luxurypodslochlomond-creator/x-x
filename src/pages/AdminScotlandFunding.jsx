@@ -276,10 +276,10 @@ Whitepaper: uf51.love/Whitepaper
                     <h1 className="text-5xl font-black font-mono text-cyan-400">SCOTLAND FUNDING</h1>
                     <p className="text-gray-400 font-mono">Quick turnaround opportunities for UF51 mental health tech</p>
                     <div className="bg-green-900/30 border-2 border-green-500 p-4 inline-block">
-                        <p className="text-green-400 font-mono font-bold text-sm">✓ TOP 3 PRIORITIES (DIRECT FUNDERS):</p>
-                        <p className="text-white font-mono text-sm">1. Mental Health Foundation Scotland</p>
-                        <p className="text-white font-mono text-sm">2. WEAll Scotland</p>
-                        <p className="text-white font-mono text-sm">3. UnLtd Scotland</p>
+                        <p className="text-green-400 font-mono font-bold text-sm">🚨 APPLY THIS WEEK (DECEMBER 2025):</p>
+                        <p className="text-white font-mono text-sm">1. 🔥 UnLtd Awards (filling fast - 650 limit)</p>
+                        <p className="text-white font-mono text-sm">2. 💚 National Lottery Community Fund (open now)</p>
+                        <p className="text-white font-mono text-sm">3. 📞 Communities MH Fund (call local TSI)</p>
                     </div>
                     <div className="flex gap-4 justify-center">
                         <button
@@ -322,17 +322,33 @@ Whitepaper: uf51.love/Whitepaper
                                 </div>
 
                                 <div className="flex flex-wrap gap-3 text-sm">
+                                    {opp.applicationLink && (
+                                        <a href={opp.applicationLink} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-green-400 hover:text-green-300 font-bold">
+                                            <ExternalLink className="w-4 h-4" />
+                                            APPLY HERE
+                                        </a>
+                                    )}
                                     {opp.email && (
                                         <a href={`mailto:${opp.email}`} className="flex items-center gap-2 text-cyan-400 hover:text-cyan-300">
                                             <Mail className="w-4 h-4" />
                                             {opp.email}
                                         </a>
                                     )}
+                                    {opp.phone && (
+                                        <a href={`tel:${opp.phone.replace(/\s/g, '')}`} className="flex items-center gap-2 text-amber-400 hover:text-amber-300">
+                                            📞 {opp.phone}
+                                        </a>
+                                    )}
                                     {opp.link && (
                                         <a href={opp.link} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-pink-400 hover:text-pink-300">
                                             <ExternalLink className="w-4 h-4" />
-                                            Website
+                                            Info
                                         </a>
+                                    )}
+                                    {opp.localTSI && (
+                                        <div className="text-amber-400 text-sm">
+                                            📍 {opp.localTSI}
+                                        </div>
                                     )}
                                 </div>
                             </CardContent>
