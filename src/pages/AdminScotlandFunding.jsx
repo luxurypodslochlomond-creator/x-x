@@ -175,12 +175,75 @@ Whitepaper: uf51.love/Whitepaper
             focus: 'Early-stage healthtech',
             email: 'info@eosadvisory.com',
             notes: 'Impact investors - lead with "mental health crisis solution"'
+        }
+    ];
+
+    const globalFunding = [
+        {
+            name: '⭐ WHO Mental Health Innovation Fund',
+            amount: '£20,000-£100,000',
+            region: 'Global',
+            contact: 'World Health Organization - Mental Health',
+            link: 'https://www.who.int/teams/mental-health-and-substance-use/mental-health-atlas',
+            email: 'mnh@who.int',
+            notes: 'Digital mental health solutions - especially those reducing cost burden. Your zero-cost model is PERFECT for them.'
         },
         {
-            name: 'Par Equity (Edinburgh)',
-            focus: 'Scottish tech scale-ups',
-            email: 'enquiries@parequity.com',
-            notes: 'Bigger checks (£50k+) but move fast for strong founders'
+            name: 'Google.org Impact Challenge - Mental Health',
+            amount: '$100,000-$2,000,000',
+            region: 'Global',
+            contact: 'Google.org',
+            link: 'https://www.google.org/',
+            notes: 'They LOVE tech for good + mental health. You have live platform, MIT science, zero extraction.'
+        },
+        {
+            name: 'Wellcome Trust - Mental Health Tech',
+            amount: '£50,000-£500,000',
+            region: 'Global (UK-friendly)',
+            contact: 'Wellcome Trust',
+            link: 'https://wellcome.org/grant-funding',
+            email: 'grantenquiries@wellcome.org',
+            notes: 'Love evidence-based mental health innovation. Show MIT studies + live results.'
+        },
+        {
+            name: 'Skoll Foundation - Social Entrepreneurs',
+            amount: '$50,000-$150,000',
+            region: 'Global',
+            contact: 'Skoll Foundation',
+            link: 'https://skoll.org/apply/',
+            notes: 'You ARE a social entrepreneur. Mental health + Earth healing = perfect fit.'
+        },
+        {
+            name: 'Ashoka Fellows - Changemakers',
+            amount: 'Living stipend + network',
+            region: 'Global',
+            contact: 'Ashoka',
+            link: 'https://www.ashoka.org/en-gb/program/ashoka-fellowship',
+            notes: 'Not money upfront, but insane network + credibility. They back system-changers.'
+        },
+        {
+            name: 'Robert Wood Johnson Foundation',
+            amount: '$50,000-$500,000',
+            region: 'Global',
+            contact: 'RWJF',
+            link: 'https://www.rwjf.org/en/grants.html',
+            notes: 'US-based but fund global mental health. Zero-cost accessibility angle is strong.'
+        },
+        {
+            name: 'Open Society Foundations - Mental Health',
+            amount: '£30,000-£200,000',
+            region: 'Global',
+            contact: 'Open Society',
+            link: 'https://www.opensocietyfoundations.org/grants',
+            notes: 'Love justice + mental health. Your "accessible to all" angle wins.'
+        },
+        {
+            name: 'Omidyar Network - Tech for Good',
+            amount: '$100,000-$1,000,000',
+            region: 'Global',
+            contact: 'Omidyar Network',
+            link: 'https://omidyar.com/',
+            notes: 'eBay founder money. Love impact tech that scales. Show your numbers.'
         }
     ];
 
@@ -243,9 +306,48 @@ Whitepaper: uf51.love/Whitepaper
                     ))}
                 </div>
 
+                {/* GLOBAL FUNDING */}
+                <div className="space-y-4">
+                    <h2 className="text-2xl font-black font-mono text-green-400">🌍 GLOBAL FUNDING</h2>
+                    <p className="text-gray-400 font-mono text-sm mb-4">International grants/foundations - your mental health tech is GLOBAL</p>
+                    {globalFunding.map((fund, i) => (
+                        <Card key={i} className="bg-black border-4 border-green-500">
+                            <CardHeader>
+                                <div className="flex justify-between items-start">
+                                    <div className="flex-1">
+                                        <CardTitle className="text-xl font-black font-mono text-green-400">{fund.name}</CardTitle>
+                                        <div className="flex gap-4 mt-2 text-sm font-mono">
+                                            <span className="text-green-400 font-bold">{fund.amount}</span>
+                                            <span className="text-cyan-400">🌍 {fund.region}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </CardHeader>
+                            <CardContent className="space-y-3">
+                                <p className="text-gray-300 text-sm">{fund.notes}</p>
+
+                                <div className="flex flex-wrap gap-3 text-sm">
+                                    {fund.email && (
+                                        <a href={`mailto:${fund.email}`} className="flex items-center gap-2 text-cyan-400 hover:text-cyan-300">
+                                            <Mail className="w-4 h-4" />
+                                            {fund.email}
+                                        </a>
+                                    )}
+                                    {fund.link && (
+                                        <a href={fund.link} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-pink-400 hover:text-pink-300">
+                                            <ExternalLink className="w-4 h-4" />
+                                            Website
+                                        </a>
+                                    )}
+                                </div>
+                            </CardContent>
+                        </Card>
+                    ))}
+                </div>
+
                 {/* PRIVATE ANGELS */}
                 <div className="space-y-4">
-                    <h2 className="text-2xl font-black font-mono text-amber-400">👼 PRIVATE ANGELS</h2>
+                    <h2 className="text-2xl font-black font-mono text-amber-400">👼 PRIVATE ANGELS (Scotland)</h2>
                     {privateAngels.map((angel, i) => (
                         <Card key={i} className="bg-black border-4 border-amber-500">
                             <CardHeader>
