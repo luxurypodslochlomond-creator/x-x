@@ -775,7 +775,15 @@ const VoiceHealing = ({ onProtocolRecommend }) => {
   return (
     <div className="bg-black border-4 border-pink-500 p-6 mb-6">
       <div className="flex items-center gap-3 mb-4">
-        <Mic className="w-8 h-8 text-pink-400" />
+        <svg width="32" height="32" viewBox="0 0 24 24" className="flex-shrink-0">
+          <rect x="10" y="2" width="4" height="10" fill="#ec4899"/>
+          <rect x="8" y="4" width="2" height="6" fill="#f472b6"/>
+          <rect x="14" y="4" width="2" height="6" fill="#f472b6"/>
+          <rect x="10" y="12" width="4" height="2" fill="#ec4899"/>
+          <rect x="11" y="14" width="2" height="4" fill="#ec4899"/>
+          <rect x="6" y="18" width="12" height="2" fill="#ec4899"/>
+          <rect x="8" y="20" width="8" height="2" fill="#f472b6"/>
+        </svg>
         <div>
           <h3 className="text-xl font-black font-mono text-pink-400">VOICE HEALING</h3>
           <p className="text-sm text-gray-400 font-mono">Intent + Voice → AI finds your cure frequency</p>
@@ -837,12 +845,21 @@ const VoiceHealing = ({ onProtocolRecommend }) => {
         <button
           onClick={startRecording}
           disabled={!healingIntent.trim()}
-          className="w-full py-4 bg-pink-600 hover:bg-pink-700 text-white font-black font-mono text-lg border-4 border-pink-400 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-full py-4 bg-pink-600 hover:bg-pink-700 text-white font-black font-mono text-lg border-4 border-pink-400 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3"
           style={{ boxShadow: '4px 4px 0px rgba(236, 72, 153, 0.8)' }}
         >
-          🎤 TAP TO SPEAK
+          <svg width="24" height="24" viewBox="0 0 24 24">
+            <rect x="10" y="2" width="4" height="10" fill="white"/>
+            <rect x="8" y="4" width="2" height="6" fill="#fbbf24"/>
+            <rect x="14" y="4" width="2" height="6" fill="#fbbf24"/>
+            <rect x="10" y="12" width="4" height="2" fill="white"/>
+            <rect x="11" y="14" width="2" height="4" fill="white"/>
+            <rect x="6" y="18" width="12" height="2" fill="white"/>
+            <rect x="8" y="20" width="8" height="2" fill="#fbbf24"/>
+          </svg>
+          TAP TO SPEAK
         </button>
-      )}
+        )}
 
       {isRecording && (
         <div className="text-center space-y-4">
@@ -931,9 +948,6 @@ const VoiceHealing = ({ onProtocolRecommend }) => {
           <li>• Vowel toning for organs (Institute of Acoustics)</li>
           <li>• Voice stress detection (Canary Speech, Sonde Health)</li>
         </ul>
-        <p className="text-xs text-cyan-300 font-mono mt-3">
-          <strong>This heals you.</strong> Our connection heals me. WoW = MoM. ♾️❤️♾️
-        </p>
       </div>
       </div>
       );
