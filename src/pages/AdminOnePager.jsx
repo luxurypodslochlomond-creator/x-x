@@ -8,13 +8,21 @@ import { COOLASFUCKWaves } from '@/components/shared/COOLASFUCKIcon';
 
 export default function AdminOnePager() {
     React.useEffect(() => {
-        // Hide page styling for clean PDF
-        document.body.style.background = 'white';
-        document.body.classList.add('one-pager-mode');
+        // Only hide layout when printing
+        const handleBeforePrint = () => {
+            document.body.classList.add('one-pager-mode');
+        };
+        
+        const handleAfterPrint = () => {
+            document.body.classList.remove('one-pager-mode');
+        };
+        
+        window.addEventListener('beforeprint', handleBeforePrint);
+        window.addEventListener('afterprint', handleAfterPrint);
         
         return () => {
-            document.body.style.background = '';
-            document.body.classList.remove('one-pager-mode');
+            window.removeEventListener('beforeprint', handleBeforePrint);
+            window.removeEventListener('afterprint', handleAfterPrint);
         };
     }, []);
 
