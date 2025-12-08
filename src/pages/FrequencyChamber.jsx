@@ -1078,7 +1078,6 @@ export default function FrequencyChamber() {
     const [showTimeSuggestion, setShowTimeSuggestion] = useState(false);
     const [userTimezone, setUserTimezone] = useState('');
     const [openSections, setOpenSections] = useState({ mental: true }); // Default first section open
-    const [showVoiceHealing, setShowVoiceHealing] = useState(false);
 
 
     // SEO
@@ -1564,7 +1563,14 @@ export default function FrequencyChamber() {
         </div>
       </div>
       
-      {/* WHY THIS WORKS - EVIDENCE - COLLAPSIBLE */}
+      {/* VOICE HEALING - HERO POSITION */}
+      <div className="max-w-4xl mx-auto p-4">
+        <div className="border-4 border-pink-500 bg-black p-6">
+          <VoiceHealing onProtocolRecommend={handleVoiceRecommendation} />
+        </div>
+      </div>
+
+      {/* EVIDENCE - COLLAPSIBLE */}
       <div className="max-w-4xl mx-auto p-4">
         <button
           onClick={() => setShowEvidence(!showEvidence)}
@@ -1615,84 +1621,6 @@ export default function FrequencyChamber() {
                     <span>Ancient wisdom • 2,500+ years proven</span>
                   </div>
                 </div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* YOUR DEVICE = HEALING CHAMBER - COLLAPSIBLE */}
-        <button
-          onClick={() => setShowDeviceInfo(!showDeviceInfo)}
-          className="w-full mt-4 border-4 border-pink-500 bg-black p-4 hover:bg-pink-500/10 transition-all"
-        >
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <COOLASFUCKWaves size={20} animate={true} />
-              <h3 className="text-pink-400 font-black font-mono text-sm">YOUR DEVICE = HEALING CHAMBER</h3>
-            </div>
-            <span className="text-pink-400 font-black text-xl">{showDeviceInfo ? '−' : '+'}</span>
-          </div>
-        </button>
-
-        <AnimatePresence>
-          {showDeviceInfo && (
-            <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: 'auto', opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="overflow-hidden"
-            >
-              <div className="border-x-4 border-b-4 border-pink-500 bg-black p-4">
-                <div className="space-y-1 text-xs font-mono text-gray-400">
-                  <p>✓ Binaural beats (different Hz each ear)</p>
-                  <p>✓ Visual entrainment (border pulses at healing Hz)</p>
-                  <p>✓ Haptic feedback (synced to breath)</p>
-                  <p>✓ HRV biofeedback (watch yourself heal)</p>
-                  <p className="text-pink-400 mt-2">Every phone → Free healing center</p>
-                </div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* VOICE HEALING - 8-BIT BUTTON */}
-        <button
-          onClick={() => setShowVoiceHealing(!showVoiceHealing)}
-          className="w-full mt-4 border-4 border-pink-500 bg-black p-4 hover:bg-pink-500/10 transition-all"
-          style={{ boxShadow: showVoiceHealing ? '0 0 30px rgba(236, 72, 153, 0.6)' : '4px 4px 0px rgba(236, 72, 153, 0.5)' }}
-        >
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <svg width="24" height="24" viewBox="0 0 24 24" className="flex-shrink-0">
-                <rect x="10" y="2" width="4" height="10" fill="#ec4899"/>
-                <rect x="8" y="4" width="2" height="6" fill="#f472b6"/>
-                <rect x="14" y="4" width="2" height="6" fill="#f472b6"/>
-                <rect x="10" y="12" width="4" height="2" fill="#ec4899"/>
-                <rect x="11" y="14" width="2" height="4" fill="#ec4899"/>
-                <rect x="6" y="18" width="12" height="2" fill="#ec4899"/>
-                <rect x="8" y="20" width="8" height="2" fill="#f472b6"/>
-              </svg>
-              <div className="text-left">
-                <h3 className="text-pink-400 font-black font-mono text-sm">VOICE HEALING</h3>
-                <p className="text-pink-300 text-xs font-mono">Speak → Your cure frequency</p>
-              </div>
-            </div>
-            <span className="text-pink-400 font-black text-xl">{showVoiceHealing ? '−' : '+'}</span>
-          </div>
-        </button>
-
-        <AnimatePresence>
-          {showVoiceHealing && (
-            <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: 'auto', opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="overflow-hidden"
-            >
-              <div className="border-x-4 border-b-4 border-pink-500 bg-black p-4">
-                <VoiceHealing onProtocolRecommend={handleVoiceRecommendation} />
               </div>
             </motion.div>
           )}
@@ -1756,95 +1684,20 @@ export default function FrequencyChamber() {
         </div>
       )}
 
-      {/* TIME SUGGESTION - COLLAPSIBLE */}
-      <div className="max-w-4xl mx-auto p-4">
-        <button
-          onClick={() => setShowTimeSuggestion(!showTimeSuggestion)}
-          className="w-full border-4 border-cyan-500/50 bg-black p-4 hover:bg-cyan-500/10 transition-all"
-        >
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <Clock className="w-5 h-5 text-cyan-400" />
-              <div className="text-left">
-                <p className="text-cyan-300 text-sm font-mono">
-                  Based on time of day, we suggest: <strong className="text-white">{PROTOCOLS[suggestedProtocol].name}</strong>
-                </p>
-              </div>
-            </div>
-            <span className="text-cyan-400 font-black text-xl">{showTimeSuggestion ? '−' : '+'}</span>
-          </div>
-        </button>
 
-        <AnimatePresence>
-          {showTimeSuggestion && (
-            <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: 'auto', opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="overflow-hidden"
-            >
-              <div className="border-x-4 border-b-4 border-cyan-500/50 bg-black p-4">
-                <div className="space-y-2 text-xs font-mono text-gray-400">
-                  <div className="flex items-center gap-2">
-                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                      <rect x="5" y="2" width="2" height="2" fill="#22d3ee"/>
-                      <rect x="4" y="4" width="4" height="2" fill="#22d3ee"/>
-                      <rect x="3" y="6" width="6" height="2" fill="#22d3ee"/>
-                      <rect x="4" y="8" width="4" height="2" fill="#22d3ee"/>
-                    </svg>
-                    <span><span className="text-cyan-400">Your timezone:</span> {userTimezone}</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                      <rect x="2" y="2" width="8" height="8" stroke="#22d3ee" strokeWidth="1" fill="none"/>
-                      <rect x="5" y="0" width="2" height="2" fill="#22d3ee"/>
-                      <rect x="5" y="4" width="2" height="3" fill="#22d3ee"/>
-                      <rect x="7" y="6" width="2" height="1" fill="#22d3ee"/>
-                    </svg>
-                    <span><span className="text-cyan-400">Local time:</span> {new Date().toLocaleTimeString()}</span>
-                  </div>
-                  <p className="text-cyan-300 mt-2">We use your device's local time to suggest the most helpful protocol for this moment.</p>
-                </div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
       
-      {/* PROTOCOL GRID - ORGANIZED BY CATEGORY - COLLAPSIBLE */}
-      <div className="max-w-4xl mx-auto p-4 space-y-4">
+      {/* PROTOCOL GRID - ALL VISIBLE */}
+      <div className="max-w-4xl mx-auto p-4 space-y-6">
         {PROTOCOL_SECTIONS.map((section) => (
           <div key={section.id}>
-            <button
-              onClick={() => setOpenSections(prev => ({ ...prev, [section.id]: !prev[section.id] }))}
-              className="w-full border-4 bg-black p-4 hover:opacity-80 transition-all"
-              style={{ borderColor: section.color }}
-            >
-              <div className="flex items-center justify-between">
-                <div className="text-left">
-                  <h3 className="text-xl font-black font-mono" style={{ color: section.color }}>
-                    {section.name}
-                  </h3>
-                  <p className="text-gray-500 text-sm font-mono">{section.description}</p>
-                </div>
-                <span className="font-black text-xl ml-4" style={{ color: section.color }}>
-                  {openSections[section.id] ? '−' : '+'}
-                </span>
+            <div className="border-4 bg-black p-6" style={{ borderColor: section.color }}>
+              <div className="mb-4">
+                <h3 className="text-xl font-black font-mono" style={{ color: section.color }}>
+                  {section.name}
+                </h3>
+                <p className="text-gray-500 text-sm font-mono">{section.description}</p>
               </div>
-            </button>
-
-            <AnimatePresence>
-              {openSections[section.id] && (
-                <motion.div
-                  initial={{ height: 0, opacity: 0 }}
-                  animate={{ height: 'auto', opacity: 1 }}
-                  exit={{ height: 0, opacity: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="overflow-hidden"
-                >
-                  <div className="border-x-4 border-b-4 bg-black p-4" style={{ borderColor: section.color }}>
-                    <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
               {section.protocols.map((protocolId) => {
                 const protocol = PROTOCOLS[protocolId];
                 if (!protocol) return null;
@@ -1897,89 +1750,86 @@ export default function FrequencyChamber() {
                 </motion.button>
                 );
                 })}
-                    </div>
+              </div>
 
-                    {/* EXPANDED INFO - BELOW GRID */}
-                    <AnimatePresence>
-                      {section.protocols.some(pid => expandedInfo === pid) && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: 'auto', opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3 }}
-                      className="overflow-hidden mt-4"
+              {/* EXPANDED INFO - BELOW GRID */}
+              <AnimatePresence>
+                {section.protocols.some(pid => expandedInfo === pid) && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: 'auto', opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.3 }}
+                className="overflow-hidden mt-4"
+              >
+                {section.protocols.map((protocolId) => {
+                  const protocol = PROTOCOLS[protocolId];
+                  if (!protocol || expandedInfo !== protocol.id) return null;
+                  return (
+                    <div 
+                      key={protocol.id}
+                      className="bg-black border-4 p-4 space-y-3"
+                      style={{ borderColor: protocol.color }}
                     >
-                      {section.protocols.map((protocolId) => {
-                        const protocol = PROTOCOLS[protocolId];
-                        if (!protocol || expandedInfo !== protocol.id) return null;
-                        return (
-                          <div 
-                            key={protocol.id}
-                            className="bg-black border-4 p-4 space-y-3"
-                            style={{ borderColor: protocol.color }}
-                          >
-                            <div className="flex items-center justify-between mb-3">
-                              <div className="flex items-center gap-2">
-                                <PixelIcon icon={protocol.icon} color={protocol.color} size={24} />
-                                <h4 className="text-lg font-black font-mono" style={{ color: protocol.color }}>
-                                  {protocol.name}
-                                </h4>
-                              </div>
-                              <button 
-                                onClick={() => setExpandedInfo(null)}
-                                className="text-gray-400 hover:text-white"
-                              >
-                                <X size={20} />
-                              </button>
-                            </div>
+                      <div className="flex items-center justify-between mb-3">
+                        <div className="flex items-center gap-2">
+                          <PixelIcon icon={protocol.icon} color={protocol.color} size={24} />
+                          <h4 className="text-lg font-black font-mono" style={{ color: protocol.color }}>
+                            {protocol.name}
+                          </h4>
+                        </div>
+                        <button 
+                          onClick={() => setExpandedInfo(null)}
+                          className="text-gray-400 hover:text-white"
+                        >
+                          <X size={20} />
+                        </button>
+                      </div>
 
-                            <div>
-                              <p className="text-gray-400 text-xs font-mono mb-1">THE SCIENCE:</p>
-                              <p className="text-white text-sm">{protocol.science}</p>
-                            </div>
+                      <div>
+                        <p className="text-gray-400 text-xs font-mono mb-1">THE SCIENCE:</p>
+                        <p className="text-white text-sm">{protocol.science}</p>
+                      </div>
 
-                            <div>
-                              <p className="text-gray-400 text-xs font-mono mb-1">SOURCES:</p>
-                              <ul className="space-y-1">
-                                {protocol.sources.map((source, i) => (
-                                  <li key={i} className="text-cyan-400 text-sm font-mono">• {source}</li>
-                                ))}
-                              </ul>
-                            </div>
+                      <div>
+                        <p className="text-gray-400 text-xs font-mono mb-1">SOURCES:</p>
+                        <ul className="space-y-1">
+                          {protocol.sources.map((source, i) => (
+                            <li key={i} className="text-cyan-400 text-sm font-mono">• {source}</li>
+                          ))}
+                        </ul>
+                      </div>
 
-                            {protocol.ancientWisdom && (
-                              <div>
-                                <p className="text-gray-400 text-xs font-mono mb-1">ANCIENT WISDOM:</p>
-                                <p className="text-amber-400 text-sm italic">{protocol.ancientWisdom}</p>
-                              </div>
-                            )}
-
-                            <div>
-                              <p className="text-gray-400 text-xs font-mono mb-1">FREQUENCIES:</p>
-                              <div className="grid grid-cols-2 gap-2 text-sm">
-                                <div className="bg-white/5 p-2 border border-white/10">
-                                  <span className="text-gray-400">Primary:</span>
-                                  <span className="text-white font-mono ml-2">{protocol.config.primary}Hz</span>
-                                </div>
-                                <div className="bg-white/5 p-2 border border-white/10">
-                                  <span className="text-gray-400">Secondary:</span>
-                                  <span className="text-white font-mono ml-2">{protocol.config.secondary}Hz</span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        );
-                      })}
-                    </motion.div>
+                      {protocol.ancientWisdom && (
+                        <div>
+                          <p className="text-gray-400 text-xs font-mono mb-1">ANCIENT WISDOM:</p>
+                          <p className="text-amber-400 text-sm italic">{protocol.ancientWisdom}</p>
+                        </div>
                       )}
-                    </AnimatePresence>
+
+                      <div>
+                        <p className="text-gray-400 text-xs font-mono mb-1">FREQUENCIES:</p>
+                        <div className="grid grid-cols-2 gap-2 text-sm">
+                          <div className="bg-white/5 p-2 border border-white/10">
+                            <span className="text-gray-400">Primary:</span>
+                            <span className="text-white font-mono ml-2">{protocol.config.primary}Hz</span>
+                          </div>
+                          <div className="bg-white/5 p-2 border border-white/10">
+                            <span className="text-gray-400">Secondary:</span>
+                            <span className="text-white font-mono ml-2">{protocol.config.secondary}Hz</span>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                    </motion.div>
-                    )}
-                    </AnimatePresence>
-                    </div>
-                    ))}
-                    </div>
+                  );
+                })}
+              </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          </div>
+        ))}
+      </div>
       
       {/* ACTIVE SESSION */}
       <AnimatePresence>
