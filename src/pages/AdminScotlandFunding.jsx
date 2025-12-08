@@ -50,7 +50,7 @@ Universal Frequency51 - Free digital healing frequencies platform
 • Marketing to reach those who need it most
 
 🎯 IMPACT POTENTIAL:
-• Cost to NHS: £0 per user (vs £150+ per therapy session)
+• Cost to NHS: £0 per user (vs £80-£200 per therapy session, £500+ for neurofeedback)
 • Reach: Unlimited (digital, scalable)
 • Evidence-based: Published research, not pseudo-science
 • Preventative: Catch anxiety/depression early, before crisis
