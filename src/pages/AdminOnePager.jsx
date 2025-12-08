@@ -24,8 +24,9 @@ export default function AdminOnePager() {
             <style>{`
                 @media print {
                     body { background: white !important; }
-                    header, nav, aside, .no-print { display: none !important; }
+                    header, nav, aside, footer, .no-print { display: none !important; }
                     main { margin: 0 !important; padding: 0 !important; }
+                    @page { margin: 0; }
                 }
             `}</style>
 
