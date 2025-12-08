@@ -379,29 +379,33 @@ const PixelIcon = ({ icon: Icon, color, size = 48, animate = false }) => (
 const BreathingPacer = ({ breathRate, isActive, color }) => {
   const [phase, setPhase] = useState(0);
   const [instruction, setInstruction] = useState('BREATHE IN');
+  const [cycleProgress, setCycleProgress] = useState(0);
 
   useEffect(() => {
     if (!isActive) return;
 
-    const cycleDuration = 60 / breathRate;
+    const cycleDuration = 60 / breathRate; // seconds per breath
     let startTime = Date.now();
 
     const interval = setInterval(() => {
       const elapsed = (Date.now() - startTime) / 1000;
       const cyclePos = elapsed % cycleDuration;
-      const cycleProgress = cyclePos / cycleDuration;
-      const smoothPhase = (Math.sin(cycleProgress * Math.PI * 2 - Math.PI / 2) + 1) / 2;
-      setPhase(smoothPhase);
+      const progress = cyclePos / cycleDuration;
+      setCycleProgress(progress);
 
-      // Natural breathing cycle: IN → HOLD TOP → OUT → REST BOTTOM
-      if (cycleProgress < 0.4) {
+      // Natural breathing: IN (40%) → HOLD (15%) → OUT (40%) → REST (5%)
+      if (progress < 0.4) {
         setInstruction('BREATHE IN');
-      } else if (cycleProgress < 0.5) {
+        setPhase(progress / 0.4); // 0 to 1 over first 40%
+      } else if (progress < 0.55) {
         setInstruction('HOLD');
-      } else if (cycleProgress < 0.9) {
+        setPhase(1); // Stay at peak
+      } else if (progress < 0.95) {
         setInstruction('BREATHE OUT');
+        setPhase(1 - ((progress - 0.55) / 0.4)); // 1 to 0 over 40%
       } else {
         setInstruction('REST');
+        setPhase(0); // Stay at bottom
       }
     }, 50);
 
@@ -410,37 +414,37 @@ const BreathingPacer = ({ breathRate, isActive, color }) => {
 
   if (!isActive) return null;
 
+  const cycleDuration = 60 / breathRate;
+
   return (
     <div className="flex flex-col items-center gap-6">
-      <motion.div 
-        className="rounded-full border-4 flex items-center justify-center backdrop-blur-sm"
-        animate={{
+      <div 
+        className="rounded-full border-4 flex items-center justify-center backdrop-blur-sm transition-all"
+        style={{
           width: 100 + phase * 80,
           height: 100 + phase * 80,
           borderColor: color,
           backgroundColor: `${color}15`,
-          boxShadow: `0 0 ${30 + phase * 50}px ${color}50`
-        }}
-        transition={{
-          duration: 0.8,
-          ease: "easeInOut"
+          boxShadow: `0 0 ${30 + phase * 50}px ${color}50`,
+          transitionDuration: '0.3s',
+          transitionTimingFunction: 'ease-in-out'
         }}
       >
-        <motion.div
-          animate={{ scale: 0.8 + phase * 0.4 }}
-          transition={{ duration: 0.8, ease: "easeInOut" }}
-        >
-          <Wind size={40} color={color} />
-        </motion.div>
-      </motion.div>
-      <motion.p 
-        className="text-2xl font-mono font-black tracking-widest"
-        style={{ color }}
-        animate={{ opacity: [0.7, 1, 0.7] }}
-        transition={{ duration: 1, repeat: Infinity, ease: "easeInOut" }}
+        <Wind 
+          size={40 + phase * 20} 
+          color={color}
+          className="transition-all duration-300"
+        />
+      </div>
+      <p 
+        className="text-2xl font-mono font-black tracking-widest transition-opacity duration-300"
+        style={{ 
+          color,
+          opacity: 0.7 + phase * 0.3
+        }}
       >
         {instruction}
-      </motion.p>
+      </p>
     </div>
   );
 };
