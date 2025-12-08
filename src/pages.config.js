@@ -159,6 +159,7 @@ import HealingJourney from './pages/HealingJourney';
 import AdminScotlandFunding from './pages/AdminScotlandFunding';
 import AdminOnePager from './pages/AdminOnePager';
 import AdminUnLtdApplication from './pages/AdminUnLtdApplication';
+import AdminUKNewCICFunding from './pages/AdminUKNewCICFunding';
 import __Layout from './Layout.jsx';
 
 
@@ -324,6 +325,7 @@ export const PAGES = {
     "AdminScotlandFunding": AdminScotlandFunding,
     "AdminOnePager": AdminOnePager,
     "AdminUnLtdApplication": AdminUnLtdApplication,
+    "AdminUKNewCICFunding": AdminUKNewCICFunding,
 }
 
 export const pagesConfig = {
