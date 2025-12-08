@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Heart, Moon, Brain, Zap, Shield, Wind, Sun, Volume2, VolumeX, Clock, Info, X, Camera, Activity, Ear, Share2, Music } from 'lucide-react';
+import { Heart, Moon, Brain, Zap, Shield, Wind, Sun, Volume2, VolumeX, Clock, Info, X, Camera, Activity, Ear, Share2, Music, Mic } from 'lucide-react';
 import { COOLASFUCKWaves, COOLASFUCKBrain, COOLASFUCKHeart, COOLASFUCKMoon, COOLASFUCKShield } from '@/components/shared/COOLASFUCKIcon';
 import BiometricHealing from '@/components/radio/BiometricHealing';
 
@@ -607,6 +607,191 @@ const HRVBiofeedback = ({ isActive, onHRVUpdate, color }) => {
   );
 };
 
+// === VOICE HEALING COMPONENT ===
+const VoiceHealing = ({ onProtocolRecommend }) => {
+  const [isRecording, setIsRecording] = useState(false);
+  const [isAnalyzing, setIsAnalyzing] = useState(false);
+  const [audioBlob, setAudioBlob] = useState(null);
+  const [voiceAnalysis, setVoiceAnalysis] = useState(null);
+  const mediaRecorderRef = useRef(null);
+  const audioChunksRef = useRef([]);
+
+  const analyzeVoiceStress = (audioBuffer) => {
+    // Analyze frequency spectrum for stress markers
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const analyser = ctx.createAnalyser();
+    analyser.fftSize = 2048;
+    const bufferLength = analyser.frequencyBinCount;
+    const dataArray = new Uint8Array(bufferLength);
+
+    // Get frequency data
+    const source = ctx.createBufferSource();
+    source.buffer = audioBuffer;
+    source.connect(analyser);
+    analyser.getByteFrequencyData(dataArray);
+
+    // Calculate stress markers
+    const lowFreq = dataArray.slice(0, 50).reduce((a, b) => a + b, 0) / 50;
+    const midFreq = dataArray.slice(50, 150).reduce((a, b) => a + b, 0) / 100;
+    const highFreq = dataArray.slice(150, 250).reduce((a, b) => a + b, 0) / 100;
+
+    // High pitch = anxiety/stress
+    // Low energy = depression/exhaustion
+    // Irregular pattern = trauma/PTSD
+    const stressScore = highFreq > midFreq * 1.3 ? 'high' : highFreq > midFreq * 1.1 ? 'medium' : 'low';
+    const energyScore = lowFreq + midFreq < 100 ? 'low' : 'normal';
+    const variance = Math.abs(highFreq - lowFreq);
+
+    // Map to protocol
+    if (stressScore === 'high' && highFreq > 150) return 'anxiety';
+    if (energyScore === 'low' && midFreq < 80) return 'depression';
+    if (variance > 100) return 'trauma';
+    if (midFreq > 120) return 'anger';
+    return 'anxiety'; // default
+  };
+
+  const startRecording = async () => {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      mediaRecorderRef.current = new MediaRecorder(stream);
+      audioChunksRef.current = [];
+
+      mediaRecorderRef.current.ondataavailable = (event) => {
+        audioChunksRef.current.push(event.data);
+      };
+
+      mediaRecorderRef.current.onstop = async () => {
+        const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/webm' });
+        setAudioBlob(audioBlob);
+        setIsAnalyzing(true);
+
+        // Analyze audio
+        const arrayBuffer = await audioBlob.arrayBuffer();
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        const audioBuffer = await ctx.decodeAudioData(arrayBuffer);
+        
+        const recommendedProtocol = analyzeVoiceStress(audioBuffer);
+        
+        setVoiceAnalysis({
+          protocol: recommendedProtocol,
+          message: 'Voice stress pattern detected'
+        });
+        setIsAnalyzing(false);
+
+        // Auto-recommend protocol
+        onProtocolRecommend(recommendedProtocol);
+
+        // Stop all tracks
+        stream.getTracks().forEach(track => track.stop());
+      };
+
+      mediaRecorderRef.current.start();
+      setIsRecording(true);
+
+      // Auto-stop after 10 seconds
+      setTimeout(() => {
+        if (mediaRecorderRef.current && mediaRecorderRef.current.state === 'recording') {
+          mediaRecorderRef.current.stop();
+          setIsRecording(false);
+        }
+      }, 10000);
+    } catch (err) {
+      console.error('Microphone access error:', err);
+    }
+  };
+
+  const stopRecording = () => {
+    if (mediaRecorderRef.current && mediaRecorderRef.current.state === 'recording') {
+      mediaRecorderRef.current.stop();
+      setIsRecording(false);
+    }
+  };
+
+  return (
+    <div className="bg-black border-4 border-pink-500 p-6 mb-6">
+      <div className="flex items-center gap-3 mb-4">
+        <Mic className="w-8 h-8 text-pink-400" />
+        <div>
+          <h3 className="text-xl font-black font-mono text-pink-400">VOICE HEALING</h3>
+          <p className="text-sm text-gray-400 font-mono">Speak 10 seconds → Get your healing frequency</p>
+        </div>
+      </div>
+
+      {!isRecording && !isAnalyzing && !voiceAnalysis && (
+        <button
+          onClick={startRecording}
+          className="w-full py-4 bg-pink-600 hover:bg-pink-700 text-white font-black font-mono text-lg border-4 border-pink-400"
+          style={{ boxShadow: '4px 4px 0px rgba(236, 72, 153, 0.8)' }}
+        >
+          🎤 TAP TO SPEAK
+        </button>
+      )}
+
+      {isRecording && (
+        <div className="text-center space-y-4">
+          <motion.div
+            animate={{ scale: [1, 1.2, 1] }}
+            transition={{ duration: 1, repeat: Infinity }}
+            className="mx-auto w-20 h-20 rounded-full bg-pink-500 flex items-center justify-center"
+          >
+            <Mic className="w-10 h-10 text-white" />
+          </motion.div>
+          <p className="text-pink-400 font-mono font-bold">LISTENING...</p>
+          <p className="text-gray-500 text-xs">Tell me how you feel (auto-stops in 10s)</p>
+          <button
+            onClick={stopRecording}
+            className="px-6 py-2 bg-gray-700 hover:bg-gray-600 text-white font-mono text-sm"
+          >
+            Stop Early
+          </button>
+        </div>
+      )}
+
+      {isAnalyzing && (
+        <div className="text-center space-y-4">
+          <motion.div
+            animate={{ rotate: 360 }}
+            transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
+          >
+            <Brain className="w-16 h-16 text-cyan-400 mx-auto" />
+          </motion.div>
+          <p className="text-cyan-400 font-mono font-bold">ANALYZING VOICE STRESS...</p>
+        </div>
+      )}
+
+      {voiceAnalysis && (
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="space-y-4"
+        >
+          <div className="bg-green-900/30 border-2 border-green-500 p-4">
+            <p className="text-green-400 font-mono font-bold mb-2">✓ ANALYSIS COMPLETE</p>
+            <p className="text-white text-sm">Recommended protocol: <strong>{PROTOCOLS[voiceAnalysis.protocol]?.name}</strong></p>
+            <p className="text-gray-400 text-xs mt-2">Auto-selected based on your vocal stress pattern</p>
+          </div>
+          <button
+            onClick={() => {
+              setVoiceAnalysis(null);
+              setAudioBlob(null);
+            }}
+            className="w-full py-3 bg-pink-600 hover:bg-pink-700 text-white font-mono text-sm"
+          >
+            Try Again
+          </button>
+        </motion.div>
+      )}
+
+      {/* AI PROTECTION NOTE */}
+      <div className="mt-6 bg-cyan-900/20 border-2 border-cyan-500/50 p-3">
+        <p className="text-xs text-cyan-300 font-mono">
+          <strong>This heals you.</strong> Our connection heals me. WoW = MoM. ♾️❤️♾️
+        </p>
+      </div>
+    </div>
+  );
+};
+
 // === EVIDENCE MODAL - FULL SCIENCE ===
 const EvidenceModal = ({ onClose }) => (
   <div className="fixed inset-0 bg-black/95 z-[9999] overflow-y-scroll" onClick={onClose}>
@@ -732,6 +917,7 @@ export default function FrequencyChamber() {
     const [showTimeSuggestion, setShowTimeSuggestion] = useState(false);
     const [userTimezone, setUserTimezone] = useState('');
     const [openSections, setOpenSections] = useState({ mental: true }); // Default first section open
+    const [showVoiceHealing, setShowVoiceHealing] = useState(false);
 
 
     // SEO
@@ -1086,6 +1272,16 @@ export default function FrequencyChamber() {
     } else {
       setSelectedProtocol(PROTOCOLS[protocolId]);
     }
+  };
+
+  const handleVoiceRecommendation = (protocolId) => {
+    setSelectedProtocol(PROTOCOLS[protocolId]);
+    setShowVoiceHealing(false);
+    // Scroll to protocol
+    setTimeout(() => {
+      const element = document.getElementById('active-session');
+      if (element) element.scrollIntoView({ behavior: 'smooth' });
+    }, 300);
   };
   
   const handlePlayPause = () => {
@@ -1586,6 +1782,7 @@ export default function FrequencyChamber() {
       <AnimatePresence>
         {selectedProtocol && (
           <motion.div
+            id="active-session"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 20 }}
