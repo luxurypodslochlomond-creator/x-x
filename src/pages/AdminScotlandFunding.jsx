@@ -81,19 +81,19 @@ Whitepaper: uf51.love/Whitepaper
             contact: 'Apply online via West Dunbartonshire Council website',
             link: 'https://www.west-dunbarton.gov.uk/community/community-grants/',
             email: 'communityplanning@west-dunbarton.gov.uk',
-            notes: 'Perfect fit - local, mental health focus, fast decisions. Emphasize West Dunbartonshire impact.',
-            action: 'Call first: 01389 737000, ask for Community Planning team'
+            notes: '⚠️ SKIP FOR NOW - Council tax situation needs resolving first. Perfect fit otherwise.',
+            action: 'Come back to this after NHS Scotland success ✓'
         },
         {
-            name: 'NHS Scotland Innovation Fund - Mental Health',
+            name: '⭐ NHS Scotland Innovation - Mental Health (PRIORITY)',
             amount: '£10,000-£50,000',
             turnaround: '4-8 weeks',
             fit: '98%',
-            contact: 'NHS Scotland Innovation team',
-            link: 'https://www.nes.scot.nhs.uk/our-work/digital-health-and-care-innovation/',
-            email: 'dhci@nes.scot.nhs.uk',
-            notes: 'DESPERATE for anxiety/sleep solutions. Show MIT science + zero cost to NHS.',
-            action: 'Email with subject: "Free Evidence-Based Anxiety/Sleep Tool - Zero Cost to NHS"'
+            contact: 'NHS Scotland Digital Health Innovation',
+            link: 'https://www.digitalhealth.scot/innovation-funding/',
+            email: 'nss.dhiinnovation@nhs.scot',
+            notes: '🎯 YOUR BEST BET - NHS DESPERATE for anxiety/sleep solutions. Show MIT science + zero cost to NHS. Already live platform = instant credibility.',
+            action: '📧 EMAIL NOW: Subject "Free Evidence-Based Anxiety/Sleep Tool - Zero Cost to NHS" - attach 1-pager pitch doc + link to live demo (uf51.love/FrequencyChamber)'
         },
         {
             name: 'Scottish Enterprise - R&D Grants',
