@@ -1664,10 +1664,18 @@ export default function FrequencyChamber() {
         >
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <Mic className="w-6 h-6 text-pink-400" />
+              <svg width="24" height="24" viewBox="0 0 24 24" className="flex-shrink-0">
+                <rect x="10" y="2" width="4" height="10" fill="#ec4899"/>
+                <rect x="8" y="4" width="2" height="6" fill="#f472b6"/>
+                <rect x="14" y="4" width="2" height="6" fill="#f472b6"/>
+                <rect x="10" y="12" width="4" height="2" fill="#ec4899"/>
+                <rect x="11" y="14" width="2" height="4" fill="#ec4899"/>
+                <rect x="6" y="18" width="12" height="2" fill="#ec4899"/>
+                <rect x="8" y="20" width="8" height="2" fill="#f472b6"/>
+              </svg>
               <div className="text-left">
-                <h3 className="text-pink-400 font-black font-mono text-sm">🎤 VOICE HEALING</h3>
-                <p className="text-pink-300 text-xs font-mono">Speak → AI finds your cure frequency</p>
+                <h3 className="text-pink-400 font-black font-mono text-sm">VOICE HEALING</h3>
+                <p className="text-pink-300 text-xs font-mono">Speak → Your cure frequency</p>
               </div>
             </div>
             <span className="text-pink-400 font-black text-xl">{showVoiceHealing ? '−' : '+'}</span>
