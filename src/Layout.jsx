@@ -248,6 +248,7 @@ const LayoutInner = ({ children, currentPageName }) => {
 
   const adminNav = user?.role === 'admin' ? [
     { title: "💰 Funding Tracker", url: createPageUrl("AdminFundingTracker"), icon: Shield },
+    { title: "🏴󠁧󠁢󠁳󠁣󠁴󠁿 Scotland Funding", url: createPageUrl("AdminScotlandFunding"), icon: Heart },
     { title: "🎟️ National Lottery App", url: createPageUrl("AdminNationalLotteryApp"), icon: Heart },
     { title: "✅ National Lottery (SUBMITTED)", url: createPageUrl("AdminCreativeScotlandNationalLottery"), icon: CheckCircle },
     { title: "📄 Budget Document", url: createPageUrl("AdminBudgetDocument"), icon: FileText },
