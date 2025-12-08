@@ -8,6 +8,25 @@ import { Heart, Mail, ExternalLink, Clock, TrendingUp, Shield, CheckCircle } fro
  */
 
 export default function AdminScotlandFunding() {
+    const copyOnePager = () => {
+        const onePager = `UF51: FREE MENTAL HEALTH TECH FOR NHS SCOTLAND
+
+THE PROBLEM: Scotland's mental health crisis costs £8.8bn/year. NHS wait times: 18+ weeks.
+
+THE SOLUTION: Free evidence-based healing frequencies (MIT research). Already live: uf51.love/FrequencyChamber
+
+THE SCIENCE: 40Hz gamma (MIT), alpha waves (HeartMath), delta waves (Northwestern). Published research.
+
+THE ASK: £10k-£15k pilot study + NHS partnership to measure outcomes.
+
+COST TO NHS: £0 per user (vs £80-£200 therapy session, £500+ neurofeedback)
+
+CONTACT: [your email] | uf51.love`;
+
+        navigator.clipboard.writeText(onePager);
+        alert('✓ One-pager copied!');
+    };
+
     const copyPitchDoc = () => {
         const pitch = `UNIVERSAL FREQUENCY51 (UF51) - SCOTTISH MENTAL HEALTH INNOVATION
 
