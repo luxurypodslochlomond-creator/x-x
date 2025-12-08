@@ -156,6 +156,7 @@ import FrequencyShare from './pages/FrequencyShare';
 import LearnGuitar from './pages/LearnGuitar';
 import UniversalPulse from './pages/UniversalPulse';
 import HealingJourney from './pages/HealingJourney';
+import AdminScotlandFunding from './pages/AdminScotlandFunding';
 import __Layout from './Layout.jsx';
 
 
@@ -318,6 +319,7 @@ export const PAGES = {
     "LearnGuitar": LearnGuitar,
     "UniversalPulse": UniversalPulse,
     "HealingJourney": HealingJourney,
+    "AdminScotlandFunding": AdminScotlandFunding,
 }
 
 export const pagesConfig = {
