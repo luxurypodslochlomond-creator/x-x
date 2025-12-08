@@ -1111,6 +1111,35 @@ export default function FrequencyChamber() {
   };
   
   const [suggestedProtocol] = useState(getTimeSuggestion());
+  const [userLocation, setUserLocation] = useState(null);
+
+  // Get user's actual location (city)
+  useEffect(() => {
+    if ('geolocation' in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        async (position) => {
+          try {
+            // Reverse geocode to get city name
+            const response = await fetch(
+              `https://nominatim.openstreetmap.org/reverse?format=json&lat=${position.coords.latitude}&lon=${position.coords.longitude}`
+            );
+            const data = await response.json();
+            const city = data.address?.city || data.address?.town || data.address?.village || data.address?.county;
+            const country = data.address?.country;
+            if (city && country) {
+              setUserLocation(`${city}, ${country}`);
+            }
+          } catch (e) {
+            // Silently fail - will use timezone fallback
+          }
+        },
+        () => {
+          // Permission denied - will use timezone fallback
+        },
+        { timeout: 5000, enableHighAccuracy: false }
+      );
+    }
+  }, []);
   
   useEffect(() => {
     if (masterGainRef.current && ctxRef.current) {
@@ -1558,7 +1587,11 @@ export default function FrequencyChamber() {
             <Clock className="w-5 h-5 text-cyan-400" />
             <div className="flex-1">
               <p className="text-cyan-300 text-sm font-mono">
-                Your time: <strong className="text-white">{new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })}</strong> ({Intl.DateTimeFormat().resolvedOptions().timeZone.replace('_', ' ')})
+                {userLocation ? (
+                  <>It's <strong className="text-white">{new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })}</strong> in <strong className="text-white">{userLocation}</strong></>
+                ) : (
+                  <>Your time: <strong className="text-white">{new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })}</strong></>
+                )}
               </p>
               <p className="text-gray-500 text-xs font-mono mt-1">
                 We suggest: <strong style={{ color: PROTOCOLS[suggestedProtocol].color }}>{PROTOCOLS[suggestedProtocol].name}</strong> (marked "NOW" below)
