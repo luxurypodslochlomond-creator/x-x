@@ -379,13 +379,13 @@ const PixelIcon = ({ icon: Icon, color, size = 48, animate = false }) => (
 const BreathingPacer = ({ breathRate, isActive, color }) => {
   const [phase, setPhase] = useState(0);
   const [instruction, setInstruction] = useState('BREATHE IN');
-  
+
   useEffect(() => {
     if (!isActive) return;
-    
+
     const cycleDuration = 60 / breathRate;
     let startTime = Date.now();
-    
+
     const interval = setInterval(() => {
       const elapsed = (Date.now() - startTime) / 1000;
       const cyclePos = elapsed % cycleDuration;
@@ -404,29 +404,43 @@ const BreathingPacer = ({ breathRate, isActive, color }) => {
         setInstruction('REST');
       }
     }, 50);
-    
+
     return () => clearInterval(interval);
   }, [isActive, breathRate]);
-  
+
   if (!isActive) return null;
-  
+
   return (
-    <div className="flex flex-col items-center gap-4">
-      <div 
-        className="rounded-full border-4 transition-all duration-300 flex items-center justify-center"
-        style={{
-          width: 80 + phase * 60,
-          height: 80 + phase * 60,
+    <div className="flex flex-col items-center gap-6">
+      <motion.div 
+        className="rounded-full border-4 flex items-center justify-center backdrop-blur-sm"
+        animate={{
+          width: 100 + phase * 80,
+          height: 100 + phase * 80,
           borderColor: color,
-          backgroundColor: `${color}20`,
-          boxShadow: `0 0 ${20 + phase * 30}px ${color}40`
+          backgroundColor: `${color}15`,
+          boxShadow: `0 0 ${30 + phase * 50}px ${color}50`
+        }}
+        transition={{
+          duration: 0.8,
+          ease: "easeInOut"
         }}
       >
-        <Wind size={32 + phase * 16} color={color} className="transition-all duration-300" />
-      </div>
-      <p className="text-lg font-mono font-bold tracking-widest" style={{ color }}>
+        <motion.div
+          animate={{ scale: 0.8 + phase * 0.4 }}
+          transition={{ duration: 0.8, ease: "easeInOut" }}
+        >
+          <Wind size={40} color={color} />
+        </motion.div>
+      </motion.div>
+      <motion.p 
+        className="text-2xl font-mono font-black tracking-widest"
+        style={{ color }}
+        animate={{ opacity: [0.7, 1, 0.7] }}
+        transition={{ duration: 1, repeat: Infinity, ease: "easeInOut" }}
+      >
         {instruction}
-      </p>
+      </motion.p>
     </div>
   );
 };
@@ -1171,7 +1185,7 @@ export default function FrequencyChamber() {
             FREQUENCY CHAMBER
           </h1>
           <p className="text-gray-400 font-mono text-sm text-center">
-            Evidence-based healing frequencies • Zero pseudo-science • Retro vibes
+            Evidence-based healing frequencies
           </p>
 
           {/* PIXEL DECORATION */}
@@ -1645,27 +1659,7 @@ export default function FrequencyChamber() {
                 )}
               </div>
               
-              {currentHRV && hrvEnabled && isPlaying && (
-                <div 
-                  className="mb-4 p-3 rounded-lg border-2 text-center"
-                  style={{ 
-                    borderColor: currentHRV.coherence > 70 ? '#22c55e' : currentHRV.coherence > 40 ? '#eab308' : '#ef4444',
-                    backgroundColor: currentHRV.coherence > 70 ? '#22c55e10' : currentHRV.coherence > 40 ? '#eab30810' : '#ef444410'
-                  }}
-                >
-                  <p className="font-mono text-sm" style={{
-                    color: currentHRV.coherence > 70 ? '#22c55e' : currentHRV.coherence > 40 ? '#eab308' : '#ef4444'
-                  }}>
-                    {currentHRV.coherence > 70 
-                      ? '✓ HIGH COHERENCE - You\'re in sync with the frequency' 
-                      : currentHRV.coherence > 40 
-                        ? '◐ MODERATE - Breathe slower, follow the pacer'
-                        : '○ LOW COHERENCE - Slow deep breaths, you\'ll get there'}
-                  </p>
-                </div>
-              )}
-              
-              <div className="flex justify-center mb-8">
+              <div className="bg-black/60 backdrop-blur-xl border-4 rounded-xl p-6 mb-6" style={{ borderColor: selectedProtocol.color }}>
                 <BreathingPacer 
                   breathRate={currentHRV && currentHRV.coherence < 40 
                     ? Math.max(4, selectedProtocol.config.breathRate - 2) 
@@ -1673,6 +1667,28 @@ export default function FrequencyChamber() {
                   isActive={isPlaying}
                   color={selectedProtocol.color}
                 />
+
+                {currentHRV && hrvEnabled && isPlaying && (
+                  <motion.div 
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    className="mt-6 p-3 rounded-lg border-2 text-center"
+                    style={{ 
+                      borderColor: currentHRV.coherence > 70 ? '#22c55e' : currentHRV.coherence > 40 ? '#eab308' : '#ef4444',
+                      backgroundColor: currentHRV.coherence > 70 ? '#22c55e10' : currentHRV.coherence > 40 ? '#eab30810' : '#ef444410'
+                    }}
+                  >
+                    <p className="font-mono text-sm" style={{
+                      color: currentHRV.coherence > 70 ? '#22c55e' : currentHRV.coherence > 40 ? '#eab308' : '#ef4444'
+                    }}>
+                      {currentHRV.coherence > 70 
+                        ? '✓ HIGH COHERENCE - You\'re in sync with the frequency' 
+                        : currentHRV.coherence > 40 
+                          ? '◐ MODERATE - Breathe slower, follow the pacer'
+                          : '○ LOW COHERENCE - Slow deep breaths, you\'ll get there'}
+                    </p>
+                  </motion.div>
+                )}
               </div>
               
               <div className="mb-8">
