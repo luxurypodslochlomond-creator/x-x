@@ -93,93 +93,60 @@ Whitepaper: uf51.love/Whitepaper
 
     const opportunities = [
         {
-            name: 'West Dunbartonshire Council - Community Mental Health Grant',
-            amount: '£500-£5,000',
-            turnaround: '2-4 weeks',
-            fit: '95%',
-            contact: 'Apply online via West Dunbartonshire Council website',
-            link: 'https://www.west-dunbarton.gov.uk/community/community-grants/',
-            email: 'communityplanning@west-dunbarton.gov.uk',
-            notes: '⚠️ SKIP FOR NOW - Council tax situation needs resolving first. Perfect fit otherwise.',
-            action: 'Come back to this after NHS Scotland success ✓'
-        },
-        {
-            name: 'DHI Scotland - Innovation Support (NOT Direct Funding)',
-            amount: 'Guidance + Connections',
-            turnaround: '2-4 weeks response',
-            fit: '90%',
-            contact: 'Digital Health & Care Innovation Centre (DHI Scotland)',
-            link: 'https://www.dhi-scotland.com/',
-            email: 'hello@dhi-scotland.com',
-            phone: '+44 (0) 141 444 7074',
-            notes: '⚠️ IMPORTANT: DHI is NOT a direct funder - they\'re a connector/support hub. They have a funding finder tool and can guide you to the RIGHT funders for NHS Scotland digital health.',
-            action: '📧 EMAIL: Ask for GUIDANCE on which NHS Scotland funders to approach + request intro to relevant funding bodies. Subject: "Digital Mental Health Tool - Seeking Funding Guidance"'
-        },
-        {
-            name: 'Scottish Enterprise - R&D Grants',
-            amount: '£5,000-£100,000',
-            turnaround: '6-12 weeks',
-            fit: '85%',
-            contact: 'Scottish Enterprise',
-            link: 'https://www.scottish-enterprise.com/support-for-businesses/funding-and-grants/innovation-support-and-funding',
-            email: 'enquiries@scotent.co.uk',
-            notes: 'Health tech innovation - emphasize "Scottish healthtech export potential"',
-            action: 'Call: 0300 013 3385, ask for Innovation Advisor'
-        },
-        {
-            name: '⭐ Mental Health Foundation Scotland - Small Grants (TOP PRIORITY)',
-            amount: '£500-£10,000',
-            turnaround: '3-6 weeks',
+            name: '⭐ National Lottery Community Fund Scotland (PRIORITY - OPEN NOW)',
+            amount: '£300 to £500,000',
+            turnaround: '8-12 weeks',
             fit: '96%',
-            contact: 'Mental Health Foundation',
-            link: 'https://www.mentalhealth.org.uk/scotland',
-            email: 'scotland@mentalhealth.org.uk',
-            notes: '🎯 DIRECT FUNDER - Focus on "digital mental health innovation" + "preventative care" + "zero cost access for all Scots"',
-            action: '📧 EMAIL NOW: Subject "Free Evidence-Based Mental Health Tool - MIT Research - Already Live" + attach 1-pager + link to uf51.love/FrequencyChamber'
+            contact: 'National Lottery Community Fund',
+            link: 'https://www.tnlcommunityfund.org.uk/funding',
+            applicationLink: 'https://www.tnlcommunityfund.org.uk/funding/funding-programmes',
+            notes: '🎯 OPEN & ACCEPTING APPLICATIONS - Multiple programs: Strengthening Communities (£300-£20k), Fairer Life Chances (£20k-£500k). Mental health projects welcomed. You can apply TODAY.',
+            action: '📧 APPLY NOW: Go to website → Choose "Strengthening Communities" program → Apply online. Show MIT science + zero cost + already live platform.'
         },
         {
-            name: 'Glasgow University - Health Innovation Partnership',
-            amount: '£5,000-£25,000',
+            name: '⭐ UnLtd Awards (PRIORITY - OPEN NOW - FILLING FAST)',
+            amount: 'Up to £18,000 + business support',
             turnaround: '4-8 weeks',
+            fit: '98%',
+            contact: 'UnLtd',
+            link: 'https://unltd.org.uk/',
+            applicationLink: 'https://funding.scot/funds/a0R3z00000Lrp6aEAB/unltd-awards',
+            notes: '🚨 URGENT - Only 650 applications per round, filling FAST. You qualify 100% as mental health + environmental social entrepreneur under 4 years old. APPLY THIS WEEK.',
+            action: '📧 APPLY NOW: funding.scot link above → Fill application → Show live platform + MIT evidence + regenerative model. DEADLINE COMING.'
+        },
+        {
+            name: '⭐ Communities Mental Health & Wellbeing Fund (Scottish Gov)',
+            amount: '£1,000-£50,000',
+            turnaround: '6-10 weeks',
+            fit: '94%',
+            contact: 'Apply via your local Third Sector Interface (TSI)',
+            link: 'https://www.gov.scot/policies/mental-health/',
+            localTSI: 'West Dunbartonshire: WDCVS - 01389 738 724',
+            notes: '🎯 SCOTTISH GOVERNMENT FUNDED - Over £1M available 2025-27. Focus on prevention + early intervention + grassroots community mental health. Apply through local TSI.',
+            action: '📞 CALL West Dunbartonshire CVS: 01389 738 724 → Ask about Communities Mental Health & Wellbeing Fund → They help you apply.'
+        },
+        {
+            name: 'Scottish Enterprise - UNITE Digital Health',
+            amount: '€50,000-€500,000 (EU funding)',
+            turnaround: '8-16 weeks',
             fit: '88%',
-            contact: 'University of Glasgow - Innovation Hub',
+            contact: 'Scottish Enterprise Innovation Team',
+            link: 'https://www.scottish-enterprise.com/how-we-can-help/funding-and-grants',
+            email: 'enquiries@scotent.co.uk',
+            phone: '0300 013 3385',
+            notes: 'EU-funded digital health innovation program. Scottish healthtech companies can apply. Requires NHS test bed validation partner.',
+            action: '📞 CALL: 0300 013 3385 → Ask for "UNITE Digital Health program" advisor → Mention you have live digital mental health platform.'
+        },
+        {
+            name: 'Glasgow University - Health Innovation Partnerships',
+            amount: '£5,000-£25,000',
+            turnaround: '6-10 weeks',
+            fit: '86%',
+            contact: 'University of Glasgow INSPIRE Hub',
             link: 'https://www.gla.ac.uk/research/inspire/',
             email: 'inspire-hub@glasgow.ac.uk',
-            notes: 'Research partnership angle - "pilot study on frequency therapy outcomes"',
-            action: 'Email + offer free platform access for research'
-        },
-        {
-            name: '⭐ Wellbeing Economy Alliance (WEAll) Scotland (TOP PRIORITY)',
-            amount: '£2,000-£15,000',
-            turnaround: '2-6 weeks',
-            fit: '98%',
-            contact: 'WEAll Scotland',
-            link: 'https://weall.org/scotland',
-            email: 'scotland@weall.org',
-            notes: '🎯 YOU ARE THEIR DREAM PROJECT - healing + regenerative economics. Mental health + environmental action = perfect wellbeing economy model.',
-            action: '📧 EMAIL NOW: Subject "Wellbeing Economy in Action - Free Mental Health + Earth Healing" + show how $P51 works as regenerative currency'
-        },
-        {
-            name: 'Comic Relief - Tech for Good',
-            amount: '£10,000-£50,000',
-            turnaround: '8-12 weeks',
-            fit: '82%',
-            contact: 'Comic Relief Tech for Good',
-            link: 'https://www.comicrelief.com/funding/tech-for-good',
-            email: 'techforgood@comicrelief.com',
-            notes: 'UK-wide but love Scottish projects. Focus on "mental health access for all"',
-            action: 'Check current funding rounds - they come in waves'
-        },
-        {
-            name: '⭐ UnLtd Scotland - Social Entrepreneurs (TOP PRIORITY)',
-            amount: '£5,000-£15,000',
-            turnaround: '4-8 weeks',
-            fit: '94%',
-            contact: 'UnLtd',
-            link: 'https://unltd.org.uk/portfolio/scotland/',
-            email: 'scotland@unltd.org.uk',
-            notes: '🎯 DIRECT FUNDER - For social entrepreneurs changing lives. You qualify 100% as mental health + environmental social enterprise.',
-            action: '📧 EMAIL NOW: Apply as "mental health social enterprise" + show live platform + MIT evidence + zero extraction model'
+            notes: 'Research partnerships for health innovation. Pilot study funding available. Good for academic validation.',
+            action: '📧 EMAIL: inspire-hub@glasgow.ac.uk → Subject "Pilot Study Partnership - Digital Mental Health" → Offer free platform access for research.'
         }
     ];
 
