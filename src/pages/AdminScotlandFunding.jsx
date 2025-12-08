@@ -85,15 +85,16 @@ Whitepaper: uf51.love/Whitepaper
             action: 'Come back to this after NHS Scotland success ✓'
         },
         {
-            name: '⭐ NHS Scotland Innovation - Mental Health (PRIORITY)',
+            name: '⭐ DHI Scotland - NHS Digital Health Innovation (PRIORITY)',
             amount: '£10,000-£50,000',
             turnaround: '4-8 weeks',
             fit: '98%',
-            contact: 'NHS Scotland Digital Health Innovation',
-            link: 'https://www.digitalhealth.scot/innovation-funding/',
-            email: 'nss.dhiinnovation@nhs.scot',
-            notes: '🎯 YOUR BEST BET - NHS DESPERATE for anxiety/sleep solutions. Show MIT science + zero cost to NHS. Already live platform = instant credibility.',
-            action: '📧 EMAIL NOW: Subject "Free Evidence-Based Anxiety/Sleep Tool - Zero Cost to NHS" - attach 1-pager pitch doc + link to live demo (uf51.love/FrequencyChamber)'
+            contact: 'Digital Health & Care Innovation Centre (DHI Scotland)',
+            link: 'https://www.dhi-scotland.com/',
+            email: 'hello@dhi-scotland.com',
+            phone: '+44 (0) 141 444 7074',
+            notes: '🎯 YOUR BEST BET - DHI is THE hub for NHS Scotland digital health innovation. They help get digital health solutions to market. Show MIT science + zero cost to NHS. Already live platform = instant credibility.',
+            action: '📧 EMAIL NOW: "Dear DHI Innovation Team" - Subject "Free Evidence-Based Anxiety/Sleep Tool - Zero Cost to NHS Scotland" - attach 1-pager pitch doc + link to live demo (uf51.love/FrequencyChamber)'
         },
         {
             name: 'Scottish Enterprise - R&D Grants',
