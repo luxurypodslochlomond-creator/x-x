@@ -10,14 +10,11 @@ export default function AdminOnePager() {
     React.useEffect(() => {
         // Hide page styling for clean PDF
         document.body.style.background = 'white';
-        
-        // Hide Base44 footer completely
-        const footer = document.querySelector('footer');
-        if (footer) footer.style.display = 'none';
+        document.body.classList.add('one-pager-mode');
         
         return () => {
             document.body.style.background = '';
-            if (footer) footer.style.display = '';
+            document.body.classList.remove('one-pager-mode');
         };
     }, []);
 
@@ -28,6 +25,16 @@ export default function AdminOnePager() {
     return (
         <>
             <style>{`
+                body.one-pager-mode header,
+                body.one-pager-mode nav,
+                body.one-pager-mode aside,
+                body.one-pager-mode footer {
+                    display: none !important;
+                }
+                body.one-pager-mode main {
+                    margin: 0 !important;
+                    padding: 0 !important;
+                }
                 @media print {
                     body { background: white !important; }
                     header, nav, aside, footer, .no-print { display: none !important; }
@@ -130,7 +137,7 @@ export default function AdminOnePager() {
                         </div>
                         <p className="text-xl font-black font-mono">uf51.love</p>
                         <p className="text-sm text-gray-600 font-mono">Making healing accessible to everyone, starting in Scotland</p>
-                        <p className="text-xs text-gray-500 font-mono mt-4">Contact: family@uf51.love | Live Demo: uf51.love/FrequencyChamber</p>
+                        <p className="text-xs text-gray-500 font-mono mt-4">Contact: family@uf51.love | Live Demo: https://uf51.love/FrequencyChamber</p>
                     </div>
 
                 </div>
