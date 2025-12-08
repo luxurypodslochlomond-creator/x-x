@@ -1074,10 +1074,6 @@ export default function FrequencyChamber() {
     const [panicDetected, setPanicDetected] = useState(false);
     const lastHRVRef = useRef(null);
     const [showEvidence, setShowEvidence] = useState(false);
-    const [showDeviceInfo, setShowDeviceInfo] = useState(false);
-    const [showTimeSuggestion, setShowTimeSuggestion] = useState(false);
-    const [userTimezone, setUserTimezone] = useState('');
-    const [openSections, setOpenSections] = useState({ mental: true }); // Default first section open
 
 
     // SEO
@@ -1115,10 +1111,6 @@ export default function FrequencyChamber() {
   };
   
   const [suggestedProtocol] = useState(getTimeSuggestion());
-
-  useEffect(() => {
-    setUserTimezone(Intl.DateTimeFormat().resolvedOptions().timeZone);
-  }, []);
   
   useEffect(() => {
     if (masterGainRef.current && ctxRef.current) {
@@ -1436,12 +1428,8 @@ export default function FrequencyChamber() {
 
   const handleVoiceRecommendation = (protocolId) => {
     setSelectedProtocol(PROTOCOLS[protocolId]);
-    setShowVoiceHealing(false);
-    // Scroll to protocol
-    setTimeout(() => {
-      const element = document.getElementById('active-session');
-      if (element) element.scrollIntoView({ behavior: 'smooth' });
-    }, 300);
+    // Scroll to top smoothly
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
   
   const handlePlayPause = () => {
@@ -1698,14 +1686,9 @@ export default function FrequencyChamber() {
                 return (
             <motion.button
               key={protocol.id}
-              onClick={() => handleProtocolSelect(protocol.id)}
-              className={`relative p-6 border-4 transition-all ${
-                selectedProtocol?.id === protocol.id ? 'bg-white/10' : 'bg-black hover:bg-white/5'
-              }`}
-              style={{
-                borderColor: selectedProtocol?.id === protocol.id ? protocol.color : '#333',
-                boxShadow: selectedProtocol?.id === protocol.id ? `0 0 30px ${protocol.color}40` : 'none'
-              }}
+              onClick={() => { handleProtocolSelect(protocol.id); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+              className="relative p-6 border-4 bg-black hover:bg-white/5 transition-all"
+              style={{ borderColor: protocol.color + '60' }}
               whileTap={{ scale: 0.98 }}
             >
               <button
@@ -1718,29 +1701,19 @@ export default function FrequencyChamber() {
               <div className="flex flex-col items-center gap-3">
                 <PixelIcon 
                   icon={protocol.icon} 
-                  color={selectedProtocol?.id === protocol.id ? protocol.color : '#666'} 
+                  color={protocol.color} 
                   size={40}
-                  animate={selectedProtocol?.id === protocol.id && isPlaying}
                 />
                 <p 
                   className="font-black font-mono text-sm"
-                  style={{ color: selectedProtocol?.id === protocol.id ? protocol.color : '#888' }}
+                  style={{ color: protocol.color }}
                 >
                   {protocol.name}
                 </p>
-                <p className="text-gray-500 text-xs text-center">
+                <p className="text-gray-400 text-xs text-center">
                   {protocol.description}
                 </p>
               </div>
-
-              {protocol.id === suggestedProtocol && (
-                <div 
-                  className="absolute -top-2 -right-2 px-2 py-1 text-xs font-bold"
-                  style={{ backgroundColor: protocol.color, color: 'black' }}
-                >
-                  NOW
-                </div>
-                )}
                 </motion.button>
                 );
                 })}
@@ -1840,145 +1813,50 @@ export default function FrequencyChamber() {
               className="border-4 p-8"
               style={{ borderColor: selectedProtocol.color, backgroundColor: `${selectedProtocol.color}10` }}
             >
-              {/* BACK BUTTON */}
-              <button
-                onClick={() => { if (isPlaying) stopAudio(); setSelectedProtocol(null); }}
-                className="mb-6 flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
-              >
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-                  <rect x="12" y="8" width="2" height="4"/>
-                  <rect x="10" y="6" width="2" height="2"/>
-                  <rect x="10" y="12" width="2" height="2"/>
-                  <rect x="8" y="4" width="2" height="2"/>
-                  <rect x="8" y="14" width="2" height="2"/>
-                  <rect x="6" y="9" width="2" height="2"/>
-                </svg>
-                <span className="font-mono text-sm">Back to protocols</span>
-              </button>
-
               <div className="flex items-center justify-between mb-8">
-                <div className="flex items-center gap-4">
-                  <PixelIcon icon={selectedProtocol.icon} color={selectedProtocol.color} size={48} animate={isPlaying} />
-                  <div>
-                    <h2 className="text-2xl font-black" style={{ color: selectedProtocol.color }}>
-                      {selectedProtocol.name}
-                    </h2>
-                    <p className="text-gray-400 text-sm font-mono">
-                      {selectedProtocol.config.primary}Hz primary • {selectedProtocol.config.noiseType} noise
-                    </p>
-                  </div>
-                </div>
-                
+                {/* BACK BUTTON - LEFT SIDE */}
+                <button
+                  onClick={() => { if (isPlaying) stopAudio(); setSelectedProtocol(null); }}
+                  className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
+                >
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                    <rect x="12" y="8" width="2" height="4"/>
+                    <rect x="10" y="6" width="2" height="2"/>
+                    <rect x="10" y="12" width="2" height="2"/>
+                    <rect x="8" y="4" width="2" height="2"/>
+                    <rect x="8" y="14" width="2" height="2"/>
+                    <rect x="6" y="9" width="2" height="2"/>
+                  </svg>
+                  <span className="font-mono text-sm">All protocols</span>
+                </button>
+                {/* TIMER - RIGHT SIDE */}
                 {isPlaying && (
                   <div className="text-right">
                     <p className="text-4xl font-black font-mono" style={{ color: selectedProtocol.color }}>
                       {formatTime(sessionTime)}
                     </p>
-                    <p className="text-gray-500 text-xs font-mono">SESSION TIME</p>
+                    <p className="text-gray-500 text-xs font-mono">SESSION</p>
                   </div>
                 )}
               </div>
-              
-              {/* HRV Toggle */}
-              <div className="flex justify-center mb-4">
-                <button
-                  onClick={() => setHrvEnabled(!hrvEnabled)}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-lg border-2 transition-all ${
-                    hrvEnabled ? 'border-green-500 bg-green-900/30 text-green-400' : 'border-gray-600 bg-black/40 text-gray-400'
-                  }`}
-                >
-                  <Camera className="w-4 h-4" />
-                  <span className="font-mono text-sm">
-                    {hrvEnabled ? 'HRV BIOFEEDBACK ON' : 'Enable HRV Biofeedback'}
-                  </span>
-                </button>
-              </div>
-              
-              <HRVBiofeedback isActive={hrvEnabled && isPlaying} onHRVUpdate={handleHRVUpdate} color={selectedProtocol.color} />
 
-              {/* PROTOCOL ENHANCEMENTS */}
-              <div className="grid grid-cols-2 gap-2 mb-4">
-                {selectedProtocol.config.isBinaural && (
-                  <div className="bg-black/40 border border-cyan-500/30 p-2 flex items-center gap-2">
-                    <Volume2 className="w-4 h-4 text-cyan-400" />
-                    <span className="text-xs text-cyan-400 font-mono">BINAURAL ACTIVE</span>
-                  </div>
-                )}
-                {selectedProtocol.config.visualEntrainment && (
-                  <div className="bg-black/40 border border-purple-500/30 p-2 flex items-center gap-2">
-                    <Zap className="w-4 h-4 text-purple-400" />
-                    <span className="text-xs text-purple-400 font-mono">VISUAL SYNC</span>
-                  </div>
-                )}
-                {breathHapticActive && (
-                  <div className="bg-black/40 border border-pink-500/30 p-2 flex items-center gap-2">
-                    <Activity className="w-4 h-4 text-pink-400" />
-                    <span className="text-xs text-pink-400 font-mono">HAPTIC BREATH</span>
-                  </div>
-                )}
-                {selectedProtocol.config.bilateral && (
-                  <div className="bg-black/40 border border-green-500/30 p-2 flex items-center gap-2">
-                    <Wind className="w-4 h-4 text-green-400" />
-                    <span className="text-xs text-green-400 font-mono">BILATERAL</span>
-                  </div>
-                )}
-              </div>
-              
-              <div className="bg-black/60 backdrop-blur-xl border-4 rounded-xl p-6 mb-6" style={{ borderColor: selectedProtocol.color }}>
-                <BreathingPacer 
-                  breathRate={currentHRV && currentHRV.coherence < 40 
-                    ? Math.max(4, selectedProtocol.config.breathRate - 2) 
-                    : selectedProtocol.config.breathRate}
-                  isActive={isPlaying}
-                  color={selectedProtocol.color}
-                />
-
-                {currentHRV && hrvEnabled && isPlaying && (
-                  <motion.div 
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    className="mt-6 p-3 rounded-lg border-2 text-center"
-                    style={{ 
-                      borderColor: currentHRV.coherence > 70 ? '#22c55e' : currentHRV.coherence > 40 ? '#eab308' : '#ef4444',
-                      backgroundColor: currentHRV.coherence > 70 ? '#22c55e10' : currentHRV.coherence > 40 ? '#eab30810' : '#ef444410'
-                    }}
-                  >
-                    <p className="font-mono text-sm" style={{
-                      color: currentHRV.coherence > 70 ? '#22c55e' : currentHRV.coherence > 40 ? '#eab308' : '#ef4444'
-                    }}>
-                      {currentHRV.coherence > 70 
-                        ? '✓ HIGH COHERENCE - You\'re in sync with the frequency' 
-                        : currentHRV.coherence > 40 
-                          ? '◐ MODERATE - Breathe slower, follow the pacer'
-                          : '○ LOW COHERENCE - Slow deep breaths, you\'ll get there'}
-                    </p>
-                  </motion.div>
-                )}
-              </div>
-              
-              <div className="mb-8">
-                <div className="flex items-center gap-4">
-                  <VolumeX className="w-5 h-5 text-gray-500" />
-                  <input
-                    type="range"
-                    min="0"
-                    max="1"
-                    step="0.05"
-                    value={volume}
-                    onChange={(e) => setVolume(parseFloat(e.target.value))}
-                    className="flex-1 h-3 bg-gray-800 rounded-lg appearance-none cursor-pointer"
-                    style={{ accentColor: selectedProtocol.color }}
-                  />
-                  <Volume2 className="w-5 h-5 text-gray-500" />
-                  <span className="text-gray-400 font-mono text-sm w-12">
-                    {Math.round(volume * 100)}%
-                  </span>
+              {/* PROTOCOL TITLE - BIG AND CLEAR */}
+              <div className="text-center mb-8">
+                <div className="flex items-center justify-center gap-4 mb-2">
+                  <PixelIcon icon={selectedProtocol.icon} color={selectedProtocol.color} size={56} animate={isPlaying} />
                 </div>
+                <h2 className="text-3xl md:text-4xl font-black" style={{ color: selectedProtocol.color }}>
+                  {selectedProtocol.name}
+                </h2>
+                <p className="text-gray-500 text-sm font-mono mt-2">
+                  {selectedProtocol.description}
+                </p>
               </div>
               
+              {/* START BUTTON FIRST */}
               <button
                 onClick={handlePlayPause}
-                className="w-full py-6 text-2xl font-black font-mono transition-all border-4"
+                className="w-full py-6 text-2xl font-black font-mono transition-all border-4 mb-6"
                 style={{
                   backgroundColor: isPlaying ? selectedProtocol.color : 'transparent',
                   borderColor: selectedProtocol.color,
@@ -1988,11 +1866,43 @@ export default function FrequencyChamber() {
               >
                 {isPlaying ? '■ STOP' : '▶ START SESSION'}
               </button>
-              
+
               {isPlaying && (
                 <>
+                  <div className="bg-black/60 backdrop-blur-xl border-4 rounded-xl p-6 mb-6" style={{ borderColor: selectedProtocol.color }}>
+                    <BreathingPacer 
+                      breathRate={currentHRV && currentHRV.coherence < 40 
+                        ? Math.max(4, selectedProtocol.config.breathRate - 2) 
+                        : selectedProtocol.config.breathRate}
+                      isActive={isPlaying}
+                      color={selectedProtocol.color}
+                    />
+
+                    {currentHRV && hrvEnabled && (
+                      <motion.div 
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        className="mt-6 p-3 rounded-lg border-2 text-center"
+                        style={{ 
+                          borderColor: currentHRV.coherence > 70 ? '#22c55e' : currentHRV.coherence > 40 ? '#eab308' : '#ef4444',
+                          backgroundColor: currentHRV.coherence > 70 ? '#22c55e10' : currentHRV.coherence > 40 ? '#eab30810' : '#ef444410'
+                        }}
+                      >
+                        <p className="font-mono text-sm" style={{
+                          color: currentHRV.coherence > 70 ? '#22c55e' : currentHRV.coherence > 40 ? '#eab308' : '#ef4444'
+                        }}>
+                          {currentHRV.coherence > 70 
+                            ? '✓ HIGH COHERENCE - You\'re in sync' 
+                            : currentHRV.coherence > 40 
+                              ? '◐ MODERATE - Breathe slower'
+                              : '○ Slow deep breaths, you\'ll get there'}
+                        </p>
+                      </motion.div>
+                    )}
+                  </div>
+
                   {/* 8-BIT VISUALIZER */}
-                  <div className="mt-6 flex justify-center items-end gap-1 h-24">
+                  <div className="mb-6 flex justify-center items-end gap-1 h-24">
                     {[...Array(16)].map((_, i) => {
                       const height = 20 + Math.sin((Date.now() / 100) + i) * 30 + Math.random() * 20;
                       return (
@@ -2017,7 +1927,7 @@ export default function FrequencyChamber() {
                     })}
                   </div>
 
-                  <div className="mt-6 text-center">
+                  <div className="mb-6 text-center">
                     <p 
                       className="text-5xl font-black font-mono"
                       style={{ color: selectedProtocol.color, textShadow: `0 0 20px ${selectedProtocol.color}` }}
@@ -2025,10 +1935,56 @@ export default function FrequencyChamber() {
                       {currentHz} Hz
                     </p>
                     <p className="text-gray-500 text-sm font-mono mt-2">
-                      {selectedProtocol.config.breathRate} breaths/min • {selectedProtocol.config.noiseType} noise bed
+                      {selectedProtocol.config.breathRate} breaths/min
                     </p>
                   </div>
                 </>
+              )}
+
+              {!isPlaying && (
+                <>
+                  {/* HRV OPTION */}
+                  <div className="flex justify-center mb-6">
+                    <button
+                      onClick={() => setHrvEnabled(!hrvEnabled)}
+                      className={`flex items-center gap-2 px-4 py-2 border-2 transition-all ${
+                        hrvEnabled ? 'border-green-500 bg-green-900/30 text-green-400' : 'border-gray-600 bg-black/40 text-gray-400'
+                      }`}
+                    >
+                      <Camera className="w-4 h-4" />
+                      <span className="font-mono text-sm">
+                        {hrvEnabled ? 'HRV ON' : 'HRV Biofeedback'}
+                      </span>
+                    </button>
+                  </div>
+                </>
+              )}
+
+              {hrvEnabled && !isPlaying && (
+                <HRVBiofeedback isActive={hrvEnabled && isPlaying} onHRVUpdate={handleHRVUpdate} color={selectedProtocol.color} />
+              )}
+              
+              {/* VOLUME - COMPACT */}
+              {!isPlaying && (
+                <div className="mb-6">
+                  <div className="flex items-center gap-4">
+                    <VolumeX className="w-5 h-5 text-gray-500" />
+                    <input
+                      type="range"
+                      min="0"
+                      max="1"
+                      step="0.05"
+                      value={volume}
+                      onChange={(e) => setVolume(parseFloat(e.target.value))}
+                      className="flex-1 h-3 bg-gray-800 rounded-lg appearance-none cursor-pointer"
+                      style={{ accentColor: selectedProtocol.color }}
+                    />
+                    <Volume2 className="w-5 h-5 text-gray-500" />
+                    <span className="text-gray-400 font-mono text-sm w-12">
+                      {Math.round(volume * 100)}%
+                    </span>
+                  </div>
+                </div>
               )}
             </div>
           </motion.div>
