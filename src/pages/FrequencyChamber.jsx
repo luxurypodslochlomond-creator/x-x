@@ -1563,13 +1563,6 @@ export default function FrequencyChamber() {
         </div>
       </div>
       
-      {/* VOICE HEALING - HERO POSITION */}
-      <div className="max-w-4xl mx-auto p-4">
-        <div className="border-4 border-pink-500 bg-black p-6">
-          <VoiceHealing onProtocolRecommend={handleVoiceRecommendation} />
-        </div>
-      </div>
-
       {/* EVIDENCE - COLLAPSIBLE */}
       <div className="max-w-4xl mx-auto p-4">
         <button
@@ -2046,6 +2039,15 @@ export default function FrequencyChamber() {
       {!selectedProtocol && (
         <div className="max-w-4xl mx-auto p-4">
           <BiometricHealing />
+        </div>
+      )}
+
+      {/* VOICE HEALING - BOTTOM POSITION */}
+      {!selectedProtocol && (
+        <div className="max-w-4xl mx-auto p-4">
+          <div className="border-4 border-pink-500 bg-black p-6">
+            <VoiceHealing onProtocolRecommend={handleVoiceRecommendation} />
+          </div>
         </div>
       )}
 
