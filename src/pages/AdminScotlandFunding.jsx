@@ -17,7 +17,7 @@ Free, evidence-based mental health tool using sound therapy - MIT research, zero
 📊 THE PROBLEM:
 • Scotland's mental health crisis: 1 in 4 experience anxiety/depression (NHS Scotland)
 • NHS wait times: 18+ weeks for mental health support
-• Cost crisis: £10.7 billion annual cost to Scotland (Mental Health Foundation)
+• Cost crisis: £8.8 billion annual cost to Scottish economy (Audit Scotland 2023)
 • Digital divide: Existing apps cost £10-50/month or harvest data
 
 ✅ OUR SOLUTION:
