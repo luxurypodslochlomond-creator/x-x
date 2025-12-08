@@ -13,6 +13,19 @@ export default function WelcomePage() {
 
     useEffect(() => {
         base44.auth.isAuthenticated().then(setIsLoggedIn).catch(() => setIsLoggedIn(false));
+        
+        // Set share metadata
+        document.title = 'Universal Frequency51';
+        
+        const ogTitle = document.querySelector('meta[property="og:title"]') || document.createElement('meta');
+        ogTitle.setAttribute('property', 'og:title');
+        ogTitle.content = 'Universal Frequency51';
+        if (!ogTitle.parentNode) document.head.appendChild(ogTitle);
+        
+        const ogDesc = document.querySelector('meta[property="og:description"]') || document.createElement('meta');
+        ogDesc.setAttribute('property', 'og:description');
+        ogDesc.content = 'Free healing frequencies • Ethical music streaming • Get paid to clean Earth';
+        if (!ogDesc.parentNode) document.head.appendChild(ogDesc);
     }, []);
 
     const handleSignInClick = () => {
