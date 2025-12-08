@@ -155,6 +155,7 @@ import TunerTogether from './pages/TunerTogether';
 import FrequencyShare from './pages/FrequencyShare';
 import LearnGuitar from './pages/LearnGuitar';
 import UniversalPulse from './pages/UniversalPulse';
+import HealingJourney from './pages/HealingJourney';
 import __Layout from './Layout.jsx';
 
 
@@ -316,6 +317,7 @@ export const PAGES = {
     "FrequencyShare": FrequencyShare,
     "LearnGuitar": LearnGuitar,
     "UniversalPulse": UniversalPulse,
+    "HealingJourney": HealingJourney,
 }
 
 export const pagesConfig = {
