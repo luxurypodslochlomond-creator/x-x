@@ -1494,6 +1494,40 @@ export default function FrequencyChamber() {
             </motion.div>
           )}
         </AnimatePresence>
+
+        {/* VOICE HEALING - 8-BIT BUTTON */}
+        <button
+          onClick={() => setShowVoiceHealing(!showVoiceHealing)}
+          className="w-full mt-4 border-4 border-pink-500 bg-black p-4 hover:bg-pink-500/10 transition-all"
+          style={{ boxShadow: showVoiceHealing ? '0 0 30px rgba(236, 72, 153, 0.6)' : '4px 4px 0px rgba(236, 72, 153, 0.5)' }}
+        >
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <Mic className="w-6 h-6 text-pink-400" />
+              <div className="text-left">
+                <h3 className="text-pink-400 font-black font-mono text-sm">🎤 VOICE HEALING</h3>
+                <p className="text-pink-300 text-xs font-mono">Speak → AI finds your cure frequency</p>
+              </div>
+            </div>
+            <span className="text-pink-400 font-black text-xl">{showVoiceHealing ? '−' : '+'}</span>
+          </div>
+        </button>
+
+        <AnimatePresence>
+          {showVoiceHealing && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'auto', opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="overflow-hidden"
+            >
+              <div className="border-x-4 border-b-4 border-pink-500 bg-black p-4">
+                <VoiceHealing onProtocolRecommend={handleVoiceRecommendation} />
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
 
       {/* EMERGENCY MODE BANNER */}
