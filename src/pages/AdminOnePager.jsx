@@ -77,6 +77,18 @@ export default function AdminOnePager() {
                         </div>
                     </div>
 
+                    {/* IMPACT POTENTIAL */}
+                    <div className="space-y-3">
+                        <h2 className="text-3xl font-black font-mono text-pink-600">IMPACT POTENTIAL</h2>
+                        <div className="bg-pink-50 border-l-4 border-pink-600 p-4 space-y-2 text-sm">
+                            <p><strong>Cost to NHS:</strong> £0 per user (vs £80-£200 per therapy session, £500+ for neurofeedback)</p>
+                            <p><strong>Reach:</strong> Unlimited (digital, scalable)</p>
+                            <p><strong>Evidence-based:</strong> Published research, not wellness apps</p>
+                            <p><strong>Preventative:</strong> Catch anxiety/depression early, before crisis</p>
+                            <p><strong>Already working:</strong> Live platform with active users</p>
+                        </div>
+                    </div>
+
                     {/* THE SCIENCE */}
                     <div className="space-y-3">
                         <h2 className="text-3xl font-black font-mono text-cyan-600">THE SCIENCE</h2>
@@ -102,18 +114,6 @@ export default function AdminOnePager() {
                                 <li>Accessibility improvements (screen readers, translations)</li>
                                 <li>Marketing to reach those who need it most</li>
                             </ul>
-                        </div>
-                    </div>
-
-                    {/* IMPACT POTENTIAL */}
-                    <div className="space-y-3">
-                        <h2 className="text-3xl font-black font-mono text-pink-600">IMPACT POTENTIAL</h2>
-                        <div className="bg-pink-50 border-l-4 border-pink-600 p-4 space-y-2 text-sm">
-                            <p><strong>Cost to NHS:</strong> £0 per user (vs £80-£200 per therapy session, £500+ for neurofeedback)</p>
-                            <p><strong>Reach:</strong> Unlimited (digital, scalable)</p>
-                            <p><strong>Evidence-based:</strong> Published research, not wellness apps</p>
-                            <p><strong>Preventative:</strong> Catch anxiety/depression early, before crisis</p>
-                            <p><strong>Already working:</strong> Live platform with active users</p>
                         </div>
                     </div>
 
