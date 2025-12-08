@@ -275,12 +275,20 @@ Whitepaper: uf51.love/Whitepaper
                 <div className="text-center space-y-4">
                     <h1 className="text-5xl font-black font-mono text-cyan-400">SCOTLAND FUNDING</h1>
                     <p className="text-gray-400 font-mono">Quick turnaround opportunities for UF51 mental health tech</p>
-                    <button
-                        onClick={copyPitchDoc}
-                        className="px-6 py-3 bg-green-600 border-4 border-green-400 text-white font-black font-mono hover:bg-green-700"
-                    >
-                        📋 COPY PITCH DOC
-                    </button>
+                    <div className="flex gap-4 justify-center">
+                        <button
+                            onClick={copyOnePager}
+                            className="px-6 py-3 bg-cyan-600 border-4 border-cyan-400 text-white font-black font-mono hover:bg-cyan-700"
+                        >
+                            📄 COPY ONE-PAGER
+                        </button>
+                        <button
+                            onClick={copyPitchDoc}
+                            className="px-6 py-3 bg-green-600 border-4 border-green-400 text-white font-black font-mono hover:bg-green-700"
+                        >
+                            📋 COPY FULL PITCH
+                        </button>
+                    </div>
                 </div>
 
                 {/* FUNDING OPPORTUNITIES */}
