@@ -157,6 +157,7 @@ import LearnGuitar from './pages/LearnGuitar';
 import UniversalPulse from './pages/UniversalPulse';
 import HealingJourney from './pages/HealingJourney';
 import AdminScotlandFunding from './pages/AdminScotlandFunding';
+import AdminOnePager from './pages/AdminOnePager';
 import __Layout from './Layout.jsx';
 
 
@@ -320,6 +321,7 @@ export const PAGES = {
     "UniversalPulse": UniversalPulse,
     "HealingJourney": HealingJourney,
     "AdminScotlandFunding": AdminScotlandFunding,
+    "AdminOnePager": AdminOnePager,
 }
 
 export const pagesConfig = {
