@@ -104,16 +104,16 @@ Whitepaper: uf51.love/Whitepaper
             action: 'Come back to this after NHS Scotland success ✓'
         },
         {
-            name: '⭐ DHI Scotland - NHS Digital Health Innovation (PRIORITY)',
-            amount: '£10,000-£50,000',
-            turnaround: '4-8 weeks',
-            fit: '98%',
+            name: 'DHI Scotland - Innovation Support (NOT Direct Funding)',
+            amount: 'Guidance + Connections',
+            turnaround: '2-4 weeks response',
+            fit: '90%',
             contact: 'Digital Health & Care Innovation Centre (DHI Scotland)',
             link: 'https://www.dhi-scotland.com/',
             email: 'hello@dhi-scotland.com',
             phone: '+44 (0) 141 444 7074',
-            notes: '🎯 YOUR BEST BET - DHI is THE hub for NHS Scotland digital health innovation. They help get digital health solutions to market. Show MIT science + zero cost to NHS. Already live platform = instant credibility.',
-            action: '📧 EMAIL NOW: "Dear DHI Innovation Team" - Subject "Free Evidence-Based Anxiety/Sleep Tool - Zero Cost to NHS Scotland" - attach 1-pager pitch doc + link to live demo (uf51.love/FrequencyChamber)'
+            notes: '⚠️ IMPORTANT: DHI is NOT a direct funder - they\'re a connector/support hub. They have a funding finder tool and can guide you to the RIGHT funders for NHS Scotland digital health.',
+            action: '📧 EMAIL: Ask for GUIDANCE on which NHS Scotland funders to approach + request intro to relevant funding bodies. Subject: "Digital Mental Health Tool - Seeking Funding Guidance"'
         },
         {
             name: 'Scottish Enterprise - R&D Grants',
@@ -127,15 +127,15 @@ Whitepaper: uf51.love/Whitepaper
             action: 'Call: 0300 013 3385, ask for Innovation Advisor'
         },
         {
-            name: 'Mental Health Foundation Scotland - Small Grants',
+            name: '⭐ Mental Health Foundation Scotland - Small Grants (TOP PRIORITY)',
             amount: '£500-£10,000',
             turnaround: '3-6 weeks',
-            fit: '92%',
+            fit: '96%',
             contact: 'Mental Health Foundation',
             link: 'https://www.mentalhealth.org.uk/scotland',
             email: 'scotland@mentalhealth.org.uk',
-            notes: 'Focus on "digital mental health innovation" + "preventative care"',
-            action: 'Email pitch + request 15min call'
+            notes: '🎯 DIRECT FUNDER - Focus on "digital mental health innovation" + "preventative care" + "zero cost access for all Scots"',
+            action: '📧 EMAIL NOW: Subject "Free Evidence-Based Mental Health Tool - MIT Research - Already Live" + attach 1-pager + link to uf51.love/FrequencyChamber'
         },
         {
             name: 'Glasgow University - Health Innovation Partnership',
@@ -149,15 +149,15 @@ Whitepaper: uf51.love/Whitepaper
             action: 'Email + offer free platform access for research'
         },
         {
-            name: 'Wellbeing Economy Alliance (WEAll) Scotland',
+            name: '⭐ Wellbeing Economy Alliance (WEAll) Scotland (TOP PRIORITY)',
             amount: '£2,000-£15,000',
             turnaround: '2-6 weeks',
-            fit: '96%',
+            fit: '98%',
             contact: 'WEAll Scotland',
             link: 'https://weall.org/scotland',
             email: 'scotland@weall.org',
-            notes: 'YOU ARE THEIR DREAM PROJECT - healing + regenerative economics',
-            action: 'Email: "We built your vision - healing Earth pays for healing humans"'
+            notes: '🎯 YOU ARE THEIR DREAM PROJECT - healing + regenerative economics. Mental health + environmental action = perfect wellbeing economy model.',
+            action: '📧 EMAIL NOW: Subject "Wellbeing Economy in Action - Free Mental Health + Earth Healing" + show how $P51 works as regenerative currency'
         },
         {
             name: 'Comic Relief - Tech for Good',
@@ -171,15 +171,15 @@ Whitepaper: uf51.love/Whitepaper
             action: 'Check current funding rounds - they come in waves'
         },
         {
-            name: 'UnLtd Scotland - Social Entrepreneurs',
+            name: '⭐ UnLtd Scotland - Social Entrepreneurs (TOP PRIORITY)',
             amount: '£5,000-£15,000',
             turnaround: '4-8 weeks',
-            fit: '90%',
+            fit: '94%',
             contact: 'UnLtd',
             link: 'https://unltd.org.uk/portfolio/scotland/',
             email: 'scotland@unltd.org.uk',
-            notes: 'For social entrepreneurs changing lives - you qualify 100%',
-            action: 'Apply as "mental health social enterprise"'
+            notes: '🎯 DIRECT FUNDER - For social entrepreneurs changing lives. You qualify 100% as mental health + environmental social enterprise.',
+            action: '📧 EMAIL NOW: Apply as "mental health social enterprise" + show live platform + MIT evidence + zero extraction model'
         }
     ];
 
@@ -275,6 +275,12 @@ Whitepaper: uf51.love/Whitepaper
                 <div className="text-center space-y-4">
                     <h1 className="text-5xl font-black font-mono text-cyan-400">SCOTLAND FUNDING</h1>
                     <p className="text-gray-400 font-mono">Quick turnaround opportunities for UF51 mental health tech</p>
+                    <div className="bg-green-900/30 border-2 border-green-500 p-4 inline-block">
+                        <p className="text-green-400 font-mono font-bold text-sm">✓ TOP 3 PRIORITIES (DIRECT FUNDERS):</p>
+                        <p className="text-white font-mono text-sm">1. Mental Health Foundation Scotland</p>
+                        <p className="text-white font-mono text-sm">2. WEAll Scotland</p>
+                        <p className="text-white font-mono text-sm">3. UnLtd Scotland</p>
+                    </div>
                     <div className="flex gap-4 justify-center">
                         <button
                             onClick={copyOnePager}
