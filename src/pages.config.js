@@ -160,6 +160,7 @@ import AdminScotlandFunding from './pages/AdminScotlandFunding';
 import AdminOnePager from './pages/AdminOnePager';
 import AdminUnLtdApplication from './pages/AdminUnLtdApplication';
 import AdminUKNewCICFunding from './pages/AdminUKNewCICFunding';
+import AdminNationalLotteryEnvironmentMH from './pages/AdminNationalLotteryEnvironmentMH';
 import __Layout from './Layout.jsx';
 
 
@@ -326,6 +327,7 @@ export const PAGES = {
     "AdminOnePager": AdminOnePager,
     "AdminUnLtdApplication": AdminUnLtdApplication,
     "AdminUKNewCICFunding": AdminUKNewCICFunding,
+    "AdminNationalLotteryEnvironmentMH": AdminNationalLotteryEnvironmentMH,
 }
 
 export const pagesConfig = {
