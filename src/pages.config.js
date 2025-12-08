@@ -158,6 +158,7 @@ import UniversalPulse from './pages/UniversalPulse';
 import HealingJourney from './pages/HealingJourney';
 import AdminScotlandFunding from './pages/AdminScotlandFunding';
 import AdminOnePager from './pages/AdminOnePager';
+import AdminUnLtdApplication from './pages/AdminUnLtdApplication';
 import __Layout from './Layout.jsx';
 
 
@@ -322,6 +323,7 @@ export const PAGES = {
     "HealingJourney": HealingJourney,
     "AdminScotlandFunding": AdminScotlandFunding,
     "AdminOnePager": AdminOnePager,
+    "AdminUnLtdApplication": AdminUnLtdApplication,
 }
 
 export const pagesConfig = {
