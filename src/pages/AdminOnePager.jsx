@@ -10,8 +10,14 @@ export default function AdminOnePager() {
     React.useEffect(() => {
         // Hide page styling for clean PDF
         document.body.style.background = 'white';
+        
+        // Hide Base44 footer completely
+        const footer = document.querySelector('footer');
+        if (footer) footer.style.display = 'none';
+        
         return () => {
             document.body.style.background = '';
+            if (footer) footer.style.display = '';
         };
     }, []);
 
