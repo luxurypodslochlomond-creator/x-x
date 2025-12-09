@@ -9,6 +9,7 @@ import { Input } from '@/components/ui/input';
 import { Plus, User, Calendar, CheckSquare, MessageSquare, DollarSign, Search } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Duck8Bit from '@/components/shared/DuckIcon';
+import CelticFC8Bit from '@/components/shared/CelticFC8Bit';
 
 /**
  * SCOTT'S ARTIST/CLIENT MANAGER
@@ -69,11 +70,15 @@ export default function ScottManager() {
     if (!pinEntered) {
         return (
             <div className="min-h-screen bg-gradient-to-br from-purple-950 via-black to-indigo-950 p-4 flex items-center justify-center">
-                <Card className="bg-black/80 border-2 border-purple-500 p-8 max-w-md w-full">
+                <Card className="bg-black/80 border-2 border-green-500 p-8 max-w-md w-full">
                     <div className="text-center mb-6">
-                        <Duck8Bit size={60} animate={true} className="mx-auto mb-4" />
+                        <div className="flex items-center justify-center gap-4 mb-4">
+                            <CelticFC8Bit size={60} animate={true} />
+                            <Duck8Bit size={60} animate={true} />
+                            <CelticFC8Bit size={60} animate={true} />
+                        </div>
                         <h1 className="text-2xl font-black text-white mb-2">SCOTT'S MANAGER</h1>
-                        <p className="text-gray-400 text-sm">Enter access code</p>
+                        <p className="text-green-400 text-sm font-mono">☘️ CELTIC FC 1888 ☘️</p>
                     </div>
                     <Input
                         type="password"
@@ -100,6 +105,7 @@ export default function ScottManager() {
             {/* HEADER */}
             <div className="mb-6">
                 <div className="flex items-center gap-3 mb-2">
+                    <CelticFC8Bit size={40} animate={true} />
                     <h1 className="text-3xl font-black text-white">SCOTT'S MANAGER</h1>
                     <Duck8Bit size={40} animate={true} />
                 </div>
