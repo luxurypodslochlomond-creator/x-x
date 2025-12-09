@@ -687,11 +687,18 @@ export default function HealingDashboard() {
                     </DashboardSection>
 
                     {/* STRESS PATTERNS */}
-                    <DashboardSection
-                        title="WHEN YOU NEED HEALING MOST"
-                        icon={Clock}
-                        color="border-pink-500"
+                    </DashboardSection>
+                    
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.6 }}
                     >
+                        <DashboardSection
+                            title="WHEN YOU NEED HEALING MOST"
+                            icon={Clock}
+                            color="border-pink-500"
+                        >
                         <div className="space-y-6">
                             <div className="bg-pink-900/30 backdrop-blur-sm border-l-4 border-pink-500 p-5">
                                 <p className="text-pink-400 font-mono font-bold text-sm mb-3">Your hardest time:</p>
@@ -720,13 +727,18 @@ export default function HealingDashboard() {
                             </p>
                         </div>
                     </DashboardSection>
-
-                    {/* NERVOUS SYSTEM REGULATION */}
-                    <DashboardSection
-                        title="NERVOUS SYSTEM PROGRESS"
-                        icon={Activity}
-                        color="border-green-500"
+                    </motion.div>
+                    
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.7 }}
                     >
+                        <DashboardSection
+                            title="NERVOUS SYSTEM PROGRESS"
+                            icon={Activity}
+                            color="border-green-500"
+                        >
                         <div className="space-y-6">
                             <div className="bg-green-900/30 backdrop-blur-sm border-l-4 border-green-500 p-5">
                                 <p className="text-green-400 font-mono font-bold text-sm mb-3">Stress reduction:</p>
@@ -753,13 +765,18 @@ export default function HealingDashboard() {
                             </p>
                         </div>
                     </DashboardSection>
-
-                    {/* HEALING STREAK */}
-                    <DashboardSection
-                        title="YOUR CONSISTENCY"
-                        icon={Sparkles}
-                        color="border-amber-500"
+                    </motion.div>
+                    
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.8 }}
                     >
+                        <DashboardSection
+                            title="YOUR CONSISTENCY"
+                            icon={Sparkles}
+                            color="border-amber-500"
+                        >
                         <div className="space-y-6">
                             <div className="bg-amber-900/30 backdrop-blur-sm border-l-4 border-amber-500 p-5">
                                 <p className="text-amber-400 font-mono font-bold text-sm mb-3">Current streak:</p>
@@ -861,6 +878,36 @@ export default function HealingDashboard() {
                                     </p>
                                     )}
                                     </div>
+                                    </DashboardSection>
+                                    </motion.div>
+
+                                    {/* CLINICAL OUTCOMES */}
+                                    <motion.div
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ delay: 0.6 }}
+                                    >
+                                    <DashboardSection
+                                    title="CLINICAL OUTCOMES (NHS STANDARD)"
+                                    icon={Shield}
+                                    color="border-cyan-500"
+                                    >
+                                    <ClinicalOutcomes onComplete={() => window.location.reload()} />
+                                    </DashboardSection>
+                                    </motion.div>
+
+                                    {/* MORPHIC RESONANCE */}
+                                    <motion.div
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ delay: 0.7 }}
+                                    >
+                                    <DashboardSection
+                                    title="MORPHIC RESONANCE (COLLECTIVE HEALING)"
+                                    icon={COOLASFUCKWaves}
+                                    color="border-purple-500"
+                                    >
+                                    <MorphicResonance />
                                     </DashboardSection>
                                     </motion.div>
 
