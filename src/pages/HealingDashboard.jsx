@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { COOLASFUCKHeart, COOLASFUCKWaves, COOLASFUCKBrain } from '@/components/shared/COOLASFUCKIcon';
 import { TrendingDown, Sparkles, Activity, Calendar, Info } from 'lucide-react';
+import MorphicResonance from '@/components/dashboard/MorphicResonance';
 
 
 /**
@@ -107,6 +108,32 @@ export default function HealingDashboard() {
                 </div>
 
 
+
+                {/* MORPHIC RESONANCE - REAL SCIENCE */}
+                <div className="bg-black border-4 border-purple-500 p-6 mb-6">
+                    <div className="flex items-center gap-3 mb-4">
+                        <COOLASFUCKWaves size={32} animate={true} />
+                        <div>
+                            <h2 className="text-2xl font-black font-mono text-purple-400">
+                                MORPHIC RESONANCE
+                            </h2>
+                            <p className="text-purple-300 font-mono text-xs">
+                                Sheldrake hypothesis: Collective consciousness healing
+                            </p>
+                        </div>
+                    </div>
+
+                    <div className="bg-purple-900/20 border-2 border-purple-500/50 p-4 mb-4">
+                        <p className="text-purple-200 font-mono text-sm mb-3">
+                            When more people use the same healing frequency, the <strong className="text-purple-400">morphic field strengthens</strong>. Everyone heals faster through collective resonance.
+                        </p>
+                        <p className="text-gray-400 font-mono text-xs">
+                            This data tests Rupert Sheldrake's theory: Does healing become easier when more souls do it together?
+                        </p>
+                    </div>
+
+                    <MorphicResonance />
+                </div>
 
                 {/* START HEALING CTA - IF NO PERSONAL DATA */}
                 {!hasPersonalData && (
