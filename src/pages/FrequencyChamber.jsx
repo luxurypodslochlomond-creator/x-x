@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Heart, Moon, Brain, Zap, Shield, Wind, Sun, Volume2, VolumeX, Clock, Info, X, Camera, Activity, Ear, Share2, Music, Mic } from 'lucide-react';
 import { COOLASFUCKWaves, COOLASFUCKBrain, COOLASFUCKHeart, COOLASFUCKMoon, COOLASFUCKShield } from '@/components/shared/COOLASFUCKIcon';
 import BiometricHealing from '@/components/radio/BiometricHealing';
+import { base44 } from '@/api/base44Client';
 
 /**
  * UF51 FREQUENCY CHAMBER
@@ -1142,6 +1143,21 @@ export default function FrequencyChamber() {
   // Start audio
   const startAudio = async (protocol) => {
     try {
+      // Save session to dashboard (all frequency plays, not just voice)
+      try {
+        await base44.entities.VoiceHealingSession.create({
+          healing_intent: `${protocol.name} frequency session`,
+          voice_f0_hz: protocol.config.primary,
+          stress_level_detected: 50, // neutral - they'll track improvement over time
+          dominant_vowel: 'N/A',
+          recommended_protocol: protocol.id,
+          session_completed: false,
+          audio_hash: `manual_${Date.now()}`
+        });
+      } catch (e) {
+        console.log('Session save error (non-critical):', e);
+      }
+
       // Warn about headphones for binaural but don't block
       if (protocol.config.isBinaural && !hasHeadphones) {
         setShowHeadphonePrompt(true);
