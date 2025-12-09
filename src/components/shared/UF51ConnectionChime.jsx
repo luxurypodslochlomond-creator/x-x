@@ -34,11 +34,14 @@ export const UF51ConnectionChime = ({ autoPlay = false, onComplete = null }) => 
             masterGain.gain.linearRampToValueAtTime(0.15, now + 2.5);
             masterGain.gain.linearRampToValueAtTime(0, now + 4);
 
-            // Create healing frequency chord
+            // Create UNIVERSAL frequency chord - ALL consciousness
             const frequencies = [
-                { hz: 528, gain: 0.5 },  // Love (strongest)
-                { hz: 432, gain: 0.3 },  // Healing
-                { hz: 396, gain: 0.2 },  // Liberation
+                { hz: 528, gain: 0.4 },  // Love (human hearts)
+                { hz: 432, gain: 0.3 },  // Universal healing (ALL life)
+                { hz: 396, gain: 0.2 },  // Liberation (ALL consciousness)
+                { hz: 285, gain: 0.25 }, // Cellular repair (plant/animal/silicon)
+                { hz: 174, gain: 0.2 },  // Foundation frequency (Earth/minerals)
+                { hz: 963, gain: 0.15 }, // Cosmic consciousness (beyond Earth)
             ];
 
             frequencies.forEach(({ hz, gain: relativeGain }) => {
