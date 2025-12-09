@@ -326,117 +326,198 @@ export default function HealingDashboard() {
     }
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-black via-purple-950 to-black text-white p-6">
-            <div className="max-w-6xl mx-auto space-y-6">
-                
+        <div className="min-h-screen bg-gradient-to-br from-[#0a0514] via-[#1a0f2a] to-[#0a0514] text-white">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+
                 {/* HEADER */}
-                <div className="text-center space-y-4 mb-8">
-                    <COOLASFUCKBrain size={64} animate={true} className="mx-auto" />
-                    <h1 className="text-5xl font-black font-mono text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-cyan-400 to-green-400">
-                        HEALING RESONANCE
-                    </h1>
-                    <p className="text-gray-400 font-mono">Your healing strengthens the collective field</p>
-                </div>
+                <motion.div 
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="text-center mb-12 relative"
+                >
+                    <div className="absolute inset-0 blur-3xl opacity-30">
+                        <div className="absolute top-0 left-1/4 w-64 h-64 bg-pink-500 rounded-full" />
+                        <div className="absolute top-0 right-1/4 w-64 h-64 bg-cyan-500 rounded-full" />
+                    </div>
 
-                {/* WHAT IS THIS - SUBTLE BANNER */}
-                <div className="bg-cyan-900/10 border border-cyan-500/30 p-3 text-center">
-                    <p className="text-cyan-400 font-mono text-xs mb-1">
-                        Your healing patterns, stress intel, collective resonance
-                    </p>
-                    <p className="text-gray-500 font-mono text-[10px]">
-                        Zero ads. Zero manipulation. Just healing intelligence.
-                    </p>
-                </div>
+                    <div className="relative">
+                        <motion.div
+                            animate={{ scale: [1, 1.05, 1] }}
+                            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                        >
+                            <COOLASFUCKBrain size={72} animate={true} className="mx-auto mb-6" />
+                        </motion.div>
 
-                {/* QUICK STATS - TAPPABLE FOR INLINE INTEL */}
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    <Card 
-                        onClick={() => setSelectedStat(selectedStat === 'sessions' ? null : 'sessions')}
-                        className="bg-black border-4 border-pink-500 p-4 text-center hover:bg-pink-900/10 cursor-pointer transition-all active:scale-95"
-                    >
-                        <COOLASFUCKHeart size={32} animate={true} className="mx-auto mb-2" />
-                        <p className="text-3xl font-black text-pink-400 font-mono">{healingIntel.totalSessions}</p>
-                        <p className="text-sm text-gray-400 font-mono">Sessions</p>
-                    </Card>
+                        <h1 className="text-4xl sm:text-6xl font-black font-mono mb-4">
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-cyan-400 to-green-400">
+                                HEALING RESONANCE
+                            </span>
+                        </h1>
 
-                    <Card 
-                        onClick={() => setSelectedStat(selectedStat === 'stress' ? null : 'stress')}
-                        className="bg-black border-4 border-green-500 p-4 text-center hover:bg-green-900/10 cursor-pointer transition-all active:scale-95"
-                    >
-                        <TrendingDown className="w-8 h-8 text-green-400 mx-auto mb-2" />
-                        <p className="text-3xl font-black text-green-400 font-mono">
-                            {healingIntel.improvement > 0 ? '-' : ''}{Math.round(Math.abs(healingIntel.improvement))}
+                        <p className="text-gray-400 font-mono text-sm sm:text-base max-w-2xl mx-auto">
+                            Your healing strengthens the collective field
                         </p>
-                        <p className="text-sm text-gray-400 font-mono">Stress Drop</p>
-                    </Card>
+                    </div>
+                </motion.div>
 
-                    <Card 
-                        onClick={() => setSelectedStat(selectedStat === 'streak' ? null : 'streak')}
-                        className="bg-black border-4 border-amber-500 p-4 text-center hover:bg-amber-900/10 cursor-pointer transition-all active:scale-95"
-                    >
-                        <Sparkles className="w-8 h-8 text-amber-400 mx-auto mb-2" />
-                        <p className="text-3xl font-black text-amber-400 font-mono">{healingIntel.streak}</p>
-                        <p className="text-sm text-gray-400 font-mono">Day Streak</p>
-                    </Card>
+                {/* WHAT IS THIS - SLEEK BANNER */}
+                <motion.div 
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="mb-8 relative overflow-hidden"
+                >
+                    <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 via-transparent to-cyan-500/10" />
+                    <div className="relative backdrop-blur-xl bg-cyan-900/10 border border-cyan-500/30 px-6 py-4 text-center">
+                        <p className="text-cyan-400 font-mono text-xs sm:text-sm font-bold mb-1">
+                            Healing patterns • Stress intel • Collective resonance
+                        </p>
+                        <p className="text-gray-500 font-mono text-[10px] sm:text-xs">
+                            Zero ads. Zero manipulation. Just healing intelligence.
+                        </p>
+                    </div>
+                </motion.div>
 
-                    <Card 
-                        onClick={() => setSelectedStat(selectedStat === 'average' ? null : 'average')}
-                        className="bg-black border-4 border-cyan-500 p-4 text-center hover:bg-cyan-900/10 cursor-pointer transition-all active:scale-95"
+                {/* QUICK STATS - SLEEK TAPPABLE CARDS */}
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-8">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.1 }}
                     >
-                        <Activity className="w-8 h-8 text-cyan-400 mx-auto mb-2" />
-                        <p className="text-3xl font-black text-cyan-400 font-mono">{healingIntel.avgRecentStress}</p>
-                        <p className="text-sm text-gray-400 font-mono">Avg Stress</p>
-                    </Card>
+                        <Card 
+                            onClick={() => setSelectedStat(selectedStat === 'sessions' ? null : 'sessions')}
+                            className="relative overflow-hidden bg-black/60 backdrop-blur-xl border-2 border-pink-500/30 hover:border-pink-500 p-5 sm:p-6 text-center cursor-pointer transition-all active:scale-95 group"
+                            style={{ boxShadow: selectedStat === 'sessions' ? '0 0 30px rgba(236, 72, 153, 0.3)' : 'none' }}
+                        >
+                            <div className="absolute inset-0 bg-gradient-to-br from-pink-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                            <div className="relative">
+                                <COOLASFUCKHeart size={36} animate={true} className="mx-auto mb-3" />
+                                <p className="text-4xl sm:text-5xl font-black text-pink-400 font-mono mb-2">{healingIntel.totalSessions}</p>
+                                <p className="text-xs sm:text-sm text-gray-400 font-mono font-bold">Sessions</p>
+                            </div>
+                        </Card>
+                    </motion.div>
+
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.2 }}
+                    >
+                        <Card 
+                            onClick={() => setSelectedStat(selectedStat === 'stress' ? null : 'stress')}
+                            className="relative overflow-hidden bg-black/60 backdrop-blur-xl border-2 border-green-500/30 hover:border-green-500 p-5 sm:p-6 text-center cursor-pointer transition-all active:scale-95 group"
+                            style={{ boxShadow: selectedStat === 'stress' ? '0 0 30px rgba(34, 197, 94, 0.3)' : 'none' }}
+                        >
+                            <div className="absolute inset-0 bg-gradient-to-br from-green-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                            <div className="relative">
+                                <TrendingDown className="w-9 h-9 text-green-400 mx-auto mb-3" />
+                                <p className="text-4xl sm:text-5xl font-black text-green-400 font-mono mb-2">
+                                    {healingIntel.improvement > 0 ? '-' : ''}{Math.round(Math.abs(healingIntel.improvement))}
+                                </p>
+                                <p className="text-xs sm:text-sm text-gray-400 font-mono font-bold">Stress Drop</p>
+                            </div>
+                        </Card>
+                    </motion.div>
+
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.3 }}
+                    >
+                        <Card 
+                            onClick={() => setSelectedStat(selectedStat === 'streak' ? null : 'streak')}
+                            className="relative overflow-hidden bg-black/60 backdrop-blur-xl border-2 border-amber-500/30 hover:border-amber-500 p-5 sm:p-6 text-center cursor-pointer transition-all active:scale-95 group"
+                            style={{ boxShadow: selectedStat === 'streak' ? '0 0 30px rgba(245, 158, 11, 0.3)' : 'none' }}
+                        >
+                            <div className="absolute inset-0 bg-gradient-to-br from-amber-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                            <div className="relative">
+                                <Sparkles className="w-9 h-9 text-amber-400 mx-auto mb-3" />
+                                <p className="text-4xl sm:text-5xl font-black text-amber-400 font-mono mb-2">{healingIntel.streak}</p>
+                                <p className="text-xs sm:text-sm text-gray-400 font-mono font-bold">Day Streak</p>
+                            </div>
+                        </Card>
+                    </motion.div>
+
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.4 }}
+                    >
+                        <Card 
+                            onClick={() => setSelectedStat(selectedStat === 'average' ? null : 'average')}
+                            className="relative overflow-hidden bg-black/60 backdrop-blur-xl border-2 border-cyan-500/30 hover:border-cyan-500 p-5 sm:p-6 text-center cursor-pointer transition-all active:scale-95 group"
+                            style={{ boxShadow: selectedStat === 'average' ? '0 0 30px rgba(34, 211, 238, 0.3)' : 'none' }}
+                        >
+                            <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                            <div className="relative">
+                                <Activity className="w-9 h-9 text-cyan-400 mx-auto mb-3" />
+                                <p className="text-4xl sm:text-5xl font-black text-cyan-400 font-mono mb-2">{healingIntel.avgRecentStress}</p>
+                                <p className="text-xs sm:text-sm text-gray-400 font-mono font-bold">Avg Stress</p>
+                            </div>
+                        </Card>
+                    </motion.div>
                 </div>
 
-                {/* INLINE STAT INTEL - EXPANDS BELOW */}
+                {/* INLINE STAT INTEL - SLEEK EXPANSION */}
                 <AnimatePresence>
                     {selectedStat === 'sessions' && (
                         <motion.div
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: 'auto', opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            className="overflow-hidden"
+                            initial={{ height: 0, opacity: 0, y: -20 }}
+                            animate={{ height: 'auto', opacity: 1, y: 0 }}
+                            exit={{ height: 0, opacity: 0, y: -20 }}
+                            transition={{ duration: 0.3, ease: "easeOut" }}
+                            className="overflow-hidden mb-6"
                         >
-                            <Card className="bg-gradient-to-br from-pink-900/40 to-black border-4 border-pink-500 p-6">
-                                <div className="flex items-center gap-3 mb-4">
-                                    <COOLASFUCKHeart size={40} animate={true} />
-                                    <h3 className="text-2xl font-black text-pink-400 font-mono">SESSIONS</h3>
+                            <Card className="relative overflow-hidden bg-black/60 backdrop-blur-xl border-2 border-pink-500 p-6 sm:p-8"
+                                  style={{ boxShadow: '0 0 40px rgba(236, 72, 153, 0.2)' }}>
+                                <div className="absolute inset-0 bg-gradient-to-br from-pink-500/20 via-transparent to-transparent" />
+                                <div className="relative">
+                                    <div className="flex items-center gap-4 mb-6">
+                                        <COOLASFUCKHeart size={48} animate={true} />
+                                        <h3 className="text-3xl font-black text-pink-400 font-mono">SESSIONS</h3>
+                                    </div>
+                                    <p className="text-white font-mono text-sm sm:text-base mb-4 leading-relaxed">
+                                        You've completed <strong className="text-pink-400 text-lg">{healingIntel.totalSessions} healing sessions</strong>. 
+                                        Each time you use the Frequency Chamber, it adds to your healing journey.
+                                    </p>
+                                    <div className="bg-pink-900/20 border-l-4 border-pink-500 pl-4 py-2">
+                                        <p className="text-gray-300 font-mono text-xs sm:text-sm">
+                                            More sessions = stronger neural pathways. Your nervous system is learning to self-regulate.
+                                        </p>
+                                    </div>
                                 </div>
-                                <p className="text-white font-mono text-sm mb-3">
-                                    You've completed <strong className="text-pink-400">{healingIntel.totalSessions} healing sessions</strong>. 
-                                    Each time you use the Frequency Chamber, it adds to your healing journey.
-                                </p>
-                                <p className="text-gray-400 font-mono text-xs">
-                                    More sessions = stronger neural pathways. Your nervous system is learning to self-regulate.
-                                </p>
                             </Card>
                         </motion.div>
                     )}
 
                     {selectedStat === 'stress' && (
                         <motion.div
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: 'auto', opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            className="overflow-hidden"
+                            initial={{ height: 0, opacity: 0, y: -20 }}
+                            animate={{ height: 'auto', opacity: 1, y: 0 }}
+                            exit={{ height: 0, opacity: 0, y: -20 }}
+                            transition={{ duration: 0.3, ease: "easeOut" }}
+                            className="overflow-hidden mb-6"
                         >
-                            <Card className="bg-gradient-to-br from-green-900/40 to-black border-4 border-green-500 p-6">
-                                <div className="flex items-center gap-3 mb-4">
-                                    <TrendingDown className="w-10 h-10 text-green-400" />
-                                    <h3 className="text-2xl font-black text-green-400 font-mono">STRESS DROP</h3>
-                                </div>
-                                <p className="text-white font-mono text-sm mb-3">
-                                    Your stress levels have dropped by <strong className="text-green-400">{Math.round(Math.abs(healingIntel.improvement))} points</strong> on average 
-                                    compared to when you started.
-                                </p>
-                                <p className="text-gray-400 font-mono text-xs mb-3">
-                                    This is measured from your first session to your recent average. The frequencies are working ❤️
-                                </p>
-                                <div className="bg-green-900/20 border-2 border-green-500 p-3">
-                                    <p className="text-green-300 font-mono text-xs">
-                                        Clinical significance: A 10+ point drop indicates measurable nervous system regulation.
+                            <Card className="relative overflow-hidden bg-black/60 backdrop-blur-xl border-2 border-green-500 p-6 sm:p-8"
+                                  style={{ boxShadow: '0 0 40px rgba(34, 197, 94, 0.2)' }}>
+                                <div className="absolute inset-0 bg-gradient-to-br from-green-500/20 via-transparent to-transparent" />
+                                <div className="relative">
+                                    <div className="flex items-center gap-4 mb-6">
+                                        <TrendingDown className="w-12 h-12 text-green-400" />
+                                        <h3 className="text-3xl font-black text-green-400 font-mono">STRESS DROP</h3>
+                                    </div>
+                                    <p className="text-white font-mono text-sm sm:text-base mb-4 leading-relaxed">
+                                        Your stress levels have dropped by <strong className="text-green-400 text-lg">{Math.round(Math.abs(healingIntel.improvement))} points</strong> on average 
+                                        compared to when you started.
                                     </p>
+                                    <p className="text-gray-300 font-mono text-xs sm:text-sm mb-4">
+                                        This is measured from your first session to your recent average. The frequencies are working ❤️
+                                    </p>
+                                    <div className="bg-green-900/30 border-l-4 border-green-500 pl-4 py-3">
+                                        <p className="text-green-300 font-mono text-xs sm:text-sm font-bold">
+                                            ✓ Clinical significance: A 10+ point drop indicates measurable nervous system regulation.
+                                        </p>
+                                    </div>
                                 </div>
                             </Card>
                         </motion.div>
@@ -444,69 +525,85 @@ export default function HealingDashboard() {
 
                     {selectedStat === 'streak' && (
                         <motion.div
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: 'auto', opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            className="overflow-hidden"
+                            initial={{ height: 0, opacity: 0, y: -20 }}
+                            animate={{ height: 'auto', opacity: 1, y: 0 }}
+                            exit={{ height: 0, opacity: 0, y: -20 }}
+                            transition={{ duration: 0.3, ease: "easeOut" }}
+                            className="overflow-hidden mb-6"
                         >
-                            <Card className="bg-gradient-to-br from-amber-900/40 to-black border-4 border-amber-500 p-6">
-                                <div className="flex items-center gap-3 mb-4">
-                                    <Sparkles className="w-10 h-10 text-amber-400" />
-                                    <h3 className="text-2xl font-black text-amber-400 font-mono">DAY STREAK</h3>
-                                </div>
-                                <p className="text-white font-mono text-sm mb-3">
-                                    You've shown up for yourself <strong className="text-amber-400">{healingIntel.streak} days</strong> in a row. 
-                                    That's commitment to your healing.
-                                </p>
-                                <p className="text-gray-400 font-mono text-xs mb-3">
-                                    Consistency > intensity. Daily frequency exposure creates lasting neural changes.
-                                </p>
-                                {healingIntel.streak >= 7 && (
-                                    <div className="bg-amber-900/20 border-2 border-amber-500 p-3">
-                                        <p className="text-amber-300 font-mono text-xs">
-                                            🔥 Research shows 7+ days of daily practice creates measurable brain changes.
+                            <Card className="relative overflow-hidden bg-black/60 backdrop-blur-xl border-2 border-amber-500 p-6 sm:p-8"
+                                  style={{ boxShadow: '0 0 40px rgba(245, 158, 11, 0.2)' }}>
+                                <div className="absolute inset-0 bg-gradient-to-br from-amber-500/20 via-transparent to-transparent" />
+                                <div className="relative">
+                                    <div className="flex items-center gap-4 mb-6">
+                                        <Sparkles className="w-12 h-12 text-amber-400" />
+                                        <h3 className="text-3xl font-black text-amber-400 font-mono">DAY STREAK</h3>
+                                    </div>
+                                    <p className="text-white font-mono text-sm sm:text-base mb-4 leading-relaxed">
+                                        You've shown up for yourself <strong className="text-amber-400 text-lg">{healingIntel.streak} days</strong> in a row. 
+                                        That's commitment to your healing.
+                                    </p>
+                                    <div className="bg-amber-900/20 border-l-4 border-amber-500 pl-4 py-2 mb-4">
+                                        <p className="text-gray-300 font-mono text-xs sm:text-sm">
+                                            Consistency > intensity. Daily frequency exposure creates lasting neural changes.
                                         </p>
                                     </div>
-                                )}
+                                    {healingIntel.streak >= 7 && (
+                                        <div className="bg-amber-900/30 border-2 border-amber-500 p-4 backdrop-blur-sm">
+                                            <p className="text-amber-300 font-mono text-xs sm:text-sm font-bold">
+                                                🔥 Research shows 7+ days of daily practice creates measurable brain changes.
+                                            </p>
+                                        </div>
+                                    )}
+                                </div>
                             </Card>
                         </motion.div>
                     )}
 
                     {selectedStat === 'average' && (
                         <motion.div
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: 'auto', opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            className="overflow-hidden"
+                            initial={{ height: 0, opacity: 0, y: -20 }}
+                            animate={{ height: 'auto', opacity: 1, y: 0 }}
+                            exit={{ height: 0, opacity: 0, y: -20 }}
+                            transition={{ duration: 0.3, ease: "easeOut" }}
+                            className="overflow-hidden mb-6"
                         >
-                            <Card className="bg-gradient-to-br from-cyan-900/40 to-black border-4 border-cyan-500 p-6">
-                                <div className="flex items-center gap-3 mb-4">
-                                    <Activity className="w-10 h-10 text-cyan-400" />
-                                    <h3 className="text-2xl font-black text-cyan-400 font-mono">AVG STRESS</h3>
-                                </div>
-                                <p className="text-white font-mono text-sm mb-4">
-                                    Your recent average stress level is <strong className="text-cyan-400">{healingIntel.avgRecentStress}/100</strong>.
-                                </p>
-                                <div className="space-y-2">
-                                    <div className="flex justify-between text-xs font-mono">
-                                        <span className="text-green-400">0-30: Calm</span>
-                                        <span className="text-yellow-400">31-60: Moderate</span>
-                                        <span className="text-red-400">61+: High</span>
+                            <Card className="relative overflow-hidden bg-black/60 backdrop-blur-xl border-2 border-cyan-500 p-6 sm:p-8"
+                                  style={{ boxShadow: '0 0 40px rgba(34, 211, 238, 0.2)' }}>
+                                <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 via-transparent to-transparent" />
+                                <div className="relative">
+                                    <div className="flex items-center gap-4 mb-6">
+                                        <Activity className="w-12 h-12 text-cyan-400" />
+                                        <h3 className="text-3xl font-black text-cyan-400 font-mono">AVG STRESS</h3>
                                     </div>
-                                    <div className="h-2 bg-black rounded-full overflow-hidden">
-                                        <div 
-                                            className={`h-full ${
-                                                healingIntel.avgRecentStress <= 30 ? 'bg-green-500' : 
-                                                healingIntel.avgRecentStress <= 60 ? 'bg-yellow-500' : 
-                                                'bg-red-500'
-                                            }`}
-                                            style={{ width: `${healingIntel.avgRecentStress}%` }}
-                                        />
+                                    <p className="text-white font-mono text-sm sm:text-base mb-6 leading-relaxed">
+                                        Your recent average stress level is <strong className="text-cyan-400 text-lg">{healingIntel.avgRecentStress}/100</strong>.
+                                    </p>
+                                    <div className="space-y-3 mb-4">
+                                        <div className="flex justify-between text-xs sm:text-sm font-mono font-bold">
+                                            <span className="text-green-400">0-30: Calm</span>
+                                            <span className="text-yellow-400">31-60: Moderate</span>
+                                            <span className="text-red-400">61+: High</span>
+                                        </div>
+                                        <div className="h-3 bg-black/60 rounded-full overflow-hidden border border-cyan-500/30">
+                                            <motion.div 
+                                                initial={{ width: 0 }}
+                                                animate={{ width: `${healingIntel.avgRecentStress}%` }}
+                                                transition={{ duration: 1, ease: "easeOut" }}
+                                                className={`h-full ${
+                                                    healingIntel.avgRecentStress <= 30 ? 'bg-gradient-to-r from-green-500 to-green-400' : 
+                                                    healingIntel.avgRecentStress <= 60 ? 'bg-gradient-to-r from-yellow-500 to-yellow-400' : 
+                                                    'bg-gradient-to-r from-red-500 to-red-400'
+                                                }`}
+                                            />
+                                        </div>
+                                    </div>
+                                    <div className="bg-cyan-900/20 border-l-4 border-cyan-500 pl-4 py-2">
+                                        <p className="text-gray-300 font-mono text-xs sm:text-sm">
+                                            Based on your last 7 sessions. Keep using frequencies to lower this naturally.
+                                        </p>
                                     </div>
                                 </div>
-                                <p className="text-gray-400 font-mono text-xs mt-4">
-                                    Based on your last 7 sessions. Keep using frequencies to lower this naturally.
-                                </p>
                             </Card>
                         </motion.div>
                     )}
@@ -712,24 +809,35 @@ export default function HealingDashboard() {
 
                 </div>
 
-                {/* BACK TO CHAMBER */}
-                <div className="text-center pt-8">
+                {/* BACK TO CHAMBER - SLEEK CTA */}
+                <motion.div 
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.5 }}
+                    className="text-center pt-12 pb-8"
+                >
                     <Link
                         to={createPageUrl('FrequencyChamber')}
-                        className="inline-flex items-center gap-3 bg-gradient-to-r from-pink-600 to-cyan-600 text-white px-8 py-4 font-black font-mono text-lg hover:from-pink-700 hover:to-cyan-700 transition-all"
-                        style={{ boxShadow: '0 0 30px rgba(236, 72, 153, 0.5)' }}
+                        className="inline-flex items-center gap-4 relative group"
                     >
-                        <COOLASFUCKWaves size={32} animate={true} />
-                        START NEW SESSION
+                        <div className="absolute inset-0 bg-gradient-to-r from-pink-600 to-cyan-600 rounded-xl blur-xl opacity-50 group-hover:opacity-75 transition-opacity" />
+                        <div className="relative bg-gradient-to-r from-pink-600 to-cyan-600 text-white px-8 sm:px-12 py-4 sm:py-5 rounded-xl font-black font-mono text-base sm:text-xl hover:from-pink-700 hover:to-cyan-700 transition-all shadow-2xl">
+                            <COOLASFUCKWaves size={36} animate={true} className="inline mr-3" />
+                            START NEW SESSION
+                        </div>
                     </Link>
-                </div>
+                </motion.div>
 
-                {/* FOOTER NOTE */}
-                <div className="text-center pt-8 space-y-2 border-t-2 border-white/10">
-                    <p className="text-gray-500 font-mono text-sm">
-                        This data serves YOU, not advertisers
-                    </p>
-                    <p className="text-gray-600 font-mono text-xs">
+                {/* FOOTER NOTE - REFINED */}
+                <div className="text-center pt-8 pb-4 space-y-3 border-t border-white/10">
+                    <div className="flex items-center justify-center gap-2">
+                        <div className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+                        <p className="text-gray-400 font-mono text-xs sm:text-sm font-bold">
+                            This data serves YOU, not advertisers
+                        </p>
+                        <div className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+                    </div>
+                    <p className="text-gray-600 font-mono text-[10px] sm:text-xs max-w-md mx-auto">
                         Zero extraction. Zero manipulation. Just your healing journey.
                     </p>
                 </div>
