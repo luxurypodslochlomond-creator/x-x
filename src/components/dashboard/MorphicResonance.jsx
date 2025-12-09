@@ -89,9 +89,15 @@ export default function MorphicResonance() {
 
     if (!resonanceData) {
         return (
-            <div className="text-center py-8">
+            <div className="text-center py-8 space-y-4">
                 <COOLASFUCKWaves size={48} animate={true} className="mx-auto mb-4" />
-                <p className="text-gray-400 font-mono">Loading collective healing patterns...</p>
+                <p className="text-gray-400 font-mono">Gathering baseline morphic field data...</p>
+                <div className="bg-cyan-900/20 border-2 border-cyan-500 p-4 max-w-md mx-auto">
+                    <p className="text-cyan-300 font-mono text-sm">
+                        <strong>For Sheldrake:</strong> Platform launched. Data collection infrastructure active. 
+                        This dashboard shows real-time collective healing patterns as they emerge ❤️
+                    </p>
+                </div>
             </div>
         );
     }
