@@ -7,6 +7,8 @@ import { Card } from '@/components/ui/card';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { COOLASFUCKHeart, COOLASFUCKWaves, COOLASFUCKBrain, COOLASFUCKMoon, COOLASFUCKShield, COOLASFUCKZap } from '@/components/shared/COOLASFUCKIcon';
+import ClinicalOutcomes from '@/components/dashboard/ClinicalOutcomes';
+import MorphicResonance from '@/components/dashboard/MorphicResonance';
 
 /**
  * HEALING DASHBOARD - YOUR PERSONAL HEALING INTELLIGENCE
@@ -354,11 +356,29 @@ export default function HealingDashboard() {
                         </div>
                     </DashboardSection>
 
+                    {/* CLINICAL OUTCOMES */}
+                    <DashboardSection
+                        title="CLINICAL OUTCOMES (NHS STANDARD)"
+                        icon={Shield}
+                        color="border-cyan-500"
+                    >
+                        <ClinicalOutcomes onComplete={() => window.location.reload()} />
+                    </DashboardSection>
+
+                    {/* MORPHIC RESONANCE */}
+                    <DashboardSection
+                        title="MORPHIC RESONANCE (COLLECTIVE HEALING)"
+                        icon={COOLASFUCKWaves}
+                        color="border-purple-500"
+                    >
+                        <MorphicResonance />
+                    </DashboardSection>
+
                     {/* SESSION HISTORY */}
                     <DashboardSection
                         title="SESSION HISTORY"
                         icon={COOLASFUCKHeart}
-                        color="border-purple-500"
+                        color="border-pink-500"
                     >
                         <div className="space-y-3">
                             {sessions.slice(0, 10).map((session, i) => {
