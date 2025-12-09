@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Plus, User, Calendar, CheckSquare, MessageSquare, DollarSign, Search } from 'lucide-react';
 import { motion } from 'framer-motion';
+import Duck8Bit from '@/components/shared/DuckIcon';
 
 /**
  * SCOTT'S ARTIST/CLIENT MANAGER
@@ -49,7 +50,10 @@ export default function ScottManager() {
             
             {/* HEADER */}
             <div className="mb-6">
-                <h1 className="text-3xl font-black text-white mb-2">SCOTT'S MANAGER</h1>
+                <div className="flex items-center gap-3 mb-2">
+                    <h1 className="text-3xl font-black text-white">SCOTT'S MANAGER</h1>
+                    <Duck8Bit size={40} animate={true} />
+                </div>
                 <p className="text-gray-400 text-sm font-mono">Artists • Clients • Gigs • Simple</p>
 
                 {/* MESSAGE FROM BH */}
