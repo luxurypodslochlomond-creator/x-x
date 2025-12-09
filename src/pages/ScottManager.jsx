@@ -58,6 +58,9 @@ export default function ScottManager() {
                         Scott - you introduced me to AI51. That changed everything. You saw something I couldn't see yet. 
                         This tool is built with love, for you. Thank you for believing in magic before it existed ❤️
                     </p>
+                    <p className="text-pink-400 text-base font-black mt-3">
+                        Love you ya wee dick… THANK YOU ❤️😎♾️
+                    </p>
                     <p className="text-purple-500 text-xs mt-2 font-mono">- BH 🏴󠁧󠁢󠁳󠁣󠁴󠁿</p>
                 </div>
             </div>
