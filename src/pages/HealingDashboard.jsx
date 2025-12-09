@@ -173,7 +173,7 @@ export default function HealingDashboard() {
     }
 
     // PUBLIC VIEW - Show collective data always
-    if (!user || (!sessionsLoading && !sessions.length)) {
+    if (!user || (!sessionsLoading && !sessions.length) || !healingIntel) {
         // Calculate live stats from collective data (safely handle undefined/null)
         const safeAllSessions = Array.isArray(allSessions) ? allSessions : [];
         const totalHealers = safeAllSessions.length > 0 ? new Set(safeAllSessions.map(s => s.created_by)).size : 0;
