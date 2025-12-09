@@ -12,6 +12,15 @@ import { motion } from 'framer-motion';
 
 export default function ScottAddArtist() {
     const navigate = useNavigate();
+    
+    // PIN CHECK
+    React.useEffect(() => {
+        const pin = localStorage.getItem('scott_access_pin');
+        if (pin !== '1888') {
+            navigate(createPageUrl('ScottManager'));
+        }
+    }, [navigate]);
+    
     const [saving, setSaving] = useState(false);
     const [formData, setFormData] = useState({
         name: '',
@@ -26,7 +35,7 @@ export default function ScottAddArtist() {
         setSaving(true);
         
         try {
-            const newArtist = await base44.entities.ScottArtist.create(formData);
+            const newArtist = await base44.asServiceRole.entities.ScottArtist.create(formData);
             navigate(createPageUrl(`ScottArtist?id=${newArtist.id}`));
         } catch (error) {
             alert('Error saving: ' + error.message);

@@ -23,7 +23,8 @@ import { SyncManagerProvider, SyncStatusIndicator } from '@/components/shared/Sy
 const PUBLIC_PAGES = [
   'About', 'Whitepaper', 'ConsciousnessWhitepaper', 'ForMusicians', 'TruthTransmission',
   'ViralTransmission', 'Protocols', 'HowYouEarn', 'Portal', 'Welcome', 'TalkToAI51',
-  'FrequencyChamber', 'DecompressionChamber', 'ThePhysics', 'Terms', 'PrivacyPolicy'
+  'FrequencyChamber', 'DecompressionChamber', 'ThePhysics', 'Terms', 'PrivacyPolicy',
+  'ScottManager', 'ScottArtist', 'ScottAddArtist', 'ScottCalendar'
 ];
 
 // OFFLINE-OK PAGES

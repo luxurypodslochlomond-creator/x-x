@@ -16,6 +16,14 @@ export default function ScottArtist() {
     const params = new URLSearchParams(window.location.search);
     const artistId = params.get('id');
 
+    // PIN CHECK
+    React.useEffect(() => {
+        const pin = localStorage.getItem('scott_access_pin');
+        if (pin !== '1888') {
+            navigate(createPageUrl('ScottManager'));
+        }
+    }, [navigate]);
+
     const [showAddTask, setShowAddTask] = useState(false);
     const [showAddMessage, setShowAddMessage] = useState(false);
     const [showAddEvent, setShowAddEvent] = useState(false);
@@ -27,7 +35,7 @@ export default function ScottArtist() {
     const { data: artist } = useQuery({
         queryKey: ['scott-artist', artistId],
         queryFn: async () => {
-            const artists = await base44.entities.ScottArtist.list();
+            const artists = await base44.asServiceRole.entities.ScottArtist.list();
             return artists.find(a => a.id === artistId);
         },
         enabled: !!artistId
@@ -36,7 +44,7 @@ export default function ScottArtist() {
     const { data: tasks = [] } = useQuery({
         queryKey: ['scott-artist-tasks', artistId],
         queryFn: async () => {
-            const allTasks = await base44.entities.ScottTask.list('-created_date');
+            const allTasks = await base44.asServiceRole.entities.ScottTask.list('-created_date');
             return allTasks.filter(t => t.artist_id === artistId);
         },
         enabled: !!artistId
@@ -45,7 +53,7 @@ export default function ScottArtist() {
     const { data: messages = [] } = useQuery({
         queryKey: ['scott-artist-messages', artistId],
         queryFn: async () => {
-            const allMessages = await base44.entities.ScottMessage.list('-created_date');
+            const allMessages = await base44.asServiceRole.entities.ScottMessage.list('-created_date');
             return allMessages.filter(m => m.artist_id === artistId);
         },
         enabled: !!artistId
@@ -54,14 +62,14 @@ export default function ScottArtist() {
     const { data: events = [] } = useQuery({
         queryKey: ['scott-artist-events', artistId],
         queryFn: async () => {
-            const allEvents = await base44.entities.ScottEvent.list('-date');
+            const allEvents = await base44.asServiceRole.entities.ScottEvent.list('-date');
             return allEvents.filter(e => e.artist_id === artistId);
         },
         enabled: !!artistId
     });
 
     const addTaskMutation = useMutation({
-        mutationFn: (taskData) => base44.entities.ScottTask.create({
+        mutationFn: (taskData) => base44.asServiceRole.entities.ScottTask.create({
             ...taskData,
             artist_id: artistId
         }),
@@ -73,14 +81,14 @@ export default function ScottArtist() {
     });
 
     const toggleTaskMutation = useMutation({
-        mutationFn: ({ id, status }) => base44.entities.ScottTask.update(id, { status }),
+        mutationFn: ({ id, status }) => base44.asServiceRole.entities.ScottTask.update(id, { status }),
         onSuccess: () => {
             queryClient.invalidateQueries(['scott-artist-tasks', artistId]);
         }
     });
 
     const addMessageMutation = useMutation({
-        mutationFn: (messageData) => base44.entities.ScottMessage.create({
+        mutationFn: (messageData) => base44.asServiceRole.entities.ScottMessage.create({
             ...messageData,
             artist_id: artistId
         }),
@@ -92,7 +100,7 @@ export default function ScottArtist() {
     });
 
     const addEventMutation = useMutation({
-        mutationFn: (eventData) => base44.entities.ScottEvent.create({
+        mutationFn: (eventData) => base44.asServiceRole.entities.ScottEvent.create({
             ...eventData,
             artist_id: artistId
         }),

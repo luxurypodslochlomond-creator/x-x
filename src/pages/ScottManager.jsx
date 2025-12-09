@@ -17,33 +17,82 @@ import Duck8Bit from '@/components/shared/DuckIcon';
  */
 
 export default function ScottManager() {
+    const [pinEntered, setPinEntered] = useState(false);
+    const [pinInput, setPinInput] = useState('');
     const [searchQuery, setSearchQuery] = useState('');
+
+    // Check if PIN already stored
+    React.useEffect(() => {
+        const storedPin = localStorage.getItem('scott_access_pin');
+        if (storedPin === '1888') {
+            setPinEntered(true);
+        }
+    }, []);
+
+    const handlePinSubmit = () => {
+        if (pinInput === '1888') {
+            localStorage.setItem('scott_access_pin', '1888');
+            setPinEntered(true);
+        }
+    };
 
     const { data: artists = [] } = useQuery({
         queryKey: ['scott-artists'],
-        queryFn: () => base44.entities.ScottArtist.list('-created_date')
+        queryFn: () => base44.asServiceRole.entities.ScottArtist.list('-created_date'),
+        enabled: pinEntered
     });
 
     const { data: upcomingEvents = [] } = useQuery({
         queryKey: ['scott-upcoming-events'],
         queryFn: async () => {
-            const events = await base44.entities.ScottEvent.list('-date', 10);
+            const events = await base44.asServiceRole.entities.ScottEvent.list('-date', 10);
             return events.filter(e => new Date(e.date) >= new Date());
-        }
+        },
+        enabled: pinEntered
     });
 
     const { data: urgentTasks = [] } = useQuery({
         queryKey: ['scott-urgent-tasks'],
         queryFn: async () => {
-            const tasks = await base44.entities.ScottTask.list('-created_date', 20);
+            const tasks = await base44.asServiceRole.entities.ScottTask.list('-created_date', 20);
             return tasks.filter(t => t.status !== 'done' && (t.priority === 'high' || t.priority === 'urgent'));
-        }
+        },
+        enabled: pinEntered
     });
 
     const filteredArtists = artists.filter(a => 
         a.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         a.type.toLowerCase().includes(searchQuery.toLowerCase())
     );
+
+    // PIN ENTRY SCREEN
+    if (!pinEntered) {
+        return (
+            <div className="min-h-screen bg-gradient-to-br from-purple-950 via-black to-indigo-950 p-4 flex items-center justify-center">
+                <Card className="bg-black/80 border-2 border-purple-500 p-8 max-w-md w-full">
+                    <div className="text-center mb-6">
+                        <Duck8Bit size={60} animate={true} className="mx-auto mb-4" />
+                        <h1 className="text-2xl font-black text-white mb-2">SCOTT'S MANAGER</h1>
+                        <p className="text-gray-400 text-sm">Enter access code</p>
+                    </div>
+                    <Input
+                        type="password"
+                        placeholder="Access code"
+                        value={pinInput}
+                        onChange={(e) => setPinInput(e.target.value)}
+                        onKeyDown={(e) => e.key === 'Enter' && handlePinSubmit()}
+                        className="bg-black/60 border-purple-500/50 text-white text-center text-2xl mb-4"
+                    />
+                    <Button
+                        onClick={handlePinSubmit}
+                        className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-black"
+                    >
+                        ENTER
+                    </Button>
+                </Card>
+            </div>
+        );
+    }
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-purple-950 via-black to-indigo-950 p-4 pb-20">
