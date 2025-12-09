@@ -84,7 +84,7 @@ const InfoBox = ({ title, icon: Icon, color, children, defaultOpen = false }) =>
 export default function HealingDashboard() {
     const [expandedInfo, setExpandedInfo] = useState(null);
     
-    const { data: user, isLoading: userLoading } = useQuery({
+    const { data: user } = useQuery({
         queryKey: ['user'],
         queryFn: () => base44.auth.me(),
         retry: false
@@ -99,7 +99,7 @@ export default function HealingDashboard() {
         enabled: !!user
     });
 
-    const { data: allSessions = [] } = useQuery({
+    const { data: allSessions = [], isLoading: allSessionsLoading } = useQuery({
         queryKey: ['all-healing-sessions'],
         queryFn: async () => {
             return await base44.entities.VoiceHealingSession.list('-session_date', 500);
