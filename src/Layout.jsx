@@ -247,6 +247,7 @@ const LayoutInner = ({ children, currentPageName }) => {
   ];
 
   const adminNav = user?.role === 'admin' ? [
+    { title: "🦆 Scott's Manager", url: createPageUrl("ScottManager"), icon: User, description: "Artist/client management" },
     { title: "💰 Funding Tracker", url: createPageUrl("AdminFundingTracker"), icon: Shield },
     { title: "🏴󠁧󠁢󠁳󠁣󠁴󠁿 Scotland Funding", url: createPageUrl("AdminScotlandFunding"), icon: Heart },
     { title: "📄 One-Pager PDF", url: createPageUrl("AdminOnePager"), icon: FileText },
