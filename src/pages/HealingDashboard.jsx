@@ -166,7 +166,7 @@ export default function HealingDashboard() {
             <div className="min-h-screen bg-gradient-to-br from-black via-purple-950 to-black flex items-center justify-center">
                 <div className="text-center space-y-4">
                     <COOLASFUCKWaves size={64} animate={true} />
-                    <p className="text-white font-mono text-xl">Loading your healing intelligence...</p>
+                    <p className="text-white font-mono text-xl">Loading your healing resonance...</p>
                 </div>
             </div>
         );
@@ -178,7 +178,7 @@ export default function HealingDashboard() {
                 <Card className="bg-black border-4 border-cyan-500 p-8 max-w-md text-center space-y-6">
                     <COOLASFUCKBrain size={64} animate={true} className="mx-auto" />
                     <h1 className="text-3xl font-black text-cyan-400 font-mono">SIGN IN REQUIRED</h1>
-                    <p className="text-gray-300 font-mono">Sign in to see your personal healing intelligence</p>
+                    <p className="text-gray-300 font-mono">Sign in to see your healing resonance data</p>
                     <button
                         onClick={() => base44.auth.redirectToLogin()}
                         className="w-full bg-cyan-600 hover:bg-cyan-700 text-white px-6 py-3 font-black font-mono"
@@ -213,9 +213,9 @@ export default function HealingDashboard() {
                     <div className="text-center space-y-4 mb-8">
                         <COOLASFUCKBrain size={64} animate={true} className="mx-auto" />
                         <h1 className="text-5xl font-black font-mono text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-cyan-400 to-green-400">
-                            HEALING INTELLIGENCE
+                            HEALING RESONANCE
                         </h1>
-                        <p className="text-gray-400 font-mono">Live collective healing data + your personal tracking</p>
+                        <p className="text-gray-400 font-mono">Your healing strengthens the collective field</p>
                     </div>
 
                     {/* LIVE COLLECTIVE STATS */}
@@ -323,9 +323,9 @@ export default function HealingDashboard() {
                 <div className="text-center space-y-4 mb-8">
                     <COOLASFUCKBrain size={64} animate={true} className="mx-auto" />
                     <h1 className="text-5xl font-black font-mono text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-cyan-400 to-green-400">
-                        YOUR HEALING INTELLIGENCE
+                        HEALING RESONANCE
                     </h1>
-                    <p className="text-gray-400 font-mono">Data that serves YOU, not advertisers ❤️</p>
+                    <p className="text-gray-400 font-mono">Your healing strengthens the collective field ❤️</p>
                 </div>
 
                 {/* QUICK STATS - ALWAYS VISIBLE */}
