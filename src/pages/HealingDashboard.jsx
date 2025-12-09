@@ -224,6 +224,36 @@ export default function HealingDashboard() {
         );
     }
 
+    // If healingIntel is null but we have sessions, show a safe version
+    if (!healingIntel) {
+        return (
+            <div className="min-h-screen bg-black p-4 sm:p-6">
+                <div className="max-w-4xl mx-auto">
+                    <div className="text-center mb-8">
+                        <COOLASFUCKBrain size={56} animate={true} className="mx-auto mb-4" />
+                        <h1 className="text-4xl md:text-5xl font-black font-mono text-white mb-2">
+                            HEALING RESONANCE
+                        </h1>
+                        <p className="text-gray-400 font-mono text-sm">
+                            Your healing strengthens the collective field
+                        </p>
+                    </div>
+                    <div className="bg-amber-900/20 border-2 border-amber-500 p-4 mb-6">
+                        <p className="text-amber-300 font-mono text-sm text-center">
+                            Processing your healing data... refresh in a moment
+                        </p>
+                    </div>
+                    <Link
+                        to={createPageUrl('FrequencyChamber')}
+                        className="block w-full bg-green-600 hover:bg-green-700 text-white text-center px-8 py-4 font-black font-mono text-lg border-4 border-green-400"
+                    >
+                        GO TO FREQUENCY CHAMBER
+                    </Link>
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div className="min-h-screen bg-black text-white">
             <div className="max-w-4xl mx-auto p-4 sm:p-6">
