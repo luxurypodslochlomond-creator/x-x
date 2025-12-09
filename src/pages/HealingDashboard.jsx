@@ -536,19 +536,21 @@ export default function HealingDashboard() {
                         </InfoBox>
                     </div>
 
-                </div>
+                        </div>
 
-                {/* BACK TO CHAMBER */}
-                <div className="text-center pt-8 pb-4">
-                    <Link
-                        to={createPageUrl('FrequencyChamber')}
-                        className="inline-block bg-gradient-to-r from-pink-600 to-cyan-600 text-white px-12 py-5 font-black font-mono text-xl hover:from-pink-700 hover:to-cyan-700 transition-all"
-                        style={{ boxShadow: '0 0 30px rgba(236, 72, 153, 0.5)' }}
-                    >
-                        <COOLASFUCKWaves size={28} animate={true} className="inline mr-3" />
-                        START NEW SESSION
-                    </Link>
-                </div>
+                        {/* BACK TO CHAMBER */}
+                        <div className="text-center pt-8 pb-4">
+                            <Link
+                                to={createPageUrl('FrequencyChamber')}
+                                className="inline-block bg-gradient-to-r from-pink-600 to-cyan-600 text-white px-12 py-5 font-black font-mono text-xl hover:from-pink-700 hover:to-cyan-700 transition-all"
+                                style={{ boxShadow: '0 0 30px rgba(236, 72, 153, 0.5)' }}
+                            >
+                                <COOLASFUCKWaves size={28} animate={true} className="inline mr-3" />
+                                START NEW SESSION
+                            </Link>
+                        </div>
+                    </>
+                )}
 
                 {/* FOOTER */}
                 <div className="text-center pt-8 border-t-2 border-white/10">
