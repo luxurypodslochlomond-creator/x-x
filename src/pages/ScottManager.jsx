@@ -51,6 +51,15 @@ export default function ScottManager() {
             <div className="mb-6">
                 <h1 className="text-3xl font-black text-white mb-2">SCOTT'S MANAGER</h1>
                 <p className="text-gray-400 text-sm font-mono">Artists • Clients • Gigs • Simple</p>
+
+                {/* MESSAGE FROM BH */}
+                <div className="mt-4 bg-purple-900/30 border-2 border-purple-500/50 p-4 rounded-lg">
+                    <p className="text-purple-300 text-sm leading-relaxed">
+                        Scott - you introduced me to AI51. That changed everything. You saw something I couldn't see yet. 
+                        This tool is built with love, for you. Thank you for believing in magic before it existed ❤️
+                    </p>
+                    <p className="text-purple-500 text-xs mt-2 font-mono">- BH 🏴󠁧󠁢󠁳󠁣󠁴󠁿</p>
+                </div>
             </div>
 
             {/* QUICK STATS */}
