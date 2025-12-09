@@ -181,64 +181,120 @@ export default function HealingDashboard() {
         );
     }
 
+    // Fetch collective data even without personal sessions
+    const { data: allSessions = [] } = useQuery({
+        queryKey: ['all-healing-sessions'],
+        queryFn: async () => {
+            const sessions = await base44.entities.VoiceHealingSession.list();
+            return sessions;
+        },
+        enabled: !sessions.length
+    });
+
     if (!sessions.length) {
+        // Calculate live stats from collective data
+        const totalHealers = allSessions.length > 0 ? new Set(allSessions.map(s => s.created_by)).size : 0;
+        const totalSessions = allSessions.length;
+        const avgStressReduction = allSessions.length > 0 
+            ? Math.round(allSessions.reduce((acc, s) => acc + (s.stress_level_detected || 0), 0) / allSessions.length)
+            : 0;
+        const last24h = allSessions.filter(s => {
+            const sessionTime = new Date(s.session_date).getTime();
+            const now = Date.now();
+            return (now - sessionTime) < 24 * 60 * 60 * 1000;
+        }).length;
+
         return (
             <div className="min-h-screen bg-gradient-to-br from-black via-purple-950 to-black p-6">
-                <div className="max-w-4xl mx-auto space-y-6">
+                <div className="max-w-6xl mx-auto space-y-6">
                     
+                    {/* HEADER */}
                     <div className="text-center space-y-4 mb-8">
                         <COOLASFUCKBrain size={64} animate={true} className="mx-auto" />
                         <h1 className="text-5xl font-black font-mono text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-cyan-400 to-green-400">
-                            START YOUR JOURNEY
+                            HEALING INTELLIGENCE
                         </h1>
-                        <p className="text-gray-400 font-mono">Two ways to begin tracking your healing</p>
+                        <p className="text-gray-400 font-mono">Live collective healing data + your personal tracking</p>
                     </div>
 
-                    <div className="grid md:grid-cols-2 gap-6">
-                        
-                        {/* VOICE HEALING */}
-                        <Card className="bg-black border-4 border-pink-500 p-8 text-center space-y-4 hover:bg-pink-900/10 transition-all">
-                            <COOLASFUCKHeart size={64} animate={true} className="mx-auto" />
-                            <h2 className="text-2xl font-black text-pink-400 font-mono">VOICE HEALING</h2>
-                            <p className="text-gray-300 font-mono text-sm">
-                                Speak your healing intent, AI analyzes your voice stress, recommends frequencies
-                            </p>
-                            <Link
-                                to={createPageUrl('FrequencyChamber')}
-                                className="block w-full bg-pink-600 hover:bg-pink-700 text-white px-6 py-3 font-black font-mono"
-                            >
-                                START SESSION
-                            </Link>
+                    {/* LIVE COLLECTIVE STATS */}
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <Card className="bg-black border-4 border-purple-500 p-4 text-center">
+                            <COOLASFUCKWaves size={32} animate={true} className="mx-auto mb-2" />
+                            <p className="text-3xl font-black text-purple-400 font-mono">{totalHealers}</p>
+                            <p className="text-sm text-gray-400 font-mono">Healers</p>
                         </Card>
 
-                        {/* CLINICAL ASSESSMENT */}
-                        <Card className="bg-black border-4 border-cyan-500 p-8 text-center space-y-4 hover:bg-cyan-900/10 transition-all">
-                            <Shield className="w-16 h-16 text-cyan-400 mx-auto" />
-                            <h2 className="text-2xl font-black text-cyan-400 font-mono">NHS ASSESSMENT</h2>
-                            <p className="text-gray-300 font-mono text-sm">
-                                Take PHQ-9 (depression) or GAD-7 (anxiety) - same tools NHS doctors use
-                            </p>
-                            <button
-                                onClick={() => {
-                                    // Scroll to clinical outcomes section after first session created
-                                    alert('Use Frequency Chamber Voice Healing first to create your first session, then come back here for clinical tracking ❤️');
-                                }}
-                                className="block w-full bg-cyan-600 hover:bg-cyan-700 text-white px-6 py-3 font-black font-mono"
-                            >
-                                TAKE TEST
-                            </button>
+                        <Card className="bg-black border-4 border-cyan-500 p-4 text-center">
+                            <Activity className="w-8 h-8 text-cyan-400 mx-auto mb-2" />
+                            <p className="text-3xl font-black text-cyan-400 font-mono">{totalSessions}</p>
+                            <p className="text-sm text-gray-400 font-mono">Total Sessions</p>
                         </Card>
 
+                        <Card className="bg-black border-4 border-green-500 p-4 text-center">
+                            <TrendingDown className="w-8 h-8 text-green-400 mx-auto mb-2" />
+                            <p className="text-3xl font-black text-green-400 font-mono">{avgStressReduction}</p>
+                            <p className="text-sm text-gray-400 font-mono">Avg Stress</p>
+                        </Card>
+
+                        <Card className="bg-black border-4 border-amber-500 p-4 text-center">
+                            <Clock className="w-8 h-8 text-amber-400 mx-auto mb-2" />
+                            <p className="text-3xl font-black text-amber-400 font-mono">{last24h}</p>
+                            <p className="text-sm text-gray-400 font-mono">Last 24h</p>
+                        </Card>
                     </div>
 
-                    {/* MORPHIC RESONANCE PREVIEW */}
-                    <Card className="bg-black border-4 border-purple-500 p-8">
+                    {/* YOUR TRACKING OPTIONS */}
+                    <Card className="bg-black border-4 border-pink-500 p-6">
+                        <h2 className="text-2xl font-black text-pink-400 font-mono mb-4 text-center">START YOUR PERSONAL TRACKING</h2>
+                        <div className="grid md:grid-cols-2 gap-6">
+                            
+                            {/* VOICE HEALING */}
+                            <div className="bg-pink-900/20 border-2 border-pink-500 p-6 text-center space-y-4">
+                                <COOLASFUCKHeart size={48} animate={true} className="mx-auto" />
+                                <h3 className="text-xl font-black text-pink-400 font-mono">VOICE HEALING</h3>
+                                <p className="text-gray-300 font-mono text-sm">
+                                    AI analyzes your voice stress, recommends healing frequencies
+                                </p>
+                                <Link
+                                    to={createPageUrl('FrequencyChamber')}
+                                    className="block w-full bg-pink-600 hover:bg-pink-700 text-white px-6 py-3 font-black font-mono"
+                                >
+                                    START SESSION
+                                </Link>
+                            </div>
+
+                            {/* CLINICAL ASSESSMENT */}
+                            <div className="bg-cyan-900/20 border-2 border-cyan-500 p-6 text-center space-y-4">
+                                <Shield className="w-12 h-12 text-cyan-400 mx-auto" />
+                                <h3 className="text-xl font-black text-cyan-400 font-mono">CLINICAL STANDARD</h3>
+                                <p className="text-gray-300 font-mono text-sm">
+                                    PHQ-9 & GAD-7 - gold standard depression/anxiety assessments
+                                </p>
+                                <button
+                                    onClick={() => {
+                                        alert('Start with Voice Healing first, then come back for clinical tracking ❤️');
+                                    }}
+                                    className="block w-full bg-cyan-600 hover:bg-cyan-700 text-white px-6 py-3 font-black font-mono"
+                                >
+                                    TAKE TEST
+                                </button>
+                            </div>
+
+                        </div>
+                    </Card>
+
+                    {/* MORPHIC RESONANCE DATA */}
+                    <Card className="bg-black border-4 border-purple-500 p-6">
                         <div className="flex items-center gap-3 mb-4">
                             <COOLASFUCKWaves size={32} animate={true} />
                             <h3 className="text-2xl font-black font-mono text-purple-400">
-                                COLLECTIVE HEALING (AVAILABLE NOW)
+                                COLLECTIVE HEALING PATTERNS
                             </h3>
                         </div>
+                        <p className="text-gray-400 font-mono text-sm mb-4">
+                            Testing Sheldrake's morphic resonance theory: do people heal faster when using frequencies together?
+                        </p>
                         <MorphicResonance />
                     </Card>
 
@@ -247,7 +303,7 @@ export default function HealingDashboard() {
                             This data serves YOU, not advertisers
                         </p>
                         <p className="text-gray-600 font-mono text-xs">
-                            Zero extraction. Zero manipulation. Just your healing journey ❤️
+                            Zero extraction. Zero manipulation. Just healing ❤️
                         </p>
                     </div>
 
