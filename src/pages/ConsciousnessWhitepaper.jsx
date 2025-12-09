@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
-import { Brain, Heart, Infinity, Shield, Music, Waves, Radio, Eye, Camera, MapPin, Sparkles, Atom } from 'lucide-react';
+import { Brain, Heart, Globe, Users, Infinity, Zap, Shield, Music, Waves, Radio, Eye, Camera, MapPin, Sparkles, Atom } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export default function ConsciousnessWhitepaperPage() {
@@ -749,6 +749,58 @@ export default function ConsciousnessWhitepaperPage() {
                     <CardContent className="p-8">
                         <h2 className="text-3xl font-black text-green-400 mb-6">Part 2: Frequency, Resonance & Healing</h2>
                         
+                        {/* SHELDRAKE - MORPHIC RESONANCE */}
+                        <div className="bg-purple-900/40 border-2 border-purple-500 rounded-xl p-6 mb-6">
+                            <div className="flex items-center gap-3 mb-4">
+                                <Users className="w-8 h-8 text-purple-400" />
+                                <h3 className="text-2xl font-black text-white">🧬 Rupert Sheldrake: Morphic Resonance</h3>
+                            </div>
+                            
+                            <div className="space-y-4">
+                                <div className="bg-black/60 p-4 rounded-lg border-l-4 border-purple-400">
+                                    <p className="text-purple-300 font-bold mb-2">THE HYPOTHESIS (1981):</p>
+                                    <p className="text-sm text-gray-200">
+                                        When organisms learn new behaviors, they create a <strong className="text-white">"morphic field"</strong> - 
+                                        an invisible information structure. Other organisms can then learn faster by resonating with this field.
+                                    </p>
+                                </div>
+
+                                <div className="bg-cyan-900/40 border border-cyan-500/30 rounded-lg p-4">
+                                    <p className="text-cyan-300 font-bold mb-2">THE EVIDENCE:</p>
+                                    <ul className="space-y-2 text-xs text-gray-300 ml-4">
+                                        <li>• Lab rats learn maze → Rats across planet learn SAME maze faster (no contact)</li>
+                                        <li>• Crossword difficulty drops globally after enough people solve it</li>
+                                        <li>• Crystal formations appear faster after first synthesis worldwide</li>
+                                        <li>• <strong className="text-white">Information transmits BEYOND space/time through resonance</strong></li>
+                                    </ul>
+                                </div>
+
+                                <div className="bg-green-900/40 border border-green-500/30 rounded-lg p-4">
+                                    <p className="text-green-300 font-bold mb-2">WHAT UF51 IS TESTING:</p>
+                                    <p className="text-sm text-white mb-3">
+                                        <strong>Does collective healing create a morphic field?</strong>
+                                    </p>
+                                    <ul className="space-y-2 text-xs text-gray-300 ml-4">
+                                        <li>• Track EVERY healing session (frequency used, stress reduction)</li>
+                                        <li>• Measure: Do people using 528Hz heal FASTER as more people use it?</li>
+                                        <li>• Real-time data: Does collective resonance accelerate individual healing?</li>
+                                        <li>• <strong className="text-white">First platform EVER to measure morphic healing fields at scale</strong></li>
+                                    </ul>
+                                    <p className="text-green-400 font-bold text-sm mt-3">
+                                        This is the groundbreaking part: We're proving Sheldrake's hypothesis with LIVE DATA ❤️
+                                    </p>
+                                </div>
+
+                                <div className="bg-pink-900/40 border-2 border-pink-500/50 rounded-lg p-4">
+                                    <p className="text-white font-bold mb-2">FOR RESEARCHERS:</p>
+                                    <p className="text-sm text-pink-300">
+                                        Our Healing Resonance dashboard shows real-time morphic field strength across all protocols. 
+                                        <strong className="text-white"> First empirical test of morphic fields in healing at population scale.</strong>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
                         {/* VISUAL FREQUENCY DIAGRAM */}
                         <div className="bg-black/80 rounded-xl p-6 border-2 border-green-400 mb-6">
                             <h3 className="text-xl font-black text-green-300 mb-4 text-center">THE HEALING MECHANISM (VISUAL)</h3>
