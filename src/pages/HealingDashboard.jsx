@@ -159,136 +159,127 @@ export default function HealingDashboard() {
                 {/* YOUR PERSONAL HEALING DATA */}
                 {hasPersonalData && (
                     <>
-                        {/* DIVIDER */}
-                        <div className="border-t-4 border-cyan-500 pt-6 mb-6">
-                            <h2 className="text-2xl font-black font-mono text-cyan-400 mb-2 text-center">
-                                YOUR HEALING JOURNEY
-                            </h2>
-                            <p className="text-gray-400 font-mono text-xs text-center">
-                                Your personal nervous system intelligence
+                        {/* COMPACT STATS BAR */}
+                        <div className="bg-black border-4 border-cyan-500 p-4 mb-6">
+                            <div className="grid grid-cols-4 gap-3 text-center">
+                                <div>
+                                    <p className="text-3xl font-black text-pink-400 font-mono">
+                                        {totalSessions}
+                                    </p>
+                                    <p className="text-xs text-gray-500 font-mono">sessions</p>
+                                </div>
+                                <div>
+                                    <p className="text-3xl font-black text-green-400 font-mono">
+                                        -{Math.round(Math.abs(improvement))}
+                                    </p>
+                                    <p className="text-xs text-gray-500 font-mono">stress drop</p>
+                                </div>
+                                <div>
+                                    <p className="text-3xl font-black text-cyan-400 font-mono">
+                                        {avgRecentStress}
+                                    </p>
+                                    <p className="text-xs text-gray-500 font-mono">current</p>
+                                </div>
+                                <div>
+                                    <p className="text-xl font-black text-amber-400 font-mono leading-tight">
+                                        {topProtocol ? topProtocol[0].split('_')[0] : 'none'}
+                                    </p>
+                                    <p className="text-xs text-gray-500 font-mono">frequency</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* STRESS GRAPH - VISUAL */}
+                        <div className="bg-black border-4 border-pink-500 p-6 mb-6">
+                            <h3 className="text-pink-400 font-black font-mono text-lg mb-4 text-center">
+                                YOUR STRESS TRAJECTORY
+                            </h3>
+                            <div className="flex items-end justify-center gap-2 h-32 mb-4">
+                                {sessions.slice(0, 10).reverse().map((session, i) => {
+                                    const height = session.stress_level_detected;
+                                    const color = height > 70 ? '#ef4444' : height > 40 ? '#f59e0b' : '#22c55e';
+                                    return (
+                                        <motion.div
+                                            key={i}
+                                            className="flex-1 max-w-8"
+                                            style={{ 
+                                                height: `${height}%`, 
+                                                backgroundColor: color,
+                                                imageRendering: 'pixelated'
+                                            }}
+                                            initial={{ height: 0 }}
+                                            animate={{ height: `${height}%` }}
+                                            transition={{ duration: 0.5, delay: i * 0.1 }}
+                                        />
+                                    );
+                                })}
+                            </div>
+                            <div className="flex justify-between text-xs text-gray-500 font-mono">
+                                <span>OLDEST</span>
+                                <span>NEWEST</span>
+                            </div>
+                        </div>
+
+                        {/* THE VERDICT - COMPACT */}
+                        <div className="bg-black border-4 border-green-500 p-4 mb-6 text-center">
+                            <p className="text-green-400 font-black font-mono text-xl mb-2">
+                                {improvement > 10 
+                                    ? "✓ CLINICALLY SIGNIFICANT" 
+                                    : improvement > 0
+                                        ? "✓ RESPONDING"
+                                        : "→ KEEP GOING"}
+                            </p>
+                            <p className="text-gray-400 font-mono text-sm">
+                                {improvement > 10 
+                                    ? "Your nervous system is regulating. The frequencies work."
+                                    : improvement > 0
+                                        ? "Your body is responding. Healing compounds."
+                                        : "Consistency > perfection. You're building new neural pathways."}
                             </p>
                         </div>
 
-                        {/* 2x2 STAT GRID */}
-                        <div className="grid grid-cols-2 gap-4 mb-6">
-                            <div className="bg-black border-4 border-pink-500 p-6 text-center">
-                                <COOLASFUCKHeart size={40} animate={true} className="mx-auto mb-3" />
-                                <p className="text-5xl font-black text-pink-400 font-mono mb-1">
-                                    {totalSessions}
-                                </p>
-                                <p className="text-sm text-gray-400 font-mono">Sessions</p>
-                            </div>
-
-                            <div className="bg-black border-4 border-green-500 p-6 text-center">
-                                <TrendingDown className="w-10 h-10 text-green-400 mx-auto mb-3" />
-                                <p className="text-5xl font-black text-green-400 font-mono mb-1">
-                                    {improvement > 0 ? '-' : ''}{Math.round(Math.abs(improvement))}
-                                </p>
-                                <p className="text-sm text-gray-400 font-mono">Stress Drop</p>
-                            </div>
-
-                            <div className="bg-black border-4 border-cyan-500 p-6 text-center">
-                                <Activity className="w-10 h-10 text-cyan-400 mx-auto mb-3" />
-                                <p className="text-5xl font-black text-cyan-400 font-mono mb-1">
-                                    {avgRecentStress}
-                                </p>
-                                <p className="text-sm text-gray-400 font-mono">Avg Stress</p>
-                            </div>
-
-                            <div className="bg-black border-4 border-amber-500 p-6 text-center">
-                                <Sparkles className="w-10 h-10 text-amber-400 mx-auto mb-3" />
-                                <p className="text-2xl font-black text-amber-400 font-mono mb-1 leading-tight">
-                                    {topProtocol ? topProtocol[0].split('_').join(' ') : 'none'}
-                                </p>
-                                <p className="text-sm text-gray-400 font-mono">Top Protocol</p>
-                            </div>
-                        </div>
-
-                        {/* WHAT IT MEANS - COOLASFUCK INTEL */}
-                        <div className="bg-black border-4 border-cyan-500 p-6 mb-6">
-                            <h3 className="text-cyan-400 font-black font-mono text-lg mb-4 flex items-center gap-2">
-                                <COOLASFUCKBrain size={24} animate={false} />
-                                WHAT THIS MEANS
-                            </h3>
-                            <div className="space-y-4 text-sm font-mono">
-                                <div className="bg-cyan-900/20 border-l-4 border-pink-500 p-3">
-                                    <p className="text-white mb-1">
-                                        <span className="text-pink-400 font-black">{totalSessions} healing sessions</span>
-                                    </p>
-                                    <p className="text-gray-400 text-xs">
-                                        Your neural pathways are strengthening. Every session trains your nervous system to self-regulate faster.
-                                    </p>
-                                </div>
-
-                                <div className="bg-cyan-900/20 border-l-4 border-green-500 p-3">
-                                    <p className="text-white mb-1">
-                                        <span className="text-green-400 font-black">{Math.round(Math.abs(improvement))} point stress drop</span>
-                                    </p>
-                                    <p className="text-gray-400 text-xs">
-                                        {improvement > 10 
-                                            ? "✓ Clinically significant! Your nervous system is regulating. The frequencies work."
-                                            : improvement > 0
-                                                ? "Your body is responding. Keep going - healing compounds."
-                                                : "Healing isn't linear. Your consistency matters more than perfect progress."
-                                        }
-                                    </p>
-                                </div>
-
-                                <div className="bg-cyan-900/20 border-l-4 border-amber-500 p-3">
-                                    <p className="text-white mb-1">
-                                        <span className="text-amber-400 font-black">{topProtocol?.[0]?.split('_').join(' ')}</span> is your signature
-                                    </p>
-                                    <p className="text-gray-400 text-xs">
-                                        Your nervous system knows what it needs. Trust your frequency signature.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* RECENT SESSIONS */}
-                        <div className="bg-black border-4 border-pink-500 p-6 mb-6">
-                            <h3 className="text-pink-400 font-black font-mono text-lg mb-4">
-                                RECENT SESSIONS
+                        {/* LAST 5 - COMPACT LIST */}
+                        <div className="bg-black border-4 border-purple-500 p-4 mb-6">
+                            <h3 className="text-purple-400 font-black font-mono text-sm mb-3 text-center">
+                                LAST 5 SESSIONS
                             </h3>
                             <div className="space-y-2">
-                                {sessions.slice(0, 5).map((session) => {
-                                    const date = new Date(session.session_date);
+                                {sessions.slice(0, 5).map((session, i) => {
                                     const stressColor = session.stress_level_detected > 70 ? '#ef4444' : 
                                                        session.stress_level_detected > 40 ? '#f59e0b' : 
                                                        '#22c55e';
                                     return (
-                                        <div 
+                                        <motion.div 
                                             key={session.id}
-                                            className="bg-pink-900/20 p-3 border-2 border-pink-500/30"
+                                            className="flex items-center justify-between bg-purple-900/20 p-2 border border-purple-500/30"
+                                            initial={{ opacity: 0, x: -20 }}
+                                            animate={{ opacity: 1, x: 0 }}
+                                            transition={{ delay: i * 0.1 }}
                                         >
-                                            <div className="flex items-center justify-between">
-                                                <div className="flex items-center gap-2">
-                                                    <Calendar className="w-3 h-3 text-gray-500" />
-                                                    <p className="text-xs text-gray-400 font-mono">
-                                                        {date.toLocaleDateString()}
-                                                    </p>
-                                                </div>
-                                                <div className="flex items-center gap-3">
-                                                    <p className="text-xs text-purple-300 font-mono">
-                                                        {session.recommended_protocol}
-                                                    </p>
-                                                    <p className="text-xl font-black font-mono" style={{ color: stressColor }}>
-                                                        {session.stress_level_detected}
-                                                    </p>
-                                                </div>
+                                            <p className="text-xs text-purple-300 font-mono flex-1">
+                                                {session.recommended_protocol.split('_')[0]}
+                                            </p>
+                                            <div 
+                                                className="w-12 h-6 border-2 font-black font-mono text-sm flex items-center justify-center"
+                                                style={{ 
+                                                    borderColor: stressColor,
+                                                    color: stressColor
+                                                }}
+                                            >
+                                                {session.stress_level_detected}
                                             </div>
-                                        </div>
+                                        </motion.div>
                                     );
                                 })}
                             </div>
                         </div>
 
                         {/* BIG CTA - KEEP GOING */}
-                        <div className="text-center mb-6">
+                        <div className="text-center">
                             <Link
                                 to={createPageUrl('FrequencyChamber')}
-                                className="inline-block bg-gradient-to-r from-pink-600 to-cyan-600 text-white px-12 py-5 font-black font-mono text-xl hover:from-pink-700 hover:to-cyan-700 transition-all"
-                                style={{ boxShadow: '0 0 30px rgba(236, 72, 153, 0.5)' }}
+                                className="inline-block bg-gradient-to-r from-pink-600 to-cyan-600 text-white px-12 py-5 font-black font-mono text-xl hover:from-pink-700 hover:to-cyan-700 transition-all border-4 border-pink-400"
+                                style={{ boxShadow: '8px 8px 0px rgba(236, 72, 153, 0.8)' }}
                             >
                                 <COOLASFUCKWaves size={28} animate={true} className="inline mr-3" />
                                 KEEP HEALING
@@ -297,15 +288,7 @@ export default function HealingDashboard() {
                     </>
                 )}
 
-                {/* FOOTER */}
-                <div className="text-center pt-8 border-t-2 border-white/10">
-                    <p className="text-gray-500 font-mono text-sm">
-                        This data serves YOU, not advertisers
-                    </p>
-                    <p className="text-gray-700 font-mono text-xs mt-2">
-                        Zero extraction. Zero manipulation. Just healing.
-                    </p>
-                </div>
+
 
             </div>
         </div>
