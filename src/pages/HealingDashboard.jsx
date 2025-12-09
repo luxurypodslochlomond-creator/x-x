@@ -252,8 +252,9 @@ export default function HealingDashboard() {
                         <div className="bg-green-900/20 border-2 border-green-500 p-6 mb-6 text-center">
                             <COOLASFUCKWaves size={48} animate={true} className="mx-auto mb-4" />
                             <h3 className="text-xl font-black text-green-400 font-mono mb-3">JUST PLAY FREQUENCIES</h3>
-                            <p className="text-gray-300 font-mono text-sm mb-4">
-                                Every frequency session you play automatically saves to your dashboard. No voice recording needed ❤️
+                            <p className="text-gray-300 font-mono text-sm mb-4 flex items-center justify-center gap-2">
+                                Every frequency session you play automatically saves to your dashboard. No voice recording needed
+                                <COOLASFUCKHeart size={16} animate={true} />
                             </p>
                             <Link
                                 to={createPageUrl('FrequencyChamber')}
