@@ -113,11 +113,23 @@ export default function TunerTogetherPage() {
                 setSouls(response.data.souls || []);
                 setRoom(response.data.room);
                 
-                // ALL IN SYNC MOMENT
+                // ALL IN SYNC MOMENT - SAVE TO MORPHIC FIELD
                 if (response.data.all_in_sync && !allInSync) {
                     setAllInSync(true);
                     if (navigator.vibrate) navigator.vibrate([100, 50, 100, 50, 200]);
                     playBleep(880, 100);
+                    
+                    // Save collective sync moment to morphic field
+                    const colorData = freqToColor(room?.target_freq || 440);
+                    base44.entities.CollectiveSyncMoment.create({
+                        room_code: roomCode,
+                        target_freq: room?.target_freq || 440,
+                        target_note: room?.target_note || 'A',
+                        souls_count: response.data.souls?.length || 0,
+                        soul_names: response.data.souls?.map(s => s.soul_name) || [],
+                        frequency_color: colorData.name,
+                        morphic_power: response.data.souls?.length || 0
+                    }).catch(e => console.log('Sync save error:', e));
                 } else if (!response.data.all_in_sync) {
                     setAllInSync(false);
                 }
