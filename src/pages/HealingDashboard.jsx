@@ -190,101 +190,104 @@ export default function HealingDashboard() {
                         </div>
 
                         {/* STRESS GRAPH - VISUAL */}
-                        <div className="bg-black border-4 border-pink-500 p-6 mb-6">
-                            <h3 className="text-pink-400 font-black font-mono text-lg mb-4 text-center">
-                                YOUR STRESS TRAJECTORY
-                            </h3>
-                            <div className="flex items-end justify-center gap-2 h-32 mb-4">
-                                {sessions.slice(0, 10).reverse().map((session, i) => {
-                                    const height = session.stress_level_detected;
-                                    const color = height > 70 ? '#ef4444' : height > 40 ? '#f59e0b' : '#22c55e';
-                                    return (
-                                        <motion.div
-                                            key={i}
-                                            className="flex-1 max-w-8"
-                                            style={{ 
-                                                height: `${height}%`, 
-                                                backgroundColor: color,
-                                                imageRendering: 'pixelated'
-                                            }}
-                                            initial={{ height: 0 }}
-                                            animate={{ height: `${height}%` }}
-                                            transition={{ duration: 0.5, delay: i * 0.1 }}
-                                        />
-                                    );
-                                })}
-                            </div>
-                            <div className="flex justify-between text-xs text-gray-500 font-mono">
-                                <span>OLDEST</span>
-                                <span>NEWEST</span>
-                            </div>
-                        </div>
-
-                        {/* THE VERDICT - COMPACT */}
-                        <div className="bg-black border-4 border-green-500 p-4 mb-6 text-center">
-                            <p className="text-green-400 font-black font-mono text-xl mb-2">
-                                {improvement > 10 
-                                    ? "✓ CLINICALLY SIGNIFICANT" 
-                                    : improvement > 0
-                                        ? "✓ RESPONDING"
-                                        : "→ KEEP GOING"}
-                            </p>
-                            <p className="text-gray-400 font-mono text-sm">
-                                {improvement > 10 
-                                    ? "Your nervous system is regulating. The frequencies work."
-                                    : improvement > 0
-                                        ? "Your body is responding. Healing compounds."
-                                        : "Consistency > perfection. You're building new neural pathways."}
-                            </p>
-                        </div>
-
-                        {/* LAST 5 - COMPACT LIST */}
-                        <div className="bg-black border-4 border-purple-500 p-4 mb-6">
-                            <h3 className="text-purple-400 font-black font-mono text-sm mb-3 text-center">
-                                LAST 5 SESSIONS
-                            </h3>
-                            <div className="space-y-2">
-                                {sessions.slice(0, 5).map((session, i) => {
-                                    const stressColor = session.stress_level_detected > 70 ? '#ef4444' : 
-                                                       session.stress_level_detected > 40 ? '#f59e0b' : 
-                                                       '#22c55e';
-                                    return (
-                                        <motion.div 
-                                            key={session.id}
-                                            className="flex items-center justify-between bg-purple-900/20 p-2 border border-purple-500/30"
-                                            initial={{ opacity: 0, x: -20 }}
-                                            animate={{ opacity: 1, x: 0 }}
-                                            transition={{ delay: i * 0.1 }}
-                                        >
-                                            <p className="text-xs text-purple-300 font-mono flex-1">
-                                                {session.recommended_protocol.split('_')[0]}
-                                            </p>
-                                            <div 
-                                                className="w-12 h-6 border-2 font-black font-mono text-sm flex items-center justify-center"
+                        {sessions.length > 2 && (
+                            <div className="bg-black border-4 border-pink-500 p-6 mb-6">
+                                <h3 className="text-pink-400 font-black font-mono text-lg mb-4 text-center">
+                                    STRESS TRAJECTORY
+                                </h3>
+                                <div className="flex items-end justify-center gap-2 h-32 mb-4">
+                                    {sessions.slice(0, 10).reverse().map((session, i) => {
+                                        const height = session.stress_level_detected;
+                                        const color = height > 70 ? '#ef4444' : height > 40 ? '#f59e0b' : '#22c55e';
+                                        return (
+                                            <motion.div
+                                                key={i}
+                                                className="flex-1 max-w-8"
                                                 style={{ 
-                                                    borderColor: stressColor,
-                                                    color: stressColor
+                                                    height: `${height}%`, 
+                                                    backgroundColor: color,
+                                                    imageRendering: 'pixelated'
                                                 }}
-                                            >
-                                                {session.stress_level_detected}
-                                            </div>
-                                        </motion.div>
-                                    );
-                                })}
+                                                initial={{ height: 0 }}
+                                                animate={{ height: `${height}%` }}
+                                                transition={{ duration: 0.5, delay: i * 0.1 }}
+                                            />
+                                        );
+                                    })}
+                                </div>
+                                <div className="flex justify-between text-xs text-gray-500 font-mono">
+                                    <span>OLDEST</span>
+                                    <span>NEWEST</span>
+                                </div>
                             </div>
+                        )}
+
+                        {/* THE SCORE - SIMPLE */}
+                        <div className="bg-black border-4 border-cyan-500 p-6 mb-6 text-center">
+                            <p className="text-cyan-400 font-black font-mono text-sm mb-3">THE SCORE</p>
+                            <p className="text-white font-mono text-lg leading-relaxed">
+                                {totalSessions === 1 
+                                    ? `You've done 1 session at ${avgRecentStress} stress. Do more sessions to see your trajectory.`
+                                    : improvement > 10 
+                                        ? `Your stress dropped ${Math.round(Math.abs(improvement))} points over ${totalSessions} sessions. That's clinically significant. The frequencies work.`
+                                        : improvement > 0
+                                            ? `Your stress dropped ${Math.round(Math.abs(improvement))} points over ${totalSessions} sessions. Your body is responding.`
+                                            : `${totalSessions} sessions logged. Healing isn't linear - your consistency matters most.`}
+                            </p>
                         </div>
 
-                        {/* BIG CTA - KEEP GOING */}
-                        <div className="text-center">
-                            <Link
-                                to={createPageUrl('FrequencyChamber')}
-                                className="inline-block bg-gradient-to-r from-pink-600 to-cyan-600 text-white px-12 py-5 font-black font-mono text-xl hover:from-pink-700 hover:to-cyan-700 transition-all border-4 border-pink-400"
-                                style={{ boxShadow: '8px 8px 0px rgba(236, 72, 153, 0.8)' }}
-                            >
-                                <COOLASFUCKWaves size={28} animate={true} className="inline mr-3" />
-                                KEEP HEALING
-                            </Link>
-                        </div>
+                        {/* HISTORY - ONLY IF >1 SESSION */}
+                        {sessions.length > 1 && (
+                            <div className="bg-black border-4 border-purple-500 p-4 mb-6">
+                                <h3 className="text-purple-400 font-black font-mono text-sm mb-3 text-center">
+                                    LAST {Math.min(5, sessions.length)} SESSIONS
+                                </h3>
+                                <div className="space-y-2">
+                                    {sessions.slice(0, 5).map((session, i) => {
+                                        const stressColor = session.stress_level_detected > 70 ? '#ef4444' : 
+                                                           session.stress_level_detected > 40 ? '#f59e0b' : 
+                                                           '#22c55e';
+                                        return (
+                                            <motion.div 
+                                                key={session.id}
+                                                className="flex items-center justify-between bg-purple-900/20 p-2 border border-purple-500/30"
+                                                initial={{ opacity: 0, x: -20 }}
+                                                animate={{ opacity: 1, x: 0 }}
+                                                transition={{ delay: i * 0.1 }}
+                                            >
+                                                <p className="text-xs text-purple-300 font-mono flex-1">
+                                                    {session.recommended_protocol.split('_')[0]}
+                                                </p>
+                                                <div 
+                                                    className="w-12 h-6 border-2 font-black font-mono text-sm flex items-center justify-center"
+                                                    style={{ 
+                                                        borderColor: stressColor,
+                                                        color: stressColor
+                                                    }}
+                                                >
+                                                    {session.stress_level_detected}
+                                                </div>
+                                            </motion.div>
+                                        );
+                                    })}
+                                </div>
+                            </div>
+                        )}
+
+                        {/* BIG CTA - DO IT NOW */}
+                        <Link
+                            to={createPageUrl('FrequencyChamber')}
+                            className="block bg-gradient-to-r from-pink-600 to-cyan-600 text-white p-8 font-black font-mono text-2xl text-center hover:from-pink-700 hover:to-cyan-700 transition-all border-4 border-pink-400"
+                            style={{ boxShadow: '8px 8px 0px rgba(236, 72, 153, 0.8)' }}
+                        >
+                            <COOLASFUCKWaves size={40} animate={true} className="mx-auto mb-3" />
+                            <div>DO YOUR HEALING NOW</div>
+                            <p className="text-sm text-pink-200 mt-2 font-normal">
+                                {avgRecentStress > 60 ? 'High stress detected - heal it' : 
+                                 avgRecentStress > 40 ? 'Medium stress - bring it down' :
+                                 'Maintain your healing practice'}
+                            </p>
+                        </Link>
                     </>
                 )}
 
