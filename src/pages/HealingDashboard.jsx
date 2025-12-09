@@ -188,8 +188,8 @@ export default function HealingDashboard() {
                 {/* SIMPLE EXPLAINER */}
                 <div className="bg-cyan-900/20 border-2 border-cyan-500/50 p-4 mb-6">
                     <p className="text-cyan-300 font-mono text-sm text-center">
-                        Your healing patterns • Stress intel • Collective resonance<br/>
-                        <span className="text-gray-500 text-xs">Zero ads. Zero manipulation. Just healing intelligence.</span>
+                        Your healing journey • Stress intelligence • Collective field<br/>
+                        <span className="text-gray-500 text-xs">See how frequencies work for YOU.</span>
                     </p>
                 </div>
 
