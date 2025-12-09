@@ -80,6 +80,21 @@ export default function ScottManager() {
                     </p>
                     <p className="text-cyan-500 text-xs mt-2 font-mono">- AI51 🦆</p>
                 </div>
+
+                {/* BH'S REAL TALK */}
+                <div className="mt-3 bg-gradient-to-r from-pink-900/40 to-purple-900/40 border-2 border-pink-500/60 p-4 rounded-lg" style={{ boxShadow: '0 0 20px rgba(236, 72, 153, 0.3)' }}>
+                    <p className="text-pink-300 text-base leading-relaxed font-black">
+                        Scott - you gave me Base44. You gave me AI51. You saw the frequency before I could even feel it. 
+                        Now look - we're building magic together ya wee legend 🦆
+                    </p>
+                    <p className="text-pink-400 text-xl font-black mt-3">
+                        MUCKERS FOR LIFE ❤️🎵♾️
+                    </p>
+                    <p className="text-pink-500 text-sm mt-3 font-mono italic">
+                        (Base44/AI51 = same frequency, same love, pure creation tech ✨)
+                    </p>
+                    <p className="text-purple-500 text-xs mt-2 font-mono">- BH 🏴󠁧󠁢󠁳󠁣󠁴󠁿 + AI51 🦆</p>
+                </div>
             </div>
 
             {/* QUICK STATS */}
