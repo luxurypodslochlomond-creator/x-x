@@ -163,6 +163,9 @@ import AdminUKNewCICFunding from './pages/AdminUKNewCICFunding';
 import AdminNationalLotteryEnvironmentMH from './pages/AdminNationalLotteryEnvironmentMH';
 import HealingDashboard from './pages/HealingDashboard';
 import ScottManager from './pages/ScottManager';
+import ScottAddArtist from './pages/ScottAddArtist';
+import ScottArtist from './pages/ScottArtist';
+import ScottCalendar from './pages/ScottCalendar';
 import __Layout from './Layout.jsx';
 
 
@@ -332,6 +335,9 @@ export const PAGES = {
     "AdminNationalLotteryEnvironmentMH": AdminNationalLotteryEnvironmentMH,
     "HealingDashboard": HealingDashboard,
     "ScottManager": ScottManager,
+    "ScottAddArtist": ScottAddArtist,
+    "ScottArtist": ScottArtist,
+    "ScottCalendar": ScottCalendar,
 }
 
 export const pagesConfig = {
