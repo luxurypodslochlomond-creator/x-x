@@ -95,7 +95,7 @@ export default function MorphicResonance() {
                 <div className="bg-cyan-900/20 border-2 border-cyan-500 p-4 max-w-md mx-auto">
                     <p className="text-cyan-300 font-mono text-sm">
                         <strong>For Sheldrake:</strong> Platform launched. Data collection infrastructure active. 
-                        This dashboard shows real-time collective healing patterns as they emerge ❤️
+                        This dashboard shows real-time collective healing patterns as they emerge.
                     </p>
                 </div>
             </div>
@@ -217,8 +217,8 @@ export default function MorphicResonance() {
             <div className="bg-purple-900/20 border-2 border-purple-500 p-4">
                 <p className="text-purple-300 font-mono text-sm">
                     <strong className="text-purple-400">For researchers:</strong> This data shows frequencies 
-                    used by more people correlate with better outcomes. Suggests collective consciousness 
-                    amplifies healing effects - exactly what Sheldrake predicted with morphic fields ❤️
+                    used by more people correlate with better outcomes. Early patterns suggest collective consciousness 
+                    may amplify healing effects - aligning with Sheldrake's morphic field hypothesis.
                 </p>
             </div>
 

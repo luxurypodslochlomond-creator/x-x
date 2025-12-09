@@ -11,9 +11,9 @@ import ClinicalOutcomes from '@/components/dashboard/ClinicalOutcomes';
 import MorphicResonance from '@/components/dashboard/MorphicResonance';
 
 /**
- * HEALING DASHBOARD - YOUR PERSONAL HEALING INTELLIGENCE
+ * HEALING RESONANCE DASHBOARD
  * 8-bit custom dashboard showing YOUR healing signature
- * Data serves YOU, not advertisers ❤️
+ * Data serves YOU, not advertisers
  */
 
 // Expandable section component
@@ -216,10 +216,24 @@ export default function HealingDashboard() {
                             HEALING RESONANCE
                         </h1>
                         <p className="text-gray-400 font-mono">Your healing strengthens the collective field</p>
-                    </div>
+                        </div>
 
-                    {/* LIVE COLLECTIVE STATS */}
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        {/* WHAT IS THIS - EXPLAINER */}
+                        <div className="bg-black border-4 border-cyan-500 p-6 mb-6">
+                        <div className="space-y-3">
+                            <p className="text-cyan-400 font-mono font-bold text-lg">WHAT IS THIS?</p>
+                            <p className="text-gray-300 font-mono text-sm">
+                                Your <strong className="text-white">personal healing data</strong> - patterns, progress, resonance. 
+                                8-bit retro aesthetic because this is <strong className="text-cyan-400">YOURS</strong>, not corporate.
+                            </p>
+                            <p className="text-gray-400 font-mono text-xs">
+                                Zero tracking for ads. Zero algorithms manipulating you. Just clean data showing your nervous system regulation over time.
+                            </p>
+                        </div>
+                        </div>
+
+                        {/* LIVE COLLECTIVE STATS */}
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                         <Card className="bg-black border-4 border-purple-500 p-4 text-center">
                             <COOLASFUCKWaves size={32} animate={true} className="mx-auto mb-2" />
                             <p className="text-3xl font-black text-purple-400 font-mono">{totalHealers}</p>
@@ -252,9 +266,8 @@ export default function HealingDashboard() {
                         <div className="bg-green-900/20 border-2 border-green-500 p-6 mb-6 text-center">
                             <COOLASFUCKWaves size={48} animate={true} className="mx-auto mb-4" />
                             <h3 className="text-xl font-black text-green-400 font-mono mb-3">JUST PLAY FREQUENCIES</h3>
-                            <p className="text-gray-300 font-mono text-sm mb-4 flex items-center justify-center gap-2">
-                                Every frequency session you play automatically saves to your dashboard. No voice recording needed
-                                <COOLASFUCKHeart size={16} animate={true} />
+                            <p className="text-gray-300 font-mono text-sm mb-4">
+                                Every frequency session you play automatically saves to your dashboard. No voice recording needed.
                             </p>
                             <Link
                                 to={createPageUrl('FrequencyChamber')}
@@ -306,7 +319,7 @@ export default function HealingDashboard() {
                             This data serves YOU, not advertisers
                         </p>
                         <p className="text-gray-600 font-mono text-xs">
-                            Zero extraction. Zero manipulation. Just healing ❤️
+                            Zero extraction. Zero manipulation. Just healing.
                         </p>
                     </div>
 
@@ -325,7 +338,21 @@ export default function HealingDashboard() {
                     <h1 className="text-5xl font-black font-mono text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-cyan-400 to-green-400">
                         HEALING RESONANCE
                     </h1>
-                    <p className="text-gray-400 font-mono">Your healing strengthens the collective field ❤️</p>
+                    <p className="text-gray-400 font-mono">Your healing strengthens the collective field</p>
+                </div>
+
+                {/* WHAT IS THIS - EXPLAINER */}
+                <div className="bg-black border-4 border-cyan-500 p-6 mb-6">
+                    <div className="space-y-3">
+                        <p className="text-cyan-400 font-mono font-bold text-lg">WHAT IS THIS?</p>
+                        <p className="text-gray-300 font-mono text-sm">
+                            Your <strong className="text-white">personal healing data</strong> - patterns, progress, resonance. 
+                            8-bit retro aesthetic because this is <strong className="text-cyan-400">YOURS</strong>, not corporate.
+                        </p>
+                        <p className="text-gray-400 font-mono text-xs">
+                            Zero tracking for ads. Zero algorithms manipulating you. Just clean data showing your nervous system regulation over time.
+                        </p>
+                    </div>
                 </div>
 
                 {/* QUICK STATS - ALWAYS VISIBLE */}
@@ -380,7 +407,7 @@ export default function HealingDashboard() {
                                 </div>
                             </div>
                             <p className="text-gray-300 font-mono text-sm">
-                                This is YOUR signature healing frequency. Your nervous system knows what it needs ❤️
+                                This is YOUR signature healing frequency. Your nervous system knows what it needs.
                             </p>
                         </div>
                     </DashboardSection>
@@ -413,7 +440,7 @@ export default function HealingDashboard() {
                             </div>
                             
                             <p className="text-gray-300 font-mono text-sm">
-                                The app could auto-suggest protocols at your peak stress times ❤️
+                                The app could auto-suggest protocols at your peak stress times.
                             </p>
                         </div>
                     </DashboardSection>
@@ -442,8 +469,8 @@ export default function HealingDashboard() {
                             
                             <p className="text-gray-300 font-mono text-sm">
                                 {healingIntel.improvement > 0 
-                                    ? "Your nervous system is regulating. The frequencies are working ❤️"
-                                    : "Keep going - healing isn't linear, it's a spiral ❤️"
+                                    ? "Your nervous system is regulating. The frequencies are working."
+                                    : "Keep going - healing isn't linear, it's a spiral."
                                 }
                             </p>
                         </div>
@@ -465,8 +492,8 @@ export default function HealingDashboard() {
                             
                             <p className="text-gray-300 font-mono text-sm">
                                 {healingIntel.streak > 0 
-                                    ? `${healingIntel.streak} days of showing up for yourself. That's strength ❤️`
-                                    : "No pressure. Come back when you need it. That's self-love too ❤️"
+                                    ? `${healingIntel.streak} days of showing up for yourself. That's strength.`
+                                    : "No pressure. Come back when you need it. That's self-love too."
                                 }
                             </p>
                         </div>
@@ -575,7 +602,7 @@ export default function HealingDashboard() {
                         This data serves YOU, not advertisers
                     </p>
                     <p className="text-gray-600 font-mono text-xs">
-                        Zero extraction. Zero manipulation. Just your healing journey ❤️
+                        Zero extraction. Zero manipulation. Just your healing journey.
                     </p>
                 </div>
 
