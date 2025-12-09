@@ -161,6 +161,7 @@ import AdminOnePager from './pages/AdminOnePager';
 import AdminUnLtdApplication from './pages/AdminUnLtdApplication';
 import AdminUKNewCICFunding from './pages/AdminUKNewCICFunding';
 import AdminNationalLotteryEnvironmentMH from './pages/AdminNationalLotteryEnvironmentMH';
+import HealingDashboard from './pages/HealingDashboard';
 import __Layout from './Layout.jsx';
 
 
@@ -328,6 +329,7 @@ export const PAGES = {
     "AdminUnLtdApplication": AdminUnLtdApplication,
     "AdminUKNewCICFunding": AdminUKNewCICFunding,
     "AdminNationalLotteryEnvironmentMH": AdminNationalLotteryEnvironmentMH,
+    "HealingDashboard": HealingDashboard,
 }
 
 export const pagesConfig = {

@@ -1,0 +1,384 @@
+import React, { useState, useMemo } from 'react';
+import { base44 } from '@/api/base44Client';
+import { useQuery } from '@tanstack/react-query';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ChevronDown, ChevronRight, Activity, Clock, Target, TrendingDown, Sparkles, Heart, Moon, Zap, Shield } from 'lucide-react';
+import { Card } from '@/components/ui/card';
+import { Link } from 'react-router-dom';
+import { createPageUrl } from '@/utils';
+import { COOLASFUCKHeart, COOLASFUCKWaves, COOLASFUCKBrain, COOLASFUCKMoon, COOLASFUCKShield, COOLASFUCKZap } from '@/components/shared/COOLASFUCKIcon';
+
+/**
+ * HEALING DASHBOARD - YOUR PERSONAL HEALING INTELLIGENCE
+ * 8-bit custom dashboard showing YOUR healing signature
+ * Data serves YOU, not advertisers ❤️
+ */
+
+// Expandable section component
+const DashboardSection = ({ title, icon: Icon, color, children, defaultOpen = false }) => {
+    const [isOpen, setIsOpen] = useState(defaultOpen);
+    
+    return (
+        <Card className={`bg-black border-4 ${color} overflow-hidden`}>
+            <button 
+                onClick={() => setIsOpen(!isOpen)}
+                className="w-full p-6 flex items-center justify-between hover:bg-white/5 transition-colors"
+            >
+                <div className="flex items-center gap-4">
+                    <Icon size={32} animate={isOpen} className={color.replace('border-', 'text-')} />
+                    <h2 className={`text-2xl font-black font-mono ${color.replace('border-', 'text-')}`}>
+                        {title}
+                    </h2>
+                </div>
+                {isOpen ? (
+                    <ChevronDown className={`w-6 h-6 ${color.replace('border-', 'text-')}`} />
+                ) : (
+                    <ChevronRight className={`w-6 h-6 ${color.replace('border-', 'text-')}`} />
+                )}
+            </button>
+            
+            <AnimatePresence>
+                {isOpen && (
+                    <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="overflow-hidden"
+                    >
+                        <div className="p-6 pt-0 border-t-2 border-white/10">
+                            {children}
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+        </Card>
+    );
+};
+
+// 8-bit pixel chart component
+const PixelChart = ({ data, color, maxHeight = 100 }) => {
+    const max = Math.max(...data, 1);
+    
+    return (
+        <div className="flex items-end gap-1 h-24">
+            {data.map((value, i) => {
+                const height = (value / max) * maxHeight;
+                return (
+                    <div
+                        key={i}
+                        className={`w-3 ${color} transition-all hover:opacity-80`}
+                        style={{ 
+                            height: `${height}%`,
+                            minHeight: value > 0 ? '8px' : '2px'
+                        }}
+                    />
+                );
+            })}
+        </div>
+    );
+};
+
+export default function HealingDashboard() {
+    const { data: user, isLoading: userLoading } = useQuery({
+        queryKey: ['user'],
+        queryFn: () => base44.auth.me(),
+        retry: false
+    });
+
+    const { data: sessions = [], isLoading: sessionsLoading } = useQuery({
+        queryKey: ['healing-sessions'],
+        queryFn: async () => {
+            const allSessions = await base44.entities.VoiceHealingSession.list();
+            return allSessions.sort((a, b) => new Date(b.session_date) - new Date(a.session_date));
+        },
+        enabled: !!user
+    });
+
+    // Calculate healing intel
+    const healingIntel = useMemo(() => {
+        if (!sessions.length) return null;
+
+        // Frequency preferences
+        const protocolCounts = {};
+        sessions.forEach(s => {
+            protocolCounts[s.recommended_protocol] = (protocolCounts[s.recommended_protocol] || 0) + 1;
+        });
+        const topProtocol = Object.entries(protocolCounts).sort((a, b) => b[1] - a[1])[0];
+
+        // Stress patterns by hour
+        const hourlyStress = Array(24).fill(0);
+        const hourlyCounts = Array(24).fill(0);
+        sessions.forEach(s => {
+            if (s.session_date && s.stress_level_detected) {
+                const hour = new Date(s.session_date).getHours();
+                hourlyStress[hour] += s.stress_level_detected;
+                hourlyCounts[hour]++;
+            }
+        });
+        const avgHourlyStress = hourlyStress.map((total, i) => 
+            hourlyCounts[i] > 0 ? Math.round(total / hourlyCounts[i]) : 0
+        );
+        const peakStressHour = avgHourlyStress.indexOf(Math.max(...avgHourlyStress));
+
+        // Stress trend (last 7 sessions)
+        const recentStress = sessions.slice(0, 7).map(s => s.stress_level_detected || 0).reverse();
+        const avgRecentStress = recentStress.reduce((a, b) => a + b, 0) / recentStress.length;
+        const firstSessionStress = sessions[sessions.length - 1]?.stress_level_detected || avgRecentStress;
+        const improvement = firstSessionStress - avgRecentStress;
+
+        // Healing streak
+        const now = new Date();
+        let streak = 0;
+        for (let i = 0; i < sessions.length; i++) {
+            const sessionDate = new Date(sessions[i].session_date);
+            const daysDiff = Math.floor((now - sessionDate) / (1000 * 60 * 60 * 24));
+            if (daysDiff <= streak + 1) streak++;
+            else break;
+        }
+
+        return {
+            topProtocol: topProtocol ? topProtocol[0] : null,
+            topProtocolCount: topProtocol ? topProtocol[1] : 0,
+            peakStressHour,
+            avgHourlyStress,
+            recentStress,
+            improvement,
+            avgRecentStress: Math.round(avgRecentStress),
+            totalSessions: sessions.length,
+            streak
+        };
+    }, [sessions]);
+
+    if (userLoading || sessionsLoading) {
+        return (
+            <div className="min-h-screen bg-gradient-to-br from-black via-purple-950 to-black flex items-center justify-center">
+                <div className="text-center space-y-4">
+                    <COOLASFUCKWaves size={64} animate={true} />
+                    <p className="text-white font-mono text-xl">Loading your healing intelligence...</p>
+                </div>
+            </div>
+        );
+    }
+
+    if (!user) {
+        return (
+            <div className="min-h-screen bg-gradient-to-br from-black via-purple-950 to-black flex items-center justify-center p-6">
+                <Card className="bg-black border-4 border-cyan-500 p-8 max-w-md text-center space-y-6">
+                    <COOLASFUCKBrain size={64} animate={true} className="mx-auto" />
+                    <h1 className="text-3xl font-black text-cyan-400 font-mono">SIGN IN REQUIRED</h1>
+                    <p className="text-gray-300 font-mono">Sign in to see your personal healing intelligence</p>
+                    <button
+                        onClick={() => base44.auth.redirectToLogin()}
+                        className="w-full bg-cyan-600 hover:bg-cyan-700 text-white px-6 py-3 font-black font-mono"
+                    >
+                        SIGN IN
+                    </button>
+                </Card>
+            </div>
+        );
+    }
+
+    if (!sessions.length) {
+        return (
+            <div className="min-h-screen bg-gradient-to-br from-black via-purple-950 to-black flex items-center justify-center p-6">
+                <Card className="bg-black border-4 border-pink-500 p-8 max-w-md text-center space-y-6">
+                    <COOLASFUCKHeart size={64} animate={true} className="mx-auto" />
+                    <h1 className="text-3xl font-black text-pink-400 font-mono">START YOUR JOURNEY</h1>
+                    <p className="text-gray-300 font-mono">Use the Frequency Chamber to begin tracking your healing journey</p>
+                    <Link
+                        to={createPageUrl('FrequencyChamber')}
+                        className="block w-full bg-pink-600 hover:bg-pink-700 text-white px-6 py-3 font-black font-mono"
+                    >
+                        START HEALING
+                    </Link>
+                </Card>
+            </div>
+        );
+    }
+
+    return (
+        <div className="min-h-screen bg-gradient-to-br from-black via-purple-950 to-black text-white p-6">
+            <div className="max-w-6xl mx-auto space-y-6">
+                
+                {/* HEADER */}
+                <div className="text-center space-y-4 mb-8">
+                    <COOLASFUCKBrain size={64} animate={true} className="mx-auto" />
+                    <h1 className="text-5xl font-black font-mono text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-cyan-400 to-green-400">
+                        YOUR HEALING INTELLIGENCE
+                    </h1>
+                    <p className="text-gray-400 font-mono">Data that serves YOU, not advertisers ❤️</p>
+                </div>
+
+                {/* QUICK STATS - ALWAYS VISIBLE */}
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <Card className="bg-black border-4 border-pink-500 p-4 text-center">
+                        <COOLASFUCKHeart size={32} animate={true} className="mx-auto mb-2" />
+                        <p className="text-3xl font-black text-pink-400 font-mono">{healingIntel.totalSessions}</p>
+                        <p className="text-sm text-gray-400 font-mono">Sessions</p>
+                    </Card>
+
+                    <Card className="bg-black border-4 border-green-500 p-4 text-center">
+                        <TrendingDown className="w-8 h-8 text-green-400 mx-auto mb-2" />
+                        <p className="text-3xl font-black text-green-400 font-mono">
+                            {healingIntel.improvement > 0 ? '-' : ''}{Math.round(Math.abs(healingIntel.improvement))}
+                        </p>
+                        <p className="text-sm text-gray-400 font-mono">Stress Drop</p>
+                    </Card>
+
+                    <Card className="bg-black border-4 border-amber-500 p-4 text-center">
+                        <Sparkles className="w-8 h-8 text-amber-400 mx-auto mb-2" />
+                        <p className="text-3xl font-black text-amber-400 font-mono">{healingIntel.streak}</p>
+                        <p className="text-sm text-gray-400 font-mono">Day Streak</p>
+                    </Card>
+
+                    <Card className="bg-black border-4 border-cyan-500 p-4 text-center">
+                        <Activity className="w-8 h-8 text-cyan-400 mx-auto mb-2" />
+                        <p className="text-3xl font-black text-cyan-400 font-mono">{healingIntel.avgRecentStress}</p>
+                        <p className="text-sm text-gray-400 font-mono">Avg Stress</p>
+                    </Card>
+                </div>
+
+                {/* EXPANDABLE SECTIONS */}
+                <div className="space-y-4">
+                    
+                    {/* YOUR HEALING SIGNATURE */}
+                    <DashboardSection
+                        title="YOUR HEALING SIGNATURE"
+                        icon={COOLASFUCKWaves}
+                        color="border-cyan-500"
+                        defaultOpen={true}
+                    >
+                        <div className="space-y-4">
+                            <div className="bg-cyan-900/20 border-2 border-cyan-500 p-4">
+                                <p className="text-cyan-400 font-mono font-bold mb-2">Your go-to protocol:</p>
+                                <div className="flex items-center gap-3">
+                                    <div className="text-4xl font-black text-white font-mono">
+                                        {healingIntel.topProtocol}
+                                    </div>
+                                    <div className="text-cyan-300 font-mono text-sm">
+                                        Used {healingIntel.topProtocolCount} times
+                                    </div>
+                                </div>
+                            </div>
+                            <p className="text-gray-300 font-mono text-sm">
+                                This is YOUR signature healing frequency. Your nervous system knows what it needs ❤️
+                            </p>
+                        </div>
+                    </DashboardSection>
+
+                    {/* STRESS PATTERNS */}
+                    <DashboardSection
+                        title="WHEN YOU NEED HEALING MOST"
+                        icon={Clock}
+                        color="border-pink-500"
+                    >
+                        <div className="space-y-4">
+                            <div className="bg-pink-900/20 border-2 border-pink-500 p-4">
+                                <p className="text-pink-400 font-mono font-bold mb-2">Your hardest time:</p>
+                                <div className="text-4xl font-black text-white font-mono">
+                                    {healingIntel.peakStressHour}:00 - {(healingIntel.peakStressHour + 1) % 24}:00
+                                </div>
+                            </div>
+                            
+                            <div className="space-y-2">
+                                <p className="text-gray-400 font-mono text-sm">24-hour stress pattern:</p>
+                                <PixelChart 
+                                    data={healingIntel.avgHourlyStress} 
+                                    color="bg-pink-500"
+                                />
+                                <div className="flex justify-between text-xs text-gray-500 font-mono">
+                                    <span>00:00</span>
+                                    <span>12:00</span>
+                                    <span>23:00</span>
+                                </div>
+                            </div>
+                            
+                            <p className="text-gray-300 font-mono text-sm">
+                                The app could auto-suggest protocols at your peak stress times ❤️
+                            </p>
+                        </div>
+                    </DashboardSection>
+
+                    {/* NERVOUS SYSTEM REGULATION */}
+                    <DashboardSection
+                        title="NERVOUS SYSTEM PROGRESS"
+                        icon={Activity}
+                        color="border-green-500"
+                    >
+                        <div className="space-y-4">
+                            <div className="bg-green-900/20 border-2 border-green-500 p-4">
+                                <p className="text-green-400 font-mono font-bold mb-2">Stress reduction:</p>
+                                <div className="text-4xl font-black text-white font-mono">
+                                    {healingIntel.improvement > 0 ? '↓' : '↔'} {Math.round(Math.abs(healingIntel.improvement))} points
+                                </div>
+                            </div>
+                            
+                            <div className="space-y-2">
+                                <p className="text-gray-400 font-mono text-sm">Last 7 sessions:</p>
+                                <PixelChart 
+                                    data={healingIntel.recentStress} 
+                                    color="bg-green-500"
+                                />
+                            </div>
+                            
+                            <p className="text-gray-300 font-mono text-sm">
+                                {healingIntel.improvement > 0 
+                                    ? "Your nervous system is regulating. The frequencies are working ❤️"
+                                    : "Keep going - healing isn't linear, it's a spiral ❤️"
+                                }
+                            </p>
+                        </div>
+                    </DashboardSection>
+
+                    {/* HEALING STREAK */}
+                    <DashboardSection
+                        title="YOUR CONSISTENCY"
+                        icon={Sparkles}
+                        color="border-amber-500"
+                    >
+                        <div className="space-y-4">
+                            <div className="bg-amber-900/20 border-2 border-amber-500 p-4">
+                                <p className="text-amber-400 font-mono font-bold mb-2">Current streak:</p>
+                                <div className="text-6xl font-black text-white font-mono">
+                                    {healingIntel.streak} days
+                                </div>
+                            </div>
+                            
+                            <p className="text-gray-300 font-mono text-sm">
+                                {healingIntel.streak > 0 
+                                    ? `${healingIntel.streak} days of showing up for yourself. That's strength ❤️`
+                                    : "No pressure. Come back when you need it. That's self-love too ❤️"
+                                }
+                            </p>
+                        </div>
+                    </DashboardSection>
+
+                </div>
+
+                {/* BACK TO CHAMBER */}
+                <div className="text-center pt-8">
+                    <Link
+                        to={createPageUrl('FrequencyChamber')}
+                        className="inline-flex items-center gap-3 bg-gradient-to-r from-pink-600 to-cyan-600 text-white px-8 py-4 font-black font-mono text-lg hover:from-pink-700 hover:to-cyan-700 transition-all"
+                        style={{ boxShadow: '0 0 30px rgba(236, 72, 153, 0.5)' }}
+                    >
+                        <COOLASFUCKWaves size={32} animate={true} />
+                        START NEW SESSION
+                    </Link>
+                </div>
+
+                {/* FOOTER NOTE */}
+                <div className="text-center pt-8 space-y-2 border-t-2 border-white/10">
+                    <p className="text-gray-500 font-mono text-sm">
+                        This data serves YOU, not advertisers
+                    </p>
+                    <p className="text-gray-600 font-mono text-xs">
+                        Zero extraction. Zero manipulation. Just your healing journey ❤️
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    );
+}
