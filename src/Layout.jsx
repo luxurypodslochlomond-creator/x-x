@@ -206,13 +206,12 @@ const LayoutInner = ({ children, currentPageName }) => {
 
   // === NAVIGATION SECTIONS ===
   const healNav = [
-    { title: "Frequency Chamber", url: createPageUrl("FrequencyChamber"), icon: COOLASFUCKWaves, highlight: true, description: "Free healing frequencies" },
-    { title: "Healing Dashboard", url: createPageUrl("HealingDashboard"), icon: Brain, description: "Your healing intelligence" },
-    { title: "My Healing Journey", url: createPageUrl("HealingJourney"), icon: COOLASFUCKHeart, description: "Track your progress" },
-    { title: "Universal Pulse", url: createPageUrl("UniversalPulse"), icon: COOLASFUCKHeart, description: "Collective heartbeat music" },
-    { title: "Radio51", url: createPageUrl("Radio"), icon: Music, description: "Lossless music" },
-    { title: "Create Demos", url: createPageUrl("LearnGuitar"), icon: Music, description: "Studio tools for artists" },
-  ];
+      { title: "Frequency Chamber", url: createPageUrl("FrequencyChamber"), icon: COOLASFUCKWaves, highlight: true, description: "Free healing frequencies" },
+      { title: "Healing Dashboard", url: createPageUrl("HealingDashboard"), icon: Brain, description: "Your healing intelligence" },
+      { title: "Universal Pulse", url: createPageUrl("UniversalPulse"), icon: COOLASFUCKHeart, description: "Collective heartbeat music" },
+      { title: "Radio51", url: createPageUrl("Radio"), icon: Music, description: "Lossless music" },
+      { title: "Create Demos", url: createPageUrl("LearnGuitar"), icon: Music, description: "Studio tools for artists" },
+    ];
 
   const earnNav = [
     { title: "Heal Earth", url: createPageUrl("NewCleanup"), icon: Globe, description: "Clean litter, earn $P51" },
