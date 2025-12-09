@@ -354,6 +354,71 @@ export default function HealingDashboard() {
                         </div>
                     </DashboardSection>
 
+                    {/* SESSION HISTORY */}
+                    <DashboardSection
+                        title="SESSION HISTORY"
+                        icon={COOLASFUCKHeart}
+                        color="border-purple-500"
+                    >
+                        <div className="space-y-3">
+                            {sessions.slice(0, 10).map((session, i) => {
+                                const date = new Date(session.session_date);
+                                const stressColor = session.stress_level_detected > 70 ? 'text-red-400' : 
+                                                   session.stress_level_detected > 40 ? 'text-amber-400' : 
+                                                   'text-green-400';
+                                
+                                return (
+                                    <div 
+                                        key={session.id} 
+                                        className="bg-purple-900/20 border-2 border-purple-500 p-4 hover:bg-purple-900/30 transition-colors"
+                                    >
+                                        <div className="flex items-start justify-between mb-2">
+                                            <div>
+                                                <p className="text-purple-400 font-mono font-bold">
+                                                    {date.toLocaleDateString()} {date.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
+                                                </p>
+                                                {session.healing_intent && (
+                                                    <p className="text-gray-400 font-mono text-sm mt-1">
+                                                        "{session.healing_intent}"
+                                                    </p>
+                                                )}
+                                            </div>
+                                            <div className="text-right">
+                                                <div className={`text-2xl font-black font-mono ${stressColor}`}>
+                                                    {session.stress_level_detected}
+                                                </div>
+                                                <p className="text-xs text-gray-500 font-mono">stress level</p>
+                                            </div>
+                                        </div>
+                                        
+                                        <div className="flex items-center gap-2 mt-2">
+                                            <div className="bg-purple-500/20 px-2 py-1 text-xs font-mono text-purple-300">
+                                                {session.recommended_protocol}
+                                            </div>
+                                            {session.session_completed && (
+                                                <div className="bg-green-500/20 px-2 py-1 text-xs font-mono text-green-300">
+                                                    ✓ COMPLETED
+                                                </div>
+                                            )}
+                                        </div>
+                                        
+                                        {session.post_session_notes && (
+                                            <p className="text-gray-300 font-mono text-sm mt-2 italic">
+                                                "{session.post_session_notes}"
+                                            </p>
+                                        )}
+                                    </div>
+                                );
+                            })}
+                            
+                            {sessions.length > 10 && (
+                                <p className="text-center text-gray-500 font-mono text-sm pt-2">
+                                    Showing latest 10 of {sessions.length} sessions
+                                </p>
+                            )}
+                        </div>
+                    </DashboardSection>
+
                 </div>
 
                 {/* BACK TO CHAMBER */}
