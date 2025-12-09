@@ -685,10 +685,9 @@ export default function HealingDashboard() {
                             </p>
                         </div>
                     </DashboardSection>
+                    </motion.div>
 
                     {/* STRESS PATTERNS */}
-                    </DashboardSection>
-                    
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
