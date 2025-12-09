@@ -204,19 +204,24 @@ export default function HealingDashboard() {
                     <MorphicResonance />
                 </div>
 
-                {/* START TRACKING CTA - IF NOT LOGGED IN OR NO SESSIONS */}
+                {/* START YOUR HEALING CTA - IF NOT LOGGED IN OR NO SESSIONS */}
                 {!hasPersonalSessions && (
-                    <div className="border-4 border-green-500 bg-black p-6 mb-6">
-                        <h2 className="text-green-400 font-black font-mono text-xl mb-4 text-center">START TRACKING</h2>
-                        <p className="text-gray-300 font-mono text-sm text-center mb-6">
-                            Every frequency session you play automatically saves to your dashboard
+                    <div className="border-4 border-pink-500 bg-gradient-to-br from-pink-900/20 to-purple-900/20 p-8 mb-6">
+                        <COOLASFUCKHeart size={48} animate={true} className="mx-auto mb-4" />
+                        <h2 className="text-pink-400 font-black font-mono text-2xl mb-3 text-center">START YOUR HEALING</h2>
+                        <p className="text-white font-mono text-sm text-center mb-2">
+                            Free frequencies proven to reduce anxiety, improve sleep, manage pain
+                        </p>
+                        <p className="text-gray-400 font-mono text-xs text-center mb-6">
+                            Your sessions auto-save here - watch yourself heal over time
                         </p>
                         <Link
                             to={createPageUrl('FrequencyChamber')}
-                            className="block w-full bg-green-600 hover:bg-green-700 text-white text-center px-8 py-4 font-black font-mono text-lg border-4 border-green-400"
-                            style={{ boxShadow: '4px 4px 0px rgba(34, 197, 94, 0.5)' }}
+                            className="block w-full bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-700 hover:to-purple-700 text-white text-center px-8 py-5 font-black font-mono text-xl border-4 border-pink-400 transition-all"
+                            style={{ boxShadow: '0 0 30px rgba(236, 72, 153, 0.5)' }}
                         >
-                            GO TO FREQUENCY CHAMBER
+                            <COOLASFUCKWaves size={28} animate={true} className="inline mr-3" />
+                            ENTER FREQUENCY CHAMBER
                         </Link>
                     </div>
                 )}
