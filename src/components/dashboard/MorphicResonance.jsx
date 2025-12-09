@@ -21,6 +21,13 @@ export default function MorphicResonance() {
         }
     });
 
+    const { data: collectiveSyncs = [] } = useQuery({
+        queryKey: ['collective-syncs'],
+        queryFn: async () => {
+            return await base44.entities.CollectiveSyncMoment.list('-created_date', 100);
+        }
+    });
+
     const resonanceData = useMemo(() => {
         if (!allSessions.length) return null;
 
@@ -78,12 +85,22 @@ export default function MorphicResonance() {
             return daysDiff <= 7;
         }).length;
 
+        // Collective sync stats
+        const totalCollectiveSyncs = collectiveSyncs.length;
+        const totalSoulsInSync = collectiveSyncs.reduce((sum, sync) => sum + sync.souls_count, 0);
+        const strongestSyncMoment = collectiveSyncs.length > 0 
+            ? collectiveSyncs.reduce((max, sync) => sync.souls_count > max.souls_count ? sync : max, collectiveSyncs[0])
+            : null;
+
         return {
             protocolStats,
             strongest: strongest ? { name: strongest[0], ...strongest[1] } : null,
             totalSessions,
             activeLastWeek: last7Days,
-            totalHealers: new Set(allSessions.map(s => s.created_by)).size
+            totalHealers: new Set(allSessions.map(s => s.created_by)).size,
+            totalCollectiveSyncs,
+            totalSoulsInSync,
+            strongestSyncMoment
         };
     }, [allSessions]);
 
@@ -106,29 +123,37 @@ export default function MorphicResonance() {
         <div className="space-y-6">
             
             {/* COLLECTIVE STATS */}
-            <div className="grid grid-cols-3 gap-4">
-                <Card className="bg-black border-4 border-cyan-500 p-4 text-center">
-                    <Globe className="w-8 h-8 text-cyan-400 mx-auto mb-2" />
-                    <p className="text-3xl font-black text-cyan-400 font-mono">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                <Card className="bg-black border-4 border-cyan-500 p-3 text-center">
+                    <Globe className="w-6 h-6 text-cyan-400 mx-auto mb-1" />
+                    <p className="text-2xl font-black text-cyan-400 font-mono">
                         {resonanceData.totalHealers}
                     </p>
-                    <p className="text-xs text-gray-400 font-mono">Souls Healing</p>
+                    <p className="text-[10px] text-gray-400 font-mono">Solo Healing</p>
                 </Card>
 
-                <Card className="bg-black border-4 border-pink-500 p-4 text-center">
-                    <Sparkles className="w-8 h-8 text-pink-400 mx-auto mb-2" />
-                    <p className="text-3xl font-black text-pink-400 font-mono">
+                <Card className="bg-black border-4 border-pink-500 p-3 text-center">
+                    <Sparkles className="w-6 h-6 text-pink-400 mx-auto mb-1" />
+                    <p className="text-2xl font-black text-pink-400 font-mono">
                         {resonanceData.totalSessions}
                     </p>
-                    <p className="text-xs text-gray-400 font-mono">Total Sessions</p>
+                    <p className="text-[10px] text-gray-400 font-mono">Sessions</p>
                 </Card>
 
-                <Card className="bg-black border-4 border-green-500 p-4 text-center">
-                    <TrendingDown className="w-8 h-8 text-green-400 mx-auto mb-2" />
-                    <p className="text-3xl font-black text-green-400 font-mono">
-                        {resonanceData.activeLastWeek}
+                <Card className="bg-black border-4 border-green-500 p-3 text-center">
+                    <Users className="w-6 h-6 text-green-400 mx-auto mb-1" />
+                    <p className="text-2xl font-black text-green-400 font-mono">
+                        {resonanceData.totalCollectiveSyncs}
                     </p>
-                    <p className="text-xs text-gray-400 font-mono">This Week</p>
+                    <p className="text-[10px] text-gray-400 font-mono">Collective Syncs</p>
+                </Card>
+
+                <Card className="bg-black border-4 border-purple-500 p-3 text-center">
+                    <COOLASFUCKWaves size={24} animate={true} className="mx-auto mb-1" />
+                    <p className="text-2xl font-black text-purple-400 font-mono">
+                        {resonanceData.totalSoulsInSync}
+                    </p>
+                    <p className="text-[10px] text-gray-400 font-mono">Souls Synced</p>
                 </Card>
             </div>
 
@@ -213,11 +238,37 @@ export default function MorphicResonance() {
                 </div>
             </Card>
 
+            {/* STRONGEST COLLECTIVE SYNC */}
+            {resonanceData.strongestSyncMoment && (
+                <Card className="bg-gradient-to-r from-cyan-900/40 to-green-900/40 border-4 border-cyan-500 p-5">
+                    <h3 className="text-cyan-400 font-black font-mono text-lg mb-3 text-center flex items-center justify-center gap-2">
+                        <COOLASFUCKWaves size={24} animate={true} />
+                        NUCLEAR SYNC MOMENT
+                    </h3>
+                    <div className="space-y-2 text-center">
+                        <p className="text-5xl font-black text-white font-mono">
+                            {resonanceData.strongestSyncMoment.souls_count} SOULS
+                        </p>
+                        <p className="text-xl text-cyan-300 font-mono">
+                            {resonanceData.strongestSyncMoment.target_freq} Hz ({resonanceData.strongestSyncMoment.target_note})
+                        </p>
+                        <p className="text-sm text-gray-400 font-mono">
+                            {resonanceData.strongestSyncMoment.frequency_color} FREQUENCY
+                        </p>
+                        <p className="text-xs text-gray-500 font-mono mt-2">
+                            Perfect resonance: {resonanceData.strongestSyncMoment.soul_names?.join(', ')}
+                        </p>
+                    </div>
+                </Card>
+            )}
+
             {/* RESEARCH NOTE */}
             <div className="bg-purple-900/20 border-2 border-purple-500 p-4">
-                <p className="text-purple-300 font-mono text-sm">
-                    This data shows frequencies used by more people correlate with better outcomes. 
-                    Early patterns suggest collective consciousness may amplify healing effects through shared resonance.
+                <p className="text-purple-300 font-mono text-sm mb-2">
+                    <strong>COOLASFUCK.GMT RESONANCE:</strong> Solo healing builds the field. Collective tuning amplifies it exponentially.
+                </p>
+                <p className="text-gray-400 font-mono text-xs">
+                    Same frequency, same moment, different places = unified consciousness. The morphic field strengthens when souls synchronize their vibration.
                 </p>
             </div>
 
