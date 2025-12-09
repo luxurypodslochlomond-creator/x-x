@@ -91,18 +91,17 @@ export default function HealingDashboard() {
     const { data: sessions = [], isLoading: sessionsLoading } = useQuery({
         queryKey: ['healing-sessions'],
         queryFn: async () => {
-            const allSessions = await base44.entities.VoiceHealingSession.list();
-            return allSessions.sort((a, b) => new Date(b.session_date) - new Date(a.session_date));
+            const allSessions = await base44.entities.VoiceHealingSession.list('-session_date', 100);
+            return allSessions;
         },
         enabled: !!user
     });
 
-    // Fetch all sessions for collective stats (always enabled for dashboard view)
+    // Fetch collective stats (limited for performance)
     const { data: allSessions = [] } = useQuery({
         queryKey: ['all-healing-sessions'],
         queryFn: async () => {
-            const sessions = await base44.entities.VoiceHealingSession.list();
-            return sessions;
+            return await base44.entities.VoiceHealingSession.list('-session_date', 500);
         }
     });
 
