@@ -201,19 +201,23 @@ export default function HealingDashboard() {
                         <p className="text-gray-400 font-mono">Your healing strengthens the collective field</p>
                         </div>
 
-                        {/* WHAT IS THIS - EXPLAINER */}
-                        <div className="bg-black border-4 border-cyan-500 p-6 mb-6">
-                        <div className="space-y-3">
-                            <p className="text-cyan-400 font-mono font-bold text-lg">WHAT IS THIS?</p>
-                            <p className="text-gray-300 font-mono text-sm">
-                                Your <strong className="text-white">personal healing data</strong> - patterns, progress, resonance. 
-                                8-bit retro aesthetic because this is <strong className="text-cyan-400">YOURS</strong>, not corporate.
-                            </p>
-                            <p className="text-gray-400 font-mono text-xs">
-                                Zero tracking for ads. Zero algorithms manipulating you. Just clean data showing your nervous system regulation over time.
-                            </p>
-                        </div>
-                        </div>
+                        {/* WHAT IS THIS - COLLAPSIBLE EXPLAINER */}
+                        <DashboardSection
+                            title="WHAT IS THIS?"
+                            icon={COOLASFUCKBrain}
+                            color="border-cyan-500"
+                            defaultOpen={false}
+                        >
+                            <div className="space-y-3">
+                                <p className="text-gray-300 font-mono text-sm">
+                                    Your <strong className="text-white">personal healing data</strong> - patterns, progress, resonance. 
+                                    This is <strong className="text-cyan-400">YOURS</strong>, not corporate.
+                                </p>
+                                <p className="text-gray-400 font-mono text-xs">
+                                    Zero tracking for ads. Zero algorithms manipulating you. Just clean data showing your nervous system regulation over time.
+                                </p>
+                            </div>
+                        </DashboardSection>
 
                         {/* LIVE COLLECTIVE STATS */}
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -341,19 +345,23 @@ export default function HealingDashboard() {
                     <p className="text-gray-400 font-mono">Your healing strengthens the collective field</p>
                 </div>
 
-                {/* WHAT IS THIS - EXPLAINER */}
-                <div className="bg-black border-4 border-cyan-500 p-6 mb-6">
+                {/* WHAT IS THIS - COLLAPSIBLE EXPLAINER */}
+                <DashboardSection
+                    title="WHAT IS THIS?"
+                    icon={COOLASFUCKBrain}
+                    color="border-cyan-500"
+                    defaultOpen={false}
+                >
                     <div className="space-y-3">
-                        <p className="text-cyan-400 font-mono font-bold text-lg">WHAT IS THIS?</p>
                         <p className="text-gray-300 font-mono text-sm">
                             Your <strong className="text-white">personal healing data</strong> - patterns, progress, resonance. 
-                            8-bit retro aesthetic because this is <strong className="text-cyan-400">YOURS</strong>, not corporate.
+                            This is <strong className="text-cyan-400">YOURS</strong>, not corporate.
                         </p>
                         <p className="text-gray-400 font-mono text-xs">
                             Zero tracking for ads. Zero algorithms manipulating you. Just clean data showing your nervous system regulation over time.
                         </p>
                     </div>
-                </div>
+                </DashboardSection>
 
                 {/* QUICK STATS - ALWAYS VISIBLE */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
