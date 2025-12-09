@@ -296,7 +296,7 @@ export default function HealingDashboard() {
                             </h3>
                         </div>
                         <p className="text-gray-400 font-mono text-sm mb-4">
-                            Testing Sheldrake's morphic resonance theory: do people heal faster when using frequencies together?
+                            Do people heal faster when using frequencies together? Tracking collective healing patterns.
                         </p>
                         <MorphicResonance />
                     </Card>
