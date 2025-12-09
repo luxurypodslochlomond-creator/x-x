@@ -193,8 +193,39 @@ export default function HealingDashboard() {
                     </p>
                 </div>
 
-                {/* QUICK STATS - 2x2 GRID */}
-                <div className="grid grid-cols-2 gap-4 mb-6">
+                {/* MORPHIC RESONANCE - SHOW FIRST (PUBLIC) */}
+                <div className="border-4 border-purple-500 bg-black p-6 mb-6">
+                    <div className="flex items-center gap-3 mb-4">
+                        <COOLASFUCKWaves size={32} animate={true} />
+                        <h3 className="text-2xl font-black font-mono text-purple-400">
+                            COLLECTIVE HEALING
+                        </h3>
+                    </div>
+                    <MorphicResonance />
+                </div>
+
+                {/* START TRACKING CTA - IF NOT LOGGED IN OR NO SESSIONS */}
+                {!hasPersonalSessions && (
+                    <div className="border-4 border-green-500 bg-black p-6 mb-6">
+                        <h2 className="text-green-400 font-black font-mono text-xl mb-4 text-center">START TRACKING</h2>
+                        <p className="text-gray-300 font-mono text-sm text-center mb-6">
+                            Every frequency session you play automatically saves to your dashboard
+                        </p>
+                        <Link
+                            to={createPageUrl('FrequencyChamber')}
+                            className="block w-full bg-green-600 hover:bg-green-700 text-white text-center px-8 py-4 font-black font-mono text-lg border-4 border-green-400"
+                            style={{ boxShadow: '4px 4px 0px rgba(34, 197, 94, 0.5)' }}
+                        >
+                            GO TO FREQUENCY CHAMBER
+                        </Link>
+                    </div>
+                )}
+
+                {/* YOUR PERSONAL DATA - ONLY IF HAS SESSIONS */}
+                {hasPersonalSessions && (
+                    <>
+                        {/* QUICK STATS - 2x2 GRID */}
+                        <div className="grid grid-cols-2 gap-4 mb-6">
                     <button
                         onClick={() => setExpandedInfo(expandedInfo === 'sessions' ? null : 'sessions')}
                         className="relative p-6 border-4 bg-black hover:bg-white/5 transition-all"
