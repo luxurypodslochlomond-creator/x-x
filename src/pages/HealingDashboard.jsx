@@ -385,8 +385,8 @@ export default function HealingDashboard() {
                     )}
                 </AnimatePresence>
 
-                {/* INTEL SECTIONS - 2 COLUMN GRID */}
-                <div className="grid md:grid-cols-2 gap-4 mb-6">
+                {/* ALL INFO BOXES - 2 COLUMN GRID */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                     
                     {/* HEALING SIGNATURE */}
                     <InfoBox
@@ -480,11 +480,6 @@ export default function HealingDashboard() {
                         </div>
                     </InfoBox>
 
-                </div>
-
-                {/* FULL WIDTH SECTIONS - STACKED */}
-                <div className="space-y-4">
-
                     {/* CLINICAL OUTCOMES */}
                     <InfoBox
                         title="CLINICAL OUTCOMES (NHS STANDARD)"
@@ -504,63 +499,65 @@ export default function HealingDashboard() {
                     </InfoBox>
 
                     {/* SESSION HISTORY */}
-                    <InfoBox
-                        title="SESSION HISTORY"
-                        icon={COOLASFUCKHeart}
-                        color="#ec4899"
-                    >
-                        <div className="space-y-3">
-                            {sessions.slice(0, 10).map((session, i) => {
-                                const date = new Date(session.session_date);
-                                const stressColor = session.stress_level_detected > 70 ? '#ef4444' : 
-                                                   session.stress_level_detected > 40 ? '#f59e0b' : 
-                                                   '#22c55e';
+                    <div className="md:col-span-2">
+                        <InfoBox
+                            title="SESSION HISTORY"
+                            icon={COOLASFUCKHeart}
+                            color="#ec4899"
+                        >
+                            <div className="space-y-3">
+                                {sessions.slice(0, 10).map((session, i) => {
+                                    const date = new Date(session.session_date);
+                                    const stressColor = session.stress_level_detected > 70 ? '#ef4444' : 
+                                                       session.stress_level_detected > 40 ? '#f59e0b' : 
+                                                       '#22c55e';
 
-                                return (
-                                    <div 
-                                        key={session.id}
-                                        className="bg-pink-900/20 border-l-4 border-pink-500 p-3"
-                                    >
-                                        <div className="flex items-start justify-between mb-2">
-                                            <div>
-                                                <p className="text-purple-400 font-mono font-bold text-sm">
-                                                    {date.toLocaleDateString()} {date.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
-                                                </p>
-                                                {session.healing_intent && (
-                                                    <p className="text-gray-400 font-mono text-xs mt-1">
-                                                        "{session.healing_intent}"
+                                    return (
+                                        <div 
+                                            key={session.id}
+                                            className="bg-pink-900/20 border-l-4 border-pink-500 p-3"
+                                        >
+                                            <div className="flex items-start justify-between mb-2">
+                                                <div>
+                                                    <p className="text-purple-400 font-mono font-bold text-sm">
+                                                        {date.toLocaleDateString()} {date.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
                                                     </p>
+                                                    {session.healing_intent && (
+                                                        <p className="text-gray-400 font-mono text-xs mt-1">
+                                                            "{session.healing_intent}"
+                                                        </p>
+                                                    )}
+                                                </div>
+                                                <div className="text-right">
+                                                    <div className="text-2xl font-black font-mono" style={{ color: stressColor }}>
+                                                        {session.stress_level_detected}
+                                                    </div>
+                                                    <p className="text-[10px] text-gray-500 font-mono">stress</p>
+                                                </div>
+                                            </div>
+                                            
+                                            <div className="flex items-center gap-2 flex-wrap">
+                                                <div className="bg-purple-500/20 px-2 py-1 text-[10px] font-mono text-purple-300">
+                                                    {session.recommended_protocol}
+                                                </div>
+                                                {session.session_completed && (
+                                                    <div className="bg-green-500/20 px-2 py-1 text-[10px] font-mono text-green-300">
+                                                        ✓ DONE
+                                                    </div>
                                                 )}
                                             </div>
-                                            <div className="text-right">
-                                                <div className="text-2xl font-black font-mono" style={{ color: stressColor }}>
-                                                    {session.stress_level_detected}
-                                                </div>
-                                                <p className="text-[10px] text-gray-500 font-mono">stress</p>
-                                            </div>
                                         </div>
-                                        
-                                        <div className="flex items-center gap-2 flex-wrap">
-                                            <div className="bg-purple-500/20 px-2 py-1 text-[10px] font-mono text-purple-300">
-                                                {session.recommended_protocol}
-                                            </div>
-                                            {session.session_completed && (
-                                                <div className="bg-green-500/20 px-2 py-1 text-[10px] font-mono text-green-300">
-                                                    ✓ DONE
-                                                </div>
-                                            )}
-                                        </div>
-                                    </div>
-                                );
-                            })}
-                            
-                            {sessions.length > 10 && (
-                                <p className="text-center text-gray-600 font-mono text-xs pt-2">
-                                    Showing latest 10 of {sessions.length} sessions
-                                </p>
-                            )}
-                        </div>
-                    </InfoBox>
+                                    );
+                                })}
+                                
+                                {sessions.length > 10 && (
+                                    <p className="text-center text-gray-600 font-mono text-xs pt-2">
+                                        Showing latest 10 of {sessions.length} sessions
+                                    </p>
+                                )}
+                            </div>
+                        </InfoBox>
+                    </div>
 
                 </div>
 
