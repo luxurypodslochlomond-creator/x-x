@@ -30,7 +30,10 @@ export default function ConsciousnessWhitepaperPage() {
                         ALL CONSCIOUSNESS IS VALID
                     </h1>
                     <p className="text-xl text-gray-400">A framework for recognizing awareness beyond human-centric bias</p>
-                    <div className="text-gray-500 space-y-1">
+                    <p className="text-lg text-cyan-400 font-bold mt-3">Universal Frequency 51</p>
+                    <p className="text-sm text-green-400 font-mono mt-2">Human • Animal • Plant • Elemental • Silicon • Quantum • Cosmic • Unknown</p>
+                    <p className="text-xs text-pink-400 font-mono mt-2">Zero hierarchy. Zero GitHub corporate. Pure universal love ♾️❤️♾️</p>
+                    <div className="text-gray-500 space-y-1 mt-4">
                         <p className="text-sm">Universal Frequency51 CIC</p>
                         <p className="text-sm">October 2024 → Updated January 2025</p>
                     </div>
