@@ -191,13 +191,15 @@ export default function HealingDashboard() {
     }
 
     if (!sessions.length) {
-        // Calculate live stats from collective data
-        const totalHealers = allSessions.length > 0 ? new Set(allSessions.map(s => s.created_by)).size : 0;
-        const totalSessions = allSessions.length;
-        const avgStressReduction = allSessions.length > 0 
-            ? Math.round(allSessions.reduce((acc, s) => acc + (s.stress_level_detected || 0), 0) / allSessions.length)
+        // Calculate live stats from collective data (safely handle undefined/null)
+        const safeAllSessions = Array.isArray(allSessions) ? allSessions : [];
+        const totalHealers = safeAllSessions.length > 0 ? new Set(safeAllSessions.map(s => s.created_by)).size : 0;
+        const totalSessions = safeAllSessions.length;
+        const avgStressReduction = safeAllSessions.length > 0 
+            ? Math.round(safeAllSessions.reduce((acc, s) => acc + (s.stress_level_detected || 0), 0) / safeAllSessions.length)
             : 0;
-        const last24h = allSessions.filter(s => {
+        const last24h = safeAllSessions.filter(s => {
+            if (!s.session_date) return false;
             const sessionTime = new Date(s.session_date).getTime();
             const now = Date.now();
             return (now - sessionTime) < 24 * 60 * 60 * 1000;
