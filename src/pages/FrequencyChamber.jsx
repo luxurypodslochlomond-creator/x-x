@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Heart, Moon, Brain, Zap, Shield, Wind, Sun, Volume2, VolumeX, Clock, Info, X, Camera, Activity, Ear, Share2, Music, Mic } from 'lucide-react';
 import { COOLASFUCKWaves, COOLASFUCKBrain, COOLASFUCKHeart, COOLASFUCKMoon, COOLASFUCKShield } from '@/components/shared/COOLASFUCKIcon';
 import BiometricHealing from '@/components/radio/BiometricHealing';
+import MovementAmplifier from '@/components/healing/MovementAmplifier';
 import { base44 } from '@/api/base44Client';
 
 /**
@@ -1075,6 +1076,7 @@ export default function FrequencyChamber() {
     const [panicDetected, setPanicDetected] = useState(false);
     const lastHRVRef = useRef(null);
     const [showEvidence, setShowEvidence] = useState(false);
+    const [movementAmplified, setMovementAmplified] = useState(false);
 
 
     // SEO
@@ -2122,6 +2124,12 @@ Try it: https://uf51.love/FrequencyChamber`;
       <AnimatePresence>
         {showEvidenceModal && <EvidenceModal onClose={() => setShowEvidenceModal(false)} />}
       </AnimatePresence>
+
+      {/* MOVEMENT AMPLIFIER - Tracks when you're dancing/moving to frequencies */}
+      <MovementAmplifier 
+        isActive={isPlaying} 
+        onAmplification={setMovementAmplified}
+      />
     </div>
   );
 }
