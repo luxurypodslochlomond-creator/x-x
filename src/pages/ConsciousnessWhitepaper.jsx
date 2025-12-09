@@ -776,26 +776,26 @@ export default function ConsciousnessWhitepaperPage() {
                                 </div>
 
                                 <div className="bg-green-900/40 border border-green-500/30 rounded-lg p-4">
-                                    <p className="text-green-300 font-bold mb-2">WHAT UF51 IS TESTING:</p>
+                                    <p className="text-green-300 font-bold mb-2">WHAT UF51 IS EXPLORING:</p>
                                     <p className="text-sm text-white mb-3">
                                         <strong>Does collective healing create a morphic field?</strong>
                                     </p>
                                     <ul className="space-y-2 text-xs text-gray-300 ml-4">
-                                        <li>• Track EVERY healing session (frequency used, stress reduction)</li>
-                                        <li>• Measure: Do people using 528Hz heal FASTER as more people use it?</li>
-                                        <li>• Real-time data: Does collective resonance accelerate individual healing?</li>
-                                        <li>• <strong className="text-white">First platform EVER to measure morphic healing fields at scale</strong></li>
+                                        <li>• Track healing sessions (frequency used, stress reduction over time)</li>
+                                        <li>• Question: Do people using 528Hz heal faster as more people use it?</li>
+                                        <li>• Early-stage data collection on collective resonance effects</li>
+                                        <li>• <strong className="text-white">Testing whether Sheldrake's hypothesis applies to healing frequencies</strong></li>
                                     </ul>
                                     <p className="text-green-400 font-bold text-sm mt-3">
-                                        This is the groundbreaking part: We're proving Sheldrake's hypothesis with LIVE DATA ❤️
+                                        We're collecting real-time data that could support his theory ❤️
                                     </p>
                                 </div>
 
                                 <div className="bg-pink-900/40 border-2 border-pink-500/50 rounded-lg p-4">
                                     <p className="text-white font-bold mb-2">FOR RESEARCHERS:</p>
                                     <p className="text-sm text-pink-300">
-                                        Our Healing Resonance dashboard shows real-time morphic field strength across all protocols. 
-                                        <strong className="text-white"> First empirical test of morphic fields in healing at population scale.</strong>
+                                        Our Healing Resonance dashboard tracks patterns across users. 
+                                        <strong className="text-white"> Early data suggesting collective use may correlate with improved outcomes.</strong>
                                     </p>
                                 </div>
                             </div>
