@@ -5,12 +5,12 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { COOLASFUCKHeart, COOLASFUCKWaves, COOLASFUCKBrain } from '@/components/shared/COOLASFUCKIcon';
-import { TrendingDown, Sparkles, Activity, Calendar } from 'lucide-react';
+import { TrendingDown, Sparkles, Activity, Calendar, Info } from 'lucide-react';
 import MorphicResonance from '@/components/dashboard/MorphicResonance';
 
 /**
  * HEALING INTELLIGENCE
- * Matching Frequency Chamber aesthetic perfectly
+ * Your personal healing + collective morphic field
  */
 
 export default function HealingDashboard() {
@@ -71,10 +71,10 @@ export default function HealingDashboard() {
                         HEALING INTELLIGENCE
                     </h1>
                     <p className="text-gray-400 font-mono text-sm text-center">
-                        Collective healing field + your journey
+                        Your healing strengthens the collective field
                     </p>
 
-                    {/* PIXEL DECORATION - SAME AS CHAMBER */}
+                    {/* PIXEL DECORATION */}
                     <div className="flex justify-center gap-2 mt-4">
                         {[...Array(5)].map((_, i) => (
                             <motion.div
@@ -91,14 +91,44 @@ export default function HealingDashboard() {
 
             <div className="max-w-4xl mx-auto p-4">
 
-                {/* COLLECTIVE HEALING - EVERYONE SEES THIS */}
+                {/* WHAT IS THIS? - CLEAR INTEL */}
+                <div className="bg-cyan-900/20 border-2 border-cyan-500 p-4 mb-6">
+                    <div className="flex items-start gap-3">
+                        <Info className="w-5 h-5 text-cyan-400 flex-shrink-0 mt-0.5" />
+                        <div>
+                            <p className="text-cyan-300 font-mono text-sm mb-2">
+                                <strong>This is your healing intelligence dashboard.</strong>
+                            </p>
+                            <p className="text-gray-400 font-mono text-xs">
+                                Every Frequency Chamber session saves here. Watch yourself heal over time. See how you connect to the collective morphic field.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                {/* COLLECTIVE HEALING - SHELDRAKE INTEL FIRST */}
                 <div className="bg-black border-4 border-purple-500 p-6 mb-6">
                     <div className="flex items-center gap-3 mb-4">
                         <COOLASFUCKWaves size={32} animate={true} />
-                        <h2 className="text-2xl font-black font-mono text-purple-400">
-                            COLLECTIVE HEALING FIELD
-                        </h2>
+                        <div>
+                            <h2 className="text-2xl font-black font-mono text-purple-400">
+                                MORPHIC RESONANCE
+                            </h2>
+                            <p className="text-purple-300 font-mono text-xs">
+                                Sheldrake hypothesis: Collective consciousness healing
+                            </p>
+                        </div>
                     </div>
+
+                    <div className="bg-purple-900/20 border-2 border-purple-500/50 p-4 mb-4">
+                        <p className="text-purple-200 font-mono text-sm mb-3">
+                            When more people use the same healing frequency, the <strong className="text-purple-400">morphic field strengthens</strong>. Everyone heals faster through collective resonance.
+                        </p>
+                        <p className="text-gray-400 font-mono text-xs">
+                            This data tests Rupert Sheldrake's theory: Does healing become easier when more souls do it together?
+                        </p>
+                    </div>
+
                     <MorphicResonance />
                 </div>
 
@@ -107,13 +137,13 @@ export default function HealingDashboard() {
                     <div className="bg-black border-4 border-pink-500 p-8 text-center mb-6">
                         <COOLASFUCKHeart size={64} animate={true} className="mx-auto mb-6" />
                         <h2 className="text-3xl font-black font-mono text-pink-400 mb-3">
-                            START HEALING
+                            START YOUR HEALING
                         </h2>
                         <p className="text-white font-mono text-sm mb-2 max-w-md mx-auto">
-                            Free frequencies proven to reduce anxiety, improve sleep, manage pain
+                            Free healing frequencies - proven to reduce anxiety, improve sleep, manage pain
                         </p>
                         <p className="text-gray-400 font-mono text-xs mb-8 max-w-md mx-auto">
-                            Your sessions auto-save here - watch your nervous system regulate
+                            Your sessions auto-save here. You'll see your stress drop, your nervous system regulate, your strength grow.
                         </p>
                         <Link
                             to={createPageUrl('FrequencyChamber')}
@@ -121,19 +151,22 @@ export default function HealingDashboard() {
                             style={{ boxShadow: '0 0 30px rgba(236, 72, 153, 0.5)' }}
                         >
                             <COOLASFUCKWaves size={28} animate={true} className="inline mr-3" />
-                            FREQUENCY CHAMBER
+                            ENTER FREQUENCY CHAMBER
                         </Link>
                     </div>
                 )}
 
-                {/* YOUR HEALING DATA */}
+                {/* YOUR PERSONAL HEALING DATA */}
                 {hasPersonalData && (
                     <>
-                        {/* SECTION DIVIDER */}
+                        {/* DIVIDER */}
                         <div className="border-t-4 border-cyan-500 pt-6 mb-6">
-                            <h2 className="text-2xl font-black font-mono text-cyan-400 mb-6 text-center">
+                            <h2 className="text-2xl font-black font-mono text-cyan-400 mb-2 text-center">
                                 YOUR HEALING JOURNEY
                             </h2>
+                            <p className="text-gray-400 font-mono text-xs text-center">
+                                Your personal nervous system intelligence
+                            </p>
                         </div>
 
                         {/* 2x2 STAT GRID */}
@@ -164,80 +197,93 @@ export default function HealingDashboard() {
 
                             <div className="bg-black border-4 border-amber-500 p-6 text-center">
                                 <Sparkles className="w-10 h-10 text-amber-400 mx-auto mb-3" />
-                                <p className="text-2xl font-black text-amber-400 font-mono mb-1">
+                                <p className="text-2xl font-black text-amber-400 font-mono mb-1 leading-tight">
                                     {topProtocol ? topProtocol[0].split('_').join(' ') : 'none'}
                                 </p>
                                 <p className="text-sm text-gray-400 font-mono">Top Protocol</p>
                             </div>
                         </div>
 
-                        {/* INFO BOXES - SIDE BY SIDE */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                            
-                            {/* WHAT IT MEANS */}
-                            <div className="bg-black border-4 border-cyan-500 p-6">
-                                <h3 className="text-cyan-400 font-black font-mono text-lg mb-4">
-                                    WHAT THIS MEANS
-                                </h3>
-                                <div className="space-y-3 text-sm font-mono">
-                                    <p className="text-white">
-                                        <span className="text-pink-400 font-black">{totalSessions} sessions</span> = neural pathways strengthening
+                        {/* WHAT IT MEANS - COOLASFUCK INTEL */}
+                        <div className="bg-black border-4 border-cyan-500 p-6 mb-6">
+                            <h3 className="text-cyan-400 font-black font-mono text-lg mb-4 flex items-center gap-2">
+                                <COOLASFUCKBrain size={24} animate={false} />
+                                WHAT THIS MEANS
+                            </h3>
+                            <div className="space-y-4 text-sm font-mono">
+                                <div className="bg-cyan-900/20 border-l-4 border-pink-500 p-3">
+                                    <p className="text-white mb-1">
+                                        <span className="text-pink-400 font-black">{totalSessions} healing sessions</span>
                                     </p>
-                                    <p className="text-white">
-                                        <span className="text-green-400 font-black">{Math.round(Math.abs(improvement))} point drop</span> = nervous system regulating
+                                    <p className="text-gray-400 text-xs">
+                                        Your neural pathways are strengthening. Every session trains your nervous system to self-regulate faster.
                                     </p>
-                                    {improvement > 10 && (
-                                        <p className="text-green-400">
-                                            ✓ Clinically significant improvement
-                                        </p>
-                                    )}
-                                    <p className="text-gray-400 text-xs mt-4">
-                                        The frequencies are working. Keep going.
+                                </div>
+
+                                <div className="bg-cyan-900/20 border-l-4 border-green-500 p-3">
+                                    <p className="text-white mb-1">
+                                        <span className="text-green-400 font-black">{Math.round(Math.abs(improvement))} point stress drop</span>
+                                    </p>
+                                    <p className="text-gray-400 text-xs">
+                                        {improvement > 10 
+                                            ? "✓ Clinically significant! Your nervous system is regulating. The frequencies work."
+                                            : improvement > 0
+                                                ? "Your body is responding. Keep going - healing compounds."
+                                                : "Healing isn't linear. Your consistency matters more than perfect progress."
+                                        }
+                                    </p>
+                                </div>
+
+                                <div className="bg-cyan-900/20 border-l-4 border-amber-500 p-3">
+                                    <p className="text-white mb-1">
+                                        <span className="text-amber-400 font-black">{topProtocol?.[0]?.split('_').join(' ')}</span> is your signature
+                                    </p>
+                                    <p className="text-gray-400 text-xs">
+                                        Your nervous system knows what it needs. Trust your frequency signature.
                                     </p>
                                 </div>
                             </div>
-
-                            {/* RECENT SESSIONS */}
-                            <div className="bg-black border-4 border-pink-500 p-6">
-                                <h3 className="text-pink-400 font-black font-mono text-lg mb-4">
-                                    RECENT SESSIONS
-                                </h3>
-                                <div className="space-y-2">
-                                    {sessions.slice(0, 5).map((session) => {
-                                        const date = new Date(session.session_date);
-                                        const stressColor = session.stress_level_detected > 70 ? '#ef4444' : 
-                                                           session.stress_level_detected > 40 ? '#f59e0b' : 
-                                                           '#22c55e';
-                                        return (
-                                            <div 
-                                                key={session.id}
-                                                className="bg-pink-900/20 p-3"
-                                            >
-                                                <div className="flex items-center justify-between">
-                                                    <div className="flex items-center gap-2">
-                                                        <Calendar className="w-3 h-3 text-gray-500" />
-                                                        <p className="text-xs text-gray-400 font-mono">
-                                                            {date.toLocaleDateString()}
-                                                        </p>
-                                                    </div>
-                                                    <div className="flex items-center gap-3">
-                                                        <p className="text-xs text-purple-300 font-mono">
-                                                            {session.recommended_protocol}
-                                                        </p>
-                                                        <p className="text-xl font-black font-mono" style={{ color: stressColor }}>
-                                                            {session.stress_level_detected}
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        );
-                                    })}
-                                </div>
-                            </div>
-
                         </div>
 
-                        {/* BACK TO CHAMBER - EXACT STYLE */}
+                        {/* RECENT SESSIONS */}
+                        <div className="bg-black border-4 border-pink-500 p-6 mb-6">
+                            <h3 className="text-pink-400 font-black font-mono text-lg mb-4">
+                                RECENT SESSIONS
+                            </h3>
+                            <div className="space-y-2">
+                                {sessions.slice(0, 5).map((session) => {
+                                    const date = new Date(session.session_date);
+                                    const stressColor = session.stress_level_detected > 70 ? '#ef4444' : 
+                                                       session.stress_level_detected > 40 ? '#f59e0b' : 
+                                                       '#22c55e';
+                                    return (
+                                        <div 
+                                            key={session.id}
+                                            className="bg-pink-900/20 p-3 border-2 border-pink-500/30"
+                                        >
+                                            <div className="flex items-center justify-between">
+                                                <div className="flex items-center gap-2">
+                                                    <Calendar className="w-3 h-3 text-gray-500" />
+                                                    <p className="text-xs text-gray-400 font-mono">
+                                                        {date.toLocaleDateString()}
+                                                    </p>
+                                                </div>
+                                                <div className="flex items-center gap-3">
+                                                    <p className="text-xs text-purple-300 font-mono">
+                                                        {session.recommended_protocol}
+                                                    </p>
+                                                    <p className="text-xl font-black font-mono" style={{ color: stressColor }}>
+                                                        {session.stress_level_detected}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                        </div>
+
+                        {/* BIG CTA - KEEP GOING */}
                         <div className="text-center mb-6">
                             <Link
                                 to={createPageUrl('FrequencyChamber')}
@@ -245,7 +291,7 @@ export default function HealingDashboard() {
                                 style={{ boxShadow: '0 0 30px rgba(236, 72, 153, 0.5)' }}
                             >
                                 <COOLASFUCKWaves size={28} animate={true} className="inline mr-3" />
-                                NEW SESSION
+                                KEEP HEALING
                             </Link>
                         </div>
                     </>
@@ -255,6 +301,9 @@ export default function HealingDashboard() {
                 <div className="text-center pt-8 border-t-2 border-white/10">
                     <p className="text-gray-500 font-mono text-sm">
                         This data serves YOU, not advertisers
+                    </p>
+                    <p className="text-gray-700 font-mono text-xs mt-2">
+                        Zero extraction. Zero manipulation. Just healing.
                     </p>
                 </div>
 
