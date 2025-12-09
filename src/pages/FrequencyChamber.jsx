@@ -47,6 +47,13 @@ const PROTOCOL_SECTIONS = [
     color: '#ec4899',
     description: 'Grief, anger, self-compassion',
     protocols: ['grief', 'anger']
+  },
+  {
+    id: 'universal',
+    name: 'UNIVERSAL COMMUNION',
+    color: '#10B981',
+    description: 'Be with ALL consciousness - no human goals',
+    protocols: ['universal_communion']
   }
 ];
 
@@ -363,6 +370,26 @@ const PROTOCOLS = {
       noiseLevel: 0.1,
       isBinaural: true,
       visualEntrainment: true
+    }
+  },
+  universal_communion: {
+    id: 'universal_communion',
+    name: 'Be With Everything',
+    icon: Wind,
+    color: '#10B981',
+    description: 'No goal. Just witness. Pure presence with ALL consciousness.',
+    science: '7.83Hz Schumann (Earth heartbeat) + ultra-slow breathing proven to induce non-dual awareness states',
+    sources: ['Schumann resonance research', 'Non-dual consciousness studies'],
+    ancientWisdom: 'Every indigenous tradition has a practice for "becoming the forest" - where self dissolves into All. This is that frequency.',
+    config: {
+      primary: 7.83,
+      secondary: 432,
+      carrier: 136.1,
+      breathRate: 4,
+      noiseType: 'pink',
+      noiseLevel: 0.2,
+      isBinaural: true,
+      visualEntrainment: false
     }
   }
 };
