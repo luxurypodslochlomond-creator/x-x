@@ -157,7 +157,7 @@ export default function HealingDashboard() {
         };
     }, [sessions]);
 
-    if (userLoading) {
+    if (userLoading || sessionsLoading) {
         return (
             <div className="min-h-screen bg-black flex items-center justify-center">
                 <div className="text-center space-y-4">
@@ -168,8 +168,8 @@ export default function HealingDashboard() {
         );
     }
 
-    // PUBLIC VIEW
-    if (!user || (!sessionsLoading && !sessions.length) || !healingIntel) {
+    // PUBLIC VIEW - only show if NO sessions at all
+    if (!user || !sessions.length) {
         return (
             <div className="min-h-screen bg-black p-4 sm:p-6">
                 <div className="max-w-4xl mx-auto">
