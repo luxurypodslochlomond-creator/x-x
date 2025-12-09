@@ -97,6 +97,15 @@ export default function HealingDashboard() {
         enabled: !!user
     });
 
+    // Fetch all sessions for collective stats (always enabled for dashboard view)
+    const { data: allSessions = [] } = useQuery({
+        queryKey: ['all-healing-sessions'],
+        queryFn: async () => {
+            const sessions = await base44.entities.VoiceHealingSession.list();
+            return sessions;
+        }
+    });
+
     // Calculate healing intel
     const healingIntel = useMemo(() => {
         if (!sessions.length) return null;
@@ -180,16 +189,6 @@ export default function HealingDashboard() {
             </div>
         );
     }
-
-    // Fetch collective data even without personal sessions
-    const { data: allSessions = [] } = useQuery({
-        queryKey: ['all-healing-sessions'],
-        queryFn: async () => {
-            const sessions = await base44.entities.VoiceHealingSession.list();
-            return sessions;
-        },
-        enabled: !sessions.length
-    });
 
     if (!sessions.length) {
         // Calculate live stats from collective data
