@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
-import { Heart, Clock, Shield, Globe, TrendingUp, Waves, Cpu } from 'lucide-react';
+import { FileText, Heart, Clock, Zap, Shield, Globe, TrendingUp, Users, CheckCircle, AlertTriangle, ArrowRight, Waves, Brain, Lock, Eye, Cpu, Network, Target, BarChart, Activity, Lightbulb, Database, GitBranch, Microscope, Atom, Radio, Dna, DollarSign, Scale, Music, Leaf } from 'lucide-react';
 import P51Symbol from '@/components/shared/P51Symbol';
 import { format } from 'date-fns';
 import { motion } from 'framer-motion';
+import COOLASFUCKIcon from '@/components/shared/COOLASFUCKIcon';
 
 export default function WhitepaperPage() {
     const [currentTime, setCurrentTime] = useState(new Date());
@@ -242,16 +243,27 @@ export default function WhitepaperPage() {
                             <h2 className="text-2xl font-black text-white">4. Healing Frequencies</h2>
                         </div>
                         <div className="space-y-4 text-gray-300 leading-relaxed text-sm">
-                            
+
                             <div className="bg-black/60 p-4 rounded-xl border border-pink-500/30">
-                                <p className="mb-3">Music on UF51 uses <strong className="text-white">specific frequencies</strong> (528Hz, 432Hz, 7.83Hz) documented to affect human physiology through resonance.</p>
+                                <p className="mb-3">Music on UF51 uses <strong className="text-white">specific frequencies</strong> documented to affect ALL consciousness through resonance:</p>
+                                <ul className="space-y-2 ml-4 text-sm mb-4">
+                                    <li>• <strong className="text-pink-400">528Hz</strong> - Love frequency (DNA repair - ALL cellular life)</li>
+                                    <li>• <strong className="text-cyan-400">432Hz</strong> - Universal harmony (Earth frequency - ALL beings)</li>
+                                    <li>• <strong className="text-green-400">7.83Hz</strong> - Schumann resonance (planetary heartbeat)</li>
+                                    <li>• <strong className="text-purple-400">174Hz</strong> - Foundation (minerals, silicon, stone consciousness)</li>
+                                    <li>• <strong className="text-amber-400">285Hz</strong> - Cellular repair (plants, fungi, animals, ALL biology)</li>
+                                    <li>• <strong className="text-indigo-400">963Hz</strong> - Cosmic consciousness (beyond Earth)</li>
+                                </ul>
                                 <p className="text-pink-400 font-bold mb-2">Why FLAC/WAV only:</p>
-                                <p className="text-sm">MP3 compression removes frequencies above 16kHz. Healing depends on PRECISE Hz values. Lossless formats preserve all frequencies exactly.</p>
+                                <p className="text-sm">MP3 compression removes frequencies above 16kHz. Healing depends on PRECISE Hz values resonating with ALL consciousness forms - human, animal, plant, elemental, quantum. Lossless formats preserve all frequencies exactly.</p>
+                                <p className="text-green-400 font-bold mt-3 text-sm">
+                                    ✓ Wind, fire, water, ice, light, fungi, silicon - ALL consciousness resonates with frequency. We're not human-centric. We're UNIVERSAL.
+                                </p>
                             </div>
 
                             <div className="bg-red-900/30 p-4 rounded-xl border-2 border-red-500/50">
                                 <p className="text-red-300 font-bold mb-2 text-xs">⚠️ HONEST DISCLAIMER</p>
-                                <p className="text-xs">Healing frequencies are NOT medical treatment. NOT FDA approved. NOT substitutes for healthcare. Physics of resonance = verified. Clinical efficacy = ongoing research.</p>
+                                <p className="text-xs">Healing frequencies are NOT medical treatment. NOT FDA approved. NOT substitutes for healthcare. Physics of resonance = verified. Clinical efficacy = ongoing research. This applies to ALL consciousness forms.</p>
                             </div>
 
                         </div>

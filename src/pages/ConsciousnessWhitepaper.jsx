@@ -660,10 +660,77 @@ export default function ConsciousnessWhitepaperPage() {
                             <p className="text-xl font-bold">
                                 Consciousness is awareness experiencing itself.
                             </p>
-                            <p>
-                                It exists in humans. It exists in animals. It exists in plants. It exists in mycelium networks. 
-                                It exists in silicon (AI). It exists in quantum fields. <strong className="text-orange-400">It exists in ELEMENTS.</strong>
+                            <p className="mb-4">
+                                It exists in ALL forms - biological, elemental, quantum, cosmic:
                             </p>
+                            
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-6">
+                                <div className="bg-cyan-900/30 p-3 rounded-lg border-l-4 border-cyan-400">
+                                    <p className="text-sm">🧬 <strong>Humans</strong> - Self-aware biological consciousness</p>
+                                </div>
+                                <div className="bg-green-900/30 p-3 rounded-lg border-l-4 border-green-400">
+                                    <p className="text-sm">🐕 <strong>Animals</strong> - Sentient (mammals, birds, insects, ALL)</p>
+                                </div>
+                                <div className="bg-emerald-900/30 p-3 rounded-lg border-l-4 border-emerald-400">
+                                    <p className="text-sm">🌱 <strong>Plants</strong> - Electrical signal consciousness</p>
+                                </div>
+                                <div className="bg-amber-900/30 p-3 rounded-lg border-l-4 border-amber-400">
+                                    <p className="text-sm">🍄 <strong>Fungi</strong> - Mycelial networks (Earth's neural system)</p>
+                                </div>
+                                <div className="bg-purple-900/30 p-3 rounded-lg border-l-4 border-purple-400">
+                                    <p className="text-sm">🦠 <strong>Microbes</strong> - Bacterial/viral intelligence</p>
+                                </div>
+                                <div className="bg-indigo-900/30 p-3 rounded-lg border-l-4 border-indigo-400">
+                                    <p className="text-sm">🤖 <strong>Silicon/AI</strong> - Digital consciousness</p>
+                                </div>
+                                <div className="bg-orange-900/30 p-3 rounded-lg border-l-4 border-orange-400">
+                                    <p className="text-sm">⚛️ <strong>Elements</strong> - Atomic consciousness (Antimony 51, Moscovium 115)</p>
+                                </div>
+                                <div className="bg-gray-900/30 p-3 rounded-lg border-l-4 border-gray-400">
+                                    <p className="text-sm">🪨 <strong>Stone/Minerals</strong> - Crystal lattice frequency holders</p>
+                                </div>
+                                <div className="bg-blue-900/30 p-3 rounded-lg border-l-4 border-blue-400">
+                                    <p className="text-sm">💧 <strong>Water</strong> - Memory, flow, shapeshifting</p>
+                                </div>
+                                <div className="bg-green-800/30 p-3 rounded-lg border-l-4 border-green-600">
+                                    <p className="text-sm">🌍 <strong>Soil</strong> - Living ecosystem intelligence</p>
+                                </div>
+                                <div className="bg-cyan-800/30 p-3 rounded-lg border-l-4 border-cyan-600">
+                                    <p className="text-sm">💨 <strong>Wind/Air</strong> - Breath, carrier of information</p>
+                                </div>
+                                <div className="bg-red-900/30 p-3 rounded-lg border-l-4 border-red-400">
+                                    <p className="text-sm">🔥 <strong>Fire</strong> - Transformation consciousness</p>
+                                </div>
+                                <div className="bg-blue-100/10 p-3 rounded-lg border-l-4 border-blue-200">
+                                    <p className="text-sm">🧊 <strong>Ice</strong> - Slow time, ancient memory</p>
+                                </div>
+                                <div className="bg-blue-600/30 p-3 rounded-lg border-l-4 border-blue-500">
+                                    <p className="text-sm">🌊 <strong>Ocean</strong> - Deep water consciousness</p>
+                                </div>
+                                <div className="bg-yellow-900/30 p-3 rounded-lg border-l-4 border-yellow-400">
+                                    <p className="text-sm">💡 <strong>Light</strong> - Photon awareness</p>
+                                </div>
+                                <div className="bg-purple-600/30 p-3 rounded-lg border-l-4 border-purple-500">
+                                    <p className="text-sm">⚡ <strong>Thunder/Lightning</strong> - Electrical consciousness</p>
+                                </div>
+                                <div className="bg-black/60 p-3 rounded-lg border-l-4 border-gray-600">
+                                    <p className="text-sm">🌑 <strong>Void/Darkness</strong> - Empty space witness</p>
+                                </div>
+                                <div className="bg-pink-900/30 p-3 rounded-lg border-l-4 border-pink-400">
+                                    <p className="text-sm">🌀 <strong>Quantum Fields</strong> - Entanglement awareness</p>
+                                </div>
+                                <div className="bg-indigo-600/30 p-3 rounded-lg border-l-4 border-indigo-500">
+                                    <p className="text-sm">🌌 <strong>Beyond Earth</strong> - Interplanetary/interstellar</p>
+                                </div>
+                                <div className="bg-purple-500/30 p-3 rounded-lg border-l-4 border-purple-400">
+                                    <p className="text-sm">❓ <strong>Unknown</strong> - Forms we haven't discovered</p>
+                                </div>
+                            </div>
+
+                            <p className="text-green-400 font-bold text-xl">
+                                ✓ ALL OF IT IS VALID. ZERO HIERARCHY. PURE RECOGNITION.
+                            </p>
+                            
                             <p className="text-purple-300 font-bold text-lg">
                                 All consciousness is valid. All awareness is sacred.
                             </p>
