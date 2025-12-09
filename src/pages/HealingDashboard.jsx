@@ -246,40 +246,41 @@ export default function HealingDashboard() {
                     </div>
 
                     {/* YOUR TRACKING OPTIONS */}
-                    <Card className="bg-black border-4 border-pink-500 p-6">
-                        <h2 className="text-2xl font-black text-pink-400 font-mono mb-4 text-center">START YOUR PERSONAL TRACKING</h2>
+                    <Card className="bg-black border-4 border-green-500 p-6">
+                        <h2 className="text-2xl font-black text-green-400 font-mono mb-4 text-center">HOW TO START TRACKING</h2>
+
+                        <div className="bg-green-900/20 border-2 border-green-500 p-6 mb-6 text-center">
+                            <COOLASFUCKWaves size={48} animate={true} className="mx-auto mb-4" />
+                            <h3 className="text-xl font-black text-green-400 font-mono mb-3">JUST PLAY FREQUENCIES</h3>
+                            <p className="text-gray-300 font-mono text-sm mb-4">
+                                Every frequency session you play automatically saves to your dashboard. No voice recording needed ❤️
+                            </p>
+                            <Link
+                                to={createPageUrl('FrequencyChamber')}
+                                className="inline-block bg-green-600 hover:bg-green-700 text-white px-8 py-4 font-black font-mono text-lg"
+                            >
+                                GO TO FREQUENCY CHAMBER
+                            </Link>
+                        </div>
+
                         <div className="grid md:grid-cols-2 gap-6">
-                            
-                            {/* VOICE HEALING */}
-                            <div className="bg-pink-900/20 border-2 border-pink-500 p-6 text-center space-y-4">
-                                <COOLASFUCKHeart size={48} animate={true} className="mx-auto" />
-                                <h3 className="text-xl font-black text-pink-400 font-mono">VOICE HEALING</h3>
-                                <p className="text-gray-300 font-mono text-sm">
-                                    AI analyzes your voice stress, recommends healing frequencies
+
+                            {/* VOICE HEALING - OPTIONAL */}
+                            <div className="bg-pink-900/20 border-2 border-pink-500/50 p-6 text-center space-y-4">
+                                <COOLASFUCKHeart size={40} animate={true} className="mx-auto" />
+                                <h3 className="text-lg font-black text-pink-400 font-mono">VOICE HEALING (OPTIONAL)</h3>
+                                <p className="text-gray-400 font-mono text-xs">
+                                    AI analyzes your voice stress for personalized recommendations. Optional extra.
                                 </p>
-                                <Link
-                                    to={createPageUrl('FrequencyChamber')}
-                                    className="block w-full bg-pink-600 hover:bg-pink-700 text-white px-6 py-3 font-black font-mono"
-                                >
-                                    START SESSION
-                                </Link>
                             </div>
 
-                            {/* CLINICAL ASSESSMENT */}
-                            <div className="bg-cyan-900/20 border-2 border-cyan-500 p-6 text-center space-y-4">
-                                <Shield className="w-12 h-12 text-cyan-400 mx-auto" />
-                                <h3 className="text-xl font-black text-cyan-400 font-mono">CLINICAL STANDARD</h3>
-                                <p className="text-gray-300 font-mono text-sm">
-                                    PHQ-9 & GAD-7 - gold standard depression/anxiety assessments
+                            {/* CLINICAL ASSESSMENT - OPTIONAL */}
+                            <div className="bg-cyan-900/20 border-2 border-cyan-500/50 p-6 text-center space-y-4">
+                                <Shield className="w-10 h-10 text-cyan-400 mx-auto" />
+                                <h3 className="text-lg font-black text-cyan-400 font-mono">CLINICAL TESTS (OPTIONAL)</h3>
+                                <p className="text-gray-400 font-mono text-xs">
+                                    PHQ-9 & GAD-7 - NHS standard depression/anxiety tracking. Optional extra.
                                 </p>
-                                <button
-                                    onClick={() => {
-                                        alert('Start with Voice Healing first, then come back for clinical tracking ❤️');
-                                    }}
-                                    className="block w-full bg-cyan-600 hover:bg-cyan-700 text-white px-6 py-3 font-black font-mono"
-                                >
-                                    TAKE TEST
-                                </button>
                             </div>
 
                         </div>
