@@ -609,29 +609,34 @@ export default function HealingDashboard() {
                     )}
                 </AnimatePresence>
 
-                {/* EXPANDABLE SECTIONS */}
+                {/* EXPANDABLE SECTIONS - SLEEK DESIGN */}
                 <div className="space-y-4">
-                    
+
                     {/* YOUR HEALING SIGNATURE */}
-                    <DashboardSection
-                        title="YOUR HEALING SIGNATURE"
-                        icon={COOLASFUCKWaves}
-                        color="border-cyan-500"
-                        defaultOpen={true}
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.5 }}
                     >
-                        <div className="space-y-4">
-                            <div className="bg-cyan-900/20 border-2 border-cyan-500 p-4">
-                                <p className="text-cyan-400 font-mono font-bold mb-2">Your go-to protocol:</p>
-                                <div className="flex items-center gap-3">
-                                    <div className="text-4xl font-black text-white font-mono">
+                        <DashboardSection
+                            title="YOUR HEALING SIGNATURE"
+                            icon={COOLASFUCKWaves}
+                            color="border-cyan-500"
+                            defaultOpen={false}
+                        >
+                        <div className="space-y-6">
+                            <div className="bg-cyan-900/30 backdrop-blur-sm border-l-4 border-cyan-500 p-5">
+                                <p className="text-cyan-400 font-mono font-bold text-sm mb-3">Your go-to protocol:</p>
+                                <div className="flex items-center gap-4 flex-wrap">
+                                    <div className="text-3xl sm:text-4xl font-black text-white font-mono">
                                         {healingIntel.topProtocol}
                                     </div>
-                                    <div className="text-cyan-300 font-mono text-sm">
-                                        Used {healingIntel.topProtocolCount} times
+                                    <div className="text-cyan-300 font-mono text-xs sm:text-sm bg-cyan-900/30 px-3 py-1 rounded-full">
+                                        Used {healingIntel.topProtocolCount}x
                                     </div>
                                 </div>
                             </div>
-                            <p className="text-gray-300 font-mono text-sm">
+                            <p className="text-gray-300 font-mono text-sm sm:text-base leading-relaxed">
                                 This is YOUR signature healing frequency. Your nervous system knows what it needs.
                             </p>
                         </div>
@@ -643,28 +648,30 @@ export default function HealingDashboard() {
                         icon={Clock}
                         color="border-pink-500"
                     >
-                        <div className="space-y-4">
-                            <div className="bg-pink-900/20 border-2 border-pink-500 p-4">
-                                <p className="text-pink-400 font-mono font-bold mb-2">Your hardest time:</p>
-                                <div className="text-4xl font-black text-white font-mono">
+                        <div className="space-y-6">
+                            <div className="bg-pink-900/30 backdrop-blur-sm border-l-4 border-pink-500 p-5">
+                                <p className="text-pink-400 font-mono font-bold text-sm mb-3">Your hardest time:</p>
+                                <div className="text-3xl sm:text-4xl font-black text-white font-mono">
                                     {healingIntel.peakStressHour}:00 - {(healingIntel.peakStressHour + 1) % 24}:00
                                 </div>
                             </div>
-                            
-                            <div className="space-y-2">
-                                <p className="text-gray-400 font-mono text-sm">24-hour stress pattern:</p>
-                                <PixelChart 
-                                    data={healingIntel.avgHourlyStress} 
-                                    color="bg-pink-500"
-                                />
-                                <div className="flex justify-between text-xs text-gray-500 font-mono">
-                                    <span>00:00</span>
-                                    <span>12:00</span>
-                                    <span>23:00</span>
+
+                            <div className="space-y-3">
+                                <p className="text-gray-400 font-mono text-sm font-bold">24-hour stress pattern:</p>
+                                <div className="bg-black/40 p-4 rounded-lg border border-pink-500/20">
+                                    <PixelChart 
+                                        data={healingIntel.avgHourlyStress} 
+                                        color="bg-pink-500"
+                                    />
+                                    <div className="flex justify-between text-xs text-gray-500 font-mono mt-2">
+                                        <span>00:00</span>
+                                        <span>12:00</span>
+                                        <span>23:00</span>
+                                    </div>
                                 </div>
                             </div>
-                            
-                            <p className="text-gray-300 font-mono text-sm">
+
+                            <p className="text-gray-300 font-mono text-sm sm:text-base leading-relaxed">
                                 The app could auto-suggest protocols at your peak stress times.
                             </p>
                         </div>
@@ -676,23 +683,25 @@ export default function HealingDashboard() {
                         icon={Activity}
                         color="border-green-500"
                     >
-                        <div className="space-y-4">
-                            <div className="bg-green-900/20 border-2 border-green-500 p-4">
-                                <p className="text-green-400 font-mono font-bold mb-2">Stress reduction:</p>
-                                <div className="text-4xl font-black text-white font-mono">
+                        <div className="space-y-6">
+                            <div className="bg-green-900/30 backdrop-blur-sm border-l-4 border-green-500 p-5">
+                                <p className="text-green-400 font-mono font-bold text-sm mb-3">Stress reduction:</p>
+                                <div className="text-3xl sm:text-4xl font-black text-white font-mono">
                                     {healingIntel.improvement > 0 ? '↓' : '↔'} {Math.round(Math.abs(healingIntel.improvement))} points
                                 </div>
                             </div>
-                            
-                            <div className="space-y-2">
-                                <p className="text-gray-400 font-mono text-sm">Last 7 sessions:</p>
-                                <PixelChart 
-                                    data={healingIntel.recentStress} 
-                                    color="bg-green-500"
-                                />
+
+                            <div className="space-y-3">
+                                <p className="text-gray-400 font-mono text-sm font-bold">Last 7 sessions:</p>
+                                <div className="bg-black/40 p-4 rounded-lg border border-green-500/20">
+                                    <PixelChart 
+                                        data={healingIntel.recentStress} 
+                                        color="bg-green-500"
+                                    />
+                                </div>
                             </div>
-                            
-                            <p className="text-gray-300 font-mono text-sm">
+
+                            <p className="text-gray-300 font-mono text-sm sm:text-base leading-relaxed">
                                 {healingIntel.improvement > 0 
                                     ? "Your nervous system is regulating. The frequencies are working."
                                     : "Keep going - healing isn't linear, it's a spiral."
@@ -707,15 +716,15 @@ export default function HealingDashboard() {
                         icon={Sparkles}
                         color="border-amber-500"
                     >
-                        <div className="space-y-4">
-                            <div className="bg-amber-900/20 border-2 border-amber-500 p-4">
-                                <p className="text-amber-400 font-mono font-bold mb-2">Current streak:</p>
-                                <div className="text-6xl font-black text-white font-mono">
+                        <div className="space-y-6">
+                            <div className="bg-amber-900/30 backdrop-blur-sm border-l-4 border-amber-500 p-5">
+                                <p className="text-amber-400 font-mono font-bold text-sm mb-3">Current streak:</p>
+                                <div className="text-5xl sm:text-6xl font-black text-white font-mono">
                                     {healingIntel.streak} days
                                 </div>
                             </div>
-                            
-                            <p className="text-gray-300 font-mono text-sm">
+
+                            <p className="text-gray-300 font-mono text-sm sm:text-base leading-relaxed">
                                 {healingIntel.streak > 0 
                                     ? `${healingIntel.streak} days of showing up for yourself. That's strength.`
                                     : "No pressure. Come back when you need it. That's self-love too."
@@ -754,11 +763,14 @@ export default function HealingDashboard() {
                                 const stressColor = session.stress_level_detected > 70 ? 'text-red-400' : 
                                                    session.stress_level_detected > 40 ? 'text-amber-400' : 
                                                    'text-green-400';
-                                
+
                                 return (
-                                    <div 
-                                        key={session.id} 
-                                        className="bg-purple-900/20 border-2 border-purple-500 p-4 hover:bg-purple-900/30 transition-colors"
+                                    <motion.div 
+                                        key={session.id}
+                                        initial={{ opacity: 0, x: -20 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        transition={{ delay: i * 0.05 }}
+                                        className="bg-pink-900/20 backdrop-blur-sm border-l-4 border-pink-500 p-4 hover:bg-pink-900/30 transition-all"
                                     >
                                         <div className="flex items-start justify-between mb-2">
                                             <div>
