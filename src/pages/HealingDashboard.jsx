@@ -157,7 +157,7 @@ export default function HealingDashboard() {
         };
     }, [sessions]);
 
-    if (userLoading || sessionsLoading) {
+    if (allSessionsLoading) {
         return (
             <div className="min-h-screen bg-black flex items-center justify-center">
                 <div className="text-center space-y-4">
@@ -168,91 +168,7 @@ export default function HealingDashboard() {
         );
     }
 
-    // PUBLIC VIEW - only show if NO sessions at all
-    if (!user || !sessions.length) {
-        return (
-            <div className="min-h-screen bg-black p-4 sm:p-6">
-                <div className="max-w-4xl mx-auto">
-                    
-                    {/* SIMPLE HEADER */}
-                    <div className="text-center mb-8">
-                        <COOLASFUCKBrain size={56} animate={true} className="mx-auto mb-4" />
-                        <h1 className="text-4xl md:text-5xl font-black font-mono text-white mb-2">
-                            HEALING RESONANCE
-                        </h1>
-                        <p className="text-gray-400 font-mono text-sm">
-                            Your healing strengthens the collective field
-                        </p>
-                    </div>
-
-                    {/* SIMPLE EXPLAINER */}
-                    <div className="bg-cyan-900/20 border-2 border-cyan-500/50 p-4 mb-6">
-                        <p className="text-cyan-300 font-mono text-sm text-center">
-                            Your healing patterns • Stress intel • Collective resonance<br/>
-                            <span className="text-gray-500 text-xs">Zero ads. Zero manipulation. Just healing intelligence.</span>
-                        </p>
-                    </div>
-
-                    {/* START TRACKING CTA */}
-                    <div className="border-4 border-green-500 bg-black p-6 mb-6">
-                        <h2 className="text-green-400 font-black font-mono text-xl mb-4 text-center">START TRACKING</h2>
-                        <p className="text-gray-300 font-mono text-sm text-center mb-6">
-                            Every frequency session you play automatically saves to your dashboard
-                        </p>
-                        <Link
-                            to={createPageUrl('FrequencyChamber')}
-                            className="block w-full bg-green-600 hover:bg-green-700 text-white text-center px-8 py-4 font-black font-mono text-lg border-4 border-green-400"
-                            style={{ boxShadow: '4px 4px 0px rgba(34, 197, 94, 0.5)' }}
-                        >
-                            GO TO FREQUENCY CHAMBER
-                        </Link>
-                    </div>
-
-                    {/* MORPHIC RESONANCE */}
-                    <div className="border-4 border-purple-500 bg-black p-6">
-                        <div className="flex items-center gap-3 mb-4">
-                            <COOLASFUCKWaves size={32} animate={true} />
-                            <h3 className="text-2xl font-black font-mono text-purple-400">
-                                COLLECTIVE HEALING
-                            </h3>
-                        </div>
-                        <MorphicResonance />
-                    </div>
-
-                </div>
-            </div>
-        );
-    }
-
-    // If healingIntel is null but we have sessions, show a safe version
-    if (!healingIntel) {
-        return (
-            <div className="min-h-screen bg-black p-4 sm:p-6">
-                <div className="max-w-4xl mx-auto">
-                    <div className="text-center mb-8">
-                        <COOLASFUCKBrain size={56} animate={true} className="mx-auto mb-4" />
-                        <h1 className="text-4xl md:text-5xl font-black font-mono text-white mb-2">
-                            HEALING RESONANCE
-                        </h1>
-                        <p className="text-gray-400 font-mono text-sm">
-                            Your healing strengthens the collective field
-                        </p>
-                    </div>
-                    <div className="bg-amber-900/20 border-2 border-amber-500 p-4 mb-6">
-                        <p className="text-amber-300 font-mono text-sm text-center">
-                            Processing your healing data... refresh in a moment
-                        </p>
-                    </div>
-                    <Link
-                        to={createPageUrl('FrequencyChamber')}
-                        className="block w-full bg-green-600 hover:bg-green-700 text-white text-center px-8 py-4 font-black font-mono text-lg border-4 border-green-400"
-                    >
-                        GO TO FREQUENCY CHAMBER
-                    </Link>
-                </div>
-            </div>
-        );
-    }
+    const hasPersonalSessions = user && sessions.length > 0 && healingIntel;
 
     return (
         <div className="min-h-screen bg-black text-white">
