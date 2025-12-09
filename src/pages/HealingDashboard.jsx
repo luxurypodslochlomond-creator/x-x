@@ -161,36 +161,19 @@ export default function HealingDashboard() {
         };
     }, [sessions]);
 
-    if (userLoading || sessionsLoading) {
+    if (userLoading) {
         return (
             <div className="min-h-screen bg-gradient-to-br from-black via-purple-950 to-black flex items-center justify-center">
                 <div className="text-center space-y-4">
                     <COOLASFUCKWaves size={64} animate={true} />
-                    <p className="text-white font-mono text-xl">Loading your healing resonance...</p>
+                    <p className="text-white font-mono text-xl">Loading...</p>
                 </div>
             </div>
         );
     }
 
-    if (!user) {
-        return (
-            <div className="min-h-screen bg-gradient-to-br from-black via-purple-950 to-black flex items-center justify-center p-6">
-                <Card className="bg-black border-4 border-cyan-500 p-8 max-w-md text-center space-y-6">
-                    <COOLASFUCKBrain size={64} animate={true} className="mx-auto" />
-                    <h1 className="text-3xl font-black text-cyan-400 font-mono">SIGN IN REQUIRED</h1>
-                    <p className="text-gray-300 font-mono">Sign in to see your healing resonance data</p>
-                    <button
-                        onClick={() => base44.auth.redirectToLogin()}
-                        className="w-full bg-cyan-600 hover:bg-cyan-700 text-white px-6 py-3 font-black font-mono"
-                    >
-                        SIGN IN
-                    </button>
-                </Card>
-            </div>
-        );
-    }
-
-    if (!sessions.length) {
+    // PUBLIC VIEW - Show collective data always
+    if (!user || (!sessionsLoading && !sessions.length)) {
         // Calculate live stats from collective data (safely handle undefined/null)
         const safeAllSessions = Array.isArray(allSessions) ? allSessions : [];
         const totalHealers = safeAllSessions.length > 0 ? new Set(safeAllSessions.map(s => s.created_by)).size : 0;
@@ -300,7 +283,7 @@ export default function HealingDashboard() {
                         </div>
                     </Card>
 
-                    {/* MORPHIC RESONANCE DATA */}
+                    {/* MORPHIC RESONANCE DATA - PUBLIC */}
                     <Card className="bg-black border-4 border-purple-500 p-6">
                         <div className="flex items-center gap-3 mb-4">
                             <COOLASFUCKWaves size={32} animate={true} />
@@ -313,6 +296,23 @@ export default function HealingDashboard() {
                         </p>
                         <MorphicResonance />
                     </Card>
+
+                    {/* SIGN IN FOR PERSONAL TRACKING */}
+                    {!user && (
+                        <Card className="bg-black border-4 border-cyan-500 p-6 text-center">
+                            <COOLASFUCKBrain size={48} animate={true} className="mx-auto mb-4" />
+                            <h3 className="text-2xl font-black text-cyan-400 font-mono mb-3">TRACK YOUR PERSONAL HEALING</h3>
+                            <p className="text-gray-300 font-mono text-sm mb-6">
+                                Sign in to track your stress patterns, progress over time, and get personalized insights.
+                            </p>
+                            <button
+                                onClick={() => base44.auth.redirectToLogin()}
+                                className="bg-cyan-600 hover:bg-cyan-700 text-white px-8 py-4 font-black font-mono text-lg"
+                            >
+                                SIGN IN TO TRACK
+                            </button>
+                        </Card>
+                    )}
 
                     <div className="text-center pt-4 space-y-2 border-t-2 border-white/10">
                         <p className="text-gray-500 font-mono text-sm">
