@@ -200,23 +200,15 @@ export default function HealingDashboard() {
                         <p className="text-gray-400 font-mono">Your healing strengthens the collective field</p>
                         </div>
 
-                        {/* WHAT IS THIS - COLLAPSIBLE EXPLAINER */}
-                        <DashboardSection
-                            title="WHAT IS THIS?"
-                            icon={COOLASFUCKBrain}
-                            color="border-cyan-500"
-                            defaultOpen={false}
-                        >
-                            <div className="space-y-3">
-                                <p className="text-gray-300 font-mono text-sm">
-                                    Your <strong className="text-white">personal healing data</strong> - patterns, progress, resonance. 
-                                    This is <strong className="text-cyan-400">YOURS</strong>, not corporate.
-                                </p>
-                                <p className="text-gray-400 font-mono text-xs">
-                                    Zero tracking for ads. Zero algorithms manipulating you. Just clean data showing your nervous system regulation over time.
-                                </p>
-                            </div>
-                        </DashboardSection>
+                        {/* WHAT IS THIS - SUBTLE EXPLAINER */}
+                        <div className="bg-cyan-900/10 border border-cyan-500/30 p-3 text-center">
+                            <p className="text-cyan-400 font-mono text-xs mb-1">
+                                Your healing data - <strong>YOURS</strong>, not corporate
+                            </p>
+                            <p className="text-gray-500 font-mono text-[10px]">
+                                Zero ads. Zero manipulation. Just your nervous system.
+                            </p>
+                        </div>
 
                         {/* LIVE COLLECTIVE STATS */}
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
