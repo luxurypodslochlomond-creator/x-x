@@ -807,19 +807,20 @@ export default function HealingDashboard() {
                                                 "{session.post_session_notes}"
                                             </p>
                                         )}
-                                    </div>
-                                );
-                            })}
-                            
-                            {sessions.length > 10 && (
-                                <p className="text-center text-gray-500 font-mono text-sm pt-2">
-                                    Showing latest 10 of {sessions.length} sessions
-                                </p>
-                            )}
-                        </div>
-                    </DashboardSection>
+                                    </motion.div>
+                                    );
+                                    })}
 
-                </div>
+                                    {sessions.length > 10 && (
+                                    <p className="text-center text-gray-500 font-mono text-xs sm:text-sm pt-4">
+                                    Showing latest 10 of {sessions.length} sessions
+                                    </p>
+                                    )}
+                                    </div>
+                                    </DashboardSection>
+                                    </motion.div>
+
+                                    </div>
 
                 {/* BACK TO CHAMBER - SLEEK CTA */}
                 <motion.div 
