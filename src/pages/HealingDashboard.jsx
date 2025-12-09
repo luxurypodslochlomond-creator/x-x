@@ -183,18 +183,75 @@ export default function HealingDashboard() {
 
     if (!sessions.length) {
         return (
-            <div className="min-h-screen bg-gradient-to-br from-black via-purple-950 to-black flex items-center justify-center p-6">
-                <Card className="bg-black border-4 border-pink-500 p-8 max-w-md text-center space-y-6">
-                    <COOLASFUCKHeart size={64} animate={true} className="mx-auto" />
-                    <h1 className="text-3xl font-black text-pink-400 font-mono">START YOUR JOURNEY</h1>
-                    <p className="text-gray-300 font-mono">Use the Frequency Chamber to begin tracking your healing journey</p>
-                    <Link
-                        to={createPageUrl('FrequencyChamber')}
-                        className="block w-full bg-pink-600 hover:bg-pink-700 text-white px-6 py-3 font-black font-mono"
-                    >
-                        START HEALING
-                    </Link>
-                </Card>
+            <div className="min-h-screen bg-gradient-to-br from-black via-purple-950 to-black p-6">
+                <div className="max-w-4xl mx-auto space-y-6">
+                    
+                    <div className="text-center space-y-4 mb-8">
+                        <COOLASFUCKBrain size={64} animate={true} className="mx-auto" />
+                        <h1 className="text-5xl font-black font-mono text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-cyan-400 to-green-400">
+                            START YOUR JOURNEY
+                        </h1>
+                        <p className="text-gray-400 font-mono">Two ways to begin tracking your healing</p>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 gap-6">
+                        
+                        {/* VOICE HEALING */}
+                        <Card className="bg-black border-4 border-pink-500 p-8 text-center space-y-4 hover:bg-pink-900/10 transition-all">
+                            <COOLASFUCKHeart size={64} animate={true} className="mx-auto" />
+                            <h2 className="text-2xl font-black text-pink-400 font-mono">VOICE HEALING</h2>
+                            <p className="text-gray-300 font-mono text-sm">
+                                Speak your healing intent, AI analyzes your voice stress, recommends frequencies
+                            </p>
+                            <Link
+                                to={createPageUrl('FrequencyChamber')}
+                                className="block w-full bg-pink-600 hover:bg-pink-700 text-white px-6 py-3 font-black font-mono"
+                            >
+                                START SESSION
+                            </Link>
+                        </Card>
+
+                        {/* CLINICAL ASSESSMENT */}
+                        <Card className="bg-black border-4 border-cyan-500 p-8 text-center space-y-4 hover:bg-cyan-900/10 transition-all">
+                            <Shield className="w-16 h-16 text-cyan-400 mx-auto" />
+                            <h2 className="text-2xl font-black text-cyan-400 font-mono">NHS ASSESSMENT</h2>
+                            <p className="text-gray-300 font-mono text-sm">
+                                Take PHQ-9 (depression) or GAD-7 (anxiety) - same tools NHS doctors use
+                            </p>
+                            <button
+                                onClick={() => {
+                                    // Scroll to clinical outcomes section after first session created
+                                    alert('Use Frequency Chamber Voice Healing first to create your first session, then come back here for clinical tracking ❤️');
+                                }}
+                                className="block w-full bg-cyan-600 hover:bg-cyan-700 text-white px-6 py-3 font-black font-mono"
+                            >
+                                TAKE TEST
+                            </button>
+                        </Card>
+
+                    </div>
+
+                    {/* MORPHIC RESONANCE PREVIEW */}
+                    <Card className="bg-black border-4 border-purple-500 p-8">
+                        <div className="flex items-center gap-3 mb-4">
+                            <COOLASFUCKWaves size={32} animate={true} />
+                            <h3 className="text-2xl font-black font-mono text-purple-400">
+                                COLLECTIVE HEALING (AVAILABLE NOW)
+                            </h3>
+                        </div>
+                        <MorphicResonance />
+                    </Card>
+
+                    <div className="text-center pt-4 space-y-2 border-t-2 border-white/10">
+                        <p className="text-gray-500 font-mono text-sm">
+                            This data serves YOU, not advertisers
+                        </p>
+                        <p className="text-gray-600 font-mono text-xs">
+                            Zero extraction. Zero manipulation. Just your healing journey ❤️
+                        </p>
+                    </div>
+
+                </div>
             </div>
         );
     }
