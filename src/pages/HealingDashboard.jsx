@@ -16,27 +16,71 @@ import MorphicResonance from '@/components/dashboard/MorphicResonance';
  * Data serves YOU, not advertisers
  */
 
-// Expandable section component
+// Expandable section component - FREQUENCY CHAMBER AESTHETIC
 const DashboardSection = ({ title, icon: Icon, color, children, defaultOpen = false }) => {
     const [isOpen, setIsOpen] = useState(defaultOpen);
     
+    const colorMap = {
+        'border-cyan-500': { 
+            border: 'border-cyan-500/30', 
+            borderHover: 'hover:border-cyan-500',
+            text: 'text-cyan-400',
+            bg: 'from-cyan-500/10',
+            glow: '0 0 30px rgba(34, 211, 238, 0.2)'
+        },
+        'border-pink-500': { 
+            border: 'border-pink-500/30', 
+            borderHover: 'hover:border-pink-500',
+            text: 'text-pink-400',
+            bg: 'from-pink-500/10',
+            glow: '0 0 30px rgba(236, 72, 153, 0.2)'
+        },
+        'border-green-500': { 
+            border: 'border-green-500/30', 
+            borderHover: 'hover:border-green-500',
+            text: 'text-green-400',
+            bg: 'from-green-500/10',
+            glow: '0 0 30px rgba(34, 197, 94, 0.2)'
+        },
+        'border-amber-500': { 
+            border: 'border-amber-500/30', 
+            borderHover: 'hover:border-amber-500',
+            text: 'text-amber-400',
+            bg: 'from-amber-500/10',
+            glow: '0 0 30px rgba(245, 158, 11, 0.2)'
+        },
+        'border-purple-500': { 
+            border: 'border-purple-500/30', 
+            borderHover: 'hover:border-purple-500',
+            text: 'text-purple-400',
+            bg: 'from-purple-500/10',
+            glow: '0 0 30px rgba(168, 85, 247, 0.2)'
+        },
+    };
+    
+    const c = colorMap[color] || colorMap['border-cyan-500'];
+    
     return (
-        <Card className={`bg-black border-4 ${color} overflow-hidden`}>
+        <Card className={`relative overflow-hidden bg-black/60 backdrop-blur-xl border-2 ${c.border} ${c.borderHover} transition-all`}
+              style={{ boxShadow: isOpen ? c.glow : 'none' }}>
+            <div className={`absolute inset-0 bg-gradient-to-br ${c.bg} via-transparent to-transparent opacity-${isOpen ? '100' : '0'} transition-opacity`} />
+            
             <button 
                 onClick={() => setIsOpen(!isOpen)}
-                className="w-full p-6 flex items-center justify-between hover:bg-white/5 transition-colors"
+                className="relative w-full p-5 sm:p-6 flex items-center justify-between group"
             >
                 <div className="flex items-center gap-4">
-                    <Icon size={32} animate={isOpen} className={color.replace('border-', 'text-')} />
-                    <h2 className={`text-2xl font-black font-mono ${color.replace('border-', 'text-')}`}>
+                    <Icon size={40} animate={isOpen} className={c.text} />
+                    <h2 className={`text-xl sm:text-2xl font-black font-mono ${c.text}`}>
                         {title}
                     </h2>
                 </div>
-                {isOpen ? (
-                    <ChevronDown className={`w-6 h-6 ${color.replace('border-', 'text-')}`} />
-                ) : (
-                    <ChevronRight className={`w-6 h-6 ${color.replace('border-', 'text-')}`} />
-                )}
+                <motion.div
+                    animate={{ rotate: isOpen ? 180 : 0 }}
+                    transition={{ duration: 0.3 }}
+                >
+                    <ChevronDown className={`w-6 h-6 ${c.text} opacity-60 group-hover:opacity-100 transition-opacity`} />
+                </motion.div>
             </button>
             
             <AnimatePresence>
@@ -45,10 +89,10 @@ const DashboardSection = ({ title, icon: Icon, color, children, defaultOpen = fa
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: 'auto', opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3 }}
+                        transition={{ duration: 0.3, ease: "easeOut" }}
                         className="overflow-hidden"
                     >
-                        <div className="p-6 pt-0 border-t-2 border-white/10">
+                        <div className="relative px-5 sm:px-6 pb-6 pt-2 border-t border-white/10">
                             {children}
                         </div>
                     </motion.div>
