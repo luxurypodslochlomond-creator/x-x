@@ -203,10 +203,10 @@ export default function HealingDashboard() {
                         {/* WHAT IS THIS - SUBTLE EXPLAINER */}
                         <div className="bg-cyan-900/10 border border-cyan-500/30 p-3 text-center">
                             <p className="text-cyan-400 font-mono text-xs mb-1">
-                                Your healing strengthens the collective field
+                                Your healing patterns, stress intel, collective resonance
                             </p>
                             <p className="text-gray-500 font-mono text-[10px]">
-                                Zero ads. Zero manipulation. Pure resonance data.
+                                Zero ads. Zero manipulation. Just healing intelligence.
                             </p>
                         </div>
 
