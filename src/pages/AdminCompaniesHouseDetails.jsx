@@ -110,6 +110,13 @@ export default function AdminCompaniesHouseDetailsPage() {
                   <p className="text-2xl font-mono font-black text-green-300">BRCT0000358715B</p>
                 </div>
               </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                <div>
+                  <p className="text-gray-400 text-sm">Corporation Tax Activation Code</p>
+                  <p className="text-2xl font-mono font-black text-cyan-300">863883389524</p>
+                  <p className="text-xs text-gray-400 mt-1">Expires: 01/12/2025</p>
+                </div>
+              </div>
               <div className="bg-green-900/30 border border-green-500/50 rounded-lg p-4 mt-4">
                 <p className="text-sm text-green-300 font-bold mb-2">
                   ✅ REGISTRATION COMPLETE
