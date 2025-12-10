@@ -247,7 +247,7 @@ function ScottManagerInner() {
             <ScottTimeline />
 
             {/* MONEY + TRAVEL - CLEAN */}
-            <div className="grid grid-cols-3 gap-3 mb-6">
+            <div className="grid grid-cols-3 gap-3 mb-4">
                 <Link to={createPageUrl('ScottInvoices')} className="w-full">
                     <motion.div whileTap={{ scale: 0.95 }}>
                         <div className="bg-black border border-green-500/30 rounded-xl p-4 text-center hover:border-green-500/60 transition-all">
@@ -269,6 +269,26 @@ function ScottManagerInner() {
                         <div className="bg-black border border-cyan-500/30 rounded-xl p-4 text-center hover:border-cyan-500/60 transition-all">
                             <p className="text-4xl font-black text-cyan-400 mb-2" style={{ fontFamily: 'monospace' }}>✈️</p>
                             <p className="text-xs text-cyan-500 tracking-wider font-bold" style={{ fontFamily: 'monospace' }}>VISAS</p>
+                        </div>
+                    </motion.div>
+                </Link>
+            </div>
+
+            {/* INDUSTRY TOOLS */}
+            <div className="grid grid-cols-2 gap-3 mb-6">
+                <Link to={createPageUrl('ScottPublishing')} className="w-full">
+                    <motion.div whileTap={{ scale: 0.95 }}>
+                        <div className="bg-black border border-purple-500/30 rounded-xl p-3 text-center hover:border-purple-500/60 transition-all">
+                            <p className="text-2xl mb-1">📚</p>
+                            <p className="text-xs text-purple-500 tracking-wider font-bold" style={{ fontFamily: 'monospace' }}>PUBLISHING</p>
+                        </div>
+                    </motion.div>
+                </Link>
+                <Link to={createPageUrl('ScottFeatureRequests')} className="w-full">
+                    <motion.div whileTap={{ scale: 0.95 }}>
+                        <div className="bg-black border border-amber-500/30 rounded-xl p-3 text-center hover:border-amber-500/60 transition-all">
+                            <p className="text-2xl mb-1">💡</p>
+                            <p className="text-xs text-amber-500 tracking-wider font-bold" style={{ fontFamily: 'monospace' }}>IDEAS</p>
                         </div>
                     </motion.div>
                 </Link>

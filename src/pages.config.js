@@ -172,6 +172,8 @@ import ScottExpenses from './pages/ScottExpenses';
 import AdminCanadaTeslaStrategy from './pages/AdminCanadaTeslaStrategy';
 import ScottTeam from './pages/ScottTeam';
 import ScottVisas from './pages/ScottVisas';
+import ScottPublishing from './pages/ScottPublishing';
+import ScottFeatureRequests from './pages/ScottFeatureRequests';
 import __Layout from './Layout.jsx';
 
 
@@ -350,6 +352,8 @@ export const PAGES = {
     "AdminCanadaTeslaStrategy": AdminCanadaTeslaStrategy,
     "ScottTeam": ScottTeam,
     "ScottVisas": ScottVisas,
+    "ScottPublishing": ScottPublishing,
+    "ScottFeatureRequests": ScottFeatureRequests,
 }
 
 export const pagesConfig = {
