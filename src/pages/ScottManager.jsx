@@ -195,46 +195,43 @@ function ScottManagerInner() {
                 </div>
             )}
 
-            {/* HEADER - CLEAN */}
-            <div className="flex items-center justify-between mb-6">
+            {/* HEADER - SHARP */}
+            <div className={`flex items-center justify-between mb-6 p-4 -mx-4 border-b-4 ${scott.isOnline ? 'border-cyan-500 bg-cyan-500/5' : 'border-amber-500 bg-amber-500/5'}`}>
                 <div className="flex items-center gap-3">
-                    <KingdomCrown8Bit size={32} animate={true} />
+                    <KingdomCrown8Bit size={40} animate={true} />
                     <div>
-                        <h1 className="text-3xl font-black text-amber-400" style={{ fontFamily: 'monospace' }}>SK</h1>
-                        <p className="text-[10px] text-gray-600 tracking-widest uppercase" style={{ fontFamily: 'monospace' }}>OFFLINE-FIRST MGMT</p>
+                        <h1 className="text-4xl font-black text-white" style={{ fontFamily: 'monospace', textShadow: '0 0 20px rgba(251, 191, 36, 0.5)' }}>SK</h1>
+                        <p className="text-[11px] text-white tracking-widest uppercase font-bold" style={{ fontFamily: 'monospace' }}>
+                            {scott.isOnline ? '● ONLINE' : '● OFFLINE'}
+                        </p>
                     </div>
-                    {scott.isOnline ? (
-                        <Wifi className="w-5 h-5 text-green-500" />
-                    ) : (
-                        <WifiOff className="w-5 h-5 text-amber-500" />
-                    )}
                 </div>
-                <Link to={createPageUrl('ScottCalendar')} className="p-2 hover:bg-gray-900 rounded-lg transition-colors">
-                    <svg className="w-6 h-6 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                <Link to={createPageUrl('ScottCalendar')} className="p-3 bg-cyan-500 hover:bg-cyan-400 rounded-xl transition-all" style={{ boxShadow: '0 0 20px rgba(6, 182, 212, 0.4)' }}>
+                    <svg className="w-7 h-7 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
                 </Link>
             </div>
 
-            {/* QUICK STATS - CLEAN */}
-            <div className="grid grid-cols-3 gap-3 mb-6">
+            {/* QUICK STATS - SHARP */}
+            <div className="grid grid-cols-3 gap-4 mb-6">
                 <motion.div whileTap={{ scale: 0.95 }}>
-                    <div className="bg-black border border-amber-500/30 rounded-xl p-4 text-center">
-                        <p className="text-5xl font-black text-amber-400 mb-2" style={{ fontFamily: 'monospace' }}>{artists.length}</p>
-                        <p className="text-xs text-amber-500 tracking-wider font-bold" style={{ fontFamily: 'monospace' }}>ROSTER</p>
+                    <div className="bg-black border-4 border-amber-500 rounded-2xl p-5 text-center" style={{ boxShadow: '0 0 30px rgba(251, 191, 36, 0.3)' }}>
+                        <p className="text-6xl font-black text-amber-400 mb-2" style={{ fontFamily: 'monospace', textShadow: '0 0 20px rgba(251, 191, 36, 0.5)' }}>{artists.length}</p>
+                        <p className="text-sm text-white tracking-wider font-black" style={{ fontFamily: 'monospace' }}>ROSTER</p>
                     </div>
                 </motion.div>
                 <Link to={createPageUrl('ScottCalendar')} className="w-full">
                     <motion.div whileTap={{ scale: 0.95 }}>
-                        <div className="bg-black border border-cyan-500/30 rounded-xl p-4 text-center hover:border-cyan-500/60 transition-all">
-                            <p className="text-5xl font-black text-cyan-400 mb-2" style={{ fontFamily: 'monospace' }}>{upcomingEvents.length}</p>
-                            <p className="text-xs text-cyan-500 tracking-wider font-bold" style={{ fontFamily: 'monospace' }}>EVENTS</p>
+                        <div className="bg-black border-4 border-cyan-500 rounded-2xl p-5 text-center hover:border-cyan-400 transition-all" style={{ boxShadow: '0 0 30px rgba(6, 182, 212, 0.3)' }}>
+                            <p className="text-6xl font-black text-cyan-400 mb-2" style={{ fontFamily: 'monospace', textShadow: '0 0 20px rgba(6, 182, 212, 0.5)' }}>{upcomingEvents.length}</p>
+                            <p className="text-sm text-white tracking-wider font-black" style={{ fontFamily: 'monospace' }}>EVENTS</p>
                         </div>
                     </motion.div>
                 </Link>
                 <Link to={createPageUrl('ScottCalendar')} className="w-full">
                     <motion.div whileTap={{ scale: 0.95 }}>
-                        <div className="bg-black border border-red-500/30 rounded-xl p-4 text-center hover:border-red-500/60 transition-all">
-                            <p className="text-5xl font-black text-red-400 mb-2" style={{ fontFamily: 'monospace' }}>{urgentTasks.length}</p>
-                            <p className="text-xs text-red-500 tracking-wider font-bold" style={{ fontFamily: 'monospace' }}>URGENT</p>
+                        <div className="bg-black border-4 border-red-500 rounded-2xl p-5 text-center hover:border-red-400 transition-all" style={{ boxShadow: '0 0 30px rgba(239, 68, 68, 0.3)' }}>
+                            <p className="text-6xl font-black text-red-400 mb-2" style={{ fontFamily: 'monospace', textShadow: '0 0 20px rgba(239, 68, 68, 0.5)' }}>{urgentTasks.length}</p>
+                            <p className="text-sm text-white tracking-wider font-black" style={{ fontFamily: 'monospace' }}>URGENT</p>
                         </div>
                     </motion.div>
                 </Link>
@@ -370,39 +367,39 @@ function ScottManagerInner() {
                 </Link>
             </div>
 
-            {/* SMART SEARCH - NO FILTER DROPDOWNS */}
+            {/* SMART SEARCH - SHARP */}
             <div className="mb-6">
                 <div className="relative">
-                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-600" />
+                    <Search className="absolute left-5 top-1/2 -translate-y-1/2 w-6 h-6 text-cyan-400" />
                     <Input
-                        placeholder="Type anything... name, genre, vibe"
+                        placeholder="SEARCH..."
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
-                        className="pl-12 py-3 bg-black border border-gray-800 rounded-lg text-white placeholder:text-gray-700 focus:border-amber-500/50 transition-all"
-                        style={{ fontFamily: 'monospace' }}
+                        className="pl-14 py-4 bg-black border-4 border-cyan-500 rounded-xl text-white text-lg font-bold placeholder:text-cyan-500/50 focus:border-cyan-400 transition-all"
+                        style={{ fontFamily: 'monospace', boxShadow: searchQuery ? '0 0 30px rgba(6, 182, 212, 0.4)' : 'none' }}
                     />
                 </div>
                 {searchQuery && (
-                    <p className="text-xs text-gray-600 font-mono mt-2">
-                        Found {filteredArtists.length} • Just type, we'll figure it out
+                    <p className="text-sm text-cyan-400 font-mono font-bold mt-3 text-center">
+                        ✓ {filteredArtists.length} FOUND
                     </p>
                 )}
             </div>
 
-            {/* QUICK ACTIONS - CLEAN */}
-            <div className="grid grid-cols-2 gap-3 mb-6">
+            {/* QUICK ACTIONS - SHARP */}
+            <div className="grid grid-cols-2 gap-4 mb-6">
                 <Link to={createPageUrl('ScottAddArtist')} className="block">
                     <motion.div whileTap={{ scale: 0.95 }}>
-                        <Button className="w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-black font-bold py-3 rounded-lg">
-                            <Plus className="w-5 h-5 mr-2" />
+                        <Button className="w-full bg-amber-500 hover:bg-amber-400 text-black font-black py-5 rounded-xl text-lg border-4 border-amber-400" style={{ fontFamily: 'monospace', boxShadow: '0 0 30px rgba(251, 191, 36, 0.5)' }}>
+                            <Plus className="w-6 h-6 mr-2" />
                             ADD
                         </Button>
                     </motion.div>
                 </Link>
                 <Link to={createPageUrl('TalkToAI51')} className="block">
                     <motion.div whileTap={{ scale: 0.95 }}>
-                        <Button className="w-full bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white font-bold py-3 rounded-lg">
-                            <Brain className="w-5 h-5 mr-2" />
+                        <Button className="w-full bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-400 hover:to-purple-500 text-white font-black py-5 rounded-xl text-lg border-4 border-cyan-400" style={{ fontFamily: 'monospace', boxShadow: '0 0 30px rgba(6, 182, 212, 0.5)' }}>
+                            <Brain className="w-6 h-6 mr-2" />
                             LEGAL AI
                         </Button>
                     </motion.div>
@@ -421,16 +418,16 @@ function ScottManagerInner() {
                         if (active.length === 0) return null;
                         return (
                             <div>
-                                <div className="flex items-center gap-2 mb-3">
-                                    <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                                    <h2 className="text-sm font-bold text-green-400 tracking-wider" style={{ fontFamily: 'monospace' }}>
+                                <div className="flex items-center gap-3 mb-4 p-3 bg-green-500/10 border-l-4 border-green-400 rounded-r-xl">
+                                    <div className="w-4 h-4 bg-green-400 rounded-full animate-pulse" style={{ boxShadow: '0 0 15px rgba(74, 222, 128, 0.8)' }}></div>
+                                    <h2 className="text-base font-black text-white tracking-wider" style={{ fontFamily: 'monospace' }}>
                                         ACTIVE NOW ({active.length})
                                     </h2>
                                 </div>
                                 <div className="space-y-3">
                                     {active.map(artist => (
                                         <Link key={artist.id} to={createPageUrl(`ScottArtist?id=${artist.id}`)} className="block">
-                                            <motion.div whileTap={{ scale: 0.98 }} className="bg-black border border-green-500/30 hover:border-green-500/60 rounded-xl p-4 transition-all cursor-pointer">
+                                            <motion.div whileTap={{ scale: 0.98 }} className="bg-black border-4 border-green-500 hover:border-green-400 rounded-2xl p-5 transition-all cursor-pointer" style={{ boxShadow: '0 0 25px rgba(74, 222, 128, 0.2)' }}>
                                                 <div className="flex items-center justify-between">
                                                     <div className="flex-1">
                                                         <p className="text-white text-base mb-1" style={{ fontFamily: 'monospace' }}>{artist.name}</p>
@@ -462,13 +459,15 @@ function ScottManagerInner() {
                         if (others.length === 0) return null;
                         return (
                             <div>
-                                <h2 className="text-sm font-bold text-gray-600 tracking-wider mb-3" style={{ fontFamily: 'monospace' }}>
-                                    ROSTER ({others.length})
-                                </h2>
+                                <div className="flex items-center gap-3 mb-4 p-3 bg-white/5 border-l-4 border-white rounded-r-xl">
+                                    <h2 className="text-base font-black text-white tracking-wider" style={{ fontFamily: 'monospace' }}>
+                                        ROSTER ({others.length})
+                                    </h2>
+                                </div>
                                 <div className="space-y-3">
                                     {others.map(artist => (
                                         <Link key={artist.id} to={createPageUrl(`ScottArtist?id=${artist.id}`)} className="block">
-                                            <motion.div whileTap={{ scale: 0.98 }} className="bg-black border border-gray-800 hover:border-amber-500/50 rounded-xl p-4 transition-all cursor-pointer">
+                                            <motion.div whileTap={{ scale: 0.98 }} className="bg-black border-4 border-white/20 hover:border-amber-500 rounded-2xl p-5 transition-all cursor-pointer">
                                                 <div className="flex items-center justify-between">
                                                     <div className="flex-1">
                                                         <p className="text-white text-base mb-1" style={{ fontFamily: 'monospace' }}>{artist.name}</p>
