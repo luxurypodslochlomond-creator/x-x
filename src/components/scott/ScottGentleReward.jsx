@@ -20,13 +20,17 @@ export default function ScottGentleReward({ onComplete }) {
     const triggerReward = () => {
         const messages = [
             "You did it bro ❤️",
-            "Proud of you mate",
             "That was hard - you smashed it",
-            "Sorted. Well done bro",
-            "See you? Killing it",
-            "You're doing great bro",
-            "Got it done. Legend",
-            "Hard thing done ❤️",
+            "I see you mate. Well done",
+            "Sorted. Proud of you bro",
+            "You pushed through ❤️",
+            "Hard day but you showed up",
+            "You're doing it mate",
+            "One step. That matters ❤️",
+            "I know that wasn't easy bro",
+            "You kept going. That's everything",
+            "Small win. Real win ❤️",
+            "You matter bro. This matters",
         ];
         
         setMessage(messages[Math.floor(Math.random() * messages.length)]);
