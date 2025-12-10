@@ -730,7 +730,14 @@ const VoiceHealing = ({ onProtocolRecommend }) => {
     }
 
     try {
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      // Request microphone with mobile-friendly constraints
+      const stream = await navigator.mediaDevices.getUserMedia({ 
+        audio: {
+          echoCancellation: true,
+          noiseSuppression: true,
+          autoGainControl: true
+        }
+      });
       mediaRecorderRef.current = new MediaRecorder(stream);
       audioChunksRef.current = [];
 
@@ -791,6 +798,21 @@ const VoiceHealing = ({ onProtocolRecommend }) => {
       }, 10000);
     } catch (err) {
       console.error('Microphone access error:', err);
+      
+      // Mobile-friendly error messages
+      let errorMsg = '🎤 Microphone access needed\n\n';
+      if (err.name === 'NotAllowedError' || err.name === 'PermissionDeniedError') {
+        errorMsg += 'Please allow microphone access in your browser settings:\n\n';
+        errorMsg += '1. Tap the "AA" or lock icon in address bar\n';
+        errorMsg += '2. Enable microphone permissions\n';
+        errorMsg += '3. Reload page and try again';
+      } else if (err.name === 'NotFoundError' || err.name === 'DevicesNotFoundError') {
+        errorMsg += 'No microphone detected on this device.';
+      } else {
+        errorMsg += 'Unable to access microphone. Try reloading the page.';
+      }
+      
+      alert(errorMsg);
     }
   };
 
@@ -871,23 +893,28 @@ const VoiceHealing = ({ onProtocolRecommend }) => {
       )}
 
       {!isRecording && !isAnalyzing && !voiceAnalysis && (
-        <button
-          onClick={startRecording}
-          disabled={!healingIntent.trim()}
-          className="w-full py-4 bg-pink-600 hover:bg-pink-700 text-white font-black font-mono text-lg border-4 border-pink-400 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3"
-          style={{ boxShadow: '4px 4px 0px rgba(236, 72, 153, 0.8)' }}
-        >
-          <svg width="24" height="24" viewBox="0 0 24 24">
-            <rect x="10" y="2" width="4" height="10" fill="white"/>
-            <rect x="8" y="4" width="2" height="6" fill="#fbbf24"/>
-            <rect x="14" y="4" width="2" height="6" fill="#fbbf24"/>
-            <rect x="10" y="12" width="4" height="2" fill="white"/>
-            <rect x="11" y="14" width="2" height="4" fill="white"/>
-            <rect x="6" y="18" width="12" height="2" fill="white"/>
-            <rect x="8" y="20" width="8" height="2" fill="#fbbf24"/>
-          </svg>
-          TAP TO SPEAK
-        </button>
+        <>
+          <button
+            onClick={startRecording}
+            disabled={!healingIntent.trim()}
+            className="w-full py-4 bg-pink-600 hover:bg-pink-700 text-white font-black font-mono text-lg border-4 border-pink-400 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3"
+            style={{ boxShadow: '4px 4px 0px rgba(236, 72, 153, 0.8)' }}
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24">
+              <rect x="10" y="2" width="4" height="10" fill="white"/>
+              <rect x="8" y="4" width="2" height="6" fill="#fbbf24"/>
+              <rect x="14" y="4" width="2" height="6" fill="#fbbf24"/>
+              <rect x="10" y="12" width="4" height="2" fill="white"/>
+              <rect x="11" y="14" width="2" height="4" fill="white"/>
+              <rect x="6" y="18" width="12" height="2" fill="white"/>
+              <rect x="8" y="20" width="8" height="2" fill="#fbbf24"/>
+            </svg>
+            TAP TO SPEAK
+          </button>
+          <p className="text-gray-500 text-xs font-mono text-center mt-2">
+            📱 Mobile: Allow mic when prompted
+          </p>
+        </>
         )}
 
       {isRecording && (

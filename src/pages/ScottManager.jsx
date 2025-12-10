@@ -124,9 +124,6 @@ function ScottManagerInner() {
                     >
                         ENTER
                     </Button>
-                    <div className="text-center mt-6 pt-6 border-t border-gray-900">
-                        <p className="text-gray-800 text-[10px] tracking-widest" style={{ fontFamily: 'monospace' }}>1888</p>
-                    </div>
                 </Card>
             </div>
         );
