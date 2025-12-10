@@ -106,27 +106,31 @@ export default function ScottManager() {
         <div className="min-h-screen bg-black p-4 pb-20">
             
             {/* HEADER */}
-            <div className="mb-8 pb-6 border-b border-amber-500/20">
-                <div className="flex items-center justify-center mb-4">
-                    <KingdomCrown8Bit size={40} />
+            <div className="mb-6 pb-4 border-b border-amber-500/20">
+                <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center gap-2">
+                        <KingdomCrown8Bit size={32} />
+                        <h1 className="text-2xl font-black text-amber-400 tracking-tight" style={{ fontFamily: 'monospace' }}>SK</h1>
+                    </div>
+                    <Link to={createPageUrl('ScottCalendar')} className="p-2 bg-cyan-500/20 hover:bg-cyan-500/30 rounded transition-colors">
+                        <Calendar className="w-5 h-5 text-cyan-400" />
+                    </Link>
                 </div>
-                <h1 className="text-3xl font-black text-center text-amber-400 mb-2 tracking-tight" style={{ fontFamily: 'monospace' }}>KINGDOM</h1>
-                <p className="text-center text-gray-500 text-xs tracking-wider" style={{ fontFamily: 'monospace' }}>YOUR ROSTER • YOUR WAY</p>
             </div>
 
             {/* QUICK STATS */}
-            <div className="grid grid-cols-3 gap-3 mb-8">
-                <Card className="bg-black border border-amber-500/30 p-4 text-center hover:border-amber-500/60 transition-colors">
-                    <p className="text-3xl font-black text-white mb-1" style={{ fontFamily: 'monospace' }}>{artists.length}</p>
-                    <p className="text-[10px] text-amber-500 tracking-widest" style={{ fontFamily: 'monospace' }}>ROSTER</p>
+            <div className="grid grid-cols-3 gap-2 mb-6">
+                <Card className="bg-black border border-amber-500/20 p-3 text-center">
+                    <p className="text-2xl font-black text-white mb-1" style={{ fontFamily: 'monospace' }}>{artists.length}</p>
+                    <p className="text-[9px] text-amber-500 tracking-widest" style={{ fontFamily: 'monospace' }}>ROSTER</p>
                 </Card>
-                <Card className="bg-black border border-cyan-500/30 p-4 text-center hover:border-cyan-500/60 transition-colors">
-                    <p className="text-3xl font-black text-white mb-1" style={{ fontFamily: 'monospace' }}>{upcomingEvents.length}</p>
-                    <p className="text-[10px] text-cyan-500 tracking-widest" style={{ fontFamily: 'monospace' }}>EVENTS</p>
+                <Card className="bg-black border border-cyan-500/20 p-3 text-center">
+                    <p className="text-2xl font-black text-white mb-1" style={{ fontFamily: 'monospace' }}>{upcomingEvents.length}</p>
+                    <p className="text-[9px] text-cyan-500 tracking-widest" style={{ fontFamily: 'monospace' }}>EVENTS</p>
                 </Card>
-                <Card className="bg-black border border-green-500/30 p-4 text-center hover:border-green-500/60 transition-colors">
-                    <p className="text-3xl font-black text-white mb-1" style={{ fontFamily: 'monospace' }}>{urgentTasks.length}</p>
-                    <p className="text-[10px] text-green-500 tracking-widest" style={{ fontFamily: 'monospace' }}>URGENT</p>
+                <Card className="bg-black border border-red-500/20 p-3 text-center">
+                    <p className="text-2xl font-black text-white mb-1" style={{ fontFamily: 'monospace' }}>{urgentTasks.length}</p>
+                    <p className="text-[9px] text-red-500 tracking-widest" style={{ fontFamily: 'monospace' }}>URGENT</p>
                 </Card>
             </div>
 
@@ -146,56 +150,13 @@ export default function ScottManager() {
 
             {/* ADD NEW BUTTON */}
             <Link to={createPageUrl('ScottAddArtist')} className="block">
-                <Button className="w-full mb-8 bg-amber-500 hover:bg-amber-600 text-black font-black py-4 tracking-wider transition-all hover:scale-[1.02]" style={{ fontFamily: 'monospace', boxShadow: '0 0 20px rgba(245, 158, 11, 0.4), inset 0 -2px 0 rgba(0,0,0,0.3)' }}>
+                <Button className="w-full mb-6 bg-amber-500 hover:bg-amber-600 text-black font-black py-3 tracking-wider transition-all hover:scale-[1.02]" style={{ fontFamily: 'monospace', boxShadow: '0 0 20px rgba(245, 158, 11, 0.4), inset 0 -2px 0 rgba(0,0,0,0.3)' }}>
                     <Plus className="w-4 h-4 mr-2" />
-                    ADD NEW
+                    ADD
                 </Button>
             </Link>
 
-            {/* URGENT TASKS */}
-            {urgentTasks.length > 0 && (
-                <Card className="bg-black border border-red-500/30 p-4 mb-6">
-                    <div className="flex items-center justify-between mb-4">
-                        <h2 className="text-sm font-black text-red-500 tracking-wider" style={{ fontFamily: 'monospace' }}>URGENT</h2>
-                        <div className="h-px bg-red-500/30 flex-1 ml-3"></div>
-                    </div>
-                    <div className="space-y-2">
-                        {urgentTasks.slice(0, 3).map(task => (
-                            <div key={task.id} className="bg-black border border-red-500/20 p-3 hover:border-red-500/40 transition-colors">
-                                <p className="text-white text-sm mb-1" style={{ fontFamily: 'monospace' }}>{task.title}</p>
-                                {task.due_date && (
-                                    <p className="text-red-500 text-xs tracking-wide" style={{ fontFamily: 'monospace' }}>{new Date(task.due_date).toLocaleDateString()}</p>
-                                )}
-                            </div>
-                        ))}
-                    </div>
-                </Card>
-            )}
 
-            {/* UPCOMING EVENTS */}
-            {upcomingEvents.length > 0 && (
-                <Card className="bg-black border border-cyan-500/30 p-4 mb-6">
-                    <div className="flex items-center justify-between mb-4">
-                        <h2 className="text-sm font-black text-cyan-500 tracking-wider" style={{ fontFamily: 'monospace' }}>UPCOMING</h2>
-                        <div className="h-px bg-cyan-500/30 flex-1 ml-3"></div>
-                    </div>
-                    <div className="space-y-2">
-                        {upcomingEvents.slice(0, 3).map(event => (
-                            <div key={event.id} className="bg-black border border-cyan-500/20 p-3 hover:border-cyan-500/40 transition-colors">
-                                <p className="text-white text-sm mb-1" style={{ fontFamily: 'monospace' }}>{event.title}</p>
-                                <p className="text-cyan-500 text-xs tracking-wide" style={{ fontFamily: 'monospace' }}>
-                                    {new Date(event.date).toLocaleDateString()} • {event.location || 'TBC'}
-                                </p>
-                            </div>
-                        ))}
-                    </div>
-                    <Link to={createPageUrl('ScottCalendar')} className="block mt-3">
-                        <Button variant="outline" className="w-full border border-cyan-500/30 text-cyan-500 hover:border-cyan-500/60 hover:bg-cyan-500/10 transition-colors tracking-wider" style={{ fontFamily: 'monospace' }}>
-                            VIEW CALENDAR
-                        </Button>
-                    </Link>
-                </Card>
-            )}
 
             {/* ARTISTS/CLIENTS LIST */}
             <div className="space-y-2">
@@ -222,15 +183,35 @@ export default function ScottManager() {
                                 <div className="flex items-center justify-between">
                                     <div className="flex-1">
                                         <p className="text-white text-base mb-1" style={{ fontFamily: 'monospace' }}>{artist.name}</p>
-                                        <p className="text-amber-500 text-xs uppercase tracking-widest" style={{ fontFamily: 'monospace' }}>{artist.type}</p>
-                                        {artist.phone && (
-                                            <p className="text-gray-600 text-xs mt-1" style={{ fontFamily: 'monospace' }}>{artist.phone}</p>
+                                        <div className="flex items-center gap-2">
+                                           <p className="text-amber-500 text-xs uppercase tracking-widest" style={{ fontFamily: 'monospace' }}>{artist.type}</p>
+                                           {artist.relationship === 'excellent' && <span className="text-green-400 text-xs">●</span>}
+                                           {artist.relationship === 'good' && <span className="text-cyan-400 text-xs">●</span>}
+                                           {artist.relationship === 'needs_work' && <span className="text-red-400 text-xs">●</span>}
+                                        </div>
+                                        {artist.genre && (
+                                           <p className="text-gray-600 text-xs mt-1" style={{ fontFamily: 'monospace' }}>{artist.genre}</p>
                                         )}
-                                    </div>
-                                    <div className="flex gap-4">
-                                        <MessageSquare className="w-5 h-5 text-gray-700" />
-                                        <CheckSquare className="w-5 h-5 text-gray-700" />
-                                    </div>
+                                        </div>
+                                        <div className="flex gap-2">
+                                        {artist.phone && (
+                                           <a href={`tel:${artist.phone}`} onClick={(e) => e.stopPropagation()} className="p-2 bg-green-500/20 hover:bg-green-500/30 rounded transition-colors">
+                                               <svg className="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/></svg>
+                                           </a>
+                                        )}
+                                        <button 
+                                           onClick={(e) => {
+                                               e.stopPropagation();
+                                               e.preventDefault();
+                                               const text = `${artist.name}\n${artist.phone || ''}\n${artist.email || ''}`;
+                                               navigator.clipboard.writeText(text);
+                                               alert('Contact copied!');
+                                           }}
+                                           className="p-2 bg-cyan-500/20 hover:bg-cyan-500/30 rounded transition-colors"
+                                        >
+                                           <svg className="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
+                                        </button>
+                                        </div>
                                 </div>
                             </motion.div>
                         </Link>
