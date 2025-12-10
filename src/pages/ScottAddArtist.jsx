@@ -9,6 +9,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { ArrowLeft, Save } from 'lucide-react';
 import { motion } from 'framer-motion';
+import KingdomCrown8Bit from '@/components/shared/KingdomCrown8Bit';
 
 export default function ScottAddArtist() {
     const navigate = useNavigate();
@@ -44,28 +45,31 @@ export default function ScottAddArtist() {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-purple-950 via-black to-indigo-950 p-4">
+        <div className="min-h-screen bg-black p-4">
             
             <button
                 onClick={() => navigate(createPageUrl('ScottManager'))}
-                className="flex items-center gap-2 text-purple-400 mb-6 hover:text-purple-300"
+                className="flex items-center gap-2 text-gray-500 mb-6 hover:text-amber-500 transition-colors"
             >
-                <ArrowLeft className="w-5 h-5" />
-                <span className="font-mono">Back</span>
+                <ArrowLeft className="w-4 h-4" />
+                <span style={{ fontFamily: 'monospace' }} className="text-sm tracking-wider">BACK</span>
             </button>
 
-            <h1 className="text-3xl font-black text-white mb-6">ADD NEW</h1>
+            <div className="flex items-center justify-center gap-3 mb-6">
+                <KingdomCrown8Bit size={32} />
+                <h1 className="text-2xl font-black text-amber-400 tracking-tight" style={{ fontFamily: 'monospace' }}>ADD CONTACT</h1>
+            </div>
 
-            <Card className="bg-black/60 border-2 border-purple-500 p-6">
-                <form onSubmit={handleSubmit} className="space-y-4">
+            <Card className="bg-black border border-amber-500/20 p-6 max-w-md mx-auto">
+                <form onSubmit={handleSubmit} className="space-y-5">
                     
                     <div>
-                        <label className="text-purple-400 text-sm font-bold mb-2 block">Type</label>
+                        <label className="text-gray-500 text-xs tracking-widest mb-2 block uppercase" style={{ fontFamily: 'monospace' }}>Type</label>
                         <Select
                             value={formData.type}
                             onValueChange={(value) => setFormData({...formData, type: value})}
                         >
-                            <SelectTrigger className="bg-black/60 border-purple-500/50 text-white">
+                            <SelectTrigger className="bg-black border border-gray-800 text-white hover:border-amber-500/30 transition-colors" style={{ fontFamily: 'monospace' }}>
                                 <SelectValue />
                             </SelectTrigger>
                             <SelectContent>
@@ -78,59 +82,59 @@ export default function ScottAddArtist() {
                     </div>
 
                     <div>
-                        <label className="text-purple-400 text-sm font-bold mb-2 block">Name *</label>
+                        <label className="text-gray-500 text-xs tracking-widest mb-2 block uppercase" style={{ fontFamily: 'monospace' }}>Name *</label>
                         <Input
                             required
                             value={formData.name}
                             onChange={(e) => setFormData({...formData, name: e.target.value})}
-                            className="bg-black/60 border-purple-500/50 text-white"
+                            className="bg-black border border-gray-800 text-white placeholder:text-gray-700 focus:border-amber-500/50 transition-colors"
+                            style={{ fontFamily: 'monospace' }}
                             placeholder="Full name"
                         />
                     </div>
 
                     <div>
-                        <label className="text-purple-400 text-sm font-bold mb-2 block">Phone</label>
+                        <label className="text-gray-500 text-xs tracking-widest mb-2 block uppercase" style={{ fontFamily: 'monospace' }}>Phone</label>
                         <Input
                             type="tel"
                             value={formData.phone}
                             onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                            className="bg-black/60 border-purple-500/50 text-white"
-                            placeholder="Phone number"
+                            className="bg-black border border-gray-800 text-white placeholder:text-gray-700 focus:border-amber-500/50 transition-colors"
+                            style={{ fontFamily: 'monospace' }}
+                            placeholder="+44..."
                         />
                     </div>
 
                     <div>
-                        <label className="text-purple-400 text-sm font-bold mb-2 block">Email</label>
+                        <label className="text-gray-500 text-xs tracking-widest mb-2 block uppercase" style={{ fontFamily: 'monospace' }}>Email</label>
                         <Input
                             type="email"
                             value={formData.email}
                             onChange={(e) => setFormData({...formData, email: e.target.value})}
-                            className="bg-black/60 border-purple-500/50 text-white"
-                            placeholder="Email address"
+                            className="bg-black border border-gray-800 text-white placeholder:text-gray-700 focus:border-amber-500/50 transition-colors"
+                            style={{ fontFamily: 'monospace' }}
+                            placeholder="email@example.com"
                         />
                     </div>
 
                     <div>
-                        <label className="text-purple-400 text-sm font-bold mb-2 block">Notes</label>
+                        <label className="text-gray-500 text-xs tracking-widest mb-2 block uppercase" style={{ fontFamily: 'monospace' }}>Notes</label>
                         <Textarea
                             value={formData.notes}
                             onChange={(e) => setFormData({...formData, notes: e.target.value})}
-                            className="bg-black/60 border-purple-500/50 text-white min-h-[100px]"
-                            placeholder="Any important info..."
+                            className="bg-black border border-gray-800 text-white placeholder:text-gray-700 focus:border-amber-500/50 transition-colors min-h-[100px]"
+                            style={{ fontFamily: 'monospace' }}
+                            placeholder="Important info..."
                         />
                     </div>
 
                     <Button
                         type="submit"
                         disabled={saving}
-                        className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-black py-6"
+                        className="w-full bg-amber-500 hover:bg-amber-600 text-black font-black py-4 tracking-wider transition-colors"
+                        style={{ fontFamily: 'monospace', boxShadow: '0 0 15px rgba(245, 158, 11, 0.2)' }}
                     >
-                        {saving ? 'SAVING...' : (
-                            <>
-                                <Save className="w-5 h-5 mr-2" />
-                                SAVE
-                            </>
-                        )}
+                        {saving ? 'SAVING...' : 'SAVE'}
                     </Button>
                 </form>
             </Card>
