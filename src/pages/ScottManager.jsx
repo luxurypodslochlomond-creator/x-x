@@ -267,13 +267,21 @@ function ScottManagerInner() {
                 </div>
             </div>
 
-            {/* ADD NEW BUTTON */}
-            <Link to={createPageUrl('ScottAddArtist')} className="block">
-                <Button className="w-full mb-6 bg-amber-500 hover:bg-amber-600 text-black font-black py-3 tracking-wider transition-all hover:scale-[1.02]" style={{ fontFamily: 'monospace', boxShadow: '0 0 20px rgba(245, 158, 11, 0.4), inset 0 -2px 0 rgba(0,0,0,0.3)' }}>
-                    <Plus className="w-4 h-4 mr-2" />
-                    ADD
-                </Button>
-            </Link>
+            {/* QUICK ACTIONS */}
+            <div className="grid grid-cols-2 gap-2 mb-6">
+                <Link to={createPageUrl('ScottAddArtist')} className="block">
+                    <Button className="w-full bg-amber-500 hover:bg-amber-600 text-black font-black py-3 tracking-wider transition-all hover:scale-[1.02]" style={{ fontFamily: 'monospace', boxShadow: '0 0 20px rgba(245, 158, 11, 0.4), inset 0 -2px 0 rgba(0,0,0,0.3)' }}>
+                        <Plus className="w-4 h-4 mr-2" />
+                        ADD
+                    </Button>
+                </Link>
+                <Link to={createPageUrl('ScottAICoordinatorArchitecture')} className="block">
+                    <Button className="w-full bg-gradient-to-r from-cyan-600 to-purple-600 hover:from-cyan-700 hover:to-purple-700 text-white font-black py-3 tracking-wider transition-all hover:scale-[1.02]" style={{ fontFamily: 'monospace', boxShadow: '0 0 20px rgba(34, 211, 238, 0.4)' }}>
+                        <Brain className="w-4 h-4 mr-2" />
+                        AI
+                    </Button>
+                </Link>
+            </div>
 
 
 
