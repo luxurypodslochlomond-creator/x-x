@@ -31,6 +31,10 @@ export default function ScottAddArtist() {
         instagram: '',
         spotify: '',
         rate: '',
+        genre: '',
+        gear: '',
+        relationship: 'unknown',
+        availability: 'unknown',
         notes: ''
     });
 
@@ -79,6 +83,7 @@ export default function ScottAddArtist() {
                                 <SelectItem value="artist" className="text-white hover:bg-amber-500/20 focus:bg-amber-500/20 cursor-pointer" style={{ fontFamily: 'monospace' }}>Artist</SelectItem>
                                 <SelectItem value="client" className="text-white hover:bg-amber-500/20 focus:bg-amber-500/20 cursor-pointer" style={{ fontFamily: 'monospace' }}>Client</SelectItem>
                                 <SelectItem value="venue" className="text-white hover:bg-amber-500/20 focus:bg-amber-500/20 cursor-pointer" style={{ fontFamily: 'monospace' }}>Venue</SelectItem>
+                                <SelectItem value="band_crew" className="text-white hover:bg-amber-500/20 focus:bg-amber-500/20 cursor-pointer" style={{ fontFamily: 'monospace' }}>Band/Crew</SelectItem>
                                 <SelectItem value="other" className="text-white hover:bg-amber-500/20 focus:bg-amber-500/20 cursor-pointer" style={{ fontFamily: 'monospace' }}>Other</SelectItem>
                             </SelectContent>
                         </Select>
@@ -143,16 +148,58 @@ export default function ScottAddArtist() {
                         </div>
                     </div>
 
+                    <div className="grid grid-cols-2 gap-4">
+                        <div>
+                            <label className="text-gray-500 text-xs tracking-widest mb-2 block uppercase" style={{ fontFamily: 'monospace' }}>Rate (£)</label>
+                            <Input
+                                type="number"
+                                value={formData.rate}
+                                onChange={(e) => setFormData({...formData, rate: e.target.value})}
+                                className="bg-black border border-gray-800 text-white placeholder:text-gray-700 focus:border-amber-500/50 transition-colors"
+                                style={{ fontFamily: 'monospace' }}
+                                placeholder="250"
+                            />
+                        </div>
+                        <div>
+                            <label className="text-gray-500 text-xs tracking-widest mb-2 block uppercase" style={{ fontFamily: 'monospace' }}>Genre</label>
+                            <Input
+                                value={formData.genre}
+                                onChange={(e) => setFormData({...formData, genre: e.target.value})}
+                                className="bg-black border border-gray-800 text-white placeholder:text-gray-700 focus:border-amber-500/50 transition-colors"
+                                style={{ fontFamily: 'monospace' }}
+                                placeholder="Jazz, Rock..."
+                            />
+                        </div>
+                    </div>
+
                     <div>
-                        <label className="text-gray-500 text-xs tracking-widest mb-2 block uppercase" style={{ fontFamily: 'monospace' }}>Rate (£/session)</label>
+                        <label className="text-gray-500 text-xs tracking-widest mb-2 block uppercase" style={{ fontFamily: 'monospace' }}>Gear/Skills</label>
                         <Input
-                            type="number"
-                            value={formData.rate}
-                            onChange={(e) => setFormData({...formData, rate: e.target.value})}
+                            value={formData.gear}
+                            onChange={(e) => setFormData({...formData, gear: e.target.value})}
                             className="bg-black border border-gray-800 text-white placeholder:text-gray-700 focus:border-amber-500/50 transition-colors"
                             style={{ fontFamily: 'monospace' }}
-                            placeholder="250"
+                            placeholder="Guitar, keys, sound engineer..."
                         />
+                    </div>
+
+                    <div>
+                        <label className="text-gray-500 text-xs tracking-widest mb-2 block uppercase" style={{ fontFamily: 'monospace' }}>Relationship</label>
+                        <Select
+                            value={formData.relationship}
+                            onValueChange={(value) => setFormData({...formData, relationship: value})}
+                        >
+                            <SelectTrigger className="bg-black border-2 border-gray-800 text-white hover:border-amber-500/50 transition-all hover:shadow-[0_0_10px_rgba(245,158,11,0.2)]" style={{ fontFamily: 'monospace', padding: '12px' }}>
+                                <SelectValue />
+                            </SelectTrigger>
+                            <SelectContent className="bg-black border-2 border-amber-500/30" style={{ fontFamily: 'monospace' }}>
+                                <SelectItem value="excellent" className="text-white hover:bg-green-500/20 focus:bg-green-500/20 cursor-pointer" style={{ fontFamily: 'monospace' }}>Excellent</SelectItem>
+                                <SelectItem value="good" className="text-white hover:bg-cyan-500/20 focus:bg-cyan-500/20 cursor-pointer" style={{ fontFamily: 'monospace' }}>Good</SelectItem>
+                                <SelectItem value="neutral" className="text-white hover:bg-gray-500/20 focus:bg-gray-500/20 cursor-pointer" style={{ fontFamily: 'monospace' }}>Neutral</SelectItem>
+                                <SelectItem value="needs_work" className="text-white hover:bg-amber-500/20 focus:bg-amber-500/20 cursor-pointer" style={{ fontFamily: 'monospace' }}>Needs Work</SelectItem>
+                                <SelectItem value="unknown" className="text-white hover:bg-gray-500/20 focus:bg-gray-500/20 cursor-pointer" style={{ fontFamily: 'monospace' }}>Unknown</SelectItem>
+                            </SelectContent>
+                        </Select>
                     </div>
 
                     <div>
