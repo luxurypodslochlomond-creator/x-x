@@ -168,6 +168,7 @@ import ScottArtist from './pages/ScottArtist';
 import ScottCalendar from './pages/ScottCalendar';
 import ScottInvoices from './pages/ScottInvoices';
 import ScottAICoordinatorArchitecture from './pages/ScottAICoordinatorArchitecture';
+import ScottExpenses from './pages/ScottExpenses';
 import __Layout from './Layout.jsx';
 
 
@@ -342,6 +343,7 @@ export const PAGES = {
     "ScottCalendar": ScottCalendar,
     "ScottInvoices": ScottInvoices,
     "ScottAICoordinatorArchitecture": ScottAICoordinatorArchitecture,
+    "ScottExpenses": ScottExpenses,
 }
 
 export const pagesConfig = {

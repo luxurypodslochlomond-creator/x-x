@@ -251,6 +251,7 @@ const LayoutInner = ({ children, currentPageName }) => {
     { title: "Dashboard", url: createPageUrl("ScottManager"), icon: User, description: "Roster & overview" },
     { title: "Calendar", url: createPageUrl("ScottCalendar"), icon: Calendar, description: "Events & gigs" },
     { title: "Invoices", url: createPageUrl("ScottInvoices"), icon: DollarSign, description: "Money tracker" },
+    { title: "Expenses", url: createPageUrl("ScottExpenses"), icon: FileText, description: "Expense tracking" },
   ];
 
   const adminNav = user?.role === 'admin' ? [

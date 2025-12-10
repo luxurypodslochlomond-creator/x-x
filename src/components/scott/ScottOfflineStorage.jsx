@@ -21,6 +21,9 @@ const STORAGE_KEYS = {
     events: 'scott_events',
     messages: 'scott_messages',
     invoices: 'scott_invoices',
+    expenses: 'scott_expenses',
+    files: 'scott_files',
+    gigpacks: 'scott_gigpacks',
     pending: 'scott_pending_syncs',
     lastSync: 'scott_last_sync'
 };
@@ -114,12 +117,15 @@ export const ScottOfflineProvider = ({ children }) => {
         if (!isOnline) return;
 
         try {
-            const [artists, tasks, events, messages, invoices] = await Promise.all([
+            const [artists, tasks, events, messages, invoices, expenses, files, gigpacks] = await Promise.all([
                 base44.asServiceRole.entities.ScottArtist.list('-created_date'),
                 base44.asServiceRole.entities.ScottTask.list('-created_date'),
                 base44.asServiceRole.entities.ScottEvent.list('-date'),
                 base44.asServiceRole.entities.ScottMessage.list('-created_date'),
-                base44.asServiceRole.entities.ScottInvoice.list('-date')
+                base44.asServiceRole.entities.ScottInvoice.list('-date'),
+                base44.asServiceRole.entities.ScottExpense.list('-date'),
+                base44.asServiceRole.entities.ScottFile.list('-created_date'),
+                base44.asServiceRole.entities.ScottGigPack.list('-created_date')
             ]);
 
             saveLocal('artists', artists);
@@ -127,6 +133,9 @@ export const ScottOfflineProvider = ({ children }) => {
             saveLocal('events', events);
             saveLocal('messages', messages);
             saveLocal('invoices', invoices);
+            saveLocal('expenses', expenses);
+            saveLocal('files', files);
+            saveLocal('gigpacks', gigpacks);
         } catch (error) {
             console.error('Pull failed:', error);
         }
@@ -229,13 +238,59 @@ export const ScottOfflineProvider = ({ children }) => {
             }
         },
 
+        // Expenses
+        getExpenses: () => loadLocal('expenses'),
+        getExpensesForArtist: (artistId) => loadLocal('expenses').filter(e => e.artist_id === artistId),
+        createExpense: (data) => {
+            const newExpense = { ...data, id: `local_${Date.now()}`, created_date: new Date().toISOString() };
+            const expenses = loadLocal('expenses');
+            expenses.unshift(newExpense);
+            saveLocal('expenses', expenses);
+            queueSync({ type: 'create', entity: 'ScottExpense', data });
+            return newExpense;
+        },
+
+        // Files
+        getFiles: () => loadLocal('files'),
+        getFilesForArtist: (artistId) => loadLocal('files').filter(f => f.artist_id === artistId),
+        getFilesForEvent: (eventId) => loadLocal('files').filter(f => f.event_id === eventId),
+        createFile: (data) => {
+            const newFile = { ...data, id: `local_${Date.now()}`, created_date: new Date().toISOString() };
+            const files = loadLocal('files');
+            files.unshift(newFile);
+            saveLocal('files', files);
+            queueSync({ type: 'create', entity: 'ScottFile', data });
+            return newFile;
+        },
+
+        // Gig Packs
+        getGigPacks: () => loadLocal('gigpacks'),
+        getGigPacksForArtist: (artistId) => loadLocal('gigpacks').filter(g => g.artist_id === artistId),
+        createGigPack: (data) => {
+            const newGigPack = { ...data, id: `local_${Date.now()}`, created_date: new Date().toISOString() };
+            const gigpacks = loadLocal('gigpacks');
+            gigpacks.unshift(newGigPack);
+            saveLocal('gigpacks', gigpacks);
+            queueSync({ type: 'create', entity: 'ScottGigPack', data });
+            return newGigPack;
+        },
+        updateGigPack: (id, data) => {
+            const gigpacks = loadLocal('gigpacks');
+            const index = gigpacks.findIndex(g => g.id === id);
+            if (index !== -1) {
+                gigpacks[index] = { ...gigpacks[index], ...data, updated_date: new Date().toISOString() };
+                saveLocal('gigpacks', gigpacks);
+                queueSync({ type: 'update', entity: 'ScottGigPack', id, data });
+            }
+        },
+
         // Status
         isOnline,
         isSyncing,
         pendingCount,
         syncNow: syncPending,
         pullFromServer
-    };
+        };
 
     return (
         <ScottOfflineContext.Provider value={api}>
