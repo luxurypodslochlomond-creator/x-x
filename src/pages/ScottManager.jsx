@@ -384,13 +384,13 @@ function ScottManagerInner() {
 
             {/* FOOTER */}
             <div className="mt-12 pt-6 border-t border-gray-900">
-                <div className="flex items-center justify-center gap-3 mb-2">
-                    <Gill51Sunglasses8Bit size={24} animate={false} />
+                <div className="flex items-center justify-center gap-3 mb-3">
+                    <Gill51Sunglasses8Bit size={20} animate={false} />
                     <KingdomCrown8Bit size={24} />
-                    <p className="text-gray-700 text-xs tracking-widest" style={{ fontFamily: 'monospace' }}>KINGDOM</p>
+                    <Gill51Sunglasses8Bit size={20} animate={false} />
                 </div>
-                <p className="text-center text-gray-800 text-[10px] tracking-widest" style={{ fontFamily: 'monospace' }}>EST 1888 • 😎 SUNGLASSES LEGACY</p>
-                <p className="text-center text-cyan-500 text-[9px] mt-2 font-black tracking-wider" style={{ fontFamily: 'monospace' }}>AI51 + SK51 + BRO51</p>
+                <p className="text-center text-gray-800 text-[10px] tracking-widest mb-2" style={{ fontFamily: 'monospace' }}>EST 1888 • SUNGLASSES LEGACY</p>
+                <p className="text-center text-cyan-500 text-[9px] font-black tracking-wider" style={{ fontFamily: 'monospace' }}>AI51 + SK51 + BRO51</p>
                 <p className="text-center text-gray-700 text-[7px] mt-1" style={{ fontFamily: 'monospace' }}>THE TEAM ❤️</p>
             </div>
             </div>
