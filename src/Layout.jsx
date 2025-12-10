@@ -10,10 +10,11 @@ import PWAInstallPrompt from '@/components/shared/PWAInstallPrompt';
 import EmergencyMode from '@/components/shared/EmergencyMode';
 import AutoBugMonitor from '@/components/shared/AutoBugMonitor';
 import PerformanceOptimizer from '@/components/shared/PerformanceOptimizer';
+import EmergencyCalmButton from '@/components/shared/EmergencyCalmButton';
 import {
-              Menu, X, Heart, Home, LogOut, Leaf, Sparkles, Music, Map, User, Globe,
-              BookOpen, Shield, Target, Briefcase, FileText, Settings, Search, Brain, Presentation, Calculator, GraduationCap, Zap, AlertTriangle, Mic2, Lightbulb, Building, Play, Pause, Atom, Eye, Scale, Users, WifiOff, CheckCircle, Waves, ChevronDown, ChevronRight, Calendar, DollarSign
-            } from 'lucide-react';
+                    Menu, X, Heart, Home, LogOut, Leaf, Sparkles, Music, Map, User, Globe,
+                    BookOpen, Shield, Target, Briefcase, FileText, Settings, Search, Brain, Presentation, Calculator, GraduationCap, Zap, AlertTriangle, Mic2, Lightbulb, Building, Play, Pause, Atom, Eye, Scale, Users, WifiOff, CheckCircle, Waves, ChevronDown, ChevronRight, Calendar, DollarSign, Moon
+                  } from 'lucide-react';
 import { COOLASFUCKHeart, COOLASFUCKWaves } from '@/components/shared/COOLASFUCKIcon';
 import LiveClock from '@/components/shared/LiveClock';
 import { AnonymousAuthProvider } from '@/components/shared/AnonymousAuth';
@@ -209,6 +210,8 @@ const LayoutInner = ({ children, currentPageName }) => {
   const healNav = [
       { title: "Frequency Chamber", url: createPageUrl("FrequencyChamber"), icon: COOLASFUCKWaves, highlight: true, description: "Free healing frequencies" },
       { title: "Healing Dashboard", url: createPageUrl("HealingDashboard"), icon: Brain, description: "Your healing intelligence" },
+      { title: "Sleep Healing", url: createPageUrl("SleepHealing"), icon: Moon, description: "8 hours to heal" },
+      { title: "Couples Sync", url: createPageUrl("CouplesSync"), icon: Users, description: "Heal together" },
       { title: "Universal Pulse", url: createPageUrl("UniversalPulse"), icon: COOLASFUCKHeart, description: "Collective heartbeat music" },
       { title: "Radio51", url: createPageUrl("Radio"), icon: Music, description: "Lossless music" },
       { title: "Create Demos", url: createPageUrl("LearnGuitar"), icon: Music, description: "Studio tools for artists" },
@@ -419,6 +422,7 @@ const LayoutInner = ({ children, currentPageName }) => {
       <HealingCircle />
       <PWAInstallPrompt />
       <EmergencyMode />
+      <EmergencyCalmButton />
       <AutoBugMonitor />
       <PerformanceOptimizer />
     </GlobalErrorBoundary>

@@ -220,6 +220,54 @@ export default function AdminCanadaTeslaStrategy() {
                     </div>
                 </Card>
 
+                {/* BOB CONNOLLY CONTACT */}
+                <Card className="bg-gradient-to-br from-purple-900/40 to-pink-900/40 border-4 border-purple-500 p-6">
+                    <div className="flex items-center gap-3 mb-4">
+                        <Globe className="w-8 h-8 text-purple-400" />
+                        <h2 className="text-3xl font-black text-purple-400">BOB CONNOLLY - KEY CONTACT</h2>
+                    </div>
+                    <div className="bg-black border-2 border-purple-500 p-6 mb-4">
+                        <p className="text-purple-200 mb-4">
+                            <span className="font-bold text-purple-300">Born 1954, Hamilton Ontario Canada 🇨🇦</span><br/>
+                            Award-winning media producer, former ABC foreign correspondent, journalist
+                        </p>
+                        <div className="bg-purple-500/20 border-l-4 border-purple-500 p-4 mb-4">
+                            <p className="text-white font-bold mb-2">✅ Healed himself from life-threatening illness using Tesla tech</p>
+                            <p className="text-white font-bold mb-2">✅ 10 YEARS researching Tesla's medical inventions</p>
+                            <p className="text-white font-bold mb-2">✅ Proved Tesla coils make plants grow faster + develop enhanced perception</p>
+                            <p className="text-white font-bold mb-2">✅ Created music from plant responses to electromagnetic fields</p>
+                            <p className="text-white font-bold">✅ Trilogy documentary series: "Tesla's Medicine"</p>
+                        </div>
+                        <div className="bg-purple-900/60 border border-purple-400 p-4 mb-4">
+                            <p className="text-purple-300 font-bold mb-2">🎯 WHY HE'LL CARE:</p>
+                            <ul className="space-y-1 text-white text-sm">
+                                <li>• His documentary PROVES Tesla healing works</li>
+                                <li>• Your CIC = non-profit healing mission (his values)</li>
+                                <li>• You've digitized Tesla frequencies for millions</li>
+                                <li>• Canada connection = home country impact</li>
+                                <li>• His plant research = your morphic resonance data</li>
+                            </ul>
+                        </div>
+                        <div className="bg-pink-500/20 border-2 border-pink-500 p-4">
+                            <p className="text-pink-300 font-bold mb-2">📧 THE ASK:</p>
+                            <ul className="space-y-1 text-white text-sm">
+                                <li>1. Endorsement for Canadian grant applications</li>
+                                <li>2. Collaboration on plant healing protocols</li>
+                                <li>3. Introduction to Niagara Parks/Belgrade Museum</li>
+                                <li>4. Featured interview for UF51 about Tesla's medicine</li>
+                            </ul>
+                        </div>
+                        <div className="mt-4 p-4 bg-gradient-to-r from-cyan-500/20 to-purple-500/20 border-2 border-cyan-500">
+                            <p className="text-cyan-300 text-xs font-mono mb-1">CONTACT:</p>
+                            <a href="https://www.bobconnolly.com/teslas-medicine/" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:text-cyan-300 font-bold flex items-center gap-2">
+                                www.bobconnolly.com/teslas-medicine
+                                <ExternalLink className="w-4 h-4" />
+                            </a>
+                            <p className="text-gray-400 text-xs mt-2">Contact form available on website</p>
+                        </div>
+                    </div>
+                </Card>
+
                 {/* IMMEDIATE ACTIONS */}
                 <Card className="bg-gradient-to-r from-pink-900/40 to-red-900/40 border-4 border-pink-500 p-6">
                     <h2 className="text-3xl font-black text-pink-400 mb-4 text-center">IMMEDIATE ACTIONS</h2>
@@ -229,8 +277,8 @@ export default function AdminCanadaTeslaStrategy() {
                             <p className="text-white text-sm">Email about digital healing extension of Tesla exhibit</p>
                         </div>
                         <div className="bg-black border-2 border-pink-500 p-4">
-                            <p className="text-pink-300 font-black mb-2">2. REACH OUT TO BOB CONNOLLY</p>
-                            <p className="text-white text-sm">Documentary collaboration + endorsement</p>
+                            <p className="text-pink-300 font-black mb-2">2. REACH OUT TO BOB CONNOLLY (details above)</p>
+                            <p className="text-white text-sm">Documentary collaboration + endorsement - send when platform features complete</p>
                         </div>
                         <div className="bg-black border-2 border-pink-500 p-4">
                             <p className="text-pink-300 font-black mb-2">3. CONTACT BIOHEALTH CANADA</p>

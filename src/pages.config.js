@@ -170,6 +170,8 @@ import ScottInvoices from './pages/ScottInvoices';
 import ScottAICoordinatorArchitecture from './pages/ScottAICoordinatorArchitecture';
 import ScottExpenses from './pages/ScottExpenses';
 import AdminCanadaTeslaStrategy from './pages/AdminCanadaTeslaStrategy';
+import SleepHealing from './pages/SleepHealing';
+import CouplesSync from './pages/CouplesSync';
 import __Layout from './Layout.jsx';
 
 
@@ -346,6 +348,8 @@ export const PAGES = {
     "ScottAICoordinatorArchitecture": ScottAICoordinatorArchitecture,
     "ScottExpenses": ScottExpenses,
     "AdminCanadaTeslaStrategy": AdminCanadaTeslaStrategy,
+    "SleepHealing": SleepHealing,
+    "CouplesSync": CouplesSync,
 }
 
 export const pagesConfig = {
