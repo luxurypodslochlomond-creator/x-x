@@ -112,8 +112,8 @@ function ScottManagerInner() {
                         <p className="text-gray-600 text-xs tracking-widest" style={{ fontFamily: 'monospace' }}>ARTIST MANAGER</p>
                         </div>
                         <div className="flex items-center justify-center gap-2 mb-3">
-                        <Gill51Sunglasses8Bit size={20} animate={true} />
-                        <p className="text-cyan-500 text-xs tracking-widest" style={{ fontFamily: 'monospace' }}>BRO51 + SCOTT</p>
+                            <Gill51Sunglasses8Bit size={20} animate={true} />
+                            <p className="text-cyan-500 text-xs tracking-widest font-black" style={{ fontFamily: 'monospace' }}>SK51</p>
                         </div>
                         <Input
                         type="password"
