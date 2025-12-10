@@ -177,6 +177,8 @@ import ScottFeatureRequests from './pages/ScottFeatureRequests';
 import ScottGigOffers from './pages/ScottGigOffers';
 import ScottGuestList from './pages/ScottGuestList';
 import ScottMerch from './pages/ScottMerch';
+import ScottAccommodation from './pages/ScottAccommodation';
+import ScottProducers from './pages/ScottProducers';
 import __Layout from './Layout.jsx';
 
 
@@ -360,6 +362,8 @@ export const PAGES = {
     "ScottGigOffers": ScottGigOffers,
     "ScottGuestList": ScottGuestList,
     "ScottMerch": ScottMerch,
+    "ScottAccommodation": ScottAccommodation,
+    "ScottProducers": ScottProducers,
 }
 
 export const pagesConfig = {

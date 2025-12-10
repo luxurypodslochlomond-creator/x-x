@@ -4,6 +4,7 @@ import { createPageUrl } from '@/utils';
 import { Music, Plus, DollarSign, Percent } from 'lucide-react';
 import { base44 } from '@/api/base44Client';
 import KingdomCrown8Bit from '@/components/shared/KingdomCrown8Bit';
+import ScottMusicRightsBreakdown from '@/components/scott/ScottMusicRightsBreakdown';
 
 /**
  * PUBLISHING RIGHTS TRACKER
@@ -83,32 +84,8 @@ export default function ScottPublishing() {
                     </div>
                 </div>
 
-                {/* THE KNOWLEDGE - HOW PUBLISHING WORKS */}
-                <div className="bg-gradient-to-r from-amber-900/40 to-purple-900/40 border-2 border-amber-500 p-6 mb-6">
-                    <h3 className="text-amber-400 font-black font-mono text-lg mb-4">THE KNOWLEDGE 📚</h3>
-                    
-                    <div className="space-y-4 text-sm font-mono">
-                        <div className="bg-black/60 p-3">
-                            <p className="text-amber-300 font-bold mb-1">COMPOSITION (PUBLISHING)</p>
-                            <p className="text-gray-400">Writers + Publishers split. PRO collects (PRS, BMI, ASCAP). Sync licenses here.</p>
-                        </div>
-
-                        <div className="bg-black/60 p-3">
-                            <p className="text-cyan-300 font-bold mb-1">MASTER RECORDING</p>
-                            <p className="text-gray-400">Who owns the recording. Label or independent. Streaming royalties go here.</p>
-                        </div>
-
-                        <div className="bg-black/60 p-3">
-                            <p className="text-green-300 font-bold mb-1">THE SPLITS</p>
-                            <p className="text-gray-400">Publishing: typically 100% split between writers/publishers. Master: whoever paid for recording.</p>
-                        </div>
-
-                        <div className="bg-black/60 p-3">
-                            <p className="text-purple-300 font-bold mb-1">SCOTT'S JOB</p>
-                            <p className="text-gray-400">Make sure artists own their masters. Fair publishing deals. Collect everything owed.</p>
-                        </div>
-                    </div>
-                </div>
+                {/* THE KNOWLEDGE - VISUAL BREAKDOWN */}
+                <ScottMusicRightsBreakdown />
 
                 {/* ADD BUTTON */}
                 <button
