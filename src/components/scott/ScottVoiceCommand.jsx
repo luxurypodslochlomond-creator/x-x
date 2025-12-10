@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Mic, MicOff } from 'lucide-react';
 import { base44 } from '@/api/base44Client';
+import ScottGentleReward from './ScottGentleReward';
 
 /**
  * VOICE COMMAND - SPEAK DON'T TYPE
@@ -10,6 +11,7 @@ import { base44 } from '@/api/base44Client';
 export default function ScottVoiceCommand({ onCommandComplete }) {
     const [isListening, setIsListening] = useState(false);
     const [transcript, setTranscript] = useState('');
+    const [showReward, setShowReward] = useState(false);
 
     const startListening = () => {
         if (!('webkitSpeechRecognition' in window)) {
@@ -53,8 +55,11 @@ export default function ScottVoiceCommand({ onCommandComplete }) {
                     });
                 }
 
-                if (onCommandComplete) onCommandComplete();
                 setTranscript('✓ Created');
+                setShowReward(true);
+                setTimeout(() => {
+                    if (onCommandComplete) onCommandComplete();
+                }, 2000);
             } catch (error) {
                 console.error('Voice command error:', error);
             }
@@ -64,6 +69,8 @@ export default function ScottVoiceCommand({ onCommandComplete }) {
     };
 
     return (
+        <>
+        <ScottGentleReward onComplete={showReward} />
         <button
             onClick={startListening}
             disabled={isListening}
@@ -84,5 +91,6 @@ export default function ScottVoiceCommand({ onCommandComplete }) {
                 </div>
             )}
         </button>
+        </>
     );
 }
