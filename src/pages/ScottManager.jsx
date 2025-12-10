@@ -9,7 +9,6 @@ import { Input } from '@/components/ui/input';
 import { Plus, User, Calendar, CheckSquare, MessageSquare, DollarSign, Search } from 'lucide-react';
 import { motion } from 'framer-motion';
 import KingdomCrown8Bit from '@/components/shared/KingdomCrown8Bit';
-import CelticFC8Bit from '@/components/shared/CelticFC8Bit';
 
 /**
  * SCOTT'S ARTIST/CLIENT MANAGER

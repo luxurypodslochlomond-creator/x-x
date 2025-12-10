@@ -248,7 +248,7 @@ const LayoutInner = ({ children, currentPageName }) => {
   ];
 
   const scottNav = [
-    { title: "🦆 Scott's Manager", url: createPageUrl("ScottManager"), icon: User, description: "Artist/client management" },
+    { title: "SK 👑", url: createPageUrl("ScottManager"), icon: User, description: "Artist management" },
   ];
 
   const adminNav = user?.role === 'admin' ? [
