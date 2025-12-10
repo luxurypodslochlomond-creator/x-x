@@ -250,7 +250,7 @@ function ScottManagerInner() {
                         <motion.div
                             initial={{ opacity: 0, y: -10 }}
                             animate={{ opacity: 1, y: 0 }}
-                            className="absolute top-12 left-0 z-50 bg-black border-4 border-green-500 p-4 w-64"
+                            className="fixed top-32 left-4 right-4 z-[9999] bg-black border-4 border-green-500 p-4 max-w-xs"
                             style={{ boxShadow: '6px 6px 0 rgba(0,0,0,0.8)' }}
                         >
                             <div className="space-y-2">
