@@ -7,7 +7,8 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { ArrowLeft, Calendar, CheckSquare, MessageSquare, DollarSign, Plus, Phone, Mail } from 'lucide-react';
+import { ArrowLeft, Calendar, CheckSquare, MessageSquare, DollarSign, Plus, Phone, Mail, Brain, Copy } from 'lucide-react';
+import { base44 } from '@/api/base44Client';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function ScottArtist() {
@@ -27,10 +28,14 @@ export default function ScottArtist() {
     const [showAddTask, setShowAddTask] = useState(false);
     const [showAddMessage, setShowAddMessage] = useState(false);
     const [showAddEvent, setShowAddEvent] = useState(false);
+    const [showAIDraft, setShowAIDraft] = useState(false);
 
     const [newTask, setNewTask] = useState({ title: '', notes: '', priority: 'normal' });
     const [newMessage, setNewMessage] = useState({ message: '', direction: 'note' });
     const [newEvent, setNewEvent] = useState({ title: '', date: '', location: '', event_type: 'gig' });
+    const [aiContext, setAiContext] = useState('');
+    const [aiDraft, setAiDraft] = useState('');
+    const [aiLoading, setAiLoading] = useState(false);
 
     const { data: artist } = useQuery({
         queryKey: ['scott-artist', artistId],
@@ -111,6 +116,33 @@ export default function ScottArtist() {
         }
     });
 
+    const handleAIDraft = async () => {
+        setAiLoading(true);
+        try {
+            const prompt = `You are Scott's AI assistant helping him draft a professional email.
+
+ARTIST INFO:
+Name: ${artist.name}
+Type: ${artist.type}
+Genre: ${artist.genre || 'Unknown'}
+Relationship: ${artist.relationship}
+Past Notes: ${artist.notes || 'No notes yet'}
+Rate: ${artist.rate ? '£' + artist.rate : 'Not specified'}
+
+CONTEXT FROM SCOTT:
+${aiContext}
+
+TASK: Draft a short, professional but friendly email based on the context Scott provided. Keep it natural, not corporate. Sign it "Scott - Kingdom Management" at the end.`;
+
+            const response = await base44.asServiceRole.integrations.Core.InvokeLLM({ prompt });
+            setAiDraft(response);
+        } catch (error) {
+            alert('AI draft failed: ' + error.message);
+        } finally {
+            setAiLoading(false);
+        }
+    };
+
     if (!artist) {
         return (
             <div className="min-h-screen bg-gradient-to-br from-purple-950 via-black to-indigo-950 p-4 flex items-center justify-center">
@@ -157,6 +189,59 @@ export default function ScottArtist() {
                         <p className="text-gray-300 text-sm">{artist.notes}</p>
                     </div>
                 )}
+
+                <Button
+                    onClick={() => setShowAIDraft(!showAIDraft)}
+                    className="w-full mt-4 bg-gradient-to-r from-cyan-600 to-purple-600 hover:from-cyan-700 hover:to-purple-700"
+                >
+                    <Brain className="w-4 h-4 mr-2" />
+                    {showAIDraft ? 'Hide AI Draft' : 'Draft Email (AI)'}
+                </Button>
+
+                <AnimatePresence>
+                    {showAIDraft && (
+                        <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: 'auto', opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            className="mt-4 space-y-3"
+                        >
+                            <Textarea
+                                placeholder="What's the email about? (e.g., 'Asking about session next Thursday' or 'Following up on gig offer')"
+                                value={aiContext}
+                                onChange={(e) => setAiContext(e.target.value)}
+                                className="bg-black/60 border-cyan-500/50 text-white min-h-[80px]"
+                            />
+                            <Button
+                                onClick={handleAIDraft}
+                                disabled={!aiContext.trim() || aiLoading}
+                                className="w-full bg-cyan-600 hover:bg-cyan-700"
+                            >
+                                {aiLoading ? 'Drafting...' : 'Generate Email'}
+                            </Button>
+
+                            {aiDraft && (
+                                <div className="bg-black/60 p-4 rounded border border-cyan-500/30">
+                                    <div className="flex items-center justify-between mb-2">
+                                        <p className="text-cyan-400 text-xs font-bold">AI DRAFT</p>
+                                        <Button
+                                            size="sm"
+                                            variant="outline"
+                                            onClick={() => {
+                                                navigator.clipboard.writeText(aiDraft);
+                                                alert('Copied!');
+                                            }}
+                                            className="border-cyan-500/50"
+                                        >
+                                            <Copy className="w-3 h-3" />
+                                        </Button>
+                                    </div>
+                                    <p className="text-gray-300 text-sm whitespace-pre-wrap">{aiDraft}</p>
+                                </div>
+                            )}
+                        </motion.div>
+                    )}
+                </AnimatePresence>
             </Card>
 
             {/* TASKS */}
