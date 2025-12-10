@@ -370,18 +370,23 @@ function ScottManagerInner() {
                 </Link>
             </div>
 
-            {/* SEARCH - CLEAN */}
+            {/* SMART SEARCH - NO FILTER DROPDOWNS */}
             <div className="mb-6">
                 <div className="relative">
                     <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-600" />
                     <Input
-                        placeholder="Search roster..."
+                        placeholder="Type anything... name, genre, vibe"
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                         className="pl-12 py-3 bg-black border border-gray-800 rounded-lg text-white placeholder:text-gray-700 focus:border-amber-500/50 transition-all"
                         style={{ fontFamily: 'monospace' }}
                     />
                 </div>
+                {searchQuery && (
+                    <p className="text-xs text-gray-600 font-mono mt-2">
+                        Found {filteredArtists.length} • Just type, we'll figure it out
+                    </p>
+                )}
             </div>
 
             {/* QUICK ACTIONS - CLEAN */}
@@ -406,74 +411,136 @@ function ScottManagerInner() {
 
 
 
-            {/* ARTISTS/CLIENTS LIST */}
-            <div className="space-y-3">
-                <h2 className="text-sm font-bold text-amber-400 tracking-wider mb-4" style={{ fontFamily: 'monospace' }}>
-                    {searchQuery ? `RESULTS (${filteredArtists.length})` : 'ROSTER'}
-                </h2>
-                
+            {/* SMART ROSTER - AUTO-ORGANIZED */}
+            <div className="space-y-6">
+                {!searchQuery ? (
+                    <>
+                    {/* ACTIVE - Working with right now */}
+                    {(() => {
+                        const active = filteredArtists.filter(a => a.relationship === 'excellent' || a.relationship === 'good');
+                        if (active.length === 0) return null;
+                        return (
+                            <div>
+                                <div className="flex items-center gap-2 mb-3">
+                                    <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                                    <h2 className="text-sm font-bold text-green-400 tracking-wider" style={{ fontFamily: 'monospace' }}>
+                                        ACTIVE NOW ({active.length})
+                                    </h2>
+                                </div>
+                                <div className="space-y-3">
+                                    {active.map(artist => (
+                                        <Link key={artist.id} to={createPageUrl(`ScottArtist?id=${artist.id}`)} className="block">
+                                            <motion.div whileTap={{ scale: 0.98 }} className="bg-black border border-green-500/30 hover:border-green-500/60 rounded-xl p-4 transition-all cursor-pointer">
+                                                <div className="flex items-center justify-between">
+                                                    <div className="flex-1">
+                                                        <p className="text-white text-base mb-1" style={{ fontFamily: 'monospace' }}>{artist.name}</p>
+                                                        <div className="flex items-center gap-2">
+                                                            <p className="text-green-500 text-xs uppercase tracking-widest" style={{ fontFamily: 'monospace' }}>{artist.type}</p>
+                                                            <span className="text-green-400 text-xs">●</span>
+                                                        </div>
+                                                        {artist.genre && <p className="text-gray-600 text-xs mt-1" style={{ fontFamily: 'monospace' }}>{artist.genre}</p>}
+                                                    </div>
+                                                    <div className="flex gap-2">
+                                                        {artist.phone && (
+                                                            <a href={`tel:${artist.phone}`} onClick={(e) => e.stopPropagation()} className="p-2 bg-green-500/20 hover:bg-green-500/30 rounded transition-colors">
+                                                                <svg className="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/></svg>
+                                                            </a>
+                                                        )}
+                                                    </div>
+                                                </div>
+                                            </motion.div>
+                                        </Link>
+                                    ))}
+                                </div>
+                            </div>
+                        );
+                    })()}
+
+                    {/* EVERYONE ELSE */}
+                    {(() => {
+                        const others = filteredArtists.filter(a => a.relationship !== 'excellent' && a.relationship !== 'good');
+                        if (others.length === 0) return null;
+                        return (
+                            <div>
+                                <h2 className="text-sm font-bold text-gray-600 tracking-wider mb-3" style={{ fontFamily: 'monospace' }}>
+                                    ROSTER ({others.length})
+                                </h2>
+                                <div className="space-y-3">
+                                    {others.map(artist => (
+                                        <Link key={artist.id} to={createPageUrl(`ScottArtist?id=${artist.id}`)} className="block">
+                                            <motion.div whileTap={{ scale: 0.98 }} className="bg-black border border-gray-800 hover:border-amber-500/50 rounded-xl p-4 transition-all cursor-pointer">
+                                                <div className="flex items-center justify-between">
+                                                    <div className="flex-1">
+                                                        <p className="text-white text-base mb-1" style={{ fontFamily: 'monospace' }}>{artist.name}</p>
+                                                        <div className="flex items-center gap-2">
+                                                            <p className="text-amber-500 text-xs uppercase tracking-widest" style={{ fontFamily: 'monospace' }}>{artist.type}</p>
+                                                            {artist.relationship === 'needs_work' && <span className="text-red-400 text-xs">●</span>}
+                                                        </div>
+                                                        {artist.genre && <p className="text-gray-600 text-xs mt-1" style={{ fontFamily: 'monospace' }}>{artist.genre}</p>}
+                                                    </div>
+                                                    <div className="flex gap-2">
+                                                        {artist.phone && (
+                                                            <a href={`tel:${artist.phone}`} onClick={(e) => e.stopPropagation()} className="p-2 bg-green-500/20 hover:bg-green-500/30 rounded transition-colors">
+                                                                <svg className="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/></svg>
+                                                            </a>
+                                                        )}
+                                                    </div>
+                                                </div>
+                                            </motion.div>
+                                        </Link>
+                                    ))}
+                                </div>
+                            </div>
+                        );
+                    })()}
+                    </>
+                ) : (
+                    <div>
+                        <h2 className="text-sm font-bold text-cyan-400 tracking-wider mb-4" style={{ fontFamily: 'monospace' }}>
+                            SEARCH RESULTS ({filteredArtists.length})
+                        </h2>
+                        <div className="space-y-3">
                 {filteredArtists.length === 0 ? (
                     <div className="bg-black border border-gray-800 rounded-xl p-8 text-center">
-                        {searchQuery ? (
-                            <p className="text-gray-600 text-sm font-bold" style={{ fontFamily: 'monospace' }}>NO MATCHES</p>
-                        ) : (
-                            <>
-                                <p className="text-gray-600 text-sm font-bold mb-3" style={{ fontFamily: 'monospace' }}>ROSTER EMPTY</p>
-                                <p className="text-gray-700 text-xs mb-4" style={{ fontFamily: 'monospace' }}>Tap ADD to start</p>
-                                <Link to={createPageUrl('ScottAddArtist')}>
-                                    <button className="bg-amber-500 hover:bg-amber-600 text-black font-bold text-xs px-6 py-2 rounded-lg">
-                                        <Plus className="w-4 h-4 mr-1 inline" />
-                                        ADD FIRST CONTACT
-                                    </button>
-                                </Link>
-                            </>
-                        )}
+                        <p className="text-gray-600 text-sm font-bold" style={{ fontFamily: 'monospace' }}>NO MATCHES</p>
                     </div>
                 ) : (
                     filteredArtists.map(artist => (
                         <Link key={artist.id} to={createPageUrl(`ScottArtist?id=${artist.id}`)} className="block">
-                            <motion.div
-                                whileTap={{ scale: 0.98 }}
-                                className="bg-black border border-gray-800 hover:border-amber-500/50 rounded-xl p-4 transition-all cursor-pointer"
-                            >
+                            <motion.div whileTap={{ scale: 0.98 }} className="bg-black border border-gray-800 hover:border-cyan-500/50 rounded-xl p-4 transition-all cursor-pointer">
                                 <div className="flex items-center justify-between">
                                     <div className="flex-1">
                                         <p className="text-white text-base mb-1" style={{ fontFamily: 'monospace' }}>{artist.name}</p>
                                         <div className="flex items-center gap-2">
-                                           <p className="text-amber-500 text-xs uppercase tracking-widest" style={{ fontFamily: 'monospace' }}>{artist.type}</p>
-                                           {artist.relationship === 'excellent' && <span className="text-green-400 text-xs">●</span>}
-                                           {artist.relationship === 'good' && <span className="text-cyan-400 text-xs">●</span>}
-                                           {artist.relationship === 'needs_work' && <span className="text-red-400 text-xs">●</span>}
+                                            <p className="text-cyan-500 text-xs uppercase tracking-widest" style={{ fontFamily: 'monospace' }}>{artist.type}</p>
+                                            {artist.relationship === 'excellent' && <span className="text-green-400 text-xs">●</span>}
+                                            {artist.relationship === 'good' && <span className="text-cyan-400 text-xs">●</span>}
+                                            {artist.relationship === 'needs_work' && <span className="text-red-400 text-xs">●</span>}
                                         </div>
-                                        {artist.genre && (
-                                           <p className="text-gray-600 text-xs mt-1" style={{ fontFamily: 'monospace' }}>{artist.genre}</p>
-                                        )}
-                                        </div>
-                                        <div className="flex gap-2">
-                                        {artist.phone && (
-                                           <a href={`tel:${artist.phone}`} onClick={(e) => e.stopPropagation()} className="p-2 bg-green-500/20 hover:bg-green-500/30 rounded transition-colors">
-                                               <svg className="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/></svg>
-                                           </a>
-                                        )}
-                                        <button 
-                                           onClick={(e) => {
-                                               e.stopPropagation();
-                                               e.preventDefault();
-                                               const text = `${artist.name}\n${artist.phone || ''}\n${artist.email || ''}`;
-                                               navigator.clipboard.writeText(text);
-                                               alert('Contact copied!');
-                                           }}
-                                           className="p-2 bg-cyan-500/20 hover:bg-cyan-500/30 rounded transition-colors"
-                                        >
-                                           <svg className="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
-                                        </button>
-                                        </div>
+                                        {artist.genre && <p className="text-gray-600 text-xs mt-1" style={{ fontFamily: 'monospace' }}>{artist.genre}</p>}
+                                    </div>
                                 </div>
                             </motion.div>
                         </Link>
                     ))
                 )}
-            </div>
+                </div>
+                )}
+
+                {/* EMPTY STATE */}
+                {!searchQuery && filteredArtists.length === 0 && (
+                <div className="bg-black border border-gray-800 rounded-xl p-8 text-center">
+                <p className="text-gray-600 text-sm font-bold mb-3" style={{ fontFamily: 'monospace' }}>ROSTER EMPTY</p>
+                <p className="text-gray-700 text-xs mb-4" style={{ fontFamily: 'monospace' }}>Tap ADD to start</p>
+                <Link to={createPageUrl('ScottAddArtist')}>
+                    <button className="bg-amber-500 hover:bg-amber-600 text-black font-bold text-xs px-6 py-2 rounded-lg">
+                        <Plus className="w-4 h-4 mr-1 inline" />
+                        ADD FIRST CONTACT
+                    </button>
+                </Link>
+                </div>
+                )}
+                </div>
 
             {/* POWER TOOLS */}
             <div className="grid grid-cols-2 gap-3 mb-6">
