@@ -198,8 +198,11 @@ export default function MorphicResonance() {
             {/* ALL PROTOCOLS RESONANCE */}
             <Card className="bg-black border-4 border-amber-500 p-6">
                 <h3 className="text-xl font-black font-mono text-amber-400 mb-4">
-                    COLLECTIVE HEALING PATTERNS
+                    WHAT THE COLLECTIVE IS HEALING
                 </h3>
+                <p className="text-gray-400 font-mono text-xs mb-4">
+                    (These are patterns from all users globally - not your personal data)
+                </p>
                 <div className="space-y-3">
                     {Object.entries(resonanceData.protocolStats)
                         .sort((a, b) => b[1].uniqueUsers - a[1].uniqueUsers)
