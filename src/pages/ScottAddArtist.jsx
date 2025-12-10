@@ -28,6 +28,9 @@ export default function ScottAddArtist() {
         type: 'artist',
         phone: '',
         email: '',
+        instagram: '',
+        spotify: '',
+        rate: '',
         notes: ''
     });
 
@@ -117,6 +120,41 @@ export default function ScottAddArtist() {
                         />
                     </div>
 
+                    <div className="grid grid-cols-2 gap-4">
+                        <div>
+                            <label className="text-gray-500 text-xs tracking-widest mb-2 block uppercase" style={{ fontFamily: 'monospace' }}>Instagram</label>
+                            <Input
+                                value={formData.instagram}
+                                onChange={(e) => setFormData({...formData, instagram: e.target.value})}
+                                className="bg-black border border-gray-800 text-white placeholder:text-gray-700 focus:border-amber-500/50 transition-colors"
+                                style={{ fontFamily: 'monospace' }}
+                                placeholder="@handle"
+                            />
+                        </div>
+                        <div>
+                            <label className="text-gray-500 text-xs tracking-widest mb-2 block uppercase" style={{ fontFamily: 'monospace' }}>Spotify</label>
+                            <Input
+                                value={formData.spotify}
+                                onChange={(e) => setFormData({...formData, spotify: e.target.value})}
+                                className="bg-black border border-gray-800 text-white placeholder:text-gray-700 focus:border-amber-500/50 transition-colors"
+                                style={{ fontFamily: 'monospace' }}
+                                placeholder="Artist link"
+                            />
+                        </div>
+                    </div>
+
+                    <div>
+                        <label className="text-gray-500 text-xs tracking-widest mb-2 block uppercase" style={{ fontFamily: 'monospace' }}>Rate (£/session)</label>
+                        <Input
+                            type="number"
+                            value={formData.rate}
+                            onChange={(e) => setFormData({...formData, rate: e.target.value})}
+                            className="bg-black border border-gray-800 text-white placeholder:text-gray-700 focus:border-amber-500/50 transition-colors"
+                            style={{ fontFamily: 'monospace' }}
+                            placeholder="250"
+                        />
+                    </div>
+
                     <div>
                         <label className="text-gray-500 text-xs tracking-widest mb-2 block uppercase" style={{ fontFamily: 'monospace' }}>Notes</label>
                         <Textarea
@@ -124,7 +162,7 @@ export default function ScottAddArtist() {
                             onChange={(e) => setFormData({...formData, notes: e.target.value})}
                             className="bg-black border border-gray-800 text-white placeholder:text-gray-700 focus:border-amber-500/50 transition-colors min-h-[100px]"
                             style={{ fontFamily: 'monospace' }}
-                            placeholder="Important info..."
+                            placeholder="Genre, gear, contract details..."
                         />
                     </div>
 
