@@ -363,11 +363,11 @@ function ScottManagerInner() {
                         </Button>
                     </motion.div>
                 </Link>
-                <Link to={createPageUrl('ScottAICoordinatorArchitecture')} className="block">
+                <Link to={createPageUrl('TalkToAI51')} className="block">
                     <motion.div whileTap={{ scale: 0.95 }}>
                         <Button className="w-full bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white font-bold py-3 rounded-lg">
                             <Brain className="w-5 h-5 mr-2" />
-                            AI
+                            LEGAL AI
                         </Button>
                     </motion.div>
                 </Link>

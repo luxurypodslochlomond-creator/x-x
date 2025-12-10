@@ -94,10 +94,13 @@ export default function ScottMusicRightsBreakdown() {
                 </div>
             </div>
 
-            {/* UNIVERSAL JOKE */}
+            {/* UNIVERSAL JOKE + AI LEGAL */}
             <div className="mt-4 bg-black/60 border border-gray-700 p-3">
-                <p className="text-gray-500 text-xs font-mono italic text-center">
+                <p className="text-gray-500 text-xs font-mono italic text-center mb-2">
                     📡 "Including music on other planets" - Scott's contracts are FUTURE PROOF 😂🚀
+                </p>
+                <p className="text-cyan-400 text-xs font-mono text-center">
+                    🤖 AI51 = Best music lawyer in the galaxy (tap LEGAL AI button)
                 </p>
             </div>
         </div>
