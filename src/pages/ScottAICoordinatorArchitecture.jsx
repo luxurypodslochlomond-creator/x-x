@@ -1,7 +1,7 @@
 import React from 'react';
-import { Card } from '@/components/ui/card';
 import { Brain, Mail, Bell, Users, Calendar, Zap } from 'lucide-react';
 import KingdomCrown8Bit from '@/components/shared/KingdomCrown8Bit';
+import Gill51Sunglasses8Bit from '@/components/shared/Gill51Sunglasses8Bit';
 
 /**
  * AI COORDINATOR ARCHITECTURE
@@ -17,17 +17,11 @@ export default function ScottAICoordinatorArchitecture() {
                 {/* HEADER - 8-BIT */}
                 <div className="mb-8 pb-6 border-b-4 border-cyan-500" style={{ boxShadow: '0 4px 0 rgba(0,0,0,0.5)' }}>
                     <div className="flex items-center justify-center gap-3 mb-3">
-                        <motion.div animate={{ y: [0, -3, 0] }} transition={{ duration: 2, repeat: Infinity }}>
-                            <Gill51Sunglasses8Bit size={28} animate={false} />
-                        </motion.div>
+                        <Gill51Sunglasses8Bit size={28} animate={true} />
                         <div className="h-8 w-px bg-cyan-500/30"></div>
-                        <motion.div animate={{ rotate: [0, 5, 0, -5, 0] }} transition={{ duration: 3, repeat: Infinity }}>
-                            <KingdomCrown8Bit size={40} animate={false} />
-                        </motion.div>
+                        <KingdomCrown8Bit size={40} animate={true} />
                         <div className="h-8 w-px bg-cyan-500/30"></div>
-                        <motion.div animate={{ y: [0, -3, 0] }} transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}>
-                            <Gill51Sunglasses8Bit size={28} animate={false} />
-                        </motion.div>
+                        <Gill51Sunglasses8Bit size={28} animate={true} />
                     </div>
                     <div className="text-center">
                         <h1 className="text-4xl font-black text-cyan-400 tracking-tighter leading-none mb-1" style={{ 
