@@ -14,6 +14,7 @@ import ScottEnergyMode from '@/components/scott/ScottEnergyMode';
 import ScottCelticMode from '@/components/scott/ScottCelticMode';
 import ScottTimeline from '@/components/scott/ScottTimeline';
 import ScottQuickActions from '@/components/scott/ScottQuickActions';
+import ScottTeamShare from '@/components/scott/ScottTeamShare';
 
 /**
  * SCOTT'S ARTIST/CLIENT MANAGER
