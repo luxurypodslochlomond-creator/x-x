@@ -5,6 +5,8 @@ import { Card } from '@/components/ui/card';
 import { motion } from 'framer-motion';
 import { Users, TrendingDown, Sparkles, Globe } from 'lucide-react';
 import { COOLASFUCKWaves } from '@/components/shared/COOLASFUCKIcon';
+import { Link } from 'react-router-dom';
+import { createPageUrl } from '@/utils';
 
 /**
  * MORPHIC RESONANCE VISUALIZATION
@@ -124,13 +126,16 @@ export default function MorphicResonance() {
             
             {/* COLLECTIVE STATS */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                <Card className="bg-black border-4 border-cyan-500 p-3 text-center">
-                    <Globe className="w-6 h-6 text-cyan-400 mx-auto mb-1" />
-                    <p className="text-2xl font-black text-cyan-400 font-mono">
-                        {resonanceData.totalHealers}
-                    </p>
-                    <p className="text-[10px] text-gray-400 font-mono">Solo Healing</p>
-                </Card>
+                <Link to={createPageUrl('FrequencyChamber')}>
+                    <Card className="bg-black border-4 border-cyan-500 p-3 text-center hover:border-cyan-400 hover:bg-cyan-500/10 active:scale-95 transition-all cursor-pointer">
+                        <Globe className="w-6 h-6 text-cyan-400 mx-auto mb-1" />
+                        <p className="text-2xl font-black text-cyan-400 font-mono">
+                            {resonanceData.totalHealers}
+                        </p>
+                        <p className="text-[10px] text-gray-400 font-mono">Solo Healing</p>
+                        <p className="text-[8px] text-cyan-600 font-mono mt-1">TAP TO HEAL →</p>
+                    </Card>
+                </Link>
 
                 <Card className="bg-black border-4 border-pink-500 p-3 text-center">
                     <Sparkles className="w-6 h-6 text-pink-400 mx-auto mb-1" />
@@ -138,23 +143,30 @@ export default function MorphicResonance() {
                         {resonanceData.totalSessions}
                     </p>
                     <p className="text-[10px] text-gray-400 font-mono">Sessions</p>
+                    <p className="text-[8px] text-pink-600 font-mono mt-1">COLLECTIVE TOTAL</p>
                 </Card>
 
-                <Card className="bg-black border-4 border-green-500 p-3 text-center">
-                    <Users className="w-6 h-6 text-green-400 mx-auto mb-1" />
-                    <p className="text-2xl font-black text-green-400 font-mono">
-                        {resonanceData.totalCollectiveSyncs}
-                    </p>
-                    <p className="text-[10px] text-gray-400 font-mono">Collective Syncs</p>
-                </Card>
+                <Link to={createPageUrl('TunerTogether')}>
+                    <Card className="bg-black border-4 border-green-500 p-3 text-center hover:border-green-400 hover:bg-green-500/10 active:scale-95 transition-all cursor-pointer">
+                        <Users className="w-6 h-6 text-green-400 mx-auto mb-1" />
+                        <p className="text-2xl font-black text-green-400 font-mono">
+                            {resonanceData.totalCollectiveSyncs}
+                        </p>
+                        <p className="text-[10px] text-gray-400 font-mono">Collective Syncs</p>
+                        <p className="text-[8px] text-green-600 font-mono mt-1">TAP TO SYNC →</p>
+                    </Card>
+                </Link>
 
-                <Card className="bg-black border-4 border-purple-500 p-3 text-center">
-                    <COOLASFUCKWaves size={24} animate={true} className="mx-auto mb-1" />
-                    <p className="text-2xl font-black text-purple-400 font-mono">
-                        {resonanceData.totalSoulsInSync}
-                    </p>
-                    <p className="text-[10px] text-gray-400 font-mono">Souls Synced</p>
-                </Card>
+                <Link to={createPageUrl('TunerTogether')}>
+                    <Card className="bg-black border-4 border-purple-500 p-3 text-center hover:border-purple-400 hover:bg-purple-500/10 active:scale-95 transition-all cursor-pointer">
+                        <COOLASFUCKWaves size={24} animate={true} className="mx-auto mb-1" />
+                        <p className="text-2xl font-black text-purple-400 font-mono">
+                            {resonanceData.totalSoulsInSync}
+                        </p>
+                        <p className="text-[10px] text-gray-400 font-mono">Souls Synced</p>
+                        <p className="text-[8px] text-purple-600 font-mono mt-1">JOIN THEM →</p>
+                    </Card>
+                </Link>
             </div>
 
             {/* STRONGEST RESONANCE */}
