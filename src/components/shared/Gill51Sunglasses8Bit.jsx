@@ -2,9 +2,10 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 /**
- * GILL51 SUNGLASSES - 8-bit COOLASFUCK style
- * For Brian & Gill51 - the sunglasses legacy
+ * SUNGLASSES LEGACY - 8-bit COOLASFUCK style
+ * For Brian (BRO51) & Scott - the sunglasses story
  * Sharing, losing, giving away, traveling the world
+ * Gill51's idea cause we drive her mad 😎😂
  * Glasgow to hillsides ❤️
  */
 

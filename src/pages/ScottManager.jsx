@@ -187,6 +187,7 @@ function ScottManagerInner() {
                         <div>
                             <h1 className="text-2xl font-black text-amber-400 tracking-tight leading-none" style={{ fontFamily: 'monospace' }}>SK</h1>
                             <p className="text-[9px] text-gray-600 tracking-widest font-bold mt-0.5" style={{ fontFamily: 'monospace' }}>OFFLINE-FIRST MGMT</p>
+                            <p className="text-[8px] text-cyan-500 tracking-widest mt-1" style={{ fontFamily: 'monospace' }}>😎 BRO51 + SCOTT</p>
                         </div>
 
                         {/* OFFLINE/SYNC STATUS */}
@@ -353,7 +354,8 @@ function ScottManagerInner() {
                     <KingdomCrown8Bit size={24} />
                     <p className="text-gray-700 text-xs tracking-widest" style={{ fontFamily: 'monospace' }}>KINGDOM</p>
                 </div>
-                <p className="text-center text-gray-800 text-[10px] tracking-widest" style={{ fontFamily: 'monospace' }}>EST 1888 • 😎 GILL51 + BRO51</p>
+                <p className="text-center text-gray-800 text-[10px] tracking-widest" style={{ fontFamily: 'monospace' }}>EST 1888 • 😎 SUNGLASSES LEGACY</p>
+                <p className="text-center text-gray-700 text-[8px] mt-1" style={{ fontFamily: 'monospace' }}>Shared, lost, given away - BRO51 + SCOTT</p>
             </div>
             </div>
             );
