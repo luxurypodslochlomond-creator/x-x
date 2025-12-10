@@ -72,7 +72,7 @@ export default function HealingDashboard() {
                         HEALING INTELLIGENCE
                     </h1>
                     <p className="text-gray-400 font-mono text-sm text-center">
-                        Your healing strengthens the collective field
+                        Your data strengthens the collective evidence
                     </p>
 
                     {/* PIXEL DECORATION */}
@@ -101,7 +101,7 @@ export default function HealingDashboard() {
                                 <strong>This is your healing intelligence dashboard.</strong>
                             </p>
                             <p className="text-gray-400 font-mono text-xs">
-                                Every Frequency Chamber session saves here. Watch yourself heal over time. See how you connect to the global healing network.
+                                Every Frequency Chamber session saves here. Watch yourself heal over time. Your data helps prove what works for everyone.
                             </p>
                         </div>
                     </div>
@@ -125,10 +125,10 @@ export default function HealingDashboard() {
 
                     <div className="bg-purple-900/20 border-2 border-purple-500/50 p-4 mb-4">
                         <p className="text-purple-200 font-mono text-sm mb-3">
-                            Thousands of people worldwide using these frequencies to heal. <strong className="text-purple-400">Together we build the evidence.</strong>
+                            Thousands worldwide using these frequencies. <strong className="text-purple-400">Every session builds the evidence base.</strong>
                         </p>
                         <p className="text-gray-400 font-mono text-xs">
-                            Every session tracked. Every healing measured. Real data proving what works.
+                            Real tracking. Real outcomes. Real science being built together.
                         </p>
                     </div>
 
