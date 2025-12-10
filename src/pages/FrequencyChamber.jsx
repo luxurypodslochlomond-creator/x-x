@@ -1323,32 +1323,40 @@ export default function FrequencyChamber() {
         rightOsc.start();
         nodes.push(leftOsc, rightOsc, leftGain, rightGain, merger);
 
-        // TESLA 3-6-9 SEQUENCE - Honor the master
+        // TESLA 3-6-9 HARMONIC STACK - All frequencies at once for cellular resonance
         if (config.teslaSequence) {
-          const sequence = config.teslaSequence;
-          const phaseDuration = 60; // 60 seconds per frequency
-          let currentPhase = 0;
+          const teslaFreqs = config.teslaSequence; // [3, 6, 9]
 
-          const transitionToNext = () => {
-            const now = ctx.currentTime;
-            const targetFreq = sequence[currentPhase % sequence.length];
+          teslaFreqs.forEach((freq, i) => {
+            const leftTesla = ctx.createOscillator();
+            const rightTesla = ctx.createOscillator();
+            const leftTeslaGain = ctx.createGain();
+            const rightTeslaGain = ctx.createGain();
+            const teslaMerger = ctx.createChannelMerger(2);
 
-            // Smooth transition over 5 seconds
-            rightOsc.frequency.linearRampToValueAtTime(
-              config.carrier + targetFreq,
-              now + 5
-            );
+            leftTesla.type = 'sine';
+            rightTesla.type = 'sine';
+            leftTesla.frequency.value = config.carrier + freq * 0.5;
+            rightTesla.frequency.value = config.carrier + freq;
 
-            setCurrentHz(targetFreq);
-            currentPhase++;
-          };
+            // Decreasing volume for higher harmonics
+            const volume = 0.15 / (i + 1);
+            leftTeslaGain.gain.value = volume;
+            rightTeslaGain.gain.value = volume;
 
-          // Start first transition immediately
-          transitionToNext();
+            leftTesla.connect(leftTeslaGain);
+            rightTesla.connect(rightTeslaGain);
+            leftTeslaGain.connect(teslaMerger, 0, 0);
+            rightTeslaGain.connect(teslaMerger, 0, 1);
+            teslaMerger.connect(masterGain);
 
-          // Schedule phase transitions
-          const sequenceInterval = setInterval(transitionToNext, phaseDuration * 1000);
-          nodes.push({ stop: () => clearInterval(sequenceInterval) });
+            leftTesla.start();
+            rightTesla.start();
+            nodes.push(leftTesla, rightTesla, leftTeslaGain, rightTeslaGain, teslaMerger);
+          });
+
+          // Display 3-6-9 on screen
+          setCurrentHz('3-6-9');
         }
       } else {
         // ISOCHRONIC TONES - Pulsing on/off
