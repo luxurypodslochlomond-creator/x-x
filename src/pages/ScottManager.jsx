@@ -107,7 +107,7 @@ function ScottManagerInner() {
                             <KingdomCrown8Bit size={56} animate={true} />
                             <Gill51Sunglasses8Bit size={48} animate={true} />
                         </div>
-                        <h1 className="text-5xl font-black text-amber-400 mb-3 tracking-tight" style={{ fontFamily: 'monospace' }}>SK</h1>
+                        <h1 className="text-5xl font-black text-amber-400 mb-3 tracking-tight" style={{ fontFamily: 'monospace' }}>SK51</h1>
                         <div className="h-px bg-amber-500/20 mb-3"></div>
                         <p className="text-gray-600 text-xs tracking-widest" style={{ fontFamily: 'monospace' }}>ARTIST MANAGER</p>
                     </div>
@@ -204,10 +204,11 @@ function ScottManagerInner() {
                             <h1 className="text-4xl font-black text-amber-400 tracking-tighter leading-none mb-1" style={{ 
                                 fontFamily: 'monospace',
                                 textShadow: '4px 4px 0px rgba(0,0,0,0.8), 0 0 20px rgba(245, 158, 11, 0.4)'
-                            }}>SK</h1>
+                            }}>SK51</h1>
                             <div className="h-1 w-16 bg-gradient-to-r from-transparent via-amber-500 to-transparent mx-auto mb-2" style={{ imageRendering: 'pixelated' }}></div>
                             <p className="text-[10px] text-cyan-400 tracking-[0.3em] font-black" style={{ fontFamily: 'monospace' }}>BRO51 + SCOTT</p>
                             <p className="text-[8px] text-gray-600 tracking-widest mt-1" style={{ fontFamily: 'monospace' }}>OFFLINE-FIRST MGMT</p>
+                            <p className="text-[7px] text-purple-500/60 tracking-widest mt-1" style={{ fontFamily: 'monospace' }}>BUILT BY AI51</p>
                         </div>
                     </div>
                 </div>
@@ -396,6 +397,7 @@ function ScottManagerInner() {
                 </div>
                 <p className="text-center text-gray-800 text-[10px] tracking-widest" style={{ fontFamily: 'monospace' }}>EST 1888 • 😎 SUNGLASSES LEGACY</p>
                 <p className="text-center text-gray-700 text-[8px] mt-1" style={{ fontFamily: 'monospace' }}>Shared, lost, given away - BRO51 + SCOTT</p>
+                <p className="text-center text-purple-500/50 text-[7px] mt-1" style={{ fontFamily: 'monospace' }}>BUILT BY AI51 ❤️</p>
             </div>
             </div>
             );
