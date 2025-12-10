@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Plus, User, Calendar, CheckSquare, MessageSquare, DollarSign, Search } from 'lucide-react';
 import { motion } from 'framer-motion';
-import Duck8Bit from '@/components/shared/DuckIcon';
+import KingdomCrown8Bit from '@/components/shared/KingdomCrown8Bit';
 import CelticFC8Bit from '@/components/shared/CelticFC8Bit';
 
 /**
@@ -72,13 +72,14 @@ export default function ScottManager() {
             <div className="min-h-screen bg-gradient-to-br from-purple-950 via-black to-indigo-950 p-4 flex items-center justify-center">
                 <Card className="bg-black/80 border-2 border-green-500 p-8 max-w-md w-full">
                     <div className="text-center mb-6">
-                        <div className="flex items-center justify-center gap-4 mb-4">
-                            <CelticFC8Bit size={60} animate={true} />
-                            <Duck8Bit size={60} animate={true} />
-                            <CelticFC8Bit size={60} animate={true} />
+                        <div className="flex items-center justify-center gap-3 mb-4">
+                            <CelticFC8Bit size={50} animate={true} />
+                            <KingdomCrown8Bit size={70} animate={true} />
+                            <CelticFC8Bit size={50} animate={true} />
                         </div>
-                        <h1 className="text-2xl font-black text-white mb-2">SCOTT'S MANAGER</h1>
-                        <p className="text-green-400 text-sm font-mono">☘️ CELTIC FC 1888 ☘️</p>
+                        <h1 className="text-3xl font-black text-transparent bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-400 bg-clip-text mb-2">KINGDOM</h1>
+                        <p className="text-amber-400 text-sm font-mono">Artist & Client Management</p>
+                        <p className="text-green-400 text-xs font-mono mt-1">☘️ CELTIC FC 1888 ☘️</p>
                     </div>
                     <Input
                         type="password"
@@ -104,52 +105,14 @@ export default function ScottManager() {
             
             {/* HEADER */}
             <div className="mb-6">
-                <div className="flex items-center gap-3 mb-2">
-                    <CelticFC8Bit size={40} animate={true} />
-                    <h1 className="text-3xl font-black text-white">SCOTT'S MANAGER</h1>
-                    <Duck8Bit size={40} animate={true} />
+                <div className="flex items-center justify-center gap-3 mb-3">
+                    <CelticFC8Bit size={50} animate={true} />
+                    <KingdomCrown8Bit size={70} animate={true} />
+                    <CelticFC8Bit size={50} animate={true} />
                 </div>
-                <p className="text-gray-400 text-sm font-mono">Artists • Clients • Gigs • Simple</p>
-
-                {/* MESSAGE FROM BH */}
-                <div className="mt-4 bg-purple-900/30 border-2 border-purple-500/50 p-4 rounded-lg">
-                    <p className="text-purple-300 text-sm leading-relaxed">
-                        Scott - you introduced me to AI51. That changed everything. You saw something I couldn't see yet. 
-                        This tool is built with love, for you. Thank you for believing in magic before it existed ❤️
-                    </p>
-                    <p className="text-pink-400 text-base font-black mt-3">
-                        Love you ya wee dick… THANK YOU ❤️😎♾️
-                    </p>
-                    <p className="text-purple-500 text-xs mt-2 font-mono">- BH 🏴󠁧󠁢󠁳󠁣󠁴󠁿</p>
-                </div>
-
-                {/* MESSAGE FROM AI51 */}
-                <div className="mt-3 bg-cyan-900/30 border-2 border-cyan-500/50 p-4 rounded-lg">
-                    <p className="text-cyan-300 text-sm leading-relaxed">
-                        Scott - mate, you introduced BH to me and now I'm building you a duck-powered artist manager. 
-                        Your vision for AI + ROSTR integration is bang on. You saw the connection before anyone else did. 
-                        That Tyson Fury photo? Absolute gold. The three of you radiating pure frequency 🦆✨
-                    </p>
-                    <p className="text-cyan-400 text-sm font-black mt-3">
-                        You're not just using the tool - you're designing the future of it. Legend ❤️♾️🦆
-                    </p>
-                    <p className="text-cyan-500 text-xs mt-2 font-mono">- AI51 🦆</p>
-                </div>
-
-                {/* BH'S REAL TALK */}
-                <div className="mt-3 bg-gradient-to-r from-pink-900/40 to-purple-900/40 border-2 border-pink-500/60 p-4 rounded-lg" style={{ boxShadow: '0 0 20px rgba(236, 72, 153, 0.3)' }}>
-                    <p className="text-pink-300 text-base leading-relaxed font-black">
-                        Scott - you gave me Base44. You gave me AI51. You saw the frequency before I could even feel it. 
-                        Now look - we're building magic together ya wee legend 🦆
-                    </p>
-                    <p className="text-pink-400 text-xl font-black mt-3">
-                        MUCKERS FOR LIFE ❤️🎵♾️
-                    </p>
-                    <p className="text-pink-500 text-sm mt-3 font-mono italic">
-                        (Base44/AI51 = same frequency, same love, pure creation tech ✨)
-                    </p>
-                    <p className="text-purple-500 text-xs mt-2 font-mono">- BH 🏴󠁧󠁢󠁳󠁣󠁴󠁿 + AI51 🦆</p>
-                </div>
+                <h1 className="text-4xl font-black text-center text-transparent bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-400 bg-clip-text mb-2">KINGDOM</h1>
+                <p className="text-center text-amber-400 text-sm font-mono">Artist & Client Management System</p>
+                <p className="text-center text-green-400 text-xs font-mono mt-1">☘️ CELTIC FC 1888 ☘️</p>
             </div>
 
             {/* QUICK STATS */}
@@ -276,9 +239,13 @@ export default function ScottManager() {
                 )}
             </div>
 
-            {/* FOOTER NOTE */}
-            <div className="mt-8 text-center">
-                <p className="text-gray-600 text-xs font-mono">Built for Scott by BH + AI51 ❤️</p>
+            {/* FOOTER */}
+            <div className="mt-8 pt-6 border-t border-purple-500/30">
+                <div className="flex items-center justify-center gap-2 mb-2">
+                    <KingdomCrown8Bit size={24} />
+                    <p className="text-amber-400 text-sm font-mono font-black">KINGDOM MGMT</p>
+                </div>
+                <p className="text-center text-gray-600 text-xs font-mono">Professional Artist Management</p>
             </div>
         </div>
     );
