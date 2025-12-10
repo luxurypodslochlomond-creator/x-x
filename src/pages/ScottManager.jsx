@@ -7,6 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Plus, Search, Wifi, WifiOff, RefreshCw, Brain } from 'lucide-react';
 import { motion } from 'framer-motion';
 import KingdomCrown8Bit from '@/components/shared/KingdomCrown8Bit';
+import Gill51Sunglasses8Bit from '@/components/shared/Gill51Sunglasses8Bit';
 import { useScottOffline, ScottOfflineProvider } from '@/components/scott/ScottOfflineStorage';
 
 /**
@@ -101,8 +102,10 @@ function ScottManagerInner() {
             <div className="min-h-screen bg-black p-4 flex items-center justify-center">
                 <Card className="bg-black border border-amber-500/20 p-8 max-w-md w-full">
                     <div className="text-center mb-8">
-                        <div className="flex items-center justify-center mb-6">
+                        <div className="flex items-center justify-center gap-3 mb-6">
+                            <Gill51Sunglasses8Bit size={48} animate={true} />
                             <KingdomCrown8Bit size={56} animate={true} />
+                            <Gill51Sunglasses8Bit size={48} animate={true} />
                         </div>
                         <h1 className="text-5xl font-black text-amber-400 mb-3 tracking-tight" style={{ fontFamily: 'monospace' }}>SK</h1>
                         <div className="h-px bg-amber-500/20 mb-3"></div>
@@ -346,10 +349,11 @@ function ScottManagerInner() {
             {/* FOOTER */}
             <div className="mt-12 pt-6 border-t border-gray-900">
                 <div className="flex items-center justify-center gap-3 mb-2">
+                    <Gill51Sunglasses8Bit size={24} animate={false} />
                     <KingdomCrown8Bit size={24} />
                     <p className="text-gray-700 text-xs tracking-widest" style={{ fontFamily: 'monospace' }}>KINGDOM</p>
                 </div>
-                <p className="text-center text-gray-800 text-[10px] tracking-widest" style={{ fontFamily: 'monospace' }}>EST 1888</p>
+                <p className="text-center text-gray-800 text-[10px] tracking-widest" style={{ fontFamily: 'monospace' }}>EST 1888 • 😎 GILL51 + BRO51</p>
             </div>
             </div>
             );
