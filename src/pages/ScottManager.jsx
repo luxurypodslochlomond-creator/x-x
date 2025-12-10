@@ -13,6 +13,7 @@ import ScottOneSentence from '@/components/scott/ScottOneSentence';
 import ScottEnergyMode from '@/components/scott/ScottEnergyMode';
 import ScottCelticMode from '@/components/scott/ScottCelticMode';
 import ScottTimeline from '@/components/scott/ScottTimeline';
+import ScottQuickActions from '@/components/scott/ScottQuickActions';
 
 /**
  * SCOTT'S ARTIST/CLIENT MANAGER
@@ -443,10 +444,33 @@ function ScottManagerInner() {
                 )}
             </div>
 
+            {/* POWER TOOLS */}
+            <div className="grid grid-cols-2 gap-3 mb-6">
+                <Link to={createPageUrl('ScottTravelMode')} className="w-full">
+                    <motion.div whileTap={{ scale: 0.95 }}>
+                        <div className="bg-gradient-to-r from-cyan-900/40 to-purple-900/40 border-2 border-cyan-500 p-4 text-center hover:border-cyan-400 transition-all">
+                            <p className="text-3xl mb-1">✈️</p>
+                            <p className="text-xs text-cyan-400 tracking-wider font-bold" style={{ fontFamily: 'monospace' }}>TRAVEL MODE</p>
+                        </div>
+                    </motion.div>
+                </Link>
+                <Link to={createPageUrl('ScottFinancialDashboard')} className="w-full">
+                    <motion.div whileTap={{ scale: 0.95 }}>
+                        <div className="bg-gradient-to-r from-green-900/40 to-cyan-900/40 border-2 border-green-500 p-4 text-center hover:border-green-400 transition-all">
+                            <p className="text-3xl mb-1">💰</p>
+                            <p className="text-xs text-green-400 tracking-wider font-bold" style={{ fontFamily: 'monospace' }}>MONEY</p>
+                        </div>
+                    </motion.div>
+                </Link>
+            </div>
+
             {/* FOOTER */}
             <div className="mt-12 pt-6 border-t border-gray-900 text-center">
                 <p className="text-gray-800 text-xs mb-2" style={{ fontFamily: 'monospace' }}>Kingdom Management</p>
             </div>
+
+            {/* FLOATING QUICK ACTIONS */}
+            <ScottQuickActions />
             </div>
             );
             }

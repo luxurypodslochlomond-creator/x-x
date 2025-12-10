@@ -11,11 +11,13 @@ import { CelticFC8Bit } from '../shared/CelticFC8Bit';
  */
 
 export default function ScottCelticMode({ isEnabled, onToggle }) {
+    // Real Celtic fixtures - check today's date
+    const today = new Date();
     const [nextGame] = useState({
-        opponent: 'Rangers',
-        venue: 'Ibrox',
+        opponent: 'Ross County',
+        venue: 'Paradise',
         date: '2025-12-14',
-        time: '12:30',
+        time: '15:00',
         competition: 'Scottish Premiership'
     });
 
