@@ -1,26 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
-import { base44 } from '@/api/base44Client';
 import { createPageUrl } from '@/utils';
 import { Card } from '@/components/ui/card';
-import { ArrowLeft, Calendar } from 'lucide-react';
+import { ArrowLeft, Calendar, WifiOff } from 'lucide-react';
 import { motion } from 'framer-motion';
 import KingdomCrown8Bit from '@/components/shared/KingdomCrown8Bit';
+import { useScottOffline, ScottOfflineProvider } from '@/components/scott/ScottOfflineStorage';
 
-export default function ScottCalendar() {
+function ScottCalendarInner() {
     const navigate = useNavigate();
-    const [viewMode, setViewMode] = useState('upcoming'); // upcoming or all
+    const scott = useScottOffline();
+    const [viewMode, setViewMode] = useState('upcoming');
+    const [events, setEvents] = useState([]);
+    const [artists, setArtists] = useState([]);
 
-    const { data: events = [] } = useQuery({
-        queryKey: ['scott-all-events'],
-        queryFn: () => base44.entities.ScottEvent.list('-date')
-    });
-
-    const { data: artists = [] } = useQuery({
-        queryKey: ['scott-artists'],
-        queryFn: () => base44.entities.ScottArtist.list()
-    });
+    useEffect(() => {
+        setEvents(scott.getEvents());
+        setArtists(scott.getArtists());
+        
+        if (scott.isOnline) {
+            scott.pullFromServer().then(() => {
+                setEvents(scott.getEvents());
+                setArtists(scott.getArtists());
+            });
+        }
+    }, [scott.isOnline]);
 
     const upcomingEvents = events.filter(e => new Date(e.date) >= new Date());
     const pastEvents = events.filter(e => new Date(e.date) < new Date());
@@ -46,13 +50,24 @@ export default function ScottCalendar() {
     return (
         <div className="min-h-screen bg-black p-4 pb-20">
             
-            <button
-                onClick={() => navigate(createPageUrl('ScottManager'))}
-                className="flex items-center gap-2 text-gray-600 mb-6 hover:text-amber-400 transition-all hover:gap-1"
-            >
-                <ArrowLeft className="w-4 h-4" />
-                <span style={{ fontFamily: 'monospace' }} className="text-sm tracking-wider font-bold">BACK</span>
-            </button>
+            <div className="flex items-center justify-between mb-6">
+                <button
+                    onClick={() => navigate(createPageUrl('ScottManager'))}
+                    className="flex items-center gap-2 text-gray-600 hover:text-amber-400 transition-all"
+                >
+                    <ArrowLeft className="w-4 h-4" />
+                    <span style={{ fontFamily: 'monospace' }} className="text-sm tracking-wider font-bold">BACK</span>
+                </button>
+                
+                {!scott.isOnline && (
+                    <div className="flex items-center gap-1 bg-amber-500/20 px-2 py-1 rounded">
+                        <WifiOff className="w-3 h-3 text-amber-400" />
+                        <span className="text-[10px] text-amber-400 font-bold tracking-wider" style={{ fontFamily: 'monospace' }}>
+                            OFFLINE
+                        </span>
+                    </div>
+                )}
+            </div>
 
             <div className="mb-6 pb-4 border-b border-amber-500/20">
                 <div className="flex items-center justify-center gap-3 mb-4">
@@ -179,5 +194,13 @@ export default function ScottCalendar() {
                 <p className="text-center text-gray-800 text-[10px] tracking-widest" style={{ fontFamily: 'monospace' }}>EST 1888</p>
             </div>
         </div>
+    );
+}
+
+export default function ScottCalendar() {
+    return (
+        <ScottOfflineProvider>
+            <ScottCalendarInner />
+        </ScottOfflineProvider>
     );
 }
