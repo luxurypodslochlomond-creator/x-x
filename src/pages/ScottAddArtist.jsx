@@ -49,10 +49,10 @@ export default function ScottAddArtist() {
             
             <button
                 onClick={() => navigate(createPageUrl('ScottManager'))}
-                className="flex items-center gap-2 text-gray-500 mb-6 hover:text-amber-500 transition-colors"
+                className="flex items-center gap-2 text-gray-600 mb-6 hover:text-amber-400 transition-all hover:gap-1"
             >
                 <ArrowLeft className="w-4 h-4" />
-                <span style={{ fontFamily: 'monospace' }} className="text-sm tracking-wider">BACK</span>
+                <span style={{ fontFamily: 'monospace' }} className="text-sm tracking-wider font-bold">BACK</span>
             </button>
 
             <div className="flex items-center justify-center gap-3 mb-6">
@@ -69,14 +69,14 @@ export default function ScottAddArtist() {
                             value={formData.type}
                             onValueChange={(value) => setFormData({...formData, type: value})}
                         >
-                            <SelectTrigger className="bg-black border border-gray-800 text-white hover:border-amber-500/30 transition-colors" style={{ fontFamily: 'monospace' }}>
+                            <SelectTrigger className="bg-black border-2 border-gray-800 text-white hover:border-amber-500/50 transition-all hover:shadow-[0_0_10px_rgba(245,158,11,0.2)]" style={{ fontFamily: 'monospace', padding: '12px' }}>
                                 <SelectValue />
                             </SelectTrigger>
-                            <SelectContent>
-                                <SelectItem value="artist">Artist</SelectItem>
-                                <SelectItem value="client">Client</SelectItem>
-                                <SelectItem value="venue">Venue</SelectItem>
-                                <SelectItem value="other">Other</SelectItem>
+                            <SelectContent className="bg-black border-2 border-amber-500/30" style={{ fontFamily: 'monospace' }}>
+                                <SelectItem value="artist" className="text-white hover:bg-amber-500/20 focus:bg-amber-500/20 cursor-pointer" style={{ fontFamily: 'monospace' }}>Artist</SelectItem>
+                                <SelectItem value="client" className="text-white hover:bg-amber-500/20 focus:bg-amber-500/20 cursor-pointer" style={{ fontFamily: 'monospace' }}>Client</SelectItem>
+                                <SelectItem value="venue" className="text-white hover:bg-amber-500/20 focus:bg-amber-500/20 cursor-pointer" style={{ fontFamily: 'monospace' }}>Venue</SelectItem>
+                                <SelectItem value="other" className="text-white hover:bg-amber-500/20 focus:bg-amber-500/20 cursor-pointer" style={{ fontFamily: 'monospace' }}>Other</SelectItem>
                             </SelectContent>
                         </Select>
                     </div>
@@ -131,8 +131,8 @@ export default function ScottAddArtist() {
                     <Button
                         type="submit"
                         disabled={saving}
-                        className="w-full bg-amber-500 hover:bg-amber-600 text-black font-black py-4 tracking-wider transition-colors"
-                        style={{ fontFamily: 'monospace', boxShadow: '0 0 15px rgba(245, 158, 11, 0.2)' }}
+                        className="w-full bg-amber-500 hover:bg-amber-600 text-black font-black py-4 tracking-wider transition-all hover:scale-[1.02]"
+                        style={{ fontFamily: 'monospace', boxShadow: '0 0 20px rgba(245, 158, 11, 0.4), inset 0 -2px 0 rgba(0,0,0,0.3)' }}
                     >
                         {saving ? 'SAVING...' : 'SAVE'}
                     </Button>

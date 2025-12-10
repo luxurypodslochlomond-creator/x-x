@@ -146,7 +146,7 @@ export default function ScottManager() {
 
             {/* ADD NEW BUTTON */}
             <Link to={createPageUrl('ScottAddArtist')} className="block">
-                <Button className="w-full mb-8 bg-amber-500 hover:bg-amber-600 text-black font-black py-4 tracking-wider transition-colors" style={{ fontFamily: 'monospace', boxShadow: '0 0 15px rgba(245, 158, 11, 0.2)' }}>
+                <Button className="w-full mb-8 bg-amber-500 hover:bg-amber-600 text-black font-black py-4 tracking-wider transition-all hover:scale-[1.02]" style={{ fontFamily: 'monospace', boxShadow: '0 0 20px rgba(245, 158, 11, 0.4), inset 0 -2px 0 rgba(0,0,0,0.3)' }}>
                     <Plus className="w-4 h-4 mr-2" />
                     ADD NEW
                 </Button>
