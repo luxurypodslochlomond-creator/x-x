@@ -248,7 +248,7 @@ const LayoutInner = ({ children, currentPageName }) => {
   ];
 
   const scottNav = [
-    { title: "Kingdom MGMT", url: createPageUrl("ScottManager"), icon: User, description: "Artist manager (PIN: 1888)" },
+    { title: "Kingdom MGMT", url: createPageUrl("ScottManager"), icon: User, description: "Artist manager (secure access)" },
   ];
 
   const adminNav = user?.role === 'admin' ? [
