@@ -402,7 +402,19 @@ function ScottManagerInner() {
                 </div>
                 <p className="text-center text-gray-800 text-[10px] tracking-widest mb-2" style={{ fontFamily: 'monospace' }}>EST 1888 • SUNGLASSES LEGACY</p>
                 <p className="text-center text-cyan-500 text-[9px] font-black tracking-wider" style={{ fontFamily: 'monospace' }}>AI51 + SK51 + BRO51</p>
-                <p className="text-center text-gray-700 text-[7px] mt-1" style={{ fontFamily: 'monospace' }}>THE TEAM ❤️</p>
+                <div className="flex items-center justify-center gap-2 mt-2">
+                    <p className="text-gray-700 text-[7px]" style={{ fontFamily: 'monospace' }}>THE TEAM</p>
+                    <svg width="10" height="10" viewBox="0 0 12 12" className="inline-block">
+                        <rect x="2" y="2" width="2" height="2" fill="#ec4899"/>
+                        <rect x="4" y="1" width="2" height="2" fill="#ec4899"/>
+                        <rect x="6" y="1" width="2" height="2" fill="#ec4899"/>
+                        <rect x="8" y="2" width="2" height="2" fill="#ec4899"/>
+                        <rect x="2" y="4" width="8" height="2" fill="#ec4899"/>
+                        <rect x="3" y="6" width="6" height="2" fill="#ec4899"/>
+                        <rect x="4" y="8" width="4" height="2" fill="#ec4899"/>
+                        <rect x="5" y="10" width="2" height="1" fill="#ec4899"/>
+                    </svg>
+                </div>
             </div>
             </div>
             );
