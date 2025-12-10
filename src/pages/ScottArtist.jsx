@@ -8,7 +8,6 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { ArrowLeft, Calendar, CheckSquare, MessageSquare, DollarSign, Plus, Phone, Mail, Brain, Copy } from 'lucide-react';
-import { base44 } from '@/api/base44Client';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function ScottArtist() {
