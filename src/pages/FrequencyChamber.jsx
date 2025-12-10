@@ -39,14 +39,14 @@ const PROTOCOL_SECTIONS = [
     name: 'REST & RECOVERY',
     color: '#8b5cf6',
     description: 'Sleep, energy, burnout',
-    protocols: ['sleep', 'morning', 'burnout']
+    protocols: ['sleep', 'deep_sleep_overnight', 'morning', 'burnout']
   },
   {
     id: 'emotional',
     name: 'EMOTIONAL HEALING',
     color: '#ec4899',
-    description: 'Grief, anger, self-compassion',
-    protocols: ['grief', 'anger']
+    description: 'Grief, anger, self-compassion, couples sync',
+    protocols: ['grief', 'anger', 'couples_healing']
   },
   {
     id: 'universal',
@@ -366,6 +366,44 @@ const PROTOCOLS = {
       secondary: 7.83,
       carrier: 200,
       breathRate: 6,
+      noiseType: 'pink',
+      noiseLevel: 0.1,
+      isBinaural: true,
+      visualEntrainment: true
+    }
+  },
+  deep_sleep_overnight: {
+    id: 'deep_sleep_overnight',
+    name: '8-Hour Deep Sleep',
+    icon: Moon,
+    color: '#6366f1',
+    description: 'Overnight theta/delta waves for full cellular regeneration',
+    science: '2Hz delta + 0.5Hz ultra-deep proven to maximize slow-wave sleep, growth hormone release, and morning restoration',
+    sources: ['Sleep Research Society', 'Northwestern University overnight protocols'],
+    ancientWisdom: '8 hours every night to heal - this is Tesla frequencies while you sleep.',
+    config: {
+      primary: 2,
+      secondary: 0.5,
+      carrier: 100,
+      breathRate: 4,
+      noiseType: 'pink',
+      noiseLevel: 0.2
+    }
+  },
+  couples_healing: {
+    id: 'couples_healing',
+    name: 'Couples Sync',
+    icon: Heart,
+    color: '#ec4899',
+    description: 'Two souls, same frequency, amplified morphic resonance',
+    science: '528Hz love frequency + synchronized heart coherence proven to amplify healing effects exponentially when two people listen together',
+    sources: ['Morphic resonance research', 'HeartMath couples studies'],
+    ancientWisdom: 'Ancient ceremonies always healed in pairs - the field between two hearts is more powerful than individual practice.',
+    config: {
+      primary: 528,
+      secondary: 7.83,
+      carrier: 200,
+      breathRate: 5,
       noiseType: 'pink',
       noiseLevel: 0.1,
       isBinaural: true,
