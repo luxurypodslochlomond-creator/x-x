@@ -15,6 +15,11 @@ import ScottCelticMode from '@/components/scott/ScottCelticMode';
 import ScottTimeline from '@/components/scott/ScottTimeline';
 import ScottQuickActions from '@/components/scott/ScottQuickActions';
 import ScottTeamShare from '@/components/scott/ScottTeamShare';
+import ScottVoiceCommand from '@/components/scott/ScottVoiceCommand';
+import ScottMorningBriefing from '@/components/scott/ScottMorningBriefing';
+import ScottFocusMode from '@/components/scott/ScottFocusMode';
+import ScottContextMemory from '@/components/scott/ScottContextMemory';
+import ScottDidIDoThis from '@/components/scott/ScottDidIDoThis';
 
 /**
  * SCOTT'S ARTIST/CLIENT MANAGER
@@ -138,7 +143,14 @@ function ScottManagerInner() {
     }
 
     return (
+        <ScottFocusMode>
         <div className="min-h-screen bg-black p-4 pb-20">
+
+            {/* MORNING BRIEFING */}
+            <ScottMorningBriefing />
+
+            {/* CONTEXT MEMORY */}
+            <ScottContextMemory />
 
             {/* OFFLINE EXPLAINER MODAL */}
             {showOfflineExplainer && (
@@ -488,9 +500,16 @@ function ScottManagerInner() {
                 <p className="text-gray-800 text-xs mb-2" style={{ fontFamily: 'monospace' }}>Kingdom Management</p>
             </div>
 
+            {/* DID I DO THIS? */}
+            <ScottDidIDoThis />
+
             {/* FLOATING QUICK ACTIONS */}
             <ScottQuickActions />
+
+            {/* VOICE COMMAND */}
+            <ScottVoiceCommand onCommandComplete={() => window.location.reload()} />
             </div>
+            </ScottFocusMode>
             );
             }
 
