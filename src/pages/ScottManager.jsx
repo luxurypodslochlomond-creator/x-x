@@ -9,6 +9,9 @@ import { motion } from 'framer-motion';
 import KingdomCrown8Bit from '@/components/shared/KingdomCrown8Bit';
 import Gill51Sunglasses8Bit from '@/components/shared/Gill51Sunglasses8Bit';
 import { useScottOffline, ScottOfflineProvider } from '@/components/scott/ScottOfflineStorage';
+import ScottOneSentence from '@/components/scott/ScottOneSentence';
+import ScottEnergyMode from '@/components/scott/ScottEnergyMode';
+import ScottCelticMode from '@/components/scott/ScottCelticMode';
 
 /**
  * SCOTT'S ARTIST/CLIENT MANAGER
@@ -28,6 +31,8 @@ function ScottManagerInner() {
     const [urgentTasks, setUrgentTasks] = useState([]);
     const [unpaidInvoices, setUnpaidInvoices] = useState([]);
     const [expenses, setExpenses] = useState([]);
+    const [energyLevel, setEnergyLevel] = useState('high');
+    const [celticModeEnabled, setCelticModeEnabled] = useState(true);
 
     // Check if PIN already stored + show offline explainer first time
     useEffect(() => {
@@ -219,6 +224,23 @@ function ScottManagerInner() {
                     </motion.div>
                 </Link>
             </div>
+
+            {/* CELTIC MODE ☘️ */}
+            <ScottCelticMode 
+                isEnabled={celticModeEnabled}
+                onToggle={setCelticModeEnabled}
+            />
+
+            {/* ENERGY MODE - ADHD BRAIN BATTERY */}
+            <ScottEnergyMode onEnergyChange={setEnergyLevel} />
+
+            {/* ONE-SENTENCE COMMAND */}
+            <ScottOneSentence 
+                onCommandComplete={() => {
+                    // Reload data after command
+                    window.location.reload();
+                }}
+            />
 
             {/* MONEY SECTION - CLEAN */}
             <div className="grid grid-cols-2 gap-3 mb-6">
