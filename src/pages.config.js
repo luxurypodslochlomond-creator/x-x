@@ -171,6 +171,7 @@ import ScottAICoordinatorArchitecture from './pages/ScottAICoordinatorArchitectu
 import ScottExpenses from './pages/ScottExpenses';
 import AdminCanadaTeslaStrategy from './pages/AdminCanadaTeslaStrategy';
 import ScottTeam from './pages/ScottTeam';
+import ScottVisas from './pages/ScottVisas';
 import __Layout from './Layout.jsx';
 
 
@@ -348,6 +349,7 @@ export const PAGES = {
     "ScottExpenses": ScottExpenses,
     "AdminCanadaTeslaStrategy": AdminCanadaTeslaStrategy,
     "ScottTeam": ScottTeam,
+    "ScottVisas": ScottVisas,
 }
 
 export const pagesConfig = {

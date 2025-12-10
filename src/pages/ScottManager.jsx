@@ -12,6 +12,7 @@ import { useScottOffline, ScottOfflineProvider } from '@/components/scott/ScottO
 import ScottOneSentence from '@/components/scott/ScottOneSentence';
 import ScottEnergyMode from '@/components/scott/ScottEnergyMode';
 import ScottCelticMode from '@/components/scott/ScottCelticMode';
+import ScottTimeline from '@/components/scott/ScottTimeline';
 
 /**
  * SCOTT'S ARTIST/CLIENT MANAGER
@@ -242,12 +243,15 @@ function ScottManagerInner() {
                 }}
             />
 
-            {/* MONEY SECTION - CLEAN */}
-            <div className="grid grid-cols-2 gap-3 mb-6">
+            {/* VISUAL TIMELINE - EVERYTHING AT A GLANCE */}
+            <ScottTimeline />
+
+            {/* MONEY + TRAVEL - CLEAN */}
+            <div className="grid grid-cols-3 gap-3 mb-6">
                 <Link to={createPageUrl('ScottInvoices')} className="w-full">
                     <motion.div whileTap={{ scale: 0.95 }}>
                         <div className="bg-black border border-green-500/30 rounded-xl p-4 text-center hover:border-green-500/60 transition-all">
-                            <p className="text-5xl font-black text-green-400 mb-2" style={{ fontFamily: 'monospace' }}>{unpaidInvoices.length}</p>
+                            <p className="text-4xl font-black text-green-400 mb-2" style={{ fontFamily: 'monospace' }}>{unpaidInvoices.length}</p>
                             <p className="text-xs text-green-500 tracking-wider font-bold" style={{ fontFamily: 'monospace' }}>INVOICES</p>
                         </div>
                     </motion.div>
@@ -255,8 +259,16 @@ function ScottManagerInner() {
                 <Link to={createPageUrl('ScottExpenses')} className="w-full">
                     <motion.div whileTap={{ scale: 0.95 }}>
                         <div className="bg-black border border-purple-500/30 rounded-xl p-4 text-center hover:border-purple-500/60 transition-all">
-                            <p className="text-5xl font-black text-purple-400 mb-2" style={{ fontFamily: 'monospace' }}>{expenses.length}</p>
+                            <p className="text-4xl font-black text-purple-400 mb-2" style={{ fontFamily: 'monospace' }}>{expenses.length}</p>
                             <p className="text-xs text-purple-500 tracking-wider font-bold" style={{ fontFamily: 'monospace' }}>EXPENSES</p>
+                        </div>
+                    </motion.div>
+                </Link>
+                <Link to={createPageUrl('ScottVisas')} className="w-full">
+                    <motion.div whileTap={{ scale: 0.95 }}>
+                        <div className="bg-black border border-cyan-500/30 rounded-xl p-4 text-center hover:border-cyan-500/60 transition-all">
+                            <p className="text-4xl font-black text-cyan-400 mb-2" style={{ fontFamily: 'monospace' }}>✈️</p>
+                            <p className="text-xs text-cyan-500 tracking-wider font-bold" style={{ fontFamily: 'monospace' }}>VISAS</p>
                         </div>
                     </motion.div>
                 </Link>
