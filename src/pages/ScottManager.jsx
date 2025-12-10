@@ -211,24 +211,22 @@ function ScottManagerInner() {
 
             {/* QUICK STATS */}
             <div className="grid grid-cols-3 gap-2 mb-6">
-                <button onClick={() => setSearchQuery('')} className="w-full">
-                    <Card className="bg-black border border-amber-500/20 p-4 text-center hover:border-amber-500/50 transition-all hover:bg-amber-500/5 active:scale-95">
-                        <p className="text-4xl font-black text-white mb-2" style={{ fontFamily: 'monospace' }}>{artists.length}</p>
-                        <p className="text-xs text-amber-500 tracking-widest font-bold" style={{ fontFamily: 'monospace' }}>ROSTER</p>
-                    </Card>
-                </button>
+                <Card className="bg-black border border-amber-500/20 p-4 text-center">
+                    <p className="text-4xl font-black text-white mb-2" style={{ fontFamily: 'monospace' }}>{artists.length}</p>
+                    <p className="text-xs text-amber-500 tracking-widest font-bold" style={{ fontFamily: 'monospace' }}>ROSTER</p>
+                </Card>
                 <Link to={createPageUrl('ScottCalendar')} className="w-full">
                     <Card className="bg-black border border-cyan-500/20 p-4 text-center hover:border-cyan-500/50 transition-all hover:bg-cyan-500/5 active:scale-95">
                         <p className="text-4xl font-black text-white mb-2" style={{ fontFamily: 'monospace' }}>{upcomingEvents.length}</p>
                         <p className="text-xs text-cyan-500 tracking-widest font-bold" style={{ fontFamily: 'monospace' }}>EVENTS</p>
                     </Card>
                 </Link>
-                <button onClick={() => setSearchQuery('')} className="w-full">
+                <Link to={createPageUrl('ScottCalendar')} className="w-full">
                     <Card className="bg-black border border-red-500/20 p-4 text-center hover:border-red-500/50 transition-all hover:bg-red-500/5 active:scale-95">
                         <p className="text-4xl font-black text-white mb-2" style={{ fontFamily: 'monospace' }}>{urgentTasks.length}</p>
                         <p className="text-xs text-red-500 tracking-widest font-bold" style={{ fontFamily: 'monospace' }}>URGENT</p>
                     </Card>
-                </button>
+                </Link>
             </div>
 
             {/* SEARCH */}
