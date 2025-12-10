@@ -201,15 +201,15 @@ function ScottAddArtistInner() {
                             value={formData.relationship}
                             onValueChange={(value) => setFormData({...formData, relationship: value})}
                         >
-                            <SelectTrigger className="bg-black border-2 border-gray-800 text-white hover:border-amber-500/50 transition-all hover:shadow-[0_0_10px_rgba(245,158,11,0.2)]" style={{ fontFamily: 'monospace', padding: '12px' }}>
-                                <SelectValue placeholder="Unknown" />
+                            <SelectTrigger className="bg-black border border-gray-800 text-white focus:border-amber-500/50 transition-colors" style={{ fontFamily: 'monospace' }}>
+                                <SelectValue />
                             </SelectTrigger>
-                            <SelectContent className="bg-black border-2 border-amber-500/30" style={{ fontFamily: 'monospace' }}>
-                                <SelectItem value="excellent" className="text-white hover:bg-green-500/20 focus:bg-green-500/20 cursor-pointer" style={{ fontFamily: 'monospace' }}>Excellent</SelectItem>
-                                <SelectItem value="good" className="text-white hover:bg-cyan-500/20 focus:bg-cyan-500/20 cursor-pointer" style={{ fontFamily: 'monospace' }}>Good</SelectItem>
-                                <SelectItem value="neutral" className="text-white hover:bg-gray-500/20 focus:bg-gray-500/20 cursor-pointer" style={{ fontFamily: 'monospace' }}>Neutral</SelectItem>
-                                <SelectItem value="needs_work" className="text-white hover:bg-amber-500/20 focus:bg-amber-500/20 cursor-pointer" style={{ fontFamily: 'monospace' }}>Needs Work</SelectItem>
-                                <SelectItem value="unknown" className="text-white hover:bg-gray-500/20 focus:bg-gray-500/20 cursor-pointer" style={{ fontFamily: 'monospace' }}>Unknown</SelectItem>
+                            <SelectContent className="bg-black border border-amber-500/30 z-[9999]">
+                                <SelectItem value="excellent" className="text-white">● Excellent</SelectItem>
+                                <SelectItem value="good" className="text-white">● Good</SelectItem>
+                                <SelectItem value="neutral" className="text-white">● Neutral</SelectItem>
+                                <SelectItem value="needs_work" className="text-white">● Needs Work</SelectItem>
+                                <SelectItem value="unknown" className="text-white">● Unknown</SelectItem>
                             </SelectContent>
                         </Select>
                     </div>
