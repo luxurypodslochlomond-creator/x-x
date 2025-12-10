@@ -69,14 +69,14 @@ export default function ScottManager() {
     if (!pinEntered) {
         return (
             <div className="min-h-screen bg-black p-4 flex items-center justify-center">
-                <Card className="bg-black border border-amber-500/30 p-8 max-w-md w-full">
+                <Card className="bg-black border border-amber-500/20 p-8 max-w-md w-full">
                     <div className="text-center mb-8">
                         <div className="flex items-center justify-center mb-6">
-                            <KingdomCrown8Bit size={48} />
+                            <KingdomCrown8Bit size={56} animate={true} />
                         </div>
-                        <h1 className="text-4xl font-black text-amber-400 mb-3 tracking-tight" style={{ fontFamily: 'monospace' }}>KINGDOM</h1>
-                        <div className="h-px bg-amber-500/30 mb-3"></div>
-                        <p className="text-gray-400 text-sm tracking-wide" style={{ fontFamily: 'monospace' }}>ARTIST & CLIENT MANAGER</p>
+                        <h1 className="text-5xl font-black text-amber-400 mb-3 tracking-tight" style={{ fontFamily: 'monospace' }}>SK</h1>
+                        <div className="h-px bg-amber-500/20 mb-3"></div>
+                        <p className="text-gray-600 text-xs tracking-widest" style={{ fontFamily: 'monospace' }}>ARTIST MANAGER</p>
                     </div>
                     <Input
                         type="password"
@@ -84,18 +84,18 @@ export default function ScottManager() {
                         value={pinInput}
                         onChange={(e) => setPinInput(e.target.value)}
                         onKeyDown={(e) => e.key === 'Enter' && handlePinSubmit()}
-                        className="bg-black border border-amber-500/30 text-white text-center text-2xl mb-4 focus:border-amber-500 transition-colors"
+                        className="bg-black border border-gray-800 text-white text-center text-2xl mb-4 focus:border-amber-500/50 transition-colors"
                         style={{ fontFamily: 'monospace' }}
                     />
                     <Button
                         onClick={handlePinSubmit}
                         className="w-full bg-amber-500 hover:bg-amber-600 text-black font-black text-sm py-4 tracking-wider transition-all"
-                        style={{ fontFamily: 'monospace', boxShadow: '0 0 20px rgba(245, 158, 11, 0.3)' }}
+                        style={{ fontFamily: 'monospace', boxShadow: '0 0 15px rgba(245, 158, 11, 0.2)' }}
                     >
                         ENTER
                     </Button>
-                    <div className="text-center mt-6 pt-6 border-t border-green-500/20">
-                        <p className="text-green-400/60 text-xs tracking-wider" style={{ fontFamily: 'monospace' }}>EST. 1888</p>
+                    <div className="text-center mt-6 pt-6 border-t border-gray-900">
+                        <p className="text-gray-800 text-[10px] tracking-widest" style={{ fontFamily: 'monospace' }}>1888</p>
                     </div>
                 </Card>
             </div>
