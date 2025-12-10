@@ -11,9 +11,9 @@ import EmergencyMode from '@/components/shared/EmergencyMode';
 import AutoBugMonitor from '@/components/shared/AutoBugMonitor';
 import PerformanceOptimizer from '@/components/shared/PerformanceOptimizer';
 import {
-        Menu, X, Heart, Home, LogOut, Leaf, Sparkles, Music, Map, User, Globe,
-        BookOpen, Shield, Target, Briefcase, FileText, Settings, Search, Brain, Presentation, Calculator, GraduationCap, Zap, AlertTriangle, Mic2, Lightbulb, Building, Play, Pause, Atom, Eye, Scale, Users, WifiOff, CheckCircle, Waves, ChevronDown, ChevronRight
-      } from 'lucide-react';
+              Menu, X, Heart, Home, LogOut, Leaf, Sparkles, Music, Map, User, Globe,
+              BookOpen, Shield, Target, Briefcase, FileText, Settings, Search, Brain, Presentation, Calculator, GraduationCap, Zap, AlertTriangle, Mic2, Lightbulb, Building, Play, Pause, Atom, Eye, Scale, Users, WifiOff, CheckCircle, Waves, ChevronDown, ChevronRight, Calendar, DollarSign
+            } from 'lucide-react';
 import { COOLASFUCKHeart, COOLASFUCKWaves } from '@/components/shared/COOLASFUCKIcon';
 import LiveClock from '@/components/shared/LiveClock';
 import { AnonymousAuthProvider } from '@/components/shared/AnonymousAuth';
@@ -248,7 +248,9 @@ const LayoutInner = ({ children, currentPageName }) => {
   ];
 
   const scottNav = [
-    { title: "SK 👑", url: createPageUrl("ScottManager"), icon: User, description: "Artist management" },
+    { title: "Dashboard", url: createPageUrl("ScottManager"), icon: User, description: "Roster & overview" },
+    { title: "Calendar", url: createPageUrl("ScottCalendar"), icon: Calendar, description: "Events & gigs" },
+    { title: "Invoices", url: createPageUrl("ScottInvoices"), icon: DollarSign, description: "Money tracker" },
   ];
 
   const adminNav = user?.role === 'admin' ? [
