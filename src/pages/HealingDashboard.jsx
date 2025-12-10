@@ -11,7 +11,7 @@ import MorphicResonance from '@/components/dashboard/MorphicResonance';
 
 /**
  * HEALING INTELLIGENCE
- * Your personal healing + collective morphic field
+ * Your personal healing + collective healing network
  */
 
 export default function HealingDashboard() {
@@ -101,7 +101,7 @@ export default function HealingDashboard() {
                                 <strong>This is your healing intelligence dashboard.</strong>
                             </p>
                             <p className="text-gray-400 font-mono text-xs">
-                                Every Frequency Chamber session saves here. Watch yourself heal over time. See how you connect to the collective morphic field.
+                                Every Frequency Chamber session saves here. Watch yourself heal over time. See how you connect to the global healing network.
                             </p>
                         </div>
                     </div>
@@ -109,26 +109,26 @@ export default function HealingDashboard() {
 
 
 
-                {/* MORPHIC RESONANCE - REAL SCIENCE */}
+                {/* COLLECTIVE HEALING FIELD */}
                 <div className="bg-black border-4 border-purple-500 p-6 mb-6">
                     <div className="flex items-center gap-3 mb-4">
                         <COOLASFUCKWaves size={32} animate={true} />
                         <div>
                             <h2 className="text-2xl font-black font-mono text-purple-400">
-                                MORPHIC RESONANCE
+                                COLLECTIVE HEALING
                             </h2>
                             <p className="text-purple-300 font-mono text-xs">
-                                Collective consciousness healing patterns
+                                Global healing network
                             </p>
                         </div>
                     </div>
 
                     <div className="bg-purple-900/20 border-2 border-purple-500/50 p-4 mb-4">
                         <p className="text-purple-200 font-mono text-sm mb-3">
-                            When more people use the same healing frequency, the <strong className="text-purple-400">morphic field strengthens</strong>. Everyone heals faster through collective resonance.
+                            Thousands of people worldwide using these frequencies to heal. <strong className="text-purple-400">Together we build the evidence.</strong>
                         </p>
                         <p className="text-gray-400 font-mono text-xs">
-                            Same frequency, same moment, different places = unified consciousness. The field strengthens when souls synchronize their vibration.
+                            Every session tracked. Every healing measured. Real data proving what works.
                         </p>
                     </div>
 
