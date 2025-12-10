@@ -66,7 +66,7 @@ export default function InteractiveChordPlayer({ chordName, size = 'normal' }) {
     const [isPlaying, setIsPlaying] = useState(false);
     const audioContextRef = useRef(null);
 
-    const playChord = () => {
+    const playChord = async () => {
         if (isPlaying) return;
 
         const chordNotes = CHORD_NOTES[chordName];
@@ -74,10 +74,17 @@ export default function InteractiveChordPlayer({ chordName, size = 'normal' }) {
 
         setIsPlaying(true);
 
-        // Create audio context
+        // Create or reuse audio context
         const AudioContext = window.AudioContext || window.webkitAudioContext;
-        const ctx = new AudioContext();
-        audioContextRef.current = ctx;
+        if (!audioContextRef.current || audioContextRef.current.state === 'closed') {
+            audioContextRef.current = new AudioContext();
+        }
+        const ctx = audioContextRef.current;
+        
+        // Resume if suspended
+        if (ctx.state === 'suspended') {
+            await ctx.resume();
+        }
 
         const now = ctx.currentTime;
         const duration = 2.0; // Play for 2 seconds

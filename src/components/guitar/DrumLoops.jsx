@@ -160,15 +160,22 @@ export default function DrumLoops() {
         }
     };
 
-    const playLoop = () => {
+    const playLoop = async () => {
         if (!selectedPattern) return;
 
         const pattern = DRUM_PATTERNS.find(p => p.id === selectedPattern);
         if (!pattern) return;
 
         const AudioContext = window.AudioContext || window.webkitAudioContext;
-        const ctx = new AudioContext();
-        audioContextRef.current = ctx;
+        if (!audioContextRef.current || audioContextRef.current.state === 'closed') {
+            audioContextRef.current = new AudioContext();
+        }
+        const ctx = audioContextRef.current;
+        
+        // Resume if suspended
+        if (ctx.state === 'suspended') {
+            await ctx.resume();
+        }
 
         const beatDuration = 60 / pattern.bpm; // Duration of one beat in seconds
         const loopDuration = 2 * beatDuration; // 2 bars
