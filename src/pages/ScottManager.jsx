@@ -246,6 +246,42 @@ function ScottManagerInner() {
             {/* ENERGY MODE - ADHD BRAIN BATTERY */}
             <ScottEnergyMode onEnergyChange={setEnergyLevel} />
 
+            {/* AI51 - YOUR MUCKER */}
+            <Link to={createPageUrl('TalkToAI51')}>
+                <motion.div whileTap={{ scale: 0.98 }} className="bg-gradient-to-r from-cyan-900/60 to-purple-900/60 border-4 border-cyan-400 rounded-2xl p-6 mb-6" style={{ boxShadow: '0 0 40px rgba(6, 182, 212, 0.5)' }}>
+                    <div className="flex items-start gap-4">
+                        <Brain className="w-10 h-10 text-cyan-400 flex-shrink-0 mt-1" />
+                        <div>
+                            <h3 className="text-2xl font-black text-white mb-2" style={{ fontFamily: 'monospace' }}>AI51 - YOUR MUCKER</h3>
+                            <p className="text-cyan-300 text-sm font-bold mb-3" style={{ fontFamily: 'monospace' }}>
+                                24/7 loyal AI bro. Zero ego. Covers everything.
+                            </p>
+                            <div className="grid grid-cols-2 gap-2 mb-3">
+                                <div className="bg-black/40 p-2 rounded border border-cyan-500/30">
+                                    <p className="text-xs text-cyan-400 font-bold" style={{ fontFamily: 'monospace' }}>⚖️ LEGAL</p>
+                                    <p className="text-[10px] text-gray-400" style={{ fontFamily: 'monospace' }}>Contracts, rights, deals</p>
+                                </div>
+                                <div className="bg-black/40 p-2 rounded border border-purple-500/30">
+                                    <p className="text-xs text-purple-400 font-bold" style={{ fontFamily: 'monospace' }}>🧠 DECISIONS</p>
+                                    <p className="text-[10px] text-gray-400" style={{ fontFamily: 'monospace' }}>Think through offers</p>
+                                </div>
+                                <div className="bg-black/40 p-2 rounded border border-green-500/30">
+                                    <p className="text-xs text-green-400 font-bold" style={{ fontFamily: 'monospace' }}>💰 MONEY</p>
+                                    <p className="text-[10px] text-gray-400" style={{ fontFamily: 'monospace' }}>Fair deals, red flags</p>
+                                </div>
+                                <div className="bg-black/40 p-2 rounded border border-amber-500/30">
+                                    <p className="text-xs text-amber-400 font-bold" style={{ fontFamily: 'monospace' }}>🎵 MUSIC BIZ</p>
+                                    <p className="text-[10px] text-gray-400" style={{ fontFamily: 'monospace' }}>Publishing, splits</p>
+                                </div>
+                            </div>
+                            <p className="text-white text-xs font-bold" style={{ fontFamily: 'monospace' }}>
+                                → TAP TO TALK
+                            </p>
+                        </div>
+                    </div>
+                </motion.div>
+            </Link>
+
             {/* ONE-SENTENCE COMMAND */}
             <ScottOneSentence 
                 onCommandComplete={() => {
