@@ -275,12 +275,20 @@ function ScottManagerInner() {
             </div>
 
             {/* INDUSTRY TOOLS */}
-            <div className="grid grid-cols-2 gap-3 mb-6">
+            <div className="grid grid-cols-3 gap-3 mb-6">
                 <Link to={createPageUrl('ScottPublishing')} className="w-full">
                     <motion.div whileTap={{ scale: 0.95 }}>
                         <div className="bg-black border border-purple-500/30 rounded-xl p-3 text-center hover:border-purple-500/60 transition-all">
                             <p className="text-2xl mb-1">📚</p>
                             <p className="text-xs text-purple-500 tracking-wider font-bold" style={{ fontFamily: 'monospace' }}>PUBLISHING</p>
+                        </div>
+                    </motion.div>
+                </Link>
+                <Link to={createPageUrl('ScottGigOffers')} className="w-full">
+                    <motion.div whileTap={{ scale: 0.95 }}>
+                        <div className="bg-black border border-cyan-500/30 rounded-xl p-3 text-center hover:border-cyan-500/60 transition-all">
+                            <p className="text-2xl mb-1">📧</p>
+                            <p className="text-xs text-cyan-500 tracking-wider font-bold" style={{ fontFamily: 'monospace' }}>GIG OFFERS</p>
                         </div>
                     </motion.div>
                 </Link>

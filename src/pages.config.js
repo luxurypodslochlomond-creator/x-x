@@ -174,6 +174,7 @@ import ScottTeam from './pages/ScottTeam';
 import ScottVisas from './pages/ScottVisas';
 import ScottPublishing from './pages/ScottPublishing';
 import ScottFeatureRequests from './pages/ScottFeatureRequests';
+import ScottGigOffers from './pages/ScottGigOffers';
 import __Layout from './Layout.jsx';
 
 
@@ -354,6 +355,7 @@ export const PAGES = {
     "ScottVisas": ScottVisas,
     "ScottPublishing": ScottPublishing,
     "ScottFeatureRequests": ScottFeatureRequests,
+    "ScottGigOffers": ScottGigOffers,
 }
 
 export const pagesConfig = {
