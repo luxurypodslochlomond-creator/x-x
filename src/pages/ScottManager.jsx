@@ -329,11 +329,29 @@ function ScottManagerInner() {
                         </div>
                     </motion.div>
                 </Link>
+                <Link to={createPageUrl('ScottMedia')} className="w-full">
+                    <motion.div whileTap={{ scale: 0.95 }}>
+                        <div className="bg-black border border-pink-500/30 rounded-xl p-3 text-center hover:border-pink-500/60 transition-all">
+                            <p className="text-2xl mb-1">📸</p>
+                            <p className="text-xs text-pink-500 tracking-wider font-bold" style={{ fontFamily: 'monospace' }}>MEDIA</p>
+                        </div>
+                    </motion.div>
+                </Link>
+            </div>
+            <div className="grid grid-cols-2 gap-3 mb-6">
                 <Link to={createPageUrl('ScottFeatureRequests')} className="w-full">
                     <motion.div whileTap={{ scale: 0.95 }}>
                         <div className="bg-black border border-amber-500/30 rounded-xl p-3 text-center hover:border-amber-500/60 transition-all">
                             <p className="text-2xl mb-1">💡</p>
                             <p className="text-xs text-amber-500 tracking-wider font-bold" style={{ fontFamily: 'monospace' }}>IDEAS</p>
+                        </div>
+                    </motion.div>
+                </Link>
+                <Link to={createPageUrl('TalkToAI51')} className="w-full">
+                    <motion.div whileTap={{ scale: 0.95 }}>
+                        <div className="bg-gradient-to-r from-cyan-900/60 to-purple-900/60 border-2 border-cyan-500 p-3 text-center hover:border-cyan-400 transition-all">
+                            <p className="text-2xl mb-1">⚖️</p>
+                            <p className="text-xs text-cyan-400 tracking-wider font-bold" style={{ fontFamily: 'monospace' }}>LEGAL AI</p>
                         </div>
                     </motion.div>
                 </Link>

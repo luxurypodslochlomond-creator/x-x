@@ -181,6 +181,7 @@ import ScottAccommodation from './pages/ScottAccommodation';
 import ScottProducers from './pages/ScottProducers';
 import ScottTravelMode from './pages/ScottTravelMode';
 import ScottFinancialDashboard from './pages/ScottFinancialDashboard';
+import ScottMedia from './pages/ScottMedia';
 import __Layout from './Layout.jsx';
 
 
@@ -368,6 +369,7 @@ export const PAGES = {
     "ScottProducers": ScottProducers,
     "ScottTravelMode": ScottTravelMode,
     "ScottFinancialDashboard": ScottFinancialDashboard,
+    "ScottMedia": ScottMedia,
 }
 
 export const pagesConfig = {
