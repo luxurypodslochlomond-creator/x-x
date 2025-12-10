@@ -9,9 +9,9 @@ import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 
 /**
- * MORPHIC RESONANCE VISUALIZATION
- * For Sheldrake: collective consciousness healing patterns
- * Do people heal FASTER when using frequencies together?
+ * COLLECTIVE HEALING DATA VISUALIZATION
+ * Tracking global frequency usage patterns
+ * Research question: Do collective usage patterns correlate with outcomes?
  */
 
 export default function MorphicResonance() {
@@ -110,10 +110,10 @@ export default function MorphicResonance() {
         return (
             <div className="text-center py-8 space-y-4">
                 <COOLASFUCKWaves size={48} animate={true} className="mx-auto mb-4" />
-                <p className="text-gray-400 font-mono">Gathering baseline morphic field data...</p>
+                <p className="text-gray-400 font-mono">Gathering baseline healing data...</p>
                 <div className="bg-cyan-900/20 border-2 border-cyan-500 p-4 max-w-md mx-auto">
                     <p className="text-cyan-300 font-mono text-sm">
-                        Platform launched. Data collection infrastructure active. 
+                        Platform launched. Data collection active. 
                         This dashboard shows real-time collective healing patterns as they emerge.
                     </p>
                 </div>
@@ -175,7 +175,7 @@ export default function MorphicResonance() {
                     <div className="flex items-center gap-3 mb-4">
                         <COOLASFUCKWaves size={32} animate={true} />
                         <h3 className="text-2xl font-black font-mono text-purple-400">
-                            STRONGEST MORPHIC FIELD
+                            MOST-USED FREQUENCY
                         </h3>
                     </div>
                     
@@ -201,7 +201,7 @@ export default function MorphicResonance() {
 
                     <div className="bg-cyan-900/20 border-2 border-cyan-500 p-4">
                         <p className="text-cyan-300 font-mono text-sm">
-                            When more people use the same frequency, the morphic field strengthens. Everyone heals faster through collective resonance.
+                            Most popular frequency globally. Early data shows consistent stress reduction across users.
                         </p>
                     </div>
                 </Card>
@@ -279,10 +279,10 @@ export default function MorphicResonance() {
             {/* RESEARCH NOTE */}
             <div className="bg-purple-900/20 border-2 border-purple-500 p-4">
                 <p className="text-purple-300 font-mono text-sm mb-2">
-                    <strong>RESONANCE:</strong> Solo healing builds the field. Collective tuning amplifies it exponentially.
+                    <strong>DATA COLLECTION:</strong> Solo healing + collective sync sessions tracked globally.
                 </p>
                 <p className="text-gray-400 font-mono text-xs">
-                    Same frequency, same moment, different places = unified consciousness. The morphic field strengthens when souls synchronize their vibration.
+                    Same frequency, different places = research into collective effects. Building evidence base through real usage.
                 </p>
             </div>
 
