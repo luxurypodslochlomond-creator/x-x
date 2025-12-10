@@ -111,6 +111,7 @@ function ScottManagerInner() {
                         <div className="h-px bg-amber-500/20 mb-3"></div>
                         <p className="text-gray-600 text-xs tracking-widest" style={{ fontFamily: 'monospace' }}>ARTIST MANAGER</p>
                     </div>
+                    <p className="text-cyan-500 text-xs text-center mb-3 tracking-widest" style={{ fontFamily: 'monospace' }}>😎 BRO51 + SCOTT</p>
                     <Input
                         type="password"
                         placeholder="••••"
