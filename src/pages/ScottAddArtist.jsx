@@ -190,7 +190,7 @@ export default function ScottAddArtist() {
                             onValueChange={(value) => setFormData({...formData, relationship: value})}
                         >
                             <SelectTrigger className="bg-black border-2 border-gray-800 text-white hover:border-amber-500/50 transition-all hover:shadow-[0_0_10px_rgba(245,158,11,0.2)]" style={{ fontFamily: 'monospace', padding: '12px' }}>
-                                <SelectValue />
+                                <SelectValue placeholder="Unknown" />
                             </SelectTrigger>
                             <SelectContent className="bg-black border-2 border-amber-500/30" style={{ fontFamily: 'monospace' }}>
                                 <SelectItem value="excellent" className="text-white hover:bg-green-500/20 focus:bg-green-500/20 cursor-pointer" style={{ fontFamily: 'monospace' }}>Excellent</SelectItem>
