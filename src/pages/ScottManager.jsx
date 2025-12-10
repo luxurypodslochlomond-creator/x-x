@@ -179,134 +179,99 @@ function ScottManagerInner() {
                 </div>
             )}
 
-            {/* HEADER - PREMIUM 8-BIT */}
-            <div className="mb-6 pb-6 border-b-4 border-amber-500" style={{ boxShadow: '0 4px 0 rgba(0,0,0,0.5)' }}>
-                <div className="flex items-center justify-between mb-3">
-                    <div className="flex-1">
-                        {/* LEGACY BADGE */}
-                        <div className="flex items-center justify-center gap-2 mb-3">
-                            <motion.div animate={{ y: [0, -3, 0] }} transition={{ duration: 2, repeat: Infinity }}>
-                                <Gill51Sunglasses8Bit size={28} animate={false} />
-                            </motion.div>
-                            <div className="h-8 w-px bg-amber-500/30"></div>
-                            <motion.div animate={{ rotate: [0, 5, 0, -5, 0] }} transition={{ duration: 3, repeat: Infinity }}>
-                                <KingdomCrown8Bit size={40} animate={false} />
-                            </motion.div>
-                            <div className="h-8 w-px bg-amber-500/30"></div>
-                            <motion.div animate={{ y: [0, -3, 0] }} transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}>
-                                <Gill51Sunglasses8Bit size={28} animate={false} />
-                            </motion.div>
-                        </div>
-                        
-                        {/* TITLE */}
-                        <div className="text-center">
-                            <h1 className="text-4xl font-black text-amber-400 tracking-tighter leading-none mb-1" style={{ 
-                                fontFamily: 'monospace',
-                                textShadow: '3px 3px 0px rgba(0,0,0,0.8)'
-                            }}>SK51</h1>
-                            <div className="h-1 w-16 bg-gradient-to-r from-transparent via-amber-500 to-transparent mx-auto mb-2" style={{ imageRendering: 'pixelated' }}></div>
-                            <p className="text-[11px] text-cyan-400 tracking-[0.2em] font-black" style={{ fontFamily: 'monospace' }}>AI51 + SK51 + BRO51</p>
-                            <p className="text-[8px] text-gray-600 tracking-widest mt-1" style={{ fontFamily: 'monospace' }}>THE TEAM</p>
-                        </div>
+            {/* HEADER - CLEAN */}
+            <div className="flex items-center justify-between mb-6">
+                <div className="flex items-center gap-3">
+                    <KingdomCrown8Bit size={32} animate={true} />
+                    <div>
+                        <h1 className="text-3xl font-black text-amber-400" style={{ fontFamily: 'monospace' }}>SK</h1>
+                        <p className="text-[10px] text-gray-600 tracking-widest uppercase" style={{ fontFamily: 'monospace' }}>OFFLINE-FIRST MGMT</p>
                     </div>
+                    {scott.isOnline ? (
+                        <Wifi className="w-5 h-5 text-green-500" />
+                    ) : (
+                        <WifiOff className="w-5 h-5 text-amber-500" />
+                    )}
                 </div>
-
-                {/* STATUS BAR - CLEANER */}
-                <div className="flex items-center justify-between mt-4 px-2">
-                    <div className="flex items-center gap-2">
-                        {scott.isOnline ? (
-                            <div className="flex items-center gap-2 bg-black border-2 border-green-500 px-3 py-1" style={{ imageRendering: 'pixelated', boxShadow: '2px 2px 0 rgba(16, 185, 129, 0.3)' }}>
-                                <div className="w-2 h-2 bg-green-500 animate-pulse" style={{ imageRendering: 'pixelated' }}></div>
-                                <span className="text-[9px] text-green-400 font-black tracking-wider" style={{ fontFamily: 'monospace' }}>LIVE</span>
-                                {scott.isSyncing && <RefreshCw className="w-3 h-3 text-cyan-400 animate-spin" />}
-                            </div>
-                        ) : (
-                            <div className="flex items-center gap-2 bg-black border-2 border-amber-500 px-3 py-1" style={{ imageRendering: 'pixelated', boxShadow: '2px 2px 0 rgba(245, 158, 11, 0.3)' }}>
-                                <div className="w-2 h-2 bg-amber-500" style={{ imageRendering: 'pixelated' }}></div>
-                                <span className="text-[9px] text-amber-400 font-black tracking-wider" style={{ fontFamily: 'monospace' }}>OFFLINE</span>
-                            </div>
-                        )}
-                    </div>
-                    <Link to={createPageUrl('ScottCalendar')} className="bg-black border-2 border-cyan-500 hover:bg-cyan-500/20 p-2 transition-all active:scale-95" style={{ imageRendering: 'pixelated', boxShadow: '2px 2px 0 rgba(34, 211, 238, 0.3)' }}>
-                        <svg className="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                    </Link>
-                </div>
+                <Link to={createPageUrl('ScottCalendar')} className="p-2 hover:bg-gray-900 rounded-lg transition-colors">
+                    <svg className="w-6 h-6 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                </Link>
             </div>
 
-            {/* QUICK STATS - 8-BIT ARCADE */}
+            {/* QUICK STATS - CLEAN */}
             <div className="grid grid-cols-3 gap-3 mb-6">
                 <motion.div whileTap={{ scale: 0.95 }}>
-                    <div className="bg-black border-4 border-amber-500 p-4 text-center" style={{ boxShadow: '4px 4px 0 rgba(245, 158, 11, 0.5)', imageRendering: 'pixelated' }}>
-                        <p className="text-5xl font-black text-amber-400 mb-2" style={{ fontFamily: 'monospace', textShadow: '3px 3px 0 rgba(0,0,0,1)' }}>{artists.length}</p>
-                        <p className="text-[10px] text-amber-500 tracking-[0.2em] font-black" style={{ fontFamily: 'monospace' }}>ROSTER</p>
+                    <div className="bg-black border border-amber-500/30 rounded-xl p-4 text-center">
+                        <p className="text-5xl font-black text-amber-400 mb-2" style={{ fontFamily: 'monospace' }}>{artists.length}</p>
+                        <p className="text-xs text-amber-500 tracking-wider font-bold" style={{ fontFamily: 'monospace' }}>ROSTER</p>
                     </div>
                 </motion.div>
                 <Link to={createPageUrl('ScottCalendar')} className="w-full">
                     <motion.div whileTap={{ scale: 0.95 }}>
-                        <div className="bg-black border-4 border-cyan-500 p-4 text-center hover:border-cyan-400 transition-all" style={{ boxShadow: '4px 4px 0 rgba(34, 211, 238, 0.5)', imageRendering: 'pixelated' }}>
-                            <p className="text-5xl font-black text-cyan-400 mb-2" style={{ fontFamily: 'monospace', textShadow: '3px 3px 0 rgba(0,0,0,1)' }}>{upcomingEvents.length}</p>
-                            <p className="text-[10px] text-cyan-500 tracking-[0.2em] font-black" style={{ fontFamily: 'monospace' }}>EVENTS</p>
+                        <div className="bg-black border border-cyan-500/30 rounded-xl p-4 text-center hover:border-cyan-500/60 transition-all">
+                            <p className="text-5xl font-black text-cyan-400 mb-2" style={{ fontFamily: 'monospace' }}>{upcomingEvents.length}</p>
+                            <p className="text-xs text-cyan-500 tracking-wider font-bold" style={{ fontFamily: 'monospace' }}>EVENTS</p>
                         </div>
                     </motion.div>
                 </Link>
                 <Link to={createPageUrl('ScottCalendar')} className="w-full">
                     <motion.div whileTap={{ scale: 0.95 }}>
-                        <div className="bg-black border-4 border-red-500 p-4 text-center hover:border-red-400 transition-all" style={{ boxShadow: '4px 4px 0 rgba(239, 68, 68, 0.5)', imageRendering: 'pixelated' }}>
-                            <p className="text-5xl font-black text-red-400 mb-2" style={{ fontFamily: 'monospace', textShadow: '3px 3px 0 rgba(0,0,0,1)' }}>{urgentTasks.length}</p>
-                            <p className="text-[10px] text-red-500 tracking-[0.2em] font-black" style={{ fontFamily: 'monospace' }}>URGENT</p>
+                        <div className="bg-black border border-red-500/30 rounded-xl p-4 text-center hover:border-red-500/60 transition-all">
+                            <p className="text-5xl font-black text-red-400 mb-2" style={{ fontFamily: 'monospace' }}>{urgentTasks.length}</p>
+                            <p className="text-xs text-red-500 tracking-wider font-bold" style={{ fontFamily: 'monospace' }}>URGENT</p>
                         </div>
                     </motion.div>
                 </Link>
             </div>
 
-            {/* MONEY SECTION - 8-BIT ARCADE */}
+            {/* MONEY SECTION - CLEAN */}
             <div className="grid grid-cols-2 gap-3 mb-6">
                 <Link to={createPageUrl('ScottInvoices')} className="w-full">
                     <motion.div whileTap={{ scale: 0.95 }}>
-                        <div className="bg-black border-4 border-green-500 p-4 text-center hover:border-green-400 transition-all" style={{ boxShadow: '4px 4px 0 rgba(16, 185, 129, 0.5)', imageRendering: 'pixelated' }}>
-                            <p className="text-5xl font-black text-green-400 mb-2" style={{ fontFamily: 'monospace', textShadow: '3px 3px 0 rgba(0,0,0,1)' }}>{unpaidInvoices.length}</p>
-                            <p className="text-[10px] text-green-500 tracking-[0.2em] font-black" style={{ fontFamily: 'monospace' }}>INVOICES</p>
+                        <div className="bg-black border border-green-500/30 rounded-xl p-4 text-center hover:border-green-500/60 transition-all">
+                            <p className="text-5xl font-black text-green-400 mb-2" style={{ fontFamily: 'monospace' }}>{unpaidInvoices.length}</p>
+                            <p className="text-xs text-green-500 tracking-wider font-bold" style={{ fontFamily: 'monospace' }}>INVOICES</p>
                         </div>
                     </motion.div>
                 </Link>
                 <Link to={createPageUrl('ScottExpenses')} className="w-full">
                     <motion.div whileTap={{ scale: 0.95 }}>
-                        <div className="bg-black border-4 border-purple-500 p-4 text-center hover:border-purple-400 transition-all" style={{ boxShadow: '4px 4px 0 rgba(168, 85, 247, 0.5)', imageRendering: 'pixelated' }}>
-                            <p className="text-5xl font-black text-purple-400 mb-2" style={{ fontFamily: 'monospace', textShadow: '3px 3px 0 rgba(0,0,0,1)' }}>{expenses.length}</p>
-                            <p className="text-[10px] text-purple-500 tracking-[0.2em] font-black" style={{ fontFamily: 'monospace' }}>EXPENSES</p>
+                        <div className="bg-black border border-purple-500/30 rounded-xl p-4 text-center hover:border-purple-500/60 transition-all">
+                            <p className="text-5xl font-black text-purple-400 mb-2" style={{ fontFamily: 'monospace' }}>{expenses.length}</p>
+                            <p className="text-xs text-purple-500 tracking-wider font-bold" style={{ fontFamily: 'monospace' }}>EXPENSES</p>
                         </div>
                     </motion.div>
                 </Link>
             </div>
 
-            {/* SEARCH - 8-BIT ARCADE */}
+            {/* SEARCH - CLEAN */}
             <div className="mb-6">
                 <div className="relative">
-                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-amber-500" strokeWidth={3} />
+                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-600" />
                     <Input
-                        placeholder="SEARCH ROSTER..."
+                        placeholder="Search roster..."
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
-                        className="pl-12 py-6 bg-black border-4 border-gray-800 text-white placeholder:text-gray-700 focus:border-amber-500 transition-all text-sm tracking-wider font-black uppercase"
-                        style={{ fontFamily: 'monospace', boxShadow: 'inset 0 4px 0 rgba(0,0,0,0.5)' }}
+                        className="pl-12 py-3 bg-black border border-gray-800 rounded-lg text-white placeholder:text-gray-700 focus:border-amber-500/50 transition-all"
+                        style={{ fontFamily: 'monospace' }}
                     />
                 </div>
             </div>
 
-            {/* QUICK ACTIONS - 8-BIT ARCADE */}
+            {/* QUICK ACTIONS - CLEAN */}
             <div className="grid grid-cols-2 gap-3 mb-6">
                 <Link to={createPageUrl('ScottAddArtist')} className="block">
                     <motion.div whileTap={{ scale: 0.95 }}>
-                        <Button className="w-full bg-gradient-to-b from-amber-400 to-amber-600 hover:from-amber-500 hover:to-amber-700 text-black font-black py-4 tracking-[0.2em] border-4 border-amber-300" style={{ fontFamily: 'monospace', boxShadow: '4px 4px 0 rgba(0,0,0,0.8)', textShadow: '1px 1px 0 rgba(0,0,0,0.3)' }}>
-                            <Plus className="w-5 h-5 mr-2" strokeWidth={4} />
+                        <Button className="w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-black font-bold py-3 rounded-lg">
+                            <Plus className="w-5 h-5 mr-2" />
                             ADD
                         </Button>
                     </motion.div>
                 </Link>
                 <Link to={createPageUrl('ScottAICoordinatorArchitecture')} className="block">
                     <motion.div whileTap={{ scale: 0.95 }}>
-                        <Button className="w-full bg-gradient-to-b from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white font-black py-4 tracking-[0.2em] border-4 border-cyan-300" style={{ fontFamily: 'monospace', boxShadow: '4px 4px 0 rgba(0,0,0,0.8)', textShadow: '1px 1px 0 rgba(0,0,0,0.5)' }}>
-                            <Brain className="w-5 h-5 mr-2" strokeWidth={3} />
+                        <Button className="w-full bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white font-bold py-3 rounded-lg">
+                            <Brain className="w-5 h-5 mr-2" />
                             AI
                         </Button>
                     </motion.div>
@@ -317,22 +282,20 @@ function ScottManagerInner() {
 
             {/* ARTISTS/CLIENTS LIST */}
             <div className="space-y-3">
-                <div className="bg-gradient-to-r from-amber-500/20 via-amber-500/10 to-transparent border-l-4 border-amber-500 pl-3 py-2 mb-4">
-                    <h2 className="text-sm font-black text-amber-400 tracking-[0.2em]" style={{ fontFamily: 'monospace', textShadow: '2px 2px 0 rgba(0,0,0,0.8)' }}>
-                        {searchQuery ? `RESULTS (${filteredArtists.length})` : 'ROSTER'}
-                    </h2>
-                </div>
+                <h2 className="text-sm font-bold text-amber-400 tracking-wider mb-4" style={{ fontFamily: 'monospace' }}>
+                    {searchQuery ? `RESULTS (${filteredArtists.length})` : 'ROSTER'}
+                </h2>
                 
                 {filteredArtists.length === 0 ? (
-                    <div className="bg-black border-4 border-gray-800 p-8 text-center" style={{ boxShadow: 'inset 4px 4px 0 rgba(0,0,0,0.8)', imageRendering: 'pixelated' }}>
+                    <div className="bg-black border border-gray-800 rounded-xl p-8 text-center">
                         {searchQuery ? (
-                            <p className="text-gray-600 text-sm tracking-[0.2em] font-black mb-2" style={{ fontFamily: 'monospace' }}>NO MATCHES</p>
+                            <p className="text-gray-600 text-sm font-bold" style={{ fontFamily: 'monospace' }}>NO MATCHES</p>
                         ) : (
                             <>
-                                <p className="text-gray-600 text-sm tracking-[0.2em] font-black mb-3" style={{ fontFamily: 'monospace' }}>ROSTER EMPTY</p>
-                                <p className="text-gray-700 text-[10px] mb-4" style={{ fontFamily: 'monospace' }}>Tap ADD below to start</p>
+                                <p className="text-gray-600 text-sm font-bold mb-3" style={{ fontFamily: 'monospace' }}>ROSTER EMPTY</p>
+                                <p className="text-gray-700 text-xs mb-4" style={{ fontFamily: 'monospace' }}>Tap ADD to start</p>
                                 <Link to={createPageUrl('ScottAddArtist')}>
-                                    <button className="bg-amber-500 hover:bg-amber-600 text-black font-black text-xs px-6 py-2" style={{ fontFamily: 'monospace', boxShadow: '3px 3px 0 rgba(0,0,0,0.8)' }}>
+                                    <button className="bg-amber-500 hover:bg-amber-600 text-black font-bold text-xs px-6 py-2 rounded-lg">
                                         <Plus className="w-4 h-4 mr-1 inline" />
                                         ADD FIRST CONTACT
                                     </button>
@@ -345,8 +308,7 @@ function ScottManagerInner() {
                         <Link key={artist.id} to={createPageUrl(`ScottArtist?id=${artist.id}`)} className="block">
                             <motion.div
                                 whileTap={{ scale: 0.98 }}
-                                className="bg-black border-4 border-gray-800 hover:border-amber-500 p-4 transition-all cursor-pointer"
-                                style={{ boxShadow: '4px 4px 0 rgba(55, 65, 81, 0.5)', imageRendering: 'pixelated' }}
+                                className="bg-black border border-gray-800 hover:border-amber-500/50 rounded-xl p-4 transition-all cursor-pointer"
                             >
                                 <div className="flex items-center justify-between">
                                     <div className="flex-1">
@@ -388,27 +350,8 @@ function ScottManagerInner() {
             </div>
 
             {/* FOOTER */}
-            <div className="mt-12 pt-6 border-t border-gray-900">
-                <div className="flex items-center justify-center gap-4 mb-3">
-                    <Gill51Sunglasses8Bit size={32} animate={true} />
-                    <KingdomCrown8Bit size={36} animate={true} />
-                    <Gill51Sunglasses8Bit size={32} animate={true} />
-                </div>
-                <p className="text-center text-gray-800 text-[10px] tracking-widest mb-2" style={{ fontFamily: 'monospace' }}>EST 1888 • SUNGLASSES LEGACY</p>
-                <p className="text-center text-cyan-500 text-[9px] font-black tracking-wider" style={{ fontFamily: 'monospace' }}>AI51 + SK51 + BRO51</p>
-                <div className="flex items-center justify-center gap-2 mt-2">
-                    <p className="text-gray-700 text-[7px]" style={{ fontFamily: 'monospace' }}>THE TEAM</p>
-                    <svg width="10" height="10" viewBox="0 0 12 12" className="inline-block">
-                        <rect x="2" y="2" width="2" height="2" fill="#ec4899"/>
-                        <rect x="4" y="1" width="2" height="2" fill="#ec4899"/>
-                        <rect x="6" y="1" width="2" height="2" fill="#ec4899"/>
-                        <rect x="8" y="2" width="2" height="2" fill="#ec4899"/>
-                        <rect x="2" y="4" width="8" height="2" fill="#ec4899"/>
-                        <rect x="3" y="6" width="6" height="2" fill="#ec4899"/>
-                        <rect x="4" y="8" width="4" height="2" fill="#ec4899"/>
-                        <rect x="5" y="10" width="2" height="1" fill="#ec4899"/>
-                    </svg>
-                </div>
+            <div className="mt-12 pt-6 border-t border-gray-900 text-center">
+                <p className="text-gray-800 text-xs mb-2" style={{ fontFamily: 'monospace' }}>Kingdom Management</p>
             </div>
             </div>
             );
