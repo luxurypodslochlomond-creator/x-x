@@ -16,8 +16,8 @@ const ChordDiagram = ({ name, frets, fingers }) => {
     // frets: array of 6 strings, each showing fret number (0=open, x=muted, 1-4=fret)
     // Simple text-based for now
     return (
-        <div className="bg-black border-4 border-amber-500 p-4 text-center">
-            <p className="text-2xl font-black text-amber-400 mb-2">{name}</p>
+        <div className="bg-black border border-amber-500/50 rounded-lg p-4 text-center">
+            <p className="text-2xl font-bold text-amber-400 mb-2">{name}</p>
             <div className="font-mono text-white text-sm space-y-1">
                 {frets.map((fret, i) => (
                     <div key={i} className="flex justify-center items-center gap-1">
@@ -249,7 +249,7 @@ export default function LearnGuitarPage() {
     }, []);
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-amber-900 via-orange-900 to-red-900 text-white p-4 md:p-8 pb-32">
+        <div className="min-h-screen bg-black text-white p-4 md:p-8 pb-32">
             <div className="max-w-4xl mx-auto space-y-8">
 
                 {/* HEADER */}
@@ -258,16 +258,16 @@ export default function LearnGuitarPage() {
                     animate={{ opacity: 1, y: 0 }}
                     className="text-center space-y-4"
                 >
-                    <div className="inline-flex items-center justify-center bg-black border-4 border-amber-500 p-4">
+                    <div className="inline-flex items-center justify-center mb-4">
                         <COOLASFUCKMusicNote size={64} animate={true} />
                     </div>
-                    <h1 className="text-4xl md:text-5xl font-black font-mono text-amber-400" style={{ textShadow: '4px 4px 0px rgba(0,0,0,0.8)' }}>
+                    <h1 className="text-4xl md:text-5xl font-black font-mono text-amber-400">
                         CREATE DEMOS
                     </h1>
-                    <p className="text-xl text-orange-200 font-bold font-mono">
+                    <p className="text-xl text-gray-400 font-bold font-mono">
                         JAM → RECORD → UPLOAD → EARN 90%
                     </p>
-                    <Link to={createPageUrl("ForMusicians")} className="inline-flex items-center gap-3 justify-center mt-4 px-8 py-4 bg-pink-600 hover:bg-pink-700 border-4 border-pink-300 font-black font-mono text-white text-lg" style={{ boxShadow: '6px 6px 0px rgba(0,0,0,0.8)' }}>
+                    <Link to={createPageUrl("ForMusicians")} className="inline-flex items-center gap-3 justify-center mt-4 px-8 py-4 bg-pink-600 hover:bg-pink-700 rounded-lg font-bold font-mono text-white text-lg transition-all">
                         <COOLASFUCKHeart size={28} animate={true} />
                         UPLOAD → EARN 90%
                     </Link>
@@ -277,17 +277,16 @@ export default function LearnGuitarPage() {
                 <motion.div
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="bg-gradient-to-r from-cyan-900 to-cyan-950 border-4 border-cyan-400 p-4 text-center"
-                    style={{ boxShadow: '6px 6px 0px rgba(0,0,0,0.8)' }}
+                    className="bg-black border border-cyan-500/50 rounded-xl p-4 text-center"
                 >
                     <div className="flex items-center justify-center gap-2 flex-wrap">
                         <COOLASFUCKZap size={20} animate={true} />
-                        <p className="text-cyan-100 font-black font-mono text-sm md:text-base">
+                        <p className="text-cyan-400 font-bold font-mono text-sm md:text-base">
                             ROUGH DEMO TOOLS - FOR IDEAS, NOT FINAL PRODUCTIONS
                         </p>
                         <COOLASFUCKZap size={20} animate={true} />
                     </div>
-                    <p className="text-cyan-200 font-mono text-xs mt-1">
+                    <p className="text-gray-500 font-mono text-xs mt-1">
                         Want studio quality? Use GarageBand, Audacity, or your DAW. Upload the good stuff to earn 90%.
                     </p>
                 </motion.div>
@@ -296,7 +295,6 @@ export default function LearnGuitarPage() {
                 <motion.div
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    style={{ boxShadow: '8px 8px 0px rgba(0,0,0,0.8)' }}
                 >
                     <RecordingStudio />
                 </motion.div>
@@ -305,17 +303,16 @@ export default function LearnGuitarPage() {
                 <motion.div
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
-                    style={{ boxShadow: '8px 8px 0px rgba(0,0,0,0.8)' }}
                 >
-                    <Card className="bg-gradient-to-br from-purple-900 to-purple-950 border-4 border-purple-400">
+                    <Card className="bg-black border border-purple-500/50 rounded-xl">
                         <CardContent className="p-4 md:p-6">
                             <div className="flex items-center justify-center gap-3 mb-2">
                                 <COOLASFUCKPlay size={40} animate={true} />
-                                <h2 className="text-2xl md:text-3xl font-black font-mono text-purple-300" style={{ textShadow: '4px 4px 0px rgba(0,0,0,1)' }}>
+                                <h2 className="text-2xl md:text-3xl font-bold font-mono text-purple-400">
                                     JAM WITH DRUMS
                                 </h2>
                             </div>
-                            <p className="text-purple-100 mb-4 font-black font-mono text-sm md:text-base">
+                            <p className="text-gray-400 mb-4 font-bold font-mono text-sm md:text-base">
                                 PICK A BEAT. PLAY ALONG. OLD SCHOOL + MODERN.
                             </p>
                             <DrumLoops />
@@ -327,30 +324,29 @@ export default function LearnGuitarPage() {
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    style={{ boxShadow: '8px 8px 0px rgba(0,0,0,0.8)' }}
                 >
-                    <Card className="bg-gradient-to-br from-pink-900 to-pink-950 border-4 border-pink-400">
+                    <Card className="bg-black border border-pink-500/50 rounded-xl">
                         <CardContent className="p-6">
                             <div className="flex items-center justify-center gap-3 mb-6">
                                 <COOLASFUCKHeart size={48} animate={true} />
-                                <h2 className="text-3xl font-black font-mono text-pink-300 text-center" style={{ textShadow: '4px 4px 0px rgba(0,0,0,1)' }}>THE STUDIO</h2>
+                                <h2 className="text-3xl font-bold font-mono text-pink-400 text-center">THE STUDIO</h2>
                             </div>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div className="bg-black border-4 border-pink-500 p-4" style={{ boxShadow: '4px 4px 0px rgba(236, 72, 153, 0.5)' }}>
-                                    <p className="font-black font-mono text-pink-300 mb-2 text-lg">1. PICK DRUMS</p>
-                                    <p className="text-pink-100 font-mono text-sm">Get your rhythm going. Classic or modern.</p>
+                                <div className="bg-black border border-pink-500/30 rounded-lg p-4">
+                                    <p className="font-bold font-mono text-pink-400 mb-2 text-lg">1. PICK DRUMS</p>
+                                    <p className="text-gray-400 font-mono text-sm">Get your rhythm going. Classic or modern.</p>
                                 </div>
-                                <div className="bg-black border-4 border-green-500 p-4" style={{ boxShadow: '4px 4px 0px rgba(34, 197, 94, 0.5)' }}>
-                                    <p className="font-black font-mono text-green-300 mb-2 text-lg">2. TAP CHORDS</p>
-                                    <p className="text-green-100 font-mono text-sm">Hear the frequencies. Learn through sound.</p>
+                                <div className="bg-black border border-green-500/30 rounded-lg p-4">
+                                    <p className="font-bold font-mono text-green-400 mb-2 text-lg">2. TAP CHORDS</p>
+                                    <p className="text-gray-400 font-mono text-sm">Hear the frequencies. Learn through sound.</p>
                                 </div>
-                                <div className="bg-black border-4 border-cyan-500 p-4" style={{ boxShadow: '4px 4px 0px rgba(34, 211, 238, 0.5)' }}>
-                                    <p className="font-black font-mono text-cyan-300 mb-2 text-lg">3. JAM & RECORD</p>
-                                    <p className="text-cyan-100 font-mono text-sm">Hit record when you're feeling it.</p>
+                                <div className="bg-black border border-cyan-500/30 rounded-lg p-4">
+                                    <p className="font-bold font-mono text-cyan-400 mb-2 text-lg">3. JAM & RECORD</p>
+                                    <p className="text-gray-400 font-mono text-sm">Hit record when you're feeling it.</p>
                                 </div>
-                                <div className="bg-black border-4 border-amber-500 p-4" style={{ boxShadow: '4px 4px 0px rgba(245, 158, 11, 0.5)' }}>
-                                    <p className="font-black font-mono text-amber-300 mb-2 text-lg">4. UPLOAD & EARN</p>
-                                    <p className="text-amber-100 font-mono text-sm">Artists keep 90%. No label bullshit.</p>
+                                <div className="bg-black border border-amber-500/30 rounded-lg p-4">
+                                    <p className="font-bold font-mono text-amber-400 mb-2 text-lg">4. UPLOAD & EARN</p>
+                                    <p className="text-gray-400 font-mono text-sm">Artists keep 90%. No label bullshit.</p>
                                 </div>
                             </div>
                         </CardContent>
@@ -361,18 +357,17 @@ export default function LearnGuitarPage() {
                 <motion.div
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    style={{ boxShadow: '8px 8px 0px rgba(0,0,0,0.8)' }}
                 >
-                    <Card className="bg-gradient-to-br from-green-900 to-green-950 border-4 border-green-400">
+                    <Card className="bg-black border border-green-500/50 rounded-xl">
                         <CardContent className="p-4 md:p-6">
                             <div className="flex items-center justify-center gap-3 mb-2">
                                 <COOLASFUCKZap size={40} animate={true} />
-                                <h2 className="text-2xl md:text-3xl font-black font-mono text-green-300 text-center" style={{ textShadow: '4px 4px 0px rgba(0,0,0,1)' }}>
+                                <h2 className="text-2xl md:text-3xl font-bold font-mono text-green-400 text-center">
                                     TAP TO HEAR CHORDS
                                 </h2>
                             </div>
                             <div className="flex items-center justify-center gap-2 mb-4 md:mb-6">
-                                <p className="text-green-100 text-center font-black font-mono text-sm md:text-base">
+                                <p className="text-gray-400 text-center font-bold font-mono text-sm md:text-base">
                                     LEARN THROUGH FREQUENCY. TAP = HEAR!
                                 </p>
                                 <COOLASFUCKSparkle size={20} animate={true} />
@@ -389,8 +384,7 @@ export default function LearnGuitarPage() {
                 {/* CHORD LIBRARY TOGGLE */}
                 <Button
                     onClick={() => setShowChordLibrary(!showChordLibrary)}
-                    className="w-full bg-black border-4 border-cyan-400 hover:bg-cyan-900 text-cyan-300 font-black font-mono py-4 text-lg"
-                    style={{ boxShadow: '6px 6px 0px rgba(0,0,0,0.8)' }}
+                    className="w-full bg-black border border-cyan-500/50 hover:border-cyan-500 rounded-lg text-cyan-400 font-bold font-mono py-4 text-lg transition-all"
                 >
                     {showChordLibrary ? <ChevronUp className="mr-2" /> : <ChevronDown className="mr-2" />}
                     {showChordLibrary ? "HIDE" : "SHOW"} CHORD DIAGRAMS
@@ -411,12 +405,12 @@ export default function LearnGuitarPage() {
 
                 {/* SONG IDEAS */}
                 <div className="space-y-4">
-                    <div className="bg-gradient-to-br from-amber-900 to-amber-950 border-4 border-amber-400 py-4 px-6 text-center" style={{ boxShadow: '8px 8px 0px rgba(0,0,0,0.8)' }}>
+                    <div className="bg-black border border-amber-500/50 rounded-xl py-4 px-6 text-center">
                         <div className="flex items-center justify-center gap-3 mb-2">
                             <COOLASFUCKMusicNote size={48} animate={true} />
-                            <h2 className="text-3xl font-black font-mono text-amber-300" style={{ textShadow: '4px 4px 0px rgba(0,0,0,1)' }}>SONG IDEAS</h2>
+                            <h2 className="text-3xl font-bold font-mono text-amber-400">SONG IDEAS</h2>
                         </div>
-                        <p className="text-amber-100 font-black font-mono text-sm">(Full tutorials? Check YouTube. We focus on CREATION tools.)</p>
+                        <p className="text-gray-500 font-bold font-mono text-sm">(Full tutorials? Check YouTube. We focus on CREATION tools.)</p>
                     </div>
                     
                     {SONGS.map((song, index) => (
@@ -425,11 +419,10 @@ export default function LearnGuitarPage() {
                             initial={{ opacity: 0, x: -20 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ delay: index * 0.05 }}
-                            style={{ boxShadow: expandedSong === song.id ? '8px 8px 0px rgba(245, 158, 11, 0.6)' : '4px 4px 0px rgba(0,0,0,0.5)' }}
                         >
                             <Card 
-                                className={`bg-gradient-to-br from-black to-gray-900 border-4 cursor-pointer transition-all ${
-                                    expandedSong === song.id ? 'border-amber-400' : 'border-amber-500/50 hover:border-amber-500'
+                                className={`bg-black rounded-xl cursor-pointer transition-all ${
+                                    expandedSong === song.id ? 'border-2 border-amber-500' : 'border border-gray-800 hover:border-amber-500/50'
                                 }`}
                                 onClick={() => setExpandedSong(expandedSong === song.id ? null : song.id)}
                             >
@@ -458,14 +451,14 @@ export default function LearnGuitarPage() {
                                         <motion.div
                                             initial={{ opacity: 0 }}
                                             animate={{ opacity: 1 }}
-                                            className="mt-4 pt-4 border-t-4 border-amber-500 space-y-4"
+                                            className="mt-4 pt-4 border-t border-gray-800 space-y-4"
                                         >
                                             {/* CHORDS */}
                                             <div>
-                                                <p className="text-amber-400 font-black font-mono mb-2">CHORDS:</p>
+                                                <p className="text-amber-400 font-bold font-mono mb-2">CHORDS:</p>
                                                 <div className="flex flex-wrap gap-2">
                                                     {song.chords.map(chord => (
-                                                        <span key={chord} className="px-3 py-1 bg-black border-2 border-amber-600 text-amber-400 font-black font-mono">
+                                                        <span key={chord} className="px-3 py-1 bg-black border border-amber-500/50 rounded text-amber-400 font-bold font-mono">
                                                             {chord}
                                                         </span>
                                                     ))}
@@ -474,31 +467,31 @@ export default function LearnGuitarPage() {
 
                                             {/* CAPO */}
                                             {song.capo && (
-                                                <div className="bg-black border-2 border-cyan-500 p-3">
-                                                    <p className="text-cyan-400 font-black font-mono mb-1">CAPO:</p>
+                                                <div className="bg-black border border-cyan-500/50 rounded-lg p-3">
+                                                    <p className="text-cyan-400 font-bold font-mono mb-1">CAPO:</p>
                                                     <p className="text-white font-bold">{song.capo}</p>
                                                 </div>
                                             )}
 
                                             {/* PROGRESSION */}
-                                            <div className="bg-black border-2 border-purple-500 p-3">
-                                                <p className="text-purple-400 font-black font-mono mb-1">PROGRESSION:</p>
+                                            <div className="bg-black border border-purple-500/50 rounded-lg p-3">
+                                                <p className="text-purple-400 font-bold font-mono mb-1">PROGRESSION:</p>
                                                 <p className="text-cyan-300 font-mono font-bold">{song.progression}</p>
                                             </div>
 
                                             {/* STRUMMING */}
-                                            <div className="bg-black border-2 border-pink-500 p-3">
-                                                <p className="text-pink-400 font-black font-mono mb-1">STRUMMING:</p>
+                                            <div className="bg-black border border-pink-500/50 rounded-lg p-3">
+                                                <p className="text-pink-400 font-bold font-mono mb-1">STRUMMING:</p>
                                                 <p className="text-white font-bold">{song.pattern}</p>
                                             </div>
 
                                             {/* TIPS */}
-                                            <div className="bg-black border-4 border-green-500 p-4">
+                                            <div className="bg-black border border-green-500/50 rounded-lg p-4">
                                                 <div className="flex items-center gap-2 mb-2">
                                                     <COOLASFUCKSparkle size={24} animate={true} />
-                                                    <p className="text-green-400 font-black font-mono">TIPS:</p>
+                                                    <p className="text-green-400 font-bold font-mono">TIPS:</p>
                                                 </div>
-                                                <p className="text-green-200 font-bold">{song.tips}</p>
+                                                <p className="text-gray-400 font-bold">{song.tips}</p>
                                             </div>
 
                                             {/* LYRICS + CHORDS */}
@@ -531,24 +524,23 @@ export default function LearnGuitarPage() {
                 <motion.div
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    style={{ boxShadow: '10px 10px 0px rgba(236, 72, 153, 0.8)' }}
                 >
-                    <Card className="bg-gradient-to-br from-pink-900 via-pink-800 to-pink-900 border-4 border-pink-400">
+                    <Card className="bg-black border border-pink-500/50 rounded-xl">
                         <CardContent className="p-8 text-center">
                             <div className="flex justify-center mb-4">
                                 <COOLASFUCKHeart size={64} animate={true} />
                             </div>
-                            <h3 className="text-3xl md:text-4xl font-black font-mono text-pink-200 mb-4" style={{ textShadow: '4px 4px 0px rgba(0,0,0,1)' }}>READY TO SHARE?</h3>
-                            <p className="text-pink-100 font-black font-mono mb-6 text-lg">
+                            <h3 className="text-3xl md:text-4xl font-bold font-mono text-pink-400 mb-4">READY TO SHARE?</h3>
+                            <p className="text-gray-400 font-bold font-mono mb-6 text-lg">
                                 GOT A DEMO? UPLOAD IT.<br/>
                                 ARTISTS EARN 90% - NO LABEL BULLSHIT.
                             </p>
-                            <Link to={createPageUrl("ForMusicians")} className="inline-flex items-center gap-3 px-10 py-5 bg-green-600 hover:bg-green-700 border-4 border-green-300 font-black font-mono text-white text-xl justify-center" style={{ boxShadow: '6px 6px 0px rgba(0,0,0,0.8)' }}>
+                            <Link to={createPageUrl("ForMusicians")} className="inline-flex items-center gap-3 px-10 py-5 bg-green-600 hover:bg-green-700 rounded-lg font-bold font-mono text-white text-xl justify-center transition-all">
                                 <COOLASFUCKHeart size={32} animate={true} />
                                 UPLOAD NOW → EARN 90%
                             </Link>
                             <div className="flex items-center justify-center gap-2 mt-6">
-                                <p className="text-sm text-pink-200 font-black font-mono">
+                                <p className="text-sm text-gray-500 font-bold font-mono">
                                     MUSIC HEALS. SHARE YOUR FREQUENCY.
                                 </p>
                             </div>
