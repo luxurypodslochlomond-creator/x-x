@@ -100,30 +100,27 @@ function ScottManagerInner() {
     if (!pinEntered) {
         return (
             <div className="min-h-screen bg-black p-4 flex items-center justify-center">
-                <Card className="bg-black border border-amber-500/20 p-8 max-w-md w-full">
+                <Card className="bg-black border border-gray-800 rounded-xl p-8 max-w-md w-full">
                     <div className="text-center mb-8">
-                        <div className="flex items-center justify-center gap-3 mb-6">
-                            <Gill51Sunglasses8Bit size={48} animate={true} />
-                            <KingdomCrown8Bit size={56} animate={true} />
-                            <Gill51Sunglasses8Bit size={48} animate={true} />
+                        <div className="flex justify-center mb-4">
+                            <KingdomCrown8Bit size={48} animate={true} />
                         </div>
-                        <h1 className="text-5xl font-black text-amber-400 mb-3 tracking-tight" style={{ fontFamily: 'monospace' }}>SK51</h1>
-                        <div className="h-px bg-amber-500/20 mb-3"></div>
-                        <p className="text-gray-600 text-xs tracking-widest" style={{ fontFamily: 'monospace' }}>ARTIST MANAGER</p>
-                        </div>
-                        <Input
+                        <h1 className="text-4xl font-black text-amber-400 mb-2" style={{ fontFamily: 'monospace' }}>SK</h1>
+                        <p className="text-gray-600 text-xs" style={{ fontFamily: 'monospace' }}>OFFLINE-FIRST MGMT</p>
+                    </div>
+                    <Input
                         type="password"
                         placeholder="••••"
                         value={pinInput}
                         onChange={(e) => setPinInput(e.target.value)}
                         onKeyDown={(e) => e.key === 'Enter' && handlePinSubmit()}
-                        className="bg-black border border-gray-800 text-white text-center text-2xl mb-4 focus:border-amber-500/50 transition-colors"
+                        className="bg-black border border-gray-800 rounded-lg text-white text-center text-2xl mb-4 focus:border-amber-500/50 transition-colors"
                         style={{ fontFamily: 'monospace' }}
                     />
                     <Button
                         onClick={handlePinSubmit}
-                        className="w-full bg-amber-500 hover:bg-amber-600 text-black font-black text-sm py-4 tracking-wider transition-all"
-                        style={{ fontFamily: 'monospace', boxShadow: '0 0 15px rgba(245, 158, 11, 0.2)' }}
+                        className="w-full bg-amber-500 hover:bg-amber-600 text-black font-bold text-sm py-3 rounded-lg transition-all"
+                        style={{ fontFamily: 'monospace' }}
                     >
                         ENTER
                     </Button>
@@ -141,13 +138,12 @@ function ScottManagerInner() {
                     <motion.div
                         initial={{ scale: 0.9, opacity: 0 }}
                         animate={{ scale: 1, opacity: 1 }}
-                        className="bg-black border-2 border-amber-500 p-8 max-w-md w-full"
-                        style={{ boxShadow: '0 0 40px rgba(245, 158, 11, 0.4)' }}
+                        className="bg-black border border-amber-500/50 rounded-xl p-8 max-w-md w-full"
                     >
                         <div className="text-center mb-6">
                             <KingdomCrown8Bit size={64} animate={true} />
                         </div>
-                        <h2 className="text-2xl font-black text-amber-400 text-center mb-4 tracking-tight" style={{ fontFamily: 'monospace' }}>
+                        <h2 className="text-2xl font-bold text-amber-400 text-center mb-4" style={{ fontFamily: 'monospace' }}>
                             100% OFFLINE
                         </h2>
                         <div className="space-y-3 mb-6 text-center">
@@ -163,15 +159,15 @@ function ScottManagerInner() {
                             <p className="text-white text-sm" style={{ fontFamily: 'monospace' }}>
                                 Works anywhere
                             </p>
-                            <div className="h-px bg-amber-500/20 my-4"></div>
+                            <div className="h-px bg-gray-800 my-4"></div>
                             <p className="text-gray-500 text-xs" style={{ fontFamily: 'monospace' }}>
                                 Auto-syncs when signal returns
                             </p>
                         </div>
                         <Button
                             onClick={handleDismissOfflineExplainer}
-                            className="w-full bg-amber-500 hover:bg-amber-600 text-black font-black py-4 tracking-wider"
-                            style={{ fontFamily: 'monospace', boxShadow: '0 0 20px rgba(245, 158, 11, 0.4)' }}
+                            className="w-full bg-amber-500 hover:bg-amber-600 text-black font-bold py-3 rounded-lg"
+                            style={{ fontFamily: 'monospace' }}
                         >
                             LET'S GO
                         </Button>
