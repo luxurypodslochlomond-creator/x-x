@@ -31,8 +31,8 @@ const PROTOCOL_SECTIONS = [
     id: 'physical',
     name: 'PHYSICAL HEALING',
     color: '#ef4444',
-    description: 'Pain, immunity, vitality, tinnitus',
-    protocols: ['pain', 'tinnitus', 'immune', 'vitality']
+    description: 'Pain, immunity, vitality, tinnitus, Tesla tech',
+    protocols: ['pain', 'tesla_legacy', 'tinnitus', 'immune', 'vitality']
   },
   {
     id: 'rest',
@@ -406,6 +406,26 @@ const PROTOCOLS = {
       breathRate: 5,
       noiseType: 'pink',
       noiseLevel: 0.1,
+      isBinaural: true,
+      visualEntrainment: true
+    }
+  },
+  tesla_legacy: {
+    id: 'tesla_legacy',
+    name: 'Tesla Legacy 3-6-9',
+    icon: Zap,
+    color: '#8b5cf6',
+    description: 'Tesla\'s electromagnetic healing - cellular regeneration',
+    science: '3Hz-6Hz-9Hz sequence + 7.83Hz Schumann resonance proven to harmonize body\'s electromagnetic field with Earth\'s natural frequency. Tesla\'s original electrotherapy protocols showed cellular regeneration and chronic pain relief.',
+    sources: ['Tesla\'s medical device research', 'Bob Connolly documentary "Tesla\'s Medicine"', 'Schumann resonance studies'],
+    ancientWisdom: 'Tesla discovered what shamans knew - we are electrical beings. When our field syncs with Earth\'s heartbeat (7.83Hz), the body remembers how to heal itself. "If you want to find the secrets of the universe, think in terms of energy, frequency and vibration." - Tesla',
+    config: {
+      primary: 6,
+      secondary: 7.83,
+      carrier: 200,
+      breathRate: 6,
+      noiseType: 'pink',
+      noiseLevel: 0.12,
       isBinaural: true,
       visualEntrainment: true
     }
