@@ -207,6 +207,28 @@ export const ScottOfflineProvider = ({ children }) => {
             return newMessage;
         },
 
+        // Invoices
+        getInvoices: () => loadLocal('invoices'),
+        getInvoicesForArtist: (artistId) => loadLocal('invoices').filter(i => i.artist_id === artistId),
+        getUnpaidInvoices: () => loadLocal('invoices').filter(i => i.status === 'unpaid'),
+        createInvoice: (data) => {
+            const newInvoice = { ...data, id: `local_${Date.now()}`, created_date: new Date().toISOString(), status: 'unpaid' };
+            const invoices = loadLocal('invoices');
+            invoices.unshift(newInvoice);
+            saveLocal('invoices', invoices);
+            queueSync({ type: 'create', entity: 'ScottInvoice', data });
+            return newInvoice;
+        },
+        updateInvoice: (id, data) => {
+            const invoices = loadLocal('invoices');
+            const index = invoices.findIndex(i => i.id === id);
+            if (index !== -1) {
+                invoices[index] = { ...invoices[index], ...data, updated_date: new Date().toISOString() };
+                saveLocal('invoices', invoices);
+                queueSync({ type: 'update', entity: 'ScottInvoice', id, data });
+            }
+        },
+
         // Status
         isOnline,
         isSyncing,
