@@ -216,7 +216,7 @@ function ScottManagerInner() {
                 <div className="flex items-center justify-between mt-4 px-2">
                     <div className="flex items-center gap-2">
                         {scott.isOnline ? (
-                            <div className="flex items-center gap-2 bg-green-900/30 border-2 border-green-500 px-3 py-1" style={{ imageRendering: 'pixelated' }}>
+                            <div className="flex items-center gap-2 bg-green-900/30 border-2 border-green-500 px-3 py-1" style={{ imageRendering: 'pixelated' }} title="LIVE = Connected to internet, auto-syncing">
                                 <Wifi className="w-3 h-3 text-green-400" />
                                 <span className="text-[9px] text-green-400 font-black tracking-wider" style={{ fontFamily: 'monospace' }}>LIVE</span>
                                 {scott.isSyncing && <RefreshCw className="w-3 h-3 text-cyan-400 animate-spin" />}
@@ -227,7 +227,7 @@ function ScottManagerInner() {
                                 )}
                             </div>
                         ) : (
-                            <div className="flex items-center gap-2 bg-amber-900/30 border-2 border-amber-500 px-3 py-1" style={{ imageRendering: 'pixelated' }}>
+                            <div className="flex items-center gap-2 bg-amber-900/30 border-2 border-amber-500 px-3 py-1" style={{ imageRendering: 'pixelated' }} title="OFFLINE = No internet, saves locally">
                                 <WifiOff className="w-3 h-3 text-amber-400" />
                                 <span className="text-[9px] text-amber-400 font-black tracking-wider" style={{ fontFamily: 'monospace' }}>OFFLINE</span>
                             </div>
@@ -331,9 +331,20 @@ function ScottManagerInner() {
                 
                 {filteredArtists.length === 0 ? (
                     <Card className="bg-gradient-to-b from-gray-900 to-black border-4 border-gray-800 p-8 text-center" style={{ boxShadow: 'inset 0 4px 0 rgba(0,0,0,0.5)' }}>
-                        <p className="text-gray-600 text-sm tracking-[0.2em] font-black" style={{ fontFamily: 'monospace' }}>
-                            {searchQuery ? 'NO MATCHES' : 'NO CONTACTS'}
-                        </p>
+                        {searchQuery ? (
+                            <p className="text-gray-600 text-sm tracking-[0.2em] font-black mb-2" style={{ fontFamily: 'monospace' }}>NO MATCHES</p>
+                        ) : (
+                            <>
+                                <p className="text-gray-600 text-sm tracking-[0.2em] font-black mb-3" style={{ fontFamily: 'monospace' }}>ROSTER EMPTY</p>
+                                <p className="text-gray-700 text-[10px] mb-4" style={{ fontFamily: 'monospace' }}>Tap ADD below to start</p>
+                                <Link to={createPageUrl('ScottAddArtist')}>
+                                    <Button className="bg-amber-500 hover:bg-amber-600 text-black font-black text-xs px-6 py-2" style={{ fontFamily: 'monospace' }}>
+                                        <Plus className="w-4 h-4 mr-1" />
+                                        ADD FIRST CONTACT
+                                    </Button>
+                                </Link>
+                            </>
+                        )}
                     </Card>
                 ) : (
                     filteredArtists.map(artist => (
