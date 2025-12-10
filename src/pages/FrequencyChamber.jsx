@@ -427,7 +427,8 @@ const PROTOCOLS = {
       noiseType: 'pink',
       noiseLevel: 0.12,
       isBinaural: true,
-      visualEntrainment: true
+      visualEntrainment: true,
+      teslaSequence: [3, 6, 9]
     }
   },
   universal_communion: {
@@ -1303,24 +1304,52 @@ export default function FrequencyChamber() {
         const leftGain = ctx.createGain();
         const rightGain = ctx.createGain();
         const merger = ctx.createChannelMerger(2);
-        
+
         leftOsc.type = 'sine';
         rightOsc.type = 'sine';
         leftOsc.frequency.value = config.carrier;
         rightOsc.frequency.value = config.carrier + config.primary;
-        
+
         leftGain.gain.value = 0.25;
         rightGain.gain.value = 0.25;
-        
+
         leftOsc.connect(leftGain);
         rightOsc.connect(rightGain);
         leftGain.connect(merger, 0, 0);
         rightGain.connect(merger, 0, 1);
         merger.connect(masterGain);
-        
+
         leftOsc.start();
         rightOsc.start();
         nodes.push(leftOsc, rightOsc, leftGain, rightGain, merger);
+
+        // TESLA 3-6-9 SEQUENCE - Honor the master
+        if (config.teslaSequence) {
+          const sequence = config.teslaSequence;
+          const phaseDuration = 60; // 60 seconds per frequency
+          let currentPhase = 0;
+
+          const transitionToNext = () => {
+            const now = ctx.currentTime;
+            const targetFreq = sequence[currentPhase % sequence.length];
+
+            // Smooth transition over 5 seconds
+            rightOsc.frequency.linearRampToValueAtTime(
+              config.carrier + targetFreq,
+              now + 5
+            );
+
+            setCurrentHz(targetFreq);
+            currentPhase++;
+          };
+
+          // Start first transition immediately
+          transitionToNext();
+
+          // Schedule phase transitions
+          const sequenceInterval = setInterval(transitionToNext, phaseDuration * 1000);
+          nodes.push({ stop: () => clearInterval(sequenceInterval) });
+        }
       } else {
         // ISOCHRONIC TONES - Pulsing on/off
         const primaryOsc = ctx.createOscillator();
