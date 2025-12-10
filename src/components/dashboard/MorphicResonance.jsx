@@ -189,8 +189,7 @@ export default function MorphicResonance() {
 
                     <div className="bg-cyan-900/20 border-2 border-cyan-500 p-4">
                         <p className="text-cyan-300 font-mono text-sm">
-                            <strong>Sheldrake hypothesis:</strong> When more people use the same frequency, 
-                            the morphic field strengthens. Everyone heals faster through collective resonance.
+                            When more people use the same frequency, the morphic field strengthens. Everyone heals faster through collective resonance.
                         </p>
                     </div>
                 </Card>
@@ -265,7 +264,7 @@ export default function MorphicResonance() {
             {/* RESEARCH NOTE */}
             <div className="bg-purple-900/20 border-2 border-purple-500 p-4">
                 <p className="text-purple-300 font-mono text-sm mb-2">
-                    <strong>COOLASFUCK.GMT RESONANCE:</strong> Solo healing builds the field. Collective tuning amplifies it exponentially.
+                    <strong>RESONANCE:</strong> Solo healing builds the field. Collective tuning amplifies it exponentially.
                 </p>
                 <p className="text-gray-400 font-mono text-xs">
                     Same frequency, same moment, different places = unified consciousness. The morphic field strengthens when souls synchronize their vibration.

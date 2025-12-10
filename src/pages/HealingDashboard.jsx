@@ -118,7 +118,7 @@ export default function HealingDashboard() {
                                 MORPHIC RESONANCE
                             </h2>
                             <p className="text-purple-300 font-mono text-xs">
-                                Sheldrake hypothesis: Collective consciousness healing
+                                Collective consciousness healing patterns
                             </p>
                         </div>
                     </div>
@@ -128,7 +128,7 @@ export default function HealingDashboard() {
                             When more people use the same healing frequency, the <strong className="text-purple-400">morphic field strengthens</strong>. Everyone heals faster through collective resonance.
                         </p>
                         <p className="text-gray-400 font-mono text-xs">
-                            This data tests Rupert Sheldrake's theory: Does healing become easier when more souls do it together?
+                            Same frequency, same moment, different places = unified consciousness. The field strengthens when souls synchronize their vibration.
                         </p>
                     </div>
 
