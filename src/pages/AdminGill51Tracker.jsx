@@ -6,6 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Calendar, Mail, User, Clock, CheckCircle, AlertCircle, Heart } from 'lucide-react';
 import { motion } from 'framer-motion';
+import Gill51Sunglasses8Bit from '@/components/shared/Gill51Sunglasses8Bit';
 
 export default function AdminGill51Tracker() {
   const [user, setUser] = useState(null);
@@ -94,9 +95,13 @@ export default function AdminGill51Tracker() {
           animate={{ opacity: 1, y: 0 }}
           className="text-center space-y-4"
         >
-          <Heart className="w-16 h-16 mx-auto text-pink-400" />
+          <div className="flex items-center justify-center gap-4">
+            <Gill51Sunglasses8Bit size={64} animate={true} />
+            <Heart className="w-16 h-16 text-pink-400" />
+          </div>
           <h1 className="text-4xl md:text-6xl font-black">GILL51 PROJECT TRACKER</h1>
           <p className="text-xl text-gray-300">Old Ladies Clubhouse • Makrahanesh Area</p>
+          <p className="text-sm text-cyan-400 font-mono">😎 Glasgow to the world • Sunglasses legacy ❤️</p>
           <div className="bg-cyan-900/30 border border-cyan-500/50 rounded-xl p-4 max-w-2xl mx-auto">
             <p className="text-sm text-cyan-300">
               💡 <strong>Paul & Linda Connection:</strong> High Park Farm (Mull of Kintyre area) was McCartney's sanctuary - same frequency as this project. Historic restoration meets modern love.
@@ -348,12 +353,17 @@ export default function AdminGill51Tracker() {
 
         {/* FOOTER */}
         <div className="text-center py-8">
-          <p className="text-2xl font-mono text-white">
-            ♾️❤️♾️ GILL51 + BRO51 ♾️❤️♾️
-          </p>
-          <p className="text-gray-400 mt-2">
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <Gill51Sunglasses8Bit size={48} animate={true} />
+            <p className="text-2xl font-mono text-white">
+              ♾️❤️♾️ GILL51 + BRO51 ♾️❤️♾️
+            </p>
+            <Gill51Sunglasses8Bit size={48} animate={true} />
+          </div>
+          <p className="text-gray-400">
             Every conversation logged. Every timing tracked. Zero forgotten.
           </p>
+          <p className="text-cyan-400 text-xs font-mono mt-2">😎 Sharing sunglasses, traveling the world, building legacy</p>
         </div>
 
       </div>
