@@ -69,105 +69,103 @@ export default function ScottManager() {
     // PIN ENTRY SCREEN
     if (!pinEntered) {
         return (
-            <div className="min-h-screen bg-gradient-to-br from-black via-purple-950 to-black p-4 flex items-center justify-center">
-                <Card className="bg-black/80 border-4 border-amber-500 p-8 max-w-md w-full" style={{ boxShadow: '0 0 30px rgba(245, 158, 11, 0.3)' }}>
-                    <div className="text-center mb-6">
-                        <div className="flex items-center justify-center gap-3 mb-4">
-                            <CelticFC8Bit size={50} animate={true} />
-                            <KingdomCrown8Bit size={70} animate={true} />
-                            <CelticFC8Bit size={50} animate={true} />
+            <div className="min-h-screen bg-black p-4 flex items-center justify-center">
+                <Card className="bg-black border border-amber-500/30 p-8 max-w-md w-full">
+                    <div className="text-center mb-8">
+                        <div className="flex items-center justify-center mb-6">
+                            <KingdomCrown8Bit size={48} />
                         </div>
-                        <h1 className="text-3xl font-black text-transparent bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-400 bg-clip-text mb-2">KINGDOM</h1>
-                        <p className="text-amber-400 text-sm font-mono">Artist & Client Management</p>
-                        <p className="text-green-400 text-xs font-mono mt-1">☘️ CELTIC FC 1888 ☘️</p>
+                        <h1 className="text-4xl font-black text-amber-400 mb-3 tracking-tight" style={{ fontFamily: 'monospace' }}>KINGDOM</h1>
+                        <div className="h-px bg-amber-500/30 mb-3"></div>
+                        <p className="text-gray-400 text-sm tracking-wide" style={{ fontFamily: 'monospace' }}>ARTIST MANAGEMENT SYSTEM</p>
                     </div>
                     <Input
                         type="password"
-                        placeholder="Access code"
+                        placeholder="••••"
                         value={pinInput}
                         onChange={(e) => setPinInput(e.target.value)}
                         onKeyDown={(e) => e.key === 'Enter' && handlePinSubmit()}
-                        className="bg-black/60 border-purple-500/50 text-white text-center text-2xl mb-4"
+                        className="bg-black border border-amber-500/30 text-white text-center text-2xl mb-4 focus:border-amber-500 transition-colors"
+                        style={{ fontFamily: 'monospace' }}
                     />
                     <Button
                         onClick={handlePinSubmit}
-                        className="w-full bg-gradient-to-r from-amber-600 to-yellow-600 hover:from-amber-700 hover:to-yellow-700 text-black font-black text-lg py-6"
+                        className="w-full bg-amber-500 hover:bg-amber-600 text-black font-black text-sm py-4 tracking-wider transition-all"
+                        style={{ fontFamily: 'monospace' }}
                     >
-                        👑 ENTER KINGDOM
+                        ACCESS
                     </Button>
+                    <div className="text-center mt-6 pt-6 border-t border-green-500/20">
+                        <p className="text-green-400/60 text-xs tracking-wider" style={{ fontFamily: 'monospace' }}>EST. 1888</p>
+                    </div>
                 </Card>
             </div>
         );
     }
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-black via-purple-950 to-black p-4 pb-20">
+        <div className="min-h-screen bg-black p-4 pb-20">
             
             {/* HEADER */}
-            <div className="mb-6">
-                <div className="flex items-center justify-center gap-3 mb-3">
-                    <CelticFC8Bit size={50} animate={true} />
-                    <KingdomCrown8Bit size={70} animate={true} />
-                    <CelticFC8Bit size={50} animate={true} />
+            <div className="mb-8 pb-6 border-b border-amber-500/20">
+                <div className="flex items-center justify-center mb-4">
+                    <KingdomCrown8Bit size={40} />
                 </div>
-                <h1 className="text-4xl font-black text-center text-transparent bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-400 bg-clip-text mb-2">KINGDOM</h1>
-                <p className="text-center text-amber-400 text-sm font-mono">Artist & Client Management System</p>
-                <p className="text-center text-green-400 text-xs font-mono mt-1">☘️ CELTIC FC 1888 ☘️</p>
+                <h1 className="text-3xl font-black text-center text-amber-400 mb-2 tracking-tight" style={{ fontFamily: 'monospace' }}>KINGDOM</h1>
+                <p className="text-center text-gray-500 text-xs tracking-wider" style={{ fontFamily: 'monospace' }}>ARTIST MANAGEMENT</p>
             </div>
 
             {/* QUICK STATS */}
-            <div className="grid grid-cols-3 gap-3 mb-6">
-                <Card className="bg-black border-4 border-amber-500/50 p-3 text-center hover:border-amber-500 transition-all">
-                    <User className="w-6 h-6 text-amber-400 mx-auto mb-1" />
-                    <p className="text-3xl font-black text-white">{artists.length}</p>
-                    <p className="text-xs text-amber-400 font-mono font-bold">ROSTER</p>
+            <div className="grid grid-cols-3 gap-3 mb-8">
+                <Card className="bg-black border border-amber-500/30 p-4 text-center hover:border-amber-500/60 transition-colors">
+                    <p className="text-3xl font-black text-white mb-1" style={{ fontFamily: 'monospace' }}>{artists.length}</p>
+                    <p className="text-[10px] text-amber-500 tracking-widest" style={{ fontFamily: 'monospace' }}>ROSTER</p>
                 </Card>
-                <Card className="bg-black border-4 border-cyan-500/50 p-3 text-center hover:border-cyan-500 transition-all">
-                    <Calendar className="w-6 h-6 text-cyan-400 mx-auto mb-1" />
-                    <p className="text-3xl font-black text-white">{upcomingEvents.length}</p>
-                    <p className="text-xs text-cyan-400 font-mono font-bold">GIGS</p>
+                <Card className="bg-black border border-cyan-500/30 p-4 text-center hover:border-cyan-500/60 transition-colors">
+                    <p className="text-3xl font-black text-white mb-1" style={{ fontFamily: 'monospace' }}>{upcomingEvents.length}</p>
+                    <p className="text-[10px] text-cyan-500 tracking-widest" style={{ fontFamily: 'monospace' }}>EVENTS</p>
                 </Card>
-                <Card className="bg-black border-4 border-green-500/50 p-3 text-center hover:border-green-500 transition-all">
-                    <CheckSquare className="w-6 h-6 text-green-400 mx-auto mb-1" />
-                    <p className="text-3xl font-black text-white">{urgentTasks.length}</p>
-                    <p className="text-xs text-green-400 font-mono font-bold">URGENT</p>
+                <Card className="bg-black border border-green-500/30 p-4 text-center hover:border-green-500/60 transition-colors">
+                    <p className="text-3xl font-black text-white mb-1" style={{ fontFamily: 'monospace' }}>{urgentTasks.length}</p>
+                    <p className="text-[10px] text-green-500 tracking-widest" style={{ fontFamily: 'monospace' }}>URGENT</p>
                 </Card>
             </div>
 
             {/* SEARCH */}
             <div className="mb-6">
                 <div className="relative">
-                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
+                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-600" />
                     <Input
-                        placeholder="Search artists, clients, venues..."
+                        placeholder="Search roster..."
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
-                        className="pl-10 bg-black border-2 border-amber-500/50 text-white font-mono placeholder:text-gray-600 focus:border-amber-500"
+                        className="pl-10 bg-black border border-gray-800 text-white placeholder:text-gray-700 focus:border-amber-500/50 transition-colors"
+                        style={{ fontFamily: 'monospace' }}
                     />
                 </div>
             </div>
 
             {/* ADD NEW BUTTON */}
             <Link to={createPageUrl('ScottAddArtist')}>
-                <Button className="w-full mb-6 bg-gradient-to-r from-amber-600 to-yellow-600 hover:from-amber-700 hover:to-yellow-700 text-black font-black py-6 border-4 border-amber-400" style={{ boxShadow: '0 0 20px rgba(245, 158, 11, 0.4)' }}>
-                    <Plus className="w-6 h-6 mr-2" />
-                    ADD TO ROSTER
+                <Button className="w-full mb-8 bg-amber-500 hover:bg-amber-600 text-black font-black py-4 tracking-wider transition-colors" style={{ fontFamily: 'monospace' }}>
+                    <Plus className="w-4 h-4 mr-2" />
+                    NEW CONTACT
                 </Button>
             </Link>
 
             {/* URGENT TASKS */}
             {urgentTasks.length > 0 && (
-                <Card className="bg-black border-4 border-green-500 p-4 mb-6" style={{ boxShadow: '0 0 20px rgba(34, 197, 94, 0.3)' }}>
-                    <div className="flex items-center gap-2 mb-3">
-                        <CheckSquare className="w-6 h-6 text-green-400" />
-                        <h2 className="text-xl font-black text-green-400 font-mono">URGENT</h2>
+                <Card className="bg-black border border-red-500/30 p-4 mb-6">
+                    <div className="flex items-center justify-between mb-4">
+                        <h2 className="text-sm font-black text-red-500 tracking-wider" style={{ fontFamily: 'monospace' }}>URGENT</h2>
+                        <div className="h-px bg-red-500/30 flex-1 ml-3"></div>
                     </div>
                     <div className="space-y-2">
                         {urgentTasks.slice(0, 3).map(task => (
-                            <div key={task.id} className="bg-black/60 p-3 rounded border-2 border-green-500/30 hover:border-green-500 transition-all">
-                                <p className="text-white font-bold text-sm">{task.title}</p>
+                            <div key={task.id} className="bg-black border border-red-500/20 p-3 hover:border-red-500/40 transition-colors">
+                                <p className="text-white text-sm mb-1" style={{ fontFamily: 'monospace' }}>{task.title}</p>
                                 {task.due_date && (
-                                    <p className="text-green-400 text-xs mt-1 font-mono">Due: {new Date(task.due_date).toLocaleDateString()}</p>
+                                    <p className="text-red-500 text-xs tracking-wide" style={{ fontFamily: 'monospace' }}>{new Date(task.due_date).toLocaleDateString()}</p>
                                 )}
                             </div>
                         ))}
@@ -177,65 +175,62 @@ export default function ScottManager() {
 
             {/* UPCOMING EVENTS */}
             {upcomingEvents.length > 0 && (
-                <Card className="bg-black border-4 border-cyan-500 p-4 mb-6" style={{ boxShadow: '0 0 20px rgba(34, 211, 238, 0.3)' }}>
-                    <div className="flex items-center gap-2 mb-3">
-                        <Calendar className="w-6 h-6 text-cyan-400" />
-                        <h2 className="text-xl font-black text-cyan-400 font-mono">UPCOMING</h2>
+                <Card className="bg-black border border-cyan-500/30 p-4 mb-6">
+                    <div className="flex items-center justify-between mb-4">
+                        <h2 className="text-sm font-black text-cyan-500 tracking-wider" style={{ fontFamily: 'monospace' }}>UPCOMING</h2>
+                        <div className="h-px bg-cyan-500/30 flex-1 ml-3"></div>
                     </div>
                     <div className="space-y-2">
                         {upcomingEvents.slice(0, 3).map(event => (
-                            <div key={event.id} className="bg-black/60 p-3 rounded border-2 border-cyan-500/30 hover:border-cyan-500 transition-all">
-                                <p className="text-white font-bold text-sm">{event.title}</p>
-                                <p className="text-cyan-400 text-xs mt-1 font-mono">
+                            <div key={event.id} className="bg-black border border-cyan-500/20 p-3 hover:border-cyan-500/40 transition-colors">
+                                <p className="text-white text-sm mb-1" style={{ fontFamily: 'monospace' }}>{event.title}</p>
+                                <p className="text-cyan-500 text-xs tracking-wide" style={{ fontFamily: 'monospace' }}>
                                     {new Date(event.date).toLocaleDateString()} • {event.location || 'TBC'}
                                 </p>
                             </div>
                         ))}
                     </div>
                     <Link to={createPageUrl('ScottCalendar')}>
-                        <Button variant="outline" className="w-full mt-3 border-2 border-cyan-500 text-cyan-400 hover:bg-cyan-500/20 font-bold">
-                            VIEW FULL CALENDAR
+                        <Button variant="outline" className="w-full mt-3 border border-cyan-500/30 text-cyan-500 hover:border-cyan-500/60 transition-colors tracking-wider" style={{ fontFamily: 'monospace' }}>
+                            CALENDAR
                         </Button>
                     </Link>
                 </Card>
             )}
 
             {/* ARTISTS/CLIENTS LIST */}
-            <div className="space-y-3">
-                <div className="flex items-center gap-2 mb-4">
-                    <div className="flex-1 h-px bg-amber-500/30"></div>
-                    <h2 className="text-xl font-black text-amber-400 font-mono">
+            <div className="space-y-2">
+                <div className="flex items-center justify-between mb-4">
+                    <h2 className="text-sm font-black text-amber-500 tracking-wider" style={{ fontFamily: 'monospace' }}>
                         {searchQuery ? `RESULTS (${filteredArtists.length})` : 'ROSTER'}
                     </h2>
-                    <div className="flex-1 h-px bg-amber-500/30"></div>
+                    <div className="h-px bg-amber-500/30 flex-1 ml-3"></div>
                 </div>
                 
                 {filteredArtists.length === 0 ? (
-                    <Card className="bg-black border-4 border-gray-700 p-8 text-center">
-                        <User className="w-16 h-16 text-gray-600 mx-auto mb-3" />
-                        <p className="text-gray-400 font-mono font-bold">
-                            {searchQuery ? 'NO MATCHES' : 'ADD YOUR FIRST ARTIST'}
+                    <Card className="bg-black border border-gray-800 p-8 text-center">
+                        <p className="text-gray-700 text-sm tracking-wider" style={{ fontFamily: 'monospace' }}>
+                            {searchQuery ? 'NO MATCHES' : 'NO CONTACTS'}
                         </p>
                     </Card>
                 ) : (
                     filteredArtists.map(artist => (
                         <Link key={artist.id} to={createPageUrl(`ScottArtist?id=${artist.id}`)}>
                             <motion.div
-                                whileTap={{ scale: 0.98 }}
-                                className="bg-black border-4 border-amber-500/30 hover:border-amber-500 p-4 rounded-lg transition-all"
-                                style={{ boxShadow: '0 0 10px rgba(245, 158, 11, 0.1)' }}
+                                whileTap={{ scale: 0.99 }}
+                                className="bg-black border border-gray-800 hover:border-amber-500/30 p-4 transition-colors"
                             >
                                 <div className="flex items-center justify-between">
                                     <div className="flex-1">
-                                        <p className="text-white font-black text-lg">{artist.name}</p>
-                                        <p className="text-amber-400 text-sm capitalize font-mono font-bold">{artist.type}</p>
+                                        <p className="text-white text-base mb-1" style={{ fontFamily: 'monospace' }}>{artist.name}</p>
+                                        <p className="text-amber-500 text-xs uppercase tracking-widest" style={{ fontFamily: 'monospace' }}>{artist.type}</p>
                                         {artist.phone && (
-                                            <p className="text-gray-500 text-xs mt-1 font-mono">{artist.phone}</p>
+                                            <p className="text-gray-600 text-xs mt-1" style={{ fontFamily: 'monospace' }}>{artist.phone}</p>
                                         )}
                                     </div>
-                                    <div className="flex gap-3">
-                                        <MessageSquare className="w-6 h-6 text-cyan-400" />
-                                        <CheckSquare className="w-6 h-6 text-green-400" />
+                                    <div className="flex gap-4">
+                                        <MessageSquare className="w-5 h-5 text-gray-700" />
+                                        <CheckSquare className="w-5 h-5 text-gray-700" />
                                     </div>
                                 </div>
                             </motion.div>
@@ -245,13 +240,12 @@ export default function ScottManager() {
             </div>
 
             {/* FOOTER */}
-            <div className="mt-8 pt-6 border-t-4 border-amber-500/30">
+            <div className="mt-12 pt-6 border-t border-gray-900">
                 <div className="flex items-center justify-center gap-3 mb-2">
-                    <KingdomCrown8Bit size={32} animate={true} />
-                    <p className="text-amber-400 text-lg font-mono font-black">KINGDOM</p>
+                    <KingdomCrown8Bit size={24} />
+                    <p className="text-gray-700 text-xs tracking-widest" style={{ fontFamily: 'monospace' }}>KINGDOM</p>
                 </div>
-                <p className="text-center text-gray-600 text-xs font-mono">Professional Artist Management</p>
-                <p className="text-center text-green-400 text-xs font-mono mt-1">☘️ 1888 ☘️</p>
+                <p className="text-center text-gray-800 text-[10px] tracking-widest" style={{ fontFamily: 'monospace' }}>EST 1888</p>
             </div>
         </div>
     );
