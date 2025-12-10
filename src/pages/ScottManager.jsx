@@ -19,19 +19,31 @@ function ScottManagerInner() {
     const [pinEntered, setPinEntered] = useState(false);
     const [pinInput, setPinInput] = useState('');
     const [searchQuery, setSearchQuery] = useState('');
+    const [showOfflineExplainer, setShowOfflineExplainer] = useState(false);
     
     const scott = useScottOffline();
     const [artists, setArtists] = useState([]);
     const [upcomingEvents, setUpcomingEvents] = useState([]);
     const [urgentTasks, setUrgentTasks] = useState([]);
 
-    // Check if PIN already stored
+    // Check if PIN already stored + show offline explainer first time
     useEffect(() => {
         const storedPin = localStorage.getItem('scott_access_pin');
         if (storedPin === '1888') {
             setPinEntered(true);
+            
+            // Show offline explainer on first launch
+            const hasSeenOfflineExplainer = localStorage.getItem('scott_offline_explainer_seen');
+            if (!hasSeenOfflineExplainer) {
+                setShowOfflineExplainer(true);
+            }
         }
     }, []);
+    
+    const handleDismissOfflineExplainer = () => {
+        localStorage.setItem('scott_offline_explainer_seen', 'true');
+        setShowOfflineExplainer(false);
+    };
 
     // Load data from offline storage
     useEffect(() => {
@@ -114,13 +126,60 @@ function ScottManagerInner() {
 
     return (
         <div className="min-h-screen bg-black p-4 pb-20">
-            
+
+            {/* OFFLINE EXPLAINER MODAL */}
+            {showOfflineExplainer && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-sm">
+                    <motion.div
+                        initial={{ scale: 0.9, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        className="bg-black border-2 border-amber-500 p-8 max-w-md w-full"
+                        style={{ boxShadow: '0 0 40px rgba(245, 158, 11, 0.4)' }}
+                    >
+                        <div className="text-center mb-6">
+                            <KingdomCrown8Bit size={64} animate={true} />
+                        </div>
+                        <h2 className="text-2xl font-black text-amber-400 text-center mb-4 tracking-tight" style={{ fontFamily: 'monospace' }}>
+                            100% OFFLINE
+                        </h2>
+                        <div className="space-y-3 mb-6 text-center">
+                            <p className="text-white text-sm" style={{ fontFamily: 'monospace' }}>
+                                Works in basements
+                            </p>
+                            <p className="text-white text-sm" style={{ fontFamily: 'monospace' }}>
+                                Works in vans
+                            </p>
+                            <p className="text-white text-sm" style={{ fontFamily: 'monospace' }}>
+                                Works at festivals
+                            </p>
+                            <p className="text-white text-sm" style={{ fontFamily: 'monospace' }}>
+                                Works anywhere
+                            </p>
+                            <div className="h-px bg-amber-500/20 my-4"></div>
+                            <p className="text-gray-500 text-xs" style={{ fontFamily: 'monospace' }}>
+                                Auto-syncs when signal returns
+                            </p>
+                        </div>
+                        <Button
+                            onClick={handleDismissOfflineExplainer}
+                            className="w-full bg-amber-500 hover:bg-amber-600 text-black font-black py-4 tracking-wider"
+                            style={{ fontFamily: 'monospace', boxShadow: '0 0 20px rgba(245, 158, 11, 0.4)' }}
+                        >
+                            LET'S GO
+                        </Button>
+                    </motion.div>
+                </div>
+            )}
+
             {/* HEADER */}
             <div className="mb-6 pb-4 border-b border-amber-500/20">
                 <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-3">
                         <KingdomCrown8Bit size={32} />
-                        <h1 className="text-2xl font-black text-amber-400 tracking-tight" style={{ fontFamily: 'monospace' }}>SK</h1>
+                        <div>
+                            <h1 className="text-2xl font-black text-amber-400 tracking-tight leading-none" style={{ fontFamily: 'monospace' }}>SK</h1>
+                            <p className="text-[9px] text-gray-600 tracking-widest font-bold mt-0.5" style={{ fontFamily: 'monospace' }}>OFFLINE-FIRST MGMT</p>
+                        </div>
 
                         {/* OFFLINE/SYNC STATUS */}
                         <div className="flex items-center gap-2">
