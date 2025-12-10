@@ -25,6 +25,8 @@ function ScottManagerInner() {
     const [artists, setArtists] = useState([]);
     const [upcomingEvents, setUpcomingEvents] = useState([]);
     const [urgentTasks, setUrgentTasks] = useState([]);
+    const [unpaidInvoices, setUnpaidInvoices] = useState([]);
+    const [expenses, setExpenses] = useState([]);
 
     // Check if PIN already stored + show offline explainer first time
     useEffect(() => {
@@ -51,9 +53,13 @@ function ScottManagerInner() {
             const loadedArtists = scott.getArtists();
             const loadedEvents = scott.getEvents();
             const loadedTasks = scott.getTasks();
+            const loadedInvoices = scott.getUnpaidInvoices();
+            const loadedExpenses = scott.getExpenses();
 
             setArtists(loadedArtists);
-            
+            setUnpaidInvoices(loadedInvoices);
+            setExpenses(loadedExpenses);
+
             const upcoming = loadedEvents.filter(e => new Date(e.date) >= new Date());
             setUpcomingEvents(upcoming);
 
@@ -66,6 +72,8 @@ function ScottManagerInner() {
             if (scott.isOnline) {
                 scott.pullFromServer().then(() => {
                     setArtists(scott.getArtists());
+                    setUnpaidInvoices(scott.getUnpaidInvoices());
+                    setExpenses(scott.getExpenses());
                     setUpcomingEvents(scott.getEvents().filter(e => new Date(e.date) >= new Date()));
                     setUrgentTasks(scott.getTasks().filter(t => 
                         t.status !== 'done' && (t.priority === 'high' || t.priority === 'urgent')
@@ -225,6 +233,22 @@ function ScottManagerInner() {
                     <Card className="bg-black border border-red-500/20 p-4 text-center hover:border-red-500/50 transition-all hover:bg-red-500/5 active:scale-95">
                         <p className="text-4xl font-black text-white mb-2" style={{ fontFamily: 'monospace' }}>{urgentTasks.length}</p>
                         <p className="text-xs text-red-500 tracking-widest font-bold" style={{ fontFamily: 'monospace' }}>URGENT</p>
+                    </Card>
+                </Link>
+            </div>
+
+            {/* MONEY SECTION */}
+            <div className="grid grid-cols-2 gap-2 mb-6">
+                <Link to={createPageUrl('ScottInvoices')} className="w-full">
+                    <Card className="bg-black border border-green-500/20 p-4 text-center hover:border-green-500/50 transition-all hover:bg-green-500/5 active:scale-95">
+                        <p className="text-4xl font-black text-white mb-2" style={{ fontFamily: 'monospace' }}>{unpaidInvoices.length}</p>
+                        <p className="text-xs text-green-500 tracking-widest font-bold" style={{ fontFamily: 'monospace' }}>INVOICES</p>
+                    </Card>
+                </Link>
+                <Link to={createPageUrl('ScottExpenses')} className="w-full">
+                    <Card className="bg-black border border-purple-500/20 p-4 text-center hover:border-purple-500/50 transition-all hover:bg-purple-500/5 active:scale-95">
+                        <p className="text-4xl font-black text-white mb-2" style={{ fontFamily: 'monospace' }}>{expenses.length}</p>
+                        <p className="text-xs text-purple-500 tracking-widest font-bold" style={{ fontFamily: 'monospace' }}>EXPENSES</p>
                     </Card>
                 </Link>
             </div>
