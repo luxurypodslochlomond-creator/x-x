@@ -186,7 +186,7 @@ export default function HealingDashboard() {
                                     </div>
                                     <div>
                                         <p className="text-xl font-black text-amber-400 font-mono leading-tight">
-                                            {topProtocol ? topProtocol[0].split('_')[0] : 'none'}
+                                            {topProtocol ? (topProtocol[0] === 'menopause' ? 'vitality' : topProtocol[0].split('_')[0]) : 'none'}
                                         </p>
                                         <p className="text-xs text-gray-500 font-mono">frequency</p>
                                     </div>
@@ -262,7 +262,7 @@ export default function HealingDashboard() {
                                                 transition={{ delay: i * 0.1 }}
                                             >
                                                 <p className="text-xs text-purple-300 font-mono flex-1">
-                                                    {session.recommended_protocol.split('_')[0]}
+                                                    {session.recommended_protocol === 'menopause' ? 'vitality' : session.recommended_protocol.split('_')[0]}
                                                 </p>
                                                 <div 
                                                     className="w-12 h-6 border-2 font-black font-mono text-sm flex items-center justify-center"

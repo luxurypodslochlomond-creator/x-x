@@ -169,7 +169,7 @@ export default function MorphicResonance() {
                     
                     <div className="bg-black/60 p-4 mb-4">
                         <p className="text-4xl font-black text-white font-mono mb-2">
-                            {resonanceData.strongest.name.toUpperCase()}
+                            {resonanceData.strongest.name === 'menopause' ? 'VITALITY' : resonanceData.strongest.name.replace(/_/g, ' ').toUpperCase()}
                         </p>
                         <div className="grid grid-cols-2 gap-4 mt-4">
                             <div>
@@ -213,9 +213,9 @@ export default function MorphicResonance() {
                                 className="bg-amber-900/20 border-2 border-amber-500 p-3"
                             >
                                 <div className="flex items-center justify-between mb-2">
-                                    <p className="text-amber-400 font-mono font-bold">
-                                        {protocol.toUpperCase()}
-                                    </p>
+                                   <p className="text-amber-400 font-mono font-bold">
+                                       {protocol === 'menopause' ? 'VITALITY' : protocol.replace(/_/g, ' ').toUpperCase()}
+                                   </p>
                                     <div className="flex items-center gap-4 text-sm font-mono">
                                         <span className="text-cyan-400">
                                             <Users className="w-4 h-4 inline mr-1" />
