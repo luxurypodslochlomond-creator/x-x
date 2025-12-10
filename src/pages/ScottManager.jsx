@@ -77,7 +77,7 @@ export default function ScottManager() {
                         </div>
                         <h1 className="text-4xl font-black text-amber-400 mb-3 tracking-tight" style={{ fontFamily: 'monospace' }}>KINGDOM</h1>
                         <div className="h-px bg-amber-500/30 mb-3"></div>
-                        <p className="text-gray-400 text-sm tracking-wide" style={{ fontFamily: 'monospace' }}>ARTIST MANAGEMENT SYSTEM</p>
+                        <p className="text-gray-400 text-sm tracking-wide" style={{ fontFamily: 'monospace' }}>ARTIST & CLIENT MANAGER</p>
                     </div>
                     <Input
                         type="password"
@@ -91,9 +91,9 @@ export default function ScottManager() {
                     <Button
                         onClick={handlePinSubmit}
                         className="w-full bg-amber-500 hover:bg-amber-600 text-black font-black text-sm py-4 tracking-wider transition-all"
-                        style={{ fontFamily: 'monospace' }}
+                        style={{ fontFamily: 'monospace', boxShadow: '0 0 20px rgba(245, 158, 11, 0.3)' }}
                     >
-                        ACCESS
+                        ENTER
                     </Button>
                     <div className="text-center mt-6 pt-6 border-t border-green-500/20">
                         <p className="text-green-400/60 text-xs tracking-wider" style={{ fontFamily: 'monospace' }}>EST. 1888</p>
@@ -112,7 +112,7 @@ export default function ScottManager() {
                     <KingdomCrown8Bit size={40} />
                 </div>
                 <h1 className="text-3xl font-black text-center text-amber-400 mb-2 tracking-tight" style={{ fontFamily: 'monospace' }}>KINGDOM</h1>
-                <p className="text-center text-gray-500 text-xs tracking-wider" style={{ fontFamily: 'monospace' }}>ARTIST MANAGEMENT</p>
+                <p className="text-center text-gray-500 text-xs tracking-wider" style={{ fontFamily: 'monospace' }}>YOUR ROSTER • YOUR WAY</p>
             </div>
 
             {/* QUICK STATS */}
@@ -146,10 +146,10 @@ export default function ScottManager() {
             </div>
 
             {/* ADD NEW BUTTON */}
-            <Link to={createPageUrl('ScottAddArtist')}>
-                <Button className="w-full mb-8 bg-amber-500 hover:bg-amber-600 text-black font-black py-4 tracking-wider transition-colors" style={{ fontFamily: 'monospace' }}>
+            <Link to={createPageUrl('ScottAddArtist')} className="block">
+                <Button className="w-full mb-8 bg-amber-500 hover:bg-amber-600 text-black font-black py-4 tracking-wider transition-colors" style={{ fontFamily: 'monospace', boxShadow: '0 0 15px rgba(245, 158, 11, 0.2)' }}>
                     <Plus className="w-4 h-4 mr-2" />
-                    NEW CONTACT
+                    ADD NEW
                 </Button>
             </Link>
 
@@ -190,9 +190,9 @@ export default function ScottManager() {
                             </div>
                         ))}
                     </div>
-                    <Link to={createPageUrl('ScottCalendar')}>
-                        <Button variant="outline" className="w-full mt-3 border border-cyan-500/30 text-cyan-500 hover:border-cyan-500/60 transition-colors tracking-wider" style={{ fontFamily: 'monospace' }}>
-                            CALENDAR
+                    <Link to={createPageUrl('ScottCalendar')} className="block mt-3">
+                        <Button variant="outline" className="w-full border border-cyan-500/30 text-cyan-500 hover:border-cyan-500/60 hover:bg-cyan-500/10 transition-colors tracking-wider" style={{ fontFamily: 'monospace' }}>
+                            VIEW CALENDAR
                         </Button>
                     </Link>
                 </Card>
@@ -215,10 +215,10 @@ export default function ScottManager() {
                     </Card>
                 ) : (
                     filteredArtists.map(artist => (
-                        <Link key={artist.id} to={createPageUrl(`ScottArtist?id=${artist.id}`)}>
+                        <Link key={artist.id} to={createPageUrl(`ScottArtist?id=${artist.id}`)} className="block">
                             <motion.div
                                 whileTap={{ scale: 0.99 }}
-                                className="bg-black border border-gray-800 hover:border-amber-500/30 p-4 transition-colors"
+                                className="bg-black border border-gray-800 hover:border-amber-500/30 p-4 transition-colors cursor-pointer"
                             >
                                 <div className="flex items-center justify-between">
                                     <div className="flex-1">
