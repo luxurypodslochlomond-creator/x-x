@@ -21,6 +21,7 @@ function ScottManagerInner() {
     const [pinInput, setPinInput] = useState('');
     const [searchQuery, setSearchQuery] = useState('');
     const [showOfflineExplainer, setShowOfflineExplainer] = useState(false);
+    const [showLiveExplainer, setShowLiveExplainer] = useState(false);
     
     const scott = useScottOffline();
     const [artists, setArtists] = useState([]);
@@ -212,10 +213,14 @@ function ScottManagerInner() {
                 </div>
 
                 {/* STATUS BAR */}
-                <div className="flex items-center justify-between mt-4 px-2">
+                <div className="flex items-center justify-between mt-4 px-2 relative">
                     <div className="flex items-center gap-2">
                         {scott.isOnline ? (
-                            <div className="flex items-center gap-2 bg-green-900/30 border-2 border-green-500 px-3 py-1" style={{ imageRendering: 'pixelated' }} title="LIVE = Connected to internet, auto-syncing">
+                            <button 
+                                onClick={() => setShowLiveExplainer(!showLiveExplainer)}
+                                className="flex items-center gap-2 bg-green-900/30 border-2 border-green-500 px-3 py-1 hover:bg-green-500/20 transition-all active:scale-95" 
+                                style={{ imageRendering: 'pixelated' }}
+                            >
                                 <Wifi className="w-3 h-3 text-green-400" />
                                 <span className="text-[9px] text-green-400 font-black tracking-wider" style={{ fontFamily: 'monospace' }}>LIVE</span>
                                 {scott.isSyncing && <RefreshCw className="w-3 h-3 text-cyan-400 animate-spin" />}
@@ -224,17 +229,70 @@ function ScottManagerInner() {
                                         +{scott.pendingCount}
                                     </span>
                                 )}
-                            </div>
+                            </button>
                         ) : (
-                            <div className="flex items-center gap-2 bg-amber-900/30 border-2 border-amber-500 px-3 py-1" style={{ imageRendering: 'pixelated' }} title="OFFLINE = No internet, saves locally">
+                            <button 
+                                onClick={() => setShowLiveExplainer(!showLiveExplainer)}
+                                className="flex items-center gap-2 bg-amber-900/30 border-2 border-amber-500 px-3 py-1 hover:bg-amber-500/20 transition-all active:scale-95" 
+                                style={{ imageRendering: 'pixelated' }}
+                            >
                                 <WifiOff className="w-3 h-3 text-amber-400" />
                                 <span className="text-[9px] text-amber-400 font-black tracking-wider" style={{ fontFamily: 'monospace' }}>OFFLINE</span>
-                            </div>
+                            </button>
                         )}
                     </div>
                     <Link to={createPageUrl('ScottCalendar')} className="bg-cyan-900/30 border-2 border-cyan-500 hover:bg-cyan-500/20 p-2 transition-all active:scale-95" style={{ imageRendering: 'pixelated' }}>
                         <svg className="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
                     </Link>
+
+                    {/* 8-BIT DROPDOWN EXPLAINER */}
+                    {showLiveExplainer && (
+                        <motion.div
+                            initial={{ opacity: 0, y: -10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            className="absolute top-12 left-0 z-50 bg-black border-4 border-green-500 p-4 w-64"
+                            style={{ boxShadow: '6px 6px 0 rgba(0,0,0,0.8)' }}
+                        >
+                            <div className="space-y-2">
+                                <p className="text-green-400 font-black text-xs tracking-wider" style={{ fontFamily: 'monospace' }}>
+                                    {scott.isOnline ? 'LIVE MODE' : 'OFFLINE MODE'}
+                                </p>
+                                <div className="h-px bg-green-500/30"></div>
+                                {scott.isOnline ? (
+                                    <>
+                                        <p className="text-white text-[10px]" style={{ fontFamily: 'monospace' }}>
+                                            • Connected to internet
+                                        </p>
+                                        <p className="text-white text-[10px]" style={{ fontFamily: 'monospace' }}>
+                                            • Auto-syncing changes
+                                        </p>
+                                        <p className="text-white text-[10px]" style={{ fontFamily: 'monospace' }}>
+                                            • Real-time updates
+                                        </p>
+                                    </>
+                                ) : (
+                                    <>
+                                        <p className="text-white text-[10px]" style={{ fontFamily: 'monospace' }}>
+                                            • No internet connection
+                                        </p>
+                                        <p className="text-white text-[10px]" style={{ fontFamily: 'monospace' }}>
+                                            • Saves locally
+                                        </p>
+                                        <p className="text-white text-[10px]" style={{ fontFamily: 'monospace' }}>
+                                            • Will sync when back online
+                                        </p>
+                                    </>
+                                )}
+                                <button 
+                                    onClick={() => setShowLiveExplainer(false)}
+                                    className="w-full bg-green-500 hover:bg-green-600 text-black font-black text-xs py-2 mt-2 transition-all active:scale-95"
+                                    style={{ fontFamily: 'monospace' }}
+                                >
+                                    GOT IT
+                                </button>
+                            </div>
+                        </motion.div>
+                    )}
                 </div>
             </div>
 
