@@ -1,21 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { base44 } from '@/api/base44Client';
 import { createPageUrl } from '@/utils';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { ArrowLeft, Save } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { ArrowLeft, WifiOff } from 'lucide-react';
 import KingdomCrown8Bit from '@/components/shared/KingdomCrown8Bit';
+import { useScottOffline, ScottOfflineProvider } from '@/components/scott/ScottOfflineStorage';
 
-export default function ScottAddArtist() {
+function ScottAddArtistInner() {
     const navigate = useNavigate();
+    const scott = useScottOffline();
     
     // PIN CHECK
-    React.useEffect(() => {
+    useEffect(() => {
         const pin = localStorage.getItem('scott_access_pin');
         if (pin !== '1888') {
             navigate(createPageUrl('ScottManager'));
@@ -38,12 +38,12 @@ export default function ScottAddArtist() {
         notes: ''
     });
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
         setSaving(true);
         
         try {
-            const newArtist = await base44.asServiceRole.entities.ScottArtist.create(formData);
+            const newArtist = scott.createArtist(formData);
             navigate(createPageUrl(`ScottArtist?id=${newArtist.id}`));
         } catch (error) {
             alert('Error saving: ' + error.message);
@@ -54,13 +54,25 @@ export default function ScottAddArtist() {
     return (
         <div className="min-h-screen bg-black p-4">
             
-            <button
-                onClick={() => navigate(createPageUrl('ScottManager'))}
-                className="flex items-center gap-2 text-gray-600 mb-6 hover:text-amber-400 transition-all hover:gap-1"
-            >
-                <ArrowLeft className="w-4 h-4" />
-                <span style={{ fontFamily: 'monospace' }} className="text-sm tracking-wider font-bold">BACK</span>
-            </button>
+            <div className="flex items-center justify-between mb-6">
+                <button
+                    onClick={() => navigate(createPageUrl('ScottManager'))}
+                    className="flex items-center gap-2 text-gray-600 hover:text-amber-400 transition-all"
+                >
+                    <ArrowLeft className="w-4 h-4" />
+                    <span style={{ fontFamily: 'monospace' }} className="text-sm tracking-wider font-bold">BACK</span>
+                </button>
+                
+                {/* OFFLINE INDICATOR */}
+                {!scott.isOnline && (
+                    <div className="flex items-center gap-1 bg-green-500/20 px-2 py-1 rounded">
+                        <WifiOff className="w-3 h-3 text-green-400" />
+                        <span className="text-[10px] text-green-400 font-bold tracking-wider" style={{ fontFamily: 'monospace' }}>
+                            WORKS OFFLINE
+                        </span>
+                    </div>
+                )}
+            </div>
 
             <div className="flex items-center justify-center gap-3 mb-6">
                 <KingdomCrown8Bit size={32} />
@@ -222,7 +234,15 @@ export default function ScottAddArtist() {
                         {saving ? 'SAVING...' : 'SAVE'}
                     </Button>
                 </form>
-            </Card>
-        </div>
-    );
-}
+                </Card>
+                </div>
+                );
+                }
+
+                export default function ScottAddArtist() {
+                return (
+                <ScottOfflineProvider>
+                <ScottAddArtistInner />
+                </ScottOfflineProvider>
+                );
+                }

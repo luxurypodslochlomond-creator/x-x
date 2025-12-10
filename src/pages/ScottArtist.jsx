@@ -1,29 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { base44 } from '@/api/base44Client';
 import { createPageUrl } from '@/utils';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { ArrowLeft, Calendar, CheckSquare, MessageSquare, DollarSign, Plus, Phone, Mail, Brain, Copy } from 'lucide-react';
+import { ArrowLeft, CheckSquare, Plus, Phone, Mail, Brain, Copy, Wifi, WifiOff } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useScottOffline, ScottOfflineProvider } from '@/components/scott/ScottOfflineStorage';
 
-export default function ScottArtist() {
+function ScottArtistInner() {
     const navigate = useNavigate();
-    const queryClient = useQueryClient();
     const params = new URLSearchParams(window.location.search);
     const artistId = params.get('id');
+    const scott = useScottOffline();
 
     // PIN CHECK
-    React.useEffect(() => {
+    useEffect(() => {
         const pin = localStorage.getItem('scott_access_pin');
         if (pin !== '1888') {
             navigate(createPageUrl('ScottManager'));
         }
     }, [navigate]);
 
+    const [artist, setArtist] = useState(null);
+    const [tasks, setTasks] = useState([]);
+    const [messages, setMessages] = useState([]);
+    const [events, setEvents] = useState([]);
+    
     const [showAddTask, setShowAddTask] = useState(false);
     const [showAddMessage, setShowAddMessage] = useState(false);
     const [showAddEvent, setShowAddEvent] = useState(false);
@@ -36,86 +41,48 @@ export default function ScottArtist() {
     const [aiDraft, setAiDraft] = useState('');
     const [aiLoading, setAiLoading] = useState(false);
 
-    const { data: artist } = useQuery({
-        queryKey: ['scott-artist', artistId],
-        queryFn: async () => {
-            const artists = await base44.asServiceRole.entities.ScottArtist.list();
-            return artists.find(a => a.id === artistId);
-        },
-        enabled: !!artistId
-    });
-
-    const { data: tasks = [] } = useQuery({
-        queryKey: ['scott-artist-tasks', artistId],
-        queryFn: async () => {
-            const allTasks = await base44.asServiceRole.entities.ScottTask.list('-created_date');
-            return allTasks.filter(t => t.artist_id === artistId);
-        },
-        enabled: !!artistId
-    });
-
-    const { data: messages = [] } = useQuery({
-        queryKey: ['scott-artist-messages', artistId],
-        queryFn: async () => {
-            const allMessages = await base44.asServiceRole.entities.ScottMessage.list('-created_date');
-            return allMessages.filter(m => m.artist_id === artistId);
-        },
-        enabled: !!artistId
-    });
-
-    const { data: events = [] } = useQuery({
-        queryKey: ['scott-artist-events', artistId],
-        queryFn: async () => {
-            const allEvents = await base44.asServiceRole.entities.ScottEvent.list('-date');
-            return allEvents.filter(e => e.artist_id === artistId);
-        },
-        enabled: !!artistId
-    });
-
-    const addTaskMutation = useMutation({
-        mutationFn: (taskData) => base44.asServiceRole.entities.ScottTask.create({
-            ...taskData,
-            artist_id: artistId
-        }),
-        onSuccess: () => {
-            queryClient.invalidateQueries(['scott-artist-tasks', artistId]);
-            setNewTask({ title: '', notes: '', priority: 'normal' });
-            setShowAddTask(false);
+    // Load data from offline storage
+    useEffect(() => {
+        if (artistId) {
+            setArtist(scott.getArtist(artistId));
+            setTasks(scott.getTasksForArtist(artistId));
+            setMessages(scott.getMessagesForArtist(artistId));
+            setEvents(scott.getEventsForArtist(artistId));
         }
-    });
+    }, [artistId]);
 
-    const toggleTaskMutation = useMutation({
-        mutationFn: ({ id, status }) => base44.asServiceRole.entities.ScottTask.update(id, { status }),
-        onSuccess: () => {
-            queryClient.invalidateQueries(['scott-artist-tasks', artistId]);
-        }
-    });
+    const handleAddTask = () => {
+        scott.createTask({ ...newTask, artist_id: artistId });
+        setTasks(scott.getTasksForArtist(artistId));
+        setNewTask({ title: '', notes: '', priority: 'normal' });
+        setShowAddTask(false);
+    };
 
-    const addMessageMutation = useMutation({
-        mutationFn: (messageData) => base44.asServiceRole.entities.ScottMessage.create({
-            ...messageData,
-            artist_id: artistId
-        }),
-        onSuccess: () => {
-            queryClient.invalidateQueries(['scott-artist-messages', artistId]);
-            setNewMessage({ message: '', direction: 'note' });
-            setShowAddMessage(false);
-        }
-    });
+    const handleToggleTask = (taskId, status) => {
+        scott.updateTask(taskId, { status });
+        setTasks(scott.getTasksForArtist(artistId));
+    };
 
-    const addEventMutation = useMutation({
-        mutationFn: (eventData) => base44.asServiceRole.entities.ScottEvent.create({
-            ...eventData,
-            artist_id: artistId
-        }),
-        onSuccess: () => {
-            queryClient.invalidateQueries(['scott-artist-events', artistId]);
-            setNewEvent({ title: '', date: '', location: '', event_type: 'gig' });
-            setShowAddEvent(false);
-        }
-    });
+    const handleAddMessage = () => {
+        scott.createMessage({ ...newMessage, artist_id: artistId });
+        setMessages(scott.getMessagesForArtist(artistId));
+        setNewMessage({ message: '', direction: 'note' });
+        setShowAddMessage(false);
+    };
+
+    const handleAddEvent = () => {
+        scott.createEvent({ ...newEvent, artist_id: artistId });
+        setEvents(scott.getEventsForArtist(artistId));
+        setNewEvent({ title: '', date: '', location: '', event_type: 'gig' });
+        setShowAddEvent(false);
+    };
 
     const handleAIDraft = async () => {
+        if (!scott.isOnline) {
+            alert('Need internet for AI draft - save it offline first, draft when back online ❤️');
+            return;
+        }
+        
         setAiLoading(true);
         try {
             const prompt = `You are Scott's AI assistant helping him draft a professional email.
@@ -144,8 +111,8 @@ TASK: Draft a short, professional but friendly email based on the context Scott 
 
     if (!artist) {
         return (
-            <div className="min-h-screen bg-gradient-to-br from-purple-950 via-black to-indigo-950 p-4 flex items-center justify-center">
-                <p className="text-gray-400">Loading...</p>
+            <div className="min-h-screen bg-black p-4 flex items-center justify-center">
+                <p className="text-gray-400" style={{ fontFamily: 'monospace' }}>Loading...</p>
             </div>
         );
     }
@@ -154,20 +121,32 @@ TASK: Draft a short, professional but friendly email based on the context Scott 
     const doneTasks = tasks.filter(t => t.status === 'done');
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-purple-950 via-black to-indigo-950 p-4 pb-20">
+        <div className="min-h-screen bg-black p-4 pb-20">
             
-            <button
-                onClick={() => navigate(createPageUrl('ScottManager'))}
-                className="flex items-center gap-2 text-purple-400 mb-6 hover:text-purple-300"
-            >
-                <ArrowLeft className="w-5 h-5" />
-                <span className="font-mono">Back</span>
-            </button>
+            <div className="flex items-center justify-between mb-6">
+                <button
+                    onClick={() => navigate(createPageUrl('ScottManager'))}
+                    className="flex items-center gap-2 text-gray-600 hover:text-amber-400 transition-all"
+                >
+                    <ArrowLeft className="w-5 h-5" />
+                    <span style={{ fontFamily: 'monospace' }} className="text-sm font-bold tracking-wider">BACK</span>
+                </button>
+                
+                {/* OFFLINE STATUS */}
+                {!scott.isOnline && (
+                    <div className="flex items-center gap-1 bg-amber-500/20 px-2 py-1 rounded">
+                        <WifiOff className="w-3 h-3 text-amber-400" />
+                        <span className="text-[10px] text-amber-400 font-bold tracking-wider" style={{ fontFamily: 'monospace' }}>
+                            OFFLINE
+                        </span>
+                    </div>
+                )}
+            </div>
 
             {/* ARTIST HEADER */}
-            <Card className="bg-black/60 border-2 border-purple-500 p-6 mb-6">
-                <h1 className="text-3xl font-black text-white mb-2">{artist.name}</h1>
-                <p className="text-purple-400 text-sm capitalize mb-4">{artist.type}</p>
+            <Card className="bg-black border border-amber-500/20 p-6 mb-6">
+                <h1 className="text-3xl font-black text-white mb-2" style={{ fontFamily: 'monospace' }}>{artist.name}</h1>
+                <p className="text-amber-400 text-sm uppercase tracking-widest mb-4" style={{ fontFamily: 'monospace' }}>{artist.type}</p>
                 
                 {artist.phone && (
                     <div className="flex items-center gap-2 text-gray-400 text-sm mb-2">
@@ -189,13 +168,15 @@ TASK: Draft a short, professional but friendly email based on the context Scott 
                     </div>
                 )}
 
-                <Button
-                    onClick={() => setShowAIDraft(!showAIDraft)}
-                    className="w-full mt-4 bg-gradient-to-r from-cyan-600 to-purple-600 hover:from-cyan-700 hover:to-purple-700"
-                >
-                    <Brain className="w-4 h-4 mr-2" />
-                    {showAIDraft ? 'Hide AI Draft' : 'Draft Email (AI)'}
-                </Button>
+                {scott.isOnline && (
+                    <Button
+                        onClick={() => setShowAIDraft(!showAIDraft)}
+                        className="w-full mt-4 bg-gradient-to-r from-cyan-600 to-purple-600 hover:from-cyan-700 hover:to-purple-700"
+                    >
+                        <Brain className="w-4 h-4 mr-2" />
+                        {showAIDraft ? 'Hide AI Draft' : 'Draft Email (AI)'}
+                    </Button>
+                )}
 
                 <AnimatePresence>
                     {showAIDraft && (
@@ -244,7 +225,7 @@ TASK: Draft a short, professional but friendly email based on the context Scott 
             </Card>
 
             {/* TASKS */}
-            <Card className="bg-black/60 border-2 border-amber-500 p-4 mb-6">
+            <Card className="bg-black border border-amber-500/20 p-4 mb-6">
                 <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-2">
                         <CheckSquare className="w-5 h-5 text-amber-400" />
@@ -280,7 +261,7 @@ TASK: Draft a short, professional but friendly email based on the context Scott 
                                 className="bg-black/60 border-amber-500/50 text-white"
                             />
                             <Button
-                                onClick={() => addTaskMutation.mutate(newTask)}
+                                onClick={handleAddTask}
                                 disabled={!newTask.title.trim()}
                                 className="w-full bg-amber-600 hover:bg-amber-700"
                             >
@@ -298,10 +279,8 @@ TASK: Draft a short, professional but friendly email based on the context Scott 
                         >
                             <input
                                 type="checkbox"
-                                onChange={(e) => toggleTaskMutation.mutate({
-                                    id: task.id,
-                                    status: e.target.checked ? 'done' : 'todo'
-                                })}
+                                checked={task.status === 'done'}
+                                onChange={(e) => handleToggleTask(task.id, e.target.checked ? 'done' : 'todo')}
                                 className="mt-1"
                             />
                             <div className="flex-1">
@@ -317,7 +296,7 @@ TASK: Draft a short, professional but friendly email based on the context Scott 
             </Card>
 
             {/* EVENTS */}
-            <Card className="bg-black/60 border-2 border-cyan-500 p-4 mb-6">
+            <Card className="bg-black border border-cyan-500/20 p-4 mb-6">
                 <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-2">
                         <Calendar className="w-5 h-5 text-cyan-400" />
@@ -359,7 +338,7 @@ TASK: Draft a short, professional but friendly email based on the context Scott 
                                 className="bg-black/60 border-cyan-500/50 text-white"
                             />
                             <Button
-                                onClick={() => addEventMutation.mutate(newEvent)}
+                                onClick={handleAddEvent}
                                 disabled={!newEvent.title.trim() || !newEvent.date}
                                 className="w-full bg-cyan-600 hover:bg-cyan-700"
                             >
@@ -385,7 +364,7 @@ TASK: Draft a short, professional but friendly email based on the context Scott 
             </Card>
 
             {/* MESSAGES */}
-            <Card className="bg-black/60 border-2 border-pink-500 p-4">
+            <Card className="bg-black border border-pink-500/20 p-4">
                 <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-2">
                         <MessageSquare className="w-5 h-5 text-pink-400" />
@@ -415,7 +394,7 @@ TASK: Draft a short, professional but friendly email based on the context Scott 
                                 className="bg-black/60 border-pink-500/50 text-white"
                             />
                             <Button
-                                onClick={() => addMessageMutation.mutate(newMessage)}
+                                onClick={handleAddMessage}
                                 disabled={!newMessage.message.trim()}
                                 className="w-full bg-pink-600 hover:bg-pink-700"
                             >
@@ -439,6 +418,14 @@ TASK: Draft a short, professional but friendly email based on the context Scott 
                     )}
                 </div>
             </Card>
-        </div>
-    );
-}
+            </div>
+            );
+            }
+
+            export default function ScottArtist() {
+            return (
+            <ScottOfflineProvider>
+              <ScottArtistInner />
+            </ScottOfflineProvider>
+            );
+            }

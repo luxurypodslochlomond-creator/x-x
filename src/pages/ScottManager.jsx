@@ -1,14 +1,13 @@
-import React, { useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { base44 } from '@/api/base44Client';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Plus, User, Calendar, CheckSquare, MessageSquare, DollarSign, Search } from 'lucide-react';
+import { Plus, Search, Wifi, WifiOff, RefreshCw } from 'lucide-react';
 import { motion } from 'framer-motion';
 import KingdomCrown8Bit from '@/components/shared/KingdomCrown8Bit';
+import { useScottOffline, ScottOfflineProvider } from '@/components/scott/ScottOfflineStorage';
 
 /**
  * SCOTT'S ARTIST/CLIENT MANAGER
@@ -16,18 +15,53 @@ import KingdomCrown8Bit from '@/components/shared/KingdomCrown8Bit';
  * For managing artists, clients, venues - gigs, tasks, communication
  */
 
-export default function ScottManager() {
+function ScottManagerInner() {
     const [pinEntered, setPinEntered] = useState(false);
     const [pinInput, setPinInput] = useState('');
     const [searchQuery, setSearchQuery] = useState('');
+    
+    const scott = useScottOffline();
+    const [artists, setArtists] = useState([]);
+    const [upcomingEvents, setUpcomingEvents] = useState([]);
+    const [urgentTasks, setUrgentTasks] = useState([]);
 
     // Check if PIN already stored
-    React.useEffect(() => {
+    useEffect(() => {
         const storedPin = localStorage.getItem('scott_access_pin');
         if (storedPin === '1888') {
             setPinEntered(true);
         }
     }, []);
+
+    // Load data from offline storage
+    useEffect(() => {
+        if (pinEntered) {
+            const loadedArtists = scott.getArtists();
+            const loadedEvents = scott.getEvents();
+            const loadedTasks = scott.getTasks();
+
+            setArtists(loadedArtists);
+            
+            const upcoming = loadedEvents.filter(e => new Date(e.date) >= new Date());
+            setUpcomingEvents(upcoming);
+
+            const urgent = loadedTasks.filter(t => 
+                t.status !== 'done' && (t.priority === 'high' || t.priority === 'urgent')
+            );
+            setUrgentTasks(urgent);
+
+            // Pull fresh data if online
+            if (scott.isOnline) {
+                scott.pullFromServer().then(() => {
+                    setArtists(scott.getArtists());
+                    setUpcomingEvents(scott.getEvents().filter(e => new Date(e.date) >= new Date()));
+                    setUrgentTasks(scott.getTasks().filter(t => 
+                        t.status !== 'done' && (t.priority === 'high' || t.priority === 'urgent')
+                    ));
+                });
+            }
+        }
+    }, [pinEntered, scott.isOnline]);
 
     const handlePinSubmit = () => {
         if (pinInput === '1888') {
@@ -35,30 +69,6 @@ export default function ScottManager() {
             setPinEntered(true);
         }
     };
-
-    const { data: artists = [] } = useQuery({
-        queryKey: ['scott-artists'],
-        queryFn: () => base44.asServiceRole.entities.ScottArtist.list('-created_date'),
-        enabled: pinEntered
-    });
-
-    const { data: upcomingEvents = [] } = useQuery({
-        queryKey: ['scott-upcoming-events'],
-        queryFn: async () => {
-            const events = await base44.asServiceRole.entities.ScottEvent.list('-date', 10);
-            return events.filter(e => new Date(e.date) >= new Date());
-        },
-        enabled: pinEntered
-    });
-
-    const { data: urgentTasks = [] } = useQuery({
-        queryKey: ['scott-urgent-tasks'],
-        queryFn: async () => {
-            const tasks = await base44.asServiceRole.entities.ScottTask.list('-created_date', 20);
-            return tasks.filter(t => t.status !== 'done' && (t.priority === 'high' || t.priority === 'urgent'));
-        },
-        enabled: pinEntered
-    });
 
     const filteredArtists = artists.filter(a => 
         a.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -108,12 +118,34 @@ export default function ScottManager() {
             {/* HEADER */}
             <div className="mb-6 pb-4 border-b border-amber-500/20">
                 <div className="flex items-center justify-between mb-4">
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-3">
                         <KingdomCrown8Bit size={32} />
                         <h1 className="text-2xl font-black text-amber-400 tracking-tight" style={{ fontFamily: 'monospace' }}>SK</h1>
+
+                        {/* OFFLINE/SYNC STATUS */}
+                        <div className="flex items-center gap-2">
+                            {scott.isOnline ? (
+                                <div className="flex items-center gap-1">
+                                    <Wifi className="w-4 h-4 text-green-500" />
+                                    {scott.isSyncing && <RefreshCw className="w-3 h-3 text-cyan-400 animate-spin" />}
+                                    {scott.pendingCount > 0 && (
+                                        <span className="text-[10px] text-amber-400 font-bold" style={{ fontFamily: 'monospace' }}>
+                                            {scott.pendingCount}
+                                        </span>
+                                    )}
+                                </div>
+                            ) : (
+                                <div className="flex items-center gap-1 bg-amber-500/20 px-2 py-1 rounded">
+                                    <WifiOff className="w-3 h-3 text-amber-400" />
+                                    <span className="text-[10px] text-amber-400 font-bold tracking-wider" style={{ fontFamily: 'monospace' }}>
+                                        OFFLINE
+                                    </span>
+                                </div>
+                            )}
+                        </div>
                     </div>
                     <Link to={createPageUrl('ScottCalendar')} className="p-2 bg-cyan-500/20 hover:bg-cyan-500/30 rounded transition-colors">
-                        <Calendar className="w-5 h-5 text-cyan-400" />
+                        <svg className="w-5 h-5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" strokeWidth="2"/><line x1="16" y1="2" x2="16" y2="6" strokeWidth="2"/><line x1="8" y1="2" x2="8" y2="6" strokeWidth="2"/><line x1="3" y1="10" x2="21" y2="10" strokeWidth="2"/></svg>
                     </Link>
                 </div>
             </div>
@@ -233,6 +265,14 @@ export default function ScottManager() {
                 </div>
                 <p className="text-center text-gray-800 text-[10px] tracking-widest" style={{ fontFamily: 'monospace' }}>EST 1888</p>
             </div>
-        </div>
-    );
-}
+            </div>
+            );
+            }
+
+            export default function ScottManager() {
+            return (
+            <ScottOfflineProvider>
+            <ScottManagerInner />
+            </ScottOfflineProvider>
+            );
+            }
