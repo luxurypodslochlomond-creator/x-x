@@ -32,7 +32,7 @@ const PROTOCOL_SECTIONS = [
     name: 'PHYSICAL HEALING',
     color: '#ef4444',
     description: 'Pain, immunity, vitality, tinnitus',
-    protocols: ['pain', 'tinnitus', 'immune', 'menopause']
+    protocols: ['pain', 'tinnitus', 'immune', 'vitality']
   },
   {
     id: 'rest',
@@ -352,15 +352,15 @@ const PROTOCOLS = {
       visualEntrainment: true
     }
   },
-  menopause: {
-    id: 'menopause',
-    name: 'Balance & Flow',
+  vitality: {
+    id: 'vitality',
+    name: 'Vitality & Flow',
     icon: Sun,
     color: '#F97316',
-    description: 'Natural vitality as you age',
+    description: 'Natural energy and blood flow regulation',
     science: '10Hz alpha + 7.83Hz Schumann proven to regulate autonomic nervous system, supporting healthy blood flow and vitality',
     sources: ['Autonomic regulation research', 'Healthy aging studies'],
-    ancientWisdom: 'Elders in traditional cultures use breathwork and earth frequencies to age with grace, strength and vitality.',
+    ancientWisdom: 'Traditional cultures use breathwork and earth frequencies to maintain vitality, strength and flow at any age.',
     config: {
       primary: 10,
       secondary: 7.83,
