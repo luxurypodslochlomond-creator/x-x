@@ -525,6 +525,7 @@ function ScottManagerInner() {
                     ))
                 )}
                 </div>
+                </div>
                 )}
 
                 {/* EMPTY STATE */}
