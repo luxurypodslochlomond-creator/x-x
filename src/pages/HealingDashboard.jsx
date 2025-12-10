@@ -185,10 +185,10 @@ export default function HealingDashboard() {
                                         <p className="text-xs text-gray-500 font-mono">current</p>
                                     </div>
                                     <div>
-                                        <p className="text-xl font-black text-amber-400 font-mono leading-tight">
+                                        <p className="text-sm md:text-base font-black text-amber-400 font-mono leading-tight">
                                             {topProtocol ? (topProtocol[0] === 'menopause' ? 'vitality' : topProtocol[0].split('_')[0]) : 'none'}
                                         </p>
-                                        <p className="text-xs text-gray-500 font-mono">frequency</p>
+                                        <p className="text-[10px] text-gray-500 font-mono">frequency</p>
                                     </div>
                                 </div>
                                 <p className="text-center text-xs text-cyan-400 font-mono mt-3">TAP TO HEAL →</p>
