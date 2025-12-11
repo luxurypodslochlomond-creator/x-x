@@ -1,241 +1,146 @@
 import React, { useState, useRef } from 'react';
-import { Camera, Mic, Upload, Mail, Zap, Loader2 } from 'lucide-react';
+import { Camera, Upload, Loader2, CheckCircle, FileText } from 'lucide-react';
 import { base44 } from '@/api/base44Client';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 /**
- * SCOTT QUICK CAPTURE
- * 📸 Photo → AI extracts → Creates tasks/events
- * 🎤 Voice note → Transcribed → AI extracts
- * 📧 Forward email text
- * ADHD-friendly: ONE tap, done.
+ * QUICK CAPTURE - PHOTOGRAPH ANYTHING
+ * Receipts, contracts, venue details, gig sheets
+ * AI extracts everything → auto-creates events/tasks/invoices
+ * ZERO INFORMATION LOSS
  */
 
-export default function ScottQuickCapture({ onCaptureComplete }) {
+export default function ScottQuickCapture({ onComplete }) {
     const [isProcessing, setIsProcessing] = useState(false);
-    const [captureType, setCaptureType] = useState(null);
     const [result, setResult] = useState(null);
     const fileInputRef = useRef(null);
-    const [isRecording, setIsRecording] = useState(false);
-    const mediaRecorderRef = useRef(null);
-    const audioChunksRef = useRef([]);
+    const cameraInputRef = useRef(null);
 
-    // PHOTO CAPTURE → OCR → AI
-    const handlePhotoCapture = async (event) => {
-        const file = event.target.files?.[0];
-        if (!file) return;
-
+    const processImage = async (file) => {
         setIsProcessing(true);
-        setCaptureType('photo');
-
+        setResult(null);
+        
         try {
-            // Upload photo
-            const { file_url } = await base44.integrations.Core.UploadFile({ file });
+            // Upload file
+            const uploadResult = await base44.integrations.Core.UploadFile({ file });
+            const fileUrl = uploadResult.file_url;
 
-            // OCR with AI
-            const ocrPrompt = `Extract ALL text from this image. It might be:
-- Screenshot of email/WhatsApp
-- Photo of contract/document
-- Handwritten note
-- Receipt
+            // Extract text from image using AI
+            const ocrPrompt = `Extract ALL text from this image. This might be:
+- A gig offer or venue details
+- A receipt or invoice
+- Contract details
+- Tour schedule
+- Visa documents
+- Any handwritten notes
 
-Return the text exactly as it appears.`;
+Return EXACTLY what you see, word for word. Preserve structure.`;
 
-            const ocrResult = await base44.integrations.Core.InvokeLLM({
+            const extractedText = await base44.integrations.Core.InvokeLLM({
                 prompt: ocrPrompt,
-                file_urls: [file_url],
-                response_json_schema: {
-                    type: "object",
-                    properties: {
-                        extracted_text: { type: "string" }
-                    }
-                }
+                file_urls: [fileUrl]
             });
 
-            // Send to AI Coordinator
+            // Send to AI Coordinator for smart routing
             const coordinatorResult = await base44.functions.invoke('scottAICoordinator', {
-                input_text: ocrResult.extracted_text,
+                input_text: extractedText,
                 input_type: 'photo_ocr',
-                file_url: file_url
+                file_url: fileUrl
             });
 
-            setResult(coordinatorResult.data);
-            onCaptureComplete?.(coordinatorResult.data);
+            setResult(coordinatorResult);
+            
+            // Show success then close
+            setTimeout(() => {
+                if (onComplete) onComplete();
+            }, 3000);
+
         } catch (error) {
-            console.error('Photo capture error:', error);
-            alert(`Error: ${error.message}`);
+            console.error('Capture error:', error);
+            alert('Error: ' + error.message);
         } finally {
             setIsProcessing(false);
         }
     };
 
-    // VOICE NOTE → TRANSCRIBE → AI
-    const startVoiceRecording = async () => {
-        try {
-            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-            mediaRecorderRef.current = new MediaRecorder(stream);
-            audioChunksRef.current = [];
-
-            mediaRecorderRef.current.ondataavailable = (event) => {
-                audioChunksRef.current.push(event.data);
-            };
-
-            mediaRecorderRef.current.onstop = async () => {
-                const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/webm' });
-                await processVoiceNote(audioBlob);
-                stream.getTracks().forEach(track => track.stop());
-            };
-
-            mediaRecorderRef.current.start();
-            setIsRecording(true);
-            setCaptureType('voice');
-        } catch (error) {
-            alert('Microphone access needed');
-        }
+    const handleFileChange = (e) => {
+        const file = e.target.files?.[0];
+        if (file) processImage(file);
     };
 
-    const stopVoiceRecording = () => {
-        if (mediaRecorderRef.current && mediaRecorderRef.current.state === 'recording') {
-            mediaRecorderRef.current.stop();
-            setIsRecording(false);
-        }
-    };
+    if (result?.success) {
+        return (
+            <motion.div
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                className="fixed inset-0 z-50 bg-black/95 backdrop-blur-sm flex items-center justify-center p-4"
+            >
+                <div className="bg-black border-4 border-green-500 p-8 max-w-md w-full text-center">
+                    <CheckCircle className="w-16 h-16 text-green-400 mx-auto mb-4" />
+                    <h3 className="text-2xl font-black text-green-400 font-mono mb-4">CAPTURED</h3>
+                    <p className="text-white font-mono mb-6">
+                        AI created {result.created?.length || 0} items
+                    </p>
+                    <div className="space-y-2">
+                        {result.created?.map((item, idx) => (
+                            <div key={idx} className="bg-green-900/20 border border-green-500/50 p-3 text-left">
+                                <p className="text-green-400 text-xs font-mono font-bold uppercase">{item.type.replace('_', ' ')}</p>
+                                <p className="text-white text-sm font-mono mt-1">
+                                    {item.event?.title || item.task?.title || item.invoice?.description || 'Saved'}
+                                </p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </motion.div>
+        );
+    }
 
-    const processVoiceNote = async (audioBlob) => {
-        setIsProcessing(true);
-
-        try {
-            // Upload audio
-            const audioFile = new File([audioBlob], 'voice_note.webm', { type: 'audio/webm' });
-            const { file_url } = await base44.integrations.Core.UploadFile({ file: audioFile });
-
-            // Transcribe with AI
-            const transcriptionPrompt = `Transcribe this audio exactly. It's a voice note from Scott, a music manager. He might be saying:
-- "Remind me to call Dave about Friday gig"
-- "Sophie needs PA system at Barras"
-- Quick notes about artists/events
-
-Return the transcription.`;
-
-            const transcription = await base44.integrations.Core.InvokeLLM({
-                prompt: transcriptionPrompt,
-                file_urls: [file_url],
-                response_json_schema: {
-                    type: "object",
-                    properties: {
-                        transcribed_text: { type: "string" }
-                    }
-                }
-            });
-
-            // Send to AI Coordinator
-            const coordinatorResult = await base44.functions.invoke('scottAICoordinator', {
-                input_text: transcription.transcribed_text,
-                input_type: 'voice_transcription',
-                file_url: file_url
-            });
-
-            setResult(coordinatorResult.data);
-            onCaptureComplete?.(coordinatorResult.data);
-        } catch (error) {
-            console.error('Voice note error:', error);
-            alert(`Error: ${error.message}`);
-        } finally {
-            setIsProcessing(false);
-        }
-    };
+    if (isProcessing) {
+        return (
+            <div className="fixed inset-0 z-50 bg-black/95 backdrop-blur-sm flex items-center justify-center p-4">
+                <div className="bg-black border-4 border-amber-500 p-8 max-w-md w-full text-center">
+                    <Loader2 className="w-16 h-16 text-amber-400 mx-auto mb-4 animate-spin" />
+                    <h3 className="text-2xl font-black text-amber-400 font-mono mb-2">PROCESSING</h3>
+                    <p className="text-gray-500 font-mono text-sm">AI reading image...</p>
+                </div>
+            </div>
+        );
+    }
 
     return (
-        <div className="space-y-4">
-            {/* QUICK CAPTURE BUTTONS */}
-            {!isProcessing && !result && (
-                <div className="grid grid-cols-2 gap-3">
-                    <button
-                        onClick={() => fileInputRef.current?.click()}
-                        className="flex flex-col items-center gap-2 p-4 bg-cyan-900/20 border-2 border-cyan-500 hover:bg-cyan-900/40 active:scale-95 transition-all"
-                    >
-                        <Camera className="w-8 h-8 text-cyan-400" />
-                        <span className="text-sm font-mono font-bold text-cyan-400">PHOTO</span>
-                        <span className="text-xs text-gray-400">Email/Contract</span>
-                    </button>
-
-                    <button
-                        onClick={isRecording ? stopVoiceRecording : startVoiceRecording}
-                        className={`flex flex-col items-center gap-2 p-4 border-2 active:scale-95 transition-all ${
-                            isRecording 
-                                ? 'bg-red-900/40 border-red-500 animate-pulse' 
-                                : 'bg-pink-900/20 border-pink-500 hover:bg-pink-900/40'
-                        }`}
-                    >
-                        <Mic className="w-8 h-8 text-pink-400" />
-                        <span className="text-sm font-mono font-bold text-pink-400">
-                            {isRecording ? 'TAP TO STOP' : 'VOICE NOTE'}
-                        </span>
-                        <span className="text-xs text-gray-400">Quick brain dump</span>
-                    </button>
-                </div>
-            )}
-
+        <div className="fixed bottom-24 right-4 z-40 flex flex-col gap-3">
+            {/* Camera */}
+            <button
+                onClick={() => cameraInputRef.current?.click()}
+                className="w-16 h-16 rounded-full bg-amber-500 hover:bg-amber-400 flex items-center justify-center transition-all border-4 border-black shadow-2xl"
+                style={{ boxShadow: '0 0 40px rgba(245, 158, 11, 0.6)' }}
+            >
+                <Camera className="w-8 h-8 text-black" />
+            </button>
             <input
-                ref={fileInputRef}
+                ref={cameraInputRef}
                 type="file"
                 accept="image/*"
                 capture="environment"
-                onChange={handlePhotoCapture}
+                onChange={handleFileChange}
                 className="hidden"
             />
 
-            {/* PROCESSING */}
-            {isProcessing && (
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    className="bg-purple-900/20 border-2 border-purple-500 p-6 text-center"
-                >
-                    <Loader2 className="w-12 h-12 text-purple-400 mx-auto mb-3 animate-spin" />
-                    <p className="text-purple-400 font-mono font-bold">AI PROCESSING...</p>
-                    <p className="text-gray-400 text-sm font-mono mt-1">
-                        {captureType === 'photo' ? 'Reading text from photo' : 'Transcribing voice note'}
-                    </p>
-                </motion.div>
-            )}
-
-            {/* RESULT */}
-            <AnimatePresence>
-                {result && (
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -20 }}
-                        className="bg-green-900/20 border-4 border-green-500 p-4"
-                    >
-                        <div className="flex items-center gap-2 mb-3">
-                            <Zap className="w-5 h-5 text-green-400" />
-                            <p className="font-mono font-bold text-green-400">✓ CREATED</p>
-                        </div>
-
-                        <div className="space-y-2 text-sm">
-                            {result.created?.map((item, i) => (
-                                <div key={i} className="bg-black/40 p-2">
-                                    <p className="text-green-300 font-mono">
-                                        {item.type.replace(/_/g, ' ').toUpperCase()}
-                                    </p>
-                                    <p className="text-gray-400 text-xs">
-                                        {item.event?.title || item.task?.title || item.invoice?.description || 'Saved'}
-                                    </p>
-                                </div>
-                            ))}
-                        </div>
-
-                        <button
-                            onClick={() => { setResult(null); setCaptureType(null); }}
-                            className="w-full mt-4 py-2 bg-green-600 hover:bg-green-700 text-white font-mono text-sm"
-                        >
-                            DONE
-                        </button>
-                    </motion.div>
-                )}
-            </AnimatePresence>
+            {/* Upload */}
+            <button
+                onClick={() => fileInputRef.current?.click()}
+                className="w-14 h-14 rounded-full bg-cyan-500 hover:bg-cyan-400 flex items-center justify-center transition-all border-4 border-black shadow-xl"
+            >
+                <FileText className="w-6 h-6 text-black" />
+            </button>
+            <input
+                ref={fileInputRef}
+                type="file"
+                accept="image/*,application/pdf"
+                onChange={handleFileChange}
+                className="hidden"
+            />
         </div>
     );
 }

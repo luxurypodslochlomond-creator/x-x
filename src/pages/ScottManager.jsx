@@ -20,6 +20,7 @@ import ScottMorningBriefing from '@/components/scott/ScottMorningBriefing';
 import ScottFocusMode from '@/components/scott/ScottFocusMode';
 import ScottContextMemory from '@/components/scott/ScottContextMemory';
 import ScottDidIDoThis from '@/components/scott/ScottDidIDoThis';
+import ScottQuickCapture from '@/components/scott/ScottQuickCapture';
 
 /**
  * SCOTT'S ARTIST/CLIENT MANAGER
@@ -458,6 +459,8 @@ function ScottManagerInner() {
             {/* DID I DO THIS? */}
             <ScottDidIDoThis />
 
+            {/* QUICK CAPTURE */}
+            <ScottQuickCapture onComplete={() => window.location.reload()} />
 
             </div>
             </ScottFocusMode>
