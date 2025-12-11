@@ -416,13 +416,17 @@ const LayoutInner = ({ children, currentPageName }) => {
         </main>
       </div>
 
-      <FloatingMusicPlayer />
-      <HealingCircle />
-      <PWAInstallPrompt />
-      <EmergencyMode />
-      <EmergencyCalmButton />
-      <AutoBugMonitor />
-      <PerformanceOptimizer />
+      {!currentPageName.startsWith('Scott') && (
+        <>
+          <FloatingMusicPlayer />
+          <HealingCircle />
+          <PWAInstallPrompt />
+          <EmergencyMode />
+          <EmergencyCalmButton />
+          <AutoBugMonitor />
+          <PerformanceOptimizer />
+        </>
+      )}
     </GlobalErrorBoundary>
   );
 };
