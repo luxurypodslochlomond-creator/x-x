@@ -1,21 +1,20 @@
 import React, { useState } from 'react';
-import { Mic, MicOff } from 'lucide-react';
+import { Mic, MicOff, X } from 'lucide-react';
 import { base44 } from '@/api/base44Client';
-import ScottGentleReward from './ScottGentleReward';
 
 /**
  * VOICE COMMAND - SPEAK DON'T TYPE
- * ADHD brain → instant capture
+ * Quick voice capture → instant save
  */
 
 export default function ScottVoiceCommand({ onCommandComplete }) {
     const [isListening, setIsListening] = useState(false);
     const [transcript, setTranscript] = useState('');
-    const [showReward, setShowReward] = useState(false);
+    const [processing, setProcessing] = useState(false);
 
     const startListening = () => {
         if (!('webkitSpeechRecognition' in window)) {
-            alert('Voice not supported in this browser');
+            alert('Voice not supported');
             return;
         }
 
@@ -29,11 +28,11 @@ export default function ScottVoiceCommand({ onCommandComplete }) {
         recognition.onresult = async (event) => {
             const text = event.results[0][0].transcript;
             setTranscript(text);
+            setProcessing(true);
             
-            // Send to AI for processing
             try {
                 const response = await base44.integrations.Core.InvokeLLM({
-                    prompt: `Convert this voice command into a task or event for artist management: "${text}"\n\nReturn JSON with: type (task/event), title, date (if mentioned), priority, notes`,
+                    prompt: `Convert voice command to task: "${text}"\n\nReturn: type (task/event), title, date, priority, notes`,
                     response_json_schema: {
                         type: "object",
                         properties: {
@@ -55,30 +54,42 @@ export default function ScottVoiceCommand({ onCommandComplete }) {
                     });
                 }
 
-                setTranscript('✓ Created');
-                setShowReward(true);
+                setTranscript('✓ Saved');
                 setTimeout(() => {
+                    setTranscript('');
+                    setProcessing(false);
                     if (onCommandComplete) onCommandComplete();
-                }, 2000);
+                }, 1500);
             } catch (error) {
-                console.error('Voice command error:', error);
+                setTranscript('✗ Failed');
+                setTimeout(() => {
+                    setTranscript('');
+                    setProcessing(false);
+                }, 2000);
             }
         };
 
         recognition.start();
     };
 
+    if (processing) {
+        return (
+            <div className="fixed bottom-6 left-4 z-40 bg-black border-2 border-purple-500 rounded-full p-4 animate-pulse">
+                <Mic className="w-6 h-6 text-purple-400" />
+            </div>
+        );
+    }
+
     return (
-        <>
-        <ScottGentleReward onComplete={showReward} />
         <button
             onClick={startListening}
             disabled={isListening}
-            className={`fixed bottom-6 left-4 z-40 p-4 rounded-full shadow-2xl transition-all border-4 border-black ${
+            className={`fixed bottom-6 left-4 z-40 p-4 rounded-full transition-all ${
                 isListening 
-                    ? 'bg-red-500 animate-pulse' 
-                    : 'bg-gradient-to-r from-purple-600 to-pink-600 hover:scale-110'
+                    ? 'bg-red-500 animate-pulse border-2 border-white' 
+                    : 'bg-purple-600 hover:bg-purple-500 border-2 border-purple-400'
             }`}
+            style={{ boxShadow: '0 4px 20px rgba(147, 51, 234, 0.6)' }}
         >
             {isListening ? (
                 <MicOff className="w-6 h-6 text-white" />
@@ -86,11 +97,10 @@ export default function ScottVoiceCommand({ onCommandComplete }) {
                 <Mic className="w-6 h-6 text-white" />
             )}
             {transcript && (
-                <div className="absolute bottom-16 left-0 bg-black border border-purple-500 p-2 text-xs text-white font-mono whitespace-nowrap">
+                <div className="absolute bottom-16 left-0 bg-black border-2 border-purple-500 rounded-lg p-2 text-xs text-white font-mono whitespace-nowrap">
                     {transcript}
                 </div>
             )}
         </button>
-        </>
     );
 }
