@@ -74,7 +74,7 @@ export default function ScottVoiceCommand({ onCommandComplete }) {
         <button
             onClick={startListening}
             disabled={isListening}
-            className={`fixed bottom-24 right-6 z-40 p-4 rounded-full shadow-2xl transition-all ${
+            className={`fixed bottom-6 left-4 z-40 p-4 rounded-full shadow-2xl transition-all border-4 border-black ${
                 isListening 
                     ? 'bg-red-500 animate-pulse' 
                     : 'bg-gradient-to-r from-purple-600 to-pink-600 hover:scale-110'
@@ -86,7 +86,7 @@ export default function ScottVoiceCommand({ onCommandComplete }) {
                 <Mic className="w-6 h-6 text-white" />
             )}
             {transcript && (
-                <div className="absolute bottom-16 right-0 bg-black border border-purple-500 p-2 text-xs text-white font-mono whitespace-nowrap">
+                <div className="absolute bottom-16 left-0 bg-black border border-purple-500 p-2 text-xs text-white font-mono whitespace-nowrap">
                     {transcript}
                 </div>
             )}
