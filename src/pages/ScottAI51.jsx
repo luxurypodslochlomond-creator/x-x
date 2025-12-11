@@ -31,8 +31,7 @@ export default function ScottAI51() {
     useEffect(() => {
         setMessages([{
             role: 'assistant',
-            content: "What's up mate 👊\n\nI'm here to help with:\n\n💰 **Money & Deals**\nFair rates, contracts, negotiations\n\n⚖️ **Legal Stuff**\nPublishing splits, rights, sample clearance\n\n🗓️ **Tour Planning**\nVisa timelines, budgets, logistics\n\n🎵 **Music Biz**\nLabel deals, distribution, marketing\n\nWhat do you need?",
-            timestamp: new Date()
+            content: "What's up mate 👊\n\nI'm here to help with:\n\n💰 **Money & Deals**\nFair rates, contracts, negotiations\n\n⚖️ **Legal Stuff**\nPublishing splits, rights, sample clearance\n\n🗓️ **Tour Planning**\nVisa timelines, budgets, logistics\n\n🎵 **Music Biz**\nLabel deals, distribution, marketing\n\nWhat do you need?"
         }]);
     }, []);
 
@@ -77,15 +76,13 @@ Keep it concise but thorough. Use bullet points when helpful.`;
         onSuccess: (data) => {
             setMessages(prev => [...prev, {
                 role: 'assistant',
-                content: data,
-                timestamp: new Date()
+                content: data
             }]);
         },
         onError: (error) => {
             setMessages(prev => [...prev, {
                 role: 'assistant',
-                content: "Sorry mate, something went wrong. Try again?",
-                timestamp: new Date()
+                content: "Sorry mate, something went wrong. Try again?"
             }]);
         }
     });
@@ -96,8 +93,7 @@ Keep it concise but thorough. Use bullet points when helpful.`;
         const userMessage = input.trim();
         setMessages(prev => [...prev, {
             role: 'user',
-            content: userMessage,
-            timestamp: new Date()
+            content: userMessage
         }]);
         setInput('');
         ai51Mutation.mutate(userMessage);
