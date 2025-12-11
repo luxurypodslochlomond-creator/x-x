@@ -44,42 +44,51 @@ export default function ScottTimeline({ artistId = null }) {
             // Events
             events.forEach(e => {
                 if (e.date) {
-                    items.push({
-                        type: 'event',
-                        date: new Date(e.date),
-                        title: e.title,
-                        subtitle: e.location,
-                        data: e,
-                        urgency: getUrgency(new Date(e.date))
-                    });
+                    const eventDate = new Date(e.date);
+                    if (!isNaN(eventDate.getTime())) {
+                        items.push({
+                            type: 'event',
+                            date: eventDate,
+                            title: e.title,
+                            subtitle: e.location,
+                            data: e,
+                            urgency: getUrgency(eventDate)
+                        });
+                    }
                 }
             });
 
             // Tasks with due dates
             tasks.forEach(t => {
                 if (t.due_date && t.status !== 'done') {
-                    items.push({
-                        type: 'task',
-                        date: new Date(t.due_date),
-                        title: t.title,
-                        subtitle: t.priority,
-                        data: t,
-                        urgency: getUrgency(new Date(t.due_date))
-                    });
+                    const taskDate = new Date(t.due_date);
+                    if (!isNaN(taskDate.getTime())) {
+                        items.push({
+                            type: 'task',
+                            date: taskDate,
+                            title: t.title,
+                            subtitle: t.priority,
+                            data: t,
+                            urgency: getUrgency(taskDate)
+                        });
+                    }
                 }
             });
 
             // Visa deadlines
             visas.forEach(v => {
                 if (v.application_deadline) {
-                    items.push({
-                        type: 'visa',
-                        date: new Date(v.application_deadline),
-                        title: `${v.visa_type} visa deadline`,
-                        subtitle: v.country,
-                        data: v,
-                        urgency: getUrgency(new Date(v.application_deadline))
-                    });
+                    const visaDate = new Date(v.application_deadline);
+                    if (!isNaN(visaDate.getTime())) {
+                        items.push({
+                            type: 'visa',
+                            date: visaDate,
+                            title: `${v.visa_type} visa deadline`,
+                            subtitle: v.country,
+                            data: v,
+                            urgency: getUrgency(visaDate)
+                        });
+                    }
                 }
             });
 
@@ -87,15 +96,17 @@ export default function ScottTimeline({ artistId = null }) {
             invoices.forEach(i => {
                 if (i.status === 'unpaid' && i.date) {
                     const invoiceDate = new Date(i.date);
-                    const dueDate = addDays(invoiceDate, 30); // 30 days after invoice date
-                    items.push({
-                        type: 'invoice',
-                        date: dueDate,
-                        title: i.description,
-                        subtitle: `£${i.amount}`,
-                        data: i,
-                        urgency: getUrgency(dueDate)
-                    });
+                    if (!isNaN(invoiceDate.getTime())) {
+                        const dueDate = addDays(invoiceDate, 30);
+                        items.push({
+                            type: 'invoice',
+                            date: dueDate,
+                            title: i.description,
+                            subtitle: `£${i.amount}`,
+                            data: i,
+                            urgency: getUrgency(dueDate)
+                        });
+                    }
                 }
             });
 

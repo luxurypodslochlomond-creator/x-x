@@ -33,8 +33,9 @@ export default function ScottMorningBriefing() {
 
             const today = new Date();
             const todayEvents = events.filter(e => {
+                if (!e.date) return false;
                 const eventDate = new Date(e.date);
-                return eventDate.toDateString() === today.toDateString();
+                return !isNaN(eventDate.getTime()) && eventDate.toDateString() === today.toDateString();
             }).length;
 
             const unpaid = invoices.filter(i => i.status === 'unpaid').length;
