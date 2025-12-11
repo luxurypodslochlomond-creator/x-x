@@ -450,9 +450,15 @@ function ScottManagerInner() {
             </div>
 
             {/* FOOTER */}
-            <div className="mt-12 pt-6 border-t border-gray-900 text-center">
+            <div className="mt-12 pt-6 border-t border-gray-900 text-center mb-32">
                 <p className="text-gray-800 text-xs mb-2" style={{ fontFamily: 'monospace' }}>Kingdom Management</p>
             </div>
+
+            {/* VOICE COMMAND - LEFT */}
+            <ScottVoiceCommand onCommandComplete={() => window.location.reload()} />
+
+            {/* QUICK CAPTURE - RIGHT */}
+            <ScottQuickCapture onComplete={() => window.location.reload()} />
 
             </div>
             </ScottFocusMode>
