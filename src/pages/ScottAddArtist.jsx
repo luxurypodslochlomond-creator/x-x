@@ -74,166 +74,159 @@ function ScottAddArtistInner() {
                 )}
             </div>
 
-            <div className="flex items-center justify-center gap-3 mb-6">
+            <div className="flex items-center gap-3 mb-6 pb-4 border-b-2 border-amber-500/30">
                 <KingdomCrown8Bit size={32} />
-                <h1 className="text-2xl font-black text-amber-400 tracking-tight" style={{ fontFamily: 'monospace' }}>ADD CONTACT</h1>
+                <h1 className="text-2xl font-black text-amber-400" style={{ fontFamily: 'monospace' }}>ADD CONTACT</h1>
             </div>
 
-            <Card className="bg-black border border-amber-500/20 p-6 max-w-md mx-auto">
-                <form onSubmit={handleSubmit} className="space-y-5">
-                    
-                    <div>
-                        <label className="text-gray-500 text-xs tracking-widest mb-2 block uppercase" style={{ fontFamily: 'monospace' }}>Type</label>
-                        <Select
-                            value={formData.type}
-                            onValueChange={(value) => setFormData({...formData, type: value})}
-                        >
-                            <SelectTrigger className="bg-black border-2 border-gray-800 text-white hover:border-amber-500/50 transition-all hover:shadow-[0_0_10px_rgba(245,158,11,0.2)]" style={{ fontFamily: 'monospace', padding: '12px' }}>
-                                <SelectValue />
-                            </SelectTrigger>
-                            <SelectContent className="bg-black border-2 border-amber-500/30" style={{ fontFamily: 'monospace' }}>
-                                <SelectItem value="artist" className="text-white hover:bg-amber-500/20 focus:bg-amber-500/20 cursor-pointer" style={{ fontFamily: 'monospace' }}>Artist</SelectItem>
-                                <SelectItem value="client" className="text-white hover:bg-amber-500/20 focus:bg-amber-500/20 cursor-pointer" style={{ fontFamily: 'monospace' }}>Client</SelectItem>
-                                <SelectItem value="venue" className="text-white hover:bg-amber-500/20 focus:bg-amber-500/20 cursor-pointer" style={{ fontFamily: 'monospace' }}>Venue</SelectItem>
-                                <SelectItem value="band_crew" className="text-white hover:bg-amber-500/20 focus:bg-amber-500/20 cursor-pointer" style={{ fontFamily: 'monospace' }}>Band/Crew</SelectItem>
-                                <SelectItem value="other" className="text-white hover:bg-amber-500/20 focus:bg-amber-500/20 cursor-pointer" style={{ fontFamily: 'monospace' }}>Other</SelectItem>
-                            </SelectContent>
-                        </Select>
-                    </div>
+            <form onSubmit={handleSubmit} className="space-y-4 max-w-md mx-auto">
+                
+                <div>
+                    <label className="text-gray-400 text-xs mb-2 block" style={{ fontFamily: 'monospace' }}>TYPE</label>
+                    <Select value={formData.type} onValueChange={(value) => setFormData({...formData, type: value})}>
+                        <SelectTrigger className="bg-black border-2 border-gray-800 text-white h-12" style={{ fontFamily: 'monospace' }}>
+                            <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent className="bg-black border-2 border-gray-800">
+                            <SelectItem value="artist">Artist</SelectItem>
+                            <SelectItem value="client">Client</SelectItem>
+                            <SelectItem value="venue">Venue</SelectItem>
+                            <SelectItem value="band_crew">Band/Crew</SelectItem>
+                            <SelectItem value="other">Other</SelectItem>
+                        </SelectContent>
+                    </Select>
+                </div>
 
+                <div>
+                    <label className="text-gray-400 text-xs mb-2 block" style={{ fontFamily: 'monospace' }}>NAME *</label>
+                    <Input
+                        required
+                        value={formData.name}
+                        onChange={(e) => setFormData({...formData, name: e.target.value})}
+                        className="bg-black border-2 border-gray-800 text-white h-12 focus:border-amber-500"
+                        style={{ fontFamily: 'monospace' }}
+                        placeholder="Full name"
+                    />
+                </div>
+
+                <div>
+                    <label className="text-gray-400 text-xs mb-2 block" style={{ fontFamily: 'monospace' }}>PHONE</label>
+                    <Input
+                        type="tel"
+                        value={formData.phone}
+                        onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                        className="bg-black border-2 border-gray-800 text-white h-12 focus:border-amber-500"
+                        style={{ fontFamily: 'monospace' }}
+                        placeholder="+44..."
+                    />
+                </div>
+
+                <div>
+                    <label className="text-gray-400 text-xs mb-2 block" style={{ fontFamily: 'monospace' }}>EMAIL</label>
+                    <Input
+                        type="email"
+                        value={formData.email}
+                        onChange={(e) => setFormData({...formData, email: e.target.value})}
+                        className="bg-black border-2 border-gray-800 text-white h-12 focus:border-amber-500"
+                        style={{ fontFamily: 'monospace' }}
+                        placeholder="email@example.com"
+                    />
+                </div>
+
+                <div className="grid grid-cols-2 gap-3">
                     <div>
-                        <label className="text-gray-500 text-xs tracking-widest mb-2 block uppercase" style={{ fontFamily: 'monospace' }}>Name *</label>
+                        <label className="text-gray-400 text-xs mb-2 block" style={{ fontFamily: 'monospace' }}>INSTAGRAM</label>
                         <Input
-                            required
-                            value={formData.name}
-                            onChange={(e) => setFormData({...formData, name: e.target.value})}
-                            className="bg-black border border-gray-800 text-white placeholder:text-gray-700 focus:border-amber-500/50 transition-colors"
+                            value={formData.instagram}
+                            onChange={(e) => setFormData({...formData, instagram: e.target.value})}
+                            className="bg-black border-2 border-gray-800 text-white h-12 focus:border-amber-500"
                             style={{ fontFamily: 'monospace' }}
-                            placeholder="Full name"
+                            placeholder="@handle"
                         />
                     </div>
-
                     <div>
-                        <label className="text-gray-500 text-xs tracking-widest mb-2 block uppercase" style={{ fontFamily: 'monospace' }}>Phone</label>
+                        <label className="text-gray-400 text-xs mb-2 block" style={{ fontFamily: 'monospace' }}>SPOTIFY</label>
                         <Input
-                            type="tel"
-                            value={formData.phone}
-                            onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                            className="bg-black border border-gray-800 text-white placeholder:text-gray-700 focus:border-amber-500/50 transition-colors"
+                            value={formData.spotify}
+                            onChange={(e) => setFormData({...formData, spotify: e.target.value})}
+                            className="bg-black border-2 border-gray-800 text-white h-12 focus:border-amber-500"
                             style={{ fontFamily: 'monospace' }}
-                            placeholder="+44..."
+                            placeholder="Link"
                         />
                     </div>
+                </div>
 
+                <div className="grid grid-cols-2 gap-3">
                     <div>
-                        <label className="text-gray-500 text-xs tracking-widest mb-2 block uppercase" style={{ fontFamily: 'monospace' }}>Email</label>
+                        <label className="text-gray-400 text-xs mb-2 block" style={{ fontFamily: 'monospace' }}>RATE (£)</label>
                         <Input
-                            type="email"
-                            value={formData.email}
-                            onChange={(e) => setFormData({...formData, email: e.target.value})}
-                            className="bg-black border border-gray-800 text-white placeholder:text-gray-700 focus:border-amber-500/50 transition-colors"
+                            type="number"
+                            value={formData.rate}
+                            onChange={(e) => setFormData({...formData, rate: e.target.value})}
+                            className="bg-black border-2 border-gray-800 text-white h-12 focus:border-amber-500"
                             style={{ fontFamily: 'monospace' }}
-                            placeholder="email@example.com"
+                            placeholder="250"
                         />
                     </div>
-
-                    <div className="grid grid-cols-2 gap-4">
-                        <div>
-                            <label className="text-gray-500 text-xs tracking-widest mb-2 block uppercase" style={{ fontFamily: 'monospace' }}>Instagram</label>
-                            <Input
-                                value={formData.instagram}
-                                onChange={(e) => setFormData({...formData, instagram: e.target.value})}
-                                className="bg-black border border-gray-800 text-white placeholder:text-gray-700 focus:border-amber-500/50 transition-colors"
-                                style={{ fontFamily: 'monospace' }}
-                                placeholder="@handle"
-                            />
-                        </div>
-                        <div>
-                            <label className="text-gray-500 text-xs tracking-widest mb-2 block uppercase" style={{ fontFamily: 'monospace' }}>Spotify</label>
-                            <Input
-                                value={formData.spotify}
-                                onChange={(e) => setFormData({...formData, spotify: e.target.value})}
-                                className="bg-black border border-gray-800 text-white placeholder:text-gray-700 focus:border-amber-500/50 transition-colors"
-                                style={{ fontFamily: 'monospace' }}
-                                placeholder="Artist link"
-                            />
-                        </div>
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-4">
-                        <div>
-                            <label className="text-gray-500 text-xs tracking-widest mb-2 block uppercase" style={{ fontFamily: 'monospace' }}>Rate (£)</label>
-                            <Input
-                                type="number"
-                                value={formData.rate}
-                                onChange={(e) => setFormData({...formData, rate: e.target.value})}
-                                className="bg-black border border-gray-800 text-white placeholder:text-gray-700 focus:border-amber-500/50 transition-colors"
-                                style={{ fontFamily: 'monospace' }}
-                                placeholder="250"
-                            />
-                        </div>
-                        <div>
-                            <label className="text-gray-500 text-xs tracking-widest mb-2 block uppercase" style={{ fontFamily: 'monospace' }}>Genre</label>
-                            <Input
-                                value={formData.genre}
-                                onChange={(e) => setFormData({...formData, genre: e.target.value})}
-                                className="bg-black border border-gray-800 text-white placeholder:text-gray-700 focus:border-amber-500/50 transition-colors"
-                                style={{ fontFamily: 'monospace' }}
-                                placeholder="Jazz, Rock..."
-                            />
-                        </div>
-                    </div>
-
                     <div>
-                        <label className="text-gray-500 text-xs tracking-widest mb-2 block uppercase" style={{ fontFamily: 'monospace' }}>Gear/Skills</label>
+                        <label className="text-gray-400 text-xs mb-2 block" style={{ fontFamily: 'monospace' }}>GENRE</label>
                         <Input
-                            value={formData.gear}
-                            onChange={(e) => setFormData({...formData, gear: e.target.value})}
-                            className="bg-black border border-gray-800 text-white placeholder:text-gray-700 focus:border-amber-500/50 transition-colors"
+                            value={formData.genre}
+                            onChange={(e) => setFormData({...formData, genre: e.target.value})}
+                            className="bg-black border-2 border-gray-800 text-white h-12 focus:border-amber-500"
                             style={{ fontFamily: 'monospace' }}
-                            placeholder="Guitar, keys, sound engineer..."
+                            placeholder="Rock, Jazz..."
                         />
                     </div>
+                </div>
 
-                    <div>
-                        <label className="text-gray-500 text-xs tracking-widest mb-2 block uppercase" style={{ fontFamily: 'monospace' }}>Relationship</label>
-                        <Select
-                            value={formData.relationship}
-                            onValueChange={(value) => setFormData({...formData, relationship: value})}
-                        >
-                            <SelectTrigger className="bg-black border-2 border-gray-800 text-white hover:border-amber-500/50 transition-all hover:shadow-[0_0_10px_rgba(245,158,11,0.2)]" style={{ fontFamily: 'monospace', padding: '12px' }}>
-                                <SelectValue />
-                            </SelectTrigger>
-                            <SelectContent className="bg-black border-2 border-amber-500/30" style={{ fontFamily: 'monospace' }}>
-                                <SelectItem value="excellent" className="text-white hover:bg-amber-500/20 focus:bg-amber-500/20 cursor-pointer" style={{ fontFamily: 'monospace' }}>Excellent</SelectItem>
-                                <SelectItem value="good" className="text-white hover:bg-amber-500/20 focus:bg-amber-500/20 cursor-pointer" style={{ fontFamily: 'monospace' }}>Good</SelectItem>
-                                <SelectItem value="neutral" className="text-white hover:bg-amber-500/20 focus:bg-amber-500/20 cursor-pointer" style={{ fontFamily: 'monospace' }}>Neutral</SelectItem>
-                                <SelectItem value="needs_work" className="text-white hover:bg-amber-500/20 focus:bg-amber-500/20 cursor-pointer" style={{ fontFamily: 'monospace' }}>Needs Work</SelectItem>
-                                <SelectItem value="unknown" className="text-white hover:bg-amber-500/20 focus:bg-amber-500/20 cursor-pointer" style={{ fontFamily: 'monospace' }}>Unknown</SelectItem>
-                            </SelectContent>
-                        </Select>
-                    </div>
+                <div>
+                    <label className="text-gray-400 text-xs mb-2 block" style={{ fontFamily: 'monospace' }}>GEAR/SKILLS</label>
+                    <Input
+                        value={formData.gear}
+                        onChange={(e) => setFormData({...formData, gear: e.target.value})}
+                        className="bg-black border-2 border-gray-800 text-white h-12 focus:border-amber-500"
+                        style={{ fontFamily: 'monospace' }}
+                        placeholder="Guitar, keys..."
+                    />
+                </div>
 
-                    <div>
-                        <label className="text-gray-500 text-xs tracking-widest mb-2 block uppercase" style={{ fontFamily: 'monospace' }}>Notes</label>
-                        <Textarea
-                            value={formData.notes}
-                            onChange={(e) => setFormData({...formData, notes: e.target.value})}
-                            className="bg-black border border-gray-800 text-white placeholder:text-gray-700 focus:border-amber-500/50 transition-colors min-h-[100px]"
-                            style={{ fontFamily: 'monospace' }}
-                            placeholder="Genre, gear, contract details..."
-                        />
-                    </div>
+                <div>
+                    <label className="text-gray-400 text-xs mb-2 block" style={{ fontFamily: 'monospace' }}>RELATIONSHIP</label>
+                    <Select value={formData.relationship} onValueChange={(value) => setFormData({...formData, relationship: value})}>
+                        <SelectTrigger className="bg-black border-2 border-gray-800 text-white h-12" style={{ fontFamily: 'monospace' }}>
+                            <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent className="bg-black border-2 border-gray-800">
+                            <SelectItem value="excellent">Excellent</SelectItem>
+                            <SelectItem value="good">Good</SelectItem>
+                            <SelectItem value="neutral">Neutral</SelectItem>
+                            <SelectItem value="needs_work">Needs Work</SelectItem>
+                            <SelectItem value="unknown">Unknown</SelectItem>
+                        </SelectContent>
+                    </Select>
+                </div>
 
-                    <Button
-                        type="submit"
-                        disabled={saving}
-                        className="w-full bg-amber-500 hover:bg-amber-600 text-black font-black py-4 tracking-wider transition-all hover:scale-[1.02]"
-                        style={{ fontFamily: 'monospace', boxShadow: '0 0 20px rgba(245, 158, 11, 0.4), inset 0 -2px 0 rgba(0,0,0,0.3)' }}
-                    >
-                        {saving ? 'SAVING...' : 'SAVE'}
-                    </Button>
-                </form>
+                <div>
+                    <label className="text-gray-400 text-xs mb-2 block" style={{ fontFamily: 'monospace' }}>NOTES</label>
+                    <Textarea
+                        value={formData.notes}
+                        onChange={(e) => setFormData({...formData, notes: e.target.value})}
+                        className="bg-black border-2 border-gray-800 text-white focus:border-amber-500 min-h-[80px]"
+                        style={{ fontFamily: 'monospace' }}
+                        placeholder="Quick notes..."
+                    />
+                </div>
+
+                <Button
+                    type="submit"
+                    disabled={saving}
+                    className="w-full bg-amber-500 hover:bg-amber-400 text-black font-black h-14 text-lg transition-all"
+                    style={{ fontFamily: 'monospace' }}
+                >
+                    {saving ? 'SAVING...' : 'SAVE'}
+                </Button>
+            </form>
                 </Card>
                 </div>
                 );
