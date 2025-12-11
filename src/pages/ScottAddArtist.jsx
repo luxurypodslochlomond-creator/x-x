@@ -227,10 +227,9 @@ function ScottAddArtistInner() {
                     {saving ? 'SAVING...' : 'SAVE'}
                 </Button>
             </form>
-                </Card>
-                </div>
-                );
-                }
+        </div>
+    );
+}
 
                 export default function ScottAddArtist() {
                 return (
