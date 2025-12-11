@@ -1281,9 +1281,22 @@ export default function FrequencyChamber() {
       const AudioContext = window.AudioContext || window.webkitAudioContext;
       const ctx = new AudioContext();
       
-      // Resume audio context on iOS
+      // CRITICAL: Mobile audio unlock - must resume after user interaction
       if (ctx.state === 'suspended') {
-        await ctx.resume();
+        try {
+          await ctx.resume();
+          console.log('Audio context resumed:', ctx.state);
+        } catch (e) {
+          console.error('Failed to resume audio context:', e);
+          alert('Audio blocked - tap START again');
+          return;
+        }
+      }
+      
+      // Double-check audio is actually running
+      if (ctx.state !== 'running') {
+        alert('Audio system not ready - please try again');
+        return;
       }
       
       ctxRef.current = ctx;
