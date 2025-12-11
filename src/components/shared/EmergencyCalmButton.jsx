@@ -34,17 +34,27 @@ export default function EmergencyCalmButton() {
         return () => clearInterval(breathInterval);
     }, [isActive]);
 
-    const startEmergencyCalm = () => {
+    const startEmergencyCalm = async () => {
         setIsActive(true);
         setBreathCount(0);
         setBreathPhase('in');
 
         // Instant audio - 432Hz + Schumann 7.83Hz
         const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        
+        // CRITICAL: Mobile audio unlock
+        if (ctx.state === 'suspended') {
+            try {
+                await ctx.resume();
+            } catch (e) {
+                console.error('Audio resume failed:', e);
+            }
+        }
+        
         setAudioContext(ctx);
 
         const gainNode = ctx.createGain();
-        gainNode.gain.value = 0.2; // Low volume for calm
+        gainNode.gain.value = 0.3; // Slightly louder so you can hear it
 
         const osc432 = ctx.createOscillator();
         osc432.type = 'sine';
