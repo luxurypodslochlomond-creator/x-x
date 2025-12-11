@@ -231,21 +231,7 @@ function ScottManagerInner() {
                 </Link>
             </div>
 
-            {/* AI51 */}
-            <Link to={createPageUrl('TalkToAI51')}>
-                <div className="bg-black border-2 border-amber-500 rounded-lg p-5 mb-6 hover:border-amber-400 transition-all">
-                    <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-3">
-                            <Brain className="w-7 h-7 text-amber-400" />
-                            <div>
-                                <h3 className="text-lg font-black text-white" style={{ fontFamily: 'monospace' }}>AI51</h3>
-                                <p className="text-gray-500 text-xs" style={{ fontFamily: 'monospace' }}>Your loyal assistant</p>
-                            </div>
-                        </div>
-                        <div className="text-amber-400 text-2xl">→</div>
-                    </div>
-                </div>
-            </Link>
+
 
             {/* ONE-SENTENCE COMMAND */}
             <ScottOneSentence 
@@ -259,11 +245,17 @@ function ScottManagerInner() {
             <ScottTimeline />
 
             {/* QUICK ACTIONS */}
-            <div className="mb-6">
-                <Link to={createPageUrl('ScottAddArtist')} className="block w-full">
-                    <div className="bg-amber-500 hover:bg-amber-400 text-black font-black py-4 rounded-lg text-center transition-all" style={{ fontFamily: 'monospace' }}>
+            <div className="grid grid-cols-2 gap-3 mb-6">
+                <Link to={createPageUrl('ScottAddArtist')} className="block">
+                    <div className="bg-amber-500 hover:bg-amber-400 text-black font-black py-5 rounded-lg text-center transition-all" style={{ fontFamily: 'monospace' }}>
                         <Plus className="w-6 h-6 mx-auto mb-1" />
-                        ADD CONTACT
+                        <span className="text-sm">ADD</span>
+                    </div>
+                </Link>
+                <Link to={createPageUrl('ScottAI51')} className="block">
+                    <div className="bg-amber-500 hover:bg-amber-400 text-black font-black py-5 rounded-lg text-center transition-all" style={{ fontFamily: 'monospace' }}>
+                        <Brain className="w-6 h-6 mx-auto mb-1" />
+                        <span className="text-sm">AI51</span>
                     </div>
                 </Link>
             </div>
@@ -450,11 +442,7 @@ function ScottManagerInner() {
             {/* DID I DO THIS? */}
             <ScottDidIDoThis />
 
-            {/* FLOATING QUICK ACTIONS */}
-            <ScottQuickActions />
 
-            {/* VOICE COMMAND */}
-            <ScottVoiceCommand onCommandComplete={() => window.location.reload()} />
             </div>
             </ScottFocusMode>
             );
