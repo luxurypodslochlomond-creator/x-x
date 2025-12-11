@@ -194,15 +194,15 @@ function ScottAddArtistInner() {
                 <div>
                     <label className="text-gray-400 text-xs mb-2 block" style={{ fontFamily: 'monospace' }}>RELATIONSHIP</label>
                     <Select value={formData.relationship} onValueChange={(value) => setFormData({...formData, relationship: value})}>
-                        <SelectTrigger className="bg-black border-2 border-gray-800 text-white h-12" style={{ fontFamily: 'monospace' }}>
-                            <SelectValue />
+                        <SelectTrigger className="bg-black border-2 border-amber-500/50 hover:border-amber-500 text-white h-12 focus:border-amber-500 transition-all" style={{ fontFamily: 'monospace' }}>
+                            <SelectValue className="text-white" />
                         </SelectTrigger>
-                        <SelectContent className="bg-black border-2 border-gray-800">
-                            <SelectItem value="excellent">Excellent</SelectItem>
-                            <SelectItem value="good">Good</SelectItem>
-                            <SelectItem value="neutral">Neutral</SelectItem>
-                            <SelectItem value="needs_work">Needs Work</SelectItem>
-                            <SelectItem value="unknown">Unknown</SelectItem>
+                        <SelectContent className="bg-black border-2 border-amber-500/50">
+                            <SelectItem value="excellent" className="text-white hover:bg-amber-500/20">Excellent</SelectItem>
+                            <SelectItem value="good" className="text-white hover:bg-amber-500/20">Good</SelectItem>
+                            <SelectItem value="neutral" className="text-white hover:bg-amber-500/20">Neutral</SelectItem>
+                            <SelectItem value="needs_work" className="text-white hover:bg-amber-500/20">Needs Work</SelectItem>
+                            <SelectItem value="unknown" className="text-white hover:bg-amber-500/20">Unknown</SelectItem>
                         </SelectContent>
                     </Select>
                 </div>
