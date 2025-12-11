@@ -404,6 +404,20 @@ function ScottManagerInner() {
                 )}
                 </div>
 
+            {/* PHASE 2 - GIG OFFERS */}
+            <div className="mb-6">
+                <div className="flex items-center gap-2 mb-3">
+                    <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+                    <h2 className="text-xs text-green-400 font-bold tracking-wider" style={{ fontFamily: 'monospace' }}>PHASE 2 LIVE</h2>
+                </div>
+                <Link to={createPageUrl('ScottGigOffers')} className="block">
+                    <div className="bg-gradient-to-r from-amber-500 to-green-500 hover:from-amber-400 hover:to-green-400 p-4 rounded-lg text-center transition-all border-2 border-black" style={{ boxShadow: '0 0 30px rgba(245, 158, 11, 0.5)' }}>
+                        <p className="text-black font-black text-lg font-mono mb-1">GIG OFFERS</p>
+                        <p className="text-black/70 text-xs font-mono">Paste → AI → Team Votes</p>
+                    </div>
+                </Link>
+            </div>
+
             {/* TOOLS */}
             <div className="mb-6">
                 <h2 className="text-xs text-gray-600 font-bold mb-3 tracking-wider" style={{ fontFamily: 'monospace' }}>TOOLS</h2>
