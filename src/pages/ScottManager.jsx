@@ -454,12 +454,6 @@ function ScottManagerInner() {
                 <p className="text-gray-800 text-xs mb-2" style={{ fontFamily: 'monospace' }}>Kingdom Management</p>
             </div>
 
-            {/* DID I DO THIS? */}
-            <ScottDidIDoThis />
-
-            {/* QUICK CAPTURE */}
-            <ScottQuickCapture onComplete={() => window.location.reload()} />
-
             </div>
             </ScottFocusMode>
             );
