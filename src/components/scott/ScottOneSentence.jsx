@@ -19,6 +19,7 @@ export default function ScottOneSentence({ onCommandComplete }) {
         if (!command.trim()) return;
 
         setIsProcessing(true);
+        setResult(null);
         try {
             // AI interprets command
             const response = await base44.functions.invoke('scottAICoordinator', {
@@ -26,12 +27,16 @@ export default function ScottOneSentence({ onCommandComplete }) {
                 input_type: 'text'
             });
 
-            setResult(response.data);
+            setResult(response);
             setCommand('');
-            onCommandComplete?.(response.data);
+            
+            // Reload after short delay
+            setTimeout(() => {
+                if (onCommandComplete) onCommandComplete();
+            }, 1500);
         } catch (error) {
             console.error('Command error:', error);
-            alert(`Error: ${error.message}`);
+            setResult({ error: true, message: error.message || 'Something went wrong' });
         } finally {
             setIsProcessing(false);
         }
@@ -74,7 +79,7 @@ export default function ScottOneSentence({ onCommandComplete }) {
                 </button>
             </div>
 
-            {result && (
+            {result && !result.error && (
                 <div className="mt-3 bg-green-900/20 border-2 border-green-500 p-3">
                     <p className="text-green-400 font-mono text-sm mb-2">✓ DONE</p>
                     <div className="space-y-1">
@@ -84,6 +89,12 @@ export default function ScottOneSentence({ onCommandComplete }) {
                             </p>
                         ))}
                     </div>
+                </div>
+            )}
+
+            {result && result.error && (
+                <div className="mt-3 bg-red-900/20 border-2 border-red-500 p-3">
+                    <p className="text-red-400 font-mono text-xs">Error: {result.message}</p>
                 </div>
             )}
 
