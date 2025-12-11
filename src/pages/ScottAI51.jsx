@@ -169,8 +169,8 @@ Keep it concise but thorough. Use bullet points when helpful.`;
                                 }
                             }}
                             placeholder="Ask about contracts, deals, tours, publishing..."
-                            className="bg-black border-2 border-gray-800 text-white resize-none focus:border-amber-500"
-                            style={{ fontFamily: 'monospace' }}
+                            className="bg-black border-2 border-gray-800 text-white placeholder:text-gray-600 resize-none focus:border-amber-500"
+                            style={{ fontFamily: 'monospace', color: '#ffffff' }}
                             rows={2}
                         />
                         <Button
