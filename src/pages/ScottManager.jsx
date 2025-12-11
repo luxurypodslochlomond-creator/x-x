@@ -439,6 +439,22 @@ function ScottManagerInner() {
                 <p className="text-gray-800 text-xs mb-2" style={{ fontFamily: 'monospace' }}>Kingdom Management</p>
             </div>
 
+            {/* FLOATING KINGDOM ACTIONS */}
+            <div className="fixed bottom-20 left-0 right-0 z-40 flex justify-between px-4 pointer-events-none">
+                <Link to={createPageUrl('FrequencyChamber')} className="pointer-events-auto">
+                    <div className="w-16 h-16 rounded-full bg-amber-500 hover:bg-amber-400 flex items-center justify-center transition-all border-2 border-black" style={{ boxShadow: '0 0 40px rgba(245, 158, 11, 0.8)' }}>
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                            <path d="M2 16 L6 16 L8 8 L10 24 L12 12 L14 20 L16 6 L18 26 L20 10 L22 22 L24 14 L26 18 L30 16" stroke="#000000" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+                        </svg>
+                    </div>
+                </Link>
+                <Link to={createPageUrl('ScottAI51')} className="pointer-events-auto">
+                    <div className="w-16 h-16 rounded-full bg-amber-500 hover:bg-amber-400 flex items-center justify-center transition-all border-2 border-black" style={{ boxShadow: '0 0 40px rgba(245, 158, 11, 0.8)' }}>
+                        <Brain className="w-8 h-8 text-black" />
+                    </div>
+                </Link>
+            </div>
+
             {/* DID I DO THIS? */}
             <ScottDidIDoThis />
 
