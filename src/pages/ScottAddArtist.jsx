@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
-import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { ArrowLeft, WifiOff } from 'lucide-react';
+import { ArrowLeft, Check } from 'lucide-react';
 import KingdomCrown8Bit from '@/components/shared/KingdomCrown8Bit';
 import { useScottOffline, ScottOfflineProvider } from '@/components/scott/ScottOfflineStorage';
 
@@ -51,178 +49,209 @@ function ScottAddArtistInner() {
         }
     };
 
+    // Quick select buttons for common values
+    const relationshipOptions = [
+        { value: 'excellent', label: 'Excellent', color: 'bg-green-500' },
+        { value: 'good', label: 'Good', color: 'bg-cyan-500' },
+        { value: 'neutral', label: 'Neutral', color: 'bg-gray-500' },
+        { value: 'needs_work', label: 'Needs Work', color: 'bg-red-500' },
+        { value: 'unknown', label: 'Unknown', color: 'bg-gray-700' }
+    ];
+
+    const typeOptions = [
+        { value: 'artist', label: 'Artist' },
+        { value: 'client', label: 'Client' },
+        { value: 'venue', label: 'Venue' },
+        { value: 'band_crew', label: 'Band/Crew' },
+        { value: 'other', label: 'Other' }
+    ];
+
     return (
-        <div className="min-h-screen bg-black p-4">
+        <div className="min-h-screen bg-black p-4 pb-20">
             
-            <div className="flex items-center justify-between mb-6">
+            {/* HEADER */}
+            <div className="flex items-center justify-between mb-6 pb-4 border-b-2 border-amber-500/30">
                 <button
                     onClick={() => navigate(createPageUrl('ScottManager'))}
                     className="flex items-center gap-2 text-gray-600 hover:text-amber-400 transition-all"
                 >
-                    <ArrowLeft className="w-4 h-4" />
-                    <span style={{ fontFamily: 'monospace' }} className="text-sm tracking-wider font-bold">BACK</span>
+                    <ArrowLeft className="w-5 h-5" />
+                    <span style={{ fontFamily: 'monospace' }} className="text-sm font-bold">BACK</span>
                 </button>
                 
-                {/* OFFLINE INDICATOR */}
-                {!scott.isOnline && (
-                    <div className="flex items-center gap-1 bg-green-500/20 px-2 py-1 rounded">
-                        <WifiOff className="w-3 h-3 text-green-400" />
-                        <span className="text-[10px] text-green-400 font-bold tracking-wider" style={{ fontFamily: 'monospace' }}>
-                            WORKS OFFLINE
-                        </span>
-                    </div>
-                )}
+                <div className="flex items-center gap-2">
+                    <KingdomCrown8Bit size={32} animate={true} />
+                    <h1 className="text-2xl font-black text-amber-400" style={{ fontFamily: 'monospace' }}>ADD</h1>
+                </div>
             </div>
 
-            <div className="flex items-center gap-3 mb-6 pb-4 border-b-2 border-amber-500/30">
-                <KingdomCrown8Bit size={32} />
-                <h1 className="text-2xl font-black text-amber-400" style={{ fontFamily: 'monospace' }}>ADD CONTACT</h1>
-            </div>
-
-            <form onSubmit={handleSubmit} className="space-y-4 max-w-md mx-auto">
+            <form onSubmit={handleSubmit} className="space-y-6 max-w-md mx-auto">
                 
+                {/* TYPE - BIG BUTTONS */}
                 <div>
-                    <label className="text-gray-400 text-xs mb-2 block" style={{ fontFamily: 'monospace' }}>TYPE</label>
-                    <Select value={formData.type} onValueChange={(value) => setFormData({...formData, type: value})}>
-                        <SelectTrigger className="bg-black border-2 border-gray-800 text-white h-12" style={{ fontFamily: 'monospace' }}>
-                            <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent className="bg-black border-2 border-gray-800">
-                            <SelectItem value="artist">Artist</SelectItem>
-                            <SelectItem value="client">Client</SelectItem>
-                            <SelectItem value="venue">Venue</SelectItem>
-                            <SelectItem value="band_crew">Band/Crew</SelectItem>
-                            <SelectItem value="other">Other</SelectItem>
-                        </SelectContent>
-                    </Select>
+                    <label className="text-amber-400 text-xs mb-3 block tracking-widest font-bold" style={{ fontFamily: 'monospace' }}>TYPE</label>
+                    <div className="grid grid-cols-3 gap-2">
+                        {typeOptions.map(opt => (
+                            <button
+                                key={opt.value}
+                                type="button"
+                                onClick={() => setFormData({...formData, type: opt.value})}
+                                className={`py-3 px-2 rounded-lg font-bold text-xs transition-all border-2 ${
+                                    formData.type === opt.value 
+                                        ? 'bg-amber-500 text-black border-amber-500' 
+                                        : 'bg-black text-gray-500 border-gray-800 hover:border-amber-500/50'
+                                }`}
+                                style={{ fontFamily: 'monospace' }}
+                            >
+                                {opt.label}
+                            </button>
+                        ))}
+                    </div>
                 </div>
 
+                {/* NAME - BIG INPUT */}
                 <div>
-                    <label className="text-gray-400 text-xs mb-2 block" style={{ fontFamily: 'monospace' }}>NAME *</label>
+                    <label className="text-amber-400 text-xs mb-3 block tracking-widest font-bold" style={{ fontFamily: 'monospace' }}>NAME *</label>
                     <Input
                         required
                         value={formData.name}
                         onChange={(e) => setFormData({...formData, name: e.target.value})}
-                        className="bg-black border-2 border-gray-800 text-white h-12 focus:border-amber-500"
-                        style={{ fontFamily: 'monospace' }}
+                        className="bg-black border-2 border-amber-500/50 !text-white h-14 text-lg focus:border-amber-500 transition-all"
+                        style={{ fontFamily: 'monospace', color: '#ffffff !important', WebkitTextFillColor: '#ffffff' }}
                         placeholder="Full name"
                     />
                 </div>
 
+                {/* PHONE */}
                 <div>
-                    <label className="text-gray-400 text-xs mb-2 block" style={{ fontFamily: 'monospace' }}>PHONE</label>
+                    <label className="text-amber-400 text-xs mb-3 block tracking-widest font-bold" style={{ fontFamily: 'monospace' }}>PHONE</label>
                     <Input
                         type="tel"
                         value={formData.phone}
                         onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                        className="bg-black border-2 border-gray-800 text-white h-12 focus:border-amber-500"
-                        style={{ fontFamily: 'monospace' }}
+                        className="bg-black border-2 border-gray-800 !text-white h-14 text-lg focus:border-amber-500 transition-all"
+                        style={{ fontFamily: 'monospace', color: '#ffffff !important', WebkitTextFillColor: '#ffffff' }}
                         placeholder="+44..."
                     />
                 </div>
 
+                {/* EMAIL */}
                 <div>
-                    <label className="text-gray-400 text-xs mb-2 block" style={{ fontFamily: 'monospace' }}>EMAIL</label>
+                    <label className="text-amber-400 text-xs mb-3 block tracking-widest font-bold" style={{ fontFamily: 'monospace' }}>EMAIL</label>
                     <Input
                         type="email"
                         value={formData.email}
                         onChange={(e) => setFormData({...formData, email: e.target.value})}
-                        className="bg-black border-2 border-gray-800 text-white h-12 focus:border-amber-500"
-                        style={{ fontFamily: 'monospace' }}
+                        className="bg-black border-2 border-gray-800 !text-white h-14 text-lg focus:border-amber-500 transition-all"
+                        style={{ fontFamily: 'monospace', color: '#ffffff !important', WebkitTextFillColor: '#ffffff' }}
                         placeholder="email@example.com"
                     />
                 </div>
 
+                {/* SOCIALS */}
                 <div className="grid grid-cols-2 gap-3">
                     <div>
-                        <label className="text-gray-400 text-xs mb-2 block" style={{ fontFamily: 'monospace' }}>INSTAGRAM</label>
+                        <label className="text-amber-400 text-xs mb-3 block tracking-widest font-bold" style={{ fontFamily: 'monospace' }}>INSTAGRAM</label>
                         <Input
                             value={formData.instagram}
                             onChange={(e) => setFormData({...formData, instagram: e.target.value})}
-                            className="bg-black border-2 border-gray-800 text-white h-12 focus:border-amber-500"
-                            style={{ fontFamily: 'monospace' }}
+                            className="bg-black border-2 border-gray-800 !text-white h-14 text-base focus:border-amber-500 transition-all"
+                            style={{ fontFamily: 'monospace', color: '#ffffff !important', WebkitTextFillColor: '#ffffff' }}
                             placeholder="@handle"
                         />
                     </div>
                     <div>
-                        <label className="text-gray-400 text-xs mb-2 block" style={{ fontFamily: 'monospace' }}>SPOTIFY</label>
+                        <label className="text-amber-400 text-xs mb-3 block tracking-widest font-bold" style={{ fontFamily: 'monospace' }}>SPOTIFY</label>
                         <Input
                             value={formData.spotify}
                             onChange={(e) => setFormData({...formData, spotify: e.target.value})}
-                            className="bg-black border-2 border-gray-800 text-white h-12 focus:border-amber-500"
-                            style={{ fontFamily: 'monospace' }}
+                            className="bg-black border-2 border-gray-800 !text-white h-14 text-base focus:border-amber-500 transition-all"
+                            style={{ fontFamily: 'monospace', color: '#ffffff !important', WebkitTextFillColor: '#ffffff' }}
                             placeholder="Link"
                         />
                     </div>
                 </div>
 
+                {/* RATE & GENRE */}
                 <div className="grid grid-cols-2 gap-3">
                     <div>
-                        <label className="text-gray-400 text-xs mb-2 block" style={{ fontFamily: 'monospace' }}>RATE (£)</label>
+                        <label className="text-amber-400 text-xs mb-3 block tracking-widest font-bold" style={{ fontFamily: 'monospace' }}>RATE (£)</label>
                         <Input
                             type="number"
                             value={formData.rate}
                             onChange={(e) => setFormData({...formData, rate: e.target.value})}
-                            className="bg-black border-2 border-gray-800 text-white h-12 focus:border-amber-500"
-                            style={{ fontFamily: 'monospace' }}
+                            className="bg-black border-2 border-gray-800 !text-white h-14 text-lg focus:border-amber-500 transition-all"
+                            style={{ fontFamily: 'monospace', color: '#ffffff !important', WebkitTextFillColor: '#ffffff' }}
                             placeholder="250"
                         />
                     </div>
                     <div>
-                        <label className="text-gray-400 text-xs mb-2 block" style={{ fontFamily: 'monospace' }}>GENRE</label>
+                        <label className="text-amber-400 text-xs mb-3 block tracking-widest font-bold" style={{ fontFamily: 'monospace' }}>GENRE</label>
                         <Input
                             value={formData.genre}
                             onChange={(e) => setFormData({...formData, genre: e.target.value})}
-                            className="bg-black border-2 border-gray-800 text-white h-12 focus:border-amber-500"
-                            style={{ fontFamily: 'monospace' }}
+                            className="bg-black border-2 border-gray-800 !text-white h-14 text-base focus:border-amber-500 transition-all"
+                            style={{ fontFamily: 'monospace', color: '#ffffff !important', WebkitTextFillColor: '#ffffff' }}
                             placeholder="Rock, Jazz..."
                         />
                     </div>
                 </div>
 
+                {/* GEAR */}
                 <div>
-                    <label className="text-gray-400 text-xs mb-2 block" style={{ fontFamily: 'monospace' }}>GEAR/SKILLS</label>
+                    <label className="text-amber-400 text-xs mb-3 block tracking-widest font-bold" style={{ fontFamily: 'monospace' }}>GEAR/SKILLS</label>
                     <Input
                         value={formData.gear}
                         onChange={(e) => setFormData({...formData, gear: e.target.value})}
-                        className="bg-black border-2 border-gray-800 text-white h-12 focus:border-amber-500"
-                        style={{ fontFamily: 'monospace' }}
+                        className="bg-black border-2 border-gray-800 !text-white h-14 text-base focus:border-amber-500 transition-all"
+                        style={{ fontFamily: 'monospace', color: '#ffffff !important', WebkitTextFillColor: '#ffffff' }}
                         placeholder="Guitar, keys..."
                     />
                 </div>
 
+                {/* RELATIONSHIP - BIG BUTTONS */}
                 <div>
-                    <label className="text-gray-400 text-xs mb-2 block" style={{ fontFamily: 'monospace' }}>RELATIONSHIP</label>
-                    <Select value={formData.relationship} onValueChange={(value) => setFormData({...formData, relationship: value})}>
-                        <SelectTrigger className="bg-black border-2 border-amber-500/50 hover:border-amber-500 text-white h-12 focus:border-amber-500 transition-all" style={{ fontFamily: 'monospace' }}>
-                            <SelectValue className="text-white" />
-                        </SelectTrigger>
-                        <SelectContent className="bg-black border-2 border-amber-500/50">
-                            <SelectItem value="excellent" className="text-white hover:bg-amber-500/20">Excellent</SelectItem>
-                            <SelectItem value="good" className="text-white hover:bg-amber-500/20">Good</SelectItem>
-                            <SelectItem value="neutral" className="text-white hover:bg-amber-500/20">Neutral</SelectItem>
-                            <SelectItem value="needs_work" className="text-white hover:bg-amber-500/20">Needs Work</SelectItem>
-                            <SelectItem value="unknown" className="text-white hover:bg-amber-500/20">Unknown</SelectItem>
-                        </SelectContent>
-                    </Select>
+                    <label className="text-amber-400 text-xs mb-3 block tracking-widest font-bold" style={{ fontFamily: 'monospace' }}>RELATIONSHIP</label>
+                    <div className="grid grid-cols-3 gap-2">
+                        {relationshipOptions.map(opt => (
+                            <button
+                                key={opt.value}
+                                type="button"
+                                onClick={() => setFormData({...formData, relationship: opt.value})}
+                                className={`py-3 px-2 rounded-lg font-bold text-xs transition-all border-2 relative ${
+                                    formData.relationship === opt.value 
+                                        ? `${opt.color} text-white border-transparent` 
+                                        : 'bg-black text-gray-500 border-gray-800 hover:border-gray-600'
+                                }`}
+                                style={{ fontFamily: 'monospace' }}
+                            >
+                                {formData.relationship === opt.value && (
+                                    <Check className="w-4 h-4 absolute top-1 right-1" />
+                                )}
+                                {opt.label}
+                            </button>
+                        ))}
+                    </div>
                 </div>
 
+                {/* NOTES */}
                 <div>
-                    <label className="text-gray-400 text-xs mb-2 block" style={{ fontFamily: 'monospace' }}>NOTES</label>
+                    <label className="text-amber-400 text-xs mb-3 block tracking-widest font-bold" style={{ fontFamily: 'monospace' }}>NOTES</label>
                     <Textarea
                         value={formData.notes}
                         onChange={(e) => setFormData({...formData, notes: e.target.value})}
-                        className="bg-black border-2 border-gray-800 text-white focus:border-amber-500 min-h-[80px]"
-                        style={{ fontFamily: 'monospace' }}
+                        className="bg-black border-2 border-gray-800 !text-white focus:border-amber-500 min-h-[100px] transition-all"
+                        style={{ fontFamily: 'monospace', color: '#ffffff !important', WebkitTextFillColor: '#ffffff' }}
                         placeholder="Quick notes..."
                     />
                 </div>
 
+                {/* SAVE BUTTON - HUGE */}
                 <Button
                     type="submit"
                     disabled={saving}
-                    className="w-full bg-amber-500 hover:bg-amber-400 text-black font-black h-14 text-lg transition-all"
-                    style={{ fontFamily: 'monospace' }}
+                    className="w-full bg-amber-500 hover:bg-amber-400 text-black font-black h-16 text-xl transition-all shadow-lg"
+                    style={{ fontFamily: 'monospace', boxShadow: '0 0 30px rgba(245, 158, 11, 0.3)' }}
                 >
                     {saving ? 'SAVING...' : 'SAVE'}
                 </Button>
@@ -231,10 +260,10 @@ function ScottAddArtistInner() {
     );
 }
 
-                export default function ScottAddArtist() {
-                return (
-                <ScottOfflineProvider>
-                <ScottAddArtistInner />
-                </ScottOfflineProvider>
-                );
-                }
+export default function ScottAddArtist() {
+    return (
+        <ScottOfflineProvider>
+            <ScottAddArtistInner />
+        </ScottOfflineProvider>
+    );
+}
