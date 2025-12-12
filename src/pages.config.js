@@ -184,6 +184,7 @@ import ScottFinancialDashboard from './pages/ScottFinancialDashboard';
 import ScottMedia from './pages/ScottMedia';
 import ScottAI51 from './pages/ScottAI51';
 import ScottPasteGigOffer from './pages/ScottPasteGigOffer';
+import ScottLATrip from './pages/ScottLATrip';
 import __Layout from './Layout.jsx';
 
 
@@ -374,6 +375,7 @@ export const PAGES = {
     "ScottMedia": ScottMedia,
     "ScottAI51": ScottAI51,
     "ScottPasteGigOffer": ScottPasteGigOffer,
+    "ScottLATrip": ScottLATrip,
 }
 
 export const pagesConfig = {
