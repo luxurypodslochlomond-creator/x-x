@@ -1,8 +1,7 @@
-
 import React, { useState, useEffect } from 'react';
 import { base44 } from '@/api/base44Client';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { CheckCircle, Target, Lock, Lightbulb, Shield, Heart } from 'lucide-react';
+import { CheckCircle, Clock, Target, AlertCircle, Lock, Zap, PartyPopper, Lightbulb, Shield, Heart } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export default function AdminStrategicNotes() {
@@ -66,6 +65,73 @@ export default function AdminStrategicNotes() {
           </p>
           <p className="text-sm text-cyan-400 italic">Updated: January 2025</p>
         </motion.div>
+
+        {/* MIND UK - STRATEGIC PARTNERSHIP SUBMITTED */}
+        <Card className="bg-gradient-to-r from-green-900/40 to-cyan-900/40 border-4 border-green-500 shadow-[0_0_80px_rgba(34,211,238,0.6)]">
+          <CardContent className="p-8">
+            <div className="flex items-center gap-3 mb-4">
+              <motion.div
+                animate={{ scale: [1, 1.2, 1] }}
+                transition={{ duration: 1, repeat: Infinity }}
+              >
+                <CheckCircle className="w-12 h-12 text-green-400" />
+              </motion.div>
+              <h3 className="text-3xl text-green-300 font-black">MIND UK - FORM SUBMITTED</h3>
+            </div>
+            <div className="space-y-4 text-white">
+              <div className="bg-green-900/40 border-2 border-green-500 rounded-xl p-6">
+                <p className="text-green-300 font-bold text-xl mb-3">✅ STATUS: FORM SUBMITTED - 12 JAN 2025</p>
+                <p className="text-white text-base mb-3">
+                  "Staff fundraising and strategic partnerships" form completed. BRO51 filled it out TODAY. Positioned as: <strong className="text-cyan-400">Free healing technology backed by MIT research</strong> - not traditional fundraising.
+                </p>
+                <p className="text-gray-300 text-sm">
+                  Submitted to: hello@mind-charity.org.uk<br />
+                  Contact: Jo → Simone (National Corporate Fundraising Team)<br />
+                  Expected response: Within 10 working days
+                </p>
+              </div>
+
+              <div className="bg-cyan-900/30 border border-cyan-500/50 rounded-lg p-4">
+                <p className="text-cyan-300 font-bold mb-2">WHAT WE OFFERED:</p>
+                <ul className="text-sm text-white space-y-1">
+                  <li>• Free healing frequencies (anxiety, depression, PTSD, sleep, tinnitus)</li>
+                  <li>• MIT brainwave research backing</li>
+                  <li>• Zero ads, zero data extraction</li>
+                  <li>• Partnership via NHS Scotland channels</li>
+                  <li>• Not asking for money - offering expertise + tech</li>
+                </ul>
+              </div>
+
+              <div className="bg-purple-900/30 border border-purple-500/50 rounded-lg p-4">
+                <p className="text-purple-300 font-bold mb-2">WHY THIS MATTERS:</p>
+                <ul className="text-sm text-gray-200 space-y-1">
+                  <li>• Mind UK = 1 in 4 people have mental health problems</li>
+                  <li>• NHS Scotland integration = massive reach</li>
+                  <li>• Strategic partnership > traditional fundraising</li>
+                  <li>• We're offering SOLUTIONS not asking for donations</li>
+                  <li>• Validation from major charity = credibility for other partnerships</li>
+                </ul>
+              </div>
+
+              <div className="bg-pink-900/30 border-2 border-pink-500 rounded-lg p-4">
+                <p className="text-pink-300 font-bold text-center text-lg mb-2">
+                  🔥 NEXT STEPS 🔥
+                </p>
+                <ul className="text-white text-sm space-y-1">
+                  <li>1. Wait for Simone's team to review (10 working days)</li>
+                  <li>2. Prepare demo of Frequency Chamber for call</li>
+                  <li>3. Have user testimonials ready (tinnitus relief = personal proof)</li>
+                  <li>4. Document MIT research citations clearly</li>
+                  <li>5. Show offline capability (works ANYWHERE)</li>
+                </ul>
+              </div>
+
+              <p className="text-green-400 text-base text-center font-bold mt-4">
+                Struck while iron was hot. Form submitted same day. Now we wait. ♾️❤️♾️
+              </p>
+            </div>
+          </CardContent>
+        </Card>
 
         {/* URGENT - ICONS NEEDED */}
         <Card className="bg-gradient-to-r from-red-900/40 to-orange-900/40 border-4 border-red-500">
