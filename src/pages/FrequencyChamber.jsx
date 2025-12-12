@@ -2234,13 +2234,14 @@ export default function FrequencyChamber() {
                             boxShadow: `0 0 15px ${selectedProtocol.color}80`,
                           }}
                           animate={{
-                            height: `${20 + Math.sin((Date.now() / 80) + i * 0.3) * 40 + Math.cos((Date.now() / 60) + i * 0.5) * 30}%`,
-                            opacity: [0.5, 1, 0.5],
+                            height: ['30%', `${50 + (i % 3) * 20}%`, '30%'],
+                            opacity: [0.6, 1, 0.6],
                           }}
                           transition={{
-                            duration: 0.1,
+                            duration: 0.8 + (i * 0.05),
                             repeat: Infinity,
-                            ease: "linear"
+                            ease: "easeInOut",
+                            delay: i * 0.05
                           }}
                         />
                       ))}
