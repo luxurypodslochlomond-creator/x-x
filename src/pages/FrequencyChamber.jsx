@@ -488,17 +488,17 @@ const BreathingPacer = ({ breathRate, isActive, color }) => {
       const progress = cyclePos / cycleDuration;
 
       if (progress < 0.4) {
-        setInstruction('IN');
-        setPhase(progress / 0.4);
-      } else if (progress < 0.55) {
-        setInstruction('HOLD');
-        setPhase(1);
-      } else if (progress < 0.95) {
         setInstruction('OUT');
-        setPhase(1 - ((progress - 0.55) / 0.4));
-      } else {
+        setPhase(1 - (progress / 0.4));
+      } else if (progress < 0.55) {
         setInstruction('REST');
         setPhase(0);
+      } else if (progress < 0.95) {
+        setInstruction('IN');
+        setPhase((progress - 0.55) / 0.4);
+      } else {
+        setInstruction('HOLD');
+        setPhase(1);
       }
     }, 16);
 
