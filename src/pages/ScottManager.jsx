@@ -7,6 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Plus, Search, Wifi, WifiOff, RefreshCw, Brain, DollarSign, FileText, Music, Globe, Briefcase, Camera, Plane } from 'lucide-react';
 import { motion } from 'framer-motion';
 import KingdomCrown8Bit from '@/components/shared/KingdomCrown8Bit';
+import Kingdom51Crown8Bit from '@/components/shared/Kingdom51Crown8Bit';
 import Gill51Sunglasses8Bit from '@/components/shared/Gill51Sunglasses8Bit';
 import { useScottOffline, ScottOfflineProvider } from '@/components/scott/ScottOfflineStorage';
 import ScottOneSentence from '@/components/scott/ScottOneSentence';
@@ -102,65 +103,55 @@ function ScottManagerInner() {
         a.type.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
-    // PIN ENTRY SCREEN - COOLASFUCK KINGDOM51
+    // PIN ENTRY SCREEN - CLEAN 8-BIT KINGDOM51 WITH SUNGLASSES
     if (!pinEntered) {
         return (
-            <div className="min-h-screen bg-gradient-to-br from-black via-amber-950/30 to-black p-4 flex items-center justify-center relative overflow-hidden">
-                {/* Animated background pattern */}
-                <div className="absolute inset-0 opacity-10">
-                    <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-amber-500 rounded-full blur-3xl animate-pulse" />
-                    <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-pink-500 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
-                </div>
-                
-                <Card className="bg-black border-4 border-amber-500 rounded-xl p-8 max-w-md w-full relative z-10" style={{ boxShadow: '0 0 60px rgba(245, 158, 11, 0.5), 0 0 100px rgba(245, 158, 11, 0.3), inset 0 0 30px rgba(245, 158, 11, 0.1)', imageRendering: 'pixelated' }}>
+            <div className="min-h-screen bg-black p-4 flex items-center justify-center">
+                <Card className="bg-black border-4 border-amber-500 p-8 max-w-md w-full" style={{ boxShadow: '0 8px 0px #d97706, 0 0 40px rgba(245, 158, 11, 0.4)', imageRendering: 'pixelated' }}>
                     <div className="text-center mb-8">
+                        {/* Crown with sunglasses */}
                         <div className="flex justify-center mb-6">
-                            <div className="relative">
-                                <KingdomCrown8Bit size={80} animate={true} />
-                                <div className="absolute -inset-6 bg-amber-500/30 rounded-full blur-2xl animate-pulse" />
-                                <div className="absolute -inset-3 bg-pink-500/20 rounded-full blur-xl animate-pulse" style={{ animationDelay: '0.5s' }} />
-                            </div>
+                            <Kingdom51Crown8Bit size={96} animate={true} />
                         </div>
                         
-                        {/* 8-bit pixel art style KINGDOM51 */}
-                        <div className="mb-4 relative">
-                            <h1 className="text-5xl font-black mb-2 bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-400 bg-clip-text text-transparent tracking-tight" style={{ fontFamily: 'monospace', textShadow: '4px 4px 0px rgba(0,0,0,0.8), 0 0 40px rgba(245, 158, 11, 0.8)', imageRendering: 'pixelated' }}>
-                                KINGDOM51
-                            </h1>
-                            {/* Pixelated glow effect */}
-                            <div className="absolute -inset-2 bg-gradient-to-r from-amber-500/40 via-yellow-400/40 to-amber-500/40 blur-xl -z-10 animate-pulse" style={{ imageRendering: 'pixelated' }} />
-                        </div>
+                        {/* Clean 8-bit text */}
+                        <h1 className="text-5xl font-black text-amber-400 mb-3 tracking-tight" style={{ fontFamily: 'monospace', textShadow: '4px 4px 0px #000000', imageRendering: 'pixelated' }}>
+                            KINGDOM51
+                        </h1>
                         
-                        <p className="text-amber-400 text-xs font-black tracking-[0.4em] mb-2" style={{ fontFamily: 'monospace', textShadow: '2px 2px 0px rgba(0,0,0,0.8)' }}>
+                        <p className="text-amber-500 text-xs font-black tracking-[0.3em] mb-4" style={{ fontFamily: 'monospace', textShadow: '2px 2px 0px #000000' }}>
                             YOUR AI CO-MANAGER
                         </p>
                         
-                        {/* 8-bit divider */}
-                        <div className="mt-4 flex items-center justify-center gap-1">
-                            <div className="w-2 h-2 bg-amber-500" style={{ imageRendering: 'pixelated' }} />
-                            <div className="h-1 flex-1 bg-gradient-to-r from-amber-500 via-yellow-400 to-transparent" style={{ imageRendering: 'pixelated' }} />
-                            <div className="w-2 h-2 bg-yellow-400" style={{ imageRendering: 'pixelated' }} />
-                            <div className="h-1 flex-1 bg-gradient-to-l from-amber-500 via-yellow-400 to-transparent" style={{ imageRendering: 'pixelated' }} />
-                            <div className="w-2 h-2 bg-amber-500" style={{ imageRendering: 'pixelated' }} />
+                        {/* 8-bit pixel divider */}
+                        <div className="flex items-center justify-center gap-1 mb-6">
+                            <div className="w-2 h-2 bg-amber-500" />
+                            <div className="w-2 h-2 bg-amber-400" />
+                            <div className="w-2 h-2 bg-yellow-400" />
+                            <div className="flex-1 h-1 bg-amber-500" />
+                            <div className="w-2 h-2 bg-yellow-400" />
+                            <div className="w-2 h-2 bg-amber-400" />
+                            <div className="w-2 h-2 bg-amber-500" />
                         </div>
                     </div>
+                    
                     <Input
                         type="password"
                         placeholder="••••"
                         value={pinInput}
                         onChange={(e) => setPinInput(e.target.value)}
                         onKeyDown={(e) => e.key === 'Enter' && handlePinSubmit()}
-                        className="bg-black border-2 border-amber-500/50 rounded-lg text-white text-center text-3xl mb-4 focus:border-amber-400 transition-all font-black tracking-widest"
-                        style={{ fontFamily: 'monospace', boxShadow: 'inset 0 0 20px rgba(245, 158, 11, 0.2)' }}
+                        className="bg-black border-2 border-amber-500 text-white text-center text-3xl mb-4 focus:border-yellow-400 transition-colors font-black tracking-widest"
+                        style={{ fontFamily: 'monospace', boxShadow: '0 4px 0px #d97706' }}
                     />
                     <Button
                         onClick={handlePinSubmit}
-                        className="w-full bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-500 hover:from-amber-400 hover:via-yellow-300 hover:to-amber-400 text-black font-black text-lg py-4 rounded-lg transition-all"
-                        style={{ fontFamily: 'monospace', boxShadow: '0 0 30px rgba(245, 158, 11, 0.6)' }}
+                        className="w-full bg-amber-500 hover:bg-amber-400 text-black font-black text-lg py-4 transition-all"
+                        style={{ fontFamily: 'monospace', boxShadow: '0 6px 0px #d97706' }}
                     >
                         ENTER KINGDOM
                     </Button>
-                    <p className="text-center text-amber-600/60 text-xs mt-4 font-mono tracking-wider">Zero forms • Zero bullshit • Real help</p>
+                    <p className="text-center text-amber-600 text-xs mt-4 font-mono">Zero forms • Zero bullshit • Real help</p>
                 </Card>
             </div>
         );
