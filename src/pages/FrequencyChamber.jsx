@@ -1713,6 +1713,11 @@ export default function FrequencyChamber() {
   useEffect(() => {
     return () => {
       stopAudio();
+      // Clean up tinnitus test tone if playing
+      if (testToneRef.current) {
+        testToneRef.current.forEach(n => { try { n.stop?.(); n.disconnect?.(); } catch(e) {} });
+        testToneRef.current = null;
+      }
     };
   }, []);
   
