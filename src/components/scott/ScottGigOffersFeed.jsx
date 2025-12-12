@@ -97,16 +97,16 @@ export default function ScottGigOffersFeed() {
         <div className="mb-6">
             <button 
                 onClick={() => setExpanded(!expanded)}
-                className="w-full bg-gradient-to-r from-amber-500 to-green-500 p-4 rounded-lg border-2 border-black mb-3 flex items-center justify-between"
+                className="w-full bg-black p-4 rounded-lg border-2 border-amber-500 mb-3 flex items-center justify-between"
                 style={{ boxShadow: '0 0 30px rgba(245, 158, 11, 0.5)' }}
             >
                 <div className="text-left">
-                    <p className="text-black font-black text-base font-mono mb-1">
+                    <p className="text-white font-black text-base font-mono mb-1">
                         GIG OFFERS {pendingOffers.length > 0 && `(${pendingOffers.length})`}
                     </p>
-                    <p className="text-black/70 text-xs font-mono">AI math • Instant votes</p>
+                    <p className="text-gray-600 text-xs font-mono">AI math • Instant votes</p>
                 </div>
-                {expanded ? <ChevronUp className="text-black" /> : <ChevronDown className="text-black" />}
+                {expanded ? <ChevronUp className="text-amber-400" /> : <ChevronDown className="text-amber-400" />}
             </button>
 
             <AnimatePresence>
