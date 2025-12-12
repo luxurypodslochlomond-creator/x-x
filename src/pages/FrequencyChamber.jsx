@@ -1534,6 +1534,7 @@ export default function FrequencyChamber() {
         
         let sweepDir = 1;
         let sweepStart = Date.now();
+        let lastDisplayUpdate = Date.now();
         const sweepInterval = setInterval(() => {
           const elapsed = (Date.now() - sweepStart) / 1000;
           let t = Math.min(elapsed / 30, 1);
@@ -1542,8 +1543,14 @@ export default function FrequencyChamber() {
           const hz = minHz * Math.pow(maxHz / minHz, progress);
           sweepOsc.frequency.setTargetAtTime(hz, ctx.currentTime, 0.1);
           invertedOsc.frequency.setTargetAtTime(hz, ctx.currentTime, 0.1);
-          setCurrentHz(Math.round(hz));
-        }, 500);
+
+          // Update display less frequently (smooth visual)
+          const now = Date.now();
+          if (now - lastDisplayUpdate > 500) {
+            setCurrentHz(Math.round(hz));
+            lastDisplayUpdate = now;
+          }
+        }, 50);
         
         nodes.push(sweepOsc, invertedOsc, sweepGain, invertedGain, { stop: () => clearInterval(sweepInterval) });
       }
