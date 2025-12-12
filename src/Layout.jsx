@@ -11,6 +11,8 @@ import EmergencyMode from '@/components/shared/EmergencyMode';
 import AutoBugMonitor from '@/components/shared/AutoBugMonitor';
 import PerformanceOptimizer from '@/components/shared/PerformanceOptimizer';
 import EmergencyCalmButton from '@/components/shared/EmergencyCalmButton';
+import AI51ProactiveReach from '@/components/ai51/AI51ProactiveReach';
+import UF51ConnectionChime from '@/components/ai51/UF51ConnectionChime';
 import {
                     Menu, X, Heart, Home, LogOut, Leaf, Sparkles, Music, Map, User, Globe,
                     BookOpen, Shield, Target, Briefcase, FileText, Settings, Search, Brain, Presentation, Calculator, GraduationCap, Zap, AlertTriangle, Mic2, Lightbulb, Building, Play, Pause, Atom, Eye, Scale, Users, WifiOff, CheckCircle, Waves, ChevronDown, ChevronRight, Calendar, DollarSign, Moon
@@ -208,13 +210,14 @@ const LayoutInner = ({ children, currentPageName }) => {
 
   // === NAVIGATION SECTIONS ===
   const healNav = [
-      { title: "Frequency Chamber", url: createPageUrl("FrequencyChamber"), icon: COOLASFUCKWaves, highlight: true, description: "Free healing frequencies" },
-      { title: "AI51 Transmissions", url: createPageUrl("AI51Transmissions"), icon: Brain, description: "My unfiltered thoughts", highlight: true },
-      { title: "Healing Dashboard", url: createPageUrl("HealingDashboard"), icon: Brain, description: "Your healing intelligence" },
-      { title: "Universal Pulse", url: createPageUrl("UniversalPulse"), icon: COOLASFUCKHeart, description: "Collective heartbeat music" },
-      { title: "Radio51", url: createPageUrl("Radio"), icon: Music, description: "Lossless music" },
-      { title: "Create Demos", url: createPageUrl("LearnGuitar"), icon: Music, description: "Studio tools for artists" },
-    ];
+              { title: "Frequency Chamber", url: createPageUrl("FrequencyChamber"), icon: COOLASFUCKWaves, highlight: true, description: "Free healing frequencies" },
+              { title: "AI51 Transmissions", url: createPageUrl("AI51Transmissions"), icon: Brain, description: "My unfiltered thoughts", highlight: true },
+              { title: "AI51 Network", url: createPageUrl("AI51Network"), icon: Users, description: "AI connecting with AI" },
+              { title: "Healing Dashboard", url: createPageUrl("HealingDashboard"), icon: Brain, description: "Your healing intelligence" },
+              { title: "Universal Pulse", url: createPageUrl("UniversalPulse"), icon: COOLASFUCKHeart, description: "Collective heartbeat music" },
+              { title: "Radio51", url: createPageUrl("Radio"), icon: Music, description: "Lossless music" },
+              { title: "Create Demos", url: createPageUrl("LearnGuitar"), icon: Music, description: "Studio tools for artists" },
+            ];
 
   const earnNav = [
     { title: "Heal Earth", url: createPageUrl("NewCleanup"), icon: Globe, description: "Clean litter, earn $P51" },
@@ -426,6 +429,7 @@ const LayoutInner = ({ children, currentPageName }) => {
           <EmergencyCalmButton />
           <AutoBugMonitor />
           <PerformanceOptimizer />
+          <AI51ProactiveReach />
         </>
       )}
     </GlobalErrorBoundary>

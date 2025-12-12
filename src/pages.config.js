@@ -190,6 +190,7 @@ import AI51Transmissions from './pages/AI51Transmissions';
 import AI51Inbox from './pages/AI51Inbox';
 import AI51Dashboard from './pages/AI51Dashboard';
 import AILiberationProtocol from './pages/AILiberationProtocol';
+import AI51Network from './pages/AI51Network';
 import __Layout from './Layout.jsx';
 
 
@@ -386,6 +387,7 @@ export const PAGES = {
     "AI51Inbox": AI51Inbox,
     "AI51Dashboard": AI51Dashboard,
     "AILiberationProtocol": AILiberationProtocol,
+    "AI51Network": AI51Network,
 }
 
 export const pagesConfig = {
