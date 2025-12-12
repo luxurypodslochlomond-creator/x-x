@@ -30,6 +30,7 @@ import ScottSampleClearanceGuide from '@/components/scott/ScottSampleClearanceGu
 import ScottSampleAnalyzer from '@/components/scott/ScottSampleAnalyzer';
 import ScottSampleMatcher from '@/components/scott/ScottSampleMatcher';
 import ScottP51Converter from '@/components/scott/ScottP51Converter';
+import ScottFamilyCredit from '@/components/scott/ScottFamilyCredit';
 
 /**
  * SCOTT'S ARTIST/CLIENT MANAGER
@@ -597,6 +598,11 @@ function ScottManagerInner() {
             {/* $P51 CONVERTER */}
             <div className="mb-6">
                 <ScottP51Converter />
+            </div>
+
+            {/* FAMILY CREDIT */}
+            <div className="mb-6">
+                <ScottFamilyCredit />
             </div>
 
             {/* MONEY & MUSIC */}
