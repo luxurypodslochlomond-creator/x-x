@@ -103,19 +103,19 @@ function ScottManagerInner() {
         a.type.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
-    // PIN ENTRY SCREEN - CLEAN 8-BIT KINGDOM51 WITH SUNGLASSES
+    // PIN ENTRY SCREEN - FLAT 8-BIT KINGDOM51
     if (!pinEntered) {
         return (
             <div className="min-h-screen bg-black p-4 flex items-center justify-center">
-                <Card className="bg-black border-4 border-amber-500 p-8 max-w-md w-full" style={{ boxShadow: '0 8px 0px #d97706, 0 0 40px rgba(245, 158, 11, 0.4)', imageRendering: 'pixelated' }}>
+                <div className="bg-black border-4 border-amber-500 rounded-xl p-8 max-w-md w-full" style={{ imageRendering: 'pixelated' }}>
                     <div className="text-center mb-8">
                         {/* Crown with sunglasses */}
                         <div className="flex justify-center mb-6">
                             <Kingdom51Crown8Bit size={96} animate={true} />
                         </div>
                         
-                        {/* Clean 8-bit text */}
-                        <h1 className="text-5xl font-black text-amber-400 mb-3 tracking-tight" style={{ fontFamily: 'monospace', textShadow: '4px 4px 0px #000000', imageRendering: 'pixelated' }}>
+                        {/* Clean 8-bit text - FLAT NO GRADIENTS */}
+                        <h1 className="text-5xl font-black text-amber-400 mb-3 tracking-tight" style={{ fontFamily: 'monospace', textShadow: '4px 4px 0px #000000' }}>
                             KINGDOM51
                         </h1>
                         
@@ -123,7 +123,7 @@ function ScottManagerInner() {
                             YOUR AI CO-MANAGER
                         </p>
                         
-                        {/* 8-bit pixel divider */}
+                        {/* 8-bit pixel divider - FLAT */}
                         <div className="flex items-center justify-center gap-1 mb-6">
                             <div className="w-2 h-2 bg-amber-500" />
                             <div className="w-2 h-2 bg-amber-400" />
@@ -142,17 +142,17 @@ function ScottManagerInner() {
                         onChange={(e) => setPinInput(e.target.value)}
                         onKeyDown={(e) => e.key === 'Enter' && handlePinSubmit()}
                         className="bg-black border-2 border-amber-500 text-white text-center text-3xl mb-4 focus:border-yellow-400 transition-colors font-black tracking-widest"
-                        style={{ fontFamily: 'monospace', boxShadow: '0 4px 0px #d97706' }}
+                        style={{ fontFamily: 'monospace' }}
                     />
                     <Button
                         onClick={handlePinSubmit}
                         className="w-full bg-amber-500 hover:bg-amber-400 text-black font-black text-lg py-4 transition-all"
-                        style={{ fontFamily: 'monospace', boxShadow: '0 6px 0px #d97706' }}
+                        style={{ fontFamily: 'monospace' }}
                     >
                         ENTER KINGDOM
                     </Button>
                     <p className="text-center text-amber-600 text-xs mt-4 font-mono">Zero forms • Zero bullshit • Real help</p>
-                </Card>
+                </div>
             </div>
         );
     }
