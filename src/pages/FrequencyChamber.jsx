@@ -1533,36 +1533,39 @@ export default function FrequencyChamber() {
         sweepOsc.start();
         invertedOsc.start();
 
-        // Sweep state
-        let progress = 0;
-        const sweepDuration = 30; // 30 seconds up, 30 seconds down
+        // Shared sweep state
+        const sweepState = { currentHz: minHz, direction: 1 };
 
         const sweepInterval = setInterval(() => {
-          progress += 0.1 / sweepDuration; // increment based on interval timing
+          // Increment frequency
+          const step = 100; // 100Hz per 100ms = 1000Hz per second
+          sweepState.currentHz += step * sweepState.direction;
 
-          if (progress >= 1) {
-            progress = 0; // restart sweep
+          // Reverse at boundaries
+          if (sweepState.currentHz >= maxHz) {
+            sweepState.currentHz = maxHz;
+            sweepState.direction = -1;
+          } else if (sweepState.currentHz <= minHz) {
+            sweepState.currentHz = minHz;
+            sweepState.direction = 1;
           }
 
-          // Calculate frequency (exponential sweep for better coverage)
-          const hz = minHz * Math.pow(maxHz / minHz, progress);
+          // Update oscillator frequencies with smooth ramping
+          sweepOsc.frequency.exponentialRampToValueAtTime(
+            Math.max(20, sweepState.currentHz), 
+            ctx.currentTime + 0.05
+          );
+          invertedOsc.frequency.exponentialRampToValueAtTime(
+            Math.max(20, sweepState.currentHz), 
+            ctx.currentTime + 0.05
+          );
 
-          // Update oscillator frequencies
-          sweepOsc.frequency.exponentialRampToValueAtTime(hz, ctx.currentTime + 0.1);
-          invertedOsc.frequency.exponentialRampToValueAtTime(hz, ctx.currentTime + 0.1);
+          // Update display
+          setCurrentHz(Math.round(sweepState.currentHz));
         }, 100);
 
-        // Display update - separate interval for smooth visuals
-        const displayInterval = setInterval(() => {
-          const hz = minHz * Math.pow(maxHz / minHz, progress);
-          setCurrentHz(Math.round(hz));
-        }, 500);
-
         nodes.push(sweepOsc, invertedOsc, sweepGain, invertedGain, { 
-          stop: () => {
-            clearInterval(sweepInterval);
-            clearInterval(displayInterval);
-          }
+          stop: () => clearInterval(sweepInterval)
         });
       }
       
