@@ -29,6 +29,7 @@ import ScottFeatureRequest from '@/components/scott/ScottFeatureRequest';
 import ScottSampleClearanceGuide from '@/components/scott/ScottSampleClearanceGuide';
 import ScottSampleAnalyzer from '@/components/scott/ScottSampleAnalyzer';
 import ScottSampleMatcher from '@/components/scott/ScottSampleMatcher';
+import ScottP51Converter from '@/components/scott/ScottP51Converter';
 
 /**
  * SCOTT'S ARTIST/CLIENT MANAGER
@@ -592,6 +593,11 @@ function ScottManagerInner() {
 
             {/* GIG OFFERS - INLINE SMART FEED */}
             <ScottGigOffersFeed />
+
+            {/* $P51 CONVERTER */}
+            <div className="mb-6">
+                <ScottP51Converter />
+            </div>
 
             {/* MONEY & MUSIC */}
             <div className="mb-6">
