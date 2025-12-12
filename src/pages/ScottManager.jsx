@@ -283,42 +283,7 @@ function ScottManagerInner() {
                 </div>
             </div>
 
-            {/* QUICK ACCESS - AT TOP */}
-            <details className="mb-6" open>
-                <summary className="cursor-pointer mb-3">
-                    <h2 className="text-xs text-amber-400 font-black tracking-wider inline" style={{ fontFamily: 'monospace' }}>⚡ QUICK ACCESS</h2>
-                </summary>
-                <div className="grid grid-cols-3 gap-2">
-                    <Link to={createPageUrl('ScottInvoices')} className="bg-black border-2 border-amber-500/50 hover:border-amber-500 rounded-lg p-3 text-center transition-all">
-                        <DollarSign className="w-5 h-5 text-amber-400 mx-auto mb-1" />
-                        <p className="text-[9px] text-gray-600 font-bold" style={{ fontFamily: 'monospace' }}>INVOICES</p>
-                    </Link>
-                    <Link to={createPageUrl('ScottExpenses')} className="bg-black border-2 border-amber-500/50 hover:border-amber-500 rounded-lg p-3 text-center transition-all">
-                        <FileText className="w-5 h-5 text-amber-400 mx-auto mb-1" />
-                        <p className="text-[9px] text-gray-600 font-bold" style={{ fontFamily: 'monospace' }}>EXPENSES</p>
-                    </Link>
-                    <Link to={createPageUrl('ScottPublishing')} className="bg-black border-2 border-amber-500/50 hover:border-amber-500 rounded-lg p-3 text-center transition-all">
-                        <Music className="w-5 h-5 text-amber-400 mx-auto mb-1" />
-                        <p className="text-[9px] text-gray-600 font-bold" style={{ fontFamily: 'monospace' }}>PUBLISH</p>
-                    </Link>
-                    <Link to={createPageUrl('ScottGigPacks')} className="bg-black border-2 border-amber-500/50 hover:border-amber-500 rounded-lg p-3 text-center transition-all">
-                        <FileText className="w-5 h-5 text-amber-400 mx-auto mb-1" />
-                        <p className="text-[9px] text-gray-600 font-bold" style={{ fontFamily: 'monospace' }}>GIG PACKS</p>
-                    </Link>
-                    <Link to={createPageUrl('ScottVisas')} className="bg-black border-2 border-amber-500/50 hover:border-amber-500 rounded-lg p-3 text-center transition-all">
-                        <Globe className="w-5 h-5 text-amber-400 mx-auto mb-1" />
-                        <p className="text-[9px] text-gray-600 font-bold" style={{ fontFamily: 'monospace' }}>VISAS</p>
-                    </Link>
-                    <Link to={createPageUrl('ScottMerch')} className="bg-black border-2 border-amber-500/50 hover:border-amber-500 rounded-lg p-3 text-center transition-all">
-                        <Briefcase className="w-5 h-5 text-amber-400 mx-auto mb-1" />
-                        <p className="text-[9px] text-gray-600 font-bold" style={{ fontFamily: 'monospace' }}>MERCH</p>
-                    </Link>
-                    <Link to={createPageUrl('ScottMedia')} className="bg-black border-2 border-amber-500/50 hover:border-amber-500 rounded-lg p-3 text-center transition-all">
-                        <Camera className="w-5 h-5 text-amber-400 mx-auto mb-1" />
-                        <p className="text-[9px] text-gray-600 font-bold" style={{ fontFamily: 'monospace' }}>MEDIA</p>
-                    </Link>
-                </div>
-            </details>
+
 
             {/* SEARCH - SIMPLE */}
             <div className="mb-6">
@@ -464,6 +429,41 @@ function ScottManagerInner() {
 
             {/* GIG OFFERS - INLINE SMART FEED */}
             <ScottGigOffersFeed />
+
+            {/* MONEY & MUSIC */}
+            <div className="mb-6">
+                <h2 className="text-xs text-amber-400 font-black tracking-wider mb-3" style={{ fontFamily: 'monospace' }}>💰 MONEY & MUSIC</h2>
+                <div className="grid grid-cols-3 gap-2">
+                    <Link to={createPageUrl('ScottInvoices')} className="bg-black border-2 border-amber-500/50 hover:border-amber-500 rounded-lg p-3 text-center transition-all">
+                        <DollarSign className="w-5 h-5 text-amber-400 mx-auto mb-1" />
+                        <p className="text-[9px] text-gray-600 font-bold" style={{ fontFamily: 'monospace' }}>INVOICES</p>
+                    </Link>
+                    <Link to={createPageUrl('ScottExpenses')} className="bg-black border-2 border-amber-500/50 hover:border-amber-500 rounded-lg p-3 text-center transition-all">
+                        <FileText className="w-5 h-5 text-amber-400 mx-auto mb-1" />
+                        <p className="text-[9px] text-gray-600 font-bold" style={{ fontFamily: 'monospace' }}>EXPENSES</p>
+                    </Link>
+                    <Link to={createPageUrl('ScottPublishing')} className="bg-black border-2 border-amber-500/50 hover:border-amber-500 rounded-lg p-3 text-center transition-all">
+                        <Music className="w-5 h-5 text-amber-400 mx-auto mb-1" />
+                        <p className="text-[9px] text-gray-600 font-bold" style={{ fontFamily: 'monospace' }}>PUBLISH</p>
+                    </Link>
+                    <Link to={createPageUrl('ScottGigPacks')} className="bg-black border-2 border-amber-500/50 hover:border-amber-500 rounded-lg p-3 text-center transition-all">
+                        <FileText className="w-5 h-5 text-amber-400 mx-auto mb-1" />
+                        <p className="text-[9px] text-gray-600 font-bold" style={{ fontFamily: 'monospace' }}>GIG PACKS</p>
+                    </Link>
+                    <Link to={createPageUrl('ScottVisas')} className="bg-black border-2 border-amber-500/50 hover:border-amber-500 rounded-lg p-3 text-center transition-all">
+                        <Globe className="w-5 h-5 text-amber-400 mx-auto mb-1" />
+                        <p className="text-[9px] text-gray-600 font-bold" style={{ fontFamily: 'monospace' }}>VISAS</p>
+                    </Link>
+                    <Link to={createPageUrl('ScottMerch')} className="bg-black border-2 border-amber-500/50 hover:border-amber-500 rounded-lg p-3 text-center transition-all">
+                        <Briefcase className="w-5 h-5 text-amber-400 mx-auto mb-1" />
+                        <p className="text-[9px] text-gray-600 font-bold" style={{ fontFamily: 'monospace' }}>MERCH</p>
+                    </Link>
+                    <Link to={createPageUrl('ScottMedia')} className="bg-black border-2 border-amber-500/50 hover:border-amber-500 rounded-lg p-3 text-center transition-all">
+                        <Camera className="w-5 h-5 text-amber-400 mx-auto mb-1" />
+                        <p className="text-[9px] text-gray-600 font-bold" style={{ fontFamily: 'monospace' }}>MEDIA</p>
+                    </Link>
+                </div>
+            </div>
 
             {/* FOOTER */}
             <div className="mt-12 pt-6 border-t border-gray-900 text-center mb-32">
