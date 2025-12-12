@@ -156,24 +156,52 @@ function ScottManagerInner() {
                 </Link>
             </div>
 
+            {/* WHAT'S NEXT - TOP SO YOU SEE ACTIVITY */}
+            <div className="mb-6">
+                <div className="bg-black p-4 rounded-xl mb-3 border-2 border-amber-500">
+                    <p className="text-white font-black text-sm font-mono mb-2">⚡ WHAT'S NEXT</p>
+                    {urgentTasks.length > 0 ? (
+                        <Link to={createPageUrl('ScottCalendar')} className="block bg-black border border-red-500/50 rounded p-3">
+                            <p className="text-red-400 font-bold text-xs font-mono">🔥 {urgentTasks.length} URGENT TASK{urgentTasks.length > 1 ? 'S' : ''}</p>
+                            <p className="text-gray-600 text-xs font-mono mt-1">Tap to handle →</p>
+                        </Link>
+                    ) : upcomingEvents.length > 0 ? (
+                        <Link to={createPageUrl('ScottCalendar')} className="block bg-black border border-amber-500/50 rounded p-3">
+                            <p className="text-amber-400 font-bold text-xs font-mono">📅 {upcomingEvents.length} UPCOMING EVENT{upcomingEvents.length > 1 ? 'S' : ''}</p>
+                            <p className="text-gray-600 text-xs font-mono mt-1">Tap to prep →</p>
+                        </Link>
+                    ) : unpaidInvoices.length > 0 ? (
+                        <Link to={createPageUrl('ScottInvoices')} className="block bg-black border border-amber-500/50 rounded p-3">
+                            <p className="text-amber-400 font-bold text-xs font-mono">💰 {unpaidInvoices.length} UNPAID INVOICE{unpaidInvoices.length > 1 ? 'S' : ''}</p>
+                            <p className="text-gray-600 text-xs font-mono mt-1">Tap to chase →</p>
+                        </Link>
+                    ) : (
+                        <div className="bg-black border border-green-500/50 rounded p-3">
+                            <p className="text-green-400 font-bold text-xs font-mono">✓ ALL CLEAR</p>
+                            <p className="text-gray-600 text-xs font-mono mt-1">Nothing urgent</p>
+                        </div>
+                    )}
+                </div>
+            </div>
+
             {/* LA TRIP - URGENT */}
             <Link to={createPageUrl('ScottLATrip')} className="block mb-6">
-                <div className="bg-gradient-to-br from-amber-500 to-pink-600 p-6 rounded-xl border-4 border-amber-400 relative overflow-hidden animate-pulse" style={{ boxShadow: '0 8px 40px rgba(245, 158, 11, 0.6)' }}>
+                <div className="bg-black p-6 rounded-xl border-4 border-amber-500 relative overflow-hidden" style={{ boxShadow: '0 8px 40px rgba(245, 158, 11, 0.6)' }}>
                     <div className="absolute top-2 right-2 bg-red-500 text-white text-xs font-black px-2 py-1 rounded font-mono">
                         LIVE
                     </div>
                     <div className="relative z-10">
                         <div className="flex items-center gap-3 mb-3">
-                            <Plane className="w-8 h-8 text-white" />
+                            <Plane className="w-8 h-8 text-amber-400" />
                             <div>
                                 <p className="text-white font-black text-xl mb-0.5" style={{ fontFamily: 'monospace' }}>LA TRIP</p>
-                                <p className="text-white/80 text-xs font-mono">YES AND MAYBE • Dec 2024</p>
+                                <p className="text-gray-600 text-xs font-mono">YES AND MAYBE • Dec 2024</p>
                             </div>
                         </div>
-                        <div className="bg-black/40 backdrop-blur-sm border border-white/20 rounded-lg p-3 mb-2">
-                            <p className="text-white text-xs font-mono">✓ Schedule • Checklist • Budget</p>
+                        <div className="bg-black border border-amber-500/30 rounded-lg p-3 mb-2">
+                            <p className="text-gray-400 text-xs font-mono">✓ Schedule • Checklist • Budget</p>
                         </div>
-                        <div className="flex items-center gap-2 text-white/70 text-xs font-mono">
+                        <div className="flex items-center gap-2 text-gray-600 text-xs font-mono">
                             <p>Producers • Gigs • LA Contacts</p>
                         </div>
                     </div>
@@ -182,20 +210,19 @@ function ScottManagerInner() {
 
             {/* AI51 CHAT - THE STAR */}
             <Link to={createPageUrl('ScottAI51')} className="block mb-6">
-                <div className="bg-gradient-to-br from-cyan-500 via-purple-600 to-green-500 p-6 rounded-xl border-4 border-black relative overflow-hidden" style={{ boxShadow: '0 8px 40px rgba(6, 182, 212, 0.4)' }}>
-                    <div className="absolute inset-0 bg-black/20"></div>
+                <div className="bg-black p-6 rounded-xl border-4 border-amber-500 relative overflow-hidden" style={{ boxShadow: '0 8px 40px rgba(245, 158, 11, 0.4)' }}>
                     <div className="relative z-10">
                         <div className="flex items-center gap-3 mb-3">
-                            <Brain className="w-8 h-8 text-white animate-pulse" />
+                            <Brain className="w-8 h-8 text-amber-400 animate-pulse" />
                             <div>
                                 <p className="text-white font-black text-xl mb-0.5" style={{ fontFamily: 'monospace' }}>AI51</p>
-                                <p className="text-white/80 text-xs font-mono">Your right hand</p>
+                                <p className="text-gray-600 text-xs font-mono">Your right hand</p>
                             </div>
                         </div>
-                        <div className="bg-black/40 backdrop-blur-sm border border-white/20 rounded-lg p-4 mb-3">
-                            <p className="text-white text-sm font-mono">"What's happening Scott?"</p>
+                        <div className="bg-black border border-amber-500/30 rounded-lg p-4 mb-3">
+                            <p className="text-gray-400 text-sm font-mono">"What's happening Scott?"</p>
                         </div>
-                        <div className="flex items-center gap-2 text-white/70 text-xs font-mono">
+                        <div className="flex items-center gap-2 text-gray-600 text-xs font-mono">
                             <p>→ Talk • Photo • Upload</p>
                         </div>
                     </div>
@@ -204,29 +231,29 @@ function ScottManagerInner() {
 
 
 
-            {/* WHAT'S NEXT - ADHD FRIENDLY */}
+            {/* WHAT'S NEXT - TOP SO YOU SEE ACTIVITY */}
             <div className="mb-6">
-                <div className="bg-gradient-to-r from-purple-600 to-pink-600 p-4 rounded-xl mb-3 border-2 border-purple-400">
+                <div className="bg-black p-4 rounded-xl mb-3 border-2 border-amber-500">
                     <p className="text-white font-black text-sm font-mono mb-2">⚡ WHAT'S NEXT</p>
                     {urgentTasks.length > 0 ? (
-                        <Link to={createPageUrl('ScottCalendar')} className="block bg-black/40 backdrop-blur-sm border border-white/20 rounded p-3">
+                        <Link to={createPageUrl('ScottCalendar')} className="block bg-black border border-red-500/50 rounded p-3">
                             <p className="text-red-400 font-bold text-xs font-mono">🔥 {urgentTasks.length} URGENT TASK{urgentTasks.length > 1 ? 'S' : ''}</p>
-                            <p className="text-white/80 text-xs font-mono mt-1">Tap to handle →</p>
+                            <p className="text-gray-600 text-xs font-mono mt-1">Tap to handle →</p>
                         </Link>
                     ) : upcomingEvents.length > 0 ? (
-                        <Link to={createPageUrl('ScottCalendar')} className="block bg-black/40 backdrop-blur-sm border border-white/20 rounded p-3">
-                            <p className="text-cyan-400 font-bold text-xs font-mono">📅 {upcomingEvents.length} UPCOMING EVENT{upcomingEvents.length > 1 ? 'S' : ''}</p>
-                            <p className="text-white/80 text-xs font-mono mt-1">Tap to prep →</p>
+                        <Link to={createPageUrl('ScottCalendar')} className="block bg-black border border-amber-500/50 rounded p-3">
+                            <p className="text-amber-400 font-bold text-xs font-mono">📅 {upcomingEvents.length} UPCOMING EVENT{upcomingEvents.length > 1 ? 'S' : ''}</p>
+                            <p className="text-gray-600 text-xs font-mono mt-1">Tap to prep →</p>
                         </Link>
                     ) : unpaidInvoices.length > 0 ? (
-                        <Link to={createPageUrl('ScottInvoices')} className="block bg-black/40 backdrop-blur-sm border border-white/20 rounded p-3">
+                        <Link to={createPageUrl('ScottInvoices')} className="block bg-black border border-amber-500/50 rounded p-3">
                             <p className="text-amber-400 font-bold text-xs font-mono">💰 {unpaidInvoices.length} UNPAID INVOICE{unpaidInvoices.length > 1 ? 'S' : ''}</p>
-                            <p className="text-white/80 text-xs font-mono mt-1">Tap to chase →</p>
+                            <p className="text-gray-600 text-xs font-mono mt-1">Tap to chase →</p>
                         </Link>
                     ) : (
-                        <div className="bg-black/40 backdrop-blur-sm border border-white/20 rounded p-3">
+                        <div className="bg-black border border-green-500/50 rounded p-3">
                             <p className="text-green-400 font-bold text-xs font-mono">✓ ALL CLEAR</p>
-                            <p className="text-white/80 text-xs font-mono mt-1">Nothing urgent</p>
+                            <p className="text-gray-600 text-xs font-mono mt-1">Nothing urgent</p>
                         </div>
                     )}
                 </div>
@@ -395,39 +422,39 @@ function ScottManagerInner() {
             {/* GIG OFFERS - INLINE SMART FEED */}
             <ScottGigOffersFeed />
 
-            {/* TOOLS - COLOR CODED FOR ADHD */}
+            {/* TOOLS - SIMPLE AMBER */}
             <details className="mb-6">
                 <summary className="cursor-pointer">
                     <h2 className="text-xs text-gray-600 font-bold mb-3 tracking-wider inline" style={{ fontFamily: 'monospace' }}>TOOLS ▼</h2>
                 </summary>
                 <div className="grid grid-cols-3 gap-2 mt-3">
-                    <Link to={createPageUrl('ScottInvoices')} className="bg-gradient-to-br from-green-900/40 to-green-900/20 border-2 border-green-500/50 rounded-lg p-3 text-center hover:border-green-500 transition-all">
-                        <DollarSign className="w-5 h-5 text-green-400 mx-auto mb-1" />
-                        <p className="text-[9px] text-green-400 font-bold" style={{ fontFamily: 'monospace' }}>INVOICES</p>
+                    <Link to={createPageUrl('ScottInvoices')} className="bg-black border-2 border-amber-500/50 hover:border-amber-500 rounded-lg p-3 text-center transition-all">
+                        <DollarSign className="w-5 h-5 text-amber-400 mx-auto mb-1" />
+                        <p className="text-[9px] text-gray-600 font-bold" style={{ fontFamily: 'monospace' }}>INVOICES</p>
                     </Link>
-                    <Link to={createPageUrl('ScottExpenses')} className="bg-gradient-to-br from-red-900/40 to-red-900/20 border-2 border-red-500/50 rounded-lg p-3 text-center hover:border-red-500 transition-all">
-                        <FileText className="w-5 h-5 text-red-400 mx-auto mb-1" />
-                        <p className="text-[9px] text-red-400 font-bold" style={{ fontFamily: 'monospace' }}>EXPENSES</p>
+                    <Link to={createPageUrl('ScottExpenses')} className="bg-black border-2 border-amber-500/50 hover:border-amber-500 rounded-lg p-3 text-center transition-all">
+                        <FileText className="w-5 h-5 text-amber-400 mx-auto mb-1" />
+                        <p className="text-[9px] text-gray-600 font-bold" style={{ fontFamily: 'monospace' }}>EXPENSES</p>
                     </Link>
-                    <Link to={createPageUrl('ScottPublishing')} className="bg-gradient-to-br from-purple-900/40 to-purple-900/20 border-2 border-purple-500/50 rounded-lg p-3 text-center hover:border-purple-500 transition-all">
-                        <Music className="w-5 h-5 text-purple-400 mx-auto mb-1" />
-                        <p className="text-[9px] text-purple-400 font-bold" style={{ fontFamily: 'monospace' }}>PUBLISH</p>
+                    <Link to={createPageUrl('ScottPublishing')} className="bg-black border-2 border-amber-500/50 hover:border-amber-500 rounded-lg p-3 text-center transition-all">
+                        <Music className="w-5 h-5 text-amber-400 mx-auto mb-1" />
+                        <p className="text-[9px] text-gray-600 font-bold" style={{ fontFamily: 'monospace' }}>PUBLISH</p>
                     </Link>
-                    <Link to={createPageUrl('ScottGigPacks')} className="bg-gradient-to-br from-cyan-900/40 to-cyan-900/20 border-2 border-cyan-500/50 rounded-lg p-3 text-center hover:border-cyan-500 transition-all">
-                        <FileText className="w-5 h-5 text-cyan-400 mx-auto mb-1" />
-                        <p className="text-[9px] text-cyan-400 font-bold" style={{ fontFamily: 'monospace' }}>GIG PACKS</p>
+                    <Link to={createPageUrl('ScottGigPacks')} className="bg-black border-2 border-amber-500/50 hover:border-amber-500 rounded-lg p-3 text-center transition-all">
+                        <FileText className="w-5 h-5 text-amber-400 mx-auto mb-1" />
+                        <p className="text-[9px] text-gray-600 font-bold" style={{ fontFamily: 'monospace' }}>GIG PACKS</p>
                     </Link>
-                    <Link to={createPageUrl('ScottVisas')} className="bg-gradient-to-br from-blue-900/40 to-blue-900/20 border-2 border-blue-500/50 rounded-lg p-3 text-center hover:border-blue-500 transition-all">
-                        <Globe className="w-5 h-5 text-blue-400 mx-auto mb-1" />
-                        <p className="text-[9px] text-blue-400 font-bold" style={{ fontFamily: 'monospace' }}>VISAS</p>
+                    <Link to={createPageUrl('ScottVisas')} className="bg-black border-2 border-amber-500/50 hover:border-amber-500 rounded-lg p-3 text-center transition-all">
+                        <Globe className="w-5 h-5 text-amber-400 mx-auto mb-1" />
+                        <p className="text-[9px] text-gray-600 font-bold" style={{ fontFamily: 'monospace' }}>VISAS</p>
                     </Link>
-                    <Link to={createPageUrl('ScottMerch')} className="bg-gradient-to-br from-amber-900/40 to-amber-900/20 border-2 border-amber-500/50 rounded-lg p-3 text-center hover:border-amber-500 transition-all">
+                    <Link to={createPageUrl('ScottMerch')} className="bg-black border-2 border-amber-500/50 hover:border-amber-500 rounded-lg p-3 text-center transition-all">
                         <Briefcase className="w-5 h-5 text-amber-400 mx-auto mb-1" />
-                        <p className="text-[9px] text-amber-400 font-bold" style={{ fontFamily: 'monospace' }}>MERCH</p>
+                        <p className="text-[9px] text-gray-600 font-bold" style={{ fontFamily: 'monospace' }}>MERCH</p>
                     </Link>
-                    <Link to={createPageUrl('ScottMedia')} className="bg-gradient-to-br from-pink-900/40 to-pink-900/20 border-2 border-pink-500/50 rounded-lg p-3 text-center hover:border-pink-500 transition-all">
-                        <Camera className="w-5 h-5 text-pink-400 mx-auto mb-1" />
-                        <p className="text-[9px] text-pink-400 font-bold" style={{ fontFamily: 'monospace' }}>MEDIA</p>
+                    <Link to={createPageUrl('ScottMedia')} className="bg-black border-2 border-amber-500/50 hover:border-amber-500 rounded-lg p-3 text-center transition-all">
+                        <Camera className="w-5 h-5 text-amber-400 mx-auto mb-1" />
+                        <p className="text-[9px] text-gray-600 font-bold" style={{ fontFamily: 'monospace' }}>MEDIA</p>
                     </Link>
                 </div>
             </details>
