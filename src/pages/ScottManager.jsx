@@ -227,28 +227,7 @@ function ScottManagerInner() {
                 </div>
             </Link>
 
-            {/* QUICK CAPTURE BUTTONS */}
-            <div className="grid grid-cols-3 gap-2 mb-6">
-                <button 
-                    onClick={() => document.querySelector('input[type="file"][accept*="image"]')?.click()}
-                    className="bg-black border-2 border-amber-500 hover:border-amber-400 p-4 rounded-lg transition-all"
-                >
-                    <Camera className="w-6 h-6 text-amber-400 mx-auto mb-1" />
-                    <p className="text-xs text-amber-400 font-bold font-mono">PHOTO</p>
-                </button>
-                <button 
-                    className="bg-black border-2 border-purple-500 hover:border-purple-400 p-4 rounded-lg transition-all"
-                >
-                    <svg className="w-6 h-6 text-purple-400 mx-auto mb-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M12 1v11m0 0l4-4m-4 4L8 8"/><rect x="6" y="12" width="12" height="10" rx="2"/></svg>
-                    <p className="text-xs text-purple-400 font-bold font-mono">VOICE</p>
-                </button>
-                <Link to={createPageUrl('ScottAI51')} className="block">
-                    <div className="bg-black border-2 border-cyan-500 hover:border-cyan-400 p-4 rounded-lg transition-all">
-                        <svg className="w-6 h-6 text-cyan-400 mx-auto mb-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M4 7h16M4 12h16m-7 5h7"/></svg>
-                        <p className="text-xs text-cyan-400 font-bold font-mono">TYPE</p>
-                    </div>
-                </Link>
-            </div>
+
 
             {/* SMART FEED - AI HANDLED STUFF */}
             <div className="mb-6">
