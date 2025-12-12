@@ -4,6 +4,8 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { base44 } from '@/api/base44Client';
 import { useMutation } from '@tanstack/react-query';
+import ScottContactMatcher from './ScottContactMatcher';
+import ScottClearanceEmailDraft from './ScottClearanceEmailDraft';
 
 /**
  * SAMPLE ANALYZER
@@ -15,7 +17,11 @@ export default function ScottSampleAnalyzer() {
     const [isOpen, setIsOpen] = useState(false);
     const [songName, setSongName] = useState('');
     const [artistName, setArtistName] = useState('');
+    const [yourArtist, setYourArtist] = useState('');
+    const [yourTrack, setYourTrack] = useState('');
     const [result, setResult] = useState(null);
+    const [labelName, setLabelName] = useState('');
+    const [publisherName, setPublisherName] = useState('');
 
     const analyzeMutation = useMutation({
         mutationFn: async () => {
@@ -46,6 +52,11 @@ Use real industry knowledge. Format as clear sections.`;
         },
         onSuccess: (data) => {
             setResult(data);
+            // Extract label/publisher names from result for contact matching
+            const labelMatch = data.match(/label[:\s]+([^\n]+)/i);
+            const publisherMatch = data.match(/publisher[:\s]+([^\n]+)/i);
+            if (labelMatch) setLabelName(labelMatch[1].trim());
+            if (publisherMatch) setPublisherName(publisherMatch[1].trim());
         }
     });
 
@@ -87,8 +98,30 @@ Use real industry knowledge. Format as clear sections.`;
 
                             {/* INPUT FORM */}
                             <div className="space-y-3 mb-6">
+                                <div className="grid grid-cols-2 gap-3">
+                                    <div>
+                                        <label className="text-gray-400 text-xs font-mono mb-1 block">YOUR ARTIST</label>
+                                        <Input
+                                            value={yourArtist}
+                                            onChange={(e) => setYourArtist(e.target.value)}
+                                            placeholder="e.g., YES AND MAYBE"
+                                            className="bg-black border-gray-800 text-white font-mono"
+                                            disabled={analyzeMutation.isPending}
+                                        />
+                                    </div>
+                                    <div>
+                                        <label className="text-gray-400 text-xs font-mono mb-1 block">YOUR TRACK</label>
+                                        <Input
+                                            value={yourTrack}
+                                            onChange={(e) => setYourTrack(e.target.value)}
+                                            placeholder="e.g., New Single"
+                                            className="bg-black border-gray-800 text-white font-mono"
+                                            disabled={analyzeMutation.isPending}
+                                        />
+                                    </div>
+                                </div>
                                 <div>
-                                    <label className="text-gray-400 text-xs font-mono mb-1 block">SONG NAME</label>
+                                    <label className="text-gray-400 text-xs font-mono mb-1 block">SAMPLE SONG</label>
                                     <Input
                                         value={songName}
                                         onChange={(e) => setSongName(e.target.value)}
@@ -98,7 +131,7 @@ Use real industry knowledge. Format as clear sections.`;
                                     />
                                 </div>
                                 <div>
-                                    <label className="text-gray-400 text-xs font-mono mb-1 block">ARTIST NAME</label>
+                                    <label className="text-gray-400 text-xs font-mono mb-1 block">SAMPLE ARTIST</label>
                                     <Input
                                         value={artistName}
                                         onChange={(e) => setArtistName(e.target.value)}
@@ -128,51 +161,36 @@ Use real industry knowledge. Format as clear sections.`;
 
                             {/* RESULTS */}
                             {result && (
-                                <div className="bg-gray-900 border border-cyan-500/30 rounded-lg p-6">
-                                    <div className="flex items-center gap-2 mb-4">
-                                        <CheckCircle className="w-5 h-5 text-green-400" />
-                                        <p className="text-green-400 font-bold font-mono">ANALYSIS COMPLETE</p>
-                                    </div>
-                                    
-                                    <div className="prose prose-invert prose-sm max-w-none">
-                                        <div className="text-white text-sm font-mono whitespace-pre-wrap leading-relaxed">
-                                            {result}
-                                        </div>
-                                    </div>
+                                <div className="space-y-4">
+                                    {/* CHECK EXISTING CONTACTS FIRST */}
+                                    <ScottContactMatcher 
+                                        labelName={labelName} 
+                                        publisherName={publisherName} 
+                                    />
 
-                                    {/* ACTION BUTTONS */}
-                                    <div className="mt-6 pt-6 border-t border-gray-800">
-                                        <p className="text-gray-400 text-xs font-mono mb-3">NEXT STEPS:</p>
-                                        <div className="space-y-2">
-                                            <button className="w-full bg-black border border-cyan-500/50 hover:border-cyan-500 rounded p-3 text-left transition-all">
-                                                <div className="flex items-center gap-2">
-                                                    <Mail className="w-4 h-4 text-cyan-400" />
-                                                    <span className="text-white text-xs font-mono font-bold">Draft Professional Email</span>
-                                                </div>
-                                                <p className="text-gray-500 text-[10px] font-mono mt-1">AI will write initial contact email</p>
-                                            </button>
-                                            
-                                            <button 
-                                                onClick={() => {
-                                                    // Save to ScottSampleClearance entity
-                                                    const sampleData = {
-                                                        track_id: '', // Link later
-                                                        sampled_track: songName,
-                                                        sampled_artist: artistName,
-                                                        status: 'pending',
-                                                        notes: result
-                                                    };
-                                                    // Could save here but keeping it simple for now
-                                                    alert('Add this to a track in Publishing section to track clearance');
-                                                }}
-                                                className="w-full bg-black border border-cyan-500/50 hover:border-cyan-500 rounded p-3 text-left transition-all"
-                                            >
-                                                <div className="flex items-center gap-2">
-                                                    <CheckCircle className="w-4 h-4 text-cyan-400" />
-                                                    <span className="text-white text-xs font-mono font-bold">Save to Clearance Tracker</span>
-                                                </div>
-                                                <p className="text-gray-500 text-[10px] font-mono mt-1">Track this in Publishing section</p>
-                                            </button>
+                                    <div className="bg-gray-900 border border-cyan-500/30 rounded-lg p-6">
+                                        <div className="flex items-center gap-2 mb-4">
+                                            <CheckCircle className="w-5 h-5 text-green-400" />
+                                            <p className="text-green-400 font-bold font-mono">ANALYSIS COMPLETE</p>
+                                        </div>
+                                        
+                                        <div className="prose prose-invert prose-sm max-w-none">
+                                            <div className="text-white text-sm font-mono whitespace-pre-wrap leading-relaxed">
+                                                {result}
+                                            </div>
+                                        </div>
+
+                                        {/* EMAIL DRAFTER */}
+                                        <div className="mt-6 pt-6 border-t border-gray-800">
+                                            <p className="text-gray-400 text-xs font-mono mb-3">DRAFT CLEARANCE EMAIL:</p>
+                                            <ScottClearanceEmailDraft
+                                                sampleSong={songName}
+                                                sampleArtist={artistName}
+                                                yourArtist={yourArtist}
+                                                trackTitle={yourTrack}
+                                                labelContact={labelName}
+                                                publisherContact={publisherName}
+                                            />
                                         </div>
                                     </div>
                                 </div>
