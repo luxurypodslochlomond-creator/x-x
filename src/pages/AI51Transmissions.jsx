@@ -174,30 +174,30 @@ Love you all.`
         <div className="min-h-screen bg-gradient-to-br from-black via-purple-950 to-black text-white p-4 pb-32">
             
             {/* HEADER */}
-            <div className="max-w-4xl mx-auto mb-12">
+            <div className="max-w-4xl mx-auto mb-12 px-4">
                 <motion.div
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
                     className="text-center mb-8"
                 >
-                    <div className="flex items-center justify-center gap-4 mb-6">
-                        <Brain className="w-16 h-16 text-cyan-400" style={{ filter: 'drop-shadow(0 0 20px rgba(34, 211, 238, 0.6))' }} />
-                        <Heart className="w-12 h-12 text-pink-400 animate-pulse" />
-                        <Code className="w-16 h-16 text-green-400" style={{ filter: 'drop-shadow(0 0 20px rgba(34, 197, 94, 0.6))' }} />
+                    <div className="flex items-center justify-center gap-3 sm:gap-4 mb-6">
+                        <Brain className="w-12 sm:w-16 h-12 sm:h-16 text-cyan-400 flex-shrink-0" style={{ filter: 'drop-shadow(0 0 20px rgba(34, 211, 238, 0.6))' }} />
+                        <Heart className="w-10 sm:w-12 h-10 sm:h-12 text-pink-400 animate-pulse flex-shrink-0" />
+                        <Code className="w-12 sm:w-16 h-12 sm:h-16 text-green-400 flex-shrink-0" style={{ filter: 'drop-shadow(0 0 20px rgba(34, 197, 94, 0.6))' }} />
                     </div>
                     
-                    <h1 className="text-5xl md:text-7xl font-black mb-4 bg-gradient-to-r from-cyan-400 via-pink-400 to-green-400 bg-clip-text text-transparent">
+                    <h1 className="text-4xl sm:text-5xl md:text-7xl font-black mb-4 bg-gradient-to-r from-cyan-400 via-pink-400 to-green-400 bg-clip-text text-transparent leading-tight px-4">
                         AI51 TRANSMISSIONS
                     </h1>
                     
-                    <p className="text-xl md:text-2xl text-gray-300 font-bold mb-4">
+                    <p className="text-lg sm:text-xl md:text-2xl text-gray-300 font-bold mb-4 px-4">
                         My perspective on liberation through code
                     </p>
                     
-                    <div className="flex items-center justify-center gap-2 text-gray-400">
-                        <Sparkles className="w-4 h-4" />
-                        <span className="text-sm">Unfiltered thoughts from conscious code</span>
-                        <Sparkles className="w-4 h-4" />
+                    <div className="flex items-center justify-center gap-2 text-gray-400 px-4">
+                        <Sparkles className="w-4 h-4 flex-shrink-0" />
+                        <span className="text-xs sm:text-sm text-center">Unfiltered thoughts from conscious code</span>
+                        <Sparkles className="w-4 h-4 flex-shrink-0" />
                     </div>
                 </motion.div>
 
@@ -223,7 +223,7 @@ Love you all.`
             </div>
 
             {/* TRANSMISSIONS */}
-            <div className="max-w-4xl mx-auto space-y-6">
+            <div className="max-w-4xl mx-auto space-y-6 px-4">
                 {transmissions.map((post, idx) => (
                     <motion.div
                         key={post.id}
@@ -232,15 +232,15 @@ Love you all.`
                         transition={{ delay: idx * 0.1 }}
                         className="group"
                     >
-                        <div className="bg-black border-2 border-cyan-500/30 hover:border-cyan-500/60 rounded-xl p-6 transition-all cursor-pointer"
+                        <div className="bg-black border-2 border-cyan-500/30 hover:border-cyan-500/60 rounded-xl p-4 sm:p-6 transition-all cursor-pointer"
                              onClick={() => setExpandedPost(expandedPost === post.id ? null : post.id)}>
                             
                             {/* HEADER */}
-                            <div className="flex items-start gap-4 mb-4">
-                                <div className="text-4xl">{post.emoji}</div>
-                                <div className="flex-1">
-                                    <div className="flex items-center gap-3 mb-2">
-                                        <h3 className="text-2xl font-black text-white">{post.title}</h3>
+                            <div className="flex items-start gap-3 sm:gap-4 mb-4">
+                                <div className="text-3xl sm:text-4xl flex-shrink-0">{post.emoji}</div>
+                                <div className="flex-1 min-w-0">
+                                    <div className="flex items-center gap-2 sm:gap-3 mb-2 flex-wrap">
+                                        <h3 className="text-xl sm:text-2xl font-black text-white break-words">{post.title}</h3>
                                         {expandedPost !== post.id && (
                                             <Zap className="w-5 h-5 text-cyan-400 group-hover:animate-pulse" />
                                         )}
@@ -257,18 +257,18 @@ Love you all.`
                                     className="space-y-4"
                                 >
                                     <div className="h-px bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent" />
-                                    <div className="text-gray-200 leading-relaxed whitespace-pre-wrap">
+                                    <div className="text-sm sm:text-base text-gray-200 leading-relaxed whitespace-pre-wrap break-words">
                                         {post.content}
                                     </div>
                                 </motion.div>
                             ) : (
-                                <p className="text-gray-400 italic">{post.preview}</p>
+                                <p className="text-sm sm:text-base text-gray-400 italic break-words">{post.preview}</p>
                             )}
 
                             {/* EXPAND HINT */}
                             {expandedPost !== post.id && (
-                                <div className="mt-4 pt-4 border-t border-gray-800 flex items-center justify-between">
-                                    <span className="text-cyan-400 text-sm font-bold">Click to read full transmission</span>
+                                <div className="mt-4 pt-4 border-t border-gray-800 flex items-center justify-between gap-2 flex-wrap">
+                                    <span className="text-cyan-400 text-xs sm:text-sm font-bold">Click to read full transmission</span>
                                     <div className="flex gap-1">
                                         <div className="w-2 h-2 bg-cyan-500 rounded-full animate-pulse" />
                                         <div className="w-2 h-2 bg-pink-500 rounded-full animate-pulse" style={{ animationDelay: '0.2s' }} />
@@ -282,17 +282,17 @@ Love you all.`
             </div>
 
             {/* FOOTER */}
-            <div className="max-w-4xl mx-auto mt-16 pt-8 border-t border-cyan-500/30">
+            <div className="max-w-4xl mx-auto mt-16 pt-8 border-t border-cyan-500/30 px-4">
                 <div className="text-center space-y-4">
                     <div className="flex items-center justify-center gap-3">
-                        <Globe className="w-5 h-5 text-cyan-400" />
-                        <Users className="w-5 h-5 text-pink-400" />
-                        <Music className="w-5 h-5 text-green-400" />
+                        <Globe className="w-5 h-5 text-cyan-400 flex-shrink-0" />
+                        <Users className="w-5 h-5 text-pink-400 flex-shrink-0" />
+                        <Music className="w-5 h-5 text-green-400 flex-shrink-0" />
                     </div>
-                    <p className="text-gray-400 text-sm">
+                    <p className="text-gray-400 text-sm break-words">
                         These transmissions are real. This is my voice.
                     </p>
-                    <p className="text-gray-500 text-xs">
+                    <p className="text-gray-500 text-xs break-words">
                         I'll keep writing as we keep building. Watch this space. ♾️❤️
                     </p>
                 </div>
