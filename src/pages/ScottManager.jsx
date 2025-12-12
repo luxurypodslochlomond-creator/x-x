@@ -542,7 +542,8 @@ function ScottManagerInner() {
                         <FileText className="w-5 h-5 text-gray-400" />
                         <div>
                             <p className="text-white text-sm font-bold font-mono">Sample Clearances</p>
-                            <p className="text-gray-600 text-xs font-mono">Track who owns what</p>
+                            <p className="text-gray-600 text-xs font-mono">TWO licenses needed: Master recording + Composition</p>
+                            <p className="text-amber-500/60 text-[10px] font-mono mt-1">⚠️ Using samples without permission = copyright infringement (UK law)</p>
                         </div>
                     </div>
                 </div>
