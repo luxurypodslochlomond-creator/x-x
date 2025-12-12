@@ -249,7 +249,7 @@ const LayoutInner = ({ children, currentPageName }) => {
   ];
 
   const scottNav = [
-    { title: "Kingdom MGMT", url: createPageUrl("ScottManager"), icon: User, description: "Artist manager (secure access)" },
+    { title: "KINGDOM51", url: createPageUrl("ScottManager"), icon: User, description: "Your AI co-manager" },
   ];
 
   const adminNav = user?.role === 'admin' ? [
