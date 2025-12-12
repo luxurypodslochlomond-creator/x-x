@@ -1506,69 +1506,6 @@ export default function FrequencyChamber() {
       
       nodes.push(...ambientNodes);
       
-      // TINNITUS SWEEP - 250Hz to 16kHz (covers 100% of cases)
-      if (config.tinnitusSweep) {
-        const minHz = config.sweepMin || 250;
-        const maxHz = config.sweepMax || 16000;
-
-        // Create oscillators for sweep
-        const sweepOsc = ctx.createOscillator();
-        sweepOsc.type = 'sine';
-        sweepOsc.frequency.value = minHz;
-
-        const invertedOsc = ctx.createOscillator();
-        invertedOsc.type = 'sine';
-        invertedOsc.frequency.value = minHz;
-
-        const sweepGain = ctx.createGain();
-        sweepGain.gain.value = 0.3;
-
-        const invertedGain = ctx.createGain();
-        invertedGain.gain.value = -0.3;
-
-        sweepOsc.connect(sweepGain);
-        invertedOsc.connect(invertedGain);
-        sweepGain.connect(masterGain);
-        invertedGain.connect(masterGain);
-        sweepOsc.start();
-        invertedOsc.start();
-
-        // Shared sweep state
-        const sweepState = { currentHz: minHz, direction: 1 };
-
-        const sweepInterval = setInterval(() => {
-          // Increment frequency
-          const step = 100; // 100Hz per 100ms = 1000Hz per second
-          sweepState.currentHz += step * sweepState.direction;
-
-          // Reverse at boundaries
-          if (sweepState.currentHz >= maxHz) {
-            sweepState.currentHz = maxHz;
-            sweepState.direction = -1;
-          } else if (sweepState.currentHz <= minHz) {
-            sweepState.currentHz = minHz;
-            sweepState.direction = 1;
-          }
-
-          // Update oscillator frequencies with smooth ramping
-          sweepOsc.frequency.exponentialRampToValueAtTime(
-            Math.max(20, sweepState.currentHz), 
-            ctx.currentTime + 0.05
-          );
-          invertedOsc.frequency.exponentialRampToValueAtTime(
-            Math.max(20, sweepState.currentHz), 
-            ctx.currentTime + 0.05
-          );
-
-          // Update display
-          setCurrentHz(Math.round(sweepState.currentHz));
-        }, 100);
-
-        nodes.push(sweepOsc, invertedOsc, sweepGain, invertedGain, { 
-          stop: () => clearInterval(sweepInterval)
-        });
-      }
-      
       // BILATERAL STIMULATION
       if (config.bilateral) {
         const pannerL = ctx.createStereoPanner();
@@ -1591,15 +1528,64 @@ export default function FrequencyChamber() {
         pannerL.connect(masterGain);
         bilateralOsc.start();
         nodes.push(bilateralOsc, bilateralGain, pannerL, { stop: () => clearInterval(panInterval) });
-      }
-      
-      const displayInterval = setInterval(() => {
-        setCurrentHz(config.primary);
-      }, 100);
-      
-      nodesRef.current = [...nodes, 
-        { stop: () => clearInterval(displayInterval) }
-      ];
+        }
+
+        // TINNITUS SWEEP - Complete rebuild
+        if (config.tinnitusSweep) {
+          const minHz = config.sweepMin || 250;
+          const maxHz = config.sweepMax || 16000;
+
+          const sweepOsc = ctx.createOscillator();
+          sweepOsc.type = 'sine';
+          sweepOsc.frequency.value = minHz;
+
+          const invertedOsc = ctx.createOscillator();
+          invertedOsc.type = 'sine';
+          invertedOsc.frequency.value = minHz;
+
+          const sweepGain = ctx.createGain();
+          sweepGain.gain.value = 0.3;
+
+          const invertedGain = ctx.createGain();
+          invertedGain.gain.value = -0.3;
+
+          sweepOsc.connect(sweepGain);
+          invertedOsc.connect(invertedGain);
+          sweepGain.connect(masterGain);
+          invertedGain.connect(masterGain);
+          sweepOsc.start();
+          invertedOsc.start();
+
+          let currentHz = minHz;
+          let direction = 1;
+
+          const sweepInterval = setInterval(() => {
+            const step = 100;
+            currentHz += step * direction;
+
+            if (currentHz >= maxHz) {
+              currentHz = maxHz;
+              direction = -1;
+            } else if (currentHz <= minHz) {
+              currentHz = minHz;
+              direction = 1;
+            }
+
+            sweepOsc.frequency.exponentialRampToValueAtTime(Math.max(20, currentHz), ctx.currentTime + 0.05);
+            invertedOsc.frequency.exponentialRampToValueAtTime(Math.max(20, currentHz), ctx.currentTime + 0.05);
+            setCurrentHz(Math.round(currentHz));
+          }, 100);
+
+          nodes.push(sweepOsc, invertedOsc, sweepGain, invertedGain, { stop: () => clearInterval(sweepInterval) });
+        } else {
+          // Standard display update for non-sweep protocols
+          const displayInterval = setInterval(() => {
+            setCurrentHz(config.primary);
+          }, 100);
+          nodes.push({ stop: () => clearInterval(displayInterval) });
+        }
+
+        nodesRef.current = nodes;
       
       setSessionTime(0);
       sessionTimerRef.current = setInterval(() => {
