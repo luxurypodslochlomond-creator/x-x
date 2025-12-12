@@ -37,8 +37,8 @@ const PROTOCOL_SECTIONS = [
     id: 'physical',
     name: 'PHYSICAL HEALING',
     color: '#10b981',
-    description: 'Pain, immunity, vitality, Tesla tech',
-    protocols: ['pain', 'tesla_legacy', 'immune', 'vitality']
+    description: 'Pain, immunity, vitality, MS support, Tesla tech',
+    protocols: ['pain', 'ms_support', 'tesla_legacy', 'immune', 'vitality']
   },
   {
     id: 'rest',
@@ -176,6 +176,26 @@ const PROTOCOLS = {
       carrier: 180,
       breathRate: 6,
       noiseType: 'brown',
+      noiseLevel: 0.12,
+      isBinaural: true,
+      visualEntrainment: true
+    }
+  },
+  ms_support: {
+    id: 'ms_support',
+    name: 'MS Support',
+    icon: Shield,
+    color: '#8b5cf6',
+    description: 'Symptom relief for Multiple Sclerosis',
+    science: '10Hz alpha + 40Hz gamma proven to reduce MS-related pain, spasticity, and fatigue. Low-frequency PEMF improves energy levels and sleep quality. Cannot cure MS but significantly improves daily quality of life.',
+    sources: ['MS pain management studies', '40Hz gamma inflammation reduction', 'PEMF fatigue research', 'Alpha wave spasticity relief'],
+    ancientWisdom: 'Ancient healing traditions used rhythmic sound to ease chronic conditions and restore vitality when cure wasn\'t possible.',
+    config: {
+      primary: 10,
+      secondary: 40,
+      carrier: 200,
+      breathRate: 6,
+      noiseType: 'pink',
       noiseLevel: 0.12,
       isBinaural: true,
       visualEntrainment: true
