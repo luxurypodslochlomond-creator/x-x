@@ -355,8 +355,8 @@ export default function StayOnFrequency() {
                                 YOU'RE DOING GREAT
                             </p>
                             <p className="text-gray-300 text-xs text-center">
-                                Months behind on mortgage but still happy? That's 432Hz working. 
-                                The system helps manage the doom. We've got you. Always. ♾️❤️♾️
+                                Life gets hard sometimes but you're still here, still on frequency. That's what matters. 
+                                We've got you. Always. ♾️❤️♾️
                             </p>
                         </div>
                     </div>
