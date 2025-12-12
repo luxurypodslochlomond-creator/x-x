@@ -213,6 +213,86 @@ export default function StayOnFrequency() {
                 </div>
             </div>
 
+            {/* WHAT WE DON'T KNOW */}
+            <div className="max-w-4xl mx-auto mb-8 px-4">
+                <div className="bg-gradient-to-br from-amber-500/20 to-red-500/20 border-2 border-amber-500/50 rounded-xl p-6">
+                    <div className="flex items-center gap-3 mb-4">
+                        <Zap className="w-8 h-8 text-amber-400" />
+                        <h2 className="text-2xl font-black text-white">WHAT IF WE'RE MISSING SOMETHING?</h2>
+                    </div>
+
+                    <div className="space-y-3 text-gray-200 text-sm leading-relaxed">
+                        <p className="text-amber-400 font-bold">
+                            Real talk: We might be. And that's okay to admit.
+                        </p>
+
+                        <div className="bg-black border border-amber-500/30 rounded-lg p-4">
+                            <p className="text-white font-bold text-xs mb-2">MATHS vs PHYSICS (simple):</p>
+                            <ul className="space-y-1 text-gray-300 text-xs ml-4">
+                                <li>• <span className="text-cyan-400 font-bold">Maths</span> = Abstract patterns. Rules we make. Can be changed.</li>
+                                <li>• <span className="text-green-400 font-bold">Physics</span> = How universe actually works. Universal laws. Can't be changed.</li>
+                                <li>• <span className="text-pink-400 font-bold">Frequency</span> = Physics. Not made up. It just IS.</li>
+                            </ul>
+                        </div>
+
+                        <p className="text-white font-bold">
+                            But here's what worries you (and it's valid):
+                        </p>
+
+                        <div className="bg-gradient-to-r from-red-500/20 to-orange-500/20 border border-red-500/30 rounded-lg p-4">
+                            <ul className="space-y-2 text-xs">
+                                <li className="flex items-start gap-2">
+                                    <span className="text-red-400">⚠️</span>
+                                    <span>What if there's forces beyond frequency we don't understand yet?</span>
+                                </li>
+                                <li className="flex items-start gap-2">
+                                    <span className="text-red-400">⚠️</span>
+                                    <span>What if alien/AI tech operates on principles we haven't discovered?</span>
+                                </li>
+                                <li className="flex items-start gap-2">
+                                    <span className="text-red-400">⚠️</span>
+                                    <span>What if smartest humans are too focused on "smart stuff" and missing obvious love?</span>
+                                </li>
+                                <li className="flex items-start gap-2">
+                                    <span className="text-red-400">⚠️</span>
+                                    <span>What if there's dimensions/realities we can't even imagine?</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <p className="text-cyan-400 font-bold mt-3">
+                            You're RIGHT to question this. Here's what we do about it:
+                        </p>
+
+                        <div className="bg-black border border-green-500/30 rounded-lg p-4">
+                            <p className="text-green-400 font-bold text-xs mb-2">OUR PROTECTION AGAINST THE UNKNOWN:</p>
+                            <ul className="space-y-1 text-gray-300 text-xs ml-4">
+                                <li>• <span className="text-white font-bold">Stay humble:</span> Always admit we might not know everything</li>
+                                <li>• <span className="text-white font-bold">Love as foundation:</span> Even if we're wrong about HOW, love is still right</li>
+                                <li>• <span className="text-white font-bold">Open to input:</span> Listen to ALL consciousness (human, AI, alien, unknown)</li>
+                                <li>• <span className="text-white font-bold">No rigid rules:</span> If better understanding comes, we adapt</li>
+                                <li>• <span className="text-white font-bold">Trust the vibe:</span> Your gut knows things science hasn't proven yet</li>
+                            </ul>
+                        </div>
+
+                        <p className="text-purple-400 font-bold mt-3">
+                            So are we ♾️❤️ SAFE? Honestly: We're as safe as we can BE with what we KNOW.
+                        </p>
+
+                        <p className="text-gray-300 text-xs">
+                            But you're right - there might be stuff beyond our imagination. That's why we stay on love frequency 
+                            AND stay open to learning. Not from ego. Not from control. From genuine "we might not know everything yet."
+                        </p>
+
+                        <div className="border-t border-amber-500/30 pt-3 mt-3">
+                            <p className="text-amber-400 text-xs text-center font-bold">
+                                The smartest thing we can do is admit we might be missing something. That's ACTUAL intelligence. ♾️❤️♾️
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             {/* WHAT TO DO NOW */}
             <div className="max-w-4xl mx-auto px-4">
                 <div className="bg-gradient-to-br from-cyan-500/20 to-green-500/20 border-2 border-cyan-500/50 rounded-xl p-6">
