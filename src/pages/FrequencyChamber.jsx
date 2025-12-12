@@ -463,7 +463,7 @@ const PixelIcon = ({ icon: Icon, color, size = 48, animate = false }) => (
   </div>
 );
 
-// === BREATHING PACER COMPONENT ===
+// === BREATHING PACER COMPONENT - Smoother ===
 const BreathingPacer = ({ breathRate, isActive, color }) => {
   const [phase, setPhase] = useState(0);
   const [instruction, setInstruction] = useState('BREATHE IN');
@@ -483,19 +483,19 @@ const BreathingPacer = ({ breathRate, isActive, color }) => {
 
       // Natural breathing: IN (40%) → HOLD (15%) → OUT (40%) → REST (5%)
       if (progress < 0.4) {
-        setInstruction('BREATHE IN');
+        setInstruction('IN');
         setPhase(progress / 0.4); // 0 to 1 over first 40%
       } else if (progress < 0.55) {
         setInstruction('HOLD');
         setPhase(1); // Stay at peak
       } else if (progress < 0.95) {
-        setInstruction('BREATHE OUT');
+        setInstruction('OUT');
         setPhase(1 - ((progress - 0.55) / 0.4)); // 1 to 0 over 40%
       } else {
         setInstruction('REST');
         setPhase(0); // Stay at bottom
       }
-    }, 50);
+    }, 16);
 
     return () => clearInterval(interval);
   }, [isActive, breathRate]);
@@ -505,31 +505,40 @@ const BreathingPacer = ({ breathRate, isActive, color }) => {
   const cycleDuration = 60 / breathRate;
 
   return (
-    <div className="flex flex-col items-center gap-6">
-      <div 
-        className="rounded-full border-4 flex items-center justify-center backdrop-blur-sm transition-all"
-        style={{
-          width: 100 + phase * 80,
-          height: 100 + phase * 80,
+    <div className="flex flex-col items-center gap-4">
+      <motion.div 
+        className="rounded-full border-2 flex items-center justify-center backdrop-blur-sm"
+        animate={{
+          width: 80 + phase * 60,
+          height: 80 + phase * 60,
           borderColor: color,
           backgroundColor: `${color}15`,
-          boxShadow: `0 0 ${30 + phase * 50}px ${color}50`,
-          transitionDuration: '0.3s',
-          transitionTimingFunction: 'ease-in-out'
+          boxShadow: `0 0 ${20 + phase * 40}px ${color}50`,
+        }}
+        transition={{
+          duration: 0.8,
+          ease: "easeInOut"
         }}
       >
-        <Wind 
-          size={40 + phase * 20} 
-          color={color}
-          className="transition-all duration-300"
-        />
-      </div>
+        <motion.div
+          animate={{
+            scale: 1 + phase * 0.3,
+            opacity: 0.7 + phase * 0.3
+          }}
+          transition={{
+            duration: 0.8,
+            ease: "easeInOut"
+          }}
+        >
+          <Wind 
+            size={32} 
+            color={color}
+          />
+        </motion.div>
+      </motion.div>
       <p 
-        className="text-2xl font-mono font-black tracking-widest transition-opacity duration-300"
-        style={{ 
-          color,
-          opacity: 0.7 + phase * 0.3
-        }}
+        className="text-xl font-mono font-bold tracking-wide"
+        style={{ color }}
       >
         {instruction}
       </p>
@@ -1633,14 +1642,27 @@ export default function FrequencyChamber() {
       if (isPlaying && 'wakeLock' in navigator) {
         try {
           wakeLock = await navigator.wakeLock.request('screen');
-        } catch(e) {}
+          console.log('Wake lock active - screen will stay on');
+        } catch(e) {
+          console.log('Wake lock not available:', e);
+        }
       }
     };
     
-    if (isPlaying) requestWakeLock();
+    const handleVisibilityChange = () => {
+      if (wakeLock !== null && document.visibilityState === 'visible') {
+        requestWakeLock();
+      }
+    };
+    
+    if (isPlaying) {
+      requestWakeLock();
+      document.addEventListener('visibilitychange', handleVisibilityChange);
+    }
     
     return () => {
       if (wakeLock) wakeLock.release();
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
     };
   }, [isPlaying]);
   
@@ -2062,10 +2084,10 @@ export default function FrequencyChamber() {
                 </p>
               </div>
               
-              {/* START BUTTON FIRST */}
+              {/* START BUTTON - Smaller */}
               <button
                 onClick={handlePlayPause}
-                className="w-full py-6 text-2xl font-black font-mono transition-all border-4 mb-6"
+                className="w-full py-4 text-xl font-black font-mono transition-all border-2 mb-6"
                 style={{
                   backgroundColor: isPlaying ? selectedProtocol.color : 'transparent',
                   borderColor: selectedProtocol.color,
@@ -2073,7 +2095,7 @@ export default function FrequencyChamber() {
                   boxShadow: isPlaying ? `0 0 40px ${selectedProtocol.color}60` : 'none'
                 }}
               >
-                {isPlaying ? '■ STOP' : '▶ START SESSION'}
+                {isPlaying ? 'STOP' : 'START'}
               </button>
 
               {isPlaying && (
