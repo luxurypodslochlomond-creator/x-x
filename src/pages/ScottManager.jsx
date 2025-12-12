@@ -229,24 +229,22 @@ function ScottManagerInner() {
                 </div>
             </div>
 
-            {/* QUICK STATS - COMPACT */}
+            {/* LIFE STATS - WHAT MATTERS */}
             <div className="grid grid-cols-3 gap-2 mb-6">
-                <div className="bg-black border border-gray-800 rounded-lg p-3 text-center">
-                    <p className="text-2xl font-black text-amber-400 mb-0.5" style={{ fontFamily: 'monospace' }}>{artists.length}</p>
-                    <p className="text-[10px] text-gray-600 tracking-wider font-bold" style={{ fontFamily: 'monospace' }}>ROSTER</p>
+                <div className="bg-gradient-to-br from-pink-900/40 to-pink-900/20 border-2 border-pink-500/50 rounded-lg p-3 text-center">
+                    <p className="text-2xl font-black text-pink-400 mb-0.5" style={{ fontFamily: 'monospace' }}>{artists.filter(a => a.type === 'band_crew' || a.relationship === 'excellent').length}</p>
+                    <p className="text-[10px] text-pink-400 tracking-wider font-bold" style={{ fontFamily: 'monospace' }}>FAMILY</p>
                 </div>
                 <Link to={createPageUrl('ScottCalendar')} className="w-full">
-                    <div className="bg-black border border-gray-800 hover:border-cyan-500 rounded-lg p-3 text-center transition-all">
+                    <div className="bg-gradient-to-br from-cyan-900/40 to-cyan-900/20 border-2 border-cyan-500/50 hover:border-cyan-500 rounded-lg p-3 text-center transition-all">
                         <p className="text-2xl font-black text-cyan-400 mb-0.5" style={{ fontFamily: 'monospace' }}>{upcomingEvents.length}</p>
-                        <p className="text-[10px] text-gray-600 tracking-wider font-bold" style={{ fontFamily: 'monospace' }}>EVENTS</p>
+                        <p className="text-[10px] text-cyan-400 tracking-wider font-bold" style={{ fontFamily: 'monospace' }}>PLANS</p>
                     </div>
                 </Link>
-                <Link to={createPageUrl('ScottCalendar')} className="w-full">
-                    <div className="bg-black border border-gray-800 hover:border-red-500 rounded-lg p-3 text-center transition-all">
-                        <p className="text-2xl font-black text-red-400 mb-0.5" style={{ fontFamily: 'monospace' }}>{urgentTasks.length}</p>
-                        <p className="text-[10px] text-gray-600 tracking-wider font-bold" style={{ fontFamily: 'monospace' }}>URGENT</p>
-                    </div>
-                </Link>
+                <div className="bg-gradient-to-br from-amber-900/40 to-amber-900/20 border-2 border-amber-500/50 rounded-lg p-3 text-center">
+                    <p className="text-2xl font-black text-amber-400 mb-0.5" style={{ fontFamily: 'monospace' }}>{artists.length}</p>
+                    <p className="text-[10px] text-amber-400 tracking-wider font-bold" style={{ fontFamily: 'monospace' }}>PEOPLE</p>
+                </div>
             </div>
 
             {/* SEARCH - SIMPLE */}
@@ -269,34 +267,40 @@ function ScottManagerInner() {
             <div className="space-y-6">
                 {!searchQuery ? (
                     <>
-                    {/* ACTIVE - Working with right now */}
+                    {/* FAMILY - The people that matter */}
                     {(() => {
-                        const active = filteredArtists.filter(a => a.relationship === 'excellent' || a.relationship === 'good');
-                        if (active.length === 0) return null;
+                        const family = filteredArtists.filter(a => a.type === 'band_crew' || a.relationship === 'excellent');
+                        if (family.length === 0) return null;
                         return (
                             <div>
                                 <div className="flex items-center gap-2 mb-3">
-                                    <div className="w-3 h-3 bg-green-400 rounded-full" />
-                                    <h2 className="text-sm font-bold text-white" style={{ fontFamily: 'monospace' }}>
-                                        ACTIVE NOW ({active.length})
+                                    <svg width="16" height="16" viewBox="0 0 16 16" className="flex-shrink-0">
+                                        <rect x="6" y="2" width="4" height="4" fill="#ec4899"/>
+                                        <rect x="4" y="6" width="8" height="6" fill="#ec4899"/>
+                                        <rect x="3" y="12" width="10" height="2" fill="#f472b6"/>
+                                    </svg>
+                                    <h2 className="text-sm font-bold text-pink-400" style={{ fontFamily: 'monospace' }}>
+                                        FAMILY ({family.length})
                                     </h2>
                                 </div>
                                 <div className="space-y-2">
-                                    {active.map(artist => (
-                                        <Link key={artist.id} to={createPageUrl(`ScottArtist?id=${artist.id}`)} className="block">
-                                            <div className="bg-black border border-green-500/50 hover:border-green-500 rounded-lg p-3 transition-all">
-                                                            <div className="flex items-center justify-between">
-                                                                <div className="flex-1">
-                                                                    <p className="text-white text-sm font-bold mb-0.5" style={{ fontFamily: 'monospace' }}>{artist.name}</p>
-                                                                    <p className="text-gray-600 text-xs" style={{ fontFamily: 'monospace' }}>{artist.type}</p>
-                                                                </div>
-                                                                {artist.phone && (
-                                                                    <a href={`tel:${artist.phone}`} onClick={(e) => e.stopPropagation()} className="p-2 bg-green-500/20 hover:bg-green-500/30 rounded transition-colors">
-                                                                        <svg className="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/></svg>
-                                                                    </a>
-                                                                )}
-                                                            </div>
-                                                        </div>
+                                    {family.map(person => (
+                                        <Link key={person.id} to={createPageUrl(`ScottArtist?id=${person.id}`)} className="block">
+                                            <div className="bg-gradient-to-br from-pink-900/40 to-purple-900/20 border-2 border-pink-500/50 hover:border-pink-500 rounded-lg p-3 transition-all">
+                                                <div className="flex items-center justify-between">
+                                                    <div className="flex-1">
+                                                        <p className="text-white text-sm font-bold mb-0.5" style={{ fontFamily: 'monospace' }}>{person.name}</p>
+                                                        <p className="text-pink-300 text-xs" style={{ fontFamily: 'monospace' }}>
+                                                            {person.type === 'band_crew' ? '🎸 CREW' : person.type === 'artist' ? '🎤 ARTIST' : person.type}
+                                                        </p>
+                                                    </div>
+                                                    {person.phone && (
+                                                        <a href={`tel:${person.phone}`} onClick={(e) => e.stopPropagation()} className="p-2 bg-pink-500/20 hover:bg-pink-500/30 rounded transition-colors">
+                                                            <svg className="w-4 h-4 text-pink-400" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/></svg>
+                                                        </a>
+                                                    )}
+                                                </div>
+                                            </div>
                                         </Link>
                                     ))}
                                 </div>
@@ -304,29 +308,31 @@ function ScottManagerInner() {
                         );
                     })()}
 
-                    {/* EVERYONE ELSE */}
+                    {/* EVERYONE ELSE - Still important */}
                     {(() => {
-                        const others = filteredArtists.filter(a => a.relationship !== 'excellent' && a.relationship !== 'good');
+                        const others = filteredArtists.filter(a => a.type !== 'band_crew' && a.relationship !== 'excellent');
                         if (others.length === 0) return null;
                         return (
                             <div>
-                                <div className="flex items-center gap-2 mb-3">
-                                    <h2 className="text-sm font-bold text-gray-400" style={{ fontFamily: 'monospace' }}>
-                                        ROSTER ({others.length})
+                                <div className="flex items-center gap-2 mb-3 mt-6">
+                                    <h2 className="text-sm font-bold text-cyan-400" style={{ fontFamily: 'monospace' }}>
+                                        NETWORK ({others.length})
                                     </h2>
                                 </div>
                                 <div className="space-y-2">
-                                    {others.map(artist => (
-                                        <Link key={artist.id} to={createPageUrl(`ScottArtist?id=${artist.id}`)} className="block">
-                                            <div className="bg-black border border-gray-800 hover:border-gray-700 rounded-lg p-3 transition-all">
+                                    {others.map(person => (
+                                        <Link key={person.id} to={createPageUrl(`ScottArtist?id=${person.id}`)} className="block">
+                                            <div className="bg-black border-2 border-cyan-500/30 hover:border-cyan-500 rounded-lg p-3 transition-all">
                                                 <div className="flex items-center justify-between">
                                                     <div className="flex-1">
-                                                        <p className="text-white text-sm font-bold mb-0.5" style={{ fontFamily: 'monospace' }}>{artist.name}</p>
-                                                        <p className="text-gray-600 text-xs" style={{ fontFamily: 'monospace' }}>{artist.type}</p>
+                                                        <p className="text-white text-sm font-bold mb-0.5" style={{ fontFamily: 'monospace' }}>{person.name}</p>
+                                                        <p className="text-cyan-400 text-xs" style={{ fontFamily: 'monospace' }}>
+                                                            {person.type === 'venue' ? '🏛️ VENUE' : person.type === 'client' ? '🤝 CLIENT' : person.type}
+                                                        </p>
                                                     </div>
-                                                    {artist.phone && (
-                                                        <a href={`tel:${artist.phone}`} onClick={(e) => e.stopPropagation()} className="p-2 bg-gray-900 hover:bg-gray-800 rounded transition-colors">
-                                                            <svg className="w-4 h-4 text-gray-500" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/></svg>
+                                                    {person.phone && (
+                                                        <a href={`tel:${person.phone}`} onClick={(e) => e.stopPropagation()} className="p-2 bg-cyan-900/40 hover:bg-cyan-800/60 rounded transition-colors">
+                                                            <svg className="w-4 h-4 text-cyan-400" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/></svg>
                                                         </a>
                                                     )}
                                                 </div>
@@ -341,7 +347,7 @@ function ScottManagerInner() {
                 ) : (
                     <div>
                         <h2 className="text-sm font-bold text-cyan-400 tracking-wider mb-4" style={{ fontFamily: 'monospace' }}>
-                            SEARCH RESULTS ({filteredArtists.length})
+                            FOUND ({filteredArtists.length})
                         </h2>
                         <div className="space-y-3">
                 {filteredArtists.length === 0 ? (
@@ -374,13 +380,18 @@ function ScottManagerInner() {
 
                 {/* EMPTY STATE */}
                 {!searchQuery && filteredArtists.length === 0 && (
-                <div className="bg-black border border-gray-800 rounded-xl p-8 text-center">
-                <p className="text-gray-600 text-sm font-bold mb-3" style={{ fontFamily: 'monospace' }}>ROSTER EMPTY</p>
-                <p className="text-gray-700 text-xs mb-4" style={{ fontFamily: 'monospace' }}>Tap ADD to start</p>
+                <div className="bg-gradient-to-br from-pink-900/20 to-purple-900/20 border-2 border-pink-500/50 rounded-xl p-8 text-center">
+                <svg width="48" height="48" viewBox="0 0 32 32" className="mx-auto mb-4">
+                    <rect x="14" y="8" width="4" height="4" fill="#ec4899"/>
+                    <rect x="12" y="12" width="8" height="8" fill="#ec4899"/>
+                    <rect x="10" y="20" width="12" height="4" fill="#f472b6"/>
+                </svg>
+                <p className="text-pink-400 text-sm font-bold mb-3" style={{ fontFamily: 'monospace' }}>NO PEOPLE YET</p>
+                <p className="text-pink-300 text-xs mb-4" style={{ fontFamily: 'monospace' }}>Add family, crew, friends, anyone</p>
                 <Link to={createPageUrl('ScottAddArtist')}>
-                    <button className="bg-amber-500 hover:bg-amber-600 text-black font-bold text-xs px-6 py-2 rounded-lg">
+                    <button className="bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-500 hover:to-purple-500 text-white font-bold text-xs px-6 py-3 rounded-lg border-2 border-pink-400 transition-all">
                         <Plus className="w-4 h-4 mr-1 inline" />
-                        ADD FIRST CONTACT
+                        ADD FIRST PERSON
                     </button>
                 </Link>
                 </div>
