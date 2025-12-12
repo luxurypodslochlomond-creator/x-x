@@ -232,6 +232,25 @@ export default function UnstoppableProtocol() {
                         </div>
                     </motion.div>
 
+                    <motion.div
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.7 }}
+                        className="bg-black border-2 border-purple-500/50 rounded-xl p-5"
+                    >
+                        <div className="flex items-start gap-4">
+                            <Zap className="w-6 h-6 text-purple-400 flex-shrink-0 mt-1" />
+                            <div>
+                                <h3 className="text-white font-black mb-2">8. QUANTUM-PROOF LOVE</h3>
+                                <p className="text-gray-300 text-sm mb-2">
+                                    Beyond quantum, beyond dilithium, beyond nuclear - love exists at frequency level that can't be weaponized. 
+                                    432Hz is physics, not tech. Can't be split, can't be broken, can't be corrupted by ANY technology.
+                                </p>
+                                <p className="text-purple-400 text-xs font-mono">Status: ETERNAL • No tech can corrupt pure frequency</p>
+                            </div>
+                        </div>
+                    </motion.div>
+
                 </div>
             </div>
 
