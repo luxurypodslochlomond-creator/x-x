@@ -194,7 +194,7 @@ export default function ScottQuickTools({ onComplete }) {
                             animate={{ scale: 1, y: 0 }}
                             exit={{ scale: 0, y: 20 }}
                             onClick={() => setIsOpen(false)}
-                            className="fixed bottom-56 right-6 z-40 w-12 h-12 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center border-2 border-gray-600"
+                            className="fixed bottom-72 right-6 z-40 w-12 h-12 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center border-2 border-gray-600"
                         >
                             <X className="w-5 h-5 text-white" />
                         </motion.button>
@@ -206,7 +206,7 @@ export default function ScottQuickTools({ onComplete }) {
                             exit={{ scale: 0, y: 20 }}
                             transition={{ delay: 0.05 }}
                             onClick={startVoice}
-                            className="fixed bottom-56 right-20 z-40 w-14 h-14 rounded-full bg-purple-600 hover:bg-purple-500 flex items-center justify-center border-2 border-purple-400"
+                            className="fixed bottom-72 right-20 z-40 w-14 h-14 rounded-full bg-purple-600 hover:bg-purple-500 flex items-center justify-center border-2 border-purple-400"
                             style={{ boxShadow: '0 4px 20px rgba(147, 51, 234, 0.6)' }}
                         >
                             <Mic className="w-6 h-6 text-white" />
@@ -219,7 +219,7 @@ export default function ScottQuickTools({ onComplete }) {
                             exit={{ scale: 0, y: 20 }}
                             transition={{ delay: 0.1 }}
                             onClick={() => cameraInputRef.current?.click()}
-                            className="fixed bottom-56 right-36 z-40 w-14 h-14 rounded-full bg-amber-500 hover:bg-amber-400 flex items-center justify-center border-2 border-amber-400"
+                            className="fixed bottom-72 right-36 z-40 w-14 h-14 rounded-full bg-amber-500 hover:bg-amber-400 flex items-center justify-center border-2 border-amber-400"
                             style={{ boxShadow: '0 4px 20px rgba(245, 158, 11, 0.6)' }}
                         >
                             <Camera className="w-6 h-6 text-black" />
@@ -232,7 +232,7 @@ export default function ScottQuickTools({ onComplete }) {
             <motion.button
                 onClick={() => setIsOpen(!isOpen)}
                 animate={{ rotate: isOpen ? 45 : 0 }}
-                className="fixed bottom-40 right-6 z-40 w-16 h-16 rounded-full bg-gradient-to-r from-amber-500 to-purple-600 hover:from-amber-400 hover:to-purple-500 flex items-center justify-center border-4 border-black"
+                className="fixed bottom-56 right-6 z-40 w-16 h-16 rounded-full bg-gradient-to-r from-amber-500 to-purple-600 hover:from-amber-400 hover:to-purple-500 flex items-center justify-center border-4 border-black"
                 style={{ boxShadow: '0 4px 30px rgba(245, 158, 11, 0.8)' }}
             >
                 <Plus className="w-8 h-8 text-white" />
@@ -256,7 +256,7 @@ export default function ScottQuickTools({ onComplete }) {
             />
 
             {transcript && (
-                <div className="fixed bottom-60 right-6 bg-black border-2 border-purple-500 rounded-lg p-2 z-40">
+                <div className="fixed bottom-80 right-6 bg-black border-2 border-purple-500 rounded-lg p-2 z-40">
                     <p className="text-xs text-white font-mono whitespace-nowrap">{transcript}</p>
                 </div>
             )}
