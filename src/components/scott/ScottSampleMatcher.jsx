@@ -187,13 +187,55 @@ Be specific and confident if you recognize it. Say "cannot identify" if truly un
                                             ))}
                                         </div>
                                     ) : (
-                                        <div className="bg-red-900/20 border-2 border-red-500 rounded-lg p-6">
+                                        <div className="bg-amber-900/20 border-2 border-amber-500 rounded-lg p-6">
                                             <div className="flex items-center gap-2 mb-3">
-                                                <AlertCircle className="w-6 h-6 text-red-400" />
-                                                <p className="text-red-400 font-black text-lg font-mono">NEEDS CLEARANCE</p>
+                                                <AlertCircle className="w-6 h-6 text-amber-400" />
+                                                <p className="text-amber-400 font-black text-lg font-mono">YOUR OPTIONS</p>
                                             </div>
-                                            <p className="text-red-300 text-sm font-mono">
-                                                This sample is not in your licensed catalogue. You'll need to clear it before release.
+                                            <p className="text-amber-300 text-sm font-mono mb-4">
+                                                Not in your catalogue yet - here's what you can do:
+                                            </p>
+                                            
+                                            <div className="space-y-3">
+                                                <div className="bg-black border border-green-500/30 rounded p-3">
+                                                    <p className="text-green-400 font-bold text-sm font-mono mb-1">OPTION 1: CLEAR IT</p>
+                                                    <p className="text-gray-400 text-xs font-mono mb-2">Get legal permission from rights holders</p>
+                                                    <div className="flex gap-2">
+                                                        <span className="px-2 py-1 bg-green-500/20 rounded text-green-400 text-[10px] font-mono">PRO: Legit forever</span>
+                                                        <span className="px-2 py-1 bg-amber-500/20 rounded text-amber-400 text-[10px] font-mono">CON: Costs £££, takes time</span>
+                                                    </div>
+                                                </div>
+
+                                                <div className="bg-black border border-cyan-500/30 rounded p-3">
+                                                    <p className="text-cyan-400 font-bold text-sm font-mono mb-1">OPTION 2: INTERPOLATION</p>
+                                                    <p className="text-gray-400 text-xs font-mono mb-2">Re-record it yourself (same melody/composition)</p>
+                                                    <div className="flex gap-2">
+                                                        <span className="px-2 py-1 bg-green-500/20 rounded text-green-400 text-[10px] font-mono">PRO: Cheaper, only publishing split</span>
+                                                        <span className="px-2 py-1 bg-amber-500/20 rounded text-amber-400 text-[10px] font-mono">CON: Still need publishing clearance</span>
+                                                    </div>
+                                                </div>
+
+                                                <div className="bg-black border border-purple-500/30 rounded p-3">
+                                                    <p className="text-purple-400 font-bold text-sm font-mono mb-1">OPTION 3: INSPIRED ALTERNATIVE</p>
+                                                    <p className="text-gray-400 text-xs font-mono mb-2">Create similar vibe, change melody enough</p>
+                                                    <div className="flex gap-2">
+                                                        <span className="px-2 py-1 bg-green-500/20 rounded text-green-400 text-[10px] font-mono">PRO: Free, zero hassle</span>
+                                                        <span className="px-2 py-1 bg-amber-500/20 rounded text-amber-400 text-[10px] font-mono">CON: Loses exact original vibe</span>
+                                                    </div>
+                                                </div>
+
+                                                <div className="bg-black border border-pink-500/30 rounded p-3">
+                                                    <p className="text-pink-400 font-bold text-sm font-mono mb-1">OPTION 4: ROYALTY-FREE ALTERNATIVE</p>
+                                                    <p className="text-gray-400 text-xs font-mono mb-2">Find similar sample from royalty-free library</p>
+                                                    <div className="flex gap-2">
+                                                        <span className="px-2 py-1 bg-green-500/20 rounded text-green-400 text-[10px] font-mono">PRO: Instant, pre-cleared</span>
+                                                        <span className="px-2 py-1 bg-amber-500/20 rounded text-amber-400 text-[10px] font-mono">CON: Generic sound</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <p className="text-amber-500 text-xs font-mono mt-4 pt-4 border-t border-amber-500/30">
+                                                💡 SCOTT & AI51 CAN HELP WITH ANY OF THESE - choose what fits your timeline + budget
                                             </p>
                                         </div>
                                     )}
@@ -206,18 +248,42 @@ Be specific and confident if you recognize it. Say "cannot identify" if truly un
                                         </div>
                                     </div>
 
-                                    {/* ACTIONS */}
+                                    {/* SOLUTION ACTIONS */}
                                     {matches.length === 0 && (
-                                        <div className="space-y-2">
-                                            <Button
-                                                onClick={() => {
-                                                    setIsOpen(false);
-                                                    // Could trigger the sample analyzer with this info
-                                                }}
-                                                className="w-full bg-cyan-500 hover:bg-cyan-600 text-black font-mono"
-                                            >
-                                                Search for Clearance Info
-                                            </Button>
+                                        <div className="bg-gray-900 border border-cyan-500/30 rounded-lg p-4">
+                                            <p className="text-cyan-400 font-bold text-xs font-mono mb-3">NEXT STEPS - PICK YOUR ROUTE:</p>
+                                            <div className="space-y-2">
+                                                <Button
+                                                    onClick={() => {
+                                                        setIsOpen(false);
+                                                        // Trigger sample analyzer
+                                                    }}
+                                                    className="w-full bg-green-500 hover:bg-green-600 text-black font-mono text-sm justify-start"
+                                                >
+                                                    → Find who owns it + get clearance
+                                                </Button>
+                                                <Button
+                                                    variant="outline"
+                                                    className="w-full font-mono text-sm justify-start text-cyan-400 border-cyan-500/50"
+                                                >
+                                                    → Talk to producer about re-recording it
+                                                </Button>
+                                                <Button
+                                                    variant="outline"
+                                                    className="w-full font-mono text-sm justify-start text-purple-400 border-purple-500/50"
+                                                >
+                                                    → Ask AI51 for similar royalty-free samples
+                                                </Button>
+                                                <Button
+                                                    variant="outline"
+                                                    className="w-full font-mono text-sm justify-start text-pink-400 border-pink-500/50"
+                                                >
+                                                    → Create inspired alternative (safe route)
+                                                </Button>
+                                            </div>
+                                            <p className="text-gray-500 text-xs font-mono mt-3">
+                                                All routes work - depends on budget/timeline/vibe you want
+                                            </p>
                                         </div>
                                     )}
 
