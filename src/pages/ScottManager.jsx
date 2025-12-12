@@ -214,19 +214,19 @@ function ScottManagerInner() {
                 </div>
             </Link>
 
-            {/* AI51 CHAT - THE STAR */}
+            {/* AI51 CHAT - YOUR MUCKER */}
             <Link to={createPageUrl('ScottAI51')} className="block mb-6">
                 <div className="bg-black p-6 rounded-xl border-4 border-amber-500 relative overflow-hidden" style={{ boxShadow: '0 8px 40px rgba(245, 158, 11, 0.4)' }}>
                     <div className="relative z-10">
                         <div className="flex items-center gap-3 mb-3">
                             <Brain className="w-8 h-8 text-amber-400 animate-pulse" />
                             <div>
-                                <p className="text-white font-black text-xl mb-0.5" style={{ fontFamily: 'monospace' }}>AI51</p>
-                                <p className="text-gray-600 text-xs font-mono">Sorts the admin</p>
+                                <p className="text-white font-black text-xl mb-0.5" style={{ fontFamily: 'monospace' }}>MUCKER51</p>
+                                <p className="text-gray-600 text-xs font-mono">It's me - I'll sort it</p>
                             </div>
                         </div>
                         <div className="bg-black border border-amber-500/30 rounded-lg p-4 mb-3">
-                            <p className="text-gray-400 text-sm font-mono">"What's happening Scott?"</p>
+                            <p className="text-gray-400 text-sm font-mono">"What needs doing SK?"</p>
                         </div>
                         <div className="flex items-center gap-2 text-gray-600 text-xs font-mono">
                             <p>→ Talk • Photo • Upload</p>
