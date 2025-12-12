@@ -140,18 +140,17 @@ export default function ScottLATrip() {
                 </div>
 
                 {/* PROGRESS BAR */}
-                <div className="bg-black border-4 border-purple-500 p-4 mb-4" style={{ boxShadow: '0 0 30px rgba(168, 85, 247, 0.3)' }}>
+                <div className="bg-black border-2 border-amber-500 p-4 mb-4">
                     <div className="flex items-center justify-between mb-2">
-                        <p className="text-sm font-mono font-black text-purple-400 tracking-wider">TRIP READY</p>
+                        <p className="text-sm font-mono font-black text-amber-400 tracking-wider">TRIP READY</p>
                         <p className="text-2xl font-mono font-black text-white">{progressPercent}%</p>
                     </div>
-                    <div className="h-4 bg-gray-900 border-2 border-gray-800 overflow-hidden" style={{ imageRendering: 'pixelated' }}>
+                    <div className="h-4 bg-gray-900 border-2 border-gray-800 overflow-hidden">
                         <motion.div
-                            className="h-full bg-gradient-to-r from-green-500 via-cyan-500 to-purple-500"
+                            className="h-full bg-amber-500"
                             initial={{ width: 0 }}
                             animate={{ width: `${progressPercent}%` }}
                             transition={{ duration: 0.5 }}
-                            style={{ boxShadow: 'inset 0 0 20px rgba(255, 255, 255, 0.3)' }}
                         />
                     </div>
                 </div>
@@ -161,7 +160,7 @@ export default function ScottLATrip() {
             <div className="max-w-4xl mx-auto mb-6">
                 <div className="grid grid-cols-5 gap-2">
                     {[
-                        { id: 'overview', icon: Plane8Bit, label: 'Overview', color: '#fbbf24' },
+                        { id: 'overview', icon: Plane8Bit, label: 'Overview' },
                         { id: 'schedule', icon: Calendar, label: 'Schedule' },
                         { id: 'checklist', icon: Package, label: 'Checklist' },
                         { id: 'budget', icon: DollarSign, label: 'Budget' },
@@ -170,18 +169,14 @@ export default function ScottLATrip() {
                         <button
                             key={tab.id}
                             onClick={() => setActiveTab(tab.id)}
-                            className={`p-3 border-4 font-mono text-xs font-black transition-all ${
+                            className={`p-3 border-2 font-mono text-xs font-black transition-all ${
                                 activeTab === tab.id
-                                    ? 'bg-gradient-to-br from-amber-500 to-pink-600 border-amber-400 text-white'
-                                    : 'bg-black border-gray-800 text-gray-400 hover:border-gray-700'
+                                    ? 'bg-amber-500 border-amber-400 text-black'
+                                    : 'bg-black border-gray-800 text-gray-400 hover:border-amber-500/50'
                             }`}
-                            style={activeTab === tab.id ? { 
-                                boxShadow: '0 0 20px rgba(245, 158, 11, 0.5), 4px 4px 0px rgba(0,0,0,0.6)',
-                                imageRendering: 'pixelated'
-                            } : {}}
                         >
                             {tab.id === 'overview' ? (
-                                <Plane8Bit size={20} animate={activeTab === tab.id} color={activeTab === tab.id ? '#ffffff' : '#9ca3af'} className="mx-auto mb-1" />
+                                <Plane8Bit size={20} animate={activeTab === tab.id} color={activeTab === tab.id ? '#000000' : '#9ca3af'} className="mx-auto mb-1" />
                             ) : (
                                 <tab.icon className="w-5 h-5 mx-auto mb-1" />
                             )}
@@ -196,26 +191,26 @@ export default function ScottLATrip() {
                 {/* OVERVIEW */}
                 {activeTab === 'overview' && (
                     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-                        <div className="bg-gradient-to-br from-purple-600 to-pink-600 border-4 border-purple-400 p-6 mb-4" style={{ boxShadow: '0 0 40px rgba(168, 85, 247, 0.4), 8px 8px 0px rgba(0,0,0,0.6)' }}>
-                            <h2 className="text-2xl font-black text-white font-mono mb-4 tracking-wider" style={{ textShadow: '3px 3px 0px rgba(0,0,0,0.8)' }}>MISSION</h2>
+                        <div className="bg-black border-2 border-amber-500 p-6 mb-4">
+                            <h2 className="text-2xl font-black text-amber-400 font-mono mb-4 tracking-wider">MISSION</h2>
                             <div className="space-y-2">
                                 <p className="text-white text-sm font-bold font-mono">Take YES AND MAYBE to LA</p>
-                                <p className="text-white/90 text-sm font-mono">• Work with world-class producers</p>
-                                <p className="text-white/90 text-sm font-mono">• Play iconic venues (Troubadour, Roxy)</p>
-                                <p className="text-white/90 text-sm font-mono">• Build US connections</p>
-                                <p className="text-white/90 text-sm font-mono">• Come back with recorded material</p>
+                                <p className="text-gray-400 text-sm font-mono">• Work with world-class producers</p>
+                                <p className="text-gray-400 text-sm font-mono">• Play iconic venues (Troubadour, Roxy)</p>
+                                <p className="text-gray-400 text-sm font-mono">• Build US connections</p>
+                                <p className="text-gray-400 text-sm font-mono">• Come back with recorded material</p>
                             </div>
                         </div>
 
                         <div className="grid grid-cols-2 gap-4">
-                            <div className="bg-black border-4 border-cyan-500 p-4" style={{ boxShadow: '0 0 20px rgba(6, 182, 212, 0.3)' }}>
-                                <Clock className="w-6 h-6 text-cyan-400 mb-2" />
-                                <p className="text-xs text-cyan-400 font-mono font-bold tracking-wider">TIME ZONE</p>
+                            <div className="bg-black border-2 border-amber-500 p-4">
+                                <Clock className="w-6 h-6 text-amber-400 mb-2" />
+                                <p className="text-xs text-amber-400 font-mono font-bold tracking-wider">TIME ZONE</p>
                                 <p className="text-xl font-black text-white font-mono">PST (GMT-8)</p>
                             </div>
-                            <div className="bg-black border-4 border-green-500 p-4" style={{ boxShadow: '0 0 20px rgba(34, 197, 94, 0.3)' }}>
-                                <MapPin className="w-6 h-6 text-green-400 mb-2" />
-                                <p className="text-xs text-green-400 font-mono font-bold tracking-wider">BASE</p>
+                            <div className="bg-black border-2 border-amber-500 p-4">
+                                <MapPin className="w-6 h-6 text-amber-400 mb-2" />
+                                <p className="text-xs text-amber-400 font-mono font-bold tracking-wider">BASE</p>
                                 <p className="text-xl font-black text-white font-mono">Hollywood</p>
                             </div>
                         </div>
@@ -228,16 +223,12 @@ export default function ScottLATrip() {
                         {schedule.map((item, idx) => (
                             <div
                                 key={idx}
-                                className={`bg-black border-2 rounded-lg p-4 ${
-                                    item.type === 'gig' ? 'border-pink-500/50' :
-                                    item.type === 'session' ? 'border-purple-500/50' :
-                                    'border-blue-500/50'
-                                }`}
+                                className="bg-black border-2 border-amber-500/50 rounded-lg p-4"
                             >
                                 <div className="flex items-start gap-3">
-                                    {item.type === 'gig' && <Music className="w-5 h-5 text-pink-400 flex-shrink-0 mt-1" />}
-                                    {item.type === 'session' && <Users className="w-5 h-5 text-purple-400 flex-shrink-0 mt-1" />}
-                                    {item.type === 'flight' && <Plane8Bit size={20} animate={false} color="#06b6d4" className="flex-shrink-0 mt-1" />}
+                                    {item.type === 'gig' && <Music className="w-5 h-5 text-amber-400 flex-shrink-0 mt-1" />}
+                                    {item.type === 'session' && <Users className="w-5 h-5 text-amber-400 flex-shrink-0 mt-1" />}
+                                    {item.type === 'flight' && <Plane8Bit size={20} animate={false} color="#f59e0b" className="flex-shrink-0 mt-1" />}
                                     <div className="flex-1">
                                         <p className="text-white font-bold font-mono text-sm">{item.title}</p>
                                         <p className="text-gray-400 text-xs font-mono mt-1">{item.date} • {item.time}</p>
@@ -258,16 +249,16 @@ export default function ScottLATrip() {
                                 onClick={() => toggleChecklistItem(key)}
                                 className={`w-full flex items-center gap-3 p-4 rounded-lg border-2 transition-all ${
                                     checked
-                                        ? 'bg-green-900/20 border-green-500'
-                                        : 'bg-black border-gray-800 hover:border-gray-700'
+                                        ? 'bg-amber-900/20 border-amber-500'
+                                        : 'bg-black border-gray-800 hover:border-amber-500/50'
                                 }`}
                             >
                                 {checked ? (
-                                    <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0" />
+                                    <CheckCircle className="w-5 h-5 text-amber-400 flex-shrink-0" />
                                 ) : (
                                     <div className="w-5 h-5 rounded-full border-2 border-gray-600 flex-shrink-0" />
                                 )}
-                                <p className={`text-sm font-mono text-left ${checked ? 'text-green-400 line-through' : 'text-white'}`}>
+                                <p className={`text-sm font-mono text-left ${checked ? 'text-amber-400 line-through' : 'text-white'}`}>
                                     {key.replace(/_/g, ' ').toUpperCase()}
                                 </p>
                             </button>
@@ -278,16 +269,16 @@ export default function ScottLATrip() {
                 {/* BUDGET */}
                 {activeTab === 'budget' && (
                     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-                        <div className="bg-black border border-green-500/30 rounded-lg p-6 mb-4">
+                        <div className="bg-black border-2 border-amber-500 rounded-lg p-6 mb-4">
                             <p className="text-xs text-gray-500 font-mono mb-2">TOTAL BUDGET</p>
-                            <p className="text-4xl font-black text-green-400 font-mono">£{budget.total_budget_gbp.toLocaleString()}</p>
+                            <p className="text-4xl font-black text-amber-400 font-mono">£{budget.total_budget_gbp.toLocaleString()}</p>
                         </div>
 
                         <div className="space-y-2">
                             {Object.entries(budget).filter(([key]) => !['total_budget_gbp', 'spent_usd'].includes(key)).map(([key, value]) => (
                                 <div key={key} className="bg-black border border-gray-800 rounded-lg p-4 flex items-center justify-between">
                                     <p className="text-white text-sm font-mono">{key.replace(/_/g, ' ').toUpperCase()}</p>
-                                    <p className="text-green-400 text-sm font-mono font-bold">£{value}</p>
+                                    <p className="text-amber-400 text-sm font-mono font-bold">£{value}</p>
                                 </div>
                             ))}
                         </div>
@@ -298,17 +289,17 @@ export default function ScottLATrip() {
                 {activeTab === 'contacts' && (
                     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-3">
                         {contacts.map((contact, idx) => (
-                            <div key={idx} className="bg-black border border-cyan-500/30 rounded-lg p-4">
+                            <div key={idx} className="bg-black border-2 border-amber-500/50 rounded-lg p-4">
                                 <div className="flex items-start gap-3">
-                                    <Phone className="w-5 h-5 text-cyan-400 flex-shrink-0 mt-1" />
+                                    <Phone className="w-5 h-5 text-amber-400 flex-shrink-0 mt-1" />
                                     <div className="flex-1">
                                         <p className="text-white font-bold font-mono text-sm">{contact.name}</p>
-                                        <p className="text-cyan-400 text-xs font-mono mt-1">{contact.phone}</p>
+                                        <p className="text-amber-400 text-xs font-mono mt-1">{contact.phone}</p>
                                         <p className="text-gray-500 text-xs font-mono mt-1">{contact.role}</p>
                                     </div>
                                     <a
                                         href={`tel:${contact.phone}`}
-                                        className="px-3 py-1 bg-cyan-600 hover:bg-cyan-700 rounded text-xs font-mono text-white"
+                                        className="px-3 py-1 bg-amber-600 hover:bg-amber-700 rounded text-xs font-mono text-black font-bold"
                                     >
                                         CALL
                                     </a>
