@@ -4,7 +4,7 @@ import { createPageUrl } from '@/utils';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Plus, Search, Wifi, WifiOff, RefreshCw, Brain, DollarSign, FileText, Music, Globe, Briefcase, Camera } from 'lucide-react';
+import { Plus, Search, Wifi, WifiOff, RefreshCw, Brain, DollarSign, FileText, Music, Globe, Briefcase, Camera, Plane } from 'lucide-react';
 import { motion } from 'framer-motion';
 import KingdomCrown8Bit from '@/components/shared/KingdomCrown8Bit';
 import Gill51Sunglasses8Bit from '@/components/shared/Gill51Sunglasses8Bit';
@@ -152,9 +152,33 @@ function ScottManagerInner() {
                 </Link>
             </div>
 
+            {/* LA TRIP - URGENT */}
+            <Link to={createPageUrl('ScottLATrip')} className="block mb-6">
+                <div className="bg-gradient-to-br from-amber-500 to-pink-600 p-6 rounded-xl border-4 border-amber-400 relative overflow-hidden animate-pulse" style={{ boxShadow: '0 8px 40px rgba(245, 158, 11, 0.6)' }}>
+                    <div className="absolute top-2 right-2 bg-red-500 text-white text-xs font-black px-2 py-1 rounded font-mono">
+                        LIVE
+                    </div>
+                    <div className="relative z-10">
+                        <div className="flex items-center gap-3 mb-3">
+                            <Plane className="w-8 h-8 text-white" />
+                            <div>
+                                <p className="text-white font-black text-xl mb-0.5" style={{ fontFamily: 'monospace' }}>LA TRIP</p>
+                                <p className="text-white/80 text-xs font-mono">YES AND MAYBE • Dec 2024</p>
+                            </div>
+                        </div>
+                        <div className="bg-black/40 backdrop-blur-sm border border-white/20 rounded-lg p-3 mb-2">
+                            <p className="text-white text-xs font-mono">✓ Schedule • Checklist • Budget</p>
+                        </div>
+                        <div className="flex items-center gap-2 text-white/70 text-xs font-mono">
+                            <p>Producers • Gigs • LA Contacts</p>
+                        </div>
+                    </div>
+                </div>
+            </Link>
+
             {/* AI51 CHAT - THE STAR */}
             <Link to={createPageUrl('ScottAI51')} className="block mb-6">
-                <div className="bg-gradient-to-br from-amber-500 via-purple-600 to-green-500 p-6 rounded-xl border-4 border-black relative overflow-hidden" style={{ boxShadow: '0 8px 40px rgba(245, 158, 11, 0.4)' }}>
+                <div className="bg-gradient-to-br from-cyan-500 via-purple-600 to-green-500 p-6 rounded-xl border-4 border-black relative overflow-hidden" style={{ boxShadow: '0 8px 40px rgba(6, 182, 212, 0.4)' }}>
                     <div className="absolute inset-0 bg-black/20"></div>
                     <div className="relative z-10">
                         <div className="flex items-center gap-3 mb-3">
