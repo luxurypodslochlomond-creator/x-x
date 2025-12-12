@@ -21,6 +21,7 @@ import ScottContextMemory from '@/components/scott/ScottContextMemory';
 import ScottDidIDoThis from '@/components/scott/ScottDidIDoThis';
 import ScottQuickTools from '@/components/scott/ScottQuickTools';
 import ScottGigOffersFeed from '@/components/scott/ScottGigOffersFeed';
+import ScottBrainDump from '@/components/scott/ScottBrainDump';
 
 /**
  * SCOTT'S ARTIST/CLIENT MANAGER
@@ -134,6 +135,8 @@ function ScottManagerInner() {
     return (
         <ScottFocusMode>
         <div className="min-h-screen bg-black p-4 pb-32">
+
+        <ScottBrainDump />
 
 
 
