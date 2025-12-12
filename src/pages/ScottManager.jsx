@@ -28,6 +28,7 @@ import ScottTestMode from '@/components/scott/ScottTestMode';
 import ScottFeatureRequest from '@/components/scott/ScottFeatureRequest';
 import ScottSampleClearanceGuide from '@/components/scott/ScottSampleClearanceGuide';
 import ScottSampleAnalyzer from '@/components/scott/ScottSampleAnalyzer';
+import ScottSampleMatcher from '@/components/scott/ScottSampleMatcher';
 
 /**
  * SCOTT'S ARTIST/CLIENT MANAGER
@@ -541,6 +542,7 @@ function ScottManagerInner() {
                 <h2 className="text-xs text-amber-400 font-black tracking-wider mb-3" style={{ fontFamily: 'monospace' }}>⚖️ LEGAL</h2>
                 
                 <div className="space-y-2">
+                    <ScottSampleMatcher />
                     <ScottSampleAnalyzer />
                     <ScottSampleClearanceGuide />
                 </div>
