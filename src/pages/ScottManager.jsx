@@ -384,13 +384,29 @@ function ScottManagerInner() {
                 )}
                 </div>
 
-            {/* GIG OFFERS - PROMINENT */}
-            <Link to={createPageUrl('ScottGigOffers')} className="block mb-6">
-                <div className="bg-gradient-to-r from-amber-500 to-green-500 hover:from-amber-400 hover:to-green-400 p-4 rounded-lg text-center transition-all border-2 border-black" style={{ boxShadow: '0 0 30px rgba(245, 158, 11, 0.5)' }}>
-                    <p className="text-black font-black text-base font-mono mb-1">GIG OFFERS</p>
-                    <p className="text-black/70 text-xs font-mono">Paste → AI → Team Votes</p>
+            {/* GIG OFFERS - EXPANDABLE */}
+            <details className="mb-6">
+                <summary className="cursor-pointer">
+                    <div className="bg-gradient-to-r from-amber-500 to-green-500 p-4 rounded-lg border-2 border-black" style={{ boxShadow: '0 0 30px rgba(245, 158, 11, 0.5)' }}>
+                        <p className="text-black font-black text-base font-mono mb-1">GIG OFFERS ▼</p>
+                        <p className="text-black/70 text-xs font-mono">Tap to expand</p>
+                    </div>
+                </summary>
+                <div className="mt-3 space-y-3">
+                    <Link to={createPageUrl('ScottPasteGigOffer')}>
+                        <div className="bg-green-900/20 border-2 border-green-500 rounded-lg p-4 hover:bg-green-900/30 transition-all">
+                            <p className="text-green-400 font-black text-sm font-mono mb-1">+ PASTE NEW OFFER</p>
+                            <p className="text-gray-500 text-xs font-mono">Email/Text → AI reads it</p>
+                        </div>
+                    </Link>
+                    <Link to={createPageUrl('ScottGigOffers')}>
+                        <div className="bg-black border border-amber-500/50 rounded-lg p-4 hover:border-amber-500 transition-all">
+                            <p className="text-amber-400 font-bold text-sm font-mono mb-1">VIEW ALL OFFERS</p>
+                            <p className="text-gray-600 text-xs font-mono">Team votes • History</p>
+                        </div>
+                    </Link>
                 </div>
-            </Link>
+            </details>
 
             {/* TOOLS - COMPACT */}
             <details className="mb-6">
