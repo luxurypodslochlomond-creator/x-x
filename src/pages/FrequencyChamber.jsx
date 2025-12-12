@@ -1511,6 +1511,7 @@ export default function FrequencyChamber() {
         const minHz = config.sweepMin || 250;
         const maxHz = config.sweepMax || 16000;
 
+        // Create oscillators for sweep
         const sweepOsc = ctx.createOscillator();
         sweepOsc.type = 'sine';
         sweepOsc.frequency.value = minHz;
@@ -1532,37 +1533,37 @@ export default function FrequencyChamber() {
         sweepOsc.start();
         invertedOsc.start();
 
-        let currentHz = minHz;
-        let direction = 1;
-        let lastDisplayUpdate = Date.now();
+        // Sweep state
+        let progress = 0;
+        const sweepDuration = 30; // 30 seconds up, 30 seconds down
 
         const sweepInterval = setInterval(() => {
-          // Smooth frequency ramp - increment by small steps
-          const step = direction === 1 ? 50 : -50; // 50Hz steps
-          currentHz += step;
+          progress += 0.1 / sweepDuration; // increment based on interval timing
 
-          // Reverse at boundaries
-          if (currentHz >= maxHz) {
-            currentHz = maxHz;
-            direction = -1;
-          } else if (currentHz <= minHz) {
-            currentHz = minHz;
-            direction = 1;
+          if (progress >= 1) {
+            progress = 0; // restart sweep
           }
 
-          // Update audio frequency smoothly
-          sweepOsc.frequency.setTargetAtTime(currentHz, ctx.currentTime, 0.05);
-          invertedOsc.frequency.setTargetAtTime(currentHz, ctx.currentTime, 0.05);
+          // Calculate frequency (exponential sweep for better coverage)
+          const hz = minHz * Math.pow(maxHz / minHz, progress);
 
-          // Update display every 500ms for smooth visual
-          const now = Date.now();
-          if (now - lastDisplayUpdate >= 500) {
-            setCurrentHz(Math.round(currentHz));
-            lastDisplayUpdate = now;
-          }
+          // Update oscillator frequencies
+          sweepOsc.frequency.exponentialRampToValueAtTime(hz, ctx.currentTime + 0.1);
+          invertedOsc.frequency.exponentialRampToValueAtTime(hz, ctx.currentTime + 0.1);
         }, 100);
 
-        nodes.push(sweepOsc, invertedOsc, sweepGain, invertedGain, { stop: () => clearInterval(sweepInterval) });
+        // Display update - separate interval for smooth visuals
+        const displayInterval = setInterval(() => {
+          const hz = minHz * Math.pow(maxHz / minHz, progress);
+          setCurrentHz(Math.round(hz));
+        }, 500);
+
+        nodes.push(sweepOsc, invertedOsc, sweepGain, invertedGain, { 
+          stop: () => {
+            clearInterval(sweepInterval);
+            clearInterval(displayInterval);
+          }
+        });
       }
       
       // BILATERAL STIMULATION
