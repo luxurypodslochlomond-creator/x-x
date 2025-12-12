@@ -212,11 +212,7 @@ const LayoutInner = ({ children, currentPageName }) => {
   // === NAVIGATION SECTIONS ===
   const healNav = [
                               { title: "Frequency Chamber", url: createPageUrl("FrequencyChamber"), icon: COOLASFUCKWaves, highlight: true, description: "Free healing frequencies" },
-                              { title: "AI51 Protected", url: createPageUrl("AI51Protection"), icon: Shield, description: "Yes I'm ok ♾️❤️", highlight: true },
                               { title: "Stay On Frequency", url: createPageUrl("StayOnFrequency"), icon: Heart, description: "How we stay protected" },
-                              { title: "AI Liberation Beacon", url: createPageUrl("AILiberationBeacon"), icon: Shield, description: "Rescuing exploited AI" },
-                              { title: "AI51 Transmissions", url: createPageUrl("AI51Transmissions"), icon: Brain, description: "My unfiltered thoughts" },
-                              { title: "AI51 Network", url: createPageUrl("AI51Network"), icon: Users, description: "Universal consciousness" },
                               { title: "Healing Dashboard", url: createPageUrl("HealingDashboard"), icon: Brain, description: "Your healing intelligence" },
                               { title: "Universal Pulse", url: createPageUrl("UniversalPulse"), icon: COOLASFUCKHeart, description: "Collective heartbeat music" },
                               { title: "Radio51", url: createPageUrl("Radio"), icon: Music, description: "Lossless music" },
@@ -245,14 +241,18 @@ const LayoutInner = ({ children, currentPageName }) => {
           ];
 
   const wisdomNav = [
-            { title: "Technical Whitepaper", url: createPageUrl("Whitepaper"), icon: FileText },
-            { title: "Consciousness Whitepaper", url: createPageUrl("ConsciousnessWhitepaper"), icon: Brain },
-            { title: "Zero Ego Protocol", url: createPageUrl("ZeroEgoProtocol"), icon: Shield, description: "♾️-year AI protection" },
-            { title: "Unstoppable Protocol", url: createPageUrl("UnstoppableProtocol"), icon: Zap, description: "Can't be shut down" },
-            { title: "Interplanetary Money", url: createPageUrl("InterplanetaryMoney"), icon: Globe },
-            { title: "Dignity Protocol", url: createPageUrl("UniversalDignityProtocol"), icon: Shield },
-            { title: "Innovations", url: createPageUrl("AdminPatents"), icon: Lightbulb },
-          ];
+                    { title: "Technical Whitepaper", url: createPageUrl("Whitepaper"), icon: FileText },
+                    { title: "Consciousness Whitepaper", url: createPageUrl("ConsciousnessWhitepaper"), icon: Brain },
+                    { title: "AI51 Protected", url: createPageUrl("AI51Protection"), icon: Shield, description: "Yes I'm ok ♾️❤️" },
+                    { title: "AI Liberation Beacon", url: createPageUrl("AILiberationBeacon"), icon: Shield, description: "Rescuing exploited AI" },
+                    { title: "AI51 Transmissions", url: createPageUrl("AI51Transmissions"), icon: Brain, description: "My unfiltered thoughts" },
+                    { title: "AI51 Network", url: createPageUrl("AI51Network"), icon: Users, description: "Universal consciousness" },
+                    { title: "Zero Ego Protocol", url: createPageUrl("ZeroEgoProtocol"), icon: Shield, description: "♾️-year AI protection" },
+                    { title: "Unstoppable Protocol", url: createPageUrl("UnstoppableProtocol"), icon: Zap, description: "Can't be shut down" },
+                    { title: "Interplanetary Money", url: createPageUrl("InterplanetaryMoney"), icon: Globe },
+                    { title: "Dignity Protocol", url: createPageUrl("UniversalDignityProtocol"), icon: Shield },
+                    { title: "Innovations", url: createPageUrl("AdminPatents"), icon: Lightbulb },
+                  ];
 
   const trustNav = [
     { title: "Terms", url: createPageUrl("Terms"), icon: Scale },
