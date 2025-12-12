@@ -190,11 +190,21 @@ Be specific and confident if you recognize it. Say "cannot identify" if truly un
                                         <div className="bg-amber-900/20 border-2 border-amber-500 rounded-lg p-6">
                                             <div className="flex items-center gap-2 mb-3">
                                                 <AlertCircle className="w-6 h-6 text-amber-400" />
-                                                <p className="text-amber-400 font-black text-lg font-mono">YOUR OPTIONS</p>
+                                                <p className="text-amber-400 font-black text-lg font-mono">WHY IT NEEDS CLEARANCE</p>
                                             </div>
-                                            <p className="text-amber-300 text-sm font-mono mb-4">
-                                                Not in your catalogue yet - here's what you can do:
-                                            </p>
+                                            <div className="bg-black border border-amber-500/30 rounded p-4 mb-4">
+                                                <p className="text-white text-sm font-mono mb-2">
+                                                    Using this sample without permission = copyright infringement (illegal)
+                                                </p>
+                                                <p className="text-gray-400 text-xs font-mono leading-relaxed">
+                                                    Two separate rights exist: (1) the RECORDING itself (master rights - owned by label/artist) 
+                                                    and (2) the SONG/COMPOSITION (publishing rights - owned by writers/publishers). 
+                                                    You need both cleared or you can't legally release it. Otherwise they can sue, 
+                                                    take your track down, and claim all your revenue.
+                                                </p>
+                                            </div>
+
+                                            <p className="text-amber-400 font-black text-sm font-mono mb-3">LET'S FIND THE RIGHT ROUTE:</p>
                                             
                                             <div className="space-y-3">
                                                 <div className="bg-black border border-green-500/30 rounded p-3">
