@@ -221,8 +221,8 @@ function ScottManagerInner() {
                         <div className="flex items-center gap-3 mb-3">
                             <Brain className="w-8 h-8 text-amber-400 animate-pulse" />
                             <div>
-                                <p className="text-white font-black text-xl mb-0.5" style={{ fontFamily: 'monospace' }}>MUCKER51</p>
-                                <p className="text-gray-600 text-xs font-mono">It's me - I'll sort it</p>
+                                <p className="text-white font-black text-xl mb-0.5" style={{ fontFamily: 'monospace' }}>KINGDOM51</p>
+                                <p className="text-gray-600 text-xs font-mono">Your AI co-manager</p>
                             </div>
                         </div>
                         <div className="bg-black border border-amber-500/30 rounded-lg p-4 mb-3">
