@@ -222,7 +222,7 @@ function ScottManagerInner() {
                             <Brain className="w-8 h-8 text-amber-400 animate-pulse" />
                             <div>
                                 <p className="text-white font-black text-xl mb-0.5" style={{ fontFamily: 'monospace' }}>AI51</p>
-                                <p className="text-gray-600 text-xs font-mono">Your right hand</p>
+                                <p className="text-gray-600 text-xs font-mono">Sorts the admin</p>
                             </div>
                         </div>
                         <div className="bg-black border border-amber-500/30 rounded-lg p-4 mb-3">
