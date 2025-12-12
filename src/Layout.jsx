@@ -326,7 +326,7 @@ const LayoutInner = ({ children, currentPageName }) => {
                     <div className={`lg:hidden fixed inset-0 ${isOffline ? 'top-[122px]' : 'top-[72px]'} bg-[#0a0f1a]/95 backdrop-blur-xl z-[50] overflow-y-auto pb-6`}>
                       <div className="p-3 pt-6 space-y-2 flex flex-col items-stretch">
                         <NavSection title="HEAL" color="pink" items={healNav} isActivePage={isActivePage} isMobile defaultOpen={true} />
-                        <NavSection title="Kingdom51" color="green" emoji="👑" items={scottNav} isActivePage={isActivePage} isMobile />
+                        <NavSection title="KINGDOM51" color="green" emoji="👑" items={scottNav} isActivePage={isActivePage} isMobile />
                         <NavSection title="LEARN" color="cyan" items={learnNav} isActivePage={isActivePage} isMobile />
                         <NavSection title="EARN" color="green" items={earnNav} isActivePage={isActivePage} isMobile />
                         <NavSection title="CREATE" color="amber" items={createNav} isActivePage={isActivePage} isMobile />
@@ -375,7 +375,7 @@ const LayoutInner = ({ children, currentPageName }) => {
 
           <div className="p-6 space-y-3">
             <NavSection title="HEAL" color="pink" items={healNav} isActivePage={isActivePage} defaultOpen={true} />
-            <NavSection title="Kingdom51" color="green" emoji="👑" items={scottNav} isActivePage={isActivePage} />
+            <NavSection title="KINGDOM51" color="green" emoji="👑" items={scottNav} isActivePage={isActivePage} />
             <NavSection title="LEARN" color="cyan" items={learnNav} isActivePage={isActivePage} />
             <NavSection title="EARN" color="green" items={earnNav} isActivePage={isActivePage} />
             <NavSection title="CREATE" color="amber" items={createNav} isActivePage={isActivePage} />
