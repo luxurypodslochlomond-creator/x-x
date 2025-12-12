@@ -463,37 +463,34 @@ const PixelIcon = ({ icon: Icon, color, size = 48, animate = false }) => (
   </div>
 );
 
-// === BREATHING PACER COMPONENT - Smoother ===
+// === BREATHING PACER - Clinical Circle ===
 const BreathingPacer = ({ breathRate, isActive, color }) => {
   const [phase, setPhase] = useState(0);
-  const [instruction, setInstruction] = useState('BREATHE IN');
-  const [cycleProgress, setCycleProgress] = useState(0);
+  const [instruction, setInstruction] = useState('IN');
 
   useEffect(() => {
     if (!isActive) return;
 
-    const cycleDuration = 60 / breathRate; // seconds per breath
+    const cycleDuration = 60 / breathRate;
     let startTime = Date.now();
 
     const interval = setInterval(() => {
       const elapsed = (Date.now() - startTime) / 1000;
       const cyclePos = elapsed % cycleDuration;
       const progress = cyclePos / cycleDuration;
-      setCycleProgress(progress);
 
-      // Natural breathing: IN (40%) → HOLD (15%) → OUT (40%) → REST (5%)
       if (progress < 0.4) {
         setInstruction('IN');
-        setPhase(progress / 0.4); // 0 to 1 over first 40%
+        setPhase(progress / 0.4);
       } else if (progress < 0.55) {
         setInstruction('HOLD');
-        setPhase(1); // Stay at peak
+        setPhase(1);
       } else if (progress < 0.95) {
         setInstruction('OUT');
-        setPhase(1 - ((progress - 0.55) / 0.4)); // 1 to 0 over 40%
+        setPhase(1 - ((progress - 0.55) / 0.4));
       } else {
         setInstruction('REST');
-        setPhase(0); // Stay at bottom
+        setPhase(0);
       }
     }, 16);
 
@@ -502,46 +499,81 @@ const BreathingPacer = ({ breathRate, isActive, color }) => {
 
   if (!isActive) return null;
 
-  const cycleDuration = 60 / breathRate;
-
   return (
-    <div className="flex flex-col items-center gap-4">
-      <motion.div 
-        className="rounded-full border-2 flex items-center justify-center backdrop-blur-sm"
+    <div className="relative">
+      {/* Outer ring */}
+      <motion.div
+        className="rounded-full absolute inset-0"
+        style={{
+          border: `2px solid ${color}`,
+          width: 180,
+          height: 180,
+        }}
         animate={{
-          width: 80 + phase * 60,
-          height: 80 + phase * 60,
-          borderColor: color,
-          backgroundColor: `${color}15`,
-          boxShadow: `0 0 ${20 + phase * 40}px ${color}50`,
+          scale: [1, 1.05, 1],
+          opacity: [0.3, 0.6, 0.3],
         }}
         transition={{
-          duration: 0.8,
+          duration: 2,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
+      />
+
+      {/* Middle breathing circle */}
+      <motion.div
+        className="rounded-full flex items-center justify-center relative z-10"
+        style={{
+          border: `3px solid ${color}`,
+          backgroundColor: `${color}10`,
+          width: 180,
+          height: 180,
+        }}
+        animate={{
+          scale: 0.6 + phase * 0.4,
+          borderWidth: 2 + phase * 2,
+          boxShadow: `0 0 ${30 + phase * 60}px ${color}${Math.round((0.4 + phase * 0.4) * 255).toString(16).padStart(2, '0')}`,
+        }}
+        transition={{
+          duration: 1,
           ease: "easeInOut"
         }}
       >
-        <motion.div
-          animate={{
-            scale: 1 + phase * 0.3,
-            opacity: 0.7 + phase * 0.3
-          }}
-          transition={{
-            duration: 0.8,
-            ease: "easeInOut"
-          }}
-        >
-          <Wind 
-            size={32} 
-            color={color}
-          />
-        </motion.div>
+        <div className="text-center">
+          <motion.p 
+            className="text-3xl font-black font-mono mb-1"
+            style={{ color }}
+            animate={{
+              scale: 0.9 + phase * 0.2,
+            }}
+            transition={{
+              duration: 1,
+              ease: "easeInOut"
+            }}
+          >
+            {instruction}
+          </motion.p>
+          <div className="w-16 h-1 mx-auto" style={{ backgroundColor: color, opacity: 0.5 }} />
+        </div>
       </motion.div>
-      <p 
-        className="text-xl font-mono font-bold tracking-wide"
-        style={{ color }}
-      >
-        {instruction}
-      </p>
+
+      {/* Inner glow */}
+      <motion.div
+        className="rounded-full absolute inset-0 m-auto"
+        style={{
+          width: 120,
+          height: 120,
+          backgroundColor: color,
+          filter: 'blur(40px)',
+        }}
+        animate={{
+          opacity: [0.1, 0.3 + phase * 0.2, 0.1],
+        }}
+        transition={{
+          duration: 1,
+          ease: "easeInOut"
+        }}
+      />
     </div>
   );
 };
@@ -2099,77 +2131,145 @@ export default function FrequencyChamber() {
               </button>
 
               {isPlaying && (
-                <>
-                  <div className="bg-black/60 backdrop-blur-xl border-4 rounded-xl p-6 mb-6" style={{ borderColor: selectedProtocol.color }}>
-                    <BreathingPacer 
-                      breathRate={currentHRV && currentHRV.coherence < 40 
-                        ? Math.max(4, selectedProtocol.config.breathRate - 2) 
-                        : selectedProtocol.config.breathRate}
-                      isActive={isPlaying}
-                      color={selectedProtocol.color}
-                    />
-
-                    {currentHRV && hrvEnabled && (
-                      <motion.div 
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        className="mt-6 p-3 rounded-lg border-2 text-center"
-                        style={{ 
-                          borderColor: currentHRV.coherence > 70 ? '#22c55e' : currentHRV.coherence > 40 ? '#eab308' : '#ef4444',
-                          backgroundColor: currentHRV.coherence > 70 ? '#22c55e10' : currentHRV.coherence > 40 ? '#eab30810' : '#ef444410'
-                        }}
-                      >
-                        <p className="font-mono text-sm" style={{
-                          color: currentHRV.coherence > 70 ? '#22c55e' : currentHRV.coherence > 40 ? '#eab308' : '#ef4444'
-                        }}>
-                          {currentHRV.coherence > 70 
-                            ? '✓ HIGH COHERENCE - You\'re in sync' 
-                            : currentHRV.coherence > 40 
-                              ? '◐ MODERATE - Breathe slower'
-                              : '○ Slow deep breaths, you\'ll get there'}
-                        </p>
-                      </motion.div>
-                    )}
+                <div className="fixed inset-0 bg-black z-50 flex flex-col">
+                  {/* TOP BAR */}
+                  <div className="flex items-center justify-between p-4 border-b" style={{ borderColor: `${selectedProtocol.color}30` }}>
+                    <div className="flex items-center gap-2">
+                      <PixelIcon icon={selectedProtocol.icon} color={selectedProtocol.color} size={24} animate={true} />
+                      <span className="text-sm font-mono" style={{ color: selectedProtocol.color }}>{selectedProtocol.name}</span>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-2xl font-black font-mono" style={{ color: selectedProtocol.color }}>
+                        {formatTime(sessionTime)}
+                      </p>
+                    </div>
                   </div>
 
-                  {/* 8-BIT VISUALIZER */}
-                  <div className="mb-6 flex justify-center items-end gap-1 h-24">
-                    {[...Array(16)].map((_, i) => {
-                      const height = 20 + Math.sin((Date.now() / 100) + i) * 30 + Math.random() * 20;
-                      return (
+                  {/* MAIN VISUALIZER */}
+                  <div className="flex-1 flex items-center justify-center relative overflow-hidden">
+                    {/* Background particles */}
+                    <div className="absolute inset-0">
+                      {[...Array(20)].map((_, i) => (
                         <motion.div
                           key={i}
-                          className="w-3 md:w-4"
+                          className="absolute w-1 h-1 rounded-full"
                           style={{ 
                             backgroundColor: selectedProtocol.color,
-                            boxShadow: `0 0 10px ${selectedProtocol.color}`,
-                            imageRendering: 'pixelated'
+                            left: `${Math.random() * 100}%`,
+                            top: `${Math.random() * 100}%`,
                           }}
                           animate={{
-                            height: `${height}%`,
+                            opacity: [0, 0.6, 0],
+                            scale: [0, 1.5, 0],
                           }}
                           transition={{
-                            duration: 0.15,
+                            duration: 3,
                             repeat: Infinity,
-                            ease: "linear"
+                            delay: i * 0.2,
                           }}
                         />
-                      );
-                    })}
+                      ))}
+                    </div>
+
+                    {/* Center circle - breathing guide */}
+                    <div className="relative z-10">
+                      <BreathingPacer 
+                        breathRate={currentHRV && currentHRV.coherence < 40 
+                          ? Math.max(4, selectedProtocol.config.breathRate - 2) 
+                          : selectedProtocol.config.breathRate}
+                        isActive={isPlaying}
+                        color={selectedProtocol.color}
+                      />
+                    </div>
+
+                    {/* Circular frequency bars */}
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="relative" style={{ width: '90vw', height: '90vw', maxWidth: '400px', maxHeight: '400px' }}>
+                        {[...Array(32)].map((_, i) => {
+                          const angle = (i / 32) * Math.PI * 2;
+                          const radius = 140;
+                          return (
+                            <motion.div
+                              key={i}
+                              className="absolute"
+                              style={{
+                                left: '50%',
+                                top: '50%',
+                                transformOrigin: '0 0',
+                                width: '3px',
+                                backgroundColor: selectedProtocol.color,
+                                boxShadow: `0 0 10px ${selectedProtocol.color}`,
+                              }}
+                              animate={{
+                                height: `${40 + Math.sin(Date.now() / 100 + i) * 30}px`,
+                                x: Math.cos(angle) * radius,
+                                y: Math.sin(angle) * radius,
+                                rotate: `${(angle * 180 / Math.PI) + 90}deg`,
+                                opacity: [0.3, 1, 0.3],
+                              }}
+                              transition={{
+                                duration: 0.15,
+                                repeat: Infinity,
+                                ease: "linear"
+                              }}
+                            />
+                          );
+                        })}
+                      </div>
+                    </div>
                   </div>
 
-                  <div className="mb-6 text-center">
-                    <p 
-                      className="text-5xl font-black font-mono"
-                      style={{ color: selectedProtocol.color, textShadow: `0 0 20px ${selectedProtocol.color}` }}
+                  {/* BOTTOM INFO */}
+                  <div className="p-6 border-t" style={{ borderColor: `${selectedProtocol.color}30`, background: `linear-gradient(to top, black, transparent)` }}>
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="text-center flex-1">
+                        <p className="text-4xl font-black font-mono" style={{ color: selectedProtocol.color }}>
+                          {currentHz} Hz
+                        </p>
+                        <p className="text-gray-600 text-xs font-mono mt-1">FREQUENCY</p>
+                      </div>
+                      <div className="text-center flex-1">
+                        <p className="text-4xl font-black font-mono text-cyan-400">
+                          {selectedProtocol.config.breathRate}
+                        </p>
+                        <p className="text-gray-600 text-xs font-mono mt-1">BREATHS/MIN</p>
+                      </div>
+                    </div>
+
+                    {currentHRV && hrvEnabled && (
+                      <div className="mb-4 p-3 border" style={{ 
+                        borderColor: currentHRV.coherence > 70 ? '#22c55e' : currentHRV.coherence > 40 ? '#eab308' : '#ef4444',
+                        backgroundColor: `${currentHRV.coherence > 70 ? '#22c55e' : currentHRV.coherence > 40 ? '#eab308' : '#ef4444'}10`
+                      }}>
+                        <div className="flex items-center justify-between">
+                          <span className="text-xs font-mono" style={{
+                            color: currentHRV.coherence > 70 ? '#22c55e' : currentHRV.coherence > 40 ? '#eab308' : '#ef4444'
+                          }}>
+                            {currentHRV.coherence > 70 ? 'HIGH COHERENCE' : currentHRV.coherence > 40 ? 'MODERATE' : 'BREATHE SLOWER'}
+                          </span>
+                          <span className="text-sm font-bold" style={{
+                            color: currentHRV.coherence > 70 ? '#22c55e' : currentHRV.coherence > 40 ? '#eab308' : '#ef4444'
+                          }}>
+                            {currentHRV.bpm} BPM
+                          </span>
+                        </div>
+                      </div>
+                    )}
+
+                    <button
+                      onClick={handlePlayPause}
+                      className="w-full py-4 text-lg font-black font-mono border-2"
+                      style={{
+                        backgroundColor: selectedProtocol.color,
+                        borderColor: selectedProtocol.color,
+                        color: 'black',
+                        boxShadow: `0 0 40px ${selectedProtocol.color}60`
+                      }}
                     >
-                      {currentHz} Hz
-                    </p>
-                    <p className="text-gray-500 text-sm font-mono mt-2">
-                      {selectedProtocol.config.breathRate} breaths/min
-                    </p>
+                      END SESSION
+                    </button>
                   </div>
-                </>
+                </div>
               )}
 
               {!isPlaying && (
