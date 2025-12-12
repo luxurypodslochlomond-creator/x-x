@@ -86,8 +86,8 @@ export default function AdminStrategicNotes() {
                 </p>
                 <p className="text-gray-300 text-sm">
                   Submitted to: hello@mind-charity.org.uk<br />
-                  Contact: Jo → Simone (National Corporate Fundraising Team)<br />
-                  Expected response: Within 10 working days
+                  Contact: Jo (National Corporate Fundraising Team)<br />
+                  Expected response: Within 10 working days (Jo or team member will review)
                 </p>
               </div>
 
