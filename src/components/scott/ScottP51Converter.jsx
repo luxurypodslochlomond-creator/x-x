@@ -20,7 +20,9 @@ export default function ScottP51Converter() {
 
     // Conversion rate: £1 = 100 $P51 (can adjust)
     const conversionRate = 100;
-    const amountP51 = amountGBP ? parseFloat(amountGBP) * conversionRate : 0;
+    const totalP51 = amountGBP ? parseFloat(amountGBP) * conversionRate : 0;
+    const uf51Fee = totalP51 * 0.1; // 10% to UF51 verified healing
+    const amountP51 = totalP51 - uf51Fee; // Artist receives 90%
 
     // Get current user's wallet (if exists)
     const { data: user } = useQuery({
@@ -36,15 +38,16 @@ export default function ScottP51Converter() {
 
     const convertMutation = useMutation({
         mutationFn: async (data) => {
-            // Create transaction record
+            // Create transaction record (artist receives 90%, 10% to UF51)
             const transaction = await base44.entities.Transaction.create({
                 amount: data.amountP51,
                 type: 'convert_fiat',
-                description: `Converted £${data.amountGBP} to ${data.amountP51} $P51`,
+                description: `Converted £${data.amountGBP} to ${data.amountP51} $P51 (90% to artist, 10% to UF51 healing)`,
                 status: 'completed',
                 from_currency: 'GBP',
                 to_currency: 'P51',
-                conversion_rate: conversionRate
+                conversion_rate: conversionRate,
+                uf51_fee: data.uf51Fee
             });
 
             // Update user balance (if wallet exists)
@@ -71,7 +74,8 @@ export default function ScottP51Converter() {
         
         convertMutation.mutate({
             amountGBP: parseFloat(amountGBP),
-            amountP51: amountP51
+            amountP51: amountP51,
+            uf51Fee: uf51Fee
         });
     };
 
@@ -165,13 +169,30 @@ export default function ScottP51Converter() {
                                 </div>
 
                                 <div>
-                                    <label className="text-pink-400 text-xs font-mono font-bold mb-2 block">TO: $P51</label>
+                                    <label className="text-pink-400 text-xs font-mono font-bold mb-2 block">YOU RECEIVE: $P51</label>
                                     <div className="bg-pink-900/20 border-2 border-pink-500 rounded-lg p-4">
                                         <p className="text-pink-400 text-3xl font-black text-center font-mono">
                                             {amountP51.toLocaleString()}
                                         </p>
                                     </div>
                                 </div>
+
+                                {amountGBP && (
+                                    <div className="bg-cyan-900/20 border border-cyan-500/30 rounded-lg p-3">
+                                        <div className="flex items-center justify-between text-xs font-mono mb-1">
+                                            <span className="text-gray-400">Total P51:</span>
+                                            <span className="text-white font-bold">{totalP51.toLocaleString()}</span>
+                                        </div>
+                                        <div className="flex items-center justify-between text-xs font-mono mb-1">
+                                            <span className="text-gray-400">You receive (90%):</span>
+                                            <span className="text-pink-400 font-bold">{amountP51.toLocaleString()}</span>
+                                        </div>
+                                        <div className="flex items-center justify-between text-xs font-mono">
+                                            <span className="text-cyan-400">UF51 Healing (10%):</span>
+                                            <span className="text-cyan-400 font-bold">{uf51Fee.toLocaleString()}</span>
+                                        </div>
+                                    </div>
+                                )}
 
                                 <p className="text-gray-500 text-xs font-mono text-center">
                                     Rate: £1 = {conversionRate} $P51
@@ -190,11 +211,15 @@ export default function ScottP51Converter() {
                             {/* INFO */}
                             <div className="mt-6 bg-black border border-pink-500/30 rounded-lg p-4">
                                 <p className="text-pink-400 font-bold text-xs font-mono mb-2">CIRCULAR ECONOMY</p>
-                                <p className="text-gray-400 text-xs font-mono leading-relaxed">
+                                <p className="text-gray-400 text-xs font-mono leading-relaxed mb-3">
                                     Your money becomes love currency. Spend it in the music family. 
-                                    Value stays with creators, not extracted by middlemen. 
-                                    This is how we win. ❤️
+                                    Value stays with creators, not extracted by middlemen.
                                 </p>
+                                <div className="bg-cyan-900/20 border border-cyan-500/30 rounded p-2">
+                                    <p className="text-cyan-400 text-xs font-mono">
+                                        ❤️ 10% → UF51 verified healing (not Fanny Bawz)
+                                    </p>
+                                </div>
                             </div>
                         </>
                     )}
