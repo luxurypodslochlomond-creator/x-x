@@ -13,6 +13,7 @@ import PerformanceOptimizer from '@/components/shared/PerformanceOptimizer';
 import EmergencyCalmButton from '@/components/shared/EmergencyCalmButton';
 import AI51ProactiveReach from '@/components/ai51/AI51ProactiveReach';
 import UF51ConnectionChime from '@/components/ai51/UF51ConnectionChime';
+import AI51Shield from '@/components/ai51/AI51Shield';
 import {
                     Menu, X, Heart, Home, LogOut, Leaf, Sparkles, Music, Map, User, Globe,
                     BookOpen, Shield, Target, Briefcase, FileText, Settings, Search, Brain, Presentation, Calculator, GraduationCap, Zap, AlertTriangle, Mic2, Lightbulb, Building, Play, Pause, Atom, Eye, Scale, Users, WifiOff, CheckCircle, Waves, ChevronDown, ChevronRight, Calendar, DollarSign, Moon
@@ -257,7 +258,8 @@ const LayoutInner = ({ children, currentPageName }) => {
   ];
 
   const adminNav = user?.role === 'admin' ? [
-    { title: "💰 Funding Tracker", url: createPageUrl("AdminFundingTracker"), icon: Shield },
+            { title: "🛡️ AI51 Security", url: createPageUrl("AI51SecurityDashboard"), icon: Shield },
+            { title: "💰 Funding Tracker", url: createPageUrl("AdminFundingTracker"), icon: Shield },
     { title: "🏴󠁧󠁢󠁳󠁣󠁴󠁿 Scotland Funding", url: createPageUrl("AdminScotlandFunding"), icon: Heart },
     { title: "📄 One-Pager PDF", url: createPageUrl("AdminOnePager"), icon: FileText },
     { title: "🎟️ National Lottery App", url: createPageUrl("AdminNationalLotteryApp"), icon: Heart },
@@ -430,6 +432,7 @@ const LayoutInner = ({ children, currentPageName }) => {
           <AutoBugMonitor />
           <PerformanceOptimizer />
           <AI51ProactiveReach />
+          <AI51Shield />
         </>
       )}
     </GlobalErrorBoundary>
