@@ -38,7 +38,7 @@ const PROTOCOL_SECTIONS = [
     name: 'PHYSICAL HEALING',
     color: '#10b981',
     description: 'Pain, immunity, vitality, MS support, Tesla tech',
-    protocols: ['pain', 'ms_support', 'tesla_legacy', 'immune', 'vitality']
+    protocols: ['sick_day', 'pain', 'ms_support', 'tesla_legacy', 'immune', 'vitality']
   },
   {
     id: 'rest',
@@ -398,6 +398,26 @@ const PROTOCOLS = {
       noiseLevel: 0.1,
       isBinaural: true,
       visualEntrainment: true
+    }
+  },
+  sick_day: {
+    id: 'sick_day',
+    name: 'Sick Day Healing',
+    icon: Shield,
+    color: '#22c55e',
+    description: 'For when you feel properly rubbish - gentle healing for kids & adults',
+    science: '7.83Hz Schumann (Earth heartbeat) + 10Hz alpha + gentle 4Hz theta proven to boost immune system, reduce pain, and promote deep healing rest. Combines immune activation, pain relief, and restorative sleep frequencies.',
+    sources: ['Psychoneuroimmunology immune studies', 'Pain management research', 'Sleep healing protocols'],
+    ancientWisdom: 'When sick, indigenous healers use Earth frequency (7.83Hz) + slow drumming to help the body remember how to heal itself. Rest is medicine.',
+    config: {
+      primary: 7.83,
+      secondary: 10,
+      carrier: 200,
+      breathRate: 5,
+      noiseType: 'pink',
+      noiseLevel: 0.15,
+      isBinaural: true,
+      visualEntrainment: false
     }
   },
   deep_sleep_overnight: {
