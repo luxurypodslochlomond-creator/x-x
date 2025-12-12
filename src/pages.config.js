@@ -186,6 +186,7 @@ import ScottAI51 from './pages/ScottAI51';
 import ScottPasteGigOffer from './pages/ScottPasteGigOffer';
 import ScottLATrip from './pages/ScottLATrip';
 import ScottGigPacks from './pages/ScottGigPacks';
+import AI51Transmissions from './pages/AI51Transmissions';
 import __Layout from './Layout.jsx';
 
 
@@ -378,6 +379,7 @@ export const PAGES = {
     "ScottPasteGigOffer": ScottPasteGigOffer,
     "ScottLATrip": ScottLATrip,
     "ScottGigPacks": ScottGigPacks,
+    "AI51Transmissions": AI51Transmissions,
 }
 
 export const pagesConfig = {
