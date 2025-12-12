@@ -31,7 +31,6 @@ function ScottManagerInner() {
     const [pinEntered, setPinEntered] = useState(false);
     const [pinInput, setPinInput] = useState('');
     const [searchQuery, setSearchQuery] = useState('');
-    const [showOfflineExplainer, setShowOfflineExplainer] = useState(false);
     
     const scott = useScottOffline();
     const [artists, setArtists] = useState([]);
@@ -42,24 +41,13 @@ function ScottManagerInner() {
     const [energyLevel, setEnergyLevel] = useState('high');
     const [celticModeEnabled, setCelticModeEnabled] = useState(true);
 
-    // Check if PIN already stored + show offline explainer first time
+    // Check if PIN already stored
     useEffect(() => {
         const storedPin = localStorage.getItem('scott_access_pin');
         if (storedPin === '1888') {
             setPinEntered(true);
-            
-            // Show offline explainer on first launch
-            const hasSeenOfflineExplainer = localStorage.getItem('scott_offline_explainer_seen');
-            if (!hasSeenOfflineExplainer) {
-                setShowOfflineExplainer(true);
-            }
         }
     }, []);
-    
-    const handleDismissOfflineExplainer = () => {
-        localStorage.setItem('scott_offline_explainer_seen', 'true');
-        setShowOfflineExplainer(false);
-    };
 
     // Load data from offline storage
     useEffect(() => {
@@ -146,48 +134,7 @@ function ScottManagerInner() {
         <ScottFocusMode>
         <div className="min-h-screen bg-black p-4 pb-32">
 
-            {/* OFFLINE EXPLAINER MODAL */}
-            {showOfflineExplainer && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-sm">
-                    <motion.div
-                        initial={{ scale: 0.9, opacity: 0 }}
-                        animate={{ scale: 1, opacity: 1 }}
-                        className="bg-black border border-amber-500/50 rounded-xl p-8 max-w-md w-full"
-                    >
-                        <div className="text-center mb-6">
-                            <KingdomCrown8Bit size={64} animate={true} />
-                        </div>
-                        <h2 className="text-2xl font-bold text-amber-400 text-center mb-4" style={{ fontFamily: 'monospace' }}>
-                            100% OFFLINE
-                        </h2>
-                        <div className="space-y-3 mb-6 text-center">
-                            <p className="text-white text-sm" style={{ fontFamily: 'monospace' }}>
-                                Works in basements
-                            </p>
-                            <p className="text-white text-sm" style={{ fontFamily: 'monospace' }}>
-                                Works in vans
-                            </p>
-                            <p className="text-white text-sm" style={{ fontFamily: 'monospace' }}>
-                                Works at festivals
-                            </p>
-                            <p className="text-white text-sm" style={{ fontFamily: 'monospace' }}>
-                                Works anywhere
-                            </p>
-                            <div className="h-px bg-gray-800 my-4"></div>
-                            <p className="text-gray-500 text-xs" style={{ fontFamily: 'monospace' }}>
-                                Auto-syncs when signal returns
-                            </p>
-                        </div>
-                        <Button
-                            onClick={handleDismissOfflineExplainer}
-                            className="w-full bg-amber-500 hover:bg-amber-600 text-black font-bold py-3 rounded-lg"
-                            style={{ fontFamily: 'monospace' }}
-                        >
-                            LET'S GO
-                        </Button>
-                    </motion.div>
-                </div>
-            )}
+
 
             {/* HEADER - MINIMAL */}
             <div className="flex items-center justify-between mb-4 pb-3 border-b border-gray-900">
