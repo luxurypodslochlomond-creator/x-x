@@ -472,6 +472,63 @@ function ScottManagerInner() {
                 )}
                 </div>
 
+            {/* ACTIVE DEALS & CONTRACTS */}
+            <div className="mb-6">
+                <h2 className="text-xs text-amber-400 font-black tracking-wider mb-3" style={{ fontFamily: 'monospace' }}>📋 ACTIVE DEALS</h2>
+                <Link to={createPageUrl('ScottPublishing')} className="block mb-2">
+                    <div className="bg-black border-2 border-amber-500/50 hover:border-amber-500 rounded-lg p-4 transition-all">
+                        <div className="flex items-center justify-between">
+                            <div className="flex items-center gap-3">
+                                <Music className="w-5 h-5 text-amber-400" />
+                                <div>
+                                    <p className="text-white text-sm font-bold font-mono">Publishing Rights</p>
+                                    <p className="text-gray-600 text-xs font-mono">Splits, royalties, catalogue</p>
+                                </div>
+                            </div>
+                            <span className="text-amber-400 text-xs font-mono">→</span>
+                        </div>
+                    </div>
+                </Link>
+                <div className="bg-black border-2 border-gray-800 hover:border-amber-500/50 rounded-lg p-4 transition-all">
+                    <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                            <FileText className="w-5 h-5 text-gray-400" />
+                            <div>
+                                <p className="text-white text-sm font-bold font-mono">Label Negotiations</p>
+                                <p className="text-gray-600 text-xs font-mono">Ongoing discussions</p>
+                            </div>
+                        </div>
+                        <span className="text-gray-600 text-xs font-mono">Soon</span>
+                    </div>
+                </div>
+            </div>
+
+            {/* RECORDING SESSIONS */}
+            <div className="mb-6">
+                <h2 className="text-xs text-amber-400 font-black tracking-wider mb-3" style={{ fontFamily: 'monospace' }}>🎙️ STUDIO</h2>
+                <div className="bg-black border-2 border-gray-800 hover:border-amber-500/50 rounded-lg p-4 transition-all mb-2">
+                    <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                            <Music className="w-5 h-5 text-gray-400" />
+                            <div>
+                                <p className="text-white text-sm font-bold font-mono">Demo Tracking</p>
+                                <p className="text-gray-600 text-xs font-mono">Upload & share tracks</p>
+                            </div>
+                        </div>
+                        <span className="text-gray-600 text-xs font-mono">Soon</span>
+                    </div>
+                </div>
+                <div className="bg-black border-2 border-gray-800 hover:border-amber-500/50 rounded-lg p-4 transition-all">
+                    <div className="flex items-center gap-3">
+                        <Users className="w-5 h-5 text-gray-400" />
+                        <div>
+                            <p className="text-white text-sm font-bold font-mono">Producer Network</p>
+                            <p className="text-gray-600 text-xs font-mono">Collaborators & session crew</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             {/* GIG OFFERS - INLINE SMART FEED */}
             <ScottGigOffersFeed />
 
