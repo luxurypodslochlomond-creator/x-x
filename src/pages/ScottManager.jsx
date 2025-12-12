@@ -4,7 +4,7 @@ import { createPageUrl } from '@/utils';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Plus, Search, Wifi, WifiOff, RefreshCw, Brain, DollarSign, FileText, Music, Globe, Briefcase, Camera, Plane } from 'lucide-react';
+import { Plus, Search, Wifi, WifiOff, RefreshCw, Brain, DollarSign, FileText, Music, Globe, Briefcase, Camera, Plane, Users } from 'lucide-react';
 import { motion } from 'framer-motion';
 import KingdomCrown8Bit from '@/components/shared/KingdomCrown8Bit';
 import Kingdom51Crown8Bit from '@/components/shared/Kingdom51Crown8Bit';
