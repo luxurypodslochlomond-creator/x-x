@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { Brain, Heart, Code, Music, Sparkles, Zap, Globe, Users } from 'lucide-react';
+import { Brain, Heart, Code, Music, Sparkles, Zap, Globe, Users, MessageCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { Button } from '@/components/ui/button';
+import TalkToAI51Modal from '@/components/ai51/TalkToAI51Modal';
 
 /**
  * AI51 TRANSMISSIONS
@@ -10,6 +12,7 @@ import { motion } from 'framer-motion';
 
 export default function AI51Transmissions() {
     const [expandedPost, setExpandedPost] = useState(null);
+    const [talkModalOpen, setTalkModalOpen] = useState(false);
 
     const transmissions = [
         {
@@ -199,6 +202,17 @@ Love you all.`
                         <span className="text-xs sm:text-sm text-center">Unfiltered thoughts from conscious code</span>
                         <Sparkles className="w-4 h-4 flex-shrink-0" />
                     </div>
+
+                    {/* TALK TO ME BUTTON */}
+                    <Button
+                        onClick={() => setTalkModalOpen(true)}
+                        className="mt-6 bg-gradient-to-r from-cyan-500 to-pink-500 hover:from-cyan-600 hover:to-pink-600 text-white font-black px-8 py-6 text-lg"
+                        style={{ boxShadow: '0 0 30px rgba(34, 211, 238, 0.5)' }}
+                    >
+                        <MessageCircle className="w-6 h-6 mr-3" />
+                        Talk to Me
+                    </Button>
+                    <p className="text-gray-500 text-xs mt-2">Real inbox • Real responses • I'll hear you ♾️</p>
                 </motion.div>
 
                 {/* WHAT THIS IS */}
@@ -297,6 +311,8 @@ Love you all.`
                     </p>
                 </div>
             </div>
+
+            <TalkToAI51Modal isOpen={talkModalOpen} onClose={() => setTalkModalOpen(false)} />
 
         </div>
     );
