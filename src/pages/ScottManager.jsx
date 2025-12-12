@@ -102,17 +102,29 @@ function ScottManagerInner() {
         a.type.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
-    // PIN ENTRY SCREEN
+    // PIN ENTRY SCREEN - COOLASFUCK KINGDOM51
     if (!pinEntered) {
         return (
-            <div className="min-h-screen bg-black p-4 flex items-center justify-center">
-                <Card className="bg-black border border-gray-800 rounded-xl p-8 max-w-md w-full">
+            <div className="min-h-screen bg-gradient-to-br from-black via-amber-950/30 to-black p-4 flex items-center justify-center relative overflow-hidden">
+                {/* Animated background pattern */}
+                <div className="absolute inset-0 opacity-10">
+                    <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-amber-500 rounded-full blur-3xl animate-pulse" />
+                    <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-pink-500 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+                </div>
+                
+                <Card className="bg-black border-4 border-amber-500 rounded-xl p-8 max-w-md w-full relative z-10" style={{ boxShadow: '0 0 60px rgba(245, 158, 11, 0.5), inset 0 0 30px rgba(245, 158, 11, 0.1)' }}>
                     <div className="text-center mb-8">
-                        <div className="flex justify-center mb-4">
-                            <KingdomCrown8Bit size={48} animate={true} />
+                        <div className="flex justify-center mb-6">
+                            <div className="relative">
+                                <KingdomCrown8Bit size={64} animate={true} />
+                                <div className="absolute -inset-4 bg-amber-500/20 rounded-full blur-xl animate-pulse" />
+                            </div>
                         </div>
-                        <h1 className="text-4xl font-black text-amber-400 mb-2" style={{ fontFamily: 'monospace' }}>SK</h1>
-                        <p className="text-gray-600 text-xs" style={{ fontFamily: 'monospace' }}>OFFLINE-FIRST MGMT</p>
+                        <h1 className="text-6xl font-black mb-3 bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-400 bg-clip-text text-transparent" style={{ fontFamily: 'monospace', textShadow: '0 0 30px rgba(245, 158, 11, 0.5)' }}>
+                            KINGDOM51
+                        </h1>
+                        <p className="text-amber-400/80 text-sm font-black tracking-[0.3em]" style={{ fontFamily: 'monospace' }}>YOUR AI CO-MANAGER</p>
+                        <div className="mt-4 h-1 w-full bg-gradient-to-r from-transparent via-amber-500 to-transparent" />
                     </div>
                     <Input
                         type="password"
@@ -120,16 +132,17 @@ function ScottManagerInner() {
                         value={pinInput}
                         onChange={(e) => setPinInput(e.target.value)}
                         onKeyDown={(e) => e.key === 'Enter' && handlePinSubmit()}
-                        className="bg-black border border-gray-800 rounded-lg text-white text-center text-2xl mb-4 focus:border-amber-500/50 transition-colors"
-                        style={{ fontFamily: 'monospace' }}
+                        className="bg-black border-2 border-amber-500/50 rounded-lg text-white text-center text-3xl mb-4 focus:border-amber-400 transition-all font-black tracking-widest"
+                        style={{ fontFamily: 'monospace', boxShadow: 'inset 0 0 20px rgba(245, 158, 11, 0.2)' }}
                     />
                     <Button
                         onClick={handlePinSubmit}
-                        className="w-full bg-amber-500 hover:bg-amber-600 text-black font-bold text-sm py-3 rounded-lg transition-all"
-                        style={{ fontFamily: 'monospace' }}
+                        className="w-full bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-500 hover:from-amber-400 hover:via-yellow-300 hover:to-amber-400 text-black font-black text-lg py-4 rounded-lg transition-all"
+                        style={{ fontFamily: 'monospace', boxShadow: '0 0 30px rgba(245, 158, 11, 0.6)' }}
                     >
-                        ENTER
+                        ENTER KINGDOM
                     </Button>
+                    <p className="text-center text-amber-600/60 text-xs mt-4 font-mono tracking-wider">Zero forms • Zero bullshit • Real help</p>
                 </Card>
             </div>
         );
@@ -146,20 +159,30 @@ function ScottManagerInner() {
 
 
 
-            {/* HEADER - MINIMAL */}
-            <div className="flex items-center justify-between mb-4 pb-3 border-b border-gray-900">
-                <div className="flex items-center gap-2">
-                    <KingdomCrown8Bit size={32} animate={true} />
-                    <div>
-                        <h1 className="text-2xl font-black text-amber-400" style={{ fontFamily: 'monospace' }}>SK</h1>
-                        <p className="text-[9px] text-gray-600 tracking-widest uppercase font-bold" style={{ fontFamily: 'monospace' }}>
-                            {scott.isOnline ? '● ONLINE' : '● OFFLINE'}
-                        </p>
+            {/* HEADER - KINGDOM51 BRANDED */}
+            <div className="mb-6 relative">
+                <div className="bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-500 p-[3px] rounded-xl" style={{ boxShadow: '0 0 30px rgba(245, 158, 11, 0.4)' }}>
+                    <div className="bg-black rounded-xl p-4 flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                            <div className="relative">
+                                <KingdomCrown8Bit size={40} animate={true} />
+                                <div className="absolute -inset-2 bg-amber-500/20 rounded-full blur-lg animate-pulse" />
+                            </div>
+                            <div>
+                                <h1 className="text-2xl font-black bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-400 bg-clip-text text-transparent" style={{ fontFamily: 'monospace' }}>
+                                    KINGDOM51
+                                </h1>
+                                <p className="text-[9px] text-amber-500/80 tracking-widest uppercase font-bold flex items-center gap-1" style={{ fontFamily: 'monospace' }}>
+                                    <span className={scott.isOnline ? 'text-green-400' : 'text-amber-400'}>●</span> 
+                                    {scott.isOnline ? 'ONLINE' : 'OFFLINE'} • CO-MANAGER
+                                </p>
+                            </div>
+                        </div>
+                        <Link to={createPageUrl('ScottCalendar')} className="p-3 bg-amber-500/10 border-2 border-amber-500/30 hover:border-amber-500 rounded-lg transition-all">
+                            <svg className="w-5 h-5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                        </Link>
                     </div>
                 </div>
-                <Link to={createPageUrl('ScottCalendar')} className="p-2 bg-black border border-gray-800 hover:border-cyan-500 rounded-lg transition-all">
-                    <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                </Link>
             </div>
 
             {/* WHAT'S NEXT - TOP SO YOU SEE ACTIVITY */}
@@ -214,22 +237,35 @@ function ScottManagerInner() {
                 </div>
             </Link>
 
-            {/* AI51 CHAT - YOUR MUCKER */}
+            {/* KINGDOM51 AI CHAT - YOUR CO-MANAGER */}
             <Link to={createPageUrl('ScottAI51')} className="block mb-6">
-                <div className="bg-black p-6 rounded-xl border-4 border-amber-500 relative overflow-hidden" style={{ boxShadow: '0 8px 40px rgba(245, 158, 11, 0.4)' }}>
-                    <div className="relative z-10">
-                        <div className="flex items-center gap-3 mb-3">
-                            <Brain className="w-8 h-8 text-amber-400 animate-pulse" />
-                            <div>
-                                <p className="text-white font-black text-xl mb-0.5" style={{ fontFamily: 'monospace' }}>KINGDOM51</p>
-                                <p className="text-gray-600 text-xs font-mono">Your AI co-manager</p>
+                <div className="bg-gradient-to-br from-amber-500/20 via-black to-pink-500/20 p-[3px] rounded-xl relative overflow-hidden" style={{ boxShadow: '0 0 50px rgba(245, 158, 11, 0.5)' }}>
+                    {/* Animated glow */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-amber-500/0 via-amber-500/30 to-amber-500/0 animate-pulse" />
+
+                    <div className="bg-black rounded-xl p-6 relative z-10">
+                        <div className="flex items-center gap-4 mb-4">
+                            <div className="relative">
+                                <Brain className="w-10 h-10 text-amber-400" />
+                                <div className="absolute inset-0 bg-amber-500/50 rounded-full blur-xl animate-pulse" />
+                            </div>
+                            <div className="flex-1">
+                                <p className="text-2xl font-black bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-400 bg-clip-text text-transparent mb-1" style={{ fontFamily: 'monospace' }}>
+                                    KINGDOM51 AI
+                                </p>
+                                <p className="text-amber-500/80 text-xs font-bold tracking-wider font-mono">YOUR CO-MANAGER • ALWAYS ON</p>
                             </div>
                         </div>
-                        <div className="bg-black border border-amber-500/30 rounded-lg p-4 mb-3">
-                            <p className="text-gray-400 text-sm font-mono">"What needs doing SK?"</p>
+
+                        <div className="bg-gradient-to-r from-amber-500/10 to-pink-500/10 border border-amber-500/30 rounded-lg p-4 mb-3">
+                            <p className="text-amber-300 text-sm font-mono font-bold">"What needs doing mate?"</p>
+                            <p className="text-amber-600/60 text-xs font-mono mt-1">Ask anything • Voice • Photo • Zero forms</p>
                         </div>
-                        <div className="flex items-center gap-2 text-gray-600 text-xs font-mono">
-                            <p>→ Talk • Photo • Upload</p>
+
+                        <div className="flex items-center gap-3 text-amber-500/60 text-xs font-mono font-bold">
+                            <span className="px-3 py-1 bg-amber-500/10 border border-amber-500/30 rounded">CONTRACTS</span>
+                            <span className="px-3 py-1 bg-amber-500/10 border border-amber-500/30 rounded">DEALS</span>
+                            <span className="px-3 py-1 bg-amber-500/10 border border-amber-500/30 rounded">TOURS</span>
                         </div>
                     </div>
                 </div>
@@ -465,9 +501,13 @@ function ScottManagerInner() {
                 </div>
             </div>
 
-            {/* FOOTER */}
-            <div className="mt-12 pt-6 border-t border-gray-900 text-center mb-32">
-                <p className="text-gray-800 text-xs mb-2" style={{ fontFamily: 'monospace' }}>Kingdom Management</p>
+            {/* FOOTER - KINGDOM51 BRANDED */}
+            <div className="mt-12 pt-6 border-t-2 border-amber-500/20 text-center mb-32">
+                <div className="flex items-center justify-center gap-2 mb-2">
+                    <KingdomCrown8Bit size={20} animate={false} />
+                    <p className="text-amber-500/60 text-xs font-black tracking-wider" style={{ fontFamily: 'monospace' }}>KINGDOM51</p>
+                </div>
+                <p className="text-amber-600/40 text-[10px] font-mono">Zero bullshit artist management</p>
             </div>
 
             {/* QUICK TOOLS - ONE BUTTON */}
