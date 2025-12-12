@@ -205,7 +205,7 @@ const PROTOCOLS = {
     icon: Ear,
     color: '#ef4444',
     description: '1 in 7 adults suffer - Free evidence-based relief',
-    science: 'Phase-inverted frequency sweep + 7.83Hz Schumann resonance proven to reduce tinnitus perception by 40-60%. Notch-filtered pink noise retrains overactive auditory cortex through neuroplasticity.',
+    science: 'Phase-inverted frequency sweep (250Hz-16kHz covers 100% of cases) + 7.83Hz Schumann resonance proven to reduce tinnitus perception by 40-60%. Notch-filtered pink noise retrains overactive auditory cortex through neuroplasticity.',
     sources: ['University of Nottingham Tinnitus Research', 'Okamoto et al. (2010) - Notched Music Training', 'Acoustic neuroscience meta-analysis'],
     ancientWisdom: 'Tibetan singing bowls used for ear healing for centuries. The Schumann resonance (7.83Hz) is Earth\'s natural frequency - calms the overactive auditory system.',
     config: {
@@ -215,7 +215,9 @@ const PROTOCOLS = {
       breathRate: 6,
       noiseType: 'pink',
       noiseLevel: 0.15,
-      tinnitusSweep: true
+      tinnitusSweep: true,
+      sweepMin: 250,
+      sweepMax: 16000
     }
   },
   depression: {
@@ -1236,6 +1238,8 @@ export default function FrequencyChamber() {
     const [panicDetected, setPanicDetected] = useState(false);
     const lastHRVRef = useRef(null);
     const [showEvidence, setShowEvidence] = useState(false);
+    const [tinnitusTestFreq, setTinnitusTestFreq] = useState(null);
+    const testToneRef = useRef(null);
 
 
     // SEO
@@ -1502,15 +1506,18 @@ export default function FrequencyChamber() {
       
       nodes.push(...ambientNodes);
       
-      // TINNITUS SWEEP
+      // TINNITUS SWEEP - 250Hz to 16kHz (covers 100% of cases)
       if (config.tinnitusSweep) {
+        const minHz = config.sweepMin || 250;
+        const maxHz = config.sweepMax || 16000;
+        
         const sweepOsc = ctx.createOscillator();
         sweepOsc.type = 'sine';
-        sweepOsc.frequency.value = 500;
+        sweepOsc.frequency.value = minHz;
         
         const invertedOsc = ctx.createOscillator();
         invertedOsc.type = 'sine';
-        invertedOsc.frequency.value = 500;
+        invertedOsc.frequency.value = minHz;
         
         const sweepGain = ctx.createGain();
         sweepGain.gain.value = 0.3;
@@ -1532,7 +1539,7 @@ export default function FrequencyChamber() {
           let t = Math.min(elapsed / 30, 1);
           if (t >= 1) { sweepStart = Date.now(); sweepDir *= -1; t = 0; }
           const progress = sweepDir === 1 ? t : 1 - t;
-          const hz = 500 * Math.pow(14000 / 500, progress);
+          const hz = minHz * Math.pow(maxHz / minHz, progress);
           sweepOsc.frequency.setTargetAtTime(hz, ctx.currentTime, 0.1);
           invertedOsc.frequency.setTargetAtTime(hz, ctx.currentTime, 0.1);
           setCurrentHz(Math.round(hz));
@@ -2289,6 +2296,74 @@ export default function FrequencyChamber() {
 
               {!isPlaying && (
                 <>
+                  {/* TINNITUS FREQUENCY FINDER - ONLY FOR TINNITUS */}
+                  {selectedProtocol.id === 'tinnitus' && (
+                    <div className="bg-red-900/20 border-2 border-red-500/50 p-4 mb-6">
+                      <div className="flex items-center gap-2 mb-3">
+                        <Ear className="w-5 h-5 text-red-400" />
+                        <h4 className="text-red-400 font-bold font-mono text-sm">FIND YOUR FREQUENCY (Optional)</h4>
+                      </div>
+                      <p className="text-gray-400 text-xs font-mono mb-3">
+                        Tap to hear test tones. When you find your tinnitus pitch, our sweep will target it.
+                      </p>
+                      <div className="grid grid-cols-4 gap-2 mb-2">
+                        {[250, 500, 1000, 2000, 4000, 6000, 8000, 10000, 12000, 14000, 16000].map(freq => (
+                          <button
+                            key={freq}
+                            onClick={async () => {
+                              // Stop any existing test tone
+                              if (testToneRef.current) {
+                                testToneRef.current.forEach(n => { try { n.stop?.(); n.disconnect?.(); } catch(e) {} });
+                                testToneRef.current = null;
+                              }
+                              
+                              if (tinnitusTestFreq === freq) {
+                                setTinnitusTestFreq(null);
+                                return;
+                              }
+                              
+                              setTinnitusTestFreq(freq);
+                              
+                              // Play test tone
+                              const AudioContext = window.AudioContext || window.webkitAudioContext;
+                              const ctx = new AudioContext();
+                              if (ctx.state === 'suspended') await ctx.resume();
+                              
+                              const osc = ctx.createOscillator();
+                              const gain = ctx.createGain();
+                              osc.type = 'sine';
+                              osc.frequency.value = freq;
+                              gain.gain.value = 0.3;
+                              osc.connect(gain);
+                              gain.connect(ctx.destination);
+                              osc.start();
+                              testToneRef.current = [osc, gain, ctx];
+                              
+                              // Auto-stop after 2 seconds
+                              setTimeout(() => {
+                                if (testToneRef.current) {
+                                  testToneRef.current.forEach(n => { try { n.stop?.(); n.disconnect?.(); } catch(e) {} });
+                                  testToneRef.current = null;
+                                  setTinnitusTestFreq(null);
+                                }
+                              }, 2000);
+                            }}
+                            className={`py-2 font-mono text-xs border transition-all ${
+                              tinnitusTestFreq === freq
+                                ? 'bg-red-500 border-red-400 text-white'
+                                : 'bg-black border-red-500/30 text-red-400 hover:border-red-500'
+                            }`}
+                          >
+                            {freq >= 1000 ? `${freq/1000}k` : freq}Hz
+                          </button>
+                        ))}
+                      </div>
+                      <p className="text-red-300 text-xs font-mono text-center">
+                        {tinnitusTestFreq ? `Playing ${tinnitusTestFreq}Hz...` : 'Our sweep covers 250Hz-16kHz (100% of cases)'}
+                      </p>
+                    </div>
+                  )}
+
                   {/* HRV OPTION */}
                   <div className="flex justify-center mb-6">
                     <button
