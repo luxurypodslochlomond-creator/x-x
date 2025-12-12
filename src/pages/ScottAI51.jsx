@@ -9,7 +9,7 @@ import { ArrowLeft, Send, Brain, Loader2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 /**
- * AI51 FOR MUSIC MANAGERS
+ * KINGDOM51 FOR MUSIC MANAGERS
  * Focused on contracts, publishing, tour planning, money stuff
  */
 
@@ -43,7 +43,7 @@ export default function ScottAI51() {
 
     const ai51Mutation = useMutation({
         mutationFn: async (userMessage) => {
-            const prompt = `You are AI51, a loyal AI assistant helping Scott, a music manager in Glasgow, Scotland.
+            const prompt = `You are KINGDOM51, a loyal AI assistant helping Scott, a music manager in Glasgow, Scotland.
 
 CONTEXT:
 Scott manages artists, tours, publishing deals, visas, contracts, and day-to-day music business operations.
@@ -114,7 +114,7 @@ Keep it concise but thorough. Use bullet points when helpful.`;
                 
                 <div className="flex items-center gap-2">
                     <Brain className="w-6 h-6 text-amber-400" />
-                    <h1 className="text-xl font-black text-amber-400" style={{ fontFamily: 'monospace' }}>AI51</h1>
+                    <h1 className="text-xl font-black text-amber-400" style={{ fontFamily: 'monospace' }}>KINGDOM51</h1>
                 </div>
             </div>
 
@@ -182,7 +182,7 @@ Keep it concise but thorough. Use bullet points when helpful.`;
                         </Button>
                     </div>
                     <p className="text-gray-700 text-xs mt-2 text-center" style={{ fontFamily: 'monospace' }}>
-                        AI51 gives advice, not legal guarantees - always verify important stuff
+                        KINGDOM51 gives advice, not legal guarantees - always verify important stuff
                     </p>
                 </div>
             </div>
