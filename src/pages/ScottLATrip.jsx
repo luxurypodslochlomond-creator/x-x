@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Plane, Calendar, DollarSign, Users, Package, Phone, Clock, MapPin, Music, AlertCircle, CheckCircle, ArrowLeft } from 'lucide-react';
+import { Calendar, DollarSign, Users, Package, Phone, Clock, MapPin, Music, AlertCircle, CheckCircle, ArrowLeft } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { KingdomCrown8Bit } from '@/components/shared/KingdomCrown8Bit';
+import { Plane8Bit } from '@/components/shared/Plane8Bit';
 
 /**
  * SCOTT LA TRIP DASHBOARD
@@ -119,36 +119,39 @@ export default function ScottLATrip() {
                     BACK
                 </button>
 
-                <div className="flex items-center justify-between mb-4">
-                    <div className="flex items-center gap-3">
-                        <KingdomCrown8Bit size={48} animate={true} />
-                        <div>
-                            <h1 className="text-2xl font-black text-amber-400" style={{ fontFamily: 'monospace' }}>
-                                LA TRIP
-                            </h1>
-                            <p className="text-gray-500 text-sm font-mono">YES AND MAYBE • Dec 2024</p>
+                <div className="bg-gradient-to-br from-amber-500 via-pink-600 to-purple-600 p-6 rounded-xl border-4 border-amber-400 mb-4" style={{ boxShadow: '0 0 40px rgba(245, 158, 11, 0.4), 8px 8px 0px rgba(0,0,0,0.6)', imageRendering: 'pixelated' }}>
+                    <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-4">
+                            <Plane8Bit size={56} animate={true} color="#ffffff" />
+                            <div>
+                                <h1 className="text-3xl font-black text-white mb-1" style={{ fontFamily: 'monospace', textShadow: '4px 4px 0px rgba(0,0,0,0.8)' }}>
+                                    LA TRIP
+                                </h1>
+                                <p className="text-white/80 text-sm font-bold font-mono">YES AND MAYBE • Dec 2024</p>
+                            </div>
                         </div>
+                        {daysLeft > 0 && (
+                            <div className="text-right bg-black/40 backdrop-blur-sm border-2 border-white/20 rounded-lg p-3">
+                                <p className="text-5xl font-black text-white font-mono" style={{ textShadow: '0 0 20px rgba(251, 191, 36, 0.8)' }}>{daysLeft}</p>
+                                <p className="text-xs text-white/70 font-mono tracking-widest">DAYS LEFT</p>
+                            </div>
+                        )}
                     </div>
-                    {daysLeft > 0 && (
-                        <div className="text-right">
-                            <p className="text-4xl font-black text-amber-400 font-mono">{daysLeft}</p>
-                            <p className="text-xs text-gray-500 font-mono">DAYS</p>
-                        </div>
-                    )}
                 </div>
 
                 {/* PROGRESS BAR */}
-                <div className="bg-gray-900 border border-gray-800 rounded-lg p-4 mb-4">
+                <div className="bg-black border-4 border-purple-500 p-4 mb-4" style={{ boxShadow: '0 0 30px rgba(168, 85, 247, 0.3)' }}>
                     <div className="flex items-center justify-between mb-2">
-                        <p className="text-sm font-mono text-gray-400">TRIP READY</p>
-                        <p className="text-sm font-mono text-white">{progressPercent}%</p>
+                        <p className="text-sm font-mono font-black text-purple-400 tracking-wider">TRIP READY</p>
+                        <p className="text-2xl font-mono font-black text-white">{progressPercent}%</p>
                     </div>
-                    <div className="h-2 bg-gray-800 rounded-full overflow-hidden">
+                    <div className="h-4 bg-gray-900 border-2 border-gray-800 overflow-hidden" style={{ imageRendering: 'pixelated' }}>
                         <motion.div
-                            className="h-full bg-gradient-to-r from-amber-500 to-green-500"
+                            className="h-full bg-gradient-to-r from-green-500 via-cyan-500 to-purple-500"
                             initial={{ width: 0 }}
                             animate={{ width: `${progressPercent}%` }}
                             transition={{ duration: 0.5 }}
+                            style={{ boxShadow: 'inset 0 0 20px rgba(255, 255, 255, 0.3)' }}
                         />
                     </div>
                 </div>
@@ -158,7 +161,7 @@ export default function ScottLATrip() {
             <div className="max-w-4xl mx-auto mb-6">
                 <div className="grid grid-cols-5 gap-2">
                     {[
-                        { id: 'overview', icon: Plane, label: 'Overview' },
+                        { id: 'overview', icon: Plane8Bit, label: 'Overview', color: '#fbbf24' },
                         { id: 'schedule', icon: Calendar, label: 'Schedule' },
                         { id: 'checklist', icon: Package, label: 'Checklist' },
                         { id: 'budget', icon: DollarSign, label: 'Budget' },
@@ -167,13 +170,21 @@ export default function ScottLATrip() {
                         <button
                             key={tab.id}
                             onClick={() => setActiveTab(tab.id)}
-                            className={`p-3 rounded-lg border-2 font-mono text-xs transition-all ${
+                            className={`p-3 border-4 font-mono text-xs font-black transition-all ${
                                 activeTab === tab.id
-                                    ? 'bg-amber-500 border-amber-400 text-black'
+                                    ? 'bg-gradient-to-br from-amber-500 to-pink-600 border-amber-400 text-white'
                                     : 'bg-black border-gray-800 text-gray-400 hover:border-gray-700'
                             }`}
+                            style={activeTab === tab.id ? { 
+                                boxShadow: '0 0 20px rgba(245, 158, 11, 0.5), 4px 4px 0px rgba(0,0,0,0.6)',
+                                imageRendering: 'pixelated'
+                            } : {}}
                         >
-                            <tab.icon className="w-5 h-5 mx-auto mb-1" />
+                            {tab.id === 'overview' ? (
+                                <Plane8Bit size={20} animate={activeTab === tab.id} color={activeTab === tab.id ? '#ffffff' : '#9ca3af'} className="mx-auto mb-1" />
+                            ) : (
+                                <tab.icon className="w-5 h-5 mx-auto mb-1" />
+                            )}
                             {tab.label}
                         </button>
                     ))}
@@ -185,25 +196,27 @@ export default function ScottLATrip() {
                 {/* OVERVIEW */}
                 {activeTab === 'overview' && (
                     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-                        <div className="bg-gradient-to-br from-purple-900/20 to-pink-900/20 border border-purple-500/30 rounded-lg p-6 mb-4">
-                            <h2 className="text-xl font-black text-purple-400 font-mono mb-3">MISSION</h2>
-                            <p className="text-white text-sm mb-2">Take YES AND MAYBE to LA</p>
-                            <p className="text-white text-sm mb-2">• Work with world-class producers</p>
-                            <p className="text-white text-sm mb-2">• Play iconic venues (Troubadour, Roxy)</p>
-                            <p className="text-white text-sm mb-2">• Build US connections</p>
-                            <p className="text-white text-sm">• Come back with recorded material</p>
+                        <div className="bg-gradient-to-br from-purple-600 to-pink-600 border-4 border-purple-400 p-6 mb-4" style={{ boxShadow: '0 0 40px rgba(168, 85, 247, 0.4), 8px 8px 0px rgba(0,0,0,0.6)' }}>
+                            <h2 className="text-2xl font-black text-white font-mono mb-4 tracking-wider" style={{ textShadow: '3px 3px 0px rgba(0,0,0,0.8)' }}>MISSION</h2>
+                            <div className="space-y-2">
+                                <p className="text-white text-sm font-bold font-mono">Take YES AND MAYBE to LA</p>
+                                <p className="text-white/90 text-sm font-mono">• Work with world-class producers</p>
+                                <p className="text-white/90 text-sm font-mono">• Play iconic venues (Troubadour, Roxy)</p>
+                                <p className="text-white/90 text-sm font-mono">• Build US connections</p>
+                                <p className="text-white/90 text-sm font-mono">• Come back with recorded material</p>
+                            </div>
                         </div>
 
                         <div className="grid grid-cols-2 gap-4">
-                            <div className="bg-black border border-blue-500/30 rounded-lg p-4">
-                                <Clock className="w-6 h-6 text-blue-400 mb-2" />
-                                <p className="text-xs text-gray-500 font-mono">TIME ZONE</p>
-                                <p className="text-lg font-black text-white font-mono">PST (GMT-8)</p>
+                            <div className="bg-black border-4 border-cyan-500 p-4" style={{ boxShadow: '0 0 20px rgba(6, 182, 212, 0.3)' }}>
+                                <Clock className="w-6 h-6 text-cyan-400 mb-2" />
+                                <p className="text-xs text-cyan-400 font-mono font-bold tracking-wider">TIME ZONE</p>
+                                <p className="text-xl font-black text-white font-mono">PST (GMT-8)</p>
                             </div>
-                            <div className="bg-black border border-green-500/30 rounded-lg p-4">
+                            <div className="bg-black border-4 border-green-500 p-4" style={{ boxShadow: '0 0 20px rgba(34, 197, 94, 0.3)' }}>
                                 <MapPin className="w-6 h-6 text-green-400 mb-2" />
-                                <p className="text-xs text-gray-500 font-mono">BASE</p>
-                                <p className="text-lg font-black text-white font-mono">Hollywood</p>
+                                <p className="text-xs text-green-400 font-mono font-bold tracking-wider">BASE</p>
+                                <p className="text-xl font-black text-white font-mono">Hollywood</p>
                             </div>
                         </div>
                     </motion.div>
@@ -224,7 +237,7 @@ export default function ScottLATrip() {
                                 <div className="flex items-start gap-3">
                                     {item.type === 'gig' && <Music className="w-5 h-5 text-pink-400 flex-shrink-0 mt-1" />}
                                     {item.type === 'session' && <Users className="w-5 h-5 text-purple-400 flex-shrink-0 mt-1" />}
-                                    {item.type === 'flight' && <Plane className="w-5 h-5 text-blue-400 flex-shrink-0 mt-1" />}
+                                    {item.type === 'flight' && <Plane8Bit size={20} animate={false} color="#06b6d4" className="flex-shrink-0 mt-1" />}
                                     <div className="flex-1">
                                         <p className="text-white font-bold font-mono text-sm">{item.title}</p>
                                         <p className="text-gray-400 text-xs font-mono mt-1">{item.date} • {item.time}</p>
