@@ -423,7 +423,7 @@ const PROTOCOLS = {
     name: 'Let It Be (You Are Enough)',
     icon: Heart,
     color: '#f472b6',
-    description: 'For Denis\'s missus & everyone who doubts their worth',
+    description: 'For everyone who doubts their worth',
     science: '528Hz love frequency + 7.83Hz Schumann proven to activate self-compassion centers in the brain. Slow breathing triggers oxytocin release - the "I am safe, I am loved" hormone. You ARE enough. Always were.',
     sources: ['Self-compassion neuroscience', 'Oxytocin research', 'Kristin Neff studies'],
     ancientWisdom: '"Let it be" - the Beatles knew. Surrender = strength. You don\'t have to prove anything. You already ARE everything. 528Hz is the frequency of unconditional love - the kind you deserve to give yourself.',
