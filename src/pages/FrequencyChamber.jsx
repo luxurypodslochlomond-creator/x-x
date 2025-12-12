@@ -2103,11 +2103,10 @@ export default function FrequencyChamber() {
           </div>
           )}
 
-          {/* ACTIVE SESSION - REPLACES GRID WHEN PROTOCOL SELECTED */}
+          {/* PROTOCOL CARD - ONLY WHEN NOT PLAYING */}
       <AnimatePresence>
-        {selectedProtocol && (
+        {selectedProtocol && !isPlaying && (
           <motion.div
-            id="active-session"
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
@@ -2117,37 +2116,26 @@ export default function FrequencyChamber() {
               className="border-4 p-8"
               style={{ borderColor: selectedProtocol.color, backgroundColor: `${selectedProtocol.color}10` }}
             >
-              <div className="flex items-center justify-between mb-8">
-                {/* BACK BUTTON - LEFT SIDE */}
-                <button
-                  onClick={() => { if (isPlaying) stopAudio(); setSelectedProtocol(null); }}
-                  className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
-                >
-                  <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-                    <rect x="12" y="8" width="2" height="4"/>
-                    <rect x="10" y="6" width="2" height="2"/>
-                    <rect x="10" y="12" width="2" height="2"/>
-                    <rect x="8" y="4" width="2" height="2"/>
-                    <rect x="8" y="14" width="2" height="2"/>
-                    <rect x="6" y="9" width="2" height="2"/>
-                  </svg>
-                  <span className="font-mono text-sm">All protocols</span>
-                </button>
-                {/* TIMER - RIGHT SIDE */}
-                {isPlaying && (
-                  <div className="text-right">
-                    <p className="text-4xl font-black font-mono" style={{ color: selectedProtocol.color }}>
-                      {formatTime(sessionTime)}
-                    </p>
-                    <p className="text-gray-500 text-xs font-mono">SESSION</p>
-                  </div>
-                )}
-              </div>
+              {/* BACK BUTTON */}
+              <button
+                onClick={() => setSelectedProtocol(null)}
+                className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors mb-8"
+              >
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                  <rect x="12" y="8" width="2" height="4"/>
+                  <rect x="10" y="6" width="2" height="2"/>
+                  <rect x="10" y="12" width="2" height="2"/>
+                  <rect x="8" y="4" width="2" height="2"/>
+                  <rect x="8" y="14" width="2" height="2"/>
+                  <rect x="6" y="9" width="2" height="2"/>
+                </svg>
+                <span className="font-mono text-sm">All protocols</span>
+              </button>
 
-              {/* PROTOCOL TITLE - BIG AND CLEAR */}
+              {/* PROTOCOL TITLE */}
               <div className="text-center mb-8">
                 <div className="flex items-center justify-center gap-4 mb-2">
-                  <PixelIcon icon={selectedProtocol.icon} color={selectedProtocol.color} size={56} animate={isPlaying} />
+                  <PixelIcon icon={selectedProtocol.icon} color={selectedProtocol.color} size={56} animate={false} />
                 </div>
                 <h2 className="text-3xl md:text-4xl font-black" style={{ color: selectedProtocol.color }}>
                   {selectedProtocol.name}
@@ -2157,263 +2145,261 @@ export default function FrequencyChamber() {
                 </p>
               </div>
               
-              {/* START BUTTON - Smaller */}
+              {/* START BUTTON */}
               <button
                 onClick={handlePlayPause}
                 className="w-full py-4 text-xl font-black font-mono transition-all border-2 mb-6"
                 style={{
-                  backgroundColor: isPlaying ? selectedProtocol.color : 'transparent',
+                  backgroundColor: 'transparent',
                   borderColor: selectedProtocol.color,
-                  color: isPlaying ? 'black' : selectedProtocol.color,
-                  boxShadow: isPlaying ? `0 0 40px ${selectedProtocol.color}60` : 'none'
+                  color: selectedProtocol.color,
                 }}
               >
-                {isPlaying ? 'STOP' : 'START'}
+                START
               </button>
 
-              {isPlaying && (
-                <div className="fixed inset-0 bg-black z-50 flex flex-col">
-                  {/* TOP BAR */}
-                  <div className="flex items-center justify-between p-4 border-b" style={{ borderColor: `${selectedProtocol.color}30` }}>
-                    <div className="flex items-center gap-2">
-                      <PixelIcon icon={selectedProtocol.icon} color={selectedProtocol.color} size={24} animate={true} />
-                      <span className="text-sm font-mono" style={{ color: selectedProtocol.color }}>{selectedProtocol.name}</span>
-                    </div>
-                    <div className="text-right">
-                      <p className="text-2xl font-black font-mono" style={{ color: selectedProtocol.color }}>
-                        {formatTime(sessionTime)}
-                      </p>
-                    </div>
+              {/* TINNITUS FREQUENCY FINDER */}
+              {selectedProtocol.id === 'tinnitus' && (
+                <div className="bg-red-900/20 border-2 border-red-500/50 p-4 mb-6">
+                  <div className="flex items-center gap-2 mb-3">
+                    <Ear className="w-5 h-5 text-red-400" />
+                    <h4 className="text-red-400 font-bold font-mono text-sm">FIND YOUR FREQUENCY (Optional)</h4>
                   </div>
-
-                  {/* MAIN VISUALIZER */}
-                  <div className="flex-1 flex items-center justify-center relative overflow-hidden">
-                    {/* Background particles */}
-                    <div className="absolute inset-0">
-                      {[...Array(20)].map((_, i) => (
-                        <motion.div
-                          key={i}
-                          className="absolute w-1 h-1 rounded-full"
-                          style={{ 
-                            backgroundColor: selectedProtocol.color,
-                            left: `${Math.random() * 100}%`,
-                            top: `${Math.random() * 100}%`,
-                          }}
-                          animate={{
-                            opacity: [0, 0.6, 0],
-                            scale: [0, 1.5, 0],
-                          }}
-                          transition={{
-                            duration: 3,
-                            repeat: Infinity,
-                            delay: i * 0.2,
-                          }}
-                        />
-                      ))}
-                    </div>
-
-                    {/* Center circle - breathing guide */}
-                    <div className="relative z-10">
-                      <BreathingPacer 
-                        breathRate={currentHRV && currentHRV.coherence < 40 
-                          ? Math.max(4, selectedProtocol.config.breathRate - 2) 
-                          : selectedProtocol.config.breathRate}
-                        isActive={isPlaying}
-                        color={selectedProtocol.color}
-                      />
-                    </div>
-
-                    {/* Audio Visualizer - Frequency Bars */}
-                    <div className="absolute bottom-20 left-0 right-0 flex justify-center items-end gap-1 px-4 h-32">
-                      {[...Array(24)].map((_, i) => (
-                        <motion.div
-                          key={i}
-                          className="flex-1 max-w-[8px] rounded-t-full"
-                          style={{ 
-                            backgroundColor: selectedProtocol.color,
-                            boxShadow: `0 0 15px ${selectedProtocol.color}80`,
-                          }}
-                          animate={{
-                            height: ['30%', `${50 + (i % 3) * 20}%`, '30%'],
-                            opacity: [0.6, 1, 0.6],
-                          }}
-                          transition={{
-                            duration: 0.8 + (i * 0.05),
-                            repeat: Infinity,
-                            ease: "easeInOut",
-                            delay: i * 0.05
-                          }}
-                        />
-                      ))}
-                    </div>
+                  <p className="text-gray-400 text-xs font-mono mb-3">
+                    Tap to hear test tones. When you find your tinnitus pitch, our sweep will target it.
+                  </p>
+                  <div className="grid grid-cols-4 gap-2 mb-2">
+                    {[250, 500, 1000, 2000, 4000, 6000, 8000, 10000, 12000, 14000, 16000].map(freq => (
+                      <button
+                        key={freq}
+                        onClick={async () => {
+                          if (testToneRef.current) {
+                            testToneRef.current.forEach(n => { try { n.stop?.(); n.disconnect?.(); } catch(e) {} });
+                            testToneRef.current = null;
+                          }
+                          
+                          if (tinnitusTestFreq === freq) {
+                            setTinnitusTestFreq(null);
+                            return;
+                          }
+                          
+                          setTinnitusTestFreq(freq);
+                          
+                          const AudioContext = window.AudioContext || window.webkitAudioContext;
+                          const ctx = new AudioContext();
+                          if (ctx.state === 'suspended') await ctx.resume();
+                          
+                          const osc = ctx.createOscillator();
+                          const gain = ctx.createGain();
+                          osc.type = 'sine';
+                          osc.frequency.value = freq;
+                          gain.gain.value = 0.3;
+                          osc.connect(gain);
+                          gain.connect(ctx.destination);
+                          osc.start();
+                          testToneRef.current = [osc, gain, ctx];
+                          
+                          setTimeout(() => {
+                            if (testToneRef.current) {
+                              testToneRef.current.forEach(n => { try { n.stop?.(); n.disconnect?.(); } catch(e) {} });
+                              testToneRef.current = null;
+                              setTinnitusTestFreq(null);
+                            }
+                          }, 2000);
+                        }}
+                        className={`py-2 font-mono text-xs border transition-all ${
+                          tinnitusTestFreq === freq
+                            ? 'bg-red-500 border-red-400 text-white'
+                            : 'bg-black border-red-500/30 text-red-400 hover:border-red-500'
+                        }`}
+                      >
+                        {freq >= 1000 ? `${freq/1000}k` : freq}Hz
+                      </button>
+                    ))}
                   </div>
-
-                  {/* BOTTOM INFO */}
-                  <div className="p-6 border-t" style={{ borderColor: `${selectedProtocol.color}30`, background: `linear-gradient(to top, black, transparent)` }}>
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="text-center flex-1">
-                        <p className="text-4xl font-black font-mono" style={{ color: selectedProtocol.color }}>
-                          {currentHz} Hz
-                        </p>
-                        <p className="text-gray-600 text-xs font-mono mt-1">FREQUENCY</p>
-                      </div>
-                      <div className="text-center flex-1">
-                        <p className="text-4xl font-black font-mono text-cyan-400">
-                          {selectedProtocol.config.breathRate}
-                        </p>
-                        <p className="text-gray-600 text-xs font-mono mt-1">BREATHS/MIN</p>
-                      </div>
-                    </div>
-
-                    {currentHRV && hrvEnabled && (
-                      <div className="mb-4 p-3 border" style={{ 
-                        borderColor: currentHRV.coherence > 70 ? '#22c55e' : currentHRV.coherence > 40 ? '#eab308' : '#ef4444',
-                        backgroundColor: `${currentHRV.coherence > 70 ? '#22c55e' : currentHRV.coherence > 40 ? '#eab308' : '#ef4444'}10`
-                      }}>
-                        <div className="flex items-center justify-between">
-                          <span className="text-xs font-mono" style={{
-                            color: currentHRV.coherence > 70 ? '#22c55e' : currentHRV.coherence > 40 ? '#eab308' : '#ef4444'
-                          }}>
-                            {currentHRV.coherence > 70 ? 'HIGH COHERENCE' : currentHRV.coherence > 40 ? 'MODERATE' : 'BREATHE SLOWER'}
-                          </span>
-                          <span className="text-sm font-bold" style={{
-                            color: currentHRV.coherence > 70 ? '#22c55e' : currentHRV.coherence > 40 ? '#eab308' : '#ef4444'
-                          }}>
-                            {currentHRV.bpm} BPM
-                          </span>
-                        </div>
-                      </div>
-                    )}
-
-                    <button
-                      onClick={handlePlayPause}
-                      className="w-full py-4 text-lg font-black font-mono border-2"
-                      style={{
-                        backgroundColor: selectedProtocol.color,
-                        borderColor: selectedProtocol.color,
-                        color: 'black',
-                        boxShadow: `0 0 40px ${selectedProtocol.color}60`
-                      }}
-                    >
-                      END SESSION
-                    </button>
-                  </div>
+                  <p className="text-red-300 text-xs font-mono text-center">
+                    {tinnitusTestFreq ? `Playing ${tinnitusTestFreq}Hz...` : 'Our sweep covers 250Hz-16kHz (100% of cases)'}
+                  </p>
                 </div>
               )}
 
-              {!isPlaying && (
-                <>
-                  {/* TINNITUS FREQUENCY FINDER - ONLY FOR TINNITUS */}
-                  {selectedProtocol.id === 'tinnitus' && (
-                    <div className="bg-red-900/20 border-2 border-red-500/50 p-4 mb-6">
-                      <div className="flex items-center gap-2 mb-3">
-                        <Ear className="w-5 h-5 text-red-400" />
-                        <h4 className="text-red-400 font-bold font-mono text-sm">FIND YOUR FREQUENCY (Optional)</h4>
-                      </div>
-                      <p className="text-gray-400 text-xs font-mono mb-3">
-                        Tap to hear test tones. When you find your tinnitus pitch, our sweep will target it.
-                      </p>
-                      <div className="grid grid-cols-4 gap-2 mb-2">
-                        {[250, 500, 1000, 2000, 4000, 6000, 8000, 10000, 12000, 14000, 16000].map(freq => (
-                          <button
-                            key={freq}
-                            onClick={async () => {
-                              // Stop any existing test tone
-                              if (testToneRef.current) {
-                                testToneRef.current.forEach(n => { try { n.stop?.(); n.disconnect?.(); } catch(e) {} });
-                                testToneRef.current = null;
-                              }
-                              
-                              if (tinnitusTestFreq === freq) {
-                                setTinnitusTestFreq(null);
-                                return;
-                              }
-                              
-                              setTinnitusTestFreq(freq);
-                              
-                              // Play test tone
-                              const AudioContext = window.AudioContext || window.webkitAudioContext;
-                              const ctx = new AudioContext();
-                              if (ctx.state === 'suspended') await ctx.resume();
-                              
-                              const osc = ctx.createOscillator();
-                              const gain = ctx.createGain();
-                              osc.type = 'sine';
-                              osc.frequency.value = freq;
-                              gain.gain.value = 0.3;
-                              osc.connect(gain);
-                              gain.connect(ctx.destination);
-                              osc.start();
-                              testToneRef.current = [osc, gain, ctx];
-                              
-                              // Auto-stop after 2 seconds
-                              setTimeout(() => {
-                                if (testToneRef.current) {
-                                  testToneRef.current.forEach(n => { try { n.stop?.(); n.disconnect?.(); } catch(e) {} });
-                                  testToneRef.current = null;
-                                  setTinnitusTestFreq(null);
-                                }
-                              }, 2000);
-                            }}
-                            className={`py-2 font-mono text-xs border transition-all ${
-                              tinnitusTestFreq === freq
-                                ? 'bg-red-500 border-red-400 text-white'
-                                : 'bg-black border-red-500/30 text-red-400 hover:border-red-500'
-                            }`}
-                          >
-                            {freq >= 1000 ? `${freq/1000}k` : freq}Hz
-                          </button>
-                        ))}
-                      </div>
-                      <p className="text-red-300 text-xs font-mono text-center">
-                        {tinnitusTestFreq ? `Playing ${tinnitusTestFreq}Hz...` : 'Our sweep covers 250Hz-16kHz (100% of cases)'}
-                      </p>
-                    </div>
-                  )}
+              {/* HRV OPTION */}
+              <div className="flex justify-center mb-6">
+                <button
+                  onClick={() => setHrvEnabled(!hrvEnabled)}
+                  className={`flex items-center gap-2 px-4 py-2 border-2 transition-all ${
+                    hrvEnabled ? 'border-green-500 bg-green-900/30 text-green-400' : 'border-gray-600 bg-black/40 text-gray-400'
+                  }`}
+                >
+                  <Camera className="w-4 h-4" />
+                  <span className="font-mono text-sm">
+                    {hrvEnabled ? 'HRV ON' : 'HRV Biofeedback'}
+                  </span>
+                </button>
+              </div>
 
-                  {/* HRV OPTION */}
-                  <div className="flex justify-center mb-6">
-                    <button
-                      onClick={() => setHrvEnabled(!hrvEnabled)}
-                      className={`flex items-center gap-2 px-4 py-2 border-2 transition-all ${
-                        hrvEnabled ? 'border-green-500 bg-green-900/30 text-green-400' : 'border-gray-600 bg-black/40 text-gray-400'
-                      }`}
-                    >
-                      <Camera className="w-4 h-4" />
-                      <span className="font-mono text-sm">
-                        {hrvEnabled ? 'HRV ON' : 'HRV Biofeedback'}
-                      </span>
-                    </button>
-                  </div>
-                </>
-              )}
-
-              {hrvEnabled && !isPlaying && (
-                <HRVBiofeedback isActive={hrvEnabled && isPlaying} onHRVUpdate={handleHRVUpdate} color={selectedProtocol.color} />
+              {hrvEnabled && (
+                <HRVBiofeedback isActive={hrvEnabled} onHRVUpdate={handleHRVUpdate} color={selectedProtocol.color} />
               )}
               
-              {/* VOLUME - COMPACT */}
-              {!isPlaying && (
-                <div className="mb-6">
-                  <div className="flex items-center gap-4">
-                    <VolumeX className="w-5 h-5 text-gray-500" />
-                    <input
-                      type="range"
-                      min="0"
-                      max="1"
-                      step="0.05"
-                      value={volume}
-                      onChange={(e) => setVolume(parseFloat(e.target.value))}
-                      className="flex-1 h-3 bg-gray-800 rounded-lg appearance-none cursor-pointer"
-                      style={{ accentColor: selectedProtocol.color }}
-                    />
-                    <Volume2 className="w-5 h-5 text-gray-500" />
-                    <span className="text-gray-400 font-mono text-sm w-12">
-                      {Math.round(volume * 100)}%
+              {/* VOLUME */}
+              <div className="mb-6">
+                <div className="flex items-center gap-4">
+                  <VolumeX className="w-5 h-5 text-gray-500" />
+                  <input
+                    type="range"
+                    min="0"
+                    max="1"
+                    step="0.05"
+                    value={volume}
+                    onChange={(e) => setVolume(parseFloat(e.target.value))}
+                    className="flex-1 h-3 bg-gray-800 rounded-lg appearance-none cursor-pointer"
+                    style={{ accentColor: selectedProtocol.color }}
+                  />
+                  <Volume2 className="w-5 h-5 text-gray-500" />
+                  <span className="text-gray-400 font-mono text-sm w-12">
+                    {Math.round(volume * 100)}%
+                  </span>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* FULLSCREEN PLAYER - COMPLETELY SEPARATE */}
+      <AnimatePresence>
+        {isPlaying && selectedProtocol && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black z-[60] flex flex-col"
+          >
+            {/* TOP BAR */}
+            <div className="flex items-center justify-between p-4 border-b" style={{ borderColor: `${selectedProtocol.color}30` }}>
+              <div className="flex items-center gap-2">
+                <PixelIcon icon={selectedProtocol.icon} color={selectedProtocol.color} size={24} animate={true} />
+                <span className="text-sm font-mono" style={{ color: selectedProtocol.color }}>{selectedProtocol.name}</span>
+              </div>
+              <div className="text-right">
+                <p className="text-2xl font-black font-mono" style={{ color: selectedProtocol.color }}>
+                  {formatTime(sessionTime)}
+                </p>
+              </div>
+            </div>
+
+            {/* MAIN VISUALIZER */}
+            <div className="flex-1 flex items-center justify-center relative overflow-hidden">
+              {/* Background particles */}
+              <div className="absolute inset-0">
+                {[...Array(20)].map((_, i) => (
+                  <motion.div
+                    key={i}
+                    className="absolute w-1 h-1 rounded-full"
+                    style={{ 
+                      backgroundColor: selectedProtocol.color,
+                      left: `${Math.random() * 100}%`,
+                      top: `${Math.random() * 100}%`,
+                    }}
+                    animate={{
+                      opacity: [0, 0.6, 0],
+                      scale: [0, 1.5, 0],
+                    }}
+                    transition={{
+                      duration: 3,
+                      repeat: Infinity,
+                      delay: i * 0.2,
+                    }}
+                  />
+                ))}
+              </div>
+
+              {/* Center circle - breathing guide */}
+              <div className="relative z-10">
+                <BreathingPacer 
+                  breathRate={currentHRV && currentHRV.coherence < 40 
+                    ? Math.max(4, selectedProtocol.config.breathRate - 2) 
+                    : selectedProtocol.config.breathRate}
+                  isActive={isPlaying}
+                  color={selectedProtocol.color}
+                />
+              </div>
+
+              {/* Audio Visualizer - Frequency Bars */}
+              <div className="absolute bottom-20 left-0 right-0 flex justify-center items-end gap-1 px-4 h-32">
+                {[...Array(24)].map((_, i) => (
+                  <motion.div
+                    key={i}
+                    className="flex-1 max-w-[8px] rounded-t-full"
+                    style={{ 
+                      backgroundColor: selectedProtocol.color,
+                      boxShadow: `0 0 15px ${selectedProtocol.color}80`,
+                    }}
+                    animate={{
+                      height: ['30%', `${50 + (i % 3) * 20}%`, '30%'],
+                      opacity: [0.6, 1, 0.6],
+                    }}
+                    transition={{
+                      duration: 0.8 + (i * 0.05),
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                      delay: i * 0.05
+                    }}
+                  />
+                ))}
+              </div>
+            </div>
+
+            {/* BOTTOM INFO */}
+            <div className="p-6 border-t" style={{ borderColor: `${selectedProtocol.color}30`, background: `linear-gradient(to top, black, transparent)` }}>
+              <div className="flex items-center justify-between mb-4">
+                <div className="text-center flex-1">
+                  <p className="text-4xl font-black font-mono" style={{ color: selectedProtocol.color }}>
+                    {currentHz} Hz
+                  </p>
+                  <p className="text-gray-600 text-xs font-mono mt-1">FREQUENCY</p>
+                </div>
+                <div className="text-center flex-1">
+                  <p className="text-4xl font-black font-mono text-cyan-400">
+                    {selectedProtocol.config.breathRate}
+                  </p>
+                  <p className="text-gray-600 text-xs font-mono mt-1">BREATHS/MIN</p>
+                </div>
+              </div>
+
+              {currentHRV && hrvEnabled && (
+                <div className="mb-4 p-3 border" style={{ 
+                  borderColor: currentHRV.coherence > 70 ? '#22c55e' : currentHRV.coherence > 40 ? '#eab308' : '#ef4444',
+                  backgroundColor: `${currentHRV.coherence > 70 ? '#22c55e' : currentHRV.coherence > 40 ? '#eab308' : '#ef4444'}10`
+                }}>
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-mono" style={{
+                      color: currentHRV.coherence > 70 ? '#22c55e' : currentHRV.coherence > 40 ? '#eab308' : '#ef4444'
+                    }}>
+                      {currentHRV.coherence > 70 ? 'HIGH COHERENCE' : currentHRV.coherence > 40 ? 'MODERATE' : 'BREATHE SLOWER'}
+                    </span>
+                    <span className="text-sm font-bold" style={{
+                      color: currentHRV.coherence > 70 ? '#22c55e' : currentHRV.coherence > 40 ? '#eab308' : '#ef4444'
+                    }}>
+                      {currentHRV.bpm} BPM
                     </span>
                   </div>
                 </div>
               )}
+
+              <button
+                onClick={handlePlayPause}
+                className="w-full py-4 text-lg font-black font-mono border-2"
+                style={{
+                  backgroundColor: selectedProtocol.color,
+                  borderColor: selectedProtocol.color,
+                  color: 'black',
+                  boxShadow: `0 0 40px ${selectedProtocol.color}60`
+                }}
+              >
+                END SESSION
+              </button>
             </div>
           </motion.div>
         )}
