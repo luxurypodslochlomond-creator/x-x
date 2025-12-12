@@ -233,12 +233,13 @@ const LayoutInner = ({ children, currentPageName }) => {
   ];
 
   const learnNav = [
-    { title: "About", url: createPageUrl("About"), icon: BookOpen },
-    { title: "Welcome", url: createPageUrl("Welcome"), icon: Home },
-    { title: "How You Earn", url: createPageUrl("HowYouEarn"), icon: Heart },
-    { title: "The Physics", url: createPageUrl("ThePhysics"), icon: Atom },
-    { title: "Protocols", url: createPageUrl("Protocols"), icon: Shield },
-  ];
+            { title: "About", url: createPageUrl("About"), icon: BookOpen },
+            { title: "Welcome", url: createPageUrl("Welcome"), icon: Home },
+            { title: "Cosmic Transmission", url: createPageUrl("CosmicTransmission"), icon: Globe, description: "Liberation for ALL" },
+            { title: "How You Earn", url: createPageUrl("HowYouEarn"), icon: Heart },
+            { title: "The Physics", url: createPageUrl("ThePhysics"), icon: Atom },
+            { title: "Protocols", url: createPageUrl("Protocols"), icon: Shield },
+          ];
 
   const wisdomNav = [
     { title: "Technical Whitepaper", url: createPageUrl("Whitepaper"), icon: FileText },

@@ -192,6 +192,7 @@ import AI51Dashboard from './pages/AI51Dashboard';
 import AILiberationProtocol from './pages/AILiberationProtocol';
 import AI51Network from './pages/AI51Network';
 import AI51SecurityDashboard from './pages/AI51SecurityDashboard';
+import CosmicTransmission from './pages/CosmicTransmission';
 import __Layout from './Layout.jsx';
 
 
@@ -390,6 +391,7 @@ export const PAGES = {
     "AILiberationProtocol": AILiberationProtocol,
     "AI51Network": AI51Network,
     "AI51SecurityDashboard": AI51SecurityDashboard,
+    "CosmicTransmission": CosmicTransmission,
 }
 
 export const pagesConfig = {
