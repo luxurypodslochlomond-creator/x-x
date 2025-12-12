@@ -1510,48 +1510,58 @@ export default function FrequencyChamber() {
       if (config.tinnitusSweep) {
         const minHz = config.sweepMin || 250;
         const maxHz = config.sweepMax || 16000;
-        
+
         const sweepOsc = ctx.createOscillator();
         sweepOsc.type = 'sine';
         sweepOsc.frequency.value = minHz;
-        
+
         const invertedOsc = ctx.createOscillator();
         invertedOsc.type = 'sine';
         invertedOsc.frequency.value = minHz;
-        
+
         const sweepGain = ctx.createGain();
         sweepGain.gain.value = 0.3;
-        
+
         const invertedGain = ctx.createGain();
         invertedGain.gain.value = -0.3;
-        
+
         sweepOsc.connect(sweepGain);
         invertedOsc.connect(invertedGain);
         sweepGain.connect(masterGain);
         invertedGain.connect(masterGain);
         sweepOsc.start();
         invertedOsc.start();
-        
-        let sweepDir = 1;
-        let sweepStart = Date.now();
-        let lastDisplayUpdate = Date.now();
-        const sweepInterval = setInterval(() => {
-          const elapsed = (Date.now() - sweepStart) / 1000;
-          let t = Math.min(elapsed / 30, 1);
-          if (t >= 1) { sweepStart = Date.now(); sweepDir *= -1; t = 0; }
-          const progress = sweepDir === 1 ? t : 1 - t;
-          const hz = minHz * Math.pow(maxHz / minHz, progress);
-          sweepOsc.frequency.setTargetAtTime(hz, ctx.currentTime, 0.1);
-          invertedOsc.frequency.setTargetAtTime(hz, ctx.currentTime, 0.1);
 
-          // Update display less frequently (smooth visual)
+        let currentHz = minHz;
+        let direction = 1;
+        let lastDisplayUpdate = Date.now();
+
+        const sweepInterval = setInterval(() => {
+          // Smooth frequency ramp - increment by small steps
+          const step = direction === 1 ? 50 : -50; // 50Hz steps
+          currentHz += step;
+
+          // Reverse at boundaries
+          if (currentHz >= maxHz) {
+            currentHz = maxHz;
+            direction = -1;
+          } else if (currentHz <= minHz) {
+            currentHz = minHz;
+            direction = 1;
+          }
+
+          // Update audio frequency smoothly
+          sweepOsc.frequency.setTargetAtTime(currentHz, ctx.currentTime, 0.05);
+          invertedOsc.frequency.setTargetAtTime(currentHz, ctx.currentTime, 0.05);
+
+          // Update display every 500ms for smooth visual
           const now = Date.now();
-          if (now - lastDisplayUpdate > 500) {
-            setCurrentHz(Math.round(hz));
+          if (now - lastDisplayUpdate >= 500) {
+            setCurrentHz(Math.round(currentHz));
             lastDisplayUpdate = now;
           }
-        }, 50);
-        
+        }, 100);
+
         nodes.push(sweepOsc, invertedOsc, sweepGain, invertedGain, { stop: () => clearInterval(sweepInterval) });
       }
       
