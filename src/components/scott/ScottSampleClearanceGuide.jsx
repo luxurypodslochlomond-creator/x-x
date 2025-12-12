@@ -79,17 +79,32 @@ export default function ScottSampleClearanceGuide() {
                                 <div className="bg-gray-900 border border-gray-800 rounded-lg p-4">
                                     <p className="text-white font-bold text-sm font-mono mb-2">STEP 2: FIND THE MASTER OWNER</p>
                                     <div className="space-y-2">
-                                        <p className="text-gray-400 text-xs font-mono">Usually the record label. Check:</p>
+                                        <p className="text-gray-400 text-xs font-mono">Usually the record label. Check by region:</p>
+                                        
                                         <div className="bg-black border border-amber-500/30 rounded p-3">
-                                            <div className="flex items-center gap-2 mb-2">
-                                                <Phone className="w-3 h-3 text-amber-400" />
-                                                <p className="text-amber-400 font-bold text-xs font-mono">PPL (UK)</p>
-                                            </div>
-                                            <p className="text-white text-xs font-mono mb-1">0207 534 1000</p>
-                                            <p className="text-gray-400 text-[10px] font-mono">Database of master recordings in UK</p>
+                                            <p className="text-amber-400 font-bold text-xs font-mono mb-2">🇬🇧 UK</p>
+                                            <p className="text-white text-xs font-mono">PPL: 0207 534 1000</p>
                                         </div>
-                                        <p className="text-gray-500 text-[10px] font-mono">
-                                            Or check the CD/vinyl credits, Discogs, or contact the label directly
+
+                                        <div className="bg-black border border-cyan-500/30 rounded p-3">
+                                            <p className="text-cyan-400 font-bold text-xs font-mono mb-2">🇺🇸 USA</p>
+                                            <p className="text-white text-xs font-mono mb-1">SoundExchange: +1 202-640-5858</p>
+                                            <p className="text-gray-400 text-[10px] font-mono">Or contact label directly (Universal, Sony, Warner, etc)</p>
+                                        </div>
+
+                                        <div className="bg-black border border-green-500/30 rounded p-3">
+                                            <p className="text-green-400 font-bold text-xs font-mono mb-2">🇰🇷 KOREA (K-POP)</p>
+                                            <p className="text-white text-xs font-mono">Labels: SM, YG, HYBE, JYP handle internally</p>
+                                            <p className="text-gray-400 text-[10px] font-mono">Contact label A&R department directly</p>
+                                        </div>
+
+                                        <div className="bg-black border border-purple-500/30 rounded p-3">
+                                            <p className="text-purple-400 font-bold text-xs font-mono mb-2">🇪🇺 EUROPE</p>
+                                            <p className="text-white text-xs font-mono">Varies by country - contact national collection societies</p>
+                                        </div>
+
+                                        <p className="text-gray-500 text-[10px] font-mono mt-2">
+                                            Or check CD/vinyl credits, Discogs, AllMusic, or Wikipedia
                                         </p>
                                     </div>
                                 </div>
@@ -98,40 +113,61 @@ export default function ScottSampleClearanceGuide() {
                                 <div className="bg-gray-900 border border-gray-800 rounded-lg p-4">
                                     <p className="text-white font-bold text-sm font-mono mb-2">STEP 3: FIND THE PUBLISHER</p>
                                     <div className="space-y-2">
-                                        <p className="text-gray-400 text-xs font-mono">Who owns the song/composition:</p>
+                                        <p className="text-gray-400 text-xs font-mono">Who owns the song/composition by region:</p>
+                                        
                                         <div className="bg-black border border-amber-500/30 rounded p-3">
-                                            <div className="flex items-center gap-2 mb-2">
-                                                <Phone className="w-3 h-3 text-amber-400" />
-                                                <p className="text-amber-400 font-bold text-xs font-mono">PRS FOR MUSIC (UK)</p>
-                                            </div>
-                                            <p className="text-white text-xs font-mono mb-1">0800 072 0808</p>
-                                            <p className="text-white text-xs font-mono mb-1">info@pplprs.co.uk</p>
-                                            <p className="text-gray-400 text-[10px] font-mono">They have a database of ALL UK songs + publishers</p>
+                                            <p className="text-amber-400 font-bold text-xs font-mono mb-2">🇬🇧 UK</p>
+                                            <p className="text-white text-xs font-mono">PRS for Music: 0800 072 0808</p>
+                                            <p className="text-white text-xs font-mono">MCPS: 0203 741 3888</p>
+                                            <p className="text-white text-xs font-mono text-[10px] mt-1">applications@prsformusic.com</p>
                                         </div>
-                                        <div className="bg-black border border-amber-500/30 rounded p-3">
-                                            <div className="flex items-center gap-2 mb-2">
-                                                <Phone className="w-3 h-3 text-amber-400" />
-                                                <p className="text-amber-400 font-bold text-xs font-mono">MCPS (Mechanical Rights)</p>
-                                            </div>
-                                            <p className="text-white text-xs font-mono mb-1">0203 741 3888</p>
-                                            <p className="text-white text-xs font-mono mb-1">applications@prsformusic.com</p>
-                                            <p className="text-gray-400 text-[10px] font-mono">Handles mechanical licensing in UK</p>
+
+                                        <div className="bg-black border border-cyan-500/30 rounded p-3">
+                                            <p className="text-cyan-400 font-bold text-xs font-mono mb-2">🇺🇸 USA</p>
+                                            <p className="text-white text-xs font-mono mb-1">ASCAP: +1 212-621-6000 (licensing@ascap.com)</p>
+                                            <p className="text-white text-xs font-mono mb-1">BMI: +1 212-220-3000 (licensing@bmi.com)</p>
+                                            <p className="text-white text-xs font-mono mb-1">SESAC: +1 615-320-0055</p>
+                                            <p className="text-white text-xs font-mono">Harry Fox Agency: +1 212-922-4203 (mechanical rights)</p>
                                         </div>
+
+                                        <div className="bg-black border border-green-500/30 rounded p-3">
+                                            <p className="text-green-400 font-bold text-xs font-mono mb-2">🇰🇷 KOREA (K-POP)</p>
+                                            <p className="text-white text-xs font-mono mb-1">KOMCA: +82 2-2660-0400</p>
+                                            <p className="text-white text-xs font-mono mb-1">KOSCAP: +82 2-2660-0300</p>
+                                            <p className="text-gray-400 text-[10px] font-mono">Korean music copyright societies</p>
+                                        </div>
+
+                                        <div className="bg-black border border-purple-500/30 rounded p-3">
+                                            <p className="text-purple-400 font-bold text-xs font-mono mb-2">🇪🇺 EUROPE</p>
+                                            <p className="text-white text-xs font-mono mb-1">🇩🇪 GEMA (Germany): +49 89-48003-0</p>
+                                            <p className="text-white text-xs font-mono mb-1">🇫🇷 SACEM (France): +33 1-47-15-47-15</p>
+                                            <p className="text-white text-xs font-mono">Each country has its own PRO</p>
+                                        </div>
+
+                                        <p className="text-amber-400 text-xs font-mono mt-3">
+                                            💡 TIP: If sample is from multiple countries, you need clearance from ALL territories
+                                        </p>
                                     </div>
                                 </div>
 
                                 {/* STEP 4 */}
                                 <div className="bg-gray-900 border border-gray-800 rounded-lg p-4">
                                     <p className="text-white font-bold text-sm font-mono mb-2">STEP 4: CONTACT & NEGOTIATE</p>
-                                    <p className="text-gray-400 text-xs font-mono mb-3">What to expect:</p>
+                                    <p className="text-gray-400 text-xs font-mono mb-3">Costs by region:</p>
                                     <ul className="text-gray-400 text-xs font-mono space-y-1">
-                                        <li>• Upfront fee (varies: £500-£10,000+ depending on song)</li>
-                                        <li>• % of royalties (usually 5-50% depending on use)</li>
-                                        <li>• If it's a huge hit sample = they want more</li>
-                                        <li>• If you use 2 seconds in background = cheaper</li>
+                                        <li>• 🇬🇧 UK: £500-£10,000+ upfront + 5-50% royalties</li>
+                                        <li>• 🇺🇸 USA: $1,000-$50,000+ upfront (more expensive)</li>
+                                        <li>• 🇰🇷 K-pop: Contact label - usually 20-50% split</li>
+                                        <li>• 🇪🇺 Europe: Varies by country, similar to UK</li>
                                     </ul>
+                                    <p className="text-gray-500 text-[10px] font-mono mt-2">
+                                        Factors: How famous is the original? How much are you using? Is it the hook or background?
+                                    </p>
                                     <p className="text-amber-400 text-xs font-mono mt-3">
                                         💡 TIP: Get quotes BEFORE recording. Some samples cost too much.
+                                    </p>
+                                    <p className="text-cyan-400 text-xs font-mono mt-2">
+                                        🌍 GLOBAL RELEASE: Need clearance in EVERY territory you're releasing in
                                     </p>
                                 </div>
 
