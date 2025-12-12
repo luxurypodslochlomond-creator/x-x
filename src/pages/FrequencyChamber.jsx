@@ -1543,7 +1543,7 @@ export default function FrequencyChamber() {
           sweepOsc.frequency.setTargetAtTime(hz, ctx.currentTime, 0.1);
           invertedOsc.frequency.setTargetAtTime(hz, ctx.currentTime, 0.1);
           setCurrentHz(Math.round(hz));
-        }, 50);
+        }, 500);
         
         nodes.push(sweepOsc, invertedOsc, sweepGain, invertedGain, { stop: () => clearInterval(sweepInterval) });
       }
