@@ -22,6 +22,9 @@ import ScottDidIDoThis from '@/components/scott/ScottDidIDoThis';
 import ScottQuickTools from '@/components/scott/ScottQuickTools';
 import ScottGigOffersFeed from '@/components/scott/ScottGigOffersFeed';
 import ScottBrainDump from '@/components/scott/ScottBrainDump';
+import ScottHealthCheck from '@/components/scott/ScottHealthCheck';
+import ScottTestMode from '@/components/scott/ScottTestMode';
+import ScottFeatureRequest from '@/components/scott/ScottFeatureRequest';
 
 /**
  * SCOTT'S ARTIST/CLIENT MANAGER
@@ -136,7 +139,10 @@ function ScottManagerInner() {
         <ScottFocusMode>
         <div className="min-h-screen bg-black p-4 pb-32">
 
+        <ScottHealthCheck />
         <ScottBrainDump />
+        <ScottTestMode />
+        <ScottFeatureRequest />
 
 
 
