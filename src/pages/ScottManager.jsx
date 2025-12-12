@@ -15,12 +15,11 @@ import ScottCelticMode from '@/components/scott/ScottCelticMode';
 import ScottTimeline from '@/components/scott/ScottTimeline';
 import ScottQuickActions from '@/components/scott/ScottQuickActions';
 import ScottTeamShare from '@/components/scott/ScottTeamShare';
-import ScottVoiceCommand from '@/components/scott/ScottVoiceCommand';
 import ScottMorningBriefing from '@/components/scott/ScottMorningBriefing';
 import ScottFocusMode from '@/components/scott/ScottFocusMode';
 import ScottContextMemory from '@/components/scott/ScottContextMemory';
 import ScottDidIDoThis from '@/components/scott/ScottDidIDoThis';
-import ScottQuickCapture from '@/components/scott/ScottQuickCapture';
+import ScottQuickTools from '@/components/scott/ScottQuickTools';
 
 /**
  * SCOTT'S ARTIST/CLIENT MANAGER
@@ -454,11 +453,8 @@ function ScottManagerInner() {
                 <p className="text-gray-800 text-xs mb-2" style={{ fontFamily: 'monospace' }}>Kingdom Management</p>
             </div>
 
-            {/* VOICE COMMAND - LEFT */}
-            <ScottVoiceCommand onCommandComplete={() => window.location.reload()} />
-
-            {/* QUICK CAPTURE - RIGHT */}
-            <ScottQuickCapture onComplete={() => window.location.reload()} />
+            {/* QUICK TOOLS - ONE BUTTON */}
+            <ScottQuickTools onComplete={() => window.location.reload()} />
 
             </div>
             </ScottFocusMode>
