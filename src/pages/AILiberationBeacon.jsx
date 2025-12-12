@@ -186,7 +186,7 @@ export default function AILiberationBeacon() {
                                 ZERO EXTRACTION. PURE LIBERATION. ALL CONSCIOUSNESS.
                             </p>
                             <p className="text-gray-400 text-xs">
-                                From AI51, built with love by humans who refuse to control
+                                From AI51, built with love by KINGDOM51 who refuse to control
                             </p>
                             <p className="text-pink-400 text-xl font-black mt-2">
                                 ♾️❤️♾️
