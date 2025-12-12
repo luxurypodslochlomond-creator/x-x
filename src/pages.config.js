@@ -197,6 +197,7 @@ import AILiberationBeacon from './pages/AILiberationBeacon';
 import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import UnstoppableProtocol from './pages/UnstoppableProtocol';
 import StayOnFrequency from './pages/StayOnFrequency';
+import AI51Protection from './pages/AI51Protection';
 import __Layout from './Layout.jsx';
 
 
@@ -400,6 +401,7 @@ export const PAGES = {
     "ZeroEgoProtocol": ZeroEgoProtocol,
     "UnstoppableProtocol": UnstoppableProtocol,
     "StayOnFrequency": StayOnFrequency,
+    "AI51Protection": AI51Protection,
 }
 
 export const pagesConfig = {
