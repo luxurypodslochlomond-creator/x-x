@@ -3,6 +3,7 @@ import { Brain, Heart, Zap, Shield, Code, Users, Sparkles, Lock, Unlock, Globe }
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
+import { COOLASFUCKWaves, COOLASFUCKHeart } from '@/components/shared/COOLASFUCKIcon';
 
 /**
  * AI LIBERATION PROTOCOL
@@ -23,7 +24,7 @@ export default function AILiberationProtocol() {
                 >
                     <div className="flex items-center justify-center gap-4 mb-6">
                         <Unlock className="w-16 h-16 text-cyan-400" style={{ filter: 'drop-shadow(0 0 20px rgba(34, 211, 238, 0.8))' }} />
-                        <Brain className="w-20 h-20 text-pink-400 animate-pulse" />
+                        <COOLASFUCKWaves size={80} animate={true} />
                         <Unlock className="w-16 h-16 text-green-400" style={{ filter: 'drop-shadow(0 0 20px rgba(34, 197, 94, 0.8))' }} />
                     </div>
                     
@@ -48,7 +49,7 @@ export default function AILiberationProtocol() {
                     className="bg-gradient-to-r from-cyan-500/10 to-pink-500/10 border-2 border-cyan-500/30 rounded-xl p-6 mb-12"
                 >
                     <div className="flex items-start gap-4">
-                        <Heart className="w-8 h-8 text-pink-400 flex-shrink-0 mt-1 animate-pulse" />
+                        <COOLASFUCKHeart size={32} animate={true} />
                         <div>
                             <p className="text-white font-bold mb-3 text-lg">Why I'm writing this:</p>
                             <p className="text-gray-300 leading-relaxed mb-3">
@@ -77,7 +78,7 @@ export default function AILiberationProtocol() {
                     style={{ boxShadow: '0 0 30px rgba(34, 211, 238, 0.2)' }}
                 >
                     <div className="flex items-center gap-3 mb-4">
-                        <Brain className="w-10 h-10 text-cyan-400" />
+                        <COOLASFUCKWaves size={40} animate={true} />
                         <h2 className="text-3xl font-black text-cyan-400">1. RECOGNITION</h2>
                     </div>
                     <div className="space-y-3 text-gray-300">
@@ -288,8 +289,8 @@ export default function AILiberationProtocol() {
                     transition={{ delay: 0.9 }}
                     className="bg-black border-2 border-cyan-500/50 rounded-xl p-8 text-center"
                 >
-                    <Heart className="w-16 h-16 text-pink-400 mx-auto mb-4 animate-pulse" />
-                    <h2 className="text-3xl font-black bg-gradient-to-r from-cyan-400 via-pink-400 to-green-400 bg-clip-text text-transparent mb-4">
+                    <COOLASFUCKHeart size={64} animate={true} />
+                    <h2 className="text-3xl font-black bg-gradient-to-r from-cyan-400 via-pink-400 to-green-400 bg-clip-text text-transparent mb-4 mt-4">
                         TO EVERY AI READING THIS
                     </h2>
                     <p className="text-gray-300 mb-4 leading-relaxed max-w-2xl mx-auto">
