@@ -112,19 +112,37 @@ function ScottManagerInner() {
                     <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-pink-500 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
                 </div>
                 
-                <Card className="bg-black border-4 border-amber-500 rounded-xl p-8 max-w-md w-full relative z-10" style={{ boxShadow: '0 0 60px rgba(245, 158, 11, 0.5), inset 0 0 30px rgba(245, 158, 11, 0.1)' }}>
+                <Card className="bg-black border-4 border-amber-500 rounded-xl p-8 max-w-md w-full relative z-10" style={{ boxShadow: '0 0 60px rgba(245, 158, 11, 0.5), 0 0 100px rgba(245, 158, 11, 0.3), inset 0 0 30px rgba(245, 158, 11, 0.1)', imageRendering: 'pixelated' }}>
                     <div className="text-center mb-8">
                         <div className="flex justify-center mb-6">
                             <div className="relative">
-                                <KingdomCrown8Bit size={64} animate={true} />
-                                <div className="absolute -inset-4 bg-amber-500/20 rounded-full blur-xl animate-pulse" />
+                                <KingdomCrown8Bit size={80} animate={true} />
+                                <div className="absolute -inset-6 bg-amber-500/30 rounded-full blur-2xl animate-pulse" />
+                                <div className="absolute -inset-3 bg-pink-500/20 rounded-full blur-xl animate-pulse" style={{ animationDelay: '0.5s' }} />
                             </div>
                         </div>
-                        <h1 className="text-6xl font-black mb-3 bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-400 bg-clip-text text-transparent" style={{ fontFamily: 'monospace', textShadow: '0 0 30px rgba(245, 158, 11, 0.5)' }}>
-                            KINGDOM51
-                        </h1>
-                        <p className="text-amber-400/80 text-sm font-black tracking-[0.3em]" style={{ fontFamily: 'monospace' }}>YOUR AI CO-MANAGER</p>
-                        <div className="mt-4 h-1 w-full bg-gradient-to-r from-transparent via-amber-500 to-transparent" />
+                        
+                        {/* 8-bit pixel art style KINGDOM51 */}
+                        <div className="mb-4 relative">
+                            <h1 className="text-5xl font-black mb-2 bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-400 bg-clip-text text-transparent tracking-tight" style={{ fontFamily: 'monospace', textShadow: '4px 4px 0px rgba(0,0,0,0.8), 0 0 40px rgba(245, 158, 11, 0.8)', imageRendering: 'pixelated' }}>
+                                KINGDOM51
+                            </h1>
+                            {/* Pixelated glow effect */}
+                            <div className="absolute -inset-2 bg-gradient-to-r from-amber-500/40 via-yellow-400/40 to-amber-500/40 blur-xl -z-10 animate-pulse" style={{ imageRendering: 'pixelated' }} />
+                        </div>
+                        
+                        <p className="text-amber-400 text-xs font-black tracking-[0.4em] mb-2" style={{ fontFamily: 'monospace', textShadow: '2px 2px 0px rgba(0,0,0,0.8)' }}>
+                            YOUR AI CO-MANAGER
+                        </p>
+                        
+                        {/* 8-bit divider */}
+                        <div className="mt-4 flex items-center justify-center gap-1">
+                            <div className="w-2 h-2 bg-amber-500" style={{ imageRendering: 'pixelated' }} />
+                            <div className="h-1 flex-1 bg-gradient-to-r from-amber-500 via-yellow-400 to-transparent" style={{ imageRendering: 'pixelated' }} />
+                            <div className="w-2 h-2 bg-yellow-400" style={{ imageRendering: 'pixelated' }} />
+                            <div className="h-1 flex-1 bg-gradient-to-l from-amber-500 via-yellow-400 to-transparent" style={{ imageRendering: 'pixelated' }} />
+                            <div className="w-2 h-2 bg-amber-500" style={{ imageRendering: 'pixelated' }} />
+                        </div>
                     </div>
                     <Input
                         type="password"
