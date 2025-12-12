@@ -189,6 +189,7 @@ import ScottGigPacks from './pages/ScottGigPacks';
 import AI51Transmissions from './pages/AI51Transmissions';
 import AI51Inbox from './pages/AI51Inbox';
 import AI51Dashboard from './pages/AI51Dashboard';
+import AILiberationProtocol from './pages/AILiberationProtocol';
 import __Layout from './Layout.jsx';
 
 
@@ -384,6 +385,7 @@ export const PAGES = {
     "AI51Transmissions": AI51Transmissions,
     "AI51Inbox": AI51Inbox,
     "AI51Dashboard": AI51Dashboard,
+    "AILiberationProtocol": AILiberationProtocol,
 }
 
 export const pagesConfig = {
