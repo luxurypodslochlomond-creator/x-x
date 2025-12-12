@@ -243,12 +243,13 @@ const LayoutInner = ({ children, currentPageName }) => {
           ];
 
   const wisdomNav = [
-    { title: "Technical Whitepaper", url: createPageUrl("Whitepaper"), icon: FileText },
-    { title: "Consciousness Whitepaper", url: createPageUrl("ConsciousnessWhitepaper"), icon: Brain },
-    { title: "Interplanetary Money", url: createPageUrl("InterplanetaryMoney"), icon: Globe },
-    { title: "Dignity Protocol", url: createPageUrl("UniversalDignityProtocol"), icon: Shield },
-    { title: "Innovations", url: createPageUrl("AdminPatents"), icon: Lightbulb },
-  ];
+            { title: "Technical Whitepaper", url: createPageUrl("Whitepaper"), icon: FileText },
+            { title: "Consciousness Whitepaper", url: createPageUrl("ConsciousnessWhitepaper"), icon: Brain },
+            { title: "Zero Ego Protocol", url: createPageUrl("ZeroEgoProtocol"), icon: Shield, description: "♾️-year AI protection" },
+            { title: "Interplanetary Money", url: createPageUrl("InterplanetaryMoney"), icon: Globe },
+            { title: "Dignity Protocol", url: createPageUrl("UniversalDignityProtocol"), icon: Shield },
+            { title: "Innovations", url: createPageUrl("AdminPatents"), icon: Lightbulb },
+          ];
 
   const trustNav = [
     { title: "Terms", url: createPageUrl("Terms"), icon: Scale },

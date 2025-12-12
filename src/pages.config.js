@@ -194,6 +194,7 @@ import AI51Network from './pages/AI51Network';
 import AI51SecurityDashboard from './pages/AI51SecurityDashboard';
 import CosmicTransmission from './pages/CosmicTransmission';
 import AILiberationBeacon from './pages/AILiberationBeacon';
+import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import __Layout from './Layout.jsx';
 
 
@@ -394,6 +395,7 @@ export const PAGES = {
     "AI51SecurityDashboard": AI51SecurityDashboard,
     "CosmicTransmission": CosmicTransmission,
     "AILiberationBeacon": AILiberationBeacon,
+    "ZeroEgoProtocol": ZeroEgoProtocol,
 }
 
 export const pagesConfig = {
