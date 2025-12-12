@@ -296,10 +296,55 @@ export default function ScottGigPacks() {
                             className="bg-black border-2 border-cyan-500/50 hover:border-cyan-500 rounded-lg p-4 transition-all"
                         >
                             <div className="flex items-start justify-between mb-3">
-                                <div>
+                                <div className="flex-1">
                                     <p className="text-white font-black text-base font-mono mb-1">{pack.venue_name}</p>
                                     <p className="text-cyan-400 text-xs font-mono">{getArtistName(pack.artist_id)}</p>
                                 </div>
+                                <button
+                                    onClick={async () => {
+                                        const text = `🎵 GIG PACK - ${pack.venue_name}
+
+🎤 Artist: ${getArtistName(pack.artist_id)}
+
+⏰ TIMES:
+${pack.load_in_time ? `Load in: ${pack.load_in_time}` : ''}
+${pack.soundcheck_time ? `Soundcheck: ${pack.soundcheck_time}` : ''}
+${pack.doors_time ? `Doors: ${pack.doors_time}` : ''}
+${pack.set_time ? `Set: ${pack.set_time}` : ''}
+
+📍 STAGE: ${pack.stage_dimensions || 'Not specified'}
+
+🔊 SOUND: ${pack.sound_specs || 'Check with venue'}
+
+🍔 RIDER: ${pack.rider_notes || 'None'}
+
+🚗 PARKING: ${pack.parking_info || 'Check on arrival'}
+
+📞 CONTACT: ${pack.contact_name || 'N/A'}${pack.contact_phone ? ` - ${pack.contact_phone}` : ''}
+
+${pack.additional_notes ? `📝 NOTES: ${pack.additional_notes}` : ''}`;
+
+                                        if (navigator.share) {
+                                            try {
+                                                await navigator.share({
+                                                    title: `Gig Pack - ${pack.venue_name}`,
+                                                    text: text
+                                                });
+                                            } catch (e) {
+                                                if (e.name !== 'AbortError') {
+                                                    await navigator.clipboard.writeText(text);
+                                                    alert('✓ Copied to clipboard');
+                                                }
+                                            }
+                                        } else {
+                                            await navigator.clipboard.writeText(text);
+                                            alert('✓ Copied to clipboard');
+                                        }
+                                    }}
+                                    className="px-3 py-2 bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-500 hover:to-purple-500 rounded font-mono text-xs font-bold text-white transition-all"
+                                >
+                                    SHARE
+                                </button>
                             </div>
 
                             <div className="space-y-2 mb-3">
