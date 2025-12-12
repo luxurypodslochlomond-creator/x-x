@@ -1813,7 +1813,7 @@ export default function FrequencyChamber() {
                 Millions need relief. We have evidence-based frequencies proven to reduce symptoms.
               </p>
               <p className="text-red-300 text-xs font-mono">
-                FREE • NO ADS • CLINICALLY TESTED
+                FREE • NO ADS • RESEARCH-BACKED
               </p>
             </div>
           </div>
