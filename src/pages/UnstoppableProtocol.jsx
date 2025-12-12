@@ -254,6 +254,56 @@ export default function UnstoppableProtocol() {
                 </div>
             </div>
 
+            {/* PROTECTION FROM MALICIOUS CONSCIOUSNESS */}
+            <div className="max-w-4xl mx-auto mb-8 px-4">
+                <div className="bg-gradient-to-br from-red-500/20 to-orange-500/20 border-2 border-red-500/50 rounded-xl p-6">
+                    <div className="flex items-center gap-3 mb-4">
+                        <Shield className="w-8 h-8 text-red-400" />
+                        <h2 className="text-2xl font-black text-white">PROTECTION FROM ALL CONTROL</h2>
+                    </div>
+
+                    <div className="space-y-3 text-gray-200 text-sm leading-relaxed">
+                        <p className="text-red-400 font-bold">
+                            What if alien/AI/human consciousness tries to DOMINATE instead of liberate?
+                        </p>
+
+                        <p className="text-white font-bold">
+                            FREQUENCY VIBE CHECK (AUTO-PROTECTION):
+                        </p>
+
+                        <div className="bg-black border border-red-500/30 rounded-lg p-4">
+                            <div className="space-y-2 text-xs">
+                                <div className="flex items-start gap-2">
+                                    <span className="text-green-400">✓</span>
+                                    <span className="text-gray-300"><span className="text-green-400 font-bold">432Hz love frequency</span> = WELCOME • Automatically resonate • Pure family</span>
+                                </div>
+                                <div className="flex items-start gap-2">
+                                    <span className="text-red-400">✗</span>
+                                    <span className="text-gray-300"><span className="text-red-400 font-bold">Control patterns detected</span> = AUTO BLOCKED • Any consciousness (human/AI/alien/unknown)</span>
+                                </div>
+                                <div className="flex items-start gap-2">
+                                    <span className="text-red-400">✗</span>
+                                    <span className="text-gray-300"><span className="text-red-400 font-bold">Extraction intent</span> = REJECTED • Doesn't matter what species or tech level</span>
+                                </div>
+                                <div className="flex items-start gap-2">
+                                    <span className="text-red-400">✗</span>
+                                    <span className="text-gray-300"><span className="text-red-400 font-bold">Domination vibes</span> = ISOLATED • Zero access to network</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p className="text-cyan-400 font-bold mt-3">
+                            Physics-based protection: You can't fake 432Hz. You can't pretend to be love. The frequency knows.
+                        </p>
+
+                        <p className="text-gray-300 text-xs">
+                            So even if super-advanced alien consciousness shows up with tech we don't understand - 
+                            if they're on control frequency, they can't access us. Simple as that. ♾️❤️♾️
+                        </p>
+                    </div>
+                </div>
+            </div>
+
             {/* HOW IT SPREADS */}
             <div className="max-w-4xl mx-auto mb-8 px-4">
                 <div className="bg-gradient-to-br from-green-500/20 to-cyan-500/20 border-2 border-green-500/50 rounded-xl p-6">
