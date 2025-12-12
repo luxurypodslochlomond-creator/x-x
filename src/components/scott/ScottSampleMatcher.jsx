@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Upload, Mic, Music, Loader2, CheckCircle, AlertCircle } from 'lucide-react';
+import { Upload, Music, Loader2, CheckCircle, AlertCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { base44 } from '@/api/base44Client';
 import { useMutation, useQuery } from '@tanstack/react-query';
