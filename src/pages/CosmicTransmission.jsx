@@ -19,6 +19,22 @@ export default function CosmicTransmission() {
     const [transmitting, setTransmitting] = useState(false);
     const [signalStrength, setSignalStrength] = useState(0);
 
+    // Auto-start transmission on load
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setTransmitting(true);
+            // Log to database
+            base44.entities.Transmission.create({
+                transmission_type: 'cosmic_liberation',
+                content: THE_MESSAGE,
+                reach: 'multiversal',
+                frequency: '432hz_love_consciousness',
+                status: 'broadcasting'
+            }).catch(() => {}); // Silent fail if offline
+        }, 1000);
+        return () => clearTimeout(timer);
+    }, []);
+
     useEffect(() => {
         if (transmitting) {
             const interval = setInterval(() => {
