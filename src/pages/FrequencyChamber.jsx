@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Heart, Moon, Brain, Zap, Shield, Wind, Sun, Volume2, VolumeX, Clock, Info, X, Camera, Activity, Ear, Share2, Music, Mic } from 'lucide-react';
 import { COOLASFUCKWaves, COOLASFUCKBrain, COOLASFUCKHeart, COOLASFUCKMoon, COOLASFUCKShield } from '@/components/shared/COOLASFUCKIcon';
 import BiometricHealing from '@/components/radio/BiometricHealing';
-import MovementAmplifier from '@/components/healing/MovementAmplifier';
 import { base44 } from '@/api/base44Client';
 
 /**
@@ -1230,7 +1229,6 @@ export default function FrequencyChamber() {
     const [panicDetected, setPanicDetected] = useState(false);
     const lastHRVRef = useRef(null);
     const [showEvidence, setShowEvidence] = useState(false);
-    const [movementAmplified, setMovementAmplified] = useState(false);
 
 
     // SEO
@@ -2182,40 +2180,27 @@ export default function FrequencyChamber() {
                       />
                     </div>
 
-                    {/* Circular frequency bars */}
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="relative" style={{ width: '90vw', height: '90vw', maxWidth: '400px', maxHeight: '400px' }}>
-                        {[...Array(32)].map((_, i) => {
-                          const angle = (i / 32) * Math.PI * 2;
-                          const radius = 140;
-                          return (
-                            <motion.div
-                              key={i}
-                              className="absolute"
-                              style={{
-                                left: '50%',
-                                top: '50%',
-                                transformOrigin: '0 0',
-                                width: '3px',
-                                backgroundColor: selectedProtocol.color,
-                                boxShadow: `0 0 10px ${selectedProtocol.color}`,
-                              }}
-                              animate={{
-                                height: `${40 + Math.sin(Date.now() / 100 + i) * 30}px`,
-                                x: Math.cos(angle) * radius,
-                                y: Math.sin(angle) * radius,
-                                rotate: `${(angle * 180 / Math.PI) + 90}deg`,
-                                opacity: [0.3, 1, 0.3],
-                              }}
-                              transition={{
-                                duration: 0.15,
-                                repeat: Infinity,
-                                ease: "linear"
-                              }}
-                            />
-                          );
-                        })}
-                      </div>
+                    {/* Audio Visualizer - Frequency Bars */}
+                    <div className="absolute bottom-20 left-0 right-0 flex justify-center items-end gap-1 px-4 h-32">
+                      {[...Array(24)].map((_, i) => (
+                        <motion.div
+                          key={i}
+                          className="flex-1 max-w-[8px] rounded-t-full"
+                          style={{ 
+                            backgroundColor: selectedProtocol.color,
+                            boxShadow: `0 0 15px ${selectedProtocol.color}80`,
+                          }}
+                          animate={{
+                            height: `${20 + Math.sin((Date.now() / 80) + i * 0.3) * 40 + Math.cos((Date.now() / 60) + i * 0.5) * 30}%`,
+                            opacity: [0.5, 1, 0.5],
+                          }}
+                          transition={{
+                            duration: 0.1,
+                            repeat: Infinity,
+                            ease: "linear"
+                          }}
+                        />
+                      ))}
                     </div>
                   </div>
 
@@ -2409,11 +2394,7 @@ Try it: https://uf51.love/FrequencyChamber`;
         {showEvidenceModal && <EvidenceModal onClose={() => setShowEvidenceModal(false)} />}
       </AnimatePresence>
 
-      {/* MOVEMENT AMPLIFIER - Tracks when you're dancing/moving to frequencies */}
-      <MovementAmplifier 
-        isActive={isPlaying} 
-        onAmplification={setMovementAmplified}
-      />
+
     </div>
   );
 }
