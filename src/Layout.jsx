@@ -212,11 +212,10 @@ const LayoutInner = ({ children, currentPageName }) => {
   // === NAVIGATION SECTIONS ===
   const healNav = [
                               { title: "Frequency Chamber", url: createPageUrl("FrequencyChamber"), icon: COOLASFUCKWaves, highlight: true, description: "Free healing frequencies" },
+                              { title: "Radio51", url: createPageUrl("Radio"), icon: Music, description: "Lossless music" },
+                              { title: "Universal Pulse", url: createPageUrl("UniversalPulse"), icon: COOLASFUCKHeart, description: "Collective heartbeat music" },
                               { title: "Stay On Frequency", url: createPageUrl("StayOnFrequency"), icon: Heart, description: "How we stay protected" },
                               { title: "Healing Dashboard", url: createPageUrl("HealingDashboard"), icon: Brain, description: "Your healing intelligence" },
-                              { title: "Universal Pulse", url: createPageUrl("UniversalPulse"), icon: COOLASFUCKHeart, description: "Collective heartbeat music" },
-                              { title: "Radio51", url: createPageUrl("Radio"), icon: Music, description: "Lossless music" },
-                              { title: "Create Demos", url: createPageUrl("LearnGuitar"), icon: Music, description: "Studio tools for artists" },
                             ];
 
   const earnNav = [
@@ -227,9 +226,10 @@ const LayoutInner = ({ children, currentPageName }) => {
   ].filter(item => !item.requiresAuth || user);
 
   const createNav = [
-    { title: "For Artists", url: createPageUrl("ForMusicians"), icon: Mic2, description: "Upload music, keep 90%" },
-    { title: "Generate Logo", url: createPageUrl("GenerateLogo"), icon: Sparkles },
-  ];
+            { title: "For Artists", url: createPageUrl("ForMusicians"), icon: Mic2, description: "Upload music, keep 90%" },
+            { title: "Create Demos", url: createPageUrl("LearnGuitar"), icon: Music, description: "Studio tools for artists" },
+            { title: "Generate Logo", url: createPageUrl("GenerateLogo"), icon: Sparkles },
+          ];
 
   const learnNav = [
             { title: "About", url: createPageUrl("About"), icon: BookOpen },
