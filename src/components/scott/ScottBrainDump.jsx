@@ -40,17 +40,25 @@ export default function ScottBrainDump() {
 
         setIsSaving(true);
         try {
-            await base44.entities.ScottTask.create({
-                title: thought.substring(0, 100),
-                notes: thought,
-                status: 'todo',
-                priority: 'medium'
+            // AI analyzes and files it automatically - zero admin
+            await base44.functions.invoke('scottAICoordinator', {
+                input_text: thought,
+                input_type: 'brain_dump'
             });
 
             setThought('');
             setIsOpen(false);
         } catch (error) {
             console.error('Save failed:', error);
+            // Fallback - just save as task
+            await base44.entities.ScottTask.create({
+                title: thought.substring(0, 100),
+                notes: thought,
+                status: 'todo',
+                priority: 'medium'
+            });
+            setThought('');
+            setIsOpen(false);
         } finally {
             setIsSaving(false);
         }
