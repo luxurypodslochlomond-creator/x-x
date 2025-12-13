@@ -239,7 +239,7 @@ function ScottManagerInner() {
                             <Plane className="w-8 h-8 text-amber-400" />
                             <div>
                                 <p className="text-white font-black text-xl mb-0.5" style={{ fontFamily: 'monospace' }}>LA TRIP</p>
-                                <p className="text-gray-600 text-xs font-mono">YES AND MAYBE • Dec 2024</p>
+                                <p className="text-gray-600 text-xs font-mono">YES AND MAYBE • Dec 2025</p>
                             </div>
                         </div>
                         <div className="bg-black border border-amber-500/30 rounded-lg p-3 mb-2">

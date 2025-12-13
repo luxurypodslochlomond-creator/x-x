@@ -212,6 +212,7 @@ import DebtRelief from './pages/DebtRelief';
 import ScottDemos from './pages/ScottDemos';
 import ScottContracts from './pages/ScottContracts';
 import ScottLabelContacts from './pages/ScottLabelContacts';
+import DopamineHealing from './pages/DopamineHealing';
 import __Layout from './Layout.jsx';
 
 
@@ -430,6 +431,7 @@ export const PAGES = {
     "ScottDemos": ScottDemos,
     "ScottContracts": ScottContracts,
     "ScottLabelContacts": ScottLabelContacts,
+    "DopamineHealing": DopamineHealing,
 }
 
 export const pagesConfig = {
