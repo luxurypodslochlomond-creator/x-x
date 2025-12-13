@@ -184,6 +184,47 @@ export default function WelcomePage() {
 
                 </div>
 
+                {/* HONEST DISCLAIMER - CASH-OUT COMING SOON */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="bg-gradient-to-br from-amber-900/40 to-red-900/40 border-4 border-amber-500 p-8 space-y-6"
+                >
+                    <h2 className="text-3xl font-black font-mono text-amber-400 text-center">
+                        ⚠️ HONEST TRUTH
+                    </h2>
+                    
+                    <div className="space-y-4 font-mono text-sm">
+                        <div className="bg-black border-2 border-green-500 p-4">
+                            <p className="text-green-400 font-bold mb-2">✅ WORKS NOW:</p>
+                            <ul className="text-gray-300 space-y-1 text-xs">
+                                <li>• Clean litter → earn $P51 ✓</li>
+                                <li>• Listen to music → free forever ✓</li>
+                                <li>• Heal with frequencies → working ✓</li>
+                            </ul>
+                        </div>
+
+                        <div className="bg-black border-2 border-red-500 p-4">
+                            <p className="text-red-400 font-bold mb-2">❌ NOT READY YET:</p>
+                            <ul className="text-gray-300 space-y-1 text-xs">
+                                <li>• Converting $P51 → £/$/€ (coming 8-10 weeks)</li>
+                                <li>• Paying for groceries with $P51</li>
+                                <li>• Cashing out to bank</li>
+                            </ul>
+                        </div>
+
+                        <p className="text-white text-center font-bold">
+                            We're building the cash-out bridge. Keep earning $P51 - it'll be real money soon.
+                        </p>
+
+                        <Link to={createPageUrl('MakingItReal')}>
+                            <button className="w-full bg-amber-600 hover:bg-amber-700 text-black font-black py-3 transition-all">
+                                READ THE REAL TIMELINE →
+                            </button>
+                        </Link>
+                    </div>
+                </motion.div>
+
                 {/* WHAT IS $P51? */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -202,7 +243,7 @@ export default function WelcomePage() {
                         <div className="space-y-2 text-gray-300">
                             <p>→ Earn it by cleaning Earth</p>
                             <p>→ Spend it on music/artists</p>
-                            <p>→ Bridges to real money</p>
+                            <p>→ Building bridge to real money</p>
                             <p>→ Artists keep 90%</p>
                         </div>
 
