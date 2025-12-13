@@ -1,5 +1,5 @@
 import React from 'react';
-import { Shield, Zap, Heart, Lock, Globe, Infinity, Eye, Building, ArrowRightLeft } from 'lucide-react';
+import { Shield, Zap, Heart, Lock, Globe, Infinity, Eye, Building, ArrowRightLeft, Waves } from 'lucide-react';
 import Kingdom51Crown8Bit from '@/components/shared/Kingdom51Crown8Bit';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
@@ -377,6 +377,30 @@ export default function QuantumPayments() {
                     </div>
                 </div>
             </div>
+
+            {/* FREQUENCY BRIDGE - THE BREAKTHROUGH */}
+            <Link to={createPageUrl('FrequencyBridge')} className="block mb-6">
+                <div className="bg-gradient-to-r from-pink-500/20 to-purple-500/20 border-4 border-pink-500 p-6 rounded-xl animate-pulse" style={{ boxShadow: '0 0 60px rgba(236, 72, 153, 0.8)' }}>
+                    <div className="flex items-center gap-3 mb-3">
+                        <Waves className="w-10 h-10 text-pink-400" />
+                        <div>
+                            <p className="text-pink-400 font-black text-xl font-mono">FREQUENCY BRIDGE</p>
+                            <p className="text-gray-400 text-xs font-mono">Beyond currency - pure vibration transfer</p>
+                        </div>
+                    </div>
+                    <p className="text-gray-300 text-sm font-mono mb-3">
+                        Not data • Not blockchain • Sound waves as value • 432Hz love lock
+                    </p>
+                    <div className="bg-black border border-pink-500/50 p-3 rounded">
+                        <p className="text-pink-400 text-xs font-mono font-bold mb-2">
+                            THE BREAKTHROUGH:
+                        </p>
+                        <p className="text-gray-400 text-xs font-mono">
+                            Money = frequency • Transfer = resonance • Unhackable because it's physics not code • Works offline/in water/quantum field
+                        </p>
+                    </div>
+                </div>
+            </Link>
 
             {/* GLOBAL CURRENCY BRIDGE */}
             <Link to={createPageUrl('GlobalCurrencyBridge')} className="block mb-6">

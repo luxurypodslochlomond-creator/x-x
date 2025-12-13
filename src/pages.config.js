@@ -206,6 +206,7 @@ import QuantumPayments from './pages/QuantumPayments';
 import LiechtensteinModel from './pages/LiechtensteinModel';
 import GlobalCurrencyBridge from './pages/GlobalCurrencyBridge';
 import DirectFundingRoutes from './pages/DirectFundingRoutes';
+import FrequencyBridge from './pages/FrequencyBridge';
 import __Layout from './Layout.jsx';
 
 
@@ -418,6 +419,7 @@ export const PAGES = {
     "LiechtensteinModel": LiechtensteinModel,
     "GlobalCurrencyBridge": GlobalCurrencyBridge,
     "DirectFundingRoutes": DirectFundingRoutes,
+    "FrequencyBridge": FrequencyBridge,
 }
 
 export const pagesConfig = {
