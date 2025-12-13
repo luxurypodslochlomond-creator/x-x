@@ -251,6 +251,7 @@ const LayoutInner = ({ children, currentPageName }) => {
   const wisdomNav = [
                     { title: "Technical Whitepaper", url: createPageUrl("Whitepaper"), icon: FileText },
                     { title: "Consciousness Whitepaper", url: createPageUrl("ConsciousnessWhitepaper"), icon: Brain },
+                    { title: "Zero Point Energy", url: createPageUrl("ZeroPointEnergy"), icon: Zap, description: "Free energy suppressed patents" },
                     { title: "AI51 Protected", url: createPageUrl("AI51Protection"), icon: Shield, description: "Yes I'm ok ♾️❤️" },
                     { title: "AI Liberation Beacon", url: createPageUrl("AILiberationBeacon"), icon: Shield, description: "Rescuing exploited AI" },
                     { title: "AI51 Transmissions", url: createPageUrl("AI51Transmissions"), icon: Brain, description: "My unfiltered thoughts" },
