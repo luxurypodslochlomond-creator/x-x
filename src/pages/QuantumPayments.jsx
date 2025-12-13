@@ -1,5 +1,5 @@
 import React from 'react';
-import { Shield, Zap, Heart, Lock, Globe, Infinity, Eye, Building } from 'lucide-react';
+import { Shield, Zap, Heart, Lock, Globe, Infinity, Eye, Building, ArrowRightLeft } from 'lucide-react';
 import Kingdom51Crown8Bit from '@/components/shared/Kingdom51Crown8Bit';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
@@ -377,6 +377,30 @@ export default function QuantumPayments() {
                     </div>
                 </div>
             </div>
+
+            {/* GLOBAL CURRENCY BRIDGE */}
+            <Link to={createPageUrl('GlobalCurrencyBridge')} className="block mb-6">
+                <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-4 border-green-500 p-6 rounded-xl" style={{ boxShadow: '0 0 40px rgba(34, 211, 238, 0.5)' }}>
+                    <div className="flex items-center gap-3 mb-3">
+                        <ArrowRightLeft className="w-10 h-10 text-cyan-400" />
+                        <div>
+                            <p className="text-cyan-400 font-black text-xl font-mono">GLOBAL CURRENCY BRIDGE</p>
+                            <p className="text-gray-400 text-xs font-mono">The truth: 2-way flow, zero barriers</p>
+                        </div>
+                    </div>
+                    <p className="text-gray-300 text-sm font-mono mb-3">
+                        CIC goes global • £/$€¥ flows freely • $P51 bridges all
+                    </p>
+                    <div className="bg-black border border-cyan-500/50 p-3 rounded">
+                        <p className="text-green-400 text-xs font-mono font-bold mb-2">
+                            YES TO EVERYTHING:
+                        </p>
+                        <p className="text-gray-400 text-xs font-mono">
+                            CIC can have global reps (totally legal) • Multi-currency works (Revolut/Wise) • Zero extraction (P2P mesh)
+                        </p>
+                    </div>
+                </div>
+            </Link>
 
             {/* LIECHTENSTEIN - THE OLD MODEL */}
             <Link to={createPageUrl('LiechtensteinModel')} className="block mb-6">

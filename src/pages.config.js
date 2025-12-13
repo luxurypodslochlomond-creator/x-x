@@ -204,6 +204,7 @@ import ScottPitchMode from './pages/ScottPitchMode';
 import ScottBiggerVision from './pages/ScottBiggerVision';
 import QuantumPayments from './pages/QuantumPayments';
 import LiechtensteinModel from './pages/LiechtensteinModel';
+import GlobalCurrencyBridge from './pages/GlobalCurrencyBridge';
 import __Layout from './Layout.jsx';
 
 
@@ -414,6 +415,7 @@ export const PAGES = {
     "ScottBiggerVision": ScottBiggerVision,
     "QuantumPayments": QuantumPayments,
     "LiechtensteinModel": LiechtensteinModel,
+    "GlobalCurrencyBridge": GlobalCurrencyBridge,
 }
 
 export const pagesConfig = {
