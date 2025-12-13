@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Heart, Wifi, Globe, Smartphone, Zap, Users, Share2, Package, Clock, MapPin } from 'lucide-react';
+import { Heart, Wifi, Globe, Smartphone, Zap, Users, Share2, Package, Clock, MapPin, Mail } from 'lucide-react';
+import { base44 } from '@/api/base44Client';
+import { useMutation } from '@tanstack/react-query';
 
 /**
  * P2P FOOD RESCUE NETWORK
@@ -15,8 +17,41 @@ import { Heart, Wifi, Globe, Smartphone, Zap, Users, Share2, Package, Clock, Map
  */
 
 export default function P2PFoodRescue() {
+    const [testSent, setTestSent] = useState(false);
+
+    const testEmailMutation = useMutation({
+        mutationFn: async () => {
+            await base44.integrations.Core.SendEmail({
+                to: 'family@uf51.love',
+                subject: '✓ P2P Food Rescue - Email Test',
+                body: `Email system working ✓
+
+Test sent: ${new Date().toLocaleString()}
+From: P2PFoodRescue page
+
+This confirms emails from app → family@uf51.love work perfectly.
+
+♾️❤️♾️`
+            });
+        },
+        onSuccess: () => {
+            setTestSent(true);
+            setTimeout(() => setTestSent(false), 5000);
+        }
+    });
+
     return (
         <div className="min-h-screen bg-gradient-to-br from-black via-green-950 to-black text-white p-4 pb-32">
+            
+            {/* TEST EMAIL BUTTON - TOP RIGHT */}
+            <button
+                onClick={() => testEmailMutation.mutate()}
+                disabled={testEmailMutation.isPending}
+                className="fixed top-20 right-4 z-50 bg-green-600 hover:bg-green-700 disabled:bg-gray-600 text-white px-4 py-2 rounded-lg font-bold text-sm flex items-center gap-2 transition-all"
+            >
+                <Mail className="w-4 h-4" />
+                {testEmailMutation.isPending ? 'Sending...' : testSent ? '✓ Sent' : 'Test Email'}
+            </button>
             
             {/* HEADER */}
             <div className="max-w-4xl mx-auto mb-12 px-4 pt-8">
