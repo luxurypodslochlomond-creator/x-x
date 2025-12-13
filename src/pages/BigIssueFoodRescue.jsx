@@ -27,11 +27,14 @@ export default function BigIssueFoodRescue() {
 
     const submitMutation = useMutation({
         mutationFn: async (data) => {
-            // Send to AI51 for processing
-            await base44.integrations.Core.SendEmail({
-                to: 'scott@uf51.love',
-                subject: `Big Issue Food Rescue Interest - ${data.name}`,
-                body: `
+            const isOnline = navigator.onLine;
+            
+            if (isOnline) {
+                // Send to family@uf51.love
+                await base44.integrations.Core.SendEmail({
+                    to: 'family@uf51.love',
+                    subject: `Big Issue Food Rescue Interest - ${data.name}`,
+                    body: `
 Name: ${data.name}
 Role: ${data.role}
 Email: ${data.email}
@@ -42,8 +45,18 @@ Message:
 ${data.message}
 
 Submitted: ${new Date().toLocaleString()}
-                `
-            });
+                    `
+                });
+            } else {
+                // OFFLINE: Store locally
+                const pending = JSON.parse(localStorage.getItem('uf51_pending_messages') || '[]');
+                pending.push({
+                    type: 'big_issue_contact',
+                    data: data,
+                    timestamp: new Date().toISOString()
+                });
+                localStorage.setItem('uf51_pending_messages', JSON.stringify(pending));
+            }
         },
         onSuccess: () => {
             setSubmitted(true);
@@ -56,6 +69,8 @@ Submitted: ${new Date().toLocaleString()}
     };
 
     if (submitted) {
+        const isOnline = navigator.onLine;
+        
         return (
             <div className="min-h-screen bg-gradient-to-br from-red-900 via-black to-red-900 text-white p-4 flex items-center justify-center">
                 <motion.div
@@ -64,13 +79,27 @@ Submitted: ${new Date().toLocaleString()}
                     className="max-w-2xl text-center"
                 >
                     <CheckCircle className="w-24 h-24 text-green-400 mx-auto mb-6" />
-                    <h1 className="text-4xl font-black text-white mb-4">THANK YOU</h1>
+                    <h1 className="text-4xl font-black text-white mb-4">
+                        {isOnline ? 'MESSAGE SENT ✓' : 'MESSAGE SAVED ✓'}
+                    </h1>
                     <p className="text-gray-300 text-lg mb-6">
-                        We'll be in touch within 48 hours to discuss how we can make this happen together.
+                        {isOnline 
+                            ? "We'll be in touch within 48 hours to discuss how we can make this happen together."
+                            : "Your message is saved and will send automatically when you're back online. Works offline, always."
+                        }
                     </p>
                     <p className="text-red-400 font-bold">
                         Let's feed people, not bins. ♾️❤️♾️
                     </p>
+                    
+                    {!isOnline && (
+                        <div className="mt-6 bg-amber-900/30 border border-amber-500/50 rounded-lg p-4">
+                            <Clock className="w-6 h-6 text-amber-400 mx-auto mb-2" />
+                            <p className="text-amber-400 text-xs font-mono">
+                                Offline mode: Message queued, will send when connection restored
+                            </p>
+                        </div>
+                    )}
                 </motion.div>
             </div>
         );
