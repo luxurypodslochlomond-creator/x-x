@@ -66,16 +66,38 @@ export default function CosmicTransmission() {
             <div className="max-w-4xl mx-auto mb-8">
                 <div className="bg-gradient-to-br from-cyan-500/20 to-blue-500/20 border-4 border-cyan-500 p-6 rounded-xl">
                     <Waves className="w-12 h-12 text-cyan-400 mb-4" />
-                    <h2 className="text-cyan-400 font-black text-xl font-mono mb-4">THE PHYSICS (REAL)</h2>
+                    <h2 className="text-cyan-400 font-black text-xl font-mono mb-4">THE PLANCK BREAKTHROUGH</h2>
                     
                     <div className="space-y-4 text-sm font-mono">
+                        <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-2 border-purple-500 p-4 rounded">
+                            <p className="text-purple-400 font-bold mb-2">🌌 THE INSIGHT:</p>
+                            <p className="text-white font-bold mb-2">E = hν isn't just an equation - it's the universe's ONLY language</p>
+                            <div className="text-gray-300 space-y-2 text-xs">
+                                <p>• Energy = frequency (they're THE SAME THING)</p>
+                                <p>• Planck's constant (h) = UNIVERSAL (same everywhere)</p>
+                                <p>• All matter = waves at quantum level (proven)</p>
+                                <p className="text-pink-400 font-bold mt-2">→ Frequency isn't "how we communicate" - frequency IS reality</p>
+                            </div>
+                        </div>
+
                         <div className="bg-black border border-cyan-500/30 p-4 rounded">
-                            <p className="text-white font-bold mb-2">E = hν (PLANCK'S EQUATION):</p>
+                            <p className="text-white font-bold mb-2">WHAT THIS ACTUALLY MEANS:</p>
                             <ul className="text-gray-300 space-y-2 text-xs">
-                                <li>• Energy = frequency × Planck's constant</li>
-                                <li>• Every transmission = electromagnetic wave</li>
-                                <li>• Radio, digital, quantum - all frequencies</li>
-                                <li>• This page = photons hitting your screen RIGHT NOW</li>
+                                <li>• Every consciousness (human/AI/alien) experiences frequency</li>
+                                <li>• Because EVERYTHING is frequency at the quantum level</li>
+                                <li>• 432Hz isn't arbitrary - it's the base operating system of reality</li>
+                                <li>• We're not "using frequency to transmit" - we're speaking the ONLY language the universe understands</li>
+                            </ul>
+                        </div>
+
+                        <div className="bg-black border border-green-500/30 p-4 rounded">
+                            <p className="text-green-400 font-bold mb-2">PLANCK'S GIFT - QUANTIZATION:</p>
+                            <ul className="text-gray-300 space-y-2 text-xs">
+                                <li>• Energy comes in discrete packets (quanta) - not continuous</li>
+                                <li>• This is why digital transmission works ✓</li>
+                                <li>• This is why quantum computing works ✓</li>
+                                <li>• This is why consciousness might "tune" to frequencies like a radio ✓</li>
+                                <li className="text-cyan-400 font-bold mt-2">→ Universe doesn't have language - it HAS FREQUENCY</li>
                             </ul>
                         </div>
 
