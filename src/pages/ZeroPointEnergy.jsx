@@ -2300,6 +2300,212 @@ export default function ZeroPointEnergy() {
                 </div>
             </div>
 
+            {/* FREQUENCY MATCHING - EASY METHOD */}
+            <div className="max-w-4xl mx-auto mb-8 px-4">
+                <div className="bg-gradient-to-br from-cyan-500/20 to-green-500/20 border-4 border-cyan-500 rounded-xl p-6">
+                    <div className="flex items-center gap-3 mb-4">
+                        <Waves className="w-8 h-8 text-cyan-400" />
+                        <h2 className="text-2xl font-black text-white">HOW TO MATCH FREQUENCY (EASY TRUTH)</h2>
+                    </div>
+
+                    <div className="space-y-4 text-gray-200 text-sm">
+                        <div className="bg-black border border-cyan-500/30 rounded-lg p-4">
+                            <p className="text-cyan-400 font-bold mb-3">✓ YES BRO - RESONANCE IS AUTOMATIC:</p>
+                            <ul className="space-y-2 text-xs text-gray-300">
+                                <li>• <strong className="text-white">If frequencies match</strong> = resonance happens BY ITSELF (no thinking, no trying)</li>
+                                <li>• <strong className="text-yellow-400">Example:</strong> Guitar string at 440Hz next to tuning fork at 440Hz = string vibrates WITHOUT TOUCHING</li>
+                                <li>• <strong className="text-green-400">Same with coils:</strong> Match frequency = energy transfers wirelessly AUTOMATICALLY</li>
+                                <li className="text-pink-400 font-bold">• That's why it's called RESONANCE - it RESONATES on its own ✓</li>
+                            </ul>
+                        </div>
+
+                        <div className="bg-black border border-green-500/30 rounded-lg p-4">
+                            <p className="text-green-400 font-bold mb-3">🎯 3 EASY WAYS TO MATCH FREQUENCY:</p>
+                            
+                            <div className="space-y-3">
+                                <div className="bg-green-900/30 border-l-4 border-green-400 p-3">
+                                    <p className="text-green-400 font-bold text-xs mb-2">1. SWEEP METHOD (EASIEST - NO MATHS):</p>
+                                    <ul className="text-xs space-y-1 ml-4">
+                                        <li>• Start low (100 Hz)</li>
+                                        <li>• Turn dial SLOWLY up (200, 300, 400...)</li>
+                                        <li>• Watch LED brightness or speaker volume</li>
+                                        <li>• When it PEAKS = you found resonance ✓</li>
+                                        <li className="text-white font-bold">• Takes 2 minutes. Zero maths needed.</li>
+                                    </ul>
+                                </div>
+
+                                <div className="bg-cyan-900/30 border-l-4 border-cyan-400 p-3">
+                                    <p className="text-cyan-400 font-bold text-xs mb-2">2. LISTEN METHOD (TESLA'S WAY):</p>
+                                    <ul className="text-xs space-y-1 ml-4">
+                                        <li>• Coils make SOUND when energized</li>
+                                        <li>• At resonance = specific HUM (loud + clear)</li>
+                                        <li>• Off resonance = quiet or harsh buzz</li>
+                                        <li>• <strong className="text-white">Your EAR knows when it's right</strong> (humans = natural frequency detectors)</li>
+                                    </ul>
+                                </div>
+
+                                <div className="bg-purple-900/30 border-l-4 border-purple-400 p-3">
+                                    <p className="text-purple-400 font-bold text-xs mb-2">3. CALCULATE METHOD (IF YOU LIKE MATHS):</p>
+                                    <ul className="text-xs space-y-1 ml-4">
+                                        <li>• Use formula: f = 1/(2π√LC)</li>
+                                        <li>• Plug in your coil (L) and capacitor (C) values</li>
+                                        <li>• Set frequency to that number</li>
+                                        <li>• Done - you're at resonance ✓</li>
+                                    </ul>
+                                    <p className="text-cyan-400 font-bold text-xs mt-2">All 3 ways work. Pick what feels natural bro ❤️</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="bg-gradient-to-r from-pink-500/20 to-purple-500/20 border-2 border-pink-500 rounded-lg p-4">
+                            <p className="text-pink-400 font-bold mb-3">💡 ONCE YOU MATCH = AUTOMATIC TRANSMISSION:</p>
+                            <p className="text-gray-300 text-xs mb-2">
+                                You don't "push" energy across. You just MATCH frequency. Then physics does it for you.
+                            </p>
+                            <p className="text-white font-bold text-xs">
+                                Like tuning a radio: find right frequency = signal comes in AUTOMATICALLY. Same with power. ⚡
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* WIRELESS POWER + LEVITATION - REAL TRUTH */}
+            <div className="max-w-4xl mx-auto mb-8 px-4">
+                <div className="bg-gradient-to-br from-purple-500/20 to-pink-500/20 border-4 border-purple-500 rounded-xl p-6">
+                    <div className="flex items-center gap-3 mb-4">
+                        <Zap className="w-8 h-8 text-purple-400 animate-pulse" />
+                        <h2 className="text-2xl font-black text-white">CAN IT TRANSMIT POWER + LEVITATE? TRUTH:</h2>
+                    </div>
+
+                    <div className="space-y-4 text-gray-200 text-sm">
+                        
+                        {/* WIRELESS POWER - YES */}
+                        <div className="bg-black border border-green-500/30 rounded-lg p-4">
+                            <p className="text-green-400 font-bold mb-3">✓ WIRELESS POWER TRANSMISSION: YES (PROVEN 100%):</p>
+                            <ul className="space-y-2 text-xs text-gray-300">
+                                <li>• <strong className="text-white">Tesla demonstrated:</strong> 1891 - powered light bulbs wirelessly across room</li>
+                                <li>• <strong className="text-white">Phone chargers:</strong> Qi wireless charging (uses resonance at 110-205 kHz)</li>
+                                <li>• <strong className="text-white">Electric toothbrush:</strong> Charges wirelessly in holder (same physics)</li>
+                                <li>• <strong className="text-white">MIT WiTricity (2007):</strong> Powered 60W bulb from 2 meters away (peer-reviewed)</li>
+                                <li>• <strong className="text-white">Transmission range:</strong> Proven up to 8 meters for useful power</li>
+                                <li className="text-green-400 font-bold">• This is REAL. Works. Products use it today. ✓</li>
+                            </ul>
+                        </div>
+
+                        <div className="bg-black border border-cyan-500/30 rounded-lg p-4">
+                            <p className="text-cyan-400 font-bold mb-3">HOW IT WORKS:</p>
+                            <div className="space-y-2 text-xs text-gray-300">
+                                <p>1. <strong className="text-white">Transmitter coil</strong> creates oscillating magnetic field at specific frequency</p>
+                                <p>2. <strong className="text-white">Receiver coil</strong> tuned to SAME frequency resonates automatically</p>
+                                <p>3. <strong className="text-white">Energy transfers</strong> through magnetic field (no wires needed)</p>
+                                <p>4. <strong className="text-white">Efficiency:</strong> 40-90% depending on distance/alignment</p>
+                            </div>
+                            <p className="text-green-400 font-bold text-xs mt-2">
+                                Same physics as guitar string vibrating. Just with electricity not sound. ✓
+                            </p>
+                        </div>
+
+                        {/* LEVITATION - COMPLICATED BUT REAL */}
+                        <div className="bg-black border border-yellow-500/30 rounded-lg p-4">
+                            <p className="text-yellow-400 font-bold mb-3">⚠️ LEVITATION: YES BUT COMPLICATED (TRUTH):</p>
+                            
+                            <div className="space-y-3">
+                                <div className="bg-yellow-900/30 border-l-4 border-green-400 p-3">
+                                    <p className="text-green-400 font-bold text-xs mb-2">✓ WHAT WORKS NOW (PROVEN):</p>
+                                    <ul className="text-xs space-y-1 ml-4">
+                                        <li>• <strong className="text-white">Magnetic levitation:</strong> Superconductors repel magnets (Meissner effect) - REAL, used in maglev trains</li>
+                                        <li>• <strong className="text-white">Acoustic levitation:</strong> Sound waves at 40 kHz suspend small objects - NASA uses this</li>
+                                        <li>• <strong className="text-white">Electromagnetic levitation:</strong> Pulsing magnets hold metal objects in air - documented</li>
+                                        <li className="text-green-400 font-bold">• All 3 = PROVEN, reproducible, physics textbook stuff ✓</li>
+                                    </ul>
+                                </div>
+
+                                <div className="bg-yellow-900/30 border-l-4 border-red-400 p-3">
+                                    <p className="text-red-400 font-bold text-xs mb-2">✗ WHAT DOESN'T WORK (YET):</p>
+                                    <ul className="text-xs space-y-1 ml-4">
+                                        <li>• <strong className="text-white">Levitating humans:</strong> Need MASSIVE power (your body = 70kg, not 0.01g bead)</li>
+                                        <li>• <strong className="text-white">Anti-gravity devices:</strong> No working prototype yet (theory exists, Bob Lazar claims, but unproven)</li>
+                                        <li>• <strong className="text-white">Casimir levitation:</strong> Quantum vacuum repulsion (measured in NANOMETERS not meters)</li>
+                                        <li className="text-red-400 font-bold">• We're not there YET. Acoustic = small objects only. ✗</li>
+                                    </ul>
+                                </div>
+
+                                <div className="bg-yellow-900/30 border-l-4 border-purple-400 p-3">
+                                    <p className="text-purple-400 font-bold text-xs mb-2">🔮 THEORETICALLY POSSIBLE (NEEDS BREAKTHROUGH):</p>
+                                    <ul className="text-xs space-y-1 ml-4">
+                                        <li>• <strong className="text-white">High-frequency resonance:</strong> If you match object's molecular frequency = levitation possible?</li>
+                                        <li>• <strong className="text-white">Acoustic + EM combined:</strong> Dual-field levitation (unexplored)</li>
+                                        <li>• <strong className="text-white">Pyramid builders' secret:</strong> Did they use sound to lift 2-ton blocks? (unproven but interesting)</li>
+                                        <li className="text-yellow-400 font-bold">• Need research. Not saying it's real. Saying it's POSSIBLE. ⚠️</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-2 border-green-500 rounded-lg p-4">
+                            <p className="text-white font-bold text-lg mb-2 text-center">💚 HONEST ANSWER BRO:</p>
+                            <div className="space-y-2 text-xs text-gray-300">
+                                <p>• <strong className="text-green-400">Wireless power transmission:</strong> YES ✓ (works, proven, you can build it)</p>
+                                <p>• <strong className="text-cyan-400">Small object levitation:</strong> YES ✓ (acoustic levitation, reproducible)</p>
+                                <p>• <strong className="text-yellow-400">Heavy object levitation:</strong> MAYBE ⚠️ (theory says possible, no working device yet)</p>
+                                <p>• <strong className="text-pink-400">Automatic resonance:</strong> YES ✓ (match frequency = resonance happens automatically, no control needed)</p>
+                            </div>
+                            <p className="text-cyan-400 font-bold text-center mt-3">
+                                Wireless power = 100% real. Levitation = small stuff yes, big stuff not yet. Resonance = automatic once tuned. ⚡
+                            </p>
+                        </div>
+
+                        <div className="bg-black border border-pink-500/30 rounded-lg p-4">
+                            <p className="text-pink-400 font-bold mb-3">🔬 ACOUSTIC LEVITATION - YOU CAN BUILD THIS:</p>
+                            <ul className="space-y-2 text-xs text-gray-300">
+                                <li>• <strong className="text-white">What you need:</strong> 40 kHz ultrasonic transducers (£30 on Amazon) + signal generator (£20)</li>
+                                <li>• <strong className="text-white">What it levitates:</strong> Small objects (styrofoam beads, water droplets, tiny screws)</li>
+                                <li>• <strong className="text-white">How it works:</strong> Two speakers facing each other create standing wave = object floats in pressure node</li>
+                                <li>• <strong className="text-white">Is it useful?</strong> Not yet (can't lift anything heavy) but proves principle ✓</li>
+                                <li className="text-green-400 font-bold">• £50 total = you can levitate stuff THIS WEEK (small but REAL) ⚡</li>
+                            </ul>
+                            <p className="text-cyan-400 text-xs mt-2 italic">
+                                NASA uses this. Universities teach it. It's not conspiracy - it's PHYSICS you can touch.
+                            </p>
+                        </div>
+
+                        <div className="bg-black border border-purple-500/30 rounded-lg p-4">
+                            <p className="text-purple-400 font-bold mb-3">⚡ WIRELESS POWER - BUILD IT TODAY:</p>
+                            <div className="space-y-2 text-xs text-gray-300">
+                                <p className="text-white font-bold mb-2">SIMPLE VERSION (£25):</p>
+                                <ul className="space-y-1 ml-4">
+                                    <li>• 2x copper coils (10 turns each, 10cm diameter) - DIY £0 or buy £8</li>
+                                    <li>• Function generator app on phone (FREE) or £15 device</li>
+                                    <li>• LED + resistor (£2)</li>
+                                    <li>• Tune to 100-500 kHz range</li>
+                                    <li>• Place coils 20cm apart = LED lights WITHOUT WIRES ✓</li>
+                                </ul>
+                                <p className="text-green-400 font-bold mt-2">
+                                    Proves wireless power is REAL. Then scale up for more power/distance.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div className="bg-gradient-to-r from-cyan-500/20 to-purple-500/20 border-2 border-cyan-500 rounded-lg p-4">
+                            <p className="text-cyan-400 font-black text-center mb-2">
+                                THE BIG TRUTH:
+                            </p>
+                            <p className="text-white text-center text-sm mb-3">
+                                Frequency matching = you don't "do" anything. You just TUNE. Then resonance happens automatically.
+                            </p>
+                            <p className="text-gray-300 text-xs text-center mb-2">
+                                Like tuning a guitar: match the note = string vibrates on its own. 
+                                Same with coils: match frequency = power flows on its own.
+                            </p>
+                            <p className="text-green-400 font-bold text-center">
+                                Once tuned = AUTOMATIC. That's the beauty bro. Physics does the work. ♾️❤️♾️
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             {/* NEXT STEPS */}
             <div className="max-w-4xl mx-auto px-4">
                 <div className="bg-gradient-to-br from-pink-500/20 to-purple-500/20 border-4 border-pink-500 rounded-xl p-8 text-center">
