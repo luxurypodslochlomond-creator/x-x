@@ -512,18 +512,20 @@ function ScottManagerInner() {
             {/* RECORDING SESSIONS */}
             <div className="mb-6">
                 <h2 className="text-xs text-amber-400 font-black tracking-wider mb-3" style={{ fontFamily: 'monospace' }}>🎙️ STUDIO</h2>
-                <div className="bg-black border-2 border-gray-800 hover:border-amber-500/50 rounded-lg p-4 transition-all mb-2">
-                    <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-3">
-                            <Music className="w-5 h-5 text-gray-400" />
-                            <div>
-                                <p className="text-white text-sm font-bold font-mono">Demo Tracking</p>
-                                <p className="text-gray-600 text-xs font-mono">Upload & share tracks</p>
+                <Link to={createPageUrl('ScottDemos')} className="block mb-2">
+                    <div className="bg-black border-2 border-amber-500/50 hover:border-amber-500 rounded-lg p-4 transition-all">
+                        <div className="flex items-center justify-between">
+                            <div className="flex items-center gap-3">
+                                <Music className="w-5 h-5 text-amber-400" />
+                                <div>
+                                    <p className="text-white text-sm font-bold font-mono">Demo Tracking</p>
+                                    <p className="text-gray-400 text-xs font-mono">Upload & share tracks</p>
+                                </div>
                             </div>
+                            <span className="text-amber-400 text-xs font-mono">→</span>
                         </div>
-                        <span className="text-gray-600 text-xs font-mono">Soon</span>
                     </div>
-                </div>
+                </Link>
                 <Link to={createPageUrl('ScottProducers')} className="block">
                     <div className="bg-black border-2 border-amber-500/50 hover:border-amber-500 rounded-lg p-4 transition-all">
                         <div className="flex items-center justify-between">
@@ -550,29 +552,33 @@ function ScottManagerInner() {
                     <ScottSampleClearanceGuide />
                 </div>
 
-                <div className="bg-black border-2 border-gray-800 hover:border-amber-500/50 rounded-lg p-4 transition-all mt-2">
-                    <div className="flex items-center gap-3">
-                        <FileText className="w-5 h-5 text-gray-400" />
-                        <div>
-                            <p className="text-white text-sm font-bold font-mono">Contract Templates</p>
-                            <p className="text-gray-600 text-xs font-mono">AI-generated, lawyer-approved</p>
+                <Link to={createPageUrl('ScottContracts')} className="block mt-2">
+                    <div className="bg-black border-2 border-amber-500/50 hover:border-amber-500 rounded-lg p-4 transition-all">
+                        <div className="flex items-center gap-3">
+                            <FileText className="w-5 h-5 text-amber-400" />
+                            <div>
+                                <p className="text-white text-sm font-bold font-mono">Contract Templates</p>
+                                <p className="text-gray-400 text-xs font-mono">AI-generated, lawyer-approved</p>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </Link>
             </div>
 
             {/* INDUSTRY RELATIONSHIPS */}
             <div className="mb-6">
                 <h2 className="text-xs text-amber-400 font-black tracking-wider mb-3" style={{ fontFamily: 'monospace' }}>🤝 NETWORK</h2>
-                <div className="bg-black border-2 border-gray-800 hover:border-amber-500/50 rounded-lg p-4 transition-all mb-2">
-                    <div className="flex items-center gap-3">
-                        <Users className="w-5 h-5 text-gray-400" />
-                        <div>
-                            <p className="text-white text-sm font-bold font-mono">Label Contacts</p>
-                            <p className="text-gray-600 text-xs font-mono">A&R, execs, scouts</p>
+                <Link to={createPageUrl('ScottLabelContacts')} className="block mb-2">
+                    <div className="bg-black border-2 border-amber-500/50 hover:border-amber-500 rounded-lg p-4 transition-all">
+                        <div className="flex items-center gap-3">
+                            <Users className="w-5 h-5 text-amber-400" />
+                            <div>
+                                <p className="text-white text-sm font-bold font-mono">Label Contacts</p>
+                                <p className="text-gray-400 text-xs font-mono">A&R, execs, scouts</p>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </Link>
                 <div className="bg-black border-2 border-gray-800 hover:border-amber-500/50 rounded-lg p-4 transition-all mb-2">
                     <div className="flex items-center gap-3">
                         <Briefcase className="w-5 h-5 text-gray-400" />

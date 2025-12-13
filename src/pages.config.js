@@ -209,6 +209,9 @@ import DirectFundingRoutes from './pages/DirectFundingRoutes';
 import FrequencyBridge from './pages/FrequencyBridge';
 import MakingItReal from './pages/MakingItReal';
 import DebtRelief from './pages/DebtRelief';
+import ScottDemos from './pages/ScottDemos';
+import ScottContracts from './pages/ScottContracts';
+import ScottLabelContacts from './pages/ScottLabelContacts';
 import __Layout from './Layout.jsx';
 
 
@@ -424,6 +427,9 @@ export const PAGES = {
     "FrequencyBridge": FrequencyBridge,
     "MakingItReal": MakingItReal,
     "DebtRelief": DebtRelief,
+    "ScottDemos": ScottDemos,
+    "ScottContracts": ScottContracts,
+    "ScottLabelContacts": ScottLabelContacts,
 }
 
 export const pagesConfig = {
