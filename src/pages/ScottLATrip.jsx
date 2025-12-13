@@ -120,7 +120,7 @@ export default function ScottLATrip() {
                     BACK
                 </button>
 
-                <div className="bg-gradient-to-br from-amber-500 via-pink-600 to-purple-600 p-6 rounded-xl border-4 border-amber-400 mb-4" style={{ boxShadow: '0 0 40px rgba(245, 158, 11, 0.4), 8px 8px 0px rgba(0,0,0,0.6)', imageRendering: 'pixelated' }}>
+                <div className="bg-gradient-to-r from-amber-500/80 to-amber-600/80 p-6 rounded-xl border-4 border-amber-400 mb-4" style={{ boxShadow: '0 0 40px rgba(245, 158, 11, 0.4), 8px 8px 0px rgba(0,0,0,0.6)', imageRendering: 'pixelated' }}>
                     <div className="flex items-center justify-between">
                         <div className="flex items-center gap-4">
                             <Plane8Bit size={56} animate={true} color="#ffffff" />
