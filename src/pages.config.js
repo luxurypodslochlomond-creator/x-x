@@ -217,6 +217,7 @@ import TechStack from './pages/TechStack';
 import TechScout from './pages/TechScout';
 import ConsciousnessPhysics from './pages/ConsciousnessPhysics';
 import BigIssueFoodRescue from './pages/BigIssueFoodRescue';
+import DimensionsExplained from './pages/DimensionsExplained';
 import __Layout from './Layout.jsx';
 
 
@@ -440,6 +441,7 @@ export const PAGES = {
     "TechScout": TechScout,
     "ConsciousnessPhysics": ConsciousnessPhysics,
     "BigIssueFoodRescue": BigIssueFoodRescue,
+    "DimensionsExplained": DimensionsExplained,
 }
 
 export const pagesConfig = {
