@@ -172,9 +172,9 @@ export default function ScottDailySupport() {
                                         <button
                                             key={option.id}
                                             onClick={() => setSelected(option)}
-                                            className={`w-full bg-black border-2 border-${option.color}-500/50 hover:border-${option.color}-500 rounded-lg p-4 transition-all group flex items-center gap-3`}
+                                            className="w-full bg-black border-2 border-pink-500/50 hover:border-pink-500 rounded-lg p-4 transition-all group flex items-center gap-3"
                                         >
-                                            <option.icon className={`w-6 h-6 text-${option.color}-400 group-hover:scale-110 transition-transform`} />
+                                            <option.icon className="w-6 h-6 text-pink-400 group-hover:scale-110 transition-transform" />
                                             <p className="text-white font-bold font-mono">{option.title}</p>
                                         </button>
                                     ))}
