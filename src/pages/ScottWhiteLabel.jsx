@@ -144,11 +144,12 @@ export default function ScottWhiteLabel() {
                     </div>
 
                     <div className="bg-black border border-cyan-500/30 p-4 rounded-lg">
-                        <p className="text-cyan-400 font-bold text-xs mb-2">🔐 SECURITY LEVEL:</p>
+                        <p className="text-cyan-400 font-bold text-xs mb-2">🔐 SECURITY + SYNC:</p>
                         <ul className="text-gray-300 text-xs font-mono space-y-1">
-                            <li>• Base44 auth (secure but centralized)</li>
-                            <li>• LocalStorage encryption (device-level)</li>
-                            <li>• HTTPS/SSL (transport security)</li>
+                            <li>✓ Base44 auth (secure)</li>
+                            <li>✓ LocalStorage encryption (device-level)</li>
+                            <li>✓ HTTPS/SSL (transport security)</li>
+                            <li>✓ P2P mesh sync (WebRTC, real-time, offline)</li>
                             <li>• Need: End-to-end encryption (E2EE)</li>
                             <li>• Need: IPFS contract storage (tamper-proof)</li>
                             <li>• Need: Cryptographic signing (beyond banks)</li>

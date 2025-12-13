@@ -31,6 +31,7 @@ import ScottSampleAnalyzer from '@/components/scott/ScottSampleAnalyzer';
 import ScottSampleMatcher from '@/components/scott/ScottSampleMatcher';
 import ScottP51Converter from '@/components/scott/ScottP51Converter';
 import ScottFamilyCredit from '@/components/scott/ScottFamilyCredit';
+import ScottP2PSync from '@/components/scott/ScottP2PSync';
 
 /**
  * SCOTT'S ARTIST/CLIENT MANAGER
@@ -594,6 +595,9 @@ function ScottManagerInner() {
 
             {/* GIG OFFERS - INLINE SMART FEED */}
             <ScottGigOffersFeed />
+
+            {/* P2P MESH SYNC */}
+            <ScottP2PSync />
 
             {/* $P51 CONVERTER */}
             <div className="mb-6">
