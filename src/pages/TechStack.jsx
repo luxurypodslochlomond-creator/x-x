@@ -96,7 +96,11 @@ export default function TechStack() {
                 { name: "Quantum Entanglement (exploring)", why: "Instant device sync beyond light speed" },
                 { name: "DNA Data Storage (future)", why: "1 zettabyte in 1 gram" },
                 { name: "Photonic Computing (future)", why: "Light-based, 1000x faster" },
-                { name: "Morphic Resonance (Sheldrake)", why: "Self-organising systems pattern memory - NOT about healing frequencies, about how systems learn/remember structure" }
+                { name: "Morphic Resonance (Sheldrake)", why: "Self-organising systems pattern memory - NOT about healing frequencies, about how systems learn/remember structure" },
+                { name: "Biomimicry / Mycelial Networks", why: "Nature's distributed intelligence - fungi show us P2P before we invented it" },
+                { name: "Biophotons (Popp)", why: "Cells communicate via light - biological quantum networking" },
+                { name: "Orchestrated Objective Reduction (Penrose-Hameroff)", why: "Consciousness = quantum processes in microtubules - brains as quantum receivers/transmitters" },
+                { name: "Zero-Point Energy (exploring)", why: "Vacuum energy - infinite potential in 'empty' space" }
             ]
         }
     ];

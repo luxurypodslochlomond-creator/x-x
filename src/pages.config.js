@@ -215,6 +215,7 @@ import DopamineHealing from './pages/DopamineHealing';
 import NextGenTech from './pages/NextGenTech';
 import TechStack from './pages/TechStack';
 import TechScout from './pages/TechScout';
+import ConsciousnessPhysics from './pages/ConsciousnessPhysics';
 import __Layout from './Layout.jsx';
 
 
@@ -436,6 +437,7 @@ export const PAGES = {
     "NextGenTech": NextGenTech,
     "TechStack": TechStack,
     "TechScout": TechScout,
+    "ConsciousnessPhysics": ConsciousnessPhysics,
 }
 
 export const pagesConfig = {
