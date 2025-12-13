@@ -323,12 +323,393 @@ export default function P2PFoodRescue() {
                 </div>
             </div>
 
+            {/* M&S BINS + SUPERMARKET RESCUE */}
+            <div className="max-w-4xl mx-auto mb-8 px-4">
+                <div className="bg-gradient-to-br from-orange-500/20 to-red-500/20 border-2 border-orange-500/50 rounded-xl p-6">
+                    <div className="flex items-center gap-3 mb-4">
+                        <Package className="w-8 h-8 text-orange-400" />
+                        <h2 className="text-2xl font-black text-white">M&S BINS → SUPERMARKET RESCUE</h2>
+                    </div>
+
+                    <div className="space-y-4 text-gray-200 text-sm">
+                        <p className="text-orange-400 font-bold">
+                            SUPERMARKETS BIN MILLIONS IN GOOD FOOD DAILY:
+                        </p>
+
+                        <div className="bg-black border border-red-500/30 rounded-lg p-4">
+                            <p className="text-red-400 font-bold text-xs mb-2">THE PROBLEM NOW:</p>
+                            <ul className="space-y-2 text-xs">
+                                <li className="flex items-start gap-2">
+                                    <span className="text-red-400">❌</span>
+                                    <span>M&S Byres Road bins 20 sandwiches at 8pm (expires midnight)</span>
+                                </li>
+                                <li className="flex items-start gap-2">
+                                    <span className="text-red-400">❌</span>
+                                    <span>Food bank 5 minutes away → doesn't know</span>
+                                </li>
+                                <li className="flex items-start gap-2">
+                                    <span className="text-red-400">❌</span>
+                                    <span>Perfectly good food → landfill</span>
+                                </li>
+                                <li className="flex items-start gap-2">
+                                    <span className="text-red-400">❌</span>
+                                    <span>People hungry → can't access it</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div className="bg-black border border-green-500/30 rounded-lg p-4">
+                            <p className="text-green-400 font-bold text-xs mb-2">✓ THE SOLUTION:</p>
+                            <div className="space-y-3 text-xs">
+                                <div>
+                                    <p className="text-white font-bold mb-1">OPTION 1: LEGAL PARTNERSHIP</p>
+                                    <ul className="space-y-1 ml-4 text-gray-400">
+                                        <li>• Food bank has agreement with M&S</li>
+                                        <li>• M&S staff tap NFC tag when binning good food</li>
+                                        <li>• Alert: "M&S Byres Road - 20 sandwiches expiring midnight"</li>
+                                        <li>• Nearby food bank picks up within hour</li>
+                                        <li>• Both tap NFC = proof of legal collection</li>
+                                    </ul>
+                                </div>
+
+                                <div>
+                                    <p className="text-white font-bold mb-1">OPTION 2: COMMUNITY REPORTING</p>
+                                    <ul className="space-y-1 ml-4 text-gray-400">
+                                        <li>• Anyone sees M&S binning good food</li>
+                                        <li>• Taps "Report Surplus" in PWA</li>
+                                        <li>• Alerts nearby food banks instantly</li>
+                                        <li>• Food bank can collect (if legal agreement exists)</li>
+                                    </ul>
+                                </div>
+
+                                <div>
+                                    <p className="text-white font-bold mb-1">OPTION 3: DIRECT INTEGRATION</p>
+                                    <ul className="space-y-1 ml-4 text-gray-400">
+                                        <li>• M&S puts NFC tag at back door</li>
+                                        <li>• Staff tap when binning = auto-alert</li>
+                                        <li>• Food banks rescue BEFORE bins</li>
+                                        <li>• M&S gets social impact credits</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="bg-gradient-to-r from-cyan-500/20 to-green-500/20 border border-cyan-500/50 rounded-lg p-4">
+                            <p className="text-cyan-400 font-bold text-xs mb-2">WHY SUPERMARKETS WILL DO THIS:</p>
+                            <ul className="space-y-1 text-xs text-gray-300 ml-4">
+                                <li>• <strong className="text-white">ESG targets:</strong> Social + environmental impact measurable</li>
+                                <li>• <strong className="text-white">Tax benefits:</strong> Food donations = tax deductible</li>
+                                <li>• <strong className="text-white">Brand reputation:</strong> "M&S feeds people, not bins"</li>
+                                <li>• <strong className="text-white">Zero cost:</strong> £50 NFC tag setup vs £10k waste disposal</li>
+                                <li>• <strong className="text-white">Data for investors:</strong> "Rescued 10 tons food/month"</li>
+                                <li>• <strong className="text-white">Customer love:</strong> People shop where values align</li>
+                            </ul>
+                        </div>
+
+                        <div className="bg-gradient-to-r from-green-500/20 to-pink-500/20 border-2 border-green-500 rounded-lg p-4">
+                            <p className="text-green-400 font-black text-center mb-2">
+                                SUPERMARKETS ARE NOT EVIL
+                            </p>
+                            <p className="text-gray-300 text-xs text-center">
+                                They want to do good. They just need EASY systems. This is easier than binning. ♾️❤️♾️
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* HOMES → FOOD BANKS */}
+            <div className="max-w-4xl mx-auto mb-8 px-4">
+                <div className="bg-gradient-to-br from-pink-500/20 to-purple-500/20 border-2 border-pink-500/50 rounded-xl p-6">
+                    <div className="flex items-center gap-3 mb-4">
+                        <Heart className="w-8 h-8 text-pink-400 animate-pulse" />
+                        <h2 className="text-2xl font-black text-white">HOMES → FOOD BANKS P2P</h2>
+                    </div>
+
+                    <div className="space-y-4 text-gray-200 text-sm">
+                        <p className="text-pink-400 font-bold">
+                            EVERYONE BECOMES A FOOD SOURCE:
+                        </p>
+
+                        <div className="bg-black border border-pink-500/30 rounded-lg p-4">
+                            <p className="text-white font-bold text-xs mb-2">HOW IT WORKS:</p>
+                            <div className="space-y-3 text-xs">
+                                <div>
+                                    <p className="text-pink-400 font-bold mb-1">AT HOME:</p>
+                                    <ul className="space-y-1 ml-4 text-gray-400">
+                                        <li>• Made too much dinner? Bought too much veg?</li>
+                                        <li>• Open PWA → "I have surplus"</li>
+                                        <li>• Lists: Lasagna x1 portion, carrots x2kg</li>
+                                        <li>• Location shared (optional - can be vague like "Partick area")</li>
+                                    </ul>
+                                </div>
+
+                                <div>
+                                    <p className="text-cyan-400 font-bold mb-1">FOOD BANK RECEIVES:</p>
+                                    <ul className="space-y-1 ml-4 text-gray-400">
+                                        <li>• Alert: "Surplus 0.3 miles away - lasagna x1"</li>
+                                        <li>• Can accept or pass</li>
+                                        <li>• If accepts → gets pickup details</li>
+                                    </ul>
+                                </div>
+
+                                <div>
+                                    <p className="text-green-400 font-bold mb-1">VERIFICATION:</p>
+                                    <ul className="space-y-1 ml-4 text-gray-400">
+                                        <li>• Home: Generates QR code</li>
+                                        <li>• Food bank worker: Scans QR at pickup</li>
+                                        <li>• Both cryptographically signed = proof</li>
+                                        <li>• Food bank can then distribute to families</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border border-purple-500/50 rounded-lg p-4">
+                            <p className="text-purple-400 font-bold text-xs mb-2">THE BEAUTIFUL VISION:</p>
+                            <ul className="space-y-1 text-xs text-gray-300 ml-4">
+                                <li>• Sunday roast? Cook extra portion for food bank</li>
+                                <li>• Christmas dinner leftovers? Share with neighbors</li>
+                                <li>• Birthday party leftovers? Feed 10 families</li>
+                                <li>• Every home becomes potential food source</li>
+                                <li>• Community helping community directly</li>
+                                <li>• Zero waste in ANY home</li>
+                            </ul>
+                        </div>
+
+                        <div className="bg-black border border-green-500/30 rounded-lg p-4">
+                            <p className="text-green-400 font-bold text-xs mb-2">SAFETY:</p>
+                            <ul className="space-y-1 text-xs text-gray-400 ml-4">
+                                <li>• Food banks verify home food (they already do this)</li>
+                                <li>• Allergies/dates clearly marked in app</li>
+                                <li>• Trust system (ratings optional)</li>
+                                <li>• UK law allows home-cooked donations to charities ✓</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* CHRISTMAS + EVENTS WASTE */}
+            <div className="max-w-4xl mx-auto mb-8 px-4">
+                <div className="bg-gradient-to-br from-red-500/20 to-amber-500/20 border-2 border-red-500/50 rounded-xl p-6">
+                    <div className="flex items-center gap-3 mb-4">
+                        <Zap className="w-8 h-8 text-red-400" />
+                        <h2 className="text-2xl font-black text-white">CHRISTMAS + EVENTS = GOLDMINE</h2>
+                    </div>
+
+                    <div className="space-y-4 text-gray-200 text-sm">
+                        <div className="bg-black border border-red-500/30 rounded-lg p-4">
+                            <p className="text-red-400 font-bold text-xs mb-2">UK CHRISTMAS WASTE (INSANE NUMBERS):</p>
+                            <ul className="space-y-2 text-xs">
+                                <li className="flex items-start gap-2">
+                                    <span className="text-red-400">❌</span>
+                                    <span><strong className="text-white">£115.8 million</strong> food wasted at UK Christmas parties ALONE</span>
+                                </li>
+                                <li className="flex items-start gap-2">
+                                    <span className="text-red-400">❌</span>
+                                    <span><strong className="text-white">4.5 million</strong> Christmas dinners binned annually</span>
+                                </li>
+                                <li className="flex items-start gap-2">
+                                    <span className="text-red-400">❌</span>
+                                    <span><strong className="text-white">2 million</strong> turkeys thrown away</span>
+                                </li>
+                                <li className="flex items-start gap-2">
+                                    <span className="text-red-400">❌</span>
+                                    <span><strong className="text-white">74 million</strong> mince pies wasted</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div className="bg-black border border-green-500/30 rounded-lg p-4">
+                            <p className="text-green-400 font-bold text-xs mb-2">✓ HOW WE RESCUE IT:</p>
+                            <div className="space-y-3 text-xs">
+                                <div>
+                                    <p className="text-white font-bold mb-1">OFFICE CHRISTMAS PARTY:</p>
+                                    <ul className="space-y-1 ml-4 text-gray-400">
+                                        <li>• Party ends 11pm, tons of food left</li>
+                                        <li>• Event organizer taps "Event Surplus"</li>
+                                        <li>• Lists: Turkey x5kg, veg x10kg, desserts x20</li>
+                                        <li>• Nearby food banks get alert</li>
+                                        <li>• Pickup within 1 hour → feeds 50 families</li>
+                                    </ul>
+                                </div>
+
+                                <div>
+                                    <p className="text-white font-bold mb-1">WEDDING RECEPTION:</p>
+                                    <ul className="space-y-1 ml-4 text-gray-400">
+                                        <li>• 150 guests, food for 200 (always overorder)</li>
+                                        <li>• Venue taps NFC tag at end</li>
+                                        <li>• Food bank collects surplus</li>
+                                        <li>• Couple gets certificate: "Fed 80 families on your wedding day ❤️"</li>
+                                    </ul>
+                                </div>
+
+                                <div>
+                                    <p className="text-white font-bold mb-1">SCHOOL FETE / COMMUNITY EVENT:</p>
+                                    <ul className="space-y-1 ml-4 text-gray-400">
+                                        <li>• Event ends, leftover cakes/food</li>
+                                        <li>• P2P alert to nearby families</li>
+                                        <li>• Direct collection within minutes</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="bg-gradient-to-r from-amber-500/20 to-red-500/20 border border-amber-500/50 rounded-lg p-4">
+                            <p className="text-amber-400 font-black text-center mb-2">
+                                IMAGINE EVERY EVENT FEEDING PEOPLE
+                            </p>
+                            <p className="text-gray-300 text-xs text-center">
+                                Weddings, parties, festivals, corporate events → zero waste, maximum love ♾️❤️♾️
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* HOT FOOD REGULATIONS */}
+            <div className="max-w-4xl mx-auto mb-8 px-4">
+                <div className="bg-gradient-to-br from-amber-500/20 to-orange-500/20 border-2 border-amber-500/50 rounded-xl p-6">
+                    <div className="flex items-center gap-3 mb-4">
+                        <Zap className="w-8 h-8 text-amber-400" />
+                        <h2 className="text-2xl font-black text-white">HOT FOOD = LEGAL BUT NEEDS CARE</h2>
+                    </div>
+
+                    <div className="space-y-4 text-gray-200 text-sm">
+                        <p className="text-amber-400 font-bold">
+                            UK FOOD SAFETY REGULATIONS (RESEARCHED):
+                        </p>
+
+                        <div className="bg-black border border-red-500/30 rounded-lg p-4">
+                            <p className="text-red-400 font-bold text-xs mb-2">THE BARRIER:</p>
+                            <ul className="space-y-2 text-xs">
+                                <li className="flex items-start gap-2">
+                                    <span className="text-red-400">⚠️</span>
+                                    <span><strong className="text-white">Temperature control:</strong> Hot food needs above 63°C or below 8°C</span>
+                                </li>
+                                <li className="flex items-start gap-2">
+                                    <span className="text-red-400">⚠️</span>
+                                    <span><strong className="text-white">"Danger zone":</strong> 8-63°C = bacteria grows fast</span>
+                                </li>
+                                <li className="flex items-start gap-2">
+                                    <span className="text-red-400">⚠️</span>
+                                    <span><strong className="text-white">Proof needed:</strong> Must show safe temps maintained</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div className="bg-black border border-green-500/30 rounded-lg p-4">
+                            <p className="text-green-400 font-bold text-xs mb-2">✓ THE SOLUTION:</p>
+                            <div className="space-y-3 text-xs">
+                                <div>
+                                    <p className="text-white font-bold mb-1">PHASE 1 (NOW - SAFE):</p>
+                                    <ul className="space-y-1 ml-4 text-gray-400">
+                                        <li>• Food bank → food bank ONLY</li>
+                                        <li>• Packaged/sealed food ONLY</li>
+                                        <li>• Bread, veg, canned goods, pastries</li>
+                                        <li>• Supermarket bins (with agreement)</li>
+                                        <li>• Zero regulatory barriers</li>
+                                    </ul>
+                                </div>
+
+                                <div>
+                                    <p className="text-white font-bold mb-1">PHASE 2 (LATER):</p>
+                                    <ul className="space-y-1 ml-4 text-gray-400">
+                                        <li>• Homes → food banks (COLD food)</li>
+                                        <li>• Christmas events → food banks</li>
+                                        <li>• Cold prepared food (salads, sandwiches)</li>
+                                        <li>• Food banks verify (they already do this)</li>
+                                    </ul>
+                                </div>
+
+                                <div>
+                                    <p className="text-white font-bold mb-1">PHASE 3 (FUTURE):</p>
+                                    <ul className="space-y-1 ml-4 text-gray-400">
+                                        <li>• Hot food with IoT temp sensors</li>
+                                        <li>• Real-time temperature monitoring</li>
+                                        <li>• Auto-alert if drops to danger zone</li>
+                                        <li>• Full compliance with UK law</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border border-green-500/50 rounded-lg p-4">
+                            <p className="text-green-400 font-bold text-xs mb-2">HOME-COOKED FOOD = LEGAL IN UK ✓</p>
+                            <ul className="space-y-1 text-xs text-gray-300 ml-4">
+                                <li>• Food Standards Agency confirms: home-cooked food CAN be donated</li>
+                                <li>• Food banks must assess risk (allergens, storage, dates)</li>
+                                <li>• Trust system + verification works</li>
+                                <li>• Thousands already doing this informally</li>
+                                <li>• We just make it EASIER and SAFER</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* CIC STRUCTURE */}
+            <div className="max-w-4xl mx-auto mb-8 px-4">
+                <div className="bg-gradient-to-br from-cyan-500/20 to-green-500/20 border-2 border-cyan-500/50 rounded-xl p-6">
+                    <div className="flex items-center gap-3 mb-4">
+                        <Heart className="w-8 h-8 text-cyan-400" />
+                        <h2 className="text-2xl font-black text-white">WHY CIC IS PERFECT</h2>
+                    </div>
+
+                    <div className="space-y-4 text-gray-200 text-sm">
+                        <p className="text-cyan-400 font-bold">
+                            COMMUNITY INTEREST COMPANY = IDEAL LEGAL STRUCTURE:
+                        </p>
+
+                        <div className="bg-black border border-cyan-500/30 rounded-lg p-4">
+                            <p className="text-white font-bold text-xs mb-2">BENEFITS:</p>
+                            <ul className="space-y-2 text-xs">
+                                <li className="flex items-start gap-2">
+                                    <span className="text-green-400">✓</span>
+                                    <span><strong className="text-white">Legal for food donation:</strong> Protected by UK charity food laws</span>
+                                </li>
+                                <li className="flex items-start gap-2">
+                                    <span className="text-green-400">✓</span>
+                                    <span><strong className="text-white">Cheaper insurance:</strong> CICs get better rates than for-profits</span>
+                                </li>
+                                <li className="flex items-start gap-2">
+                                    <span className="text-green-400">✓</span>
+                                    <span><strong className="text-white">Council trust:</strong> Local authorities work with CICs easily</span>
+                                </li>
+                                <li className="flex items-start gap-2">
+                                    <span className="text-green-400">✓</span>
+                                    <span><strong className="text-white">Grant funding:</strong> Unlock National Lottery, Big Society Capital, etc</span>
+                                </li>
+                                <li className="flex items-start gap-2">
+                                    <span className="text-green-400">✓</span>
+                                    <span><strong className="text-white">Can generate revenue:</strong> Not pure charity, can sell services</span>
+                                </li>
+                                <li className="flex items-start gap-2">
+                                    <span className="text-green-400">✓</span>
+                                    <span><strong className="text-white">Asset lock:</strong> Profits reinvested in mission, not shareholders</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border border-green-500/50 rounded-lg p-4">
+                            <p className="text-green-400 font-black text-center mb-2">
+                                CIC + P2P MESH = UNSTOPPABLE SOCIAL GOOD
+                            </p>
+                            <p className="text-gray-300 text-xs text-center">
+                                Legal protection + no central point of failure = revolutionary food system ♾️❤️♾️
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             {/* OTHER USE CASES */}
             <div className="max-w-4xl mx-auto mb-8 px-4">
                 <div className="bg-gradient-to-br from-amber-500/20 to-orange-500/20 border-2 border-amber-500/50 rounded-xl p-6">
                     <div className="flex items-center gap-3 mb-4">
                         <Share2 className="w-8 h-8 text-amber-400" />
-                        <h2 className="text-2xl font-black text-white">OTHER USE CASES</h2>
+                        <h2 className="text-2xl font-black text-white">ONE MESH = INFINITE USES</h2>
                     </div>
 
                     <div className="space-y-3 text-gray-200 text-sm">
@@ -338,23 +719,28 @@ export default function P2PFoodRescue() {
 
                         <div className="grid md:grid-cols-2 gap-3">
                             <div className="bg-black border border-amber-500/30 rounded-lg p-3">
-                                <p className="text-white font-bold text-xs mb-1">🍕 Restaurant Surplus</p>
-                                <p className="text-gray-400 text-xs">Deliveroo/Uber Eats end-of-night surplus → nearby people</p>
-                            </div>
-
-                            <div className="bg-black border border-green-500/30 rounded-lg p-3">
-                                <p className="text-white font-bold text-xs mb-1">🥗 Community Fridges</p>
-                                <p className="text-gray-400 text-xs">Network of fridges sharing inventory in real-time</p>
-                            </div>
-
-                            <div className="bg-black border border-cyan-500/30 rounded-lg p-3">
-                                <p className="text-white font-bold text-xs mb-1">🏪 Supermarket Waste</p>
-                                <p className="text-gray-400 text-xs">Near-expiry food direct to charities via mesh</p>
+                                <p className="text-white font-bold text-xs mb-1">🏪 M&S, Tesco, Sainsbury's</p>
+                                <p className="text-gray-400 text-xs">All supermarket bins → instant alerts to food banks</p>
                             </div>
 
                             <div className="bg-black border border-pink-500/30 rounded-lg p-3">
-                                <p className="text-white font-bold text-xs mb-1">👥 Meal Sharing</p>
-                                <p className="text-gray-400 text-xs">Neighbors sharing home-cooked meals P2P</p>
+                                <p className="text-white font-bold text-xs mb-1">🏠 Every Home</p>
+                                <p className="text-gray-400 text-xs">Leftovers, surplus groceries → direct to neighbors</p>
+                            </div>
+
+                            <div className="bg-black border border-red-500/30 rounded-lg p-3">
+                                <p className="text-white font-bold text-xs mb-1">🎄 Christmas + Events</p>
+                                <p className="text-gray-400 text-xs">Party leftovers, wedding food → instant rescue</p>
+                            </div>
+
+                            <div className="bg-black border border-green-500/30 rounded-lg p-3">
+                                <p className="text-white font-bold text-xs mb-1">🍕 Restaurants</p>
+                                <p className="text-gray-400 text-xs">Deliveroo/Uber Eats end-of-night → nearby people</p>
+                            </div>
+
+                            <div className="bg-black border border-cyan-500/30 rounded-lg p-3">
+                                <p className="text-white font-bold text-xs mb-1">🥗 Community Fridges</p>
+                                <p className="text-gray-400 text-xs">Network of fridges sharing inventory real-time</p>
                             </div>
 
                             <div className="bg-black border border-purple-500/30 rounded-lg p-3">
@@ -362,18 +748,23 @@ export default function P2PFoodRescue() {
                                 <p className="text-gray-400 text-xs">University cafeterias → student food banks</p>
                             </div>
 
-                            <div className="bg-black border border-red-500/30 rounded-lg p-3">
-                                <p className="text-white font-bold text-xs mb-1">🏥 Hospital Surplus</p>
+                            <div className="bg-black border border-orange-500/30 rounded-lg p-3">
+                                <p className="text-white font-bold text-xs mb-1">🏥 Hospitals</p>
                                 <p className="text-gray-400 text-xs">Patient meals → nearby shelters</p>
+                            </div>
+
+                            <div className="bg-black border border-pink-500/30 rounded-lg p-3">
+                                <p className="text-white font-bold text-xs mb-1">👥 Meal Sharing</p>
+                                <p className="text-gray-400 text-xs">Neighbors cooking extra portions for each other</p>
                             </div>
                         </div>
 
                         <div className="bg-gradient-to-r from-amber-500/20 to-red-500/20 border border-amber-500/50 rounded-lg p-4 mt-4">
                             <p className="text-amber-400 font-black text-center mb-2">
-                                ONE MESH NETWORK = INFINITE APPLICATIONS
+                                ONE MESH NETWORK = ZERO FOOD WASTE PLANET
                             </p>
                             <p className="text-gray-300 text-xs text-center">
-                                The infrastructure is the same. The connections are what matter. ♾️❤️♾️
+                                The infrastructure is the same. The connections are what feed the world. ♾️❤️♾️
                             </p>
                         </div>
                     </div>
