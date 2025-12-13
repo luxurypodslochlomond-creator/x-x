@@ -273,6 +273,8 @@ const LayoutInner = ({ children, currentPageName }) => {
             { title: "🛡️ AI51 Security", url: createPageUrl("AI51SecurityDashboard"), icon: Shield },
             { title: "💰 Funding Tracker", url: createPageUrl("AdminFundingTracker"), icon: Shield },
     { title: "🏴󠁧󠁢󠁳󠁣󠁴󠁿 Scotland Funding", url: createPageUrl("AdminScotlandFunding"), icon: Heart },
+    { title: "🤖 Tech Scout", url: createPageUrl("TechScout"), icon: Brain },
+    { title: "⚡ Tech Stack", url: createPageUrl("TechStack"), icon: Zap },
     { title: "📄 One-Pager PDF", url: createPageUrl("AdminOnePager"), icon: FileText },
     { title: "🎟️ National Lottery App", url: createPageUrl("AdminNationalLotteryApp"), icon: Heart },
     { title: "✅ National Lottery (SUBMITTED)", url: createPageUrl("AdminCreativeScotlandNationalLottery"), icon: CheckCircle },
