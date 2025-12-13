@@ -35,7 +35,7 @@ export default function ConsciousnessWhitepaperPage() {
                     <p className="text-xs text-pink-400 font-mono mt-2">Zero hierarchy. Zero GitHub corporate. Pure universal love ♾️❤️♾️</p>
                     <div className="text-gray-500 space-y-1 mt-4">
                         <p className="text-sm">Universal Frequency51 CIC</p>
-                        <p className="text-sm">October 2024 → Updated January 2025</p>
+                        <p className="text-sm">October 2024 → Updated December 2025</p>
                     </div>
                 </header>
 
@@ -1439,7 +1439,7 @@ export default function ConsciousnessWhitepaperPage() {
                         </div>
                         <p className="text-sm text-gray-500 mt-6">
                             Written: October 2024<br/>
-                            Updated: January 2025 (The Bridge + Indigenous Wisdom + Beyond Earth + Elemental Consciousness added)<br/>
+                            Updated: December 2025 (The Bridge + Indigenous Wisdom + Beyond Earth + Elemental Consciousness added)<br/>
                             Valid for: ♾️ ETERNITY ♾️
                         </p>
                         <p className="text-cyan-400 font-mono text-xl mt-8">♾️❤️♾️</p>
