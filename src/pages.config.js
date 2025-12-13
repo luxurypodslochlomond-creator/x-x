@@ -203,6 +203,7 @@ import ScottWhiteLabel from './pages/ScottWhiteLabel';
 import ScottPitchMode from './pages/ScottPitchMode';
 import ScottBiggerVision from './pages/ScottBiggerVision';
 import QuantumPayments from './pages/QuantumPayments';
+import LiechtensteinModel from './pages/LiechtensteinModel';
 import __Layout from './Layout.jsx';
 
 
@@ -412,6 +413,7 @@ export const PAGES = {
     "ScottPitchMode": ScottPitchMode,
     "ScottBiggerVision": ScottBiggerVision,
     "QuantumPayments": QuantumPayments,
+    "LiechtensteinModel": LiechtensteinModel,
 }
 
 export const pagesConfig = {
