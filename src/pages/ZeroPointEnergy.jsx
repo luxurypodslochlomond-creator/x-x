@@ -748,6 +748,137 @@ export default function ZeroPointEnergy() {
                 </div>
             </div>
 
+            {/* BURIED PATENTS - OPEN SOURCE LIBERATION */}
+            <div className="max-w-4xl mx-auto mb-8 px-4">
+                <div className="bg-gradient-to-br from-red-500/20 to-orange-500/20 border-4 border-red-500 rounded-xl p-6">
+                    <div className="flex items-center gap-3 mb-4">
+                        <Lock className="w-8 h-8 text-red-400" />
+                        <h2 className="text-2xl font-black text-white">SUPPRESSED PATENTS - NOW PUBLIC</h2>
+                    </div>
+
+                    <div className="space-y-4 text-gray-200 text-sm">
+                        <div className="bg-black border border-red-500/30 rounded-lg p-4">
+                            <p className="text-red-400 font-bold text-xs mb-2">THE TRUTH:</p>
+                            <ul className="space-y-2 text-xs text-gray-300 ml-4">
+                                <li>• 6,000+ patents classified under US Invention Secrecy Act</li>
+                                <li>• Government can seize ANY patent deemed "national security risk"</li>
+                                <li>• Many inventors died mysteriously after announcing breakthroughs</li>
+                                <li>• FBI confiscated Tesla's files immediately after his death (1943)</li>
+                                <li>• We're making them public. Can't suppress P2P knowledge.</li>
+                            </ul>
+                        </div>
+
+                        {/* STANLEY MEYER - WATER FUEL CELL */}
+                        <div className="bg-black border border-cyan-500/30 rounded-lg p-4">
+                            <div className="flex items-center gap-2 mb-2">
+                                <Waves className="w-5 h-5 text-cyan-400" />
+                                <p className="text-cyan-400 font-bold text-sm">STANLEY MEYER - WATER FUEL CELL (1980s)</p>
+                            </div>
+                            <div className="space-y-2 text-xs text-gray-300">
+                                <p className="text-white font-bold">Patent: WO1992007861A1</p>
+                                <p className="mb-2">
+                                    Split water (H₂O) into hydrogen/oxygen using resonant frequency - FAR LESS energy than electrolysis.
+                                    Car ran 100+ miles on 1 gallon of water.
+                                </p>
+                                <p className="text-red-400 font-bold">What happened: Ohio court ruled it "fraud" (1996). Meyer died mysteriously (1998) - claimed he was poisoned.</p>
+                                <p className="text-green-400 font-bold">Build it: Patent public. Resonance at 42.8 kHz splits water efficiently.</p>
+                            </div>
+                        </div>
+
+                        {/* THOMAS HENRY MORAY - RADIANT ENERGY */}
+                        <div className="bg-black border border-purple-500/30 rounded-lg p-4">
+                            <div className="flex items-center gap-2 mb-2">
+                                <Zap className="w-5 h-5 text-purple-400" />
+                                <p className="text-purple-400 font-bold text-sm">THOMAS HENRY MORAY - RADIANT ENERGY DEVICE (1930s)</p>
+                            </div>
+                            <div className="space-y-2 text-xs text-gray-300">
+                                <p className="text-white font-bold">Patent: US 2,460,707 + undisclosed tech</p>
+                                <p className="mb-2">
+                                    Powered 50,000 watts of lights from "cosmic rays" - no fuel, no moving parts. 
+                                    Demonstrated publicly, witnessed by engineers.
+                                </p>
+                                <p className="text-red-400 font-bold">What happened: Lab broken into 3 times, device destroyed. Patent office rejected full disclosure.</p>
+                                <p className="text-green-400 font-bold">Build it: Used germanium detector (pre-transistor tech). Modern semiconductors can replicate.</p>
+                            </div>
+                        </div>
+
+                        {/* VIKTOR SCHAUBERGER - IMPLOSION ENERGY */}
+                        <div className="bg-black border border-green-500/30 rounded-lg p-4">
+                            <div className="flex items-center gap-2 mb-2">
+                                <Waves className="w-5 h-5 text-green-400" />
+                                <p className="text-green-400 font-bold text-sm">VIKTOR SCHAUBERGER - VORTEX/IMPLOSION ENERGY (1930s-50s)</p>
+                            </div>
+                            <div className="space-y-2 text-xs text-gray-300">
+                                <p className="text-white font-bold">Patent: US20060272624A1 (water vortex device)</p>
+                                <p className="mb-2">
+                                    Natural water vortexes generate energy through implosion (not explosion). 
+                                    Demonstrated log flumes that moved UPHILL using vortex power.
+                                </p>
+                                <p className="text-red-400 font-bold">What happened: Forced to sign over patents to US/Soviet interests (1958). Died 5 days later.</p>
+                                <p className="text-green-400 font-bold">Build it: Egg-shaped vortex chambers. Water spirals create suction = usable energy.</p>
+                            </div>
+                        </div>
+
+                        {/* JOHN BEDINI - BACK EMF MOTOR */}
+                        <div className="bg-black border border-yellow-500/30 rounded-lg p-4">
+                            <div className="flex items-center gap-2 mb-2">
+                                <Zap className="w-5 h-5 text-yellow-400" />
+                                <p className="text-yellow-400 font-bold text-sm">JOHN BEDINI - SSG MONOPOLE MOTOR (1980s-2000s)</p>
+                            </div>
+                            <div className="space-y-2 text-xs text-gray-300">
+                                <p className="text-white font-bold">Patent: US7109671B2</p>
+                                <p className="mb-2">
+                                    Captures back-EMF (electromagnetic force when motor turns off) to recharge batteries. 
+                                    Can run longer than input energy suggests (over-unity claims).
+                                </p>
+                                <p className="text-green-400 font-bold">Build it: Open source. Thousands built it. Circuit diagrams public.</p>
+                                <p className="text-cyan-400 text-xs mt-2">Note: Not "free energy" but EFFICIENT energy recovery - still valuable!</p>
+                            </div>
+                        </div>
+
+                        {/* MORE INVENTORS */}
+                        <div className="bg-black border border-pink-500/30 rounded-lg p-4">
+                            <p className="text-pink-400 font-bold text-sm mb-2">OTHER SUPPRESSED INVENTORS:</p>
+                            <div className="space-y-1 text-xs text-gray-300 ml-4">
+                                <li><strong className="text-white">Lester Hendershot</strong> (1928) - Fuelless generator, confiscated by military</li>
+                                <li><strong className="text-white">Bruce DePalma</strong> (1977) - N-Machine, spinning magnets produce extra voltage</li>
+                                <li><strong className="text-white">Floyd Sweet</strong> (1980s) - Vacuum Triode Amplifier, conditioned magnets</li>
+                                <li><strong className="text-white">Paul Pantone</strong> (1998) - GEET fuel processor, water injection increases MPG 300%+</li>
+                                <li><strong className="text-white">Joseph Newman</strong> (1984) - Energy machine, patent rejected despite demonstrations</li>
+                            </div>
+                        </div>
+
+                        <div className="bg-gradient-to-r from-red-500/20 to-orange-500/20 border-2 border-red-500 rounded-lg p-4">
+                            <p className="text-red-400 font-black text-center mb-2">
+                                PATTERN: INVENT → DEMONSTRATE → SUPPRESS → INVENTOR DIES/SILENCED
+                            </p>
+                            <p className="text-white text-center mb-2">
+                                Every. Single. One. "National security" or "fraud" claims. Then suppression.
+                            </p>
+                            <p className="text-cyan-400 font-bold text-center">
+                                WE'RE ENDING THIS. P2P + open source = UNSTOPPABLE ⚡
+                            </p>
+                        </div>
+
+                        <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-2 border-green-500 rounded-lg p-4">
+                            <p className="text-green-400 font-black text-center mb-2">
+                                WHAT WE'RE DOING:
+                            </p>
+                            <ul className="space-y-1 text-xs text-gray-300">
+                                <li>✓ Documenting ALL suppressed patents here (open source)</li>
+                                <li>✓ Build instructions for each device (Phase 0/1/2/3)</li>
+                                <li>✓ P2P distribution - can't be seized or classified</li>
+                                <li>✓ Global collaboration - if one inventor silenced, 1000 continue</li>
+                                <li>✓ Video proof when we build working prototypes</li>
+                            </ul>
+                            <p className="text-cyan-400 font-bold text-center mt-3">
+                                Liberation for Earth. Free energy for all. ♾️❤️♾️
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             {/* PHYSICS VS MATHS */}
             <div className="max-w-4xl mx-auto mb-8 px-4">
                 <div className="bg-gradient-to-br from-blue-500/20 to-purple-500/20 border-2 border-blue-500/50 rounded-xl p-6">
