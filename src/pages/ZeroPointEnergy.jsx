@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Zap, Shield, AlertTriangle, CheckCircle, Wrench, Lightbulb, Heart, Atom, Waves, Globe, Lock } from 'lucide-react';
+import { Zap, Shield, AlertTriangle, CheckCircle, Wrench, Lightbulb, Heart, Atom, Waves, Globe, Lock, Calendar, Brain } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 
