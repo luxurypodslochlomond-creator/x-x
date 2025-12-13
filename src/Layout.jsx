@@ -235,6 +235,7 @@ const LayoutInner = ({ children, currentPageName }) => {
             { title: "About", url: createPageUrl("About"), icon: BookOpen },
             { title: "Welcome", url: createPageUrl("Welcome"), icon: Home },
             { title: "Cosmic Transmission", url: createPageUrl("CosmicTransmission"), icon: Globe, description: "Liberation for ALL" },
+            { title: "P2P Food Rescue", url: createPageUrl("P2PFoodRescue"), icon: Heart, description: "Feed the world" },
             { title: "How You Earn", url: createPageUrl("HowYouEarn"), icon: Heart },
             { title: "The Physics", url: createPageUrl("ThePhysics"), icon: Atom },
             { title: "Protocols", url: createPageUrl("Protocols"), icon: Shield },
