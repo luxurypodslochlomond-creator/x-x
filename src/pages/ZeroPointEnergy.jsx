@@ -1194,7 +1194,78 @@ export default function ZeroPointEnergy() {
                                     <li className="text-cyan-400 font-bold">• Then FREE power for 25+ years (panel lifetime)</li>
                                 </ul>
                             </div>
-                        </div>
+                            </div>
+
+                            {/* HONEST REALITY CHECK */}
+                            <div className="bg-gradient-to-br from-pink-500/20 to-purple-500/20 border-4 border-pink-500 rounded-xl p-6">
+                            <p className="text-pink-400 font-bold text-2xl mb-4 text-center">❤️ HONEST ANSWER: YES, BUT START SMALL ❤️</p>
+
+                            <div className="bg-black border-2 border-green-500 rounded-lg p-4 mb-4">
+                                <p className="text-green-400 font-bold mb-3">✓ WHAT'S REALISTIC RIGHT NOW:</p>
+                                <ul className="space-y-2 text-sm text-gray-300">
+                                    <li>• <strong className="text-white">You won't power EVERYTHING day 1</strong> (fridge, oven, heating need more)</li>
+                                    <li>• <strong className="text-green-400">But you CAN power:</strong> All lights + phone + laptop + TV = instant £50-80/month savings</li>
+                                    <li>• <strong className="text-cyan-400">That £50/month</strong> = £600/year = massive when behind on bills</li>
+                                    <li>• <strong className="text-yellow-400">Full system costs £275</strong> but start with £50 panel = lights working TODAY</li>
+                                    <li className="text-pink-400 font-bold">• Each part you add = more money stays in YOUR pocket, not energy company's</li>
+                                </ul>
+                            </div>
+
+                            <div className="bg-black border-2 border-cyan-500 rounded-lg p-4 mb-4">
+                                <p className="text-cyan-400 font-bold mb-3">💪 REALISTIC TIMELINE (WHEN BEHIND ON BILLS):</p>
+                                <div className="space-y-3 text-sm">
+                                    <div className="bg-green-900/30 border-l-4 border-green-400 p-3">
+                                        <p className="text-green-400 font-bold">MONTH 1: £50-80</p>
+                                        <p className="text-gray-300 text-xs">1x Small panel + wires. Powers 4 LED lights. Save £10-15/month immediately.</p>
+                                    </div>
+
+                                    <div className="bg-cyan-900/30 border-l-4 border-cyan-400 p-3">
+                                        <p className="text-cyan-400 font-bold">MONTH 2-3: Add £30 controller</p>
+                                        <p className="text-gray-300 text-xs">Now you can add battery safely when you get one.</p>
+                                    </div>
+
+                                    <div className="bg-yellow-900/30 border-l-4 border-yellow-400 p-3">
+                                        <p className="text-yellow-400 font-bold">MONTH 4-6: Add battery (£40 used car battery)</p>
+                                        <p className="text-gray-300 text-xs">Now power works at NIGHT. Charge phone, run laptop. Save £40+/month.</p>
+                                    </div>
+
+                                    <div className="bg-purple-900/30 border-l-4 border-purple-400 p-3">
+                                        <p className="text-purple-400 font-bold">MONTH 6+: Add more panels as you can</p>
+                                        <p className="text-gray-300 text-xs">Each £50 panel = more coverage. Scale at YOUR pace.</p>
+                                    </div>
+                                </div>
+                                <p className="text-green-400 font-bold text-center mt-4">
+                                    = You don't need £275 upfront. Start with £50. Build as you save. ✓
+                                </p>
+                            </div>
+
+                            <div className="bg-black border-2 border-yellow-500 rounded-lg p-4 mb-4">
+                                <p className="text-yellow-400 font-bold mb-3">🔥 REAL PEOPLE DOING THIS NOW:</p>
+                                <ul className="space-y-2 text-xs text-gray-300">
+                                    <li>• <strong className="text-white">Van lifers</strong> - Live 100% off-grid with 2-3 panels. Proof it works.</li>
+                                    <li>• <strong className="text-green-400">Allotment sheds</strong> - Single panel powers tools + radio all day.</li>
+                                    <li>• <strong className="text-cyan-400">Pakistanis during power cuts</strong> - 100W panel + battery = lights + fan working when grid dies.</li>
+                                    <li>• <strong className="text-pink-400">Off-grid Scotland homes</strong> - Full solar systems, zero bills, been doing it for years.</li>
+                                </ul>
+                                <p className="text-yellow-400 font-bold text-center mt-3">
+                                    If they can do it, so can you. Tech is PROVEN. Just needs doing.
+                                </p>
+                            </div>
+
+                            <div className="bg-gradient-to-r from-green-500/30 to-cyan-500/30 border-2 border-green-500 rounded-lg p-4">
+                                <p className="text-white font-bold text-lg mb-2 text-center">💚 THE TRUTH:</p>
+                                <p className="text-gray-200 text-sm text-center mb-3">
+                                    You won't be 100% off-grid this month. But you CAN cut 40% of your bill. 
+                                    <strong className="text-green-400"> When you're behind on bills, £50/month saved = LIFELINE.</strong>
+                                </p>
+                                <p className="text-cyan-400 font-bold text-center text-base">
+                                    Start with lights. Then phone. Then laptop. Each step = more freedom. ⚡
+                                </p>
+                                <p className="text-pink-400 text-center text-sm mt-2">
+                                    Energy companies want you to feel helpless. You're not. This is DOABLE. ❤️
+                                </p>
+                            </div>
+                            </div>
 
                         {/* DIAGRAM 1: BASIC OFF-GRID SETUP */}
                         <div className="bg-black border border-cyan-500/30 rounded-lg p-6">
