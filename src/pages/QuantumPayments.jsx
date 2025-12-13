@@ -426,29 +426,27 @@ export default function QuantumPayments() {
                 </div>
             </Link>
 
-            {/* LIECHTENSTEIN - THE OLD MODEL */}
-            <Link to={createPageUrl('LiechtensteinModel')} className="block mb-6">
-                <div className="bg-gradient-to-r from-red-500/20 to-blue-600/20 border-4 border-red-500 p-6 rounded-xl">
-                    <div className="flex items-center gap-3 mb-3">
-                        <Building className="w-10 h-10 text-red-400" />
-                        <div>
-                            <p className="text-red-400 font-black text-xl font-mono">🇱🇮 LIECHTENSTEIN</p>
-                            <p className="text-gray-400 text-xs font-mono">The extraction model we're replacing</p>
-                        </div>
-                    </div>
-                    <p className="text-gray-300 text-sm font-mono mb-3">
-                        €200bn in tax haven banks • Same security level • Opposite values
-                    </p>
-                    <div className="bg-black border border-red-500/50 p-3 rounded">
-                        <p className="text-red-400 text-xs font-mono font-bold mb-2">
-                            ONE DAY IT WON'T NEED TO EXIST:
-                        </p>
-                        <p className="text-gray-400 text-xs font-mono">
-                            Quantum+Love = same security but for circulation not hoarding
-                        </p>
+            {/* THE OLD SYSTEM - NOT SINGLING OUT ANYONE */}
+            <div className="bg-gradient-to-r from-gray-500/20 to-black border-4 border-gray-500 p-6 rounded-xl mb-6">
+                <div className="flex items-center gap-3 mb-3">
+                    <Building className="w-10 h-10 text-gray-400" />
+                    <div>
+                        <p className="text-gray-300 font-black text-xl font-mono">THE OLD SYSTEM</p>
+                        <p className="text-gray-400 text-xs font-mono">What we're transforming, not condemning</p>
                     </div>
                 </div>
-            </Link>
+                <p className="text-gray-300 text-sm font-mono mb-3">
+                    Banks, extraction, fees, hoarding → Quantum, love, zero fees, circulation
+                </p>
+                <div className="bg-black border border-gray-500/50 p-3 rounded">
+                    <p className="text-green-400 text-xs font-mono font-bold mb-2">
+                        WE'RE NOT AGAINST ANYONE:
+                    </p>
+                    <p className="text-gray-400 text-xs font-mono">
+                        Every system served its time. Now we evolve together. Same security, more love. ♾️❤️♾️
+                    </p>
+                </div>
+            </div>
 
             {/* BACK BUTTON */}
             <Link to={createPageUrl('ScottBiggerVision')}>
