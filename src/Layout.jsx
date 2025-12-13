@@ -23,6 +23,8 @@ import { COOLASFUCKHeart, COOLASFUCKWaves } from '@/components/shared/COOLASFUCK
 import LiveClock from '@/components/shared/LiveClock';
 import { AnonymousAuthProvider } from '@/components/shared/AnonymousAuth';
 import { SyncManagerProvider, SyncStatusIndicator } from '@/components/shared/SyncManager';
+import { ProfessionalModeProvider } from '@/components/shared/ProfessionalMode';
+import ProfessionalModeToggle from '@/components/shared/ProfessionalModeToggle';
 
 // PUBLIC PAGES - No login required
 const PUBLIC_PAGES = [
@@ -452,14 +454,17 @@ const LayoutInner = ({ children, currentPageName }) => {
     };
 
     export default function Layout(props) {
-  return (
-    <AnonymousAuthProvider>
-      <SyncManagerProvider>
-        <AudioProvider>
-          <LayoutInner {...props} />
-          <SyncStatusIndicator />
-        </AudioProvider>
-      </SyncManagerProvider>
-    </AnonymousAuthProvider>
-  );
-}
+      return (
+        <ProfessionalModeProvider>
+          <AnonymousAuthProvider>
+            <SyncManagerProvider>
+              <AudioProvider>
+                <LayoutInner {...props} />
+                <SyncStatusIndicator />
+                <ProfessionalModeToggle />
+              </AudioProvider>
+            </SyncManagerProvider>
+          </AnonymousAuthProvider>
+        </ProfessionalModeProvider>
+      );
+    }
