@@ -283,7 +283,7 @@ export default function QuantumPayments() {
                 
                 <div className="space-y-3 text-sm font-mono">
                     <div className="flex items-start gap-3">
-                        <div className="w-3 h-3 bg-green-400 mt-2 flex-shrink-0">✓</div>
+                        <div className="w-3 h-3 bg-green-400 rounded-full mt-2 flex-shrink-0" />
                         <div>
                             <p className="text-green-400 font-bold">PHASE 1: ✓ DELIVERED</p>
                             <p className="text-gray-400 text-xs">P2P mesh working, local storage, fiat bridges live, Scott testing daily</p>
