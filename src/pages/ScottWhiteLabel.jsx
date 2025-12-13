@@ -31,12 +31,12 @@ export default function ScottWhiteLabel() {
                         </div>
 
                         <div className="bg-amber-900/20 border border-amber-500/50 p-4 rounded-lg">
-                            <p className="text-amber-400 font-bold text-sm mb-2">💰 LA PITCH:</p>
+                            <p className="text-amber-400 font-bold text-sm mb-2">💰 PRICING TIERS:</p>
                             <ul className="text-gray-400 text-xs space-y-1 font-mono">
-                                <li>• Rebrand with THEIR logo + colors</li>
-                                <li>• Demo mode - test with sample artists</li>
-                                <li>• PDF exports for accountants</li>
-                                <li>• £50/month solo or £200/month agency</li>
+                                <li>• £100/month - Solo managers (1-5 artists)</li>
+                                <li>• £300/month - Agencies (10-30 artists)</li>
+                                <li>• £2,000/month - Labels (unlimited + white-label)</li>
+                                <li>• Crypto-secure, works offline, PDF exports</li>
                                 <li>• White-label ready NOW</li>
                             </ul>
                         </div>
@@ -82,10 +82,13 @@ export default function ScottWhiteLabel() {
                     <div className="bg-black border border-pink-500/30 p-4 rounded-lg">
                         <p className="text-pink-400 font-bold text-xs mb-2">THE ASK:</p>
                         <p className="text-gray-300 text-xs font-mono mb-3">
-                            "£50/month per artist you manage. I white-label it with your branding. You keep control. I handle the tech."
+                            "£100/month if you're solo. £300/month for agencies. £2,000/month for labels with full white-label branding."
                         </p>
-                        <p className="text-green-400 text-xs font-mono font-bold">
-                            10 managers x 5 artists each = £2,500/month recurring ✓
+                        <p className="text-green-400 text-xs font-mono font-bold mb-2">
+                            10 solo managers = £1,000/month recurring ✓
+                        </p>
+                        <p className="text-cyan-400 text-xs font-mono font-bold">
+                            2 labels x £2k = £4,000/month recurring ✓
                         </p>
                     </div>
 
@@ -105,6 +108,64 @@ export default function ScottWhiteLabel() {
                                 <p className="text-gray-400 font-mono">A: Works alongside. Export to PDF for accountants. Import from Excel.</p>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* SECURITY & ONBOARDING STATUS */}
+            <div className="bg-gradient-to-br from-purple-500/20 to-pink-500/20 border-2 border-purple-500 p-6 mb-6">
+                <div className="flex items-center gap-3 mb-4">
+                    <Crown className="w-8 h-8 text-purple-400" />
+                    <h3 className="text-purple-400 font-black font-mono text-lg">WHAT'S BUILT VS WHAT'S NEEDED</h3>
+                </div>
+
+                <div className="space-y-4 text-sm">
+                    <div className="bg-black border border-green-500/30 p-4 rounded-lg">
+                        <p className="text-green-400 font-bold text-xs mb-2">✓ READY NOW (SCOTT CAN USE):</p>
+                        <ul className="text-gray-300 text-xs font-mono space-y-1">
+                            <li>• Offline storage (works in shed/van/plane)</li>
+                            <li>• Artists, events, tasks, invoices</li>
+                            <li>• AI assistant (contracts, publishing help)</li>
+                            <li>• PDF exports for accountants</li>
+                            <li>• Demo mode (test with sample data)</li>
+                            <li>• White-label branding (logo/colors)</li>
+                        </ul>
+                    </div>
+
+                    <div className="bg-black border border-amber-500/30 p-4 rounded-lg">
+                        <p className="text-amber-400 font-bold text-xs mb-2">⚠️ NEEDED FOR WHITE-LABEL SALES:</p>
+                        <ul className="text-gray-300 text-xs font-mono space-y-1">
+                            <li>• Stripe checkout integration (payment flow)</li>
+                            <li>• Multi-tenancy (each label = separate data)</li>
+                            <li>• Subdomain routing (biglabel.kingdom51.com)</li>
+                            <li>• Onboarding wizard (sign up → pay → branded)</li>
+                            <li>• Contract crypto-signing (blockchain proof)</li>
+                        </ul>
+                    </div>
+
+                    <div className="bg-black border border-cyan-500/30 p-4 rounded-lg">
+                        <p className="text-cyan-400 font-bold text-xs mb-2">🔐 SECURITY LEVEL:</p>
+                        <ul className="text-gray-300 text-xs font-mono space-y-1">
+                            <li>• Base44 auth (secure but centralized)</li>
+                            <li>• LocalStorage encryption (device-level)</li>
+                            <li>• HTTPS/SSL (transport security)</li>
+                            <li>• Need: End-to-end encryption (E2EE)</li>
+                            <li>• Need: IPFS contract storage (tamper-proof)</li>
+                            <li>• Need: Cryptographic signing (beyond banks)</li>
+                        </ul>
+                    </div>
+
+                    <div className="bg-gradient-to-r from-pink-500/20 to-purple-500/20 border border-pink-500 p-4 rounded-lg">
+                        <p className="text-pink-400 font-bold text-xs mb-2">💡 THE PLAY:</p>
+                        <p className="text-gray-300 text-xs font-mono mb-2">
+                            Scott uses it daily → finds gaps → you fix → becomes indispensable
+                        </p>
+                        <p className="text-cyan-400 text-xs font-mono mb-2">
+                            THEN pitch to LA managers: "This runs my whole business. Want your branded version?"
+                        </p>
+                        <p className="text-green-400 text-xs font-mono font-bold">
+                            Proof of value FIRST → white-label infrastructure SECOND ✓
+                        </p>
                     </div>
                 </div>
             </div>

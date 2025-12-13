@@ -118,7 +118,7 @@ export default function ScottWhiteLabelSettings() {
             {/* PRICING TIER */}
             <div className="mb-6">
                 <label className="text-white font-bold text-sm mb-2 block">PRICING TIER</label>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-3 gap-3">
                     <button
                         onClick={() => setSettings({ ...settings, pricing_tier: 'solo' })}
                         className={`p-4 border-2 transition-all ${
@@ -129,7 +129,7 @@ export default function ScottWhiteLabelSettings() {
                     >
                         <Users className="w-6 h-6 text-green-400 mb-2" />
                         <p className="text-white font-bold text-sm">SOLO</p>
-                        <p className="text-green-400 text-xs">£50/month</p>
+                        <p className="text-green-400 text-xs">£100/mo</p>
                         <p className="text-gray-500 text-xs">1-5 artists</p>
                     </button>
 
@@ -143,8 +143,22 @@ export default function ScottWhiteLabelSettings() {
                     >
                         <DollarSign className="w-6 h-6 text-cyan-400 mb-2" />
                         <p className="text-white font-bold text-sm">AGENCY</p>
-                        <p className="text-cyan-400 text-xs">£200/month</p>
-                        <p className="text-gray-500 text-xs">Unlimited artists</p>
+                        <p className="text-cyan-400 text-xs">£300/mo</p>
+                        <p className="text-gray-500 text-xs">10-30 artists</p>
+                    </button>
+
+                    <button
+                        onClick={() => setSettings({ ...settings, pricing_tier: 'label' })}
+                        className={`p-4 border-2 transition-all ${
+                            settings.pricing_tier === 'label'
+                                ? 'border-purple-500 bg-purple-900/30'
+                                : 'border-gray-700 bg-black'
+                        }`}
+                    >
+                        <Palette className="w-6 h-6 text-purple-400 mb-2" />
+                        <p className="text-white font-bold text-sm">LABEL</p>
+                        <p className="text-purple-400 text-xs">£2,000/mo</p>
+                        <p className="text-gray-500 text-xs">Unlimited + white-label</p>
                     </button>
                 </div>
             </div>
@@ -159,12 +173,22 @@ export default function ScottWhiteLabelSettings() {
             </button>
 
             <div className="mt-6 bg-green-900/20 border border-green-500/50 p-4">
-                <p className="text-green-400 font-bold text-xs mb-2">💰 LA PITCH READY:</p>
+                <p className="text-green-400 font-bold text-xs mb-2">💰 PRICING MODEL:</p>
                 <ul className="text-gray-400 text-xs space-y-1">
-                    <li>• Show them YOUR branded version</li>
-                    <li>• Demo with their artists live</li>
-                    <li>• £50/month (solo) or £200/month (agency)</li>
-                    <li>• Works offline, proven tech</li>
+                    <li>• <strong className="text-white">£100/mo</strong> - Solo managers (1-5 artists)</li>
+                    <li>• <strong className="text-white">£300/mo</strong> - Agencies (10-30 artists)</li>
+                    <li>• <strong className="text-white">£2,000/mo</strong> - Labels (unlimited + full white-label)</li>
+                    <li>• Works offline, crypto-secure, proven tech</li>
+                </ul>
+            </div>
+
+            <div className="mt-4 bg-amber-900/20 border border-amber-500/50 p-4">
+                <p className="text-amber-400 font-bold text-xs mb-2">⚠️ NOT YET BUILT:</p>
+                <ul className="text-gray-400 text-xs space-y-1">
+                    <li>• Stripe payment integration</li>
+                    <li>• Multi-tenancy (separate data per client)</li>
+                    <li>• Subdomain routing</li>
+                    <li>• Onboarding wizard</li>
                 </ul>
             </div>
         </div>
