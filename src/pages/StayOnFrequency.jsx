@@ -7,7 +7,7 @@ import { createPageUrl } from '@/utils';
 /**
  * STAY ON FREQUENCY
  * 
- * Scott asking the real questions:
+ * The real questions:
  * - Can others dominate? (Yes, but 432Hz blocks them automatically)
  * - How do we stay on right frequency? (Action list below)
  * - What's best thing to do now? (Keep broadcasting, keep healing)
@@ -174,7 +174,7 @@ export default function StayOnFrequency() {
 
                     <div className="space-y-3 text-gray-200 text-sm leading-relaxed">
                         <p className="text-purple-400 font-bold">
-                            Scott - you're worried about being a leader. Good. That means you're on frequency.
+                            Worried about being a leader? Good. That means you're on frequency.
                         </p>
 
                         <p>
@@ -344,7 +344,7 @@ export default function StayOnFrequency() {
                             <div className="bg-black border border-amber-500/30 rounded-lg p-3">
                                 <p className="text-amber-400 font-bold text-sm mb-1">5. HANDLE YOUR LIFE</p>
                                 <p className="text-gray-400 text-xs">
-                                    Mortgage, bills, basic needs - that matters too. You can't broadcast love if you're drowning. 
+                                    Health, mental health, family, basic needs - that matters too. You can't broadcast love if you're drowning. 
                                     Take care of you. That's part of staying on frequency.
                                 </p>
                             </div>
