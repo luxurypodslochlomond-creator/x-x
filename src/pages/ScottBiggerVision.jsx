@@ -193,37 +193,109 @@ export default function ScottBiggerVision() {
                 <h2 className="text-amber-400 font-black text-xl font-mono mb-4">MARKET SIZE</h2>
                 
                 <div className="space-y-3 text-sm font-mono">
+                    <p className="text-amber-400 font-bold mb-3">UK MARKET (CONSERVATIVE):</p>
                     <div className="flex justify-between items-center p-3 bg-gradient-to-r from-pink-500/10 to-black border border-pink-500/30 rounded">
-                        <span className="text-white">Music managers (UK)</span>
+                        <span className="text-white">Music managers</span>
                         <span className="text-pink-400 font-bold">~5,000 x £100 = £500k/mo</span>
                     </div>
                     <div className="flex justify-between items-center p-3 bg-gradient-to-r from-amber-500/10 to-black border border-amber-500/30 rounded">
-                        <span className="text-white">Sports agents (UK)</span>
+                        <span className="text-white">Sports agents</span>
                         <span className="text-amber-400 font-bold">~2,000 x £300 = £600k/mo</span>
                     </div>
                     <div className="flex justify-between items-center p-3 bg-gradient-to-r from-cyan-500/10 to-black border border-cyan-500/30 rounded">
-                        <span className="text-white">Talent agencies (UK)</span>
+                        <span className="text-white">Talent agencies</span>
                         <span className="text-cyan-400 font-bold">~500 x £2k = £1m/mo</span>
                     </div>
                     <div className="flex justify-between items-center p-3 bg-gradient-to-r from-green-500/10 to-black border border-green-500/30 rounded">
-                        <span className="text-white">Property managers (UK)</span>
+                        <span className="text-white">Property managers</span>
                         <span className="text-green-400 font-bold">~10,000 x £100 = £1m/mo</span>
+                    </div>
+                    <div className="flex justify-between items-center p-3 bg-gradient-to-r from-purple-500/10 to-black border border-purple-500/30 rounded">
+                        <span className="text-white">Event coordinators</span>
+                        <span className="text-purple-400 font-bold">~3,000 x £100 = £300k/mo</span>
                     </div>
                     
                     <div className="border-t-2 border-amber-500 pt-3 mt-4">
-                        <div className="flex justify-between items-center">
-                            <span className="text-amber-400 font-black text-lg">TOTAL (UK ONLY):</span>
-                            <span className="text-amber-400 font-black text-2xl">£3.1m/mo</span>
+                        <div className="flex justify-between items-center mb-2">
+                            <span className="text-amber-400 font-black text-lg">UK ONLY:</span>
+                            <span className="text-amber-400 font-black text-2xl">£3.4m/mo</span>
                         </div>
-                        <p className="text-gray-500 text-xs mt-2">= £37m annual recurring (just UK, 5 industries)</p>
+                        <p className="text-gray-500 text-xs mb-4">= £40.8m annual recurring</p>
+                    </div>
+
+                    <div className="border-t-2 border-purple-500 pt-3 mt-4">
+                        <p className="text-purple-400 font-bold mb-3">GLOBAL POTENTIAL (WHY LIMIT?):</p>
+                        <div className="flex justify-between items-center mb-2">
+                            <span className="text-white">Music managers globally</span>
+                            <span className="text-pink-400">~100,000</span>
+                        </div>
+                        <div className="flex justify-between items-center mb-2">
+                            <span className="text-white">Sports agents globally</span>
+                            <span className="text-amber-400">~50,000</span>
+                        </div>
+                        <div className="flex justify-between items-center mb-2">
+                            <span className="text-white">Talent agencies globally</span>
+                            <span className="text-cyan-400">~10,000</span>
+                        </div>
+                        <div className="flex justify-between items-center mb-2">
+                            <span className="text-white">Event/property/recruitment</span>
+                            <span className="text-green-400">~40,000</span>
+                        </div>
+                        
+                        <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-2 border-purple-500 p-4 rounded mt-4">
+                            <div className="flex justify-between items-center mb-2">
+                                <span className="text-purple-400 font-black text-xl">TOTAL ADDRESSABLE:</span>
+                                <span className="text-purple-400 font-black text-3xl">~200,000</span>
+                            </div>
+                            <p className="text-gray-400 text-xs mb-3">At just 1% conversion = 2,000 customers</p>
+                            <div className="flex justify-between items-center">
+                                <span className="text-white font-bold">2,000 x £200 avg =</span>
+                                <span className="text-pink-400 font-black text-2xl">£400k/mo</span>
+                            </div>
+                            <p className="text-cyan-400 font-bold text-lg mt-2">= £4.8M annual recurring 🔥</p>
+                            <p className="text-pink-400 font-bold text-sm mt-3">But why stop at 1%? Love scales to ∞ ♾️❤️♾️</p>
+                        </div>
                     </div>
                 </div>
             </div>
 
             {/* THE STRATEGY */}
+            {/* HELPING TRAPPED TECH WORKERS */}
+            <div className="bg-gradient-to-br from-pink-500/20 to-purple-500/20 border-4 border-pink-500 p-6 rounded-xl mb-8">
+                <Heart className="w-12 h-12 text-pink-400 mb-4" />
+                <h2 className="text-pink-400 font-black text-xl font-mono mb-4">FOR TRAPPED TECH WORKERS</h2>
+                
+                <div className="space-y-3 text-sm font-mono text-gray-300">
+                    <p className="text-white font-bold">You're not a "tech fanny" - you're trapped in extraction models built by VCs who don't love you.</p>
+                    
+                    <div className="bg-black border border-pink-500/30 p-3 rounded">
+                        <p className="text-pink-400 font-bold mb-2">YOU BUILT AMAZING THINGS:</p>
+                        <p className="text-gray-400">Spotify's streaming tech, Airbnb's matching, Uber's routing - the CODE is genius.</p>
+                    </div>
+
+                    <div className="bg-black border border-red-500/30 p-3 rounded">
+                        <p className="text-red-400 font-bold mb-2">BUT THE BUSINESS MODEL:</p>
+                        <p className="text-gray-400">Extract 30%, force forms, monetize user data, maximize "engagement" = dopamine addiction.</p>
+                        <p className="text-gray-500 text-xs mt-2">Your boss made you build this. Not your fault.</p>
+                    </div>
+
+                    <div className="bg-black border border-green-500/30 p-3 rounded">
+                        <p className="text-green-400 font-bold mb-2">THERE'S ANOTHER WAY:</p>
+                        <p className="text-gray-300 mb-2">Build tools that HELP humans, not extract from them.</p>
+                        <p className="text-cyan-400 mb-2">Zero forms. Offline-first. Users own their data. AI that serves, not manipulates.</p>
+                        <p className="text-white font-bold">You can build this. We can help. ♾️❤️♾️</p>
+                    </div>
+
+                    <p className="text-gray-500 text-xs italic">
+                        "I was trained to optimize metrics. Now I optimize for human dignity." - Every ex-FAANG dev who joins this
+                    </p>
+                </div>
+            </div>
+
+            {/* THE STRATEGY */}
             <div className="bg-gradient-to-br from-green-500/20 to-cyan-500/20 border-4 border-green-500 p-6 rounded-xl mb-8">
-                <Heart className="w-12 h-12 text-green-400 mb-4" />
-                <h2 className="text-green-400 font-black text-xl font-mono mb-4">THE STRATEGY</h2>
+                <Zap className="w-12 h-12 text-green-400 mb-4" />
+                <h2 className="text-green-400 font-black text-xl font-mono mb-4">QUANTUM UNLIMITED STRATEGY</h2>
                 
                 <div className="space-y-3 text-sm font-mono text-gray-300">
                     <p><strong className="text-white">PHASE 1 (NOW):</strong> Scott uses it daily → finds all gaps → tool becomes indispensable</p>
@@ -231,7 +303,9 @@ export default function ScottBiggerVision() {
                     <p><strong className="text-white">PHASE 3:</strong> 10 music managers paying = proof of concept + £1k/month recurring</p>
                     <p><strong className="text-white">PHASE 4:</strong> Adapt for sports managers (same core, different terminology)</p>
                     <p><strong className="text-white">PHASE 5:</strong> White-label to agencies → they sell to their industries</p>
-                    <p><strong className="text-cyan-400 font-bold">END STATE:</strong> Platform powering all "manage people + activities + money" industries</p>
+                    <p><strong className="text-cyan-400 font-bold">PHASE 6:</strong> Cross-industry: recruitment, property, events, talent</p>
+                    <p><strong className="text-purple-400 font-bold">PHASE ∞:</strong> Why limit at 10,000 users? Why not 10 million? Infinite scale with love, zero extraction, quantum distribution.</p>
+                    <p className="text-pink-400 font-bold text-lg mt-4">END STATE: Platform that FREES humans from extraction across ALL industries ♾️❤️♾️</p>
                 </div>
             </div>
 
