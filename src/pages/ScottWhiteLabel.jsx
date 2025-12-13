@@ -61,6 +61,72 @@ export default function ScottWhiteLabel() {
                 </div>
             </div>
 
+            {/* TEMPLATE PREVIEWS - COOLASFUCK */}
+            <div className="mb-6">
+                <h2 className="text-pink-400 font-black text-lg font-mono mb-4 flex items-center gap-2">
+                    <Palette className="w-6 h-6" />
+                    WHITE-LABEL TEMPLATES
+                </h2>
+
+                {/* SOLO MANAGER */}
+                <div className="bg-gradient-to-br from-cyan-500/10 to-blue-500/10 border-2 border-cyan-500 rounded-xl p-4 mb-4">
+                    <div className="flex items-center gap-3 mb-3">
+                        <Music className="w-8 h-8 text-cyan-400" />
+                        <div>
+                            <p className="text-cyan-400 font-black font-mono">SOLO MANAGER</p>
+                            <p className="text-gray-500 text-xs font-mono">£100/month • 1-5 artists</p>
+                        </div>
+                    </div>
+                    <div className="bg-black border border-cyan-500/30 rounded-lg p-3 mb-2">
+                        <p className="text-white text-xs font-mono mb-2">"I manage 3 artists. No team. Just me, my phone, and this."</p>
+                        <p className="text-cyan-400 text-xs font-mono">✓ Offline calendar • Tasks • Quick invoices • Voice notes</p>
+                    </div>
+                    <p className="text-gray-400 text-xs font-mono">Perfect for: Independent managers, artist-managers, side hustlers</p>
+                </div>
+
+                {/* AGENCY */}
+                <div className="bg-gradient-to-br from-purple-500/10 to-pink-500/10 border-2 border-purple-500 rounded-xl p-4 mb-4">
+                    <div className="flex items-center gap-3 mb-3">
+                        <Users className="w-8 h-8 text-purple-400" />
+                        <div>
+                            <p className="text-purple-400 font-black font-mono">AGENCY</p>
+                            <p className="text-gray-500 text-xs font-mono">£300/month • 10-30 artists • Team sync</p>
+                        </div>
+                    </div>
+                    <div className="bg-black border border-purple-500/30 rounded-lg p-3 mb-2">
+                        <p className="text-white text-xs font-mono mb-2">"Me + 2 assistants. 15 artists. We're on tour, no WiFi, still coordinated."</p>
+                        <p className="text-purple-400 text-xs font-mono">✓ P2P team sync • Shared calendar • Task delegation • Live updates</p>
+                    </div>
+                    <p className="text-gray-400 text-xs font-mono">Perfect for: Small agencies, tour managers, booking teams</p>
+                </div>
+
+                {/* LABEL */}
+                <div className="bg-gradient-to-br from-amber-500/10 to-orange-500/10 border-4 border-amber-500 rounded-xl p-4">
+                    <div className="flex items-center gap-3 mb-3">
+                        <Crown className="w-10 h-10 text-amber-400 animate-pulse" />
+                        <div>
+                            <p className="text-amber-400 font-black font-mono text-lg">LABEL (WHITE-LABEL)</p>
+                            <p className="text-gray-500 text-xs font-mono">£2,000/month • Unlimited • YOUR branding</p>
+                        </div>
+                    </div>
+                    <div className="bg-black border border-amber-500/50 rounded-lg p-4 mb-3">
+                        <p className="text-white text-sm font-mono mb-3">"We're a label with 50 artists. We brand this as OURS. Our logo, our colors, our domain."</p>
+                        <div className="space-y-2 text-xs font-mono">
+                            <p className="text-amber-400">✓ biglabel.com/manager (your domain)</p>
+                            <p className="text-amber-400">✓ Your logo, colors, branding</p>
+                            <p className="text-amber-400">✓ Unlimited artists + team</p>
+                            <p className="text-pink-400 font-bold">✓ COOLASFUCK integration: Your artists upload, keep 90%, you take cut</p>
+                        </div>
+                    </div>
+                    <div className="bg-gradient-to-r from-pink-500/20 to-purple-500/20 border border-pink-500 rounded-lg p-3">
+                        <p className="text-pink-400 text-xs font-mono font-bold mb-1">THE FUTURE:</p>
+                        <p className="text-gray-300 text-xs font-mono">
+                            You sell KINGDOM51 as YOUR tool. Artists see YOUR brand. You keep revenue. We're infrastructure. ♾️❤️♾️
+                        </p>
+                    </div>
+                </div>
+            </div>
+
             {/* DEMO MODE */}
             <ScottDemoMode />
 
