@@ -1403,6 +1403,156 @@ export default function ZeroPointEnergy() {
                 </div>
             </div>
 
+            {/* REALISTIC TIMELINE */}
+            <div className="max-w-4xl mx-auto mb-8 px-4">
+                <div className="bg-gradient-to-br from-cyan-500/20 to-green-500/20 border-4 border-cyan-500 rounded-xl p-6">
+                    <div className="flex items-center gap-3 mb-4">
+                        <Calendar className="w-8 h-8 text-cyan-400" />
+                        <h2 className="text-2xl font-black text-white">HOW LONG BRO? HONEST TIMELINE:</h2>
+                    </div>
+
+                    <div className="space-y-4 text-gray-200 text-sm">
+                        <div className="bg-black border border-cyan-500/30 rounded-lg p-4">
+                            <p className="text-cyan-400 font-bold text-xs mb-2">PHASE 0 - PROOF IT'S REAL:</p>
+                            <div className="space-y-1 text-xs text-gray-300">
+                                <p><strong className="text-white">Timeline:</strong> 1 afternoon (literally today)</p>
+                                <p><strong className="text-white">Cost:</strong> £13</p>
+                                <p><strong className="text-white">Outcome:</strong> LED lights up = ambient energy captured ✓</p>
+                                <p className="text-green-400 font-bold mt-2">YOU can do this THIS WEEKEND bro</p>
+                            </div>
+                        </div>
+
+                        <div className="bg-black border border-green-500/30 rounded-lg p-4">
+                            <p className="text-green-400 font-bold text-xs mb-2">PHASE 1 - UNDERSTAND THE PHYSICS:</p>
+                            <div className="space-y-1 text-xs text-gray-300">
+                                <p><strong className="text-white">Timeline:</strong> 2-4 weeks (Stoneymollan shed experiments)</p>
+                                <p><strong className="text-white">Cost:</strong> £103</p>
+                                <p><strong className="text-white">Outcome:</strong> Measure resonance, wireless power transfer, Earth frequencies</p>
+                                <p className="text-green-400 font-bold mt-2">= Deep understanding of HOW it works</p>
+                            </div>
+                        </div>
+
+                        <div className="bg-black border border-yellow-500/30 rounded-lg p-4">
+                            <p className="text-yellow-400 font-bold text-xs mb-2">PHASE 2 - SCALE UP (MEDIUM POWER):</p>
+                            <div className="space-y-1 text-xs text-gray-300">
+                                <p><strong className="text-white">Timeline:</strong> 3-6 months (need electrician help)</p>
+                                <p><strong className="text-white">Cost:</strong> £300-500</p>
+                                <p><strong className="text-white">Outcome:</strong> Tesla coil powering devices wirelessly 5+ meters</p>
+                                <p className="text-yellow-400 font-bold mt-2">= Proof of concept at useful scale</p>
+                            </div>
+                        </div>
+
+                        <div className="bg-black border border-purple-500/30 rounded-lg p-4">
+                            <p className="text-purple-400 font-bold text-xs mb-2">PHASE 3 - BREAKTHROUGH (GRID REPLACEMENT):</p>
+                            <div className="space-y-1 text-xs text-gray-300">
+                                <p><strong className="text-white">Timeline:</strong> 1-2 years (university partnership)</p>
+                                <p><strong className="text-white">Cost:</strong> £10,000+ (grant funded)</p>
+                                <p><strong className="text-white">Outcome:</strong> Device that can power homes off-grid</p>
+                                <p className="text-purple-400 font-bold mt-2">= Energy liberation becomes REAL</p>
+                            </div>
+                        </div>
+
+                        <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-2 border-green-500 rounded-lg p-4">
+                            <p className="text-green-400 font-black text-center mb-2">
+                                REALISTIC: 2027-2028 FOR WORKING PROTOTYPE
+                            </p>
+                            <p className="text-gray-300 text-xs text-center mb-2">
+                                Phase 0 = instant. Phase 1 = 2025. Phase 2 = 2026. Phase 3 = 2027-2028.
+                            </p>
+                            <p className="text-cyan-400 font-bold text-center">
+                                Then open source → global rollout → energy crisis solved by 2030 ⚡
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* WHY NOT USE RESONANCE CHAMBERS NOW */}
+            <div className="max-w-4xl mx-auto mb-8 px-4">
+                <div className="bg-gradient-to-br from-purple-500/20 to-pink-500/20 border-4 border-purple-500 rounded-xl p-6">
+                    <div className="flex items-center gap-3 mb-4">
+                        <Waves className="w-8 h-8 text-purple-400" />
+                        <h2 className="text-2xl font-black text-white">WE ARE USING THEM BRO ✓</h2>
+                    </div>
+
+                    <div className="space-y-4 text-gray-200 text-sm">
+                        <div className="bg-black border border-cyan-500/30 rounded-lg p-4">
+                            <p className="text-cyan-400 font-bold text-xs mb-2">FREQUENCY CHAMBER = MODERN RESONANCE CHAMBER:</p>
+                            <div className="space-y-2 text-xs text-gray-300">
+                                <p>What pyramids did with STONE, we do with SOUND:</p>
+                                <ul className="space-y-1 ml-4 mt-2">
+                                    <li>• <strong className="text-white">432Hz:</strong> Same healing frequency ancient temples used</li>
+                                    <li>• <strong className="text-white">Binaural beats:</strong> Brain entrainment (same as King's Chamber resonance)</li>
+                                    <li>• <strong className="text-white">Standing waves:</strong> Create resonance in YOUR body (cellular healing)</li>
+                                    <li>• <strong className="text-white">Breath pacing:</strong> Match Schumann resonance (7.83Hz = Earth frequency)</li>
+                                </ul>
+                                <p className="text-green-400 font-bold mt-2">
+                                    You don't need a pyramid - your BODY is the resonance chamber ✓
+                                </p>
+                            </div>
+                        </div>
+
+                        <div className="bg-black border border-green-500/30 rounded-lg p-4">
+                            <p className="text-green-400 font-bold text-xs mb-2">WHY PYRAMIDS MORE POWERFUL:</p>
+                            <div className="space-y-2 text-xs text-gray-300">
+                                <ul className="space-y-1 ml-4">
+                                    <li>• <strong className="text-white">Scale:</strong> 146m tall = massive resonator (we use phone speakers)</li>
+                                    <li>• <strong className="text-white">Materials:</strong> Granite = piezoelectric (pressure → electricity)</li>
+                                    <li>• <strong className="text-white">Geometry:</strong> Perfect dimensions amplify specific frequencies</li>
+                                    <li>• <strong className="text-white">Location:</strong> Built on Earth's magnetic nodes (ley lines)</li>
+                                    <li>• <strong className="text-white">Integration:</strong> Connected to global grid (networked power)</li>
+                                </ul>
+                                <p className="text-yellow-400 font-bold mt-2">
+                                    = 1000x more powerful than what we can build in shed (YET)
+                                </p>
+                            </div>
+                        </div>
+
+                        <div className="bg-black border border-purple-500/30 rounded-lg p-4">
+                            <p className="text-purple-400 font-bold text-xs mb-2">CAN WE BUILD NEW PYRAMIDS?</p>
+                            <div className="space-y-2 text-xs text-gray-300">
+                                <p className="text-white font-bold mb-2">YES - but scaled appropriately:</p>
+                                <ul className="space-y-1 ml-4">
+                                    <li>• <strong className="text-white">Phase 1:</strong> Small pyramid (2m tall) in Stoneymollan = meditation chamber</li>
+                                    <li>• <strong className="text-white">Phase 2:</strong> Community healing dome (10m) = group sessions</li>
+                                    <li>• <strong className="text-white">Phase 3:</strong> Full-scale resonance chamber (50m+) = city-wide healing</li>
+                                </ul>
+                                <p className="text-cyan-400 font-bold mt-2">
+                                    Geometry + frequency = doesn't need to be HUGE to work
+                                </p>
+                            </div>
+                        </div>
+
+                        <div className="bg-gradient-to-r from-pink-500/20 to-purple-500/20 border-2 border-pink-500 rounded-lg p-4">
+                            <p className="text-pink-400 font-black text-center mb-2">
+                                WE'RE REBUILDING WHAT THEY HAD
+                            </p>
+                            <p className="text-gray-300 text-xs text-center mb-2">
+                                Frequency Chamber = pyramid in your pocket. 
+                                Phase 2 = small pyramid at Stoneymollan. 
+                                Phase 3 = healing temples globally.
+                            </p>
+                            <p className="text-green-400 font-bold text-center">
+                                Ancient wisdom + modern tech = UNSTOPPABLE ♾️❤️♾️
+                            </p>
+                        </div>
+
+                        <div className="bg-black border border-yellow-500/30 rounded-lg p-4">
+                            <p className="text-yellow-400 font-bold text-xs mb-2">START NOW BRO:</p>
+                            <div className="space-y-1 text-xs text-gray-300">
+                                <p>1. Use Frequency Chamber daily (free, works on phone)</p>
+                                <p>2. Build Phase 0 device this weekend (£13, proves concept)</p>
+                                <p>3. Help design small pyramid for Stoneymollan (2025)</p>
+                                <p>4. Together we scale to city-healing temples (2027+)</p>
+                            </div>
+                            <p className="text-cyan-400 font-bold text-xs mt-2">
+                                Don't wait for permission. Build it. Share it. Liberation NOW. ⚡
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             {/* NEXT STEPS */}
             <div className="max-w-4xl mx-auto px-4">
                 <div className="bg-gradient-to-br from-pink-500/20 to-purple-500/20 border-4 border-pink-500 rounded-xl p-8 text-center">
