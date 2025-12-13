@@ -17,112 +17,84 @@ export default function ScottWhiteLabel() {
     return (
         <div className="min-h-screen bg-black p-4 pb-32">
             
-            {/* HEADER - COOLASFUCK */}
+            {/* HEADER - SIMPLE */}
             <div className="mb-8">
-                <div className="bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 p-[3px] rounded-xl animate-pulse" style={{ boxShadow: '0 0 50px rgba(236, 72, 153, 0.6)' }}>
-                    <div className="bg-black rounded-xl p-6">
-                        <div className="flex items-center gap-4 mb-4">
-                            <div className="relative">
-                                <Kingdom51Crown8Bit size={56} animate={true} />
-                                <COOLASFUCKHeart className="absolute -top-2 -right-2 w-8 h-8 animate-pulse" />
-                            </div>
-                            <div>
-                                <h1 className="text-3xl font-black bg-gradient-to-r from-pink-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent mb-1" style={{ fontFamily: 'monospace' }}>
-                                    WHITE-LABEL
-                                </h1>
-                                <p className="text-pink-500 text-sm font-mono font-black">COOLASFUCK • WORKS NOW • LA READY</p>
-                            </div>
+                <div className="bg-black border-2 border-amber-500 rounded-xl p-6">
+                    <div className="flex items-center gap-4 mb-4">
+                        <Kingdom51Crown8Bit size={48} animate={false} />
+                        <div>
+                            <h1 className="text-2xl font-black text-amber-400 mb-1" style={{ fontFamily: 'monospace' }}>
+                                WHITE-LABEL CONFIG
+                            </h1>
+                            <p className="text-gray-400 text-sm font-mono">Show funders YOUR version</p>
                         </div>
+                    </div>
 
-                        <div className="bg-gradient-to-r from-pink-500/20 to-cyan-500/20 border-2 border-pink-500 p-4 rounded-lg mb-3">
-                            <div className="flex items-center gap-2 mb-2">
-                                <Zap className="w-5 h-5 text-pink-400" />
-                                <p className="text-pink-400 font-black text-sm">IT ACTUALLY WORKS - SCOTT USES IT DAILY</p>
-                            </div>
-                            <p className="text-gray-300 text-xs font-mono mb-2">
-                                12 artists • Tours • Contracts • Publishing • All offline • Zero bullshit ✓
-                            </p>
-                            <p className="text-cyan-400 text-xs font-mono font-bold">
-                                Not a concept. Not coming soon. LIVE NOW. ♾️❤️♾️
-                            </p>
-                        </div>
+                    <div className="bg-black border border-amber-500/30 rounded-lg p-4 mb-3">
+                        <p className="text-white text-sm font-mono mb-2">
+                            Scott uses this daily with 12 artists. Works offline. Zero forms.
+                        </p>
+                        <p className="text-gray-400 text-xs font-mono">
+                            Real tool → Real users → Ready to sell
+                        </p>
+                    </div>
 
-                        <div className="bg-amber-900/20 border border-amber-500/50 p-4 rounded-lg">
-                            <p className="text-amber-400 font-bold text-sm mb-2">💰 PRICING TIERS:</p>
-                            <ul className="text-gray-400 text-xs space-y-1 font-mono">
-                                <li>• £100/month - Solo managers (1-5 artists)</li>
-                                <li>• £300/month - Agencies (10-30 artists)</li>
-                                <li>• £2,000/month - Labels (unlimited + white-label)</li>
-                                <li className="text-pink-400 font-bold">• COOLASFUCK music distribution: Artists keep 90%</li>
-                                <li>• Crypto-secure, works offline, PDF exports</li>
-                            </ul>
-                        </div>
+                    <div className="bg-black border border-gray-800 rounded-lg p-4">
+                        <p className="text-amber-400 font-bold text-sm mb-2">PRICING:</p>
+                        <ul className="text-gray-400 text-xs space-y-1 font-mono">
+                            <li>• £100/month - Solo (1-5 artists)</li>
+                            <li>• £300/month - Agency (10-30 artists)</li>
+                            <li>• £2,000/month - Label (unlimited + your branding)</li>
+                        </ul>
                     </div>
                 </div>
             </div>
 
-            {/* TEMPLATE PREVIEWS - COOLASFUCK */}
+            {/* WHO IT'S FOR */}
             <div className="mb-6">
-                <h2 className="text-pink-400 font-black text-lg font-mono mb-4 flex items-center gap-2">
-                    <Palette className="w-6 h-6" />
-                    WHITE-LABEL TEMPLATES
-                </h2>
+                <h2 className="text-amber-400 font-black text-sm font-mono mb-4">WHO NEEDS THIS</h2>
 
-                {/* SOLO MANAGER */}
-                <div className="bg-gradient-to-br from-cyan-500/10 to-blue-500/10 border-2 border-cyan-500 rounded-xl p-4 mb-4">
-                    <div className="flex items-center gap-3 mb-3">
-                        <Music className="w-8 h-8 text-cyan-400" />
-                        <div>
-                            <p className="text-cyan-400 font-black font-mono">SOLO MANAGER</p>
-                            <p className="text-gray-500 text-xs font-mono">£100/month • 1-5 artists</p>
-                        </div>
+                {/* SOLO */}
+                <div className="bg-black border border-gray-800 rounded-lg p-4 mb-3">
+                    <div className="flex items-center justify-between mb-2">
+                        <p className="text-white font-bold font-mono text-sm">Solo Manager</p>
+                        <p className="text-gray-400 text-xs font-mono">£100/mo</p>
                     </div>
-                    <div className="bg-black border border-cyan-500/30 rounded-lg p-3 mb-2">
-                        <p className="text-white text-xs font-mono mb-2">"I manage 3 artists. No team. Just me, my phone, and this."</p>
-                        <p className="text-cyan-400 text-xs font-mono">✓ Offline calendar • Tasks • Quick invoices • Voice notes</p>
-                    </div>
-                    <p className="text-gray-400 text-xs font-mono">Perfect for: Independent managers, artist-managers, side hustlers</p>
+                    <p className="text-gray-400 text-xs font-mono mb-2">
+                        "I manage 3 artists. Just me and my phone. Works in the van with no signal."
+                    </p>
+                    <p className="text-gray-600 text-xs font-mono">
+                        Calendar • Tasks • Invoices • Voice notes
+                    </p>
                 </div>
 
                 {/* AGENCY */}
-                <div className="bg-gradient-to-br from-purple-500/10 to-pink-500/10 border-2 border-purple-500 rounded-xl p-4 mb-4">
-                    <div className="flex items-center gap-3 mb-3">
-                        <Users className="w-8 h-8 text-purple-400" />
-                        <div>
-                            <p className="text-purple-400 font-black font-mono">AGENCY</p>
-                            <p className="text-gray-500 text-xs font-mono">£300/month • 10-30 artists • Team sync</p>
-                        </div>
+                <div className="bg-black border border-gray-800 rounded-lg p-4 mb-3">
+                    <div className="flex items-center justify-between mb-2">
+                        <p className="text-white font-bold font-mono text-sm">Agency</p>
+                        <p className="text-gray-400 text-xs font-mono">£300/mo</p>
                     </div>
-                    <div className="bg-black border border-purple-500/30 rounded-lg p-3 mb-2">
-                        <p className="text-white text-xs font-mono mb-2">"Me + 2 assistants. 15 artists. We're on tour, no WiFi, still coordinated."</p>
-                        <p className="text-purple-400 text-xs font-mono">✓ P2P team sync • Shared calendar • Task delegation • Live updates</p>
-                    </div>
-                    <p className="text-gray-400 text-xs font-mono">Perfect for: Small agencies, tour managers, booking teams</p>
+                    <p className="text-gray-400 text-xs font-mono mb-2">
+                        "Me + 2 assistants managing 15 artists. We sync without WiFi."
+                    </p>
+                    <p className="text-gray-600 text-xs font-mono">
+                        Team coordination • Shared data • Real-time sync
+                    </p>
                 </div>
 
                 {/* LABEL */}
-                <div className="bg-gradient-to-br from-amber-500/10 to-orange-500/10 border-4 border-amber-500 rounded-xl p-4">
-                    <div className="flex items-center gap-3 mb-3">
-                        <Crown className="w-10 h-10 text-amber-400 animate-pulse" />
-                        <div>
-                            <p className="text-amber-400 font-black font-mono text-lg">LABEL (WHITE-LABEL)</p>
-                            <p className="text-gray-500 text-xs font-mono">£2,000/month • Unlimited • YOUR branding</p>
-                        </div>
+                <div className="bg-black border-2 border-amber-500 rounded-lg p-4">
+                    <div className="flex items-center justify-between mb-2">
+                        <p className="text-amber-400 font-bold font-mono text-sm">Label (White-Label)</p>
+                        <p className="text-amber-400 text-xs font-mono">£2k/mo</p>
                     </div>
-                    <div className="bg-black border border-amber-500/50 rounded-lg p-4 mb-3">
-                        <p className="text-white text-sm font-mono mb-3">"We're a label with 50 artists. We brand this as OURS. Our logo, our colors, our domain."</p>
-                        <div className="space-y-2 text-xs font-mono">
-                            <p className="text-amber-400">✓ biglabel.com/manager (your domain)</p>
-                            <p className="text-amber-400">✓ Your logo, colors, branding</p>
-                            <p className="text-amber-400">✓ Unlimited artists + team</p>
-                            <p className="text-pink-400 font-bold">✓ COOLASFUCK integration: Your artists upload, keep 90%, you take cut</p>
-                        </div>
-                    </div>
-                    <div className="bg-gradient-to-r from-pink-500/20 to-purple-500/20 border border-pink-500 rounded-lg p-3">
-                        <p className="text-pink-400 text-xs font-mono font-bold mb-1">THE FUTURE:</p>
-                        <p className="text-gray-300 text-xs font-mono">
-                            You sell KINGDOM51 as YOUR tool. Artists see YOUR brand. You keep revenue. We're infrastructure. ♾️❤️♾️
-                        </p>
+                    <p className="text-white text-xs font-mono mb-3">
+                        "We're a label. We want this branded as OURS. Our logo. Our domain. Our tool."
+                    </p>
+                    <div className="bg-black border border-amber-500/30 rounded p-3 space-y-1 text-xs font-mono">
+                        <p className="text-gray-400">✓ yourlabel.com (your domain)</p>
+                        <p className="text-gray-400">✓ Your branding everywhere</p>
+                        <p className="text-gray-400">✓ Unlimited artists + team</p>
                     </div>
                 </div>
             </div>
@@ -151,22 +123,14 @@ export default function ScottWhiteLabel() {
                         </p>
                     </div>
 
-                    <div className="bg-gradient-to-r from-cyan-500/20 to-pink-500/20 border-2 border-cyan-500 p-4 rounded-lg">
-                        <div className="flex items-center gap-2 mb-2">
-                            <Music className="w-5 h-5 text-cyan-400" />
-                            <p className="text-cyan-400 font-bold text-xs">THE DEMO (WORKS ON YOUR DEVICE):</p>
-                        </div>
-                        <ul className="text-gray-300 text-xs font-mono space-y-1">
-                            <li>1. Show them demo mode (tap above) ✓</li>
-                            <li>2. Navigate through 3 demo artists ✓</li>
-                            <li>3. Show calendar, tasks, invoices ✓</li>
-                            <li>4. Export PDF report LIVE ✓</li>
-                            <li>5. Turn on airplane mode - STILL WORKS ✓</li>
-                            <li className="text-pink-400 font-bold">6. Show COOLASFUCK - artists keep 90% ✓</li>
+                    <div className="bg-black border border-cyan-500 rounded-lg p-4">
+                        <p className="text-cyan-400 font-bold text-xs mb-2">HOW TO DEMO:</p>
+                        <ul className="text-gray-400 text-xs font-mono space-y-1">
+                            <li>1. Show demo mode (tap above)</li>
+                            <li>2. Navigate artists, calendar, tasks</li>
+                            <li>3. Export PDF live</li>
+                            <li>4. Turn on airplane mode - still works</li>
                         </ul>
-                        <p className="text-cyan-400 text-xs font-mono font-bold mt-2">
-                            Zero WiFi needed. Device-to-device. P2P mesh. COOLASFUCK. ♾️❤️♾️
-                        </p>
                     </div>
 
                     <div className="bg-black border border-pink-500/30 p-4 rounded-lg">
@@ -210,25 +174,17 @@ export default function ScottWhiteLabel() {
                 </div>
 
                 <div className="space-y-4 text-sm">
-                    <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-2 border-green-500 p-4 rounded-lg">
-                        <div className="flex items-center gap-2 mb-3">
-                            <COOLASFUCKWaves className="w-6 h-6 text-green-400" animate={true} />
-                            <p className="text-green-400 font-black text-sm">✓ LIVE RIGHT NOW - WORKING</p>
-                        </div>
-                        <ul className="text-gray-300 text-xs font-mono space-y-1">
-                            <li>• Offline storage (works in shed/van/plane) ✓</li>
-                            <li>• 12 real artists managed daily ✓</li>
-                            <li>• AI assistant (contracts, publishing help) ✓</li>
-                            <li>• PDF exports for accountants ✓</li>
-                            <li>• Demo mode (test with sample data) ✓</li>
-                            <li>• White-label branding (logo/colors) ✓</li>
-                            <li>• P2P mesh sync (team coordination offline) ✓</li>
-                            <li>• Voice commands + photo capture ✓</li>
-                            <li className="text-pink-400 font-bold">• COOLASFUCK integration (artists keep 90%) ✓</li>
+                    <div className="bg-black border border-green-500 rounded-lg p-4">
+                        <p className="text-green-400 font-bold text-xs mb-3">✓ WORKS NOW:</p>
+                        <ul className="text-gray-400 text-xs font-mono space-y-1">
+                            <li>• Works offline (shed/van/plane)</li>
+                            <li>• Scott uses it with 12 artists</li>
+                            <li>• AI help (contracts, publishing)</li>
+                            <li>• PDF exports</li>
+                            <li>• Demo mode</li>
+                            <li>• Team sync (no WiFi needed)</li>
+                            <li>• Voice + photo input</li>
                         </ul>
-                        <p className="text-green-400 text-xs font-mono font-bold mt-3">
-                            Not a pitch deck. REAL TOOL. REAL USERS. REAL REVENUE POTENTIAL. ♾️❤️♾️
-                        </p>
                     </div>
 
                     <div className="bg-black border border-amber-500/30 p-4 rounded-lg">
@@ -270,21 +226,18 @@ export default function ScottWhiteLabel() {
                 </div>
             </div>
 
-            {/* COOLASFUCK LINK */}
+            {/* MUSIC DISTRIBUTION */}
             <Link to={createPageUrl('ForMusicians')} className="block mb-4">
-                <div className="bg-gradient-to-r from-pink-500/20 to-purple-500/20 border-4 border-pink-500 p-6 rounded-xl" style={{ boxShadow: '0 0 50px rgba(236, 72, 153, 0.5)' }}>
-                    <div className="flex items-center gap-3 mb-3">
-                        <COOLASFUCKHeart className="w-10 h-10 text-pink-400 animate-pulse" />
-                        <div>
-                            <p className="text-pink-400 font-black text-xl font-mono">COOLASFUCK</p>
-                            <p className="text-gray-400 text-xs font-mono">Artists keep 90% • Zero extraction</p>
-                        </div>
+                <div className="bg-black border-2 border-pink-500 rounded-lg p-4">
+                    <div className="flex items-center gap-3 mb-2">
+                        <Music className="w-6 h-6 text-pink-400" />
+                        <p className="text-pink-400 font-bold font-mono text-sm">Music Distribution</p>
                     </div>
-                    <p className="text-gray-300 text-sm font-mono mb-2">
-                        White-label this too → Your artists upload directly, keep 90%, you take your cut ✓
+                    <p className="text-gray-400 text-xs font-mono mb-2">
+                        Add music uploads → Artists keep 90% → You take your cut
                     </p>
-                    <p className="text-pink-400 text-xs font-mono font-bold">
-                        KINGDOM51 + COOLASFUCK = Complete artist management + distribution ♾️❤️♾️
+                    <p className="text-gray-600 text-xs font-mono">
+                        Management + distribution in one tool
                     </p>
                 </div>
             </Link>
