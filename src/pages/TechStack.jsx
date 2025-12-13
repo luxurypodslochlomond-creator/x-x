@@ -96,7 +96,7 @@ export default function TechStack() {
                 { name: "Quantum Entanglement (exploring)", why: "Instant device sync beyond light speed" },
                 { name: "DNA Data Storage (future)", why: "1 zettabyte in 1 gram" },
                 { name: "Photonic Computing (future)", why: "Light-based, 1000x faster" },
-                { name: "Morphic Resonance", why: "Collective consciousness field" }
+                { name: "Morphic Resonance (Sheldrake)", why: "Self-organising systems pattern memory - NOT about healing frequencies, about how systems learn/remember structure" }
             ]
         }
     ];
