@@ -1097,8 +1097,9 @@ export default function ZeroPointEnergy() {
                                 <rect x="490" y="300" width="140" height="100" fill="#1e293b" stroke="#22c55e" strokeWidth="4" />
                                 <rect x="520" y="293" width="15" height="12" fill="#22c55e" />
                                 <rect x="565" y="293" width="15" height="12" fill="#22c55e" />
-                                <text x="560" y="340" textAnchor="middle" fill="#22c55e" fontSize="16" fontWeight="bold">12V BATTERY</text>
-                                <text x="560" y="365" textAnchor="middle" fill="#4ade80" fontSize="13">(stores power)</text>
+                                <text x="560" y="330" textAnchor="middle" fill="#22c55e" fontSize="15" fontWeight="bold">12V 100Ah</text>
+                                <text x="560" y="350" textAnchor="middle" fill="#fbbf24" fontSize="13" fontWeight="bold">1200Wh storage</text>
+                                <text x="560" y="370" textAnchor="middle" fill="#4ade80" fontSize="12">(~600W usable)</text>
                                 <text x="560" y="390" textAnchor="middle" fill="#4ade80" fontSize="14">£80</text>
 
                                 {/* Arrow left to devices */}
@@ -1147,8 +1148,44 @@ export default function ZeroPointEnergy() {
                                 </div>
                             </div>
 
+                            <div className="bg-cyan-500/20 border-2 border-cyan-500 rounded-lg p-4 mb-4">
+                                <p className="text-cyan-400 font-bold mb-2">⚡ BATTERY EXPLAINED:</p>
+                                <ul className="space-y-1 text-xs text-gray-300 ml-4">
+                                    <li>• <strong className="text-white">12V 100Ah</strong> = 1200 watt-hours (Wh) total capacity</li>
+                                    <li>• <strong className="text-yellow-400">Usable power</strong>: ~600Wh (don't drain below 50% = longer life)</li>
+                                    <li>• <strong className="text-green-400">Max watts</strong>: 600W continuous (can run laptop + lights + fan at once)</li>
+                                    <li>• <strong className="text-cyan-400">Recharge time</strong>: 4-6 hours full sun</li>
+                                    <li className="text-pink-400 font-bold">• Formula: Watts = Volts × Amps (12V × 50A = 600W max safe draw)</li>
+                                </ul>
+                            </div>
+
+                            <div className="bg-purple-500/20 border-2 border-purple-500 rounded-lg p-4 mb-4">
+                                <p className="text-purple-400 font-bold mb-2">🔋 INNOVATIVE ALTERNATIVES (CHEAPER):</p>
+                                <ul className="space-y-2 text-xs text-gray-300 ml-4">
+                                    <li>
+                                        <strong className="text-cyan-400">1. Car Battery (Used):</strong>
+                                        <p className="ml-4 text-gray-400">£20-40 from scrapyard. Same 12V. Slightly less capacity but WORKS ✓</p>
+                                    </li>
+                                    <li>
+                                        <strong className="text-green-400">2. DIY Battery Bank:</strong>
+                                        <p className="ml-4 text-gray-400">18650 cells from old laptops (FREE) + £15 holder = custom capacity</p>
+                                    </li>
+                                    <li>
+                                        <strong className="text-yellow-400">3. Gravity Battery (MENTAL):</strong>
+                                        <p className="ml-4 text-gray-400">Lift heavy weight when sun out → drops slowly at night → generates power. NO BATTERY NEEDED. Open source designs exist.</p>
+                                    </li>
+                                    <li>
+                                        <strong className="text-pink-400">4. Supercapacitor Bank:</strong>
+                                        <p className="ml-4 text-gray-400">Charges in seconds. Lasts 1 million cycles. £100 but worth it long-term.</p>
+                                    </li>
+                                </ul>
+                                <p className="text-cyan-400 font-bold text-xs mt-2">
+                                    = Innovation happens when you share what works. Try all. Document. Improve. ⚡
+                                </p>
+                            </div>
+
                             <div className="bg-cyan-500/20 border-2 border-cyan-500 rounded-lg p-4">
-                                <p className="text-cyan-400 font-bold mb-2">⚡ WHAT IT SAVES YOU:</p>
+                                <p className="text-cyan-400 font-bold mb-2">💰 WHAT IT SAVES YOU:</p>
                                 <ul className="space-y-1 text-xs text-gray-300 ml-4">
                                     <li>• Average UK energy bill: <span className="text-red-400 font-bold">£1,717/year</span></li>
                                     <li>• This setup covers: <span className="text-green-400 font-bold">~40% of usage</span> (lights, devices, laptop)</li>
