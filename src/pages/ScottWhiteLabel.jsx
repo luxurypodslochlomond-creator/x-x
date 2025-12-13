@@ -5,6 +5,7 @@ import { COOLASFUCKHeart, COOLASFUCKWaves } from '@/components/shared/COOLASFUCK
 import ScottWhiteLabelSettings from '@/components/scott/ScottWhiteLabelSettings';
 import ScottDemoMode from '@/components/scott/ScottDemoMode';
 import ScottPDFExport from '@/components/scott/ScottPDFExport';
+import ScottCasualDemo from '@/components/scott/ScottCasualDemo';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 
@@ -230,6 +231,15 @@ export default function ScottWhiteLabel() {
                         <p className="text-gray-400">✓ Unlimited artists + team</p>
                     </div>
                 </div>
+            </div>
+
+            {/* CASUAL DEMO - FOR SHOWING MATES */}
+            <div className="mb-6">
+                <h2 className="text-amber-400 font-black text-sm font-mono mb-3">SHOW YOUR MATES</h2>
+                <ScottCasualDemo />
+                <p className="text-gray-600 text-xs font-mono text-center">
+                    Tap through in pub/studio - they see THEIR version in 30 seconds
+                </p>
             </div>
 
             {/* DEMO MODE */}
