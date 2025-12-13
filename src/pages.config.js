@@ -201,6 +201,7 @@ import AI51Protection from './pages/AI51Protection';
 import P2PFoodRescue from './pages/P2PFoodRescue';
 import ScottWhiteLabel from './pages/ScottWhiteLabel';
 import ScottPitchMode from './pages/ScottPitchMode';
+import ScottBiggerVision from './pages/ScottBiggerVision';
 import __Layout from './Layout.jsx';
 
 
@@ -408,6 +409,7 @@ export const PAGES = {
     "P2PFoodRescue": P2PFoodRescue,
     "ScottWhiteLabel": ScottWhiteLabel,
     "ScottPitchMode": ScottPitchMode,
+    "ScottBiggerVision": ScottBiggerVision,
 }
 
 export const pagesConfig = {

@@ -609,6 +609,19 @@ function ScottManagerInner() {
                 <ScottFamilyCredit />
             </div>
 
+            {/* BIGGER VISION */}
+            <Link to={createPageUrl('ScottBiggerVision')} className="block mb-6">
+                <div className="bg-gradient-to-r from-cyan-500/20 to-green-500/20 border-2 border-cyan-500 p-4 rounded-xl">
+                    <div className="flex items-center gap-3 mb-2">
+                        <Globe className="w-6 h-6 text-cyan-400" />
+                        <p className="text-cyan-400 font-black text-sm font-mono">BIGGER THAN MUSIC</p>
+                    </div>
+                    <p className="text-gray-400 text-xs font-mono">
+                        Sports • Talent • Property • Events - same tool, 5+ industries
+                    </p>
+                </div>
+            </Link>
+
             {/* BRANDED PITCH MODE */}
             <Link to={createPageUrl('ScottPitchMode')} className="block mb-6">
                 <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-4 border-purple-500 p-4 rounded-xl" style={{ boxShadow: '0 0 40px rgba(168, 85, 247, 0.5)' }}>
