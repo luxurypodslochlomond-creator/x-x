@@ -637,10 +637,6 @@ function ScottManagerInner() {
                         <Camera className="w-5 h-5 text-amber-400 mx-auto mb-1" />
                         <p className="text-[9px] text-gray-600 font-bold" style={{ fontFamily: 'monospace' }}>MEDIA</p>
                     </Link>
-                    <Link to={createPageUrl('ScottWhiteLabel')} className="bg-black border-2 border-pink-500/50 hover:border-pink-500 rounded-lg p-3 text-center transition-all">
-                        <Palette className="w-5 h-5 text-pink-400 mx-auto mb-1" />
-                        <p className="text-[9px] text-gray-600 font-bold" style={{ fontFamily: 'monospace' }}>LA PITCH</p>
-                    </Link>
                 </div>
             </div>
 
