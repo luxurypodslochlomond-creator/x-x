@@ -312,6 +312,72 @@ export default function QuantumPayments() {
                 </div>
             </div>
 
+            {/* DIRECT FUNDING - NO EXTRACTION */}
+            <div className="bg-gradient-to-br from-green-500/20 to-cyan-500/20 border-4 border-green-500 p-6 rounded-xl mb-8">
+                <Globe className="w-12 h-12 text-green-400 mb-4" />
+                <h2 className="text-green-400 font-black text-xl font-mono mb-4">DIRECT FUNDING MODEL</h2>
+                
+                <div className="space-y-4 text-sm font-mono">
+                    <p className="text-white font-bold mb-2">
+                        This same infrastructure = funders can pay DIRECTLY, zero extraction:
+                    </p>
+
+                    <div className="bg-black border border-green-500/30 p-4 rounded">
+                        <p className="text-green-400 font-bold mb-2">CREATIVE SCOTLAND → UF51:</p>
+                        <ul className="text-gray-300 space-y-1 text-xs">
+                            <li>✓ £100k grant → quantum-signed transaction</li>
+                            <li>✓ Zero bank fees (no intermediaries)</li>
+                            <li>✓ Cryptographic proof of payment</li>
+                            <li>✓ Instant (not 5-day bank transfer)</li>
+                            <li>✓ Auditable forever (immutable ledger)</li>
+                        </ul>
+                    </div>
+
+                    <div className="bg-black border border-cyan-500/30 p-4 rounded">
+                        <p className="text-cyan-400 font-bold mb-2">INVESTORS → KINGDOM51:</p>
+                        <ul className="text-gray-300 space-y-1 text-xs">
+                            <li>✓ Angel/VC funding via P2P</li>
+                            <li>✓ No Stripe/PayPal taking 3%</li>
+                            <li>✓ Works offline (shed/festival/anywhere)</li>
+                            <li>✓ Quantum-proof (future-resistant)</li>
+                        </ul>
+                    </div>
+
+                    <div className="bg-black border border-purple-500/30 p-4 rounded">
+                        <p className="text-purple-400 font-bold mb-2">COMMUNITY → ARTISTS:</p>
+                        <ul className="text-gray-300 space-y-1 text-xs">
+                            <li>✓ Fans support artists directly</li>
+                            <li>✓ Artists keep 100% (not 90%)</li>
+                            <li>✓ No platform extraction</li>
+                            <li>✓ Love frequency validated</li>
+                        </ul>
+                    </div>
+
+                    <div className="bg-gradient-to-r from-pink-500/20 to-green-500/20 border-2 border-pink-500 p-4 rounded mt-4">
+                        <p className="text-pink-400 font-bold mb-2">THE FUNDING UNLOCK:</p>
+                        <p className="text-gray-300 text-xs mb-2">
+                            "Where does the money go?" = THE question that blocks funding
+                        </p>
+                        <p className="text-green-400 text-xs mb-2">
+                            Quantum payments = cryptographic proof of EVERY transaction
+                        </p>
+                        <p className="text-cyan-400 text-xs font-bold">
+                            → Funders see exactly where £ goes, zero extraction arguments, zero trust issues ✓
+                        </p>
+                    </div>
+
+                    <div className="bg-black border border-amber-500/30 p-4 rounded">
+                        <p className="text-amber-400 font-bold mb-2">SWITZERLAND (🇨🇭) VIBES:</p>
+                        <p className="text-gray-300 text-xs mb-2">
+                            Swiss banks trusted because = secure, neutral, auditable
+                        </p>
+                        <p className="text-cyan-400 text-xs font-bold">
+                            Quantum + Love = MORE secure than Swiss banks, works offline, zero extraction ♾️❤️♾️
+                        </p>
+                    </div>
+                </div>
+            </div>
+
             {/* BACK BUTTON */}
             <Link to={createPageUrl('ScottBiggerVision')}>
                 <button className="w-full py-3 bg-purple-600 hover:bg-purple-700 text-white font-black font-mono rounded-xl transition-all mb-4">
