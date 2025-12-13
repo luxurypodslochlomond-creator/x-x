@@ -67,12 +67,15 @@ Focus on: Base44 platform updates, quantum computing breakthroughs, AI developme
     });
 
     const quickScouts = [
-        { label: "Base44 Updates", query: "Base44 platform latest updates features releases" },
-        { label: "Quantum Computing", query: "Quantum computing breakthroughs post-quantum cryptography SPHINCS+" },
-        { label: "AI Developments", query: "AI developments GPT-5 on-device AI LLMs privacy" },
-        { label: "WebAssembly", query: "WebAssembly WASM audio processing performance improvements" },
-        { label: "P2P Tech", query: "P2P peer-to-peer WebRTC mesh networking offline-first" },
-        { label: "IPFS/Storage", query: "IPFS decentralized storage web3 storage improvements" }
+        { label: "🔥 WebAssembly Audio", query: "WebAssembly WASM audio processing performance 50% latency reduction real-time" },
+        { label: "🛡️ Quantum Crypto", query: "Quantum computing post-quantum cryptography SPHINCS+ lattice-based" },
+        { label: "🎵 Web Audio API", query: "Web Audio API improvements AudioWorklet spatial audio binaural" },
+        { label: "🌐 P2P Mesh", query: "WebRTC mesh networking P2P offline-first sync CRDT" },
+        { label: "💾 IPFS Updates", query: "IPFS decentralized storage pinning performance improvements" },
+        { label: "📱 PWA Features", query: "Progressive Web Apps offline-first service workers background sync" },
+        { label: "🤖 AI in Browser", query: "On-device AI WebGPU WASM ML models browser inference" },
+        { label: "🎧 Audio Codecs", query: "FLAC lossless audio codec streaming Opus AAC browser support" },
+        { label: "⚡ Base44 Platform", query: "Base44 platform updates features React TypeScript latest" }
     ];
 
     const runCustomScout = () => {
@@ -109,16 +112,28 @@ Focus on: Base44 platform updates, quantum computing breakthroughs, AI developme
 
                 {/* QUICK SCOUTS */}
                 <div className="mb-8">
-                    <h2 className="text-xl font-black text-cyan-400 mb-4">QUICK SCOUTS</h2>
+                    <div className="flex items-center justify-between mb-4">
+                        <h2 className="text-xl font-black text-cyan-400">PRIORITY SCOUTS</h2>
+                        <button
+                            onClick={() => {
+                                quickScouts.forEach((scout) => {
+                                    setTimeout(() => scoutMutation.mutate(scout.query), Math.random() * 1000);
+                                });
+                            }}
+                            disabled={scoutMutation.isPending}
+                            className="bg-pink-500 hover:bg-pink-600 text-white font-bold px-4 py-2 rounded-lg transition-all disabled:opacity-50 text-sm"
+                        >
+                            🚀 RUN ALL
+                        </button>
+                    </div>
                     <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                         {quickScouts.map((scout) => (
                             <button
                                 key={scout.label}
                                 onClick={() => scoutMutation.mutate(scout.query)}
                                 disabled={scoutMutation.isPending}
-                                className="bg-black border-2 border-cyan-500/50 hover:border-cyan-500 rounded-lg p-4 transition-all disabled:opacity-50"
+                                className="bg-black border-2 border-cyan-500/50 hover:border-cyan-500 rounded-lg p-4 transition-all disabled:opacity-50 text-left"
                             >
-                                <Sparkles className="w-5 h-5 text-cyan-400 mb-2" />
                                 <p className="text-white text-sm font-bold">{scout.label}</p>
                             </button>
                         ))}
