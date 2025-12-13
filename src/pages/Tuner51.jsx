@@ -538,8 +538,9 @@ export default function Tuner51() {
                                 </div>
                             )}
                         </div>
-                    </div>
+                    </motion.div>
                 )}
+                </AnimatePresence>
 
                 {/* INFO */}
                 <div className="mt-8 bg-black border-2 border-gray-700 rounded-xl p-6">
