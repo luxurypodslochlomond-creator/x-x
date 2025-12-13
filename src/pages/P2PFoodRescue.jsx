@@ -847,15 +847,67 @@ export default function P2PFoodRescue() {
                 </div>
             </div>
 
+            {/* VERIFIED CIC */}
+            <div className="max-w-4xl mx-auto mb-8 px-4">
+                <div className="bg-gradient-to-br from-green-500/20 to-cyan-500/20 border-2 border-green-500/50 rounded-xl p-6">
+                    <div className="flex items-center gap-3 mb-4">
+                        <motion.div
+                            animate={{ rotate: 360 }}
+                            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                        >
+                            <Heart className="w-8 h-8 text-green-400" />
+                        </motion.div>
+                        <h2 className="text-2xl font-black text-white">VERIFIED COMMUNITY INTEREST COMPANY</h2>
+                    </div>
+
+                    <div className="space-y-3 text-gray-200 text-sm">
+                        <div className="bg-black border border-green-500/30 rounded-lg p-4">
+                            <ul className="space-y-2 text-xs text-gray-300">
+                                <li className="flex items-start gap-2">
+                                    <span className="text-green-400">✓</span>
+                                    <span><strong className="text-white">UF51 CIC:</strong> Registered November 2025, Companies House verified</span>
+                                </li>
+                                <li className="flex items-start gap-2">
+                                    <span className="text-green-400">✓</span>
+                                    <span><strong className="text-white">Asset lock:</strong> Profits MUST go to social good. Extraction = illegal.</span>
+                                </li>
+                                <li className="flex items-start gap-2">
+                                    <span className="text-green-400">✓</span>
+                                    <span><strong className="text-white">Open source:</strong> Code will be public. Anyone can verify. Zero secrets.</span>
+                                </li>
+                                <li className="flex items-start gap-2">
+                                    <span className="text-green-400">✓</span>
+                                    <span><strong className="text-white">Zero extraction forever:</strong> Built into legal structure. Can't be changed.</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border border-green-500/50 rounded-lg p-4">
+                            <p className="text-green-400 font-black text-center mb-2">
+                                NOT A STARTUP. A MOVEMENT.
+                            </p>
+                            <p className="text-gray-300 text-xs text-center">
+                                Community Interest Company = legally bound to serve humanity. This is tech for good. Verified. Real. ♾️❤️♾️
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             {/* FOOTER */}
             <div className="max-w-4xl mx-auto px-4">
                 <div className="bg-black border-2 border-white/20 rounded-xl p-6 text-center">
                     <p className="text-gray-400 text-xs font-mono mb-2">
-                        Concept by UF51 • Free forever • Share with world
+                        UF51 Community Interest Company • Registered November 2025 • Free Forever
                     </p>
-                    <p className="text-cyan-400 text-sm font-black">
+                    <p className="text-cyan-400 text-sm font-black mb-3">
                         ♾️❤️♾️ LOVE TO DERMID FOR SPARKING THIS ♾️❤️♾️
                     </p>
+                    <div className="flex items-center justify-center gap-4 text-xs text-gray-500">
+                        <span>scott@uf51.love</span>
+                        <span>•</span>
+                        <span>family@uf51.love</span>
+                    </div>
                 </div>
             </div>
 

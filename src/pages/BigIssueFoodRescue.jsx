@@ -545,14 +545,16 @@ Submitted: ${new Date().toLocaleString()}
             <div className="max-w-4xl mx-auto px-4">
                 <div className="bg-black border-2 border-red-500/30 rounded-xl p-6 text-center">
                     <p className="text-gray-400 text-xs font-mono mb-2">
-                        UF51 Community Interest Company • Zero Extraction Forever
+                        UF51 Community Interest Company • Registered November 2025 • Zero Extraction Forever
                     </p>
                     <p className="text-red-400 text-sm font-black mb-3">
                         ♾️❤️♾️ LET'S FEED PEOPLE, NOT BINS ♾️❤️♾️
                     </p>
-                    <p className="text-gray-500 text-xs">
-                        Questions? Email: scott@uf51.love
-                    </p>
+                    <div className="flex items-center justify-center gap-4 text-xs text-gray-500">
+                        <span>scott@uf51.love</span>
+                        <span>•</span>
+                        <span>family@uf51.love</span>
+                    </div>
                 </div>
             </div>
 
