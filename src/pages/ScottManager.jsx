@@ -189,7 +189,7 @@ function ScottManagerInner() {
                                 </h1>
                                 <p className="text-[9px] text-amber-500/80 tracking-widest uppercase font-bold flex items-center gap-1" style={{ fontFamily: 'monospace' }}>
                                     <span className={scott.isOnline ? 'text-green-400' : 'text-amber-400'}>●</span> 
-                                    {scott.isOnline ? 'ONLINE' : 'OFFLINE'} • CO-MANAGER
+                                    {scott.isOnline ? 'ONLINE' : 'OFFLINE'} • HANDLES EVERYTHING
                                 </p>
                             </div>
                         </div>
@@ -268,7 +268,7 @@ function ScottManagerInner() {
                                 <p className="text-2xl font-black bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-400 bg-clip-text text-transparent mb-1" style={{ fontFamily: 'monospace' }}>
                                     KINGDOM51 AI
                                 </p>
-                                <p className="text-amber-500/80 text-xs font-bold tracking-wider font-mono">YOUR CO-MANAGER • ALWAYS ON</p>
+                                <p className="text-amber-500/80 text-xs font-bold tracking-wider font-mono">HANDLES EVERYTHING • ALWAYS ON</p>
                             </div>
                         </div>
 
