@@ -30,6 +30,7 @@ import ScottSampleTools from '@/components/scott/ScottSampleTools';
 import ScottP51Converter from '@/components/scott/ScottP51Converter';
 import ScottFamilyCredit from '@/components/scott/ScottFamilyCredit';
 import ScottP2PSync from '@/components/scott/ScottP2PSync';
+import ScottDailySupport from '@/components/scott/ScottDailySupport';
 
 /**
  * SCOTT'S ARTIST/CLIENT MANAGER
@@ -169,6 +170,9 @@ function ScottManagerInner() {
         <ScottBrainDump />
         <ScottTestMode />
         <ScottFeatureRequest />
+
+        {/* DAILY SUPPORT - ALWAYS VISIBLE */}
+        <ScottDailySupport />
 
 
 
