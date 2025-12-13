@@ -1035,7 +1035,7 @@ export default function ZeroPointEnergy() {
                 <div className="bg-gradient-to-br from-cyan-500/20 to-green-500/20 border-4 border-cyan-500 rounded-xl p-6">
                     <div className="flex items-center gap-3 mb-4">
                         <Zap className="w-8 h-8 text-cyan-400 animate-pulse" />
-                        <h2 className="text-2xl font-black text-white">OFF-GRID POWER FOR STONEYMOLLAN (DIAGRAMS)</h2>
+                        <h2 className="text-2xl font-black text-white">OFF-GRID POWER SETUP (DIAGRAMS)</h2>
                     </div>
 
                     <div className="space-y-6 text-gray-200 text-sm">
@@ -1095,7 +1095,7 @@ export default function ZeroPointEnergy() {
                                 <polygon points="230,220 150,280 310,280" fill="#991b1b" stroke="#dc2626" strokeWidth="2" />
                                 <rect x="200" y="290" width="25" height="35" fill="#422006" />
                                 <rect x="235" y="280" width="30" height="25" fill="#0c4a6e" stroke="#0ea5e9" strokeWidth="1" />
-                                <text x="230" y="360" textAnchor="middle" fill="#ea580c" fontSize="11" fontWeight="bold">STONEYMOLLAN</text>
+                                <text x="230" y="360" textAnchor="middle" fill="#ea580c" fontSize="11" fontWeight="bold">YOUR HOME</text>
 
                                 {/* Arrow battery to house */}
                                 <line x1="380" y1="275" x2="285" y2="275" stroke="#fbbf24" strokeWidth="3" />
@@ -1238,7 +1238,7 @@ export default function ZeroPointEnergy() {
 
                         {/* DIAGRAM 3: PYRAMID RESONANCE CHAMBER */}
                         <div className="bg-black border border-pink-500/30 rounded-lg p-6">
-                            <p className="text-pink-400 font-bold text-lg mb-4 text-center">3. PYRAMID RESONANCE CHAMBER (STONEYMOLLAN SHED)</p>
+                            <p className="text-pink-400 font-bold text-lg mb-4 text-center">3. PYRAMID RESONANCE CHAMBER (YOUR SHED)</p>
 
                             <svg viewBox="0 0 500 400" className="w-full max-w-xl mx-auto mb-4">
                                 {/* Pyramid structure */}
@@ -1291,7 +1291,7 @@ export default function ZeroPointEnergy() {
 
                             <div className="space-y-3">
                                 <div className="bg-pink-500/20 border border-pink-500/50 rounded p-3">
-                                    <p className="text-pink-400 font-bold text-xs mb-2">BUILD IN STONEYMOLLAN SHED:</p>
+                                    <p className="text-pink-400 font-bold text-xs mb-2">BUILD IN YOUR SHED/GARDEN:</p>
                                     <ul className="space-y-1 text-xs text-gray-300 ml-4">
                                         <li>• 2m x 2m wooden frame (£80)</li>
                                         <li>• Cover with copper mesh (£60) OR aluminum foil (£15)</li>
@@ -2073,7 +2073,7 @@ export default function ZeroPointEnergy() {
                         </div>
 
                         <p className="text-yellow-400 font-black text-xl mt-6">
-                            FROM STONEYMOLLAN TO THE STARS ♾️❤️♾️
+                            FROM YOUR SHED TO THE STARS ♾️❤️♾️
                         </p>
                     </div>
                 </div>
