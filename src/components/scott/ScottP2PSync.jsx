@@ -3,16 +3,18 @@ import { Wifi, WifiOff, Radio, Users, Video, Mic, Phone, Brain } from 'lucide-re
 import { base44 } from '@/api/base44Client';
 
 /**
- * P2P MESH SYNC + AUDIO/VIDEO FOR KINGDOM51
- * WebRTC = real-time sync, voice/video calls OFFLINE
- * AI51 listens to calls, gives contract/deal advice live
+ * P2P MESH SYNC + AUDIO/VIDEO FOR KINGDOM51 TEAMS
+ * Your whole crew stays connected - no server, no internet needed
  * 
- * USE CASES:
- * - Label with 10 managers in office → all sync + can video call
- * - Desert festival → no internet but can call other manager tent
- * - Negotiating deal on call → AI51 listens, whispers advice
- * - "Should I take this deal?" → AI51 analyzes live, shows comparable deals
- * - Trade $P51 credits P2P during call
+ * TEAM USE CASES:
+ * - Scott + 5 crew members at festival → all synced, can call anyone
+ * - Tour manager in van, stage manager at venue → instant video call
+ * - Negotiating deal → AI51 listens, team can join to help
+ * - Desert festival → zero internet, full team comms working
+ * - Share artist updates → everyone sees instantly
+ * - Trade $P51 credits between team P2P
+ * 
+ * ALWAYS THERE FOR THE TEAM ❤️
  */
 
 export default function ScottP2PSync() {
@@ -25,10 +27,25 @@ export default function ScottP2PSync() {
     const [ai51Listening, setAi51Listening] = useState(false);
     const [ai51Advice, setAi51Advice] = useState(null);
     const [mediaStream, setMediaStream] = useState(null);
+    const [myName, setMyName] = useState('');
+    const [showNameInput, setShowNameInput] = useState(false);
 
     useEffect(() => {
+        // Load saved name
+        const savedName = localStorage.getItem('kingdom51_team_name');
+        if (savedName) {
+            setMyName(savedName);
+        } else {
+            setShowNameInput(true);
+        }
         initP2PMesh();
     }, []);
+
+    const saveName = (name) => {
+        localStorage.setItem('kingdom51_team_name', name);
+        setMyName(name);
+        setShowNameInput(false);
+    };
 
     const initP2PMesh = async () => {
         try {
@@ -55,15 +72,18 @@ export default function ScottP2PSync() {
         const channel = new BroadcastChannel('kingdom51_mesh');
 
         channel.onmessage = (event) => {
-            const { type, data, from } = event.data;
+            const { type, data, from, name } = event.data;
 
             if (type === 'peer_announce' && from !== id) {
                 // New peer joined
                 setPeers(prev => {
-                    if (!prev.find(p => p.id === from)) {
-                        return [...prev, { id: from, lastSeen: Date.now() }];
+                    const existing = prev.find(p => p.id === from);
+                    if (!existing) {
+                        return [...prev, { id: from, name: name || 'Team Member', lastSeen: Date.now() }];
+                    } else {
+                        // Update last seen
+                        return prev.map(p => p.id === from ? { ...p, lastSeen: Date.now(), name: name || p.name } : p);
                     }
-                    return prev;
                 });
             }
 
@@ -73,21 +93,21 @@ export default function ScottP2PSync() {
             }
         };
 
-        // Announce presence
-        channel.postMessage({
-            type: 'peer_announce',
-            from: id,
-            timestamp: Date.now()
-        });
-
-        // Keep announcing every 5s
-        setInterval(() => {
+        // Announce presence with name
+        const announcePresence = () => {
+            const savedName = localStorage.getItem('kingdom51_team_name');
             channel.postMessage({
                 type: 'peer_announce',
                 from: id,
+                name: savedName || 'Team Member',
                 timestamp: Date.now()
             });
-        }, 5000);
+        };
+
+        announcePresence();
+
+        // Keep announcing every 5s
+        setInterval(announcePresence, 5000);
 
         setMeshActive(true);
 
@@ -201,6 +221,24 @@ export default function ScottP2PSync() {
 
     return (
         <div className="bg-gradient-to-r from-cyan-500/20 to-green-500/20 border-2 border-cyan-500 p-4 mb-6">
+            {/* NAME INPUT */}
+            {showNameInput && (
+                <div className="bg-black border-2 border-amber-500 p-4 mb-4 rounded-lg">
+                    <p className="text-amber-400 font-bold text-sm font-mono mb-3">YOUR NAME (FOR TEAM):</p>
+                    <input
+                        type="text"
+                        placeholder="Scott / Tour Manager / etc"
+                        className="w-full bg-black border-2 border-amber-500/50 text-white px-3 py-2 font-mono text-sm mb-3"
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter' && e.target.value.trim()) {
+                                saveName(e.target.value.trim());
+                            }
+                        }}
+                    />
+                    <p className="text-gray-500 text-xs font-mono">So your team knows who's connected</p>
+                </div>
+            )}
+
             {/* ACTIVE CALL */}
             {inCall && (
                 <div className="bg-black border-2 border-green-500 p-4 mb-4 rounded-lg">
@@ -258,9 +296,9 @@ export default function ScottP2PSync() {
                         <WifiOff className="w-6 h-6 text-gray-600" />
                     )}
                     <div>
-                        <p className="text-cyan-400 font-black text-sm font-mono">P2P MESH + CALLS</p>
+                        <p className="text-cyan-400 font-black text-sm font-mono">TEAM MESH + CALLS</p>
                         <p className="text-gray-400 text-xs font-mono">
-                            {meshActive ? 'LIVE' : 'OFFLINE'} • {peers.length} peer{peers.length !== 1 ? 's' : ''}
+                            {meshActive ? '✓ CONNECTED' : 'OFFLINE'} • {myName && <span className="text-cyan-400">{myName}</span>}
                         </p>
                     </div>
                 </div>
@@ -277,27 +315,45 @@ export default function ScottP2PSync() {
 
             {meshActive && !inCall && (
                 <div className="bg-black border border-cyan-500/30 rounded p-3 space-y-3">
-                    <div className="flex items-center gap-2 text-xs">
-                        <Users className="w-4 h-4 text-green-400" />
-                        <span className="text-green-400 font-mono font-bold">
-                            Connected: {peers.length} {peers.length === 1 ? 'manager' : 'managers'}
-                        </span>
+                    <div className="flex items-center justify-between text-xs">
+                        <div className="flex items-center gap-2">
+                            <Users className="w-4 h-4 text-green-400" />
+                            <span className="text-green-400 font-mono font-bold">
+                                YOUR TEAM: {peers.length} online
+                            </span>
+                        </div>
+                        {myName && (
+                            <button
+                                onClick={() => setShowNameInput(true)}
+                                className="text-gray-500 hover:text-cyan-400 text-xs font-mono"
+                            >
+                                Change name
+                            </button>
+                        )}
                     </div>
                     
-                    {/* CALL BUTTONS */}
-                    {peers.length > 0 && (
+                    {/* TEAM ROSTER + CALL BUTTONS */}
+                    {peers.length > 0 ? (
                         <div className="space-y-2">
-                            <p className="text-cyan-400 font-bold text-xs font-mono">AVAILABLE TO CALL:</p>
+                            <p className="text-cyan-400 font-bold text-xs font-mono">TEAM AVAILABLE:</p>
                             {peers.map(peer => (
                                 <button
                                     key={peer.id}
-                                    onClick={() => startCall(peer.id)}
-                                    className="w-full flex items-center justify-between p-2 bg-green-900/30 border border-green-500/50 hover:border-green-500 rounded transition-all"
+                                    onClick={() => startCall(peer.name || peer.id)}
+                                    className="w-full flex items-center justify-between p-2 bg-green-900/30 border border-green-500/50 hover:border-green-500 rounded transition-all group"
                                 >
-                                    <span className="text-white text-xs font-mono">{peer.id.slice(0, 15)}...</span>
-                                    <Phone className="w-4 h-4 text-green-400" />
+                                    <div className="flex items-center gap-2">
+                                        <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+                                        <span className="text-white text-sm font-mono font-bold">{peer.name || 'Team Member'}</span>
+                                    </div>
+                                    <Phone className="w-4 h-4 text-green-400 group-hover:scale-110 transition-transform" />
                                 </button>
                             ))}
+                        </div>
+                    ) : (
+                        <div className="bg-amber-900/20 border border-amber-500/50 p-3 rounded">
+                            <p className="text-amber-400 text-xs font-mono">No team members connected yet</p>
+                            <p className="text-gray-500 text-xs font-mono mt-1">They'll appear here when they open the app</p>
                         </div>
                     )}
                     
@@ -308,11 +364,12 @@ export default function ScottP2PSync() {
                     )}
 
                     <div className="text-xs text-gray-400 font-mono space-y-1 pt-2 border-t border-gray-800">
-                        <p>✓ Real-time artist/event updates</p>
+                        <p className="text-cyan-400 font-bold mb-1">ALWAYS THERE FOR THE TEAM:</p>
+                        <p>✓ Real-time sync (everyone sees updates)</p>
                         <p>✓ Voice/video calls OFFLINE</p>
-                        <p>✓ AI51 listens + gives advice</p>
-                        <p>✓ Works at festivals (no internet)</p>
-                        <p>✓ Trade $P51 credits P2P</p>
+                        <p>✓ AI51 listens + helps with deals</p>
+                        <p>✓ Works at festivals (zero internet)</p>
+                        <p>✓ Trade $P51 credits between crew</p>
                     </div>
                 </div>
             )}
