@@ -1039,9 +1039,129 @@ export default function ZeroPointEnergy() {
                     </div>
 
                     <div className="space-y-6 text-gray-200 text-sm">
+                        {/* MOST EFFICIENT HOME SETUP */}
+                        <div className="bg-gradient-to-br from-green-500/20 to-cyan-500/20 border-4 border-green-500 rounded-xl p-6">
+                            <p className="text-green-400 font-bold text-xl mb-2 text-center">⚡ MOST EFFICIENT HOME SETUP ⚡</p>
+                            <p className="text-cyan-400 text-sm mb-4 text-center">Start small, scale up. Pay once, power forever.</p>
+
+                            <svg viewBox="0 0 700 500" className="w-full max-w-3xl mx-auto mb-6">
+                                {/* Sun */}
+                                <circle cx="100" cy="80" r="40" fill="#fbbf24" stroke="#f59e0b" strokeWidth="3" />
+                                <text x="100" y="140" textAnchor="middle" fill="#fbbf24" fontSize="16" fontWeight="bold">FREE SUN</text>
+
+                                {/* Arrow sun to panel */}
+                                <motion.line
+                                    x1="140" y1="90" x2="220" y2="140"
+                                    stroke="#fbbf24" strokeWidth="4"
+                                    strokeDasharray="8,8"
+                                    animate={{ strokeDashoffset: [0, -16] }}
+                                    transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                                />
+                                <polygon points="220,140 210,133 213,145" fill="#fbbf24" />
+
+                                {/* Solar Panel with specs */}
+                                <rect x="240" y="120" width="180" height="120" fill="#1e3a8a" stroke="#3b82f6" strokeWidth="4" />
+                                <line x1="250" y1="140" x2="410" y2="140" stroke="#60a5fa" strokeWidth="2" />
+                                <line x1="250" y1="160" x2="410" y2="160" stroke="#60a5fa" strokeWidth="2" />
+                                <line x1="250" y1="180" x2="410" y2="180" stroke="#60a5fa" strokeWidth="2" />
+                                <line x1="250" y1="200" x2="410" y2="200" stroke="#60a5fa" strokeWidth="2" />
+                                <line x1="250" y1="220" x2="410" y2="220" stroke="#60a5fa" strokeWidth="2" />
+                                <text x="330" y="260" textAnchor="middle" fill="#3b82f6" fontSize="18" fontWeight="bold">200W SOLAR</text>
+                                <text x="330" y="280" textAnchor="middle" fill="#60a5fa" fontSize="14">£150</text>
+
+                                {/* Arrow panel to controller */}
+                                <motion.line
+                                    x1="420" y1="180" x2="490" y2="180"
+                                    stroke="#10b981" strokeWidth="4"
+                                    animate={{ x1: [420, 440], x2: [490, 470] }}
+                                    transition={{ duration: 0.8, repeat: Infinity, repeatType: "reverse" }}
+                                />
+                                <polygon points="490,180 480,175 480,185" fill="#10b981" />
+
+                                {/* Charge Controller */}
+                                <rect x="500" y="140" width="120" height="80" fill="#065f46" stroke="#10b981" strokeWidth="3" />
+                                <text x="560" y="175" textAnchor="middle" fill="#10b981" fontSize="14" fontWeight="bold">CONTROLLER</text>
+                                <text x="560" y="195" textAnchor="middle" fill="#34d399" fontSize="12">(protects battery)</text>
+                                <text x="560" y="235" textAnchor="middle" fill="#34d399" fontSize="13">£30</text>
+
+                                {/* Arrow down to battery */}
+                                <motion.line
+                                    x1="560" y1="220" x2="560" y2="290"
+                                    stroke="#10b981" strokeWidth="4"
+                                    animate={{ y1: [220, 240], y2: [290, 270] }}
+                                    transition={{ duration: 0.8, repeat: Infinity, repeatType: "reverse" }}
+                                />
+                                <polygon points="560,290 555,280 565,280" fill="#10b981" />
+
+                                {/* Battery */}
+                                <rect x="490" y="300" width="140" height="100" fill="#1e293b" stroke="#22c55e" strokeWidth="4" />
+                                <rect x="520" y="293" width="15" height="12" fill="#22c55e" />
+                                <rect x="565" y="293" width="15" height="12" fill="#22c55e" />
+                                <text x="560" y="340" textAnchor="middle" fill="#22c55e" fontSize="16" fontWeight="bold">12V BATTERY</text>
+                                <text x="560" y="365" textAnchor="middle" fill="#4ade80" fontSize="13">(stores power)</text>
+                                <text x="560" y="390" textAnchor="middle" fill="#4ade80" fontSize="14">£80</text>
+
+                                {/* Arrow left to devices */}
+                                <motion.line
+                                    x1="490" y1="350" x2="340" y2="350"
+                                    stroke="#fbbf24" strokeWidth="4"
+                                    animate={{ x1: [490, 470], x2: [340, 360] }}
+                                    transition={{ duration: 0.8, repeat: Infinity, repeatType: "reverse" }}
+                                />
+                                <polygon points="340,350 350,345 350,355" fill="#fbbf24" />
+
+                                {/* Your Home with devices */}
+                                <rect x="50" y="300" width="280" height="150" fill="#7c2d12" stroke="#ea580c" strokeWidth="3" />
+                                <polygon points="190,270 20,315 360,315" fill="#991b1b" stroke="#dc2626" strokeWidth="2" />
+                                <text x="190" y="290" textAnchor="middle" fill="#fbbf24" fontSize="16" fontWeight="bold">⚡ POWERS ⚡</text>
+
+                                {/* Device list inside house */}
+                                <text x="70" y="340" fill="#fbbf24" fontSize="13" fontWeight="bold">💡 8 LED lights</text>
+                                <text x="70" y="360" fill="#60a5fa" fontSize="13" fontWeight="bold">📱 Phone charging</text>
+                                <text x="70" y="380" fill="#10b981" fontSize="13" fontWeight="bold">💻 Laptop (6 hrs)</text>
+                                <text x="70" y="400" fill="#ec4899" fontSize="13" fontWeight="bold">📺 Small TV (3 hrs)</text>
+                                <text x="70" y="420" fill="#a855f7" fontSize="13" fontWeight="bold">🌀 Fan / Router</text>
+
+                                {/* Total cost banner */}
+                                <rect x="150" y="460" width="400" height="35" fill="#10b981" stroke="#22c55e" strokeWidth="3" rx="5" />
+                                <text x="350" y="483" textAnchor="middle" fill="white" fontSize="20" fontWeight="bold">TOTAL: £260 → FREE POWER FOREVER</text>
+                            </svg>
+
+                            <div className="bg-black border-2 border-green-500 rounded-lg p-4 mb-4">
+                                <p className="text-green-400 font-bold text-center mb-3">💰 COST BREAKDOWN:</p>
+                                <div className="grid grid-cols-2 gap-2 text-xs">
+                                    <div className="text-gray-300">200W Solar Panel:</div>
+                                    <div className="text-green-400 font-bold text-right">£150</div>
+
+                                    <div className="text-gray-300">12V Battery (100Ah):</div>
+                                    <div className="text-green-400 font-bold text-right">£80</div>
+
+                                    <div className="text-gray-300">Charge Controller:</div>
+                                    <div className="text-green-400 font-bold text-right">£30</div>
+
+                                    <div className="text-gray-300">Cables + connectors:</div>
+                                    <div className="text-green-400 font-bold text-right">£15</div>
+
+                                    <div className="border-t border-green-500/30 pt-2 text-white font-bold">TOTAL:</div>
+                                    <div className="border-t border-green-500/30 pt-2 text-green-400 font-black text-lg text-right">£275</div>
+                                </div>
+                            </div>
+
+                            <div className="bg-cyan-500/20 border-2 border-cyan-500 rounded-lg p-4">
+                                <p className="text-cyan-400 font-bold mb-2">⚡ WHAT IT SAVES YOU:</p>
+                                <ul className="space-y-1 text-xs text-gray-300 ml-4">
+                                    <li>• Average UK energy bill: <span className="text-red-400 font-bold">£1,717/year</span></li>
+                                    <li>• This setup covers: <span className="text-green-400 font-bold">~40% of usage</span> (lights, devices, laptop)</li>
+                                    <li>• Saves you: <span className="text-green-400 font-bold">£686/year</span></li>
+                                    <li className="text-yellow-400 font-bold">• Pays for itself in: 5 months ✓</li>
+                                    <li className="text-cyan-400 font-bold">• Then FREE power for 25+ years (panel lifetime)</li>
+                                </ul>
+                            </div>
+                        </div>
+
                         {/* DIAGRAM 1: BASIC OFF-GRID SETUP */}
                         <div className="bg-black border border-cyan-500/30 rounded-lg p-6">
-                            <p className="text-cyan-400 font-bold text-lg mb-4 text-center">1. BASIC OFF-GRID SETUP (YOUR HOME)</p>
+                            <p className="text-cyan-400 font-bold text-lg mb-4 text-center">ALTERNATIVE: STARTER SETUP (CHEAPER)</p>
 
                             <svg viewBox="0 0 600 400" className="w-full max-w-2xl mx-auto mb-4">
                                 {/* Sun */}
