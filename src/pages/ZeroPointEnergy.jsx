@@ -1467,6 +1467,126 @@ export default function ZeroPointEnergy() {
                 </div>
             </div>
 
+            {/* HOW TESLA CALCULATED RESONANCE - THE FORMULA */}
+            <div className="max-w-4xl mx-auto mb-8 px-4">
+                <div className="bg-gradient-to-br from-yellow-500/20 to-orange-500/20 border-4 border-yellow-500 rounded-xl p-6">
+                    <div className="flex items-center gap-3 mb-4">
+                        <Lightbulb className="w-8 h-8 text-yellow-400" />
+                        <h2 className="text-2xl font-black text-white">HOW TESLA CALCULATED IT (THE MATHS)</h2>
+                    </div>
+
+                    <div className="space-y-4 text-gray-200 text-sm">
+                        <div className="bg-black border border-yellow-500/30 rounded-lg p-6">
+                            <p className="text-yellow-400 font-bold text-lg mb-4 text-center">THE FORMULA:</p>
+                            
+                            <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-2 border-purple-500 rounded-lg p-6 mb-4">
+                                <p className="text-5xl font-mono text-center text-white mb-4">
+                                    f = 1 / (2π√LC)
+                                </p>
+                                <div className="space-y-2 text-sm text-gray-300">
+                                    <p>• <strong className="text-white">f</strong> = resonant frequency (Hz)</p>
+                                    <p>• <strong className="text-white">L</strong> = inductance of coil (Henries)</p>
+                                    <p>• <strong className="text-white">C</strong> = capacitance (Farads)</p>
+                                    <p>• <strong className="text-white">π</strong> = 3.14159...</p>
+                                </div>
+                            </div>
+
+                            <div className="bg-cyan-500/20 border border-cyan-500/50 rounded-lg p-4">
+                                <p className="text-cyan-400 font-bold mb-2">REAL EXAMPLE (EASY):</p>
+                                <div className="space-y-2 text-xs text-gray-300 font-mono">
+                                    <p>Say you have:</p>
+                                    <p className="ml-4">• L = 0.001 H (1 millihenry coil)</p>
+                                    <p className="ml-4">• C = 0.00001 F (10 microfarad capacitor)</p>
+                                    <p className="mt-3">f = 1 / (2 × 3.14 × √(0.001 × 0.00001))</p>
+                                    <p className="mt-2">f = 1 / (6.28 × √0.00000001)</p>
+                                    <p className="mt-2">f = 1 / (6.28 × 0.0001)</p>
+                                    <p className="mt-2 text-green-400 font-bold text-lg">f = 1,592 Hz ✓</p>
+                                    <p className="mt-3 text-white">That's the EXACT frequency to power your circuit at maximum efficiency!</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="bg-black border border-green-500/30 rounded-lg p-4">
+                            <p className="text-green-400 font-bold text-xs mb-3">HOW TO SMOOTHLY TUNE TO RESONANCE:</p>
+                            
+                            <div className="space-y-3">
+                                <div className="bg-black/60 p-3 rounded border-l-4 border-cyan-400">
+                                    <p className="text-cyan-400 font-bold mb-1">METHOD 1 - SWEEP (EASIEST):</p>
+                                    <ol className="text-xs space-y-1 ml-4 list-decimal">
+                                        <li>Start at LOW frequency (e.g., 100 Hz)</li>
+                                        <li>SLOWLY increase frequency (100 → 200 → 300...)</li>
+                                        <li>Watch LED brightness or meter reading</li>
+                                        <li>When brightness PEAKS = you hit resonance ✓</li>
+                                        <li>Fine-tune around that frequency for maximum power</li>
+                                    </ol>
+                                    <p className="text-green-400 font-bold text-xs mt-2">= You FEEL/SEE when you hit it (light gets brightest)</p>
+                                </div>
+
+                                <div className="bg-black/60 p-3 rounded border-l-4 border-purple-400">
+                                    <p className="text-purple-400 font-bold mb-1">METHOD 2 - CALCULATE THEN TEST:</p>
+                                    <ol className="text-xs space-y-1 ml-4 list-decimal">
+                                        <li>Use formula: f = 1/(2π√LC) to predict frequency</li>
+                                        <li>Set your power source to that frequency</li>
+                                        <li>Adjust ±10% if not perfect (coils vary slightly)</li>
+                                        <li>Lock in when power output maximizes</li>
+                                    </ol>
+                                    <p className="text-cyan-400 font-bold text-xs mt-2">= Maths gets you 90% there, testing gets you to 100%</p>
+                                </div>
+
+                                <div className="bg-black/60 p-3 rounded border-l-4 border-pink-400">
+                                    <p className="text-pink-400 font-bold mb-1">METHOD 3 - LISTEN (TESLA'S WAY):</p>
+                                    <p className="text-xs text-gray-300 mb-2">
+                                        Tesla used SOUND. At resonance, coils HUM at a specific pitch. 
+                                        He'd tune by EAR until the sound was loudest/clearest. 
+                                        Human hearing = natural frequency detector ✓
+                                    </p>
+                                    <p className="text-green-400 font-bold text-xs">You can literally HEAR when you hit resonance 🎵</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-2 border-green-500 rounded-lg p-4">
+                            <p className="text-green-400 font-black text-center mb-2">
+                                WHY SMOOTH TUNING MATTERS:
+                            </p>
+                            <p className="text-gray-300 text-xs text-center mb-2">
+                                Jump from 100Hz to 1000Hz = you might MISS the resonance peak (say it's at 543Hz). 
+                                Sweep slowly = you CATCH every frequency, see exactly where resonance happens.
+                            </p>
+                            <p className="text-cyan-400 font-bold text-center">
+                                Slow sweep = guaranteed to find resonance. Fast jump = might miss it. ⚡
+                            </p>
+                        </div>
+
+                        <div className="bg-black border border-purple-500/30 rounded-lg p-4">
+                            <p className="text-purple-400 font-bold text-xs mb-2">VISUAL - WHAT YOU'LL SEE:</p>
+                            <div className="space-y-2 text-xs text-gray-300 font-mono">
+                                <p>100 Hz → LED dim 💡</p>
+                                <p>200 Hz → LED dim 💡</p>
+                                <p>500 Hz → LED brighter 💡✨</p>
+                                <p>540 Hz → LED BRIGHTEST 💡✨✨✨ ← RESONANCE!</p>
+                                <p>545 Hz → LED dimmer 💡✨</p>
+                                <p>600 Hz → LED dim 💡</p>
+                                <p className="mt-3 text-green-400 font-bold">That peak at 540Hz = perfect resonance = maximum amplification ✓</p>
+                            </div>
+                        </div>
+
+                        <div className="bg-gradient-to-r from-cyan-500/20 to-green-500/20 border-2 border-cyan-500 rounded-lg p-4">
+                            <p className="text-cyan-400 font-black text-center mb-2">
+                                FOR PHASE 0 (£13 DEVICE):
+                            </p>
+                            <p className="text-white text-center mb-2">
+                                You don't tune it - it automatically captures whatever ambient frequency is there. 
+                                Just build it, leave it outside, LED glows. SIMPLE ✓
+                            </p>
+                            <p className="text-green-400 font-bold text-center">
+                                Phase 1+ = you learn to TUNE for specific frequencies (that's when formula matters) ♾️❤️♾️
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             {/* WHY NOT USE RESONANCE CHAMBERS NOW */}
             <div className="max-w-4xl mx-auto mb-8 px-4">
                 <div className="bg-gradient-to-br from-purple-500/20 to-pink-500/20 border-4 border-purple-500 rounded-xl p-6">
