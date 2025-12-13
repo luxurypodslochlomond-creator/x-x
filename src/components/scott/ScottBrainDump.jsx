@@ -99,13 +99,14 @@ export default function ScottBrainDump() {
                             </button>
                         </div>
 
-                        <p className="text-xs text-gray-600 font-mono mb-3">Just dump it here bro, I'll sort it</p>
+                        <p className="text-sm text-gray-400 font-mono mb-3">Just dump it here bro, I'll sort it</p>
 
                         <textarea
                             value={thought}
                             onChange={(e) => setThought(e.target.value)}
                             placeholder="Type or speak..."
-                            className="w-full bg-black border border-purple-500/30 rounded p-2 text-white text-sm font-mono h-24 resize-none focus:border-purple-500 focus:outline-none"
+                            className="w-full bg-black border border-purple-500/30 rounded p-3 text-white text-base font-mono h-32 resize-none focus:border-purple-500 focus:outline-none"
+                            style={{ color: '#ffffff' }}
                         />
 
                         <div className="flex items-center gap-2 mt-3">
