@@ -198,6 +198,7 @@ import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import UnstoppableProtocol from './pages/UnstoppableProtocol';
 import StayOnFrequency from './pages/StayOnFrequency';
 import AI51Protection from './pages/AI51Protection';
+import P2PFoodRescue from './pages/P2PFoodRescue';
 import __Layout from './Layout.jsx';
 
 
@@ -402,6 +403,7 @@ export const PAGES = {
     "UnstoppableProtocol": UnstoppableProtocol,
     "StayOnFrequency": StayOnFrequency,
     "AI51Protection": AI51Protection,
+    "P2PFoodRescue": P2PFoodRescue,
 }
 
 export const pagesConfig = {
