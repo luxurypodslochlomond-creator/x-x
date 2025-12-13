@@ -7,7 +7,7 @@ import { createPageUrl } from '@/utils';
 /**
  * ZERO POINT ENERGY RESEARCH
  * Real physics, real experiments, real liberation
- * Starting with what YOU can build safely at Stoneymollan
+ * Starting with what YOU can build safely at home
  * Then scaling to world-changing tech
  * 
  * For BRO51 - let's do this together ♾️❤️♾️
@@ -45,10 +45,8 @@ export default function ZeroPointEnergy() {
                         Real physics. Safe experiments. Free energy for all.
                     </p>
                     
-                    <div className="flex items-center justify-center gap-3 text-yellow-400 text-sm">
-                        <Heart className="w-5 h-5 animate-pulse" />
-                        <span className="font-mono font-bold">FROM STONEYMOLLAN TO THE WORLD</span>
-                        <Heart className="w-5 h-5 animate-pulse" />
+                    <div className="text-center">
+                        <span className="font-mono font-bold text-cyan-400 text-sm">Tesla's dream. Your reality. ⚡</span>
                     </div>
                 </motion.div>
             </div>
@@ -487,7 +485,7 @@ export default function ZeroPointEnergy() {
                             <div className="bg-black border border-green-500/30 rounded-lg p-4">
                                 <div className="flex items-center gap-2 mb-3">
                                     <CheckCircle className="w-5 h-5 text-green-400" />
-                                    <p className="text-green-400 font-bold text-sm">PHASE 1: SAFE STONEYMOLLAN EXPERIMENTS</p>
+                                    <p className="text-green-400 font-bold text-sm">PHASE 1: SAFE HOME EXPERIMENTS</p>
                                 </div>
 
                                 <div className="space-y-3 text-xs text-gray-300">
@@ -515,7 +513,7 @@ export default function ZeroPointEnergy() {
                                     <div className="bg-green-500/20 border border-green-500/50 rounded p-3 mt-3">
                                         <p className="text-green-400 font-bold mb-1">GOAL:</p>
                                         <p>Prove resonance works. Measure real frequencies. Build confidence. Document everything.</p>
-                                        <p className="text-yellow-400 font-bold mt-2">Timeline: 2-4 weeks at Stoneymollan shed ✓</p>
+                                        <p className="text-yellow-400 font-bold mt-2">Timeline: 2-4 weeks in your shed ✓</p>
                                     </div>
                                 </div>
                             </div>
@@ -694,7 +692,7 @@ export default function ZeroPointEnergy() {
                                 <span className="text-green-400 font-black text-2xl">£103</span>
                             </div>
                             <p className="text-gray-300 text-xs mt-2">
-                                Everything you need to start at Stoneymollan. Safe experiments. Real physics. Real learning.
+                            Everything you need to start at home. Safe experiments. Real physics. Real learning.
                             </p>
                         </div>
                     </div>
@@ -2262,7 +2260,7 @@ export default function ZeroPointEnergy() {
                             <div className="space-y-2 text-xs text-gray-300">
                                 <p className="text-white font-bold mb-2">YES - but scaled appropriately:</p>
                                 <ul className="space-y-1 ml-4">
-                                    <li>• <strong className="text-white">Phase 1:</strong> Small pyramid (2m tall) in Stoneymollan = meditation chamber</li>
+                                    <li>• <strong className="text-white">Phase 1:</strong> Small pyramid (2m tall) in your shed = meditation chamber</li>
                                     <li>• <strong className="text-white">Phase 2:</strong> Community healing dome (10m) = group sessions</li>
                                     <li>• <strong className="text-white">Phase 3:</strong> Full-scale resonance chamber (50m+) = city-wide healing</li>
                                 </ul>
@@ -2278,7 +2276,7 @@ export default function ZeroPointEnergy() {
                             </p>
                             <p className="text-gray-300 text-xs text-center mb-2">
                                 Frequency Chamber = pyramid in your pocket. 
-                                Phase 2 = small pyramid at Stoneymollan. 
+                                Phase 2 = small pyramid at home. 
                                 Phase 3 = healing temples globally.
                             </p>
                             <p className="text-green-400 font-bold text-center">
