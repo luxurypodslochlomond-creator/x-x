@@ -203,7 +203,6 @@ import ScottWhiteLabel from './pages/ScottWhiteLabel';
 import ScottPitchMode from './pages/ScottPitchMode';
 import ScottBiggerVision from './pages/ScottBiggerVision';
 import QuantumPayments from './pages/QuantumPayments';
-import LiechtensteinModel from './pages/LiechtensteinModel';
 import GlobalCurrencyBridge from './pages/GlobalCurrencyBridge';
 import DirectFundingRoutes from './pages/DirectFundingRoutes';
 import FrequencyBridge from './pages/FrequencyBridge';
@@ -422,7 +421,6 @@ export const PAGES = {
     "ScottPitchMode": ScottPitchMode,
     "ScottBiggerVision": ScottBiggerVision,
     "QuantumPayments": QuantumPayments,
-    "LiechtensteinModel": LiechtensteinModel,
     "GlobalCurrencyBridge": GlobalCurrencyBridge,
     "DirectFundingRoutes": DirectFundingRoutes,
     "FrequencyBridge": FrequencyBridge,
