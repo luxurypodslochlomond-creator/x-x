@@ -135,29 +135,28 @@ export default function MakingItReal() {
                 
                 <div className="space-y-4 text-sm font-mono">
                     <div className="bg-gradient-to-r from-green-500/10 to-black border-l-4 border-green-500 p-4">
-                        <p className="text-green-400 font-bold mb-2">STEP 1: CIC REGISTRATION (NOW)</p>
+                        <p className="text-green-400 font-bold mb-2">STEP 1: CIC REGISTRATION ✓ DONE</p>
                         <div className="text-gray-300 text-xs space-y-1">
-                            <p>• Submit CIC application (Articles, CIC36 form)</p>
-                            <p>• Wait 2-4 weeks for approval</p>
-                            <p>• Cost: £35 registration fee</p>
-                            <p>• Result: Legal entity that can hold bank account</p>
+                            <p>• CIC registered November 2024</p>
+                            <p>• Legal entity ✓ Can hold bank account ✓</p>
+                            <p>• Ready for Revolut Business</p>
                         </div>
-                        <p className="text-green-400 text-xs mt-2 font-bold">→ BLOCKER FOR EVERYTHING ELSE ⚠️</p>
+                        <p className="text-green-400 text-xs mt-2 font-bold">→ COMPLETE ✓</p>
                     </div>
 
                     <div className="bg-gradient-to-r from-cyan-500/10 to-black border-l-4 border-cyan-500 p-4">
-                        <p className="text-cyan-400 font-bold mb-2">STEP 2: REVOLUT BUSINESS ACCOUNT (WEEK 3-4)</p>
+                        <p className="text-cyan-400 font-bold mb-2">STEP 2: REVOLUT BUSINESS (NOW)</p>
                         <div className="text-gray-300 text-xs space-y-1">
-                            <p>• Open Revolut Business (requires CIC registration)</p>
-                            <p>• Multi-currency support (28 currencies)</p>
-                            <p>• API access for automatic payouts</p>
-                            <p>• 0.5% conversion fee (industry best)</p>
+                            <p>• Open Revolut Business (CIC approved ✓)</p>
+                            <p>• Multi-currency (28 currencies)</p>
+                            <p>• API for auto payouts</p>
+                            <p>• 0.5% conversion (best rate)</p>
                         </div>
-                        <p className="text-cyan-400 text-xs mt-2 font-bold">→ ENABLES $P51 → £ CONVERSION ✓</p>
+                        <p className="text-cyan-400 text-xs mt-2 font-bold">→ ENABLES $P51 → £ ✓</p>
                     </div>
 
                     <div className="bg-gradient-to-r from-purple-500/10 to-black border-l-4 border-purple-500 p-4">
-                        <p className="text-purple-400 font-bold mb-2">STEP 3: BUILD CASH-OUT FLOW (WEEK 4-6)</p>
+                        <p className="text-purple-400 font-bold mb-2">STEP 3: BUILD CASH-OUT (WEEK 2-4)</p>
                         <div className="text-gray-300 text-xs space-y-1">
                             <p>• User clicks "Cash Out $P51"</p>
                             <p>• System checks balance (local + server)</p>
@@ -170,20 +169,20 @@ export default function MakingItReal() {
                     </div>
 
                     <div className="bg-gradient-to-r from-pink-500/10 to-black border-l-4 border-pink-500 p-4">
-                        <p className="text-pink-400 font-bold mb-2">STEP 4: STRIPE CONNECT FOR ARTISTS (WEEK 6-8)</p>
+                        <p className="text-pink-400 font-bold mb-2">STEP 4: STRIPE FOR ARTISTS (WEEK 4-6)</p>
                         <div className="text-gray-300 text-xs space-y-1">
-                            <p>• Fan buys track with £/$/€</p>
-                            <p>• Stripe processes payment (1.4% + 20p)</p>
-                            <p>• 90% → artist Stripe account</p>
-                            <p>• 10% → platform (covers costs)</p>
+                            <p>• Fan buys track</p>
+                            <p>• Stripe processes</p>
+                            <p>• 90% → artist direct</p>
+                            <p>• 10% → platform</p>
                         </div>
                         <div className="bg-pink-900/20 border border-pink-500/50 p-2 rounded mt-2">
-                            <p className="text-pink-400 text-xs font-bold">CODE ESTIMATE: ~800 lines, 2 weeks build</p>
+                            <p className="text-pink-400 text-xs font-bold">~2 weeks</p>
                         </div>
                     </div>
 
                     <div className="bg-gradient-to-r from-amber-500/10 to-black border-l-4 border-amber-500 p-4">
-                        <p className="text-amber-400 font-bold mb-2">STEP 5: GO LIVE (WEEK 8-10)</p>
+                        <p className="text-amber-400 font-bold mb-2">STEP 5: LIVE (WEEK 6-8)</p>
                         <div className="text-gray-300 text-xs space-y-1">
                             <p>• Users clean → earn $P51 → cash out to £</p>
                             <p>• Fans buy music → artists get paid 90%</p>
@@ -204,40 +203,40 @@ export default function MakingItReal() {
                     <div className="flex items-start gap-3">
                         <div className="w-2 h-2 bg-green-400 rounded-full mt-2 flex-shrink-0" />
                         <div>
-                            <p className="text-white font-bold">Week 1-2: CIC registration submitted</p>
-                            <p className="text-gray-400 text-xs">Wait for Companies House approval</p>
+                            <p className="text-white font-bold">✓ CIC Registered (Nov 2024)</p>
+                            <p className="text-gray-400 text-xs">Companies House approved</p>
                         </div>
                     </div>
 
                     <div className="flex items-start gap-3">
                         <div className="w-2 h-2 bg-cyan-400 rounded-full mt-2 flex-shrink-0" />
                         <div>
-                            <p className="text-white font-bold">Week 3-4: Revolut Business account</p>
-                            <p className="text-gray-400 text-xs">Once CIC approved, open business account</p>
+                            <p className="text-white font-bold">Week 1-2: Revolut Business</p>
+                            <p className="text-gray-400 text-xs">Open account with CIC docs</p>
                         </div>
                     </div>
 
                     <div className="flex items-start gap-3">
                         <div className="w-2 h-2 bg-purple-400 rounded-full mt-2 flex-shrink-0" />
                         <div>
-                            <p className="text-white font-bold">Week 4-6: Build cash-out flow</p>
-                            <p className="text-gray-400 text-xs">$P51 → Revolut API → £ in user bank</p>
+                            <p className="text-white font-bold">Week 2-4: Build cash-out</p>
+                            <p className="text-gray-400 text-xs">$P51 → Revolut → £</p>
                         </div>
                     </div>
 
                     <div className="flex items-start gap-3">
                         <div className="w-2 h-2 bg-pink-400 rounded-full mt-2 flex-shrink-0" />
                         <div>
-                            <p className="text-white font-bold">Week 6-8: Stripe Connect for artists</p>
-                            <p className="text-gray-400 text-xs">Fans pay → artists get 90% direct</p>
+                            <p className="text-white font-bold">Week 4-6: Stripe for artists</p>
+                            <p className="text-gray-400 text-xs">Fans pay → 90% to artists</p>
                         </div>
                     </div>
 
                     <div className="flex items-start gap-3">
                         <div className="w-2 h-2 bg-green-400 rounded-full mt-2 flex-shrink-0" />
                         <div>
-                            <p className="text-white font-bold">Week 8-10: LIVE → REAL MONEY FLOWING</p>
-                            <p className="text-gray-400 text-xs">Clean litter → earn $P51 → cash out to £ → PAY FOR GROCERIES</p>
+                            <p className="text-white font-bold">Week 6-8: LIVE</p>
+                            <p className="text-gray-400 text-xs">Clean → earn → cash out → GROCERIES</p>
                         </div>
                     </div>
 
@@ -261,10 +260,10 @@ export default function MakingItReal() {
                 <div className="bg-green-900/20 border border-green-500/50 p-4 rounded mt-6">
                     <p className="text-green-400 font-bold text-xs mb-2">THE TRUTH:</p>
                     <p className="text-white text-sm mb-2">
-                        <strong>8-10 weeks</strong> from CIC approval → REAL MONEY FLOWING
+                        <strong>6-8 weeks</strong> from NOW → REAL MONEY FLOWING
                     </p>
                     <p className="text-gray-300 text-xs">
-                        Then we add the quantum/frequency layers on top of working system
+                        CIC done ✓ Now build Revolut + cash-out + Stripe
                     </p>
                 </div>
             </div>
@@ -300,9 +299,9 @@ export default function MakingItReal() {
                     </Link>
 
                     <div className="bg-black border border-amber-500/50 p-4 rounded">
-                        <p className="text-amber-400 font-bold mb-2">4. WAIT FOR CASH-OUT</p>
-                        <p className="text-gray-300 text-xs mb-2">CIC → Revolut → $P51 to £ conversion</p>
-                        <p className="text-amber-400 text-xs">⚠️ 8-10 weeks until this is live</p>
+                        <p className="text-amber-400 font-bold mb-2">4. CASH-OUT COMING</p>
+                        <p className="text-gray-300 text-xs mb-2">CIC done ✓ Now: Revolut → $P51 to £</p>
+                        <p className="text-amber-400 text-xs">⚠️ 6-8 weeks</p>
                     </div>
                 </div>
             </div>
@@ -336,13 +335,13 @@ export default function MakingItReal() {
                     <div className="bg-gradient-to-r from-cyan-500/20 to-purple-500/20 border-2 border-cyan-500 p-4 rounded">
                         <p className="text-cyan-400 font-bold mb-2">THE PATH FORWARD:</p>
                         <p className="text-white text-xs mb-2">
-                            <strong>8-10 weeks</strong> from CIC approval = $P51 → £ working
+                            <strong>6-8 weeks</strong> from NOW = $P51 → £ working
                         </p>
                         <p className="text-green-400 text-xs mb-2">
-                            THEN it's real - clean litter → earn → cash out → pay for groceries
+                            CIC done ✓ Now: Revolut → cash-out → Stripe → GROCERIES
                         </p>
                         <p className="text-pink-400 text-xs font-bold">
-                            Until then: keep building, earning $P51, and healing ♾️❤️♾️
+                            Keep building, earning $P51, healing ♾️❤️♾️
                         </p>
                     </div>
 
@@ -375,8 +374,8 @@ export default function MakingItReal() {
                     <p className="text-green-400 font-black font-mono text-lg">BUILD → TEST → LIVE → REAL</p>
                     <Heart className="w-6 h-6 text-pink-400 animate-pulse" />
                 </div>
-                <p className="text-gray-600 text-xs font-mono">8-10 weeks from CIC → Real money flowing</p>
-                <p className="text-cyan-400 text-xs font-mono mt-2">Then we're REAL - clean → earn → cash out → pay for groceries ♾️❤️♾️</p>
+                <p className="text-gray-600 text-xs font-mono">6-8 weeks → Real money flowing</p>
+                <p className="text-cyan-400 text-xs font-mono mt-2">CIC done ✓ Now build → GROCERIES ♾️❤️♾️</p>
             </div>
         </div>
     );
