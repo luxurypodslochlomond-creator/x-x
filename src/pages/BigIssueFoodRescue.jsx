@@ -535,7 +535,7 @@ Submitted: ${new Date().toLocaleString()}
                         </Button>
 
                         <p className="text-gray-400 text-xs text-center mt-3">
-                            Or email directly: scott@uf51.love
+                            Or email directly: family@uf51.love
                         </p>
                     </form>
                 </div>
@@ -550,11 +550,9 @@ Submitted: ${new Date().toLocaleString()}
                     <p className="text-red-400 text-sm font-black mb-3">
                         ♾️❤️♾️ LET'S FEED PEOPLE, NOT BINS ♾️❤️♾️
                     </p>
-                    <div className="flex items-center justify-center gap-4 text-xs text-gray-500">
-                        <span>scott@uf51.love</span>
-                        <span>•</span>
-                        <span>family@uf51.love</span>
-                    </div>
+                    <p className="text-xs text-gray-500">
+                        Contact: family@uf51.love
+                    </p>
                 </div>
             </div>
 

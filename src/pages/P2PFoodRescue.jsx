@@ -903,11 +903,9 @@ export default function P2PFoodRescue() {
                     <p className="text-cyan-400 text-sm font-black mb-3">
                         ♾️❤️♾️ LOVE TO DERMID FOR SPARKING THIS ♾️❤️♾️
                     </p>
-                    <div className="flex items-center justify-center gap-4 text-xs text-gray-500">
-                        <span>scott@uf51.love</span>
-                        <span>•</span>
-                        <span>family@uf51.love</span>
-                    </div>
+                    <p className="text-xs text-gray-500">
+                        Contact: family@uf51.love
+                    </p>
                 </div>
             </div>
 
