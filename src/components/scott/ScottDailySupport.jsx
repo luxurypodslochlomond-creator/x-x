@@ -186,7 +186,7 @@ export default function ScottDailySupport() {
                                         <button
                                             key={i}
                                             onClick={() => handleAction(action.action)}
-                                            className={`w-full bg-black border-2 border-${selected.color}-500/50 hover:border-${selected.color}-500 rounded-lg p-4 transition-all text-left`}
+                                            className="w-full bg-black border-2 border-pink-500/50 hover:border-pink-500 rounded-lg p-4 transition-all text-left"
                                         >
                                             <p className="text-white font-bold text-sm font-mono">{action.label}</p>
                                         </button>
