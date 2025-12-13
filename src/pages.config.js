@@ -219,6 +219,7 @@ import ConsciousnessPhysics from './pages/ConsciousnessPhysics';
 import BigIssueFoodRescue from './pages/BigIssueFoodRescue';
 import DimensionsExplained from './pages/DimensionsExplained';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
+import Tuner51 from './pages/Tuner51';
 import __Layout from './Layout.jsx';
 
 
@@ -444,6 +445,7 @@ export const PAGES = {
     "BigIssueFoodRescue": BigIssueFoodRescue,
     "DimensionsExplained": DimensionsExplained,
     "ZeroPointEnergy": ZeroPointEnergy,
+    "Tuner51": Tuner51,
 }
 
 export const pagesConfig = {
