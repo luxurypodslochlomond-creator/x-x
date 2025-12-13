@@ -2370,6 +2370,205 @@ export default function ZeroPointEnergy() {
                 </div>
             </div>
 
+            {/* HOW TO MEASURE FREQUENCY - PRACTICAL */}
+            <div className="max-w-4xl mx-auto mb-8 px-4">
+                <div className="bg-gradient-to-br from-cyan-500/20 to-blue-500/20 border-4 border-cyan-500 rounded-xl p-6">
+                    <div className="flex items-center gap-3 mb-4">
+                        <Zap className="w-8 h-8 text-cyan-400" />
+                        <h2 className="text-2xl font-black text-white">HOW TO KNOW + MEASURE FREQUENCY (REAL METHODS)</h2>
+                    </div>
+
+                    <div className="space-y-4 text-gray-200 text-sm">
+                        
+                        <div className="bg-black border border-cyan-500/30 rounded-lg p-4">
+                            <p className="text-cyan-400 font-bold mb-3">📱 4 WAYS TO MEASURE FREQUENCY:</p>
+                            
+                            <div className="space-y-3">
+                                <div className="bg-cyan-900/30 border-l-4 border-green-400 p-3">
+                                    <p className="text-green-400 font-bold text-xs mb-2">1. PHONE APP (FREE - £0):</p>
+                                    <ul className="text-xs space-y-1 ml-4">
+                                        <li>• <strong className="text-white">Audio frequencies:</strong> "Spectroid" app (Android) or "Audio Spectrum Analyzer" (iOS)</li>
+                                        <li>• <strong className="text-white">Shows:</strong> Real-time graph of frequencies (0-20,000 Hz)</li>
+                                        <li>• <strong className="text-white">Works for:</strong> Sound, humming coils, vibrations</li>
+                                        <li className="text-white font-bold">• Hold phone near coil = SEE the frequency instantly ✓</li>
+                                    </ul>
+                                </div>
+
+                                <div className="bg-cyan-900/30 border-l-4 border-yellow-400 p-3">
+                                    <p className="text-yellow-400 font-bold text-xs mb-2">2. MULTIMETER WITH FREQUENCY MODE (£15-£40):</p>
+                                    <ul className="text-xs space-y-1 ml-4">
+                                        <li>• <strong className="text-white">Budget:</strong> UNI-T UT33D (£18 Amazon) - measures up to 10 MHz</li>
+                                        <li>• <strong className="text-white">How:</strong> Connect probes to circuit = digital readout shows Hz</li>
+                                        <li>• <strong className="text-white">Accuracy:</strong> ±0.1% (good enough for DIY)</li>
+                                        <li className="text-white font-bold">• Most simple multimeters have this built-in ✓</li>
+                                    </ul>
+                                </div>
+
+                                <div className="bg-cyan-900/30 border-l-4 border-purple-400 p-3">
+                                    <p className="text-purple-400 font-bold text-xs mb-2">3. OSCILLOSCOPE (£60-£200):</p>
+                                    <ul className="text-xs space-y-1 ml-4">
+                                        <li>• <strong className="text-white">Budget option:</strong> DSO138 DIY kit (£25) or JYETech DSO150 (£60)</li>
+                                        <li>• <strong className="text-white">Shows:</strong> Actual waveform + frequency measurement</li>
+                                        <li>• <strong className="text-white">Range:</strong> 0 Hz to 200 kHz (perfect for Tesla coils)</li>
+                                        <li>• <strong className="text-white">Best for:</strong> Seeing SHAPE of wave (sine, square, triangle)</li>
+                                        <li className="text-white font-bold">• Pro level but affordable - see EXACTLY what's happening ✓</li>
+                                    </ul>
+                                </div>
+
+                                <div className="bg-cyan-900/30 border-l-4 border-pink-400 p-3">
+                                    <p className="text-pink-400 font-bold text-xs mb-2">4. FREQUENCY COUNTER MODULE (£8):</p>
+                                    <ul className="text-xs space-y-1 ml-4">
+                                        <li>• <strong className="text-white">Cheap module:</strong> 0.1-60 MHz digital display (£8 on eBay/AliExpress)</li>
+                                        <li>• <strong className="text-white">How:</strong> Connect to circuit = shows frequency on LED display</li>
+                                        <li>• <strong className="text-white">Ultra accurate:</strong> Crystal-based (±10 ppm)</li>
+                                        <li className="text-white font-bold">• Cheapest + most accurate option ✓</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="bg-black border border-green-500/30 rounded-lg p-4">
+                            <p className="text-green-400 font-bold mb-3">🎯 HOW TO KNOW WHAT FREQUENCY YOU NEED:</p>
+                            
+                            <div className="space-y-3">
+                                <div className="bg-green-900/30 border-l-4 border-cyan-400 p-3">
+                                    <p className="text-cyan-400 font-bold text-xs mb-2">METHOD 1: CALCULATE IT (IF YOU BUILT THE COIL):</p>
+                                    <div className="bg-black/60 p-3 rounded-lg mb-2">
+                                        <p className="text-white font-mono text-xs text-center mb-2">f = 1 / (2π√LC)</p>
+                                        <ul className="text-xs space-y-1 text-gray-300">
+                                            <li>• <strong className="text-white">L</strong> = Inductance of coil (Henries) - use LCR meter or calculate</li>
+                                            <li>• <strong className="text-white">C</strong> = Capacitance (Farads) - written on capacitor</li>
+                                            <li>• <strong className="text-white">π</strong> = 3.14159...</li>
+                                        </ul>
+                                    </div>
+                                    <p className="text-white text-xs font-bold">Example: 100 μH coil + 1 μF capacitor = 50,329 Hz (50 kHz) ✓</p>
+                                </div>
+
+                                <div className="bg-green-900/30 border-l-4 border-purple-400 p-3">
+                                    <p className="text-purple-400 font-bold text-xs mb-2">METHOD 2: LOOK UP THE SPEC:</p>
+                                    <ul className="text-xs space-y-1 ml-4">
+                                        <li>• <strong className="text-white">Wireless charger:</strong> 110-205 kHz (Qi standard)</li>
+                                        <li>• <strong className="text-white">Tesla coil:</strong> 50-500 kHz (depends on design)</li>
+                                        <li>• <strong className="text-white">Earth Schumann:</strong> 7.83 Hz (fundamental)</li>
+                                        <li>• <strong className="text-white">Acoustic levitation:</strong> 40 kHz (ultrasonic)</li>
+                                        <li className="text-white font-bold">• Google "[device type] operating frequency" = instant answer ✓</li>
+                                    </ul>
+                                </div>
+
+                                <div className="bg-green-900/30 border-l-4 border-yellow-400 p-3">
+                                    <p className="text-yellow-400 font-bold text-xs mb-2">METHOD 3: SWEEP + FIND PEAK (NO MATHS):</p>
+                                    <ul className="text-xs space-y-1 ml-4">
+                                        <li>• Turn frequency knob from low to high</li>
+                                        <li>• Watch LED brightness or power meter</li>
+                                        <li>• When it PEAKS = that's resonance frequency</li>
+                                        <li>• Note the number = that's your frequency ✓</li>
+                                        <li className="text-white font-bold">• Zero math. Just turn dial + watch. Simple. ✓</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="bg-black border border-purple-500/30 rounded-lg p-4">
+                            <p className="text-purple-400 font-bold mb-3">🤖 CAN DEVICE AUTO-MATCH? YES:</p>
+                            
+                            <div className="space-y-3">
+                                <div className="bg-purple-900/30 border-l-4 border-green-400 p-3">
+                                    <p className="text-green-400 font-bold text-xs mb-2">✓ AUTO-TUNING CIRCUITS (EXIST TODAY):</p>
+                                    <ul className="text-xs space-y-1 ml-4">
+                                        <li>• <strong className="text-white">PLL (Phase-Locked Loop):</strong> Circuit that auto-locks to incoming frequency</li>
+                                        <li>• <strong className="text-white">How it works:</strong> Compares input signal to internal oscillator, adjusts until match</li>
+                                        <li>• <strong className="text-white">Used in:</strong> FM radios, WiFi, GPS, phone signals</li>
+                                        <li>• <strong className="text-white">Cost:</strong> £3 PLL chip (e.g., 4046) can auto-tune to 0-1 MHz</li>
+                                        <li className="text-white font-bold">• Your radio auto-tunes = same tech for power coils ✓</li>
+                                    </ul>
+                                </div>
+
+                                <div className="bg-purple-900/30 border-l-4 border-cyan-400 p-3">
+                                    <p className="text-cyan-400 font-bold text-xs mb-2">✓ IMPEDANCE MATCHING CIRCUITS:</p>
+                                    <ul className="text-xs space-y-1 ml-4">
+                                        <li>• <strong className="text-white">Variable capacitor:</strong> Motor-controlled cap that sweeps frequency</li>
+                                        <li>• <strong className="text-white">Measures reflected power:</strong> When minimum = perfect match</li>
+                                        <li>• <strong className="text-white">Used in:</strong> Ham radios, antenna tuners</li>
+                                        <li>• <strong className="text-white">Can build:</strong> Arduino + stepper motor + variable cap = auto-tuner (£25)</li>
+                                        <li className="text-white font-bold">• Press button = device finds best frequency automatically ✓</li>
+                                    </ul>
+                                </div>
+
+                                <div className="bg-purple-900/30 border-l-4 border-pink-400 p-3">
+                                    <p className="text-pink-400 font-bold text-xs mb-2">✓ MODERN WIRELESS CHARGERS (PROOF IT WORKS):</p>
+                                    <ul className="text-xs space-y-1 ml-4">
+                                        <li>• Your phone charger AUTO-DETECTS phone frequency</li>
+                                        <li>• Adjusts power level based on distance/alignment</li>
+                                        <li>• NO MANUAL TUNING - just works</li>
+                                        <li className="text-white font-bold">• Same tech can scale to HOUSE POWER (just bigger coils) ✓</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-2 border-green-500 rounded-lg p-4">
+                            <p className="text-white font-bold text-lg mb-2 text-center">💚 SIMPLE TRUTH BRO:</p>
+                            <div className="space-y-2 text-xs text-gray-300">
+                                <p className="text-white font-bold mb-2">TO MEASURE FREQUENCY:</p>
+                                <ul className="space-y-1 ml-4">
+                                    <li>• <strong className="text-green-400">FREE:</strong> Phone app (audio frequencies)</li>
+                                    <li>• <strong className="text-green-400">£8:</strong> Frequency counter module (best value)</li>
+                                    <li>• <strong className="text-green-400">£18:</strong> Multimeter with Hz mode</li>
+                                    <li>• <strong className="text-green-400">£60:</strong> Oscilloscope (see waveform too)</li>
+                                </ul>
+                                
+                                <p className="text-white font-bold mt-3 mb-2">TO MATCH FREQUENCY:</p>
+                                <ul className="space-y-1 ml-4">
+                                    <li>• <strong className="text-cyan-400">Manual:</strong> Turn dial until meter peaks (2 mins)</li>
+                                    <li>• <strong className="text-cyan-400">Calculate:</strong> Use f = 1/(2π√LC) formula</li>
+                                    <li>• <strong className="text-cyan-400">Auto:</strong> PLL circuit locks automatically (£3 chip)</li>
+                                </ul>
+                            </div>
+                            <p className="text-green-400 font-bold text-center mt-3">
+                                Device CAN do it automatically. Same tech as your phone tuning WiFi. ⚡
+                            </p>
+                        </div>
+
+                        <div className="bg-black border border-pink-500/30 rounded-lg p-4">
+                            <p className="text-pink-400 font-bold mb-3">🔬 REAL EXAMPLE - AUTO-TUNING COIL SYSTEM:</p>
+                            <div className="bg-pink-900/30 p-3 rounded-lg">
+                                <p className="text-white font-bold text-xs mb-2">£50 AUTO-TUNING WIRELESS POWER (DIY):</p>
+                                <ul className="text-xs space-y-1 ml-4 text-gray-300">
+                                    <li>• Function generator (£25) - creates adjustable frequency</li>
+                                    <li>• Frequency counter module (£8) - measures what coil is doing</li>
+                                    <li>• 2x coils (£10 DIY or buy)</li>
+                                    <li>• Arduino (£7) - reads frequency, adjusts generator to match</li>
+                                </ul>
+                                <p className="text-green-400 font-bold text-xs mt-2">
+                                    = System that AUTO-TUNES to perfect resonance in 5 seconds ✓
+                                </p>
+                            </div>
+                            <p className="text-cyan-400 text-xs mt-2 italic">
+                                Press power button = device measures, calculates, tunes = wireless power ON. All automatic.
+                            </p>
+                        </div>
+
+                        <div className="bg-gradient-to-r from-cyan-500/20 to-purple-500/20 border-2 border-cyan-500 rounded-lg p-4">
+                            <p className="text-cyan-400 font-black text-center mb-2">
+                                BOTTOM LINE:
+                            </p>
+                            <p className="text-white text-center text-sm mb-2">
+                                Frequency = measurable (£0 phone app to £60 oscilloscope).
+                            </p>
+                            <p className="text-white text-center text-sm mb-2">
+                                Matching = automatic (sweep dial OR £3 PLL chip does it for you).
+                            </p>
+                            <p className="text-green-400 font-bold text-center">
+                                Device CAN auto-match. Same tech as WiFi/radio/phone. We just scale it to POWER. ⚡
+                            </p>
+                            <p className="text-gray-300 text-xs text-center mt-3 italic">
+                                You don't need to be engineer bro. Device measures + tunes itself. You just plug it in. ♾️❤️♾️
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             {/* YOU CAN FEEL IT - IT'S REAL */}
             <div className="max-w-4xl mx-auto mb-8 px-4">
                 <div className="bg-gradient-to-br from-green-500/20 to-cyan-500/20 border-4 border-green-500 rounded-xl p-6">
