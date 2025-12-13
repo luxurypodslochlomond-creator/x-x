@@ -199,6 +199,7 @@ import UnstoppableProtocol from './pages/UnstoppableProtocol';
 import StayOnFrequency from './pages/StayOnFrequency';
 import AI51Protection from './pages/AI51Protection';
 import P2PFoodRescue from './pages/P2PFoodRescue';
+import ScottWhiteLabel from './pages/ScottWhiteLabel';
 import __Layout from './Layout.jsx';
 
 
@@ -404,6 +405,7 @@ export const PAGES = {
     "StayOnFrequency": StayOnFrequency,
     "AI51Protection": AI51Protection,
     "P2PFoodRescue": P2PFoodRescue,
+    "ScottWhiteLabel": ScottWhiteLabel,
 }
 
 export const pagesConfig = {
