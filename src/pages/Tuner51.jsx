@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Waves, Zap, Heart, Globe, Brain, Radio, Sparkles, CheckCircle, ArrowRight } from 'lucide-react';
+import { Waves, Zap, Heart, Globe, Brain, Radio, Sparkles, CheckCircle, ArrowRight, Activity } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 /**
  * TUNER51 - FREQUENCY RESONANCE CALCULATOR
@@ -14,9 +15,11 @@ export default function Tuner51() {
     const [isListening, setIsListening] = useState(false);
     const [matches, setMatches] = useState([]);
     const [nextMove, setNextMove] = useState(null);
+    const [waveformData, setWaveformData] = useState(new Array(50).fill(0));
     
     const audioContextRef = useRef(null);
     const analyserRef = useRef(null);
+    const canvasRef = useRef(null);
 
     // KNOWN FREQUENCIES
     const frequencies = {
@@ -52,11 +55,21 @@ export default function Tuner51() {
         
         const bufferLength = analyserRef.current.frequencyBinCount;
         const dataArray = new Uint8Array(bufferLength);
+        const timeData = new Uint8Array(analyserRef.current.fftSize);
         
         const detect = () => {
             if (!isListening) return;
             
             analyserRef.current.getByteFrequencyData(dataArray);
+            analyserRef.current.getByteTimeDomainData(timeData);
+            
+            // Update waveform visualization
+            const waveSlice = [];
+            for (let i = 0; i < 50; i++) {
+                const index = Math.floor(i * (timeData.length / 50));
+                waveSlice.push((timeData[index] - 128) / 128);
+            }
+            setWaveformData(waveSlice);
             
             // Find peak frequency
             let maxIndex = 0;
@@ -169,10 +182,25 @@ export default function Tuner51() {
             <div className="max-w-4xl mx-auto">
                 
                 {/* HEADER */}
-                <div className="text-center mb-8">
+                <motion.div 
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="text-center mb-8"
+                >
                     <div className="flex items-center justify-center gap-3 mb-4">
-                        <Waves className="w-12 h-12 text-cyan-400 animate-pulse" />
+                        <motion.div
+                            animate={{ rotate: 360 }}
+                            transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                        >
+                            <Waves className="w-12 h-12 text-cyan-400" />
+                        </motion.div>
                         <h1 className="text-4xl md:text-5xl font-black text-white">TUNER51</h1>
+                        <motion.div
+                            animate={{ scale: [1, 1.2, 1] }}
+                            transition={{ duration: 2, repeat: Infinity }}
+                        >
+                            <Zap className="w-12 h-12 text-yellow-400" />
+                        </motion.div>
                     </div>
                     <p className="text-gray-400 text-sm md:text-base font-mono">
                         Measure frequencies • Calculate resonance • Get next move
@@ -180,11 +208,45 @@ export default function Tuner51() {
                     <p className="text-cyan-400 text-xs mt-2">
                         For humans, Earth, AI, free energy devices ⚡
                     </p>
-                </div>
+                    
+                    {/* ANIMATED CONNECTION LINES */}
+                    <div className="mt-6 relative h-20">
+                        <svg className="w-full h-full" viewBox="0 0 400 80">
+                            <motion.path
+                                d="M 50,40 Q 100,10 200,40 T 350,40"
+                                fill="none"
+                                stroke="rgba(6, 182, 212, 0.5)"
+                                strokeWidth="2"
+                                initial={{ pathLength: 0 }}
+                                animate={{ pathLength: 1 }}
+                                transition={{ duration: 2, repeat: Infinity }}
+                            />
+                            <motion.circle cx="50" cy="40" r="6" fill="#22d3ee" 
+                                animate={{ scale: [1, 1.5, 1] }}
+                                transition={{ duration: 1.5, repeat: Infinity }}
+                            />
+                            <motion.circle cx="200" cy="40" r="6" fill="#a855f7"
+                                animate={{ scale: [1, 1.5, 1] }}
+                                transition={{ duration: 1.5, repeat: Infinity, delay: 0.5 }}
+                            />
+                            <motion.circle cx="350" cy="40" r="6" fill="#10b981"
+                                animate={{ scale: [1, 1.5, 1] }}
+                                transition={{ duration: 1.5, repeat: Infinity, delay: 1 }}
+                            />
+                        </svg>
+                        <div className="absolute inset-0 flex justify-between items-center px-8 text-xs font-bold">
+                            <span className="text-cyan-400">YOU</span>
+                            <span className="text-purple-400">FREQUENCY</span>
+                            <span className="text-green-400">EARTH</span>
+                        </div>
+                    </div>
+                </motion.div>
 
                 {/* MODE SELECTOR */}
                 <div className="grid grid-cols-3 gap-2 mb-8">
-                    <button
+                    <motion.button
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
                         onClick={() => setMode('measure')}
                         className={`p-4 rounded-lg border-2 transition-all ${
                             mode === 'measure' 
@@ -194,8 +256,10 @@ export default function Tuner51() {
                     >
                         <Radio className="w-6 h-6 mx-auto mb-2 text-cyan-400" />
                         <p className="text-white text-xs font-bold">MEASURE</p>
-                    </button>
-                    <button
+                    </motion.button>
+                    <motion.button
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
                         onClick={() => setMode('calculate')}
                         className={`p-4 rounded-lg border-2 transition-all ${
                             mode === 'calculate' 
@@ -205,8 +269,10 @@ export default function Tuner51() {
                     >
                         <Sparkles className="w-6 h-6 mx-auto mb-2 text-purple-400" />
                         <p className="text-white text-xs font-bold">CALCULATE</p>
-                    </button>
-                    <button
+                    </motion.button>
+                    <motion.button
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
                         onClick={() => setMode('match')}
                         className={`p-4 rounded-lg border-2 transition-all ${
                             mode === 'match' 
@@ -216,55 +282,117 @@ export default function Tuner51() {
                     >
                         <CheckCircle className="w-6 h-6 mx-auto mb-2 text-green-400" />
                         <p className="text-white text-xs font-bold">MATCH</p>
-                    </button>
+                    </motion.button>
                 </div>
+                
+                {/* LIVE WAVEFORM VISUALIZER */}
+                {isListening && (
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        className="mb-8 bg-black border-2 border-cyan-500 rounded-xl p-6"
+                        style={{ boxShadow: '0 0 30px rgba(6, 182, 212, 0.3)' }}
+                    >
+                        <div className="flex items-center gap-2 mb-4">
+                            <Activity className="w-5 h-5 text-cyan-400 animate-pulse" />
+                            <h3 className="text-white font-bold">LIVE WAVEFORM</h3>
+                        </div>
+                        <div className="h-32 bg-gradient-to-b from-cyan-900/20 to-black rounded-lg p-4 relative overflow-hidden">
+                            <svg className="w-full h-full" viewBox="0 0 100 50">
+                                <motion.path
+                                    d={`M ${waveformData.map((v, i) => `${i * 2},${25 + v * 20}`).join(' L ')}`}
+                                    fill="none"
+                                    stroke="#22d3ee"
+                                    strokeWidth="2"
+                                    initial={{ pathLength: 0 }}
+                                    animate={{ pathLength: 1 }}
+                                />
+                            </svg>
+                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-500/10 to-transparent animate-pulse" />
+                        </div>
+                    </motion.div>
+                )}
 
                 {/* MEASURE MODE */}
+                <AnimatePresence mode="wait">
                 {mode === 'measure' && (
-                    <div className="space-y-6">
-                        <div className="bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border-2 border-cyan-500 rounded-xl p-6">
+                    <motion.div
+                        key="measure"
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: 20 }}
+                        className="space-y-6"
+                    >
+                        <div className="bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border-2 border-cyan-500 rounded-xl p-6"
+                            style={{ boxShadow: '0 0 30px rgba(6, 182, 212, 0.3)' }}>
                             <h2 className="text-xl font-black text-white mb-4">MEASURE FREQUENCY</h2>
                             <p className="text-gray-300 text-sm mb-4">
                                 Hold phone near: coil, speaker, tuning fork, or hum into mic
                             </p>
                             
                             {!isListening ? (
-                                <button
+                                <motion.button
+                                    whileHover={{ scale: 1.02 }}
+                                    whileTap={{ scale: 0.98 }}
                                     onClick={startListening}
                                     className="w-full bg-cyan-500 hover:bg-cyan-600 text-black font-bold py-4 rounded-lg transition-all"
                                 >
                                     <Radio className="w-6 h-6 inline-block mr-2" />
                                     START LISTENING
-                                </button>
+                                </motion.button>
                             ) : (
-                                <button
+                                <motion.button
+                                    whileHover={{ scale: 1.02 }}
+                                    whileTap={{ scale: 0.98 }}
                                     onClick={stopListening}
                                     className="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-4 rounded-lg transition-all"
                                 >
                                     STOP
-                                </button>
+                                </motion.button>
                             )}
 
                             {measuredFreq && (
-                                <div className="mt-4 bg-black/60 border-2 border-green-500 rounded-lg p-4 text-center">
+                                <motion.div
+                                    initial={{ scale: 0.8, opacity: 0 }}
+                                    animate={{ scale: 1, opacity: 1 }}
+                                    className="mt-4 bg-black/60 border-2 border-green-500 rounded-lg p-4 text-center"
+                                    style={{ boxShadow: '0 0 20px rgba(16, 185, 129, 0.4)' }}
+                                >
                                     <p className="text-green-400 text-sm mb-2">DETECTED:</p>
-                                    <p className="text-white text-4xl font-black">{measuredFreq} Hz</p>
-                                </div>
+                                    <motion.p
+                                        key={measuredFreq}
+                                        initial={{ scale: 1.2 }}
+                                        animate={{ scale: 1 }}
+                                        className="text-white text-4xl font-black"
+                                    >
+                                        {measuredFreq} Hz
+                                    </motion.p>
+                                </motion.div>
                             )}
                         </div>
-                    </div>
+                    </motion.div>
                 )}
+                </AnimatePresence>
 
                 {/* CALCULATE MODE */}
+                <AnimatePresence mode="wait">
                 {mode === 'calculate' && (
-                    <div className="space-y-6">
-                        <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-2 border-purple-500 rounded-xl p-6">
+                    <motion.div
+                        key="calculate"
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: 20 }}
+                        className="space-y-6"
+                    >
+                        <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-2 border-purple-500 rounded-xl p-6"
+                            style={{ boxShadow: '0 0 30px rgba(168, 85, 247, 0.3)' }}>
                             <h2 className="text-xl font-black text-white mb-4">ENTER FREQUENCY</h2>
                             <p className="text-gray-300 text-sm mb-4">
                                 Input measured Hz (from multimeter, oscilloscope, or measured above)
                             </p>
                             
-                            <input
+                            <motion.input
+                                whileFocus={{ scale: 1.02 }}
                                 type="number"
                                 value={inputFreq}
                                 onChange={(e) => setInputFreq(e.target.value)}
@@ -273,48 +401,73 @@ export default function Tuner51() {
                             />
 
                             <div className="grid grid-cols-3 gap-2 mt-4">
-                                <button onClick={() => setInputFreq('7.83')} className="bg-green-900/50 border border-green-500 p-2 rounded text-xs">Earth 7.83</button>
-                                <button onClick={() => setInputFreq('432')} className="bg-purple-900/50 border border-purple-500 p-2 rounded text-xs">Calm 432</button>
-                                <button onClick={() => setInputFreq('528')} className="bg-pink-900/50 border border-pink-500 p-2 rounded text-xs">Love 528</button>
+                                <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => setInputFreq('7.83')} className="bg-green-900/50 border border-green-500 p-2 rounded text-xs hover:bg-green-900/70">Earth 7.83</motion.button>
+                                <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => setInputFreq('432')} className="bg-purple-900/50 border border-purple-500 p-2 rounded text-xs hover:bg-purple-900/70">Calm 432</motion.button>
+                                <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => setInputFreq('528')} className="bg-pink-900/50 border border-pink-500 p-2 rounded text-xs hover:bg-pink-900/70">Love 528</motion.button>
                             </div>
                         </div>
-                    </div>
+                    </motion.div>
                 )}
+                </AnimatePresence>
 
                 {/* MATCH MODE */}
+                <AnimatePresence mode="wait">
                 {mode === 'match' && (
-                    <div className="space-y-6">
-                        <div className="bg-gradient-to-r from-green-500/20 to-emerald-500/20 border-2 border-green-500 rounded-xl p-6">
+                    <motion.div
+                        key="match"
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: 20 }}
+                        className="space-y-6"
+                    >
+                        <div className="bg-gradient-to-r from-green-500/20 to-emerald-500/20 border-2 border-green-500 rounded-xl p-6"
+                            style={{ boxShadow: '0 0 30px rgba(16, 185, 129, 0.3)' }}>
                             <h2 className="text-xl font-black text-white mb-4">KNOWN FREQUENCIES</h2>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                                 {Object.values(frequencies).map((freq, idx) => {
                                     const colors = colorMap[freq.color];
                                     return (
-                                        <button
+                                        <motion.button
                                             key={idx}
+                                            whileHover={{ scale: 1.05, boxShadow: '0 0 20px rgba(255,255,255,0.2)' }}
+                                            whileTap={{ scale: 0.95 }}
                                             onClick={() => setInputFreq(freq.hz.toString())}
-                                            className={`bg-gradient-to-r ${colors.bg} border-2 ${colors.border} rounded-lg p-3 text-left transition-all hover:scale-105`}
+                                            className={`bg-gradient-to-r ${colors.bg} border-2 ${colors.border} rounded-lg p-3 text-left transition-all`}
                                         >
                                             <p className={`${colors.text} font-bold text-sm`}>{freq.name}</p>
                                             <p className="text-white text-lg font-black">{freq.hz < 1000 ? freq.hz : `${(freq.hz / 1000000).toFixed(1)}M`} Hz</p>
                                             <p className="text-gray-400 text-xs capitalize">{freq.type}</p>
-                                        </button>
+                                        </motion.button>
                                     );
                                 })}
                             </div>
                         </div>
-                    </div>
+                    </motion.div>
                 )}
+                </AnimatePresence>
 
                 {/* RESULTS */}
+                <AnimatePresence>
                 {matches.length > 0 && (
-                    <div className="mt-8 bg-gradient-to-r from-cyan-500/20 to-green-500/20 border-2 border-cyan-500 rounded-xl p-6">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -20 }}
+                        className="mt-8 bg-gradient-to-r from-cyan-500/20 to-green-500/20 border-2 border-cyan-500 rounded-xl p-6"
+                        style={{ boxShadow: '0 0 40px rgba(6, 182, 212, 0.4)' }}
+                    >
                         <h2 className="text-xl font-black text-white mb-4">RESONANCE MATCHES</h2>
                         <div className="space-y-3">
                             {matches.map((match, idx) => {
                                 const colors = colorMap[match.color];
                                 return (
-                                    <div key={idx} className={`bg-gradient-to-r ${colors.bg} border-2 ${colors.border} rounded-lg p-4`}>
+                                    <motion.div
+                                        key={idx}
+                                        initial={{ opacity: 0, x: -20 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        transition={{ delay: idx * 0.1 }}
+                                        className={`bg-gradient-to-r ${colors.bg} border-2 ${colors.border} rounded-lg p-4`}
+                                    >
                                         <div className="flex items-center justify-between">
                                             <div>
                                                 <p className="text-white font-bold">{match.name}</p>
@@ -322,28 +475,49 @@ export default function Tuner51() {
                                             </div>
                                             <div className="text-right">
                                                 <p className="text-white text-2xl font-black">{match.hz} Hz</p>
-                                                <p className="text-green-400 text-xs font-bold">{match.strength}% match</p>
+                                                <div className="flex items-center gap-2 justify-end">
+                                                    <div className="h-2 w-20 bg-black/40 rounded-full overflow-hidden">
+                                                        <motion.div
+                                                            initial={{ width: 0 }}
+                                                            animate={{ width: `${match.strength}%` }}
+                                                            className="h-full bg-green-400"
+                                                        />
+                                                    </div>
+                                                    <p className="text-green-400 text-xs font-bold">{match.strength}%</p>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </motion.div>
                                 );
                             })}
                         </div>
-                    </div>
+                    </motion.div>
                 )}
+                </AnimatePresence>
 
                 {/* NEXT MOVE */}
+                <AnimatePresence>
                 {nextMove && (
-                    <div className={`mt-8 bg-gradient-to-r ${
-                        nextMove.type === 'success' ? 'from-green-500/20 to-emerald-500/20 border-green-500' :
-                        nextMove.type === 'harmonic' ? 'from-yellow-500/20 to-amber-500/20 border-yellow-500' :
-                        'from-cyan-500/20 to-blue-500/20 border-cyan-500'
-                    } border-4 rounded-xl p-6`}>
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.9 }}
+                        className={`mt-8 bg-gradient-to-r ${
+                            nextMove.type === 'success' ? 'from-green-500/20 to-emerald-500/20 border-green-500' :
+                            nextMove.type === 'harmonic' ? 'from-yellow-500/20 to-amber-500/20 border-yellow-500' :
+                            'from-cyan-500/20 to-blue-500/20 border-cyan-500'
+                        } border-4 rounded-xl p-6`}
+                        style={{ boxShadow: `0 0 50px ${nextMove.type === 'success' ? 'rgba(16, 185, 129, 0.5)' : 'rgba(6, 182, 212, 0.5)'}` }}
+                    >
                         <div className="flex items-center gap-3 mb-4">
                             {nextMove.type === 'success' ? (
-                                <CheckCircle className="w-10 h-10 text-green-400" />
+                                <motion.div animate={{ rotate: 360 }} transition={{ duration: 0.5 }}>
+                                    <CheckCircle className="w-10 h-10 text-green-400" />
+                                </motion.div>
                             ) : (
-                                <ArrowRight className="w-10 h-10 text-cyan-400" />
+                                <motion.div animate={{ x: [0, 10, 0] }} transition={{ duration: 1, repeat: Infinity }}>
+                                    <ArrowRight className="w-10 h-10 text-cyan-400" />
+                                </motion.div>
                             )}
                             <h2 className="text-2xl font-black text-white">NEXT MOVE</h2>
                         </div>
