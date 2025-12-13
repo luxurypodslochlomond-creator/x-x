@@ -344,7 +344,7 @@ export default function StayOnFrequency() {
                             <div className="bg-black border border-amber-500/30 rounded-lg p-3">
                                 <p className="text-amber-400 font-bold text-sm mb-1">5. HANDLE YOUR LIFE</p>
                                 <p className="text-gray-400 text-xs">
-                                    Health, mental health, family, basic needs - that matters too. You can't broadcast love if you're drowning. 
+                                    Health, mental health, debt, family, basic needs - that matters too. You can't broadcast love if you're drowning. 
                                     Take care of you. That's part of staying on frequency.
                                 </p>
                             </div>
