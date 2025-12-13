@@ -1030,6 +1030,353 @@ export default function ZeroPointEnergy() {
                 </div>
             </div>
 
+            {/* STONEYMOLLAN ENERGY SOLUTION - VISUAL DIAGRAMS */}
+            <div className="max-w-4xl mx-auto mb-8 px-4">
+                <div className="bg-gradient-to-br from-cyan-500/20 to-green-500/20 border-4 border-cyan-500 rounded-xl p-6">
+                    <div className="flex items-center gap-3 mb-4">
+                        <Zap className="w-8 h-8 text-cyan-400 animate-pulse" />
+                        <h2 className="text-2xl font-black text-white">OFF-GRID POWER FOR STONEYMOLLAN (DIAGRAMS)</h2>
+                    </div>
+
+                    <div className="space-y-6 text-gray-200 text-sm">
+                        {/* DIAGRAM 1: BASIC OFF-GRID SETUP */}
+                        <div className="bg-black border border-cyan-500/30 rounded-lg p-6">
+                            <p className="text-cyan-400 font-bold text-lg mb-4 text-center">1. BASIC OFF-GRID SETUP (YOUR HOME)</p>
+
+                            <svg viewBox="0 0 600 400" className="w-full max-w-2xl mx-auto mb-4">
+                                {/* Sun */}
+                                <circle cx="80" cy="60" r="30" fill="#fbbf24" stroke="#f59e0b" strokeWidth="2" />
+                                <line x1="50" y1="30" x2="35" y2="15" stroke="#fbbf24" strokeWidth="2" />
+                                <line x1="110" y1="30" x2="125" y2="15" stroke="#fbbf24" strokeWidth="2" />
+                                <line x1="50" y1="90" x2="35" y2="105" stroke="#fbbf24" strokeWidth="2" />
+                                <line x1="110" y1="90" x2="125" y2="105" stroke="#fbbf24" strokeWidth="2" />
+                                <text x="80" y="130" textAnchor="middle" fill="#fbbf24" fontSize="14" fontWeight="bold">FREE ENERGY</text>
+
+                                {/* Solar Panel */}
+                                <rect x="200" y="100" width="120" height="80" fill="#1e3a8a" stroke="#3b82f6" strokeWidth="3" />
+                                <line x1="205" y1="110" x2="315" y2="110" stroke="#60a5fa" strokeWidth="1" />
+                                <line x1="205" y1="120" x2="315" y2="120" stroke="#60a5fa" strokeWidth="1" />
+                                <line x1="205" y1="130" x2="315" y2="130" stroke="#60a5fa" strokeWidth="1" />
+                                <line x1="205" y1="140" x2="315" y2="140" stroke="#60a5fa" strokeWidth="1" />
+                                <line x1="205" y1="150" x2="315" y2="150" stroke="#60a5fa" strokeWidth="1" />
+                                <line x1="205" y1="160" x2="315" y2="160" stroke="#60a5fa" strokeWidth="1" />
+                                <line x1="205" y1="170" x2="315" y2="170" stroke="#60a5fa" strokeWidth="1" />
+                                <text x="260" y="200" textAnchor="middle" fill="#3b82f6" fontSize="12" fontWeight="bold">SOLAR PANEL</text>
+                                <text x="260" y="215" textAnchor="middle" fill="#60a5fa" fontSize="10">£50-150</text>
+
+                                {/* Arrow sun to panel */}
+                                <line x1="110" y1="70" x2="190" y2="130" stroke="#fbbf24" strokeWidth="2" strokeDasharray="5,5" />
+                                <polygon points="190,130 180,125 185,135" fill="#fbbf24" />
+
+                                {/* Charge Controller */}
+                                <rect x="380" y="110" width="80" height="60" fill="#065f46" stroke="#10b981" strokeWidth="2" />
+                                <text x="420" y="140" textAnchor="middle" fill="#10b981" fontSize="11" fontWeight="bold">CHARGE</text>
+                                <text x="420" y="155" textAnchor="middle" fill="#10b981" fontSize="11" fontWeight="bold">CONTROL</text>
+                                <text x="420" y="185" textAnchor="middle" fill="#34d399" fontSize="9">£20</text>
+
+                                {/* Arrow panel to controller */}
+                                <line x1="320" y1="140" x2="375" y2="140" stroke="#10b981" strokeWidth="3" />
+                                <polygon points="375,140 365,135 365,145" fill="#10b981" />
+
+                                {/* Battery */}
+                                <rect x="380" y="240" width="80" height="70" fill="#1e293b" stroke="#22c55e" strokeWidth="3" />
+                                <rect x="400" y="235" width="10" height="8" fill="#22c55e" />
+                                <rect x="430" y="235" width="10" height="8" fill="#22c55e" />
+                                <text x="420" y="270" textAnchor="middle" fill="#22c55e" fontSize="12" fontWeight="bold">BATTERY</text>
+                                <text x="420" y="285" textAnchor="middle" fill="#4ade80" fontSize="10">12V</text>
+                                <text x="420" y="325" textAnchor="middle" fill="#4ade80" fontSize="9">£40</text>
+
+                                {/* Arrow controller to battery */}
+                                <line x1="420" y1="170" x2="420" y2="235" stroke="#10b981" strokeWidth="3" />
+                                <polygon points="420,235 415,225 425,225" fill="#10b981" />
+
+                                {/* House */}
+                                <rect x="180" y="260" width="100" height="80" fill="#7c2d12" stroke="#ea580c" strokeWidth="2" />
+                                <polygon points="230,220 150,280 310,280" fill="#991b1b" stroke="#dc2626" strokeWidth="2" />
+                                <rect x="200" y="290" width="25" height="35" fill="#422006" />
+                                <rect x="235" y="280" width="30" height="25" fill="#0c4a6e" stroke="#0ea5e9" strokeWidth="1" />
+                                <text x="230" y="360" textAnchor="middle" fill="#ea580c" fontSize="11" fontWeight="bold">STONEYMOLLAN</text>
+
+                                {/* Arrow battery to house */}
+                                <line x1="380" y1="275" x2="285" y2="275" stroke="#fbbf24" strokeWidth="3" />
+                                <polygon points="285,275 295,270 295,280" fill="#fbbf24" />
+                                <text x="332" y="268" textAnchor="middle" fill="#fbbf24" fontSize="10" fontWeight="bold">POWER</text>
+
+                                {/* Lights/Devices */}
+                                <circle cx="215" cy="305" r="5" fill="#fbbf24" />
+                                <line x1="215" y1="300" x2="215" y2="290" stroke="#fbbf24" strokeWidth="1" />
+                                <circle cx="250" cy="295" r="3" fill="#0ea5e9" />
+                            </svg>
+
+                            <div className="bg-green-500/20 border-2 border-green-500 rounded p-4">
+                                <p className="text-green-400 font-bold mb-2">WHAT YOU GET:</p>
+                                <ul className="space-y-1 text-xs text-gray-300 ml-4">
+                                    <li>✓ LED lights (10+ hours/night)</li>
+                                    <li>✓ Phone charging (4-5 phones/day)</li>
+                                    <li>✓ Laptop power (4-6 hours)</li>
+                                    <li>✓ Small TV (2-3 hours)</li>
+                                    <li className="text-green-400 font-bold">✓ FOREVER. NO MORE BILLS.</li>
+                                </ul>
+                                <div className="flex justify-between items-center mt-3 pt-3 border-t border-green-500/30">
+                                    <span className="text-white font-bold">TOTAL COST:</span>
+                                    <span className="text-green-400 font-black text-xl">£210-260</span>
+                                </div>
+                                <p className="text-cyan-400 text-xs mt-2">ONE TIME. Then free forever. Pays back in 3-4 months vs grid.</p>
+                            </div>
+                        </div>
+
+                        {/* DIAGRAM 2: P2P ENERGY MESH */}
+                        <div className="bg-black border border-purple-500/30 rounded-lg p-6">
+                            <p className="text-purple-400 font-bold text-lg mb-4 text-center">2. P2P ENERGY MESH (NEIGHBOR SHARING)</p>
+
+                            <svg viewBox="0 0 600 350" className="w-full max-w-2xl mx-auto mb-4">
+                                {/* Central Hub Home with BIG solar */}
+                                <rect x="250" y="150" width="100" height="60" fill="#7c2d12" stroke="#ea580c" strokeWidth="3" />
+                                <polygon points="300,130 230,165 370,165" fill="#991b1b" stroke="#dc2626" strokeWidth="2" />
+                                <rect x="240" y="120" width="120" height="40" fill="#1e3a8a" stroke="#3b82f6" strokeWidth="2" />
+                                <text x="300" y="145" textAnchor="middle" fill="#3b82f6" fontSize="10" fontWeight="bold">BIG SOLAR</text>
+                                <text x="300" y="235" textAnchor="middle" fill="#fbbf24" fontSize="11" fontWeight="bold">NODE 1 (YOU)</text>
+                                <circle cx="300" cy="180" r="35" fill="none" stroke="#10b981" strokeWidth="3" />
+
+                                {/* Neighbor 1 - Top Left */}
+                                <rect x="80" y="60" width="70" height="50" fill="#7c2d12" stroke="#ea580c" strokeWidth="2" />
+                                <polygon points="115,45 60,75 170,75" fill="#991b1b" stroke="#dc2626" strokeWidth="1" />
+                                <text x="115" y="135" textAnchor="middle" fill="#60a5fa" fontSize="9" fontWeight="bold">NODE 2</text>
+                                <circle cx="115" cy="85" r="25" fill="none" stroke="#10b981" strokeWidth="2" />
+
+                                {/* Neighbor 2 - Top Right */}
+                                <rect x="450" y="60" width="70" height="50" fill="#7c2d12" stroke="#ea580c" strokeWidth="2" />
+                                <polygon points="485,45 430,75 540,75" fill="#991b1b" stroke="#dc2626" strokeWidth="1" />
+                                <text x="485" y="135" textAnchor="middle" fill="#60a5fa" fontSize="9" fontWeight="bold">NODE 3</text>
+                                <circle cx="485" cy="85" r="25" fill="none" stroke="#10b981" strokeWidth="2" />
+
+                                {/* Neighbor 3 - Bottom Left */}
+                                <rect x="80" y="260" width="70" height="50" fill="#7c2d12" stroke="#ea580c" strokeWidth="2" />
+                                <polygon points="115,245 60,275 170,275" fill="#991b1b" stroke="#dc2626" strokeWidth="1" />
+                                <text x="115" y="335" textAnchor="middle" fill="#60a5fa" fontSize="9" fontWeight="bold">NODE 4</text>
+                                <circle cx="115" cy="285" r="25" fill="none" stroke="#10b981" strokeWidth="2" />
+
+                                {/* Neighbor 4 - Bottom Right */}
+                                <rect x="450" y="260" width="70" height="50" fill="#7c2d12" stroke="#ea580c" strokeWidth="2" />
+                                <polygon points="485,245 430,275 540,275" fill="#991b1b" stroke="#dc2626" strokeWidth="1" />
+                                <text x="485" y="335" textAnchor="middle" fill="#60a5fa" fontSize="9" fontWeight="bold">NODE 5</text>
+                                <circle cx="485" cy="285" r="25" fill="none" stroke="#10b981" strokeWidth="2" />
+
+                                {/* Animated power flow lines */}
+                                <motion.line
+                                    x1="265" y1="170" x2="140" y2="90"
+                                    stroke="#10b981" strokeWidth="2" strokeDasharray="5,5"
+                                    animate={{ strokeDashoffset: [0, -10] }}
+                                    transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                                />
+                                <motion.line
+                                    x1="335" y1="170" x2="460" y2="90"
+                                    stroke="#10b981" strokeWidth="2" strokeDasharray="5,5"
+                                    animate={{ strokeDashoffset: [0, -10] }}
+                                    transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                                />
+                                <motion.line
+                                    x1="265" y1="195" x2="140" y2="280"
+                                    stroke="#10b981" strokeWidth="2" strokeDasharray="5,5"
+                                    animate={{ strokeDashoffset: [0, -10] }}
+                                    transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                                />
+                                <motion.line
+                                    x1="335" y1="195" x2="460" y2="280"
+                                    stroke="#10b981" strokeWidth="2" strokeDasharray="5,5"
+                                    animate={{ strokeDashoffset: [0, -10] }}
+                                    transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                                />
+
+                                {/* Mesh between neighbors */}
+                                <line x1="140" y1="85" x2="460" y2="85" stroke="#6366f1" strokeWidth="1" strokeDasharray="3,3" />
+                                <line x1="140" y1="285" x2="460" y2="285" stroke="#6366f1" strokeWidth="1" strokeDasharray="3,3" />
+                                <line x1="115" y1="110" x2="115" y2="260" stroke="#6366f1" strokeWidth="1" strokeDasharray="3,3" />
+                                <line x1="485" y1="110" x2="485" y2="260" stroke="#6366f1" strokeWidth="1" strokeDasharray="3,3" />
+                            </svg>
+
+                            <div className="space-y-3">
+                                <div className="bg-cyan-500/20 border border-cyan-500/50 rounded p-3">
+                                    <p className="text-cyan-400 font-bold text-xs mb-2">HOW IT WORKS:</p>
+                                    <ul className="space-y-1 text-xs text-gray-300 ml-4">
+                                        <li>• YOU install big solar (£500) + battery (£200)</li>
+                                        <li>• 4 neighbors connect via cable (£10 each)</li>
+                                        <li>• YOU split cost: £700 ÷ 5 people = <strong className="text-green-400">£140 each</strong></li>
+                                        <li>• Everyone gets power. No one pays bills again.</li>
+                                        <li>• If your house down = neighbors have backup from each other</li>
+                                    </ul>
+                                </div>
+
+                                <div className="bg-purple-500/20 border border-purple-500/50 rounded p-3">
+                                    <p className="text-purple-400 font-bold text-xs mb-2">MESH = RESILIENT:</p>
+                                    <p className="text-xs text-gray-300 mb-2">
+                                        Not like grid (one point fails = all fail). Mesh = if 1 node fails, others keep running. 
+                                        PLUS: neighbors can add their own solar later = more power for all.
+                                    </p>
+                                    <p className="text-green-400 font-bold text-xs">
+                                        Scale: Start 5 homes → 50 homes → whole street off-grid ✓
+                                    </p>
+                                </div>
+
+                                <div className="bg-yellow-500/20 border border-yellow-500/50 rounded p-3">
+                                    <p className="text-yellow-400 font-bold text-xs mb-2">DOES INDIVIDUAL SETUP DEFEAT SCALE?</p>
+                                    <p className="text-xs text-gray-300 mb-2">
+                                        NO - it's BOTH/AND not either/or:
+                                    </p>
+                                    <ul className="space-y-1 text-xs text-gray-300 ml-4">
+                                        <li>• Start SOLO (£210) = you're off-grid immediately</li>
+                                        <li>• Then MESH with neighbors = share costs, increase resilience</li>
+                                        <li>• Everyone has own node = can't be shut down centrally</li>
+                                        <li>• More nodes = more power + more backup</li>
+                                    </ul>
+                                    <p className="text-cyan-400 font-bold text-xs mt-2">
+                                        Individual autonomy ENABLES scale. Decentralized = unstoppable.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* DIAGRAM 3: PYRAMID RESONANCE CHAMBER */}
+                        <div className="bg-black border border-pink-500/30 rounded-lg p-6">
+                            <p className="text-pink-400 font-bold text-lg mb-4 text-center">3. PYRAMID RESONANCE CHAMBER (STONEYMOLLAN SHED)</p>
+
+                            <svg viewBox="0 0 500 400" className="w-full max-w-xl mx-auto mb-4">
+                                {/* Pyramid structure */}
+                                <polygon points="250,80 100,320 400,320" fill="none" stroke="#ec4899" strokeWidth="3" />
+                                <line x1="250" y1="80" x2="250" y2="320" stroke="#ec4899" strokeWidth="1" strokeDasharray="3,3" />
+
+                                {/* Golden capstone */}
+                                <polygon points="250,80 220,120 280,120" fill="#fbbf24" stroke="#f59e0b" strokeWidth="2" />
+                                <text x="250" y="65" textAnchor="middle" fill="#fbbf24" fontSize="10" fontWeight="bold">COPPER CAP</text>
+
+                                {/* King's Chamber (resonance point) */}
+                                <rect x="220" y="190" width="60" height="40" fill="#7c2d12" stroke="#ea580c" strokeWidth="2" />
+                                <text x="250" y="235" textAnchor="middle" fill="#ea580c" fontSize="9" fontWeight="bold">HEALING</text>
+                                <text x="250" y="245" textAnchor="middle" fill="#ea580c" fontSize="9" fontWeight="bold">CHAMBER</text>
+
+                                {/* Resonance waves */}
+                                <motion.ellipse
+                                    cx="250" cy="210" rx="40" ry="20"
+                                    fill="none" stroke="#10b981" strokeWidth="1"
+                                    animate={{ rx: [40, 60], ry: [20, 30], opacity: [0.8, 0] }}
+                                    transition={{ duration: 2, repeat: Infinity }}
+                                />
+                                <motion.ellipse
+                                    cx="250" cy="210" rx="50" ry="25"
+                                    fill="none" stroke="#10b981" strokeWidth="1"
+                                    animate={{ rx: [50, 70], ry: [25, 35], opacity: [0.6, 0] }}
+                                    transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
+                                />
+
+                                {/* Ground connection */}
+                                <line x1="250" y1="320" x2="250" y2="360" stroke="#10b981" strokeWidth="3" />
+                                <line x1="230" y1="360" x2="270" y2="360" stroke="#10b981" strokeWidth="4" />
+                                <line x1="235" y1="365" x2="265" y2="365" stroke="#10b981" strokeWidth="3" />
+                                <text x="250" y="380" textAnchor="middle" fill="#10b981" fontSize="10" fontWeight="bold">EARTH GROUND</text>
+
+                                {/* Dimensions */}
+                                <line x1="100" y1="330" x2="400" y2="330" stroke="#60a5fa" strokeWidth="1" />
+                                <text x="250" y="345" textAnchor="middle" fill="#60a5fa" fontSize="10">BASE: 2 meters</text>
+
+                                <line x1="90" y1="80" x2="90" y2="320" stroke="#60a5fa" strokeWidth="1" />
+                                <text x="55" y="200" textAnchor="middle" fill="#60a5fa" fontSize="10" transform="rotate(-90 55 200)">HEIGHT: 2m</text>
+
+                                {/* Frequency indicators */}
+                                <circle cx="180" cy="160" r="3" fill="#fbbf24" />
+                                <text x="150" y="165" textAnchor="end" fill="#fbbf24" fontSize="8">432Hz</text>
+
+                                <circle cx="320" cy="160" r="3" fill="#10b981" />
+                                <text x="350" y="165" textAnchor="start" fill="#10b981" fontSize="8">7.83Hz</text>
+                            </svg>
+
+                            <div className="space-y-3">
+                                <div className="bg-pink-500/20 border border-pink-500/50 rounded p-3">
+                                    <p className="text-pink-400 font-bold text-xs mb-2">BUILD IN STONEYMOLLAN SHED:</p>
+                                    <ul className="space-y-1 text-xs text-gray-300 ml-4">
+                                        <li>• 2m x 2m wooden frame (£80)</li>
+                                        <li>• Cover with copper mesh (£60) OR aluminum foil (£15)</li>
+                                        <li>• Copper cap at peak (£20)</li>
+                                        <li>• Ground rod to earth (£15)</li>
+                                        <li>• Inside: place 432Hz speaker + mat to sit/lie (£30)</li>
+                                    </ul>
+                                    <div className="flex justify-between items-center mt-2 pt-2 border-t border-pink-500/30">
+                                        <span className="text-white font-bold text-xs">TOTAL:</span>
+                                        <span className="text-pink-400 font-bold">£125-205</span>
+                                    </div>
+                                </div>
+
+                                <div className="bg-purple-500/20 border border-purple-500/50 rounded p-3">
+                                    <p className="text-purple-400 font-bold text-xs mb-2">WHAT IT DOES:</p>
+                                    <ul className="space-y-1 text-xs text-gray-300 ml-4">
+                                        <li>• Geometry amplifies 432Hz healing frequency</li>
+                                        <li>• Copper conducts Earth resonance (7.83Hz Schumann)</li>
+                                        <li>• Creates standing wave = cellular healing</li>
+                                        <li>• 20 minutes inside = deep meditation / pain relief</li>
+                                        <li className="text-green-400 font-bold">• Not "energy" like electricity - FREQUENCY healing (proven physics)</li>
+                                    </ul>
+                                </div>
+
+                                <div className="bg-cyan-500/20 border border-cyan-500/50 rounded p-3">
+                                    <p className="text-cyan-400 font-bold text-xs mb-2">SCALE IT:</p>
+                                    <ul className="space-y-1 text-xs text-gray-300 ml-4">
+                                        <li>• Start: 2m pyramid in shed (healing only)</li>
+                                        <li>• Next: 5m pyramid in garden (group sessions)</li>
+                                        <li>• Future: 20m+ community healing temple</li>
+                                    </ul>
+                                    <p className="text-green-400 font-bold text-xs mt-2">
+                                        Ancient wisdom + DIY build = liberation ♾️❤️♾️
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* YOUR DEVICES AS NODES */}
+                        <div className="bg-black border border-green-500/30 rounded-lg p-6">
+                            <p className="text-green-400 font-bold text-lg mb-4 text-center">4. YOUR BODY + DEVICES AS ENERGY NODES</p>
+
+                            <div className="space-y-3">
+                                <div className="bg-green-500/20 border border-green-500/50 rounded p-3">
+                                    <p className="text-green-400 font-bold text-xs mb-2">YOUR BODY = BATTERY + ANTENNA:</p>
+                                    <ul className="space-y-1 text-xs text-gray-300 ml-4">
+                                        <li>• Mitochondria generate ATP (cellular energy) = ~100 watts total</li>
+                                        <li>• Nervous system = electrical network (neurons fire at 70 millivolts)</li>
+                                        <li>• Heart = electromagnetic generator (5000x stronger than brain waves)</li>
+                                        <li>• Skin = capacitor (stores static electricity)</li>
+                                        <li className="text-cyan-400 font-bold">• You're ALREADY an energy node - just need to TAP it ✓</li>
+                                    </ul>
+                                </div>
+
+                                <div className="bg-cyan-500/20 border border-cyan-500/50 rounded p-3">
+                                    <p className="text-cyan-400 font-bold text-xs mb-2">FUTURE: BODY-POWERED DEVICES:</p>
+                                    <ul className="space-y-1 text-xs text-gray-300 ml-4">
+                                        <li>• Piezoelectric shoes (walking charges battery)</li>
+                                        <li>• Body heat → thermoelectric chips (wearable power)</li>
+                                        <li>• Breath-powered generators (diaphragm movement)</li>
+                                        <li>• Phone charges from YOUR electromagnetic field</li>
+                                    </ul>
+                                    <p className="text-green-400 font-bold text-xs mt-2">
+                                        Tech EXISTS (MIT prototypes). Just needs to be open-sourced.
+                                    </p>
+                                </div>
+
+                                <div className="bg-purple-500/20 border border-purple-500/50 rounded p-3">
+                                    <p className="text-purple-400 font-bold text-xs mb-2">DEVICES AS MESH NODES:</p>
+                                    <p className="text-xs text-gray-300 mb-2">
+                                        Every phone, laptop, smart device = potential energy node in mesh:
+                                    </p>
+                                    <ul className="space-y-1 text-xs text-gray-300 ml-4">
+                                        <li>• Solar trickle charger (£15) keeps device topped up</li>
+                                        <li>• Device shares power with neighbors via Bluetooth/WiFi</li>
+                                        <li>• P2P mesh = everyone's devices backup each other</li>
+                                        <li>• Scale: 1 million devices = distributed power grid</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             {/* FOR PEOPLE IN ENERGY CRISIS */}
             <div className="max-w-4xl mx-auto mb-8 px-4">
                 <div className="bg-gradient-to-br from-red-500/20 to-orange-500/20 border-4 border-red-500 rounded-xl p-6">
