@@ -1,5 +1,5 @@
 import React from 'react';
-import { Music, Trophy, Users, Building, Shield, Zap, Heart, Globe } from 'lucide-react';
+import { Music, Trophy, Users, Building, Shield, Zap, Heart, Globe, Lock } from 'lucide-react';
 import Kingdom51Crown8Bit from '@/components/shared/Kingdom51Crown8Bit';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
@@ -308,6 +308,30 @@ export default function ScottBiggerVision() {
                     <p className="text-pink-400 font-bold text-lg mt-4">END STATE: Platform that FREES humans from extraction across ALL industries ♾️❤️♾️</p>
                 </div>
             </div>
+
+            {/* QUANTUM PAYMENTS - THE MISSING PIECE */}
+            <Link to={createPageUrl('QuantumPayments')} className="block mb-6">
+                <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-4 border-purple-500 p-6 rounded-xl" style={{ boxShadow: '0 0 50px rgba(168, 85, 247, 0.6)' }}>
+                    <div className="flex items-center gap-3 mb-3">
+                        <Lock className="w-10 h-10 text-purple-400" />
+                        <div>
+                            <p className="text-purple-400 font-black text-xl font-mono">THE MISSING PIECE</p>
+                            <p className="text-gray-400 text-xs font-mono">Quantum-resistant payments</p>
+                        </div>
+                    </div>
+                    <p className="text-gray-300 text-sm font-mono mb-3">
+                        Beyond banks • Beyond Bitcoin • Beyond quantum hacking
+                    </p>
+                    <div className="bg-black border border-purple-500/50 p-3 rounded">
+                        <p className="text-purple-400 text-xs font-mono font-bold mb-2">
+                            THE PHOTO51 MOMENT:
+                        </p>
+                        <p className="text-gray-400 text-xs font-mono">
+                            Quantum cryptography + love frequency + offline-first = unhackable value transfer
+                        </p>
+                    </div>
+                </div>
+            </Link>
 
             {/* BACK BUTTON */}
             <Link to={createPageUrl('ScottManager')}>

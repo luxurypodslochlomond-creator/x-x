@@ -202,6 +202,7 @@ import P2PFoodRescue from './pages/P2PFoodRescue';
 import ScottWhiteLabel from './pages/ScottWhiteLabel';
 import ScottPitchMode from './pages/ScottPitchMode';
 import ScottBiggerVision from './pages/ScottBiggerVision';
+import QuantumPayments from './pages/QuantumPayments';
 import __Layout from './Layout.jsx';
 
 
@@ -410,6 +411,7 @@ export const PAGES = {
     "ScottWhiteLabel": ScottWhiteLabel,
     "ScottPitchMode": ScottPitchMode,
     "ScottBiggerVision": ScottBiggerVision,
+    "QuantumPayments": QuantumPayments,
 }
 
 export const pagesConfig = {
