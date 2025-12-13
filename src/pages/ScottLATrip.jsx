@@ -32,11 +32,12 @@ export default function ScottLATrip() {
     const [schedule, setSchedule] = useState(() => {
         const saved = localStorage.getItem('scott_la_schedule');
         return saved ? JSON.parse(saved) : [
-            { date: '2024-12-18', time: '10:00', type: 'flight', title: 'LHR → LAX', location: 'Heathrow Terminal 5' },
-            { date: '2024-12-19', time: '14:00', type: 'session', title: 'Producer Meeting - Rick Rubin Studio', location: 'Malibu' },
-            { date: '2024-12-20', time: '20:00', type: 'gig', title: 'YES AND MAYBE @ Troubadour', location: '9081 Santa Monica Blvd' },
-            { date: '2024-12-21', time: '11:00', type: 'session', title: 'Recording Session', location: 'Sunset Sound' },
-            { date: '2024-12-22', time: '21:00', type: 'gig', title: 'YES AND MAYBE @ The Roxy', location: '9009 Sunset Blvd' }
+            { date: '2024-12-16', time: 'TBC', type: 'session', title: 'Core Ideas Meeting - Scott + Gill', location: 'Glasgow (Monday/Tuesday)' },
+            { date: '2025-03-15', time: '10:00', type: 'flight', title: 'LHR → LAX', location: 'Heathrow Terminal 5' },
+            { date: '2025-03-16', time: '14:00', type: 'session', title: 'Producer Meeting - TBC', location: 'LA' },
+            { date: '2025-03-17', time: '20:00', type: 'gig', title: 'YES AND MAYBE @ Troubadour', location: '9081 Santa Monica Blvd' },
+            { date: '2025-03-18', time: '11:00', type: 'session', title: 'Recording Session', location: 'LA Studio TBC' },
+            { date: '2025-03-19', time: '21:00', type: 'gig', title: 'YES AND MAYBE @ The Roxy', location: '9009 Sunset Blvd' }
         ];
     });
 
@@ -98,7 +99,7 @@ export default function ScottLATrip() {
 
     // Time until departure
     const getDaysUntilDeparture = () => {
-        const departure = new Date('2024-12-18');
+        const departure = new Date('2025-03-15'); // Rough March date - Scott to confirm
         const now = new Date();
         const diff = departure - now;
         const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
@@ -127,7 +128,7 @@ export default function ScottLATrip() {
                                 <h1 className="text-3xl font-black text-white mb-1" style={{ fontFamily: 'monospace', textShadow: '4px 4px 0px rgba(0,0,0,0.8)' }}>
                                     LA TRIP
                                 </h1>
-                                <p className="text-white/80 text-sm font-bold font-mono">YES AND MAYBE • Dec 2024</p>
+                                <p className="text-white/80 text-sm font-bold font-mono">YES AND MAYBE • March 2025</p>
                             </div>
                         </div>
                         {daysLeft > 0 && (
@@ -191,14 +192,25 @@ export default function ScottLATrip() {
                 {/* OVERVIEW */}
                 {activeTab === 'overview' && (
                     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+                        <div className="bg-black border-2 border-pink-500 p-6 mb-4">
+                            <h2 className="text-2xl font-black text-pink-400 font-mono mb-4 tracking-wider">NEXT STEP</h2>
+                            <div className="space-y-2">
+                                <p className="text-white text-sm font-bold font-mono">Meeting Mon/Tue next week - Core ideas</p>
+                                <p className="text-gray-400 text-sm font-mono">• Scott's few core ideas to discuss</p>
+                                <p className="text-gray-400 text-sm font-mono">• Proper sit down (not rushed)</p>
+                                <p className="text-gray-400 text-sm font-mono">• Might go Oz next weekend but that's holiday</p>
+                            </div>
+                        </div>
+
                         <div className="bg-black border-2 border-amber-500 p-6 mb-4">
                             <h2 className="text-2xl font-black text-amber-400 font-mono mb-4 tracking-wider">MISSION</h2>
                             <div className="space-y-2">
-                                <p className="text-white text-sm font-bold font-mono">Take YES AND MAYBE to LA</p>
+                                <p className="text-white text-sm font-bold font-mono">Take YES AND MAYBE to LA - March 2025</p>
                                 <p className="text-gray-400 text-sm font-mono">• Work with world-class producers</p>
                                 <p className="text-gray-400 text-sm font-mono">• Play iconic venues (Troubadour, Roxy)</p>
                                 <p className="text-gray-400 text-sm font-mono">• Build US connections</p>
                                 <p className="text-gray-400 text-sm font-mono">• Come back with recorded material</p>
+                                <p className="text-green-400 text-sm font-mono mt-2">✓ Loads of time to plan this properly</p>
                             </div>
                         </div>
 
