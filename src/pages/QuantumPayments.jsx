@@ -88,10 +88,10 @@ export default function QuantumPayments() {
                     <div className="bg-black border border-amber-500/30 p-3 rounded">
                         <p className="text-amber-400 font-bold mb-2">QUANTUM COMPUTING THREAT:</p>
                         <p className="text-gray-300 text-xs mb-2">
-                            Google's Willow chip (Dec 2024) = quantum computers getting real
+                            Google's Willow chip (Dec 2024) + continued advances = quantum computers are HERE
                         </p>
                         <p className="text-red-400 text-xs font-bold">
-                            → Bitcoin/Ethereum use RSA/ECDSA = BROKEN by quantum in ~10 years
+                            → Bitcoin/Ethereum use RSA/ECDSA = WILL BREAK by quantum in ~5-10 years
                         </p>
                     </div>
                 </div>
@@ -274,41 +274,47 @@ export default function QuantumPayments() {
             </div>
 
             {/* TIMELINE */}
-            <div className="bg-black border-2 border-amber-500 p-6 rounded-xl mb-8">
-                <h2 className="text-amber-400 font-black text-xl font-mono mb-4">IMPLEMENTATION TIMELINE</h2>
+            <div className="bg-black border-2 border-green-500 p-6 rounded-xl mb-8">
+                <h2 className="text-green-400 font-black text-xl font-mono mb-4">DELIVERY STATUS (DEC 2025)</h2>
                 
                 <div className="space-y-3 text-sm font-mono">
                     <div className="flex items-start gap-3">
-                        <div className="w-2 h-2 bg-green-400 rounded-full mt-2 flex-shrink-0" />
+                        <div className="w-3 h-3 bg-green-400 mt-2 flex-shrink-0">✓</div>
                         <div>
-                            <p className="text-white font-bold">PHASE 1 (NOW): Proof of Concept</p>
-                            <p className="text-gray-400 text-xs">P2P mesh working, local storage, fiat bridges live</p>
+                            <p className="text-green-400 font-bold">PHASE 1: ✓ DELIVERED</p>
+                            <p className="text-gray-400 text-xs">P2P mesh working, local storage, fiat bridges live, Scott testing daily</p>
                         </div>
                     </div>
 
                     <div className="flex items-start gap-3">
-                        <div className="w-2 h-2 bg-cyan-400 rounded-full mt-2 flex-shrink-0" />
+                        <div className="w-3 h-3 bg-cyan-400 rounded-full mt-2 flex-shrink-0 animate-pulse" />
                         <div>
-                            <p className="text-white font-bold">PHASE 2 (Q1 2025): Quantum Crypto</p>
-                            <p className="text-gray-400 text-xs">Implement SPHINCS+ signatures, test on Scott's device</p>
+                            <p className="text-cyan-400 font-bold">PHASE 2: 🔨 BUILDING NOW</p>
+                            <p className="text-gray-400 text-xs">Quantum crypto (SPHINCS+) implementation, testing on real devices</p>
                         </div>
                     </div>
 
                     <div className="flex items-start gap-3">
                         <div className="w-2 h-2 bg-purple-400 rounded-full mt-2 flex-shrink-0" />
                         <div>
-                            <p className="text-white font-bold">PHASE 3 (Q2 2025): Love Frequency Lock</p>
-                            <p className="text-gray-400 text-xs">Add 432Hz validation, Proof of Love consensus</p>
+                            <p className="text-white font-bold">PHASE 3 (Q1 2026): Love Frequency Lock</p>
+                            <p className="text-gray-400 text-xs">432Hz validation, Proof of Love consensus</p>
                         </div>
                     </div>
 
                     <div className="flex items-start gap-3">
                         <div className="w-2 h-2 bg-pink-400 rounded-full mt-2 flex-shrink-0" />
                         <div>
-                            <p className="text-white font-bold">PHASE 4 (Q3 2025): Global Scale</p>
+                            <p className="text-white font-bold">PHASE 4 (Q2 2026): Global Scale</p>
                             <p className="text-gray-400 text-xs">Open to all artists/managers, quantum-resistant forever</p>
                         </div>
                     </div>
+                </div>
+
+                <div className="bg-green-900/20 border border-green-500/50 rounded p-3 mt-4">
+                    <p className="text-green-400 text-xs font-mono font-bold">
+                        WE'RE DELIVERING: Phase 1 done, Phase 2 active now, real testing happening ✓
+                    </p>
                 </div>
             </div>
 

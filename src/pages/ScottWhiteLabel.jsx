@@ -124,7 +124,7 @@ export default function ScottWhiteLabel() {
                     </div>
 
                     <div className="bg-black border border-cyan-500 rounded-lg p-4">
-                        <p className="text-cyan-400 font-bold text-xs mb-2">LA PITCH (MARCH 2025):</p>
+                        <p className="text-cyan-400 font-bold text-xs mb-2">LA PITCH (MARCH 2026):</p>
                         <ul className="text-gray-400 text-xs font-mono space-y-1">
                             <li>1. Show demo mode on your phone</li>
                             <li>2. Navigate artists, calendar, tasks</li>

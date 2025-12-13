@@ -32,12 +32,12 @@ export default function ScottLATrip() {
     const [schedule, setSchedule] = useState(() => {
         const saved = localStorage.getItem('scott_la_schedule');
         return saved ? JSON.parse(saved) : [
-            { date: '2024-12-16', time: 'TBC', type: 'session', title: 'Core Ideas Meeting - Scott + Gill', location: 'Glasgow (Monday/Tuesday)' },
-            { date: '2025-03-15', time: '10:00', type: 'flight', title: 'LHR → LAX', location: 'Heathrow Terminal 5' },
-            { date: '2025-03-16', time: '14:00', type: 'session', title: 'Producer Meeting - TBC', location: 'LA' },
-            { date: '2025-03-17', time: '20:00', type: 'gig', title: 'YES AND MAYBE @ Troubadour', location: '9081 Santa Monica Blvd' },
-            { date: '2025-03-18', time: '11:00', type: 'session', title: 'Recording Session', location: 'LA Studio TBC' },
-            { date: '2025-03-19', time: '21:00', type: 'gig', title: 'YES AND MAYBE @ The Roxy', location: '9009 Sunset Blvd' }
+            { date: '2025-12-16', time: 'TBC', type: 'session', title: 'Core Ideas Meeting - Scott + Gill', location: 'Glasgow (Monday/Tuesday)' },
+            { date: '2026-03-15', time: '10:00', type: 'flight', title: 'LHR → LAX', location: 'Heathrow Terminal 5' },
+            { date: '2026-03-16', time: '14:00', type: 'session', title: 'Producer Meeting - TBC', location: 'LA' },
+            { date: '2026-03-17', time: '20:00', type: 'gig', title: 'YES AND MAYBE @ Troubadour', location: '9081 Santa Monica Blvd' },
+            { date: '2026-03-18', time: '11:00', type: 'session', title: 'Recording Session', location: 'LA Studio TBC' },
+            { date: '2026-03-19', time: '21:00', type: 'gig', title: 'YES AND MAYBE @ The Roxy', location: '9009 Sunset Blvd' }
         ];
     });
 
@@ -99,7 +99,7 @@ export default function ScottLATrip() {
 
     // Time until departure
     const getDaysUntilDeparture = () => {
-        const departure = new Date('2025-03-15'); // Rough March date - Scott to confirm
+        const departure = new Date('2026-03-15'); // March 2026
         const now = new Date();
         const diff = departure - now;
         const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
@@ -128,7 +128,7 @@ export default function ScottLATrip() {
                                 <h1 className="text-3xl font-black text-white mb-1" style={{ fontFamily: 'monospace', textShadow: '4px 4px 0px rgba(0,0,0,0.8)' }}>
                                     LA TRIP
                                 </h1>
-                                <p className="text-white/80 text-sm font-bold font-mono">YES AND MAYBE • March 2025</p>
+                                <p className="text-white/80 text-sm font-bold font-mono">YES AND MAYBE • March 2026</p>
                             </div>
                         </div>
                         {daysLeft > 0 && (
