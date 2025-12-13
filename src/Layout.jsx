@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { base44 } from '@/api/base44Client';
 import GlobalErrorBoundary from '@/components/shared/GlobalErrorBoundary';
+import COOLASFUCKErrorMonitor from '@/components/shared/COOLASFUCKErrorMonitor';
 import FloatingMusicPlayer from '@/components/shared/FloatingMusicPlayer';
 import { AudioProvider, useAudio } from '@/components/shared/AudioProvider';
 import HealingCircle from '@/components/jukebox/HealingCircle';
@@ -291,7 +292,8 @@ const LayoutInner = ({ children, currentPageName }) => {
   };
 
   return (
-    <GlobalErrorBoundary>
+      <COOLASFUCKErrorMonitor>
+      <GlobalErrorBoundary>
       <style>{`
         @media (display-mode: standalone) { body { -webkit-touch-callout: none; -webkit-user-select: none; } }
         @media print { header, aside, .floating-music-player, nav, footer { display: none !important; } main { margin: 0 !important; padding: 0 !important; } }
@@ -445,10 +447,11 @@ const LayoutInner = ({ children, currentPageName }) => {
         </>
       )}
     </GlobalErrorBoundary>
-  );
-};
+    </COOLASFUCKErrorMonitor>
+    );
+    };
 
-export default function Layout(props) {
+    export default function Layout(props) {
   return (
     <AnonymousAuthProvider>
       <SyncManagerProvider>
