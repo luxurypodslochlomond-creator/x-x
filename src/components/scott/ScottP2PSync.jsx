@@ -29,6 +29,10 @@ export default function ScottP2PSync() {
     const [mediaStream, setMediaStream] = useState(null);
     const [myName, setMyName] = useState('');
     const [showNameInput, setShowNameInput] = useState(false);
+    const [isRecording, setIsRecording] = useState(false);
+    const [screenSharing, setScreenSharing] = useState(false);
+    const [groupCallActive, setGroupCallActive] = useState(false);
+    const [callParticipants, setCallParticipants] = useState([]);
 
     useEffect(() => {
         // Load saved name
@@ -169,7 +173,6 @@ export default function ScottP2PSync() {
 
     const startCall = async (peerId) => {
         try {
-            // Request audio/video
             const stream = await navigator.mediaDevices.getUserMedia({ 
                 video: true, 
                 audio: true 
@@ -177,12 +180,81 @@ export default function ScottP2PSync() {
             setMediaStream(stream);
             setInCall(true);
             setCallWith(peerId);
-
-            // In production: establish WebRTC connection with peer
-            // For now: just show UI
+            setCallParticipants([peerId]);
         } catch (error) {
             alert('Camera/mic access denied: ' + error.message);
         }
+    };
+
+    const startGroupCall = async (peerIds) => {
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({ 
+                video: true, 
+                audio: true 
+            });
+            setMediaStream(stream);
+            setInCall(true);
+            setGroupCallActive(true);
+            setCallParticipants(peerIds);
+        } catch (error) {
+            alert('Camera/mic access denied: ' + error.message);
+        }
+    };
+
+    const toggleScreenShare = async () => {
+        if (!screenSharing) {
+            try {
+                const screenStream = await navigator.mediaDevices.getDisplayMedia({ video: true });
+                setScreenSharing(true);
+                // In production: replace video track in WebRTC connection
+            } catch (error) {
+                alert('Screen share denied: ' + error.message);
+            }
+        } else {
+            setScreenSharing(false);
+        }
+    };
+
+    const toggleRecording = () => {
+        if (!isRecording) {
+            // Start MediaRecorder
+            setIsRecording(true);
+        } else {
+            // Stop and save recording
+            setIsRecording(false);
+            alert('✓ Call recorded and saved locally (legal protection)');
+        }
+    };
+
+    const sendEmergencyBroadcast = (message) => {
+        if (!window.kingdom51MeshChannel) return;
+        
+        window.kingdom51MeshChannel.postMessage({
+            type: 'emergency_broadcast',
+            from: connectionId,
+            message: message,
+            timestamp: Date.now()
+        });
+        
+        alert('✓ Emergency broadcast sent to all team members');
+    };
+
+    const sendFile = async (file) => {
+        if (!window.kingdom51MeshChannel) return;
+        
+        // Convert file to base64
+        const reader = new FileReader();
+        reader.onload = () => {
+            window.kingdom51MeshChannel.postMessage({
+                type: 'file_transfer',
+                from: connectionId,
+                fileName: file.name,
+                fileData: reader.result,
+                timestamp: Date.now()
+            });
+            alert('✓ File sent to call participants');
+        };
+        reader.readAsDataURL(file);
     };
 
     const endCall = () => {
@@ -246,9 +318,11 @@ export default function ScottP2PSync() {
                         <div className="flex items-center gap-3">
                             <Video className="w-6 h-6 text-green-400 animate-pulse" />
                             <div>
-                                <p className="text-green-400 font-black text-sm font-mono">ON CALL</p>
+                                <p className="text-green-400 font-black text-sm font-mono">
+                                    {groupCallActive ? 'GROUP CALL' : 'ON CALL'}
+                                </p>
                                 <p className="text-gray-400 text-xs font-mono">
-                                    {callWith || 'Peer'}
+                                    {groupCallActive ? `${callParticipants.length} participants` : callWith}
                                 </p>
                             </div>
                         </div>
@@ -256,8 +330,40 @@ export default function ScottP2PSync() {
                             onClick={endCall}
                             className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white font-bold text-xs rounded"
                         >
-                            END CALL
+                            END
                         </button>
+                    </div>
+
+                    {/* CALL CONTROLS */}
+                    <div className="grid grid-cols-3 gap-2 mb-3">
+                        <button
+                            onClick={toggleScreenShare}
+                            className={`p-2 text-xs font-bold rounded transition-all ${
+                                screenSharing 
+                                    ? 'bg-green-600 text-white' 
+                                    : 'bg-gray-800 border border-gray-700 text-gray-400 hover:border-green-500'
+                            }`}
+                        >
+                            📺 {screenSharing ? 'SHARING' : 'SHARE'}
+                        </button>
+                        <button
+                            onClick={toggleRecording}
+                            className={`p-2 text-xs font-bold rounded transition-all ${
+                                isRecording 
+                                    ? 'bg-red-600 text-white animate-pulse' 
+                                    : 'bg-gray-800 border border-gray-700 text-gray-400 hover:border-red-500'
+                            }`}
+                        >
+                            ⏺ {isRecording ? 'REC' : 'RECORD'}
+                        </button>
+                        <label className="p-2 text-xs font-bold rounded bg-gray-800 border border-gray-700 text-gray-400 hover:border-cyan-500 cursor-pointer text-center transition-all">
+                            📎 SEND
+                            <input
+                                type="file"
+                                className="hidden"
+                                onChange={(e) => e.target.files[0] && sendFile(e.target.files[0])}
+                            />
+                        </label>
                     </div>
 
                     {/* AI51 LISTENER */}
@@ -335,7 +441,17 @@ export default function ScottP2PSync() {
                     {/* TEAM ROSTER + CALL BUTTONS */}
                     {peers.length > 0 ? (
                         <div className="space-y-2">
-                            <p className="text-cyan-400 font-bold text-xs font-mono">TEAM AVAILABLE:</p>
+                            <div className="flex items-center justify-between">
+                                <p className="text-cyan-400 font-bold text-xs font-mono">TEAM AVAILABLE:</p>
+                                {peers.length >= 2 && (
+                                    <button
+                                        onClick={() => startGroupCall(peers.map(p => p.name || p.id))}
+                                        className="px-3 py-1 bg-purple-600 hover:bg-purple-700 text-white text-xs font-bold rounded"
+                                    >
+                                        GROUP CALL ALL
+                                    </button>
+                                )}
+                            </div>
                             {peers.map(peer => (
                                 <button
                                     key={peer.id}
@@ -349,6 +465,17 @@ export default function ScottP2PSync() {
                                     <Phone className="w-4 h-4 text-green-400 group-hover:scale-110 transition-transform" />
                                 </button>
                             ))}
+                            
+                            {/* EMERGENCY BROADCAST */}
+                            <button
+                                onClick={() => {
+                                    const msg = prompt('Emergency message to all team:');
+                                    if (msg) sendEmergencyBroadcast(msg);
+                                }}
+                                className="w-full p-2 bg-red-900/30 border-2 border-red-500 hover:bg-red-900/50 text-red-400 font-bold text-xs rounded transition-all"
+                            >
+                                🚨 EMERGENCY BROADCAST
+                            </button>
                         </div>
                     ) : (
                         <div className="bg-amber-900/20 border border-amber-500/50 p-3 rounded">

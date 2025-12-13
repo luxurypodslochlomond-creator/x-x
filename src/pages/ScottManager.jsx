@@ -4,7 +4,7 @@ import { createPageUrl } from '@/utils';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Plus, Search, Wifi, WifiOff, RefreshCw, Brain, DollarSign, FileText, Music, Globe, Briefcase, Camera, Plane, Users } from 'lucide-react';
+import { Plus, Search, Wifi, WifiOff, RefreshCw, Brain, DollarSign, FileText, Music, Globe, Briefcase, Camera, Plane, Users, Crown, Palette } from 'lucide-react';
 import { motion } from 'framer-motion';
 import KingdomCrown8Bit from '@/components/shared/KingdomCrown8Bit';
 import Kingdom51Crown8Bit from '@/components/shared/Kingdom51Crown8Bit';
@@ -608,6 +608,27 @@ function ScottManagerInner() {
             <div className="mb-6">
                 <ScottFamilyCredit />
             </div>
+
+            {/* BRANDED PITCH MODE */}
+            <Link to={createPageUrl('ScottPitchMode')} className="block mb-6">
+                <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-4 border-purple-500 p-4 rounded-xl" style={{ boxShadow: '0 0 40px rgba(168, 85, 247, 0.5)' }}>
+                    <div className="flex items-center gap-3 mb-3">
+                        <Crown className="w-8 h-8 text-purple-400" />
+                        <div>
+                            <p className="text-purple-400 font-black text-lg font-mono">PITCH MODE</p>
+                            <p className="text-gray-400 text-xs font-mono">Show labels on your device</p>
+                        </div>
+                    </div>
+                    <p className="text-gray-300 text-xs font-mono mb-2">
+                        Interactive demo • Works offline • Device-to-device
+                    </p>
+                    <div className="bg-purple-900/30 border border-purple-500/50 p-2 rounded">
+                        <p className="text-purple-400 text-xs font-mono font-bold">
+                            ✓ Stats • Features • Pricing • The whole pitch ready
+                        </p>
+                    </div>
+                </div>
+            </Link>
 
             {/* MONEY & MUSIC */}
             <div className="mb-6">

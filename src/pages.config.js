@@ -200,6 +200,7 @@ import StayOnFrequency from './pages/StayOnFrequency';
 import AI51Protection from './pages/AI51Protection';
 import P2PFoodRescue from './pages/P2PFoodRescue';
 import ScottWhiteLabel from './pages/ScottWhiteLabel';
+import ScottPitchMode from './pages/ScottPitchMode';
 import __Layout from './Layout.jsx';
 
 
@@ -406,6 +407,7 @@ export const PAGES = {
     "AI51Protection": AI51Protection,
     "P2PFoodRescue": P2PFoodRescue,
     "ScottWhiteLabel": ScottWhiteLabel,
+    "ScottPitchMode": ScottPitchMode,
 }
 
 export const pagesConfig = {
