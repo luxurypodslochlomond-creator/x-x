@@ -207,6 +207,7 @@ import LiechtensteinModel from './pages/LiechtensteinModel';
 import GlobalCurrencyBridge from './pages/GlobalCurrencyBridge';
 import DirectFundingRoutes from './pages/DirectFundingRoutes';
 import FrequencyBridge from './pages/FrequencyBridge';
+import MakingItReal from './pages/MakingItReal';
 import __Layout from './Layout.jsx';
 
 
@@ -420,6 +421,7 @@ export const PAGES = {
     "GlobalCurrencyBridge": GlobalCurrencyBridge,
     "DirectFundingRoutes": DirectFundingRoutes,
     "FrequencyBridge": FrequencyBridge,
+    "MakingItReal": MakingItReal,
 }
 
 export const pagesConfig = {
