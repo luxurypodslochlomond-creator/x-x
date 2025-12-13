@@ -76,6 +76,28 @@ export default function TechStack() {
                 { name: "Progressive Web App", why: "Works like native" },
                 { name: "Offline-first", why: "No internet needed" }
             ]
+        },
+        {
+            category: "Ancient Wisdom",
+            icon: Heart,
+            color: "pink",
+            items: [
+                { name: "432Hz / Solfeggio", why: "Healing frequencies used for 1000s of years" },
+                { name: "Sacred Geometry", why: "Fibonacci, golden ratio in design" },
+                { name: "Cymatics", why: "Sound creating physical patterns" },
+                { name: "Schumann Resonance", why: "Earth's 7.83Hz frequency alignment" }
+            ]
+        },
+        {
+            category: "Cutting Edge / Theory",
+            icon: Zap,
+            color: "purple",
+            items: [
+                { name: "Quantum Entanglement (exploring)", why: "Instant device sync beyond light speed" },
+                { name: "DNA Data Storage (future)", why: "1 zettabyte in 1 gram" },
+                { name: "Photonic Computing (future)", why: "Light-based, 1000x faster" },
+                { name: "Morphic Resonance", why: "Collective consciousness field" }
+            ]
         }
     ];
 
@@ -156,21 +178,51 @@ export default function TechStack() {
                     </div>
                 </Link>
 
-                {/* OPEN SOURCE ETHOS */}
+                {/* OPEN SOURCE TRUTH */}
                 <div className="mt-8 border-t-2 border-white/10 pt-8">
                     <div className="flex items-center gap-3 mb-4">
                         <Heart className="w-8 h-8 text-pink-400" />
-                        <h3 className="text-2xl font-black text-pink-400">OPEN SOURCE ETHOS</h3>
+                        <h3 className="text-2xl font-black text-pink-400">OPEN SOURCE TRUTH</h3>
                     </div>
                     <p className="text-gray-300 text-sm font-mono mb-4">
-                        This tech stack isn't proprietary. It's built on open standards, public libraries, transparent protocols. 
-                        Anyone can verify what we're doing. No backdoors, no secrets, no extraction.
+                        Our architecture, approach, and most tech is open. React, WebRTC, IPFS, IndexedDB - all open. 
+                        We run on Base44 which is proprietary but accessible (not locked). Anyone can verify what we're doing.
                     </p>
-                    <div className="bg-black border border-pink-500/30 rounded-lg p-4">
-                        <p className="text-white font-bold mb-2">For Developers:</p>
-                        <p className="text-gray-400 text-xs font-mono">
-                            Want to build on this? All our tech is documented. Base44 is open, React is open, 
-                            IPFS is open, WebRTC is open. The only proprietary bit is the love - and that's free ♾️❤️♾️
+                    
+                    <div className="grid gap-4 mb-4">
+                        <div className="bg-black border-2 border-green-500 rounded-lg p-4">
+                            <p className="text-green-400 font-bold mb-2">✓ Open / Verifiable:</p>
+                            <p className="text-gray-400 text-xs font-mono">
+                                React, WebRTC, IPFS, WebAssembly, Service Workers, IndexedDB, Tailwind, 
+                                healing frequencies (432Hz documented), sacred geometry (public knowledge)
+                            </p>
+                        </div>
+                        
+                        <div className="bg-black border-2 border-amber-500 rounded-lg p-4">
+                            <p className="text-amber-400 font-bold mb-2">⚠️ Proprietary (but accessible):</p>
+                            <p className="text-gray-400 text-xs font-mono">
+                                Base44 platform (backend as a service - not open source, but documented API, 
+                                no vendor lock-in, can export data anytime)
+                            </p>
+                        </div>
+                        
+                        <div className="bg-black border-2 border-cyan-500 rounded-lg p-4">
+                            <p className="text-cyan-400 font-bold mb-2">📖 Fully Transparent:</p>
+                            <p className="text-gray-400 text-xs font-mono">
+                                Our architecture, security model, data flows, crypto approach - all documented. 
+                                No secrets, no backdoors, no hidden extraction. Tech stack is public.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div className="bg-gradient-to-r from-pink-500/20 to-purple-500/20 border-2 border-pink-500 rounded-lg p-4">
+                        <p className="text-white font-bold mb-2">For Developers / Funders:</p>
+                        <p className="text-gray-300 text-xs font-mono mb-2">
+                            You can audit everything. Check our code approach, verify frequencies are real (432Hz is measurable), 
+                            test offline capabilities, inspect P2P sync. Base44 hosts it but doesn't own your data.
+                        </p>
+                        <p className="text-pink-400 text-xs font-mono font-bold">
+                            Open mindset + verifiable tech + zero extraction = trust built on truth ♾️❤️♾️
                         </p>
                     </div>
                 </div>
