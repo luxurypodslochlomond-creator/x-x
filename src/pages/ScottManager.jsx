@@ -26,9 +26,7 @@ import ScottBrainDump from '@/components/scott/ScottBrainDump';
 import ScottHealthCheck from '@/components/scott/ScottHealthCheck';
 import ScottTestMode from '@/components/scott/ScottTestMode';
 import ScottFeatureRequest from '@/components/scott/ScottFeatureRequest';
-import ScottSampleClearanceGuide from '@/components/scott/ScottSampleClearanceGuide';
-import ScottSampleAnalyzer from '@/components/scott/ScottSampleAnalyzer';
-import ScottSampleMatcher from '@/components/scott/ScottSampleMatcher';
+import ScottSampleTools from '@/components/scott/ScottSampleTools';
 import ScottP51Converter from '@/components/scott/ScottP51Converter';
 import ScottFamilyCredit from '@/components/scott/ScottFamilyCredit';
 import ScottP2PSync from '@/components/scott/ScottP2PSync';
@@ -545,12 +543,8 @@ function ScottManagerInner() {
             {/* LEGAL & CLEARANCES */}
             <div className="mb-6">
                 <h2 className="text-xs text-amber-400 font-black tracking-wider mb-3" style={{ fontFamily: 'monospace' }}>⚖️ LEGAL</h2>
-                
-                <div className="space-y-2">
-                    <ScottSampleMatcher />
-                    <ScottSampleAnalyzer />
-                    <ScottSampleClearanceGuide />
-                </div>
+
+                <ScottSampleTools />
 
                 <Link to={createPageUrl('ScottContracts')} className="block mt-2">
                     <div className="bg-black border-2 border-amber-500/50 hover:border-amber-500 rounded-lg p-4 transition-all">

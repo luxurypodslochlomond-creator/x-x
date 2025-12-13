@@ -124,12 +124,13 @@ export default function ScottWhiteLabel() {
                     </div>
 
                     <div className="bg-black border border-cyan-500 rounded-lg p-4">
-                        <p className="text-cyan-400 font-bold text-xs mb-2">HOW TO DEMO:</p>
+                        <p className="text-cyan-400 font-bold text-xs mb-2">LA PITCH (MARCH 2025):</p>
                         <ul className="text-gray-400 text-xs font-mono space-y-1">
-                            <li>1. Show demo mode (tap above)</li>
+                            <li>1. Show demo mode on your phone</li>
                             <li>2. Navigate artists, calendar, tasks</li>
                             <li>3. Export PDF live</li>
                             <li>4. Turn on airplane mode - still works</li>
+                            <li>5. "I built this. It's real. Want it?"</li>
                         </ul>
                     </div>
 
@@ -175,16 +176,19 @@ export default function ScottWhiteLabel() {
 
                 <div className="space-y-4 text-sm">
                     <div className="bg-black border border-green-500 rounded-lg p-4">
-                        <p className="text-green-400 font-bold text-xs mb-3">✓ WORKS NOW:</p>
+                        <p className="text-green-400 font-bold text-xs mb-3">✓ BACKEND READY:</p>
                         <ul className="text-gray-400 text-xs font-mono space-y-1">
-                            <li>• Works offline (shed/van/plane)</li>
-                            <li>• Scott uses it with 12 artists</li>
+                            <li>• Works offline (tested in shed/van)</li>
+                            <li>• Scott testing daily (real-world proof)</li>
                             <li>• AI help (contracts, publishing)</li>
                             <li>• PDF exports</li>
-                            <li>• Demo mode</li>
-                            <li>• Team sync (no WiFi needed)</li>
-                            <li>• Voice + photo input</li>
+                            <li>• Demo mode working</li>
+                            <li>• Team sync built (P2P mesh)</li>
+                            <li>• Voice + photo input tested</li>
                         </ul>
+                        <p className="text-gray-500 text-xs font-mono mt-2">
+                            Ready to onboard first paying customers
+                        </p>
                     </div>
 
                     <div className="bg-black border border-amber-500/30 p-4 rounded-lg">
