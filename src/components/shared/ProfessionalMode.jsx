@@ -2,7 +2,7 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 
 /**
  * PROFESSIONAL MODE
- * Toggle between COOLASFUCK branding (real) and UF51 branding (for founders who don't get it yet)
+ * Toggle between COOLASFUCK branding (real) and UF51 branding (for funders who don't get it yet)
  */
 
 const ProfessionalModeContext = createContext();

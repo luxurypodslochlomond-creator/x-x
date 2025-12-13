@@ -15,7 +15,7 @@ export default function ProfessionalModeToggle() {
             onClick={toggle}
             className="fixed bottom-4 right-4 z-50 p-3 rounded-full bg-black border-2 border-cyan-500 hover:border-pink-500 transition-all shadow-lg"
             style={{ boxShadow: '0 0 20px rgba(34, 211, 238, 0.4)' }}
-            title={isProfessional ? "Switch to real mode" : "Switch to founder mode"}
+            title={isProfessional ? "Switch to real mode" : "Switch to funder mode"}
         >
             {isProfessional ? (
                 <Briefcase className="w-5 h-5 text-cyan-400" />
