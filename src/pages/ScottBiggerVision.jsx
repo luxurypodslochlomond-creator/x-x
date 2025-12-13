@@ -114,7 +114,7 @@ export default function ScottBiggerVision() {
                             <li>✓ Zero extraction (you keep your money)</li>
                             <li>✓ Works offline (P2P mesh, local-first)</li>
                             <li>✓ Mobile-first (built for real humans)</li>
-                            <li>✓ AI co-worker (not a dashboard)</li>
+                            <li>✓ AI co-manager (not a dashboard)</li>
                         </ul>
                     </div>
                 </div>
