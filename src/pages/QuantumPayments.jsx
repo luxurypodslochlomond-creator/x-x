@@ -145,6 +145,9 @@ export default function QuantumPayments() {
                             <li>
                                 <strong className="text-white">Proof of Love:</strong> Not Proof of Work/Stake - Proof of Love
                             </li>
+                            <li>
+                                <strong className="text-white">Morphic Resonance (Sheldrake):</strong> More love-transactions = stronger collective field = system self-organizes to reject extraction naturally
+                            </li>
                         </ul>
                     </div>
 
@@ -237,6 +240,7 @@ export default function QuantumPayments() {
                             <li>• <strong className="text-green-400">Proof of Love:</strong> Transaction metadata must show care</li>
                             <li>• <strong className="text-cyan-400">Anti-extraction:</strong> Fees = 0% (hardcoded)</li>
                             <li>• <strong className="text-pink-400">Frequency lock:</strong> 432Hz resonance required</li>
+                            <li>• <strong className="text-purple-400">Morphic field:</strong> System learns from love-patterns, self-organizes to reject extraction (Sheldrake)</li>
                         </ul>
                     </div>
                 </div>
