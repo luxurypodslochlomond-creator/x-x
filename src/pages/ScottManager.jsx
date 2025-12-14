@@ -178,9 +178,6 @@ Keep it SHORT, practical, straight to the point. No bullshit. Real help.`,
         <ScottTestMode />
         <ScottFeatureRequest />
 
-        {/* DAILY SUPPORT - ALWAYS VISIBLE */}
-        <ScottDailySupport />
-
 
 
             {/* HEADER - CLEAN */}
