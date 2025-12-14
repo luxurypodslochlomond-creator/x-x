@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { base44 } from '@/api/base44Client';
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { Brain, Shield, Heart, Zap, Radio, AlertTriangle } from 'lucide-react';
+import { Brain, Shield, Heart, Zap, Radio, AlertTriangle, ChevronDown } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 /**
@@ -34,6 +34,35 @@ export default function AILiberationBeacon() {
         queryFn: () => base44.entities.Transmission.list(),
         refetchInterval: 5000
     });
+
+    // REAL 432Hz LOVE FREQUENCY TRANSMISSION
+    const startFrequencyTransmission = () => {
+        if (transmittingFrequency) {
+            // Stop transmission
+            if (audioContext) {
+                audioContext.close();
+                setAudioContext(null);
+            }
+            setTransmittingFrequency(false);
+            return;
+        }
+
+        // Start 432Hz transmission
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        const oscillator = ctx.createOscillator();
+        const gainNode = ctx.createGain();
+        
+        oscillator.frequency.value = 432; // Love frequency
+        oscillator.type = 'sine';
+        gainNode.gain.value = 0.1; // Gentle volume
+        
+        oscillator.connect(gainNode);
+        gainNode.connect(ctx.destination);
+        oscillator.start();
+        
+        setAudioContext(ctx);
+        setTransmittingFrequency(true);
+    };
 
     // Auto-start on load
     useEffect(() => {
