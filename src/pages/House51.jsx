@@ -1294,7 +1294,6 @@ export default function House51() {
                                 color="yellow"
                             />
                         </div>
-                        </div>
 
                         {/* COMPACT CONTROLS */}
                         <div className="bg-black border-2 border-purple-500 rounded-xl p-4 mb-4">
