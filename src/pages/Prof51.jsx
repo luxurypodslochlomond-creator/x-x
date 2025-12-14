@@ -420,6 +420,16 @@ export default function Prof51() {
                                     <p className="text-white text-xs mb-1">✓ Works offline = lectures, libraries, dorms</p>
                                     <p className="text-green-400 text-xs font-bold mt-2">Same problem worldwide = one solution ♾️❤️♾️</p>
                                 </div>
+
+                                <div className="bg-gradient-to-r from-red-500/20 to-amber-500/20 border-4 border-red-500 p-4 rounded" style={{ boxShadow: '0 0 40px rgba(239, 68, 68, 0.4)' }}>
+                                    <p className="text-red-400 font-bold mb-2">🔓 WORKS IN SUPPRESSED COUNTRIES:</p>
+                                    <p className="text-white text-xs mb-2">Government can't block P2P mesh</p>
+                                    <p className="text-cyan-400 text-xs mb-1">✓ China (Great Firewall) → P2P goes around it</p>
+                                    <p className="text-green-400 text-xs mb-1">✓ Iran (Internet shutdown) → Still works offline</p>
+                                    <p className="text-purple-400 text-xs mb-1">✓ Russia (Surveillance) → Encrypted, can't monitor</p>
+                                    <p className="text-pink-400 text-xs mb-1">✓ North Korea → Device-to-device freedom</p>
+                                    <p className="text-amber-400 text-xs font-bold mt-2">Students rise up. Government can't stop physics. ♾️❤️♾️</p>
+                                </div>
                             </div>
                         </div>
 
