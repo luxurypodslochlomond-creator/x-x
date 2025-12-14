@@ -878,7 +878,7 @@ export default function House51() {
                 </div>
 
                 {/* HEALING + CONTROLS */}
-                <div className="grid md:grid-cols-2 gap-2">
+                <div className="grid md:grid-cols-2 gap-2 mb-4">
                     <div className="bg-zinc-950 border border-amber-600/30 rounded-lg p-3">
                         <h3 className="text-xs font-black text-pink-500 mb-2">HEALING LAYERS</h3>
                         <div className="grid grid-cols-2 gap-1.5">
@@ -903,6 +903,37 @@ export default function House51() {
                         <input type="range" min="0" max="1" step="0.01" value={volume} onChange={(e) => setVolume(parseFloat(e.target.value))} className="w-full h-1.5 bg-zinc-800 rounded appearance-none mb-3" />
                         <label className="text-[10px] text-gray-500 mb-1 block">BPM: {bpm}</label>
                         <input type="range" min="110" max="140" value={bpm} onChange={(e) => setBpm(parseInt(e.target.value))} disabled={isPlaying} className="w-full h-1.5 bg-zinc-800 rounded appearance-none disabled:opacity-50" />
+                    </div>
+                </div>
+
+                {/* IBIZA LEGENDS */}
+                <div className="bg-zinc-950 border border-amber-600/30 rounded-lg p-3 mb-4">
+                    <h3 className="text-xs font-black text-amber-500 mb-2">IBIZA LEGENDS:</h3>
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-2 text-xs">
+                        <div className="bg-black border border-amber-600/30 p-2 rounded">
+                            <p className="text-white font-bold">Freddy</p>
+                            <p className="text-gray-500 text-[10px]">10 years Pikes resident</p>
+                        </div>
+                        <div className="bg-black border border-amber-600/30 p-2 rounded">
+                            <p className="text-white font-bold">Ben Santiago</p>
+                            <p className="text-gray-500 text-[10px]">Luka's Ibiza</p>
+                        </div>
+                        <div className="bg-black border border-amber-600/30 p-2 rounded">
+                            <p className="text-white font-bold">Kerri Chandler</p>
+                            <p className="text-gray-500 text-[10px]">Bar A Thym</p>
+                        </div>
+                        <div className="bg-black border border-amber-600/30 p-2 rounded">
+                            <p className="text-white font-bold">Larry Heard</p>
+                            <p className="text-gray-500 text-[10px]">Can You Feel It</p>
+                        </div>
+                        <div className="bg-black border border-amber-600/30 p-2 rounded">
+                            <p className="text-white font-bold">Moodymann</p>
+                            <p className="text-gray-500 text-[10px]">Dem Young Sconies</p>
+                        </div>
+                        <div className="bg-black border border-amber-600/30 p-2 rounded">
+                            <p className="text-white font-bold">CamelPhat</p>
+                            <p className="text-gray-500 text-[10px]">Cola</p>
+                        </div>
                     </div>
                 </div>
             </div>
