@@ -25,14 +25,20 @@ export default function ScottWhiteLabel() {
             {/* HEADER - SIMPLE */}
             <div className="mb-8">
                 <div className="bg-black border-2 border-amber-500 rounded-xl p-6">
-                    <div className="flex items-center gap-4 mb-4">
-                        <Kingdom51Crown8Bit size={48} animate={false} />
-                        <div>
-                            <h1 className="text-2xl font-black text-amber-400 mb-1" style={{ fontFamily: 'monospace' }}>
-                                WHITE-LABEL CONFIG
-                            </h1>
-                            <p className="text-gray-400 text-sm font-mono">Show funders YOUR version</p>
+                    <div className="flex items-center justify-between gap-4 mb-4">
+                        <div className="flex items-center gap-4">
+                            <Kingdom51Crown8Bit size={48} animate={false} />
+                            <div>
+                                <h1 className="text-2xl font-black text-amber-400 mb-1" style={{ fontFamily: 'monospace' }}>
+                                    WHITE-LABEL CONFIG
+                                </h1>
+                                <p className="text-gray-400 text-sm font-mono">Show funders YOUR version</p>
+                            </div>
                         </div>
+                        <Link to={createPageUrl('ScottWhiteLabelPricing')} className="flex items-center gap-2 px-4 py-2 bg-amber-500 hover:bg-amber-400 text-black font-bold rounded-lg transition-all">
+                            <DollarSign className="w-4 h-4" />
+                            Pricing
+                        </Link>
                     </div>
 
                     <div className="bg-black border border-amber-500/30 rounded-lg p-4 mb-3">
