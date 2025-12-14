@@ -284,6 +284,7 @@ const LayoutInner = ({ children, currentPageName }) => {
   // CO-MANAGER51 - Will move to separate subdomain later
   const scottNav = user?.role === 'admin' ? [
     { title: "CO-MANAGER51", url: createPageUrl("ScottManager"), icon: User, description: "Your AI co-manager" },
+    { title: "PROF51", url: createPageUrl("Prof51"), icon: GraduationCap, description: "Student co-manager (Archie's vision)" },
   ] : [];
 
   const adminNav = user?.role === 'admin' ? [
