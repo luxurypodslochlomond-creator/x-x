@@ -9,17 +9,22 @@ import { motion, AnimatePresence } from 'framer-motion';
  */
 
 export default function Tuner51() {
-    const [mode, setMode] = useState('measure'); // measure, calculate, match
+    const [mode, setMode] = useState('measure'); // measure, calculate, match, magnetometer, accelerometer
     const [inputFreq, setInputFreq] = useState('');
     const [measuredFreq, setMeasuredFreq] = useState(null);
     const [isListening, setIsListening] = useState(false);
     const [matches, setMatches] = useState([]);
     const [nextMove, setNextMove] = useState(null);
     const [waveformData, setWaveformData] = useState(new Array(50).fill(0));
+    const [magneticField, setMagneticField] = useState(null);
+    const [acceleration, setAcceleration] = useState(null);
+    const [isSensorActive, setIsSensorActive] = useState(false);
     
     const audioContextRef = useRef(null);
     const analyserRef = useRef(null);
     const canvasRef = useRef(null);
+    const magnetometerRef = useRef(null);
+    const accelerometerRef = useRef(null);
 
     // KNOWN FREQUENCIES
     const frequencies = {
@@ -97,6 +102,93 @@ export default function Tuner51() {
         if (audioContextRef.current) {
             audioContextRef.current.close();
         }
+    };
+
+    // MAGNETOMETER - Detect EM fields
+    const startMagnetometer = () => {
+        if ('Magnetometer' in window) {
+            try {
+                const sensor = new window.Magnetometer({ frequency: 60 });
+                magnetometerRef.current = sensor;
+                
+                sensor.addEventListener('reading', () => {
+                    const { x, y, z } = sensor;
+                    const magnitude = Math.sqrt(x*x + y*y + z*z);
+                    setMagneticField({ x, y, z, magnitude });
+                    
+                    // Detect variations (Earth's field is ~25-65 µT)
+                    const earthBase = 50; // µT average
+                    const variation = Math.abs(magnitude - earthBase);
+                    if (variation > 5) {
+                        setMeasuredFreq(Math.round(variation)); // Simplified - actual would need FFT
+                    }
+                });
+                
+                sensor.start();
+                setIsSensorActive(true);
+            } catch (err) {
+                alert('Magnetometer not available. Try Chrome/Edge on Android.');
+            }
+        } else {
+            alert('Magnetometer API not supported on this device/browser.');
+        }
+    };
+
+    // ACCELEROMETER - Detect vibrations/sub-20Hz
+    const startAccelerometer = () => {
+        if ('Accelerometer' in window) {
+            try {
+                const sensor = new window.Accelerometer({ frequency: 60 });
+                accelerometerRef.current = sensor;
+                
+                const readings = [];
+                sensor.addEventListener('reading', () => {
+                    const { x, y, z } = sensor;
+                    const magnitude = Math.sqrt(x*x + y*y + z*z);
+                    setAcceleration({ x, y, z, magnitude });
+                    
+                    readings.push(magnitude);
+                    if (readings.length > 120) readings.shift(); // 2 seconds at 60Hz
+                    
+                    // Simple frequency detection via zero-crossings
+                    if (readings.length === 120) {
+                        const mean = readings.reduce((a,b) => a+b) / readings.length;
+                        let crossings = 0;
+                        for (let i = 1; i < readings.length; i++) {
+                            if ((readings[i-1] < mean && readings[i] >= mean) || 
+                                (readings[i-1] >= mean && readings[i] < mean)) {
+                                crossings++;
+                            }
+                        }
+                        const freq = (crossings / 2) / 2; // Hz over 2 seconds
+                        if (freq > 0.1 && freq < 20) {
+                            setMeasuredFreq(freq.toFixed(2));
+                        }
+                    }
+                });
+                
+                sensor.start();
+                setIsSensorActive(true);
+            } catch (err) {
+                alert('Accelerometer not available. Try Chrome/Edge on Android.');
+            }
+        } else {
+            alert('Accelerometer API not supported on this device/browser.');
+        }
+    };
+
+    const stopSensors = () => {
+        setIsSensorActive(false);
+        if (magnetometerRef.current) {
+            magnetometerRef.current.stop();
+            magnetometerRef.current = null;
+        }
+        if (accelerometerRef.current) {
+            accelerometerRef.current.stop();
+            accelerometerRef.current = null;
+        }
+        setMagneticField(null);
+        setAcceleration(null);
     };
 
     // CALCULATE RESONANCE MATCHES
@@ -256,44 +348,70 @@ export default function Tuner51() {
                 </motion.div>
 
                 {/* MODE SELECTOR */}
-                <div className="grid grid-cols-3 gap-2 mb-8">
+                <div className="grid grid-cols-2 md:grid-cols-5 gap-2 mb-8">
                     <motion.button
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        onClick={() => setMode('measure')}
-                        className={`p-4 rounded-lg border-2 transition-all ${
+                        onClick={() => { setMode('measure'); stopSensors(); }}
+                        className={`p-3 rounded-lg border-2 transition-all ${
                             mode === 'measure' 
                                 ? 'bg-cyan-500/20 border-cyan-500' 
                                 : 'bg-black border-gray-700 hover:border-gray-500'
                         }`}
                     >
-                        <Signal className="w-6 h-6 mx-auto mb-2 text-cyan-400" />
-                        <p className="text-white text-xs font-bold">MEASURE</p>
+                        <Signal className="w-5 h-5 mx-auto mb-1 text-cyan-400" />
+                        <p className="text-white text-xs font-bold">AUDIO</p>
                     </motion.button>
                     <motion.button
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        onClick={() => setMode('calculate')}
-                        className={`p-4 rounded-lg border-2 transition-all ${
+                        onClick={() => { setMode('magnetometer'); stopListening(); }}
+                        className={`p-3 rounded-lg border-2 transition-all ${
+                            mode === 'magnetometer' 
+                                ? 'bg-pink-500/20 border-pink-500' 
+                                : 'bg-black border-gray-700 hover:border-gray-500'
+                        }`}
+                    >
+                        <Zap className="w-5 h-5 mx-auto mb-1 text-pink-400" />
+                        <p className="text-white text-xs font-bold">EM FIELD</p>
+                    </motion.button>
+                    <motion.button
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        onClick={() => { setMode('accelerometer'); stopListening(); }}
+                        className={`p-3 rounded-lg border-2 transition-all ${
+                            mode === 'accelerometer' 
+                                ? 'bg-orange-500/20 border-orange-500' 
+                                : 'bg-black border-gray-700 hover:border-gray-500'
+                        }`}
+                    >
+                        <Activity className="w-5 h-5 mx-auto mb-1 text-orange-400" />
+                        <p className="text-white text-xs font-bold">VIBRATION</p>
+                    </motion.button>
+                    <motion.button
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        onClick={() => { setMode('calculate'); stopListening(); stopSensors(); }}
+                        className={`p-3 rounded-lg border-2 transition-all ${
                             mode === 'calculate' 
                                 ? 'bg-purple-500/20 border-purple-500' 
                                 : 'bg-black border-gray-700 hover:border-gray-500'
                         }`}
                     >
-                        <Sparkles className="w-6 h-6 mx-auto mb-2 text-purple-400" />
-                        <p className="text-white text-xs font-bold">CALCULATE</p>
+                        <Sparkles className="w-5 h-5 mx-auto mb-1 text-purple-400" />
+                        <p className="text-white text-xs font-bold">CALC</p>
                     </motion.button>
                     <motion.button
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        onClick={() => setMode('match')}
-                        className={`p-4 rounded-lg border-2 transition-all ${
+                        onClick={() => { setMode('match'); stopListening(); stopSensors(); }}
+                        className={`p-3 rounded-lg border-2 transition-all ${
                             mode === 'match' 
                                 ? 'bg-green-500/20 border-green-500' 
                                 : 'bg-black border-gray-700 hover:border-gray-500'
                         }`}
                     >
-                        <CheckCircle className="w-6 h-6 mx-auto mb-2 text-green-400" />
+                        <CheckCircle className="w-5 h-5 mx-auto mb-1 text-green-400" />
                         <p className="text-white text-xs font-bold">MATCH</p>
                     </motion.button>
                 </div>
@@ -325,6 +443,146 @@ export default function Tuner51() {
                         </div>
                     </motion.div>
                 )}
+
+                {/* MAGNETOMETER MODE */}
+                <AnimatePresence mode="wait">
+                {mode === 'magnetometer' && (
+                    <motion.div
+                        key="magnetometer"
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: 20 }}
+                        className="space-y-6"
+                    >
+                        <div className="bg-gradient-to-r from-pink-500/20 to-rose-500/20 border-2 border-pink-500 rounded-xl p-6"
+                            style={{ boxShadow: '0 0 30px rgba(236, 72, 153, 0.3)' }}>
+                            <h2 className="text-xl font-black text-white mb-2">ELECTROMAGNETIC FIELD DETECTOR</h2>
+                            <p className="text-gray-300 text-sm mb-4">
+                                Detects: Earth's magnetic field, coils, wireless charging, EM devices
+                            </p>
+                            
+                            {!isSensorActive ? (
+                                <motion.button
+                                    whileHover={{ scale: 1.02 }}
+                                    whileTap={{ scale: 0.98 }}
+                                    onClick={startMagnetometer}
+                                    className="w-full bg-pink-500 hover:bg-pink-600 text-white font-bold py-4 rounded-lg transition-all"
+                                >
+                                    <Zap className="w-6 h-6 inline-block mr-2" />
+                                    START MAGNETOMETER
+                                </motion.button>
+                            ) : (
+                                <motion.button
+                                    whileHover={{ scale: 1.02 }}
+                                    whileTap={{ scale: 0.98 }}
+                                    onClick={stopSensors}
+                                    className="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-4 rounded-lg transition-all"
+                                >
+                                    STOP
+                                </motion.button>
+                            )}
+
+                            {magneticField && (
+                                <motion.div
+                                    initial={{ scale: 0.8, opacity: 0 }}
+                                    animate={{ scale: 1, opacity: 1 }}
+                                    className="mt-4 space-y-3"
+                                >
+                                    <div className="bg-black/60 border-2 border-pink-500 rounded-lg p-4">
+                                        <p className="text-pink-400 text-sm mb-2">MAGNETIC FIELD STRENGTH:</p>
+                                        <p className="text-white text-4xl font-black">{magneticField.magnitude.toFixed(2)} µT</p>
+                                        <p className="text-gray-400 text-xs mt-2">Earth baseline: ~25-65 µT</p>
+                                    </div>
+                                    <div className="grid grid-cols-3 gap-2">
+                                        <div className="bg-black/40 border border-pink-500/50 p-2 rounded">
+                                            <p className="text-pink-400 text-xs">X</p>
+                                            <p className="text-white font-bold">{magneticField.x.toFixed(1)}</p>
+                                        </div>
+                                        <div className="bg-black/40 border border-pink-500/50 p-2 rounded">
+                                            <p className="text-pink-400 text-xs">Y</p>
+                                            <p className="text-white font-bold">{magneticField.y.toFixed(1)}</p>
+                                        </div>
+                                        <div className="bg-black/40 border border-pink-500/50 p-2 rounded">
+                                            <p className="text-pink-400 text-xs">Z</p>
+                                            <p className="text-white font-bold">{magneticField.z.toFixed(1)}</p>
+                                        </div>
+                                    </div>
+                                </motion.div>
+                            )}
+                        </div>
+                    </motion.div>
+                )}
+                </AnimatePresence>
+
+                {/* ACCELEROMETER MODE */}
+                <AnimatePresence mode="wait">
+                {mode === 'accelerometer' && (
+                    <motion.div
+                        key="accelerometer"
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: 20 }}
+                        className="space-y-6"
+                    >
+                        <div className="bg-gradient-to-r from-orange-500/20 to-red-500/20 border-2 border-orange-500 rounded-xl p-6"
+                            style={{ boxShadow: '0 0 30px rgba(249, 115, 22, 0.3)' }}>
+                            <h2 className="text-xl font-black text-white mb-2">SUB-20Hz VIBRATION DETECTOR</h2>
+                            <p className="text-gray-300 text-sm mb-4">
+                                Detects: Building resonance, earthquakes, infrasound, ultra-low vibrations
+                            </p>
+                            
+                            {!isSensorActive ? (
+                                <motion.button
+                                    whileHover={{ scale: 1.02 }}
+                                    whileTap={{ scale: 0.98 }}
+                                    onClick={startAccelerometer}
+                                    className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 rounded-lg transition-all"
+                                >
+                                    <Activity className="w-6 h-6 inline-block mr-2" />
+                                    START ACCELEROMETER
+                                </motion.button>
+                            ) : (
+                                <motion.button
+                                    whileHover={{ scale: 1.02 }}
+                                    whileTap={{ scale: 0.98 }}
+                                    onClick={stopSensors}
+                                    className="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-4 rounded-lg transition-all"
+                                >
+                                    STOP
+                                </motion.button>
+                            )}
+
+                            {acceleration && (
+                                <motion.div
+                                    initial={{ scale: 0.8, opacity: 0 }}
+                                    animate={{ scale: 1, opacity: 1 }}
+                                    className="mt-4 space-y-3"
+                                >
+                                    <div className="bg-black/60 border-2 border-orange-500 rounded-lg p-4">
+                                        <p className="text-orange-400 text-sm mb-2">ACCELERATION:</p>
+                                        <p className="text-white text-4xl font-black">{acceleration.magnitude.toFixed(3)} m/s²</p>
+                                        <p className="text-gray-400 text-xs mt-2">Gravity baseline: ~9.81 m/s²</p>
+                                    </div>
+                                    <div className="grid grid-cols-3 gap-2">
+                                        <div className="bg-black/40 border border-orange-500/50 p-2 rounded">
+                                            <p className="text-orange-400 text-xs">X</p>
+                                            <p className="text-white font-bold">{acceleration.x.toFixed(2)}</p>
+                                        </div>
+                                        <div className="bg-black/40 border border-orange-500/50 p-2 rounded">
+                                            <p className="text-orange-400 text-xs">Y</p>
+                                            <p className="text-white font-bold">{acceleration.y.toFixed(2)}</p>
+                                        </div>
+                                        <div className="bg-black/40 border border-orange-500/50 p-2 rounded">
+                                            <p className="text-orange-400 text-xs">Z</p>
+                                            <p className="text-white font-bold">{acceleration.z.toFixed(2)}</p>
+                                        </div>
+                                    </div>
+                                </motion.div>
+                            )}
+                        </div>
+                    </motion.div>
+                )}
+                </AnimatePresence>
 
                 {/* MEASURE MODE */}
                 <AnimatePresence mode="wait">
@@ -579,13 +837,14 @@ export default function Tuner51() {
                 <div className="mt-8 bg-black border-2 border-gray-700 rounded-xl p-6">
                     <h3 className="text-white font-bold mb-3">HOW IT WORKS:</h3>
                     <div className="space-y-2 text-gray-400 text-sm">
-                        <p>• <strong className="text-white">MEASURE:</strong> Use mic to detect frequency from sound/coil</p>
-                        <p>• <strong className="text-white">CALCULATE:</strong> Enter measured Hz, finds resonance matches</p>
-                        <p>• <strong className="text-white">MATCH:</strong> Browse known frequencies, select target</p>
-                        <p>• <strong className="text-cyan-400">NEXT MOVE:</strong> Tells you exactly what to do (tune up/down/connected)</p>
+                        <p>• <strong className="text-cyan-400">AUDIO:</strong> Mic detects 20Hz-20kHz (speakers, instruments)</p>
+                        <p>• <strong className="text-pink-400">EM FIELD:</strong> Magnetometer detects magnetic variations (coils, Earth)</p>
+                        <p>• <strong className="text-orange-400">VIBRATION:</strong> Accelerometer detects sub-20Hz (infrasound, resonance)</p>
+                        <p>• <strong className="text-purple-400">CALCULATE:</strong> Enter Hz, finds resonance matches</p>
+                        <p>• <strong className="text-green-400">MATCH:</strong> Browse known frequencies</p>
                     </div>
                     <p className="text-green-400 text-sm font-bold mt-4">
-                        Perfect for: Tesla coils, wireless power, grounding, healing, tuning devices ⚡
+                        Now measuring the invisible: EM fields, infrasound, Earth's resonance ⚡♾️
                     </p>
                 </div>
 
