@@ -203,7 +203,11 @@ export default function ScottPitchMode() {
                             <div className="flex items-center justify-between mb-3">
                                 <div>
                                     <p className="text-white font-black text-lg font-mono">{tier.name}</p>
-                                    <p className={`text-${tier.color}-400 font-black text-2xl font-mono`}>
+                                    <p className={`font-black text-2xl font-mono ${
+                                        tier.color === 'green' ? 'text-green-400' : 
+                                        tier.color === 'cyan' ? 'text-cyan-400' : 
+                                        'text-purple-400'
+                                    }`}>
                                         {tier.price}<span className="text-sm text-gray-500">{tier.period}</span>
                                     </p>
                                 </div>

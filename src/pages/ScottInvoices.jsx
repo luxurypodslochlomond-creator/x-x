@@ -25,9 +25,13 @@ function ScottInvoicesInner() {
         accountant_notes: ''
     });
 
+    const [loading, setLoading] = useState(true);
+
     useEffect(() => {
+        setLoading(true);
         setInvoices(scott.getInvoices());
         setArtists(scott.getArtists());
+        setLoading(false);
         
         if (scott.isOnline) {
             scott.pullFromServer().then(() => {
@@ -63,6 +67,17 @@ function ScottInvoicesInner() {
     const unpaidInvoices = invoices.filter(i => i.status === 'unpaid');
     const paidInvoices = invoices.filter(i => i.status === 'paid');
     const totalUnpaid = unpaidInvoices.reduce((sum, i) => sum + (Number(i.amount) || 0), 0);
+
+    if (loading) {
+        return (
+            <div className="min-h-screen bg-black flex items-center justify-center">
+                <div className="text-center">
+                    <DollarSign className="w-12 h-12 text-amber-400 mx-auto mb-3 animate-pulse" />
+                    <p className="text-gray-500 text-sm font-mono">Loading invoices...</p>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className="min-h-screen bg-black p-4 pb-20">

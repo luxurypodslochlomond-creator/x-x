@@ -269,7 +269,7 @@ export default function ScottGigPacks() {
                             </Button>
                             <Button
                                 type="submit"
-                                disabled={createMutation.isPending}
+                                disabled={!formData.artist_id || !formData.venue_name || createMutation.isPending}
                                 className="flex-1 bg-cyan-500 hover:bg-cyan-600 text-black font-bold font-mono text-sm"
                             >
                                 {createMutation.isPending ? 'Saving...' : 'Save Pack'}

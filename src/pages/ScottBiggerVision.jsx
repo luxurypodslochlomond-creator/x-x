@@ -125,12 +125,22 @@ export default function ScottBiggerVision() {
                 <h2 className="text-amber-400 font-black text-xl font-mono mb-4 text-center">WHO NEEDS THIS</h2>
                 
                 <div className="space-y-4">
-                    {industries.map((industry, i) => (
-                        <div key={i} className={`bg-gradient-to-r from-${industry.color}-500/20 to-black border-2 border-${industry.color}-500 p-4 rounded-xl`}>
+                    {industries.map((industry, i) => {
+                        const colorClasses = {
+                            pink: { bg: 'from-pink-500/20', border: 'border-pink-500', icon: 'text-pink-400', title: 'text-pink-400' },
+                            amber: { bg: 'from-amber-500/20', border: 'border-amber-500', icon: 'text-amber-400', title: 'text-amber-400' },
+                            cyan: { bg: 'from-cyan-500/20', border: 'border-cyan-500', icon: 'text-cyan-400', title: 'text-cyan-400' },
+                            green: { bg: 'from-green-500/20', border: 'border-green-500', icon: 'text-green-400', title: 'text-green-400' },
+                            purple: { bg: 'from-purple-500/20', border: 'border-purple-500', icon: 'text-purple-400', title: 'text-purple-400' }
+                        };
+                        const c = colorClasses[industry.color];
+                        
+                        return (
+                        <div key={i} className={`bg-gradient-to-r ${c.bg} to-black border-2 ${c.border} p-4 rounded-xl`}>
                             <div className="flex items-center gap-3 mb-3">
-                                {React.createElement(industry.icon, { className: `w-8 h-8 text-${industry.color}-400` })}
+                                {React.createElement(industry.icon, { className: `w-8 h-8 ${c.icon}` })}
                                 <div>
-                                    <p className={`text-${industry.color}-400 font-black text-lg font-mono`}>{industry.name}</p>
+                                    <p className={`${c.title} font-black text-lg font-mono`}>{industry.name}</p>
                                     <p className="text-gray-500 text-xs font-mono">{industry.manager}</p>
                                 </div>
                             </div>
@@ -152,7 +162,8 @@ export default function ScottBiggerVision() {
                                 </div>
                             </div>
                         </div>
-                    ))}
+                        );
+                    })}
                 </div>
             </div>
 

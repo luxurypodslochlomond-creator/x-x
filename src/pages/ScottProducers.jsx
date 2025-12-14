@@ -26,16 +26,32 @@ export default function ScottProducers() {
         }
     }, []);
 
+    const [loading, setLoading] = useState(true);
+
     const loadData = async () => {
         try {
+            setLoading(true);
             const allProducers = await base44.entities.ScottProducer.list();
             setProducers(allProducers);
         } catch (error) {
             console.error('Load error:', error);
+        } finally {
+            setLoading(false);
         }
     };
 
     if (!pinEntered) return null;
+
+    if (loading) {
+        return (
+            <div className="min-h-screen bg-black flex items-center justify-center">
+                <div className="text-center">
+                    <Headphones className="w-12 h-12 text-purple-400 mx-auto mb-3 animate-pulse" />
+                    <p className="text-gray-500 text-sm font-mono">Loading producers...</p>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className="min-h-screen bg-black p-4">

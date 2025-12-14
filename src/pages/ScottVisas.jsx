@@ -18,6 +18,7 @@ export default function ScottVisas() {
     const [visas, setVisas] = useState([]);
     const [artists, setArtists] = useState([]);
     const [showAddForm, setShowAddForm] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [newVisa, setNewVisa] = useState({
         artist_id: '',
         visa_type: 'O-1',
@@ -42,12 +43,15 @@ export default function ScottVisas() {
 
     const loadData = async () => {
         try {
+            setLoading(true);
             const allVisas = await base44.entities.ScottVisa.list('-application_deadline');
             const allArtists = await base44.entities.ScottArtist.list();
             setVisas(allVisas);
             setArtists(allArtists);
         } catch (error) {
             console.error('Load error:', error);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -86,6 +90,17 @@ export default function ScottVisas() {
     };
 
     if (!pinEntered) return null;
+
+    if (loading) {
+        return (
+            <div className="min-h-screen bg-black flex items-center justify-center">
+                <div className="text-center">
+                    <Plane className="w-12 h-12 text-cyan-400 mx-auto mb-3 animate-pulse" />
+                    <p className="text-gray-500 text-sm font-mono">Loading visas...</p>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className="min-h-screen bg-black p-4">

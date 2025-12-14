@@ -17,6 +17,7 @@ export default function ScottMerch() {
     const [merch, setMerch] = useState([]);
     const [artists, setArtists] = useState([]);
     const [showAddForm, setShowAddForm] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const storedPin = localStorage.getItem('scott_access_pin');
@@ -30,16 +31,30 @@ export default function ScottMerch() {
 
     const loadData = async () => {
         try {
+            setLoading(true);
             const allMerch = await base44.entities.ScottMerch.list();
             const allArtists = await base44.entities.ScottArtist.list();
             setMerch(allMerch);
             setArtists(allArtists);
         } catch (error) {
             console.error('Load error:', error);
+        } finally {
+            setLoading(false);
         }
     };
 
     if (!pinEntered) return null;
+
+    if (loading) {
+        return (
+            <div className="min-h-screen bg-black flex items-center justify-center">
+                <div className="text-center">
+                    <ShoppingBag className="w-12 h-12 text-purple-400 mx-auto mb-3 animate-pulse" />
+                    <p className="text-gray-500 text-sm font-mono">Loading merch...</p>
+                </div>
+            </div>
+        );
+    }
 
     const totalValue = merch.reduce((sum, m) => sum + (m.stock_remaining * m.price), 0);
     const lowStock = merch.filter(m => m.stock_remaining < 5).length;

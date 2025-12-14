@@ -23,6 +23,7 @@ function ScottExpensesInner() {
     const [expenses, setExpenses] = useState([]);
     const [artists, setArtists] = useState([]);
     const [showAddExpense, setShowAddExpense] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [newExpense, setNewExpense] = useState({
         amount: '',
         category: 'other',
@@ -33,9 +34,18 @@ function ScottExpensesInner() {
     });
 
     useEffect(() => {
+        setLoading(true);
         setExpenses(scott.getExpenses());
         setArtists(scott.getArtists());
-    }, []);
+        setLoading(false);
+
+        if (scott.isOnline) {
+            scott.pullFromServer().then(() => {
+                setExpenses(scott.getExpenses());
+                setArtists(scott.getArtists());
+            });
+        }
+    }, [scott.isOnline]);
 
     const handleAddExpense = () => {
         scott.createExpense({

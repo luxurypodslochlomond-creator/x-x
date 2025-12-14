@@ -19,6 +19,7 @@ export default function ScottPublishing() {
     const [tracks, setTracks] = useState([]);
     const [artists, setArtists] = useState([]);
     const [showAddForm, setShowAddForm] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const storedPin = localStorage.getItem('scott_access_pin');
@@ -32,16 +33,30 @@ export default function ScottPublishing() {
 
     const loadData = async () => {
         try {
+            setLoading(true);
             const allTracks = await base44.entities.ScottPublishing.list();
             const allArtists = await base44.entities.ScottArtist.list();
             setTracks(allTracks);
             setArtists(allArtists);
         } catch (error) {
             console.error('Load error:', error);
+        } finally {
+            setLoading(false);
         }
     };
 
     if (!pinEntered) return null;
+
+    if (loading) {
+        return (
+            <div className="min-h-screen bg-black flex items-center justify-center">
+                <div className="text-center">
+                    <Music className="w-12 h-12 text-purple-400 mx-auto mb-3 animate-pulse" />
+                    <p className="text-gray-500 text-sm font-mono">Loading catalogue...</p>
+                </div>
+            </div>
+        );
+    }
 
     const totalStreams = tracks.reduce((sum, t) => sum + (t.total_streams || 0), 0);
     const totalEarnings = tracks.reduce((sum, t) => sum + (t.estimated_earnings || 0), 0);

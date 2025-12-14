@@ -21,6 +21,7 @@ export default function ScottMedia() {
     const [artists, setArtists] = useState([]);
     const [selectedVibe, setSelectedVibe] = useState('all');
     const [showUploadForm, setShowUploadForm] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const storedPin = localStorage.getItem('scott_access_pin');
@@ -34,16 +35,30 @@ export default function ScottMedia() {
 
     const loadData = async () => {
         try {
+            setLoading(true);
             const allMedia = await base44.entities.ScottMedia.list();
             const allArtists = await base44.entities.ScottArtist.list();
             setMedia(allMedia);
             setArtists(allArtists);
         } catch (error) {
             console.error('Load error:', error);
+        } finally {
+            setLoading(false);
         }
     };
 
     if (!pinEntered) return null;
+
+    if (loading) {
+        return (
+            <div className="min-h-screen bg-black flex items-center justify-center">
+                <div className="text-center">
+                    <Image className="w-12 h-12 text-pink-400 mx-auto mb-3 animate-pulse" />
+                    <p className="text-gray-500 text-sm font-mono">Loading media...</p>
+                </div>
+            </div>
+        );
+    }
 
     const vibes = ['all', 'fire', 'chill', 'professional', 'backstage', 'fans', 'promo'];
     const filteredMedia = selectedVibe === 'all' 

@@ -24,21 +24,32 @@ export default function ScottWhiteLabelPricing() {
             return;
         }
 
+        // Pricing map for Stripe
+        const stripePrices = {
+            solo: 'price_solo_49',
+            small_label: 'price_small_199',
+            mid_label: 'price_mid_499',
+            major_label: 'price_major_4999'
+        };
+
         // Label - create Stripe checkout
         setLoading(true);
         try {
             const response = await base44.functions.invoke('createStripeCheckout', {
-                plan: 'label',
-                priceId: 'price_label_99', // Set this in Stripe dashboard
+                plan: plan,
+                priceId: stripePrices[plan],
                 successUrl: window.location.origin + createPageUrl('ScottManager'),
                 cancelUrl: window.location.origin + createPageUrl('ScottWhiteLabelPricing')
             });
 
-            if (response.data.url) {
+            if (response.data?.url) {
                 window.location.href = response.data.url;
+            } else {
+                throw new Error('No checkout URL returned');
             }
         } catch (error) {
-            alert('Payment setup failed - email support');
+            console.error('Checkout error:', error);
+            alert('Payment setup failed - contact support@kingdom51.com');
             setLoading(false);
         }
     };

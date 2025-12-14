@@ -13,10 +13,13 @@ function ScottCalendarInner() {
     const [viewMode, setViewMode] = useState('upcoming');
     const [events, setEvents] = useState([]);
     const [artists, setArtists] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        setLoading(true);
         setEvents(scott.getEvents());
         setArtists(scott.getArtists());
+        setLoading(false);
         
         if (scott.isOnline) {
             scott.pullFromServer().then(() => {
@@ -46,6 +49,17 @@ function ScottCalendarInner() {
     };
 
     const groupedEvents = groupByMonth(displayEvents);
+
+    if (loading) {
+        return (
+            <div className="min-h-screen bg-black flex items-center justify-center">
+                <div className="text-center">
+                    <Calendar className="w-12 h-12 text-amber-400 mx-auto mb-3 animate-pulse" />
+                    <p className="text-gray-500 text-sm font-mono">Loading calendar...</p>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className="min-h-screen bg-black p-4 pb-20">
