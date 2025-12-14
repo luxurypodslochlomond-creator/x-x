@@ -529,7 +529,8 @@ export default function ScottBiggerVision() {
                         <p className="text-cyan-400 text-xs font-bold mb-1 mt-2">SPACE MISSIONS:</p>
                         <p className="text-white text-xs mb-1">ISS/Mars contracts = £500k+/mission</p>
                         
-                        <p className="text-green-400 text-xs font-bold mt-3 text-base">TOTAL REALISTIC: £5.6M-£9.5M/year by year 5 ♾️❤️♾️</p>
+                        <p className="text-green-400 text-xs font-bold mt-3 text-base">TOTAL REALISTIC: £6.4M-£10.3M/year by year 5 ♾️❤️♾️</p>
+                        <p className="text-cyan-400 text-xs mt-1">(+£780k from clubs/stadiums)</p>
                     </div>
                 </div>
             </div>
