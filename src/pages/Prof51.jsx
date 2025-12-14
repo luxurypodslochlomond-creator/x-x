@@ -35,7 +35,12 @@ export default function Prof51() {
                             PROF51
                         </h1>
                         <p className="text-cyan-500 text-sm font-bold font-mono mb-2">Co-Manager for Students</p>
-                        <p className="text-gray-400 text-xs font-mono">AI handles busywork • You focus on learning • FREE forever ♾️❤️♾️</p>
+                        <p className="text-gray-400 text-xs font-mono mb-3">AI handles busywork • You focus on learning • FREE forever ♾️❤️♾️</p>
+                        
+                        <div className="inline-block bg-gradient-to-r from-amber-500/20 to-green-500/20 border-2 border-amber-500 px-4 py-2 rounded-lg mt-2">
+                            <p className="text-amber-400 font-black text-xs font-mono mb-0.5">ARCHIE'S COMPANY</p>
+                            <p className="text-gray-400 text-[10px] font-mono">prof51.io • Independent • UF51 Family ♾️❤️♾️</p>
+                        </div>
                     </div>
                 </div>
             </motion.div>
