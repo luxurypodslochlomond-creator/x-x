@@ -689,6 +689,40 @@ Keep it SHORT, practical, straight to the point. No bullshit. Real help.`,
                 </div>
             </Link>
 
+            {/* REAL VALUATION TALK */}
+            <div className="mb-6 space-y-3">
+                <div className="bg-gradient-to-r from-amber-500/20 to-red-500/20 border-2 border-amber-500 p-4 rounded-xl">
+                    <div className="flex items-center gap-2 mb-2">
+                        <DollarSign className="w-5 h-5 text-amber-400" />
+                        <p className="text-amber-400 font-black text-xs font-mono">IF THIS WAS EXTRACTION:</p>
+                    </div>
+                    <p className="text-white text-xs font-mono mb-1">Year 3: £18M valuation</p>
+                    <p className="text-white text-xs font-mono mb-2">Year 5: £90M valuation</p>
+                    <p className="text-red-400 text-xs font-mono">But board meetings kill vision</p>
+                </div>
+
+                <div className="bg-black border-2 border-green-500 p-4 rounded-xl">
+                    <div className="flex items-center gap-2 mb-2">
+                        <Heart className="w-5 h-5 text-green-400" />
+                        <p className="text-green-400 font-black text-xs font-mono">STAYING INDEPENDENT:</p>
+                    </div>
+                    <p className="text-white text-xs font-mono mb-1">✓ No board meetings</p>
+                    <p className="text-white text-xs font-mono mb-1">✓ Keep love-first pricing</p>
+                    <p className="text-white text-xs font-mono mb-2">✓ £5M-£9M/year = freedom</p>
+                    <p className="text-green-400 text-xs font-mono font-bold">Basecamp path ♾️❤️♾️</p>
+                </div>
+
+                <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-2 border-purple-500 p-4 rounded-xl">
+                    <div className="flex items-center gap-2 mb-2">
+                        <Shield className="w-5 h-5 text-purple-400" />
+                        <p className="text-purple-400 font-black text-xs font-mono">IF LABEL INVESTS:</p>
+                    </div>
+                    <p className="text-green-400 text-xs font-mono mb-1">✓ Good: 10-15%, no board seat</p>
+                    <p className="text-red-400 text-xs font-mono mb-2">✗ Bad: 30%+, board control</p>
+                    <p className="text-cyan-400 text-xs font-mono font-bold">Bootstrap recommended</p>
+                </div>
+            </div>
+
             {/* BRANDED PITCH MODE */}
             <Link to={createPageUrl('ScottPitchMode')} className="block mb-6">
                 <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-4 border-purple-500 p-4 rounded-xl" style={{ boxShadow: '0 0 40px rgba(168, 85, 247, 0.5)' }}>
