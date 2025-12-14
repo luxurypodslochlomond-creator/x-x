@@ -14,7 +14,7 @@ import CameraHeartRate from '@/components/healing/CameraHeartRate';
  */
 
 export default function Tuner51() {
-          const [mode, setMode] = useState('measure'); // measure, calculate, match, magnetometer, accelerometer, light, pressure, coherence, temperature
+          const [mode, setMode] = useState('measure'); // measure, calculate, match, magnetometer, accelerometer, light, pressure, coherence, temperature, gyroscope, proximity, haptic, nfc
           const [inputFreq, setInputFreq] = useState('');
           const [measuredFreq, setMeasuredFreq] = useState(null);
           const [isListening, setIsListening] = useState(false);
@@ -29,6 +29,12 @@ export default function Tuner51() {
           const [showCoherenceExplainer, setShowCoherenceExplainer] = useState(false);
           const [batteryInfo, setBatteryInfo] = useState(null);
           const [thermalState, setThermalState] = useState(null);
+          
+          // FORGOTTEN TECH STATE
+          const [gyroData, setGyroData] = useState(null);
+          const [proximityDetected, setProximityDetected] = useState(false);
+          const [postureScore, setPostureScore] = useState(null);
+          const gyroscopeRef = useRef(null);
           
           // COHERENCE MODE STATE
           const [coherenceScore, setCoherenceScore] = useState(null);
@@ -521,8 +527,131 @@ export default function Tuner51() {
             }
         } catch (err) {
             alert('Temperature monitoring not available');
-        }
-    };
+            }
+            };
+
+            // GYROSCOPE - Posture & Movement Tracking (GOOD: meditation, healing, posture)
+            const startGyroscope = () => {
+            if ('Gyroscope' in window) {
+            try {
+                const sensor = new window.Gyroscope({ frequency: 60 });
+                gyroscopeRef.current = sensor;
+
+                sensor.addEventListener('reading', () => {
+                    const { x, y, z } = sensor;
+                    setGyroData({ x, y, z });
+
+                    // Calculate posture score (lower rotation = more still = better meditation)
+                    const totalRotation = Math.sqrt(x*x + y*y + z*z);
+                    const stillness = Math.max(0, 100 - (totalRotation * 10));
+                    setPostureScore(Math.round(stillness));
+
+                    // Vibrate on excessive movement (gentle reminder to stay still)
+                    if (totalRotation > 5 && 'vibrate' in navigator) {
+                        navigator.vibrate(30);
+                    }
+                });
+
+                sensor.start();
+                setIsSensorActive(true);
+            } catch (err) {
+                alert('Gyroscope not available. Try Chrome/Edge on Android.');
+            }
+            } else {
+            alert('Gyroscope API not supported on this device/browser.');
+            }
+            };
+
+            // PROXIMITY SENSOR - Hand Energy Detection (GOOD: healing, energy work)
+            // BLOCKED: facial recognition, surveillance
+            const startProximitySensor = () => {
+            if ('ProximitySensor' in window) {
+            try {
+                const sensor = new window.ProximitySensor({ frequency: 10 });
+
+                sensor.addEventListener('reading', () => {
+                    const { distance } = sensor;
+                    setProximityDetected(distance < 5); // Object within 5cm
+
+                    // Audio feedback when hand detected
+                    if (distance < 5) {
+                        playFeedbackBeep(440); // A4 note
+                    }
+                });
+
+                sensor.start();
+                setIsSensorActive(true);
+            } catch (err) {
+                alert('Proximity sensor not available.');
+            }
+            } else {
+            // PRIVACY-SAFE FALLBACK: Use ambient light sensor instead
+            if ('AmbientLightSensor' in window) {
+                alert('Using light sensor instead - cover/uncover to detect hand presence (privacy-safe)');
+                startLightSensor();
+            } else {
+                alert('Proximity API not supported. This is GOOD for privacy.');
+            }
+            }
+            };
+
+            // HAPTIC HEALING - Deliver frequencies via vibration (GOOD: therapy, healing)
+            // BLOCKED: tracking user behavior, addiction patterns
+            const playHapticHealing = (frequency) => {
+            if (!('vibrate' in navigator)) {
+            alert('Vibration not supported on this device');
+            return;
+            }
+
+            // Convert frequency to vibration pattern (pulse at frequency rate)
+            const period = 1000 / frequency; // ms per cycle
+            const pattern = [];
+
+            // Generate 5 seconds of pulsed vibration
+            for (let i = 0; i < frequency * 5; i++) {
+            pattern.push(Math.round(period * 0.3)); // vibrate for 30% of cycle
+            pattern.push(Math.round(period * 0.7)); // pause for 70% of cycle
+            }
+
+            navigator.vibrate(pattern);
+            };
+
+            // NFC HEALING TAG READER (GOOD: share frequencies, offline transfer)
+            // BLOCKED: payment tracking, location tracking
+            const startNFCReader = async () => {
+            if (!('NDEFReader' in window)) {
+            alert('NFC not supported on this browser/device');
+            return;
+            }
+
+            try {
+            const ndef = new window.NDEFReader();
+            await ndef.scan();
+
+            setIsSensorActive(true);
+            alert('✓ NFC ready - tap a healing tag to load frequency');
+
+            ndef.addEventListener('reading', ({ message }) => {
+                for (const record of message.records) {
+                    if (record.recordType === 'text') {
+                        const decoder = new TextDecoder(record.encoding);
+                        const text = decoder.decode(record.data);
+
+                        // Parse frequency from tag
+                        const freq = parseFloat(text);
+                        if (freq && freq > 0) {
+                            setInputFreq(freq.toString());
+                            alert(`✓ Loaded ${freq} Hz from healing tag`);
+                            playFeedbackBeep(freq);
+                        }
+                    }
+                }
+            });
+
+            } catch (err) {
+            alert('NFC permission denied or not available');
+            }
+            };
 
     // CALCULATE RESONANCE MATCHES
     const calculateMatches = (freq) => {
@@ -635,6 +764,9 @@ export default function Tuner51() {
             stopListening();
             stopSensors();
             stopPlayback();
+            if (gyroscopeRef.current) {
+                gyroscopeRef.current.stop();
+            }
             document.body.style.backgroundColor = '';
         };
     }, []);
@@ -929,6 +1061,32 @@ export default function Tuner51() {
                         >
                             <Zap className="w-5 h-5 mx-auto mb-1 text-red-400" />
                             <p className="text-white text-xs font-bold">TEMP</p>
+                        </motion.button>
+                        <motion.button
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            onClick={() => { setMode('gyroscope'); stopListening(); stopSensors(); }}
+                            className={`p-3 rounded-lg border-2 transition-all ${
+                                mode === 'gyroscope' 
+                                    ? 'bg-purple-500/20 border-purple-500' 
+                                    : 'bg-black border-gray-700 hover:border-gray-500'
+                            }`}
+                        >
+                            <Brain className="w-5 h-5 mx-auto mb-1 text-purple-400" />
+                            <p className="text-white text-xs font-bold">POSTURE</p>
+                        </motion.button>
+                        <motion.button
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            onClick={() => { setMode('haptic'); stopListening(); stopSensors(); }}
+                            className={`p-3 rounded-lg border-2 transition-all ${
+                                mode === 'haptic' 
+                                    ? 'bg-pink-500/20 border-pink-500' 
+                                    : 'bg-black border-gray-700 hover:border-gray-500'
+                            }`}
+                        >
+                            <Activity className="w-5 h-5 mx-auto mb-1 text-pink-400" />
+                            <p className="text-white text-xs font-bold">HAPTIC</p>
                         </motion.button>
                         </div>
                 
@@ -1740,6 +1898,184 @@ export default function Tuner51() {
                 )}
                 </AnimatePresence>
 
+                {/* GYROSCOPE POSTURE MODE */}
+                <AnimatePresence mode="wait">
+                {mode === 'gyroscope' && (
+                    <motion.div
+                        key="gyroscope"
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: 20 }}
+                        className="space-y-6"
+                    >
+                        <div className="bg-gradient-to-r from-purple-500/20 to-indigo-500/20 border-2 border-purple-500 rounded-xl p-6"
+                            style={{ boxShadow: '0 0 30px rgba(168, 85, 247, 0.3)' }}>
+                            <h2 className="text-xl font-black text-white mb-2">POSTURE TRACKER</h2>
+                            <p className="text-gray-300 text-sm mb-4">
+                                Gyroscope measures stillness during meditation/healing
+                            </p>
+
+                            <div className="bg-green-900/20 border border-green-500/50 p-3 rounded mb-4">
+                                <p className="text-green-400 text-xs font-bold mb-2">✓ GOOD USE:</p>
+                                <p className="text-gray-300 text-xs">Meditation posture, healing stillness, mindfulness practice</p>
+                            </div>
+
+                            <div className="bg-red-900/20 border border-red-500/50 p-3 rounded mb-4">
+                                <p className="text-red-400 text-xs font-bold mb-2">✗ BLOCKED:</p>
+                                <p className="text-gray-300 text-xs">Behavioral tracking, addiction detection, surveillance</p>
+                            </div>
+
+                            {!isSensorActive ? (
+                                <motion.button
+                                    whileHover={{ scale: 1.02 }}
+                                    whileTap={{ scale: 0.98 }}
+                                    onClick={startGyroscope}
+                                    className="w-full bg-purple-500 hover:bg-purple-600 text-white font-bold py-4 rounded-lg transition-all"
+                                >
+                                    <Brain className="w-6 h-6 inline-block mr-2" />
+                                    START POSTURE TRACKING
+                                </motion.button>
+                            ) : (
+                                <>
+                                    <motion.button
+                                        whileHover={{ scale: 1.02 }}
+                                        whileTap={{ scale: 0.98 }}
+                                        onClick={stopSensors}
+                                        className="w-full bg-gray-600 hover:bg-gray-700 text-white font-bold py-4 rounded-lg transition-all mb-4"
+                                    >
+                                        STOP
+                                    </motion.button>
+
+                                    {postureScore !== null && (
+                                        <motion.div
+                                            initial={{ scale: 0.8, opacity: 0 }}
+                                            animate={{ scale: 1, opacity: 1 }}
+                                            className="space-y-3"
+                                        >
+                                            <div className={`border-2 rounded-lg p-4 ${
+                                                postureScore >= 80 ? 'bg-green-900/40 border-green-500' :
+                                                postureScore >= 60 ? 'bg-yellow-900/40 border-yellow-500' :
+                                                'bg-red-900/40 border-red-500'
+                                            }`}>
+                                                <p className="text-sm mb-2 font-bold text-white">STILLNESS SCORE:</p>
+                                                <p className={`text-5xl font-black ${
+                                                    postureScore >= 80 ? 'text-green-400' :
+                                                    postureScore >= 60 ? 'text-yellow-400' :
+                                                    'text-red-400'
+                                                }`}>{postureScore}%</p>
+
+                                                {postureScore >= 80 && (
+                                                    <p className="text-green-300 text-xs mt-3">✓ Very still - perfect meditation posture</p>
+                                                )}
+                                                {postureScore >= 60 && postureScore < 80 && (
+                                                    <p className="text-yellow-300 text-xs mt-3">⚡ Some movement - try to stay still</p>
+                                                )}
+                                                {postureScore < 60 && (
+                                                    <p className="text-red-300 text-xs mt-3">⚠️ Too much movement - find stillness</p>
+                                                )}
+                                            </div>
+
+                                            {gyroData && (
+                                                <div className="grid grid-cols-3 gap-2">
+                                                    <div className="bg-black/40 border border-purple-500/50 p-2 rounded">
+                                                        <p className="text-purple-400 text-xs">X rotation</p>
+                                                        <p className="text-white font-bold">{gyroData.x.toFixed(2)}°/s</p>
+                                                    </div>
+                                                    <div className="bg-black/40 border border-purple-500/50 p-2 rounded">
+                                                        <p className="text-purple-400 text-xs">Y rotation</p>
+                                                        <p className="text-white font-bold">{gyroData.y.toFixed(2)}°/s</p>
+                                                    </div>
+                                                    <div className="bg-black/40 border border-purple-500/50 p-2 rounded">
+                                                        <p className="text-purple-400 text-xs">Z rotation</p>
+                                                        <p className="text-white font-bold">{gyroData.z.toFixed(2)}°/s</p>
+                                                    </div>
+                                                </div>
+                                            )}
+                                        </motion.div>
+                                    )}
+                                </>
+                            )}
+                        </div>
+                    </motion.div>
+                )}
+                </AnimatePresence>
+
+                {/* HAPTIC HEALING MODE */}
+                <AnimatePresence mode="wait">
+                {mode === 'haptic' && (
+                    <motion.div
+                        key="haptic"
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: 20 }}
+                        className="space-y-6"
+                    >
+                        <div className="bg-gradient-to-r from-pink-500/20 to-rose-500/20 border-2 border-pink-500 rounded-xl p-6"
+                            style={{ boxShadow: '0 0 30px rgba(236, 72, 153, 0.3)' }}>
+                            <h2 className="text-xl font-black text-white mb-2">HAPTIC HEALING</h2>
+                            <p className="text-gray-300 text-sm mb-4">
+                                Feel frequencies directly through vibration - bypass ears
+                            </p>
+
+                            <div className="bg-green-900/20 border border-green-500/50 p-3 rounded mb-4">
+                                <p className="text-green-400 text-xs font-bold mb-2">✓ GOOD USE:</p>
+                                <p className="text-gray-300 text-xs">Healing therapy, sub-20Hz frequencies, touch-based wellness</p>
+                            </div>
+
+                            <div className="bg-red-900/20 border border-red-500/50 p-3 rounded mb-4">
+                                <p className="text-red-400 text-xs font-bold mb-2">✗ BLOCKED:</p>
+                                <p className="text-gray-300 text-xs">Addiction patterns (slot machine vibrations), manipulation</p>
+                            </div>
+
+                            <div className="space-y-3">
+                                <p className="text-white font-bold text-sm">SELECT HEALING FREQUENCY:</p>
+
+                                <motion.button
+                                    whileHover={{ scale: 1.02 }}
+                                    whileTap={{ scale: 0.98 }}
+                                    onClick={() => playHapticHealing(7.83)}
+                                    className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-lg transition-all"
+                                >
+                                    Earth Schumann (7.83 Hz)
+                                </motion.button>
+
+                                <motion.button
+                                    whileHover={{ scale: 1.02 }}
+                                    whileTap={{ scale: 0.98 }}
+                                    onClick={() => playHapticHealing(4)}
+                                    className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all"
+                                >
+                                    Delta Sleep (4 Hz)
+                                </motion.button>
+
+                                <motion.button
+                                    whileHover={{ scale: 1.02 }}
+                                    whileTap={{ scale: 0.98 }}
+                                    onClick={() => playHapticHealing(10)}
+                                    className="w-full bg-cyan-600 hover:bg-cyan-700 text-white font-bold py-3 rounded-lg transition-all"
+                                >
+                                    Alpha Calm (10 Hz)
+                                </motion.button>
+
+                                <motion.button
+                                    whileHover={{ scale: 1.02 }}
+                                    whileTap={{ scale: 0.98 }}
+                                    onClick={() => playHapticHealing(40)}
+                                    className="w-full bg-yellow-600 hover:bg-yellow-700 text-white font-bold py-3 rounded-lg transition-all"
+                                >
+                                    Gamma Focus (40 Hz)
+                                </motion.button>
+
+                                <div className="bg-amber-900/20 border border-amber-500/50 p-3 rounded mt-4">
+                                    <p className="text-amber-400 text-xs font-bold mb-2">HOW IT WORKS:</p>
+                                    <p className="text-gray-300 text-xs">Vibration motor pulses at frequency rate. 5 seconds per session. Can feel sub-20Hz frequencies your ears can't hear.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </motion.div>
+                )}
+                </AnimatePresence>
+
                 {/* WHAT YOU CAN DO NOW */}
                 <div className="mt-8 bg-gradient-to-br from-green-500/20 to-cyan-500/20 border-2 border-green-500 rounded-xl p-6">
                     <h3 className="text-green-400 font-bold text-lg mb-3">WHAT YOU CAN DO NOW (WORKING):</h3>
@@ -1771,6 +2107,14 @@ export default function Tuner51() {
                         <div className="bg-black border border-red-500/30 p-3 rounded">
                             <p className="text-red-400 font-bold mb-1">7. MONITOR DEVICE HEAT:</p>
                             <p className="text-gray-300 text-xs">Know when to take breaks during heavy creation (music, video editing)</p>
+                        </div>
+                        <div className="bg-black border border-purple-500/30 p-3 rounded">
+                            <p className="text-purple-400 font-bold mb-1">8. POSTURE TRACKING:</p>
+                            <p className="text-gray-300 text-xs">Gyroscope measures stillness during meditation - verify healing posture</p>
+                        </div>
+                        <div className="bg-black border border-pink-500/30 p-3 rounded">
+                            <p className="text-pink-400 font-bold mb-1">9. HAPTIC HEALING:</p>
+                            <p className="text-gray-300 text-xs">Feel sub-20Hz frequencies through vibration - therapy via touch</p>
                         </div>
                     </div>
                 </div>
