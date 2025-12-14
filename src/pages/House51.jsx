@@ -25,6 +25,19 @@ export default function House51() {
     const [waveformData, setWaveformData] = useState(new Array(64).fill(0));
     const [playbackTime, setPlaybackTime] = useState(0);
     const [totalDuration, setTotalDuration] = useState(240); // 4 minutes default
+    const [showMixer, setShowMixer] = useState(false);
+    const [mixerLevels, setMixerLevels] = useState({
+        kick: 1.0,
+        bass: 0.3,
+        hats: 0.1,
+        claps: 0.25,
+        bells: 0.12,
+        pads: 0.05,
+        strings: 0.15,
+        shakers: 0.06,
+        ride: 0.08,
+        healing: 0.08
+    });
 
     const audioContextRef = useRef(null);
     const kickOscRef = useRef(null);
@@ -948,7 +961,160 @@ export default function House51() {
                             SHARE P2P
                         </motion.button>
                     </div>
+
+                    {/* SHOW MIXER TOGGLE */}
+                    <div className="flex justify-center mt-4">
+                        <motion.button
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            onClick={() => setShowMixer(!showMixer)}
+                            className="px-6 py-3 rounded-lg bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 font-bold text-sm flex items-center gap-2"
+                        >
+                            <Settings className="w-4 h-4" />
+                            {showMixer ? 'HIDE MIXER' : 'SHOW MIXER (Learn to Mix!)'}
+                        </motion.button>
+                    </div>
                 </motion.div>
+
+                {/* DJ MIXER - VISUAL LEARNING */}
+                <AnimatePresence>
+                {showMixer && (
+                    <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        className="mb-8 bg-gradient-to-br from-black via-purple-900/30 to-black border-4 border-cyan-500 rounded-xl p-6"
+                        style={{ boxShadow: '0 0 40px rgba(34, 211, 238, 0.5)' }}
+                    >
+                        <div className="mb-6 text-center">
+                            <h3 className="text-2xl font-black text-cyan-400 mb-2">DJ MIXING BOARD</h3>
+                            <p className="text-gray-400 text-sm font-mono">
+                                Each fader controls a layer - see how house music is built ⚡
+                            </p>
+                        </div>
+
+                        <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+                            {/* KICK */}
+                            <MixerChannel
+                                label="KICK"
+                                color="cyan"
+                                icon="●"
+                                value={mixerLevels.kick}
+                                onChange={(val) => setMixerLevels({...mixerLevels, kick: val})}
+                                description="4-on-floor heartbeat"
+                                isActive={isPlaying}
+                            />
+
+                            {/* BASS */}
+                            <MixerChannel
+                                label="BASS"
+                                color="pink"
+                                icon="~"
+                                value={mixerLevels.bass}
+                                onChange={(val) => setMixerLevels({...mixerLevels, bass: val})}
+                                description="Rolling groove + sub"
+                                isActive={isPlaying}
+                            />
+
+                            {/* HI-HATS */}
+                            <MixerChannel
+                                label="HATS"
+                                color="yellow"
+                                icon="^"
+                                value={mixerLevels.hats}
+                                onChange={(val) => setMixerLevels({...mixerLevels, hats: val})}
+                                description="Crisp high energy"
+                                isActive={isPlaying}
+                            />
+
+                            {/* CLAPS */}
+                            <MixerChannel
+                                label="CLAPS"
+                                color="orange"
+                                icon="◆"
+                                value={mixerLevels.claps}
+                                onChange={(val) => setMixerLevels({...mixerLevels, claps: val})}
+                                description="2 + 4 snap"
+                                isActive={isPlaying}
+                            />
+
+                            {/* BELLS */}
+                            <MixerChannel
+                                label="BELLS"
+                                color="purple"
+                                icon="✦"
+                                value={mixerLevels.bells}
+                                onChange={(val) => setMixerLevels({...mixerLevels, bells: val})}
+                                description="Lil Louis shimmer"
+                                isActive={isPlaying}
+                            />
+
+                            {/* PADS */}
+                            <MixerChannel
+                                label="PADS"
+                                color="teal"
+                                icon="≋"
+                                value={mixerLevels.pads}
+                                onChange={(val) => setMixerLevels({...mixerLevels, pads: val})}
+                                description="Warm atmosphere"
+                                isActive={isPlaying}
+                            />
+
+                            {/* STRINGS */}
+                            <MixerChannel
+                                label="STRINGS"
+                                color="amber"
+                                icon="∿"
+                                value={mixerLevels.strings}
+                                onChange={(val) => setMixerLevels({...mixerLevels, strings: val})}
+                                description="Classic house soul"
+                                isActive={isPlaying}
+                            />
+
+                            {/* SHAKERS */}
+                            <MixerChannel
+                                label="SHAKERS"
+                                color="green"
+                                icon="※"
+                                value={mixerLevels.shakers}
+                                onChange={(val) => setMixerLevels({...mixerLevels, shakers: val})}
+                                description="Groove texture"
+                                isActive={isPlaying}
+                            />
+
+                            {/* RIDE */}
+                            <MixerChannel
+                                label="RIDE"
+                                color="blue"
+                                icon="○"
+                                value={mixerLevels.ride}
+                                onChange={(val) => setMixerLevels({...mixerLevels, ride: val})}
+                                description="Cymbal sustain"
+                                isActive={isPlaying}
+                            />
+
+                            {/* HEALING */}
+                            <MixerChannel
+                                label="HEALING"
+                                color="pink"
+                                icon="♾"
+                                value={mixerLevels.healing}
+                                onChange={(val) => setMixerLevels({...mixerLevels, healing: val})}
+                                description="432/528Hz layer"
+                                isActive={isPlaying}
+                            />
+                        </div>
+
+                        <div className="mt-6 bg-black/60 border-2 border-pink-500 p-4 rounded-lg">
+                            <p className="text-pink-400 font-bold text-sm mb-2">💡 MIXING TIP:</p>
+                            <p className="text-gray-300 text-xs">
+                                CamelPhat's secret: balance LOW (kick/bass) + MID (claps/bells) + HIGH (hats/ride) frequencies. 
+                                Each layer occupies different sonic space = full spectrum sound that physically moves you ⚡
+                            </p>
+                        </div>
+                    </motion.div>
+                )}
+                </AnimatePresence>
 
                 {/* VISUALIZER */}
                 <AnimatePresence>
@@ -1312,6 +1478,79 @@ export default function House51() {
 
             </div>
         </div>
+    );
+}
+
+// MIXER CHANNEL COMPONENT
+function MixerChannel({ label, color, icon, value, onChange, description, isActive }) {
+    const colorMap = {
+        cyan: { border: 'border-cyan-500', bg: 'bg-cyan-500', text: 'text-cyan-400', glow: 'rgba(34, 211, 238, 0.6)' },
+        pink: { border: 'border-pink-500', bg: 'bg-pink-500', text: 'text-pink-400', glow: 'rgba(236, 72, 153, 0.6)' },
+        yellow: { border: 'border-yellow-500', bg: 'bg-yellow-500', text: 'text-yellow-400', glow: 'rgba(234, 179, 8, 0.6)' },
+        orange: { border: 'border-orange-500', bg: 'bg-orange-500', text: 'text-orange-400', glow: 'rgba(249, 115, 22, 0.6)' },
+        purple: { border: 'border-purple-500', bg: 'bg-purple-500', text: 'text-purple-400', glow: 'rgba(168, 85, 247, 0.6)' },
+        teal: { border: 'border-teal-500', bg: 'bg-teal-500', text: 'text-teal-400', glow: 'rgba(20, 184, 166, 0.6)' },
+        amber: { border: 'border-amber-500', bg: 'bg-amber-500', text: 'text-amber-400', glow: 'rgba(245, 158, 11, 0.6)' },
+        green: { border: 'border-green-500', bg: 'bg-green-500', text: 'text-green-400', glow: 'rgba(34, 197, 94, 0.6)' },
+        blue: { border: 'border-blue-500', bg: 'bg-blue-500', text: 'text-blue-400', glow: 'rgba(59, 130, 246, 0.6)' }
+    };
+    const c = colorMap[color] || colorMap.cyan;
+
+    return (
+        <motion.div 
+            className="bg-black border-2 rounded-lg p-4 relative"
+            style={{ borderColor: c.border.replace('border-', '') }}
+            animate={isActive && value > 0.1 ? {
+                boxShadow: [`0 0 5px ${c.glow}`, `0 0 20px ${c.glow}`, `0 0 5px ${c.glow}`]
+            } : {}}
+            transition={{ duration: 0.5, repeat: Infinity }}
+        >
+            {/* LEVEL INDICATOR */}
+            <div className="mb-3 text-center">
+                <motion.span 
+                    className={`text-3xl ${c.text} font-black`}
+                    animate={isActive && value > 0.1 ? { scale: [1, 1.2, 1] } : {}}
+                    transition={{ duration: 0.3, repeat: Infinity }}
+                >
+                    {icon}
+                </motion.span>
+            </div>
+
+            {/* VERTICAL FADER */}
+            <div className="flex justify-center mb-3">
+                <div className="relative h-32 w-8">
+                    {/* Track */}
+                    <div className={`absolute inset-0 ${c.bg} opacity-20 rounded-full`} />
+                    
+                    {/* Fill */}
+                    <motion.div 
+                        className={`absolute bottom-0 left-0 right-0 ${c.bg} rounded-full`}
+                        style={{ height: `${value * 100}%` }}
+                        animate={isActive && value > 0.1 ? { opacity: [0.6, 1, 0.6] } : {}}
+                        transition={{ duration: 0.5, repeat: Infinity }}
+                    />
+                    
+                    {/* Input */}
+                    <input
+                        type="range"
+                        min="0"
+                        max="1"
+                        step="0.01"
+                        value={value}
+                        onChange={(e) => onChange(parseFloat(e.target.value))}
+                        className="absolute inset-0 opacity-0 cursor-pointer"
+                        style={{ writingMode: 'bt-lr', WebkitAppearance: 'slider-vertical' }}
+                    />
+                </div>
+            </div>
+
+            {/* LABEL */}
+            <div className="text-center">
+                <p className={`${c.text} font-black text-xs mb-1`}>{label}</p>
+                <p className="text-gray-500 text-[10px]">{description}</p>
+                <p className={`${c.text} text-xs font-mono mt-1`}>{Math.round(value * 100)}%</p>
+            </div>
+        </motion.div>
     );
 }
 
