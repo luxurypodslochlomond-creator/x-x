@@ -126,6 +126,15 @@ export default function Prof51() {
                         <p className="text-purple-400 text-xs mb-1">→ Iran shuts down WiFi? Students still share notes.</p>
                         <p className="text-pink-400 text-xs mb-1">→ Lecture hall has no signal? Mesh connects everyone.</p>
                         <p className="text-amber-400 text-xs font-bold mt-2">Maxwell's physics → Governments can't block it ♾️❤️♾️</p>
+
+                        <div className="bg-black/60 border-2 border-cyan-500 p-3 rounded mt-3">
+                            <p className="text-cyan-400 font-black text-xs mb-2">🌍 LARGEST STUDENT NETWORK EVER:</p>
+                            <p className="text-white text-xs mb-1">Student → Student → Student → Student (P2P chain)</p>
+                            <p className="text-green-400 text-xs mb-1">→ Edinburgh economics → Cambridge maths → MIT physics</p>
+                            <p className="text-purple-400 text-xs mb-1">→ Sophisticated students sharing globally</p>
+                            <p className="text-pink-400 text-xs mb-1">→ Device-to-device, no company controls it</p>
+                            <p className="text-amber-400 text-xs font-bold mt-2">235M students worldwide. All connected P2P. Unstoppable ♾️❤️♾️</p>
+                        </div>
                     </div>
 
                     <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-4 border-purple-500 p-4 rounded" style={{ boxShadow: '0 0 30px rgba(168, 85, 247, 0.4)' }}>
