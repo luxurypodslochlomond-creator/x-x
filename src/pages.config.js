@@ -226,6 +226,7 @@ import PatientZero from './pages/PatientZero';
 import ScottOfflineMode from './pages/ScottOfflineMode';
 import AdminStarlingSetup from './pages/AdminStarlingSetup';
 import Universal51 from './pages/Universal51';
+import Life51 from './pages/Life51';
 import __Layout from './Layout.jsx';
 
 
@@ -458,6 +459,7 @@ export const PAGES = {
     "ScottOfflineMode": ScottOfflineMode,
     "AdminStarlingSetup": AdminStarlingSetup,
     "Universal51": Universal51,
+    "Life51": Life51,
 }
 
 export const pagesConfig = {
