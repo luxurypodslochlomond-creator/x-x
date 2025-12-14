@@ -289,11 +289,20 @@ export default function Prof51() {
                                 </div>
 
                                 <div className="bg-black border border-green-500/30 p-3 rounded">
-                                    <p className="text-green-400 font-bold mb-2">THE PATH (LEARNING AS HE GOES):</p>
+                                    <p className="text-green-400 font-bold mb-2">HIS OWN COMPANY:</p>
+                                    <p className="text-white text-xs mb-1">prof51.io = Archie's independent company</p>
+                                    <p className="text-cyan-400 text-xs mb-1">→ He owns it. He runs it. His vision.</p>
+                                    <p className="text-pink-400 text-xs mb-1">→ UF51 Family support (but it's HIS)</p>
+                                    <p className="text-amber-400 text-xs mb-2 mt-2">→ Grants go to Prof51 (separate from UF51 CIC)</p>
+                                    <p className="text-green-400 text-xs font-bold">Independent founder. Connected family. Best of both. ♾️❤️♾️</p>
+                                </div>
+
+                                <div className="bg-black border border-purple-500/30 p-3 rounded">
+                                    <p className="text-purple-400 font-bold mb-2">THE PATH (LEARNING AS HE GOES):</p>
                                     <p className="text-white text-xs mb-1">Year 1: Campus lead (learns what students actually need)</p>
                                     <p className="text-white text-xs mb-1">Year 2: Head of Growth (learns ethical scaling)</p>
-                                    <p className="text-white text-xs mb-1">Year 3: Co-Founder (learns business + impact balance)</p>
-                                    <p className="text-white text-xs mb-1">Year 4: Founder (10M students helped, not extracted)</p>
+                                    <p className="text-white text-xs mb-1">Year 3: Founder building Prof51 globally</p>
+                                    <p className="text-white text-xs mb-1">Year 4: 10M students helped, not extracted</p>
                                     <p className="text-cyan-400 text-xs font-bold mt-2">Building while learning. Real education. Makes Dad proud. ✓</p>
                                 </div>
                             </div>
