@@ -14,54 +14,20 @@ import CameraHeartRate from '@/components/healing/CameraHeartRate';
  */
 
 export default function Tuner51() {
-          const [mode, setMode] = useState('measure'); // measure, calculate, match, magnetometer, accelerometer, light, pressure, coherence, temperature, gyroscope, proximity, haptic, nfc
-          const [inputFreq, setInputFreq] = useState('');
-          const [measuredFreq, setMeasuredFreq] = useState(null);
-          const [isListening, setIsListening] = useState(false);
-          const [matches, setMatches] = useState([]);
-          const [nextMove, setNextMove] = useState(null);
-          const [waveformData, setWaveformData] = useState(new Array(50).fill(0));
-          const [magneticField, setMagneticField] = useState(null);
-          const [acceleration, setAcceleration] = useState(null);
-          const [isSensorActive, setIsSensorActive] = useState(false);
-          const [ambientLight, setAmbientLight] = useState(null);
-          const [pressure, setPressure] = useState(null);
-          const [showCoherenceExplainer, setShowCoherenceExplainer] = useState(false);
-          const [batteryInfo, setBatteryInfo] = useState(null);
-          const [thermalState, setThermalState] = useState(null);
-          
-          // FORGOTTEN TECH STATE
-          const [gyroData, setGyroData] = useState(null);
-          const [proximityDetected, setProximityDetected] = useState(false);
-          const [postureScore, setPostureScore] = useState(null);
-          const gyroscopeRef = useRef(null);
-          
-          // COHERENCE MODE STATE
-          const [coherenceScore, setCoherenceScore] = useState(null);
-          const [heartData, setHeartData] = useState(null);
-          const [sensorData, setSensorData] = useState({
-              emStability: null,
-              movementCalm: null,
-              lightBalance: null
-          });
-          const [isCoherenceMeasuring, setIsCoherenceMeasuring] = useState(false);
-          const coherenceTimerRef = useRef(null);
+    const [mode, setMode] = useState('measure'); // measure, calculate, match
+    const [inputFreq, setInputFreq] = useState('');
+    const [measuredFreq, setMeasuredFreq] = useState(null);
+    const [isListening, setIsListening] = useState(false);
+    const [matches, setMatches] = useState([]);
+    const [nextMove, setNextMove] = useState(null);
+    const [waveformData, setWaveformData] = useState(new Array(50).fill(0));
 
     const audioContextRef = useRef(null);
     const analyserRef = useRef(null);
-    const canvasRef = useRef(null);
-    const magnetometerRef = useRef(null);
-    const accelerometerRef = useRef(null);
     const lastSaveRef = useRef(Date.now());
     const oscillatorRef = useRef(null);
     const gainNodeRef = useRef(null);
     const [isPlaying, setIsPlaying] = useState(false);
-
-    // FEEDBACK REFS
-    const feedbackOscillatorRef = useRef(null);
-    const lastBeepRef = useRef(Date.now());
-    const baselineEMRef = useRef(null);
-    const baselineAccelRef = useRef(null);
 
     // Fetch measurement history
     const { data: measurements = [] } = useQuery({
@@ -165,287 +131,11 @@ export default function Tuner51() {
         }
     };
 
-    // MAGNETOMETER - Detect EM fields
-    const startMagnetometer = () => {
-        if ('Magnetometer' in window) {
-            try {
-                const sensor = new window.Magnetometer({ frequency: 60 });
-                magnetometerRef.current = sensor;
 
-                sensor.addEventListener('reading', () => {
-                    const { x, y, z } = sensor;
-                    const magnitude = Math.sqrt(x*x + y*y + z*z);
-                    setMagneticField({ x, y, z, magnitude });
 
-                    // Set baseline on first reading
-                    if (baselineEMRef.current === null) {
-                        baselineEMRef.current = magnitude;
-                    }
 
-                    // INSTANT FEEDBACK: beep when EM field changes significantly
-                    const change = Math.abs(magnitude - baselineEMRef.current);
-                    if (change > 5 && Date.now() - lastBeepRef.current > 500) {
-                        playFeedbackBeep(200 + change * 10); // Higher pitch = stronger field
-                        lastBeepRef.current = Date.now();
-                        // Visual feedback: vibrate phone
-                        if ('vibrate' in navigator) {
-                            navigator.vibrate(50);
-                        }
-                    }
 
-                    // Auto-save measurement
-                    saveMeasurement('magnetometer', { magnitude, x, y, z });
 
-                    // Detect variations (Earth's field is ~25-65 µT)
-                    const earthBase = 50; // µT average
-                    const variation = Math.abs(magnitude - earthBase);
-                    if (variation > 5) {
-                        setMeasuredFreq(Math.round(variation)); // Simplified - actual would need FFT
-                    }
-                });
-
-                sensor.start();
-                setIsSensorActive(true);
-            } catch (err) {
-                alert('Magnetometer not available. Try Chrome/Edge on Android.');
-            }
-        } else {
-            alert('Magnetometer API not supported on this device/browser.');
-        }
-    };
-
-    // ACCELEROMETER - Detect vibrations/sub-20Hz
-    const startAccelerometer = () => {
-        if ('Accelerometer' in window) {
-            try {
-                const sensor = new window.Accelerometer({ frequency: 60 });
-                accelerometerRef.current = sensor;
-
-                const readings = [];
-                sensor.addEventListener('reading', () => {
-                    const { x, y, z } = sensor;
-                    const magnitude = Math.sqrt(x*x + y*y + z*z);
-                    setAcceleration({ x, y, z, magnitude });
-
-                    // Set baseline
-                    if (baselineAccelRef.current === null) {
-                        baselineAccelRef.current = magnitude;
-                    }
-
-                    // INSTANT FEEDBACK: vibrate when movement detected
-                    const change = Math.abs(magnitude - baselineAccelRef.current);
-                    if (change > 0.5 && Date.now() - lastBeepRef.current > 300) {
-                        // Visual: flash background
-                        document.body.style.backgroundColor = '#ff6b35';
-                        setTimeout(() => {
-                            document.body.style.backgroundColor = '';
-                        }, 100);
-
-                        // Haptic feedback
-                        if ('vibrate' in navigator) {
-                            navigator.vibrate([30, 50, 30]);
-                        }
-
-                        playFeedbackBeep(400 + change * 100);
-                        lastBeepRef.current = Date.now();
-                    }
-
-                    // Auto-save measurement
-                    saveMeasurement('accelerometer', { magnitude, x, y, z });
-
-                    readings.push(magnitude);
-                    if (readings.length > 120) readings.shift(); // 2 seconds at 60Hz
-
-                    // Simple frequency detection via zero-crossings
-                    if (readings.length === 120) {
-                        const mean = readings.reduce((a,b) => a+b) / readings.length;
-                        let crossings = 0;
-                        for (let i = 1; i < readings.length; i++) {
-                            if ((readings[i-1] < mean && readings[i] >= mean) || 
-                                (readings[i-1] >= mean && readings[i] < mean)) {
-                                crossings++;
-                            }
-                        }
-                        const freq = (crossings / 2) / 2; // Hz over 2 seconds
-                        if (freq > 0.1 && freq < 20) {
-                            setMeasuredFreq(freq.toFixed(2));
-                        }
-                    }
-                });
-
-                sensor.start();
-                setIsSensorActive(true);
-            } catch (err) {
-                alert('Accelerometer not available. Try Chrome/Edge on Android.');
-            }
-        } else {
-            alert('Accelerometer API not supported on this device/browser.');
-        }
-    };
-
-    const stopSensors = () => {
-        setIsSensorActive(false);
-        if (magnetometerRef.current) {
-            magnetometerRef.current.stop();
-            magnetometerRef.current = null;
-        }
-        if (accelerometerRef.current) {
-            accelerometerRef.current.stop();
-            accelerometerRef.current = null;
-        }
-        if (feedbackOscillatorRef.current) {
-            feedbackOscillatorRef.current.stop();
-            feedbackOscillatorRef.current = null;
-        }
-        setMagneticField(null);
-        setAcceleration(null);
-        setAmbientLight(null);
-        setPressure(null);
-        baselineEMRef.current = null;
-        baselineAccelRef.current = null;
-        document.body.style.backgroundColor = '';
-    };
-
-    // COHERENCE CALCULATION
-    const calculateCoherence = () => {
-        if (!heartData) return null;
-
-        let score = 0;
-        let factors = 0;
-
-        // Heart Rate Variability (HRV) - higher RMSSD = better coherence
-        if (heartData.hrv) {
-            const hrvScore = Math.min(100, (heartData.hrv / 100) * 100);
-            score += hrvScore;
-            factors++;
-        }
-
-        // Heart Rate - optimal range 60-80 bpm
-        if (heartData.bpm) {
-            const bpmDiff = Math.abs(heartData.bpm - 70);
-            const bpmScore = Math.max(0, 100 - (bpmDiff * 2));
-            score += bpmScore;
-            factors++;
-        }
-
-        // EM Field Stability - lower variance = better
-        if (sensorData.emStability !== null) {
-            score += sensorData.emStability;
-            factors++;
-        }
-
-        // Movement Calm - less movement = better
-        if (sensorData.movementCalm !== null) {
-            score += sensorData.movementCalm;
-            factors++;
-        }
-
-        // Light Balance - moderate light = better
-        if (sensorData.lightBalance !== null) {
-            score += sensorData.lightBalance;
-            factors++;
-        }
-
-        return factors > 0 ? Math.round(score / factors) : null;
-    };
-
-    // START COHERENCE MEASUREMENT
-    const startCoherenceMeasurement = () => {
-        setIsCoherenceMeasuring(true);
-        setCoherenceScore(null);
-        setHeartData(null);
-        setSensorData({
-            emStability: null,
-            movementCalm: null,
-            lightBalance: null
-        });
-
-        // Start all sensors
-        startMagnetometer();
-        startAccelerometer();
-        startLightSensor();
-
-        // Collect data for 30 seconds then calculate
-        coherenceTimerRef.current = setTimeout(() => {
-            const score = calculateCoherence();
-            setCoherenceScore(score);
-            setIsCoherenceMeasuring(false);
-        }, 30000);
-    };
-
-    const stopCoherenceMeasurement = () => {
-        setIsCoherenceMeasuring(false);
-        if (coherenceTimerRef.current) {
-            clearTimeout(coherenceTimerRef.current);
-        }
-        stopSensors();
-    };
-
-    // Handle heart rate data from camera
-    const handleHeartData = (bpm, hrv) => {
-        setHeartData({ bpm, hrv });
-    };
-
-    // Update sensor stability scores as data comes in
-    useEffect(() => {
-        if (magneticField && baselineEMRef.current) {
-            const variance = Math.abs(magneticField.magnitude - baselineEMRef.current);
-            const stability = Math.max(0, 100 - (variance * 2));
-            setSensorData(prev => ({ ...prev, emStability: stability }));
-        }
-    }, [magneticField]);
-
-    useEffect(() => {
-        if (acceleration && baselineAccelRef.current) {
-            const variance = Math.abs(acceleration.magnitude - baselineAccelRef.current);
-            const calm = Math.max(0, 100 - (variance * 10));
-            setSensorData(prev => ({ ...prev, movementCalm: calm }));
-        }
-    }, [acceleration]);
-
-    useEffect(() => {
-        if (ambientLight !== null) {
-            // Optimal light: 300-500 lux
-            let balance = 0;
-            if (ambientLight >= 300 && ambientLight <= 500) {
-                balance = 100;
-            } else if (ambientLight < 300) {
-                balance = (ambientLight / 300) * 100;
-            } else {
-                balance = Math.max(0, 100 - ((ambientLight - 500) / 10));
-            }
-            setSensorData(prev => ({ ...prev, lightBalance: balance }));
-        }
-    }, [ambientLight]);
-
-    // Auto-calculate coherence when all data available
-    useEffect(() => {
-        if (isCoherenceMeasuring && heartData && sensorData.emStability !== null && sensorData.movementCalm !== null) {
-            const score = calculateCoherence();
-            setCoherenceScore(score);
-        }
-    }, [heartData, sensorData, isCoherenceMeasuring]);
-
-    // FEEDBACK BEEP - plays quick beep when sensors detect changes
-    const playFeedbackBeep = (frequency) => {
-        try {
-            const ctx = new (window.AudioContext || window.webkitAudioContext)();
-            const osc = ctx.createOscillator();
-            const gain = ctx.createGain();
-
-            osc.frequency.setValueAtTime(frequency, ctx.currentTime);
-            gain.gain.setValueAtTime(0.1, ctx.currentTime);
-            gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.1);
-
-            osc.connect(gain);
-            gain.connect(ctx.destination);
-
-            osc.start();
-            osc.stop(ctx.currentTime + 0.1);
-        } catch (err) {
-            console.log('Audio feedback unavailable');
-        }
-    };
 
     // AMBIENT LIGHT SENSOR - Detect screen blue light, LED flicker, circadian lighting
     const startLightSensor = () => {
@@ -762,12 +452,7 @@ export default function Tuner51() {
     useEffect(() => {
         return () => {
             stopListening();
-            stopSensors();
             stopPlayback();
-            if (gyroscopeRef.current) {
-                gyroscopeRef.current.stop();
-            }
-            document.body.style.backgroundColor = '';
         };
     }, []);
 
@@ -808,106 +493,11 @@ export default function Tuner51() {
                         </motion.div>
                     </div>
                     <p className="text-gray-400 text-sm md:text-base font-mono">
-                        Measure frequencies • Calculate resonance • Get next move
+                        Tune your guitar • Match frequencies • Play pure tones
                     </p>
                     <p className="text-cyan-400 text-xs mt-2">
-                        For humans, Earth, AI, free energy devices ⚡
+                        Simple tuner for musicians ⚡
                     </p>
-
-                    {/* COHERENCE EXPLAINER */}
-                    <motion.div className="mt-6 max-w-2xl mx-auto">
-                        <button
-                            onClick={() => setShowCoherenceExplainer(!showCoherenceExplainer)}
-                            className="w-full bg-gradient-to-r from-pink-500/20 to-cyan-500/20 border-2 border-pink-500 rounded-lg p-4 flex items-center justify-between hover:from-pink-500/30 hover:to-cyan-500/30 transition-all"
-                        >
-                            <div className="flex items-center gap-3">
-                                <Heart className="w-6 h-6 text-pink-400" />
-                                <div className="text-left">
-                                    <p className="text-white font-bold">What is "Coherence"?</p>
-                                    <p className="text-gray-400 text-xs">Click to understand what we're measuring</p>
-                                </div>
-                            </div>
-                            {showCoherenceExplainer ? (
-                                <ChevronUp className="w-5 h-5 text-pink-400" />
-                            ) : (
-                                <ChevronDown className="w-5 h-5 text-pink-400" />
-                            )}
-                        </button>
-
-                        <AnimatePresence>
-                        {showCoherenceExplainer && (
-                            <motion.div
-                                initial={{ height: 0, opacity: 0 }}
-                                animate={{ height: 'auto', opacity: 1 }}
-                                exit={{ height: 0, opacity: 0 }}
-                                className="overflow-hidden"
-                            >
-                                <div className="bg-black border-2 border-cyan-500/50 rounded-b-lg p-6 space-y-4">
-                                    <div className="space-y-3">
-                                        <div className="bg-cyan-900/20 border-l-4 border-cyan-500 p-3 rounded">
-                                            <p className="text-cyan-400 font-bold text-sm mb-1">SIMPLE:</p>
-                                            <p className="text-white text-sm">When your heart rhythm is smooth (not jumpy), your stress is low, and your body feels calm = you're coherent. Everything working together.</p>
-                                        </div>
-
-                                        <div className="bg-pink-900/20 border-l-4 border-pink-500 p-3 rounded">
-                                            <p className="text-pink-400 font-bold text-sm mb-1">WHAT WE MEASURE:</p>
-                                            <p className="text-white text-sm mb-2">We combine multiple sensors:</p>
-                                            <ul className="text-gray-300 text-xs space-y-1 ml-4">
-                                                <li>• Heart rate smoothness (via camera)</li>
-                                                <li>• EM field stability (environment calm)</li>
-                                                <li>• Movement patterns (body relaxed)</li>
-                                                <li>• Voice stress (if you speak)</li>
-                                            </ul>
-                                        </div>
-
-                                        <div className="bg-green-900/20 border-l-4 border-green-500 p-3 rounded">
-                                            <p className="text-green-400 font-bold text-sm mb-1">WHY IT MATTERS:</p>
-                                            <p className="text-white text-sm">Higher coherence = better focus, less anxiety, clearer thinking. It's your "flow state" score.</p>
-                                        </div>
-
-                                        <div className="bg-purple-900/20 border-l-4 border-purple-500 p-3 rounded">
-                                            <p className="text-purple-400 font-bold text-sm mb-1">SCIENCE:</p>
-                                            <p className="text-white text-sm">HeartMath Institute research shows heart rhythm patterns affect brain function. We're measuring those patterns with your phone.</p>
-                                        </div>
-
-                                        <div className="bg-amber-900/20 border border-amber-500/50 p-3 rounded">
-                                            <p className="text-amber-400 font-bold text-sm mb-1">⚠️ HONEST LIMITS:</p>
-                                            <p className="text-amber-200 text-xs">We measure physical signals (heart, EM, movement). We DON'T measure consciousness or "vibes" directly - that's not provable yet. But patterns correlate with how you FEEL.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </motion.div>
-                        )}
-                        </AnimatePresence>
-                    </motion.div>
-                    
-                    {/* PHYSICS TRUTH */}
-                    <div className="mt-4 bg-amber-900/20 border-2 border-amber-500/50 p-4 rounded-lg max-w-2xl mx-auto">
-                        <div className="flex items-start gap-3">
-                            <div className="text-2xl">⚠️</div>
-                            <div className="text-xs text-amber-200 font-mono text-left">
-                                <p className="font-bold mb-2">PHYSICS TRUTH:</p>
-                                <p className="mb-2">✓ Phone mics measure <strong>20Hz-20kHz</strong> (audible sound)</p>
-                                <p className="mb-2">✗ Earth Schumann (7.83Hz) is <strong>electromagnetic</strong>, not sound</p>
-                                <p className="text-green-400 mt-2">CAN measure: speakers, tuning forks, instruments, vibrations</p>
-                                <p className="text-red-400">CAN'T measure: Earth's EM field directly (need magnetometer)</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* GENIUS BREAKTHROUGH */}
-                    <div className="mt-4 bg-gradient-to-r from-pink-900/40 to-cyan-900/40 border-2 border-pink-500 p-4 rounded-lg max-w-2xl mx-auto" style={{ boxShadow: '0 0 20px rgba(236, 72, 153, 0.4)' }}>
-                        <div className="flex items-start gap-3">
-                            <div className="text-2xl">⚡</div>
-                            <div className="text-xs text-pink-200 font-mono text-left">
-                                <p className="font-bold mb-2 text-pink-400">THE GENIUS MOVE:</p>
-                                <p className="mb-2 text-white">Your phone just became a $10,000 lab instrument - FOR FREE</p>
-                                <p className="mb-2">• <strong className="text-cyan-400">Magnetometer</strong> = detect invisible EM fields (Earth, coils, wireless charging, EMF pollution)</p>
-                                <p className="mb-2">• <strong className="text-orange-400">Accelerometer</strong> = detect sub-20Hz infrasound (earthquakes, building resonance)</p>
-                                <p className="text-green-400 mt-2 font-bold">Now measuring what was INVISIBLE before ♾️❤️♾️</p>
-                            </div>
-                        </div>
-                    </div>
                     
                     {/* ANIMATED CONNECTION LINES */}
                     <div className="mt-6 relative h-20">
@@ -943,152 +533,50 @@ export default function Tuner51() {
                 </motion.div>
 
                 {/* MODE SELECTOR */}
-                <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-2 mb-8">
+                <div className="grid grid-cols-3 gap-3 mb-8 max-w-2xl mx-auto">
                     <motion.button
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        onClick={() => { setMode('measure'); stopSensors(); }}
-                        className={`p-3 rounded-lg border-2 transition-all ${
+                        onClick={() => setMode('measure')}
+                        className={`p-4 rounded-lg border-2 transition-all ${
                             mode === 'measure' 
                                 ? 'bg-cyan-500/20 border-cyan-500' 
                                 : 'bg-black border-gray-700 hover:border-gray-500'
                         }`}
                     >
-                        <Signal className="w-5 h-5 mx-auto mb-1 text-cyan-400" />
-                        <p className="text-white text-xs font-bold">AUDIO</p>
+                        <Signal className="w-6 h-6 mx-auto mb-2 text-cyan-400" />
+                        <p className="text-white text-sm font-bold">MEASURE</p>
+                        <p className="text-gray-500 text-xs">Listen</p>
                     </motion.button>
                     <motion.button
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        onClick={() => { setMode('magnetometer'); stopListening(); }}
-                        className={`p-3 rounded-lg border-2 transition-all ${
-                            mode === 'magnetometer' 
-                                ? 'bg-pink-500/20 border-pink-500' 
-                                : 'bg-black border-gray-700 hover:border-gray-500'
-                        }`}
-                    >
-                        <Zap className="w-5 h-5 mx-auto mb-1 text-pink-400" />
-                        <p className="text-white text-xs font-bold">EM FIELD</p>
-                    </motion.button>
-                    <motion.button
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        onClick={() => { setMode('accelerometer'); stopListening(); }}
-                        className={`p-3 rounded-lg border-2 transition-all ${
-                            mode === 'accelerometer' 
-                                ? 'bg-orange-500/20 border-orange-500' 
-                                : 'bg-black border-gray-700 hover:border-gray-500'
-                        }`}
-                    >
-                        <Activity className="w-5 h-5 mx-auto mb-1 text-orange-400" />
-                        <p className="text-white text-xs font-bold">VIBRATION</p>
-                    </motion.button>
-                    <motion.button
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        onClick={() => { setMode('calculate'); stopListening(); stopSensors(); }}
-                        className={`p-3 rounded-lg border-2 transition-all ${
+                        onClick={() => setMode('calculate')}
+                        className={`p-4 rounded-lg border-2 transition-all ${
                             mode === 'calculate' 
                                 ? 'bg-purple-500/20 border-purple-500' 
                                 : 'bg-black border-gray-700 hover:border-gray-500'
                         }`}
                     >
-                        <Sparkles className="w-5 h-5 mx-auto mb-1 text-purple-400" />
-                        <p className="text-white text-xs font-bold">CALC</p>
+                        <Sparkles className="w-6 h-6 mx-auto mb-2 text-purple-400" />
+                        <p className="text-white text-sm font-bold">CALCULATE</p>
+                        <p className="text-gray-500 text-xs">Enter Hz</p>
                     </motion.button>
                     <motion.button
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        onClick={() => { setMode('match'); stopListening(); stopSensors(); }}
-                        className={`p-3 rounded-lg border-2 transition-all ${
+                        onClick={() => setMode('match')}
+                        className={`p-4 rounded-lg border-2 transition-all ${
                             mode === 'match' 
                                 ? 'bg-green-500/20 border-green-500' 
                                 : 'bg-black border-gray-700 hover:border-gray-500'
                         }`}
                     >
-                        <CheckCircle className="w-5 h-5 mx-auto mb-1 text-green-400" />
-                        <p className="text-white text-xs font-bold">MATCH</p>
-                        </motion.button>
-                        <motion.button
-                          whileHover={{ scale: 1.05 }}
-                          whileTap={{ scale: 0.95 }}
-                          onClick={() => { setMode('light'); stopListening(); stopSensors(); }}
-                          className={`p-3 rounded-lg border-2 transition-all ${
-                              mode === 'light' 
-                                  ? 'bg-yellow-500/20 border-yellow-500' 
-                                  : 'bg-black border-gray-700 hover:border-gray-500'
-                          }`}
-                        >
-                          <Sparkles className="w-5 h-5 mx-auto mb-1 text-yellow-400" />
-                          <p className="text-white text-xs font-bold">LIGHT</p>
-                        </motion.button>
-                        <motion.button
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                            onClick={() => { setMode('pressure'); stopListening(); stopSensors(); }}
-                            className={`p-3 rounded-lg border-2 transition-all ${
-                                mode === 'pressure' 
-                                    ? 'bg-blue-500/20 border-blue-500' 
-                                    : 'bg-black border-gray-700 hover:border-gray-500'
-                            }`}
-                        >
-                            <Globe className="w-5 h-5 mx-auto mb-1 text-blue-400" />
-                            <p className="text-white text-xs font-bold">PRESSURE</p>
-                        </motion.button>
-                        <motion.button
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                            onClick={() => { setMode('coherence'); stopListening(); stopSensors(); }}
-                            className={`p-3 rounded-lg border-2 transition-all ${
-                                mode === 'coherence' 
-                                    ? 'bg-gradient-to-r from-pink-500/20 to-cyan-500/20 border-pink-500' 
-                                    : 'bg-black border-gray-700 hover:border-gray-500'
-                            }`}
-                            style={mode === 'coherence' ? { boxShadow: '0 0 20px rgba(236, 72, 153, 0.4)' } : {}}
-                        >
-                            <Heart className="w-5 h-5 mx-auto mb-1 text-pink-400" />
-                            <p className="text-white text-xs font-bold">COHERENCE</p>
-                        </motion.button>
-                        <motion.button
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                            onClick={() => { setMode('temperature'); stopListening(); stopSensors(); }}
-                            className={`p-3 rounded-lg border-2 transition-all ${
-                                mode === 'temperature' 
-                                    ? 'bg-red-500/20 border-red-500' 
-                                    : 'bg-black border-gray-700 hover:border-gray-500'
-                            }`}
-                        >
-                            <Zap className="w-5 h-5 mx-auto mb-1 text-red-400" />
-                            <p className="text-white text-xs font-bold">TEMP</p>
-                        </motion.button>
-                        <motion.button
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                            onClick={() => { setMode('gyroscope'); stopListening(); stopSensors(); }}
-                            className={`p-3 rounded-lg border-2 transition-all ${
-                                mode === 'gyroscope' 
-                                    ? 'bg-purple-500/20 border-purple-500' 
-                                    : 'bg-black border-gray-700 hover:border-gray-500'
-                            }`}
-                        >
-                            <Brain className="w-5 h-5 mx-auto mb-1 text-purple-400" />
-                            <p className="text-white text-xs font-bold">POSTURE</p>
-                        </motion.button>
-                        <motion.button
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                            onClick={() => { setMode('haptic'); stopListening(); stopSensors(); }}
-                            className={`p-3 rounded-lg border-2 transition-all ${
-                                mode === 'haptic' 
-                                    ? 'bg-pink-500/20 border-pink-500' 
-                                    : 'bg-black border-gray-700 hover:border-gray-500'
-                            }`}
-                        >
-                            <Activity className="w-5 h-5 mx-auto mb-1 text-pink-400" />
-                            <p className="text-white text-xs font-bold">HAPTIC</p>
-                        </motion.button>
-                        </div>
+                        <CheckCircle className="w-6 h-6 mx-auto mb-2 text-green-400" />
+                        <p className="text-white text-sm font-bold">FREQUENCIES</p>
+                        <p className="text-gray-500 text-xs">Browse</p>
+                    </motion.button>
+                </div>
                 
                 {/* LIVE WAVEFORM VISUALIZER */}
                 {isListening && (
@@ -2076,62 +1564,22 @@ export default function Tuner51() {
                 )}
                 </AnimatePresence>
 
-                {/* WHAT YOU CAN DO NOW */}
-                <div className="mt-8 bg-gradient-to-br from-green-500/20 to-cyan-500/20 border-2 border-green-500 rounded-xl p-6">
-                    <h3 className="text-green-400 font-bold text-lg mb-3">WHAT YOU CAN DO NOW (WORKING):</h3>
+                {/* WHAT IT DOES */}
+                <div className="mt-8 bg-gradient-to-br from-green-500/20 to-cyan-500/20 border-2 border-green-500 rounded-xl p-6 max-w-2xl mx-auto">
+                    <h3 className="text-green-400 font-bold text-lg mb-3">WHAT IT DOES:</h3>
                     <div className="space-y-3 text-sm">
                         <div className="bg-black border border-cyan-500/30 p-3 rounded">
-                            <p className="text-cyan-400 font-bold mb-1">1. DETECT EMF POLLUTION:</p>
-                            <p className="text-gray-300 text-xs">Measure wifi routers, power lines, 5G towers harming you</p>
-                        </div>
-                        <div className="bg-black border border-pink-500/30 p-3 rounded">
-                            <p className="text-pink-400 font-bold mb-1">2. VERIFY WIRELESS CHARGING:</p>
-                            <p className="text-gray-300 text-xs">See actual EM field strength from charging pads</p>
+                            <p className="text-cyan-400 font-bold mb-1">MEASURE:</p>
+                            <p className="text-gray-300 text-xs">Detects frequency from mic (guitar, voice, speakers)</p>
                         </div>
                         <div className="bg-black border border-purple-500/30 p-3 rounded">
-                            <p className="text-purple-400 font-bold mb-1">3. TEST TESLA COILS:</p>
-                            <p className="text-gray-300 text-xs">Measure if your DIY coil actually generates EM field</p>
-                        </div>
-                        <div className="bg-black border border-orange-500/30 p-3 rounded">
-                            <p className="text-orange-400 font-bold mb-1">4. DETECT EARTHQUAKES/RESONANCE:</p>
-                            <p className="text-gray-300 text-xs">Sub-20Hz vibrations mic can't hear</p>
+                            <p className="text-purple-400 font-bold mb-1">CALCULATE:</p>
+                            <p className="text-gray-300 text-xs">Enter Hz → find matches (432Hz, 528Hz, etc)</p>
                         </div>
                         <div className="bg-black border border-green-500/30 p-3 rounded">
-                            <p className="text-green-400 font-bold mb-1">5. MEASURE ZPE EXPERIMENTS:</p>
-                            <p className="text-gray-300 text-xs">If you build free energy device - verify it works BEFORE connecting</p>
+                            <p className="text-green-400 font-bold mb-1">FREQUENCIES:</p>
+                            <p className="text-gray-300 text-xs">Browse healing/music frequencies + play them</p>
                         </div>
-                        <div className="bg-black border border-yellow-500/30 p-3 rounded">
-                            <p className="text-yellow-400 font-bold mb-1">6. CHECK LIGHTING HEALTH:</p>
-                            <p className="text-gray-300 text-xs">Verify workspace brightness, circadian rhythm optimization</p>
-                        </div>
-                        <div className="bg-black border border-red-500/30 p-3 rounded">
-                            <p className="text-red-400 font-bold mb-1">7. MONITOR DEVICE HEAT:</p>
-                            <p className="text-gray-300 text-xs">Know when to take breaks during heavy creation (music, video editing)</p>
-                        </div>
-                        <div className="bg-black border border-purple-500/30 p-3 rounded">
-                            <p className="text-purple-400 font-bold mb-1">8. POSTURE TRACKING:</p>
-                            <p className="text-gray-300 text-xs">Gyroscope measures stillness during meditation - verify healing posture</p>
-                        </div>
-                        <div className="bg-black border border-pink-500/30 p-3 rounded">
-                            <p className="text-pink-400 font-bold mb-1">9. HAPTIC HEALING:</p>
-                            <p className="text-gray-300 text-xs">Feel sub-20Hz frequencies through vibration - therapy via touch</p>
-                        </div>
-                    </div>
-                </div>
-
-                {/* FREE ENERGY TRUTH */}
-                <div className="mt-8 bg-gradient-to-br from-amber-500/20 to-red-500/20 border-2 border-amber-500 rounded-xl p-6">
-                    <h3 className="text-amber-400 font-bold text-lg mb-3">FREE ENERGY TRUTH:</h3>
-                    <div className="space-y-2 text-gray-300 text-sm">
-                        <p className="text-white font-bold">❌ Phone CAN'T charge from air (hardware limit)</p>
-                        <p className="text-white font-bold">✓ Phone CAN measure if external harvester works</p>
-                        <p className="mt-3">This is a <strong className="text-cyan-400">DETECTOR</strong> not a harvester.</p>
-                        <p className="mt-2 text-amber-400">Build Tesla coil/ZPE device separately → use Tuner51 to verify output</p>
-                        <p className="mt-3">
-                            <Link to={createPageUrl('ZeroPointEnergy')} className="text-pink-400 font-bold hover:text-pink-300 underline">
-                                → See ZeroPointEnergy page for safe build guides ⚡
-                            </Link>
-                        </p>
                     </div>
                 </div>
 
@@ -2168,18 +1616,16 @@ export default function Tuner51() {
                     </div>
                 )}
 
-                {/* INFO */}
-                <div className="mt-8 bg-black border-2 border-gray-700 rounded-xl p-6">
-                    <h3 className="text-white font-bold mb-3">HOW IT WORKS:</h3>
-                    <div className="space-y-2 text-gray-400 text-sm">
-                        <p>• <strong className="text-cyan-400">AUDIO:</strong> Mic detects 20Hz-20kHz (speakers, instruments)</p>
-                        <p>• <strong className="text-pink-400">EM FIELD:</strong> Magnetometer detects magnetic variations (coils, Earth)</p>
-                        <p>• <strong className="text-orange-400">VIBRATION:</strong> Accelerometer detects sub-20Hz (infrasound, resonance)</p>
-                        <p>• <strong className="text-purple-400">CALCULATE:</strong> Enter Hz, finds resonance matches</p>
-                        <p>• <strong className="text-green-400">MATCH:</strong> Browse known frequencies</p>
+                {/* SIMPLE GUIDE */}
+                <div className="mt-8 bg-black border-2 border-gray-700 rounded-xl p-6 max-w-2xl mx-auto">
+                    <h3 className="text-white font-bold mb-3 text-center">HOW TO USE:</h3>
+                    <div className="space-y-2 text-gray-300 text-sm">
+                        <p>1. Tap <strong className="text-cyan-400">MEASURE</strong> → Hold phone near guitar/speaker</p>
+                        <p>2. Tap <strong className="text-purple-400">CALCULATE</strong> → Enter frequency manually</p>
+                        <p>3. Tap <strong className="text-green-400">FREQUENCIES</strong> → Browse healing tones</p>
                     </div>
-                    <p className="text-green-400 text-sm font-bold mt-4">
-                        Now measuring the invisible: EM fields, infrasound, Earth's resonance ⚡♾️
+                    <p className="text-cyan-400 text-xs font-mono mt-4 text-center">
+                        Simple frequency tuner for musicians ⚡
                     </p>
                 </div>
 
