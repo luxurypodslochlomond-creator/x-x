@@ -20,9 +20,10 @@ import { AI51MemoryProvider } from '@/components/ai51/AI51MemoryLoader';
 import TruthCheckProtocol from '@/components/ai51/TruthCheckProtocol';
 import { MeshProvider, MeshStatusIndicator } from '@/components/shared/MeshNetwork';
 import {
-                            Menu, X, Heart, Home, LogOut, Leaf, Sparkles, Music, Map, User, Globe,
-                        BookOpen, Shield, Target, Briefcase, FileText, Settings, Search, Brain, Presentation, Calculator, GraduationCap, Zap, AlertTriangle, Mic2, Lightbulb, Building, Play, Pause, Atom, Eye, Scale, Users, WifiOff, CheckCircle, Waves, ChevronDown, ChevronRight, Calendar, DollarSign, Moon, Signal
-                      } from 'lucide-react';
+                                  Menu, X, Heart, Home, LogOut, Leaf, Sparkles, Music, Map, User, Globe,
+                              BookOpen, Shield, Target, Briefcase, FileText, Settings, Search, Brain, Presentation, Calculator, GraduationCap, Zap, AlertTriangle, Mic2, Lightbulb, Building, Play, Pause, Atom, Eye, Scale, Users, WifiOff, CheckCircle, Waves, ChevronDown, ChevronRight, Calendar, DollarSign, Moon, Signal, ArrowLeft
+                            } from 'lucide-react';
+import { AnimatePresence } from 'framer-motion';
 import { COOLASFUCKHeart, COOLASFUCKWaves, COOLASFUCKHouse, COOLASFUCKHouse51 } from '@/components/shared/COOLASFUCKIcon';
 import LiveClock from '@/components/shared/LiveClock';
 import { AnonymousAuthProvider } from '@/components/shared/AnonymousAuth';
@@ -132,6 +133,7 @@ const LayoutInner = ({ children, currentPageName }) => {
   const [authError, setAuthError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isOffline, setIsOffline] = useState(!navigator.onLine);
+  const [canGoBack, setCanGoBack] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -176,7 +178,12 @@ const LayoutInner = ({ children, currentPageName }) => {
     loadUser();
   }, [location.pathname, isPublicPage, isOffline, isOfflineOkPage]);
 
-  useEffect(() => { setMobileMenuOpen(false); window.scrollTo(0, 0); }, [location.pathname]);
+  useEffect(() => { 
+    setMobileMenuOpen(false); 
+    window.scrollTo(0, 0);
+    // Check if can go back
+    setCanGoBack(window.history.length > 1);
+  }, [location.pathname]);
 
   useEffect(() => {
     const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
@@ -330,10 +337,20 @@ const LayoutInner = ({ children, currentPageName }) => {
         {/* MOBILE HEADER */}
         <header className={`lg:hidden fixed ${isOffline ? 'top-10' : 'top-0'} left-0 right-0 z-[60] bg-[#0a0f1a]/95 backdrop-blur-xl border-b border-cyan-500/30`}>
           <div className="flex items-center justify-between p-4">
-            <Link to={createPageUrl("Welcome")} className="flex items-center gap-2" onClick={() => setMobileMenuOpen(false)}>
-              <COOLASFUCKWaves size={28} animate={true} />
-              <span className="text-xl font-black text-white">UF51</span>
-            </Link>
+            <div className="flex items-center gap-2">
+              {canGoBack && (
+                <button
+                  onClick={() => navigate(-1)}
+                  className="p-2 hover:bg-cyan-500/10 rounded-lg transition-colors"
+                >
+                  <ArrowLeft className="w-5 h-5 text-cyan-400" />
+                </button>
+              )}
+              <Link to={createPageUrl("Welcome")} className="flex items-center gap-2" onClick={() => setMobileMenuOpen(false)}>
+                <COOLASFUCKWaves size={28} animate={true} />
+                <span className="text-xl font-black text-white">UF51</span>
+              </Link>
+            </div>
 
             <div className="flex items-center gap-2">
               <CompactMusicPlayer />
@@ -401,10 +418,20 @@ const LayoutInner = ({ children, currentPageName }) => {
         {/* DESKTOP SIDEBAR */}
         <aside className={`hidden lg:block fixed left-0 ${isOffline ? 'top-10' : 'top-0'} w-80 h-screen border-r border-cyan-500/30 bg-[#0a0f1a]/95 overflow-y-auto z-50`}>
           <div className="p-6 border-b border-cyan-500/30">
-            <Link to={createPageUrl("Welcome")} className="flex items-center gap-3 mb-4">
-              <COOLASFUCKWaves size={40} animate={true} />
-              <span className="text-3xl font-black">UF51</span>
-            </Link>
+            <div className="flex items-center gap-3 mb-4">
+              {canGoBack && (
+                <button
+                  onClick={() => navigate(-1)}
+                  className="p-2 hover:bg-cyan-500/10 rounded-lg transition-colors flex-shrink-0"
+                >
+                  <ArrowLeft className="w-5 h-5 text-cyan-400" />
+                </button>
+              )}
+              <Link to={createPageUrl("Welcome")} className="flex items-center gap-3">
+                <COOLASFUCKWaves size={40} animate={true} />
+                <span className="text-3xl font-black">UF51</span>
+              </Link>
+            </div>
             <div className="mb-4"><CompactMusicPlayer /></div>
             <Link to={createPageUrl("TalkToAI51")} className="w-full flex items-center gap-3 p-4 rounded-xl bg-gradient-to-r from-cyan-500 to-green-500" style={{ boxShadow: '0 0 30px rgba(34, 211, 238, 0.5)' }}>
               <Brain className="w-6 h-6 text-white" />
@@ -454,7 +481,17 @@ const LayoutInner = ({ children, currentPageName }) => {
                             </aside>
 
         <main className={`lg:ml-80 ${isOffline ? 'pt-[122px] lg:pt-10' : 'pt-[72px] lg:pt-0'} min-h-screen`}>
-          {children}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={location.pathname}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.15, ease: "easeInOut" }}
+            >
+              {children}
+            </motion.div>
+          </AnimatePresence>
           <footer className="border-t border-cyan-500/20 bg-[#0a0f1a]/60">
                   <LiveClock />
                   <p className="text-xs text-gray-600 text-center pb-4">Built on <a href="https://base44.com" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-cyan-400">Base44</a></p>
