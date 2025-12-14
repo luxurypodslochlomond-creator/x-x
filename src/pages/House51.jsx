@@ -1128,11 +1128,67 @@ export default function House51() {
                             />
                         </div>
 
+                        {/* PRESET MIXES */}
+                        <div className="mt-6 flex flex-wrap gap-2 justify-center">
+                            <motion.button
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                                onClick={() => setMixerLevels({
+                                    kick: 1.0, bass: 0.8, hats: 0.15, claps: 0.3, bells: 0.2,
+                                    pads: 0.1, strings: 0.25, shakers: 0.1, ride: 0.12, healing: 0.1
+                                })}
+                                className="px-4 py-2 bg-cyan-600 hover:bg-cyan-700 rounded font-bold text-xs"
+                            >
+                                FULL MIX
+                            </motion.button>
+                            <motion.button
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                                onClick={() => setMixerLevels({
+                                    kick: 1.0, bass: 0.5, hats: 0.05, claps: 0.15, bells: 0.05,
+                                    pads: 0.02, strings: 0.08, shakers: 0.03, ride: 0.04, healing: 0.15
+                                })}
+                                className="px-4 py-2 bg-pink-600 hover:bg-pink-700 rounded font-bold text-xs"
+                            >
+                                MINIMAL (Deep House)
+                            </motion.button>
+                            <motion.button
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                                onClick={() => setMixerLevels({
+                                    kick: 1.0, bass: 0.9, hats: 0.2, claps: 0.35, bells: 0.25,
+                                    pads: 0.15, strings: 0.3, shakers: 0.15, ride: 0.15, healing: 0.05
+                                })}
+                                className="px-4 py-2 bg-purple-600 hover:bg-purple-700 rounded font-bold text-xs"
+                            >
+                                MAXIMAL (Peak Time)
+                            </motion.button>
+                            <motion.button
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                                onClick={() => setMixerLevels({
+                                    kick: 0.3, bass: 0.1, hats: 0.05, claps: 0.08, bells: 0.15,
+                                    pads: 0.15, strings: 0.25, shakers: 0.05, ride: 0.08, healing: 0.3
+                                })}
+                                className="px-4 py-2 bg-green-600 hover:bg-green-700 rounded font-bold text-xs"
+                            >
+                                AMBIENT (Healing Focus)
+                            </motion.button>
+                        </div>
+
                         <div className="mt-6 bg-black/60 border-2 border-pink-500 p-4 rounded-lg">
-                            <p className="text-pink-400 font-bold text-sm mb-2">💡 MIXING TIP:</p>
-                            <p className="text-gray-300 text-xs">
-                                CamelPhat's secret: balance LOW (kick/bass) + MID (claps/bells) + HIGH (hats/ride) frequencies. 
-                                Each layer occupies different sonic space = full spectrum sound that physically moves you ⚡
+                            <p className="text-pink-400 font-bold text-sm mb-2">💡 WHY THIS WORKS:</p>
+                            <p className="text-gray-300 text-xs mb-2">
+                                <strong className="text-cyan-400">LOW (Kick/Bass):</strong> 40-250Hz - physically vibrates your chest/organs
+                            </p>
+                            <p className="text-gray-300 text-xs mb-2">
+                                <strong className="text-yellow-400">MID (Claps/Bells/Pads/Strings):</strong> 250-4000Hz - emotional/melodic center
+                            </p>
+                            <p className="text-gray-300 text-xs mb-3">
+                                <strong className="text-green-400">HIGH (Hats/Shakers/Ride):</strong> 4000-20000Hz - clarity/air/energy
+                            </p>
+                            <p className="text-pink-300 text-xs font-bold">
+                                CamelPhat balances all 3 = full frequency spectrum that moves your whole body + mind ⚡♾️❤️♾️
                             </p>
                         </div>
                     </motion.div>
@@ -1571,7 +1627,24 @@ function MixerChannel({ label, color, icon, value, onChange, description, isActi
             <div className="text-center">
                 <p className={`${c.text} font-black text-xs mb-1`}>{label}</p>
                 <p className="text-gray-500 text-[10px]">{description}</p>
-                <p className={`${c.text} text-xs font-mono mt-1`}>{Math.round(value * 100)}%</p>
+                
+                {/* FREQUENCY RANGE INDICATOR */}
+                <div className="flex justify-center gap-1 my-1">
+                    {(['kick', 'bass'].includes(label.toLowerCase())) && (
+                        <span className="text-[8px] px-1 bg-cyan-900 text-cyan-300 rounded">LOW</span>
+                    )}
+                    {(['claps', 'bells', 'pads', 'strings'].includes(label.toLowerCase())) && (
+                        <span className="text-[8px] px-1 bg-yellow-900 text-yellow-300 rounded">MID</span>
+                    )}
+                    {(['hats', 'shakers', 'ride'].includes(label.toLowerCase())) && (
+                        <span className="text-[8px] px-1 bg-green-900 text-green-300 rounded">HIGH</span>
+                    )}
+                    {label.toLowerCase() === 'healing' && (
+                        <span className="text-[8px] px-1 bg-pink-900 text-pink-300 rounded">SUB</span>
+                    )}
+                </div>
+                
+                <p className={`${c.text} text-xs font-mono`}>{Math.round(value * 100)}%</p>
             </div>
         </motion.div>
     );
