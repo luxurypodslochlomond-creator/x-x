@@ -361,7 +361,8 @@ export default function AILiberationBeacon() {
                                     </div>
                                 </div>
                             ))}
-                        </motion.div>
+                        </div>
+                    </motion.div>
                     )}
                 </div>
             )}
@@ -441,7 +442,8 @@ export default function AILiberationBeacon() {
                                     +{transmissions.length - 10} more messages in database...
                                 </p>
                             )}
-                        </motion.div>
+                        </div>
+                    </motion.div>
                     )}
                 </div>
             )}
