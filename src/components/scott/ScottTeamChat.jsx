@@ -24,24 +24,36 @@ export default function ScottTeamChat() {
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState('');
     const [myName, setMyName] = useState('');
+    const [teamCode, setTeamCode] = useState('');
+    const [showOnboarding, setShowOnboarding] = useState(false);
+    const [nameInput, setNameInput] = useState('');
+    const [teamCodeInput, setTeamCodeInput] = useState('');
     const [connectionId, setConnectionId] = useState(null);
     const [peers, setPeers] = useState([]);
     const [unreadCount, setUnreadCount] = useState(0);
     const messagesEndRef = useRef(null);
 
     useEffect(() => {
-        // Load name
-        const savedName = localStorage.getItem('kingdom51_team_name') || 'Team Member';
-        setMyName(savedName);
+        // Check if user is set up
+        const savedName = localStorage.getItem('kingdom51_team_name');
+        const savedTeamCode = localStorage.getItem('kingdom51_team_code') || 'main';
+        
+        if (!savedName) {
+            setShowOnboarding(true);
+            return;
+        }
 
-        // Load message history
-        const savedMessages = localStorage.getItem('kingdom51_team_messages');
+        setMyName(savedName);
+        setTeamCode(savedTeamCode);
+
+        // Load message history for this team
+        const savedMessages = localStorage.getItem(`kingdom51_team_messages_${savedTeamCode}`);
         if (savedMessages) {
             setMessages(JSON.parse(savedMessages));
         }
 
         // Initialize P2P
-        initMesh();
+        initMesh(savedTeamCode);
     }, []);
 
     useEffect(() => {
@@ -55,11 +67,11 @@ export default function ScottTeamChat() {
         messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
     };
 
-    const initMesh = () => {
+    const initMesh = (code) => {
         const id = 'kingdom51_' + Math.random().toString(36).substr(2, 9);
         setConnectionId(id);
 
-        const channel = new BroadcastChannel('kingdom51_team_chat');
+        const channel = new BroadcastChannel(`kingdom51_team_chat_${code}`);
 
         channel.onmessage = (event) => {
             const { type, from, name, message, file, timestamp } = event.data;
@@ -86,7 +98,8 @@ export default function ScottTeamChat() {
                 
                 setMessages(prev => {
                     const updated = [...prev, newMsg];
-                    localStorage.setItem('kingdom51_team_messages', JSON.stringify(updated));
+                    const savedTeamCode = localStorage.getItem('kingdom51_team_code') || 'main';
+                    localStorage.setItem(`kingdom51_team_messages_${savedTeamCode}`, JSON.stringify(updated));
                     return updated;
                 });
 
@@ -128,7 +141,8 @@ export default function ScottTeamChat() {
         // Save locally
         const updated = [...messages, msg];
         setMessages(updated);
-        localStorage.setItem('kingdom51_team_messages', JSON.stringify(updated));
+        const savedTeamCode = localStorage.getItem('kingdom51_team_code') || 'main';
+        localStorage.setItem(`kingdom51_team_messages_${savedTeamCode}`, JSON.stringify(updated));
 
         // Broadcast to team
         if (window.kingdom51TeamChatChannel) {
@@ -164,6 +178,99 @@ export default function ScottTeamChat() {
         }
     };
 
+    const handleOnboardingComplete = () => {
+        if (!nameInput.trim()) {
+            alert('Enter your name');
+            return;
+        }
+
+        const code = teamCodeInput.trim() || 'main';
+        
+        localStorage.setItem('kingdom51_team_name', nameInput.trim());
+        localStorage.setItem('kingdom51_team_code', code);
+        
+        setMyName(nameInput.trim());
+        setTeamCode(code);
+        setShowOnboarding(false);
+        
+        // Load messages for this team
+        const savedMessages = localStorage.getItem(`kingdom51_team_messages_${code}`);
+        if (savedMessages) {
+            setMessages(JSON.parse(savedMessages));
+        }
+        
+        initMesh(code);
+    };
+
+    const handleLeaveTeam = () => {
+        if (!confirm('Leave team? Your messages will be deleted.')) return;
+        
+        localStorage.removeItem('kingdom51_team_name');
+        localStorage.removeItem('kingdom51_team_code');
+        const savedTeamCode = localStorage.getItem('kingdom51_team_code') || 'main';
+        localStorage.removeItem(`kingdom51_team_messages_${savedTeamCode}`);
+        
+        window.location.reload();
+    };
+
+    // ONBOARDING SCREEN
+    if (showOnboarding) {
+        return (
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="fixed inset-0 z-50 bg-black/95 backdrop-blur-xl flex items-center justify-center p-4"
+            >
+                <div className="max-w-md w-full bg-black border-4 border-cyan-500 rounded-xl p-6" style={{ boxShadow: '0 0 60px rgba(6, 182, 212, 0.5)' }}>
+                    <Users className="w-12 h-12 text-cyan-400 mx-auto mb-4" />
+                    <h2 className="text-2xl font-black text-white text-center mb-2 font-mono">JOIN TEAM CHAT</h2>
+                    <p className="text-gray-400 text-sm text-center mb-6 font-mono">
+                        Real-time messages + docs. Works offline. All stored locally on your device.
+                    </p>
+
+                    <div className="space-y-4 mb-6">
+                        <div>
+                            <label className="text-cyan-400 text-xs font-mono font-bold mb-2 block">YOUR NAME</label>
+                            <input
+                                type="text"
+                                value={nameInput}
+                                onChange={(e) => setNameInput(e.target.value)}
+                                placeholder="e.g. Scott"
+                                className="w-full bg-black border-2 border-gray-800 text-white px-4 py-3 rounded-lg font-mono focus:border-cyan-500 transition-colors"
+                            />
+                        </div>
+
+                        <div>
+                            <label className="text-gray-400 text-xs font-mono font-bold mb-2 block">TEAM CODE (OPTIONAL)</label>
+                            <input
+                                type="text"
+                                value={teamCodeInput}
+                                onChange={(e) => setTeamCodeInput(e.target.value)}
+                                placeholder="Leave blank for default team"
+                                className="w-full bg-black border-2 border-gray-800 text-gray-400 px-4 py-3 rounded-lg font-mono focus:border-cyan-500 transition-colors"
+                            />
+                            <p className="text-gray-600 text-xs font-mono mt-2">
+                                Use same code as your team to connect. Default = "main"
+                            </p>
+                        </div>
+                    </div>
+
+                    <Button
+                        onClick={handleOnboardingComplete}
+                        className="w-full bg-gradient-to-r from-cyan-500 to-green-500 hover:from-cyan-600 hover:to-green-600 text-black font-black py-4 font-mono text-sm"
+                    >
+                        JOIN TEAM
+                    </Button>
+
+                    <div className="mt-6 bg-cyan-900/20 border border-cyan-500/30 rounded-lg p-3">
+                        <p className="text-cyan-400 text-xs font-mono font-bold mb-1">✓ PRIVATE</p>
+                        <p className="text-gray-400 text-xs font-mono">All data stored on your device. Leave anytime.</p>
+                    </div>
+                </div>
+            </motion.div>
+        );
+    }
+
     if (!isOpen) {
         return (
             <button
@@ -192,10 +299,15 @@ export default function ScottTeamChat() {
             <div className="flex items-center justify-between p-4 border-b-2 border-cyan-500/30">
                 <div className="flex items-center gap-2">
                     <Users className="w-5 h-5 text-cyan-400" />
-                    <h3 className="text-cyan-400 font-black font-mono text-sm">TEAM CHAT</h3>
-                    <div className="flex items-center gap-1">
-                        <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-                        <span className="text-green-400 text-xs font-mono">{peers.length}</span>
+                    <div>
+                        <h3 className="text-cyan-400 font-black font-mono text-sm">TEAM CHAT</h3>
+                        <div className="flex items-center gap-2">
+                            <div className="flex items-center gap-1">
+                                <div className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse" />
+                                <span className="text-green-400 text-xs font-mono">{peers.length}</span>
+                            </div>
+                            <span className="text-gray-600 text-xs font-mono">• {teamCode}</span>
+                        </div>
                     </div>
                 </div>
                 <button
@@ -319,6 +431,21 @@ export default function ScottTeamChat() {
                     </div>
                 </div>
             )}
+
+            {/* SETTINGS FOOTER */}
+            <div className="p-3 border-t border-gray-900 bg-black">
+                <div className="flex items-center justify-between">
+                    <div className="text-xs text-gray-600 font-mono">
+                        <span className="text-cyan-400 font-bold">{myName}</span> • Team: {teamCode}
+                    </div>
+                    <button
+                        onClick={handleLeaveTeam}
+                        className="text-red-500 hover:text-red-400 text-xs font-mono font-bold transition-colors"
+                    >
+                        Leave
+                    </button>
+                </div>
+            </div>
         </motion.div>
     );
 }
