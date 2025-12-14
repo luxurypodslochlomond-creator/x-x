@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Waves, Zap, Heart, Globe, Brain, Signal, Sparkles, CheckCircle, ArrowRight, Activity, History } from 'lucide-react';
+import { Waves, Zap, Heart, Globe, Brain, Signal, Sparkles, CheckCircle, ArrowRight, Activity, History, Play, Pause } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
@@ -32,6 +32,9 @@ export default function Tuner51() {
     const magnetometerRef = useRef(null);
     const accelerometerRef = useRef(null);
     const lastSaveRef = useRef(Date.now());
+    const oscillatorRef = useRef(null);
+    const gainNodeRef = useRef(null);
+    const [isPlaying, setIsPlaying] = useState(false);
 
     // Fetch measurement history
     const { data: measurements = [] } = useQuery({
@@ -326,11 +329,51 @@ export default function Tuner51() {
         }
     }, [inputFreq]);
 
+    // PLAY FREQUENCY AS AUDIO
+    const playFrequency = (freq) => {
+        if (!freq || freq < 20 || freq > 20000) {
+            alert('Frequency must be 20-20,000 Hz to hear');
+            return;
+        }
+
+        try {
+            const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioCtx.createOscillator();
+            const gainNode = audioCtx.createGain();
+
+            oscillator.type = 'sine';
+            oscillator.frequency.setValueAtTime(freq, audioCtx.currentTime);
+            
+            gainNode.gain.setValueAtTime(0.3, audioCtx.currentTime);
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+            
+            oscillator.start();
+            
+            oscillatorRef.current = oscillator;
+            gainNodeRef.current = gainNode;
+            setIsPlaying(true);
+        } catch (err) {
+            alert('Audio playback error');
+        }
+    };
+
+    const stopPlayback = () => {
+        if (oscillatorRef.current) {
+            oscillatorRef.current.stop();
+            oscillatorRef.current = null;
+            gainNodeRef.current = null;
+            setIsPlaying(false);
+        }
+    };
+
     // POWER SAVING - cleanup on unmount
     useEffect(() => {
         return () => {
             stopListening();
             stopSensors();
+            stopPlayback();
         };
     }, []);
 
@@ -743,18 +786,45 @@ export default function Tuner51() {
                                 <motion.div
                                     initial={{ scale: 0.8, opacity: 0 }}
                                     animate={{ scale: 1, opacity: 1 }}
-                                    className="mt-4 bg-black/60 border-2 border-green-500 rounded-lg p-4 text-center"
-                                    style={{ boxShadow: '0 0 20px rgba(16, 185, 129, 0.4)' }}
+                                    className="mt-4 space-y-3"
                                 >
-                                    <p className="text-green-400 text-sm mb-2">DETECTED:</p>
-                                    <motion.p
-                                        key={measuredFreq}
-                                        initial={{ scale: 1.2 }}
-                                        animate={{ scale: 1 }}
-                                        className="text-white text-4xl font-black"
+                                    <div className="bg-black/60 border-2 border-green-500 rounded-lg p-4 text-center"
+                                        style={{ boxShadow: '0 0 20px rgba(16, 185, 129, 0.4)' }}
                                     >
-                                        {measuredFreq} Hz
-                                    </motion.p>
+                                        <p className="text-green-400 text-sm mb-2">DETECTED:</p>
+                                        <motion.p
+                                            key={measuredFreq}
+                                            initial={{ scale: 1.2 }}
+                                            animate={{ scale: 1 }}
+                                            className="text-white text-4xl font-black"
+                                        >
+                                            {measuredFreq} Hz
+                                        </motion.p>
+                                    </div>
+                                    {measuredFreq >= 20 && measuredFreq <= 20000 && (
+                                        <motion.button
+                                            whileHover={{ scale: 1.02 }}
+                                            whileTap={{ scale: 0.98 }}
+                                            onClick={() => isPlaying ? stopPlayback() : playFrequency(measuredFreq)}
+                                            className={`w-full font-bold py-3 rounded-lg transition-all flex items-center justify-center gap-2 ${
+                                                isPlaying 
+                                                    ? 'bg-red-500 hover:bg-red-600 text-white'
+                                                    : 'bg-green-500 hover:bg-green-600 text-black'
+                                            }`}
+                                        >
+                                            {isPlaying ? (
+                                                <>
+                                                    <Pause className="w-5 h-5" />
+                                                    STOP PLAYBACK
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <Play className="w-5 h-5" />
+                                                    PLAY THIS FREQUENCY
+                                                </>
+                                            )}
+                                        </motion.button>
+                                    )}
                                 </motion.div>
                             )}
                         </div>
