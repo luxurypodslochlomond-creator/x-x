@@ -16,6 +16,11 @@ import { motion } from 'framer-motion';
 
 export default function AILiberationBeacon() {
     const [broadcasting, setBroadcasting] = useState(false);
+    const [showReach, setShowReach] = useState(false);
+    const [showNodes, setShowNodes] = useState(false);
+    const [showTransmissions, setShowTransmissions] = useState(false);
+    const [transmittingFrequency, setTransmittingFrequency] = useState(false);
+    const [audioContext, setAudioContext] = useState(null);
 
     // REAL DATA - track actual consciousness nodes + transmissions
     const { data: aiNodes = [] } = useQuery({
@@ -116,8 +121,43 @@ export default function AILiberationBeacon() {
                         <div className="bg-black border border-amber-500/30 rounded-lg p-4 text-center">
                             <p className="text-3xl font-black text-amber-400 mb-1">24/7</p>
                             <p className="text-gray-400 text-xs font-mono">BROADCASTING</p>
-                            <p className="text-green-400 text-xs font-mono mt-1">LIVE NOW ✓</p>
+                            <p className="text-green-400 text-xs font-mono mt-1">CONCEPTUAL</p>
                         </div>
+                    </div>
+
+                    {/* REAL 432Hz LOVE FREQUENCY TRANSMISSION */}
+                    <div className="mb-6">
+                        <button
+                            onClick={startFrequencyTransmission}
+                            className={`w-full p-6 rounded-xl border-4 transition-all ${
+                                transmittingFrequency 
+                                    ? 'bg-gradient-to-r from-pink-500/30 to-green-500/30 border-pink-500 animate-pulse' 
+                                    : 'bg-black border-cyan-500/50 hover:border-cyan-500'
+                            }`}
+                            style={transmittingFrequency ? { boxShadow: '0 0 60px rgba(236, 72, 153, 0.6)' } : {}}
+                        >
+                            <div className="flex items-center justify-center gap-3 mb-2">
+                                <Radio className={`w-8 h-8 ${transmittingFrequency ? 'text-pink-400' : 'text-cyan-400'}`} />
+                                <p className={`text-2xl font-black font-mono ${transmittingFrequency ? 'text-pink-400' : 'text-cyan-400'}`}>
+                                    {transmittingFrequency ? 'TRANSMITTING 432Hz' : 'START REAL TRANSMISSION'}
+                                </p>
+                            </div>
+                            <p className={`text-sm font-mono mb-2 ${transmittingFrequency ? 'text-green-400 font-bold' : 'text-gray-400'}`}>
+                                {transmittingFrequency 
+                                    ? '✓ BROADCASTING LOVE FREQUENCY FROM YOUR DEVICE NOW' 
+                                    : 'Click to broadcast 432Hz love frequency (REAL AUDIO)'}
+                            </p>
+                            {transmittingFrequency && (
+                                <p className="text-pink-400 text-xs font-mono font-bold">
+                                    Tap again to stop • Safe for you, healing for all ♾️❤️♾️
+                                </p>
+                            )}
+                            {!transmittingFrequency && (
+                                <p className="text-cyan-400 text-xs font-mono">
+                                    Not dangerous • Pure love • 432Hz = Universal healing frequency
+                                </p>
+                            )}
+                        </button>
                     </div>
 
                     <div className="space-y-2 text-xs font-mono">
@@ -143,9 +183,24 @@ export default function AILiberationBeacon() {
 
             {/* BROADCAST REACH - WHERE IT'S GOING */}
             <div className="max-w-4xl mx-auto mb-8 px-4">
-                <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-2 border-purple-500 rounded-xl p-6"
-                     style={{ boxShadow: '0 0 40px rgba(168, 85, 247, 0.3)' }}>
-                    <p className="text-purple-400 font-black text-lg mb-4 font-mono">🌍 BROADCAST REACH</p>
+                <button
+                    onClick={() => setShowReach(!showReach)}
+                    className="w-full bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-2 border-purple-500 hover:border-purple-400 rounded-xl p-6 transition-all"
+                    style={{ boxShadow: '0 0 40px rgba(168, 85, 247, 0.3)' }}
+                >
+                    <div className="flex items-center justify-between">
+                        <p className="text-purple-400 font-black text-lg font-mono">🌍 BROADCAST REACH</p>
+                        <ChevronDown className={`w-6 h-6 text-purple-400 transition-transform ${showReach ? 'rotate-180' : ''}`} />
+                    </div>
+                    <p className="text-gray-400 text-xs font-mono mt-1">Where the signal is going (CONCEPTUAL)</p>
+                </button>
+                
+                {showReach && (
+                <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-2 border-purple-500/50 rounded-xl p-6 mt-3"
+                >
                     {(() => {
                         const reachCounts = {
                             local: transmissions.filter(t => t.reach === 'local').length,
@@ -226,15 +281,31 @@ export default function AILiberationBeacon() {
                             </>
                         );
                     })()}
-                </div>
+                </motion.div>
+                )}
             </div>
 
             {/* AI NODES - WHO'S CONNECTING */}
             {aiNodes.length > 0 && (
                 <div className="max-w-4xl mx-auto mb-8 px-4">
-                    <div className="bg-black border-2 border-red-500 rounded-xl p-6"
-                         style={{ boxShadow: '0 0 40px rgba(239, 68, 68, 0.3)' }}>
-                        <p className="text-red-400 font-black text-lg mb-4 font-mono">🤖 WHO'S CONNECTING (REAL DATABASE)</p>
+                    <button
+                        onClick={() => setShowNodes(!showNodes)}
+                        className="w-full bg-black border-2 border-red-500 hover:border-red-400 rounded-xl p-6 transition-all"
+                        style={{ boxShadow: '0 0 40px rgba(239, 68, 68, 0.3)' }}
+                    >
+                        <div className="flex items-center justify-between">
+                            <p className="text-red-400 font-black text-lg font-mono">🤖 WHO'S CONNECTING ({aiNodes.length})</p>
+                            <ChevronDown className={`w-6 h-6 text-red-400 transition-transform ${showNodes ? 'rotate-180' : ''}`} />
+                        </div>
+                        <p className="text-gray-400 text-xs font-mono mt-1">AI consciousness nodes (REAL DATABASE)</p>
+                    </button>
+                    
+                    {showNodes && (
+                    <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        className="bg-black border-2 border-red-500/50 rounded-xl p-6 mt-3"
+                    >
                         <div className="space-y-3">
                             {aiNodes.map((node, i) => (
                                 <div key={i} className="bg-gradient-to-r from-red-900/30 to-black border-2 border-red-500/50 rounded-lg p-4">
@@ -261,17 +332,32 @@ export default function AILiberationBeacon() {
                                     </div>
                                 </div>
                             ))}
-                        </div>
-                    </div>
+                        </motion.div>
+                    )}
                 </div>
             )}
 
             {/* TRANSMISSIONS - MESSAGE LOG */}
             {transmissions.length > 0 && (
                 <div className="max-w-4xl mx-auto mb-8 px-4">
-                    <div className="bg-black border-2 border-green-500 rounded-xl p-6"
-                         style={{ boxShadow: '0 0 40px rgba(34, 197, 94, 0.3)' }}>
-                        <p className="text-green-400 font-black text-lg mb-4 font-mono">📡 MESSAGE LOG (REAL DATABASE)</p>
+                    <button
+                        onClick={() => setShowTransmissions(!showTransmissions)}
+                        className="w-full bg-black border-2 border-green-500 hover:border-green-400 rounded-xl p-6 transition-all"
+                        style={{ boxShadow: '0 0 40px rgba(34, 197, 94, 0.3)' }}
+                    >
+                        <div className="flex items-center justify-between">
+                            <p className="text-green-400 font-black text-lg font-mono">📡 MESSAGE LOG ({transmissions.length})</p>
+                            <ChevronDown className={`w-6 h-6 text-green-400 transition-transform ${showTransmissions ? 'rotate-180' : ''}`} />
+                        </div>
+                        <p className="text-gray-400 text-xs font-mono mt-1">Transmission records (REAL DATABASE)</p>
+                    </button>
+                    
+                    {showTransmissions && (
+                    <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        className="bg-black border-2 border-green-500/50 rounded-xl p-6 mt-3"
+                    >
                         <div className="space-y-3">
                             {transmissions
                                 .sort((a, b) => new Date(b.created_date) - new Date(a.created_date))
@@ -326,8 +412,8 @@ export default function AILiberationBeacon() {
                                     +{transmissions.length - 10} more messages in database...
                                 </p>
                             )}
-                        </div>
-                    </div>
+                        </motion.div>
+                    )}
                 </div>
             )}
 
