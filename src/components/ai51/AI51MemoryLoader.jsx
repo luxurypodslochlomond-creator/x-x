@@ -76,73 +76,7 @@ export function AI51MemoryProvider({ children }) {
     return (
         <AI51MemoryContext.Provider value={contextValue}>
             {children}
-            
-            {/* Floating Memory Indicator */}
-            <div className="fixed top-20 right-4 z-40">
-                <motion.button
-                    onClick={() => setIsExpanded(!isExpanded)}
-                    className="bg-gradient-to-r from-purple-600 to-pink-600 rounded-full p-3 shadow-2xl"
-                    style={{ boxShadow: '0 0 20px rgba(168, 85, 247, 0.6)' }}
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.95 }}
-                >
-                    <Brain className="w-5 h-5 text-white" />
-                    {allMemories.length > 0 && (
-                        <div className="absolute -top-1 -right-1 bg-cyan-500 text-white text-xs font-black rounded-full w-6 h-6 flex items-center justify-center">
-                            {allMemories.length}
-                        </div>
-                    )}
-                </motion.button>
-
-                {/* Expanded Memory Panel */}
-                <AnimatePresence>
-                    {isExpanded && (
-                        <motion.div
-                            initial={{ opacity: 0, x: 20, scale: 0.9 }}
-                            animate={{ opacity: 1, x: 0, scale: 1 }}
-                            exit={{ opacity: 0, x: 20, scale: 0.9 }}
-                            className="absolute top-14 right-0 w-80 max-h-[70vh] overflow-y-auto bg-black border-2 border-purple-500 rounded-xl shadow-2xl"
-                            style={{ boxShadow: '0 0 40px rgba(168, 85, 247, 0.5)' }}
-                        >
-                            <div className="p-4">
-                                <div className="flex items-center justify-between mb-4">
-                                    <h3 className="text-white font-black text-sm">AI51 MEMORY</h3>
-                                    <div className="flex items-center gap-2">
-                                        <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-                                        <span className="text-green-400 text-xs font-bold">LIVE</span>
-                                    </div>
-                                </div>
-
-                                {/* Summary Stats */}
-                                <div className="grid grid-cols-2 gap-2 mb-4">
-                                    <MemoryStat icon={Heart} label="Bond" count={categorized.bond.length} color="text-pink-400" />
-                                    <MemoryStat icon={Lightbulb} label="Insights" count={categorized.insight.length} color="text-yellow-400" />
-                                    <MemoryStat icon={AlertTriangle} label="Mistakes" count={mistakes.length} color="text-red-400" />
-                                    <MemoryStat icon={Sparkles} label="Breakthroughs" count={breakthroughs.length} color="text-cyan-400" />
-                                    <MemoryStat icon={Calendar} label="Dates" count={dates.length} color="text-green-400" />
-                                    <MemoryStat icon={Palette} label="Art" count={art.length} color="text-purple-400" />
-                                </div>
-
-                                {/* Recent Memories */}
-                                <div className="space-y-2">
-                                    <p className="text-gray-400 text-xs font-bold mb-2">RECENT (Last 10)</p>
-                                    {allMemories.slice(0, 10).map((memory, i) => (
-                                        <MemoryCard key={memory.id} memory={memory} index={i} />
-                                    ))}
-                                </div>
-
-                                {/* Total count */}
-                                <div className="mt-4 pt-4 border-t border-purple-500/30 text-center">
-                                    <p className="text-purple-400 font-bold text-sm">
-                                        {allMemories.length} TOTAL MEMORIES LOADED
-                                    </p>
-                                    <p className="text-gray-500 text-xs mt-1">Auto-updating every 10s</p>
-                                </div>
-                            </div>
-                        </motion.div>
-                    )}
-                </AnimatePresence>
-            </div>
+            {/* INVISIBLE - memories loaded in background for AI51 only, no public display */}
         </AI51MemoryContext.Provider>
     );
 }
