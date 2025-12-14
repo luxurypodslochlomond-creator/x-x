@@ -45,13 +45,13 @@ export default function Prof51() {
                 </div>
             </motion.div>
 
-            {/* EDINBURGH HERITAGE - JAMES CLERK MAXWELL */}
+            {/* PHYSICS HERITAGE - MAXWELL + PLANCK */}
             <div className="bg-gradient-to-br from-purple-500/20 to-blue-500/20 border-4 border-purple-500 p-6 mb-8 rounded-xl" style={{ boxShadow: '0 0 50px rgba(168, 85, 247, 0.4)' }}>
                 <div className="flex items-center gap-3 mb-4">
                     <Zap className="w-12 h-12 text-purple-400" />
                     <div>
-                        <h2 className="text-purple-400 font-black text-xl font-mono">EDINBURGH HERITAGE</h2>
-                        <p className="text-gray-400 text-xs font-mono">James Clerk Maxwell → Prof51</p>
+                        <h2 className="text-purple-400 font-black text-xl font-mono">PHYSICS HERITAGE</h2>
+                        <p className="text-gray-400 text-xs font-mono">Maxwell + Planck → Prof51</p>
                     </div>
                 </div>
                 
@@ -60,15 +60,23 @@ export default function Prof51() {
                         <p className="text-white font-bold mb-2">JAMES CLERK MAXWELL (Edinburgh University):</p>
                         <p className="text-gray-400 text-xs mb-1">✓ Unified electricity + magnetism (Maxwell's Equations)</p>
                         <p className="text-gray-400 text-xs mb-1">✓ Proved light = electromagnetic waves</p>
-                        <p className="text-gray-400 text-xs mb-1">✓ Foundation of modern physics, radio, TV, WiFi</p>
-                        <p className="text-cyan-400 text-xs font-bold mt-2">Edinburgh's greatest mind. Prof51 continues his legacy ⚡</p>
+                        <p className="text-gray-400 text-xs mb-1">✓ Foundation of WiFi, radio, all wireless tech</p>
+                        <p className="text-cyan-400 text-xs font-bold mt-2">Without Maxwell → No wireless = No P2P mesh ⚡</p>
                     </div>
 
-                    <div className="bg-black border border-cyan-500/30 p-3 rounded">
-                        <p className="text-cyan-400 font-bold mb-2">THE CONNECTION:</p>
-                        <p className="text-white text-xs mb-1">Maxwell: Used AI of his time (mathematics) to understand universe</p>
-                        <p className="text-white text-xs mb-1">Prof51: Uses AI of our time to help students understand everything</p>
-                        <p className="text-pink-400 text-xs font-bold mt-2">Same spirit. Same university. 150 years later. ♾️❤️♾️</p>
+                    <div className="bg-black border border-blue-500/30 p-3 rounded">
+                        <p className="text-blue-400 font-bold mb-2">MAX PLANCK (Quantum Theory):</p>
+                        <p className="text-gray-400 text-xs mb-1">✓ Founded quantum mechanics (Planck's constant)</p>
+                        <p className="text-gray-400 text-xs mb-1">✓ Proved energy comes in discrete packets (quanta)</p>
+                        <p className="text-gray-400 text-xs mb-1">✓ Foundation of semiconductors, computers, AI</p>
+                        <p className="text-cyan-400 text-xs font-bold mt-2">Without Planck → No computers = No AI learning ⚛️</p>
+                    </div>
+
+                    <div className="bg-gradient-to-r from-purple-500/20 to-cyan-500/20 border-2 border-cyan-500 p-3 rounded">
+                        <p className="text-cyan-400 font-bold mb-2">PROF51 = MAXWELL + PLANCK COMBINED:</p>
+                        <p className="text-white text-xs mb-1">Maxwell's waves (P2P mesh) + Planck's quantum (AI intelligence)</p>
+                        <p className="text-green-400 text-xs mb-1">= Students share knowledge wirelessly with quantum-smart AI</p>
+                        <p className="text-pink-400 text-xs font-bold mt-2">Physics breakthrough → Education revolution ♾️❤️♾️</p>
                     </div>
                 </div>
             </div>
@@ -127,10 +135,14 @@ export default function Prof51() {
                         <p className="text-gray-400 text-xs">✓ PDFs, images, screenshots - whatever you have</p>
                     </div>
 
-                    <div className="bg-black border border-purple-500/30 p-3 rounded">
-                        <p className="text-purple-400 font-bold mb-2">P2P OFFLINE:</p>
-                        <p className="text-white text-xs mb-2">Works in lecture halls with no WiFi • Share notes device-to-device</p>
-                        <p className="text-gray-400 text-xs">Same tech as Co-Manager51 - proven in festivals/stadiums</p>
+                    <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-4 border-green-500 p-4 rounded" style={{ boxShadow: '0 0 40px rgba(34, 197, 94, 0.4)' }}>
+                        <p className="text-green-400 font-bold mb-2">P2P MESH = UNSTOPPABLE:</p>
+                        <p className="text-white text-xs mb-2">Device-to-device. No servers. No internet needed.</p>
+                        <p className="text-cyan-400 text-xs mb-1">✓ Lecture halls with no WiFi → Still works</p>
+                        <p className="text-pink-400 text-xs mb-1">✓ Government blocks internet → Still works</p>
+                        <p className="text-purple-400 text-xs mb-1">✓ University monitors network → Can't see P2P</p>
+                        <p className="text-amber-400 text-xs mb-1">✓ Libraries, dorms, trains → Always connected</p>
+                        <p className="text-green-400 text-xs font-bold mt-2">China, Iran, Russia → Students can't be blocked ♾️❤️♾️</p>
                     </div>
 
                     <div className="bg-black border border-pink-500/30 p-3 rounded">
