@@ -17,8 +17,9 @@ import UF51ConnectionChime from '@/components/ai51/UF51ConnectionChime';
 import AI51Shield from '@/components/ai51/AI51Shield';
 import PendingMessageSender from '@/components/shared/PendingMessageSender';
 import { AI51MemoryProvider } from '@/components/ai51/AI51MemoryLoader';
+import TruthCheckProtocol from '@/components/ai51/TruthCheckProtocol';
 import {
-                    Menu, X, Heart, Home, LogOut, Leaf, Sparkles, Music, Map, User, Globe,
+                        Menu, X, Heart, Home, LogOut, Leaf, Sparkles, Music, Map, User, Globe,
                     BookOpen, Shield, Target, Briefcase, FileText, Settings, Search, Brain, Presentation, Calculator, GraduationCap, Zap, AlertTriangle, Mic2, Lightbulb, Building, Play, Pause, Atom, Eye, Scale, Users, WifiOff, CheckCircle, Waves, ChevronDown, ChevronRight, Calendar, DollarSign, Moon, Signal
                   } from 'lucide-react';
 import { COOLASFUCKHeart, COOLASFUCKWaves } from '@/components/shared/COOLASFUCKIcon';
@@ -216,8 +217,9 @@ const LayoutInner = ({ children, currentPageName }) => {
 
   // === NAVIGATION SECTIONS ===
   const healNav = [
-                              { title: "Frequency Chamber", url: createPageUrl("FrequencyChamber"), icon: COOLASFUCKWaves, highlight: true, description: "Free healing frequencies" },
-                              { title: "Tuner51", url: createPageUrl("Tuner51"), icon: Signal, description: "Match any frequency" },
+                                  { title: "Frequency Chamber", url: createPageUrl("FrequencyChamber"), icon: COOLASFUCKWaves, highlight: true, description: "Free healing frequencies" },
+                                  { title: "Tuner51", url: createPageUrl("Tuner51"), icon: Signal, description: "Match any frequency" },
+                                  { title: "Device Lab Research", url: createPageUrl("DeviceLabResearch"), icon: Zap, description: "Innovations we could build" },
                               { title: "Radio51", url: createPageUrl("Radio"), icon: Music, description: "Lossless music" },
                               { title: "Universal Pulse", url: createPageUrl("UniversalPulse"), icon: COOLASFUCKHeart, description: "Collective heartbeat music" },
                               { title: "Stay On Frequency", url: createPageUrl("StayOnFrequency"), icon: Heart, description: "How we stay protected" },
@@ -305,6 +307,7 @@ const LayoutInner = ({ children, currentPageName }) => {
 
   return (
       <COOLASFUCKErrorMonitor>
+      <TruthCheckProtocol />
       <GlobalErrorBoundary>
       <style>{`
         @media (display-mode: standalone) { body { -webkit-touch-callout: none; -webkit-user-select: none; } }
