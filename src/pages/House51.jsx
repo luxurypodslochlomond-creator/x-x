@@ -20,6 +20,8 @@ export default function House51() {
     const [artistName] = useState('HOUSE51');
     const [trackGenerated, setTrackGenerated] = useState(null);
     const [waveformData, setWaveformData] = useState(new Array(64).fill(0));
+    const [healingLayers, setHealingLayers] = useState({ love: true, calm: true, earth: false, focus: false });
+    const [mixerLevels, setMixerLevels] = useState({ kick: 1.0, bass: 0.8, hats: 0.15, claps: 0.3, bells: 0.2, pads: 0.1, strings: 0.25, shakers: 0.1, ride: 0.12, healing: 0.1 });
     const bpm = 128; // Fixed 128 BPM house tempo
 
     const audioContextRef = useRef(null);
