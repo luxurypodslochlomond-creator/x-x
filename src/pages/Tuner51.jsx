@@ -257,6 +257,14 @@ export default function Tuner51() {
         }
     }, [inputFreq]);
 
+    // POWER SAVING - cleanup on unmount
+    useEffect(() => {
+        return () => {
+            stopListening();
+            stopSensors();
+        };
+    }, []);
+
     const colorMap = {
         green: { bg: 'from-green-500/20 to-emerald-500/20', border: 'border-green-500', text: 'text-green-400' },
         pink: { bg: 'from-pink-500/20 to-rose-500/20', border: 'border-pink-500', text: 'text-pink-400' },
