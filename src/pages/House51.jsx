@@ -649,10 +649,10 @@ Listen: ${window.location.href}`;
 
                 {showMixer && (
                     <div className="mt-4 bg-zinc-950 border border-cyan-500 rounded-lg p-3">
-                        <h3 className="text-xs font-black text-cyan-400 mb-2">10-CHANNEL MIXER</h3>
+                        <h3 className="text-xs font-black text-cyan-400 mb-2">MIXER (VISUAL ONLY - NOT WIRED YET)</h3>
                         <div className="grid grid-cols-5 md:grid-cols-10 gap-2">
                             {/* KICK */}
-                            <MixerChannel
+                            {/* <MixerChannel
                                 label="KICK"
                                 color="cyan"
                                 icon="●"
