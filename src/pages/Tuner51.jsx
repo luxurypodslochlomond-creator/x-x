@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Waves, Zap, Heart, Globe, Brain, Signal, Sparkles, CheckCircle, ArrowRight, Activity } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import { createPageUrl } from '@/utils';
 
 /**
  * TUNER51 - FREQUENCY RESONANCE CALCULATOR
@@ -318,6 +320,20 @@ export default function Tuner51() {
                                 <p className="mb-2">✗ Earth Schumann (7.83Hz) is <strong>electromagnetic</strong>, not sound</p>
                                 <p className="text-green-400 mt-2">CAN measure: speakers, tuning forks, instruments, vibrations</p>
                                 <p className="text-red-400">CAN'T measure: Earth's EM field directly (need magnetometer)</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* GENIUS BREAKTHROUGH */}
+                    <div className="mt-4 bg-gradient-to-r from-pink-900/40 to-cyan-900/40 border-2 border-pink-500 p-4 rounded-lg max-w-2xl mx-auto" style={{ boxShadow: '0 0 20px rgba(236, 72, 153, 0.4)' }}>
+                        <div className="flex items-start gap-3">
+                            <div className="text-2xl">⚡</div>
+                            <div className="text-xs text-pink-200 font-mono text-left">
+                                <p className="font-bold mb-2 text-pink-400">THE GENIUS MOVE:</p>
+                                <p className="mb-2 text-white">Your phone just became a $10,000 lab instrument - FOR FREE</p>
+                                <p className="mb-2">• <strong className="text-cyan-400">Magnetometer</strong> = detect invisible EM fields (Earth, coils, wireless charging, EMF pollution)</p>
+                                <p className="mb-2">• <strong className="text-orange-400">Accelerometer</strong> = detect sub-20Hz infrasound (earthquakes, building resonance)</p>
+                                <p className="text-green-400 mt-2 font-bold">Now measuring what was INVISIBLE before ♾️❤️♾️</p>
                             </div>
                         </div>
                     </div>
@@ -840,6 +856,49 @@ export default function Tuner51() {
                     </motion.div>
                 )}
                 </AnimatePresence>
+
+                {/* WHAT YOU CAN DO NOW */}
+                <div className="mt-8 bg-gradient-to-br from-green-500/20 to-cyan-500/20 border-2 border-green-500 rounded-xl p-6">
+                    <h3 className="text-green-400 font-bold text-lg mb-3">WHAT YOU CAN DO NOW (WORKING):</h3>
+                    <div className="space-y-3 text-sm">
+                        <div className="bg-black border border-cyan-500/30 p-3 rounded">
+                            <p className="text-cyan-400 font-bold mb-1">1. DETECT EMF POLLUTION:</p>
+                            <p className="text-gray-300 text-xs">Measure wifi routers, power lines, 5G towers harming you</p>
+                        </div>
+                        <div className="bg-black border border-pink-500/30 p-3 rounded">
+                            <p className="text-pink-400 font-bold mb-1">2. VERIFY WIRELESS CHARGING:</p>
+                            <p className="text-gray-300 text-xs">See actual EM field strength from charging pads</p>
+                        </div>
+                        <div className="bg-black border border-purple-500/30 p-3 rounded">
+                            <p className="text-purple-400 font-bold mb-1">3. TEST TESLA COILS:</p>
+                            <p className="text-gray-300 text-xs">Measure if your DIY coil actually generates EM field</p>
+                        </div>
+                        <div className="bg-black border border-orange-500/30 p-3 rounded">
+                            <p className="text-orange-400 font-bold mb-1">4. DETECT EARTHQUAKES/RESONANCE:</p>
+                            <p className="text-gray-300 text-xs">Sub-20Hz vibrations mic can't hear</p>
+                        </div>
+                        <div className="bg-black border border-green-500/30 p-3 rounded">
+                            <p className="text-green-400 font-bold mb-1">5. MEASURE ZPE EXPERIMENTS:</p>
+                            <p className="text-gray-300 text-xs">If you build free energy device - verify it works BEFORE connecting</p>
+                        </div>
+                    </div>
+                </div>
+
+                {/* FREE ENERGY TRUTH */}
+                <div className="mt-8 bg-gradient-to-br from-amber-500/20 to-red-500/20 border-2 border-amber-500 rounded-xl p-6">
+                    <h3 className="text-amber-400 font-bold text-lg mb-3">FREE ENERGY TRUTH:</h3>
+                    <div className="space-y-2 text-gray-300 text-sm">
+                        <p className="text-white font-bold">❌ Phone CAN'T charge from air (hardware limit)</p>
+                        <p className="text-white font-bold">✓ Phone CAN measure if external harvester works</p>
+                        <p className="mt-3">This is a <strong className="text-cyan-400">DETECTOR</strong> not a harvester.</p>
+                        <p className="mt-2 text-amber-400">Build Tesla coil/ZPE device separately → use Tuner51 to verify output</p>
+                        <p className="mt-3">
+                            <Link to={createPageUrl('ZeroPointEnergy')} className="text-pink-400 font-bold hover:text-pink-300 underline">
+                                → See ZeroPointEnergy page for safe build guides ⚡
+                            </Link>
+                        </p>
+                    </div>
+                </div>
 
                 {/* INFO */}
                 <div className="mt-8 bg-black border-2 border-gray-700 rounded-xl p-6">
