@@ -31,7 +31,7 @@ export default function House51() {
         bass: 0.3,
         hats: 0.1,
         claps: 0.25,
-        bells: 0.05,      // Lower - can be harsh on ears
+        bells: 0.02,      // Lower - can be harsh on ears
         pads: 0.05,
         strings: 0.15,
         shakers: 0.06,
@@ -785,6 +785,14 @@ export default function House51() {
         }
     }, [mixerLevels]);
 
+    // RESTART WHEN STYLE CHANGES
+    useEffect(() => {
+        if (isPlaying) {
+            stopHouse();
+            setTimeout(() => startHouse(), 100);
+        }
+    }, [currentStyle]);
+
     // CLEANUP
     useEffect(() => {
         return () => {
@@ -903,6 +911,37 @@ export default function House51() {
                             <input type="range" min="110" max="140" value={bpm} onChange={(e) => setBpm(parseInt(e.target.value))} disabled={isPlaying} className="w-full h-1.5 bg-zinc-800 rounded appearance-none disabled:opacity-50" />
                         </div>
                     </div>
+
+                {/* TRACK SUGGESTIONS */}
+                <div className="md:col-span-3 bg-zinc-950 border border-amber-600/30 rounded-lg p-3">
+                    <h3 className="text-sm font-black text-amber-500 mb-2">START HERE BRO:</h3>
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-2 text-xs">
+                        <div className="bg-black border border-amber-600/30 p-2 rounded">
+                            <p className="text-white font-bold">Kerri Chandler</p>
+                            <p className="text-gray-500 text-[10px]">Bar A Thym</p>
+                        </div>
+                        <div className="bg-black border border-amber-600/30 p-2 rounded">
+                            <p className="text-white font-bold">Larry Heard</p>
+                            <p className="text-gray-500 text-[10px]">Can You Feel It</p>
+                        </div>
+                        <div className="bg-black border border-amber-600/30 p-2 rounded">
+                            <p className="text-white font-bold">Moodymann</p>
+                            <p className="text-gray-500 text-[10px]">Dem Young Sconies</p>
+                        </div>
+                        <div className="bg-black border border-amber-600/30 p-2 rounded">
+                            <p className="text-white font-bold">CamelPhat</p>
+                            <p className="text-gray-500 text-[10px]">Cola (sub-bass king)</p>
+                        </div>
+                        <div className="bg-black border border-amber-600/30 p-2 rounded">
+                            <p className="text-white font-bold">RÜFÜS DU SOL</p>
+                            <p className="text-gray-500 text-[10px]">Innerbloom</p>
+                        </div>
+                        <div className="bg-black border border-amber-600/30 p-2 rounded">
+                            <p className="text-white font-bold">Luka's Ibiza</p>
+                            <p className="text-gray-500 text-[10px]">Ben Santiago sets</p>
+                        </div>
+                    </div>
+                </div>
                     </div>
 
                 {showMixer && (
