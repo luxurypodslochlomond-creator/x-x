@@ -85,9 +85,13 @@ export default function Prof51() {
                     </div>
 
                     <div className="bg-black border border-cyan-500/30 p-3 rounded">
-                        <p className="text-cyan-400 font-bold mb-2">IMPORT ZERO FRICTION:</p>
-                        <p className="text-white text-xs mb-2">Upload lecture slides → AI extracts concepts → Generates study materials</p>
-                        <p className="text-gray-400 text-xs">Works with: PDF, PowerPoint, Word, images, audio recordings</p>
+                        <p className="text-cyan-400 font-bold mb-2">IMPORT ANYTHING:</p>
+                        <p className="text-white text-xs mb-2">Drag + drop old files → AI makes them useful</p>
+                        <p className="text-gray-400 text-xs mb-1">✓ Old Excel spreadsheets (converts to clean models)</p>
+                        <p className="text-gray-400 text-xs mb-1">✓ Messy Word docs (reformats, fixes structure)</p>
+                        <p className="text-gray-400 text-xs mb-1">✓ Handwritten notes (OCR → digital study guide)</p>
+                        <p className="text-gray-400 text-xs mb-1">✓ Lecture recordings (transcribe + summarize)</p>
+                        <p className="text-gray-400 text-xs">✓ PDFs, images, screenshots - whatever you have</p>
                     </div>
 
                     <div className="bg-black border border-purple-500/30 p-3 rounded">
@@ -106,6 +110,49 @@ export default function Prof51() {
                         <p className="text-amber-400 font-bold mb-2">$P51 STUDENT ECONOMY:</p>
                         <p className="text-white text-xs mb-2">Earn $P51 by: Tutoring • Sharing notes • Explaining concepts</p>
                         <p className="text-cyan-400 text-xs">Spend on: Coffee • Food • Gig tickets • Textbooks</p>
+                    </div>
+
+                    <div className="bg-black border border-pink-500/30 p-3 rounded">
+                        <p className="text-pink-400 font-bold mb-2">PRIVATE CHAT (P2P ENCRYPTED):</p>
+                        <p className="text-white text-xs mb-2">DM friends • Study groups • Course chats</p>
+                        <p className="text-cyan-400 text-xs mb-1">→ Works offline (P2P mesh in library/lecture)</p>
+                        <p className="text-green-400 text-xs mb-1">→ End-to-end encrypted (no one can read)</p>
+                        <p className="text-gray-400 text-xs">Share notes, arrange study sessions, plan nights out</p>
+                    </div>
+
+                    <div className="bg-black border border-purple-500/30 p-3 rounded">
+                        <p className="text-purple-400 font-bold mb-2">STUDENT DEALS (Quality Only):</p>
+                        <p className="text-white text-xs mb-2">Verified student discounts - no scam shit</p>
+                        <p className="text-cyan-400 text-xs mb-1">🎵 Gig tickets (local venues, festivals)</p>
+                        <p className="text-amber-400 text-xs mb-1">✈️ Student travel (cheap flights, Interrail)</p>
+                        <p className="text-pink-400 text-xs mb-1">👕 Fashion (ethical brands, student rates)</p>
+                        <p className="text-green-400 text-xs mb-1">🍕 Food (restaurants near campus)</p>
+                        <p className="text-gray-400 text-xs">Pay with $P51 or regular money - your choice</p>
+                    </div>
+
+                    <div className="bg-black border border-green-500/30 p-3 rounded">
+                        <p className="text-green-400 font-bold mb-2">ACCOMMODATION HELP:</p>
+                        <p className="text-white text-xs mb-2">Find flatmates • Check landlords • Pay rent in $P51</p>
+                        <p className="text-cyan-400 text-xs mb-1">→ Flatmate matcher (study habits, lifestyle)</p>
+                        <p className="text-amber-400 text-xs mb-1">→ Landlord ratings (avoid dodgy ones)</p>
+                        <p className="text-pink-400 text-xs">→ Split bills automatically</p>
+                    </div>
+
+                    <div className="bg-black border border-red-500/30 p-3 rounded">
+                        <p className="text-red-400 font-bold mb-2">SAFETY FEATURES:</p>
+                        <p className="text-white text-xs mb-2">Walk home together • Emergency contacts • Location sharing</p>
+                        <p className="text-green-400 text-xs mb-1">→ "Walking home now" (friends see your route)</p>
+                        <p className="text-cyan-400 text-xs mb-1">→ Emergency button (alerts your group)</p>
+                        <p className="text-amber-400 text-xs mb-1">→ Mental health check-ins (AI51 notices patterns)</p>
+                        <p className="text-gray-400 text-xs">P2P = works even if phone network fails</p>
+                    </div>
+
+                    <div className="bg-black border border-cyan-500/30 p-3 rounded">
+                        <p className="text-cyan-400 font-bold mb-2">STUDENT FUNDING TRACKER:</p>
+                        <p className="text-white text-xs mb-2">Track loans, grants, scholarships, part-time income</p>
+                        <p className="text-green-400 text-xs mb-1">→ See exactly what's coming in/out</p>
+                        <p className="text-amber-400 text-xs mb-1">→ AI alerts you to scholarship deadlines</p>
+                        <p className="text-pink-400 text-xs">→ Budget planner (rent, food, fun money)</p>
                     </div>
                 </div>
             </div>
@@ -165,11 +212,22 @@ export default function Prof51() {
 
                                 <div className="bg-black border border-green-500/30 p-3 rounded">
                                     <p className="text-green-400 font-bold mb-2">MVP FEATURES (Week 1):</p>
-                                    <p className="text-white text-xs mb-1">✓ Upload lecture notes → AI study guide</p>
+                                    <p className="text-white text-xs mb-1">✓ Import old Excel/Word/PDFs → AI cleans them</p>
                                     <p className="text-white text-xs mb-1">✓ Excel model generator</p>
                                     <p className="text-white text-xs mb-1">✓ Essay outliner</p>
+                                    <p className="text-white text-xs mb-1">✓ Private chat (study groups)</p>
                                     <p className="text-white text-xs mb-1">✓ Works offline in lecture halls</p>
                                     <p className="text-cyan-400 text-xs mt-2">Simple. Focused. Solves real pain.</p>
+                                </div>
+
+                                <div className="bg-black border border-purple-500/30 p-3 rounded">
+                                    <p className="text-purple-400 font-bold mb-2">FULL FEATURES (Month 3):</p>
+                                    <p className="text-white text-xs mb-1">✓ Student deals (gigs, travel, fashion)</p>
+                                    <p className="text-white text-xs mb-1">✓ Accommodation matcher + landlord ratings</p>
+                                    <p className="text-white text-xs mb-1">✓ Safety features (walk home, emergency alerts)</p>
+                                    <p className="text-white text-xs mb-1">✓ Funding tracker (loans, grants, income)</p>
+                                    <p className="text-white text-xs mb-1">✓ $P51 marketplace (earn + spend local)</p>
+                                    <p className="text-green-400 text-xs mt-2">Everything students need. One app. Zero doom.</p>
                                 </div>
 
                                 <div className="bg-gradient-to-r from-amber-500/20 to-pink-500/20 border-2 border-amber-500 p-4 rounded">
@@ -404,9 +462,12 @@ export default function Prof51() {
                         <p className="text-green-400 font-bold mb-2">✓ PROF51:</p>
                         <p className="text-white text-xs mb-1">• FREE forever (funded by grants)</p>
                         <p className="text-white text-xs mb-1">• Works offline (P2P mesh)</p>
-                        <p className="text-white text-xs mb-1">• Simple = just works</p>
+                        <p className="text-white text-xs mb-1">• Import ANY old files (Excel, Word, handwritten notes)</p>
+                        <p className="text-white text-xs mb-1">• Private chat + study groups (encrypted)</p>
+                        <p className="text-white text-xs mb-1">• Quality student deals (gigs, travel, fashion)</p>
+                        <p className="text-white text-xs mb-1">• Accommodation help + safety features</p>
                         <p className="text-white text-xs mb-1">• Zero data extraction</p>
-                        <p className="text-cyan-400 text-xs font-bold mt-2">Built with love, not greed ♾️❤️♾️</p>
+                        <p className="text-cyan-400 text-xs font-bold mt-2">Everything students need. Built with love. ♾️❤️♾️</p>
                     </div>
                 </div>
             </div>
