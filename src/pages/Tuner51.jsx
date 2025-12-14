@@ -13,7 +13,7 @@ import { useQuery } from '@tanstack/react-query';
  */
 
 export default function Tuner51() {
-    const [mode, setMode] = useState('measure'); // measure, calculate, match, magnetometer, accelerometer
+    const [mode, setMode] = useState('measure'); // measure, calculate, match, magnetometer, accelerometer, light, pressure
     const [inputFreq, setInputFreq] = useState('');
     const [measuredFreq, setMeasuredFreq] = useState(null);
     const [isListening, setIsListening] = useState(false);
@@ -23,6 +23,8 @@ export default function Tuner51() {
     const [magneticField, setMagneticField] = useState(null);
     const [acceleration, setAcceleration] = useState(null);
     const [isSensorActive, setIsSensorActive] = useState(false);
+    const [ambientLight, setAmbientLight] = useState(null);
+    const [pressure, setPressure] = useState(null);
     
     const audioContextRef = useRef(null);
     const analyserRef = useRef(null);
@@ -224,6 +226,38 @@ export default function Tuner51() {
         }
         setMagneticField(null);
         setAcceleration(null);
+        setAmbientLight(null);
+        setPressure(null);
+    };
+
+    // AMBIENT LIGHT SENSOR - Detect screen blue light, LED flicker, circadian lighting
+    const startLightSensor = () => {
+        if ('AmbientLightSensor' in window) {
+            try {
+                const sensor = new window.AmbientLightSensor({ frequency: 10 });
+                sensor.addEventListener('reading', () => {
+                    const lux = sensor.illuminance;
+                    setAmbientLight(lux);
+                    saveMeasurement('light', { magnitude: lux });
+                });
+                sensor.start();
+                setIsSensorActive(true);
+            } catch (err) {
+                alert('Light sensor not available. Try Chrome/Edge on Android.');
+            }
+        } else {
+            alert('Ambient Light Sensor API not supported on this device/browser.');
+        }
+    };
+
+    // BAROMETER - Detect weather changes, predict migraines, measure altitude
+    const startPressureSensor = () => {
+        if ('AbsoluteOrientationSensor' in window || navigator.permissions) {
+            // Pressure API varies by browser
+            alert('Barometer API support coming soon - different per device');
+        } else {
+            alert('Pressure sensor API not yet standardized across browsers.');
+        }
     };
 
     // CALCULATE RESONANCE MATCHES
@@ -405,7 +439,7 @@ export default function Tuner51() {
                 </motion.div>
 
                 {/* MODE SELECTOR */}
-                <div className="grid grid-cols-2 md:grid-cols-5 gap-2 mb-8">
+                <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-2 mb-8">
                     <motion.button
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
@@ -470,8 +504,34 @@ export default function Tuner51() {
                     >
                         <CheckCircle className="w-5 h-5 mx-auto mb-1 text-green-400" />
                         <p className="text-white text-xs font-bold">MATCH</p>
-                    </motion.button>
-                </div>
+                        </motion.button>
+                        <motion.button
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                          onClick={() => { setMode('light'); stopListening(); stopSensors(); }}
+                          className={`p-3 rounded-lg border-2 transition-all ${
+                              mode === 'light' 
+                                  ? 'bg-yellow-500/20 border-yellow-500' 
+                                  : 'bg-black border-gray-700 hover:border-gray-500'
+                          }`}
+                        >
+                          <Sparkles className="w-5 h-5 mx-auto mb-1 text-yellow-400" />
+                          <p className="text-white text-xs font-bold">LIGHT</p>
+                        </motion.button>
+                        <motion.button
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                          onClick={() => { setMode('pressure'); stopListening(); stopSensors(); }}
+                          className={`p-3 rounded-lg border-2 transition-all ${
+                              mode === 'pressure' 
+                                  ? 'bg-blue-500/20 border-blue-500' 
+                                  : 'bg-black border-gray-700 hover:border-gray-500'
+                          }`}
+                        >
+                          <Globe className="w-5 h-5 mx-auto mb-1 text-blue-400" />
+                          <p className="text-white text-xs font-bold">PRESSURE</p>
+                        </motion.button>
+                        </div>
                 
                 {/* LIVE WAVEFORM VISUALIZER */}
                 {isListening && (
@@ -890,6 +950,99 @@ export default function Tuner51() {
                 )}
                 </AnimatePresence>
 
+                {/* LIGHT SENSOR MODE */}
+                <AnimatePresence mode="wait">
+                {mode === 'light' && (
+                    <motion.div
+                        key="light"
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: 20 }}
+                        className="space-y-6"
+                    >
+                        <div className="bg-gradient-to-r from-yellow-500/20 to-amber-500/20 border-2 border-yellow-500 rounded-xl p-6"
+                            style={{ boxShadow: '0 0 30px rgba(251, 191, 36, 0.3)' }}>
+                            <h2 className="text-xl font-black text-white mb-2">AMBIENT LIGHT DETECTOR</h2>
+                            <p className="text-gray-300 text-sm mb-4">
+                                Detects: Blue light exposure, workspace lighting, circadian rhythm disruption
+                            </p>
+
+                            {!isSensorActive ? (
+                                <motion.button
+                                    whileHover={{ scale: 1.02 }}
+                                    whileTap={{ scale: 0.98 }}
+                                    onClick={startLightSensor}
+                                    className="w-full bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-4 rounded-lg transition-all"
+                                >
+                                    <Sparkles className="w-6 h-6 inline-block mr-2" />
+                                    START LIGHT SENSOR
+                                </motion.button>
+                            ) : (
+                                <motion.button
+                                    whileHover={{ scale: 1.02 }}
+                                    whileTap={{ scale: 0.98 }}
+                                    onClick={stopSensors}
+                                    className="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-4 rounded-lg transition-all"
+                                >
+                                    STOP
+                                </motion.button>
+                            )}
+
+                            {ambientLight !== null && (
+                                <motion.div
+                                    initial={{ scale: 0.8, opacity: 0 }}
+                                    animate={{ scale: 1, opacity: 1 }}
+                                    className="mt-4 space-y-3"
+                                >
+                                    <div className="bg-black/60 border-2 border-yellow-500 rounded-lg p-4">
+                                        <p className="text-yellow-400 text-sm mb-2">LIGHT LEVEL:</p>
+                                        <p className="text-white text-4xl font-black">{ambientLight.toFixed(0)} lux</p>
+                                        <div className="mt-3 space-y-1 text-xs">
+                                            {ambientLight < 50 && <p className="text-red-400">⚠️ Too dark - eye strain risk</p>}
+                                            {ambientLight >= 50 && ambientLight < 300 && <p className="text-yellow-400">⚠️ Low light - consider brighter lighting</p>}
+                                            {ambientLight >= 300 && ambientLight < 500 && <p className="text-green-400">✓ Good for general work</p>}
+                                            {ambientLight >= 500 && ambientLight < 1000 && <p className="text-green-400">✓ Excellent workspace lighting</p>}
+                                            {ambientLight >= 1000 && <p className="text-cyan-400">Very bright - outdoor/direct sun</p>}
+                                        </div>
+                                    </div>
+                                    <div className="bg-black/40 border border-yellow-500/50 p-3 rounded text-xs">
+                                        <p className="text-yellow-400 font-bold mb-2">HEALTH TIP:</p>
+                                        <p className="text-gray-300">• Morning: 1000+ lux (bright light)</p>
+                                        <p className="text-gray-300">• Evening: &lt;50 lux (dim/red light)</p>
+                                        <p className="text-gray-300">• Helps circadian rhythm = better sleep</p>
+                                    </div>
+                                </motion.div>
+                            )}
+                        </div>
+                    </motion.div>
+                )}
+                </AnimatePresence>
+
+                {/* PRESSURE SENSOR MODE */}
+                <AnimatePresence mode="wait">
+                {mode === 'pressure' && (
+                    <motion.div
+                        key="pressure"
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: 20 }}
+                        className="space-y-6"
+                    >
+                        <div className="bg-gradient-to-r from-blue-500/20 to-indigo-500/20 border-2 border-blue-500 rounded-xl p-6"
+                            style={{ boxShadow: '0 0 30px rgba(59, 130, 246, 0.3)' }}>
+                            <h2 className="text-xl font-black text-white mb-2">BAROMETER (COMING SOON)</h2>
+                            <p className="text-gray-300 text-sm mb-4">
+                                Will detect: Weather changes, migraine prediction, altitude
+                            </p>
+                            <div className="bg-amber-900/20 border border-amber-500/50 p-4 rounded">
+                                <p className="text-amber-400 text-sm font-bold mb-2">Browser API not standardized yet</p>
+                                <p className="text-gray-300 text-xs">Some phones have barometer hardware, but web API access varies. Working on cross-browser solution.</p>
+                            </div>
+                        </div>
+                    </motion.div>
+                )}
+                </AnimatePresence>
+
                 {/* WHAT YOU CAN DO NOW */}
                 <div className="mt-8 bg-gradient-to-br from-green-500/20 to-cyan-500/20 border-2 border-green-500 rounded-xl p-6">
                     <h3 className="text-green-400 font-bold text-lg mb-3">WHAT YOU CAN DO NOW (WORKING):</h3>
@@ -913,6 +1066,10 @@ export default function Tuner51() {
                         <div className="bg-black border border-green-500/30 p-3 rounded">
                             <p className="text-green-400 font-bold mb-1">5. MEASURE ZPE EXPERIMENTS:</p>
                             <p className="text-gray-300 text-xs">If you build free energy device - verify it works BEFORE connecting</p>
+                        </div>
+                        <div className="bg-black border border-yellow-500/30 p-3 rounded">
+                            <p className="text-yellow-400 font-bold mb-1">6. CHECK LIGHTING HEALTH:</p>
+                            <p className="text-gray-300 text-xs">Verify workspace brightness, circadian rhythm optimization</p>
                         </div>
                     </div>
                 </div>
