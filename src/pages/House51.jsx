@@ -336,36 +336,50 @@ export default function House51() {
         });
     };
 
-    // KICK SECTION - Deep house kick (smooth, no clicks)
+    // KICK SECTION - Deep house kick with punch + sub layers
     const playKickSection = (ctx, destination, startTime, duration, style) => {
         const beatDuration = 60 / 128;
         const numBeats = Math.floor(duration / beatDuration);
         const kickFreq = style.frequencies.kick;
 
         for (let i = 0; i < numBeats; i++) {
-            const time = startTime + (i * beatDuration);
+            // Add slight swing to off-beats
+            const swing = (i % 2 === 1) ? 0.015 : 0;
+            const time = startTime + (i * beatDuration) + swing;
 
-            // Deep kick - single oscillator, smooth envelope
-            const osc = ctx.createOscillator();
-            const gain = ctx.createGain();
+            // Velocity variation (subtle humanization)
+            const velocity = 0.4 + (Math.random() * 0.05);
 
-            osc.type = 'sine';
-            osc.frequency.setValueAtTime(kickFreq * 2, time);
-            osc.frequency.exponentialRampToValueAtTime(kickFreq, time + 0.05);
+            // SUB LAYER - Deep fundamental
+            const sub = ctx.createOscillator();
+            const subGain = ctx.createGain();
+            sub.type = 'sine';
+            sub.frequency.setValueAtTime(kickFreq, time);
+            subGain.gain.setValueAtTime(0, time);
+            subGain.gain.linearRampToValueAtTime(velocity, time + 0.001);
+            subGain.gain.exponentialRampToValueAtTime(0.001, time + 0.5);
+            sub.connect(subGain);
+            subGain.connect(destination);
+            sub.start(time);
+            sub.stop(time + 0.5);
 
-            // Smooth attack/release to prevent clicks
-            gain.gain.setValueAtTime(0, time);
-            gain.gain.linearRampToValueAtTime(0.4, time + 0.001);
-            gain.gain.exponentialRampToValueAtTime(0.001, time + 0.5);
-
-            osc.connect(gain);
-            gain.connect(destination);
-            osc.start(time);
-            osc.stop(time + 0.5);
+            // PUNCH LAYER - Transient attack
+            const punch = ctx.createOscillator();
+            const punchGain = ctx.createGain();
+            punch.type = 'sine';
+            punch.frequency.setValueAtTime(kickFreq * 2.5, time);
+            punch.frequency.exponentialRampToValueAtTime(kickFreq * 1.5, time + 0.03);
+            punchGain.gain.setValueAtTime(0, time);
+            punchGain.gain.linearRampToValueAtTime(velocity * 0.6, time + 0.001);
+            punchGain.gain.exponentialRampToValueAtTime(0.001, time + 0.08);
+            punch.connect(punchGain);
+            punchGain.connect(destination);
+            punch.start(time);
+            punch.stop(time + 0.08);
         }
     };
 
-    // BASS SECTION - Deep rolling bassline
+    // BASS SECTION - Deep rolling bassline with groove
     const playBassSection = (ctx, destination, startTime, duration, style) => {
         const beatDuration = 60 / 128;
         const bassFreq = style.frequencies.bass;
@@ -379,7 +393,7 @@ export default function House51() {
             deep: [1, 1, 1.5, 1, 1.25, 1, 1.5, 1.25],
             soulful: [1, 1.2, 1, 1.5, 1.2, 1, 1.3, 1],
             tech: [1, 1, 1.25, 1.25, 1, 1.5, 1.25, 1],
-            moroder: [1, 1, 1, 1, 1, 1, 1, 1] // Steady driving pulse
+            moroder: [1, 1, 1, 1, 1, 1, 1, 1]
         };
 
         const pattern = patterns[currentStyle] || patterns.deep;
@@ -387,24 +401,34 @@ export default function House51() {
         const numPatterns = Math.floor(duration / patternDuration);
 
         for (let p = 0; p < numPatterns; p++) {
+            // Vary filter per bar for movement
+            const barFilterOffset = (p % 4) * 100;
+
             pattern.forEach((mult, i) => {
-                const time = startTime + (p * patternDuration) + (i * beatDuration);
+                // Add swing
+                const swing = (i % 2 === 1) ? 0.015 : 0;
+                const time = startTime + (p * patternDuration) + (i * beatDuration) + swing;
+
+                // Velocity variation
+                const velocity = 0.15 + (Math.random() * 0.03);
 
                 const osc = ctx.createOscillator();
                 const gain = ctx.createGain();
                 const filter = ctx.createBiquadFilter();
 
                 osc.type = 'sawtooth';
-                osc.frequency.value = bassFreq * mult;
+                // Slight pitch variation for analog feel
+                osc.frequency.value = (bassFreq * mult) + (Math.random() - 0.5);
 
                 filter.type = 'lowpass';
-                filter.frequency.setValueAtTime(800, time);
-                filter.frequency.exponentialRampToValueAtTime(300, time + beatDuration * 0.6);
-                filter.Q.value = 1;
+                const filterStart = 800 + barFilterOffset;
+                filter.frequency.setValueAtTime(filterStart, time);
+                filter.frequency.exponentialRampToValueAtTime(300 + barFilterOffset * 0.3, time + beatDuration * 0.6);
+                filter.Q.value = 1.5;
 
-                // Smooth envelope
+                // Envelope with velocity
                 gain.gain.setValueAtTime(0, time);
-                gain.gain.linearRampToValueAtTime(0.15, time + 0.001);
+                gain.gain.linearRampToValueAtTime(velocity, time + 0.001);
                 gain.gain.exponentialRampToValueAtTime(0.001, time + beatDuration * 0.7);
 
                 osc.connect(filter);
@@ -416,37 +440,52 @@ export default function House51() {
         }
     };
 
-    // HATS SECTION - Soft deep house hats
+    // HATS SECTION - Groovy hats with velocity variation
     const playHatsSection = (ctx, destination, startTime, duration) => {
         const beatDuration = 60 / 128;
         const numBeats = Math.floor(duration / (beatDuration * 0.5));
 
         for (let i = 0; i < numBeats; i++) {
-            const time = startTime + (i * beatDuration * 0.5);
+            // Swing timing
+            const swing = (i % 2 === 1) ? 0.015 : 0;
+            const time = startTime + (i * beatDuration * 0.5) + swing;
+
+            // Complex velocity pattern (not just on/off beats)
+            const isDownbeat = i % 4 === 0;
             const isOffbeat = i % 2 === 1;
-            
+            const isGhost = i % 4 === 3; // Ghost note
+
+            let velocity;
+            if (isDownbeat) velocity = 0.06;
+            else if (isOffbeat) velocity = 0.045;
+            else if (isGhost) velocity = 0.015; // Quiet ghost hit
+            else velocity = 0.03;
+
+            // Add randomness for human feel
+            velocity *= (0.9 + Math.random() * 0.2);
+
             const noise = ctx.createBufferSource();
-            const buffer = ctx.createBuffer(1, ctx.sampleRate * 0.02, ctx.sampleRate);
+            const buffer = ctx.createBuffer(1, ctx.sampleRate * 0.025, ctx.sampleRate);
             const data = buffer.getChannelData(0);
             for (let j = 0; j < data.length; j++) data[j] = Math.random() * 2 - 1;
             noise.buffer = buffer;
 
             const filter = ctx.createBiquadFilter();
             filter.type = 'highpass';
-            filter.frequency.value = 10000;
+            // Vary filter per hit for texture
+            filter.frequency.value = 9000 + (Math.random() * 2000);
             filter.Q.value = 0.5;
 
             const gain = ctx.createGain();
-            const level = isOffbeat ? 0.05 : 0.025;
             gain.gain.setValueAtTime(0, time);
-            gain.gain.linearRampToValueAtTime(level, time + 0.001);
-            gain.gain.exponentialRampToValueAtTime(0.001, time + 0.03);
+            gain.gain.linearRampToValueAtTime(velocity, time + 0.001);
+            gain.gain.exponentialRampToValueAtTime(0.001, time + 0.035);
 
             noise.connect(filter);
             filter.connect(gain);
             gain.connect(destination);
             noise.start(time);
-            noise.stop(time + 0.03);
+            noise.stop(time + 0.035);
         }
     };
 
@@ -472,36 +511,64 @@ export default function House51() {
         }
     };
 
-    // CLAPS SECTION - Smooth deep house claps
+    // CLAPS SECTION - Layered clap with reverb tail
     const playClapsSection = (ctx, destination, startTime, duration) => {
         const beatDuration = 60 / 128;
         const numBars = Math.floor(duration / (beatDuration * 4));
 
         for (let bar = 0; bar < numBars; bar++) {
             [1, 3].forEach(beat => {
-                const time = startTime + (bar * beatDuration * 4) + (beat * beatDuration);
-                
-                const noise = ctx.createBufferSource();
-                const buffer = ctx.createBuffer(1, ctx.sampleRate * 0.03, ctx.sampleRate);
-                const data = buffer.getChannelData(0);
-                for (let i = 0; i < data.length; i++) data[i] = Math.random() * 2 - 1;
-                noise.buffer = buffer;
+                const swing = 0.008; // Slight late feel on claps
+                const time = startTime + (bar * beatDuration * 4) + (beat * beatDuration) + swing;
 
-                const filter = ctx.createBiquadFilter();
-                filter.type = 'bandpass';
-                filter.frequency.value = 1500;
-                filter.Q.value = 1.5;
+                // Velocity variation per bar
+                const velocity = 0.12 + (Math.random() * 0.02);
 
-                const gain = ctx.createGain();
-                gain.gain.setValueAtTime(0, time);
-                gain.gain.linearRampToValueAtTime(0.12, time + 0.002);
-                gain.gain.exponentialRampToValueAtTime(0.001, time + 0.15);
+                // MAIN CLAP - Three layered hits for thickness
+                for (let layer = 0; layer < 3; layer++) {
+                    const layerTime = time + (layer * 0.015); // Slight delay per layer
 
-                noise.connect(filter);
-                filter.connect(gain);
-                gain.connect(destination);
-                noise.start(time);
-                noise.stop(time + 0.15);
+                    const noise = ctx.createBufferSource();
+                    const buffer = ctx.createBuffer(1, ctx.sampleRate * 0.04, ctx.sampleRate);
+                    const data = buffer.getChannelData(0);
+                    for (let i = 0; i < data.length; i++) data[i] = Math.random() * 2 - 1;
+                    noise.buffer = buffer;
+
+                    const filter = ctx.createBiquadFilter();
+                    filter.type = 'bandpass';
+                    filter.frequency.value = 1500 + (layer * 200);
+                    filter.Q.value = 2;
+
+                    const gain = ctx.createGain();
+                    const layerVel = velocity * (1 - layer * 0.2);
+                    gain.gain.setValueAtTime(0, layerTime);
+                    gain.gain.linearRampToValueAtTime(layerVel, layerTime + 0.002);
+                    gain.gain.exponentialRampToValueAtTime(0.001, layerTime + 0.08);
+
+                    noise.connect(filter);
+                    filter.connect(gain);
+                    gain.connect(destination);
+                    noise.start(layerTime);
+                    noise.stop(layerTime + 0.08);
+                }
+
+                // REVERB TAIL
+                const tail = ctx.createBufferSource();
+                const tailBuffer = ctx.createBuffer(1, ctx.sampleRate * 0.3, ctx.sampleRate);
+                const tailData = tailBuffer.getChannelData(0);
+                for (let i = 0; i < tailData.length; i++) {
+                    tailData[i] = (Math.random() * 2 - 1) * Math.exp(-i / (ctx.sampleRate * 0.15));
+                }
+                tail.buffer = tailBuffer;
+
+                const tailGain = ctx.createGain();
+                tailGain.gain.setValueAtTime(0.03, time + 0.05);
+                tailGain.gain.exponentialRampToValueAtTime(0.001, time + 0.35);
+
+                tail.connect(tailGain);
+                tailGain.connect(destination);
+                tail.start(time + 0.05);
+                tail.stop(time + 0.35);
             });
         }
     };
