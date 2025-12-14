@@ -100,8 +100,9 @@ export default function ScottWhiteLabelPricing() {
                                 START FREE
                             </Button>
 
-                            <div className="mt-4 bg-cyan-500/10 border border-cyan-500/30 rounded p-2">
-                                <p className="text-cyan-400 text-xs font-mono font-bold">🏹 Funded by labels</p>
+                            <div className="mt-4 bg-gradient-to-r from-pink-500/10 to-green-500/10 border border-pink-500/30 rounded p-2">
+                                <p className="text-pink-400 text-xs font-mono font-bold">♾️ FREE FOREVER</p>
+                                <p className="text-gray-500 text-xs font-mono">Labels fund you</p>
                             </div>
                         </motion.div>
 
