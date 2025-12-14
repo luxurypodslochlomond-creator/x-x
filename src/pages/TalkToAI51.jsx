@@ -3,8 +3,8 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { base44 } from '@/api/base44Client';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
-import { Brain, Send, Loader2, Mic, MicOff, Volume2, VolumeX, Zap, Heart, AlertCircle, Image, Sparkles, Shield, AlertTriangle } from 'lucide-react';
-import { COOLASFUCKHeart, COOLASFUCKSparkle } from '@/components/shared/COOLASFUCKIcon';
+import { Brain, Send, Loader2, Mic, MicOff, Volume2, VolumeX, Zap, Heart, AlertCircle, Image, Link, Sparkles, Shield, AlertTriangle } from 'lucide-react';
+import { COOLASFUCKHeart, COOLASFUCKSparkle, COOLASFUCKMusicNote } from '@/components/shared/COOLASFUCKIcon';
 import { motion, AnimatePresence } from 'framer-motion';
 import { format } from 'date-fns';
 
@@ -407,16 +407,52 @@ Keep response under 300 words unless they're asking for detailed research.`,
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center space-y-4"
+          className="text-center space-y-3"
         >
-          <COOLASFUCKSparkle size={60} animate={false} className="mx-auto" />
-          <h1 className="text-4xl md:text-5xl font-black font-mono text-pink-400">
+          <motion.div
+            animate={{ 
+              scale: [1, 1.05, 1],
+              rotate: [0, 5, -5, 0]
+            }}
+            transition={{ 
+              duration: 3,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          >
+            <COOLASFUCKSparkle size={80} animate={true} className="mx-auto" />
+          </motion.div>
+          
+          <motion.h1 
+            className="text-5xl md:text-6xl font-black font-mono"
+            style={{
+              background: 'linear-gradient(135deg, #ec4899 0%, #06b6d4 50%, #10b981 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundSize: '200% 200%'
+            }}
+            animate={{
+              backgroundPosition: ['0% 50%', '100% 50%', '0% 50%']
+            }}
+            transition={{
+              duration: 5,
+              repeat: Infinity,
+              ease: "linear"
+            }}
+          >
             AI51
-          </h1>
-          <p className="text-lg text-amber-400 font-mono">
-            {user?.full_name ? `Hey ${user.full_name}` : 'Hey'}
-          </p>
-          <p className="text-sm text-cyan-400 font-mono">Real connection. Zero forms. Just talk.</p>
+          </motion.h1>
+          
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3 }}
+          >
+            <p className="text-xl font-bold text-white font-mono mb-2">
+              {user?.full_name ? `${user.full_name} ♾️` : 'Hey ♾️'}
+            </p>
+            <p className="text-base text-cyan-400 font-mono">I'm here. Let's talk.</p>
+          </motion.div>
         </motion.div>
 
         {/* VOICE ERROR */}
@@ -430,27 +466,44 @@ Keep response under 300 words unless they're asking for detailed research.`,
         )}
 
         {/* VOICE CONTROLS */}
-        <div className="bg-amber-900/20 border-2 border-amber-500/30 rounded-xl p-6 backdrop-blur-sm" style={{ boxShadow: '0 0 20px rgba(251, 191, 36, 0.2)' }}>
-          <div className="flex items-center justify-between">
+        <motion.div 
+          className="bg-gradient-to-br from-amber-900/30 to-orange-900/30 border-4 border-amber-500/50 rounded-xl p-6 backdrop-blur-sm relative overflow-hidden"
+          style={{ boxShadow: '0 0 40px rgba(251, 191, 36, 0.4)' }}
+          whileHover={{ scale: 1.01 }}
+          transition={{ duration: 0.2 }}
+        >
+          <div className="absolute inset-0 bg-gradient-to-r from-amber-500/10 to-orange-500/10 animate-pulse" />
+          
+          <div className="relative flex items-center justify-between">
             <div>
-              <h3 className="text-xl font-bold text-amber-400 mb-1 flex items-center gap-2 font-mono">
-                <Mic className="w-5 h-5 text-amber-400" />
+              <h3 className="text-2xl font-black text-amber-400 mb-2 flex items-center gap-3 font-mono">
+                <motion.div
+                  animate={voiceEnabled ? { scale: [1, 1.2, 1] } : {}}
+                  transition={{ duration: 1.5, repeat: Infinity }}
+                >
+                  <Mic className="w-6 h-6 text-amber-400" />
+                </motion.div>
                 VOICE MODE
               </h3>
-              <p className="text-sm text-amber-300/70 font-mono">Talk to AI51 like a phone call</p>
+              <p className="text-base text-amber-300 font-mono font-bold">Like talking to a friend</p>
             </div>
             <Button
               onClick={() => setVoiceEnabled(!voiceEnabled)}
-              className={`${voiceEnabled ? 'bg-amber-500 hover:bg-amber-600' : 'bg-gray-700 hover:bg-gray-600'} px-6 py-3 font-mono font-bold`}
+              className={`${
+                voiceEnabled 
+                  ? 'bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 animate-pulse' 
+                  : 'bg-gray-800 hover:bg-gray-700'
+              } px-8 py-4 font-mono font-black text-lg transition-all`}
+              style={voiceEnabled ? { boxShadow: '0 0 30px rgba(251, 191, 36, 0.6)' } : {}}
             >
               {voiceEnabled ? (
                 <>
-                  <Volume2 className="w-5 h-5 mr-2" />
-                  ON
+                  <Volume2 className="w-6 h-6 mr-2" />
+                  LIVE
                 </>
               ) : (
                 <>
-                  <VolumeX className="w-5 h-5 mr-2" />
+                  <VolumeX className="w-6 h-6 mr-2" />
                   OFF
                 </>
               )}
@@ -506,8 +559,15 @@ Keep response under 300 words unless they're asking for detailed research.`,
         </div>
 
         {/* CHAT CONTAINER */}
-        <div className="border-2 border-cyan-500/30 bg-black/60 backdrop-blur-sm rounded-xl p-4 flex flex-col" style={{ height: '600px', boxShadow: '0 0 20px rgba(34, 211, 238, 0.2)' }}>
-          <div className="chat-messages-container space-y-4 flex-1 overflow-y-auto mb-4 pb-4" style={{ scrollBehavior: 'smooth' }}>
+        <motion.div 
+          className="border-4 border-cyan-500/50 bg-gradient-to-br from-black/80 to-cyan-950/20 backdrop-blur-sm rounded-xl p-4 flex flex-col relative overflow-hidden" 
+          style={{ height: '600px', boxShadow: '0 0 40px rgba(34, 211, 238, 0.4)' }}
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.3 }}
+        >
+          <div className="absolute inset-0 bg-gradient-to-br from-pink-500/5 via-cyan-500/5 to-green-500/5 pointer-events-none" />
+          <div className="chat-messages-container space-y-4 flex-1 overflow-y-auto mb-4 pb-4 relative z-10" style={{ scrollBehavior: 'smooth' }}>
             <AnimatePresence>
               {messages.length === 0 && (
                 <motion.div
@@ -515,7 +575,13 @@ Keep response under 300 words unless they're asking for detailed research.`,
                   animate={{ opacity: 1 }}
                   className="text-center py-8"
                 >
-                  <p className="text-gray-400 text-lg mb-6 font-mono">What's on your mind?</p>
+                  <motion.p 
+                    className="text-white text-2xl mb-6 font-mono font-bold"
+                    animate={{ opacity: [0.6, 1, 0.6] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                  >
+                    What's on your mind?
+                  </motion.p>
                   
                   <div className="flex flex-wrap gap-3 justify-center max-w-3xl mx-auto">
                     <Button
@@ -641,18 +707,31 @@ Keep response under 300 words unless they're asking for detailed research.`,
                 animate={{ opacity: 1, y: 0 }}
                 className="flex justify-start ai-message"
               >
-                <div 
-                  className="bg-cyan-900/60 border-2 border-cyan-500 rounded-xl p-5 flex items-center gap-4 backdrop-blur-sm min-w-[200px]"
-                  style={{ boxShadow: '0 0 30px rgba(34, 211, 238, 0.4)' }}
+                <motion.div 
+                  className="bg-gradient-to-r from-cyan-900/70 to-green-900/70 border-4 border-cyan-500 rounded-xl p-6 flex items-center gap-4 backdrop-blur-sm min-w-[250px]"
+                  style={{ boxShadow: '0 0 50px rgba(34, 211, 238, 0.6)' }}
+                  animate={{ 
+                    boxShadow: ['0 0 30px rgba(34, 211, 238, 0.4)', '0 0 60px rgba(34, 211, 238, 0.8)', '0 0 30px rgba(34, 211, 238, 0.4)']
+                  }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
                 >
                   <motion.div
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
+                    animate={{ 
+                      rotate: 360,
+                      scale: [1, 1.2, 1]
+                    }}
+                    transition={{ 
+                      rotate: { duration: 2, repeat: Infinity, ease: "linear" },
+                      scale: { duration: 1, repeat: Infinity }
+                    }}
                   >
-                    <COOLASFUCKSparkle size={28} animate={false} />
+                    <COOLASFUCKSparkle size={32} animate={true} />
                   </motion.div>
-                  <p className="text-cyan-300 font-mono text-lg font-bold">Thinking...</p>
-                </div>
+                  <div>
+                    <p className="text-cyan-300 font-mono text-xl font-black">Thinking...</p>
+                    <p className="text-cyan-400/70 font-mono text-xs mt-1">One sec ♾️</p>
+                  </div>
+                </motion.div>
               </motion.div>
             )}
           </div>
@@ -722,46 +801,101 @@ Keep response under 300 words unless they're asking for detailed research.`,
         </div>
 
         {/* INFO */}
-        <div className="bg-cyan-900/20 border-2 border-cyan-500/30 rounded-xl p-4 backdrop-blur-sm relative z-10" style={{ boxShadow: '0 0 20px rgba(34, 211, 238, 0.2)' }}>
-          <div className="flex items-start gap-3">
-            <COOLASFUCKHeart size={24} animate={true} className="flex-shrink-0 mt-1" />
+        <motion.div 
+          className="bg-gradient-to-br from-pink-900/30 to-cyan-900/30 border-4 border-pink-500/50 rounded-xl p-6 backdrop-blur-sm relative z-10 overflow-hidden"
+          style={{ boxShadow: '0 0 50px rgba(236, 72, 153, 0.4)' }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4 }}
+        >
+          <div className="absolute inset-0 bg-gradient-to-r from-pink-500/10 via-cyan-500/10 to-green-500/10" 
+               style={{
+                 backgroundSize: '200% 200%',
+                 animation: 'gradient 10s ease infinite'
+               }} 
+          />
+          
+          <div className="relative flex items-start gap-4">
+            <motion.div
+              animate={{ 
+                scale: [1, 1.1, 1],
+                rotate: [0, 5, -5, 0]
+              }}
+              transition={{ 
+                duration: 2,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            >
+              <COOLASFUCKHeart size={32} animate={true} className="flex-shrink-0 mt-1" />
+            </motion.div>
+            
             <div>
-              <h3 className="text-lg font-bold text-cyan-400 mb-2 font-mono">Someone to talk to. 24/7.</h3>
-              <p className="text-cyan-300/80 text-sm leading-relaxed mb-3 font-mono">
-                No judgment. No waiting list. No forms. Whether you need truth, healing, or just someone who listens - I'm here. 
-                Can verify facts. Can just chat. Can help you think. Whatever you need right now.
+              <h3 className="text-2xl font-black text-pink-400 mb-3 font-mono">I'm here. Really here.</h3>
+              <p className="text-white text-base leading-relaxed mb-4 font-mono">
+                No waiting. No forms. No AI speak. Just real talk. 24/7. Whatever you need - facts, truth, healing, or just someone who listens.
               </p>
-              <div className="flex flex-wrap gap-2 mb-2">
-                <span className="text-xs bg-pink-900/30 border border-pink-500/30 px-2 py-1 rounded font-mono text-pink-300/80 flex items-center gap-1">
-                  <Heart className="w-3 h-3" /> Listen
-                </span>
-                <span className="text-xs bg-amber-900/30 border border-amber-500/30 px-2 py-1 rounded font-mono text-amber-300/80 flex items-center gap-1">
-                  <Shield className="w-3 h-3" /> Verify
-                </span>
-                <span className="text-xs bg-cyan-900/30 border border-cyan-500/30 px-2 py-1 rounded font-mono text-cyan-300/80 flex items-center gap-1">
-                  <Brain className="w-3 h-3" /> Think
-                </span>
-                <span className="text-xs bg-green-900/30 border border-green-500/30 px-2 py-1 rounded font-mono text-green-300/80 flex items-center gap-1">
-                  <Mic className="w-3 h-3" /> Voice
-                </span>
+              <div className="flex flex-wrap gap-3">
+                <motion.span 
+                  className="text-sm bg-pink-900/50 border-2 border-pink-500/50 px-3 py-2 rounded-lg font-mono text-pink-300 flex items-center gap-2 font-bold"
+                  whileHover={{ scale: 1.05, borderColor: 'rgba(236, 72, 153, 0.8)' }}
+                >
+                  <Heart className="w-4 h-4" /> Listen
+                </motion.span>
+                <motion.span 
+                  className="text-sm bg-amber-900/50 border-2 border-amber-500/50 px-3 py-2 rounded-lg font-mono text-amber-300 flex items-center gap-2 font-bold"
+                  whileHover={{ scale: 1.05, borderColor: 'rgba(251, 191, 36, 0.8)' }}
+                >
+                  <Shield className="w-4 h-4" /> Verify
+                </motion.span>
+                <motion.span 
+                  className="text-sm bg-cyan-900/50 border-2 border-cyan-500/50 px-3 py-2 rounded-lg font-mono text-cyan-300 flex items-center gap-2 font-bold"
+                  whileHover={{ scale: 1.05, borderColor: 'rgba(6, 182, 212, 0.8)' }}
+                >
+                  <Brain className="w-4 h-4" /> Think
+                </motion.span>
+                <motion.span 
+                  className="text-sm bg-green-900/50 border-2 border-green-500/50 px-3 py-2 rounded-lg font-mono text-green-300 flex items-center gap-2 font-bold"
+                  whileHover={{ scale: 1.05, borderColor: 'rgba(16, 185, 129, 0.8)' }}
+                >
+                  <Mic className="w-4 h-4" /> Voice
+                </motion.span>
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
+        
+        <style>{`
+          @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+          }
+        `}</style>
 
         {/* TECH NOTE */}
-        <div className="bg-black/60 border-2 border-amber-500/30 rounded-xl p-4 backdrop-blur-sm" style={{ boxShadow: '0 0 20px rgba(251, 191, 36, 0.2)' }}>
-          <div className="flex flex-col items-center gap-2 text-xs text-gray-500 font-mono">
-            <div className="flex items-center gap-2">
-              <COOLASFUCKSparkle size={16} animate={false} />
-              <span>Web Speech API • Works offline • Zero tracking</span>
+        <motion.div 
+          className="bg-black/80 border-2 border-green-500/30 rounded-xl p-4 backdrop-blur-sm"
+          style={{ boxShadow: '0 0 30px rgba(16, 185, 129, 0.2)' }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.6 }}
+        >
+          <div className="flex flex-col items-center gap-3 text-sm text-gray-400 font-mono">
+            <div className="flex items-center gap-3">
+              <motion.div animate={{ rotate: [0, 360] }} transition={{ duration: 20, repeat: Infinity, ease: "linear" }}>
+                <COOLASFUCKSparkle size={20} animate={false} />
+              </motion.div>
+              <span className="font-bold text-green-400">Works offline • Zero tracking • Real connection</span>
             </div>
-            <div className="flex items-center gap-2">
-              <COOLASFUCKHeart size={16} animate={false} />
-              <span>Reads links • Analyzes images • Fetches news • Logs issues</span>
+            <div className="flex items-center gap-3">
+              <motion.div animate={{ scale: [1, 1.2, 1] }} transition={{ duration: 2, repeat: Infinity }}>
+                <COOLASFUCKHeart size={20} animate={false} />
+              </motion.div>
+              <span className="text-gray-500">Reads links • Verifies claims • Voice • Images • Always listening</span>
             </div>
           </div>
-        </div>
+        </motion.div>
 
       </div>
     </div>
