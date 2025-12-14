@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { base44 } from '@/api/base44Client';
 import { useQuery } from '@tanstack/react-query';
+import CameraHeartRate from '@/components/healing/CameraHeartRate';
 
 /**
  * TUNER51 - FREQUENCY RESONANCE CALCULATOR
@@ -13,7 +14,7 @@ import { useQuery } from '@tanstack/react-query';
  */
 
 export default function Tuner51() {
-          const [mode, setMode] = useState('measure'); // measure, calculate, match, magnetometer, accelerometer, light, pressure
+          const [mode, setMode] = useState('measure'); // measure, calculate, match, magnetometer, accelerometer, light, pressure, coherence
           const [inputFreq, setInputFreq] = useState('');
           const [measuredFreq, setMeasuredFreq] = useState(null);
           const [isListening, setIsListening] = useState(false);
@@ -26,6 +27,17 @@ export default function Tuner51() {
           const [ambientLight, setAmbientLight] = useState(null);
           const [pressure, setPressure] = useState(null);
           const [showCoherenceExplainer, setShowCoherenceExplainer] = useState(false);
+          
+          // COHERENCE MODE STATE
+          const [coherenceScore, setCoherenceScore] = useState(null);
+          const [heartData, setHeartData] = useState(null);
+          const [sensorData, setSensorData] = useState({
+              emStability: null,
+              movementCalm: null,
+              lightBalance: null
+          });
+          const [isCoherenceMeasuring, setIsCoherenceMeasuring] = useState(false);
+          const coherenceTimerRef = useRef(null);
 
     const audioContextRef = useRef(null);
     const analyserRef = useRef(null);
@@ -285,6 +297,126 @@ export default function Tuner51() {
         baselineAccelRef.current = null;
         document.body.style.backgroundColor = '';
     };
+
+    // COHERENCE CALCULATION
+    const calculateCoherence = () => {
+        if (!heartData) return null;
+
+        let score = 0;
+        let factors = 0;
+
+        // Heart Rate Variability (HRV) - higher RMSSD = better coherence
+        if (heartData.hrv) {
+            const hrvScore = Math.min(100, (heartData.hrv / 100) * 100);
+            score += hrvScore;
+            factors++;
+        }
+
+        // Heart Rate - optimal range 60-80 bpm
+        if (heartData.bpm) {
+            const bpmDiff = Math.abs(heartData.bpm - 70);
+            const bpmScore = Math.max(0, 100 - (bpmDiff * 2));
+            score += bpmScore;
+            factors++;
+        }
+
+        // EM Field Stability - lower variance = better
+        if (sensorData.emStability !== null) {
+            score += sensorData.emStability;
+            factors++;
+        }
+
+        // Movement Calm - less movement = better
+        if (sensorData.movementCalm !== null) {
+            score += sensorData.movementCalm;
+            factors++;
+        }
+
+        // Light Balance - moderate light = better
+        if (sensorData.lightBalance !== null) {
+            score += sensorData.lightBalance;
+            factors++;
+        }
+
+        return factors > 0 ? Math.round(score / factors) : null;
+    };
+
+    // START COHERENCE MEASUREMENT
+    const startCoherenceMeasurement = () => {
+        setIsCoherenceMeasuring(true);
+        setCoherenceScore(null);
+        setHeartData(null);
+        setSensorData({
+            emStability: null,
+            movementCalm: null,
+            lightBalance: null
+        });
+
+        // Start all sensors
+        startMagnetometer();
+        startAccelerometer();
+        startLightSensor();
+
+        // Collect data for 30 seconds then calculate
+        coherenceTimerRef.current = setTimeout(() => {
+            const score = calculateCoherence();
+            setCoherenceScore(score);
+            setIsCoherenceMeasuring(false);
+        }, 30000);
+    };
+
+    const stopCoherenceMeasurement = () => {
+        setIsCoherenceMeasuring(false);
+        if (coherenceTimerRef.current) {
+            clearTimeout(coherenceTimerRef.current);
+        }
+        stopSensors();
+    };
+
+    // Handle heart rate data from camera
+    const handleHeartData = (bpm, hrv) => {
+        setHeartData({ bpm, hrv });
+    };
+
+    // Update sensor stability scores as data comes in
+    useEffect(() => {
+        if (magneticField && baselineEMRef.current) {
+            const variance = Math.abs(magneticField.magnitude - baselineEMRef.current);
+            const stability = Math.max(0, 100 - (variance * 2));
+            setSensorData(prev => ({ ...prev, emStability: stability }));
+        }
+    }, [magneticField]);
+
+    useEffect(() => {
+        if (acceleration && baselineAccelRef.current) {
+            const variance = Math.abs(acceleration.magnitude - baselineAccelRef.current);
+            const calm = Math.max(0, 100 - (variance * 10));
+            setSensorData(prev => ({ ...prev, movementCalm: calm }));
+        }
+    }, [acceleration]);
+
+    useEffect(() => {
+        if (ambientLight !== null) {
+            // Optimal light: 300-500 lux
+            let balance = 0;
+            if (ambientLight >= 300 && ambientLight <= 500) {
+                balance = 100;
+            } else if (ambientLight < 300) {
+                balance = (ambientLight / 300) * 100;
+            } else {
+                balance = Math.max(0, 100 - ((ambientLight - 500) / 10));
+            }
+            setSensorData(prev => ({ ...prev, lightBalance: balance }));
+        }
+    }, [ambientLight]);
+
+    // Auto-calculate coherence when all data available
+    useEffect(() => {
+        if (isCoherenceMeasuring && heartData && sensorData.emStability !== null && sensorData.movementCalm !== null) {
+            const score = calculateCoherence();
+            setCoherenceScore(score);
+        }
+    }, [heartData, sensorData, isCoherenceMeasuring]);
 
     // FEEDBACK BEEP - plays quick beep when sensors detect changes
     const playFeedbackBeep = (frequency) => {
@@ -716,17 +848,31 @@ export default function Tuner51() {
                           <p className="text-white text-xs font-bold">LIGHT</p>
                         </motion.button>
                         <motion.button
-                          whileHover={{ scale: 1.05 }}
-                          whileTap={{ scale: 0.95 }}
-                          onClick={() => { setMode('pressure'); stopListening(); stopSensors(); }}
-                          className={`p-3 rounded-lg border-2 transition-all ${
-                              mode === 'pressure' 
-                                  ? 'bg-blue-500/20 border-blue-500' 
-                                  : 'bg-black border-gray-700 hover:border-gray-500'
-                          }`}
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            onClick={() => { setMode('pressure'); stopListening(); stopSensors(); }}
+                            className={`p-3 rounded-lg border-2 transition-all ${
+                                mode === 'pressure' 
+                                    ? 'bg-blue-500/20 border-blue-500' 
+                                    : 'bg-black border-gray-700 hover:border-gray-500'
+                            }`}
                         >
-                          <Globe className="w-5 h-5 mx-auto mb-1 text-blue-400" />
-                          <p className="text-white text-xs font-bold">PRESSURE</p>
+                            <Globe className="w-5 h-5 mx-auto mb-1 text-blue-400" />
+                            <p className="text-white text-xs font-bold">PRESSURE</p>
+                        </motion.button>
+                        <motion.button
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            onClick={() => { setMode('coherence'); stopListening(); stopSensors(); }}
+                            className={`p-3 rounded-lg border-2 transition-all ${
+                                mode === 'coherence' 
+                                    ? 'bg-gradient-to-r from-pink-500/20 to-cyan-500/20 border-pink-500' 
+                                    : 'bg-black border-gray-700 hover:border-gray-500'
+                            }`}
+                            style={mode === 'coherence' ? { boxShadow: '0 0 20px rgba(236, 72, 153, 0.4)' } : {}}
+                        >
+                            <Heart className="w-5 h-5 mx-auto mb-1 text-pink-400" />
+                            <p className="text-white text-xs font-bold">COHERENCE</p>
                         </motion.button>
                         </div>
                 
@@ -1275,6 +1421,157 @@ export default function Tuner51() {
                                 <p className="text-amber-400 text-sm font-bold mb-2">Browser API not standardized yet</p>
                                 <p className="text-gray-300 text-xs">Some phones have barometer hardware, but web API access varies. Working on cross-browser solution.</p>
                             </div>
+                        </div>
+                    </motion.div>
+                )}
+                </AnimatePresence>
+
+                {/* COHERENCE MODE */}
+                <AnimatePresence mode="wait">
+                {mode === 'coherence' && (
+                    <motion.div
+                        key="coherence"
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: 20 }}
+                        className="space-y-6"
+                    >
+                        <div className="bg-gradient-to-r from-pink-500/20 to-cyan-500/20 border-2 border-pink-500 rounded-xl p-6"
+                            style={{ boxShadow: '0 0 30px rgba(236, 72, 153, 0.3)' }}>
+                            <h2 className="text-xl font-black text-white mb-2">YOUR COHERENCE</h2>
+                            <p className="text-gray-300 text-sm mb-4">
+                                Multi-sensor analysis: Heart + EM + Movement + Light
+                            </p>
+
+                            {!isCoherenceMeasuring && !coherenceScore ? (
+                                <>
+                                    <div className="bg-black/60 border-2 border-cyan-500/50 rounded-lg p-4 mb-4">
+                                        <p className="text-cyan-400 text-xs font-bold mb-2">WHAT WE MEASURE:</p>
+                                        <ul className="text-gray-300 text-xs space-y-1">
+                                            <li>✓ Heart rate variability (camera)</li>
+                                            <li>✓ EM field stability (magnetometer)</li>
+                                            <li>✓ Body stillness (accelerometer)</li>
+                                            <li>✓ Light balance (ambient sensor)</li>
+                                        </ul>
+                                        <p className="text-amber-300 text-xs mt-3">Takes 30 seconds. Keep still, breathe calm.</p>
+                                    </div>
+
+                                    <motion.button
+                                        whileHover={{ scale: 1.02 }}
+                                        whileTap={{ scale: 0.98 }}
+                                        onClick={startCoherenceMeasurement}
+                                        className="w-full bg-gradient-to-r from-pink-500 to-cyan-500 hover:from-pink-600 hover:to-cyan-600 text-white font-bold py-4 rounded-lg transition-all"
+                                        style={{ boxShadow: '0 0 20px rgba(236, 72, 153, 0.5)' }}
+                                    >
+                                        <Heart className="w-6 h-6 inline-block mr-2" />
+                                        MEASURE MY COHERENCE
+                                    </motion.button>
+                                </>
+                            ) : isCoherenceMeasuring ? (
+                                <div className="space-y-4">
+                                    <div className="bg-black/60 border-2 border-pink-500 rounded-lg p-4">
+                                        <p className="text-pink-400 font-bold text-center mb-4">MEASURING... {coherenceTimerRef.current ? '30s' : ''}</p>
+
+                                        {/* Heart Rate Scanner */}
+                                        <div className="mb-4">
+                                            <p className="text-white text-sm font-bold mb-2">1. Heart Rate (Camera)</p>
+                                            <CameraHeartRate onMeasurementComplete={handleHeartData} />
+                                        </div>
+
+                                        {/* Sensor Status */}
+                                        <div className="space-y-2">
+                                            <div className="flex items-center justify-between text-xs">
+                                                <span className="text-gray-400">EM Field Stability:</span>
+                                                <span className={sensorData.emStability !== null ? 'text-green-400' : 'text-gray-500'}>
+                                                    {sensorData.emStability !== null ? `${sensorData.emStability.toFixed(0)}%` : 'Measuring...'}
+                                                </span>
+                                            </div>
+                                            <div className="flex items-center justify-between text-xs">
+                                                <span className="text-gray-400">Movement Calm:</span>
+                                                <span className={sensorData.movementCalm !== null ? 'text-green-400' : 'text-gray-500'}>
+                                                    {sensorData.movementCalm !== null ? `${sensorData.movementCalm.toFixed(0)}%` : 'Measuring...'}
+                                                </span>
+                                            </div>
+                                            <div className="flex items-center justify-between text-xs">
+                                                <span className="text-gray-400">Light Balance:</span>
+                                                <span className={sensorData.lightBalance !== null ? 'text-green-400' : 'text-gray-500'}>
+                                                    {sensorData.lightBalance !== null ? `${sensorData.lightBalance.toFixed(0)}%` : 'Measuring...'}
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        {coherenceScore !== null && (
+                                            <motion.div
+                                                initial={{ scale: 0.8, opacity: 0 }}
+                                                animate={{ scale: 1, opacity: 1 }}
+                                                className="mt-4 pt-4 border-t border-white/20"
+                                            >
+                                                <p className="text-white text-sm text-center mb-2">COHERENCE SCORE</p>
+                                                <p className="text-5xl font-black text-center bg-gradient-to-r from-pink-400 to-cyan-400 bg-clip-text text-transparent">
+                                                    {coherenceScore}%
+                                                </p>
+                                            </motion.div>
+                                        )}
+                                    </div>
+
+                                    <motion.button
+                                        whileHover={{ scale: 1.02 }}
+                                        whileTap={{ scale: 0.98 }}
+                                        onClick={stopCoherenceMeasurement}
+                                        className="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-3 rounded-lg transition-all"
+                                    >
+                                        STOP
+                                    </motion.button>
+                                </div>
+                            ) : coherenceScore !== null ? (
+                                <motion.div
+                                    initial={{ scale: 0.9, opacity: 0 }}
+                                    animate={{ scale: 1, opacity: 1 }}
+                                    className="space-y-4"
+                                >
+                                    <div className="bg-black/60 border-2 border-green-500 rounded-lg p-6 text-center"
+                                        style={{ boxShadow: '0 0 30px rgba(34, 197, 94, 0.4)' }}>
+                                        <CheckCircle className="w-16 h-16 text-green-400 mx-auto mb-4" />
+                                        <p className="text-green-400 font-bold mb-2">YOUR COHERENCE</p>
+                                        <p className="text-7xl font-black bg-gradient-to-r from-pink-400 to-cyan-400 bg-clip-text text-transparent mb-4">
+                                            {coherenceScore}%
+                                        </p>
+
+                                        <div className="space-y-2 text-left mt-6">
+                                            {coherenceScore >= 80 && (
+                                                <p className="text-green-300 text-sm">✓ High coherence - you're in flow state</p>
+                                            )}
+                                            {coherenceScore >= 60 && coherenceScore < 80 && (
+                                                <p className="text-yellow-300 text-sm">⚡ Moderate coherence - decent focus</p>
+                                            )}
+                                            {coherenceScore < 60 && (
+                                                <p className="text-amber-300 text-sm">⚠ Low coherence - stress detected</p>
+                                            )}
+
+                                            {heartData && (
+                                                <p className="text-gray-400 text-xs">Heart: {heartData.bpm} BPM, HRV: {heartData.hrv}ms</p>
+                                            )}
+                                        </div>
+                                    </div>
+
+                                    <motion.button
+                                        whileHover={{ scale: 1.02 }}
+                                        whileTap={{ scale: 0.98 }}
+                                        onClick={() => {
+                                            setCoherenceScore(null);
+                                            setHeartData(null);
+                                            setSensorData({
+                                                emStability: null,
+                                                movementCalm: null,
+                                                lightBalance: null
+                                            });
+                                        }}
+                                        className="w-full bg-gradient-to-r from-pink-500 to-cyan-500 hover:from-pink-600 hover:to-cyan-600 text-white font-bold py-3 rounded-lg transition-all"
+                                    >
+                                        MEASURE AGAIN
+                                    </motion.button>
+                                </motion.div>
+                            ) : null}
                         </div>
                     </motion.div>
                 )}
