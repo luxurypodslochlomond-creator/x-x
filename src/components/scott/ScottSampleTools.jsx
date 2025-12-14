@@ -112,23 +112,26 @@ export default function ScottSampleTools() {
                 const isExpanded = expanded === tool.id;
                 const Icon = tool.icon;
                 
+                const borderColor = tool.color === 'purple' ? 'border-purple-500' : tool.color === 'cyan' ? 'border-cyan-500' : 'border-amber-500';
+                const textColor = tool.color === 'purple' ? 'text-purple-400' : tool.color === 'cyan' ? 'text-cyan-400' : 'text-amber-400';
+                
                 return (
-                    <div key={tool.id} className={`bg-black border-2 border-${tool.color}-500 rounded-lg overflow-hidden`}>
+                    <div key={tool.id} className={`bg-black border-2 ${borderColor} rounded-lg overflow-hidden`}>
                         <button
                             onClick={() => setExpanded(isExpanded ? null : tool.id)}
                             className="w-full p-4 flex items-center justify-between hover:bg-gray-900/50 transition-colors"
                         >
                             <div className="flex items-center gap-3">
-                                <Icon className={`w-5 h-5 text-${tool.color}-400 flex-shrink-0`} />
+                                <Icon className={`w-5 h-5 ${textColor} flex-shrink-0`} />
                                 <div className="text-left">
                                     <p className="text-white text-sm font-bold font-mono">{tool.title}</p>
-                                    <p className={`text-${tool.color}-400 text-xs font-mono`}>{tool.desc}</p>
+                                    <p className={`${textColor} text-xs font-mono`}>{tool.desc}</p>
                                 </div>
                             </div>
                             {isExpanded ? (
-                                <ChevronDown className={`w-5 h-5 text-${tool.color}-400 flex-shrink-0`} />
+                                <ChevronDown className={`w-5 h-5 ${textColor} flex-shrink-0`} />
                             ) : (
-                                <ChevronRight className={`w-5 h-5 text-${tool.color}-400 flex-shrink-0`} />
+                                <ChevronRight className={`w-5 h-5 ${textColor} flex-shrink-0`} />
                             )}
                         </button>
                         
