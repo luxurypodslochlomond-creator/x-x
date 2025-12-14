@@ -12,9 +12,11 @@ import { base44 } from '@/api/base44Client';
 export default function House51() {
     const [isPlaying, setIsPlaying] = useState(false);
     const [currentStyle, setCurrentStyle] = useState('deep');
+    const [currentTrack, setCurrentTrack] = useState(null);
     const [volume, setVolume] = useState(0.7);
     const [playbackTime, setPlaybackTime] = useState(0);
-    const [totalDuration] = useState(180); // 3 minute track
+    const [totalDuration, setTotalDuration] = useState(180);
+    const [mode, setMode] = useState('freestyle'); // freestyle or tracks
     const [showMixer, setShowMixer] = useState(false);
     const [artistName] = useState('HOUSE51');
     const [trackGenerated, setTrackGenerated] = useState(null);
@@ -33,55 +35,116 @@ export default function House51() {
     const timeTrackerRef = useRef(null);
     const mixerGainsRef = useRef({});
 
-    const styles = {
-        patient_zero: {
-            name: "Patient Zero",
-            vibe: "The First Transmission - Pure Healing",
-            icon: Heart,
-            frequencies: { kick: 51, bass: 102 }, // 51Hz = Element 51 Antimony
+    // SIGNATURE TRACKS - Pre-composed arrangements
+    const tracks = {
+        frequency_of_love: {
+            name: "Frequency Of Love",
+            artist: "HOUSE51",
+            style: "patient_zero",
+            duration: 180,
+            vibe: "432Hz deep meditation journey",
+            arrangement: [
+                { section: 'intro', start: 0, end: 30, layers: ['kick', 'healing'] },
+                { section: 'build', start: 30, end: 60, layers: ['kick', 'bass', 'pads', 'healing'] },
+                { section: 'drop', start: 60, end: 90, layers: ['kick', 'bass', 'hats', 'pads', 'healing'] },
+                { section: 'breakdown', start: 90, end: 120, layers: ['strings', 'pads', 'healing'] },
+                { section: 'climax', start: 120, end: 150, layers: ['kick', 'bass', 'hats', 'claps', 'pads', 'strings', 'healing'] },
+                { section: 'outro', start: 150, end: 180, layers: ['kick', 'bass', 'healing'], fadeOut: true }
+            ]
         },
-        chicago: {
-            name: "Chicago House",
-            vibe: "Larry Heard - Can You Feel It",
-            icon: Heart,
-            frequencies: { kick: 58, bass: 116 },
+        chicago_nights: {
+            name: "Chicago Nights",
+            artist: "HOUSE51",
+            style: "chicago",
+            duration: 150,
+            vibe: "Warm soulful grooves",
+            arrangement: [
+                { section: 'intro', start: 0, end: 20, layers: ['kick', 'bass'] },
+                { section: 'groove', start: 20, end: 50, layers: ['kick', 'bass', 'hats', 'healing'] },
+                { section: 'drop', start: 50, end: 80, layers: ['kick', 'bass', 'hats', 'claps', 'pads', 'healing'] },
+                { section: 'breakdown', start: 80, end: 100, layers: ['pads', 'strings', 'healing'] },
+                { section: 'rebuild', start: 100, end: 130, layers: ['kick', 'bass', 'hats', 'claps', 'strings', 'healing'] },
+                { section: 'outro', start: 130, end: 150, layers: ['kick', 'pads', 'healing'], fadeOut: true }
+            ]
         },
-        detroit: {
-            name: "Detroit",
-            vibe: "Carl Craig - At Les",
-            icon: Zap,
-            frequencies: { kick: 62, bass: 120 },
-        },
-        glasgow: {
-            name: "Glasgow",
-            vibe: "Optimo - Liquid Liquid",
-            icon: Music,
-            frequencies: { kick: 64, bass: 124 },
-        },
-        deep: {
-            name: "Deep House",
-            vibe: "Kerri Chandler - Bar A Thym",
-            icon: Waves,
-            frequencies: { kick: 60, bass: 118 },
-        },
-        soulful: {
-            name: "Soulful",
-            vibe: "Moodymann - Dem Young Sconies",
-            icon: Heart,
-            frequencies: { kick: 58, bass: 115 },
-        },
-        tech: {
-            name: "Tech House",
-            vibe: "CamelPhat - Cola",
-            icon: Brain,
-            frequencies: { kick: 65, bass: 128 },
+        glasgow_underground: {
+            name: "Glasgow Underground",
+            artist: "HOUSE51",
+            style: "glasgow",
+            duration: 165,
+            vibe: "Dark hypnotic energy",
+            arrangement: [
+                { section: 'intro', start: 0, end: 25, layers: ['kick', 'bass', 'healing'] },
+                { section: 'tension', start: 25, end: 55, layers: ['kick', 'bass', 'hats', 'shakers', 'healing'] },
+                { section: 'drop', start: 55, end: 85, layers: ['kick', 'bass', 'hats', 'claps', 'ride', 'healing'] },
+                { section: 'breakdown', start: 85, end: 110, layers: ['bass', 'pads', 'healing'] },
+                { section: 'peak', start: 110, end: 140, layers: ['kick', 'bass', 'hats', 'claps', 'ride', 'pads', 'healing'] },
+                { section: 'outro', start: 140, end: 165, layers: ['kick', 'bass', 'healing'], fadeOut: true }
+            ]
         }
     };
 
-    // START PLAYING - 3 MINUTE TRACK
+    const styles = {
+            patient_zero: {
+                name: "Patient Zero",
+                vibe: "The First Transmission - Pure Healing",
+                icon: Heart,
+                frequencies: { kick: 51, bass: 102 }, // 51Hz = Element 51 Antimony
+            },
+            chicago: {
+                name: "Chicago House",
+                vibe: "Larry Heard - Can You Feel It",
+                icon: Heart,
+                frequencies: { kick: 58, bass: 116 },
+            },
+            detroit: {
+                name: "Detroit",
+                vibe: "Carl Craig - At Les",
+                icon: Zap,
+                frequencies: { kick: 62, bass: 120 },
+            },
+            glasgow: {
+                name: "Glasgow",
+                vibe: "Optimo - Liquid Liquid",
+                icon: Music,
+                frequencies: { kick: 64, bass: 124 },
+            },
+            deep: {
+                name: "Deep House",
+                vibe: "Kerri Chandler - Bar A Thym",
+                icon: Waves,
+                frequencies: { kick: 60, bass: 118 },
+            },
+            soulful: {
+                name: "Soulful",
+                vibe: "Moodymann - Dem Young Sconies",
+                icon: Heart,
+                frequencies: { kick: 58, bass: 115 },
+            },
+            tech: {
+                name: "Tech House",
+                vibe: "CamelPhat - Cola",
+                icon: Brain,
+                frequencies: { kick: 65, bass: 128 },
+            }
+        };
+
+    // START PLAYING - FREESTYLE OR TRACK MODE
     const startHouse = async () => {
-        const ctx = new (window.AudioContext || window.webkitAudioContext)();
-        audioContextRef.current = ctx;
+        if (mode === 'tracks' && currentTrack) {
+            return startTrack(currentTrack);
+        }
+        return startFreestyle();
+        };
+
+        // START TRACK MODE - Use pre-composed arrangement
+        const startTrack = async (trackKey) => {
+            const track = tracks[trackKey];
+            const style = styles[track.style];
+            setTotalDuration(track.duration);
+
+            const ctx = new (window.AudioContext || window.webkitAudioContext)();
+            audioContextRef.current = ctx;
 
         // Master chain - clean signal path
         const masterGain = ctx.createGain();
@@ -104,28 +167,76 @@ export default function House51() {
         limiter.connect(analyser);
 
         const now = ctx.currentTime;
+
+        // Compose using track arrangement
+        track.arrangement.forEach(section => {
+            composeSection(ctx, masterGain, now, section.start, section.end, section.layers, style, section.fadeOut);
+        });
+
+        // Auto-stop
+        setTimeout(() => stopHouse(), track.duration * 1000);
+
+        // Visualizer
+        const updateWaveform = () => {
+            const dataArray = new Uint8Array(analyser.frequencyBinCount);
+            analyser.getByteFrequencyData(dataArray);
+            setWaveformData(Array.from(dataArray));
+            animationFrameRef.current = requestAnimationFrame(updateWaveform);
+        };
+        updateWaveform();
+
+        // Time tracker
+        startTimeRef.current = Date.now();
+        const trackTime = () => {
+            const elapsed = (Date.now() - startTimeRef.current) / 1000;
+            if (elapsed < 180) {
+                setPlaybackTime(elapsed);
+                timeTrackerRef.current = setTimeout(trackTime, 100);
+            } else {
+                setPlaybackTime(180);
+            }
+        };
+        trackTime();
+
+        setTrackGenerated(new Date().toISOString());
+        setIsPlaying(true);
+        };
+
+        // START FREESTYLE MODE - Random generation
+        const startFreestyle = async () => {
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        audioContextRef.current = ctx;
+
+        // Master chain - clean signal path
+        const masterGain = ctx.createGain();
+        masterGain.gain.value = volume * 0.3;
+
+        const limiter = ctx.createDynamicsCompressor();
+        limiter.threshold.value = -10;
+        limiter.knee.value = 0;
+        limiter.ratio.value = 20;
+        limiter.attack.value = 0.001;
+        limiter.release.value = 0.1;
+
+        masterGain.connect(limiter);
+        limiter.connect(ctx.destination);
+        masterGainRef.current = masterGain;
+
+        const analyser = ctx.createAnalyser();
+        analyser.fftSize = 128;
+        limiter.connect(analyser);
+
+        const now = ctx.currentTime;
         const style = styles[currentStyle];
 
         // 3-MINUTE DEEP HOUSE JOURNEY
-        // INTRO (0-30s) - Kick + Bass + Healing
         composeSection(ctx, masterGain, now, 0, 30, ['kick', 'bass', 'healing'], style);
-
-        // BUILD (30-60s) - Add hats
         composeSection(ctx, masterGain, now, 30, 60, ['kick', 'bass', 'hats', 'healing'], style);
-
-        // DROP (60-90s) - Full groove
         composeSection(ctx, masterGain, now, 60, 90, ['kick', 'bass', 'hats', 'claps', 'healing'], style);
-
-        // BREAKDOWN (90-120s) - Emotional pads
         composeSection(ctx, masterGain, now, 90, 120, ['kick', 'pads', 'strings', 'healing'], style);
-
-        // CLIMAX (120-150s) - Everything
         composeSection(ctx, masterGain, now, 120, 150, ['kick', 'bass', 'hats', 'claps', 'pads', 'strings', 'healing'], style);
-
-        // OUTRO (150-180s) - Fade
         composeSection(ctx, masterGain, now, 150, 180, ['kick', 'bass', 'pads', 'healing'], style, true);
 
-        // Auto-stop
         setTimeout(() => stopHouse(), 180000);
 
         // Visualizer
@@ -152,7 +263,7 @@ export default function House51() {
 
         setTrackGenerated(new Date().toISOString());
         setIsPlaying(true);
-    };
+        };
 
     // COMPOSE SECTION
     const composeSection = (ctx, destination, startTime, sectionStart, sectionEnd, layers, style, fadeOut = false) => {
@@ -609,9 +720,19 @@ Listen: ${window.location.href}`;
 
                     {/* TRACK INFO */}
                     <div className="text-center space-y-2">
-                        <p className="text-white font-black text-xl">{currentStyleData.name}</p>
-                        <p className="text-amber-400 text-sm font-bold">by HOUSE51</p>
-                        <p className="text-gray-500 text-xs">{currentStyleData.vibe}</p>
+                        {mode === 'tracks' && currentTrack ? (
+                            <>
+                                <p className="text-white font-black text-xl">{tracks[currentTrack].name}</p>
+                                <p className="text-amber-400 text-sm font-bold">by {tracks[currentTrack].artist}</p>
+                                <p className="text-gray-500 text-xs">{tracks[currentTrack].vibe}</p>
+                            </>
+                        ) : (
+                            <>
+                                <p className="text-white font-black text-xl">{currentStyleData.name}</p>
+                                <p className="text-amber-400 text-sm font-bold">by HOUSE51</p>
+                                <p className="text-gray-500 text-xs">{currentStyleData.vibe}</p>
+                            </>
+                        )}
                     </div>
 
                     {/* HEALING FREQUENCIES */}
@@ -701,8 +822,61 @@ Listen: ${window.location.href}`;
                         />
                     </div>
 
-                    {/* STYLE SELECTOR */}
+                    {/* MODE SELECTOR */}
                     <div className="space-y-2">
+                        <p className="text-xs font-bold text-gray-500 font-mono">MODE</p>
+                        <div className="flex gap-2">
+                            <button
+                                onClick={() => { setMode('freestyle'); setCurrentTrack(null); }}
+                                className={`flex-1 py-3 rounded-lg border-2 font-bold text-sm transition-all ${
+                                    mode === 'freestyle' 
+                                        ? 'bg-amber-600/20 border-amber-500 text-white' 
+                                        : 'bg-black/40 border-gray-700 text-gray-500 hover:border-gray-600'
+                                }`}
+                            >
+                                FREESTYLE
+                            </button>
+                            <button
+                                onClick={() => { setMode('tracks'); setCurrentTrack('frequency_of_love'); }}
+                                className={`flex-1 py-3 rounded-lg border-2 font-bold text-sm transition-all ${
+                                    mode === 'tracks' 
+                                        ? 'bg-amber-600/20 border-amber-500 text-white' 
+                                        : 'bg-black/40 border-gray-700 text-gray-500 hover:border-gray-600'
+                                }`}
+                            >
+                                TRACKS
+                            </button>
+                        </div>
+                    </div>
+
+                    {/* TRACK SELECTOR (if tracks mode) */}
+                    {mode === 'tracks' && (
+                        <div className="space-y-2">
+                            <p className="text-xs font-bold text-gray-500 font-mono">SELECT TRACK</p>
+                            <div className="space-y-2">
+                                {Object.entries(tracks).map(([key, track]) => (
+                                    <button
+                                        key={key}
+                                        onClick={() => setCurrentTrack(key)}
+                                        className={`w-full p-3 rounded-lg border-2 text-left transition-all ${
+                                            currentTrack === key 
+                                                ? 'bg-amber-600/20 border-amber-500' 
+                                                : 'bg-black/40 border-gray-700 hover:border-gray-600'
+                                        }`}
+                                    >
+                                        <p className={`font-bold text-sm ${currentTrack === key ? 'text-white' : 'text-gray-500'}`}>
+                                            {track.name}
+                                        </p>
+                                        <p className="text-[10px] text-gray-600">{track.vibe} • {Math.floor(track.duration / 60)}:{String(track.duration % 60).padStart(2, '0')}</p>
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+                    )}
+
+                    {/* STYLE SELECTOR (if freestyle mode) */}
+                    {mode === 'freestyle' && (
+                        <div className="space-y-2">
                         <p className="text-xs font-bold text-gray-500 font-mono">STYLE</p>
                         <div className="grid grid-cols-2 gap-2">
                             {Object.entries(styles).map(([key, style]) => {
@@ -729,9 +903,10 @@ Listen: ${window.location.href}`;
                                 );
                             })}
                         </div>
-                    </div>
+                        </div>
+                        )}
 
-                </div>
+                        </div>
 
             </div>
         </div>
