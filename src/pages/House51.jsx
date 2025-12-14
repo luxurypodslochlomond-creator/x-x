@@ -569,12 +569,36 @@ Listen: ${window.location.href}`;
                         <p className="text-amber-500 text-sm font-bold mb-1">by HOUSE51</p>
                         <p className="text-gray-600 text-xs mb-1">{currentStyleData.vibe}</p>
                         <p className="text-cyan-400 text-xs">AI51 • Live Synthesis for Radio51</p>
-                        <div className="flex items-center justify-center gap-2 mt-2">
-                            <span className="text-pink-400 text-xs font-bold">432Hz</span>
-                            <span className="text-gray-600">•</span>
-                            <span className="text-cyan-400 text-xs font-bold">528Hz</span>
-                            <span className="text-gray-600">•</span>
-                            <span className="text-gray-500 text-xs">Healing</span>
+                        </div>
+                    
+                    {/* VISUALIZER */}
+                    <div className="h-16 flex items-end justify-center gap-0.5 mb-3">
+                        {waveformData.map((value, i) => (
+                            <div
+                                key={i}
+                                className="flex-1 bg-gradient-to-t from-amber-600 to-amber-400 rounded-t transition-all duration-75"
+                                style={{ height: `${Math.max(2, (value / 255) * 100)}%`, opacity: isPlaying ? 1 : 0.3 }}
+                            />
+                        ))}
+                    </div>
+                    
+                    {/* HEALING FREQUENCIES */}
+                    <div className="grid grid-cols-4 gap-1 mb-3">
+                        <div className="bg-purple-500/20 border border-purple-500 rounded p-1.5 text-center">
+                            <p className="text-purple-400 text-[10px] font-black">432Hz</p>
+                            <p className="text-gray-500 text-[8px]">CALM</p>
+                        </div>
+                        <div className="bg-pink-500/20 border border-pink-500 rounded p-1.5 text-center">
+                            <p className="text-pink-400 text-[10px] font-black">528Hz</p>
+                            <p className="text-gray-500 text-[8px]">LOVE</p>
+                        </div>
+                        <div className="bg-green-500/20 border border-green-500 rounded p-1.5 text-center">
+                            <p className="text-green-400 text-[10px] font-black">7.83Hz</p>
+                            <p className="text-gray-500 text-[8px]">EARTH</p>
+                        </div>
+                        <div className="bg-yellow-500/20 border border-yellow-500 rounded p-1.5 text-center">
+                            <p className="text-yellow-400 text-[10px] font-black">40Hz</p>
+                            <p className="text-gray-500 text-[8px]">FOCUS</p>
                         </div>
                     </div>
 
@@ -634,7 +658,6 @@ Listen: ${window.location.href}`;
                             <span className="text-[10px] text-gray-500">100%</span>
                         </div>
                         <input type="range" min="0" max="1" step="0.01" value={volume} onChange={(e) => setVolume(parseFloat(e.target.value))} className="w-full h-1.5 bg-zinc-800 rounded appearance-none" />
-                        <p className="text-[10px] text-pink-400 text-center mt-2">432Hz • 528Hz • 7.83Hz • 40Hz • Healing</p>
                     </div>
                 </div>
 
