@@ -122,7 +122,7 @@ function ScottManagerInner() {
                 >
                     <div className="text-center mb-8">
                         <Kingdom51Crown8Bit size={64} animate={true} className="mx-auto mb-4" />
-                        <h1 className="text-3xl font-black text-white mb-2 font-mono tracking-tight">Co-Manager</h1>
+                        <h1 className="text-3xl font-black text-white mb-2 font-mono tracking-tight">Co-Manager51</h1>
                         <p className="text-gray-400 text-sm font-mono">Enter PIN to unlock</p>
                     </div>
 
@@ -172,7 +172,7 @@ function ScottManagerInner() {
                     <div>
                         <div className="flex items-center gap-2 mb-1">
                             <Kingdom51Crown8Bit size={28} animate={true} />
-                            <h1 className="text-2xl font-black text-white font-mono tracking-tight">Co-Manager</h1>
+                            <h1 className="text-2xl font-black text-white font-mono tracking-tight">Co-Manager51</h1>
                         </div>
                         <p className="text-xs text-gray-400 flex items-center gap-1 font-mono">
                             <span className={scott.isOnline ? 'text-green-400' : 'text-amber-400'}>●</span> 
