@@ -860,8 +860,8 @@ export default function House51() {
                     </div>
                     </div>
 
-                {/* STYLES */}
-                <div className="grid md:grid-cols-2 gap-2 mb-4">
+                    {/* STYLES */}
+                    <div className="grid md:grid-cols-3 gap-2 mb-4">
                     {Object.entries(styles).map(([key, style]) => {
                         const Icon = style.icon;
                         const isActive = currentStyle === key;
@@ -1060,8 +1060,6 @@ export default function House51() {
                         </div>
                     </div>
                 )}
-
-
 
             </div>
         </div>
