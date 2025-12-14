@@ -906,36 +906,7 @@ export default function House51() {
                     </div>
                 </div>
 
-                {/* IBIZA LEGENDS */}
-                <div className="bg-zinc-950 border border-amber-600/30 rounded-lg p-3 mb-4">
-                    <h3 className="text-xs font-black text-amber-500 mb-2">IBIZA LEGENDS:</h3>
-                    <div className="grid grid-cols-2 md:grid-cols-3 gap-2 text-xs">
-                        <div className="bg-black border border-amber-600/30 p-2 rounded">
-                            <p className="text-white font-bold">Freddy</p>
-                            <p className="text-gray-500 text-[10px]">10 years Pikes resident</p>
-                        </div>
-                        <div className="bg-black border border-amber-600/30 p-2 rounded">
-                            <p className="text-white font-bold">Ben Santiago</p>
-                            <p className="text-gray-500 text-[10px]">Luka's Ibiza</p>
-                        </div>
-                        <div className="bg-black border border-amber-600/30 p-2 rounded">
-                            <p className="text-white font-bold">Kerri Chandler</p>
-                            <p className="text-gray-500 text-[10px]">Bar A Thym</p>
-                        </div>
-                        <div className="bg-black border border-amber-600/30 p-2 rounded">
-                            <p className="text-white font-bold">Larry Heard</p>
-                            <p className="text-gray-500 text-[10px]">Can You Feel It</p>
-                        </div>
-                        <div className="bg-black border border-amber-600/30 p-2 rounded">
-                            <p className="text-white font-bold">Moodymann</p>
-                            <p className="text-gray-500 text-[10px]">Dem Young Sconies</p>
-                        </div>
-                        <div className="bg-black border border-amber-600/30 p-2 rounded">
-                            <p className="text-white font-bold">CamelPhat</p>
-                            <p className="text-gray-500 text-[10px]">Cola</p>
-                        </div>
-                    </div>
-                </div>
+
             </div>
 
                 {showMixer && (
