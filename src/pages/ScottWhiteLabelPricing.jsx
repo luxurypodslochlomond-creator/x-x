@@ -381,10 +381,10 @@ export default function ScottWhiteLabelPricing() {
 
                     <div className="bg-black border-2 border-green-500/30 rounded-lg p-4">
                         <p className="text-white text-sm font-mono mb-2">
-                            Tour logistics • Publishing splits • Contract drafts • Invoice tracking • Guest lists • Media uploads • <span className="font-bold text-cyan-400">Offline team chat</span>
+                            Tour logistics • Publishing splits • Contract drafts • Invoice tracking • Guest lists • Media uploads • <span className="font-bold text-cyan-400">Real-time team chat (offline)</span> • <span className="font-bold text-purple-400">Document sharing</span> • <span className="font-bold text-pink-400">Video calls</span>
                         </p>
                         <p className="text-green-400 text-xs font-mono font-bold">
-                            Not theory. Real usage. Works in van with no signal. Team syncs device-to-device. ✓
+                            Not theory. Real usage. Works in van with no signal. Team messages + docs sync device-to-device. ✓
                         </p>
                     </div>
                 </div>

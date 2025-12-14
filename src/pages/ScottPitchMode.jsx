@@ -34,7 +34,7 @@ export default function ScottPitchMode() {
         },
         {
             title: "Team Mesh Network",
-            description: "10 managers in office → all synced P2P. Video calls work offline. Zero lag. No server.",
+            description: "10 managers in office → real-time chat + doc sharing + video calls. ALL OFFLINE. Zero lag. No server needed.",
             icon: Zap,
             color: "from-amber-500 to-orange-500"
         },
@@ -237,9 +237,9 @@ export default function ScottPitchMode() {
                 <div className="space-y-3 text-sm text-gray-300 font-mono">
                     <p>"I'm a manager. Built this for myself. It runs my whole business."</p>
                     <p>"Works offline - festivals, planes, anywhere. AI helps with contracts, deals, the boring shit."</p>
-                    <p>"Your team stays synced. Video calls work with zero internet. P2P mesh."</p>
+                    <p className="text-cyan-400 font-bold">"Your team stays connected: Real-time chat, doc sharing, video calls - ALL offline. P2P mesh."</p>
                     <p className="text-white font-bold">"Want it branded for your label?"</p>
-                    <p className="text-cyan-400 font-bold">→ £2k/month, unlimited artists, your logo everywhere, ready now.</p>
+                    <p className="text-pink-400 font-bold">→ £2k/month, unlimited artists, your logo everywhere, ready now.</p>
                 </div>
             </div>
 

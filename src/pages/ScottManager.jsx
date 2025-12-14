@@ -31,6 +31,7 @@ import ScottP51Converter from '@/components/scott/ScottP51Converter';
 import ScottFamilyCredit from '@/components/scott/ScottFamilyCredit';
 import ScottP2PSync from '@/components/scott/ScottP2PSync';
 import ScottDailySupport from '@/components/scott/ScottDailySupport';
+import ScottTeamChat from '@/components/scott/ScottTeamChat';
 
 /**
  * SCOTT'S ARTIST/CLIENT MANAGER
@@ -659,6 +660,9 @@ function ScottManagerInner() {
 
             {/* QUICK TOOLS - ONE BUTTON */}
             <ScottQuickTools onComplete={() => window.location.reload()} />
+
+            {/* TEAM CHAT - FLOATING */}
+            <ScottTeamChat />
 
             </div>
             </ScottFocusMode>

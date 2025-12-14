@@ -93,6 +93,8 @@ export default function ScottWhiteLabel() {
                             <p>✓ Invoice tracking + expenses</p>
                             <p>✓ Guest lists + venue coordination</p>
                             <p>✓ Media uploads + social coordination</p>
+                            <p className="text-cyan-400 font-bold">✓ Real-time team chat (offline)</p>
+                            <p className="text-purple-400 font-bold">✓ Doc/photo sharing with crew</p>
                         </div>
                     </div>
 
