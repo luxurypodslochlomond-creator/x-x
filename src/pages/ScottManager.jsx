@@ -121,12 +121,12 @@ function ScottManagerInner() {
                         
                         {/* Clean 8-bit text - FLAT NO GRADIENTS */}
                         <h1 className="text-5xl font-black text-amber-400 mb-3 tracking-tight" style={{ fontFamily: 'monospace', textShadow: '4px 4px 0px #000000' }}>
-                            KINGDOM51
+                            CO-MANAGER51
                         </h1>
-                        <p className="text-[10px] text-green-400 font-black font-mono tracking-wider">WHITE-LABEL AI CO-MANAGER</p>
+                        <p className="text-[10px] text-green-400 font-black font-mono tracking-wider">AI CO-MANAGER FOR MUSIC</p>
                         
                         <p className="text-amber-500 text-xs font-black tracking-[0.3em] mb-4" style={{ fontFamily: 'monospace', textShadow: '2px 2px 0px #000000' }}>
-                            YOUR AI CO-MANAGER
+                            WHITE-LABEL PLATFORM
                         </p>
                         
                         {/* 8-bit pixel divider - FLAT */}
@@ -155,7 +155,7 @@ function ScottManagerInner() {
                         className="w-full bg-amber-500 hover:bg-amber-400 text-black font-black text-lg py-4 transition-all"
                         style={{ fontFamily: 'monospace' }}
                     >
-                        ENTER KINGDOM
+                        ENTER
                     </Button>
                     <p className="text-center text-amber-600 text-xs mt-4 font-mono">Zero forms • Zero bullshit • Real help</p>
                 </div>
@@ -188,7 +188,7 @@ function ScottManagerInner() {
                             </div>
                             <div>
                                 <h1 className="text-2xl font-black bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-400 bg-clip-text text-transparent" style={{ fontFamily: 'monospace' }}>
-                                    KINGDOM51
+                                    CO-MANAGER51
                                 </h1>
                                 <p className="text-[9px] text-amber-500/80 tracking-widest uppercase font-bold flex items-center gap-1" style={{ fontFamily: 'monospace' }}>
                                     <span className={scott.isOnline ? 'text-green-400' : 'text-amber-400'}>●</span> 
@@ -269,7 +269,7 @@ function ScottManagerInner() {
                             </div>
                             <div className="flex-1">
                                 <p className="text-2xl font-black bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-400 bg-clip-text text-transparent mb-1" style={{ fontFamily: 'monospace' }}>
-                                    KINGDOM51 AI
+                                    CO-MANAGER51 AI
                                 </p>
                                 <p className="text-amber-500/80 text-xs font-bold tracking-wider font-mono">HANDLES EVERYTHING • ALWAYS ON</p>
                             </div>
@@ -691,9 +691,9 @@ function ScottManagerInner() {
             <div className="mt-12 pt-6 border-t-2 border-amber-500/20 text-center mb-32">
                 <div className="flex items-center justify-center gap-2 mb-2">
                     <KingdomCrown8Bit size={20} animate={false} />
-                    <p className="text-amber-500/60 text-xs font-black tracking-wider" style={{ fontFamily: 'monospace' }}>KINGDOM51</p>
+                    <p className="text-amber-500/60 text-xs font-black tracking-wider" style={{ fontFamily: 'monospace' }}>CO-MANAGER51</p>
                 </div>
-                <p className="text-amber-600/40 text-[10px] font-mono">Zero bullshit artist management</p>
+                <p className="text-amber-600/40 text-[10px] font-mono">White-label AI co-manager</p>
             </div>
 
             {/* QUICK TOOLS - ONE BUTTON */}

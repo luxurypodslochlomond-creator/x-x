@@ -50,7 +50,7 @@ export default function Kingdom51Pricing() {
                 {/* HEADER */}
                 <div className="text-center mb-12">
                     <Kingdom51Crown8Bit size={80} animate={true} className="mx-auto mb-6" />
-                    <h1 className="text-5xl font-black text-amber-400 mb-3 font-mono">KINGDOM51</h1>
+                    <h1 className="text-5xl font-black text-amber-400 mb-3 font-mono">CO-MANAGER51</h1>
                     <p className="text-gray-400 text-sm font-mono">AI co-manager for music industry</p>
                 </div>
 
