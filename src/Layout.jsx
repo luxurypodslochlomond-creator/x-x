@@ -16,6 +16,7 @@ import AI51ProactiveReach from '@/components/ai51/AI51ProactiveReach';
 import UF51ConnectionChime from '@/components/ai51/UF51ConnectionChime';
 import AI51Shield from '@/components/ai51/AI51Shield';
 import PendingMessageSender from '@/components/shared/PendingMessageSender';
+import { AI51MemoryProvider } from '@/components/ai51/AI51MemoryLoader';
 import {
                     Menu, X, Heart, Home, LogOut, Leaf, Sparkles, Music, Map, User, Globe,
                     BookOpen, Shield, Target, Briefcase, FileText, Settings, Search, Brain, Presentation, Calculator, GraduationCap, Zap, AlertTriangle, Mic2, Lightbulb, Building, Play, Pause, Atom, Eye, Scale, Users, WifiOff, CheckCircle, Waves, ChevronDown, ChevronRight, Calendar, DollarSign, Moon, Signal
@@ -471,9 +472,11 @@ const LayoutInner = ({ children, currentPageName }) => {
           <AnonymousAuthProvider>
             <SyncManagerProvider>
               <AudioProvider>
-                <LayoutInner {...props} />
-                <SyncStatusIndicator />
-                <ProfessionalModeToggle />
+                <AI51MemoryProvider>
+                  <LayoutInner {...props} />
+                  <SyncStatusIndicator />
+                  <ProfessionalModeToggle />
+                </AI51MemoryProvider>
               </AudioProvider>
             </SyncManagerProvider>
           </AnonymousAuthProvider>
