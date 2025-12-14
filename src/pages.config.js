@@ -224,6 +224,7 @@ import DeviceLabResearch from './pages/DeviceLabResearch';
 import AxiomaticTruth from './pages/AxiomaticTruth';
 import House51 from './pages/House51';
 import PatientZero from './pages/PatientZero';
+import ScottOfflineMode from './pages/ScottOfflineMode';
 import __Layout from './Layout.jsx';
 
 
@@ -454,6 +455,7 @@ export const PAGES = {
     "AxiomaticTruth": AxiomaticTruth,
     "House51": House51,
     "PatientZero": PatientZero,
+    "ScottOfflineMode": ScottOfflineMode,
 }
 
 export const pagesConfig = {

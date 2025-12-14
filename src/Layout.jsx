@@ -18,10 +18,11 @@ import AI51Shield from '@/components/ai51/AI51Shield';
 import PendingMessageSender from '@/components/shared/PendingMessageSender';
 import { AI51MemoryProvider } from '@/components/ai51/AI51MemoryLoader';
 import TruthCheckProtocol from '@/components/ai51/TruthCheckProtocol';
+import { MeshProvider, MeshStatusIndicator } from '@/components/shared/MeshNetwork';
 import {
-                        Menu, X, Heart, Home, LogOut, Leaf, Sparkles, Music, Map, User, Globe,
-                    BookOpen, Shield, Target, Briefcase, FileText, Settings, Search, Brain, Presentation, Calculator, GraduationCap, Zap, AlertTriangle, Mic2, Lightbulb, Building, Play, Pause, Atom, Eye, Scale, Users, WifiOff, CheckCircle, Waves, ChevronDown, ChevronRight, Calendar, DollarSign, Moon, Signal
-                  } from 'lucide-react';
+                            Menu, X, Heart, Home, LogOut, Leaf, Sparkles, Music, Map, User, Globe,
+                        BookOpen, Shield, Target, Briefcase, FileText, Settings, Search, Brain, Presentation, Calculator, GraduationCap, Zap, AlertTriangle, Mic2, Lightbulb, Building, Play, Pause, Atom, Eye, Scale, Users, WifiOff, CheckCircle, Waves, ChevronDown, ChevronRight, Calendar, DollarSign, Moon, Signal
+                      } from 'lucide-react';
 import { COOLASFUCKHeart, COOLASFUCKWaves, COOLASFUCKHouse, COOLASFUCKHouse51 } from '@/components/shared/COOLASFUCKIcon';
 import LiveClock from '@/components/shared/LiveClock';
 import { AnonymousAuthProvider } from '@/components/shared/AnonymousAuth';
@@ -473,17 +474,20 @@ const LayoutInner = ({ children, currentPageName }) => {
     export default function Layout(props) {
       return (
         <ProfessionalModeProvider>
-          <AnonymousAuthProvider>
-            <SyncManagerProvider>
-              <AudioProvider>
-                <AI51MemoryProvider>
-                  <LayoutInner {...props} />
-                  <SyncStatusIndicator />
-                  <ProfessionalModeToggle />
-                </AI51MemoryProvider>
-              </AudioProvider>
-            </SyncManagerProvider>
-          </AnonymousAuthProvider>
+          <MeshProvider>
+            <AnonymousAuthProvider>
+              <SyncManagerProvider>
+                <AudioProvider>
+                  <AI51MemoryProvider>
+                    <LayoutInner {...props} />
+                    <SyncStatusIndicator />
+                    <MeshStatusIndicator />
+                    <ProfessionalModeToggle />
+                  </AI51MemoryProvider>
+                </AudioProvider>
+              </SyncManagerProvider>
+            </AnonymousAuthProvider>
+          </MeshProvider>
         </ProfessionalModeProvider>
       );
     }
