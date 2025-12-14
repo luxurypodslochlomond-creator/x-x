@@ -1,5 +1,6 @@
 import React from 'react';
-import { Music, Trophy, Users, Building, Shield, Zap, Heart, Globe, Lock } from 'lucide-react';
+import { Music, Trophy, Users, Building, Shield, Zap, Heart, Globe, Lock, ArrowLeft } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import Kingdom51Crown8Bit from '@/components/shared/Kingdom51Crown8Bit';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
@@ -15,6 +16,8 @@ import { createPageUrl } from '@/utils';
  */
 
 export default function ScottBiggerVision() {
+    const navigate = useNavigate();
+
     const industries = [
         {
             name: "Music Management",
@@ -66,6 +69,15 @@ export default function ScottBiggerVision() {
     return (
         <div className="min-h-screen bg-black p-4 pb-32">
             
+            {/* BACK BUTTON */}
+            <button
+                onClick={() => navigate(-1)}
+                className="flex items-center gap-2 text-gray-600 hover:text-amber-400 transition-all mb-6"
+            >
+                <ArrowLeft className="w-4 h-4" />
+                <span className="text-sm font-bold tracking-wider font-mono">BACK</span>
+            </button>
+
             {/* HEADER */}
             <div className="mb-8">
                 <div className="bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-500 p-[3px] rounded-xl" style={{ boxShadow: '0 0 30px rgba(245, 158, 11, 0.4)' }}>

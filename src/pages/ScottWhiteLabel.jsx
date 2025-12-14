@@ -1,5 +1,6 @@
 import React from 'react';
-import { Crown, Palette, Download, Play, Zap, Heart, Music, DollarSign, Shield } from 'lucide-react';
+import { Crown, Palette, Download, Play, Zap, Heart, Music, DollarSign, Shield, ArrowLeft } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import Kingdom51Crown8Bit from '@/components/shared/Kingdom51Crown8Bit';
 import { COOLASFUCKHeart, COOLASFUCKWaves } from '@/components/shared/COOLASFUCKIcon';
 import ScottWhiteLabelSettings from '@/components/scott/ScottWhiteLabelSettings';
@@ -15,9 +16,20 @@ import { createPageUrl } from '@/utils';
  */
 
 export default function ScottWhiteLabel() {
+    const navigate = useNavigate();
+
     return (
         <div className="min-h-screen bg-black p-4 pb-32">
             
+            {/* BACK BUTTON */}
+            <button
+                onClick={() => navigate(-1)}
+                className="flex items-center gap-2 text-gray-600 hover:text-amber-400 transition-all mb-6"
+            >
+                <ArrowLeft className="w-4 h-4" />
+                <span className="text-sm font-bold tracking-wider font-mono">BACK</span>
+            </button>
+
             {/* HEADER - SIMPLE */}
             <div className="mb-8">
                 <div className="bg-black border-2 border-amber-500 rounded-xl p-6">

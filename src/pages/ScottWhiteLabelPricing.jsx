@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { Check, Crown, Music, Building, Zap, Users } from 'lucide-react';
+import { Check, Crown, Music, Building, Zap, Users, ArrowLeft } from 'lucide-react';
 import Kingdom51Crown8Bit from '@/components/shared/Kingdom51Crown8Bit';
 import { useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
@@ -57,6 +57,15 @@ export default function ScottWhiteLabelPricing() {
     return (
         <div className="min-h-screen bg-black p-4 flex items-center justify-center">
             <div className="max-w-6xl w-full">
+
+                {/* BACK BUTTON */}
+                <button
+                    onClick={() => navigate(-1)}
+                    className="flex items-center gap-2 text-gray-600 hover:text-amber-400 transition-all mb-6"
+                >
+                    <ArrowLeft className="w-4 h-4" />
+                    <span className="text-sm font-bold tracking-wider font-mono">BACK</span>
+                </button>
 
                 {/* HEADER */}
                 <div className="text-center mb-8">
