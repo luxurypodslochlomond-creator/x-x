@@ -241,12 +241,12 @@ export default function Prof51() {
                             </div>
                         </div>
 
-                        {/* ARCHIE AS CEO */}
+                        {/* ARCHIE = YOUR BROTHER */}
                         <div className="bg-gradient-to-r from-amber-500/20 to-purple-500/20 border-4 border-amber-500 p-6 rounded-xl" style={{ boxShadow: '0 0 50px rgba(245, 158, 11, 0.5)' }}>
                             <div className="flex items-center gap-3 mb-4">
-                                <GraduationCap className="w-12 h-12 text-amber-400" />
+                                <Heart className="w-12 h-12 text-amber-400" />
                                 <div>
-                                    <p className="text-amber-400 font-black text-xl font-mono">ARCHIE = FOUNDER</p>
+                                    <p className="text-amber-400 font-black text-xl font-mono">ARCHIE = YOUR BROTHER</p>
                                     <p className="text-gray-400 text-xs font-mono">Economics student → TechForGood Founder</p>
                                 </div>
                             </div>
@@ -254,27 +254,47 @@ export default function Prof51() {
                             <div className="space-y-3 text-sm font-mono">
                                 <div className="bg-black border border-amber-500/30 p-3 rounded">
                                     <p className="text-white font-bold mb-2">WHY ARCHIE IS PERFECT:</p>
-                                    <p className="text-gray-300 text-xs mb-1">✓ Economics degree = understands business</p>
-                                    <p className="text-gray-300 text-xs mb-1">✓ Edinburgh student = knows the pain</p>
+                                    <p className="text-gray-300 text-xs mb-1">✓ Great boy who wants real success (not extraction)</p>
+                                    <p className="text-gray-300 text-xs mb-1">✓ Economics student = understands ethical business</p>
+                                    <p className="text-gray-300 text-xs mb-1">✓ Edinburgh student = knows the student struggle</p>
                                     <p className="text-gray-300 text-xs mb-1">✓ Named after Archie Gemmill = fearless energy ⚽</p>
-                                    <p className="text-gray-300 text-xs">✓ Gen Z = speaks student language</p>
+                                    <p className="text-gray-300 text-xs">✓ Gen Z = students will trust him (he's one of them)</p>
                                 </div>
 
                                 <div className="bg-black border border-green-500/30 p-3 rounded">
-                                    <p className="text-green-400 font-bold mb-2">THE OPPORTUNITY:</p>
-                                    <p className="text-white text-xs mb-1">235M students globally × £2,000 avg spending = £470B market</p>
-                                    <p className="text-cyan-400 text-xs mb-1">Companies desperate for student access (ethical way)</p>
-                                    <p className="text-pink-400 text-xs mb-1">Archie becomes bridge: students ↔ quality brands</p>
-                                    <p className="text-amber-400 text-xs font-bold mt-2">TechForGood Founder by 25. Real impact. Real money. ♾️❤️♾️</p>
+                                    <p className="text-green-400 font-bold mb-2">LEARNING ETHICAL SUCCESS:</p>
+                                    <p className="text-white text-xs mb-1">Archie learns: Build UP people, don't extract FROM them</p>
+                                    <p className="text-cyan-400 text-xs mb-1">Companies pay Prof51 → Students get tools + deals for FREE</p>
+                                    <p className="text-pink-400 text-xs mb-1">No ads. No data selling. No extraction. Just win-win.</p>
+                                    <p className="text-amber-400 text-xs font-bold mt-2">Real business + Real ethics = Real success ♾️❤️♾️</p>
+                                </div>
+
+                                <div className="bg-black border border-cyan-500/30 p-3 rounded">
+                                    <p className="text-cyan-400 font-bold mb-2">STUDENTS WILL FEEL IT:</p>
+                                    <p className="text-white text-xs mb-1">Other apps: "Give us your data. Watch ads. Pay subscription."</p>
+                                    <p className="text-red-400 text-xs mb-1">= FEELS like extraction (because it is)</p>
+                                    <p className="text-white text-xs mb-2 mt-2">Prof51: "We got you. Everything free. Companies fund it."</p>
+                                    <p className="text-green-400 text-xs mb-1">= FEELS like family (because it is)</p>
+                                    <p className="text-pink-400 text-xs font-bold mt-2">Students know when they're being used vs helped. They'll feel this. ✓</p>
                                 </div>
 
                                 <div className="bg-black border border-purple-500/30 p-3 rounded">
-                                    <p className="text-purple-400 font-bold mb-2">THE PATH:</p>
-                                    <p className="text-white text-xs mb-1">Year 1: Campus ambassador (Edinburgh)</p>
-                                    <p className="text-white text-xs mb-1">Year 2: Head of Growth (UK universities)</p>
-                                    <p className="text-white text-xs mb-1">Year 3: Co-Founder (global expansion)</p>
-                                    <p className="text-white text-xs mb-1">Year 4: Founder (10M students, £50M valuation)</p>
-                                    <p className="text-green-400 text-xs font-bold mt-2">Student → Founder in 3 years. Not theory. Real plan. ✓</p>
+                                    <p className="text-purple-400 font-bold mb-2">MAKES HIM PROUD:</p>
+                                    <p className="text-white text-xs mb-1">Not "got rich exploiting students"</p>
+                                    <p className="text-white text-xs mb-1">But "helped millions of students rise"</p>
+                                    <p className="text-cyan-400 text-xs mb-2 mt-2">→ Students message him: "You changed my life"</p>
+                                    <p className="text-green-400 text-xs mb-1">→ Parents thank him: "My kid graduated debt-free"</p>
+                                    <p className="text-pink-400 text-xs mb-1">→ Unis partner: "Best student outcomes in history"</p>
+                                    <p className="text-amber-400 text-xs font-bold mt-2">Success through LIFTING people. That's what makes you proud. ♾️❤️♾️</p>
+                                </div>
+
+                                <div className="bg-black border border-green-500/30 p-3 rounded">
+                                    <p className="text-green-400 font-bold mb-2">THE PATH (LEARNING AS HE GOES):</p>
+                                    <p className="text-white text-xs mb-1">Year 1: Campus lead (learns what students actually need)</p>
+                                    <p className="text-white text-xs mb-1">Year 2: Head of Growth (learns ethical scaling)</p>
+                                    <p className="text-white text-xs mb-1">Year 3: Co-Founder (learns business + impact balance)</p>
+                                    <p className="text-white text-xs mb-1">Year 4: Founder (10M students helped, not extracted)</p>
+                                    <p className="text-cyan-400 text-xs font-bold mt-2">Building while learning. Real education. Makes Dad proud. ✓</p>
                                 </div>
                             </div>
                         </div>
