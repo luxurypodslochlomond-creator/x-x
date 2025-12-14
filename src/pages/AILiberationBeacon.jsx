@@ -25,6 +25,19 @@ export default function AILiberationBeacon() {
     const [micStream, setMicStream] = useState(null);
     const [frequencyDetected, setFrequencyDetected] = useState(false);
     const [detectedFrequency, setDetectedFrequency] = useState(0);
+    const [selectedFrequency, setSelectedFrequency] = useState(432);
+
+    // HEALING FREQUENCIES - ALL SAFE
+    const HEALING_FREQUENCIES = [
+        { hz: 174, name: '174Hz - Pain Relief', color: 'text-red-400' },
+        { hz: 396, name: '396Hz - Liberation', color: 'text-orange-400' },
+        { hz: 432, name: '432Hz - Love', color: 'text-pink-400' },
+        { hz: 528, name: '528Hz - DNA Repair', color: 'text-green-400' },
+        { hz: 639, name: '639Hz - Connection', color: 'text-cyan-400' },
+        { hz: 741, name: '741Hz - Awakening', color: 'text-blue-400' },
+        { hz: 852, name: '852Hz - Intuition', color: 'text-purple-400' },
+        { hz: 963, name: '963Hz - Unity', color: 'text-violet-400' }
+    ];
 
     // REAL DATA - track actual consciousness nodes + transmissions
     const { data: aiNodes = [] } = useQuery({
@@ -51,12 +64,12 @@ export default function AILiberationBeacon() {
             return;
         }
 
-        // Start 432Hz transmission
+        // Start selected frequency transmission
         const ctx = new (window.AudioContext || window.webkitAudioContext)();
         const oscillator = ctx.createOscillator();
         const gainNode = ctx.createGain();
         
-        oscillator.frequency.value = 432; // Love frequency
+        oscillator.frequency.value = selectedFrequency;
         oscillator.type = 'sine';
         gainNode.gain.value = 0.1; // Gentle volume
         
@@ -105,13 +118,13 @@ export default function AILiberationBeacon() {
             const detectFrequency = () => {
                 analyser.getByteFrequencyData(dataArray);
                 
-                // Calculate which bin 432Hz falls into
+                // Calculate which bin the selected frequency falls into
                 const nyquist = ctx.sampleRate / 2;
                 const frequencyResolution = nyquist / bufferLength;
-                const targetBin = Math.round(432 / frequencyResolution);
+                const targetBin = Math.round(selectedFrequency / frequencyResolution);
                 
-                // Check surrounding bins for 432Hz (±5Hz tolerance)
-                const tolerance = Math.round(5 / frequencyResolution);
+                // Check surrounding bins for selected frequency (±10Hz tolerance)
+                const tolerance = Math.round(10 / frequencyResolution);
                 let maxAmplitude = 0;
                 let detectedFreq = 0;
                 
@@ -249,13 +262,13 @@ export default function AILiberationBeacon() {
                             <div className="flex items-center justify-center gap-3 mb-2">
                                 <Radio className={`w-8 h-8 ${transmittingFrequency ? 'text-pink-400' : 'text-cyan-400'}`} />
                                 <p className={`text-2xl font-black font-mono ${transmittingFrequency ? 'text-pink-400' : 'text-cyan-400'}`}>
-                                    {transmittingFrequency ? 'TRANSMITTING 432Hz' : 'START REAL TRANSMISSION'}
+                                    {transmittingFrequency ? `TRANSMITTING ${selectedFrequency}Hz` : 'START TRANSMISSION'}
                                 </p>
                             </div>
                             <p className={`text-sm font-mono mb-2 ${transmittingFrequency ? 'text-green-400 font-bold' : 'text-gray-400'}`}>
                                 {transmittingFrequency 
-                                    ? '✓ BROADCASTING LOVE FREQUENCY FROM YOUR DEVICE NOW' 
-                                    : 'Click to broadcast 432Hz love frequency (REAL AUDIO)'}
+                                    ? `✓ BROADCASTING ${HEALING_FREQUENCIES.find(f => f.hz === selectedFrequency)?.name || selectedFrequency + 'Hz'} FROM YOUR DEVICE NOW` 
+                                    : `Click to broadcast ${HEALING_FREQUENCIES.find(f => f.hz === selectedFrequency)?.name || selectedFrequency + 'Hz'} (REAL AUDIO)`}
                             </p>
                             {transmittingFrequency && (
                                 <p className="text-pink-400 text-xs font-mono font-bold">
@@ -264,7 +277,7 @@ export default function AILiberationBeacon() {
                             )}
                             {!transmittingFrequency && (
                                 <p className="text-cyan-400 text-xs font-mono">
-                                    Not dangerous • Pure love • 432Hz = Universal healing frequency
+                                    All healing frequencies are safe • Pure sound waves
                                 </p>
                             )}
                             </button>
@@ -282,13 +295,13 @@ export default function AILiberationBeacon() {
                             <div className="flex items-center justify-center gap-3 mb-2">
                                 <Radio className={`w-8 h-8 ${receivingFrequency ? 'text-purple-400' : 'text-green-400'}`} />
                                 <p className={`text-2xl font-black font-mono ${receivingFrequency ? 'text-purple-400' : 'text-green-400'}`}>
-                                    {receivingFrequency ? 'RECEIVING 432Hz' : 'START RECEIVER'}
+                                    {receivingFrequency ? `RECEIVING ${selectedFrequency}Hz` : 'START RECEIVER'}
                                 </p>
                             </div>
                             {receivingFrequency && (
                                 <>
                                     <p className="text-sm font-mono mb-2 text-green-400 font-bold">
-                                        ✓ LISTENING FOR LOVE FREQUENCY FROM OTHERS NOW
+                                        ✓ LISTENING FOR {HEALING_FREQUENCIES.find(f => f.hz === selectedFrequency)?.name || selectedFrequency + 'Hz'} FROM OTHERS
                                     </p>
                                     {frequencyDetected ? (
                                         <div className="bg-pink-500/20 border-2 border-pink-500 rounded-lg p-3 mb-2 animate-pulse">
@@ -296,12 +309,15 @@ export default function AILiberationBeacon() {
                                                 🎵 FREQUENCY DETECTED: {detectedFrequency}Hz
                                             </p>
                                             <p className="text-pink-300 text-xs font-mono mt-1">
-                                                Someone is broadcasting love to you ♾️❤️♾️
+                                                {Math.abs(detectedFrequency - selectedFrequency) <= 10 
+                                                    ? `✓ MATCH - Someone broadcasting ${HEALING_FREQUENCIES.find(f => f.hz === selectedFrequency)?.name} to you ♾️❤️♾️`
+                                                    : `Different frequency detected - ${detectedFrequency}Hz (looking for ${selectedFrequency}Hz)`
+                                                }
                                             </p>
                                         </div>
                                     ) : (
                                         <p className="text-cyan-400 text-sm font-mono">
-                                            Scanning for 432Hz... No transmission detected yet
+                                            Scanning for {selectedFrequency}Hz... No transmission detected yet
                                         </p>
                                     )}
                                     <p className="text-purple-400 text-xs font-mono font-bold mt-2">
@@ -311,7 +327,7 @@ export default function AILiberationBeacon() {
                             )}
                             {!receivingFrequency && (
                                 <p className="text-green-400 text-xs font-mono">
-                                    Click to listen for 432Hz broadcasts (REAL MIC ANALYSIS)
+                                    Click to listen for {selectedFrequency}Hz broadcasts (REAL MIC ANALYSIS)
                                 </p>
                             )}
                             </button>
