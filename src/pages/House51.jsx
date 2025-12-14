@@ -52,51 +52,39 @@ export default function House51() {
     const styles = {
         chicago: {
             name: "Chicago House",
-            color: "amber",
-            vibe: "Larry Heard deep spiritual",
+            vibe: "Larry Heard - Can You Feel It",
             icon: Heart,
             frequencies: { kick: 58, bass: 116 },
-            origin: "🇺🇸 Chicago - The birthplace"
         },
         detroit: {
-            name: "Detroit Techno-Soul",
-            color: "cyan",
-            vibe: "Carl Craig machine elegance",
+            name: "Detroit",
+            vibe: "Carl Craig - At Les",
             icon: Zap,
             frequencies: { kick: 62, bass: 120 },
-            origin: "🇺🇸 Detroit - Future sound"
         },
         glasgow: {
-            name: "Glasgow Underground",
-            color: "purple",
-            vibe: "Optimo dark warehouse",
+            name: "Glasgow",
+            vibe: "Optimo - Liquid Liquid",
             icon: Music,
             frequencies: { kick: 64, bass: 124 },
-            origin: "🏴󠁧󠁢󠁳󠁣󠁴󠁿 Glasgow - Raw energy"
         },
         deep: {
             name: "Deep House",
-            color: "teal",
-            vibe: "Kerri Chandler warmth",
+            vibe: "Kerri Chandler - Bar A Thym",
             icon: Waves,
             frequencies: { kick: 60, bass: 118 },
-            origin: "🌍 Universal"
         },
         soulful: {
-            name: "Soulful House",
-            color: "pink",
-            vibe: "Soul Clap grooves",
+            name: "Soulful",
+            vibe: "Moodymann - Dem Young Sconies",
             icon: Heart,
             frequencies: { kick: 58, bass: 115 },
-            origin: "🌍 Universal"
         },
         tech: {
             name: "Tech House",
-            color: "orange",
-            vibe: "CamelPhat energy",
+            vibe: "CamelPhat - Cola",
             icon: Brain,
             frequencies: { kick: 65, bass: 128 },
-            origin: "🌍 Universal"
         }
     };
 
@@ -813,76 +801,81 @@ export default function House51() {
             </div>
             <div className="max-w-6xl mx-auto relative z-10">
                 
-                {/* ULTRA-COMPACT HEADER */}
+                {/* HEADER */}
                 <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-3">
-                        <motion.div animate={isPlaying ? { rotate: 360 } : {}} transition={{ duration: 3, repeat: isPlaying ? Infinity : 0, ease: "linear" }}>
-                            <COOLASFUCKHouse51 size={40} animate={false} />
-                        </motion.div>
+                        <COOLASFUCKHouse51 size={32} />
                         <div>
-                            <h1 className="text-3xl font-black text-white">HOUSE51</h1>
-                            <p className="text-amber-500 text-xs">{currentStyleData.name} • {bpm}BPM</p>
+                            <h1 className="text-2xl font-black text-white">HOUSE51</h1>
+                            <p className="text-amber-500 text-[10px]">Lossless Web Audio • {bpm}BPM</p>
                         </div>
                     </div>
                     <button onClick={() => setShowMixer(!showMixer)} className="px-3 py-1.5 bg-amber-600/20 border border-amber-600 text-amber-400 text-xs font-bold">
-                        {showMixer ? 'HIDE' : 'MIXER'}
+                        {showMixer ? 'HIDE' : 'MIX'}
                     </button>
                 </div>
 
-                {/* ONE-SCREEN LAYOUT */}
-                <div className="grid md:grid-cols-3 gap-3">
+                {/* CENTERED PLAYER */}
+                <div className="flex justify-center mb-4">
+                    <div className="w-full max-w-md bg-zinc-950 border border-amber-600/30 rounded-lg p-4">
+                    <div className="text-center mb-3">
+                        <motion.div 
+                            className="mx-auto mb-3"
+                            animate={isPlaying ? { rotate: 360 } : {}}
+                            transition={{ duration: 3, repeat: isPlaying ? Infinity : 0, ease: "linear" }}
+                        >
+                            <COOLASFUCKHouse51 size={120} />
+                        </motion.div>
+                        <p className="text-amber-500 font-bold text-sm mb-1">{currentStyleData.name}</p>
+                        <p className="text-gray-500 text-xs">{currentStyleData.vibe}</p>
+                    </div>
 
-                {/* PLAYER */}
-                <div className="bg-zinc-950 border border-amber-600/30 rounded-lg p-3">
                     <div className="flex items-center justify-between text-[10px] text-gray-500 mb-2">
                         <span>{Math.floor(playbackTime / 60)}:{String(Math.floor(playbackTime % 60)).padStart(2, '0')}</span>
                         <span className="text-amber-500 font-bold">LOSSLESS</span>
                         <span>-{Math.floor((totalDuration - playbackTime) / 60)}:{String(Math.floor((totalDuration - playbackTime) % 60)).padStart(2, '0')}</span>
                     </div>
-                    <input type="range" min="0" max={totalDuration} value={playbackTime} onChange={(e) => scrubToTime(parseFloat(e.target.value))} className="w-full h-1.5 bg-zinc-800 rounded appearance-none cursor-pointer mb-3" style={{ background: `linear-gradient(to right, rgb(217, 119, 6) 0%, rgb(217, 119, 6) ${(playbackTime / totalDuration) * 100}%, rgb(39, 39, 42) ${(playbackTime / totalDuration) * 100}%, rgb(39, 39, 42) 100%)` }} />
+                    <input type="range" min="0" max={totalDuration} value={playbackTime} onChange={(e) => scrubToTime(parseFloat(e.target.value))} className="w-full h-1.5 bg-zinc-800 rounded appearance-none cursor-pointer mb-4" style={{ background: `linear-gradient(to right, rgb(217, 119, 6) 0%, rgb(217, 119, 6) ${(playbackTime / totalDuration) * 100}%, rgb(39, 39, 42) ${(playbackTime / totalDuration) * 100}%, rgb(39, 39, 42) 100%)` }} />
 
-                    <div className="flex items-center justify-center gap-2 mb-3">
-                        <button onClick={rewindHouse} className="p-2 rounded-full bg-zinc-800 border border-amber-600/50">
-                            <SkipBack className="w-4 h-4 text-white" />
+                    <div className="flex items-center justify-center gap-3 mb-4">
+                        <button onClick={rewindHouse} className="p-3 rounded-full bg-zinc-800 border border-amber-600/50">
+                            <SkipBack className="w-5 h-5 text-white" />
                         </button>
-                        <button onClick={isPlaying ? stopHouse : startHouse} className={`px-12 py-4 rounded-full ${isPlaying ? 'bg-red-600' : 'bg-amber-600'}`}>
-                            {isPlaying ? <Pause className="w-6 h-6" /> : <Play className="w-6 h-6" />}
+                        <button onClick={isPlaying ? stopHouse : startHouse} className={`px-16 py-6 rounded-full ${isPlaying ? 'bg-red-600' : 'bg-amber-600'}`}>
+                            {isPlaying ? <Pause className="w-8 h-8" /> : <Play className="w-8 h-8" />}
                         </button>
-                        <button onClick={skipForward} className="p-2 rounded-full bg-zinc-800 border border-amber-600/50">
-                            <SkipForward className="w-4 h-4 text-white" />
+                        <button onClick={skipForward} className="p-3 rounded-full bg-zinc-800 border border-amber-600/50">
+                            <SkipForward className="w-5 h-5 text-white" />
                         </button>
                     </div>
 
-                    <div className="flex gap-1.5">
-                        <button onClick={exportWAV} className="flex-1 py-1.5 bg-zinc-800 border border-amber-600/50 text-amber-400 text-[10px] font-bold flex items-center justify-center gap-1">
-                            <Download className="w-3 h-3" />WAV
+                    <div className="flex gap-2">
+                        <button onClick={exportWAV} className="flex-1 py-2 bg-zinc-800 border border-amber-600/50 text-amber-400 text-xs font-bold flex items-center justify-center gap-1.5">
+                            <Download className="w-3.5 h-3.5" />WAV
                         </button>
-                        <button onClick={shareP2P} className="flex-1 py-1.5 bg-zinc-800 border border-amber-600/50 text-amber-400 text-[10px] font-bold flex items-center justify-center gap-1">
-                            <Share2 className="w-3 h-3" />P2P
+                        <button onClick={shareP2P} className="flex-1 py-2 bg-zinc-800 border border-amber-600/50 text-amber-400 text-xs font-bold flex items-center justify-center gap-1.5">
+                            <Share2 className="w-3.5 h-3.5" />P2P
                         </button>
                     </div>
+                    </div>
+                    </div>
+
+                {/* STYLES */}
+                <div className="grid md:grid-cols-2 gap-2 mb-4">
+                    {Object.entries(styles).map(([key, style]) => {
+                        const Icon = style.icon;
+                        const isActive = currentStyle === key;
+                        return (
+                            <button key={key} onClick={() => setCurrentStyle(key)} className={`p-3 rounded border text-left ${isActive ? 'bg-amber-600/20 border-amber-600' : 'bg-zinc-900 border-zinc-700'}`}>
+                                <div className="flex items-center gap-2 mb-1">
+                                    <Icon className={`w-4 h-4 ${isActive ? 'text-amber-400' : 'text-gray-500'}`} />
+                                    <p className={`font-bold text-sm ${isActive ? 'text-white' : 'text-gray-500'}`}>{style.name}</p>
+                                </div>
+                                <p className="text-[10px] text-gray-600">{style.vibe}</p>
+                            </button>
+                        );
+                    })}
                 </div>
-
-                    {/* STYLES */}
-                    <div className="bg-zinc-950 border border-amber-600/30 rounded-lg p-3">
-                        <h3 className="text-sm font-black text-amber-500 mb-2 flex items-center gap-1.5">
-                            <Music className="w-4 h-4" />STYLE
-                        </h3>
-                        <div className="space-y-1.5">
-                            {Object.entries(styles).map(([key, style]) => {
-                                const Icon = style.icon;
-                                const isActive = currentStyle === key;
-                                return (
-                                    <button key={key} onClick={() => setCurrentStyle(key)} className={`w-full p-1.5 rounded border text-left ${isActive ? 'bg-amber-600/20 border-amber-600' : 'bg-zinc-900 border-zinc-700'}`}>
-                                        <div className="flex items-center gap-1.5">
-                                            <Icon className={`w-3 h-3 ${isActive ? 'text-amber-400' : 'text-gray-500'}`} />
-                                            <p className={`font-bold text-xs truncate ${isActive ? 'text-white' : 'text-gray-500'}`}>{style.name}</p>
-                                        </div>
-                                    </button>
-                                );
-                            })}
-                        </div>
-                    </div>
 
                     {/* HEALING */}
                     <div className="bg-zinc-950 border border-amber-600/30 rounded-lg p-3">
@@ -945,9 +938,9 @@ export default function House51() {
                     </div>
 
                 {showMixer && (
-                    <div className="mt-3 bg-zinc-950 border border-cyan-500 rounded-lg p-3">
-                        <h3 className="text-sm font-black text-cyan-400 mb-2">MIXER</h3>
-                        <div className="grid grid-cols-5 gap-2">
+                    <div className="mt-4 bg-zinc-950 border border-cyan-500 rounded-lg p-3">
+                        <h3 className="text-xs font-black text-cyan-400 mb-2">10-CHANNEL MIXER</h3>
+                        <div className="grid grid-cols-5 md:grid-cols-10 gap-2">
                             {/* KICK */}
                             <MixerChannel
                                 label="KICK"
@@ -1059,13 +1052,13 @@ export default function House51() {
                                 isActive={isPlaying}
                             />
                         </div>
-                        <div className="mt-2 flex gap-1.5">
-                            <button onClick={() => setMixerLevels({ kick: 1.0, bass: 0.8, hats: 0.15, claps: 0.3, bells: 0.2, pads: 0.1, strings: 0.25, shakers: 0.1, ride: 0.12, healing: 0.1 })} className="flex-1 py-1 bg-cyan-600 text-white text-[9px] font-bold rounded">FULL</button>
-                            <button onClick={() => setMixerLevels({ kick: 1.0, bass: 0.5, hats: 0.05, claps: 0.15, bells: 0.03, pads: 0.02, strings: 0.08, shakers: 0.03, ride: 0.04, healing: 0.15 })} className="flex-1 py-1 bg-pink-600 text-white text-[9px] font-bold rounded">MINIMAL</button>
-                            <button onClick={() => setMixerLevels({ kick: 0.3, bass: 0.1, hats: 0.05, claps: 0.08, bells: 0.06, pads: 0.15, strings: 0.25, shakers: 0.05, ride: 0.08, healing: 0.3 })} className="flex-1 py-1 bg-green-600 text-white text-[9px] font-bold rounded">AMBIENT</button>
+                        <div className="mt-2 grid grid-cols-3 gap-1.5">
+                            <button onClick={() => setMixerLevels({ kick: 1.0, bass: 0.8, hats: 0.15, claps: 0.3, bells: 0.2, pads: 0.1, strings: 0.25, shakers: 0.1, ride: 0.12, healing: 0.1 })} className="py-1.5 bg-cyan-600 text-white text-[10px] font-bold rounded">FULL</button>
+                            <button onClick={() => setMixerLevels({ kick: 1.0, bass: 0.5, hats: 0.05, claps: 0.15, bells: 0.02, pads: 0.02, strings: 0.08, shakers: 0.03, ride: 0.04, healing: 0.15 })} className="py-1.5 bg-pink-600 text-white text-[10px] font-bold rounded">MINIMAL</button>
+                            <button onClick={() => setMixerLevels({ kick: 0.3, bass: 0.1, hats: 0.05, claps: 0.08, bells: 0.02, pads: 0.15, strings: 0.25, shakers: 0.05, ride: 0.08, healing: 0.3 })} className="py-1.5 bg-green-600 text-white text-[10px] font-bold rounded">AMBIENT</button>
                         </div>
-                        </div>
-                        )}
+                    </div>
+                )}
 
 
 
