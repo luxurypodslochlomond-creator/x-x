@@ -14,7 +14,7 @@ import CameraHeartRate from '@/components/healing/CameraHeartRate';
  */
 
 export default function Tuner51() {
-          const [mode, setMode] = useState('measure'); // measure, calculate, match, magnetometer, accelerometer, light, pressure, coherence
+          const [mode, setMode] = useState('measure'); // measure, calculate, match, magnetometer, accelerometer, light, pressure, coherence, temperature
           const [inputFreq, setInputFreq] = useState('');
           const [measuredFreq, setMeasuredFreq] = useState(null);
           const [isListening, setIsListening] = useState(false);
@@ -27,6 +27,8 @@ export default function Tuner51() {
           const [ambientLight, setAmbientLight] = useState(null);
           const [pressure, setPressure] = useState(null);
           const [showCoherenceExplainer, setShowCoherenceExplainer] = useState(false);
+          const [batteryInfo, setBatteryInfo] = useState(null);
+          const [thermalState, setThermalState] = useState(null);
           
           // COHERENCE MODE STATE
           const [coherenceScore, setCoherenceScore] = useState(null);
@@ -481,6 +483,47 @@ export default function Tuner51() {
         }
     };
 
+    // TEMPERATURE MONITOR - Battery thermal state
+    const startTemperatureMonitor = async () => {
+        try {
+            if ('getBattery' in navigator) {
+                const battery = await navigator.getBattery();
+
+                const updateBatteryInfo = () => {
+                    setBatteryInfo({
+                        level: (battery.level * 100).toFixed(0),
+                        charging: battery.charging,
+                        chargingTime: battery.chargingTime,
+                        dischargingTime: battery.dischargingTime
+                    });
+                };
+
+                updateBatteryInfo();
+                battery.addEventListener('levelchange', updateBatteryInfo);
+                battery.addEventListener('chargingchange', updateBatteryInfo);
+
+                setIsSensorActive(true);
+
+                // Estimate thermal state from discharge rate
+                const estimateThermal = () => {
+                    if (battery.dischargingTime < 7200 && !battery.charging) {
+                        setThermalState('hot'); // Draining fast = hot
+                    } else if (battery.dischargingTime < 14400 && !battery.charging) {
+                        setThermalState('warm');
+                    } else {
+                        setThermalState('normal');
+                    }
+                };
+
+                estimateThermal();
+            } else {
+                alert('Battery API not supported on this browser');
+            }
+        } catch (err) {
+            alert('Temperature monitoring not available');
+        }
+    };
+
     // CALCULATE RESONANCE MATCHES
     const calculateMatches = (freq) => {
         const f = parseFloat(freq);
@@ -873,6 +916,19 @@ export default function Tuner51() {
                         >
                             <Heart className="w-5 h-5 mx-auto mb-1 text-pink-400" />
                             <p className="text-white text-xs font-bold">COHERENCE</p>
+                        </motion.button>
+                        <motion.button
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            onClick={() => { setMode('temperature'); stopListening(); stopSensors(); }}
+                            className={`p-3 rounded-lg border-2 transition-all ${
+                                mode === 'temperature' 
+                                    ? 'bg-red-500/20 border-red-500' 
+                                    : 'bg-black border-gray-700 hover:border-gray-500'
+                            }`}
+                        >
+                            <Zap className="w-5 h-5 mx-auto mb-1 text-red-400" />
+                            <p className="text-white text-xs font-bold">TEMP</p>
                         </motion.button>
                         </div>
                 
@@ -1577,6 +1633,113 @@ export default function Tuner51() {
                 )}
                 </AnimatePresence>
 
+                {/* TEMPERATURE MONITOR MODE */}
+                <AnimatePresence mode="wait">
+                {mode === 'temperature' && (
+                    <motion.div
+                        key="temperature"
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: 20 }}
+                        className="space-y-6"
+                    >
+                        <div className="bg-gradient-to-r from-red-500/20 to-orange-500/20 border-2 border-red-500 rounded-xl p-6"
+                            style={{ boxShadow: '0 0 30px rgba(239, 68, 68, 0.3)' }}>
+                            <h2 className="text-xl font-black text-white mb-2">DEVICE TEMPERATURE</h2>
+                            <p className="text-gray-300 text-sm mb-4">
+                                Monitor phone heat when creating music/editing
+                            </p>
+
+                            {!isSensorActive ? (
+                                <>
+                                    <div className="bg-amber-900/20 border border-amber-500/50 p-3 rounded mb-4">
+                                        <p className="text-amber-400 text-xs font-bold mb-2">HOW IT WORKS:</p>
+                                        <p className="text-gray-300 text-xs">Uses Battery API to estimate thermal state from discharge rate. Fast drain = phone working hard = heat.</p>
+                                    </div>
+
+                                    <motion.button
+                                        whileHover={{ scale: 1.02 }}
+                                        whileTap={{ scale: 0.98 }}
+                                        onClick={startTemperatureMonitor}
+                                        className="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-4 rounded-lg transition-all"
+                                    >
+                                        <Zap className="w-6 h-6 inline-block mr-2" />
+                                        START TEMP MONITOR
+                                    </motion.button>
+                                </>
+                            ) : (
+                                <>
+                                    <motion.button
+                                        whileHover={{ scale: 1.02 }}
+                                        whileTap={{ scale: 0.98 }}
+                                        onClick={stopSensors}
+                                        className="w-full bg-gray-600 hover:bg-gray-700 text-white font-bold py-4 rounded-lg transition-all mb-4"
+                                    >
+                                        STOP
+                                    </motion.button>
+
+                                    {batteryInfo && (
+                                        <motion.div
+                                            initial={{ scale: 0.8, opacity: 0 }}
+                                            animate={{ scale: 1, opacity: 1 }}
+                                            className="space-y-3"
+                                        >
+                                            <div className={`border-2 rounded-lg p-4 ${
+                                                thermalState === 'hot' ? 'bg-red-900/40 border-red-500' :
+                                                thermalState === 'warm' ? 'bg-orange-900/40 border-orange-500' :
+                                                'bg-green-900/40 border-green-500'
+                                            }`}>
+                                                <p className={`text-sm mb-2 font-bold ${
+                                                    thermalState === 'hot' ? 'text-red-400' :
+                                                    thermalState === 'warm' ? 'text-orange-400' :
+                                                    'text-green-400'
+                                                }`}>THERMAL STATE:</p>
+                                                <p className={`text-5xl font-black ${
+                                                    thermalState === 'hot' ? 'text-red-400' :
+                                                    thermalState === 'warm' ? 'text-orange-400' :
+                                                    'text-green-400'
+                                                }`}>{thermalState?.toUpperCase()}</p>
+
+                                                {thermalState === 'hot' && (
+                                                    <p className="text-red-300 text-xs mt-3">⚠️ Phone working hard - consider a break</p>
+                                                )}
+                                                {thermalState === 'warm' && (
+                                                    <p className="text-orange-300 text-xs mt-3">⚡ Moderate usage - monitor if gets hotter</p>
+                                                )}
+                                                {thermalState === 'normal' && (
+                                                    <p className="text-green-300 text-xs mt-3">✓ Cool - safe to create</p>
+                                                )}
+                                            </div>
+
+                                            <div className="grid grid-cols-2 gap-2">
+                                                <div className="bg-black/40 border border-cyan-500/50 p-3 rounded">
+                                                    <p className="text-cyan-400 text-xs mb-1">BATTERY</p>
+                                                    <p className="text-white text-2xl font-bold">{batteryInfo.level}%</p>
+                                                </div>
+                                                <div className="bg-black/40 border border-purple-500/50 p-3 rounded">
+                                                    <p className="text-purple-400 text-xs mb-1">STATUS</p>
+                                                    <p className="text-white text-sm font-bold">{batteryInfo.charging ? 'Charging' : 'Draining'}</p>
+                                                </div>
+                                            </div>
+
+                                            <div className="bg-black/40 border border-pink-500/50 p-3 rounded">
+                                                <p className="text-pink-400 text-xs font-bold mb-2">COOL DOWN TIPS:</p>
+                                                <ul className="text-gray-300 text-xs space-y-1">
+                                                    <li>• Close unused apps (music production heavy)</li>
+                                                    <li>• Lower screen brightness</li>
+                                                    <li>• Remove phone case (better airflow)</li>
+                                                    <li>• Put on airplane mode when recording</li>
+                                                </ul>
+                                            </div>
+                                        </motion.div>
+                                    )}
+                                </>
+                            )}
+                        </div>
+                    </motion.div>
+                )}
+                </AnimatePresence>
+
                 {/* WHAT YOU CAN DO NOW */}
                 <div className="mt-8 bg-gradient-to-br from-green-500/20 to-cyan-500/20 border-2 border-green-500 rounded-xl p-6">
                     <h3 className="text-green-400 font-bold text-lg mb-3">WHAT YOU CAN DO NOW (WORKING):</h3>
@@ -1604,6 +1767,10 @@ export default function Tuner51() {
                         <div className="bg-black border border-yellow-500/30 p-3 rounded">
                             <p className="text-yellow-400 font-bold mb-1">6. CHECK LIGHTING HEALTH:</p>
                             <p className="text-gray-300 text-xs">Verify workspace brightness, circadian rhythm optimization</p>
+                        </div>
+                        <div className="bg-black border border-red-500/30 p-3 rounded">
+                            <p className="text-red-400 font-bold mb-1">7. MONITOR DEVICE HEAT:</p>
+                            <p className="text-gray-300 text-xs">Know when to take breaks during heavy creation (music, video editing)</p>
                         </div>
                     </div>
                 </div>
