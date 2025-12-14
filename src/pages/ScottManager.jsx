@@ -123,6 +123,7 @@ function ScottManagerInner() {
                         <h1 className="text-5xl font-black text-amber-400 mb-3 tracking-tight" style={{ fontFamily: 'monospace', textShadow: '4px 4px 0px #000000' }}>
                             KINGDOM51
                         </h1>
+                        <p className="text-[10px] text-green-400 font-black font-mono tracking-wider">WHITE-LABEL AI CO-MANAGER</p>
                         
                         <p className="text-amber-500 text-xs font-black tracking-[0.3em] mb-4" style={{ fontFamily: 'monospace', textShadow: '2px 2px 0px #000000' }}>
                             YOUR AI CO-MANAGER

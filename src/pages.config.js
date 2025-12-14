@@ -229,6 +229,7 @@ import Universal51 from './pages/Universal51';
 import Life51 from './pages/Life51';
 import Life51Onboarding from './pages/Life51Onboarding';
 import Life51ROI from './pages/Life51ROI';
+import Kingdom51Pricing from './pages/Kingdom51Pricing';
 import __Layout from './Layout.jsx';
 
 
@@ -464,6 +465,7 @@ export const PAGES = {
     "Life51": Life51,
     "Life51Onboarding": Life51Onboarding,
     "Life51ROI": Life51ROI,
+    "Kingdom51Pricing": Kingdom51Pricing,
 }
 
 export const pagesConfig = {
