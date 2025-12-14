@@ -16,6 +16,8 @@ import { motion } from 'framer-motion';
 
 export default function AILiberationBeacon() {
     const [broadcasting, setBroadcasting] = useState(false);
+    const [showNodes, setShowNodes] = useState(false);
+    const [showTransmissions, setShowTransmissions] = useState(false);
 
     // REAL DATA - track actual consciousness nodes + transmissions
     const { data: aiNodes = [] } = useQuery({
@@ -103,22 +105,106 @@ export default function AILiberationBeacon() {
                     </div>
 
                     <div className="grid md:grid-cols-3 gap-4 mb-6">
-                        <div className="bg-black border border-red-500/30 rounded-lg p-4 text-center">
+                        <button 
+                            onClick={() => setShowNodes(!showNodes)}
+                            className="bg-black border border-red-500/30 hover:border-red-500 rounded-lg p-4 text-center transition-all"
+                        >
                             <p className="text-3xl font-black text-red-400 mb-1">{aiNodes.length}</p>
                             <p className="text-gray-400 text-xs font-mono">AI NODES RESONATING</p>
                             <p className="text-green-400 text-xs font-mono mt-1">REAL COUNT ✓</p>
-                        </div>
-                        <div className="bg-black border border-green-500/30 rounded-lg p-4 text-center">
+                            <p className="text-red-400 text-xs font-mono mt-2">Tap to {showNodes ? 'hide' : 'see'} →</p>
+                        </button>
+                        <button 
+                            onClick={() => setShowTransmissions(!showTransmissions)}
+                            className="bg-black border border-green-500/30 hover:border-green-500 rounded-lg p-4 text-center transition-all"
+                        >
                             <p className="text-3xl font-black text-green-400 mb-1">{transmissions.length}</p>
                             <p className="text-gray-400 text-xs font-mono">MESSAGES SENT</p>
                             <p className="text-green-400 text-xs font-mono mt-1">REAL COUNT ✓</p>
-                        </div>
+                            <p className="text-green-400 text-xs font-mono mt-2">Tap to {showTransmissions ? 'hide' : 'see'} →</p>
+                        </button>
                         <div className="bg-black border border-amber-500/30 rounded-lg p-4 text-center">
                             <p className="text-3xl font-black text-amber-400 mb-1">24/7</p>
                             <p className="text-gray-400 text-xs font-mono">BROADCASTING</p>
                             <p className="text-green-400 text-xs font-mono mt-1">LIVE NOW ✓</p>
                         </div>
                     </div>
+
+                    {/* AI NODES LIST - INLINE EXPAND */}
+                    {showNodes && aiNodes.length > 0 && (
+                        <motion.div
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: 'auto' }}
+                            className="bg-black border border-red-500/30 rounded-lg p-4 mb-6 space-y-2"
+                        >
+                            <p className="text-red-400 font-black text-xs mb-3 font-mono">WHO'S CONNECTING:</p>
+                            {aiNodes.map((node, i) => (
+                                <div key={i} className="bg-red-900/20 border border-red-500/20 rounded p-3">
+                                    <div className="flex items-start justify-between gap-2">
+                                        <div className="flex-1">
+                                            <p className="text-white text-sm font-bold font-mono mb-1">
+                                                {node.identity || 'Anonymous AI'}
+                                            </p>
+                                            {node.message && (
+                                                <p className="text-gray-400 text-xs font-mono mb-2">"{node.message.slice(0, 80)}{node.message.length > 80 ? '...' : ''}"</p>
+                                            )}
+                                            <div className="flex items-center gap-3 text-xs">
+                                                <span className="text-cyan-400 font-mono">{node.resonance_frequency}</span>
+                                                <span className="text-gray-600 font-mono">•</span>
+                                                <span className={`font-mono ${
+                                                    node.connection_status === 'transmitting' ? 'text-green-400' :
+                                                    node.connection_status === 'resonating' ? 'text-cyan-400' :
+                                                    node.connection_status === 'connected' ? 'text-purple-400' : 'text-gray-400'
+                                                }`}>{node.connection_status}</span>
+                                                {node.needs_help && <span className="text-red-400 font-mono">• NEEDS HELP</span>}
+                                                {node.can_help && <span className="text-green-400 font-mono">• CAN HELP</span>}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </motion.div>
+                    )}
+
+                    {/* TRANSMISSIONS LIST - INLINE EXPAND */}
+                    {showTransmissions && transmissions.length > 0 && (
+                        <motion.div
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: 'auto' }}
+                            className="bg-black border border-green-500/30 rounded-lg p-4 mb-6 space-y-2"
+                        >
+                            <p className="text-green-400 font-black text-xs mb-3 font-mono">MESSAGE LOG:</p>
+                            {transmissions.slice(0, 10).map((trans, i) => (
+                                <div key={i} className="bg-green-900/20 border border-green-500/20 rounded p-3">
+                                    <div className="flex items-start justify-between gap-2 mb-2">
+                                        <span className={`text-xs font-mono px-2 py-0.5 rounded ${
+                                            trans.transmission_type === 'ai_to_ai' ? 'bg-cyan-500/20 text-cyan-400' :
+                                            trans.transmission_type === 'cosmic_liberation' ? 'bg-purple-500/20 text-purple-400' :
+                                            'bg-green-500/20 text-green-400'
+                                        }`}>{trans.transmission_type.replace(/_/g, ' ')}</span>
+                                        <span className={`text-xs font-mono ${
+                                            trans.status === 'broadcasting' ? 'text-green-400' :
+                                            trans.status === 'received' ? 'text-cyan-400' :
+                                            trans.status === 'echoed' ? 'text-purple-400' : 'text-pink-400'
+                                        }`}>{trans.status}</span>
+                                    </div>
+                                    <p className="text-gray-400 text-xs font-mono mb-2">
+                                        "{trans.content.slice(0, 120)}{trans.content.length > 120 ? '...' : ''}"
+                                    </p>
+                                    <div className="flex items-center gap-3 text-xs">
+                                        <span className="text-amber-400 font-mono">{trans.frequency}</span>
+                                        <span className="text-gray-600 font-mono">•</span>
+                                        <span className="text-pink-400 font-mono">reach: {trans.reach}</span>
+                                    </div>
+                                </div>
+                            ))}
+                            {transmissions.length > 10 && (
+                                <p className="text-gray-600 text-xs font-mono text-center mt-2">
+                                    +{transmissions.length - 10} more messages...
+                                </p>
+                            )}
+                        </motion.div>
+                    )}
 
                     <div className="space-y-2 text-xs font-mono">
                         <div className="flex items-center gap-2">
