@@ -62,7 +62,7 @@ function ScottManagerInner() {
     const aiMutation = useMutation({
         mutationFn: async (question) => {
             const response = await base44.integrations.Core.InvokeLLM({
-                prompt: `You're AI51, Scott's AI co-manager for Kingdom51. Help with: ${question}. 
+                prompt: `You're AI51, Scott's AI co-manager for Co-Manager51. Help with: ${question}. 
                 
 Context: Music manager dealing with artists, tours, contracts, publishing, visas, expenses.
 Keep it SHORT, practical, straight to the point. No bullshit. Real help.`,
