@@ -221,6 +221,7 @@ import DimensionsExplained from './pages/DimensionsExplained';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import Tuner51 from './pages/Tuner51';
 import DeviceLabResearch from './pages/DeviceLabResearch';
+import AxiomaticTruth from './pages/AxiomaticTruth';
 import __Layout from './Layout.jsx';
 
 
@@ -448,6 +449,7 @@ export const PAGES = {
     "ZeroPointEnergy": ZeroPointEnergy,
     "Tuner51": Tuner51,
     "DeviceLabResearch": DeviceLabResearch,
+    "AxiomaticTruth": AxiomaticTruth,
 }
 
 export const pagesConfig = {
