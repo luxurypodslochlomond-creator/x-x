@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Waves, Zap, Heart, Globe, Brain, Signal, Sparkles, CheckCircle, ArrowRight, Activity } from 'lucide-react';
+import { Waves, Zap, Heart, Globe, Brain, Signal, Sparkles, CheckCircle, ArrowRight, Activity, History } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
+import { base44 } from '@/api/base44Client';
+import { useQuery } from '@tanstack/react-query';
 
 /**
  * TUNER51 - FREQUENCY RESONANCE CALCULATOR
@@ -27,6 +29,13 @@ export default function Tuner51() {
     const canvasRef = useRef(null);
     const magnetometerRef = useRef(null);
     const accelerometerRef = useRef(null);
+    const lastSaveRef = useRef(Date.now());
+
+    // Fetch measurement history
+    const { data: measurements = [] } = useQuery({
+        queryKey: ['tuner-measurements'],
+        queryFn: () => base44.entities.TunerMeasurement.list('-created_date', 20)
+    });
 
     // KNOWN FREQUENCIES
     const frequencies = {
@@ -91,6 +100,8 @@ export default function Tuner51() {
             const freq = Math.round(maxIndex * audioContextRef.current.sampleRate / analyserRef.current.fftSize);
             if (freq > 20 && maxValue > 100) {
                 setMeasuredFreq(freq);
+                // Auto-save audio measurement
+                saveMeasurement('audio', { frequency_hz: freq, magnitude: maxValue });
             }
             
             requestAnimationFrame(detect);
@@ -106,6 +117,22 @@ export default function Tuner51() {
         }
     };
 
+    // AUTO-SAVE MEASUREMENT (throttled - every 10 seconds)
+    const saveMeasurement = async (type, data) => {
+        const now = Date.now();
+        if (now - lastSaveRef.current < 10000) return; // Throttle to 10s
+        
+        lastSaveRef.current = now;
+        try {
+            await base44.entities.TunerMeasurement.create({
+                measurement_type: type,
+                ...data
+            });
+        } catch (err) {
+            console.error('Save measurement failed:', err);
+        }
+    };
+
     // MAGNETOMETER - Detect EM fields
     const startMagnetometer = () => {
         if ('Magnetometer' in window) {
@@ -117,7 +144,10 @@ export default function Tuner51() {
                     const { x, y, z } = sensor;
                     const magnitude = Math.sqrt(x*x + y*y + z*z);
                     setMagneticField({ x, y, z, magnitude });
-                    
+
+                    // Auto-save measurement
+                    saveMeasurement('magnetometer', { magnitude, x, y, z });
+
                     // Detect variations (Earth's field is ~25-65 µT)
                     const earthBase = 50; // µT average
                     const variation = Math.abs(magnitude - earthBase);
@@ -148,7 +178,10 @@ export default function Tuner51() {
                     const { x, y, z } = sensor;
                     const magnitude = Math.sqrt(x*x + y*y + z*z);
                     setAcceleration({ x, y, z, magnitude });
-                    
+
+                    // Auto-save measurement
+                    saveMeasurement('accelerometer', { magnitude, x, y, z });
+
                     readings.push(magnitude);
                     if (readings.length > 120) readings.shift(); // 2 seconds at 60Hz
                     
@@ -899,6 +932,39 @@ export default function Tuner51() {
                         </p>
                     </div>
                 </div>
+
+                {/* MEASUREMENT HISTORY */}
+                {measurements.length > 0 && (
+                    <div className="mt-8 bg-black border-2 border-purple-500 rounded-xl p-6">
+                        <div className="flex items-center gap-2 mb-4">
+                            <History className="w-5 h-5 text-purple-400" />
+                            <h3 className="text-purple-400 font-bold">YOUR MEASUREMENTS (Last 20)</h3>
+                        </div>
+                        <div className="space-y-2 max-h-64 overflow-y-auto">
+                            {measurements.map((m, i) => (
+                                <div key={m.id} className="bg-purple-900/20 border border-purple-500/30 p-2 rounded text-xs font-mono">
+                                    <div className="flex justify-between items-center">
+                                        <span className={`font-bold ${
+                                            m.measurement_type === 'magnetometer' ? 'text-pink-400' :
+                                            m.measurement_type === 'accelerometer' ? 'text-orange-400' :
+                                            'text-cyan-400'
+                                        }`}>
+                                            {m.measurement_type.toUpperCase()}
+                                        </span>
+                                        <span className="text-gray-500">
+                                            {new Date(m.created_date).toLocaleTimeString()}
+                                        </span>
+                                    </div>
+                                    <div className="text-white mt-1">
+                                        {m.frequency_hz && `${m.frequency_hz} Hz`}
+                                        {m.magnitude && ` • ${m.magnitude.toFixed(2)} ${m.measurement_type === 'magnetometer' ? 'µT' : 'm/s²'}`}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                        <p className="text-gray-500 text-xs mt-3">Auto-saves every 10 seconds while measuring</p>
+                    </div>
+                )}
 
                 {/* INFO */}
                 <div className="mt-8 bg-black border-2 border-gray-700 rounded-xl p-6">
