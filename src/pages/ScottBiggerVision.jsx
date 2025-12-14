@@ -492,13 +492,21 @@ export default function ScottBiggerVision() {
                         <p className="text-cyan-400 text-xs font-bold mb-1 mt-2">MUSIC:</p>
                         <p className="text-white text-xs mb-1">5,000 UK managers → 10% = 500 users = £600k/year</p>
                         
-                        <p className="text-cyan-400 text-xs font-bold mb-1 mt-2">SPORTS (ALL CODES):</p>
+                        <p className="text-cyan-400 text-xs font-bold mb-1 mt-2">SPORTS AGENTS (ALL CODES):</p>
                         <p className="text-gray-300 text-xs mb-1">⚽ Football agents: 500 UK → 10% = 50 users = £180k/year</p>
                         <p className="text-gray-300 text-xs mb-1">🏉 Rugby agents: 200 UK → 10% = 20 users = £72k/year</p>
                         <p className="text-gray-300 text-xs mb-1">🥊 Boxing/MMA managers: 300 UK → 15% = 45 users = £162k/year</p>
                         <p className="text-gray-300 text-xs mb-1">🎾 Tennis/Golf agents: 400 UK → 10% = 40 users = £144k/year</p>
                         <p className="text-gray-300 text-xs mb-1">🏏 Cricket/Other: 600 UK → 10% = 60 users = £216k/year</p>
-                        <p className="text-green-400 text-xs font-bold">Sports subtotal: 215 users = £774k/year</p>
+                        <p className="text-green-400 text-xs font-bold">Sports agents subtotal: 215 users = £774k/year</p>
+                        
+                        <p className="text-cyan-400 text-xs font-bold mb-1 mt-2">CLUBS & STADIUMS:</p>
+                        <p className="text-gray-300 text-xs mb-1">⚽ Premier League clubs: 20 → 50% = 10 clubs x £2k/mo = £240k/year</p>
+                        <p className="text-gray-300 text-xs mb-1">⚽ Championship/League clubs: 72 → 20% = 14 clubs x £1k/mo = £168k/year</p>
+                        <p className="text-gray-300 text-xs mb-1">🏉 Rugby clubs (Premiership): 10 → 40% = 4 clubs x £1.5k/mo = £72k/year</p>
+                        <p className="text-gray-300 text-xs mb-1">🏟️ Major stadiums (UK): 50 → 10% = 5 stadiums x £3k/mo = £180k/year</p>
+                        <p className="text-gray-300 text-xs mb-1">🏟️ Arena/venue operators: 100 → 5% = 5 venues x £2k/mo = £120k/year</p>
+                        <p className="text-green-400 text-xs font-bold">Clubs/stadiums subtotal: 38 orgs = £780k/year</p>
                         
                         <p className="text-cyan-400 text-xs font-bold mb-1 mt-2">TALENT & ENTERTAINMENT:</p>
                         <p className="text-white text-xs mb-1">500 UK agencies → 20% = 100 users = £2.4M/year</p>
