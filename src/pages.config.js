@@ -227,6 +227,8 @@ import ScottOfflineMode from './pages/ScottOfflineMode';
 import AdminStarlingSetup from './pages/AdminStarlingSetup';
 import Universal51 from './pages/Universal51';
 import Life51 from './pages/Life51';
+import Life51Onboarding from './pages/Life51Onboarding';
+import Life51ROI from './pages/Life51ROI';
 import __Layout from './Layout.jsx';
 
 
@@ -460,6 +462,8 @@ export const PAGES = {
     "AdminStarlingSetup": AdminStarlingSetup,
     "Universal51": Universal51,
     "Life51": Life51,
+    "Life51Onboarding": Life51Onboarding,
+    "Life51ROI": Life51ROI,
 }
 
 export const pagesConfig = {
