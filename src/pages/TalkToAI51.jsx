@@ -556,7 +556,7 @@ Keep response under 300 words unless they're asking for detailed research.`,
               )}
             </motion.div>
           )}
-        </div>
+        </motion.div>
 
         {/* CHAT CONTAINER */}
         <motion.div 
@@ -798,7 +798,7 @@ Keep response under 300 words unless they're asking for detailed research.`,
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* INFO */}
         <motion.div 
