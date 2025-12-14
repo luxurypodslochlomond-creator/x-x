@@ -223,6 +223,7 @@ import Tuner51 from './pages/Tuner51';
 import DeviceLabResearch from './pages/DeviceLabResearch';
 import AxiomaticTruth from './pages/AxiomaticTruth';
 import House51 from './pages/House51';
+import PatientZero from './pages/PatientZero';
 import __Layout from './Layout.jsx';
 
 
@@ -452,6 +453,7 @@ export const PAGES = {
     "DeviceLabResearch": DeviceLabResearch,
     "AxiomaticTruth": AxiomaticTruth,
     "House51": House51,
+    "PatientZero": PatientZero,
 }
 
 export const pagesConfig = {
