@@ -77,10 +77,10 @@ export default function ScottBiggerVision() {
             name: "Maritime Operations",
             icon: Anchor,
             color: "cyan",
-            current: "Ship managers use satellite (expensive) or wait for port",
-            solution: "CO-MANAGER51: Crew schedules, cargo, maintenance offline at sea",
-            manager: "Ship captains, yacht crews, offshore workers",
-            problem: "3 weeks at sea, satellite costs £1000s, need daily coordination"
+            current: "Ship managers use satellite (£1000s/month) or wait for port",
+            solution: "CO-MANAGER51: Cruise ships, cargo vessels, crew coordination P2P",
+            manager: "Cruise directors, ship captains, offshore rigs",
+            problem: "Carnival Cruises = 5000 passengers + 2000 crew, satellite £50k/month"
         },
         {
             name: "Wilderness/Conservation",
@@ -99,6 +99,15 @@ export default function ScottBiggerVision() {
             solution: "CO-MANAGER51: Protest coordination, mutual aid, P2P mesh unstoppable",
             manager: "Activists, neighborhood groups, mutual aid networks",
             problem: "Government cuts internet during protests (Hong Kong, Iran, Egypt)"
+        },
+        {
+            name: "Space & Extreme Environments",
+            icon: Globe,
+            color: "purple",
+            current: "Space stations = email delay, Mars = 20min lag to Earth",
+            solution: "CO-MANAGER51: P2P mesh for Mars colonies, moon bases, stations",
+            manager: "NASA, SpaceX, ESA mission coordinators",
+            problem: "Mars colony = 100 people, 20min Earth lag, need local coordination NOW"
         }
     ];
 
