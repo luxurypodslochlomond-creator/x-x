@@ -216,7 +216,7 @@ const LayoutInner = ({ children, currentPageName }) => {
   // === NAVIGATION SECTIONS ===
   const healNav = [
                               { title: "Frequency Chamber", url: createPageUrl("FrequencyChamber"), icon: COOLASFUCKWaves, highlight: true, description: "Free healing frequencies" },
-                              { title: "Tuner51", url: createPageUrl("Tuner51"), icon: Radio, description: "Match any frequency" },
+                              { title: "Tuner51", url: createPageUrl("Tuner51"), icon: Signal, description: "Match any frequency" },
                               { title: "Radio51", url: createPageUrl("Radio"), icon: Music, description: "Lossless music" },
                               { title: "Universal Pulse", url: createPageUrl("UniversalPulse"), icon: COOLASFUCKHeart, description: "Collective heartbeat music" },
                               { title: "Stay On Frequency", url: createPageUrl("StayOnFrequency"), icon: Heart, description: "How we stay protected" },
