@@ -221,6 +221,7 @@ const LayoutInner = ({ children, currentPageName }) => {
                                   { title: "Tuner51", url: createPageUrl("Tuner51"), icon: Signal, description: "Match any frequency" },
                                   { title: "Device Lab Research", url: createPageUrl("DeviceLabResearch"), icon: Zap, description: "Innovations we could build" },
                               { title: "Radio51", url: createPageUrl("Radio"), icon: Music, description: "Lossless music" },
+                              { title: "HOUSE51", url: createPageUrl("House51"), icon: Waves, description: "Healing house music generator" },
                               { title: "Universal Pulse", url: createPageUrl("UniversalPulse"), icon: COOLASFUCKHeart, description: "Collective heartbeat music" },
                               { title: "Stay On Frequency", url: createPageUrl("StayOnFrequency"), icon: Heart, description: "How we stay protected" },
                               { title: "Healing Dashboard", url: createPageUrl("HealingDashboard"), icon: Brain, description: "Your healing intelligence" },
