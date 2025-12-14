@@ -281,9 +281,9 @@ const LayoutInner = ({ children, currentPageName }) => {
     { title: "Privacy", url: createPageUrl("PrivacyPolicy"), icon: Eye },
   ];
 
-  // KINGDOM51 - Will move to separate subdomain later
+  // CO-MANAGER51 - Will move to separate subdomain later
   const scottNav = user?.role === 'admin' ? [
-    { title: "KINGDOM51", url: createPageUrl("ScottManager"), icon: User, description: "Your AI co-manager" },
+    { title: "CO-MANAGER51", url: createPageUrl("ScottManager"), icon: User, description: "Your AI co-manager" },
   ] : [];
 
   const adminNav = user?.role === 'admin' ? [
@@ -383,7 +383,7 @@ const LayoutInner = ({ children, currentPageName }) => {
                         {scottNav.length > 0 && (
                           <>
                             <div className="h-px bg-amber-500/30 my-3" />
-                            <NavSection title="KINGDOM51" color="green" emoji="👑" items={scottNav} isActivePage={isActivePage} isMobile />
+                            <NavSection title="CO-MANAGER51" color="green" emoji="👑" items={scottNav} isActivePage={isActivePage} isMobile />
                           </>
                         )}
 
@@ -448,7 +448,7 @@ const LayoutInner = ({ children, currentPageName }) => {
             {scottNav.length > 0 && (
               <>
                 <div className="h-px bg-amber-500/30 my-4" />
-                <NavSection title="KINGDOM51" color="green" emoji="👑" items={scottNav} isActivePage={isActivePage} />
+                <NavSection title="CO-MANAGER51" color="green" emoji="👑" items={scottNav} isActivePage={isActivePage} />
               </>
             )}
 
