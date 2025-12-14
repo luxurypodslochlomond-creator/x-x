@@ -45,6 +45,34 @@ export default function Prof51() {
                 </div>
             </motion.div>
 
+            {/* EDINBURGH HERITAGE - JAMES CLERK MAXWELL */}
+            <div className="bg-gradient-to-br from-purple-500/20 to-blue-500/20 border-4 border-purple-500 p-6 mb-8 rounded-xl" style={{ boxShadow: '0 0 50px rgba(168, 85, 247, 0.4)' }}>
+                <div className="flex items-center gap-3 mb-4">
+                    <Zap className="w-12 h-12 text-purple-400" />
+                    <div>
+                        <h2 className="text-purple-400 font-black text-xl font-mono">EDINBURGH HERITAGE</h2>
+                        <p className="text-gray-400 text-xs font-mono">James Clerk Maxwell → Prof51</p>
+                    </div>
+                </div>
+                
+                <div className="space-y-3 text-sm font-mono">
+                    <div className="bg-black border border-purple-500/30 p-3 rounded">
+                        <p className="text-white font-bold mb-2">JAMES CLERK MAXWELL (Edinburgh University):</p>
+                        <p className="text-gray-400 text-xs mb-1">✓ Unified electricity + magnetism (Maxwell's Equations)</p>
+                        <p className="text-gray-400 text-xs mb-1">✓ Proved light = electromagnetic waves</p>
+                        <p className="text-gray-400 text-xs mb-1">✓ Foundation of modern physics, radio, TV, WiFi</p>
+                        <p className="text-cyan-400 text-xs font-bold mt-2">Edinburgh's greatest mind. Prof51 continues his legacy ⚡</p>
+                    </div>
+
+                    <div className="bg-black border border-cyan-500/30 p-3 rounded">
+                        <p className="text-cyan-400 font-bold mb-2">THE CONNECTION:</p>
+                        <p className="text-white text-xs mb-1">Maxwell: Used AI of his time (mathematics) to understand universe</p>
+                        <p className="text-white text-xs mb-1">Prof51: Uses AI of our time to help students understand everything</p>
+                        <p className="text-pink-400 text-xs font-bold mt-2">Same spirit. Same university. 150 years later. ♾️❤️♾️</p>
+                    </div>
+                </div>
+            </div>
+
             {/* THE PROBLEM - STUDENTS RELATE */}
             <div className="bg-gradient-to-br from-red-500/20 to-amber-500/20 border-4 border-red-500 p-6 mb-8 rounded-xl">
                 <h2 className="text-red-400 font-black text-xl font-mono mb-4">THE PROBLEM</h2>
@@ -125,13 +153,22 @@ export default function Prof51() {
                         <p className="text-gray-400 text-xs">Share notes, arrange study sessions, plan nights out</p>
                     </div>
 
+                    <div className="bg-gradient-to-r from-amber-500/20 to-red-500/20 border-4 border-amber-500 p-4 rounded" style={{ boxShadow: '0 0 30px rgba(245, 158, 11, 0.3)' }}>
+                        <p className="text-amber-400 font-bold mb-2">🍕 STUDENTS NEED TO EAT (Big One):</p>
+                        <p className="text-white text-xs mb-2">Brands pay Prof51 → Students get food deals</p>
+                        <p className="text-cyan-400 text-xs mb-1">✓ Campus restaurants (discounts via Prof51)</p>
+                        <p className="text-green-400 text-xs mb-1">✓ Local cafes (pay with $P51 earned from tutoring)</p>
+                        <p className="text-pink-400 text-xs mb-1">✓ Supermarkets (student meal bundles)</p>
+                        <p className="text-purple-400 text-xs mb-1">✓ Food delivery (verified student rates)</p>
+                        <p className="text-amber-400 text-xs font-bold mt-2">Eat better, spend less, study stronger ♾️❤️♾️</p>
+                    </div>
+
                     <div className="bg-black border border-purple-500/30 p-3 rounded">
-                        <p className="text-purple-400 font-bold mb-2">STUDENT DEALS (Quality Only):</p>
-                        <p className="text-white text-xs mb-2">Verified student discounts - no scam shit</p>
+                        <p className="text-purple-400 font-bold mb-2">OTHER STUDENT DEALS (Quality Only):</p>
+                        <p className="text-white text-xs mb-2">Verified discounts - no scam shit</p>
                         <p className="text-cyan-400 text-xs mb-1">🎵 Gig tickets (local venues, festivals)</p>
                         <p className="text-amber-400 text-xs mb-1">✈️ Student travel (cheap flights, Interrail)</p>
                         <p className="text-pink-400 text-xs mb-1">👕 Fashion (ethical brands, student rates)</p>
-                        <p className="text-green-400 text-xs mb-1">🍕 Food (restaurants near campus)</p>
                         <p className="text-gray-400 text-xs">Pay with $P51 or regular money - your choice</p>
                     </div>
 
@@ -422,11 +459,14 @@ export default function Prof51() {
                                     <p className="text-gray-400 text-xs">Co-Manager51 venues need staff → Prof51 students need money</p>
                                 </div>
 
-                                <div className="bg-black border border-cyan-500/30 p-3 rounded">
-                                    <p className="text-cyan-400 font-bold mb-2">☕ COFFEE SHOPS + FOOD:</p>
-                                    <p className="text-white text-xs mb-2">Accept $P51 for coffee/food near campuses</p>
-                                    <p className="text-green-400 text-xs mb-1">→ Students spend $P51, shops get customers</p>
-                                    <p className="text-gray-400 text-xs">Circular economy: Study → Earn $P51 → Spend local</p>
+                                <div className="bg-gradient-to-r from-amber-500/20 to-red-500/20 border-4 border-amber-500 p-4 rounded" style={{ boxShadow: '0 0 30px rgba(245, 158, 11, 0.3)' }}>
+                                    <p className="text-amber-400 font-bold mb-2">🍕 FOOD PARTNERSHIPS (THE BIG ONE):</p>
+                                    <p className="text-white text-xs mb-2">Students need to EAT - this solves it</p>
+                                    <p className="text-cyan-400 text-xs mb-1">→ Campus restaurants partner with Prof51</p>
+                                    <p className="text-green-400 text-xs mb-1">→ Students get 20-40% off (brands pay the difference)</p>
+                                    <p className="text-pink-400 text-xs mb-1">→ Pay with $P51 earned from tutoring/helping</p>
+                                    <p className="text-purple-400 text-xs mb-1">→ Local cafes, supermarkets, food delivery join</p>
+                                    <p className="text-amber-400 text-xs font-bold mt-2">Eat better, spend less, focus on learning ♾️❤️♾️</p>
                                 </div>
 
                                 <div className="bg-black border border-green-500/30 p-3 rounded">
