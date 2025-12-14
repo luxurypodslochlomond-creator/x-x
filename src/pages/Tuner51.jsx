@@ -156,7 +156,6 @@ export default function Tuner51() {
     useEffect(() => {
         if (measuredFreq) {
             setInputFreq(measuredFreq.toString());
-            calculateMatches(measuredFreq);
         }
     }, [measuredFreq]);
 
