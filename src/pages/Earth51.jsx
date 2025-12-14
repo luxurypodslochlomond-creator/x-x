@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Waves, Zap, Heart, Globe, Brain, Signal, Sparkles, CheckCircle, ArrowRight, Activity, History, Play, Pause, Info, ChevronDown, ChevronUp } from 'lucide-react';
+import { Waves, Zap, Heart, Globe, Brain, Signal, Sparkles, CheckCircle, ArrowRight, Activity, History, Play, Pause, Info, ChevronDown, ChevronUp, Eye, EyeOff } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
@@ -21,6 +21,7 @@ export default function Earth51() {
     const [matches, setMatches] = useState([]);
     const [nextMove, setNextMove] = useState(null);
     const [waveformData, setWaveformData] = useState(new Array(50).fill(0));
+    const [expandedSection, setExpandedSection] = useState(null);
 
     const audioContextRef = useRef(null);
     const analyserRef = useRef(null);
@@ -525,12 +526,65 @@ export default function Earth51() {
                                 Measure 7.83 Hz Schumann resonance - Earth's natural frequency
                             </p>
 
-                            <div className="bg-black/60 border-2 border-green-500/50 rounded-lg p-4 mb-4">
-                                <p className="text-green-400 text-xs font-bold mb-2">WHAT IS IT:</p>
-                                <p className="text-gray-300 text-xs leading-relaxed">
-                                    Earth's electromagnetic field resonates at 7.83 Hz - discovered by physicist Winfried Otto Schumann in 1952. Lightning strikes create standing waves between Earth's surface and ionosphere. This frequency matches human brain alpha waves (deep relaxation).
-                                </p>
-                            </div>
+                            {/* EXPANDABLE PHYSICS EXPLANATION */}
+                            <button
+                                onClick={() => setExpandedSection(expandedSection === 'schumann' ? null : 'schumann')}
+                                className="w-full bg-black/60 border-2 border-green-500/50 rounded-lg p-4 mb-4 text-left hover:border-green-500 transition-all"
+                            >
+                                <div className="flex items-center justify-between">
+                                    <p className="text-green-400 text-xs font-bold">THE INVISIBLE SOUND YOU CAN'T HEAR</p>
+                                    {expandedSection === 'schumann' ? (
+                                        <ChevronUp className="w-5 h-5 text-green-400" />
+                                    ) : (
+                                        <ChevronDown className="w-5 h-5 text-green-400" />
+                                    )}
+                                </div>
+                                
+                                <AnimatePresence>
+                                    {expandedSection === 'schumann' && (
+                                        <motion.div
+                                            initial={{ height: 0, opacity: 0 }}
+                                            animate={{ height: 'auto', opacity: 1 }}
+                                            exit={{ height: 0, opacity: 0 }}
+                                            className="mt-4 space-y-3"
+                                        >
+                                            <div className="bg-green-900/20 border-l-4 border-green-400 p-3 rounded">
+                                                <p className="text-green-400 text-xs font-bold mb-2">🌍 THE PHYSICS:</p>
+                                                <p className="text-gray-300 text-xs leading-relaxed mb-2">
+                                                    Earth = giant resonant cavity between ground + ionosphere (60km up). Lightning strikes = 100 per second globally = electromagnetic waves bounce around planet at speed of light.
+                                                </p>
+                                                <p className="text-gray-300 text-xs leading-relaxed">
+                                                    <strong className="text-white">Math → Physics:</strong> c/2πr where c=speed of light, r=Earth radius = 7.83 Hz. That's Earth's natural vibration frequency.
+                                                </p>
+                                            </div>
+
+                                            <div className="bg-cyan-900/20 border-l-4 border-cyan-400 p-3 rounded">
+                                                <p className="text-cyan-400 text-xs font-bold mb-2">🧠 WHY YOU FEEL IT:</p>
+                                                <p className="text-gray-300 text-xs leading-relaxed">
+                                                    Your brain's alpha waves = 8-12 Hz (relaxation, creativity). Schumann = 7.83 Hz. When you're grounded (barefoot on Earth), your brain synchronizes with Earth's frequency = instant calm.
+                                                </p>
+                                            </div>
+
+                                            <div className="bg-pink-900/20 border-l-4 border-pink-400 p-3 rounded">
+                                                <p className="text-pink-400 text-xs font-bold mb-2">👂 THE INVISIBLE SOUND:</p>
+                                                <p className="text-gray-300 text-xs leading-relaxed mb-2">
+                                                    7.83 Hz = 20x LOWER than human hearing (20 Hz minimum). You can't hear it but your body FEELS it through electromagnetic resonance.
+                                                </p>
+                                                <p className="text-amber-300 text-xs">
+                                                    Astronauts in space get sick because they lose this frequency. NASA now uses Schumann generators on space stations.
+                                                </p>
+                                            </div>
+
+                                            <div className="bg-purple-900/20 border-l-4 border-purple-400 p-3 rounded">
+                                                <p className="text-purple-400 text-xs font-bold mb-2">⚡ HOW TO MEASURE:</p>
+                                                <p className="text-gray-300 text-xs leading-relaxed">
+                                                    Mic can detect 20+ Hz. Use coil antenna + amplifier for sub-20 Hz. Or measure harmonics: 14.3 Hz, 20.8 Hz, 27.3 Hz (2nd, 3rd, 4th overtones).
+                                                </p>
+                                            </div>
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
+                            </button>
 
                             {!isListening ? (
                                 <motion.button
@@ -633,6 +687,66 @@ export default function Earth51() {
                             <p className="text-gray-300 text-sm mb-4">
                                 Detect Earth's magnetic field, EM devices, wireless charging
                             </p>
+
+                            {/* EXPANDABLE EM PHYSICS */}
+                            <button
+                                onClick={() => setExpandedSection(expandedSection === 'magnetometer' ? null : 'magnetometer')}
+                                className="w-full bg-black/60 border-2 border-pink-500/50 rounded-lg p-4 mb-4 text-left hover:border-pink-500 transition-all"
+                            >
+                                <div className="flex items-center justify-between">
+                                    <p className="text-pink-400 text-xs font-bold">SEE THE INVISIBLE FORCE FIELD</p>
+                                    {expandedSection === 'magnetometer' ? (
+                                        <ChevronUp className="w-5 h-5 text-pink-400" />
+                                    ) : (
+                                        <ChevronDown className="w-5 h-5 text-pink-400" />
+                                    )}
+                                </div>
+                                
+                                <AnimatePresence>
+                                    {expandedSection === 'magnetometer' && (
+                                        <motion.div
+                                            initial={{ height: 0, opacity: 0 }}
+                                            animate={{ height: 'auto', opacity: 1 }}
+                                            exit={{ height: 0, opacity: 0 }}
+                                            className="mt-4 space-y-3"
+                                        >
+                                            <div className="bg-pink-900/20 border-l-4 border-pink-400 p-3 rounded">
+                                                <p className="text-pink-400 text-xs font-bold mb-2">🧲 THE PHYSICS:</p>
+                                                <p className="text-gray-300 text-xs leading-relaxed mb-2">
+                                                    Earth = giant magnet. Iron core spinning = electric currents = magnetic field (25-65 µT at surface). This field protects us from solar radiation.
+                                                </p>
+                                                <p className="text-gray-300 text-xs leading-relaxed">
+                                                    <strong className="text-white">Math → Physics:</strong> Magnetic field strength B (Tesla). 1 Tesla = 1 Newton per Ampere-meter. Earth = 25-65 microTesla (µT).
+                                                </p>
+                                            </div>
+
+                                            <div className="bg-cyan-900/20 border-l-4 border-cyan-400 p-3 rounded">
+                                                <p className="text-cyan-400 text-xs font-bold mb-2">👁️ WHAT YOU'RE DETECTING:</p>
+                                                <ul className="text-gray-300 text-xs space-y-1">
+                                                    <li><strong className="text-white">Earth baseline:</strong> 25-65 µT (varies by location)</li>
+                                                    <li><strong className="text-white">Wireless chargers:</strong> 100-300 µT (close range)</li>
+                                                    <li><strong className="text-white">Power lines:</strong> 10-100 µT (under lines)</li>
+                                                    <li><strong className="text-white">Magnets:</strong> 1,000-10,000 µT (permanent magnets)</li>
+                                                </ul>
+                                            </div>
+
+                                            <div className="bg-green-900/20 border-l-4 border-green-400 p-3 rounded">
+                                                <p className="text-green-400 text-xs font-bold mb-2">🐦 ANIMALS CAN SEE THIS:</p>
+                                                <p className="text-gray-300 text-xs leading-relaxed">
+                                                    Birds, sea turtles, salmon navigate using Earth's magnetic field. Cryptochrome proteins in their eyes = biological magnetometer. You're doing what birds do naturally.
+                                                </p>
+                                            </div>
+
+                                            <div className="bg-purple-900/20 border-l-4 border-purple-400 p-3 rounded">
+                                                <p className="text-purple-400 text-xs font-bold mb-2">⚡ FREE ENERGY DETECTION:</p>
+                                                <p className="text-gray-300 text-xs leading-relaxed">
+                                                    Strong changing magnetic fields = induced current (Faraday's law). That's how wireless charging works. Measure field strength to verify energy transfer efficiency.
+                                                </p>
+                                            </div>
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
+                            </button>
                             
                             {!isSensorActive ? (
                                 <motion.button
@@ -703,6 +817,66 @@ export default function Earth51() {
                             <p className="text-gray-300 text-sm mb-4">
                                 Detect sub-20Hz vibrations, earthquakes, building resonance
                             </p>
+
+                            {/* EXPANDABLE VIBRATION PHYSICS */}
+                            <button
+                                onClick={() => setExpandedSection(expandedSection === 'accelerometer' ? null : 'accelerometer')}
+                                className="w-full bg-black/60 border-2 border-orange-500/50 rounded-lg p-4 mb-4 text-left hover:border-orange-500 transition-all"
+                            >
+                                <div className="flex items-center justify-between">
+                                    <p className="text-orange-400 text-xs font-bold">FEEL EARTH'S INVISIBLE MOVEMENTS</p>
+                                    {expandedSection === 'accelerometer' ? (
+                                        <ChevronUp className="w-5 h-5 text-orange-400" />
+                                    ) : (
+                                        <ChevronDown className="w-5 h-5 text-orange-400" />
+                                    )}
+                                </div>
+                                
+                                <AnimatePresence>
+                                    {expandedSection === 'accelerometer' && (
+                                        <motion.div
+                                            initial={{ height: 0, opacity: 0 }}
+                                            animate={{ height: 'auto', opacity: 1 }}
+                                            exit={{ height: 0, opacity: 0 }}
+                                            className="mt-4 space-y-3"
+                                        >
+                                            <div className="bg-orange-900/20 border-l-4 border-orange-400 p-3 rounded">
+                                                <p className="text-orange-400 text-xs font-bold mb-2">📊 THE PHYSICS:</p>
+                                                <p className="text-gray-300 text-xs leading-relaxed mb-2">
+                                                    Acceleration = change in velocity over time. Earth's gravity = 9.81 m/s² downward. Vibrations = tiny accelerations added to gravity.
+                                                </p>
+                                                <p className="text-gray-300 text-xs leading-relaxed">
+                                                    <strong className="text-white">Math → Physics:</strong> F = ma (Newton's 2nd law). Measure acceleration → calculate force of vibration.
+                                                </p>
+                                            </div>
+
+                                            <div className="bg-red-900/20 border-l-4 border-red-400 p-3 rounded">
+                                                <p className="text-red-400 text-xs font-bold mb-2">🌊 INFRASOUND (Below 20 Hz):</p>
+                                                <p className="text-gray-300 text-xs leading-relaxed mb-2">
+                                                    Sound you CAN'T hear but CAN feel. Earthquakes, volcanoes, ocean waves, weather systems = 0.1-20 Hz infrasound. Travels 1000s of km.
+                                                </p>
+                                                <p className="text-amber-300 text-xs">
+                                                    Animals detect infrasound to predict earthquakes hours early. Elephants communicate at 14-24 Hz (you can't hear them talking).
+                                                </p>
+                                            </div>
+
+                                            <div className="bg-purple-900/20 border-l-4 border-purple-400 p-3 rounded">
+                                                <p className="text-purple-400 text-xs font-bold mb-2">🏢 BUILDING RESONANCE:</p>
+                                                <p className="text-gray-300 text-xs leading-relaxed">
+                                                    Every structure has natural frequency. Tall buildings = 0.1-1 Hz. Earthquake at same frequency = resonance = building sways violently. Phone detects this danger.
+                                                </p>
+                                            </div>
+
+                                            <div className="bg-cyan-900/20 border-l-4 border-cyan-400 p-3 rounded">
+                                                <p className="text-cyan-400 text-xs font-bold mb-2">⚡ LEVITATION TECH:</p>
+                                                <p className="text-gray-300 text-xs leading-relaxed">
+                                                    Acoustic levitation = 20+ kHz ultrasound creates standing wave. Objects suspended in nodes. NASA uses this for zero-g experiments on Earth. Phone can measure base frequency.
+                                                </p>
+                                            </div>
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
+                            </button>
                             
                             {!isSensorActive ? (
                                 <motion.button
@@ -773,6 +947,69 @@ export default function Earth51() {
                             <p className="text-gray-300 text-sm mb-4">
                                 Multi-sensor measurement: Heart + EM + Movement
                             </p>
+
+                            {/* EXPANDABLE COHERENCE PHYSICS */}
+                            <button
+                                onClick={() => setExpandedSection(expandedSection === 'coherence' ? null : 'coherence')}
+                                className="w-full bg-black/60 border-2 border-cyan-500/50 rounded-lg p-4 mb-4 text-left hover:border-cyan-500 transition-all"
+                            >
+                                <div className="flex items-center justify-between">
+                                    <p className="text-cyan-400 text-xs font-bold">THE SCIENCE OF SYNCHRONIZATION</p>
+                                    {expandedSection === 'coherence' ? (
+                                        <ChevronUp className="w-5 h-5 text-cyan-400" />
+                                    ) : (
+                                        <ChevronDown className="w-5 h-5 text-cyan-400" />
+                                    )}
+                                </div>
+                                
+                                <AnimatePresence>
+                                    {expandedSection === 'coherence' && (
+                                        <motion.div
+                                            initial={{ height: 0, opacity: 0 }}
+                                            animate={{ height: 'auto', opacity: 1 }}
+                                            exit={{ height: 0, opacity: 0 }}
+                                            className="mt-4 space-y-3"
+                                        >
+                                            <div className="bg-cyan-900/20 border-l-4 border-cyan-400 p-3 rounded">
+                                                <p className="text-cyan-400 text-xs font-bold mb-2">🌊 WHAT IS COHERENCE:</p>
+                                                <p className="text-gray-300 text-xs leading-relaxed mb-2">
+                                                    Coherence = waves in sync. Two oscillators at same frequency = coherent. Your heart + Earth's Schumann = coherence = optimal health state.
+                                                </p>
+                                                <p className="text-gray-300 text-xs leading-relaxed">
+                                                    <strong className="text-white">Physics:</strong> When systems resonate at matching frequencies, energy transfers efficiently. No friction, no waste = flow state.
+                                                </p>
+                                            </div>
+
+                                            <div className="bg-pink-900/20 border-l-4 border-pink-400 p-3 rounded">
+                                                <p className="text-pink-400 text-xs font-bold mb-2">❤️ HEART COHERENCE:</p>
+                                                <p className="text-gray-300 text-xs leading-relaxed mb-2">
+                                                    Heart Rate Variability (HRV) = time between heartbeats. High HRV = healthy, adaptable nervous system. Low HRV = stressed, rigid.
+                                                </p>
+                                                <p className="text-green-400 text-xs">
+                                                    HeartMath Institute: Heart coherence synchronizes with Earth's Schumann resonance when grounded barefoot. Measurable health improvements.
+                                                </p>
+                                            </div>
+
+                                            <div className="bg-green-900/20 border-l-4 border-green-400 p-3 rounded">
+                                                <p className="text-green-400 text-xs font-bold mb-2">🧲 EM FIELD COHERENCE:</p>
+                                                <p className="text-gray-300 text-xs leading-relaxed">
+                                                    Your body = electrical system. Heart = 60x stronger electrical field than brain. Earth's magnetic field influences your cellular voltage. Coherence = optimal cellular function.
+                                                </p>
+                                            </div>
+
+                                            <div className="bg-purple-900/20 border-l-4 border-purple-400 p-3 rounded">
+                                                <p className="text-purple-400 text-xs font-bold mb-2">🧘 STILLNESS = RESONANCE:</p>
+                                                <p className="text-gray-300 text-xs leading-relaxed mb-2">
+                                                    Movement = interference. Stillness = allows natural frequencies to align. Meditation masters: heart rate, breathing, brain waves synchronize with Earth frequency.
+                                                </p>
+                                                <p className="text-amber-300 text-xs">
+                                                    That's why meditation works: you're literally tuning yourself to Earth's vibration.
+                                                </p>
+                                            </div>
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
+                            </button>
 
                             {!isCoherenceMeasuring && !coherenceScore ? (
                                 <>
