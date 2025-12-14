@@ -113,6 +113,15 @@ export default function House51() {
         // Start pads
         playPads(ctx, masterGain);
 
+        // Start strings
+        playStrings(ctx, masterGain);
+
+        // Start shakers
+        playShakers(ctx, masterGain);
+
+        // Start ride cymbal
+        playRide(ctx, masterGain);
+
         // Visualizer
         const updateWaveform = () => {
             const dataArray = new Uint8Array(analyser.frequencyBinCount);
@@ -271,41 +280,63 @@ export default function House51() {
         scheduleHats();
     };
 
-    // BELLS/CHIMES (classic house element)
+    // BELLS/CHIMES (classic house element - Lil Louis Chaser vibes)
     const playBells = (ctx, destination) => {
         const beatInterval = 60 / bpm;
 
-        const playBell = (freq, time) => {
+        const playBell = (freq, time, decay = 2) => {
             const osc = ctx.createOscillator();
             const osc2 = ctx.createOscillator();
+            const osc3 = ctx.createOscillator();
             const gain = ctx.createGain();
 
             osc.type = 'sine';
             osc.frequency.value = freq;
             osc2.type = 'sine';
             osc2.frequency.value = freq * 2.001; // Slight detune for shimmer
+            osc3.type = 'sine';
+            osc3.frequency.value = freq * 3.997; // Harmonic overtone
 
-            gain.gain.setValueAtTime(0.08, time);
-            gain.gain.exponentialRampToValueAtTime(0.001, time + 2);
+            gain.gain.setValueAtTime(0.12, time);
+            gain.gain.exponentialRampToValueAtTime(0.001, time + decay);
 
             osc.connect(gain);
             osc2.connect(gain);
+            osc3.connect(gain);
             gain.connect(destination);
 
             osc.start(time);
             osc2.start(time);
-            osc.stop(time + 2);
-            osc2.stop(time + 2);
+            osc3.start(time);
+            osc.stop(time + decay);
+            osc2.stop(time + decay);
+            osc3.stop(time + decay);
         };
 
-        // Bell pattern - plays every 4 bars
-        const bellNotes = [523.25, 659.25, 783.99, 880]; // C5, E5, G5, A5
+        // Multiple bell patterns - classic + modern
+        const bellPatterns = [
+            [523.25, 659.25, 783.99, 880],        // Pattern 1 - C E G A
+            [587.33, 739.99, 880, 1046.5],        // Pattern 2 - D F# A C
+            [493.88, 622.25, 739.99, 830.61],     // Pattern 3 - B D F# G#
+            [440, 554.37, 659.25, 783.99]         // Pattern 4 - A C# E G
+        ];
         
+        let patternIndex = 0;
+
         const scheduleBells = () => {
             const now = ctx.currentTime;
-            bellNotes.forEach((freq, i) => {
-                playBell(freq, now + (beatInterval * i * 4));
+            const currentPattern = bellPatterns[patternIndex];
+            
+            // Main bell notes
+            currentPattern.forEach((freq, i) => {
+                playBell(freq, now + (beatInterval * i * 4), 3);
             });
+
+            // Extra chime sparkle every 2 bars
+            playBell(currentPattern[0] * 2, now + (beatInterval * 8), 1.5);
+            playBell(currentPattern[2] * 2, now + (beatInterval * 12), 1.5);
+
+            patternIndex = (patternIndex + 1) % bellPatterns.length;
             setTimeout(scheduleBells, beatInterval * 16 * 1000); // Every 4 bars
         };
         setTimeout(() => scheduleBells(), beatInterval * 8 * 1000); // Start after 2 bars
@@ -403,6 +434,164 @@ export default function House51() {
             setTimeout(scheduleChords, beatInterval * 4 * 1000);
         };
         scheduleChords();
+    };
+
+    // STRINGS (classic house warmth)
+    const playStrings = (ctx, destination) => {
+        const beatInterval = 60 / bpm;
+
+        const playString = (freq, time, duration) => {
+            // Multiple oscillators for rich string sound
+            const oscs = [];
+            const gains = [];
+            const mainGain = ctx.createGain();
+
+            for (let i = 0; i < 5; i++) {
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                
+                osc.type = 'sawtooth';
+                osc.frequency.value = freq * (1 + (Math.random() - 0.5) * 0.01); // Slight detune
+                
+                gain.gain.value = 0.03;
+                
+                osc.connect(gain);
+                gain.connect(mainGain);
+                
+                oscs.push(osc);
+                gains.push(gain);
+            }
+
+            const filter = ctx.createBiquadFilter();
+            filter.type = 'lowpass';
+            filter.frequency.value = 2000;
+            
+            mainGain.connect(filter);
+            filter.connect(destination);
+
+            mainGain.gain.setValueAtTime(0, time);
+            mainGain.gain.linearRampToValueAtTime(0.15, time + 1);
+            mainGain.gain.setValueAtTime(0.15, time + duration - 1);
+            mainGain.gain.linearRampToValueAtTime(0, time + duration);
+
+            oscs.forEach(osc => {
+                osc.start(time);
+                osc.stop(time + duration);
+            });
+        };
+
+        // String progression
+        const stringNotes = [
+            [261.63, 329.63, 392.00, 523.25], // C E G C
+            [293.66, 369.99, 440.00, 587.33], // D F# A D
+        ];
+
+        let noteIndex = 0;
+
+        const scheduleStrings = () => {
+            const now = ctx.currentTime;
+            const notes = stringNotes[noteIndex % stringNotes.length];
+            
+            notes.forEach(freq => {
+                playString(freq, now, beatInterval * 8);
+            });
+
+            noteIndex++;
+            setTimeout(scheduleStrings, beatInterval * 8 * 1000);
+        };
+        setTimeout(() => scheduleStrings(), beatInterval * 16 * 1000); // Start after 4 bars
+    };
+
+    // SHAKERS (texture + groove)
+    const playShakers = (ctx, destination) => {
+        const beatInterval = 60 / bpm;
+
+        const playShake = (time) => {
+            const noise = ctx.createBufferSource();
+            const buffer = ctx.createBuffer(1, ctx.sampleRate * 0.03, ctx.sampleRate);
+            const data = buffer.getChannelData(0);
+            
+            for (let i = 0; i < data.length; i++) {
+                data[i] = (Math.random() * 2 - 1) * 0.5;
+            }
+            
+            noise.buffer = buffer;
+
+            const filter = ctx.createBiquadFilter();
+            filter.type = 'highpass';
+            filter.frequency.value = 5000;
+
+            const gain = ctx.createGain();
+            gain.gain.setValueAtTime(0.06, time);
+            gain.gain.exponentialRampToValueAtTime(0.001, time + 0.08);
+
+            noise.connect(filter);
+            filter.connect(gain);
+            gain.connect(destination);
+
+            noise.start(time);
+            noise.stop(time + 0.08);
+        };
+
+        // 16th note shaker pattern
+        const scheduleShakers = () => {
+            const now = ctx.currentTime;
+            for (let i = 0; i < 16; i++) {
+                if (i % 2 === 1) { // Offbeat shakers
+                    playShake(now + (beatInterval * i * 0.25));
+                }
+            }
+            setTimeout(scheduleShakers, beatInterval * 4 * 1000);
+        };
+        setTimeout(() => scheduleShakers(), beatInterval * 4 * 1000); // Start after 1 bar
+    };
+
+    // RIDE CYMBAL (classic house ride)
+    const playRide = (ctx, destination) => {
+        const beatInterval = 60 / bpm;
+
+        const playRideBell = (time) => {
+            const osc = ctx.createOscillator();
+            const noise = ctx.createBufferSource();
+            const buffer = ctx.createBuffer(1, ctx.sampleRate * 0.2, ctx.sampleRate);
+            const data = buffer.getChannelData(0);
+            
+            for (let i = 0; i < data.length; i++) {
+                data[i] = Math.random() * 2 - 1;
+            }
+            
+            noise.buffer = buffer;
+            osc.type = 'sine';
+            osc.frequency.value = 3000;
+
+            const filter = ctx.createBiquadFilter();
+            filter.type = 'highpass';
+            filter.frequency.value = 4000;
+
+            const gain = ctx.createGain();
+            gain.gain.setValueAtTime(0.08, time);
+            gain.gain.exponentialRampToValueAtTime(0.001, time + 0.4);
+
+            osc.connect(gain);
+            noise.connect(filter);
+            filter.connect(gain);
+            gain.connect(destination);
+
+            osc.start(time);
+            noise.start(time);
+            osc.stop(time + 0.4);
+            noise.stop(time + 0.4);
+        };
+
+        // 8th note ride pattern
+        const scheduleRide = () => {
+            const now = ctx.currentTime;
+            for (let i = 0; i < 8; i++) {
+                playRideBell(now + (beatInterval * i * 0.5));
+            }
+            setTimeout(scheduleRide, beatInterval * 4 * 1000);
+        };
+        setTimeout(() => scheduleRide(), beatInterval * 12 * 1000); // Start after 3 bars
     };
 
     // HEALING FREQUENCY LAYERS
@@ -895,11 +1084,20 @@ export default function House51() {
                         <p className="text-gray-300">
                             • <strong className="text-amber-400">Warm pad chords</strong> for atmosphere
                         </p>
+                        <p className="text-gray-300">
+                            • <strong className="text-yellow-400">Lush string layers</strong> (classic house warmth)
+                        </p>
+                        <p className="text-gray-300">
+                            • <strong className="text-orange-400">Shakers + ride cymbal</strong> (groove texture)
+                        </p>
+                        <p className="text-gray-300">
+                            • <strong className="text-pink-400">Evolving chime patterns</strong> (Lil Louis Chaser vibes)
+                        </p>
                         <p className="text-green-400 font-bold mt-3">
-                            ✓ Zero-loss quality - DJs like Ben Santiago can play this at Sub Club level 🔥
+                            ✓ Zero-loss Web Audio quality - Ben Santiago / Moodymann club-ready 🔥
                         </p>
                         <p className="text-cyan-400 text-xs mt-2">
-                            (Export as WAV when we add download = club-ready lossless)
+                            (Old school + new school = timeless house music ♾️❤️♾️)
                         </p>
                     </div>
                 </div>
