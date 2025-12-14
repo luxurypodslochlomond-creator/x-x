@@ -387,6 +387,71 @@ export default function ScottBiggerVision() {
                 </div>
             </div>
 
+            {/* REAL ACHIEVABLE TIMELINE - NO BULLSHIT */}
+            <div className="bg-gradient-to-br from-cyan-500/20 to-green-500/20 border-4 border-cyan-500 p-6 rounded-xl mb-8">
+                <Heart className="w-12 h-12 text-cyan-400 mb-4" />
+                <h2 className="text-cyan-400 font-black text-xl font-mono mb-4">REALISTIC TIMELINE (NO BULLSHIT)</h2>
+                
+                <div className="space-y-3 text-sm font-mono">
+                    <div className="bg-black border-2 border-green-500 p-4 rounded">
+                        <p className="text-green-400 font-bold mb-2">YEAR 1 (2025-2026) - PROOF:</p>
+                        <p className="text-gray-300 mb-2">Scott uses daily → 10-50 music managers in UK/LA (people he knows)</p>
+                        <p className="text-white font-bold">10 users x £100 = £1k/mo minimum</p>
+                        <p className="text-white font-bold">50 users x £200 avg = £10k/mo realistic</p>
+                        <p className="text-green-400 text-xs mt-2">= £12k-£120k annual (ACHIEVABLE)</p>
+                    </div>
+
+                    <div className="bg-black border-2 border-cyan-500 p-4 rounded">
+                        <p className="text-cyan-400 font-bold mb-2">YEAR 2 (2026-2027) - WORD SPREADS:</p>
+                        <p className="text-gray-300 mb-2">Music industry proves it works → sports agents notice</p>
+                        <p className="text-white font-bold">100-300 users x £150 avg = £15k-£45k/mo</p>
+                        <p className="text-cyan-400 text-xs mt-2">= £180k-£540k annual (REALISTIC)</p>
+                    </div>
+
+                    <div className="bg-black border-2 border-amber-500 p-4 rounded">
+                        <p className="text-amber-400 font-bold mb-2">YEAR 3 (2027-2028) - MULTI-INDUSTRY:</p>
+                        <p className="text-gray-300 mb-2">Sports, talent agencies, event coordinators, property managers</p>
+                        <p className="text-white font-bold">500-1,000 users x £150 avg = £75k-£150k/mo</p>
+                        <p className="text-amber-400 text-xs mt-2">= £900k-£1.8M annual (SOLID)</p>
+                    </div>
+
+                    <div className="bg-black border-2 border-purple-500 p-4 rounded">
+                        <p className="text-purple-400 font-bold mb-2">YEAR 5 (2029-2030) - GLOBAL + NGOs:</p>
+                        <p className="text-gray-300 mb-2">Established UK/US/EU → disaster relief orgs (grant funded)</p>
+                        <p className="text-white font-bold">2,000-5,000 users x £150 avg = £300k-£750k/mo</p>
+                        <p className="text-purple-400 text-xs mt-2">= £3.6M-£9M annual (SUSTAINABLE)</p>
+                    </div>
+
+                    <div className="bg-gradient-to-r from-pink-500/20 to-purple-500/20 border-2 border-pink-500 p-4 rounded mt-4">
+                        <p className="text-pink-400 font-bold mb-2">🚀 SPACE USE CASES:</p>
+                        <p className="text-gray-300 text-xs mb-2">Mars colonies = 20min Earth lag, moon bases = 2.6sec lag</p>
+                        <p className="text-cyan-400 text-xs mb-2">ISS crew coordination, asteroid mining operations</p>
+                        <p className="text-white font-bold text-xs">P2P mesh = PERFECT for isolated space environments</p>
+                        <p className="text-purple-400 text-xs mt-2">SpaceX/NASA contracts = £500k+ per mission</p>
+                    </div>
+
+                    <div className="bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border-2 border-cyan-500 p-4 rounded">
+                        <p className="text-cyan-400 font-bold mb-2">🚢 CRUISE SHIP REALITY:</p>
+                        <p className="text-gray-300 text-xs mb-2">Carnival Cruises = 92 ships worldwide</p>
+                        <p className="text-white text-xs mb-2">Each ship: 5000 passengers + 2000 crew</p>
+                        <p className="text-amber-400 text-xs mb-2">Current satellite cost: £50k/month PER SHIP</p>
+                        <p className="text-green-400 font-bold text-xs">CO-MANAGER51: £2k/month flat = £48k saved per ship</p>
+                        <p className="text-pink-400 text-xs mt-2">Just Carnival = 92 ships x £2k = £184k/month = £2.2M annual</p>
+                        <p className="text-purple-400 text-xs">Global cruise industry = 300+ ships = £7.2M annual JUST CRUISES</p>
+                    </div>
+
+                    <div className="bg-black border-2 border-green-500 p-4 rounded mt-4">
+                        <p className="text-green-400 font-bold mb-2">TRUTH CHECK:</p>
+                        <p className="text-gray-300 text-xs mb-2">Year 1 = Prove it works (£12k-£120k)</p>
+                        <p className="text-gray-300 text-xs mb-2">Year 3 = Sustainable business (£900k-£1.8M)</p>
+                        <p className="text-gray-300 text-xs mb-2">Year 5 = Multi-industry adoption (£3.6M-£9M)</p>
+                        <p className="text-cyan-400 text-xs mb-2">Cruise ships alone = £2M-£7M potential</p>
+                        <p className="text-purple-400 text-xs">Space missions = £500k+ per contract</p>
+                        <p className="text-white font-bold text-xs mt-3">NO BULLSHIT. REAL NUMBERS. LOVE-BASED GROWTH. ♾️❤️♾️</p>
+                    </div>
+                </div>
+            </div>
+
             {/* QUANTUM PAYMENTS - THE MISSING PIECE */}
             <Link to={createPageUrl('QuantumPayments')} className="block mb-6">
                 <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-4 border-purple-500 p-6 rounded-xl" style={{ boxShadow: '0 0 50px rgba(168, 85, 247, 0.6)' }}>
