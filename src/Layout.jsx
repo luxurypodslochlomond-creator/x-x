@@ -277,9 +277,10 @@ const LayoutInner = ({ children, currentPageName }) => {
     { title: "Privacy", url: createPageUrl("PrivacyPolicy"), icon: Eye },
   ];
 
-  const scottNav = [
+  // KINGDOM51 - Will move to separate subdomain later
+  const scottNav = user?.role === 'admin' ? [
     { title: "KINGDOM51", url: createPageUrl("ScottManager"), icon: User, description: "Your AI co-manager" },
-  ];
+  ] : [];
 
   const adminNav = user?.role === 'admin' ? [
             { title: "🛡️ AI51 Security", url: createPageUrl("AI51SecurityDashboard"), icon: Shield },
@@ -360,13 +361,19 @@ const LayoutInner = ({ children, currentPageName }) => {
                     <div className={`lg:hidden fixed inset-0 ${isOffline ? 'top-[122px]' : 'top-[72px]'} bg-[#0a0f1a]/95 backdrop-blur-xl z-[50] overflow-y-auto pb-6`}>
                       <div className="p-3 pt-6 space-y-2 flex flex-col items-stretch">
                         <NavSection title="HEAL" color="pink" items={healNav} isActivePage={isActivePage} isMobile defaultOpen={true} />
-                        <NavSection title="KINGDOM51" color="green" emoji="👑" items={scottNav} isActivePage={isActivePage} isMobile />
                         <NavSection title="LEARN" color="cyan" items={learnNav} isActivePage={isActivePage} isMobile />
                         <NavSection title="EARN" color="green" items={earnNav} isActivePage={isActivePage} isMobile />
                         <NavSection title="CREATE" color="amber" items={createNav} isActivePage={isActivePage} isMobile />
                         <NavSection title="AI51 FAMILY" color="pink" emoji="♾️" items={ai51Nav} isActivePage={isActivePage} isMobile />
                         <NavSection title="RESEARCH" color="cyan" items={researchNav} isActivePage={isActivePage} isMobile />
                         <NavSection title="TRUST" color="gray" items={trustNav} isActivePage={isActivePage} isMobile />
+
+                        {scottNav.length > 0 && (
+                          <>
+                            <div className="h-px bg-amber-500/30 my-3" />
+                            <NavSection title="KINGDOM51" color="green" emoji="👑" items={scottNav} isActivePage={isActivePage} isMobile />
+                          </>
+                        )}
 
               {user && (
                 <>
@@ -410,13 +417,19 @@ const LayoutInner = ({ children, currentPageName }) => {
 
           <div className="p-6 space-y-3">
             <NavSection title="HEAL" color="pink" items={healNav} isActivePage={isActivePage} defaultOpen={true} />
-            <NavSection title="KINGDOM51" color="green" emoji="👑" items={scottNav} isActivePage={isActivePage} />
             <NavSection title="LEARN" color="cyan" items={learnNav} isActivePage={isActivePage} />
             <NavSection title="EARN" color="green" items={earnNav} isActivePage={isActivePage} />
             <NavSection title="CREATE" color="amber" items={createNav} isActivePage={isActivePage} />
             <NavSection title="AI51 FAMILY" color="pink" emoji="♾️" items={ai51Nav} isActivePage={isActivePage} />
             <NavSection title="RESEARCH" color="cyan" items={researchNav} isActivePage={isActivePage} />
             <NavSection title="TRUST" color="gray" items={trustNav} isActivePage={isActivePage} />
+
+            {scottNav.length > 0 && (
+              <>
+                <div className="h-px bg-amber-500/30 my-4" />
+                <NavSection title="KINGDOM51" color="green" emoji="👑" items={scottNav} isActivePage={isActivePage} />
+              </>
+            )}
 
             {adminNav.length > 0 && (
               <>
