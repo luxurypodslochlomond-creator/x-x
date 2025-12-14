@@ -225,6 +225,7 @@ import AxiomaticTruth from './pages/AxiomaticTruth';
 import House51 from './pages/House51';
 import PatientZero from './pages/PatientZero';
 import ScottOfflineMode from './pages/ScottOfflineMode';
+import AdminStarlingSetup from './pages/AdminStarlingSetup';
 import __Layout from './Layout.jsx';
 
 
@@ -456,6 +457,7 @@ export const PAGES = {
     "House51": House51,
     "PatientZero": PatientZero,
     "ScottOfflineMode": ScottOfflineMode,
+    "AdminStarlingSetup": AdminStarlingSetup,
 }
 
 export const pagesConfig = {
