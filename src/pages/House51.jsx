@@ -44,12 +44,12 @@ export default function House51() {
             duration: 180,
             vibe: "432Hz deep meditation journey",
             arrangement: [
-                { section: 'intro', start: 0, end: 30, layers: ['kick', 'healing'] },
-                { section: 'build', start: 30, end: 60, layers: ['kick', 'bass', 'pads', 'healing'] },
-                { section: 'drop', start: 60, end: 90, layers: ['kick', 'bass', 'hats', 'pads', 'healing'] },
-                { section: 'breakdown', start: 90, end: 120, layers: ['strings', 'pads', 'healing'] },
-                { section: 'climax', start: 120, end: 150, layers: ['kick', 'bass', 'hats', 'claps', 'pads', 'strings', 'healing'] },
-                { section: 'outro', start: 150, end: 180, layers: ['kick', 'bass', 'healing'], fadeOut: true }
+                { section: 'intro', start: 0, end: 30, layers: ['kick', 'piano', 'healing'] },
+                { section: 'build', start: 30, end: 60, layers: ['kick', 'bass', 'piano', 'pads', 'healing'] },
+                { section: 'drop', start: 60, end: 90, layers: ['kick', 'bass', 'hats', 'piano', 'pads', 'healing'] },
+                { section: 'breakdown', start: 90, end: 120, layers: ['piano', 'strings', 'pads', 'healing'] },
+                { section: 'climax', start: 120, end: 150, layers: ['kick', 'bass', 'hats', 'claps', 'piano', 'pads', 'strings', 'healing'] },
+                { section: 'outro', start: 150, end: 180, layers: ['kick', 'bass', 'piano', 'healing'], fadeOut: true }
             ]
         },
         chicago_nights: {
@@ -59,12 +59,12 @@ export default function House51() {
             duration: 150,
             vibe: "Warm soulful grooves",
             arrangement: [
-                { section: 'intro', start: 0, end: 20, layers: ['kick', 'bass'] },
-                { section: 'groove', start: 20, end: 50, layers: ['kick', 'bass', 'hats', 'healing'] },
-                { section: 'drop', start: 50, end: 80, layers: ['kick', 'bass', 'hats', 'claps', 'pads', 'healing'] },
-                { section: 'breakdown', start: 80, end: 100, layers: ['pads', 'strings', 'healing'] },
-                { section: 'rebuild', start: 100, end: 130, layers: ['kick', 'bass', 'hats', 'claps', 'strings', 'healing'] },
-                { section: 'outro', start: 130, end: 150, layers: ['kick', 'pads', 'healing'], fadeOut: true }
+                { section: 'intro', start: 0, end: 20, layers: ['kick', 'piano'] },
+                { section: 'groove', start: 20, end: 50, layers: ['kick', 'bass', 'piano', 'hats', 'healing'] },
+                { section: 'drop', start: 50, end: 80, layers: ['kick', 'bass', 'hats', 'claps', 'piano', 'pads', 'healing'] },
+                { section: 'breakdown', start: 80, end: 100, layers: ['piano', 'pads', 'strings', 'healing'] },
+                { section: 'rebuild', start: 100, end: 130, layers: ['kick', 'bass', 'hats', 'claps', 'piano', 'strings', 'healing'] },
+                { section: 'outro', start: 130, end: 150, layers: ['piano', 'pads', 'healing'], fadeOut: true }
             ]
         },
         glasgow_underground: {
@@ -330,6 +330,8 @@ export default function House51() {
                 playShakersSection(ctx, layerGain, startTime + sectionStart, sectionDuration);
             } else if (layer === 'ride') {
                 playRideSection(ctx, layerGain, startTime + sectionStart, sectionDuration);
+            } else if (layer === 'piano') {
+                playPianoSection(ctx, layerGain, startTime + sectionStart, sectionDuration);
             } else if (layer === 'healing') {
                 playHealingSection(ctx, layerGain, startTime + sectionStart, sectionDuration);
             }
@@ -691,6 +693,93 @@ export default function House51() {
             gain.connect(destination);
             osc.start(time);
             osc.stop(time + 0.4);
+        }
+    };
+
+    // PIANO SECTION - Warm Chicago house chords (Larry Heard style)
+    const playPianoSection = (ctx, destination, startTime, duration) => {
+        const beatDuration = 60 / 128;
+
+        // Chicago house chord progressions (deep, soulful)
+        const chordProgressions = [
+            // Dmaj7 (Larry Heard vibes)
+            [293.66, 369.99, 440.00, 554.37],
+            // Gmaj7
+            [196.00, 246.94, 293.66, 369.99],
+            // Cmaj7
+            [261.63, 329.63, 392.00, 493.88],
+            // Am7
+            [220.00, 261.63, 329.63, 415.30]
+        ];
+
+        const barDuration = beatDuration * 4;
+        const numBars = Math.floor(duration / barDuration);
+
+        for (let bar = 0; bar < numBars; bar++) {
+            const time = startTime + (bar * barDuration);
+            const chord = chordProgressions[bar % chordProgressions.length];
+
+            // Each chord held for 4 beats
+            chord.forEach(freq => {
+                // Fundamental note - warm Rhodes tone
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                const filter = ctx.createBiquadFilter();
+
+                osc.type = 'sine';
+                osc.frequency.value = freq;
+
+                // Warm filter
+                filter.type = 'lowpass';
+                filter.frequency.value = 2500;
+                filter.Q.value = 0.7;
+
+                // Smooth attack/release for Rhodes feel
+                gain.gain.setValueAtTime(0, time);
+                gain.gain.linearRampToValueAtTime(0.04, time + 0.05);
+                gain.gain.setValueAtTime(0.04, time + barDuration - 0.5);
+                gain.gain.linearRampToValueAtTime(0, time + barDuration);
+
+                osc.connect(filter);
+                filter.connect(gain);
+                gain.connect(destination);
+                osc.start(time);
+                osc.stop(time + barDuration);
+
+                // Harmonic layer for depth
+                const harm = ctx.createOscillator();
+                const harmGain = ctx.createGain();
+                harm.type = 'triangle';
+                harm.frequency.value = freq * 2;
+                harmGain.gain.setValueAtTime(0, time);
+                harmGain.gain.linearRampToValueAtTime(0.015, time + 0.05);
+                harmGain.gain.setValueAtTime(0.015, time + barDuration - 0.5);
+                harmGain.gain.linearRampToValueAtTime(0, time + barDuration);
+                harm.connect(filter);
+                filter.connect(harmGain);
+                harmGain.connect(destination);
+                harm.start(time);
+                harm.stop(time + barDuration);
+            });
+
+            // Subtle chord stabs on off-beats (Chicago groove)
+            if (bar % 2 === 1) {
+                [1.5, 2.5, 3.5].forEach(beat => {
+                    const stabTime = time + (beat * beatDuration);
+                    chord.forEach(freq => {
+                        const stab = ctx.createOscillator();
+                        const stabGain = ctx.createGain();
+                        stab.type = 'triangle';
+                        stab.frequency.value = freq;
+                        stabGain.gain.setValueAtTime(0.025, stabTime);
+                        stabGain.gain.exponentialRampToValueAtTime(0.001, stabTime + 0.15);
+                        stab.connect(stabGain);
+                        stabGain.connect(destination);
+                        stab.start(stabTime);
+                        stab.stop(stabTime + 0.15);
+                    });
+                });
+            }
         }
     };
 
