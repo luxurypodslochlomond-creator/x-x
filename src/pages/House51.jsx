@@ -47,6 +47,7 @@ export default function House51() {
     const animationFrameRef = useRef(null);
     const startTimeRef = useRef(null);
     const timeTrackerRef = useRef(null);
+    const mixerGainsRef = useRef({});
 
     const styles = {
         deep: {
@@ -104,40 +105,50 @@ export default function House51() {
         masterGain.connect(ctx.destination);
         masterGainRef.current = masterGain;
 
+        // Create mixer gain nodes for each layer
+        const mixerGains = {};
+        ['kick', 'bass', 'hats', 'claps', 'bells', 'pads', 'strings', 'shakers', 'ride', 'healing'].forEach(layer => {
+            const gain = ctx.createGain();
+            gain.gain.value = mixerLevels[layer];
+            gain.connect(masterGain);
+            mixerGains[layer] = gain;
+        });
+        mixerGainsRef.current = mixerGains;
+
         // Analyzer for visualization
         const analyser = ctx.createAnalyser();
         analyser.fftSize = 128;
         masterGain.connect(analyser);
 
         // Start kick drum loop
-        playKickPattern(ctx, masterGain);
+        playKickPattern(ctx, mixerGains.kick);
 
         // Start bass line
-        playBassline(ctx, masterGain);
+        playBassline(ctx, mixerGains.bass);
 
         // Start healing frequencies
-        startHealingLayers(ctx, masterGain);
+        startHealingLayers(ctx, mixerGains.healing);
 
         // Start hi-hats
-        playHiHats(ctx, masterGain);
+        playHiHats(ctx, mixerGains.hats);
 
         // Start bells/chimes
-        playBells(ctx, masterGain);
+        playBells(ctx, mixerGains.bells);
 
         // Start claps
-        playClaps(ctx, masterGain);
+        playClaps(ctx, mixerGains.claps);
 
         // Start pads
-        playPads(ctx, masterGain);
+        playPads(ctx, mixerGains.pads);
 
         // Start strings
-        playStrings(ctx, masterGain);
+        playStrings(ctx, mixerGains.strings);
 
         // Start shakers
-        playShakers(ctx, masterGain);
+        playShakers(ctx, mixerGains.shakers);
 
         // Start ride cymbal
-        playRide(ctx, masterGain);
+        playRide(ctx, mixerGains.ride);
 
         // Visualizer
         const updateWaveform = () => {
@@ -757,6 +768,17 @@ export default function House51() {
         }
     }, [volume]);
 
+    // UPDATE MIXER LEVELS IN REAL-TIME
+    useEffect(() => {
+        if (mixerGainsRef.current) {
+            Object.keys(mixerLevels).forEach(layer => {
+                if (mixerGainsRef.current[layer]) {
+                    mixerGainsRef.current[layer].gain.value = mixerLevels[layer];
+                }
+            });
+        }
+    }, [mixerLevels]);
+
     // CLEANUP
     useEffect(() => {
         return () => {
@@ -1012,8 +1034,9 @@ export default function House51() {
                                 icon="~"
                                 value={mixerLevels.bass}
                                 onChange={(val) => setMixerLevels({...mixerLevels, bass: val})}
-                                description="Rolling groove + sub"
+                                description="Rolling groove + SUB"
                                 isActive={isPlaying}
+                                emphasis={true}
                             />
 
                             {/* HI-HATS */}
@@ -1482,7 +1505,7 @@ export default function House51() {
 }
 
 // MIXER CHANNEL COMPONENT
-function MixerChannel({ label, color, icon, value, onChange, description, isActive }) {
+function MixerChannel({ label, color, icon, value, onChange, description, isActive, emphasis = false }) {
     const colorMap = {
         cyan: { border: 'border-cyan-500', bg: 'bg-cyan-500', text: 'text-cyan-400', glow: 'rgba(34, 211, 238, 0.6)' },
         pink: { border: 'border-pink-500', bg: 'bg-pink-500', text: 'text-pink-400', glow: 'rgba(236, 72, 153, 0.6)' },
@@ -1498,10 +1521,10 @@ function MixerChannel({ label, color, icon, value, onChange, description, isActi
 
     return (
         <motion.div 
-            className="bg-black border-2 rounded-lg p-4 relative"
+            className={`bg-black rounded-lg p-4 relative ${emphasis ? 'border-4' : 'border-2'}`}
             style={{ borderColor: c.border.replace('border-', '') }}
             animate={isActive && value > 0.1 ? {
-                boxShadow: [`0 0 5px ${c.glow}`, `0 0 20px ${c.glow}`, `0 0 5px ${c.glow}`]
+                boxShadow: [`0 0 ${emphasis ? '10px' : '5px'} ${c.glow}`, `0 0 ${emphasis ? '30px' : '20px'} ${c.glow}`, `0 0 ${emphasis ? '10px' : '5px'} ${c.glow}`]
             } : {}}
             transition={{ duration: 0.5, repeat: Infinity }}
         >
