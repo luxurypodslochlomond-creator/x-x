@@ -1,8 +1,7 @@
 import React from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 import { Music, Trophy, Users, Building, Shield, Zap, Heart, Globe, Lock, ArrowLeft, Anchor, Trees, Radio } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
 import CoManager51Icon8Bit from '@/components/shared/CoManager51Icon8Bit';
-import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 
 /**
