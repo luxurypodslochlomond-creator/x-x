@@ -8,7 +8,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Plus, Search, Wifi, WifiOff, RefreshCw, Brain, DollarSign, FileText, Music, Globe, Briefcase, Camera, Plane, Users, Crown, Palette, Heart, Send, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import KingdomCrown8Bit from '@/components/shared/KingdomCrown8Bit';
-import Kingdom51Crown8Bit from '@/components/shared/Kingdom51Crown8Bit';
+import CoManager51Icon8Bit from '@/components/shared/CoManager51Icon8Bit';
 import Gill51Sunglasses8Bit from '@/components/shared/Gill51Sunglasses8Bit';
 import { useScottOffline, ScottOfflineProvider } from '@/components/scott/ScottOfflineStorage';
 import ScottOneSentence from '@/components/scott/ScottOneSentence';
@@ -143,7 +143,7 @@ Keep it SHORT, practical, straight to the point. No bullshit. Real help.`,
                     style={{ boxShadow: '0 0 60px rgba(245, 158, 11, 0.15)' }}
                 >
                     <div className="text-center mb-8">
-                        <Kingdom51Crown8Bit size={64} animate={true} className="mx-auto mb-4" />
+                        <CoManager51Icon8Bit size={64} animate={true} className="mx-auto mb-4" />
                         <h1 className="text-3xl font-black text-white mb-2 font-mono tracking-tight">Co-Manager51</h1>
                         <p className="text-gray-400 text-sm font-mono">Enter PIN to unlock</p>
                     </div>
@@ -190,7 +190,7 @@ Keep it SHORT, practical, straight to the point. No bullshit. Real help.`,
                 <div className="bg-gradient-to-br from-gray-900 to-black border-2 border-amber-500/30 rounded-xl p-5 flex items-center justify-between shadow-lg" style={{ boxShadow: '0 4px 30px rgba(245, 158, 11, 0.1)' }}>
                     <div>
                         <div className="flex items-center gap-2 mb-1">
-                            <Kingdom51Crown8Bit size={28} animate={true} />
+                            <CoManager51Icon8Bit size={28} animate={true} />
                             <h1 className="text-2xl font-black text-white font-mono tracking-tight">Co-Manager51</h1>
                         </div>
                         <p className="text-xs text-gray-400 flex items-center gap-1 font-mono">
