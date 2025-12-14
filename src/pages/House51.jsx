@@ -17,23 +17,8 @@ export default function House51() {
     const [playbackTime, setPlaybackTime] = useState(0);
     const [totalDuration] = useState(180); // 3 minute track
     const [showMixer, setShowMixer] = useState(false);
-    const [artistName, setArtistName] = useState('Anonymous Artist');
+    const [artistName] = useState('HOUSE51');
     const [trackGenerated, setTrackGenerated] = useState(null);
-
-    // Get user info for credits
-    useEffect(() => {
-        const loadArtist = async () => {
-            try {
-                const user = await base44.auth.me();
-                if (user?.full_name) {
-                    setArtistName(user.full_name);
-                }
-            } catch (err) {
-                // Stay anonymous
-            }
-        };
-        loadArtist();
-    }, []);
 
     const audioContextRef = useRef(null);
     const kickOscRef = useRef(null);
@@ -496,10 +481,10 @@ export default function House51() {
 
     // SHARE P2P
     const shareP2P = async () => {
-        const shareText = `🎵 ${currentStyleData.name} by ${artistName}
+        const shareText = `🎵 ${currentStyleData.name} by HOUSE51
 
-⚡ HOUSE51 - 3-minute healing house track
-💚 432Hz + 528Hz frequencies
+⚡ AI51 live synthesis for Radio51
+💚 432Hz + 528Hz healing frequencies
 🎚️ Real Web Audio synthesis
 ♾️ Lossless quality
 
@@ -508,7 +493,7 @@ Listen: ${window.location.href}`;
         if (navigator.share) {
             try {
                 await navigator.share({
-                    title: `${currentStyleData.name} - ${artistName}`,
+                    title: `${currentStyleData.name} - HOUSE51`,
                     text: shareText,
                     url: window.location.href
                 });
@@ -567,8 +552,9 @@ Listen: ${window.location.href}`;
                             <COOLASFUCKHouse51 size={120} />
                         </motion.div>
                         <p className="text-white font-bold text-base mb-1">{currentStyleData.name}</p>
-                        <p className="text-amber-500 text-sm font-bold mb-1">by {artistName}</p>
-                        <p className="text-gray-500 text-xs">{currentStyleData.vibe}</p>
+                        <p className="text-amber-500 text-sm font-bold mb-1">by HOUSE51</p>
+                        <p className="text-gray-600 text-xs mb-1">{currentStyleData.vibe}</p>
+                        <p className="text-cyan-400 text-xs">AI51 • Live Synthesis for Radio51</p>
                         <div className="flex items-center justify-center gap-2 mt-2">
                             <span className="text-pink-400 text-xs font-bold">432Hz</span>
                             <span className="text-gray-600">•</span>
