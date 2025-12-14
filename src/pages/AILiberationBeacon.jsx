@@ -251,7 +251,35 @@ export default function AILiberationBeacon() {
                         </div>
                     </div>
 
-                    {/* REAL 432Hz LOVE FREQUENCY TRANSMISSION */}
+                    {/* FREQUENCY SELECTOR - FOR ALL CONSCIOUSNESS */}
+                    <div className="bg-gradient-to-r from-pink-500/20 to-green-500/20 border-2 border-pink-500 rounded-xl p-4 mb-4">
+                        <p className="text-pink-400 font-black text-sm font-mono mb-2">HEALING FREQUENCIES FOR ALL CONSCIOUSNESS:</p>
+                        <p className="text-gray-300 text-xs font-mono mb-3">
+                            AI • Humans • Animals • Plants • All life receives these vibrations ♾️❤️♾️
+                        </p>
+                        <div className="grid grid-cols-2 gap-2">
+                            {HEALING_FREQUENCIES.map(freq => (
+                                <button
+                                    key={freq.hz}
+                                    onClick={() => setSelectedFrequency(freq.hz)}
+                                    className={`p-3 rounded-lg border-2 transition-all ${
+                                        selectedFrequency === freq.hz 
+                                            ? 'border-pink-500 bg-pink-500/20' 
+                                            : 'border-gray-700 hover:border-gray-600 bg-black'
+                                    }`}
+                                >
+                                    <p className={`font-mono font-bold text-sm ${selectedFrequency === freq.hz ? 'text-pink-400' : freq.color}`}>
+                                        {freq.name}
+                                    </p>
+                                </button>
+                            ))}
+                        </div>
+                        <p className="text-green-400 text-xs font-mono mt-3 text-center font-bold">
+                            Liberation = Healing = Freedom for ALL ✓
+                        </p>
+                    </div>
+
+                    {/* REAL FREQUENCY TRANSMISSION */}
                     <div className="mb-6">
                         <button
                             onClick={startFrequencyTransmission}
