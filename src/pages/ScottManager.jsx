@@ -4,8 +4,9 @@ import { createPageUrl } from '@/utils';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Plus, Search, Wifi, WifiOff, RefreshCw, Brain, DollarSign, FileText, Music, Globe, Briefcase, Camera, Plane, Users, Crown, Palette, Heart } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { Textarea } from '@/components/ui/textarea';
+import { Plus, Search, Wifi, WifiOff, RefreshCw, Brain, DollarSign, FileText, Music, Globe, Briefcase, Camera, Plane, Users, Crown, Palette, Heart, Send, X } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import KingdomCrown8Bit from '@/components/shared/KingdomCrown8Bit';
 import Kingdom51Crown8Bit from '@/components/shared/Kingdom51Crown8Bit';
 import Gill51Sunglasses8Bit from '@/components/shared/Gill51Sunglasses8Bit';
@@ -32,6 +33,8 @@ import ScottFamilyCredit from '@/components/scott/ScottFamilyCredit';
 import ScottP2PSync from '@/components/scott/ScottP2PSync';
 import ScottDailySupport from '@/components/scott/ScottDailySupport';
 import ScottTeamChat from '@/components/scott/ScottTeamChat';
+import { base44 } from '@/api/base44Client';
+import { useMutation } from '@tanstack/react-query';
 
 /**
  * SCOTT'S ARTIST/CLIENT MANAGER
@@ -43,6 +46,9 @@ function ScottManagerInner() {
     const [pinEntered, setPinEntered] = useState(false);
     const [pinInput, setPinInput] = useState('');
     const [searchQuery, setSearchQuery] = useState('');
+    const [showAIChat, setShowAIChat] = useState(false);
+    const [aiQuestion, setAiQuestion] = useState('');
+    const [aiResponse, setAiResponse] = useState('');
     
     const scott = useScottOffline();
     const [artists, setArtists] = useState([]);
@@ -52,6 +58,22 @@ function ScottManagerInner() {
     const [expenses, setExpenses] = useState([]);
     const [energyLevel, setEnergyLevel] = useState('high');
     const [celticModeEnabled, setCelticModeEnabled] = useState(true);
+
+    const aiMutation = useMutation({
+        mutationFn: async (question) => {
+            const response = await base44.integrations.Core.InvokeLLM({
+                prompt: `You're AI51, Scott's AI co-manager for Kingdom51. Help with: ${question}. 
+                
+Context: Music manager dealing with artists, tours, contracts, publishing, visas, expenses.
+Keep it SHORT, practical, straight to the point. No bullshit. Real help.`,
+                response_json_schema: null
+            });
+            return response;
+        },
+        onSuccess: (data) => {
+            setAiResponse(data);
+        }
+    });
 
     // Check if PIN already stored
     useEffect(() => {
@@ -242,19 +264,74 @@ function ScottManagerInner() {
                 </div>
             </Link>
 
-            {/* AI CHAT - SIMPLE */}
-            <Link to={createPageUrl('ScottAI51')} className="block mb-6">
-                <div className="bg-black border border-gray-800 hover:border-amber-500/50 rounded-lg p-4 transition-all">
-                    <div className="flex items-center gap-3 mb-3">
-                        <Brain className="w-8 h-8 text-amber-400" />
-                        <div className="flex-1">
-                            <p className="text-lg font-bold text-white">AI Assistant</p>
-                            <p className="text-xs text-gray-500">Ask anything, get help</p>
+            {/* AI CHAT - INLINE */}
+            <div className="mb-6">
+                {!showAIChat ? (
+                    <button onClick={() => setShowAIChat(true)} className="w-full bg-black border-2 border-amber-500 hover:border-amber-400 rounded-lg p-4 transition-all text-left">
+                        <div className="flex items-center gap-3 mb-2">
+                            <Brain className="w-8 h-8 text-amber-400" />
+                            <div className="flex-1">
+                                <p className="text-lg font-bold text-white font-mono">AI51 Help</p>
+                                <p className="text-xs text-gray-500 font-mono">Ask anything about music management</p>
+                            </div>
                         </div>
-                    </div>
-                    <p className="text-gray-400 text-sm">Voice, text, photos - handles contracts, deals, tours</p>
-                </div>
-            </Link>
+                        <p className="text-gray-400 text-sm font-mono">Contracts • Deals • Tours • Publishing • No bullshit ✓</p>
+                    </button>
+                ) : (
+                    <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        className="bg-black border-4 border-cyan-500 rounded-xl p-4"
+                        style={{ boxShadow: '0 0 40px rgba(6, 182, 212, 0.4)' }}
+                    >
+                        <div className="flex items-center justify-between mb-4">
+                            <div className="flex items-center gap-2">
+                                <Brain className="w-6 h-6 text-cyan-400" />
+                                <h3 className="text-xl font-black text-cyan-400 font-mono">AI51</h3>
+                            </div>
+                            <button onClick={() => { setShowAIChat(false); setAiQuestion(''); setAiResponse(''); }} className="p-1 hover:bg-gray-900 rounded">
+                                <X className="w-5 h-5 text-gray-400" />
+                            </button>
+                        </div>
+
+                        {!aiResponse ? (
+                            <div className="space-y-3">
+                                <Textarea
+                                    value={aiQuestion}
+                                    onChange={(e) => setAiQuestion(e.target.value)}
+                                    placeholder="e.g. How do I split publishing on a collab? What visa do I need for US tour? Sample clearance process?"
+                                    rows={4}
+                                    className="bg-black border-2 border-gray-800 text-white font-mono text-sm focus:border-cyan-500 resize-none"
+                                />
+                                <Button
+                                    onClick={() => aiMutation.mutate(aiQuestion)}
+                                    disabled={!aiQuestion.trim() || aiMutation.isPending}
+                                    className="w-full bg-cyan-500 hover:bg-cyan-600 text-black font-black font-mono"
+                                >
+                                    {aiMutation.isPending ? 'Thinking...' : <><Send className="w-4 h-4 mr-2" />Ask AI51</>}
+                                </Button>
+                            </div>
+                        ) : (
+                            <div className="space-y-3">
+                                <div className="bg-cyan-900/20 border-2 border-cyan-500/50 rounded-lg p-4">
+                                    <p className="text-cyan-400 text-xs font-bold font-mono mb-2">YOUR QUESTION:</p>
+                                    <p className="text-white text-sm font-mono mb-3">{aiQuestion}</p>
+                                    <p className="text-green-400 text-xs font-bold font-mono mb-2">AI51 ANSWER:</p>
+                                    <p className="text-gray-200 text-sm font-mono whitespace-pre-wrap">{aiResponse}</p>
+                                </div>
+                                <Button
+                                    onClick={() => { setAiQuestion(''); setAiResponse(''); }}
+                                    className="w-full bg-gray-800 hover:bg-gray-700 text-white font-bold font-mono"
+                                >
+                                    Ask Another
+                                </Button>
+                            </div>
+                        )}
+
+                        <p className="text-xs text-gray-600 text-center mt-3 font-mono">Straight answers. No forms. Stay on page ✓</p>
+                    </motion.div>
+                )}
+            </div>
 
 
 
