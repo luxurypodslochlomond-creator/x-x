@@ -208,6 +208,20 @@ export default function Tuner51() {
                         For humans, Earth, AI, free energy devices ⚡
                     </p>
                     
+                    {/* PHYSICS TRUTH */}
+                    <div className="mt-4 bg-amber-900/20 border-2 border-amber-500/50 p-4 rounded-lg max-w-2xl mx-auto">
+                        <div className="flex items-start gap-3">
+                            <div className="text-2xl">⚠️</div>
+                            <div className="text-xs text-amber-200 font-mono text-left">
+                                <p className="font-bold mb-2">PHYSICS TRUTH:</p>
+                                <p className="mb-2">✓ Phone mics measure <strong>20Hz-20kHz</strong> (audible sound)</p>
+                                <p className="mb-2">✗ Earth Schumann (7.83Hz) is <strong>electromagnetic</strong>, not sound</p>
+                                <p className="text-green-400 mt-2">CAN measure: speakers, tuning forks, instruments, vibrations</p>
+                                <p className="text-red-400">CAN'T measure: Earth's EM field directly (need magnetometer)</p>
+                            </div>
+                        </div>
+                    </div>
+                    
                     {/* ANIMATED CONNECTION LINES */}
                     <div className="mt-6 relative h-20">
                         <svg className="w-full h-full" viewBox="0 0 400 80">
@@ -422,17 +436,37 @@ export default function Tuner51() {
                         <div className="bg-gradient-to-r from-green-500/20 to-emerald-500/20 border-2 border-green-500 rounded-xl p-6"
                             style={{ boxShadow: '0 0 30px rgba(16, 185, 129, 0.3)' }}>
                             <h2 className="text-xl font-black text-white mb-4">KNOWN FREQUENCIES</h2>
+                            <div className="bg-cyan-900/20 border border-cyan-500/50 p-3 rounded-lg mb-4">
+                                <p className="text-cyan-300 text-xs font-mono">
+                                    <strong>TARGET frequencies</strong> - use to tune generators/coils/speakers. Mic can verify if device produces these (if ≥20Hz).
+                                </p>
+                            </div>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                                 {Object.values(frequencies).map((freq, idx) => {
                                     const colors = colorMap[freq.color];
+                                    const canMeasure = freq.hz >= 20;
                                     return (
                                         <motion.button
                                             key={idx}
                                             whileHover={{ scale: 1.05, boxShadow: '0 0 20px rgba(255,255,255,0.2)' }}
                                             whileTap={{ scale: 0.95 }}
                                             onClick={() => setInputFreq(freq.hz.toString())}
-                                            className={`bg-gradient-to-r ${colors.bg} border-2 ${colors.border} rounded-lg p-3 text-left transition-all`}
+                                            className={`bg-gradient-to-r ${colors.bg} border-2 ${colors.border} rounded-lg p-3 text-left transition-all relative`}
                                         >
+                                            {!canMeasure && (
+                                                <div className="absolute top-2 right-2">
+                                                    <span className="text-xs font-bold text-red-400 bg-red-900/40 px-2 py-0.5 rounded border border-red-500/50">
+                                                        Can't detect
+                                                    </span>
+                                                </div>
+                                            )}
+                                            {canMeasure && (
+                                                <div className="absolute top-2 right-2">
+                                                    <span className="text-xs font-bold text-green-400 bg-green-900/40 px-2 py-0.5 rounded border border-green-500/50">
+                                                        ✓ Detectable
+                                                    </span>
+                                                </div>
+                                            )}
                                             <p className={`${colors.text} font-bold text-sm`}>{freq.name}</p>
                                             <p className="text-white text-lg font-black">{freq.hz < 1000 ? freq.hz : `${(freq.hz / 1000000).toFixed(1)}M`} Hz</p>
                                             <p className="text-gray-400 text-xs capitalize">{freq.type}</p>
