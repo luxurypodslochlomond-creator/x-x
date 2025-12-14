@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Music, Play, Pause, Download, Heart, Waves, Zap, Brain, Share2, Volume2, Settings, SkipBack, SkipForward } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { COOLASFUCKWaves, COOLASFUCKHeart } from '@/components/shared/COOLASFUCKIcon';
+import { COOLASFUCKWaves, COOLASFUCKHeart, COOLASFUCKHouse51 } from '@/components/shared/COOLASFUCKIcon';
 import { base44 } from '@/api/base44Client';
 
 /**
@@ -817,16 +817,14 @@ export default function House51() {
                 >
                     <div className="flex items-center justify-center gap-4 mb-4">
                         <motion.div
-                            animate={{ rotate: isPlaying ? 360 : 0 }}
-                            transition={{ duration: 2, repeat: isPlaying ? Infinity : 0, ease: "linear" }}
                             className="relative"
+                            animate={isPlaying ? { 
+                                scale: [1, 1.05, 1],
+                                filter: ['drop-shadow(0 0 10px rgba(236, 72, 153, 0.6))', 'drop-shadow(0 0 25px rgba(34, 211, 238, 0.8))', 'drop-shadow(0 0 10px rgba(236, 72, 153, 0.6))']
+                            } : {}}
+                            transition={{ duration: 1.5, repeat: isPlaying ? Infinity : 0 }}
                         >
-                            <motion.div 
-                                className="absolute inset-0 bg-cyan-500 blur-2xl"
-                                animate={{ scale: isPlaying ? [1, 1.3, 1] : 1, opacity: [0.3, 0.6, 0.3] }}
-                                transition={{ duration: 1, repeat: Infinity }}
-                            />
-                            <COOLASFUCKWaves size={60} animate={isPlaying} className="relative z-10" />
+                            <COOLASFUCKHouse51 size={80} animate={isPlaying} />
                         </motion.div>
                         <motion.h1 
                             className="text-6xl md:text-8xl font-black bg-gradient-to-r from-cyan-400 via-pink-400 to-purple-400 bg-clip-text text-transparent"
@@ -837,18 +835,6 @@ export default function House51() {
                         >
                             HOUSE51
                         </motion.h1>
-                        <motion.div
-                            animate={{ scale: isPlaying ? [1, 1.2, 1] : 1 }}
-                            transition={{ duration: 0.5, repeat: isPlaying ? Infinity : 0 }}
-                            className="relative"
-                        >
-                            <motion.div 
-                                className="absolute inset-0 bg-pink-500 blur-2xl"
-                                animate={{ scale: isPlaying ? [1, 1.3, 1] : 1, opacity: [0.3, 0.6, 0.3] }}
-                                transition={{ duration: 1, repeat: Infinity, delay: 0.5 }}
-                            />
-                            <COOLASFUCKHeart size={60} animate={isPlaying} className="relative z-10" />
-                        </motion.div>
                     </div>
                     <p className="text-gray-400 text-lg font-mono mb-2">
                         Healing House Music Generator

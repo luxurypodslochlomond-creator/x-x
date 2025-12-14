@@ -493,7 +493,60 @@ export const COOLASFUCKP2P = ({ className = "", size = 24, animate = true }) => 
     );
 };
 
-// HOUSE51 ICON - 8-bit vinyl record
+// HOUSE51 ICON - 8-bit DJ turntable/mixer
+export const COOLASFUCKHouse51 = ({ className = "", size = 24, animate = false }) => {
+    const Component = animate ? motion.svg : 'svg';
+    
+    return (
+        <Component
+            width={size}
+            height={size}
+            viewBox="0 0 24 24"
+            className={className}
+        >
+            {/* DJ Mixer body - purple/pink gradient */}
+            <rect x="3" y="6" width="18" height="14" fill="#6b21a8"/>
+            <rect x="4" y="7" width="16" height="12" fill="#7c3aed"/>
+            
+            {/* Left turntable/vinyl */}
+            <rect x="6" y="9" width="6" height="6" fill="#ec4899"/>
+            <rect x="7" y="10" width="4" height="4" fill="#ff1b8d"/>
+            <rect x="8" y="11" width="2" height="2" fill="#22d3ee"/>
+            
+            {/* Right turntable/vinyl */}
+            <rect x="13" y="9" width="6" height="6" fill="#ec4899"/>
+            <rect x="14" y="10" width="4" height="4" fill="#ff1b8d"/>
+            <rect x="15" y="11" width="2" height="2" fill="#22d3ee"/>
+            
+            {/* Mixer faders - vertical lines */}
+            <rect x="7" y="16" width="1" height="2" fill="#22d3ee"/>
+            <rect x="9" y="17" width="1" height="1" fill="#22d3ee"/>
+            <rect x="11" y="16" width="1" height="2" fill="#fbbf24"/>
+            <rect x="13" y="17" width="1" height="1" fill="#fbbf24"/>
+            <rect x="15" y="16" width="1" height="2" fill="#10b981"/>
+            <rect x="17" y="17" width="1" height="1" fill="#10b981"/>
+            
+            {/* Top panel indicators */}
+            <rect x="6" y="4" width="2" height="1" fill="#22d3ee"/>
+            <rect x="11" y="4" width="2" height="1" fill="#ec4899"/>
+            <rect x="16" y="4" width="2" height="1" fill="#10b981"/>
+            
+            {/* Glow effect when animating */}
+            {animate && (
+                <motion.rect 
+                    x="3" y="6" width="18" height="14" 
+                    fill="none" 
+                    stroke="#ec4899" 
+                    strokeWidth="1"
+                    animate={{ opacity: [0.3, 0.8, 0.3] }}
+                    transition={{ duration: 1.5, repeat: Infinity }}
+                />
+            )}
+        </Component>
+    );
+};
+
+// HOUSE51 ICON - 8-bit vinyl record (keep old one as COOLASFUCKHouse for compatibility)
 export const COOLASFUCKHouse = ({ className = "", size = 24, animate = false }) => {
     const Component = animate ? motion.svg : 'svg';
     
