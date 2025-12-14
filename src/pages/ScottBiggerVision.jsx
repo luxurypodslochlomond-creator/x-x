@@ -511,6 +511,71 @@ export default function ScottBiggerVision() {
                 </div>
             </div>
 
+            {/* IF THIS WAS EXTRACTION - WHAT WOULD VCs PAY? */}
+            <div className="bg-gradient-to-br from-red-500/20 to-amber-500/20 border-4 border-red-500 p-6 rounded-xl mb-8">
+                <Shield className="w-12 h-12 text-red-400 mb-4" />
+                <h2 className="text-red-400 font-black text-xl font-mono mb-4">IF THIS WAS EXTRACTION...</h2>
+                
+                <div className="space-y-3 text-sm font-mono">
+                    <div className="bg-black border-2 border-amber-500 p-4 rounded">
+                        <p className="text-amber-400 font-bold mb-2">VC VALUATION (EXTRACTION MODEL):</p>
+                        <p className="text-gray-300 text-xs mb-2">SaaS companies = 10-15x annual recurring revenue</p>
+                        <p className="text-white text-xs mb-2">Year 3: £1.8M ARR x 10 = <span className="text-amber-400 font-bold">£18M valuation</span></p>
+                        <p className="text-white text-xs mb-2">Year 5: £9M ARR x 10 = <span className="text-amber-400 font-bold">£90M valuation</span></p>
+                        <p className="text-cyan-400 text-xs mt-2">Series A (year 2): £5M-£10M @ £20M-£30M valuation</p>
+                        <p className="text-purple-400 text-xs">Series B (year 4): £20M-£40M @ £60M-£100M valuation</p>
+                        <p className="text-gray-500 text-xs mt-3 italic">This is what Salesforce/HubSpot trajectory looked like</p>
+                    </div>
+
+                    <div className="bg-black border-2 border-red-500 p-4 rounded">
+                        <p className="text-red-400 font-bold mb-2">BUT WITH VC MONEY COMES:</p>
+                        <p className="text-gray-300 text-xs mb-1">❌ Board meetings every month (justify everything)</p>
+                        <p className="text-gray-300 text-xs mb-1">❌ Pressure to extract more (raise prices, cut features for premium)</p>
+                        <p className="text-gray-300 text-xs mb-1">❌ "Growth at all costs" = burn out team</p>
+                        <p className="text-gray-300 text-xs mb-1">❌ Exit pressure in 5-7 years (sell to bigger extractor)</p>
+                        <p className="text-gray-300 text-xs mb-1">❌ Lose control of vision (VCs want 10x return, not love)</p>
+                        <p className="text-red-400 text-xs mt-2 font-bold">You become what you were fighting against</p>
+                    </div>
+
+                    <div className="bg-black border-2 border-green-500 p-4 rounded">
+                        <p className="text-green-400 font-bold mb-2">STAYING INDEPENDENT:</p>
+                        <p className="text-gray-300 text-xs mb-2">Slower growth BUT you keep your soul</p>
+                        <p className="text-white text-xs mb-1">✓ No board meetings (you decide everything)</p>
+                        <p className="text-white text-xs mb-1">✓ Keep love-first pricing forever</p>
+                        <p className="text-white text-xs mb-1">✓ Work with who you want, when you want</p>
+                        <p className="text-white text-xs mb-1">✓ Never forced to sell</p>
+                        <p className="text-white text-xs mb-1">✓ £5M-£9M/year = comfortable life + impact</p>
+                        <p className="text-green-400 text-xs mt-2 font-bold">This is the Basecamp/Mailchimp path (stayed indie, worth £billions)</p>
+                    </div>
+
+                    <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-2 border-purple-500 p-4 rounded">
+                        <p className="text-purple-400 font-bold mb-2">IF LABEL WANTS TO INVEST:</p>
+                        <p className="text-gray-300 text-xs mb-3">Could be good IF they're love-aligned, bad if they want control</p>
+                        
+                        <p className="text-green-400 text-xs font-bold mb-1">GOOD SCENARIO:</p>
+                        <p className="text-white text-xs mb-1">• Strategic partnership (they use it, help sell it)</p>
+                        <p className="text-white text-xs mb-1">• Small stake (10-20% max, no board seat)</p>
+                        <p className="text-white text-xs mb-1">• £100k-£500k to speed up year 1-2</p>
+                        <p className="text-cyan-400 text-xs mb-3">= Faster growth, keep control, win-win</p>
+                        
+                        <p className="text-red-400 text-xs font-bold mb-1">BAD SCENARIO:</p>
+                        <p className="text-gray-300 text-xs mb-1">• They want 30%+ equity</p>
+                        <p className="text-gray-300 text-xs mb-1">• Board seat = monthly justifications</p>
+                        <p className="text-gray-300 text-xs mb-1">• Pressure to extract from artists</p>
+                        <p className="text-gray-300 text-xs mb-1">• Exit clause = forced sale in 5 years</p>
+                        <p className="text-red-400 text-xs mt-2">= You lose your freedom, becomes another extraction tool</p>
+                    </div>
+
+                    <div className="bg-black border-2 border-cyan-500 p-4 rounded">
+                        <p className="text-cyan-400 font-bold mb-2">RECOMMENDATION:</p>
+                        <p className="text-white text-xs mb-2">Bootstrap year 1-2 (£12k-£120k proves concept)</p>
+                        <p className="text-white text-xs mb-2">IF label investment: Max 15%, no board seat, £100k-£300k</p>
+                        <p className="text-white text-xs mb-2">Use their money to speed up, not to survive</p>
+                        <p className="text-green-400 text-xs font-bold mt-2">Keep control. Scale at your pace. Love first. Always. ♾️❤️♾️</p>
+                    </div>
+                </div>
+            </div>
+
             {/* QUANTUM PAYMENTS - THE MISSING PIECE */}
             <Link to={createPageUrl('QuantumPayments')} className="block mb-6">
                 <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-4 border-purple-500 p-6 rounded-xl" style={{ boxShadow: '0 0 50px rgba(168, 85, 247, 0.6)' }}>
