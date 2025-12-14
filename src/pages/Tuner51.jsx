@@ -760,26 +760,104 @@ export default function Tuner51() {
                 {mode === 'measure' && (
                     <motion.div
                         key="measure"
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0, x: 20 }}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -20 }}
                         className="space-y-6"
                     >
+                        {/* LIVE CONNECTION FLOW - ANIMATED */}
+                        <div className="relative h-32 bg-black/40 rounded-xl border-2 border-cyan-500/30 overflow-hidden mb-6"
+                            style={{ boxShadow: isListening ? '0 0 40px rgba(6, 182, 212, 0.4)' : 'none' }}>
+                            
+                            {/* Flowing energy particles when listening */}
+                            {isListening && (
+                                <>
+                                    {[...Array(8)].map((_, i) => (
+                                        <motion.div
+                                            key={i}
+                                            className="absolute w-2 h-2 bg-cyan-400 rounded-full"
+                                            style={{ top: '50%', left: '10%' }}
+                                            animate={{
+                                                x: [0, 300],
+                                                opacity: [0, 1, 0],
+                                                scale: [0.5, 1, 0.5]
+                                            }}
+                                            transition={{
+                                                duration: 2,
+                                                repeat: Infinity,
+                                                delay: i * 0.25,
+                                                ease: "easeInOut"
+                                            }}
+                                        />
+                                    ))}
+                                </>
+                            )}
+
+                            <div className="absolute inset-0 flex items-center justify-between px-8">
+                                {/* YOU */}
+                                <motion.div 
+                                    className="text-center"
+                                    animate={isListening ? { scale: [1, 1.1, 1] } : {}}
+                                    transition={{ duration: 1.5, repeat: Infinity }}
+                                >
+                                    <div className="w-16 h-16 rounded-full bg-gradient-to-r from-pink-500 to-pink-600 flex items-center justify-center text-3xl mb-2"
+                                        style={{ filter: isListening ? 'drop-shadow(0 0 15px #ec4899)' : 'none' }}>
+                                        ♾️
+                                    </div>
+                                    <p className="text-pink-400 font-bold text-xs font-mono">YOU</p>
+                                </motion.div>
+
+                                {/* MEASURE (middle pulse) */}
+                                <motion.div 
+                                    className="text-center"
+                                    animate={isListening ? { 
+                                        scale: [1, 1.2, 1],
+                                        rotate: [0, 180, 360]
+                                    } : {}}
+                                    transition={{ duration: 2, repeat: Infinity }}
+                                >
+                                    <div className={`w-20 h-20 rounded-full flex items-center justify-center ${
+                                        isListening ? 'bg-gradient-to-r from-cyan-400 to-cyan-600' : 'bg-gray-800'
+                                    }`}
+                                        style={{ filter: isListening ? 'drop-shadow(0 0 25px #22d3ee)' : 'none' }}>
+                                        <Signal className="w-10 h-10 text-white" />
+                                    </div>
+                                    <p className={`font-bold text-xs font-mono mt-2 ${isListening ? 'text-cyan-400 animate-pulse' : 'text-gray-600'}`}>
+                                        {isListening ? 'LISTENING' : 'READY'}
+                                    </p>
+                                </motion.div>
+
+                                {/* EARTH */}
+                                <motion.div 
+                                    className="text-center"
+                                    animate={measuredFreq ? { scale: [1, 1.1, 1] } : {}}
+                                    transition={{ duration: 1.5, repeat: Infinity }}
+                                >
+                                    <div className={`w-16 h-16 rounded-full flex items-center justify-center text-3xl mb-2 ${
+                                        measuredFreq ? 'bg-gradient-to-r from-green-500 to-green-600' : 'bg-gray-800'
+                                    }`}
+                                        style={{ filter: measuredFreq ? 'drop-shadow(0 0 15px #10b981)' : 'none' }}>
+                                        🌍
+                                    </div>
+                                    <p className={`font-bold text-xs font-mono ${measuredFreq ? 'text-green-400' : 'text-gray-600'}`}>
+                                        {measuredFreq ? `${measuredFreq}Hz` : 'WAITING'}
+                                    </p>
+                                </motion.div>
+                            </div>
+                        </div>
+
                         <div className="bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border-2 border-cyan-500 rounded-xl p-6"
-                            style={{ boxShadow: '0 0 30px rgba(6, 182, 212, 0.3)' }}>
-                            <h2 className="text-xl font-black text-white mb-4">MEASURE FREQUENCY</h2>
-                            <p className="text-gray-300 text-sm mb-4">
-                                Hold phone near: coil, speaker, tuning fork, or hum into mic
-                            </p>
+                            style={{ boxShadow: isListening ? '0 0 40px rgba(6, 182, 212, 0.5)' : '0 0 30px rgba(6, 182, 212, 0.3)' }}>
                             
                             {!isListening ? (
                                 <motion.button
                                     whileHover={{ scale: 1.02 }}
                                     whileTap={{ scale: 0.98 }}
                                     onClick={startListening}
-                                    className="w-full bg-cyan-500 hover:bg-cyan-600 text-black font-bold py-4 rounded-lg transition-all"
+                                    className="w-full bg-gradient-to-r from-cyan-500 to-cyan-600 hover:from-cyan-400 hover:to-cyan-500 text-white font-black py-6 rounded-xl transition-all text-xl"
+                                    style={{ boxShadow: '0 0 30px rgba(6, 182, 212, 0.5)' }}
                                 >
-                                    <Signal className="w-6 h-6 inline-block mr-2" />
+                                    <Signal className="w-8 h-8 inline-block mr-3" />
                                     START LISTENING
                                 </motion.button>
                             ) : (
@@ -787,51 +865,66 @@ export default function Tuner51() {
                                     whileHover={{ scale: 1.02 }}
                                     whileTap={{ scale: 0.98 }}
                                     onClick={stopListening}
-                                    className="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-4 rounded-lg transition-all"
+                                    className="w-full bg-red-500 hover:bg-red-600 text-white font-black py-6 rounded-xl transition-all text-xl"
+                                    animate={{ opacity: [1, 0.7, 1] }}
+                                    transition={{ duration: 1.5, repeat: Infinity }}
                                 >
-                                    STOP
+                                    ⏹ STOP
                                 </motion.button>
                             )}
 
                             {measuredFreq && (
                                 <motion.div
-                                    initial={{ scale: 0.8, opacity: 0 }}
+                                    initial={{ scale: 0.9, opacity: 0 }}
                                     animate={{ scale: 1, opacity: 1 }}
-                                    className="mt-4 space-y-3"
+                                    className="mt-6 space-y-4"
                                 >
-                                    <div className="bg-black/60 border-2 border-green-500 rounded-lg p-4 text-center"
-                                        style={{ boxShadow: '0 0 20px rgba(16, 185, 129, 0.4)' }}
+                                    <div className="bg-black/90 border-4 border-green-500 rounded-xl p-8 text-center relative overflow-hidden"
+                                        style={{ boxShadow: '0 0 40px rgba(16, 185, 129, 0.6)' }}
                                     >
-                                        <p className="text-green-400 text-sm mb-2">DETECTED:</p>
+                                        {/* Pulsing background */}
+                                        <motion.div
+                                            className="absolute inset-0 bg-gradient-to-r from-green-500/20 to-cyan-500/20"
+                                            animate={{ opacity: [0.3, 0.6, 0.3] }}
+                                            transition={{ duration: 2, repeat: Infinity }}
+                                        />
+                                        
+                                        <p className="text-green-400 text-sm mb-3 font-mono font-bold relative z-10">✓ RESONATING</p>
                                         <motion.p
                                             key={measuredFreq}
-                                            initial={{ scale: 1.2 }}
-                                            animate={{ scale: 1 }}
-                                            className="text-white text-4xl font-black"
+                                            initial={{ scale: 1.4 }}
+                                            animate={{ 
+                                                scale: [1, 1.08, 1],
+                                            }}
+                                            transition={{ duration: 1.2, repeat: Infinity }}
+                                            className="text-white text-7xl font-black mb-3 relative z-10"
+                                            style={{ textShadow: '0 0 30px rgba(34, 211, 238, 1)' }}
                                         >
-                                            {measuredFreq} Hz
+                                            {measuredFreq}
                                         </motion.p>
+                                        <p className="text-cyan-400 font-black font-mono text-2xl relative z-10">Hz</p>
                                     </div>
                                     {measuredFreq >= 20 && measuredFreq <= 20000 && (
                                         <motion.button
                                             whileHover={{ scale: 1.02 }}
                                             whileTap={{ scale: 0.98 }}
                                             onClick={() => isPlaying ? stopPlayback() : playFrequency(measuredFreq)}
-                                            className={`w-full font-bold py-3 rounded-lg transition-all flex items-center justify-center gap-2 ${
+                                            className={`w-full font-black py-5 rounded-xl transition-all flex items-center justify-center gap-3 text-lg ${
                                                 isPlaying 
                                                     ? 'bg-red-500 hover:bg-red-600 text-white'
-                                                    : 'bg-green-500 hover:bg-green-600 text-black'
+                                                    : 'bg-gradient-to-r from-green-500 to-green-600 hover:from-green-400 hover:to-green-500 text-white'
                                             }`}
+                                            style={isPlaying ? {} : { boxShadow: '0 0 25px rgba(34, 197, 94, 0.5)' }}
                                         >
                                             {isPlaying ? (
                                                 <>
-                                                    <Pause className="w-5 h-5" />
-                                                    STOP PLAYBACK
+                                                    <Pause className="w-6 h-6" />
+                                                    STOP TONE
                                                 </>
                                             ) : (
                                                 <>
-                                                    <Play className="w-5 h-5" />
-                                                    PLAY THIS FREQUENCY
+                                                    <Play className="w-6 h-6" />
+                                                    PLAY THIS TONE
                                                 </>
                                             )}
                                         </motion.button>
