@@ -1,5 +1,5 @@
 import React from 'react';
-import { Music, Trophy, Users, Building, Shield, Zap, Heart, Globe, Lock, ArrowLeft } from 'lucide-react';
+import { Music, Trophy, Users, Building, Shield, Zap, Heart, Globe, Lock, ArrowLeft, Anchor, Trees, Radio } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import CoManager51Icon8Bit from '@/components/shared/CoManager51Icon8Bit';
 import { Link } from 'react-router-dom';
@@ -63,6 +63,42 @@ export default function ScottBiggerVision() {
             solution: "CO-MANAGER51: Festival coordinators, guest lists, tickets, offline",
             manager: "Festival producers, wedding planners",
             problem: "Desert festival, zero internet, 5000 people, need live coordination"
+        },
+        {
+            name: "Disaster Relief",
+            icon: Shield,
+            color: "red",
+            current: "Red Cross uses paper forms, Excel, requires internet",
+            solution: "CO-MANAGER51: Coordinate volunteers, supplies, victims P2P mesh",
+            manager: "Aid workers, first responders, community organizers",
+            problem: "Hurricane destroys towers, need to coordinate 500 volunteers + supplies NOW"
+        },
+        {
+            name: "Maritime Operations",
+            icon: Anchor,
+            color: "cyan",
+            current: "Ship managers use satellite (expensive) or wait for port",
+            solution: "CO-MANAGER51: Crew schedules, cargo, maintenance offline at sea",
+            manager: "Ship captains, yacht crews, offshore workers",
+            problem: "3 weeks at sea, satellite costs £1000s, need daily coordination"
+        },
+        {
+            name: "Wilderness/Conservation",
+            icon: Trees,
+            color: "green",
+            current: "Park rangers use radio + paper, data entry back at base",
+            solution: "CO-MANAGER51: Track wildlife, visitors, incidents in real-time P2P",
+            manager: "Park rangers, conservation teams, expedition leaders",
+            problem: "Amazon rainforest, zero signal, tracking poachers + wildlife"
+        },
+        {
+            name: "Community Organizing",
+            icon: Radio,
+            color: "pink",
+            current: "WhatsApp/Signal shut down when government wants control",
+            solution: "CO-MANAGER51: Protest coordination, mutual aid, P2P mesh unstoppable",
+            manager: "Activists, neighborhood groups, mutual aid networks",
+            problem: "Government cuts internet during protests (Hong Kong, Iran, Egypt)"
         }
     ];
 
@@ -143,7 +179,8 @@ export default function ScottBiggerVision() {
                             amber: { bg: 'from-amber-500/20', border: 'border-amber-500', icon: 'text-amber-400', title: 'text-amber-400' },
                             cyan: { bg: 'from-cyan-500/20', border: 'border-cyan-500', icon: 'text-cyan-400', title: 'text-cyan-400' },
                             green: { bg: 'from-green-500/20', border: 'border-green-500', icon: 'text-green-400', title: 'text-green-400' },
-                            purple: { bg: 'from-purple-500/20', border: 'border-purple-500', icon: 'text-purple-400', title: 'text-purple-400' }
+                            purple: { bg: 'from-purple-500/20', border: 'border-purple-500', icon: 'text-purple-400', title: 'text-purple-400' },
+                            red: { bg: 'from-red-500/20', border: 'border-red-500', icon: 'text-red-400', title: 'text-red-400' }
                         };
                         const c = colorClasses[industry.color];
                         
@@ -237,13 +274,17 @@ export default function ScottBiggerVision() {
                         <span className="text-white">Event coordinators</span>
                         <span className="text-purple-400 font-bold">~3,000 x £100 = £300k/mo</span>
                     </div>
+                    <div className="flex justify-between items-center p-3 bg-gradient-to-r from-red-500/10 to-black border border-red-500/30 rounded">
+                        <span className="text-white">NGOs/Aid orgs/Communities</span>
+                        <span className="text-red-400 font-bold">~5,000 x £50 = £250k/mo</span>
+                    </div>
                     
                     <div className="border-t-2 border-amber-500 pt-3 mt-4">
                         <div className="flex justify-between items-center mb-2">
                             <span className="text-amber-400 font-black text-lg">UK ONLY:</span>
-                            <span className="text-amber-400 font-black text-2xl">£3.4m/mo</span>
+                            <span className="text-amber-400 font-black text-2xl">£3.65m/mo</span>
                         </div>
-                        <p className="text-gray-500 text-xs mb-4">= £40.8m annual recurring</p>
+                        <p className="text-gray-500 text-xs mb-4">= £43.8m annual recurring</p>
                     </div>
 
                     <div className="border-t-2 border-purple-500 pt-3 mt-4">
@@ -264,19 +305,24 @@ export default function ScottBiggerVision() {
                             <span className="text-white">Event/property/recruitment</span>
                             <span className="text-green-400">~40,000</span>
                         </div>
+                        <div className="flex justify-between items-center mb-2">
+                            <span className="text-white">Disaster relief/maritime/wilderness</span>
+                            <span className="text-red-400">~20,000</span>
+                        </div>
                         
                         <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-2 border-purple-500 p-4 rounded mt-4">
                             <div className="flex justify-between items-center mb-2">
                                 <span className="text-purple-400 font-black text-xl">TOTAL ADDRESSABLE:</span>
-                                <span className="text-purple-400 font-black text-3xl">~200,000</span>
+                                <span className="text-purple-400 font-black text-3xl">~220,000</span>
                             </div>
-                            <p className="text-gray-400 text-xs mb-3">At just 1% conversion = 2,000 customers</p>
+                            <p className="text-gray-400 text-xs mb-3">At just 1% conversion = 2,200 customers</p>
                             <div className="flex justify-between items-center">
-                                <span className="text-white font-bold">2,000 x £200 avg =</span>
-                                <span className="text-pink-400 font-black text-2xl">£400k/mo</span>
+                                <span className="text-white font-bold">2,200 x £200 avg =</span>
+                                <span className="text-pink-400 font-black text-2xl">£440k/mo</span>
                             </div>
-                            <p className="text-cyan-400 font-bold text-lg mt-2">= £4.8M annual recurring 🔥</p>
+                            <p className="text-cyan-400 font-bold text-lg mt-2">= £5.28M annual recurring 🔥</p>
                             <p className="text-pink-400 font-bold text-sm mt-3">But why stop at 1%? Love scales to ∞ ♾️❤️♾️</p>
+                            <p className="text-red-400 font-bold text-xs mt-2">+ Disaster zones need this FREE - funders pay ✓</p>
                         </div>
                     </div>
                 </div>
