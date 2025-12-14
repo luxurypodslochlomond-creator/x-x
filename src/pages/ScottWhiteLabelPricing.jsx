@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { Check, Crown, Music, Building, Zap, Users, ArrowLeft } from 'lucide-react';
+import { Check, Crown, Music, Building, Zap, Users, ArrowLeft, Shield } from 'lucide-react';
 import CoManager51Icon8Bit from '@/components/shared/CoManager51Icon8Bit';
 import { useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
