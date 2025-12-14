@@ -683,8 +683,7 @@ function ScottManagerInner() {
             {/* QUICK TOOLS - ONE BUTTON */}
             <ScottQuickTools onComplete={() => window.location.reload()} />
 
-            {/* TEAM CHAT - FLOATING */}
-            <ScottTeamChat />
+            {/* TEAM CHAT - FLOATING (Hidden by default) */}
 
             </div>
             </ScottFocusMode>
