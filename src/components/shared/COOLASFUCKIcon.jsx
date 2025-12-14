@@ -493,64 +493,45 @@ export const COOLASFUCKP2P = ({ className = "", size = 24, animate = true }) => 
     );
 };
 
-// HOUSE51 ICON - 8-bit vinyl/turntable
-export const COOLASFUCKHouse = ({ className = "", size = 32, animate = false }) => {
+// HOUSE51 ICON - 8-bit vinyl record
+export const COOLASFUCKHouse = ({ className = "", size = 24, animate = false }) => {
     const Component = animate ? motion.svg : 'svg';
     
     return (
         <Component
             width={size}
             height={size}
-            viewBox="0 0 32 32"
+            viewBox="0 0 24 24"
             className={className}
-            style={{ imageRendering: 'pixelated' }}
             animate={animate ? { rotate: 360 } : {}}
             transition={animate ? { duration: 3, repeat: Infinity, ease: "linear" } : {}}
         >
-            {/* Vinyl record outer ring */}
-            <circle cx="16" cy="16" r="14" fill="#1a1a1a" stroke="#ec4899" strokeWidth="2" />
+            {/* 8-bit vinyl record */}
+            {/* Outer ring */}
+            <rect x="6" y="4" width="2" height="2" fill="#ec4899"/>
+            <rect x="8" y="2" width="8" height="2" fill="#ec4899"/>
+            <rect x="16" y="4" width="2" height="2" fill="#ec4899"/>
+            <rect x="4" y="6" width="2" height="2" fill="#ec4899"/>
+            <rect x="18" y="6" width="2" height="2" fill="#ec4899"/>
+            <rect x="2" y="8" width="2" height="8" fill="#ec4899"/>
+            <rect x="20" y="8" width="2" height="8" fill="#ec4899"/>
+            <rect x="4" y="16" width="2" height="2" fill="#ec4899"/>
+            <rect x="18" y="16" width="2" height="2" fill="#ec4899"/>
+            <rect x="6" y="18" width="2" height="2" fill="#ec4899"/>
+            <rect x="8" y="20" width="8" height="2" fill="#ec4899"/>
+            <rect x="16" y="18" width="2" height="2" fill="#ec4899"/>
             
-            {/* Vinyl grooves */}
-            <circle cx="16" cy="16" r="12" fill="none" stroke="#ec4899" strokeWidth="0.5" opacity="0.4" />
-            <circle cx="16" cy="16" r="10" fill="none" stroke="#ec4899" strokeWidth="0.5" opacity="0.4" />
-            <circle cx="16" cy="16" r="8" fill="none" stroke="#ec4899" strokeWidth="0.5" opacity="0.4" />
+            {/* Grooves */}
+            <rect x="6" y="6" width="2" height="2" fill="#ff1b8d" opacity="0.6"/>
+            <rect x="16" y="6" width="2" height="2" fill="#ff1b8d" opacity="0.6"/>
+            <rect x="6" y="16" width="2" height="2" fill="#ff1b8d" opacity="0.6"/>
+            <rect x="16" y="16" width="2" height="2" fill="#ff1b8d" opacity="0.6"/>
             
-            {/* Center label */}
-            <circle cx="16" cy="16" r="5" fill="#22d3ee" />
+            {/* Center label - cyan */}
+            <rect x="10" y="10" width="4" height="4" fill="#22d3ee"/>
             
-            {/* Label text area */}
-            <circle cx="16" cy="16" r="3" fill="#1a1a1a" />
-            
-            {/* Spindle hole */}
-            <circle cx="16" cy="16" r="1" fill="#ec4899" />
-            
-            {/* Sound waves emanating */}
-            {animate && (
-                <>
-                    <motion.circle
-                        cx="16"
-                        cy="16"
-                        r="16"
-                        fill="none"
-                        stroke="#22d3ee"
-                        strokeWidth="2"
-                        initial={{ scale: 0.8, opacity: 0 }}
-                        animate={{ scale: 1.4, opacity: [0, 0.6, 0] }}
-                        transition={{ duration: 2, repeat: Infinity }}
-                    />
-                    <motion.circle
-                        cx="16"
-                        cy="16"
-                        r="16"
-                        fill="none"
-                        stroke="#ec4899"
-                        strokeWidth="2"
-                        initial={{ scale: 0.8, opacity: 0 }}
-                        animate={{ scale: 1.4, opacity: [0, 0.6, 0] }}
-                        transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
-                    />
-                </>
-            )}
+            {/* Center hole */}
+            <rect x="11" y="11" width="2" height="2" fill="#1a1a1a"/>
         </Component>
     );
 };
