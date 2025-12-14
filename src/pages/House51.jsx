@@ -19,6 +19,7 @@ export default function House51() {
     const [showMixer, setShowMixer] = useState(false);
     const [artistName] = useState('HOUSE51');
     const [trackGenerated, setTrackGenerated] = useState(null);
+    const bpm = 128; // Fixed 128 BPM house tempo
 
     const audioContextRef = useRef(null);
     const kickOscRef = useRef(null);
