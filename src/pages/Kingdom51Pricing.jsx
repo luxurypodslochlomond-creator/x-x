@@ -45,124 +45,250 @@ export default function Kingdom51Pricing() {
 
     return (
         <div className="min-h-screen bg-black p-4 flex items-center justify-center">
-            <div className="max-w-5xl w-full">
-                
+            <div className="max-w-6xl w-full">
+
                 {/* HEADER */}
-                <div className="text-center mb-12">
+                <div className="text-center mb-8">
                     <Kingdom51Crown8Bit size={80} animate={true} className="mx-auto mb-6" />
                     <h1 className="text-5xl font-black text-amber-400 mb-3 font-mono">CO-MANAGER51</h1>
-                    <p className="text-gray-400 text-sm font-mono">AI co-manager for music industry</p>
+                    <p className="text-gray-400 text-sm font-mono mb-3">AI co-manager for music industry</p>
+                    <div className="inline-block bg-gradient-to-r from-pink-500/20 to-green-500/20 border-2 border-pink-500 px-4 py-2 rounded-lg">
+                        <p className="text-pink-400 font-black text-sm font-mono">🏹 ROBIN HOOD PRICING</p>
+                        <p className="text-gray-400 text-xs font-mono">Labels fund free indie artists</p>
+                    </div>
                 </div>
 
                 {/* PRICING */}
-                <div className="grid md:grid-cols-2 gap-6">
+                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
                     
-                    {/* INDIE */}
-                    <motion.div
-                        whileHover={{ scale: 1.02 }}
-                        className="bg-black border-4 border-cyan-500 rounded-xl p-8"
-                        style={{ boxShadow: '0 0 40px rgba(6, 182, 212, 0.3)' }}
-                    >
-                        <Music className="w-12 h-12 text-cyan-400 mb-4" />
-                        <h2 className="text-3xl font-black text-white mb-2 font-mono">INDIE</h2>
-                        <p className="text-gray-400 text-sm mb-6 font-mono">Solo artist, band, producer</p>
-                        
-                        <div className="mb-6">
-                            <p className="text-5xl font-black text-cyan-400 font-mono">FREE</p>
-                            <p className="text-gray-500 text-sm font-mono">Forever</p>
-                        </div>
-
-                        <div className="space-y-3 mb-8">
-                            <div className="flex items-center gap-2 text-sm text-white font-mono">
-                                <Check className="w-5 h-5 text-cyan-400" />
-                                Calendar + Tasks
-                            </div>
-                            <div className="flex items-center gap-2 text-sm text-white font-mono">
-                                <Check className="w-5 h-5 text-cyan-400" />
-                                AI drafts messages
-                            </div>
-                            <div className="flex items-center gap-2 text-sm text-white font-mono">
-                                <Check className="w-5 h-5 text-cyan-400" />
-                                Gig tracking
-                            </div>
-                            <div className="flex items-center gap-2 text-sm text-white font-mono">
-                                <Check className="w-5 h-5 text-cyan-400" />
-                                Works offline
-                            </div>
-                        </div>
-
-                        <Button
-                            onClick={() => handleSubscribe('indie')}
-                            className="w-full bg-cyan-500 hover:bg-cyan-400 text-black font-black font-mono py-6 text-lg"
+                    {/* INDIE - FREE */}
+                        <motion.div
+                            whileHover={{ scale: 1.02 }}
+                            className="bg-black border-4 border-cyan-500 rounded-xl p-6"
+                            style={{ boxShadow: '0 0 40px rgba(6, 182, 212, 0.3)' }}
                         >
-                            START FREE
-                        </Button>
-                    </motion.div>
+                            <Music className="w-10 h-10 text-cyan-400 mb-3" />
+                            <h2 className="text-2xl font-black text-white mb-1 font-mono">INDIE</h2>
+                            <p className="text-gray-400 text-xs mb-4 font-mono">1-3 artists</p>
 
-                    {/* LABEL */}
-                    <motion.div
-                        whileHover={{ scale: 1.02 }}
-                        className="bg-black border-4 border-amber-500 rounded-xl p-8 relative"
-                        style={{ boxShadow: '0 0 40px rgba(245, 158, 11, 0.4)' }}
-                    >
-                        <div className="absolute -top-4 right-4 bg-green-500 text-black px-3 py-1 rounded font-black text-xs font-mono">
-                            2500x ROI
-                        </div>
+                            <div className="mb-4">
+                                <p className="text-4xl font-black text-cyan-400 font-mono">FREE</p>
+                                <p className="text-gray-500 text-xs font-mono">Forever</p>
+                            </div>
 
-                        <Building className="w-12 h-12 text-amber-400 mb-4" />
-                        <h2 className="text-3xl font-black text-white mb-2 font-mono">LABEL</h2>
-                        <p className="text-gray-400 text-sm mb-6 font-mono">Manage roster, rights, ROI</p>
-                        
-                        <div className="mb-6">
-                            <p className="text-5xl font-black text-amber-400 font-mono">£99</p>
-                            <p className="text-gray-500 text-sm font-mono">Per month / 10 artists</p>
-                        </div>
+                            <div className="space-y-2 mb-6">
+                                <div className="flex items-center gap-2 text-xs text-white font-mono">
+                                    <Check className="w-4 h-4 text-cyan-400" />
+                                    Calendar + Tasks
+                                </div>
+                                <div className="flex items-center gap-2 text-xs text-white font-mono">
+                                    <Check className="w-4 h-4 text-cyan-400" />
+                                    AI co-manager
+                                </div>
+                                <div className="flex items-center gap-2 text-xs text-white font-mono">
+                                    <Check className="w-4 h-4 text-cyan-400" />
+                                    Works offline
+                                </div>
+                            </div>
 
-                        <div className="space-y-3 mb-8">
-                            <div className="flex items-center gap-2 text-sm text-white font-mono">
-                                <Check className="w-5 h-5 text-amber-400" />
-                                Everything in Indie
-                            </div>
-                            <div className="flex items-center gap-2 text-sm text-white font-mono">
-                                <Check className="w-5 h-5 text-amber-400" />
-                                Multi-artist dashboard
-                            </div>
-                            <div className="flex items-center gap-2 text-sm text-white font-mono">
-                                <Check className="w-5 h-5 text-amber-400" />
-                                Publishing rights tracking
-                            </div>
-                            <div className="flex items-center gap-2 text-sm text-white font-mono">
-                                <Check className="w-5 h-5 text-amber-400" />
-                                Contract templates (AI)
-                            </div>
-                            <div className="flex items-center gap-2 text-sm text-white font-mono">
-                                <Check className="w-5 h-5 text-amber-400" />
-                                ROI dashboard
-                            </div>
-                            <div className="flex items-center gap-2 text-sm text-white font-mono">
-                                <Check className="w-5 h-5 text-amber-400" />
-                                White label rebrand
-                            </div>
-                        </div>
+                            <Button
+                                onClick={() => handleSubscribe('indie')}
+                                className="w-full bg-cyan-500 hover:bg-cyan-400 text-black font-black font-mono py-4 text-sm"
+                            >
+                                START FREE
+                            </Button>
 
-                        <Button
-                            onClick={() => handleSubscribe('label')}
-                            disabled={loading}
-                            className="w-full bg-amber-500 hover:bg-amber-400 text-black font-black font-mono py-6 text-lg"
+                            <div className="mt-4 bg-cyan-500/10 border border-cyan-500/30 rounded p-2">
+                                <p className="text-cyan-400 text-xs font-mono font-bold">🏹 Funded by labels</p>
+                            </div>
+                        </motion.div>
+
+                        {/* SMALL LABEL */}
+                        <motion.div
+                            whileHover={{ scale: 1.02 }}
+                            className="bg-black border-4 border-amber-500 rounded-xl p-6"
+                            style={{ boxShadow: '0 0 40px rgba(245, 158, 11, 0.4)' }}
                         >
-                            {loading ? 'LOADING...' : 'START TRIAL'}
-                        </Button>
-                        <p className="text-center text-gray-600 text-xs font-mono mt-3">7 days free • Cancel anytime</p>
-                    </motion.div>
+                            <Building className="w-10 h-10 text-amber-400 mb-3" />
+                            <h2 className="text-2xl font-black text-white mb-1 font-mono">SMALL</h2>
+                            <p className="text-gray-400 text-xs mb-4 font-mono">4-10 artists</p>
+
+                            <div className="mb-4">
+                                <p className="text-4xl font-black text-amber-400 font-mono">£99</p>
+                                <p className="text-gray-500 text-xs font-mono">Per month</p>
+                            </div>
+
+                            <div className="space-y-2 mb-6">
+                                <div className="flex items-center gap-2 text-xs text-white font-mono">
+                                    <Check className="w-4 h-4 text-amber-400" />
+                                    Everything in Indie
+                                </div>
+                                <div className="flex items-center gap-2 text-xs text-white font-mono">
+                                    <Check className="w-4 h-4 text-amber-400" />
+                                    Multi-artist dashboard
+                                </div>
+                                <div className="flex items-center gap-2 text-xs text-white font-mono">
+                                    <Check className="w-4 h-4 text-amber-400" />
+                                    Publishing tracking
+                                </div>
+                                <div className="flex items-center gap-2 text-xs text-white font-mono">
+                                    <Check className="w-4 h-4 text-amber-400" />
+                                    Contract templates
+                                </div>
+                            </div>
+
+                            <Button
+                                onClick={() => handleSubscribe('small_label')}
+                                disabled={loading}
+                                className="w-full bg-amber-500 hover:bg-amber-400 text-black font-black font-mono py-4 text-sm"
+                            >
+                                {loading ? 'LOADING...' : 'START 7-DAY TRIAL'}
+                            </Button>
+
+                            <div className="mt-4 bg-pink-500/10 border border-pink-500/30 rounded p-2">
+                                <p className="text-pink-400 text-xs font-mono font-bold">🏹 £10/mo funds indies</p>
+                            </div>
+                        </motion.div>
+
+                        {/* MID LABEL */}
+                        <motion.div
+                            whileHover={{ scale: 1.02 }}
+                            className="bg-black border-4 border-green-500 rounded-xl p-6 relative"
+                            style={{ boxShadow: '0 0 40px rgba(34, 197, 94, 0.4)' }}
+                        >
+                            <div className="absolute -top-3 right-4 bg-green-500 text-black px-2 py-1 rounded font-black text-xs font-mono">
+                                POPULAR
+                            </div>
+
+                            <Building className="w-10 h-10 text-green-400 mb-3" />
+                            <h2 className="text-2xl font-black text-white mb-1 font-mono">MID</h2>
+                            <p className="text-gray-400 text-xs mb-4 font-mono">11-30 artists</p>
+
+                            <div className="mb-4">
+                                <p className="text-4xl font-black text-green-400 font-mono">£499</p>
+                                <p className="text-gray-500 text-xs font-mono">Per month</p>
+                            </div>
+
+                            <div className="space-y-2 mb-6">
+                                <div className="flex items-center gap-2 text-xs text-white font-mono">
+                                    <Check className="w-4 h-4 text-green-400" />
+                                    Everything in Small
+                                </div>
+                                <div className="flex items-center gap-2 text-xs text-white font-mono">
+                                    <Check className="w-4 h-4 text-green-400" />
+                                    ROI dashboard
+                                </div>
+                                <div className="flex items-center gap-2 text-xs text-white font-mono">
+                                    <Check className="w-4 h-4 text-green-400" />
+                                    White label rebrand
+                                </div>
+                                <div className="flex items-center gap-2 text-xs text-white font-mono">
+                                    <Check className="w-4 h-4 text-green-400" />
+                                    Priority support
+                                </div>
+                            </div>
+
+                            <Button
+                                onClick={() => handleSubscribe('mid_label')}
+                                disabled={loading}
+                                className="w-full bg-green-500 hover:bg-green-400 text-black font-black font-mono py-4 text-sm"
+                            >
+                                {loading ? 'LOADING...' : 'START 7-DAY TRIAL'}
+                            </Button>
+
+                            <div className="mt-4 bg-pink-500/10 border border-pink-500/30 rounded p-2">
+                                <p className="text-pink-400 text-xs font-mono font-bold">🏹 £100/mo funds indies</p>
+                            </div>
+                        </motion.div>
+
+                        {/* MAJOR LABEL */}
+                        <motion.div
+                            whileHover={{ scale: 1.02 }}
+                            className="bg-black border-4 border-purple-500 rounded-xl p-6"
+                            style={{ boxShadow: '0 0 40px rgba(168, 85, 247, 0.4)' }}
+                        >
+                            <Crown className="w-10 h-10 text-purple-400 mb-3" />
+                            <h2 className="text-2xl font-black text-white mb-1 font-mono">MAJOR</h2>
+                            <p className="text-gray-400 text-xs mb-4 font-mono">30+ artists</p>
+
+                            <div className="mb-4">
+                                <p className="text-4xl font-black text-purple-400 font-mono">£2,499</p>
+                                <p className="text-gray-500 text-xs font-mono">Per month</p>
+                            </div>
+
+                            <div className="space-y-2 mb-6">
+                                <div className="flex items-center gap-2 text-xs text-white font-mono">
+                                    <Check className="w-4 h-4 text-purple-400" />
+                                    Everything in Mid
+                                </div>
+                                <div className="flex items-center gap-2 text-xs text-white font-mono">
+                                    <Check className="w-4 h-4 text-purple-400" />
+                                    Unlimited artists
+                                </div>
+                                <div className="flex items-center gap-2 text-xs text-white font-mono">
+                                    <Check className="w-4 h-4 text-purple-400" />
+                                    API access
+                                </div>
+                                <div className="flex items-center gap-2 text-xs text-white font-mono">
+                                    <Check className="w-4 h-4 text-purple-400" />
+                                    Dedicated support
+                                </div>
+                            </div>
+
+                            <Button
+                                onClick={() => handleSubscribe('major_label')}
+                                disabled={loading}
+                                className="w-full bg-purple-500 hover:bg-purple-400 text-black font-black font-mono py-4 text-sm"
+                            >
+                                {loading ? 'LOADING...' : 'CONTACT US'}
+                            </Button>
+
+                            <div className="mt-4 bg-pink-500/10 border border-pink-500/30 rounded p-2">
+                                <p className="text-pink-400 text-xs font-mono font-bold">🏹 £750/mo funds indies</p>
+                            </div>
+                        </motion.div>
 
                 </div>
 
-                {/* PROOF */}
-                <div className="mt-12 bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-2 border-green-500 rounded-xl p-6 text-center">
+                {/* WHERE THE MONEY GOES */}
+                <div className="bg-gradient-to-r from-pink-500/20 to-green-500/20 border-4 border-pink-500 rounded-xl p-6">
+                    <h2 className="text-2xl font-black text-center text-pink-400 mb-6 font-mono">🏹 WHERE YOUR MONEY GOES</h2>
+
+                    <div className="grid md:grid-cols-3 gap-4">
+                        <div className="bg-black border-2 border-cyan-500 rounded-lg p-4 text-center">
+                            <Music className="w-8 h-8 text-cyan-400 mx-auto mb-2" />
+                            <p className="text-cyan-400 font-black text-lg font-mono mb-1">50%</p>
+                            <p className="text-white text-sm font-mono">Free indie artists</p>
+                            <p className="text-gray-500 text-xs font-mono mt-1">Zero cost for struggling artists</p>
+                        </div>
+
+                        <div className="bg-black border-2 border-green-500 rounded-lg p-4 text-center">
+                            <Zap className="w-8 h-8 text-green-400 mx-auto mb-2" />
+                            <p className="text-green-400 font-black text-lg font-mono mb-1">30%</p>
+                            <p className="text-white text-sm font-mono">Healing frequencies</p>
+                            <p className="text-gray-500 text-xs font-mono mt-1">Mental health + artist support</p>
+                        </div>
+
+                        <div className="bg-black border-2 border-amber-500 rounded-lg p-4 text-center">
+                            <Crown className="w-8 h-8 text-amber-400 mx-auto mb-2" />
+                            <p className="text-amber-400 font-black text-lg font-mono mb-1">20%</p>
+                            <p className="text-white text-sm font-mono">Platform development</p>
+                            <p className="text-gray-500 text-xs font-mono mt-1">Better tools for everyone</p>
+                        </div>
+                    </div>
+
+                    <div className="mt-6 bg-black border-2 border-pink-500 rounded-lg p-4 text-center">
+                        <p className="text-white font-black text-sm font-mono mb-1">ZERO BULLSHIT GUARANTEE</p>
+                        <p className="text-gray-400 text-xs font-mono">Labels fund indies. Indies stay free forever. Everyone wins.</p>
+                    </div>
+                </div>
+
+                {/* VALUE PROOF */}
+                <div className="mt-8 bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-2 border-green-500 rounded-xl p-6 text-center">
                     <Zap className="w-8 h-8 text-green-400 mx-auto mb-3" />
-                    <p className="text-white font-black text-xl mb-2 font-mono">Labels save 142 hours/month</p>
-                    <p className="text-gray-400 text-sm font-mono">Worth £3,550 in time + £245k deals closed</p>
-                    <p className="text-green-400 text-xs font-mono mt-2">Provable ROI • Real results</p>
+                    <p className="text-white font-black text-xl mb-2 font-mono">Labels save 20+ hours/week</p>
+                    <p className="text-gray-400 text-sm font-mono">Replaces £30k-50k/year manager salary</p>
+                    <p className="text-green-400 text-xs font-mono mt-2">You save money • Indies get freed • Planet heals</p>
                 </div>
 
             </div>
