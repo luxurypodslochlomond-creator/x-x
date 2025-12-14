@@ -643,7 +643,7 @@ Listen: ${window.location.href}`;
                         <label className="text-[10px] text-gray-500 mb-1 block">VOL: {Math.round(volume * 100)}%</label>
                         <input type="range" min="0" max="1" step="0.01" value={volume} onChange={(e) => setVolume(parseFloat(e.target.value))} className="w-full h-1.5 bg-zinc-800 rounded appearance-none mb-3" />
                         <label className="text-[10px] text-gray-500 mb-1 block">BPM: {bpm}</label>
-                        <input type="range" min="110" max="140" value={bpm} onChange={(e) => setBpm(parseInt(e.target.value))} disabled={isPlaying} className="w-full h-1.5 bg-zinc-800 rounded appearance-none disabled:opacity-50" />
+                        <input type="range" min="110" max="140" value={bpm} disabled className="w-full h-1.5 bg-zinc-800 rounded appearance-none opacity-50" />
                     </div>
                 </div>
 
