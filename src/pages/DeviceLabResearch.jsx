@@ -278,7 +278,7 @@ export default function DeviceLabResearch() {
                 },
                 {
                     name: "Stereo Speakers",
-                    status: "underused",
+                    status: "unused",
                     capability: "Spatial audio positioning",
                     innovation: "Could use: 3D sound healing, binaural without headphones, speaker-based ultrasound communication",
                     tech: "Most phones have stereo now",
