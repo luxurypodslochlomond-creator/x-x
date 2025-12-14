@@ -493,7 +493,7 @@ export const COOLASFUCKP2P = ({ className = "", size = 24, animate = true }) => 
     );
 };
 
-// HOUSE51 ICON - 8-bit DJ turntable/mixer
+// HOUSE51 ICON - Vinyl record with warm grooves (Kerri Chandler vibes)
 export const COOLASFUCKHouse51 = ({ className = "", size = 24, animate = false }) => {
     const Component = animate ? motion.svg : 'svg';
     
@@ -504,43 +504,59 @@ export const COOLASFUCKHouse51 = ({ className = "", size = 24, animate = false }
             viewBox="0 0 24 24"
             className={className}
         >
-            {/* DJ Mixer body - purple/pink gradient */}
-            <rect x="3" y="6" width="18" height="14" fill="#6b21a8"/>
-            <rect x="4" y="7" width="16" height="12" fill="#7c3aed"/>
+            {/* Outer vinyl ring - warm amber/gold */}
+            <circle cx="12" cy="12" r="10" fill="#1a1a1a" />
+            <circle cx="12" cy="12" r="9.5" fill="#2a2a2a" />
             
-            {/* Left turntable/vinyl */}
-            <rect x="6" y="9" width="6" height="6" fill="#ec4899"/>
-            <rect x="7" y="10" width="4" height="4" fill="#ff1b8d"/>
-            <rect x="8" y="11" width="2" height="2" fill="#22d3ee"/>
+            {/* Vinyl grooves - multiple rings for authenticity */}
+            <circle cx="12" cy="12" r="8.5" fill="none" stroke="#3a3a3a" strokeWidth="0.3" />
+            <circle cx="12" cy="12" r="7.5" fill="none" stroke="#3a3a3a" strokeWidth="0.3" />
+            <circle cx="12" cy="12" r="6.5" fill="none" stroke="#3a3a3a" strokeWidth="0.3" />
+            <circle cx="12" cy="12" r="5.5" fill="none" stroke="#3a3a3a" strokeWidth="0.3" />
+            <circle cx="12" cy="12" r="4.5" fill="none" stroke="#3a3a3a" strokeWidth="0.3" />
             
-            {/* Right turntable/vinyl */}
-            <rect x="13" y="9" width="6" height="6" fill="#ec4899"/>
-            <rect x="14" y="10" width="4" height="4" fill="#ff1b8d"/>
-            <rect x="15" y="11" width="2" height="2" fill="#22d3ee"/>
+            {/* Center label - warm gradient pink to amber */}
+            <circle cx="12" cy="12" r="4" fill="#ec4899" />
+            <circle cx="12" cy="12" r="3.5" fill="#f59e0b" />
             
-            {/* Mixer faders - vertical lines */}
-            <rect x="7" y="16" width="1" height="2" fill="#22d3ee"/>
-            <rect x="9" y="17" width="1" height="1" fill="#22d3ee"/>
-            <rect x="11" y="16" width="1" height="2" fill="#fbbf24"/>
-            <rect x="13" y="17" width="1" height="1" fill="#fbbf24"/>
-            <rect x="15" y="16" width="1" height="2" fill="#10b981"/>
-            <rect x="17" y="17" width="1" height="1" fill="#10b981"/>
+            {/* Label text area */}
+            <circle cx="12" cy="12" r="3" fill="#fbbf24" />
             
-            {/* Top panel indicators */}
-            <rect x="6" y="4" width="2" height="1" fill="#22d3ee"/>
-            <rect x="11" y="4" width="2" height="1" fill="#ec4899"/>
-            <rect x="16" y="4" width="2" height="1" fill="#10b981"/>
+            {/* Center hole */}
+            <circle cx="12" cy="12" r="1" fill="#1a1a1a" />
             
-            {/* Glow effect when animating */}
+            {/* Subtle light reflection - top left */}
+            <path 
+                d="M 8 7 Q 10 6 12 6 Q 14 6 16 7" 
+                fill="none" 
+                stroke="#ffffff" 
+                strokeWidth="0.5" 
+                opacity="0.15"
+            />
+            
+            {/* Warm glow when playing */}
             {animate && (
-                <motion.rect 
-                    x="3" y="6" width="18" height="14" 
-                    fill="none" 
-                    stroke="#ec4899" 
-                    strokeWidth="1"
-                    animate={{ opacity: [0.3, 0.8, 0.3] }}
-                    transition={{ duration: 1.5, repeat: Infinity }}
-                />
+                <>
+                    <motion.circle 
+                        cx="12" cy="12" r="11"
+                        fill="none" 
+                        stroke="#f59e0b" 
+                        strokeWidth="0.5"
+                        animate={{ 
+                            opacity: [0.2, 0.5, 0.2],
+                            r: [10.5, 11.5, 10.5]
+                        }}
+                        transition={{ duration: 2, repeat: Infinity }}
+                    />
+                    <motion.circle 
+                        cx="12" cy="12" r="3.5"
+                        fill="#ec4899"
+                        animate={{ 
+                            opacity: [0.6, 1, 0.6]
+                        }}
+                        transition={{ duration: 1.5, repeat: Infinity }}
+                    />
+                </>
             )}
         </Component>
     );
