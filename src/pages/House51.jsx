@@ -906,9 +906,6 @@ export default function House51() {
                     </div>
                 </div>
 
-
-            </div>
-
                 {showMixer && (
                     <div className="mt-4 bg-zinc-950 border border-cyan-500 rounded-lg p-3">
                         <h3 className="text-xs font-black text-cyan-400 mb-2">10-CHANNEL MIXER</h3>
