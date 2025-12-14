@@ -14,6 +14,10 @@ import { createPageUrl } from '@/utils';
  * For LA pitch - show funders THEIR version
  */
 
+import { Link } from 'react-router-dom';
+import { createPageUrl } from '@/utils';
+import { DollarSign } from 'lucide-react';
+
 export default function ScottWhiteLabel() {
     return (
         <div className="min-h-screen bg-black p-4 pb-32">
