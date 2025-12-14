@@ -138,13 +138,13 @@ export default function Prof51() {
                         <p className="text-pink-400 text-xs">→ Split bills automatically</p>
                     </div>
 
-                    <div className="bg-black border border-red-500/30 p-3 rounded">
-                        <p className="text-red-400 font-bold mb-2">SAFETY FEATURES:</p>
-                        <p className="text-white text-xs mb-2">Walk home together • Emergency contacts • Location sharing</p>
-                        <p className="text-green-400 text-xs mb-1">→ "Walking home now" (friends see your route)</p>
-                        <p className="text-cyan-400 text-xs mb-1">→ Emergency button (alerts your group)</p>
-                        <p className="text-amber-400 text-xs mb-1">→ Mental health check-ins (AI51 notices patterns)</p>
-                        <p className="text-gray-400 text-xs">P2P = works even if phone network fails</p>
+                    <div className="bg-black border border-amber-500/30 p-3 rounded">
+                        <p className="text-amber-400 font-bold mb-2">COMPANIES WANT YOU:</p>
+                        <p className="text-white text-xs mb-2">Students = £50B spending power UK alone</p>
+                        <p className="text-green-400 text-xs mb-1">→ Brands pay Prof51 for verified student access</p>
+                        <p className="text-cyan-400 text-xs mb-1">→ Students get quality deals, not scam shit</p>
+                        <p className="text-pink-400 text-xs mb-1">→ You control what brands see (opt-in only)</p>
+                        <p className="text-gray-400 text-xs">Win-win: Students save money, brands reach real customers</p>
                     </div>
 
                     <div className="bg-black border border-cyan-500/30 p-3 rounded">
@@ -222,12 +222,12 @@ export default function Prof51() {
 
                                 <div className="bg-black border border-purple-500/30 p-3 rounded">
                                     <p className="text-purple-400 font-bold mb-2">FULL FEATURES (Month 3):</p>
-                                    <p className="text-white text-xs mb-1">✓ Student deals (gigs, travel, fashion)</p>
-                                    <p className="text-white text-xs mb-1">✓ Accommodation matcher + landlord ratings</p>
-                                    <p className="text-white text-xs mb-1">✓ Safety features (walk home, emergency alerts)</p>
-                                    <p className="text-white text-xs mb-1">✓ Funding tracker (loans, grants, income)</p>
+                                    <p className="text-white text-xs mb-1">✓ Student deals (brands pay Prof51, students benefit)</p>
+                                    <p className="text-white text-xs mb-1">✓ Funding tracker (know your money)</p>
                                     <p className="text-white text-xs mb-1">✓ $P51 marketplace (earn + spend local)</p>
-                                    <p className="text-green-400 text-xs mt-2">Everything students need. One app. Zero doom.</p>
+                                    <p className="text-white text-xs mb-1">✓ Accommodation matcher (find flatmates)</p>
+                                    <p className="text-white text-xs mb-1">✓ Graduate job pipeline (companies hiring)</p>
+                                    <p className="text-green-400 text-xs mt-2">Empowering students. Not holding them back. Rise up ✓</p>
                                 </div>
 
                                 <div className="bg-gradient-to-r from-amber-500/20 to-pink-500/20 border-2 border-amber-500 p-4 rounded">
@@ -241,24 +241,42 @@ export default function Prof51() {
                             </div>
                         </div>
 
-                        {/* ARCHIE GEMMILL ENERGY */}
-                        <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-4 border-green-500 p-6 rounded-xl">
+                        {/* ARCHIE AS CEO */}
+                        <div className="bg-gradient-to-r from-amber-500/20 to-purple-500/20 border-4 border-amber-500 p-6 rounded-xl" style={{ boxShadow: '0 0 50px rgba(245, 158, 11, 0.5)' }}>
                             <div className="flex items-center gap-3 mb-4">
-                                <span className="text-4xl">⚽</span>
+                                <GraduationCap className="w-12 h-12 text-amber-400" />
                                 <div>
-                                    <p className="text-green-400 font-black text-lg font-mono">ARCHIE GEMMILL ENERGY</p>
-                                    <p className="text-gray-400 text-xs font-mono">That goal vs Holland - impossible till he did it</p>
+                                    <p className="text-amber-400 font-black text-xl font-mono">ARCHIE = CEO POTENTIAL</p>
+                                    <p className="text-gray-400 text-xs font-mono">Economics student → TechForGood CEO</p>
                                 </div>
                             </div>
-                            <p className="text-white text-sm font-mono mb-2">
-                                "Can't dribble past 3 defenders" → He did it anyway ⚽
-                            </p>
-                            <p className="text-cyan-400 text-sm font-mono mb-2">
-                                "Can't give every student an AI tutor" → Watch us ♾️❤️♾️
-                            </p>
-                            <p className="text-green-400 text-xs font-mono font-bold">
-                                Same name. Same fearless energy. Let's make history bro ❤️
-                            </p>
+                            
+                            <div className="space-y-3 text-sm font-mono">
+                                <div className="bg-black border border-amber-500/30 p-3 rounded">
+                                    <p className="text-white font-bold mb-2">WHY ARCHIE IS PERFECT:</p>
+                                    <p className="text-gray-300 text-xs mb-1">✓ Economics degree = understands business</p>
+                                    <p className="text-gray-300 text-xs mb-1">✓ Edinburgh student = knows the pain</p>
+                                    <p className="text-gray-300 text-xs mb-1">✓ Named after Archie Gemmill = fearless energy ⚽</p>
+                                    <p className="text-gray-300 text-xs">✓ Gen Z = speaks student language</p>
+                                </div>
+
+                                <div className="bg-black border border-green-500/30 p-3 rounded">
+                                    <p className="text-green-400 font-bold mb-2">THE OPPORTUNITY:</p>
+                                    <p className="text-white text-xs mb-1">235M students globally × £2,000 avg spending = £470B market</p>
+                                    <p className="text-cyan-400 text-xs mb-1">Companies desperate for student access (ethical way)</p>
+                                    <p className="text-pink-400 text-xs mb-1">Archie becomes bridge: students ↔ quality brands</p>
+                                    <p className="text-amber-400 text-xs font-bold mt-2">TechForGood CEO by 25. Real impact. Real money. ♾️❤️♾️</p>
+                                </div>
+
+                                <div className="bg-black border border-purple-500/30 p-3 rounded">
+                                    <p className="text-purple-400 font-bold mb-2">THE PATH:</p>
+                                    <p className="text-white text-xs mb-1">Year 1: Campus ambassador (Edinburgh)</p>
+                                    <p className="text-white text-xs mb-1">Year 2: Head of Growth (UK universities)</p>
+                                    <p className="text-white text-xs mb-1">Year 3: COO (global expansion)</p>
+                                    <p className="text-white text-xs mb-1">Year 4: CEO (10M students, £50M valuation)</p>
+                                    <p className="text-green-400 text-xs font-bold mt-2">Graduate → CEO in 3 years. Not theory. Real plan. ✓</p>
+                                </div>
+                            </div>
                         </div>
                     </motion.div>
                 )}
@@ -392,10 +410,11 @@ export default function Prof51() {
                                 </div>
 
                                 <div className="bg-black border border-purple-500/30 p-3 rounded">
-                                    <p className="text-purple-400 font-bold mb-2">🎓 UNIVERSITIES THEMSELVES:</p>
-                                    <p className="text-white text-xs mb-2">Official partnerships with Prof51</p>
-                                    <p className="text-cyan-400 text-xs mb-1">→ Students succeed → University rankings rise</p>
-                                    <p className="text-green-400 text-xs">Win-win: Better outcomes, lower dropout rates</p>
+                                    <p className="text-purple-400 font-bold mb-2">🎓 UNIVERSITIES + COMPANIES:</p>
+                                    <p className="text-white text-xs mb-2">Unis partner for better outcomes, companies for talent pipeline</p>
+                                    <p className="text-cyan-400 text-xs mb-1">→ Universities: Better grades, higher rankings</p>
+                                    <p className="text-green-400 text-xs mb-1">→ Companies: Hire best students direct (skip LinkedIn)</p>
+                                    <p className="text-amber-400 text-xs">→ Students: Graduate with jobs lined up</p>
                                 </div>
 
                                 <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-2 border-green-500 p-4 rounded mt-4">
@@ -462,12 +481,12 @@ export default function Prof51() {
                         <p className="text-green-400 font-bold mb-2">✓ PROF51:</p>
                         <p className="text-white text-xs mb-1">• FREE forever (funded by grants)</p>
                         <p className="text-white text-xs mb-1">• Works offline (P2P mesh)</p>
-                        <p className="text-white text-xs mb-1">• Import ANY old files (Excel, Word, handwritten notes)</p>
-                        <p className="text-white text-xs mb-1">• Private chat + study groups (encrypted)</p>
-                        <p className="text-white text-xs mb-1">• Quality student deals (gigs, travel, fashion)</p>
-                        <p className="text-white text-xs mb-1">• Accommodation help + safety features</p>
+                        <p className="text-white text-xs mb-1">• Import old files (makes them useful)</p>
+                        <p className="text-white text-xs mb-1">• Private chat (study groups)</p>
+                        <p className="text-white text-xs mb-1">• Quality deals (brands pay, students benefit)</p>
+                        <p className="text-white text-xs mb-1">• Graduate job pipeline</p>
                         <p className="text-white text-xs mb-1">• Zero data extraction</p>
-                        <p className="text-cyan-400 text-xs font-bold mt-2">Everything students need. Built with love. ♾️❤️♾️</p>
+                        <p className="text-cyan-400 text-xs font-bold mt-2">Empowers students. Doesn't hold them back. Rise up. ♾️❤️♾️</p>
                     </div>
                 </div>
             </div>
