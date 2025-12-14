@@ -17,6 +17,23 @@ export default function House51() {
     const [playbackTime, setPlaybackTime] = useState(0);
     const [totalDuration] = useState(180); // 3 minute track
     const [showMixer, setShowMixer] = useState(false);
+    const [artistName, setArtistName] = useState('Anonymous Artist');
+    const [trackGenerated, setTrackGenerated] = useState(null);
+
+    // Get user info for credits
+    useEffect(() => {
+        const loadArtist = async () => {
+            try {
+                const user = await base44.auth.me();
+                if (user?.full_name) {
+                    setArtistName(user.full_name);
+                }
+            } catch (err) {
+                // Stay anonymous
+            }
+        };
+        loadArtist();
+    }, []);
 
     const audioContextRef = useRef(null);
     const kickOscRef = useRef(null);
@@ -138,6 +155,8 @@ export default function House51() {
         };
         trackTime();
 
+        // Track metadata
+        setTrackGenerated(new Date().toISOString());
         setIsPlaying(true);
     };
 
@@ -471,19 +490,28 @@ export default function House51() {
 
     // SHARE P2P
     const shareP2P = async () => {
+        const shareText = `🎵 ${currentStyleData.name} by ${artistName}
+
+⚡ HOUSE51 - 3-minute healing house track
+💚 432Hz + 528Hz frequencies
+🎚️ Real Web Audio synthesis
+♾️ Lossless quality
+
+Listen: ${window.location.href}`;
+
         if (navigator.share) {
             try {
                 await navigator.share({
-                    title: 'HOUSE51 - Healing House Music',
-                    text: `3-minute ${currentStyleData.name} track with 432Hz + 528Hz healing frequencies ⚡♾️❤️♾️`,
+                    title: `${currentStyleData.name} - ${artistName}`,
+                    text: shareText,
                     url: window.location.href
                 });
             } catch (err) {
                 console.log('Share cancelled');
             }
         } else {
-            navigator.clipboard.writeText(window.location.href);
-            alert('Link copied!');
+            navigator.clipboard.writeText(shareText);
+            alert('Track info copied! ⚡♾️❤️♾️');
         }
     };
 
@@ -532,8 +560,16 @@ export default function House51() {
                         >
                             <COOLASFUCKHouse51 size={120} />
                         </motion.div>
-                        <p className="text-amber-500 font-bold text-sm mb-1">{currentStyleData.name}</p>
+                        <p className="text-white font-bold text-base mb-1">{currentStyleData.name}</p>
+                        <p className="text-amber-500 text-sm font-bold mb-1">by {artistName}</p>
                         <p className="text-gray-500 text-xs">{currentStyleData.vibe}</p>
+                        <div className="flex items-center justify-center gap-2 mt-2">
+                            <span className="text-pink-400 text-xs font-bold">432Hz</span>
+                            <span className="text-gray-600">•</span>
+                            <span className="text-cyan-400 text-xs font-bold">528Hz</span>
+                            <span className="text-gray-600">•</span>
+                            <span className="text-gray-500 text-xs">Healing</span>
+                        </div>
                     </div>
 
                     <div className="flex items-center justify-between text-[10px] text-gray-500 mb-2">
