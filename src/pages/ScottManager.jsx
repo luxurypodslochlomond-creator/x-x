@@ -4,7 +4,7 @@ import { createPageUrl } from '@/utils';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Plus, Search, Wifi, WifiOff, RefreshCw, Brain, DollarSign, FileText, Music, Globe, Briefcase, Camera, Plane, Users, Crown, Palette } from 'lucide-react';
+import { Plus, Search, Wifi, WifiOff, RefreshCw, Brain, DollarSign, FileText, Music, Globe, Briefcase, Camera, Plane, Users, Crown, Palette, Heart } from 'lucide-react';
 import { motion } from 'framer-motion';
 import KingdomCrown8Bit from '@/components/shared/KingdomCrown8Bit';
 import Kingdom51Crown8Bit from '@/components/shared/Kingdom51Crown8Bit';
@@ -161,9 +161,14 @@ function ScottManagerInner() {
                             {scott.isOnline ? 'Online' : 'Offline'}
                         </p>
                     </div>
-                    <Link to={createPageUrl('ScottCalendar')} className="p-2 bg-gray-900 hover:bg-gray-800 rounded transition-all">
-                        <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                    </Link>
+                    <div className="flex items-center gap-2">
+                        <Link to={createPageUrl('ScottWhiteLabelPricing')} className="p-2 bg-amber-500 hover:bg-amber-400 rounded transition-all">
+                            <DollarSign className="w-5 h-5 text-black" />
+                        </Link>
+                        <Link to={createPageUrl('ScottCalendar')} className="p-2 bg-gray-900 hover:bg-gray-800 rounded transition-all">
+                            <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                        </Link>
+                    </div>
                 </div>
             </div>
 
@@ -557,6 +562,22 @@ function ScottManagerInner() {
             <div className="mb-6">
                 <ScottFamilyCredit />
             </div>
+
+            {/* PRICING - COOLASFUCK */}
+            <Link to={createPageUrl('ScottWhiteLabelPricing')} className="block mb-6">
+                <div className="bg-gradient-to-r from-pink-500/20 to-amber-500/20 border-4 border-pink-500 p-4 rounded-xl" style={{ boxShadow: '0 0 40px rgba(236, 72, 153, 0.4)' }}>
+                    <div className="flex items-center gap-3 mb-2">
+                        <Heart className="w-8 h-8 text-pink-400" />
+                        <div>
+                            <p className="text-pink-400 font-black text-base font-mono">🏹 PRICING</p>
+                            <p className="text-amber-400 text-xs font-mono">Labels fund cleanup crews</p>
+                        </div>
+                    </div>
+                    <p className="text-gray-400 text-xs font-mono">
+                        Free indies • £49-£1,499 labels • Your money pays people to heal planet ♾️❤️♾️
+                    </p>
+                </div>
+            </Link>
 
             {/* BIGGER VISION */}
             <Link to={createPageUrl('ScottBiggerVision')} className="block mb-6">
