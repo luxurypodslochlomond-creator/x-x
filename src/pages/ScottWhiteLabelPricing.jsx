@@ -186,7 +186,7 @@ export default function ScottWhiteLabelPricing() {
                                 </div>
                                 <div className="flex items-center gap-2 text-xs text-white font-mono">
                                     <Check className="w-4 h-4 text-green-400" />
-                                    Team collaboration
+                                    <span className="font-bold">Offline team chat + sync</span>
                                 </div>
                                 <div className="flex items-center gap-2 text-xs text-white font-mono">
                                     <Check className="w-4 h-4 text-green-400" />
@@ -237,7 +237,7 @@ export default function ScottWhiteLabelPricing() {
                                 </div>
                                 <div className="flex items-center gap-2 text-xs text-white font-mono">
                                     <Check className="w-4 h-4 text-purple-400" />
-                                    ROI dashboard
+                                    <span className="font-bold">Video calls (offline)</span>
                                 </div>
                                 <div className="flex items-center gap-2 text-xs text-white font-mono">
                                     <Check className="w-4 h-4 text-purple-400" />
@@ -245,7 +245,7 @@ export default function ScottWhiteLabelPricing() {
                                 </div>
                                 <div className="flex items-center gap-2 text-xs text-white font-mono">
                                     <Check className="w-4 h-4 text-purple-400" />
-                                    Priority support
+                                    ROI dashboard
                                 </div>
                             </div>
 
@@ -284,15 +284,15 @@ export default function ScottWhiteLabelPricing() {
                                 </div>
                                 <div className="flex items-center gap-2 text-xs text-white font-mono">
                                     <Check className="w-4 h-4 text-pink-400" />
-                                    Unlimited artists
+                                    Unlimited artists + team
                                 </div>
                                 <div className="flex items-center gap-2 text-xs text-white font-mono">
                                     <Check className="w-4 h-4 text-pink-400" />
-                                    API access
+                                    <span className="font-bold">P2P mesh (10+ devices)</span>
                                 </div>
                                 <div className="flex items-center gap-2 text-xs text-white font-mono">
                                     <Check className="w-4 h-4 text-pink-400" />
-                                    Dedicated support
+                                    API + custom features
                                 </div>
                             </div>
 
@@ -381,10 +381,10 @@ export default function ScottWhiteLabelPricing() {
 
                     <div className="bg-black border-2 border-green-500/30 rounded-lg p-4">
                         <p className="text-white text-sm font-mono mb-2">
-                            Tour logistics • Publishing splits • Contract drafts • Invoice tracking • Guest lists • Media uploads
+                            Tour logistics • Publishing splits • Contract drafts • Invoice tracking • Guest lists • Media uploads • <span className="font-bold text-cyan-400">Offline team chat</span>
                         </p>
                         <p className="text-green-400 text-xs font-mono font-bold">
-                            Not theory. Real usage. Works in van with no signal. ✓
+                            Not theory. Real usage. Works in van with no signal. Team syncs device-to-device. ✓
                         </p>
                     </div>
                 </div>
