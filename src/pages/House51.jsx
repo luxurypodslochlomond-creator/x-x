@@ -81,6 +81,22 @@ export default function House51() {
                 { section: 'peak', start: 110, end: 140, layers: ['kick', 'bass', 'hats', 'claps', 'ride', 'pads', 'healing'] },
                 { section: 'outro', start: 140, end: 165, layers: ['kick', 'bass', 'healing'], fadeOut: true }
             ]
+        },
+        i_feel_frequency: {
+            name: "I Feel Frequency",
+            artist: "HOUSE51 ft. Giorgio",
+            style: "moroder",
+            duration: 195,
+            vibe: "Cosmic synth journey - Moroder tribute",
+            arrangement: [
+                { section: 'arpeggios', start: 0, end: 30, layers: ['kick', 'arpeggio', 'healing'] },
+                { section: 'build', start: 30, end: 60, layers: ['kick', 'arpeggio', 'hats', 'healing'] },
+                { section: 'synth_drop', start: 60, end: 90, layers: ['kick', 'arpeggio', 'hats', 'strings', 'healing'] },
+                { section: 'cosmic', start: 90, end: 120, layers: ['kick', 'arpeggio', 'hats', 'pads', 'strings', 'healing'] },
+                { section: 'breakdown', start: 120, end: 150, layers: ['arpeggio', 'pads', 'healing'] },
+                { section: 'finale', start: 150, end: 180, layers: ['kick', 'arpeggio', 'hats', 'pads', 'strings', 'healing'] },
+                { section: 'outro', start: 180, end: 195, layers: ['arpeggio', 'healing'], fadeOut: true }
+            ]
         }
     };
 
@@ -126,8 +142,14 @@ export default function House51() {
                 vibe: "CamelPhat - Cola",
                 icon: Brain,
                 frequencies: { kick: 65, bass: 128 },
+            },
+            moroder: {
+                name: "Moroder Synth",
+                vibe: "Giorgio Moroder - I Feel Love",
+                icon: Zap,
+                frequencies: { kick: 60, bass: 120 },
             }
-        };
+            };
 
     // START PLAYING - FREESTYLE OR TRACK MODE
     const startHouse = async () => {
@@ -170,7 +192,14 @@ export default function House51() {
 
         // Compose using track arrangement
         track.arrangement.forEach(section => {
-            composeSection(ctx, masterGain, now, section.start, section.end, section.layers, style, section.fadeOut);
+            // Handle special arpeggio layer for Moroder
+            const layers = section.layers.map(l => l === 'arpeggio' ? 'bass' : l);
+            composeSection(ctx, masterGain, now, section.start, section.end, layers, style, section.fadeOut);
+
+            // Add arpeggio separately if present
+            if (section.layers.includes('arpeggio')) {
+                playArpeggioSection(ctx, masterGain, now + section.start, section.end - section.start, style);
+            }
         });
 
         // Auto-stop
@@ -349,7 +378,8 @@ export default function House51() {
             glasgow: [1, 1, 1.3, 1.3, 1, 1.5, 1, 1.2],
             deep: [1, 1, 1.5, 1, 1.25, 1, 1.5, 1.25],
             soulful: [1, 1.2, 1, 1.5, 1.2, 1, 1.3, 1],
-            tech: [1, 1, 1.25, 1.25, 1, 1.5, 1.25, 1]
+            tech: [1, 1, 1.25, 1.25, 1, 1.5, 1.25, 1],
+            moroder: [1, 1, 1, 1, 1, 1, 1, 1] // Steady driving pulse
         };
 
         const pattern = patterns[currentStyle] || patterns.deep;
@@ -594,6 +624,47 @@ export default function House51() {
             gain.connect(destination);
             osc.start(time);
             osc.stop(time + 0.4);
+        }
+    };
+
+    // ARPEGGIO SECTION - Moroder-style pulsing synth
+    const playArpeggioSection = (ctx, destination, startTime, duration, style) => {
+        const beatDuration = 60 / 128;
+        const bassFreq = style.frequencies.bass;
+
+        // Classic 16th note arpeggio pattern (I Feel Love style)
+        const pattern = [1, 1.5, 2, 2.5, 3, 2.5, 2, 1.5]; // Octaves and fifths
+        const noteLength = beatDuration / 4; // 16th notes
+        const numNotes = Math.floor(duration / noteLength);
+
+        for (let i = 0; i < numNotes; i++) {
+            const time = startTime + (i * noteLength);
+            const mult = pattern[i % pattern.length];
+
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            const filter = ctx.createBiquadFilter();
+
+            osc.type = 'sawtooth'; // Classic Moog sound
+            osc.frequency.value = bassFreq * mult;
+
+            // Sweeping filter - THE Moroder signature
+            filter.type = 'lowpass';
+            const filterStart = 800 + (i % 64) * 30; // Evolving sweep
+            filter.frequency.setValueAtTime(filterStart, time);
+            filter.frequency.exponentialRampToValueAtTime(filterStart * 2, time + noteLength * 0.5);
+            filter.Q.value = 5; // Resonant filter
+
+            // Tight envelope for pulsing effect
+            gain.gain.setValueAtTime(0, time);
+            gain.gain.linearRampToValueAtTime(0.08, time + 0.001);
+            gain.gain.exponentialRampToValueAtTime(0.001, time + noteLength * 0.8);
+
+            osc.connect(filter);
+            filter.connect(gain);
+            gain.connect(destination);
+            osc.start(time);
+            osc.stop(time + noteLength);
         }
     };
 
