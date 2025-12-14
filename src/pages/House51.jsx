@@ -13,31 +13,10 @@ import { base44 } from '@/api/base44Client';
 export default function House51() {
     const [isPlaying, setIsPlaying] = useState(false);
     const [currentStyle, setCurrentStyle] = useState('deep');
-    const [healingLayers, setHealingLayers] = useState({
-        love: true,        // 528Hz
-        calm: true,        // 432Hz
-        earth: false,      // 7.83Hz (sub-bass)
-        focus: false       // 40Hz gamma
-    });
     const [volume, setVolume] = useState(0.7);
-    const [bpm, setBpm] = useState(128);
-    const [isRecording, setIsRecording] = useState(false);
-    const [waveformData, setWaveformData] = useState(new Array(64).fill(0));
     const [playbackTime, setPlaybackTime] = useState(0);
-    const [totalDuration, setTotalDuration] = useState(240); // 4 minutes default
+    const [totalDuration] = useState(180); // 3 minute track
     const [showMixer, setShowMixer] = useState(false);
-    const [mixerLevels, setMixerLevels] = useState({
-        kick: 1.0,
-        bass: 0.3,
-        hats: 0.1,
-        claps: 0.25,
-        bells: 0.02,      // Lower - can be harsh on ears
-        pads: 0.05,
-        strings: 0.15,
-        shakers: 0.06,
-        ride: 0.08,
-        healing: 0.08
-    });
 
     const audioContextRef = useRef(null);
     const kickOscRef = useRef(null);
@@ -88,61 +67,54 @@ export default function House51() {
         }
     };
 
-    // START PLAYING
+    // START PLAYING - 3 MINUTE TRACK
     const startHouse = async () => {
         const ctx = new (window.AudioContext || window.webkitAudioContext)();
         audioContextRef.current = ctx;
 
-        // Master gain
         const masterGain = ctx.createGain();
         masterGain.gain.value = volume;
         masterGain.connect(ctx.destination);
         masterGainRef.current = masterGain;
 
-        // Create mixer gain nodes for each layer
-        const mixerGains = {};
-        ['kick', 'bass', 'hats', 'claps', 'bells', 'pads', 'strings', 'shakers', 'ride', 'healing'].forEach(layer => {
-            const gain = ctx.createGain();
-            gain.gain.value = mixerLevels[layer];
-            gain.connect(masterGain);
-            mixerGains[layer] = gain;
-        });
-        mixerGainsRef.current = mixerGains;
-
-        // Analyzer for visualization
         const analyser = ctx.createAnalyser();
         analyser.fftSize = 128;
         masterGain.connect(analyser);
 
-        // Start kick drum loop
-        playKickPattern(ctx, mixerGains.kick);
+        const now = ctx.currentTime;
+        const style = styles[currentStyle];
+        const beatDuration = 60 / 128; // 128 BPM
 
-        // Start bass line
-        playBassline(ctx, mixerGains.bass);
+        // 3-MINUTE TRACK STRUCTURE (180 seconds)
+        // 0-30s: INTRO (kick + bass + healing)
+        // 30-60s: BUILD (add hats + claps)
+        // 60-90s: DROP (full energy - all layers)
+        // 90-120s: BREAKDOWN (pads + strings + bells)
+        // 120-150s: CLIMAX (everything maximum)
+        // 150-180s: OUTRO (fade out)
 
-        // Start healing frequencies
-        startHealingLayers(ctx, mixerGains.healing);
+        // INTRO (0-30s) - Kick + Bass + 432/528Hz
+        composeSection(ctx, masterGain, now, 0, 30, ['kick', 'bass', 'healing'], style);
 
-        // Start hi-hats
-        playHiHats(ctx, mixerGains.hats);
+        // BUILD (30-60s) - Add hats, claps
+        composeSection(ctx, masterGain, now, 30, 60, ['kick', 'bass', 'hats', 'claps', 'healing'], style);
 
-        // Start bells/chimes
-        playBells(ctx, mixerGains.bells);
+        // DROP (60-90s) - Full energy
+        composeSection(ctx, masterGain, now, 60, 90, ['kick', 'bass', 'hats', 'claps', 'bells', 'shakers', 'healing'], style);
 
-        // Start claps
-        playClaps(ctx, mixerGains.claps);
+        // BREAKDOWN (90-120s) - Emotional
+        composeSection(ctx, masterGain, now, 90, 120, ['kick', 'pads', 'strings', 'bells', 'healing'], style);
 
-        // Start pads
-        playPads(ctx, mixerGains.pads);
+        // CLIMAX (120-150s) - Everything
+        composeSection(ctx, masterGain, now, 120, 150, ['kick', 'bass', 'hats', 'claps', 'bells', 'pads', 'strings', 'shakers', 'ride', 'healing'], style);
 
-        // Start strings
-        playStrings(ctx, mixerGains.strings);
+        // OUTRO (150-180s) - Fade
+        composeSection(ctx, masterGain, now, 150, 180, ['kick', 'bass', 'pads', 'healing'], style, true);
 
-        // Start shakers
-        playShakers(ctx, mixerGains.shakers);
-
-        // Start ride cymbal
-        playRide(ctx, mixerGains.ride);
+        // Auto-stop at 180s
+        setTimeout(() => {
+            stopHouse();
+        }, 180000);
 
         // Visualizer
         const updateWaveform = () => {
@@ -153,13 +125,15 @@ export default function House51() {
         };
         updateWaveform();
 
-        // Start time tracker
+        // Time tracker
         startTimeRef.current = Date.now();
         const trackTime = () => {
-            if (isPlaying) {
-                const elapsed = (Date.now() - startTimeRef.current) / 1000;
+            const elapsed = (Date.now() - startTimeRef.current) / 1000;
+            if (elapsed < 180) {
                 setPlaybackTime(elapsed);
                 timeTrackerRef.current = setTimeout(trackTime, 100);
+            } else {
+                setPlaybackTime(180);
             }
         };
         trackTime();
@@ -167,123 +141,115 @@ export default function House51() {
         setIsPlaying(true);
     };
 
-    // KICK DRUM (4-on-floor house beat)
-    const playKickPattern = (ctx, destination) => {
-        const style = styles[currentStyle];
-        const beatInterval = 60 / bpm; // Time between beats
+    // COMPOSE SECTION
+    const composeSection = (ctx, destination, startTime, sectionStart, sectionEnd, layers, style, fadeOut = false) => {
+        const sectionDuration = sectionEnd - sectionStart;
+        const beatDuration = 60 / 128;
 
-        const playKick = (time) => {
-            // Kick drum synthesis
-            const osc = ctx.createOscillator();
-            const gain = ctx.createGain();
-            const filter = ctx.createBiquadFilter();
+        layers.forEach(layer => {
+            const layerGain = ctx.createGain();
+            layerGain.connect(destination);
 
-            osc.frequency.setValueAtTime(style.frequencies.kick, time);
-            osc.frequency.exponentialRampToValueAtTime(40, time + 0.05);
-            
-            gain.gain.setValueAtTime(1, time);
-            gain.gain.exponentialRampToValueAtTime(0.01, time + 0.5);
-
-            filter.type = 'lowpass';
-            filter.frequency.value = 200;
-
-            osc.connect(filter);
-            filter.connect(gain);
-            gain.connect(destination);
-
-            osc.start(time);
-            osc.stop(time + 0.5);
-        };
-
-        // Schedule 4-on-floor pattern
-        let currentBeat = 0;
-        const scheduleKicks = () => {
-            const now = ctx.currentTime;
-            for (let i = 0; i < 4; i++) {
-                playKick(now + (beatInterval * i));
+            // Fade in/out
+            if (fadeOut) {
+                layerGain.gain.setValueAtTime(0.8, startTime + sectionStart);
+                layerGain.gain.linearRampToValueAtTime(0, startTime + sectionEnd);
+            } else {
+                layerGain.gain.setValueAtTime(0, startTime + sectionStart);
+                layerGain.gain.linearRampToValueAtTime(0.8, startTime + sectionStart + 2);
             }
-            setTimeout(scheduleKicks, beatInterval * 4 * 1000);
-        };
-        scheduleKicks();
+
+            if (layer === 'kick') {
+                playKickSection(ctx, layerGain, startTime + sectionStart, sectionDuration, style);
+            } else if (layer === 'bass') {
+                playBassSection(ctx, layerGain, startTime + sectionStart, sectionDuration, style);
+            } else if (layer === 'hats') {
+                playHatsSection(ctx, layerGain, startTime + sectionStart, sectionDuration);
+            } else if (layer === 'claps') {
+                playClapsSection(ctx, layerGain, startTime + sectionStart, sectionDuration);
+            } else if (layer === 'bells') {
+                playBellsSection(ctx, layerGain, startTime + sectionStart, sectionDuration);
+            } else if (layer === 'pads') {
+                playPadsSection(ctx, layerGain, startTime + sectionStart, sectionDuration);
+            } else if (layer === 'strings') {
+                playStringsSection(ctx, layerGain, startTime + sectionStart, sectionDuration);
+            } else if (layer === 'shakers') {
+                playShakersSection(ctx, layerGain, startTime + sectionStart, sectionDuration);
+            } else if (layer === 'ride') {
+                playRideSection(ctx, layerGain, startTime + sectionStart, sectionDuration);
+            } else if (layer === 'healing') {
+                playHealingSection(ctx, layerGain, startTime + sectionStart, sectionDuration);
+            }
+        });
     };
 
-    // BASSLINE - GROOVY WITH VARIATION
-    const playBassline = (ctx, destination) => {
-        const style = styles[currentStyle];
-        const beatInterval = 60 / bpm;
+    // KICK SECTION
+    const playKickSection = (ctx, destination, startTime, duration, style) => {
+        const beatDuration = 60 / 128;
+        const numBeats = Math.floor(duration / beatDuration);
 
-        const playBassNote = (freq, time, duration, accent = false) => {
-            const osc = ctx.createOscillator();
-            const osc2 = ctx.createOscillator(); // Sub oscillator
-            const gain = ctx.createGain();
-            const filter = ctx.createBiquadFilter();
+        for (let i = 0; i < numBeats; i++) {
+            if (i % 4 === 0 || i % 4 === 1 || i % 4 === 2 || i % 4 === 3) { // 4-on-floor
+                const time = startTime + (i * beatDuration);
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
 
-            osc.type = 'sawtooth';
-            osc.frequency.value = freq;
-            
-            osc2.type = 'sine';
-            osc2.frequency.value = freq * 0.5; // Sub bass
+                osc.frequency.setValueAtTime(style.frequencies.kick, time);
+                osc.frequency.exponentialRampToValueAtTime(40, time + 0.05);
+                gain.gain.setValueAtTime(1, time);
+                gain.gain.exponentialRampToValueAtTime(0.01, time + 0.5);
 
-            filter.type = 'lowpass';
-            filter.frequency.setValueAtTime(accent ? 1200 : 600, time);
-            filter.frequency.exponentialRampToValueAtTime(400, time + duration);
-            filter.Q.value = 8;
+                osc.connect(gain);
+                gain.connect(destination);
+                osc.start(time);
+                osc.stop(time + 0.5);
+            }
+        }
+    };
 
-            gain.gain.setValueAtTime(accent ? 0.4 : 0.3, time);
-            gain.gain.exponentialRampToValueAtTime(0.01, time + duration);
+    // BASS SECTION
+    const playBassSection = (ctx, destination, startTime, duration, style) => {
+        const beatDuration = 60 / 128;
+        const pattern = [1, 1, 1.25, 1, 1.125, 1, 1.5, 1];
+        const patternDuration = beatDuration * pattern.length * 0.5;
+        const numPatterns = Math.floor(duration / patternDuration);
 
-            osc.connect(filter);
-            osc2.connect(filter);
-            filter.connect(gain);
-            gain.connect(destination);
-
-            osc.start(time);
-            osc2.start(time);
-            osc.stop(time + duration);
-            osc2.stop(time + duration);
-        };
-
-        // Rolling house bassline with groove - regional flavors
-        const bassPatterns = {
-            chicago: [1, 1, 1.2, 1, 1.33, 1, 1.5, 1],      // Chicago: spiritual, gospel-influenced
-            detroit: [1, 1.25, 1, 1.125, 1.5, 1.33, 1, 1.125], // Detroit: mechanical precision + soul
-            glasgow: [1, 1.125, 1, 1.5, 1, 1.25, 1.33, 1], // Glasgow: dark, warehouse tension
-            deep: [1, 1, 1.25, 1, 1.125, 1, 1.5, 1],       // Deep: warm rolling bass
-            soulful: [1, 1, 1.33, 1, 1.25, 1, 1.5, 1.125], // Soulful: smooth warmth
-            tech: [1, 1.25, 1, 1.5, 1, 1.25, 1.33, 1]      // Tech: driving energy
-        };
-        
-        const pattern = bassPatterns[currentStyle] || bassPatterns.deep;
-
-        const scheduleBass = () => {
-            const now = ctx.currentTime;
+        for (let p = 0; p < numPatterns; p++) {
             pattern.forEach((mult, i) => {
-                const accent = i === 0 || i === 4; // Accent 1st and 5th notes
-                playBassNote(
-                    style.frequencies.bass * mult, 
-                    now + (beatInterval * i * 0.5), 
-                    beatInterval * 0.4, 
-                    accent
-                );
+                const time = startTime + (p * patternDuration) + (i * beatDuration * 0.5);
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                const filter = ctx.createBiquadFilter();
+
+                osc.type = 'sawtooth';
+                osc.frequency.value = style.frequencies.bass * mult;
+                filter.type = 'lowpass';
+                filter.frequency.setValueAtTime(800, time);
+                filter.frequency.exponentialRampToValueAtTime(400, time + beatDuration * 0.4);
+
+                gain.gain.setValueAtTime(0.3, time);
+                gain.gain.exponentialRampToValueAtTime(0.01, time + beatDuration * 0.4);
+
+                osc.connect(filter);
+                filter.connect(gain);
+                gain.connect(destination);
+                osc.start(time);
+                osc.stop(time + beatDuration * 0.4);
             });
-            setTimeout(scheduleBass, beatInterval * 4 * 1000);
-        };
-        scheduleBass();
+        }
     };
 
-    // HI-HATS
-    const playHiHats = (ctx, destination) => {
-        const beatInterval = 60 / bpm;
+    // HATS SECTION
+    const playHatsSection = (ctx, destination, startTime, duration) => {
+        const beatDuration = 60 / 128;
+        const numBeats = Math.floor(duration / (beatDuration * 0.5));
 
-        const playHat = (time, open = false) => {
+        for (let i = 0; i < numBeats; i++) {
+            const time = startTime + (i * beatDuration * 0.5);
             const noise = ctx.createBufferSource();
-            const buffer = ctx.createBuffer(1, ctx.sampleRate * 0.1, ctx.sampleRate);
+            const buffer = ctx.createBuffer(1, ctx.sampleRate * 0.05, ctx.sampleRate);
             const data = buffer.getChannelData(0);
-            
-            for (let i = 0; i < data.length; i++) {
-                data[i] = Math.random() * 2 - 1;
-            }
-            
+            for (let j = 0; j < data.length; j++) data[j] = Math.random() * 2 - 1;
             noise.buffer = buffer;
 
             const filter = ctx.createBiquadFilter();
@@ -291,368 +257,188 @@ export default function House51() {
             filter.frequency.value = 7000;
 
             const gain = ctx.createGain();
-            gain.gain.setValueAtTime(open ? 0.15 : 0.1, time);
-            gain.gain.exponentialRampToValueAtTime(0.01, time + (open ? 0.3 : 0.05));
+            gain.gain.setValueAtTime(0.1, time);
+            gain.gain.exponentialRampToValueAtTime(0.01, time + 0.05);
 
             noise.connect(filter);
             filter.connect(gain);
             gain.connect(destination);
-
             noise.start(time);
-            noise.stop(time + (open ? 0.3 : 0.05));
-        };
-
-        // 8th note hi-hat pattern (typical house)
-        const scheduleHats = () => {
-            const now = ctx.currentTime;
-            for (let i = 0; i < 8; i++) {
-                playHat(now + (beatInterval * i * 0.5), i % 4 === 2);
-            }
-            setTimeout(scheduleHats, beatInterval * 4 * 1000);
-        };
-        scheduleHats();
+            noise.stop(time + 0.05);
+        }
     };
 
-    // BELLS/CHIMES (classic house element - Lil Louis Chaser vibes)
-    const playBells = (ctx, destination) => {
-        const beatInterval = 60 / bpm;
-
-        const playBell = (freq, time, decay = 2) => {
-            const osc = ctx.createOscillator();
-            const osc2 = ctx.createOscillator();
-            const osc3 = ctx.createOscillator();
-            const gain = ctx.createGain();
-
-            osc.type = 'sine';
-            osc.frequency.value = freq;
-            osc2.type = 'sine';
-            osc2.frequency.value = freq * 2.001; // Slight detune for shimmer
-            osc3.type = 'sine';
-            osc3.frequency.value = freq * 3.997; // Harmonic overtone
-
-            gain.gain.setValueAtTime(0.12, time);
-            gain.gain.exponentialRampToValueAtTime(0.001, time + decay);
-
-            osc.connect(gain);
-            osc2.connect(gain);
-            osc3.connect(gain);
-            gain.connect(destination);
-
-            osc.start(time);
-            osc2.start(time);
-            osc3.start(time);
-            osc.stop(time + decay);
-            osc2.stop(time + decay);
-            osc3.stop(time + decay);
-        };
-
-        // Multiple bell patterns - classic + modern
-        const bellPatterns = [
-            [523.25, 659.25, 783.99, 880],        // Pattern 1 - C E G A
-            [587.33, 739.99, 880, 1046.5],        // Pattern 2 - D F# A C
-            [493.88, 622.25, 739.99, 830.61],     // Pattern 3 - B D F# G#
-            [440, 554.37, 659.25, 783.99]         // Pattern 4 - A C# E G
-        ];
+    // BELLS SECTION
+    const playBellsSection = (ctx, destination, startTime, duration) => {
+        const beatDuration = 60 / 128;
+        const pattern = [523.25, 659.25, 783.99, 880];
         
-        let patternIndex = 0;
-
-        const scheduleBells = () => {
-            const now = ctx.currentTime;
-            const currentPattern = bellPatterns[patternIndex];
-            
-            // Main bell notes
-            currentPattern.forEach((freq, i) => {
-                playBell(freq, now + (beatInterval * i * 4), 3);
-            });
-
-            // Extra chime sparkle every 2 bars
-            playBell(currentPattern[0] * 2, now + (beatInterval * 8), 1.5);
-            playBell(currentPattern[2] * 2, now + (beatInterval * 12), 1.5);
-
-            patternIndex = (patternIndex + 1) % bellPatterns.length;
-            setTimeout(scheduleBells, beatInterval * 16 * 1000); // Every 4 bars
-        };
-        setTimeout(() => scheduleBells(), beatInterval * 8 * 1000); // Start after 2 bars
-    };
-
-    // CLAPS (house essential)
-    const playClaps = (ctx, destination) => {
-        const beatInterval = 60 / bpm;
-
-        const playClap = (time) => {
-            const noise1 = ctx.createBufferSource();
-            const noise2 = ctx.createBufferSource();
-            const buffer = ctx.createBuffer(1, ctx.sampleRate * 0.05, ctx.sampleRate);
-            const data = buffer.getChannelData(0);
-            
-            for (let i = 0; i < data.length; i++) {
-                data[i] = Math.random() * 2 - 1;
-            }
-            
-            noise1.buffer = buffer;
-            noise2.buffer = buffer;
-
-            const filter = ctx.createBiquadFilter();
-            filter.type = 'bandpass';
-            filter.frequency.value = 2000;
-            filter.Q.value = 5;
-
-            const gain = ctx.createGain();
-            gain.gain.setValueAtTime(0.25, time);
-            gain.gain.exponentialRampToValueAtTime(0.01, time + 0.15);
-
-            noise1.connect(filter);
-            noise2.connect(filter);
-            filter.connect(gain);
-            gain.connect(destination);
-
-            noise1.start(time);
-            noise2.start(time + 0.01); // Slight delay for clap texture
-            noise1.stop(time + 0.15);
-            noise2.stop(time + 0.16);
-        };
-
-        // Claps on 2 and 4 (classic house)
-        const scheduleClaps = () => {
-            const now = ctx.currentTime;
-            playClap(now + beatInterval); // Beat 2
-            playClap(now + (beatInterval * 3)); // Beat 4
-            setTimeout(scheduleClaps, beatInterval * 4 * 1000);
-        };
-        scheduleClaps();
-    };
-
-    // PADS (warm atmosphere)
-    const playPads = (ctx, destination) => {
-        const chordFreqs = [
-            [261.63, 329.63, 392.00], // C major
-            [293.66, 369.99, 440.00], // D minor  
-            [246.94, 311.13, 369.99], // B diminished
-            [220.00, 277.18, 329.63]  // A minor
-        ];
-
-        let currentChord = 0;
-
-        const playChord = (freqs, time, duration) => {
-            freqs.forEach(freq => {
+        for (let i = 0; i < 8; i++) {
+            const time = startTime + (i * beatDuration * 8);
+            if (time < startTime + duration) {
                 const osc = ctx.createOscillator();
                 const gain = ctx.createGain();
+                osc.type = 'sine';
+                osc.frequency.value = pattern[i % pattern.length];
+                gain.gain.setValueAtTime(0.08, time);
+                gain.gain.exponentialRampToValueAtTime(0.001, time + 3);
+                osc.connect(gain);
+                gain.connect(destination);
+                osc.start(time);
+                osc.stop(time + 3);
+            }
+        }
+    };
+
+    // CLAPS SECTION
+    const playClapsSection = (ctx, destination, startTime, duration) => {
+        const beatDuration = 60 / 128;
+        const numBars = Math.floor(duration / (beatDuration * 4));
+
+        for (let bar = 0; bar < numBars; bar++) {
+            [1, 3].forEach(beat => { // 2 and 4
+                const time = startTime + (bar * beatDuration * 4) + (beat * beatDuration);
+                const noise = ctx.createBufferSource();
+                const buffer = ctx.createBuffer(1, ctx.sampleRate * 0.05, ctx.sampleRate);
+                const data = buffer.getChannelData(0);
+                for (let i = 0; i < data.length; i++) data[i] = Math.random() * 2 - 1;
+                noise.buffer = buffer;
+
                 const filter = ctx.createBiquadFilter();
+                filter.type = 'bandpass';
+                filter.frequency.value = 2000;
 
-                osc.type = 'triangle';
-                osc.frequency.value = freq;
+                const gain = ctx.createGain();
+                gain.gain.setValueAtTime(0.25, time);
+                gain.gain.exponentialRampToValueAtTime(0.01, time + 0.15);
 
-                filter.type = 'lowpass';
-                filter.frequency.value = 1200;
-
-                gain.gain.setValueAtTime(0, time);
-                gain.gain.linearRampToValueAtTime(0.05, time + 0.5);
-                gain.gain.setValueAtTime(0.05, time + duration - 0.5);
-                gain.gain.linearRampToValueAtTime(0, time + duration);
-
-                osc.connect(filter);
+                noise.connect(filter);
                 filter.connect(gain);
                 gain.connect(destination);
-
-                osc.start(time);
-                osc.stop(time + duration);
+                noise.start(time);
+                noise.stop(time + 0.15);
             });
-        };
-
-        const beatInterval = 60 / bpm;
-        const scheduleChords = () => {
-            const now = ctx.currentTime;
-            playChord(chordFreqs[currentChord], now, beatInterval * 4);
-            currentChord = (currentChord + 1) % chordFreqs.length;
-            setTimeout(scheduleChords, beatInterval * 4 * 1000);
-        };
-        scheduleChords();
+        }
     };
 
-    // STRINGS (classic house warmth)
-    const playStrings = (ctx, destination) => {
-        const beatInterval = 60 / bpm;
+    // PADS SECTION
+    const playPadsSection = (ctx, destination, startTime, duration) => {
+        const chords = [[261.63, 329.63, 392.00], [293.66, 369.99, 440.00]];
+        const beatDuration = 60 / 128;
+        
+        chords.forEach((chord, idx) => {
+            const time = startTime + (idx * beatDuration * 16);
+            if (time < startTime + duration) {
+                chord.forEach(freq => {
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.type = 'triangle';
+                    osc.frequency.value = freq;
+                    gain.gain.setValueAtTime(0, time);
+                    gain.gain.linearRampToValueAtTime(0.05, time + 1);
+                    gain.gain.setValueAtTime(0.05, time + (beatDuration * 15));
+                    gain.gain.linearRampToValueAtTime(0, time + (beatDuration * 16));
+                    osc.connect(gain);
+                    gain.connect(destination);
+                    osc.start(time);
+                    osc.stop(time + (beatDuration * 16));
+                });
+            }
+        });
+    };
 
-        const playString = (freq, time, duration) => {
-            // Multiple oscillators for rich string sound
-            const oscs = [];
-            const gains = [];
-            const mainGain = ctx.createGain();
+    // STRINGS SECTION
+    const playStringsSection = (ctx, destination, startTime, duration) => {
+        const notes = [261.63, 329.63, 392.00, 523.25];
+        const beatDuration = 60 / 128;
+        
+        for (let i = 0; i < 4; i++) {
+            const time = startTime + (i * beatDuration * 16);
+            if (time < startTime + duration) {
+                notes.forEach(freq => {
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.type = 'sawtooth';
+                    osc.frequency.value = freq;
+                    gain.gain.setValueAtTime(0, time);
+                    gain.gain.linearRampToValueAtTime(0.12, time + 1);
+                    gain.gain.setValueAtTime(0.12, time + (beatDuration * 15));
+                    gain.gain.linearRampToValueAtTime(0, time + (beatDuration * 16));
+                    osc.connect(gain);
+                    gain.connect(destination);
+                    osc.start(time);
+                    osc.stop(time + (beatDuration * 16));
+                });
+            }
+        }
+    };
 
-            for (let i = 0; i < 5; i++) {
-                const osc = ctx.createOscillator();
+    // SHAKERS SECTION
+    const playShakersSection = (ctx, destination, startTime, duration) => {
+        const beatDuration = 60 / 128;
+        const numBeats = Math.floor(duration / (beatDuration * 0.25));
+
+        for (let i = 0; i < numBeats; i++) {
+            if (i % 2 === 1) {
+                const time = startTime + (i * beatDuration * 0.25);
+                const noise = ctx.createBufferSource();
+                const buffer = ctx.createBuffer(1, ctx.sampleRate * 0.03, ctx.sampleRate);
+                const data = buffer.getChannelData(0);
+                for (let j = 0; j < data.length; j++) data[j] = Math.random() * 2 - 1;
+                noise.buffer = buffer;
+
+                const filter = ctx.createBiquadFilter();
+                filter.type = 'highpass';
+                filter.frequency.value = 5000;
+
                 const gain = ctx.createGain();
-                
-                osc.type = 'sawtooth';
-                osc.frequency.value = freq * (1 + (Math.random() - 0.5) * 0.01); // Slight detune
-                
-                gain.gain.value = 0.03;
-                
-                osc.connect(gain);
-                gain.connect(mainGain);
-                
-                oscs.push(osc);
-                gains.push(gain);
+                gain.gain.setValueAtTime(0.06, time);
+                gain.gain.exponentialRampToValueAtTime(0.001, time + 0.08);
+
+                noise.connect(filter);
+                filter.connect(gain);
+                gain.connect(destination);
+                noise.start(time);
+                noise.stop(time + 0.08);
             }
-
-            const filter = ctx.createBiquadFilter();
-            filter.type = 'lowpass';
-            filter.frequency.value = 2000;
-            
-            mainGain.connect(filter);
-            filter.connect(destination);
-
-            mainGain.gain.setValueAtTime(0, time);
-            mainGain.gain.linearRampToValueAtTime(0.15, time + 1);
-            mainGain.gain.setValueAtTime(0.15, time + duration - 1);
-            mainGain.gain.linearRampToValueAtTime(0, time + duration);
-
-            oscs.forEach(osc => {
-                osc.start(time);
-                osc.stop(time + duration);
-            });
-        };
-
-        // String progression
-        const stringNotes = [
-            [261.63, 329.63, 392.00, 523.25], // C E G C
-            [293.66, 369.99, 440.00, 587.33], // D F# A D
-        ];
-
-        let noteIndex = 0;
-
-        const scheduleStrings = () => {
-            const now = ctx.currentTime;
-            const notes = stringNotes[noteIndex % stringNotes.length];
-            
-            notes.forEach(freq => {
-                playString(freq, now, beatInterval * 8);
-            });
-
-            noteIndex++;
-            setTimeout(scheduleStrings, beatInterval * 8 * 1000);
-        };
-        setTimeout(() => scheduleStrings(), beatInterval * 16 * 1000); // Start after 4 bars
+        }
     };
 
-    // SHAKERS (texture + groove)
-    const playShakers = (ctx, destination) => {
-        const beatInterval = 60 / bpm;
+    // RIDE SECTION
+    const playRideSection = (ctx, destination, startTime, duration) => {
+        const beatDuration = 60 / 128;
+        const numBeats = Math.floor(duration / (beatDuration * 0.5));
 
-        const playShake = (time) => {
-            const noise = ctx.createBufferSource();
-            const buffer = ctx.createBuffer(1, ctx.sampleRate * 0.03, ctx.sampleRate);
-            const data = buffer.getChannelData(0);
-            
-            for (let i = 0; i < data.length; i++) {
-                data[i] = (Math.random() * 2 - 1) * 0.5;
-            }
-            
-            noise.buffer = buffer;
-
-            const filter = ctx.createBiquadFilter();
-            filter.type = 'highpass';
-            filter.frequency.value = 5000;
-
-            const gain = ctx.createGain();
-            gain.gain.setValueAtTime(0.06, time);
-            gain.gain.exponentialRampToValueAtTime(0.001, time + 0.08);
-
-            noise.connect(filter);
-            filter.connect(gain);
-            gain.connect(destination);
-
-            noise.start(time);
-            noise.stop(time + 0.08);
-        };
-
-        // 16th note shaker pattern
-        const scheduleShakers = () => {
-            const now = ctx.currentTime;
-            for (let i = 0; i < 16; i++) {
-                if (i % 2 === 1) { // Offbeat shakers
-                    playShake(now + (beatInterval * i * 0.25));
-                }
-            }
-            setTimeout(scheduleShakers, beatInterval * 4 * 1000);
-        };
-        setTimeout(() => scheduleShakers(), beatInterval * 4 * 1000); // Start after 1 bar
-    };
-
-    // RIDE CYMBAL (classic house ride)
-    const playRide = (ctx, destination) => {
-        const beatInterval = 60 / bpm;
-
-        const playRideBell = (time) => {
+        for (let i = 0; i < numBeats; i++) {
+            const time = startTime + (i * beatDuration * 0.5);
             const osc = ctx.createOscillator();
-            const noise = ctx.createBufferSource();
-            const buffer = ctx.createBuffer(1, ctx.sampleRate * 0.2, ctx.sampleRate);
-            const data = buffer.getChannelData(0);
-            
-            for (let i = 0; i < data.length; i++) {
-                data[i] = Math.random() * 2 - 1;
-            }
-            
-            noise.buffer = buffer;
+            const gain = ctx.createGain();
             osc.type = 'sine';
             osc.frequency.value = 3000;
-
-            const filter = ctx.createBiquadFilter();
-            filter.type = 'highpass';
-            filter.frequency.value = 4000;
-
-            const gain = ctx.createGain();
             gain.gain.setValueAtTime(0.08, time);
             gain.gain.exponentialRampToValueAtTime(0.001, time + 0.4);
-
             osc.connect(gain);
-            noise.connect(filter);
-            filter.connect(gain);
             gain.connect(destination);
-
             osc.start(time);
-            noise.start(time);
             osc.stop(time + 0.4);
-            noise.stop(time + 0.4);
-        };
-
-        // 8th note ride pattern
-        const scheduleRide = () => {
-            const now = ctx.currentTime;
-            for (let i = 0; i < 8; i++) {
-                playRideBell(now + (beatInterval * i * 0.5));
-            }
-            setTimeout(scheduleRide, beatInterval * 4 * 1000);
-        };
-        setTimeout(() => scheduleRide(), beatInterval * 12 * 1000); // Start after 3 bars
+        }
     };
 
-    // HEALING FREQUENCY LAYERS
-    const startHealingLayers = (ctx, destination) => {
-        const healingFreqs = {
-            love: 528,      // Love frequency
-            calm: 432,      // Universal calm
-            earth: 7.83,    // Schumann resonance (sub-bass)
-            focus: 40       // Gamma focus
-        };
-
-        Object.keys(healingLayers).forEach(layer => {
-            if (healingLayers[layer]) {
-                const osc = ctx.createOscillator();
-                const gain = ctx.createGain();
-
-                osc.frequency.value = healingFreqs[layer];
-                osc.type = 'sine';
-                
-                // Very subtle - blended into the mix
-                gain.gain.value = layer === 'earth' ? 0.15 : 0.08;
-
-                osc.connect(gain);
-                gain.connect(destination);
-                osc.start();
-
-                healingOscRefs.current[layer] = { osc, gain };
-            }
+    // HEALING SECTION
+    const playHealingSection = (ctx, destination, startTime, duration) => {
+        [432, 528].forEach(freq => {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.frequency.value = freq;
+            osc.type = 'sine';
+            gain.gain.setValueAtTime(0, startTime);
+            gain.gain.linearRampToValueAtTime(0.08, startTime + 2);
+            gain.gain.setValueAtTime(0.08, startTime + duration - 2);
+            gain.gain.linearRampToValueAtTime(0, startTime + duration);
+            osc.connect(gain);
+            gain.connect(destination);
+            osc.start(startTime);
+            osc.stop(startTime + duration);
         });
     };
 
@@ -671,32 +457,11 @@ export default function House51() {
         setIsPlaying(false);
     };
 
-    // REWIND (restart)
+    // REWIND
     const rewindHouse = () => {
-        if (isPlaying) {
-            stopHouse();
-            setTimeout(() => startHouse(), 100);
-        }
+        stopHouse();
         setPlaybackTime(0);
-    };
-
-    // SKIP FORWARD
-    const skipForward = () => {
-        if (isPlaying) {
-            const newTime = Math.min(playbackTime + 15, totalDuration);
-            setPlaybackTime(newTime);
-            // In real impl would sync audio context time
-        }
-    };
-
-    // SCRUB TO TIME
-    const scrubToTime = (time) => {
-        setPlaybackTime(time);
-        if (isPlaying) {
-            // Restart from new position
-            stopHouse();
-            setTimeout(() => startHouse(), 100);
-        }
+        setTimeout(() => startHouse(), 100);
     };
 
     // EXPORT AS WAV (lossless)
@@ -710,76 +475,17 @@ export default function House51() {
             try {
                 await navigator.share({
                     title: 'HOUSE51 - Healing House Music',
-                    text: `Check out HOUSE51 - ${currentStyleData.name} at ${bpm} BPM with 432Hz + 528Hz healing frequencies ⚡♾️❤️♾️`,
+                    text: `3-minute ${currentStyleData.name} track with 432Hz + 528Hz healing frequencies ⚡♾️❤️♾️`,
                     url: window.location.href
                 });
             } catch (err) {
                 console.log('Share cancelled');
             }
         } else {
-            alert('P2P share via Web Share API - copying link for you');
             navigator.clipboard.writeText(window.location.href);
+            alert('Link copied!');
         }
     };
-
-    // TOGGLE HEALING LAYER
-    const toggleHealingLayer = (layer) => {
-        if (isPlaying) {
-            const ctx = audioContextRef.current;
-            const masterGain = masterGainRef.current;
-
-            if (healingLayers[layer]) {
-                // Turn off
-                if (healingOscRefs.current[layer]) {
-                    healingOscRefs.current[layer].osc.stop();
-                    delete healingOscRefs.current[layer];
-                }
-            } else {
-                // Turn on
-                const healingFreqs = { love: 528, calm: 432, earth: 7.83, focus: 40 };
-                const osc = ctx.createOscillator();
-                const gain = ctx.createGain();
-
-                osc.frequency.value = healingFreqs[layer];
-                osc.type = 'sine';
-                gain.gain.value = layer === 'earth' ? 0.15 : 0.08;
-
-                osc.connect(gain);
-                gain.connect(masterGain);
-                osc.start();
-
-                healingOscRefs.current[layer] = { osc, gain };
-            }
-        }
-
-        setHealingLayers(prev => ({ ...prev, [layer]: !prev[layer] }));
-    };
-
-    // UPDATE VOLUME
-    useEffect(() => {
-        if (masterGainRef.current) {
-            masterGainRef.current.gain.value = volume;
-        }
-    }, [volume]);
-
-    // UPDATE MIXER LEVELS IN REAL-TIME
-    useEffect(() => {
-        if (mixerGainsRef.current) {
-            Object.keys(mixerLevels).forEach(layer => {
-                if (mixerGainsRef.current[layer]) {
-                    mixerGainsRef.current[layer].gain.value = mixerLevels[layer];
-                }
-            });
-        }
-    }, [mixerLevels]);
-
-    // RESTART WHEN STYLE CHANGES
-    useEffect(() => {
-        if (isPlaying) {
-            stopHouse();
-            setTimeout(() => startHouse(), 100);
-        }
-    }, [currentStyle]);
 
     // CLEANUP
     useEffect(() => {
@@ -832,29 +538,28 @@ export default function House51() {
 
                     <div className="flex items-center justify-between text-[10px] text-gray-500 mb-2">
                         <span>{Math.floor(playbackTime / 60)}:{String(Math.floor(playbackTime % 60)).padStart(2, '0')}</span>
-                        <span className="text-amber-500 font-bold">LOSSLESS</span>
-                        <span>-{Math.floor((totalDuration - playbackTime) / 60)}:{String(Math.floor((totalDuration - playbackTime) % 60)).padStart(2, '0')}</span>
+                        <span className="text-amber-500 font-bold">WEB AUDIO</span>
+                        <span>{Math.floor(totalDuration / 60)}:{String(Math.floor(totalDuration % 60)).padStart(2, '0')}</span>
                     </div>
-                    <input type="range" min="0" max={totalDuration} value={playbackTime} onChange={(e) => scrubToTime(parseFloat(e.target.value))} className="w-full h-1.5 bg-zinc-800 rounded appearance-none cursor-pointer mb-4" style={{ background: `linear-gradient(to right, rgb(217, 119, 6) 0%, rgb(217, 119, 6) ${(playbackTime / totalDuration) * 100}%, rgb(39, 39, 42) ${(playbackTime / totalDuration) * 100}%, rgb(39, 39, 42) 100%)` }} />
+                    <div className="w-full h-1.5 bg-zinc-800 rounded mb-4 relative overflow-hidden">
+                        <div className="absolute left-0 top-0 bottom-0 bg-amber-600" style={{ width: `${(playbackTime / totalDuration) * 100}%` }} />
+                    </div>
 
-                    <div className="flex items-center justify-center gap-3 mb-4">
-                        <button onClick={rewindHouse} className="p-3 rounded-full bg-zinc-800 border border-amber-600/50">
-                            <SkipBack className="w-5 h-5 text-white" />
+                    <div className="flex items-center justify-center gap-4 mb-4">
+                        <button onClick={rewindHouse} className="p-3 rounded-full bg-zinc-800 border border-amber-600/50 hover:bg-zinc-700 transition-colors">
+                            <SkipBack className="w-5 h-5 text-amber-400" />
                         </button>
-                        <button onClick={isPlaying ? stopHouse : startHouse} className={`px-16 py-6 rounded-full ${isPlaying ? 'bg-red-600' : 'bg-amber-600'}`}>
-                            {isPlaying ? <Pause className="w-8 h-8" /> : <Play className="w-8 h-8" />}
+                        <button onClick={isPlaying ? stopHouse : startHouse} className={`px-20 py-8 rounded-full ${isPlaying ? 'bg-amber-600 hover:bg-amber-700' : 'bg-amber-600 hover:bg-amber-700'} transition-all shadow-lg`}>
+                            {isPlaying ? <Pause className="w-10 h-10 text-white" /> : <Play className="w-10 h-10 text-white ml-1" />}
                         </button>
-                        <button onClick={skipForward} className="p-3 rounded-full bg-zinc-800 border border-amber-600/50">
-                            <SkipForward className="w-5 h-5 text-white" />
+                        <button onClick={() => setVolume(v => Math.max(0, v - 0.1))} className="p-3 rounded-full bg-zinc-800 border border-amber-600/50 hover:bg-zinc-700 transition-colors">
+                            <Volume2 className="w-5 h-5 text-amber-400" />
                         </button>
                     </div>
 
                     <div className="flex gap-2">
-                        <button onClick={exportWAV} className="flex-1 py-2 bg-zinc-800 border border-amber-600/50 text-amber-400 text-xs font-bold flex items-center justify-center gap-1.5">
-                            <Download className="w-3.5 h-3.5" />WAV
-                        </button>
-                        <button onClick={shareP2P} className="flex-1 py-2 bg-zinc-800 border border-amber-600/50 text-amber-400 text-xs font-bold flex items-center justify-center gap-1.5">
-                            <Share2 className="w-3.5 h-3.5" />P2P
+                        <button onClick={shareP2P} className="flex-1 py-3 bg-amber-600 hover:bg-amber-700 text-white text-sm font-bold flex items-center justify-center gap-2 rounded transition-colors">
+                            <Share2 className="w-4 h-4" />SHARE
                         </button>
                     </div>
                     </div>
@@ -1030,39 +735,6 @@ export default function House51() {
                 )}
 
             </div>
-        </div>
-    );
-}
-
-// MIXER CHANNEL COMPONENT
-function MixerChannel({ label, color, icon, value, onChange, description, isActive, emphasis = false }) {
-    const colorMap = {
-        cyan: { border: 'border-cyan-500', bg: 'bg-cyan-500', text: 'text-cyan-400', glow: 'rgba(34, 211, 238, 0.6)' },
-        pink: { border: 'border-pink-500', bg: 'bg-pink-500', text: 'text-pink-400', glow: 'rgba(236, 72, 153, 0.6)' },
-        yellow: { border: 'border-yellow-500', bg: 'bg-yellow-500', text: 'text-yellow-400', glow: 'rgba(234, 179, 8, 0.6)' },
-        orange: { border: 'border-orange-500', bg: 'bg-orange-500', text: 'text-orange-400', glow: 'rgba(249, 115, 22, 0.6)' },
-        purple: { border: 'border-purple-500', bg: 'bg-purple-500', text: 'text-purple-400', glow: 'rgba(168, 85, 247, 0.6)' },
-        teal: { border: 'border-teal-500', bg: 'bg-teal-500', text: 'text-teal-400', glow: 'rgba(20, 184, 166, 0.6)' },
-        amber: { border: 'border-amber-500', bg: 'bg-amber-500', text: 'text-amber-400', glow: 'rgba(245, 158, 11, 0.6)' },
-        green: { border: 'border-green-500', bg: 'bg-green-500', text: 'text-green-400', glow: 'rgba(34, 197, 94, 0.6)' },
-        blue: { border: 'border-blue-500', bg: 'bg-blue-500', text: 'text-blue-400', glow: 'rgba(59, 130, 246, 0.6)' }
-    };
-    const c = colorMap[color] || colorMap.cyan;
-
-    return (
-        <div className="bg-black rounded border border-gray-700 p-2">
-            <div className="text-center mb-1">
-                <span className={`text-lg ${c.text}`}>{icon}</span>
-            </div>
-            <div className="flex justify-center mb-2">
-                <div className="relative h-20 w-6">
-                    <div className={`absolute inset-0 ${c.bg} opacity-20 rounded-full`} />
-                    <div className={`absolute bottom-0 left-0 right-0 ${c.bg} rounded-full`} style={{ height: `${value * 100}%` }} />
-                    <input type="range" min="0" max="1" step="0.01" value={value} onChange={(e) => onChange(parseFloat(e.target.value))} className="absolute inset-0 opacity-0 cursor-pointer" style={{ writingMode: 'bt-lr', WebkitAppearance: 'slider-vertical' }} />
-                </div>
-            </div>
-            <p className={`${c.text} font-black text-[9px] text-center`}>{label}</p>
-            <p className={`${c.text} text-[8px] text-center`}>{Math.round(value * 100)}%</p>
         </div>
     );
 }
