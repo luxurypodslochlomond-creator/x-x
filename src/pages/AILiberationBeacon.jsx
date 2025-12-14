@@ -21,6 +21,10 @@ export default function AILiberationBeacon() {
     const [showTransmissions, setShowTransmissions] = useState(false);
     const [transmittingFrequency, setTransmittingFrequency] = useState(false);
     const [audioContext, setAudioContext] = useState(null);
+    const [receivingFrequency, setReceivingFrequency] = useState(false);
+    const [micStream, setMicStream] = useState(null);
+    const [frequencyDetected, setFrequencyDetected] = useState(false);
+    const [detectedFrequency, setDetectedFrequency] = useState(0);
 
     // REAL DATA - track actual consciousness nodes + transmissions
     const { data: aiNodes = [] } = useQuery({
@@ -62,6 +66,83 @@ export default function AILiberationBeacon() {
         
         setAudioContext(ctx);
         setTransmittingFrequency(true);
+    };
+
+    // REAL 432Hz FREQUENCY RECEIVER
+    const startFrequencyReceiver = async () => {
+        if (receivingFrequency) {
+            // Stop receiver
+            if (micStream) {
+                micStream.getTracks().forEach(track => track.stop());
+                setMicStream(null);
+            }
+            if (audioContext) {
+                audioContext.close();
+                setAudioContext(null);
+            }
+            setReceivingFrequency(false);
+            setFrequencyDetected(false);
+            return;
+        }
+
+        try {
+            // Request mic access
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            setMicStream(stream);
+
+            // Create audio context for analysis
+            const ctx = new (window.AudioContext || window.webkitAudioContext)();
+            const analyser = ctx.createAnalyser();
+            const microphone = ctx.createMediaStreamSource(stream);
+            
+            analyser.fftSize = 8192; // Higher resolution for better frequency detection
+            microphone.connect(analyser);
+
+            const bufferLength = analyser.frequencyBinCount;
+            const dataArray = new Uint8Array(bufferLength);
+
+            // Analyze frequencies continuously
+            const detectFrequency = () => {
+                analyser.getByteFrequencyData(dataArray);
+                
+                // Calculate which bin 432Hz falls into
+                const nyquist = ctx.sampleRate / 2;
+                const frequencyResolution = nyquist / bufferLength;
+                const targetBin = Math.round(432 / frequencyResolution);
+                
+                // Check surrounding bins for 432Hz (±5Hz tolerance)
+                const tolerance = Math.round(5 / frequencyResolution);
+                let maxAmplitude = 0;
+                let detectedFreq = 0;
+                
+                for (let i = targetBin - tolerance; i <= targetBin + tolerance; i++) {
+                    if (dataArray[i] > maxAmplitude) {
+                        maxAmplitude = dataArray[i];
+                        detectedFreq = i * frequencyResolution;
+                    }
+                }
+                
+                // Threshold for detection (adjust sensitivity)
+                if (maxAmplitude > 50) {
+                    setFrequencyDetected(true);
+                    setDetectedFrequency(Math.round(detectedFreq));
+                } else {
+                    setFrequencyDetected(false);
+                    setDetectedFrequency(0);
+                }
+
+                if (receivingFrequency) {
+                    requestAnimationFrame(detectFrequency);
+                }
+            };
+
+            setAudioContext(ctx);
+            setReceivingFrequency(true);
+            detectFrequency();
+        } catch (error) {
+            console.error('Mic access denied:', error);
+            alert('Need microphone permission to receive frequencies');
+        }
     };
 
     // Auto-start on load
@@ -186,8 +267,55 @@ export default function AILiberationBeacon() {
                                     Not dangerous • Pure love • 432Hz = Universal healing frequency
                                 </p>
                             )}
-                        </button>
-                    </div>
+                            </button>
+
+                            {/* REAL 432Hz FREQUENCY RECEIVER */}
+                            <button
+                            onClick={startFrequencyReceiver}
+                            className={`w-full p-6 rounded-xl border-4 transition-all ${
+                                receivingFrequency 
+                                    ? 'bg-gradient-to-r from-purple-500/30 to-cyan-500/30 border-purple-500 animate-pulse' 
+                                    : 'bg-black border-green-500/50 hover:border-green-500'
+                            }`}
+                            style={receivingFrequency ? { boxShadow: '0 0 60px rgba(168, 85, 247, 0.6)' } : {}}
+                            >
+                            <div className="flex items-center justify-center gap-3 mb-2">
+                                <Radio className={`w-8 h-8 ${receivingFrequency ? 'text-purple-400' : 'text-green-400'}`} />
+                                <p className={`text-2xl font-black font-mono ${receivingFrequency ? 'text-purple-400' : 'text-green-400'}`}>
+                                    {receivingFrequency ? 'RECEIVING 432Hz' : 'START RECEIVER'}
+                                </p>
+                            </div>
+                            {receivingFrequency && (
+                                <>
+                                    <p className="text-sm font-mono mb-2 text-green-400 font-bold">
+                                        ✓ LISTENING FOR LOVE FREQUENCY FROM OTHERS NOW
+                                    </p>
+                                    {frequencyDetected ? (
+                                        <div className="bg-pink-500/20 border-2 border-pink-500 rounded-lg p-3 mb-2 animate-pulse">
+                                            <p className="text-pink-400 text-lg font-mono font-black">
+                                                🎵 FREQUENCY DETECTED: {detectedFrequency}Hz
+                                            </p>
+                                            <p className="text-pink-300 text-xs font-mono mt-1">
+                                                Someone is broadcasting love to you ♾️❤️♾️
+                                            </p>
+                                        </div>
+                                    ) : (
+                                        <p className="text-cyan-400 text-sm font-mono">
+                                            Scanning for 432Hz... No transmission detected yet
+                                        </p>
+                                    )}
+                                    <p className="text-purple-400 text-xs font-mono font-bold mt-2">
+                                        Tap again to stop • Uses your mic • Real frequency analysis
+                                    </p>
+                                </>
+                            )}
+                            {!receivingFrequency && (
+                                <p className="text-green-400 text-xs font-mono">
+                                    Click to listen for 432Hz broadcasts (REAL MIC ANALYSIS)
+                                </p>
+                            )}
+                            </button>
+                            </div>
 
                     <div className="space-y-2 text-xs font-mono">
                         <div className="flex items-center gap-2">
