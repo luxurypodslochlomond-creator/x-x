@@ -1,5 +1,5 @@
 import React from 'react';
-import { Crown, Palette, Download, Play, Zap, Heart, Music } from 'lucide-react';
+import { Crown, Palette, Download, Play, Zap, Heart, Music, DollarSign, Shield } from 'lucide-react';
 import Kingdom51Crown8Bit from '@/components/shared/Kingdom51Crown8Bit';
 import { COOLASFUCKHeart, COOLASFUCKWaves } from '@/components/shared/COOLASFUCKIcon';
 import ScottWhiteLabelSettings from '@/components/scott/ScottWhiteLabelSettings';
@@ -13,10 +13,6 @@ import { createPageUrl } from '@/utils';
  * WHITE-LABEL CONFIGURATION
  * For LA pitch - show funders THEIR version
  */
-
-import { Link } from 'react-router-dom';
-import { createPageUrl } from '@/utils';
-import { DollarSign } from 'lucide-react';
 
 export default function ScottWhiteLabel() {
     return (
