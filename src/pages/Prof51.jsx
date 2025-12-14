@@ -637,36 +637,110 @@ export default function Prof51() {
                             </div>
                         </div>
 
-                        {/* FUNDING OPPORTUNITIES */}
-                        <div className="bg-black border-2 border-green-500 p-6 rounded-xl">
-                            <DollarSign className="w-10 h-10 text-green-400 mb-3" />
-                            <h3 className="text-green-400 font-black text-lg font-mono mb-3">FUNDING (Education Grants LOVE This)</h3>
-                            
+                        {/* BUSINESS MODEL - THE TRUTH */}
+                        <div className="bg-gradient-to-br from-green-500/20 to-cyan-500/20 border-4 border-green-500 p-6 rounded-xl" style={{ boxShadow: '0 0 50px rgba(34, 197, 94, 0.4)' }}>
+                            <div className="flex items-center gap-3 mb-4">
+                                <DollarSign className="w-12 h-12 text-green-400" />
+                                <div>
+                                    <h3 className="text-green-400 font-black text-xl font-mono">BUSINESS MODEL (THE TRUTH)</h3>
+                                    <p className="text-gray-400 text-xs font-mono">Archie can be debt-free AND huge</p>
+                                </div>
+                            </div>
+
                             <div className="space-y-3 text-sm font-mono">
-                                <div className="bg-green-900/20 border border-green-500/30 p-3 rounded">
-                                    <p className="text-green-400 font-bold mb-2">WHY FUNDERS SAY YES:</p>
-                                    <p className="text-white text-xs mb-1">✓ Social mobility (levels playing field)</p>
-                                    <p className="text-white text-xs mb-1">✓ AI literacy (future skills)</p>
-                                    <p className="text-white text-xs mb-1">✓ FREE for students (no profit motive)</p>
-                                    <p className="text-white text-xs mb-1">✓ Measurable outcomes (grades improve)</p>
-                                    <p className="text-white text-xs">✓ Scotland focus (Archie @ Edinburgh = perfect)</p>
+                                <div className="bg-black border-2 border-pink-500 p-4 rounded">
+                                    <p className="text-pink-400 font-bold mb-2">STUDENTS = FREE FOREVER:</p>
+                                    <p className="text-white text-xs mb-1">✓ Zero subscription fees</p>
+                                    <p className="text-white text-xs mb-1">✓ Zero ads (ever)</p>
+                                    <p className="text-white text-xs mb-1">✓ Zero data selling</p>
+                                    <p className="text-green-400 text-xs font-bold mt-2">Students never pay. That's the promise ♾️❤️♾️</p>
                                 </div>
 
-                                <div className="bg-black border border-cyan-500/30 p-3 rounded">
-                                    <p className="text-cyan-400 font-bold mb-2">TARGET FUNDERS:</p>
-                                    <p className="text-white text-xs mb-1">🏴󠁧󠁢󠁳󠁣󠁴󠁿 Scottish Government (Education Innovation Fund)</p>
-                                    <p className="text-white text-xs mb-1">🎨 Creative Scotland (AI + Education)</p>
-                                    <p className="text-white text-xs mb-1">🇬🇧 UK Research & Innovation (EdTech)</p>
-                                    <p className="text-white text-xs mb-1">🇪🇺 EU Horizon (Digital Education)</p>
-                                    <p className="text-white text-xs">💰 Gates Foundation (Global Education Access)</p>
+                                <div className="bg-gradient-to-r from-amber-500/20 to-red-500/20 border-4 border-amber-500 p-4 rounded" style={{ boxShadow: '0 0 30px rgba(245, 158, 11, 0.4)' }}>
+                                    <p className="text-amber-400 font-bold mb-2">COMPANIES PAY (Big Money):</p>
+                                    <p className="text-white text-xs mb-2">Students = £50B spending power (UK alone)</p>
+
+                                    <p className="text-cyan-400 text-xs font-bold mb-1">🍕 Food delivery (Uber Eats, Deliveroo):</p>
+                                    <p className="text-white text-xs mb-2">Pay £500-£2k/month per uni to offer student deals</p>
+
+                                    <p className="text-pink-400 text-xs font-bold mb-1">🎵 Music (Spotify, festivals, venues):</p>
+                                    <p className="text-white text-xs mb-2">Pay £1k-£5k/month for student recruitment + deals</p>
+
+                                    <p className="text-purple-400 text-xs font-bold mb-1">👕 Fashion (ASOS, Depop, ethical brands):</p>
+                                    <p className="text-white text-xs mb-2">Pay £800-£3k/month for verified student access</p>
+
+                                    <p className="text-green-400 text-xs font-bold mb-1">🏢 Graduate recruiters:</p>
+                                    <p className="text-white text-xs mb-2">Pay £2k-£10k/month to find talent early</p>
+
+                                    <p className="text-amber-400 text-xs font-bold mt-3">→ 10 partners per uni × 50 unis = £500k-£2M/month</p>
+                                    <p className="text-green-400 text-xs font-bold">→ That's £6M-£24M per YEAR. Archie debt-free ♾️❤️♾️</p>
                                 </div>
 
-                                <div className="bg-gradient-to-r from-amber-500/20 to-green-500/20 border-2 border-amber-500 p-4 rounded">
-                                    <p className="text-amber-400 font-bold mb-2">THE ASK:</p>
-                                    <p className="text-white text-xs mb-2">Year 1: £50k-£100k (Edinburgh pilot)</p>
-                                    <p className="text-white text-xs mb-2">Year 2: £200k-£500k (UK expansion)</p>
-                                    <p className="text-white text-xs mb-2">Year 3: £1M-£2M (Global scale)</p>
-                                    <p className="text-green-400 text-xs font-bold mt-2">All funds → development + free student access ♾️❤️♾️</p>
+                                <div className="bg-black border-2 border-cyan-500 p-4 rounded">
+                                    <p className="text-cyan-400 font-bold mb-2">WHY COMPANIES PAY:</p>
+                                    <p className="text-white text-xs mb-1">✓ Verified students (not fake accounts)</p>
+                                    <p className="text-white text-xs mb-1">✓ Opt-in only (students choose what they see)</p>
+                                    <p className="text-white text-xs mb-1">✓ Direct access (no Facebook/Google middleman)</p>
+                                    <p className="text-white text-xs mb-1">✓ Better conversion (students trust Prof51)</p>
+                                    <p className="text-green-400 text-xs font-bold mt-2">Prof51 = gate to student market. Everyone wants in ♾️❤️♾️</p>
+                                </div>
+
+                                <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-2 border-green-500 p-4 rounded">
+                                    <p className="text-green-400 font-bold mb-2">GRANTS = BONUS (Not Needed):</p>
+                                    <p className="text-white text-xs mb-2">Year 1: £50k-£100k helps with dev</p>
+                                    <p className="text-white text-xs mb-2">Year 2: Company revenue kicks in</p>
+                                    <p className="text-white text-xs mb-2">Year 3+: £6M-£24M/year from partnerships</p>
+                                    <p className="text-cyan-400 text-xs font-bold mt-2">Grants help start, companies make it huge ♾️❤️♾️</p>
+                                </div>
+
+                                <div className="bg-black border-2 border-purple-500 p-4 rounded">
+                                    <p className="text-purple-400 font-bold mb-2">ARCHIE'S FREEDOM:</p>
+                                    <p className="text-white text-xs mb-1">Year 1: £50k grant + first partnerships = £150k revenue</p>
+                                    <p className="text-white text-xs mb-1">Year 2: 20 unis × 5 partners = £1.2M revenue</p>
+                                    <p className="text-white text-xs mb-1">Year 3: 50 unis × 10 partners = £6M revenue</p>
+                                    <p className="text-white text-xs mb-1">Year 5: 200 unis globally = £24M revenue</p>
+                                    <p className="text-green-400 text-xs font-bold mt-3">No debt. No investors owning him. Just building ♾️❤️♾️</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* WHAT'S WORKING NOW */}
+                        <div className="bg-black border-4 border-cyan-500 p-6 rounded-xl mb-8" style={{ boxShadow: '0 0 40px rgba(6, 182, 212, 0.4)' }}>
+                            <div className="flex items-center gap-3 mb-4">
+                                <Zap className="w-10 h-10 text-cyan-400" />
+                                <div>
+                                    <h3 className="text-cyan-400 font-black text-xl font-mono">WHAT'S WORKING NOW</h3>
+                                    <p className="text-gray-400 text-xs font-mono">Real features vs vision</p>
+                                </div>
+                            </div>
+
+                            <div className="space-y-3 text-sm font-mono">
+                                <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-2 border-green-500 p-4 rounded">
+                                    <p className="text-green-400 font-bold mb-2">✓ LIVE NOW:</p>
+                                    <p className="text-white text-xs mb-1">✓ This page (shows vision clearly)</p>
+                                    <p className="text-white text-xs mb-1">✓ One-tap share button (viral spread)</p>
+                                    <p className="text-white text-xs mb-1">✓ P2P mesh tech (proven in UF51)</p>
+                                    <p className="text-white text-xs mb-1">✓ AI assistance (InvokeLLM working)</p>
+                                    <p className="text-cyan-400 text-xs font-bold mt-2">Foundation is solid. Ready to build ♾️❤️♾️</p>
+                                </div>
+
+                                <div className="bg-gradient-to-r from-amber-500/20 to-purple-500/20 border-2 border-amber-500 p-4 rounded">
+                                    <p className="text-amber-400 font-bold mb-2">🚧 BUILDING NEXT:</p>
+                                    <p className="text-white text-xs mb-1">→ Import old files (Excel/Word/PDF)</p>
+                                    <p className="text-white text-xs mb-1">→ AI transforms messy notes to clean guides</p>
+                                    <p className="text-white text-xs mb-1">→ Private study group chat (P2P encrypted)</p>
+                                    <p className="text-white text-xs mb-1">→ $P51 tutoring marketplace</p>
+                                    <p className="text-white text-xs mb-1">→ Food partnership integration</p>
+                                    <p className="text-purple-400 text-xs font-bold mt-2">Week 1-4 build. Then Archie tests ♾️❤️♾️</p>
+                                </div>
+
+                                <div className="bg-black border-2 border-cyan-500 p-4 rounded">
+                                    <p className="text-cyan-400 font-bold mb-2">📅 THE TIMELINE:</p>
+                                    <p className="text-white text-xs mb-1">Week 1-4: Core features (import, AI, chat)</p>
+                                    <p className="text-white text-xs mb-1">Week 5-8: Archie tests with 5 friends</p>
+                                    <p className="text-white text-xs mb-1">Month 3: 50 Economics students</p>
+                                    <p className="text-white text-xs mb-1">Month 6: All Edinburgh (30k students)</p>
+                                    <p className="text-green-400 text-xs font-bold mt-2">Real users, real feedback, real growth ♾️❤️♾️</p>
                                 </div>
                             </div>
                         </div>
