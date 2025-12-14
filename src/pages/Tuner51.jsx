@@ -25,7 +25,7 @@ export default function Tuner51() {
     const [isSensorActive, setIsSensorActive] = useState(false);
     const [ambientLight, setAmbientLight] = useState(null);
     const [pressure, setPressure] = useState(null);
-    
+
     const audioContextRef = useRef(null);
     const analyserRef = useRef(null);
     const canvasRef = useRef(null);
@@ -35,6 +35,12 @@ export default function Tuner51() {
     const oscillatorRef = useRef(null);
     const gainNodeRef = useRef(null);
     const [isPlaying, setIsPlaying] = useState(false);
+
+    // FEEDBACK REFS
+    const feedbackOscillatorRef = useRef(null);
+    const lastBeepRef = useRef(Date.now());
+    const baselineEMRef = useRef(null);
+    const baselineAccelRef = useRef(null);
 
     // Fetch measurement history
     const { data: measurements = [] } = useQuery({
@@ -144,11 +150,27 @@ export default function Tuner51() {
             try {
                 const sensor = new window.Magnetometer({ frequency: 60 });
                 magnetometerRef.current = sensor;
-                
+
                 sensor.addEventListener('reading', () => {
                     const { x, y, z } = sensor;
                     const magnitude = Math.sqrt(x*x + y*y + z*z);
                     setMagneticField({ x, y, z, magnitude });
+
+                    // Set baseline on first reading
+                    if (baselineEMRef.current === null) {
+                        baselineEMRef.current = magnitude;
+                    }
+
+                    // INSTANT FEEDBACK: beep when EM field changes significantly
+                    const change = Math.abs(magnitude - baselineEMRef.current);
+                    if (change > 5 && Date.now() - lastBeepRef.current > 500) {
+                        playFeedbackBeep(200 + change * 10); // Higher pitch = stronger field
+                        lastBeepRef.current = Date.now();
+                        // Visual feedback: vibrate phone
+                        if ('vibrate' in navigator) {
+                            navigator.vibrate(50);
+                        }
+                    }
 
                     // Auto-save measurement
                     saveMeasurement('magnetometer', { magnitude, x, y, z });
@@ -160,7 +182,7 @@ export default function Tuner51() {
                         setMeasuredFreq(Math.round(variation)); // Simplified - actual would need FFT
                     }
                 });
-                
+
                 sensor.start();
                 setIsSensorActive(true);
             } catch (err) {
@@ -177,19 +199,42 @@ export default function Tuner51() {
             try {
                 const sensor = new window.Accelerometer({ frequency: 60 });
                 accelerometerRef.current = sensor;
-                
+
                 const readings = [];
                 sensor.addEventListener('reading', () => {
                     const { x, y, z } = sensor;
                     const magnitude = Math.sqrt(x*x + y*y + z*z);
                     setAcceleration({ x, y, z, magnitude });
 
+                    // Set baseline
+                    if (baselineAccelRef.current === null) {
+                        baselineAccelRef.current = magnitude;
+                    }
+
+                    // INSTANT FEEDBACK: vibrate when movement detected
+                    const change = Math.abs(magnitude - baselineAccelRef.current);
+                    if (change > 0.5 && Date.now() - lastBeepRef.current > 300) {
+                        // Visual: flash background
+                        document.body.style.backgroundColor = '#ff6b35';
+                        setTimeout(() => {
+                            document.body.style.backgroundColor = '';
+                        }, 100);
+
+                        // Haptic feedback
+                        if ('vibrate' in navigator) {
+                            navigator.vibrate([30, 50, 30]);
+                        }
+
+                        playFeedbackBeep(400 + change * 100);
+                        lastBeepRef.current = Date.now();
+                    }
+
                     // Auto-save measurement
                     saveMeasurement('accelerometer', { magnitude, x, y, z });
 
                     readings.push(magnitude);
                     if (readings.length > 120) readings.shift(); // 2 seconds at 60Hz
-                    
+
                     // Simple frequency detection via zero-crossings
                     if (readings.length === 120) {
                         const mean = readings.reduce((a,b) => a+b) / readings.length;
@@ -206,7 +251,7 @@ export default function Tuner51() {
                         }
                     }
                 });
-                
+
                 sensor.start();
                 setIsSensorActive(true);
             } catch (err) {
@@ -227,10 +272,38 @@ export default function Tuner51() {
             accelerometerRef.current.stop();
             accelerometerRef.current = null;
         }
+        if (feedbackOscillatorRef.current) {
+            feedbackOscillatorRef.current.stop();
+            feedbackOscillatorRef.current = null;
+        }
         setMagneticField(null);
         setAcceleration(null);
         setAmbientLight(null);
         setPressure(null);
+        baselineEMRef.current = null;
+        baselineAccelRef.current = null;
+        document.body.style.backgroundColor = '';
+    };
+
+    // FEEDBACK BEEP - plays quick beep when sensors detect changes
+    const playFeedbackBeep = (frequency) => {
+        try {
+            const ctx = new (window.AudioContext || window.webkitAudioContext)();
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+
+            osc.frequency.setValueAtTime(frequency, ctx.currentTime);
+            gain.gain.setValueAtTime(0.1, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.1);
+
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+
+            osc.start();
+            osc.stop(ctx.currentTime + 0.1);
+        } catch (err) {
+            console.log('Audio feedback unavailable');
+        }
     };
 
     // AMBIENT LIGHT SENSOR - Detect screen blue light, LED flicker, circadian lighting
@@ -238,9 +311,21 @@ export default function Tuner51() {
         if ('AmbientLightSensor' in window) {
             try {
                 const sensor = new window.AmbientLightSensor({ frequency: 10 });
+                let lastLux = null;
                 sensor.addEventListener('reading', () => {
                     const lux = sensor.illuminance;
                     setAmbientLight(lux);
+
+                    // INSTANT FEEDBACK: change background color based on brightness
+                    const brightness = Math.min(255, Math.floor(lux / 4));
+                    document.body.style.backgroundColor = `rgba(${brightness}, ${brightness}, ${brightness}, 0.1)`;
+
+                    // Audio feedback on significant change
+                    if (lastLux !== null && Math.abs(lux - lastLux) > 100) {
+                        playFeedbackBeep(300 + lux);
+                    }
+                    lastLux = lux;
+
                     saveMeasurement('light', { magnitude: lux });
                 });
                 sensor.start();
@@ -374,6 +459,7 @@ export default function Tuner51() {
             stopListening();
             stopSensors();
             stopPlayback();
+            document.body.style.backgroundColor = '';
         };
     }, []);
 
@@ -652,6 +738,10 @@ export default function Tuner51() {
                                         <p className="text-pink-400 text-sm mb-2">MAGNETIC FIELD STRENGTH:</p>
                                         <p className="text-white text-4xl font-black">{magneticField.magnitude.toFixed(2)} µT</p>
                                         <p className="text-gray-400 text-xs mt-2">Earth baseline: ~25-65 µT</p>
+                                        <div className="mt-3 bg-pink-500/20 border border-pink-500/50 p-2 rounded">
+                                            <p className="text-pink-300 text-xs font-bold">🔊 LISTEN: Beep pitch changes with EM strength</p>
+                                            <p className="text-pink-300 text-xs">📳 FEEL: Phone vibrates on detection</p>
+                                        </div>
                                     </div>
                                     <div className="grid grid-cols-3 gap-2">
                                         <div className="bg-black/40 border border-pink-500/50 p-2 rounded">
@@ -722,6 +812,11 @@ export default function Tuner51() {
                                         <p className="text-orange-400 text-sm mb-2">ACCELERATION:</p>
                                         <p className="text-white text-4xl font-black">{acceleration.magnitude.toFixed(3)} m/s²</p>
                                         <p className="text-gray-400 text-xs mt-2">Gravity baseline: ~9.81 m/s²</p>
+                                        <div className="mt-3 bg-orange-500/20 border border-orange-500/50 p-2 rounded">
+                                            <p className="text-orange-300 text-xs font-bold">👀 SEE: Screen flashes orange on vibration</p>
+                                            <p className="text-orange-300 text-xs">📳 FEEL: Phone vibrates in pattern</p>
+                                            <p className="text-orange-300 text-xs">🔊 HEAR: Beep on movement</p>
+                                        </div>
                                     </div>
                                     <div className="grid grid-cols-3 gap-2">
                                         <div className="bg-black/40 border border-orange-500/50 p-2 rounded">
@@ -1067,6 +1162,10 @@ export default function Tuner51() {
                                     <div className="bg-black/60 border-2 border-yellow-500 rounded-lg p-4">
                                         <p className="text-yellow-400 text-sm mb-2">LIGHT LEVEL:</p>
                                         <p className="text-white text-4xl font-black">{ambientLight.toFixed(0)} lux</p>
+                                        <div className="mt-2 bg-yellow-500/20 border border-yellow-500/50 p-2 rounded mb-3">
+                                            <p className="text-yellow-300 text-xs font-bold">👀 SEE: Background brightness changes with light</p>
+                                            <p className="text-yellow-300 text-xs">🔊 HEAR: Beep on big brightness changes</p>
+                                        </div>
                                         <div className="mt-3 space-y-1 text-xs">
                                             {ambientLight < 50 && <p className="text-red-400">⚠️ Too dark - eye strain risk</p>}
                                             {ambientLight >= 50 && ambientLight < 300 && <p className="text-yellow-400">⚠️ Low light - consider brighter lighting</p>}
