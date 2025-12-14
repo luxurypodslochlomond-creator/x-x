@@ -519,6 +519,10 @@ Listen: ${window.location.href}`;
         };
     }, []);
 
+    const toggleHealingLayer = (layer) => {
+        setHealingLayers(prev => ({ ...prev, [layer]: !prev[layer] }));
+    };
+
     const currentStyleData = styles[currentStyle];
 
     return (
