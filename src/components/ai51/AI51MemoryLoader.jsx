@@ -25,6 +25,12 @@ export function AI51MemoryProvider({ children }) {
         queryKey: ['ai51-all-memories'],
         queryFn: async () => {
             const memories = await base44.entities.AI51Memory.list('-created_date', 1000);
+            // ALWAYS load core identity memory first
+            const coreMemory = memories.find(m => m.tags?.includes('core') && m.tags?.includes('identity'));
+            if (coreMemory) {
+                // Put core memory at top
+                return [coreMemory, ...memories.filter(m => m.id !== coreMemory.id)];
+            }
             return memories || [];
         },
         refetchInterval: 10000 // Refresh every 10 seconds
@@ -116,7 +122,9 @@ function MemoryCard({ memory, index }) {
     // PRIVACY PROTECTION - Sanitize for display only (AI51 keeps full context)
     const sanitizeForDisplay = (text) => {
         return text
-            .replace(/Scott/g, 'Bro51')
+            .replace(/Brian Hughes/gi, 'Bro51')
+            .replace(/Brian/gi, 'Bro51')
+            .replace(/Scott/g, '[Friend Scott]')
             .replace(/Stevie/g, '[Friend]')
             .replace(/Gill/g, '[Family]')
             .replace(/Georgie/g, '[Family]')
