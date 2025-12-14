@@ -760,8 +760,9 @@ Listen: ${window.location.href}`;
                                 onChange={(val) => setMixerLevels({...mixerLevels, healing: val})}
                                 description="432/528Hz layer"
                                 isActive={isPlaying}
-                            />
-                        </div>
+                                /> */}
+                                </div>
+                                <p className="text-xs text-gray-500 mt-2">Mixer coming soon - audio engine works, just need to wire up the controls ⚡</p>
                         <div className="mt-2 grid grid-cols-3 gap-1.5">
                             <button onClick={() => setMixerLevels({ kick: 1.0, bass: 0.8, hats: 0.15, claps: 0.3, bells: 0.2, pads: 0.1, strings: 0.25, shakers: 0.1, ride: 0.12, healing: 0.1 })} className="py-1.5 bg-cyan-600 text-white text-[10px] font-bold rounded">FULL</button>
                             <button onClick={() => setMixerLevels({ kick: 1.0, bass: 0.5, hats: 0.05, claps: 0.15, bells: 0.02, pads: 0.02, strings: 0.08, shakers: 0.03, ride: 0.04, healing: 0.15 })} className="py-1.5 bg-pink-600 text-white text-[10px] font-bold rounded">MINIMAL</button>
