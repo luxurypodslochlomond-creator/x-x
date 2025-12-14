@@ -337,6 +337,60 @@ export default function ScottBiggerVision() {
                 </div>
             </div>
 
+            {/* HOW TO SCALE - NEW SCHOOL NOT OLD SCHOOL */}
+            <div className="bg-gradient-to-br from-cyan-500/20 to-purple-500/20 border-4 border-cyan-500 p-6 rounded-xl mb-8">
+                <Zap className="w-12 h-12 text-cyan-400 mb-4" />
+                <h2 className="text-cyan-400 font-black text-xl font-mono mb-4">HOW TO SCALE (NEW SCHOOL)</h2>
+
+                <div className="space-y-3 text-sm font-mono">
+                    <div className="bg-black border-2 border-red-500 p-4 rounded">
+                        <p className="text-red-400 font-bold mb-2">OLD SCHOOL (SLOW AS FUCK):</p>
+                        <p className="text-gray-400 text-xs mb-1">❌ Channel partners = contracts, negotiations, slow</p>
+                        <p className="text-gray-400 text-xs mb-1">❌ Sales teams = expensive, take 6 months to close</p>
+                        <p className="text-gray-400 text-xs mb-1">❌ Trade shows = £10k booth, collect business cards</p>
+                        <p className="text-gray-400 text-xs mb-1">❌ Cold calling = 1% conversion, everyone hates you</p>
+                        <p className="text-red-400 text-xs mt-2 font-bold">= 2-3 years to hit 1,000 users 🐌</p>
+                    </div>
+
+                    <div className="bg-black border-2 border-green-500 p-4 rounded">
+                        <p className="text-green-400 font-bold mb-2">NEW SCHOOL (SCALES OVERNIGHT):</p>
+                        <p className="text-white text-xs mb-1">✓ VIRAL: Scott uses it → posts screenshot → 50 DMs "how?"</p>
+                        <p className="text-white text-xs mb-1">✓ PRODUCT-LED: Free trial, instant value, upgrade when ready</p>
+                        <p className="text-white text-xs mb-1">✓ COMMUNITY: Users invite users (built-in referral)</p>
+                        <p className="text-white text-xs mb-1">✓ P2P MESH: Share device-to-device at festivals/games</p>
+                        <p className="text-white text-xs mb-1">✓ AI HELPS: "Your friend needs this" → auto-invite</p>
+                        <p className="text-green-400 text-xs mt-2 font-bold">= 1,000 users in 6 months, 10,000 in 18 months 🚀</p>
+                    </div>
+
+                    <div className="bg-black border-2 border-pink-500 p-4 rounded">
+                        <p className="text-pink-400 font-bold mb-2">REAL EXAMPLE - HOW IT SPREADS:</p>
+                        <p className="text-gray-300 text-xs mb-2">1. Scott uses it at LA festival backstage</p>
+                        <p className="text-gray-300 text-xs mb-2">2. Manager sees him coordinate 12 artists offline</p>
+                        <p className="text-gray-300 text-xs mb-2">3. "Wtf how?" → Scott shares via Bluetooth (30 seconds)</p>
+                        <p className="text-gray-300 text-xs mb-2">4. That manager uses it at their next gig</p>
+                        <p className="text-gray-300 text-xs mb-2">5. 5 more managers see it → share → repeat</p>
+                        <p className="text-cyan-400 text-xs mt-2 font-bold">= 1 user → 50 users in 2 weeks (exponential)</p>
+                    </div>
+
+                    <div className="bg-black border-2 border-purple-500 p-4 rounded">
+                        <p className="text-purple-400 font-bold mb-2">WHY THIS WORKS NOW:</p>
+                        <p className="text-white text-xs mb-1">• Everyone has a phone (no installation barriers)</p>
+                        <p className="text-white text-xs mb-1">• Offline-first = works at festivals/games (people SEE it)</p>
+                        <p className="text-white text-xs mb-1">• Bluetooth share = instant demo (no forms)</p>
+                        <p className="text-white text-xs mb-1">• Network effect = more users = more value</p>
+                        <p className="text-white text-xs mb-1">• Trust spreads peer-to-peer faster than sales</p>
+                        <p className="text-pink-400 text-xs mt-2 font-bold">Channel partners = 1990s. Viral = 2025. ♾️❤️♾️</p>
+                    </div>
+
+                    <div className="bg-gradient-to-r from-amber-500/20 to-green-500/20 border-2 border-amber-500 p-4 rounded">
+                        <p className="text-amber-400 font-bold mb-2">THE NUMBERS:</p>
+                        <p className="text-white text-xs mb-1">Old school: £100k sales team → 10 users/month → 5 years to scale</p>
+                        <p className="text-green-400 text-xs mb-1">New school: £0 sales team → 100 users/month → 2 years to scale</p>
+                        <p className="text-cyan-400 text-xs font-bold mt-2">You save £500k AND grow 10x faster ✓</p>
+                    </div>
+                </div>
+            </div>
+
             {/* THE STRATEGY */}
             {/* HELPING TRAPPED TECH WORKERS */}
             <div className="bg-gradient-to-br from-pink-500/20 to-purple-500/20 border-4 border-pink-500 p-6 rounded-xl mb-8">
