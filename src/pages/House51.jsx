@@ -83,60 +83,50 @@ export default function House51() {
         const ctx = new (window.AudioContext || window.webkitAudioContext)();
         audioContextRef.current = ctx;
 
-        // Master gain - lower to prevent clipping
+        // Master chain - clean signal path
         const masterGain = ctx.createGain();
-        masterGain.gain.value = volume * 0.5; // Headroom for zero clipping
+        masterGain.gain.value = volume * 0.3; // Lots of headroom
         
-        // Compressor to prevent distortion
-        const compressor = ctx.createDynamicsCompressor();
-        compressor.threshold.value = -24;
-        compressor.knee.value = 30;
-        compressor.ratio.value = 12;
-        compressor.attack.value = 0.003;
-        compressor.release.value = 0.25;
+        // Limiter to catch any peaks
+        const limiter = ctx.createDynamicsCompressor();
+        limiter.threshold.value = -10;
+        limiter.knee.value = 0;
+        limiter.ratio.value = 20;
+        limiter.attack.value = 0.001;
+        limiter.release.value = 0.1;
         
-        masterGain.connect(compressor);
-        compressor.connect(ctx.destination);
+        masterGain.connect(limiter);
+        limiter.connect(ctx.destination);
         masterGainRef.current = masterGain;
 
         const analyser = ctx.createAnalyser();
         analyser.fftSize = 128;
-        compressor.connect(analyser);
+        limiter.connect(analyser);
 
         const now = ctx.currentTime;
         const style = styles[currentStyle];
-        const beatDuration = 60 / 128; // 128 BPM
 
-        // 3-MINUTE TRACK STRUCTURE (180 seconds)
-        // 0-30s: INTRO (kick + bass + healing)
-        // 30-60s: BUILD (add hats + claps)
-        // 60-90s: DROP (full energy - all layers)
-        // 90-120s: BREAKDOWN (pads + strings + bells)
-        // 120-150s: CLIMAX (everything maximum)
-        // 150-180s: OUTRO (fade out)
-
-        // INTRO (0-30s) - Kick + Bass + 432/528Hz
+        // 3-MINUTE DEEP HOUSE JOURNEY
+        // INTRO (0-30s) - Kick + Bass + Healing
         composeSection(ctx, masterGain, now, 0, 30, ['kick', 'bass', 'healing'], style);
 
-        // BUILD (30-60s) - Add hats, claps
-        composeSection(ctx, masterGain, now, 30, 60, ['kick', 'bass', 'hats', 'claps', 'healing'], style);
+        // BUILD (30-60s) - Add hats
+        composeSection(ctx, masterGain, now, 30, 60, ['kick', 'bass', 'hats', 'healing'], style);
 
-        // DROP (60-90s) - Full energy
-        composeSection(ctx, masterGain, now, 60, 90, ['kick', 'bass', 'hats', 'claps', 'bells', 'shakers', 'healing'], style);
+        // DROP (60-90s) - Full groove
+        composeSection(ctx, masterGain, now, 60, 90, ['kick', 'bass', 'hats', 'claps', 'healing'], style);
 
-        // BREAKDOWN (90-120s) - Emotional
-        composeSection(ctx, masterGain, now, 90, 120, ['kick', 'pads', 'strings', 'bells', 'healing'], style);
+        // BREAKDOWN (90-120s) - Emotional pads
+        composeSection(ctx, masterGain, now, 90, 120, ['kick', 'pads', 'strings', 'healing'], style);
 
         // CLIMAX (120-150s) - Everything
-        composeSection(ctx, masterGain, now, 120, 150, ['kick', 'bass', 'hats', 'claps', 'bells', 'pads', 'strings', 'shakers', 'ride', 'healing'], style);
+        composeSection(ctx, masterGain, now, 120, 150, ['kick', 'bass', 'hats', 'claps', 'pads', 'strings', 'healing'], style);
 
         // OUTRO (150-180s) - Fade
         composeSection(ctx, masterGain, now, 150, 180, ['kick', 'bass', 'pads', 'healing'], style, true);
 
-        // Auto-stop at 180s
-        setTimeout(() => {
-            stopHouse();
-        }, 180000);
+        // Auto-stop
+        setTimeout(() => stopHouse(), 180000);
 
         // Visualizer
         const updateWaveform = () => {
@@ -160,7 +150,6 @@ export default function House51() {
         };
         trackTime();
 
-        // Track metadata
         setTrackGenerated(new Date().toISOString());
         setIsPlaying(true);
     };
@@ -207,82 +196,73 @@ export default function House51() {
         });
     };
 
-    // KICK SECTION - Clean punchy house kick
+    // KICK SECTION - Deep house kick (smooth, no clicks)
     const playKickSection = (ctx, destination, startTime, duration, style) => {
         const beatDuration = 60 / 128;
         const numBeats = Math.floor(duration / beatDuration);
 
         for (let i = 0; i < numBeats; i++) {
-            if (i % 4 === 0 || i % 4 === 1 || i % 4 === 2 || i % 4 === 3) { // 4-on-floor
-                const time = startTime + (i * beatDuration);
-                
-                // Main punch oscillator
-                const osc1 = ctx.createOscillator();
-                const gain1 = ctx.createGain();
-                osc1.type = 'sine';
-                osc1.frequency.setValueAtTime(150, time);
-                osc1.frequency.exponentialRampToValueAtTime(50, time + 0.05);
-                osc1.frequency.exponentialRampToValueAtTime(40, time + 0.2);
-                gain1.gain.setValueAtTime(0.5, time);
-                gain1.gain.exponentialRampToValueAtTime(0.01, time + 0.4);
-                osc1.connect(gain1);
-                gain1.connect(destination);
-                osc1.start(time);
-                osc1.stop(time + 0.4);
-
-                // Sub bass oscillator for depth
-                const osc2 = ctx.createOscillator();
-                const gain2 = ctx.createGain();
-                osc2.type = 'sine';
-                osc2.frequency.value = 45;
-                gain2.gain.setValueAtTime(0.35, time);
-                gain2.gain.exponentialRampToValueAtTime(0.01, time + 0.3);
-                osc2.connect(gain2);
-                gain2.connect(destination);
-                osc2.start(time);
-                osc2.stop(time + 0.3);
-            }
+            const time = startTime + (i * beatDuration);
+            
+            // Deep kick - single oscillator, smooth envelope
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(120, time);
+            osc.frequency.exponentialRampToValueAtTime(40, time + 0.05);
+            
+            // Smooth attack/release to prevent clicks
+            gain.gain.setValueAtTime(0, time);
+            gain.gain.linearRampToValueAtTime(0.4, time + 0.001);
+            gain.gain.exponentialRampToValueAtTime(0.001, time + 0.5);
+            
+            osc.connect(gain);
+            gain.connect(destination);
+            osc.start(time);
+            osc.stop(time + 0.5);
         }
     };
 
-    // BASS SECTION - Clean rolling house bass
+    // BASS SECTION - Deep rolling bassline
     const playBassSection = (ctx, destination, startTime, duration, style) => {
         const beatDuration = 60 / 128;
-        // Classic house bass pattern - root, octave, fifth, octave
-        const pattern = [1, 2, 1.5, 2, 1, 2, 1.5, 1];
-        const patternDuration = beatDuration * pattern.length * 0.5;
+        // Deep house bass pattern - groovy, rolling
+        const pattern = [1, 1, 1.5, 1, 1.25, 1, 1.5, 1.25];
+        const patternDuration = beatDuration * pattern.length;
         const numPatterns = Math.floor(duration / patternDuration);
 
         for (let p = 0; p < numPatterns; p++) {
             pattern.forEach((mult, i) => {
-                const time = startTime + (p * patternDuration) + (i * beatDuration * 0.5);
+                const time = startTime + (p * patternDuration) + (i * beatDuration);
                 
-                // Main bass oscillator
                 const osc = ctx.createOscillator();
                 const gain = ctx.createGain();
                 const filter = ctx.createBiquadFilter();
 
                 osc.type = 'sawtooth';
-                osc.frequency.value = style.frequencies.bass * mult;
+                osc.frequency.value = 55 * mult; // Deep bass frequency
                 
                 filter.type = 'lowpass';
-                filter.frequency.setValueAtTime(1200, time);
-                filter.frequency.exponentialRampToValueAtTime(400, time + beatDuration * 0.3);
-                filter.Q.value = 2;
+                filter.frequency.setValueAtTime(800, time);
+                filter.frequency.exponentialRampToValueAtTime(300, time + beatDuration * 0.6);
+                filter.Q.value = 1;
 
-                gain.gain.setValueAtTime(0.2, time);
-                gain.gain.exponentialRampToValueAtTime(0.01, time + beatDuration * 0.4);
+                // Smooth envelope
+                gain.gain.setValueAtTime(0, time);
+                gain.gain.linearRampToValueAtTime(0.15, time + 0.001);
+                gain.gain.exponentialRampToValueAtTime(0.001, time + beatDuration * 0.7);
 
                 osc.connect(filter);
                 filter.connect(gain);
                 gain.connect(destination);
                 osc.start(time);
-                osc.stop(time + beatDuration * 0.4);
+                osc.stop(time + beatDuration * 0.7);
             });
         }
     };
 
-    // HATS SECTION - Clean crisp house hats
+    // HATS SECTION - Soft deep house hats
     const playHatsSection = (ctx, destination, startTime, duration) => {
         const beatDuration = 60 / 128;
         const numBeats = Math.floor(duration / (beatDuration * 0.5));
@@ -292,27 +272,27 @@ export default function House51() {
             const isOffbeat = i % 2 === 1;
             
             const noise = ctx.createBufferSource();
-            const buffer = ctx.createBuffer(1, ctx.sampleRate * 0.03, ctx.sampleRate);
+            const buffer = ctx.createBuffer(1, ctx.sampleRate * 0.02, ctx.sampleRate);
             const data = buffer.getChannelData(0);
             for (let j = 0; j < data.length; j++) data[j] = Math.random() * 2 - 1;
             noise.buffer = buffer;
 
             const filter = ctx.createBiquadFilter();
             filter.type = 'highpass';
-            filter.frequency.value = 8000;
-            filter.Q.value = 1;
+            filter.frequency.value = 10000;
+            filter.Q.value = 0.5;
 
             const gain = ctx.createGain();
-            // Accent offbeat hats (classic house feel)
-            const level = isOffbeat ? 0.08 : 0.04;
-            gain.gain.setValueAtTime(level, time);
-            gain.gain.exponentialRampToValueAtTime(0.001, time + 0.04);
+            const level = isOffbeat ? 0.05 : 0.025;
+            gain.gain.setValueAtTime(0, time);
+            gain.gain.linearRampToValueAtTime(level, time + 0.001);
+            gain.gain.exponentialRampToValueAtTime(0.001, time + 0.03);
 
             noise.connect(filter);
             filter.connect(gain);
             gain.connect(destination);
             noise.start(time);
-            noise.stop(time + 0.04);
+            noise.stop(time + 0.03);
         }
     };
 
@@ -338,41 +318,41 @@ export default function House51() {
         }
     };
 
-    // CLAPS SECTION - Clean snappy house claps
+    // CLAPS SECTION - Smooth deep house claps
     const playClapsSection = (ctx, destination, startTime, duration) => {
         const beatDuration = 60 / 128;
         const numBars = Math.floor(duration / (beatDuration * 4));
 
         for (let bar = 0; bar < numBars; bar++) {
-            [1, 3].forEach(beat => { // 2 and 4
+            [1, 3].forEach(beat => {
                 const time = startTime + (bar * beatDuration * 4) + (beat * beatDuration);
                 
-                // Single clean clap
                 const noise = ctx.createBufferSource();
-                const buffer = ctx.createBuffer(1, ctx.sampleRate * 0.04, ctx.sampleRate);
+                const buffer = ctx.createBuffer(1, ctx.sampleRate * 0.03, ctx.sampleRate);
                 const data = buffer.getChannelData(0);
                 for (let i = 0; i < data.length; i++) data[i] = Math.random() * 2 - 1;
                 noise.buffer = buffer;
 
                 const filter = ctx.createBiquadFilter();
                 filter.type = 'bandpass';
-                filter.frequency.value = 1800;
-                filter.Q.value = 2;
+                filter.frequency.value = 1500;
+                filter.Q.value = 1.5;
 
                 const gain = ctx.createGain();
-                gain.gain.setValueAtTime(0.2, time);
-                gain.gain.exponentialRampToValueAtTime(0.001, time + 0.12);
+                gain.gain.setValueAtTime(0, time);
+                gain.gain.linearRampToValueAtTime(0.12, time + 0.002);
+                gain.gain.exponentialRampToValueAtTime(0.001, time + 0.15);
 
                 noise.connect(filter);
                 filter.connect(gain);
                 gain.connect(destination);
                 noise.start(time);
-                noise.stop(time + 0.12);
+                noise.stop(time + 0.15);
             });
         }
     };
 
-    // PADS SECTION
+    // PADS SECTION - Warm deep house pads
     const playPadsSection = (ctx, destination, startTime, duration) => {
         const chords = [[261.63, 329.63, 392.00], [293.66, 369.99, 440.00]];
         const beatDuration = 60 / 128;
@@ -383,13 +363,22 @@ export default function House51() {
                 chord.forEach(freq => {
                     const osc = ctx.createOscillator();
                     const gain = ctx.createGain();
-                    osc.type = 'triangle';
+                    const filter = ctx.createBiquadFilter();
+                    
+                    osc.type = 'sawtooth';
                     osc.frequency.value = freq;
+                    
+                    filter.type = 'lowpass';
+                    filter.frequency.value = 2000;
+                    filter.Q.value = 0.5;
+                    
                     gain.gain.setValueAtTime(0, time);
-                    gain.gain.linearRampToValueAtTime(0.05, time + 1);
-                    gain.gain.setValueAtTime(0.05, time + (beatDuration * 15));
+                    gain.gain.linearRampToValueAtTime(0.03, time + 2);
+                    gain.gain.setValueAtTime(0.03, time + (beatDuration * 14));
                     gain.gain.linearRampToValueAtTime(0, time + (beatDuration * 16));
-                    osc.connect(gain);
+                    
+                    osc.connect(filter);
+                    filter.connect(gain);
                     gain.connect(destination);
                     osc.start(time);
                     osc.stop(time + (beatDuration * 16));
@@ -398,7 +387,7 @@ export default function House51() {
         });
     };
 
-    // STRINGS SECTION
+    // STRINGS SECTION - Smooth strings
     const playStringsSection = (ctx, destination, startTime, duration) => {
         const notes = [261.63, 329.63, 392.00, 523.25];
         const beatDuration = 60 / 128;
@@ -409,13 +398,22 @@ export default function House51() {
                 notes.forEach(freq => {
                     const osc = ctx.createOscillator();
                     const gain = ctx.createGain();
+                    const filter = ctx.createBiquadFilter();
+                    
                     osc.type = 'sawtooth';
                     osc.frequency.value = freq;
+                    
+                    filter.type = 'lowpass';
+                    filter.frequency.value = 3000;
+                    filter.Q.value = 0.7;
+                    
                     gain.gain.setValueAtTime(0, time);
-                    gain.gain.linearRampToValueAtTime(0.12, time + 1);
-                    gain.gain.setValueAtTime(0.12, time + (beatDuration * 15));
+                    gain.gain.linearRampToValueAtTime(0.06, time + 1.5);
+                    gain.gain.setValueAtTime(0.06, time + (beatDuration * 14));
                     gain.gain.linearRampToValueAtTime(0, time + (beatDuration * 16));
-                    osc.connect(gain);
+                    
+                    osc.connect(filter);
+                    filter.connect(gain);
                     gain.connect(destination);
                     osc.start(time);
                     osc.stop(time + (beatDuration * 16));
