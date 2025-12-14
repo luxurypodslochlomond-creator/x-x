@@ -262,7 +262,7 @@ export default function ScottWhiteLabelPricing() {
                             <p className="text-gray-400 text-xs mb-4 font-mono">50+ artists</p>
 
                             <div className="mb-4">
-                                <p className="text-4xl font-black text-pink-400 font-mono">£1,499</p>
+                                <p className="text-4xl font-black text-pink-400 font-mono">£4,999</p>
                                 <p className="text-gray-500 text-xs font-mono">Per month</p>
                             </div>
 
@@ -294,7 +294,8 @@ export default function ScottWhiteLabelPricing() {
                             </Button>
 
                             <div className="mt-4 bg-pink-500/10 border border-pink-500/30 rounded p-2">
-                                <p className="text-pink-400 text-xs font-mono font-bold">🏹 £450/mo → cleanup crews paid</p>
+                                <p className="text-pink-400 text-xs font-mono font-bold">♾️ £1,500/mo → indies + cleanup</p>
+                                <p className="text-gray-500 text-xs font-mono">Serious pricing = serious impact</p>
                             </div>
                         </motion.div>
 
