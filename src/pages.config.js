@@ -219,13 +219,13 @@ import ConsciousnessPhysics from './pages/ConsciousnessPhysics';
 import BigIssueFoodRescue from './pages/BigIssueFoodRescue';
 import DimensionsExplained from './pages/DimensionsExplained';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
-import Tuner51 from './pages/Tuner51';
 import DeviceLabResearch from './pages/DeviceLabResearch';
 import AxiomaticTruth from './pages/AxiomaticTruth';
 import House51 from './pages/House51';
 import PatientZero from './pages/PatientZero';
 import ScottOfflineMode from './pages/ScottOfflineMode';
 import AdminStarlingSetup from './pages/AdminStarlingSetup';
+import Earth51 from './pages/Earth51';
 import __Layout from './Layout.jsx';
 
 
@@ -451,13 +451,13 @@ export const PAGES = {
     "BigIssueFoodRescue": BigIssueFoodRescue,
     "DimensionsExplained": DimensionsExplained,
     "ZeroPointEnergy": ZeroPointEnergy,
-    "Tuner51": Tuner51,
     "DeviceLabResearch": DeviceLabResearch,
     "AxiomaticTruth": AxiomaticTruth,
     "House51": House51,
     "PatientZero": PatientZero,
     "ScottOfflineMode": ScottOfflineMode,
     "AdminStarlingSetup": AdminStarlingSetup,
+    "Earth51": Earth51,
 }
 
 export const pagesConfig = {
