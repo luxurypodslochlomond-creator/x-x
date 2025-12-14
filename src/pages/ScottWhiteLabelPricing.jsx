@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Check, Crown, Music, Building, Zap, Users, ArrowLeft } from 'lucide-react';
-import Kingdom51Crown8Bit from '@/components/shared/Kingdom51Crown8Bit';
+import CoManager51Icon8Bit from '@/components/shared/CoManager51Icon8Bit';
 import { useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { base44 } from '@/api/base44Client';
@@ -49,7 +49,7 @@ export default function ScottWhiteLabelPricing() {
             }
         } catch (error) {
             console.error('Checkout error:', error);
-            alert('Payment setup failed - contact support@kingdom51.com');
+            alert('Payment setup failed - contact support');
             setLoading(false);
         }
     };
@@ -69,8 +69,8 @@ export default function ScottWhiteLabelPricing() {
 
                 {/* HEADER */}
                 <div className="text-center mb-8">
-                    <Kingdom51Crown8Bit size={80} animate={true} className="mx-auto mb-6" />
-                    <h1 className="text-5xl font-black text-amber-400 mb-3 font-mono">KINGDOM51</h1>
+                    <CoManager51Icon8Bit size={80} animate={true} className="mx-auto mb-6" />
+                    <h1 className="text-5xl font-black text-amber-400 mb-3 font-mono">CO-MANAGER51</h1>
                     <p className="text-gray-400 text-lg font-mono mb-2">AI co-manager • Works offline • Zero forms</p>
                     <p className="text-gray-500 text-sm font-mono mb-6">Scott uses this daily with 12 artists. Real tool. Real proof.</p>
                     
