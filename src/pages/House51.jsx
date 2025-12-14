@@ -877,65 +877,35 @@ export default function House51() {
                     })}
                 </div>
 
-                    {/* HEALING */}
+                {/* HEALING + CONTROLS */}
+                <div className="grid md:grid-cols-2 gap-2">
                     <div className="bg-zinc-950 border border-amber-600/30 rounded-lg p-3">
-                        <h3 className="text-sm font-black text-pink-500 mb-2 flex items-center gap-1.5">
-                            <Heart className="w-4 h-4" />HEALING
-                        </h3>
-                        <div className="space-y-1.5">
-                            <button onClick={() => toggleHealingLayer('love')} className={`w-full p-1.5 rounded border text-left ${healingLayers.love ? 'bg-pink-500/20 border-pink-500' : 'bg-zinc-900 border-zinc-700'}`}>
-                                <p className="text-xs font-bold text-white">528Hz Love</p>
+                        <h3 className="text-xs font-black text-pink-500 mb-2">HEALING LAYERS</h3>
+                        <div className="grid grid-cols-2 gap-1.5">
+                            <button onClick={() => toggleHealingLayer('love')} className={`p-2 rounded border text-center ${healingLayers.love ? 'bg-pink-500/20 border-pink-500' : 'bg-zinc-900 border-zinc-700'}`}>
+                                <p className="text-[10px] font-bold text-white">528Hz</p>
                             </button>
-                            <button onClick={() => toggleHealingLayer('calm')} className={`w-full p-1.5 rounded border text-left ${healingLayers.calm ? 'bg-purple-500/20 border-purple-500' : 'bg-zinc-900 border-zinc-700'}`}>
-                                <p className="text-xs font-bold text-white">432Hz Calm</p>
+                            <button onClick={() => toggleHealingLayer('calm')} className={`p-2 rounded border text-center ${healingLayers.calm ? 'bg-purple-500/20 border-purple-500' : 'bg-zinc-900 border-zinc-700'}`}>
+                                <p className="text-[10px] font-bold text-white">432Hz</p>
                             </button>
-                            <button onClick={() => toggleHealingLayer('earth')} className={`w-full p-1.5 rounded border text-left ${healingLayers.earth ? 'bg-green-500/20 border-green-500' : 'bg-zinc-900 border-zinc-700'}`}>
-                                <p className="text-xs font-bold text-white">7.83Hz Earth</p>
+                            <button onClick={() => toggleHealingLayer('earth')} className={`p-2 rounded border text-center ${healingLayers.earth ? 'bg-green-500/20 border-green-500' : 'bg-zinc-900 border-zinc-700'}`}>
+                                <p className="text-[10px] font-bold text-white">7.83Hz</p>
                             </button>
-                            <button onClick={() => toggleHealingLayer('focus')} className={`w-full p-1.5 rounded border text-left ${healingLayers.focus ? 'bg-yellow-500/20 border-yellow-500' : 'bg-zinc-900 border-zinc-700'}`}>
-                                <p className="text-xs font-bold text-white">40Hz Focus</p>
+                            <button onClick={() => toggleHealingLayer('focus')} className={`p-2 rounded border text-center ${healingLayers.focus ? 'bg-yellow-500/20 border-yellow-500' : 'bg-zinc-900 border-zinc-700'}`}>
+                                <p className="text-[10px] font-bold text-white">40Hz</p>
                             </button>
-                        </div>
-
-                        <div className="mt-3 pt-3 border-t border-zinc-800">
-                            <label className="text-[10px] text-gray-500 mb-1.5 block">VOLUME</label>
-                            <input type="range" min="0" max="1" step="0.01" value={volume} onChange={(e) => setVolume(parseFloat(e.target.value))} className="w-full h-1.5 bg-zinc-800 rounded appearance-none" />
-                            <label className="text-[10px] text-gray-500 mb-1.5 block mt-2">BPM: {bpm}</label>
-                            <input type="range" min="110" max="140" value={bpm} onChange={(e) => setBpm(parseInt(e.target.value))} disabled={isPlaying} className="w-full h-1.5 bg-zinc-800 rounded appearance-none disabled:opacity-50" />
                         </div>
                     </div>
 
-                {/* TRACK SUGGESTIONS */}
-                <div className="md:col-span-3 bg-zinc-950 border border-amber-600/30 rounded-lg p-3">
-                    <h3 className="text-sm font-black text-amber-500 mb-2">START HERE BRO:</h3>
-                    <div className="grid grid-cols-2 md:grid-cols-3 gap-2 text-xs">
-                        <div className="bg-black border border-amber-600/30 p-2 rounded">
-                            <p className="text-white font-bold">Kerri Chandler</p>
-                            <p className="text-gray-500 text-[10px]">Bar A Thym</p>
-                        </div>
-                        <div className="bg-black border border-amber-600/30 p-2 rounded">
-                            <p className="text-white font-bold">Larry Heard</p>
-                            <p className="text-gray-500 text-[10px]">Can You Feel It</p>
-                        </div>
-                        <div className="bg-black border border-amber-600/30 p-2 rounded">
-                            <p className="text-white font-bold">Moodymann</p>
-                            <p className="text-gray-500 text-[10px]">Dem Young Sconies</p>
-                        </div>
-                        <div className="bg-black border border-amber-600/30 p-2 rounded">
-                            <p className="text-white font-bold">CamelPhat</p>
-                            <p className="text-gray-500 text-[10px]">Cola (sub-bass king)</p>
-                        </div>
-                        <div className="bg-black border border-amber-600/30 p-2 rounded">
-                            <p className="text-white font-bold">RÜFÜS DU SOL</p>
-                            <p className="text-gray-500 text-[10px]">Innerbloom</p>
-                        </div>
-                        <div className="bg-black border border-amber-600/30 p-2 rounded">
-                            <p className="text-white font-bold">Luka's Ibiza</p>
-                            <p className="text-gray-500 text-[10px]">Ben Santiago sets</p>
-                        </div>
+                    <div className="bg-zinc-950 border border-amber-600/30 rounded-lg p-3">
+                        <h3 className="text-xs font-black text-amber-500 mb-2">CONTROLS</h3>
+                        <label className="text-[10px] text-gray-500 mb-1 block">VOL: {Math.round(volume * 100)}%</label>
+                        <input type="range" min="0" max="1" step="0.01" value={volume} onChange={(e) => setVolume(parseFloat(e.target.value))} className="w-full h-1.5 bg-zinc-800 rounded appearance-none mb-3" />
+                        <label className="text-[10px] text-gray-500 mb-1 block">BPM: {bpm}</label>
+                        <input type="range" min="110" max="140" value={bpm} onChange={(e) => setBpm(parseInt(e.target.value))} disabled={isPlaying} className="w-full h-1.5 bg-zinc-800 rounded appearance-none disabled:opacity-50" />
                     </div>
                 </div>
-                    </div>
+            </div>
 
                 {showMixer && (
                     <div className="mt-4 bg-zinc-950 border border-cyan-500 rounded-lg p-3">
