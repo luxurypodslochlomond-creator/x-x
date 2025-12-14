@@ -760,6 +760,29 @@ Listen: ${window.location.href}`;
         setHealingLayers(prev => ({ ...prev, [layer]: !prev[layer] }));
     };
 
+    // HOT-SWAP STYLE - Change style during playback
+    const changeStyleLive = (newStyle) => {
+        if (!isPlaying || mode !== 'freestyle') {
+            setCurrentStyle(newStyle);
+            return;
+        }
+
+        // Save current position
+        const currentTime = playbackTime;
+
+        // Stop current
+        stopHouse();
+
+        // Switch style
+        setCurrentStyle(newStyle);
+
+        // Restart from same position after brief pause
+        setTimeout(() => {
+            setPlaybackTime(currentTime);
+            startFreestyle();
+        }, 50);
+    };
+
     const currentStyleData = styles[currentStyle];
 
     return (
@@ -955,9 +978,9 @@ Listen: ${window.location.href}`;
                                 const isActive = currentStyle === key;
                                 return (
                                     <button
-                                        key={key}
-                                        onClick={() => setCurrentStyle(key)}
-                                        className={`p-3 rounded-lg border-2 text-left transition-all ${
+                                            key={key}
+                                            onClick={() => changeStyleLive(key)}
+                                            className={`p-3 rounded-lg border-2 text-left transition-all ${
                                             isActive 
                                                 ? 'bg-amber-600/20 border-amber-500' 
                                                 : 'bg-black/40 border-gray-700 hover:border-gray-600'
