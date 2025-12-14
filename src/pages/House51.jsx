@@ -797,54 +797,34 @@ export default function House51() {
     const currentStyleData = styles[currentStyle];
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-black via-purple-950 to-black text-white p-4 md:p-6 relative overflow-hidden">
-            {/* COOLASFUCK animated grid background */}
-            <div className="fixed inset-0 opacity-10 pointer-events-none z-0">
-                <motion.div
-                    animate={{ 
-                        backgroundPosition: ['0% 0%', '100% 100%'],
-                        opacity: [0.1, 0.2, 0.1]
-                    }}
-                    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                    className="absolute inset-0"
-                    style={{
-                        backgroundImage: 'repeating-linear-gradient(0deg, #ec4899 0px, transparent 1px, transparent 30px), repeating-linear-gradient(90deg, #22d3ee 0px, transparent 1px, transparent 30px)',
-                        backgroundSize: '30px 30px'
-                    }}
-                />
+        <div className="min-h-screen bg-black text-white p-4 md:p-6 relative overflow-hidden">
+            {/* Subtle warm glow - club darkness */}
+            <div className="fixed inset-0 pointer-events-none z-0">
+                <div className="absolute top-0 left-1/4 w-96 h-96 bg-amber-600/5 rounded-full blur-3xl" />
+                <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-orange-600/5 rounded-full blur-3xl" />
             </div>
             <div className="max-w-6xl mx-auto relative z-10">
                 
-                {/* COMPACT HEADER */}
+                {/* HEADER - CLEAN NEW */}
                 <motion.div 
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="flex flex-col gap-3 mb-4"
+                    className="flex flex-col gap-3 mb-6"
                 >
                     <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-3">
+                        <div className="flex items-center gap-4">
                             <motion.div
-                                className="relative"
-                                animate={isPlaying ? { 
-                                    scale: [1, 1.05, 1],
-                                    filter: ['drop-shadow(0 0 10px rgba(236, 72, 153, 0.6))', 'drop-shadow(0 0 20px rgba(34, 211, 238, 0.8))', 'drop-shadow(0 0 10px rgba(236, 72, 153, 0.6))']
-                                } : {}}
-                                transition={{ duration: 1.5, repeat: isPlaying ? Infinity : 0 }}
+                                animate={isPlaying ? { rotate: 360 } : {}}
+                                transition={{ duration: 3, repeat: isPlaying ? Infinity : 0, ease: "linear" }}
                             >
-                                <COOLASFUCKHouse51 size={50} animate={isPlaying} />
+                                <COOLASFUCKHouse51 size={56} animate={false} />
                             </motion.div>
                             <div>
-                                <motion.h1 
-                                    className="text-4xl md:text-5xl font-black bg-gradient-to-r from-cyan-400 via-pink-400 to-purple-400 bg-clip-text text-transparent"
-                                    animate={isPlaying ? { 
-                                        textShadow: ['0 0 20px rgba(236,72,153,0.5)', '0 0 40px rgba(34,211,238,0.8)', '0 0 20px rgba(236,72,153,0.5)']
-                                    } : {}}
-                                    transition={{ duration: 2, repeat: Infinity }}
-                                >
+                                <h1 className="text-5xl md:text-6xl font-black text-white tracking-tight">
                                     HOUSE51
-                                </motion.h1>
-                                <p className="text-cyan-400 text-xs font-mono">
-                                    {currentStyleData.origin} • {bpm} BPM + 432/528Hz
+                                </h1>
+                                <p className="text-amber-500 text-sm font-bold">
+                                    {currentStyleData.origin} • {bpm} BPM
                                 </p>
                             </div>
                         </div>
@@ -852,7 +832,7 @@ export default function House51() {
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                             onClick={() => setShowMixer(!showMixer)}
-                            className="px-4 py-2 rounded-lg bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 font-bold text-sm flex items-center gap-2"
+                            className="px-4 py-2 bg-amber-600/20 border-2 border-amber-600 hover:bg-amber-600/30 font-bold text-sm flex items-center gap-2 text-amber-400"
                         >
                             <Settings className="w-4 h-4" />
                             {showMixer ? 'HIDE' : 'MIXER'}
@@ -860,15 +840,11 @@ export default function House51() {
                     </div>
 
                     {/* EAR SAFETY NOTE */}
-                    <motion.div 
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        className="bg-amber-900/30 border-l-4 border-amber-500 p-2 rounded"
-                    >
-                        <p className="text-amber-300 text-xs font-mono">
-                            🎚️ Use MIXER to adjust bells/chimes if harsh on ears - start low ⚡♾️❤️♾️
+                    <div className="bg-amber-950/40 border border-amber-600/50 p-2 rounded">
+                        <p className="text-amber-400 text-xs">
+                            Use MIXER to adjust levels - start low, find your frequency
                         </p>
-                    </motion.div>
+                    </div>
                 </motion.div>
 
                 {/* COMPACT PLAYER + STYLES */}
@@ -878,14 +854,13 @@ export default function House51() {
                 <motion.div 
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="bg-black border-2 border-pink-500 rounded-xl p-4"
-                    style={{ boxShadow: '0 0 30px rgba(236, 72, 153, 0.4)' }}
+                    className="bg-zinc-950 border border-amber-600/30 rounded-lg p-4"
                 >
                     {/* Timeline */}
                     <div className="mb-4">
-                        <div className="flex items-center justify-between text-xs text-gray-400 mb-2">
+                        <div className="flex items-center justify-between text-xs text-gray-500 mb-2">
                             <span>{Math.floor(playbackTime / 60)}:{String(Math.floor(playbackTime % 60)).padStart(2, '0')}</span>
-                            <span className="text-cyan-400 font-mono">LOSSLESS • {bpm} BPM</span>
+                            <span className="text-amber-500 font-bold">LOSSLESS • {bpm} BPM</span>
                             <span>-{Math.floor((totalDuration - playbackTime) / 60)}:{String(Math.floor((totalDuration - playbackTime) % 60)).padStart(2, '0')}</span>
                         </div>
                         <input
@@ -894,9 +869,9 @@ export default function House51() {
                             max={totalDuration}
                             value={playbackTime}
                             onChange={(e) => scrubToTime(parseFloat(e.target.value))}
-                            className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer"
+                            className="w-full h-2 bg-zinc-800 rounded-lg appearance-none cursor-pointer"
                             style={{
-                                background: `linear-gradient(to right, rgb(236, 72, 153) 0%, rgb(236, 72, 153) ${(playbackTime / totalDuration) * 100}%, rgb(55, 65, 81) ${(playbackTime / totalDuration) * 100}%, rgb(55, 65, 81) 100%)`
+                                background: `linear-gradient(to right, rgb(217, 119, 6) 0%, rgb(217, 119, 6) ${(playbackTime / totalDuration) * 100}%, rgb(39, 39, 42) ${(playbackTime / totalDuration) * 100}%, rgb(39, 39, 42) 100%)`
                             }}
                         />
                     </div>
@@ -908,8 +883,7 @@ export default function House51() {
                             whileHover={{ scale: 1.1 }}
                             whileTap={{ scale: 0.9 }}
                             onClick={rewindHouse}
-                            className="p-4 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600"
-                            style={{ boxShadow: '0 0 20px rgba(168, 85, 247, 0.5)' }}
+                            className="p-4 rounded-full bg-zinc-800 border border-amber-600/50 hover:bg-zinc-700"
                         >
                             <motion.svg 
                                 width="32" 
@@ -930,16 +904,11 @@ export default function House51() {
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                             onClick={isPlaying ? stopHouse : startHouse}
-                            className={`relative px-16 py-8 rounded-full font-black text-3xl transition-all ${
+                            className={`relative px-16 py-8 rounded-full font-black text-3xl ${
                                 isPlaying 
-                                    ? 'bg-gradient-to-r from-red-500 to-orange-500' 
-                                    : 'bg-gradient-to-r from-cyan-500 via-pink-500 to-purple-500'
+                                    ? 'bg-red-600 border-2 border-red-500' 
+                                    : 'bg-amber-600 border-2 border-amber-500'
                             }`}
-                            style={{ 
-                                boxShadow: isPlaying 
-                                    ? '0 0 50px rgba(239, 68, 68, 0.8)' 
-                                    : '0 0 50px rgba(34, 211, 238, 0.8)' 
-                            }}
                         >
                             {isPlaying ? (
                                 <Pause className="w-10 h-10" />
@@ -953,8 +922,7 @@ export default function House51() {
                             whileHover={{ scale: 1.1 }}
                             whileTap={{ scale: 0.9 }}
                             onClick={skipForward}
-                            className="p-4 rounded-full bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600"
-                            style={{ boxShadow: '0 0 20px rgba(236, 72, 153, 0.5)' }}
+                            className="p-4 rounded-full bg-zinc-800 border border-amber-600/50 hover:bg-zinc-700"
                         >
                             <motion.svg 
                                 width="32" 
@@ -977,7 +945,7 @@ export default function House51() {
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                             onClick={exportWAV}
-                            className="flex-1 py-2 rounded-lg bg-green-600 hover:bg-green-700 font-bold text-xs flex items-center justify-center gap-2"
+                            className="flex-1 py-2 bg-zinc-800 border border-amber-600/50 hover:bg-zinc-700 font-bold text-xs flex items-center justify-center gap-2 text-amber-400"
                         >
                             <Download className="w-3 h-3" />
                             WAV
@@ -986,7 +954,7 @@ export default function House51() {
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                             onClick={shareP2P}
-                            className="flex-1 py-2 rounded-lg bg-cyan-600 hover:bg-cyan-700 font-bold text-xs flex items-center justify-center gap-2"
+                            className="flex-1 py-2 bg-zinc-800 border border-amber-600/50 hover:bg-zinc-700 font-bold text-xs flex items-center justify-center gap-2 text-amber-400"
                         >
                             <Share2 className="w-3 h-3" />
                             P2P
@@ -995,8 +963,8 @@ export default function House51() {
                     </motion.div>
 
                     {/* HOUSE STYLES - COMPACT */}
-                    <div className="bg-gradient-to-br from-cyan-500/10 to-purple-500/10 border-2 border-cyan-500 rounded-xl p-4">
-                    <h3 className="text-lg font-black text-cyan-400 mb-3 flex items-center gap-2">
+                    <div className="bg-zinc-950 border border-amber-600/30 rounded-lg p-4">
+                    <h3 className="text-lg font-black text-amber-500 mb-3 flex items-center gap-2">
                         <Music className="w-5 h-5" />
                         HOUSE STYLE
                     </h3>
@@ -1010,20 +978,19 @@ export default function House51() {
                                     whileHover={{ scale: 1.02 }}
                                     whileTap={{ scale: 0.98 }}
                                     onClick={() => setCurrentStyle(key)}
-                                    className={`w-full p-2 rounded-lg border-2 transition-all text-left ${
+                                    className={`w-full p-2 rounded border transition-all text-left ${
                                         isActive 
-                                            ? 'bg-gradient-to-r from-cyan-500/20 to-pink-500/20 border-pink-500' 
-                                            : 'bg-black/40 border-gray-700 hover:border-gray-500'
+                                            ? 'bg-amber-600/20 border-amber-600' 
+                                            : 'bg-zinc-900 border-zinc-700 hover:border-zinc-600'
                                     }`}
-                                    style={isActive ? { boxShadow: '0 0 20px rgba(236, 72, 153, 0.4)' } : {}}
                                 >
                                     <div className="flex items-center gap-2">
-                                        <Icon className={`w-4 h-4 ${isActive ? 'text-pink-400' : 'text-gray-400'}`} />
+                                        <Icon className={`w-4 h-4 ${isActive ? 'text-amber-400' : 'text-gray-500'}`} />
                                         <div className="flex-1 min-w-0">
-                                            <p className={`font-bold text-sm truncate ${isActive ? 'text-white' : 'text-gray-400'}`}>
+                                            <p className={`font-bold text-sm truncate ${isActive ? 'text-white' : 'text-gray-500'}`}>
                                                 {style.name}
                                             </p>
-                                            <p className="text-[10px] text-gray-500 truncate">{style.vibe}</p>
+                                            <p className="text-[10px] text-gray-600 truncate">{style.vibe}</p>
                                         </div>
                                     </div>
                                 </motion.button>
