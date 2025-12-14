@@ -180,12 +180,12 @@ Keep it SHORT, practical, straight to the point. No bullshit. Real help.`,
 
 
 
-            {/* HEADER - CLEAN */}
+            {/* HEADER - CLEAN - STICKY */}
             <motion.div 
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4 }}
-                className="mb-6"
+                className="sticky top-0 z-50 mb-6 bg-black/95 backdrop-blur-xl py-4 -mx-4 px-4"
             >
                 <div className="bg-gradient-to-br from-gray-900 to-black border-2 border-amber-500/30 rounded-xl p-5 flex items-center justify-between shadow-lg" style={{ boxShadow: '0 4px 30px rgba(245, 158, 11, 0.1)' }}>
                     <div>
