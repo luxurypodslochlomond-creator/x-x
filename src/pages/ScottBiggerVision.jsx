@@ -573,6 +573,36 @@ export default function ScottBiggerVision() {
                         <p className="text-white text-xs mb-2">Use their money to speed up, not to survive</p>
                         <p className="text-green-400 text-xs font-bold mt-2">Keep control. Scale at your pace. Love first. Always. ♾️❤️♾️</p>
                     </div>
+
+                    <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-4 border-green-500 p-4 rounded mt-4">
+                        <p className="text-green-400 font-bold mb-3">WHAT SCOTT COULD CREDIBLY REQUEST (ANALYST-PROOF):</p>
+                        
+                        <p className="text-white text-xs font-bold mb-2">YEAR 1 (NOW - PROVING CONCEPT):</p>
+                        <p className="text-gray-300 text-xs mb-1">10-50 paying users, £12k-£120k ARR proven</p>
+                        <p className="text-cyan-400 text-xs mb-1">Valuation: £500k-£1M (pre-revenue startup range)</p>
+                        <p className="text-white text-xs mb-2">Ask: <span className="text-green-400 font-bold">£100k-£150k for 10-15%</span></p>
+                        <p className="text-gray-500 text-xs mb-3 italic">Analysts accept: Early-stage tech with traction, reasonable ask</p>
+                        
+                        <p className="text-white text-xs font-bold mb-2">YEAR 2 (VALIDATED - 100+ USERS):</p>
+                        <p className="text-gray-300 text-xs mb-1">100-200 paying users, £300k-£500k ARR</p>
+                        <p className="text-cyan-400 text-xs mb-1">Valuation: £3M-£5M (5-10x ARR standard for SaaS)</p>
+                        <p className="text-white text-xs mb-2">Ask: <span className="text-green-400 font-bold">£300k-£500k for 10-15%</span></p>
+                        <p className="text-gray-500 text-xs mb-3 italic">Analysts accept: Proven growth, industry-specific moat, defensible valuation</p>
+                        
+                        <p className="text-white text-xs font-bold mb-2">WHAT THEY GET:</p>
+                        <p className="text-white text-xs mb-1">✓ White label version for their roster (their branding)</p>
+                        <p className="text-white text-xs mb-1">✓ First mover advantage in their network</p>
+                        <p className="text-white text-xs mb-1">✓ 10-15% of company worth £18M-£90M in 3-5 years</p>
+                        <p className="text-white text-xs mb-1">✓ Strategic positioning as "tech-forward label"</p>
+                        <p className="text-green-400 text-xs font-bold mt-2">£150k investment → £2.7M-£13.5M return (18x-90x) = analysts approve ✓</p>
+                        
+                        <p className="text-amber-400 text-xs font-bold mt-3 mb-2">TERMS YOU INSIST ON:</p>
+                        <p className="text-white text-xs mb-1">• No board seat (investor update emails only)</p>
+                        <p className="text-white text-xs mb-1">• No forced exit timeline</p>
+                        <p className="text-white text-xs mb-1">• Love-first pricing stays forever (written in contract)</p>
+                        <p className="text-white text-xs mb-1">• You keep operational control</p>
+                        <p className="text-cyan-400 text-xs font-bold mt-2">Their analysts can't argue with 18x-90x return potential ♾️❤️♾️</p>
+                    </div>
                 </div>
             </div>
 
