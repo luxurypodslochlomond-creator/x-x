@@ -433,15 +433,41 @@ export default function ScottBiggerVision() {
                     </div>
 
                     <div className="bg-black border-2 border-purple-500 p-4 rounded">
-                        <p className="text-purple-400 font-bold mb-2">MARKET SEGMENT BREAKDOWN:</p>
-                        <p className="text-white text-xs mb-1">🎵 Music: 5,000 UK managers → 10% = 500 users = £600k/year</p>
-                        <p className="text-white text-xs mb-1">⚽ Sports: 2,000 UK agents → 5% = 100 users = £360k/year</p>
-                        <p className="text-white text-xs mb-1">🎬 Talent: 500 UK agencies → 20% = 100 users = £2.4M/year</p>
-                        <p className="text-white text-xs mb-1">🏠 Property: 10,000 UK managers → 2% = 200 users = £240k/year</p>
-                        <p className="text-white text-xs mb-1">🎪 Events: 3,000 UK coordinators → 5% = 150 users = £180k/year</p>
-                        <p className="text-white text-xs mb-1">🚢 Maritime: 300 cruise ships → 10% = 30 ships = £720k/year</p>
-                        <p className="text-white text-xs mb-1">🌍 NGOs: Grant-funded = £500k-£2M/year</p>
-                        <p className="text-green-400 text-xs font-bold mt-2">TOTAL REALISTIC: £5M-£9M/year by year 5</p>
+                        <p className="text-purple-400 font-bold mb-2">MARKET SEGMENT BREAKDOWN (ALL INDUSTRIES):</p>
+                        
+                        <p className="text-cyan-400 text-xs font-bold mb-1 mt-2">MUSIC:</p>
+                        <p className="text-white text-xs mb-1">5,000 UK managers → 10% = 500 users = £600k/year</p>
+                        
+                        <p className="text-cyan-400 text-xs font-bold mb-1 mt-2">SPORTS (ALL CODES):</p>
+                        <p className="text-gray-300 text-xs mb-1">⚽ Football agents: 500 UK → 10% = 50 users = £180k/year</p>
+                        <p className="text-gray-300 text-xs mb-1">🏉 Rugby agents: 200 UK → 10% = 20 users = £72k/year</p>
+                        <p className="text-gray-300 text-xs mb-1">🥊 Boxing/MMA managers: 300 UK → 15% = 45 users = £162k/year</p>
+                        <p className="text-gray-300 text-xs mb-1">🎾 Tennis/Golf agents: 400 UK → 10% = 40 users = £144k/year</p>
+                        <p className="text-gray-300 text-xs mb-1">🏏 Cricket/Other: 600 UK → 10% = 60 users = £216k/year</p>
+                        <p className="text-green-400 text-xs font-bold">Sports subtotal: 215 users = £774k/year</p>
+                        
+                        <p className="text-cyan-400 text-xs font-bold mb-1 mt-2">TALENT & ENTERTAINMENT:</p>
+                        <p className="text-white text-xs mb-1">500 UK agencies → 20% = 100 users = £2.4M/year</p>
+                        
+                        <p className="text-cyan-400 text-xs font-bold mb-1 mt-2">PROPERTY:</p>
+                        <p className="text-white text-xs mb-1">10,000 UK managers → 2% = 200 users = £240k/year</p>
+                        
+                        <p className="text-cyan-400 text-xs font-bold mb-1 mt-2">EVENTS & FESTIVALS:</p>
+                        <p className="text-white text-xs mb-1">3,000 UK coordinators → 5% = 150 users = £180k/year</p>
+                        
+                        <p className="text-cyan-400 text-xs font-bold mb-1 mt-2">MARITIME (CRUISE SHIPS):</p>
+                        <p className="text-white text-xs mb-1">300 global cruise ships → 10% = 30 ships = £720k/year</p>
+                        
+                        <p className="text-cyan-400 text-xs font-bold mb-1 mt-2">WILDERNESS & ADVENTURE:</p>
+                        <p className="text-white text-xs mb-1">Expedition managers, safari operators = £150k/year</p>
+                        
+                        <p className="text-cyan-400 text-xs font-bold mb-1 mt-2">NGOs & DISASTER RELIEF:</p>
+                        <p className="text-white text-xs mb-1">Grant-funded deployment = £500k-£2M/year</p>
+                        
+                        <p className="text-cyan-400 text-xs font-bold mb-1 mt-2">SPACE MISSIONS:</p>
+                        <p className="text-white text-xs mb-1">ISS/Mars contracts = £500k+/mission</p>
+                        
+                        <p className="text-green-400 text-xs font-bold mt-3 text-base">TOTAL REALISTIC: £5.6M-£9.5M/year by year 5 ♾️❤️♾️</p>
                     </div>
                 </div>
             </div>
