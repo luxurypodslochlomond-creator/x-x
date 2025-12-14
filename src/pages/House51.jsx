@@ -50,47 +50,53 @@ export default function House51() {
     const mixerGainsRef = useRef({});
 
     const styles = {
+        chicago: {
+            name: "Chicago House",
+            color: "amber",
+            vibe: "Larry Heard deep spiritual",
+            icon: Heart,
+            frequencies: { kick: 58, bass: 116 },
+            origin: "🇺🇸 Chicago - The birthplace"
+        },
+        detroit: {
+            name: "Detroit Techno-Soul",
+            color: "cyan",
+            vibe: "Carl Craig machine elegance",
+            icon: Zap,
+            frequencies: { kick: 62, bass: 120 },
+            origin: "🇺🇸 Detroit - Future sound"
+        },
+        glasgow: {
+            name: "Glasgow Underground",
+            color: "purple",
+            vibe: "Optimo dark warehouse",
+            icon: Music,
+            frequencies: { kick: 64, bass: 124 },
+            origin: "🏴󠁧󠁢󠁳󠁣󠁴󠁿 Glasgow - Raw energy"
+        },
         deep: {
             name: "Deep House",
-            color: "cyan",
-            vibe: "Grounding + creativity",
+            color: "teal",
+            vibe: "Kerri Chandler warmth",
             icon: Waves,
-            frequencies: { kick: 60, bass: 120 }
-        },
-        tech: {
-            name: "Tech House",
-            color: "pink",
-            vibe: "Focus + build energy",
-            icon: Zap,
-            frequencies: { kick: 65, bass: 130 }
-        },
-        progressive: {
-            name: "Progressive",
-            color: "purple",
-            vibe: "Journey + flow",
-            icon: Brain,
-            frequencies: { kick: 62, bass: 124 }
+            frequencies: { kick: 60, bass: 118 },
+            origin: "🌍 Universal"
         },
         soulful: {
             name: "Soulful House",
-            color: "amber",
-            vibe: "Soul Clap warm grooves",
+            color: "pink",
+            vibe: "Soul Clap grooves",
             icon: Heart,
-            frequencies: { kick: 58, bass: 115 }
+            frequencies: { kick: 58, bass: 115 },
+            origin: "🌍 Universal"
         },
-        detroit: {
-            name: "Detroit Deep",
-            color: "emerald",
-            vibe: "Moodymann machine funk",
-            icon: Music,
-            frequencies: { kick: 62, bass: 118 }
-        },
-        broken: {
-            name: "Broken Beat",
+        tech: {
+            name: "Tech House",
             color: "orange",
-            vibe: "Kamaal jazzy shuffle",
-            icon: Share2,
-            frequencies: { kick: 64, bass: 122 }
+            vibe: "CamelPhat energy",
+            icon: Brain,
+            frequencies: { kick: 65, bass: 128 },
+            origin: "🌍 Universal"
         }
     };
 
@@ -249,14 +255,14 @@ export default function House51() {
             osc2.stop(time + duration);
         };
 
-        // Rolling house bassline with groove
+        // Rolling house bassline with groove - regional flavors
         const bassPatterns = {
-            deep: [1, 1, 1.25, 1, 1.125, 1, 1.5, 1],      // Deep rolling bass
-            tech: [1, 1.25, 1, 1.5, 1, 1.25, 1.33, 1],    // Tech driving bass
-            progressive: [1, 1.125, 1.25, 1, 1.5, 1.25, 1.125, 1], // Progressive journey
-            soulful: [1, 1, 1.33, 1, 1.25, 1, 1.5, 1.125], // Soulful warmth
-            detroit: [1, 1.25, 1, 1.125, 1.5, 1, 1.33, 1], // Detroit machine funk
-            broken: [1, 1.33, 1, 1.25, 1, 1.5, 1.125, 1]  // Broken beat shuffle
+            chicago: [1, 1, 1.2, 1, 1.33, 1, 1.5, 1],      // Chicago: spiritual, gospel-influenced
+            detroit: [1, 1.25, 1, 1.125, 1.5, 1.33, 1, 1.125], // Detroit: mechanical precision + soul
+            glasgow: [1, 1.125, 1, 1.5, 1, 1.25, 1.33, 1], // Glasgow: dark, warehouse tension
+            deep: [1, 1, 1.25, 1, 1.125, 1, 1.5, 1],       // Deep: warm rolling bass
+            soulful: [1, 1, 1.33, 1, 1.25, 1, 1.5, 1.125], // Soulful: smooth warmth
+            tech: [1, 1.25, 1, 1.5, 1, 1.25, 1.33, 1]      // Tech: driving energy
         };
         
         const pattern = bassPatterns[currentStyle] || bassPatterns.deep;
@@ -791,7 +797,7 @@ export default function House51() {
     const currentStyleData = styles[currentStyle];
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-black via-purple-950 to-black text-white p-4 md:p-8 relative overflow-hidden">
+        <div className="min-h-screen bg-gradient-to-br from-black via-purple-950 to-black text-white p-4 md:p-6 relative overflow-hidden">
             {/* COOLASFUCK animated grid background */}
             <div className="fixed inset-0 opacity-10 pointer-events-none z-0">
                 <motion.div
@@ -809,57 +815,61 @@ export default function House51() {
             </div>
             <div className="max-w-6xl mx-auto relative z-10">
                 
-                {/* HEADER */}
+                {/* COMPACT HEADER */}
                 <motion.div 
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="text-center mb-8"
+                    className="flex items-center justify-between mb-4"
                 >
-                    <div className="flex items-center justify-center gap-4 mb-4">
+                    <div className="flex items-center gap-3">
                         <motion.div
                             className="relative"
                             animate={isPlaying ? { 
                                 scale: [1, 1.05, 1],
-                                filter: ['drop-shadow(0 0 10px rgba(236, 72, 153, 0.6))', 'drop-shadow(0 0 25px rgba(34, 211, 238, 0.8))', 'drop-shadow(0 0 10px rgba(236, 72, 153, 0.6))']
+                                filter: ['drop-shadow(0 0 10px rgba(236, 72, 153, 0.6))', 'drop-shadow(0 0 20px rgba(34, 211, 238, 0.8))', 'drop-shadow(0 0 10px rgba(236, 72, 153, 0.6))']
                             } : {}}
                             transition={{ duration: 1.5, repeat: isPlaying ? Infinity : 0 }}
                         >
-                            <COOLASFUCKHouse51 size={80} animate={isPlaying} />
+                            <COOLASFUCKHouse51 size={50} animate={isPlaying} />
                         </motion.div>
-                        <motion.h1 
-                            className="text-6xl md:text-8xl font-black bg-gradient-to-r from-cyan-400 via-pink-400 to-purple-400 bg-clip-text text-transparent"
-                            animate={isPlaying ? { 
-                                textShadow: ['0 0 20px rgba(236,72,153,0.5)', '0 0 40px rgba(34,211,238,0.8)', '0 0 20px rgba(236,72,153,0.5)']
-                            } : {}}
-                            transition={{ duration: 2, repeat: Infinity }}
-                        >
-                            HOUSE51
-                        </motion.h1>
+                        <div>
+                            <motion.h1 
+                                className="text-4xl md:text-5xl font-black bg-gradient-to-r from-cyan-400 via-pink-400 to-purple-400 bg-clip-text text-transparent"
+                                animate={isPlaying ? { 
+                                    textShadow: ['0 0 20px rgba(236,72,153,0.5)', '0 0 40px rgba(34,211,238,0.8)', '0 0 20px rgba(236,72,153,0.5)']
+                                } : {}}
+                                transition={{ duration: 2, repeat: Infinity }}
+                            >
+                                HOUSE51
+                            </motion.h1>
+                            <p className="text-cyan-400 text-xs font-mono">
+                                {currentStyleData.origin} • {bpm} BPM + 432/528Hz
+                            </p>
+                        </div>
                     </div>
-                    <p className="text-gray-400 text-lg font-mono mb-2">
-                        Healing House Music Generator
-                    </p>
-                    <motion.p 
-                        className="text-cyan-400 text-sm font-bold mb-1"
-                        animate={isPlaying ? { opacity: [1, 0.7, 1] } : {}}
-                        transition={{ duration: 2, repeat: Infinity }}
+                    <motion.button
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        onClick={() => setShowMixer(!showMixer)}
+                        className="px-4 py-2 rounded-lg bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 font-bold text-sm flex items-center gap-2"
                     >
-                        128 BPM + 432Hz/528Hz = Flow State Creation ⚡♾️❤️♾️
-                    </motion.p>
-                    <p className="text-pink-400 text-xs font-mono">
-                        Soul Clap • Moodymann • Kamaal Par vibes 🔥
-                    </p>
+                        <Settings className="w-4 h-4" />
+                        {showMixer ? 'HIDE' : 'MIXER'}
+                    </motion.button>
                 </motion.div>
 
-                {/* VINYL-STYLE CONTROLS */}
+                {/* COMPACT PLAYER + STYLES */}
+                <div className="grid md:grid-cols-2 gap-4 mb-4">
+
+                {/* VINYL PLAYER */}
                 <motion.div 
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="mb-8 bg-black border-2 border-pink-500 rounded-xl p-6"
+                    className="bg-black border-2 border-pink-500 rounded-xl p-4"
                     style={{ boxShadow: '0 0 30px rgba(236, 72, 153, 0.4)' }}
                 >
                     {/* Timeline */}
-                    <div className="mb-6">
+                    <div className="mb-4">
                         <div className="flex items-center justify-between text-xs text-gray-400 mb-2">
                             <span>{Math.floor(playbackTime / 60)}:{String(Math.floor(playbackTime % 60)).padStart(2, '0')}</span>
                             <span className="text-cyan-400 font-mono">LOSSLESS • {bpm} BPM</span>
@@ -949,40 +959,67 @@ export default function House51() {
                     </div>
 
                     {/* Action Buttons */}
-                    <div className="flex items-center justify-center gap-3 mt-6">
+                    <div className="flex items-center justify-center gap-2 mt-4">
                         <motion.button
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                             onClick={exportWAV}
-                            className="px-6 py-3 rounded-lg bg-green-600 hover:bg-green-700 font-bold text-sm flex items-center gap-2"
+                            className="flex-1 py-2 rounded-lg bg-green-600 hover:bg-green-700 font-bold text-xs flex items-center justify-center gap-2"
                         >
-                            <Download className="w-4 h-4" />
-                            EXPORT WAV (LOSSLESS)
+                            <Download className="w-3 h-3" />
+                            WAV
                         </motion.button>
                         <motion.button
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                             onClick={shareP2P}
-                            className="px-6 py-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 font-bold text-sm flex items-center gap-2"
+                            className="flex-1 py-2 rounded-lg bg-cyan-600 hover:bg-cyan-700 font-bold text-xs flex items-center justify-center gap-2"
                         >
-                            <Share2 className="w-4 h-4" />
-                            SHARE P2P
+                            <Share2 className="w-3 h-3" />
+                            P2P
                         </motion.button>
+                    </div>
+                    </motion.div>
+
+                    {/* HOUSE STYLES - COMPACT */}
+                    <div className="bg-gradient-to-br from-cyan-500/10 to-purple-500/10 border-2 border-cyan-500 rounded-xl p-4">
+                    <h3 className="text-lg font-black text-cyan-400 mb-3 flex items-center gap-2">
+                        <Music className="w-5 h-5" />
+                        HOUSE STYLE
+                    </h3>
+                    <div className="space-y-2">
+                        {Object.entries(styles).map(([key, style]) => {
+                            const Icon = style.icon;
+                            const isActive = currentStyle === key;
+                            return (
+                                <motion.button
+                                    key={key}
+                                    whileHover={{ scale: 1.02 }}
+                                    whileTap={{ scale: 0.98 }}
+                                    onClick={() => setCurrentStyle(key)}
+                                    className={`w-full p-2 rounded-lg border-2 transition-all text-left ${
+                                        isActive 
+                                            ? 'bg-gradient-to-r from-cyan-500/20 to-pink-500/20 border-pink-500' 
+                                            : 'bg-black/40 border-gray-700 hover:border-gray-500'
+                                    }`}
+                                    style={isActive ? { boxShadow: '0 0 20px rgba(236, 72, 153, 0.4)' } : {}}
+                                >
+                                    <div className="flex items-center gap-2">
+                                        <Icon className={`w-4 h-4 ${isActive ? 'text-pink-400' : 'text-gray-400'}`} />
+                                        <div className="flex-1 min-w-0">
+                                            <p className={`font-bold text-sm truncate ${isActive ? 'text-white' : 'text-gray-400'}`}>
+                                                {style.name}
+                                            </p>
+                                            <p className="text-[10px] text-gray-500 truncate">{style.vibe}</p>
+                                        </div>
+                                    </div>
+                                </motion.button>
+                            );
+                        })}
+                    </div>
                     </div>
 
-                    {/* SHOW MIXER TOGGLE */}
-                    <div className="flex justify-center mt-4">
-                        <motion.button
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                            onClick={() => setShowMixer(!showMixer)}
-                            className="px-6 py-3 rounded-lg bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 font-bold text-sm flex items-center gap-2"
-                        >
-                            <Settings className="w-4 h-4" />
-                            {showMixer ? 'HIDE MIXER' : 'SHOW MIXER (Learn to Mix!)'}
-                        </motion.button>
                     </div>
-                </motion.div>
 
                 {/* DJ MIXER - VISUAL LEARNING */}
                 <AnimatePresence>
@@ -1181,25 +1218,17 @@ export default function House51() {
                 )}
                 </AnimatePresence>
 
-                {/* VISUALIZER */}
+                {/* COMPACT VISUALIZER + HEALING */}
                 <AnimatePresence>
                 {isPlaying && (
                     <motion.div
                         initial={{ opacity: 0, scale: 0.9 }}
                         animate={{ opacity: 1, scale: 1 }}
                         exit={{ opacity: 0, scale: 0.9 }}
-                        className="mb-8 bg-gradient-to-br from-black via-purple-900/20 to-black border-2 border-cyan-500 rounded-xl p-6 relative overflow-hidden"
-                        style={{ boxShadow: '0 0 50px rgba(34, 211, 238, 0.5)' }}
+                        className="mb-4 bg-gradient-to-br from-black via-purple-900/20 to-black border-2 border-cyan-500 rounded-xl p-4 relative overflow-hidden"
+                        style={{ boxShadow: '0 0 30px rgba(34, 211, 238, 0.5)' }}
                     >
-                        <motion.div
-                            className="absolute inset-0 bg-gradient-to-r from-pink-500/10 via-cyan-500/10 to-purple-500/10"
-                            animate={{ 
-                                x: [-500, 500],
-                                opacity: [0.2, 0.4, 0.2]
-                            }}
-                            transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-                        />
-                        <div className="h-48 flex items-end justify-center gap-1 relative z-10">
+                        <div className="h-24 flex items-end justify-center gap-1 relative z-10">
                             {waveformData.map((value, i) => (
                                 <motion.div
                                     key={i}
@@ -1212,82 +1241,30 @@ export default function House51() {
                                             rgba(236, 72, 153, 0.9), 
                                             rgba(168, 85, 247, 0.9)
                                         )`,
-                                        boxShadow: '0 0 15px rgba(236, 72, 153, 0.6)',
-                                        filter: 'brightness(1.2)'
+                                        boxShadow: '0 0 10px rgba(236, 72, 153, 0.6)'
                                     }}
                                 />
                             ))}
                         </div>
                         <motion.p 
-                            className="text-center text-cyan-400 font-mono text-sm mt-4 relative z-10"
+                            className="text-center text-cyan-400 font-mono text-xs mt-2 relative z-10"
                             animate={{ opacity: [1, 0.6, 1] }}
                             transition={{ duration: 1.5, repeat: Infinity }}
                         >
-                            {bpm} BPM • {currentStyleData.name} • HEALING ACTIVE ⚡
+                            {currentStyleData.name} • HEALING ⚡
                         </motion.p>
                     </motion.div>
                 )}
                 </AnimatePresence>
 
-                <div className="grid md:grid-cols-2 gap-6">
-                    
-                    {/* HOUSE STYLE SELECTOR */}
-                    <div className="bg-gradient-to-br from-cyan-500/10 to-purple-500/10 border-2 border-cyan-500 rounded-xl p-6 relative overflow-hidden">
-                        <motion.div
-                            className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-pink-500/5"
-                            animate={{ opacity: [0.3, 0.5, 0.3] }}
-                            transition={{ duration: 3, repeat: Infinity }}
-                        />
-                        <h3 className="text-xl font-black text-cyan-400 mb-4 flex items-center gap-2 relative z-10">
-                            <Music className="w-6 h-6" />
-                            HOUSE STYLE
-                        </h3>
-                        <div className="space-y-3 relative z-10">
-                            {Object.entries(styles).map(([key, style]) => {
-                                const Icon = style.icon;
-                                const isActive = currentStyle === key;
-                                return (
-                                    <motion.button
-                                        key={key}
-                                        whileHover={{ scale: 1.02, boxShadow: '0 0 25px rgba(236, 72, 153, 0.6)' }}
-                                        whileTap={{ scale: 0.98 }}
-                                        onClick={() => setCurrentStyle(key)}
-                                        className={`w-full p-4 rounded-lg border-2 transition-all relative overflow-hidden ${
-                                            isActive 
-                                                ? 'bg-gradient-to-r from-cyan-500/20 to-pink-500/20 border-pink-500' 
-                                                : 'bg-black/40 border-gray-700 hover:border-gray-500'
-                                        }`}
-                                        style={isActive ? { boxShadow: '0 0 30px rgba(236, 72, 153, 0.6)' } : {}}
-                                    >
-                                        {isActive && (
-                                            <motion.div
-                                                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"
-                                                animate={{ x: [-100, 300] }}
-                                                transition={{ duration: 1.5, repeat: Infinity }}
-                                            />
-                                        )}
-                                        <div className="flex items-center gap-3">
-                                            <Icon className={`w-6 h-6 ${isActive ? 'text-pink-400' : 'text-gray-400'}`} />
-                                            <div className="text-left">
-                                                <p className={`font-bold ${isActive ? 'text-white' : 'text-gray-400'}`}>
-                                                    {style.name}
-                                                </p>
-                                                <p className="text-xs text-gray-500">{style.vibe}</p>
-                                            </div>
-                                        </div>
-                                    </motion.button>
-                                );
-                            })}
-                        </div>
-                    </div>
+                {/* HEALING FREQUENCIES - COMPACT */}
+                <div className="bg-gradient-to-br from-pink-500/10 to-purple-500/10 border-2 border-pink-500 rounded-xl p-4 mb-4">
+                    <h3 className="text-lg font-black text-pink-400 mb-3 flex items-center gap-2">
+                        <Heart className="w-5 h-5" />
+                        HEALING FREQUENCIES
+                    </h3>
+                    <div className="grid grid-cols-2 gap-2">
 
-                    {/* HEALING LAYERS */}
-                    <div className="bg-gradient-to-br from-pink-500/10 to-purple-500/10 border-2 border-pink-500 rounded-xl p-6">
-                        <h3 className="text-xl font-black text-pink-400 mb-4 flex items-center gap-2">
-                            <Heart className="w-6 h-6" />
-                            HEALING FREQUENCIES
-                        </h3>
-                        <div className="space-y-3">
                             <HealingToggle
                                 label="528Hz Love"
                                 description="DNA repair, heart opening"
@@ -1317,17 +1294,16 @@ export default function House51() {
                                 color="yellow"
                             />
                         </div>
-                    </div>
-                </div>
+                        </div>
 
-                {/* CONTROLS */}
-                <div className="mt-6 bg-black border-2 border-purple-500 rounded-xl p-6">
-                    <div className="grid md:grid-cols-2 gap-6">
+                        {/* COMPACT CONTROLS */}
+                        <div className="bg-black border-2 border-purple-500 rounded-xl p-4 mb-4">
+                    <div className="grid md:grid-cols-2 gap-4">
                         {/* VOLUME */}
                         <div>
-                            <label className="flex items-center gap-2 text-purple-400 font-bold mb-3">
-                                <Volume2 className="w-5 h-5" />
-                                VOLUME: {Math.round(volume * 100)}%
+                            <label className="flex items-center gap-2 text-purple-400 font-bold text-sm mb-2">
+                                <Volume2 className="w-4 h-4" />
+                                VOL: {Math.round(volume * 100)}%
                             </label>
                             <input
                                 type="range"
@@ -1345,8 +1321,8 @@ export default function House51() {
 
                         {/* BPM */}
                         <div>
-                            <label className="flex items-center gap-2 text-purple-400 font-bold mb-3">
-                                <Zap className="w-5 h-5" />
+                            <label className="flex items-center gap-2 text-purple-400 font-bold text-sm mb-2">
+                                <Zap className="w-4 h-4" />
                                 BPM: {bpm}
                             </label>
                             <input
@@ -1360,14 +1336,11 @@ export default function House51() {
                                 className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer disabled:opacity-50"
                             />
                             {isPlaying && (
-                                <p className="text-xs text-gray-500 mt-1">Stop playback to change BPM</p>
+                                <p className="text-[10px] text-gray-500 mt-1">Stop to change</p>
                             )}
-                        </div>
-                    </div>
-                </div>
-
-                {/* INFO */}
-                <div className="mt-8 bg-gradient-to-br from-cyan-500/10 to-green-500/10 border-2 border-cyan-500 rounded-xl p-6">
+                            </div>
+                            </div>
+                            </div>
                     <h3 className="text-xl font-black text-cyan-400 mb-4">THE PHYSICS:</h3>
                     <div className="space-y-3 text-sm text-gray-300">
                         <p>• <strong className="text-white">128 BPM</strong> = 2.13 Hz (matches heart rate during flow state)</p>
@@ -1651,25 +1624,25 @@ function HealingToggle({ label, description, active, onToggle, color }) {
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             onClick={onToggle}
-            className={`w-full p-3 rounded-lg border-2 transition-all ${
+            className={`w-full p-2 rounded-lg border-2 transition-all ${
                 active 
                     ? `${c.bg} ${c.border}` 
                     : 'bg-black/40 border-gray-700 hover:border-gray-500'
             }`}
         >
             <div className="flex items-center justify-between">
-                <div className="text-left">
-                    <p className={`font-bold text-sm ${active ? 'text-white' : 'text-gray-400'}`}>
+                <div className="text-left flex-1 min-w-0">
+                    <p className={`font-bold text-xs truncate ${active ? 'text-white' : 'text-gray-400'}`}>
                         {label}
                     </p>
-                    <p className="text-xs text-gray-500">{description}</p>
+                    <p className="text-[10px] text-gray-500 truncate">{description}</p>
                 </div>
-                <div className={`w-12 h-6 rounded-full transition-all ${
+                <div className={`w-10 h-5 rounded-full transition-all flex-shrink-0 ml-2 ${
                     active ? c.bg : 'bg-gray-700'
                 } relative`}>
                     <motion.div
-                        animate={{ x: active ? 24 : 0 }}
-                        className={`absolute top-0.5 left-0.5 w-5 h-5 rounded-full ${
+                        animate={{ x: active ? 20 : 0 }}
+                        className={`absolute top-0.5 left-0.5 w-4 h-4 rounded-full ${
                             active ? 'bg-white' : 'bg-gray-500'
                         }`}
                     />
