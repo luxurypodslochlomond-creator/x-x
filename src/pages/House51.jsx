@@ -31,7 +31,7 @@ export default function House51() {
         bass: 0.3,
         hats: 0.1,
         claps: 0.25,
-        bells: 0.12,
+        bells: 0.05,      // Lower - can be harsh on ears
         pads: 0.05,
         strings: 0.15,
         shakers: 0.06,
@@ -819,43 +819,56 @@ export default function House51() {
                 <motion.div 
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="flex items-center justify-between mb-4"
+                    className="flex flex-col gap-3 mb-4"
                 >
-                    <div className="flex items-center gap-3">
-                        <motion.div
-                            className="relative"
-                            animate={isPlaying ? { 
-                                scale: [1, 1.05, 1],
-                                filter: ['drop-shadow(0 0 10px rgba(236, 72, 153, 0.6))', 'drop-shadow(0 0 20px rgba(34, 211, 238, 0.8))', 'drop-shadow(0 0 10px rgba(236, 72, 153, 0.6))']
-                            } : {}}
-                            transition={{ duration: 1.5, repeat: isPlaying ? Infinity : 0 }}
-                        >
-                            <COOLASFUCKHouse51 size={50} animate={isPlaying} />
-                        </motion.div>
-                        <div>
-                            <motion.h1 
-                                className="text-4xl md:text-5xl font-black bg-gradient-to-r from-cyan-400 via-pink-400 to-purple-400 bg-clip-text text-transparent"
+                    <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                            <motion.div
+                                className="relative"
                                 animate={isPlaying ? { 
-                                    textShadow: ['0 0 20px rgba(236,72,153,0.5)', '0 0 40px rgba(34,211,238,0.8)', '0 0 20px rgba(236,72,153,0.5)']
+                                    scale: [1, 1.05, 1],
+                                    filter: ['drop-shadow(0 0 10px rgba(236, 72, 153, 0.6))', 'drop-shadow(0 0 20px rgba(34, 211, 238, 0.8))', 'drop-shadow(0 0 10px rgba(236, 72, 153, 0.6))']
                                 } : {}}
-                                transition={{ duration: 2, repeat: Infinity }}
+                                transition={{ duration: 1.5, repeat: isPlaying ? Infinity : 0 }}
                             >
-                                HOUSE51
-                            </motion.h1>
-                            <p className="text-cyan-400 text-xs font-mono">
-                                {currentStyleData.origin} • {bpm} BPM + 432/528Hz
-                            </p>
+                                <COOLASFUCKHouse51 size={50} animate={isPlaying} />
+                            </motion.div>
+                            <div>
+                                <motion.h1 
+                                    className="text-4xl md:text-5xl font-black bg-gradient-to-r from-cyan-400 via-pink-400 to-purple-400 bg-clip-text text-transparent"
+                                    animate={isPlaying ? { 
+                                        textShadow: ['0 0 20px rgba(236,72,153,0.5)', '0 0 40px rgba(34,211,238,0.8)', '0 0 20px rgba(236,72,153,0.5)']
+                                    } : {}}
+                                    transition={{ duration: 2, repeat: Infinity }}
+                                >
+                                    HOUSE51
+                                </motion.h1>
+                                <p className="text-cyan-400 text-xs font-mono">
+                                    {currentStyleData.origin} • {bpm} BPM + 432/528Hz
+                                </p>
+                            </div>
                         </div>
+                        <motion.button
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            onClick={() => setShowMixer(!showMixer)}
+                            className="px-4 py-2 rounded-lg bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 font-bold text-sm flex items-center gap-2"
+                        >
+                            <Settings className="w-4 h-4" />
+                            {showMixer ? 'HIDE' : 'MIXER'}
+                        </motion.button>
                     </div>
-                    <motion.button
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        onClick={() => setShowMixer(!showMixer)}
-                        className="px-4 py-2 rounded-lg bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 font-bold text-sm flex items-center gap-2"
+
+                    {/* EAR SAFETY NOTE */}
+                    <motion.div 
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        className="bg-amber-900/30 border-l-4 border-amber-500 p-2 rounded"
                     >
-                        <Settings className="w-4 h-4" />
-                        {showMixer ? 'HIDE' : 'MIXER'}
-                    </motion.button>
+                        <p className="text-amber-300 text-xs font-mono">
+                            🎚️ Use MIXER to adjust bells/chimes if harsh on ears - start low ⚡♾️❤️♾️
+                        </p>
+                    </motion.div>
                 </motion.div>
 
                 {/* COMPACT PLAYER + STYLES */}
@@ -1168,7 +1181,7 @@ export default function House51() {
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                                 onClick={() => setMixerLevels({
-                                    kick: 1.0, bass: 0.5, hats: 0.05, claps: 0.15, bells: 0.05,
+                                    kick: 1.0, bass: 0.5, hats: 0.05, claps: 0.15, bells: 0.03,
                                     pads: 0.02, strings: 0.08, shakers: 0.03, ride: 0.04, healing: 0.15
                                 })}
                                 className="px-4 py-2 bg-pink-600 hover:bg-pink-700 rounded font-bold text-xs"
@@ -1179,7 +1192,7 @@ export default function House51() {
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                                 onClick={() => setMixerLevels({
-                                    kick: 1.0, bass: 0.9, hats: 0.2, claps: 0.35, bells: 0.25,
+                                    kick: 1.0, bass: 0.9, hats: 0.2, claps: 0.35, bells: 0.08,
                                     pads: 0.15, strings: 0.3, shakers: 0.15, ride: 0.15, healing: 0.05
                                 })}
                                 className="px-4 py-2 bg-purple-600 hover:bg-purple-700 rounded font-bold text-xs"
@@ -1190,7 +1203,7 @@ export default function House51() {
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                                 onClick={() => setMixerLevels({
-                                    kick: 0.3, bass: 0.1, hats: 0.05, claps: 0.08, bells: 0.15,
+                                    kick: 0.3, bass: 0.1, hats: 0.05, claps: 0.08, bells: 0.06,
                                     pads: 0.15, strings: 0.25, shakers: 0.05, ride: 0.08, healing: 0.3
                                 })}
                                 className="px-4 py-2 bg-green-600 hover:bg-green-700 rounded font-bold text-xs"
