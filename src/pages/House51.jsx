@@ -802,14 +802,57 @@ Listen: ${window.location.href}`;
                 <div className="bg-black/60 backdrop-blur-xl border-2 border-amber-500/50 rounded-xl p-6 space-y-6">
 
                     {/* VISUALIZER */}
-                    <div className="h-24 flex items-end justify-center gap-1 bg-black/40 rounded-lg p-2">
-                        {waveformData.map((value, i) => (
-                            <div
-                                key={i}
-                                className="flex-1 bg-gradient-to-t from-amber-600 via-amber-500 to-amber-400 rounded-t transition-all duration-75"
-                                style={{ height: `${Math.max(4, (value / 255) * 100)}%`, opacity: isPlaying ? 1 : 0.2 }}
-                            />
-                        ))}
+                    <div className="h-32 relative bg-black/40 rounded-lg p-4 overflow-hidden">
+                        {/* Kick pulse - center circle */}
+                        <div 
+                            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-r from-pink-500 to-amber-500 blur-xl transition-all duration-75"
+                            style={{ 
+                                width: `${Math.max(20, waveformData[0] / 3)}px`,
+                                height: `${Math.max(20, waveformData[0] / 3)}px`,
+                                opacity: isPlaying ? Math.max(0.3, waveformData[0] / 255) : 0.1
+                            }}
+                        />
+
+                        {/* Frequency rings - reactive */}
+                        <div className="absolute inset-0 flex items-center justify-center">
+                            {[0, 1, 2, 3].map(ring => {
+                                const freq = waveformData[ring * 16] || 0;
+                                const size = 30 + (ring * 20) + (freq / 10);
+                                return (
+                                    <div
+                                        key={ring}
+                                        className="absolute rounded-full border-2 transition-all duration-100"
+                                        style={{
+                                            width: `${size}px`,
+                                            height: `${size}px`,
+                                            borderColor: ring % 2 === 0 ? '#ec4899' : '#f59e0b',
+                                            opacity: isPlaying ? Math.max(0.2, freq / 400) : 0.1,
+                                            transform: `scale(${1 + (freq / 1000)})`
+                                        }}
+                                    />
+                                );
+                            })}
+                        </div>
+
+                        {/* Frequency bars - around edge */}
+                        <div className="absolute inset-0 flex items-center justify-around">
+                            {waveformData.slice(0, 32).map((value, i) => (
+                                <div
+                                    key={i}
+                                    className="w-1 bg-gradient-to-t from-amber-600 via-pink-500 to-cyan-400 rounded-full transition-all duration-75"
+                                    style={{ 
+                                        height: `${Math.max(8, (value / 255) * 90)}%`,
+                                        opacity: isPlaying ? Math.max(0.3, value / 300) : 0.2,
+                                        transform: `translateY(${Math.sin(i / 5) * 5}px)`
+                                    }}
+                                />
+                            ))}
+                        </div>
+
+                        {/* Healing frequency glow */}
+                        {isPlaying && (
+                            <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 via-pink-500/10 to-amber-500/10 animate-pulse" />
+                        )}
                     </div>
 
                     {/* TRACK INFO */}
