@@ -129,9 +129,9 @@ export default function ScottBiggerVision() {
                     <div className="bg-black rounded-xl p-6 text-center">
                         <CoManager51Icon8Bit size={64} animate={true} />
                         <h1 className="text-3xl font-black bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-400 bg-clip-text text-transparent mt-4 mb-2" style={{ fontFamily: 'monospace' }}>
-                            BIGGER THAN MUSIC
+                            OUR BIGGER VISION
                         </h1>
-                        <p className="text-amber-500 text-sm font-bold font-mono">Same tool, 5+ industries, £billions in extraction stopped</p>
+                        <p className="text-amber-500 text-sm font-bold font-mono">10+ industries • £5M-£9M year 5 • Real numbers • No bullshit ♾️❤️♾️</p>
                     </div>
                 </div>
             </div>
@@ -384,6 +384,65 @@ export default function ScottBiggerVision() {
                     <p><strong className="text-cyan-400 font-bold">PHASE 6:</strong> Cross-industry: recruitment, property, events, talent</p>
                     <p><strong className="text-purple-400 font-bold">PHASE ∞:</strong> Why limit at 10,000 users? Why not 10 million? Infinite scale with love, zero extraction, quantum distribution.</p>
                     <p className="text-pink-400 font-bold text-lg mt-4">END STATE: Platform that FREES humans from extraction across ALL industries ♾️❤️♾️</p>
+                </div>
+            </div>
+
+            {/* BUSINESS MODEL - REAL TALK */}
+            <div className="bg-gradient-to-br from-purple-500/20 to-amber-500/20 border-4 border-purple-500 p-6 rounded-xl mb-8">
+                <Zap className="w-12 h-12 text-purple-400 mb-4" />
+                <h2 className="text-purple-400 font-black text-xl font-mono mb-4">BUSINESS MODEL (REAL TALK)</h2>
+                
+                <div className="space-y-3 text-sm font-mono">
+                    <div className="bg-black border-2 border-cyan-500 p-4 rounded">
+                        <p className="text-cyan-400 font-bold mb-2">OPTION 1: GO ALONE (BOOTSTRAP)</p>
+                        <p className="text-gray-300 mb-2">Build slowly, keep 100% ownership, grow organically</p>
+                        <p className="text-white text-xs mb-1">✓ We control everything</p>
+                        <p className="text-white text-xs mb-1">✓ Zero compromise on love-first principles</p>
+                        <p className="text-white text-xs mb-1">✓ Sustainable £3.6M-£9M in 5 years</p>
+                        <p className="text-red-400 text-xs mt-2">✗ Slower growth, limited resources</p>
+                        <p className="text-red-400 text-xs">✗ Can't save everyone fast enough</p>
+                    </div>
+
+                    <div className="bg-black border-2 border-green-500 p-4 rounded">
+                        <p className="text-green-400 font-bold mb-2">OPTION 2: WHITE LABEL PARTNERSHIPS</p>
+                        <p className="text-gray-300 mb-2">Agencies/labels get their branded version, we take 30% revenue share</p>
+                        <p className="text-white text-xs mb-1">✓ Faster market penetration (they sell to their networks)</p>
+                        <p className="text-white text-xs mb-1">✓ Industry validation from established players</p>
+                        <p className="text-white text-xs mb-1">✓ £500k-£2M deals with cruise lines/NGOs/labels</p>
+                        <p className="text-amber-400 text-xs mt-2">± Need careful partner selection (love-aligned only)</p>
+                        <p className="text-red-400 text-xs">✗ Risk of brand dilution if partners extract</p>
+                    </div>
+
+                    <div className="bg-black border-2 border-pink-500 p-4 rounded">
+                        <p className="text-pink-400 font-bold mb-2">OPTION 3: HYBRID (RECOMMENDED)</p>
+                        <p className="text-gray-300 mb-2">Start alone → prove it → selective white label partnerships</p>
+                        <p className="text-white text-xs mb-1">Year 1-2: Build core, Scott + 50 direct users (£120k)</p>
+                        <p className="text-white text-xs mb-1">Year 2-3: First white label (big label/agency) = £500k deal</p>
+                        <p className="text-white text-xs mb-1">Year 3-5: 5-10 partners x £200k avg = £1M-£2M/year</p>
+                        <p className="text-white text-xs mb-1">Year 5+: Direct users (£3.6M) + partners (£2M) = £5.6M/year</p>
+                        <p className="text-green-400 text-xs mt-2 font-bold">✓ BEST OF BOTH: Control + Speed + Scale</p>
+                    </div>
+
+                    <div className="bg-gradient-to-r from-amber-500/20 to-pink-500/20 border-2 border-amber-500 p-4 rounded mt-4">
+                        <p className="text-amber-400 font-bold mb-2">WHITE LABEL PRICING (REAL):</p>
+                        <p className="text-gray-300 text-xs mb-2">Small agency (100 users): £10k setup + £500/mo = £16k/year</p>
+                        <p className="text-cyan-400 text-xs mb-2">Mid label (500 users): £50k setup + £2k/mo = £74k/year</p>
+                        <p className="text-green-400 text-xs mb-2">Major label (2000+ users): £200k setup + £10k/mo = £320k/year</p>
+                        <p className="text-purple-400 text-xs mb-2">Cruise line (92 ships): £500k setup + £15k/mo = £680k/year</p>
+                        <p className="text-pink-400 text-xs font-bold mt-2">10 partners = £1M-£3M annual recurring</p>
+                    </div>
+
+                    <div className="bg-black border-2 border-purple-500 p-4 rounded">
+                        <p className="text-purple-400 font-bold mb-2">MARKET SEGMENT BREAKDOWN:</p>
+                        <p className="text-white text-xs mb-1">🎵 Music: 5,000 UK managers → 10% = 500 users = £600k/year</p>
+                        <p className="text-white text-xs mb-1">⚽ Sports: 2,000 UK agents → 5% = 100 users = £360k/year</p>
+                        <p className="text-white text-xs mb-1">🎬 Talent: 500 UK agencies → 20% = 100 users = £2.4M/year</p>
+                        <p className="text-white text-xs mb-1">🏠 Property: 10,000 UK managers → 2% = 200 users = £240k/year</p>
+                        <p className="text-white text-xs mb-1">🎪 Events: 3,000 UK coordinators → 5% = 150 users = £180k/year</p>
+                        <p className="text-white text-xs mb-1">🚢 Maritime: 300 cruise ships → 10% = 30 ships = £720k/year</p>
+                        <p className="text-white text-xs mb-1">🌍 NGOs: Grant-funded = £500k-£2M/year</p>
+                        <p className="text-green-400 text-xs font-bold mt-2">TOTAL REALISTIC: £5M-£9M/year by year 5</p>
+                    </div>
                 </div>
             </div>
 
