@@ -1,7 +1,7 @@
 import React from 'react';
 import { Music, Trophy, Users, Building, Shield, Zap, Heart, Globe, Lock, ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import Kingdom51Crown8Bit from '@/components/shared/Kingdom51Crown8Bit';
+import CoManager51Icon8Bit from '@/components/shared/CoManager51Icon8Bit';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 
@@ -33,7 +33,7 @@ export default function ScottBiggerVision() {
             icon: Trophy,
             color: "amber",
             current: "Agents use Excel + email, lose deals to lag",
-            solution: "KINGDOM51: Offline contracts at games, AI analyzes offers live",
+            solution: "CO-MANAGER51: Offline contracts at games, AI analyzes offers live",
             manager: "Football agents, boxing promoters",
             problem: "Need instant decision on transfer offers, stuck in hotel with no WiFi"
         },
@@ -42,7 +42,7 @@ export default function ScottBiggerVision() {
             icon: Users,
             color: "cyan",
             current: "CAA/UTA using ancient CRMs, zero mobile-first",
-            solution: "KINGDOM51: Actors/models/influencers, all synced P2P",
+            solution: "CO-MANAGER51: Actors/models/influencers, all synced P2P",
             manager: "LA/London talent agencies",
             problem: "50+ clients, can't track auditions/castings/contracts on the go"
         },
@@ -51,7 +51,7 @@ export default function ScottBiggerVision() {
             icon: Building,
             color: "green",
             current: "Rightmove/Zoopla = forms, fees, extraction",
-            solution: "KINGDOM51: Landlords manage tenants, maintenance, rent - offline",
+            solution: "CO-MANAGER51: Landlords manage tenants, maintenance, rent - offline",
             manager: "Property managers, landlords",
             problem: "Emergency repairs at 3am, need tenant info NOW, internet dead"
         },
@@ -60,7 +60,7 @@ export default function ScottBiggerVision() {
             icon: Globe,
             color: "purple",
             current: "Eventbrite charges 10%+, complex dashboards",
-            solution: "KINGDOM51: Festival coordinators, guest lists, tickets, offline",
+            solution: "CO-MANAGER51: Festival coordinators, guest lists, tickets, offline",
             manager: "Festival producers, wedding planners",
             problem: "Desert festival, zero internet, 5000 people, need live coordination"
         }
@@ -82,7 +82,7 @@ export default function ScottBiggerVision() {
             <div className="mb-8">
                 <div className="bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-500 p-[3px] rounded-xl" style={{ boxShadow: '0 0 30px rgba(245, 158, 11, 0.4)' }}>
                     <div className="bg-black rounded-xl p-6 text-center">
-                        <Kingdom51Crown8Bit size={64} animate={true} />
+                        <CoManager51Icon8Bit size={64} animate={true} />
                         <h1 className="text-3xl font-black bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-400 bg-clip-text text-transparent mt-4 mb-2" style={{ fontFamily: 'monospace' }}>
                             BIGGER THAN MUSIC
                         </h1>
@@ -120,7 +120,7 @@ export default function ScottBiggerVision() {
                     </div>
 
                     <div className="bg-black border border-green-500/30 p-4 rounded">
-                        <p className="text-green-400 font-bold mb-2">KINGDOM51 SOLUTION:</p>
+                        <p className="text-green-400 font-bold mb-2">CO-MANAGER51 SOLUTION:</p>
                         <ul className="text-gray-300 space-y-1 text-xs">
                             <li>✓ Zero forms (voice/photo/AI extracts data)</li>
                             <li>✓ Zero extraction (you keep your money)</li>
@@ -194,19 +194,19 @@ export default function ScottBiggerVision() {
                     <div className="bg-black border border-pink-500/30 p-3 rounded">
                         <p className="text-white font-bold mb-2">RIGHTMOVE/ZOOPLA:</p>
                         <p className="text-gray-400 mb-2">Charge landlords £100s/month, forms, lag, desktop-only</p>
-                        <p className="text-pink-400">→ KINGDOM51: £100/month, offline, mobile, AI handles forms</p>
+                        <p className="text-pink-400">→ CO-MANAGER51: £100/month, offline, mobile, AI handles forms</p>
                     </div>
 
                     <div className="bg-black border border-pink-500/30 p-3 rounded">
                         <p className="text-white font-bold mb-2">EVENTBRITE:</p>
                         <p className="text-gray-400 mb-2">10%+ fees, complex, requires internet, slow</p>
-                        <p className="text-pink-400">→ KINGDOM51: £100/month flat, works offline, instant</p>
+                        <p className="text-pink-400">→ CO-MANAGER51: £100/month flat, works offline, instant</p>
                     </div>
 
                     <div className="bg-black border border-pink-500/30 p-3 rounded">
                         <p className="text-white font-bold mb-2">SALESFORCE/ENTERPRISE:</p>
                         <p className="text-gray-400 mb-2">£1000s/month, training needed, desktop-only, forms hell</p>
-                        <p className="text-pink-400">→ KINGDOM51: £2k/month unlimited, mobile, AI = zero training</p>
+                        <p className="text-pink-400">→ CO-MANAGER51: £2k/month unlimited, mobile, AI = zero training</p>
                     </div>
                 </div>
             </div>
@@ -359,7 +359,7 @@ export default function ScottBiggerVision() {
             {/* BACK BUTTON */}
             <Link to={createPageUrl('ScottManager')}>
                 <button className="w-full py-3 bg-amber-600 hover:bg-amber-700 text-black font-black font-mono rounded-xl transition-all">
-                    ← BACK TO KINGDOM51
+                    ← BACK TO CO-MANAGER51
                 </button>
             </Link>
         </div>
