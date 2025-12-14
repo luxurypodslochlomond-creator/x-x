@@ -580,6 +580,88 @@ export default function ScottBiggerVision() {
                 </div>
             </div>
 
+            {/* GLOBAL SPORTS MARKET - THE REAL SCALE */}
+            <div className="bg-gradient-to-br from-purple-500/20 to-amber-500/20 border-4 border-purple-500 p-6 rounded-xl mb-8">
+                <Globe className="w-12 h-12 text-purple-400 mb-4" />
+                <h2 className="text-purple-400 font-black text-xl font-mono mb-4">GLOBAL SPORTS MARKET (WHY LIMIT TO UK?)</h2>
+
+                <div className="space-y-3 text-sm font-mono">
+                    <div className="bg-black border-2 border-amber-500 p-4 rounded">
+                        <p className="text-amber-400 font-bold mb-2">FOOTBALL CLUBS WORLDWIDE:</p>
+                        <p className="text-gray-300 text-xs mb-1">🇬🇧 UK: 92 Pro clubs (Premier League + Championship + League)</p>
+                        <p className="text-gray-300 text-xs mb-1">🇪🇸 Spain (La Liga): 42 clubs</p>
+                        <p className="text-gray-300 text-xs mb-1">🇮🇹 Italy (Serie A/B): 40 clubs</p>
+                        <p className="text-gray-300 text-xs mb-1">🇩🇪 Germany (Bundesliga): 36 clubs</p>
+                        <p className="text-gray-300 text-xs mb-1">🇫🇷 France (Ligue 1): 20 clubs</p>
+                        <p className="text-gray-300 text-xs mb-1">🇺🇸 USA (MLS): 29 clubs</p>
+                        <p className="text-gray-300 text-xs mb-1">🇧🇷 Brazil (Serie A): 20 clubs</p>
+                        <p className="text-gray-300 text-xs mb-1">🇦🇷 Argentina: 28 clubs</p>
+                        <p className="text-gray-300 text-xs mb-1">🌍 Rest of world (top leagues): ~200 clubs</p>
+                        <p className="text-green-400 text-xs font-bold mt-2">TOTAL: ~500 major clubs worldwide</p>
+                        <p className="text-cyan-400 text-xs">At 10% conversion: 50 clubs x £2k/mo = £1.2M/year</p>
+                    </div>
+
+                    <div className="bg-black border-2 border-cyan-500 p-4 rounded">
+                        <p className="text-cyan-400 font-bold mb-2">SPORTS STADIUMS & ARENAS GLOBALLY:</p>
+                        <p className="text-gray-300 text-xs mb-1">🏟️ Major stadiums (50k+ capacity): ~500 worldwide</p>
+                        <p className="text-gray-300 text-xs mb-1">🏀 NBA/NHL arenas (USA): 60 venues</p>
+                        <p className="text-gray-300 text-xs mb-1">🏈 NFL stadiums: 30 venues</p>
+                        <p className="text-gray-300 text-xs mb-1">⚾ MLB stadiums: 30 venues</p>
+                        <p className="text-gray-300 text-xs mb-1">🎾 Tennis venues (Grand Slams + major): 50 venues</p>
+                        <p className="text-gray-300 text-xs mb-1">🏏 Cricket grounds (major): 100 venues</p>
+                        <p className="text-gray-300 text-xs mb-1">🏟️ Olympic venues/multi-purpose: 200 venues</p>
+                        <p className="text-green-400 text-xs font-bold mt-2">TOTAL: ~1,000 major venues worldwide</p>
+                        <p className="text-cyan-400 text-xs">At 5% conversion: 50 venues x £3k/mo = £1.8M/year</p>
+                    </div>
+
+                    <div className="bg-black border-2 border-pink-500 p-4 rounded">
+                        <p className="text-pink-400 font-bold mb-2">MUSIC FESTIVALS & EVENT VENUES GLOBALLY:</p>
+                        <p className="text-gray-300 text-xs mb-1">🎪 Major festivals (Glastonbury-scale): ~200 worldwide</p>
+                        <p className="text-gray-300 text-xs mb-1">🎵 Mid-size festivals (10k+ capacity): ~1,000 worldwide</p>
+                        <p className="text-gray-300 text-xs mb-1">🎭 Concert venues (5k+ capacity): ~2,000 worldwide</p>
+                        <p className="text-gray-300 text-xs mb-1">🏛️ Exhibition centers/convention halls: ~500 worldwide</p>
+                        <p className="text-green-400 text-xs font-bold mt-2">TOTAL: ~3,700 event venues</p>
+                        <p className="text-cyan-400 text-xs">At 2% conversion: 74 venues x £1k/mo = £888k/year</p>
+                    </div>
+
+                    <div className="bg-black border-2 border-green-500 p-4 rounded">
+                        <p className="text-green-400 font-bold mb-2">WHY THEY ALL NEED IT:</p>
+                        <p className="text-white text-xs mb-1">✓ WiFi fails with 20k+ crowds = EVERY major event</p>
+                        <p className="text-white text-xs mb-1">✓ Security coordination = radios (1990s tech)</p>
+                        <p className="text-white text-xs mb-1">✓ Medical emergencies = slow response = lawsuits</p>
+                        <p className="text-white text-xs mb-1">✓ Food/merch vendors = cash chaos = lost revenue</p>
+                        <p className="text-white text-xs mb-1">✓ Staff coordination = WhatsApp (doesn't scale)</p>
+                        <p className="text-green-400 text-xs font-bold mt-2">SAME PROBLEM WORLDWIDE. ONE SOLUTION. ♾️❤️♾️</p>
+                    </div>
+
+                    <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-2 border-purple-500 p-4 rounded">
+                        <p className="text-purple-400 font-bold mb-2">GLOBAL VENUE/EVENT MARKET POTENTIAL:</p>
+                        <p className="text-white text-xs mb-2">Football clubs: 50 x £2k = £1.2M/year</p>
+                        <p className="text-white text-xs mb-2">Sports stadiums/arenas: 50 x £3k = £1.8M/year</p>
+                        <p className="text-white text-xs mb-2">Music festivals/venues: 74 x £1k = £888k/year</p>
+                        <p className="text-green-400 text-xs font-bold text-lg mt-2">= £3.9M/year JUST VENUES</p>
+                        <p className="text-cyan-400 text-xs mt-2">+ Individual managers/agents: £6.4M</p>
+                        <p className="text-pink-400 text-xs font-bold text-xl mt-2">GLOBAL TOTAL: £10.3M-£15M/year realistic ♾️❤️♾️</p>
+                    </div>
+
+                    <div className="bg-black border-2 border-amber-500 p-4 rounded">
+                        <p className="text-amber-400 font-bold mb-2">REAL EXAMPLE - GLASTONBURY FESTIVAL:</p>
+                        <p className="text-gray-300 text-xs mb-2">200,000 people, zero phone signal, chaos every year</p>
+                        <p className="text-red-400 text-xs mb-1">❌ Security can't coordinate (radios only)</p>
+                        <p className="text-red-400 text-xs mb-1">❌ Medical teams = walkie-talkies, 15min response</p>
+                        <p className="text-red-400 text-xs mb-1">❌ Lost children = announcements only</p>
+                        <p className="text-red-400 text-xs mb-2">❌ Food vendors = paper, cash chaos, £100k lost</p>
+                        <p className="text-green-400 text-xs font-bold">With CO-MANAGER51:</p>
+                        <p className="text-white text-xs mb-1">✓ P2P mesh works with 200k people</p>
+                        <p className="text-white text-xs mb-1">✓ Security = live crowd map, instant alerts</p>
+                        <p className="text-white text-xs mb-1">✓ Medical = 2min response, GPS tracking</p>
+                        <p className="text-white text-xs mb-1">✓ Lost people finder = location sharing</p>
+                        <p className="text-white text-xs mb-1">✓ Vendors = digital, zero cash errors</p>
+                        <p className="text-cyan-400 text-xs font-bold mt-2">Glastonbury would pay £5k/year to save £100k+ ✓</p>
+                    </div>
+                </div>
+            </div>
+
             {/* FREE FOR CRISIS ORGANIZATIONS */}
             <div className="bg-gradient-to-br from-red-500/20 to-pink-500/20 border-4 border-red-500 p-6 rounded-xl mb-8">
                 <Heart className="w-12 h-12 text-red-400 mb-4" />
