@@ -440,7 +440,13 @@ export default function House51() {
 
     // HEALING SECTION
     const playHealingSection = (ctx, destination, startTime, duration) => {
-        [432, 528].forEach(freq => {
+        const frequencies = [];
+        if (healingLayers.calm) frequencies.push(432); // 432Hz - Universal harmony
+        if (healingLayers.love) frequencies.push(528); // 528Hz - Love frequency
+        if (healingLayers.earth) frequencies.push(7.83); // 7.83Hz - Schumann resonance
+        if (healingLayers.focus) frequencies.push(40); // 40Hz - Gamma focus
+        
+        frequencies.forEach(freq => {
             const osc = ctx.createOscillator();
             const gain = ctx.createGain();
             osc.frequency.value = freq;
