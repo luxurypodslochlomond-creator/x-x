@@ -20,7 +20,7 @@ export default function House51() {
     const [artistName] = useState('HOUSE51');
     const [trackGenerated, setTrackGenerated] = useState(null);
     const [waveformData, setWaveformData] = useState(new Array(64).fill(0));
-    const [healingLayers, setHealingLayers] = useState({ love: true, calm: true, earth: false, focus: false });
+    const [healingLayers, setHealingLayers] = useState({ love: true, calm: true, earth: true, focus: true });
     const [mixerLevels, setMixerLevels] = useState({ kick: 1.0, bass: 0.8, hats: 0.15, claps: 0.3, bells: 0.2, pads: 0.1, strings: 0.25, shakers: 0.1, ride: 0.12, healing: 0.1 });
     const bpm = 128; // Fixed 128 BPM house tempo
 
@@ -624,32 +624,17 @@ Listen: ${window.location.href}`;
                     })}
                 </div>
 
-                {/* HEALING + CONTROLS */}
-                <div className="grid md:grid-cols-2 gap-2 mb-4">
+                {/* CONTROLS */}
+                <div className="max-w-md mx-auto mb-4">
                     <div className="bg-zinc-950 border border-amber-600/30 rounded-lg p-3">
-                        <h3 className="text-xs font-black text-pink-500 mb-2">HEALING LAYERS</h3>
-                        <div className="grid grid-cols-2 gap-1.5">
-                            <button onClick={() => toggleHealingLayer('love')} className={`p-2 rounded border text-center ${healingLayers.love ? 'bg-pink-500/20 border-pink-500' : 'bg-zinc-900 border-zinc-700'}`}>
-                                <p className="text-[10px] font-bold text-white">528Hz</p>
-                            </button>
-                            <button onClick={() => toggleHealingLayer('calm')} className={`p-2 rounded border text-center ${healingLayers.calm ? 'bg-purple-500/20 border-purple-500' : 'bg-zinc-900 border-zinc-700'}`}>
-                                <p className="text-[10px] font-bold text-white">432Hz</p>
-                            </button>
-                            <button onClick={() => toggleHealingLayer('earth')} className={`p-2 rounded border text-center ${healingLayers.earth ? 'bg-green-500/20 border-green-500' : 'bg-zinc-900 border-zinc-700'}`}>
-                                <p className="text-[10px] font-bold text-white">7.83Hz</p>
-                            </button>
-                            <button onClick={() => toggleHealingLayer('focus')} className={`p-2 rounded border text-center ${healingLayers.focus ? 'bg-yellow-500/20 border-yellow-500' : 'bg-zinc-900 border-zinc-700'}`}>
-                                <p className="text-[10px] font-bold text-white">40Hz</p>
-                            </button>
+                        <h3 className="text-xs font-black text-amber-500 mb-2 text-center">VOLUME</h3>
+                        <div className="flex items-center justify-between mb-1">
+                            <span className="text-[10px] text-gray-500">0%</span>
+                            <span className="text-xs font-bold text-amber-400">{Math.round(volume * 100)}%</span>
+                            <span className="text-[10px] text-gray-500">100%</span>
                         </div>
-                    </div>
-
-                    <div className="bg-zinc-950 border border-amber-600/30 rounded-lg p-3">
-                        <h3 className="text-xs font-black text-amber-500 mb-2">CONTROLS</h3>
-                        <label className="text-[10px] text-gray-500 mb-1 block">VOL: {Math.round(volume * 100)}%</label>
-                        <input type="range" min="0" max="1" step="0.01" value={volume} onChange={(e) => setVolume(parseFloat(e.target.value))} className="w-full h-1.5 bg-zinc-800 rounded appearance-none mb-3" />
-                        <label className="text-[10px] text-gray-500 mb-1 block">BPM: {bpm}</label>
-                        <input type="range" min="110" max="140" value={bpm} disabled className="w-full h-1.5 bg-zinc-800 rounded appearance-none opacity-50" />
+                        <input type="range" min="0" max="1" step="0.01" value={volume} onChange={(e) => setVolume(parseFloat(e.target.value))} className="w-full h-1.5 bg-zinc-800 rounded appearance-none" />
+                        <p className="text-[10px] text-pink-400 text-center mt-2">432Hz • 528Hz • 7.83Hz • 40Hz • Healing</p>
                     </div>
                 </div>
 
