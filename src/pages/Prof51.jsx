@@ -697,12 +697,57 @@ export default function Prof51() {
                 </div>
             </div>
 
-            {/* BACK TO CO-MANAGER51 */}
-            <Link to={createPageUrl('ScottManager')}>
-                <Button className="w-full bg-cyan-500 hover:bg-cyan-600 text-black font-black font-mono py-6 text-base mb-6">
-                    ← BACK TO CO-MANAGER51
-                </Button>
-            </Link>
+            {/* SHARE WITH FRIENDS - ZERO FRICTION */}
+            <div className="bg-gradient-to-br from-pink-500/20 to-purple-500/20 border-4 border-pink-500 p-6 mb-8 rounded-xl" style={{ boxShadow: '0 0 50px rgba(236, 72, 153, 0.5)' }}>
+                <div className="flex items-center gap-3 mb-4">
+                    <Users className="w-12 h-12 text-pink-400" />
+                    <div>
+                        <h2 className="text-pink-400 font-black text-xl font-mono">SHARE WITH FRIENDS</h2>
+                        <p className="text-gray-400 text-xs font-mono">Zero friction viral spread</p>
+                    </div>
+                </div>
+
+                <div className="space-y-3 text-sm font-mono">
+                    <Button
+                        onClick={() => {
+                            const url = window.location.origin + createPageUrl('Prof51');
+                            const text = `Prof51 - AI co-manager for students. FREE forever. Works offline. Try it: ${url}`;
+                            
+                            if (navigator.share) {
+                                navigator.share({
+                                    title: 'Prof51 - Student AI Co-Manager',
+                                    text: text,
+                                    url: url
+                                }).catch(() => {});
+                            } else {
+                                navigator.clipboard.writeText(text);
+                                alert('Link copied! Send to friends ♾️❤️♾️');
+                            }
+                        }}
+                        className="w-full bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-400 hover:to-purple-400 text-white font-black py-6 text-base mb-3"
+                    >
+                        📱 SHARE WITH FRIENDS
+                    </Button>
+
+                    <div className="bg-black border border-cyan-500/30 p-3 rounded">
+                        <p className="text-cyan-400 font-bold mb-2">HOW IT SPREADS:</p>
+                        <p className="text-white text-xs mb-1">1. Archie shares link with 5 friends</p>
+                        <p className="text-white text-xs mb-1">2. They try it, works offline instantly</p>
+                        <p className="text-white text-xs mb-1">3. They share with their friends</p>
+                        <p className="text-white text-xs mb-1">4. P2P mesh connects everyone automatically</p>
+                        <p className="text-green-400 text-xs font-bold mt-2">Zero friction = Viral growth ♾️❤️♾️</p>
+                    </div>
+
+                    <div className="bg-black border border-green-500/30 p-3 rounded">
+                        <p className="text-green-400 font-bold mb-2">ONE TAP = MULTIPLE FRIENDS:</p>
+                        <p className="text-white text-xs mb-1">✓ WhatsApp group → Everyone gets link</p>
+                        <p className="text-white text-xs mb-1">✓ iMessage → Share to study group</p>
+                        <p className="text-white text-xs mb-1">✓ Instagram story → Tag friends</p>
+                        <p className="text-white text-xs mb-1">✓ In person → QR code scan</p>
+                        <p className="text-cyan-400 text-xs font-bold mt-2">One share reaches 10-50 people instantly ♾️❤️♾️</p>
+                    </div>
+                </div>
+            </div>
 
             {/* FOOTER */}
             <div className="text-center text-gray-600 text-xs font-mono">

@@ -282,10 +282,12 @@ const LayoutInner = ({ children, currentPageName }) => {
   ];
 
   // CO-MANAGER51 - Will move to separate subdomain later
-  const scottNav = user?.role === 'admin' ? [
-    { title: "CO-MANAGER51", url: createPageUrl("ScottManager"), icon: User, description: "Your AI co-manager" },
-    { title: "PROF51", url: createPageUrl("Prof51"), icon: GraduationCap, description: "Student co-manager (Archie's vision)" },
-  ] : [];
+  const scottNav = [
+    { title: "PROF51", url: createPageUrl("Prof51"), icon: GraduationCap, description: "Student AI co-manager (Archie's company)", highlight: true },
+    ...(user?.role === 'admin' ? [
+      { title: "CO-MANAGER51", url: createPageUrl("ScottManager"), icon: User, description: "Your AI co-manager" },
+    ] : [])
+  ];
 
   const adminNav = user?.role === 'admin' ? [
             { title: "🛡️ AI51 Security", url: createPageUrl("AI51SecurityDashboard"), icon: Shield },
@@ -383,8 +385,8 @@ const LayoutInner = ({ children, currentPageName }) => {
 
                         {scottNav.length > 0 && (
                           <>
-                            <div className="h-px bg-amber-500/30 my-3" />
-                            <NavSection title="CO-MANAGER51" color="green" emoji="👑" items={scottNav} isActivePage={isActivePage} isMobile />
+                            <div className="h-px bg-cyan-500/30 my-3" />
+                            <NavSection title="STUDENT TOOLS" color="cyan" emoji="🎓" items={scottNav} isActivePage={isActivePage} isMobile defaultOpen={true} />
                           </>
                         )}
 
@@ -448,8 +450,8 @@ const LayoutInner = ({ children, currentPageName }) => {
 
             {scottNav.length > 0 && (
               <>
-                <div className="h-px bg-amber-500/30 my-4" />
-                <NavSection title="CO-MANAGER51" color="green" emoji="👑" items={scottNav} isActivePage={isActivePage} />
+                <div className="h-px bg-cyan-500/30 my-4" />
+                <NavSection title="STUDENT TOOLS" color="cyan" emoji="🎓" items={scottNav} isActivePage={isActivePage} defaultOpen={true} />
               </>
             )}
 
