@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Waves, Zap, Heart, Globe, Brain, Radio, Sparkles, CheckCircle, ArrowRight, Activity } from 'lucide-react';
+import { Waves, Zap, Heart, Globe, Brain, Signal, Sparkles, CheckCircle, ArrowRight, Activity } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 /**
@@ -254,7 +254,7 @@ export default function Tuner51() {
                                 : 'bg-black border-gray-700 hover:border-gray-500'
                         }`}
                     >
-                        <Radio className="w-6 h-6 mx-auto mb-2 text-cyan-400" />
+                        <Signal className="w-6 h-6 mx-auto mb-2 text-cyan-400" />
                         <p className="text-white text-xs font-bold">MEASURE</p>
                     </motion.button>
                     <motion.button
@@ -337,7 +337,7 @@ export default function Tuner51() {
                                     onClick={startListening}
                                     className="w-full bg-cyan-500 hover:bg-cyan-600 text-black font-bold py-4 rounded-lg transition-all"
                                 >
-                                    <Radio className="w-6 h-6 inline-block mr-2" />
+                                    <Signal className="w-6 h-6 inline-block mr-2" />
                                     START LISTENING
                                 </motion.button>
                             ) : (
