@@ -112,11 +112,18 @@ function ScottManagerInner() {
     // PIN ENTRY SCREEN - CLEAN SIMPLE
     if (!pinEntered) {
         return (
-            <div className="min-h-screen bg-black p-4 flex items-center justify-center">
-                <div className="bg-black border-2 border-gray-800 rounded-lg p-6 max-w-sm w-full">
-                    <div className="text-center mb-6">
-                        <h1 className="text-2xl font-bold text-white mb-2">Co-Manager</h1>
-                        <p className="text-gray-500 text-sm">Enter PIN</p>
+            <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black p-4 flex items-center justify-center">
+                <motion.div 
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.3 }}
+                    className="bg-gradient-to-br from-gray-900 to-black border-2 border-amber-500/30 rounded-xl p-8 max-w-sm w-full shadow-2xl"
+                    style={{ boxShadow: '0 0 60px rgba(245, 158, 11, 0.15)' }}
+                >
+                    <div className="text-center mb-8">
+                        <Kingdom51Crown8Bit size={64} animate={true} className="mx-auto mb-4" />
+                        <h1 className="text-3xl font-black text-white mb-2 font-mono tracking-tight">Co-Manager</h1>
+                        <p className="text-gray-400 text-sm font-mono">Enter PIN to unlock</p>
                     </div>
 
                     <Input
@@ -125,22 +132,24 @@ function ScottManagerInner() {
                         value={pinInput}
                         onChange={(e) => setPinInput(e.target.value)}
                         onKeyDown={(e) => e.key === 'Enter' && handlePinSubmit()}
-                        className="bg-black border border-gray-800 text-white text-center text-2xl mb-4 focus:border-amber-500 transition-colors tracking-widest"
+                        className="bg-black/50 border-2 border-amber-500/50 text-white text-center text-2xl mb-4 focus:border-amber-500 transition-all tracking-widest font-mono rounded-lg"
+                        style={{ boxShadow: '0 0 20px rgba(245, 158, 11, 0.1)' }}
                     />
                     <Button
                         onClick={handlePinSubmit}
-                        className="w-full bg-amber-500 hover:bg-amber-400 text-black font-bold py-3 transition-all"
+                        className="w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-black font-black py-4 transition-all shadow-lg font-mono text-sm tracking-wider rounded-lg"
+                        style={{ boxShadow: '0 4px 20px rgba(245, 158, 11, 0.4)' }}
                     >
-                        Enter
+                        ENTER
                     </Button>
-                </div>
+                </motion.div>
             </div>
         );
     }
 
     return (
         <ScottFocusMode>
-        <div className="min-h-screen bg-black p-4 pb-32">
+        <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black p-4 pb-32">
 
         <ScottHealthCheck />
         <ScottBrainDump />
@@ -153,25 +162,33 @@ function ScottManagerInner() {
 
 
             {/* HEADER - CLEAN */}
-            <div className="mb-6">
-                <div className="bg-black border border-gray-800 rounded-lg p-4 flex items-center justify-between">
+            <motion.div 
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4 }}
+                className="mb-6"
+            >
+                <div className="bg-gradient-to-br from-gray-900 to-black border-2 border-amber-500/30 rounded-xl p-5 flex items-center justify-between shadow-lg" style={{ boxShadow: '0 4px 30px rgba(245, 158, 11, 0.1)' }}>
                     <div>
-                        <h1 className="text-xl font-bold text-white">Co-Manager</h1>
-                        <p className="text-xs text-gray-500 flex items-center gap-1">
+                        <div className="flex items-center gap-2 mb-1">
+                            <Kingdom51Crown8Bit size={28} animate={true} />
+                            <h1 className="text-2xl font-black text-white font-mono tracking-tight">Co-Manager</h1>
+                        </div>
+                        <p className="text-xs text-gray-400 flex items-center gap-1 font-mono">
                             <span className={scott.isOnline ? 'text-green-400' : 'text-amber-400'}>●</span> 
                             {scott.isOnline ? 'Online' : 'Offline'}
                         </p>
                     </div>
                     <div className="flex items-center gap-2">
-                        <Link to={createPageUrl('ScottWhiteLabelPricing')} className="p-2 bg-amber-500 hover:bg-amber-400 rounded transition-all">
+                        <Link to={createPageUrl('ScottWhiteLabelPricing')} className="p-3 bg-gradient-to-br from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 rounded-lg transition-all shadow-md" style={{ boxShadow: '0 2px 12px rgba(245, 158, 11, 0.3)' }}>
                             <DollarSign className="w-5 h-5 text-black" />
                         </Link>
-                        <Link to={createPageUrl('ScottCalendar')} className="p-2 bg-gray-900 hover:bg-gray-800 rounded transition-all">
-                            <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                        <Link to={createPageUrl('ScottCalendar')} className="p-3 bg-gray-800/80 hover:bg-gray-700 rounded-lg transition-all border border-gray-700">
+                            <svg className="w-5 h-5 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
                         </Link>
                     </div>
                 </div>
-            </div>
+            </motion.div>
 
             {/* WHAT'S NEXT - TOP SO YOU SEE ACTIVITY */}
             <div className="mb-6">
@@ -270,22 +287,27 @@ function ScottManagerInner() {
             </div>
 
             {/* LIFE STATS - WHAT MATTERS */}
-            <div className="grid grid-cols-3 gap-2 mb-6">
-                <div className="bg-black border-2 border-amber-500 p-3 text-center">
-                    <p className="text-2xl font-black text-amber-400 mb-0.5" style={{ fontFamily: 'monospace' }}>{artists.filter(a => a.type === 'band_crew' || a.relationship === 'excellent').length}</p>
-                    <p className="text-[10px] text-gray-600 tracking-wider font-bold" style={{ fontFamily: 'monospace' }}>FAMILY</p>
+            <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.2 }}
+                className="grid grid-cols-3 gap-3 mb-6"
+            >
+                <div className="bg-gradient-to-br from-amber-950/30 to-black border-2 border-amber-500/50 p-4 text-center rounded-lg shadow-md">
+                    <p className="text-3xl font-black text-amber-400 mb-1 font-mono">{artists.filter(a => a.type === 'band_crew' || a.relationship === 'excellent').length}</p>
+                    <p className="text-[9px] text-gray-500 tracking-wider font-bold font-mono">FAMILY</p>
                 </div>
                 <Link to={createPageUrl('ScottCalendar')} className="w-full">
-                    <div className="bg-black border-2 border-amber-500 hover:border-amber-400 p-3 text-center transition-all">
-                        <p className="text-2xl font-black text-amber-400 mb-0.5" style={{ fontFamily: 'monospace' }}>{upcomingEvents.length}</p>
-                        <p className="text-[10px] text-gray-600 tracking-wider font-bold" style={{ fontFamily: 'monospace' }}>PLANS</p>
+                    <div className="bg-gradient-to-br from-cyan-950/30 to-black border-2 border-cyan-500/50 hover:border-cyan-500 p-4 text-center transition-all rounded-lg shadow-md">
+                        <p className="text-3xl font-black text-cyan-400 mb-1 font-mono">{upcomingEvents.length}</p>
+                        <p className="text-[9px] text-gray-500 tracking-wider font-bold font-mono">PLANS</p>
                     </div>
                 </Link>
-                <div className="bg-black border-2 border-amber-500 p-3 text-center">
-                    <p className="text-2xl font-black text-amber-400 mb-0.5" style={{ fontFamily: 'monospace' }}>{artists.length}</p>
-                    <p className="text-[10px] text-gray-600 tracking-wider font-bold" style={{ fontFamily: 'monospace' }}>PEOPLE</p>
+                <div className="bg-gradient-to-br from-green-950/30 to-black border-2 border-green-500/50 p-4 text-center rounded-lg shadow-md">
+                    <p className="text-3xl font-black text-green-400 mb-1 font-mono">{artists.length}</p>
+                    <p className="text-[9px] text-gray-500 tracking-wider font-bold font-mono">PEOPLE</p>
                 </div>
-            </div>
+            </motion.div>
 
 
 
