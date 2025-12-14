@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Waves, Zap, Heart, Globe, Brain, Signal, Sparkles, CheckCircle, ArrowRight, Activity, History, Play, Pause } from 'lucide-react';
+import { Waves, Zap, Heart, Globe, Brain, Signal, Sparkles, CheckCircle, ArrowRight, Activity, History, Play, Pause, Info, ChevronDown, ChevronUp } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
@@ -13,18 +13,19 @@ import { useQuery } from '@tanstack/react-query';
  */
 
 export default function Tuner51() {
-    const [mode, setMode] = useState('measure'); // measure, calculate, match, magnetometer, accelerometer, light, pressure
-    const [inputFreq, setInputFreq] = useState('');
-    const [measuredFreq, setMeasuredFreq] = useState(null);
-    const [isListening, setIsListening] = useState(false);
-    const [matches, setMatches] = useState([]);
-    const [nextMove, setNextMove] = useState(null);
-    const [waveformData, setWaveformData] = useState(new Array(50).fill(0));
-    const [magneticField, setMagneticField] = useState(null);
-    const [acceleration, setAcceleration] = useState(null);
-    const [isSensorActive, setIsSensorActive] = useState(false);
-    const [ambientLight, setAmbientLight] = useState(null);
-    const [pressure, setPressure] = useState(null);
+          const [mode, setMode] = useState('measure'); // measure, calculate, match, magnetometer, accelerometer, light, pressure
+          const [inputFreq, setInputFreq] = useState('');
+          const [measuredFreq, setMeasuredFreq] = useState(null);
+          const [isListening, setIsListening] = useState(false);
+          const [matches, setMatches] = useState([]);
+          const [nextMove, setNextMove] = useState(null);
+          const [waveformData, setWaveformData] = useState(new Array(50).fill(0));
+          const [magneticField, setMagneticField] = useState(null);
+          const [acceleration, setAcceleration] = useState(null);
+          const [isSensorActive, setIsSensorActive] = useState(false);
+          const [ambientLight, setAmbientLight] = useState(null);
+          const [pressure, setPressure] = useState(null);
+          const [showCoherenceExplainer, setShowCoherenceExplainer] = useState(false);
 
     const audioContextRef = useRef(null);
     const analyserRef = useRef(null);
@@ -505,6 +506,73 @@ export default function Tuner51() {
                     <p className="text-cyan-400 text-xs mt-2">
                         For humans, Earth, AI, free energy devices ⚡
                     </p>
+
+                    {/* COHERENCE EXPLAINER */}
+                    <motion.div className="mt-6 max-w-2xl mx-auto">
+                        <button
+                            onClick={() => setShowCoherenceExplainer(!showCoherenceExplainer)}
+                            className="w-full bg-gradient-to-r from-pink-500/20 to-cyan-500/20 border-2 border-pink-500 rounded-lg p-4 flex items-center justify-between hover:from-pink-500/30 hover:to-cyan-500/30 transition-all"
+                        >
+                            <div className="flex items-center gap-3">
+                                <Heart className="w-6 h-6 text-pink-400" />
+                                <div className="text-left">
+                                    <p className="text-white font-bold">What is "Coherence"?</p>
+                                    <p className="text-gray-400 text-xs">Click to understand what we're measuring</p>
+                                </div>
+                            </div>
+                            {showCoherenceExplainer ? (
+                                <ChevronUp className="w-5 h-5 text-pink-400" />
+                            ) : (
+                                <ChevronDown className="w-5 h-5 text-pink-400" />
+                            )}
+                        </button>
+
+                        <AnimatePresence>
+                        {showCoherenceExplainer && (
+                            <motion.div
+                                initial={{ height: 0, opacity: 0 }}
+                                animate={{ height: 'auto', opacity: 1 }}
+                                exit={{ height: 0, opacity: 0 }}
+                                className="overflow-hidden"
+                            >
+                                <div className="bg-black border-2 border-cyan-500/50 rounded-b-lg p-6 space-y-4">
+                                    <div className="space-y-3">
+                                        <div className="bg-cyan-900/20 border-l-4 border-cyan-500 p-3 rounded">
+                                            <p className="text-cyan-400 font-bold text-sm mb-1">SIMPLE:</p>
+                                            <p className="text-white text-sm">When your heart rhythm is smooth (not jumpy), your stress is low, and your body feels calm = you're coherent. Everything working together.</p>
+                                        </div>
+
+                                        <div className="bg-pink-900/20 border-l-4 border-pink-500 p-3 rounded">
+                                            <p className="text-pink-400 font-bold text-sm mb-1">WHAT WE MEASURE:</p>
+                                            <p className="text-white text-sm mb-2">We combine multiple sensors:</p>
+                                            <ul className="text-gray-300 text-xs space-y-1 ml-4">
+                                                <li>• Heart rate smoothness (via camera)</li>
+                                                <li>• EM field stability (environment calm)</li>
+                                                <li>• Movement patterns (body relaxed)</li>
+                                                <li>• Voice stress (if you speak)</li>
+                                            </ul>
+                                        </div>
+
+                                        <div className="bg-green-900/20 border-l-4 border-green-500 p-3 rounded">
+                                            <p className="text-green-400 font-bold text-sm mb-1">WHY IT MATTERS:</p>
+                                            <p className="text-white text-sm">Higher coherence = better focus, less anxiety, clearer thinking. It's your "flow state" score.</p>
+                                        </div>
+
+                                        <div className="bg-purple-900/20 border-l-4 border-purple-500 p-3 rounded">
+                                            <p className="text-purple-400 font-bold text-sm mb-1">SCIENCE:</p>
+                                            <p className="text-white text-sm">HeartMath Institute research shows heart rhythm patterns affect brain function. We're measuring those patterns with your phone.</p>
+                                        </div>
+
+                                        <div className="bg-amber-900/20 border border-amber-500/50 p-3 rounded">
+                                            <p className="text-amber-400 font-bold text-sm mb-1">⚠️ HONEST LIMITS:</p>
+                                            <p className="text-amber-200 text-xs">We measure physical signals (heart, EM, movement). We DON'T measure consciousness or "vibes" directly - that's not provable yet. But patterns correlate with how you FEEL.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </motion.div>
+                        )}
+                        </AnimatePresence>
+                    </motion.div>
                     
                     {/* PHYSICS TRUTH */}
                     <div className="mt-4 bg-amber-900/20 border-2 border-amber-500/50 p-4 rounded-lg max-w-2xl mx-auto">
