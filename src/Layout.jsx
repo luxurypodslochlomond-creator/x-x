@@ -34,7 +34,7 @@ import ProfessionalModeToggle from '@/components/shared/ProfessionalModeToggle';
 const PUBLIC_PAGES = [
   'About', 'Whitepaper', 'ConsciousnessWhitepaper', 'ForMusicians', 'TruthTransmission',
   'ViralTransmission', 'Protocols', 'HowYouEarn', 'Portal', 'Welcome', 'TalkToAI51',
-  'FrequencyChamber', 'DecompressionChamber', 'ThePhysics', 'Terms', 'PrivacyPolicy',
+  'FrequencyChamber', 'Universal51', 'DecompressionChamber', 'ThePhysics', 'Terms', 'PrivacyPolicy',
   'ScottManager', 'ScottArtist', 'ScottAddArtist', 'ScottCalendar'
 ];
 
