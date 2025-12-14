@@ -104,6 +104,15 @@ export default function House51() {
         // Start hi-hats
         playHiHats(ctx, masterGain);
 
+        // Start bells/chimes
+        playBells(ctx, masterGain);
+
+        // Start claps
+        playClaps(ctx, masterGain);
+
+        // Start pads
+        playPads(ctx, masterGain);
+
         // Visualizer
         const updateWaveform = () => {
             const dataArray = new Uint8Array(analyser.frequencyBinCount);
@@ -156,46 +165,64 @@ export default function House51() {
         scheduleKicks();
     };
 
-    // BASSLINE
+    // BASSLINE - GROOVY WITH VARIATION
     const playBassline = (ctx, destination) => {
         const style = styles[currentStyle];
         const beatInterval = 60 / bpm;
 
-        const playBassNote = (freq, time, duration) => {
+        const playBassNote = (freq, time, duration, accent = false) => {
             const osc = ctx.createOscillator();
+            const osc2 = ctx.createOscillator(); // Sub oscillator
             const gain = ctx.createGain();
             const filter = ctx.createBiquadFilter();
 
             osc.type = 'sawtooth';
             osc.frequency.value = freq;
+            
+            osc2.type = 'sine';
+            osc2.frequency.value = freq * 0.5; // Sub bass
 
             filter.type = 'lowpass';
-            filter.frequency.value = 800;
-            filter.Q.value = 5;
+            filter.frequency.setValueAtTime(accent ? 1200 : 600, time);
+            filter.frequency.exponentialRampToValueAtTime(400, time + duration);
+            filter.Q.value = 8;
 
-            gain.gain.setValueAtTime(0.3, time);
+            gain.gain.setValueAtTime(accent ? 0.4 : 0.3, time);
             gain.gain.exponentialRampToValueAtTime(0.01, time + duration);
 
             osc.connect(filter);
+            osc2.connect(filter);
             filter.connect(gain);
             gain.connect(destination);
 
             osc.start(time);
+            osc2.start(time);
             osc.stop(time + duration);
+            osc2.stop(time + duration);
         };
 
-        // Simple house bassline pattern
-        const bassPattern = [
-            style.frequencies.bass,
-            style.frequencies.bass,
-            style.frequencies.bass * 1.25,
-            style.frequencies.bass
-        ];
+        // Rolling house bassline with groove
+        const bassPatterns = {
+            deep: [1, 1, 1.25, 1, 1.125, 1, 1.5, 1],      // Deep rolling bass
+            tech: [1, 1.25, 1, 1.5, 1, 1.25, 1.33, 1],    // Tech driving bass
+            progressive: [1, 1.125, 1.25, 1, 1.5, 1.25, 1.125, 1], // Progressive journey
+            soulful: [1, 1, 1.33, 1, 1.25, 1, 1.5, 1.125], // Soulful warmth
+            detroit: [1, 1.25, 1, 1.125, 1.5, 1, 1.33, 1], // Detroit machine funk
+            broken: [1, 1.33, 1, 1.25, 1, 1.5, 1.125, 1]  // Broken beat shuffle
+        };
+        
+        const pattern = bassPatterns[currentStyle] || bassPatterns.deep;
 
         const scheduleBass = () => {
             const now = ctx.currentTime;
-            bassPattern.forEach((freq, i) => {
-                playBassNote(freq, now + (beatInterval * i), beatInterval * 0.8);
+            pattern.forEach((mult, i) => {
+                const accent = i === 0 || i === 4; // Accent 1st and 5th notes
+                playBassNote(
+                    style.frequencies.bass * mult, 
+                    now + (beatInterval * i * 0.5), 
+                    beatInterval * 0.4, 
+                    accent
+                );
             });
             setTimeout(scheduleBass, beatInterval * 4 * 1000);
         };
@@ -242,6 +269,140 @@ export default function House51() {
             setTimeout(scheduleHats, beatInterval * 4 * 1000);
         };
         scheduleHats();
+    };
+
+    // BELLS/CHIMES (classic house element)
+    const playBells = (ctx, destination) => {
+        const beatInterval = 60 / bpm;
+
+        const playBell = (freq, time) => {
+            const osc = ctx.createOscillator();
+            const osc2 = ctx.createOscillator();
+            const gain = ctx.createGain();
+
+            osc.type = 'sine';
+            osc.frequency.value = freq;
+            osc2.type = 'sine';
+            osc2.frequency.value = freq * 2.001; // Slight detune for shimmer
+
+            gain.gain.setValueAtTime(0.08, time);
+            gain.gain.exponentialRampToValueAtTime(0.001, time + 2);
+
+            osc.connect(gain);
+            osc2.connect(gain);
+            gain.connect(destination);
+
+            osc.start(time);
+            osc2.start(time);
+            osc.stop(time + 2);
+            osc2.stop(time + 2);
+        };
+
+        // Bell pattern - plays every 4 bars
+        const bellNotes = [523.25, 659.25, 783.99, 880]; // C5, E5, G5, A5
+        
+        const scheduleBells = () => {
+            const now = ctx.currentTime;
+            bellNotes.forEach((freq, i) => {
+                playBell(freq, now + (beatInterval * i * 4));
+            });
+            setTimeout(scheduleBells, beatInterval * 16 * 1000); // Every 4 bars
+        };
+        setTimeout(() => scheduleBells(), beatInterval * 8 * 1000); // Start after 2 bars
+    };
+
+    // CLAPS (house essential)
+    const playClaps = (ctx, destination) => {
+        const beatInterval = 60 / bpm;
+
+        const playClap = (time) => {
+            const noise1 = ctx.createBufferSource();
+            const noise2 = ctx.createBufferSource();
+            const buffer = ctx.createBuffer(1, ctx.sampleRate * 0.05, ctx.sampleRate);
+            const data = buffer.getChannelData(0);
+            
+            for (let i = 0; i < data.length; i++) {
+                data[i] = Math.random() * 2 - 1;
+            }
+            
+            noise1.buffer = buffer;
+            noise2.buffer = buffer;
+
+            const filter = ctx.createBiquadFilter();
+            filter.type = 'bandpass';
+            filter.frequency.value = 2000;
+            filter.Q.value = 5;
+
+            const gain = ctx.createGain();
+            gain.gain.setValueAtTime(0.25, time);
+            gain.gain.exponentialRampToValueAtTime(0.01, time + 0.15);
+
+            noise1.connect(filter);
+            noise2.connect(filter);
+            filter.connect(gain);
+            gain.connect(destination);
+
+            noise1.start(time);
+            noise2.start(time + 0.01); // Slight delay for clap texture
+            noise1.stop(time + 0.15);
+            noise2.stop(time + 0.16);
+        };
+
+        // Claps on 2 and 4 (classic house)
+        const scheduleClaps = () => {
+            const now = ctx.currentTime;
+            playClap(now + beatInterval); // Beat 2
+            playClap(now + (beatInterval * 3)); // Beat 4
+            setTimeout(scheduleClaps, beatInterval * 4 * 1000);
+        };
+        scheduleClaps();
+    };
+
+    // PADS (warm atmosphere)
+    const playPads = (ctx, destination) => {
+        const chordFreqs = [
+            [261.63, 329.63, 392.00], // C major
+            [293.66, 369.99, 440.00], // D minor  
+            [246.94, 311.13, 369.99], // B diminished
+            [220.00, 277.18, 329.63]  // A minor
+        ];
+
+        let currentChord = 0;
+
+        const playChord = (freqs, time, duration) => {
+            freqs.forEach(freq => {
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                const filter = ctx.createBiquadFilter();
+
+                osc.type = 'triangle';
+                osc.frequency.value = freq;
+
+                filter.type = 'lowpass';
+                filter.frequency.value = 1200;
+
+                gain.gain.setValueAtTime(0, time);
+                gain.gain.linearRampToValueAtTime(0.05, time + 0.5);
+                gain.gain.setValueAtTime(0.05, time + duration - 0.5);
+                gain.gain.linearRampToValueAtTime(0, time + duration);
+
+                osc.connect(filter);
+                filter.connect(gain);
+                gain.connect(destination);
+
+                osc.start(time);
+                osc.stop(time + duration);
+            });
+        };
+
+        const beatInterval = 60 / bpm;
+        const scheduleChords = () => {
+            const now = ctx.currentTime;
+            playChord(chordFreqs[currentChord], now, beatInterval * 4);
+            currentChord = (currentChord + 1) % chordFreqs.length;
+            setTimeout(scheduleChords, beatInterval * 4 * 1000);
+        };
+        scheduleChords();
     };
 
     // HEALING FREQUENCY LAYERS
@@ -710,6 +871,37 @@ export default function House51() {
                     <p className="text-cyan-400 text-sm font-bold">
                         This is what Moodymann + CamelPhat understand - house music IS healing ⚡♾️❤️♾️
                     </p>
+                </div>
+
+                {/* LOSSLESS QUALITY NOTE */}
+                <div className="mt-6 bg-gradient-to-r from-green-900/40 to-cyan-900/40 border-2 border-green-500 rounded-xl p-6">
+                    <h3 className="text-xl font-black text-green-400 mb-3 flex items-center gap-2">
+                        <Zap className="w-6 h-6" />
+                        READY FOR THE CLUB:
+                    </h3>
+                    <div className="space-y-2 text-sm">
+                        <p className="text-gray-300">
+                            • <strong className="text-white">Web Audio API</strong> = lossless synthesis (no compression artifacts)
+                        </p>
+                        <p className="text-gray-300">
+                            • <strong className="text-cyan-400">Rolling bassline</strong> with sub-bass layer
+                        </p>
+                        <p className="text-gray-300">
+                            • <strong className="text-pink-400">Bell chimes</strong> shimmer every 4 bars (classic house)
+                        </p>
+                        <p className="text-gray-300">
+                            • <strong className="text-purple-400">Claps on 2 + 4</strong> (proper house groove)
+                        </p>
+                        <p className="text-gray-300">
+                            • <strong className="text-amber-400">Warm pad chords</strong> for atmosphere
+                        </p>
+                        <p className="text-green-400 font-bold mt-3">
+                            ✓ Zero-loss quality - DJs like Ben Santiago can play this at Sub Club level 🔥
+                        </p>
+                        <p className="text-cyan-400 text-xs mt-2">
+                            (Export as WAV when we add download = club-ready lossless)
+                        </p>
+                    </div>
                 </div>
 
             </div>
