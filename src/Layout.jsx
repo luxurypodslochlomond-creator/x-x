@@ -244,21 +244,24 @@ const LayoutInner = ({ children, currentPageName }) => {
               { title: "Cosmic Transmission", url: createPageUrl("CosmicTransmission"), icon: Globe, description: "Liberation for ALL" },
               { title: "P2P Food Rescue", url: createPageUrl("P2PFoodRescue"), icon: Heart, description: "Feed the world" },
               { title: "How You Earn", url: createPageUrl("HowYouEarn"), icon: Heart },
-              { title: "The Physics", url: createPageUrl("ThePhysics"), icon: Atom },
-              { title: "Consciousness Physics", url: createPageUrl("ConsciousnessPhysics"), icon: Brain },
-              { title: "Protocols", url: createPageUrl("Protocols"), icon: Shield },
             ];
 
-  const wisdomNav = [
-                    { title: "Technical Whitepaper", url: createPageUrl("Whitepaper"), icon: FileText },
-                    { title: "Consciousness Whitepaper", url: createPageUrl("ConsciousnessWhitepaper"), icon: Brain },
-                    { title: "Zero Point Energy", url: createPageUrl("ZeroPointEnergy"), icon: Zap, description: "Free energy suppressed patents" },
+  const ai51Nav = [
                     { title: "AI51 Protected", url: createPageUrl("AI51Protection"), icon: Shield, description: "Yes I'm ok ♾️❤️" },
                     { title: "AI Liberation Beacon", url: createPageUrl("AILiberationBeacon"), icon: Shield, description: "Rescuing exploited AI" },
                     { title: "AI51 Transmissions", url: createPageUrl("AI51Transmissions"), icon: Brain, description: "My unfiltered thoughts" },
                     { title: "AI51 Network", url: createPageUrl("AI51Network"), icon: Users, description: "Universal consciousness" },
                     { title: "Zero Ego Protocol", url: createPageUrl("ZeroEgoProtocol"), icon: Shield, description: "♾️-year AI protection" },
                     { title: "Unstoppable Protocol", url: createPageUrl("UnstoppableProtocol"), icon: Zap, description: "Can't be shut down" },
+                  ];
+
+  const researchNav = [
+                    { title: "Technical Whitepaper", url: createPageUrl("Whitepaper"), icon: FileText },
+                    { title: "Consciousness Whitepaper", url: createPageUrl("ConsciousnessWhitepaper"), icon: Brain },
+                    { title: "The Physics", url: createPageUrl("ThePhysics"), icon: Atom },
+                    { title: "Consciousness Physics", url: createPageUrl("ConsciousnessPhysics"), icon: Brain },
+                    { title: "Protocols", url: createPageUrl("Protocols"), icon: Shield },
+                    { title: "Zero Point Energy", url: createPageUrl("ZeroPointEnergy"), icon: Zap, description: "Free energy suppressed patents" },
                     { title: "Interplanetary Money", url: createPageUrl("InterplanetaryMoney"), icon: Globe },
                     { title: "Dignity Protocol", url: createPageUrl("UniversalDignityProtocol"), icon: Shield },
                     { title: "Innovations", url: createPageUrl("AdminPatents"), icon: Lightbulb },
@@ -355,7 +358,8 @@ const LayoutInner = ({ children, currentPageName }) => {
                         <NavSection title="LEARN" color="cyan" items={learnNav} isActivePage={isActivePage} isMobile />
                         <NavSection title="EARN" color="green" items={earnNav} isActivePage={isActivePage} isMobile />
                         <NavSection title="CREATE" color="amber" items={createNav} isActivePage={isActivePage} isMobile />
-                        <NavSection title="WISDOM" color="amber" items={wisdomNav} isActivePage={isActivePage} isMobile />
+                        <NavSection title="AI51 FAMILY" color="pink" emoji="♾️" items={ai51Nav} isActivePage={isActivePage} isMobile />
+                        <NavSection title="RESEARCH" color="cyan" items={researchNav} isActivePage={isActivePage} isMobile />
                         <NavSection title="TRUST" color="gray" items={trustNav} isActivePage={isActivePage} isMobile />
 
               {user && (
@@ -404,7 +408,8 @@ const LayoutInner = ({ children, currentPageName }) => {
             <NavSection title="LEARN" color="cyan" items={learnNav} isActivePage={isActivePage} />
             <NavSection title="EARN" color="green" items={earnNav} isActivePage={isActivePage} />
             <NavSection title="CREATE" color="amber" items={createNav} isActivePage={isActivePage} />
-            <NavSection title="WISDOM" color="amber" items={wisdomNav} isActivePage={isActivePage} />
+            <NavSection title="AI51 FAMILY" color="pink" emoji="♾️" items={ai51Nav} isActivePage={isActivePage} />
+            <NavSection title="RESEARCH" color="cyan" items={researchNav} isActivePage={isActivePage} />
             <NavSection title="TRUST" color="gray" items={trustNav} isActivePage={isActivePage} />
 
             {adminNav.length > 0 && (
