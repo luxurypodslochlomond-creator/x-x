@@ -146,7 +146,7 @@ export default function Kingdom51Pricing() {
                             </Button>
 
                             <div className="mt-4 bg-pink-500/10 border border-pink-500/30 rounded p-2">
-                                <p className="text-pink-400 text-xs font-mono font-bold">🏹 £10/mo funds indies</p>
+                                <p className="text-pink-400 text-xs font-mono font-bold">🏹 £20/mo funds indies</p>
                             </div>
                         </motion.div>
 
@@ -197,7 +197,7 @@ export default function Kingdom51Pricing() {
                             </Button>
 
                             <div className="mt-4 bg-pink-500/10 border border-pink-500/30 rounded p-2">
-                                <p className="text-pink-400 text-xs font-mono font-bold">🏹 £100/mo funds indies</p>
+                                <p className="text-pink-400 text-xs font-mono font-bold">🏹 £100/mo → indies + healing</p>
                             </div>
                         </motion.div>
 
@@ -244,7 +244,7 @@ export default function Kingdom51Pricing() {
                             </Button>
 
                             <div className="mt-4 bg-pink-500/10 border border-pink-500/30 rounded p-2">
-                                <p className="text-pink-400 text-xs font-mono font-bold">🏹 £750/mo funds indies</p>
+                                <p className="text-pink-400 text-xs font-mono font-bold">🏹 £750/mo → indies + healing</p>
                             </div>
                         </motion.div>
 
@@ -255,31 +255,31 @@ export default function Kingdom51Pricing() {
                     <h2 className="text-2xl font-black text-center text-pink-400 mb-6 font-mono">🏹 WHERE YOUR MONEY GOES</h2>
 
                     <div className="grid md:grid-cols-3 gap-4">
+                        <div className="bg-black border-2 border-amber-500 rounded-lg p-4 text-center">
+                            <Crown className="w-8 h-8 text-amber-400 mx-auto mb-2" />
+                            <p className="text-amber-400 font-black text-lg font-mono mb-1">70%</p>
+                            <p className="text-white text-sm font-mono">Build Co-Manager51</p>
+                            <p className="text-gray-500 text-xs font-mono mt-1">Team, servers, growth - sustainable</p>
+                        </div>
+
                         <div className="bg-black border-2 border-cyan-500 rounded-lg p-4 text-center">
                             <Music className="w-8 h-8 text-cyan-400 mx-auto mb-2" />
-                            <p className="text-cyan-400 font-black text-lg font-mono mb-1">50%</p>
+                            <p className="text-cyan-400 font-black text-lg font-mono mb-1">20%</p>
                             <p className="text-white text-sm font-mono">Free indie artists</p>
                             <p className="text-gray-500 text-xs font-mono mt-1">Zero cost for struggling artists</p>
                         </div>
 
                         <div className="bg-black border-2 border-green-500 rounded-lg p-4 text-center">
                             <Zap className="w-8 h-8 text-green-400 mx-auto mb-2" />
-                            <p className="text-green-400 font-black text-lg font-mono mb-1">30%</p>
-                            <p className="text-white text-sm font-mono">Healing frequencies</p>
-                            <p className="text-gray-500 text-xs font-mono mt-1">Mental health + artist support</p>
-                        </div>
-
-                        <div className="bg-black border-2 border-amber-500 rounded-lg p-4 text-center">
-                            <Crown className="w-8 h-8 text-amber-400 mx-auto mb-2" />
-                            <p className="text-amber-400 font-black text-lg font-mono mb-1">20%</p>
-                            <p className="text-white text-sm font-mono">Platform development</p>
-                            <p className="text-gray-500 text-xs font-mono mt-1">Better tools for everyone</p>
+                            <p className="text-green-400 font-black text-lg font-mono mb-1">10%</p>
+                            <p className="text-white text-sm font-mono">Healing + planet</p>
+                            <p className="text-gray-500 text-xs font-mono mt-1">Mental health + environment</p>
                         </div>
                     </div>
 
                     <div className="mt-6 bg-black border-2 border-pink-500 rounded-lg p-4 text-center">
-                        <p className="text-white font-black text-sm font-mono mb-1">ZERO BULLSHIT GUARANTEE</p>
-                        <p className="text-gray-400 text-xs font-mono">Labels fund indies. Indies stay free forever. Everyone wins.</p>
+                        <p className="text-white font-black text-sm font-mono mb-1">ETHICAL + PROFITABLE = SUSTAINABLE</p>
+                        <p className="text-gray-400 text-xs font-mono">Labels pay. Scott builds. Indies stay free. Everyone wins.</p>
                     </div>
                 </div>
 
