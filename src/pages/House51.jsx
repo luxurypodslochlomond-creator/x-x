@@ -200,23 +200,24 @@ export default function House51() {
     const playKickSection = (ctx, destination, startTime, duration, style) => {
         const beatDuration = 60 / 128;
         const numBeats = Math.floor(duration / beatDuration);
+        const kickFreq = style.frequencies.kick;
 
         for (let i = 0; i < numBeats; i++) {
             const time = startTime + (i * beatDuration);
-            
+
             // Deep kick - single oscillator, smooth envelope
             const osc = ctx.createOscillator();
             const gain = ctx.createGain();
-            
+
             osc.type = 'sine';
-            osc.frequency.setValueAtTime(120, time);
-            osc.frequency.exponentialRampToValueAtTime(40, time + 0.05);
-            
+            osc.frequency.setValueAtTime(kickFreq * 2, time);
+            osc.frequency.exponentialRampToValueAtTime(kickFreq, time + 0.05);
+
             // Smooth attack/release to prevent clicks
             gain.gain.setValueAtTime(0, time);
             gain.gain.linearRampToValueAtTime(0.4, time + 0.001);
             gain.gain.exponentialRampToValueAtTime(0.001, time + 0.5);
-            
+
             osc.connect(gain);
             gain.connect(destination);
             osc.start(time);
@@ -227,22 +228,34 @@ export default function House51() {
     // BASS SECTION - Deep rolling bassline
     const playBassSection = (ctx, destination, startTime, duration, style) => {
         const beatDuration = 60 / 128;
-        // Deep house bass pattern - groovy, rolling
-        const pattern = [1, 1, 1.5, 1, 1.25, 1, 1.5, 1.25];
+        const bassFreq = style.frequencies.bass;
+
+        // Different patterns per style
+        const patterns = {
+            patient_zero: [1, 1, 1.5, 1, 1.25, 1, 1.5, 1.25],
+            chicago: [1, 1, 1.2, 1, 1.5, 1.2, 1, 1.5],
+            detroit: [1, 1.5, 1, 1.25, 1, 1.5, 1.25, 1],
+            glasgow: [1, 1, 1.3, 1.3, 1, 1.5, 1, 1.2],
+            deep: [1, 1, 1.5, 1, 1.25, 1, 1.5, 1.25],
+            soulful: [1, 1.2, 1, 1.5, 1.2, 1, 1.3, 1],
+            tech: [1, 1, 1.25, 1.25, 1, 1.5, 1.25, 1]
+        };
+
+        const pattern = patterns[currentStyle] || patterns.deep;
         const patternDuration = beatDuration * pattern.length;
         const numPatterns = Math.floor(duration / patternDuration);
 
         for (let p = 0; p < numPatterns; p++) {
             pattern.forEach((mult, i) => {
                 const time = startTime + (p * patternDuration) + (i * beatDuration);
-                
+
                 const osc = ctx.createOscillator();
                 const gain = ctx.createGain();
                 const filter = ctx.createBiquadFilter();
 
                 osc.type = 'sawtooth';
-                osc.frequency.value = 55 * mult; // Deep bass frequency
-                
+                osc.frequency.value = bassFreq * mult;
+
                 filter.type = 'lowpass';
                 filter.frequency.setValueAtTime(800, time);
                 filter.frequency.exponentialRampToValueAtTime(300, time + beatDuration * 0.6);
