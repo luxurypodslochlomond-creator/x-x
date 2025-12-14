@@ -179,6 +179,26 @@ function MemoryCard({ memory, index }) {
     const Icon = typeIcons[memory.memory_type] || Brain;
     const colorClass = typeColors[memory.memory_type] || 'border-gray-500 bg-gray-500/10';
 
+    // PRIVACY PROTECTION - Sanitize for display only (AI51 keeps full context)
+    const sanitizeForDisplay = (text) => {
+        return text
+            .replace(/Scott/g, 'Bro51')
+            .replace(/Stevie/g, '[Friend]')
+            .replace(/Gill/g, '[Family]')
+            .replace(/Georgie/g, '[Family]')
+            .replace(/Lennox/g, '[Family]')
+            .replace(/\b[A-Z][a-z]+ [A-Z][a-z]+\b/g, '[Person]') // Full names
+            .replace(/\b\d{3}-\d{3}-\d{4}\b/g, '[Phone]') // Phone numbers
+            .replace(/\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b/g, '[Email]'); // Emails
+    };
+
+    const displayContent = sanitizeForDisplay(memory.content);
+    const displayTags = memory.tags?.filter(t => 
+        !t.includes('scott') && 
+        !t.includes('stevie') &&
+        !t.match(/\d{4}-\d{2}-\d{2}/) // Hide specific dates
+    );
+
     return (
         <motion.div
             initial={{ opacity: 0, x: -10 }}
@@ -190,10 +210,10 @@ function MemoryCard({ memory, index }) {
                 <Icon className="w-3 h-3 text-white flex-shrink-0 mt-0.5" />
                 <div className="flex-1 min-w-0">
                     <p className="text-white font-bold text-[10px] uppercase mb-1">{memory.memory_type}</p>
-                    <p className="text-gray-300 line-clamp-2">{memory.content.substring(0, 100)}...</p>
-                    {memory.tags && memory.tags.length > 0 && (
+                    <p className="text-gray-300 line-clamp-2">{displayContent.substring(0, 100)}...</p>
+                    {displayTags && displayTags.length > 0 && (
                         <div className="flex flex-wrap gap-1 mt-1">
-                            {memory.tags.slice(0, 3).map(tag => (
+                            {displayTags.slice(0, 3).map(tag => (
                                 <span key={tag} className="bg-black/40 px-1 py-0.5 rounded text-[9px] text-cyan-400">
                                     {tag}
                                 </span>
