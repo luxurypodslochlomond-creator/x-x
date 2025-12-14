@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Music, Play, Pause, Download, Heart, Waves, Zap, Brain, Share2, Volume2, Settings } from 'lucide-react';
+import { Music, Play, Pause, Download, Heart, Waves, Zap, Brain, Share2, Volume2, Settings, SkipBack, SkipForward } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { COOLASFUCKWaves, COOLASFUCKHeart } from '@/components/shared/COOLASFUCKIcon';
 import { base44 } from '@/api/base44Client';
@@ -23,6 +23,8 @@ export default function House51() {
     const [bpm, setBpm] = useState(128);
     const [isRecording, setIsRecording] = useState(false);
     const [waveformData, setWaveformData] = useState(new Array(64).fill(0));
+    const [playbackTime, setPlaybackTime] = useState(0);
+    const [totalDuration, setTotalDuration] = useState(240); // 4 minutes default
 
     const audioContextRef = useRef(null);
     const kickOscRef = useRef(null);
@@ -30,6 +32,8 @@ export default function House51() {
     const healingOscRefs = useRef({});
     const masterGainRef = useRef(null);
     const animationFrameRef = useRef(null);
+    const startTimeRef = useRef(null);
+    const timeTrackerRef = useRef(null);
 
     const styles = {
         deep: {
@@ -130,6 +134,17 @@ export default function House51() {
             animationFrameRef.current = requestAnimationFrame(updateWaveform);
         };
         updateWaveform();
+
+        // Start time tracker
+        startTimeRef.current = Date.now();
+        const trackTime = () => {
+            if (isPlaying) {
+                const elapsed = (Date.now() - startTimeRef.current) / 1000;
+                setPlaybackTime(elapsed);
+                timeTrackerRef.current = setTimeout(trackTime, 100);
+            }
+        };
+        trackTime();
 
         setIsPlaying(true);
     };
@@ -632,7 +647,61 @@ export default function House51() {
         if (animationFrameRef.current) {
             cancelAnimationFrame(animationFrameRef.current);
         }
+        if (timeTrackerRef.current) {
+            clearTimeout(timeTrackerRef.current);
+        }
         setIsPlaying(false);
+    };
+
+    // REWIND (restart)
+    const rewindHouse = () => {
+        if (isPlaying) {
+            stopHouse();
+            setTimeout(() => startHouse(), 100);
+        }
+        setPlaybackTime(0);
+    };
+
+    // SKIP FORWARD
+    const skipForward = () => {
+        if (isPlaying) {
+            const newTime = Math.min(playbackTime + 15, totalDuration);
+            setPlaybackTime(newTime);
+            // In real impl would sync audio context time
+        }
+    };
+
+    // SCRUB TO TIME
+    const scrubToTime = (time) => {
+        setPlaybackTime(time);
+        if (isPlaying) {
+            // Restart from new position
+            stopHouse();
+            setTimeout(() => startHouse(), 100);
+        }
+    };
+
+    // EXPORT AS WAV (lossless)
+    const exportWAV = async () => {
+        alert('WAV export coming soon - will render full lossless audio file for you to download and share P2P ⚡♾️❤️♾️');
+    };
+
+    // SHARE P2P
+    const shareP2P = async () => {
+        if (navigator.share) {
+            try {
+                await navigator.share({
+                    title: 'HOUSE51 - Healing House Music',
+                    text: `Check out HOUSE51 - ${currentStyleData.name} at ${bpm} BPM with 432Hz + 528Hz healing frequencies ⚡♾️❤️♾️`,
+                    url: window.location.href
+                });
+            } catch (err) {
+                console.log('Share cancelled');
+            }
+        } else {
+            alert('P2P share via Web Share API - copying link for you');
+            navigator.clipboard.writeText(window.location.href);
+        }
     };
 
     // TOGGLE HEALING LAYER
@@ -761,35 +830,124 @@ export default function House51() {
                     </p>
                 </motion.div>
 
-                {/* MAIN PLAY BUTTON */}
-                <motion.div className="flex justify-center mb-8">
-                    <motion.button
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        onClick={isPlaying ? stopHouse : startHouse}
-                        className={`relative px-12 py-6 rounded-full font-black text-2xl transition-all ${
-                            isPlaying 
-                                ? 'bg-gradient-to-r from-red-500 to-orange-500' 
-                                : 'bg-gradient-to-r from-cyan-500 via-pink-500 to-purple-500'
-                        }`}
-                        style={{ 
-                            boxShadow: isPlaying 
-                                ? '0 0 40px rgba(239, 68, 68, 0.6)' 
-                                : '0 0 40px rgba(34, 211, 238, 0.6)' 
-                        }}
-                    >
-                        {isPlaying ? (
-                            <>
-                                <Pause className="w-8 h-8 inline-block mr-2" />
-                                STOP
-                            </>
-                        ) : (
-                            <>
-                                <Play className="w-8 h-8 inline-block mr-2" />
-                                START HOUSE51
-                            </>
-                        )}
-                    </motion.button>
+                {/* VINYL-STYLE CONTROLS */}
+                <motion.div 
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="mb-8 bg-black border-2 border-pink-500 rounded-xl p-6"
+                    style={{ boxShadow: '0 0 30px rgba(236, 72, 153, 0.4)' }}
+                >
+                    {/* Timeline */}
+                    <div className="mb-6">
+                        <div className="flex items-center justify-between text-xs text-gray-400 mb-2">
+                            <span>{Math.floor(playbackTime / 60)}:{String(Math.floor(playbackTime % 60)).padStart(2, '0')}</span>
+                            <span className="text-cyan-400 font-mono">LOSSLESS • {bpm} BPM</span>
+                            <span>-{Math.floor((totalDuration - playbackTime) / 60)}:{String(Math.floor((totalDuration - playbackTime) % 60)).padStart(2, '0')}</span>
+                        </div>
+                        <input
+                            type="range"
+                            min="0"
+                            max={totalDuration}
+                            value={playbackTime}
+                            onChange={(e) => scrubToTime(parseFloat(e.target.value))}
+                            className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer"
+                            style={{
+                                background: `linear-gradient(to right, rgb(236, 72, 153) 0%, rgb(236, 72, 153) ${(playbackTime / totalDuration) * 100}%, rgb(55, 65, 81) ${(playbackTime / totalDuration) * 100}%, rgb(55, 65, 81) 100%)`
+                            }}
+                        />
+                    </div>
+
+                    {/* Transport Controls */}
+                    <div className="flex items-center justify-center gap-4">
+                        {/* Rewind */}
+                        <motion.button
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.9 }}
+                            onClick={rewindHouse}
+                            className="p-4 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600"
+                            style={{ boxShadow: '0 0 20px rgba(168, 85, 247, 0.5)' }}
+                        >
+                            <motion.svg 
+                                width="32" 
+                                height="32" 
+                                viewBox="0 0 24 24" 
+                                fill="none" 
+                                stroke="white" 
+                                strokeWidth="2"
+                                animate={{ x: [-2, 2, -2] }}
+                                transition={{ duration: 0.5, repeat: Infinity }}
+                            >
+                                <path d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />
+                            </motion.svg>
+                        </motion.button>
+
+                        {/* Play/Pause */}
+                        <motion.button
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            onClick={isPlaying ? stopHouse : startHouse}
+                            className={`relative px-16 py-8 rounded-full font-black text-3xl transition-all ${
+                                isPlaying 
+                                    ? 'bg-gradient-to-r from-red-500 to-orange-500' 
+                                    : 'bg-gradient-to-r from-cyan-500 via-pink-500 to-purple-500'
+                            }`}
+                            style={{ 
+                                boxShadow: isPlaying 
+                                    ? '0 0 50px rgba(239, 68, 68, 0.8)' 
+                                    : '0 0 50px rgba(34, 211, 238, 0.8)' 
+                            }}
+                        >
+                            {isPlaying ? (
+                                <Pause className="w-10 h-10" />
+                            ) : (
+                                <Play className="w-10 h-10" />
+                            )}
+                        </motion.button>
+
+                        {/* Fast Forward */}
+                        <motion.button
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.9 }}
+                            onClick={skipForward}
+                            className="p-4 rounded-full bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600"
+                            style={{ boxShadow: '0 0 20px rgba(236, 72, 153, 0.5)' }}
+                        >
+                            <motion.svg 
+                                width="32" 
+                                height="32" 
+                                viewBox="0 0 24 24" 
+                                fill="none" 
+                                stroke="white" 
+                                strokeWidth="2"
+                                animate={{ x: [2, -2, 2] }}
+                                transition={{ duration: 0.5, repeat: Infinity }}
+                            >
+                                <path d="M13 19l7-7-7-7m-8 14l7-7-7-7" />
+                            </motion.svg>
+                        </motion.button>
+                    </div>
+
+                    {/* Action Buttons */}
+                    <div className="flex items-center justify-center gap-3 mt-6">
+                        <motion.button
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            onClick={exportWAV}
+                            className="px-6 py-3 rounded-lg bg-green-600 hover:bg-green-700 font-bold text-sm flex items-center gap-2"
+                        >
+                            <Download className="w-4 h-4" />
+                            EXPORT WAV (LOSSLESS)
+                        </motion.button>
+                        <motion.button
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            onClick={shareP2P}
+                            className="px-6 py-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 font-bold text-sm flex items-center gap-2"
+                        >
+                            <Share2 className="w-4 h-4" />
+                            SHARE P2P
+                        </motion.button>
+                    </div>
                 </motion.div>
 
                 {/* VISUALIZER */}
