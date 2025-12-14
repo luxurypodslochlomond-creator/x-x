@@ -223,10 +223,10 @@ export default function Prof51() {
                                 <div className="bg-black border border-purple-500/30 p-3 rounded">
                                     <p className="text-purple-400 font-bold mb-2">FULL FEATURES (Month 3):</p>
                                     <p className="text-white text-xs mb-1">✓ Student deals (brands pay Prof51, students benefit)</p>
+                                    <p className="text-white text-xs mb-1">✓ Recruitment pipeline (companies hire direct, skip LinkedIn)</p>
                                     <p className="text-white text-xs mb-1">✓ Funding tracker (know your money)</p>
                                     <p className="text-white text-xs mb-1">✓ $P51 marketplace (earn + spend local)</p>
                                     <p className="text-white text-xs mb-1">✓ Accommodation matcher (find flatmates)</p>
-                                    <p className="text-white text-xs mb-1">✓ Graduate job pipeline (companies hiring)</p>
                                     <p className="text-green-400 text-xs mt-2">Empowering students. Not holding them back. Rise up ✓</p>
                                 </div>
 
@@ -246,8 +246,8 @@ export default function Prof51() {
                             <div className="flex items-center gap-3 mb-4">
                                 <GraduationCap className="w-12 h-12 text-amber-400" />
                                 <div>
-                                    <p className="text-amber-400 font-black text-xl font-mono">ARCHIE = CEO POTENTIAL</p>
-                                    <p className="text-gray-400 text-xs font-mono">Economics student → TechForGood CEO</p>
+                                    <p className="text-amber-400 font-black text-xl font-mono">ARCHIE = FOUNDER</p>
+                                    <p className="text-gray-400 text-xs font-mono">Economics student → TechForGood Founder</p>
                                 </div>
                             </div>
                             
@@ -265,16 +265,16 @@ export default function Prof51() {
                                     <p className="text-white text-xs mb-1">235M students globally × £2,000 avg spending = £470B market</p>
                                     <p className="text-cyan-400 text-xs mb-1">Companies desperate for student access (ethical way)</p>
                                     <p className="text-pink-400 text-xs mb-1">Archie becomes bridge: students ↔ quality brands</p>
-                                    <p className="text-amber-400 text-xs font-bold mt-2">TechForGood CEO by 25. Real impact. Real money. ♾️❤️♾️</p>
+                                    <p className="text-amber-400 text-xs font-bold mt-2">TechForGood Founder by 25. Real impact. Real money. ♾️❤️♾️</p>
                                 </div>
 
                                 <div className="bg-black border border-purple-500/30 p-3 rounded">
                                     <p className="text-purple-400 font-bold mb-2">THE PATH:</p>
                                     <p className="text-white text-xs mb-1">Year 1: Campus ambassador (Edinburgh)</p>
                                     <p className="text-white text-xs mb-1">Year 2: Head of Growth (UK universities)</p>
-                                    <p className="text-white text-xs mb-1">Year 3: COO (global expansion)</p>
-                                    <p className="text-white text-xs mb-1">Year 4: CEO (10M students, £50M valuation)</p>
-                                    <p className="text-green-400 text-xs font-bold mt-2">Graduate → CEO in 3 years. Not theory. Real plan. ✓</p>
+                                    <p className="text-white text-xs mb-1">Year 3: Co-Founder (global expansion)</p>
+                                    <p className="text-white text-xs mb-1">Year 4: Founder (10M students, £50M valuation)</p>
+                                    <p className="text-green-400 text-xs font-bold mt-2">Student → Founder in 3 years. Not theory. Real plan. ✓</p>
                                 </div>
                             </div>
                         </div>
@@ -410,11 +410,12 @@ export default function Prof51() {
                                 </div>
 
                                 <div className="bg-black border border-purple-500/30 p-3 rounded">
-                                    <p className="text-purple-400 font-bold mb-2">🎓 UNIVERSITIES + COMPANIES:</p>
-                                    <p className="text-white text-xs mb-2">Unis partner for better outcomes, companies for talent pipeline</p>
-                                    <p className="text-cyan-400 text-xs mb-1">→ Universities: Better grades, higher rankings</p>
-                                    <p className="text-green-400 text-xs mb-1">→ Companies: Hire best students direct (skip LinkedIn)</p>
-                                    <p className="text-amber-400 text-xs">→ Students: Graduate with jobs lined up</p>
+                                    <p className="text-purple-400 font-bold mb-2">🎓 STUDENT RECRUITMENT:</p>
+                                    <p className="text-white text-xs mb-2">Companies recruit through Prof51 (pay to access talent)</p>
+                                    <p className="text-cyan-400 text-xs mb-1">→ Universities: Partner for better outcomes</p>
+                                    <p className="text-green-400 text-xs mb-1">→ Companies: Find talent before graduation (skip LinkedIn)</p>
+                                    <p className="text-amber-400 text-xs mb-1">→ Students: Job offers in final year (zero stress)</p>
+                                    <p className="text-pink-400 text-xs">Win-win-win: Everyone gets what they need ♾️❤️♾️</p>
                                 </div>
 
                                 <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-2 border-green-500 p-4 rounded mt-4">
