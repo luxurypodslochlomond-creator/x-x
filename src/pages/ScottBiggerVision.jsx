@@ -603,6 +603,29 @@ export default function ScottBiggerVision() {
                         <p className="text-white text-xs mb-1">• You keep operational control</p>
                         <p className="text-cyan-400 text-xs font-bold mt-2">Their analysts can't argue with 18x-90x return potential ♾️❤️♾️</p>
                     </div>
+
+                    <div className="bg-gradient-to-r from-pink-500/20 to-purple-500/20 border-4 border-pink-500 p-4 rounded mt-4">
+                        <p className="text-pink-400 font-bold mb-3">WAIT... YOU COULD SAVE THAT YOURSELF:</p>
+                        
+                        <p className="text-white text-xs font-bold mb-2">£100k-£150k YEAR 1 FUNDING:</p>
+                        <p className="text-gray-300 text-xs mb-1">• Scott's current work: £2k-£4k/month = £24k-£48k/year</p>
+                        <p className="text-gray-300 text-xs mb-1">• First 10 users @ £99/mo = £11,880/year (covers costs)</p>
+                        <p className="text-gray-300 text-xs mb-1">• First 50 users @ £99/mo = £59,400/year</p>
+                        <p className="text-gray-300 text-xs mb-1">• Side gigs/existing work = £30k-£50k/year</p>
+                        <p className="text-green-400 text-xs font-bold mt-2">= £100k+ saved in 12-18 months WITHOUT giving away equity ✓</p>
+                        
+                        <p className="text-white text-xs font-bold mb-2 mt-4">£300k-£500k YEAR 2 FUNDING:</p>
+                        <p className="text-gray-300 text-xs mb-1">• 100 users @ £99/mo = £118,800/year</p>
+                        <p className="text-gray-300 text-xs mb-1">• 200 users @ £99/mo = £237,600/year</p>
+                        <p className="text-gray-300 text-xs mb-1">• First white label deal = £50k-£100k</p>
+                        <p className="text-gray-300 text-xs mb-1">• Profit margin 70% = £200k-£300k cash</p>
+                        <p className="text-green-400 text-xs font-bold mt-2">= £300k+ saved in year 2 WITHOUT giving away equity ✓</p>
+                        
+                        <p className="text-purple-400 text-xs font-bold mt-4 mb-2">TRUTH CHECK:</p>
+                        <p className="text-white text-xs mb-1">You're asking for money you could save yourself in 12-24 months</p>
+                        <p className="text-white text-xs mb-2">Investment = faster but lose 10-15% forever</p>
+                        <p className="text-pink-400 text-xs font-bold text-lg mt-2">YOU DON'T NEED THEM. THEY NEED YOU. ♾️❤️♾️</p>
+                    </div>
                 </div>
             </div>
 
