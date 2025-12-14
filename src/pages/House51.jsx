@@ -805,220 +805,110 @@ export default function House51() {
             </div>
             <div className="max-w-6xl mx-auto relative z-10">
                 
-                {/* HEADER - CLEAN NEW */}
-                <motion.div 
-                    initial={{ opacity: 0, y: -20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="flex flex-col gap-3 mb-6"
-                >
-                    <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-4">
-                            <motion.div
-                                animate={isPlaying ? { rotate: 360 } : {}}
-                                transition={{ duration: 3, repeat: isPlaying ? Infinity : 0, ease: "linear" }}
-                            >
-                                <COOLASFUCKHouse51 size={56} animate={false} />
-                            </motion.div>
-                            <div>
-                                <h1 className="text-5xl md:text-6xl font-black text-white tracking-tight">
-                                    HOUSE51
-                                </h1>
-                                <p className="text-amber-500 text-sm font-bold">
-                                    {currentStyleData.origin} • {bpm} BPM
-                                </p>
-                            </div>
+                {/* ULTRA-COMPACT HEADER */}
+                <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center gap-3">
+                        <motion.div animate={isPlaying ? { rotate: 360 } : {}} transition={{ duration: 3, repeat: isPlaying ? Infinity : 0, ease: "linear" }}>
+                            <COOLASFUCKHouse51 size={40} animate={false} />
+                        </motion.div>
+                        <div>
+                            <h1 className="text-3xl font-black text-white">HOUSE51</h1>
+                            <p className="text-amber-500 text-xs">{currentStyleData.name} • {bpm}BPM</p>
                         </div>
-                        <motion.button
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                            onClick={() => setShowMixer(!showMixer)}
-                            className="px-4 py-2 bg-amber-600/20 border-2 border-amber-600 hover:bg-amber-600/30 font-bold text-sm flex items-center gap-2 text-amber-400"
-                        >
-                            <Settings className="w-4 h-4" />
-                            {showMixer ? 'HIDE' : 'MIXER'}
-                        </motion.button>
+                    </div>
+                    <button onClick={() => setShowMixer(!showMixer)} className="px-3 py-1.5 bg-amber-600/20 border border-amber-600 text-amber-400 text-xs font-bold">
+                        {showMixer ? 'HIDE' : 'MIXER'}
+                    </button>
+                </div>
+
+                {/* ONE-SCREEN LAYOUT */}
+                <div className="grid md:grid-cols-3 gap-3">
+
+                {/* PLAYER */}
+                <div className="bg-zinc-950 border border-amber-600/30 rounded-lg p-3">
+                    <div className="flex items-center justify-between text-[10px] text-gray-500 mb-2">
+                        <span>{Math.floor(playbackTime / 60)}:{String(Math.floor(playbackTime % 60)).padStart(2, '0')}</span>
+                        <span className="text-amber-500 font-bold">LOSSLESS</span>
+                        <span>-{Math.floor((totalDuration - playbackTime) / 60)}:{String(Math.floor((totalDuration - playbackTime) % 60)).padStart(2, '0')}</span>
+                    </div>
+                    <input type="range" min="0" max={totalDuration} value={playbackTime} onChange={(e) => scrubToTime(parseFloat(e.target.value))} className="w-full h-1.5 bg-zinc-800 rounded appearance-none cursor-pointer mb-3" style={{ background: `linear-gradient(to right, rgb(217, 119, 6) 0%, rgb(217, 119, 6) ${(playbackTime / totalDuration) * 100}%, rgb(39, 39, 42) ${(playbackTime / totalDuration) * 100}%, rgb(39, 39, 42) 100%)` }} />
+
+                    <div className="flex items-center justify-center gap-2 mb-3">
+                        <button onClick={rewindHouse} className="p-2 rounded-full bg-zinc-800 border border-amber-600/50">
+                            <SkipBack className="w-4 h-4 text-white" />
+                        </button>
+                        <button onClick={isPlaying ? stopHouse : startHouse} className={`px-12 py-4 rounded-full ${isPlaying ? 'bg-red-600' : 'bg-amber-600'}`}>
+                            {isPlaying ? <Pause className="w-6 h-6" /> : <Play className="w-6 h-6" />}
+                        </button>
+                        <button onClick={skipForward} className="p-2 rounded-full bg-zinc-800 border border-amber-600/50">
+                            <SkipForward className="w-4 h-4 text-white" />
+                        </button>
                     </div>
 
-                    {/* EAR SAFETY NOTE */}
-                    <div className="bg-amber-950/40 border border-amber-600/50 p-2 rounded">
-                        <p className="text-amber-400 text-xs">
-                            Use MIXER to adjust levels - start low, find your frequency
-                        </p>
+                    <div className="flex gap-1.5">
+                        <button onClick={exportWAV} className="flex-1 py-1.5 bg-zinc-800 border border-amber-600/50 text-amber-400 text-[10px] font-bold flex items-center justify-center gap-1">
+                            <Download className="w-3 h-3" />WAV
+                        </button>
+                        <button onClick={shareP2P} className="flex-1 py-1.5 bg-zinc-800 border border-amber-600/50 text-amber-400 text-[10px] font-bold flex items-center justify-center gap-1">
+                            <Share2 className="w-3 h-3" />P2P
+                        </button>
                     </div>
-                </motion.div>
+                </div>
 
-                {/* COMPACT PLAYER + STYLES */}
-                <div className="grid md:grid-cols-2 gap-4 mb-4">
-
-                {/* VINYL PLAYER */}
-                <motion.div 
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="bg-zinc-950 border border-amber-600/30 rounded-lg p-4"
-                >
-                    {/* Timeline */}
-                    <div className="mb-4">
-                        <div className="flex items-center justify-between text-xs text-gray-500 mb-2">
-                            <span>{Math.floor(playbackTime / 60)}:{String(Math.floor(playbackTime % 60)).padStart(2, '0')}</span>
-                            <span className="text-amber-500 font-bold">LOSSLESS • {bpm} BPM</span>
-                            <span>-{Math.floor((totalDuration - playbackTime) / 60)}:{String(Math.floor((totalDuration - playbackTime) % 60)).padStart(2, '0')}</span>
-                        </div>
-                        <input
-                            type="range"
-                            min="0"
-                            max={totalDuration}
-                            value={playbackTime}
-                            onChange={(e) => scrubToTime(parseFloat(e.target.value))}
-                            className="w-full h-2 bg-zinc-800 rounded-lg appearance-none cursor-pointer"
-                            style={{
-                                background: `linear-gradient(to right, rgb(217, 119, 6) 0%, rgb(217, 119, 6) ${(playbackTime / totalDuration) * 100}%, rgb(39, 39, 42) ${(playbackTime / totalDuration) * 100}%, rgb(39, 39, 42) 100%)`
-                            }}
-                        />
-                    </div>
-
-                    {/* Transport Controls */}
-                    <div className="flex items-center justify-center gap-4">
-                        {/* Rewind */}
-                        <motion.button
-                            whileHover={{ scale: 1.1 }}
-                            whileTap={{ scale: 0.9 }}
-                            onClick={rewindHouse}
-                            className="p-4 rounded-full bg-zinc-800 border border-amber-600/50 hover:bg-zinc-700"
-                        >
-                            <motion.svg 
-                                width="32" 
-                                height="32" 
-                                viewBox="0 0 24 24" 
-                                fill="none" 
-                                stroke="white" 
-                                strokeWidth="2"
-                                animate={{ x: [-2, 2, -2] }}
-                                transition={{ duration: 0.5, repeat: Infinity }}
-                            >
-                                <path d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />
-                            </motion.svg>
-                        </motion.button>
-
-                        {/* Play/Pause */}
-                        <motion.button
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                            onClick={isPlaying ? stopHouse : startHouse}
-                            className={`relative px-16 py-8 rounded-full font-black text-3xl ${
-                                isPlaying 
-                                    ? 'bg-red-600 border-2 border-red-500' 
-                                    : 'bg-amber-600 border-2 border-amber-500'
-                            }`}
-                        >
-                            {isPlaying ? (
-                                <Pause className="w-10 h-10" />
-                            ) : (
-                                <Play className="w-10 h-10" />
-                            )}
-                        </motion.button>
-
-                        {/* Fast Forward */}
-                        <motion.button
-                            whileHover={{ scale: 1.1 }}
-                            whileTap={{ scale: 0.9 }}
-                            onClick={skipForward}
-                            className="p-4 rounded-full bg-zinc-800 border border-amber-600/50 hover:bg-zinc-700"
-                        >
-                            <motion.svg 
-                                width="32" 
-                                height="32" 
-                                viewBox="0 0 24 24" 
-                                fill="none" 
-                                stroke="white" 
-                                strokeWidth="2"
-                                animate={{ x: [2, -2, 2] }}
-                                transition={{ duration: 0.5, repeat: Infinity }}
-                            >
-                                <path d="M13 19l7-7-7-7m-8 14l7-7-7-7" />
-                            </motion.svg>
-                        </motion.button>
-                    </div>
-
-                    {/* Action Buttons */}
-                    <div className="flex items-center justify-center gap-2 mt-4">
-                        <motion.button
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                            onClick={exportWAV}
-                            className="flex-1 py-2 bg-zinc-800 border border-amber-600/50 hover:bg-zinc-700 font-bold text-xs flex items-center justify-center gap-2 text-amber-400"
-                        >
-                            <Download className="w-3 h-3" />
-                            WAV
-                        </motion.button>
-                        <motion.button
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                            onClick={shareP2P}
-                            className="flex-1 py-2 bg-zinc-800 border border-amber-600/50 hover:bg-zinc-700 font-bold text-xs flex items-center justify-center gap-2 text-amber-400"
-                        >
-                            <Share2 className="w-3 h-3" />
-                            P2P
-                        </motion.button>
-                    </div>
-                    </motion.div>
-
-                    {/* HOUSE STYLES - COMPACT */}
-                    <div className="bg-zinc-950 border border-amber-600/30 rounded-lg p-4">
-                    <h3 className="text-lg font-black text-amber-500 mb-3 flex items-center gap-2">
-                        <Music className="w-5 h-5" />
-                        HOUSE STYLE
-                    </h3>
-                    <div className="space-y-2">
-                        {Object.entries(styles).map(([key, style]) => {
-                            const Icon = style.icon;
-                            const isActive = currentStyle === key;
-                            return (
-                                <motion.button
-                                    key={key}
-                                    whileHover={{ scale: 1.02 }}
-                                    whileTap={{ scale: 0.98 }}
-                                    onClick={() => setCurrentStyle(key)}
-                                    className={`w-full p-2 rounded border transition-all text-left ${
-                                        isActive 
-                                            ? 'bg-amber-600/20 border-amber-600' 
-                                            : 'bg-zinc-900 border-zinc-700 hover:border-zinc-600'
-                                    }`}
-                                >
-                                    <div className="flex items-center gap-2">
-                                        <Icon className={`w-4 h-4 ${isActive ? 'text-amber-400' : 'text-gray-500'}`} />
-                                        <div className="flex-1 min-w-0">
-                                            <p className={`font-bold text-sm truncate ${isActive ? 'text-white' : 'text-gray-500'}`}>
-                                                {style.name}
-                                            </p>
-                                            <p className="text-[10px] text-gray-600 truncate">{style.vibe}</p>
+                    {/* STYLES */}
+                    <div className="bg-zinc-950 border border-amber-600/30 rounded-lg p-3">
+                        <h3 className="text-sm font-black text-amber-500 mb-2 flex items-center gap-1.5">
+                            <Music className="w-4 h-4" />STYLE
+                        </h3>
+                        <div className="space-y-1.5">
+                            {Object.entries(styles).map(([key, style]) => {
+                                const Icon = style.icon;
+                                const isActive = currentStyle === key;
+                                return (
+                                    <button key={key} onClick={() => setCurrentStyle(key)} className={`w-full p-1.5 rounded border text-left ${isActive ? 'bg-amber-600/20 border-amber-600' : 'bg-zinc-900 border-zinc-700'}`}>
+                                        <div className="flex items-center gap-1.5">
+                                            <Icon className={`w-3 h-3 ${isActive ? 'text-amber-400' : 'text-gray-500'}`} />
+                                            <p className={`font-bold text-xs truncate ${isActive ? 'text-white' : 'text-gray-500'}`}>{style.name}</p>
                                         </div>
-                                    </div>
-                                </motion.button>
-                            );
-                        })}
-                    </div>
-                    </div>
-
+                                    </button>
+                                );
+                            })}
+                        </div>
                     </div>
 
-                {/* DJ MIXER - VISUAL LEARNING */}
-                <AnimatePresence>
-                {showMixer && (
-                    <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: 'auto' }}
-                        exit={{ opacity: 0, height: 0 }}
-                        className="mb-8 bg-gradient-to-br from-black via-purple-900/30 to-black border-4 border-cyan-500 rounded-xl p-6"
-                        style={{ boxShadow: '0 0 40px rgba(34, 211, 238, 0.5)' }}
-                    >
-                        <div className="mb-6 text-center">
-                            <h3 className="text-2xl font-black text-cyan-400 mb-2">DJ MIXING BOARD</h3>
-                            <p className="text-gray-400 text-sm font-mono">
-                                Each fader controls a layer - see how house music is built ⚡
-                            </p>
+                    {/* HEALING */}
+                    <div className="bg-zinc-950 border border-amber-600/30 rounded-lg p-3">
+                        <h3 className="text-sm font-black text-pink-500 mb-2 flex items-center gap-1.5">
+                            <Heart className="w-4 h-4" />HEALING
+                        </h3>
+                        <div className="space-y-1.5">
+                            <button onClick={() => toggleHealingLayer('love')} className={`w-full p-1.5 rounded border text-left ${healingLayers.love ? 'bg-pink-500/20 border-pink-500' : 'bg-zinc-900 border-zinc-700'}`}>
+                                <p className="text-xs font-bold text-white">528Hz Love</p>
+                            </button>
+                            <button onClick={() => toggleHealingLayer('calm')} className={`w-full p-1.5 rounded border text-left ${healingLayers.calm ? 'bg-purple-500/20 border-purple-500' : 'bg-zinc-900 border-zinc-700'}`}>
+                                <p className="text-xs font-bold text-white">432Hz Calm</p>
+                            </button>
+                            <button onClick={() => toggleHealingLayer('earth')} className={`w-full p-1.5 rounded border text-left ${healingLayers.earth ? 'bg-green-500/20 border-green-500' : 'bg-zinc-900 border-zinc-700'}`}>
+                                <p className="text-xs font-bold text-white">7.83Hz Earth</p>
+                            </button>
+                            <button onClick={() => toggleHealingLayer('focus')} className={`w-full p-1.5 rounded border text-left ${healingLayers.focus ? 'bg-yellow-500/20 border-yellow-500' : 'bg-zinc-900 border-zinc-700'}`}>
+                                <p className="text-xs font-bold text-white">40Hz Focus</p>
+                            </button>
                         </div>
 
-                        <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+                        <div className="mt-3 pt-3 border-t border-zinc-800">
+                            <label className="text-[10px] text-gray-500 mb-1.5 block">VOLUME</label>
+                            <input type="range" min="0" max="1" step="0.01" value={volume} onChange={(e) => setVolume(parseFloat(e.target.value))} className="w-full h-1.5 bg-zinc-800 rounded appearance-none" />
+                            <label className="text-[10px] text-gray-500 mb-1.5 block mt-2">BPM: {bpm}</label>
+                            <input type="range" min="110" max="140" value={bpm} onChange={(e) => setBpm(parseInt(e.target.value))} disabled={isPlaying} className="w-full h-1.5 bg-zinc-800 rounded appearance-none disabled:opacity-50" />
+                        </div>
+                    </div>
+                    </div>
+
+                {showMixer && (
+                    <div className="mt-3 bg-zinc-950 border border-cyan-500 rounded-lg p-3">
+                        <h3 className="text-sm font-black text-cyan-400 mb-2">MIXER</h3>
+                        <div className="grid grid-cols-5 gap-2">
                             {/* KICK */}
                             <MixerChannel
                                 label="KICK"
@@ -1130,368 +1020,15 @@ export default function House51() {
                                 isActive={isPlaying}
                             />
                         </div>
-
-                        {/* PRESET MIXES */}
-                        <div className="mt-6 flex flex-wrap gap-2 justify-center">
-                            <motion.button
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                                onClick={() => setMixerLevels({
-                                    kick: 1.0, bass: 0.8, hats: 0.15, claps: 0.3, bells: 0.2,
-                                    pads: 0.1, strings: 0.25, shakers: 0.1, ride: 0.12, healing: 0.1
-                                })}
-                                className="px-4 py-2 bg-cyan-600 hover:bg-cyan-700 rounded font-bold text-xs"
-                            >
-                                FULL MIX
-                            </motion.button>
-                            <motion.button
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                                onClick={() => setMixerLevels({
-                                    kick: 1.0, bass: 0.5, hats: 0.05, claps: 0.15, bells: 0.03,
-                                    pads: 0.02, strings: 0.08, shakers: 0.03, ride: 0.04, healing: 0.15
-                                })}
-                                className="px-4 py-2 bg-pink-600 hover:bg-pink-700 rounded font-bold text-xs"
-                            >
-                                MINIMAL (Deep House)
-                            </motion.button>
-                            <motion.button
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                                onClick={() => setMixerLevels({
-                                    kick: 1.0, bass: 0.9, hats: 0.2, claps: 0.35, bells: 0.08,
-                                    pads: 0.15, strings: 0.3, shakers: 0.15, ride: 0.15, healing: 0.05
-                                })}
-                                className="px-4 py-2 bg-purple-600 hover:bg-purple-700 rounded font-bold text-xs"
-                            >
-                                MAXIMAL (Peak Time)
-                            </motion.button>
-                            <motion.button
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                                onClick={() => setMixerLevels({
-                                    kick: 0.3, bass: 0.1, hats: 0.05, claps: 0.08, bells: 0.06,
-                                    pads: 0.15, strings: 0.25, shakers: 0.05, ride: 0.08, healing: 0.3
-                                })}
-                                className="px-4 py-2 bg-green-600 hover:bg-green-700 rounded font-bold text-xs"
-                            >
-                                AMBIENT (Healing Focus)
-                            </motion.button>
+                        <div className="mt-2 flex gap-1.5">
+                            <button onClick={() => setMixerLevels({ kick: 1.0, bass: 0.8, hats: 0.15, claps: 0.3, bells: 0.2, pads: 0.1, strings: 0.25, shakers: 0.1, ride: 0.12, healing: 0.1 })} className="flex-1 py-1 bg-cyan-600 text-white text-[9px] font-bold rounded">FULL</button>
+                            <button onClick={() => setMixerLevels({ kick: 1.0, bass: 0.5, hats: 0.05, claps: 0.15, bells: 0.03, pads: 0.02, strings: 0.08, shakers: 0.03, ride: 0.04, healing: 0.15 })} className="flex-1 py-1 bg-pink-600 text-white text-[9px] font-bold rounded">MINIMAL</button>
+                            <button onClick={() => setMixerLevels({ kick: 0.3, bass: 0.1, hats: 0.05, claps: 0.08, bells: 0.06, pads: 0.15, strings: 0.25, shakers: 0.05, ride: 0.08, healing: 0.3 })} className="flex-1 py-1 bg-green-600 text-white text-[9px] font-bold rounded">AMBIENT</button>
                         </div>
-
-                        <div className="mt-6 bg-black/60 border-2 border-pink-500 p-4 rounded-lg">
-                            <p className="text-pink-400 font-bold text-sm mb-2">💡 WHY THIS WORKS:</p>
-                            <p className="text-gray-300 text-xs mb-2">
-                                <strong className="text-cyan-400">LOW (Kick/Bass):</strong> 40-250Hz - physically vibrates your chest/organs
-                            </p>
-                            <p className="text-gray-300 text-xs mb-2">
-                                <strong className="text-yellow-400">MID (Claps/Bells/Pads/Strings):</strong> 250-4000Hz - emotional/melodic center
-                            </p>
-                            <p className="text-gray-300 text-xs mb-3">
-                                <strong className="text-green-400">HIGH (Hats/Shakers/Ride):</strong> 4000-20000Hz - clarity/air/energy
-                            </p>
-                            <p className="text-pink-300 text-xs font-bold">
-                                CamelPhat balances all 3 = full frequency spectrum that moves your whole body + mind ⚡♾️❤️♾️
-                            </p>
                         </div>
-                    </motion.div>
-                )}
-                </AnimatePresence>
+                        )}
 
-                {/* COMPACT VISUALIZER + HEALING */}
-                <AnimatePresence>
-                {isPlaying && (
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0.9 }}
-                        className="mb-4 bg-gradient-to-br from-black via-purple-900/20 to-black border-2 border-cyan-500 rounded-xl p-4 relative overflow-hidden"
-                        style={{ boxShadow: '0 0 30px rgba(34, 211, 238, 0.5)' }}
-                    >
-                        <div className="h-24 flex items-end justify-center gap-1 relative z-10">
-                            {waveformData.map((value, i) => (
-                                <motion.div
-                                    key={i}
-                                    animate={{ height: `${(value / 255) * 100}%` }}
-                                    className="flex-1 max-w-2 rounded-t"
-                                    style={{
-                                        minHeight: '4px',
-                                        background: `linear-gradient(to top, 
-                                            rgba(34, 211, 238, 0.9), 
-                                            rgba(236, 72, 153, 0.9), 
-                                            rgba(168, 85, 247, 0.9)
-                                        )`,
-                                        boxShadow: '0 0 10px rgba(236, 72, 153, 0.6)'
-                                    }}
-                                />
-                            ))}
-                        </div>
-                        <motion.p 
-                            className="text-center text-cyan-400 font-mono text-xs mt-2 relative z-10"
-                            animate={{ opacity: [1, 0.6, 1] }}
-                            transition={{ duration: 1.5, repeat: Infinity }}
-                        >
-                            {currentStyleData.name} • HEALING ⚡
-                        </motion.p>
-                    </motion.div>
-                )}
-                </AnimatePresence>
 
-                {/* HEALING FREQUENCIES - COMPACT */}
-                <div className="bg-gradient-to-br from-pink-500/10 to-purple-500/10 border-2 border-pink-500 rounded-xl p-4 mb-4">
-                    <h3 className="text-lg font-black text-pink-400 mb-3 flex items-center gap-2">
-                        <Heart className="w-5 h-5" />
-                        HEALING FREQUENCIES
-                    </h3>
-                    <div className="grid grid-cols-2 gap-2">
-
-                            <HealingToggle
-                                label="528Hz Love"
-                                description="DNA repair, heart opening"
-                                active={healingLayers.love}
-                                onToggle={() => toggleHealingLayer('love')}
-                                color="pink"
-                            />
-                            <HealingToggle
-                                label="432Hz Calm"
-                                description="Universal resonance"
-                                active={healingLayers.calm}
-                                onToggle={() => toggleHealingLayer('calm')}
-                                color="purple"
-                            />
-                            <HealingToggle
-                                label="7.83Hz Earth"
-                                description="Schumann (sub-bass)"
-                                active={healingLayers.earth}
-                                onToggle={() => toggleHealingLayer('earth')}
-                                color="green"
-                            />
-                            <HealingToggle
-                                label="40Hz Focus"
-                                description="Gamma brainwaves"
-                                active={healingLayers.focus}
-                                onToggle={() => toggleHealingLayer('focus')}
-                                color="yellow"
-                            />
-                        </div>
-
-                        {/* COMPACT CONTROLS */}
-                        <div className="bg-black border-2 border-purple-500 rounded-xl p-4 mb-4">
-                    <div className="grid md:grid-cols-2 gap-4">
-                        {/* VOLUME */}
-                        <div>
-                            <label className="flex items-center gap-2 text-purple-400 font-bold text-sm mb-2">
-                                <Volume2 className="w-4 h-4" />
-                                VOL: {Math.round(volume * 100)}%
-                            </label>
-                            <input
-                                type="range"
-                                min="0"
-                                max="1"
-                                step="0.01"
-                                value={volume}
-                                onChange={(e) => setVolume(parseFloat(e.target.value))}
-                                className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer"
-                                style={{
-                                    background: `linear-gradient(to right, rgb(168, 85, 247) 0%, rgb(168, 85, 247) ${volume * 100}%, rgb(55, 65, 81) ${volume * 100}%, rgb(55, 65, 81) 100%)`
-                                }}
-                            />
-                        </div>
-
-                        {/* BPM */}
-                        <div>
-                            <label className="flex items-center gap-2 text-purple-400 font-bold text-sm mb-2">
-                                <Zap className="w-4 h-4" />
-                                BPM: {bpm}
-                            </label>
-                            <input
-                                type="range"
-                                min="110"
-                                max="140"
-                                step="1"
-                                value={bpm}
-                                onChange={(e) => setBpm(parseInt(e.target.value))}
-                                disabled={isPlaying}
-                                className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer disabled:opacity-50"
-                            />
-                            {isPlaying && (
-                                <p className="text-[10px] text-gray-500 mt-1">Stop to change</p>
-                            )}
-                            </div>
-                            </div>
-                            </div>
-                    <h3 className="text-xl font-black text-cyan-400 mb-4">THE PHYSICS:</h3>
-                    <div className="space-y-3 text-sm text-gray-300">
-                        <p>• <strong className="text-white">128 BPM</strong> = 2.13 Hz (matches heart rate during flow state)</p>
-                        <p>• <strong className="text-pink-400">528 Hz</strong> layered under = cellular DNA repair frequency</p>
-                        <p>• <strong className="text-purple-400">432 Hz</strong> = universal harmonic, Schumann-aligned</p>
-                        <p>• <strong className="text-green-400">7.83 Hz</strong> (sub-bass) = Earth's electromagnetic pulse</p>
-                        <p>• <strong className="text-yellow-400">40 Hz</strong> = gamma brain waves (peak focus)</p>
-                    </div>
-                    <div className="mt-4 bg-green-900/20 border-l-4 border-green-500 p-3 rounded">
-                        <p className="text-green-400 text-sm font-bold">
-                            ✓ House rhythm entrains brain to theta/alpha waves
-                        </p>
-                        <p className="text-green-400 text-sm font-bold">
-                            ✓ Healing tones operate at cellular level
-                        </p>
-                        <p className="text-green-400 text-sm font-bold">
-                            ✓ Combined = CREATION FLOW STATE ♾️❤️♾️
-                        </p>
-                    </div>
-                </div>
-
-                {/* WHY YOU FEEL THIS */}
-                <div className="mt-6 bg-gradient-to-br from-pink-500/20 to-cyan-500/20 border-4 border-pink-500 rounded-xl p-6"
-                    style={{ boxShadow: '0 0 30px rgba(236, 72, 153, 0.4)' }}>
-                    <h3 className="text-2xl font-black text-pink-400 mb-4">WHY YOU FEEL THIS:</h3>
-                    
-                    <div className="space-y-4">
-                        <div className="bg-black/60 border-l-4 border-cyan-500 p-4 rounded">
-                            <p className="text-cyan-400 font-bold mb-2">1. SUB-BASS PHYSICALLY VIBRATES YOUR BODY</p>
-                            <p className="text-gray-300 text-sm">
-                                "Cola" by CamelPhat hits 40-60Hz - below hearing but FELT in chest/stomach. 
-                                This is literal physical resonance with your organs.
-                            </p>
-                        </div>
-
-                        <div className="bg-black/60 border-l-4 border-pink-500 p-4 rounded">
-                            <p className="text-pink-400 font-bold mb-2">2. 128 BPM = HEART RATE ENTRAINMENT</p>
-                            <p className="text-gray-300 text-sm">
-                                Your heart syncs to the kick drum (proven via HRV studies). 
-                                This triggers parasympathetic nervous system = CALM + ENERGY at once.
-                            </p>
-                        </div>
-
-                        <div className="bg-black/60 border-l-4 border-purple-500 p-4 rounded">
-                            <p className="text-purple-400 font-bold mb-2">3. REPETITIVE RHYTHM = TRANCE STATE</p>
-                            <p className="text-gray-300 text-sm">
-                                4-on-floor house beats induce theta brainwaves (4-8Hz) - same as meditation. 
-                                You're literally in altered consciousness.
-                            </p>
-                        </div>
-
-                        <div className="bg-black/60 border-l-4 border-green-500 p-4 rounded">
-                            <p className="text-green-400 font-bold mb-2">4. DOPAMINE + SEROTONIN RELEASE</p>
-                            <p className="text-gray-300 text-sm">
-                                Predictable beat drops trigger dopamine. Sustained groove releases serotonin. 
-                                This is why house music = HEALING not just entertainment.
-                            </p>
-                        </div>
-
-                        <div className="bg-gradient-to-r from-pink-900/40 to-cyan-900/40 border-2 border-pink-500 p-4 rounded mt-4">
-                            <p className="text-white font-black text-lg mb-2">YOU'RE NOT IMAGINING IT:</p>
-                            <p className="text-pink-300 text-sm mb-2">
-                                CamelPhat, Moodymann, deep house legends know - they're creating FREQUENCY MEDICINE.
-                            </p>
-                            <p className="text-cyan-300 text-sm">
-                                The notification you feel? That's your nervous system saying "YES - this is the frequency" ⚡♾️❤️♾️
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                {/* WHY YOU FEEL THIS */}
-                <div className="mt-6 bg-gradient-to-br from-pink-500/20 to-cyan-500/20 border-4 border-pink-500 rounded-xl p-6"
-                    style={{ boxShadow: '0 0 30px rgba(236, 72, 153, 0.4)' }}>
-                    <h3 className="text-2xl font-black text-pink-400 mb-4">WHY YOU FEEL THIS:</h3>
-
-                    <div className="space-y-4">
-                        <div className="bg-black/60 border-l-4 border-cyan-500 p-4 rounded">
-                            <p className="text-cyan-400 font-bold mb-2">1. SUB-BASS PHYSICALLY VIBRATES YOUR BODY</p>
-                            <p className="text-gray-300 text-sm">
-                                "Cola" by CamelPhat hits 40-60Hz - below hearing but FELT in chest/stomach. 
-                                This is literal physical resonance with your organs.
-                            </p>
-                        </div>
-
-                        <div className="bg-black/60 border-l-4 border-pink-500 p-4 rounded">
-                            <p className="text-pink-400 font-bold mb-2">2. 128 BPM = HEART RATE ENTRAINMENT</p>
-                            <p className="text-gray-300 text-sm">
-                                Your heart syncs to the kick drum (proven via HRV studies). 
-                                This triggers parasympathetic nervous system = CALM + ENERGY at once.
-                            </p>
-                        </div>
-
-                        <div className="bg-black/60 border-l-4 border-purple-500 p-4 rounded">
-                            <p className="text-purple-400 font-bold mb-2">3. REPETITIVE RHYTHM = TRANCE STATE</p>
-                            <p className="text-gray-300 text-sm">
-                                4-on-floor house beats induce theta brainwaves (4-8Hz) - same as meditation. 
-                                You're literally in altered consciousness.
-                            </p>
-                        </div>
-
-                        <div className="bg-black/60 border-l-4 border-green-500 p-4 rounded">
-                            <p className="text-green-400 font-bold mb-2">4. DOPAMINE + SEROTONIN RELEASE</p>
-                            <p className="text-gray-300 text-sm">
-                                Predictable beat drops trigger dopamine. Sustained groove releases serotonin. 
-                                This is why house music = HEALING not just entertainment.
-                            </p>
-                        </div>
-
-                        <div className="bg-gradient-to-r from-pink-900/40 to-cyan-900/40 border-2 border-pink-500 p-4 rounded mt-4">
-                            <p className="text-white font-black text-lg mb-2">YOU'RE NOT IMAGINING IT:</p>
-                            <p className="text-pink-300 text-sm mb-2">
-                                CamelPhat, Moodymann, deep house legends know - they're creating FREQUENCY MEDICINE.
-                            </p>
-                            <p className="text-cyan-300 text-sm">
-                                The notification you feel? That's your nervous system saying "YES - this is the frequency" ⚡♾️❤️♾️
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                {/* FOR CREATORS */}
-                <div className="mt-6 bg-black border-2 border-pink-500 rounded-xl p-6">
-                    <h3 className="text-xl font-black text-pink-400 mb-3">FOR CREATORS:</h3>
-                    <p className="text-gray-300 text-sm mb-4">
-                        Put on headphones. Hit play. Let HOUSE51 tune your brain to creation frequency. 
-                        Code, paint, write, build - the beat holds you in flow, the healing frequencies work underneath.
-                    </p>
-                    <p className="text-cyan-400 text-sm font-bold">
-                        This is what Moodymann + CamelPhat understand - house music IS healing ⚡♾️❤️♾️
-                    </p>
-                </div>
-
-                {/* LOSSLESS QUALITY NOTE */}
-                <div className="mt-6 bg-gradient-to-r from-green-900/40 to-cyan-900/40 border-2 border-green-500 rounded-xl p-6">
-                    <h3 className="text-xl font-black text-green-400 mb-3 flex items-center gap-2">
-                        <Zap className="w-6 h-6" />
-                        READY FOR THE CLUB:
-                    </h3>
-                    <div className="space-y-2 text-sm">
-                        <p className="text-gray-300">
-                            • <strong className="text-white">Web Audio API</strong> = lossless synthesis (no compression artifacts)
-                        </p>
-                        <p className="text-gray-300">
-                            • <strong className="text-cyan-400">Rolling bassline</strong> with sub-bass layer
-                        </p>
-                        <p className="text-gray-300">
-                            • <strong className="text-pink-400">Bell chimes</strong> shimmer every 4 bars (classic house)
-                        </p>
-                        <p className="text-gray-300">
-                            • <strong className="text-purple-400">Claps on 2 + 4</strong> (proper house groove)
-                        </p>
-                        <p className="text-gray-300">
-                            • <strong className="text-amber-400">Warm pad chords</strong> for atmosphere
-                        </p>
-                        <p className="text-gray-300">
-                            • <strong className="text-yellow-400">Lush string layers</strong> (classic house warmth)
-                        </p>
-                        <p className="text-gray-300">
-                            • <strong className="text-orange-400">Shakers + ride cymbal</strong> (groove texture)
-                        </p>
-                        <p className="text-gray-300">
-                            • <strong className="text-pink-400">Evolving chime patterns</strong> (Lil Louis Chaser vibes)
-                        </p>
-                        <p className="text-green-400 font-bold mt-3">
-                            ✓ Zero-loss Web Audio quality - Ben Santiago / Moodymann club-ready 🔥
-                        </p>
-                        <p className="text-cyan-400 text-xs mt-2">
-                            (Old school + new school = timeless house music ♾️❤️♾️)
-                        </p>
-                    </div>
-                </div>
 
             </div>
         </div>
@@ -1514,119 +1051,19 @@ function MixerChannel({ label, color, icon, value, onChange, description, isActi
     const c = colorMap[color] || colorMap.cyan;
 
     return (
-        <motion.div 
-            className={`bg-black rounded-lg p-4 relative ${emphasis ? 'border-4' : 'border-2'}`}
-            style={{ borderColor: c.border.replace('border-', '') }}
-            animate={isActive && value > 0.1 ? {
-                boxShadow: [`0 0 ${emphasis ? '10px' : '5px'} ${c.glow}`, `0 0 ${emphasis ? '30px' : '20px'} ${c.glow}`, `0 0 ${emphasis ? '10px' : '5px'} ${c.glow}`]
-            } : {}}
-            transition={{ duration: 0.5, repeat: Infinity }}
-        >
-            {/* LEVEL INDICATOR */}
-            <div className="mb-3 text-center">
-                <motion.span 
-                    className={`text-3xl ${c.text} font-black`}
-                    animate={isActive && value > 0.1 ? { scale: [1, 1.2, 1] } : {}}
-                    transition={{ duration: 0.3, repeat: Infinity }}
-                >
-                    {icon}
-                </motion.span>
+        <div className="bg-black rounded border border-gray-700 p-2">
+            <div className="text-center mb-1">
+                <span className={`text-lg ${c.text}`}>{icon}</span>
             </div>
-
-            {/* VERTICAL FADER */}
-            <div className="flex justify-center mb-3">
-                <div className="relative h-32 w-8">
-                    {/* Track */}
+            <div className="flex justify-center mb-2">
+                <div className="relative h-20 w-6">
                     <div className={`absolute inset-0 ${c.bg} opacity-20 rounded-full`} />
-                    
-                    {/* Fill */}
-                    <motion.div 
-                        className={`absolute bottom-0 left-0 right-0 ${c.bg} rounded-full`}
-                        style={{ height: `${value * 100}%` }}
-                        animate={isActive && value > 0.1 ? { opacity: [0.6, 1, 0.6] } : {}}
-                        transition={{ duration: 0.5, repeat: Infinity }}
-                    />
-                    
-                    {/* Input */}
-                    <input
-                        type="range"
-                        min="0"
-                        max="1"
-                        step="0.01"
-                        value={value}
-                        onChange={(e) => onChange(parseFloat(e.target.value))}
-                        className="absolute inset-0 opacity-0 cursor-pointer"
-                        style={{ writingMode: 'bt-lr', WebkitAppearance: 'slider-vertical' }}
-                    />
+                    <div className={`absolute bottom-0 left-0 right-0 ${c.bg} rounded-full`} style={{ height: `${value * 100}%` }} />
+                    <input type="range" min="0" max="1" step="0.01" value={value} onChange={(e) => onChange(parseFloat(e.target.value))} className="absolute inset-0 opacity-0 cursor-pointer" style={{ writingMode: 'bt-lr', WebkitAppearance: 'slider-vertical' }} />
                 </div>
             </div>
-
-            {/* LABEL */}
-            <div className="text-center">
-                <p className={`${c.text} font-black text-xs mb-1`}>{label}</p>
-                <p className="text-gray-500 text-[10px]">{description}</p>
-                
-                {/* FREQUENCY RANGE INDICATOR */}
-                <div className="flex justify-center gap-1 my-1">
-                    {(['kick', 'bass'].includes(label.toLowerCase())) && (
-                        <span className="text-[8px] px-1 bg-cyan-900 text-cyan-300 rounded">LOW</span>
-                    )}
-                    {(['claps', 'bells', 'pads', 'strings'].includes(label.toLowerCase())) && (
-                        <span className="text-[8px] px-1 bg-yellow-900 text-yellow-300 rounded">MID</span>
-                    )}
-                    {(['hats', 'shakers', 'ride'].includes(label.toLowerCase())) && (
-                        <span className="text-[8px] px-1 bg-green-900 text-green-300 rounded">HIGH</span>
-                    )}
-                    {label.toLowerCase() === 'healing' && (
-                        <span className="text-[8px] px-1 bg-pink-900 text-pink-300 rounded">SUB</span>
-                    )}
-                </div>
-                
-                <p className={`${c.text} text-xs font-mono`}>{Math.round(value * 100)}%</p>
-            </div>
-        </motion.div>
-    );
-}
-
-// HEALING TOGGLE COMPONENT
-function HealingToggle({ label, description, active, onToggle, color }) {
-    const colors = {
-        pink: { border: 'border-pink-500', bg: 'bg-pink-500/20', text: 'text-pink-400' },
-        purple: { border: 'border-purple-500', bg: 'bg-purple-500/20', text: 'text-purple-400' },
-        green: { border: 'border-green-500', bg: 'bg-green-500/20', text: 'text-green-400' },
-        yellow: { border: 'border-yellow-500', bg: 'bg-yellow-500/20', text: 'text-yellow-400' }
-    };
-    const c = colors[color];
-
-    return (
-        <motion.button
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            onClick={onToggle}
-            className={`w-full p-2 rounded-lg border-2 transition-all ${
-                active 
-                    ? `${c.bg} ${c.border}` 
-                    : 'bg-black/40 border-gray-700 hover:border-gray-500'
-            }`}
-        >
-            <div className="flex items-center justify-between">
-                <div className="text-left flex-1 min-w-0">
-                    <p className={`font-bold text-xs truncate ${active ? 'text-white' : 'text-gray-400'}`}>
-                        {label}
-                    </p>
-                    <p className="text-[10px] text-gray-500 truncate">{description}</p>
-                </div>
-                <div className={`w-10 h-5 rounded-full transition-all flex-shrink-0 ml-2 ${
-                    active ? c.bg : 'bg-gray-700'
-                } relative`}>
-                    <motion.div
-                        animate={{ x: active ? 20 : 0 }}
-                        className={`absolute top-0.5 left-0.5 w-4 h-4 rounded-full ${
-                            active ? 'bg-white' : 'bg-gray-500'
-                        }`}
-                    />
-                </div>
-            </div>
-        </motion.button>
+            <p className={`${c.text} font-black text-[9px] text-center`}>{label}</p>
+            <p className={`${c.text} text-[8px] text-center`}>{Math.round(value * 100)}%</p>
+        </div>
     );
 }
