@@ -46,6 +46,12 @@ export default function House51() {
     const mixerGainsRef = useRef({});
 
     const styles = {
+        patient_zero: {
+            name: "Patient Zero",
+            vibe: "The First Transmission - Pure Healing",
+            icon: Heart,
+            frequencies: { kick: 51, bass: 102 }, // 51Hz = Element 51 Antimony
+        },
         chicago: {
             name: "Chicago House",
             vibe: "Larry Heard - Can You Feel It",
