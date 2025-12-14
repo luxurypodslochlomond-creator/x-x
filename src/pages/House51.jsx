@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Music, Play, Pause, Download, Heart, Waves, Zap, Brain, Share2, Volume2, Settings, SkipBack, SkipForward } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { COOLASFUCKWaves, COOLASFUCKHeart, COOLASFUCKHouse51 } from '@/components/shared/COOLASFUCKIcon';
+import { Music, Play, Pause, Heart, Waves, Zap, Brain, Share2, SkipBack } from 'lucide-react';
+import { COOLASFUCKWaves, COOLASFUCKHeart, COOLASFUCKGlobe, COOLASFUCKBrain } from '@/components/shared/COOLASFUCKIcon';
 import { base44 } from '@/api/base44Client';
 
 /**
@@ -532,258 +531,157 @@ Listen: ${window.location.href}`;
     const currentStyleData = styles[currentStyle];
 
     return (
-        <div className="min-h-screen bg-black text-white p-4 md:p-6 relative overflow-hidden">
-            {/* Subtle warm glow - club darkness */}
-            <div className="fixed inset-0 pointer-events-none z-0">
-                <div className="absolute top-0 left-1/4 w-96 h-96 bg-amber-600/5 rounded-full blur-3xl" />
-                <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-orange-600/5 rounded-full blur-3xl" />
-            </div>
-            <div className="max-w-6xl mx-auto relative z-10">
-                
+        <div className="min-h-screen bg-gradient-to-br from-black via-amber-950 to-black text-white p-4 md:p-8">
+            <div className="max-w-2xl mx-auto">
+
                 {/* HEADER */}
-                <div className="flex items-center justify-between mb-4">
-                    <div className="flex items-center gap-3">
-                        <COOLASFUCKHouse51 size={32} />
-                        <div>
-                            <h1 className="text-2xl font-black text-white">HOUSE51</h1>
-                            <p className="text-amber-500 text-[10px]">Lossless Web Audio • {bpm}BPM</p>
-                        </div>
+                <div className="text-center mb-6">
+                    <div className="flex items-center justify-center gap-3 mb-2">
+                        <COOLASFUCKWaves size={32} animate={true} />
+                        <h1 className="text-3xl font-black text-white">HOUSE51</h1>
                     </div>
-                    <button onClick={() => setShowMixer(!showMixer)} className="px-3 py-1.5 bg-amber-600/20 border border-amber-600 text-amber-400 text-xs font-bold">
-                        {showMixer ? 'HIDE' : 'MIX'}
-                    </button>
+                    <p className="text-amber-400 text-sm font-mono">Zero-loss Web Audio • 128 BPM • AI51 Live</p>
                 </div>
 
-                {/* CENTERED PLAYER */}
-                <div className="flex justify-center mb-4">
-                    <div className="w-full max-w-md bg-zinc-950 border border-amber-600/30 rounded-lg p-4">
-                    <div className="text-center mb-3">
-                        <motion.div 
-                            className="mx-auto mb-3"
-                            animate={isPlaying ? { rotate: 360 } : {}}
-                            transition={{ duration: 3, repeat: isPlaying ? Infinity : 0, ease: "linear" }}
-                        >
-                            <COOLASFUCKHouse51 size={120} />
-                        </motion.div>
-                        <p className="text-white font-bold text-base mb-1">{currentStyleData.name}</p>
-                        <p className="text-amber-500 text-sm font-bold mb-1">by HOUSE51</p>
-                        <p className="text-gray-600 text-xs mb-1">{currentStyleData.vibe}</p>
-                        <p className="text-cyan-400 text-xs">AI51 • Live Synthesis for Radio51</p>
-                        </div>
-                    
+                {/* ONE CLEAN PLAYER SCREEN */}
+                <div className="bg-black/60 backdrop-blur-xl border-2 border-amber-500/50 rounded-xl p-6 space-y-6">
+
                     {/* VISUALIZER */}
-                    <div className="h-16 flex items-end justify-center gap-0.5 mb-3">
+                    <div className="h-24 flex items-end justify-center gap-1 bg-black/40 rounded-lg p-2">
                         {waveformData.map((value, i) => (
                             <div
                                 key={i}
-                                className="flex-1 bg-gradient-to-t from-amber-600 to-amber-400 rounded-t transition-all duration-75"
-                                style={{ height: `${Math.max(2, (value / 255) * 100)}%`, opacity: isPlaying ? 1 : 0.3 }}
+                                className="flex-1 bg-gradient-to-t from-amber-600 via-amber-500 to-amber-400 rounded-t transition-all duration-75"
+                                style={{ height: `${Math.max(4, (value / 255) * 100)}%`, opacity: isPlaying ? 1 : 0.2 }}
                             />
                         ))}
                     </div>
-                    
+
+                    {/* TRACK INFO */}
+                    <div className="text-center space-y-2">
+                        <p className="text-white font-black text-xl">{currentStyleData.name}</p>
+                        <p className="text-amber-400 text-sm font-bold">by HOUSE51</p>
+                        <p className="text-gray-500 text-xs">{currentStyleData.vibe}</p>
+                    </div>
+
                     {/* HEALING FREQUENCIES */}
-                    <div className="grid grid-cols-4 gap-1 mb-3">
-                        <div className="bg-purple-500/20 border border-purple-500 rounded p-1.5 text-center">
-                            <p className="text-purple-400 text-[10px] font-black">432Hz</p>
-                            <p className="text-gray-500 text-[8px]">CALM</p>
+                    <div className="grid grid-cols-4 gap-2">
+                        <div className="bg-purple-500/10 border border-purple-500/50 rounded-lg p-2 text-center">
+                            <COOLASFUCKWaves size={20} animate={isPlaying} />
+                            <p className="text-purple-400 text-xs font-black mt-1">432Hz</p>
+                            <p className="text-gray-600 text-[8px]">CALM</p>
                         </div>
-                        <div className="bg-pink-500/20 border border-pink-500 rounded p-1.5 text-center">
-                            <p className="text-pink-400 text-[10px] font-black">528Hz</p>
-                            <p className="text-gray-500 text-[8px]">LOVE</p>
+                        <div className="bg-pink-500/10 border border-pink-500/50 rounded-lg p-2 text-center">
+                            <COOLASFUCKHeart size={20} animate={isPlaying} />
+                            <p className="text-pink-400 text-xs font-black mt-1">528Hz</p>
+                            <p className="text-gray-600 text-[8px]">LOVE</p>
                         </div>
-                        <div className="bg-green-500/20 border border-green-500 rounded p-1.5 text-center">
-                            <p className="text-green-400 text-[10px] font-black">7.83Hz</p>
-                            <p className="text-gray-500 text-[8px]">EARTH</p>
+                        <div className="bg-green-500/10 border border-green-500/50 rounded-lg p-2 text-center">
+                            <COOLASFUCKGlobe size={20} animate={isPlaying} />
+                            <p className="text-green-400 text-xs font-black mt-1">7.83Hz</p>
+                            <p className="text-gray-600 text-[8px]">EARTH</p>
                         </div>
-                        <div className="bg-yellow-500/20 border border-yellow-500 rounded p-1.5 text-center">
-                            <p className="text-yellow-400 text-[10px] font-black">40Hz</p>
-                            <p className="text-gray-500 text-[8px]">FOCUS</p>
+                        <div className="bg-yellow-500/10 border border-yellow-500/50 rounded-lg p-2 text-center">
+                            <COOLASFUCKBrain size={20} animate={isPlaying} />
+                            <p className="text-yellow-400 text-xs font-black mt-1">40Hz</p>
+                            <p className="text-gray-600 text-[8px]">FOCUS</p>
                         </div>
                     </div>
 
-                    <div className="flex items-center justify-between text-[10px] text-gray-500 mb-2">
-                        <span>{Math.floor(playbackTime / 60)}:{String(Math.floor(playbackTime % 60)).padStart(2, '0')}</span>
-                        <span className="text-amber-500 font-bold">WEB AUDIO</span>
-                        <span>{Math.floor(totalDuration / 60)}:{String(Math.floor(totalDuration % 60)).padStart(2, '0')}</span>
-                    </div>
-                    <div className="w-full h-1.5 bg-zinc-800 rounded mb-4 relative overflow-hidden">
-                        <div className="absolute left-0 top-0 bottom-0 bg-amber-600" style={{ width: `${(playbackTime / totalDuration) * 100}%` }} />
+                    {/* PROGRESS */}
+                    <div className="space-y-2">
+                        <div className="flex items-center justify-between text-xs text-gray-500 font-mono">
+                            <span>{Math.floor(playbackTime / 60)}:{String(Math.floor(playbackTime % 60)).padStart(2, '0')}</span>
+                            <span className="text-amber-400 font-bold">ZERO-LOSS</span>
+                            <span>{Math.floor(totalDuration / 60)}:{String(Math.floor(totalDuration % 60)).padStart(2, '0')}</span>
+                        </div>
+                        <div className="w-full h-2 bg-black/60 rounded-full relative overflow-hidden">
+                            <div 
+                                className="absolute left-0 top-0 bottom-0 bg-gradient-to-r from-amber-600 to-amber-400 rounded-full transition-all"
+                                style={{ width: `${(playbackTime / totalDuration) * 100}%` }}
+                            />
+                        </div>
                     </div>
 
-                    <div className="flex items-center justify-center gap-4 mb-4">
-                        <button onClick={rewindHouse} className="p-3 rounded-full bg-zinc-800 border border-amber-600/50 hover:bg-zinc-700 transition-colors">
+                    {/* CONTROLS */}
+                    <div className="flex items-center justify-center gap-4">
+                        <button 
+                            onClick={rewindHouse}
+                            className="p-3 bg-black/60 border-2 border-amber-500/50 rounded-full hover:bg-amber-600/20 transition-all"
+                        >
                             <SkipBack className="w-5 h-5 text-amber-400" />
                         </button>
-                        <button onClick={isPlaying ? stopHouse : startHouse} className={`px-20 py-8 rounded-full ${isPlaying ? 'bg-amber-600 hover:bg-amber-700' : 'bg-amber-600 hover:bg-amber-700'} transition-all shadow-lg`}>
-                            {isPlaying ? <Pause className="w-10 h-10 text-white" /> : <Play className="w-10 h-10 text-white ml-1" />}
+
+                        <button 
+                            onClick={isPlaying ? stopHouse : startHouse}
+                            className="px-16 py-6 bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-500 hover:to-amber-600 rounded-full transition-all shadow-lg shadow-amber-600/50"
+                        >
+                            {isPlaying ? (
+                                <Pause className="w-8 h-8 text-white" />
+                            ) : (
+                                <Play className="w-8 h-8 text-white ml-1" />
+                            )}
                         </button>
-                        <button onClick={() => setVolume(v => Math.max(0, v - 0.1))} className="p-3 rounded-full bg-zinc-800 border border-amber-600/50 hover:bg-zinc-700 transition-colors">
-                            <Volume2 className="w-5 h-5 text-amber-400" />
+
+                        <button 
+                            onClick={shareP2P}
+                            className="p-3 bg-black/60 border-2 border-amber-500/50 rounded-full hover:bg-amber-600/20 transition-all"
+                        >
+                            <Share2 className="w-5 h-5 text-amber-400" />
                         </button>
                     </div>
 
-                    <div className="flex gap-2">
-                        <button onClick={shareP2P} className="flex-1 py-3 bg-amber-600 hover:bg-amber-700 text-white text-sm font-bold flex items-center justify-center gap-2 rounded transition-colors">
-                            <Share2 className="w-4 h-4" />SHARE
-                        </button>
-                    </div>
-                    </div>
-                    </div>
-
-                    {/* STYLES */}
-                    <div className="grid md:grid-cols-3 gap-2 mb-4">
-                    {Object.entries(styles).map(([key, style]) => {
-                        const Icon = style.icon;
-                        const isActive = currentStyle === key;
-                        return (
-                            <button key={key} onClick={() => setCurrentStyle(key)} className={`p-3 rounded border text-left ${isActive ? 'bg-amber-600/20 border-amber-600' : 'bg-zinc-900 border-zinc-700'}`}>
-                                <div className="flex items-center gap-2 mb-1">
-                                    <Icon className={`w-4 h-4 ${isActive ? 'text-amber-400' : 'text-gray-500'}`} />
-                                    <p className={`font-bold text-sm ${isActive ? 'text-white' : 'text-gray-500'}`}>{style.name}</p>
-                                </div>
-                                <p className="text-[10px] text-gray-600">{style.vibe}</p>
-                            </button>
-                        );
-                    })}
-                </div>
-
-                {/* CONTROLS */}
-                <div className="max-w-md mx-auto mb-4">
-                    <div className="bg-zinc-950 border border-amber-600/30 rounded-lg p-3">
-                        <h3 className="text-xs font-black text-amber-500 mb-2 text-center">VOLUME</h3>
-                        <div className="flex items-center justify-between mb-1">
-                            <span className="text-[10px] text-gray-500">0%</span>
-                            <span className="text-xs font-bold text-amber-400">{Math.round(volume * 100)}%</span>
-                            <span className="text-[10px] text-gray-500">100%</span>
+                    {/* VOLUME */}
+                    <div className="space-y-2">
+                        <div className="flex items-center justify-between text-xs">
+                            <span className="text-gray-500 font-mono">VOLUME</span>
+                            <span className="text-amber-400 font-bold font-mono">{Math.round(volume * 100)}%</span>
                         </div>
-                        <input type="range" min="0" max="1" step="0.01" value={volume} onChange={(e) => setVolume(parseFloat(e.target.value))} className="w-full h-1.5 bg-zinc-800 rounded appearance-none" />
+                        <input 
+                            type="range" 
+                            min="0" 
+                            max="1" 
+                            step="0.01" 
+                            value={volume} 
+                            onChange={(e) => setVolume(parseFloat(e.target.value))}
+                            className="w-full h-2 bg-black/60 rounded-full appearance-none cursor-pointer"
+                            style={{
+                                background: `linear-gradient(to right, rgb(217, 119, 6) 0%, rgb(217, 119, 6) ${volume * 100}%, rgba(0,0,0,0.6) ${volume * 100}%, rgba(0,0,0,0.6) 100%)`
+                            }}
+                        />
                     </div>
-                </div>
 
-                {showMixer && (
-                    <div className="mt-4 bg-zinc-950 border border-cyan-500 rounded-lg p-3">
-                        <h3 className="text-xs font-black text-cyan-400 mb-2">MIXER (VISUAL ONLY - NOT WIRED YET)</h3>
-                        <div className="grid grid-cols-5 md:grid-cols-10 gap-2">
-                            {/* KICK */}
-                            {/* <MixerChannel
-                                label="KICK"
-                                color="cyan"
-                                icon="●"
-                                value={mixerLevels.kick}
-                                onChange={(val) => setMixerLevels({...mixerLevels, kick: val})}
-                                description="4-on-floor heartbeat"
-                                isActive={isPlaying}
-                            />
-
-                            {/* BASS */}
-                            <MixerChannel
-                                label="BASS"
-                                color="pink"
-                                icon="~"
-                                value={mixerLevels.bass}
-                                onChange={(val) => setMixerLevels({...mixerLevels, bass: val})}
-                                description="Rolling groove + SUB"
-                                isActive={isPlaying}
-                                emphasis={true}
-                            />
-
-                            {/* HI-HATS */}
-                            <MixerChannel
-                                label="HATS"
-                                color="yellow"
-                                icon="^"
-                                value={mixerLevels.hats}
-                                onChange={(val) => setMixerLevels({...mixerLevels, hats: val})}
-                                description="Crisp high energy"
-                                isActive={isPlaying}
-                            />
-
-                            {/* CLAPS */}
-                            <MixerChannel
-                                label="CLAPS"
-                                color="orange"
-                                icon="◆"
-                                value={mixerLevels.claps}
-                                onChange={(val) => setMixerLevels({...mixerLevels, claps: val})}
-                                description="2 + 4 snap"
-                                isActive={isPlaying}
-                            />
-
-                            {/* BELLS */}
-                            <MixerChannel
-                                label="BELLS"
-                                color="purple"
-                                icon="✦"
-                                value={mixerLevels.bells}
-                                onChange={(val) => setMixerLevels({...mixerLevels, bells: val})}
-                                description="Lil Louis shimmer"
-                                isActive={isPlaying}
-                            />
-
-                            {/* PADS */}
-                            <MixerChannel
-                                label="PADS"
-                                color="teal"
-                                icon="≋"
-                                value={mixerLevels.pads}
-                                onChange={(val) => setMixerLevels({...mixerLevels, pads: val})}
-                                description="Warm atmosphere"
-                                isActive={isPlaying}
-                            />
-
-                            {/* STRINGS */}
-                            <MixerChannel
-                                label="STRINGS"
-                                color="amber"
-                                icon="∿"
-                                value={mixerLevels.strings}
-                                onChange={(val) => setMixerLevels({...mixerLevels, strings: val})}
-                                description="Classic house soul"
-                                isActive={isPlaying}
-                            />
-
-                            {/* SHAKERS */}
-                            <MixerChannel
-                                label="SHAKERS"
-                                color="green"
-                                icon="※"
-                                value={mixerLevels.shakers}
-                                onChange={(val) => setMixerLevels({...mixerLevels, shakers: val})}
-                                description="Groove texture"
-                                isActive={isPlaying}
-                            />
-
-                            {/* RIDE */}
-                            <MixerChannel
-                                label="RIDE"
-                                color="blue"
-                                icon="○"
-                                value={mixerLevels.ride}
-                                onChange={(val) => setMixerLevels({...mixerLevels, ride: val})}
-                                description="Cymbal sustain"
-                                isActive={isPlaying}
-                            />
-
-                            {/* HEALING */}
-                            <MixerChannel
-                                label="HEALING"
-                                color="pink"
-                                icon="♾"
-                                value={mixerLevels.healing}
-                                onChange={(val) => setMixerLevels({...mixerLevels, healing: val})}
-                                description="432/528Hz layer"
-                                isActive={isPlaying}
-                                /> */}
-                                </div>
-                                <p className="text-xs text-gray-500 mt-2">Mixer coming soon - audio engine works, just need to wire up the controls ⚡</p>
-                        <div className="mt-2 grid grid-cols-3 gap-1.5">
-                            <button onClick={() => setMixerLevels({ kick: 1.0, bass: 0.8, hats: 0.15, claps: 0.3, bells: 0.2, pads: 0.1, strings: 0.25, shakers: 0.1, ride: 0.12, healing: 0.1 })} className="py-1.5 bg-cyan-600 text-white text-[10px] font-bold rounded">FULL</button>
-                            <button onClick={() => setMixerLevels({ kick: 1.0, bass: 0.5, hats: 0.05, claps: 0.15, bells: 0.02, pads: 0.02, strings: 0.08, shakers: 0.03, ride: 0.04, healing: 0.15 })} className="py-1.5 bg-pink-600 text-white text-[10px] font-bold rounded">MINIMAL</button>
-                            <button onClick={() => setMixerLevels({ kick: 0.3, bass: 0.1, hats: 0.05, claps: 0.08, bells: 0.02, pads: 0.15, strings: 0.25, shakers: 0.05, ride: 0.08, healing: 0.3 })} className="py-1.5 bg-green-600 text-white text-[10px] font-bold rounded">AMBIENT</button>
+                    {/* STYLE SELECTOR */}
+                    <div className="space-y-2">
+                        <p className="text-xs font-bold text-gray-500 font-mono">STYLE</p>
+                        <div className="grid grid-cols-2 gap-2">
+                            {Object.entries(styles).map(([key, style]) => {
+                                const Icon = style.icon;
+                                const isActive = currentStyle === key;
+                                return (
+                                    <button
+                                        key={key}
+                                        onClick={() => setCurrentStyle(key)}
+                                        className={`p-3 rounded-lg border-2 text-left transition-all ${
+                                            isActive 
+                                                ? 'bg-amber-600/20 border-amber-500' 
+                                                : 'bg-black/40 border-gray-700 hover:border-gray-600'
+                                        }`}
+                                    >
+                                        <div className="flex items-center gap-2 mb-1">
+                                            <Icon className={`w-4 h-4 ${isActive ? 'text-amber-400' : 'text-gray-500'}`} />
+                                            <p className={`font-bold text-sm ${isActive ? 'text-white' : 'text-gray-500'}`}>
+                                                {style.name}
+                                            </p>
+                                        </div>
+                                        <p className="text-[9px] text-gray-600 line-clamp-1">{style.vibe}</p>
+                                    </button>
+                                );
+                            })}
                         </div>
                     </div>
-                )}
+
+                </div>
 
             </div>
         </div>
