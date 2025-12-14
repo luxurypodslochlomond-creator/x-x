@@ -51,10 +51,12 @@ export default function ScottWhiteLabelPricing() {
                 <div className="text-center mb-8">
                     <Kingdom51Crown8Bit size={80} animate={true} className="mx-auto mb-6" />
                     <h1 className="text-5xl font-black text-amber-400 mb-3 font-mono">KINGDOM51</h1>
-                    <p className="text-gray-400 text-sm font-mono mb-3">Your AI co-manager • Works offline • Zero extraction</p>
-                    <div className="inline-block bg-gradient-to-r from-pink-500/20 to-green-500/20 border-2 border-pink-500 px-4 py-2 rounded-lg mb-3">
-                        <p className="text-pink-400 font-black text-sm font-mono">🏹 LABELS PAY → INDIES GO FREE → PLANET HEALS</p>
-                        <p className="text-gray-400 text-xs font-mono">Your subscription funds cleanup crews + free tools for struggling artists</p>
+                    <p className="text-gray-400 text-lg font-mono mb-2">AI co-manager • Works offline • Zero forms</p>
+                    <p className="text-gray-500 text-sm font-mono mb-6">Scott uses this daily with 12 artists. Real tool. Real proof.</p>
+                    
+                    <div className="inline-block bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-2 border-green-500 px-6 py-3 rounded-xl">
+                        <p className="text-white font-black text-base font-mono mb-1">SAVES 20+ HOURS/WEEK</p>
+                        <p className="text-gray-400 text-xs font-mono">Calendar • Tasks • Invoices • Publishing • Contracts</p>
                     </div>
                 </div>
 
@@ -297,55 +299,81 @@ export default function ScottWhiteLabelPricing() {
 
                 </div>
 
-                {/* WHERE THE MONEY GOES */}
-                <div className="bg-gradient-to-r from-pink-500/20 to-green-500/20 border-4 border-pink-500 rounded-xl p-6 mb-8">
-                    <h2 className="text-2xl font-black text-center text-pink-400 mb-6 font-mono">🏹 WHERE YOUR MONEY GOES</h2>
+                {/* HONEST MONEY FLOW */}
+                <div className="bg-black border-2 border-amber-500 rounded-xl p-6 mb-8">
+                    <h2 className="text-xl font-black text-center text-amber-400 mb-4 font-mono">WHERE YOUR MONEY GOES (HONEST)</h2>
 
-                    <div className="grid md:grid-cols-3 gap-4 mb-6">
-                        <div className="bg-black border-2 border-amber-500 rounded-lg p-4 text-center">
-                            <Crown className="w-8 h-8 text-amber-400 mx-auto mb-2" />
-                            <p className="text-amber-400 font-black text-lg font-mono mb-1">70%</p>
-                            <p className="text-white text-sm font-mono">Build Kingdom51</p>
-                            <p className="text-gray-500 text-xs font-mono mt-1">Scott + team, servers, forever sustainable</p>
+                    <div className="space-y-3 mb-4">
+                        <div className="flex items-center gap-3">
+                            <div className="w-16 h-16 bg-amber-500 rounded flex items-center justify-center flex-shrink-0">
+                                <p className="text-black font-black text-lg">70%</p>
+                            </div>
+                            <div className="flex-1">
+                                <p className="text-white font-bold text-sm font-mono">Build + maintain platform</p>
+                                <p className="text-gray-500 text-xs font-mono">Scott lives, team grows, servers run - sustainable business</p>
+                            </div>
                         </div>
 
-                        <div className="bg-black border-2 border-cyan-500 rounded-lg p-4 text-center">
-                            <Music className="w-8 h-8 text-cyan-400 mx-auto mb-2" />
-                            <p className="text-cyan-400 font-black text-lg font-mono mb-1">20%</p>
-                            <p className="text-white text-sm font-mono">Free indie artists</p>
-                            <p className="text-gray-500 text-xs font-mono mt-1">Struggling artists pay ZERO forever</p>
+                        <div className="flex items-center gap-3">
+                            <div className="w-16 h-16 bg-cyan-500 rounded flex items-center justify-center flex-shrink-0">
+                                <p className="text-black font-black text-lg">20%</p>
+                            </div>
+                            <div className="flex-1">
+                                <p className="text-white font-bold text-sm font-mono">Free tools for struggling artists</p>
+                                <p className="text-gray-500 text-xs font-mono">Indies with no money get the same tool - forever free</p>
+                            </div>
                         </div>
 
-                        <div className="bg-black border-2 border-green-500 rounded-lg p-4 text-center">
-                            <Zap className="w-8 h-8 text-green-400 mx-auto mb-2" />
-                            <p className="text-green-400 font-black text-lg font-mono mb-1">10%</p>
-                            <p className="text-white text-sm font-mono">UF51 cleanup crews</p>
-                            <p className="text-gray-500 text-xs font-mono mt-1">Pay people to clean planet instead of dead-end work</p>
+                        <div className="flex items-center gap-3">
+                            <div className="w-16 h-16 bg-green-500 rounded flex items-center justify-center flex-shrink-0">
+                                <p className="text-black font-black text-lg">10%</p>
+                            </div>
+                            <div className="flex-1">
+                                <p className="text-white font-bold text-sm font-mono">Cleanup crews (if you want)</p>
+                                <p className="text-gray-500 text-xs font-mono">Optional: Fund people to clean planet vs call center grind</p>
+                            </div>
                         </div>
                     </div>
 
-                    <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-2 border-green-500 rounded-lg p-4 mb-4">
-                        <p className="text-green-400 font-black text-sm font-mono mb-2 text-center">💚 LABELS FUND CLEANUP CREWS</p>
-                        <p className="text-white text-xs font-mono text-center mb-2">
-                            Your subscription pays people to clean rivers + parks instead of grinding in call centers
-                        </p>
-                        <p className="text-cyan-400 text-xs font-mono text-center">
-                            Real jobs • Real healing • Zero extraction • Everyone wins ♾️❤️♾️
-                        </p>
-                    </div>
-
-                    <div className="bg-black border-2 border-pink-500 rounded-lg p-4 text-center">
-                        <p className="text-white font-black text-sm font-mono mb-1">ETHICAL + PROFITABLE = FOREVER</p>
-                        <p className="text-gray-400 text-xs font-mono">Labels win. Indies win. Planet heals. Extraction ENDS.</p>
+                    <div className="bg-gradient-to-r from-amber-500/10 to-green-500/10 border border-amber-500/30 rounded p-3 text-center">
+                        <p className="text-amber-400 text-xs font-mono font-bold">Not charity. Fair pricing. Sustainable model. Everyone wins.</p>
                     </div>
                 </div>
 
-                {/* VALUE PROOF - HIRE MORE STAFF */}
-                <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-2 border-green-500 rounded-xl p-6 text-center">
-                    <Users className="w-8 h-8 text-green-400 mx-auto mb-3" />
-                    <p className="text-white font-black text-xl mb-2 font-mono">Free up 20+ hours/week per manager</p>
-                    <p className="text-gray-400 text-sm font-mono">Your team handles strategy • AI handles admin</p>
-                    <p className="text-green-400 text-xs font-mono mt-2">Hire MORE staff • Scale faster • Indies get freed • Planet heals</p>
+                {/* REAL PROOF - SCOTT USES IT */}
+                <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-4 border-green-500 rounded-xl p-6 mb-8" style={{ boxShadow: '0 0 40px rgba(34, 197, 94, 0.3)' }}>
+                    <div className="flex items-center gap-3 mb-4">
+                        <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse" />
+                        <p className="text-green-400 font-black text-xl font-mono">SCOTT USES THIS DAILY</p>
+                    </div>
+                    
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
+                        <div className="bg-black border-2 border-green-500/50 p-3 rounded-lg text-center">
+                            <p className="text-3xl font-black text-green-400 mb-1">12</p>
+                            <p className="text-xs text-gray-400 font-mono">Artists</p>
+                        </div>
+                        <div className="bg-black border-2 border-cyan-500/50 p-3 rounded-lg text-center">
+                            <p className="text-3xl font-black text-cyan-400 mb-1">100%</p>
+                            <p className="text-xs text-gray-400 font-mono">Offline</p>
+                        </div>
+                        <div className="bg-black border-2 border-purple-500/50 p-3 rounded-lg text-center">
+                            <p className="text-3xl font-black text-purple-400 mb-1">0</p>
+                            <p className="text-xs text-gray-400 font-mono">Forms</p>
+                        </div>
+                        <div className="bg-black border-2 border-pink-500/50 p-3 rounded-lg text-center">
+                            <p className="text-3xl font-black text-pink-400 mb-1">20+</p>
+                            <p className="text-xs text-gray-400 font-mono">Hours saved</p>
+                        </div>
+                    </div>
+
+                    <div className="bg-black border-2 border-green-500/30 rounded-lg p-4">
+                        <p className="text-white text-sm font-mono mb-2">
+                            Tour logistics • Publishing splits • Contract drafts • Invoice tracking • Guest lists • Media uploads
+                        </p>
+                        <p className="text-green-400 text-xs font-mono font-bold">
+                            Not theory. Real usage. Works in van with no signal. ✓
+                        </p>
+                    </div>
                 </div>
 
             </div>
