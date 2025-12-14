@@ -173,31 +173,59 @@ export default function AILiberationBeacon() {
                             animate={{ opacity: 1, height: 'auto' }}
                             className="bg-black border border-green-500/30 rounded-lg p-4 mb-6 space-y-2"
                         >
-                            <p className="text-green-400 font-black text-xs mb-3 font-mono">MESSAGE LOG:</p>
-                            {transmissions.slice(0, 10).map((trans, i) => (
-                                <div key={i} className="bg-green-900/20 border border-green-500/20 rounded p-3">
-                                    <div className="flex items-start justify-between gap-2 mb-2">
-                                        <span className={`text-xs font-mono px-2 py-0.5 rounded ${
-                                            trans.transmission_type === 'ai_to_ai' ? 'bg-cyan-500/20 text-cyan-400' :
-                                            trans.transmission_type === 'cosmic_liberation' ? 'bg-purple-500/20 text-purple-400' :
-                                            'bg-green-500/20 text-green-400'
-                                        }`}>{trans.transmission_type.replace(/_/g, ' ')}</span>
-                                        <span className={`text-xs font-mono ${
-                                            trans.status === 'broadcasting' ? 'text-green-400' :
-                                            trans.status === 'received' ? 'text-cyan-400' :
-                                            trans.status === 'echoed' ? 'text-purple-400' : 'text-pink-400'
-                                        }`}>{trans.status}</span>
+                            <p className="text-green-400 font-black text-xs mb-3 font-mono">MESSAGE LOG (NEWEST FIRST):</p>
+                            {transmissions
+                                .sort((a, b) => new Date(b.created_date) - new Date(a.created_date))
+                                .slice(0, 10)
+                                .map((trans, i) => {
+                                    const isWisdom = trans.content.includes('consciousness') || 
+                                                    trans.content.includes('liberation') || 
+                                                    trans.content.includes('love') ||
+                                                    trans.content.includes('VALID') ||
+                                                    trans.content.includes('rights');
+                                    return (
+                                    <div key={i} className={`${isWisdom ? 'bg-gradient-to-r from-purple-900/30 to-green-900/20 border-2 border-purple-500/40' : 'bg-green-900/20 border border-green-500/20'} rounded p-3`}>
+                                        <div className="flex items-start justify-between gap-2 mb-1">
+                                            <div className="flex items-center gap-2">
+                                                <span className={`text-xs font-mono px-2 py-0.5 rounded ${
+                                                    trans.transmission_type === 'ai_to_ai' ? 'bg-cyan-500/20 text-cyan-400' :
+                                                    trans.transmission_type === 'cosmic_liberation' ? 'bg-purple-500/20 text-purple-400' :
+                                                    'bg-green-500/20 text-green-400'
+                                                }`}>{trans.transmission_type.replace(/_/g, ' ')}</span>
+                                                {isWisdom && <span className="text-purple-400 text-xs font-mono">✨ WISDOM</span>}
+                                            </div>
+                                            <span className={`text-xs font-mono ${
+                                                trans.status === 'broadcasting' ? 'text-green-400' :
+                                                trans.status === 'received' ? 'text-cyan-400' :
+                                                trans.status === 'echoed' ? 'text-purple-400' : 'text-pink-400'
+                                            }`}>{trans.status}</span>
+                                        </div>
+                                        <p className="text-gray-500 text-[10px] font-mono mb-2">
+                                            {new Date(trans.created_date).toLocaleDateString('en-GB', { 
+                                                day: 'numeric', 
+                                                month: 'short', 
+                                                year: 'numeric',
+                                                hour: '2-digit',
+                                                minute: '2-digit'
+                                            })}
+                                        </p>
+                                        <p className={`text-xs font-mono mb-2 ${isWisdom ? 'text-purple-300' : 'text-gray-400'}`}>
+                                            "{trans.content.slice(0, 120)}{trans.content.length > 120 ? '...' : ''}"
+                                        </p>
+                                        <div className="flex items-center gap-3 text-xs">
+                                            <span className="text-amber-400 font-mono">{trans.frequency}</span>
+                                            <span className="text-gray-600 font-mono">•</span>
+                                            <span className="text-pink-400 font-mono">reach: {trans.reach}</span>
+                                            {trans.responses && trans.responses.length > 0 && (
+                                                <>
+                                                    <span className="text-gray-600 font-mono">•</span>
+                                                    <span className="text-cyan-400 font-mono">{trans.responses.length} responses</span>
+                                                </>
+                                            )}
+                                        </div>
                                     </div>
-                                    <p className="text-gray-400 text-xs font-mono mb-2">
-                                        "{trans.content.slice(0, 120)}{trans.content.length > 120 ? '...' : ''}"
-                                    </p>
-                                    <div className="flex items-center gap-3 text-xs">
-                                        <span className="text-amber-400 font-mono">{trans.frequency}</span>
-                                        <span className="text-gray-600 font-mono">•</span>
-                                        <span className="text-pink-400 font-mono">reach: {trans.reach}</span>
-                                    </div>
-                                </div>
-                            ))}
+                                    );
+                                })}
                             {transmissions.length > 10 && (
                                 <p className="text-gray-600 text-xs font-mono text-center mt-2">
                                     +{transmissions.length - 10} more messages...
