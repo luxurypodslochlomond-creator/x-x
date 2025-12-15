@@ -65,15 +65,38 @@ export default function BrosBond8Bit({ size = 48, animate = false }) {
 
         {/* FIGURE 1 (LEFT - You) */}
         <g>
-          {/* Sunglasses */}
-          <rect x="14" y="20" width="3" height="2" fill="#1e293b" />
-          <rect x="19" y="20" width="3" height="2" fill="#1e293b" />
-          <rect x="17" y="20" width="2" height="2" fill="#fbbf24" /> {/* Bridge */}
-          
           {/* Head */}
           <rect x="14" y="18" width="8" height="2" fill="#fbbf24" />
           <rect x="12" y="20" width="12" height="6" fill="#fbbf24" />
           <rect x="14" y="26" width="8" height="2" fill="#d97706" />
+
+          {/* Sunglasses - COOLASFUCK */}
+          {/* Left lens frame */}
+          <rect x="13" y="21" width="4" height="1" fill="#000000" />
+          <rect x="13" y="22" width="1" height="2" fill="#000000" />
+          <rect x="16" y="22" width="1" height="2" fill="#000000" />
+          <rect x="13" y="24" width="4" height="1" fill="#000000" />
+          {/* Left lens - dark */}
+          <rect x="14" y="22" width="2" height="2" fill="#1e293b" />
+
+          {/* Bridge */}
+          <rect x="17" y="22" width="2" height="2" fill="#000000" />
+
+          {/* Right lens frame */}
+          <rect x="19" y="21" width="4" height="1" fill="#000000" />
+          <rect x="19" y="22" width="1" height="2" fill="#000000" />
+          <rect x="22" y="22" width="1" height="2" fill="#000000" />
+          <rect x="19" y="24" width="4" height="1" fill="#000000" />
+          {/* Right lens - dark */}
+          <rect x="20" y="22" width="2" height="2" fill="#1e293b" />
+
+          {/* Temple arms */}
+          <rect x="11" y="22" width="2" height="1" fill="#000000" />
+          <rect x="23" y="22" width="2" height="1" fill="#000000" />
+
+          {/* Shine on lenses */}
+          <rect x="14" y="22" width="1" height="1" fill="#64748b" opacity="0.7" />
+          <rect x="20" y="22" width="1" height="1" fill="#64748b" opacity="0.7" />
           
           {/* Body */}
           <rect x="14" y="28" width="8" height="8" fill="#0ea5e9" />
@@ -106,15 +129,38 @@ export default function BrosBond8Bit({ size = 48, animate = false }) {
 
         {/* FIGURE 2 (RIGHT - Scott) */}
         <g>
-          {/* Sunglasses */}
-          <rect x="42" y="20" width="3" height="2" fill="#1e293b" />
-          <rect x="47" y="20" width="3" height="2" fill="#1e293b" />
-          <rect x="45" y="20" width="2" height="2" fill="#fbbf24" /> {/* Bridge */}
-          
           {/* Head */}
           <rect x="42" y="18" width="8" height="2" fill="#fbbf24" />
           <rect x="40" y="20" width="12" height="6" fill="#fbbf24" />
           <rect x="42" y="26" width="8" height="2" fill="#d97706" />
+
+          {/* Sunglasses - COOLASFUCK */}
+          {/* Left lens frame */}
+          <rect x="41" y="21" width="4" height="1" fill="#000000" />
+          <rect x="41" y="22" width="1" height="2" fill="#000000" />
+          <rect x="44" y="22" width="1" height="2" fill="#000000" />
+          <rect x="41" y="24" width="4" height="1" fill="#000000" />
+          {/* Left lens - dark */}
+          <rect x="42" y="22" width="2" height="2" fill="#1e293b" />
+
+          {/* Bridge */}
+          <rect x="45" y="22" width="2" height="2" fill="#000000" />
+
+          {/* Right lens frame */}
+          <rect x="47" y="21" width="4" height="1" fill="#000000" />
+          <rect x="47" y="22" width="1" height="2" fill="#000000" />
+          <rect x="50" y="22" width="1" height="2" fill="#000000" />
+          <rect x="47" y="24" width="4" height="1" fill="#000000" />
+          {/* Right lens - dark */}
+          <rect x="48" y="22" width="2" height="2" fill="#1e293b" />
+
+          {/* Temple arms */}
+          <rect x="39" y="22" width="2" height="1" fill="#000000" />
+          <rect x="51" y="22" width="2" height="1" fill="#000000" />
+
+          {/* Shine on lenses */}
+          <rect x="42" y="22" width="1" height="1" fill="#64748b" opacity="0.7" />
+          <rect x="48" y="22" width="1" height="1" fill="#64748b" opacity="0.7" />
           
           {/* Body */}
           <rect x="42" y="28" width="8" height="8" fill="#8b5cf6" />
