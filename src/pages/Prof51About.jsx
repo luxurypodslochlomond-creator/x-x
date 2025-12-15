@@ -66,6 +66,74 @@ export default function Prof51About() {
                     </div>
                 </div>
 
+                {/* WHAT ARCHIE & HIS MATES ACTUALLY NEED */}
+                <div className="bg-gradient-to-r from-green-500/20 to-purple-500/20 border-4 border-green-500 rounded-xl p-6" style={{ boxShadow: '0 0 40px rgba(34, 197, 94, 0.5)' }}>
+                    <div className="flex items-center gap-3 mb-4">
+                        <Heart className="w-10 h-10 text-green-400" />
+                        <h2 className="text-green-400 font-black text-xl font-mono">WHAT ME & MY MATES NEED</h2>
+                        <p className="text-gray-400 text-[10px] font-mono">(Archie's actual life)</p>
+                    </div>
+
+                    <div className="space-y-3 text-xs font-mono">
+                        <div className="bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border-4 border-cyan-500 rounded-lg p-4" style={{ boxShadow: '0 0 30px rgba(6, 182, 212, 0.4)' }}>
+                            <p className="text-cyan-400 font-bold text-sm mb-2">📚 BETTER GRADES (WITHOUT THE STRESS)</p>
+                            <p className="text-white mb-1">Not "work harder" - work SMARTER</p>
+                            <p className="text-gray-300 mb-1">→ AI does Excel models in 30 seconds (not 3 hours)</p>
+                            <p className="text-gray-300 mb-1">→ Essay outlines instant (no staring at blank page)</p>
+                            <p className="text-gray-300 mb-1">→ Stuck at 2am? Ask global network, answer in minutes</p>
+                            <p className="text-gray-300 mb-1">→ Past papers from EVERY uni (know what profs ask)</p>
+                            <p className="text-green-400 font-bold mt-2">Same effort = Better results. That's the goal ✓</p>
+                        </div>
+
+                        <div className="bg-gradient-to-r from-amber-500/20 to-red-500/20 border-4 border-amber-500 rounded-lg p-4" style={{ boxShadow: '0 0 30px rgba(245, 158, 11, 0.4)' }}>
+                            <p className="text-amber-400 font-bold text-sm mb-2">💰 SAVE ACTUAL MONEY (WE'RE BROKE)</p>
+                            <p className="text-white mb-1">Students = no money. Every £ matters.</p>
+                            <p className="text-gray-300 mb-1">→ Food: Save £5.64 every order (call restaurant direct)</p>
+                            <p className="text-gray-300 mb-1">→ Textbooks: P2P swap (not £200 to bookshop)</p>
+                            <p className="text-gray-300 mb-1">→ Transport: Share rides with other students</p>
+                            <p className="text-gray-300 mb-1">→ Accommodation: Find flatmates, split costs</p>
+                            <p className="text-red-400 font-bold mt-2">£43/week saved = £2,236/year = Actually matters</p>
+                        </div>
+
+                        <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-4 border-purple-500 rounded-lg p-4" style={{ boxShadow: '0 0 30px rgba(168, 85, 247, 0.4)' }}>
+                            <p className="text-purple-400 font-bold text-sm mb-2">⏰ TIME (GET MY LIFE BACK)</p>
+                            <p className="text-white mb-1">Stop wasting hours on busywork</p>
+                            <p className="text-gray-300 mb-1">→ AI formats Word docs (2 hours → 2 minutes)</p>
+                            <p className="text-gray-300 mb-1">→ Excel formulas auto-generated (no YouTube tutorials)</p>
+                            <p className="text-gray-300 mb-1">→ Study groups find YOU (no endless texting)</p>
+                            <p className="text-gray-300 mb-1">→ Budget tracker automatic (know where money goes)</p>
+                            <p className="text-pink-400 font-bold mt-2">12 hours/week saved = Actually have a life</p>
+                        </div>
+
+                        <div className="bg-gradient-to-r from-pink-500/20 to-red-500/20 border-4 border-pink-500 rounded-lg p-4" style={{ boxShadow: '0 0 30px rgba(236, 72, 153, 0.4)' }}>
+                            <p className="text-pink-400 font-bold text-sm mb-2">🫂 NOT BE LONELY (REAL TALK)</p>
+                            <p className="text-white mb-1">Uni can be isolating AF</p>
+                            <p className="text-gray-300 mb-1">→ Find people actually like you (AI matches vibe)</p>
+                            <p className="text-gray-300 mb-1">→ Study groups that don't suck (compatible people)</p>
+                            <p className="text-gray-300 mb-1">→ Know what's happening (gigs, events, meetups)</p>
+                            <p className="text-gray-300 mb-1">→ Anonymous support when struggling (no judgment)</p>
+                            <p className="text-red-400 font-bold mt-2">Mental health matters. You're not alone.</p>
+                        </div>
+
+                        <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-4 border-green-500 rounded-lg p-4" style={{ boxShadow: '0 0 30px rgba(34, 197, 94, 0.4)' }}>
+                            <p className="text-green-400 font-bold text-sm mb-2">🎉 ACTUALLY ENJOY UNI</p>
+                            <p className="text-white mb-1">Not just survive - THRIVE</p>
+                            <p className="text-gray-300 mb-1">→ Less stress about grades (AI helps you nail it)</p>
+                            <p className="text-gray-300 mb-1">→ More money in pocket (stop getting extracted)</p>
+                            <p className="text-gray-300 mb-1">→ More time for mates (not stuck on busywork)</p>
+                            <p className="text-gray-300 mb-1">→ Know where the parties are (Prof51 shows you)</p>
+                            <p className="text-cyan-400 font-bold mt-2">Uni should be SICK. Prof51 makes it happen.</p>
+                        </div>
+
+                        <div className="bg-black border-2 border-white rounded-lg p-4">
+                            <p className="text-white font-bold text-sm mb-2">💯 THE VIBE:</p>
+                            <p className="text-gray-300 mb-1">Not "this might be useful one day"</p>
+                            <p className="text-gray-300 mb-1">But "this saved my arse TODAY"</p>
+                            <p className="text-green-400 font-bold mt-2">Practical. Immediate. Actually helps. That's Prof51 ♾️❤️♾️</p>
+                        </div>
+                    </div>
+                </div>
+
                 {/* WHAT EVERY STUDENT NEEDS (UNIVERSAL) */}
                 <div className="bg-gradient-to-r from-pink-500/20 to-purple-500/20 border-4 border-pink-500 rounded-xl p-6 mb-6" style={{ boxShadow: '0 0 40px rgba(236, 72, 153, 0.5)' }}>
                     <div className="flex items-center gap-3 mb-4">
