@@ -522,8 +522,9 @@ export default function Prof51() {
                             <div className="space-y-3 text-sm font-mono">
                                 <div className="bg-green-900/20 border border-green-500/30 p-3 rounded">
                                     <p className="text-white font-bold mb-2">STUDENTS WORLDWIDE:</p>
-                                    <p className="text-green-400 text-2xl font-black mb-2">235,000,000</p>
-                                    <p className="text-gray-400 text-xs">University students globally (UNESCO 2024)</p>
+                                    <p className="text-green-400 text-3xl font-black mb-2">735,000,000+</p>
+                                    <p className="text-cyan-400 text-xs mb-1">235M university + 500M high school</p>
+                                    <p className="text-pink-400 text-xs font-bold">Actually 1B+ if we include age 12+ (homework stress)</p>
                                 </div>
 
                                 <div className="bg-black border border-cyan-500/30 p-3 rounded">
@@ -562,7 +563,7 @@ export default function Prof51() {
                                     <p className="text-white text-xs mb-1">✓ All students share P2P already (proven behavior)</p>
                                     <p className="text-white text-xs mb-1">✓ FREE = no adoption barrier</p>
                                     <p className="text-white text-xs mb-1">✓ Works offline = lectures, libraries, dorms</p>
-                                    <p className="text-green-400 text-xs font-bold mt-2">Same problem worldwide = one solution ♾️❤️♾️</p>
+                                    <p className="text-green-400 text-xs font-bold mt-2">735M-1B students = Same problem worldwide = one solution ♾️❤️♾️</p>
                                 </div>
 
                                 <div className="bg-gradient-to-r from-red-500/20 to-amber-500/20 border-4 border-red-500 p-4 rounded" style={{ boxShadow: '0 0 40px rgba(239, 68, 68, 0.4)' }}>
@@ -606,8 +607,9 @@ export default function Prof51() {
                                     <p className="text-white text-xs mb-1">Year 1: 10,000 students (Edinburgh + Cambridge)</p>
                                     <p className="text-white text-xs mb-1">Year 2: 100,000 students (UK + USA elite)</p>
                                     <p className="text-white text-xs mb-1">Year 3: 1,000,000 students (global spread)</p>
-                                    <p className="text-white text-xs mb-1">Year 5: 10,000,000 students (10M = 4% of 235M)</p>
-                                    <p className="text-green-400 text-xs font-bold mt-2">That's 4% market share = MASSIVE ♾️❤️♾️</p>
+                                    <p className="text-white text-xs mb-1">Year 5: 10,000,000 students (1.3% of 735M)</p>
+                                    <p className="text-white text-xs mb-1">Year 10: 100,000,000 students (13% market share)</p>
+                                    <p className="text-green-400 text-xs font-bold mt-2">100M students helped = UNSTOPPABLE ♾️❤️♾️</p>
                                 </div>
                             </div>
                         </div>
@@ -967,8 +969,8 @@ export default function Prof51() {
                             <span className="text-amber-400 font-bold text-sm font-mono">💰 WHY TRILLION $ (NOT BILLION)</span>
                         </summary>
                         <div className="p-3 pt-0 space-y-1 text-xs font-mono">
-                            <p className="text-gray-300">235M students × £50-£200/year = £11B-£47B revenue</p>
-                            <p className="text-cyan-400">→ 20x multiple = £220B-£940B valuation</p>
+                            <p className="text-gray-300">735M students × £50-£200/year = £36B-£147B revenue potential</p>
+                            <p className="text-cyan-400">→ 20x multiple = £720B-£2.9T valuation potential</p>
                             <p className="text-pink-400 font-bold mt-2">BUT building for LOVE not exit:</p>
                             <p className="text-gray-300">→ Students FREE forever (never change)</p>
                             <p className="text-gray-300">→ Companies pay fair (not exploitative)</p>
@@ -998,7 +1000,7 @@ export default function Prof51() {
                                 <p className="text-white font-bold">4️⃣ OFFLINE-FIRST</p>
                                 <p className="text-cyan-400 ml-4">Works in lecture halls, libraries, anywhere</p>
                             </div>
-                            <p className="text-pink-400 font-bold mt-3">4 innovations × 235M students = Unstoppable ♾️❤️♾️</p>
+                            <p className="text-pink-400 font-bold mt-3">4 innovations × 735M students = Unstoppable ♾️❤️♾️</p>
                         </div>
                     </details>
 
