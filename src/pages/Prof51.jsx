@@ -140,8 +140,8 @@ Return CLEAN, FORMATTED content ready to use. Be helpful, not generic.`,
                         <p className="text-gray-400 text-xs font-mono mb-3">Studies • Mindset • Accommodation • Gigs • Fashion • Social • EVERYTHING included ♾️❤️♾️</p>
                         
                         <div className="inline-block bg-gradient-to-r from-amber-500/20 to-green-500/20 border-2 border-amber-500 px-4 py-2 rounded-lg mt-2">
-                            <p className="text-amber-400 font-black text-xs font-mono mb-0.5">YOUTH VISION LEAD: 10-YEAR-OLD GENIUS</p>
-                            <p className="text-gray-400 text-[10px] font-mono">Structured through Co-Manager51 • prof51.io • UF51 Family ♾️❤️♾️</p>
+                            <p className="text-amber-400 font-black text-xs font-mono mb-0.5">FOUNDER: ARCHIE (19) • VISION: LENNOX (10)</p>
+                            <p className="text-gray-400 text-[10px] font-mono">Archie = Legal founder • Lennox = Co-founder at 16 ♾️❤️♾️</p>
                         </div>
 
                         {/* PWA INSTALL - DEVICE TO DEVICE */}
@@ -159,10 +159,10 @@ Return CLEAN, FORMATTED content ready to use. Be helpful, not generic.`,
 
                         <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-2 border-purple-500 px-4 py-3 rounded-lg mt-3">
                             <p className="text-purple-400 font-black text-xs font-mono mb-1">STRUCTURE:</p>
-                            <p className="text-white text-[10px] font-mono mb-1">✓ Co-Manager51 = Parent company (legal protection)</p>
-                            <p className="text-cyan-400 text-[10px] font-mono mb-1">✓ Youth Vision Lead = 10-year-old who spotted £717B extraction</p>
-                            <p className="text-green-400 text-[10px] font-mono mb-1">✓ At 16-18 = becomes legal founder</p>
-                            <p className="text-pink-400 text-[10px] font-mono font-bold">Kids lead. Adults protect. Zero barriers. ♾️❤️♾️</p>
+                            <p className="text-white text-[10px] font-mono mb-1">✓ ARCHIE (19) = Legal founder (signs contracts, runs company)</p>
+                            <p className="text-cyan-400 text-[10px] font-mono mb-1">✓ LENNOX (10) = Youth Vision Lead (spotted £717B extraction)</p>
+                            <p className="text-green-400 text-[10px] font-mono mb-1">✓ At 16 = Lennox becomes co-founder legally</p>
+                            <p className="text-pink-400 text-[10px] font-mono font-bold">Archie builds. Lennox sees. Both protected. Zero barriers. ♾️❤️♾️</p>
                         </div>
                     </div>
                 </div>
