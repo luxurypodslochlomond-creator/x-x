@@ -467,18 +467,42 @@ export default function LostAndFoundMesh() {
                                 </Button>
                             </div>
 
-                            {/* SHARE LIVE LOCATION */}
+                            {/* SHARE WITH FINDER */}
                             <div className="bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border-2 border-cyan-500 rounded-lg p-4 mb-4">
-                                <p className="text-cyan-400 font-bold text-sm mb-1">📍 SHARE LIVE LOCATION</p>
+                                <p className="text-cyan-400 font-bold text-sm mb-1">📍 SHARE LOCATION (with finder)</p>
                                 <p className="text-gray-300 text-xs mb-3">P2P location sharing via Bluetooth mesh</p>
                                 <Button className="w-full bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white font-bold mb-2">
                                     <MapPin className="w-4 h-4 mr-2" />
-                                    SHARE MY LOCATION NOW
+                                    SHARE MY LOCATION WITH {selectedItem.finder?.split(' ')[0]?.toUpperCase()}
                                 </Button>
                                 <div className="bg-black/60 border border-cyan-500/50 rounded p-2">
                                     <p className="text-cyan-400 text-[10px] text-center font-mono font-bold">
                                         They see you moving in real-time (mesh updates every 2 seconds)
                                     </p>
+                                </div>
+                            </div>
+
+                            {/* SAFETY: SHARE WITH YOUR MATES */}
+                            <div className="bg-gradient-to-r from-pink-500/20 to-purple-500/20 border-4 border-pink-500 rounded-lg p-4 mb-4" style={{ boxShadow: '0 0 30px rgba(236, 72, 153, 0.4)' }}>
+                                <div className="flex items-center gap-2 mb-2">
+                                    <Heart className="w-5 h-5 text-pink-400 animate-pulse" />
+                                    <p className="text-pink-400 font-bold text-sm">🛡️ LET YOUR MATES KNOW</p>
+                                </div>
+                                <p className="text-gray-300 text-xs mb-3">So your friends know where you're going + can track you</p>
+                                
+                                <Button className="w-full bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white font-bold mb-3">
+                                    <Heart className="w-4 h-4 mr-2" />
+                                    SHARE WITH TRUSTED FRIENDS
+                                </Button>
+
+                                <div className="bg-black/80 border border-pink-500/50 rounded p-3 space-y-2">
+                                    <p className="text-pink-400 font-bold text-xs mb-2">WHAT THEY'LL SEE:</p>
+                                    <div className="space-y-1 text-[10px] text-gray-300 font-mono">
+                                        <p>✓ "Meeting {selectedItem.finder} to get {selectedItem.item}"</p>
+                                        <p>✓ Where: {safeMeetupSpots[0].name}</p>
+                                        <p>✓ Your live location (updates every 2 seconds)</p>
+                                        <p>✓ "Check in when safe" reminder in 30 mins</p>
+                                    </div>
                                 </div>
                             </div>
 
@@ -503,15 +527,38 @@ export default function LostAndFoundMesh() {
                                 </div>
                             </div>
 
-                            {/* SAFETY */}
-                            <div className="bg-red-900/20 border border-red-500/50 rounded-lg p-3">
-                                <p className="text-red-400 font-bold text-xs mb-2">⚠️ STAY SAFE:</p>
-                                <ul className="space-y-1 text-[10px] text-gray-300 font-mono">
-                                    <li className="flex items-start gap-1"><span className="text-green-400">✓</span> Meet in busy public place (library/union)</li>
-                                    <li className="flex items-start gap-1"><span className="text-green-400">✓</span> Tell a friend where you're going</li>
-                                    <li className="flex items-start gap-1"><span className="text-green-400">✓</span> Check their student ID before exchange</li>
-                                    <li className="flex items-start gap-1"><span className="text-green-400">✓</span> Campus security 24/7 if needed</li>
-                                </ul>
+                            {/* SAFETY CHECKLIST */}
+                            <div className="bg-gradient-to-r from-red-500/20 to-amber-500/20 border-2 border-red-500 rounded-lg p-4">
+                                <div className="flex items-center gap-2 mb-3">
+                                    <AlertTriangle className="w-5 h-5 text-red-400" />
+                                    <p className="text-red-400 font-bold text-sm">⚠️ SAFETY FIRST ALWAYS</p>
+                                </div>
+                                <div className="space-y-2">
+                                    <div className="bg-black/60 border border-green-500/50 rounded p-2">
+                                        <p className="text-green-400 font-bold text-xs mb-1">✓ ALWAYS DO THIS:</p>
+                                        <ul className="space-y-1 text-[10px] text-gray-300 font-mono">
+                                            <li>• Share location with 2-3 trusted friends</li>
+                                            <li>• Meet in busy public spot (library/union)</li>
+                                            <li>• Daytime meetups only (avoid late night)</li>
+                                            <li>• Check their student ID before exchange</li>
+                                        </ul>
+                                    </div>
+                                    
+                                    <div className="bg-black/60 border border-red-500/50 rounded p-2">
+                                        <p className="text-red-400 font-bold text-xs mb-1">❌ NEVER DO THIS:</p>
+                                        <ul className="space-y-1 text-[10px] text-gray-300 font-mono">
+                                            <li>• Meet alone without telling anyone</li>
+                                            <li>• Go to private/empty locations</li>
+                                            <li>• Meet someone who won't verify ID</li>
+                                        </ul>
+                                    </div>
+
+                                    <div className="bg-black/60 border border-amber-500/50 rounded p-2">
+                                        <p className="text-amber-400 font-bold text-xs mb-1">🚨 IF ANYTHING FEELS WRONG:</p>
+                                        <p className="text-white text-[10px] font-mono">→ Campus Security: 24/7</p>
+                                        <p className="text-white text-[10px] font-mono">→ Don't go. Safety > getting stuff back.</p>
+                                    </div>
+                                </div>
                             </div>
                         </motion.div>
                     </motion.div>
