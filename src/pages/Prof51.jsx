@@ -148,6 +148,13 @@ Return CLEAN, FORMATTED content ready to use. Be helpful, not generic.`,
             </div>
 
             <div className="px-4 py-6 max-w-2xl mx-auto">
+                {/* WORKING TOOLS BUTTON */}
+                <Link to={createPageUrl('Prof51Tools')}>
+                    <Button className="w-full bg-gradient-to-r from-green-500 to-cyan-500 text-black font-black py-6 text-lg mb-4 border-4 border-green-400" style={{ boxShadow: '0 0 40px rgba(34, 197, 94, 0.6)' }}>
+                        🚀 OPEN PROF51 TOOLS (WORKING NOW)
+                    </Button>
+                </Link>
+
                 {/* PWA INSTALL */}
                 {showInstallButton && (
                     <button
