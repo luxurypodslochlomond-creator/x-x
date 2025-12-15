@@ -232,6 +232,8 @@ import Life51ROI from './pages/Life51ROI';
 import ScottWhiteLabelPricing from './pages/ScottWhiteLabelPricing';
 import Prof51 from './pages/Prof51';
 import Prof51Tools from './pages/Prof51Tools';
+import Prof51About from './pages/Prof51About';
+import ScottAbout from './pages/ScottAbout';
 import __Layout from './Layout.jsx';
 
 
@@ -470,6 +472,8 @@ export const PAGES = {
     "ScottWhiteLabelPricing": ScottWhiteLabelPricing,
     "Prof51": Prof51,
     "Prof51Tools": Prof51Tools,
+    "Prof51About": Prof51About,
+    "ScottAbout": ScottAbout,
 }
 
 export const pagesConfig = {

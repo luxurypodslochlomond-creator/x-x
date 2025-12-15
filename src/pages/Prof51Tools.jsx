@@ -74,7 +74,7 @@ export default function Prof51Tools() {
                             <p className="text-cyan-500 text-[10px] font-mono">Archie's co-manager</p>
                         </div>
                     </div>
-                    <Link to={createPageUrl('Prof51')} className="text-cyan-400 text-xs font-mono">ABOUT</Link>
+                    <Link to={createPageUrl('Prof51About')} className="text-cyan-400 text-xs font-mono font-bold">ABOUT</Link>
                 </div>
             </div>
 

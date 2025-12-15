@@ -199,6 +199,9 @@ Keep it SHORT, practical, straight to the point. No bullshit. Real help.`,
                         </p>
                     </div>
                     <div className="flex items-center gap-2">
+                        <Link to={createPageUrl('ScottAbout')} className="p-3 bg-gray-800/80 hover:bg-gray-700 rounded-lg transition-all border border-gray-700">
+                            <Heart className="w-5 h-5 text-gray-300" />
+                        </Link>
                         <Link to={createPageUrl('ScottWhiteLabelPricing')} className="p-3 bg-gradient-to-br from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 rounded-lg transition-all shadow-md" style={{ boxShadow: '0 2px 12px rgba(245, 158, 11, 0.3)' }}>
                             <DollarSign className="w-5 h-5 text-black" />
                         </Link>
