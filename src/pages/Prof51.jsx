@@ -252,13 +252,13 @@ Return CLEAN, FORMATTED content ready to use. Be helpful, not generic.`,
 
                 <div className="space-y-3 text-sm font-mono">
                     <div className="bg-black border-2 border-red-500 p-4 rounded">
-                        <p className="text-red-400 font-bold mb-2">JUST EAT ORDER:</p>
+                        <p className="text-red-400 font-bold mb-2">TYPICAL JUST EAT ORDER:</p>
                         <p className="text-white text-xs mb-1">Food cost: £19.95</p>
                         <p className="text-white text-xs mb-1">Delivery: £4.50</p>
                         <p className="text-white text-xs mb-1">Bag fee: £0.15</p>
                         <p className="text-white text-xs mb-1">Service fee: £0.99</p>
                         <p className="text-red-400 text-base font-bold mt-2">TOTAL: £25.59</p>
-                        <p className="text-amber-400 text-xs mt-2">Just Eat takes: £5.64 (29% EXTRACTION)</p>
+                        <p className="text-amber-400 text-xs mt-2">Platform takes: £5.64 (29% EXTRACTION)</p>
                     </div>
 
                     <div className="bg-black border-2 border-green-500 p-4 rounded">
