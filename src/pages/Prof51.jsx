@@ -149,56 +149,112 @@ Return CLEAN, FORMATTED content ready to use. Be helpful, not generic.`,
             </div>
 
             <div className="px-4 py-6 max-w-2xl mx-auto">
-                {/* WORKING TOOLS BUTTON */}
-                <Link to={createPageUrl('Prof51Tools')}>
-                    <Button className="w-full bg-gradient-to-r from-green-500 to-cyan-500 text-black font-black py-6 text-lg mb-4 border-4 border-green-400" style={{ boxShadow: '0 0 40px rgba(34, 197, 94, 0.6)' }}>
-                        🚀 OPEN PROF51 TOOLS (WORKING NOW)
-                    </Button>
-                </Link>
+                {/* HERO SECTION */}
+                <motion.div 
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="text-center mb-6"
+                >
+                    <h1 className="text-4xl font-black mb-2 bg-gradient-to-r from-cyan-400 via-green-400 to-blue-400 bg-clip-text text-transparent">
+                        Your AI Co-Manager
+                    </h1>
+                    <p className="text-gray-400 text-sm font-mono mb-4">Built by students, for students</p>
+                    
+                    {/* WORKING TOOLS BUTTON */}
+                    <Link to={createPageUrl('Prof51Tools')}>
+                        <motion.button
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
+                            className="w-full bg-gradient-to-r from-green-500 to-cyan-500 text-white font-black py-6 text-lg rounded-2xl border-2 border-green-400 shadow-2xl"
+                            style={{ boxShadow: '0 0 60px rgba(34, 197, 94, 0.5)' }}
+                        >
+                            <div className="flex items-center justify-center gap-3">
+                                <span className="text-2xl">🚀</span>
+                                <span>OPEN 9 WORKING TOOLS</span>
+                            </div>
+                            <p className="text-xs text-green-100 mt-1">Offline • P2P • Campus Ready</p>
+                        </motion.button>
+                    </Link>
+                </motion.div>
 
                 {/* PWA INSTALL */}
                 {showInstallButton && (
-                    <button
+                    <motion.button
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
                         onClick={handleInstallClick}
-                        className="w-full bg-gradient-to-r from-green-500 to-cyan-500 text-white font-black py-4 rounded-lg border-2 border-green-400 font-mono text-sm mb-4"
+                        className="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white font-black py-4 rounded-xl border-2 border-purple-400 font-mono text-sm mb-4 shadow-lg"
+                        style={{ boxShadow: '0 0 30px rgba(168, 85, 247, 0.4)' }}
                     >
                         📱 INSTALL APP (Works Offline)
-                    </button>
+                    </motion.button>
                 )}
 
                 {/* KEY STAT - BIG */}
-                <div className="bg-gradient-to-r from-red-500/20 to-pink-500/20 border-4 border-red-500 rounded-xl p-6 mb-6 text-center" style={{ boxShadow: '0 0 50px rgba(239, 68, 68, 0.5)' }}>
-                    <p className="text-red-400 text-5xl font-black font-mono mb-2">£717B</p>
-                    <p className="text-white text-sm font-mono mb-1">Extracted from students globally</p>
-                    <p className="text-pink-400 text-xs font-mono font-bold">Lennox (10) spotted it. Archie (19) stops it. ♾️❤️♾️</p>
-                </div>
+                <motion.div 
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.2 }}
+                    className="bg-gradient-to-br from-red-500/10 via-pink-500/10 to-purple-500/10 border-2 border-red-500/50 rounded-2xl p-8 mb-6 text-center backdrop-blur-xl"
+                    style={{ boxShadow: '0 0 60px rgba(239, 68, 68, 0.3), inset 0 0 40px rgba(236, 72, 153, 0.1)' }}
+                >
+                    <motion.p 
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        transition={{ delay: 0.4, type: "spring" }}
+                        className="text-red-400 text-6xl font-black font-mono mb-3"
+                    >
+                        £717B
+                    </motion.p>
+                    <p className="text-white text-base font-bold mb-2">Extracted from students globally</p>
+                    <div className="flex items-center justify-center gap-2 text-xs font-mono">
+                        <LennoxIcon8Bit size={20} animate={true} />
+                        <p className="text-pink-400 font-bold">Lennox (10) spotted it</p>
+                    </div>
+                    <div className="flex items-center justify-center gap-2 text-xs font-mono mt-1">
+                        <Prof51Icon8Bit size={20} animate={true} />
+                        <p className="text-cyan-400 font-bold">Archie (19) stops it ♾️❤️♾️</p>
+                    </div>
+                </motion.div>
 
                 {/* TAB NAVIGATION */}
                 <div className="grid grid-cols-4 gap-2 mb-6">
-                    <button
+                    <motion.button
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
                         onClick={() => setActiveTab('demo')}
-                        className={`py-3 px-2 rounded-lg font-mono text-xs font-black transition-all ${activeTab === 'demo' ? 'bg-cyan-500 text-black' : 'bg-black/60 text-cyan-400 border border-cyan-500/30'}`}
+                        className={`py-4 px-2 rounded-xl font-mono text-xs font-black transition-all ${activeTab === 'demo' ? 'bg-gradient-to-br from-cyan-500 to-cyan-600 text-white shadow-lg' : 'bg-black/60 text-cyan-400 border border-cyan-500/30'}`}
+                        style={activeTab === 'demo' ? { boxShadow: '0 0 20px rgba(6, 182, 212, 0.4)' } : {}}
                     >
                         TRY IT
-                    </button>
-                    <button
+                    </motion.button>
+                    <motion.button
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
                         onClick={() => setActiveTab('how')}
-                        className={`py-3 px-2 rounded-lg font-mono text-xs font-black transition-all ${activeTab === 'how' ? 'bg-green-500 text-black' : 'bg-black/60 text-green-400 border border-green-500/30'}`}
+                        className={`py-4 px-2 rounded-xl font-mono text-xs font-black transition-all ${activeTab === 'how' ? 'bg-gradient-to-br from-green-500 to-green-600 text-white shadow-lg' : 'bg-black/60 text-green-400 border border-green-500/30'}`}
+                        style={activeTab === 'how' ? { boxShadow: '0 0 20px rgba(34, 197, 94, 0.4)' } : {}}
                     >
                         HOW
-                    </button>
-                    <button
+                    </motion.button>
+                    <motion.button
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
                         onClick={() => setActiveTab('why')}
-                        className={`py-3 px-2 rounded-lg font-mono text-xs font-black transition-all ${activeTab === 'why' ? 'bg-pink-500 text-black' : 'bg-black/60 text-pink-400 border border-pink-500/30'}`}
+                        className={`py-4 px-2 rounded-xl font-mono text-xs font-black transition-all ${activeTab === 'why' ? 'bg-gradient-to-br from-pink-500 to-pink-600 text-white shadow-lg' : 'bg-black/60 text-pink-400 border border-pink-500/30'}`}
+                        style={activeTab === 'why' ? { boxShadow: '0 0 20px rgba(236, 72, 153, 0.4)' } : {}}
                     >
                         WHY
-                    </button>
-                    <button
+                    </motion.button>
+                    <motion.button
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
                         onClick={() => setActiveTab('scale')}
-                        className={`py-3 px-2 rounded-lg font-mono text-xs font-black transition-all ${activeTab === 'scale' ? 'bg-purple-500 text-black' : 'bg-black/60 text-purple-400 border border-purple-500/30'}`}
+                        className={`py-4 px-2 rounded-xl font-mono text-xs font-black transition-all ${activeTab === 'scale' ? 'bg-gradient-to-br from-purple-500 to-purple-600 text-white shadow-lg' : 'bg-black/60 text-purple-400 border border-purple-500/30'}`}
+                        style={activeTab === 'scale' ? { boxShadow: '0 0 20px rgba(168, 85, 247, 0.4)' } : {}}
                     >
                         SCALE
-                    </button>
+                    </motion.button>
                 </div>
 
                 {/* DEMO TAB */}
@@ -290,12 +346,22 @@ Return CLEAN, FORMATTED content ready to use. Be helpful, not generic.`,
                 </div>
             </div>
 
-                        <div className="bg-gradient-to-br from-green-500/20 to-cyan-500/20 border-4 border-green-500 p-4 rounded-xl" style={{ boxShadow: '0 0 50px rgba(34, 197, 94, 0.5)' }}>
-                            <div className="flex items-center gap-2 mb-3">
-                                <FileText className="w-8 h-8 text-green-400" />
+                        <motion.div 
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            className="bg-gradient-to-br from-green-500/10 to-cyan-500/10 border-2 border-green-500/50 p-6 rounded-2xl backdrop-blur-xl" 
+                            style={{ boxShadow: '0 0 40px rgba(34, 197, 94, 0.3), inset 0 0 30px rgba(6, 182, 212, 0.1)' }}
+                        >
+                            <div className="flex items-center gap-3 mb-4">
+                                <motion.div
+                                    animate={{ rotate: [0, 5, -5, 0] }}
+                                    transition={{ repeat: Infinity, duration: 2 }}
+                                >
+                                    <FileText className="w-10 h-10 text-green-400" />
+                                </motion.div>
                                 <div>
-                                    <h2 className="text-green-400 font-black text-lg font-mono">TRY IT NOW</h2>
-                                    <p className="text-gray-400 text-[10px] font-mono">Upload → AI fixes in seconds</p>
+                                    <h2 className="text-green-400 font-black text-xl font-mono">TRY IT NOW</h2>
+                                    <p className="text-gray-400 text-xs font-mono">Upload → AI fixes in seconds</p>
                                 </div>
                             </div>
 
