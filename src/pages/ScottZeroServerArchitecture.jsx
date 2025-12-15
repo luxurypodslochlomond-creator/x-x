@@ -31,7 +31,7 @@ export default function ScottZeroServerArchitecture() {
                         <div className="flex items-center justify-center gap-4 text-sm text-gray-500">
                             <p>Version 1.0</p>
                             <p>•</p>
-                            <p>December 2024</p>
+                            <p>December 2025</p>
                         </div>
                         <p className="text-sm text-gray-600 max-w-2xl mx-auto">A decentralized management architecture enabling artists, managers, and teams to coordinate without centralized infrastructure, ensuring privacy, offline capability, and zero operational costs.</p>
                     </div>
