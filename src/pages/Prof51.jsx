@@ -163,6 +163,42 @@ export default function Prof51() {
                 </div>
             </div>
 
+            {/* PHYSICS HERITAGE - MAXWELL + PLANCK */}
+            <div className="bg-gradient-to-br from-purple-500/20 to-blue-500/20 border-4 border-purple-500 p-6 mb-8 rounded-xl" style={{ boxShadow: '0 0 50px rgba(168, 85, 247, 0.4)' }}>
+                <div className="flex items-center gap-3 mb-4">
+                    <Zap className="w-12 h-12 text-purple-400" />
+                    <div>
+                        <h2 className="text-purple-400 font-black text-xl font-mono">PHYSICS HERITAGE</h2>
+                        <p className="text-gray-400 text-xs font-mono">Maxwell + Planck → Prof51</p>
+                    </div>
+                </div>
+
+                <div className="space-y-3 text-sm font-mono">
+                    <div className="bg-black border border-purple-500/30 p-3 rounded">
+                        <p className="text-white font-bold mb-2">JAMES CLERK MAXWELL (Edinburgh University):</p>
+                        <p className="text-gray-400 text-xs mb-1">✓ Unified electricity + magnetism (Maxwell's Equations)</p>
+                        <p className="text-gray-400 text-xs mb-1">✓ Proved light = electromagnetic waves</p>
+                        <p className="text-gray-400 text-xs mb-1">✓ Foundation of WiFi, radio, all wireless tech</p>
+                        <p className="text-cyan-400 text-xs font-bold mt-2">Without Maxwell → No wireless = No P2P mesh ⚡</p>
+                    </div>
+
+                    <div className="bg-black border border-blue-500/30 p-3 rounded">
+                        <p className="text-blue-400 font-bold mb-2">MAX PLANCK (Quantum Theory):</p>
+                        <p className="text-gray-400 text-xs mb-1">✓ Founded quantum mechanics (Planck's constant)</p>
+                        <p className="text-gray-400 text-xs mb-1">✓ Proved energy comes in discrete packets (quanta)</p>
+                        <p className="text-gray-400 text-xs mb-1">✓ Foundation of semiconductors, computers, AI</p>
+                        <p className="text-cyan-400 text-xs font-bold mt-2">Without Planck → No computers = No AI learning ⚛️</p>
+                    </div>
+
+                    <div className="bg-gradient-to-r from-purple-500/20 to-cyan-500/20 border-2 border-cyan-500 p-3 rounded">
+                        <p className="text-cyan-400 font-bold mb-2">PROF51 = MAXWELL + PLANCK COMBINED:</p>
+                        <p className="text-white text-xs mb-1">Maxwell's waves (P2P mesh) + Planck's quantum (AI intelligence)</p>
+                        <p className="text-green-400 text-xs mb-1">= Students share knowledge wirelessly with quantum-smart AI</p>
+                        <p className="text-pink-400 text-xs font-bold mt-2">Physics breakthrough → Education revolution ♾️❤️♾️</p>
+                    </div>
+                </div>
+            </div>
+
             {/* THE PROBLEM - STUDENTS RELATE */}
             <div className="bg-gradient-to-br from-red-500/20 to-amber-500/20 border-4 border-red-500 p-6 mb-8 rounded-xl">
                 <h2 className="text-red-400 font-black text-xl font-mono mb-4">THE PROBLEM</h2>
@@ -322,6 +358,17 @@ export default function Prof51() {
                         <p className="text-pink-400 text-xs mb-1">✓ Supermarkets (student meal bundles)</p>
                         <p className="text-purple-400 text-xs mb-1">✓ Food delivery (verified student rates)</p>
                         <p className="text-amber-400 text-xs font-bold mt-2">Eat better, spend less, study stronger ♾️❤️♾️</p>
+                    </div>
+
+                    <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-4 border-purple-500 p-4 rounded" style={{ boxShadow: '0 0 30px rgba(168, 85, 247, 0.4)' }}>
+                        <p className="text-purple-400 font-bold mb-2">AI PREDICTS (TO HELP YOU, NOT EXTRACT):</p>
+                        <p className="text-white text-xs mb-2">Prof51 learns YOUR patterns to SERVE you better</p>
+                        <p className="text-cyan-400 text-xs mb-1">📚 "You usually struggle with stats → here's a tutor before exam"</p>
+                        <p className="text-green-400 text-xs mb-1">😰 "You're stressed → take a break, heal, then study"</p>
+                        <p className="text-pink-400 text-xs mb-1">🏠 "Your flatmate search = 3 perfect matches nearby"</p>
+                        <p className="text-amber-400 text-xs mb-1">🎵 "Your mates going to this gig tomorrow - join them?"</p>
+                        <p className="text-purple-400 text-xs mb-2 mt-2">Zero extraction. Zero selling your data. Just HELPING.</p>
+                        <p className="text-green-400 text-xs font-bold">Prediction = serve you better, not manipulate ♾️❤️♾️</p>
                     </div>
 
                     <div className="bg-black border border-purple-500/30 p-3 rounded">
