@@ -404,7 +404,85 @@ export default function Prof51About() {
                                         <p className="text-gray-300 text-xs mb-1">→ Unis teach old shit? AI teaches you real skills for actual jobs</p>
                                         <p className="text-cyan-400 text-xs font-bold">FEEL: Maybe things can be different. Maybe I can help. ✓</p>
                                     </div>
-                                </div>
+                                    </div>
+
+                                    <div className="bg-gradient-to-r from-amber-500/20 to-cyan-500/20 border-4 border-amber-500 rounded-xl p-6 mt-4" style={{ boxShadow: '0 0 50px rgba(245, 158, 11, 0.5)' }}>
+                                    <p className="text-amber-400 font-black text-xl mb-3">⚖️ THE SWEET SPOT (FOR EVERYONE)</p>
+                                    <p className="text-white text-sm mb-4">Not all students are struggling. Some are thriving. Prof51 = benefits BOTH.</p>
+
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                        <div className="bg-black border-2 border-red-500 rounded-lg p-4">
+                                            <p className="text-red-400 font-bold text-xs mb-2">🆘 STRUGGLING STUDENTS:</p>
+                                            <p className="text-gray-300 text-xs mb-1">→ Lonely, broke, stressed, lost</p>
+                                            <p className="text-gray-300 text-xs mb-1">→ Need help NOW</p>
+                                            <p className="text-gray-300 text-xs mb-1">→ Can't afford tutors</p>
+                                            <p className="text-gray-300 text-xs mb-1">→ Drowning in busywork</p>
+                                            <p className="text-white text-xs mt-2 font-bold">Prof51 = LIFELINE</p>
+                                            <p className="text-green-400 text-xs">→ AI tutor FREE</p>
+                                            <p className="text-green-400 text-xs">→ Find community</p>
+                                            <p className="text-green-400 text-xs">→ Earn money helping</p>
+                                            <p className="text-green-400 text-xs">→ Automate busywork</p>
+                                        </div>
+
+                                        <div className="bg-black border-2 border-green-500 rounded-lg p-4">
+                                            <p className="text-green-400 font-bold text-xs mb-2">💪 THRIVING STUDENTS:</p>
+                                            <p className="text-gray-300 text-xs mb-1">→ Happy, connected, doing well</p>
+                                            <p className="text-gray-300 text-xs mb-1">→ Good friend group</p>
+                                            <p className="text-gray-300 text-xs mb-1">→ Getting good grades</p>
+                                            <p className="text-gray-300 text-xs mb-1">→ But... still spend HOURS on Excel/PowerPoint</p>
+                                            <p className="text-white text-xs mt-2 font-bold">Prof51 = TIME SAVER</p>
+                                            <p className="text-cyan-400 text-xs">→ Excel in 30 seconds not 3 hours</p>
+                                            <p className="text-cyan-400 text-xs">→ More time for fun/friends</p>
+                                            <p className="text-cyan-400 text-xs">→ Help others, feel good</p>
+                                            <p className="text-cyan-400 text-xs">→ Save money on food/textbooks</p>
+                                        </div>
+                                    </div>
+
+                                    <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-4 border-purple-500 rounded-lg p-4 mt-3">
+                                        <p className="text-purple-400 font-black text-sm mb-2">🎯 THE GENIUS (WHY IT WORKS FOR BOTH):</p>
+
+                                        <div className="bg-black/60 border border-cyan-500/50 rounded p-3 mb-2">
+                                            <p className="text-cyan-400 font-bold text-xs mb-1">EVERYONE HATES BUSYWORK:</p>
+                                            <p className="text-gray-300 text-xs mb-1">→ Lonely student: "I'm stressed AND have 3-hour Excel assignment"</p>
+                                            <p className="text-gray-300 text-xs mb-1">→ Happy student: "I'm great but this Excel is killing my Saturday"</p>
+                                            <p className="text-white text-xs mt-1 font-bold">= Both want AI to do the boring shit ✓</p>
+                                        </div>
+
+                                        <div className="bg-black/60 border border-green-500/50 rounded p-3 mb-2">
+                                            <p className="text-green-400 font-bold text-xs mb-1">EVERYONE WANTS TO SAVE MONEY:</p>
+                                            <p className="text-gray-300 text-xs mb-1">→ Broke student: "I need to save every £"</p>
+                                            <p className="text-gray-300 text-xs mb-1">→ Comfortable student: "Why pay £5.64 extra to Just Eat?"</p>
+                                            <p className="text-white text-xs mt-1 font-bold">= Both want direct restaurant contact ✓</p>
+                                        </div>
+
+                                        <div className="bg-black/60 border border-pink-500/50 rounded p-3 mb-2">
+                                            <p className="text-pink-400 font-bold text-xs mb-1">EVERYONE WANTS CONVENIENCE:</p>
+                                            <p className="text-gray-300 text-xs mb-1">→ Isolated student: "I need help finding community"</p>
+                                            <p className="text-gray-300 text-xs mb-1">→ Social student: "I want to know what's happening tonight"</p>
+                                            <p className="text-white text-xs mt-1 font-bold">= Both use the same directory ✓</p>
+                                        </div>
+
+                                        <div className="bg-black/60 border border-amber-500/50 rounded p-3">
+                                            <p className="text-amber-400 font-bold text-xs mb-1">EVERYONE HATES EXTRACTION:</p>
+                                            <p className="text-gray-300 text-xs mb-1">→ Struggling student: "I'm being squeezed by everyone"</p>
+                                            <p className="text-gray-300 text-xs mb-1">→ Thriving student: "I see the system is rigged"</p>
+                                            <p className="text-white text-xs mt-1 font-bold">= Both want zero-extraction platform ✓</p>
+                                        </div>
+
+                                        <p className="text-white text-xs font-bold mt-3 text-center">SWEET SPOT = SOLVES REAL PAIN FOR EVERYONE</p>
+                                        <p className="text-cyan-400 text-xs text-center">→ Struggling students: lifeline they desperately need</p>
+                                        <p className="text-green-400 text-xs text-center">→ Thriving students: time/money saver they appreciate</p>
+                                        <p className="text-pink-400 text-xs text-center font-bold mt-2">BOTH SPREAD IT. That's why it works. ♾️❤️♾️</p>
+                                    </div>
+
+                                    <div className="bg-black border-2 border-white rounded-lg p-4 mt-3">
+                                        <p className="text-white font-bold text-sm mb-2">💡 THE INSIGHT:</p>
+                                        <p className="text-gray-300 text-xs mb-2">Prof51 is NOT a "fix your life" app. It's a "make life EASIER" app.</p>
+                                        <p className="text-cyan-400 text-xs mb-1">→ Life falling apart? Prof51 catches you.</p>
+                                        <p className="text-green-400 text-xs mb-1">→ Life going great? Prof51 saves you time.</p>
+                                        <p className="text-pink-400 text-xs font-bold mt-2">Universal benefit. That's the sweet spot. ✓</p>
+                                    </div>
+                                    </div>
 
                                 <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-4 border-purple-500 rounded-lg p-4">
                                     <p className="text-purple-400 font-bold text-sm mb-2">💝 THE REAL MAGIC:</p>
