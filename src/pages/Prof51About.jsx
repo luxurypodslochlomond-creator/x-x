@@ -82,14 +82,14 @@ export default function Prof51About() {
 
                     <div className="space-y-3 text-sm font-mono">
                         <div className="bg-black border-2 border-cyan-500 rounded-lg p-4">
-                            <p className="text-cyan-400 font-bold mb-2">🎓 ARCHIE (19)</p>
+                            <p className="text-cyan-400 font-bold mb-2">🎓 STARTED BY STUDENTS</p>
                             <p className="text-white text-xs mb-1">Economics @ Edinburgh</p>
-                            <p className="text-gray-400 text-xs mb-2">Legal founder</p>
+                            <p className="text-gray-400 text-xs mb-2">Built by students, for students</p>
 
                             <div className="bg-cyan-500/10 border border-cyan-500/30 rounded p-2 mt-2">
                                 <p className="text-cyan-400 font-bold text-xs mb-1">HOW IT SPREADS:</p>
                                 <p className="text-white text-xs mb-1">"Yo check this out it's actually sick"</p>
-                                <p className="text-gray-300 text-xs mb-1">→ Uses it himself, mates see it works</p>
+                                <p className="text-gray-300 text-xs mb-1">→ Students use it, mates see it works</p>
                                 <p className="text-gray-300 text-xs mb-1">→ Share link in group chats: "Saved me 3 hours"</p>
                                 <p className="text-gray-300 text-xs mb-1">→ P2P mesh = spreads device-to-device</p>
                                 <p className="text-gray-300 text-xs mb-1">→ No "ambassador" corporate bullshit</p>
@@ -98,12 +98,9 @@ export default function Prof51About() {
                         </div>
 
                         <div className="bg-black border-2 border-pink-500 rounded-lg p-4">
-                            <div className="flex items-center gap-2 mb-2">
-                                <LennoxIcon8Bit size={24} animate={true} />
-                                <p className="text-pink-400 font-bold">⚽ LENNOX (10)</p>
-                            </div>
-                            <p className="text-white text-xs mb-1">Spotted £717B extraction from students</p>
-                            <p className="text-gray-400 text-xs">Vision lead (becomes co-founder later)</p>
+                            <p className="text-pink-400 font-bold mb-2">💡 THE VISION</p>
+                            <p className="text-white text-xs mb-1">Spotted £717B extraction from students globally</p>
+                            <p className="text-gray-400 text-xs">Built solution that can't be stopped</p>
                         </div>
                     </div>
                 </div>
@@ -112,8 +109,8 @@ export default function Prof51About() {
                 <div className="bg-gradient-to-r from-green-500/20 to-purple-500/20 border-4 border-green-500 rounded-xl p-6" style={{ boxShadow: '0 0 40px rgba(34, 197, 94, 0.5)' }}>
                     <div className="flex items-center gap-3 mb-4">
                         <Heart className="w-10 h-10 text-green-400" />
-                        <h2 className="text-green-400 font-black text-xl font-mono">WHAT ME & MY MATES NEED</h2>
-                        <p className="text-gray-400 text-[10px] font-mono">(Archie's actual life)</p>
+                        <h2 className="text-green-400 font-black text-xl font-mono">WHAT STUDENTS ACTUALLY NEED</h2>
+                        <p className="text-gray-400 text-[10px] font-mono">(Real student life)</p>
                     </div>
 
                     <div className="space-y-3 text-xs font-mono">
@@ -1186,7 +1183,7 @@ export default function Prof51About() {
                         <p className="text-cyan-400 font-black text-sm font-mono mb-1">P2P Lost & Found Network for Students</p>
                         <p className="text-white text-xs font-mono">Safe • Trusted • Student-to-Student • Free Forever</p>
                     </div>
-                    <p className="text-gray-600 text-[10px] font-mono">Archie's company • UniversalFamily51</p>
+                    <p className="text-gray-600 text-[10px] font-mono">Student-owned company • UniversalFamily51</p>
                     <p className="text-gray-700 text-[9px] font-mono mt-1">(Co-Manager51 = Music industry, separate)</p>
                     <p className="text-pink-400 text-xs font-mono mt-2">♾️❤️♾️</p>
                 </div>
