@@ -17,7 +17,7 @@ import { createPageUrl } from '@/utils';
  */
 
 export default function Prof51() {
-    const [activeTab, setActiveTab] = useState('edinburgh');
+    const [showDetails, setShowDetails] = useState(false);
 
     const [deferredPrompt, setDeferredPrompt] = React.useState(null);
     const [showInstallButton, setShowInstallButton] = React.useState(false);
@@ -402,32 +402,61 @@ export default function Prof51() {
                 </div>
             </div>
 
-            {/* TABS - EDINBURGH PILOT vs GLOBAL VISION */}
-            <div className="mb-8">
-                <div className="flex gap-2 mb-4">
-                    <button 
-                        onClick={() => setActiveTab('edinburgh')}
-                        className={`flex-1 py-3 rounded-lg font-black text-sm font-mono transition-all ${
-                            activeTab === 'edinburgh' 
-                                ? 'bg-cyan-500 text-black' 
-                                : 'bg-black border-2 border-cyan-500/30 text-cyan-400'
-                        }`}
-                    >
-                        EDINBURGH PILOT
-                    </button>
-                    <button 
-                        onClick={() => setActiveTab('global')}
-                        className={`flex-1 py-3 rounded-lg font-black text-sm font-mono transition-all ${
-                            activeTab === 'global' 
-                                ? 'bg-green-500 text-black' 
-                                : 'bg-black border-2 border-green-500/30 text-green-400'
-                        }`}
-                    >
-                        GLOBAL VISION
-                    </button>
-                </div>
+            {/* SIMPLE TOGGLE - ONE SCREEN FLOW */}
+            <div className="text-center mb-8">
+                <Button
+                    onClick={() => setShowDetails(!showDetails)}
+                    className="bg-gradient-to-r from-cyan-500 to-green-500 text-white font-black py-6 px-8 text-lg"
+                >
+                    {showDetails ? '↑ SIMPLE VIEW' : '↓ FULL DETAILS (Edinburgh → Global)'}
+                </Button>
+            </div>
 
-                {activeTab === 'edinburgh' && (
+            {showDetails && (
+                <>
+                    {/* EDINBURGH START */}
+                    <div className="bg-black border-2 border-cyan-500 p-6 rounded-xl mb-8">
+                        <GraduationCap className="w-10 h-10 text-cyan-400 mb-3" />
+                        <h3 className="text-cyan-400 font-black text-lg font-mono mb-3">START: ECONOMICS @ EDINBURGH</h3>
+
+                        <div className="space-y-3 text-sm font-mono">
+                            <div className="bg-cyan-900/20 border border-cyan-500/30 p-3 rounded">
+                                <p className="text-white font-bold mb-2">WHY ECONOMICS FIRST:</p>
+                                <p className="text-gray-300 text-xs mb-1">✓ Excel-heavy (perfect for AI)</p>
+                                <p className="text-gray-300 text-xs mb-1">✓ Data analysis (Prof51 shines)</p>
+                                <p className="text-gray-300 text-xs mb-1">✓ Archie knows the cohort (50-100 students)</p>
+                                <p className="text-gray-300 text-xs">✓ Smart students = early adopters</p>
+                            </div>
+
+                            <div className="bg-gradient-to-r from-amber-500/20 to-pink-500/20 border-2 border-amber-500 p-4 rounded">
+                                <p className="text-amber-400 font-bold mb-2">THE SPREAD:</p>
+                                <p className="text-white text-xs mb-1">Week 1: Archie + 5 friends</p>
+                                <p className="text-white text-xs mb-1">Week 4: 50 Economics students</p>
+                                <p className="text-white text-xs mb-1">Week 8: 200 students (other courses)</p>
+                                <p className="text-white text-xs mb-1">Month 6: All Edinburgh (30,000 students)</p>
+                                <p className="text-green-400 text-xs font-bold mt-2">Then: Cambridge, LSE, Oxford, MIT... ♾️❤️♾️</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* GLOBAL MARKET */}
+                    <div className="bg-black border-2 border-green-500 p-6 rounded-xl mb-8">
+                        <Globe className="w-10 h-10 text-green-400 mb-3" />
+                        <h3 className="text-green-400 font-black text-lg font-mono mb-3">GLOBAL MARKET SIZE</h3>
+
+                        <div className="space-y-3 text-sm font-mono">
+                            <div className="bg-green-900/20 border border-green-500/30 p-3 rounded">
+                                <p className="text-white font-bold mb-2">STUDENTS WORLDWIDE:</p>
+                                <p className="text-green-400 text-3xl font-black mb-2">735,000,000+</p>
+                                <p className="text-cyan-400 text-xs mb-1">235M university + 500M high school</p>
+                                <p className="text-pink-400 text-xs font-bold">Actually 1B+ if we include age 12+ (homework stress)</p>
+                            </div>
+                        </div>
+                    </div>
+                </>
+            )}
+
+            {!showDetails && (
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -552,280 +581,8 @@ export default function Prof51() {
                                 </div>
                             </div>
                         </div>
-                    </motion.div>
-                )}
-
-                {activeTab === 'global' && (
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="space-y-4"
-                    >
-                        {/* GLOBAL MARKET */}
-                        <div className="bg-black border-2 border-green-500 p-6 rounded-xl">
-                            <Globe className="w-10 h-10 text-green-400 mb-3" />
-                            <h3 className="text-green-400 font-black text-lg font-mono mb-3">GLOBAL MARKET SIZE</h3>
-                            
-                            <div className="space-y-3 text-sm font-mono">
-                                <div className="bg-green-900/20 border border-green-500/30 p-3 rounded">
-                                    <p className="text-white font-bold mb-2">STUDENTS WORLDWIDE:</p>
-                                    <p className="text-green-400 text-3xl font-black mb-2">735,000,000+</p>
-                                    <p className="text-cyan-400 text-xs mb-1">235M university + 500M high school</p>
-                                    <p className="text-pink-400 text-xs font-bold">Actually 1B+ if we include age 12+ (homework stress)</p>
-                                </div>
-
-                                <div className="bg-black border border-cyan-500/30 p-3 rounded">
-                                    <p className="text-cyan-400 font-bold mb-2">BREAKDOWN BY REGION:</p>
-                                    <div className="space-y-2 text-xs">
-                                        <div className="flex justify-between items-center">
-                                            <span className="text-white">🇬🇧 UK students</span>
-                                            <span className="text-cyan-400 font-bold">2.9M</span>
-                                        </div>
-                                        <div className="flex justify-between items-center">
-                                            <span className="text-white">🇺🇸 USA students</span>
-                                            <span className="text-cyan-400 font-bold">20M</span>
-                                        </div>
-                                        <div className="flex justify-between items-center">
-                                            <span className="text-white">🇪🇺 EU students</span>
-                                            <span className="text-cyan-400 font-bold">19M</span>
-                                        </div>
-                                        <div className="flex justify-between items-center">
-                                            <span className="text-white">🇨🇳 China students</span>
-                                            <span className="text-cyan-400 font-bold">44M</span>
-                                        </div>
-                                        <div className="flex justify-between items-center">
-                                            <span className="text-white">🇮🇳 India students</span>
-                                            <span className="text-cyan-400 font-bold">40M</span>
-                                        </div>
-                                        <div className="flex justify-between items-center">
-                                            <span className="text-white">🌍 Rest of world</span>
-                                            <span className="text-cyan-400 font-bold">109M</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-2 border-purple-500 p-4 rounded">
-                                    <p className="text-purple-400 font-bold mb-2">WHY THEY ALL NEED IT:</p>
-                                    <p className="text-white text-xs mb-1">✓ All students hate busywork (universal pain)</p>
-                                    <p className="text-white text-xs mb-1">✓ All students share P2P already (proven behavior)</p>
-                                    <p className="text-white text-xs mb-1">✓ FREE = no adoption barrier</p>
-                                    <p className="text-white text-xs mb-1">✓ Works offline = lectures, libraries, dorms</p>
-                                    <p className="text-green-400 text-xs font-bold mt-2">735M-1B students = Same problem worldwide = one solution ♾️❤️♾️</p>
-                                </div>
-
-                                <div className="bg-gradient-to-r from-red-500/20 to-amber-500/20 border-4 border-red-500 p-4 rounded" style={{ boxShadow: '0 0 40px rgba(239, 68, 68, 0.4)' }}>
-                                    <p className="text-red-400 font-bold mb-2">🔓 WORKS IN SUPPRESSED COUNTRIES:</p>
-                                    <p className="text-white text-xs mb-2">Government can't block P2P mesh</p>
-                                    <p className="text-cyan-400 text-xs mb-1">✓ China (Great Firewall) → P2P goes around it</p>
-                                    <p className="text-green-400 text-xs mb-1">✓ Iran (Internet shutdown) → Still works offline</p>
-                                    <p className="text-purple-400 text-xs mb-1">✓ Russia (Surveillance) → Encrypted, can't monitor</p>
-                                    <p className="text-pink-400 text-xs mb-1">✓ North Korea → Device-to-device freedom</p>
-                                    <p className="text-amber-400 text-xs font-bold mt-2">Students rise up. Government can't stop physics. ♾️❤️♾️</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* ELITE UNIVERSITIES - THE SPREAD */}
-                        <div className="bg-black border-2 border-amber-500 p-6 rounded-xl">
-                            <TrendingUp className="w-10 h-10 text-amber-400 mb-3" />
-                            <h3 className="text-amber-400 font-black text-lg font-mono mb-3">HOW IT SPREADS</h3>
-                            
-                            <div className="space-y-3 text-sm font-mono">
-                                <div className="bg-black border border-amber-500/30 p-3 rounded">
-                                    <p className="text-amber-400 font-bold mb-2">PHASE 1: ELITE UK</p>
-                                    <p className="text-white text-xs mb-1">Edinburgh → Cambridge → Oxford → LSE → Imperial</p>
-                                    <p className="text-gray-400 text-xs">Smart students = early adopters = word spreads fast</p>
-                                </div>
-
-                                <div className="bg-black border border-cyan-500/30 p-3 rounded">
-                                    <p className="text-cyan-400 font-bold mb-2">PHASE 2: USA IVY LEAGUE</p>
-                                    <p className="text-white text-xs mb-1">Harvard → MIT → Stanford → Yale → Princeton</p>
-                                    <p className="text-gray-400 text-xs">"UK students using this" = USA wants it</p>
-                                </div>
-
-                                <div className="bg-black border border-green-500/30 p-3 rounded">
-                                    <p className="text-green-400 font-bold mb-2">PHASE 3: GLOBAL REACH</p>
-                                    <p className="text-white text-xs mb-1">Europe → Asia → Australia → Latin America</p>
-                                    <p className="text-gray-400 text-xs">P2P sharing = no marketing needed, just works</p>
-                                </div>
-
-                                <div className="bg-gradient-to-r from-pink-500/20 to-red-500/20 border-2 border-pink-500 p-4 rounded">
-                                    <p className="text-pink-400 font-bold mb-2">REALISTIC ADOPTION (Conservative):</p>
-                                    <p className="text-white text-xs mb-1">Year 1: 10,000 students (Edinburgh + Cambridge)</p>
-                                    <p className="text-white text-xs mb-1">Year 2: 100,000 students (UK + USA elite)</p>
-                                    <p className="text-white text-xs mb-1">Year 3: 1,000,000 students (global spread)</p>
-                                    <p className="text-white text-xs mb-1">Year 5: 10,000,000 students (1.3% of 735M)</p>
-                                    <p className="text-white text-xs mb-1">Year 10: 100,000,000 students (13% market share)</p>
-                                    <p className="text-green-400 text-xs font-bold mt-2">100M students helped = UNSTOPPABLE ♾️❤️♾️</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* PARTNERSHIPS - THE CONNECTIONS */}
-                        <div className="bg-black border-2 border-purple-500 p-6 rounded-xl">
-                            <Users className="w-10 h-10 text-purple-400 mb-3" />
-                            <h3 className="text-purple-400 font-black text-lg font-mono mb-3">PARTNERSHIP OPPORTUNITIES</h3>
-                            
-                            <div className="space-y-3 text-sm font-mono">
-                                <div className="bg-black border border-pink-500/30 p-3 rounded">
-                                    <p className="text-pink-400 font-bold mb-2">🎵 MUSIC VENUES + FESTIVALS:</p>
-                                    <p className="text-white text-xs mb-2">Students get gigs through Prof51 $P51 economy</p>
-                                    <p className="text-cyan-400 text-xs mb-1">→ Work festivals, earn $P51, pay rent</p>
-                                    <p className="text-gray-400 text-xs">Co-Manager51 venues need staff → Prof51 students need money</p>
-                                </div>
-
-                                <div className="bg-gradient-to-r from-amber-500/20 to-red-500/20 border-4 border-amber-500 p-4 rounded" style={{ boxShadow: '0 0 30px rgba(245, 158, 11, 0.3)' }}>
-                                    <p className="text-amber-400 font-bold mb-2">🍕 FOOD PARTNERSHIPS (THE BIG ONE):</p>
-                                    <p className="text-white text-xs mb-2">Students need to EAT - this solves it</p>
-                                    <p className="text-cyan-400 text-xs mb-1">→ Campus restaurants partner with Prof51</p>
-                                    <p className="text-green-400 text-xs mb-1">→ Students get 20-40% off (brands pay the difference)</p>
-                                    <p className="text-pink-400 text-xs mb-1">→ Pay with $P51 earned from tutoring/helping</p>
-                                    <p className="text-purple-400 text-xs mb-1">→ Local cafes, supermarkets, food delivery join</p>
-                                    <p className="text-amber-400 text-xs font-bold mt-2">Eat better, spend less, focus on learning ♾️❤️♾️</p>
-                                </div>
-
-                                <div className="bg-black border border-green-500/30 p-3 rounded">
-                                    <p className="text-green-400 font-bold mb-2">🏠 STUDENT HOUSING:</p>
-                                    <p className="text-white text-xs mb-2">Pay rent in $P51 (partnered landlords)</p>
-                                    <p className="text-amber-400 text-xs mb-1">→ Earn by tutoring, pay rent, no bank needed</p>
-                                    <p className="text-gray-400 text-xs">Removes banking friction, instant payments</p>
-                                </div>
-
-                                <div className="bg-black border border-amber-500/30 p-3 rounded">
-                                    <p className="text-amber-400 font-bold mb-2">📚 TEXTBOOK PUBLISHERS:</p>
-                                    <p className="text-white text-xs mb-2">Import textbooks → AI creates study guides</p>
-                                    <p className="text-purple-400 text-xs mb-1">→ Publishers license content, students pay $P51</p>
-                                    <p className="text-gray-400 text-xs">Better than piracy, fair for both sides</p>
-                                </div>
-
-                                <div className="bg-black border border-purple-500/30 p-3 rounded">
-                                    <p className="text-purple-400 font-bold mb-2">🎓 STUDENT RECRUITMENT:</p>
-                                    <p className="text-white text-xs mb-2">Companies recruit through Prof51 (pay to access talent)</p>
-                                    <p className="text-cyan-400 text-xs mb-1">→ Universities: Partner for better outcomes</p>
-                                    <p className="text-green-400 text-xs mb-1">→ Companies: Find talent before graduation (skip LinkedIn)</p>
-                                    <p className="text-amber-400 text-xs mb-1">→ Students: Job offers in final year (zero stress)</p>
-                                    <p className="text-pink-400 text-xs">Win-win-win: Everyone gets what they need ♾️❤️♾️</p>
-                                </div>
-
-                                <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-2 border-green-500 p-4 rounded mt-4">
-                                    <p className="text-green-400 font-bold mb-2">THE ECOSYSTEM:</p>
-                                    <p className="text-white text-xs mb-1">Prof51 (students) + Co-Manager51 (venues) + $P51 (currency)</p>
-                                    <p className="text-cyan-400 text-xs mb-1">→ Students study better, work gigs, earn money, spend local</p>
-                                    <p className="text-pink-400 text-xs font-bold mt-2">All connected. All helping each other. Love economy ♾️❤️♾️</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* BUSINESS MODEL - THE TRUTH */}
-                        <div className="bg-gradient-to-br from-green-500/20 to-cyan-500/20 border-4 border-green-500 p-6 rounded-xl" style={{ boxShadow: '0 0 50px rgba(34, 197, 94, 0.4)' }}>
-                            <div className="flex items-center gap-3 mb-4">
-                                <DollarSign className="w-12 h-12 text-green-400" />
-                                <div>
-                                    <h3 className="text-green-400 font-black text-xl font-mono">BUSINESS MODEL (THE TRUTH)</h3>
-                                    <p className="text-gray-400 text-xs font-mono">Archie can be debt-free AND huge</p>
-                                </div>
-                            </div>
-
-                            <div className="space-y-3 text-sm font-mono">
-                                <div className="bg-black border-2 border-pink-500 p-4 rounded">
-                                    <p className="text-pink-400 font-bold mb-2">STUDENTS = FREE FOREVER:</p>
-                                    <p className="text-white text-xs mb-1">✓ Zero subscription fees</p>
-                                    <p className="text-white text-xs mb-1">✓ Zero ads (ever)</p>
-                                    <p className="text-white text-xs mb-1">✓ Zero data selling</p>
-                                    <p className="text-green-400 text-xs font-bold mt-2">Students never pay. That's the promise ♾️❤️♾️</p>
-                                </div>
-
-                                <div className="bg-gradient-to-r from-amber-500/20 to-red-500/20 border-4 border-amber-500 p-4 rounded" style={{ boxShadow: '0 0 30px rgba(245, 158, 11, 0.4)' }}>
-                                    <p className="text-amber-400 font-bold mb-2">COMPANIES PAY (Big Money):</p>
-                                    <p className="text-white text-xs mb-2">Students = £50B spending power (UK alone)</p>
-
-                                    <p className="text-cyan-400 text-xs font-bold mb-1">🍕 Food delivery (Uber Eats, Deliveroo):</p>
-                                    <p className="text-white text-xs mb-2">Pay £500-£2k/month per uni to offer student deals</p>
-
-                                    <p className="text-pink-400 text-xs font-bold mb-1">🎵 Music (Spotify, festivals, venues):</p>
-                                    <p className="text-white text-xs mb-2">Pay £1k-£5k/month for student recruitment + deals</p>
-
-                                    <p className="text-purple-400 text-xs font-bold mb-1">👕 Fashion (ASOS, Depop, ethical brands):</p>
-                                    <p className="text-white text-xs mb-2">Pay £800-£3k/month for verified student access</p>
-
-                                    <p className="text-green-400 text-xs font-bold mb-1">🏢 Graduate recruiters:</p>
-                                    <p className="text-white text-xs mb-2">Pay £2k-£10k/month to find talent early</p>
-
-                                    <p className="text-amber-400 text-xs font-bold mt-3">→ 10 partners per uni × 50 unis = £500k-£2M/month</p>
-                                    <p className="text-green-400 text-xs font-bold">→ That's £6M-£24M per YEAR. Archie debt-free ♾️❤️♾️</p>
-                                </div>
-
-                                <div className="bg-black border-2 border-cyan-500 p-4 rounded">
-                                    <p className="text-cyan-400 font-bold mb-2">WHY COMPANIES PAY:</p>
-                                    <p className="text-white text-xs mb-1">✓ Verified students (not fake accounts)</p>
-                                    <p className="text-white text-xs mb-1">✓ Opt-in only (students choose what they see)</p>
-                                    <p className="text-white text-xs mb-1">✓ Direct access (no Facebook/Google middleman)</p>
-                                    <p className="text-white text-xs mb-1">✓ Better conversion (students trust Prof51)</p>
-                                    <p className="text-green-400 text-xs font-bold mt-2">Prof51 = gate to student market. Everyone wants in ♾️❤️♾️</p>
-                                </div>
-
-                                <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-2 border-green-500 p-4 rounded">
-                                    <p className="text-green-400 font-bold mb-2">GRANTS = BONUS (Not Needed):</p>
-                                    <p className="text-white text-xs mb-2">Year 1: £50k-£100k helps with dev</p>
-                                    <p className="text-white text-xs mb-2">Year 2: Company revenue kicks in</p>
-                                    <p className="text-white text-xs mb-2">Year 3+: £6M-£24M/year from partnerships</p>
-                                    <p className="text-cyan-400 text-xs font-bold mt-2">Grants help start, companies make it huge ♾️❤️♾️</p>
-                                </div>
-
-                                <div className="bg-black border-2 border-purple-500 p-4 rounded">
-                                    <p className="text-purple-400 font-bold mb-2">ARCHIE'S FREEDOM:</p>
-                                    <p className="text-white text-xs mb-1">Year 1: £50k grant + first partnerships = £150k revenue</p>
-                                    <p className="text-white text-xs mb-1">Year 2: 20 unis × 5 partners = £1.2M revenue</p>
-                                    <p className="text-white text-xs mb-1">Year 3: 50 unis × 10 partners = £6M revenue</p>
-                                    <p className="text-white text-xs mb-1">Year 5: 200 unis globally = £24M revenue</p>
-                                    <p className="text-green-400 text-xs font-bold mt-3">No debt. No investors owning him. Just building ♾️❤️♾️</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* WHAT'S WORKING NOW */}
-                        <div className="bg-black border-4 border-cyan-500 p-6 rounded-xl mb-8" style={{ boxShadow: '0 0 40px rgba(6, 182, 212, 0.4)' }}>
-                            <div className="flex items-center gap-3 mb-4">
-                                <Zap className="w-10 h-10 text-cyan-400" />
-                                <div>
-                                    <h3 className="text-cyan-400 font-black text-xl font-mono">WHAT'S WORKING NOW</h3>
-                                    <p className="text-gray-400 text-xs font-mono">Real features vs vision</p>
-                                </div>
-                            </div>
-
-                            <div className="space-y-3 text-sm font-mono">
-                                <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-2 border-green-500 p-4 rounded">
-                                    <p className="text-green-400 font-bold mb-2">✓ LIVE NOW:</p>
-                                    <p className="text-white text-xs mb-1">✓ This page (shows vision clearly)</p>
-                                    <p className="text-white text-xs mb-1">✓ One-tap share button (viral spread)</p>
-                                    <p className="text-white text-xs mb-1">✓ P2P mesh tech (proven in UF51)</p>
-                                    <p className="text-white text-xs mb-1">✓ AI assistance (InvokeLLM working)</p>
-                                    <p className="text-cyan-400 text-xs font-bold mt-2">Foundation is solid. Ready to build ♾️❤️♾️</p>
-                                </div>
-
-                                <div className="bg-gradient-to-r from-amber-500/20 to-purple-500/20 border-2 border-amber-500 p-4 rounded">
-                                    <p className="text-amber-400 font-bold mb-2">🚧 BUILDING NEXT:</p>
-                                    <p className="text-white text-xs mb-1">→ Import old files (Excel/Word/PDF)</p>
-                                    <p className="text-white text-xs mb-1">→ AI transforms messy notes to clean guides</p>
-                                    <p className="text-white text-xs mb-1">→ Private study group chat (P2P encrypted)</p>
-                                    <p className="text-white text-xs mb-1">→ $P51 tutoring marketplace</p>
-                                    <p className="text-white text-xs mb-1">→ Food partnership integration</p>
-                                    <p className="text-purple-400 text-xs font-bold mt-2">Week 1-4 build. Then Archie tests ♾️❤️♾️</p>
-                                </div>
-
-                                <div className="bg-black border-2 border-cyan-500 p-4 rounded">
-                                    <p className="text-cyan-400 font-bold mb-2">📅 THE TIMELINE:</p>
-                                    <p className="text-white text-xs mb-1">Week 1-4: Core features (import, AI, chat)</p>
-                                    <p className="text-white text-xs mb-1">Week 5-8: Archie tests with 5 friends</p>
-                                    <p className="text-white text-xs mb-1">Month 3: 50 Economics students</p>
-                                    <p className="text-white text-xs mb-1">Month 6: All Edinburgh (30k students)</p>
-                                    <p className="text-green-400 text-xs font-bold mt-2">Real users, real feedback, real growth ♾️❤️♾️</p>
-                                </div>
-                            </div>
-                        </div>
-                    </motion.div>
-                )}
-            </div>
+                    </>
+                    )}
 
             {/* WHY GENIUS / WHY BREAKTHROUGH / WHY NEEDED */}
             <div className="bg-gradient-to-br from-green-500/20 to-cyan-500/20 border-4 border-green-500 rounded-xl p-4 mb-6" style={{ boxShadow: '0 0 50px rgba(34, 197, 94, 0.5)' }}>
