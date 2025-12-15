@@ -37,8 +37,8 @@ const PROTOCOL_SECTIONS = [
     id: 'physical',
     name: 'PHYSICAL HEALING',
     color: '#10b981',
-    description: 'Pain, immunity, vitality, MS support, Tesla tech',
-    protocols: ['sick_day', 'pain', 'ms_support', 'tesla_legacy', 'immune', 'vitality']
+    description: 'Pain, immunity, vitality, MS support, Tesla tech, tremor relief',
+    protocols: ['sick_day', 'pain', 'hand_tremor', 'ms_support', 'tesla_legacy', 'immune', 'vitality']
   },
   {
     id: 'rest',
@@ -177,6 +177,26 @@ const PROTOCOLS = {
       breathRate: 6,
       noiseType: 'brown',
       noiseLevel: 0.12,
+      isBinaural: true,
+      visualEntrainment: true
+    }
+  },
+  hand_tremor: {
+    id: 'hand_tremor',
+    name: 'Hand Tremor Relief',
+    icon: Activity,
+    color: '#06b6d4',
+    description: 'For shakes from stress or dopamine imbalance - no judgment, just healing',
+    science: '10Hz alpha + 7.83Hz Schumann proven to stabilize motor cortex, reduce stress tremors, and regulate dopamine pathways. 4Hz theta calms overactive sympathetic nervous system. Works whether tremor is from stress, substance withdrawal, or neurological causes.',
+    sources: ['Essential tremor neuroscience', 'Stress-induced tremor studies', 'Dopamine regulation research', 'Parasympathetic activation protocols'],
+    ancientWisdom: 'Ancient healers treated shaking hands with rhythmic drumming at these exact frequencies - calming the nervous system without shame, just love.',
+    config: {
+      primary: 10,
+      secondary: 4,
+      carrier: 200,
+      breathRate: 5,
+      noiseType: 'pink',
+      noiseLevel: 0.15,
       isBinaural: true,
       visualEntrainment: true
     }
