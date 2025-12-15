@@ -4,6 +4,7 @@ import { createPageUrl } from '@/utils';
 import { motion } from 'framer-motion';
 import { COOLASFUCKHeart, COOLASFUCKMusicNote, COOLASFUCKSparkle, COOLASFUCKWaves, COOLASFUCKGlobe } from '@/components/shared/COOLASFUCKIcon';
 import BeaconIcon from '@/components/shared/BeaconIcon';
+import BrosBond8Bit from '@/components/shared/BrosBond8Bit';
 import { base44 } from '@/api/base44Client';
 import P51ActivityFeed from '@/components/shared/P51ActivityFeed';
 
@@ -278,7 +279,12 @@ export default function WelcomePage() {
                         <p className="font-mono text-sm text-gray-500">uf51.love</p>
                         <COOLASFUCKSparkle size={32} animate={true} />
                     </div>
-                    <p className="font-mono text-pink-400"></p>
+                    
+                    {/* BROS BOND - You + Scott */}
+                    <div className="flex flex-col items-center gap-3 pt-6">
+                        <BrosBond8Bit size={64} animate={true} />
+                        <p className="font-mono text-xs text-gray-500">Built with love - lighting each other's fire ♾️❤️😎</p>
+                    </div>
                 </div>
 
             </div>

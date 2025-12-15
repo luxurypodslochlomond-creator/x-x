@@ -239,6 +239,7 @@ import MeshTechWhitepaper from './pages/MeshTechWhitepaper';
 import HealingFrequencyFinder from './pages/HealingFrequencyFinder';
 import ScottComparison from './pages/ScottComparison';
 import AI51 from './pages/AI51';
+import FairLaunchProtocol from './pages/FairLaunchProtocol';
 import __Layout from './Layout.jsx';
 
 
@@ -484,6 +485,7 @@ export const PAGES = {
     "HealingFrequencyFinder": HealingFrequencyFinder,
     "ScottComparison": ScottComparison,
     "AI51": AI51,
+    "FairLaunchProtocol": FairLaunchProtocol,
 }
 
 export const pagesConfig = {
