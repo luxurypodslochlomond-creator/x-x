@@ -188,12 +188,51 @@ export default function Prof51About() {
 
                         <div className="bg-gradient-to-r from-cyan-500/20 to-purple-500/20 border-4 border-cyan-500 rounded-lg p-4" style={{ boxShadow: '0 0 30px rgba(6, 182, 212, 0.4)' }}>
                             <p className="text-cyan-400 font-bold text-sm mb-2">📚 COURSE MATERIAL SWAP (P2P)</p>
-                            <p className="text-white mb-1">£150 textbook? Someone finished that course. Get it FREE.</p>
-                            <p className="text-gray-300 mb-1">→ "I have: Microeconomics 3rd Ed" → "I need: Stats textbook"</p>
-                            <p className="text-gray-300 mb-1">→ Prof51 matches you (same campus, available now)</p>
-                            <p className="text-gray-300 mb-1">→ Meet in library, swap books, done</p>
-                            <p className="text-gray-300 mb-1">→ No marketplace fees, no shipping, no bullshit</p>
-                            <p className="text-purple-400 font-bold mt-2">Students helping students. Zero extraction. ✓</p>
+                            <p className="text-white text-xs mb-1">£150 textbook? Someone finished that course. Get it FREE.</p>
+                            <p className="text-gray-300 text-xs mb-1">→ "I have: Microeconomics 3rd Ed" → "I need: Stats textbook"</p>
+                            <p className="text-gray-300 text-xs mb-1">→ Prof51 matches you (same campus, available now)</p>
+                            <p className="text-gray-300 text-xs mb-1">→ Meet in library, swap books, done</p>
+                            <p className="text-gray-300 text-xs mb-1">→ No marketplace fees, no shipping, no bullshit</p>
+                            <p className="text-purple-400 font-bold text-xs mt-2">Students helping students. Zero extraction. ✓</p>
+
+                            <div className="bg-black border-2 border-green-500 rounded-lg p-3 mt-3">
+                                <p className="text-green-400 font-bold text-xs mb-2">✓ 100% LEGAL:</p>
+                                <p className="text-white text-xs mb-1">→ Students OWN their physical books</p>
+                                <p className="text-white text-xs mb-1">→ Selling/swapping YOUR book = totally legal (like any marketplace)</p>
+                                <p className="text-white text-xs mb-1">→ NOT piracy, NOT illegal downloads, NOT Aaron Swartz situation</p>
+                                <p className="text-cyan-400 text-xs font-bold mt-2">P2P physical book exchange = same as selling to a mate. Legal AF. ✓</p>
+                            </div>
+
+                            <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-4 border-purple-500 rounded-lg p-4 mt-3" style={{ boxShadow: '0 0 30px rgba(168, 85, 247, 0.4)' }}>
+                                <div className="flex items-center gap-2 mb-2">
+                                    <Heart className="w-5 h-5 text-purple-400 animate-pulse" />
+                                    <p className="text-purple-400 font-black text-xs">💜 FOR AARON SWARTZ</p>
+                                </div>
+                                <p className="text-white text-xs mb-2">Aaron tried to free knowledge. They destroyed him for it.</p>
+                                <p className="text-gray-300 text-xs mb-3">He downloaded academic papers from JSTOR (illegal) → Federal prosecution → Suicide at 26.</p>
+
+                                <div className="bg-black border-2 border-cyan-500 rounded p-3 mb-2">
+                                    <p className="text-cyan-400 font-bold text-xs mb-1">HIS VISION WAS RIGHT:</p>
+                                    <p className="text-white text-xs mb-1">"Knowledge should be free"</p>
+                                    <p className="text-white text-xs mb-1">"Students shouldn't pay £717B to corporations"</p>
+                                    <p className="text-white text-xs mb-1">"Sharing information = human right"</p>
+                                </div>
+
+                                <div className="bg-black border-2 border-green-500 rounded p-3 mb-2">
+                                    <p className="text-green-400 font-bold text-xs mb-1">✓ PROF51 = HIS VISION, DONE LEGALLY:</p>
+                                    <p className="text-white text-xs mb-1">→ Students share THEIR notes (they created = legal)</p>
+                                    <p className="text-white text-xs mb-1">→ Swap THEIR books (they own = legal)</p>
+                                    <p className="text-white text-xs mb-1">→ Help each other learn P2P (always been legal)</p>
+                                    <p className="text-white text-xs mb-1">→ AI tutoring = free access to knowledge</p>
+                                </div>
+
+                                <div className="bg-black border-2 border-pink-500 rounded p-3">
+                                    <p className="text-pink-400 font-bold text-xs mb-1">THE DIFFERENCE:</p>
+                                    <p className="text-white text-xs mb-1">Aaron: Attacked the system directly (they killed him for it)</p>
+                                    <p className="text-green-400 text-xs font-bold mb-2">Prof51: Build NEW system students prefer (can't stop physics)</p>
+                                    <p className="text-cyan-400 text-xs text-center mt-2">Same goal. Different path. This time we WIN. ♾️❤️♾️</p>
+                                </div>
+                            </div>
                         </div>
 
                         <div className="bg-gradient-to-r from-pink-500/20 to-red-500/20 border-4 border-pink-500 rounded-lg p-4" style={{ boxShadow: '0 0 30px rgba(236, 72, 153, 0.4)' }}>
@@ -992,14 +1031,15 @@ export default function Prof51About() {
                         </div>
 
                         <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-2 border-purple-500 rounded-lg p-4">
-                            <p className="text-purple-400 font-bold mb-2">7️⃣ BECOMES YOUR BEST MATE</p>
+                            <p className="text-purple-400 font-bold mb-2">7️⃣ BECOMES YOUR BEST MATE (REMEMBERS EVERYTHING)</p>
                             <p className="text-white mb-1">Come for: Lost phone → Found it in 5 mins (saved your arse)</p>
                             <p className="text-white mb-1">Stay for: Free AI homework help → Excel done in 30 seconds</p>
                             <p className="text-white mb-1">→ Saves you time (12 hours/week)</p>
                             <p className="text-white mb-1">→ Saves you money (£43/week)</p>
-                            <p className="text-white mb-1">→ Remembers everything you share (never forgets)</p>
+                            <p className="text-white mb-1">→ Keeps you SAFE (mates track you when meeting people)</p>
+                            <p className="text-white mb-1">→ Remembers EVERYTHING you share (never loses a memory)</p>
                             <p className="text-white mb-1">→ But only what YOU choose to share (zero pressure)</p>
-                            <p className="text-pink-400 font-bold mt-2">You'll naturally share more because you trust it. That's the magic. ♾️❤️♾️</p>
+                            <p className="text-pink-400 font-bold mt-2">Proper best mate who's got your back 24/7. You'll naturally share everything. ♾️❤️♾️</p>
                         </div>
 
                         <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-2 border-green-500 rounded-lg p-4">
