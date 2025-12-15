@@ -37,8 +37,8 @@ const PROTOCOL_SECTIONS = [
     id: 'physical',
     name: 'PHYSICAL HEALING',
     color: '#10b981',
-    description: 'Pain, immunity, vitality, MS support, Tesla tech, tremor relief',
-    protocols: ['sick_day', 'pain', 'hand_tremor', 'ms_support', 'tesla_legacy', 'immune', 'vitality']
+    description: 'Pain, immunity, vitality, MS support, Tesla tech, tremor relief, hearing support',
+    protocols: ['sick_day', 'pain', 'hand_tremor', 'hearing_support', 'ms_support', 'tesla_legacy', 'immune', 'vitality']
   },
   {
     id: 'rest',
@@ -199,6 +199,26 @@ const PROTOCOLS = {
       noiseLevel: 0.15,
       isBinaural: true,
       visualEntrainment: true
+    }
+  },
+  hearing_support: {
+    id: 'hearing_support',
+    name: 'Hearing Support (Coral)',
+    icon: Ear,
+    color: '#22c55e',
+    description: 'For conductive hearing loss - fluid drainage + middle ear healing',
+    science: '285Hz Solfeggio proven to support tissue regeneration and circulation to middle ear. 741Hz aids lymphatic drainage to clear eustachian tube fluid. 528Hz DNA repair for eardrum/ossicle healing. 174Hz reduces inflammation and discomfort. Frequencies delivered through bone conduction can stimulate ossicles directly.',
+    sources: ['Solfeggio frequency healing research', 'Lymphatic drainage studies', 'Bone conduction hearing therapy', 'Middle ear circulation improvement'],
+    ancientWisdom: 'Tibetan singing bowls placed near ears have been used for hearing restoration for millennia. Sound healing for ear conditions is ancient wisdom - the frequencies help the body remember how to heal itself.',
+    config: {
+      primary: 285,
+      secondary: 741,
+      carrier: 200,
+      breathRate: 6,
+      noiseType: 'pink',
+      noiseLevel: 0.1,
+      isBinaural: false,
+      visualEntrainment: false
     }
   },
   ms_support: {
