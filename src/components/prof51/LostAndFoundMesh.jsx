@@ -48,45 +48,54 @@ export default function LostAndFoundMesh() {
 
     return (
         <div className="space-y-4">
-            {/* MESH STATUS - 8-BIT QUANTUM LIVE INDICATOR */}
-            <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-4 border-green-500 rounded-xl p-4" style={{ boxShadow: '0 0 40px rgba(34, 197, 94, 0.5)' }}>
-                <div className="flex items-center justify-between mb-3">
-                    <div className="flex items-center gap-3">
-                        <motion.div
-                            animate={{ scale: [1, 1.2, 1] }}
-                            transition={{ repeat: Infinity, duration: 2 }}
-                        >
-                            <Bluetooth className="w-8 h-8 text-green-400" />
-                        </motion.div>
-                        <div>
-                            <p className="text-green-400 font-black text-lg font-mono">P2P MESH LIVE</p>
-                            <p className="text-gray-400 text-xs font-mono">Offline scanning active</p>
+            {/* MESH STATUS - LIVE POWER INDICATOR */}
+            <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-4 border-green-500 rounded-xl p-4 relative overflow-hidden" style={{ boxShadow: '0 0 40px rgba(34, 197, 94, 0.5)' }}>
+                {/* Animated pulse background */}
+                <motion.div
+                    className="absolute inset-0 bg-green-500/10"
+                    animate={{ opacity: [0.1, 0.3, 0.1] }}
+                    transition={{ repeat: Infinity, duration: 2 }}
+                />
+                
+                <div className="relative z-10">
+                    <div className="flex items-center justify-between mb-3">
+                        <div className="flex items-center gap-3">
+                            <motion.div
+                                animate={{ scale: [1, 1.2, 1], rotate: [0, 360] }}
+                                transition={{ repeat: Infinity, duration: 3 }}
+                            >
+                                <Bluetooth className="w-8 h-8 text-green-400" style={{ filter: 'drop-shadow(0 0 8px rgba(34, 197, 94, 0.8))' }} />
+                            </motion.div>
+                            <div>
+                                <p className="text-green-400 font-black text-lg font-mono">MESH ACTIVE</p>
+                                <p className="text-cyan-400 text-xs font-mono font-bold">{meshNodes} students watching your back</p>
+                            </div>
+                        </div>
+                        <div className="text-right">
+                            <p className="text-green-400 font-black text-3xl font-mono">{meshNodes}</p>
+                            <p className="text-gray-400 text-xs font-mono">RIGHT NOW</p>
                         </div>
                     </div>
-                    <div className="text-right">
-                        <p className="text-green-400 font-black text-2xl font-mono">{meshNodes}</p>
-                        <p className="text-gray-400 text-xs font-mono">devices nearby</p>
+                    
+                    {/* Coverage bar */}
+                    <div className="bg-black border-2 border-green-500 rounded-lg p-3">
+                        <div className="flex items-center justify-between mb-2">
+                            <span className="text-white text-xs font-mono font-bold">PROTECTION RADIUS:</span>
+                            <span className="text-green-400 text-xs font-mono font-bold animate-pulse">CAMPUS-WIDE</span>
+                        </div>
+                        <div className="w-full bg-black border border-green-500/30 rounded-full h-4 overflow-hidden">
+                            <motion.div 
+                                className="h-full bg-gradient-to-r from-green-500 via-cyan-500 to-green-500"
+                                initial={{ width: 0 }}
+                                animate={{ width: `${(meshNodes / 150) * 100}%`, backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'] }}
+                                transition={{ duration: 0.5, backgroundPosition: { duration: 3, repeat: Infinity } }}
+                                style={{ boxShadow: '0 0 20px rgba(34, 197, 94, 0.8)', backgroundSize: '200% 200%' }}
+                            />
+                        </div>
+                        <p className="text-cyan-400 text-[10px] font-mono mt-2 text-center font-bold">
+                            ⚡ Library • Bars • Restaurants • Lecture Halls • Clubs • EVERYWHERE ⚡
+                        </p>
                     </div>
-                </div>
-                
-                {/* Mesh coverage visualization */}
-                <div className="bg-black border-2 border-green-500 rounded-lg p-3">
-                    <div className="flex items-center justify-between mb-2">
-                        <span className="text-white text-xs font-mono">Coverage strength:</span>
-                        <span className="text-green-400 text-xs font-mono font-bold">EXCELLENT</span>
-                    </div>
-                    <div className="w-full bg-black border border-green-500/30 rounded-full h-3 overflow-hidden">
-                        <motion.div 
-                            className="h-full bg-gradient-to-r from-green-500 to-cyan-500"
-                            initial={{ width: 0 }}
-                            animate={{ width: `${(meshNodes / 150) * 100}%` }}
-                            transition={{ duration: 0.5 }}
-                            style={{ boxShadow: '0 0 15px rgba(34, 197, 94, 0.6)' }}
-                        />
-                    </div>
-                    <p className="text-gray-400 text-[10px] font-mono mt-2 text-center">
-                        Scanning: Campus • Library • Student Union • Clubs • Restaurants
-                    </p>
                 </div>
             </div>
 
@@ -132,7 +141,13 @@ export default function LostAndFoundMesh() {
 
                     {/* RECENT ACTIVITY */}
                     <div className="space-y-2">
-                        <p className="text-white font-bold text-sm font-mono">RECENT MESH ACTIVITY:</p>
+                        <div className="flex items-center justify-between mb-2">
+                            <p className="text-white font-bold text-sm font-mono">LIVE MESH FEED:</p>
+                            <div className="flex items-center gap-1">
+                                <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                                <span className="text-green-400 text-xs font-mono font-bold">LIVE</span>
+                            </div>
+                        </div>
                         {recentFinds.map((find, idx) => (
                             <motion.div
                                 key={idx}
@@ -174,8 +189,15 @@ export default function LostAndFoundMesh() {
             {/* REPORT TAB */}
             {activeTab === 'report' && (
                 <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-4">
-                    <div className="bg-gradient-to-r from-amber-500/20 to-red-500/20 border-4 border-amber-500 rounded-xl p-4">
-                        <p className="text-amber-400 font-black text-lg font-mono mb-3">REPORT LOST ITEM</p>
+                    <div className="bg-gradient-to-r from-amber-500/20 to-red-500/20 border-4 border-amber-500 rounded-xl p-4 relative overflow-hidden">
+                        <motion.div
+                            className="absolute inset-0 bg-amber-500/10"
+                            animate={{ opacity: [0.1, 0.2, 0.1] }}
+                            transition={{ repeat: Infinity, duration: 1.5 }}
+                        />
+                        <div className="relative z-10">
+                            <p className="text-amber-400 font-black text-lg font-mono mb-1">🚨 LOST SOMETHING?</p>
+                            <p className="text-red-400 font-bold text-xs font-mono mb-3">{meshNodes} students ready to help RIGHT NOW</p>
                         
                         <div className="space-y-3">
                             <div>
@@ -211,15 +233,28 @@ export default function LostAndFoundMesh() {
                             <Button 
                                 onClick={handleReport}
                                 disabled={!reportForm.item}
-                                className="w-full bg-gradient-to-r from-amber-500 to-red-500 text-white font-black py-4 text-base font-mono"
+                                className="w-full bg-gradient-to-r from-amber-500 to-red-500 text-white font-black py-5 text-lg font-mono relative overflow-hidden group"
                             >
-                                <Zap className="w-5 h-5 mr-2" />
-                                ACTIVATE MESH SEARCH
+                                <motion.div
+                                    className="absolute inset-0 bg-white"
+                                    initial={{ x: '-100%' }}
+                                    whileHover={{ x: '100%' }}
+                                    transition={{ duration: 0.5 }}
+                                    style={{ opacity: 0.2 }}
+                                />
+                                <Zap className="w-6 h-6 mr-2" />
+                                ACTIVATE MESH NOW
                             </Button>
 
-                            <p className="text-gray-400 text-xs font-mono text-center">
-                                {meshNodes} devices will start scanning immediately
-                            </p>
+                            <div className="bg-black/60 border border-amber-500/50 rounded-lg p-3 mt-3">
+                                <p className="text-amber-400 text-xs font-mono text-center font-bold mb-1">
+                                    ⚡ {meshNodes} STUDENTS SCANNING IN SECONDS ⚡
+                                </p>
+                                <p className="text-gray-300 text-[10px] font-mono text-center">
+                                    Library • Bars • Clubs • Restaurants • Everywhere you've been today
+                                </p>
+                            </div>
+                        </div>
                         </div>
                     </div>
 
@@ -232,10 +267,18 @@ export default function LostAndFoundMesh() {
                                 className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-4 border-green-500 rounded-xl p-6 text-center"
                                 style={{ boxShadow: '0 0 60px rgba(34, 197, 94, 0.6)' }}
                             >
-                                <CheckCircle className="w-16 h-16 text-green-400 mx-auto mb-3" />
-                                <p className="text-green-400 font-black text-xl font-mono mb-2">MESH ACTIVATED ✓</p>
-                                <p className="text-white text-sm font-mono mb-3">{meshNodes} students now scanning for your {reportForm.item}</p>
-                                <p className="text-cyan-400 text-xs font-mono">You'll get instant alert when found ♾️❤️♾️</p>
+                                <motion.div
+                                    animate={{ scale: [1, 1.1, 1] }}
+                                    transition={{ repeat: Infinity, duration: 2 }}
+                                >
+                                    <CheckCircle className="w-20 h-20 text-green-400 mx-auto mb-3" style={{ filter: 'drop-shadow(0 0 15px rgba(34, 197, 94, 0.9))' }} />
+                                </motion.div>
+                                <p className="text-green-400 font-black text-2xl font-mono mb-2">🔥 MESH LIVE 🔥</p>
+                                <p className="text-white text-base font-mono mb-2 font-bold">{meshNodes} STUDENTS HUNTING NOW</p>
+                                <p className="text-cyan-400 text-sm font-mono mb-3">Your {reportForm.item} = PRIORITY #1</p>
+                                <div className="bg-black/60 border border-green-500/50 rounded-lg p-2">
+                                    <p className="text-green-400 text-xs font-mono font-bold text-center">Instant alert when located ⚡</p>
+                                </div>
                             </motion.div>
                         )}
                     </AnimatePresence>
@@ -272,7 +315,8 @@ export default function LostAndFoundMesh() {
 
                     {/* SUCCESS EXAMPLES */}
                     <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-4 border-green-500 rounded-xl p-4">
-                        <p className="text-green-400 font-black text-base font-mono mb-3 text-center">WORKING EXAMPLES</p>
+                        <p className="text-green-400 font-black text-base font-mono mb-1 text-center">💚 REAL SAVES 💚</p>
+                        <p className="text-cyan-400 text-xs font-mono mb-3 text-center font-bold">Students helping students. Zero bullshit.</p>
 
                         <div className="space-y-2">
                             <div className="bg-black border-2 border-green-500 rounded-lg p-3">
