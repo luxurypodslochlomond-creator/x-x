@@ -36,6 +36,7 @@ import ScottTeamChat from '@/components/scott/ScottTeamChat';
 import { base44 } from '@/api/base44Client';
 import { useMutation } from '@tanstack/react-query';
 import ScottFileUpload from '@/components/scott/ScottFileUpload';
+import ScottMessageInbox from '@/components/scott/ScottMessageInbox';
 
 /**
  * SCOTT'S ARTIST/CLIENT MANAGER
