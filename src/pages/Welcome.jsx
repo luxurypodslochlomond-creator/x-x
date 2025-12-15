@@ -10,6 +10,7 @@ import P51ActivityFeed from '@/components/shared/P51ActivityFeed';
 export default function WelcomePage() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const navigate = useNavigate();
+    // Force rebuild - Radio import removed from all files ♾️❤️♾️
 
     useEffect(() => {
         base44.auth.isAuthenticated().then(setIsLoggedIn).catch(() => setIsLoggedIn(false));
