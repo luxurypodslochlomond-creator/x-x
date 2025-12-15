@@ -22,6 +22,7 @@ export default function Prof51() {
     const [activeTab, setActiveTab] = useState('demo'); // demo, how, why, scale
     const [uploadedFile, setUploadedFile] = useState(null);
     const [transformedResult, setTransformedResult] = useState(null);
+    const [showDetails, setShowDetails] = useState(false);
 
     const [deferredPrompt, setDeferredPrompt] = React.useState(null);
     const [showInstallButton, setShowInstallButton] = React.useState(false);
