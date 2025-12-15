@@ -278,7 +278,76 @@ export default function Prof51About() {
 
                         <div className="bg-gradient-to-r from-amber-500/20 to-green-500/20 border-4 border-amber-500 rounded-xl p-6" style={{ boxShadow: '0 0 50px rgba(245, 158, 11, 0.5)' }}>
                             <p className="text-amber-400 font-black text-xl mb-3">💰 HOW WE MAKE MONEY (ZERO EXTRACTION)</p>
-                            <p className="text-white text-sm mb-4">Businesses want to reach students. We make it FAIR for everyone.</p>
+                            <p className="text-white text-sm mb-4">Businesses pay for REACH. Students free forever. Simple.</p>
+
+                            <div className="bg-gradient-to-r from-purple-500/20 to-cyan-500/20 border-4 border-purple-500 rounded-xl p-4 mb-4" style={{ boxShadow: '0 0 40px rgba(168, 85, 247, 0.5)' }}>
+                                <p className="text-purple-400 font-black text-base mb-3 text-center">💎 TIERED ACCESS MODEL</p>
+                                <p className="text-white text-xs mb-3 text-center">Companies pay based on HOW MANY students they reach (not for data)</p>
+
+                                <div className="space-y-2">
+                                    <div className="bg-black border-2 border-green-500 rounded-lg p-3">
+                                        <div className="flex items-center justify-between mb-2">
+                                            <p className="text-green-400 font-bold text-xs">🏪 LOCAL BUSINESS</p>
+                                            <p className="text-green-400 font-black text-sm">£200/year</p>
+                                        </div>
+                                        <p className="text-white text-xs mb-1">→ Reach: 1,000 students (one campus)</p>
+                                        <p className="text-gray-300 text-xs mb-1">→ Restaurant, cafe, barber, gym</p>
+                                        <p className="text-cyan-400 text-xs font-bold">Saves £5,640/year in Just Eat fees = worth it ✓</p>
+                                    </div>
+
+                                    <div className="bg-black border-2 border-cyan-500 rounded-lg p-3">
+                                        <div className="flex items-center justify-between mb-2">
+                                            <p className="text-cyan-400 font-bold text-xs">🏢 REGIONAL CHAIN</p>
+                                            <p className="text-cyan-400 font-black text-sm">£5,000/year</p>
+                                        </div>
+                                        <p className="text-white text-xs mb-1">→ Reach: 10,000 students (city-wide)</p>
+                                        <p className="text-gray-300 text-xs mb-1">→ Restaurant chain, gym chain, local brand</p>
+                                        <p className="text-cyan-400 text-xs font-bold">10 locations × £500 each = cheaper than ads ✓</p>
+                                    </div>
+
+                                    <div className="bg-black border-2 border-purple-500 rounded-lg p-3">
+                                        <div className="flex items-center justify-between mb-2">
+                                            <p className="text-purple-400 font-bold text-xs">🏭 NATIONAL BRAND</p>
+                                            <p className="text-purple-400 font-black text-sm">£50,000/year</p>
+                                        </div>
+                                        <p className="text-white text-xs mb-1">→ Reach: 500,000 students (UK-wide)</p>
+                                        <p className="text-gray-300 text-xs mb-1">→ Nationwide chain, UK brand, textbook publisher</p>
+                                        <p className="text-purple-400 text-xs font-bold">£0.10 per student per year = insane value vs ads ✓</p>
+                                    </div>
+
+                                    <div className="bg-black border-2 border-pink-500 rounded-lg p-3">
+                                        <div className="flex items-center justify-between mb-2">
+                                            <p className="text-pink-400 font-bold text-xs">🌍 GLOBAL BRAND</p>
+                                            <p className="text-pink-400 font-black text-sm">£200,000/year</p>
+                                        </div>
+                                        <p className="text-white text-xs mb-1">→ Reach: 10,000,000 students (globally)</p>
+                                        <p className="text-gray-300 text-xs mb-1">→ Apple, Nike, Samsung, Spotify, Netflix</p>
+                                        <p className="text-pink-400 text-xs font-bold">£0.02 per student = cheaper than ONE Facebook ad ✓</p>
+                                    </div>
+                                </div>
+
+                                <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-4 border-green-500 rounded-lg p-4 mt-3">
+                                    <p className="text-green-400 font-black text-sm mb-2 text-center">💰 REVENUE AT SCALE (NO STUDENTS PAYING)</p>
+                                    <div className="space-y-1 text-xs">
+                                        <p className="text-white">→ 10,000 local businesses × £200 = <span className="text-green-400 font-bold">£2M</span></p>
+                                        <p className="text-white">→ 500 regional chains × £5,000 = <span className="text-cyan-400 font-bold">£2.5M</span></p>
+                                        <p className="text-white">→ 100 national brands × £50,000 = <span className="text-purple-400 font-bold">£5M</span></p>
+                                        <p className="text-white">→ 50 global brands × £200,000 = <span className="text-pink-400 font-bold">£10M</span></p>
+                                        <p className="text-amber-400 font-black text-base mt-2 text-center">= £19.5M/year revenue</p>
+                                        <p className="text-cyan-400 text-xs text-center mt-1">Students: FREE forever. Zero extraction. ✓</p>
+                                    </div>
+                                </div>
+
+                                <div className="bg-black border-2 border-amber-500 rounded-lg p-3 mt-3">
+                                    <p className="text-amber-400 font-bold text-xs mb-2">🚀 AT 100M STUDENTS (10% OF GLOBAL):</p>
+                                    <p className="text-white text-xs mb-1">→ 100,000 local businesses = £20M</p>
+                                    <p className="text-white text-xs mb-1">→ 2,000 regional chains = £10M</p>
+                                    <p className="text-white text-xs mb-1">→ 500 national brands = £25M</p>
+                                    <p className="text-white text-xs mb-1">→ 200 global brands = £40M</p>
+                                    <p className="text-green-400 font-black text-lg text-center mt-2">£95M/year revenue ✓</p>
+                                    <p className="text-pink-400 text-xs text-center font-bold mt-1">Students still FREE. That's the magic. ♾️❤️♾️</p>
+                                </div>
+                            </div>
 
                             <div className="space-y-3">
                                 <div className="bg-black border-2 border-green-500 rounded-lg p-4">
