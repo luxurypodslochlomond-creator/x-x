@@ -126,7 +126,18 @@ Return CLEAN, FORMATTED content ready to use. Be helpful, not generic.`,
                         </h1>
                         <p className="text-cyan-500 text-sm font-bold font-mono mb-2">Your Most Intelligent Mate in the Universe</p>
                         <p className="text-pink-400 text-xs font-mono mb-2">Mate = Best friend (warm, never condescending) • Equal respect, real support ♾️</p>
-                        <p className="text-gray-400 text-xs font-mono mb-3">Studies • Mindset • Accommodation • Gigs • Fashion • Social • EVERYTHING • FREE forever ♾️❤️♾️</p>
+                        
+                        <div className="bg-gradient-to-r from-green-500/30 to-cyan-500/30 border-4 border-green-500 rounded-lg p-4 mb-3" style={{ boxShadow: '0 0 40px rgba(34, 197, 94, 0.6)' }}>
+                            <p className="text-green-400 font-black text-2xl font-mono mb-2">FREE FOREVER</p>
+                            <p className="text-white text-sm font-mono mb-2">Students NEVER pay. Not now. Not ever. No catch.</p>
+                            <p className="text-cyan-400 text-xs font-mono mb-1">✓ No ads (ever)</p>
+                            <p className="text-cyan-400 text-xs font-mono mb-1">✓ No data selling (ever)</p>
+                            <p className="text-cyan-400 text-xs font-mono mb-1">✓ No subscription (ever)</p>
+                            <p className="text-cyan-400 text-xs font-mono mb-2">✓ No "premium" bullshit (everything included)</p>
+                            <p className="text-pink-400 text-xs font-mono font-bold">Companies pay Prof51 → Students benefit FREE ♾️❤️♾️</p>
+                        </div>
+                        
+                        <p className="text-gray-400 text-xs font-mono mb-3">Studies • Mindset • Accommodation • Gigs • Fashion • Social • EVERYTHING included ♾️❤️♾️</p>
                         
                         <div className="inline-block bg-gradient-to-r from-amber-500/20 to-green-500/20 border-2 border-amber-500 px-4 py-2 rounded-lg mt-2">
                             <p className="text-amber-400 font-black text-xs font-mono mb-0.5">ARCHIE'S COMPANY</p>
