@@ -37,6 +37,8 @@ import { base44 } from '@/api/base44Client';
 import { useMutation } from '@tanstack/react-query';
 import ScottFileUpload from '@/components/scott/ScottFileUpload';
 import ScottMessageInbox from '@/components/scott/ScottMessageInbox';
+import ScottDecisionCenter from '@/components/scott/ScottDecisionCenter';
+import ScottEmailDrafter from '@/components/scott/ScottEmailDrafter';
 
 /**
  * SCOTT'S ARTIST/CLIENT MANAGER
