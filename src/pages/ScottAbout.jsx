@@ -54,11 +54,76 @@ export default function ScottAbout() {
                     </div>
                 </div>
 
-                {/* WHAT */}
+                {/* WHAT - 8-BIT DIAGRAM */}
                 <div className="bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border-4 border-cyan-500 rounded-xl p-6" style={{ boxShadow: '0 0 40px rgba(6, 182, 212, 0.4)' }}>
                     <div className="flex items-center gap-3 mb-4">
                         <Brain className="w-10 h-10 text-cyan-400" />
                         <h2 className="text-cyan-400 font-black text-xl font-mono">WHAT WE DO</h2>
+                    </div>
+
+                    {/* 8-BIT FLOW DIAGRAM */}
+                    <div className="bg-gradient-to-br from-gray-900 to-black border-2 border-amber-500/30 rounded-xl p-6 mb-4">
+                        <div className="space-y-4">
+                            {/* Manager (Before) */}
+                            <div className="flex items-center gap-3">
+                                <div className="w-16 h-16 bg-red-500 rounded" style={{ imageRendering: 'pixelated', boxShadow: '4px 4px 0 rgba(239, 68, 68, 0.4)' }}>
+                                    <div className="w-full h-full flex items-center justify-center text-3xl">😰</div>
+                                </div>
+                                <div className="flex-1">
+                                    <p className="text-red-400 font-black text-sm font-mono">BEFORE: STRESSED</p>
+                                    <p className="text-gray-400 text-xs font-mono">Spreadsheets, emails, chaos</p>
+                                </div>
+                            </div>
+
+                            {/* Arrow Down */}
+                            <div className="flex justify-center">
+                                <div className="space-y-1">
+                                    <div className="w-2 h-2 bg-amber-400" style={{ imageRendering: 'pixelated' }}></div>
+                                    <div className="w-2 h-2 bg-amber-400" style={{ imageRendering: 'pixelated' }}></div>
+                                    <div className="w-2 h-2 bg-amber-400" style={{ imageRendering: 'pixelated' }}></div>
+                                    <div className="w-6 h-6 bg-amber-400 rotate-45" style={{ imageRendering: 'pixelated', marginLeft: '-8px' }}></div>
+                                </div>
+                            </div>
+
+                            {/* Co-Manager51 */}
+                            <div className="flex items-center gap-3">
+                                <div className="w-16 h-16 bg-amber-500 rounded flex items-center justify-center" style={{ imageRendering: 'pixelated', boxShadow: '4px 4px 0 rgba(245, 158, 11, 0.4)' }}>
+                                    <CoManager51Icon8Bit size={40} animate={false} />
+                                </div>
+                                <div className="flex-1">
+                                    <p className="text-amber-400 font-black text-sm font-mono">CO-MANAGER51</p>
+                                    <p className="text-gray-400 text-xs font-mono">AI handles busywork</p>
+                                </div>
+                            </div>
+
+                            {/* Arrow Down */}
+                            <div className="flex justify-center">
+                                <div className="space-y-1">
+                                    <div className="w-2 h-2 bg-green-400" style={{ imageRendering: 'pixelated' }}></div>
+                                    <div className="w-2 h-2 bg-green-400" style={{ imageRendering: 'pixelated' }}></div>
+                                    <div className="w-2 h-2 bg-green-400" style={{ imageRendering: 'pixelated' }}></div>
+                                    <div className="w-6 h-6 bg-green-400 rotate-45" style={{ imageRendering: 'pixelated', marginLeft: '-8px' }}></div>
+                                </div>
+                            </div>
+
+                            {/* Manager (After) */}
+                            <div className="flex items-center gap-3">
+                                <div className="w-16 h-16 bg-green-500 rounded" style={{ imageRendering: 'pixelated', boxShadow: '4px 4px 0 rgba(34, 197, 94, 0.4)' }}>
+                                    <div className="w-full h-full flex items-center justify-center text-3xl">🎸</div>
+                                </div>
+                                <div className="flex-1">
+                                    <p className="text-green-400 font-black text-sm font-mono">AFTER: FREE</p>
+                                    <p className="text-gray-400 text-xs font-mono">Focus on music ♾️</p>
+                                </div>
+                            </div>
+
+                            {/* Result */}
+                            <div className="bg-gradient-to-r from-cyan-500/20 to-green-500/20 border-2 border-cyan-500 rounded-lg p-3">
+                                <p className="text-cyan-400 font-black text-xs mb-1">✓ 10 hours/week saved</p>
+                                <p className="text-green-400 font-black text-xs mb-1">✓ Zero stress</p>
+                                <p className="text-pink-400 font-black text-xs">✓ More time for music ♾️❤️♾️</p>
+                            </div>
+                        </div>
                     </div>
 
                     <div className="space-y-2 text-sm font-mono">
