@@ -236,6 +236,7 @@ import Prof51About from './pages/Prof51About';
 import ScottAbout from './pages/ScottAbout';
 import Prof51ZeroServerArchitecture from './pages/Prof51ZeroServerArchitecture';
 import ScottZeroServerArchitecture from './pages/ScottZeroServerArchitecture';
+import Diary51 from './pages/Diary51';
 import __Layout from './Layout.jsx';
 
 
@@ -478,6 +479,7 @@ export const PAGES = {
     "ScottAbout": ScottAbout,
     "Prof51ZeroServerArchitecture": Prof51ZeroServerArchitecture,
     "ScottZeroServerArchitecture": ScottZeroServerArchitecture,
+    "Diary51": Diary51,
 }
 
 export const pagesConfig = {
