@@ -35,7 +35,10 @@ export const MeshProvider = ({ children }) => {
     const [meshPeers, setMeshPeers] = useState([]); // Connected devices
     const [syncStatus, setSyncStatus] = useState('idle'); // idle, syncing, synced, error
     const [lastSync, setLastSync] = useState(null);
+    const [bluetoothSupported, setBluetoothSupported] = useState(false);
     const syncQueueRef = useRef([]);
+    const bluetoothDeviceRef = useRef(null);
+    const gattServerRef = useRef(null);
 
     // Monitor online status + Bluetooth capability
     useEffect(() => {
