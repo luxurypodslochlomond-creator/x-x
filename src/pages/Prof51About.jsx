@@ -265,6 +265,72 @@ export default function Prof51About() {
                                     </div>
                                 </div>
 
+                                <div className="bg-gradient-to-r from-cyan-500/20 to-green-500/20 border-4 border-cyan-500 rounded-xl p-4" style={{ boxShadow: '0 0 40px rgba(6, 182, 212, 0.5)' }}>
+                                    <p className="text-cyan-400 font-black text-base mb-3">🚀 THE NEW THINKING (TRULY INNOVATIVE):</p>
+                                    <p className="text-white text-xs mb-3">Businesses access students BUT zero ads, zero extraction. How? REVERSE THE MODEL.</p>
+
+                                    <div className="bg-black border-2 border-red-500 rounded-lg p-3 mb-3">
+                                        <p className="text-red-400 font-bold text-xs mb-2">❌ OLD MODEL (Facebook/Instagram/etc):</p>
+                                        <p className="text-gray-300 text-xs mb-1">1. Students use app "free"</p>
+                                        <p className="text-gray-300 text-xs mb-1">2. Platform harvests ALL data (clicks, time, behavior, location)</p>
+                                        <p className="text-gray-300 text-xs mb-1">3. Sells data to advertisers</p>
+                                        <p className="text-gray-300 text-xs mb-1">4. Shows targeted ads everywhere</p>
+                                        <p className="text-gray-300 text-xs mb-1">5. Students = product being sold</p>
+                                        <p className="text-red-400 font-bold text-xs mt-2">EXTRACTION. Students used. Businesses manipulate. Everyone loses trust.</p>
+                                    </div>
+
+                                    <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-4 border-green-500 rounded-lg p-3">
+                                        <p className="text-green-400 font-black text-xs mb-2">✓ NEW MODEL (Prof51 - PERMISSION BASED):</p>
+                                        <p className="text-white text-xs mb-2 font-bold">Students control EVERYTHING. Businesses pay for PERMISSION to exist.</p>
+
+                                        <div className="bg-black/60 border border-cyan-500/50 rounded p-2 mb-2">
+                                            <p className="text-cyan-400 font-bold text-xs mb-1">STEP 1: Business pays to BE LISTED (not for data)</p>
+                                            <p className="text-gray-300 text-xs mb-1">→ Restaurant: £200/year to be in directory</p>
+                                            <p className="text-gray-300 text-xs mb-1">→ Textbook shop: £500/year</p>
+                                            <p className="text-gray-300 text-xs mb-1">→ Apple/Nike: £50k/year for global reach</p>
+                                            <p className="text-white text-xs mt-1">They pay for PRESENCE. Not tracking. Not manipulation.</p>
+                                        </div>
+
+                                        <div className="bg-black/60 border border-purple-500/50 rounded p-2 mb-2">
+                                            <p className="text-purple-400 font-bold text-xs mb-1">STEP 2: Students OPT-IN to categories</p>
+                                            <p className="text-gray-300 text-xs mb-1">→ Open Prof51 first time: "What do you need help with?"</p>
+                                            <p className="text-gray-300 text-xs mb-1">→ Student picks: Food, Textbooks, Accommodation</p>
+                                            <p className="text-gray-300 text-xs mb-1">→ Student DOESN'T pick: Fashion, Tech, Travel</p>
+                                            <p className="text-white text-xs mt-1">= You ONLY see what YOU chose. Not what advertisers want.</p>
+                                        </div>
+
+                                        <div className="bg-black/60 border border-pink-500/50 rounded p-2 mb-2">
+                                            <p className="text-pink-400 font-bold text-xs mb-1">STEP 3: Prof51 shows DIRECTORY (not ads)</p>
+                                            <p className="text-gray-300 text-xs mb-1">→ You selected "Food"? See list of restaurants near campus</p>
+                                            <p className="text-gray-300 text-xs mb-1">→ Each restaurant: name, menu, phone, student rating</p>
+                                            <p className="text-gray-300 text-xs mb-1">→ No tracking which one you look at</p>
+                                            <p className="text-gray-300 text-xs mb-1">→ No "this restaurant paid more so show them first"</p>
+                                            <p className="text-white text-xs mt-1">Clean list. You choose. We never know which you picked.</p>
+                                        </div>
+
+                                        <div className="bg-black/60 border border-amber-500/50 rounded p-2 mb-2">
+                                            <p className="text-amber-400 font-bold text-xs mb-1">STEP 4: Student contacts business DIRECT</p>
+                                            <p className="text-gray-300 text-xs mb-1">→ You call restaurant: "Hi I want to order"</p>
+                                            <p className="text-gray-300 text-xs mb-1">→ Transaction happens between YOU and THEM</p>
+                                            <p className="text-gray-300 text-xs mb-1">→ Prof51 NEVER sees: what you ordered, how much you spent, when, how often</p>
+                                            <p className="text-white text-xs mt-1">Zero tracking. Zero data harvesting. You're invisible to us.</p>
+                                        </div>
+
+                                        <div className="bg-black/60 border border-green-500/50 rounded p-2">
+                                            <p className="text-green-400 font-bold text-xs mb-1">STEP 5: Students verify businesses (TRUST)</p>
+                                            <p className="text-gray-300 text-xs mb-1">→ After calling restaurant, you can rate: "Great food, saved £6"</p>
+                                            <p className="text-gray-300 text-xs mb-1">→ Bad business? Students rate it badly, eventually removed</p>
+                                            <p className="text-gray-300 text-xs mb-1">→ Good business? Rises in directory, more students find them</p>
+                                            <p className="text-white text-xs mt-1">Community decides who stays. Not money. Quality wins.</p>
+                                        </div>
+
+                                        <p className="text-cyan-400 font-black text-xs mt-3 text-center">BUSINESSES ACCESS STUDENTS ✓</p>
+                                        <p className="text-green-400 font-black text-xs text-center">ZERO ADS ✓</p>
+                                        <p className="text-pink-400 font-black text-xs text-center">ZERO EXTRACTION ✓</p>
+                                        <p className="text-white text-xs text-center mt-2">That's the innovation. Permission-based directory. ♾️❤️♾️</p>
+                                    </div>
+                                </div>
+
                                 <div className="bg-black border-2 border-white rounded-lg p-4">
                                     <p className="text-white font-bold text-sm mb-2">🔥 WHY IT'S POWERFUL AF:</p>
                                     <p className="text-gray-300 text-xs mb-1">1. Students trust it (no ads, no data selling, community verifies)</p>
@@ -273,8 +339,8 @@ export default function Prof51About() {
                                     <p className="text-gray-300 text-xs mb-1">4. Can't be copied (community trust takes years, we're first)</p>
                                     <p className="text-green-400 font-bold text-xs mt-2">Real money at scale. Zero extraction. Makes Archie proud. ♾️❤️♾️</p>
                                 </div>
-                            </div>
-                        </div>
+                                </div>
+                                </div>
 
                         <div className="bg-gradient-to-r from-pink-500/20 to-purple-500/20 border-4 border-pink-500 rounded-xl p-6" style={{ boxShadow: '0 0 50px rgba(236, 72, 153, 0.5)' }}>
                             <p className="text-pink-400 font-black text-xl mb-3">💗 WHAT STUDENTS ACTUALLY FEEL</p>
