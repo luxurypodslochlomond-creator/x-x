@@ -4,7 +4,8 @@ import { base44 } from '@/api/base44Client';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { motion, AnimatePresence } from 'framer-motion';
-import { CheckCircle, XCircle, AlertCircle, Calendar, DollarSign, MessageSquare } from 'lucide-react';
+import { CheckCircle, XCircle, AlertCircle, Calendar, DollarSign, MessageSquare, Users } from 'lucide-react';
+import ScottTeamShare from './ScottTeamShare';
 
 /**
  * SCOTT DECISION CENTER - YES/NO Everything
@@ -22,6 +23,7 @@ import { CheckCircle, XCircle, AlertCircle, Calendar, DollarSign, MessageSquare 
 export default function ScottDecisionCenter() {
   const [reasonInput, setReasonInput] = React.useState('');
   const [currentDecision, setCurrentDecision] = React.useState(null);
+  const [showTeamShare, setShowTeamShare] = React.useState(null);
   const queryClient = useQueryClient();
 
   // Fetch pending decisions
@@ -204,7 +206,17 @@ export default function ScottDecisionCenter() {
               )}
             </div>
 
-            {/* BIG YES/NO BUTTONS */}
+            {/* ASK TEAM FIRST */}
+            <Button
+              onClick={() => setShowTeamShare(item)}
+              className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-black text-lg py-6 rounded-xl mb-4"
+              style={{ boxShadow: '0 0 30px rgba(168, 85, 247, 0.5)' }}
+            >
+              <Users className="w-6 h-6 mr-2" />
+              ASK TEAM (YES/NO)
+            </Button>
+
+            {/* SCOTT'S YES/NO BUTTONS */}
             <div className="grid grid-cols-2 gap-4">
               <Button
                 onClick={() => handleYes(item)}
@@ -228,6 +240,15 @@ export default function ScottDecisionCenter() {
           </motion.div>
         ))}
       </div>
+
+      {/* TEAM SHARE MODAL */}
+      {showTeamShare && (
+        <ScottTeamShare
+          item={showTeamShare}
+          type={showTeamShare.type}
+          onClose={() => setShowTeamShare(null)}
+        />
+      )}
 
     </div>
   );
