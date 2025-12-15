@@ -26,15 +26,14 @@ export default function LostAndFoundMesh() {
         return () => clearInterval(interval);
     }, []);
 
-    // HIGH-VALUE items students ACTUALLY report (not £15 cables)
-    // Source: Most reported = phones, keys, wallets, laptops, ID cards
+    // IRREPLACEABLE items - sentimental, urgent, can't buy another
     const recentFinds = [
-        { item: 'iPhone 13 (blue)', location: 'Library Level 3', time: '2 mins ago', status: 'found' },
-        { item: 'House Keys (3 keys)', location: 'Main Quad', time: '15 mins ago', status: 'found' },
-        { item: 'MacBook Pro 14"', location: 'Student Union', time: '1 hour ago', status: 'searching' },
-        { item: 'Black Wallet', location: 'Gym Locker Room', time: '3 hours ago', status: 'found' },
-        { item: 'AirPods Pro', location: 'Lecture Hall B', time: '5 hours ago', status: 'searching' },
-        { item: 'Student ID Card', location: 'Potterow Bar', time: '8 hours ago', status: 'found' },
+        { item: 'Passport (expires tomorrow)', location: 'Library Level 3', time: '2 mins ago', status: 'found' },
+        { item: 'Gran\'s necklace', location: 'Main Quad', time: '15 mins ago', status: 'found' },
+        { item: 'Phone (all photos)', location: 'Student Union', time: '1 hour ago', status: 'searching' },
+        { item: 'Wallet (betting slip £450)', location: 'Gym Locker Room', time: '3 hours ago', status: 'found' },
+        { item: 'Keys (can\'t get home)', location: 'Lecture Hall B', time: '5 hours ago', status: 'searching' },
+        { item: 'Mum\'s ring', location: 'Potterow Bar', time: '8 hours ago', status: 'found' },
     ];
 
     const handleReport = () => {
@@ -250,13 +249,13 @@ export default function LostAndFoundMesh() {
                         <p className="text-red-400 font-black text-lg font-mono mb-3 text-center">📊 REAL CAMPUS DATA</p>
                         
                         <div className="bg-black border-2 border-amber-500 rounded-lg p-3 mb-3">
-                            <p className="text-amber-400 font-bold text-sm mb-2">TOP 5 MOST REPORTED LOST:</p>
+                            <p className="text-amber-400 font-bold text-sm mb-2">WHAT STUDENTS LOSE (REAL PAIN):</p>
                             <div className="space-y-1 text-xs">
-                                <p className="text-white">1. Phones - £600-£1,200 replacement</p>
-                                <p className="text-white">2. Keys - £200 locksmith + re-keying</p>
-                                <p className="text-white">3. Wallets - ID/cards/cash hassle</p>
-                                <p className="text-white">4. Laptops - All coursework gone</p>
-                                <p className="text-white">5. Student ID - Can't access campus</p>
+                                <p className="text-white">→ Phones - All your photos/memories</p>
+                                <p className="text-white">→ Keys - Locked out, can't get home</p>
+                                <p className="text-white">→ Wallets - Passport/ID/betting slips</p>
+                                <p className="text-white">→ Jewelry - Gran's ring, dad's watch</p>
+                                <p className="text-white">→ Devices - Coursework, personal stuff</p>
                             </div>
                         </div>
 
@@ -275,23 +274,23 @@ export default function LostAndFoundMesh() {
 
                         <div className="space-y-2">
                             <div className="bg-black border-2 border-green-500 rounded-lg p-3">
-                                <p className="text-green-400 font-bold text-sm mb-1">📱 iPhone (£900 value)</p>
-                                <p className="text-gray-300 text-xs">Potterow bathroom → 84 mesh nodes → Located in 7 mins</p>
+                                <p className="text-green-400 font-bold text-sm mb-1">💍 Gran's ring (can't replace)</p>
+                                <p className="text-gray-300 text-xs">Potterow bathroom → Mesh found it → Reunited same night</p>
                             </div>
 
                             <div className="bg-black border-2 border-green-500 rounded-lg p-3">
-                                <p className="text-green-400 font-bold text-sm mb-1">🔑 House Keys (£200 locksmith)</p>
-                                <p className="text-gray-300 text-xs">Student Union → Mesh pinpointed sofa → Avoided re-keying flat</p>
+                                <p className="text-green-400 font-bold text-sm mb-1">📱 Phone (all photos)</p>
+                                <p className="text-gray-300 text-xs">Library → 92 nodes scanned → 3 years of memories saved</p>
                             </div>
 
                             <div className="bg-black border-2 border-green-500 rounded-lg p-3">
-                                <p className="text-green-400 font-bold text-sm mb-1">💻 MacBook Pro (all coursework)</p>
-                                <p className="text-gray-300 text-xs">Library Level 2 → Last-seen alert → Retrieved before closing</p>
+                                <p className="text-green-400 font-bold text-sm mb-1">🎫 Passport + betting slip (£380)</p>
+                                <p className="text-gray-300 text-xs">Student Union → Located in lost property → Flight saved</p>
                             </div>
 
                             <div className="bg-black border-2 border-green-500 rounded-lg p-3">
-                                <p className="text-green-400 font-bold text-sm mb-1">💳 Wallet (ID + cards)</p>
-                                <p className="text-gray-300 text-xs">Lecture hall → Bluetooth ping → Found under seat in 12 mins</p>
+                                <p className="text-green-400 font-bold text-sm mb-1">🔑 Keys (locked out)</p>
+                                <p className="text-gray-300 text-xs">Lecture hall → Found under desk → Didn't sleep on street</p>
                             </div>
                         </div>
                     </div>
