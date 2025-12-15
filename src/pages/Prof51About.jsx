@@ -200,6 +200,82 @@ export default function Prof51About() {
                             <p className="text-pink-400 text-xs text-center mt-1">Not "another app". THE app. ✓</p>
                         </div>
 
+                        <div className="bg-gradient-to-r from-amber-500/20 to-green-500/20 border-4 border-amber-500 rounded-xl p-6" style={{ boxShadow: '0 0 50px rgba(245, 158, 11, 0.5)' }}>
+                            <p className="text-amber-400 font-black text-xl mb-3">💰 HOW WE MAKE MONEY (ZERO EXTRACTION)</p>
+                            <p className="text-white text-sm mb-4">Businesses want to reach students. We make it FAIR for everyone.</p>
+
+                            <div className="space-y-3">
+                                <div className="bg-black border-2 border-green-500 rounded-lg p-4">
+                                    <p className="text-green-400 font-bold text-sm mb-2">✓ BUSINESSES PAY FOR ACCESS (NOT DATA)</p>
+                                    <p className="text-white text-xs mb-1">Restaurant pays Prof51 £200/year to be in directory</p>
+                                    <p className="text-gray-300 text-xs mb-1">→ Students see: name, menu, phone number</p>
+                                    <p className="text-gray-300 text-xs mb-1">→ Students call DIRECT (save money, restaurant keeps full revenue)</p>
+                                    <p className="text-gray-300 text-xs mb-1">→ Prof51 NEVER sees the transaction</p>
+                                    <p className="text-gray-300 text-xs mb-1">→ No tracking, no data harvesting, no selling student behavior</p>
+                                    <p className="text-cyan-400 font-bold text-xs mt-2">Business pays for PERMISSION to be seen. That's it. ✓</p>
+                                </div>
+
+                                <div className="bg-black border-2 border-purple-500 rounded-lg p-4">
+                                    <p className="text-purple-400 font-bold text-sm mb-2">✓ STUDENTS CHOOSE WHAT THEY SEE (OPT-IN)</p>
+                                    <p className="text-white text-xs mb-1">Zero ads. Students control everything.</p>
+                                    <p className="text-gray-300 text-xs mb-1">→ "Show me: Food, Accommodation, Textbooks" = you see those</p>
+                                    <p className="text-gray-300 text-xs mb-1">→ "Hide: Fashion, Travel" = you don't see those</p>
+                                    <p className="text-gray-300 text-xs mb-1">→ AI learns what you ACTUALLY need (not what advertisers want)</p>
+                                    <p className="text-pink-400 font-bold text-xs mt-2">You control Prof51. Prof51 doesn't control you. ✓</p>
+                                </div>
+
+                                <div className="bg-black border-2 border-cyan-500 rounded-lg p-4">
+                                    <p className="text-cyan-400 font-bold text-sm mb-2">✓ VERIFICATION = TRUST (NOT SPAM)</p>
+                                    <p className="text-white text-xs mb-1">Big companies pay more? Yes. But ONLY if students verify they're good.</p>
+                                    <p className="text-gray-300 text-xs mb-1">→ Restaurant verified by 500 students = trustworthy</p>
+                                    <p className="text-gray-300 text-xs mb-1">→ Landlord with 10 bad reviews = kicked off platform</p>
+                                    <p className="text-gray-300 text-xs mb-1">→ Textbook seller scams someone = banned forever</p>
+                                    <p className="text-red-400 text-xs mb-1">→ Students rate businesses. Bad actors = OUT.</p>
+                                    <p className="text-green-400 font-bold text-xs mt-2">Money doesn't buy trust. Quality does. ✓</p>
+                                </div>
+
+                                <div className="bg-gradient-to-r from-red-500/20 to-pink-500/20 border-4 border-red-500 rounded-lg p-4">
+                                    <p className="text-red-400 font-bold text-sm mb-2">💎 THE INNOVATION (TRULY POWERFUL):</p>
+                                    <p className="text-white text-xs mb-2">Businesses teach students + Students verify businesses = ECOSYSTEM</p>
+
+                                    <div className="bg-black/60 border border-pink-500/50 rounded p-2 mb-2">
+                                        <p className="text-pink-400 font-bold text-xs mb-1">EXAMPLE 1: Local restaurant</p>
+                                        <p className="text-gray-300 text-xs mb-1">→ Pays £200/year to Prof51</p>
+                                        <p className="text-gray-300 text-xs mb-1">→ Gets listed to 1,000 students on campus</p>
+                                        <p className="text-gray-300 text-xs mb-1">→ Students call direct (no Just Eat fees)</p>
+                                        <p className="text-gray-300 text-xs mb-1">→ Restaurant saves £5,640/year in platform fees</p>
+                                        <p className="text-green-400 text-xs font-bold">→ Win-win: Restaurant saves £5,440 net, students save £5.64/order ✓</p>
+                                    </div>
+
+                                    <div className="bg-black/60 border border-purple-500/50 rounded p-2 mb-2">
+                                        <p className="text-purple-400 font-bold text-xs mb-1">EXAMPLE 2: Big company (Apple/Nike/etc)</p>
+                                        <p className="text-gray-300 text-xs mb-1">→ Pays £50,000/year to reach 100,000 students globally</p>
+                                        <p className="text-gray-300 text-xs mb-1">→ NOT ads. They offer: student discount code + educational content</p>
+                                        <p className="text-gray-300 text-xs mb-1">→ Students OPT-IN: "Show me tech deals" = they see Apple</p>
+                                        <p className="text-gray-300 text-xs mb-1">→ Students verify: "Got MacBook 20% off, legit" = trust builds</p>
+                                        <p className="text-cyan-400 text-xs font-bold">→ Big company pays MORE but students still control what they see ✓</p>
+                                    </div>
+
+                                    <div className="bg-black/60 border border-amber-500/50 rounded p-2">
+                                        <p className="text-amber-400 font-bold text-xs mb-1">SCALE = MASSIVE VALUE (NO EXTRACTION):</p>
+                                        <p className="text-white text-xs mb-1">1,000 students on campus = £20,000/year revenue (100 businesses × £200)</p>
+                                        <p className="text-white text-xs mb-1">100,000 students globally = £2M/year (big companies pay more for reach)</p>
+                                        <p className="text-white text-xs mb-1">10M students = £20M-£50M/year (sustainable forever)</p>
+                                        <p className="text-green-400 text-xs font-bold mt-1">Students FREE forever. Businesses pay for REACH not DATA. ✓</p>
+                                    </div>
+                                </div>
+
+                                <div className="bg-black border-2 border-white rounded-lg p-4">
+                                    <p className="text-white font-bold text-sm mb-2">🔥 WHY IT'S POWERFUL AF:</p>
+                                    <p className="text-gray-300 text-xs mb-1">1. Students trust it (no ads, no data selling, community verifies)</p>
+                                    <p className="text-gray-300 text-xs mb-1">2. Businesses love it (cheaper than ads, better targeting, real results)</p>
+                                    <p className="text-gray-300 text-xs mb-1">3. Scales globally (same model works Edinburgh → MIT → world)</p>
+                                    <p className="text-gray-300 text-xs mb-1">4. Can't be copied (community trust takes years, we're first)</p>
+                                    <p className="text-green-400 font-bold text-xs mt-2">Real money at scale. Zero extraction. Makes Archie proud. ♾️❤️♾️</p>
+                                </div>
+                            </div>
+                        </div>
+
                         <div className="bg-black border-2 border-white rounded-lg p-4">
                             <p className="text-white font-bold text-sm mb-2">💯 THE VIBE:</p>
                             <p className="text-gray-300 mb-1">Not "this might be useful one day"</p>
