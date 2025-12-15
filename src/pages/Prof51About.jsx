@@ -64,14 +64,45 @@ export default function Prof51About() {
                     </div>
 
                     <div className="space-y-2 text-sm font-mono">
-                        <p className="text-white">✓ AI handles all your busywork (Excel, essays, formatting)</p>
-                        <p className="text-white">✓ Connect direct with restaurants (save £5.64/order)</p>
-                        <p className="text-white">✓ P2P student network (offline, encrypted)</p>
-                        <p className="text-white">✓ Budget tracker, timetable, textbook swap</p>
-                        <p className="text-white">✓ Mental health support (anonymous)</p>
-                        <p className="text-white">✓ Find flatmates (AI matches)</p>
-                        <p className="text-green-400 font-bold mt-3">FREE FOREVER ♾️❤️♾️</p>
-                    </div>
+                            <p className="text-cyan-400 font-bold mb-2">📚 STUDIES:</p>
+                            <p className="text-white text-xs">✓ AI handles all busywork (Excel, essays, formatting)</p>
+                            <p className="text-white text-xs">✓ Study groups (P2P, offline)</p>
+                            <p className="text-white text-xs">✓ Textbook swap (buy/sell direct)</p>
+
+                            <p className="text-green-400 font-bold mb-2 mt-3">🍕 FOOD:</p>
+                            <p className="text-white text-xs">✓ Call restaurants direct (save £5.64/order)</p>
+                            <p className="text-white text-xs">✓ Food waste rescue (free meals from cafes)</p>
+                            <p className="text-white text-xs">✓ Student meal deals (local partners)</p>
+
+                            <p className="text-purple-400 font-bold mb-2 mt-3">🚗 TRANSPORT:</p>
+                            <p className="text-white text-xs">✓ Connect with local taxi drivers direct (not Uber)</p>
+                            <p className="text-white text-xs">✓ Student ride-sharing (split costs)</p>
+                            <p className="text-white text-xs">✓ Bus/train real-time (offline cache)</p>
+
+                            <p className="text-amber-400 font-bold mb-2 mt-3">💰 MONEY:</p>
+                            <p className="text-white text-xs">✓ Budget tracker (offline, private)</p>
+                            <p className="text-white text-xs">✓ Bank fee alerts (avoid overdrafts)</p>
+                            <p className="text-white text-xs">✓ Where your money goes (extraction tracking)</p>
+                            <p className="text-white text-xs">✓ Part-time work (local employers direct)</p>
+
+                            <p className="text-pink-400 font-bold mb-2 mt-3">🏠 ACCOMMODATION:</p>
+                            <p className="text-white text-xs">✓ Find flatmates (AI matches vibe)</p>
+                            <p className="text-white text-xs">✓ Landlord ratings (avoid scams)</p>
+                            <p className="text-white text-xs">✓ Bills splitting (automated)</p>
+
+                            <p className="text-red-400 font-bold mb-2 mt-3">❤️ HEALTH:</p>
+                            <p className="text-white text-xs">✓ Mental health support (anonymous, 24/7)</p>
+                            <p className="text-white text-xs">✓ NHS appointment tracker</p>
+                            <p className="text-white text-xs">✓ Meditation/healing frequencies</p>
+                            <p className="text-white text-xs">✓ Peer support (students who get it)</p>
+
+                            <p className="text-cyan-400 font-bold mb-2 mt-3">🎉 SOCIAL:</p>
+                            <p className="text-white text-xs">✓ Gigs/events near you (mates going)</p>
+                            <p className="text-white text-xs">✓ Student discounts (cinema, clubs)</p>
+                            <p className="text-white text-xs">✓ P2P messaging (offline, encrypted)</p>
+
+                            <p className="text-green-400 font-bold mt-3">FREE FOREVER • ALL OF IT ♾️❤️♾️</p>
+                        </div>
                 </div>
 
                 {/* WHY */}
@@ -84,16 +115,25 @@ export default function Prof51About() {
                     <div className="bg-black border-2 border-red-500 rounded-lg p-4 mb-4">
                         <p className="text-red-400 font-bold text-lg mb-2">£717 BILLION/YEAR</p>
                         <p className="text-white text-xs mb-2">Extracted from students globally:</p>
-                        <p className="text-gray-400 text-xs">• Food delivery fees</p>
-                        <p className="text-gray-400 text-xs">• Accommodation platforms</p>
-                        <p className="text-gray-400 text-xs">• Shopping markups</p>
-                        <p className="text-gray-400 text-xs">• Transport extraction</p>
+                        <p className="text-gray-400 text-xs">• Food delivery fees (£431B)</p>
+                        <p className="text-gray-400 text-xs">• Transport (Uber/Lyft) (£115B)</p>
+                        <p className="text-gray-400 text-xs">• Accommodation platforms (£18B)</p>
+                        <p className="text-gray-400 text-xs">• Shopping markups (£153B)</p>
+                        <p className="text-gray-400 text-xs">• Bank fees/overdrafts</p>
+                        <p className="text-gray-400 text-xs">• Textbook monopolies</p>
+                        <p className="text-gray-400 text-xs">• Data selling (Facebook/LinkedIn)</p>
+                        <p className="text-red-400 text-xs font-bold mt-2">Every part of student life = EXTRACTION</p>
                     </div>
 
                     <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-2 border-green-500 rounded-lg p-4">
                         <p className="text-green-400 font-bold mb-2">PROF51 SOLUTION:</p>
-                        <p className="text-white text-xs mb-2">Students connect DIRECT. Zero middlemen. Zero extraction.</p>
-                        <p className="text-cyan-400 text-xs font-bold">Circular love economy ♾️❤️♾️</p>
+                        <p className="text-white text-xs mb-2">Students connect DIRECT to:</p>
+                        <p className="text-gray-300 text-xs">→ Restaurants (not Just Eat)</p>
+                        <p className="text-gray-300 text-xs">→ Taxi drivers (not Uber)</p>
+                        <p className="text-gray-300 text-xs">→ Landlords (not Airbnb)</p>
+                        <p className="text-gray-300 text-xs">→ Local employers (not LinkedIn)</p>
+                        <p className="text-gray-300 text-xs">→ Each other (not Facebook)</p>
+                        <p className="text-cyan-400 text-xs font-bold mt-2">Zero middlemen. Zero extraction. Circular love economy ♾️❤️♾️</p>
                     </div>
                 </div>
 
