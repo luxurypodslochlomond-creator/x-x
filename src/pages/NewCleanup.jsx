@@ -59,17 +59,19 @@ export default function NewCleanupPage() {
     const [authChecked, setAuthChecked] = useState(false);
 
     useEffect(() => {
+        let mounted = true;
         const checkAuth = async () => {
             try {
                 await base44.auth.me();
-                setIsAuthenticated(true);
+                if (mounted) setIsAuthenticated(true);
             } catch {
-                setIsAuthenticated(false);
+                if (mounted) setIsAuthenticated(false);
             } finally {
-                setAuthChecked(true);
+                if (mounted) setAuthChecked(true);
             }
         };
         checkAuth();
+        return () => { mounted = false; };
     }, []);
 
     const { data: recentActivity = [], isLoading: activityLoading } = useQuery({
@@ -905,15 +907,6 @@ export default function NewCleanupPage() {
             alert('Share text copied! Paste to Instagram/TikTok');
         }
     };
-
-    // Show loading until auth checked
-    if (!authChecked) {
-        return (
-            <div className="min-h-screen bg-black flex items-center justify-center">
-                <Heart className="w-16 h-16 text-pink-400 animate-pulse" />
-            </div>
-        );
-    }
 
     // LANDING - 8-BIT QUANTUM
     if (step === 'landing') {
