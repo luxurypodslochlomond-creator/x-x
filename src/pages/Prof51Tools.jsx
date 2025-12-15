@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { FileSpreadsheet, FileText, Coffee, Users, Home, Brain, ArrowLeft, DollarSign, Calendar, Book, Heart } from 'lucide-react';
+import { FileSpreadsheet, FileText, Coffee, Users, Home, Brain, ArrowLeft, DollarSign, Calendar, Book, Heart, Search } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import Prof51Icon8Bit from '@/components/shared/Prof51Icon8Bit';
@@ -13,6 +13,7 @@ import BudgetTracker from '@/components/prof51/BudgetTracker';
 import TimetableManager from '@/components/prof51/TimetableManager';
 import TextbookExchange from '@/components/prof51/TextbookExchange';
 import MentalHealthBuddy from '@/components/prof51/MentalHealthBuddy';
+import LostAndFoundMesh from '@/components/prof51/LostAndFoundMesh';
 
 /**
  * PROF51 TOOLS - ACTUAL WORKING STUDENT CO-MANAGER
@@ -23,6 +24,7 @@ export default function Prof51Tools() {
     const [activeTool, setActiveTool] = useState(null);
 
     const tools = [
+        { id: 'lostandfound', title: 'Lost & Found', icon: Search, color: 'pink', desc: 'P2P mesh finds ANYTHING', highlight: true },
         { id: 'excel', title: 'Excel Generator', icon: FileSpreadsheet, color: 'cyan', desc: 'Economics models in seconds' },
         { id: 'essay', title: 'Essay Outliner', icon: FileText, color: 'purple', desc: 'Structure any assignment' },
         { id: 'food', title: 'Food Direct', icon: Coffee, color: 'amber', desc: 'Call restaurants, save £5.64' },
@@ -48,6 +50,7 @@ export default function Prof51Tools() {
                 </div>
 
                 <div className="p-4">
+                    {activeTool === 'lostandfound' && <LostAndFoundMesh />}
                     {activeTool === 'excel' && <ExcelGenerator />}
                     {activeTool === 'essay' && <EssayOutliner />}
                     {activeTool === 'food' && <RestaurantDirectory />}
@@ -127,9 +130,14 @@ export default function Prof51Tools() {
                                 key={tool.id}
                                 onClick={() => setActiveTool(tool.id)}
                                 whileTap={{ scale: 0.98 }}
-                                className={`bg-gradient-to-r ${c.bg} border-4 ${c.border} rounded-xl p-6 text-left transition-all hover:scale-105`}
-                                style={{ boxShadow: `0 0 30px ${c.shadow}` }}
+                                className={`bg-gradient-to-r ${c.bg} border-4 ${c.border} rounded-xl p-6 text-left transition-all hover:scale-105 ${tool.highlight ? 'relative' : ''}`}
+                                style={{ boxShadow: tool.highlight ? `0 0 60px ${c.shadow}` : `0 0 30px ${c.shadow}` }}
                             >
+                                {tool.highlight && (
+                                    <div className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-black px-2 py-1 rounded font-mono animate-pulse">
+                                        🔥 KILLER
+                                    </div>
+                                )}
                                 <div className="flex items-center gap-4">
                                     <Icon className={`w-12 h-12 ${c.text} flex-shrink-0`} />
                                     <div>
