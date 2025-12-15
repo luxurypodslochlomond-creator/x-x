@@ -239,6 +239,7 @@ import ScottZeroServerArchitecture from './pages/ScottZeroServerArchitecture';
 import Diary51 from './pages/Diary51';
 import MeshTechWhitepaper from './pages/MeshTechWhitepaper';
 import HealingFrequencyFinder from './pages/HealingFrequencyFinder';
+import ScottComparison from './pages/ScottComparison';
 import __Layout from './Layout.jsx';
 
 
@@ -484,6 +485,7 @@ export const PAGES = {
     "Diary51": Diary51,
     "MeshTechWhitepaper": MeshTechWhitepaper,
     "HealingFrequencyFinder": HealingFrequencyFinder,
+    "ScottComparison": ScottComparison,
 }
 
 export const pagesConfig = {
