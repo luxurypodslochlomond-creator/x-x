@@ -160,7 +160,7 @@ Return CLEAN, FORMATTED content ready to use. Be helpful, not generic.`,
                         <motion.button
                             initial={{ opacity: 0, scale: 0.9 }}
                             animate={{ opacity: 1, scale: 1 }}
-                            onClick={() => {
+                            onClick={async () => {
                                 const shareMsg = `🎓 PROF51 - AI Co-Manager for Students
 
                         FOUNDER: Archie (19, Economics @ Edinburgh)
@@ -178,11 +178,18 @@ Return CLEAN, FORMATTED content ready to use. Be helpful, not generic.`,
 
                         ♾️❤️♾️`;
 
-                                if (navigator.share) {
-                                    navigator.share({ title: 'PROF51', text: shareMsg });
-                                } else {
-                                    navigator.clipboard.writeText(shareMsg);
-                                    alert('Message copied! Send to Lennox + Archie ♾️❤️♾️');
+                                try {
+                                    if (navigator.share) {
+                                        await navigator.share({ title: 'PROF51', text: shareMsg });
+                                    } else {
+                                        await navigator.clipboard.writeText(shareMsg);
+                                        alert('Message copied! Send to Lennox + Archie ♾️❤️♾️');
+                                    }
+                                } catch (err) {
+                                    if (err.name !== 'AbortError') {
+                                        await navigator.clipboard.writeText(shareMsg);
+                                        alert('Message copied! Send to Lennox + Archie ♾️❤️♾️');
+                                    }
                                 }
                             }}
                             className="mt-3 w-full bg-gradient-to-r from-pink-500 to-purple-500 text-white font-black py-4 rounded-lg border-4 border-pink-400 font-mono text-sm"
