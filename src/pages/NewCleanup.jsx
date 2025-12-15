@@ -906,6 +906,15 @@ export default function NewCleanupPage() {
         }
     };
 
+    // Show loading until auth checked
+    if (!authChecked) {
+        return (
+            <div className="min-h-screen bg-black flex items-center justify-center">
+                <Heart className="w-16 h-16 text-pink-400 animate-pulse" />
+            </div>
+        );
+    }
+
     // LANDING - 8-BIT QUANTUM
     if (step === 'landing') {
         return (

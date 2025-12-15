@@ -30,61 +30,15 @@ export default function HealingFrequencyFinder() {
         file: null
     });
 
-    // AI51 DEEP SEARCH - Scans Discogs, SoundCloud, Bandcamp, YouTube
+    // AI51 DEEP SEARCH - Uses backend function for powerful search
     const deepSearch = useMutation({
         mutationFn: async (query) => {
-            setSearching(true);
-            
-            // AI51 searches across multiple sources
-            const searchResults = await base44.integrations.Core.InvokeLLM({
-                prompt: `DEEP SEARCH for healing frequencies/music:
-
-Query: "${query}"
-
-Search across:
-1. Discogs - unreleased vinyl, 432Hz pressings, rare meditation albums
-2. SoundCloud - private healing tracks, frequency generators, binaural beats
-3. Bandcamp - underground meditation artists, healing frequency producers
-4. YouTube - unlisted 432Hz conversions, Schumann resonance tracks
-5. Archive.org - public domain healing music, vintage meditation recordings
-
-For each result found, extract:
-- Title
-- Artist/Producer
-- Platform (where found)
-- URL (direct link)
-- Type (vinyl, digital, video)
-- Frequency info (432Hz, 528Hz, binaural, etc)
-- Why it's special/healing
-
-Focus on UNRELEASED or RARE tracks that would NEVER be on Spotify.
-Look for producers who quit before streaming, spiritual artists, frequency healers.
-
-Return JSON array of results (max 20).`,
-                add_context_from_internet: true,
-                response_json_schema: {
-                    type: 'object',
-                    properties: {
-                        results: {
-                            type: 'array',
-                            items: {
-                                type: 'object',
-                                properties: {
-                                    title: { type: 'string' },
-                                    artist: { type: 'string' },
-                                    platform: { type: 'string' },
-                                    url: { type: 'string' },
-                                    type: { type: 'string' },
-                                    frequency_info: { type: 'string' },
-                                    description: { type: 'string' }
-                                }
-                            }
-                        }
-                    }
-                }
+            const response = await base44.functions.invoke('findHealingFrequencies', {
+                query,
+                platforms: ['discogs', 'soundcloud', 'bandcamp', 'archive', 'youtube'],
+                formats: ['FLAC', 'WAV', 'AIFF']
             });
-
-            return searchResults.results || [];
+            return response.results || [];
         },
         onSuccess: (data) => {
             setResults(data);
@@ -367,9 +321,25 @@ Return JSON array of results (max 20).`,
                                                             {track.frequency_info}
                                                         </span>
                                                     )}
+                                                    {track.download_format && (
+                                                        <span className="bg-amber-500/20 border border-amber-500 text-amber-300 px-3 py-1 rounded-full text-xs font-bold">
+                                                            {track.download_format}
+                                                        </span>
+                                                    )}
+                                                    {track.license && (
+                                                        <span className="bg-blue-500/20 border border-blue-500 text-blue-300 px-3 py-1 rounded-full text-xs font-bold">
+                                                            {track.license}
+                                                        </span>
+                                                    )}
                                                 </div>
 
-                                                <p className="text-gray-300 text-sm mb-4">{track.description}</p>
+                                                <p className="text-gray-300 text-sm mb-3">{track.why_special || track.description}</p>
+                                                {track.healing_properties && (
+                                                    <p className="text-green-300 text-xs mb-3">🌿 {track.healing_properties}</p>
+                                                )}
+                                                {track.contact_info && (
+                                                    <p className="text-cyan-300 text-xs mb-3">📧 {track.contact_info}</p>
+                                                )}
 
                                                 <div className="flex gap-3">
                                                     <a
