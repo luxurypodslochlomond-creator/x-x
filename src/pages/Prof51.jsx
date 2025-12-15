@@ -323,15 +323,14 @@ Return CLEAN, FORMATTED content ready to use. Be helpful, not generic.`,
                     </div>
 
                     <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-4 border-green-500 p-4 rounded" style={{ boxShadow: '0 0 40px rgba(34, 197, 94, 0.4)' }}>
-                        <p className="text-green-400 font-bold mb-2">PROF51 SOLUTION:</p>
-                        <p className="text-white text-xs mb-1">✓ Student opens Prof51 → Sees verified local restaurants</p>
-                        <p className="text-white text-xs mb-1">✓ Tap to call direct (or $P51 payment future)</p>
-                        <p className="text-white text-xs mb-1">✓ Restaurant keeps full money</p>
-                        <p className="text-white text-xs mb-1">✓ Student saves £5.64 per order</p>
-                        <p className="text-white text-xs mb-1">✓ Zero data extraction (we never see what you eat)</p>
-                        <p className="text-cyan-400 text-xs font-bold mt-2">Why restaurants pay Prof51: We give them REAL student access without extraction</p>
-                        <p className="text-pink-400 text-xs font-bold mt-1">Restaurants pay £200/year → Reach 1000+ students → Save £5,640 in fees</p>
-                        <p className="text-green-400 text-xs font-bold mt-2">FUCK THE MIDDLEMEN. DIRECT CONNECTION. ♾️❤️♾️</p>
+                        <p className="text-green-400 font-bold mb-2">PROF51 SOLUTION (SIMPLE):</p>
+                        <p className="text-white text-xs mb-1">1️⃣ Open Prof51 → See local restaurants</p>
+                        <p className="text-white text-xs mb-1">2️⃣ Tap phone icon → Call direct</p>
+                        <p className="text-white text-xs mb-1">3️⃣ Restaurant keeps full £25.59 (not £19.95)</p>
+                        <p className="text-white text-xs mb-1">4️⃣ You save £5.64 every order</p>
+                        <p className="text-cyan-400 text-xs font-bold mt-2">Restaurant pays Prof51 £200/year = Reach 1000+ students</p>
+                        <p className="text-pink-400 text-xs font-bold mt-1">Students FREE forever. Restaurant saves £5,640 in parasite fees.</p>
+                        <p className="text-green-400 text-xs font-bold mt-2">DIRECT CONNECTION. ZERO EXTRACTION. ♾️❤️♾️</p>
                     </div>
                 </div>
             </div>
@@ -870,69 +869,40 @@ Return CLEAN, FORMATTED content ready to use. Be helpful, not generic.`,
                     </div>
 
                     <div className="bg-gradient-to-r from-green-500/20 to-blue-500/20 border-4 border-green-500 rounded-lg p-4" style={{ boxShadow: '0 0 40px rgba(34, 197, 94, 0.4)' }}>
-                        <p className="text-green-400 font-bold text-sm font-mono mb-3">♾️ THE CIRCULAR ECONOMY (THE BEAUTIFUL LOOP):</p>
-                        
+                        <p className="text-green-400 font-bold text-sm font-mono mb-3">♾️ LOVE ECONOMY (SIMPLE LOOP):</p>
+
                         <div className="space-y-2 text-xs font-mono">
-                            <div className="bg-black/60 border border-green-500/30 rounded p-2">
-                                <p className="text-white font-bold mb-1">1. Companies pay Prof51 💰</p>
-                                <p className="text-gray-400">Brands want student market (£50B UK alone)</p>
+                            <div className="bg-black border-2 border-green-500 rounded p-2">
+                                <p className="text-green-400 font-bold">1. Restaurants pay Prof51 £200/year 💰</p>
                             </div>
+                            <div className="text-cyan-400 text-xl text-center">↓</div>
 
-                            <div className="flex justify-center">
-                                <div className="text-cyan-400 text-2xl">↓</div>
+                            <div className="bg-black border-2 border-cyan-500 rounded p-2">
+                                <p className="text-cyan-400 font-bold">2. Students use Prof51 FREE 🎓</p>
                             </div>
+                            <div className="text-cyan-400 text-xl text-center">↓</div>
 
-                            <div className="bg-black/60 border border-cyan-500/30 rounded p-2">
-                                <p className="text-white font-bold mb-1">2. Students get FREE tools 🎓</p>
-                                <p className="text-gray-400">AI, P2P mesh, import anything, zero cost forever</p>
+                            <div className="bg-black border-2 border-purple-500 rounded p-2">
+                                <p className="text-purple-400 font-bold">3. Student calls restaurant direct ☎️</p>
                             </div>
+                            <div className="text-cyan-400 text-xl text-center">↓</div>
 
-                            <div className="flex justify-center">
-                                <div className="text-cyan-400 text-2xl">↓</div>
+                            <div className="bg-black border-2 border-pink-500 rounded p-2">
+                                <p className="text-pink-400 font-bold">4. Restaurant keeps full £25.59 🍕</p>
                             </div>
+                            <div className="text-cyan-400 text-xl text-center">↓</div>
 
-                            <div className="bg-black/60 border border-purple-500/30 rounded p-2">
-                                <p className="text-white font-bold mb-1">3. Students help each other 🤝</p>
-                                <p className="text-gray-400">Tutor, share notes, explain concepts</p>
+                            <div className="bg-black border-2 border-amber-500 rounded p-2">
+                                <p className="text-amber-400 font-bold">5. Student saves £5.64 💚</p>
                             </div>
+                            <div className="text-green-400 text-2xl text-center animate-pulse">⟲</div>
 
-                            <div className="flex justify-center">
-                                <div className="text-cyan-400 text-2xl">↓</div>
-                            </div>
-
-                            <div className="bg-black/60 border border-amber-500/30 rounded p-2">
-                                <p className="text-white font-bold mb-1">4. Earn $P51 for helping 💚</p>
-                                <p className="text-gray-400">Smart students earn, struggling students get help</p>
-                            </div>
-
-                            <div className="flex justify-center">
-                                <div className="text-cyan-400 text-2xl">↓</div>
-                            </div>
-
-                            <div className="bg-black/60 border border-pink-500/30 rounded p-2">
-                                <p className="text-white font-bold mb-1">5. Spend on food & life 🍕</p>
-                                <p className="text-gray-400">Local cafes, supermarkets, essentials</p>
-                            </div>
-
-                            <div className="flex justify-center">
-                                <div className="text-cyan-400 text-2xl">↓</div>
-                            </div>
-
-                            <div className="bg-black/60 border border-green-500/30 rounded p-2">
-                                <p className="text-white font-bold mb-1">6. Money stays in community 🌱</p>
-                                <p className="text-gray-400">Local businesses thrive, students fed, repeat</p>
-                            </div>
-
-                            <div className="flex justify-center">
-                                <div className="text-green-400 text-2xl animate-pulse">⟲</div>
-                            </div>
-
-                            <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-2 border-green-500 rounded p-3 mt-3">
-                                <p className="text-green-400 font-bold mb-1">THE MAGIC:</p>
-                                <p className="text-white text-xs mb-1">→ Nobody extracted from (students FREE forever)</p>
-                                <p className="text-white text-xs mb-1">→ Everyone rises together (help others = help yourself)</p>
-                                <p className="text-white text-xs mb-1">→ Money flows in circles (not extracted to top)</p>
-                                <p className="text-cyan-400 font-bold mt-2">This is what LOVE economy feels like ♾️❤️♾️</p>
+                            <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-4 border-green-500 rounded p-3 mt-3">
+                                <p className="text-white text-xs mb-1">✓ Nobody extracted from</p>
+                                <p className="text-white text-xs mb-1">✓ Restaurant earns MORE</p>
+                                <p className="text-white text-xs mb-1">✓ Student saves MONEY</p>
+                                <p className="text-white text-xs mb-1">✓ Prof51 grows (more restaurants)</p>
+                                <p className="text-green-400 font-bold mt-2">CIRCULAR. FAIR. LOVE. ♾️❤️♾️</p>
                             </div>
                         </div>
                     </div>
