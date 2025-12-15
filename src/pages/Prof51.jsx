@@ -19,10 +19,40 @@ import { createPageUrl } from '@/utils';
 export default function Prof51() {
     const [activeTab, setActiveTab] = useState('edinburgh');
 
-    // SEO + Social Share Meta Tags
+    const [deferredPrompt, setDeferredPrompt] = React.useState(null);
+    const [showInstallButton, setShowInstallButton] = React.useState(false);
+
+    // PWA Install Prompt
+    React.useEffect(() => {
+        const handler = (e) => {
+            e.preventDefault();
+            setDeferredPrompt(e);
+            setShowInstallButton(true);
+        };
+        window.addEventListener('beforeinstallprompt', handler);
+        return () => window.removeEventListener('beforeinstallprompt', handler);
+    }, []);
+
+    const handleInstallClick = async () => {
+        if (!deferredPrompt) return;
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        if (outcome === 'accepted') {
+            setShowInstallButton(false);
+        }
+        setDeferredPrompt(null);
+    };
+
+    // SEO + Social Share Meta Tags + PWA
     React.useEffect(() => {
         document.title = 'PROF51 - AI Co-Manager for Students | Free Forever';
         
+        // PWA theme
+        const themeColor = document.querySelector('meta[name="theme-color"]') || document.createElement('meta');
+        themeColor.name = 'theme-color';
+        themeColor.content = '#06b6d4';
+        if (!themeColor.parentNode) document.head.appendChild(themeColor);
+
         const metaTags = [
             { property: 'og:title', content: 'PROF51 - AI Co-Manager for Students' },
             { property: 'og:description', content: 'Your most intelligent mate in the universe. Studies • Mindset • Accommodation • Gigs • Fashion • Social • P2P student network. Fuck Facebook/LinkedIn. FREE forever. ♾️❤️♾️' },
@@ -72,6 +102,19 @@ export default function Prof51() {
                             <p className="text-amber-400 font-black text-xs font-mono mb-0.5">ARCHIE'S COMPANY</p>
                             <p className="text-gray-400 text-[10px] font-mono">prof51.io • Separate domain • UF51 Family ♾️❤️♾️</p>
                         </div>
+
+                        {/* PWA INSTALL - DEVICE TO DEVICE */}
+                        {showInstallButton && (
+                            <motion.button
+                                initial={{ opacity: 0, scale: 0.9 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                onClick={handleInstallClick}
+                                className="mt-4 w-full bg-gradient-to-r from-green-500 to-cyan-500 text-white font-black py-4 rounded-lg border-4 border-green-400 font-mono text-sm"
+                                style={{ boxShadow: '0 0 30px rgba(34, 197, 94, 0.5)' }}
+                            >
+                                📱 INSTALL APP → USE OFFLINE → SHARE DEVICE-TO-DEVICE
+                            </motion.button>
+                        )}
 
                         <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-2 border-purple-500 px-4 py-3 rounded-lg mt-3">
                             <p className="text-purple-400 font-black text-xs font-mono mb-1">WHY SEPARATE DOMAIN?</p>
@@ -1159,13 +1202,13 @@ export default function Prof51() {
                 </div>
             </div>
 
-            {/* SHARE WITH FRIENDS - ZERO FRICTION */}
+            {/* P2P DEVICE-TO-DEVICE SHARING */}
             <div className="bg-gradient-to-br from-pink-500/20 to-purple-500/20 border-4 border-pink-500 p-6 mb-8 rounded-xl" style={{ boxShadow: '0 0 50px rgba(236, 72, 153, 0.5)' }}>
                 <div className="flex items-center gap-3 mb-4">
                     <Users className="w-12 h-12 text-pink-400" />
                     <div>
-                        <h2 className="text-pink-400 font-black text-xl font-mono">SHARE WITH FRIENDS</h2>
-                        <p className="text-gray-400 text-xs font-mono">Zero friction viral spread</p>
+                        <h2 className="text-pink-400 font-black text-xl font-mono">STUDENT → STUDENT (P2P)</h2>
+                        <p className="text-gray-400 text-xs font-mono">Device-to-device. No servers. Unstoppable.</p>
                     </div>
                 </div>
 
@@ -1173,40 +1216,51 @@ export default function Prof51() {
                     <Button
                         onClick={() => {
                             const url = window.location.origin + createPageUrl('Prof51');
-                            const text = `Prof51 - AI co-manager for students. FREE forever. Works offline. Try it: ${url}`;
-                            
+                            const text = `📱 PROF51 - Your intelligent mate
+
+            ✓ AI handles all busywork (Excel, essays, formatting)
+            ✓ Works OFFLINE (no WiFi needed)
+            ✓ FREE forever (no ads, no extraction)
+            ✓ Find flatmates, gigs, what's happening
+            ✓ P2P mesh = unstoppable
+
+            → ${url}
+
+            Share device-to-device. Students help students ♾️❤️♾️`;
+
                             if (navigator.share) {
                                 navigator.share({
-                                    title: 'Prof51 - Student AI Co-Manager',
+                                    title: 'PROF51 - Student P2P Network',
                                     text: text,
                                     url: url
                                 }).catch(() => {});
                             } else {
                                 navigator.clipboard.writeText(text);
-                                alert('Link copied! Send to friends ♾️❤️♾️');
+                                alert('Link copied! Share with students ♾️❤️♾️');
                             }
                         }}
                         className="w-full bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-400 hover:to-purple-400 text-white font-black py-6 text-base mb-3"
                     >
-                        📱 SHARE WITH FRIENDS
+                        📱 SHARE DEVICE-TO-DEVICE
                     </Button>
 
-                    <div className="bg-black border border-cyan-500/30 p-3 rounded">
-                        <p className="text-cyan-400 font-bold mb-2">HOW IT SPREADS:</p>
-                        <p className="text-white text-xs mb-1">1. Archie shares link with 5 friends</p>
-                        <p className="text-white text-xs mb-1">2. They try it, works offline instantly</p>
-                        <p className="text-white text-xs mb-1">3. They share with their friends</p>
-                        <p className="text-white text-xs mb-1">4. P2P mesh connects everyone automatically</p>
-                        <p className="text-green-400 text-xs font-bold mt-2">Zero friction = Viral growth ♾️❤️♾️</p>
+                    <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-4 border-green-500 p-4 rounded" style={{ boxShadow: '0 0 30px rgba(34, 197, 94, 0.4)' }}>
+                        <p className="text-green-400 font-bold mb-2">📱 DEVICE-TO-DEVICE NETWORK:</p>
+                        <p className="text-white text-xs mb-2">Your phone → Your friend's phone → Their friends → Global</p>
+                        <p className="text-cyan-400 text-xs mb-1">1. Tap share button above</p>
+                        <p className="text-pink-400 text-xs mb-1">2. Send via WhatsApp/iMessage/Bluetooth</p>
+                        <p className="text-purple-400 text-xs mb-1">3. Friend installs in 10 seconds</p>
+                        <p className="text-amber-400 text-xs mb-1">4. Works offline immediately</p>
+                        <p className="text-green-400 text-xs font-bold mt-2">Edinburgh → Cambridge → MIT → World ♾️❤️♾️</p>
                     </div>
 
-                    <div className="bg-black border border-green-500/30 p-3 rounded">
-                        <p className="text-green-400 font-bold mb-2">ONE TAP = MULTIPLE FRIENDS:</p>
-                        <p className="text-white text-xs mb-1">✓ WhatsApp group → Everyone gets link</p>
-                        <p className="text-white text-xs mb-1">✓ iMessage → Share to study group</p>
-                        <p className="text-white text-xs mb-1">✓ Instagram story → Tag friends</p>
-                        <p className="text-white text-xs mb-1">✓ In person → QR code scan</p>
-                        <p className="text-cyan-400 text-xs font-bold mt-2">One share reaches 10-50 people instantly ♾️❤️♾️</p>
+                    <div className="bg-black border-2 border-purple-500 p-4 rounded">
+                        <p className="text-purple-400 font-bold mb-2">WHY STUDENTS WILL SHARE:</p>
+                        <p className="text-white text-xs mb-1">✓ Saves them 10+ hours/week (actually helps)</p>
+                        <p className="text-white text-xs mb-1">✓ Works when WiFi is shit (lecture halls, libraries)</p>
+                        <p className="text-white text-xs mb-1">✓ Free forever (no catch, genuinely helpful)</p>
+                        <p className="text-white text-xs mb-1">✓ Helps them help friends (circular good)</p>
+                        <p className="text-cyan-400 text-xs font-bold mt-2">Real value = Real viral growth ♾️❤️♾️</p>
                     </div>
                 </div>
             </div>
