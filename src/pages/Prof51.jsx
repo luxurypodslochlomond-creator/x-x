@@ -65,7 +65,7 @@ export default function Prof51() {
                             PROF51
                         </h1>
                         <p className="text-cyan-500 text-sm font-bold font-mono mb-2">Your Most Intelligent Mate in the Universe</p>
-                        <p className="text-pink-400 text-xs font-mono mb-2">Mate = ALL students (any gender) • Your best friend who's got you ♾️</p>
+                        <p className="text-pink-400 text-xs font-mono mb-2">Mate = Best friend (warm, never condescending) • Equal respect, real support ♾️</p>
                         <p className="text-gray-400 text-xs font-mono mb-3">Studies • Mindset • Accommodation • Gigs • Fashion • Social • EVERYTHING • FREE forever ♾️❤️♾️</p>
                         
                         <div className="inline-block bg-gradient-to-r from-amber-500/20 to-green-500/20 border-2 border-amber-500 px-4 py-2 rounded-lg mt-2">
@@ -218,7 +218,7 @@ export default function Prof51() {
                 <div className="space-y-3 text-sm font-mono">
                     <div className="bg-gradient-to-r from-pink-500/20 to-purple-500/20 border-4 border-pink-500 p-4 rounded" style={{ boxShadow: '0 0 30px rgba(236, 72, 153, 0.4)' }}>
                         <p className="text-pink-400 font-bold mb-2">MOST INTELLIGENT MATE IN UNIVERSE:</p>
-                        <p className="text-purple-400 text-xs mb-1 font-bold">Mate = ALL humans (any gender) • Best friend energy ♾️</p>
+                        <p className="text-purple-400 text-xs mb-1 font-bold">Mate = Best friend (warm, respectful, never talking down) ♾️</p>
                         <p className="text-white text-xs mb-2">Not a tool. Not an app. Your actual best friend who helps with EVERYTHING.</p>
                         <p className="text-cyan-400 text-xs mb-1">✓ Studies? Sorted. (AI generates all busywork)</p>
                         <p className="text-green-400 text-xs mb-1">✓ Stressed? Talk to me. (I get it, no judgment)</p>
