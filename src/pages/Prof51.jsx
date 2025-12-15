@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { BookOpen, Brain, TrendingUp, Globe, Users, Zap, Heart, FileText, BarChart3, Presentation, Calculator, GraduationCap, Music, Coffee, Home, DollarSign, ArrowRight, Upload, CheckCircle, Loader } from 'lucide-react';
 import Prof51Icon8Bit from '@/components/shared/Prof51Icon8Bit';
+import LennoxIcon8Bit from '@/components/shared/LennoxIcon8Bit';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { base44 } from '@/api/base44Client';
