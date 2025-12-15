@@ -87,15 +87,15 @@ Return CLEAN, FORMATTED content ready to use. Be helpful, not generic.`,
 
         const metaTags = [
             { property: 'og:title', content: 'PROF51 - AI Co-Manager for Students' },
-            { property: 'og:description', content: 'Your most intelligent mate in the universe. Studies • Mindset • Accommodation • Gigs • Fashion • Social • P2P student network. Fuck Facebook/LinkedIn. FREE forever. ♾️❤️♾️' },
+            { property: 'og:description', content: 'Your most intelligent mate in the universe. Studies • Mindset • Accommodation • Gigs • Fashion • Social • P2P student network. FREE forever. ♾️❤️♾️' },
             { property: 'og:type', content: 'website' },
             { property: 'og:url', content: window.location.href },
             { property: 'og:image', content: window.location.origin + '/prof51-share.png' },
             { name: 'twitter:card', content: 'summary_large_image' },
             { name: 'twitter:title', content: 'PROF51 - AI Co-Manager for Students' },
-            { name: 'twitter:description', content: 'Your most intelligent mate • Studies • Accommodation • Gigs • Fashion • Social • P2P network • Fuck Facebook/LinkedIn • FREE forever ♾️❤️♾️' },
+            { name: 'twitter:description', content: 'Your most intelligent mate • Studies • Accommodation • Gigs • Fashion • Social • P2P network • FREE forever ♾️❤️♾️' },
             { name: 'twitter:image', content: window.location.origin + '/prof51-share.png' },
-            { name: 'description', content: 'PROF51: Your most intelligent mate in the universe. Handles studies, mindset, accommodation, gigs, fashion, social life. P2P student network that actually helps. Zero isolation. Fuck Facebook/LinkedIn. Free forever.' },
+            { name: 'description', content: 'PROF51: Your most intelligent mate in the universe. Handles studies, mindset, accommodation, gigs, fashion, social life. P2P student network that actually helps. Zero isolation. Free forever.' },
         ];
 
         metaTags.forEach(({ property, name, content }) => {
@@ -377,13 +377,13 @@ Return CLEAN, FORMATTED content ready to use. Be helpful, not generic.`,
                     <DollarSign className="w-12 h-12 text-red-400" />
                     <div>
                         <h2 className="text-red-400 font-black text-xl font-mono">THE EXTRACTION PROBLEM</h2>
-                        <p className="text-gray-400 text-xs font-mono">Just Eat extraction = Why Prof51 exists</p>
+                        <p className="text-gray-400 text-xs font-mono">Food delivery extraction = Why Prof51 exists</p>
                     </div>
                 </div>
 
                 <div className="space-y-3 text-sm font-mono">
                     <div className="bg-black border-2 border-red-500 p-4 rounded">
-                        <p className="text-red-400 font-bold mb-2">TYPICAL JUST EAT ORDER:</p>
+                        <p className="text-red-400 font-bold mb-2">TYPICAL PLATFORM ORDER:</p>
                         <p className="text-white text-xs mb-1">Food cost: £19.95</p>
                         <p className="text-white text-xs mb-1">Delivery: £4.50</p>
                         <p className="text-white text-xs mb-1">Bag fee: £0.15</p>
@@ -393,7 +393,7 @@ Return CLEAN, FORMATTED content ready to use. Be helpful, not generic.`,
                     </div>
 
                     <div className="bg-black border-2 border-green-500 p-4 rounded">
-                        <p className="text-green-400 font-bold mb-2">THE SOLUTION (FUCK THE SYSTEM):</p>
+                        <p className="text-green-400 font-bold mb-2">DIRECT CONNECTION SOLUTION:</p>
                         <p className="text-white text-xs mb-1">Call restaurant direct</p>
                         <p className="text-white text-xs mb-1">Pay cash: £30</p>
                         <p className="text-white text-xs mb-1">Keep change or tip driver</p>
@@ -446,8 +446,8 @@ Return CLEAN, FORMATTED content ready to use. Be helpful, not generic.`,
                     </div>
 
                     <div className="bg-black border border-red-500/30 p-3 rounded">
-                        <p className="text-white font-bold mb-2">FACEBOOK/LINKEDIN = TOXIC:</p>
-                        <p className="text-gray-400 text-xs">Facebook = old people • LinkedIn = fake professional • Neither actually HELPS students connect</p>
+                        <p className="text-white font-bold mb-2">SOCIAL PLATFORMS MISS THE MARK:</p>
+                        <p className="text-gray-400 text-xs">Traditional social platforms don't serve student needs • Prof51 built specifically for student life</p>
                     </div>
 
                     <div className="bg-black border border-red-500/30 p-3 rounded">
@@ -604,7 +604,7 @@ Return CLEAN, FORMATTED content ready to use. Be helpful, not generic.`,
                         <p className="text-purple-400 font-bold mb-2">2. IMPORT ANYTHING (AI Makes It Useful):</p>
                         <p className="text-white text-xs mb-1">Drag old Excel/Word/PDF → AI transforms it</p>
                         <p className="text-cyan-400 text-xs mb-1">→ Messy notes become clean study guides</p>
-                        <p className="text-green-400 text-xs mb-1">→ Broken Excel becomes working models</p>
+                        <p className="text-green-400 text-xs mb-1">→ Incomplete Excel becomes working models</p>
                         <p className="text-pink-400 text-xs mb-1">→ Scanned images become editable documents</p>
                         <p className="text-amber-400 text-xs font-bold mt-2">Nothing is wasted. Everything becomes learning ♾️❤️♾️</p>
                     </div>
@@ -689,14 +689,14 @@ Return CLEAN, FORMATTED content ready to use. Be helpful, not generic.`,
                     </div>
 
                     <div className="bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border-4 border-cyan-500 p-4 rounded" style={{ boxShadow: '0 0 30px rgba(6, 182, 212, 0.4)' }}>
-                        <p className="text-cyan-400 font-bold mb-2">P2P STUDENT SOCIAL NETWORK (Fuck Facebook/LinkedIn):</p>
+                        <p className="text-cyan-400 font-bold mb-2">P2P STUDENT SOCIAL NETWORK:</p>
                         <p className="text-white text-xs mb-2">Connect with students P2P • Zero corporate surveillance</p>
                         <p className="text-green-400 text-xs mb-1">✓ DM anyone at your uni (or globally)</p>
-                        <p className="text-purple-400 text-xs mb-1">✓ Find flatmates (Prof51 matches based on vibe)</p>
+                        <p className="text-purple-400 text-xs mb-1">✓ Find flatmates (Prof51 matches based on compatibility)</p>
                         <p className="text-amber-400 text-xs mb-1">✓ See what's happening (gigs, events, parties)</p>
                         <p className="text-pink-400 text-xs mb-1">✓ Study groups that actually help</p>
                         <p className="text-cyan-400 text-xs mb-1">✓ Works offline in lecture halls/libraries</p>
-                        <p className="text-white text-xs font-bold mt-2">Facebook = boomers. LinkedIn = fake. Prof51 = REAL student network ♾️❤️♾️</p>
+                        <p className="text-white text-xs font-bold mt-2">Built specifically for student life ♾️❤️♾️</p>
                     </div>
 
                     <div className="bg-gradient-to-r from-amber-500/20 to-red-500/20 border-4 border-amber-500 p-4 rounded" style={{ boxShadow: '0 0 30px rgba(245, 158, 11, 0.3)' }}>
