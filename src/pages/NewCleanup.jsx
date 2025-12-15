@@ -7,7 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-        Camera, MapPin, Loader2, CheckCircle2, Zap, AlertCircle, ArrowLeft, WifiOff, Sparkles, Eye, Share2, X, Recycle, Globe, Shield
+        Camera, MapPin, Loader2, CheckCircle2, Zap, AlertCircle, ArrowLeft, WifiOff, Sparkles, Eye, Share2, X, Recycle, Globe, Shield, Radio
     } from 'lucide-react';
 import { COOLASFUCKHeart, COOLASFUCKSparkle, COOLASFUCKMusicNote } from '@/components/shared/COOLASFUCKIcon';
 import { useNavigate } from 'react-router-dom';
