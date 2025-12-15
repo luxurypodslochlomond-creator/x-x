@@ -850,13 +850,16 @@ export default function Prof51() {
                             <span className="text-pink-400 font-bold text-sm font-mono">🔥 SPREADS LIKE WILDFIRE (LEGALLY)</span>
                         </summary>
                         <div className="p-3 pt-0 space-y-1 text-xs font-mono">
-                            <p className="text-gray-300">Aaron Swartz broke internet sharing papers (illegal, tragic)</p>
-                            <p className="text-green-400 font-bold mt-2">Prof51 = LEGAL + ETHICAL + BETTER:</p>
+                            <p className="text-gray-300">Aaron Swartz freed academic papers from JSTOR paywalls</p>
+                            <p className="text-red-400">→ His way: Illegal download (prosecuted, tragic loss)</p>
+                            <p className="text-cyan-400 mt-2">→ His vision: Knowledge should be free for students</p>
+                            <p className="text-green-400 font-bold mt-2">Prof51 = Aaron's dream done RIGHT:</p>
                             <p className="text-gray-300">✓ Students help each other (always legal)</p>
                             <p className="text-gray-300">✓ P2P mesh (physics, can't be blocked)</p>
                             <p className="text-gray-300">✓ Free for students (no extraction)</p>
-                            <p className="text-gray-300">✓ Companies fund it (win-win)</p>
-                            <p className="text-pink-400 font-bold mt-2">Viral because it HELPS, not exploits ♾️❤️♾️</p>
+                            <p className="text-gray-300">✓ Companies fund it (sustainable)</p>
+                            <p className="text-purple-400 mt-2">Students = future artists, economists, creators</p>
+                            <p className="text-pink-400 font-bold mt-2">Moral: Give them tools now, they lift humanity later ♾️❤️♾️</p>
                         </div>
                     </details>
 
