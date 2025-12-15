@@ -394,13 +394,58 @@ export default function Prof51About() {
                                     </div>
                                 </div>
 
+                                <div className="bg-gradient-to-r from-pink-500/20 to-purple-500/20 border-4 border-pink-500 rounded-xl p-4 mb-3" style={{ boxShadow: '0 0 50px rgba(236, 72, 153, 0.5)' }}>
+                                    <p className="text-pink-400 font-black text-base mb-3 text-center">🌍 BIG BRANDS (Nike, Apple, Spotify, etc)</p>
+                                    <p className="text-white text-xs mb-3 text-center">£200,000/year = 10M students globally = £0.02 per student</p>
+
+                                    <div className="bg-black border-2 border-cyan-500 rounded-lg p-3 mb-2">
+                                        <p className="text-cyan-400 font-bold text-xs mb-2">WHY IT'S INSANE VALUE:</p>
+                                        <p className="text-white text-xs mb-1">→ Facebook ads: £5-£10 per student reached (£50M-£100M)</p>
+                                        <p className="text-white text-xs mb-1">→ Instagram ads: £3-£8 per student (£30M-£80M)</p>
+                                        <p className="text-white text-xs mb-1">→ TikTok ads: £2-£5 per student (£20M-£50M)</p>
+                                        <p className="text-green-400 text-xs font-bold mt-2">Prof51: £0.02 per student = £200k total</p>
+                                        <p className="text-pink-400 text-xs font-bold">= 100x-500x CHEAPER than social media ads ✓</p>
+                                    </div>
+
+                                    <div className="bg-black border-2 border-green-500 rounded-lg p-3 mb-2">
+                                        <p className="text-green-400 font-bold text-xs mb-2">WHAT BIG BRANDS GET:</p>
+                                        <p className="text-white text-xs mb-1">✓ Global student directory listing (10M students see them)</p>
+                                        <p className="text-white text-xs mb-1">✓ Verified by student community (authentic trust)</p>
+                                        <p className="text-white text-xs mb-1">✓ Student discount codes (drives real sales)</p>
+                                        <p className="text-white text-xs mb-1">✓ Brand association with helping students (good PR)</p>
+                                        <p className="text-white text-xs mb-1">✓ Direct to brand website/store (no middleman)</p>
+                                        <p className="text-cyan-400 text-xs font-bold mt-2">Students CHOOSE to see tech/fashion brands (opt-in only)</p>
+                                    </div>
+
+                                    <div className="bg-black border-2 border-purple-500 rounded-lg p-3 mb-2">
+                                        <p className="text-purple-400 font-bold text-xs mb-2">EXAMPLE: SPOTIFY</p>
+                                        <p className="text-white text-xs mb-1">Pays: £200,000/year to Prof51</p>
+                                        <p className="text-white text-xs mb-1">Gets: Listed in "Music & Entertainment" category</p>
+                                        <p className="text-gray-300 text-xs mb-1">→ 10M students who opted-in to see music deals</p>
+                                        <p className="text-gray-300 text-xs mb-1">→ Verified student discount: £4.99/month (50% off)</p>
+                                        <p className="text-gray-300 text-xs mb-1">→ If 1% convert = 100,000 new subscribers</p>
+                                        <p className="text-gray-300 text-xs mb-1">→ = £6M/year new revenue from £200k investment</p>
+                                        <p className="text-green-400 text-xs font-bold mt-2">30x ROI + brand trust with students ✓</p>
+                                    </div>
+
+                                    <div className="bg-black border-2 border-amber-500 rounded-lg p-3">
+                                        <p className="text-amber-400 font-bold text-xs mb-2">EXAMPLE: APPLE</p>
+                                        <p className="text-white text-xs mb-1">Pays: £200,000/year to Prof51</p>
+                                        <p className="text-white text-xs mb-1">Gets: Listed in "Tech & Gadgets" category</p>
+                                        <p className="text-gray-300 text-xs mb-1">→ Student discount: 20% off MacBook (saves £400)</p>
+                                        <p className="text-gray-300 text-xs mb-1">→ If 0.5% buy MacBook = 50,000 sales</p>
+                                        <p className="text-gray-300 text-xs mb-1">→ = £50M revenue from £200k investment</p>
+                                        <p className="text-green-400 text-xs font-bold mt-2">250x ROI + lifelong Apple customers ✓</p>
+                                    </div>
+                                </div>
+
                                 <div className="bg-black border-2 border-green-500 rounded-lg p-4">
                                     <p className="text-green-400 font-bold text-sm mb-2">✓ WHAT BUSINESSES DON'T GET (PROTECTING STUDENTS)</p>
                                     <p className="text-red-400 text-xs mb-1">❌ Student data (names, emails, behavior)</p>
                                     <p className="text-red-400 text-xs mb-1">❌ Transaction tracking (what they ordered, when, how much)</p>
                                     <p className="text-red-400 text-xs mb-1">❌ Advertising space (no ads, ever)</p>
                                     <p className="text-red-400 text-xs mb-1">❌ Ability to message students directly</p>
-                                    <p className="text-white text-xs font-bold mt-2">Just a listing. Students control everything. ✓</p>
+                                    <p className="text-white text-xs font-bold mt-2">Just a listing. Students control everything. Fair deal for everyone. ✓</p>
                                 </div>
 
                                 <div className="bg-black border-2 border-purple-500 rounded-lg p-4">
