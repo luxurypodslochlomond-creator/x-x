@@ -125,14 +125,43 @@ export default function Prof51About() {
                             <p className="text-cyan-400 font-bold mt-2">Uni should be SICK. Prof51 makes it happen.</p>
                         </div>
 
+                        <div className="bg-gradient-to-r from-red-500/20 to-pink-500/20 border-4 border-red-500 rounded-lg p-4" style={{ boxShadow: '0 0 30px rgba(239, 68, 68, 0.4)' }}>
+                            <p className="text-red-400 font-bold text-sm mb-2">📚 COURSE MATERIALS = SCAM</p>
+                            <p className="text-white mb-1">Always moaning about it, yeah?</p>
+                            <p className="text-gray-300 mb-1">→ Textbook: £150 (used once, then sits on shelf)</p>
+                            <p className="text-gray-300 mb-1">→ "Required" course pack: £80 (just PDFs printed out)</p>
+                            <p className="text-gray-300 mb-1">→ Lab materials: £50 (should be included in tuition wtf)</p>
+                            <p className="text-gray-300 mb-1">→ Online access codes: £40 (expires after semester)</p>
+                            <p className="text-pink-400 font-bold mt-2">Prof51: Student textbook swap P2P + shared notes = FREE</p>
+                        </div>
+
+                        <div className="bg-gradient-to-r from-purple-500/20 to-cyan-500/20 border-4 border-purple-500 rounded-lg p-4" style={{ boxShadow: '0 0 30px rgba(168, 85, 247, 0.4)' }}>
+                            <p className="text-purple-400 font-bold text-sm mb-2">💳 STUDENT DISCOUNTS (WE MOVE)</p>
+                            <p className="text-white mb-1">Everyone goes mad for student discount</p>
+                            <p className="text-gray-300 mb-1">→ Prof51 shows ALL local student deals (restaurants, shops, cafes)</p>
+                            <p className="text-gray-300 mb-1">→ Call direct = save more than "student discount" (no middleman)</p>
+                            <p className="text-gray-300 mb-1">→ Students share deals P2P: "This place does 50% off after 9pm"</p>
+                            <p className="text-cyan-400 font-bold mt-2">Not fake discounts. Real savings from real businesses ✓</p>
+                        </div>
+
+                        <div className="bg-gradient-to-r from-green-500/20 to-amber-500/20 border-4 border-green-500 rounded-lg p-4" style={{ boxShadow: '0 0 30px rgba(34, 197, 94, 0.4)' }}>
+                            <p className="text-green-400 font-bold text-sm mb-2">🌍 FUTURE: STUDENTS RISING TOGETHER</p>
+                            <p className="text-white mb-1">Not being political. Just practical.</p>
+                            <p className="text-gray-300 mb-1">→ Mass campus cleanups (earn $P51, heal planet, build community)</p>
+                            <p className="text-gray-300 mb-1">→ Better than protests (protests = just shouting, cleanups = actual change)</p>
+                            <p className="text-gray-300 mb-1">→ Students worldwide connecting (Edinburgh → MIT → Tokyo → Lagos)</p>
+                            <p className="text-gray-300 mb-1">→ Rise together, not compete against each other</p>
+                            <p className="text-amber-400 font-bold mt-2">Action > Words. Students actually helping, not just complaining ✓</p>
+                        </div>
+
                         <div className="bg-black border-2 border-white rounded-lg p-4">
                             <p className="text-white font-bold text-sm mb-2">💯 THE VIBE:</p>
                             <p className="text-gray-300 mb-1">Not "this might be useful one day"</p>
                             <p className="text-gray-300 mb-1">But "this saved my arse TODAY"</p>
                             <p className="text-green-400 font-bold mt-2">Practical. Immediate. Actually helps. That's Prof51 ♾️❤️♾️</p>
                         </div>
-                    </div>
-                </div>
+                        </div>
+                        </div>
 
                 {/* WHAT EVERY STUDENT NEEDS (UNIVERSAL) */}
                 <div className="bg-gradient-to-r from-pink-500/20 to-purple-500/20 border-4 border-pink-500 rounded-xl p-6 mb-6" style={{ boxShadow: '0 0 40px rgba(236, 72, 153, 0.5)' }}>
