@@ -236,13 +236,44 @@ Return CLEAN, FORMATTED content ready to use. Be helpful, not generic.`,
                         </div>
                     </div>
 
+                    <div className="bg-gradient-to-r from-amber-500/20 to-red-500/20 border-4 border-amber-500 rounded-xl p-4 mb-4" style={{ boxShadow: '0 0 50px rgba(245, 158, 11, 0.6)' }}>
+                        <p className="text-amber-400 font-black text-xl mb-2 text-center">📱 THE ONE THING EVERYONE NEEDS:</p>
+                        <p className="text-white text-3xl font-black text-center mb-3">NEVER LOSE YOUR STUFF</p>
+
+                        <div className="bg-black border-2 border-red-500 rounded-lg p-4 mb-3">
+                            <p className="text-red-400 font-bold text-sm mb-2 text-center">THIS IS THE UNLOCK:</p>
+                            <p className="text-white text-xs mb-3 text-center">Rich, broke, British, Chinese, lonely, popular = EVERYONE loses stuff.</p>
+
+                            <div className="grid grid-cols-2 gap-2 text-xs">
+                                <p className="text-gray-300 text-center">→ Phone</p>
+                                <p className="text-gray-300 text-center">→ Laptop</p>
+                                <p className="text-gray-300 text-center">→ Keys</p>
+                                <p className="text-gray-300 text-center">→ Wallet</p>
+                                <p className="text-gray-300 text-center">→ Bag</p>
+                                <p className="text-gray-300 text-center">→ Jacket</p>
+                            </div>
+
+                            <p className="text-green-400 font-bold text-sm text-center mt-3">P2P mesh finds it. ALWAYS. EVERYWHERE. ✓</p>
+                        </div>
+
+                        <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-2 border-green-500 rounded-lg p-3">
+                            <p className="text-green-400 font-black text-xs mb-2 text-center">HOW IT SPREADS:</p>
+                            <p className="text-white text-xs mb-1 text-center">Day 1: Student loses phone at club</p>
+                            <p className="text-cyan-400 text-xs mb-1 text-center">→ Prof51 finds it (500 students in venue)</p>
+                            <p className="text-pink-400 text-xs mb-1 text-center">→ "This app just saved my life"</p>
+                            <p className="text-purple-400 text-xs mb-1 text-center">→ Tells 10 friends</p>
+                            <p className="text-amber-400 text-xs mb-2 text-center">→ They all download (want same protection)</p>
+                            <p className="text-white font-bold text-sm text-center mt-2">ONE REAL SAVE = VIRAL EXPLOSION ♾️❤️♾️</p>
+                        </div>
+                    </div>
+
                     <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-4 border-purple-500 rounded-xl p-4">
-                        <p className="text-purple-400 font-black text-sm mb-3 text-center">FOR EVERY STUDENT:</p>
+                        <p className="text-purple-400 font-black text-sm mb-3 text-center">THEN THEY DISCOVER THE REST:</p>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
                             <div className="bg-black border border-cyan-500/50 rounded p-2">
                                 <p className="text-cyan-400 font-bold mb-1">🇬🇧 BRITISH STUDENT:</p>
                                 <p className="text-gray-300">→ Excel homework? AI does it in 30 seconds.</p>
-                                <p className="text-gray-300">→ Lost phone at club? Mesh finds it.</p>
+                                <p className="text-gray-300">→ Essays? Structured instantly.</p>
                             </div>
                             <div className="bg-black border border-pink-500/50 rounded p-2">
                                 <p className="text-pink-400 font-bold mb-1">🇨🇳 CHINESE STUDENT:</p>
@@ -252,7 +283,7 @@ Return CLEAN, FORMATTED content ready to use. Be helpful, not generic.`,
                             <div className="bg-black border border-green-500/50 rounded p-2">
                                 <p className="text-green-400 font-bold mb-1">💰 RICH STUDENT:</p>
                                 <p className="text-gray-300">→ Save time (AI = better than assistant).</p>
-                                <p className="text-gray-300">→ Track expensive stuff (£2k laptop? Never lose it).</p>
+                                <p className="text-gray-300">→ Track expensive stuff constantly.</p>
                             </div>
                             <div className="bg-black border border-amber-500/50 rounded p-2">
                                 <p className="text-amber-400 font-bold mb-1">💸 BROKE STUDENT:</p>
@@ -270,7 +301,7 @@ Return CLEAN, FORMATTED content ready to use. Be helpful, not generic.`,
                                 <p className="text-gray-300">→ Keep friend group connected.</p>
                             </div>
                         </div>
-                        <p className="text-white font-bold text-center mt-3">EVERYONE BENEFITS. THAT'S THE POINT. ✓</p>
+                        <p className="text-white font-bold text-center mt-3">Come for Lost & Found. Stay for EVERYTHING. ✓</p>
                     </div>
                 </motion.div>
 
