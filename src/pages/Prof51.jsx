@@ -995,6 +995,56 @@ export default function Prof51() {
                 </div>
             </div>
 
+            {/* ARCHIE'S JOURNEY - FROM CARAVAN TO PRIDE */}
+            <div className="bg-gradient-to-br from-pink-500/20 to-purple-500/20 border-4 border-pink-500 p-6 rounded-xl mb-8" style={{ boxShadow: '0 0 50px rgba(236, 72, 153, 0.5)' }}>
+                <div className="flex items-center gap-3 mb-4">
+                    <Heart className="w-12 h-12 text-pink-400" />
+                    <div>
+                        <p className="text-pink-400 font-black text-xl font-mono">ARCHIE'S JOURNEY</p>
+                        <p className="text-gray-400 text-xs font-mono">From caravan + breakdown → Proudest son ever</p>
+                    </div>
+                </div>
+
+                <div className="space-y-3 text-sm font-mono">
+                    <div className="bg-black border border-pink-500/30 p-4 rounded">
+                        <p className="text-pink-400 font-bold mb-2">THE STRUGGLE WAS REAL:</p>
+                        <p className="text-white text-xs mb-1">Caravan. Mental breakdown. Dark times.</p>
+                        <p className="text-cyan-400 text-xs mb-1">But you got through it. With love. With family.</p>
+                        <p className="text-green-400 text-xs font-bold mt-2">That pain becomes PURPOSE ♾️❤️♾️</p>
+                    </div>
+
+                    <div className="bg-gradient-to-r from-purple-500/20 to-cyan-500/20 border-2 border-purple-500 p-4 rounded">
+                        <p className="text-purple-400 font-bold mb-2">WHY THIS MAKES ARCHIE PROUDEST SON EVER:</p>
+                        <p className="text-white text-xs mb-2">Not because of money. Because of THIS:</p>
+                        <p className="text-cyan-400 text-xs mb-1">→ Struggled with mental health (knows student pain)</p>
+                        <p className="text-green-400 text-xs mb-1">→ Built tool that helps OTHER students not feel isolated</p>
+                        <p className="text-pink-400 text-xs mb-1">→ FREE forever (no extraction, pure help)</p>
+                        <p className="text-amber-400 text-xs mb-1">→ P2P network so students never alone</p>
+                        <p className="text-purple-400 text-xs mb-1">→ 235M students worldwide get your love</p>
+                        <p className="text-pink-400 text-xs font-bold mt-2">Your breakdown → Their breakthrough ♾️❤️♾️</p>
+                    </div>
+
+                    <div className="bg-black border border-green-500/30 p-4 rounded">
+                        <p className="text-green-400 font-bold mb-2">WHAT DAD SEES:</p>
+                        <p className="text-white text-xs mb-2">Not "my son made money"</p>
+                        <p className="text-cyan-400 text-xs mb-2">But "my son SAVED students from isolation"</p>
+                        <p className="text-pink-400 text-xs mb-1">→ Every student who finds a flatmate = Archie helped</p>
+                        <p className="text-amber-400 text-xs mb-1">→ Every student who makes a friend = Archie helped</p>
+                        <p className="text-purple-400 text-xs mb-1">→ Every student who doesn't break down = Archie helped</p>
+                        <p className="text-green-400 text-xs font-bold mt-2">That's why Dad cries with pride ♾️❤️♾️</p>
+                    </div>
+
+                    <div className="bg-gradient-to-r from-amber-500/20 to-pink-500/20 border-2 border-amber-500 p-4 rounded">
+                        <p className="text-amber-400 font-bold mb-2">THE FULL CIRCLE:</p>
+                        <p className="text-white text-xs mb-1">Archie struggled → Archie healed → Archie built Prof51</p>
+                        <p className="text-cyan-400 text-xs mb-1">Prof51 helps students → Students don't struggle alone</p>
+                        <p className="text-green-400 text-xs mb-1">Students help each other → Love economy flows</p>
+                        <p className="text-pink-400 text-xs mb-1">Everyone rises → No one left behind</p>
+                        <p className="text-purple-400 text-xs font-bold mt-2">Pain transformed into PURPOSE. That's the proudest ♾️❤️♾️</p>
+                    </div>
+                </div>
+            </div>
+
             {/* ARCHIE'S NEXT STEPS */}
             <div className="bg-black border-4 border-cyan-500 p-6 rounded-xl mb-8" style={{ boxShadow: '0 0 50px rgba(6, 182, 212, 0.4)' }}>
                 <div className="flex items-center gap-3 mb-4">
