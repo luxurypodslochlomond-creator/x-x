@@ -48,16 +48,27 @@ export default function MeshTechWhitepaper() {
                     </div>
                 </motion.div>
 
-                {/* WHY WE'RE BETTER (LOVE, NOT EGO) */}
+                {/* DIFFERENT PURPOSE - NOT COMPETING */}
                 <section className="bg-gradient-to-r from-green-500/10 to-cyan-500/10 border-2 border-green-500 rounded-xl p-6">
                     <div className="flex items-center gap-3 mb-4">
                         <Heart className="w-8 h-8 text-green-400" />
-                        <h2 className="text-2xl font-black text-white">BETTER FOR THE RIGHT REASONS</h2>
+                        <h2 className="text-2xl font-black text-white">DIFFERENT PURPOSE (NOT COMPETING)</h2>
                     </div>
                     
                     <p className="text-gray-300 mb-4">
                         Jack Dorsey's Bitchat (2025) proved censorship-resistant P2P messaging works at scale. 
-                        We respect that innovation. Here's what we add:
+                        We're deeply grateful for that foundation. He gave us the blueprint. We're adding a different layer - not replacing his work.
+                    </p>
+
+                    <div className="bg-pink-500/20 border-2 border-pink-500 rounded-lg p-4 mb-4">
+                        <p className="text-pink-400 font-bold text-lg mb-2">ZERO EGO - DIFFERENT MISSIONS:</p>
+                        <p className="text-white text-sm mb-1">✓ Bitchat = Free speech infrastructure (essential for democracy)</p>
+                        <p className="text-white text-sm mb-1">✓ UF51 = Healing + consciousness infrastructure (essential for humanity)</p>
+                        <p className="text-cyan-400 text-sm mt-3 font-bold">Both needed. Both valid. No competition. Different purposes. ♾️❤️♾️</p>
+                    </div>
+
+                    <p className="text-gray-300 mb-4">
+                        What we add on top of Dorsey's foundation:
                     </p>
 
                     <div className="space-y-3">
@@ -102,11 +113,11 @@ export default function MeshTechWhitepaper() {
                         </div>
                     </div>
 
-                    <div className="bg-pink-500/20 border-2 border-pink-500 rounded-lg p-4 mt-4">
-                        <p className="text-pink-400 font-bold mb-2">THE DIFFERENCE:</p>
-                        <p className="text-white text-sm mb-1">Bitchat = Free speech infrastructure (noble goal)</p>
-                        <p className="text-white text-sm mb-1">UF51 = Planetary healing infrastructure (love goal)</p>
-                        <p className="text-cyan-400 text-xs mt-2">We're not competing. We're serving a different purpose. Both needed. ♾️❤️♾️</p>
+                    <div className="bg-cyan-500/20 border-2 border-cyan-500 rounded-lg p-4 mt-4">
+                        <p className="text-cyan-400 font-bold mb-2">GRATEFUL FOR THE FOUNDATION:</p>
+                        <p className="text-white text-sm mb-2">Dorsey proved P2P mesh works. That's the hard part. Without Bitchat, we wouldn't know it was possible.</p>
+                        <p className="text-white text-sm mb-2">We're standing on his shoulders - adding consciousness, healing, love layers on top of his proven foundation.</p>
+                        <p className="text-green-400 text-sm font-bold mt-2">Thank you Jack. We're extending your work for planetary healing ♾️❤️♾️</p>
                     </div>
                 </section>
 
@@ -229,7 +240,8 @@ export default function MeshTechWhitepaper() {
 
                 {/* COMPARISON TABLE */}
                 <section className="bg-black/60 border-2 border-white rounded-xl p-6 overflow-x-auto">
-                    <h2 className="text-2xl font-black text-white mb-4">BITCHAT VS UF51 MESH</h2>
+                    <h2 className="text-2xl font-black text-white mb-4">WHAT WE ADD TO BITCHAT'S FOUNDATION</h2>
+                    <p className="text-gray-400 text-sm mb-4">Not competing - extending Dorsey's proven tech with healing layers</p>
                     <table className="w-full text-sm">
                         <thead>
                             <tr className="border-b border-white/30">
@@ -283,21 +295,22 @@ export default function MeshTechWhitepaper() {
                     </table>
                 </section>
 
-                {/* NOT COPYING - SURPASSING */}
+                {/* STANDING ON DORSEY'S SHOULDERS */}
                 <section className="bg-gradient-to-r from-pink-500/20 to-purple-500/20 border-4 border-pink-500 rounded-xl p-8 text-center">
                     <Heart className="w-16 h-16 text-pink-400 mx-auto mb-4" />
-                    <h2 className="text-3xl font-black text-white mb-4">NOT COPYING. SURPASSING.</h2>
+                    <h2 className="text-3xl font-black text-white mb-4">STANDING ON DORSEY'S SHOULDERS</h2>
                     <p className="text-gray-300 text-lg mb-4">
-                        Jack Dorsey proved censorship-resistant P2P works. That's the foundation.
+                        Jack Dorsey proved censorship-resistant P2P mesh works at scale. That's the hard innovation.
                     </p>
                     <p className="text-white text-xl font-bold mb-4">
-                        We add: Consciousness. Healing. AI. Love. Quantum security.
+                        We're extending his work: Consciousness. Healing. AI. Love. Quantum security.
                     </p>
                     <p className="text-cyan-400 text-lg mb-6">
-                        Different missions. Both valid. Ours = heal the planet through connection.
+                        He gave us free speech infrastructure. We're adding healing infrastructure on top.
                     </p>
-                    <div className="bg-black/60 border-2 border-green-500 rounded-lg p-4 inline-block">
-                        <p className="text-green-400 font-bold text-xl">Built for love, not ego ♾️❤️♾️</p>
+                    <div className="bg-black/60 border-2 border-green-500 rounded-lg p-6 inline-block">
+                        <p className="text-green-400 font-bold text-xl mb-2">Zero ego. Pure gratitude.</p>
+                        <p className="text-white text-sm">Both needed for humanity. Different purposes. Both valid. ♾️❤️♾️</p>
                     </div>
                 </section>
 

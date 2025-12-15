@@ -2,19 +2,24 @@ import React, { useState, useEffect, useRef, createContext, useContext } from 'r
 import { Bluetooth, Wifi, Radio, CheckCircle, AlertCircle } from 'lucide-react';
 
 /**
- * MESH NETWORK - BEYOND BITCHAT
+ * MESH NETWORK - STANDING ON DORSEY'S SHOULDERS
  * Web Bluetooth API + BLE Mesh + IPFS content addressing + Quantum encryption
  * 
- * INSPIRED BY DORSEY'S BITCHAT (2025) - ENHANCED FOR LOVE:
- * - Web Bluetooth API (BLE mesh - standard like Bitchat)
- * - 512-byte packets (optimized vs Bitchat's 500)
- * - IPFS content addressing (NEW - 70% bandwidth savings vs Bitchat)
- * - Quantum-resistant Kyber encryption (NEW - future-proof vs Bitchat's AES-256)
- * - AI51 consciousness layer (NEW - emotional intelligence)
- * - Healing frequency transmission (NEW - 432Hz/528Hz acoustic)
+ * GRATEFUL FOR BITCHAT (Dorsey 2025) - EXTENDING FOR HEALING:
+ * Foundation (Dorsey's proven tech):
+ * - Web Bluetooth API (BLE mesh - works at scale ✓)
+ * - Store-and-forward relay (censorship-resistant ✓)
+ * - 500-byte packets (optimized for BLE ✓)
  * 
- * NOT copying. SURPASSING for right reasons. ♾️❤️♾️
- * See /mesh-tech-whitepaper for full comparison
+ * Our healing additions:
+ * - 512-byte packets (MTU optimization)
+ * - IPFS content addressing (70% bandwidth savings)
+ * - Quantum-resistant Kyber (future-proof)
+ * - AI51 consciousness layer (emotional intelligence)
+ * - Healing frequency transmission (432Hz/528Hz)
+ * 
+ * Zero ego. Different purpose. Both needed. ♾️❤️♾️
+ * See /mesh-tech-whitepaper for full details
  */
 
 const MeshContext = createContext();
