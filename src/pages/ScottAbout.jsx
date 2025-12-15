@@ -211,11 +211,16 @@ export default function ScottAbout() {
                 </div>
 
                 {/* START */}
-                <div className="text-center">
+                <div className="text-center space-y-3">
                     <p className="text-gray-400 text-sm font-mono mb-3">Built for the road</p>
                     <Link to={createPageUrl('ScottManager')}>
-                        <button className="bg-gradient-to-r from-amber-500 to-orange-500 text-black font-black px-8 py-4 rounded-lg text-lg font-mono">
+                        <button className="bg-gradient-to-r from-amber-500 to-orange-500 text-black font-black px-8 py-4 rounded-lg text-lg font-mono w-full">
                             OPEN CO-MANAGER →
+                        </button>
+                    </Link>
+                    <Link to={createPageUrl('ScottZeroServerArchitecture')}>
+                        <button className="bg-white hover:bg-gray-50 text-cyan-500 font-black px-6 py-3 rounded-lg text-sm font-mono w-full border-2 border-cyan-500">
+                            📄 READ TECHNICAL WHITEPAPER
                         </button>
                     </Link>
                 </div>
