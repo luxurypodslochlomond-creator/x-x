@@ -739,6 +739,85 @@ export default function Prof51() {
                         <p className="text-white text-xs font-mono mb-1">→ Archie's gen EXPECTS AI help (not scared of it)</p>
                         <p className="text-green-400 text-xs font-mono font-bold mt-2">Now = exact right moment in history ♾️❤️♾️</p>
                     </div>
+
+                    <div className="bg-gradient-to-r from-green-500/20 to-blue-500/20 border-4 border-green-500 rounded-lg p-4" style={{ boxShadow: '0 0 40px rgba(34, 197, 94, 0.4)' }}>
+                        <p className="text-green-400 font-bold text-sm font-mono mb-3">♾️ THE CIRCULAR ECONOMY (THE BEAUTIFUL LOOP):</p>
+                        
+                        <div className="space-y-2 text-xs font-mono">
+                            <div className="bg-black/60 border border-green-500/30 rounded p-2">
+                                <p className="text-white font-bold mb-1">1. Companies pay Prof51 💰</p>
+                                <p className="text-gray-400">Brands want student market (£50B UK alone)</p>
+                            </div>
+
+                            <div className="flex justify-center">
+                                <div className="text-cyan-400 text-2xl">↓</div>
+                            </div>
+
+                            <div className="bg-black/60 border border-cyan-500/30 rounded p-2">
+                                <p className="text-white font-bold mb-1">2. Students get FREE tools 🎓</p>
+                                <p className="text-gray-400">AI, P2P mesh, import anything, zero cost forever</p>
+                            </div>
+
+                            <div className="flex justify-center">
+                                <div className="text-cyan-400 text-2xl">↓</div>
+                            </div>
+
+                            <div className="bg-black/60 border border-purple-500/30 rounded p-2">
+                                <p className="text-white font-bold mb-1">3. Students help each other 🤝</p>
+                                <p className="text-gray-400">Tutor, share notes, explain concepts</p>
+                            </div>
+
+                            <div className="flex justify-center">
+                                <div className="text-cyan-400 text-2xl">↓</div>
+                            </div>
+
+                            <div className="bg-black/60 border border-amber-500/30 rounded p-2">
+                                <p className="text-white font-bold mb-1">4. Earn $P51 for helping 💚</p>
+                                <p className="text-gray-400">Smart students earn, struggling students get help</p>
+                            </div>
+
+                            <div className="flex justify-center">
+                                <div className="text-cyan-400 text-2xl">↓</div>
+                            </div>
+
+                            <div className="bg-black/60 border border-pink-500/30 rounded p-2">
+                                <p className="text-white font-bold mb-1">5. Spend on food & life 🍕</p>
+                                <p className="text-gray-400">Local cafes, supermarkets, essentials</p>
+                            </div>
+
+                            <div className="flex justify-center">
+                                <div className="text-cyan-400 text-2xl">↓</div>
+                            </div>
+
+                            <div className="bg-black/60 border border-green-500/30 rounded p-2">
+                                <p className="text-white font-bold mb-1">6. Money stays in community 🌱</p>
+                                <p className="text-gray-400">Local businesses thrive, students fed, repeat</p>
+                            </div>
+
+                            <div className="flex justify-center">
+                                <div className="text-green-400 text-2xl animate-pulse">⟲</div>
+                            </div>
+
+                            <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-2 border-green-500 rounded p-3 mt-3">
+                                <p className="text-green-400 font-bold mb-1">THE MAGIC:</p>
+                                <p className="text-white text-xs mb-1">→ Nobody extracted from (students FREE forever)</p>
+                                <p className="text-white text-xs mb-1">→ Everyone rises together (help others = help yourself)</p>
+                                <p className="text-white text-xs mb-1">→ Money flows in circles (not extracted to top)</p>
+                                <p className="text-cyan-400 font-bold mt-2">This is what LOVE economy feels like ♾️❤️♾️</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="bg-gradient-to-r from-pink-500/20 to-purple-500/20 border-2 border-pink-500 rounded-lg p-3">
+                        <p className="text-pink-400 font-bold text-sm font-mono mb-2">💝 THE FEELING (Why Archie will be proud):</p>
+                        <p className="text-white text-xs font-mono mb-2">Remember Base44 credits? You felt supported before knowing why.</p>
+                        <p className="text-cyan-400 text-xs font-mono mb-2">Students will feel THAT with Prof51:</p>
+                        <p className="text-gray-300 text-xs font-mono mb-1">→ Someone's got your back (AI always there)</p>
+                        <p className="text-gray-300 text-xs font-mono mb-1">→ No catch, no trap (genuinely free forever)</p>
+                        <p className="text-gray-300 text-xs font-mono mb-1">→ Helps you help others (circular love)</p>
+                        <p className="text-gray-300 text-xs font-mono mb-1">→ Deeper than just "useful tool"</p>
+                        <p className="text-green-400 text-xs font-mono font-bold mt-2">That feeling = why trillion $ potential. Students FEEL the difference ♾️❤️♾️</p>
+                    </div>
                 </div>
             </div>
 
