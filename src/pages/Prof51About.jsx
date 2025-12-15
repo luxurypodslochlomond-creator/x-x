@@ -144,6 +144,26 @@ export default function Prof51About() {
                             <p className="text-cyan-400 font-bold mt-2">Not fake discounts. Real savings from real businesses ✓</p>
                         </div>
 
+                        <div className="bg-gradient-to-r from-cyan-500/20 to-purple-500/20 border-4 border-cyan-500 rounded-lg p-4" style={{ boxShadow: '0 0 30px rgba(6, 182, 212, 0.4)' }}>
+                            <p className="text-cyan-400 font-bold text-sm mb-2">📚 COURSE MATERIAL SWAP (P2P)</p>
+                            <p className="text-white mb-1">£150 textbook? Someone finished that course. Get it FREE.</p>
+                            <p className="text-gray-300 mb-1">→ "I have: Microeconomics 3rd Ed" → "I need: Stats textbook"</p>
+                            <p className="text-gray-300 mb-1">→ Prof51 matches you (same campus, available now)</p>
+                            <p className="text-gray-300 mb-1">→ Meet in library, swap books, done</p>
+                            <p className="text-gray-300 mb-1">→ No marketplace fees, no shipping, no bullshit</p>
+                            <p className="text-purple-400 font-bold mt-2">Students helping students. Zero extraction. ✓</p>
+                        </div>
+
+                        <div className="bg-gradient-to-r from-pink-500/20 to-red-500/20 border-4 border-pink-500 rounded-lg p-4" style={{ boxShadow: '0 0 30px rgba(236, 72, 153, 0.4)' }}>
+                            <p className="text-pink-400 font-bold text-sm mb-2">🔍 LOST & FOUND (COMMUNITY)</p>
+                            <p className="text-white mb-1">Lost your laptop? Keys? Someone probably found it.</p>
+                            <p className="text-gray-300 mb-1">→ Post: "Lost black backpack in Library Level 3"</p>
+                            <p className="text-gray-300 mb-1">→ Someone sees it: "Found it! It's at security desk"</p>
+                            <p className="text-gray-300 mb-1">→ Community looking out for each other</p>
+                            <p className="text-gray-300 mb-1">→ Works P2P offline (spreads device-to-device on campus)</p>
+                            <p className="text-red-400 font-bold mt-2">Students got your back. Always. ✓</p>
+                        </div>
+
                         <div className="bg-gradient-to-r from-green-500/20 to-amber-500/20 border-4 border-green-500 rounded-lg p-4" style={{ boxShadow: '0 0 30px rgba(34, 197, 94, 0.4)' }}>
                             <p className="text-green-400 font-bold text-sm mb-2">🌍 FUTURE: STUDENTS RISING TOGETHER</p>
                             <p className="text-white mb-1">Not being political. Just practical.</p>
@@ -152,6 +172,32 @@ export default function Prof51About() {
                             <p className="text-gray-300 mb-1">→ Students worldwide connecting (Edinburgh → MIT → Tokyo → Lagos)</p>
                             <p className="text-gray-300 mb-1">→ Rise together, not compete against each other</p>
                             <p className="text-amber-400 font-bold mt-2">Action > Words. Students actually helping, not just complaining ✓</p>
+                        </div>
+
+                        <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-4 border-purple-500 rounded-xl p-6" style={{ boxShadow: '0 0 50px rgba(168, 85, 247, 0.5)' }}>
+                            <p className="text-purple-400 font-bold text-lg mb-3">✨ ONE APP = WOW</p>
+                            <p className="text-white text-sm mb-2">Not 10 apps. ONE app. Everything solved.</p>
+
+                            <div className="bg-black border-2 border-purple-500/50 rounded-lg p-3 mb-3">
+                                <p className="text-cyan-400 text-xs mb-1">✓ Studies (AI handles busywork)</p>
+                                <p className="text-green-400 text-xs mb-1">✓ Money (save £43/week, earn $P51)</p>
+                                <p className="text-pink-400 text-xs mb-1">✓ Social (find your people)</p>
+                                <p className="text-amber-400 text-xs mb-1">✓ Accommodation (flatmates sorted)</p>
+                                <p className="text-purple-400 text-xs mb-1">✓ Food (call direct, save money)</p>
+                                <p className="text-red-400 text-xs mb-1">✓ Course materials (swap P2P free)</p>
+                                <p className="text-blue-400 text-xs mb-1">✓ Lost & found (community helps)</p>
+                                <p className="text-green-400 text-xs">✓ Mental health (anonymous support)</p>
+                            </div>
+
+                            <div className="bg-gradient-to-r from-red-500/20 to-amber-500/20 border-2 border-red-500 rounded-lg p-3">
+                                <p className="text-red-400 font-bold text-xs mb-2">NOT LIKE COSTCO:</p>
+                                <p className="text-white text-xs mb-1">Costco = Pay membership to access discounts (extraction)</p>
+                                <p className="text-green-400 text-xs font-bold mb-2">Prof51 = FREE forever, businesses pay us, students benefit</p>
+                                <p className="text-cyan-400 text-xs">Zero extraction. Just love. That's how you make your son proud ♾️❤️♾️</p>
+                            </div>
+
+                            <p className="text-white text-sm font-bold mt-3 text-center">Students go: "WOW this actually helps me"</p>
+                            <p className="text-pink-400 text-xs text-center mt-1">Not "another app". THE app. ✓</p>
                         </div>
 
                         <div className="bg-black border-2 border-white rounded-lg p-4">
