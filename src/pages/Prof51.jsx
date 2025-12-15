@@ -214,6 +214,66 @@ Return CLEAN, FORMATTED content ready to use. Be helpful, not generic.`,
                     </motion.button>
                 )}
 
+                {/* SIMPLE: WHAT IS PROF51 */}
+                <motion.div
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="bg-gradient-to-br from-cyan-500/20 to-green-500/20 border-4 border-cyan-500 rounded-2xl p-6 mb-6"
+                    style={{ boxShadow: '0 0 50px rgba(6, 182, 212, 0.5)' }}
+                >
+                    <p className="text-cyan-400 font-black text-2xl mb-3 text-center">WHAT IS PROF51?</p>
+                    <p className="text-white text-lg font-bold text-center mb-4">Your most intelligent mate in the universe.</p>
+
+                    <div className="bg-black border-2 border-white rounded-xl p-4 mb-4">
+                        <p className="text-white font-bold text-base mb-3 text-center">SIMPLE VERSION:</p>
+                        <div className="space-y-2 text-sm">
+                            <p className="text-gray-300">✓ AI does ALL your busywork (Excel, essays, slides)</p>
+                            <p className="text-gray-300">✓ Lost & Found mesh (never lose phone/laptop/keys)</p>
+                            <p className="text-gray-300">✓ P2P student network (find flatmates, study groups, what's on)</p>
+                            <p className="text-gray-300">✓ Save money (call restaurants direct, swap textbooks)</p>
+                            <p className="text-gray-300">✓ Works offline (mesh network, no internet needed)</p>
+                            <p className="text-green-400 font-bold mt-2">FREE FOREVER. No ads. No data selling. ♾️❤️♾️</p>
+                        </div>
+                    </div>
+
+                    <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-4 border-purple-500 rounded-xl p-4">
+                        <p className="text-purple-400 font-black text-sm mb-3 text-center">FOR EVERY STUDENT:</p>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+                            <div className="bg-black border border-cyan-500/50 rounded p-2">
+                                <p className="text-cyan-400 font-bold mb-1">🇬🇧 BRITISH STUDENT:</p>
+                                <p className="text-gray-300">→ Excel homework? AI does it in 30 seconds.</p>
+                                <p className="text-gray-300">→ Lost phone at club? Mesh finds it.</p>
+                            </div>
+                            <div className="bg-black border border-pink-500/50 rounded p-2">
+                                <p className="text-pink-400 font-bold mb-1">🇨🇳 CHINESE STUDENT:</p>
+                                <p className="text-gray-300">→ Works offline (no VPN needed).</p>
+                                <p className="text-gray-300">→ Find other Chinese students P2P.</p>
+                            </div>
+                            <div className="bg-black border border-green-500/50 rounded p-2">
+                                <p className="text-green-400 font-bold mb-1">💰 RICH STUDENT:</p>
+                                <p className="text-gray-300">→ Save time (AI = better than assistant).</p>
+                                <p className="text-gray-300">→ Track expensive stuff (£2k laptop? Never lose it).</p>
+                            </div>
+                            <div className="bg-black border border-amber-500/50 rounded p-2">
+                                <p className="text-amber-400 font-bold mb-1">💸 BROKE STUDENT:</p>
+                                <p className="text-gray-300">→ Free AI tutor (no £80/hour cost).</p>
+                                <p className="text-gray-300">→ Earn $P51 helping others.</p>
+                            </div>
+                            <div className="bg-black border border-purple-500/50 rounded p-2">
+                                <p className="text-purple-400 font-bold mb-1">😰 LONELY STUDENT:</p>
+                                <p className="text-gray-300">→ Find compatible flatmates.</p>
+                                <p className="text-gray-300">→ Join study groups that fit you.</p>
+                            </div>
+                            <div className="bg-black border border-red-500/50 rounded p-2">
+                                <p className="text-red-400 font-bold mb-1">😎 POPULAR STUDENT:</p>
+                                <p className="text-gray-300">→ Organize events easier.</p>
+                                <p className="text-gray-300">→ Keep friend group connected.</p>
+                            </div>
+                        </div>
+                        <p className="text-white font-bold text-center mt-3">EVERYONE BENEFITS. THAT'S THE POINT. ✓</p>
+                    </div>
+                </motion.div>
+
                 {/* KEY STAT - BIG */}
                 <motion.div 
                     initial={{ opacity: 0, scale: 0.95 }}
