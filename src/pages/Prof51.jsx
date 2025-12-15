@@ -453,7 +453,7 @@ Return CLEAN, FORMATTED content ready to use. Be helpful, not generic.`,
                         </p>
                     </motion.div>
                 )}
-                        </div>
+                        </motion.div>
                     </motion.div>
                 )}
 
