@@ -276,6 +276,82 @@ export default function Prof51About() {
                             </div>
                         </div>
 
+                        <div className="bg-gradient-to-r from-pink-500/20 to-purple-500/20 border-4 border-pink-500 rounded-xl p-6" style={{ boxShadow: '0 0 50px rgba(236, 72, 153, 0.5)' }}>
+                            <p className="text-pink-400 font-black text-xl mb-3">💗 WHAT STUDENTS ACTUALLY FEEL</p>
+                            <p className="text-white text-sm mb-4">In this world? Conflict, drama, wealth gaps, getting taught shit. Prof51 = different feeling.</p>
+
+                            <div className="space-y-3">
+                                <div className="bg-black border-2 border-red-500 rounded-lg p-4">
+                                    <p className="text-red-400 font-bold text-sm mb-2">❌ THE WORLD RIGHT NOW:</p>
+                                    <p className="text-gray-300 text-xs mb-1">→ Rich kids get tutors (£80/hour), poor kids struggle alone = UNFAIR</p>
+                                    <p className="text-gray-300 text-xs mb-1">→ Social media = fake lives, comparison, anxiety, depression</p>
+                                    <p className="text-gray-300 text-xs mb-1">→ Everyone extracting from students (tuition, textbooks, rent, food apps)</p>
+                                    <p className="text-gray-300 text-xs mb-1">→ Unis teach theory from 1980s, not real skills for 2025</p>
+                                    <p className="text-gray-300 text-xs mb-1">→ Conflict everywhere (politics, protests, division)</p>
+                                    <p className="text-red-400 font-bold text-xs mt-2">Students feel: Alone. Stressed. Broke. Lost. Anxious.</p>
+                                </div>
+
+                                <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-4 border-green-500 rounded-lg p-4">
+                                    <p className="text-green-400 font-bold text-sm mb-2">✓ WITH PROF51 YOU FEEL:</p>
+                                    <p className="text-white text-xs mb-2">Not "useful app" - DIFFERENT FEELING IN YOUR CHEST:</p>
+
+                                    <div className="bg-black/60 border border-cyan-500/50 rounded p-2 mb-2">
+                                        <p className="text-cyan-400 font-bold text-xs mb-1">💪 EMPOWERED (NOT HELPLESS):</p>
+                                        <p className="text-gray-300 text-xs mb-1">→ Excel assignment due? AI does it in 30 seconds (not 3 hour panic)</p>
+                                        <p className="text-gray-300 text-xs mb-1">→ Don't understand topic? 1000 students globally who DO understand, answer in minutes</p>
+                                        <p className="text-gray-300 text-xs mb-1">→ Broke AF? Earn $P51 helping others, spend on food</p>
+                                        <p className="text-green-400 text-xs font-bold">FEEL: I can handle this. I got this. ✓</p>
+                                    </div>
+
+                                    <div className="bg-black/60 border border-purple-500/50 rounded p-2 mb-2">
+                                        <p className="text-purple-400 font-bold text-xs mb-1">🫂 CONNECTED (NOT LONELY):</p>
+                                        <p className="text-gray-300 text-xs mb-1">→ Study group finds YOU (compatible people, same course, same vibe)</p>
+                                        <p className="text-gray-300 text-xs mb-1">→ Flatmate search = perfect match (AI knows who you'd vibe with)</p>
+                                        <p className="text-gray-300 text-xs mb-1">→ Lost something? Community finds it and messages you</p>
+                                        <p className="text-gray-300 text-xs mb-1">→ Struggling mentally? Anonymous support, real humans who get it</p>
+                                        <p className="text-pink-400 text-xs font-bold">FEEL: I'm not alone. People got my back. ✓</p>
+                                    </div>
+
+                                    <div className="bg-black/60 border border-amber-500/50 rounded p-2 mb-2">
+                                        <p className="text-amber-400 font-bold text-xs mb-1">⚖️ FAIR (NOT RIGGED):</p>
+                                        <p className="text-gray-300 text-xs mb-1">→ Rich kid has tutor? You have AI tutor (FREE, better than human)</p>
+                                        <p className="text-gray-300 text-xs mb-1">→ Everyone pays £717B to platforms? You call restaurant direct, save money</p>
+                                        <p className="text-gray-300 text-xs mb-1">→ Textbooks £150? Swap with student who finished course (FREE)</p>
+                                        <p className="text-gray-300 text-xs mb-1">→ Nobody extracting from you. Zero ads. Zero data selling.</p>
+                                        <p className="text-green-400 text-xs font-bold">FEEL: Finally, something not trying to fuck me over. ✓</p>
+                                    </div>
+
+                                    <div className="bg-black/60 border border-pink-500/50 rounded p-2 mb-2">
+                                        <p className="text-pink-400 font-bold text-xs mb-1">🎯 PURPOSEFUL (NOT LOST):</p>
+                                        <p className="text-gray-300 text-xs mb-1">→ Not just "get degree". Build community. Help others rise.</p>
+                                        <p className="text-gray-300 text-xs mb-1">→ Mass campus cleanup = heal planet + earn money + make friends</p>
+                                        <p className="text-gray-300 text-xs mb-1">→ Tutor someone = they pass exam = you helped change their life</p>
+                                        <p className="text-gray-300 text-xs mb-1">→ Share notes = other students benefit = rising together</p>
+                                        <p className="text-purple-400 text-xs font-bold">FEEL: I'm part of something bigger. My actions matter. ✓</p>
+                                    </div>
+
+                                    <div className="bg-black/60 border border-green-500/50 rounded p-2">
+                                        <p className="text-green-400 font-bold text-xs mb-1">✨ HOPEFUL (NOT DEPRESSED):</p>
+                                        <p className="text-gray-300 text-xs mb-1">→ World feels fucked? Here's proof it's not: students helping students</p>
+                                        <p className="text-gray-300 text-xs mb-1">→ Everyone talks conflict? Here's action: clean campus, build community</p>
+                                        <p className="text-gray-300 text-xs mb-1">→ Wealth gap massive? Here's solution: share resources, rise together</p>
+                                        <p className="text-gray-300 text-xs mb-1">→ Unis teach old shit? AI teaches you real skills for actual jobs</p>
+                                        <p className="text-cyan-400 text-xs font-bold">FEEL: Maybe things can be different. Maybe I can help. ✓</p>
+                                    </div>
+                                </div>
+
+                                <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-4 border-purple-500 rounded-lg p-4">
+                                    <p className="text-purple-400 font-bold text-sm mb-2">💝 THE REAL MAGIC:</p>
+                                    <p className="text-white text-xs mb-2">You can't explain it. You just FEEL it.</p>
+                                    <p className="text-gray-300 text-xs mb-1">→ Like when someone has your back without asking for anything</p>
+                                    <p className="text-gray-300 text-xs mb-1">→ Like when you help someone and they actually succeed</p>
+                                    <p className="text-gray-300 text-xs mb-1">→ Like when you're stressed but know you're not alone</p>
+                                    <p className="text-gray-300 text-xs mb-1">→ Like when something actually helps instead of extracting</p>
+                                    <p className="text-pink-400 font-bold text-xs mt-2">That feeling = why Prof51 will spread. Students FEEL the difference. ♾️❤️♾️</p>
+                                </div>
+                            </div>
+                        </div>
+
                         <div className="bg-black border-2 border-white rounded-lg p-4">
                             <p className="text-white font-bold text-sm mb-2">💯 THE VIBE:</p>
                             <p className="text-gray-300 mb-1">Not "this might be useful one day"</p>
