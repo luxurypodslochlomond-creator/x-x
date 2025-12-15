@@ -534,10 +534,11 @@ Return CLEAN, FORMATTED content ready to use. Be helpful, not generic.`,
                     <div className="bg-black border border-amber-500/30 p-3 rounded">
                         <p className="text-amber-400 font-bold mb-2">COMPANIES WANT YOU:</p>
                         <p className="text-white text-xs mb-2">Students = £50B spending power UK alone</p>
-                        <p className="text-green-400 text-xs mb-1">→ Brands pay Prof51 for verified student access</p>
+                        <p className="text-green-400 text-xs mb-1">→ Brands pay Prof51 to OFFER deals to verified students</p>
                         <p className="text-cyan-400 text-xs mb-1">→ Students get quality deals, not scam shit</p>
-                        <p className="text-pink-400 text-xs mb-1">→ You control what brands see (opt-in only)</p>
-                        <p className="text-gray-400 text-xs">Win-win: Students save money, brands reach real customers</p>
+                        <p className="text-pink-400 text-xs mb-1">→ You control what you see (opt-in only)</p>
+                        <p className="text-red-400 text-xs font-bold mb-1">→ WE NEVER SELL YOUR DATA (EVER)</p>
+                        <p className="text-purple-400 text-xs">Access = Companies advertise. NOT data extraction ♾️❤️♾️</p>
                     </div>
 
                 </div>
