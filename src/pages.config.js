@@ -104,7 +104,6 @@ import QuantumField from './pages/QuantumField';
 import AdminCICGrantRiskAssessment from './pages/AdminCICGrantRiskAssessment';
 import AdminCICCreativeScotlandRisk from './pages/AdminCICCreativeScotlandRisk';
 import GeorgieMaths from './pages/GeorgieMaths';
-import TalkToAI51 from './pages/TalkToAI51';
 import Radio from './pages/Radio';
 import Artist from './pages/Artist';
 import OpenSource from './pages/OpenSource';
@@ -236,7 +235,6 @@ import Prof51About from './pages/Prof51About';
 import ScottAbout from './pages/ScottAbout';
 import Prof51ZeroServerArchitecture from './pages/Prof51ZeroServerArchitecture';
 import ScottZeroServerArchitecture from './pages/ScottZeroServerArchitecture';
-import Diary51 from './pages/Diary51';
 import MeshTechWhitepaper from './pages/MeshTechWhitepaper';
 import HealingFrequencyFinder from './pages/HealingFrequencyFinder';
 import ScottComparison from './pages/ScottComparison';
@@ -351,7 +349,6 @@ export const PAGES = {
     "AdminCICGrantRiskAssessment": AdminCICGrantRiskAssessment,
     "AdminCICCreativeScotlandRisk": AdminCICCreativeScotlandRisk,
     "GeorgieMaths": GeorgieMaths,
-    "TalkToAI51": TalkToAI51,
     "Radio": Radio,
     "Artist": Artist,
     "OpenSource": OpenSource,
@@ -483,7 +480,6 @@ export const PAGES = {
     "ScottAbout": ScottAbout,
     "Prof51ZeroServerArchitecture": Prof51ZeroServerArchitecture,
     "ScottZeroServerArchitecture": ScottZeroServerArchitecture,
-    "Diary51": Diary51,
     "MeshTechWhitepaper": MeshTechWhitepaper,
     "HealingFrequencyFinder": HealingFrequencyFinder,
     "ScottComparison": ScottComparison,
