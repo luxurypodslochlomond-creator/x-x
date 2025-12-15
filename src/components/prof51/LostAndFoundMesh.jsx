@@ -28,12 +28,19 @@ export default function LostAndFoundMesh() {
 
     // IRREPLACEABLE items - works globally, any language, any culture
     const recentFinds = [
-        { item: 'Passport + Visa', location: 'Library Level 3', time: '2 mins ago', status: 'found', flag: '🇨🇳' },
-        { item: 'Dad\'s watch (from home)', location: 'Main Quad', time: '15 mins ago', status: 'found', flag: '🇮🇳' },
+        { item: 'Passport + Visa', location: 'Library Level 3', time: '2 mins ago', status: 'found', flag: '🇨🇳', finder: 'Wei (Edinburgh Economics)' },
+        { item: 'Dad\'s watch (from home)', location: 'Main Quad', time: '15 mins ago', status: 'found', flag: '🇮🇳', finder: 'Priya (Computer Science)' },
         { item: 'Phone (family photos)', location: 'Student Union', time: '1 hour ago', status: 'searching', flag: '🇧🇷' },
-        { item: 'Prayer beads', location: 'Gym Locker Room', time: '3 hours ago', status: 'found', flag: '🇸🇦' },
+        { item: 'Prayer beads', location: 'Gym Locker Room', time: '3 hours ago', status: 'found', flag: '🇸🇦', finder: 'Mohammed (Medicine)' },
         { item: 'Keys (only set)', location: 'Lecture Hall B', time: '5 hours ago', status: 'searching', flag: '🇦🇺' },
-        { item: 'Mum\'s bracelet', location: 'Student Bar', time: '8 hours ago', status: 'found', flag: '🇲🇽' },
+        { item: 'Mum\'s bracelet', location: 'Student Bar', time: '8 hours ago', status: 'found', flag: '🇲🇽', finder: 'Sofia (Law)' },
+    ];
+
+    const safeMeetupSpots = [
+        { name: 'Main Library Reception', distance: '2 min walk', hours: '8am-10pm', busy: 'Very busy (safe)' },
+        { name: 'Student Union Info Desk', distance: '5 min walk', hours: '9am-11pm', busy: 'Always staffed' },
+        { name: 'Campus Security Office', distance: '3 min walk', hours: '24/7', busy: 'Police present' },
+        { name: 'Main Lecture Building Entrance', distance: '4 min walk', hours: '7am-9pm', busy: 'High foot traffic' },
     ];
 
     const handleReport = () => {
