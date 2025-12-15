@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Bluetooth, Wifi, MapPin, Search, CheckCircle, Clock, AlertTriangle, Heart, Zap } from 'lucide-react';
+import { Bluetooth, Wifi, MapPin, Search, CheckCircle, Clock, AlertTriangle, Heart, Zap, X, Send } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -17,6 +17,8 @@ export default function LostAndFoundMesh() {
     const [meshNodes, setMeshNodes] = useState(127); // Simulated nearby devices
     const [reportForm, setReportForm] = useState({ item: '', description: '', location: '' });
     const [showSuccess, setShowSuccess] = useState(false);
+    const [showMeetup, setShowMeetup] = useState(false);
+    const [selectedItem, setSelectedItem] = useState(null);
 
     // Simulated mesh strength (updates every 2 seconds)
     useEffect(() => {
@@ -182,7 +184,17 @@ export default function LostAndFoundMesh() {
                                         </div>
                                     </div>
                                     {find.status === 'found' ? (
-                                        <span className="bg-green-500 text-white text-xs font-bold px-2 py-1 rounded font-mono">FOUND</span>
+                                        <div className="flex flex-col gap-1 items-end">
+                                            <span className="bg-green-500 text-white text-xs font-bold px-2 py-1 rounded font-mono">FOUND</span>
+                                            {find.finder && (
+                                                <Button
+                                                    onClick={() => { setSelectedItem(find); setShowMeetup(true); }}
+                                                    className="bg-cyan-500 hover:bg-cyan-600 text-black text-[10px] font-mono font-bold px-2 py-1 h-auto"
+                                                >
+                                                    MEET UP
+                                                </Button>
+                                            )}
+                                        </div>
                                     ) : (
                                         <span className="bg-amber-500 text-black text-xs font-bold px-2 py-1 rounded font-mono animate-pulse">SEARCHING</span>
                                     )}
@@ -399,6 +411,112 @@ export default function LostAndFoundMesh() {
                     </div>
                 </motion.div>
             )}
+
+            {/* P2P MEETUP MODAL - OFFLINE LOCATION SHARING */}
+            <AnimatePresence>
+                {showMeetup && selectedItem && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 bg-black/95 backdrop-blur-xl z-50 flex items-center justify-center p-4"
+                        onClick={() => setShowMeetup(false)}
+                    >
+                        <motion.div
+                            initial={{ scale: 0.9, y: 20 }}
+                            animate={{ scale: 1, y: 0 }}
+                            exit={{ scale: 0.9, y: 20 }}
+                            onClick={(e) => e.stopPropagation()}
+                            className="bg-gradient-to-br from-gray-900 to-black border-4 border-cyan-500 rounded-2xl p-6 max-w-md w-full max-h-[90vh] overflow-y-auto"
+                            style={{ boxShadow: '0 0 60px rgba(6, 182, 212, 0.8)' }}
+                        >
+                            <div className="flex items-center justify-between mb-4">
+                                <h2 className="text-cyan-400 font-black text-xl font-mono">🤝 P2P MEETUP</h2>
+                                <button onClick={() => setShowMeetup(false)} className="text-gray-400 hover:text-white transition-colors">
+                                    <X className="w-6 h-6" />
+                                </button>
+                            </div>
+
+                            {/* ITEM & FINDER */}
+                            <div className="bg-black border-2 border-green-500 rounded-lg p-4 mb-4">
+                                <div className="flex items-center gap-2 mb-2">
+                                    {selectedItem.flag && <span className="text-2xl">{selectedItem.flag}</span>}
+                                    <p className="text-white font-bold text-base">{selectedItem.item}</p>
+                                </div>
+                                <div className="flex items-center gap-2 text-sm text-gray-300 mb-3">
+                                    <MapPin className="w-4 h-4 text-green-400" />
+                                    <span>Found at: {selectedItem.location}</span>
+                                </div>
+                                <div className="bg-green-500/20 border border-green-500 rounded p-3">
+                                    <p className="text-green-400 font-bold text-xs mb-1">🙌 FOUND BY:</p>
+                                    <p className="text-white font-mono text-sm font-bold">{selectedItem.finder}</p>
+                                </div>
+                            </div>
+
+                            {/* DIRECT P2P MESSAGE */}
+                            <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-2 border-purple-500 rounded-lg p-4 mb-4">
+                                <p className="text-purple-400 font-bold text-sm mb-1">💬 MESSAGE (P2P OFFLINE)</p>
+                                <p className="text-gray-300 text-xs mb-3">Bluetooth mesh - works without internet</p>
+                                <Textarea
+                                    placeholder="Hey! Thanks for finding my stuff! Can we meet at the library?"
+                                    className="bg-black border border-purple-500/50 text-white text-sm font-mono h-20 mb-3"
+                                />
+                                <Button className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold">
+                                    <Send className="w-4 h-4 mr-2" />
+                                    SEND MESSAGE (OFFLINE OK)
+                                </Button>
+                            </div>
+
+                            {/* SHARE LIVE LOCATION */}
+                            <div className="bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border-2 border-cyan-500 rounded-lg p-4 mb-4">
+                                <p className="text-cyan-400 font-bold text-sm mb-1">📍 SHARE LIVE LOCATION</p>
+                                <p className="text-gray-300 text-xs mb-3">P2P location sharing via Bluetooth mesh</p>
+                                <Button className="w-full bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white font-bold mb-2">
+                                    <MapPin className="w-4 h-4 mr-2" />
+                                    SHARE MY LOCATION NOW
+                                </Button>
+                                <div className="bg-black/60 border border-cyan-500/50 rounded p-2">
+                                    <p className="text-cyan-400 text-[10px] text-center font-mono font-bold">
+                                        They see you moving in real-time (mesh updates every 2 seconds)
+                                    </p>
+                                </div>
+                            </div>
+
+                            {/* SAFE MEETUP SPOTS */}
+                            <div className="bg-black border-2 border-amber-500 rounded-lg p-4 mb-4">
+                                <p className="text-amber-400 font-bold text-sm mb-3">🛡️ SAFE PUBLIC SPOTS:</p>
+                                <div className="space-y-2">
+                                    {safeMeetupSpots.map((spot, idx) => (
+                                        <div key={idx} className="bg-amber-900/20 border border-amber-500/30 rounded p-3 hover:bg-amber-900/30 transition-colors cursor-pointer">
+                                            <div className="flex items-start justify-between mb-1">
+                                                <p className="text-white font-bold text-xs">{spot.name}</p>
+                                                <span className="text-amber-400 text-xs font-mono">{spot.distance}</span>
+                                            </div>
+                                            <div className="flex items-center gap-2 text-[10px] text-gray-400 font-mono">
+                                                <Clock className="w-3 h-3" />
+                                                <span>{spot.hours}</span>
+                                                <span>•</span>
+                                                <span className="text-green-400">{spot.busy}</span>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* SAFETY */}
+                            <div className="bg-red-900/20 border border-red-500/50 rounded-lg p-3">
+                                <p className="text-red-400 font-bold text-xs mb-2">⚠️ STAY SAFE:</p>
+                                <ul className="space-y-1 text-[10px] text-gray-300 font-mono">
+                                    <li className="flex items-start gap-1"><span className="text-green-400">✓</span> Meet in busy public place (library/union)</li>
+                                    <li className="flex items-start gap-1"><span className="text-green-400">✓</span> Tell a friend where you're going</li>
+                                    <li className="flex items-start gap-1"><span className="text-green-400">✓</span> Check their student ID before exchange</li>
+                                    <li className="flex items-start gap-1"><span className="text-green-400">✓</span> Campus security 24/7 if needed</li>
+                                </ul>
+                            </div>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </div>
     );
 }
