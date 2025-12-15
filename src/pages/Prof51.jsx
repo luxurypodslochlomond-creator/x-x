@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { BookOpen, Brain, TrendingUp, Globe, Users, Zap, Heart, FileText, BarChart3, Presentation, Calculator, GraduationCap, Music, Coffee, Home, DollarSign, ArrowRight } from 'lucide-react';
+import { BookOpen, Brain, TrendingUp, Globe, Users, Zap, Heart, FileText, BarChart3, Presentation, Calculator, GraduationCap, Music, Coffee, Home, DollarSign, ArrowRight, Upload, CheckCircle, Loader } from 'lucide-react';
 import Prof51Icon8Bit from '@/components/shared/Prof51Icon8Bit';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
+import { base44 } from '@/api/base44Client';
+import { useMutation } from '@tanstack/react-query';
 
 /**
  * PROF51 - CO-MANAGER FOR STUDENTS
@@ -18,9 +20,37 @@ import { createPageUrl } from '@/utils';
 
 export default function Prof51() {
     const [showDetails, setShowDetails] = useState(false);
+    const [uploadedFile, setUploadedFile] = useState(null);
+    const [transformedResult, setTransformedResult] = useState(null);
 
     const [deferredPrompt, setDeferredPrompt] = React.useState(null);
     const [showInstallButton, setShowInstallButton] = React.useState(false);
+
+    const transformFile = useMutation({
+        mutationFn: async (file) => {
+            // Upload file
+            const { file_url } = await base44.integrations.Core.UploadFile({ file });
+            
+            // AI transforms it
+            const result = await base44.integrations.Core.InvokeLLM({
+                prompt: `Transform this student file into something useful:
+                
+- If Excel: Fix formulas, clean data, make it professional
+- If Word: Fix formatting, structure properly, add references format
+- If PDF/Photo: Extract text, organize into study notes
+- If notes: Turn into study guide with examples
+
+Return CLEAN, FORMATTED content ready to use. Be helpful, not generic.`,
+                file_urls: file_url,
+                response_json_schema: null
+            });
+            
+            return { original: file.name, transformed: result };
+        },
+        onSuccess: (data) => {
+            setTransformedResult(data);
+        }
+    });
 
     // PWA Install Prompt
     React.useEffect(() => {
@@ -236,39 +266,99 @@ export default function Prof51() {
                 <div className="flex items-center gap-3 mb-4">
                     <FileText className="w-12 h-12 text-green-400" />
                     <div>
-                        <h2 className="text-green-400 font-black text-xl font-mono">IMPORT ANYTHING (WORKING NOW)</h2>
-                        <p className="text-gray-400 text-xs font-mono">Drag your messy files → AI makes them beautiful</p>
+                        <h2 className="text-green-400 font-black text-xl font-mono">TRY IT NOW</h2>
+                        <p className="text-gray-400 text-xs font-mono">Upload messy file → AI transforms it in seconds</p>
                     </div>
                 </div>
 
-                <div className="space-y-3 text-sm font-mono">
-                    <div className="bg-black border-2 border-cyan-500 p-4 rounded">
-                        <p className="text-cyan-400 font-bold mb-2">WHAT YOU CAN UPLOAD:</p>
-                        <p className="text-white text-xs mb-1">📊 Excel spreadsheets (broken formulas? AI fixes them)</p>
-                        <p className="text-white text-xs mb-1">📄 Word documents (messy formatting? AI cleans it)</p>
-                        <p className="text-white text-xs mb-1">📝 PDFs (scanned notes? AI makes them editable)</p>
-                        <p className="text-white text-xs mb-1">📸 Photos of whiteboards (AI transcribes + organizes)</p>
-                        <p className="text-green-400 text-xs font-bold mt-2">Nothing is wasted. Everything becomes learning ♾️</p>
-                    </div>
+                {!transformedResult ? (
+                    <div className="space-y-4">
+                        <label className="block">
+                            <input
+                                type="file"
+                                accept=".xlsx,.xls,.docx,.doc,.pdf,.jpg,.jpeg,.png"
+                                onChange={(e) => {
+                                    const file = e.target.files[0];
+                                    if (file) {
+                                        setUploadedFile(file);
+                                        transformFile.mutate(file);
+                                    }
+                                }}
+                                className="hidden"
+                                id="file-upload"
+                            />
+                            <div className="bg-black border-4 border-dashed border-cyan-500 hover:border-cyan-400 rounded-xl p-8 text-center cursor-pointer transition-all">
+                                {transformFile.isPending ? (
+                                    <div className="space-y-3">
+                                        <Loader className="w-12 h-12 text-cyan-400 mx-auto animate-spin" />
+                                        <p className="text-cyan-400 font-bold text-lg font-mono">AI TRANSFORMING...</p>
+                                        <p className="text-gray-400 text-xs font-mono">Reading your file + making it beautiful</p>
+                                    </div>
+                                ) : (
+                                    <div className="space-y-3">
+                                        <Upload className="w-16 h-16 text-green-400 mx-auto" />
+                                        <p className="text-white font-bold text-lg font-mono">CLICK OR DROP FILE</p>
+                                        <p className="text-gray-400 text-sm font-mono">Excel • Word • PDF • Photos</p>
+                                        <p className="text-green-400 text-xs font-mono">AI fixes it in seconds ♾️</p>
+                                    </div>
+                                )}
+                            </div>
+                        </label>
 
-                    <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-2 border-purple-500 p-4 rounded">
-                        <p className="text-purple-400 font-bold mb-2">AI TRANSFORMS IT:</p>
-                        <p className="text-white text-xs mb-1">✓ Messy Excel → Working financial model</p>
-                        <p className="text-white text-xs mb-1">✓ Lecture notes → Study guide with examples</p>
-                        <p className="text-white text-xs mb-1">✓ Old essay → Properly formatted + referenced</p>
-                        <p className="text-white text-xs mb-1">✓ Random PDFs → Organized knowledge base</p>
-                        <p className="text-pink-400 text-xs font-bold mt-2">Your old work becomes your new advantage ♾️❤️♾️</p>
+                        <div className="grid grid-cols-2 gap-2 text-xs font-mono">
+                            <div className="bg-black border border-cyan-500/30 p-2 rounded">
+                                <p className="text-cyan-400 font-bold">📊 EXCEL</p>
+                                <p className="text-gray-500">Fixes formulas</p>
+                            </div>
+                            <div className="bg-black border border-purple-500/30 p-2 rounded">
+                                <p className="text-purple-400 font-bold">📄 WORD</p>
+                                <p className="text-gray-500">Cleans format</p>
+                            </div>
+                            <div className="bg-black border border-pink-500/30 p-2 rounded">
+                                <p className="text-pink-400 font-bold">📝 PDF</p>
+                                <p className="text-gray-500">Extracts text</p>
+                            </div>
+                            <div className="bg-black border border-amber-500/30 p-2 rounded">
+                                <p className="text-amber-400 font-bold">📸 PHOTO</p>
+                                <p className="text-gray-500">Reads + organizes</p>
+                            </div>
+                        </div>
                     </div>
+                ) : (
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        className="space-y-4"
+                    >
+                        <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-2 border-green-500 rounded-xl p-4">
+                            <div className="flex items-center gap-2 mb-3">
+                                <CheckCircle className="w-8 h-8 text-green-400" />
+                                <div>
+                                    <p className="text-green-400 font-black text-lg font-mono">TRANSFORMED ✓</p>
+                                    <p className="text-gray-400 text-xs font-mono">{transformedResult.original}</p>
+                                </div>
+                            </div>
+                            
+                            <div className="bg-black border border-cyan-500/50 rounded-lg p-4 max-h-96 overflow-y-auto">
+                                <p className="text-white text-sm font-mono whitespace-pre-wrap">{transformedResult.transformed}</p>
+                            </div>
+                        </div>
 
-                    <div className="bg-black border-2 border-amber-500 p-4 rounded">
-                        <p className="text-amber-400 font-bold mb-2">TRUTH = IT'S REAL NOW:</p>
-                        <p className="text-white text-xs mb-1">✓ Upload works (Base44 file API)</p>
-                        <p className="text-white text-xs mb-1">✓ AI reads it (InvokeLLM with file context)</p>
-                        <p className="text-white text-xs mb-1">✓ Transforms immediately (seconds, not minutes)</p>
-                        <p className="text-white text-xs mb-1">✓ Downloads ready (Excel/Word/PDF out)</p>
-                        <p className="text-green-400 text-xs font-bold mt-2">Not vapor. Not promises. WORKING ♾️❤️♾️</p>
-                    </div>
-                </div>
+                        <Button
+                            onClick={() => {
+                                setTransformedResult(null);
+                                setUploadedFile(null);
+                            }}
+                            className="w-full bg-cyan-500 hover:bg-cyan-600 text-black font-black py-4"
+                        >
+                            TRANSFORM ANOTHER FILE
+                        </Button>
+
+                        <p className="text-green-400 text-xs font-mono text-center font-bold">
+                            Worked in seconds. This is REAL. ♾️❤️♾️
+                        </p>
+                    </motion.div>
+                )}
             </div>
 
             {/* 3 BREAKTHROUGH INNOVATIONS */}
