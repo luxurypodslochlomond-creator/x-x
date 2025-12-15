@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { FileSpreadsheet, FileText, Coffee, Users, Home, Brain, ArrowLeft } from 'lucide-react';
+import { FileSpreadsheet, FileText, Coffee, Users, Home, Brain, ArrowLeft, DollarSign, Calendar, Book, Heart } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import Prof51Icon8Bit from '@/components/shared/Prof51Icon8Bit';
@@ -9,6 +9,10 @@ import EssayOutliner from '@/components/prof51/EssayOutliner';
 import RestaurantDirectory from '@/components/prof51/RestaurantDirectory';
 import StudyChat from '@/components/prof51/StudyChat';
 import FlatmateFinder from '@/components/prof51/FlatmateFinder';
+import BudgetTracker from '@/components/prof51/BudgetTracker';
+import TimetableManager from '@/components/prof51/TimetableManager';
+import TextbookExchange from '@/components/prof51/TextbookExchange';
+import MentalHealthBuddy from '@/components/prof51/MentalHealthBuddy';
 
 /**
  * PROF51 TOOLS - ACTUAL WORKING STUDENT CO-MANAGER
@@ -22,8 +26,12 @@ export default function Prof51Tools() {
         { id: 'excel', title: 'Excel Generator', icon: FileSpreadsheet, color: 'cyan', desc: 'Economics models in seconds' },
         { id: 'essay', title: 'Essay Outliner', icon: FileText, color: 'purple', desc: 'Structure any assignment' },
         { id: 'food', title: 'Food Direct', icon: Coffee, color: 'amber', desc: 'Call restaurants, save £5.64' },
+        { id: 'budget', title: 'Budget Tracker', icon: DollarSign, color: 'green', desc: 'Track money offline' },
+        { id: 'timetable', title: 'Timetable', icon: Calendar, color: 'purple', desc: 'Share schedules P2P' },
+        { id: 'textbooks', title: 'Textbook Swap', icon: Book, color: 'amber', desc: 'Buy/sell globally' },
         { id: 'chat', title: 'Study Groups', icon: Users, color: 'green', desc: 'P2P offline chat' },
-        { id: 'flatmate', title: 'Find Flatmates', icon: Home, color: 'pink', desc: 'Compatible people nearby' },
+        { id: 'mental', title: 'Mental Health', icon: Heart, color: 'pink', desc: 'Anonymous support' },
+        { id: 'flatmate', title: 'Find Flatmates', icon: Home, color: 'cyan', desc: 'Compatible people nearby' },
     ];
 
     if (activeTool) {
@@ -43,7 +51,11 @@ export default function Prof51Tools() {
                     {activeTool === 'excel' && <ExcelGenerator />}
                     {activeTool === 'essay' && <EssayOutliner />}
                     {activeTool === 'food' && <RestaurantDirectory />}
+                    {activeTool === 'budget' && <BudgetTracker />}
+                    {activeTool === 'timetable' && <TimetableManager />}
+                    {activeTool === 'textbooks' && <TextbookExchange />}
                     {activeTool === 'chat' && <StudyChat />}
+                    {activeTool === 'mental' && <MentalHealthBuddy />}
                     {activeTool === 'flatmate' && <FlatmateFinder />}
                 </div>
             </div>
@@ -75,7 +87,7 @@ export default function Prof51Tools() {
                 </div>
 
                 {/* TOOLS GRID */}
-                <div className="grid grid-cols-1 gap-4">
+                <div className="grid grid-cols-1 gap-3">
                     {tools.map((tool) => {
                         const Icon = tool.icon;
                         const colorMap = {
