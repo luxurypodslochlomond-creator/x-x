@@ -983,14 +983,27 @@ export default function Prof51About() {
                         </div>
 
                         <div className="bg-gradient-to-r from-cyan-500/20 to-green-500/20 border-2 border-cyan-500 rounded-lg p-4">
-                            <p className="text-cyan-400 font-bold mb-2">6️⃣ SAFE ENVIRONMENT (STUDENTS HELPING STUDENTS)</p>
-                            <p className="text-white mb-1">Share location with friends when meeting up. Public spots only. Student ID verification.</p>
-                            <p className="text-white mb-1">→ Not Craigslist (sketchy). Not Facebook Marketplace (scams).</p>
-                            <p className="text-green-400 font-bold mt-2">Trusted student community. Zero creeps. ✓</p>
+                            <p className="text-cyan-400 font-bold mb-2">6️⃣ YOUR MATES KEEP AN EYE ON YOU</p>
+                            <p className="text-white mb-1">Meeting someone to get your stuff? Your friends track you live.</p>
+                            <p className="text-white mb-1">→ Share location with trusted mates (they see you moving real-time)</p>
+                            <p className="text-white mb-1">→ Public spots only + Student ID check</p>
+                            <p className="text-white mb-1">→ Not Craigslist (sketchy). Not Facebook (scams).</p>
+                            <p className="text-green-400 font-bold mt-2">Your mates got your back. Always safe. ✓</p>
                         </div>
 
                         <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-2 border-purple-500 rounded-lg p-4">
-                            <p className="text-purple-400 font-bold mb-2">7️⃣ CIRCULAR LOVE ECONOMY</p>
+                            <p className="text-purple-400 font-bold mb-2">7️⃣ BECOMES YOUR BEST MATE</p>
+                            <p className="text-white mb-1">Come for: Lost phone → Found it in 5 mins (saved your arse)</p>
+                            <p className="text-white mb-1">Stay for: Free AI homework help → Excel done in 30 seconds</p>
+                            <p className="text-white mb-1">→ Saves you time (12 hours/week)</p>
+                            <p className="text-white mb-1">→ Saves you money (£43/week)</p>
+                            <p className="text-white mb-1">→ Remembers everything you share (never forgets)</p>
+                            <p className="text-white mb-1">→ But only what YOU choose to share (zero pressure)</p>
+                            <p className="text-pink-400 font-bold mt-2">You'll naturally share more because you trust it. That's the magic. ♾️❤️♾️</p>
+                        </div>
+
+                        <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-2 border-green-500 rounded-lg p-4">
+                            <p className="text-green-400 font-bold mb-2">8️⃣ CIRCULAR LOVE ECONOMY</p>
                             <p className="text-white mb-1">Students don't pay → businesses do (restaurants, brands)</p>
                             <p className="text-white mb-1">Why businesses pay: Reach 235M students direct (no ads)</p>
                             <p className="text-white mb-1">→ Restaurant pays £200/year, saves £5,640 in extraction</p>
