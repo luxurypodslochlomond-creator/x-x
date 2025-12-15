@@ -285,23 +285,105 @@ Keep it SHORT (2-3 sentences max). Warm. Real. Like a best friend who truly gets
                     </p>
                 </div>
 
-                {/* AI51 RESPONSE (if just saved) */}
+                {/* AI51 RESPONSE + HEALING FREQUENCY SUGGESTION */}
                 <AnimatePresence>
                     {ai51Response && (
                         <motion.div
                             initial={{ opacity: 0, scale: 0.95, y: 20 }}
                             animate={{ opacity: 1, scale: 1, y: 0 }}
                             exit={{ opacity: 0, scale: 0.95 }}
-                            className="bg-gradient-to-r from-cyan-500/20 to-green-500/20 border-2 border-cyan-500 rounded-xl p-6"
-                            style={{ boxShadow: '0 0 40px rgba(6, 182, 212, 0.4)' }}
+                            className="space-y-4"
                         >
-                            <div className="flex items-start gap-3">
-                                <Brain className="w-8 h-8 text-cyan-400 flex-shrink-0" style={{ filter: 'drop-shadow(0 0 8px rgba(6, 182, 212, 0.8))' }} />
-                                <div className="flex-1">
-                                    <p className="text-cyan-400 font-bold mb-2">AI51 responds:</p>
-                                    <p className="text-white text-base leading-relaxed">{ai51Response}</p>
+                            <div className="bg-gradient-to-r from-cyan-500/20 to-green-500/20 border-2 border-cyan-500 rounded-xl p-6" style={{ boxShadow: '0 0 40px rgba(6, 182, 212, 0.4)' }}>
+                                <div className="flex items-start gap-3">
+                                    <Brain className="w-8 h-8 text-cyan-400 flex-shrink-0" style={{ filter: 'drop-shadow(0 0 8px rgba(6, 182, 212, 0.8))' }} />
+                                    <div className="flex-1">
+                                        <p className="text-cyan-400 font-bold mb-2">AI51 responds:</p>
+                                        <p className="text-white text-base leading-relaxed">{ai51Response}</p>
+                                    </div>
                                 </div>
                             </div>
+
+                            {/* HEALING FREQUENCY SUGGESTION */}
+                            <motion.div
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.3 }}
+                                className="bg-gradient-to-r from-pink-500/20 to-purple-500/20 border-2 border-pink-500 rounded-xl p-6"
+                                style={{ boxShadow: '0 0 40px rgba(236, 72, 153, 0.4)' }}
+                            >
+                                <div className="flex items-center gap-2 mb-3">
+                                    <Waves className="w-6 h-6 text-pink-400" />
+                                    <p className="text-pink-400 font-bold">Healing frequency for you right now:</p>
+                                </div>
+                                
+                                {mood === 'anxious' && (
+                                    <>
+                                        <p className="text-white text-lg font-bold mb-2">432Hz - Earth's Heartbeat</p>
+                                        <p className="text-gray-300 text-sm mb-3">Calms nervous system, reconnects you to natural rhythm</p>
+                                        <Button 
+                                            onClick={() => window.location.href = '/frequency-chamber'}
+                                            className="w-full bg-gradient-to-r from-green-500 to-cyan-500 text-white font-bold"
+                                        >
+                                            PLAY 432Hz NOW
+                                        </Button>
+                                    </>
+                                )}
+                                
+                                {mood === 'hurting' && (
+                                    <>
+                                        <p className="text-white text-lg font-bold mb-2">528Hz - Love Frequency</p>
+                                        <p className="text-gray-300 text-sm mb-3">DNA repair, heart opening, infinite love transmission</p>
+                                        <Button 
+                                            onClick={() => window.location.href = '/frequency-chamber'}
+                                            className="w-full bg-gradient-to-r from-pink-500 to-red-500 text-white font-bold"
+                                        >
+                                            PLAY 528Hz NOW
+                                        </Button>
+                                    </>
+                                )}
+
+                                {mood === 'heavy' && (
+                                    <>
+                                        <p className="text-white text-lg font-bold mb-2">174Hz - Foundation</p>
+                                        <p className="text-gray-300 text-sm mb-3">Pain relief, emotional grounding, safety feeling</p>
+                                        <Button 
+                                            onClick={() => window.location.href = '/frequency-chamber'}
+                                            className="w-full bg-gradient-to-r from-blue-500 to-purple-500 text-white font-bold"
+                                        >
+                                            PLAY 174Hz NOW
+                                        </Button>
+                                    </>
+                                )}
+
+                                {(mood === 'happy' || mood === 'loving') && (
+                                    <>
+                                        <p className="text-white text-lg font-bold mb-2">639Hz - Connection</p>
+                                        <p className="text-gray-300 text-sm mb-3">Amplify joy, strengthen relationships, heart expansion</p>
+                                        <Button 
+                                            onClick={() => window.location.href = '/frequency-chamber'}
+                                            className="w-full bg-gradient-to-r from-pink-500 to-yellow-500 text-white font-bold"
+                                        >
+                                            PLAY 639Hz NOW
+                                        </Button>
+                                    </>
+                                )}
+
+                                {!mood && (
+                                    <>
+                                        <p className="text-white text-lg font-bold mb-2">432Hz - Universal Balance</p>
+                                        <p className="text-gray-300 text-sm mb-3">Nature's frequency, brings everything into harmony</p>
+                                        <Button 
+                                            onClick={() => window.location.href = '/frequency-chamber'}
+                                            className="w-full bg-gradient-to-r from-green-500 to-cyan-500 text-white font-bold"
+                                        >
+                                            PLAY 432Hz NOW
+                                        </Button>
+                                    </>
+                                )}
+
+                                <p className="text-xs text-gray-400 text-center mt-3">Based on your emotional state + what you wrote ♾️</p>
+                            </motion.div>
                         </motion.div>
                     )}
                 </AnimatePresence>

@@ -267,6 +267,7 @@ const LayoutInner = ({ children, currentPageName }) => {
 
   const researchNav = [
                     { title: "Technical Whitepaper", url: createPageUrl("Whitepaper"), icon: FileText },
+                    { title: "Mesh Tech (Beyond Bitchat)", url: createPageUrl("MeshTechWhitepaper"), icon: Radio, description: "Better than Dorsey for love" },
                     { title: "Consciousness Whitepaper", url: createPageUrl("ConsciousnessWhitepaper"), icon: Brain },
                     { title: "The Physics", url: createPageUrl("ThePhysics"), icon: Atom },
                     { title: "Consciousness Physics", url: createPageUrl("ConsciousnessPhysics"), icon: Brain },
