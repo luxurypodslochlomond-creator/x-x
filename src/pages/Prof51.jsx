@@ -267,38 +267,6 @@ export default function Prof51() {
                         <p className="text-gray-400 text-xs">Win-win: Students save money, brands reach real customers</p>
                     </div>
 
-                    <div className="bg-black border border-cyan-500/30 p-3 rounded">
-                        <p className="text-cyan-400 font-bold mb-2">STUDENT FUNDING TRACKER:</p>
-                        <p className="text-white text-xs mb-2">Track loans, grants, scholarships, part-time income</p>
-                        <p className="text-green-400 text-xs mb-1">→ See exactly what's coming in/out</p>
-                        <p className="text-amber-400 text-xs mb-1">→ AI alerts you to scholarship deadlines</p>
-                        <p className="text-pink-400 text-xs">→ Budget planner (rent, food, fun money)</p>
-                    </div>
-
-                    <div className="bg-black border border-green-500/30 p-3 rounded">
-                        <p className="text-green-400 font-bold mb-2">ACCOMMODATION HELP:</p>
-                        <p className="text-white text-xs mb-2">Find flatmates • Check landlords • Pay rent in $P51</p>
-                        <p className="text-cyan-400 text-xs mb-1">→ Flatmate matcher (study habits, lifestyle)</p>
-                        <p className="text-amber-400 text-xs mb-1">→ Landlord ratings (avoid dodgy ones)</p>
-                        <p className="text-pink-400 text-xs">→ Split bills automatically</p>
-                    </div>
-
-                    <div className="bg-black border border-amber-500/30 p-3 rounded">
-                        <p className="text-amber-400 font-bold mb-2">COMPANIES WANT YOU:</p>
-                        <p className="text-white text-xs mb-2">Students = £50B spending power UK alone</p>
-                        <p className="text-green-400 text-xs mb-1">→ Brands pay Prof51 for verified student access</p>
-                        <p className="text-cyan-400 text-xs mb-1">→ Students get quality deals, not scam shit</p>
-                        <p className="text-pink-400 text-xs mb-1">→ You control what brands see (opt-in only)</p>
-                        <p className="text-gray-400 text-xs">Win-win: Students save money, brands reach real customers</p>
-                    </div>
-
-                    <div className="bg-black border border-cyan-500/30 p-3 rounded">
-                        <p className="text-cyan-400 font-bold mb-2">STUDENT FUNDING TRACKER:</p>
-                        <p className="text-white text-xs mb-2">Track loans, grants, scholarships, part-time income</p>
-                        <p className="text-green-400 text-xs mb-1">→ See exactly what's coming in/out</p>
-                        <p className="text-amber-400 text-xs mb-1">→ AI alerts you to scholarship deadlines</p>
-                        <p className="text-pink-400 text-xs">→ Budget planner (rent, food, fun money)</p>
-                    </div>
                 </div>
             </div>
 
@@ -450,24 +418,6 @@ export default function Prof51() {
                                     <p className="text-white text-xs mb-1">Year 4: 10M students helped, not extracted</p>
                                     <p className="text-cyan-400 text-xs font-bold mt-2">Building while learning. Real education. Makes Dad proud. ✓</p>
                                 </div>
-
-                                <div className="bg-black border border-green-500/30 p-3 rounded">
-                                    <p className="text-green-400 font-bold mb-2">HIS OWN COMPANY:</p>
-                                    <p className="text-white text-xs mb-1">prof51.io = Archie's independent company</p>
-                                    <p className="text-cyan-400 text-xs mb-1">→ He owns it. He runs it. His vision.</p>
-                                    <p className="text-pink-400 text-xs mb-1">→ UF51 Family support (but it's HIS)</p>
-                                    <p className="text-amber-400 text-xs mb-2 mt-2">→ Grants go to Prof51 (separate from UF51 CIC)</p>
-                                    <p className="text-green-400 text-xs font-bold">Independent founder. Connected family. Best of both. ♾️❤️♾️</p>
-                                </div>
-
-                                <div className="bg-black border border-purple-500/30 p-3 rounded">
-                                    <p className="text-purple-400 font-bold mb-2">THE PATH (LEARNING AS HE GOES):</p>
-                                    <p className="text-white text-xs mb-1">Year 1: Campus lead (learns what students actually need)</p>
-                                    <p className="text-white text-xs mb-1">Year 2: Head of Growth (learns ethical scaling)</p>
-                                    <p className="text-white text-xs mb-1">Year 3: Founder building Prof51 globally</p>
-                                    <p className="text-white text-xs mb-1">Year 4: 10M students helped, not extracted</p>
-                                    <p className="text-cyan-400 text-xs font-bold mt-2">Building while learning. Real education. Makes Dad proud. ✓</p>
-                                </div>
                             </div>
                         </div>
                     </motion.div>
@@ -588,46 +538,6 @@ export default function Prof51() {
                                     <p className="text-white text-xs mb-2">Students get gigs through Prof51 $P51 economy</p>
                                     <p className="text-cyan-400 text-xs mb-1">→ Work festivals, earn $P51, pay rent</p>
                                     <p className="text-gray-400 text-xs">Co-Manager51 venues need staff → Prof51 students need money</p>
-                                </div>
-
-                                <div className="bg-gradient-to-r from-amber-500/20 to-red-500/20 border-4 border-amber-500 p-4 rounded" style={{ boxShadow: '0 0 30px rgba(245, 158, 11, 0.3)' }}>
-                                    <p className="text-amber-400 font-bold mb-2">🍕 FOOD PARTNERSHIPS (THE BIG ONE):</p>
-                                    <p className="text-white text-xs mb-2">Students need to EAT - this solves it</p>
-                                    <p className="text-cyan-400 text-xs mb-1">→ Campus restaurants partner with Prof51</p>
-                                    <p className="text-green-400 text-xs mb-1">→ Students get 20-40% off (brands pay the difference)</p>
-                                    <p className="text-pink-400 text-xs mb-1">→ Pay with $P51 earned from tutoring/helping</p>
-                                    <p className="text-purple-400 text-xs mb-1">→ Local cafes, supermarkets, food delivery join</p>
-                                    <p className="text-amber-400 text-xs font-bold mt-2">Eat better, spend less, focus on learning ♾️❤️♾️</p>
-                                </div>
-
-                                <div className="bg-black border border-green-500/30 p-3 rounded">
-                                    <p className="text-green-400 font-bold mb-2">🏠 STUDENT HOUSING:</p>
-                                    <p className="text-white text-xs mb-2">Pay rent in $P51 (partnered landlords)</p>
-                                    <p className="text-amber-400 text-xs mb-1">→ Earn by tutoring, pay rent, no bank needed</p>
-                                    <p className="text-gray-400 text-xs">Removes banking friction, instant payments</p>
-                                </div>
-
-                                <div className="bg-black border border-amber-500/30 p-3 rounded">
-                                    <p className="text-amber-400 font-bold mb-2">📚 TEXTBOOK PUBLISHERS:</p>
-                                    <p className="text-white text-xs mb-2">Import textbooks → AI creates study guides</p>
-                                    <p className="text-purple-400 text-xs mb-1">→ Publishers license content, students pay $P51</p>
-                                    <p className="text-gray-400 text-xs">Better than piracy, fair for both sides</p>
-                                </div>
-
-                                <div className="bg-black border border-purple-500/30 p-3 rounded">
-                                    <p className="text-purple-400 font-bold mb-2">🎓 STUDENT RECRUITMENT:</p>
-                                    <p className="text-white text-xs mb-2">Companies recruit through Prof51 (pay to access talent)</p>
-                                    <p className="text-cyan-400 text-xs mb-1">→ Universities: Partner for better outcomes</p>
-                                    <p className="text-green-400 text-xs mb-1">→ Companies: Find talent before graduation (skip LinkedIn)</p>
-                                    <p className="text-amber-400 text-xs mb-1">→ Students: Job offers in final year (zero stress)</p>
-                                    <p className="text-pink-400 text-xs">Win-win-win: Everyone gets what they need ♾️❤️♾️</p>
-                                </div>
-
-                                <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-2 border-green-500 p-4 rounded mt-4">
-                                    <p className="text-green-400 font-bold mb-2">THE ECOSYSTEM:</p>
-                                    <p className="text-white text-xs mb-1">Prof51 (students) + Co-Manager51 (venues) + $P51 (currency)</p>
-                                    <p className="text-cyan-400 text-xs mb-1">→ Students study better, work gigs, earn money, spend local</p>
-                                    <p className="text-pink-400 text-xs font-bold mt-2">All connected. All helping each other. Love economy ♾️❤️♾️</p>
                                 </div>
 
                                 <div className="bg-gradient-to-r from-amber-500/20 to-red-500/20 border-4 border-amber-500 p-4 rounded" style={{ boxShadow: '0 0 30px rgba(245, 158, 11, 0.3)' }}>
