@@ -17,11 +17,13 @@ export default function ScottAbout() {
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black pb-20">
-            {/* HEADER */}
-            <div className="sticky top-0 z-50 bg-black/95 backdrop-blur-xl border-b border-amber-500/30 px-4 py-3">
-                <Link to={createPageUrl('ScottManager')} className="flex items-center gap-2 text-amber-400 font-mono text-sm font-bold">
-                    <ArrowLeft className="w-5 h-5" />
-                    BACK TO CO-MANAGER
+            {/* HEADER - 8-BIT MUSIC INDUSTRY VIBE */}
+            <div className="sticky top-0 z-50 border-b-4 border-amber-500 px-4 py-3" style={{ background: 'linear-gradient(135deg, #000000 0%, #4a2a0a 50%, #000000 100%)', boxShadow: '0 0 30px rgba(245, 158, 11, 0.6)' }}>
+                <Link to={createPageUrl('ScottManager')} className="flex items-center gap-2 text-white font-mono text-sm font-black">
+                    <div className="bg-amber-500 p-1.5 rounded" style={{ boxShadow: '2px 2px 0 rgba(245, 158, 11, 0.4)' }}>
+                        <ArrowLeft className="w-4 h-4 text-black" />
+                    </div>
+                    BACK
                 </Link>
             </div>
 
@@ -218,10 +220,15 @@ export default function ScottAbout() {
                     </Link>
                 </div>
 
-                {/* FOOTER */}
-                <div className="text-center text-gray-600 text-xs font-mono pt-6 border-t border-gray-800">
-                    <p>Part of UniversalFamily51</p>
-                    <p className="mt-1">Love-first business ♾️❤️♾️</p>
+                {/* FOOTER - CLEAR IDENTITY */}
+                <div className="text-center pt-6 border-t-2 border-amber-500/30">
+                    <div className="bg-gradient-to-r from-amber-500/20 to-orange-500/20 border-2 border-amber-500 rounded-xl p-4 mb-3">
+                        <p className="text-amber-400 font-black text-sm font-mono mb-1">CO-MANAGER51 = MUSIC ONLY</p>
+                        <p className="text-white text-xs font-mono">Artists • Gigs • Publishing • Tours</p>
+                    </div>
+                    <p className="text-gray-600 text-[10px] font-mono">Scott's tool • UniversalFamily51</p>
+                    <p className="text-gray-700 text-[9px] font-mono mt-1">(Prof51 = Students, separate)</p>
+                    <p className="text-pink-400 text-xs font-mono mt-2">♾️❤️♾️</p>
                 </div>
             </div>
         </div>

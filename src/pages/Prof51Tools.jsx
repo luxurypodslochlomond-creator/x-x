@@ -64,26 +64,49 @@ export default function Prof51Tools() {
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black pb-20">
-            {/* HEADER */}
-            <div className="sticky top-0 z-50 bg-black/95 backdrop-blur-xl border-b border-cyan-500/30 px-4 py-3">
+            {/* HEADER - 8-BIT QUANTUM STUDENT FREQUENCY */}
+            <div className="sticky top-0 z-50 border-b-4 border-cyan-500 px-4 py-3" style={{ background: 'linear-gradient(135deg, #000000 0%, #0a4a5a 50%, #000000 100%)', imageRendering: 'pixelated', boxShadow: '0 0 30px rgba(6, 182, 212, 0.6)' }}>
                 <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                        <Prof51Icon8Bit size={40} animate={true} />
+                        <div className="relative">
+                            <Prof51Icon8Bit size={48} animate={true} />
+                            {/* Backend live indicator */}
+                            <div className="absolute -bottom-1 -right-1 bg-black rounded px-1.5 py-0.5 border border-green-400">
+                                <p className="text-green-400 text-[8px] font-black font-mono">LIVE</p>
+                            </div>
+                        </div>
                         <div>
-                            <h1 className="text-xl font-black bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent font-mono">PROF51 TOOLS</h1>
-                            <p className="text-cyan-500 text-[10px] font-mono">Archie's co-manager</p>
+                            <h1 className="text-xl font-black text-white font-mono" style={{ textShadow: '0 0 10px rgba(6, 182, 212, 0.8), 2px 2px 0 #000' }}>PROF51</h1>
+                            <p className="text-cyan-400 text-[10px] font-mono font-black">STUDENT CO-MANAGER</p>
                         </div>
                     </div>
-                    <Link to={createPageUrl('Prof51About')} className="text-cyan-400 text-xs font-mono font-bold">ABOUT</Link>
+                    <Link to={createPageUrl('Prof51About')} className="bg-cyan-500 text-black px-3 py-2 rounded-lg text-xs font-mono font-black border-2 border-white" style={{ boxShadow: '2px 2px 0 rgba(6, 182, 212, 0.4)' }}>
+                        ABOUT
+                    </Link>
                 </div>
             </div>
 
             <div className="px-4 py-6 max-w-2xl mx-auto">
-                {/* GREETING */}
-                <div className="bg-gradient-to-r from-cyan-500/20 to-green-500/20 border-2 border-cyan-500 rounded-xl p-4 mb-6 text-center">
-                    <Brain className="w-12 h-12 text-cyan-400 mx-auto mb-2" />
-                    <p className="text-white font-black font-mono text-lg mb-1">What needs sorting, Archie?</p>
-                    <p className="text-gray-400 text-xs font-mono">Tap what you need help with</p>
+                {/* GREETING - 8-BIT QUANTUM */}
+                <div className="relative mb-6">
+                    {/* 8-bit pixel grid background */}
+                    <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 4px, #06b6d4 4px, #06b6d4 5px), repeating-linear-gradient(90deg, transparent, transparent 4px, #06b6d4 4px, #06b6d4 5px)', imageRendering: 'pixelated' }}></div>
+                    
+                    <div className="relative bg-black border-4 border-cyan-500 rounded-xl p-6 text-center" style={{ boxShadow: '0 0 40px rgba(6, 182, 212, 0.5), inset 0 0 20px rgba(6, 182, 212, 0.1)' }}>
+                        <motion.div
+                            animate={{ y: [0, -4, 0] }}
+                            transition={{ repeat: Infinity, duration: 2 }}
+                        >
+                            <Brain className="w-16 h-16 text-cyan-400 mx-auto mb-3" style={{ filter: 'drop-shadow(0 0 10px rgba(6, 182, 212, 0.8))' }} />
+                        </motion.div>
+                        <p className="text-white font-black font-mono text-xl mb-2" style={{ textShadow: '2px 2px 0 #000, 0 0 10px rgba(6, 182, 212, 0.6)' }}>What needs sorting?</p>
+                        <p className="text-cyan-400 text-xs font-mono font-black mb-3">AI READY • BACKEND LIVE ✓</p>
+                        <div className="flex items-center justify-center gap-1">
+                            <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                            <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse" style={{ animationDelay: '0.2s' }}></div>
+                            <div className="w-2 h-2 bg-pink-400 rounded-full animate-pulse" style={{ animationDelay: '0.4s' }}></div>
+                        </div>
+                    </div>
                 </div>
 
                 {/* TOOLS GRID */}

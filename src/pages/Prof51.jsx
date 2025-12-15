@@ -114,18 +114,26 @@ Return CLEAN, FORMATTED content ready to use. Be helpful, not generic.`,
     return (
         <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black pb-20">
             
-            {/* STICKY HEADER - COMPACT */}
-            <div className="sticky top-0 z-50 bg-black/95 backdrop-blur-xl border-b border-cyan-500/30 px-4 py-3">
+            {/* STICKY HEADER - 8-BIT QUANTUM STUDENT TECH */}
+            <div className="sticky top-0 z-50 border-b-4 border-cyan-500 px-4 py-3" style={{ background: 'linear-gradient(135deg, #000000 0%, #0a4a5a 50%, #000000 100%)', imageRendering: 'pixelated', boxShadow: '0 0 30px rgba(6, 182, 212, 0.6)' }}>
                 <div className="flex items-center justify-between max-w-2xl mx-auto">
                     <div className="flex items-center gap-3">
-                        <Prof51Icon8Bit size={40} animate={true} />
+                        <div className="relative">
+                            <Prof51Icon8Bit size={48} animate={true} />
+                            {/* Live status indicator */}
+                            <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-400 rounded-full animate-pulse" style={{ boxShadow: '0 0 8px rgba(34, 197, 94, 0.8)' }}></div>
+                        </div>
                         <div>
-                            <h1 className="text-xl font-black bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent font-mono">PROF51</h1>
-                            <p className="text-cyan-500 text-[10px] font-mono">Archie (19) + Lennox (10)</p>
+                            <h1 className="text-2xl font-black text-white font-mono" style={{ textShadow: '0 0 10px rgba(6, 182, 212, 0.8), 2px 2px 0 #000' }}>PROF51</h1>
+                            <div className="flex items-center gap-2">
+                                <div className="w-2 h-2 bg-cyan-400 animate-pulse"></div>
+                                <p className="text-cyan-400 text-[10px] font-mono font-black">9 TOOLS LIVE</p>
+                            </div>
                         </div>
                     </div>
                     
-                    <button
+                    <motion.button
+                        whileTap={{ scale: 0.9 }}
                         onClick={async () => {
                             const shareMsg = `🎓 PROF51 - AI Co-Manager for Students\n\nFOUNDER: Archie (19, Economics @ Edinburgh)\nVISION: Lennox (10, spotted £717B extraction)\n\n✓ AI handles ALL busywork\n✓ Works OFFLINE\n✓ FREE FOREVER\n\n→ ${window.location.origin}${createPageUrl('Prof51')}\n\n♾️❤️♾️`;
                             try {
@@ -142,39 +150,54 @@ Return CLEAN, FORMATTED content ready to use. Be helpful, not generic.`,
                                 }
                             }
                         }}
-                        className="bg-gradient-to-r from-pink-500 to-purple-500 text-white font-black px-4 py-2 rounded-lg text-sm font-mono"
+                        className="bg-gradient-to-r from-pink-500 to-purple-500 text-white font-black px-4 py-2 rounded-lg text-sm font-mono border-2 border-pink-400"
+                        style={{ boxShadow: '0 0 20px rgba(236, 72, 153, 0.5)' }}
                     >
                         SHARE
-                    </button>
+                    </motion.button>
                 </div>
             </div>
 
             <div className="px-4 py-6 max-w-2xl mx-auto">
-                {/* HERO SECTION */}
+                {/* HERO SECTION - 8-BIT QUANTUM */}
                 <motion.div 
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     className="text-center mb-6"
                 >
-                    <h1 className="text-4xl font-black mb-2 bg-gradient-to-r from-cyan-400 via-green-400 to-blue-400 bg-clip-text text-transparent">
-                        Your AI Co-Manager
-                    </h1>
-                    <p className="text-gray-400 text-sm font-mono mb-4">Built by students, for students</p>
+                    {/* 8-bit pixelated background grid */}
+                    <div className="relative mb-4">
+                        <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 3px, #06b6d4 3px, #06b6d4 4px), repeating-linear-gradient(90deg, transparent, transparent 3px, #06b6d4 3px, #06b6d4 4px)', imageRendering: 'pixelated' }}></div>
+                        <h1 className="relative text-5xl font-black mb-2 text-white font-mono" style={{ textShadow: '4px 4px 0 #000, 0 0 20px rgba(6, 182, 212, 0.8)' }}>
+                            YOUR AI MATE
+                        </h1>
+                    </div>
+                    <p className="text-cyan-400 text-sm font-mono font-black mb-1">STUDENT LIFE CO-MANAGER</p>
+                    <p className="text-gray-500 text-xs font-mono mb-4">Studies • Social • Money • Mental Health • Everything</p>
                     
-                    {/* WORKING TOOLS BUTTON */}
+                    {/* WORKING TOOLS BUTTON - 8-BIT QUANTUM STYLE */}
                     <Link to={createPageUrl('Prof51Tools')}>
-                        <motion.button
-                            whileHover={{ scale: 1.02 }}
+                        <motion.div
+                            whileHover={{ scale: 1.02, y: -2 }}
                             whileTap={{ scale: 0.98 }}
-                            className="w-full bg-gradient-to-r from-green-500 to-cyan-500 text-white font-black py-6 text-lg rounded-2xl border-2 border-green-400 shadow-2xl"
-                            style={{ boxShadow: '0 0 60px rgba(34, 197, 94, 0.5)' }}
+                            className="relative"
                         >
-                            <div className="flex items-center justify-center gap-3">
-                                <span className="text-2xl">🚀</span>
-                                <span>OPEN 9 WORKING TOOLS</span>
-                            </div>
-                            <p className="text-xs text-green-100 mt-1">Offline • P2P • Campus Ready</p>
-                        </motion.button>
+                            {/* 8-bit shadow layers */}
+                            <div className="absolute inset-0 bg-green-500 rounded-xl translate-x-1 translate-y-1" style={{ imageRendering: 'pixelated' }}></div>
+                            <div className="absolute inset-0 bg-cyan-500 rounded-xl translate-x-0.5 translate-y-0.5" style={{ imageRendering: 'pixelated' }}></div>
+                            
+                            <button className="relative w-full bg-gradient-to-r from-green-400 to-cyan-400 text-black font-black py-6 text-xl rounded-xl border-4 border-white">
+                                <div className="flex items-center justify-center gap-3 mb-1">
+                                    <span className="text-3xl">🚀</span>
+                                    <span className="font-mono">OPEN 9 TOOLS</span>
+                                </div>
+                                <div className="flex items-center justify-center gap-2 text-xs">
+                                    <div className="w-2 h-2 bg-black rounded-full animate-pulse"></div>
+                                    <span className="text-black font-bold font-mono">BACKEND LIVE</span>
+                                    <div className="w-2 h-2 bg-black rounded-full animate-pulse"></div>
+                                </div>
+                            </button>
+                        </motion.div>
                     </Link>
                 </motion.div>
 
@@ -944,10 +967,18 @@ Return CLEAN, FORMATTED content ready to use. Be helpful, not generic.`,
                     </motion.div>
                 )}
 
-                {/* FOOTER */}
-                <div className="text-center text-gray-600 text-[10px] font-mono mt-8">
-                    <p>Prof51 × Co-Manager51 × $P51</p>
-                    <p className="mt-1">All connected. All love. ♾️❤️♾️</p>
+                {/* FOOTER - CLEAR SEPARATION */}
+                <div className="text-center mt-8 space-y-3">
+                    <div className="bg-gradient-to-r from-cyan-500/20 to-green-500/20 border-2 border-cyan-500 rounded-xl p-4">
+                        <p className="text-cyan-400 text-xs font-mono font-black mb-2">PROF51 = STUDENT LIFE</p>
+                        <p className="text-gray-400 text-[10px] font-mono">Studies • Social • Accommodation • Everything</p>
+                    </div>
+                    
+                    <div className="h-px bg-gray-700"></div>
+                    
+                    <p className="text-gray-600 text-[10px] font-mono">Part of UniversalFamily51</p>
+                    <p className="text-gray-700 text-[9px] font-mono">Co-Manager51 = Music industry (separate tool)</p>
+                    <p className="text-pink-500 text-xs font-mono mt-2">♾️❤️♾️</p>
                 </div>
             </div>
         </div>
