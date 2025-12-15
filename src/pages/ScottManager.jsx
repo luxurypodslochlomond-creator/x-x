@@ -5,7 +5,7 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Plus, Search, Wifi, WifiOff, RefreshCw, Brain, DollarSign, FileText, Music, Globe, Briefcase, Camera, Plane, Users, Crown, Palette, Heart, Send, X, Shield } from 'lucide-react';
+import { Plus, Search, Wifi, WifiOff, RefreshCw, Brain, DollarSign, FileText, Music, Globe, Briefcase, Camera, Plane, Users, Crown, Palette, Heart, Send, X, Shield, Upload } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import KingdomCrown8Bit from '@/components/shared/KingdomCrown8Bit';
 import CoManager51Icon8Bit from '@/components/shared/CoManager51Icon8Bit';
@@ -35,6 +35,7 @@ import ScottDailySupport from '@/components/scott/ScottDailySupport';
 import ScottTeamChat from '@/components/scott/ScottTeamChat';
 import { base44 } from '@/api/base44Client';
 import { useMutation } from '@tanstack/react-query';
+import ScottFileUpload from '@/components/scott/ScottFileUpload';
 
 /**
  * SCOTT'S ARTIST/CLIENT MANAGER
@@ -49,6 +50,7 @@ function ScottManagerInner() {
     const [showAIChat, setShowAIChat] = useState(false);
     const [aiQuestion, setAiQuestion] = useState('');
     const [aiResponse, setAiResponse] = useState('');
+    const [showFileUpload, setShowFileUpload] = useState(false);
     
     const scott = useScottOffline();
     const [artists, setArtists] = useState([]);
@@ -264,19 +266,32 @@ Keep it SHORT, practical, straight to the point. No bullshit. Real help.`,
                 </div>
             </Link>
 
+            {showFileUpload && <ScottFileUpload onClose={() => setShowFileUpload(false)} />}
+
             {/* AI CHAT - INLINE */}
             <div className="mb-6">
                 {!showAIChat ? (
-                    <button onClick={() => setShowAIChat(true)} className="w-full bg-black border-2 border-amber-500 hover:border-amber-400 rounded-lg p-4 transition-all text-left">
-                        <div className="flex items-center gap-3 mb-2">
-                            <Brain className="w-8 h-8 text-amber-400" />
-                            <div className="flex-1">
-                                <p className="text-lg font-bold text-white font-mono">AI51 Help</p>
-                                <p className="text-xs text-gray-500 font-mono">Ask anything about music management</p>
+                    <div className="space-y-2">
+                        <button onClick={() => setShowAIChat(true)} className="w-full bg-black border-2 border-amber-500 hover:border-amber-400 rounded-lg p-4 transition-all text-left">
+                            <div className="flex items-center gap-3 mb-2">
+                                <Brain className="w-8 h-8 text-amber-400" />
+                                <div className="flex-1">
+                                    <p className="text-lg font-bold text-white font-mono">AI51 Help</p>
+                                    <p className="text-xs text-gray-500 font-mono">Ask anything about music management</p>
+                                </div>
                             </div>
-                        </div>
-                        <p className="text-gray-400 text-sm font-mono">Contracts • Deals • Tours • Publishing • No bullshit ✓</p>
-                    </button>
+                            <p className="text-gray-400 text-sm font-mono">Contracts • Deals • Tours • Publishing • No bullshit ✓</p>
+                        </button>
+                        <button onClick={() => setShowFileUpload(true)} className="w-full bg-gradient-to-r from-cyan-600 to-green-600 hover:from-cyan-500 hover:to-green-500 border-2 border-cyan-500 rounded-lg p-4 transition-all text-left">
+                            <div className="flex items-center gap-3">
+                                <Upload className="w-8 h-8 text-white" />
+                                <div className="flex-1">
+                                    <p className="text-lg font-bold text-white font-mono">Upload to AI51</p>
+                                    <p className="text-xs text-cyan-200 font-mono">Contracts • Emails • Offers → AI extracts</p>
+                                </div>
+                            </div>
+                        </button>
+                    </div>
                 ) : (
                     <motion.div
                         initial={{ opacity: 0, height: 0 }}
