@@ -604,7 +604,93 @@ export default function Prof51About() {
                                             <p className="text-white text-xs text-center mb-2">Looking for flatmate? 1000 students matched to you.</p>
                                             <p className="text-amber-400 font-black text-sm text-center mt-3">THAT'S THE WOW. PURE. SIMPLE. UNSTOPPABLE. ♾️❤️♾️</p>
                                         </div>
-                                    </div>
+                                        </div>
+
+                                        <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-4 border-purple-500 rounded-xl p-4 mt-4" style={{ boxShadow: '0 0 50px rgba(168, 85, 247, 0.5)' }}>
+                                        <p className="text-purple-400 font-black text-xl mb-3 text-center">🎉 P2P EVERYWHERE STUDENTS GO</p>
+                                        <p className="text-white text-sm mb-3 text-center">Not just campus. EVERYWHERE students are = mesh network active.</p>
+
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                            <div className="bg-black border-2 border-cyan-500 rounded-lg p-3">
+                                                <p className="text-cyan-400 font-bold text-xs mb-2">🍕 RESTAURANTS:</p>
+                                                <p className="text-gray-300 text-xs mb-1">→ Left your jacket at table</p>
+                                                <p className="text-gray-300 text-xs mb-1">→ 20 students eating there</p>
+                                                <p className="text-gray-300 text-xs mb-1">→ Their phones detect it</p>
+                                                <p className="text-gray-300 text-xs mb-1">→ You get alert: "Jacket still at restaurant"</p>
+                                                <p className="text-green-400 font-bold text-xs mt-1">Never lose stuff at restaurants ✓</p>
+                                            </div>
+
+                                            <div className="bg-black border-2 border-pink-500 rounded-lg p-3">
+                                                <p className="text-pink-400 font-bold text-xs mb-2">🎵 CLUBS:</p>
+                                                <p className="text-gray-300 text-xs mb-1">→ Phone slips out dancing</p>
+                                                <p className="text-gray-300 text-xs mb-1">→ 500 students in club</p>
+                                                <p className="text-gray-300 text-xs mb-1">→ Mesh tracks it every second</p>
+                                                <p className="text-gray-300 text-xs mb-1">→ "Phone near DJ booth" → "Someone picked it up" → "Moving to bar"</p>
+                                                <p className="text-green-400 font-bold text-xs mt-1">Find it even in chaos ✓</p>
+                                            </div>
+
+                                            <div className="bg-black border-2 border-amber-500 rounded-lg p-3">
+                                                <p className="text-amber-400 font-bold text-xs mb-2">🎪 FESTIVALS:</p>
+                                                <p className="text-gray-300 text-xs mb-1">→ Lost your mate in crowd</p>
+                                                <p className="text-gray-300 text-xs mb-1">→ 10,000 students at festival</p>
+                                                <p className="text-gray-300 text-xs mb-1">→ Their Prof51 = your location tracker</p>
+                                                <p className="text-gray-300 text-xs mb-1">→ "Near main stage" → "Walking to food tents"</p>
+                                                <p className="text-green-400 font-bold text-xs mt-1">Never lose your friends ✓</p>
+                                            </div>
+
+                                            <div className="bg-black border-2 border-green-500 rounded-lg p-3">
+                                                <p className="text-green-400 font-bold text-xs mb-2">🚆 TRAINS/BUSES:</p>
+                                                <p className="text-gray-300 text-xs mb-1">→ Left bag on train</p>
+                                                <p className="text-gray-300 text-xs mb-1">→ Train moving, 50 students onboard</p>
+                                                <p className="text-gray-300 text-xs mb-1">→ Mesh still tracking it</p>
+                                                <p className="text-gray-300 text-xs mb-1">→ "Bag detected, train heading to [Station]"</p>
+                                                <p className="text-green-400 font-bold text-xs mt-1">Recover even in transit ✓</p>
+                                            </div>
+
+                                            <div className="bg-black border-2 border-purple-500 rounded-lg p-3">
+                                                <p className="text-purple-400 font-bold text-xs mb-2">🏋️ GYMS:</p>
+                                                <p className="text-gray-300 text-xs mb-1">→ Someone takes your locker</p>
+                                                <p className="text-gray-300 text-xs mb-1">→ Your stuff (with tag) moves</p>
+                                                <p className="text-gray-300 text-xs mb-1">→ 30 students working out</p>
+                                                <p className="text-gray-300 text-xs mb-1">→ Mesh tracks who took it</p>
+                                                <p className="text-green-400 font-bold text-xs mt-1">Theft becomes impossible ✓</p>
+                                            </div>
+
+                                            <div className="bg-black border-2 border-red-500 rounded-lg p-3">
+                                                <p className="text-red-400 font-bold text-xs mb-2">🏠 HOUSE PARTIES:</p>
+                                                <p className="text-gray-300 text-xs mb-1">→ 100 people, chaos everywhere</p>
+                                                <p className="text-gray-300 text-xs mb-1">→ Can't find your keys</p>
+                                                <p className="text-gray-300 text-xs mb-1">→ 40 students with Prof51</p>
+                                                <p className="text-gray-300 text-xs mb-1">→ "Keys detected in kitchen"</p>
+                                                <p className="text-green-400 font-bold text-xs mt-1">Find anything anywhere ✓</p>
+                                            </div>
+                                        </div>
+
+                                        <div className="bg-gradient-to-r from-amber-500/20 to-red-500/20 border-4 border-amber-500 rounded-lg p-4 mt-4">
+                                            <p className="text-amber-400 font-black text-sm mb-2 text-center">🌍 THE EXPLOSION:</p>
+                                            <p className="text-white text-xs mb-3 text-center">Students go EVERYWHERE. Mesh goes with them.</p>
+
+                                            <div className="bg-black border-2 border-cyan-500 rounded p-3 mb-3">
+                                                <p className="text-cyan-400 font-bold text-xs mb-2">NETWORK EFFECT MADNESS:</p>
+                                                <p className="text-gray-300 text-xs mb-1">→ Campus: 30,000 students = strong mesh</p>
+                                                <p className="text-gray-300 text-xs mb-1">→ City center: 5,000 students shopping = mesh covers downtown</p>
+                                                <p className="text-gray-300 text-xs mb-1">→ Nightclub: 500 students = mesh covers venue</p>
+                                                <p className="text-gray-300 text-xs mb-1">→ Festival: 10,000 students = mesh covers entire site</p>
+                                                <p className="text-gray-300 text-xs mb-1">→ Train: 50 students = mesh moves city to city</p>
+                                                <p className="text-white font-bold text-xs mt-2">Students ARE the infrastructure. Everywhere they go = coverage. ✓</p>
+                                            </div>
+
+                                            <div className="bg-black border-2 border-green-500 rounded p-3">
+                                                <p className="text-green-400 font-black text-xs mb-2 text-center">WHY THIS EXPLODES ADOPTION:</p>
+                                                <p className="text-white text-xs mb-2 text-center">Not just "useful on campus". Useful EVERYWHERE IN LIFE.</p>
+                                                <p className="text-cyan-400 text-xs text-center mb-1">→ Lost phone at club? Found it.</p>
+                                                <p className="text-pink-400 text-xs text-center mb-1">→ Can't find friend at festival? Located them.</p>
+                                                <p className="text-purple-400 text-xs text-center mb-1">→ Bag stolen on train? Tracked it.</p>
+                                                <p className="text-amber-400 text-xs text-center mb-1">→ Keys at house party? Found them.</p>
+                                                <p className="text-white font-bold text-sm text-center mt-3">EVERY venue = use case. EVERY use = viral story. UNSTOPPABLE SPREAD. ♾️❤️♾️</p>
+                                            </div>
+                                        </div>
+                                        </div>
                                     </div>
 
                                 <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-4 border-purple-500 rounded-lg p-4">
