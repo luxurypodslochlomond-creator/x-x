@@ -56,6 +56,7 @@ export default function NewCleanupPage() {
     const [showGPSExplainer, setShowGPSExplainer] = useState(false);
 
     const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [authChecked, setAuthChecked] = useState(false);
 
     useEffect(() => {
         const checkAuth = async () => {
@@ -64,6 +65,8 @@ export default function NewCleanupPage() {
                 setIsAuthenticated(true);
             } catch {
                 setIsAuthenticated(false);
+            } finally {
+                setAuthChecked(true);
             }
         };
         checkAuth();
@@ -92,7 +95,7 @@ export default function NewCleanupPage() {
                 return [];
             }
         },
-        enabled: isAuthenticated && navigator.onLine,
+        enabled: authChecked && isAuthenticated && navigator.onLine,
         retry: false,
         staleTime: 5 * 60 * 1000,
         refetchOnWindowFocus: false,
