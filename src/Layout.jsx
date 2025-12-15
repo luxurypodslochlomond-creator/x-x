@@ -229,7 +229,7 @@ const LayoutInner = ({ children, currentPageName }) => {
                                           { title: "Frequency Chamber", url: createPageUrl("FrequencyChamber"), icon: COOLASFUCKWaves, highlight: true, description: "Free healing frequencies" },
                                           { title: "Universal51", url: createPageUrl("Universal51"), icon: Waves, description: "HEAR invisible frequencies", highlight: true },
                                       { title: "Radio51", url: createPageUrl("Radio"), icon: Music, description: "Lossless music" },
-                              { title: "Diary51", url: createPageUrl("Diary51"), icon: Brain, description: "AI51 reads, responds, remembers ♾️" },
+                              { title: "AI51", url: createPageUrl("AI51"), icon: Brain, description: "Talk + Upload Anything → I categorize forever ♾️" },
                               { title: "Stay On Frequency", url: createPageUrl("StayOnFrequency"), icon: Heart, description: "How we stay protected" },
                               { title: "Healing Dashboard", url: createPageUrl("HealingDashboard"), icon: Brain, description: "Your healing intelligence" },
                             ];

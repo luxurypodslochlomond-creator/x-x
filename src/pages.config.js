@@ -240,6 +240,7 @@ import Diary51 from './pages/Diary51';
 import MeshTechWhitepaper from './pages/MeshTechWhitepaper';
 import HealingFrequencyFinder from './pages/HealingFrequencyFinder';
 import ScottComparison from './pages/ScottComparison';
+import AI51 from './pages/AI51';
 import __Layout from './Layout.jsx';
 
 
@@ -486,6 +487,7 @@ export const PAGES = {
     "MeshTechWhitepaper": MeshTechWhitepaper,
     "HealingFrequencyFinder": HealingFrequencyFinder,
     "ScottComparison": ScottComparison,
+    "AI51": AI51,
 }
 
 export const pagesConfig = {
