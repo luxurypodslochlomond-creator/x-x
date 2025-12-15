@@ -581,7 +581,7 @@ export default function Prof51() {
                                 </div>
                             </div>
                         </div>
-                    </>
+                    </motion.div>
                     )}
 
             {/* WHY GENIUS / WHY BREAKTHROUGH / WHY NEEDED */}
