@@ -662,13 +662,22 @@ Return CLEAN, FORMATTED content ready to use. Be helpful, not generic.`,
                     </div>
 
                     <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-4 border-green-500 p-4 rounded" style={{ boxShadow: '0 0 40px rgba(34, 197, 94, 0.4)' }}>
-                        <p className="text-green-400 font-bold mb-2">P2P MESH = UNSTOPPABLE:</p>
-                        <p className="text-white text-xs mb-2">Device-to-device. No servers. No internet needed.</p>
-                        <p className="text-cyan-400 text-xs mb-1">✓ Lecture halls with no WiFi → Still works</p>
-                        <p className="text-pink-400 text-xs mb-1">✓ Government blocks internet → Still works</p>
-                        <p className="text-purple-400 text-xs mb-1">✓ University monitors network → Can't see P2P</p>
-                        <p className="text-amber-400 text-xs mb-1">✓ Libraries, dorms, trains → Always connected</p>
+                        <p className="text-green-400 font-bold mb-2">ZERO SERVER ARCHITECTURE = UNSTOPPABLE:</p>
+                        <p className="text-white text-xs mb-2">Every device = storage node. No servers. No shutdown risk.</p>
+                        <p className="text-cyan-400 text-xs mb-1">✓ Lecture halls with no WiFi → Still works (Bluetooth mesh)</p>
+                        <p className="text-pink-400 text-xs mb-1">✓ Government blocks internet → Still works (P2P direct)</p>
+                        <p className="text-purple-400 text-xs mb-1">✓ Data on 10M devices globally → Can't seize/shut down</p>
+                        <p className="text-amber-400 text-xs mb-1">✓ Quantum-resistant encryption → Secure as fuck</p>
                         <p className="text-green-400 text-xs font-bold mt-2">China, Iran, Russia → Students can't be blocked ♾️❤️♾️</p>
+                        <Link to={createPageUrl('Prof51ZeroServerArchitecture')} className="block mt-3">
+                            <motion.button
+                                whileHover={{ scale: 1.02 }}
+                                whileTap={{ scale: 0.98 }}
+                                className="w-full bg-gradient-to-r from-cyan-500 to-purple-500 text-white font-bold py-2 rounded-lg text-xs"
+                            >
+                                → HOW IT WORKS (TECHNICAL)
+                            </motion.button>
+                        </Link>
                     </div>
 
                     <div className="bg-black border border-pink-500/30 p-3 rounded">
