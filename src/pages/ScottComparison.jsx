@@ -25,7 +25,7 @@ export default function ScottComparison() {
                     </Link>
                     <div className="text-center space-y-2">
                         <h1 className="text-3xl md:text-4xl font-black text-white">CO-MANAGER51</h1>
-                        <p className="text-xl text-cyan-400 font-bold">December 2024 → December 2025</p>
+                        <p className="text-xl text-cyan-400 font-bold">First Draft Dec 2024 → Built Dec 2025</p>
                         <p className="text-sm text-gray-400">What Scott asked for vs what's built</p>
                     </div>
                 </div>
@@ -53,7 +53,7 @@ export default function ScottComparison() {
                 <div className="space-y-4">
                     <h2 className="text-2xl font-black text-cyan-400 flex items-center gap-2">
                         <Circle className="w-6 h-6" />
-                        DECEMBER 2024 - ORIGINAL BRIEF
+                        FIRST DRAFT DEC 2024 - ORIGINAL BRIEF
                     </h2>
 
                     <div className="space-y-3">
@@ -151,8 +151,9 @@ export default function ScottComparison() {
                         <p className="text-amber-400 font-bold text-sm">+ BONUS (EXTRAS WE BUILT):</p>
 
                         <div className="bg-amber-900/30 border-l-4 border-amber-500 p-4 rounded-r-lg">
-                            <p className="text-white font-bold mb-2">+ AI Chat</p>
-                            <p className="text-gray-300 text-sm">Quick management questions answered instantly</p>
+                            <p className="text-white font-bold mb-2">+ Diary51 + File Upload</p>
+                            <p className="text-gray-300 text-sm">Talk to AI51 + upload anything (contracts/emails/photos/videos) → AI categorizes, remembers forever, helps with tech/paperwork</p>
+                            <p className="text-green-400 text-xs mt-2">Same tech as Prof51 • Understands context • Zero tech barrier</p>
                         </div>
 
                         <div className="bg-amber-900/30 border-l-4 border-amber-500 p-4 rounded-r-lg">
