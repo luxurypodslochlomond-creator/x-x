@@ -28,23 +28,21 @@ export default function Prof51About() {
             </div>
 
             <div className="px-4 py-6 max-w-2xl mx-auto space-y-6">
-                {/* ARCHIE'S STORY - THE UNIVERSAL PAIN */}
+                {/* THE UNIVERSAL ENTRY POINT */}
                 <div className="bg-gradient-to-br from-amber-500/20 to-red-500/20 border-4 border-amber-500 rounded-2xl p-6" style={{ boxShadow: '0 0 60px rgba(245, 158, 11, 0.6)' }}>
-                    <p className="text-amber-400 font-black text-3xl mb-3 text-center">💔 WHY PROF51 EXISTS</p>
-                    <p className="text-white text-2xl font-bold text-center mb-4">Archie lost his watch.</p>
+                    <p className="text-amber-400 font-black text-3xl mb-3 text-center">💔 THE UNIVERSAL PAIN</p>
+                    <p className="text-white text-2xl font-bold text-center mb-4">Everyone loses something precious.</p>
                     
                     <div className="bg-black border-4 border-red-500 rounded-xl p-5 mb-4" style={{ boxShadow: '0 0 40px rgba(239, 68, 68, 0.5)' }}>
-                        <p className="text-red-400 font-bold text-lg mb-3 text-center">THE MOMENT IT CLICKED:</p>
-                        <p className="text-white text-base mb-2 text-center">His auntie bought it for him. Christmas gift.</p>
-                        <p className="text-pink-400 text-base mb-4 text-center italic">"I was devastated. Not about the money. About losing something she gave me."</p>
+                        <p className="text-red-400 font-bold text-lg mb-3 text-center">WHY THIS REACHES EVERYONE:</p>
                         
                         <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-2 border-purple-500 rounded-lg p-4">
-                            <p className="text-purple-400 font-bold text-sm mb-2 text-center">THEN HE REALIZED:</p>
-                            <p className="text-white text-xs mb-2 text-center">→ Rich student? Has expensive stuff they can't lose</p>
-                            <p className="text-white text-xs mb-2 text-center">→ Poor student? Literally can't afford to lose phone/laptop</p>
+                            <p className="text-purple-400 font-bold text-sm mb-2 text-center">DOESN'T MATTER WHO YOU ARE:</p>
+                            <p className="text-white text-xs mb-2 text-center">→ Rich student? Has expensive stuff they can't lose (£2k laptop, designer watch)</p>
+                            <p className="text-white text-xs mb-2 text-center">→ Poor student? Literally can't afford to lose phone/laptop (can't replace it)</p>
                             <p className="text-white text-xs mb-2 text-center">→ British student? Lost ID/wallet at club</p>
                             <p className="text-white text-xs mb-2 text-center">→ Chinese student? Lost phone with all contacts</p>
-                            <p className="text-white text-xs mb-2 text-center">→ International student? Lost passport/visa docs</p>
+                            <p className="text-white text-xs mb-2 text-center">→ International student? Lost passport/visa docs (nightmare)</p>
                             <p className="text-cyan-400 font-bold text-base text-center mt-3">EVERYONE loses something precious. EVERYONE needs this.</p>
                         </div>
                     </div>
@@ -54,7 +52,7 @@ export default function Prof51About() {
                         <p className="text-white text-sm mb-3 text-center">Not just "useful feature". The reason EVERY student downloads Prof51.</p>
                         <div className="space-y-2 text-xs">
                             <p className="text-white text-center">Student downloads for P2P Lost & Found (universal need)</p>
-                            <p className="text-cyan-400 text-center">→ Mesh finds their lost watch/phone/keys at club/restaurant/festival</p>
+                            <p className="text-cyan-400 text-center">→ Mesh finds their lost phone/keys/laptop at club/restaurant/festival</p>
                             <p className="text-pink-400 text-center">→ "This just saved my arse TODAY"</p>
                             <p className="text-purple-400 text-center">→ Opens app to say thanks</p>
                             <p className="text-amber-400 text-center">→ Discovers: AI homework help, study groups, budget tracker, flatmate finder, food savings</p>
