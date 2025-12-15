@@ -157,13 +157,61 @@ export default function Prof51ZeroServerArchitecture() {
                     </div>
                 </div>
 
-                {/* WHY GOVERNMENTS CAN'T SHUT IT DOWN */}
+                {/* WHY GOVERNMENTS MIGHT TRY (AND FAIL) */}
+                <div className="bg-gradient-to-r from-amber-500/20 to-purple-500/20 border-4 border-amber-500 rounded-xl p-6 mb-6">
+                    <div className="flex items-center gap-3 mb-4">
+                        <Shield className="w-10 h-10 text-amber-400" />
+                        <div>
+                            <h2 className="text-amber-400 font-black text-lg font-mono">WHY THEY'D TRY TO SHUT IT DOWN</h2>
+                            <p className="text-gray-400 text-xs font-mono">(They shouldn't, but some might try)</p>
+                        </div>
+                    </div>
+
+                    <div className="space-y-3">
+                        <div className="bg-black border-2 border-red-500 rounded-lg p-4">
+                            <p className="text-red-400 font-bold text-sm mb-2">🎯 CONTROL + SURVEILLANCE</p>
+                            <p className="text-white text-xs mb-1">Authoritarian governments want to monitor citizens</p>
+                            <p className="text-gray-300 text-xs mb-1">→ Facebook/Google = can be pressured to share data</p>
+                            <p className="text-gray-300 text-xs mb-1">→ Prof51 = encrypted P2P, no data to share</p>
+                            <p className="text-cyan-400 text-xs font-bold mt-2">They can't spy = they want to shut it down</p>
+                        </div>
+
+                        <div className="bg-black border-2 border-purple-500 rounded-lg p-4">
+                            <p className="text-purple-400 font-bold text-sm mb-2">💰 PROTECTING EXTRACTION SYSTEMS</p>
+                            <p className="text-white text-xs mb-1">Prof51 saves students £5.64/order on food</p>
+                            <p className="text-gray-300 text-xs mb-1">→ Just Eat/Deliveroo lose £717B/year globally</p>
+                            <p className="text-gray-300 text-xs mb-1">→ They lobby governments to regulate P2P</p>
+                            <p className="text-cyan-400 text-xs font-bold mt-2">Established systems fight disruption</p>
+                        </div>
+
+                        <div className="bg-black border-2 border-green-500 rounded-lg p-4">
+                            <p className="text-green-400 font-bold text-sm mb-2">✅ BUT OUR TERMS/PRIVACY/MISSION PROTECT US</p>
+                            <p className="text-white text-xs mb-1">Democratic governments SHOULD protect Prof51 because:</p>
+                            <p className="text-cyan-400 text-xs mb-1">→ Terms: Clear student protection, no exploitation</p>
+                            <p className="text-cyan-400 text-xs mb-1">→ Privacy: Quantum encryption, zero data collection</p>
+                            <p className="text-cyan-400 text-xs mb-1">→ Mission: Help students rise, not extract from them</p>
+                            <p className="text-green-400 text-xs font-bold mt-2">UK/EU/USA should SUPPORT this (we follow all laws) ✓</p>
+                        </div>
+
+                        <div className="bg-gradient-to-r from-cyan-500/20 to-green-500/20 border-2 border-cyan-500 rounded-lg p-4">
+                            <p className="text-cyan-400 font-bold text-sm mb-2">🛡️ LEGAL FRAMEWORK</p>
+                            <p className="text-white text-xs mb-1">Prof51 = 100% legal everywhere:</p>
+                            <p className="text-gray-300 text-xs mb-1">✓ GDPR compliant (EU)</p>
+                            <p className="text-gray-300 text-xs mb-1">✓ COPPA compliant (USA)</p>
+                            <p className="text-gray-300 text-xs mb-1">✓ Data Protection Act (UK)</p>
+                            <p className="text-gray-300 text-xs mb-1">✓ No illegal content hosting (encrypted, can't see it)</p>
+                            <p className="text-green-400 text-xs font-bold mt-2">Built COOLASFUCK from day one ♾️❤️♾️</p>
+                        </div>
+                    </div>
+                </div>
+
+                {/* WHY GOVERNMENTS CAN'T SHUT IT DOWN (EVEN IF THEY TRY) */}
                 <div className="bg-gradient-to-r from-red-500/20 to-amber-500/20 border-4 border-red-500 rounded-xl p-6">
                     <div className="flex items-center gap-3 mb-4">
                         <Shield className="w-10 h-10 text-red-400" />
                         <div>
-                            <h2 className="text-red-400 font-black text-lg font-mono">UNSTOPPABLE</h2>
-                            <p className="text-gray-400 text-xs font-mono">Why governments can't shut it down</p>
+                            <h2 className="text-red-400 font-black text-lg font-mono">WHY THEY CAN'T SHUT IT DOWN</h2>
+                            <p className="text-gray-400 text-xs font-mono">(Even if they wanted to)</p>
                         </div>
                     </div>
 
@@ -334,6 +382,55 @@ export default function Prof51ZeroServerArchitecture() {
                             <p className="text-gray-300">→ Every node = copy of entire blockchain</p>
                             <p className="text-gray-300">→ Governments tried to ban = failed</p>
                             <p className="text-green-400 font-bold mt-1">Proof: Decentralization = unstoppable ✓</p>
+                        </div>
+                    </div>
+                </div>
+
+                {/* UF51 USES SAME TECH */}
+                <div className="bg-gradient-to-r from-pink-500/20 to-purple-500/20 border-4 border-pink-500 rounded-xl p-6">
+                    <div className="flex items-center gap-3 mb-4">
+                        <Globe className="w-10 h-10 text-pink-400" />
+                        <div>
+                            <h2 className="text-pink-400 font-black text-lg font-mono">YES - UF51 USES THIS TOO</h2>
+                            <p className="text-gray-400 text-xs font-mono">Same architecture = FREE forever</p>
+                        </div>
+                    </div>
+
+                    <div className="bg-black border-2 border-cyan-500 rounded-lg p-4">
+                        <p className="text-cyan-400 font-bold text-sm mb-3">ALL UF51 PLATFORMS = ZERO SERVERS:</p>
+                        
+                        <div className="space-y-2 text-xs">
+                            <div className="bg-cyan-900/20 border border-cyan-500/30 rounded p-2">
+                                <p className="text-white font-bold mb-1">🎓 PROF51 (Student co-manager)</p>
+                                <p className="text-gray-300">→ Student devices = storage network</p>
+                                <p className="text-gray-300">→ Works offline, encrypted, free forever</p>
+                            </div>
+
+                            <div className="bg-purple-900/20 border border-purple-500/30 rounded p-2">
+                                <p className="text-white font-bold mb-1">🎵 CO-MANAGER51 (Music industry)</p>
+                                <p className="text-gray-300">→ Artist devices = storage network</p>
+                                <p className="text-gray-300">→ Tour data, contracts, media - all P2P</p>
+                            </div>
+
+                            <div className="bg-green-900/20 border border-green-500/30 rounded p-2">
+                                <p className="text-white font-bold mb-1">❤️ FREQUENCY CHAMBER (Healing)</p>
+                                <p className="text-gray-300">→ Healing sessions stored on devices</p>
+                                <p className="text-gray-300">→ Frequencies shared P2P globally</p>
+                            </div>
+
+                            <div className="bg-pink-900/20 border border-pink-500/30 rounded p-2">
+                                <p className="text-white font-bold mb-1">🌍 CLEANUP (Earth healing)</p>
+                                <p className="text-gray-300">→ Proof photos stored distributed</p>
+                                <p className="text-gray-300">→ $P51 ledger = blockchain (no servers)</p>
+                            </div>
+                        </div>
+
+                        <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-2 border-green-500 rounded-lg p-3 mt-4">
+                            <p className="text-green-400 font-bold text-sm mb-2">WHY THIS MATTERS:</p>
+                            <p className="text-white text-xs mb-1">Amazon S3 would cost UF51: £24M/year</p>
+                            <p className="text-white text-xs mb-1">Zero-server P2P costs UF51: £0/year</p>
+                            <p className="text-cyan-400 text-xs font-bold mt-2">= Can stay FREE forever for humans ♾️❤️♾️</p>
+                            <p className="text-pink-400 text-xs mt-2">Phone to phone to phone = unstoppable love network ✓</p>
                         </div>
                     </div>
                 </div>
