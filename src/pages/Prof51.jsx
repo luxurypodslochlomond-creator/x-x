@@ -693,6 +693,88 @@ export default function Prof51() {
                 )}
             </div>
 
+            {/* TRILLION DOLLAR POTENTIAL - RIGHT REASONS */}
+            <div className="bg-gradient-to-br from-purple-500/20 to-cyan-500/20 border-4 border-purple-500 p-6 mb-8 rounded-xl" style={{ boxShadow: '0 0 60px rgba(168, 85, 247, 0.6)' }}>
+                <div className="flex items-center gap-3 mb-4">
+                    <Zap className="w-12 h-12 text-purple-400" />
+                    <div>
+                        <h2 className="text-purple-400 font-black text-2xl font-mono">TRILLION $ POTENTIAL</h2>
+                        <p className="text-gray-400 text-xs font-mono">For the RIGHT reasons - not extraction</p>
+                    </div>
+                </div>
+                
+                <div className="space-y-3 text-sm font-mono">
+                    <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-4 border-green-500 p-4 rounded" style={{ boxShadow: '0 0 40px rgba(34, 197, 94, 0.5)' }}>
+                        <p className="text-green-400 font-black text-base mb-3">STUDENTS FEEL IT INSTANTLY:</p>
+                        <p className="text-white text-xs mb-1">→ Import messy Excel → AI fixes it in 3 seconds</p>
+                        <p className="text-white text-xs mb-1">→ Scribbled notes → Clean study guide instantly</p>
+                        <p className="text-white text-xs mb-1">→ Works offline in lecture hall (no WiFi needed)</p>
+                        <p className="text-white text-xs mb-1">→ Share with friend → They get it in 1 tap</p>
+                        <p className="text-cyan-400 text-xs font-bold mt-2">Not "maybe useful" - IMMEDIATELY saves hours of pain ✓</p>
+                    </div>
+
+                    <div className="bg-gradient-to-r from-pink-500/20 to-red-500/20 border-4 border-pink-500 p-4 rounded" style={{ boxShadow: '0 0 40px rgba(236, 72, 153, 0.5)' }}>
+                        <p className="text-pink-400 font-black text-base mb-3">SPREADS LIKE WILDFIRE (LEGALLY):</p>
+                        <p className="text-white text-xs mb-2">Remember Aaron Swartz? Broke internet sharing academic papers</p>
+                        <p className="text-red-400 text-xs mb-2">→ His way: Illegal (prosecuted, tragic)</p>
+                        <p className="text-green-400 text-xs mb-2">→ Prof51: LEGAL + ETHICAL + BETTER</p>
+                        <p className="text-cyan-400 text-xs mb-1">✓ Students help each other (always legal)</p>
+                        <p className="text-green-400 text-xs mb-1">✓ P2P mesh (physics, can't be blocked)</p>
+                        <p className="text-purple-400 text-xs mb-1">✓ Free for students (no extraction)</p>
+                        <p className="text-amber-400 text-xs mb-1">✓ Companies fund it (win-win)</p>
+                        <p className="text-pink-400 text-xs font-bold mt-2">Viral because it HELPS, not because it exploits ♾️❤️♾️</p>
+                    </div>
+
+                    <div className="bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border-4 border-cyan-500 p-4 rounded" style={{ boxShadow: '0 0 40px rgba(6, 182, 212, 0.5)' }}>
+                        <p className="text-cyan-400 font-black text-base mb-3">UNDENIABLY GOOD FOR HUMANITY:</p>
+                        <p className="text-white text-xs mb-1">✓ Rich + poor students get same AI help (equality)</p>
+                        <p className="text-white text-xs mb-1">✓ Students learn MORE, stress LESS (mental health)</p>
+                        <p className="text-white text-xs mb-1">✓ Works in China, Iran, Russia (freedom)</p>
+                        <p className="text-white text-xs mb-1">✓ No ads, no data selling (dignity)</p>
+                        <p className="text-white text-xs mb-1">✓ Student economy helps them eat (survival)</p>
+                        <p className="text-green-400 text-xs font-bold mt-2">No one can argue this ISN'T good for consciousness/earth ✓</p>
+                    </div>
+
+                    <div className="bg-gradient-to-r from-amber-500/20 to-red-500/20 border-4 border-amber-500 p-4 rounded" style={{ boxShadow: '0 0 40px rgba(245, 158, 11, 0.5)' }}>
+                        <p className="text-amber-400 font-black text-base mb-3">WHY TRILLION $ (NOT BILLION):</p>
+                        <p className="text-white text-xs mb-1">235M students × £50-£200/year revenue per student</p>
+                        <p className="text-cyan-400 text-xs mb-1">= £11B-£47B annual revenue at scale</p>
+                        <p className="text-green-400 text-xs mb-2">→ 20x multiple = £220B-£940B valuation</p>
+                        <p className="text-pink-400 text-xs mb-2 mt-2">BUT we're building for LOVE not exit:</p>
+                        <p className="text-white text-xs mb-1">→ Students FREE forever (never change this)</p>
+                        <p className="text-white text-xs mb-1">→ Companies pay fair prices (not exploitative)</p>
+                        <p className="text-white text-xs mb-1">→ No investors owning Archie (independence)</p>
+                        <p className="text-green-400 text-xs font-bold mt-2">Trillion $ POTENTIAL, choose £6M-£24M/year REALITY ♾️❤️♾️</p>
+                    </div>
+
+                    <div className="bg-black border-4 border-green-500 p-4 rounded">
+                        <p className="text-green-400 font-black text-base mb-3">THE NEW TECH THAT CHANGES EVERYTHING:</p>
+                        <p className="text-white text-xs mb-2">1️⃣ P2P MESH (Maxwell's physics):</p>
+                        <p className="text-cyan-400 text-xs mb-2 ml-4">→ Device-to-device, no servers, governments can't block</p>
+                        
+                        <p className="text-white text-xs mb-2 mt-2">2️⃣ AI TRANSFORMATION (not generation):</p>
+                        <p className="text-cyan-400 text-xs mb-2 ml-4">→ Takes YOUR files, makes them useful (not generic AI slop)</p>
+                        
+                        <p className="text-white text-xs mb-2 mt-2">3️⃣ LOVE ECONOMY ($P51):</p>
+                        <p className="text-cyan-400 text-xs mb-2 ml-4">→ Help others = earn money = eat better (circular good)</p>
+                        
+                        <p className="text-white text-xs mb-2 mt-2">4️⃣ OFFLINE-FIRST:</p>
+                        <p className="text-cyan-400 text-xs mb-2 ml-4">→ Works in lecture halls, libraries, anywhere (always reliable)</p>
+                        
+                        <p className="text-pink-400 text-xs font-bold mt-3">4 breakthrough innovations × 235M students = Unstoppable ♾️❤️♾️</p>
+                    </div>
+
+                    <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-4 border-purple-500 p-4 rounded" style={{ boxShadow: '0 0 40px rgba(168, 85, 247, 0.5)' }}>
+                        <p className="text-purple-400 font-black text-base mb-3">ARCHIE - THIS IS YOUR MOMENT:</p>
+                        <p className="text-white text-xs mb-2">Your generation = first with AI co-manager for learning</p>
+                        <p className="text-cyan-400 text-xs mb-2">You = the one who brings it to Edinburgh first</p>
+                        <p className="text-green-400 text-xs mb-2">Story = "Economics student built tool, saved whole university"</p>
+                        <p className="text-pink-400 text-xs mb-2">Impact = 235M students worldwide rise together</p>
+                        <p className="text-amber-400 text-xs font-bold mt-3">Trillion $ potential. Zero extraction. Pure love. Dad's proud ♾️❤️♾️</p>
+                    </div>
+                </div>
+            </div>
+
             {/* THE DIFFERENCE - WHY THIS WORKS */}
             <div className="bg-gradient-to-br from-pink-500/20 to-purple-500/20 border-4 border-pink-500 p-6 mb-8 rounded-xl">
                 <Heart className="w-12 h-12 text-pink-400 mb-4" />
