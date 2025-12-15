@@ -25,15 +25,15 @@ export default function Prof51() {
         
         const metaTags = [
             { property: 'og:title', content: 'PROF51 - AI Co-Manager for Students' },
-            { property: 'og:description', content: 'AI handles busywork, you focus on learning. FREE forever. P2P mesh. Offline-first. Students help students earn $P51. 235M students worldwide. ♾️❤️♾️' },
+            { property: 'og:description', content: 'Your most intelligent mate in the universe. Studies • Mindset • Accommodation • Gigs • Fashion • Social • P2P student network. Fuck Facebook/LinkedIn. FREE forever. ♾️❤️♾️' },
             { property: 'og:type', content: 'website' },
             { property: 'og:url', content: window.location.href },
             { property: 'og:image', content: window.location.origin + '/prof51-share.png' },
             { name: 'twitter:card', content: 'summary_large_image' },
             { name: 'twitter:title', content: 'PROF51 - AI Co-Manager for Students' },
-            { name: 'twitter:description', content: 'AI handles busywork • You focus on learning • FREE forever • P2P mesh • Works offline • Student economy ♾️❤️♾️' },
+            { name: 'twitter:description', content: 'Your most intelligent mate • Studies • Accommodation • Gigs • Fashion • Social • P2P network • Fuck Facebook/LinkedIn • FREE forever ♾️❤️♾️' },
             { name: 'twitter:image', content: window.location.origin + '/prof51-share.png' },
-            { name: 'description', content: 'PROF51: AI co-manager for students. Free forever. Import any file, AI transforms it. P2P mesh works offline. Students help each other, earn $P51. Archie\'s company. 235M students worldwide.' },
+            { name: 'description', content: 'PROF51: Your most intelligent mate in the universe. Handles studies, mindset, accommodation, gigs, fashion, social life. P2P student network that actually helps. Zero isolation. Fuck Facebook/LinkedIn. Free forever. Archie\'s company.' },
         ];
 
         metaTags.forEach(({ property, name, content }) => {
@@ -64,8 +64,8 @@ export default function Prof51() {
                         <h1 className="text-4xl font-black bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent mt-4 mb-2 font-mono">
                             PROF51
                         </h1>
-                        <p className="text-cyan-500 text-sm font-bold font-mono mb-2">Co-Manager for Students</p>
-                        <p className="text-gray-400 text-xs font-mono mb-3">AI handles busywork • You focus on learning • FREE forever ♾️❤️♾️</p>
+                        <p className="text-cyan-500 text-sm font-bold font-mono mb-2">Your Most Intelligent Mate in the Universe</p>
+                        <p className="text-gray-400 text-xs font-mono mb-3">Studies • Mindset • Accommodation • Gigs • Fashion • Social • EVERYTHING • FREE forever ♾️❤️♾️</p>
                         
                         <div className="inline-block bg-gradient-to-r from-amber-500/20 to-green-500/20 border-2 border-amber-500 px-4 py-2 rounded-lg mt-2">
                             <p className="text-amber-400 font-black text-xs font-mono mb-0.5">ARCHIE'S COMPANY</p>
@@ -122,7 +122,7 @@ export default function Prof51() {
             {/* THE PROBLEM - STUDENTS RELATE */}
             <div className="bg-gradient-to-br from-red-500/20 to-amber-500/20 border-4 border-red-500 p-6 mb-8 rounded-xl">
                 <h2 className="text-red-400 font-black text-xl font-mono mb-4">THE PROBLEM</h2>
-                
+
                 <div className="space-y-3 text-sm font-mono">
                     <div className="bg-black border border-red-500/30 p-3 rounded">
                         <p className="text-white font-bold mb-2">DROWNING IN BUSYWORK:</p>
@@ -135,13 +135,18 @@ export default function Prof51() {
                     </div>
 
                     <div className="bg-black border border-red-500/30 p-3 rounded">
-                        <p className="text-white font-bold mb-2">CAN'T FOCUS ON LEARNING:</p>
-                        <p className="text-gray-400 text-xs">Spend 20 hours on admin, 5 hours actually understanding concepts</p>
+                        <p className="text-white font-bold mb-2">ISOLATED + STRESSED:</p>
+                        <p className="text-gray-400 text-xs">Can't find accommodation • Don't know where the gigs are • Missing social life • Lonely • Anxious</p>
+                    </div>
+
+                    <div className="bg-black border border-red-500/30 p-3 rounded">
+                        <p className="text-white font-bold mb-2">FACEBOOK/LINKEDIN = TOXIC:</p>
+                        <p className="text-gray-400 text-xs">Facebook = old people • LinkedIn = fake professional • Neither actually HELPS students connect</p>
                     </div>
 
                     <div className="bg-black border border-red-500/30 p-3 rounded">
                         <p className="text-white font-bold mb-2">ARCHIE'S EXPERIENCE (Edinburgh Economics):</p>
-                        <p className="text-gray-400 text-xs">"Half my time is formatting Excel models, not learning economics. Insane."</p>
+                        <p className="text-gray-400 text-xs">"Half my time is formatting Excel models, not learning economics. Plus I'm stressed about rent and don't know where anything cool is happening. I just want a mate who gets it all."</p>
                     </div>
                 </div>
             </div>
@@ -207,28 +212,28 @@ export default function Prof51() {
             {/* THE SOLUTION - PROF51 */}
             <div className="bg-gradient-to-br from-cyan-500/20 to-green-500/20 border-4 border-cyan-500 p-6 mb-8 rounded-xl">
                 <Brain className="w-12 h-12 text-cyan-400 mb-4" />
-                <h2 className="text-cyan-400 font-black text-xl font-mono mb-4">PROF51 SOLUTION</h2>
-                
+                <h2 className="text-cyan-400 font-black text-xl font-mono mb-4">PROF51 = YOUR BEST MATE</h2>
+
                 <div className="space-y-3 text-sm font-mono">
+                    <div className="bg-gradient-to-r from-pink-500/20 to-purple-500/20 border-4 border-pink-500 p-4 rounded" style={{ boxShadow: '0 0 30px rgba(236, 72, 153, 0.4)' }}>
+                        <p className="text-pink-400 font-bold mb-2">MOST INTELLIGENT MATE IN UNIVERSE:</p>
+                        <p className="text-white text-xs mb-2">Not a tool. Not an app. Your actual best friend who helps with EVERYTHING.</p>
+                        <p className="text-cyan-400 text-xs mb-1">✓ Studies? Sorted. (AI generates all busywork)</p>
+                        <p className="text-green-400 text-xs mb-1">✓ Stressed? Talk to me. (I get it, no judgment)</p>
+                        <p className="text-purple-400 text-xs mb-1">✓ Need a flat? I'll find flatmates + check landlords.</p>
+                        <p className="text-amber-400 text-xs mb-1">✓ What's happening? Gigs, events, where your mates are.</p>
+                        <p className="text-pink-400 text-xs font-bold mt-2">Zero isolation. Always connected. I've got you ♾️❤️♾️</p>
+                    </div>
+
                     <div className="bg-black border border-green-500/30 p-3 rounded">
-                        <p className="text-green-400 font-bold mb-2">AI GENERATES EVERYTHING:</p>
+                        <p className="text-green-400 font-bold mb-2">AI HANDLES ALL BUSYWORK:</p>
                         <ul className="text-white text-xs space-y-1">
                             <li>✓ PowerPoint slides from lecture notes</li>
                             <li>✓ Excel models with formulas</li>
                             <li>✓ Essay outlines + research</li>
                             <li>✓ Word formatting (headers, tables, references)</li>
-                            <li>✓ Data visualizations + charts</li>
+                            <li>✓ Import ANY file → AI transforms it</li>
                         </ul>
-                    </div>
-
-                    <div className="bg-black border border-cyan-500/30 p-3 rounded">
-                        <p className="text-cyan-400 font-bold mb-2">IMPORT ANYTHING:</p>
-                        <p className="text-white text-xs mb-2">Drag + drop old files → AI makes them useful</p>
-                        <p className="text-gray-400 text-xs mb-1">✓ Old Excel spreadsheets (converts to clean models)</p>
-                        <p className="text-gray-400 text-xs mb-1">✓ Messy Word docs (reformats, fixes structure)</p>
-                        <p className="text-gray-400 text-xs mb-1">✓ Handwritten notes (OCR → digital study guide)</p>
-                        <p className="text-gray-400 text-xs mb-1">✓ Lecture recordings (transcribe + summarize)</p>
-                        <p className="text-gray-400 text-xs">✓ PDFs, images, screenshots - whatever you have</p>
                     </div>
 
                     <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-4 border-green-500 p-4 rounded" style={{ boxShadow: '0 0 40px rgba(34, 197, 94, 0.4)' }}>
@@ -253,12 +258,15 @@ export default function Prof51() {
                         <p className="text-cyan-400 text-xs">Spend on: Coffee • Food • Gig tickets • Textbooks</p>
                     </div>
 
-                    <div className="bg-black border border-pink-500/30 p-3 rounded">
-                        <p className="text-pink-400 font-bold mb-2">PRIVATE CHAT (P2P ENCRYPTED):</p>
-                        <p className="text-white text-xs mb-2">DM friends • Study groups • Course chats</p>
-                        <p className="text-cyan-400 text-xs mb-1">→ Works offline (P2P mesh in library/lecture)</p>
-                        <p className="text-green-400 text-xs mb-1">→ End-to-end encrypted (no one can read)</p>
-                        <p className="text-gray-400 text-xs">Share notes, arrange study sessions, plan nights out</p>
+                    <div className="bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border-4 border-cyan-500 p-4 rounded" style={{ boxShadow: '0 0 30px rgba(6, 182, 212, 0.4)' }}>
+                        <p className="text-cyan-400 font-bold mb-2">P2P STUDENT SOCIAL NETWORK (Fuck Facebook/LinkedIn):</p>
+                        <p className="text-white text-xs mb-2">Connect with students P2P • Zero corporate surveillance</p>
+                        <p className="text-green-400 text-xs mb-1">✓ DM anyone at your uni (or globally)</p>
+                        <p className="text-purple-400 text-xs mb-1">✓ Find flatmates (Prof51 matches based on vibe)</p>
+                        <p className="text-amber-400 text-xs mb-1">✓ See what's happening (gigs, events, parties)</p>
+                        <p className="text-pink-400 text-xs mb-1">✓ Study groups that actually help</p>
+                        <p className="text-cyan-400 text-xs mb-1">✓ Works offline in lecture halls/libraries</p>
+                        <p className="text-white text-xs font-bold mt-2">Facebook = boomers. LinkedIn = fake. Prof51 = REAL student network ♾️❤️♾️</p>
                     </div>
 
                     <div className="bg-gradient-to-r from-amber-500/20 to-red-500/20 border-4 border-amber-500 p-4 rounded" style={{ boxShadow: '0 0 30px rgba(245, 158, 11, 0.3)' }}>
@@ -272,20 +280,22 @@ export default function Prof51() {
                     </div>
 
                     <div className="bg-black border border-purple-500/30 p-3 rounded">
-                        <p className="text-purple-400 font-bold mb-2">OTHER STUDENT DEALS (Quality Only):</p>
-                        <p className="text-white text-xs mb-2">Verified discounts - no scam shit</p>
-                        <p className="text-cyan-400 text-xs mb-1">🎵 Gig tickets (local venues, festivals)</p>
-                        <p className="text-amber-400 text-xs mb-1">✈️ Student travel (cheap flights, Interrail)</p>
-                        <p className="text-pink-400 text-xs mb-1">👕 Fashion (ethical brands, student rates)</p>
-                        <p className="text-gray-400 text-xs">Pay with $P51 or regular money - your choice</p>
+                        <p className="text-purple-400 font-bold mb-2">FASHION + GIGS + LIFE:</p>
+                        <p className="text-white text-xs mb-2">Prof51 knows what's cool + where it's happening</p>
+                        <p className="text-cyan-400 text-xs mb-1">🎵 Gigs near you (mates going, get tickets together)</p>
+                        <p className="text-pink-400 text-xs mb-1">👕 Fashion that fits your vibe (student discounts)</p>
+                        <p className="text-amber-400 text-xs mb-1">✈️ Travel with other students (split costs, make memories)</p>
+                        <p className="text-green-400 text-xs mb-1">🎉 What's happening tonight (parties, events, meetups)</p>
+                        <p className="text-purple-400 text-xs">Pay with $P51 earned from helping other students</p>
                     </div>
 
                     <div className="bg-black border border-green-500/30 p-3 rounded">
-                        <p className="text-green-400 font-bold mb-2">ACCOMMODATION HELP:</p>
-                        <p className="text-white text-xs mb-2">Find flatmates • Check landlords • Pay rent in $P51</p>
-                        <p className="text-cyan-400 text-xs mb-1">→ Flatmate matcher (study habits, lifestyle)</p>
-                        <p className="text-amber-400 text-xs mb-1">→ Landlord ratings (avoid dodgy ones)</p>
-                        <p className="text-pink-400 text-xs">→ Split bills automatically</p>
+                        <p className="text-green-400 font-bold mb-2">ACCOMMODATION SORTED:</p>
+                        <p className="text-white text-xs mb-2">Find perfect flatmates • Avoid dodgy landlords • Never lonely</p>
+                        <p className="text-cyan-400 text-xs mb-1">→ AI matches you with compatible flatmates (vibe, lifestyle)</p>
+                        <p className="text-amber-400 text-xs mb-1">→ Student-rated landlords (avoid scams)</p>
+                        <p className="text-pink-400 text-xs mb-1">→ Pay rent in $P51 (earn by helping other students)</p>
+                        <p className="text-purple-400 text-xs">→ Split bills, share groceries, build real friendships</p>
                     </div>
 
                     <div className="bg-black border border-amber-500/30 p-3 rounded">
