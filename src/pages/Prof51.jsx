@@ -157,6 +157,40 @@ Return CLEAN, FORMATTED content ready to use. Be helpful, not generic.`,
                             </motion.button>
                         )}
 
+                        <motion.button
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            onClick={() => {
+                                const shareMsg = `🎓 PROF51 - AI Co-Manager for Students
+
+                        FOUNDER: Archie (19, Economics @ Edinburgh)
+                        VISION: Lennox (10, spotted £717B extraction)
+
+                        ✓ AI handles ALL busywork (Excel, essays, formatting)
+                        ✓ Works OFFLINE (P2P mesh, no WiFi needed)
+                        ✓ FREE FOREVER (no ads, no extraction)
+                        ✓ £717 BILLION/year extracted from students globally
+                        ✓ Prof51 = direct connection, zero middlemen
+
+                        Archie builds. Lennox sees. Both protected.
+
+                        → ${window.location.origin}${createPageUrl('Prof51')}
+
+                        ♾️❤️♾️`;
+
+                                if (navigator.share) {
+                                    navigator.share({ title: 'PROF51', text: shareMsg });
+                                } else {
+                                    navigator.clipboard.writeText(shareMsg);
+                                    alert('Message copied! Send to Lennox + Archie ♾️❤️♾️');
+                                }
+                            }}
+                            className="mt-3 w-full bg-gradient-to-r from-pink-500 to-purple-500 text-white font-black py-4 rounded-lg border-4 border-pink-400 font-mono text-sm"
+                            style={{ boxShadow: '0 0 30px rgba(236, 72, 153, 0.5)' }}
+                        >
+                            📲 SHARE WITH LENNOX + ARCHIE
+                        </motion.button>
+
                         <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-2 border-purple-500 px-4 py-3 rounded-lg mt-3">
                             <p className="text-purple-400 font-black text-xs font-mono mb-1">STRUCTURE:</p>
                             <p className="text-white text-[10px] font-mono mb-1">✓ ARCHIE (19) = Legal founder (signs contracts, runs company)</p>
