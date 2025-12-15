@@ -140,8 +140,8 @@ Return CLEAN, FORMATTED content ready to use. Be helpful, not generic.`,
                         <p className="text-gray-400 text-xs font-mono mb-3">Studies • Mindset • Accommodation • Gigs • Fashion • Social • EVERYTHING included ♾️❤️♾️</p>
                         
                         <div className="inline-block bg-gradient-to-r from-amber-500/20 to-green-500/20 border-2 border-amber-500 px-4 py-2 rounded-lg mt-2">
-                            <p className="text-amber-400 font-black text-xs font-mono mb-0.5">ARCHIE'S COMPANY</p>
-                            <p className="text-gray-400 text-[10px] font-mono">prof51.io • Separate domain • UF51 Family ♾️❤️♾️</p>
+                            <p className="text-amber-400 font-black text-xs font-mono mb-0.5">YOUTH VISION LEAD: 10-YEAR-OLD GENIUS</p>
+                            <p className="text-gray-400 text-[10px] font-mono">Structured through Co-Manager51 • prof51.io • UF51 Family ♾️❤️♾️</p>
                         </div>
 
                         {/* PWA INSTALL - DEVICE TO DEVICE */}
