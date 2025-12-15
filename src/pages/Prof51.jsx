@@ -39,7 +39,15 @@ export default function Prof51() {
                         
                         <div className="inline-block bg-gradient-to-r from-amber-500/20 to-green-500/20 border-2 border-amber-500 px-4 py-2 rounded-lg mt-2">
                             <p className="text-amber-400 font-black text-xs font-mono mb-0.5">ARCHIE'S COMPANY</p>
-                            <p className="text-gray-400 text-[10px] font-mono">prof51.io • Independent • UF51 Family ♾️❤️♾️</p>
+                            <p className="text-gray-400 text-[10px] font-mono">prof51.io • Separate domain • UF51 Family ♾️❤️♾️</p>
+                        </div>
+
+                        <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-2 border-purple-500 px-4 py-3 rounded-lg mt-3">
+                            <p className="text-purple-400 font-black text-xs font-mono mb-1">WHY SEPARATE DOMAIN?</p>
+                            <p className="text-white text-[10px] font-mono mb-1">✓ Prof51 = distinct brand (student tool, not UF51 healing)</p>
+                            <p className="text-cyan-400 text-[10px] font-mono mb-1">✓ Cleaner CI/CD pipeline (faster updates)</p>
+                            <p className="text-green-400 text-[10px] font-mono mb-1">✓ Archie's own identity (makes you proud)</p>
+                            <p className="text-pink-400 text-[10px] font-mono font-bold">His company. His brand. He grows with it ♾️❤️♾️</p>
                         </div>
                     </div>
                 </div>
@@ -423,6 +431,24 @@ export default function Prof51() {
                                     <p className="text-green-400 text-xs mb-1">→ Parents thank him: "My kid graduated debt-free"</p>
                                     <p className="text-pink-400 text-xs mb-1">→ Unis partner: "Best student outcomes in history"</p>
                                     <p className="text-amber-400 text-xs font-bold mt-2">Success through LIFTING people. That's what makes you proud. ♾️❤️♾️</p>
+                                </div>
+
+                                <div className="bg-black border border-green-500/30 p-3 rounded">
+                                    <p className="text-green-400 font-bold mb-2">HIS OWN COMPANY:</p>
+                                    <p className="text-white text-xs mb-1">prof51.io = Archie's independent company</p>
+                                    <p className="text-cyan-400 text-xs mb-1">→ He owns it. He runs it. His vision.</p>
+                                    <p className="text-pink-400 text-xs mb-1">→ UF51 Family support (but it's HIS)</p>
+                                    <p className="text-amber-400 text-xs mb-2 mt-2">→ Grants go to Prof51 (separate from UF51 CIC)</p>
+                                    <p className="text-green-400 text-xs font-bold">Independent founder. Connected family. Best of both. ♾️❤️♾️</p>
+                                </div>
+
+                                <div className="bg-black border border-purple-500/30 p-3 rounded">
+                                    <p className="text-purple-400 font-bold mb-2">THE PATH (LEARNING AS HE GOES):</p>
+                                    <p className="text-white text-xs mb-1">Year 1: Campus lead (learns what students actually need)</p>
+                                    <p className="text-white text-xs mb-1">Year 2: Head of Growth (learns ethical scaling)</p>
+                                    <p className="text-white text-xs mb-1">Year 3: Founder building Prof51 globally</p>
+                                    <p className="text-white text-xs mb-1">Year 4: 10M students helped, not extracted</p>
+                                    <p className="text-cyan-400 text-xs font-bold mt-2">Building while learning. Real education. Makes Dad proud. ✓</p>
                                 </div>
 
                                 <div className="bg-black border border-green-500/30 p-3 rounded">
