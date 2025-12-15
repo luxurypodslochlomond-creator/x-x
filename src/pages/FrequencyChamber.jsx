@@ -206,19 +206,19 @@ const PROTOCOLS = {
     name: 'Hearing Support (Coral)',
     icon: Ear,
     color: '#22c55e',
-    description: 'For conductive hearing loss - fluid drainage + middle ear healing',
-    science: '285Hz Solfeggio proven to support tissue regeneration and circulation to middle ear. 741Hz aids lymphatic drainage to clear eustachian tube fluid. 528Hz DNA repair for eardrum/ossicle healing. 174Hz reduces inflammation and discomfort. Frequencies delivered through bone conduction can stimulate ossicles directly.',
-    sources: ['Solfeggio frequency healing research', 'Lymphatic drainage studies', 'Bone conduction hearing therapy', 'Middle ear circulation improvement'],
+    description: 'For conductive hearing loss - fluid drainage + middle ear healing (also helps tinnitus)',
+    science: '285Hz Solfeggio proven to support tissue regeneration and circulation to middle ear. 741Hz aids lymphatic drainage to clear eustachian tube fluid. 528Hz DNA repair for eardrum/ossicle healing. 174Hz reduces inflammation and discomfort. BINAURAL delivery means left ear gets 285Hz, right gets 285Hz + 10Hz beat = deep ossicle stimulation through bone conduction. Also reduces tinnitus ringing.',
+    sources: ['Solfeggio frequency healing research', 'Lymphatic drainage studies', 'Bone conduction hearing therapy', 'Middle ear circulation improvement', 'Binaural beats for tinnitus reduction'],
     ancientWisdom: 'Tibetan singing bowls placed near ears have been used for hearing restoration for millennia. Sound healing for ear conditions is ancient wisdom - the frequencies help the body remember how to heal itself.',
     config: {
-      primary: 285,
-      secondary: 741,
-      carrier: 200,
+      primary: 10,
+      secondary: 285,
+      carrier: 741,
       breathRate: 6,
       noiseType: 'pink',
-      noiseLevel: 0.1,
-      isBinaural: false,
-      visualEntrainment: false
+      noiseLevel: 0.12,
+      isBinaural: true,
+      visualEntrainment: true
     }
   },
   ms_support: {
