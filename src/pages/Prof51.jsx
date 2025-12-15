@@ -240,6 +240,57 @@ Return CLEAN, FORMATTED content ready to use. Be helpful, not generic.`,
                 </div>
             </div>
 
+            {/* LENNOX'S JUST EAT DISCOVERY - FUCK THE SYSTEM */}
+            <div className="bg-gradient-to-br from-red-500/20 to-amber-500/20 border-4 border-red-500 p-6 mb-8 rounded-xl" style={{ boxShadow: '0 0 50px rgba(239, 68, 68, 0.5)' }}>
+                <div className="flex items-center gap-3 mb-4">
+                    <DollarSign className="w-12 h-12 text-red-400" />
+                    <div>
+                        <h2 className="text-red-400 font-black text-xl font-mono">LENNOX SPOTTED THE PARASITE</h2>
+                        <p className="text-gray-400 text-xs font-mono">Just Eat extraction = Why Prof51 exists</p>
+                    </div>
+                </div>
+
+                <div className="space-y-3 text-sm font-mono">
+                    <div className="bg-black border-2 border-red-500 p-4 rounded">
+                        <p className="text-red-400 font-bold mb-2">JUST EAT ORDER:</p>
+                        <p className="text-white text-xs mb-1">Food cost: £19.95</p>
+                        <p className="text-white text-xs mb-1">Delivery: £4.50</p>
+                        <p className="text-white text-xs mb-1">Bag fee: £0.15</p>
+                        <p className="text-white text-xs mb-1">Service fee: £0.99</p>
+                        <p className="text-red-400 text-base font-bold mt-2">TOTAL: £25.59</p>
+                        <p className="text-amber-400 text-xs mt-2">Just Eat takes: £5.64 (29% EXTRACTION)</p>
+                    </div>
+
+                    <div className="bg-black border-2 border-green-500 p-4 rounded">
+                        <p className="text-green-400 font-bold mb-2">LENNOX'S WAY (FUCK THE SYSTEM):</p>
+                        <p className="text-white text-xs mb-1">Call restaurant direct</p>
+                        <p className="text-white text-xs mb-1">Pay cash: £30</p>
+                        <p className="text-white text-xs mb-1">Keep change or tip driver</p>
+                        <p className="text-green-400 text-xs font-bold mt-2">Restaurant keeps FULL £25.59 (not £19.95)</p>
+                        <p className="text-cyan-400 text-xs mt-1">Zero tracking. Zero data selling. Zero extraction.</p>
+                    </div>
+
+                    <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-4 border-purple-500 p-4 rounded" style={{ boxShadow: '0 0 40px rgba(168, 85, 247, 0.4)' }}>
+                        <p className="text-purple-400 font-bold mb-2">THE GLOBAL EXTRACTION:</p>
+                        <p className="text-white text-xs mb-1">£5.64 per order × 735M students × 52 weeks</p>
+                        <p className="text-red-400 text-2xl font-black mt-2">= £215 BILLION/YEAR EXTRACTED</p>
+                        <p className="text-pink-400 text-xs mt-2 font-bold">That's what parasites take from students + restaurants globally</p>
+                    </div>
+
+                    <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-4 border-green-500 p-4 rounded" style={{ boxShadow: '0 0 40px rgba(34, 197, 94, 0.4)' }}>
+                        <p className="text-green-400 font-bold mb-2">PROF51 SOLUTION:</p>
+                        <p className="text-white text-xs mb-1">✓ Student opens Prof51 → Sees verified local restaurants</p>
+                        <p className="text-white text-xs mb-1">✓ Tap to call direct (or $P51 payment future)</p>
+                        <p className="text-white text-xs mb-1">✓ Restaurant keeps full money</p>
+                        <p className="text-white text-xs mb-1">✓ Student saves £5.64 per order</p>
+                        <p className="text-white text-xs mb-1">✓ Zero data extraction (we never see what you eat)</p>
+                        <p className="text-cyan-400 text-xs font-bold mt-2">Why restaurants pay Prof51: We give them REAL student access without extraction</p>
+                        <p className="text-pink-400 text-xs font-bold mt-1">Restaurants pay £200/year → Reach 1000+ students → Save £5,640 in fees</p>
+                        <p className="text-green-400 text-xs font-bold mt-2">FUCK THE MIDDLEMEN. DIRECT CONNECTION. ♾️❤️♾️</p>
+                    </div>
+                </div>
+            </div>
+
             {/* THE PROBLEM - STUDENTS RELATE */}
             <div className="bg-gradient-to-br from-red-500/20 to-amber-500/20 border-4 border-red-500 p-6 mb-8 rounded-xl">
                 <h2 className="text-red-400 font-black text-xl font-mono mb-4">THE PROBLEM</h2>
