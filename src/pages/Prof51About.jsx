@@ -42,7 +42,17 @@ export default function Prof51About() {
                         <div className="bg-black border-2 border-cyan-500 rounded-lg p-4">
                             <p className="text-cyan-400 font-bold mb-2">🎓 ARCHIE (19)</p>
                             <p className="text-white text-xs mb-1">Economics @ Edinburgh</p>
-                            <p className="text-gray-400 text-xs">Legal founder + campus lead</p>
+                            <p className="text-gray-400 text-xs mb-2">Legal founder</p>
+
+                            <div className="bg-cyan-500/10 border border-cyan-500/30 rounded p-2 mt-2">
+                                <p className="text-cyan-400 font-bold text-xs mb-1">HOW IT SPREADS:</p>
+                                <p className="text-white text-xs mb-1">"Yo check this out it's actually sick"</p>
+                                <p className="text-gray-300 text-xs mb-1">→ Uses it himself, mates see it works</p>
+                                <p className="text-gray-300 text-xs mb-1">→ Share link in group chats: "Saved me 3 hours"</p>
+                                <p className="text-gray-300 text-xs mb-1">→ P2P mesh = spreads device-to-device</p>
+                                <p className="text-gray-300 text-xs mb-1">→ No "ambassador" corporate bullshit</p>
+                                <p className="text-green-400 text-xs font-bold mt-1">Just: "This helped me, try it" ✓</p>
+                            </div>
                         </div>
 
                         <div className="bg-black border-2 border-pink-500 rounded-lg p-4">
