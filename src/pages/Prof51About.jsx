@@ -30,8 +30,9 @@ export default function Prof51About() {
             <div className="px-4 py-6 max-w-2xl mx-auto space-y-6">
                 {/* THE UNIVERSAL ENTRY POINT */}
                 <div className="bg-gradient-to-br from-amber-500/20 to-red-500/20 border-4 border-amber-500 rounded-2xl p-6" style={{ boxShadow: '0 0 60px rgba(245, 158, 11, 0.6)' }}>
-                    <p className="text-amber-400 font-black text-3xl mb-3 text-center">💔 THE UNIVERSAL PAIN</p>
-                    <p className="text-white text-2xl font-bold text-center mb-4">Everyone loses something precious.</p>
+                    <p className="text-amber-400 font-black text-3xl mb-3 text-center">🌍 WORLD'S FIRST</p>
+                    <p className="text-white text-2xl font-bold text-center mb-2">P2P Lost & Found Network</p>
+                    <p className="text-cyan-400 text-base font-bold text-center mb-4">For Students. By Students. Zero Bullshit.</p>
                     
                     <div className="bg-black border-4 border-red-500 rounded-xl p-5 mb-4" style={{ boxShadow: '0 0 40px rgba(239, 68, 68, 0.5)' }}>
                         <p className="text-red-400 font-bold text-lg mb-3 text-center">WHY THIS REACHES EVERYONE:</p>
@@ -48,8 +49,9 @@ export default function Prof51About() {
                     </div>
 
                     <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-4 border-green-500 rounded-xl p-4">
-                        <p className="text-green-400 font-black text-lg mb-3 text-center">P2P LOST & FOUND = THE UNLOCK:</p>
-                        <p className="text-white text-sm mb-3 text-center">Not just "useful feature". The reason EVERY student downloads Prof51.</p>
+                        <p className="text-green-400 font-black text-lg mb-3 text-center">🔥 THE INNOVATION (WORLD'S FIRST):</p>
+                        <p className="text-white text-sm mb-2 text-center">Bluetooth mesh exists (AirTags, Tile trackers)</p>
+                        <p className="text-cyan-400 font-bold text-sm mb-3 text-center">But NEVER used for students helping students = PROF51 FIRST EVER ✓</p>
                         <div className="space-y-2 text-xs">
                             <p className="text-white text-center">Student downloads for P2P Lost & Found (universal need)</p>
                             <p className="text-cyan-400 text-center">→ Mesh finds their lost phone/keys/laptop at club/restaurant/festival</p>
@@ -824,7 +826,10 @@ export default function Prof51About() {
                 <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-4 border-green-500 rounded-xl p-6" style={{ boxShadow: '0 0 40px rgba(34, 197, 94, 0.4)' }}>
                     <div className="flex items-center gap-3 mb-4">
                         <Brain className="w-10 h-10 text-green-400" />
-                        <h2 className="text-green-400 font-black text-xl font-mono">WHAT WE DO</h2>
+                        <div>
+                            <h2 className="text-green-400 font-black text-xl font-mono">WHAT WE DO</h2>
+                            <p className="text-cyan-400 text-xs font-mono font-bold">World's first student P2P mesh network</p>
+                        </div>
                     </div>
 
                     <div className="space-y-2 text-sm font-mono">
@@ -926,13 +931,16 @@ export default function Prof51About() {
                 <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-4 border-green-500 rounded-xl p-6" style={{ boxShadow: '0 0 40px rgba(34, 197, 94, 0.4)' }}>
                     <div className="flex items-center gap-3 mb-4">
                         <Brain className="w-10 h-10 text-green-400" />
-                        <h2 className="text-green-400 font-black text-xl font-mono">WHY THIS IS GENIUS</h2>
+                        <div>
+                            <h2 className="text-green-400 font-black text-xl font-mono">WHY THIS IS GENIUS</h2>
+                            <p className="text-cyan-400 text-xs font-mono font-bold">Safe, trusted, student-to-student mutual aid at scale</p>
+                        </div>
                     </div>
 
                     <div className="space-y-3 text-xs font-mono">
                         <div className="bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border-2 border-cyan-500 rounded-lg p-4">
-                            <p className="text-cyan-400 font-bold mb-2">1️⃣ P2P MESH = GOVERNMENT-PROOF</p>
-                            <p className="text-white mb-1">Device-to-device. No servers. No internet needed.</p>
+                            <p className="text-cyan-400 font-bold mb-2">1️⃣ WORLD'S FIRST STUDENT P2P MESH</p>
+                            <p className="text-white mb-1">AirTags = £35 each, corporate owned. Prof51 = FREE, student owned.</p>
                             <p className="text-white mb-1">→ China blocks Google? Prof51 still works.</p>
                             <p className="text-white mb-1">→ Lecture hall no WiFi? Mesh connects everyone.</p>
                             <p className="text-white mb-1">→ Iran shuts internet? Students still share notes.</p>
@@ -975,7 +983,14 @@ export default function Prof51About() {
                         </div>
 
                         <div className="bg-gradient-to-r from-cyan-500/20 to-green-500/20 border-2 border-cyan-500 rounded-lg p-4">
-                            <p className="text-cyan-400 font-bold mb-2">6️⃣ CIRCULAR LOVE ECONOMY</p>
+                            <p className="text-cyan-400 font-bold mb-2">6️⃣ SAFE ENVIRONMENT (STUDENTS HELPING STUDENTS)</p>
+                            <p className="text-white mb-1">Share location with friends when meeting up. Public spots only. Student ID verification.</p>
+                            <p className="text-white mb-1">→ Not Craigslist (sketchy). Not Facebook Marketplace (scams).</p>
+                            <p className="text-green-400 font-bold mt-2">Trusted student community. Zero creeps. ✓</p>
+                        </div>
+
+                        <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-2 border-purple-500 rounded-lg p-4">
+                            <p className="text-purple-400 font-bold mb-2">7️⃣ CIRCULAR LOVE ECONOMY</p>
                             <p className="text-white mb-1">Students don't pay → businesses do (restaurants, brands)</p>
                             <p className="text-white mb-1">Why businesses pay: Reach 235M students direct (no ads)</p>
                             <p className="text-white mb-1">→ Restaurant pays £200/year, saves £5,640 in extraction</p>
@@ -1115,9 +1130,10 @@ export default function Prof51About() {
 
                 {/* FOOTER - CLEAR IDENTITY */}
                 <div className="text-center pt-6 border-t-2 border-cyan-500/30">
-                    <div className="bg-gradient-to-r from-cyan-500/20 to-green-500/20 border-2 border-cyan-500 rounded-xl p-4 mb-3">
-                        <p className="text-cyan-400 font-black text-sm font-mono mb-1">PROF51 = STUDENT EVERYTHING</p>
-                        <p className="text-white text-xs font-mono">Studies • Social • Money • Health • Life</p>
+                    <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-4 border-green-500 rounded-xl p-4 mb-3" style={{ boxShadow: '0 0 40px rgba(34, 197, 94, 0.5)' }}>
+                        <p className="text-green-400 font-black text-base font-mono mb-1">🌍 WORLD'S FIRST 🌍</p>
+                        <p className="text-cyan-400 font-black text-sm font-mono mb-1">P2P Lost & Found Network for Students</p>
+                        <p className="text-white text-xs font-mono">Safe • Trusted • Student-to-Student • Free Forever</p>
                     </div>
                     <p className="text-gray-600 text-[10px] font-mono">Archie's company • UniversalFamily51</p>
                     <p className="text-gray-700 text-[9px] font-mono mt-1">(Co-Manager51 = Music industry, separate)</p>
