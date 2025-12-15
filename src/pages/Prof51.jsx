@@ -271,10 +271,14 @@ Return CLEAN, FORMATTED content ready to use. Be helpful, not generic.`,
                     </div>
 
                     <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-4 border-purple-500 p-4 rounded" style={{ boxShadow: '0 0 40px rgba(168, 85, 247, 0.4)' }}>
-                        <p className="text-purple-400 font-bold mb-2">THE GLOBAL EXTRACTION:</p>
-                        <p className="text-white text-xs mb-1">£5.64 per order × 735M students × 52 weeks</p>
-                        <p className="text-red-400 text-2xl font-black mt-2">= £215 BILLION/YEAR EXTRACTED</p>
-                        <p className="text-pink-400 text-xs mt-2 font-bold">That's what parasites take from students + restaurants globally</p>
+                        <p className="text-purple-400 font-bold mb-2">THE REAL GLOBAL EXTRACTION:</p>
+                        <p className="text-white text-xs mb-1">Food delivery (2x/week): £5.64 × 735M × 104 = £431B</p>
+                        <p className="text-white text-xs mb-1">Transport (Uber): £3 × 735M × 52 = £115B</p>
+                        <p className="text-white text-xs mb-1">Accommodation (Airbnb fees): £2 × 735M × 12 = £18B</p>
+                        <p className="text-white text-xs mb-1">Shopping (Amazon markup): £8 × 735M × 26 = £153B</p>
+                        <p className="text-red-400 text-3xl font-black mt-2">= £717 BILLION/YEAR</p>
+                        <p className="text-pink-400 text-xs mt-2 font-bold">Nearly THREE QUARTERS OF A TRILLION extracted from students globally ♾️❤️♾️</p>
+                        <p className="text-cyan-400 text-xs mt-1">Prof51 = students connect DIRECT. Zero middlemen. Zero extraction.</p>
                     </div>
 
                     <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-4 border-green-500 p-4 rounded" style={{ boxShadow: '0 0 40px rgba(34, 197, 94, 0.4)' }}>
