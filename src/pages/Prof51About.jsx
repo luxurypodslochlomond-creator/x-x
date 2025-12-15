@@ -66,6 +66,72 @@ export default function Prof51About() {
                     </div>
                 </div>
 
+                {/* WHAT EVERY STUDENT NEEDS (UNIVERSAL) */}
+                <div className="bg-gradient-to-r from-pink-500/20 to-purple-500/20 border-4 border-pink-500 rounded-xl p-6 mb-6" style={{ boxShadow: '0 0 40px rgba(236, 72, 153, 0.5)' }}>
+                    <div className="flex items-center gap-3 mb-4">
+                        <Globe className="w-10 h-10 text-pink-400" />
+                        <h2 className="text-pink-400 font-black text-xl font-mono">WHAT EVERY STUDENT NEEDS</h2>
+                        <p className="text-gray-400 text-[10px] font-mono">(Edinburgh = rural India = Beijing)</p>
+                    </div>
+
+                    <div className="space-y-2 text-xs font-mono">
+                        <div className="bg-black border-2 border-pink-500 rounded-lg p-3">
+                            <p className="text-pink-400 font-bold mb-1">🍕 FOOD (universal)</p>
+                            <p className="text-white">Every human needs to eat. Students broke everywhere.</p>
+                            <p className="text-cyan-400 mt-1">Prof51: Direct to restaurants, save £5.64/order globally</p>
+                        </div>
+
+                        <div className="bg-black border-2 border-cyan-500 rounded-lg p-3">
+                            <p className="text-cyan-400 font-bold mb-1">🧠 HELP WITH STUDIES (universal)</p>
+                            <p className="text-white">Homework is stressful in every language, every country.</p>
+                            <p className="text-green-400 mt-1">Prof51: 235M students + AI = 24/7 global help network</p>
+                        </div>
+
+                        <div className="bg-black border-2 border-green-500 rounded-lg p-3">
+                            <p className="text-green-400 font-bold mb-1">💰 MONEY STRESS (universal)</p>
+                            <p className="text-white">Students poor in Glasgow, Mumbai, Rio, Lagos, everywhere.</p>
+                            <p className="text-purple-400 mt-1">Prof51: Budget tracker + earn $P51 helping others</p>
+                        </div>
+
+                        <div className="bg-black border-2 border-purple-500 rounded-lg p-3">
+                            <p className="text-purple-400 font-bold mb-1">💔 LONELINESS (universal)</p>
+                            <p className="text-white">Isolation, anxiety, "am I the only one struggling?"</p>
+                            <p className="text-pink-400 mt-1">Prof51: Anonymous peer support + find your people</p>
+                        </div>
+
+                        <div className="bg-black border-2 border-amber-500 rounded-lg p-3">
+                            <p className="text-amber-400 font-bold mb-1">🏠 ACCOMMODATION (universal)</p>
+                            <p className="text-white">Need somewhere safe to live. Dodgy landlords everywhere.</p>
+                            <p className="text-cyan-400 mt-1">Prof51: Find flatmates + rate landlords + avoid scams</p>
+                        </div>
+
+                        <div className="bg-black border-2 border-red-500 rounded-lg p-3">
+                            <p className="text-red-400 font-bold mb-1">🚗 TRANSPORT (universal)</p>
+                            <p className="text-white">Getting to class, getting home safe, getting around.</p>
+                            <p className="text-green-400 mt-1">Prof51: Direct to drivers, share rides, save money</p>
+                        </div>
+
+                        <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-4 border-green-500 rounded-lg p-4 mt-3">
+                            <p className="text-green-400 font-bold text-sm mb-2">🌍 WHY PROF51 WORKS EVERYWHERE:</p>
+                            <p className="text-white mb-1">✓ Works OFFLINE (villages with no internet)</p>
+                            <p className="text-white mb-1">✓ P2P mesh (no servers needed)</p>
+                            <p className="text-white mb-1">✓ FREE forever (works for poorest students)</p>
+                            <p className="text-white mb-1">✓ Multi-language (AI translates real-time)</p>
+                            <p className="text-white mb-1">✓ Encrypted (works in oppressive countries)</p>
+                            <p className="text-white mb-1">✓ Zero extraction (circular love economy)</p>
+                            <p className="text-cyan-400 font-bold mt-2">Student in rural Kenya = same needs as Edinburgh student</p>
+                            <p className="text-pink-400 font-bold">Prof51 solves ALL needs in ONE place ♾️❤️♾️</p>
+                        </div>
+
+                        <div className="bg-black border-2 border-purple-500 rounded-lg p-4">
+                            <p className="text-purple-400 font-bold mb-2">🎯 NOT JUST "ANOTHER STUDENT APP":</p>
+                            <p className="text-white mb-1">Other apps: ONE thing (notes, or food, or housing)</p>
+                            <p className="text-white mb-1">Prof51: EVERYTHING a student needs to survive + thrive</p>
+                            <p className="text-green-400 font-bold mt-2">It's your mate who helps with LIFE, not just one problem</p>
+                        </div>
+                    </div>
+                </div>
+
                 {/* WHAT */}
                 <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-4 border-green-500 rounded-xl p-6" style={{ boxShadow: '0 0 40px rgba(34, 197, 94, 0.4)' }}>
                     <div className="flex items-center gap-3 mb-4">
