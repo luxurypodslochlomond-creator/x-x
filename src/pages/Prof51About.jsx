@@ -64,44 +64,50 @@ export default function Prof51About() {
                     </div>
 
                     <div className="space-y-2 text-sm font-mono">
-                            <p className="text-cyan-400 font-bold mb-2">📚 STUDIES:</p>
-                            <p className="text-white text-xs">✓ AI handles all busywork (Excel, essays, formatting)</p>
-                            <p className="text-white text-xs">✓ Study groups (P2P, offline)</p>
-                            <p className="text-white text-xs">✓ Textbook swap (buy/sell direct)</p>
+                            <div className="bg-gradient-to-r from-cyan-500/20 to-purple-500/20 border-4 border-cyan-500 rounded-lg p-4 mb-4" style={{ boxShadow: '0 0 40px rgba(6, 182, 212, 0.5)' }}>
+                                <p className="text-cyan-400 font-black text-base mb-2">🌍 GLOBAL STUDENT BRAIN</p>
+                                <p className="text-white text-xs mb-3 font-bold">235M students. One P2P network. Encrypted. Offline. Unstoppable.</p>
 
-                            <p className="text-green-400 font-bold mb-2 mt-3">🍕 FOOD:</p>
-                            <p className="text-white text-xs">✓ Call restaurants direct (save £5.64/order)</p>
-                            <p className="text-white text-xs">✓ Food waste rescue (free meals from cafes)</p>
-                            <p className="text-white text-xs">✓ Student meal deals (local partners)</p>
+                                <p className="text-green-400 font-bold text-xs mb-1">REAL-TIME EXAM HELP:</p>
+                                <p className="text-gray-300 text-xs mb-2">→ Stuck on economics? Edinburgh → Cambridge → MIT chain helps you NOW</p>
+                                <p className="text-gray-300 text-xs mb-2">→ Time zones = 24/7 coverage (UK sleeps, Asia studies, US wakes)</p>
+                                <p className="text-gray-300 text-xs mb-3">→ AI routes question to best student globally (offline mesh)</p>
 
-                            <p className="text-purple-400 font-bold mb-2 mt-3">🚗 TRANSPORT:</p>
-                            <p className="text-white text-xs">✓ Connect with local taxi drivers direct (not Uber)</p>
-                            <p className="text-white text-xs">✓ Student ride-sharing (split costs)</p>
-                            <p className="text-white text-xs">✓ Bus/train real-time (offline cache)</p>
+                                <p className="text-pink-400 font-bold text-xs mb-1">CROWDSOURCED EXAM DATABASE:</p>
+                                <p className="text-gray-300 text-xs mb-2">→ Every past paper, every uni, every year (students share P2P)</p>
+                                <p className="text-gray-300 text-xs mb-2">→ AI shows which questions repeat, what profs ask</p>
+                                <p className="text-gray-300 text-xs mb-3">→ "This exact calc appears every 3 years - here's how"</p>
 
-                            <p className="text-amber-400 font-bold mb-2 mt-3">💰 MONEY:</p>
-                            <p className="text-white text-xs">✓ Budget tracker (offline, private)</p>
-                            <p className="text-white text-xs">✓ Bank fee alerts (avoid overdrafts)</p>
-                            <p className="text-white text-xs">✓ Where your money goes (extraction tracking)</p>
-                            <p className="text-white text-xs">✓ Part-time work (local employers direct)</p>
+                                <p className="text-purple-400 font-bold text-xs mb-1">LANGUAGE BARRIER = GONE:</p>
+                                <p className="text-gray-300 text-xs mb-2">→ Chinese student explains to UK student (AI translates real-time)</p>
+                                <p className="text-gray-300 text-xs mb-2">→ Voice + text + diagrams (whatever helps you learn)</p>
+                                <p className="text-gray-300 text-xs mb-3">→ Knowledge flows freely across ALL borders</p>
 
-                            <p className="text-pink-400 font-bold mb-2 mt-3">🏠 ACCOMMODATION:</p>
-                            <p className="text-white text-xs">✓ Find flatmates (AI matches vibe)</p>
-                            <p className="text-white text-xs">✓ Landlord ratings (avoid scams)</p>
-                            <p className="text-white text-xs">✓ Bills splitting (automated)</p>
+                                <p className="text-amber-400 font-bold text-xs mb-1">DISABILITY SUPERPOWERS:</p>
+                                <p className="text-gray-300 text-xs mb-2">→ Dyslexia: AI reads papers aloud, highlights key points</p>
+                                <p className="text-gray-300 text-xs mb-2">→ ADHD: Break tasks into micro-steps, focus timer</p>
+                                <p className="text-gray-300 text-xs mb-2">→ Autism: Predictable interface, no social pressure</p>
+                                <p className="text-gray-300 text-xs mb-3">→ Anxiety: Anonymous help, no judgment ever</p>
 
-                            <p className="text-red-400 font-bold mb-2 mt-3">❤️ HEALTH:</p>
-                            <p className="text-white text-xs">✓ Mental health support (anonymous, 24/7)</p>
-                            <p className="text-white text-xs">✓ NHS appointment tracker</p>
-                            <p className="text-white text-xs">✓ Meditation/healing frequencies</p>
-                            <p className="text-white text-xs">✓ Peer support (students who get it)</p>
+                                <p className="text-green-400 font-bold text-xs mb-1">RESEARCH PAPER SIMPLIFIER:</p>
+                                <p className="text-gray-300 text-xs mb-2">→ PhD-level paper → undergrad-level explanation (AI + PhD students)</p>
+                                <p className="text-gray-300 text-xs mb-2">→ "Here's what this ACTUALLY means in plain English"</p>
+                                <p className="text-gray-300 text-xs mb-3">→ Visual diagrams, examples, step-by-step</p>
 
-                            <p className="text-cyan-400 font-bold mb-2 mt-3">🎉 SOCIAL:</p>
-                            <p className="text-white text-xs">✓ Gigs/events near you (mates going)</p>
-                            <p className="text-white text-xs">✓ Student discounts (cinema, clubs)</p>
-                            <p className="text-white text-xs">✓ P2P messaging (offline, encrypted)</p>
+                                <p className="text-cyan-400 font-bold text-xs mb-1">PHD/MASTERS → UNDERGRADS:</p>
+                                <p className="text-gray-300 text-xs mb-2">→ Advanced students tutor beginners (earn $P51)</p>
+                                <p className="text-gray-300 text-xs mb-2">→ "I did this module last year - here's the tricks"</p>
+                                <p className="text-gray-300 text-xs mb-3">→ Knowledge flows down, money flows up (circular)</p>
 
-                            <p className="text-green-400 font-bold mt-3">FREE FOREVER • ALL OF IT ♾️❤️♾️</p>
+                                <p className="text-white font-black text-xs mt-3">WORKS IN LECTURE HALLS (No WiFi needed)</p>
+                                <p className="text-pink-400 font-black text-xs">ENCRYPTED (Government can't block it)</p>
+                                <p className="text-green-400 font-black text-xs">FREE (Forever. No extraction. Ever.)</p>
+                            </div>
+
+                            <p className="text-cyan-400 font-bold mb-2">🍕 FOOD/TRANSPORT/MONEY/ACCOMMODATION:</p>
+                            <p className="text-gray-400 text-xs">Direct connections (restaurants, taxis, landlords) - save £717B/year globally</p>
+
+                            <p className="text-green-400 font-bold mt-3 text-base">THE INNOVATION = GLOBAL STUDENT COLLECTIVE INTELLIGENCE ♾️❤️♾️</p>
                         </div>
                 </div>
 
