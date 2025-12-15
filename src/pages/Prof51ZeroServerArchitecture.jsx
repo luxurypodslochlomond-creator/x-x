@@ -303,7 +303,7 @@ export default function Prof51ZeroServerArchitecture() {
                             <p className="text-gray-300 text-xs mb-1">✓ COPPA compliant (USA)</p>
                             <p className="text-gray-300 text-xs mb-1">✓ Data Protection Act (UK)</p>
                             <p className="text-gray-300 text-xs mb-1">✓ No illegal content hosting (encrypted, can't see it)</p>
-                            <p className="text-green-400 text-xs font-bold mt-2">Built COOLASFUCK from day one ♾️❤️♾️</p>
+                            <p className="text-green-400 text-xs font-bold mt-2">Built compliant from day one ♾️❤️♾️</p>
                         </div>
                     </div>
                 </div>
