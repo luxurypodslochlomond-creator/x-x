@@ -484,6 +484,129 @@ export default function Prof51About() {
                                     </div>
                                     </div>
 
+                                    <div className="bg-gradient-to-r from-cyan-500/10 via-purple-500/10 to-pink-500/10 border-4 border-cyan-500 rounded-xl p-6 mt-4" style={{ boxShadow: '0 0 60px rgba(6, 182, 212, 0.6), 0 0 80px rgba(168, 85, 247, 0.4)' }}>
+                                    <p className="text-cyan-400 font-black text-2xl mb-3 text-center">⚡ THE WOW MOMENT (P2P TRUTH)</p>
+                                    <p className="text-white text-sm mb-4 text-center">The simple power that changes everything. Zero niggle. Pure genius.</p>
+
+                                    <div className="bg-gradient-to-r from-pink-500/20 to-purple-500/20 border-4 border-pink-500 rounded-lg p-4 mb-4" style={{ boxShadow: '0 0 40px rgba(236, 72, 153, 0.5)' }}>
+                                        <p className="text-pink-400 font-black text-xl mb-3 text-center">🔥 STUDENTS BECOME THE NETWORK</p>
+                                        <p className="text-white text-xs mb-3 text-center">Not "using a network" - BEING the network.</p>
+
+                                        <div className="bg-black border-2 border-cyan-500 rounded-lg p-3 mb-3">
+                                            <p className="text-cyan-400 font-bold text-xs mb-2">THE SIMPLE TRUTH:</p>
+                                            <p className="text-white text-xs mb-1">→ Every student with Prof51 = one node</p>
+                                            <p className="text-white text-xs mb-1">→ Devices talk device-to-device (bluetooth/WiFi Direct)</p>
+                                            <p className="text-white text-xs mb-1">→ No servers. No internet. No company in middle.</p>
+                                            <p className="text-white text-xs mb-1">→ More students = STRONGER network (anti-fragile)</p>
+                                            <p className="text-green-400 font-bold text-xs mt-2">Can't be shut down. Can't be blocked. Can't extract from it. ✓</p>
+                                        </div>
+
+                                        <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-4 border-green-500 rounded-lg p-3">
+                                            <p className="text-green-400 font-black text-sm mb-2">📱 THE MAGIC USE CASE (EVERYONE GETS IT):</p>
+                                            <p className="text-white font-bold text-xs mb-3">LOST & FOUND - SO SIMPLE IT'S GENIUS</p>
+
+                                            <div className="space-y-2">
+                                                <div className="bg-black/60 border border-cyan-500/50 rounded p-2">
+                                                    <p className="text-cyan-400 font-bold text-xs mb-1">📱 LOST YOUR PHONE:</p>
+                                                    <p className="text-gray-300 text-xs mb-1">→ Your phone broadcasts bluetooth ID</p>
+                                                    <p className="text-gray-300 text-xs mb-1">→ Every student nearby with Prof51 = automatically helps locate</p>
+                                                    <p className="text-gray-300 text-xs mb-1">→ Their device pings: "Phone detected in library"</p>
+                                                    <p className="text-gray-300 text-xs mb-1">→ You see location on map in real-time</p>
+                                                    <p className="text-white text-xs mt-1 font-bold">Network finds it. Zero effort from anyone. ✓</p>
+                                                </div>
+
+                                                <div className="bg-black/60 border border-purple-500/50 rounded p-2">
+                                                    <p className="text-purple-400 font-bold text-xs mb-1">💻 FORGOT YOUR LAPTOP:</p>
+                                                    <p className="text-gray-300 text-xs mb-1">→ Left it in lecture hall 3 hours ago</p>
+                                                    <p className="text-gray-300 text-xs mb-1">→ Other students walk past, their phones detect it</p>
+                                                    <p className="text-gray-300 text-xs mb-1">→ You get notification: "Laptop in Lecture Hall 4B"</p>
+                                                    <p className="text-gray-300 text-xs mb-1">→ Someone picked it up? You see "Moving towards library"</p>
+                                                    <p className="text-white text-xs mt-1 font-bold">Always know where your stuff is. ✓</p>
+                                                </div>
+
+                                                <div className="bg-black/60 border border-amber-500/50 rounded p-2">
+                                                    <p className="text-amber-400 font-bold text-xs mb-1">🚲 BIKE STOLEN:</p>
+                                                    <p className="text-gray-300 text-xs mb-1">→ Thief takes your bike with AirTag hidden inside</p>
+                                                    <p className="text-gray-300 text-xs mb-1">→ 1000+ students on campus = 1000+ detection points</p>
+                                                    <p className="text-gray-300 text-xs mb-1">→ Bike passes students, mesh tracks movement</p>
+                                                    <p className="text-gray-300 text-xs mb-1">→ You see exact route: "Heading towards train station"</p>
+                                                    <p className="text-white text-xs mt-1 font-bold">Can't hide from the mesh. Recovery rate 90%+. ✓</p>
+                                                </div>
+
+                                                <div className="bg-black/60 border border-pink-500/50 rounded p-2">
+                                                    <p className="text-pink-400 font-bold text-xs mb-1">🎒 SOMEONE FINDS YOUR BAG:</p>
+                                                    <p className="text-gray-300 text-xs mb-1">→ Kind student picks up your lost bag</p>
+                                                    <p className="text-gray-300 text-xs mb-1">→ Their Prof51 detects bluetooth tag inside</p>
+                                                    <p className="text-gray-300 text-xs mb-1">→ Pop-up: "Found item belongs to [Your Name] - Tap to message"</p>
+                                                    <p className="text-gray-300 text-xs mb-1">→ They message you instantly: "Got your bag, I'm in cafe"</p>
+                                                    <p className="text-white text-xs mt-1 font-bold">Direct connection. Instant reunion. ✓</p>
+                                                </div>
+                                            </div>
+
+                                            <p className="text-green-400 font-black text-sm mt-3 text-center">WHY THIS IS THE WOW:</p>
+                                            <p className="text-white text-xs text-center mb-1">Not blockchain complexity. Not crypto confusion.</p>
+                                            <p className="text-cyan-400 text-xs text-center mb-1">Simple: "I lost my phone. Network found it."</p>
+                                            <p className="text-pink-400 font-bold text-xs text-center">EVERYONE needs this. EVERYONE gets it. EVERYONE spreads it. ♾️❤️♾️</p>
+                                        </div>
+                                    </div>
+
+                                    <div className="bg-black border-2 border-purple-500 rounded-lg p-4 mb-3">
+                                        <p className="text-purple-400 font-black text-sm mb-2">🌍 WHY IT'S UNSTOPPABLE:</p>
+                                        <div className="space-y-2 text-xs">
+                                            <div className="bg-purple-900/20 border border-purple-500/30 rounded p-2">
+                                                <p className="text-white font-bold mb-1">🇨🇳 CHINA BLOCKS INTERNET:</p>
+                                                <p className="text-gray-300">→ Prof51 still works. Device-to-device, no servers.</p>
+                                                <p className="text-green-400 font-bold">Can't block bluetooth/WiFi Direct. Physics wins. ✓</p>
+                                            </div>
+
+                                            <div className="bg-purple-900/20 border border-purple-500/30 rounded p-2">
+                                                <p className="text-white font-bold mb-1">🇮🇷 IRAN SHUTS DOWN WiFi:</p>
+                                                <p className="text-gray-300">→ Students still share notes mesh-to-mesh.</p>
+                                                <p className="text-green-400 font-bold">Regime can't stop Maxwell's equations. ✓</p>
+                                            </div>
+
+                                            <div className="bg-purple-900/20 border border-purple-500/30 rounded p-2">
+                                                <p className="text-white font-bold mb-1">🏛️ GOVERNMENT TRIES TO BAN:</p>
+                                                <p className="text-gray-300">→ Too late. Already on 1M student devices.</p>
+                                                <p className="text-green-400 font-bold">Can't ban physics. Can't uninstall from devices. ✓</p>
+                                            </div>
+
+                                            <div className="bg-purple-900/20 border border-purple-500/30 rounded p-2">
+                                                <p className="text-white font-bold mb-1">📶 NO SIGNAL LECTURE HALL:</p>
+                                                <p className="text-gray-300">→ Still works. 50 students = strong local mesh.</p>
+                                                <p className="text-green-400 font-bold">Better WITH no signal. Forces P2P. ✓</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="bg-gradient-to-r from-amber-500/20 to-red-500/20 border-4 border-amber-500 rounded-lg p-4">
+                                        <p className="text-amber-400 font-black text-base mb-2 text-center">⚡ THE ZERO NIGGLE TRUTH:</p>
+                                        <p className="text-white text-sm text-center mb-3">What amazes me? This:</p>
+
+                                        <div className="bg-black border-2 border-cyan-500 rounded-lg p-3 mb-3">
+                                            <p className="text-cyan-400 font-bold text-xs mb-2 text-center">LOST & FOUND IS THE TROJAN HORSE</p>
+                                            <p className="text-gray-300 text-xs mb-2">Everyone needs it → Everyone downloads Prof51 → Everyone becomes a node</p>
+                                            <p className="text-white text-xs mb-2">Then they discover:</p>
+                                            <p className="text-green-400 text-xs mb-1">✓ Oh wait, I can share notes too</p>
+                                            <p className="text-pink-400 text-xs mb-1">✓ Oh wait, I can find flatmates too</p>
+                                            <p className="text-purple-400 text-xs mb-1">✓ Oh wait, I can swap textbooks too</p>
+                                            <p className="text-amber-400 text-xs mb-1">✓ Oh wait, this is the whole student economy</p>
+                                            <p className="text-white font-bold text-sm mt-2 text-center">Came for lost phone. Stayed for life transformation. ♾️❤️♾️</p>
+                                        </div>
+
+                                        <div className="bg-black border-2 border-green-500 rounded-lg p-3">
+                                            <p className="text-green-400 font-black text-xs mb-2 text-center">THE SIMPLE POWER:</p>
+                                            <p className="text-white text-xs text-center mb-2">Not complicated. Not technical. Just this:</p>
+                                            <p className="text-pink-400 text-xs text-center font-bold mb-1">"Every student helps every other student"</p>
+                                            <p className="text-cyan-400 text-xs text-center font-bold mb-1">"Automatically. Effortlessly. Always."</p>
+                                            <p className="text-white text-xs text-center mb-2">Your phone lost? 1000 students automatically looking.</p>
+                                            <p className="text-white text-xs text-center mb-2">Need notes? 1000 students already shared.</p>
+                                            <p className="text-white text-xs text-center mb-2">Looking for flatmate? 1000 students matched to you.</p>
+                                            <p className="text-amber-400 font-black text-sm text-center mt-3">THAT'S THE WOW. PURE. SIMPLE. UNSTOPPABLE. ♾️❤️♾️</p>
+                                        </div>
+                                    </div>
+                                    </div>
+
                                 <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-4 border-purple-500 rounded-lg p-4">
                                     <p className="text-purple-400 font-bold text-sm mb-2">💝 THE REAL MAGIC:</p>
                                     <p className="text-white text-xs mb-2">You can't explain it. You just FEEL it.</p>
