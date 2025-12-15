@@ -10,6 +10,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import KingdomCrown8Bit from '@/components/shared/KingdomCrown8Bit';
 import CoManager51Icon8Bit from '@/components/shared/CoManager51Icon8Bit';
 import Gill51Sunglasses8Bit from '@/components/shared/Gill51Sunglasses8Bit';
+import BrosBond8Bit from '@/components/shared/BrosBond8Bit';
 import { useScottOffline, ScottOfflineProvider } from '@/components/scott/ScottOfflineStorage';
 import ScottOneSentence from '@/components/scott/ScottOneSentence';
 import ScottEnergyMode from '@/components/scott/ScottEnergyMode';
@@ -148,9 +149,10 @@ Keep it SHORT, practical, straight to the point. No bullshit. Real help.`,
                     style={{ boxShadow: '0 0 60px rgba(245, 158, 11, 0.15)' }}
                 >
                     <div className="text-center mb-8">
-                        <CoManager51Icon8Bit size={64} animate={true} className="mx-auto mb-4" />
+                        <BrosBond8Bit size={80} animate={true} className="mx-auto mb-4" />
                         <h1 className="text-3xl font-black text-white mb-2 font-mono tracking-tight">Co-Manager51</h1>
-                        <p className="text-gray-400 text-sm font-mono">Enter PIN to unlock</p>
+                        <p className="text-gray-400 text-sm font-mono">You + Scott • Light each other's fire ♾️❤️😎</p>
+                        <p className="text-gray-600 text-xs font-mono mt-2">Enter PIN to unlock</p>
                     </div>
 
                     <Input
