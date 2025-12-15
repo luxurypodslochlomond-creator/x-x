@@ -463,6 +463,36 @@ export default function Universal51() {
                     })}
                 </div>
 
+                {/* DIARY51 CONNECTION */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="bg-gradient-to-r from-pink-500/20 to-purple-500/20 border-4 border-pink-500 rounded-xl p-6 mb-6"
+                    style={{ boxShadow: '0 0 40px rgba(236, 72, 153, 0.4)' }}
+                >
+                    <div className="flex items-center gap-3 mb-3">
+                        <Brain className="w-8 h-8 text-pink-400" />
+                        <div>
+                            <p className="text-pink-400 font-black text-lg">DIARY51 CONNECTED</p>
+                            <p className="text-gray-400 text-xs">AI51 suggests frequencies based on how you feel</p>
+                        </div>
+                    </div>
+                    <p className="text-white text-sm mb-4">
+                        Write in Diary51 → AI51 reads your consciousness → Suggests perfect healing frequency for you right now
+                    </p>
+                    <Link to={createPageUrl('Diary51')}>
+                        <motion.button
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
+                            className="w-full bg-gradient-to-r from-pink-500 to-purple-500 text-white font-black py-4 rounded-xl flex items-center justify-center gap-2"
+                        >
+                            <Brain className="w-5 h-5" />
+                            OPEN DIARY51
+                            <ArrowRight className="w-5 h-5" />
+                        </motion.button>
+                    </Link>
+                </motion.div>
+
                 {/* HEADPHONE REMINDER */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
