@@ -121,35 +121,124 @@ export default function Prof51About() {
                         </div>
                 </div>
 
-                {/* WHY */}
-                <div className="bg-gradient-to-r from-pink-500/20 to-purple-500/20 border-4 border-pink-500 rounded-xl p-6" style={{ boxShadow: '0 0 40px rgba(236, 72, 153, 0.4)' }}>
+                {/* WHAT THIS SOLVES */}
+                <div className="bg-gradient-to-r from-red-500/20 to-amber-500/20 border-4 border-red-500 rounded-xl p-6 mb-6" style={{ boxShadow: '0 0 40px rgba(239, 68, 68, 0.4)' }}>
                     <div className="flex items-center gap-3 mb-4">
-                        <Heart className="w-10 h-10 text-pink-400" />
-                        <h2 className="text-pink-400 font-black text-xl font-mono">WHY WE EXIST</h2>
+                        <Heart className="w-10 h-10 text-red-400" />
+                        <h2 className="text-red-400 font-black text-xl font-mono">WHAT THIS SOLVES</h2>
                     </div>
 
-                    <div className="bg-black border-2 border-red-500 rounded-lg p-4 mb-4">
-                        <p className="text-red-400 font-bold text-lg mb-2">£717 BILLION/YEAR</p>
-                        <p className="text-white text-xs mb-2">Extracted from students globally:</p>
-                        <p className="text-gray-400 text-xs">• Food delivery fees (£431B)</p>
-                        <p className="text-gray-400 text-xs">• Transport (Uber/Lyft) (£115B)</p>
-                        <p className="text-gray-400 text-xs">• Accommodation platforms (£18B)</p>
-                        <p className="text-gray-400 text-xs">• Shopping markups (£153B)</p>
-                        <p className="text-gray-400 text-xs">• Bank fees/overdrafts</p>
-                        <p className="text-gray-400 text-xs">• Textbook monopolies</p>
-                        <p className="text-gray-400 text-xs">• Data selling (Facebook/LinkedIn)</p>
-                        <p className="text-red-400 text-xs font-bold mt-2">Every part of student life = EXTRACTION</p>
+                    <div className="space-y-3 text-xs font-mono">
+                        <div className="bg-black border-2 border-red-500 rounded-lg p-4">
+                            <p className="text-red-400 font-bold mb-2">💸 £717 BILLION EXTRACTION:</p>
+                            <p className="text-white mb-1">Food delivery: £431B (Just Eat takes 29%)</p>
+                            <p className="text-white mb-1">Transport: £115B (Uber takes 25%)</p>
+                            <p className="text-white mb-1">Accommodation: £18B (Airbnb takes 15%)</p>
+                            <p className="text-white mb-1">Shopping: £153B (Amazon markup)</p>
+                            <p className="text-red-400 font-bold mt-2">= Nearly a TRILLION stolen from students yearly</p>
+                        </div>
+
+                        <div className="bg-black border-2 border-purple-500 rounded-lg p-4">
+                            <p className="text-purple-400 font-bold mb-2">😰 ACADEMIC INEQUALITY:</p>
+                            <p className="text-white mb-1">Rich kids: £80/hour tutors = better grades</p>
+                            <p className="text-white mb-1">Poor kids: Struggle alone = stress + worse outcomes</p>
+                            <p className="text-purple-400 font-bold mt-2">Prof51 = Everyone gets AI tutor + global student network FREE</p>
+                        </div>
+
+                        <div className="bg-black border-2 border-amber-500 rounded-lg p-4">
+                            <p className="text-amber-400 font-bold mb-2">🌍 KNOWLEDGE SILOS:</p>
+                            <p className="text-white mb-1">Students isolated by: language, disability, location, time zone</p>
+                            <p className="text-white mb-1">Same exam question = 1000 students solve separately (wasteful)</p>
+                            <p className="text-amber-400 font-bold mt-2">Prof51 = 235M students ONE BRAIN, real-time help globally</p>
+                        </div>
+
+                        <div className="bg-black border-2 border-pink-500 rounded-lg p-4">
+                            <p className="text-pink-400 font-bold mb-2">💔 LONELINESS EPIDEMIC:</p>
+                            <p className="text-white mb-1">Students isolated, anxious, don't know where to find help</p>
+                            <p className="text-white mb-1">Facebook = old people. LinkedIn = fake corporate.</p>
+                            <p className="text-pink-400 font-bold mt-2">Prof51 = Real peer support, anonymous when needed, always there</p>
+                        </div>
+
+                        <div className="bg-black border-2 border-cyan-500 rounded-lg p-4">
+                            <p className="text-cyan-400 font-bold mb-2">🚫 GOVERNMENT CENSORSHIP:</p>
+                            <p className="text-white mb-1">China/Iran block internet → students can't learn freely</p>
+                            <p className="text-white mb-1">Universities monitor networks → privacy invaded</p>
+                            <p className="text-cyan-400 font-bold mt-2">Prof51 = P2P mesh, works offline, encrypted, UNSTOPPABLE</p>
+                        </div>
+                    </div>
+                </div>
+
+                {/* WHY THIS IS GENIUS */}
+                <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-4 border-green-500 rounded-xl p-6" style={{ boxShadow: '0 0 40px rgba(34, 197, 94, 0.4)' }}>
+                    <div className="flex items-center gap-3 mb-4">
+                        <Brain className="w-10 h-10 text-green-400" />
+                        <h2 className="text-green-400 font-black text-xl font-mono">WHY THIS IS GENIUS</h2>
                     </div>
 
-                    <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-2 border-green-500 rounded-lg p-4">
-                        <p className="text-green-400 font-bold mb-2">PROF51 SOLUTION:</p>
-                        <p className="text-white text-xs mb-2">Students connect DIRECT to:</p>
-                        <p className="text-gray-300 text-xs">→ Restaurants (not Just Eat)</p>
-                        <p className="text-gray-300 text-xs">→ Taxi drivers (not Uber)</p>
-                        <p className="text-gray-300 text-xs">→ Landlords (not Airbnb)</p>
-                        <p className="text-gray-300 text-xs">→ Local employers (not LinkedIn)</p>
-                        <p className="text-gray-300 text-xs">→ Each other (not Facebook)</p>
-                        <p className="text-cyan-400 text-xs font-bold mt-2">Zero middlemen. Zero extraction. Circular love economy ♾️❤️♾️</p>
+                    <div className="space-y-3 text-xs font-mono">
+                        <div className="bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border-2 border-cyan-500 rounded-lg p-4">
+                            <p className="text-cyan-400 font-bold mb-2">1️⃣ P2P MESH = GOVERNMENT-PROOF</p>
+                            <p className="text-white mb-1">Device-to-device. No servers. No internet needed.</p>
+                            <p className="text-white mb-1">→ China blocks Google? Prof51 still works.</p>
+                            <p className="text-white mb-1">→ Lecture hall no WiFi? Mesh connects everyone.</p>
+                            <p className="text-white mb-1">→ Iran shuts internet? Students still share notes.</p>
+                            <p className="text-green-400 font-bold mt-2">Maxwell's physics = literally IMPOSSIBLE to block ♾️</p>
+                        </div>
+
+                        <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-2 border-purple-500 rounded-lg p-4">
+                            <p className="text-purple-400 font-bold mb-2">2️⃣ TIME ZONES = 24/7 GLOBAL BRAIN</p>
+                            <p className="text-white mb-1">UK 3am stuck on essay? → Asia students awake (8am their time)</p>
+                            <p className="text-white mb-1">US morning exam panic? → UK students help (their afternoon)</p>
+                            <p className="text-white mb-1">Edinburgh → Cambridge → MIT → Tokyo → Sydney</p>
+                            <p className="text-pink-400 font-bold mt-2">Planet = ONE continuous study session across time zones</p>
+                        </div>
+
+                        <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-2 border-green-500 rounded-lg p-4">
+                            <p className="text-green-400 font-bold mb-2">3️⃣ FREE = LEVELS PLAYING FIELD</p>
+                            <p className="text-white mb-1">Rich kid advantage = gone. Everyone gets:</p>
+                            <p className="text-white mb-1">→ AI tutor (better than £80/hour human)</p>
+                            <p className="text-white mb-1">→ Global peer network (235M students)</p>
+                            <p className="text-white mb-1">→ Past papers from every uni globally</p>
+                            <p className="text-cyan-400 font-bold mt-2">Smart poor kid beats rich average kid now ✓</p>
+                        </div>
+
+                        <div className="bg-gradient-to-r from-amber-500/20 to-red-500/20 border-2 border-amber-500 rounded-lg p-4">
+                            <p className="text-amber-400 font-bold mb-2">4️⃣ VIRAL BY DESIGN</p>
+                            <p className="text-white mb-1">P2P mesh = share by proximity (tap phones)</p>
+                            <p className="text-white mb-1">→ One student in lecture hall → whole room in 5 mins</p>
+                            <p className="text-white mb-1">→ Works offline = spreads IN lecture halls</p>
+                            <p className="text-white mb-1">→ No login, no forms, instant value</p>
+                            <p className="text-red-400 font-bold mt-2">Fastest student network spread in history (physics guarantee)</p>
+                        </div>
+
+                        <div className="bg-gradient-to-r from-pink-500/20 to-purple-500/20 border-2 border-pink-500 rounded-lg p-4">
+                            <p className="text-pink-400 font-bold mb-2">5️⃣ AI + HUMAN = UNSTOPPABLE COMBO</p>
+                            <p className="text-white mb-1">AI: Instant busywork (Excel, essays, formatting)</p>
+                            <p className="text-white mb-1">Humans: Real understanding ("here's how I think about it")</p>
+                            <p className="text-white mb-1">→ AI can't replace humans for deep learning</p>
+                            <p className="text-white mb-1">→ Humans can't match AI speed for busywork</p>
+                            <p className="text-purple-400 font-bold mt-2">Together = perfect learning system</p>
+                        </div>
+
+                        <div className="bg-gradient-to-r from-cyan-500/20 to-green-500/20 border-2 border-cyan-500 rounded-lg p-4">
+                            <p className="text-cyan-400 font-bold mb-2">6️⃣ CIRCULAR LOVE ECONOMY</p>
+                            <p className="text-white mb-1">Students don't pay → businesses do (restaurants, brands)</p>
+                            <p className="text-white mb-1">Why businesses pay: Reach 235M students direct (no ads)</p>
+                            <p className="text-white mb-1">→ Restaurant pays £200/year, saves £5,640 in extraction</p>
+                            <p className="text-white mb-1">→ Students free forever + save £717B extraction</p>
+                            <p className="text-green-400 font-bold mt-2">Everyone wins. Zero extraction. Sustainable forever ♾️❤️♾️</p>
+                        </div>
+
+                        <div className="bg-black border-2 border-green-500 rounded-lg p-4">
+                            <p className="text-green-400 font-bold mb-2">🎯 WHAT'S DIFFERENT FROM OTHER "STUDENT APPS":</p>
+                            <p className="text-white mb-1">❌ Others: Need internet, sell data, charge students</p>
+                            <p className="text-white mb-1">✓ Prof51: Offline-first, encrypted, free forever</p>
+                            <p className="text-white mb-1">❌ Others: Centralized (can be shut down)</p>
+                            <p className="text-white mb-1">✓ Prof51: P2P mesh (physically impossible to stop)</p>
+                            <p className="text-white mb-1">❌ Others: Local to one uni/country</p>
+                            <p className="text-white mb-1">✓ Prof51: Global from day 1 (any student anywhere)</p>
+                            <p className="text-green-400 font-bold mt-2">It's not an app. It's a global movement with tech to match.</p>
+                        </div>
                     </div>
                 </div>
 
