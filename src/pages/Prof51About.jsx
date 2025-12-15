@@ -350,14 +350,57 @@ export default function Prof51About() {
                             </div>
 
                             <div className="space-y-3">
+                                <div className="bg-gradient-to-r from-cyan-500/20 to-purple-500/20 border-4 border-cyan-500 rounded-xl p-4" style={{ boxShadow: '0 0 40px rgba(6, 182, 212, 0.5)' }}>
+                                    <p className="text-cyan-400 font-black text-base mb-3 text-center">🎯 WHAT BUSINESSES GET</p>
+                                    
+                                    <div className="bg-black border-2 border-green-500 rounded-lg p-3 mb-3">
+                                        <p className="text-green-400 font-bold text-xs mb-2">1️⃣ VERIFIED DIRECTORY LISTING</p>
+                                        <p className="text-white text-xs mb-1">→ Name, address, phone, menu/services</p>
+                                        <p className="text-white text-xs mb-1">→ Student ratings + reviews (builds trust)</p>
+                                        <p className="text-white text-xs mb-1">→ Special student offers (optional)</p>
+                                        <p className="text-cyan-400 text-xs font-bold">Clean, simple, no ads, no spam ✓</p>
+                                    </div>
+
+                                    <div className="bg-black border-2 border-purple-500 rounded-lg p-3 mb-3">
+                                        <p className="text-purple-400 font-bold text-xs mb-2">2️⃣ DIRECT STUDENT CALLS</p>
+                                        <p className="text-white text-xs mb-1">→ Students call YOU direct (not through platform)</p>
+                                        <p className="text-white text-xs mb-1">→ You keep 100% of money (no commission fees)</p>
+                                        <p className="text-white text-xs mb-1">→ Prof51 never touches the transaction</p>
+                                        <p className="text-purple-400 text-xs font-bold">Real customers. Real revenue. Zero middleman. ✓</p>
+                                    </div>
+
+                                    <div className="bg-black border-2 border-pink-500 rounded-lg p-3 mb-3">
+                                        <p className="text-pink-400 font-bold text-xs mb-2">3️⃣ MASSIVE COST SAVINGS</p>
+                                        <p className="text-white text-xs mb-1">Restaurant saves vs Just Eat/Deliveroo:</p>
+                                        <p className="text-gray-300 text-xs mb-1">→ Just Eat takes 29% per order = £5,640/year</p>
+                                        <p className="text-gray-300 text-xs mb-1">→ Prof51 = £200/year flat (no commissions)</p>
+                                        <p className="text-green-400 text-xs font-bold">= £5,440/year SAVED per location ✓</p>
+                                    </div>
+
+                                    <div className="bg-black border-2 border-amber-500 rounded-lg p-3 mb-3">
+                                        <p className="text-amber-400 font-bold text-xs mb-2">4️⃣ QUALIFIED STUDENT AUDIENCE</p>
+                                        <p className="text-white text-xs mb-1">→ Students CHOOSE to see your category</p>
+                                        <p className="text-white text-xs mb-1">→ "Show me: Food" = they want restaurants</p>
+                                        <p className="text-white text-xs mb-1">→ Not random ads, targeted by CHOICE</p>
+                                        <p className="text-amber-400 text-xs font-bold">Better conversion than any ad platform ✓</p>
+                                    </div>
+
+                                    <div className="bg-black border-2 border-cyan-500 rounded-lg p-3">
+                                        <p className="text-cyan-400 font-bold text-xs mb-2">5️⃣ COMMUNITY VERIFICATION</p>
+                                        <p className="text-white text-xs mb-1">→ Good service = students rate you high = more visibility</p>
+                                        <p className="text-white text-xs mb-1">→ Students share: "This place is actually sick"</p>
+                                        <p className="text-white text-xs mb-1">→ Word-of-mouth = most powerful marketing</p>
+                                        <p className="text-cyan-400 text-xs font-bold">Trust built naturally through community ✓</p>
+                                    </div>
+                                </div>
+
                                 <div className="bg-black border-2 border-green-500 rounded-lg p-4">
-                                    <p className="text-green-400 font-bold text-sm mb-2">✓ BUSINESSES PAY FOR ACCESS (NOT DATA)</p>
-                                    <p className="text-white text-xs mb-1">Restaurant pays Prof51 £200/year to be in directory</p>
-                                    <p className="text-gray-300 text-xs mb-1">→ Students see: name, menu, phone number</p>
-                                    <p className="text-gray-300 text-xs mb-1">→ Students call DIRECT (save money, restaurant keeps full revenue)</p>
-                                    <p className="text-gray-300 text-xs mb-1">→ Prof51 NEVER sees the transaction</p>
-                                    <p className="text-gray-300 text-xs mb-1">→ No tracking, no data harvesting, no selling student behavior</p>
-                                    <p className="text-cyan-400 font-bold text-xs mt-2">Business pays for PERMISSION to be seen. That's it. ✓</p>
+                                    <p className="text-green-400 font-bold text-sm mb-2">✓ WHAT BUSINESSES DON'T GET (PROTECTING STUDENTS)</p>
+                                    <p className="text-red-400 text-xs mb-1">❌ Student data (names, emails, behavior)</p>
+                                    <p className="text-red-400 text-xs mb-1">❌ Transaction tracking (what they ordered, when, how much)</p>
+                                    <p className="text-red-400 text-xs mb-1">❌ Advertising space (no ads, ever)</p>
+                                    <p className="text-red-400 text-xs mb-1">❌ Ability to message students directly</p>
+                                    <p className="text-white text-xs font-bold mt-2">Just a listing. Students control everything. ✓</p>
                                 </div>
 
                                 <div className="bg-black border-2 border-purple-500 rounded-lg p-4">
