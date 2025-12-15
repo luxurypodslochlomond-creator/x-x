@@ -196,41 +196,39 @@ export default function Prof51About() {
                             <p className="text-purple-400 font-bold text-xs mt-2">Students helping students. Zero extraction. ✓</p>
 
                             <div className="bg-black border-2 border-green-500 rounded-lg p-3 mt-3">
-                                <p className="text-green-400 font-bold text-xs mb-2">✓ 100% LEGAL:</p>
+                                <p className="text-green-400 font-bold text-xs mb-2">✓ 100% LEGAL (SMART THIS TIME):</p>
                                 <p className="text-white text-xs mb-1">→ Students OWN their physical books</p>
                                 <p className="text-white text-xs mb-1">→ Selling/swapping YOUR book = totally legal (like any marketplace)</p>
-                                <p className="text-white text-xs mb-1">→ NOT piracy, NOT illegal downloads, NOT Aaron Swartz situation</p>
-                                <p className="text-cyan-400 text-xs font-bold mt-2">P2P physical book exchange = same as selling to a mate. Legal AF. ✓</p>
+                                <p className="text-white text-xs mb-1">→ Share notes YOU created = legal</p>
+                                <p className="text-white text-xs mb-1">→ Help each other learn = always been legal</p>
+                                <p className="text-white text-xs mb-1">→ NOT piracy, NOT illegal downloads</p>
+                                <p className="text-cyan-400 text-xs font-bold mt-2">Free knowledge vision = ACHIEVED. Done the RIGHT way. ✓</p>
                             </div>
 
-                            <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-4 border-purple-500 rounded-lg p-4 mt-3" style={{ boxShadow: '0 0 30px rgba(168, 85, 247, 0.4)' }}>
-                                <div className="flex items-center gap-2 mb-2">
-                                    <Heart className="w-5 h-5 text-purple-400 animate-pulse" />
-                                    <p className="text-purple-400 font-black text-xs">💜 FOR AARON SWARTZ</p>
-                                </div>
-                                <p className="text-white text-xs mb-2">Aaron tried to free knowledge. They destroyed him for it.</p>
-                                <p className="text-gray-300 text-xs mb-3">He downloaded academic papers from JSTOR (illegal) → Federal prosecution → Suicide at 26.</p>
+                            <div className="bg-gradient-to-r from-purple-500/20 to-cyan-500/20 border-4 border-purple-500 rounded-lg p-4 mt-3" style={{ boxShadow: '0 0 30px rgba(168, 85, 247, 0.4)' }}>
+                                <p className="text-purple-400 font-black text-xs mb-2">💡 THE COOLASFUCK INNOVATION:</p>
+                                <p className="text-white text-xs mb-2">Best ideas from pioneers → Applied legally through P2P mesh</p>
 
                                 <div className="bg-black border-2 border-cyan-500 rounded p-3 mb-2">
-                                    <p className="text-cyan-400 font-bold text-xs mb-1">HIS VISION WAS RIGHT:</p>
-                                    <p className="text-white text-xs mb-1">"Knowledge should be free"</p>
-                                    <p className="text-white text-xs mb-1">"Students shouldn't pay £717B to corporations"</p>
-                                    <p className="text-white text-xs mb-1">"Sharing information = human right"</p>
+                                    <p className="text-cyan-400 font-bold text-xs mb-1">✓ FREE KNOWLEDGE SHARING:</p>
+                                    <p className="text-white text-xs mb-1">→ Students help students learn (P2P encrypted mesh)</p>
+                                    <p className="text-white text-xs mb-1">→ Past papers shared globally (students created = legal)</p>
+                                    <p className="text-white text-xs mb-1">→ 24/7 global study help (time zones = always someone awake)</p>
                                 </div>
 
                                 <div className="bg-black border-2 border-green-500 rounded p-3 mb-2">
-                                    <p className="text-green-400 font-bold text-xs mb-1">✓ PROF51 = HIS VISION, DONE LEGALLY:</p>
-                                    <p className="text-white text-xs mb-1">→ Students share THEIR notes (they created = legal)</p>
-                                    <p className="text-white text-xs mb-1">→ Swap THEIR books (they own = legal)</p>
-                                    <p className="text-white text-xs mb-1">→ Help each other learn P2P (always been legal)</p>
-                                    <p className="text-white text-xs mb-1">→ AI tutoring = free access to knowledge</p>
+                                    <p className="text-green-400 font-bold text-xs mb-1">✓ P2P MARKETPLACE (NO MIDDLEMAN):</p>
+                                    <p className="text-white text-xs mb-1">→ Student-to-student direct (books, notes, tutoring)</p>
+                                    <p className="text-white text-xs mb-1">→ Zero platform fees (physical exchange P2P)</p>
+                                    <p className="text-white text-xs mb-1">→ Encrypted communication (privacy protected)</p>
                                 </div>
 
                                 <div className="bg-black border-2 border-pink-500 rounded p-3">
-                                    <p className="text-pink-400 font-bold text-xs mb-1">THE DIFFERENCE:</p>
-                                    <p className="text-white text-xs mb-1">Aaron: Attacked the system directly (they killed him for it)</p>
-                                    <p className="text-green-400 text-xs font-bold mb-2">Prof51: Build NEW system students prefer (can't stop physics)</p>
-                                    <p className="text-cyan-400 text-xs text-center mt-2">Same goal. Different path. This time we WIN. ♾️❤️♾️</p>
+                                    <p className="text-pink-400 font-bold text-xs mb-1">✓ UNSTOPPABLE BY DESIGN:</p>
+                                    <p className="text-white text-xs mb-1">→ Works offline (can't shut down internet to stop it)</p>
+                                    <p className="text-white text-xs mb-1">→ Device-to-device (no servers to raid)</p>
+                                    <p className="text-white text-xs mb-1">→ 100% legal (nothing to prosecute)</p>
+                                    <p className="text-cyan-400 text-xs font-bold text-center mt-2">Good ideas FINALLY winning. Done right this time. ♾️❤️♾️</p>
                                 </div>
                             </div>
                         </div>
