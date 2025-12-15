@@ -83,9 +83,14 @@ export default function Prof51Tools() {
                             <p className="text-cyan-400 text-[10px] font-mono font-black">STUDENT CO-MANAGER</p>
                         </div>
                     </div>
-                    <Link to={createPageUrl('Prof51About')} className="bg-cyan-500 text-black px-3 py-2 rounded-lg text-xs font-mono font-black border-2 border-white" style={{ boxShadow: '2px 2px 0 rgba(6, 182, 212, 0.4)' }}>
-                        ABOUT
-                    </Link>
+                    <div className="flex gap-2">
+                        <Link to={createPageUrl('Prof51About')} className="bg-cyan-500 text-black px-3 py-2 rounded-lg text-xs font-mono font-black border-2 border-white" style={{ boxShadow: '2px 2px 0 rgba(6, 182, 212, 0.4)' }}>
+                            ABOUT
+                        </Link>
+                        <Link to={createPageUrl('Prof51ZeroServerArchitecture')} className="bg-white text-cyan-500 px-3 py-2 rounded-lg text-xs font-mono font-black border-2 border-cyan-500" style={{ boxShadow: '2px 2px 0 rgba(6, 182, 212, 0.4)' }}>
+                            📄 TECH
+                        </Link>
+                    </div>
                 </div>
             </div>
 
