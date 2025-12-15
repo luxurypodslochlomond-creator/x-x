@@ -19,6 +19,36 @@ import { createPageUrl } from '@/utils';
 export default function Prof51() {
     const [activeTab, setActiveTab] = useState('edinburgh');
 
+    // SEO + Social Share Meta Tags
+    React.useEffect(() => {
+        document.title = 'PROF51 - AI Co-Manager for Students | Free Forever';
+        
+        const metaTags = [
+            { property: 'og:title', content: 'PROF51 - AI Co-Manager for Students' },
+            { property: 'og:description', content: 'AI handles busywork, you focus on learning. FREE forever. P2P mesh. Offline-first. Students help students earn $P51. 235M students worldwide. ♾️❤️♾️' },
+            { property: 'og:type', content: 'website' },
+            { property: 'og:url', content: window.location.href },
+            { property: 'og:image', content: window.location.origin + '/prof51-share.png' },
+            { name: 'twitter:card', content: 'summary_large_image' },
+            { name: 'twitter:title', content: 'PROF51 - AI Co-Manager for Students' },
+            { name: 'twitter:description', content: 'AI handles busywork • You focus on learning • FREE forever • P2P mesh • Works offline • Student economy ♾️❤️♾️' },
+            { name: 'twitter:image', content: window.location.origin + '/prof51-share.png' },
+            { name: 'description', content: 'PROF51: AI co-manager for students. Free forever. Import any file, AI transforms it. P2P mesh works offline. Students help each other, earn $P51. Archie\'s company. 235M students worldwide.' },
+        ];
+
+        metaTags.forEach(({ property, name, content }) => {
+            const attr = property ? 'property' : 'name';
+            const attrValue = property || name;
+            let meta = document.querySelector(`meta[${attr}="${attrValue}"]`);
+            if (!meta) {
+                meta = document.createElement('meta');
+                meta.setAttribute(attr, attrValue);
+                document.head.appendChild(meta);
+            }
+            meta.setAttribute('content', content);
+        });
+    }, []);
+
     return (
         <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black p-4 pb-32">
             
