@@ -15,7 +15,7 @@ import { useMutation } from '@tanstack/react-query';
  * AI handles busywork, students focus on learning
  * FREE. P2P. Offline-first. $P51 student economy.
  * 
- * START: Archie's Economics cohort at Edinburgh
+ * START: Economics cohort at Edinburgh
  * SCALE: Edinburgh → Cambridge → MIT → world
  */
 
@@ -95,7 +95,7 @@ Return CLEAN, FORMATTED content ready to use. Be helpful, not generic.`,
             { name: 'twitter:title', content: 'PROF51 - AI Co-Manager for Students' },
             { name: 'twitter:description', content: 'Your most intelligent mate • Studies • Accommodation • Gigs • Fashion • Social • P2P network • Fuck Facebook/LinkedIn • FREE forever ♾️❤️♾️' },
             { name: 'twitter:image', content: window.location.origin + '/prof51-share.png' },
-            { name: 'description', content: 'PROF51: Your most intelligent mate in the universe. Handles studies, mindset, accommodation, gigs, fashion, social life. P2P student network that actually helps. Zero isolation. Fuck Facebook/LinkedIn. Free forever. Archie\'s company.' },
+            { name: 'description', content: 'PROF51: Your most intelligent mate in the universe. Handles studies, mindset, accommodation, gigs, fashion, social life. P2P student network that actually helps. Zero isolation. Fuck Facebook/LinkedIn. Free forever.' },
         ];
 
         metaTags.forEach(({ property, name, content }) => {
@@ -135,7 +135,7 @@ Return CLEAN, FORMATTED content ready to use. Be helpful, not generic.`,
                     <motion.button
                         whileTap={{ scale: 0.9 }}
                         onClick={async () => {
-                            const shareMsg = `🎓 PROF51 - AI Co-Manager for Students\n\nFOUNDER: Archie (19, Economics @ Edinburgh)\nVISION: Lennox (10, spotted £717B extraction)\n\n✓ AI handles ALL busywork\n✓ Works OFFLINE\n✓ FREE FOREVER\n\n→ ${window.location.origin}${createPageUrl('Prof51')}\n\n♾️❤️♾️`;
+                            const shareMsg = `🎓 PROF51 - AI Co-Manager for Students\n\n✓ AI handles ALL busywork\n✓ Works OFFLINE\n✓ FREE FOREVER\n✓ P2P student network\n✓ £717B extraction stopped\n\n→ ${window.location.origin}${createPageUrl('Prof51')}\n\n♾️❤️♾️`;
                             try {
                                 if (navigator.share) {
                                     await navigator.share({ title: 'PROF51', text: shareMsg });
@@ -322,13 +322,9 @@ Return CLEAN, FORMATTED content ready to use. Be helpful, not generic.`,
                         £717B
                     </motion.p>
                     <p className="text-white text-base font-bold mb-2">Extracted from students globally</p>
-                    <div className="flex items-center justify-center gap-2 text-xs font-mono">
-                        <LennoxIcon8Bit size={20} animate={true} />
-                        <p className="text-pink-400 font-bold">Lennox (10) spotted it</p>
-                    </div>
-                    <div className="flex items-center justify-center gap-2 text-xs font-mono mt-1">
+                    <div className="flex items-center justify-center gap-2 text-xs font-mono mt-2">
                         <Prof51Icon8Bit size={20} animate={true} />
-                        <p className="text-cyan-400 font-bold">Archie (19) stops it ♾️❤️♾️</p>
+                        <p className="text-cyan-400 font-bold">Prof51 stops it ♾️❤️♾️</p>
                     </div>
                 </motion.div>
 
@@ -380,7 +376,7 @@ Return CLEAN, FORMATTED content ready to use. Be helpful, not generic.`,
                 <div className="flex items-center gap-3 mb-4">
                     <DollarSign className="w-12 h-12 text-red-400" />
                     <div>
-                        <h2 className="text-red-400 font-black text-xl font-mono">LENNOX SPOTTED THE PARASITE</h2>
+                        <h2 className="text-red-400 font-black text-xl font-mono">THE EXTRACTION PROBLEM</h2>
                         <p className="text-gray-400 text-xs font-mono">Just Eat extraction = Why Prof51 exists</p>
                     </div>
                 </div>
@@ -397,7 +393,7 @@ Return CLEAN, FORMATTED content ready to use. Be helpful, not generic.`,
                     </div>
 
                     <div className="bg-black border-2 border-green-500 p-4 rounded">
-                        <p className="text-green-400 font-bold mb-2">LENNOX'S WAY (FUCK THE SYSTEM):</p>
+                        <p className="text-green-400 font-bold mb-2">THE SOLUTION (FUCK THE SYSTEM):</p>
                         <p className="text-white text-xs mb-1">Call restaurant direct</p>
                         <p className="text-white text-xs mb-1">Pay cash: £30</p>
                         <p className="text-white text-xs mb-1">Keep change or tip driver</p>
@@ -455,7 +451,7 @@ Return CLEAN, FORMATTED content ready to use. Be helpful, not generic.`,
                     </div>
 
                     <div className="bg-black border border-red-500/30 p-3 rounded">
-                        <p className="text-white font-bold mb-2">ARCHIE'S EXPERIENCE (Edinburgh Economics):</p>
+                        <p className="text-white font-bold mb-2">REAL STUDENT EXPERIENCE (Edinburgh Economics):</p>
                         <p className="text-gray-400 text-xs">"Half my time is formatting Excel models, not learning economics. Plus I'm stressed about rent and don't know where anything cool is happening. I just want a mate who gets it all."</p>
                     </div>
                 </div>
@@ -784,7 +780,7 @@ Return CLEAN, FORMATTED content ready to use. Be helpful, not generic.`,
 
                             <div className="bg-gradient-to-r from-amber-500/20 to-pink-500/20 border-2 border-amber-500 p-4 rounded">
                                 <p className="text-amber-400 font-bold mb-2">THE SPREAD:</p>
-                                <p className="text-white text-xs mb-1">Week 1: Archie + 5 friends</p>
+                                <p className="text-white text-xs mb-1">Week 1: Founder + 5 friends</p>
                                 <p className="text-white text-xs mb-1">Week 4: 50 Economics students</p>
                                 <p className="text-white text-xs mb-1">Week 8: 200 students (other courses)</p>
                                 <p className="text-white text-xs mb-1">Month 6: All Edinburgh (30,000 students)</p>
@@ -860,7 +856,7 @@ Return CLEAN, FORMATTED content ready to use. Be helpful, not generic.`,
 
                                 <div className="bg-gradient-to-r from-amber-500/20 to-pink-500/20 border-2 border-amber-500 p-4 rounded">
                                     <p className="text-amber-400 font-bold mb-2">THE SPREAD:</p>
-                                    <p className="text-white text-xs mb-1">Week 1: Archie + 5 friends</p>
+                                    <p className="text-white text-xs mb-1">Week 1: Founder + 5 friends</p>
                                     <p className="text-white text-xs mb-1">Week 4: 50 Economics students</p>
                                     <p className="text-white text-xs mb-1">Week 8: 200 students (other courses)</p>
                                     <p className="text-white text-xs mb-1">Month 6: All Edinburgh (30,000 students)</p>
@@ -869,29 +865,29 @@ Return CLEAN, FORMATTED content ready to use. Be helpful, not generic.`,
                             </div>
                         </div>
 
-                        {/* ARCHIE = YOUR BROTHER */}
+                        {/* ETHICAL FOUNDATION */}
                         <div className="bg-gradient-to-r from-amber-500/20 to-purple-500/20 border-4 border-amber-500 p-6 rounded-xl" style={{ boxShadow: '0 0 50px rgba(245, 158, 11, 0.5)' }}>
                             <div className="flex items-center gap-3 mb-4">
                                 <Heart className="w-12 h-12 text-amber-400" />
                                 <div>
-                                    <p className="text-amber-400 font-black text-xl font-mono">ARCHIE = YOUR BROTHER</p>
-                                    <p className="text-gray-400 text-xs font-mono">Economics student → TechForGood Founder</p>
+                                    <p className="text-amber-400 font-black text-xl font-mono">BUILT BY STUDENTS, FOR STUDENTS</p>
+                                    <p className="text-gray-400 text-xs font-mono">Economics background → TechForGood Vision</p>
                                 </div>
                             </div>
                             
                             <div className="space-y-3 text-sm font-mono">
                                 <div className="bg-black border border-amber-500/30 p-3 rounded">
-                                    <p className="text-white font-bold mb-2">WHY ARCHIE IS PERFECT:</p>
-                                    <p className="text-gray-300 text-xs mb-1">✓ Great boy who wants real success (not extraction)</p>
-                                    <p className="text-gray-300 text-xs mb-1">✓ Economics student = understands ethical business</p>
+                                    <p className="text-white font-bold mb-2">WHY THIS APPROACH WORKS:</p>
+                                    <p className="text-gray-300 text-xs mb-1">✓ Founded by someone who wants real success (not extraction)</p>
+                                    <p className="text-gray-300 text-xs mb-1">✓ Economics background = understands ethical business</p>
                                     <p className="text-gray-300 text-xs mb-1">✓ Edinburgh student = knows the student struggle</p>
-                                    <p className="text-gray-300 text-xs mb-1">✓ Named after Archie Gemmill = fearless energy ⚽</p>
-                                    <p className="text-gray-300 text-xs">✓ Gen Z = students will trust him (he's one of them)</p>
+                                    <p className="text-gray-300 text-xs mb-1">✓ Fearless energy meets practical innovation</p>
+                                    <p className="text-gray-300 text-xs">✓ Gen Z founder = students trust the vision</p>
                                 </div>
 
                                 <div className="bg-black border border-green-500/30 p-3 rounded">
                                     <p className="text-green-400 font-bold mb-2">LEARNING ETHICAL SUCCESS:</p>
-                                    <p className="text-white text-xs mb-1">Archie learns: Build UP people, don't extract FROM them</p>
+                                    <p className="text-white text-xs mb-1">Core principle: Build UP people, don't extract FROM them</p>
                                     <p className="text-cyan-400 text-xs mb-1">Companies pay Prof51 → Students get tools + deals for FREE</p>
                                     <p className="text-pink-400 text-xs mb-1">No ads. No data selling. No extraction. Just win-win.</p>
                                     <p className="text-amber-400 text-xs font-bold mt-2">Real business + Real ethics = Real success ♾️❤️♾️</p>
@@ -907,31 +903,31 @@ Return CLEAN, FORMATTED content ready to use. Be helpful, not generic.`,
                                 </div>
 
                                 <div className="bg-black border border-purple-500/30 p-3 rounded">
-                                    <p className="text-purple-400 font-bold mb-2">MAKES HIM PROUD:</p>
+                                    <p className="text-purple-400 font-bold mb-2">MAKES FOUNDERS PROUD:</p>
                                     <p className="text-white text-xs mb-1">Not "got rich exploiting students"</p>
                                     <p className="text-white text-xs mb-1">But "helped millions of students rise"</p>
-                                    <p className="text-cyan-400 text-xs mb-2 mt-2">→ Students message him: "You changed my life"</p>
-                                    <p className="text-green-400 text-xs mb-1">→ Parents thank him: "My kid graduated debt-free"</p>
+                                    <p className="text-cyan-400 text-xs mb-2 mt-2">→ Students message: "You changed my life"</p>
+                                    <p className="text-green-400 text-xs mb-1">→ Parents thank us: "My kid graduated debt-free"</p>
                                     <p className="text-pink-400 text-xs mb-1">→ Unis partner: "Best student outcomes in history"</p>
                                     <p className="text-amber-400 text-xs font-bold mt-2">Success through LIFTING people. That's what makes you proud. ♾️❤️♾️</p>
                                 </div>
 
                                 <div className="bg-black border border-green-500/30 p-3 rounded">
-                                    <p className="text-green-400 font-bold mb-2">HIS OWN COMPANY:</p>
-                                    <p className="text-white text-xs mb-1">prof51.io = Archie's independent company</p>
-                                    <p className="text-cyan-400 text-xs mb-1">→ He owns it. He runs it. His vision.</p>
-                                    <p className="text-pink-400 text-xs mb-1">→ UF51 Family support (but it's HIS)</p>
+                                    <p className="text-green-400 font-bold mb-2">INDEPENDENT OPERATION:</p>
+                                    <p className="text-white text-xs mb-1">prof51.io = Independent student-led company</p>
+                                    <p className="text-cyan-400 text-xs mb-1">→ Student-owned. Student-run. Student vision.</p>
+                                    <p className="text-pink-400 text-xs mb-1">→ UF51 Family support (but independently operated)</p>
                                     <p className="text-amber-400 text-xs mb-2 mt-2">→ Grants go to Prof51 (separate from UF51 CIC)</p>
-                                    <p className="text-green-400 text-xs font-bold">Independent founder. Connected family. Best of both. ♾️❤️♾️</p>
+                                    <p className="text-green-400 text-xs font-bold">Independent vision. Connected family. Best of both. ♾️❤️♾️</p>
                                 </div>
 
                                 <div className="bg-black border border-purple-500/30 p-3 rounded">
-                                    <p className="text-purple-400 font-bold mb-2">THE PATH (LEARNING AS HE GOES):</p>
-                                    <p className="text-white text-xs mb-1">Year 1: Campus lead (learns what students actually need)</p>
-                                    <p className="text-white text-xs mb-1">Year 2: Head of Growth (learns ethical scaling)</p>
-                                    <p className="text-white text-xs mb-1">Year 3: Founder building Prof51 globally</p>
+                                    <p className="text-purple-400 font-bold mb-2">THE PATH (LEARNING AS WE GO):</p>
+                                    <p className="text-white text-xs mb-1">Year 1: Campus launch (learn what students actually need)</p>
+                                    <p className="text-white text-xs mb-1">Year 2: Growth phase (learn ethical scaling)</p>
+                                    <p className="text-white text-xs mb-1">Year 3: Global expansion (building Prof51 worldwide)</p>
                                     <p className="text-white text-xs mb-1">Year 4: 10M students helped, not extracted</p>
-                                    <p className="text-cyan-400 text-xs font-bold mt-2">Building while learning. Real education. Makes Dad proud. ✓</p>
+                                    <p className="text-cyan-400 text-xs font-bold mt-2">Building while learning. Real education. Making families proud. ✓</p>
                                 </div>
                             </div>
                         </div>
@@ -1010,7 +1006,7 @@ Return CLEAN, FORMATTED content ready to use. Be helpful, not generic.`,
                             
                             <div className="space-y-2 text-xs font-mono">
                                 <div className="bg-cyan-900/20 border border-cyan-500/30 p-2 rounded">
-                                    <p className="text-white font-bold">Week 1: Archie + 5 friends</p>
+                                    <p className="text-white font-bold">Week 1: Founder + 5 friends</p>
                                 </div>
                                 <div className="bg-cyan-900/20 border border-cyan-500/30 p-2 rounded">
                                     <p className="text-white font-bold">Week 4: 50 Economics students</p>
