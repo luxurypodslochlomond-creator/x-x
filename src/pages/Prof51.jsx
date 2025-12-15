@@ -670,14 +670,14 @@ Return CLEAN, FORMATTED content ready to use. Be helpful, not generic.`,
                         <p className="text-amber-400 text-xs mb-1">✓ Quantum-resistant encryption → Secure as fuck</p>
                         <p className="text-green-400 text-xs font-bold mt-2">China, Iran, Russia → Students can't be blocked ♾️❤️♾️</p>
                         <Link to={createPageUrl('Prof51ZeroServerArchitecture')} className="block mt-3">
-                            <motion.button
-                                whileHover={{ scale: 1.02 }}
-                                whileTap={{ scale: 0.98 }}
-                                className="w-full bg-gradient-to-r from-cyan-500 to-purple-500 text-white font-bold py-2 rounded-lg text-xs"
-                            >
-                                → HOW IT WORKS (TECHNICAL)
-                            </motion.button>
-                        </Link>
+                                <motion.button
+                                    whileHover={{ scale: 1.02 }}
+                                    whileTap={{ scale: 0.98 }}
+                                    className="w-full bg-gradient-to-r from-cyan-500 to-purple-500 text-white font-bold py-2 rounded-lg text-xs"
+                                >
+                                    📄 READ TECHNICAL WHITEPAPER
+                                </motion.button>
+                            </Link>
                     </div>
 
                     <div className="bg-black border border-pink-500/30 p-3 rounded">

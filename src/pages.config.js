@@ -235,6 +235,7 @@ import Prof51Tools from './pages/Prof51Tools';
 import Prof51About from './pages/Prof51About';
 import ScottAbout from './pages/ScottAbout';
 import Prof51ZeroServerArchitecture from './pages/Prof51ZeroServerArchitecture';
+import ScottZeroServerArchitecture from './pages/ScottZeroServerArchitecture';
 import __Layout from './Layout.jsx';
 
 
@@ -476,6 +477,7 @@ export const PAGES = {
     "Prof51About": Prof51About,
     "ScottAbout": ScottAbout,
     "Prof51ZeroServerArchitecture": Prof51ZeroServerArchitecture,
+    "ScottZeroServerArchitecture": ScottZeroServerArchitecture,
 }
 
 export const pagesConfig = {
