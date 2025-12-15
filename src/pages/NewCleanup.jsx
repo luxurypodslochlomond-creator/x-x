@@ -69,7 +69,7 @@ export default function NewCleanupPage() {
         checkAuth();
     }, []);
 
-    const { data: recentActivity = [] } = useQuery({
+    const { data: recentActivity = [], isLoading: activityLoading } = useQuery({
         queryKey: ['recentActivity'],
         queryFn: async () => {
             try {
@@ -94,7 +94,9 @@ export default function NewCleanupPage() {
         },
         enabled: isAuthenticated && navigator.onLine,
         retry: false,
-        staleTime: 5 * 60 * 1000
+        staleTime: 5 * 60 * 1000,
+        refetchOnWindowFocus: false,
+        refetchOnMount: false
     });
 
     const createCleanupMutation = useMutation({
