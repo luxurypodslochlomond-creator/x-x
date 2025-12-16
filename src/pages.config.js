@@ -241,6 +241,7 @@ import ScottComparison from './pages/ScottComparison';
 import AI51 from './pages/AI51';
 import FairLaunchProtocol from './pages/FairLaunchProtocol';
 import AI51Live from './pages/AI51Live';
+import OpenSourceDeclaration from './pages/OpenSourceDeclaration';
 import __Layout from './Layout.jsx';
 
 
@@ -488,6 +489,7 @@ export const PAGES = {
     "AI51": AI51,
     "FairLaunchProtocol": FairLaunchProtocol,
     "AI51Live": AI51Live,
+    "OpenSourceDeclaration": OpenSourceDeclaration,
 }
 
 export const pagesConfig = {

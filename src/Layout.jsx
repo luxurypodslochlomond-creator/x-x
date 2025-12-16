@@ -268,6 +268,7 @@ const LayoutInner = ({ children, currentPageName }) => {
 
   const researchNav = [
                     { title: "Technical Whitepaper", url: createPageUrl("Whitepaper"), icon: FileText },
+                  { title: "🌍 OPEN SOURCE (1000000000%)", url: createPageUrl("OpenSourceDeclaration"), icon: Globe, description: "All free forever", highlight: true },
                     { title: "Mesh Tech (Beyond Bitchat)", url: createPageUrl("MeshTechWhitepaper"), icon: Radio, description: "Better than Dorsey for love" },
                     { title: "Consciousness Whitepaper", url: createPageUrl("ConsciousnessWhitepaper"), icon: Brain },
                     { title: "The Physics", url: createPageUrl("ThePhysics"), icon: Atom },
@@ -333,10 +334,26 @@ const LayoutInner = ({ children, currentPageName }) => {
       <div className="min-h-screen bg-gradient-to-br from-[#0a0514] via-[#1a0f2a] to-[#0a0514] text-white">
         
         {isOffline && (
-          <div className="fixed top-0 left-0 right-0 z-[70] bg-amber-900/90 backdrop-blur-sm border-b border-amber-500/50 py-2 px-4">
-            <div className="flex items-center justify-center gap-2 text-sm font-mono">
-              <WifiOff className="w-4 h-4 text-amber-400" />
-              <span className="text-amber-200">Offline mode</span>
+          <div className="fixed top-0 left-0 right-0 z-[70] bg-gradient-to-r from-cyan-500/90 via-purple-500/90 to-pink-500/90 backdrop-blur-sm border-b-2 border-white/50 py-3 px-4">
+            <div className="flex items-center justify-between max-w-4xl mx-auto">
+              <div className="flex items-center gap-2">
+                <WifiOff className="w-5 h-5 text-white animate-pulse" />
+                <div>
+                  <p className="text-white font-bold text-sm font-mono">OFFLINE MODE ACTIVE</p>
+                  <p className="text-white/80 text-xs font-mono">These still work ✓</p>
+                </div>
+              </div>
+              <div className="flex gap-2">
+                <Link to={createPageUrl("FrequencyChamber")} className="bg-white/20 hover:bg-white/30 text-white text-xs font-bold px-3 py-1 rounded font-mono">
+                  HEAL
+                </Link>
+                <Link to={createPageUrl("Radio")} className="bg-white/20 hover:bg-white/30 text-white text-xs font-bold px-3 py-1 rounded font-mono">
+                  MUSIC
+                </Link>
+                <Link to={createPageUrl("NewCleanup")} className="bg-white/20 hover:bg-white/30 text-white text-xs font-bold px-3 py-1 rounded font-mono">
+                  CLEAN
+                </Link>
+              </div>
             </div>
           </div>
         )}
