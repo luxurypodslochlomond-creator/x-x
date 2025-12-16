@@ -229,13 +229,23 @@ Keep it SHORT, practical, straight to the point. No bullshit. Real help.`,
 
 
 
-            {/* ULTRA-SIMPLE - 3 BUTTONS TOTAL */}
+            {/* ULTRA-SIMPLE - 4 BUTTONS TOTAL */}
             {!activeWorkflow && !advancedMode && (
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     className="space-y-3 mb-6"
                 >
+                    <motion.button
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        onClick={() => setActiveWorkflow('comms')}
+                        className="w-full bg-gradient-to-br from-pink-500 via-purple-500 to-pink-600 text-white font-black py-6 rounded-2xl text-xl font-mono shadow-lg"
+                        style={{ boxShadow: '0 4px 20px rgba(236, 72, 153, 0.5)' }}
+                    >
+                        💬 IN/OUT
+                    </motion.button>
+
                     <motion.button
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
@@ -277,6 +287,18 @@ Keep it SHORT, practical, straight to the point. No bullshit. Real help.`,
             )}
 
             {/* ACTIVE WORKFLOW */}
+            {activeWorkflow === 'comms' && (
+                <div className="mb-6">
+                    <ScottSimpleComms />
+                    <Button
+                        onClick={() => setActiveWorkflow(null)}
+                        className="w-full bg-gray-700 hover:bg-gray-600 font-bold mt-3"
+                    >
+                        BACK
+                    </Button>
+                </div>
+            )}
+
             {activeWorkflow === 'gig' && (
                 <div className="mb-6">
                     <ScottGigWorkflow />
