@@ -278,34 +278,43 @@ Keep it SHORT, practical, straight to the point. No bullshit. Real help.`,
                 </div>
             </Link>
 
-            {/* WORKFLOWS - SIMPLE 2 BUTTONS */}
+            {/* ULTRA-SIMPLE - 3 BUTTONS TOTAL */}
             {!activeWorkflow && !advancedMode && (
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="space-y-3 mb-6"
+                    className="space-y-4 mb-6"
                 >
                     <button
                         onClick={() => setActiveWorkflow('gig')}
-                        className="w-full bg-gradient-to-r from-amber-500 to-orange-500 border-4 border-amber-400 text-black font-black py-6 rounded-xl text-xl font-mono"
-                        style={{ boxShadow: '0 8px 30px rgba(245, 158, 11, 0.6)' }}
+                        className="w-full bg-gradient-to-r from-amber-500 to-orange-500 border-4 border-amber-400 text-black font-black py-8 rounded-xl text-2xl font-mono"
+                        style={{ boxShadow: '0 8px 40px rgba(245, 158, 11, 0.7)' }}
                     >
-                        📧 GIG EMAIL
+                        📧 GIG
                     </button>
 
                     <button
                         onClick={() => setActiveWorkflow('session')}
-                        className="w-full bg-gradient-to-r from-cyan-500 to-blue-500 border-4 border-cyan-400 text-black font-black py-6 rounded-xl text-xl font-mono"
-                        style={{ boxShadow: '0 8px 30px rgba(6, 182, 212, 0.6)' }}
+                        className="w-full bg-gradient-to-r from-cyan-500 to-blue-500 border-4 border-cyan-400 text-black font-black py-8 rounded-xl text-2xl font-mono"
+                        style={{ boxShadow: '0 8px 40px rgba(6, 182, 212, 0.7)' }}
                     >
-                        🎵 SESSION REQUEST
+                        🎵 SESSION
                     </button>
+
+                    <Link to={createPageUrl('ScottCalendar')} className="block">
+                        <button
+                            className="w-full bg-gradient-to-r from-green-500 to-emerald-500 border-4 border-green-400 text-black font-black py-8 rounded-xl text-2xl font-mono"
+                            style={{ boxShadow: '0 8px 40px rgba(34, 197, 94, 0.7)' }}
+                        >
+                            📅 CALENDAR
+                        </button>
+                    </Link>
 
                     <button
                         onClick={() => setAdvancedMode(true)}
-                        className="w-full bg-black border-2 border-gray-700 hover:border-gray-600 text-gray-400 font-bold py-3 rounded-lg text-sm font-mono"
+                        className="w-full bg-black border-2 border-gray-800 hover:border-gray-700 text-gray-500 font-bold py-3 rounded-lg text-xs font-mono mt-6"
                     >
-                        Advanced Mode →
+                        + Advanced (invoices, publishing, etc)
                     </button>
                 </motion.div>
             )}
@@ -459,48 +468,7 @@ Keep it SHORT, practical, straight to the point. No bullshit. Real help.`,
                 </div>
             </div>
 
-            {/* LIFE STATS - WHAT MATTERS */}
-            <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: 0.2 }}
-                className="grid grid-cols-3 gap-3 mb-6"
-            >
-                <div className="bg-gradient-to-br from-amber-950/30 to-black border-2 border-amber-500/50 p-4 text-center rounded-lg shadow-md">
-                    <p className="text-3xl font-black text-amber-400 mb-1 font-mono">{artists.filter(a => a.type === 'band_crew' || a.relationship === 'excellent').length}</p>
-                    <p className="text-[9px] text-gray-500 tracking-wider font-bold font-mono">FAMILY</p>
-                </div>
-                <Link to={createPageUrl('ScottCalendar')} className="w-full">
-                    <div className="bg-gradient-to-br from-cyan-950/30 to-black border-2 border-cyan-500/50 hover:border-cyan-500 p-4 text-center transition-all rounded-lg shadow-md">
-                        <p className="text-3xl font-black text-cyan-400 mb-1 font-mono">{upcomingEvents.length}</p>
-                        <p className="text-[9px] text-gray-500 tracking-wider font-bold font-mono">PLANS</p>
-                    </div>
-                </Link>
-                <div className="bg-gradient-to-br from-green-950/30 to-black border-2 border-green-500/50 p-4 text-center rounded-lg shadow-md">
-                    <p className="text-3xl font-black text-green-400 mb-1 font-mono">{artists.length}</p>
-                    <p className="text-[9px] text-gray-500 tracking-wider font-bold font-mono">PEOPLE</p>
-                </div>
-            </motion.div>
-
-
-
-            {/* SEARCH - SIMPLE */}
-            <div className="mb-6">
-                <div className="relative">
-                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-600" />
-                    <Input
-                        placeholder="Find artist..."
-                        value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                        className="pl-10 py-2 bg-black border border-gray-800 rounded-lg text-white text-sm focus:border-cyan-500 transition-all"
-                        style={{ fontFamily: 'monospace' }}
-                    />
-                </div>
-            </div>
-
-
-
-            {/* SMART ROSTER - AUTO-ORGANIZED */}
+            {/* SMART ROSTER - ADVANCED MODE ONLY */}
             <div className="space-y-6">
                 {!searchQuery ? (
                     <>
@@ -626,7 +594,7 @@ Keep it SHORT, practical, straight to the point. No bullshit. Real help.`,
                 )}
                 </div>
 
-            {/* ACTIVE DEALS & CONTRACTS */}
+            {/* ALL EXTRAS - ADVANCED MODE */}
             <div className="mb-6">
                 <h2 className="text-xs text-amber-400 font-black tracking-wider mb-3" style={{ fontFamily: 'monospace' }}>📋 ACTIVE DEALS</h2>
                 <Link to={createPageUrl('ScottPublishing')} className="block mb-2">
@@ -881,17 +849,14 @@ Keep it SHORT, practical, straight to the point. No bullshit. Real help.`,
                 </div>
             </div>
 
-            {/* FOOTER - SIMPLE */}
-            <div className="mt-12 pt-6 border-t border-gray-800 text-center mb-32">
-                <p className="text-gray-600 text-xs">CB51 • Citizen Band 51</p>
-            </div>
-
-            {/* QUICK TOOLS - ONE BUTTON */}
-            <ScottQuickTools onComplete={() => window.location.reload()} />
-
-            {/* TEAM CHAT - FLOATING (Hidden by default) */}
-
             </>
+            )}
+
+            {/* FOOTER - SIMPLE */}
+            {!advancedMode && (
+                <div className="mt-12 text-center">
+                    <p className="text-gray-700 text-xs font-mono">CB51 • 10-4 bro ♾️📻😎</p>
+                </div>
             )}
 
             </div>
