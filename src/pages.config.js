@@ -240,6 +240,7 @@ import HealingFrequencyFinder from './pages/HealingFrequencyFinder';
 import ScottComparison from './pages/ScottComparison';
 import AI51 from './pages/AI51';
 import FairLaunchProtocol from './pages/FairLaunchProtocol';
+import AI51Live from './pages/AI51Live';
 import __Layout from './Layout.jsx';
 
 
@@ -486,6 +487,7 @@ export const PAGES = {
     "ScottComparison": ScottComparison,
     "AI51": AI51,
     "FairLaunchProtocol": FairLaunchProtocol,
+    "AI51Live": AI51Live,
 }
 
 export const pagesConfig = {
