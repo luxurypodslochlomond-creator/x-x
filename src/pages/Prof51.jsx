@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
@@ -178,47 +177,56 @@ Return CLEAN, FORMATTED content ready to use. Be helpful, not generic.`,
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="space-y-4 mb-6"
+                        className="space-y-3 mb-6"
                     >
                         <Link to={createPageUrl('Prof51Tools')}>
-                            <button className="w-full bg-gradient-to-r from-green-500 to-cyan-500 border-4 border-green-400 text-black font-black py-8 rounded-xl text-2xl font-mono" style={{ boxShadow: '0 8px 40px rgba(34, 197, 94, 0.7)' }}>
+                            <motion.button
+                                whileHover={{ scale: 1.02 }}
+                                whileTap={{ scale: 0.98 }}
+                                className="w-full bg-gradient-to-br from-green-500 via-cyan-500 to-green-600 text-white font-black py-6 rounded-2xl text-xl font-mono shadow-lg"
+                                style={{ boxShadow: '0 4px 20px rgba(34, 197, 94, 0.5)' }}
+                            >
                                 🚀 9 TOOLS
-                            </button>
+                            </motion.button>
                         </Link>
 
-                        <button
+                        <motion.button
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
                             onClick={() => setActiveTab('transform')}
-                            className="w-full bg-gradient-to-r from-purple-500 to-pink-500 border-4 border-purple-400 text-black font-black py-8 rounded-xl text-2xl font-mono"
-                            style={{ boxShadow: '0 8px 40px rgba(168, 85, 247, 0.7)' }}
+                            className="w-full bg-gradient-to-br from-purple-500 via-pink-500 to-purple-600 text-white font-black py-6 rounded-2xl text-xl font-mono shadow-lg"
+                            style={{ boxShadow: '0 4px 20px rgba(168, 85, 247, 0.5)' }}
                         >
                             📄 FIX FILE
-                        </button>
+                        </motion.button>
 
-                        <button
+                        <motion.button
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
                             onClick={() => setActiveTab('lost')}
-                            className="w-full bg-gradient-to-r from-amber-500 to-orange-500 border-4 border-amber-400 text-black font-black py-8 rounded-xl text-2xl font-mono"
-                            style={{ boxShadow: '0 8px 40px rgba(245, 158, 11, 0.7)' }}
+                            className="w-full bg-gradient-to-br from-amber-500 via-orange-500 to-amber-600 text-white font-black py-6 rounded-2xl text-xl font-mono shadow-lg"
+                            style={{ boxShadow: '0 4px 20px rgba(245, 158, 11, 0.5)' }}
                         >
                             📱 LOST & FOUND
-                        </button>
+                        </motion.button>
 
                         {showInstallButton && (
                             <motion.button
                                 initial={{ opacity: 0, scale: 0.9 }}
                                 animate={{ opacity: 1, scale: 1 }}
                                 onClick={handleInstallClick}
-                                className="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white font-black py-4 rounded-xl border-2 border-purple-400 font-mono text-sm shadow-lg mt-4"
-                                style={{ boxShadow: '0 0 30px rgba(168, 85, 247, 0.4)' }}
+                                className="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white font-black py-3 rounded-xl font-mono text-sm shadow-lg mt-2"
+                                style={{ boxShadow: '0 4px 15px rgba(168, 85, 247, 0.4)' }}
                             >
-                                📱 INSTALL APP (Works Offline)
+                                📱 INSTALL APP
                             </motion.button>
                         )}
 
                         <button
                             onClick={() => setActiveTab('learn')}
-                            className="w-full bg-black border-2 border-gray-800 hover:border-gray-700 text-gray-500 font-bold py-3 rounded-lg text-xs font-mono mt-6"
+                            className="w-full bg-black/60 border border-gray-800 hover:border-gray-700 text-gray-500 hover:text-gray-400 font-bold py-3 rounded-xl text-xs font-mono mt-4 transition-all"
                         >
-                            + Learn More (£717B extraction, why it works, etc)
+                            + Learn More
                         </button>
                     </motion.div>
                 )}
