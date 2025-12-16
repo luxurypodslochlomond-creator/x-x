@@ -42,6 +42,7 @@ import ScottDecisionCenter from '@/components/scott/ScottDecisionCenter';
 import ScottEmailDrafter from '@/components/scott/ScottEmailDrafter';
 import ScottGigWorkflow from '@/components/scott/ScottGigWorkflow';
 import ScottSessionWorkflow from '@/components/scott/ScottSessionWorkflow';
+import ScottSimpleComms from '@/components/scott/ScottSimpleComms';
 
 /**
  * SCOTT'S ARTIST/CLIENT MANAGER

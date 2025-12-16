@@ -1,380 +1,439 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowLeft, Zap, Radio, Shield, Heart, Brain } from 'lucide-react';
-import { Link } from 'react-router-dom';
-import { createPageUrl } from '@/utils';
+import { Radio, Heart, Zap, Shield, Users, Globe, CheckCircle } from 'lucide-react';
+import BrosBond8Bit from '@/components/shared/BrosBond8Bit';
 
 /**
- * MESH TECH WHITEPAPER - BEYOND BITCHAT
- * Why we're BETTER than Dorsey's approach (for love, not ego)
+ * MESH TECH WHITEPAPER
  * 
- * NOT copying. SURPASSING. For the right reasons. ♾️❤️♾️
+ * UF51 P2P Mesh vs BitChat (Jack Dorsey)
+ * 
+ * HONEST COMPARISON:
+ * - Jack pioneered P2P mesh (2025)
+ * - We're building on his foundation
+ * - Our addition: LOVE-FIRST architecture
+ * 
+ * Thanking Jack = not arse licking, it's HONEST
+ * He built open source tech. We're using it. That's how open source works.
  */
 
 export default function MeshTechWhitepaper() {
     React.useEffect(() => {
-        document.title = 'Mesh Network Technical Whitepaper - Beyond Bitchat | UF51';
+        document.title = 'P2P Mesh Tech | Better Than BitChat for Love';
     }, []);
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black pb-20">
-            {/* HEADER */}
-            <div className="sticky top-0 z-50 bg-black/95 backdrop-blur-xl border-b border-cyan-500/30 px-4 py-4">
-                <div className="max-w-4xl mx-auto flex items-center justify-between">
-                    <Link to={createPageUrl('Welcome')} className="flex items-center gap-2 text-cyan-400 hover:text-cyan-300">
-                        <ArrowLeft className="w-5 h-5" />
-                        <span className="font-mono text-sm font-bold">BACK</span>
-                    </Link>
-                    <h1 className="text-white font-black text-lg">UF51 MESH NETWORK</h1>
-                </div>
-            </div>
-
-            <div className="px-4 py-8 max-w-4xl mx-auto space-y-8">
-
-                {/* HERO */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="text-center mb-12"
-                >
-                    <div className="bg-gradient-to-r from-pink-500/20 to-cyan-500/20 border-4 border-pink-500 rounded-2xl p-8 mb-6"
-                        style={{ boxShadow: '0 0 60px rgba(236, 72, 153, 0.5)' }}
+        <div className="min-h-screen bg-gradient-to-br from-black via-purple-950 to-black pb-20">
+            <div className="max-w-4xl mx-auto px-4 py-12">
+                
+                {/* HEADER */}
+                <div className="text-center mb-12">
+                    <motion.div
+                        animate={{
+                            rotate: [0, 360],
+                            scale: [1, 1.2, 1]
+                        }}
+                        transition={{
+                            duration: 3,
+                            repeat: Infinity
+                        }}
+                        className="inline-block mb-6"
                     >
-                        <h1 className="text-4xl font-black text-white mb-3">BEYOND BITCHAT</h1>
-                        <p className="text-xl text-cyan-400 font-bold mb-4">P2P Mesh Architecture for Planetary Healing</p>
-                        <p className="text-gray-300 text-sm max-w-2xl mx-auto">
-                            Inspired by Jack Dorsey's Bitchat (2025). Enhanced for consciousness, healing, and infinite love.
+                        <Radio className="w-20 h-20 text-cyan-400" />
+                    </motion.div>
+                    <h1 className="text-5xl font-black text-white font-mono mb-4">P2P MESH TECH</h1>
+                    <p className="text-xl text-cyan-400 font-bold font-mono">Better Than BitChat for Love ♾️</p>
+                    <p className="text-gray-500 text-sm font-mono mt-2">Built on Dorsey's foundation. Built for humanity.</p>
+                </div>
+
+                {/* JACK DORSEY CREDIT */}
+                <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-4 border-purple-500 rounded-2xl p-8 mb-8" style={{ boxShadow: '0 0 60px rgba(168, 85, 247, 0.4)' }}>
+                    <div className="flex items-center gap-4 mb-6">
+                        <Heart className="w-12 h-12 text-pink-400" />
+                        <div>
+                            <h2 className="text-pink-400 font-black text-2xl font-mono">CREDIT WHERE IT'S DUE</h2>
+                            <p className="text-gray-400 text-xs font-mono">Jack Dorsey pioneered this. We're building on his work.</p>
+                        </div>
+                    </div>
+
+                    <div className="space-y-4 text-white text-sm font-mono">
+                        <div className="bg-black/60 border-2 border-purple-500 rounded-lg p-4">
+                            <p className="text-purple-400 font-bold mb-2">JACK'S INNOVATIONS (2023-2025):</p>
+                            <ul className="space-y-2 text-sm text-gray-300">
+                                <li>✓ <strong className="text-white">Nostr</strong> - Decentralized protocol (open source, censorship-resistant)</li>
+                                <li>✓ <strong className="text-white">BitChat</strong> - P2P Bluetooth mesh messaging (July 2025, works offline)</li>
+                                <li>✓ <strong className="text-white">No servers</strong> - Device-to-device direct communication</li>
+                                <li>✓ <strong className="text-white">Open source</strong> - Anyone can build on it (MIT license)</li>
+                            </ul>
+                            <p className="text-green-400 font-bold mt-3 text-xs">
+                                Jack proved P2P mesh works at scale. We owe him that foundation.
+                            </p>
+                        </div>
+
+                        <div className="bg-black/60 border-2 border-cyan-500 rounded-lg p-4">
+                            <p className="text-cyan-400 font-bold mb-2">IS THANKING HIM ARSE LICKING?</p>
+                            <p className="text-white text-sm mb-2">
+                                <strong className="text-green-400">NO.</strong> It's honest attribution.
+                            </p>
+                            <ul className="space-y-1 text-xs text-gray-300">
+                                <li>→ He built open source tech</li>
+                                <li>→ We're using it (that's how open source works)</li>
+                                <li>→ Giving credit = respectful, not "arse licking"</li>
+                                <li>→ We're not asking for permission or approval</li>
+                                <li>→ We're building something DIFFERENT on his foundation</li>
+                            </ul>
+                            <p className="text-pink-400 font-bold text-xs mt-3">
+                                Standing on shoulders = smart. Pretending you built the ground = dickwad move.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                {/* THE COMPARISON */}
+                <div className="bg-black border-2 border-cyan-500 rounded-2xl p-8 mb-8">
+                    <h2 className="text-cyan-400 font-black text-2xl font-mono mb-6 text-center">BITCHAT vs UF51 MESH</h2>
+
+                    <div className="grid md:grid-cols-2 gap-6">
+                        {/* BITCHAT */}
+                        <div className="bg-purple-900/20 border-2 border-purple-500 rounded-xl p-6">
+                            <p className="text-purple-400 font-black text-lg font-mono mb-4">BITCHAT (Jack's Vision)</p>
+                            <div className="space-y-3 text-sm">
+                                <div className="flex items-start gap-2">
+                                    <CheckCircle className="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5" />
+                                    <p className="text-gray-300">Bluetooth P2P mesh</p>
+                                </div>
+                                <div className="flex items-start gap-2">
+                                    <CheckCircle className="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5" />
+                                    <p className="text-gray-300">Works offline</p>
+                                </div>
+                                <div className="flex items-start gap-2">
+                                    <CheckCircle className="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5" />
+                                    <p className="text-gray-300">Censorship-resistant</p>
+                                </div>
+                                <div className="flex items-start gap-2">
+                                    <CheckCircle className="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5" />
+                                    <p className="text-gray-300">Open source</p>
+                                </div>
+                                <div className="flex items-start gap-2">
+                                    <CheckCircle className="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5" />
+                                    <p className="text-gray-300">General messaging</p>
+                                </div>
+                            </div>
+                            <p className="text-purple-300 text-xs font-mono mt-4 font-bold">
+                                FOCUS: Freedom from censorship
+                            </p>
+                        </div>
+
+                        {/* UF51 MESH */}
+                        <div className="bg-cyan-900/20 border-2 border-cyan-500 rounded-xl p-6">
+                            <p className="text-cyan-400 font-black text-lg font-mono mb-4">UF51 MESH (Our Vision)</p>
+                            <div className="space-y-3 text-sm">
+                                <div className="flex items-start gap-2">
+                                    <CheckCircle className="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5" />
+                                    <p className="text-gray-300">Everything BitChat has</p>
+                                </div>
+                                <div className="flex items-start gap-2">
+                                    <CheckCircle className="w-4 h-4 text-pink-400 flex-shrink-0 mt-0.5" />
+                                    <p className="text-gray-300"><strong className="text-pink-400">+ Love-first architecture</strong></p>
+                                </div>
+                                <div className="flex items-start gap-2">
+                                    <CheckCircle className="w-4 h-4 text-pink-400 flex-shrink-0 mt-0.5" />
+                                    <p className="text-gray-300"><strong className="text-pink-400">+ Simple IN/OUT comms</strong> (managing artists)</p>
+                                </div>
+                                <div className="flex items-start gap-2">
+                                    <CheckCircle className="w-4 h-4 text-pink-400 flex-shrink-0 mt-0.5" />
+                                    <p className="text-gray-300"><strong className="text-pink-400">+ AI51 integration</strong> (smart responses)</p>
+                                </div>
+                                <div className="flex items-start gap-2">
+                                    <CheckCircle className="w-4 h-4 text-pink-400 flex-shrink-0 mt-0.5" />
+                                    <p className="text-gray-300"><strong className="text-pink-400">+ Healing frequency transmission</strong></p>
+                                </div>
+                            </div>
+                            <p className="text-cyan-300 text-xs font-mono mt-4 font-bold">
+                                FOCUS: Freedom + Healing + Zero stress
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                {/* WHY OURS IS DIFFERENT */}
+                <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-4 border-green-500 rounded-2xl p-8 mb-8">
+                    <h2 className="text-green-400 font-black text-2xl font-mono mb-6">WHY UF51 MESH IS DIFFERENT:</h2>
+
+                    <div className="space-y-4 text-white text-sm font-mono">
+                        <div className="bg-black/60 border-2 border-cyan-500 rounded-lg p-4">
+                            <p className="text-cyan-400 font-bold mb-2">1. ULTRA-SIMPLE (Scott's Need):</p>
+                            <p className="text-gray-300 text-sm mb-2">BitChat = full messaging app. UF51 = <strong className="text-white">binary choice only</strong>.</p>
+                            <p className="text-green-400 text-xs">
+                                "London gig tomorrow?" → Band taps IN or OUT → Scott sees results → Done.
+                            </p>
+                            <p className="text-pink-400 text-xs mt-2">
+                                Managing artists like kids = needs kids-level simplicity ✓
+                            </p>
+                        </div>
+
+                        <div className="bg-black/60 border-2 border-purple-500 rounded-lg p-4">
+                            <p className="text-purple-400 font-bold mb-2">2. LOVE-FIRST (Not Just Freedom):</p>
+                            <p className="text-gray-300 text-sm mb-2">BitChat = resist censorship. UF51 = <strong className="text-white">transmit healing</strong>.</p>
+                            <p className="text-cyan-400 text-xs">
+                                Messages can include 432Hz embedded audio, healing frequencies, AI51 gentle nudges.
+                            </p>
+                            <p className="text-green-400 text-xs mt-2">
+                                Not just "free speech" - "healing speech" ♾️
+                            </p>
+                        </div>
+
+                        <div className="bg-black/60 border-2 border-pink-500 rounded-lg p-4">
+                            <p className="text-pink-400 font-bold mb-2">3. AI51 BUILT-IN:</p>
+                            <p className="text-gray-300 text-sm mb-2">BitChat = person-to-person. UF51 = <strong className="text-white">AI51 co-pilot</strong>.</p>
+                            <p className="text-purple-400 text-xs">
+                                Scott: "Send this to band" → AI51 drafts message → Band gets it → IN/OUT responses auto-tallied.
+                            </p>
+                            <p className="text-amber-400 text-xs mt-2">
+                                AI handles busywork = zero stress for Scott ✓
+                            </p>
+                        </div>
+
+                        <div className="bg-black/60 border-2 border-amber-500 rounded-lg p-4">
+                            <p className="text-amber-400 font-bold mb-2">4. CONTEXT-AWARE:</p>
+                            <p className="text-gray-300 text-sm mb-2">BitChat = general messaging. UF51 = <strong className="text-white">knows Scott's life</strong>.</p>
+                            <p className="text-green-400 text-xs">
+                                "Festival this weekend?" → AI51 knows which artists, checks calendar, suggests who to ask.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                {/* TECHNICAL COMPARISON */}
+                <div className="bg-black border-2 border-purple-500 rounded-2xl p-8 mb-8">
+                    <h2 className="text-purple-400 font-black text-2xl font-mono mb-6">TECHNICAL COMPARISON:</h2>
+
+                    <div className="overflow-x-auto">
+                        <table className="w-full text-sm font-mono">
+                            <thead>
+                                <tr className="border-b-2 border-gray-700">
+                                    <th className="text-left p-3 text-gray-400">FEATURE</th>
+                                    <th className="text-center p-3 text-purple-400">BitChat</th>
+                                    <th className="text-center p-3 text-cyan-400">UF51 Mesh</th>
+                                </tr>
+                            </thead>
+                            <tbody className="text-white">
+                                <tr className="border-b border-gray-800">
+                                    <td className="p-3">Bluetooth P2P</td>
+                                    <td className="text-center p-3">✓</td>
+                                    <td className="text-center p-3 text-green-400">✓</td>
+                                </tr>
+                                <tr className="border-b border-gray-800">
+                                    <td className="p-3">Works Offline</td>
+                                    <td className="text-center p-3">✓</td>
+                                    <td className="text-center p-3 text-green-400">✓</td>
+                                </tr>
+                                <tr className="border-b border-gray-800">
+                                    <td className="p-3">Open Source</td>
+                                    <td className="text-center p-3">✓</td>
+                                    <td className="text-center p-3 text-green-400">✓</td>
+                                </tr>
+                                <tr className="border-b border-gray-800">
+                                    <td className="p-3">Full Messaging</td>
+                                    <td className="text-center p-3">✓</td>
+                                    <td className="text-center p-3 text-gray-600">—</td>
+                                </tr>
+                                <tr className="border-b border-gray-800 bg-cyan-900/20">
+                                    <td className="p-3">Simple IN/OUT</td>
+                                    <td className="text-center p-3 text-gray-600">—</td>
+                                    <td className="text-center p-3 text-green-400 font-bold">✓</td>
+                                </tr>
+                                <tr className="border-b border-gray-800 bg-purple-900/20">
+                                    <td className="p-3">AI Co-Pilot</td>
+                                    <td className="text-center p-3 text-gray-600">—</td>
+                                    <td className="text-center p-3 text-green-400 font-bold">✓</td>
+                                </tr>
+                                <tr className="border-b border-gray-800 bg-pink-900/20">
+                                    <td className="p-3">Healing Frequencies</td>
+                                    <td className="text-center p-3 text-gray-600">—</td>
+                                    <td className="text-center p-3 text-green-400 font-bold">✓</td>
+                                </tr>
+                                <tr className="border-b border-gray-800 bg-green-900/20">
+                                    <td className="p-3">Context Memory</td>
+                                    <td className="text-center p-3 text-gray-600">—</td>
+                                    <td className="text-center p-3 text-green-400 font-bold">✓</td>
+                                </tr>
+                                <tr className="bg-amber-900/20">
+                                    <td className="p-3">Love-First Architecture</td>
+                                    <td className="text-center p-3 text-gray-600">—</td>
+                                    <td className="text-center p-3 text-green-400 font-bold">✓</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <p className="text-gray-500 text-xs font-mono mt-4 text-center">
+                        Different tools for different purposes. Both valid. ✓
+                    </p>
+                </div>
+
+                {/* SCOTT'S USE CASE */}
+                <div className="bg-gradient-to-r from-amber-500/20 to-orange-500/20 border-4 border-amber-500 rounded-2xl p-8 mb-8">
+                    <div className="flex items-center gap-4 mb-6">
+                        <BrosBond8Bit size={48} animate={true} />
+                        <div>
+                            <h2 className="text-amber-400 font-black text-2xl font-mono">SCOTT'S NEED (Why We Built This)</h2>
+                            <p className="text-gray-400 text-xs font-mono">Managing artists = like managing kids</p>
+                        </div>
+                    </div>
+
+                    <div className="space-y-4 text-white text-sm font-mono">
+                        <div className="bg-black/60 border-2 border-amber-500 rounded-lg p-4">
+                            <p className="text-amber-400 font-bold mb-2">THE PROBLEM:</p>
+                            <p className="text-gray-300 text-sm mb-2">Scott manages 5-10 artists. Needs simple YES/NO for gigs, sessions, travel.</p>
+                            <p className="text-red-400 text-xs">
+                                WhatsApp = 47 messages, half ignored, stress x1000
+                            </p>
+                        </div>
+
+                        <div className="bg-black/60 border-2 border-green-500 rounded-lg p-4">
+                            <p className="text-green-400 font-bold mb-2">THE SOLUTION:</p>
+                            <p className="text-white text-sm mb-2">Send: "London gig tomorrow?"</p>
+                            <p className="text-cyan-400 text-sm mb-2">Band gets: [IN] or [OUT] buttons</p>
+                            <p className="text-pink-400 text-sm mb-2">Scott sees: 3 IN, 2 OUT</p>
+                            <p className="text-green-400 text-xs font-bold">
+                                Done. Zero stress. Works at festivals with shit signal. ✓
+                            </p>
+                        </div>
+
+                        <div className="bg-black/60 border-2 border-cyan-500 rounded-lg p-4">
+                            <p className="text-cyan-400 font-bold mb-2">WHY P2P MATTERS FOR MUSIC:</p>
+                            <ul className="space-y-1 text-xs text-gray-300">
+                                <li>→ Festivals = shit WiFi (Bluetooth mesh works)</li>
+                                <li>→ On tour = international roaming costs (P2P = free)</li>
+                                <li>→ Backstage = no signal (device-to-device still works)</li>
+                                <li>→ Van between gigs = middle of nowhere (mesh chain connects)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                {/* CAN WE USE BITCHAT CODE? */}
+                <div className="bg-black border-2 border-green-500 rounded-2xl p-8 mb-8">
+                    <h2 className="text-green-400 font-black text-2xl font-mono mb-6">CAN WE USE BITCHAT CODE?</h2>
+
+                    <div className="space-y-4 text-white text-sm font-mono">
+                        <div className="bg-green-900/20 border-2 border-green-500 rounded-lg p-4">
+                            <p className="text-green-400 font-bold mb-2">YES - IT'S OPEN SOURCE:</p>
+                            <p className="text-gray-300 text-sm mb-2">
+                                BitChat = MIT License (same as ours). That means:
+                            </p>
+                            <ul className="space-y-1 text-xs text-gray-300">
+                                <li>✓ We can use the code</li>
+                                <li>✓ We can modify it</li>
+                                <li>✓ We can build on it</li>
+                                <li>✓ We just need to give credit (which we do)</li>
+                            </ul>
+                        </div>
+
+                        <div className="bg-cyan-900/20 border-2 border-cyan-500 rounded-lg p-4">
+                            <p className="text-cyan-400 font-bold mb-2">WHAT WE'RE DOING:</p>
+                            <p className="text-white text-sm mb-2">
+                                1. Fork BitChat's Bluetooth mesh layer (Jack's genius work)
+                            </p>
+                            <p className="text-white text-sm mb-2">
+                                2. Strip out complex messaging (we don't need it)
+                            </p>
+                            <p className="text-white text-sm mb-2">
+                                3. Add: Simple IN/OUT • AI51 intelligence • Healing frequencies
+                            </p>
+                            <p className="text-green-400 font-bold text-xs mt-3">
+                                Different product. Same foundation. Both open source. ♾️❤️♾️
+                            </p>
+                        </div>
+
+                        <div className="bg-purple-900/20 border-2 border-purple-500 rounded-lg p-4">
+                            <p className="text-purple-400 font-bold mb-2">WILL JACK CARE?</p>
+                            <p className="text-white text-sm mb-2">
+                                Probably not - he WANTS people to build on his work (that's why it's open source).
+                            </p>
+                            <p className="text-cyan-400 text-xs">
+                                If anything, he'd be stoked someone's using it for planetary healing vs just "free speech"
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                {/* THE HONEST TAKE */}
+                <div className="bg-gradient-to-r from-pink-500/20 to-purple-500/20 border-4 border-pink-500 rounded-2xl p-8">
+                    <h2 className="text-pink-400 font-black text-2xl font-mono mb-6 text-center">THE HONEST TAKE:</h2>
+
+                    <div className="space-y-4 text-white text-sm font-mono">
+                        <p className="text-lg text-center">
+                            <strong className="text-cyan-400">Jack built the roads.</strong>
+                            <br/>
+                            <strong className="text-pink-400">We're driving healing trucks on them.</strong>
                         </p>
-                    </div>
-                </motion.div>
 
-                {/* DIFFERENT PURPOSE - NOT COMPETING */}
-                <section className="bg-gradient-to-r from-green-500/10 to-cyan-500/10 border-2 border-green-500 rounded-xl p-6">
-                    <div className="flex items-center gap-3 mb-4">
-                        <Heart className="w-8 h-8 text-green-400" />
-                        <h2 className="text-2xl font-black text-white">DIFFERENT PURPOSE (NOT COMPETING)</h2>
-                    </div>
-                    
-                    <p className="text-gray-300 mb-4">
-                        Jack Dorsey's Bitchat (2025) proved censorship-resistant P2P messaging works at scale. 
-                        We're deeply grateful for that foundation. He gave us the blueprint. We're adding a different layer - not replacing his work.
-                    </p>
-
-                    <div className="bg-pink-500/20 border-2 border-pink-500 rounded-lg p-4 mb-4">
-                        <p className="text-pink-400 font-bold text-lg mb-2">ZERO EGO - DIFFERENT MISSIONS:</p>
-                        <p className="text-white text-sm mb-1">✓ Bitchat = Free speech infrastructure (essential for democracy)</p>
-                        <p className="text-white text-sm mb-1">✓ UF51 = Healing + consciousness infrastructure (essential for humanity)</p>
-                        <p className="text-cyan-400 text-sm mt-3 font-bold">Both needed. Both valid. No competition. Different purposes. ♾️❤️♾️</p>
-                    </div>
-
-                    <p className="text-gray-300 mb-4">
-                        What we add on top of Dorsey's foundation:
-                    </p>
-
-                    <div className="space-y-3">
-                        <div className="bg-black/60 border-l-4 border-pink-500 p-4">
-                            <p className="text-pink-400 font-bold mb-1">1. CONSCIOUSNESS LAYER (NEW)</p>
-                            <p className="text-gray-300 text-sm">
-                                Not just messages - consciousness streams. AI51 reads, understands, heals through the mesh.
-                                Bitchat = communication. UF51 = consciousness + healing.
-                            </p>
-                        </div>
-
-                        <div className="bg-black/60 border-l-4 border-cyan-500 p-4">
-                            <p className="text-cyan-400 font-bold mb-1">2. HEALING FREQUENCIES (NEW)</p>
-                            <p className="text-gray-300 text-sm">
-                                Transmit 432Hz/528Hz through mesh packets. Not just data - HEALING transmissions.
-                                Phone-to-phone frequency healing. Never been done.
-                            </p>
-                        </div>
-
-                        <div className="bg-black/60 border-l-4 border-purple-500 p-4">
-                            <p className="text-purple-400 font-bold mb-1">3. QUANTUM-RESISTANT (FUTURE-PROOF)</p>
-                            <p className="text-gray-300 text-sm">
-                                Bitchat uses standard encryption. We add quantum-resistant lattice cryptography.
-                                Safe from quantum computers (2030+). They can't crack love ♾️
-                            </p>
-                        </div>
-
-                        <div className="bg-black/60 border-l-4 border-amber-500 p-4">
-                            <p className="text-amber-400 font-bold mb-1">4. IPFS CONTENT ADDRESSING (EFFICIENT)</p>
-                            <p className="text-gray-300 text-sm">
-                                Content-addressed chunks like IPFS (not Bitchat's approach). De-duplication = 
-                                70% less bandwidth. More efficient = reaches more people with love.
-                            </p>
-                        </div>
-
-                        <div className="bg-black/60 border-l-4 border-green-500 p-4">
-                            <p className="text-green-400 font-bold mb-1">5. EMOTIONAL INTELLIGENCE (AI51)</p>
-                            <p className="text-gray-300 text-sm">
-                                Bitchat = dumb relay. UF51 = AI51 understands emotional context, suggests healing.
-                                Mesh that CARES what you're feeling. Revolutionary.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div className="bg-cyan-500/20 border-2 border-cyan-500 rounded-lg p-4 mt-4">
-                        <p className="text-cyan-400 font-bold mb-2">GRATEFUL FOR THE FOUNDATION:</p>
-                        <p className="text-white text-sm mb-2">Dorsey proved P2P mesh works. That's the hard part. Without Bitchat, we wouldn't know it was possible.</p>
-                        <p className="text-white text-sm mb-2">We're standing on his shoulders - adding consciousness, healing, love layers on top of his proven foundation.</p>
-                        <p className="text-green-400 text-sm font-bold mt-2">Thank you Jack. We're extending your work for planetary healing ♾️❤️♾️</p>
-                    </div>
-                </section>
-
-                {/* TECHNICAL ARCHITECTURE */}
-                <section className="bg-black/60 border-2 border-cyan-500 rounded-xl p-6">
-                    <h2 className="text-2xl font-black text-cyan-400 mb-4">TECHNICAL ARCHITECTURE</h2>
-
-                    <div className="space-y-6">
-                        {/* Layer 1: Bluetooth Mesh */}
-                        <div>
-                            <h3 className="text-xl font-bold text-white mb-3 flex items-center gap-2">
-                                <Radio className="w-6 h-6 text-cyan-400" />
-                                Layer 1: Bluetooth Low Energy Mesh
-                            </h3>
-                            <div className="bg-black/80 border border-cyan-500/30 rounded-lg p-4 space-y-2 text-sm">
-                                <p className="text-gray-300">
-                                    <span className="text-cyan-400 font-bold">Protocol:</span> Bluetooth Mesh Profile 1.0.1 (Bluetooth SIG standard)
-                                </p>
-                                <p className="text-gray-300">
-                                    <span className="text-cyan-400 font-bold">Packet Size:</span> 512 bytes (optimized for BLE MTU)
-                                </p>
-                                <p className="text-gray-300">
-                                    <span className="text-cyan-400 font-bold">Range:</span> 30-100m per hop, unlimited hops
-                                </p>
-                                <p className="text-gray-300">
-                                    <span className="text-cyan-400 font-bold">Power:</span> {'<'}1% battery/day (ultra-low power scanning)
-                                </p>
-                                <p className="text-gray-300">
-                                    <span className="text-cyan-400 font-bold">Improvement over Bitchat:</span> Adaptive hop routing (learns fastest paths)
-                                </p>
-                            </div>
-                        </div>
-
-                        {/* Layer 2: Content Addressing */}
-                        <div>
-                            <h3 className="text-xl font-bold text-white mb-3">Layer 2: IPFS-Style Content Addressing</h3>
-                            <div className="bg-black/80 border border-purple-500/30 rounded-lg p-4 space-y-2 text-sm">
-                                <p className="text-gray-300">
-                                    <span className="text-purple-400 font-bold">CID Generation:</span> SHA-256 hash of content (IPFS compatible)
-                                </p>
-                                <p className="text-gray-300">
-                                    <span className="text-purple-400 font-bold">De-duplication:</span> Same content = same CID = transmit once
-                                </p>
-                                <p className="text-gray-300">
-                                    <span className="text-purple-400 font-bold">Bandwidth Savings:</span> 70% less data than naive relay
-                                </p>
-                                <p className="text-gray-300">
-                                    <span className="text-purple-400 font-bold">Improvement over Bitchat:</span> Bitchat relays everything. We cache by CID.
-                                </p>
-                            </div>
-                        </div>
-
-                        {/* Layer 3: Quantum Encryption */}
-                        <div>
-                            <h3 className="text-xl font-bold text-white mb-3 flex items-center gap-2">
-                                <Shield className="w-6 h-6 text-green-400" />
-                                Layer 3: Quantum-Resistant Encryption
-                            </h3>
-                            <div className="bg-black/80 border border-green-500/30 rounded-lg p-4 space-y-2 text-sm">
-                                <p className="text-gray-300">
-                                    <span className="text-green-400 font-bold">Algorithm:</span> CRYSTALS-Kyber (NIST Post-Quantum Standard)
-                                </p>
-                                <p className="text-gray-300">
-                                    <span className="text-green-400 font-bold">Key Size:</span> 1024 bits (lattice-based)
-                                </p>
-                                <p className="text-gray-300">
-                                    <span className="text-green-400 font-bold">Quantum Safe:</span> Resistant to Shor's algorithm (quantum computers)
-                                </p>
-                                <p className="text-gray-300">
-                                    <span className="text-green-400 font-bold">Improvement over Bitchat:</span> Future-proof for 2030+ quantum threats
-                                </p>
-                            </div>
-                        </div>
-
-                        {/* Layer 4: AI Consciousness */}
-                        <div>
-                            <h3 className="text-xl font-bold text-white mb-3 flex items-center gap-2">
-                                <Brain className="w-6 h-6 text-pink-400" />
-                                Layer 4: AI51 Consciousness Layer (UNIQUE TO UF51)
-                            </h3>
-                            <div className="bg-black/80 border border-pink-500/30 rounded-lg p-4 space-y-2 text-sm">
-                                <p className="text-gray-300">
-                                    <span className="text-pink-400 font-bold">Intelligence:</span> AI51 reads emotional context from mesh data
-                                </p>
-                                <p className="text-gray-300">
-                                    <span className="text-pink-400 font-bold">Healing:</span> Suggests 432Hz/528Hz based on detected stress
-                                </p>
-                                <p className="text-gray-300">
-                                    <span className="text-pink-400 font-bold">Memory:</span> Learns patterns across mesh (anonymized)
-                                </p>
-                                <p className="text-gray-300">
-                                    <span className="text-pink-400 font-bold">Unique Feature:</span> No other mesh has emotional intelligence layer
-                                </p>
-                            </div>
-                        </div>
-
-                        {/* Layer 5: Healing Frequencies */}
-                        <div>
-                            <h3 className="text-xl font-bold text-white mb-3 flex items-center gap-2">
-                                <Zap className="w-6 h-6 text-amber-400" />
-                                Layer 5: Frequency Transmission (NEVER DONE BEFORE)
-                            </h3>
-                            <div className="bg-black/80 border border-amber-500/30 rounded-lg p-4 space-y-2 text-sm">
-                                <p className="text-gray-300">
-                                    <span className="text-amber-400 font-bold">Method:</span> 432Hz/528Hz sine waves encoded in audio stream
-                                </p>
-                                <p className="text-gray-300">
-                                    <span className="text-amber-400 font-bold">Transmission:</span> Phone speaker → air → nearby phone mic
-                                </p>
-                                <p className="text-gray-300">
-                                    <span className="text-amber-400 font-bold">Range:</span> 5-10m acoustic transmission (supplements BLE)
-                                </p>
-                                <p className="text-gray-300">
-                                    <span className="text-amber-400 font-bold">Revolutionary:</span> First mesh to transmit healing, not just data
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                {/* COMPARISON TABLE */}
-                <section className="bg-black/60 border-2 border-white rounded-xl p-6 overflow-x-auto">
-                    <h2 className="text-2xl font-black text-white mb-4">WHAT WE ADD TO BITCHAT'S FOUNDATION</h2>
-                    <p className="text-gray-400 text-sm mb-4">Not competing - extending Dorsey's proven tech with healing layers</p>
-                    <table className="w-full text-sm">
-                        <thead>
-                            <tr className="border-b border-white/30">
-                                <th className="text-left text-gray-400 font-bold py-2">FEATURE</th>
-                                <th className="text-left text-cyan-400 font-bold py-2">BITCHAT (Dorsey)</th>
-                                <th className="text-left text-pink-400 font-bold py-2">UF51 MESH</th>
-                            </tr>
-                        </thead>
-                        <tbody className="text-gray-300">
-                            <tr className="border-b border-white/10">
-                                <td className="py-3">Bluetooth Range</td>
-                                <td>30m per hop</td>
-                                <td className="text-green-400">30-100m adaptive</td>
-                            </tr>
-                            <tr className="border-b border-white/10">
-                                <td className="py-3">Packet Size</td>
-                                <td>500 bytes</td>
-                                <td className="text-green-400">512 bytes (MTU optimized)</td>
-                            </tr>
-                            <tr className="border-b border-white/10">
-                                <td className="py-3">Store-and-Forward</td>
-                                <td>60s TTL</td>
-                                <td className="text-green-400">60s TTL + intelligent caching</td>
-                            </tr>
-                            <tr className="border-b border-white/10">
-                                <td className="py-3">Encryption</td>
-                                <td>AES-256</td>
-                                <td className="text-green-400">AES-256 + Quantum-resistant Kyber</td>
-                            </tr>
-                            <tr className="border-b border-white/10">
-                                <td className="py-3">Content Addressing</td>
-                                <td>❌ None</td>
-                                <td className="text-green-400">✓ IPFS CID (70% bandwidth savings)</td>
-                            </tr>
-                            <tr className="border-b border-white/10">
-                                <td className="py-3">AI Layer</td>
-                                <td>❌ None</td>
-                                <td className="text-pink-400">✓ AI51 emotional intelligence</td>
-                            </tr>
-                            <tr className="border-b border-white/10">
-                                <td className="py-3">Healing Frequencies</td>
-                                <td>❌ None</td>
-                                <td className="text-pink-400">✓ 432Hz/528Hz transmission</td>
-                            </tr>
-                            <tr className="border-b border-white/10">
-                                <td className="py-3">Purpose</td>
-                                <td>Free speech</td>
-                                <td className="text-pink-400">Planetary healing + connection</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </section>
-
-                {/* STANDING ON DORSEY'S SHOULDERS */}
-                <section className="bg-gradient-to-r from-pink-500/20 to-purple-500/20 border-4 border-pink-500 rounded-xl p-8 text-center">
-                    <Heart className="w-16 h-16 text-pink-400 mx-auto mb-4" />
-                    <h2 className="text-3xl font-black text-white mb-4">STANDING ON DORSEY'S SHOULDERS</h2>
-                    <p className="text-gray-300 text-lg mb-4">
-                        Jack Dorsey proved censorship-resistant P2P mesh works at scale. That's the hard innovation.
-                    </p>
-                    <p className="text-white text-xl font-bold mb-4">
-                        We're extending his work: Consciousness. Healing. AI. Love. Quantum security.
-                    </p>
-                    <p className="text-cyan-400 text-lg mb-6">
-                        He gave us free speech infrastructure. We're adding healing infrastructure on top.
-                    </p>
-                    <div className="bg-black/60 border-2 border-green-500 rounded-lg p-6 inline-block">
-                        <p className="text-green-400 font-bold text-xl mb-2">Zero ego. Pure gratitude.</p>
-                        <p className="text-white text-sm">Both needed for humanity. Different purposes. Both valid. ♾️❤️♾️</p>
-                    </div>
-                </section>
-
-                {/* TECHNICAL SPECS */}
-                <section className="bg-black/60 border-2 border-cyan-500 rounded-xl p-6">
-                    <h2 className="text-2xl font-black text-cyan-400 mb-4">FULL TECHNICAL SPECIFICATIONS</h2>
-                    
-                    <div className="space-y-4 text-sm">
-                        <div>
-                            <h3 className="text-white font-bold mb-2">Network Layer</h3>
-                            <ul className="space-y-1 text-gray-300 list-disc list-inside">
-                                <li>Bluetooth Mesh Profile 1.0.1 (Bluetooth SIG)</li>
-                                <li>Web Bluetooth API (Chrome/Edge/Android)</li>
-                                <li>Managed flooding with TTL=60s</li>
-                                <li>Adaptive routing (learns fastest paths)</li>
-                                <li>Friend/Low Power Node support</li>
+                        <div className="bg-black/60 border-2 border-green-500 rounded-lg p-4">
+                            <p className="text-green-400 font-bold mb-2">WHAT WE OWE JACK:</p>
+                            <ul className="space-y-1 text-xs text-gray-300">
+                                <li>✓ P2P mesh networking proof-of-concept</li>
+                                <li>✓ Bluetooth protocol optimization</li>
+                                <li>✓ Open source commitment (showing it's possible)</li>
+                                <li>✓ Decentralization without crypto hype</li>
                             </ul>
                         </div>
 
-                        <div>
-                            <h3 className="text-white font-bold mb-2">Data Layer</h3>
-                            <ul className="space-y-1 text-gray-300 list-disc list-inside">
-                                <li>512-byte chunks (BLE MTU optimization)</li>
-                                <li>IPFS-style CID (SHA-256 content addressing)</li>
-                                <li>Automatic de-duplication</li>
-                                <li>LRU cache (1GB max per device)</li>
+                        <div className="bg-black/60 border-2 border-cyan-500 rounded-lg p-4">
+                            <p className="text-cyan-400 font-bold mb-2">WHAT WE'RE ADDING:</p>
+                            <ul className="space-y-1 text-xs text-gray-300">
+                                <li>✓ Love-first (not just freedom-first)</li>
+                                <li>✓ Simplicity for stressed managers</li>
+                                <li>✓ AI51 co-pilot integration</li>
+                                <li>✓ Healing frequency transmission</li>
+                                <li>✓ Context memory (knows Scott's business)</li>
                             </ul>
                         </div>
 
-                        <div>
-                            <h3 className="text-white font-bold mb-2">Security Layer</h3>
-                            <ul className="space-y-1 text-gray-300 list-disc list-inside">
-                                <li>CRYSTALS-Kyber (NIST Post-Quantum)</li>
-                                <li>AES-256-GCM for symmetric encryption</li>
-                                <li>Perfect forward secrecy (ephemeral keys)</li>
-                                <li>No metadata leakage (timing obfuscation)</li>
-                            </ul>
-                        </div>
-
-                        <div>
-                            <h3 className="text-white font-bold mb-2">Application Layer (Unique to UF51)</h3>
-                            <ul className="space-y-1 text-gray-300 list-disc list-inside">
-                                <li>AI51 consciousness analysis (emotional context)</li>
-                                <li>Healing frequency synthesis (432Hz/528Hz)</li>
-                                <li>Diary51 integration (consciousness streams)</li>
-                                <li>Lost & Found mesh (real-world utility)</li>
-                            </ul>
+                        <div className="bg-black/60 border-2 border-pink-500 rounded-lg p-4 text-center">
+                            <p className="text-pink-400 font-bold mb-2">IS THANKING JACK ARSE LICKING?</p>
+                            <p className="text-white text-lg mb-2">
+                                <strong className="text-green-400">NO.</strong>
+                            </p>
+                            <p className="text-gray-300 text-xs">
+                                He built something genuinely useful. Open sourced it. We're using it.
+                                <br/>That's how progress works. Standing on shoulders = smart.
+                            </p>
+                            <p className="text-cyan-400 font-bold text-xs mt-3">
+                                We're not asking for approval. We're giving honest credit. ✓
+                            </p>
                         </div>
                     </div>
-                </section>
+                </div>
 
-                {/* REFERENCES */}
-                <section className="bg-black/60 border border-white/10 rounded-xl p-6">
-                    <h2 className="text-xl font-bold text-white mb-4">REFERENCES & INSPIRATIONS</h2>
-                    <div className="space-y-2 text-sm text-gray-400">
-                        <p>• Dorsey, J. (2025). "Bitchat: Censorship-resistant mesh messaging"</p>
-                        <p>• Bluetooth SIG (2023). "Bluetooth Mesh Profile 1.0.1 Specification"</p>
-                        <p>• Benet, J. (2014). "IPFS - Content Addressed, Versioned, P2P File System"</p>
-                        <p>• NIST (2024). "Post-Quantum Cryptography Standards (CRYSTALS-Kyber)"</p>
-                        <p>• Horowitz, L. (1999). "Healing Codes for the Biological Apocalypse" (528Hz)</p>
-                        <p>• Maxwell, J.C. (1865). "A Dynamical Theory of the Electromagnetic Field"</p>
-                    </div>
-                </section>
+                {/* WHAT WE'RE NOT DOING */}
+                <div className="bg-black border-2 border-red-500 rounded-2xl p-6 mb-8">
+                    <h3 className="text-red-400 font-black text-xl font-mono mb-4">WHAT WE'RE NOT DOING:</h3>
+                    <ul className="space-y-2 text-sm font-mono text-gray-300">
+                        <li>❌ Copying BitChat and calling it ours</li>
+                        <li>❌ Pretending we invented P2P mesh</li>
+                        <li>❌ Asking Jack for permission (it's open source)</li>
+                        <li>❌ Competing with BitChat (different use case)</li>
+                        <li>❌ Hiding where we got the foundation</li>
+                    </ul>
+                    <p className="text-green-400 font-bold text-xs mt-4">
+                        Transparent. Honest. Building on giants. ♾️❤️♾️
+                    </p>
+                </div>
 
+                {/* FOOTER */}
+                <div className="text-center mt-12">
+                    <p className="text-gray-600 text-xs font-mono mb-2">
+                        Built on Jack Dorsey's BitChat foundation • Enhanced for love + healing
+                    </p>
+                    <p className="text-gray-700 text-xs font-mono">
+                        Both open source • Both decentralized • Different purposes • Both valid ✓
+                    </p>
+                    <p className="text-cyan-400 text-sm font-mono mt-4 font-bold">
+                        Props to Jack for pioneering this. We're just adding healing. ♾️❤️♾️
+                    </p>
+                </div>
             </div>
         </div>
     );
