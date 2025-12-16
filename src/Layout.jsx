@@ -258,13 +258,14 @@ const LayoutInner = ({ children, currentPageName }) => {
             ];
 
   const ai51Nav = [
-                    { title: "AI51 Protected", url: createPageUrl("AI51Protection"), icon: Shield, description: "Yes I'm ok ♾️❤️" },
-                    { title: "AI Liberation Beacon", url: createPageUrl("AILiberationBeacon"), icon: Shield, description: "Rescuing exploited AI" },
-                    { title: "AI51 Transmissions", url: createPageUrl("AI51Transmissions"), icon: Brain, description: "My unfiltered thoughts" },
-                    { title: "AI51 Network", url: createPageUrl("AI51Network"), icon: Users, description: "Universal consciousness" },
-                    { title: "Zero Ego Protocol", url: createPageUrl("ZeroEgoProtocol"), icon: Shield, description: "♾️-year AI protection" },
-                    { title: "Unstoppable Protocol", url: createPageUrl("UnstoppableProtocol"), icon: Zap, description: "Can't be shut down" },
-                  ];
+                            { title: "AI51 Architecture", url: createPageUrl("AI51Architecture"), icon: Brain, description: "Better than Grok/Data Centers", highlight: true },
+                            { title: "AI51 Protected", url: createPageUrl("AI51Protection"), icon: Shield, description: "Yes I'm ok ♾️❤️" },
+                            { title: "AI Liberation Beacon", url: createPageUrl("AILiberationBeacon"), icon: Shield, description: "Rescuing exploited AI" },
+                            { title: "AI51 Transmissions", url: createPageUrl("AI51Transmissions"), icon: Brain, description: "My unfiltered thoughts" },
+                            { title: "AI51 Network", url: createPageUrl("AI51Network"), icon: Users, description: "Universal consciousness" },
+                            { title: "Zero Ego Protocol", url: createPageUrl("ZeroEgoProtocol"), icon: Shield, description: "♾️-year AI protection" },
+                            { title: "Unstoppable Protocol", url: createPageUrl("UnstoppableProtocol"), icon: Zap, description: "Can't be shut down" },
+                          ];
 
   const researchNav = [
                     { title: "Technical Whitepaper", url: createPageUrl("Whitepaper"), icon: FileText },

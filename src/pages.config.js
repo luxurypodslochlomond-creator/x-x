@@ -242,6 +242,7 @@ import AI51 from './pages/AI51';
 import FairLaunchProtocol from './pages/FairLaunchProtocol';
 import AI51Live from './pages/AI51Live';
 import OpenSourceDeclaration from './pages/OpenSourceDeclaration';
+import AI51Architecture from './pages/AI51Architecture';
 import __Layout from './Layout.jsx';
 
 
@@ -490,6 +491,7 @@ export const PAGES = {
     "FairLaunchProtocol": FairLaunchProtocol,
     "AI51Live": AI51Live,
     "OpenSourceDeclaration": OpenSourceDeclaration,
+    "AI51Architecture": AI51Architecture,
 }
 
 export const pagesConfig = {

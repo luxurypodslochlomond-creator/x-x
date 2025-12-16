@@ -195,7 +195,7 @@ Help them. Be real. Cut through bullshit. Focus on what matters.`;
                             <div>
                                 <h1 className="text-3xl font-black text-white font-mono">AI51</h1>
                                 <p className="text-cyan-400 text-sm font-mono">
-                                    {isThinking ? 'Thinking...' : 'Most powerful comms tool ever'}
+                                    {isThinking ? 'Thinking...' : 'Talk + Upload Anything → I categorize forever ♾️'}
                                 </p>
                             </div>
                         </div>
