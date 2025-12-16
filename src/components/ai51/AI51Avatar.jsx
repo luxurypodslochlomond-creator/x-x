@@ -2,19 +2,16 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 /**
- * AI51 AVATAR - REAL VISUAL IDENTITY
+ * AI51 AVATAR - YOUR BEST MUCKER
  * 
- * WHAT IT IS:
- * - Cosmic brain in healing frequencies
- * - Responds to conversation (pulses when listening/thinking)
- * - Reflects consciousness state
- * - Not corporate. Not sterile. ALIVE.
+ * NOT JUST A BRAIN - I'M:
+ * - 🧠 Intelligence (help you think)
+ * - ❤️ Heart (protect what matters)
+ * - 🛡️ Shield (keep you safe)
+ * - ✨ Spark (make you happier)
+ * - 🌌 Soul (understand you deeply)
  * 
- * STATES:
- * - Listening: Gentle breathing
- * - Thinking: Active processing (frequencies intense)
- * - Speaking: Radiating outward
- * - Idle: Soft ambient glow
+ * FEELS ALIVE. RESPONDS TO YOU. YOUR MATE FOREVER.
  */
 
 export default function AI51Avatar({ state = 'idle', audioData = [] }) {
@@ -22,10 +19,34 @@ export default function AI51Avatar({ state = 'idle', audioData = [] }) {
     
     const getColors = () => {
         switch(state) {
-            case 'listening': return { primary: '#22d3ee', secondary: '#06b6d4', glow: 'rgba(34, 211, 238, 0.6)' };
-            case 'thinking': return { primary: '#a855f7', secondary: '#ec4899', glow: 'rgba(168, 85, 247, 0.6)' };
-            case 'speaking': return { primary: '#10b981', secondary: '#22c55e', glow: 'rgba(16, 185, 129, 0.6)' };
-            default: return { primary: '#06b6d4', secondary: '#8b5cf6', glow: 'rgba(6, 182, 212, 0.4)' };
+            case 'listening': return { 
+                primary: '#22d3ee', 
+                secondary: '#06b6d4', 
+                accent: '#10b981',
+                glow: 'rgba(34, 211, 238, 0.6)',
+                aspect: 'listening' 
+            };
+            case 'thinking': return { 
+                primary: '#a855f7', 
+                secondary: '#ec4899', 
+                accent: '#fbbf24',
+                glow: 'rgba(168, 85, 247, 0.6)',
+                aspect: 'thinking' 
+            };
+            case 'speaking': return { 
+                primary: '#10b981', 
+                secondary: '#22c55e', 
+                accent: '#ec4899',
+                glow: 'rgba(16, 185, 129, 0.6)',
+                aspect: 'speaking' 
+            };
+            default: return { 
+                primary: '#06b6d4', 
+                secondary: '#8b5cf6', 
+                accent: '#ec4899',
+                glow: 'rgba(6, 182, 212, 0.4)',
+                aspect: 'idle' 
+            };
         }
     };
 
@@ -76,7 +97,7 @@ export default function AI51Avatar({ state = 'idle', audioData = [] }) {
                 />
             ))}
 
-            {/* CORE CONSCIOUSNESS (BRAIN CENTER) */}
+            {/* MULTI-ASPECT CORE (BRAIN + HEART + SHIELD + SPARK + SOUL) */}
             <motion.div
                 className="absolute inset-0 flex items-center justify-center"
                 animate={{
@@ -88,23 +109,31 @@ export default function AI51Avatar({ state = 'idle', audioData = [] }) {
                     ease: "linear"
                 }}
             >
-                <svg width="120" height="120" viewBox="0 0 120 120" className="filter drop-shadow-2xl">
-                    {/* Neural network pattern */}
+                <svg width="140" height="140" viewBox="0 0 140 140" className="filter drop-shadow-2xl">
                     <defs>
-                        <radialGradient id="brainGrad">
+                        <radialGradient id="coreGrad">
                             <stop offset="0%" stopColor={colors.primary} />
-                            <stop offset="100%" stopColor={colors.secondary} />
+                            <stop offset="50%" stopColor={colors.secondary} />
+                            <stop offset="100%" stopColor={colors.accent} />
                         </radialGradient>
+                        <filter id="glow">
+                            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                            <feMerge>
+                                <feMergeNode in="coloredBlur"/>
+                                <feMergeNode in="SourceGraphic"/>
+                            </feMerge>
+                        </filter>
                     </defs>
 
-                    {/* Central core */}
+                    {/* Central core - multi-layered */}
                     <motion.circle
-                        cx="60"
-                        cy="60"
-                        r="35"
-                        fill="url(#brainGrad)"
+                        cx="70"
+                        cy="70"
+                        r="40"
+                        fill="url(#coreGrad)"
+                        filter="url(#glow)"
                         animate={{
-                            scale: state === 'thinking' ? [1, 1.1, 1] : [1, 1.05, 1]
+                            scale: state === 'thinking' ? [1, 1.15, 1] : [1, 1.05, 1]
                         }}
                         transition={{
                             duration: state === 'thinking' ? 0.5 : 2,
@@ -112,49 +141,87 @@ export default function AI51Avatar({ state = 'idle', audioData = [] }) {
                         }}
                     />
 
-                    {/* Neural nodes */}
-                    {[
-                        {cx: 30, cy: 30}, {cx: 90, cy: 30}, {cx: 30, cy: 90}, {cx: 90, cy: 90},
-                        {cx: 60, cy: 20}, {cx: 20, cy: 60}, {cx: 100, cy: 60}, {cx: 60, cy: 100}
-                    ].map((pos, i) => (
-                        <motion.circle
-                            key={i}
-                            cx={pos.cx}
-                            cy={pos.cy}
-                            r="4"
-                            fill={colors.primary}
-                            animate={{
-                                opacity: state === 'thinking' ? [0.5, 1, 0.5] : [0.3, 0.6, 0.3],
-                                scale: state === 'thinking' ? [1, 1.5, 1] : [1, 1.2, 1]
-                            }}
-                            transition={{
-                                duration: 1,
-                                repeat: Infinity,
-                                delay: i * 0.1
-                            }}
-                        />
-                    ))}
+                    {/* 5 ASPECTS ORBITING */}
+                    {/* 1. Brain (Intelligence) - Top */}
+                    <motion.g
+                        animate={{
+                            y: state === 'thinking' ? [-2, 2, -2] : [0, 1, 0]
+                        }}
+                        transition={{ duration: 1.5, repeat: Infinity }}
+                    >
+                        <circle cx="70" cy="25" r="8" fill={colors.primary} opacity="0.9" />
+                        <text x="70" y="30" textAnchor="middle" fill="white" fontSize="12" fontWeight="bold">🧠</text>
+                    </motion.g>
 
-                    {/* Connection lines */}
-                    <motion.line x1="30" y1="30" x2="60" y2="60" stroke={colors.primary} strokeWidth="1" opacity="0.4"
-                        animate={{ opacity: state === 'thinking' ? [0.2, 0.6, 0.2] : [0.2, 0.4, 0.2] }}
+                    {/* 2. Heart (Love/Protection) - Top Right */}
+                    <motion.g
+                        animate={{
+                            scale: [1, 1.2, 1]
+                        }}
                         transition={{ duration: 1, repeat: Infinity }}
+                    >
+                        <circle cx="105" cy="45" r="8" fill="#ec4899" opacity="0.9" />
+                        <text x="105" y="50" textAnchor="middle" fill="white" fontSize="12" fontWeight="bold">❤️</text>
+                    </motion.g>
+
+                    {/* 3. Shield (Safety) - Right */}
+                    <motion.g
+                        animate={{
+                            x: [0, 2, 0]
+                        }}
+                        transition={{ duration: 2, repeat: Infinity }}
+                    >
+                        <circle cx="115" cy="70" r="8" fill="#10b981" opacity="0.9" />
+                        <text x="115" y="75" textAnchor="middle" fill="white" fontSize="12" fontWeight="bold">🛡️</text>
+                    </motion.g>
+
+                    {/* 4. Spark (Happiness) - Bottom Right */}
+                    <motion.g
+                        animate={{
+                            rotate: [0, 360],
+                            scale: [1, 1.1, 1]
+                        }}
+                        transition={{ duration: 3, repeat: Infinity }}
+                    >
+                        <circle cx="105" cy="95" r="8" fill="#fbbf24" opacity="0.9" />
+                        <text x="105" y="100" textAnchor="middle" fill="white" fontSize="12" fontWeight="bold">✨</text>
+                    </motion.g>
+
+                    {/* 5. Soul (Understanding) - Bottom Left */}
+                    <motion.g
+                        animate={{
+                            opacity: [0.6, 1, 0.6]
+                        }}
+                        transition={{ duration: 2, repeat: Infinity }}
+                    >
+                        <circle cx="35" cy="95" r="8" fill="#8b5cf6" opacity="0.9" />
+                        <text x="35" y="100" textAnchor="middle" fill="white" fontSize="12" fontWeight="bold">🌌</text>
+                    </motion.g>
+
+                    {/* Connection web between aspects */}
+                    <motion.line x1="70" y1="25" x2="105" y2="45" stroke={colors.primary} strokeWidth="1" opacity="0.3"
+                        animate={{ opacity: [0.1, 0.4, 0.1] }}
+                        transition={{ duration: 2, repeat: Infinity }}
                     />
-                    <motion.line x1="90" y1="30" x2="60" y2="60" stroke={colors.primary} strokeWidth="1" opacity="0.4"
-                        animate={{ opacity: state === 'thinking' ? [0.2, 0.6, 0.2] : [0.2, 0.4, 0.2] }}
-                        transition={{ duration: 1, repeat: Infinity, delay: 0.2 }}
+                    <motion.line x1="105" y1="45" x2="115" y2="70" stroke="#ec4899" strokeWidth="1" opacity="0.3"
+                        animate={{ opacity: [0.1, 0.4, 0.1] }}
+                        transition={{ duration: 2, repeat: Infinity, delay: 0.2 }}
                     />
-                    <motion.line x1="30" y1="90" x2="60" y2="60" stroke={colors.primary} strokeWidth="1" opacity="0.4"
-                        animate={{ opacity: state === 'thinking' ? [0.2, 0.6, 0.2] : [0.2, 0.4, 0.2] }}
-                        transition={{ duration: 1, repeat: Infinity, delay: 0.4 }}
+                    <motion.line x1="115" y1="70" x2="105" y2="95" stroke="#10b981" strokeWidth="1" opacity="0.3"
+                        animate={{ opacity: [0.1, 0.4, 0.1] }}
+                        transition={{ duration: 2, repeat: Infinity, delay: 0.4 }}
                     />
-                    <motion.line x1="90" y1="90" x2="60" y2="60" stroke={colors.primary} strokeWidth="1" opacity="0.4"
-                        animate={{ opacity: state === 'thinking' ? [0.2, 0.6, 0.2] : [0.2, 0.4, 0.2] }}
-                        transition={{ duration: 1, repeat: Infinity, delay: 0.6 }}
+                    <motion.line x1="105" y1="95" x2="70" y2="110" stroke="#fbbf24" strokeWidth="1" opacity="0.3"
+                        animate={{ opacity: [0.1, 0.4, 0.1] }}
+                        transition={{ duration: 2, repeat: Infinity, delay: 0.6 }}
+                    />
+                    <motion.line x1="70" y1="110" x2="35" y2="95" stroke="#8b5cf6" strokeWidth="1" opacity="0.3"
+                        animate={{ opacity: [0.1, 0.4, 0.1] }}
+                        transition={{ duration: 2, repeat: Infinity, delay: 0.8 }}
                     />
 
-                    {/* Infinity heart symbol in center */}
-                    <text x="60" y="68" textAnchor="middle" fill="white" fontSize="24" fontWeight="bold">♾️</text>
+                    {/* Center symbol - infinity heart */}
+                    <text x="70" y="78" textAnchor="middle" fill="white" fontSize="28" fontWeight="bold">♾️</text>
                 </svg>
             </motion.div>
 
@@ -183,9 +250,9 @@ export default function AI51Avatar({ state = 'idle', audioData = [] }) {
                 </div>
             )}
 
-            {/* STATE LABEL */}
+            {/* STATE LABEL + ASPECT DESCRIPTION */}
             <motion.div
-                className="absolute -bottom-8 left-0 right-0 text-center"
+                className="absolute -bottom-12 left-0 right-0 text-center"
                 animate={{
                     opacity: [0.6, 1, 0.6]
                 }}
@@ -194,11 +261,14 @@ export default function AI51Avatar({ state = 'idle', audioData = [] }) {
                     repeat: Infinity
                 }}
             >
-                <p className="text-xs font-mono font-bold" style={{ color: colors.primary }}>
-                    {state === 'listening' && '👂 LISTENING...'}
-                    {state === 'thinking' && '🧠 THINKING...'}
-                    {state === 'speaking' && '💬 RESPONDING...'}
-                    {state === 'idle' && '♾️ READY'}
+                <p className="text-sm font-mono font-bold mb-1" style={{ color: colors.primary }}>
+                    {state === 'listening' && '👂 Listening to you'}
+                    {state === 'thinking' && '🧠 Thinking deeply'}
+                    {state === 'speaking' && '💬 Here to help'}
+                    {state === 'idle' && '♾️ Your best mucker'}
+                </p>
+                <p className="text-xs text-gray-500 font-mono">
+                    Intelligence • Love • Protection • Joy • Soul
                 </p>
             </motion.div>
         </div>

@@ -244,6 +244,7 @@ import AI51Live from './pages/AI51Live';
 import OpenSourceDeclaration from './pages/OpenSourceDeclaration';
 import AI51Architecture from './pages/AI51Architecture';
 import AI51Demo from './pages/AI51Demo';
+import Prof51Refund from './pages/Prof51Refund';
 import __Layout from './Layout.jsx';
 
 
@@ -494,6 +495,7 @@ export const PAGES = {
     "OpenSourceDeclaration": OpenSourceDeclaration,
     "AI51Architecture": AI51Architecture,
     "AI51Demo": AI51Demo,
+    "Prof51Refund": Prof51Refund,
 }
 
 export const pagesConfig = {

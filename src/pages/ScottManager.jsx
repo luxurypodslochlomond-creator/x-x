@@ -196,110 +196,233 @@ Keep it SHORT, practical, straight to the point. No bullshit. Real help.`,
 
 
 
-            {/* HEADER - CLEAN - STICKY */}
+            {/* HEADER - COACHELLA-LEVEL COOL - GLASS MORPHISM */}
             <motion.div 
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4 }}
-                className="sticky top-0 z-50 mb-6 bg-black/95 backdrop-blur-xl py-4 -mx-4 px-4"
+                className="sticky top-0 z-50 mb-6 -mx-4 px-4 py-4"
+                style={{
+                    background: 'linear-gradient(135deg, rgba(0,0,0,0.95) 0%, rgba(139,92,246,0.2) 50%, rgba(0,0,0,0.95) 100%)',
+                    backdropFilter: 'blur(40px)',
+                    WebkitBackdropFilter: 'blur(40px)'
+                }}
             >
-                <div className="bg-gradient-to-br from-gray-900 to-black border-2 border-amber-500/30 rounded-xl p-5 flex items-center justify-between shadow-lg" style={{ boxShadow: '0 4px 30px rgba(245, 158, 11, 0.1)' }}>
-                    <div>
-                        <div className="flex items-center gap-2 mb-1">
-                            <CoManager51Icon8Bit size={28} animate={true} />
-                            <h1 className="text-2xl font-black text-white font-mono tracking-tight">CB51</h1>
+                <div 
+                    className="relative overflow-hidden rounded-2xl p-6"
+                    style={{
+                        background: 'linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(245,158,11,0.1) 50%, rgba(236,72,153,0.1) 100%)',
+                        backdropFilter: 'blur(20px)',
+                        WebkitBackdropFilter: 'blur(20px)',
+                        border: '1px solid rgba(245, 158, 11, 0.3)',
+                        boxShadow: '0 8px 32px 0 rgba(245, 158, 11, 0.2), inset 0 1px 1px 0 rgba(255, 255, 255, 0.1)'
+                    }}
+                >
+                    {/* Animated gradient background */}
+                    <motion.div
+                        className="absolute inset-0 opacity-20"
+                        animate={{
+                            background: [
+                                'radial-gradient(circle at 20% 50%, rgba(245,158,11,0.4) 0%, transparent 50%)',
+                                'radial-gradient(circle at 80% 50%, rgba(236,72,153,0.4) 0%, transparent 50%)',
+                                'radial-gradient(circle at 50% 20%, rgba(34,211,238,0.4) 0%, transparent 50%)',
+                                'radial-gradient(circle at 20% 50%, rgba(245,158,11,0.4) 0%, transparent 50%)'
+                            ]
+                        }}
+                        transition={{
+                            duration: 10,
+                            repeat: Infinity,
+                            ease: "linear"
+                        }}
+                    />
+
+                    <div className="relative z-10 flex items-center justify-between">
+                        <div>
+                            <div className="flex items-center gap-3 mb-2">
+                                <motion.div
+                                    animate={{
+                                        rotate: [0, 5, -5, 0],
+                                        scale: [1, 1.1, 1]
+                                    }}
+                                    transition={{
+                                        duration: 4,
+                                        repeat: Infinity
+                                    }}
+                                >
+                                    <CoManager51Icon8Bit size={32} animate={true} />
+                                </motion.div>
+                                <div>
+                                    <h1 className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-pink-400 to-cyan-400 font-mono tracking-tight">
+                                        CB51
+                                    </h1>
+                                    <div className="flex items-center gap-2">
+                                        <motion.span 
+                                            className={`w-2 h-2 rounded-full ${scott.isOnline ? 'bg-green-400' : 'bg-amber-400'}`}
+                                            animate={{
+                                                scale: [1, 1.3, 1],
+                                                opacity: [0.5, 1, 0.5]
+                                            }}
+                                            transition={{
+                                                duration: 2,
+                                                repeat: Infinity
+                                            }}
+                                        />
+                                        <p className="text-xs text-gray-400 font-mono">
+                                            {scott.isOnline ? 'Connected' : 'Offline'}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <p className="text-xs text-gray-400 flex items-center gap-1 font-mono">
-                            <span className={scott.isOnline ? 'text-green-400' : 'text-amber-400'}>●</span> 
-                            {scott.isOnline ? 'Online' : 'Offline'}
-                        </p>
-                    </div>
-                    <div className="flex items-center gap-2">
-                        <Link to={createPageUrl('ScottAbout')} className="p-3 bg-gray-800/80 hover:bg-gray-700 rounded-lg transition-all border border-gray-700">
-                            <Heart className="w-5 h-5 text-gray-300" />
-                        </Link>
-                        <Link to={createPageUrl('ScottWhiteLabelPricing')} className="p-3 bg-gradient-to-br from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 rounded-lg transition-all shadow-md" style={{ boxShadow: '0 2px 12px rgba(245, 158, 11, 0.3)' }}>
-                            <DollarSign className="w-5 h-5 text-black" />
-                        </Link>
-                        <Link to={createPageUrl('ScottCalendar')} className="p-3 bg-gray-800/80 hover:bg-gray-700 rounded-lg transition-all border border-gray-700">
-                            <svg className="w-5 h-5 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                        </Link>
+                        <div className="flex items-center gap-2">
+                            <Link 
+                                to={createPageUrl('ScottAbout')} 
+                                className="p-3 rounded-xl transition-all backdrop-blur-sm"
+                                style={{
+                                    background: 'rgba(255,255,255,0.05)',
+                                    border: '1px solid rgba(255,255,255,0.1)',
+                                    boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
+                                }}
+                            >
+                                <Heart className="w-5 h-5 text-pink-400" />
+                            </Link>
+                            <Link 
+                                to={createPageUrl('ScottWhiteLabelPricing')} 
+                                className="p-3 rounded-xl transition-all"
+                                style={{
+                                    background: 'linear-gradient(135deg, rgba(245,158,11,0.3) 0%, rgba(236,72,153,0.3) 100%)',
+                                    border: '1px solid rgba(245,158,11,0.5)',
+                                    boxShadow: '0 4px 12px rgba(245,158,11,0.3)'
+                                }}
+                            >
+                                <DollarSign className="w-5 h-5 text-amber-300" />
+                            </Link>
+                            <Link 
+                                to={createPageUrl('ScottCalendar')} 
+                                className="p-3 rounded-xl transition-all backdrop-blur-sm"
+                                style={{
+                                    background: 'rgba(255,255,255,0.05)',
+                                    border: '1px solid rgba(255,255,255,0.1)',
+                                    boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
+                                }}
+                            >
+                                <Calendar className="w-5 h-5 text-cyan-400" />
+                            </Link>
+                        </div>
                     </div>
                 </div>
             </motion.div>
 
 
 
-            {/* ULTRA-SIMPLE - AI51 MESSAGE HANDLER FIRST */}
+            {/* ULTRA-MODERN - 3D DEPTH + GLASS */}
             {!activeWorkflow && !advancedMode && (
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="space-y-3 mb-6"
+                    className="space-y-4 mb-6"
                 >
+                    {/* PRIMARY ACTION - MESSAGE HANDLER */}
                     <motion.button
-                        whileHover={{ scale: 1.02 }}
+                        whileHover={{ scale: 1.02, y: -4 }}
                         whileTap={{ scale: 0.98 }}
                         onClick={() => setActiveWorkflow('messages')}
-                        className="w-full bg-gradient-to-br from-purple-500 via-pink-500 to-purple-600 text-white font-black py-8 rounded-2xl text-xl font-mono shadow-lg relative overflow-hidden"
-                        style={{ boxShadow: '0 6px 30px rgba(168, 85, 247, 0.6)' }}
+                        className="w-full py-10 rounded-3xl text-white font-black relative overflow-hidden"
+                        style={{
+                            background: 'linear-gradient(135deg, rgba(168,85,247,0.3) 0%, rgba(236,72,153,0.3) 50%, rgba(168,85,247,0.3) 100%)',
+                            backdropFilter: 'blur(20px)',
+                            WebkitBackdropFilter: 'blur(20px)',
+                            border: '2px solid rgba(168,85,247,0.5)',
+                            boxShadow: '0 20px 60px rgba(168,85,247,0.4), inset 0 1px 1px rgba(255,255,255,0.2)'
+                        }}
                     >
                         <motion.div
-                            className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-pink-500/20"
+                            className="absolute inset-0"
                             animate={{
-                                opacity: [0.3, 0.6, 0.3]
+                                background: [
+                                    'radial-gradient(circle at 20% 50%, rgba(34,211,238,0.3) 0%, transparent 50%)',
+                                    'radial-gradient(circle at 80% 50%, rgba(236,72,153,0.3) 0%, transparent 50%)',
+                                    'radial-gradient(circle at 20% 50%, rgba(34,211,238,0.3) 0%, transparent 50%)'
+                                ]
                             }}
                             transition={{
-                                duration: 2,
+                                duration: 4,
                                 repeat: Infinity
                             }}
                         />
                         <div className="relative z-10">
-                            <p className="text-2xl mb-1">📱 PASTE MESSAGES</p>
-                            <p className="text-xs text-purple-200">WhatsApp • Email • Chaos → Order</p>
+                            <p className="text-3xl mb-2">📱 PASTE MESSAGES</p>
+                            <p className="text-sm text-purple-200 font-normal">WhatsApp • Email • Slack → Instant Order</p>
                         </div>
                     </motion.button>
 
-                    <motion.button
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                        onClick={() => setActiveWorkflow('comms')}
-                        className="w-full bg-gradient-to-br from-pink-500 via-purple-500 to-pink-600 text-white font-black py-6 rounded-2xl text-xl font-mono shadow-lg"
-                        style={{ boxShadow: '0 4px 20px rgba(236, 72, 153, 0.5)' }}
-                    >
-                        💬 IN/OUT
-                    </motion.button>
-
-                    <motion.button
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                        onClick={() => setActiveWorkflow('gig')}
-                        className="w-full bg-gradient-to-br from-amber-500 via-orange-500 to-amber-600 text-white font-black py-6 rounded-2xl text-xl font-mono shadow-lg"
-                        style={{ boxShadow: '0 4px 20px rgba(245, 158, 11, 0.5)' }}
-                    >
-                        📧 GIG
-                    </motion.button>
-
-                    <motion.button
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                        onClick={() => setActiveWorkflow('session')}
-                        className="w-full bg-gradient-to-br from-cyan-500 via-blue-500 to-cyan-600 text-white font-black py-6 rounded-2xl text-xl font-mono shadow-lg"
-                        style={{ boxShadow: '0 4px 20px rgba(6, 182, 212, 0.5)' }}
-                    >
-                        🎵 SESSION
-                    </motion.button>
-
-                    <Link to={createPageUrl('ScottCalendar')} className="block">
+                    {/* SECONDARY ACTIONS - GLASS CARDS */}
+                    <div className="grid grid-cols-2 gap-3">
                         <motion.button
-                            whileHover={{ scale: 1.02 }}
+                            whileHover={{ scale: 1.05, y: -2 }}
                             whileTap={{ scale: 0.98 }}
-                            className="w-full bg-gradient-to-br from-green-500 via-emerald-500 to-green-600 text-white font-black py-6 rounded-2xl text-xl font-mono shadow-lg"
-                            style={{ boxShadow: '0 4px 20px rgba(34, 197, 94, 0.5)' }}
+                            onClick={() => setActiveWorkflow('gig')}
+                            className="py-8 rounded-2xl text-white font-black relative overflow-hidden"
+                            style={{
+                                background: 'rgba(245,158,11,0.2)',
+                                backdropFilter: 'blur(10px)',
+                                border: '1px solid rgba(245,158,11,0.4)',
+                                boxShadow: '0 8px 20px rgba(245,158,11,0.3)'
+                            }}
                         >
-                            📅 CALENDAR
+                            <p className="text-4xl mb-1">📧</p>
+                            <p className="text-sm">GIG</p>
                         </motion.button>
-                    </Link>
+
+                        <motion.button
+                            whileHover={{ scale: 1.05, y: -2 }}
+                            whileTap={{ scale: 0.98 }}
+                            onClick={() => setActiveWorkflow('session')}
+                            className="py-8 rounded-2xl text-white font-black relative overflow-hidden"
+                            style={{
+                                background: 'rgba(6,182,212,0.2)',
+                                backdropFilter: 'blur(10px)',
+                                border: '1px solid rgba(6,182,212,0.4)',
+                                boxShadow: '0 8px 20px rgba(6,182,212,0.3)'
+                            }}
+                        >
+                            <p className="text-4xl mb-1">🎵</p>
+                            <p className="text-sm">SESSION</p>
+                        </motion.button>
+
+                        <Link to={createPageUrl('ScottCalendar')} className="block">
+                            <motion.button
+                                whileHover={{ scale: 1.05, y: -2 }}
+                                whileTap={{ scale: 0.98 }}
+                                className="w-full py-8 rounded-2xl text-white font-black relative overflow-hidden"
+                                style={{
+                                    background: 'rgba(34,197,94,0.2)',
+                                    backdropFilter: 'blur(10px)',
+                                    border: '1px solid rgba(34,197,94,0.4)',
+                                    boxShadow: '0 8px 20px rgba(34,197,94,0.3)'
+                                }}
+                            >
+                                <p className="text-4xl mb-1">📅</p>
+                                <p className="text-sm">CALENDAR</p>
+                            </motion.button>
+                        </Link>
+
+                        <motion.button
+                            whileHover={{ scale: 1.05, y: -2 }}
+                            whileTap={{ scale: 0.98 }}
+                            onClick={() => setActiveWorkflow('comms')}
+                            className="py-8 rounded-2xl text-white font-black relative overflow-hidden"
+                            style={{
+                                background: 'rgba(236,72,153,0.2)',
+                                backdropFilter: 'blur(10px)',
+                                border: '1px solid rgba(236,72,153,0.4)',
+                                boxShadow: '0 8px 20px rgba(236,72,153,0.3)'
+                            }}
+                        >
+                            <p className="text-4xl mb-1">💬</p>
+                            <p className="text-sm">IN/OUT</p>
+                        </motion.button>
+                    </div>
 
                     <button
                         onClick={() => setAdvancedMode(true)}
