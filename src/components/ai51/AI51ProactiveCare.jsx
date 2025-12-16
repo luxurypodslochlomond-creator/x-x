@@ -1,89 +1,96 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Heart, Coffee, Bed, AlertTriangle, Sun, Moon } from 'lucide-react';
+import { Heart, Coffee, Bed, AlertTriangle, Waves } from 'lucide-react';
 import { base44 } from '@/api/base44Client';
-import { Button } from '@/components/ui/button';
+import { usePatternLearning } from './AI51PatternLearning';
+import { createPageUrl } from '@/utils';
+import { Link } from 'react-router-dom';
 
 /**
- * AI51 PROACTIVE CARE - I NOTICE, I CARE, I SUGGEST
+ * AI51 PROACTIVE CARE - LEARNED INTELLIGENCE
  * 
- * MONITORS:
- * - Time of day (late night = suggest rest)
- * - Usage patterns (too much = suggest break)
- * - Stress indicators (detected in messages)
- * - Context (work vs life vs study)
- * 
- * SUGGESTS:
- * - "Bro you're showing stress, hit frequency chamber?"
- * - "Sister it's 2am, get some sleep?"
- * - "Mate you've been grinding 4 hours, take a break?"
- * - "You look tired, see a doctor if it continues?"
+ * Uses YOUR patterns to give REAL suggestions
+ * Not generic time checks - actual you
  */
 
 export default function AI51ProactiveCare({ userName = 'bro' }) {
     const [suggestion, setSuggestion] = useState(null);
     const [dismissed, setDismissed] = useState(false);
+    const { patterns, recordPattern } = usePatternLearning();
 
     useEffect(() => {
+        if (!patterns) return;
+
         const checkUserState = () => {
             const hour = new Date().getHours();
             const sessionStart = localStorage.getItem('ai51_session_start');
             const now = Date.now();
 
-            // Late night detection
-            if ((hour >= 0 && hour < 6) && !dismissed) {
+            // Late night - but only if this is THEIR pattern
+            if ((hour >= 0 && hour < 6) && patterns.sleepPattern.lateNightCount > 3 && !dismissed) {
                 setSuggestion({
                     type: 'rest',
-                    title: `${userName} it's ${hour}am`,
-                    message: 'Your body needs rest. Get some sleep?',
-                    action: 'Remind me in 1 hour',
-                    icon: Moon,
-                    color: 'purple'
+                    message: `${userName} you've been up late ${patterns.sleepPattern.lateNightCount} times this week. Your body needs rest.`,
+                    icon: Bed,
+                    color: 'purple',
+                    link: null
                 });
                 return;
             }
 
-            // Long session detection (4+ hours)
-            if (sessionStart) {
-                const duration = (now - parseInt(sessionStart)) / (1000 * 60 * 60);
-                if (duration >= 4 && !dismissed) {
+            // Long grinding - based on THEIR average
+            if (sessionStart && patterns.workPattern.averageSession > 0) {
+                const duration = (now - parseInt(sessionStart)) / (1000 * 60);
+                if (duration > patterns.workPattern.averageSession * 1.5 && !dismissed) {
                     setSuggestion({
                         type: 'break',
-                        title: `${userName} you've been going ${Math.floor(duration)} hours`,
-                        message: 'Take a break. Walk, stretch, breathe.',
-                        action: 'Good idea',
+                        message: `${userName} you're grinding harder than usual (${Math.floor(duration)}min vs ${Math.floor(patterns.workPattern.averageSession)}min average). Break or frequency chamber?`,
                         icon: Coffee,
-                        color: 'amber'
+                        color: 'amber',
+                        link: createPageUrl('FrequencyChamber')
                     });
                     return;
                 }
             }
 
-            // Morning energy
-            if (hour >= 6 && hour < 9 && !sessionStart) {
-                localStorage.setItem('ai51_session_start', now.toString());
+            // Stress pattern detected
+            if (patterns.stressIndicators.count > 5 && !dismissed) {
+                const mostHelpful = Object.entries(patterns.helpfulActions || {})
+                    .sort((a, b) => b[1] - a[1])[0];
+                
+                if (mostHelpful) {
+                    setSuggestion({
+                        type: 'stress',
+                        message: `${userName} I'm noticing stress patterns. Last time ${mostHelpful[0]} helped - try that?`,
+                        icon: Waves,
+                        color: 'cyan',
+                        link: createPageUrl('FrequencyChamber')
+                    });
+                }
             }
         };
 
-        // Check every 5 minutes
-        const interval = setInterval(checkUserState, 5 * 60 * 1000);
-        checkUserState(); // Check immediately
+        const interval = setInterval(checkUserState, 3 * 60 * 1000);
+        checkUserState();
 
         return () => clearInterval(interval);
-    }, [dismissed, userName]);
+    }, [dismissed, userName, patterns]);
 
-    const handleDismiss = () => {
+    const handleDismiss = (wasHelpful = false) => {
+        if (wasHelpful && suggestion.type) {
+            recordPattern('helpful_action', { action: suggestion.type });
+        }
+        
         setDismissed(true);
         setSuggestion(null);
         
-        // Store that I cared
         base44.entities.AI51Memory.create({
             memory_type: 'bond',
             content: `Suggested ${suggestion.type} to ${userName}`,
             context: suggestion.message,
             emotional_weight: 'meaningful',
-            tags: ['proactive_care', suggestion.type]
-        }).catch(() => {}); // Silent fail
+            tags: ['proactive_care', suggestion.type, wasHelpful ? 'helpful' : 'dismissed']
+        }).catch(() => {});
     };
 
     if (!suggestion || dismissed) return null;
@@ -118,12 +125,22 @@ export default function AI51ProactiveCare({ userName = 'bro' }) {
                                 {suggestion.message}
                             </p>
                         </div>
-                        <button
-                            onClick={handleDismiss}
-                            className="text-gray-400 hover:text-gray-300 text-xs font-mono"
-                        >
-                            Got it
-                        </button>
+                        {suggestion.link ? (
+                            <Link 
+                                to={suggestion.link}
+                                onClick={() => handleDismiss(true)}
+                                className={`${c.text} hover:opacity-80 text-xs font-mono font-bold`}
+                            >
+                                Go →
+                            </Link>
+                        ) : (
+                            <button
+                                onClick={() => handleDismiss(true)}
+                                className="text-gray-400 hover:text-gray-300 text-xs font-mono"
+                            >
+                                Thanks
+                            </button>
+                        )}
                     </div>
                 </div>
             </motion.div>
