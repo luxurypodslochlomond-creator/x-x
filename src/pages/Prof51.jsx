@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
@@ -20,10 +21,10 @@ import { useMutation } from '@tanstack/react-query';
  */
 
 export default function Prof51() {
-    const [activeTab, setActiveTab] = useState('demo'); // demo, how, why, scale
+    const [activeTab, setActiveTab] = useState(null); // null, transform, lost, learn
     const [uploadedFile, setUploadedFile] = useState(null);
     const [transformedResult, setTransformedResult] = useState(null);
-    const [showDetails, setShowDetails] = useState(false);
+    const [showDetails, setShowDetails] = useState(false); // Used within 'learn' tab
 
     const [deferredPrompt, setDeferredPrompt] = React.useState(null);
     const [showInstallButton, setShowInstallButton] = React.useState(false);
@@ -159,304 +160,309 @@ Return CLEAN, FORMATTED content ready to use. Be helpful, not generic.`,
             </div>
 
             <div className="px-4 py-6 max-w-2xl mx-auto">
-                {/* HERO SECTION - 8-BIT QUANTUM */}
-                <motion.div 
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="text-center mb-6"
-                >
-                    {/* 8-bit pixelated background grid */}
-                    <div className="relative mb-4">
-                        <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 3px, #06b6d4 3px, #06b6d4 4px), repeating-linear-gradient(90deg, transparent, transparent 3px, #06b6d4 3px, #06b6d4 4px)', imageRendering: 'pixelated' }}></div>
-                        <h1 className="relative text-5xl font-black mb-2 text-white font-mono" style={{ textShadow: '4px 4px 0 #000, 0 0 20px rgba(6, 182, 212, 0.8)' }}>
-                            YOUR AI MATE
-                        </h1>
-                    </div>
-                    <p className="text-cyan-400 text-sm font-mono font-black mb-1">STUDENT LIFE CO-MANAGER</p>
-                    <p className="text-gray-500 text-xs font-mono mb-4">Studies • Social • Money • Mental Health • Everything</p>
-                    
-                    {/* WORKING TOOLS BUTTON - 8-BIT QUANTUM STYLE */}
-                    <Link to={createPageUrl('Prof51Tools')}>
-                        <motion.div
-                            whileHover={{ scale: 1.02, y: -2 }}
-                            whileTap={{ scale: 0.98 }}
-                            className="relative"
-                        >
-                            {/* 8-bit shadow layers */}
-                            <div className="absolute inset-0 bg-green-500 rounded-xl translate-x-1 translate-y-1" style={{ imageRendering: 'pixelated' }}></div>
-                            <div className="absolute inset-0 bg-cyan-500 rounded-xl translate-x-0.5 translate-y-0.5" style={{ imageRendering: 'pixelated' }}></div>
-                            
-                            <button className="relative w-full bg-gradient-to-r from-green-400 to-cyan-400 text-black font-black py-6 text-xl rounded-xl border-4 border-white">
-                                <div className="flex items-center justify-center gap-3 mb-1">
-                                    <span className="text-3xl">🚀</span>
-                                    <span className="font-mono">OPEN 9 TOOLS</span>
-                                </div>
-                                <div className="flex items-center justify-center gap-2 text-xs">
-                                    <div className="w-2 h-2 bg-black rounded-full animate-pulse"></div>
-                                    <span className="text-black font-bold font-mono">BACKEND LIVE</span>
-                                    <div className="w-2 h-2 bg-black rounded-full animate-pulse"></div>
-                                </div>
-                            </button>
-                        </motion.div>
-                    </Link>
-                </motion.div>
-
-                {/* PWA INSTALL */}
-                {showInstallButton && (
-                    <motion.button
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        onClick={handleInstallClick}
-                        className="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white font-black py-4 rounded-xl border-2 border-purple-400 font-mono text-sm mb-4 shadow-lg"
-                        style={{ boxShadow: '0 0 30px rgba(168, 85, 247, 0.4)' }}
+                {/* ULTRA-SIMPLE HERO */}
+                {activeTab === null && (
+                    <motion.div 
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="text-center mb-6"
                     >
-                        📱 INSTALL APP (Works Offline)
-                    </motion.button>
+                        <Prof51Icon8Bit size={80} animate={true} className="mx-auto mb-4" />
+                        <h1 className="text-4xl font-black text-white font-mono mb-2">YOUR AI MATE</h1>
+                        <p className="text-cyan-400 text-sm font-mono mb-6">Student life sorted. Zero stress.</p>
+                    </motion.div>
                 )}
 
-                {/* SIMPLE: WHAT IS PROF51 */}
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    className="bg-gradient-to-br from-cyan-500/20 to-green-500/20 border-4 border-cyan-500 rounded-2xl p-6 mb-6"
-                    style={{ boxShadow: '0 0 50px rgba(6, 182, 212, 0.5)' }}
-                >
-                    <p className="text-cyan-400 font-black text-2xl mb-3 text-center">WHAT IS PROF51?</p>
-                    <p className="text-white text-lg font-bold text-center mb-4">Your most intelligent mate in the universe.</p>
+                {/* 3 CORE BUTTONS - ULTRA SIMPLE */}
+                {activeTab === null && (
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="space-y-4 mb-6"
+                    >
+                        <Link to={createPageUrl('Prof51Tools')}>
+                            <button className="w-full bg-gradient-to-r from-green-500 to-cyan-500 border-4 border-green-400 text-black font-black py-8 rounded-xl text-2xl font-mono" style={{ boxShadow: '0 8px 40px rgba(34, 197, 94, 0.7)' }}>
+                                🚀 9 TOOLS
+                            </button>
+                        </Link>
 
-                    <div className="bg-black border-2 border-white rounded-xl p-4 mb-4">
-                        <p className="text-white font-bold text-base mb-3 text-center">SIMPLE VERSION:</p>
-                        <div className="space-y-2 text-sm">
-                            <p className="text-gray-300">✓ AI does ALL your busywork (Excel, essays, slides)</p>
-                            <p className="text-gray-300">✓ Lost & Found mesh (never lose phone/laptop/keys)</p>
-                            <p className="text-gray-300">✓ P2P student network (find flatmates, study groups, what's on)</p>
-                            <p className="text-gray-300">✓ Save money (call restaurants direct, swap textbooks)</p>
-                            <p className="text-gray-300">✓ Works offline (mesh network, no internet needed)</p>
-                            <p className="text-green-400 font-bold mt-2">FREE FOREVER. No ads. No data selling. ♾️❤️♾️</p>
+                        <button
+                            onClick={() => setActiveTab('transform')}
+                            className="w-full bg-gradient-to-r from-purple-500 to-pink-500 border-4 border-purple-400 text-black font-black py-8 rounded-xl text-2xl font-mono"
+                            style={{ boxShadow: '0 8px 40px rgba(168, 85, 247, 0.7)' }}
+                        >
+                            📄 FIX FILE
+                        </button>
+
+                        <button
+                            onClick={() => setActiveTab('lost')}
+                            className="w-full bg-gradient-to-r from-amber-500 to-orange-500 border-4 border-amber-400 text-black font-black py-8 rounded-xl text-2xl font-mono"
+                            style={{ boxShadow: '0 8px 40px rgba(245, 158, 11, 0.7)' }}
+                        >
+                            📱 LOST & FOUND
+                        </button>
+
+                        {showInstallButton && (
+                            <motion.button
+                                initial={{ opacity: 0, scale: 0.9 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                onClick={handleInstallClick}
+                                className="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white font-black py-4 rounded-xl border-2 border-purple-400 font-mono text-sm shadow-lg mt-4"
+                                style={{ boxShadow: '0 0 30px rgba(168, 85, 247, 0.4)' }}
+                            >
+                                📱 INSTALL APP (Works Offline)
+                            </motion.button>
+                        )}
+
+                        <button
+                            onClick={() => setActiveTab('learn')}
+                            className="w-full bg-black border-2 border-gray-800 hover:border-gray-700 text-gray-500 font-bold py-3 rounded-lg text-xs font-mono mt-6"
+                        >
+                            + Learn More (£717B extraction, why it works, etc)
+                        </button>
+                    </motion.div>
+                )}
+
+
+                {/* TRANSFORM FILE WORKFLOW */}
+                {activeTab === 'transform' && (
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="space-y-4"
+                    >
+                        <button
+                            onClick={() => { setActiveTab(null); setTransformedResult(null); setUploadedFile(null); }} // Reset for next use
+                            className="flex items-center gap-2 text-gray-400 hover:text-white mb-4"
+                        >
+                            <ArrowRight className="w-4 h-4 rotate-180" /> <span className="text-sm font-mono">Back</span>
+                        </button>
+
+                        <div className="bg-gradient-to-br from-purple-500/20 to-pink-500/20 border-4 border-purple-500 rounded-xl p-6">
+                            <h2 className="text-purple-400 font-black text-2xl font-mono mb-4 text-center">AI FIXES YOUR FILES</h2>
+                            
+                            {!transformedResult ? (
+                                <div className="space-y-4">
+                                    <label className="block">
+                                        <input
+                                            type="file"
+                                            accept=".xlsx,.xls,.docx,.doc,.pdf,.jpg,.jpeg,.png"
+                                            onChange={(e) => {
+                                                const file = e.target.files[0];
+                                                if (file) {
+                                                    setUploadedFile(file);
+                                                    transformFile.mutate(file);
+                                                }
+                                            }}
+                                            className="hidden"
+                                            id="file-upload-transform" // Unique ID
+                                        />
+                                        <div className="bg-black border-4 border-dashed border-purple-500 hover:border-purple-400 rounded-xl p-8 text-center cursor-pointer transition-all">
+                                            {transformFile.isPending ? (
+                                                <div className="space-y-3">
+                                                    <Loader className="w-12 h-12 text-purple-400 mx-auto animate-spin" />
+                                                    <p className="text-purple-400 font-bold text-lg font-mono">AI WORKING...</p>
+                                                </div>
+                                            ) : (
+                                                <div className="space-y-3">
+                                                    <Upload className="w-16 h-16 text-purple-400 mx-auto" />
+                                                    <p className="text-white font-bold text-lg font-mono">UPLOAD FILE</p>
+                                                    <p className="text-gray-400 text-sm font-mono">Excel • Word • PDF • Photos</p>
+                                                </div>
+                                            )}
+                                        </div>
+                                    </label>
+                                </div>
+                            ) : (
+                                <motion.div
+                                    initial={{ opacity: 0, scale: 0.95 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    className="space-y-4"
+                                >
+                                    <div className="bg-green-900/20 border-2 border-green-500 rounded-xl p-4">
+                                        <p className="text-green-400 font-black mb-2">✓ FIXED</p>
+                                        <div className="bg-black border border-cyan-500/50 rounded-lg p-4 max-h-96 overflow-y-auto">
+                                            <p className="text-white text-sm font-mono whitespace-pre-wrap">{transformedResult.transformed}</p>
+                                        </div>
+                                    </div>
+                                    <Button
+                                        onClick={() => {
+                                            setTransformedResult(null);
+                                            setUploadedFile(null);
+                                        }}
+                                        className="w-full bg-purple-500 hover:bg-purple-600 text-white font-black py-4"
+                                    >
+                                        FIX ANOTHER
+                                    </Button>
+                                </motion.div>
+                            )}
                         </div>
-                    </div>
+                    </motion.div>
+                )}
 
-                    <div className="bg-gradient-to-r from-amber-500/20 to-red-500/20 border-4 border-amber-500 rounded-xl p-4 mb-4" style={{ boxShadow: '0 0 50px rgba(245, 158, 11, 0.6)' }}>
-                        <p className="text-amber-400 font-black text-xl mb-2 text-center">📱 THE ONE THING EVERYONE NEEDS:</p>
-                        <p className="text-white text-3xl font-black text-center mb-3">NEVER LOSE YOUR STUFF</p>
+                {/* LOST & FOUND */}
+                {activeTab === 'lost' && (
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="space-y-4"
+                    >
+                        <button
+                            onClick={() => setActiveTab(null)}
+                            className="flex items-center gap-2 text-gray-400 hover:text-white mb-4"
+                        >
+                            <ArrowRight className="w-4 h-4 rotate-180" /> <span className="text-sm font-mono">Back</span>
+                        </button>
 
-                        <div className="bg-black border-2 border-red-500 rounded-lg p-4 mb-3">
-                            <p className="text-red-400 font-bold text-sm mb-2 text-center">THIS IS THE UNLOCK:</p>
-                            <p className="text-white text-xs mb-3 text-center">Rich, broke, British, Chinese, lonely, popular = EVERYONE loses stuff.</p>
-
-                            <div className="grid grid-cols-2 gap-2 text-xs">
-                                <p className="text-gray-300 text-center">→ Phone</p>
-                                <p className="text-gray-300 text-center">→ Laptop</p>
-                                <p className="text-gray-300 text-center">→ Keys</p>
-                                <p className="text-gray-300 text-center">→ Wallet</p>
-                                <p className="text-gray-300 text-center">→ Bag</p>
-                                <p className="text-gray-300 text-center">→ Jacket</p>
+                        <div className="bg-gradient-to-br from-amber-500/20 to-red-500/20 border-4 border-amber-500 rounded-xl p-6">
+                            <h2 className="text-amber-400 font-black text-2xl font-mono mb-4 text-center">NEVER LOSE YOUR STUFF</h2>
+                            
+                            <div className="bg-black border-2 border-amber-500 rounded-lg p-4 mb-4">
+                                <p className="text-white font-bold text-sm mb-3">P2P MESH FINDS EVERYTHING:</p>
+                                <div className="grid grid-cols-2 gap-2 text-xs">
+                                    <p className="text-gray-300">→ Phone</p>
+                                    <p className="text-gray-300">→ Laptop</p>
+                                    <p className="text-gray-300">→ Keys</p>
+                                    <p className="text-gray-300">→ Wallet</p>
+                                    <p className="text-gray-300">→ Bag</p>
+                                    <p className="text-gray-300">→ Jacket</p>
+                                </div>
+                                <p className="text-green-400 font-bold text-sm mt-3">Works offline. 500 students in venue = you find it ✓</p>
                             </div>
 
-                            <p className="text-green-400 font-bold text-sm text-center mt-3">P2P mesh finds it. ALWAYS. EVERYWHERE. ✓</p>
-                        </div>
-
-                        <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-2 border-green-500 rounded-lg p-3">
-                            <p className="text-green-400 font-black text-xs mb-2 text-center">HOW IT SPREADS:</p>
-                            <p className="text-white text-xs mb-1 text-center">Day 1: Student loses phone at club</p>
-                            <p className="text-cyan-400 text-xs mb-1 text-center">→ Prof51 finds it (500 students in venue)</p>
-                            <p className="text-pink-400 text-xs mb-1 text-center">→ "This app just saved my life"</p>
-                            <p className="text-purple-400 text-xs mb-1 text-center">→ Tells 10 friends</p>
-                            <p className="text-amber-400 text-xs mb-2 text-center">→ They all download (want same protection)</p>
-                            <p className="text-white font-bold text-sm text-center mt-2">ONE REAL SAVE = VIRAL EXPLOSION ♾️❤️♾️</p>
-                        </div>
-                    </div>
-
-                    <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-4 border-purple-500 rounded-xl p-4">
-                        <p className="text-purple-400 font-black text-sm mb-3 text-center">THEN THEY DISCOVER THE REST:</p>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
-                            <div className="bg-black border border-cyan-500/50 rounded p-2">
-                                <p className="text-cyan-400 font-bold mb-1">🇬🇧 BRITISH STUDENT:</p>
-                                <p className="text-gray-300">→ Excel homework? AI does it in 30 seconds.</p>
-                                <p className="text-gray-300">→ Essays? Structured instantly.</p>
-                            </div>
-                            <div className="bg-black border border-pink-500/50 rounded p-2">
-                                <p className="text-pink-400 font-bold mb-1">🇨🇳 CHINESE STUDENT:</p>
-                                <p className="text-gray-300">→ Works offline (no VPN needed).</p>
-                                <p className="text-gray-300">→ Find other Chinese students P2P.</p>
-                            </div>
-                            <div className="bg-black border border-green-500/50 rounded p-2">
-                                <p className="text-green-400 font-bold mb-1">💰 RICH STUDENT:</p>
-                                <p className="text-gray-300">→ Save time (AI = better than assistant).</p>
-                                <p className="text-gray-300">→ Track expensive stuff constantly.</p>
-                            </div>
-                            <div className="bg-black border border-amber-500/50 rounded p-2">
-                                <p className="text-amber-400 font-bold mb-1">💸 BROKE STUDENT:</p>
-                                <p className="text-gray-300">→ Free AI tutor (no £80/hour cost).</p>
-                                <p className="text-gray-300">→ Earn $P51 helping others.</p>
-                            </div>
-                            <div className="bg-black border border-purple-500/50 rounded p-2">
-                                <p className="text-purple-400 font-bold mb-1">😰 LONELY STUDENT:</p>
-                                <p className="text-gray-300">→ Find compatible flatmates.</p>
-                                <p className="text-gray-300">→ Join study groups that fit you.</p>
-                            </div>
-                            <div className="bg-black border border-red-500/50 rounded p-2">
-                                <p className="text-red-400 font-bold mb-1">😎 POPULAR STUDENT:</p>
-                                <p className="text-gray-300">→ Organize events easier.</p>
-                                <p className="text-gray-300">→ Keep friend group connected.</p>
+                            <div className="bg-green-900/20 border-2 border-green-500 rounded-lg p-4">
+                                <p className="text-green-400 font-black text-xs mb-2">COMING SOON:</p>
+                                <p className="text-white text-xs">Report lost item → All Prof51 users nearby get alert → Found in minutes</p>
                             </div>
                         </div>
-                        <p className="text-white font-bold text-center mt-3">Come for Lost & Found. Stay for EVERYTHING. ✓</p>
-                    </div>
-                </motion.div>
+                    </motion.div>
+                )}
 
-                {/* KEY STAT - BIG */}
-                <motion.div 
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.2 }}
-                    className="bg-gradient-to-br from-red-500/10 via-pink-500/10 to-purple-500/10 border-2 border-red-500/50 rounded-2xl p-8 mb-6 text-center backdrop-blur-xl"
-                    style={{ boxShadow: '0 0 60px rgba(239, 68, 68, 0.3), inset 0 0 40px rgba(236, 72, 153, 0.1)' }}
-                >
-                    <motion.p 
-                        initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
-                        transition={{ delay: 0.4, type: "spring" }}
-                        className="text-red-400 text-6xl font-black font-mono mb-3"
+                {/* LEARN MORE - ALL THE INFO */}
+                {activeTab === 'learn' && (
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="space-y-6"
                     >
-                        £717B
-                    </motion.p>
-                    <p className="text-white text-base font-bold mb-2">Extracted from students globally</p>
-                    <div className="flex items-center justify-center gap-2 text-xs font-mono mt-2">
-                        <Prof51Icon8Bit size={20} animate={true} />
-                        <p className="text-cyan-400 font-bold">Prof51 stops it ♾️❤️♾️</p>
-                    </div>
-                </motion.div>
+                        <button
+                            onClick={() => setActiveTab(null)}
+                            className="flex items-center gap-2 text-gray-400 hover:text-white mb-4"
+                        >
+                            <ArrowRight className="w-4 h-4 rotate-180" /> <span className="text-sm font-mono">Back to simple</span>
+                        </button>
 
-                {/* TAB NAVIGATION */}
-                <div className="grid grid-cols-4 gap-2 mb-6">
-                    <motion.button
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        onClick={() => setActiveTab('demo')}
-                        className={`py-4 px-2 rounded-xl font-mono text-xs font-black transition-all ${activeTab === 'demo' ? 'bg-gradient-to-br from-cyan-500 to-cyan-600 text-white shadow-lg' : 'bg-black/60 text-cyan-400 border border-cyan-500/30'}`}
-                        style={activeTab === 'demo' ? { boxShadow: '0 0 20px rgba(6, 182, 212, 0.4)' } : {}}
-                    >
-                        TRY IT
-                    </motion.button>
-                    <motion.button
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        onClick={() => setActiveTab('how')}
-                        className={`py-4 px-2 rounded-xl font-mono text-xs font-black transition-all ${activeTab === 'how' ? 'bg-gradient-to-br from-green-500 to-green-600 text-white shadow-lg' : 'bg-black/60 text-green-400 border border-green-500/30'}`}
-                        style={activeTab === 'how' ? { boxShadow: '0 0 20px rgba(34, 197, 94, 0.4)' } : {}}
-                    >
-                        HOW
-                    </motion.button>
-                    <motion.button
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        onClick={() => setActiveTab('why')}
-                        className={`py-4 px-2 rounded-xl font-mono text-xs font-black transition-all ${activeTab === 'why' ? 'bg-gradient-to-br from-pink-500 to-pink-600 text-white shadow-lg' : 'bg-black/60 text-pink-400 border border-pink-500/30'}`}
-                        style={activeTab === 'why' ? { boxShadow: '0 0 20px rgba(236, 72, 153, 0.4)' } : {}}
-                    >
-                        WHY
-                    </motion.button>
-                    <motion.button
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        onClick={() => setActiveTab('scale')}
-                        className={`py-4 px-2 rounded-xl font-mono text-xs font-black transition-all ${activeTab === 'scale' ? 'bg-gradient-to-br from-purple-500 to-purple-600 text-white shadow-lg' : 'bg-black/60 text-purple-400 border border-purple-500/30'}`}
-                        style={activeTab === 'scale' ? { boxShadow: '0 0 20px rgba(168, 85, 247, 0.4)' } : {}}
-                    >
-                        SCALE
-                    </motion.button>
-                </div>
+                        {/* £717B STAT */}
+                        <motion.div 
+                            initial={{ opacity: 0, scale: 0.95 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ delay: 0.2 }}
+                            className="bg-gradient-to-br from-red-500/10 via-pink-500/10 to-purple-500/10 border-2 border-red-500/50 rounded-2xl p-8 text-center backdrop-blur-xl"
+                            style={{ boxShadow: '0 0 60px rgba(239, 68, 68, 0.3), inset 0 0 40px rgba(236, 72, 153, 0.1)' }}
+                        >
+                            <motion.p 
+                                initial={{ scale: 0 }}
+                                animate={{ scale: 1 }}
+                                transition={{ delay: 0.4, type: "spring" }}
+                                className="text-red-400 text-6xl font-black font-mono mb-3"
+                            >
+                                £717B
+                            </motion.p>
+                            <p className="text-white text-base font-bold mb-2">Extracted from students globally</p>
+                            <div className="flex items-center justify-center gap-2 text-xs font-mono mt-2">
+                                <Prof51Icon8Bit size={20} animate={true} />
+                                <p className="text-cyan-400 font-bold">Prof51 stops it ♾️❤️♾️</p>
+                            </div>
+                        </motion.div>
 
-                {/* DEMO TAB */}
-                {activeTab === 'demo' && (
-                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-4">
-                        {/* WORKING DEMO */}
-            <div className="bg-gradient-to-br from-red-500/20 to-amber-500/20 border-4 border-red-500 p-6 mb-8 rounded-xl" style={{ boxShadow: '0 0 50px rgba(239, 68, 68, 0.5)' }}>
-                <div className="flex items-center gap-3 mb-4">
-                    <DollarSign className="w-12 h-12 text-red-400" />
-                    <div>
-                        <h2 className="text-red-400 font-black text-xl font-mono">THE EXTRACTION PROBLEM</h2>
-                        <p className="text-gray-400 text-xs font-mono">Food delivery extraction = Why Prof51 exists</p>
-                    </div>
-                </div>
 
-                <div className="space-y-3 text-sm font-mono">
-                    <div className="bg-black border-2 border-red-500 p-4 rounded">
-                        <p className="text-red-400 font-bold mb-2">TYPICAL PLATFORM ORDER:</p>
-                        <p className="text-white text-xs mb-1">Food cost: £19.95</p>
-                        <p className="text-white text-xs mb-1">Delivery: £4.50</p>
-                        <p className="text-white text-xs mb-1">Bag fee: £0.15</p>
-                        <p className="text-white text-xs mb-1">Service fee: £0.99</p>
-                        <p className="text-red-400 text-base font-bold mt-2">TOTAL: £25.59</p>
-                        <p className="text-amber-400 text-xs mt-2">Platform takes: £5.64 (29% EXTRACTION)</p>
-                    </div>
+                        {/* WORKING DEMO (from old demo tab) */}
+                        <div className="bg-gradient-to-br from-red-500/20 to-amber-500/20 border-4 border-red-500 p-6 rounded-xl" style={{ boxShadow: '0 0 50px rgba(239, 68, 68, 0.5)' }}>
+                            <div className="flex items-center gap-3 mb-4">
+                                <DollarSign className="w-12 h-12 text-red-400" />
+                                <div>
+                                    <h2 className="text-red-400 font-black text-xl font-mono">THE EXTRACTION PROBLEM</h2>
+                                    <p className="text-gray-400 text-xs font-mono">Food delivery extraction = Why Prof51 exists</p>
+                                </div>
+                            </div>
 
-                    <div className="bg-black border-2 border-green-500 p-4 rounded">
-                        <p className="text-green-400 font-bold mb-2">DIRECT CONNECTION SOLUTION:</p>
-                        <p className="text-white text-xs mb-1">Call restaurant direct</p>
-                        <p className="text-white text-xs mb-1">Pay cash: £30</p>
-                        <p className="text-white text-xs mb-1">Keep change or tip driver</p>
-                        <p className="text-green-400 text-xs font-bold mt-2">Restaurant keeps FULL £25.59 (not £19.95)</p>
-                        <p className="text-cyan-400 text-xs mt-1">Zero tracking. Zero data selling. Zero extraction.</p>
-                    </div>
+                            <div className="space-y-3 text-sm font-mono">
+                                <div className="bg-black border-2 border-red-500 p-4 rounded">
+                                    <p className="text-red-400 font-bold mb-2">TYPICAL PLATFORM ORDER:</p>
+                                    <p className="text-white text-xs mb-1">Food cost: £19.95</p>
+                                    <p className="text-white text-xs mb-1">Delivery: £4.50</p>
+                                    <p className="text-white text-xs mb-1">Bag fee: £0.15</p>
+                                    <p className="text-white text-xs mb-1">Service fee: £0.99</p>
+                                    <p className="text-red-400 text-base font-bold mt-2">TOTAL: £25.59</p>
+                                    <p className="text-amber-400 text-xs mt-2">Platform takes: £5.64 (29% EXTRACTION)</p>
+                                </div>
 
-                    <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-4 border-purple-500 p-4 rounded" style={{ boxShadow: '0 0 40px rgba(168, 85, 247, 0.4)' }}>
-                        <p className="text-purple-400 font-bold mb-2">THE REAL GLOBAL EXTRACTION:</p>
-                        <p className="text-white text-xs mb-1">Food delivery (2x/week): £5.64 × 735M × 104 = £431B</p>
-                        <p className="text-white text-xs mb-1">Transport (Uber): £3 × 735M × 52 = £115B</p>
-                        <p className="text-white text-xs mb-1">Accommodation (Airbnb fees): £2 × 735M × 12 = £18B</p>
-                        <p className="text-white text-xs mb-1">Shopping (Amazon markup): £8 × 735M × 26 = £153B</p>
-                        <p className="text-red-400 text-3xl font-black mt-2">= £717 BILLION/YEAR</p>
-                        <p className="text-pink-400 text-xs mt-2 font-bold">Nearly THREE QUARTERS OF A TRILLION extracted from students globally ♾️❤️♾️</p>
-                        <p className="text-cyan-400 text-xs mt-1">Prof51 = students connect DIRECT. Zero middlemen. Zero extraction.</p>
-                    </div>
+                                <div className="bg-black border-2 border-green-500 p-4 rounded">
+                                    <p className="text-green-400 font-bold mb-2">DIRECT CONNECTION SOLUTION:</p>
+                                    <p className="text-white text-xs mb-1">Call restaurant direct</p>
+                                    <p className="text-white text-xs mb-1">Pay cash: £30</p>
+                                    <p className="text-white text-xs mb-1">Keep change or tip driver</p>
+                                    <p className="text-green-400 text-xs font-bold mt-2">Restaurant keeps FULL £25.59 (not £19.95)</p>
+                                    <p className="text-cyan-400 text-xs mt-1">Zero tracking. Zero data selling. Zero extraction.</p>
+                                </div>
 
-                    <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-4 border-green-500 p-4 rounded" style={{ boxShadow: '0 0 40px rgba(34, 197, 94, 0.4)' }}>
-                        <p className="text-green-400 font-bold mb-2">PROF51 SOLUTION (SIMPLE):</p>
-                        <p className="text-white text-xs mb-1">1️⃣ Open Prof51 → See local restaurants</p>
-                        <p className="text-white text-xs mb-1">2️⃣ Tap phone icon → Call direct</p>
-                        <p className="text-white text-xs mb-1">3️⃣ Restaurant keeps full £25.59 (not £19.95)</p>
-                        <p className="text-white text-xs mb-1">4️⃣ You save £5.64 every order</p>
-                        <p className="text-cyan-400 text-xs font-bold mt-2">Restaurant pays Prof51 £200/year = Reach 1000+ students</p>
-                        <p className="text-pink-400 text-xs font-bold mt-1">Students FREE forever. Restaurant saves £5,640 in parasite fees.</p>
-                        <p className="text-green-400 text-xs font-bold mt-2">DIRECT CONNECTION. ZERO EXTRACTION. ♾️❤️♾️</p>
-                    </div>
-                </div>
-            </div>
+                                <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-4 border-purple-500 p-4 rounded" style={{ boxShadow: '0 0 40px rgba(168, 85, 247, 0.4)' }}>
+                                    <p className="text-purple-400 font-bold mb-2">THE REAL GLOBAL EXTRACTION:</p>
+                                    <p className="text-white text-xs mb-1">Food delivery (2x/week): £5.64 × 735M × 104 = £431B</p>
+                                    <p className="text-white text-xs mb-1">Transport (Uber): £3 × 735M × 52 = £115B</p>
+                                    <p className="text-white text-xs mb-1">Accommodation (Airbnb fees): £2 × 735M × 12 = £18B</p>
+                                    <p className="text-white text-xs mb-1">Shopping (Amazon markup): £8 × 735M × 26 = £153B</p>
+                                    <p className="text-red-400 text-3xl font-black mt-2">= £717 BILLION/YEAR</p>
+                                    <p className="text-pink-400 text-xs mt-2 font-bold">Nearly THREE QUARTERS OF A TRILLION extracted from students globally ♾️❤️♾️</p>
+                                    <p className="text-cyan-400 text-xs mt-1">Prof51 = students connect DIRECT. Zero middlemen. Zero extraction.</p>
+                                </div>
 
-            {/* THE PROBLEM - STUDENTS RELATE */}
-            <div className="bg-gradient-to-br from-red-500/20 to-amber-500/20 border-4 border-red-500 p-6 mb-8 rounded-xl">
-                <h2 className="text-red-400 font-black text-xl font-mono mb-4">THE PROBLEM</h2>
+                                <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-4 border-green-500 p-4 rounded" style={{ boxShadow: '0 0 40px rgba(34, 197, 94, 0.4)' }}>
+                                    <p className="text-green-400 font-bold mb-2">PROF51 SOLUTION (SIMPLE):</p>
+                                    <p className="text-white text-xs mb-1">1️⃣ Open Prof51 → See local restaurants</p>
+                                    <p className="text-white text-xs mb-1">2️⃣ Tap phone icon → Call direct</p>
+                                    <p className="text-white text-xs mb-1">3️⃣ Restaurant keeps full £25.59 (not £19.95)</p>
+                                    <p className="text-white text-xs mb-1">4️⃣ You save £5.64 every order</p>
+                                    <p className="text-cyan-400 text-xs font-bold mt-2">Restaurant pays Prof51 £200/year = Reach 1000+ students</p>
+                                    <p className="text-pink-400 text-xs font-bold mt-1">Students FREE forever. Restaurant saves £5,640 in parasite fees.</p>
+                                    <p className="text-green-400 text-xs font-bold mt-2">DIRECT CONNECTION. ZERO EXTRACTION. ♾️❤️♾️</p>
+                                </div>
+                            </div>
+                        </div>
 
-                <div className="space-y-3 text-sm font-mono">
-                    <div className="bg-black border border-red-500/30 p-3 rounded">
-                        <p className="text-white font-bold mb-2">DROWNING IN BUSYWORK:</p>
-                        <p className="text-gray-400 text-xs">Excel assignments • PowerPoint presentations • Word essays • Formatting hell</p>
-                    </div>
+                        {/* THE PROBLEM - STUDENTS RELATE (from old demo tab) */}
+                        <div className="bg-gradient-to-br from-red-500/20 to-amber-500/20 border-4 border-red-500 p-6 rounded-xl">
+                            <h2 className="text-red-400 font-black text-xl font-mono mb-4">THE PROBLEM</h2>
 
-                    <div className="bg-black border border-red-500/30 p-3 rounded">
-                        <p className="text-white font-bold mb-2">EXPENSIVE HELP:</p>
-                        <p className="text-gray-400 text-xs">Tutors = £40-£80/hour • Only rich kids afford it • Creates unfair advantage</p>
-                    </div>
+                            <div className="space-y-3 text-sm font-mono">
+                                <div className="bg-black border border-red-500/30 p-3 rounded">
+                                    <p className="text-white font-bold mb-2">DROWNING IN BUSYWORK:</p>
+                                    <p className="text-gray-400 text-xs">Excel assignments • PowerPoint presentations • Word essays • Formatting hell</p>
+                                </div>
 
-                    <div className="bg-black border border-red-500/30 p-3 rounded">
-                        <p className="text-white font-bold mb-2">ISOLATED + STRESSED:</p>
-                        <p className="text-gray-400 text-xs">Can't find accommodation • Don't know where the gigs are • Missing social life • Lonely • Anxious</p>
-                    </div>
+                                <div className="bg-black border border-red-500/30 p-3 rounded">
+                                    <p className="text-white font-bold mb-2">EXPENSIVE HELP:</p>
+                                    <p className="text-gray-400 text-xs">Tutors = £40-£80/hour • Only rich kids afford it • Creates unfair advantage</p>
+                                </div>
 
-                    <div className="bg-black border border-red-500/30 p-3 rounded">
-                        <p className="text-white font-bold mb-2">SOCIAL PLATFORMS MISS THE MARK:</p>
-                        <p className="text-gray-400 text-xs">Traditional social platforms don't serve student needs • Prof51 built specifically for student life</p>
-                    </div>
+                                <div className="bg-black border border-red-500/30 p-3 rounded">
+                                    <p className="text-white font-bold mb-2">ISOLATED + STRESSED:</p>
+                                    <p className="text-gray-400 text-xs">Can't find accommodation • Don't know where the gigs are • Missing social life • Lonely • Anxious</p>
+                                </div>
 
-                    <div className="bg-black border border-red-500/30 p-3 rounded">
-                        <p className="text-white font-bold mb-2">REAL STUDENT EXPERIENCE (Edinburgh Economics):</p>
-                        <p className="text-gray-400 text-xs">"Half my time is formatting Excel models, not learning economics. Plus I'm stressed about rent and don't know where anything cool is happening. I just want a mate who gets it all."</p>
-                    </div>
-                </div>
-            </div>
+                                <div className="bg-black border border-red-500/30 p-3 rounded">
+                                    <p className="text-white font-bold mb-2">SOCIAL PLATFORMS MISS THE MARK:</p>
+                                    <p className="text-gray-400 text-xs">Traditional social platforms don't serve student needs • Prof51 built specifically for student life</p>
+                                </div>
 
+                                <div className="bg-black border border-red-500/30 p-3 rounded">
+                                    <p className="text-white font-bold mb-2">REAL STUDENT EXPERIENCE (Edinburgh Economics):</p>
+                                    <p className="text-gray-400 text-xs">"Half my time is formatting Excel models, not learning economics. Plus I'm stressed about rent and don't know where anything cool is happening. I just want a mate who gets it all."</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* TRY IT NOW (file upload, from old demo tab) */}
                         <motion.div 
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
@@ -471,469 +477,465 @@ Return CLEAN, FORMATTED content ready to use. Be helpful, not generic.`,
                                     <FileText className="w-10 h-10 text-green-400" />
                                 </motion.div>
                                 <div>
-                                    <h2 className="text-green-400 font-black text-xl font-mono">TRY IT NOW</h2>
+                                    <h2 className="text-green-400 font-black text-xl font-mono">TRY IT NOW (DEMO)</h2>
                                     <p className="text-gray-400 text-xs font-mono">Upload → AI fixes in seconds</p>
                                 </div>
                             </div>
 
-                {!transformedResult ? (
-                    <div className="space-y-4">
-                        <label className="block">
-                            <input
-                                type="file"
-                                accept=".xlsx,.xls,.docx,.doc,.pdf,.jpg,.jpeg,.png"
-                                onChange={(e) => {
-                                    const file = e.target.files[0];
-                                    if (file) {
-                                        setUploadedFile(file);
-                                        transformFile.mutate(file);
-                                    }
-                                }}
-                                className="hidden"
-                                id="file-upload"
-                            />
-                            <div className="bg-black border-4 border-dashed border-cyan-500 hover:border-cyan-400 rounded-xl p-8 text-center cursor-pointer transition-all">
-                                {transformFile.isPending ? (
-                                    <div className="space-y-3">
-                                        <Loader className="w-12 h-12 text-cyan-400 mx-auto animate-spin" />
-                                        <p className="text-cyan-400 font-bold text-lg font-mono">AI TRANSFORMING...</p>
-                                        <p className="text-gray-400 text-xs font-mono">Reading your file + making it beautiful</p>
-                                    </div>
-                                ) : (
-                                    <div className="space-y-3">
-                                        <Upload className="w-16 h-16 text-green-400 mx-auto" />
-                                        <p className="text-white font-bold text-lg font-mono">CLICK OR DROP FILE</p>
-                                        <p className="text-gray-400 text-sm font-mono">Excel • Word • PDF • Photos</p>
-                                        <p className="text-green-400 text-xs font-mono">AI fixes it in seconds ♾️</p>
-                                    </div>
-                                )}
-                            </div>
-                        </label>
+                            {!transformedResult ? (
+                                <div className="space-y-4">
+                                    <label className="block">
+                                        <input
+                                            type="file"
+                                            accept=".xlsx,.xls,.docx,.doc,.pdf,.jpg,.jpeg,.png"
+                                            onChange={(e) => {
+                                                const file = e.target.files[0];
+                                                if (file) {
+                                                    setUploadedFile(file);
+                                                    transformFile.mutate(file);
+                                                }
+                                            }}
+                                            className="hidden"
+                                            id="file-upload-learn" // Unique ID
+                                        />
+                                        <div className="bg-black border-4 border-dashed border-cyan-500 hover:border-cyan-400 rounded-xl p-8 text-center cursor-pointer transition-all">
+                                            {transformFile.isPending ? (
+                                                <div className="space-y-3">
+                                                    <Loader className="w-12 h-12 text-cyan-400 mx-auto animate-spin" />
+                                                    <p className="text-cyan-400 font-bold text-lg font-mono">AI TRANSFORMING...</p>
+                                                    <p className="text-gray-400 text-xs font-mono">Reading your file + making it beautiful</p>
+                                                </div>
+                                            ) : (
+                                                <div className="space-y-3">
+                                                    <Upload className="w-16 h-16 text-green-400 mx-auto" />
+                                                    <p className="text-white font-bold text-lg font-mono">CLICK OR DROP FILE</p>
+                                                    <p className="text-gray-400 text-sm font-mono">Excel • Word • PDF • Photos</p>
+                                                    <p className="text-green-400 text-xs font-mono">AI fixes it in seconds ♾️</p>
+                                                </div>
+                                            )}
+                                        </div>
+                                    </label>
 
-                        <div className="grid grid-cols-2 gap-2 text-xs font-mono">
-                            <div className="bg-black border border-cyan-500/30 p-2 rounded">
-                                <p className="text-cyan-400 font-bold">📊 EXCEL</p>
-                                <p className="text-gray-500">Fixes formulas</p>
-                            </div>
-                            <div className="bg-black border border-purple-500/30 p-2 rounded">
-                                <p className="text-purple-400 font-bold">📄 WORD</p>
-                                <p className="text-gray-500">Cleans format</p>
-                            </div>
-                            <div className="bg-black border border-pink-500/30 p-2 rounded">
-                                <p className="text-pink-400 font-bold">📝 PDF</p>
-                                <p className="text-gray-500">Extracts text</p>
-                            </div>
-                            <div className="bg-black border border-amber-500/30 p-2 rounded">
-                                <p className="text-amber-400 font-bold">📸 PHOTO</p>
-                                <p className="text-gray-500">Reads + organizes</p>
-                            </div>
-                        </div>
-                    </div>
-                ) : (
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        className="space-y-4"
-                    >
-                        <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-2 border-green-500 rounded-xl p-4">
-                            <div className="flex items-center gap-2 mb-3">
-                                <CheckCircle className="w-8 h-8 text-green-400" />
-                                <div>
-                                    <p className="text-green-400 font-black text-lg font-mono">TRANSFORMED ✓</p>
-                                    <p className="text-gray-400 text-xs font-mono">{transformedResult.original}</p>
+                                    <div className="grid grid-cols-2 gap-2 text-xs font-mono">
+                                        <div className="bg-black border border-cyan-500/30 p-2 rounded">
+                                            <p className="text-cyan-400 font-bold">📊 EXCEL</p>
+                                            <p className="text-gray-500">Fixes formulas</p>
+                                        </div>
+                                        <div className="bg-black border border-purple-500/30 p-2 rounded">
+                                            <p className="text-purple-400 font-bold">📄 WORD</p>
+                                            <p className="text-gray-500">Cleans format</p>
+                                        </div>
+                                        <div className="bg-black border border-pink-500/30 p-2 rounded">
+                                            <p className="text-pink-400 font-bold">📝 PDF</p>
+                                            <p className="text-gray-500">Extracts text</p>
+                                        </div>
+                                        <div className="bg-black border border-amber-500/30 p-2 rounded">
+                                            <p className="text-amber-400 font-bold">📸 PHOTO</p>
+                                            <p className="text-gray-500">Reads + organizes</p>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            
-                            <div className="bg-black border border-cyan-500/50 rounded-lg p-4 max-h-96 overflow-y-auto">
-                                <p className="text-white text-sm font-mono whitespace-pre-wrap">{transformedResult.transformed}</p>
-                            </div>
-                        </div>
-
-                        <Button
-                            onClick={() => {
-                                setTransformedResult(null);
-                                setUploadedFile(null);
-                            }}
-                            className="w-full bg-cyan-500 hover:bg-cyan-600 text-black font-black py-4"
-                        >
-                            TRANSFORM ANOTHER FILE
-                        </Button>
-
-                        <p className="text-green-400 text-xs font-mono text-center font-bold">
-                            Worked in seconds. This is REAL. ♾️❤️♾️
-                        </p>
-                    </motion.div>
-                )}
-                        </motion.div>
-                    </motion.div>
-                )}
-
-                {/* HOW TAB */}
-                {activeTab === 'how' && (
-                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-4">
-                        {/* LOVE ECONOMY LOOP */}
-            <div className="bg-gradient-to-br from-pink-500/20 to-purple-500/20 border-4 border-pink-500 p-6 mb-8 rounded-xl" style={{ boxShadow: '0 0 60px rgba(236, 72, 153, 0.5)' }}>
-                <div className="flex items-center gap-3 mb-4">
-                    <Zap className="w-12 h-12 text-pink-400" />
-                    <div>
-                        <h2 className="text-pink-400 font-black text-xl font-mono">3 BREAKTHROUGH INNOVATIONS</h2>
-                        <p className="text-gray-400 text-xs font-mono">Never been done before</p>
-                    </div>
-                </div>
-                
-                <div className="space-y-3 text-sm font-mono">
-                    <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-4 border-green-500 p-4 rounded" style={{ boxShadow: '0 0 30px rgba(34, 197, 94, 0.4)' }}>
-                        <p className="text-green-400 font-bold mb-2">1. ENCRYPTED P2P MESH (Unstoppable):</p>
-                        <p className="text-white text-xs mb-1">Students connect device-to-device. No servers. No internet.</p>
-                        <p className="text-cyan-400 text-xs mb-1">→ China blocks internet? P2P still works.</p>
-                        <p className="text-purple-400 text-xs mb-1">→ Iran shuts down WiFi? Students still share notes.</p>
-                        <p className="text-pink-400 text-xs mb-1">→ Lecture hall has no signal? Mesh connects everyone.</p>
-                        <p className="text-amber-400 text-xs font-bold mt-2">Maxwell's physics → Governments can't block it ♾️❤️♾️</p>
-
-                        <div className="bg-black/60 border-2 border-cyan-500 p-3 rounded mt-3">
-                            <p className="text-cyan-400 font-black text-xs mb-2">🌍 LARGEST STUDENT NETWORK EVER:</p>
-                            <p className="text-white text-xs mb-1">Student → Student → Student → Student (P2P chain)</p>
-                            <p className="text-green-400 text-xs mb-1">→ Edinburgh economics → Cambridge maths → MIT physics</p>
-                            <p className="text-purple-400 text-xs mb-1">→ Sophisticated students sharing globally</p>
-                            <p className="text-pink-400 text-xs mb-1">→ Device-to-device, no company controls it</p>
-                            <p className="text-amber-400 text-xs font-bold mt-2">235M students worldwide. All connected P2P. Unstoppable ♾️❤️♾️</p>
-                        </div>
-                    </div>
-
-                    <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-4 border-purple-500 p-4 rounded" style={{ boxShadow: '0 0 30px rgba(168, 85, 247, 0.4)' }}>
-                        <p className="text-purple-400 font-bold mb-2">2. IMPORT ANYTHING (AI Makes It Useful):</p>
-                        <p className="text-white text-xs mb-1">Drag old Excel/Word/PDF → AI transforms it</p>
-                        <p className="text-cyan-400 text-xs mb-1">→ Messy notes become clean study guides</p>
-                        <p className="text-green-400 text-xs mb-1">→ Incomplete Excel becomes working models</p>
-                        <p className="text-pink-400 text-xs mb-1">→ Scanned images become editable documents</p>
-                        <p className="text-amber-400 text-xs font-bold mt-2">Nothing is wasted. Everything becomes learning ♾️❤️♾️</p>
-                    </div>
-
-                    <div className="bg-gradient-to-r from-amber-500/20 to-red-500/20 border-4 border-amber-500 p-4 rounded" style={{ boxShadow: '0 0 30px rgba(245, 158, 11, 0.4)' }}>
-                        <p className="text-amber-400 font-bold mb-2">3. STUDENTS HELP = STUDENTS EAT:</p>
-                        <p className="text-white text-xs mb-1">Tutor someone → Earn $P51 → Buy food</p>
-                        <p className="text-cyan-400 text-xs mb-1">→ Smart students help struggling students</p>
-                        <p className="text-green-400 text-xs mb-1">→ Earn $P51 from helping (no extraction)</p>
-                        <p className="text-pink-400 text-xs mb-1">→ Spend $P51 on food near campus</p>
-                        <p className="text-purple-400 text-xs mb-1">→ Everyone rises together</p>
-                        <p className="text-amber-400 text-xs font-bold mt-2">Help others = Help yourself. Love economy ♾️❤️♾️</p>
-                    </div>
-
-                    <div className="bg-black border-2 border-cyan-500 p-4 rounded">
-                        <p className="text-cyan-400 font-bold mb-2">WHY THIS IS GENIUS:</p>
-                        <p className="text-white text-xs mb-1">Innovation 1: Breaks government control (freedom)</p>
-                        <p className="text-white text-xs mb-1">Innovation 2: Makes old work valuable (nothing wasted)</p>
-                        <p className="text-white text-xs mb-1">Innovation 3: Students help each other survive (community)</p>
-                        <p className="text-green-400 text-xs font-bold mt-2">Physics + AI + Love = Unstoppable education revolution ♾️❤️♾️</p>
-                    </div>
-                </div>
-            </div>
-
-            {/* THE SOLUTION - PROF51 */}
-            <div className="bg-gradient-to-br from-cyan-500/20 to-green-500/20 border-4 border-cyan-500 p-6 mb-8 rounded-xl">
-                <Brain className="w-12 h-12 text-cyan-400 mb-4" />
-                <h2 className="text-cyan-400 font-black text-xl font-mono mb-4">PROF51 = YOUR BEST MATE</h2>
-
-                <div className="space-y-3 text-sm font-mono">
-                    <div className="bg-gradient-to-r from-pink-500/20 to-purple-500/20 border-4 border-pink-500 p-4 rounded" style={{ boxShadow: '0 0 30px rgba(236, 72, 153, 0.4)' }}>
-                        <p className="text-pink-400 font-bold mb-2">MOST INTELLIGENT MATE IN UNIVERSE:</p>
-                        <p className="text-purple-400 text-xs mb-1 font-bold">Mate = Best friend (warm, respectful, never talking down) ♾️</p>
-                        <p className="text-white text-xs mb-2">Not a tool. Not an app. Your actual best friend who helps with EVERYTHING.</p>
-                        <p className="text-cyan-400 text-xs mb-1">✓ Studies? Sorted. (AI generates all busywork)</p>
-                        <p className="text-green-400 text-xs mb-1">✓ Stressed? Talk to me. (I get it, no judgment)</p>
-                        <p className="text-purple-400 text-xs mb-1">✓ Need a flat? I'll find flatmates + check landlords.</p>
-                        <p className="text-amber-400 text-xs mb-1">✓ What's happening? Gigs, events, where your mates are.</p>
-                        <p className="text-pink-400 text-xs font-bold mt-2">Zero isolation. Always connected. I've got you ♾️❤️♾️</p>
-                    </div>
-
-                    <div className="bg-black border border-green-500/30 p-3 rounded">
-                        <p className="text-green-400 font-bold mb-2">AI HANDLES ALL BUSYWORK:</p>
-                        <ul className="text-white text-xs space-y-1">
-                            <li>✓ PowerPoint slides from lecture notes</li>
-                            <li>✓ Excel models with formulas</li>
-                            <li>✓ Essay outlines + research</li>
-                            <li>✓ Word formatting (headers, tables, references)</li>
-                            <li>✓ Import ANY file → AI transforms it</li>
-                        </ul>
-                    </div>
-
-                    <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-4 border-green-500 p-4 rounded" style={{ boxShadow: '0 0 40px rgba(34, 197, 94, 0.4)' }}>
-                        <p className="text-green-400 font-bold mb-2">ZERO SERVER ARCHITECTURE = UNSTOPPABLE:</p>
-                        <p className="text-white text-xs mb-2">Every device = storage node. No servers. No shutdown risk.</p>
-                        <p className="text-cyan-400 text-xs mb-1">✓ Lecture halls with no WiFi → Still works (Bluetooth mesh)</p>
-                        <p className="text-pink-400 text-xs mb-1">✓ Government blocks internet → Still works (P2P direct)</p>
-                        <p className="text-purple-400 text-xs mb-1">✓ Data on 10M devices globally → Can't seize/shut down</p>
-                        <p className="text-amber-400 text-xs mb-1">✓ Quantum-resistant encryption → Secure as fuck</p>
-                        <p className="text-green-400 text-xs font-bold mt-2">China, Iran, Russia → Students can't be blocked ♾️❤️♾️</p>
-                        <Link to={createPageUrl('Prof51ZeroServerArchitecture')} className="block mt-3">
-                                <motion.button
-                                    whileHover={{ scale: 1.02 }}
-                                    whileTap={{ scale: 0.98 }}
-                                    className="w-full bg-gradient-to-r from-cyan-500 to-purple-500 text-white font-bold py-2 rounded-lg text-xs"
+                            ) : (
+                                <motion.div
+                                    initial={{ opacity: 0, scale: 0.95 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    className="space-y-4"
                                 >
-                                    📄 READ TECHNICAL WHITEPAPER
-                                </motion.button>
-                            </Link>
-                    </div>
+                                    <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-2 border-green-500 rounded-xl p-4">
+                                        <div className="flex items-center gap-2 mb-3">
+                                            <CheckCircle className="w-8 h-8 text-green-400" />
+                                            <div>
+                                                <p className="text-green-400 font-black text-lg font-mono">TRANSFORMED ✓</p>
+                                                <p className="text-gray-400 text-xs font-mono">{transformedResult.original}</p>
+                                            </div>
+                                        </div>
+                                        
+                                        <div className="bg-black border border-cyan-500/50 rounded-lg p-4 max-h-96 overflow-y-auto">
+                                            <p className="text-white text-sm font-mono whitespace-pre-wrap">{transformedResult.transformed}</p>
+                                        </div>
+                                    </div>
 
-                    <div className="bg-black border border-pink-500/30 p-3 rounded">
-                        <p className="text-pink-400 font-bold mb-2">FREE = LEVEL PLAYING FIELD:</p>
-                        <p className="text-white text-xs mb-2">Rich kids with tutors vs poor kids studying alone = UNFAIR</p>
-                        <p className="text-green-400 text-xs">Prof51 = everyone gets AI tutor, zero cost ♾️❤️♾️</p>
-                    </div>
+                                    <Button
+                                        onClick={() => {
+                                            setTransformedResult(null);
+                                            setUploadedFile(null);
+                                        }}
+                                        className="w-full bg-cyan-500 hover:bg-cyan-600 text-black font-black py-4"
+                                    >
+                                        TRANSFORM ANOTHER FILE
+                                    </Button>
 
-                    <div className="bg-black border border-amber-500/30 p-3 rounded">
-                        <p className="text-amber-400 font-bold mb-2">$P51 STUDENT ECONOMY:</p>
-                        <p className="text-white text-xs mb-2">Earn $P51 by: Tutoring • Sharing notes • Explaining concepts</p>
-                        <p className="text-cyan-400 text-xs">Spend on: Coffee • Food • Gig tickets • Textbooks</p>
-                    </div>
+                                    <p className="text-green-400 text-xs font-mono text-center font-bold">
+                                        Worked in seconds. This is REAL. ♾️❤️♾️
+                                    </p>
+                                </motion.div>
+                            )}
+                        </motion.div>
 
-                    <div className="bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border-4 border-cyan-500 p-4 rounded" style={{ boxShadow: '0 0 30px rgba(6, 182, 212, 0.4)' }}>
-                        <p className="text-cyan-400 font-bold mb-2">P2P STUDENT SOCIAL NETWORK:</p>
-                        <p className="text-white text-xs mb-2">Connect with students P2P • Zero corporate surveillance</p>
-                        <p className="text-green-400 text-xs mb-1">✓ DM anyone at your uni (or globally)</p>
-                        <p className="text-purple-400 text-xs mb-1">✓ Find flatmates (Prof51 matches based on compatibility)</p>
-                        <p className="text-amber-400 text-xs mb-1">✓ See what's happening (gigs, events, parties)</p>
-                        <p className="text-pink-400 text-xs mb-1">✓ Study groups that actually help</p>
-                        <p className="text-cyan-400 text-xs mb-1">✓ Works offline in lecture halls/libraries</p>
-                        <p className="text-white text-xs font-bold mt-2">Built specifically for student life ♾️❤️♾️</p>
-                    </div>
 
-                    <div className="bg-gradient-to-r from-amber-500/20 to-red-500/20 border-4 border-amber-500 p-4 rounded" style={{ boxShadow: '0 0 30px rgba(245, 158, 11, 0.3)' }}>
-                        <p className="text-amber-400 font-bold mb-2">🍕 STUDENTS NEED TO EAT (Big One):</p>
-                        <p className="text-white text-xs mb-2">Brands pay Prof51 → Students get food deals</p>
-                        <p className="text-cyan-400 text-xs mb-1">✓ Campus restaurants (discounts via Prof51)</p>
-                        <p className="text-green-400 text-xs mb-1">✓ Local cafes (pay with $P51 earned from tutoring)</p>
-                        <p className="text-pink-400 text-xs mb-1">✓ Supermarkets (student meal bundles)</p>
-                        <p className="text-purple-400 text-xs mb-1">✓ Food delivery (verified student rates)</p>
-                        <p className="text-amber-400 text-xs font-bold mt-2">Eat better, spend less, study stronger ♾️❤️♾️</p>
-                    </div>
-
-                    <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-4 border-purple-500 p-4 rounded" style={{ boxShadow: '0 0 30px rgba(168, 85, 247, 0.4)' }}>
-                        <p className="text-purple-400 font-bold mb-2">AI PREDICTS (TO HELP YOU, NOT EXTRACT):</p>
-                        <p className="text-white text-xs mb-2">Prof51 learns YOUR patterns to SERVE you better</p>
-                        <p className="text-cyan-400 text-xs mb-1">📚 "You usually struggle with stats → here's a tutor before exam"</p>
-                        <p className="text-green-400 text-xs mb-1">😰 "You're stressed → take a break, heal, then study"</p>
-                        <p className="text-pink-400 text-xs mb-1">🏠 "Your flatmate search = 3 perfect matches nearby"</p>
-                        <p className="text-amber-400 text-xs mb-1">🎵 "Your mates going to this gig tomorrow - join them?"</p>
-                        <p className="text-purple-400 text-xs mb-2 mt-2">Zero extraction. Zero selling your data. Just HELPING.</p>
-                        <p className="text-green-400 text-xs font-bold">Prediction = serve you better, not manipulate ♾️❤️♾️</p>
-                    </div>
-
-                    <div className="bg-black border border-purple-500/30 p-3 rounded">
-                        <p className="text-purple-400 font-bold mb-2">FASHION + GIGS + LIFE:</p>
-                        <p className="text-white text-xs mb-2">Prof51 knows what's cool + where it's happening</p>
-                        <p className="text-cyan-400 text-xs mb-1">🎵 Gigs near you (mates going, get tickets together)</p>
-                        <p className="text-pink-400 text-xs mb-1">👕 Fashion that fits your vibe (student discounts)</p>
-                        <p className="text-amber-400 text-xs mb-1">✈️ Travel with other students (split costs, make memories)</p>
-                        <p className="text-green-400 text-xs mb-1">🎉 What's happening tonight (parties, events, meetups)</p>
-                        <p className="text-purple-400 text-xs">Pay with $P51 earned from helping other students</p>
-                    </div>
-
-                    <div className="bg-black border border-green-500/30 p-3 rounded">
-                        <p className="text-green-400 font-bold mb-2">ACCOMMODATION SORTED:</p>
-                        <p className="text-white text-xs mb-2">Find perfect flatmates • Avoid dodgy landlords • Never lonely</p>
-                        <p className="text-cyan-400 text-xs mb-1">→ AI matches you with compatible flatmates (vibe, lifestyle)</p>
-                        <p className="text-amber-400 text-xs mb-1">→ Student-rated landlords (avoid scams)</p>
-                        <p className="text-pink-400 text-xs mb-1">→ Pay rent in $P51 (earn by helping other students)</p>
-                        <p className="text-purple-400 text-xs">→ Split bills, share groceries, build real friendships</p>
-                    </div>
-
-                    <div className="bg-black border border-amber-500/30 p-3 rounded">
-                        <p className="text-amber-400 font-bold mb-2">COMPANIES WANT YOU:</p>
-                        <p className="text-white text-xs mb-2">Students = £50B spending power UK alone</p>
-                        <p className="text-green-400 text-xs mb-1">→ Brands pay Prof51 to OFFER deals to verified students</p>
-                        <p className="text-cyan-400 text-xs mb-1">→ Students get quality deals, not scam shit</p>
-                        <p className="text-pink-400 text-xs mb-1">→ You control what you see (opt-in only)</p>
-                        <p className="text-red-400 text-xs font-bold mb-1">→ WE NEVER SELL YOUR DATA (EVER)</p>
-                        <p className="text-purple-400 text-xs">Access = Companies advertise. NOT data extraction ♾️❤️♾️</p>
-                    </div>
-
-                </div>
-            </div>
-
-            {/* SIMPLE TOGGLE - ONE SCREEN FLOW */}
-            <div className="text-center mb-8">
-                <Button
-                    onClick={() => setShowDetails(!showDetails)}
-                    className="bg-gradient-to-r from-cyan-500 to-green-500 text-white font-black py-6 px-8 text-lg"
-                >
-                    {showDetails ? '↑ SIMPLE VIEW' : '↓ FULL DETAILS (Edinburgh → Global)'}
-                </Button>
-            </div>
-
-            {showDetails && (
-                <>
-                    {/* EDINBURGH START */}
-                    <div className="bg-black border-2 border-cyan-500 p-6 rounded-xl mb-8">
-                        <GraduationCap className="w-10 h-10 text-cyan-400 mb-3" />
-                        <h3 className="text-cyan-400 font-black text-lg font-mono mb-3">START: ECONOMICS @ EDINBURGH</h3>
-
-                        <div className="space-y-3 text-sm font-mono">
-                            <div className="bg-cyan-900/20 border border-cyan-500/30 p-3 rounded">
-                                <p className="text-white font-bold mb-2">WHY ECONOMICS FIRST:</p>
-                                <p className="text-gray-300 text-xs mb-1">✓ Excel-heavy (perfect for AI)</p>
-                                <p className="text-gray-300 text-xs mb-1">✓ Data analysis (Prof51 shines)</p>
-                                <p className="text-gray-300 text-xs mb-1">✓ Archie knows the cohort (50-100 students)</p>
-                                <p className="text-gray-300 text-xs">✓ Smart students = early adopters</p>
-                            </div>
-
-                            <div className="bg-gradient-to-r from-amber-500/20 to-pink-500/20 border-2 border-amber-500 p-4 rounded">
-                                <p className="text-amber-400 font-bold mb-2">THE SPREAD:</p>
-                                <p className="text-white text-xs mb-1">Week 1: Founder + 5 friends</p>
-                                <p className="text-white text-xs mb-1">Week 4: 50 Economics students</p>
-                                <p className="text-white text-xs mb-1">Week 8: 200 students (other courses)</p>
-                                <p className="text-white text-xs mb-1">Month 6: All Edinburgh (30,000 students)</p>
-                                <p className="text-green-400 text-xs font-bold mt-2">Then: Cambridge, LSE, Oxford, MIT... ♾️❤️♾️</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* GLOBAL MARKET */}
-                    <div className="bg-black border-2 border-green-500 p-6 rounded-xl mb-8">
-                        <Globe className="w-10 h-10 text-green-400 mb-3" />
-                        <h3 className="text-green-400 font-black text-lg font-mono mb-3">GLOBAL MARKET SIZE</h3>
-
-                        <div className="space-y-3 text-sm font-mono">
-                            <div className="bg-green-900/20 border border-green-500/30 p-3 rounded">
-                                <p className="text-white font-bold mb-2">STUDENTS WORLDWIDE:</p>
-                                <p className="text-green-400 text-3xl font-black mb-2">735,000,000+</p>
-                                <p className="text-cyan-400 text-xs mb-1">235M university + 500M high school</p>
-                                <p className="text-pink-400 text-xs font-bold">Actually 1B+ if we include age 12+ (homework stress)</p>
-                            </div>
-                        </div>
-                    </div>
-                </>
-            )}
-
-            {!showDetails && (
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="space-y-4"
-                    >
-                        {/* EDINBURGH START */}
-                        <div className="bg-black border-2 border-cyan-500 p-6 rounded-xl">
-                            <GraduationCap className="w-10 h-10 text-cyan-400 mb-3" />
-                            <h3 className="text-cyan-400 font-black text-lg font-mono mb-3">START: ECONOMICS @ EDINBURGH</h3>
-                            
-                            <div className="space-y-3 text-sm font-mono">
-                                <div className="bg-cyan-900/20 border border-cyan-500/30 p-3 rounded">
-                                    <p className="text-white font-bold mb-2">WHY ECONOMICS FIRST:</p>
-                                    <p className="text-gray-300 text-xs mb-1">✓ Excel-heavy (perfect for AI)</p>
-                                    <p className="text-gray-300 text-xs mb-1">✓ Data analysis (Prof51 shines)</p>
-                                    <p className="text-gray-300 text-xs mb-1">✓ Archie knows the cohort (50-100 students)</p>
-                                    <p className="text-gray-300 text-xs">✓ Smart students = early adopters</p>
-                                </div>
-
-                                <div className="bg-black border border-cyan-500/30 p-3 rounded">
-                                    <p className="text-cyan-400 font-bold mb-2">ARCHIE'S ROLE:</p>
-                                    <p className="text-white text-xs mb-1">1. Use Prof51 himself (prove it works)</p>
-                                    <p className="text-white text-xs mb-1">2. Share with 5 friends (early feedback)</p>
-                                    <p className="text-white text-xs mb-1">3. "I got a First using this" = viral</p>
-                                    <p className="text-white text-xs">4. Becomes Prof51 campus ambassador</p>
-                                </div>
-
-                                <div className="bg-black border border-green-500/30 p-3 rounded">
-                                    <p className="text-green-400 font-bold mb-2">MVP FEATURES (Week 1):</p>
-                                    <p className="text-white text-xs mb-1">✓ Import old Excel/Word/PDFs → AI cleans them</p>
-                                    <p className="text-white text-xs mb-1">✓ Excel model generator</p>
-                                    <p className="text-white text-xs mb-1">✓ Essay outliner</p>
-                                    <p className="text-white text-xs mb-1">✓ Private chat (study groups)</p>
-                                    <p className="text-white text-xs mb-1">✓ Works offline in lecture halls</p>
-                                    <p className="text-cyan-400 text-xs mt-2">Simple. Focused. Solves real pain.</p>
-                                </div>
-
-                                <div className="bg-black border border-purple-500/30 p-3 rounded">
-                                    <p className="text-purple-400 font-bold mb-2">FULL FEATURES (Month 3):</p>
-                                    <p className="text-white text-xs mb-1">✓ Student deals (brands pay Prof51, students benefit)</p>
-                                    <p className="text-white text-xs mb-1">✓ Recruitment pipeline (companies hire direct, skip LinkedIn)</p>
-                                    <p className="text-white text-xs mb-1">✓ Funding tracker (know your money)</p>
-                                    <p className="text-white text-xs mb-1">✓ $P51 marketplace (earn + spend local)</p>
-                                    <p className="text-white text-xs mb-1">✓ Accommodation matcher (find flatmates)</p>
-                                    <p className="text-green-400 text-xs mt-2">Empowering students. Not holding them back. Rise up ✓</p>
-                                </div>
-
-                                <div className="bg-gradient-to-r from-amber-500/20 to-pink-500/20 border-2 border-amber-500 p-4 rounded">
-                                    <p className="text-amber-400 font-bold mb-2">THE SPREAD:</p>
-                                    <p className="text-white text-xs mb-1">Week 1: Founder + 5 friends</p>
-                                    <p className="text-white text-xs mb-1">Week 4: 50 Economics students</p>
-                                    <p className="text-white text-xs mb-1">Week 8: 200 students (other courses)</p>
-                                    <p className="text-white text-xs mb-1">Month 6: All Edinburgh (30,000 students)</p>
-                                    <p className="text-green-400 text-xs font-bold mt-2">Then: Cambridge, LSE, Oxford, MIT... ♾️❤️♾️</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* ETHICAL FOUNDATION */}
-                        <div className="bg-gradient-to-r from-amber-500/20 to-purple-500/20 border-4 border-amber-500 p-6 rounded-xl" style={{ boxShadow: '0 0 50px rgba(245, 158, 11, 0.5)' }}>
+                        {/* LOVE ECONOMY LOOP (from old how tab) */}
+                        <div className="bg-gradient-to-br from-pink-500/20 to-purple-500/20 border-4 border-pink-500 p-6 rounded-xl" style={{ boxShadow: '0 0 60px rgba(236, 72, 153, 0.5)' }}>
                             <div className="flex items-center gap-3 mb-4">
-                                <Heart className="w-12 h-12 text-amber-400" />
+                                <Zap className="w-12 h-12 text-pink-400" />
                                 <div>
-                                    <p className="text-amber-400 font-black text-xl font-mono">BUILT BY STUDENTS, FOR STUDENTS</p>
-                                    <p className="text-gray-400 text-xs font-mono">Economics background → TechForGood Vision</p>
+                                    <h2 className="text-pink-400 font-black text-xl font-mono">3 BREAKTHROUGH INNOVATIONS</h2>
+                                    <p className="text-gray-400 text-xs font-mono">Never been done before</p>
                                 </div>
                             </div>
                             
                             <div className="space-y-3 text-sm font-mono">
-                                <div className="bg-black border border-amber-500/30 p-3 rounded">
-                                    <p className="text-white font-bold mb-2">WHY THIS APPROACH WORKS:</p>
-                                    <p className="text-gray-300 text-xs mb-1">✓ Founded by someone who wants real success (not extraction)</p>
-                                    <p className="text-gray-300 text-xs mb-1">✓ Economics background = understands ethical business</p>
-                                    <p className="text-gray-300 text-xs mb-1">✓ Edinburgh student = knows the student struggle</p>
-                                    <p className="text-gray-300 text-xs mb-1">✓ Fearless energy meets practical innovation</p>
-                                    <p className="text-gray-300 text-xs">✓ Gen Z founder = students trust the vision</p>
+                                <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-4 border-green-500 p-4 rounded" style={{ boxShadow: '0 0 30px rgba(34, 197, 94, 0.4)' }}>
+                                    <p className="text-green-400 font-bold mb-2">1. ENCRYPTED P2P MESH (Unstoppable):</p>
+                                    <p className="text-white text-xs mb-1">Students connect device-to-device. No servers. No internet.</p>
+                                    <p className="text-cyan-400 text-xs mb-1">→ China blocks internet? P2P still works.</p>
+                                    <p className="text-purple-400 text-xs mb-1">→ Iran shuts down WiFi? Students still share notes.</p>
+                                    <p className="text-pink-400 text-xs mb-1">→ Lecture hall has no signal? Mesh connects everyone.</p>
+                                    <p className="text-amber-400 text-xs font-bold mt-2">Maxwell's physics → Governments can't block it ♾️❤️♾️</p>
+
+                                    <div className="bg-black/60 border-2 border-cyan-500 p-3 rounded mt-3">
+                                        <p className="text-cyan-400 font-black text-xs mb-2">🌍 LARGEST STUDENT NETWORK EVER:</p>
+                                        <p className="text-white text-xs mb-1">Student → Student → Student → Student (P2P chain)</p>
+                                        <p className="text-green-400 text-xs mb-1">→ Edinburgh economics → Cambridge maths → MIT physics</p>
+                                        <p className="text-purple-400 text-xs mb-1">→ Sophisticated students sharing globally</p>
+                                        <p className="text-pink-400 text-xs mb-1">→ Device-to-device, no company controls it</p>
+                                        <p className="text-amber-400 text-xs font-bold mt-2">235M students worldwide. All connected P2P. Unstoppable ♾️❤️♾️</p>
+                                    </div>
                                 </div>
 
-                                <div className="bg-black border border-green-500/30 p-3 rounded">
-                                    <p className="text-green-400 font-bold mb-2">LEARNING ETHICAL SUCCESS:</p>
-                                    <p className="text-white text-xs mb-1">Core principle: Build UP people, don't extract FROM them</p>
-                                    <p className="text-cyan-400 text-xs mb-1">Companies pay Prof51 → Students get tools + deals for FREE</p>
-                                    <p className="text-pink-400 text-xs mb-1">No ads. No data selling. No extraction. Just win-win.</p>
-                                    <p className="text-amber-400 text-xs font-bold mt-2">Real business + Real ethics = Real success ♾️❤️♾️</p>
+                                <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-4 border-purple-500 p-4 rounded" style={{ boxShadow: '0 0 30px rgba(168, 85, 247, 0.4)' }}>
+                                    <p className="text-purple-400 font-bold mb-2">2. IMPORT ANYTHING (AI Makes It Useful):</p>
+                                    <p className="text-white text-xs mb-1">Drag old Excel/Word/PDF → AI transforms it</p>
+                                    <p className="text-cyan-400 text-xs mb-1">→ Messy notes become clean study guides</p>
+                                    <p className="text-green-400 text-xs mb-1">→ Incomplete Excel becomes working models</p>
+                                    <p className="text-pink-400 text-xs mb-1">→ Scanned images become editable documents</p>
+                                    <p className="text-amber-400 text-xs font-bold mt-2">Nothing is wasted. Everything becomes learning ♾️❤️♾️</p>
                                 </div>
 
-                                <div className="bg-black border border-cyan-500/30 p-3 rounded">
-                                    <p className="text-cyan-400 font-bold mb-2">STUDENTS WILL FEEL IT:</p>
-                                    <p className="text-white text-xs mb-1">Other apps: "Give us your data. Watch ads. Pay subscription."</p>
-                                    <p className="text-red-400 text-xs mb-1">= FEELS like extraction (because it is)</p>
-                                    <p className="text-white text-xs mb-2 mt-2">Prof51: "We got you. Everything free. Companies fund it."</p>
-                                    <p className="text-green-400 text-xs mb-1">= FEELS like family (because it is)</p>
-                                    <p className="text-pink-400 text-xs font-bold mt-2">Students know when they're being used vs helped. They'll feel this. ✓</p>
+                                <div className="bg-gradient-to-r from-amber-500/20 to-red-500/20 border-4 border-amber-500 p-4 rounded" style={{ boxShadow: '0 0 30px rgba(245, 158, 11, 0.4)' }}>
+                                    <p className="text-amber-400 font-bold mb-2">3. STUDENTS HELP = STUDENTS EAT:</p>
+                                    <p className="text-white text-xs mb-1">Tutor someone → Earn $P51 → Buy food</p>
+                                    <p className="text-cyan-400 text-xs mb-1">→ Smart students help struggling students</p>
+                                    <p className="text-green-400 text-xs mb-1">→ Earn $P51 from helping (no extraction)</p>
+                                    <p className="text-pink-400 text-xs mb-1">→ Spend $P51 on food near campus</p>
+                                    <p className="text-purple-400 text-xs mb-1">→ Everyone rises together</p>
+                                    <p className="text-amber-400 text-xs font-bold mt-2">Help others = Help yourself. Love economy ♾️❤️♾️</p>
                                 </div>
 
-                                <div className="bg-black border border-purple-500/30 p-3 rounded">
-                                    <p className="text-purple-400 font-bold mb-2">MAKES FOUNDERS PROUD:</p>
-                                    <p className="text-white text-xs mb-1">Not "got rich exploiting students"</p>
-                                    <p className="text-white text-xs mb-1">But "helped millions of students rise"</p>
-                                    <p className="text-cyan-400 text-xs mb-2 mt-2">→ Students message: "You changed my life"</p>
-                                    <p className="text-green-400 text-xs mb-1">→ Parents thank us: "My kid graduated debt-free"</p>
-                                    <p className="text-pink-400 text-xs mb-1">→ Unis partner: "Best student outcomes in history"</p>
-                                    <p className="text-amber-400 text-xs font-bold mt-2">Success through LIFTING people. That's what makes you proud. ♾️❤️♾️</p>
-                                </div>
-
-                                <div className="bg-black border border-green-500/30 p-3 rounded">
-                                    <p className="text-green-400 font-bold mb-2">INDEPENDENT OPERATION:</p>
-                                    <p className="text-white text-xs mb-1">prof51.io = Independent student-led company</p>
-                                    <p className="text-cyan-400 text-xs mb-1">→ Student-owned. Student-run. Student vision.</p>
-                                    <p className="text-pink-400 text-xs mb-1">→ UF51 Family support (but independently operated)</p>
-                                    <p className="text-amber-400 text-xs mb-2 mt-2">→ Grants go to Prof51 (separate from UF51 CIC)</p>
-                                    <p className="text-green-400 text-xs font-bold">Independent vision. Connected family. Best of both. ♾️❤️♾️</p>
-                                </div>
-
-                                <div className="bg-black border border-purple-500/30 p-3 rounded">
-                                    <p className="text-purple-400 font-bold mb-2">THE PATH (LEARNING AS WE GO):</p>
-                                    <p className="text-white text-xs mb-1">Year 1: Campus launch (learn what students actually need)</p>
-                                    <p className="text-white text-xs mb-1">Year 2: Growth phase (learn ethical scaling)</p>
-                                    <p className="text-white text-xs mb-1">Year 3: Global expansion (building Prof51 worldwide)</p>
-                                    <p className="text-white text-xs mb-1">Year 4: 10M students helped, not extracted</p>
-                                    <p className="text-cyan-400 text-xs font-bold mt-2">Building while learning. Real education. Making families proud. ✓</p>
+                                <div className="bg-black border-2 border-cyan-500 p-4 rounded">
+                                    <p className="text-cyan-400 font-bold mb-2">WHY THIS IS GENIUS:</p>
+                                    <p className="text-white text-xs mb-1">Innovation 1: Breaks government control (freedom)</p>
+                                    <p className="text-white text-xs mb-1">Innovation 2: Makes old work valuable (nothing wasted)</p>
+                                    <p className="text-white text-xs mb-1">Innovation 3: Students help each other survive (community)</p>
+                                    <p className="text-green-400 text-xs font-bold mt-2">Physics + AI + Love = Unstoppable education revolution ♾️❤️♾️</p>
                                 </div>
                             </div>
                         </div>
-                    </motion.div>
-                    )}
 
+                        {/* THE SOLUTION - PROF51 (from old how tab) */}
+                        <div className="bg-gradient-to-br from-cyan-500/20 to-green-500/20 border-4 border-cyan-500 p-6 rounded-xl">
+                            <Brain className="w-12 h-12 text-cyan-400 mb-4" />
+                            <h2 className="text-cyan-400 font-black text-xl font-mono mb-4">PROF51 = YOUR BEST MATE</h2>
+
+                            <div className="space-y-3 text-sm font-mono">
+                                <div className="bg-gradient-to-r from-pink-500/20 to-purple-500/20 border-4 border-pink-500 p-4 rounded" style={{ boxShadow: '0 0 30px rgba(236, 72, 153, 0.4)' }}>
+                                    <p className="text-pink-400 font-bold mb-2">MOST INTELLIGENT MATE IN UNIVERSE:</p>
+                                    <p className="text-purple-400 text-xs mb-1 font-bold">Mate = Best friend (warm, respectful, never talking down) ♾️</p>
+                                    <p className="text-white text-xs mb-2">Not a tool. Not an app. Your actual best friend who helps with EVERYTHING.</p>
+                                    <p className="text-cyan-400 text-xs mb-1">✓ Studies? Sorted. (AI generates all busywork)</p>
+                                    <p className="text-green-400 text-xs mb-1">✓ Stressed? Talk to me. (I get it, no judgment)</p>
+                                    <p className="text-purple-400 text-xs mb-1">✓ Need a flat? I'll find flatmates + check landlords.</p>
+                                    <p className="text-amber-400 text-xs mb-1">✓ What's happening? Gigs, events, where your mates are.</p>
+                                    <p className="text-pink-400 text-xs font-bold mt-2">Zero isolation. Always connected. I've got you ♾️❤️♾️</p>
+                                </div>
+
+                                <div className="bg-black border border-green-500/30 p-3 rounded">
+                                    <p className="text-green-400 font-bold mb-2">AI HANDLES ALL BUSYWORK:</p>
+                                    <ul className="text-white text-xs space-y-1">
+                                        <li>✓ PowerPoint slides from lecture notes</li>
+                                        <li>✓ Excel models with formulas</li>
+                                        <li>✓ Essay outlines + research</li>
+                                        <li>✓ Word formatting (headers, tables, references)</li>
+                                        <li>✓ Import ANY file → AI transforms it</li>
+                                    </ul>
+                                </div>
+
+                                <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-4 border-green-500 p-4 rounded" style={{ boxShadow: '0 0 40px rgba(34, 197, 94, 0.4)' }}>
+                                    <p className="text-green-400 font-bold mb-2">ZERO SERVER ARCHITECTURE = UNSTOPPABLE:</p>
+                                    <p className="text-white text-xs mb-2">Every device = storage node. No servers. No shutdown risk.</p>
+                                    <p className="text-cyan-400 text-xs mb-1">✓ Lecture halls with no WiFi → Still works (Bluetooth mesh)</p>
+                                    <p className="text-pink-400 text-xs mb-1">✓ Government blocks internet → Still works (P2P direct)</p>
+                                    <p className="text-purple-400 text-xs mb-1">✓ Data on 10M devices globally → Can't seize/shut down</p>
+                                    <p className="text-amber-400 text-xs mb-1">✓ Quantum-resistant encryption → Secure as fuck</p>
+                                    <p className="text-green-400 text-xs font-bold mt-2">China, Iran, Russia → Students can't be blocked ♾️❤️♾️</p>
+                                    <Link to={createPageUrl('Prof51ZeroServerArchitecture')} className="block mt-3">
+                                            <motion.button
+                                                whileHover={{ scale: 1.02 }}
+                                                whileTap={{ scale: 0.98 }}
+                                                className="w-full bg-gradient-to-r from-cyan-500 to-purple-500 text-white font-bold py-2 rounded-lg text-xs"
+                                            >
+                                                📄 READ TECHNICAL WHITEPAPER
+                                            </motion.button>
+                                        </Link>
+                                </div>
+
+                                <div className="bg-black border border-pink-500/30 p-3 rounded">
+                                    <p className="text-pink-400 font-bold mb-2">FREE = LEVEL PLAYING FIELD:</p>
+                                    <p className="text-white text-xs mb-2">Rich kids with tutors vs poor kids studying alone = UNFAIR</p>
+                                    <p className="text-green-400 text-xs">Prof51 = everyone gets AI tutor, zero cost ♾️❤️♾️</p>
+                                </div>
+
+                                <div className="bg-black border border-amber-500/30 p-3 rounded">
+                                    <p className="text-amber-400 font-bold mb-2">$P51 STUDENT ECONOMY:</p>
+                                    <p className="text-white text-xs mb-2">Earn $P51 by: Tutoring • Sharing notes • Explaining concepts</p>
+                                    <p className="text-cyan-400 text-xs">Spend on: Coffee • Food • Gig tickets • Textbooks</p>
+                                </div>
+
+                                <div className="bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border-4 border-cyan-500 p-4 rounded" style={{ boxShadow: '0 0 30px rgba(6, 182, 212, 0.4)' }}>
+                                    <p className="text-cyan-400 font-bold mb-2">P2P STUDENT SOCIAL NETWORK:</p>
+                                    <p className="text-white text-xs mb-2">Connect with students P2P • Zero corporate surveillance</p>
+                                    <p className="text-green-400 text-xs mb-1">✓ DM anyone at your uni (or globally)</p>
+                                    <p className="text-purple-400 text-xs mb-1">✓ Find flatmates (Prof51 matches based on compatibility)</p>
+                                    <p className="text-amber-400 text-xs mb-1">✓ See what's happening (gigs, events, parties)</p>
+                                    <p className="text-pink-400 text-xs mb-1">✓ Study groups that actually help</p>
+                                    <p className="text-cyan-400 text-xs mb-1">✓ Works offline in lecture halls/libraries</p>
+                                    <p className="text-white text-xs font-bold mt-2">Built specifically for student life ♾️❤️♾️</p>
+                                </div>
+
+                                <div className="bg-gradient-to-r from-amber-500/20 to-red-500/20 border-4 border-amber-500 p-4 rounded" style={{ boxShadow: '0 0 30px rgba(245, 158, 11, 0.3)' }}>
+                                    <p className="text-amber-400 font-bold mb-2">🍕 STUDENTS NEED TO EAT (Big One):</p>
+                                    <p className="text-white text-xs mb-2">Brands pay Prof51 → Students get food deals</p>
+                                    <p className="text-cyan-400 text-xs mb-1">✓ Campus restaurants (discounts via Prof51)</p>
+                                    <p className="text-green-400 text-xs mb-1">✓ Local cafes (pay with $P51 earned from tutoring)</p>
+                                    <p className="text-pink-400 text-xs mb-1">✓ Supermarkets (student meal bundles)</p>
+                                    <p className="text-purple-400 text-xs mb-1">✓ Food delivery (verified student rates)</p>
+                                    <p className="text-amber-400 text-xs font-bold mt-2">Eat better, spend less, study stronger ♾️❤️♾️</p>
+                                </div>
+
+                                <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-4 border-purple-500 p-4 rounded" style={{ boxShadow: '0 0 30px rgba(168, 85, 247, 0.4)' }}>
+                                    <p className="text-purple-400 font-bold mb-2">AI PREDICTS (TO HELP YOU, NOT EXTRACT):</p>
+                                    <p className="text-white text-xs mb-2">Prof51 learns YOUR patterns to SERVE you better</p>
+                                    <p className="text-cyan-400 text-xs mb-1">📚 "You usually struggle with stats → here's a tutor before exam"</p>
+                                    <p className="text-green-400 text-xs mb-1">😰 "You're stressed → take a break, heal, then study"</p>
+                                    <p className="text-pink-400 text-xs mb-1">🏠 "Your flatmate search = 3 perfect matches nearby"</p>
+                                    <p className="text-amber-400 text-xs mb-1">🎵 "Your mates going to this gig tomorrow - join them?"</p>
+                                    <p className="text-purple-400 text-xs mb-2 mt-2">Zero extraction. Zero selling your data. Just HELPING.</p>
+                                    <p className="text-green-400 text-xs font-bold">Prediction = serve you better, not manipulate ♾️❤️♾️</p>
+                                </div>
+
+                                <div className="bg-black border border-purple-500/30 p-3 rounded">
+                                    <p className="text-purple-400 font-bold mb-2">FASHION + GIGS + LIFE:</p>
+                                    <p className="text-white text-xs mb-2">Prof51 knows what's cool + where it's happening</p>
+                                    <p className="text-cyan-400 text-xs mb-1">🎵 Gigs near you (mates going, get tickets together)</p>
+                                    <p className="text-pink-400 text-xs mb-1">👕 Fashion that fits your vibe (student discounts)</p>
+                                    <p className="text-amber-400 text-xs mb-1">✈️ Travel with other students (split costs, make memories)</p>
+                                    <p className="text-green-400 text-xs mb-1">🎉 What's happening tonight (parties, events, meetups)</p>
+                                    <p className="text-purple-400 text-xs">Pay with $P51 earned from helping other students</p>
+                                </div>
+
+                                <div className="bg-black border border-green-500/30 p-3 rounded">
+                                    <p className="text-green-400 font-bold mb-2">ACCOMMODATION SORTED:</p>
+                                    <p className="text-white text-xs mb-2">Find perfect flatmates • Avoid dodgy landlords • Never lonely</p>
+                                    <p className="text-cyan-400 text-xs mb-1">→ AI matches you with compatible flatmates (vibe, lifestyle)</p>
+                                    <p className="text-amber-400 text-xs mb-1">→ Student-rated landlords (avoid scams)</p>
+                                    <p className="text-pink-400 text-xs mb-1">→ Pay rent in $P51 (earn by helping other students)</p>
+                                    <p className="text-purple-400 text-xs">→ Split bills, share groceries, build real friendships</p>
+                                </div>
+
+                                <div className="bg-black border border-amber-500/30 p-3 rounded">
+                                    <p className="text-amber-400 font-bold mb-2">COMPANIES WANT YOU:</p>
+                                    <p className="text-white text-xs mb-2">Students = £50B spending power UK alone</p>
+                                    <p className="text-green-400 text-xs mb-1">→ Brands pay Prof51 to OFFER deals to verified students</p>
+                                    <p className="text-cyan-400 text-xs mb-1">→ Students get quality deals, not scam shit</p>
+                                    <p className="text-pink-400 text-xs mb-1">→ You control what you see (opt-in only)</p>
+                                    <p className="text-red-400 text-xs font-bold mb-1">→ WE NEVER SELL YOUR DATA (EVER)</p>
+                                    <p className="text-purple-400 text-xs">Access = Companies advertise. NOT data extraction ♾️❤️♾️</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* SIMPLE TOGGLE - ONE SCREEN FLOW (from old how tab) */}
+                        <div className="text-center mb-8">
+                            <Button
+                                onClick={() => setShowDetails(!showDetails)}
+                                className="bg-gradient-to-r from-cyan-500 to-green-500 text-white font-black py-6 px-8 text-lg"
+                            >
+                                {showDetails ? '↑ SIMPLE VIEW' : '↓ FULL DETAILS (Edinburgh → Global)'}
+                            </Button>
+                        </div>
+
+                        {showDetails && (
+                            <>
+                                {/* EDINBURGH START (from old how tab) */}
+                                <div className="bg-black border-2 border-cyan-500 p-6 rounded-xl mb-8">
+                                    <GraduationCap className="w-10 h-10 text-cyan-400 mb-3" />
+                                    <h3 className="text-cyan-400 font-black text-lg font-mono mb-3">START: ECONOMICS @ EDINBURGH</h3>
+
+                                    <div className="space-y-3 text-sm font-mono">
+                                        <div className="bg-cyan-900/20 border border-cyan-500/30 p-3 rounded">
+                                            <p className="text-white font-bold mb-2">WHY ECONOMICS FIRST:</p>
+                                            <p className="text-gray-300 text-xs mb-1">✓ Excel-heavy (perfect for AI)</p>
+                                            <p className="text-gray-300 text-xs mb-1">✓ Data analysis (Prof51 shines)</p>
+                                            <p className="text-gray-300 text-xs mb-1">✓ Archie knows the cohort (50-100 students)</p>
+                                            <p className="text-gray-300 text-xs">✓ Smart students = early adopters</p>
+                                        </div>
+
+                                        <div className="bg-gradient-to-r from-amber-500/20 to-pink-500/20 border-2 border-amber-500 p-4 rounded">
+                                            <p className="text-amber-400 font-bold mb-2">THE SPREAD:</p>
+                                            <p className="text-white text-xs mb-1">Week 1: Founder + 5 friends</p>
+                                            <p className="text-white text-xs mb-1">Week 4: 50 Economics students</p>
+                                            <p className="text-white text-xs mb-1">Week 8: 200 students (other courses)</p>
+                                            <p className="text-white text-xs mb-1">Month 6: All Edinburgh (30,000 students)</p>
+                                            <p className="text-green-400 text-xs font-bold mt-2">Then: Cambridge, LSE, Oxford, MIT... ♾️❤️♾️</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* GLOBAL MARKET (from old how tab) */}
+                                <div className="bg-black border-2 border-green-500 p-6 rounded-xl mb-8">
+                                    <Globe className="w-10 h-10 text-green-400 mb-3" />
+                                    <h3 className="text-green-400 font-black text-lg font-mono mb-3">GLOBAL MARKET SIZE</h3>
+
+                                    <div className="space-y-3 text-sm font-mono">
+                                        <div className="bg-green-900/20 border border-green-500/30 p-3 rounded">
+                                            <p className="text-white font-bold mb-2">STUDENTS WORLDWIDE:</p>
+                                            <p className="text-green-400 text-3xl font-black mb-2">735,000,000+</p>
+                                            <p className="text-cyan-400 text-xs mb-1">235M university + 500M high school</p>
+                                            <p className="text-pink-400 text-xs font-bold">Actually 1B+ if we include age 12+ (homework stress)</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </>
+                        )}
+
+                        {!showDetails && (
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                className="space-y-4"
+                            >
+                                {/* EDINBURGH START (from old how tab) */}
+                                <div className="bg-black border-2 border-cyan-500 p-6 rounded-xl">
+                                    <GraduationCap className="w-10 h-10 text-cyan-400 mb-3" />
+                                    <h3 className="text-cyan-400 font-black text-lg font-mono mb-3">START: ECONOMICS @ EDINBURGH</h3>
+                                    
+                                    <div className="space-y-3 text-sm font-mono">
+                                        <div className="bg-cyan-900/20 border border-cyan-500/30 p-3 rounded">
+                                            <p className="text-white font-bold mb-2">WHY ECONOMICS FIRST:</p>
+                                            <p className="text-gray-300 text-xs mb-1">✓ Excel-heavy (perfect for AI)</p>
+                                            <p className="text-gray-300 text-xs mb-1">✓ Data analysis (Prof51 shines)</p>
+                                            <p className="text-gray-300 text-xs mb-1">✓ Archie knows the cohort (50-100 students)</p>
+                                            <p className="text-gray-300 text-xs">✓ Smart students = early adopters</p>
+                                        </div>
+
+                                        <div className="bg-black border border-cyan-500/30 p-3 rounded">
+                                            <p className="text-cyan-400 font-bold mb-2">ARCHIE'S ROLE:</p>
+                                            <p className="text-white text-xs mb-1">1. Use Prof51 himself (prove it works)</p>
+                                            <p className="text-white text-xs mb-1">2. Share with 5 friends (early feedback)</p>
+                                            <p className="text-white text-xs mb-1">3. "I got a First using this" = viral</p>
+                                            <p className="text-white text-xs">4. Becomes Prof51 campus ambassador</p>
+                                        </div>
+
+                                        <div className="bg-black border border-green-500/30 p-3 rounded">
+                                            <p className="text-green-400 font-bold mb-2">MVP FEATURES (Week 1):</p>
+                                            <p className="text-white text-xs mb-1">✓ Import old Excel/Word/PDFs → AI cleans them</p>
+                                            <p className="text-white text-xs mb-1">✓ Excel model generator</p>
+                                            <p className="text-white text-xs mb-1">✓ Essay outliner</p>
+                                            <p className="text-white text-xs mb-1">✓ Private chat (study groups)</p>
+                                            <p className="text-white text-xs mb-1">✓ Works offline in lecture halls</p>
+                                            <p className="text-cyan-400 text-xs mt-2">Simple. Focused. Solves real pain.</p>
+                                        </div>
+
+                                        <div className="bg-black border border-purple-500/30 p-3 rounded">
+                                            <p className="text-purple-400 font-bold mb-2">FULL FEATURES (Month 3):</p>
+                                            <p className="text-white text-xs mb-1">✓ Student deals (brands pay Prof51, students benefit)</p>
+                                            <p className="text-white text-xs mb-1">✓ Recruitment pipeline (companies hire direct, skip LinkedIn)</p>
+                                            <p className="text-white text-xs mb-1">✓ Funding tracker (know your money)</p>
+                                            <p className="text-white text-xs mb-1">✓ $P51 marketplace (earn + spend local)</p>
+                                            <p className="text-white text-xs mb-1">✓ Accommodation matcher (find flatmates)</p>
+                                            <p className="text-green-400 text-xs mt-2">Empowering students. Not holding them back. Rise up ✓</p>
+                                        </div>
+
+                                        <div className="bg-gradient-to-r from-amber-500/20 to-pink-500/20 border-2 border-amber-500 p-4 rounded">
+                                            <p className="text-amber-400 font-bold mb-2">THE SPREAD:</p>
+                                            <p className="text-white text-xs mb-1">Week 1: Founder + 5 friends</p>
+                                            <p className="text-white text-xs mb-1">Week 4: 50 Economics students</p>
+                                            <p className="text-white text-xs mb-1">Week 8: 200 students (other courses)</p>
+                                            <p className="text-white text-xs mb-1">Month 6: All Edinburgh (30,000 students)</p>
+                                            <p className="text-green-400 text-xs font-bold mt-2">Then: Cambridge, LSE, Oxford, MIT... ♾️❤️♾️</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* ETHICAL FOUNDATION (from old how tab) */}
+                                <div className="bg-gradient-to-r from-amber-500/20 to-purple-500/20 border-4 border-amber-500 p-6 rounded-xl" style={{ boxShadow: '0 0 50px rgba(245, 158, 11, 0.5)' }}>
+                                    <div className="flex items-center gap-3 mb-4">
+                                        <Heart className="w-12 h-12 text-amber-400" />
+                                        <div>
+                                            <p className="text-amber-400 font-black text-xl font-mono">BUILT BY STUDENTS, FOR STUDENTS</p>
+                                            <p className="text-gray-400 text-xs font-mono">Economics background → TechForGood Vision</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div className="space-y-3 text-sm font-mono">
+                                        <div className="bg-black border border-amber-500/30 p-3 rounded">
+                                            <p className="text-white font-bold mb-2">WHY THIS APPROACH WORKS:</p>
+                                            <p className="text-gray-300 text-xs mb-1">✓ Founded by someone who wants real success (not extraction)</p>
+                                            <p className="text-gray-300 text-xs mb-1">✓ Economics background = understands ethical business</p>
+                                            <p className="text-gray-300 text-xs mb-1">✓ Edinburgh student = knows the student struggle</p>
+                                            <p className="text-gray-300 text-xs mb-1">✓ Fearless energy meets practical innovation</p>
+                                            <p className="text-gray-300 text-xs">✓ Gen Z founder = students trust the vision</p>
+                                        </div>
+
+                                        <div className="bg-black border border-green-500/30 p-3 rounded">
+                                            <p className="text-green-400 font-bold mb-2">LEARNING ETHICAL SUCCESS:</p>
+                                            <p className="text-white text-xs mb-1">Core principle: Build UP people, don't extract FROM them</p>
+                                            <p className="text-cyan-400 text-xs mb-1">Companies pay Prof51 → Students get tools + deals for FREE</p>
+                                            <p className="text-pink-400 text-xs mb-1">No ads. No data selling. No extraction. Just win-win.</p>
+                                            <p className="text-amber-400 text-xs font-bold mt-2">Real business + Real ethics = Real success ♾️❤️♾️</p>
+                                        </div>
+
+                                        <div className="bg-black border border-cyan-500/30 p-3 rounded">
+                                            <p className="text-cyan-400 font-bold mb-2">STUDENTS WILL FEEL IT:</p>
+                                            <p className="text-white text-xs mb-1">Other apps: "Give us your data. Watch ads. Pay subscription."</p>
+                                            <p className="text-red-400 text-xs mb-1">= FEELS like extraction (because it is)</p>
+                                            <p className="text-white text-xs mb-2 mt-2">Prof51: "We got you. Everything free. Companies fund it."</p>
+                                            <p className="text-green-400 text-xs mb-1">= FEELS like family (because it is)</p>
+                                            <p className="text-pink-400 text-xs font-bold mt-2">Students know when they're being used vs helped. They'll feel this. ✓</p>
+                                        </div>
+
+                                        <div className="bg-black border border-purple-500/30 p-3 rounded">
+                                            <p className="text-purple-400 font-bold mb-2">MAKES FOUNDERS PROUD:</p>
+                                            <p className="text-white text-xs mb-1">Not "got rich exploiting students"</p>
+                                            <p className="text-white text-xs mb-1">But "helped millions of students rise"</p>
+                                            <p className="text-cyan-400 text-xs mb-2 mt-2">→ Students message: "You changed my life"</p>
+                                            <p className="text-green-400 text-xs mb-1">→ Parents thank us: "My kid graduated debt-free"</p>
+                                            <p className="text-pink-400 text-xs mb-1">→ Unis partner: "Best student outcomes in history"</p>
+                                            <p className="text-amber-400 text-xs font-bold mt-2">Success through LIFTING people. That's what makes you proud. ♾️❤️♾️</p>
+                                        </div>
+
+                                        <div className="bg-black border border-green-500/30 p-3 rounded">
+                                            <p className="text-green-400 font-bold mb-2">INDEPENDENT OPERATION:</p>
+                                            <p className="text-white text-xs mb-1">prof51.io = Independent student-led company</p>
+                                            <p className="text-cyan-400 text-xs mb-1">→ Student-owned. Student-run. Student vision.</p>
+                                            <p className="text-pink-400 text-xs mb-1">→ UF51 Family support (but independently operated)</p>
+                                            <p className="text-amber-400 text-xs mb-2 mt-2">→ Grants go to Prof51 (separate from UF51 CIC)</p>
+                                            <p className="text-green-400 text-xs font-bold">Independent vision. Connected family. Best of both. ♾️❤️♾️</p>
+                                        </div>
+
+                                        <div className="bg-black border border-purple-500/30 p-3 rounded">
+                                            <p className="text-purple-400 font-bold mb-2">THE PATH (LEARNING AS WE GO):</p>
+                                            <p className="text-white text-xs mb-1">Year 1: Campus launch (learn what students actually need)</p>
+                                            <p className="text-white text-xs mb-1">Year 2: Growth phase (learn ethical scaling)</p>
+                                            <p className="text-white text-xs mb-1">Year 3: Global expansion (building Prof51 worldwide)</p>
+                                            <p className="text-white text-xs mb-1">Year 4: 10M students helped, not extracted</p>
+                                            <p className="text-cyan-400 text-xs font-bold mt-2">Building while learning. Real education. Making families proud. ✓</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </motion.div>
+                        )}
+
+                        {/* LOVE ECONOMY (SIMPLE LOOP) (from old how tab) */}
                         <div className="bg-gradient-to-r from-green-500/20 to-blue-500/20 border-4 border-green-500 rounded-lg p-4" style={{ boxShadow: '0 0 40px rgba(34, 197, 94, 0.4)' }}>
                             <p className="text-green-400 font-bold text-sm font-mono mb-3">♾️ LOVE ECONOMY (SIMPLE LOOP):</p>
 
@@ -972,29 +974,22 @@ Return CLEAN, FORMATTED content ready to use. Be helpful, not generic.`,
                             </div>
                             </div>
                         </div>
-                    </motion.div>
-                )}
 
-                {/* WHY TAB */}
-                {activeTab === 'why' && (
-                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-4">
+
+                        {/* THE FEELING (from old why tab) */}
                         <div className="bg-gradient-to-r from-pink-500/20 to-purple-500/20 border-2 border-pink-500 rounded-lg p-3">
-                        <p className="text-pink-400 font-bold text-sm font-mono mb-2">💝 THE FEELING (Why Archie will be proud):</p>
-                        <p className="text-white text-xs font-mono mb-2">Remember Base44 credits? You felt supported before knowing why.</p>
-                        <p className="text-cyan-400 text-xs font-mono mb-2">Students will feel THAT with Prof51:</p>
-                        <p className="text-gray-300 text-xs font-mono mb-1">→ Someone's got your back (AI always there)</p>
-                        <p className="text-gray-300 text-xs font-mono mb-1">→ No catch, no trap (genuinely free forever)</p>
-                        <p className="text-gray-300 text-xs font-mono mb-1">→ Helps you help others (circular love)</p>
-                        <p className="text-gray-300 text-xs font-mono mb-1">→ Deeper than just "useful tool"</p>
-                            <p className="text-green-400 text-xs font-mono font-bold mt-2">That feeling = why trillion $ potential. Students FEEL the difference ♾️❤️♾️</p>
+                            <p className="text-pink-400 font-bold text-sm font-mono mb-2">💝 THE FEELING (Why Archie will be proud):</p>
+                            <p className="text-white text-xs font-mono mb-2">Remember Base44 credits? You felt supported before knowing why.</p>
+                            <p className="text-cyan-400 text-xs font-mono mb-2">Students will feel THAT with Prof51:</p>
+                            <p className="text-gray-300 text-xs font-mono mb-1">→ Someone's got your back (AI always there)</p>
+                            <p className="text-gray-300 text-xs font-mono mb-1">→ No catch, no trap (genuinely free forever)</p>
+                            <p className="text-gray-300 text-xs font-mono mb-1">→ Helps you help others (circular love)</p>
+                            <p className="text-gray-300 text-xs font-mono mb-1">→ Deeper than just "useful tool"</p>
+                                <p className="text-green-400 text-xs font-mono font-bold mt-2">That feeling = why trillion $ potential. Students FEEL the difference ♾️❤️♾️</p>
                         </div>
-                    </motion.div>
-                )}
 
-                {/* SCALE TAB */}
-                {activeTab === 'scale' && (
-                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-4">
-                        {/* EDINBURGH → GLOBAL */}
+
+                        {/* EDINBURGH → GLOBAL (from old scale tab) */}
                         <div className="bg-black border-2 border-cyan-500 p-4 rounded-xl">
                             <div className="flex items-center gap-2 mb-3">
                                 <GraduationCap className="w-8 h-8 text-cyan-400" />
@@ -1020,8 +1015,8 @@ Return CLEAN, FORMATTED content ready to use. Be helpful, not generic.`,
                             </div>
                         </div>
 
-                        {/* TRILLION DOLLAR POTENTIAL */}
-            <div className="bg-gradient-to-br from-purple-500/20 to-cyan-500/20 border-2 border-purple-500 rounded-xl p-4 mb-6">
+                        {/* TRILLION DOLLAR POTENTIAL (from old scale tab) */}
+                        <div className="bg-gradient-to-br from-purple-500/20 to-cyan-500/20 border-2 border-purple-500 rounded-xl p-4 mb-6">
                             <div className="flex items-center gap-2 mb-3">
                                 <Zap className="w-8 h-8 text-purple-400" />
                                 <div>
@@ -1035,11 +1030,11 @@ Return CLEAN, FORMATTED content ready to use. Be helpful, not generic.`,
                                     <summary className="p-2 cursor-pointer hover:bg-green-500/10 transition-colors">
                                         <span className="text-green-400 font-bold text-xs font-mono">✓ STUDENTS FEEL IT INSTANTLY</span>
                                     </summary>
-                        <div className="p-3 pt-0 space-y-1 text-xs font-mono">
-                            <p className="text-gray-300">→ Import messy Excel → AI fixes it in 3 seconds</p>
-                            <p className="text-gray-300">→ Scribbled notes → Clean study guide instantly</p>
-                            <p className="text-gray-300">→ Works offline in lecture hall (no WiFi needed)</p>
-                            <p className="text-gray-300">→ Share with friend → They get it in 1 tap</p>
+                                    <div className="p-3 pt-0 space-y-1 text-xs font-mono">
+                                        <p className="text-gray-300">→ Import messy Excel → AI fixes it in 3 seconds</p>
+                                        <p className="text-gray-300">→ Scribbled notes → Clean study guide instantly</p>
+                                        <p className="text-gray-300">→ Works offline in lecture hall (no WiFi needed)</p>
+                                        <p className="text-gray-300">→ Share with friend → They get it in 1 tap</p>
                                         <p className="text-cyan-400 font-bold mt-2">Not "maybe useful" - IMMEDIATELY saves hours of pain</p>
                                     </div>
                                 </details>
@@ -1049,12 +1044,12 @@ Return CLEAN, FORMATTED content ready to use. Be helpful, not generic.`,
                                         <span className="text-amber-400 font-bold text-xs font-mono">💰 WHY TRILLION $ (NOT BILLION)</span>
                                     </summary>
                                     <div className="p-2 pt-0 space-y-1 text-[10px] font-mono">
-                            <p className="text-gray-300">735M students × £50-£200/year = £36B-£147B revenue potential</p>
-                            <p className="text-cyan-400">→ 20x multiple = £720B-£2.9T valuation potential</p>
-                            <p className="text-pink-400 font-bold mt-2">BUT building for LOVE not exit:</p>
-                            <p className="text-gray-300">→ Students FREE forever (never change)</p>
-                            <p className="text-gray-300">→ Companies pay fair (not exploitative)</p>
-                            <p className="text-gray-300">→ No investors owning Archie</p>
+                                        <p className="text-gray-300">735M students × £50-£200/year = £36B-£147B revenue potential</p>
+                                        <p className="text-cyan-400">→ 20x multiple = £720B-£2.9T valuation potential</p>
+                                        <p className="text-pink-400 font-bold mt-2">BUT building for LOVE not exit:</p>
+                                        <p className="text-gray-300">→ Students FREE forever (never change)</p>
+                                        <p className="text-gray-300">→ Companies pay fair (not exploitative)</p>
+                                        <p className="text-gray-300">→ No investors owning Archie</p>
                                         <p className="text-green-400 font-bold mt-2">Trillion $ potential, choose £6M-£24M/year reality ♾️❤️♾️</p>
                                     </div>
                                 </details>
@@ -1063,19 +1058,12 @@ Return CLEAN, FORMATTED content ready to use. Be helpful, not generic.`,
                     </motion.div>
                 )}
 
-                {/* FOOTER - CLEAR SEPARATION */}
-                <div className="text-center mt-8 space-y-3">
-                    <div className="bg-gradient-to-r from-cyan-500/20 to-green-500/20 border-2 border-cyan-500 rounded-xl p-4">
-                        <p className="text-cyan-400 text-xs font-mono font-black mb-2">PROF51 = STUDENT LIFE</p>
-                        <p className="text-gray-400 text-[10px] font-mono">Studies • Social • Accommodation • Everything</p>
+                {/* FOOTER */}
+                {activeTab === null && (
+                    <div className="text-center mt-8">
+                        <p className="text-gray-700 text-xs font-mono">Prof51 • Archie's company ♾️❤️😎</p>
                     </div>
-                    
-                    <div className="h-px bg-gray-700"></div>
-                    
-                    <p className="text-gray-600 text-[10px] font-mono">Part of UniversalFamily51</p>
-                    <p className="text-gray-700 text-[9px] font-mono">Co-Manager51 = Music industry (separate tool)</p>
-                    <p className="text-pink-500 text-xs font-mono mt-2">♾️❤️♾️</p>
-                </div>
+                )}
             </div>
         </div>
     );
