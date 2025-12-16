@@ -233,38 +233,44 @@ Keep it SHORT, practical, straight to the point. No bullshit. Real help.`,
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="space-y-4 mb-6"
+                    className="space-y-3 mb-6"
                 >
-                    <button
+                    <motion.button
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
                         onClick={() => setActiveWorkflow('gig')}
-                        className="w-full bg-gradient-to-r from-amber-500 to-orange-500 border-4 border-amber-400 text-black font-black py-8 rounded-xl text-2xl font-mono"
-                        style={{ boxShadow: '0 8px 40px rgba(245, 158, 11, 0.7)' }}
+                        className="w-full bg-gradient-to-br from-amber-500 via-orange-500 to-amber-600 text-white font-black py-6 rounded-2xl text-xl font-mono shadow-lg"
+                        style={{ boxShadow: '0 4px 20px rgba(245, 158, 11, 0.5)' }}
                     >
                         📧 GIG
-                    </button>
+                    </motion.button>
 
-                    <button
+                    <motion.button
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
                         onClick={() => setActiveWorkflow('session')}
-                        className="w-full bg-gradient-to-r from-cyan-500 to-blue-500 border-4 border-cyan-400 text-black font-black py-8 rounded-xl text-2xl font-mono"
-                        style={{ boxShadow: '0 8px 40px rgba(6, 182, 212, 0.7)' }}
+                        className="w-full bg-gradient-to-br from-cyan-500 via-blue-500 to-cyan-600 text-white font-black py-6 rounded-2xl text-xl font-mono shadow-lg"
+                        style={{ boxShadow: '0 4px 20px rgba(6, 182, 212, 0.5)' }}
                     >
                         🎵 SESSION
-                    </button>
+                    </motion.button>
 
                     <Link to={createPageUrl('ScottCalendar')} className="block">
-                        <button
-                            className="w-full bg-gradient-to-r from-green-500 to-emerald-500 border-4 border-green-400 text-black font-black py-8 rounded-xl text-2xl font-mono"
-                            style={{ boxShadow: '0 8px 40px rgba(34, 197, 94, 0.7)' }}
+                        <motion.button
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
+                            className="w-full bg-gradient-to-br from-green-500 via-emerald-500 to-green-600 text-white font-black py-6 rounded-2xl text-xl font-mono shadow-lg"
+                            style={{ boxShadow: '0 4px 20px rgba(34, 197, 94, 0.5)' }}
                         >
                             📅 CALENDAR
-                        </button>
+                        </motion.button>
                     </Link>
 
                     <button
                         onClick={() => setAdvancedMode(true)}
-                        className="w-full bg-black border-2 border-gray-800 hover:border-gray-700 text-gray-500 font-bold py-3 rounded-lg text-xs font-mono mt-6"
+                        className="w-full bg-black/60 border border-gray-800 hover:border-gray-700 text-gray-500 hover:text-gray-400 font-bold py-3 rounded-xl text-xs font-mono mt-4 transition-all"
                     >
-                        + Advanced (invoices, publishing, etc)
+                        + Advanced Mode
                     </button>
                 </motion.div>
             )}
