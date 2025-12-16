@@ -1,12 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Send, Upload, Mic, Brain, Sparkles, FileText, Image as ImageIcon, Mail, File, Zap, Heart, Smile, Coffee, Bed, Book, Briefcase, MessageSquare } from 'lucide-react';
 import { base44 } from '@/api/base44Client';
 import { useMutation } from '@tanstack/react-query';
-import { Button } from '@/components/ui/button';
-import { Textarea } from '@/components/ui/textarea';
-import AI51Avatar from '@/components/ai51/AI51Avatar';
-import AI51MessageHandler from '@/components/ai51/AI51MessageHandler';
+import AI51Pure from '@/components/ai51/AI51Pure';
 
 /**
  * AI51 - MOST POWERFUL COMMS TOOL EVER
