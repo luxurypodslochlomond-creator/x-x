@@ -60,6 +60,18 @@ export default function TestAI51() {
             test: async () => {
                 return 'Rendering ✓';
             }
+        },
+        {
+            id: 'audio',
+            name: 'Connection Chime (432Hz)',
+            test: async () => {
+                // Test audio context availability
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                if (!AudioContext) return 'Audio not supported';
+                const ctx = new AudioContext();
+                await ctx.close();
+                return 'Audio Ready ✓';
+            }
         }
     ];
 

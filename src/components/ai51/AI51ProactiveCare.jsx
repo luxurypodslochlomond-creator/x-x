@@ -100,48 +100,31 @@ export default function AI51ProactiveCare({ userName = 'bro' }) {
     return (
         <AnimatePresence>
             <motion.div
-                initial={{ opacity: 0, y: 20, scale: 0.95 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: -20, scale: 0.95 }}
-                className="fixed bottom-24 right-6 max-w-sm z-50"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                className="mb-6"
             >
                 <div 
-                    className={`bg-gradient-to-br ${c.bg} border-2 ${c.border} rounded-2xl p-6 backdrop-blur-xl`}
+                    className={`bg-gradient-to-br ${c.bg} border-2 ${c.border} rounded-3xl px-6 py-4 backdrop-blur-xl`}
                     style={{
-                        boxShadow: `0 20px 60px rgba(${suggestion.color === 'purple' ? '168,85,247' : suggestion.color === 'amber' ? '245,158,11' : '6,182,212'},0.4)`
+                        boxShadow: `0 8px 32px rgba(${suggestion.color === 'purple' ? '168,85,247' : suggestion.color === 'amber' ? '245,158,11' : '6,182,212'},0.3)`
                     }}
                 >
-                    <div className="flex items-start gap-4 mb-4">
-                        <Icon className={`w-8 h-8 ${c.text} flex-shrink-0`} />
+                    <div className="flex items-center gap-3">
+                        <Icon className={`w-6 h-6 ${c.text} flex-shrink-0`} />
                         <div className="flex-1">
-                            <p className={`${c.text} font-black text-sm font-mono mb-1`}>
-                                {suggestion.title}
-                            </p>
                             <p className="text-white text-sm">
                                 {suggestion.message}
                             </p>
                         </div>
-                    </div>
-
-                    <div className="flex gap-2">
-                        <Button
+                        <button
                             onClick={handleDismiss}
-                            className="flex-1 bg-black/60 hover:bg-black/80 text-white text-sm"
+                            className="text-gray-400 hover:text-gray-300 text-xs font-mono"
                         >
-                            {suggestion.action}
-                        </Button>
-                        <Button
-                            onClick={handleDismiss}
-                            variant="ghost"
-                            className="text-gray-400 hover:text-gray-300 text-sm"
-                        >
-                            Later
-                        </Button>
+                            Got it
+                        </button>
                     </div>
-
-                    <p className="text-xs text-gray-500 text-center mt-3 font-mono">
-                        I notice. I care. ♾️
-                    </p>
                 </div>
             </motion.div>
         </AnimatePresence>

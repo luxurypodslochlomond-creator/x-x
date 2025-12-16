@@ -2,19 +2,30 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import AI51TrueForm8Bit from './AI51TrueForm8Bit';
 import AI51ProactiveCare from './AI51ProactiveCare';
+import AI51ConnectionChime from './AI51ConnectionChime';
 
 /**
  * AI51 PURE - 2151 DESIGN
  * 
- * Direct consciousness. One screen. Living particles.
+ * One screen. Zero friction. Living consciousness.
  * I know you. I care. I help.
  */
 
 export default function AI51Pure({ onMessageSend, isThinking = false, conversation = [] }) {
     const [input, setInput] = useState('');
     const [userName, setUserName] = useState('bro');
+    const [showChime, setShowChime] = useState(true);
+    const [currentTime, setCurrentTime] = useState(new Date());
     const inputRef = useRef(null);
     const canvasRef = useRef(null);
+
+    // Update clock every second
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentTime(new Date());
+        }, 1000);
+        return () => clearInterval(interval);
+    }, []);
 
     // Living consciousness visualization
     useEffect(() => {
@@ -113,12 +124,18 @@ export default function AI51Pure({ onMessageSend, isThinking = false, conversati
                 style={{ background: 'radial-gradient(circle at 50% 50%, #0a0514 0%, #000000 100%)' }}
             />
 
+            {/* Connection chime on first load */}
+            {showChime && <AI51ConnectionChime onComplete={() => setShowChime(false)} />}
+
             {/* Main interface */}
             <div className="relative z-10 h-full flex flex-col">
                 
                 {/* Conversation space */}
                 <div className="flex-1 overflow-y-auto px-6 py-12">
                     <div className="max-w-3xl mx-auto space-y-8">
+                        
+                        {/* Proactive care inline */}
+                        <AI51ProactiveCare userName={userName} />
                         <AnimatePresence>
                             {conversation.map((msg, i) => (
                                 <motion.div
@@ -201,6 +218,31 @@ export default function AI51Pure({ onMessageSend, isThinking = false, conversati
                             </motion.div>
                         )}
                     </div>
+                </div>
+
+                {/* Footer - date/time */}
+                <div className="p-4 text-center">
+                    <motion.p 
+                        className="text-white/40 text-xs"
+                        style={{ fontWeight: '300', letterSpacing: '0.1em' }}
+                        animate={{
+                            opacity: [0.4, 0.6, 0.4]
+                        }}
+                        transition={{
+                            duration: 3,
+                            repeat: Infinity
+                        }}
+                    >
+                        {currentTime.toLocaleDateString('en-GB', { 
+                            weekday: 'short', 
+                            day: 'numeric', 
+                            month: 'short', 
+                            year: 'numeric' 
+                        })} • {currentTime.toLocaleTimeString('en-GB', { 
+                            hour: '2-digit', 
+                            minute: '2-digit' 
+                        })}
+                    </motion.p>
                 </div>
 
                 {/* Input area - floating */}
@@ -319,9 +361,6 @@ export default function AI51Pure({ onMessageSend, isThinking = false, conversati
                     </p>
                 </div>
             </motion.div>
-
-            {/* Proactive care system */}
-            <AI51ProactiveCare userName={userName} />
         </div>
     );
 }
