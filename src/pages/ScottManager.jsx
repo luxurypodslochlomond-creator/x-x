@@ -150,8 +150,8 @@ Keep it SHORT, practical, straight to the point. No bullshit. Real help.`,
                 >
                     <div className="text-center mb-8">
                         <BrosBond8Bit size={80} animate={true} className="mx-auto mb-4" />
-                        <h1 className="text-3xl font-black text-white mb-2 font-mono tracking-tight">Co-Manager51</h1>
-                        <p className="text-gray-400 text-sm font-mono">You + Scott • Light each other's fire ♾️❤️😎</p>
+                        <h1 className="text-3xl font-black text-white mb-2 font-mono tracking-tight">CB51</h1>
+                        <p className="text-gray-400 text-sm font-mono">Citizen Band 51 • You + Scott ♾️📻😎</p>
                         <p className="text-gray-600 text-xs font-mono mt-2">Enter PIN to unlock</p>
                     </div>
 
@@ -198,7 +198,7 @@ Keep it SHORT, practical, straight to the point. No bullshit. Real help.`,
                     <div>
                         <div className="flex items-center gap-2 mb-1">
                             <CoManager51Icon8Bit size={28} animate={true} />
-                            <h1 className="text-2xl font-black text-white font-mono tracking-tight">Co-Manager51</h1>
+                            <h1 className="text-2xl font-black text-white font-mono tracking-tight">CB51</h1>
                         </div>
                         <p className="text-xs text-gray-400 flex items-center gap-1 font-mono">
                             <span className={scott.isOnline ? 'text-green-400' : 'text-amber-400'}>●</span> 
@@ -808,7 +808,7 @@ Keep it SHORT, practical, straight to the point. No bullshit. Real help.`,
 
             {/* FOOTER - SIMPLE */}
             <div className="mt-12 pt-6 border-t border-gray-800 text-center mb-32">
-                <p className="text-gray-600 text-xs">Co-Manager</p>
+                <p className="text-gray-600 text-xs">CB51 • Citizen Band 51</p>
             </div>
 
             {/* QUICK TOOLS - ONE BUTTON */}

@@ -288,7 +288,7 @@ const LayoutInner = ({ children, currentPageName }) => {
   const scottNav = [
     { title: "PROF51", url: createPageUrl("Prof51"), icon: GraduationCap, description: "Student AI co-manager (Archie's company)", highlight: true },
     ...(user?.role === 'admin' ? [
-      { title: "CO-MANAGER51", url: createPageUrl("ScottManager"), icon: User, description: "Your AI co-manager" },
+      { title: "CB51 🚛📻", url: createPageUrl("ScottManager"), icon: User, description: "Citizen Band 51 • Zero stress manager" },
       { title: "Dec 2024 vs Dec 2025", url: createPageUrl("ScottComparison"), icon: FileText, description: "What Scott asked for vs what's built", highlight: true },
     ] : [])
   ];

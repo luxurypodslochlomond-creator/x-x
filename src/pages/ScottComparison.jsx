@@ -11,7 +11,7 @@ import { ArrowLeft, CheckCircle, Circle, Zap, Heart } from 'lucide-react';
 
 export default function ScottComparison() {
     React.useEffect(() => {
-        document.title = 'Dec 2024 vs Dec 2025 - Co-Manager51';
+        document.title = 'Dec 2024 vs Dec 2025 - CB51';
     }, []);
 
     return (
@@ -21,10 +21,10 @@ export default function ScottComparison() {
                 <div className="max-w-4xl mx-auto">
                     <Link to={createPageUrl('ScottManager')} className="flex items-center gap-2 text-cyan-400 hover:text-cyan-300 text-sm font-bold mb-4">
                         <ArrowLeft className="w-4 h-4" />
-                        Back to Co-Manager51
+                        Back to CB51
                     </Link>
                     <div className="text-center space-y-2">
-                        <h1 className="text-3xl md:text-4xl font-black text-white">CO-MANAGER51</h1>
+                        <h1 className="text-3xl md:text-4xl font-black text-white">CB51 (was Co-Manager51)</h1>
                         <p className="text-xl text-cyan-400 font-bold">First Draft Dec 2024 → Built Dec 2025</p>
                         <p className="text-sm text-gray-400">What Scott asked for vs what's built</p>
                     </div>

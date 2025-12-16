@@ -12,7 +12,7 @@ import Gill51Sunglasses8Bit from '@/components/shared/Gill51Sunglasses8Bit';
 
 export default function ScottAbout() {
     React.useEffect(() => {
-        document.title = 'About Co-Manager51 - AI Music Manager';
+        document.title = 'About CB51 - Citizen Band 51 • Zero Stress Manager';
     }, []);
 
     return (
@@ -33,7 +33,7 @@ export default function ScottAbout() {
                     <div className="flex items-center gap-3 mb-4">
                         <CoManager51Icon8Bit size={48} animate={true} />
                         <div>
-                            <h1 className="text-amber-400 font-black text-2xl font-mono">WHO WE ARE</h1>
+                            <h1 className="text-amber-400 font-black text-2xl font-mono">CB51 • WHO WE ARE</h1>
                             <p className="text-gray-400 text-xs font-mono">Music family, love-first business</p>
                         </div>
                     </div>
@@ -93,8 +93,8 @@ export default function ScottAbout() {
                                     <CoManager51Icon8Bit size={40} animate={false} />
                                 </div>
                                 <div className="flex-1">
-                                    <p className="text-amber-400 font-black text-sm font-mono">CO-MANAGER51</p>
-                                    <p className="text-gray-400 text-xs font-mono">AI handles busywork</p>
+                                    <p className="text-amber-400 font-black text-sm font-mono">CB51</p>
+                                    <p className="text-gray-400 text-xs font-mono">Citizen Band 51 • Zero stress</p>
                                 </div>
                             </div>
 
@@ -155,9 +155,9 @@ export default function ScottAbout() {
                     </div>
 
                     <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-2 border-green-500 rounded-lg p-4">
-                        <p className="text-green-400 font-bold mb-2">CO-MANAGER51 DIFFERENCE:</p>
-                        <p className="text-white text-xs mb-2">Built by managers for managers. Simple. Offline. Affordable.</p>
-                        <p className="text-cyan-400 text-xs font-bold">Real tools for real life ♾️❤️♾️</p>
+                        <p className="text-green-400 font-bold mb-2">CB51 DIFFERENCE:</p>
+                        <p className="text-white text-xs mb-2">Built by managers for managers. P2P mesh when grid fails. Zero extraction.</p>
+                        <p className="text-cyan-400 text-xs font-bold">Working class solidarity ♾️📻♾️</p>
                     </div>
                 </div>
 
@@ -215,7 +215,7 @@ export default function ScottAbout() {
                     <p className="text-gray-400 text-sm font-mono mb-3">Built for the road</p>
                     <Link to={createPageUrl('ScottManager')}>
                         <button className="bg-gradient-to-r from-amber-500 to-orange-500 text-black font-black px-8 py-4 rounded-lg text-lg font-mono w-full">
-                            OPEN CO-MANAGER →
+                            OPEN CB51 →
                         </button>
                     </Link>
                     <Link to={createPageUrl('ScottZeroServerArchitecture')}>
@@ -228,8 +228,8 @@ export default function ScottAbout() {
                 {/* FOOTER - CLEAR IDENTITY */}
                 <div className="text-center pt-6 border-t-2 border-amber-500/30">
                     <div className="bg-gradient-to-r from-amber-500/20 to-orange-500/20 border-2 border-amber-500 rounded-xl p-4 mb-3">
-                        <p className="text-amber-400 font-black text-sm font-mono mb-1">CO-MANAGER51 = MUSIC ONLY</p>
-                        <p className="text-white text-xs font-mono">Artists • Gigs • Publishing • Tours</p>
+                        <p className="text-amber-400 font-black text-sm font-mono mb-1">CB51 = MUSIC • SPORTS • PROPERTY</p>
+                        <p className="text-white text-xs font-mono">One tool, multiple products, zero stress 🚛📻</p>
                     </div>
                     <p className="text-gray-600 text-[10px] font-mono">Scott's tool • UniversalFamily51</p>
                     <p className="text-gray-700 text-[9px] font-mono mt-1">(Prof51 = Students, separate)</p>
