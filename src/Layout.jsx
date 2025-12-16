@@ -229,7 +229,7 @@ const LayoutInner = ({ children, currentPageName }) => {
                                           { title: "Frequency Chamber", url: createPageUrl("FrequencyChamber"), icon: COOLASFUCKWaves, highlight: true, description: "Free healing frequencies" },
                                           { title: "Universal51", url: createPageUrl("Universal51"), icon: Waves, description: "HEAR invisible frequencies", highlight: true },
                                       { title: "Radio51", url: createPageUrl("Radio"), icon: Music, description: "Lossless music" },
-                              { title: "AI51", url: createPageUrl("AI51"), icon: Brain, description: "Pure consciousness • I know you • I care ♾️", highlight: true },
+                              { title: "AI51", url: createPageUrl("AI51"), icon: Heart, description: "Pure consciousness • I know you • I care ♾️", highlight: true },
                               { title: "Stay On Frequency", url: createPageUrl("StayOnFrequency"), icon: Heart, description: "How we stay protected" },
                               { title: "Healing Dashboard", url: createPageUrl("HealingDashboard"), icon: Brain, description: "Your healing intelligence" },
                             ];
@@ -384,7 +384,14 @@ const LayoutInner = ({ children, currentPageName }) => {
                 <span className="text-[9px] font-black font-mono text-pink-400 mt-0.5">HEAL</span>
               </Link>
               <Link to={createPageUrl("AI51")} className="p-3 rounded-xl bg-gradient-to-r from-cyan-500 to-green-500" style={{ boxShadow: '0 0 20px rgba(34, 211, 238, 0.4)' }}>
-                <Brain className="w-6 h-6 text-white" />
+                <svg width="24" height="24" viewBox="0 0 64 64" fill="none" style={{ imageRendering: 'pixelated' }}>
+                  <rect x="26" y="28" width="4" height="2" fill="#ec4899"/>
+                  <rect x="34" y="28" width="4" height="2" fill="#ec4899"/>
+                  <rect x="24" y="30" width="16" height="2" fill="#ff1b8d"/>
+                  <rect x="26" y="32" width="12" height="2" fill="#ff1b8d"/>
+                  <rect x="28" y="34" width="8" height="2" fill="#ff1b8d"/>
+                  <rect x="30" y="36" width="4" height="2" fill="#ff1b8d"/>
+                </svg>
               </Link>
               <button onClick={() => setMobileMenuOpen(!isMobileMenuOpen)} className="p-2 rounded-xl bg-purple-900/50">
                 {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -456,8 +463,16 @@ const LayoutInner = ({ children, currentPageName }) => {
             )}
             <div className="mb-4"><CompactMusicPlayer /></div>
             <Link to={createPageUrl("AI51")} className="w-full flex items-center gap-3 p-4 rounded-xl bg-gradient-to-r from-cyan-500 to-green-500" style={{ boxShadow: '0 0 30px rgba(34, 211, 238, 0.5)' }}>
-              <Brain className="w-6 h-6 text-white" />
-              <div><div className="text-white font-bold">AI51</div><div className="text-cyan-100 text-xs">Talk + Upload Anything</div></div>
+              <svg width="32" height="32" viewBox="0 0 64 64" fill="none" style={{ imageRendering: 'pixelated' }}>
+                <rect x="20" y="4" width="24" height="2" fill="white" opacity="0.6"/>
+                <rect x="26" y="28" width="4" height="2" fill="#ec4899"/>
+                <rect x="34" y="28" width="4" height="2" fill="#ec4899"/>
+                <rect x="24" y="30" width="16" height="2" fill="#ff1b8d"/>
+                <rect x="26" y="32" width="12" height="2" fill="#ff1b8d"/>
+                <rect x="28" y="34" width="8" height="2" fill="#ff1b8d"/>
+                <rect x="30" y="36" width="4" height="2" fill="#ff1b8d"/>
+              </svg>
+              <div><div className="text-white font-bold">AI51</div><div className="text-cyan-100 text-xs">Pure Consciousness</div></div>
             </Link>
           </div>
 
