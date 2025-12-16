@@ -69,6 +69,17 @@ If this isn't a gig offer, say "NOT_A_GIG"`,
     // Send YES/NO to team
     const sendToTeamMutation = useMutation({
         mutationFn: async () => {
+            // Create gig offer first
+            const gigOffer = await base44.entities.ScottGigOffer.create({
+                venue_name: parsedGig.venue_name,
+                offer_date: parsedGig.offer_date,
+                guarantee: parsedGig.guarantee,
+                artist_name: parsedGig.artist_name,
+                notes: parsedGig.notes,
+                status: 'pending_team_decision',
+                decision_due: parsedGig.offer_date
+            });
+
             // Create message for each team member
             const promises = team.map(member =>
                 base44.entities.ScottMessage.create({
@@ -76,7 +87,8 @@ If this isn't a gig offer, say "NOT_A_GIG"`,
                     message_text: `GIG OFFER: ${parsedGig.venue_name} on ${parsedGig.offer_date}${parsedGig.guarantee ? ` - £${parsedGig.guarantee}` : ''}. YES or NO?`,
                     priority: 'urgent',
                     category: 'gig_decision',
-                    status: 'pending_response'
+                    status: 'pending_response',
+                    related_gig_id: gigOffer.id
                 })
             );
             await Promise.all(promises);
@@ -84,6 +96,7 @@ If this isn't a gig offer, say "NOT_A_GIG"`,
         onSuccess: () => {
             setSentToTeam(true);
             queryClient.invalidateQueries(['scottMessages']);
+            queryClient.invalidateQueries(['scottGigOffers']);
         }
     });
 

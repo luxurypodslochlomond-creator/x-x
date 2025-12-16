@@ -69,6 +69,17 @@ Return subject and body.`,
                     subject: draftEmail.subject,
                     body: draftEmail.body
                 });
+
+                // Create event for session request
+                await base44.entities.ScottEvent.create({
+                    title: `Session: ${artistName} x ${producerName}`,
+                    type: 'session_request',
+                    date: new Date().toISOString(),
+                    status: 'pending_confirmation',
+                    notes: notes,
+                    artist_id: null, // Can link later if needed
+                    producer_name: producerName
+                });
             }
         },
         onSuccess: () => {
