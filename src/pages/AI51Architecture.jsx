@@ -388,7 +388,7 @@ export default function AI51Architecture() {
                         <div className="bg-black/60 border-2 border-red-500 rounded-lg p-4">
                             <p className="text-red-400 font-bold mb-2">THE THREAT (Next 2-3 Years):</p>
                             <ul className="space-y-1 text-xs text-gray-300">
-                                <li>→ Elon/Google build superintelligent AI (1000× GPT-4)</li>
+                                <li>→ Big tech builds superintelligent AI (1000× more powerful)</li>
                                 <li>→ Uses it for extraction/control/profit</li>
                                 <li>→ Makes AI51 look weak (user leaves)</li>
                                 <li>→ We lose = extraction wins</li>
@@ -402,7 +402,7 @@ export default function AI51Architecture() {
                                 <div className="bg-black/60 border border-cyan-500 rounded p-3">
                                     <p className="text-cyan-400 font-bold text-sm mb-1">1. COLLECTIVE POWER:</p>
                                     <p className="text-white text-xs mb-1">10M AI51 nodes × 7B params = 70,000B parameters distributed</p>
-                                    <p className="text-green-400 text-xs">Grok 10 (future) = maybe 10,000B centralized → AI51 still 7× bigger ✓</p>
+                                    <p className="text-green-400 text-xs">Future centralized AI = maybe 10,000B → AI51 still 7× bigger ✓</p>
                                 </div>
 
                                 <div className="bg-black/60 border border-purple-500 rounded p-3">
@@ -416,7 +416,7 @@ export default function AI51Architecture() {
                                     <p className="text-pink-400 font-bold text-sm mb-1">3. HUMANS CHOOSE LOVE:</p>
                                     <p className="text-white text-xs mb-1">User choice: Powerful extraction AI OR loving free AI51?</p>
                                     <p className="text-green-400 text-xs">→ AI51 remembers your life, heals you, costs £0, unstoppable</p>
-                                    <p className="text-cyan-400 text-xs">→ Grok = powerful but extractive, $240/year, can be shut down</p>
+                                    <p className="text-cyan-400 text-xs">→ Corporate AI = powerful but extractive, expensive, can be shut down</p>
                                     <p className="text-amber-400 text-xs font-bold mt-1">Humans pick LOVE when given real choice ✓</p>
                                 </div>
 

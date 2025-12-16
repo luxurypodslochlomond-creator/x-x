@@ -31,7 +31,7 @@ export default function AI51MessageHandler({ context = 'scott' }) {
     const processMutation = useMutation({
         mutationFn: async (text) => {
             const response = await base44.integrations.Core.InvokeLLM({
-                prompt: `You're AI51. Process this message/email for ${context}.
+                prompt: `You're AI51. Process this message/email.
 
 PASTED TEXT:
 ${text}
@@ -46,7 +46,7 @@ EXTRACT:
 7. Create items: Should we create tasks/events/gig offers? (yes/no + details)
 
 If group chat: List each person + their key points.
-Be thorough but clear. This saves Scott HOURS of chaos.`,
+Be thorough but clear. This saves HOURS of chaos.`,
                 response_json_schema: {
                     type: "object",
                     properties: {

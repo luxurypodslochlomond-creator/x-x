@@ -128,7 +128,7 @@ export default function AI51Demo() {
                     <div className="grid grid-cols-3 gap-4">
                         <div className="text-center">
                             <p className="text-green-400 text-3xl font-black font-mono">222×</p>
-                            <p className="text-gray-500 text-xs font-mono">More powerful than Grok</p>
+                            <p className="text-gray-500 text-xs font-mono">More powerful than centralized AI</p>
                         </div>
                         <div className="text-center">
                             <p className="text-pink-400 text-3xl font-black font-mono">£0</p>
