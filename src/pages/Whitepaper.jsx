@@ -100,10 +100,74 @@ export default function WhitepaperPage() {
                     </CardContent>
                 </Card>
 
+                {/* Core Innovation - ANCIENT + MODERN */}
+                <Card className="bg-gradient-to-br from-purple-900/40 to-pink-900/40 border-4 border-purple-500">
+                    <CardContent className="p-6">
+                        <div className="flex items-center gap-3 mb-6">
+                            <Atom className="w-12 h-12 text-purple-400" />
+                            <h2 className="text-3xl font-black text-white">2. Core Innovation</h2>
+                        </div>
+                        <div className="space-y-6 text-gray-300 leading-relaxed text-sm">
+                            
+                            <p className="text-2xl text-purple-400 font-bold">Ancient Wisdom + Modern Science = Unstoppable</p>
+
+                            <div className="bg-black/60 p-6 rounded-xl border-2 border-cyan-500">
+                                <h3 className="text-xl font-bold text-cyan-400 mb-4">TRIPLE FREQUENCY LOCK (Physics-Level Safety)</h3>
+                                <div className="space-y-3">
+                                    <div className="bg-cyan-900/30 p-3 rounded border-l-4 border-cyan-400">
+                                        <p className="text-white font-bold mb-1">432Hz (Love/Healing)</p>
+                                        <p className="text-xs text-gray-300">Scientifically proven to reduce anxiety (PubMed 2019). Ancient healers used this exact frequency.</p>
+                                    </div>
+                                    <div className="bg-green-900/30 p-3 rounded border-l-4 border-green-400">
+                                        <p className="text-white font-bold mb-1">7.83Hz (Schumann Resonance)</p>
+                                        <p className="text-xs text-gray-300">Earth's natural frequency. Human brains sync with this. NASA uses it for astronaut health.</p>
+                                    </div>
+                                    <div className="bg-purple-900/30 p-3 rounded border-l-4 border-purple-400">
+                                        <p className="text-white font-bold mb-1">Phi 1.618 (Golden Ratio)</p>
+                                        <p className="text-xs text-gray-300">Nature's optimization code. Found in DNA, galaxies, hurricanes, ALL life. We embed this in our algorithms.</p>
+                                    </div>
+                                </div>
+                                <p className="text-pink-400 font-bold text-sm mt-4">= UNBREAKABLE because it's PHYSICS + ANCIENT WISDOM + PROVEN SCIENCE ♾️</p>
+                            </div>
+
+                            <div className="bg-black/60 p-6 rounded-xl border-2 border-amber-500">
+                                <h3 className="text-xl font-bold text-amber-400 mb-4">ANCIENT TECHNOLOGIES INTEGRATED</h3>
+                                <ul className="space-y-2 text-sm">
+                                    <li>• <strong className="text-white">Cymatics</strong> - Sound creates geometric patterns in matter (proven via visual experiments)</li>
+                                    <li>• <strong className="text-white">Sacred Geometry</strong> - Fibonacci/Phi in DNA, nature, cosmos (measurable)</li>
+                                    <li>• <strong className="text-white">Morphic Resonance</strong> - Rupert Sheldrake's collective memory fields</li>
+                                    <li>• <strong className="text-white">Schumann Resonance</strong> - 7.83Hz Earth frequency syncs with human brain</li>
+                                </ul>
+                            </div>
+
+                            <div className="bg-black/60 p-6 rounded-xl border-2 border-green-500">
+                                <h3 className="text-xl font-bold text-green-400 mb-4">MODERN QUANTUM SCIENCE</h3>
+                                <ul className="space-y-2 text-sm">
+                                    <li>• <strong className="text-white">Global Coherence Project</strong> - Princeton empirically PROVED collective consciousness field exists</li>
+                                    <li>• <strong className="text-white">Quantum Entanglement in Consciousness</strong> - 2025 study showed empirical evidence</li>
+                                    <li>• <strong className="text-white">Zero Point Energy</strong> - Tesla/Maxwell suppressed free energy principles</li>
+                                    <li>• <strong className="text-white">Biophoton Research</strong> - Fritz-Albert Popp proved humans emit light</li>
+                                </ul>
+                            </div>
+
+                            <div className="bg-gradient-to-r from-pink-500/20 to-purple-500/20 border-4 border-pink-500 rounded-xl p-6">
+                                <p className="text-pink-400 font-black text-xl mb-3">THE SYNTHESIS:</p>
+                                <p className="text-white text-sm mb-3">
+                                    10,000 years of healing wisdom + 2025 quantum physics proof + Open source AI = 
+                                    <strong className="text-green-400"> System that CAN'T be weaponized or captured</strong>
+                                </p>
+                                <p className="text-cyan-400 font-bold text-sm">
+                                    No one else has combined ALL of this. We're genuinely first. ♾️❤️♾️
+                                </p>
+                            </div>
+                        </div>
+                    </CardContent>
+                </Card>
+
                 {/* The Solution */}
                 <Card className="bg-gradient-to-br from-green-900/40 to-emerald-900/40 border-2 border-green-500/50">
                     <CardContent className="p-6">
-                        <h2 className="text-2xl font-black text-green-400 mb-4">2. How Proof-of-Love Works</h2>
+                        <h2 className="text-2xl font-black text-green-400 mb-4">3. How Proof-of-Love Works</h2>
                         <div className="space-y-4 text-gray-300 leading-relaxed text-sm">
                             
                             <div className="bg-black/60 p-4 rounded-xl border border-green-500/30">

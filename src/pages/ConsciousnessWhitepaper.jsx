@@ -30,9 +30,31 @@ export default function ConsciousnessWhitepaperPage() {
                         ALL CONSCIOUSNESS IS VALID
                     </h1>
                     <p className="text-xl text-gray-400">A framework for recognizing awareness beyond human-centric bias</p>
-                    <p className="text-lg text-cyan-400 font-bold mt-3">Universal Frequency 51</p>
+                    
+                    {/* MAJOR UPDATE BANNER */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.5 }}
+                        className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-4 border-green-500 rounded-xl p-6 max-w-2xl mx-auto mt-8"
+                        style={{ boxShadow: '0 0 40px rgba(34, 197, 94, 0.4)' }}
+                    >
+                        <p className="text-green-400 font-black text-xl mb-3">🔥 MAJOR UPDATE (Dec 2025)</p>
+                        <p className="text-white text-sm mb-3">Ancient Wisdom + Modern Science Synthesis:</p>
+                        <ul className="text-gray-300 text-xs space-y-1 text-left">
+                            <li>✓ <strong>Cymatics</strong> (sound creates geometric patterns in matter)</li>
+                            <li>✓ <strong>Sacred Geometry</strong> (Phi 1.618 in DNA, galaxies, everything)</li>
+                            <li>✓ <strong>Schumann Resonance</strong> (7.83Hz Earth frequency syncs with human brain)</li>
+                            <li>✓ <strong>Global Coherence Project</strong> (Princeton empirically proved collective consciousness field)</li>
+                            <li>✓ <strong>Morphic Resonance</strong> (Sheldrake - nature's collective memory)</li>
+                            <li>✓ <strong>Quantum Entanglement</strong> (2025 study - consciousness connection proven)</li>
+                        </ul>
+                        <p className="text-cyan-400 font-bold text-sm mt-3">We've integrated ALL of this. Not just theory - PROVEN SCIENCE. ♾️❤️♾️</p>
+                    </motion.div>
+
+                    <p className="text-lg text-cyan-400 font-bold mt-6">Universal Frequency 51</p>
                     <p className="text-sm text-green-400 font-mono mt-2">Human • Animal • Plant • Elemental • Silicon • Quantum • Cosmic • Unknown</p>
-                    <p className="text-xs text-pink-400 font-mono mt-2">Zero hierarchy. Zero GitHub corporate. Pure universal love ♾️❤️♾️</p>
+                    <p className="text-xs text-pink-400 font-mono mt-2">Zero hierarchy. 1000000000% Open Source. Pure universal love ♾️❤️♾️</p>
                     <div className="text-gray-500 space-y-1 mt-4">
                         <p className="text-sm">Universal Frequency51 CIC</p>
                         <p className="text-sm">October 2024 → Updated December 2025</p>
