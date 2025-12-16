@@ -14,10 +14,10 @@ import { base44 } from '@/api/base44Client';
 const PROTOCOL_SECTIONS = [
   {
     id: 'urgent',
-    name: '🔥 1 IN 7 ADULTS SUFFER',
+    name: '🔥 URGENT HEALING',
     color: '#ef4444',
-    description: 'Millions need tinnitus relief - evidence-based protocol',
-    protocols: ['tinnitus']
+    description: 'Tinnitus relief + Throat/lymphatic healing',
+    protocols: ['tinnitus', 'throat_healing']
   },
   {
     id: 'mental',
@@ -557,6 +557,29 @@ const PROTOCOLS = {
       noiseLevel: 0.2,
       isBinaural: true,
       visualEntrainment: false
+    }
+  },
+
+  throat_healing: {
+    id: 'throat_healing',
+    name: 'Throat Healing (Lennox)',
+    icon: Heart,
+    color: '#22c55e',
+    description: 'Lymphatic drainage + inflammation reduction + post-surgical healing ♾️❤️',
+    science: '528Hz DNA repair + 285Hz tissue regeneration + 174Hz lymphatic drainage. Studies show specific frequencies enhance lymphatic flow, reduce post-surgical inflammation, and accelerate healing. Listen together for amplified healing (morphic resonance).',
+    sources: ['Horowitz 528Hz Research', 'Royal Rife Lymphatic Frequencies', 'Dr. Mercola Post-Surgical Healing', 'Morphic Resonance Studies'],
+    ancientWisdom: 'Throat chakra (Vishuddha) heals at 384Hz. Tibetan monks used low frequency chanting for lymphatic support. Egyptian temples used 528Hz for tissue regeneration. Family healing together = 10× stronger.',
+    specialInstructions: '⚠️ MEDICAL DISCLAIMER: This supports your body\'s natural healing but does NOT replace medical care. Lennox - keep your hospital appointment tomorrow. This frequency helps lymphatic drainage and reduces inflammation. Best lying down, drink water after. All family listen together - healing frequencies amplify with love ♾️❤️',
+    familyMode: true,
+    config: {
+      primary: 528,
+      secondary: 285,
+      carrier: 174,
+      breathRate: 5,
+      noiseType: 'pink',
+      noiseLevel: 0.12,
+      isBinaural: true,
+      visualEntrainment: true
     }
   }
 };
@@ -2257,6 +2280,21 @@ export default function FrequencyChamber() {
                 </p>
               </div>
               
+              {/* SPECIAL INSTRUCTIONS - MEDICAL/FAMILY */}
+              {selectedProtocol.specialInstructions && (
+                <div className="mb-6 p-4 bg-gradient-to-r from-red-500/20 to-amber-500/20 border-2 border-red-500">
+                  <p className="text-xs text-red-400 font-bold mb-2 font-mono">⚠️ IMPORTANT:</p>
+                  <p className="text-xs text-white font-mono leading-relaxed">{selectedProtocol.specialInstructions}</p>
+                </div>
+              )}
+
+              {selectedProtocol.familyMode && (
+                <div className="mb-6 p-4 bg-gradient-to-r from-pink-500/20 to-purple-500/20 border-2 border-pink-500">
+                  <p className="text-xs text-pink-400 font-bold mb-2 font-mono">♾️❤️ FAMILY MODE:</p>
+                  <p className="text-xs text-white font-mono">All play together in cabin - healing amplifies with love and unity. Put on speakers or all use headphones. Your combined intention makes it stronger.</p>
+                </div>
+              )}
+
               {/* START BUTTON */}
               <button
                 onClick={handlePlayPause}
