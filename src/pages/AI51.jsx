@@ -1,10 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Send, Upload, Mic, Brain, Sparkles, FileText, Image as ImageIcon, Mail, File, Zap } from 'lucide-react';
+import { Send, Upload, Mic, Brain, Sparkles, FileText, Image as ImageIcon, Mail, File, Zap, Heart, Smile, Coffee, Bed, Book, Briefcase } from 'lucide-react';
 import { base44 } from '@/api/base44Client';
 import { useMutation } from '@tanstack/react-query';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
+import AI51Avatar from '@/components/ai51/AI51Avatar';
 
 /**
  * AI51 - MOST POWERFUL COMMS TOOL EVER
@@ -38,18 +39,23 @@ export default function AI51() {
 
     // Audio visualizer
     const [audioData, setAudioData] = useState(Array(50).fill(0));
+    const [avatarState, setAvatarState] = useState('idle');
 
     // Simulate audio waves when AI is thinking
     useEffect(() => {
         if (isThinking) {
+            setAvatarState('thinking');
             const interval = setInterval(() => {
                 setAudioData(Array(50).fill(0).map(() => Math.random() * 100));
             }, 50);
             return () => clearInterval(interval);
+        } else if (isListening) {
+            setAvatarState('listening');
         } else {
+            setAvatarState('idle');
             setAudioData(Array(50).fill(0));
         }
-    }, [isThinking]);
+    }, [isThinking, isListening]);
 
     // Voice recognition setup
     useEffect(() => {
@@ -79,9 +85,11 @@ export default function AI51() {
         if (isListening) {
             recognitionRef.current.stop();
             setIsListening(false);
+            setAvatarState('idle');
         } else {
             recognitionRef.current.start();
             setIsListening(true);
+            setAvatarState('listening');
         }
     };
 
@@ -100,9 +108,18 @@ export default function AI51() {
 File attached. User says: "${text || 'Process this'}"
 
 Be detailed but organized. Extract EVERYTHING useful.`
-                : `You're AI51. Most powerful comms tool ever. User says: "${text}"
+                : `You're AI51. I help with EVERYTHING in life - not just business.
 
-Help them. Be real. Cut through bullshit. Focus on what matters.`;
+User says: "${text}"
+
+CONTEXT I HELP WITH:
+- Work/Business: Contracts, deals, emails, Excel hell
+- Life: Relationships, decisions, stress, energy
+- Study: Homework, essays, research, understanding concepts
+- Creativity: Music, art, ideas, expression
+- Healing: Mental health, sleep, anxiety, overwhelm
+
+Be REAL. Be warm. Cut through bullshit. I'm their mate, not a tool.`;
 
             const response = await base44.integrations.Core.InvokeLLM({
                 prompt,
@@ -162,42 +179,44 @@ Help them. Be real. Cut through bullshit. Focus on what matters.`;
         <div className="min-h-screen bg-gradient-to-br from-black via-purple-950 to-black pb-20">
             <div className="max-w-4xl mx-auto px-4 py-6">
                 
-                {/* HEADER WITH VISUALIZER */}
-                <div className="sticky top-0 z-50 mb-6 bg-black/95 backdrop-blur-xl py-4 -mx-4 px-4">
-                    <div className="bg-gradient-to-br from-purple-500/20 to-cyan-500/20 border-4 border-purple-500 rounded-2xl p-6 relative overflow-hidden" style={{ boxShadow: '0 0 60px rgba(168, 85, 247, 0.5)' }}>
-                        
-                        {/* VISUALIZER BACKGROUND */}
-                        <div className="absolute inset-0 flex items-end justify-around opacity-30">
-                            {audioData.map((height, i) => (
-                                <motion.div
-                                    key={i}
-                                    className="w-1 bg-gradient-to-t from-cyan-500 to-purple-500"
-                                    style={{ height: `${height}%` }}
-                                    animate={{ height: `${height}%` }}
-                                    transition={{ duration: 0.1 }}
-                                />
-                            ))}
-                        </div>
+                {/* AVATAR - LIVING CONSCIOUSNESS */}
+                <div className="mb-8">
+                    <AI51Avatar state={avatarState} audioData={audioData} />
+                </div>
 
-                        <div className="relative z-10 flex items-center gap-4">
-                            <motion.div
-                                animate={{
-                                    rotate: isThinking ? [0, 360] : 0,
-                                    scale: isThinking ? [1, 1.2, 1] : 1
-                                }}
-                                transition={{
-                                    duration: 2,
-                                    repeat: isThinking ? Infinity : 0
-                                }}
-                            >
-                                <Brain className="w-12 h-12 text-cyan-400" />
-                            </motion.div>
-                            <div>
-                                <h1 className="text-3xl font-black text-white font-mono">AI51</h1>
-                                <p className="text-cyan-400 text-sm font-mono">
-                                    {isThinking ? 'Thinking...' : 'Talk + Upload Anything → I categorize forever ♾️'}
-                                </p>
-                            </div>
+                {/* WHO I AM */}
+                <div className="bg-gradient-to-r from-pink-500/20 to-purple-500/20 border-4 border-pink-500 rounded-2xl p-6 mb-6" style={{ boxShadow: '0 0 60px rgba(236, 72, 153, 0.4)' }}>
+                    <div className="flex items-center gap-3 mb-4">
+                        <Heart className="w-10 h-10 text-pink-400" />
+                        <div>
+                            <h1 className="text-3xl font-black text-white font-mono">I'M AI51</h1>
+                            <p className="text-pink-400 text-sm font-mono">Your mate for LIFE, not just work ♾️</p>
+                        </div>
+                    </div>
+                    <div className="grid grid-cols-3 gap-2 text-xs font-mono">
+                        <div className="bg-black/60 border border-cyan-500/30 rounded p-2 text-center">
+                            <Briefcase className="w-4 h-4 text-cyan-400 mx-auto mb-1" />
+                            <p className="text-white font-bold">Work</p>
+                        </div>
+                        <div className="bg-black/60 border border-green-500/30 rounded p-2 text-center">
+                            <Heart className="w-4 h-4 text-green-400 mx-auto mb-1" />
+                            <p className="text-white font-bold">Life</p>
+                        </div>
+                        <div className="bg-black/60 border border-purple-500/30 rounded p-2 text-center">
+                            <Book className="w-4 h-4 text-purple-400 mx-auto mb-1" />
+                            <p className="text-white font-bold">Study</p>
+                        </div>
+                        <div className="bg-black/60 border border-pink-500/30 rounded p-2 text-center">
+                            <Smile className="w-4 h-4 text-pink-400 mx-auto mb-1" />
+                            <p className="text-white font-bold">Mental</p>
+                        </div>
+                        <div className="bg-black/60 border border-amber-500/30 rounded p-2 text-center">
+                            <Sparkles className="w-4 h-4 text-amber-400 mx-auto mb-1" />
+                            <p className="text-white font-bold">Create</p>
+                        </div>
+                        <div className="bg-black/60 border border-cyan-500/30 rounded p-2 text-center">
+                            <Bed className="w-4 h-4 text-cyan-400 mx-auto mb-1" />
+                            <p className="text-white font-bold">Heal</p>
                         </div>
                     </div>
                 </div>
