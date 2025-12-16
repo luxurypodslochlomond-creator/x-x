@@ -43,6 +43,7 @@ import ScottEmailDrafter from '@/components/scott/ScottEmailDrafter';
 import ScottGigWorkflow from '@/components/scott/ScottGigWorkflow';
 import ScottSessionWorkflow from '@/components/scott/ScottSessionWorkflow';
 import ScottSimpleComms from '@/components/scott/ScottSimpleComms';
+import AI51MessageHandler from '@/components/ai51/AI51MessageHandler';
 
 /**
  * SCOTT'S ARTIST/CLIENT MANAGER
@@ -229,13 +230,36 @@ Keep it SHORT, practical, straight to the point. No bullshit. Real help.`,
 
 
 
-            {/* ULTRA-SIMPLE - 4 BUTTONS TOTAL */}
+            {/* ULTRA-SIMPLE - AI51 MESSAGE HANDLER FIRST */}
             {!activeWorkflow && !advancedMode && (
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     className="space-y-3 mb-6"
                 >
+                    <motion.button
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        onClick={() => setActiveWorkflow('messages')}
+                        className="w-full bg-gradient-to-br from-purple-500 via-pink-500 to-purple-600 text-white font-black py-8 rounded-2xl text-xl font-mono shadow-lg relative overflow-hidden"
+                        style={{ boxShadow: '0 6px 30px rgba(168, 85, 247, 0.6)' }}
+                    >
+                        <motion.div
+                            className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-pink-500/20"
+                            animate={{
+                                opacity: [0.3, 0.6, 0.3]
+                            }}
+                            transition={{
+                                duration: 2,
+                                repeat: Infinity
+                            }}
+                        />
+                        <div className="relative z-10">
+                            <p className="text-2xl mb-1">📱 PASTE MESSAGES</p>
+                            <p className="text-xs text-purple-200">WhatsApp • Email • Chaos → Order</p>
+                        </div>
+                    </motion.button>
+
                     <motion.button
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
@@ -287,6 +311,18 @@ Keep it SHORT, practical, straight to the point. No bullshit. Real help.`,
             )}
 
             {/* ACTIVE WORKFLOW */}
+            {activeWorkflow === 'messages' && (
+                <div className="mb-6">
+                    <AI51MessageHandler context="scott" />
+                    <Button
+                        onClick={() => setActiveWorkflow(null)}
+                        className="w-full bg-gray-700 hover:bg-gray-600 font-bold mt-3"
+                    >
+                        BACK
+                    </Button>
+                </div>
+            )}
+
             {activeWorkflow === 'comms' && (
                 <div className="mb-6">
                     <ScottSimpleComms />

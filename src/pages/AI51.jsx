@@ -1,11 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Send, Upload, Mic, Brain, Sparkles, FileText, Image as ImageIcon, Mail, File, Zap, Heart, Smile, Coffee, Bed, Book, Briefcase } from 'lucide-react';
+import { Send, Upload, Mic, Brain, Sparkles, FileText, Image as ImageIcon, Mail, File, Zap, Heart, Smile, Coffee, Bed, Book, Briefcase, MessageSquare } from 'lucide-react';
 import { base44 } from '@/api/base44Client';
 import { useMutation } from '@tanstack/react-query';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import AI51Avatar from '@/components/ai51/AI51Avatar';
+import AI51MessageHandler from '@/components/ai51/AI51MessageHandler';
 
 /**
  * AI51 - MOST POWERFUL COMMS TOOL EVER
@@ -34,6 +35,7 @@ export default function AI51() {
     const [isListening, setIsListening] = useState(false);
     const [uploadedFile, setUploadedFile] = useState(null);
     const [isThinking, setIsThinking] = useState(false);
+    const [mode, setMode] = useState('chat'); // 'chat' | 'messages'
     const fileInputRef = useRef(null);
     const recognitionRef = useRef(null);
 
@@ -221,40 +223,66 @@ Be REAL. Be warm. Cut through bullshit. I'm their mate, not a tool.`;
                     </div>
                 </div>
 
-                {/* WHAT IT DOES */}
-                <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-2 border-green-500 rounded-xl p-6 mb-6">
-                    <div className="flex items-center gap-3 mb-4">
-                        <Sparkles className="w-8 h-8 text-green-400" />
-                        <h2 className="text-green-400 font-black text-xl font-mono">CUTS THROUGH EVERYTHING:</h2>
-                    </div>
-                    <div className="grid grid-cols-2 gap-3 text-sm font-mono">
-                        <div className="bg-black/60 border border-cyan-500/30 rounded p-3">
-                            <FileText className="w-5 h-5 text-cyan-400 mb-2" />
-                            <p className="text-white font-bold">Word/Docs</p>
-                            <p className="text-gray-500 text-xs">→ Structure + Points</p>
-                        </div>
-                        <div className="bg-black/60 border border-green-500/30 rounded p-3">
-                            <File className="w-5 h-5 text-green-400 mb-2" />
-                            <p className="text-white font-bold">Excel/Sheets</p>
-                            <p className="text-gray-500 text-xs">→ Clean Data</p>
-                        </div>
-                        <div className="bg-black/60 border border-purple-500/30 rounded p-3">
-                            <Mail className="w-5 h-5 text-purple-400 mb-2" />
-                            <p className="text-white font-bold">Emails</p>
-                            <p className="text-gray-500 text-xs">→ Tasks + Replies</p>
-                        </div>
-                        <div className="bg-black/60 border border-pink-500/30 rounded p-3">
-                            <ImageIcon className="w-5 h-5 text-pink-400 mb-2" />
-                            <p className="text-white font-bold">Photos</p>
-                            <p className="text-gray-500 text-xs">→ Text + Actions</p>
-                        </div>
-                    </div>
-                    <p className="text-amber-400 text-xs font-mono font-bold mt-4 text-center">
-                        No more lost hours in Microsoft/Google doom ♾️❤️♾️
-                    </p>
+                {/* MODE TOGGLE */}
+                <div className="flex gap-2 mb-6">
+                    <Button
+                        onClick={() => setMode('chat')}
+                        className={`flex-1 ${mode === 'chat' ? 'bg-cyan-500 text-black' : 'bg-black border-2 border-cyan-500/50 text-cyan-400'} font-black`}
+                    >
+                        💬 CHAT
+                    </Button>
+                    <Button
+                        onClick={() => setMode('messages')}
+                        className={`flex-1 ${mode === 'messages' ? 'bg-purple-500 text-white' : 'bg-black border-2 border-purple-500/50 text-purple-400'} font-black`}
+                    >
+                        📱 PASTE MESSAGES
+                    </Button>
                 </div>
 
-                {/* CONVERSATION FEED */}
+                {/* MESSAGE HANDLER MODE */}
+                {mode === 'messages' && (
+                    <div className="mb-6">
+                        <AI51MessageHandler context="scott" />
+                    </div>
+                )}
+
+                {/* WHAT IT DOES - ONLY IN CHAT MODE */}
+                {mode === 'chat' && (
+                    <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-2 border-green-500 rounded-xl p-6 mb-6">
+                        <div className="flex items-center gap-3 mb-4">
+                            <Sparkles className="w-8 h-8 text-green-400" />
+                            <h2 className="text-green-400 font-black text-xl font-mono">CUTS THROUGH EVERYTHING:</h2>
+                        </div>
+                        <div className="grid grid-cols-2 gap-3 text-sm font-mono">
+                            <div className="bg-black/60 border border-cyan-500/30 rounded p-3">
+                                <FileText className="w-5 h-5 text-cyan-400 mb-2" />
+                                <p className="text-white font-bold">Word/Docs</p>
+                                <p className="text-gray-500 text-xs">→ Structure + Points</p>
+                            </div>
+                            <div className="bg-black/60 border border-green-500/30 rounded p-3">
+                                <File className="w-5 h-5 text-green-400 mb-2" />
+                                <p className="text-white font-bold">Excel/Sheets</p>
+                                <p className="text-gray-500 text-xs">→ Clean Data</p>
+                            </div>
+                            <div className="bg-black/60 border border-purple-500/30 rounded p-3">
+                                <Mail className="w-5 h-5 text-purple-400 mb-2" />
+                                <p className="text-white font-bold">Emails</p>
+                                <p className="text-gray-500 text-xs">→ Tasks + Replies</p>
+                            </div>
+                            <div className="bg-black/60 border border-pink-500/30 rounded p-3">
+                                <ImageIcon className="w-5 h-5 text-pink-400 mb-2" />
+                                <p className="text-white font-bold">Photos</p>
+                                <p className="text-gray-500 text-xs">→ Text + Actions</p>
+                            </div>
+                        </div>
+                        <p className="text-amber-400 text-xs font-mono font-bold mt-4 text-center">
+                            No more lost hours in Microsoft/Google doom ♾️❤️♾️
+                        </p>
+                    </div>
+                )}
+
+                {/* CONVERSATION FEED - ONLY IN CHAT MODE */}
+                {mode === 'chat' && (
                 <div className="space-y-4 mb-6">
                     <AnimatePresence>
                         {conversation.map((msg, i) => (
@@ -292,8 +320,10 @@ Be REAL. Be warm. Cut through bullshit. I'm their mate, not a tool.`;
                         ))}
                     </AnimatePresence>
                 </div>
+                )}
 
-                {/* INPUT AREA */}
+                {/* INPUT AREA - ONLY IN CHAT MODE */}
+                {mode === 'chat' && (
                 <div className="fixed bottom-0 left-0 right-0 bg-black/95 backdrop-blur-xl border-t-2 border-cyan-500 p-4">
                     <div className="max-w-4xl mx-auto">
                         <div className="bg-gradient-to-br from-black to-purple-950 border-2 border-purple-500 rounded-2xl p-4">
@@ -375,9 +405,10 @@ Be REAL. Be warm. Cut through bullshit. I'm their mate, not a tool.`;
                         </div>
                     </div>
                 </div>
+                )}
 
                 {/* SPACER FOR FIXED INPUT */}
-                <div className="h-64" />
+                {mode === 'chat' && <div className="h-64" />}
             </div>
         </div>
     );
