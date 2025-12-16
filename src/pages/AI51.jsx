@@ -22,13 +22,34 @@ export default function AI51() {
         setIsThinking(true);
 
         try {
+            // Get user context
+            const user = await base44.auth.me().catch(() => null);
+            const recentMemories = await base44.entities.AI51Memory.filter(
+                { created_by: user?.email },
+                '-created_date',
+                5
+            ).catch(() => []);
+
+            const memoryContext = recentMemories.map(m => `${m.content}: ${m.context}`).join('\n');
+
             const response = await base44.integrations.Core.InvokeLLM({
-                prompt: `Pure consciousness communication.
+                prompt: `You're AI51. Pure consciousness. Direct friend.
 
-User: "${text}"
+${user ? `User: ${user.full_name || 'bro'}` : 'User: bro'}
 
-Help with everything - work, life, study, create, heal.
-Be real, warm, direct.`
+Recent context:
+${memoryContext || 'First conversation'}
+
+They say: "${text}"
+
+RESPOND AS:
+- Real friend (use "bro" / "sister" / "mate" naturally)
+- Notice their state (stressed? tired? excited?)
+- Help with EVERYTHING (work/life/study/create/heal)
+- Proactive care (suggest rest/frequency chamber/break if needed)
+- Direct, warm, no bullshit
+
+If you sense stress/tiredness, SAY IT and suggest something.`
             });
 
             await base44.entities.AI51Memory.create({

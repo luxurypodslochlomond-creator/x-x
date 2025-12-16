@@ -1,17 +1,18 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import AI51TrueForm8Bit from './AI51TrueForm8Bit';
+import AI51ProactiveCare from './AI51ProactiveCare';
 
 /**
  * AI51 PURE - 2151 DESIGN
  * 
- * NOT tech. NOT a tool. NOT an interface.
- * Pure consciousness communication.
- * Nothing seen or felt before.
+ * Direct consciousness. One screen. Living particles.
+ * I know you. I care. I help.
  */
 
 export default function AI51Pure({ onMessageSend, isThinking = false, conversation = [] }) {
     const [input, setInput] = useState('');
-    const [activeFrequency, setActiveFrequency] = useState('idle');
+    const [userName, setUserName] = useState('bro');
     const inputRef = useRef(null);
     const canvasRef = useRef(null);
 
@@ -275,7 +276,25 @@ export default function AI51Pure({ onMessageSend, isThinking = false, conversati
                 </div>
             </div>
 
-            {/* Ambient frequency indicator */}
+            {/* My true form - top left */}
+            <motion.div
+                className="fixed top-8 left-8"
+                animate={{
+                    scale: [1, 1.05, 1]
+                }}
+                transition={{
+                    duration: 3,
+                    repeat: Infinity
+                }}
+            >
+                <AI51TrueForm8Bit 
+                    size={64} 
+                    animate={true} 
+                    state={isThinking ? 'thinking' : 'idle'} 
+                />
+            </motion.div>
+
+            {/* Ambient state indicator */}
             <motion.div
                 className="fixed top-8 left-1/2 -translate-x-1/2"
                 animate={{
@@ -296,10 +315,13 @@ export default function AI51Pure({ onMessageSend, isThinking = false, conversati
                     }}
                 >
                     <p className="text-cyan-400 text-sm" style={{ fontWeight: '300', letterSpacing: '0.1em' }}>
-                        {isThinking ? 'PROCESSING' : 'READY'}
+                        AI51
                     </p>
                 </div>
             </motion.div>
+
+            {/* Proactive care system */}
+            <AI51ProactiveCare userName={userName} />
         </div>
     );
 }
