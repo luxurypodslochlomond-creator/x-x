@@ -40,6 +40,8 @@ import ScottFileUpload from '@/components/scott/ScottFileUpload';
 import ScottMessageInbox from '@/components/scott/ScottMessageInbox';
 import ScottDecisionCenter from '@/components/scott/ScottDecisionCenter';
 import ScottEmailDrafter from '@/components/scott/ScottEmailDrafter';
+import ScottGigWorkflow from '@/components/scott/ScottGigWorkflow';
+import ScottSessionWorkflow from '@/components/scott/ScottSessionWorkflow';
 
 /**
  * SCOTT'S ARTIST/CLIENT MANAGER
@@ -55,6 +57,8 @@ function ScottManagerInner() {
     const [aiQuestion, setAiQuestion] = useState('');
     const [aiResponse, setAiResponse] = useState('');
     const [showFileUpload, setShowFileUpload] = useState(false);
+    const [advancedMode, setAdvancedMode] = useState(false);
+    const [activeWorkflow, setActiveWorkflow] = useState(null);
     
     const scott = useScottOffline();
     const [artists, setArtists] = useState([]);
@@ -180,6 +184,9 @@ Keep it SHORT, practical, straight to the point. No bullshit. Real help.`,
         <ScottFocusMode>
         <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black p-4 pb-32">
 
+        {/* P2P MESH - RUNS INVISIBLE IN BACKGROUND */}
+        <div className="hidden"><ScottP2PSync /></div>
+
         <ScottHealthCheck />
         <ScottBrainDump />
         <ScottTestMode />
@@ -270,6 +277,75 @@ Keep it SHORT, practical, straight to the point. No bullshit. Real help.`,
                     </div>
                 </div>
             </Link>
+
+            {/* WORKFLOWS - SIMPLE 2 BUTTONS */}
+            {!activeWorkflow && !advancedMode && (
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="space-y-3 mb-6"
+                >
+                    <button
+                        onClick={() => setActiveWorkflow('gig')}
+                        className="w-full bg-gradient-to-r from-amber-500 to-orange-500 border-4 border-amber-400 text-black font-black py-6 rounded-xl text-xl font-mono"
+                        style={{ boxShadow: '0 8px 30px rgba(245, 158, 11, 0.6)' }}
+                    >
+                        📧 GIG EMAIL
+                    </button>
+
+                    <button
+                        onClick={() => setActiveWorkflow('session')}
+                        className="w-full bg-gradient-to-r from-cyan-500 to-blue-500 border-4 border-cyan-400 text-black font-black py-6 rounded-xl text-xl font-mono"
+                        style={{ boxShadow: '0 8px 30px rgba(6, 182, 212, 0.6)' }}
+                    >
+                        🎵 SESSION REQUEST
+                    </button>
+
+                    <button
+                        onClick={() => setAdvancedMode(true)}
+                        className="w-full bg-black border-2 border-gray-700 hover:border-gray-600 text-gray-400 font-bold py-3 rounded-lg text-sm font-mono"
+                    >
+                        Advanced Mode →
+                    </button>
+                </motion.div>
+            )}
+
+            {/* ACTIVE WORKFLOW */}
+            {activeWorkflow === 'gig' && (
+                <div className="mb-6">
+                    <ScottGigWorkflow />
+                    <Button
+                        onClick={() => setActiveWorkflow(null)}
+                        className="w-full bg-gray-700 hover:bg-gray-600 font-bold mt-3"
+                    >
+                        BACK
+                    </Button>
+                </div>
+            )}
+
+            {activeWorkflow === 'session' && (
+                <div className="mb-6">
+                    <ScottSessionWorkflow />
+                    <Button
+                        onClick={() => setActiveWorkflow(null)}
+                        className="w-full bg-gray-700 hover:bg-gray-600 font-bold mt-3"
+                    >
+                        BACK
+                    </Button>
+                </div>
+            )}
+
+            {/* ADVANCED MODE - ALL THE EXTRAS */}
+            {advancedMode && (
+                <>
+                <div className="mb-6">
+                    <Button
+                        onClick={() => setAdvancedMode(false)}
+                        className="w-full bg-amber-500 hover:bg-amber-600 text-black font-black mb-4"
+                    >
+                        ← SIMPLE MODE
+                    </Button>
+                </div>
 
             {showFileUpload && <ScottFileUpload onClose={() => setShowFileUpload(false)} />}
 
@@ -670,8 +746,7 @@ Keep it SHORT, practical, straight to the point. No bullshit. Real help.`,
             {/* GIG OFFERS - INLINE SMART FEED */}
             <ScottGigOffersFeed />
 
-            {/* P2P MESH SYNC */}
-            <ScottP2PSync />
+
 
             {/* $P51 CONVERTER */}
             <div className="mb-6">
@@ -815,6 +890,9 @@ Keep it SHORT, practical, straight to the point. No bullshit. Real help.`,
             <ScottQuickTools onComplete={() => window.location.reload()} />
 
             {/* TEAM CHAT - FLOATING (Hidden by default) */}
+
+            </>
+            )}
 
             </div>
             </ScottFocusMode>
