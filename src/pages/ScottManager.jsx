@@ -226,57 +226,7 @@ Keep it SHORT, practical, straight to the point. No bullshit. Real help.`,
                 </div>
             </motion.div>
 
-            {/* WHAT'S NEXT - TOP SO YOU SEE ACTIVITY */}
-            <div className="mb-6">
-                <div className="bg-black p-4 rounded-xl mb-3 border-2 border-amber-500">
-                    <p className="text-white font-black text-sm font-mono mb-2">⚡ WHAT'S NEXT</p>
-                    {urgentTasks.length > 0 ? (
-                        <Link to={createPageUrl('ScottCalendar')} className="block bg-black border border-red-500/50 rounded p-3">
-                            <p className="text-red-400 font-bold text-xs font-mono">🔥 {urgentTasks.length} URGENT TASK{urgentTasks.length > 1 ? 'S' : ''}</p>
-                            <p className="text-gray-600 text-xs font-mono mt-1">Tap to handle →</p>
-                        </Link>
-                    ) : upcomingEvents.length > 0 ? (
-                        <Link to={createPageUrl('ScottCalendar')} className="block bg-black border border-amber-500/50 rounded p-3">
-                            <p className="text-amber-400 font-bold text-xs font-mono">📅 {upcomingEvents.length} UPCOMING EVENT{upcomingEvents.length > 1 ? 'S' : ''}</p>
-                            <p className="text-gray-600 text-xs font-mono mt-1">Tap to prep →</p>
-                        </Link>
-                    ) : unpaidInvoices.length > 0 ? (
-                        <Link to={createPageUrl('ScottInvoices')} className="block bg-black border border-amber-500/50 rounded p-3">
-                            <p className="text-amber-400 font-bold text-xs font-mono">💰 {unpaidInvoices.length} UNPAID INVOICE{unpaidInvoices.length > 1 ? 'S' : ''}</p>
-                            <p className="text-gray-600 text-xs font-mono mt-1">Tap to chase →</p>
-                        </Link>
-                    ) : (
-                        <div className="bg-black border border-green-500/50 rounded p-3">
-                            <p className="text-green-400 font-bold text-xs font-mono">✓ ALL CLEAR</p>
-                            <p className="text-gray-600 text-xs font-mono mt-1">Nothing urgent</p>
-                        </div>
-                    )}
-                </div>
-            </div>
 
-            {/* LA TRIP - URGENT */}
-            <Link to={createPageUrl('ScottLATrip')} className="block mb-6">
-                <div className="bg-black p-6 rounded-xl border-4 border-amber-500 relative overflow-hidden" style={{ boxShadow: '0 8px 40px rgba(245, 158, 11, 0.6)' }}>
-                    <div className="absolute top-2 right-2 bg-red-500 text-white text-xs font-black px-2 py-1 rounded font-mono">
-                        LIVE
-                    </div>
-                    <div className="relative z-10">
-                        <div className="flex items-center gap-3 mb-3">
-                            <Plane className="w-8 h-8 text-amber-400" />
-                            <div>
-                                <p className="text-white font-black text-xl mb-0.5" style={{ fontFamily: 'monospace' }}>LA TRIP</p>
-                                <p className="text-gray-600 text-xs font-mono">YES AND MAYBE • Dec 2025</p>
-                            </div>
-                        </div>
-                        <div className="bg-black border border-amber-500/30 rounded-lg p-3 mb-2">
-                            <p className="text-gray-300 text-sm font-mono">✓ Schedule • Checklist • Budget</p>
-                        </div>
-                        <div className="flex items-center gap-2 text-gray-400 text-sm font-mono">
-                            <p>Producers • Gigs • LA Contacts</p>
-                        </div>
-                    </div>
-                </div>
-            </Link>
 
             {/* ULTRA-SIMPLE - 3 BUTTONS TOTAL */}
             {!activeWorkflow && !advancedMode && (
