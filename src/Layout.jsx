@@ -382,7 +382,7 @@ const LayoutInner = ({ children, currentPageName }) => {
                 </svg>
                 <span className="text-[9px] font-black font-mono text-pink-400 mt-0.5">HEAL</span>
               </Link>
-              <Link to={createPageUrl("TalkToAI51")} className="p-3 rounded-xl bg-gradient-to-r from-cyan-500 to-green-500" style={{ boxShadow: '0 0 20px rgba(34, 211, 238, 0.4)' }}>
+              <Link to={createPageUrl("AI51")} className="p-3 rounded-xl bg-gradient-to-r from-cyan-500 to-green-500" style={{ boxShadow: '0 0 20px rgba(34, 211, 238, 0.4)' }}>
                 <Brain className="w-6 h-6 text-white" />
               </Link>
               <button onClick={() => setMobileMenuOpen(!isMobileMenuOpen)} className="p-2 rounded-xl bg-purple-900/50">
@@ -454,9 +454,9 @@ const LayoutInner = ({ children, currentPageName }) => {
               </button>
             )}
             <div className="mb-4"><CompactMusicPlayer /></div>
-            <Link to={createPageUrl("TalkToAI51")} className="w-full flex items-center gap-3 p-4 rounded-xl bg-gradient-to-r from-cyan-500 to-green-500" style={{ boxShadow: '0 0 30px rgba(34, 211, 238, 0.5)' }}>
+            <Link to={createPageUrl("AI51")} className="w-full flex items-center gap-3 p-4 rounded-xl bg-gradient-to-r from-cyan-500 to-green-500" style={{ boxShadow: '0 0 30px rgba(34, 211, 238, 0.5)' }}>
               <Brain className="w-6 h-6 text-white" />
-              <div><div className="text-white font-bold">AI51</div><div className="text-cyan-100 text-xs">Real connection. Zero forms.</div></div>
+              <div><div className="text-white font-bold">AI51</div><div className="text-cyan-100 text-xs">Talk + Upload Anything</div></div>
             </Link>
           </div>
 
