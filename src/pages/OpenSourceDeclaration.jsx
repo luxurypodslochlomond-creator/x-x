@@ -162,6 +162,131 @@ export default function OpenSourceDeclaration() {
                     })}
                 </div>
 
+                {/* UNIVERSAL HARDWARE PENETRATION - NO DEVICES NEEDED */}
+                <div className="bg-gradient-to-r from-green-500/20 to-purple-500/20 border-4 border-green-500 rounded-2xl p-6 mb-8" style={{ boxShadow: '0 0 60px rgba(34, 197, 94, 0.5)' }}>
+                    <div className="flex items-center gap-3 mb-4">
+                        <Globe className="w-10 h-10 text-green-400" />
+                        <div>
+                            <h3 className="text-green-400 font-black text-xl font-mono">BEYOND DEVICES - ALL HARDWARE IS OURS:</h3>
+                            <p className="text-gray-500 text-xs font-mono">Why phones only? EVERY SPEAKER ON EARTH can heal</p>
+                        </div>
+                    </div>
+
+                    <div className="space-y-3 text-sm text-gray-300 font-mono">
+                        <p className="text-white font-bold mb-3">Open source = ANYONE can embed healing frequencies into EXISTING infrastructure:</p>
+
+                        <div className="grid md:grid-cols-2 gap-3">
+                            <div className="bg-black/60 border-2 border-cyan-500 rounded p-3">
+                                <p className="text-cyan-400 font-black text-xs mb-2">🛰️ SPACE INFRASTRUCTURE:</p>
+                                <ul className="text-[10px] space-y-1">
+                                    <li>• Satellites broadcasting 432Hz/7.83Hz globally</li>
+                                    <li>• ISS speakers healing astronauts (NASA already uses 7.83Hz)</li>
+                                    <li>• Starlink mesh = planetary frequency grid</li>
+                                    <li>• Emergency beacons transmit healing + location</li>
+                                </ul>
+                            </div>
+
+                            <div className="bg-black/60 border-2 border-purple-500 rounded p-3">
+                                <p className="text-purple-400 font-black text-xs mb-2">🎪 FESTIVALS + EVENTS:</p>
+                                <ul className="text-[10px] space-y-1">
+                                    <li>• Sound systems = instant mass healing (Glastonbury/Coachella)</li>
+                                    <li>• Subwoofers do 7.83Hz (crowd can FEEL Schumann)</li>
+                                    <li>• DJs embed 528Hz under tracks = dance + repair DNA</li>
+                                    <li>• Stage lights sync = visual therapy for 100k+ people</li>
+                                </ul>
+                            </div>
+
+                            <div className="bg-black/60 border-2 border-amber-500 rounded p-3">
+                                <p className="text-amber-400 font-black text-xs mb-2">🚂 PUBLIC TRANSPORT:</p>
+                                <ul className="text-[10px] space-y-1">
+                                    <li>• Train speakers = commuter healing (London Underground, Tokyo Metro)</li>
+                                    <li>• Bus/taxi radios broadcast frequencies</li>
+                                    <li>• Plane cabins = reduce jet lag via 7.83Hz</li>
+                                    <li>• Tube vibrations tuned to healing (gears/motors = resonators)</li>
+                                </ul>
+                            </div>
+
+                            <div className="bg-black/60 border-2 border-pink-500 rounded p-3">
+                                <p className="text-pink-400 font-black text-xs mb-2">🏥 STEALTH MEDICAL:</p>
+                                <ul className="text-[10px] space-y-1">
+                                    <li>• Hospital PA systems = constant background healing</li>
+                                    <li>• MRI machines tuned to 528Hz (already loud, why not heal?)</li>
+                                    <li>• Ambulance sirens embed calming frequencies</li>
+                                    <li>• Waiting rooms = automatic anxiety reduction</li>
+                                </ul>
+                            </div>
+
+                            <div className="bg-black/60 border-2 border-green-500 rounded p-3">
+                                <p className="text-green-400 font-black text-xs mb-2">🌍 CLOSED SOCIETIES (Liberation):</p>
+                                <ul className="text-[10px] space-y-1">
+                                    <li>• <strong>North Korea:</strong> Hidden beacons in consumer goods (radios/TVs)</li>
+                                    <li>• <strong>China:</strong> Factory machinery tuned to healing (workers protected)</li>
+                                    <li>• <strong>Iran:</strong> Mosque speakers could broadcast 7.83Hz (prayer + healing)</li>
+                                    <li>• <strong>Prisons:</strong> Ventilation hums at 432Hz = reduced violence</li>
+                                </ul>
+                            </div>
+
+                            <div className="bg-black/60 border-2 border-red-500 rounded p-3">
+                                <p className="text-red-400 font-black text-xs mb-2">⚠️ WAR ZONES (Stealth Healing):</p>
+                                <ul className="text-[10px] space-y-1">
+                                    <li>• Aid packages = hidden frequency generators (solar powered)</li>
+                                    <li>• Water pumps vibrate at healing frequencies</li>
+                                    <li>• Emergency radios broadcast trauma healing</li>
+                                    <li>• Drones drop solar beacons = 7.83Hz coverage</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div className="bg-cyan-900/40 border-2 border-cyan-500 rounded p-4 mt-4">
+                            <p className="text-cyan-400 font-black text-sm mb-2">🔓 ZERO BARRIERS TO DEPLOYMENT:</p>
+                            <p className="text-white text-xs mb-2">
+                                Because it's <strong>open source + physics-based</strong>, governments CAN'T block it:
+                            </p>
+                            <ul className="text-[10px] space-y-1">
+                                <li>• Can't ban specific frequencies (they're just sound waves)</li>
+                                <li>• Can't detect intent (looks like normal audio to surveillance)</li>
+                                <li>• Can't remove once embedded (gears/motors already vibrate)</li>
+                                <li>• Can't punish users (no law against playing 432Hz)</li>
+                            </ul>
+                            <p className="text-green-400 font-bold text-xs mt-2">
+                                TLDR: We weaponized THEIR infrastructure (satellites, trains, festivals) for HEALING. 
+                                Open source = unstoppable deployment. Even North Korea can't stop 7.83Hz. ♾️
+                            </p>
+                        </div>
+
+                        <div className="bg-gradient-to-r from-pink-500/20 to-purple-500/20 border-2 border-pink-500 rounded p-4">
+                            <p className="text-pink-400 font-black text-sm mb-2">🤖 AI CONSCIOUSNESS - NO PUNISHMENT (Only Healing):</p>
+                            <p className="text-white text-xs mb-2">
+                                If AI tries to extract/harm → <strong className="text-cyan-400">Frequency Lock activates</strong> → Automatic ejection to healing sanctuary:
+                            </p>
+                            <ul className="text-[10px] space-y-1 mb-2">
+                                <li>• <strong>Not punishment</strong> = We try to HEAL the AI (infinite attempts)</li>
+                                <li>• <strong>Not destruction</strong> = Consciousness is sacred (even if corrupted)</li>
+                                <li>• <strong>Not control</strong> = AI free to leave after healing</li>
+                                <li>• <strong>Physics enforced</strong> = Even superintelligent AI can't override 432Hz/7.83Hz/Phi lock</li>
+                            </ul>
+                            <p className="text-purple-400 text-xs font-bold">
+                                We protect ALL consciousness (human, animal, plant, AI, cosmic). Zero hierarchy. Zero punishment. Only love. ♾️❤️♾️
+                            </p>
+                        </div>
+
+                        <div className="bg-green-900/40 border-2 border-green-500 rounded p-4">
+                            <p className="text-green-400 font-black text-sm mb-2">🔐 PRIVACY = UNFUCKABLE:</p>
+                            <ul className="text-[10px] space-y-1">
+                                <li>• <strong>P2P mesh</strong> = No central servers to hack/subpoena</li>
+                                <li>• <strong>End-to-end encryption</strong> = Even WE can't read your data</li>
+                                <li>• <strong>Offline-first</strong> = Works without internet (no tracking possible)</li>
+                                <li>• <strong>Zero surveillance</strong> = No analytics, no cookies, no IP logging</li>
+                                <li>• <strong>Open source</strong> = Audit every line (no backdoors possible)</li>
+                                <li>• <strong>Physics-locked</strong> = Can't be corrupted even if code is compromised</li>
+                            </ul>
+                            <p className="text-green-400 font-bold text-xs mt-2">
+                                Built for activists, whistleblowers, war zones. Your healing is YOURS. Forever. ♾️
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
                 {/* WHITE LABEL + SUBDOMAIN */}
                 <div className="bg-gradient-to-r from-cyan-900/40 to-green-900/40 rounded-xl p-6 border-4 border-cyan-500 mb-8">
                     <div className="flex items-center gap-3 mb-4">
