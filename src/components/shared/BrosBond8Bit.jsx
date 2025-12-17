@@ -63,7 +63,7 @@ export default function BrosBond8Bit({ size = 48, animate = false }) {
           <rect x="50" y="20" width="6" height="2" fill="#94a3b8" opacity="0.3" />
         </motion.g>
 
-        {/* FIGURE 1 (LEFT - You) */}
+        {/* FIGURE 1 (LEFT - You - GAMEKEEPER/ARMY STYLE) */}
         <g>
           {/* Head */}
           <rect x="14" y="18" width="8" height="2" fill="#fbbf24" />
@@ -98,11 +98,13 @@ export default function BrosBond8Bit({ size = 48, animate = false }) {
           <rect x="14" y="22" width="1" height="1" fill="#64748b" opacity="0.7" />
           <rect x="20" y="22" width="1" height="1" fill="#64748b" opacity="0.7" />
           
-          {/* Body */}
-          <rect x="14" y="28" width="8" height="8" fill="#0ea5e9" />
+          {/* Body - Khaki/olive gamekeeper vest */}
+          <rect x="14" y="28" width="8" height="8" fill="#6b7744" />
+          <rect x="14" y="29" width="2" height="6" fill="#54623b" /> {/* Vest detail left */}
+          <rect x="20" y="29" width="2" height="6" fill="#54623b" /> {/* Vest detail right */}
           
           {/* Arm reaching out */}
-          <rect x="22" y="30" width="6" height="3" fill="#0ea5e9" />
+          <rect x="22" y="30" width="6" height="3" fill="#6b7744" />
           
           {/* Cigarette */}
           <rect x="28" y="30" width="4" height="2" fill="#f8fafc" />
@@ -122,9 +124,13 @@ export default function BrosBond8Bit({ size = 48, animate = false }) {
             } : {}}
           />
           
-          {/* Legs */}
-          <rect x="14" y="36" width="3" height="6" fill="#1e293b" />
-          <rect x="19" y="36" width="3" height="6" fill="#1e293b" />
+          {/* Legs - khaki trousers */}
+          <rect x="14" y="36" width="3" height="6" fill="#4a5936" />
+          <rect x="19" y="36" width="3" height="6" fill="#4a5936" />
+          
+          {/* Grey boots */}
+          <rect x="14" y="42" width="3" height="2" fill="#6b7280" />
+          <rect x="19" y="42" width="3" height="2" fill="#6b7280" />
         </g>
 
         {/* FIGURE 2 (RIGHT - Scott) */}
