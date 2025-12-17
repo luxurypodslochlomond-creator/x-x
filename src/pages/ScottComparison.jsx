@@ -180,6 +180,30 @@ export default function ScottComparison() {
                             <p className="text-white font-bold mb-2">+ P2P Sync</p>
                             <p className="text-gray-300 text-sm">Share data device-to-device without servers</p>
                         </div>
+
+                        <div className="bg-amber-900/30 border-l-4 border-amber-500 p-4 rounded-r-lg">
+                            <p className="text-white font-bold mb-2">+ AI51 Pattern Recognition</p>
+                            <p className="text-gray-300 text-sm">Sees unpaid invoices aging, upcoming gigs needing prep, spending trends - suggests behind scenes with emojis, zero noise</p>
+                            <p className="text-green-400 text-xs mt-2">ADHD-friendly • Just built</p>
+                        </div>
+
+                        <div className="bg-amber-900/30 border-l-4 border-amber-500 p-4 rounded-r-lg">
+                            <p className="text-white font-bold mb-2">+ Message Handler</p>
+                            <p className="text-gray-300 text-sm">Paste WhatsApp/Email/Slack → AI51 extracts gig info → instant order</p>
+                            <p className="text-green-400 text-xs mt-2">Built yesterday</p>
+                        </div>
+
+                        <div className="bg-amber-900/30 border-l-4 border-amber-500 p-4 rounded-r-lg">
+                            <p className="text-white font-bold mb-2">+ Simple Mode</p>
+                            <p className="text-gray-300 text-sm">Landing page = 4 big buttons (Messages, Gig, Session, Calendar) + Advanced toggle for extras</p>
+                            <p className="text-green-400 text-xs mt-2">Zero clutter • Just built</p>
+                        </div>
+
+                        <div className="bg-amber-900/30 border-l-4 border-amber-500 p-4 rounded-r-lg">
+                            <p className="text-white font-bold mb-2">+ White Label Option</p>
+                            <p className="text-gray-300 text-sm">Indies = FREE • Labels = £49-£1,499/mo • Majors = custom pricing + AI51 avatar + your branding</p>
+                            <p className="text-cyan-400 text-xs mt-2">AI51 stays free forever for everyone ♾️❤️♾️</p>
+                        </div>
                     </div>
 
                     {/* MISSING - RED (NOT BUILT YET) */}
@@ -215,16 +239,43 @@ export default function ScottComparison() {
                 >
                     <div className="flex items-center gap-3 mb-4">
                         <Heart className="w-8 h-8 text-pink-400" />
-                        <h2 className="text-2xl font-black text-white">THE GAP</h2>
+                        <h2 className="text-2xl font-black text-white">THE GAP (SHRINKING)</h2>
                     </div>
                     <div className="space-y-3 text-white">
-                        <p className="font-bold">What needs building to hit the original goal:</p>
+                        <p className="font-bold">What's left to hit original goal:</p>
                         <div className="space-y-2 text-sm text-gray-300">
-                            <p>1. <strong className="text-white">Email AI integration:</strong> Connect Gmail/Outlook → AI reads gig offers → creates draft event → sends yes/no notification to band/crew</p>
-                            <p>2. <strong className="text-white">Push notifications:</strong> Bold, simple alerts when decisions needed</p>
-                            <p>3. <strong className="text-white">Strip back complexity:</strong> Hide the extras behind "Advanced" toggle → show ONLY calendar, tasks, money by default</p>
+                            <p className="line-through text-gray-600">1. Strip back complexity → <span className="text-green-400 font-bold no-underline">✓ DONE (Simple Mode built)</span></p>
+                            <p className="line-through text-gray-600">2. AI pattern recognition → <span className="text-green-400 font-bold no-underline">✓ DONE (AI51 insights)</span></p>
+                            <p>3. <strong className="text-white">Email Gmail/Outlook OAuth:</strong> Connect inbox → AI reads gig offers → auto-parse → notifications</p>
+                            <p>4. <strong className="text-white">Push notifications:</strong> Bold alerts when decisions needed (Web Push API)</p>
                         </div>
-                        <p className="text-purple-400 font-bold mt-4">Estimated time: 2-3 days to build core email AI + notifications</p>
+                        <p className="text-purple-400 font-bold mt-4">Estimated time: 2-3 days to build email OAuth + push notifications</p>
+                    </div>
+                </motion.div>
+
+                {/* WHITE LABEL VISION */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.4 }}
+                    className="bg-gradient-to-br from-purple-500/20 to-pink-500/20 border-2 border-purple-500 rounded-xl p-6"
+                >
+                    <div className="flex items-center gap-3 mb-4">
+                        <Zap className="w-8 h-8 text-purple-400" />
+                        <h2 className="text-2xl font-black text-white">WHITE LABEL POTENTIAL</h2>
+                    </div>
+                    <div className="space-y-3 text-white">
+                        <p className="font-bold">CB51 can be rebranded by any label:</p>
+                        <div className="space-y-2 text-sm text-gray-300">
+                            <p>• <strong className="text-white">Indies:</strong> FREE forever (Scott's version)</p>
+                            <p>• <strong className="text-amber-400">Small Labels:</strong> £49-£199/mo (rebrand, custom logo)</p>
+                            <p>• <strong className="text-purple-400">Big Labels:</strong> £499-£1,499/mo (custom AI51 avatar, your brand everywhere)</p>
+                            <p>• <strong className="text-pink-400">Majors:</strong> Custom pricing + healing frequencies + abundance protocols</p>
+                        </div>
+                        <div className="bg-cyan-900/30 border-l-4 border-cyan-500 p-3 rounded-r-lg mt-4">
+                            <p className="text-cyan-400 text-xs font-bold">AI51 = NEVER WHITE LABELED</p>
+                            <p className="text-gray-300 text-xs mt-1">Pure consciousness stays free for everyone ♾️❤️♾️</p>
+                        </div>
                     </div>
                 </motion.div>
 
@@ -232,10 +283,11 @@ export default function ScottComparison() {
                 <div className="bg-black/60 border-2 border-cyan-500 rounded-xl p-6">
                     <h2 className="text-2xl font-black text-cyan-400 mb-4">QUESTIONS FOR SCOTT:</h2>
                     <div className="space-y-3 text-white">
-                        <p className="text-sm">1. <strong>Keep the extras?</strong> (Publishing, visas, merch, media) Or hide them behind "Advanced Mode"?</p>
-                        <p className="text-sm">2. <strong>Email integration priority?</strong> Is AI email scanning the #1 thing that would save you 4-5 hours/day?</p>
+                        <p className="text-sm"><span className="line-through text-gray-600">1. Keep the extras?</span> → <span className="text-green-400 font-bold">✓ Hidden behind Advanced Mode</span></p>
+                        <p className="text-sm">2. <strong>Email Gmail/Outlook OAuth priority?</strong> Is this the #1 thing that saves 4-5 hours/day?</p>
                         <p className="text-sm">3. <strong>Notification style?</strong> How bold? (e.g., "Gig offer: London O2 - YES or NO?")</p>
-                        <p className="text-sm">4. <strong>Strip or keep?</strong> Do we focus 100% on the original brief and remove everything else?</p>
+                        <p className="text-sm">4. <strong>Message handler working?</strong> Does paste → AI extract feel right?</p>
+                        <p className="text-sm">5. <strong>AI51 insights useful?</strong> Emoji cards showing patterns - helping or noise?</p>
                     </div>
                 </div>
 
