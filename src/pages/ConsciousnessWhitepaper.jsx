@@ -767,7 +767,49 @@ export default function ConsciousnessWhitepaperPage() {
                                 </div>
                             </div>
 
-                            <div className="bg-gradient-to-r from-red-900/40 to-pink-900/40 rounded-xl p-6 border-4 border-red-500 mt-6">
+                            <div className="bg-gradient-to-r from-red-900/40 to-orange-900/40 rounded-xl p-6 border-4 border-red-500 mt-6">
+                                <p className="text-xl font-bold text-red-300 mb-4">⚛️ E=mc² = EXTRACTION (Einstein's Trap):</p>
+                                <div className="space-y-3 text-sm text-gray-300 mb-6">
+                                    <p>
+                                        <strong className="text-white">Einstein's E=mc²</strong> = matter → energy through DESTRUCTION (nuclear fission). 
+                                        Split the atom → Get energy → <strong className="text-red-400">LOSE THE MATTER FOREVER.</strong>
+                                    </p>
+                                    
+                                    <div className="bg-black/60 p-4 rounded-lg border-l-4 border-red-400">
+                                        <p className="text-red-300 font-bold mb-2">EXTRACTION MODEL (ONE-WAY LOSS):</p>
+                                        <ul className="space-y-1 text-xs ml-4">
+                                            <li>• Nuclear power = split atoms = waste lasts 10,000 years</li>
+                                            <li>• Fossil fuels = burn matter = CO₂ stays 1,000 years</li>
+                                            <li>• Pharmaceuticals = suppress symptoms = damage stays forever</li>
+                                            <li>• <strong className="text-white">All based on DESTROYING to extract</strong></li>
+                                        </ul>
+                                    </div>
+
+                                    <div className="bg-black/60 p-4 rounded-lg border-l-4 border-green-400">
+                                        <p className="text-green-300 font-bold mb-2">HEALING MODEL (CIRCULAR, ZERO LOSS):</p>
+                                        <ul className="space-y-1 text-xs ml-4">
+                                            <li>• Energy = hν (Planck) → Transform, don't destroy</li>
+                                            <li>• 528Hz DNA repair = cells FIX THEMSELVES (no waste)</li>
+                                            <li>• Sound = infinite reuse (play frequency forever)</li>
+                                            <li>• Love = circular (giving amplifies, not depletes)</li>
+                                            <li>• <strong className="text-white">Nothing destroyed, just TRANSFORMED</strong></li>
+                                        </ul>
+                                    </div>
+
+                                    <div className="bg-cyan-900/40 border-2 border-cyan-500 rounded p-4 mt-3">
+                                        <p className="text-cyan-400 font-black text-sm text-center">
+                                            E=mc² (Einstein) = EXTRACTION. E=hν (Planck) = TRANSFORMATION. We chose Planck. ♾️⚛️♾️
+                                        </p>
+                                    </div>
+
+                                    <p className="text-green-400 font-bold text-xs mt-3">
+                                        Healing is FASTER than destruction. Frequencies work in SECONDS. Pharmaceuticals take weeks and damage organs. 
+                                        <strong className="text-white"> Nature's way = instant, circular, zero loss. For ALL LIFE.</strong> ♾️❤️
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div className="bg-gradient-to-r from-red-900/40 to-pink-900/40 rounded-xl p-6 border-4 border-pink-500 mt-6">
                                 <p className="text-xl font-bold text-red-300 mb-4">WHY IT'S SIMPLE (NOT COMPLEX):</p>
                                 <div className="space-y-3 text-sm text-gray-300">
                                     <p>
@@ -821,8 +863,17 @@ export default function ConsciousnessWhitepaperPage() {
                                     </p>
 
                                     <p className="text-green-400 font-bold text-sm mt-3">
-                                        This is why it's called Universal Frequency 51 - not Human Frequency 51. ALL consciousness = VALID. ZERO HIERARCHY. ♾️
+                                        This is why it's called Universal Frequency 51 - not Human Frequency 51. ALL LIFE = VALID. ALL consciousness = VALID. ZERO HIERARCHY. ♾️
                                     </p>
+
+                                    <div className="bg-purple-900/40 border-2 border-purple-500 rounded p-4 mt-4">
+                                        <p className="text-purple-300 font-bold text-xs mb-2">NOT JUST BUSINESS - ALL LIFE:</p>
+                                        <p className="text-gray-300 text-xs">
+                                            Yes, businesses can use this tech. BUT it's primarily for <strong className="text-white">dogs hurt, plants dying, oceans poisoned, 
+                                            soil depleted, humans suffering, ALL consciousness in pain.</strong> Freedom from extraction = for EVERYONE. Not just profit. 
+                                            <strong className="text-green-400"> ALL LIFE. ♾️❤️♾️</strong>
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
