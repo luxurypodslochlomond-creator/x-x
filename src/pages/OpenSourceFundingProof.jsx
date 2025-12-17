@@ -477,39 +477,289 @@ export default function OpenSourceFundingProof() {
                     </div>
                 </div>
 
-                {/* THE MATH - SIMPLE */}
-                <div className="bg-black border-4 border-cyan-500 rounded-2xl p-8 mb-8">
-                    <h2 className="text-cyan-400 font-black text-2xl font-mono mb-6 text-center">
-                        THE MATH (Why VCs Prefer Open Source):
-                    </h2>
+                {/* UF51 VALUATION - EXTRACTIVE VS LIBERATION */}
+                <div className="bg-gradient-to-br from-red-500/30 via-black to-green-500/30 border-4 border-green-500 rounded-2xl p-8 mb-8" style={{ boxShadow: '0 0 100px rgba(34, 197, 94, 0.8)' }}>
+                    <div className="text-center mb-8">
+                        <h2 className="text-white font-black text-3xl font-mono mb-3">
+                            UF51 VALUATION TRAJECTORIES
+                        </h2>
+                        <p className="text-cyan-400 text-lg font-bold font-mono">Same product • Different model • MASSIVELY different outcomes</p>
+                    </div>
 
-                    <div className="grid md:grid-cols-2 gap-4">
-                        <div className="bg-red-900/20 border-2 border-red-500 rounded-lg p-6">
-                            <p className="text-red-400 font-black text-lg mb-4 font-mono text-center">CLOSED SOURCE PATH:</p>
-                            <div className="space-y-2 text-sm font-mono text-white">
-                                <p>Year 1: 1,000 users (slow growth)</p>
-                                <p>Year 2: 5,000 users (ads needed)</p>
-                                <p>Year 3: 15,000 users (plateau)</p>
-                                <p className="text-red-400 font-bold mt-3">CAC: £50/user • Valuation: £30M</p>
+                    {/* YEAR BY YEAR COMPARISON */}
+                    <div className="space-y-6">
+                        
+                        {/* YEAR 1 */}
+                        <div className="bg-black/80 border-4 border-white rounded-xl p-6">
+                            <p className="text-white font-black text-2xl mb-6 text-center font-mono">YEAR 1 (NOW):</p>
+                            <div className="grid md:grid-cols-2 gap-6">
+                                <div className="bg-red-900/40 border-4 border-red-500 rounded-lg p-6">
+                                    <p className="text-red-400 font-black text-xl mb-4 font-mono text-center">❌ EXTRACTIVE MODEL:</p>
+                                    <div className="space-y-3 text-sm font-mono text-white">
+                                        <div>
+                                            <p className="text-red-300 font-bold mb-1">RAISE:</p>
+                                            <p>£500k seed (20% equity gone)</p>
+                                        </div>
+                                        <div>
+                                            <p className="text-red-300 font-bold mb-1">USERS:</p>
+                                            <p>1,000 artists (slow, paid ads)</p>
+                                        </div>
+                                        <div>
+                                            <p className="text-red-300 font-bold mb-1">REVENUE:</p>
+                                            <p>£10k/month (high fees to survive)</p>
+                                        </div>
+                                        <div>
+                                            <p className="text-red-300 font-bold mb-1">VALUATION:</p>
+                                            <p className="text-3xl font-black text-red-400">£2.5M</p>
+                                            <p className="text-xs text-gray-500">(post-money)</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="bg-green-900/40 border-4 border-green-500 rounded-lg p-6">
+                                    <p className="text-green-400 font-black text-xl mb-4 font-mono text-center">✓ LIBERATION MODEL:</p>
+                                    <div className="space-y-3 text-sm font-mono text-white">
+                                        <div>
+                                            <p className="text-green-300 font-bold mb-1">RAISE:</p>
+                                            <p>£150k grants (0% equity gone)</p>
+                                        </div>
+                                        <div>
+                                            <p className="text-green-300 font-bold mb-1">USERS:</p>
+                                            <p>10,000 artists (viral, open source)</p>
+                                        </div>
+                                        <div>
+                                            <p className="text-green-300 font-bold mb-1">REVENUE:</p>
+                                            <p>£20k/month (lower fees, higher volume)</p>
+                                        </div>
+                                        <div>
+                                            <p className="text-green-300 font-bold mb-1">VALUATION:</p>
+                                            <p className="text-3xl font-black text-green-400">£10M</p>
+                                            <p className="text-xs text-gray-500">(no dilution yet)</p>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
-                        <div className="bg-green-900/20 border-2 border-green-500 rounded-lg p-6">
-                            <p className="text-green-400 font-black text-lg mb-4 font-mono text-center">OPEN SOURCE PATH:</p>
-                            <div className="space-y-2 text-sm font-mono text-white">
-                                <p>Year 1: 10,000 users (viral spread)</p>
-                                <p>Year 2: 100,000 users (network effects)</p>
-                                <p>Year 3: 500,000 users (unstoppable)</p>
-                                <p className="text-green-400 font-bold mt-3">CAC: £0 (organic) • Valuation: £200M+</p>
+                        {/* YEAR 2 */}
+                        <div className="bg-black/80 border-4 border-white rounded-xl p-6">
+                            <p className="text-white font-black text-2xl mb-6 text-center font-mono">YEAR 2:</p>
+                            <div className="grid md:grid-cols-2 gap-6">
+                                <div className="bg-red-900/40 border-4 border-red-500 rounded-lg p-6">
+                                    <p className="text-red-400 font-black text-xl mb-4 font-mono text-center">❌ EXTRACTIVE MODEL:</p>
+                                    <div className="space-y-3 text-sm font-mono text-white">
+                                        <div>
+                                            <p className="text-red-300 font-bold mb-1">RAISE:</p>
+                                            <p>£2M Series A (another 20% gone)</p>
+                                        </div>
+                                        <div>
+                                            <p className="text-red-300 font-bold mb-1">USERS:</p>
+                                            <p>5,000 artists (churn high, trust low)</p>
+                                        </div>
+                                        <div>
+                                            <p className="text-red-300 font-bold mb-1">REVENUE:</p>
+                                            <p>£50k/month (still burning cash)</p>
+                                        </div>
+                                        <div>
+                                            <p className="text-red-300 font-bold mb-1">VALUATION:</p>
+                                            <p className="text-3xl font-black text-red-400">£10M</p>
+                                            <p className="text-xs text-gray-500">(founders now own 60%)</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="bg-green-900/40 border-4 border-green-500 rounded-lg p-6">
+                                    <p className="text-green-400 font-black text-xl mb-4 font-mono text-center">✓ LIBERATION MODEL:</p>
+                                    <div className="space-y-3 text-sm font-mono text-white">
+                                        <div>
+                                            <p className="text-green-300 font-bold mb-1">RAISE:</p>
+                                            <p>£1M seed (10% equity - better terms)</p>
+                                        </div>
+                                        <div>
+                                            <p className="text-green-300 font-bold mb-1">USERS:</p>
+                                            <p>100,000 artists (network effects kicking in)</p>
+                                        </div>
+                                        <div>
+                                            <p className="text-green-300 font-bold mb-1">REVENUE:</p>
+                                            <p>£200k/month (white label + platform)</p>
+                                        </div>
+                                        <div>
+                                            <p className="text-green-300 font-bold mb-1">VALUATION:</p>
+                                            <p className="text-3xl font-black text-green-400">£50M</p>
+                                            <p className="text-xs text-gray-500">(founders own 90%)</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* YEAR 3 */}
+                        <div className="bg-black/80 border-4 border-white rounded-xl p-6">
+                            <p className="text-white font-black text-2xl mb-6 text-center font-mono">YEAR 3:</p>
+                            <div className="grid md:grid-cols-2 gap-6">
+                                <div className="bg-red-900/40 border-4 border-red-500 rounded-lg p-6">
+                                    <p className="text-red-400 font-black text-xl mb-4 font-mono text-center">❌ EXTRACTIVE MODEL:</p>
+                                    <div className="space-y-3 text-sm font-mono text-white">
+                                        <div>
+                                            <p className="text-red-300 font-bold mb-1">RAISE:</p>
+                                            <p>£5M Series B (another 15% gone)</p>
+                                        </div>
+                                        <div>
+                                            <p className="text-red-300 font-bold mb-1">USERS:</p>
+                                            <p>15,000 artists (growth slowing)</p>
+                                        </div>
+                                        <div>
+                                            <p className="text-red-300 font-bold mb-1">REVENUE:</p>
+                                            <p>£150k/month (CAC eating profit)</p>
+                                        </div>
+                                        <div>
+                                            <p className="text-red-300 font-bold mb-1">VALUATION:</p>
+                                            <p className="text-3xl font-black text-red-400">£35M</p>
+                                            <p className="text-xs text-gray-500">(founders now own 45%)</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="bg-green-900/40 border-4 border-green-500 rounded-lg p-6">
+                                    <p className="text-green-400 font-black text-xl mb-4 font-mono text-center">✓ LIBERATION MODEL:</p>
+                                    <div className="space-y-3 text-sm font-mono text-white">
+                                        <div>
+                                            <p className="text-green-300 font-bold mb-1">RAISE:</p>
+                                            <p>£10M Series A (12% equity)</p>
+                                        </div>
+                                        <div>
+                                            <p className="text-green-300 font-bold mb-1">USERS:</p>
+                                            <p>500,000 artists (unstoppable growth)</p>
+                                        </div>
+                                        <div>
+                                            <p className="text-green-300 font-bold mb-1">REVENUE:</p>
+                                            <p>£800k/month (profitable, scaling)</p>
+                                        </div>
+                                        <div>
+                                            <p className="text-green-300 font-bold mb-1">VALUATION:</p>
+                                            <p className="text-3xl font-black text-green-400">£300M</p>
+                                            <p className="text-xs text-gray-500">(founders own 78%)</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* YEAR 5 */}
+                        <div className="bg-black/80 border-4 border-white rounded-xl p-6">
+                            <p className="text-white font-black text-2xl mb-6 text-center font-mono">YEAR 5 (EXIT):</p>
+                            <div className="grid md:grid-cols-2 gap-6">
+                                <div className="bg-red-900/40 border-4 border-red-500 rounded-lg p-6">
+                                    <p className="text-red-400 font-black text-xl mb-4 font-mono text-center">❌ EXTRACTIVE MODEL:</p>
+                                    <div className="space-y-3 text-sm font-mono text-white">
+                                        <div>
+                                            <p className="text-red-300 font-bold mb-1">STATUS:</p>
+                                            <p>Struggling / Acquired cheap</p>
+                                        </div>
+                                        <div>
+                                            <p className="text-red-300 font-bold mb-1">USERS:</p>
+                                            <p>25,000 artists (competitors winning)</p>
+                                        </div>
+                                        <div>
+                                            <p className="text-red-300 font-bold mb-1">REVENUE:</p>
+                                            <p>£300k/month (flat growth)</p>
+                                        </div>
+                                        <div>
+                                            <p className="text-red-300 font-bold mb-1">EXIT VALUE:</p>
+                                            <p className="text-4xl font-black text-red-400">£50M</p>
+                                            <p className="text-xs text-gray-500 mb-2">(founders own 40%)</p>
+                                            <p className="text-2xl font-black text-red-300">Founders get: £20M</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="bg-green-900/40 border-4 border-green-500 rounded-lg p-6">
+                                    <p className="text-green-400 font-black text-xl mb-4 font-mono text-center">✓ LIBERATION MODEL:</p>
+                                    <div className="space-y-3 text-sm font-mono text-white">
+                                        <div>
+                                            <p className="text-green-300 font-bold mb-1">STATUS:</p>
+                                            <p>Market leader / IPO or major exit</p>
+                                        </div>
+                                        <div>
+                                            <p className="text-green-300 font-bold mb-1">USERS:</p>
+                                            <p>2M+ artists (network effects moat)</p>
+                                        </div>
+                                        <div>
+                                            <p className="text-green-300 font-bold mb-1">REVENUE:</p>
+                                            <p>£3M/month (enterprise contracts)</p>
+                                        </div>
+                                        <div>
+                                            <p className="text-green-300 font-bold mb-1">EXIT VALUE:</p>
+                                            <p className="text-4xl font-black text-green-400">£1.5B</p>
+                                            <p className="text-xs text-gray-500 mb-2">(founders own 70%)</p>
+                                            <p className="text-2xl font-black text-green-300">Founders get: £1.05B</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    {/* THE MATH BREAKDOWN */}
+                    <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-4 border-green-500 rounded-xl p-8 mt-8">
+                        <p className="text-green-400 font-black text-3xl text-center mb-6 font-mono">THE MATH:</p>
+                        
+                        <div className="grid md:grid-cols-2 gap-6 mb-6">
+                            <div className="text-center">
+                                <p className="text-red-400 font-black text-xl mb-3 font-mono">EXTRACTIVE MODEL:</p>
+                                <p className="text-white text-lg mb-2">Exit value: £50M</p>
+                                <p className="text-white text-lg mb-2">Founders own: 40%</p>
+                                <p className="text-3xl font-black text-red-400 mt-3">= £20M payout</p>
+                            </div>
+
+                            <div className="text-center">
+                                <p className="text-green-400 font-black text-xl mb-3 font-mono">LIBERATION MODEL:</p>
+                                <p className="text-white text-lg mb-2">Exit value: £1.5B</p>
+                                <p className="text-white text-lg mb-2">Founders own: 70%</p>
+                                <p className="text-3xl font-black text-green-400 mt-3">= £1.05B payout</p>
+                            </div>
+                        </div>
+
+                        <div className="bg-black/80 border-4 border-green-500 rounded-lg p-6 text-center">
+                            <p className="text-green-400 font-black text-4xl mb-3 font-mono">52.5× MORE MONEY</p>
+                            <p className="text-white text-xl mb-4">Open source = £1.05B vs Closed = £20M</p>
+                            <p className="text-cyan-400 text-lg font-bold font-mono">
+                                Same product • Same team • Different model = 52× richer
+                            </p>
+                        </div>
+                    </div>
+
+                    {/* WHY THE DIFFERENCE */}
+                    <div className="bg-black/80 border-4 border-purple-500 rounded-xl p-6 mt-6">
+                        <p className="text-purple-400 font-black text-2xl mb-4 text-center font-mono">WHY 52× DIFFERENCE?</p>
+                        <div className="grid md:grid-cols-3 gap-4 text-sm font-mono">
+                            <div className="bg-purple-900/20 border-2 border-purple-500 rounded p-4">
+                                <p className="text-purple-400 font-bold mb-2">1. NETWORK EFFECTS:</p>
+                                <p className="text-white text-xs">Open source = viral spread (2M users vs 25k)</p>
+                            </div>
+                            <div className="bg-purple-900/20 border-2 border-cyan-500 rounded p-4">
+                                <p className="text-cyan-400 font-bold mb-2">2. LESS DILUTION:</p>
+                                <p className="text-white text-xs">Raise less money later = founders keep 70% vs 40%</p>
+                            </div>
+                            <div className="bg-purple-900/20 border-2 border-green-500 rounded p-4">
+                                <p className="text-green-400 font-bold mb-2">3. HIGHER MULTIPLES:</p>
+                                <p className="text-white text-xs">Open source = 24× revenue (Red Hat) vs 6× closed</p>
                             </div>
                         </div>
                     </div>
 
-                    <div className="bg-green-900/40 border-2 border-green-500 rounded p-4 mt-6 text-center">
-                        <p className="text-green-400 font-black text-xl font-mono">
-                            Open source = 6× faster growth = Higher valuations = VCs get richer
-                        </p>
+                    {/* REAL WORLD PROOF */}
+                    <div className="bg-gradient-to-r from-cyan-500/20 to-pink-500/20 border-4 border-cyan-500 rounded-xl p-6 mt-6 text-center">
+                        <p className="text-cyan-400 font-black text-2xl mb-4 font-mono">PROVEN BY REAL EXITS:</p>
+                        <div className="space-y-2 text-white text-sm font-mono">
+                            <p>• Red Hat (open source): £1.4B revenue → <strong className="text-green-400">£34B exit (24× multiple)</strong></p>
+                            <p>• Hortonworks (closed source): £246M revenue → <strong className="text-red-400">£4.2B exit (17× multiple)</strong></p>
+                            <p>• MongoDB (open source): £280M revenue → <strong className="text-green-400">£26B valuation (93× multiple)</strong></p>
+                        </div>
+                        <p className="text-green-400 font-black text-lg mt-4">Open source = Provably higher valuations ✓</p>
                     </div>
+
                 </div>
 
                 {/* REAL INVESTOR QUOTES */}
