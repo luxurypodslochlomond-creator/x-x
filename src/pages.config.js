@@ -251,6 +251,7 @@ import SubdomainSetup from './pages/SubdomainSetup';
 import BuildOnUF51 from './pages/BuildOnUF51';
 import ZeroServerScaling from './pages/ZeroServerScaling';
 import WhiteLabelSetup from './pages/WhiteLabelSetup';
+import NotifyMeCashOut from './pages/NotifyMeCashOut';
 import __Layout from './Layout.jsx';
 
 
@@ -508,6 +509,7 @@ export const PAGES = {
     "BuildOnUF51": BuildOnUF51,
     "ZeroServerScaling": ZeroServerScaling,
     "WhiteLabelSetup": WhiteLabelSetup,
+    "NotifyMeCashOut": NotifyMeCashOut,
 }
 
 export const pagesConfig = {

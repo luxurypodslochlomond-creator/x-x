@@ -21,26 +21,25 @@ export default function SubdomainRouter({ children }) {
     const location = useLocation();
     
     useEffect(() => {
-        // Only route on initial load, not on every navigation
-        if (location.pathname !== '/') return;
-        
         const hostname = window.location.hostname;
         const parts = hostname.split('.');
         
         // Get subdomain (first part before uf51.love)
         const subdomain = parts.length > 2 ? parts[0] : null;
         
-        // Route based on subdomain
-        if (subdomain === 'radio51') {
-            navigate(createPageUrl('Radio'), { replace: true });
-        } else if (subdomain === 'prof51') {
-            navigate(createPageUrl('Prof51'), { replace: true });
-        } else if (subdomain === 'cb51') {
-            navigate(createPageUrl('ScottManager'), { replace: true });
+        // Route based on subdomain ONLY if on root
+        if (location.pathname === '/' || location.pathname === '/Welcome') {
+            if (subdomain === 'radio51') {
+                navigate(createPageUrl('Radio'), { replace: true });
+            } else if (subdomain === 'prof51') {
+                navigate(createPageUrl('Prof51'), { replace: true });
+            } else if (subdomain === 'cb51') {
+                navigate(createPageUrl('ScottManager'), { replace: true });
+            }
         }
         // uf51 or www or no subdomain = stay on main site
         // Future: other subdomains can route to other love-first apps
-    }, []);
+    }, [location.pathname]);
     
     return <>{children}</>;
 }
