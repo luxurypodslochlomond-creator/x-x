@@ -93,32 +93,10 @@ export default function BrosBond8Bit({ size = 48, animate = false }) {
           />
 
           {/* Sunglasses - COOLASFUCK - facing right */}
-          {/* Left lens frame */}
-          <rect x="13" y="19" width="4" height="1" fill="#000000" />
-          <rect x="13" y="20" width="1" height="2" fill="#000000" />
-          <rect x="16" y="20" width="1" height="2" fill="#000000" />
-          <rect x="13" y="22" width="4" height="1" fill="#000000" />
-          {/* Left lens - dark */}
-          <rect x="14" y="20" width="2" height="2" fill="#1e293b" />
-
-          {/* Bridge */}
-          <rect x="17" y="20" width="2" height="2" fill="#000000" />
-
-          {/* Right lens frame */}
-          <rect x="19" y="19" width="4" height="1" fill="#000000" />
-          <rect x="19" y="20" width="1" height="2" fill="#000000" />
-          <rect x="22" y="20" width="1" height="2" fill="#000000" />
-          <rect x="19" y="22" width="4" height="1" fill="#000000" />
-          {/* Right lens - dark */}
-          <rect x="20" y="20" width="2" height="2" fill="#1e293b" />
-
-          {/* Temple arms */}
-          <rect x="11" y="20" width="2" height="1" fill="#000000" />
-          <rect x="23" y="20" width="2" height="1" fill="#000000" />
-
-          {/* Shine on lenses */}
-          <rect x="14" y="20" width="1" height="1" fill="#64748b" opacity="0.7" />
-          <rect x="20" y="20" width="1" height="1" fill="#64748b" opacity="0.7" />
+          <rect x="16" y="20" width="2" height="2" fill="#1e293b" />
+          <rect x="19" y="20" width="2" height="2" fill="#1e293b" />
+          <rect x="18" y="20" width="1" height="1" fill="#000000" />
+          <rect x="16" y="20" width="1" height="1" fill="#64748b" opacity="0.7" />
           
           {/* Body - Celtic FC black shirt with green hoops */}
           <rect x="14" y="26" width="8" height="8" fill="#1a1a1a" />
@@ -187,32 +165,10 @@ export default function BrosBond8Bit({ size = 48, animate = false }) {
           />
 
           {/* Sunglasses - COOLASFUCK - facing left */}
-          {/* Left lens frame */}
-          <rect x="41" y="21" width="4" height="1" fill="#000000" />
-          <rect x="41" y="22" width="1" height="2" fill="#000000" />
-          <rect x="44" y="22" width="1" height="2" fill="#000000" />
-          <rect x="41" y="24" width="4" height="1" fill="#000000" />
-          {/* Left lens - dark */}
-          <rect x="42" y="22" width="2" height="2" fill="#1e293b" />
-
-          {/* Bridge */}
-          <rect x="45" y="22" width="2" height="2" fill="#000000" />
-
-          {/* Right lens frame */}
-          <rect x="47" y="21" width="4" height="1" fill="#000000" />
-          <rect x="47" y="22" width="1" height="2" fill="#000000" />
-          <rect x="50" y="22" width="1" height="2" fill="#000000" />
-          <rect x="47" y="24" width="4" height="1" fill="#000000" />
-          {/* Right lens - dark */}
-          <rect x="48" y="22" width="2" height="2" fill="#1e293b" />
-
-          {/* Temple arms */}
-          <rect x="39" y="22" width="2" height="1" fill="#000000" />
-          <rect x="51" y="22" width="2" height="1" fill="#000000" />
-
-          {/* Shine on lenses */}
-          <rect x="42" y="22" width="1" height="1" fill="#64748b" opacity="0.7" />
-          <rect x="48" y="22" width="1" height="1" fill="#64748b" opacity="0.7" />
+          <rect x="43" y="22" width="2" height="2" fill="#1e293b" />
+          <rect x="46" y="22" width="2" height="2" fill="#1e293b" />
+          <rect x="45" y="22" width="1" height="1" fill="#000000" />
+          <rect x="47" y="22" width="1" height="1" fill="#64748b" opacity="0.7" />
           
           {/* Body - Khaki/olive gamekeeper vest */}
           <rect x="42" y="28" width="8" height="8" fill="#6b7744" />
