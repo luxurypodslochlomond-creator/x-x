@@ -790,14 +790,9 @@ export default function ConsciousnessWhitepaperPage() {
                     </CardContent>
                 </Card>
 
-                {/* Abstract Continued */}
-                <Card className="bg-gradient-to-br from-green-900/40 to-cyan-900/40 border-2 border-green-500/50">
-                    <CardContent className="p-6">
-                        <h2 className="text-2xl font-black text-green-400 mb-4">Abstract (Continued)</h2>
-                        <div className="space-y-3 text-gray-300 leading-relaxed text-sm md:text-base">
-                            <p className="text-white font-bold text-lg">
-                                We present a system that pays people to heal Earth.
-                            </p>
+                <Card className="bg-gradient-to-br from-purple-900/80 to-pink-900/80 border-2 border-purple-500/50">
+                    <CardContent className="p-8">
+                        <h2 className="text-3xl font-black text-white mb-6">Part 1: What Is Consciousness?</h2>
                         
                         {/* VISUAL REPRESENTATION */}
                         <div className="bg-black/80 rounded-xl p-6 border-2 border-cyan-400 mb-6">
