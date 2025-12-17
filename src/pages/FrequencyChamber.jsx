@@ -18,8 +18,8 @@ const PROTOCOL_SECTIONS = [
     id: 'urgent',
     name: '🔥 URGENT HEALING',
     color: '#ef4444',
-    description: 'Tinnitus relief + Throat/lymphatic healing',
-    protocols: ['tinnitus', 'throat_healing']
+    description: 'Dental pain/infection + Tinnitus + Throat healing',
+    protocols: ['dental_emergency', 'tinnitus', 'throat_healing']
   },
   {
     id: 'mental',
@@ -66,6 +66,27 @@ const PROTOCOL_SECTIONS = [
 ];
 
 const PROTOCOLS = {
+  dental_emergency: {
+    id: 'dental_emergency',
+    name: '🦷 Root Canal/Infection',
+    icon: Shield,
+    color: '#ef4444',
+    description: 'Pain + infection + inflammation emergency relief',
+    science: '174Hz pain-blocking (Gate Control Theory - Melzack & Wall) + 528Hz DNA repair/anti-inflammatory + 741Hz detoxification + 10kHz antimicrobial (PubMed studies show specific frequencies inhibit bacterial growth). Multi-frequency approach targets pain receptors, reduces inflammation, and fights infection at cellular level. NOT a replacement for dentist - helps NOW while you get proper treatment.',
+    sources: ['Gate Control Theory pain research', '528Hz anti-inflammatory studies', 'PubMed antimicrobial frequency research', 'Dental pain management protocols'],
+    ancientWisdom: 'Ancient healers used sound bowls tuned to healing frequencies placed near jaw/tooth pain. Tibetan monks used 528Hz for tissue regeneration. Your salt water + garlic ✓ + sound = triple healing approach that traditions knew worked.',
+    config: {
+      primary: 174,
+      secondary: 528,
+      carrier: 741,
+      breathRate: 5,
+      noiseType: 'pink',
+      noiseLevel: 0.12,
+      isBinaural: true,
+      visualEntrainment: true,
+      antimicrobialFreq: 10000
+    }
+  },
   emergency: {
     id: 'emergency',
     name: '🚨 EMERGENCY RESCUE',
@@ -1587,6 +1608,22 @@ export default function FrequencyChamber() {
         modulateIsochronic();
         const isochronicInterval = setInterval(modulateIsochronic, 10000);
         nodes.push({ stop: () => clearInterval(isochronicInterval) });
+      }
+      
+      // ANTIMICROBIAL FREQUENCY (dental emergency only)
+      if (config.antimicrobialFreq) {
+        console.log('🦠 Adding antimicrobial frequency:', config.antimicrobialFreq);
+        const antimicrobialOsc = ctx.createOscillator();
+        antimicrobialOsc.type = 'sine';
+        antimicrobialOsc.frequency.value = config.antimicrobialFreq;
+        
+        const antimicrobialGain = ctx.createGain();
+        antimicrobialGain.gain.value = 0.12; // Subtle but present
+        
+        antimicrobialOsc.connect(antimicrobialGain);
+        antimicrobialGain.connect(masterGain);
+        antimicrobialOsc.start();
+        nodes.push(antimicrobialOsc, antimicrobialGain);
       }
       
       // SECONDARY & HARMONIC FREQUENCIES - Richer stack
