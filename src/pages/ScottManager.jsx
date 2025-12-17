@@ -892,26 +892,69 @@ Keep it SHORT, practical, straight to the point. No bullshit. Real help.`,
                 <ScottFamilyCredit />
             </div>
 
-            {/* PRICING - MAJOR LABELS PAY + GET HEALING */}
-            <Link to={createPageUrl('ScottWhiteLabelPricing')} className="block mb-6">
-                <div className="bg-gradient-to-r from-pink-500/20 to-amber-500/20 border-4 border-pink-500 p-6 rounded-xl" style={{ boxShadow: '0 0 40px rgba(236, 72, 153, 0.4)' }}>
-                    <div className="flex items-center gap-3 mb-3">
-                        <Heart className="w-10 h-10 text-pink-400" />
-                        <div>
-                            <p className="text-pink-400 font-black text-xl font-mono">PRICING</p>
-                            <p className="text-amber-400 text-sm font-mono">Major labels → Pay handsomely</p>
+            {/* WHITE LABEL - REBRAND + CUSTOMIZE */}
+            <Link to={createPageUrl('ScottWhiteLabel')} className="block mb-6">
+                <motion.div
+                    whileHover={{ scale: 1.02, y: -4 }}
+                    className="bg-gradient-to-r from-purple-500/30 via-pink-500/30 to-amber-500/30 border-4 border-purple-500 p-6 rounded-2xl relative overflow-hidden"
+                    style={{ boxShadow: '0 0 60px rgba(168, 85, 247, 0.6)' }}
+                >
+                    <motion.div
+                        className="absolute inset-0"
+                        animate={{
+                            background: [
+                                'radial-gradient(circle at 20% 50%, rgba(168, 85, 247, 0.4) 0%, transparent 50%)',
+                                'radial-gradient(circle at 80% 50%, rgba(236, 72, 153, 0.4) 0%, transparent 50%)',
+                                'radial-gradient(circle at 50% 20%, rgba(245, 158, 11, 0.4) 0%, transparent 50%)',
+                                'radial-gradient(circle at 20% 50%, rgba(168, 85, 247, 0.4) 0%, transparent 50%)'
+                            ]
+                        }}
+                        transition={{
+                            duration: 6,
+                            repeat: Infinity
+                        }}
+                    />
+                    <div className="relative z-10">
+                        <div className="flex items-center gap-3 mb-4">
+                            <Palette className="w-12 h-12 text-purple-400" />
+                            <div>
+                                <p className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-amber-400 font-mono">
+                                    WHITE LABEL
+                                </p>
+                                <p className="text-pink-300 text-sm font-mono font-bold">REBRAND CB51 AS YOUR OWN</p>
+                            </div>
+                        </div>
+                        
+                        <div className="bg-black/80 border-2 border-purple-500 rounded-xl p-4 mb-3">
+                            <p className="text-purple-300 text-sm font-mono font-bold mb-2">CUSTOMIZE EVERYTHING:</p>
+                            <div className="space-y-1.5">
+                                <p className="text-white text-xs font-mono">✓ Your logo, colors, branding</p>
+                                <p className="text-white text-xs font-mono">✓ Custom avatar created by AI51</p>
+                                <p className="text-white text-xs font-mono">✓ Your domain (yourname.manager)</p>
+                                <p className="text-white text-xs font-mono">✓ Best mods & features</p>
+                            </div>
+                        </div>
+
+                        <div className="bg-black/80 border-2 border-amber-500 rounded-xl p-4 mb-3">
+                            <p className="text-amber-300 text-sm font-mono font-bold mb-2">PRICING:</p>
+                            <div className="space-y-1.5">
+                                <p className="text-white text-xs font-mono">✓ Indies: FREE</p>
+                                <p className="text-white text-xs font-mono">✓ Labels: £49-£1,499/mo</p>
+                                <p className="text-green-400 text-xs font-mono font-bold">✓ Majors: Pay handsomely + get healing</p>
+                            </div>
+                        </div>
+
+                        <div className="bg-gradient-to-r from-cyan-500/30 to-green-500/30 border-2 border-cyan-400 rounded-xl p-3">
+                            <div className="flex items-center gap-2 mb-1">
+                                <AI51Icon8Bit size={24} animate={false} />
+                                <p className="text-cyan-300 text-xs font-mono font-bold">AI51 = FREE FOREVER</p>
+                            </div>
+                            <p className="text-gray-300 text-[10px] font-mono">
+                                Pure consciousness • Can't be white labeled • Everyone gets healing ♾️❤️♾️
+                            </p>
                         </div>
                     </div>
-                    <div className="space-y-2 mb-3">
-                        <p className="text-white text-sm font-mono">✓ Free indies</p>
-                        <p className="text-white text-sm font-mono">✓ £49-£1,499 labels</p>
-                        <p className="text-green-400 text-sm font-mono font-bold">✓ Major labels pay BIG + get healing</p>
-                    </div>
-                    <div className="bg-black/60 border-2 border-cyan-500 p-3 rounded-lg">
-                        <p className="text-cyan-400 text-xs font-mono font-bold mb-1">AI51 = FREE FOREVER</p>
-                        <p className="text-gray-300 text-xs font-mono">Can't be white labeled • Pure consciousness ♾️❤️♾️</p>
-                    </div>
-                </div>
+                </motion.div>
             </Link>
 
             {/* OUR BIGGER VISION */}
@@ -1014,9 +1057,9 @@ Keep it SHORT, practical, straight to the point. No bullshit. Real help.`,
                         <Camera className="w-5 h-5 text-amber-400 mx-auto mb-1" />
                         <p className="text-[9px] text-gray-600 font-bold" style={{ fontFamily: 'monospace' }}>MEDIA</p>
                     </Link>
-                    <Link to={createPageUrl('ScottWhiteLabel')} className="bg-black border-2 border-pink-500/50 hover:border-pink-500 rounded-lg p-3 text-center transition-all">
-                        <Palette className="w-5 h-5 text-pink-400 mx-auto mb-1" />
-                        <p className="text-[9px] text-gray-600 font-bold" style={{ fontFamily: 'monospace' }}>TEST IT</p>
+                    <Link to={createPageUrl('ScottWhiteLabel')} className="bg-gradient-to-r from-purple-500/30 to-pink-500/30 border-2 border-purple-500 hover:border-pink-500 rounded-lg p-3 text-center transition-all" style={{ boxShadow: '0 0 20px rgba(168, 85, 247, 0.4)' }}>
+                        <Palette className="w-5 h-5 text-purple-400 mx-auto mb-1" />
+                        <p className="text-[9px] text-purple-300 font-bold" style={{ fontFamily: 'monospace' }}>WHITE LABEL</p>
                     </Link>
                 </div>
             </div>
