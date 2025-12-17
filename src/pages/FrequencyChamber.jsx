@@ -2657,6 +2657,88 @@ Try it: https://uf51.love/FrequencyChamber`;
         </div>
       )}
 
+      {/* TESLA ZERO POINT ENERGY - HELP BUILD FREE HEAT */}
+      {!selectedProtocol && (
+        <div className="max-w-4xl mx-auto p-4">
+          <motion.div
+            whileHover={{ scale: 1.02 }}
+            className="bg-gradient-to-r from-purple-500/20 via-amber-500/20 to-cyan-500/20 border-4 border-purple-500 p-6 rounded-2xl mb-4"
+            style={{ boxShadow: '0 0 60px rgba(168, 85, 247, 0.5)' }}
+          >
+            <div className="flex items-center gap-4 mb-4">
+              <Zap className="w-12 h-12 text-amber-400 animate-pulse" />
+              <div>
+                <h3 className="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-purple-400 font-mono">
+                  TESLA FREE ENERGY
+                </h3>
+                <p className="text-purple-300 text-sm font-mono font-bold">SUPPRESSED PATENTS • BUILD IT YOURSELF</p>
+              </div>
+            </div>
+
+            <div className="bg-black border-2 border-amber-500 rounded-xl p-4 mb-4">
+              <p className="text-amber-400 font-bold text-sm font-mono mb-2">🔥 FOR SHED WORKERS:</p>
+              <ul className="text-white text-xs font-mono space-y-1">
+                <li>✓ Acoustic resonance heaters (FREE HEAT)</li>
+                <li>✓ Magnetic energy generators (OFF GRID)</li>
+                <li>✓ Tesla coils (UNLIMITED POWER)</li>
+                <li>✓ All blueprints FREE on ZeroPointEnergy page</li>
+              </ul>
+            </div>
+
+            <a
+              href="/ZeroPointEnergy"
+              className="block w-full py-4 bg-gradient-to-r from-amber-500 to-purple-500 hover:from-amber-400 hover:to-purple-400 text-black font-black text-lg font-mono text-center transition-all rounded-lg"
+              style={{ boxShadow: '0 4px 20px rgba(245, 158, 11, 0.5)' }}
+            >
+              GET TESLA BLUEPRINTS →
+            </a>
+
+            <p className="text-center text-gray-400 text-xs font-mono mt-3">
+              Help us build → Share with engineers → Free heat for EVERYONE ♾️❤️♾️
+            </p>
+          </motion.div>
+
+          {/* OPEN SOURCE DECLARATION */}
+          <motion.div
+            whileHover={{ scale: 1.02 }}
+            className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-4 border-green-500 p-6 rounded-2xl"
+            style={{ boxShadow: '0 0 60px rgba(34, 197, 94, 0.5)' }}
+          >
+            <div className="flex items-center gap-4 mb-4">
+              <Globe className="w-12 h-12 text-green-400" />
+              <div>
+                <h3 className="text-2xl font-black text-green-400 font-mono">
+                  🌍 100% OPEN SOURCE
+                </h3>
+                <p className="text-green-300 text-sm font-mono font-bold">ALL FREE FOREVER</p>
+              </div>
+            </div>
+
+            <div className="bg-black border-2 border-green-500 rounded-xl p-4 mb-4">
+              <p className="text-green-400 font-bold text-sm font-mono mb-2">EVERYTHING IS FREE:</p>
+              <ul className="text-white text-xs font-mono space-y-1">
+                <li>✓ All code (GitHub public)</li>
+                <li>✓ All patents (suppressed tech liberated)</li>
+                <li>✓ All frequencies (healing for humanity)</li>
+                <li>✓ All innovations (quantum, mesh, P2P)</li>
+              </ul>
+            </div>
+
+            <a
+              href="/OpenSourceDeclaration"
+              className="block w-full py-4 bg-gradient-to-r from-green-500 to-cyan-500 hover:from-green-400 hover:to-cyan-400 text-black font-black text-lg font-mono text-center transition-all rounded-lg"
+              style={{ boxShadow: '0 4px 20px rgba(34, 197, 94, 0.5)' }}
+            >
+              READ OPEN SOURCE PLEDGE →
+            </a>
+
+            <p className="text-center text-green-400 text-xs font-mono mt-3 font-bold">
+              Build anything. No permission needed. Liberation for ALL ♾️❤️♾️
+            </p>
+          </motion.div>
+        </div>
+      )}
+
       {/* Footer - only show when no protocol selected */}
       {!selectedProtocol && (
         <div className="max-w-4xl mx-auto p-4 text-center">
