@@ -252,7 +252,7 @@ const LayoutInner = ({ children, currentPageName }) => {
   const learnNav = [
                       { title: "About", url: createPageUrl("About"), icon: BookOpen },
                       { title: "Welcome", url: createPageUrl("Welcome"), icon: Home },
-                      { title: "Why Help UF51", url: createPageUrl("WhyHelpUF51"), icon: Heart, description: "For partners who feel it", highlight: true },
+                      { title: "Why Help UF51", url: createPageUrl("WhyHelpUF51"), icon: Heart, description: "For partners who resonate" },
                       { title: "Making It Real", url: createPageUrl("MakingItReal"), icon: Zap, description: "How it connects" },
                       { title: "Debt Relief", url: createPageUrl("DebtRelief"), icon: Heart, description: "Help more with less weight" },
                       { title: "Cosmic Transmission", url: createPageUrl("CosmicTransmission"), icon: Globe, description: "Liberation for ALL" },
