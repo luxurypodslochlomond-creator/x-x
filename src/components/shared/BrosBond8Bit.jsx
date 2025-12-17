@@ -75,11 +75,17 @@ export default function BrosBond8Bit({ size = 48, animate = false }) {
           <rect x="12" y="18" width="12" height="6" fill="#fbbf24" />
           <rect x="14" y="24" width="8" height="2" fill="#d97706" />
           
+          {/* Sunglasses - COOLASFUCK - facing right */}
+          <rect x="16" y="20" width="2" height="2" fill="#1e293b" />
+          <rect x="19" y="20" width="2" height="2" fill="#1e293b" />
+          <rect x="18" y="20" width="1" height="1" fill="#000000" />
+          <rect x="16" y="20" width="1" height="1" fill="#64748b" opacity="0.7" />
+          
           {/* Cigarette in mouth */}
-          <rect x="20" y="20" width="4" height="1" fill="#f8fafc" />
+          <rect x="20" y="22" width="4" height="1" fill="#f8fafc" />
           <motion.rect 
             x="24" 
-            y="20" 
+            y="22" 
             width="1" 
             height="1" 
             fill="#fb923c"
@@ -139,11 +145,17 @@ export default function BrosBond8Bit({ size = 48, animate = false }) {
           <rect x="42" y="20" width="10" height="6" fill="#fbbf24" />
           <rect x="44" y="26" width="6" height="2" fill="#d97706" />
           
+          {/* Sunglasses - COOLASFUCK - facing left */}
+          <rect x="43" y="22" width="2" height="2" fill="#1e293b" />
+          <rect x="46" y="22" width="2" height="2" fill="#1e293b" />
+          <rect x="45" y="22" width="1" height="1" fill="#000000" />
+          <rect x="47" y="22" width="1" height="1" fill="#64748b" opacity="0.7" />
+          
           {/* Cigarette in mouth */}
-          <rect x="40" y="22" width="4" height="1" fill="#f8fafc" />
+          <rect x="40" y="24" width="4" height="1" fill="#f8fafc" />
           <motion.rect 
             x="39" 
-            y="22" 
+            y="24" 
             width="1" 
             height="1" 
             fill="#fb923c"
