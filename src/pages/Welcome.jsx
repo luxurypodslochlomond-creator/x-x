@@ -272,11 +272,18 @@ export default function WelcomePage() {
                             We're building the cash-out bridge. Keep earning $P51 - it'll be real money soon.
                         </p>
 
-                        <Link to={createPageUrl('MakingItReal')}>
-                            <button className="w-full bg-amber-600 hover:bg-amber-700 text-black font-black py-3 transition-all">
-                                READ THE REAL TIMELINE →
-                            </button>
-                        </Link>
+                        <div className="grid grid-cols-2 gap-3">
+                            <Link to={createPageUrl('MakingItReal')}>
+                                <button className="w-full bg-amber-600 hover:bg-amber-700 text-black font-black py-3 transition-all text-sm">
+                                    TIMELINE →
+                                </button>
+                            </Link>
+                            <Link to={createPageUrl('NotifyMeCashOut')}>
+                                <button className="w-full bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-400 hover:to-purple-400 text-white font-black py-3 transition-all text-sm">
+                                    NOTIFY ME →
+                                </button>
+                            </Link>
+                        </div>
                     </div>
                 </motion.div>
 
