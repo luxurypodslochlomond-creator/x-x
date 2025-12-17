@@ -65,27 +65,27 @@ export default function BrosBond8Bit({ size = 48, animate = false }) {
 
         {/* FIGURE 1 (LEFT - Gill - GAMEKEEPER STYLE) */}
         <g>
-          {/* Wooly hat - Grey/khaki beanie */}
-          <rect x="12" y="12" width="10" height="2" fill="#6b7280" />
-          <rect x="11" y="14" width="12" height="2" fill="#6b7280" />
-          <rect x="13" y="13" width="8" height="1" fill="#4b5563" /> {/* Hat texture */}
+          {/* Wooly hat - Grey/khaki beanie - MORE VISIBLE */}
+          <rect x="12" y="10" width="10" height="3" fill="#6b7280" />
+          <rect x="11" y="13" width="12" height="2" fill="#6b7280" />
+          <rect x="13" y="11" width="8" height="2" fill="#4b5563" /> {/* Hat texture */}
 
           {/* Head - facing RIGHT (towards Scott) */}
-          <rect x="14" y="16" width="8" height="2" fill="#fbbf24" />
-          <rect x="12" y="18" width="12" height="6" fill="#fbbf24" />
-          <rect x="14" y="24" width="8" height="2" fill="#d97706" />
+          <rect x="14" y="15" width="8" height="2" fill="#fbbf24" />
+          <rect x="12" y="17" width="12" height="6" fill="#fbbf24" />
+          <rect x="14" y="23" width="8" height="2" fill="#d97706" />
           
           {/* Sunglasses - COOLASFUCK - facing right */}
-          <rect x="16" y="20" width="2" height="2" fill="#1e293b" />
-          <rect x="19" y="20" width="2" height="2" fill="#1e293b" />
-          <rect x="18" y="20" width="1" height="1" fill="#000000" />
-          <rect x="16" y="20" width="1" height="1" fill="#64748b" opacity="0.7" />
-          
+          <rect x="16" y="19" width="2" height="2" fill="#1e293b" />
+          <rect x="19" y="19" width="2" height="2" fill="#1e293b" />
+          <rect x="18" y="19" width="1" height="1" fill="#000000" />
+          <rect x="16" y="19" width="1" height="1" fill="#64748b" opacity="0.7" />
+
           {/* Cigarette in mouth */}
-          <rect x="20" y="22" width="4" height="1" fill="#f8fafc" />
+          <rect x="20" y="21" width="4" height="1" fill="#f8fafc" />
           <motion.rect 
             x="24" 
-            y="22" 
+            y="21" 
             width="1" 
             height="1" 
             fill="#fb923c"
@@ -97,20 +97,20 @@ export default function BrosBond8Bit({ size = 48, animate = false }) {
               repeat: Infinity
             } : {}}
           />
-          
+
           {/* Body - Khaki/olive gamekeeper vest */}
-          <rect x="14" y="26" width="8" height="10" fill="#6b7744" />
-          <rect x="14" y="27" width="2" height="8" fill="#54623b" />
-          <rect x="20" y="27" width="2" height="8" fill="#54623b" />
-          
+          <rect x="14" y="25" width="8" height="10" fill="#6b7744" />
+          <rect x="14" y="26" width="2" height="8" fill="#54623b" />
+          <rect x="20" y="26" width="2" height="8" fill="#54623b" />
+
           {/* Arm reaching RIGHT to light Scott */}
-          <rect x="22" y="28" width="6" height="3" fill="#6b7744" />
-          
+          <rect x="22" y="27" width="6" height="3" fill="#6b7744" />
+
           {/* Hand + lighter flame */}
-          <rect x="28" y="28" width="2" height="2" fill="#fbbf24" />
+          <rect x="28" y="27" width="2" height="2" fill="#fbbf24" />
           <motion.rect 
             x="30" 
-            y="28" 
+            y="27" 
             width="2" 
             height="2" 
             fill="#fb923c"
@@ -123,39 +123,39 @@ export default function BrosBond8Bit({ size = 48, animate = false }) {
               repeat: Infinity
             } : {}}
           />
-          
+
           {/* Legs - khaki trousers */}
-          <rect x="14" y="36" width="3" height="8" fill="#4a5936" />
-          <rect x="19" y="36" width="3" height="8" fill="#4a5936" />
-          
+          <rect x="14" y="35" width="3" height="8" fill="#4a5936" />
+          <rect x="19" y="35" width="3" height="8" fill="#4a5936" />
+
           {/* Grey boots */}
-          <rect x="14" y="44" width="3" height="2" fill="#6b7280" />
-          <rect x="19" y="44" width="3" height="2" fill="#6b7280" />
+          <rect x="14" y="43" width="3" height="2" fill="#6b7280" />
+          <rect x="19" y="43" width="3" height="2" fill="#6b7280" />
         </g>
 
         {/* FIGURE 2 (RIGHT - Scott - CELTIC FC - SAME SIZE) */}
         <g>
-          {/* Cap - Black Celtic cap */}
-          <rect x="42" y="12" width="10" height="2" fill="#1a1a1a" />
-          <rect x="44" y="10" width="6" height="2" fill="#1a1a1a" />
-          <rect x="45" y="11" width="4" height="1" fill="#00a650" /> {/* Green badge */}
+          {/* Cap - Black Celtic cap - MORE VISIBLE */}
+          <rect x="42" y="10" width="10" height="3" fill="#1a1a1a" />
+          <rect x="44" y="8" width="6" height="2" fill="#1a1a1a" />
+          <rect x="45" y="9" width="4" height="2" fill="#00a650" /> {/* Green badge */}
 
           {/* Head - facing LEFT (towards Gill) */}
-          <rect x="44" y="14" width="8" height="2" fill="#fbbf24" />
-          <rect x="42" y="16" width="12" height="6" fill="#fbbf24" />
-          <rect x="44" y="22" width="8" height="2" fill="#d97706" />
-          
+          <rect x="44" y="13" width="8" height="2" fill="#fbbf24" />
+          <rect x="42" y="15" width="12" height="6" fill="#fbbf24" />
+          <rect x="44" y="21" width="8" height="2" fill="#d97706" />
+
           {/* Sunglasses - COOLASFUCK - facing left */}
-          <rect x="43" y="18" width="2" height="2" fill="#1e293b" />
-          <rect x="46" y="18" width="2" height="2" fill="#1e293b" />
-          <rect x="45" y="18" width="1" height="1" fill="#000000" />
-          <rect x="47" y="18" width="1" height="1" fill="#64748b" opacity="0.7" />
-          
+          <rect x="43" y="17" width="2" height="2" fill="#1e293b" />
+          <rect x="46" y="17" width="2" height="2" fill="#1e293b" />
+          <rect x="45" y="17" width="1" height="1" fill="#000000" />
+          <rect x="47" y="17" width="1" height="1" fill="#64748b" opacity="0.7" />
+
           {/* Cigarette in mouth */}
-          <rect x="40" y="20" width="4" height="1" fill="#f8fafc" />
+          <rect x="40" y="19" width="4" height="1" fill="#f8fafc" />
           <motion.rect 
             x="39" 
-            y="20" 
+            y="19" 
             width="1" 
             height="1" 
             fill="#fb923c"
@@ -168,21 +168,21 @@ export default function BrosBond8Bit({ size = 48, animate = false }) {
               delay: 0.4
             } : {}}
           />
-          
+
           {/* Body - Celtic FC black shirt with green hoops */}
-          <rect x="44" y="24" width="8" height="10" fill="#1a1a1a" />
-          <rect x="44" y="25" width="8" height="1" fill="#00a650" />
-          <rect x="44" y="27" width="8" height="1" fill="#00a650" />
-          <rect x="44" y="29" width="8" height="1" fill="#00a650" />
-          
+          <rect x="44" y="23" width="8" height="10" fill="#1a1a1a" />
+          <rect x="44" y="24" width="8" height="1" fill="#00a650" />
+          <rect x="44" y="26" width="8" height="1" fill="#00a650" />
+          <rect x="44" y="28" width="8" height="1" fill="#00a650" />
+
           {/* Arm reaching LEFT to light Gill */}
-          <rect x="38" y="28" width="6" height="3" fill="#1a1a1a" />
-          
+          <rect x="38" y="27" width="6" height="3" fill="#1a1a1a" />
+
           {/* Hand + lighter flame */}
-          <rect x="36" y="28" width="2" height="2" fill="#fbbf24" />
+          <rect x="36" y="27" width="2" height="2" fill="#fbbf24" />
           <motion.rect 
             x="34" 
-            y="28" 
+            y="27" 
             width="2" 
             height="2" 
             fill="#fb923c"
@@ -196,14 +196,14 @@ export default function BrosBond8Bit({ size = 48, animate = false }) {
               delay: 0.25
             } : {}}
           />
-          
+
           {/* Legs - black trousers */}
-          <rect x="44" y="34" width="3" height="8" fill="#1a1a1a" />
-          <rect x="49" y="34" width="3" height="8" fill="#1a1a1a" />
-          
+          <rect x="44" y="33" width="3" height="8" fill="#1a1a1a" />
+          <rect x="49" y="33" width="3" height="8" fill="#1a1a1a" />
+
           {/* Grey shoes */}
-          <rect x="44" y="42" width="3" height="2" fill="#6b7280" />
-          <rect x="49" y="42" width="3" height="2" fill="#6b7280" />
+          <rect x="44" y="41" width="3" height="2" fill="#6b7280" />
+          <rect x="49" y="41" width="3" height="2" fill="#6b7280" />
         </g>
 
         {/* THE FLAME IN THE MIDDLE (shared light) */}
@@ -217,9 +217,9 @@ export default function BrosBond8Bit({ size = 48, animate = false }) {
             repeat: Infinity
           } : {}}
         >
-          <rect x="30" y="28" width="4" height="2" fill="#fb923c" />
-          <rect x="31" y="26" width="2" height="2" fill="#fbbf24" />
-          <rect x="32" y="24" width="1" height="2" fill="#fef08a" />
+          <rect x="30" y="27" width="4" height="2" fill="#fb923c" />
+          <rect x="31" y="25" width="2" height="2" fill="#fbbf24" />
+          <rect x="32" y="23" width="1" height="2" fill="#fef08a" />
         </motion.g>
 
         {/* Heart above (the bond) */}
