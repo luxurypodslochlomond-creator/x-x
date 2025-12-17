@@ -562,7 +562,7 @@ const PROTOCOLS = {
 
   throat_healing: {
     id: 'throat_healing',
-    name: '💚 Lennox Throat Healing',
+    name: 'Throat Healing',
     icon: Heart,
     color: '#22c55e',
     description: 'Lymphatic drainage + inflammation reduction + post-surgical healing ♾️❤️',
