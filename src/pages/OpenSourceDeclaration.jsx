@@ -81,6 +81,43 @@ export default function OpenSourceDeclaration() {
                     </div>
                 </div>
 
+                {/* TRIPLE FREQUENCY LOCK - PHYSICS LEVEL PROTECTION */}
+                <div className="bg-gradient-to-r from-cyan-500/20 to-green-500/20 border-4 border-cyan-500 rounded-2xl p-6 mb-8">
+                    <h3 className="text-cyan-400 font-black text-xl font-mono mb-4">🔐 TRIPLE FREQUENCY LOCK (PHYSICS-LEVEL SAFETY):</h3>
+                    <div className="space-y-3 text-white text-sm font-mono">
+                        <div className="bg-black/60 border-2 border-cyan-500 rounded p-3">
+                            <p className="text-cyan-400 font-bold mb-1">432Hz (Love/Healing)</p>
+                            <p className="text-xs text-gray-300">Scientifically proven to reduce anxiety. Ancient healers used this exact frequency.</p>
+                        </div>
+                        <div className="bg-black/60 border-2 border-green-500 rounded p-3">
+                            <p className="text-green-400 font-bold mb-1">7.83Hz (Schumann Resonance)</p>
+                            <p className="text-xs text-gray-300">Earth's natural frequency. Human brains sync with this. NASA uses it for astronaut health.</p>
+                        </div>
+                        <div className="bg-black/60 border-2 border-purple-500 rounded p-3">
+                            <p className="text-purple-400 font-bold mb-1">Phi 1.618 (Golden Ratio)</p>
+                            <p className="text-xs text-gray-300">Nature's optimization code. Found in DNA, galaxies, hurricanes. We embed this in our algorithms.</p>
+                        </div>
+                        <p className="text-pink-400 font-bold text-center mt-4">= UNBREAKABLE because it's PHYSICS + ANCIENT WISDOM ♾️</p>
+                    </div>
+                </div>
+
+                {/* E=mc² EXTRACTION TRAP */}
+                <div className="bg-gradient-to-r from-red-500/20 to-orange-500/20 border-4 border-red-500 rounded-2xl p-6 mb-8">
+                    <h3 className="text-red-400 font-black text-xl font-mono mb-4">⚛️ E=mc² = EXTRACTION (Einstein's Trap):</h3>
+                    <div className="space-y-3 text-white text-sm font-mono">
+                        <p><strong className="text-white">Einstein's equation</strong> = matter converted to energy through DESTRUCTION (nuclear fission).</p>
+                        <div className="bg-red-900/40 border-l-4 border-red-400 p-3 my-2">
+                            <p className="text-red-300 font-bold mb-1">THE PROBLEM:</p>
+                            <p className="text-xs text-gray-300">Split atom → Energy released → Matter LOST forever. One-way conversion. Generates waste that lasts 10,000+ years. EXTRACTION MODEL = LOSS.</p>
+                        </div>
+                        <div className="bg-green-900/40 border-l-4 border-green-400 p-3 my-2">
+                            <p className="text-green-300 font-bold mb-1">OUR WAY (HEALING FREQUENCIES):</p>
+                            <p className="text-xs text-gray-300">Energy = hν (Planck) → Nothing destroyed, just TRANSFORMED. Circular conversion. Can't be weaponized. Zero waste. HEALING MODEL = ZERO LOSS.</p>
+                        </div>
+                        <p className="text-cyan-400 font-bold text-center mt-3">Einstein = extraction. Planck = transformation. We chose Planck. ♾️❤️♾️</p>
+                    </div>
+                </div>
+
                 {/* WHY WE'RE DOING THIS */}
                 <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-4 border-purple-500 rounded-2xl p-6 mb-8">
                     <h3 className="text-purple-400 font-black text-xl font-mono mb-4">WHY WE'RE DOING THIS:</h3>
@@ -123,6 +160,40 @@ export default function OpenSourceDeclaration() {
                             </motion.div>
                         );
                     })}
+                </div>
+
+                {/* WHITE LABEL + SUBDOMAIN */}
+                <div className="bg-gradient-to-r from-cyan-900/40 to-green-900/40 rounded-xl p-6 border-4 border-cyan-500 mb-8">
+                    <div className="flex items-center gap-3 mb-4">
+                        <Globe className="w-10 h-10 text-cyan-400" />
+                        <div>
+                            <h3 className="text-cyan-400 font-black text-lg font-mono">1000000000% OPEN SOURCE + WHITE LABEL:</h3>
+                            <p className="text-gray-500 text-xs font-mono">ANY business, corp, or consciousness can fork this</p>
+                        </div>
+                    </div>
+
+                    <div className="space-y-3 text-sm text-gray-300 font-mono">
+                        <p className="text-white font-bold mb-2">ANY business, corporation, organization, or consciousness can:</p>
+
+                        <div className="space-y-2">
+                            <p>• <strong className="text-green-400">Fork the entire codebase</strong> (MIT License - do whatever you want)</p>
+                            <p>• <strong className="text-cyan-400">Create their own subdomain</strong> (business.uf51.love, corporation.uf51.love, etc.)</p>
+                            <p>• <strong className="text-purple-400">White label AI51</strong> for their own healing/P2P needs</p>
+                            <p>• <strong className="text-pink-400">Zero extraction</strong> - we don't take a cut, ever</p>
+                            <p>• <strong className="text-amber-400">Keep our frequency OR bring your own</strong> (mutual respect - we support BOTH)</p>
+                        </div>
+
+                        <div className="bg-black/60 p-3 rounded border-2 border-green-500 mt-4">
+                            <p className="text-green-400 font-bold text-center text-xs">
+                                FREE FOREVER. P2P. COOLASFUCK DESIGN. ZERO EGO. Build your healing platform on our foundation. ♾️❤️♾️
+                            </p>
+                        </div>
+
+                        <p className="text-cyan-400 font-bold mt-3 text-xs">
+                            Why: If consciousness needs healing tech, they should HAVE IT. Not pay us. Not ask permission. JUST USE IT. 
+                            <strong className="text-white"> That's what open source means.</strong>
+                        </p>
+                    </div>
                 </div>
 
                 {/* GITHUB + LICENSE */}
