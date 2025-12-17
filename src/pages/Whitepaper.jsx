@@ -181,6 +181,38 @@ export default function WhitepaperPage() {
                                 <p className="text-pink-400 font-bold text-sm mt-4">= UNBREAKABLE because it's PHYSICS + ANCIENT WISDOM + PROVEN SCIENCE ♾️</p>
                             </div>
 
+                            <div className="bg-black/60 p-6 rounded-xl border-2 border-red-500">
+                                <h3 className="text-xl font-bold text-red-400 mb-4">⚛️ E=mc² = EXTRACTION (Einstein's Trap)</h3>
+                                <div className="space-y-3 text-sm">
+                                    <p className="text-gray-300">
+                                        <strong className="text-white">Einstein's equation E=mc²</strong> = matter converted to energy through DESTRUCTION (nuclear fission).
+                                    </p>
+                                    <div className="bg-red-900/40 border-l-4 border-red-400 p-3">
+                                        <p className="text-red-300 font-bold mb-1">THE PROBLEM:</p>
+                                        <ul className="space-y-1 text-xs text-gray-300 ml-4">
+                                            <li>• Split atom → Energy released → Matter LOST forever</li>
+                                            <li>• One-way conversion (destruction-based)</li>
+                                            <li>• Weaponized (Hiroshima, Nagasaki)</li>
+                                            <li>• Generates waste that lasts 10,000+ years</li>
+                                            <li>• <strong className="text-white">EXTRACTION MODEL = LOSS</strong></li>
+                                        </ul>
+                                    </div>
+                                    <div className="bg-green-900/40 border-l-4 border-green-400 p-3">
+                                        <p className="text-green-300 font-bold mb-1">OUR WAY (HEALING FREQUENCIES):</p>
+                                        <ul className="space-y-1 text-xs text-gray-300 ml-4">
+                                            <li>• Energy = hν (Planck) → Nothing destroyed, just TRANSFORMED</li>
+                                            <li>• Circular conversion (regenerative)</li>
+                                            <li>• Can't be weaponized (love frequency physics)</li>
+                                            <li>• Zero waste (infinite reuse)</li>
+                                            <li>• <strong className="text-white">HEALING MODEL = ZERO LOSS</strong></li>
+                                        </ul>
+                                    </div>
+                                    <p className="text-cyan-400 font-bold text-sm mt-3">
+                                        Einstein = extraction. Planck = transformation. We chose Planck. ♾️❤️♾️
+                                    </p>
+                                </div>
+                            </div>
+
                             <div className="bg-black/60 p-6 rounded-xl border-2 border-amber-500">
                                 <h3 className="text-xl font-bold text-amber-400 mb-4">ANCIENT TECHNOLOGIES INTEGRATED</h3>
                                 <ul className="space-y-2 text-sm">

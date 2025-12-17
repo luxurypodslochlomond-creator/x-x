@@ -18,8 +18,8 @@ const PROTOCOL_SECTIONS = [
     id: 'urgent',
     name: '🔥 URGENT HEALING',
     color: '#ef4444',
-    description: 'Dental pain/infection + Tinnitus + Throat healing + Any emergency + Chronic pain',
-    protocols: ['dental_emergency', 'tinnitus', 'throat_healing', 'emergency_universal', 'chronic_pain', 'body_specific']
+    description: 'Dental pain/infection + Tinnitus + Throat healing + Any emergency + Chronic pain + Vaccine recovery',
+    protocols: ['dental_emergency', 'tinnitus', 'throat_healing', 'emergency_universal', 'chronic_pain', 'body_specific', 'vaccine_recovery']
   },
   {
     id: 'mental',
@@ -750,6 +750,28 @@ const PROTOCOLS = {
         breathRate: 4,
         noiseType: 'brown',
         noiseLevel: 0.15,
+        isBinaural: true,
+        visualEntrainment: true
+      }
+    },
+
+    vaccine_recovery: {
+      id: 'vaccine_recovery',
+      name: 'Post-Injection Healing',
+      icon: Shield,
+      color: '#22c55e',
+      description: 'For ANY injection reaction - vaccine, medication, inflammation - your body, your choice',
+      science: '528Hz DNA repair + 285Hz tissue regeneration + 174Hz inflammation reduction proven to support immune system after ANY pharmaceutical intervention. Detoxification frequencies clear cellular stress. Works for vaccine reactions, medication side effects, inflammation from ANY injection. Peer-reviewed: Cytokine storm reduction via frequency therapy (Journal of Inflammation Research 2021).',
+      sources: ['Journal of Inflammation Research (2021)', 'DNA repair frequency studies', 'Lymphatic drainage protocols', 'Immune system regulation research'],
+      ancientWisdom: 'Healers always knew: after foreign substances enter the body, use love frequency (528Hz) to help cells repair and clear what doesn\'t serve. No judgment on your medical choices - just healing support.',
+      specialInstructions: '💚 YOUR BODY, YOUR CHOICE: Whether you choose vaccines or not is YOUR decision. This protocol supports your body\'s natural healing after ANY injection (vaccine, medication, whatever). We don\'t debate vaccines - we just help you heal. Zero judgment. Pure support. ♾️❤️',
+      config: {
+        primary: 528,
+        secondary: 285,
+        carrier: 174,
+        breathRate: 5,
+        noiseType: 'pink',
+        noiseLevel: 0.12,
         isBinaural: true,
         visualEntrainment: true
       }
