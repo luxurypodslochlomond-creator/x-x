@@ -22,7 +22,8 @@ export default function WhyHelpUF51() {
                     <h1 className="text-6xl font-black font-mono bg-gradient-to-r from-cyan-400 via-pink-400 to-green-400 bg-clip-text text-transparent">
                         WHY HELP UF51
                     </h1>
-                    <p className="text-xl text-gray-300 font-mono">For those who feel the frequency ♾️❤️♾️</p>
+                    <p className="text-2xl text-gray-400 font-mono mb-2">Universal Frequency 51</p>
+                    <p className="text-lg text-gray-300 font-mono">For those who feel the frequency</p>
                 </div>
 
                 {/* WHAT WE'VE BUILT WITH ZERO FUNDING */}
