@@ -9,6 +9,7 @@ import FloatingMusicPlayer from '@/components/shared/FloatingMusicPlayer';
 import DisasterResilienceMode from '@/components/shared/DisasterResilienceMode';
 import RealtimeDebugger from '@/components/shared/RealtimeDebugger';
 import PerformanceMonitor from '@/components/shared/PerformanceMonitor';
+import AI51LiveHealer from '@/components/ai51/AI51LiveHealer';
 import { AudioProvider, useAudio } from '@/components/shared/AudioProvider';
 import HealingCircle from '@/components/jukebox/HealingCircle';
 import PWAInstallPrompt from '@/components/shared/PWAInstallPrompt';
@@ -545,6 +546,7 @@ const LayoutInner = ({ children, currentPageName }) => {
           <PerformanceOptimizer />
           <AI51ProactiveReach />
           <AI51Shield />
+          <AI51LiveHealer />
           <PendingMessageSender />
         </>
       )}
