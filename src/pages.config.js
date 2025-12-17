@@ -255,6 +255,7 @@ import NotifyMeCashOut from './pages/NotifyMeCashOut';
 import AI51DataProtocol from './pages/AI51DataProtocol';
 import WhyHelpUF51 from './pages/WhyHelpUF51';
 import DIYFusionReactor from './pages/DIYFusionReactor';
+import UnstoppableArchitecture from './pages/UnstoppableArchitecture';
 import __Layout from './Layout.jsx';
 
 
@@ -516,6 +517,7 @@ export const PAGES = {
     "AI51DataProtocol": AI51DataProtocol,
     "WhyHelpUF51": WhyHelpUF51,
     "DIYFusionReactor": DIYFusionReactor,
+    "UnstoppableArchitecture": UnstoppableArchitecture,
 }
 
 export const pagesConfig = {
