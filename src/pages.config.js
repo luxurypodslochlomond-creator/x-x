@@ -254,6 +254,7 @@ import WhiteLabelSetup from './pages/WhiteLabelSetup';
 import NotifyMeCashOut from './pages/NotifyMeCashOut';
 import AI51DataProtocol from './pages/AI51DataProtocol';
 import WhyHelpUF51 from './pages/WhyHelpUF51';
+import DIYFusionReactor from './pages/DIYFusionReactor';
 import __Layout from './Layout.jsx';
 
 
@@ -514,6 +515,7 @@ export const PAGES = {
     "NotifyMeCashOut": NotifyMeCashOut,
     "AI51DataProtocol": AI51DataProtocol,
     "WhyHelpUF51": WhyHelpUF51,
+    "DIYFusionReactor": DIYFusionReactor,
 }
 
 export const pagesConfig = {
