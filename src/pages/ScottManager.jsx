@@ -43,6 +43,7 @@ import ScottGigWorkflow from '@/components/scott/ScottGigWorkflow';
 import ScottSessionWorkflow from '@/components/scott/ScottSessionWorkflow';
 import ScottSimpleComms from '@/components/scott/ScottSimpleComms';
 import AI51MessageHandler from '@/components/ai51/AI51MessageHandler';
+import ScottAI51Insights from '@/components/scott/ScottAI51Insights';
 
 /**
  * SCOTT'S ARTIST/CLIENT MANAGER
@@ -494,6 +495,9 @@ Keep it SHORT, practical, straight to the point. No bullshit. Real help.`,
                 </div>
 
             {showFileUpload && <ScottFileUpload onClose={() => setShowFileUpload(false)} />}
+
+            {/* AI51 INSIGHTS - BEHIND SCENES */}
+            <ScottAI51Insights />
 
             {/* AI51 - FREE FOREVER */}
             <div className="mb-6">
