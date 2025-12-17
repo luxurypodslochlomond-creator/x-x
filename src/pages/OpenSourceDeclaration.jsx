@@ -389,25 +389,19 @@ export default function OpenSourceDeclaration() {
                     <div className="space-y-6 text-white font-mono">
                         
                         {/* THE TRUTH */}
-                        <motion.div 
-                            className="bg-red-900/60 border-4 border-red-400 rounded-xl p-6"
-                            animate={{ boxShadow: ['0 0 20px rgba(239, 68, 68, 0.5)', '0 0 40px rgba(239, 68, 68, 0.8)', '0 0 20px rgba(239, 68, 68, 0.5)'] }}
-                            transition={{ duration: 2, repeat: Infinity }}
-                        >
-                            <p className="text-red-400 font-black text-2xl mb-3 text-center">⚠️ LET'S BE REAL:</p>
+                        <div className="bg-gradient-to-r from-red-900/40 to-purple-900/40 border-4 border-red-400 rounded-xl p-6">
+                            <p className="text-red-400 font-black text-2xl mb-3 text-center">💀 OLD SYSTEM = EXTRACTION</p>
                             <p className="text-white text-sm mb-4 text-center">
-                                Labels have been <strong className="text-red-300">EXTRACTING</strong> for decades. 
-                                Artists trapped in debt. Planet dying. Music industry = exploitation machine.
+                                Music industry extracted for decades. Artists trapped. Planet dying. Time to reverse it.
                             </p>
-                            <div className="bg-black/60 border-2 border-red-500 rounded p-4 text-center">
-                                <p className="text-red-300 font-bold text-sm mb-2">WHY WE'LL TAKE THEIR MONEY:</p>
+                            <div className="bg-black/60 border-2 border-green-500 rounded p-4 text-center">
+                                <p className="text-green-300 font-bold text-sm mb-2">NEW SYSTEM = CONVERSION:</p>
                                 <p className="text-gray-300 text-xs">
-                                    Not to make them heroes. Not to help their PR. 
-                                    <br/><strong className="text-white">To CONVERT their extraction into DEBT RELIEF.</strong>
-                                    <br/>Use their money to FREE the artists they trapped.
+                                    Take old extraction money → Convert to debt relief → Free artists → Heal planet.
+                                    <br/><strong className="text-white">Physics prevents them capturing it back.</strong>
                                 </p>
                             </div>
-                        </motion.div>
+                        </div>
 
                         {/* WHO WE HELP (NOT LABELS) */}
                         <div className="bg-gradient-to-r from-green-900/60 to-cyan-900/60 border-4 border-green-400 rounded-xl p-6" style={{ boxShadow: '0 0 30px rgba(34, 197, 94, 0.4)' }}>
