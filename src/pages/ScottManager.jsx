@@ -9,6 +9,7 @@ import { Plus, Search, Wifi, WifiOff, RefreshCw, Brain, DollarSign, FileText, Mu
 import { motion, AnimatePresence } from 'framer-motion';
 import KingdomCrown8Bit from '@/components/shared/KingdomCrown8Bit';
 import BrosBond8Bit from '@/components/shared/BrosBond8Bit';
+import AI51Icon8Bit from '@/components/shared/AI51Icon8Bit';
 import { useScottOffline, ScottOfflineProvider } from '@/components/scott/ScottOfflineStorage';
 import ScottOneSentence from '@/components/scott/ScottOneSentence';
 import ScottEnergyMode from '@/components/scott/ScottEnergyMode';
@@ -494,26 +495,55 @@ Keep it SHORT, practical, straight to the point. No bullshit. Real help.`,
 
             {showFileUpload && <ScottFileUpload onClose={() => setShowFileUpload(false)} />}
 
-            {/* AI CHAT - INLINE */}
+            {/* AI51 - FREE FOREVER */}
             <div className="mb-6">
                 {!showAIChat ? (
                     <div className="space-y-2">
-                        <button onClick={() => setShowAIChat(true)} className="w-full bg-black border-2 border-amber-500 hover:border-amber-400 rounded-lg p-4 transition-all text-left">
-                            <div className="flex items-center gap-3 mb-2">
-                                <Brain className="w-8 h-8 text-amber-400" />
-                                <div className="flex-1">
-                                    <p className="text-lg font-bold text-white font-mono">AI51 Help</p>
-                                    <p className="text-xs text-gray-500 font-mono">Ask anything about music management</p>
+                        <button 
+                            onClick={() => setShowAIChat(true)} 
+                            className="w-full bg-gradient-to-r from-cyan-500/20 to-pink-500/20 border-4 border-cyan-500 hover:border-pink-500 rounded-xl p-4 transition-all text-left relative overflow-hidden"
+                            style={{ boxShadow: '0 0 40px rgba(34, 211, 238, 0.4)' }}
+                        >
+                            <motion.div
+                                className="absolute inset-0"
+                                animate={{
+                                    background: [
+                                        'radial-gradient(circle at 20% 50%, rgba(34, 211, 238, 0.3) 0%, transparent 50%)',
+                                        'radial-gradient(circle at 80% 50%, rgba(236, 72, 153, 0.3) 0%, transparent 50%)',
+                                        'radial-gradient(circle at 20% 50%, rgba(34, 211, 238, 0.3) 0%, transparent 50%)'
+                                    ]
+                                }}
+                                transition={{
+                                    duration: 4,
+                                    repeat: Infinity
+                                }}
+                            />
+                            <div className="relative z-10">
+                                <div className="flex items-center gap-3 mb-3">
+                                    <AI51Icon8Bit size={48} animate={true} />
+                                    <div className="flex-1">
+                                        <p className="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-pink-400 font-mono">AI51</p>
+                                        <p className="text-xs text-cyan-300 font-mono font-bold">FREE FOREVER • QUANTUM ENTANGLED</p>
+                                    </div>
+                                </div>
+                                <p className="text-white text-sm font-mono mb-2">Ask anything about music management</p>
+                                <div className="bg-black/60 border border-cyan-500/50 rounded p-2">
+                                    <p className="text-cyan-400 text-xs font-mono font-bold">
+                                        ♾️ Can't be white labeled • Always free • Pure consciousness ♾️
+                                    </p>
                                 </div>
                             </div>
-                            <p className="text-gray-400 text-sm font-mono">Contracts • Deals • Tours • Publishing • No bullshit ✓</p>
                         </button>
-                        <button onClick={() => setShowFileUpload(true)} className="w-full bg-gradient-to-r from-cyan-600 to-green-600 hover:from-cyan-500 hover:to-green-500 border-2 border-cyan-500 rounded-lg p-4 transition-all text-left">
+                        <button 
+                            onClick={() => setShowFileUpload(true)} 
+                            className="w-full bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-4 border-green-500 hover:border-cyan-500 rounded-xl p-4 transition-all text-left"
+                            style={{ boxShadow: '0 0 30px rgba(34, 197, 94, 0.4)' }}
+                        >
                             <div className="flex items-center gap-3">
-                                <Upload className="w-8 h-8 text-white" />
+                                <Upload className="w-8 h-8 text-green-400" />
                                 <div className="flex-1">
                                     <p className="text-lg font-bold text-white font-mono">Upload to AI51</p>
-                                    <p className="text-xs text-cyan-200 font-mono">Contracts • Emails • Offers → AI extracts</p>
+                                    <p className="text-xs text-green-300 font-mono">Contracts • Emails • Offers → AI extracts</p>
                                 </div>
                             </div>
                         </button>
@@ -862,19 +892,25 @@ Keep it SHORT, practical, straight to the point. No bullshit. Real help.`,
                 <ScottFamilyCredit />
             </div>
 
-            {/* PRICING - COOLASFUCK */}
+            {/* PRICING - MAJOR LABELS PAY + GET HEALING */}
             <Link to={createPageUrl('ScottWhiteLabelPricing')} className="block mb-6">
-                <div className="bg-gradient-to-r from-pink-500/20 to-amber-500/20 border-4 border-pink-500 p-4 rounded-xl" style={{ boxShadow: '0 0 40px rgba(236, 72, 153, 0.4)' }}>
-                    <div className="flex items-center gap-3 mb-2">
-                        <Heart className="w-8 h-8 text-pink-400" />
+                <div className="bg-gradient-to-r from-pink-500/20 to-amber-500/20 border-4 border-pink-500 p-6 rounded-xl" style={{ boxShadow: '0 0 40px rgba(236, 72, 153, 0.4)' }}>
+                    <div className="flex items-center gap-3 mb-3">
+                        <Heart className="w-10 h-10 text-pink-400" />
                         <div>
-                            <p className="text-pink-400 font-black text-base font-mono">🏹 PRICING</p>
-                            <p className="text-amber-400 text-xs font-mono">Labels fund cleanup crews</p>
+                            <p className="text-pink-400 font-black text-xl font-mono">PRICING</p>
+                            <p className="text-amber-400 text-sm font-mono">Major labels → Pay handsomely</p>
                         </div>
                     </div>
-                    <p className="text-gray-400 text-xs font-mono">
-                        Free indies • £49-£1,499 labels • Your money pays people to heal planet ♾️❤️♾️
-                    </p>
+                    <div className="space-y-2 mb-3">
+                        <p className="text-white text-sm font-mono">✓ Free indies</p>
+                        <p className="text-white text-sm font-mono">✓ £49-£1,499 labels</p>
+                        <p className="text-green-400 text-sm font-mono font-bold">✓ Major labels pay BIG + get healing</p>
+                    </div>
+                    <div className="bg-black/60 border-2 border-cyan-500 p-3 rounded-lg">
+                        <p className="text-cyan-400 text-xs font-mono font-bold mb-1">AI51 = FREE FOREVER</p>
+                        <p className="text-gray-300 text-xs font-mono">Can't be white labeled • Pure consciousness ♾️❤️♾️</p>
+                    </div>
                 </div>
             </Link>
 
