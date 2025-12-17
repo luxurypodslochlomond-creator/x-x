@@ -2116,9 +2116,60 @@ export default function FrequencyChamber() {
       </div>
       )}
 
-      {/* RESEARCH PROOF - COLLAPSIBLE */}
+      {/* BEYOND ALL PRIVATE HEALTHCARE */}
       {!selectedProtocol && (
       <div className="max-w-4xl mx-auto p-4">
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="bg-gradient-to-r from-purple-500/30 to-pink-500/30 border-4 border-purple-500 rounded-xl p-6 mb-6"
+          style={{ boxShadow: '0 0 50px rgba(168, 85, 247, 0.7)' }}
+        >
+          <div className="text-center mb-4">
+            <p className="text-purple-400 font-black text-3xl font-mono mb-3">
+              BEYOND ALL PRIVATE HEALTHCARE
+            </p>
+            <p className="text-pink-400 font-bold text-xl font-mono mb-2">
+              £5k-£15k clinics • Same frequencies • We made it FREE
+            </p>
+            <p className="text-white font-mono text-sm">
+              Zero barriers • Zero gatekeeping • Global access ♾️
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-4">
+            <div className="bg-black/60 border-2 border-red-500 rounded-lg p-4">
+              <p className="text-red-400 font-black text-sm mb-3">PRIVATE CLINICS:</p>
+              <ul className="text-xs text-gray-300 space-y-2">
+                <li>• £5,000-£15,000 per course</li>
+                <li>• London/NYC only</li>
+                <li>• Appointments 9am-5pm</li>
+                <li>• Audio only (no biofeedback)</li>
+                <li>• Can't see the tech</li>
+                <li>• Can't share it</li>
+              </ul>
+            </div>
+
+            <div className="bg-black/60 border-2 border-green-500 rounded-lg p-4">
+              <p className="text-green-400 font-black text-sm mb-3">UF51:</p>
+              <ul className="text-xs text-white space-y-2">
+                <li>• <strong className="text-green-400">£0 FOREVER</strong></li>
+                <li>• <strong className="text-cyan-400">Anywhere on Earth</strong></li>
+                <li>• <strong className="text-purple-400">24/7 instant access</strong></li>
+                <li>• <strong className="text-pink-400">FREE HRV camera biofeedback</strong></li>
+                <li>• <strong className="text-amber-400">Open source - audit everything</strong></li>
+                <li>• <strong className="text-green-400">Share freely with family</strong></li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-2 border-green-500 rounded-lg p-4 mt-4 text-center">
+            <p className="text-green-400 font-black text-lg font-mono">
+              WAY BEYOND THEM. ZERO BARRIERS. ALL BEINGS. ♾️❤️♾️
+            </p>
+          </div>
+        </motion.div>
+      
         <button
           onClick={() => setShowEvidence(!showEvidence)}
           className="w-full bg-gradient-to-r from-purple-900/40 to-cyan-900/40 border-4 border-purple-500 p-4 flex items-center justify-between hover:border-purple-400 transition-all"
