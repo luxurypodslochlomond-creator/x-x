@@ -1431,36 +1431,44 @@ export default function FrequencyChamber() {
   // Start audio
   const startAudio = async (protocol) => {
     try {
+      console.log('🎵 START AUDIO - Protocol:', protocol.name);
+      console.log('Config:', protocol.config);
+
       // Save session to dashboard (all frequency plays, not just voice)
       try {
         await base44.entities.VoiceHealingSession.create({
           healing_intent: `${protocol.name} frequency session`,
           voice_f0_hz: protocol.config.primary,
-          stress_level_detected: 50, // neutral - they'll track improvement over time
+          stress_level_detected: 50,
           dominant_vowel: 'N/A',
           recommended_protocol: protocol.id,
           session_completed: false,
           audio_hash: `manual_${Date.now()}`
         });
+        console.log('✓ Session saved');
       } catch (e) {
         console.log('Session save error (non-critical):', e);
       }
 
       // Warn about headphones for binaural but don't block
       if (protocol.config.isBinaural && !hasHeadphones) {
+        console.log('⚠️ Binaural beats - headphones recommended');
         setShowHeadphonePrompt(true);
       }
       
+      console.log('Creating AudioContext...');
       const AudioContext = window.AudioContext || window.webkitAudioContext;
       const ctx = new AudioContext();
+      console.log('AudioContext created, state:', ctx.state);
       
       // CRITICAL: Mobile audio unlock - must resume after user interaction
       if (ctx.state === 'suspended') {
+        console.log('AudioContext suspended, resuming...');
         try {
           await ctx.resume();
-          console.log('Audio context resumed:', ctx.state);
+          console.log('✓ Audio context resumed:', ctx.state);
         } catch (e) {
-          console.error('Failed to resume audio context:', e);
+          console.error('❌ Failed to resume audio context:', e);
           alert('Audio blocked - tap START again');
           return;
         }
@@ -1468,22 +1476,29 @@ export default function FrequencyChamber() {
       
       // Double-check audio is actually running
       if (ctx.state !== 'running') {
+        console.error('❌ Audio not running, state:', ctx.state);
         alert('Audio system not ready - please try again');
         return;
       }
       
+      console.log('✓ AudioContext running');
       ctxRef.current = ctx;
       
+      console.log('Creating master gain...');
       const masterGain = ctx.createGain();
       masterGain.gain.value = volume;
       masterGain.connect(ctx.destination);
       masterGainRef.current = masterGain;
+      console.log('✓ Master gain created, volume:', volume);
       
       const nodes = [];
       const config = protocol.config;
       
       // PRIMARY FREQUENCY - Binaural or Isochronic
       if (config.isBinaural) {
+        console.log('🎧 Creating BINAURAL beats');
+        console.log('Left freq:', config.carrier, 'Right freq:', config.carrier + config.primary);
+        
         // BINAURAL BEATS - Left/Right ear different frequencies
         const leftOsc = ctx.createOscillator();
         const rightOsc = ctx.createOscillator();
@@ -1507,6 +1522,7 @@ export default function FrequencyChamber() {
 
         leftOsc.start();
         rightOsc.start();
+        console.log('✓ Binaural oscillators started');
         nodes.push(leftOsc, rightOsc, leftGain, rightGain, merger);
 
         // TESLA 3-6-9 HARMONIC STACK - All frequencies at once for cellular resonance
@@ -1736,18 +1752,28 @@ export default function FrequencyChamber() {
         }, flashPeriod);
       }
       
+      console.log('✓✓✓ AUDIO GENERATION COMPLETE');
+      console.log('Total nodes created:', nodes.length);
+      console.log('Playing:', protocol.name);
+      
       setIsPlaying(true);
     } catch (err) {
-      console.error('Audio start error:', err);
+      console.error('❌❌❌ Audio start error:', err);
+      alert(`Audio error: ${err.message}`);
     }
   };
   
   const stopAudio = () => {
+    console.log('🛑 STOPPING AUDIO');
+    console.log('Nodes to stop:', nodesRef.current.length);
+    
     nodesRef.current.forEach(node => {
       try {
         node.stop?.();
         node.disconnect?.();
-      } catch(e) {}
+      } catch(e) {
+        console.log('Node cleanup error (non-critical):', e);
+      }
     });
     nodesRef.current = [];
     
