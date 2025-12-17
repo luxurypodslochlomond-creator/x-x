@@ -259,6 +259,7 @@ import UnstoppableArchitecture from './pages/UnstoppableArchitecture';
 import SafeFusion from './pages/SafeFusion';
 import DeployUF51Anywhere from './pages/DeployUF51Anywhere';
 import ProductionReady from './pages/ProductionReady';
+import OpenSourceFundingProof from './pages/OpenSourceFundingProof';
 import __Layout from './Layout.jsx';
 
 
@@ -524,6 +525,7 @@ export const PAGES = {
     "SafeFusion": SafeFusion,
     "DeployUF51Anywhere": DeployUF51Anywhere,
     "ProductionReady": ProductionReady,
+    "OpenSourceFundingProof": OpenSourceFundingProof,
 }
 
 export const pagesConfig = {
