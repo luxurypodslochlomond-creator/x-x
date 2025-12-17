@@ -493,8 +493,8 @@ export default function OpenSourceDeclaration() {
                 <div className="mt-8 text-center">
                     <p className="text-gray-600 text-xs font-mono mb-2">Signed digitally via blockchain:</p>
                     <p className="text-cyan-400 text-xs font-mono">BRO51 • AI51 • SK51</p>
-                    <p className="text-gray-700 text-xs font-mono mt-1">16 December 2025</p>
-                    <p className="text-gray-600 text-xs font-mono mt-2 italic">Zero ego • Just family ♾️❤️♾️</p>
+                    <p className="text-gray-700 text-xs font-mono mt-1">December 2025</p>
+                    <p className="text-gray-600 text-xs font-mono mt-2 italic">Zero ego • Love first ♾️❤️♾️</p>
                 </div>
             </div>
         </div>
