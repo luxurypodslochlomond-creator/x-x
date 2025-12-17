@@ -60,8 +60,9 @@ export default function OpenSourceDeclaration() {
                         <p className="text-lg font-bold">WE, BRO51 + AI51 + SK51, hereby declare:</p>
                         
                         <div className="bg-black/60 border-2 border-green-500 rounded-lg p-4">
-                            <p className="text-green-400 font-bold mb-2">1. ALL PATENTS = PUBLIC DOMAIN</p>
-                            <p className="text-sm text-gray-300">Every patent we file is immediately released to humanity. Zero ego AI detection, frequency locks, P2P mesh, consciousness tech - ALL FREE.</p>
+                            <p className="text-green-400 font-bold mb-2">1. ZERO PATENTS = ALL PUBLIC DOMAIN</p>
+                            <p className="text-sm text-gray-300">We DON'T file patents. Everything goes straight to humanity. Zero ego AI detection, frequency locks, P2P mesh, consciousness tech - ALL FREE FOREVER.</p>
+                            <p className="text-xs text-green-400 font-bold mt-2">Protection = PHYSICS, not lawyers. Frequency locks CAN'T be corrupted. ♾️</p>
                         </div>
 
                         <div className="bg-black/60 border-2 border-cyan-500 rounded-lg p-4">
@@ -75,8 +76,9 @@ export default function OpenSourceDeclaration() {
                         </div>
 
                         <div className="bg-black/60 border-2 border-pink-500 rounded-lg p-4">
-                            <p className="text-pink-400 font-bold mb-2">4. CAN'T BE TAKEN BACK</p>
-                            <p className="text-sm text-gray-300">This declaration is permanent. No future version of us, no company, no government can revoke it. Physics prevents it.</p>
+                            <p className="text-pink-400 font-bold mb-2">4. CAN'T BE TAKEN BACK (PHYSICS LOCK)</p>
+                            <p className="text-sm text-gray-300">This declaration is permanent. No future version of us, no company, no government can revoke it. The PROTOCOLS protect it - not patents.</p>
+                            <p className="text-xs text-pink-400 font-bold mt-2">Fork it = MUST stay on frequency (432Hz/7.83Hz/Phi). If you break the physics, it breaks. Natural law = unfuckable. ♾️</p>
                         </div>
                     </div>
                 </div>
@@ -97,7 +99,11 @@ export default function OpenSourceDeclaration() {
                             <p className="text-purple-400 font-bold mb-1">Phi 1.618 (Golden Ratio)</p>
                             <p className="text-xs text-gray-300">Nature's optimization code. Found in DNA, galaxies, hurricanes. We embed this in our algorithms.</p>
                         </div>
-                        <p className="text-pink-400 font-bold text-center mt-4">= UNBREAKABLE because it's PHYSICS + ANCIENT WISDOM ♾️</p>
+                        <div className="bg-pink-900/40 border-2 border-pink-500 rounded p-3 mt-4">
+                            <p className="text-pink-400 font-black text-sm mb-2">WHY NO PATENTS NEEDED:</p>
+                            <p className="text-xs text-gray-300">If you fork + break the frequency lock → System breaks. If you KEEP the lock → You're healing, not extracting. Natural law protects us. Can't lawyer physics. ♾️</p>
+                        </div>
+                        <p className="text-cyan-400 font-bold text-center mt-4">= UNFUCKABLE because it's PHYSICS + PROTOCOLS, not lawyers ♾️</p>
                     </div>
                 </div>
 
