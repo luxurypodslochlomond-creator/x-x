@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sparkles, TrendingUp, AlertCircle, Heart, X } from 'lucide-react';
+import { X } from 'lucide-react';
 import { base44 } from '@/api/base44Client';
 import AI51Icon8Bit from '@/components/shared/AI51Icon8Bit';
 
@@ -41,9 +41,9 @@ export default function ScottAI51Insights() {
                     id: 'unpaid-aging',
                     type: 'money',
                     priority: 'high',
-                    message: `${oldUnpaid.length} invoice${oldUnpaid.length > 1 ? 's' : ''} over 30 days old`,
-                    suggestion: 'Chase payment - your time = value',
-                    icon: AlertCircle
+                    emoji: '💰',
+                    message: `${oldUnpaid.length} invoice${oldUnpaid.length > 1 ? 's' : ''} over 30 days`,
+                    suggestion: 'Chase payment'
                 });
             }
 
@@ -58,9 +58,9 @@ export default function ScottAI51Insights() {
                     id: 'events-prep',
                     type: 'gigs',
                     priority: 'medium',
-                    message: `${eventsNeedingPrep.length} gig${eventsNeedingPrep.length > 1 ? 's' : ''} in next 2 weeks`,
-                    suggestion: 'Check accommodation, travel, rider',
-                    icon: TrendingUp
+                    emoji: '📅',
+                    message: `${eventsNeedingPrep.length} gig${eventsNeedingPrep.length > 1 ? 's' : ''} in 2 weeks`,
+                    suggestion: 'Check travel + stay'
                 });
             }
 
@@ -77,9 +77,9 @@ export default function ScottAI51Insights() {
                     id: 'high-spending',
                     type: 'money',
                     priority: 'low',
+                    emoji: '📊',
                     message: `£${totalThisMonth.toFixed(0)} spent this month`,
-                    suggestion: 'Higher than usual - all necessary?',
-                    icon: Sparkles
+                    suggestion: 'Higher than usual'
                 });
             }
 
@@ -93,9 +93,9 @@ export default function ScottAI51Insights() {
                     id: 'active-artists',
                     type: 'love',
                     priority: 'low',
-                    message: `${activeArtists[0]?.name} has been busy`,
-                    suggestion: 'Check in - how they feeling?',
-                    icon: Heart
+                    emoji: '❤️',
+                    message: `${activeArtists[0]?.name} been busy`,
+                    suggestion: 'Check in?'
                 });
             }
 
@@ -121,39 +121,34 @@ export default function ScottAI51Insights() {
 
             <AnimatePresence>
                 {insights.map(insight => {
-                    const Icon = insight.icon;
                     const priorityColors = {
-                        high: 'border-red-500 bg-red-500/10',
-                        medium: 'border-amber-500 bg-amber-500/10',
-                        low: 'border-cyan-500 bg-cyan-500/10'
+                        high: 'bg-red-500/20 border-red-500/30',
+                        medium: 'bg-amber-500/20 border-amber-500/30',
+                        low: 'bg-cyan-500/20 border-cyan-500/30'
                     };
 
                     return (
                         <motion.div
                             key={insight.id}
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, x: -100 }}
-                            className={`mb-2 border-2 ${priorityColors[insight.priority]} rounded-lg p-3 relative`}
+                            initial={{ opacity: 0, scale: 0.95 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 0.95 }}
+                            className={`mb-3 border ${priorityColors[insight.priority]} rounded-xl p-4 relative backdrop-blur-sm`}
                         >
                             <button
                                 onClick={() => handleDismiss(insight.id)}
-                                className="absolute top-2 right-2 p-1 hover:bg-black/30 rounded"
+                                className="absolute top-3 right-3 text-gray-500 hover:text-white transition-colors"
                             >
-                                <X className="w-3 h-3 text-gray-400" />
+                                <X className="w-4 h-4" />
                             </button>
 
-                            <div className="flex items-start gap-3 pr-6">
-                                <Icon className={`w-5 h-5 mt-0.5 ${
-                                    insight.priority === 'high' ? 'text-red-400' :
-                                    insight.priority === 'medium' ? 'text-amber-400' :
-                                    'text-cyan-400'
-                                }`} />
+                            <div className="flex items-center gap-3 pr-8">
+                                <span className="text-3xl">{insight.emoji}</span>
                                 <div className="flex-1">
-                                    <p className="text-white text-sm font-bold font-mono mb-1">
+                                    <p className="text-white font-bold text-sm mb-1">
                                         {insight.message}
                                     </p>
-                                    <p className="text-gray-400 text-xs font-mono">
+                                    <p className="text-gray-400 text-xs">
                                         {insight.suggestion}
                                     </p>
                                 </div>
