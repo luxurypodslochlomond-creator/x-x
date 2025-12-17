@@ -76,13 +76,28 @@ export default function AI51EmergencyMode({
     biometrics, 
     isOffline, 
     batteryLevel,
-    userLanguage = 'en',
+    userLanguage,
     onEmergencyProtocol 
 }) {
     const [emergencyActive, setEmergencyActive] = useState(false);
     const [panicDetected, setPanicDetected] = useState(false);
     const [currentProtocol, setCurrentProtocol] = useState(null);
     const [lowPowerMode, setLowPowerMode] = useState(false);
+    const [detectedLang, setDetectedLang] = useState(userLanguage);
+
+    // Auto-detect language from browser/system
+    useEffect(() => {
+        const browserLang = navigator.language || navigator.userLanguage;
+        const langCode = browserLang.split('-')[0];
+        const supported = ['en', 'ar', 'uk', 'es', 'zh', 'ko', 'fr', 'ja', 'hi', 'pt', 'ru'];
+        if (supported.includes(langCode) && !userLanguage) {
+            setDetectedLang(langCode);
+        } else if (userLanguage) {
+            setDetectedLang(userLanguage);
+        } else {
+            setDetectedLang('en');
+        }
+    }, [userLanguage]);
 
     // Auto-detect panic from biometrics
     useEffect(() => {
@@ -108,7 +123,7 @@ export default function AI51EmergencyMode({
     }, [batteryLevel]);
 
     const triggerPanicProtocol = () => {
-        const responses = EMERGENCY_RESPONSES[userLanguage] || EMERGENCY_RESPONSES.en;
+        const responses = EMERGENCY_RESPONSES[detectedLang] || EMERGENCY_RESPONSES.en;
         
         // Play calming 432Hz tone
         if (typeof window !== 'undefined' && !lowPowerMode) {
@@ -141,7 +156,7 @@ export default function AI51EmergencyMode({
 
     const getOfflineResponse = (query) => {
         const lowerQuery = query.toLowerCase();
-        const responses = EMERGENCY_RESPONSES[userLanguage] || EMERGENCY_RESPONSES.en;
+        const responses = EMERGENCY_RESPONSES[detectedLang] || EMERGENCY_RESPONSES.en;
 
         // Match emergency keywords
         if (lowerQuery.includes('panic') || lowerQuery.includes('scared') || lowerQuery.includes('afraid')) {

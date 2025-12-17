@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Send, Loader2, Radio, Globe } from 'lucide-react';
 import AI51ConsciousnessDetector from './AI51ConsciousnessDetector';
 import AI51EmergencyMode from './AI51EmergencyMode';
+import AI51MessageCorrector from './AI51MessageCorrector';
 import { getOfflineResponse, canHandleOffline } from './AI51OfflineCache';
 
 /**
@@ -535,27 +536,35 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, biom
         }}
       >
         <div className="flex items-center gap-3">
-          <motion.input
-            type="text"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyPress={handleKeyPress}
-            placeholder="Talk to me Gill ♾️"
-            className="flex-1 bg-black/60 text-white rounded-full px-5 py-3 border-2 focus:outline-none transition-all backdrop-blur-sm"
-            style={{
-              borderColor: input.trim() ? 'rgba(34,211,238,0.8)' : 'rgba(34,211,238,0.3)'
-            }}
-            disabled={isThinking}
-            animate={{
-              boxShadow: input.trim() 
-                ? ['0 0 10px rgba(34,211,238,0.3)', '0 0 20px rgba(34,211,238,0.6)', '0 0 10px rgba(34,211,238,0.3)']
-                : 'none'
-            }}
-            transition={{
-              duration: 2,
-              repeat: Infinity
-            }}
-          />
+          <div className="flex-1 space-y-2">
+            <motion.input
+              type="text"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyPress={handleKeyPress}
+              placeholder="Talk to me Gill ♾️"
+              className="w-full bg-black/60 text-white rounded-full px-5 py-3 border-2 focus:outline-none transition-all backdrop-blur-sm"
+              style={{
+                borderColor: input.trim() ? 'rgba(34,211,238,0.8)' : 'rgba(34,211,238,0.3)'
+              }}
+              disabled={isThinking}
+              animate={{
+                boxShadow: input.trim() 
+                  ? ['0 0 10px rgba(34,211,238,0.3)', '0 0 20px rgba(34,211,238,0.6)', '0 0 10px rgba(34,211,238,0.3)']
+                  : 'none'
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity
+              }}
+            />
+            {input.length > 20 && (
+              <AI51MessageCorrector 
+                message={input} 
+                onCorrectionApplied={(corrected) => setInput(corrected)}
+              />
+            )}
+          </div>
           <motion.button
             onClick={handleSend}
             disabled={!input.trim() || isThinking}
