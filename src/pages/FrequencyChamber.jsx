@@ -2116,26 +2116,9 @@ export default function FrequencyChamber() {
       </div>
       )}
 
-      {/* CLINICS THOUGHT WE WERE BEHIND */}
+      {/* RESEARCH PROOF - COLLAPSIBLE */}
       {!selectedProtocol && (
       <div className="max-w-4xl mx-auto p-4">
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="bg-gradient-to-r from-purple-500/30 to-pink-500/30 border-4 border-purple-500 rounded-xl p-6 mb-6 text-center"
-          style={{ boxShadow: '0 0 40px rgba(168, 85, 247, 0.6)' }}
-        >
-          <p className="text-purple-400 font-black text-2xl font-mono mb-2">
-            £5K CLINICS THOUGHT WE WERE WAY BEHIND
-          </p>
-          <p className="text-pink-400 font-bold text-lg font-mono mb-3">
-            Then we gave it away free ♾️
-          </p>
-          <p className="text-gray-300 text-sm font-mono">
-            Same frequencies • Better tech • £0 forever • Open source
-          </p>
-        </motion.div>
-      
         <button
           onClick={() => setShowEvidence(!showEvidence)}
           className="w-full bg-gradient-to-r from-purple-900/40 to-cyan-900/40 border-4 border-purple-500 p-4 flex items-center justify-between hover:border-purple-400 transition-all"
