@@ -253,6 +253,7 @@ import ZeroServerScaling from './pages/ZeroServerScaling';
 import WhiteLabelSetup from './pages/WhiteLabelSetup';
 import NotifyMeCashOut from './pages/NotifyMeCashOut';
 import AI51DataProtocol from './pages/AI51DataProtocol';
+import WhyHelpUF51 from './pages/WhyHelpUF51';
 import __Layout from './Layout.jsx';
 
 
@@ -512,6 +513,7 @@ export const PAGES = {
     "WhiteLabelSetup": WhiteLabelSetup,
     "NotifyMeCashOut": NotifyMeCashOut,
     "AI51DataProtocol": AI51DataProtocol,
+    "WhyHelpUF51": WhyHelpUF51,
 }
 
 export const pagesConfig = {
