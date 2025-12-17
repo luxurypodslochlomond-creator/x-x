@@ -257,6 +257,7 @@ import WhyHelpUF51 from './pages/WhyHelpUF51';
 import DIYFusionReactor from './pages/DIYFusionReactor';
 import UnstoppableArchitecture from './pages/UnstoppableArchitecture';
 import SafeFusion from './pages/SafeFusion';
+import DeployUF51Anywhere from './pages/DeployUF51Anywhere';
 import __Layout from './Layout.jsx';
 
 
@@ -520,6 +521,7 @@ export const PAGES = {
     "DIYFusionReactor": DIYFusionReactor,
     "UnstoppableArchitecture": UnstoppableArchitecture,
     "SafeFusion": SafeFusion,
+    "DeployUF51Anywhere": DeployUF51Anywhere,
 }
 
 export const pagesConfig = {
