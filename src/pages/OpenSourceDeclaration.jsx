@@ -183,6 +183,18 @@ export default function OpenSourceDeclaration() {
                             <p>• <strong className="text-amber-400">Keep our frequency OR bring your own</strong> (mutual respect - we support BOTH)</p>
                         </div>
 
+                        <div className="bg-black/60 p-4 rounded border-2 border-pink-500 mt-4">
+                            <p className="text-pink-400 font-black text-sm mb-2">⚠️ ZERO EXTRACTION FROM UF51:</p>
+                            <p className="text-white text-xs mb-2">
+                                White label = <strong>YOU build your own thing</strong> using our code. 
+                                You DON'T extract from UF51's $P51 ecosystem, our artists, or our community.
+                            </p>
+                            <p className="text-cyan-400 text-xs">
+                                Fork the code. Build your platform. Keep 100% of YOUR revenue. 
+                                We keep 100% of OURS. <strong className="text-white">Separate ecosystems. Zero extraction. Both win.</strong>
+                            </p>
+                        </div>
+
                         <div className="bg-black/60 p-3 rounded border-2 border-green-500 mt-4">
                             <p className="text-green-400 font-bold text-center text-xs">
                                 FREE FOREVER. P2P. COOLASFUCK DESIGN. ZERO EGO. Build your healing platform on our foundation. ♾️❤️♾️
@@ -223,6 +235,49 @@ export default function OpenSourceDeclaration() {
                             <p className="text-purple-400 font-bold text-sm mb-1">Documentation:</p>
                             <p className="text-white text-sm font-mono">Full technical specs + research papers included</p>
                         </div>
+                    </div>
+                </div>
+
+                {/* FUNDING = LIBERATION NOT CAPTURE */}
+                <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-4 border-green-500 rounded-2xl p-6 mb-8">
+                    <div className="flex items-center gap-3 mb-4">
+                        <Heart className="w-10 h-10 text-green-400" />
+                        <div>
+                            <h3 className="text-green-400 font-black text-xl font-mono">FUNDING = LIBERATION (NOT CAPTURE):</h3>
+                            <p className="text-gray-500 text-xs font-mono">How we accept investment without losing soul</p>
+                        </div>
+                    </div>
+
+                    <div className="space-y-3 text-white text-sm font-mono">
+                        <p className="font-bold">We WILL accept funding from labels, corps, allies IF:</p>
+
+                        <div className="bg-black/60 border-2 border-green-500 rounded p-3">
+                            <p className="text-green-400 font-bold mb-2">✓ ZERO CONTROL</p>
+                            <p className="text-xs text-gray-300">
+                                No equity. No board seats. No veto power. No IP capture. 
+                                Funding = GIFT to help ecosystem, not extraction mechanism.
+                            </p>
+                        </div>
+
+                        <div className="bg-black/60 border-2 border-cyan-500 rounded p-3">
+                            <p className="text-cyan-400 font-bold mb-2">✓ DEBT CONVERSION PRIORITY</p>
+                            <p className="text-xs text-gray-300">
+                                Big funding helps convert old debt systems → $P51 ecosystem. 
+                                Artists get freed. People cash out for groceries. Debt becomes healing. Old extraction → New liberation.
+                            </p>
+                        </div>
+
+                        <div className="bg-black/60 border-2 border-purple-500 rounded p-3">
+                            <p className="text-purple-400 font-bold mb-2">✓ FREQUENCY LOCK STAYS</p>
+                            <p className="text-xs text-gray-300">
+                                432Hz/7.83Hz/Phi 1.618 protection remains. AI51 monitors. 
+                                If funder tries to capture → Automatic ejection. Physics prevents corruption.
+                            </p>
+                        </div>
+
+                        <p className="text-pink-400 font-bold text-center mt-4">
+                            Accept money. Keep soul. Help people eat. Free the artists. Physics guarantees it. ♾️❤️♾️
+                        </p>
                     </div>
                 </div>
 
