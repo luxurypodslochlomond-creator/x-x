@@ -1958,59 +1958,6 @@ export default function FrequencyChamber() {
         </div>
       </div>
       
-      {/* AUDIO TEST - DEBUG */}
-      {!selectedProtocol && (
-      <div className="max-w-4xl mx-auto p-4">
-        <div className="bg-cyan-900/20 border-2 border-cyan-500 p-4 mb-4">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-cyan-400 font-mono font-bold text-sm mb-1">🔊 AUDIO TEST</p>
-              <p className="text-gray-400 font-mono text-xs">Tap to verify audio works on your device</p>
-            </div>
-            <button
-              onClick={async () => {
-                console.log('🔊 TESTING AUDIO...');
-                try {
-                  const AudioContext = window.AudioContext || window.webkitAudioContext;
-                  const testCtx = new AudioContext();
-                  console.log('Test AudioContext state:', testCtx.state);
-                  
-                  if (testCtx.state === 'suspended') {
-                    await testCtx.resume();
-                    console.log('Test context resumed:', testCtx.state);
-                  }
-                  
-                  const testOsc = testCtx.createOscillator();
-                  const testGain = testCtx.createGain();
-                  testOsc.frequency.value = 440; // A4 note
-                  testGain.gain.value = 0.3;
-                  
-                  testOsc.connect(testGain);
-                  testGain.connect(testCtx.destination);
-                  testOsc.start();
-                  console.log('✓ Test tone started (440Hz)');
-                  
-                  setTimeout(() => {
-                    testOsc.stop();
-                    testCtx.close();
-                    console.log('✓ Test tone stopped');
-                  }, 1000);
-                  
-                  alert('✓ If you heard a beep, audio works!\n\nCheck console for full logs.');
-                } catch (e) {
-                  console.error('❌ Audio test failed:', e);
-                  alert(`Audio test failed: ${e.message}`);
-                }
-              }}
-              className="px-4 py-2 bg-cyan-600 hover:bg-cyan-500 text-white font-mono text-sm font-bold rounded"
-            >
-              TEST
-            </button>
-          </div>
-        </div>
-      </div>
-      )}
-
       {/* TINNITUS BANNER - URGENT NEED */}
       {!selectedProtocol && (
       <div className="max-w-4xl mx-auto p-4">
