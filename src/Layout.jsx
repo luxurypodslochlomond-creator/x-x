@@ -7,6 +7,8 @@ import GlobalErrorBoundary from '@/components/shared/GlobalErrorBoundary';
 import COOLASFUCKErrorMonitor from '@/components/shared/COOLASFUCKErrorMonitor';
 import FloatingMusicPlayer from '@/components/shared/FloatingMusicPlayer';
 import DisasterResilienceMode from '@/components/shared/DisasterResilienceMode';
+import RealtimeDebugger from '@/components/shared/RealtimeDebugger';
+import PerformanceMonitor from '@/components/shared/PerformanceMonitor';
 import { AudioProvider, useAudio } from '@/components/shared/AudioProvider';
 import HealingCircle from '@/components/jukebox/HealingCircle';
 import PWAInstallPrompt from '@/components/shared/PWAInstallPrompt';
@@ -328,6 +330,8 @@ const LayoutInner = ({ children, currentPageName }) => {
       <COOLASFUCKErrorMonitor>
       <DisasterResilienceMode />
       <TruthCheckProtocol />
+      <RealtimeDebugger />
+      <PerformanceMonitor />
       <GlobalErrorBoundary>
       <style>{`
         @media (display-mode: standalone) { body { -webkit-touch-callout: none; -webkit-user-select: none; } }
