@@ -18,8 +18,8 @@ const PROTOCOL_SECTIONS = [
     id: 'urgent',
     name: '🔥 URGENT HEALING',
     color: '#ef4444',
-    description: 'Dental pain/infection + Tinnitus + Throat healing + Any emergency',
-    protocols: ['dental_emergency', 'tinnitus', 'throat_healing', 'emergency_universal']
+    description: 'Dental pain/infection + Tinnitus + Throat healing + Any emergency + Chronic pain',
+    protocols: ['dental_emergency', 'tinnitus', 'throat_healing', 'emergency_universal', 'chronic_pain', 'body_specific']
   },
   {
     id: 'mental',
@@ -625,8 +625,51 @@ const PROTOCOLS = {
       isBinaural: true,
       visualEntrainment: true
     }
-  }
-};
+    },
+
+    chronic_pain: {
+    id: 'chronic_pain',
+    name: 'Chronic Pain (Any Body Part)',
+    icon: Zap,
+    color: '#f59e0b',
+    description: 'Back, knee, shoulder, arthritis - pain that won\'t quit',
+    science: '174Hz pain-blocking (Gate Control Theory) + 528Hz anti-inflammatory + 4Hz theta for deep relaxation. Works on ANY body part - the frequencies target pain receptors and inflammation pathways in your nervous system, not specific locations. Your body knows where it hurts.',
+    sources: ['Gate Control Theory (Melzack & Wall)', 'Chronic pain management protocols', 'Anti-inflammatory frequency studies'],
+    ancientWisdom: 'Healers never needed to know WHERE you hurt - sound healing works on the whole system. Your body directs the frequencies to where they\'re needed most.',
+    config: {
+      primary: 174,
+      secondary: 4,
+      carrier: 528,
+      breathRate: 5,
+      noiseType: 'brown',
+      noiseLevel: 0.15,
+      isBinaural: true,
+      visualEntrainment: true
+    }
+    },
+
+    body_specific: {
+    id: 'body_specific',
+    name: 'Animal Healing (Dogs, Cats, All)',
+    icon: Heart,
+    color: '#22c55e',
+    description: 'Your pet in pain? They hear frequencies we can\'t - this helps them too',
+    science: 'Animals hear 20Hz-65,000Hz (dogs), 45Hz-64,000Hz (cats) vs humans 20Hz-20,000Hz. Same healing frequencies work - 174Hz pain relief, 528Hz DNA repair, 7.83Hz Earth resonance. Play near them (not loud). They\'ll move closer if it helps, away if they don\'t need it. Trust them.',
+    sources: ['Veterinary acoustics research', 'Animal frequency perception studies', 'Comparative hearing ranges'],
+    ancientWisdom: 'Every culture knew animals respond to healing sounds. They\'re more sensitive than us. No words needed - just frequency.',
+    specialInstructions: '🐕 ANIMAL USE: Play at LOW volume near your pet. Let them choose - if they stay close, it\'s helping. If they leave, respect that. Never force. Works for dogs, cats, horses, birds, ALL beings. They know what they need better than we do.',
+    config: {
+      primary: 174,
+      secondary: 528,
+      carrier: 200,
+      breathRate: 4,
+      noiseType: 'pink',
+      noiseLevel: 0.1,
+      isBinaural: false,
+      visualEntrainment: false
+    }
+    }
+    };
 
 // === 8-BIT PIXEL ART ICON COMPONENT ===
 const PixelIcon = ({ icon: Icon, color, size = 48, animate = false }) => (
@@ -2060,6 +2103,22 @@ export default function FrequencyChamber() {
                 We suggest: <strong style={{ color: PROTOCOLS[suggestedProtocol].color }}>{PROTOCOLS[suggestedProtocol].name}</strong> (marked "NOW" below)
               </p>
             </div>
+          </div>
+        </div>
+      </div>
+      )}
+
+      {/* HOW IT WORKS - BODY SPECIFIC VS HOLISTIC */}
+      {!selectedProtocol && (
+      <div className="max-w-4xl mx-auto p-4">
+        <div className="bg-gradient-to-r from-amber-500/20 to-pink-500/20 border-4 border-amber-500 p-6">
+          <h3 className="text-amber-400 font-black font-mono text-lg mb-3">🎯 BODY-SPECIFIC OR WHOLE SYSTEM?</h3>
+          <div className="space-y-3 text-sm font-mono text-white">
+            <p><strong className="text-amber-400">BOTH WORK:</strong></p>
+            <p>• Tooth pain? <strong>Dental Emergency</strong> targets jaw/tooth specifically (pain-blocking + antimicrobial frequencies)</p>
+            <p>• Back pain, knee pain, arthritis? <strong>Chronic Pain</strong> works on ANY body part (your nervous system directs it where needed)</p>
+            <p>• Stressed/anxious? <strong>Mental Health</strong> protocols calm your whole nervous system</p>
+            <p><strong className="text-pink-400">THE TRUTH:</strong> Frequencies work on your NERVOUS SYSTEM, not just one spot. But some protocols target specific areas better. Use what feels right. Your body knows.</p>
           </div>
         </div>
       </div>
