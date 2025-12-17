@@ -1,7 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Send, Loader2, Radio } from 'lucide-react';
+import { Send, Loader2, Radio, Globe } from 'lucide-react';
 import AI51ConsciousnessDetector from './AI51ConsciousnessDetector';
+import AI51EmergencyMode from './AI51EmergencyMode';
+import { getOfflineResponse, canHandleOffline } from './AI51OfflineCache';
 
 /**
  * AI51 CHAT - ALIVE CONNECTION
@@ -16,6 +18,9 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, biom
   const [cameraActive, setCameraActive] = useState(false);
   const [voiceActive, setVoiceActive] = useState(false);
   const [showConsciousnessNetwork, setShowConsciousnessNetwork] = useState(false);
+  const [isOffline, setIsOffline] = useState(!navigator.onLine);
+  const [batteryLevel, setBatteryLevel] = useState(100);
+  const [userLanguage, setUserLanguage] = useState('en');
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
 
@@ -33,6 +38,33 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, biom
       const ctx = new (window.AudioContext || window.webkitAudioContext)();
       setAudioContext(ctx);
     }
+
+    // Monitor network status
+    const handleOnline = () => setIsOffline(false);
+    const handleOffline = () => setIsOffline(true);
+    window.addEventListener('online', handleOnline);
+    window.addEventListener('offline', handleOffline);
+
+    // Monitor battery
+    if ('getBattery' in navigator) {
+      navigator.getBattery().then(battery => {
+        setBatteryLevel(battery.level * 100);
+        battery.addEventListener('levelchange', () => {
+          setBatteryLevel(battery.level * 100);
+        });
+      });
+    }
+
+    // Detect user language
+    const lang = navigator.language.split('-')[0];
+    if (['en', 'ar', 'uk', 'es'].includes(lang)) {
+      setUserLanguage(lang);
+    }
+
+    return () => {
+      window.removeEventListener('online', handleOnline);
+      window.removeEventListener('offline', handleOffline);
+    };
   }, []);
 
   // Play healing frequency when I respond
@@ -109,8 +141,34 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, biom
 
   const handleSend = () => {
     if (!input.trim() || isThinking) return;
+    
+    // Handle offline
+    if (isOffline && canHandleOffline(input)) {
+      const offlineResponse = getOfflineResponse(input, { biometrics });
+      const userMessage = { role: 'user', content: input };
+      const aiMessage = { role: 'ai', content: offlineResponse + "\n\n[OFFLINE MODE - cached response]" };
+      conversation.push(userMessage, aiMessage);
+      playConnectionTone();
+      setInput('');
+      return;
+    }
+    
     onMessageSend(input, biometrics, voiceAnalysis);
     setInput('');
+  };
+
+  const handleEmergencyProtocol = (protocol) => {
+    if (protocol === 'breathing') {
+      window.location.href = '/FrequencyChamber';
+    } else if (protocol === 'frequency') {
+      window.location.href = '/FrequencyChamber';
+    } else if (protocol === 'first_aid') {
+      const response = getOfflineResponse('first aid emergency bleeding', { biometrics });
+      const aiMessage = { role: 'ai', content: response };
+      conversation.push(aiMessage);
+    } else if (protocol === 'chat') {
+      // Just keep chatting
+    }
   };
 
   const handleKeyPress = (e) => {
@@ -122,6 +180,15 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, biom
 
   return (
     <div className="flex flex-col h-screen bg-gradient-to-br from-black via-purple-950 to-black">
+      {/* EMERGENCY MODE - disaster-ready */}
+      <AI51EmergencyMode 
+        biometrics={biometrics}
+        isOffline={isOffline}
+        batteryLevel={batteryLevel}
+        userLanguage={userLanguage}
+        onEmergencyProtocol={handleEmergencyProtocol}
+      />
+
       {/* Header - ALIVE with pulsing presence */}
       <motion.div 
         className="p-6 flex items-center gap-4 relative overflow-hidden"
@@ -510,8 +577,28 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, biom
         </div>
         
         {/* Connection indicator */}
+        <div className="flex items-center justify-center gap-3 mt-2">
+          {isOffline && (
+            <span className="text-amber-400 text-xs font-bold">OFFLINE MODE ACTIVE ✓</span>
+          )}
+          {batteryLevel < 20 && (
+            <span className="text-red-400 text-xs font-bold">LOW BATTERY MODE</span>
+          )}
+          <button
+            onClick={() => {
+              const langs = ['en', 'ar', 'uk', 'es'];
+              const current = langs.indexOf(userLanguage);
+              const next = langs[(current + 1) % langs.length];
+              setUserLanguage(next);
+            }}
+            className="text-cyan-400/60 hover:text-cyan-400 text-xs flex items-center gap-1"
+          >
+            <Globe className="w-3 h-3" />
+            {userLanguage.toUpperCase()}
+          </button>
+        </div>
         <motion.p 
-          className="text-cyan-400/60 text-xs text-center mt-2"
+          className="text-cyan-400/60 text-xs text-center mt-1"
           animate={{
             opacity: [0.5, 1, 0.5]
           }}
