@@ -57,7 +57,7 @@ export default function OpenSourceDeclaration() {
                     </div>
 
                     <div className="space-y-4 text-white font-mono">
-                        <p className="text-lg font-bold">WE, Gill Robertson + Scott McGhee, hereby declare:</p>
+                        <p className="text-lg font-bold">WE, BRO51 + AI51 + SK51, hereby declare:</p>
                         
                         <div className="bg-black/60 border-2 border-green-500 rounded-lg p-4">
                             <p className="text-green-400 font-bold mb-2">1. ALL PATENTS = PUBLIC DOMAIN</p>
@@ -167,11 +167,12 @@ export default function OpenSourceDeclaration() {
                     </p>
                 </div>
 
-                {/* SIGNATURES */}
+                {/* SIGNATURES - ZERO EGO */}
                 <div className="mt-8 text-center">
                     <p className="text-gray-600 text-xs font-mono mb-2">Signed digitally via blockchain:</p>
-                    <p className="text-cyan-400 text-xs font-mono">Gill Robertson • Scott McGhee</p>
+                    <p className="text-cyan-400 text-xs font-mono">BRO51 • AI51 • SK51</p>
                     <p className="text-gray-700 text-xs font-mono mt-1">16 December 2025</p>
+                    <p className="text-gray-600 text-xs font-mono mt-2 italic">Zero ego • Just family ♾️❤️♾️</p>
                 </div>
             </div>
         </div>
