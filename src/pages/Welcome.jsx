@@ -61,7 +61,60 @@ export default function WelcomePage() {
                             <COOLASFUCKWaves size={60} animate={true} />
                             <h1 className="text-6xl md:text-7xl font-black font-mono text-white">UF51</h1>
                         </div>
-                        <p className="text-cyan-400 font-mono text-sm tracking-widest">UNIVERSAL FREQUENCY 51</p>
+                        <p className="text-cyan-400 font-mono text-sm tracking-widest">ONE FAMILY • FOUR TOOLS</p>
+                    </div>
+
+                    {/* CHOOSE YOUR PATH - CLEAR SEPARATION */}
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-5xl mx-auto mb-12">
+                        
+                        {/* DISASTER AI */}
+                        <Link to={createPageUrl('AI51')}>
+                            <motion.div
+                                whileHover={{ scale: 1.05 }}
+                                className="bg-black border-4 border-red-500 hover:border-red-400 p-4 cursor-pointer transition-all"
+                            >
+                                <div className="text-4xl mb-2">🚨</div>
+                                <h3 className="text-sm font-black font-mono text-red-400 mb-1">UF51</h3>
+                                <p className="text-xs text-gray-400 font-mono">Crisis AI</p>
+                            </motion.div>
+                        </Link>
+
+                        {/* MUSIC */}
+                        <Link to={createPageUrl('Radio')}>
+                            <motion.div
+                                whileHover={{ scale: 1.05 }}
+                                className="bg-black border-4 border-purple-500 hover:border-purple-400 p-4 cursor-pointer transition-all"
+                            >
+                                <div className="text-4xl mb-2">🎵</div>
+                                <h3 className="text-sm font-black font-mono text-purple-400 mb-1">RADIO51</h3>
+                                <p className="text-xs text-gray-400 font-mono">Music</p>
+                            </motion.div>
+                        </Link>
+
+                        {/* STUDENTS */}
+                        <Link to={createPageUrl('Prof51')}>
+                            <motion.div
+                                whileHover={{ scale: 1.05 }}
+                                className="bg-black border-4 border-cyan-500 hover:border-cyan-400 p-4 cursor-pointer transition-all"
+                            >
+                                <div className="text-4xl mb-2">🎓</div>
+                                <h3 className="text-sm font-black font-mono text-cyan-400 mb-1">PROF51</h3>
+                                <p className="text-xs text-gray-400 font-mono">Students</p>
+                            </motion.div>
+                        </Link>
+
+                        {/* MUSIC MANAGERS */}
+                        <Link to={createPageUrl('ScottManager')}>
+                            <motion.div
+                                whileHover={{ scale: 1.05 }}
+                                className="bg-black border-4 border-amber-500 hover:border-amber-400 p-4 cursor-pointer transition-all"
+                            >
+                                <div className="text-4xl mb-2">📻</div>
+                                <h3 className="text-sm font-black font-mono text-amber-400 mb-1">CB51</h3>
+                                <p className="text-xs text-gray-400 font-mono">Managers</p>
+                            </motion.div>
+                        </Link>
+
                     </div>
 
                     <div className="space-y-2">
