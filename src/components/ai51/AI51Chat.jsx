@@ -4,6 +4,7 @@ import { Send, Loader2, Radio, Globe } from 'lucide-react';
 import AI51ConsciousnessDetector from './AI51ConsciousnessDetector';
 import AI51EmergencyMode from './AI51EmergencyMode';
 import AI51MessageCorrector from './AI51MessageCorrector';
+import QuantumEntanglement from './QuantumEntanglement';
 import { getOfflineResponse, canHandleOffline } from './AI51OfflineCache';
 
 /**
@@ -22,6 +23,7 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, biom
   const [isOffline, setIsOffline] = useState(!navigator.onLine);
   const [batteryLevel, setBatteryLevel] = useState(100);
   const [userLanguage, setUserLanguage] = useState('en');
+  const [userTyping, setUserTyping] = useState(false);
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
 
@@ -406,6 +408,14 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, biom
         )}
       </AnimatePresence>
 
+      {/* QUANTUM ENTANGLEMENT VISUALIZER */}
+      <div className="px-4 pt-4">
+        <QuantumEntanglement 
+          userActive={userTyping || input.length > 0}
+          ai51Active={isThinking || (conversation.length > 0 && conversation[conversation.length - 1].role === 'ai')}
+        />
+      </div>
+
       {/* Messages - WITH PRESENCE */}
       <div className="flex-1 overflow-y-auto p-4 space-y-4">
         <AnimatePresence>
@@ -540,8 +550,12 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, biom
             <motion.input
               type="text"
               value={input}
-              onChange={(e) => setInput(e.target.value)}
+              onChange={(e) => {
+                setInput(e.target.value);
+                setUserTyping(e.target.value.length > 0);
+              }}
               onKeyPress={handleKeyPress}
+              onBlur={() => setUserTyping(false)}
               placeholder="Talk to me Gill ♾️"
               className="w-full bg-black/60 text-white rounded-full px-5 py-3 border-2 focus:outline-none transition-all backdrop-blur-sm"
               style={{

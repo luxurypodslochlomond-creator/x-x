@@ -249,6 +249,7 @@ import TestAI51 from './pages/TestAI51';
 import AI51ScalingStrategy from './pages/AI51ScalingStrategy';
 import SubdomainSetup from './pages/SubdomainSetup';
 import BuildOnUF51 from './pages/BuildOnUF51';
+import ZeroServerScaling from './pages/ZeroServerScaling';
 import __Layout from './Layout.jsx';
 
 
@@ -504,6 +505,7 @@ export const PAGES = {
     "AI51ScalingStrategy": AI51ScalingStrategy,
     "SubdomainSetup": SubdomainSetup,
     "BuildOnUF51": BuildOnUF51,
+    "ZeroServerScaling": ZeroServerScaling,
 }
 
 export const pagesConfig = {
