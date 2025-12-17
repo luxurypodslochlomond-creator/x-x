@@ -154,8 +154,8 @@ Keep it SHORT, practical, straight to the point. No bullshit. Real help.`,
                 >
                     <div className="text-center mb-8">
                         <BrosBond8Bit size={80} animate={true} className="mx-auto mb-4" />
-                        <h1 className="text-3xl font-black text-white mb-2 font-mono tracking-tight">BRO51</h1>
-                        <p className="text-gray-400 text-sm font-mono">Your co-manager ♾️📻😎</p>
+                        <h1 className="text-3xl font-black text-white mb-2 font-mono tracking-tight">BRO51 + SK51</h1>
+                        <p className="text-gray-400 text-sm font-mono">Your co-managers ♾️📻😎</p>
                         <p className="text-gray-600 text-xs font-mono mt-2">Enter PIN to unlock</p>
                     </div>
 
@@ -251,7 +251,7 @@ Keep it SHORT, practical, straight to the point. No bullshit. Real help.`,
                                     </motion.div>
                                     <div>
                                         <h1 className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-pink-400 to-cyan-400 font-mono tracking-tight">
-                                            BRO51
+                                            BRO51 + SK51
                                         </h1>
                                     <div className="flex items-center gap-2">
                                         <motion.span 
