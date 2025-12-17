@@ -2206,12 +2206,12 @@ export default function FrequencyChamber() {
             </div>
 
             <div className="bg-black/60 border-2 border-cyan-500 rounded p-3 mb-3">
-              <p className="text-cyan-400 font-black text-xs mb-2">🏥 VS NAMED CLINICS (We Win):</p>
+              <p className="text-cyan-400 font-black text-xs mb-2">🏥 VS PRIVATE CLINICS (We Win):</p>
               <ul className="space-y-1 text-[10px] text-gray-300">
-                <li>• <strong className="text-white">Harley Street (London):</strong> £5k-£15k for 6-week course. Audio only. Us = £0, quad-modal, instant.</li>
-                <li>• <strong className="text-white">HeartMath (California):</strong> $295 HRV device. Us = FREE camera-based HRV, same medical accuracy.</li>
-                <li>• <strong className="text-white">BrainTap (Nashville):</strong> $647 headset. Audio+visual. Us = FREE, adds haptic+biofeedback.</li>
-                <li>• <strong className="text-white">Monroe Institute (Virginia):</strong> $1,495/week retreat. Binaural only. Us = ALL frequencies, 24/7, FREE.</li>
+                <li>• <strong className="text-white">Elite frequency therapy:</strong> £5k-£15k for 6-week course. Audio only. Us = £0, quad-modal, instant.</li>
+                <li>• <strong className="text-white">HRV monitoring devices:</strong> £250-£500 per device. Us = FREE camera-based HRV, same medical accuracy.</li>
+                <li>• <strong className="text-white">Audio-visual headsets:</strong> £400-£650 retail. Audio+visual. Us = FREE, adds haptic+biofeedback.</li>
+                <li>• <strong className="text-white">Meditation retreats:</strong> £1k-£2k/week. Binaural only. Us = ALL frequencies, 24/7, FREE.</li>
               </ul>
             </div>
 

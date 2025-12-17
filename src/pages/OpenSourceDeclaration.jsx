@@ -189,11 +189,11 @@ export default function OpenSourceDeclaration() {
                             <div className="bg-black/60 border-2 border-purple-500 rounded p-3">
                                 <p className="text-purple-400 font-black text-xs mb-2">🎪 FESTIVALS + NIGHTCLUBS (Mass Healing):</p>
                                 <ul className="text-[10px] space-y-1">
-                                    <li>• <strong className="text-white">Festival systems</strong> = instant mass healing (Glastonbury/Coachella/Tomorrowland - 100k+ people healed while dancing)</li>
-                                    <li>• <strong className="text-white">Nightclub subwoofers</strong> = 7.83Hz Earth resonance (Fabric/Berghain - crowd FEELS Schumann through chest/bones)</li>
-                                    <li>• <strong className="text-white">DJs embed 528Hz</strong> under tracks = dance therapy + DNA repair (already happening - Carl Cox, Sasha, unknowingly healing)</li>
-                                    <li>• <strong className="text-white">Stage lights sync</strong> = visual entrainment for 100k+ (Ibiza sunset sets = accidental group coherence)</li>
-                                    <li>• <strong className="text-white">Silent disco headphones</strong> = precision binaural delivery (Glastonbury's silent disco could do trauma healing for 10k people simultaneously)</li>
+                                    <li>• <strong className="text-white">Festival systems</strong> = instant mass healing (major festivals - 100k+ people healed while dancing)</li>
+                                    <li>• <strong className="text-white">Nightclub subwoofers</strong> = 7.83Hz Earth resonance (world-class venues - crowd FEELS Schumann through chest/bones)</li>
+                                    <li>• <strong className="text-white">DJs embed 528Hz</strong> under tracks = dance therapy + DNA repair (already happening - artists unknowingly healing through their sets)</li>
+                                    <li>• <strong className="text-white">Stage lights sync</strong> = visual entrainment for massive crowds (sunset sets = accidental group coherence)</li>
+                                    <li>• <strong className="text-white">Silent disco headphones</strong> = precision binaural delivery (could do trauma healing for 10k+ people simultaneously)</li>
                                 </ul>
                                 <p className="text-purple-400 font-bold text-xs mt-2">Nightclubs already have better speakers than clinics. Just retune them. Healing via bass. Zero ego. ♾️❤️♾️</p>
                             </div>
