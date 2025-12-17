@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Heart, Moon, Brain, Zap, Shield, Wind, Sun, Volume2, VolumeX, Clock, Info, X, Camera, Activity, Ear, Share2, Music, Mic, Globe } from 'lucide-react';
-import { COOLASFUCKWaves, COOLASFUCKBrain, COOLASFUCKHeart, COOLASFUCKMoon, COOLASFUCKShield } from '@/components/shared/COOLASFUCKIcon';
+import { COOLASFUCKWaves, COOLASFUCKBrain, COOLASFUCKHeart, COOLASFUCKMoon, COOLASFUCKShield, COOLASFUCKTooth } from '@/components/shared/COOLASFUCKIcon';
 import BiometricHealing from '@/components/radio/BiometricHealing';
 import { base44 } from '@/api/base44Client';
 import { Link } from 'react-router-dom';
@@ -68,8 +68,8 @@ const PROTOCOL_SECTIONS = [
 const PROTOCOLS = {
   dental_emergency: {
     id: 'dental_emergency',
-    name: '🦷 Root Canal/Infection',
-    icon: Shield,
+    name: 'Root Canal/Infection',
+    icon: COOLASFUCKTooth,
     color: '#ef4444',
     description: 'Pain + infection + inflammation emergency relief',
     science: '174Hz pain-blocking (Gate Control Theory - Melzack & Wall) + 528Hz DNA repair/anti-inflammatory + 741Hz detoxification + 10kHz antimicrobial (PubMed studies show specific frequencies inhibit bacterial growth). Multi-frequency approach targets pain receptors, reduces inflammation, and fights infection at cellular level. NOT a replacement for dentist - helps NOW while you get proper treatment.',

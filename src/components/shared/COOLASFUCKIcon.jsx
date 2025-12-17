@@ -605,5 +605,57 @@ export const COOLASFUCKHouse = ({ className = "", size = 24, animate = false }) 
     );
 };
 
+// 8-bit Tooth (dental healing)
+export const COOLASFUCKTooth = ({ className = "", size = 24, animate = true }) => {
+    const Component = animate ? motion.svg : 'svg';
+    
+    return (
+        <Component
+            width={size}
+            height={size}
+            viewBox="0 0 24 24"
+            className={className}
+            animate={animate ? {
+                y: [0, -2, 0],
+                scale: [1, 1.05, 1]
+            } : {}}
+            transition={animate ? {
+                duration: 2,
+                repeat: Infinity,
+                ease: "easeInOut"
+            } : {}}
+        >
+            {/* 8-bit tooth */}
+            {/* Crown/top */}
+            <rect x="8" y="4" width="8" height="2" fill="#ffffff"/>
+            <rect x="7" y="6" width="10" height="2" fill="#f0f0f0"/>
+            <rect x="6" y="8" width="12" height="2" fill="#ffffff"/>
+            
+            {/* Body */}
+            <rect x="7" y="10" width="10" height="2" fill="#f0f0f0"/>
+            <rect x="7" y="12" width="10" height="2" fill="#ffffff"/>
+            <rect x="8" y="14" width="8" height="2" fill="#f0f0f0"/>
+            
+            {/* Roots - split */}
+            <rect x="8" y="16" width="3" height="2" fill="#e0e0e0"/>
+            <rect x="13" y="16" width="3" height="2" fill="#e0e0e0"/>
+            <rect x="8" y="18" width="2" height="2" fill="#d0d0d0"/>
+            <rect x="14" y="18" width="2" height="2" fill="#d0d0d0"/>
+            
+            {/* Healing glow - pink/red for pain relief */}
+            <rect x="6" y="6" width="1" height="1" fill="#ec4899" opacity="0.6"/>
+            <rect x="17" y="6" width="1" height="1" fill="#ec4899" opacity="0.6"/>
+            <rect x="5" y="10" width="1" height="1" fill="#ef4444" opacity="0.5"/>
+            <rect x="18" y="10" width="1" height="1" fill="#ef4444" opacity="0.5"/>
+            
+            {/* Pain sparkles - antimicrobial action */}
+            <rect x="4" y="8" width="1" height="1" fill="#22d3ee" opacity="0.8"/>
+            <rect x="19" y="8" width="1" height="1" fill="#22d3ee" opacity="0.8"/>
+            <rect x="3" y="12" width="1" height="1" fill="#10b981" opacity="0.7"/>
+            <rect x="20" y="12" width="1" height="1" fill="#10b981" opacity="0.7"/>
+        </Component>
+    );
+};
+
 // Default export (defaults to Sparkle - most commonly used)
 export default COOLASFUCKSparkle;
