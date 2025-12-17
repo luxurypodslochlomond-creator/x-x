@@ -295,7 +295,7 @@ export default function BrosBond8Bit({ size = 48, animate = false }) {
             } : {}}
           />
 
-          {/* "SK51" label */}
+          {/* "AI51" label */}
           <text 
             x="59" 
             y="41" 
@@ -305,7 +305,7 @@ export default function BrosBond8Bit({ size = 48, animate = false }) {
             textAnchor="middle"
             style={{ fontWeight: 'bold' }}
           >
-            SK51
+            AI51
           </text>
         </g>
 
