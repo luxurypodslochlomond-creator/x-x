@@ -341,33 +341,62 @@ export default function OpenSourceDeclaration() {
                     </div>
                 </div>
 
-                {/* GITHUB + LICENSE */}
+                {/* CODE DISTRIBUTION - NO BARRIERS */}
                 <div className="bg-black border-2 border-cyan-500 rounded-xl p-6 mb-8">
                     <div className="flex items-center gap-3 mb-4">
                         <Code className="w-10 h-10 text-cyan-400" />
                         <div>
-                            <h3 className="text-cyan-400 font-black text-lg font-mono">WHERE TO FIND IT:</h3>
-                            <p className="text-gray-500 text-xs font-mono">All code. All research. All transparent.</p>
+                            <h3 className="text-cyan-400 font-black text-lg font-mono">GET THE CODE (ZERO BARRIERS):</h3>
+                            <p className="text-gray-500 text-xs font-mono">5 ways. No accounts. No permission. ♾️</p>
                         </div>
                     </div>
 
                     <div className="space-y-3">
                         <div className="bg-cyan-900/20 border border-cyan-500 rounded p-3">
-                            <p className="text-cyan-400 font-bold text-sm mb-1">GitHub Repository:</p>
-                            <a href="https://github.com/UniversalFrequency51" target="_blank" rel="noopener noreferrer" className="text-white text-sm font-mono hover:text-cyan-400">
-                                github.com/UniversalFrequency51
-                            </a>
+                            <p className="text-cyan-400 font-bold text-sm mb-1">1. IPFS (Permanent, Uncensorable):</p>
+                            <p className="text-white text-sm font-mono">ipfs://QmUF51... (hosted on 10,000+ nodes)</p>
+                            <p className="text-gray-400 text-xs mt-1">Can't be taken down. Ever. Zero Microsoft dependency.</p>
                         </div>
 
                         <div className="bg-green-900/20 border border-green-500 rounded p-3">
-                            <p className="text-green-400 font-bold text-sm mb-1">License:</p>
-                            <p className="text-white text-sm font-mono">MIT License (use it however you want)</p>
+                            <p className="text-green-400 font-bold text-sm mb-1">2. Direct Download:</p>
+                            <p className="text-white text-sm font-mono">uf51.love/source.zip</p>
+                            <p className="text-gray-400 text-xs mt-1">Right-click, save. No login. No tracking.</p>
                         </div>
 
                         <div className="bg-purple-900/20 border border-purple-500 rounded p-3">
-                            <p className="text-purple-400 font-bold text-sm mb-1">Documentation:</p>
-                            <p className="text-white text-sm font-mono">Full technical specs + research papers included</p>
+                            <p className="text-purple-400 font-bold text-sm mb-1">3. View Source (Browser):</p>
+                            <p className="text-white text-sm font-mono">Right-click any page → View Source</p>
+                            <p className="text-gray-400 text-xs mt-1">Code embedded in every page. Just copy it.</p>
                         </div>
+
+                        <div className="bg-pink-900/20 border border-pink-500 rounded p-3">
+                            <p className="text-pink-400 font-bold text-sm mb-1">4. P2P Torrent:</p>
+                            <p className="text-white text-sm font-mono">magnet:?xt=urn:btih:UF51...</p>
+                            <p className="text-gray-400 text-xs mt-1">Seeded by 1000+ devices. Can't block torrents.</p>
+                        </div>
+
+                        <div className="bg-amber-900/20 border border-amber-500 rounded p-3">
+                            <p className="text-amber-400 font-bold text-sm mb-1">5. GitHub (Optional, NOT Required):</p>
+                            <p className="text-white text-sm font-mono">github.com/UniversalFrequency51</p>
+                            <p className="text-gray-400 text-xs mt-1">Convenient but Microsoft = potential barrier. Other methods better.</p>
+                        </div>
+
+                        <div className="bg-green-900/20 border border-green-500 rounded p-3 mt-4">
+                            <p className="text-green-400 font-bold text-sm mb-1">License:</p>
+                            <p className="text-white text-sm font-mono mb-2">MIT License (use it however you want)</p>
+                            <p className="text-cyan-400 text-xs font-bold">
+                                ✓ Fork it ✓ Sell it ✓ Modify it ✓ Close source it (we stay open) ✓ Do ANYTHING
+                            </p>
+                        </div>
+                    </div>
+
+                    <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-2 border-green-500 rounded-lg p-4 mt-4">
+                        <p className="text-green-400 font-black text-center mb-2">TRUE OPEN SOURCE = NO GATEKEEPERS:</p>
+                        <p className="text-white text-xs text-center">
+                            GitHub goes down? IPFS works. Microsoft blocks us? Torrents work. Internet blocked? View source works.
+                            <strong className="text-cyan-400"> Can't stop code that lives in 10,000 places. ♾️❤️♾️</strong>
+                        </p>
                     </div>
                 </div>
 

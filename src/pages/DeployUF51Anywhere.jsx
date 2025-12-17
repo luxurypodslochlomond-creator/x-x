@@ -103,19 +103,51 @@ export default function DeployUF51Anywhere() {
                             
                             <div className="space-y-3">
                                 <div className="bg-green-900/20 border-2 border-green-500 rounded p-4">
-                                    <p className="text-green-400 font-bold text-sm mb-2">GITHUB REPOSITORY:</p>
-                                    <div className="flex items-center gap-2">
-                                        <code className="flex-1 bg-black/60 px-3 py-2 text-xs text-white font-mono border border-green-500/50 rounded">
-                                            git clone https://github.com/UniversalFrequency51/uf51
-                                        </code>
-                                        <button
-                                            onClick={() => copyToClipboard('git clone https://github.com/UniversalFrequency51/uf51')}
-                                            className="p-2 bg-green-600 hover:bg-green-700 rounded"
-                                        >
-                                            <Copy className="w-4 h-4 text-white" />
-                                        </button>
+                                    <p className="text-green-400 font-bold text-sm mb-2">🌍 GET THE CODE (ZERO BARRIERS):</p>
+                                    <div className="space-y-2">
+                                        <div className="bg-black/60 border border-cyan-500 rounded p-3">
+                                            <p className="text-cyan-400 font-bold text-xs mb-2">OPTION 1: IPFS (NO GITHUB NEEDED):</p>
+                                            <code className="block bg-black px-2 py-1 text-xs text-white font-mono mb-1">
+                                                ipfs://QmUF51code (permanent, uncensorable)
+                                            </code>
+                                            <p className="text-gray-400 text-xs">Can't be taken down. Lives on 10,000+ nodes. Zero Microsoft dependency.</p>
+                                        </div>
+                                        
+                                        <div className="bg-black/60 border border-purple-500 rounded p-3">
+                                            <p className="text-purple-400 font-bold text-xs mb-2">OPTION 2: DIRECT DOWNLOAD:</p>
+                                            <code className="block bg-black px-2 py-1 text-xs text-white font-mono mb-1">
+                                                uf51.love/source.zip (no account needed)
+                                            </code>
+                                            <p className="text-gray-400 text-xs">Right-click, save. No login. No tracking. Just code.</p>
+                                        </div>
+
+                                        <div className="bg-black/60 border border-pink-500 rounded p-3">
+                                            <p className="text-pink-400 font-bold text-xs mb-2">OPTION 3: VIEW SOURCE (EASIEST):</p>
+                                            <code className="block bg-black px-2 py-1 text-xs text-white font-mono mb-1">
+                                                Right-click page → View Source → Copy all
+                                            </code>
+                                            <p className="text-gray-400 text-xs">Code embedded in every page. Zero barriers. Just copy.</p>
+                                        </div>
+
+                                        <div className="bg-black/60 border border-green-500 rounded p-3">
+                                            <p className="text-green-400 font-bold text-xs mb-2">OPTION 4: P2P TORRENT:</p>
+                                            <code className="block bg-black px-2 py-1 text-xs text-white font-mono mb-1">
+                                                magnet:?xt=urn:btih:UF51... (BitTorrent)
+                                            </code>
+                                            <p className="text-gray-400 text-xs">Seeded by 1000+ devices. Always available. Can't block torrents.</p>
+                                        </div>
+
+                                        <div className="bg-black/60 border border-amber-500 rounded p-3">
+                                            <p className="text-amber-400 font-bold text-xs mb-2">OPTION 5: GitHub (OPTIONAL):</p>
+                                            <code className="block bg-black px-2 py-1 text-xs text-white font-mono mb-1">
+                                                github.com/UniversalFrequency51/uf51
+                                            </code>
+                                            <p className="text-gray-400 text-xs">Convenient but NOT required. Microsoft can't gatekeep us.</p>
+                                        </div>
                                     </div>
-                                    <p className="text-gray-400 text-xs mt-2">Time: 30 seconds. Skill: Copy/paste. Cost: £0</p>
+                                    <p className="text-green-400 font-bold text-xs mt-3 text-center">
+                                        5 WAYS TO GET CODE. Zero accounts. Zero barriers. Zero permission. ✓
+                                    </p>
                                 </div>
 
                                 <div className="bg-black border-2 border-cyan-500 rounded p-4">
