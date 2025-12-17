@@ -66,14 +66,25 @@ export default function NotifyMeCashOut() {
                     <p className="text-xl text-cyan-400 font-mono">When $P51 → £ cash-out is ready</p>
                 </motion.div>
 
-                <div className="bg-black border-4 border-amber-500 p-8 space-y-6">
-                    <h2 className="text-2xl font-black font-mono text-amber-400">THE PLAN:</h2>
+                <div className="bg-black border-4 border-red-500 p-8 space-y-6">
+                    <h2 className="text-2xl font-black font-mono text-red-400">HONEST TRUTH:</h2>
                     <div className="space-y-3 font-mono text-sm">
-                        <p className="text-gray-300">✓ Week 1-2: Revolut Business API integration</p>
-                        <p className="text-gray-300">✓ Week 3-4: Live testing with small amounts</p>
-                        <p className="text-gray-300">✓ Week 5-6: Open to 100 early supporters</p>
-                        <p className="text-gray-300">✓ Week 7-8: Full launch - everyone can cash out</p>
-                        <p className="text-green-400 font-bold pt-2">Target: 8-10 weeks from now</p>
+                        <p className="text-white font-bold">We DON'T have funding yet to build cash-out.</p>
+                        <p className="text-gray-300">Need: £50k-100k for Revolut integration + legal + testing</p>
+                        <p className="text-gray-300">Trying: Grant applications, ethical investors</p>
+                        <p className="text-gray-300">Timeline: Unknown - could be 2 months or 12 months</p>
+                        <p className="text-amber-400 font-bold pt-2">We'll ONLY notify you when it's ACTUALLY ready, not promises</p>
+                    </div>
+                </div>
+
+                <div className="bg-black border-4 border-green-500 p-8 space-y-4">
+                    <h2 className="text-2xl font-black font-mono text-green-400">WHAT WORKS NOW:</h2>
+                    <div className="space-y-2 font-mono text-sm">
+                        <p className="text-gray-300">→ Earn $P51 cleaning Earth (verified + stored)</p>
+                        <p className="text-gray-300">→ Free healing frequencies 24/7</p>
+                        <p className="text-gray-300">→ Free lossless music streaming</p>
+                        <p className="text-gray-300">→ Connect with humans P2P (Beacon)</p>
+                        <p className="text-white font-bold pt-2">Use these NOW - don't wait for cash ♾️❤️♾️</p>
                     </div>
                 </div>
 

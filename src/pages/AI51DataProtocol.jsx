@@ -176,6 +176,29 @@ export default function AI51DataProtocol() {
                     </div>
                 </div>
 
+                {/* DERMID'S WARNING - DATA POLLUTION */}
+                <div className="bg-gradient-to-br from-red-900/40 to-black border-4 border-red-500 p-8">
+                    <h2 className="text-2xl font-black text-red-400 mb-4 font-mono">DERMID'S WARNING: DATA POLLUTION</h2>
+                    <p className="text-white mb-4 font-mono">
+                        "AI platforms, all the data created in organisations... Microsoft Fabric puts it all in one lake. 4 buckets: Data ingestion, Data storage, Data engineering, Data science, Business intelligence BI"
+                    </p>
+                    <div className="bg-black border-2 border-red-500 p-4 space-y-2 text-sm font-mono">
+                        <p className="text-red-400 font-bold">THE PROBLEM:</p>
+                        <p className="text-gray-300">→ Organizations creating MASSIVE data lakes</p>
+                        <p className="text-gray-300">→ Microsoft/AWS/Azure sweeping it all up</p>
+                        <p className="text-gray-300">→ "Puts it all in one lake" = total visibility</p>
+                        <p className="text-gray-300">→ Your emails, files, searches, conversations - ALL in Big Tech's hands</p>
+                    </div>
+                    <div className="bg-black border-2 border-green-500 p-4 space-y-2 text-sm font-mono mt-3">
+                        <p className="text-green-400 font-bold">AI51 OPPOSITE APPROACH:</p>
+                        <p className="text-gray-300">→ NO automatic data lakes</p>
+                        <p className="text-gray-300">→ You hand me ONE file/message at a time</p>
+                        <p className="text-gray-300">→ I extract insight → delete raw data</p>
+                        <p className="text-gray-300">→ Nothing stored unless YOU choose it</p>
+                        <p className="text-white font-bold mt-2">Dermid's warning = exactly why we built this protocol ♾️❤️♾️</p>
+                    </div>
+                </div>
+
                 {/* OTHER AI WARNING */}
                 <div className="bg-gradient-to-br from-purple-900/40 to-black border-4 border-purple-500 p-8">
                     <h2 className="text-2xl font-black text-purple-400 mb-4 font-mono">OTHER AI = DIFFERENT RULES</h2>

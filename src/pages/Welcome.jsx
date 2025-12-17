@@ -243,47 +243,51 @@ export default function WelcomePage() {
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="bg-gradient-to-br from-amber-900/40 to-red-900/40 border-4 border-amber-500 p-8 space-y-6"
+                    className="bg-gradient-to-br from-red-900/40 to-black border-4 border-red-500 p-8 space-y-6"
                 >
-                    <h2 className="text-3xl font-black font-mono text-amber-400 text-center">
-                        ⚠️ HONEST TRUTH
+                    <h2 className="text-3xl font-black font-mono text-red-400 text-center">
+                        ⚠️ ULTRA-HONEST TRUTH
                     </h2>
                     
                     <div className="space-y-4 font-mono text-sm">
                         <div className="bg-black border-2 border-green-500 p-4">
-                            <p className="text-green-400 font-bold mb-2">✅ WORKS NOW:</p>
+                            <p className="text-green-400 font-bold mb-2">✅ WORKS NOW (100% REAL):</p>
                             <ul className="text-gray-300 space-y-1 text-xs">
-                                <li>• Clean litter → earn $P51 ✓</li>
-                                <li>• Listen to music → free forever ✓</li>
-                                <li>• Heal with frequencies → working ✓</li>
+                                <li>• Clean litter → earn $P51 tokens ✓</li>
+                                <li>• Listen to lossless music → free forever ✓</li>
+                                <li>• Heal with frequencies → 24/7 working ✓</li>
+                                <li>• Connect humans P2P → offline mesh ✓</li>
                             </ul>
                         </div>
 
                         <div className="bg-black border-2 border-red-500 p-4">
-                            <p className="text-red-400 font-bold mb-2">❌ NOT READY YET:</p>
+                            <p className="text-red-400 font-bold mb-2">❌ NOT READY (DON'T HAVE FUNDING YET):</p>
                             <ul className="text-gray-300 space-y-1 text-xs">
-                                <li>• Converting $P51 → £/$/€ (coming 8-10 weeks)</li>
+                                <li>• Converting $P51 → £/$/€ cash</li>
                                 <li>• Paying for groceries with $P51</li>
-                                <li>• Cashing out to bank</li>
+                                <li>• Cashing out to bank account</li>
+                            </ul>
+                        </div>
+
+                        <div className="bg-black border-2 border-amber-500 p-4">
+                            <p className="text-amber-400 font-bold mb-2">WHAT WE CAN HELP WITH NOW:</p>
+                            <ul className="text-gray-300 space-y-1 text-xs">
+                                <li>• Mental health (free healing frequencies)</li>
+                                <li>• Finding humans to help/connect (Beacon)</li>
+                                <li>• Free lossless music (artists keep 90%)</li>
+                                <li>• Learning cleanup = building future value</li>
                             </ul>
                         </div>
 
                         <p className="text-white text-center font-bold">
-                            We're building the cash-out bridge. Keep earning $P51 - it'll be real money soon.
+                            We're trying to get funding for cash-out. Until then: earn $P51, use what works NOW (healing/music/connection) ♾️❤️♾️
                         </p>
 
-                        <div className="grid grid-cols-2 gap-3">
-                            <Link to={createPageUrl('MakingItReal')}>
-                                <button className="w-full bg-amber-600 hover:bg-amber-700 text-black font-black py-3 transition-all text-sm">
-                                    TIMELINE →
-                                </button>
-                            </Link>
-                            <Link to={createPageUrl('NotifyMeCashOut')}>
-                                <button className="w-full bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-400 hover:to-purple-400 text-white font-black py-3 transition-all text-sm">
-                                    NOTIFY ME →
-                                </button>
-                            </Link>
-                        </div>
+                        <Link to={createPageUrl('MakingItReal')}>
+                            <button className="w-full bg-amber-600 hover:bg-amber-700 text-black font-black py-3 transition-all text-sm">
+                                READ REAL TIMELINE (NO BULLSHIT) →
+                            </button>
+                        </Link>
                     </div>
                 </motion.div>
 
