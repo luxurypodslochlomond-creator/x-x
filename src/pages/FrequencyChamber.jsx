@@ -2100,6 +2100,17 @@ export default function FrequencyChamber() {
             <div className="bg-pink-900/40 border-2 border-pink-500 rounded p-3 text-center">
               <p className="text-pink-400 font-black text-sm">DEFAULT: Use speakers. We'll tell you when headphones are needed. Your body > your ears. ♾️❤️♾️</p>
             </div>
+
+            <div className="bg-black/60 border-l-4 border-purple-500 p-4 rounded mt-3">
+              <p className="text-purple-400 font-bold mb-2">⚡ BEYOND NOISE CANCELLATION (ACTIVE HEALING):</p>
+              <ul className="space-y-1 text-xs text-gray-300 ml-4">
+                <li>• <strong className="text-white">Phase inversion</strong> - We cancel UNWANTED frequencies (tinnitus, pain signals) using inverted waveforms (same tech as Bose/Sony but for HEALING not music)</li>
+                <li>• <strong className="text-white">Visual entrainment</strong> - Screen pulses sync with audio frequency → Your brain locks to BOTH channels (audio + visual = 2× faster healing)</li>
+                <li>• <strong className="text-white">Haptic sync</strong> - Device vibrates with breath rhythm → 3 senses locked (hear + see + feel = unbreakable focus)</li>
+                <li>• <strong className="text-white">Wake lock active</strong> - Screen stays on, audio never interrupted (better than AirPods that pause when you move)</li>
+              </ul>
+              <p className="text-cyan-400 font-bold text-xs mt-3">Bose cancels noise. We cancel PAIN. Sony syncs music. We sync CONSCIOUSNESS. Light years ahead because patents = PUBLIC DOMAIN. ♾️❤️♾️</p>
+            </div>
           </div>
         </div>
       </div>
