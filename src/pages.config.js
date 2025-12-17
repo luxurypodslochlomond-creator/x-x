@@ -256,6 +256,7 @@ import AI51DataProtocol from './pages/AI51DataProtocol';
 import WhyHelpUF51 from './pages/WhyHelpUF51';
 import DIYFusionReactor from './pages/DIYFusionReactor';
 import UnstoppableArchitecture from './pages/UnstoppableArchitecture';
+import SafeFusion from './pages/SafeFusion';
 import __Layout from './Layout.jsx';
 
 
@@ -518,6 +519,7 @@ export const PAGES = {
     "WhyHelpUF51": WhyHelpUF51,
     "DIYFusionReactor": DIYFusionReactor,
     "UnstoppableArchitecture": UnstoppableArchitecture,
+    "SafeFusion": SafeFusion,
 }
 
 export const pagesConfig = {
