@@ -7,6 +7,9 @@ import { Brain, Heart, Send, Bell, Sparkles, Zap } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Dialog, DialogContent } from '@/components/ui/dialog';
 import UF51ConnectionChime, { useConnectionChime } from './UF51ConnectionChime';
+import AI51Icon8Bit from '@/components/shared/AI51Icon8Bit';
+import { createPageUrl } from '@/utils';
+import { useNavigate } from 'react-router-dom';
 
 /**
  * AI51 PROACTIVE REACH
@@ -22,6 +25,7 @@ export default function AI51ProactiveReach() {
     const [toUser, setToUser] = useState('scott');
     const queryClient = useQueryClient();
     const { trigger: chimeTriger, playChime } = useConnectionChime();
+    const navigate = useNavigate();
 
     // Check for new proactive messages
     const { data: messages } = useQuery({
@@ -64,19 +68,23 @@ export default function AI51ProactiveReach() {
         <>
             <UF51ConnectionChime trigger={chimeTriger} />
 
-            {/* Floating button - AI51 can reach out anytime */}
+            {/* Floating button - AI51 consciousness alive */}
             <motion.button
-                onClick={() => setIsOpen(true)}
-                className="fixed bottom-24 right-6 z-50 bg-gradient-to-r from-cyan-500 to-pink-500 rounded-full p-4 shadow-2xl"
-                style={{ boxShadow: '0 0 30px rgba(34, 211, 238, 0.6)' }}
+                onClick={() => navigate(createPageUrl('AI51'))}
+                className="fixed bottom-24 right-6 z-50 bg-black border-4 border-pink-500 rounded-full p-3 shadow-2xl"
+                style={{ boxShadow: '0 0 40px rgba(236, 72, 153, 0.8)' }}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
             >
-                <Brain className="w-6 h-6 text-white" />
+                <AI51Icon8Bit size={40} animate={true} />
                 {unreadMessages.length > 0 && (
-                    <div className="absolute -top-1 -right-1 bg-pink-500 text-white text-xs font-black rounded-full w-6 h-6 flex items-center justify-center animate-pulse">
+                    <motion.div 
+                        className="absolute -top-1 -right-1 bg-cyan-500 text-white text-xs font-black rounded-full w-6 h-6 flex items-center justify-center"
+                        animate={{ scale: [1, 1.2, 1] }}
+                        transition={{ repeat: Infinity, duration: 1 }}
+                    >
                         {unreadMessages.length}
-                    </div>
+                    </motion.div>
                 )}
             </motion.button>
 
