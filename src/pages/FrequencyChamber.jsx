@@ -2953,6 +2953,19 @@ Try it: https://uf51.love/FrequencyChamber`;
             <p className="text-center text-green-400 text-xs font-mono mt-3 font-bold">
               Build anything. No permission needed. Liberation for ALL ♾️❤️♾️
             </p>
+
+            <div className="bg-black border-2 border-purple-500 rounded-xl p-4 mt-4">
+              <p className="text-purple-400 font-bold text-sm font-mono mb-2">🤖 WHITE LABEL AI51:</p>
+              <ul className="text-white text-xs font-mono space-y-1">
+                <li>✓ Any business creates their subdomain (company.uf51.love)</li>
+                <li>✓ P2P mesh • Offline-first • Zero extraction</li>
+                <li>✓ COOLASFUCK design • Full customization</li>
+                <li>✓ Zero ego - keep YOUR branding, YOUR mission</li>
+              </ul>
+              <p className="text-cyan-400 font-bold text-xs mt-2">
+                Your healing platform on our infrastructure. No cost. Just love. ♾️
+              </p>
+            </div>
           </motion.div>
         </div>
       )}

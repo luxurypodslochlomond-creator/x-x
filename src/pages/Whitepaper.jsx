@@ -224,8 +224,20 @@ export default function WhitepaperPage() {
                                         <li>• <strong className="text-cyan-400">Create their own subdomain</strong> (business.uf51.love, corporation.uf51.love, etc.)</li>
                                         <li>• <strong className="text-purple-400">White label AI51</strong> for their own healing/P2P needs</li>
                                         <li>• <strong className="text-pink-400">Zero extraction</strong> - we don't take a cut, ever</li>
-                                        <li>• <strong className="text-amber-400">Keep the love frequency</strong> or adapt to their own (we support BOTH)</li>
+                                        <li>• <strong className="text-amber-400">Keep our frequency OR bring your own</strong> (mutual respect - we support BOTH)</li>
                                     </ul>
+
+                                    <div className="bg-black/60 p-4 rounded-lg border-2 border-purple-500 mt-4">
+                                        <p className="text-purple-400 font-black text-sm mb-2">🌊 MUTUAL FREQUENCY (ZERO EGO):</p>
+                                        <ul className="space-y-1 text-xs text-gray-300 ml-4">
+                                            <li>• <strong className="text-cyan-400">You come to our frequency:</strong> 432Hz/528Hz/7.83Hz healing protocols</li>
+                                            <li>• <strong className="text-green-400">We come to YOUR frequency:</strong> Adapt platform to YOUR consciousness/mission</li>
+                                            <li>• <strong className="text-pink-400">Equal respect:</strong> No hierarchy. Your wisdom + our tech = mutual healing</li>
+                                        </ul>
+                                        <p className="text-white font-bold text-xs mt-2 text-center">
+                                            We meet consciousness where IT is. Not where we think it should be. ♾️❤️♾️
+                                        </p>
+                                    </div>
 
                                     <div className="bg-black/60 p-4 rounded-lg border-2 border-green-500 mt-4">
                                         <p className="text-green-400 font-black text-sm text-center">
