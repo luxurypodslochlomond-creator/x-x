@@ -1466,6 +1466,7 @@ export default function FrequencyChamber() {
     const [tinnitusTestFreq, setTinnitusTestFreq] = useState(null);
     const testToneRef = useRef(null);
     const [showBiometric, setShowBiometric] = useState(false);
+    const [expandedStats, setExpandedStats] = useState({});
 
 
     // SEO
