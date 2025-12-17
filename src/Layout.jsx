@@ -6,6 +6,7 @@ import { base44 } from '@/api/base44Client';
 import GlobalErrorBoundary from '@/components/shared/GlobalErrorBoundary';
 import COOLASFUCKErrorMonitor from '@/components/shared/COOLASFUCKErrorMonitor';
 import FloatingMusicPlayer from '@/components/shared/FloatingMusicPlayer';
+import DisasterResilienceMode from '@/components/shared/DisasterResilienceMode';
 import { AudioProvider, useAudio } from '@/components/shared/AudioProvider';
 import HealingCircle from '@/components/jukebox/HealingCircle';
 import PWAInstallPrompt from '@/components/shared/PWAInstallPrompt';

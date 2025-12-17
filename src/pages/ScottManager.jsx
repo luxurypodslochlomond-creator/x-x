@@ -8,7 +8,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Plus, Search, Wifi, WifiOff, RefreshCw, Brain, DollarSign, FileText, Music, Globe, Briefcase, Camera, Plane, Users, Crown, Palette, Heart, Send, X, Shield, Upload } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import KingdomCrown8Bit from '@/components/shared/KingdomCrown8Bit';
-import WinterBros8Bit from '@/components/shared/WinterBros8Bit';
+import BrosBond8Bit from '@/components/shared/BrosBond8Bit';
 import { useScottOffline, ScottOfflineProvider } from '@/components/scott/ScottOfflineStorage';
 import ScottOneSentence from '@/components/scott/ScottOneSentence';
 import ScottEnergyMode from '@/components/scott/ScottEnergyMode';
@@ -153,7 +153,7 @@ Keep it SHORT, practical, straight to the point. No bullshit. Real help.`,
                     style={{ boxShadow: '0 0 60px rgba(245, 158, 11, 0.15)' }}
                 >
                     <div className="text-center mb-8">
-                        <WinterBros8Bit size={80} animate={true} className="mx-auto mb-4" />
+                        <BrosBond8Bit size={80} animate={true} className="mx-auto mb-4" />
                         <h1 className="text-3xl font-black text-white mb-2 font-mono tracking-tight">BRO51</h1>
                         <p className="text-gray-400 text-sm font-mono">Your co-manager ♾️📻😎</p>
                         <p className="text-gray-600 text-xs font-mono mt-2">Enter PIN to unlock</p>
@@ -247,7 +247,7 @@ Keep it SHORT, practical, straight to the point. No bullshit. Real help.`,
                                             repeat: Infinity
                                         }}
                                     >
-                                        <WinterBros8Bit size={32} animate={true} />
+                                        <BrosBond8Bit size={32} animate={true} />
                                     </motion.div>
                                     <div>
                                         <h1 className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-pink-400 to-cyan-400 font-mono tracking-tight">
