@@ -11,6 +11,7 @@ import {
 } from 'lucide-react';
 import { COOLASFUCKHeart, COOLASFUCKMusicNote, COOLASFUCKWaves, COOLASFUCKP2P } from '@/components/shared/COOLASFUCKIcon';
 import { motion, AnimatePresence } from 'framer-motion';
+import GenerativeMusic from '@/components/radio/GenerativeMusic';
 import { useAudio } from '@/components/shared/AudioProvider';
 import P51Symbol from '@/components/shared/P51Symbol';
 import { Link, useNavigate } from 'react-router-dom';
@@ -196,6 +197,9 @@ Listen free at UF51.LOVE`;
         </motion.div>
 
 
+
+        {/* AI MUSIC GENERATOR */}
+        <GenerativeMusic />
 
         {/* SEARCH & FILTER - 8-BIT */}
         <Card className="bg-black border-4 border-gray-700">
