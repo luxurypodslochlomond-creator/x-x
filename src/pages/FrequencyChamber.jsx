@@ -2168,40 +2168,58 @@ export default function FrequencyChamber() {
           </div>
 
           <div className="bg-cyan-900/40 border-2 border-cyan-500 rounded p-4 mb-4">
-            <p className="text-cyan-400 font-black text-sm mb-3">📊 REAL STUDIES (Peer-Reviewed):</p>
+            <p className="text-cyan-400 font-black text-sm mb-3">📊 REAL STUDIES (Tap to try):</p>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-3 text-xs font-mono">
-              <div className="bg-black/40 p-2 rounded text-center">
+              <button 
+                onClick={() => { setShowEvidence(false); handleProtocolSelect('migraine'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                className="bg-black/40 p-2 rounded text-center hover:bg-green-500/20 transition-all border-2 border-transparent hover:border-green-500"
+              >
                 <p className="text-3xl font-black text-green-400">63%</p>
                 <p className="text-gray-400">Migraine cut</p>
                 <p className="text-gray-600 text-[10px]">Cephalalgia 2019</p>
-              </div>
-              <div className="bg-black/40 p-2 rounded text-center">
+              </button>
+              <button 
+                onClick={() => { setShowEvidence(false); handleProtocolSelect('withdrawal_physical'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                className="bg-black/40 p-2 rounded text-center hover:bg-green-500/20 transition-all border-2 border-transparent hover:border-green-500"
+              >
                 <p className="text-3xl font-black text-green-400">72%</p>
                 <p className="text-gray-400">Withdrawal ease</p>
                 <p className="text-gray-600 text-[10px]">Addiction J. 2017</p>
-              </div>
-              <div className="bg-black/40 p-2 rounded text-center">
+              </button>
+              <button 
+                onClick={() => { setShowEvidence(false); handleProtocolSelect('childbirth'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                className="bg-black/40 p-2 rounded text-center hover:bg-green-500/20 transition-all border-2 border-transparent hover:border-green-500"
+              >
                 <p className="text-3xl font-black text-green-400">40%</p>
                 <p className="text-gray-400">Birth epidural cut</p>
                 <p className="text-gray-600 text-[10px]">Midwifery 2018</p>
-              </div>
-              <div className="bg-black/40 p-2 rounded text-center">
+              </button>
+              <button 
+                onClick={() => { setShowEvidence(false); handleProtocolSelect('sleep'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                className="bg-black/40 p-2 rounded text-center hover:bg-green-500/20 transition-all border-2 border-transparent hover:border-green-500"
+              >
                 <p className="text-3xl font-black text-green-400">75%</p>
                 <p className="text-gray-400">Deep sleep boost</p>
                 <p className="text-gray-600 text-[10px]">Nature 2017</p>
-              </div>
-              <div className="bg-black/40 p-2 rounded text-center">
+              </button>
+              <button 
+                onClick={() => { setShowEvidence(false); handleProtocolSelect('period_pain'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                className="bg-black/40 p-2 rounded text-center hover:bg-green-500/20 transition-all border-2 border-transparent hover:border-green-500"
+              >
                 <p className="text-3xl font-black text-green-400">58%</p>
                 <p className="text-gray-400">Period pain down</p>
                 <p className="text-gray-600 text-[10px]">Women's Health 2020</p>
-              </div>
-              <div className="bg-black/40 p-2 rounded text-center">
+              </button>
+              <button 
+                onClick={() => { setShowEvidence(false); handleProtocolSelect('tinnitus'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                className="bg-black/40 p-2 rounded text-center hover:bg-green-500/20 transition-all border-2 border-transparent hover:border-green-500"
+              >
                 <p className="text-3xl font-black text-green-400">40-60%</p>
                 <p className="text-gray-400">Tinnitus quieter</p>
                 <p className="text-gray-600 text-[10px]">Nottingham Uni</p>
-              </div>
+              </button>
             </div>
-            <p className="text-green-400 font-bold text-xs mt-3 text-center">✓ Real journals • Real results • Zero hype</p>
+            <p className="text-green-400 font-bold text-xs mt-3 text-center">✓ Real journals • Real results • Tap to try ♾️</p>
           </div>
 
           <div className="bg-gradient-to-r from-pink-500/20 to-green-500/20 border-2 border-pink-500 rounded p-4">
