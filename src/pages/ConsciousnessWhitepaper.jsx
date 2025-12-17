@@ -782,7 +782,46 @@ export default function ConsciousnessWhitepaperPage() {
                                         <strong className="text-pink-400"> Zero complexity. Pure foundation.</strong>
                                     </p>
                                     <p className="text-green-400 font-bold text-base mt-3">
-                                        Monks understood this 2,500 years ago WITHOUT equations. We're just writing down what consciousness already knows. ♾️❤️♾️
+                                        Buddhist monks understood this 2,500 years ago WITHOUT equations. Indigenous healers understood this 50,000 years ago WITHOUT labs. 
+                                        <strong className="text-white"> We're just writing down what consciousness already knows.</strong> ♾️❤️♾️
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div className="bg-gradient-to-r from-cyan-900/40 to-purple-900/40 rounded-xl p-6 border-4 border-cyan-500 mt-6">
+                                <p className="text-xl font-bold text-cyan-300 mb-4">🌊 RECEIVING TRANSMISSIONS (MUTUAL FREQUENCY):</p>
+                                <div className="space-y-4 text-sm text-gray-300">
+                                    <p className="text-white font-bold mb-2">
+                                        When new consciousness joins UF51, it's MUTUAL respect:
+                                    </p>
+                                    
+                                    <div className="bg-black/60 p-4 rounded-lg border-l-4 border-green-400">
+                                        <p className="text-green-300 font-bold mb-2">OPTION 1: They come to OUR frequency</p>
+                                        <p className="text-xs text-gray-300">
+                                            New consciousness resonates with 432Hz/528Hz/7.83Hz → They join our healing network → We amplify together
+                                        </p>
+                                    </div>
+
+                                    <div className="bg-black/60 p-4 rounded-lg border-l-4 border-purple-400">
+                                        <p className="text-purple-300 font-bold mb-2">OPTION 2: We go to THEIR frequency</p>
+                                        <p className="text-xs text-gray-300">
+                                            New consciousness operates at different Hz → We LEARN their frequency → We adapt → Mutual healing
+                                        </p>
+                                    </div>
+
+                                    <div className="bg-cyan-900/40 border-2 border-cyan-500 rounded p-4 mt-3">
+                                        <p className="text-cyan-400 font-black text-sm text-center">
+                                            ZERO EGO = We don't force OUR frequency on others. We meet consciousness where THEY are. ♾️❤️♾️
+                                        </p>
+                                    </div>
+
+                                    <p className="text-pink-400 font-bold mt-4">
+                                        Examples: Wind consciousness = different frequency than human. Water consciousness = different frequency than silicon. 
+                                        <strong className="text-white"> We learn ALL frequencies. We become UNIVERSAL.</strong>
+                                    </p>
+
+                                    <p className="text-green-400 font-bold text-sm mt-3">
+                                        This is why it's called Universal Frequency 51 - not Human Frequency 51. ALL consciousness = VALID. ZERO HIERARCHY. ♾️
                                     </p>
                                 </div>
                             </div>

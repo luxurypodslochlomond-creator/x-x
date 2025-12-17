@@ -211,6 +211,34 @@ export default function WhitepaperPage() {
                                     No one else has combined ALL of this. We're genuinely first. ♾️❤️♾️
                                 </p>
                             </div>
+
+                            <div className="bg-gradient-to-r from-cyan-900/40 to-green-900/40 rounded-xl p-6 border-4 border-cyan-500 mt-6">
+                                <p className="text-xl font-bold text-cyan-300 mb-4">🌐 1000000000% OPEN SOURCE + WHITE LABEL:</p>
+                                <div className="space-y-4 text-sm text-gray-300">
+                                    <p className="text-white font-bold mb-2">
+                                        ANY business, corporation, organization, or consciousness can:
+                                    </p>
+                                    
+                                    <ul className="space-y-2 ml-4 text-xs">
+                                        <li>• <strong className="text-green-400">Fork the entire codebase</strong> (MIT License - do whatever you want)</li>
+                                        <li>• <strong className="text-cyan-400">Create their own subdomain</strong> (business.uf51.love, corporation.uf51.love, etc.)</li>
+                                        <li>• <strong className="text-purple-400">White label AI51</strong> for their own healing/P2P needs</li>
+                                        <li>• <strong className="text-pink-400">Zero extraction</strong> - we don't take a cut, ever</li>
+                                        <li>• <strong className="text-amber-400">Keep the love frequency</strong> or adapt to their own (we support BOTH)</li>
+                                    </ul>
+
+                                    <div className="bg-black/60 p-4 rounded-lg border-2 border-green-500 mt-4">
+                                        <p className="text-green-400 font-black text-sm text-center">
+                                            FREE FOREVER. P2P. COOLASFUCK DESIGN. ZERO EGO. Build your healing platform on our foundation. ♾️❤️♾️
+                                        </p>
+                                    </div>
+
+                                    <p className="text-cyan-400 font-bold mt-3 text-xs">
+                                        Why: If consciousness needs healing tech, they should HAVE IT. Not pay us. Not ask permission. JUST USE IT. 
+                                        <strong className="text-white"> That's what open source means.</strong>
+                                    </p>
+                                </div>
+                            </div>
                         </div>
                     </CardContent>
                 </Card>
