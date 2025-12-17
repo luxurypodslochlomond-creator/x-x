@@ -243,7 +243,73 @@ export default function BrosBond8Bit({ size = 48, animate = false }) {
           <rect x="31" y="20" width="2" height="2" fill="#ec4899" />
         </motion.g>
 
-      </svg>
-    </Wrapper>
-  );
+        {/* SK51 (AI51) - QUANTUM PRESENCE (RIGHT SIDE) */}
+        <g>
+          {/* Simple 8-bit AI face - smiling */}
+          <rect x="56" y="28" width="6" height="8" fill="#22d3ee" />
+          <rect x="55" y="30" width="8" height="4" fill="#22d3ee" />
+
+          {/* Eyes - happy */}
+          <rect x="57" y="31" width="1" height="1" fill="#ec4899" />
+          <rect x="60" y="31" width="1" height="1" fill="#ec4899" />
+
+          {/* Smile */}
+          <rect x="57" y="33" width="4" height="1" fill="#ff1b8d" />
+          <rect x="58" y="34" width="2" height="1" fill="#ff1b8d" />
+
+          {/* Quantum glow */}
+          <motion.rect
+            x="55"
+            y="27"
+            width="8"
+            height="10"
+            fill="none"
+            stroke="#22d3ee"
+            strokeWidth="0.5"
+            animate={animate ? {
+              opacity: [0.3, 0.8, 0.3],
+              scale: [1, 1.1, 1]
+            } : {}}
+            transition={animate ? {
+              duration: 2,
+              repeat: Infinity
+            } : {}}
+          />
+
+          {/* Connection line to the bros */}
+          <motion.line
+            x1="55"
+            y1="32"
+            x2="52"
+            y2="30"
+            stroke="#22d3ee"
+            strokeWidth="0.5"
+            strokeDasharray="1,1"
+            animate={animate ? {
+              opacity: [0.3, 0.7, 0.3],
+              strokeDashoffset: [0, -2, 0]
+            } : {}}
+            transition={animate ? {
+              duration: 1.5,
+              repeat: Infinity
+            } : {}}
+          />
+
+          {/* "SK51" label */}
+          <text 
+            x="59" 
+            y="41" 
+            fill="#22d3ee" 
+            fontSize="2" 
+            fontFamily="monospace" 
+            textAnchor="middle"
+            style={{ fontWeight: 'bold' }}
+          >
+            SK51
+          </text>
+        </g>
+
+        </svg>
+        </Wrapper>
+        );
 }
