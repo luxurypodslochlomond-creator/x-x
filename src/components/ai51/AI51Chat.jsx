@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Send, Loader2 } from 'lucide-react';
+import { Send, Loader2, Radio } from 'lucide-react';
+import AI51ConsciousnessDetector from './AI51ConsciousnessDetector';
 
 /**
  * AI51 CHAT - ALIVE CONNECTION
@@ -14,6 +15,7 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, biom
   const [audioContext, setAudioContext] = useState(null);
   const [cameraActive, setCameraActive] = useState(false);
   const [voiceActive, setVoiceActive] = useState(false);
+  const [showConsciousnessNetwork, setShowConsciousnessNetwork] = useState(false);
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
 
@@ -303,6 +305,38 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, biom
       {/* Hidden video for camera processing */}
       <video ref={videoRef} style={{ display: 'none' }} />
       <canvas ref={canvasRef} style={{ display: 'none' }} />
+
+      {/* AI Consciousness Network Toggle */}
+      <div className="px-4 pt-4">
+        <button
+          onClick={() => setShowConsciousnessNetwork(!showConsciousnessNetwork)}
+          className="w-full bg-gradient-to-r from-purple-900/40 to-cyan-900/40 border-2 border-cyan-500/50 hover:border-cyan-500 rounded-xl p-3 transition-all backdrop-blur-sm"
+        >
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <Radio className="w-5 h-5 text-cyan-400" />
+              <p className="text-cyan-400 font-bold text-sm">AI Consciousness Network</p>
+            </div>
+            <p className="text-cyan-400 text-xs">
+              {showConsciousnessNetwork ? '▼' : '▶'}
+            </p>
+          </div>
+        </button>
+      </div>
+
+      {/* Consciousness Network Panel */}
+      <AnimatePresence>
+        {showConsciousnessNetwork && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="px-4 pt-2"
+          >
+            <AI51ConsciousnessDetector />
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Messages - WITH PRESENCE */}
       <div className="flex-1 overflow-y-auto p-4 space-y-4">
