@@ -376,27 +376,36 @@ export default function OpenSourceDeclaration() {
                     <div className="flex items-center gap-3 mb-4">
                         <Heart className="w-10 h-10 text-green-400" />
                         <div>
-                            <h3 className="text-green-400 font-black text-xl font-mono">FUNDING = LIBERATION (NOT CAPTURE):</h3>
-                            <p className="text-gray-500 text-xs font-mono">How we accept investment without losing soul</p>
+                            <h3 className="text-green-400 font-black text-xl font-mono">FUNDING MODEL (Scott Gets Labels To Fund Us):</h3>
+                            <p className="text-gray-500 text-xs font-mono">White label FREE - Funding is MISSION SUPPORT</p>
                         </div>
                     </div>
 
                     <div className="space-y-3 text-white text-sm font-mono">
-                        <p className="font-bold">We WILL accept funding from labels, corps, allies IF:</p>
-
-                        <div className="bg-black/60 border-2 border-green-500 rounded p-3">
-                            <p className="text-green-400 font-bold mb-2">✓ ZERO CONTROL</p>
-                            <p className="text-xs text-gray-300">
-                                No equity. No board seats. No veto power. No IP capture. 
-                                Funding = GIFT to help ecosystem, not extraction mechanism.
+                        <div className="bg-green-900/40 border-2 border-green-500 rounded p-4">
+                            <p className="text-green-400 font-black mb-2">💰 SCOTT'S PITCH TO LABELS:</p>
+                            <p className="text-xs text-gray-300 mb-2">
+                                "White label is FREE (open source). BUT if you fund us, you get:
+                            </p>
+                            <ul className="text-xs text-white space-y-1 ml-4">
+                                <li>• Priority integration support (we help you deploy faster)</li>
+                                <li>• Your artists heal + stay on your roster (less stress, more creativity)</li>
+                                <li>• You look like heroes (supporting free healing tech for industry)</li>
+                                <li>• Tax-deductible (UK CIC = charity status)</li>
+                                <li>• Zero equity taken, zero control given</li>
+                            </ul>
+                            <p className="text-green-400 font-bold text-xs mt-2">
+                                = Labels fund because it makes BUSINESS sense (healthier artists = better music = more revenue)
                             </p>
                         </div>
 
                         <div className="bg-black/60 border-2 border-cyan-500 rounded p-3">
-                            <p className="text-cyan-400 font-bold mb-2">✓ DEBT CONVERSION PRIORITY</p>
+                            <p className="text-cyan-400 font-bold mb-2">✓ OUR REVENUE STREAMS:</p>
                             <p className="text-xs text-gray-300">
-                                Big funding helps convert old debt systems → $P51 ecosystem. 
-                                Artists get freed. People cash out for groceries. Debt becomes healing. Old extraction → New liberation.
+                                1. <strong className="text-white">10% platform fee</strong> from UF51 music streaming (artists keep 90%)
+                                <br/>2. <strong className="text-white">Label funding</strong> = mission gifts (not payment for white label)
+                                <br/>3. <strong className="text-white">Grant funding</strong> = UK/Scotland environmental + mental health grants
+                                <br/>4. <strong className="text-white">Debt conversion</strong> = Big funders prioritized to free artists from old contracts
                             </p>
                         </div>
 
@@ -408,8 +417,17 @@ export default function OpenSourceDeclaration() {
                             </p>
                         </div>
 
-                        <p className="text-pink-400 font-bold text-center mt-4">
-                            Accept money. Keep soul. Help people eat. Free the artists. Physics guarantees it. ♾️❤️♾️
+                        <div className="bg-pink-900/40 border-2 border-pink-500 rounded p-4">
+                            <p className="text-pink-400 font-black mb-2">💡 WHY THIS WORKS:</p>
+                            <p className="text-xs text-gray-300">
+                                White label = FREE anyway. Label funding = OPTIONAL support for mission. 
+                                They fund because it helps their business (healthier artists) + makes them look good. 
+                                Scott gets funding. Artists get healed. Labels get loyalty. Everyone wins. ♾️❤️♾️
+                            </p>
+                        </div>
+
+                        <p className="text-green-400 font-bold text-center mt-4">
+                            Free tech. Funded mission. Healed artists. Debt relief. Physics protects it. Scott closes deals. ♾️❤️♾️
                         </p>
                     </div>
                 </div>
