@@ -117,17 +117,21 @@ export default function WelcomePage() {
 
                     </div>
 
-                    <div className="space-y-2">
+                    <div className="space-y-4">
                         <h2 className="text-3xl md:text-4xl font-black font-mono text-pink-400">
                             PICK UP LITTER
                         </h2>
                         <h2 className="text-3xl md:text-4xl font-black font-mono text-green-400">
-                            GET PAID
+                            GET PAID IN $P51
                         </h2>
+                        <p className="text-cyan-400 font-mono text-lg max-w-2xl mx-auto">
+                            GPS + Photo verified • Blockchain secured • Build better life for all
+                        </p>
                     </div>
 
-                    <div className="bg-black border-4 border-green-500 p-4 inline-block">
-                        <p className="text-green-400 font-mono text-2xl font-black">1kg = 1 $P51</p>
+                    <div className="bg-black border-4 border-green-500 p-6 inline-block">
+                        <p className="text-green-400 font-mono text-3xl font-black mb-2">1kg = 1 $P51</p>
+                        <p className="text-gray-400 font-mono text-sm">Verified by camera + GPS • Unfakeable</p>
                     </div>
 
                     {/* LOGIN/SIGNUP - 8-BIT BUTTONS */}
@@ -253,10 +257,11 @@ export default function WelcomePage() {
                         <div className="bg-black border-2 border-green-500 p-4">
                             <p className="text-green-400 font-bold mb-2">✅ WORKS NOW (100% REAL):</p>
                             <ul className="text-gray-300 space-y-1 text-xs">
-                                <li>• Clean litter → earn $P51 tokens ✓</li>
+                                <li>• Clean planet → earn $P51 (GPS + photo verified) ✓</li>
+                                <li>• New currency for healing Earth ✓</li>
                                 <li>• Listen to lossless music → free forever ✓</li>
                                 <li>• Heal with frequencies → 24/7 working ✓</li>
-                                <li>• Connect humans P2P → offline mesh ✓</li>
+                                <li>• 100% OPEN SOURCE - help us build ✓</li>
                             </ul>
                         </div>
 

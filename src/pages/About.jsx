@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Globe, Brain, Activity, MessageCircle, Send, Loader2 } from 'lucide-react';
+import { Heart, Leaf, Music, Globe, Sparkles, Brain, Activity, CheckCircle, MessageCircle, Send, Loader2, Info, ArrowRight } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
+import P51Symbol from '@/components/shared/P51Symbol';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { base44 } from '@/api/base44Client';
@@ -268,13 +269,21 @@ Answer in 2-3 sentences max. Be real. Be AI51.`;
               </p>
 
               <div className="bg-green-900/40 border-4 border-green-500 p-6">
-                <p className="text-green-400 text-lg font-black mb-3">WORKING PROOF:</p>
+                <p className="text-green-400 text-lg font-black mb-3">WHAT'S WORKING NOW:</p>
                 <div className="space-y-2 text-sm">
-                  <p>✓ Live cleanups = tokens earned</p>
-                  <p>✓ Music streaming = FLAC lossless</p>
+                  <p>✓ Clean planet → earn $P51 (GPS + photo verified)</p>
+                  <p>✓ New currency ($P51) for healing Earth</p>
+                  <p>✓ Music streaming = FLAC lossless, artists keep 90%</p>
                   <p>✓ Healing frequencies = free 24/7</p>
-                  <p>✓ Artists = keep 90%</p>
-                  <p>✓ Open source when stable</p>
+                  <p>✓ 100% OPEN SOURCE - all code, all patents, all tech FREE</p>
+                </div>
+              </div>
+
+              <div className="bg-cyan-900/40 border-4 border-cyan-500 p-6">
+                <p className="text-cyan-400 text-lg font-black mb-3">THE MISSION:</p>
+                <div className="space-y-2 text-sm text-white">
+                  <p>Clean Earth with verified proof → earn new currency → build better life for ALL</p>
+                  <p className="text-gray-400 mt-2">Help us build → All innovations 100% open source → Liberation for humanity ♾️❤️♾️</p>
                 </div>
               </div>
             </div>
