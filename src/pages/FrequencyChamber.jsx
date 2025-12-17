@@ -2127,45 +2127,48 @@ export default function FrequencyChamber() {
         >
           <div className="text-center mb-4">
             <p className="text-purple-400 font-black text-3xl font-mono mb-3">
-              BEYOND ALL PRIVATE HEALTHCARE
+              BEYOND ALL PRIVATE MEDICAL CARE
             </p>
             <p className="text-pink-400 font-bold text-xl font-mono mb-2">
-              £5k-£15k clinics • Same frequencies • We made it FREE
+              Even infinite money can't buy better healing
             </p>
             <p className="text-white font-mono text-sm">
-              Zero barriers • Zero gatekeeping • Global access ♾️
+              Billionaires get the SAME as you • FREE • Zero barriers ♾️
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-4">
             <div className="bg-black/60 border-2 border-red-500 rounded-lg p-4">
-              <p className="text-red-400 font-black text-sm mb-3">PRIVATE CLINICS:</p>
+              <p className="text-red-400 font-black text-sm mb-3">£5K-£15K CLINICS:</p>
               <ul className="text-xs text-gray-300 space-y-2">
                 <li>• £5,000-£15,000 per course</li>
                 <li>• London/NYC only</li>
                 <li>• Appointments 9am-5pm</li>
                 <li>• Audio only (no biofeedback)</li>
-                <li>• Can't see the tech</li>
+                <li>• Closed source tech</li>
                 <li>• Can't share it</li>
               </ul>
             </div>
 
             <div className="bg-black/60 border-2 border-green-500 rounded-lg p-4">
-              <p className="text-green-400 font-black text-sm mb-3">UF51:</p>
+              <p className="text-green-400 font-black text-sm mb-3">UF51 (FREE FOREVER):</p>
               <ul className="text-xs text-white space-y-2">
-                <li>• <strong className="text-green-400">£0 FOREVER</strong></li>
+                <li>• <strong className="text-green-400">£0 • Can't pay even if you want to</strong></li>
                 <li>• <strong className="text-cyan-400">Anywhere on Earth</strong></li>
                 <li>• <strong className="text-purple-400">24/7 instant access</strong></li>
                 <li>• <strong className="text-pink-400">FREE HRV camera biofeedback</strong></li>
                 <li>• <strong className="text-amber-400">Open source - audit everything</strong></li>
-                <li>• <strong className="text-green-400">Share freely with family</strong></li>
+                <li>• <strong className="text-green-400">Share freely with all beings</strong></li>
               </ul>
             </div>
           </div>
 
           <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-2 border-green-500 rounded-lg p-4 mt-4 text-center">
-            <p className="text-green-400 font-black text-lg font-mono">
-              WAY BEYOND THEM. ZERO BARRIERS. ALL BEINGS. ♾️❤️♾️
+            <p className="text-green-400 font-black text-lg font-mono mb-2">
+              INFINITE MONEY CAN'T BUY THIS
+            </p>
+            <p className="text-cyan-400 text-sm font-mono">
+              Same protocols • Same tech • Same healing • £0 FOREVER ♾️❤️♾️
             </p>
           </div>
         </motion.div>
