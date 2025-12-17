@@ -324,6 +324,7 @@ const LayoutInner = ({ children, currentPageName }) => {
 
   return (
       <COOLASFUCKErrorMonitor>
+      <DisasterResilienceMode />
       <TruthCheckProtocol />
       <GlobalErrorBoundary>
       <style>{`
