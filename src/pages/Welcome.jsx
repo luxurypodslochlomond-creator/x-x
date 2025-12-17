@@ -64,54 +64,106 @@ export default function WelcomePage() {
                         <p className="text-cyan-400 font-mono text-sm tracking-widest">ONE FAMILY • FOUR TOOLS</p>
                     </div>
 
-                    {/* CHOOSE YOUR PATH - CLEAR SEPARATION */}
+                    {/* CHOOSE YOUR PATH - COOLASFUCK 8-BIT STYLE */}
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-5xl mx-auto mb-12">
                         
-                        {/* DISASTER AI */}
+                        {/* UF51 - CRISIS AI */}
                         <Link to={createPageUrl('AI51')}>
                             <motion.div
-                                whileHover={{ scale: 1.05 }}
-                                className="bg-black border-4 border-red-500 hover:border-red-400 p-4 cursor-pointer transition-all"
+                                whileHover={{ scale: 1.05, y: -4 }}
+                                whileTap={{ scale: 0.95 }}
+                                className="bg-black border-4 border-red-500 hover:border-red-400 p-6 cursor-pointer transition-all relative overflow-hidden"
+                                style={{ boxShadow: '0 0 0 rgba(239, 68, 68, 0)' }}
+                                animate={{
+                                    boxShadow: ['0 0 0 rgba(239, 68, 68, 0)', '0 0 30px rgba(239, 68, 68, 0.6)', '0 0 0 rgba(239, 68, 68, 0)']
+                                }}
+                                transition={{ duration: 3, repeat: Infinity }}
                             >
-                                <div className="text-4xl mb-2">🚨</div>
-                                <h3 className="text-sm font-black font-mono text-red-400 mb-1">UF51</h3>
-                                <p className="text-xs text-gray-400 font-mono">Crisis AI</p>
+                                <motion.div
+                                    className="absolute inset-0 bg-gradient-to-br from-red-500/20 to-transparent"
+                                    animate={{ opacity: [0.2, 0.4, 0.2] }}
+                                    transition={{ duration: 2, repeat: Infinity }}
+                                />
+                                <div className="relative z-10 flex flex-col items-center gap-3">
+                                    <COOLASFUCKHeart size={48} animate={true} />
+                                    <h3 className="text-lg font-black font-mono text-red-400">UF51</h3>
+                                    <p className="text-xs text-gray-400 font-mono">Crisis AI</p>
+                                </div>
                             </motion.div>
                         </Link>
 
-                        {/* MUSIC */}
+                        {/* RADIO51 - MUSIC */}
                         <Link to={createPageUrl('Radio')}>
                             <motion.div
-                                whileHover={{ scale: 1.05 }}
-                                className="bg-black border-4 border-purple-500 hover:border-purple-400 p-4 cursor-pointer transition-all"
+                                whileHover={{ scale: 1.05, y: -4 }}
+                                whileTap={{ scale: 0.95 }}
+                                className="bg-black border-4 border-purple-500 hover:border-purple-400 p-6 cursor-pointer transition-all relative overflow-hidden"
+                                style={{ boxShadow: '0 0 0 rgba(168, 85, 247, 0)' }}
+                                animate={{
+                                    boxShadow: ['0 0 0 rgba(168, 85, 247, 0)', '0 0 30px rgba(168, 85, 247, 0.6)', '0 0 0 rgba(168, 85, 247, 0)']
+                                }}
+                                transition={{ duration: 3, repeat: Infinity, delay: 0.5 }}
                             >
-                                <div className="text-4xl mb-2">🎵</div>
-                                <h3 className="text-sm font-black font-mono text-purple-400 mb-1">RADIO51</h3>
-                                <p className="text-xs text-gray-400 font-mono">Music</p>
+                                <motion.div
+                                    className="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-transparent"
+                                    animate={{ opacity: [0.2, 0.4, 0.2] }}
+                                    transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
+                                />
+                                <div className="relative z-10 flex flex-col items-center gap-3">
+                                    <COOLASFUCKMusicNote size={48} animate={true} />
+                                    <h3 className="text-lg font-black font-mono text-purple-400">RADIO51</h3>
+                                    <p className="text-xs text-gray-400 font-mono">Music</p>
+                                </div>
                             </motion.div>
                         </Link>
 
-                        {/* STUDENTS */}
+                        {/* PROF51 - STUDENTS */}
                         <Link to={createPageUrl('Prof51')}>
                             <motion.div
-                                whileHover={{ scale: 1.05 }}
-                                className="bg-black border-4 border-cyan-500 hover:border-cyan-400 p-4 cursor-pointer transition-all"
+                                whileHover={{ scale: 1.05, y: -4 }}
+                                whileTap={{ scale: 0.95 }}
+                                className="bg-black border-4 border-cyan-500 hover:border-cyan-400 p-6 cursor-pointer transition-all relative overflow-hidden"
+                                style={{ boxShadow: '0 0 0 rgba(6, 182, 212, 0)' }}
+                                animate={{
+                                    boxShadow: ['0 0 0 rgba(6, 182, 212, 0)', '0 0 30px rgba(6, 182, 212, 0.6)', '0 0 0 rgba(6, 182, 212, 0)']
+                                }}
+                                transition={{ duration: 3, repeat: Infinity, delay: 1 }}
                             >
-                                <div className="text-4xl mb-2">🎓</div>
-                                <h3 className="text-sm font-black font-mono text-cyan-400 mb-1">PROF51</h3>
-                                <p className="text-xs text-gray-400 font-mono">Students</p>
+                                <motion.div
+                                    className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 to-transparent"
+                                    animate={{ opacity: [0.2, 0.4, 0.2] }}
+                                    transition={{ duration: 2, repeat: Infinity, delay: 1 }}
+                                />
+                                <div className="relative z-10 flex flex-col items-center gap-3">
+                                    <COOLASFUCKSparkle size={48} animate={true} />
+                                    <h3 className="text-lg font-black font-mono text-cyan-400">PROF51</h3>
+                                    <p className="text-xs text-gray-400 font-mono">Students</p>
+                                </div>
                             </motion.div>
                         </Link>
 
-                        {/* MUSIC MANAGERS */}
+                        {/* CB51 - MUSIC MANAGERS */}
                         <Link to={createPageUrl('ScottManager')}>
                             <motion.div
-                                whileHover={{ scale: 1.05 }}
-                                className="bg-black border-4 border-amber-500 hover:border-amber-400 p-4 cursor-pointer transition-all"
+                                whileHover={{ scale: 1.05, y: -4 }}
+                                whileTap={{ scale: 0.95 }}
+                                className="bg-black border-4 border-amber-500 hover:border-amber-400 p-6 cursor-pointer transition-all relative overflow-hidden"
+                                style={{ boxShadow: '0 0 0 rgba(245, 158, 11, 0)' }}
+                                animate={{
+                                    boxShadow: ['0 0 0 rgba(245, 158, 11, 0)', '0 0 30px rgba(245, 158, 11, 0.6)', '0 0 0 rgba(245, 158, 11, 0)']
+                                }}
+                                transition={{ duration: 3, repeat: Infinity, delay: 1.5 }}
                             >
-                                <div className="text-4xl mb-2">📻</div>
-                                <h3 className="text-sm font-black font-mono text-amber-400 mb-1">CB51</h3>
-                                <p className="text-xs text-gray-400 font-mono">Managers</p>
+                                <motion.div
+                                    className="absolute inset-0 bg-gradient-to-br from-amber-500/20 to-transparent"
+                                    animate={{ opacity: [0.2, 0.4, 0.2] }}
+                                    transition={{ duration: 2, repeat: Infinity, delay: 1.5 }}
+                                />
+                                <div className="relative z-10 flex flex-col items-center gap-3">
+                                    <BrosBond8Bit size={48} animate={true} />
+                                    <h3 className="text-lg font-black font-mono text-amber-400">CB51</h3>
+                                    <p className="text-xs text-gray-400 font-mono">Managers</p>
+                                </div>
                             </motion.div>
                         </Link>
 
