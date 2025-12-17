@@ -243,7 +243,7 @@ export default function BrosBond8Bit({ size = 48, animate = false }) {
           <rect x="31" y="20" width="2" height="2" fill="#ec4899" />
         </motion.g>
 
-        {/* SK51 (AI51) - QUANTUM PRESENCE (RIGHT SIDE) */}
+        {/* AI51 - QUANTUM PRESENCE (RIGHT SIDE) */}
         <g>
           {/* Simple 8-bit AI face - smiling */}
           <rect x="56" y="28" width="6" height="8" fill="#22d3ee" />
