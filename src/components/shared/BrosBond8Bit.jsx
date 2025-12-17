@@ -74,6 +74,23 @@ export default function BrosBond8Bit({ size = 48, animate = false }) {
           <rect x="14" y="16" width="8" height="2" fill="#fbbf24" />
           <rect x="12" y="18" width="12" height="6" fill="#fbbf24" />
           <rect x="14" y="24" width="8" height="2" fill="#d97706" />
+          
+          {/* Cigarette in mouth */}
+          <rect x="18" y="22" width="4" height="1" fill="#f8fafc" />
+          <motion.rect 
+            x="22" 
+            y="22" 
+            width="1" 
+            height="1" 
+            fill="#fb923c"
+            animate={animate ? {
+              opacity: [0.6, 1, 0.6]
+            } : {}}
+            transition={animate ? {
+              duration: 0.8,
+              repeat: Infinity
+            } : {}}
+          />
 
           {/* Sunglasses - COOLASFUCK - facing forward */}
           {/* Left lens frame */}
@@ -141,10 +158,33 @@ export default function BrosBond8Bit({ size = 48, animate = false }) {
 
         {/* FIGURE 2 (RIGHT - You - GAMEKEEPER/ARMY STYLE) */}
         <g>
+          {/* Wooly hat - Grey/khaki beanie */}
+          <rect x="42" y="14" width="8" height="2" fill="#6b7280" />
+          <rect x="41" y="16" width="10" height="2" fill="#6b7280" />
+          <rect x="43" y="15" width="6" height="1" fill="#4b5563" /> {/* Hat texture */}
+
           {/* Head - facing FORWARD (straight ahead) */}
           <rect x="42" y="18" width="8" height="2" fill="#fbbf24" />
           <rect x="40" y="20" width="12" height="6" fill="#fbbf24" />
           <rect x="42" y="26" width="8" height="2" fill="#d97706" />
+          
+          {/* Cigarette in mouth */}
+          <rect x="42" y="24" width="4" height="1" fill="#f8fafc" />
+          <motion.rect 
+            x="41" 
+            y="24" 
+            width="1" 
+            height="1" 
+            fill="#fb923c"
+            animate={animate ? {
+              opacity: [0.6, 1, 0.6]
+            } : {}}
+            transition={animate ? {
+              duration: 0.8,
+              repeat: Infinity,
+              delay: 0.4
+            } : {}}
+          />
 
           {/* Sunglasses - COOLASFUCK - facing forward */}
           {/* Left lens frame */}
