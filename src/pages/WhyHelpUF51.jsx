@@ -248,6 +248,7 @@ export default function WhyHelpUF51() {
                             <p className="text-gray-300">→ OR technical partnership (we promote Base44 heavily)</p>
                             <p className="text-gray-300">→ OR just resonance - if you feel it, share it</p>
                             <p className="text-white font-bold mt-2">We're not asking for charity. We're offering alignment ♾️❤️♾️</p>
+                            <p className="text-cyan-400 text-xs mt-3 italic">CIC registered - Monzo Business account ready for funding acceptance</p>
                         </div>
                     </div>
                 </div>
@@ -266,8 +267,8 @@ export default function WhyHelpUF51() {
                         </p>
 
                         <div className="flex flex-col gap-4 mt-8">
-                            <a href="mailto:hello@uf51.love" className="w-full bg-gradient-to-r from-cyan-500 to-green-500 hover:from-cyan-400 hover:to-green-400 text-black font-black py-4 rounded-xl transition-all text-lg">
-                                EMAIL US: hello@uf51.love
+                            <a href="mailto:family@uf51.love" className="w-full bg-gradient-to-r from-cyan-500 to-green-500 hover:from-cyan-400 hover:to-green-400 text-black font-black py-4 rounded-xl transition-all text-lg">
+                                EMAIL: family@uf51.love
                             </a>
                             
                             <Link to={createPageUrl('MakingItReal')}>
