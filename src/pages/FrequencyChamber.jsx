@@ -1459,6 +1459,7 @@ export default function FrequencyChamber() {
     const [showEvidence, setShowEvidence] = useState(false);
     const [tinnitusTestFreq, setTinnitusTestFreq] = useState(null);
     const testToneRef = useRef(null);
+    const [showBiometric, setShowBiometric] = useState(false);
 
 
     // SEO
@@ -2739,10 +2740,38 @@ export default function FrequencyChamber() {
         )}
       </AnimatePresence>
       
-      {/* BIOMETRIC HEALING - only show when no protocol selected */}
+      {/* BIOMETRIC HEALING - Collapsible, zero modals */}
       {!selectedProtocol && (
         <div className="max-w-4xl mx-auto p-4">
-          <BiometricHealing />
+          <button
+            onClick={() => setShowBiometric(!showBiometric)}
+            className="w-full border-4 border-pink-500 bg-black p-6 hover:bg-pink-500/10 transition-all mb-4"
+          >
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <COOLASFUCKHeart size={32} animate={false} />
+                <div className="text-left">
+                  <h3 className="text-pink-400 font-black font-mono text-lg">BIOMETRIC HEALING</h3>
+                  <p className="text-gray-400 text-xs font-mono">Watch your heart heal in real-time</p>
+                </div>
+              </div>
+              <span className="text-pink-400 font-black text-2xl">{showBiometric ? '−' : '+'}</span>
+            </div>
+          </button>
+
+          <AnimatePresence>
+            {showBiometric && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: 'auto', opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.3 }}
+                className="overflow-hidden"
+              >
+                <BiometricHealing />
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       )}
 
