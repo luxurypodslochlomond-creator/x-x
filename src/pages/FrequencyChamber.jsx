@@ -1412,105 +1412,7 @@ const VoiceHealing = ({ onProtocolRecommend }) => {
       );
       };
 
-// === EVIDENCE MODAL - FULL SCIENCE ===
-const EvidenceModal = ({ onClose }) => (
-  <div className="fixed inset-0 bg-black/95 z-[9999] overflow-y-scroll" onClick={onClose}>
-    <div className="min-h-screen p-4 py-20">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: 20 }}
-        onClick={e => e.stopPropagation()}
-        className="bg-black border-4 border-cyan-500 p-4 max-w-2xl mx-auto"
-      >
-        {/* HEADER */}
-        <div className="flex justify-between items-start mb-4 sticky top-0 bg-black pb-2 border-b-2 border-cyan-500/30">
-          <div className="flex items-center gap-2">
-            <Shield className="w-6 h-6 text-cyan-400" />
-            <h3 className="text-xl font-black font-mono text-cyan-400">THE SCIENCE</h3>
-          </div>
-          <button onClick={onClose} className="text-gray-400 hover:text-white -mt-1">
-            <X size={24} />
-          </button>
-        </div>
 
-        {/* CONTENT */}
-        <div className="space-y-4">
-          {/* MIT RESEARCH */}
-          <div className="bg-black border-2 border-green-500/50 p-3">
-            <div className="flex items-center gap-2 mb-2">
-              <COOLASFUCKBrain size={20} animate={false} />
-              <h4 className="text-green-400 font-black font-mono text-sm">MIT RESEARCH • 40Hz GAMMA</h4>
-            </div>
-            <div className="space-y-2 text-xs text-gray-300">
-              <p><strong className="text-white">What it does:</strong> 40Hz gamma waves increase neuroplasticity (brain's ability to rewire itself) and reduce inflammation in the brain.</p>
-              <p><strong className="text-white">The studies:</strong> MIT Tsai Lab published in Nature (2016-2023) showing 40Hz light/sound reduces Alzheimer's markers and improves memory.</p>
-              <p><strong className="text-white">Why it works:</strong> Gamma oscillations synchronize neurons, clearing toxic proteins and enhancing cognitive function.</p>
-              <p className="text-cyan-400 text-xs font-mono">Source: Nature, MIT Picower Institute</p>
-            </div>
-          </div>
-
-          {/* HEARTMATH */}
-          <div className="bg-black border-2 border-pink-500/50 p-3">
-            <div className="flex items-center gap-2 mb-2">
-              <COOLASFUCKHeart size={20} animate={false} />
-              <h4 className="text-pink-400 font-black font-mono text-sm">HEARTMATH • VAGAL TONE</h4>
-            </div>
-            <div className="space-y-2 text-xs text-gray-300">
-              <p><strong className="text-white">What it does:</strong> 10Hz alpha waves + slow breathing (6 breaths/min) activates your vagus nerve, reducing stress hormones.</p>
-              <p><strong className="text-white">What's "vagal"?</strong> The vagus nerve is your body's natural calming system - like a reset button for anxiety. It controls your heart rate, digestion, and stress response.</p>
-              <p><strong className="text-white">The studies:</strong> HeartMath Institute research shows coherent breathing at 0.1Hz (6 breaths/min) maximizes heart rate variability (HRV) - a key marker of nervous system health.</p>
-              <p><strong className="text-white">Why it works:</strong> Slow breathing synchronizes your heart and brain rhythms, triggering the parasympathetic nervous system (rest & digest mode).</p>
-              <p className="text-cyan-400 text-xs font-mono">Source: HeartMath Institute, Porges Polyvagal Theory</p>
-            </div>
-          </div>
-
-          {/* SLEEP SCIENCE */}
-          <div className="bg-black border-2 border-purple-500/50 p-3">
-            <div className="flex items-center gap-2 mb-2">
-              <COOLASFUCKMoon size={20} animate={false} />
-              <h4 className="text-purple-400 font-black font-mono text-sm">SLEEP SCIENCE • DELTA WAVES</h4>
-            </div>
-            <div className="space-y-2 text-xs text-gray-300">
-              <p><strong className="text-white">What it does:</strong> 2Hz delta waves + pink noise enhance deep sleep (slow-wave sleep) where your brain consolidates memories and repairs tissue.</p>
-              <p><strong className="text-white">What's "delta"?</strong> Delta waves (0.5-4Hz) are the slowest brain waves, only present in deep sleep. They're essential for physical restoration and memory.</p>
-              <p><strong className="text-white">The studies:</strong> Northwestern University (Nature, 2017) found pink noise synchronized with delta waves increased deep sleep by 75% and improved memory by 2x.</p>
-              <p><strong className="text-white">Why it works:</strong> Pink noise mimics natural sounds (rain, wind) that our brains evolved to find calming. Delta entrainment guides your brain into deep sleep states.</p>
-              <p className="text-cyan-400 text-xs font-mono">Source: Nature, Northwestern University, Sleep Research Society</p>
-            </div>
-          </div>
-
-          {/* ANCIENT WISDOM */}
-          <div className="bg-black border-2 border-amber-500/50 p-3">
-            <div className="flex items-center gap-2 mb-2">
-              <COOLASFUCKShield size={20} animate={false} />
-              <h4 className="text-amber-400 font-black font-mono text-sm">ANCIENT WISDOM • 2,500+ YEARS</h4>
-            </div>
-            <div className="space-y-2 text-xs text-gray-300">
-              <p><strong className="text-white">Tibetan singing bowls:</strong> Used for 2,500+ years in meditation, these bowls naturally produce frequencies around 10Hz (alpha waves) - same as our anxiety protocol.</p>
-              <p><strong className="text-white">Buddhist meditation:</strong> Brain scans of monks show they naturally enter 40Hz gamma states during deep meditation - the same frequency MIT proved reduces brain inflammation.</p>
-              <p><strong className="text-white">Shamanic drumming:</strong> Indigenous traditions worldwide use 4-7Hz drumming (theta waves) for healing ceremonies - same range as our trauma protocol.</p>
-              <p><strong className="text-white">Why it matters:</strong> These traditions discovered through experience what science now proves with instruments. The frequencies work because they're tuned to our nervous system.</p>
-              <p className="text-cyan-400 text-xs font-mono">Sources: Ethnomusicology journals, neuroscience of meditation</p>
-            </div>
-          </div>
-
-          {/* HOW TO USE */}
-          <div className="bg-cyan-900/20 border-2 border-cyan-500/50 p-3 mb-8">
-            <h4 className="text-cyan-400 font-black font-mono text-sm mb-2">HOW TO USE THIS</h4>
-            <ul className="space-y-1 text-xs text-gray-300">
-              <li>• Start with 10-15 minutes daily</li>
-              <li>• Use headphones for best results</li>
-              <li>• Follow the breathing pacer</li>
-              <li>• Consistency matters more than duration</li>
-              <li>• Trust the process - effects build over time</li>
-            </ul>
-          </div>
-        </div>
-      </motion.div>
-    </div>
-  </div>
-);
 
 
 
@@ -1520,7 +1422,7 @@ export default function FrequencyChamber() {
     const [isPlaying, setIsPlaying] = useState(false);
     const [volume, setVolume] = useState(0.5);
     const [expandedInfo, setExpandedInfo] = useState(null);
-    const [showEvidenceModal, setShowEvidenceModal] = useState(false);
+    const [showFullEvidence, setShowFullEvidence] = useState(false);
     const [currentHz, setCurrentHz] = useState(0);
     const [sessionTime, setSessionTime] = useState(0);
     const [hrvEnabled, setHrvEnabled] = useState(false);
@@ -2253,10 +2155,10 @@ export default function FrequencyChamber() {
             </div>
             <div className="flex items-center gap-2">
               <button 
-                onClick={(e) => { e.stopPropagation(); setShowEvidenceModal(true); }}
+                onClick={(e) => { e.stopPropagation(); setShowFullEvidence(!showFullEvidence); }}
                 className="text-cyan-400 hover:text-cyan-300 font-mono text-xs underline"
               >
-                Why?
+                {showFullEvidence ? 'Hide' : 'Full science'}
               </button>
               <span className="text-cyan-400 font-black text-xl">{showEvidence ? '−' : '+'}</span>
             </div>
@@ -3062,8 +2964,95 @@ Try it: https://uf51.love/FrequencyChamber`;
         </div>
       )}
       
+      {/* FULL EVIDENCE - EXPANDABLE */}
       <AnimatePresence>
-        {showEvidenceModal && <EvidenceModal onClose={() => setShowEvidenceModal(false)} />}
+        {showFullEvidence && !selectedProtocol && (
+          <div className="max-w-4xl mx-auto p-4">
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'auto', opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              className="overflow-hidden"
+            >
+              <div className="bg-black border-4 border-cyan-500 p-4 md:p-6 space-y-4">
+                <div className="flex justify-between items-start sticky top-0 bg-black pb-2 border-b-2 border-cyan-500/30">
+                  <div className="flex items-center gap-2">
+                    <Shield className="w-6 h-6 text-cyan-400" />
+                    <h3 className="text-xl font-black font-mono text-cyan-400">FULL SCIENCE</h3>
+                  </div>
+                  <button onClick={() => setShowFullEvidence(false)} className="text-gray-400 hover:text-white">
+                    <X size={24} />
+                  </button>
+                </div>
+
+                {/* MIT RESEARCH */}
+                <div className="bg-black border-2 border-green-500/50 p-3">
+                  <div className="flex items-center gap-2 mb-2">
+                    <COOLASFUCKBrain size={20} animate={false} />
+                    <h4 className="text-green-400 font-black font-mono text-sm">MIT • 40Hz GAMMA</h4>
+                  </div>
+                  <div className="space-y-2 text-xs text-gray-300">
+                    <p><strong className="text-white">What it does:</strong> 40Hz gamma waves increase neuroplasticity + reduce brain inflammation.</p>
+                    <p><strong className="text-white">Studies:</strong> MIT Tsai Lab (Nature 2016-2023) - 40Hz reduces Alzheimer's markers.</p>
+                    <p className="text-cyan-400 font-mono">Source: Nature, MIT Picower Institute</p>
+                  </div>
+                </div>
+
+                {/* HEARTMATH */}
+                <div className="bg-black border-2 border-pink-500/50 p-3">
+                  <div className="flex items-center gap-2 mb-2">
+                    <COOLASFUCKHeart size={20} animate={false} />
+                    <h4 className="text-pink-400 font-black font-mono text-sm">HEARTMATH • VAGAL TONE</h4>
+                  </div>
+                  <div className="space-y-2 text-xs text-gray-300">
+                    <p><strong className="text-white">What it does:</strong> 10Hz alpha + slow breathing activates vagus nerve, reduces stress hormones.</p>
+                    <p><strong className="text-white">What's vagal?</strong> Reset button for anxiety - controls heart, stress response.</p>
+                    <p className="text-cyan-400 font-mono">Source: HeartMath Institute, Porges Polyvagal Theory</p>
+                  </div>
+                </div>
+
+                {/* SLEEP */}
+                <div className="bg-black border-2 border-purple-500/50 p-3">
+                  <div className="flex items-center gap-2 mb-2">
+                    <COOLASFUCKMoon size={20} animate={false} />
+                    <h4 className="text-purple-400 font-black font-mono text-sm">SLEEP • DELTA WAVES</h4>
+                  </div>
+                  <div className="space-y-2 text-xs text-gray-300">
+                    <p><strong className="text-white">What it does:</strong> 2Hz delta + pink noise enhance deep sleep, memory consolidation.</p>
+                    <p><strong className="text-white">Studies:</strong> Northwestern (Nature 2017) - increased deep sleep 75%, memory 2x.</p>
+                    <p className="text-cyan-400 font-mono">Source: Nature, Sleep Research Society</p>
+                  </div>
+                </div>
+
+                {/* ANCIENT WISDOM */}
+                <div className="bg-black border-2 border-amber-500/50 p-3">
+                  <div className="flex items-center gap-2 mb-2">
+                    <COOLASFUCKShield size={20} animate={false} />
+                    <h4 className="text-amber-400 font-black font-mono text-sm">ANCIENT WISDOM • 2,500+ YEARS</h4>
+                  </div>
+                  <div className="space-y-2 text-xs text-gray-300">
+                    <p><strong className="text-white">Tibetan bowls:</strong> 10Hz alpha - same as anxiety protocol.</p>
+                    <p><strong className="text-white">Buddhist monks:</strong> 40Hz gamma during meditation - same as MIT research.</p>
+                    <p><strong className="text-white">Shamanic drumming:</strong> 4-7Hz theta - same as trauma protocol.</p>
+                    <p className="text-cyan-400 font-mono">Sources: Ethnomusicology, neuroscience of meditation</p>
+                  </div>
+                </div>
+
+                {/* HOW TO USE */}
+                <div className="bg-cyan-900/20 border-2 border-cyan-500/50 p-3">
+                  <h4 className="text-cyan-400 font-black font-mono text-sm mb-2">HOW TO USE</h4>
+                  <ul className="space-y-1 text-xs text-gray-300">
+                    <li>• Start 10-15 minutes daily</li>
+                    <li>• Use headphones for best results</li>
+                    <li>• Follow breathing pacer</li>
+                    <li>• Consistency > duration</li>
+                    <li>• Trust the process - effects build over time</li>
+                  </ul>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        )}
       </AnimatePresence>
 
 
