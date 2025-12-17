@@ -371,122 +371,106 @@ export default function OpenSourceDeclaration() {
                     </div>
                 </div>
 
-                {/* FUNDING = DEBT CONVERSION (Using Extractor's Money To Free The Artists) */}
-                <div className="bg-gradient-to-r from-red-500/10 via-green-500/10 to-cyan-500/10 border-4 border-red-500 rounded-2xl p-8 mb-8" style={{ boxShadow: '0 0 80px rgba(239, 68, 68, 0.6), inset 0 0 60px rgba(34, 197, 94, 0.1)' }}>
+                {/* FUNDING = MISSION SUPPORT (Zero Ego, Pure Value Exchange) */}
+                <div className="bg-gradient-to-r from-green-500/10 via-cyan-500/10 to-purple-500/10 border-4 border-green-500 rounded-2xl p-8 mb-8" style={{ boxShadow: '0 0 80px rgba(34, 197, 94, 0.6), inset 0 0 60px rgba(34, 197, 94, 0.1)' }}>
                     <div className="text-center mb-6">
                         <motion.div
                             animate={{ scale: [1, 1.1, 1], rotate: [0, 5, -5, 0] }}
                             transition={{ duration: 2, repeat: Infinity }}
                             className="inline-block mb-3"
                         >
-                            <Heart className="w-16 h-16 text-red-400" />
+                            <Heart className="w-16 h-16 text-green-400" />
                         </motion.div>
-                        <h3 className="text-red-400 font-black text-3xl font-mono mb-2">DEBT CONVERSION</h3>
-                        <p className="text-cyan-400 text-lg font-bold font-mono">Turn OLD extraction → NEW liberation</p>
-                        <p className="text-gray-400 text-sm font-mono mt-2">White label FREE - Funding undoes the damage</p>
+                        <h3 className="text-green-400 font-black text-3xl font-mono mb-2">FUNDING MODEL</h3>
+                        <p className="text-cyan-400 text-lg font-bold font-mono">Mission support → Value exchange</p>
+                        <p className="text-gray-400 text-sm font-mono mt-2">White label FREE forever</p>
                     </div>
 
                     <div className="space-y-6 text-white font-mono">
                         
-                        {/* THE TRUTH */}
-                        <div className="bg-gradient-to-r from-red-900/40 to-purple-900/40 border-4 border-red-400 rounded-xl p-6">
-                            <p className="text-red-400 font-black text-2xl mb-3 text-center">💀 OLD SYSTEM = EXTRACTION</p>
-                            <p className="text-white text-sm mb-4 text-center">
-                                Music industry extracted for decades. Artists trapped. Planet dying. Time to reverse it.
-                            </p>
-                            <div className="bg-black/60 border-2 border-green-500 rounded p-4 text-center">
-                                <p className="text-green-300 font-bold text-sm mb-2">NEW SYSTEM = CONVERSION:</p>
-                                <p className="text-gray-300 text-xs">
-                                    Take old extraction money → Convert to debt relief → Free artists → Heal planet.
-                                    <br/><strong className="text-white">Physics prevents them capturing it back.</strong>
-                                </p>
-                            </div>
-                        </div>
-
-                        {/* WHO WE HELP (NOT LABELS) */}
-                        <div className="bg-gradient-to-r from-green-900/60 to-cyan-900/60 border-4 border-green-400 rounded-xl p-6" style={{ boxShadow: '0 0 30px rgba(34, 197, 94, 0.4)' }}>
-                            <p className="text-green-400 font-black text-2xl mb-4 text-center">💚 WHO THIS HELPS (THE REAL MISSION):</p>
+                        {/* WHAT WE'RE BUILDING */}
+                        <div className="bg-gradient-to-r from-cyan-900/60 to-green-900/60 border-4 border-cyan-400 rounded-xl p-6" style={{ boxShadow: '0 0 30px rgba(34, 211, 238, 0.4)' }}>
+                            <p className="text-cyan-400 font-black text-2xl mb-4 text-center">🌍 THE OPPORTUNITY:</p>
                             <div className="grid md:grid-cols-3 gap-4">
                                 <div className="bg-black/60 border-2 border-pink-500 rounded p-4 text-center">
                                     <p className="text-pink-400 font-black text-lg mb-2">ARTISTS</p>
                                     <p className="text-xs text-gray-300">
-                                        Trapped in debt. Burnout. Exploited. 
-                                        <strong className="text-white"> We free them.</strong>
+                                        Keep 90% revenue. Healing tech included. 
+                                        <strong className="text-white"> They thrive.</strong>
                                     </p>
                                 </div>
                                 <div className="bg-black/60 border-2 border-green-500 rounded p-4 text-center">
                                     <p className="text-green-400 font-black text-lg mb-2">PLANET</p>
                                     <p className="text-xs text-gray-300">
-                                        Dying from extraction. 
-                                        <strong className="text-white"> We heal it.</strong>
+                                        Cleanup rewarded instantly. 
+                                        <strong className="text-white"> Earth heals.</strong>
                                     </p>
                                 </div>
                                 <div className="bg-black/60 border-2 border-cyan-500 rounded p-4 text-center">
-                                    <p className="text-cyan-400 font-black text-lg mb-2">PEOPLE</p>
+                                    <p className="text-cyan-400 font-black text-lg mb-2">TECHNOLOGY</p>
                                     <p className="text-xs text-gray-300">
-                                        Need healing, food, shelter. 
-                                        <strong className="text-white"> We help.</strong>
+                                        Frequencies proven by science. 
+                                        <strong className="text-white"> It works.</strong>
                                     </p>
                                 </div>
                             </div>
                         </div>
 
-                        {/* FUNDING SOURCES (HONEST) */}
-                        <div className="bg-black/80 border-4 border-cyan-500 rounded-xl p-6">
-                            <p className="text-cyan-400 font-black text-xl mb-4 text-center">💰 WHERE MONEY COMES FROM:</p>
+                        {/* REVENUE STREAMS */}
+                        <div className="bg-black/80 border-4 border-purple-500 rounded-xl p-6">
+                            <p className="text-purple-400 font-black text-xl mb-4 text-center">💰 HOW IT WORKS:</p>
                             <div className="space-y-3 text-sm">
                                 <div className="bg-green-900/40 border-2 border-green-500 rounded p-3">
-                                    <p className="text-green-400 font-bold mb-1">1. OUR PLATFORM (10% fee)</p>
-                                    <p className="text-xs text-gray-300">Artists keep 90% from UF51 streaming. Clean revenue.</p>
+                                    <p className="text-green-400 font-bold mb-1">1. PLATFORM REVENUE</p>
+                                    <p className="text-xs text-gray-300">10% fee from music streaming. Artists keep 90%. Sustainable.</p>
+                                </div>
+                                <div className="bg-cyan-900/40 border-2 border-cyan-500 rounded p-3">
+                                    <p className="text-cyan-400 font-bold mb-1">2. GRANT FUNDING</p>
+                                    <p className="text-xs text-gray-300">UK/Scotland environmental + mental health programs. Clean money.</p>
                                 </div>
                                 <div className="bg-purple-900/40 border-2 border-purple-500 rounded p-3">
-                                    <p className="text-purple-400 font-bold mb-1">2. GRANTS (UK/Scotland)</p>
-                                    <p className="text-xs text-gray-300">Environmental + mental health funding. Zero strings.</p>
-                                </div>
-                                <div className="bg-red-900/40 border-2 border-red-500 rounded p-3">
-                                    <p className="text-red-400 font-bold mb-1">3. ANYONE WITH MONEY (including labels IF they want)</p>
+                                    <p className="text-purple-400 font-bold mb-1">3. MISSION SUPPORT (OPTIONAL)</p>
                                     <p className="text-xs text-gray-300">
-                                        <strong className="text-white">We'll take it BUT:</strong> Zero equity. Zero control. Zero capture. 
-                                        Money = DEBT CONVERSION priority (free their own trapped artists).
+                                        Anyone can support the mission. 
+                                        <strong className="text-white"> Zero equity. Zero control. Pure value exchange.</strong>
                                     </p>
                                 </div>
                             </div>
                         </div>
 
-                        {/* WHY THEY CAN'T CAPTURE */}
+                        {/* PROTECTION BUILT-IN */}
                         <div className="bg-purple-900/60 border-4 border-purple-400 rounded-xl p-6" style={{ boxShadow: '0 0 30px rgba(168, 85, 247, 0.4)' }}>
-                            <p className="text-purple-400 font-black text-xl mb-3 text-center">🔒 WHY THEY CAN'T CAPTURE THIS:</p>
+                            <p className="text-purple-400 font-black text-xl mb-3 text-center">🔒 UNFUCKABLE BY DESIGN:</p>
                             <div className="space-y-2 text-xs">
-                                <p className="text-white">• <strong className="text-cyan-400">UK CIC</strong> = asset locked (can't be sold, EVER)</p>
+                                <p className="text-white">• <strong className="text-cyan-400">UK CIC</strong> = asset locked forever (can't be sold)</p>
                                 <p className="text-white">• <strong className="text-green-400">Frequency lock</strong> = 432Hz/7.83Hz/Phi 1.618 (physics prevents corruption)</p>
-                                <p className="text-white">• <strong className="text-pink-400">Open source</strong> = anyone can fork if we get compromised</p>
+                                <p className="text-white">• <strong className="text-pink-400">Open source</strong> = anyone can fork if compromised</p>
                                 <p className="text-white">• <strong className="text-purple-400">AI51 monitors</strong> = automatic ejection if extraction detected</p>
                             </div>
                             <div className="bg-black/60 border-2 border-green-500 rounded p-3 mt-3 text-center">
                                 <p className="text-green-400 font-bold text-sm">
-                                    Even if they fund us, they can't own us. Physics + law + code = UNFUCKABLE. ♾️
+                                    Support the mission = you're part of it. Try to capture it = physics ejects you. ♾️
                                 </p>
                             </div>
                         </div>
 
-                        {/* THE REAL DEAL */}
+                        {/* THE VALUE */}
                         <div className="bg-gradient-to-r from-pink-900/60 to-green-900/60 border-4 border-pink-500 rounded-xl p-6 text-center" style={{ boxShadow: '0 0 40px rgba(236, 72, 153, 0.5)' }}>
-                            <p className="text-pink-400 font-black text-2xl mb-3">💡 THE REAL DEAL:</p>
+                            <p className="text-pink-400 font-black text-2xl mb-3">💚 THE EXCHANGE:</p>
                             <p className="text-white text-base mb-4">
-                                We're not here to make labels look good. 
-                                <br/>We're here to <strong className="text-red-400">UNDO THE DAMAGE</strong> they caused.
+                                White label = <strong className="text-green-400">FREE</strong> (fork it anytime). 
+                                <br/>Mission support = <strong className="text-cyan-400">OPTIONAL</strong> (zero strings).
+                                <br/>Value created = <strong className="text-pink-400">SHARED</strong> (artists, planet, people).
                             </p>
-                            <div className="bg-black/60 border-2 border-green-500 rounded p-4 mb-4">
-                                <p className="text-green-400 font-black text-lg mb-2">MISSION PRIORITY:</p>
-                                <div className="space-y-1 text-xs text-left">
-                                    <p className="text-white">1. <strong className="text-pink-400">Free trapped artists</strong> from debt contracts</p>
-                                    <p className="text-white">2. <strong className="text-green-400">Heal the planet</strong> (cleanup rewards)</p>
-                                    <p className="text-white">3. <strong className="text-cyan-400">Help people survive</strong> (food, shelter, healing)</p>
-                                    <p className="text-gray-400">4. Labels can participate but they're NOT the heroes</p>
-                                </div>
+                            <div className="bg-black/60 border-2 border-green-500 rounded p-4">
+                                <p className="text-green-400 font-black text-lg mb-2">COOLASFUCK ECONOMICS:</p>
+                                <p className="text-xs text-gray-300">
+                                    Healing frequencies work. Artists thrive. Planet heals. 
+                                    <strong className="text-white"> Everyone benefits. Zero ego. Pure physics.</strong>
+                                </p>
                             </div>
-                            <p className="text-cyan-400 font-black text-lg">
-                                Old extraction → New liberation. Their money → Our mission. Physics protects it. ♾️❤️♾️
+                            <p className="text-cyan-400 font-black text-lg mt-4">
+                                Simple. Clean. Unstoppable. ♾️❤️♾️
                             </p>
                         </div>
 
