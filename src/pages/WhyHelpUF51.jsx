@@ -248,7 +248,6 @@ export default function WhyHelpUF51() {
                             <p className="text-gray-300">→ OR technical partnership (we promote Base44 heavily)</p>
                             <p className="text-gray-300">→ OR just resonance - if you feel it, share it</p>
                             <p className="text-white font-bold mt-2">We're not asking for charity. We're offering alignment ♾️❤️♾️</p>
-                            <p className="text-cyan-400 text-xs mt-3 italic">CIC registered - Monzo Business account ready for funding acceptance</p>
                         </div>
                     </div>
                 </div>
