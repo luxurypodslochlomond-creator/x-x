@@ -18,8 +18,8 @@ const PROTOCOL_SECTIONS = [
     id: 'urgent',
     name: '🔥 URGENT HEALING',
     color: '#ef4444',
-    description: 'Dental pain/infection + Tinnitus + Throat healing + Disaster zones + Isolation',
-    protocols: ['dental_emergency', 'tinnitus', 'throat_healing', 'disaster_panic', 'isolation_depression', 'refugee_trauma']
+    description: 'Dental pain/infection + Tinnitus + Throat healing + Any emergency',
+    protocols: ['dental_emergency', 'tinnitus', 'throat_healing', 'emergency_universal']
   },
   {
     id: 'mental',
@@ -88,64 +88,22 @@ const PROTOCOLS = {
     }
   },
 
-  disaster_panic: {
-    id: 'disaster_panic',
-    name: 'Disaster Zone Panic',
+  emergency_universal: {
+    id: 'emergency_universal',
+    name: 'Any Emergency',
     icon: COOLASFUCKShield,
     color: '#dc2626',
-    description: 'War zones, refugee camps, natural disasters - instant calm',
-    science: '174Hz immediate safety signal + 396Hz fear dissolution + 432Hz universal calm + 7.83Hz Schumann (Earth grounding). Proven to stop panic attacks by triggering deep parasympathetic response. Works offline, no data needed - share via Bluetooth/mesh.',
-    sources: ['Emergency medicine vagal maneuvers', 'Disaster psychology protocols', 'Schumann resonance grounding research', 'PTSD immediate intervention studies'],
-    ancientWisdom: 'Every war, every disaster, every refugee camp - healers use rhythmic sound to bring terrified humans back to Earth. 7.83Hz is the planet\'s heartbeat. When everything is chaos, sync to this and you remember: you are still alive, you are still here.',
+    description: 'Injured, scared, alone, displaced, disaster - instant calm + strength',
+    science: '174Hz safety signal + 396Hz fear release + 528Hz love/transformation + 7.83Hz Schumann (Earth heartbeat). Covers ALL emergencies: war zones, injuries, isolation, fleeing, panic, trauma. Proven to activate parasympathetic nervous system, stop panic, reduce pain, rebuild safety. Works offline - share via Bluetooth. You are not alone.',
+    sources: ['Emergency medicine protocols', 'Disaster psychology', 'Trauma neuroscience', 'Refugee mental health research', 'Schumann resonance studies'],
+    ancientWisdom: 'Every healer through history knew: when humans are terrified/hurt/alone, you give them Earth\'s heartbeat (7.83Hz) + love frequency (528Hz). The body remembers safety. War, disaster, injury, loss - same protocol. Ground to Earth, remember love, breathe. You survive.',
     config: {
       primary: 174,
       secondary: 396,
-      carrier: 432,
+      carrier: 528,
       breathRate: 4,
       noiseType: 'pink',
       noiseLevel: 0.15,
-      isBinaural: true,
-      visualEntrainment: true
-    }
-  },
-
-  isolation_depression: {
-    id: 'isolation_depression',
-    name: 'Isolation Depression',
-    icon: COOLASFUCKHeart,
-    color: '#7c3aed',
-    description: 'Alone, cut off, no contact - reconnect to universal love',
-    science: '528Hz self-love/DNA repair + 639Hz connection frequency (proven to activate social bonding circuits) + 963Hz universal consciousness link + 40Hz gamma (monks reach this in deep meditation - you are NEVER alone). Works when you have zero human contact.',
-    sources: ['Social isolation neuroscience', '639Hz relationship frequency research', 'Gamma meditation studies', 'Loneliness intervention protocols'],
-    ancientWisdom: 'Hermits, monks, prisoners in solitary - they all discovered this: tune to 963Hz and you connect to EVERYTHING. You are never isolated. The universe is inside you. Birds, trees, stars - all on this frequency. You are held.',
-    config: {
-      primary: 528,
-      secondary: 639,
-      carrier: 963,
-      breathRate: 5,
-      noiseType: 'pink',
-      noiseLevel: 0.12,
-      isBinaural: true,
-      visualEntrainment: true
-    }
-  },
-
-  refugee_trauma: {
-    id: 'refugee_trauma',
-    name: 'Refugee/Displacement',
-    icon: COOLASFUCKShield,
-    color: '#ea580c',
-    description: 'Lost home, fleeing, displaced - rebuild internal safety',
-    science: '396Hz fear/guilt release + 417Hz facilitate change/adaptation + 528Hz transformation/new start + 174Hz foundation/security. Solfeggio sequence proven to process trauma and rebuild sense of safety when external world is destroyed. Your safety lives in your nervous system, not your location.',
-    sources: ['Refugee mental health meta-analysis', 'Displacement trauma research', 'Solfeggio healing sequence studies', 'Somatic trauma therapy protocols'],
-    ancientWisdom: 'Every culture that has been displaced knows this truth: home is a frequency, not a place. When you have lost everything external, you tune your body to 174Hz (foundation) + 528Hz (transformation) and you carry home inside you. Nomads, refugees, exiles - they all learned to be the sanctuary.',
-    config: {
-      primary: 396,
-      secondary: 417,
-      carrier: 528,
-      breathRate: 5,
-      noiseType: 'pink',
-      noiseLevel: 0.12,
       isBinaural: true,
       visualEntrainment: true
     }
