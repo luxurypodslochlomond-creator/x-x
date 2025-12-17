@@ -246,6 +246,7 @@ import AI51Architecture from './pages/AI51Architecture';
 import AI51Demo from './pages/AI51Demo';
 import Prof51Refund from './pages/Prof51Refund';
 import TestAI51 from './pages/TestAI51';
+import AI51ScalingStrategy from './pages/AI51ScalingStrategy';
 import __Layout from './Layout.jsx';
 
 
@@ -498,6 +499,7 @@ export const PAGES = {
     "AI51Demo": AI51Demo,
     "Prof51Refund": Prof51Refund,
     "TestAI51": TestAI51,
+    "AI51ScalingStrategy": AI51ScalingStrategy,
 }
 
 export const pagesConfig = {

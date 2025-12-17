@@ -57,7 +57,7 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, biom
 
     // Detect user language
     const lang = navigator.language.split('-')[0];
-    if (['en', 'ar', 'uk', 'es'].includes(lang)) {
+    if (['en', 'ar', 'uk', 'es', 'zh', 'ko', 'fr', 'ja', 'hi', 'pt', 'ru'].includes(lang)) {
       setUserLanguage(lang);
     }
 
@@ -586,7 +586,7 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, biom
           )}
           <button
             onClick={() => {
-              const langs = ['en', 'ar', 'uk', 'es'];
+              const langs = ['en', 'ar', 'uk', 'es', 'zh', 'ko', 'fr', 'ja', 'hi', 'pt', 'ru'];
               const current = langs.indexOf(userLanguage);
               const next = langs[(current + 1) % langs.length];
               setUserLanguage(next);
