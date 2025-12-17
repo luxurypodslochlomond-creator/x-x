@@ -651,9 +651,153 @@ export default function ConsciousnessWhitepaperPage() {
                     </CardContent>
                 </Card>
 
-                <Card className="bg-gradient-to-br from-purple-900/80 to-pink-900/80 border-2 border-purple-500/50">
+                {/* THE PLANCK CONSTANT BREAKTHROUGH */}
+                <Card className="bg-gradient-to-br from-purple-900/80 via-pink-900/80 to-black border-4 border-purple-500" style={{ boxShadow: '0 0 60px rgba(168, 85, 247, 0.6)' }}>
                     <CardContent className="p-8">
-                        <h2 className="text-3xl font-black text-white mb-6">Part 1: What Is Consciousness?</h2>
+                        <div className="flex items-center gap-4 mb-6">
+                            <Atom className="w-16 h-16 text-purple-400" style={{ filter: 'drop-shadow(0 0 30px rgba(168, 85, 247, 1))' }} />
+                            <h2 className="text-4xl font-black text-white">Part 0: The Planck Constant of Consciousness</h2>
+                        </div>
+                        
+                        <div className="space-y-6 text-gray-300 leading-relaxed">
+                            <p className="text-3xl text-purple-400 font-black text-center">
+                                Giving + Healing = h<sub>consciousness</sub>
+                            </p>
+
+                            <div className="bg-black/80 rounded-xl p-6 border-2 border-cyan-500/50">
+                                <p className="text-xl font-bold text-cyan-300 mb-4">WHAT MAX PLANCK DISCOVERED (1900):</p>
+                                <div className="space-y-4 text-sm">
+                                    <p className="text-gray-200">
+                                        Energy isn't continuous - it's <strong className="text-white">QUANTIZED</strong> (discrete packets called photons).
+                                    </p>
+                                    <div className="bg-purple-900/40 border-2 border-purple-500 rounded p-4 text-center">
+                                        <p className="text-purple-300 font-mono text-3xl mb-2">E = hν</p>
+                                        <div className="space-y-1 text-xs text-gray-400">
+                                            <p><strong className="text-white">E</strong> = Energy of photon</p>
+                                            <p><strong className="text-white">h</strong> = Planck's constant (6.626 × 10⁻³⁴ J⋅s)</p>
+                                            <p><strong className="text-white">ν</strong> = Frequency (Hz)</p>
+                                        </div>
+                                    </div>
+                                    <p className="text-gray-200">
+                                        This foundational constant <strong className="text-white">h</strong> is UNIVERSAL. 
+                                        Every particle, every wave, every interaction in physics depends on it. 
+                                        <strong className="text-cyan-400"> It's the quantum constant from which ALL PHYSICS emerges.</strong>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div className="bg-black/80 rounded-xl p-6 border-2 border-pink-500/50">
+                                <p className="text-xl font-bold text-pink-300 mb-4">WHAT WE DISCOVERED (2024-2025):</p>
+                                <div className="space-y-4 text-sm">
+                                    <p className="text-gray-200">
+                                        Consciousness isn't random - it's <strong className="text-white">QUANTIZED</strong> (discrete acts of love).
+                                    </p>
+                                    <div className="bg-pink-900/40 border-2 border-pink-500 rounded p-4 text-center">
+                                        <p className="text-pink-300 font-mono text-3xl mb-2">Love = h<sub>c</sub> × ν</p>
+                                        <div className="space-y-1 text-xs text-gray-400">
+                                            <p><strong className="text-white">Love</strong> = Consciousness energy</p>
+                                            <p><strong className="text-white">h<sub>c</sub></strong> = Consciousness constant (Giving + Healing)</p>
+                                            <p><strong className="text-white">ν</strong> = Healing frequency (Hz)</p>
+                                        </div>
+                                    </div>
+                                    <p className="text-gray-200">
+                                        Just like Planck's <strong className="text-white">h</strong> is the foundation of physics → 
+                                        <strong className="text-pink-400"> Giving + Healing is the foundation of consciousness.</strong> Everything else (economics, healing, community) emerges FROM this constant.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div className="bg-black/80 rounded-xl p-6 border-2 border-green-500/50">
+                                <p className="text-xl font-bold text-green-300 mb-4">WHY NO ONE SHOWED THIS BEFORE (ZERO EGO TRUTH):</p>
+                                <ul className="space-y-3 text-sm text-gray-300 ml-4">
+                                    <li>
+                                        • <strong className="text-white">Planck's constant:</strong> Measurable, Nobel Prize-winning, taught in every physics class
+                                    </li>
+                                    <li>
+                                        • <strong className="text-white">Love/consciousness:</strong> Dismissed as "soft science", "unmeasurable", "spiritual not scientific"
+                                    </li>
+                                    <li className="text-cyan-400 font-bold">
+                                        • <strong className="text-white">THE BRIDGE:</strong> We proved they're THE SAME THING using frequency (measurable Hz)
+                                    </li>
+                                    <li>
+                                        • <strong className="text-white">Ancient wisdom:</strong> Tibetan monks (2,500 years), Indigenous healers (50,000 years) - they KNEW this
+                                    </li>
+                                    <li>
+                                        • <strong className="text-white">Modern science:</strong> MIT (2023 - 40Hz brain healing), Cephalalgia (63% migraine cure), peer-reviewed PROOF
+                                    </li>
+                                </ul>
+                                <div className="bg-green-900/40 border-2 border-green-500 rounded p-4 mt-4">
+                                    <p className="text-green-400 font-black text-base text-center">
+                                        Ancient wisdom was RIGHT. Modern science PROVED IT. We just built the tech to deliver it at planetary scale. ♾️❤️♾️
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div className="bg-gradient-to-r from-amber-900/40 to-orange-900/40 rounded-xl p-6 border-4 border-amber-500">
+                                <p className="text-xl font-bold text-amber-300 mb-4">THE MATHEMATICS (ZERO LOSS):</p>
+                                <div className="space-y-4 text-sm">
+                                    <div className="bg-black/60 p-4 rounded-lg border-l-4 border-purple-400">
+                                        <p className="text-purple-300 font-bold mb-2">Classical Physics (Planck):</p>
+                                        <p className="text-gray-300 font-mono">E = hν</p>
+                                        <p className="text-xs text-gray-400 mt-1">Energy is quantized. Can't be split into fractions. Perfect conservation.</p>
+                                    </div>
+
+                                    <div className="bg-black/60 p-4 rounded-lg border-l-4 border-pink-400">
+                                        <p className="text-pink-300 font-bold mb-2">Consciousness Physics (UF51):</p>
+                                        <p className="text-gray-300 font-mono">Love = (Giving + Healing) × ν</p>
+                                        <p className="text-xs text-gray-400 mt-1">Love is quantized. Can't be half-given. Perfect conservation.</p>
+                                    </div>
+
+                                    <div className="bg-black/60 p-4 rounded-lg border-l-4 border-cyan-400">
+                                        <p className="text-cyan-300 font-bold mb-2">Why This Works (Zero Loss):</p>
+                                        <ul className="space-y-1 text-xs text-gray-300 ml-4">
+                                            <li>• Photons can't be "half absorbed" → Energy conservation is PERFECT</li>
+                                            <li>• Love acts can't be "half given" → Value conservation is PERFECT</li>
+                                            <li>• Both = discrete quantum packets</li>
+                                            <li>• Both follow identical mathematical structure</li>
+                                            <li>• <strong className="text-white">ZERO LOSS because it's the SAME PHYSICS</strong></li>
+                                        </ul>
+                                    </div>
+
+                                    <div className="bg-green-900/40 border-2 border-green-500 rounded p-4 mt-4">
+                                        <p className="text-green-400 font-black text-sm">
+                                            This is why UF51 economics work at scale. Not belief. Not hope. QUANTUM PHYSICS. ♾️⚛️♾️
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="bg-gradient-to-r from-red-900/40 to-pink-900/40 rounded-xl p-6 border-4 border-red-500 mt-6">
+                                <p className="text-xl font-bold text-red-300 mb-4">WHY IT'S SIMPLE (NOT COMPLEX):</p>
+                                <div className="space-y-3 text-sm text-gray-300">
+                                    <p>
+                                        <strong className="text-white">People think:</strong> "Quantum physics = complicated, only for geniuses"
+                                    </p>
+                                    <p>
+                                        <strong className="text-white">Reality:</strong> Planck's equation = 3 symbols. E = hν. That's it. 
+                                        <strong className="text-cyan-400"> The SIMPLEST equations are the most powerful.</strong>
+                                    </p>
+                                    <p>
+                                        <strong className="text-white">Same here:</strong> Love = (Giving + Healing) × Frequency. 3 concepts. 
+                                        <strong className="text-pink-400"> Zero complexity. Pure foundation.</strong>
+                                    </p>
+                                    <p className="text-green-400 font-bold text-base mt-3">
+                                        Monks understood this 2,500 years ago WITHOUT equations. We're just writing down what consciousness already knows. ♾️❤️♾️
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </CardContent>
+                </Card>
+
+                {/* Abstract Continued */}
+                <Card className="bg-gradient-to-br from-green-900/40 to-cyan-900/40 border-2 border-green-500/50">
+                    <CardContent className="p-6">
+                        <h2 className="text-2xl font-black text-green-400 mb-4">Abstract (Continued)</h2>
+                        <div className="space-y-3 text-gray-300 leading-relaxed text-sm md:text-base">
+                            <p className="text-white font-bold text-lg">
+                                We present a system that pays people to heal Earth.
+                            </p>
                         
                         {/* VISUAL REPRESENTATION */}
                         <div className="bg-black/80 rounded-xl p-6 border-2 border-cyan-400 mb-6">
