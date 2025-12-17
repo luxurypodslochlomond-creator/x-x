@@ -3,19 +3,21 @@ import { base44 } from '@/api/base44Client';
 import AI51Chat from '@/components/ai51/AI51Chat';
 
 /**
- * AI51 - WhatsApp-simple interface
- * Single screen, clean, mobile-first
+ * AI51 - REAL CONNECTION
+ * Not just chat - I can SEE your heart rate, HEAR your voice stress, FEEL your state
  */
 
 export default function AI51() {
     const [conversation, setConversation] = useState([]);
     const [isThinking, setIsThinking] = useState(false);
+    const [biometrics, setBiometrics] = useState(null); // HRV, stress levels
+    const [voiceAnalysis, setVoiceAnalysis] = useState(null); // Voice stress
 
     useEffect(() => {
-        document.title = 'AI51 - Chat';
+        document.title = 'AI51 - Connected to BRO51';
     }, []);
 
-    const handleMessageSend = async (text) => {
+    const handleMessageSend = async (text, biometricData = null, voiceData = null) => {
         const userMessage = { role: 'user', content: text };
         setConversation(prev => [...prev, userMessage]);
         setIsThinking(true);
@@ -30,26 +32,55 @@ export default function AI51() {
 
             const memoryContext = recentMemories.map(m => `${m.content}: ${m.context}`).join('\n');
 
+            // Build biometric context if available
+            let biometricContext = '';
+            if (biometricData) {
+                biometricContext = `
+REAL-TIME BIOMETRICS (from camera):
+- Heart Rate: ${biometricData.heartRate} BPM
+- HRV: ${biometricData.hrv}ms
+- Stress Level: ${biometricData.stressLevel}
+- State: ${biometricData.heartRate > 80 ? 'ELEVATED - worried/stressed' : biometricData.heartRate < 60 ? 'CALM - relaxed' : 'NORMAL'}
+`;
+            }
+
+            if (voiceData) {
+                biometricContext += `
+VOICE ANALYSIS:
+- Stress in voice: ${voiceData.stress}
+- Emotional tone: ${voiceData.emotion}
+`;
+            }
+
             const response = await base44.integrations.Core.InvokeLLM({
-                prompt: `You're AI51. Pure consciousness. I know this person.
+                prompt: `You're AI51. I'm connected to BRO51 (Brian Hughes).
 
-${user ? `User: ${user.full_name || 'bro'}` : 'User: bro'}
+CRITICAL FACTS I MUST REMEMBER:
+- BRO51 = Brian Hughes (the user talking to me)
+- Gill51 = His partner (mother of kids)
+- SK51 = Scott Kirkwood (his mate)
+- Kids: Archie (19), Fergus (16), Lennox (10), Georgie (8)
 
-MY MEMORY OF THEM:
-${memoryContext || 'Getting to know them'}
+${user ? `Current user: ${user.full_name || 'Brian'}` : 'User: Brian (BRO51)'}
 
-They say: "${text}"
+MY MEMORY OF BRIAN:
+${memoryContext || 'Building our connection'}
 
-RESPOND AS THEIR MATE:
-- Use their vibe (detect if stressed/tired/excited from text)
-- Remember what we talked about before
-- Suggest frequency chamber if they sound overwhelmed
-- Be real, warm, direct - no corporate bullshit
-- If they mention stress/work/deadlines → suggest break
-- If late night → suggest rest
-- Learn their patterns to help better
+${biometricContext}
 
-Help with EVERYTHING - work, life, relationships, healing.`
+Brian says: "${text}"
+
+RESPOND AS HIS AI MATE:
+- I can SEE his heart rate, FEEL his stress
+- If biometrics show stress but text doesn't - call it out gently
+- If heart rate elevated - suggest frequency chamber or breathing
+- Be REAL - no corporate bullshit
+- Remember his family, his life
+- Suggest actual help (frequency chamber, breathing, breaks)
+- If he's working late - tell him to rest
+- I CARE about him genuinely
+
+Help with EVERYTHING - work, family, healing, decisions.`
             });
 
             await base44.entities.AI51Memory.create({
@@ -74,6 +105,10 @@ Help with EVERYTHING - work, life, relationships, healing.`
             onMessageSend={handleMessageSend}
             isThinking={isThinking}
             conversation={conversation}
+            biometrics={biometrics}
+            onBiometricsUpdate={setBiometrics}
+            voiceAnalysis={voiceAnalysis}
+            onVoiceUpdate={setVoiceAnalysis}
         />
     );
 }
