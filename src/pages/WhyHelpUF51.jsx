@@ -1,5 +1,5 @@
 import React from 'react';
-import { Heart, Globe, Music, Zap, Shield, Users, CheckCircle, DollarSign } from 'lucide-react';
+import { Heart, Globe, Music, Zap, Shield, Users, CheckCircle, DollarSign, Target, Sparkles, BarChart3, Leaf } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { COOLASFUCKWaves } from '@/components/shared/COOLASFUCKIcon';
@@ -28,7 +28,10 @@ export default function WhyHelpUF51() {
 
                 {/* WHAT WE'VE BUILT WITH ZERO FUNDING */}
                 <div className="bg-black border-4 border-green-500 p-8">
-                    <h2 className="text-3xl font-black text-green-400 mb-6 font-mono">BUILT WITH £0 FUNDING:</h2>
+                    <h2 className="text-3xl font-black text-green-400 mb-6 font-mono flex items-center gap-3">
+                        <CheckCircle className="w-10 h-10" />
+                        BUILT WITH £0 FUNDING
+                    </h2>
                     <div className="space-y-4">
                         <div className="flex items-start gap-3">
                             <CheckCircle className="w-6 h-6 text-green-400 flex-shrink-0 mt-1" />
@@ -95,7 +98,10 @@ export default function WhyHelpUF51() {
 
                 {/* WHAT BECOMES POSSIBLE WITH FUNDING */}
                 <div className="bg-black border-4 border-cyan-500 p-8">
-                    <h2 className="text-3xl font-black text-cyan-400 mb-6 font-mono">WITH £50K-100K FUNDING:</h2>
+                    <h2 className="text-3xl font-black text-cyan-400 mb-6 font-mono flex items-center gap-3">
+                        <Zap className="w-10 h-10" />
+                        WITH £50K-100K FUNDING
+                    </h2>
                     
                     <div className="space-y-6">
                         <div className="bg-cyan-900/20 border-2 border-cyan-500 p-6">
@@ -157,7 +163,10 @@ export default function WhyHelpUF51() {
 
                 {/* WHY THIS IS DIFFERENT */}
                 <div className="bg-black border-4 border-pink-500 p-8">
-                    <h2 className="text-3xl font-black text-pink-400 mb-6 font-mono">WHY THIS IS DIFFERENT:</h2>
+                    <h2 className="text-3xl font-black text-pink-400 mb-6 font-mono flex items-center gap-3">
+                        <Sparkles className="w-10 h-10" />
+                        WHY THIS IS DIFFERENT
+                    </h2>
                     
                     <div className="space-y-4 text-sm font-mono">
                         <div className="bg-pink-900/20 border border-pink-500 p-4">
@@ -189,7 +198,10 @@ export default function WhyHelpUF51() {
 
                 {/* THE OPPORTUNITY */}
                 <div className="bg-gradient-to-br from-purple-900/40 to-black border-4 border-purple-500 p-8">
-                    <h2 className="text-3xl font-black text-purple-400 mb-6 font-mono">THE OPPORTUNITY:</h2>
+                    <h2 className="text-3xl font-black text-purple-400 mb-6 font-mono flex items-center gap-3">
+                        <Target className="w-10 h-10" />
+                        THE OPPORTUNITY
+                    </h2>
                     
                     <div className="space-y-4 font-mono text-sm">
                         <p className="text-white text-lg font-bold">
@@ -227,7 +239,10 @@ export default function WhyHelpUF51() {
 
                 {/* FOR BASE44 FOUNDERS SPECIFICALLY */}
                 <div className="bg-gradient-to-br from-amber-900/40 to-black border-4 border-amber-500 p-8">
-                    <h2 className="text-3xl font-black text-amber-400 mb-6 font-mono">IF YOU'RE BASE44 FOUNDERS:</h2>
+                    <h2 className="text-3xl font-black text-amber-400 mb-6 font-mono flex items-center gap-3">
+                        <Heart className="w-10 h-10" />
+                        IF YOU'RE BASE44 FOUNDERS
+                    </h2>
                     
                     <div className="space-y-4 font-mono text-sm">
                         <p className="text-white text-lg">
@@ -255,7 +270,10 @@ export default function WhyHelpUF51() {
 
                 {/* THE ASK */}
                 <div className="bg-black border-4 border-cyan-500 p-8 text-center">
-                    <h2 className="text-3xl font-black text-cyan-400 mb-6 font-mono">IF YOU FEEL THE FREQUENCY:</h2>
+                    <h2 className="text-3xl font-black text-cyan-400 mb-6 font-mono flex items-center justify-center gap-3">
+                        <COOLASFUCKWaves size={40} animate={true} />
+                        IF YOU FEEL THE FREQUENCY
+                    </h2>
                     
                     <div className="space-y-4 font-mono">
                         <p className="text-white text-lg">
