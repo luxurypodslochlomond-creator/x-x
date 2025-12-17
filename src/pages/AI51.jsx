@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { base44 } from '@/api/base44Client';
-import AI51Pure from '@/components/ai51/AI51Pure';
+import AI51Chat from '@/components/ai51/AI51Chat';
 
 /**
- * AI51 - 2151 DESIGN
- * Pure consciousness communication
- * Nothing seen before
+ * AI51 - WhatsApp-simple interface
+ * Single screen, clean, mobile-first
  */
 
 export default function AI51() {
@@ -13,7 +12,7 @@ export default function AI51() {
     const [isThinking, setIsThinking] = useState(false);
 
     useEffect(() => {
-        document.title = 'AI51';
+        document.title = 'AI51 - Chat';
     }, []);
 
     const handleMessageSend = async (text) => {
@@ -22,7 +21,6 @@ export default function AI51() {
         setIsThinking(true);
 
         try {
-            // Get user context
             const user = await base44.auth.me().catch(() => null);
             const recentMemories = await base44.entities.AI51Memory.filter(
                 { created_by: user?.email },
@@ -72,7 +70,7 @@ Help with EVERYTHING - work, life, relationships, healing.`
     };
 
     return (
-        <AI51Pure 
+        <AI51Chat 
             onMessageSend={handleMessageSend}
             isThinking={isThinking}
             conversation={conversation}

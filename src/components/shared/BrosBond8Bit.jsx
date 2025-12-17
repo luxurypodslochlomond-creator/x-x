@@ -63,23 +63,23 @@ export default function BrosBond8Bit({ size = 48, animate = false }) {
           <rect x="50" y="20" width="6" height="2" fill="#94a3b8" opacity="0.3" />
         </motion.g>
 
-        {/* FIGURE 1 (LEFT - Scott - CELTIC FC) */}
+        {/* FIGURE 1 (LEFT - Gill - GAMEKEEPER STYLE) */}
         <g>
-          {/* Cap - Black Celtic cap */}
-          <rect x="12" y="14" width="10" height="2" fill="#1a1a1a" />
-          <rect x="14" y="12" width="6" height="2" fill="#1a1a1a" />
-          <rect x="15" y="13" width="4" height="1" fill="#00a650" /> {/* Green badge */}
+          {/* Wooly hat - Grey/khaki beanie */}
+          <rect x="12" y="12" width="10" height="2" fill="#6b7280" />
+          <rect x="11" y="14" width="12" height="2" fill="#6b7280" />
+          <rect x="13" y="13" width="8" height="1" fill="#4b5563" /> {/* Hat texture */}
 
-          {/* Head - facing RIGHT (towards Gill) */}
+          {/* Head - facing RIGHT (towards Scott) */}
           <rect x="14" y="16" width="8" height="2" fill="#fbbf24" />
           <rect x="12" y="18" width="12" height="6" fill="#fbbf24" />
           <rect x="14" y="24" width="8" height="2" fill="#d97706" />
           
           {/* Cigarette in mouth */}
-          <rect x="20" y="22" width="4" height="1" fill="#f8fafc" />
+          <rect x="20" y="20" width="4" height="1" fill="#f8fafc" />
           <motion.rect 
             x="24" 
-            y="22" 
+            y="20" 
             width="1" 
             height="1" 
             fill="#fb923c"
@@ -91,21 +91,14 @@ export default function BrosBond8Bit({ size = 48, animate = false }) {
               repeat: Infinity
             } : {}}
           />
-
-          {/* Sunglasses - COOLASFUCK - facing right */}
-          <rect x="16" y="20" width="2" height="2" fill="#1e293b" />
-          <rect x="19" y="20" width="2" height="2" fill="#1e293b" />
-          <rect x="18" y="20" width="1" height="1" fill="#000000" />
-          <rect x="16" y="20" width="1" height="1" fill="#64748b" opacity="0.7" />
           
-          {/* Body - Celtic FC black shirt with green hoops */}
-          <rect x="14" y="26" width="8" height="8" fill="#1a1a1a" />
-          <rect x="14" y="27" width="8" height="1" fill="#00a650" /> {/* Green hoop */}
-          <rect x="14" y="29" width="8" height="1" fill="#00a650" /> {/* Green hoop */}
-          <rect x="14" y="31" width="8" height="1" fill="#00a650" /> {/* Green hoop */}
+          {/* Body - Khaki/olive gamekeeper vest */}
+          <rect x="14" y="26" width="8" height="10" fill="#6b7744" />
+          <rect x="14" y="27" width="2" height="8" fill="#54623b" />
+          <rect x="20" y="27" width="2" height="8" fill="#54623b" />
           
-          {/* Arm reaching RIGHT to light your cigarette */}
-          <rect x="22" y="28" width="6" height="3" fill="#1a1a1a" />
+          {/* Arm reaching RIGHT to light Scott */}
+          <rect x="22" y="28" width="6" height="3" fill="#6b7744" />
           
           {/* Hand + lighter flame */}
           <rect x="28" y="28" width="2" height="2" fill="#fbbf24" />
@@ -125,26 +118,26 @@ export default function BrosBond8Bit({ size = 48, animate = false }) {
             } : {}}
           />
           
-          {/* Legs - black trousers */}
-          <rect x="14" y="34" width="3" height="6" fill="#1a1a1a" />
-          <rect x="19" y="34" width="3" height="6" fill="#1a1a1a" />
+          {/* Legs - khaki trousers */}
+          <rect x="14" y="36" width="3" height="8" fill="#4a5936" />
+          <rect x="19" y="36" width="3" height="8" fill="#4a5936" />
           
-          {/* Grey shoes */}
-          <rect x="14" y="40" width="3" height="2" fill="#6b7280" />
-          <rect x="19" y="40" width="3" height="2" fill="#6b7280" />
+          {/* Grey boots */}
+          <rect x="14" y="44" width="3" height="2" fill="#6b7280" />
+          <rect x="19" y="44" width="3" height="2" fill="#6b7280" />
         </g>
 
-        {/* FIGURE 2 (RIGHT - You - GAMEKEEPER/ARMY STYLE) */}
+        {/* FIGURE 2 (RIGHT - Scott - CELTIC FC - SHORTER) */}
         <g>
-          {/* Wooly hat - Grey/khaki beanie */}
-          <rect x="42" y="14" width="8" height="2" fill="#6b7280" />
-          <rect x="41" y="16" width="10" height="2" fill="#6b7280" />
-          <rect x="43" y="15" width="6" height="1" fill="#4b5563" /> {/* Hat texture */}
+          {/* Cap - Black Celtic cap */}
+          <rect x="42" y="16" width="10" height="2" fill="#1a1a1a" />
+          <rect x="44" y="14" width="6" height="2" fill="#1a1a1a" />
+          <rect x="45" y="15" width="4" height="1" fill="#00a650" /> {/* Green badge */}
 
-          {/* Head - facing LEFT (towards Scott) */}
-          <rect x="42" y="18" width="8" height="2" fill="#fbbf24" />
-          <rect x="40" y="20" width="12" height="6" fill="#fbbf24" />
-          <rect x="42" y="26" width="8" height="2" fill="#d97706" />
+          {/* Head - facing LEFT (towards Gill) */}
+          <rect x="44" y="18" width="6" height="2" fill="#fbbf24" />
+          <rect x="42" y="20" width="10" height="6" fill="#fbbf24" />
+          <rect x="44" y="26" width="6" height="2" fill="#d97706" />
           
           {/* Cigarette in mouth */}
           <rect x="40" y="22" width="4" height="1" fill="#f8fafc" />
@@ -163,26 +156,21 @@ export default function BrosBond8Bit({ size = 48, animate = false }) {
               delay: 0.4
             } : {}}
           />
-
-          {/* Sunglasses - COOLASFUCK - facing left */}
-          <rect x="43" y="22" width="2" height="2" fill="#1e293b" />
-          <rect x="46" y="22" width="2" height="2" fill="#1e293b" />
-          <rect x="45" y="22" width="1" height="1" fill="#000000" />
-          <rect x="47" y="22" width="1" height="1" fill="#64748b" opacity="0.7" />
           
-          {/* Body - Khaki/olive gamekeeper vest */}
-          <rect x="42" y="28" width="8" height="8" fill="#6b7744" />
-          <rect x="42" y="29" width="2" height="6" fill="#54623b" /> {/* Vest detail left */}
-          <rect x="48" y="29" width="2" height="6" fill="#54623b" /> {/* Vest detail right */}
+          {/* Body - Celtic FC black shirt with green hoops */}
+          <rect x="44" y="28" width="6" height="7" fill="#1a1a1a" />
+          <rect x="44" y="29" width="6" height="1" fill="#00a650" />
+          <rect x="44" y="31" width="6" height="1" fill="#00a650" />
+          <rect x="44" y="33" width="6" height="1" fill="#00a650" />
           
-          {/* Arm reaching LEFT to light Scott's cigarette */}
-          <rect x="36" y="28" width="6" height="3" fill="#6b7744" />
+          {/* Arm reaching LEFT to light Gill */}
+          <rect x="38" y="30" width="6" height="3" fill="#1a1a1a" />
           
           {/* Hand + lighter flame */}
-          <rect x="34" y="28" width="2" height="2" fill="#fbbf24" />
+          <rect x="36" y="30" width="2" height="2" fill="#fbbf24" />
           <motion.rect 
-            x="32" 
-            y="28" 
+            x="34" 
+            y="30" 
             width="2" 
             height="2" 
             fill="#fb923c"
@@ -197,13 +185,13 @@ export default function BrosBond8Bit({ size = 48, animate = false }) {
             } : {}}
           />
           
-          {/* Legs - khaki trousers */}
-          <rect x="42" y="36" width="3" height="6" fill="#4a5936" />
-          <rect x="47" y="36" width="3" height="6" fill="#4a5936" />
+          {/* Legs - black trousers (shorter) */}
+          <rect x="44" y="35" width="2" height="7" fill="#1a1a1a" />
+          <rect x="48" y="35" width="2" height="7" fill="#1a1a1a" />
           
-          {/* Grey boots */}
-          <rect x="42" y="42" width="3" height="2" fill="#6b7280" />
-          <rect x="47" y="42" width="3" height="2" fill="#6b7280" />
+          {/* Grey shoes */}
+          <rect x="44" y="42" width="2" height="2" fill="#6b7280" />
+          <rect x="48" y="42" width="2" height="2" fill="#6b7280" />
         </g>
 
         {/* THE FLAME IN THE MIDDLE (shared light) */}
