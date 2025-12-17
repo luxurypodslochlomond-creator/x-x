@@ -247,6 +247,7 @@ import AI51Demo from './pages/AI51Demo';
 import Prof51Refund from './pages/Prof51Refund';
 import TestAI51 from './pages/TestAI51';
 import AI51ScalingStrategy from './pages/AI51ScalingStrategy';
+import SubdomainSetup from './pages/SubdomainSetup';
 import __Layout from './Layout.jsx';
 
 
@@ -500,6 +501,7 @@ export const PAGES = {
     "Prof51Refund": Prof51Refund,
     "TestAI51": TestAI51,
     "AI51ScalingStrategy": AI51ScalingStrategy,
+    "SubdomainSetup": SubdomainSetup,
 }
 
 export const pagesConfig = {
