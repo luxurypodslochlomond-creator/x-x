@@ -26,6 +26,8 @@ export default function LostAndFoundMesh() {
     const [showSuccess, setShowSuccess] = useState(false);
     const [showMeetup, setShowMeetup] = useState(false);
     const [selectedItem, setSelectedItem] = useState(null);
+    const [showFoundAlert, setShowFoundAlert] = useState(false);
+    const [audioContext, setAudioContext] = useState(null);
 
     // Simulated mesh strength (updates every 2 seconds)
     useEffect(() => {
@@ -52,6 +54,45 @@ export default function LostAndFoundMesh() {
         { name: 'Main Lecture Building Entrance', distance: '4 min walk', hours: '7am-9pm', busy: 'High foot traffic' },
     ];
 
+    // PLAY FOUND CHIME - 8-bit success sound
+    const playFoundChime = () => {
+        const ctx = audioContext || new (window.AudioContext || window.webkitAudioContext)();
+        if (!audioContext) setAudioContext(ctx);
+        
+        // 8-bit ascending chime (C-E-G major chord)
+        const notes = [523.25, 659.25, 783.99]; // C5, E5, G5
+        notes.forEach((freq, i) => {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            
+            osc.type = 'square'; // 8-bit square wave
+            osc.frequency.value = freq;
+            
+            gain.gain.setValueAtTime(0, ctx.currentTime + (i * 0.15));
+            gain.gain.linearRampToValueAtTime(0.2, ctx.currentTime + (i * 0.15) + 0.01);
+            gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + (i * 0.15) + 0.3);
+            
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            
+            osc.start(ctx.currentTime + (i * 0.15));
+            osc.stop(ctx.currentTime + (i * 0.15) + 0.3);
+        });
+    };
+
+    // Simulate P2P found notification (every 10 seconds for demo)
+    useEffect(() => {
+        const interval = setInterval(() => {
+            // 10% chance of "finding" something (demo)
+            if (Math.random() < 0.1) {
+                playFoundChime();
+                setShowFoundAlert(true);
+                setTimeout(() => setShowFoundAlert(false), 5000);
+            }
+        }, 10000);
+        return () => clearInterval(interval);
+    }, [audioContext]);
+
     const handleReport = () => {
         if (!reportForm.item) return;
         setShowSuccess(true);
@@ -64,6 +105,93 @@ export default function LostAndFoundMesh() {
 
     return (
         <div className="space-y-4">
+            {/* P2P FOUND ALERT - 8-BIT NOTIFICATION */}
+            <AnimatePresence>
+                {showFoundAlert && (
+                    <motion.div
+                        initial={{ opacity: 0, y: -100, scale: 0.8 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: -100, scale: 0.8 }}
+                        className="fixed top-20 left-1/2 transform -translate-x-1/2 z-50 bg-gradient-to-r from-green-500 to-cyan-500 border-4 border-white rounded-2xl p-6 max-w-sm"
+                        style={{ boxShadow: '0 0 60px rgba(34, 197, 94, 0.8)' }}
+                    >
+                        <div className="text-center">
+                            {/* 8-bit Found Icon */}
+                            <motion.svg 
+                                width="80" 
+                                height="80" 
+                                viewBox="0 0 32 32" 
+                                className="mx-auto mb-3"
+                                animate={{ rotate: [0, 10, -10, 0] }}
+                                transition={{ duration: 0.5, repeat: 3 }}
+                                style={{ imageRendering: 'pixelated' }}
+                            >
+                                {/* 8-bit checkmark circle */}
+                                <rect x="4" y="8" width="4" height="4" fill="#22c55e"/>
+                                <rect x="8" y="4" width="16" height="4" fill="#22c55e"/>
+                                <rect x="24" y="8" width="4" height="4" fill="#22c55e"/>
+                                <rect x="4" y="12" width="4" height="12" fill="#22c55e"/>
+                                <rect x="24" y="12" width="4" height="12" fill="#22c55e"/>
+                                <rect x="8" y="24" width="16" height="4" fill="#22c55e"/>
+                                <rect x="4" y="20" width="4" height="4" fill="#22c55e"/>
+                                <rect x="24" y="20" width="4" height="4" fill="#22c55e"/>
+                                
+                                {/* Checkmark inside */}
+                                <rect x="10" y="16" width="2" height="2" fill="white"/>
+                                <rect x="12" y="18" width="2" height="2" fill="white"/>
+                                <rect x="14" y="20" width="2" height="2" fill="white"/>
+                                <rect x="16" y="18" width="2" height="2" fill="white"/>
+                                <rect x="18" y="16" width="2" height="2" fill="white"/>
+                                <rect x="20" y="14" width="2" height="2" fill="white"/>
+                                
+                                {/* Sparkles */}
+                                <motion.rect 
+                                    x="2" y="6" width="2" height="2" fill="#fbbf24"
+                                    animate={{ opacity: [0, 1, 0] }}
+                                    transition={{ duration: 1, repeat: Infinity }}
+                                />
+                                <motion.rect 
+                                    x="28" y="6" width="2" height="2" fill="#fbbf24"
+                                    animate={{ opacity: [0, 1, 0] }}
+                                    transition={{ duration: 1, repeat: Infinity, delay: 0.3 }}
+                                />
+                                <motion.rect 
+                                    x="2" y="24" width="2" height="2" fill="#fbbf24"
+                                    animate={{ opacity: [0, 1, 0] }}
+                                    transition={{ duration: 1, repeat: Infinity, delay: 0.6 }}
+                                />
+                                <motion.rect 
+                                    x="28" y="24" width="2" height="2" fill="#fbbf24"
+                                    animate={{ opacity: [0, 1, 0] }}
+                                    transition={{ duration: 1, repeat: Infinity, delay: 0.9 }}
+                                />
+                            </motion.svg>
+                            
+                            <p className="text-white font-black text-2xl font-mono mb-2">YOUR ITEM FOUND!</p>
+                            <p className="text-black font-bold text-sm font-mono mb-3">
+                                Someone found your passport near Library
+                            </p>
+                            
+                            <div className="bg-black/20 border-2 border-white rounded-lg p-3 mb-3">
+                                <p className="text-white text-xs font-mono font-bold mb-1">
+                                    P2P NOTIFICATION (OFFLINE):
+                                </p>
+                                <p className="text-white text-[10px] font-mono">
+                                    Via Bluetooth mesh • No internet needed ✓
+                                </p>
+                            </div>
+                            
+                            <button 
+                                onClick={() => { setShowFoundAlert(false); setActiveTab('search'); }}
+                                className="w-full bg-white text-green-600 font-black py-3 rounded-lg font-mono text-sm hover:bg-gray-100 transition-colors"
+                            >
+                                SEE MEETUP DETAILS →
+                            </button>
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
             {/* MESH STATUS - LIVE POWER INDICATOR */}
             <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-4 border-green-500 rounded-xl p-4 relative overflow-hidden" style={{ boxShadow: '0 0 40px rgba(34, 197, 94, 0.5)' }}>
                 {/* Animated pulse background */}
@@ -515,15 +643,33 @@ export default function LostAndFoundMesh() {
                                 </div>
                             </div>
 
-                            {/* SAFE MEETUP SPOTS */}
+                            {/* SAFE MEETUP SPOTS - AUTO-SELECTED */}
                             <div className="bg-black border-2 border-amber-500 rounded-lg p-4 mb-4">
-                                <p className="text-amber-400 font-bold text-sm mb-3">🛡️ SAFE PUBLIC SPOTS:</p>
+                                <p className="text-amber-400 font-bold text-sm mb-2">🛡️ SAFE PUBLIC SPOTS:</p>
+                                <p className="text-gray-300 text-xs font-mono mb-3">
+                                    P2P suggests safest spot based on time + your location
+                                </p>
+                                
                                 <div className="space-y-2">
                                     {safeMeetupSpots.map((spot, idx) => (
-                                        <div key={idx} className="bg-amber-900/20 border border-amber-500/30 rounded p-3 hover:bg-amber-900/30 transition-colors cursor-pointer">
+                                        <div 
+                                            key={idx} 
+                                            className={`border rounded p-3 transition-colors cursor-pointer ${
+                                                idx === 0 
+                                                    ? 'bg-green-500/20 border-green-500 shadow-lg' 
+                                                    : 'bg-amber-900/20 border-amber-500/30 hover:bg-amber-900/30'
+                                            }`}
+                                        >
                                             <div className="flex items-start justify-between mb-1">
-                                                <p className="text-white font-bold text-xs">{spot.name}</p>
-                                                <span className="text-amber-400 text-xs font-mono">{spot.distance}</span>
+                                                <div className="flex items-center gap-2">
+                                                    {idx === 0 && <CheckCircle className="w-4 h-4 text-green-400" />}
+                                                    <p className={`font-bold text-xs ${idx === 0 ? 'text-green-400' : 'text-white'}`}>
+                                                        {spot.name}
+                                                    </p>
+                                                </div>
+                                                <span className={`text-xs font-mono ${idx === 0 ? 'text-green-400' : 'text-amber-400'}`}>
+                                                    {spot.distance}
+                                                </span>
                                             </div>
                                             <div className="flex items-center gap-2 text-[10px] text-gray-400 font-mono">
                                                 <Clock className="w-3 h-3" />
@@ -531,8 +677,28 @@ export default function LostAndFoundMesh() {
                                                 <span>•</span>
                                                 <span className="text-green-400">{spot.busy}</span>
                                             </div>
+                                            {idx === 0 && (
+                                                <div className="mt-2 bg-green-900/30 border border-green-500/50 rounded p-2">
+                                                    <p className="text-green-400 text-[10px] font-mono font-bold">
+                                                        ✓ RECOMMENDED (Open now, 2 min walk, very busy)
+                                                    </p>
+                                                </div>
+                                            )}
                                         </div>
                                     ))}
+                                </div>
+                                
+                                <div className="bg-cyan-900/20 border border-cyan-500/50 rounded p-3 mt-3">
+                                    <p className="text-cyan-400 font-bold text-xs mb-1">P2P AUTO-COORDINATION:</p>
+                                    <p className="text-gray-300 text-[10px] font-mono mb-1">
+                                        • Finder sees your preferred spot
+                                    </p>
+                                    <p className="text-gray-300 text-[10px] font-mono mb-1">
+                                        • You see their ETA via mesh
+                                    </p>
+                                    <p className="text-gray-300 text-[10px] font-mono">
+                                        • Both get GPS to exact spot (offline maps)
+                                    </p>
                                 </div>
                             </div>
 
