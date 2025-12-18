@@ -548,7 +548,7 @@ export default function UniversalFrequencyLibrary() {
                             Silicon connects tech. Water connects EVERYTHING. ♾️💧♾️
                         </p>
                     </div>
-                </div>)}
+                    </div>)}
                 </div>
 
                 {/* SILICON FEATURED - HEAR IT NOW */}
