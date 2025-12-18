@@ -976,6 +976,7 @@ export default function UniversalFrequencyLibrary() {
                             </div>
                         </div>
                     </div>
+                    </div>)}
                 </div>
 
                 {/* BISMUTH - 8-BIT */}
