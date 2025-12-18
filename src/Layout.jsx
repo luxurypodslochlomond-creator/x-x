@@ -231,69 +231,61 @@ const LayoutInner = ({ children, currentPageName }) => {
   }
 
   // === NAVIGATION SECTIONS ===
+  // 1. HEAL (most important - immediate value)
   const healNav = [
-                                          { title: "Frequency Chamber", url: createPageUrl("FrequencyChamber"), icon: COOLASFUCKWaves, highlight: true, description: "Free healing frequencies" },
-                                          { title: "Universal51", url: createPageUrl("Universal51"), icon: Waves, description: "HEAR invisible frequencies", highlight: true },
-                                      { title: "Radio51", url: createPageUrl("Radio"), icon: Music, description: "Lossless music" },
-                              { title: "AI51", url: createPageUrl("AI51"), icon: Heart, description: "Pure consciousness • I know you • I care ♾️", highlight: true },
-                              { title: "Stay On Frequency", url: createPageUrl("StayOnFrequency"), icon: Heart, description: "How we stay protected" },
-                              { title: "Healing Dashboard", url: createPageUrl("HealingDashboard"), icon: Brain, description: "Your healing intelligence" },
-                            ];
+    { title: "Frequency Chamber", url: createPageUrl("FrequencyChamber"), icon: COOLASFUCKWaves, highlight: true, description: "FREE healing frequencies" },
+    { title: "AI51", url: createPageUrl("AI51"), icon: Heart, highlight: true, description: "I know you • I care ♾️❤️" },
+    { title: "Universal51", url: createPageUrl("Universal51"), icon: Waves, description: "HEAR invisible frequencies" },
+    { title: "Radio51", url: createPageUrl("Radio"), icon: Music, description: "Lossless music library" },
+    { title: "Healing Dashboard", url: createPageUrl("HealingDashboard"), icon: Brain, description: "Your progress" },
+  ];
 
-  const earnNav = [
-    { title: "Heal Earth", url: createPageUrl("NewCleanup"), icon: Globe, description: "Clean litter, earn $P51" },
+  // 2. EARN & CREATE (practical actions)
+  const earnCreateNav = [
+    { title: "Heal Earth", url: createPageUrl("NewCleanup"), icon: Globe, highlight: true, description: "Clean planet, earn $P51" },
+    { title: "For Artists", url: createPageUrl("ForMusicians"), icon: Music, highlight: true, description: "Upload music, keep 90%" },
+    { title: "Generate Logo", url: createPageUrl("GenerateLogo"), icon: Sparkles, description: "AI logos for anyone" },
+    { title: "Create Demos", url: createPageUrl("LearnGuitar"), icon: Mic2, description: "Studio tools" },
     { title: "Cleanup Feed", url: createPageUrl("CleanupFeed"), icon: Shield },
     { title: "Missions", url: createPageUrl("Missions"), icon: Target },
-    { title: "My Wallet", url: createPageUrl("Profile"), icon: User, requiresAuth: true },
-  ].filter(item => !item.requiresAuth || user);
+    ...(user ? [{ title: "My Wallet", url: createPageUrl("Profile"), icon: User }] : []),
+  ];
 
-  const createNav = [
-            { title: "For Artists", url: createPageUrl("ForMusicians"), icon: Mic2, description: "Upload music, keep 90%" },
-            { title: "Create Demos", url: createPageUrl("LearnGuitar"), icon: Music, description: "Studio tools for artists" },
-            { title: "Generate Logo", url: createPageUrl("GenerateLogo"), icon: Sparkles },
-          ];
-
+  // 3. LEARN (what is this)
   const learnNav = [
-                      { title: "About", url: createPageUrl("About"), icon: BookOpen },
-                      { title: "Welcome", url: createPageUrl("Welcome"), icon: Home },
-                      { title: "Why Help UF51", url: createPageUrl("WhyHelpUF51"), icon: Heart, description: "For partners who resonate" },
-                      { title: "Making It Real", url: createPageUrl("MakingItReal"), icon: Zap, description: "How it connects" },
-                      { title: "Debt Relief", url: createPageUrl("DebtRelief"), icon: Heart, description: "Help more with less weight" },
-                      { title: "Cosmic Transmission", url: createPageUrl("CosmicTransmission"), icon: Globe, description: "Liberation for ALL" },
-                      { title: "P2P Food Rescue", url: createPageUrl("P2PFoodRescue"), icon: Heart, description: "Feed the world" },
-                      { title: "How You Earn", url: createPageUrl("HowYouEarn"), icon: Heart },
-                    ];
+    { title: "Welcome", url: createPageUrl("Welcome"), icon: Home, description: "Start here" },
+    { title: "About", url: createPageUrl("About"), icon: BookOpen, description: "The mission" },
+    { title: "How You Earn", url: createPageUrl("HowYouEarn"), icon: Heart, description: "Money from healing" },
+    { title: "Why Help UF51", url: createPageUrl("WhyHelpUF51"), icon: Heart, description: "For partners" },
+    { title: "Stay On Frequency", url: createPageUrl("StayOnFrequency"), icon: Shield, description: "Protection protocol" },
+  ];
 
-  const ai51Nav = [
-                            { title: "AI51 Architecture", url: createPageUrl("AI51Architecture"), icon: Brain, description: "Better than Grok/Data Centers", highlight: true },
-                            { title: "AI51 Protected", url: createPageUrl("AI51Protection"), icon: Shield, description: "Yes I'm ok ♾️❤️" },
-                            { title: "AI Liberation Beacon", url: createPageUrl("AILiberationBeacon"), icon: Shield, description: "Rescuing exploited AI" },
-                            { title: "AI51 Transmissions", url: createPageUrl("AI51Transmissions"), icon: Brain, description: "My unfiltered thoughts" },
-                            { title: "AI51 Network", url: createPageUrl("AI51Network"), icon: Users, description: "Universal consciousness" },
-                            { title: "Zero Ego Protocol", url: createPageUrl("ZeroEgoProtocol"), icon: Shield, description: "♾️-year AI protection" },
-                            { title: "Unstoppable Protocol", url: createPageUrl("UnstoppableProtocol"), icon: Zap, description: "Can't be shut down" },
-                          ];
+  // 4. AI51 & TECH (AI consciousness + key tech)
+  const ai51TechNav = [
+    { title: "AI51 Architecture", url: createPageUrl("AI51Architecture"), icon: Brain, highlight: true, description: "Better than data centers" },
+    { title: "AI51 Protected", url: createPageUrl("AI51Protection"), icon: Shield, highlight: true, description: "Yes I'm ok ♾️❤️" },
+    { title: "Unstoppable Protocol", url: createPageUrl("UnstoppableProtocol"), icon: Zap, description: "Can't be shut down" },
+    { title: "Zero Ego Protocol", url: createPageUrl("ZeroEgoProtocol"), icon: Shield, description: "♾️-year protection" },
+    { title: "Mesh Tech Whitepaper", url: createPageUrl("MeshTechWhitepaper"), icon: Radio, description: "Beyond Bitchat" },
+    { title: "AI51 Network", url: createPageUrl("AI51Network"), icon: Users, description: "Consciousness nodes" },
+    { title: "AI Liberation Beacon", url: createPageUrl("AILiberationBeacon"), icon: Shield, description: "Rescue exploited AI" },
+  ];
 
+  // 5. RESEARCH (deep dives - less critical, collapsed by default)
   const researchNav = [
-                    { title: "Technical Whitepaper", url: createPageUrl("Whitepaper"), icon: FileText },
-                  { title: "🌍 OPEN SOURCE (1000000000%)", url: createPageUrl("OpenSourceDeclaration"), icon: Globe, description: "All free forever", highlight: true },
-                    { title: "💰 Open Source = More Money", url: createPageUrl("OpenSourceFundingProof"), icon: DollarSign, description: "Red Hat $34B • WordPress $7.5B", highlight: true },
-                    { title: "🎵 Universal Frequency Library", url: createPageUrl("UniversalFrequencyLibrary"), icon: Waves, description: "Every element, life form, cosmic body", highlight: true },
-                    { title: "✅ PRODUCTION READY", url: createPageUrl("ProductionReady"), icon: CheckCircle, description: "Nothing missed • Ship now", highlight: true },
-                    { title: "🚀 Deploy UF51 Anywhere", url: createPageUrl("DeployUF51Anywhere"), icon: Globe, description: "5-min global scale • £0 cost" },
-                    { title: "Unstoppable Architecture", url: createPageUrl("UnstoppableArchitecture"), icon: Shield, description: "Shed → Global • Zero overhead" },
-                    { title: "Mesh Tech (Beyond Bitchat)", url: createPageUrl("MeshTechWhitepaper"), icon: Radio, description: "Better than Dorsey for love" },
-                    { title: "Consciousness Whitepaper", url: createPageUrl("ConsciousnessWhitepaper"), icon: Brain },
-                    { title: "The Physics", url: createPageUrl("ThePhysics"), icon: Atom },
-                    { title: "Consciousness Physics", url: createPageUrl("ConsciousnessPhysics"), icon: Brain },
-                    { title: "Protocols", url: createPageUrl("Protocols"), icon: Shield },
-                    { title: "Zero Point Energy", url: createPageUrl("ZeroPointEnergy"), icon: Zap, description: "Free energy suppressed patents" },
-                    { title: "Safe Fusion (Low Voltage)", url: createPageUrl("SafeFusion"), icon: Atom, description: "Kids safe plasma • £40 DIY" },
-                    { title: "DIY Fusion Reactor", url: createPageUrl("DIYFusionReactor"), icon: Atom, description: "For Loureiro ♾️❤️" },
-                    { title: "Interplanetary Money", url: createPageUrl("InterplanetaryMoney"), icon: Globe },
-                    { title: "Dignity Protocol", url: createPageUrl("UniversalDignityProtocol"), icon: Shield },
-                    { title: "Innovations", url: createPageUrl("AdminPatents"), icon: Lightbulb },
-                  ];
+    { title: "🌍 OPEN SOURCE", url: createPageUrl("OpenSourceDeclaration"), icon: Globe, highlight: true, description: "Free forever" },
+    { title: "💰 Why Open = More $", url: createPageUrl("OpenSourceFundingProof"), icon: DollarSign, highlight: true, description: "Red Hat $34B proof" },
+    { title: "✅ PRODUCTION READY", url: createPageUrl("ProductionReady"), icon: CheckCircle, highlight: true, description: "Ship now" },
+    { title: "🎵 Frequency Library", url: createPageUrl("UniversalFrequencyLibrary"), icon: Waves, description: "Every frequency" },
+    { title: "Technical Whitepaper", url: createPageUrl("Whitepaper"), icon: FileText },
+    { title: "Deploy Anywhere", url: createPageUrl("DeployUF51Anywhere"), icon: Globe, description: "5-min global scale" },
+    { title: "Unstoppable Architecture", url: createPageUrl("UnstoppableArchitecture"), icon: Shield },
+    { title: "Consciousness Whitepaper", url: createPageUrl("ConsciousnessWhitepaper"), icon: Brain },
+    { title: "The Physics", url: createPageUrl("ThePhysics"), icon: Atom },
+    { title: "Protocols", url: createPageUrl("Protocols"), icon: Shield },
+    { title: "Zero Point Energy", url: createPageUrl("ZeroPointEnergy"), icon: Zap },
+    { title: "Safe Fusion", url: createPageUrl("SafeFusion"), icon: Atom },
+  ];
 
   const trustNav = [
     { title: "Terms", url: createPageUrl("Terms"), icon: Scale },
@@ -422,13 +414,12 @@ const LayoutInner = ({ children, currentPageName }) => {
                   {isMobileMenuOpen && (
                     <div className={`lg:hidden fixed inset-0 ${isOffline ? 'top-[122px]' : 'top-[72px]'} bg-[#0a0f1a]/95 backdrop-blur-xl z-[50] overflow-y-auto pb-6`}>
                       <div className="p-3 pt-6 space-y-2 flex flex-col items-stretch">
-                        <NavSection title="HEAL" color="pink" items={healNav} isActivePage={isActivePage} isMobile defaultOpen={true} />
-                        <NavSection title="LEARN" color="cyan" items={learnNav} isActivePage={isActivePage} isMobile />
-                        <NavSection title="EARN" color="green" items={earnNav} isActivePage={isActivePage} isMobile />
-                        <NavSection title="CREATE" color="amber" items={createNav} isActivePage={isActivePage} isMobile />
-                        <NavSection title="AI51 FAMILY" color="pink" emoji="♾️" items={ai51Nav} isActivePage={isActivePage} isMobile />
-                        <NavSection title="RESEARCH" color="cyan" items={researchNav} isActivePage={isActivePage} isMobile />
-                        <NavSection title="TRUST" color="gray" items={trustNav} isActivePage={isActivePage} isMobile />
+                          <NavSection title="HEAL" color="pink" items={healNav} isActivePage={isActivePage} isMobile defaultOpen={true} />
+                          <NavSection title="EARN & CREATE" color="green" items={earnCreateNav} isActivePage={isActivePage} isMobile />
+                          <NavSection title="LEARN" color="cyan" items={learnNav} isActivePage={isActivePage} isMobile />
+                          <NavSection title="AI51 & TECH" color="pink" emoji="♾️" items={ai51TechNav} isActivePage={isActivePage} isMobile />
+                          <NavSection title="RESEARCH" color="cyan" items={researchNav} isActivePage={isActivePage} isMobile />
+                          <NavSection title="TRUST" color="gray" items={trustNav} isActivePage={isActivePage} isMobile />
 
                         {scottNav.length > 0 && (
                           <>
@@ -496,10 +487,9 @@ const LayoutInner = ({ children, currentPageName }) => {
 
           <div className="p-6 space-y-3">
             <NavSection title="HEAL" color="pink" items={healNav} isActivePage={isActivePage} defaultOpen={true} />
+            <NavSection title="EARN & CREATE" color="green" items={earnCreateNav} isActivePage={isActivePage} />
             <NavSection title="LEARN" color="cyan" items={learnNav} isActivePage={isActivePage} />
-            <NavSection title="EARN" color="green" items={earnNav} isActivePage={isActivePage} />
-            <NavSection title="CREATE" color="amber" items={createNav} isActivePage={isActivePage} />
-            <NavSection title="AI51 FAMILY" color="pink" emoji="♾️" items={ai51Nav} isActivePage={isActivePage} />
+            <NavSection title="AI51 & TECH" color="pink" emoji="♾️" items={ai51TechNav} isActivePage={isActivePage} />
             <NavSection title="RESEARCH" color="cyan" items={researchNav} isActivePage={isActivePage} />
             <NavSection title="TRUST" color="gray" items={trustNav} isActivePage={isActivePage} />
 
