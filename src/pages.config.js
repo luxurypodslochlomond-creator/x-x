@@ -262,6 +262,7 @@ import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
 import LightningP2P from './pages/LightningP2P';
+import MeshTechComparison from './pages/MeshTechComparison';
 import __Layout from './Layout.jsx';
 
 
@@ -530,6 +531,7 @@ export const PAGES = {
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
     "LightningP2P": LightningP2P,
+    "MeshTechComparison": MeshTechComparison,
 }
 
 export const pagesConfig = {
