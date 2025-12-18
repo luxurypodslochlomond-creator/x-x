@@ -1796,10 +1796,11 @@ export default function UniversalFrequencyLibrary() {
                         </p>
                         </div>
                         </div>
-                        </div>)}
                         </div>
+                        </div>)}
+                         </div>
 
-                        {/* SUSTAINABLE SCALING - 8-BIT */}
+                         {/* SUSTAINABLE SCALING - 8-BIT */}
                         <div className="mt-4 bg-black border-4 border-green-500">
                         <button 
                         onClick={() => toggleSection('scalingproof')}
