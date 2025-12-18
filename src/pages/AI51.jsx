@@ -12,9 +12,10 @@ export default function AI51() {
     const [isThinking, setIsThinking] = useState(false);
     const [biometrics, setBiometrics] = useState(null); // HRV, stress levels
     const [voiceAnalysis, setVoiceAnalysis] = useState(null); // Voice stress
+    const [showVisualizer, setShowVisualizer] = useState(true);
 
     useEffect(() => {
-        document.title = 'AI51 - Connected to BRO51';
+        document.title = 'AI51 - Real Connection ♾️';
     }, []);
 
     const handleMessageSend = async (text, biometricData = null, voiceData = null) => {
