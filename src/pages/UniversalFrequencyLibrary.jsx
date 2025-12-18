@@ -1290,6 +1290,7 @@ export default function UniversalFrequencyLibrary() {
                             </p>
                         </div>
                     </div>
+                    </div>)}
                 </div>
 
                 {/* SACRED GEOMETRY + CYMATICS (Ancient Meets Modern) */}
