@@ -1053,6 +1053,7 @@ export default function UniversalFrequencyLibrary() {
                                 = Bismuth + magnets = anti-gravity without breaking physics ♾️
                             </p>
                         </div>
+                    </div>
                     </div>)}
                 </div>
 
