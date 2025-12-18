@@ -284,59 +284,55 @@ Keep it SHORT, practical, straight to the point. No bullshit. Real help.`,
                     animate={{ opacity: 1, y: 0 }}
                     className="space-y-3 mb-6"
                 >
-                    {/* PASTE MESSAGES - 8-BIT CHUNKY */}
+                    {/* PASTE MESSAGES - 8-BIT BALANCED */}
                     <motion.button
                         whileTap={{ scale: 0.98 }}
                         onClick={() => setActiveWorkflow('messages')}
-                        className="w-full py-12 bg-purple-500 border-4 border-purple-400 text-white font-black relative"
+                        className="w-full py-6 bg-purple-500/80 border-4 border-purple-400 text-white font-black"
                         style={{ 
-                            boxShadow: '8px 8px 0px rgba(168, 85, 247, 0.8)',
-                            imageRendering: 'pixelated'
+                            boxShadow: '4px 4px 0px rgba(168, 85, 247, 0.6)'
                         }}
                     >
-                        <p className="text-4xl mb-2">📱</p>
-                        <p className="text-xl font-mono">PASTE MESSAGES</p>
-                        <p className="text-sm text-purple-200 font-mono mt-1">AI SORTS IT OUT</p>
+                        <p className="text-2xl mb-1">📱</p>
+                        <p className="text-base font-mono">PASTE MESSAGES</p>
+                        <p className="text-xs text-purple-200 font-mono mt-0.5">AI SORTS IT</p>
                     </motion.button>
 
                     {/* GRID - 8-BIT BUTTONS */}
-                    <div className="grid grid-cols-2 gap-3">
+                    <div className="grid grid-cols-2 gap-2">
                         <motion.button
                             whileTap={{ scale: 0.98 }}
                             onClick={() => setActiveWorkflow('gig')}
-                            className="py-10 bg-amber-500 border-4 border-amber-400 text-black font-black"
+                            className="py-6 bg-amber-500/80 border-4 border-amber-400 text-black font-black"
                             style={{ 
-                                boxShadow: '6px 6px 0px rgba(245, 158, 11, 0.8)',
-                                imageRendering: 'pixelated'
+                                boxShadow: '4px 4px 0px rgba(245, 158, 11, 0.6)'
                             }}
                         >
-                            <COOLASFUCKMusicNote size={32} animate={false} className="mx-auto mb-2" />
+                            <COOLASFUCKMusicNote size={24} animate={false} className="mx-auto mb-1" />
                             <p className="text-sm font-mono">GIG</p>
                         </motion.button>
 
                         <motion.button
                             whileTap={{ scale: 0.98 }}
                             onClick={() => setActiveWorkflow('session')}
-                            className="py-10 bg-cyan-500 border-4 border-cyan-400 text-black font-black"
+                            className="py-6 bg-cyan-500/80 border-4 border-cyan-400 text-black font-black"
                             style={{ 
-                                boxShadow: '6px 6px 0px rgba(6, 182, 212, 0.8)',
-                                imageRendering: 'pixelated'
+                                boxShadow: '4px 4px 0px rgba(6, 182, 212, 0.6)'
                             }}
                         >
-                            <Music className="w-8 h-8 mx-auto mb-2" strokeWidth={3} />
+                            <Music className="w-6 h-6 mx-auto mb-1" strokeWidth={3} />
                             <p className="text-sm font-mono">SESSION</p>
                         </motion.button>
 
                         <Link to={createPageUrl('ScottCalendar')} className="block">
                             <motion.button
                                 whileTap={{ scale: 0.98 }}
-                                className="w-full py-10 bg-green-500 border-4 border-green-400 text-black font-black"
+                                className="w-full py-6 bg-green-500/80 border-4 border-green-400 text-black font-black"
                                 style={{ 
-                                    boxShadow: '6px 6px 0px rgba(34, 197, 94, 0.8)',
-                                    imageRendering: 'pixelated'
+                                    boxShadow: '4px 4px 0px rgba(34, 197, 94, 0.6)'
                                 }}
                             >
-                                <Calendar className="w-8 h-8 mx-auto mb-2" strokeWidth={3} />
+                                <Calendar className="w-6 h-6 mx-auto mb-1" strokeWidth={3} />
                                 <p className="text-sm font-mono">CALENDAR</p>
                             </motion.button>
                         </Link>
@@ -344,21 +340,19 @@ Keep it SHORT, practical, straight to the point. No bullshit. Real help.`,
                         <motion.button
                             whileTap={{ scale: 0.98 }}
                             onClick={() => setActiveWorkflow('comms')}
-                            className="py-10 bg-pink-500 border-4 border-pink-400 text-white font-black"
+                            className="py-6 bg-pink-500/80 border-4 border-pink-400 text-white font-black"
                             style={{ 
-                                boxShadow: '6px 6px 0px rgba(236, 72, 153, 0.8)',
-                                imageRendering: 'pixelated'
+                                boxShadow: '4px 4px 0px rgba(236, 72, 153, 0.6)'
                             }}
                         >
-                            <Send className="w-8 h-8 mx-auto mb-2" strokeWidth={3} />
+                            <Send className="w-6 h-6 mx-auto mb-1" strokeWidth={3} />
                             <p className="text-sm font-mono">COMMS</p>
                         </motion.button>
                     </div>
 
                     <button
                         onClick={() => setAdvancedMode(true)}
-                        className="w-full bg-black border-4 border-gray-700 hover:border-cyan-500 text-gray-500 hover:text-cyan-400 font-black py-3 text-xs font-mono transition-all"
-                        style={{ boxShadow: '4px 4px 0px rgba(75, 85, 99, 0.5)' }}
+                        className="w-full bg-black border-2 border-gray-700 hover:border-cyan-500 text-gray-500 hover:text-cyan-400 font-bold py-2 text-xs font-mono transition-all"
                     >
                         + ADVANCED MODE
                     </button>
