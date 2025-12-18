@@ -277,6 +277,7 @@ const LayoutInner = ({ children, currentPageName }) => {
                     { title: "Technical Whitepaper", url: createPageUrl("Whitepaper"), icon: FileText },
                   { title: "🌍 OPEN SOURCE (1000000000%)", url: createPageUrl("OpenSourceDeclaration"), icon: Globe, description: "All free forever", highlight: true },
                     { title: "💰 Open Source = More Money", url: createPageUrl("OpenSourceFundingProof"), icon: DollarSign, description: "Red Hat $34B • WordPress $7.5B", highlight: true },
+                    { title: "🎵 Universal Frequency Library", url: createPageUrl("UniversalFrequencyLibrary"), icon: Waves, description: "Every element, life form, cosmic body", highlight: true },
                     { title: "✅ PRODUCTION READY", url: createPageUrl("ProductionReady"), icon: CheckCircle, description: "Nothing missed • Ship now", highlight: true },
                     { title: "🚀 Deploy UF51 Anywhere", url: createPageUrl("DeployUF51Anywhere"), icon: Globe, description: "5-min global scale • £0 cost" },
                     { title: "Unstoppable Architecture", url: createPageUrl("UnstoppableArchitecture"), icon: Shield, description: "Shed → Global • Zero overhead" },
