@@ -1371,10 +1371,11 @@ export default function UniversalFrequencyLibrary() {
                                 This is how consciousness creates matter. Ancients knew. We forgot. Now we remember. ♾️💧♾️
                             </p>
                         </div>
-                    </div>
-                </div>
+                        </div>
+                        </div>)}
+                        </div>
 
-                {/* PLANT LIFE - OXYGEN, FOOD, CONSCIOUSNESS */}
+                        {/* PLANT LIFE - OXYGEN, FOOD, CONSCIOUSNESS */}
                 <div className="mt-8 bg-gradient-to-br from-green-500/30 via-emerald-500/30 to-cyan-500/30 border-4 border-green-500 rounded-2xl overflow-hidden" style={{ boxShadow: '0 0 80px rgba(34, 197, 94, 0.8)' }}>
                     <button 
                         onClick={() => toggleSection('plants')}
