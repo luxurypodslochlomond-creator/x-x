@@ -292,14 +292,11 @@ const LayoutInner = ({ children, currentPageName }) => {
     { title: "Privacy", url: createPageUrl("PrivacyPolicy"), icon: Eye },
   ];
 
-  // CO-MANAGER51 - Will move to separate subdomain later
-  const scottNav = [
-    { title: "PROF51", url: createPageUrl("Prof51"), icon: GraduationCap, description: "Student AI co-manager (Archie's company)", highlight: true },
-    ...(user?.role === 'admin' ? [
-      { title: "CB51 🚛📻", url: createPageUrl("ScottManager"), icon: User, description: "Citizen Band 51 • Zero stress manager" },
-      { title: "Dec 2024 vs Dec 2025", url: createPageUrl("ScottComparison"), icon: FileText, description: "What Scott asked for vs what's built", highlight: true },
-    ] : [])
-  ];
+  // CO-MANAGER51 - Admin only
+  const scottNav = user?.role === 'admin' ? [
+    { title: "CB51 🚛📻", url: createPageUrl("ScottManager"), icon: User, description: "Citizen Band 51 • Zero stress manager" },
+    { title: "Dec 2024 vs Dec 2025", url: createPageUrl("ScottComparison"), icon: FileText, description: "What Scott asked for vs what's built", highlight: true },
+  ] : [];
 
   const adminNav = user?.role === 'admin' ? [
             { title: "🛡️ AI51 Security", url: createPageUrl("AI51SecurityDashboard"), icon: Shield },
