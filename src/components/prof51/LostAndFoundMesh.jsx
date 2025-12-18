@@ -579,8 +579,6 @@ export default function LostAndFoundMesh() {
                     </div>
                 </motion.div>
             )}
-                </motion.div>
-            )}
 
             {/* P2P MEETUP MODAL - OFFLINE LOCATION SHARING */}
             <AnimatePresence>
