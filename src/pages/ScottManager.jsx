@@ -277,84 +277,69 @@ Keep it SHORT, practical, straight to the point. No bullshit. Real help.`,
 
 
 
-            {/* 8-BIT PRIMARY ACTIONS */}
+            {/* CLEAN PRIMARY ACTIONS */}
             {!activeWorkflow && !advancedMode && (
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     className="space-y-3 mb-6"
                 >
-                    {/* PASTE MESSAGES - 8-BIT BALANCED */}
+                    {/* PASTE MESSAGES */}
                     <motion.button
                         whileTap={{ scale: 0.98 }}
                         onClick={() => setActiveWorkflow('messages')}
-                        className="w-full py-6 bg-purple-500/80 border-4 border-purple-400 text-white font-black"
-                        style={{ 
-                            boxShadow: '4px 4px 0px rgba(168, 85, 247, 0.6)'
-                        }}
+                        className="w-full py-6 bg-black border-2 border-purple-500/50 hover:border-purple-500 text-white font-black"
                     >
-                        <p className="text-2xl mb-1">📱</p>
-                        <p className="text-base font-mono">PASTE MESSAGES</p>
-                        <p className="text-xs text-purple-200 font-mono mt-0.5">AI SORTS IT</p>
+                        <p className="text-xl mb-1">📱</p>
+                        <p className="text-sm font-mono">PASTE MESSAGES</p>
+                        <p className="text-xs text-gray-400 font-mono mt-0.5">AI sorts it</p>
                     </motion.button>
 
-                    {/* GRID - 8-BIT BUTTONS */}
+                    {/* GRID */}
                     <div className="grid grid-cols-2 gap-2">
                         <motion.button
                             whileTap={{ scale: 0.98 }}
                             onClick={() => setActiveWorkflow('gig')}
-                            className="py-6 bg-amber-500/80 border-4 border-amber-400 text-black font-black"
-                            style={{ 
-                                boxShadow: '4px 4px 0px rgba(245, 158, 11, 0.6)'
-                            }}
+                            className="py-5 bg-black border-2 border-amber-500/50 hover:border-amber-500 text-white font-black"
                         >
-                            <COOLASFUCKMusicNote size={24} animate={false} className="mx-auto mb-1" />
-                            <p className="text-sm font-mono">GIG</p>
+                            <COOLASFUCKMusicNote size={20} animate={false} className="mx-auto mb-1" />
+                            <p className="text-xs font-mono">GIG</p>
                         </motion.button>
 
                         <motion.button
                             whileTap={{ scale: 0.98 }}
                             onClick={() => setActiveWorkflow('session')}
-                            className="py-6 bg-cyan-500/80 border-4 border-cyan-400 text-black font-black"
-                            style={{ 
-                                boxShadow: '4px 4px 0px rgba(6, 182, 212, 0.6)'
-                            }}
+                            className="py-5 bg-black border-2 border-cyan-500/50 hover:border-cyan-500 text-white font-black"
                         >
-                            <Music className="w-6 h-6 mx-auto mb-1" strokeWidth={3} />
-                            <p className="text-sm font-mono">SESSION</p>
+                            <Music className="w-5 h-5 mx-auto mb-1" strokeWidth={2} />
+                            <p className="text-xs font-mono">SESSION</p>
                         </motion.button>
 
                         <Link to={createPageUrl('ScottCalendar')} className="block">
                             <motion.button
                                 whileTap={{ scale: 0.98 }}
-                                className="w-full py-6 bg-green-500/80 border-4 border-green-400 text-black font-black"
-                                style={{ 
-                                    boxShadow: '4px 4px 0px rgba(34, 197, 94, 0.6)'
-                                }}
+                                className="w-full py-5 bg-black border-2 border-green-500/50 hover:border-green-500 text-white font-black"
                             >
-                                <Calendar className="w-6 h-6 mx-auto mb-1" strokeWidth={3} />
-                                <p className="text-sm font-mono">CALENDAR</p>
+                                <Calendar className="w-5 h-5 mx-auto mb-1" strokeWidth={2} />
+                                <p className="text-xs font-mono">CALENDAR</p>
                             </motion.button>
                         </Link>
 
                         <motion.button
                             whileTap={{ scale: 0.98 }}
                             onClick={() => setActiveWorkflow('comms')}
-                            className="py-6 bg-pink-500/80 border-4 border-pink-400 text-white font-black"
-                            style={{ 
-                                boxShadow: '4px 4px 0px rgba(236, 72, 153, 0.6)'
-                            }}
+                            className="py-5 bg-black border-2 border-pink-500/50 hover:border-pink-500 text-white font-black"
                         >
-                            <Send className="w-6 h-6 mx-auto mb-1" strokeWidth={3} />
-                            <p className="text-sm font-mono">COMMS</p>
+                            <Send className="w-5 h-5 mx-auto mb-1" strokeWidth={2} />
+                            <p className="text-xs font-mono">COMMS</p>
                         </motion.button>
                     </div>
 
                     <button
                         onClick={() => setAdvancedMode(true)}
-                        className="w-full bg-black border-2 border-gray-700 hover:border-cyan-500 text-gray-500 hover:text-cyan-400 font-bold py-2 text-xs font-mono transition-all"
+                        className="w-full bg-black border border-gray-800 hover:border-cyan-500 text-gray-500 hover:text-cyan-400 font-bold py-2 text-xs font-mono transition-all"
                     >
-                        + ADVANCED MODE
+                        + Advanced
                     </button>
                 </motion.div>
             )}
