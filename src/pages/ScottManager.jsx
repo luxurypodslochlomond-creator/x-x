@@ -5,11 +5,12 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Plus, Search, Wifi, WifiOff, RefreshCw, Brain, DollarSign, FileText, Music, Globe, Briefcase, Camera, Plane, Users, Crown, Palette, Heart, Send, X, Shield, Upload, Calendar } from 'lucide-react';
+import { Plus, Search, Wifi, WifiOff, RefreshCw, Brain, DollarSign, FileText, Music, Globe, Briefcase, Camera, Plane, Users, Crown, Palette, Heart, Send, X, Shield, Upload, Calendar, Radio } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import KingdomCrown8Bit from '@/components/shared/KingdomCrown8Bit';
 import BrosBond8Bit from '@/components/shared/BrosBond8Bit';
 import AI51Icon8Bit from '@/components/shared/AI51Icon8Bit';
+import { COOLASFUCKMusicNote, COOLASFUCKHeart, COOLASFUCKWaves } from '@/components/shared/COOLASFUCKIcon';
 import { useScottOffline, ScottOfflineProvider } from '@/components/scott/ScottOfflineStorage';
 import ScottOneSentence from '@/components/scott/ScottOneSentence';
 import ScottEnergyMode from '@/components/scott/ScottEnergyMode';
@@ -146,37 +147,43 @@ Keep it SHORT, practical, straight to the point. No bullshit. Real help.`,
     // PIN ENTRY SCREEN - CLEAN SIMPLE
     if (!pinEntered) {
         return (
-            <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black p-4 flex items-center justify-center">
+            <div className="min-h-screen bg-black p-4 flex items-center justify-center">
                 <motion.div 
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.3 }}
-                    className="bg-gradient-to-br from-gray-900 to-black border-2 border-amber-500/30 rounded-xl p-8 max-w-sm w-full shadow-2xl"
-                    style={{ boxShadow: '0 0 60px rgba(245, 158, 11, 0.15)' }}
+                    className="bg-black border-4 border-cyan-500 p-8 max-w-sm w-full"
+                    style={{ boxShadow: '0 0 60px rgba(34, 211, 238, 0.5)' }}
                 >
                     <div className="text-center mb-8">
-                        <BrosBond8Bit size={80} animate={true} className="mx-auto mb-4" />
-                        <h1 className="text-3xl font-black text-white mb-2 font-mono tracking-tight">BRO51 + SK51</h1>
-                        <p className="text-gray-400 text-sm font-mono">Your co-managers ♾️📻😎</p>
-                        <p className="text-gray-600 text-xs font-mono mt-2">Enter PIN to unlock</p>
+                        <motion.div
+                            animate={{ rotate: [0, 5, -5, 0] }}
+                            transition={{ duration: 2, repeat: Infinity }}
+                            className="mb-6"
+                        >
+                            <Radio className="w-20 h-20 text-cyan-400 mx-auto" />
+                        </motion.div>
+                        <h1 className="text-4xl font-black text-cyan-400 mb-2 font-mono" style={{ textShadow: '4px 4px 0px rgba(0,0,0,0.8)' }}>CB51</h1>
+                        <p className="text-pink-400 text-lg font-bold font-mono mb-1">CITIZEN BAND 51</p>
+                        <p className="text-gray-400 text-sm font-mono">10-4 BRO51 + SK51 ♾️📻</p>
+                        <p className="text-gray-600 text-xs font-mono mt-4">Enter PIN to unlock</p>
                     </div>
 
                     <Input
                         type="password"
-                        placeholder="••••"
+                        placeholder="1888"
                         value={pinInput}
                         onChange={(e) => setPinInput(e.target.value)}
                         onKeyDown={(e) => e.key === 'Enter' && handlePinSubmit()}
-                        className="bg-black/50 border-2 border-amber-500/50 text-white text-center text-2xl mb-4 focus:border-amber-500 transition-all tracking-widest font-mono rounded-lg"
-                        style={{ boxShadow: '0 0 20px rgba(245, 158, 11, 0.1)' }}
+                        className="bg-black border-4 border-cyan-500 text-white text-center text-3xl mb-4 focus:border-pink-500 transition-all tracking-widest font-mono"
                     />
-                    <Button
+                    <button
                         onClick={handlePinSubmit}
-                        className="w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-black font-black py-4 transition-all shadow-lg font-mono text-sm tracking-wider rounded-lg"
-                        style={{ boxShadow: '0 4px 20px rgba(245, 158, 11, 0.4)' }}
+                        className="w-full bg-cyan-500 hover:bg-cyan-400 border-4 border-cyan-400 text-black font-black py-4 font-mono text-lg tracking-wider"
+                        style={{ boxShadow: '8px 8px 0px rgba(34, 211, 238, 0.5)' }}
                     >
-                        ENTER
-                    </Button>
+                        ENTER CB51 →
+                    </button>
                 </motion.div>
             </div>
         );
@@ -184,7 +191,7 @@ Keep it SHORT, practical, straight to the point. No bullshit. Real help.`,
 
     return (
         <ScottFocusMode>
-        <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black p-4 pb-32">
+        <div className="min-h-screen bg-black p-4 pb-32">
 
         {/* P2P MESH - RUNS INVISIBLE IN BACKGROUND */}
         <div className="hidden"><ScottP2PSync /></div>
@@ -196,117 +203,72 @@ Keep it SHORT, practical, straight to the point. No bullshit. Real help.`,
 
 
 
-            {/* HEADER - COACHELLA-LEVEL COOL - GLASS MORPHISM */}
+            {/* HEADER - 8-BIT RETRO CB51 RADIO */}
             <motion.div 
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4 }}
-                className="sticky top-0 z-50 mb-6 -mx-4 px-4 py-4"
-                style={{
-                    background: 'linear-gradient(135deg, rgba(0,0,0,0.95) 0%, rgba(139,92,246,0.2) 50%, rgba(0,0,0,0.95) 100%)',
-                    backdropFilter: 'blur(40px)',
-                    WebkitBackdropFilter: 'blur(40px)'
-                }}
+                className="sticky top-0 z-50 mb-6 -mx-4 px-4 py-3 bg-black border-b-4 border-cyan-500"
             >
-                <div 
-                    className="relative overflow-hidden rounded-2xl p-6"
-                    style={{
-                        background: 'linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(245,158,11,0.1) 50%, rgba(236,72,153,0.1) 100%)',
-                        backdropFilter: 'blur(20px)',
-                        WebkitBackdropFilter: 'blur(20px)',
-                        border: '1px solid rgba(245, 158, 11, 0.3)',
-                        boxShadow: '0 8px 32px 0 rgba(245, 158, 11, 0.2), inset 0 1px 1px 0 rgba(255, 255, 255, 0.1)'
-                    }}
-                >
-                    {/* Animated gradient background */}
-                    <motion.div
-                        className="absolute inset-0 opacity-20"
-                        animate={{
-                            background: [
-                                'radial-gradient(circle at 20% 50%, rgba(245,158,11,0.4) 0%, transparent 50%)',
-                                'radial-gradient(circle at 80% 50%, rgba(236,72,153,0.4) 0%, transparent 50%)',
-                                'radial-gradient(circle at 50% 20%, rgba(34,211,238,0.4) 0%, transparent 50%)',
-                                'radial-gradient(circle at 20% 50%, rgba(245,158,11,0.4) 0%, transparent 50%)'
-                            ]
-                        }}
-                        transition={{
-                            duration: 10,
-                            repeat: Infinity,
-                            ease: "linear"
-                        }}
-                    />
+                <div className="bg-black border-4 border-cyan-500 p-4">
+                    {/* Pixel scanlines */}
+                    <div className="absolute inset-0 opacity-10 pointer-events-none" style={{
+                        backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(34, 211, 238, 0.3) 2px, rgba(34, 211, 238, 0.3) 4px)'
+                    }} />
 
                     <div className="relative z-10 flex items-center justify-between">
-                        <div>
-                            <div className="flex items-center gap-3 mb-2">
-                                    <motion.div
+                        <div className="flex items-center gap-3">
+                            <motion.div
+                                animate={{
+                                    rotate: [0, 10, -10, 0]
+                                }}
+                                transition={{
+                                    duration: 3,
+                                    repeat: Infinity
+                                }}
+                            >
+                                <Radio className="w-10 h-10 text-cyan-400" strokeWidth={3} />
+                            </motion.div>
+                            <div>
+                                <h1 className="text-2xl font-black text-cyan-400 font-mono" style={{ textShadow: '2px 2px 0px rgba(0,0,0,1)' }}>
+                                    CB51
+                                </h1>
+                                <div className="flex items-center gap-2">
+                                    <motion.div 
+                                        className={`w-2 h-2 ${scott.isOnline ? 'bg-green-400' : 'bg-amber-400'}`}
                                         animate={{
-                                            rotate: [0, 5, -5, 0],
-                                            scale: [1, 1.1, 1]
+                                            opacity: [0.5, 1, 0.5]
                                         }}
                                         transition={{
-                                            duration: 4,
+                                            duration: 1.5,
                                             repeat: Infinity
                                         }}
-                                    >
-                                        <BrosBond8Bit size={32} animate={true} />
-                                    </motion.div>
-                                    <div>
-                                        <h1 className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-pink-400 to-cyan-400 font-mono tracking-tight">
-                                            BRO51 + SK51
-                                        </h1>
-                                    <div className="flex items-center gap-2">
-                                        <motion.span 
-                                            className={`w-2 h-2 rounded-full ${scott.isOnline ? 'bg-green-400' : 'bg-amber-400'}`}
-                                            animate={{
-                                                scale: [1, 1.3, 1],
-                                                opacity: [0.5, 1, 0.5]
-                                            }}
-                                            transition={{
-                                                duration: 2,
-                                                repeat: Infinity
-                                            }}
-                                        />
-                                        <p className="text-xs text-gray-400 font-mono">
-                                            {scott.isOnline ? 'Connected' : 'Offline'}
-                                        </p>
-                                    </div>
+                                        style={{ imageRendering: 'pixelated' }}
+                                    />
+                                    <p className="text-xs text-gray-400 font-mono">
+                                        {scott.isOnline ? '10-4 ONLINE' : '10-7 OFFLINE'}
+                                    </p>
                                 </div>
                             </div>
                         </div>
                         <div className="flex items-center gap-2">
                             <Link 
                                 to={createPageUrl('ScottAbout')} 
-                                className="p-3 rounded-xl transition-all backdrop-blur-sm"
-                                style={{
-                                    background: 'rgba(255,255,255,0.05)',
-                                    border: '1px solid rgba(255,255,255,0.1)',
-                                    boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
-                                }}
+                                className="w-10 h-10 bg-black border-2 border-pink-500 hover:border-pink-400 flex items-center justify-center transition-all"
                             >
-                                <Heart className="w-5 h-5 text-pink-400" />
+                                <COOLASFUCKHeart size={20} animate={false} />
                             </Link>
                             <Link 
                                 to={createPageUrl('ScottWhiteLabelPricing')} 
-                                className="p-3 rounded-xl transition-all"
-                                style={{
-                                    background: 'linear-gradient(135deg, rgba(245,158,11,0.3) 0%, rgba(236,72,153,0.3) 100%)',
-                                    border: '1px solid rgba(245,158,11,0.5)',
-                                    boxShadow: '0 4px 12px rgba(245,158,11,0.3)'
-                                }}
+                                className="w-10 h-10 bg-black border-2 border-amber-500 hover:border-amber-400 flex items-center justify-center transition-all"
                             >
-                                <DollarSign className="w-5 h-5 text-amber-300" />
+                                <DollarSign className="w-5 h-5 text-amber-400" strokeWidth={3} />
                             </Link>
                             <Link 
                                 to={createPageUrl('ScottCalendar')} 
-                                className="p-3 rounded-xl transition-all backdrop-blur-sm"
-                                style={{
-                                    background: 'rgba(255,255,255,0.05)',
-                                    border: '1px solid rgba(255,255,255,0.1)',
-                                    boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
-                                }}
+                                className="w-10 h-10 bg-black border-2 border-cyan-500 hover:border-cyan-400 flex items-center justify-center transition-all"
                             >
-                                <Calendar className="w-5 h-5 text-cyan-400" />
+                                <Calendar className="w-5 h-5 text-cyan-400" strokeWidth={3} />
                             </Link>
                         </div>
                     </div>
@@ -315,120 +277,90 @@ Keep it SHORT, practical, straight to the point. No bullshit. Real help.`,
 
 
 
-            {/* ULTRA-MODERN - 3D DEPTH + GLASS */}
+            {/* 8-BIT PRIMARY ACTIONS */}
             {!activeWorkflow && !advancedMode && (
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="space-y-4 mb-6"
+                    className="space-y-3 mb-6"
                 >
-                    {/* PRIMARY ACTION - MESSAGE HANDLER */}
+                    {/* PASTE MESSAGES - 8-BIT CHUNKY */}
                     <motion.button
-                        whileHover={{ scale: 1.02, y: -4 }}
                         whileTap={{ scale: 0.98 }}
                         onClick={() => setActiveWorkflow('messages')}
-                        className="w-full py-10 rounded-3xl text-white font-black relative overflow-hidden"
-                        style={{
-                            background: 'linear-gradient(135deg, rgba(168,85,247,0.3) 0%, rgba(236,72,153,0.3) 50%, rgba(168,85,247,0.3) 100%)',
-                            backdropFilter: 'blur(20px)',
-                            WebkitBackdropFilter: 'blur(20px)',
-                            border: '2px solid rgba(168,85,247,0.5)',
-                            boxShadow: '0 20px 60px rgba(168,85,247,0.4), inset 0 1px 1px rgba(255,255,255,0.2)'
+                        className="w-full py-12 bg-purple-500 border-4 border-purple-400 text-white font-black relative"
+                        style={{ 
+                            boxShadow: '8px 8px 0px rgba(168, 85, 247, 0.8)',
+                            imageRendering: 'pixelated'
                         }}
                     >
-                        <motion.div
-                            className="absolute inset-0"
-                            animate={{
-                                background: [
-                                    'radial-gradient(circle at 20% 50%, rgba(34,211,238,0.3) 0%, transparent 50%)',
-                                    'radial-gradient(circle at 80% 50%, rgba(236,72,153,0.3) 0%, transparent 50%)',
-                                    'radial-gradient(circle at 20% 50%, rgba(34,211,238,0.3) 0%, transparent 50%)'
-                                ]
-                            }}
-                            transition={{
-                                duration: 4,
-                                repeat: Infinity
-                            }}
-                        />
-                        <div className="relative z-10">
-                            <p className="text-3xl mb-2">📱 PASTE MESSAGES</p>
-                            <p className="text-sm text-purple-200 font-normal">WhatsApp • Email • Slack → Instant Order</p>
-                        </div>
+                        <p className="text-4xl mb-2">📱</p>
+                        <p className="text-xl font-mono">PASTE MESSAGES</p>
+                        <p className="text-sm text-purple-200 font-mono mt-1">AI SORTS IT OUT</p>
                     </motion.button>
 
-                    {/* SECONDARY ACTIONS - GLASS CARDS */}
+                    {/* GRID - 8-BIT BUTTONS */}
                     <div className="grid grid-cols-2 gap-3">
                         <motion.button
-                            whileHover={{ scale: 1.05, y: -2 }}
                             whileTap={{ scale: 0.98 }}
                             onClick={() => setActiveWorkflow('gig')}
-                            className="py-8 rounded-2xl text-white font-black relative overflow-hidden"
-                            style={{
-                                background: 'rgba(245,158,11,0.2)',
-                                backdropFilter: 'blur(10px)',
-                                border: '1px solid rgba(245,158,11,0.4)',
-                                boxShadow: '0 8px 20px rgba(245,158,11,0.3)'
+                            className="py-10 bg-amber-500 border-4 border-amber-400 text-black font-black"
+                            style={{ 
+                                boxShadow: '6px 6px 0px rgba(245, 158, 11, 0.8)',
+                                imageRendering: 'pixelated'
                             }}
                         >
-                            <p className="text-4xl mb-1">📧</p>
-                            <p className="text-sm">GIG</p>
+                            <COOLASFUCKMusicNote size={32} animate={false} className="mx-auto mb-2" />
+                            <p className="text-sm font-mono">GIG</p>
                         </motion.button>
 
                         <motion.button
-                            whileHover={{ scale: 1.05, y: -2 }}
                             whileTap={{ scale: 0.98 }}
                             onClick={() => setActiveWorkflow('session')}
-                            className="py-8 rounded-2xl text-white font-black relative overflow-hidden"
-                            style={{
-                                background: 'rgba(6,182,212,0.2)',
-                                backdropFilter: 'blur(10px)',
-                                border: '1px solid rgba(6,182,212,0.4)',
-                                boxShadow: '0 8px 20px rgba(6,182,212,0.3)'
+                            className="py-10 bg-cyan-500 border-4 border-cyan-400 text-black font-black"
+                            style={{ 
+                                boxShadow: '6px 6px 0px rgba(6, 182, 212, 0.8)',
+                                imageRendering: 'pixelated'
                             }}
                         >
-                            <p className="text-4xl mb-1">🎵</p>
-                            <p className="text-sm">SESSION</p>
+                            <Music className="w-8 h-8 mx-auto mb-2" strokeWidth={3} />
+                            <p className="text-sm font-mono">SESSION</p>
                         </motion.button>
 
                         <Link to={createPageUrl('ScottCalendar')} className="block">
                             <motion.button
-                                whileHover={{ scale: 1.05, y: -2 }}
                                 whileTap={{ scale: 0.98 }}
-                                className="w-full py-8 rounded-2xl text-white font-black relative overflow-hidden"
-                                style={{
-                                    background: 'rgba(34,197,94,0.2)',
-                                    backdropFilter: 'blur(10px)',
-                                    border: '1px solid rgba(34,197,94,0.4)',
-                                    boxShadow: '0 8px 20px rgba(34,197,94,0.3)'
+                                className="w-full py-10 bg-green-500 border-4 border-green-400 text-black font-black"
+                                style={{ 
+                                    boxShadow: '6px 6px 0px rgba(34, 197, 94, 0.8)',
+                                    imageRendering: 'pixelated'
                                 }}
                             >
-                                <p className="text-4xl mb-1">📅</p>
-                                <p className="text-sm">CALENDAR</p>
+                                <Calendar className="w-8 h-8 mx-auto mb-2" strokeWidth={3} />
+                                <p className="text-sm font-mono">CALENDAR</p>
                             </motion.button>
                         </Link>
 
                         <motion.button
-                            whileHover={{ scale: 1.05, y: -2 }}
                             whileTap={{ scale: 0.98 }}
                             onClick={() => setActiveWorkflow('comms')}
-                            className="py-8 rounded-2xl text-white font-black relative overflow-hidden"
-                            style={{
-                                background: 'rgba(236,72,153,0.2)',
-                                backdropFilter: 'blur(10px)',
-                                border: '1px solid rgba(236,72,153,0.4)',
-                                boxShadow: '0 8px 20px rgba(236,72,153,0.3)'
+                            className="py-10 bg-pink-500 border-4 border-pink-400 text-white font-black"
+                            style={{ 
+                                boxShadow: '6px 6px 0px rgba(236, 72, 153, 0.8)',
+                                imageRendering: 'pixelated'
                             }}
                         >
-                            <p className="text-4xl mb-1">💬</p>
-                            <p className="text-sm">IN/OUT</p>
+                            <Send className="w-8 h-8 mx-auto mb-2" strokeWidth={3} />
+                            <p className="text-sm font-mono">COMMS</p>
                         </motion.button>
                     </div>
 
                     <button
                         onClick={() => setAdvancedMode(true)}
-                        className="w-full bg-black/60 border border-gray-800 hover:border-gray-700 text-gray-500 hover:text-gray-400 font-bold py-3 rounded-xl text-xs font-mono mt-4 transition-all"
+                        className="w-full bg-black border-4 border-gray-700 hover:border-cyan-500 text-gray-500 hover:text-cyan-400 font-black py-3 text-xs font-mono transition-all"
+                        style={{ boxShadow: '4px 4px 0px rgba(75, 85, 99, 0.5)' }}
                     >
-                        + Advanced Mode
+                        + ADVANCED MODE
                     </button>
                 </motion.div>
             )}
@@ -610,10 +542,10 @@ Keep it SHORT, practical, straight to the point. No bullshit. Real help.`,
 
 
 
-            {/* WHAT'S NEXT - TOP SO YOU SEE ACTIVITY */}
+            {/* WHAT'S NEXT - 8-BIT */}
             <div className="mb-6">
-                <div className="bg-black p-4 rounded-xl mb-3 border-2 border-amber-500">
-                    <p className="text-white font-black text-sm font-mono mb-2">⚡ WHAT'S NEXT</p>
+                <div className="bg-black p-4 border-4 border-amber-500">
+                    <p className="text-amber-400 font-black text-sm font-mono mb-3">⚡ WHAT'S NEXT</p>
                     {urgentTasks.length > 0 ? (
                         <Link to={createPageUrl('ScottCalendar')} className="block bg-black border border-red-500/50 rounded p-3">
                             <p className="text-red-400 font-bold text-xs font-mono">🔥 {urgentTasks.length} URGENT TASK{urgentTasks.length > 1 ? 'S' : ''}</p>
@@ -1071,10 +1003,22 @@ Keep it SHORT, practical, straight to the point. No bullshit. Real help.`,
             </>
             )}
 
-            {/* FOOTER - SIMPLE */}
+            {/* FOOTER - 8-BIT PIXEL */}
             {!advancedMode && (
-                <div className="mt-12 text-center">
-                    <p className="text-gray-700 text-xs font-mono">CB51 • 10-4 bro ♾️📻😎</p>
+                <div className="mt-12 text-center space-y-4">
+                    <div className="flex justify-center gap-2">
+                        {[...Array(7)].map((_, i) => (
+                            <motion.div
+                                key={i}
+                                className="w-2 h-2 bg-cyan-500"
+                                animate={{ opacity: [0.3, 1, 0.3] }}
+                                transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.15 }}
+                                style={{ imageRendering: 'pixelated' }}
+                            />
+                        ))}
+                    </div>
+                    <p className="text-gray-600 text-xs font-mono">CB51 • 10-4 bro ♾️📻😎</p>
+                    <COOLASFUCKWaves size={24} animate={true} className="mx-auto" />
                 </div>
             )}
 
