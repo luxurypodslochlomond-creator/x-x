@@ -1864,6 +1864,7 @@ export default function UniversalFrequencyLibrary() {
                             Shed/bedroom → Open source → Community improves → Global scale
                             <br/><strong className="text-cyan-400">Zero extraction. Zero waste. Pure knowledge transfer.</strong>
                         </p>
+                    </div>
                     </div>)}
                 </div>
 
