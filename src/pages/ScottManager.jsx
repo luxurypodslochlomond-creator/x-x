@@ -171,7 +171,7 @@ Keep it SHORT, practical, straight to the point. No bullshit. Real help.`,
 
                     <Input
                         type="password"
-                        placeholder="1888"
+                        placeholder="****"
                         value={pinInput}
                         onChange={(e) => setPinInput(e.target.value)}
                         onKeyDown={(e) => e.key === 'Enter' && handlePinSubmit()}
