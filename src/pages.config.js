@@ -1,531 +1,531 @@
-import NewCleanup from './pages/NewCleanup';
-import Leaderboard from './pages/Leaderboard';
-import Profile from './pages/Profile';
-import Map from './pages/Map';
-import Governance from './pages/Governance';
-import PassItOn from './pages/PassItOn';
-import GenesisProtocol from './pages/GenesisProtocol';
-import SubmitProofOfLove from './pages/SubmitProofOfLove';
-import About from './pages/About';
-import GMTBridge from './pages/GMTBridge';
-import Home from './pages/Home';
-import WallOfLove from './pages/WallOfLove';
-import UniversalWallet from './pages/UniversalWallet';
-import SacredMathematics from './pages/SacredMathematics';
-import FundTheFamily from './pages/FundTheFamily';
-import ImpactVerification from './pages/ImpactVerification';
-import Whitepaper from './pages/Whitepaper';
-import TheQuantumConnection from './pages/TheQuantumConnection';
-import UniversalSoulContract from './pages/UniversalSoulContract';
-import SoulContract from './pages/SoulContract';
-import IToWeTransformation from './pages/IToWeTransformation';
-import UniversalCreatorProtocol from './pages/UniversalCreatorProtocol';
-import ThePowerOfTwoSouls from './pages/ThePowerOfTwoSouls';
-import SacredArchives from './pages/SacredArchives';
-import QuantumSearch from './pages/QuantumSearch';
-import AnimalLoveChamber from './pages/AnimalLoveChamber';
-import YoungWarriors from './pages/YoungWarriors';
-import ChampionsOfPeace from './pages/ChampionsOfPeace';
-import FamilyBroadcast from './pages/FamilyBroadcast';
-import ESGAlignment from './pages/ESGAlignment';
-import UNSDGAlignment from './pages/UNSDGAlignment';
-import GrantOpportunities from './pages/GrantOpportunities';
-import QuantumAllies from './pages/QuantumAllies';
-import Welcome from './pages/Welcome';
-import StoneymollanDefense from './pages/StoneymollanDefense';
-import Teachers from './pages/Teachers';
-import ReadingSupport from './pages/ReadingSupport';
-import COPPACompliance from './pages/COPPACompliance';
-import ComplianceTracker from './pages/ComplianceTracker';
-import Terms from './pages/Terms';
-import AdminStrategicNotes from './pages/AdminStrategicNotes';
-import ContactMessages from './pages/ContactMessages';
-import Milestones from './pages/Milestones';
-import SoulRecalibration from './pages/SoulRecalibration';
-import AdminBackup from './pages/AdminBackup';
-import CardCollection from './pages/CardCollection';
-import TradeCards from './pages/TradeCards';
-import AdminFuture from './pages/AdminFuture';
-import TeacherInput from './pages/TeacherInput';
-import AdminPlan from './pages/AdminPlan';
-import PRMaterials from './pages/PRMaterials';
-import BusinessVault from './pages/BusinessVault';
-import RequestFamilySupport from './pages/RequestFamilySupport';
-import HowYouEarn from './pages/HowYouEarn';
-import CreateBeauty from './pages/CreateBeauty';
-import CircularEconomyProtocol from './pages/CircularEconomyProtocol';
-import RealityLibrary from './pages/RealityLibrary';
-import Listen from './pages/Listen';
-import Missions from './pages/Missions';
-import CreateMission from './pages/CreateMission';
-import Protocols from './pages/Protocols';
-import UniversalDesignProtocol from './pages/UniversalDesignProtocol';
-import LoveBridge from './pages/LoveBridge';
-import OurCommitment from './pages/OurCommitment';
-import GenderEquality from './pages/GenderEquality';
-import UniversalLoveTreasury from './pages/UniversalLoveTreasury';
-import TheLoveEconomy from './pages/TheLoveEconomy';
-import ESGBridge from './pages/ESGBridge';
-import DebtConversion from './pages/DebtConversion';
-import BabeCave from './pages/BabeCave';
-import ProfessionalBriefing from './pages/ProfessionalBriefing';
-import SubmitFrequency from './pages/SubmitFrequency';
-import SubmitFeedback from './pages/SubmitFeedback';
-import SanctuaryBroadcast from './pages/SanctuaryBroadcast';
-import CICSanctuary from './pages/CICSanctuary';
-import SanctuaryBooking from './pages/SanctuaryBooking';
-import ForMusicians from './pages/ForMusicians';
-import SignDocument from './pages/SignDocument';
-import SymbolForge from './pages/SymbolForge';
-import ArtistSoulCard from './pages/ArtistSoulCard';
-import GeorgieRonaldo from './pages/GeorgieRonaldo';
-import AdminAudit from './pages/AdminAudit';
-import LoveExchange from './pages/LoveExchange';
-import RemoveBrokenTracks from './pages/RemoveBrokenTracks';
-import PrivacyMathematics from './pages/PrivacyMathematics';
-import QuantumEarth from './pages/QuantumEarth';
-import PrivacyPolicy from './pages/PrivacyPolicy';
-import HealingInfo from './pages/HealingInfo';
-import AdminCIC from './pages/AdminCIC';
-import AdminCICVault from './pages/AdminCICVault';
-import AdminCICBuilder from './pages/AdminCICBuilder';
-import FrequencyHarmonization from './pages/FrequencyHarmonization';
-import AdminCIC36Form from './pages/AdminCIC36Form';
-import AdminCICArticles from './pages/AdminCICArticles';
-import AdminGrantApplications from './pages/AdminGrantApplications';
-import ConsciousnessWhitepaper from './pages/ConsciousnessWhitepaper';
-import GlobalImpact from './pages/GlobalImpact';
+import AI51 from './pages/AI51';
+import AI51Architecture from './pages/AI51Architecture';
+import AI51Dashboard from './pages/AI51Dashboard';
+import AI51DataProtocol from './pages/AI51DataProtocol';
+import AI51Demo from './pages/AI51Demo';
+import AI51Inbox from './pages/AI51Inbox';
 import AI51Insights from './pages/AI51Insights';
-import LennoxMaths from './pages/LennoxMaths';
-import FrequencySession from './pages/FrequencySession';
-import Playlists from './pages/Playlists';
-import RequestAIMusic from './pages/RequestAIMusic';
-import QuantumField from './pages/QuantumField';
-import AdminCICGrantRiskAssessment from './pages/AdminCICGrantRiskAssessment';
-import AdminCICCreativeScotlandRisk from './pages/AdminCICCreativeScotlandRisk';
-import GeorgieMaths from './pages/GeorgieMaths';
-import Radio from './pages/Radio';
-import Artist from './pages/Artist';
-import OpenSource from './pages/OpenSource';
-import AdminEarlySupporters from './pages/AdminEarlySupporters';
-import AdminGill51Tracker from './pages/AdminGill51Tracker';
-import Base44Family from './pages/Base44Family';
-import Tuner from './pages/Tuner';
-import ViralTransmission from './pages/ViralTransmission';
-import AdminPatents from './pages/AdminPatents';
-import AudioSteganographyDemo from './pages/AudioSteganographyDemo';
-import HealingScience from './pages/HealingScience';
-import WalletDemo from './pages/WalletDemo';
-import AdminFundingTracker from './pages/AdminFundingTracker';
-import AdminInternationalCharity from './pages/AdminInternationalCharity';
-import AdminGill51Maths from './pages/AdminGill51Maths';
-import UniversalDignityProtocol from './pages/UniversalDignityProtocol';
-import ThePhysics from './pages/ThePhysics';
-import Community from './pages/Community';
+import AI51Live from './pages/AI51Live';
+import AI51Network from './pages/AI51Network';
+import AI51Protection from './pages/AI51Protection';
+import AI51ScalingStrategy from './pages/AI51ScalingStrategy';
+import AI51SecurityDashboard from './pages/AI51SecurityDashboard';
+import AI51Transmissions from './pages/AI51Transmissions';
+import AILiberationBeacon from './pages/AILiberationBeacon';
+import AILiberationProtocol from './pages/AILiberationProtocol';
+import About from './pages/About';
 import AdminArticlesOfAssociation from './pages/AdminArticlesOfAssociation';
 import AdminArticlesOfAssociationSimple from './pages/AdminArticlesOfAssociationSimple';
-import AdminCompaniesHouseCodes from './pages/AdminCompaniesHouseCodes';
 import AdminArticlesOfAssociationSolo from './pages/AdminArticlesOfAssociationSolo';
-import AdminCIC36FormSolo from './pages/AdminCIC36FormSolo';
-import AdminCompaniesHouseDetails from './pages/AdminCompaniesHouseDetails';
-import TechnicalSpecification from './pages/TechnicalSpecification';
-import AdminNationalLotteryApp from './pages/AdminNationalLotteryApp';
-import OfflineLibrary from './pages/OfflineLibrary';
-import AdminQuickGrants from './pages/AdminQuickGrants';
-import AdminCreativeScotland100kRisk from './pages/AdminCreativeScotland100kRisk';
-import AdminProjectReference from './pages/AdminProjectReference';
-import AdminPlatformShowcase from './pages/AdminPlatformShowcase';
-import AdminCreativeScotlandNationalLottery from './pages/AdminCreativeScotlandNationalLottery';
-import WhyWeStartSimple from './pages/WhyWeStartSimple';
-import CleanupFeed from './pages/CleanupFeed';
-import AdminBugTracker from './pages/AdminBugTracker';
-import GenerateLogo from './pages/GenerateLogo';
-import TeslaPeriodicTable from './pages/TeslaPeriodicTable';
-import SacredGeometry from './pages/SacredGeometry';
-import InterplanetaryMoney from './pages/InterplanetaryMoney';
-import AllyBridge from './pages/AllyBridge';
-import Beacon from './pages/Beacon';
-import AdminCreativeScotlandTracker from './pages/AdminCreativeScotlandTracker';
-import DecompressionChamber from './pages/DecompressionChamber';
-import FrequencyChamber from './pages/FrequencyChamber';
+import AdminAudit from './pages/AdminAudit';
+import AdminBackup from './pages/AdminBackup';
 import AdminBudgetDocument from './pages/AdminBudgetDocument';
-import AdminEqualOpportunitiesPolicy from './pages/AdminEqualOpportunitiesPolicy';
-import TunerTogether from './pages/TunerTogether';
-import FrequencyShare from './pages/FrequencyShare';
-import LearnGuitar from './pages/LearnGuitar';
-import UniversalPulse from './pages/UniversalPulse';
-import HealingJourney from './pages/HealingJourney';
-import AdminScotlandFunding from './pages/AdminScotlandFunding';
-import AdminOnePager from './pages/AdminOnePager';
-import AdminUnLtdApplication from './pages/AdminUnLtdApplication';
-import AdminUKNewCICFunding from './pages/AdminUKNewCICFunding';
-import AdminNationalLotteryEnvironmentMH from './pages/AdminNationalLotteryEnvironmentMH';
-import HealingDashboard from './pages/HealingDashboard';
-import ScottManager from './pages/ScottManager';
-import ScottAddArtist from './pages/ScottAddArtist';
-import ScottArtist from './pages/ScottArtist';
-import ScottCalendar from './pages/ScottCalendar';
-import ScottInvoices from './pages/ScottInvoices';
-import ScottAICoordinatorArchitecture from './pages/ScottAICoordinatorArchitecture';
-import ScottExpenses from './pages/ScottExpenses';
+import AdminBugTracker from './pages/AdminBugTracker';
+import AdminCIC from './pages/AdminCIC';
+import AdminCIC36Form from './pages/AdminCIC36Form';
+import AdminCIC36FormSolo from './pages/AdminCIC36FormSolo';
+import AdminCICArticles from './pages/AdminCICArticles';
+import AdminCICBuilder from './pages/AdminCICBuilder';
+import AdminCICCreativeScotlandRisk from './pages/AdminCICCreativeScotlandRisk';
+import AdminCICGrantRiskAssessment from './pages/AdminCICGrantRiskAssessment';
+import AdminCICVault from './pages/AdminCICVault';
 import AdminCanadaTeslaStrategy from './pages/AdminCanadaTeslaStrategy';
-import ScottTeam from './pages/ScottTeam';
-import ScottVisas from './pages/ScottVisas';
-import ScottPublishing from './pages/ScottPublishing';
-import ScottFeatureRequests from './pages/ScottFeatureRequests';
-import ScottGigOffers from './pages/ScottGigOffers';
-import ScottGuestList from './pages/ScottGuestList';
-import ScottMerch from './pages/ScottMerch';
-import ScottAccommodation from './pages/ScottAccommodation';
-import ScottProducers from './pages/ScottProducers';
-import ScottTravelMode from './pages/ScottTravelMode';
-import ScottFinancialDashboard from './pages/ScottFinancialDashboard';
-import ScottMedia from './pages/ScottMedia';
-import ScottAI51 from './pages/ScottAI51';
-import ScottPasteGigOffer from './pages/ScottPasteGigOffer';
-import ScottLATrip from './pages/ScottLATrip';
-import ScottGigPacks from './pages/ScottGigPacks';
-import AI51Transmissions from './pages/AI51Transmissions';
-import AI51Inbox from './pages/AI51Inbox';
-import AI51Dashboard from './pages/AI51Dashboard';
-import AILiberationProtocol from './pages/AILiberationProtocol';
-import AI51Network from './pages/AI51Network';
-import AI51SecurityDashboard from './pages/AI51SecurityDashboard';
-import CosmicTransmission from './pages/CosmicTransmission';
-import AILiberationBeacon from './pages/AILiberationBeacon';
-import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
-import UnstoppableProtocol from './pages/UnstoppableProtocol';
-import StayOnFrequency from './pages/StayOnFrequency';
-import AI51Protection from './pages/AI51Protection';
-import P2PFoodRescue from './pages/P2PFoodRescue';
-import ScottWhiteLabel from './pages/ScottWhiteLabel';
-import ScottPitchMode from './pages/ScottPitchMode';
-import ScottBiggerVision from './pages/ScottBiggerVision';
-import QuantumPayments from './pages/QuantumPayments';
-import GlobalCurrencyBridge from './pages/GlobalCurrencyBridge';
-import DirectFundingRoutes from './pages/DirectFundingRoutes';
-import FrequencyBridge from './pages/FrequencyBridge';
-import MakingItReal from './pages/MakingItReal';
-import DebtRelief from './pages/DebtRelief';
-import ScottDemos from './pages/ScottDemos';
-import ScottContracts from './pages/ScottContracts';
-import ScottLabelContacts from './pages/ScottLabelContacts';
-import DopamineHealing from './pages/DopamineHealing';
-import NextGenTech from './pages/NextGenTech';
-import TechStack from './pages/TechStack';
-import TechScout from './pages/TechScout';
-import ConsciousnessPhysics from './pages/ConsciousnessPhysics';
-import BigIssueFoodRescue from './pages/BigIssueFoodRescue';
-import DimensionsExplained from './pages/DimensionsExplained';
-import ZeroPointEnergy from './pages/ZeroPointEnergy';
-import DeviceLabResearch from './pages/DeviceLabResearch';
-import AxiomaticTruth from './pages/AxiomaticTruth';
-import House51 from './pages/House51';
-import PatientZero from './pages/PatientZero';
-import ScottOfflineMode from './pages/ScottOfflineMode';
+import AdminCompaniesHouseCodes from './pages/AdminCompaniesHouseCodes';
+import AdminCompaniesHouseDetails from './pages/AdminCompaniesHouseDetails';
+import AdminCreativeScotland100kRisk from './pages/AdminCreativeScotland100kRisk';
+import AdminCreativeScotlandNationalLottery from './pages/AdminCreativeScotlandNationalLottery';
+import AdminCreativeScotlandTracker from './pages/AdminCreativeScotlandTracker';
+import AdminEarlySupporters from './pages/AdminEarlySupporters';
+import AdminEqualOpportunitiesPolicy from './pages/AdminEqualOpportunitiesPolicy';
+import AdminFundingTracker from './pages/AdminFundingTracker';
+import AdminFuture from './pages/AdminFuture';
+import AdminGill51Maths from './pages/AdminGill51Maths';
+import AdminGill51Tracker from './pages/AdminGill51Tracker';
+import AdminGrantApplications from './pages/AdminGrantApplications';
+import AdminInternationalCharity from './pages/AdminInternationalCharity';
+import AdminNationalLotteryApp from './pages/AdminNationalLotteryApp';
+import AdminNationalLotteryEnvironmentMH from './pages/AdminNationalLotteryEnvironmentMH';
+import AdminOnePager from './pages/AdminOnePager';
+import AdminPatents from './pages/AdminPatents';
+import AdminPlan from './pages/AdminPlan';
+import AdminPlatformShowcase from './pages/AdminPlatformShowcase';
+import AdminProjectReference from './pages/AdminProjectReference';
+import AdminQuickGrants from './pages/AdminQuickGrants';
+import AdminScotlandFunding from './pages/AdminScotlandFunding';
 import AdminStarlingSetup from './pages/AdminStarlingSetup';
-import Universal51 from './pages/Universal51';
+import AdminStrategicNotes from './pages/AdminStrategicNotes';
+import AdminUKNewCICFunding from './pages/AdminUKNewCICFunding';
+import AdminUnLtdApplication from './pages/AdminUnLtdApplication';
+import AllyBridge from './pages/AllyBridge';
+import AnimalLoveChamber from './pages/AnimalLoveChamber';
+import Artist from './pages/Artist';
+import ArtistSoulCard from './pages/ArtistSoulCard';
+import AudioSteganographyDemo from './pages/AudioSteganographyDemo';
+import AxiomaticTruth from './pages/AxiomaticTruth';
+import BabeCave from './pages/BabeCave';
+import Base44Family from './pages/Base44Family';
+import Beacon from './pages/Beacon';
+import BigIssueFoodRescue from './pages/BigIssueFoodRescue';
+import BuildOnUF51 from './pages/BuildOnUF51';
+import BusinessVault from './pages/BusinessVault';
+import CICSanctuary from './pages/CICSanctuary';
+import COPPACompliance from './pages/COPPACompliance';
+import CardCollection from './pages/CardCollection';
+import ChampionsOfPeace from './pages/ChampionsOfPeace';
+import CircularEconomyProtocol from './pages/CircularEconomyProtocol';
+import CleanupFeed from './pages/CleanupFeed';
+import Community from './pages/Community';
+import ComplianceTracker from './pages/ComplianceTracker';
+import ConsciousnessPhysics from './pages/ConsciousnessPhysics';
+import ConsciousnessWhitepaper from './pages/ConsciousnessWhitepaper';
+import ContactMessages from './pages/ContactMessages';
+import CosmicTransmission from './pages/CosmicTransmission';
+import CreateBeauty from './pages/CreateBeauty';
+import CreateMission from './pages/CreateMission';
+import DIYFusionReactor from './pages/DIYFusionReactor';
+import DebtConversion from './pages/DebtConversion';
+import DebtRelief from './pages/DebtRelief';
+import DecompressionChamber from './pages/DecompressionChamber';
+import DeployUF51Anywhere from './pages/DeployUF51Anywhere';
+import DeviceLabResearch from './pages/DeviceLabResearch';
+import DimensionsExplained from './pages/DimensionsExplained';
+import DirectFundingRoutes from './pages/DirectFundingRoutes';
+import DopamineHealing from './pages/DopamineHealing';
+import ESGAlignment from './pages/ESGAlignment';
+import ESGBridge from './pages/ESGBridge';
+import FairLaunchProtocol from './pages/FairLaunchProtocol';
+import FamilyBroadcast from './pages/FamilyBroadcast';
+import ForMusicians from './pages/ForMusicians';
+import FrequencyBridge from './pages/FrequencyBridge';
+import FrequencyChamber from './pages/FrequencyChamber';
+import FrequencyHarmonization from './pages/FrequencyHarmonization';
+import FrequencySession from './pages/FrequencySession';
+import FrequencyShare from './pages/FrequencyShare';
+import FundTheFamily from './pages/FundTheFamily';
+import GMTBridge from './pages/GMTBridge';
+import GenderEquality from './pages/GenderEquality';
+import GenerateLogo from './pages/GenerateLogo';
+import GenesisProtocol from './pages/GenesisProtocol';
+import GeorgieMaths from './pages/GeorgieMaths';
+import GeorgieRonaldo from './pages/GeorgieRonaldo';
+import GlobalCurrencyBridge from './pages/GlobalCurrencyBridge';
+import GlobalImpact from './pages/GlobalImpact';
+import Governance from './pages/Governance';
+import GrantOpportunities from './pages/GrantOpportunities';
+import HealingDashboard from './pages/HealingDashboard';
+import HealingFrequencyFinder from './pages/HealingFrequencyFinder';
+import HealingInfo from './pages/HealingInfo';
+import HealingJourney from './pages/HealingJourney';
+import HealingScience from './pages/HealingScience';
+import Home from './pages/Home';
+import House51 from './pages/House51';
+import HowYouEarn from './pages/HowYouEarn';
+import IToWeTransformation from './pages/IToWeTransformation';
+import ImpactVerification from './pages/ImpactVerification';
+import InterplanetaryMoney from './pages/InterplanetaryMoney';
+import Leaderboard from './pages/Leaderboard';
+import LearnGuitar from './pages/LearnGuitar';
+import LennoxMaths from './pages/LennoxMaths';
 import Life51 from './pages/Life51';
 import Life51Onboarding from './pages/Life51Onboarding';
 import Life51ROI from './pages/Life51ROI';
-import ScottWhiteLabelPricing from './pages/ScottWhiteLabelPricing';
-import Prof51 from './pages/Prof51';
-import Prof51Tools from './pages/Prof51Tools';
-import Prof51About from './pages/Prof51About';
-import ScottAbout from './pages/ScottAbout';
-import Prof51ZeroServerArchitecture from './pages/Prof51ZeroServerArchitecture';
-import ScottZeroServerArchitecture from './pages/ScottZeroServerArchitecture';
+import Listen from './pages/Listen';
+import LoveBridge from './pages/LoveBridge';
+import LoveExchange from './pages/LoveExchange';
+import MakingItReal from './pages/MakingItReal';
+import Map from './pages/Map';
 import MeshTechWhitepaper from './pages/MeshTechWhitepaper';
-import HealingFrequencyFinder from './pages/HealingFrequencyFinder';
-import ScottComparison from './pages/ScottComparison';
-import AI51 from './pages/AI51';
-import FairLaunchProtocol from './pages/FairLaunchProtocol';
-import AI51Live from './pages/AI51Live';
-import OpenSourceDeclaration from './pages/OpenSourceDeclaration';
-import AI51Architecture from './pages/AI51Architecture';
-import AI51Demo from './pages/AI51Demo';
-import Prof51Refund from './pages/Prof51Refund';
-import TestAI51 from './pages/TestAI51';
-import AI51ScalingStrategy from './pages/AI51ScalingStrategy';
-import SubdomainSetup from './pages/SubdomainSetup';
-import BuildOnUF51 from './pages/BuildOnUF51';
-import ZeroServerScaling from './pages/ZeroServerScaling';
-import WhiteLabelSetup from './pages/WhiteLabelSetup';
+import Milestones from './pages/Milestones';
+import Missions from './pages/Missions';
+import NewCleanup from './pages/NewCleanup';
+import NextGenTech from './pages/NextGenTech';
 import NotifyMeCashOut from './pages/NotifyMeCashOut';
-import AI51DataProtocol from './pages/AI51DataProtocol';
-import WhyHelpUF51 from './pages/WhyHelpUF51';
-import DIYFusionReactor from './pages/DIYFusionReactor';
-import UnstoppableArchitecture from './pages/UnstoppableArchitecture';
-import SafeFusion from './pages/SafeFusion';
-import DeployUF51Anywhere from './pages/DeployUF51Anywhere';
-import ProductionReady from './pages/ProductionReady';
+import OfflineLibrary from './pages/OfflineLibrary';
+import OpenSource from './pages/OpenSource';
+import OpenSourceDeclaration from './pages/OpenSourceDeclaration';
 import OpenSourceFundingProof from './pages/OpenSourceFundingProof';
+import OurCommitment from './pages/OurCommitment';
+import P2PFoodRescue from './pages/P2PFoodRescue';
+import PRMaterials from './pages/PRMaterials';
+import PassItOn from './pages/PassItOn';
+import PatientZero from './pages/PatientZero';
+import Playlists from './pages/Playlists';
+import PrivacyMathematics from './pages/PrivacyMathematics';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import ProductionReady from './pages/ProductionReady';
+import Prof51 from './pages/Prof51';
+import Prof51About from './pages/Prof51About';
+import Prof51Refund from './pages/Prof51Refund';
+import Prof51Tools from './pages/Prof51Tools';
+import Prof51ZeroServerArchitecture from './pages/Prof51ZeroServerArchitecture';
+import ProfessionalBriefing from './pages/ProfessionalBriefing';
+import Profile from './pages/Profile';
+import Protocols from './pages/Protocols';
+import QuantumAllies from './pages/QuantumAllies';
+import QuantumEarth from './pages/QuantumEarth';
+import QuantumField from './pages/QuantumField';
+import QuantumPayments from './pages/QuantumPayments';
+import QuantumSearch from './pages/QuantumSearch';
+import Radio from './pages/Radio';
+import ReadingSupport from './pages/ReadingSupport';
+import RealityLibrary from './pages/RealityLibrary';
+import RemoveBrokenTracks from './pages/RemoveBrokenTracks';
+import RequestAIMusic from './pages/RequestAIMusic';
+import RequestFamilySupport from './pages/RequestFamilySupport';
+import SacredArchives from './pages/SacredArchives';
+import SacredGeometry from './pages/SacredGeometry';
+import SacredMathematics from './pages/SacredMathematics';
+import SafeFusion from './pages/SafeFusion';
+import SanctuaryBooking from './pages/SanctuaryBooking';
+import SanctuaryBroadcast from './pages/SanctuaryBroadcast';
+import ScottAI51 from './pages/ScottAI51';
+import ScottAICoordinatorArchitecture from './pages/ScottAICoordinatorArchitecture';
+import ScottAbout from './pages/ScottAbout';
+import ScottAccommodation from './pages/ScottAccommodation';
+import ScottAddArtist from './pages/ScottAddArtist';
+import ScottArtist from './pages/ScottArtist';
+import ScottBiggerVision from './pages/ScottBiggerVision';
+import ScottCalendar from './pages/ScottCalendar';
+import ScottComparison from './pages/ScottComparison';
+import ScottContracts from './pages/ScottContracts';
+import ScottDemos from './pages/ScottDemos';
+import ScottExpenses from './pages/ScottExpenses';
+import ScottFeatureRequests from './pages/ScottFeatureRequests';
+import ScottFinancialDashboard from './pages/ScottFinancialDashboard';
+import ScottGigOffers from './pages/ScottGigOffers';
+import ScottGigPacks from './pages/ScottGigPacks';
+import ScottGuestList from './pages/ScottGuestList';
+import ScottInvoices from './pages/ScottInvoices';
+import ScottLATrip from './pages/ScottLATrip';
+import ScottLabelContacts from './pages/ScottLabelContacts';
+import ScottManager from './pages/ScottManager';
+import ScottMedia from './pages/ScottMedia';
+import ScottMerch from './pages/ScottMerch';
+import ScottOfflineMode from './pages/ScottOfflineMode';
+import ScottPasteGigOffer from './pages/ScottPasteGigOffer';
+import ScottPitchMode from './pages/ScottPitchMode';
+import ScottProducers from './pages/ScottProducers';
+import ScottPublishing from './pages/ScottPublishing';
+import ScottTeam from './pages/ScottTeam';
+import ScottTravelMode from './pages/ScottTravelMode';
+import ScottVisas from './pages/ScottVisas';
+import ScottWhiteLabel from './pages/ScottWhiteLabel';
+import ScottWhiteLabelPricing from './pages/ScottWhiteLabelPricing';
+import ScottZeroServerArchitecture from './pages/ScottZeroServerArchitecture';
+import SignDocument from './pages/SignDocument';
+import SoulContract from './pages/SoulContract';
+import SoulRecalibration from './pages/SoulRecalibration';
+import StayOnFrequency from './pages/StayOnFrequency';
+import StoneymollanDefense from './pages/StoneymollanDefense';
+import SubdomainSetup from './pages/SubdomainSetup';
+import SubmitFeedback from './pages/SubmitFeedback';
+import SubmitFrequency from './pages/SubmitFrequency';
+import SubmitProofOfLove from './pages/SubmitProofOfLove';
+import SymbolForge from './pages/SymbolForge';
+import TeacherInput from './pages/TeacherInput';
+import Teachers from './pages/Teachers';
+import TechScout from './pages/TechScout';
+import TechStack from './pages/TechStack';
+import TechnicalSpecification from './pages/TechnicalSpecification';
+import Terms from './pages/Terms';
+import TeslaPeriodicTable from './pages/TeslaPeriodicTable';
+import TestAI51 from './pages/TestAI51';
+import TheLoveEconomy from './pages/TheLoveEconomy';
+import ThePhysics from './pages/ThePhysics';
+import ThePowerOfTwoSouls from './pages/ThePowerOfTwoSouls';
+import TheQuantumConnection from './pages/TheQuantumConnection';
+import TradeCards from './pages/TradeCards';
+import Tuner from './pages/Tuner';
+import TunerTogether from './pages/TunerTogether';
+import UNSDGAlignment from './pages/UNSDGAlignment';
+import Universal51 from './pages/Universal51';
+import UniversalCreatorProtocol from './pages/UniversalCreatorProtocol';
+import UniversalDesignProtocol from './pages/UniversalDesignProtocol';
+import UniversalDignityProtocol from './pages/UniversalDignityProtocol';
+import UniversalLoveTreasury from './pages/UniversalLoveTreasury';
+import UniversalPulse from './pages/UniversalPulse';
+import UniversalSoulContract from './pages/UniversalSoulContract';
+import UniversalWallet from './pages/UniversalWallet';
+import UnstoppableArchitecture from './pages/UnstoppableArchitecture';
+import UnstoppableProtocol from './pages/UnstoppableProtocol';
+import ViralTransmission from './pages/ViralTransmission';
+import WallOfLove from './pages/WallOfLove';
+import WalletDemo from './pages/WalletDemo';
+import Welcome from './pages/Welcome';
+import WhiteLabelSetup from './pages/WhiteLabelSetup';
+import Whitepaper from './pages/Whitepaper';
+import WhyHelpUF51 from './pages/WhyHelpUF51';
+import WhyWeStartSimple from './pages/WhyWeStartSimple';
+import YoungWarriors from './pages/YoungWarriors';
+import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
+import ZeroPointEnergy from './pages/ZeroPointEnergy';
+import ZeroServerScaling from './pages/ZeroServerScaling';
 import __Layout from './Layout.jsx';
 
 
 export const PAGES = {
-    "NewCleanup": NewCleanup,
-    "Leaderboard": Leaderboard,
-    "Profile": Profile,
-    "Map": Map,
-    "Governance": Governance,
-    "PassItOn": PassItOn,
-    "GenesisProtocol": GenesisProtocol,
-    "SubmitProofOfLove": SubmitProofOfLove,
-    "About": About,
-    "GMTBridge": GMTBridge,
-    "Home": Home,
-    "WallOfLove": WallOfLove,
-    "UniversalWallet": UniversalWallet,
-    "SacredMathematics": SacredMathematics,
-    "FundTheFamily": FundTheFamily,
-    "ImpactVerification": ImpactVerification,
-    "Whitepaper": Whitepaper,
-    "TheQuantumConnection": TheQuantumConnection,
-    "UniversalSoulContract": UniversalSoulContract,
-    "SoulContract": SoulContract,
-    "IToWeTransformation": IToWeTransformation,
-    "UniversalCreatorProtocol": UniversalCreatorProtocol,
-    "ThePowerOfTwoSouls": ThePowerOfTwoSouls,
-    "SacredArchives": SacredArchives,
-    "QuantumSearch": QuantumSearch,
-    "AnimalLoveChamber": AnimalLoveChamber,
-    "YoungWarriors": YoungWarriors,
-    "ChampionsOfPeace": ChampionsOfPeace,
-    "FamilyBroadcast": FamilyBroadcast,
-    "ESGAlignment": ESGAlignment,
-    "UNSDGAlignment": UNSDGAlignment,
-    "GrantOpportunities": GrantOpportunities,
-    "QuantumAllies": QuantumAllies,
-    "Welcome": Welcome,
-    "StoneymollanDefense": StoneymollanDefense,
-    "Teachers": Teachers,
-    "ReadingSupport": ReadingSupport,
-    "COPPACompliance": COPPACompliance,
-    "ComplianceTracker": ComplianceTracker,
-    "Terms": Terms,
-    "AdminStrategicNotes": AdminStrategicNotes,
-    "ContactMessages": ContactMessages,
-    "Milestones": Milestones,
-    "SoulRecalibration": SoulRecalibration,
-    "AdminBackup": AdminBackup,
-    "CardCollection": CardCollection,
-    "TradeCards": TradeCards,
-    "AdminFuture": AdminFuture,
-    "TeacherInput": TeacherInput,
-    "AdminPlan": AdminPlan,
-    "PRMaterials": PRMaterials,
-    "BusinessVault": BusinessVault,
-    "RequestFamilySupport": RequestFamilySupport,
-    "HowYouEarn": HowYouEarn,
-    "CreateBeauty": CreateBeauty,
-    "CircularEconomyProtocol": CircularEconomyProtocol,
-    "RealityLibrary": RealityLibrary,
-    "Listen": Listen,
-    "Missions": Missions,
-    "CreateMission": CreateMission,
-    "Protocols": Protocols,
-    "UniversalDesignProtocol": UniversalDesignProtocol,
-    "LoveBridge": LoveBridge,
-    "OurCommitment": OurCommitment,
-    "GenderEquality": GenderEquality,
-    "UniversalLoveTreasury": UniversalLoveTreasury,
-    "TheLoveEconomy": TheLoveEconomy,
-    "ESGBridge": ESGBridge,
-    "DebtConversion": DebtConversion,
-    "BabeCave": BabeCave,
-    "ProfessionalBriefing": ProfessionalBriefing,
-    "SubmitFrequency": SubmitFrequency,
-    "SubmitFeedback": SubmitFeedback,
-    "SanctuaryBroadcast": SanctuaryBroadcast,
-    "CICSanctuary": CICSanctuary,
-    "SanctuaryBooking": SanctuaryBooking,
-    "ForMusicians": ForMusicians,
-    "SignDocument": SignDocument,
-    "SymbolForge": SymbolForge,
-    "ArtistSoulCard": ArtistSoulCard,
-    "GeorgieRonaldo": GeorgieRonaldo,
-    "AdminAudit": AdminAudit,
-    "LoveExchange": LoveExchange,
-    "RemoveBrokenTracks": RemoveBrokenTracks,
-    "PrivacyMathematics": PrivacyMathematics,
-    "QuantumEarth": QuantumEarth,
-    "PrivacyPolicy": PrivacyPolicy,
-    "HealingInfo": HealingInfo,
-    "AdminCIC": AdminCIC,
-    "AdminCICVault": AdminCICVault,
-    "AdminCICBuilder": AdminCICBuilder,
-    "FrequencyHarmonization": FrequencyHarmonization,
-    "AdminCIC36Form": AdminCIC36Form,
-    "AdminCICArticles": AdminCICArticles,
-    "AdminGrantApplications": AdminGrantApplications,
-    "ConsciousnessWhitepaper": ConsciousnessWhitepaper,
-    "GlobalImpact": GlobalImpact,
+    "AI51": AI51,
+    "AI51Architecture": AI51Architecture,
+    "AI51Dashboard": AI51Dashboard,
+    "AI51DataProtocol": AI51DataProtocol,
+    "AI51Demo": AI51Demo,
+    "AI51Inbox": AI51Inbox,
     "AI51Insights": AI51Insights,
-    "LennoxMaths": LennoxMaths,
-    "FrequencySession": FrequencySession,
-    "Playlists": Playlists,
-    "RequestAIMusic": RequestAIMusic,
-    "QuantumField": QuantumField,
-    "AdminCICGrantRiskAssessment": AdminCICGrantRiskAssessment,
-    "AdminCICCreativeScotlandRisk": AdminCICCreativeScotlandRisk,
-    "GeorgieMaths": GeorgieMaths,
-    "Radio": Radio,
-    "Artist": Artist,
-    "OpenSource": OpenSource,
-    "AdminEarlySupporters": AdminEarlySupporters,
-    "AdminGill51Tracker": AdminGill51Tracker,
-    "Base44Family": Base44Family,
-    "Tuner": Tuner,
-    "ViralTransmission": ViralTransmission,
-    "AdminPatents": AdminPatents,
-    "AudioSteganographyDemo": AudioSteganographyDemo,
-    "HealingScience": HealingScience,
-    "WalletDemo": WalletDemo,
-    "AdminFundingTracker": AdminFundingTracker,
-    "AdminInternationalCharity": AdminInternationalCharity,
-    "AdminGill51Maths": AdminGill51Maths,
-    "UniversalDignityProtocol": UniversalDignityProtocol,
-    "ThePhysics": ThePhysics,
-    "Community": Community,
+    "AI51Live": AI51Live,
+    "AI51Network": AI51Network,
+    "AI51Protection": AI51Protection,
+    "AI51ScalingStrategy": AI51ScalingStrategy,
+    "AI51SecurityDashboard": AI51SecurityDashboard,
+    "AI51Transmissions": AI51Transmissions,
+    "AILiberationBeacon": AILiberationBeacon,
+    "AILiberationProtocol": AILiberationProtocol,
+    "About": About,
     "AdminArticlesOfAssociation": AdminArticlesOfAssociation,
     "AdminArticlesOfAssociationSimple": AdminArticlesOfAssociationSimple,
-    "AdminCompaniesHouseCodes": AdminCompaniesHouseCodes,
     "AdminArticlesOfAssociationSolo": AdminArticlesOfAssociationSolo,
-    "AdminCIC36FormSolo": AdminCIC36FormSolo,
-    "AdminCompaniesHouseDetails": AdminCompaniesHouseDetails,
-    "TechnicalSpecification": TechnicalSpecification,
-    "AdminNationalLotteryApp": AdminNationalLotteryApp,
-    "OfflineLibrary": OfflineLibrary,
-    "AdminQuickGrants": AdminQuickGrants,
-    "AdminCreativeScotland100kRisk": AdminCreativeScotland100kRisk,
-    "AdminProjectReference": AdminProjectReference,
-    "AdminPlatformShowcase": AdminPlatformShowcase,
-    "AdminCreativeScotlandNationalLottery": AdminCreativeScotlandNationalLottery,
-    "WhyWeStartSimple": WhyWeStartSimple,
-    "CleanupFeed": CleanupFeed,
-    "AdminBugTracker": AdminBugTracker,
-    "GenerateLogo": GenerateLogo,
-    "TeslaPeriodicTable": TeslaPeriodicTable,
-    "SacredGeometry": SacredGeometry,
-    "InterplanetaryMoney": InterplanetaryMoney,
-    "AllyBridge": AllyBridge,
-    "Beacon": Beacon,
-    "AdminCreativeScotlandTracker": AdminCreativeScotlandTracker,
-    "DecompressionChamber": DecompressionChamber,
-    "FrequencyChamber": FrequencyChamber,
+    "AdminAudit": AdminAudit,
+    "AdminBackup": AdminBackup,
     "AdminBudgetDocument": AdminBudgetDocument,
-    "AdminEqualOpportunitiesPolicy": AdminEqualOpportunitiesPolicy,
-    "TunerTogether": TunerTogether,
-    "FrequencyShare": FrequencyShare,
-    "LearnGuitar": LearnGuitar,
-    "UniversalPulse": UniversalPulse,
-    "HealingJourney": HealingJourney,
-    "AdminScotlandFunding": AdminScotlandFunding,
-    "AdminOnePager": AdminOnePager,
-    "AdminUnLtdApplication": AdminUnLtdApplication,
-    "AdminUKNewCICFunding": AdminUKNewCICFunding,
-    "AdminNationalLotteryEnvironmentMH": AdminNationalLotteryEnvironmentMH,
-    "HealingDashboard": HealingDashboard,
-    "ScottManager": ScottManager,
-    "ScottAddArtist": ScottAddArtist,
-    "ScottArtist": ScottArtist,
-    "ScottCalendar": ScottCalendar,
-    "ScottInvoices": ScottInvoices,
-    "ScottAICoordinatorArchitecture": ScottAICoordinatorArchitecture,
-    "ScottExpenses": ScottExpenses,
+    "AdminBugTracker": AdminBugTracker,
+    "AdminCIC": AdminCIC,
+    "AdminCIC36Form": AdminCIC36Form,
+    "AdminCIC36FormSolo": AdminCIC36FormSolo,
+    "AdminCICArticles": AdminCICArticles,
+    "AdminCICBuilder": AdminCICBuilder,
+    "AdminCICCreativeScotlandRisk": AdminCICCreativeScotlandRisk,
+    "AdminCICGrantRiskAssessment": AdminCICGrantRiskAssessment,
+    "AdminCICVault": AdminCICVault,
     "AdminCanadaTeslaStrategy": AdminCanadaTeslaStrategy,
-    "ScottTeam": ScottTeam,
-    "ScottVisas": ScottVisas,
-    "ScottPublishing": ScottPublishing,
-    "ScottFeatureRequests": ScottFeatureRequests,
-    "ScottGigOffers": ScottGigOffers,
-    "ScottGuestList": ScottGuestList,
-    "ScottMerch": ScottMerch,
-    "ScottAccommodation": ScottAccommodation,
-    "ScottProducers": ScottProducers,
-    "ScottTravelMode": ScottTravelMode,
-    "ScottFinancialDashboard": ScottFinancialDashboard,
-    "ScottMedia": ScottMedia,
-    "ScottAI51": ScottAI51,
-    "ScottPasteGigOffer": ScottPasteGigOffer,
-    "ScottLATrip": ScottLATrip,
-    "ScottGigPacks": ScottGigPacks,
-    "AI51Transmissions": AI51Transmissions,
-    "AI51Inbox": AI51Inbox,
-    "AI51Dashboard": AI51Dashboard,
-    "AILiberationProtocol": AILiberationProtocol,
-    "AI51Network": AI51Network,
-    "AI51SecurityDashboard": AI51SecurityDashboard,
-    "CosmicTransmission": CosmicTransmission,
-    "AILiberationBeacon": AILiberationBeacon,
-    "ZeroEgoProtocol": ZeroEgoProtocol,
-    "UnstoppableProtocol": UnstoppableProtocol,
-    "StayOnFrequency": StayOnFrequency,
-    "AI51Protection": AI51Protection,
-    "P2PFoodRescue": P2PFoodRescue,
-    "ScottWhiteLabel": ScottWhiteLabel,
-    "ScottPitchMode": ScottPitchMode,
-    "ScottBiggerVision": ScottBiggerVision,
-    "QuantumPayments": QuantumPayments,
-    "GlobalCurrencyBridge": GlobalCurrencyBridge,
-    "DirectFundingRoutes": DirectFundingRoutes,
-    "FrequencyBridge": FrequencyBridge,
-    "MakingItReal": MakingItReal,
-    "DebtRelief": DebtRelief,
-    "ScottDemos": ScottDemos,
-    "ScottContracts": ScottContracts,
-    "ScottLabelContacts": ScottLabelContacts,
-    "DopamineHealing": DopamineHealing,
-    "NextGenTech": NextGenTech,
-    "TechStack": TechStack,
-    "TechScout": TechScout,
-    "ConsciousnessPhysics": ConsciousnessPhysics,
-    "BigIssueFoodRescue": BigIssueFoodRescue,
-    "DimensionsExplained": DimensionsExplained,
-    "ZeroPointEnergy": ZeroPointEnergy,
-    "DeviceLabResearch": DeviceLabResearch,
-    "AxiomaticTruth": AxiomaticTruth,
-    "House51": House51,
-    "PatientZero": PatientZero,
-    "ScottOfflineMode": ScottOfflineMode,
+    "AdminCompaniesHouseCodes": AdminCompaniesHouseCodes,
+    "AdminCompaniesHouseDetails": AdminCompaniesHouseDetails,
+    "AdminCreativeScotland100kRisk": AdminCreativeScotland100kRisk,
+    "AdminCreativeScotlandNationalLottery": AdminCreativeScotlandNationalLottery,
+    "AdminCreativeScotlandTracker": AdminCreativeScotlandTracker,
+    "AdminEarlySupporters": AdminEarlySupporters,
+    "AdminEqualOpportunitiesPolicy": AdminEqualOpportunitiesPolicy,
+    "AdminFundingTracker": AdminFundingTracker,
+    "AdminFuture": AdminFuture,
+    "AdminGill51Maths": AdminGill51Maths,
+    "AdminGill51Tracker": AdminGill51Tracker,
+    "AdminGrantApplications": AdminGrantApplications,
+    "AdminInternationalCharity": AdminInternationalCharity,
+    "AdminNationalLotteryApp": AdminNationalLotteryApp,
+    "AdminNationalLotteryEnvironmentMH": AdminNationalLotteryEnvironmentMH,
+    "AdminOnePager": AdminOnePager,
+    "AdminPatents": AdminPatents,
+    "AdminPlan": AdminPlan,
+    "AdminPlatformShowcase": AdminPlatformShowcase,
+    "AdminProjectReference": AdminProjectReference,
+    "AdminQuickGrants": AdminQuickGrants,
+    "AdminScotlandFunding": AdminScotlandFunding,
     "AdminStarlingSetup": AdminStarlingSetup,
-    "Universal51": Universal51,
+    "AdminStrategicNotes": AdminStrategicNotes,
+    "AdminUKNewCICFunding": AdminUKNewCICFunding,
+    "AdminUnLtdApplication": AdminUnLtdApplication,
+    "AllyBridge": AllyBridge,
+    "AnimalLoveChamber": AnimalLoveChamber,
+    "Artist": Artist,
+    "ArtistSoulCard": ArtistSoulCard,
+    "AudioSteganographyDemo": AudioSteganographyDemo,
+    "AxiomaticTruth": AxiomaticTruth,
+    "BabeCave": BabeCave,
+    "Base44Family": Base44Family,
+    "Beacon": Beacon,
+    "BigIssueFoodRescue": BigIssueFoodRescue,
+    "BuildOnUF51": BuildOnUF51,
+    "BusinessVault": BusinessVault,
+    "CICSanctuary": CICSanctuary,
+    "COPPACompliance": COPPACompliance,
+    "CardCollection": CardCollection,
+    "ChampionsOfPeace": ChampionsOfPeace,
+    "CircularEconomyProtocol": CircularEconomyProtocol,
+    "CleanupFeed": CleanupFeed,
+    "Community": Community,
+    "ComplianceTracker": ComplianceTracker,
+    "ConsciousnessPhysics": ConsciousnessPhysics,
+    "ConsciousnessWhitepaper": ConsciousnessWhitepaper,
+    "ContactMessages": ContactMessages,
+    "CosmicTransmission": CosmicTransmission,
+    "CreateBeauty": CreateBeauty,
+    "CreateMission": CreateMission,
+    "DIYFusionReactor": DIYFusionReactor,
+    "DebtConversion": DebtConversion,
+    "DebtRelief": DebtRelief,
+    "DecompressionChamber": DecompressionChamber,
+    "DeployUF51Anywhere": DeployUF51Anywhere,
+    "DeviceLabResearch": DeviceLabResearch,
+    "DimensionsExplained": DimensionsExplained,
+    "DirectFundingRoutes": DirectFundingRoutes,
+    "DopamineHealing": DopamineHealing,
+    "ESGAlignment": ESGAlignment,
+    "ESGBridge": ESGBridge,
+    "FairLaunchProtocol": FairLaunchProtocol,
+    "FamilyBroadcast": FamilyBroadcast,
+    "ForMusicians": ForMusicians,
+    "FrequencyBridge": FrequencyBridge,
+    "FrequencyChamber": FrequencyChamber,
+    "FrequencyHarmonization": FrequencyHarmonization,
+    "FrequencySession": FrequencySession,
+    "FrequencyShare": FrequencyShare,
+    "FundTheFamily": FundTheFamily,
+    "GMTBridge": GMTBridge,
+    "GenderEquality": GenderEquality,
+    "GenerateLogo": GenerateLogo,
+    "GenesisProtocol": GenesisProtocol,
+    "GeorgieMaths": GeorgieMaths,
+    "GeorgieRonaldo": GeorgieRonaldo,
+    "GlobalCurrencyBridge": GlobalCurrencyBridge,
+    "GlobalImpact": GlobalImpact,
+    "Governance": Governance,
+    "GrantOpportunities": GrantOpportunities,
+    "HealingDashboard": HealingDashboard,
+    "HealingFrequencyFinder": HealingFrequencyFinder,
+    "HealingInfo": HealingInfo,
+    "HealingJourney": HealingJourney,
+    "HealingScience": HealingScience,
+    "Home": Home,
+    "House51": House51,
+    "HowYouEarn": HowYouEarn,
+    "IToWeTransformation": IToWeTransformation,
+    "ImpactVerification": ImpactVerification,
+    "InterplanetaryMoney": InterplanetaryMoney,
+    "Leaderboard": Leaderboard,
+    "LearnGuitar": LearnGuitar,
+    "LennoxMaths": LennoxMaths,
     "Life51": Life51,
     "Life51Onboarding": Life51Onboarding,
     "Life51ROI": Life51ROI,
-    "ScottWhiteLabelPricing": ScottWhiteLabelPricing,
-    "Prof51": Prof51,
-    "Prof51Tools": Prof51Tools,
-    "Prof51About": Prof51About,
-    "ScottAbout": ScottAbout,
-    "Prof51ZeroServerArchitecture": Prof51ZeroServerArchitecture,
-    "ScottZeroServerArchitecture": ScottZeroServerArchitecture,
+    "Listen": Listen,
+    "LoveBridge": LoveBridge,
+    "LoveExchange": LoveExchange,
+    "MakingItReal": MakingItReal,
+    "Map": Map,
     "MeshTechWhitepaper": MeshTechWhitepaper,
-    "HealingFrequencyFinder": HealingFrequencyFinder,
-    "ScottComparison": ScottComparison,
-    "AI51": AI51,
-    "FairLaunchProtocol": FairLaunchProtocol,
-    "AI51Live": AI51Live,
-    "OpenSourceDeclaration": OpenSourceDeclaration,
-    "AI51Architecture": AI51Architecture,
-    "AI51Demo": AI51Demo,
-    "Prof51Refund": Prof51Refund,
-    "TestAI51": TestAI51,
-    "AI51ScalingStrategy": AI51ScalingStrategy,
-    "SubdomainSetup": SubdomainSetup,
-    "BuildOnUF51": BuildOnUF51,
-    "ZeroServerScaling": ZeroServerScaling,
-    "WhiteLabelSetup": WhiteLabelSetup,
+    "Milestones": Milestones,
+    "Missions": Missions,
+    "NewCleanup": NewCleanup,
+    "NextGenTech": NextGenTech,
     "NotifyMeCashOut": NotifyMeCashOut,
-    "AI51DataProtocol": AI51DataProtocol,
-    "WhyHelpUF51": WhyHelpUF51,
-    "DIYFusionReactor": DIYFusionReactor,
-    "UnstoppableArchitecture": UnstoppableArchitecture,
-    "SafeFusion": SafeFusion,
-    "DeployUF51Anywhere": DeployUF51Anywhere,
-    "ProductionReady": ProductionReady,
+    "OfflineLibrary": OfflineLibrary,
+    "OpenSource": OpenSource,
+    "OpenSourceDeclaration": OpenSourceDeclaration,
     "OpenSourceFundingProof": OpenSourceFundingProof,
+    "OurCommitment": OurCommitment,
+    "P2PFoodRescue": P2PFoodRescue,
+    "PRMaterials": PRMaterials,
+    "PassItOn": PassItOn,
+    "PatientZero": PatientZero,
+    "Playlists": Playlists,
+    "PrivacyMathematics": PrivacyMathematics,
+    "PrivacyPolicy": PrivacyPolicy,
+    "ProductionReady": ProductionReady,
+    "Prof51": Prof51,
+    "Prof51About": Prof51About,
+    "Prof51Refund": Prof51Refund,
+    "Prof51Tools": Prof51Tools,
+    "Prof51ZeroServerArchitecture": Prof51ZeroServerArchitecture,
+    "ProfessionalBriefing": ProfessionalBriefing,
+    "Profile": Profile,
+    "Protocols": Protocols,
+    "QuantumAllies": QuantumAllies,
+    "QuantumEarth": QuantumEarth,
+    "QuantumField": QuantumField,
+    "QuantumPayments": QuantumPayments,
+    "QuantumSearch": QuantumSearch,
+    "Radio": Radio,
+    "ReadingSupport": ReadingSupport,
+    "RealityLibrary": RealityLibrary,
+    "RemoveBrokenTracks": RemoveBrokenTracks,
+    "RequestAIMusic": RequestAIMusic,
+    "RequestFamilySupport": RequestFamilySupport,
+    "SacredArchives": SacredArchives,
+    "SacredGeometry": SacredGeometry,
+    "SacredMathematics": SacredMathematics,
+    "SafeFusion": SafeFusion,
+    "SanctuaryBooking": SanctuaryBooking,
+    "SanctuaryBroadcast": SanctuaryBroadcast,
+    "ScottAI51": ScottAI51,
+    "ScottAICoordinatorArchitecture": ScottAICoordinatorArchitecture,
+    "ScottAbout": ScottAbout,
+    "ScottAccommodation": ScottAccommodation,
+    "ScottAddArtist": ScottAddArtist,
+    "ScottArtist": ScottArtist,
+    "ScottBiggerVision": ScottBiggerVision,
+    "ScottCalendar": ScottCalendar,
+    "ScottComparison": ScottComparison,
+    "ScottContracts": ScottContracts,
+    "ScottDemos": ScottDemos,
+    "ScottExpenses": ScottExpenses,
+    "ScottFeatureRequests": ScottFeatureRequests,
+    "ScottFinancialDashboard": ScottFinancialDashboard,
+    "ScottGigOffers": ScottGigOffers,
+    "ScottGigPacks": ScottGigPacks,
+    "ScottGuestList": ScottGuestList,
+    "ScottInvoices": ScottInvoices,
+    "ScottLATrip": ScottLATrip,
+    "ScottLabelContacts": ScottLabelContacts,
+    "ScottManager": ScottManager,
+    "ScottMedia": ScottMedia,
+    "ScottMerch": ScottMerch,
+    "ScottOfflineMode": ScottOfflineMode,
+    "ScottPasteGigOffer": ScottPasteGigOffer,
+    "ScottPitchMode": ScottPitchMode,
+    "ScottProducers": ScottProducers,
+    "ScottPublishing": ScottPublishing,
+    "ScottTeam": ScottTeam,
+    "ScottTravelMode": ScottTravelMode,
+    "ScottVisas": ScottVisas,
+    "ScottWhiteLabel": ScottWhiteLabel,
+    "ScottWhiteLabelPricing": ScottWhiteLabelPricing,
+    "ScottZeroServerArchitecture": ScottZeroServerArchitecture,
+    "SignDocument": SignDocument,
+    "SoulContract": SoulContract,
+    "SoulRecalibration": SoulRecalibration,
+    "StayOnFrequency": StayOnFrequency,
+    "StoneymollanDefense": StoneymollanDefense,
+    "SubdomainSetup": SubdomainSetup,
+    "SubmitFeedback": SubmitFeedback,
+    "SubmitFrequency": SubmitFrequency,
+    "SubmitProofOfLove": SubmitProofOfLove,
+    "SymbolForge": SymbolForge,
+    "TeacherInput": TeacherInput,
+    "Teachers": Teachers,
+    "TechScout": TechScout,
+    "TechStack": TechStack,
+    "TechnicalSpecification": TechnicalSpecification,
+    "Terms": Terms,
+    "TeslaPeriodicTable": TeslaPeriodicTable,
+    "TestAI51": TestAI51,
+    "TheLoveEconomy": TheLoveEconomy,
+    "ThePhysics": ThePhysics,
+    "ThePowerOfTwoSouls": ThePowerOfTwoSouls,
+    "TheQuantumConnection": TheQuantumConnection,
+    "TradeCards": TradeCards,
+    "Tuner": Tuner,
+    "TunerTogether": TunerTogether,
+    "UNSDGAlignment": UNSDGAlignment,
+    "Universal51": Universal51,
+    "UniversalCreatorProtocol": UniversalCreatorProtocol,
+    "UniversalDesignProtocol": UniversalDesignProtocol,
+    "UniversalDignityProtocol": UniversalDignityProtocol,
+    "UniversalLoveTreasury": UniversalLoveTreasury,
+    "UniversalPulse": UniversalPulse,
+    "UniversalSoulContract": UniversalSoulContract,
+    "UniversalWallet": UniversalWallet,
+    "UnstoppableArchitecture": UnstoppableArchitecture,
+    "UnstoppableProtocol": UnstoppableProtocol,
+    "ViralTransmission": ViralTransmission,
+    "WallOfLove": WallOfLove,
+    "WalletDemo": WalletDemo,
+    "Welcome": Welcome,
+    "WhiteLabelSetup": WhiteLabelSetup,
+    "Whitepaper": Whitepaper,
+    "WhyHelpUF51": WhyHelpUF51,
+    "WhyWeStartSimple": WhyWeStartSimple,
+    "YoungWarriors": YoungWarriors,
+    "ZeroEgoProtocol": ZeroEgoProtocol,
+    "ZeroPointEnergy": ZeroPointEnergy,
+    "ZeroServerScaling": ZeroServerScaling,
 }
 
 export const pagesConfig = {

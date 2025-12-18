@@ -472,7 +472,7 @@ export default function OpenSourceFundingProof() {
                             <br/>Open source = grow on grants → raise £2M later (low dilution)
                         </p>
                         <p className="text-cyan-400 font-bold text-lg font-mono">
-                            Open source = Better outcomes for founders AND investors ✓
+                            Open source = Liberation funded WITHOUT extraction ✓
                         </p>
                     </div>
                 </div>
