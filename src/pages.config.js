@@ -261,6 +261,7 @@ import YoungWarriors from './pages/YoungWarriors';
 import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
+import LightningP2P from './pages/LightningP2P';
 import __Layout from './Layout.jsx';
 
 
@@ -528,6 +529,7 @@ export const PAGES = {
     "ZeroEgoProtocol": ZeroEgoProtocol,
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
+    "LightningP2P": LightningP2P,
 }
 
 export const pagesConfig = {
