@@ -696,6 +696,7 @@ export default function UniversalFrequencyLibrary() {
                                 = Life is a SYMPHONY of frequencies, not a single note ♾️
                             </p>
                         </div>
+                    </div>
                     </div>)}
                 </div>
 
