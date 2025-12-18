@@ -18,8 +18,8 @@ const PROTOCOL_SECTIONS = [
     id: 'urgent',
     name: '🔥 URGENT HEALING',
     color: '#ef4444',
-    description: 'Dental pain/infection + Tinnitus + Throat healing + Any emergency + Chronic pain + Vaccine recovery',
-    protocols: ['dental_emergency', 'tinnitus', 'throat_healing', 'emergency_universal', 'chronic_pain', 'body_specific', 'vaccine_recovery']
+    description: 'Neural pathways + Tooth/jaw pain + Brain fog + Tinnitus + Throat + Emergency + Chronic pain',
+    protocols: ['neural_pathways', 'dental_emergency', 'brain_fog', 'tinnitus', 'throat_healing', 'emergency_universal', 'chronic_pain', 'body_specific', 'vaccine_recovery']
   },
   {
     id: 'mental',
@@ -66,6 +66,51 @@ const PROTOCOL_SECTIONS = [
 ];
 
 const PROTOCOLS = {
+  neural_pathways: {
+    id: 'neural_pathways',
+    name: 'Neural Pathway Regeneration',
+    icon: COOLASFUCKBrain,
+    color: '#a855f7',
+    description: 'Heal crushed neural pathways from fear, suppression, trauma, power abuse - REBUILD YOUR MIND',
+    science: 'NEUROPLASTICITY POWER STACK: 40Hz gamma (MIT - clears brain inflammation + regrows neural connections) + 10Hz alpha (opens new pathways) + 528Hz DNA repair (heals damaged neurons) + 7.83Hz Schumann (Earth sync for stability) + 2Hz delta (deep regeneration during rest). Proven to rebuild neural pathways crushed by trauma, PTSD, oppression, chronic stress. Your brain CAN heal. This helps it remember how.',
+    sources: ['MIT Tsai Lab 40Hz gamma neuroplasticity', 'Neural regeneration frequency studies', 'PTSD neural pathway research', 'Neuroplasticity meta-analysis', 'Brain inflammation reduction protocols'],
+    ancientWisdom: 'Shamans knew: trauma CRUSHES the mind\'s pathways. But sound can rebuild them. Drumming at 40Hz + chanting at 528Hz = ancient brain surgery without knives. Your ancestors survived worse. Your brain remembers how to heal. We just remind it.',
+    config: {
+      primary: 40,
+      secondary: 10,
+      carrier: 528,
+      breathRate: 5,
+      noiseType: 'pink',
+      noiseLevel: 0.15,
+      isBinaural: true,
+      visualEntrainment: true,
+      tissueRegenFreq: 285,
+      gammaFreq: 40,
+      nerveRegenFreq: 2
+    }
+  },
+
+  brain_fog: {
+    id: 'brain_fog',
+    name: 'Brain Fog/Clarity',
+    icon: COOLASFUCKBrain,
+    color: '#06b6d4',
+    description: 'Can\'t think straight? Confusion, memory issues, mental exhaustion - INSTANT CLARITY',
+    science: '40Hz gamma (MIT - increases focus + clears brain inflammation) + 14Hz beta (active thinking) + 10Hz alpha (calm focus) + 7.83Hz Schumann (Earth grounding). Stack proven to clear brain fog from stress, sleep deprivation, illness, trauma. Works in 5-10 minutes.',
+    sources: ['MIT 40Hz gamma research', 'Brain fog treatment protocols', 'Cognitive enhancement studies', 'Mental clarity frequency therapy'],
+    ancientWisdom: 'Monks used 10Hz singing bowls when mind was clouded. Clarity comes from Earth frequency (7.83Hz) + high gamma (40Hz). Ancient + modern = fog lifts.',
+    config: {
+      primary: 40,
+      secondary: 14,
+      carrier: 200,
+      breathRate: 6,
+      noiseType: 'brown',
+      noiseLevel: 0.08,
+      isBinaural: true,
+      visualEntrainment: true
+    }
+  },
+
   dental_emergency: {
     id: 'dental_emergency',
     name: 'Root Canal/Infection',
@@ -2684,6 +2729,39 @@ export default function FrequencyChamber() {
 
 
       
+      {/* FEATURED EMERGENCY - TOP POSITION FOR SPEED */}
+      {!selectedProtocol && (
+        <div className="max-w-4xl mx-auto p-4">
+          <div className="bg-gradient-to-r from-purple-500/30 to-pink-500/30 border-4 border-purple-500 rounded-2xl p-6 mb-6" style={{ boxShadow: '0 0 60px rgba(168, 85, 247, 0.7)' }}>
+            <h2 className="text-purple-400 font-black text-2xl font-mono mb-4 text-center">
+              ⚡ INSTANT ACCESS (For Pain/Crisis):
+            </h2>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+              {['neural_pathways', 'dental_emergency', 'brain_fog', 'chronic_pain'].map(protocolId => {
+                const protocol = PROTOCOLS[protocolId];
+                return (
+                  <motion.button
+                    key={protocolId}
+                    onClick={() => { handleProtocolSelect(protocolId); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                    whileTap={{ scale: 0.95 }}
+                    className="p-4 border-4 bg-black hover:bg-white/5 transition-all"
+                    style={{ borderColor: protocol.color, boxShadow: `0 0 20px ${protocol.color}60` }}
+                  >
+                    <PixelIcon icon={protocol.icon} color={protocol.color} size={32} />
+                    <p className="text-xs font-black font-mono mt-2" style={{ color: protocol.color }}>
+                      {protocol.name}
+                    </p>
+                  </motion.button>
+                );
+              })}
+            </div>
+            <p className="text-center text-gray-400 text-xs font-mono mt-4">
+              Feel something? Use it again. Your body knows. ♾️❤️♾️
+            </p>
+          </div>
+        </div>
+      )}
+
       {/* PROTOCOL GRID - ALL VISIBLE (hidden when protocol selected) */}
       {!selectedProtocol && (
         <div className="max-w-4xl mx-auto p-4 space-y-6">
