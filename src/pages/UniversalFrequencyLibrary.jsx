@@ -1417,12 +1417,10 @@ export default function UniversalFrequencyLibrary() {
                             </p>
                         </div>
                         </div>
-                        </div>
-                        </div>
-                        </div>)}
-                        </div>
+                    </div>)}
+                </div>
 
-                        {/* PLANT LIFE - 8-BIT */}
+                {/* PLANT LIFE - 8-BIT */}
                 <div className="mt-4 bg-black border-4 border-green-500">
                     <button 
                         onClick={() => toggleSection('plants')}
