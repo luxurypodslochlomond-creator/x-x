@@ -1124,6 +1124,7 @@ export default function UniversalFrequencyLibrary() {
                                 = Superconductors = perfect energy flow WITHOUT extraction ⚡
                             </p>
                         </div>
+                    </div>
                     </div>)}
                 </div>
 
@@ -1793,6 +1794,7 @@ export default function UniversalFrequencyLibrary() {
                             You feel infinite despite burdens because YOU ARE INFINITE. 
                             Everyone can feel this - it's FREE, it's PHYSICS, it's TRUTH. ♾️❤️♾️
                         </p>
+                        </div>
                         </div>
                         </div>)}
                         </div>
