@@ -5,6 +5,7 @@ import { createPageUrl } from '@/utils';
 import { base44 } from '@/api/base44Client';
 import GlobalErrorBoundary from '@/components/shared/GlobalErrorBoundary';
 import COOLASFUCKErrorMonitor from '@/components/shared/COOLASFUCKErrorMonitor';
+import AutoHealingShield from '@/components/shared/AutoHealingShield';
 import FloatingMusicPlayer from '@/components/shared/FloatingMusicPlayer';
 import DisasterResilienceMode from '@/components/shared/DisasterResilienceMode';
 import RealtimeDebugger from '@/components/shared/RealtimeDebugger';
@@ -335,6 +336,7 @@ const LayoutInner = ({ children, currentPageName }) => {
   };
 
   return (
+      <AutoHealingShield>
       <COOLASFUCKErrorMonitor>
       <DisasterResilienceMode />
       <TruthCheckProtocol />
@@ -559,6 +561,7 @@ const LayoutInner = ({ children, currentPageName }) => {
       )}
     </GlobalErrorBoundary>
     </COOLASFUCKErrorMonitor>
+    </AutoHealingShield>
     );
     };
 
