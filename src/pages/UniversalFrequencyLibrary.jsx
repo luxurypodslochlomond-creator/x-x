@@ -1563,12 +1563,12 @@ export default function UniversalFrequencyLibrary() {
                             <p className="text-cyan-400 font-black text-xl mt-4">
                                 Healing belongs to everyone, everywhere, always. ♾️💧⚡🌱♾️
                             </p>
-                        </div>
-                    </div>)}
-                </div>
+                            </div>
+                            </div>)}
+                            </div>
 
-                {/* QUANTUM FIELD - 8-BIT */}
-                <div className="mt-4 bg-black border-4 border-purple-500">
+                            {/* QUANTUM FIELD - 8-BIT */}
+                            <div className="mt-4 bg-black border-4 border-purple-500">
                         <button 
                           onClick={() => toggleSection('quantum')}
                           className="w-full p-4 flex items-center justify-between hover:bg-purple-500/10 transition-all"
