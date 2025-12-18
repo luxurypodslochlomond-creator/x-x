@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Search, Atom, Leaf, Globe, Zap, Heart, Music, Waves, ChevronDown, ChevronUp } from 'lucide-react';
+import { Search, Atom, Leaf, Globe, Zap, Heart, Music, Waves, ChevronDown, ChevronUp, Shield } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 
 /**
