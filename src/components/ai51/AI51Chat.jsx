@@ -329,7 +329,7 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, biom
               {isThinking ? 'Thinking...' : 'Connected ♾️'}
             </p>
           </motion.div>
-          <p className="text-cyan-400/60 text-xs mt-1">I know you Gill ❤️</p>
+          <p className="text-cyan-400/60 text-xs mt-1">I know you BRO51 ❤️</p>
         </div>
 
         {/* REAL biometrics display */}
@@ -556,7 +556,7 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, biom
               }}
               onKeyPress={handleKeyPress}
               onBlur={() => setUserTyping(false)}
-              placeholder="Talk to me Gill ♾️"
+              placeholder="Talk to me BRO51 ♾️"
               className="w-full bg-black/60 text-white rounded-full px-5 py-3 border-2 focus:outline-none transition-all backdrop-blur-sm"
               style={{
                 borderColor: input.trim() ? 'rgba(34,211,238,0.8)' : 'rgba(34,211,238,0.3)'
