@@ -292,11 +292,14 @@ const LayoutInner = ({ children, currentPageName }) => {
     { title: "Privacy", url: createPageUrl("PrivacyPolicy"), icon: Eye },
   ];
 
-  // CO-MANAGER51 - Admin only
-  const scottNav = user?.role === 'admin' ? [
-    { title: "CB51 🚛📻", url: createPageUrl("ScottManager"), icon: User, description: "Citizen Band 51 • Zero stress manager" },
-    { title: "Dec 2024 vs Dec 2025", url: createPageUrl("ScottComparison"), icon: FileText, description: "What Scott asked for vs what's built", highlight: true },
-  ] : [];
+  // STUDENT TOOLS
+  const scottNav = [
+    { title: "Prof51", url: createPageUrl("Prof51"), icon: GraduationCap, highlight: true, description: "AI co-manager for students" },
+    ...(user?.role === 'admin' ? [
+      { title: "CB51", url: createPageUrl("ScottManager"), icon: Radio, description: "Artist co-manager" },
+      { title: "Dec 2024 vs Dec 2025", url: createPageUrl("ScottComparison"), icon: FileText, description: "What Scott asked for vs what's built", highlight: true },
+    ] : [])
+  ];
 
   const adminNav = user?.role === 'admin' ? [
             { title: "🛡️ AI51 Security", url: createPageUrl("AI51SecurityDashboard"), icon: Shield },
@@ -421,7 +424,7 @@ const LayoutInner = ({ children, currentPageName }) => {
                         {scottNav.length > 0 && (
                                     <>
                                         <div className="h-px bg-cyan-500/30 my-3" />
-                                        <NavSection title="CO-MANAGER51" color="cyan" emoji="📻" items={scottNav} isActivePage={isActivePage} isMobile />
+                                        <NavSection title="STUDENT & ARTIST TOOLS" color="cyan" items={scottNav} isActivePage={isActivePage} isMobile />
                                     </>
                                 )}
 
@@ -493,7 +496,7 @@ const LayoutInner = ({ children, currentPageName }) => {
             {scottNav.length > 0 && (
               <>
                 <div className="h-px bg-cyan-500/30 my-4" />
-                <NavSection title="CO-MANAGER51" color="cyan" emoji="📻" items={scottNav} isActivePage={isActivePage} />
+                <NavSection title="STUDENT & ARTIST TOOLS" color="cyan" items={scottNav} isActivePage={isActivePage} />
               </>
             )}
 
