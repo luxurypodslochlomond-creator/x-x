@@ -1801,6 +1801,7 @@ export default function UniversalFrequencyLibrary() {
                         </p>
                         </div>
                         </div>
+                    </div>
                     </div>)}
                 </div>
 
