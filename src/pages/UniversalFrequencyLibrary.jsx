@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Search, Atom, Leaf, Globe, Zap, Heart, Music, Waves } from 'lucide-react';
+import { Search, Atom, Leaf, Globe, Zap, Heart, Music, Waves, ChevronDown, ChevronUp } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 
 /**
@@ -15,10 +15,15 @@ export default function UniversalFrequencyLibrary() {
     const [playingFreq, setPlayingFreq] = useState(null);
     const [audioContext, setAudioContext] = useState(null);
     const [oscillator, setOscillator] = useState(null);
+    const [expandedCards, setExpandedCards] = useState({});
 
     React.useEffect(() => {
         document.title = 'Universal Frequency Library | UF51';
     }, []);
+
+    const toggleCard = (name) => {
+        setExpandedCards(prev => ({ ...prev, [name]: !prev[name] }));
+    };
 
     const playFrequency = async (freqString, name) => {
         // Stop any currently playing sound
@@ -317,42 +322,109 @@ export default function UniversalFrequencyLibrary() {
                     </p>
                 </div>
 
-                {/* FREQUENCY GRID */}
+                {/* FREQUENCY GRID - EXPANDABLE CARDS */}
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {filteredData.map((item, i) => (
-                        <motion.div
-                            key={i}
-                            initial={{ opacity: 0, scale: 0.9 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            transition={{ delay: i * 0.02 }}
-                            className="bg-black/60 border-2 border-cyan-500/30 hover:border-cyan-500 rounded-xl p-4 transition-all"
-                        >
-                            <div className="flex items-start justify-between mb-2">
-                                <h3 className="text-white font-black text-lg font-mono">{item.name}</h3>
-                                <button
-                                    onClick={() => playingFreq === item.name ? stopFrequency() : playFrequency(item.freq, item.name)}
-                                    className={`flex-shrink-0 p-2 rounded-lg transition-all ${
-                                        playingFreq === item.name 
-                                            ? 'bg-pink-500 text-white' 
-                                            : 'bg-cyan-500/20 text-cyan-400 hover:bg-cyan-500/40'
-                                    }`}
-                                >
-                                    {playingFreq === item.name ? (
-                                        <div className="flex items-center gap-1">
-                                            <div className="w-1 h-4 bg-white animate-pulse" />
-                                            <div className="w-1 h-4 bg-white animate-pulse" style={{ animationDelay: '0.1s' }} />
-                                            <div className="w-1 h-4 bg-white animate-pulse" style={{ animationDelay: '0.2s' }} />
+                    {filteredData.map((item, i) => {
+                        const isExpanded = expandedCards[item.name];
+                        const isPlaying = playingFreq === item.name;
+                        
+                        return (
+                            <motion.div
+                                key={i}
+                                initial={{ opacity: 0, scale: 0.9 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                transition={{ delay: i * 0.02 }}
+                                className={`bg-black/60 border-2 rounded-xl p-4 transition-all ${
+                                    isPlaying 
+                                        ? 'border-pink-500 shadow-[0_0_20px_rgba(236,72,153,0.5)]' 
+                                        : 'border-cyan-500/30 hover:border-cyan-500'
+                                }`}
+                            >
+                                <div className="flex items-start justify-between mb-2">
+                                    <h3 className="text-white font-black text-lg font-mono">{item.name}</h3>
+                                    <div className="flex gap-2">
+                                        <button
+                                            onClick={() => playingFreq === item.name ? stopFrequency() : playFrequency(item.freq, item.name)}
+                                            className={`flex-shrink-0 p-2 rounded-lg transition-all ${
+                                                isPlaying 
+                                                    ? 'bg-pink-500 text-white animate-pulse' 
+                                                    : 'bg-cyan-500/20 text-cyan-400 hover:bg-cyan-500/40'
+                                            }`}
+                                        >
+                                            {isPlaying ? (
+                                                <div className="flex items-center gap-1">
+                                                    <div className="w-1 h-4 bg-white animate-pulse" />
+                                                    <div className="w-1 h-4 bg-white animate-pulse" style={{ animationDelay: '0.1s' }} />
+                                                    <div className="w-1 h-4 bg-white animate-pulse" style={{ animationDelay: '0.2s' }} />
+                                                </div>
+                                            ) : (
+                                                <Music className="w-5 h-5" />
+                                            )}
+                                        </button>
+                                        <button
+                                            onClick={() => toggleCard(item.name)}
+                                            className="flex-shrink-0 p-2 rounded-lg bg-purple-500/20 text-purple-400 hover:bg-purple-500/40 transition-all"
+                                        >
+                                            {isExpanded ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <p className="text-cyan-400 font-bold text-2xl font-mono mb-2">{item.freq}</p>
+                                <p className="text-gray-300 text-xs mb-2">{item.use}</p>
+                                <p className="text-green-400 text-xs font-mono mb-3">✓ {item.verified}</p>
+                                
+                                {/* EXPANDABLE SECTION */}
+                                {isExpanded && (
+                                    <motion.div
+                                        initial={{ opacity: 0, height: 0 }}
+                                        animate={{ opacity: 1, height: 'auto' }}
+                                        exit={{ opacity: 0, height: 0 }}
+                                        className="border-t-2 border-cyan-500/20 pt-3 mt-3 space-y-2"
+                                    >
+                                        <div className="bg-cyan-900/20 rounded p-2">
+                                            <p className="text-cyan-400 font-bold text-xs mb-1">WHAT IT DOES:</p>
+                                            <p className="text-white text-xs">{item.use}</p>
                                         </div>
-                                    ) : (
-                                        <Music className="w-5 h-5" />
-                                    )}
-                                </button>
-                            </div>
-                            <p className="text-cyan-400 font-bold text-2xl font-mono mb-2">{item.freq}</p>
-                            <p className="text-gray-300 text-xs mb-3">{item.use}</p>
-                            <p className="text-green-400 text-xs font-mono">✓ {item.verified}</p>
-                        </motion.div>
-                    ))}
+                                        
+                                        <div className="bg-green-900/20 rounded p-2">
+                                            <p className="text-green-400 font-bold text-xs mb-1">VERIFIED BY:</p>
+                                            <p className="text-white text-xs">{item.verified}</p>
+                                        </div>
+                                        
+                                        <div className="bg-purple-900/20 rounded p-2">
+                                            <p className="text-purple-400 font-bold text-xs mb-1">AUDIBLE TRANSLATION:</p>
+                                            <p className="text-white text-xs">
+                                                {(() => {
+                                                    const freqMatch = item.freq.match(/(\d+\.?\d*)\s*(Hz|kHz|MHz|GHz|THz)/i);
+                                                    if (!freqMatch) return 'Variable frequency';
+                                                    
+                                                    let frequency = parseFloat(freqMatch[1]);
+                                                    const unit = freqMatch[2].toLowerCase();
+                                                    
+                                                    if (unit === 'khz') frequency *= 1000;
+                                                    if (unit === 'mhz') frequency *= 1000000;
+                                                    if (unit === 'ghz') frequency *= 1000000000;
+                                                    if (unit === 'thz') frequency *= 1000000000000;
+                                                    
+                                                    while (frequency > 20000) frequency /= 2;
+                                                    while (frequency < 20) frequency *= 2;
+                                                    
+                                                    return `Translated to ${frequency.toFixed(2)} Hz (human hearing range)`;
+                                                })()}
+                                            </p>
+                                        </div>
+                                        
+                                        {isPlaying && (
+                                            <div className="bg-pink-900/40 rounded p-2 text-center">
+                                                <p className="text-pink-400 font-bold text-xs">🎧 PLAYING NOW - FEEL THE HEALING ♾️</p>
+                                            </div>
+                                        )}
+                                    </motion.div>
+                                )}
+                            </motion.div>
+                        );
+                    })}
                 </div>
 
                 {filteredData.length === 0 && (
