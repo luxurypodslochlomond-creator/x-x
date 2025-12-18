@@ -20,7 +20,7 @@ export default function UniversalFrequencyLibrary() {
         document.title = 'Universal Frequency Library | UF51';
     }, []);
 
-    const playFrequency = (freqString, name) => {
+    const playFrequency = async (freqString, name) => {
         // Stop any currently playing sound
         if (oscillator) {
             oscillator.stop();
@@ -45,39 +45,49 @@ export default function UniversalFrequencyLibrary() {
         while (frequency > 20000) frequency /= 2;
         while (frequency < 20) frequency *= 2;
 
-        // Create audio context
-        const ctx = audioContext || new (window.AudioContext || window.webkitAudioContext)();
-        if (!audioContext) setAudioContext(ctx);
+        try {
+            // Create audio context
+            const ctx = audioContext || new (window.AudioContext || window.webkitAudioContext)();
+            if (!audioContext) setAudioContext(ctx);
 
-        // Create oscillator (sine wave = pure healing tone)
-        const osc = ctx.createOscillator();
-        const gainNode = ctx.createGain();
-        
-        osc.type = 'sine'; // Pure sine wave
-        osc.frequency.setValueAtTime(frequency, ctx.currentTime);
-        
-        // Gentle fade in/out
-        gainNode.gain.setValueAtTime(0, ctx.currentTime);
-        gainNode.gain.linearRampToValueAtTime(0.3, ctx.currentTime + 0.1);
-        
-        osc.connect(gainNode);
-        gainNode.connect(ctx.destination);
-        
-        osc.start();
-        setOscillator(osc);
-        setPlayingFreq(name);
-
-        // Auto-stop after 10 seconds
-        setTimeout(() => {
-            if (osc) {
-                gainNode.gain.linearRampToValueAtTime(0, ctx.currentTime + 0.5);
-                setTimeout(() => {
-                    osc.stop();
-                    setOscillator(null);
-                    setPlayingFreq(null);
-                }, 500);
+            // CRITICAL: Resume audio context for mobile (iOS/Android requirement)
+            if (ctx.state === 'suspended') {
+                await ctx.resume();
             }
-        }, 10000);
+
+            // Create oscillator (sine wave = pure healing tone)
+            const osc = ctx.createOscillator();
+            const gainNode = ctx.createGain();
+            
+            osc.type = 'sine'; // Pure sine wave
+            osc.frequency.setValueAtTime(frequency, ctx.currentTime);
+            
+            // Gentle fade in/out
+            gainNode.gain.setValueAtTime(0, ctx.currentTime);
+            gainNode.gain.linearRampToValueAtTime(0.3, ctx.currentTime + 0.1);
+            
+            osc.connect(gainNode);
+            gainNode.connect(ctx.destination);
+            
+            osc.start();
+            setOscillator(osc);
+            setPlayingFreq(name);
+
+            // Auto-stop after 10 seconds
+            setTimeout(() => {
+                if (osc) {
+                    gainNode.gain.linearRampToValueAtTime(0, ctx.currentTime + 0.5);
+                    setTimeout(() => {
+                        osc.stop();
+                        setOscillator(null);
+                        setPlayingFreq(null);
+                    }, 500);
+                }
+            }, 10000);
+        } catch (error) {
+            console.error('Audio play failed:', error);
+            alert('Audio blocked - tap again to enable sound ♾️');
+        }
     };
 
     const stopFrequency = () => {
