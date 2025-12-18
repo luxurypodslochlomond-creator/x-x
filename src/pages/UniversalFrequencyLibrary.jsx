@@ -489,7 +489,8 @@ export default function UniversalFrequencyLibrary() {
                         </p>
                     </button>
 
-                    {expandedSections.water && (<div className="p-8 pt-0">
+                    {expandedSections.water && (
+                    <div className="p-8 pt-0">
                     <div className="grid md:grid-cols-3 gap-4 mb-6">
                         <div className="bg-black/60 border-2 border-cyan-500 rounded-lg p-4">
                             <p className="text-cyan-400 font-black text-lg mb-3">WHY WATER = EVERYTHING:</p>
@@ -567,7 +568,8 @@ export default function UniversalFrequencyLibrary() {
                         </p>
                     </button>
 
-                    {expandedSections.silicon && (<div className="p-8 pt-0">
+                    {expandedSections.silicon && (
+                    <div className="p-8 pt-0">
                         <div className="text-center mb-6">
                             <button
                                 onClick={() => playingFreq === 'Silicon Featured' ? stopFrequency() : playFrequency('10.7 Hz', 'Silicon Featured')}
@@ -1202,7 +1204,8 @@ export default function UniversalFrequencyLibrary() {
                         </div>
                     </button>
 
-                    {expandedSections.fusion && (<div className="p-8 pt-0">
+                    {expandedSections.fusion && (
+                    <div className="p-8 pt-0">
                     <div className="grid md:grid-cols-3 gap-4 mb-6">
 
                         <div className="bg-green-900/60 border-4 border-green-500 rounded-xl p-6">
@@ -1303,7 +1306,8 @@ export default function UniversalFrequencyLibrary() {
                         </div>
                     </button>
 
-                    {expandedSections.geometry && (<div className="p-8 pt-0">
+                    {expandedSections.geometry && (
+                    <div className="p-8 pt-0">
                     <div className="grid md:grid-cols-2 gap-6 mb-6">
 
                         <div className="bg-black/60 border-2 border-purple-500 rounded-lg p-6">
@@ -1383,7 +1387,8 @@ export default function UniversalFrequencyLibrary() {
                         </div>
                     </button>
 
-                    {expandedSections.plants && (<div className="p-8 pt-0">
+                    {expandedSections.plants && (
+                    <div className="p-8 pt-0">
                     <div className="grid md:grid-cols-3 gap-4 mb-6">
                         <div className="bg-black/60 border-2 border-green-500 rounded-lg p-4">
                             <p className="text-green-400 font-black text-lg mb-3">WHY PLANTS = SACRED:</p>
@@ -1459,7 +1464,8 @@ export default function UniversalFrequencyLibrary() {
                                 </div>
                             </button>
 
-                            {expandedSections.offline && (<div className="p-8 pt-0">
+                            {expandedSections.offline && (
+                            <div className="p-8 pt-0">
                     <div className="grid md:grid-cols-2 gap-6">
                         <div className="bg-black/60 border-2 border-green-500 rounded-lg p-6">
                             <p className="text-green-400 font-black text-xl mb-4">WHAT WORKS OFFLINE:</p>
@@ -1524,7 +1530,8 @@ export default function UniversalFrequencyLibrary() {
                           </p>
                         </button>
 
-                        {expandedSections.quantum && (<div className="p-8 pt-0">
+                        {expandedSections.quantum && (
+                      <div className="p-8 pt-0">
 
                           <div className="bg-gradient-to-r from-cyan-500/20 to-purple-500/20 border-4 border-cyan-500 rounded-xl p-6 mb-6">
                               <p className="text-cyan-400 font-black text-2xl mb-4 text-center">
