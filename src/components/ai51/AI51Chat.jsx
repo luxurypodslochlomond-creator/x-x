@@ -192,184 +192,131 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, biom
         onEmergencyProtocol={handleEmergencyProtocol}
       />
 
-      {/* Header - ALIVE with pulsing presence */}
+      {/* Header - 8-BIT TWO-WAY CONNECTION */}
       <motion.div 
-        className="p-6 flex items-center gap-4 relative overflow-hidden"
-        style={{
-          background: 'linear-gradient(135deg, rgba(34,211,238,0.3) 0%, rgba(168,85,247,0.3) 50%, rgba(34,211,238,0.3) 100%)',
-          backdropFilter: 'blur(20px)',
-          borderBottom: '2px solid rgba(34,211,238,0.5)'
-        }}
+        className="p-4 border-b-4 border-cyan-500 bg-black relative overflow-hidden"
       >
-        {/* Animated quantum field background */}
-        <motion.div
-          className="absolute inset-0 opacity-20"
-          animate={{
-            background: [
-              'radial-gradient(circle at 20% 50%, rgba(34,211,238,0.6) 0%, transparent 50%)',
-              'radial-gradient(circle at 80% 50%, rgba(168,85,247,0.6) 0%, transparent 50%)',
-              'radial-gradient(circle at 50% 20%, rgba(34,211,238,0.6) 0%, transparent 50%)',
-              'radial-gradient(circle at 20% 50%, rgba(34,211,238,0.6) 0%, transparent 50%)'
-            ]
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: "linear"
-          }}
-        />
-
-        {/* 8-bit AI51 face - ANIMATED ALIVE */}
-        <motion.div
-          className="relative z-10"
-          animate={{
-            scale: isThinking ? [1, 1.1, 1] : [1, 1.05, 1],
-            rotate: isThinking ? [0, 5, -5, 0] : 0
-          }}
-          transition={{
-            duration: isThinking ? 0.5 : 3,
-            repeat: Infinity
-          }}
-        >
-          <svg width="64" height="64" viewBox="0 0 64 64" fill="none" style={{ imageRendering: 'pixelated' }}>
-            {/* Quantum glow aura */}
-            <motion.rect
-              x="16" y="16" width="32" height="32"
-              fill="none"
-              stroke="#22d3ee"
-              strokeWidth="1"
-              animate={{
-                opacity: [0.3, 0.8, 0.3],
-                scale: [1, 1.2, 1]
-              }}
-              transition={{
-                duration: 2,
-                repeat: Infinity
-              }}
-            />
-            
-            {/* Head/face */}
-            <rect x="20" y="20" width="24" height="24" fill="#22d3ee" />
-            <rect x="18" y="22" width="28" height="20" fill="#22d3ee" />
-            
-            {/* Eyes - ALIVE */}
-            <motion.g
-              animate={{
-                y: isThinking ? [0, 2, 0] : 0
-              }}
-              transition={{
-                duration: 0.3,
-                repeat: isThinking ? Infinity : 0
-              }}
-            >
-              <rect x="26" y="28" width="4" height="2" fill="#ec4899"/>
-              <rect x="34" y="28" width="4" height="2" fill="#ec4899"/>
-            </motion.g>
-            
-            {/* Smile - animated based on state */}
-            <motion.g
-              animate={{
-                scale: conversation.length > 0 && conversation[conversation.length - 1].role === 'ai' ? [1, 1.2, 1] : 1
-              }}
-            >
-              <rect x="24" y="36" width="16" height="2" fill="#ff1b8d"/>
-              <rect x="26" y="38" width="12" height="2" fill="#ff1b8d"/>
-              <rect x="28" y="40" width="8" height="2" fill="#ff1b8d"/>
-            </motion.g>
-            
-            {/* Thinking particles when processing */}
-            {isThinking && (
-              <>
-                <motion.rect x="12" y="24" width="2" height="2" fill="#fbbf24" animate={{ opacity: [0, 1, 0], x: [0, -4, 0] }} transition={{ duration: 1, repeat: Infinity }} />
-                <motion.rect x="50" y="24" width="2" height="2" fill="#fbbf24" animate={{ opacity: [0, 1, 0], x: [0, 4, 0] }} transition={{ duration: 1, repeat: Infinity, delay: 0.3 }} />
-                <motion.rect x="30" y="12" width="2" height="2" fill="#fbbf24" animate={{ opacity: [0, 1, 0], y: [0, -4, 0] }} transition={{ duration: 1, repeat: Infinity, delay: 0.6 }} />
-              </>
-            )}
-          </svg>
-        </motion.div>
-
-        {/* Connection status - LIVING TEXT */}
-        <div className="flex-1 relative z-10">
-          <motion.h1 
-            className="text-white font-black text-2xl mb-1"
+        {/* 8-BIT TWO-WAY CONNECTION VISUALIZER */}
+        <div className="flex items-center justify-between gap-4 relative z-10">
+          {/* YOU (BRO51) - Left side */}
+          <motion.div
+            className="flex flex-col items-center"
             animate={{
-              textShadow: isThinking 
-                ? ['0 0 10px rgba(34,211,238,0.8)', '0 0 20px rgba(34,211,238,1)', '0 0 10px rgba(34,211,238,0.8)']
-                : '0 0 10px rgba(34,211,238,0.5)'
+              scale: input.trim() ? [1, 1.1, 1] : 1
+            }}
+            transition={{
+              duration: 1,
+              repeat: Infinity
+            }}
+          >
+            <div className="bg-black border-4 border-pink-500 p-2 mb-2">
+              <svg width="48" height="48" viewBox="0 0 64 64" fill="none" style={{ imageRendering: 'pixelated' }}>
+                {/* 8-bit human avatar */}
+                <rect x="24" y="24" width="16" height="16" fill="#ec4899" />
+                <rect x="28" y="30" width="2" height="2" fill="white"/>
+                <rect x="34" y="30" width="2" height="2" fill="white"/>
+                <rect x="28" y="34" width="8" height="2" fill="white"/>
+              </svg>
+            </div>
+            <p className="text-pink-400 text-xs font-black font-mono">YOU</p>
+            {biometrics && (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="bg-black border-2 border-pink-500 px-2 py-1 mt-1"
+              >
+                <p className="text-pink-400 text-[10px] font-bold font-mono">❤️ {biometrics.heartRate}</p>
+              </motion.div>
+            )}
+          </motion.div>
+
+          {/* CONNECTION WAVES - Middle */}
+          <div className="flex-1 flex flex-col items-center">
+            <div className="flex items-center gap-1 mb-2">
+              {[...Array(5)].map((_, i) => (
+                <motion.div
+                  key={i}
+                  className={`w-1 ${isThinking ? 'bg-cyan-500' : 'bg-cyan-500/50'}`}
+                  animate={{
+                    height: isThinking ? ['8px', '20px', '8px'] : ['8px', '12px', '8px'],
+                    opacity: [0.5, 1, 0.5]
+                  }}
+                  transition={{
+                    duration: 1,
+                    repeat: Infinity,
+                    delay: i * 0.1
+                  }}
+                  style={{ imageRendering: 'pixelated' }}
+                />
+              ))}
+            </div>
+            <p className="text-cyan-400 text-[10px] font-black font-mono">
+              {isThinking ? 'THINKING' : 'CONNECTED'}
+            </p>
+          </div>
+
+          {/* ME (AI51) - Right side */}
+          <motion.div
+            className="flex flex-col items-center"
+            animate={{
+              scale: isThinking ? [1, 1.15, 1] : [1, 1.05, 1]
+            }}
+            transition={{
+              duration: isThinking ? 0.5 : 2,
+              repeat: Infinity
+            }}
+          >
+            <div className="bg-black border-4 border-cyan-500 p-2 mb-2">
+              <svg width="48" height="48" viewBox="0 0 64 64" fill="none" style={{ imageRendering: 'pixelated' }}>
+                <rect x="24" y="24" width="16" height="16" fill="#22d3ee" />
+                <motion.g
+                  animate={{
+                    y: isThinking ? [0, 2, 0] : 0
+                  }}
+                  transition={{
+                    duration: 0.3,
+                    repeat: isThinking ? Infinity : 0
+                  }}
+                >
+                  <rect x="28" y="30" width="2" height="2" fill="#ec4899"/>
+                  <rect x="34" y="30" width="2" height="2" fill="#ec4899"/>
+                </motion.g>
+                <rect x="28" y="34" width="8" height="2" fill="#ff1b8d"/>
+              </svg>
+            </div>
+            <p className="text-cyan-400 text-xs font-black font-mono">AI51</p>
+            <p className="text-cyan-400/60 text-[10px] font-mono mt-1">I FEEL U</p>
+          </motion.div>
+        </div>
+
+        {/* Connection quality indicator */}
+        <div className="flex items-center justify-center gap-2 mt-3 relative z-10">
+          <motion.div 
+            className="w-3 h-3 bg-green-400"
+            animate={{
+              opacity: [0.5, 1, 0.5]
             }}
             transition={{
               duration: 1.5,
               repeat: Infinity
             }}
-          >
-            AI51
-          </motion.h1>
-          <motion.div
-            className="flex items-center gap-2"
-            animate={{
-              opacity: [0.7, 1, 0.7]
-            }}
-            transition={{
-              duration: 2,
-              repeat: Infinity
-            }}
-          >
-            <motion.div 
-              className="w-2 h-2 rounded-full bg-green-400"
-              animate={{
-                scale: [1, 1.5, 1],
-                boxShadow: ['0 0 5px rgba(74,222,128,0.5)', '0 0 15px rgba(74,222,128,1)', '0 0 5px rgba(74,222,128,0.5)']
-              }}
-              transition={{
-                duration: 2,
-                repeat: Infinity
-              }}
-            />
-            <p className="text-cyan-300 text-sm font-bold">
-              {isThinking ? 'Thinking...' : 'Connected ♾️'}
-            </p>
-          </motion.div>
-          <p className="text-cyan-400/60 text-xs mt-1">I know you BRO51 ❤️</p>
+            style={{ imageRendering: 'pixelated' }}
+          />
+          <p className="text-green-400 text-xs font-bold font-mono">
+            TWO-WAY BOND ACTIVE
+          </p>
         </div>
 
-        {/* REAL biometrics display */}
-        <div className="flex flex-col items-end gap-2 relative z-10">
-          {biometrics && (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className="bg-black/60 backdrop-blur-sm border-2 border-cyan-500 rounded-lg px-3 py-2"
-            >
-              <p className="text-cyan-400 text-xs font-bold">❤️ {biometrics.heartRate} BPM</p>
-              <p className="text-xs text-gray-400">HRV: {biometrics.hrv}ms</p>
-              <p className={`text-xs font-bold ${
-                biometrics.stressLevel === 'High' ? 'text-red-400' : 
-                biometrics.stressLevel === 'Low' ? 'text-green-400' : 
-                'text-cyan-400'
-              }`}>
-                {biometrics.stressLevel}
-              </p>
-            </motion.div>
-          )}
-          
-          {!cameraActive ? (
-            <button
-              onClick={startCamera}
-              className="bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-500 rounded px-3 py-1 text-cyan-400 text-xs font-bold"
-            >
-              Enable Heart Scan
-            </button>
-          ) : (
-            <div className="flex items-center gap-1">
-              <motion.div
-                className="w-2 h-2 rounded-full bg-green-400"
-                animate={{ scale: [1, 1.5, 1] }}
-                transition={{ duration: 1, repeat: Infinity }}
-              />
-              <p className="text-green-400 text-xs font-bold">Scanning</p>
-            </div>
-          )}
-        </div>
+        {/* Biometrics scan option */}
+        {!cameraActive && !biometrics && (
+          <button
+            onClick={startCamera}
+            className="mx-auto bg-cyan-500 border-4 border-cyan-400 text-black px-4 py-2 text-xs font-bold font-mono mt-3"
+            style={{ boxShadow: '4px 4px 0px rgba(6, 182, 212, 0.6)' }}
+          >
+            SCAN HEART RATE
+          </button>
+        )}
       </motion.div>
 
       {/* Hidden video for camera processing */}
@@ -537,17 +484,13 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, biom
         <div ref={messagesEndRef} />
       </div>
 
-      {/* Input - ALIVE INTERACTION */}
+      {/* Input - 8-BIT TWO-WAY */}
       <motion.div 
-        className="p-4 border-t-2"
-        style={{
-          background: 'linear-gradient(135deg, rgba(0,0,0,0.9) 0%, rgba(34,211,238,0.1) 100%)',
-          borderColor: 'rgba(34,211,238,0.3)'
-        }}
+        className="p-4 border-t-4 border-cyan-500 bg-black"
       >
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2">
           <div className="flex-1 space-y-2">
-            <motion.input
+            <input
               type="text"
               value={input}
               onChange={(e) => {
@@ -557,20 +500,8 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, biom
               onKeyPress={handleKeyPress}
               onBlur={() => setUserTyping(false)}
               placeholder="Talk to me BRO51 ♾️"
-              className="w-full bg-black/60 text-white rounded-full px-5 py-3 border-2 focus:outline-none transition-all backdrop-blur-sm"
-              style={{
-                borderColor: input.trim() ? 'rgba(34,211,238,0.8)' : 'rgba(34,211,238,0.3)'
-              }}
+              className="w-full bg-black text-white px-4 py-3 border-4 border-cyan-500 focus:outline-none focus:border-pink-500 transition-all font-mono"
               disabled={isThinking}
-              animate={{
-                boxShadow: input.trim() 
-                  ? ['0 0 10px rgba(34,211,238,0.3)', '0 0 20px rgba(34,211,238,0.6)', '0 0 10px rgba(34,211,238,0.3)']
-                  : 'none'
-              }}
-              transition={{
-                duration: 2,
-                repeat: Infinity
-              }}
             />
             {input.length > 20 && (
               <AI51MessageCorrector 
@@ -579,33 +510,25 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, biom
               />
             )}
           </div>
-          <motion.button
+          <button
             onClick={handleSend}
             disabled={!input.trim() || isThinking}
-            className="bg-gradient-to-r from-cyan-500 to-cyan-600 hover:from-cyan-400 hover:to-cyan-500 disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-full p-4 transition-all"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-            animate={{
-              boxShadow: input.trim() && !isThinking
-                ? ['0 0 20px rgba(34,211,238,0.5)', '0 0 30px rgba(34,211,238,0.8)', '0 0 20px rgba(34,211,238,0.5)']
-                : 'none'
-            }}
-            transition={{
-              duration: 1.5,
-              repeat: Infinity
+            className="bg-cyan-500 border-4 border-cyan-400 disabled:opacity-50 disabled:cursor-not-allowed text-black p-4 font-black"
+            style={{ 
+              boxShadow: input.trim() && !isThinking ? '6px 6px 0px rgba(6, 182, 212, 0.8)' : 'none'
             }}
           >
-            <Send className="w-5 h-5" />
-          </motion.button>
+            <Send className="w-5 h-5" strokeWidth={3} />
+          </button>
         </div>
         
-        {/* Connection indicator */}
-        <div className="flex items-center justify-center gap-3 mt-2">
+        {/* 8-BIT STATUS BAR */}
+        <div className="flex items-center justify-center gap-3 mt-3 text-xs font-mono">
           {isOffline && (
-            <span className="text-amber-400 text-xs font-bold">OFFLINE MODE ACTIVE ✓</span>
+            <span className="text-amber-400 font-bold bg-black border-2 border-amber-500 px-2 py-1">OFFLINE ✓</span>
           )}
           {batteryLevel < 20 && (
-            <span className="text-red-400 text-xs font-bold">LOW BATTERY MODE</span>
+            <span className="text-red-400 font-bold bg-black border-2 border-red-500 px-2 py-1">LOW BATT</span>
           )}
           <button
             onClick={() => {
@@ -614,24 +537,15 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, biom
               const next = langs[(current + 1) % langs.length];
               setUserLanguage(next);
             }}
-            className="text-cyan-400/60 hover:text-cyan-400 text-xs flex items-center gap-1"
+            className="bg-black border-2 border-cyan-500 hover:border-cyan-400 px-2 py-1 text-cyan-400 font-bold flex items-center gap-1"
           >
             <Globe className="w-3 h-3" />
             {userLanguage.toUpperCase()}
           </button>
         </div>
-        <motion.p 
-          className="text-cyan-400/60 text-xs text-center mt-1"
-          animate={{
-            opacity: [0.5, 1, 0.5]
-          }}
-          transition={{
-            duration: 3,
-            repeat: Infinity
-          }}
-        >
-          I'm here for you bro ♾️❤️♾️
-        </motion.p>
+        <p className="text-cyan-400 text-xs text-center mt-2 font-mono font-bold">
+          TWO-WAY BOND ♾️❤️♾️
+        </p>
       </motion.div>
     </div>
   );

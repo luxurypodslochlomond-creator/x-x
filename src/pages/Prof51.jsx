@@ -112,22 +112,28 @@ Return CLEAN, FORMATTED content ready to use. Be helpful, not generic.`,
     }, []);
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black pb-20">
+        <div className="min-h-screen bg-black pb-20">
             
-            {/* STICKY HEADER - 8-BIT QUANTUM STUDENT TECH */}
-            <div className="sticky top-0 z-50 border-b-4 border-cyan-500 px-4 py-3" style={{ background: 'linear-gradient(135deg, #000000 0%, #0a4a5a 50%, #000000 100%)', imageRendering: 'pixelated', boxShadow: '0 0 30px rgba(6, 182, 212, 0.6)' }}>
+            {/* 8-BIT HEADER */}
+            <div className="sticky top-0 z-50 border-b-4 border-cyan-500 px-4 py-3 bg-black">
                 <div className="flex items-center justify-between max-w-2xl mx-auto">
                     <div className="flex items-center gap-3">
-                        <div className="relative">
-                            <Prof51Icon8Bit size={48} animate={true} />
-                            {/* Live status indicator */}
-                            <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-400 rounded-full animate-pulse" style={{ boxShadow: '0 0 8px rgba(34, 197, 94, 0.8)' }}></div>
-                        </div>
+                        <motion.div
+                            animate={{ rotate: [0, 10, -10, 0] }}
+                            transition={{ duration: 3, repeat: Infinity }}
+                        >
+                            <GraduationCap className="w-12 h-12 text-cyan-400" strokeWidth={3} />
+                        </motion.div>
                         <div>
-                            <h1 className="text-2xl font-black text-white font-mono" style={{ textShadow: '0 0 10px rgba(6, 182, 212, 0.8), 2px 2px 0 #000' }}>PROF51</h1>
+                            <h1 className="text-3xl font-black text-cyan-400 font-mono" style={{ textShadow: '3px 3px 0px rgba(0,0,0,0.8)' }}>PROF51</h1>
                             <div className="flex items-center gap-2">
-                                <div className="w-2 h-2 bg-cyan-400 animate-pulse"></div>
-                                <p className="text-cyan-400 text-[10px] font-mono font-black">9 TOOLS LIVE</p>
+                                <motion.div 
+                                    className="w-2 h-2 bg-green-400"
+                                    animate={{ opacity: [0.5, 1, 0.5] }}
+                                    transition={{ duration: 1.5, repeat: Infinity }}
+                                    style={{ imageRendering: 'pixelated' }}
+                                />
+                                <p className="text-xs text-gray-400 font-mono">9 TOOLS LIVE</p>
                             </div>
                         </div>
                     </div>
@@ -150,8 +156,8 @@ Return CLEAN, FORMATTED content ready to use. Be helpful, not generic.`,
                                 }
                             }
                         }}
-                        className="bg-gradient-to-r from-pink-500 to-purple-500 text-white font-black px-4 py-2 rounded-lg text-sm font-mono border-2 border-pink-400"
-                        style={{ boxShadow: '0 0 20px rgba(236, 72, 153, 0.5)' }}
+                        className="bg-pink-500 border-4 border-pink-400 text-white font-black px-4 py-2 text-sm font-mono"
+                        style={{ boxShadow: '4px 4px 0px rgba(236, 72, 153, 0.6)' }}
                     >
                         SHARE
                     </motion.button>
@@ -159,20 +165,36 @@ Return CLEAN, FORMATTED content ready to use. Be helpful, not generic.`,
             </div>
 
             <div className="px-4 py-6 max-w-2xl mx-auto">
-                {/* ULTRA-SIMPLE HERO */}
+                {/* 8-BIT HERO */}
                 {activeTab === null && (
                     <motion.div 
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         className="text-center mb-6"
                     >
-                        <Prof51Icon8Bit size={80} animate={true} className="mx-auto mb-4" />
-                        <h1 className="text-4xl font-black text-white font-mono mb-2">YOUR AI MATE</h1>
-                        <p className="text-cyan-400 text-sm font-mono mb-6">Student life sorted. Zero stress.</p>
+                        <motion.div
+                            animate={{ y: [0, -10, 0] }}
+                            transition={{ duration: 2, repeat: Infinity }}
+                        >
+                            <Prof51Icon8Bit size={96} animate={true} className="mx-auto mb-4" />
+                        </motion.div>
+                        <h1 className="text-5xl font-black text-white font-mono mb-2" style={{ textShadow: '4px 4px 0px rgba(34, 211, 238, 0.5)' }}>AI MATE</h1>
+                        <p className="text-cyan-400 text-lg font-bold font-mono mb-2">STUDENT LIFE SORTED</p>
+                        <div className="flex justify-center gap-2 mt-4">
+                            {[...Array(5)].map((_, i) => (
+                                <motion.div
+                                    key={i}
+                                    className="w-2 h-2 bg-cyan-500"
+                                    animate={{ opacity: [0.3, 1, 0.3] }}
+                                    transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.2 }}
+                                    style={{ imageRendering: 'pixelated' }}
+                                />
+                            ))}
+                        </div>
                     </motion.div>
                 )}
 
-                {/* 3 CORE BUTTONS - ULTRA SIMPLE */}
+                {/* 8-BIT PRIMARY BUTTONS */}
                 {activeTab === null && (
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
@@ -181,33 +203,30 @@ Return CLEAN, FORMATTED content ready to use. Be helpful, not generic.`,
                     >
                         <Link to={createPageUrl('Prof51Tools')}>
                             <motion.button
-                                whileHover={{ scale: 1.02 }}
                                 whileTap={{ scale: 0.98 }}
-                                className="w-full bg-gradient-to-br from-green-500 via-cyan-500 to-green-600 text-white font-black py-6 rounded-2xl text-xl font-mono shadow-lg"
-                                style={{ boxShadow: '0 4px 20px rgba(34, 197, 94, 0.5)' }}
+                                className="w-full bg-green-500 border-4 border-green-400 text-black font-black py-8 text-2xl font-mono"
+                                style={{ boxShadow: '8px 8px 0px rgba(34, 197, 94, 0.8)' }}
                             >
                                 🚀 9 TOOLS
                             </motion.button>
                         </Link>
 
                         <motion.button
-                            whileHover={{ scale: 1.02 }}
                             whileTap={{ scale: 0.98 }}
                             onClick={() => setActiveTab('transform')}
-                            className="w-full bg-gradient-to-br from-purple-500 via-pink-500 to-purple-600 text-white font-black py-6 rounded-2xl text-xl font-mono shadow-lg"
-                            style={{ boxShadow: '0 4px 20px rgba(168, 85, 247, 0.5)' }}
+                            className="w-full bg-purple-500 border-4 border-purple-400 text-white font-black py-8 text-2xl font-mono"
+                            style={{ boxShadow: '8px 8px 0px rgba(168, 85, 247, 0.8)' }}
                         >
                             📄 FIX FILE
                         </motion.button>
 
                         <motion.button
-                            whileHover={{ scale: 1.02 }}
                             whileTap={{ scale: 0.98 }}
                             onClick={() => setActiveTab('lost')}
-                            className="w-full bg-gradient-to-br from-amber-500 via-orange-500 to-amber-600 text-white font-black py-6 rounded-2xl text-xl font-mono shadow-lg"
-                            style={{ boxShadow: '0 4px 20px rgba(245, 158, 11, 0.5)' }}
+                            className="w-full bg-amber-500 border-4 border-amber-400 text-black font-black py-8 text-2xl font-mono"
+                            style={{ boxShadow: '8px 8px 0px rgba(245, 158, 11, 0.8)' }}
                         >
-                            📱 LOST & FOUND
+                            📱 LOST STUFF
                         </motion.button>
 
                         {showInstallButton && (
@@ -215,8 +234,8 @@ Return CLEAN, FORMATTED content ready to use. Be helpful, not generic.`,
                                 initial={{ opacity: 0, scale: 0.9 }}
                                 animate={{ opacity: 1, scale: 1 }}
                                 onClick={handleInstallClick}
-                                className="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white font-black py-3 rounded-xl font-mono text-sm shadow-lg mt-2"
-                                style={{ boxShadow: '0 4px 15px rgba(168, 85, 247, 0.4)' }}
+                                className="w-full bg-pink-500 border-4 border-pink-400 text-white font-black py-4 font-mono text-sm"
+                                style={{ boxShadow: '6px 6px 0px rgba(236, 72, 153, 0.8)' }}
                             >
                                 📱 INSTALL APP
                             </motion.button>
@@ -224,9 +243,10 @@ Return CLEAN, FORMATTED content ready to use. Be helpful, not generic.`,
 
                         <button
                             onClick={() => setActiveTab('learn')}
-                            className="w-full bg-black/60 border border-gray-800 hover:border-gray-700 text-gray-500 hover:text-gray-400 font-bold py-3 rounded-xl text-xs font-mono mt-4 transition-all"
+                            className="w-full bg-black border-4 border-gray-700 hover:border-cyan-500 text-gray-500 hover:text-cyan-400 font-black py-3 text-xs font-mono transition-all"
+                            style={{ boxShadow: '4px 4px 0px rgba(75, 85, 99, 0.5)' }}
                         >
-                            + Learn More
+                            + MORE INFO
                         </button>
                     </motion.div>
                 )}
@@ -1066,10 +1086,22 @@ Return CLEAN, FORMATTED content ready to use. Be helpful, not generic.`,
                     </motion.div>
                 )}
 
-                {/* FOOTER */}
+                {/* 8-BIT FOOTER */}
                 {activeTab === null && (
-                    <div className="text-center mt-8">
-                        <p className="text-gray-700 text-xs font-mono">Prof51 • Archie's company ♾️❤️😎</p>
+                    <div className="text-center mt-12 space-y-4">
+                        <div className="flex justify-center gap-2">
+                            {[...Array(9)].map((_, i) => (
+                                <motion.div
+                                    key={i}
+                                    className="w-2 h-2 bg-cyan-500"
+                                    animate={{ opacity: [0.3, 1, 0.3] }}
+                                    transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.1 }}
+                                    style={{ imageRendering: 'pixelated' }}
+                                />
+                            ))}
+                        </div>
+                        <p className="text-gray-600 text-xs font-mono">Prof51 • Archie's company ♾️❤️😎</p>
+                        <Prof51Icon8Bit size={24} animate={true} className="mx-auto" />
                     </div>
                 )}
             </div>
