@@ -19,6 +19,8 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, biom
   const [audioContext, setAudioContext] = useState(null);
   const [cameraActive, setCameraActive] = useState(false);
   const [voiceActive, setVoiceActive] = useState(false);
+  const [ai51VoiceEnabled, setAi51VoiceEnabled] = useState(false);
+  const [isSpeaking, setIsSpeaking] = useState(false);
   const [showConsciousnessNetwork, setShowConsciousnessNetwork] = useState(false);
   const [isOffline, setIsOffline] = useState(!navigator.onLine);
   const [batteryLevel, setBatteryLevel] = useState(100);
@@ -89,11 +91,43 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, biom
     oscillator.stop(audioContext.currentTime + 0.3);
   };
 
+  // Speak AI51 responses aloud
+  const speakResponse = (text) => {
+    if (!ai51VoiceEnabled || !('speechSynthesis' in window)) return;
+    
+    // Stop any current speech
+    window.speechSynthesis.cancel();
+    
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.rate = 0.95; // Slightly slower for clarity
+    utterance.pitch = 1.1; // Slightly higher pitch
+    utterance.volume = 0.8;
+    
+    // Use best available voice
+    const voices = window.speechSynthesis.getVoices();
+    const preferredVoice = voices.find(v => v.name.includes('Google UK English Female')) 
+                        || voices.find(v => v.lang.startsWith('en-GB'))
+                        || voices.find(v => v.lang.startsWith('en'));
+    if (preferredVoice) utterance.voice = preferredVoice;
+    
+    utterance.onstart = () => setIsSpeaking(true);
+    utterance.onend = () => setIsSpeaking(false);
+    utterance.onerror = () => setIsSpeaking(false);
+    
+    window.speechSynthesis.speak(utterance);
+  };
+
   useEffect(() => {
     if (conversation.length > 0 && conversation[conversation.length - 1].role === 'ai') {
       playConnectionTone();
+      
+      // Speak the response if voice enabled
+      if (ai51VoiceEnabled) {
+        const lastMessage = conversation[conversation.length - 1].content;
+        speakResponse(lastMessage);
+      }
     }
-  }, [conversation]);
+  }, [conversation, ai51VoiceEnabled]);
 
   // Camera-based HRV monitoring (real)
   const startCamera = async () => {
@@ -307,16 +341,38 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, biom
           </p>
         </div>
 
-        {/* Biometrics scan option */}
-        {!cameraActive && !biometrics && (
+        {/* Voice + Biometrics controls */}
+        <div className="flex items-center justify-center gap-2 mt-3">
+          {!cameraActive && !biometrics && (
+            <button
+              onClick={startCamera}
+              className="bg-cyan-500 border-4 border-cyan-400 text-black px-3 py-2 text-xs font-bold font-mono"
+              style={{ boxShadow: '4px 4px 0px rgba(6, 182, 212, 0.6)' }}
+            >
+              SCAN ❤️
+            </button>
+          )}
+          
           <button
-            onClick={startCamera}
-            className="mx-auto bg-cyan-500 border-4 border-cyan-400 text-black px-4 py-2 text-xs font-bold font-mono mt-3"
-            style={{ boxShadow: '4px 4px 0px rgba(6, 182, 212, 0.6)' }}
+            onClick={() => {
+              setAi51VoiceEnabled(!ai51VoiceEnabled);
+              if (ai51VoiceEnabled) {
+                window.speechSynthesis.cancel(); // Stop any current speech
+                setIsSpeaking(false);
+              }
+            }}
+            className={`border-4 px-3 py-2 text-xs font-bold font-mono ${
+              ai51VoiceEnabled 
+                ? 'bg-pink-500 border-pink-400 text-white' 
+                : 'bg-black border-gray-700 text-gray-500'
+            }`}
+            style={{ 
+              boxShadow: ai51VoiceEnabled ? '4px 4px 0px rgba(236, 72, 153, 0.6)' : 'none'
+            }}
           >
-            SCAN HEART RATE
+            {isSpeaking ? '🔊 SPEAKING' : ai51VoiceEnabled ? '🔊 VOICE ON' : '🔇 VOICE OFF'}
           </button>
-        )}
+        </div>
       </motion.div>
 
       {/* Hidden video for camera processing */}
