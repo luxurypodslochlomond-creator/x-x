@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { BookOpen, Brain, TrendingUp, Globe, Users, Zap, Heart, FileText, BarChart3, Presentation, Calculator, GraduationCap, Music, Coffee, Home, DollarSign, ArrowRight, Upload, CheckCircle, Loader } from 'lucide-react';
 import Prof51Icon8Bit from '@/components/shared/Prof51Icon8Bit';
 import LennoxIcon8Bit from '@/components/shared/LennoxIcon8Bit';
+import LostAndFoundMesh from '@/components/prof51/LostAndFoundMesh';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { base44 } from '@/api/base44Client';
@@ -342,27 +343,7 @@ Return CLEAN, FORMATTED content ready to use. Be helpful, not generic.`,
                             <ArrowRight className="w-4 h-4 rotate-180" /> <span className="text-sm font-mono">Back</span>
                         </button>
 
-                        <div className="bg-gradient-to-br from-amber-500/20 to-red-500/20 border-4 border-amber-500 rounded-xl p-6">
-                            <h2 className="text-amber-400 font-black text-2xl font-mono mb-4 text-center">NEVER LOSE YOUR STUFF</h2>
-                            
-                            <div className="bg-black border-2 border-amber-500 rounded-lg p-4 mb-4">
-                                <p className="text-white font-bold text-sm mb-3">P2P MESH FINDS EVERYTHING:</p>
-                                <div className="grid grid-cols-2 gap-2 text-xs">
-                                    <p className="text-gray-300">→ Phone</p>
-                                    <p className="text-gray-300">→ Laptop</p>
-                                    <p className="text-gray-300">→ Keys</p>
-                                    <p className="text-gray-300">→ Wallet</p>
-                                    <p className="text-gray-300">→ Bag</p>
-                                    <p className="text-gray-300">→ Jacket</p>
-                                </div>
-                                <p className="text-green-400 font-bold text-sm mt-3">Works offline. 500 students in venue = you find it ✓</p>
-                            </div>
-
-                            <div className="bg-green-900/20 border-2 border-green-500 rounded-lg p-4">
-                                <p className="text-green-400 font-black text-xs mb-2">COMING SOON:</p>
-                                <p className="text-white text-xs">Report lost item → All Prof51 users nearby get alert → Found in minutes</p>
-                            </div>
-                        </div>
+                        <LostAndFoundMesh />
                     </motion.div>
                 )}
 
