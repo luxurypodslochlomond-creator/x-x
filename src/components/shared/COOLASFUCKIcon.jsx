@@ -657,5 +657,121 @@ export const COOLASFUCKTooth = ({ className = "", size = 24, animate = true }) =
     );
 };
 
+// 8-bit Beacon/Homing Device (for festival tracking, tour bus operations, zero loss)
+export const COOLASFUCKBeacon = ({ className = "", size = 24, animate = true }) => {
+    const Component = animate ? motion.svg : 'svg';
+    
+    return (
+        <Component
+            width={size}
+            height={size}
+            viewBox="0 0 24 24"
+            className={className}
+            animate={animate ? {
+                scale: [1, 1.1, 1],
+            } : {}}
+            transition={animate ? {
+                duration: 2,
+                repeat: Infinity,
+                ease: "easeInOut"
+            } : {}}
+        >
+            {/* 8-bit beacon/homing device */}
+            {/* Center device */}
+            <rect x="10" y="10" width="4" height="4" fill="#22c55e"/>
+            <rect x="9" y="11" width="6" height="2" fill="#4ade80"/>
+            
+            {/* Pulsing rings - inner */}
+            {animate && (
+                <motion.g
+                    animate={{ opacity: [0.8, 0.3, 0.8], scale: [0.8, 1.2, 0.8] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                    style={{ transformOrigin: 'center' }}
+                >
+                    <rect x="8" y="8" width="2" height="2" fill="#22c55e"/>
+                    <rect x="14" y="8" width="2" height="2" fill="#22c55e"/>
+                    <rect x="8" y="14" width="2" height="2" fill="#22c55e"/>
+                    <rect x="14" y="14" width="2" height="2" fill="#22c55e"/>
+                </motion.g>
+            )}
+            
+            {!animate && (
+                <>
+                    <rect x="8" y="8" width="2" height="2" fill="#22c55e"/>
+                    <rect x="14" y="8" width="2" height="2" fill="#22c55e"/>
+                    <rect x="8" y="14" width="2" height="2" fill="#22c55e"/>
+                    <rect x="14" y="14" width="2" height="2" fill="#22c55e"/>
+                </>
+            )}
+            
+            {/* Pulsing rings - middle */}
+            {animate && (
+                <motion.g
+                    animate={{ opacity: [0.6, 0.2, 0.6], scale: [0.9, 1.4, 0.9] }}
+                    transition={{ duration: 2, repeat: Infinity, delay: 0.3 }}
+                    style={{ transformOrigin: 'center' }}
+                >
+                    <rect x="6" y="6" width="2" height="2" fill="#10b981"/>
+                    <rect x="16" y="6" width="2" height="2" fill="#10b981"/>
+                    <rect x="6" y="16" width="2" height="2" fill="#10b981"/>
+                    <rect x="16" y="16" width="2" height="2" fill="#10b981"/>
+                    <rect x="6" y="11" width="2" height="2" fill="#10b981"/>
+                    <rect x="16" y="11" width="2" height="2" fill="#10b981"/>
+                    <rect x="11" y="6" width="2" height="2" fill="#10b981"/>
+                    <rect x="11" y="16" width="2" height="2" fill="#10b981"/>
+                </motion.g>
+            )}
+            
+            {!animate && (
+                <>
+                    <rect x="6" y="6" width="2" height="2" fill="#10b981" opacity="0.6"/>
+                    <rect x="16" y="6" width="2" height="2" fill="#10b981" opacity="0.6"/>
+                    <rect x="6" y="16" width="2" height="2" fill="#10b981" opacity="0.6"/>
+                    <rect x="16" y="16" width="2" height="2" fill="#10b981" opacity="0.6"/>
+                    <rect x="6" y="11" width="2" height="2" fill="#10b981" opacity="0.6"/>
+                    <rect x="16" y="11" width="2" height="2" fill="#10b981" opacity="0.6"/>
+                    <rect x="11" y="6" width="2" height="2" fill="#10b981" opacity="0.6"/>
+                    <rect x="11" y="16" width="2" height="2" fill="#10b981" opacity="0.6"/>
+                </>
+            )}
+            
+            {/* Pulsing rings - outer */}
+            {animate && (
+                <motion.g
+                    animate={{ opacity: [0.4, 0.1, 0.4], scale: [1, 1.6, 1] }}
+                    transition={{ duration: 2, repeat: Infinity, delay: 0.6 }}
+                    style={{ transformOrigin: 'center' }}
+                >
+                    <rect x="4" y="4" width="2" height="2" fill="#059669"/>
+                    <rect x="18" y="4" width="2" height="2" fill="#059669"/>
+                    <rect x="4" y="18" width="2" height="2" fill="#059669"/>
+                    <rect x="18" y="18" width="2" height="2" fill="#059669"/>
+                    <rect x="4" y="11" width="2" height="2" fill="#059669"/>
+                    <rect x="18" y="11" width="2" height="2" fill="#059669"/>
+                    <rect x="11" y="4" width="2" height="2" fill="#059669"/>
+                    <rect x="11" y="18" width="2" height="2" fill="#059669"/>
+                    <rect x="2" y="11" width="2" height="2" fill="#059669"/>
+                    <rect x="20" y="11" width="2" height="2" fill="#059669"/>
+                </motion.g>
+            )}
+            
+            {!animate && (
+                <>
+                    <rect x="4" y="4" width="2" height="2" fill="#059669" opacity="0.4"/>
+                    <rect x="18" y="4" width="2" height="2" fill="#059669" opacity="0.4"/>
+                    <rect x="4" y="18" width="2" height="2" fill="#059669" opacity="0.4"/>
+                    <rect x="18" y="18" width="2" height="2" fill="#059669" opacity="0.4"/>
+                    <rect x="4" y="11" width="2" height="2" fill="#059669" opacity="0.4"/>
+                    <rect x="18" y="11" width="2" height="2" fill="#059669" opacity="0.4"/>
+                    <rect x="11" y="4" width="2" height="2" fill="#059669" opacity="0.4"/>
+                    <rect x="11" y="18" width="2" height="2" fill="#059669" opacity="0.4"/>
+                    <rect x="2" y="11" width="2" height="2" fill="#059669" opacity="0.4"/>
+                    <rect x="20" y="11" width="2" height="2" fill="#059669" opacity="0.4"/>
+                </>
+            )}
+        </Component>
+    );
+};
+
 // Default export (defaults to Sparkle - most commonly used)
 export default COOLASFUCKSparkle;
