@@ -1226,6 +1226,7 @@ export default function UniversalFrequencyLibrary() {
                             </p>
                         </div>
                     </div>
+                    </div>)}
                 </div>
 
                 {/* FUSION - 8-BIT */}
