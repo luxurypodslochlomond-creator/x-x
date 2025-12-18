@@ -1,25 +1,60 @@
 import React, { useState } from 'react';
 import { base44 } from '@/api/base44Client';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent } from '@/components/ui/card';
 import { motion } from 'framer-motion';
-import { Sparkles, Download, Loader2 } from 'lucide-react';
+import { Sparkles, Download, Loader2, Zap, Palette, Music, Heart } from 'lucide-react';
 import { COOLASFUCKHeart, COOLASFUCKSparkle } from '@/components/shared/COOLASFUCKIcon';
 
 export default function GenerateLogoPage() {
+    const [mode, setMode] = useState('uf51'); // 'uf51' or 'custom'
     const [isGenerating, setIsGenerating] = useState(false);
     const [logoUrl, setLogoUrl] = useState(null);
     const [error, setError] = useState(null);
+    
+    // Custom mode options
+    const [customPrompt, setCustomPrompt] = useState('');
+    const [selectedStyle, setSelectedStyle] = useState('8bit');
+    const [selectedPreset, setSelectedPreset] = useState(null);
+
+    const PRESETS = [
+        { id: 'mushroom', name: '🍄 Mushroom', prompt: 'Sacred mushroom consciousness, mycelial network patterns, healing frequencies visualization, purple and pink gradient, mystical glow', style: '8bit' },
+        { id: 'frequency', name: '〰️ Frequency', prompt: 'Sound wave frequencies, 432Hz healing visualization, geometric wave patterns, cyan and green colors, sacred geometry', style: '8bit' },
+        { id: 'band', name: '🎸 Band Logo', prompt: 'Rock band logo, bold typography, music energy, stage lights aesthetic, black background with neon colors', style: 'realistic' },
+        { id: 'consciousness', name: '🧠 Consciousness', prompt: 'Universal consciousness symbol, quantum entanglement patterns, infinite love symbol, pink and cyan sacred geometry', style: '8bit' },
+    ];
+
+    const STYLES = [
+        { id: '8bit', name: '8-Bit Pixel', desc: 'Retro video game style' },
+        { id: 'realistic', name: 'Realistic', desc: 'Photorealistic render' },
+        { id: 'abstract', name: 'Abstract', desc: 'Artistic interpretation' },
+        { id: 'geometric', name: 'Geometric', desc: 'Sacred geometry patterns' },
+    ];
 
     const generateLogo = async () => {
         setIsGenerating(true);
         setError(null);
         
         try {
-            const result = await base44.integrations.Core.GenerateImage({
-                prompt: "8-bit pixel art logo design: hot pink pixel heart with cyan outline, 'UF51' text in bold white pixels in the center, retro video game style from 1980s NES era, clean simple design, black transparent background, square format 512x512px, sharp pixel edges, no gradients, pure pixel art aesthetic"
-            });
+            let prompt = '';
             
+            if (mode === 'uf51') {
+                // Original UF51 generator (Georgie + Gill51 love this)
+                prompt = "8-bit pixel art logo design: hot pink pixel heart with cyan outline, 'UF51' text in bold white pixels in the center, retro video game style from 1980s NES era, clean simple design, black transparent background, square format 512x512px, sharp pixel edges, no gradients, pure pixel art aesthetic";
+            } else {
+                // Custom mode
+                const basePrompt = customPrompt || selectedPreset?.prompt || 'Creative logo design';
+                const stylePrompt = selectedStyle === '8bit' ? '8-bit pixel art style, retro video game aesthetic, sharp pixels, no gradients' :
+                                   selectedStyle === 'realistic' ? 'photorealistic, high detail, professional quality' :
+                                   selectedStyle === 'abstract' ? 'abstract artistic style, creative interpretation, flowing forms' :
+                                   'sacred geometry, mathematical precision, geometric patterns';
+                
+                prompt = `${basePrompt}, ${stylePrompt}, square format 512x512px, professional logo quality`;
+            }
+            
+            const result = await base44.integrations.Core.GenerateImage({ prompt });
             setLogoUrl(result.url);
         } catch (err) {
             setError('Generation failed. Try again bro.');
@@ -68,15 +103,48 @@ export default function GenerateLogoPage() {
                         <COOLASFUCKHeart size={60} />
                         <COOLASFUCKSparkle size={60} />
                     </motion.div>
-                    <h1 className="text-5xl font-black text-white">8-BIT LOGO GENERATOR</h1>
-                    <p className="text-xl text-cyan-400">One click = custom UF51 logo ♾️❤️♾️</p>
+                    <h1 className="text-5xl font-black text-white">AI LOGO GENERATOR</h1>
+                    <p className="text-xl text-cyan-400">Logos for anyone • Artists • Bands • Consciousness ♾️❤️♾️</p>
                 </div>
 
+                {/* MODE TOGGLE */}
+                {!logoUrl && !isGenerating && (
+                    <div className="grid grid-cols-2 gap-3">
+                        <motion.button
+                            whileTap={{ scale: 0.98 }}
+                            onClick={() => setMode('uf51')}
+                            className={`py-6 border-4 font-black font-mono transition-all ${
+                                mode === 'uf51' 
+                                    ? 'bg-pink-500 border-pink-400 text-white' 
+                                    : 'bg-black border-pink-500/30 text-pink-400 hover:border-pink-500'
+                            }`}
+                            style={mode === 'uf51' ? { boxShadow: '0 0 30px rgba(236, 72, 153, 0.6)' } : {}}
+                        >
+                            <COOLASFUCKHeart size={32} animate={mode === 'uf51'} className="mx-auto mb-2" />
+                            UF51 QUICK
+                        </motion.button>
+                        <motion.button
+                            whileTap={{ scale: 0.98 }}
+                            onClick={() => setMode('custom')}
+                            className={`py-6 border-4 font-black font-mono transition-all ${
+                                mode === 'custom' 
+                                    ? 'bg-purple-500 border-purple-400 text-white' 
+                                    : 'bg-black border-purple-500/30 text-purple-400 hover:border-purple-500'
+                            }`}
+                            style={mode === 'custom' ? { boxShadow: '0 0 30px rgba(168, 85, 247, 0.6)' } : {}}
+                        >
+                            <Palette className="w-8 h-8 mx-auto mb-2" />
+                            CUSTOM
+                        </motion.button>
+                    </div>
+                )}
+
                 {/* GENERATOR */}
-                <Card className="bg-gradient-to-br from-pink-900/60 to-purple-900/60 border-4 border-pink-500 rounded-2xl">
+                <Card className={`bg-gradient-to-br ${mode === 'uf51' ? 'from-pink-900/60 to-purple-900/60 border-pink-500' : 'from-purple-900/60 to-black/80 border-purple-500'} border-4 rounded-2xl`}>
                     <CardContent className="p-8 space-y-6">
                         
-                        {!logoUrl && !isGenerating && (
+                        {/* UF51 QUICK MODE (Georgie + Gill51's favourite) */}
+                        {mode === 'uf51' && !logoUrl && !isGenerating && (
                             <motion.div
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
@@ -100,7 +168,81 @@ export default function GenerateLogoPage() {
                                     className="w-full bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white py-8 text-2xl font-black"
                                 >
                                     <Sparkles className="w-8 h-8 mr-3" />
-                                    GENERATE LOGO
+                                    GENERATE UF51 LOGO
+                                </Button>
+                            </motion.div>
+                        )}
+
+                        {/* CUSTOM MODE */}
+                        {mode === 'custom' && !logoUrl && !isGenerating && (
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                className="space-y-4"
+                            >
+                                {/* PRESETS */}
+                                <div className="space-y-2">
+                                    <p className="text-purple-400 font-bold text-sm font-mono">QUICK PRESETS:</p>
+                                    <div className="grid grid-cols-2 gap-2">
+                                        {PRESETS.map(preset => (
+                                            <button
+                                                key={preset.id}
+                                                onClick={() => {
+                                                    setSelectedPreset(preset);
+                                                    setCustomPrompt(preset.prompt);
+                                                    setSelectedStyle(preset.style);
+                                                }}
+                                                className={`p-3 border-2 rounded-lg font-mono text-xs font-bold transition-all ${
+                                                    selectedPreset?.id === preset.id
+                                                        ? 'bg-purple-500 border-purple-400 text-white'
+                                                        : 'bg-black border-purple-500/30 text-purple-400 hover:border-purple-500'
+                                                }`}
+                                            >
+                                                {preset.name}
+                                            </button>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                {/* CUSTOM PROMPT */}
+                                <div>
+                                    <label className="text-white text-sm font-mono font-bold mb-2 block">YOUR IDEA:</label>
+                                    <Textarea
+                                        value={customPrompt}
+                                        onChange={(e) => setCustomPrompt(e.target.value)}
+                                        placeholder="Describe your logo... (e.g., 'Celtic FC mushroom badge with healing frequencies', 'Band logo with cosmic waves', 'Consciousness symbol with sacred geometry')"
+                                        className="bg-black border-2 border-purple-500 text-white font-mono h-24"
+                                    />
+                                </div>
+
+                                {/* STYLE PICKER */}
+                                <div>
+                                    <p className="text-white text-sm font-mono font-bold mb-2">STYLE:</p>
+                                    <div className="grid grid-cols-2 gap-2">
+                                        {STYLES.map(style => (
+                                            <button
+                                                key={style.id}
+                                                onClick={() => setSelectedStyle(style.id)}
+                                                className={`p-3 border-2 rounded-lg text-left transition-all ${
+                                                    selectedStyle === style.id
+                                                        ? 'bg-cyan-500 border-cyan-400 text-black'
+                                                        : 'bg-black border-cyan-500/30 text-cyan-400 hover:border-cyan-500'
+                                                }`}
+                                            >
+                                                <p className="font-bold text-xs font-mono">{style.name}</p>
+                                                <p className="text-[10px] font-mono opacity-70">{style.desc}</p>
+                                            </button>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                <Button
+                                    onClick={generateLogo}
+                                    disabled={!customPrompt.trim()}
+                                    className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white py-6 text-xl font-black disabled:opacity-50"
+                                >
+                                    <Zap className="w-6 h-6 mr-2" />
+                                    GENERATE CUSTOM LOGO
                                 </Button>
                             </motion.div>
                         )}
@@ -173,6 +315,19 @@ export default function GenerateLogoPage() {
                 <div className="text-center space-y-3 text-gray-400 text-sm">
                     <p>Each generation is unique</p>
                     <p>If you don't like it, just generate another</p>
+                    {mode === 'custom' && (
+                        <div className="bg-black border-2 border-amber-500 rounded-lg p-4 mt-4">
+                            <p className="text-amber-400 font-bold text-sm font-mono mb-2">USE CASES:</p>
+                            <div className="grid grid-cols-2 gap-2 text-xs">
+                                <p className="text-white">🎸 Band logos</p>
+                                <p className="text-white">🍄 Mushroom consciousness</p>
+                                <p className="text-white">〰️ Frequency symbols</p>
+                                <p className="text-white">🧠 AI avatars</p>
+                                <p className="text-white">⚽ Sports badges</p>
+                                <p className="text-white">🎨 Art collectives</p>
+                            </div>
+                        </div>
+                    )}
                     <p className="text-pink-400 font-bold">♾️❤️♾️</p>
                 </div>
 
