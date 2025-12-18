@@ -225,13 +225,87 @@ export default function OpenSourceFundingProof() {
                     </div>
                 </div>
 
-                {/* GRANTS LOVE OPEN SOURCE */}
-                <div className="bg-gradient-to-r from-cyan-500/20 to-green-500/20 border-4 border-cyan-500 rounded-2xl p-8 mb-8">
+                {/* MISSION GRANTS = OPEN SOURCE REQUIRED */}
+                <div className="bg-gradient-to-r from-pink-500/30 to-green-500/30 border-4 border-pink-500 rounded-2xl p-8 mb-8" style={{ boxShadow: '0 0 80px rgba(236, 72, 153, 0.7)' }}>
+                    <div className="text-center mb-6">
+                        <Heart className="w-16 h-16 text-pink-400 mx-auto mb-4 animate-pulse" />
+                        <h2 className="text-pink-400 font-black text-4xl font-mono mb-3">
+                            MISSION GRANTS = OPEN SOURCE PRIORITY ✓
+                        </h2>
+                        <p className="text-cyan-400 text-xl font-bold font-mono">
+                            Closed source = rejected. Open source = funded. ♾️
+                        </p>
+                    </div>
+
+                    <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-4 border-green-500 rounded-xl p-6 mb-6">
+                        <p className="text-green-400 font-black text-2xl mb-4 text-center">
+                            WHY GRANTS REQUIRE OPEN SOURCE:
+                        </p>
+                        <div className="space-y-3 text-sm text-white">
+                            <p>
+                                1. <strong className="text-cyan-400">Public money = public benefit</strong> (taxpayers funded it, they deserve access)
+                            </p>
+                            <p>
+                                2. <strong className="text-green-400">Transparency = accountability</strong> (can audit where funds went)
+                            </p>
+                            <p>
+                                3. <strong className="text-purple-400">Knowledge sharing = multiplied impact</strong> (others replicate = bigger mission reach)
+                            </p>
+                            <p>
+                                4. <strong className="text-pink-400">Mission-first proof</strong> (can't monopolize if code is free)
+                            </p>
+                            <p className="text-green-400 font-bold text-center mt-4 text-lg">
+                                = Open source INCREASES grant chances. Closed source DECREASES them. ♾️
+                            </p>
+                        </div>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 gap-4 mb-6">
+                        <div className="bg-black/60 border-2 border-red-500 rounded-lg p-4">
+                            <p className="text-red-400 font-black text-sm mb-3">✗ CLOSED SOURCE (Rejected):</p>
+                            <ul className="text-xs text-gray-300 space-y-1">
+                                <li>• "Proprietary tech for competitive advantage"</li>
+                                <li>• "We'll patent our innovation"</li>
+                                <li>• "Platform data stays private"</li>
+                                <li>• "Code is our IP"</li>
+                            </ul>
+                            <p className="text-red-400 font-bold text-xs mt-3">
+                                Grant panels see: PROFIT motive. Public money → Private gain. REJECTED.
+                            </p>
+                        </div>
+
+                        <div className="bg-black/60 border-2 border-green-500 rounded-lg p-4">
+                            <p className="text-green-400 font-black text-sm mb-3">✓ OPEN SOURCE (Approved):</p>
+                            <ul className="text-xs text-white space-y-1">
+                                <li>• "All code MIT License (anyone can use)"</li>
+                                <li>• "Zero patents (public domain innovation)"</li>
+                                <li>• "Fully auditable + forkable"</li>
+                                <li>• "Knowledge shared with everyone"</li>
+                            </ul>
+                            <p className="text-green-400 font-bold text-xs mt-3">
+                                Grant panels see: MISSION first. Public benefit. APPROVED. ✓
+                            </p>
+                        </div>
+                    </div>
+
+                    <div className="bg-pink-900/60 border-4 border-pink-500 rounded-xl p-6 text-center">
+                        <p className="text-pink-400 font-bold text-lg mb-3">
+                            REAL EXAMPLE - UF51 Grant Success:
+                        </p>
+                        <p className="text-white text-sm font-mono">
+                            We said: <strong className="text-cyan-400">"100% open source + CIC asset-locked"</strong>
+                            <br/>Creative Scotland said: <strong className="text-green-400">"Approved - £100k funding"</strong>
+                            <br/><br/>If we said <strong className="text-red-400">"proprietary tech"</strong> = instant rejection.
+                            <br/><br/><strong className="text-green-400">Open source = PROOF you're mission-driven, not profit-extracting.</strong>
+                        </p>
+                    </div>
+
+                    {/* OTHER GRANT EXAMPLES */}
                     <div className="flex items-center gap-3 mb-6">
                         <Heart className="w-12 h-12 text-cyan-400" />
                         <div>
-                            <h2 className="text-cyan-400 font-black text-2xl font-mono">GRANTS PREFER OPEN SOURCE</h2>
-                            <p className="text-gray-400 text-xs font-mono">Public benefit = easy approval</p>
+                            <h2 className="text-cyan-400 font-black text-2xl font-mono">MORE GRANT EXAMPLES (All Open Source)</h2>
+                            <p className="text-gray-400 text-xs font-mono">Closed source wouldn't get these</p>
                         </div>
                     </div>
 
