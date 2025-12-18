@@ -1052,7 +1052,7 @@ export default function UniversalFrequencyLibrary() {
                                 = Bismuth + magnets = anti-gravity without breaking physics ♾️
                             </p>
                         </div>
-                    </div>
+                    </div>)}
                 </div>
 
                 {/* SUPERCONDUCTORS - 8-BIT */}
@@ -1128,7 +1128,6 @@ export default function UniversalFrequencyLibrary() {
                         </div>
                     </div>
                     </div>)}
-                </div>
                 </div>
 
                 {/* SHED → GLOBAL - 8-BIT */}
