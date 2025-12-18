@@ -402,9 +402,10 @@ export default function MeshTechComparison() {
 
                         <div className="bg-black border-2 border-cyan-500 rounded-lg p-4">
                             <p className="text-cyan-400 font-bold mb-2">PHASE 2 (NEXT):</p>
-                            <p className="text-white text-sm mb-2">Fork Bitchat codebase (MIT license) ✓</p>
+                            <p className="text-white text-sm mb-2">Study Bitchat codebase (permissionlesstech) ✓</p>
                             <p className="text-white text-sm mb-2">Add lost & found tracking layer on top ✓</p>
                             <p className="text-white text-sm mb-2">Test with 10-50 students at Edinburgh ✓</p>
+                            <p className="text-white text-sm mb-2">Distribute via IPFS + torrent (zero barriers) ✓</p>
                             <p className="text-gray-400 text-xs">Status: Ready to build when you say go</p>
                         </div>
 
@@ -426,6 +427,25 @@ export default function MeshTechComparison() {
                             </p>
                             <p className="text-pink-400 text-xs font-bold">
                                 Standing on giants' shoulders, not pretending we invented it ♾️❤️♾️
+                            </p>
+                        </div>
+
+                        <div className="bg-gradient-to-r from-cyan-500/20 to-purple-500/20 border-2 border-cyan-500 rounded p-4 mt-4">
+                            <p className="text-cyan-400 font-black mb-2">ZERO BARRIERS DISTRIBUTION:</p>
+                            <p className="text-white text-xs mb-2">
+                                🚫 Not on GitHub (Microsoft owns it = barrier)
+                            </p>
+                            <p className="text-green-400 text-xs mb-2">
+                                ✓ IPFS (unstoppable, decentralized)
+                            </p>
+                            <p className="text-green-400 text-xs mb-2">
+                                ✓ Torrent (peer-to-peer, no servers)
+                            </p>
+                            <p className="text-green-400 text-xs mb-2">
+                                ✓ Direct download (no login, no barriers)
+                            </p>
+                            <p className="text-pink-400 text-xs font-bold mt-2">
+                                Download code = no permission needed ♾️❤️♾️
                             </p>
                         </div>
                     </div>
