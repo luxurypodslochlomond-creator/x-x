@@ -1801,7 +1801,7 @@ export default function UniversalFrequencyLibrary() {
                         </p>
                         </div>
                         </div>
-                        </div>)}
+                    </div>)}
                 </div>
 
                 {/* SUSTAINABLE SCALING - 8-BIT */}
