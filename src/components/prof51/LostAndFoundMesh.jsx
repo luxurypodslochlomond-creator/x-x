@@ -39,19 +39,30 @@ export default function LostAndFoundMesh() {
 
     // IRREPLACEABLE items - works globally, any language, any culture
     const recentFinds = [
-        { item: 'Passport + Visa', location: 'Library Level 3', time: '2 mins ago', status: 'found', flag: '🇨🇳', finder: 'Wei (Edinburgh Economics)' },
-        { item: 'Dad\'s watch (from home)', location: 'Main Quad', time: '15 mins ago', status: 'found', flag: '🇮🇳', finder: 'Priya (Computer Science)' },
-        { item: 'Phone (family photos)', location: 'Student Union', time: '1 hour ago', status: 'searching', flag: '🇧🇷' },
-        { item: 'Prayer beads', location: 'Gym Locker Room', time: '3 hours ago', status: 'found', flag: '🇸🇦', finder: 'Mohammed (Medicine)' },
-        { item: 'Keys (only set)', location: 'Lecture Hall B', time: '5 hours ago', status: 'searching', flag: '🇦🇺' },
-        { item: 'Mum\'s bracelet', location: 'Student Bar', time: '8 hours ago', status: 'found', flag: '🇲🇽', finder: 'Sofia (Law)' },
+        { item: 'Passport + Visa', location: 'Library Level 3', time: '2 mins ago', status: 'found', flag: '🇨🇳', finder: 'Wei (Edinburgh Economics)', mapLink: 'geo:55.9440,-3.1892' },
+        { item: 'Dad\'s watch (from home)', location: 'Main Quad', time: '15 mins ago', status: 'found', flag: '🇮🇳', finder: 'Priya (Computer Science)', mapLink: 'geo:55.9465,-3.1898' },
+        { item: 'Phone (family photos)', location: 'Student Union', time: '1 hour ago', status: 'searching', flag: '🇧🇷', mapLink: 'geo:55.9443,-3.1886' },
+        { item: 'Prayer beads', location: 'Gym Locker Room', time: '3 hours ago', status: 'found', flag: '🇸🇦', finder: 'Mohammed (Medicine)', mapLink: 'geo:55.9420,-3.1875' },
+        { item: 'Keys (only set)', location: 'Lecture Hall B', time: '5 hours ago', status: 'searching', flag: '🇦🇺', mapLink: 'geo:55.9445,-3.1900' },
+        { item: 'Mum\'s bracelet', location: 'Student Bar', time: '8 hours ago', status: 'found', flag: '🇲🇽', finder: 'Sofia (Law)', mapLink: 'geo:55.9438,-3.1880' },
+        // CB51/Festival use cases
+        { item: 'XLR cables (full set)', location: 'Main Stage Backstage', time: '10 mins ago', status: 'found', flag: '🎸', finder: 'CB51 Crew (Soundcheck)', mapLink: 'geo:55.9500,-3.1800', isFestival: true },
+        { item: 'Artist pass (all-access)', location: 'VIP Tent', time: '30 mins ago', status: 'found', flag: '🎤', finder: 'Festival Staff', mapLink: 'geo:55.9510,-3.1810', isFestival: true },
     ];
 
     const safeMeetupSpots = [
-        { name: 'Main Library Reception', distance: '2 min walk', hours: '8am-10pm', busy: 'Very busy (safe)' },
-        { name: 'Student Union Info Desk', distance: '5 min walk', hours: '9am-11pm', busy: 'Always staffed' },
-        { name: 'Campus Security Office', distance: '3 min walk', hours: '24/7', busy: 'Police present' },
-        { name: 'Main Lecture Building Entrance', distance: '4 min walk', hours: '7am-9pm', busy: 'High foot traffic' },
+        { name: 'Main Library Reception', distance: '2 min walk', hours: '8am-10pm', busy: 'Very busy (safe)', mapLink: 'geo:55.9440,-3.1892' },
+        { name: 'Student Union Info Desk', distance: '5 min walk', hours: '9am-11pm', busy: 'Always staffed', mapLink: 'geo:55.9443,-3.1886' },
+        { name: 'Campus Security Office', distance: '3 min walk', hours: '24/7', busy: 'Police present', mapLink: 'geo:55.9435,-3.1895' },
+        { name: 'Main Lecture Building Entrance', distance: '4 min walk', hours: '7am-9pm', busy: 'High foot traffic', mapLink: 'geo:55.9445,-3.1900' },
+    ];
+
+    // Festival/touring spots (CB51 use case)
+    const festivalMeetupSpots = [
+        { name: 'Main Stage Backstage', distance: '30 sec walk', hours: '24/7', busy: 'Crew present', mapLink: 'geo:55.9500,-3.1800' },
+        { name: 'Production Office', distance: '1 min walk', hours: '24/7', busy: 'Always staffed', mapLink: 'geo:55.9505,-3.1805' },
+        { name: 'Artist Catering Tent', distance: '2 min walk', hours: '10am-midnight', busy: 'Very busy', mapLink: 'geo:55.9510,-3.1810' },
+        { name: 'Tour Bus Area', distance: '3 min walk', hours: '24/7', busy: 'Security present', mapLink: 'geo:55.9515,-3.1815' },
     ];
 
     // PLAY FOUND CHIME - 8-bit success sound
@@ -322,12 +333,23 @@ export default function LostAndFoundMesh() {
                                         <div className="flex flex-col gap-1 items-end">
                                             <span className="bg-green-500 text-white text-xs font-bold px-2 py-1 rounded font-mono">FOUND</span>
                                             {find.finder && (
-                                                <Button
-                                                    onClick={() => { setSelectedItem(find); setShowMeetup(true); }}
-                                                    className="bg-cyan-500 hover:bg-cyan-600 text-black text-[10px] font-mono font-bold px-2 py-1 h-auto"
-                                                >
-                                                    MEET UP
-                                                </Button>
+                                                <div className="flex flex-col gap-1">
+                                                    <Button
+                                                        onClick={() => { setSelectedItem(find); setShowMeetup(true); }}
+                                                        className="bg-cyan-500 hover:bg-cyan-600 text-black text-[10px] font-mono font-bold px-2 py-1 h-auto"
+                                                    >
+                                                        MEET UP
+                                                    </Button>
+                                                    <a 
+                                                        href={find.mapLink} 
+                                                        target="_blank" 
+                                                        rel="noopener noreferrer"
+                                                        className="bg-green-500 hover:bg-green-600 text-black text-[10px] font-mono font-bold px-2 py-1 h-auto rounded text-center"
+                                                        onClick={(e) => e.stopPropagation()}
+                                                    >
+                                                        📍 MAP
+                                                    </a>
+                                                </div>
                                             )}
                                         </div>
                                     ) : (
@@ -546,6 +568,17 @@ export default function LostAndFoundMesh() {
                         <p className="text-white text-[10px] mb-1">→ Prof51 = Bitchat + item tracking, student-safe, FREE</p>
                         <p className="text-green-400 text-[10px] font-bold mt-2">Dorsey built the messaging • We added lost & found ♾️❤️♾️</p>
                     </div>
+
+                    <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-2 border-purple-500 rounded-lg p-3 mt-3">
+                        <p className="text-purple-400 font-bold text-xs mb-2">CB51/FESTIVAL USE CASE:</p>
+                        <p className="text-white text-[10px] mb-1">→ Artists lose cables/passes at festivals = show delayed</p>
+                        <p className="text-white text-[10px] mb-1">→ Mesh finds gear backstage in seconds (offline)</p>
+                        <p className="text-white text-[10px] mb-1">→ Maps direct to exact location (tour bus, stage, tent)</p>
+                        <p className="text-white text-[10px] mb-1">→ Track where your crew is hanging out (zero calls)</p>
+                        <p className="text-pink-400 text-[10px] font-bold mt-2">Zero loss • Zero friction • Tour manager's dream ♾️🎸♾️</p>
+                    </div>
+                </motion.div>
+            )}
                 </motion.div>
             )}
 
@@ -696,10 +729,27 @@ export default function LostAndFoundMesh() {
                                     <p className="text-gray-300 text-[10px] font-mono mb-1">
                                         • You see their ETA via mesh
                                     </p>
-                                    <p className="text-gray-300 text-[10px] font-mono">
+                                    <p className="text-gray-300 text-[10px] font-mono mb-1">
                                         • Both get GPS to exact spot (offline maps)
                                     </p>
+                                    <p className="text-gray-300 text-[10px] font-mono">
+                                        • Tap 📍 MAP = Opens in your maps app (works offline)
+                                    </p>
                                 </div>
+
+                                {/* FESTIVAL/TOUR USE CASE */}
+                                {selectedItem?.isFestival && (
+                                    <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-2 border-purple-500 rounded-lg p-4 mt-4">
+                                        <p className="text-purple-400 font-bold text-sm mb-2">🎸 CB51 TOUR MODE:</p>
+                                        <div className="space-y-2 text-xs text-white">
+                                            <p>✓ Find lost gear at festivals (cables, passes, instruments)</p>
+                                            <p>✓ Track where your crew is hanging out (backstage, catering, bus)</p>
+                                            <p>✓ Get to pickup in 30 seconds (offline maps direct to location)</p>
+                                            <p>✓ Works at any venue/festival worldwide (Bluetooth mesh)</p>
+                                            <p className="text-pink-400 font-bold mt-2">Zero friction • Zero loss • Zero stress ♾️❤️♾️</p>
+                                        </div>
+                                    </div>
+                                )}
                             </div>
 
                             {/* SAFETY CHECKLIST */}
