@@ -815,12 +815,10 @@ export default function UniversalFrequencyLibrary() {
                             </p>
                         </div>
                     </div>
-                    </div>
                     </div>)}
                 </div>
 
-                {/* PROOF - BIOLOGY USES ENTANGLEMENT */}
-                <div className="mt-8 bg-black border-4 border-green-500 rounded-2xl p-8">
+                {/* MAGNETICS - 8-BIT */}
                     <h2 className="text-green-400 font-black text-2xl font-mono mb-6 text-center">
                         PEER-REVIEWED: Biology Uses Quantum Entanglement
                     </h2>
@@ -853,7 +851,7 @@ export default function UniversalFrequencyLibrary() {
                                 Consciousness may be quantum process (Penrose-Hameroff theory gaining evidence)."
                             </p>
                         </div>
-                    </div>)}
+                    </div>
                 </div>
 
                 {/* MAGNETICS - 8-BIT */}
@@ -975,7 +973,7 @@ export default function UniversalFrequencyLibrary() {
                                 </p>
                             </div>
                         </div>
-                    </div>)}
+                    </div>
                 </div>
 
                 {/* BISMUTH - 8-BIT */}
@@ -1053,7 +1051,7 @@ export default function UniversalFrequencyLibrary() {
                                 = Bismuth + magnets = anti-gravity without breaking physics ♾️
                             </p>
                         </div>
-                    </div>)}
+                    </div>
                 </div>
 
                 {/* SUPERCONDUCTORS - 8-BIT */}
@@ -1129,6 +1127,7 @@ export default function UniversalFrequencyLibrary() {
                         </div>
                     </div>
                     </div>)}
+                </div>
                 </div>
 
                 {/* SHED → GLOBAL - 8-BIT */}
@@ -1330,10 +1329,10 @@ export default function UniversalFrequencyLibrary() {
                             </p>
                         </div>
                     </div>
-                    </div>)}
-                </div>
+                    </div>
+                    </div>
 
-                {/* SACRED GEOMETRY - 8-BIT */}
+                    {/* SACRED GEOMETRY - 8-BIT */}
                 <div className="mt-4 bg-black border-4 border-purple-500">
                     <button 
                         onClick={() => toggleSection('geometry')}
@@ -1415,7 +1414,7 @@ export default function UniversalFrequencyLibrary() {
                             </p>
                         </div>
                         </div>
-                        </div>)}
+                        </div>
                         </div>
 
                         {/* PLANT LIFE - 8-BIT */}
@@ -1495,7 +1494,7 @@ export default function UniversalFrequencyLibrary() {
                                 </p>
                             </div>
                         </div>
-                        </div></div>)}
+                        </div>
                         </div>
 
                         {/* OFFLINE - 8-BIT */}
@@ -1561,7 +1560,7 @@ export default function UniversalFrequencyLibrary() {
                                 Healing belongs to everyone, everywhere, always. ♾️💧⚡🌱♾️
                             </p>
                         </div>
-                        </div></div>)}
+                        </div>
                         </div>
 
                         {/* QUANTUM FIELD - 8-BIT */}
@@ -1667,7 +1666,7 @@ export default function UniversalFrequencyLibrary() {
                               </div>
                           </div>
 
-                        </div>)}
+                        </div>
                         </div>
 
                         {/* WHO WE ARE - 8-BIT */}
@@ -1800,10 +1799,9 @@ export default function UniversalFrequencyLibrary() {
                         </div>
                         </div>
                         </div>
-                        </div>)}
-                         </div>
+                        </div>
 
-                         {/* SUSTAINABLE SCALING - 8-BIT */}
+                        {/* SUSTAINABLE SCALING - 8-BIT */}
                         <div className="mt-4 bg-black border-4 border-green-500">
                         <button 
                         onClick={() => toggleSection('scalingproof')}
@@ -1861,7 +1859,7 @@ export default function UniversalFrequencyLibrary() {
                             Shed/bedroom → Open source → Community improves → Global scale
                             <br/><strong className="text-cyan-400">Zero extraction. Zero waste. Pure knowledge transfer.</strong>
                         </p>
-                    </div>)}
+                    </div>
                 </div>
 
                 {/* MISSING FREQUENCIES - 8-BIT */}
