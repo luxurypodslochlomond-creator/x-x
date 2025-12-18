@@ -489,18 +489,6 @@ export default function UniversalFrequencyLibrary() {
                     </button>
 
                     {expandedSections.water && (<div className="p-8 pt-0">
-                        <Waves className="w-24 h-24 text-cyan-400 mx-auto mb-4 animate-pulse" />
-                        <h2 className="text-cyan-400 font-black text-5xl font-mono mb-3">
-                            💧 WATER = UNIVERSAL BRIDGE
-                        </h2>
-                        <p className="text-white text-2xl font-bold font-mono mb-2">
-                            70% of YOU • 71% of EARTH • 100% of HEALING
-                        </p>
-                        <p className="text-gray-400 text-sm font-mono mb-4">
-                            Every frequency works THROUGH water in your cells
-                        </p>
-                    </div>
-
                     <div className="grid md:grid-cols-3 gap-4 mb-6">
                         <div className="bg-black/60 border-2 border-cyan-500 rounded-lg p-4">
                             <p className="text-cyan-400 font-black text-lg mb-3">WHY WATER = EVERYTHING:</p>
@@ -579,28 +567,19 @@ export default function UniversalFrequencyLibrary() {
                     </button>
 
                     {expandedSections.silicon && (<div className="p-8 pt-0">
-                        <Atom className="w-20 h-20 text-pink-400 mx-auto mb-4" />
-                        <h2 className="text-pink-400 font-black text-4xl font-mono mb-3">
-                            🎧 SILICON FREQUENCY
-                        </h2>
-                        <p className="text-cyan-400 text-xl font-bold font-mono mb-2">
-                            Original: 10.7 Hz → Audible: 342.4 Hz
-                        </p>
-                        <p className="text-gray-400 text-sm font-mono mb-4">
-                            Computer chip element • Earth's crust 27% • Your bones/skin
-                        </p>
-                        <button
-                            onClick={() => playingFreq === 'Silicon Featured' ? stopFrequency() : playFrequency('10.7 Hz', 'Silicon Featured')}
-                            className={`px-8 py-4 rounded-xl font-black text-xl transition-all ${
-                                playingFreq === 'Silicon Featured'
-                                    ? 'bg-pink-500 text-white animate-pulse'
-                                    : 'bg-gradient-to-r from-green-500 to-cyan-500 text-white hover:scale-105'
-                            }`}
-                            style={{ boxShadow: '0 0 30px rgba(34, 197, 94, 0.5)' }}
-                        >
-                            {playingFreq === 'Silicon Featured' ? '⏸️ STOP HEALING' : '▶️ PLAY SILICON (342.4 Hz)'}
-                        </button>
-                    </div>
+                        <div className="text-center mb-6">
+                            <button
+                                onClick={() => playingFreq === 'Silicon Featured' ? stopFrequency() : playFrequency('10.7 Hz', 'Silicon Featured')}
+                                className={`px-8 py-4 rounded-xl font-black text-xl transition-all ${
+                                    playingFreq === 'Silicon Featured'
+                                        ? 'bg-pink-500 text-white animate-pulse'
+                                        : 'bg-gradient-to-r from-green-500 to-cyan-500 text-white hover:scale-105'
+                                }`}
+                                style={{ boxShadow: '0 0 30px rgba(34, 197, 94, 0.5)' }}
+                            >
+                                {playingFreq === 'Silicon Featured' ? '⏸️ STOP HEALING' : '▶️ PLAY SILICON (342.4 Hz)'}
+                            </button>
+                        </div>
 
                     <div className="grid md:grid-cols-2 gap-4 mt-6">
                         <div className="bg-black/60 border-2 border-cyan-500 rounded-lg p-4">
@@ -1223,15 +1202,6 @@ export default function UniversalFrequencyLibrary() {
                     </button>
 
                     {expandedSections.fusion && (<div className="p-8 pt-0">
-                        <Zap className="w-16 h-16 text-amber-400 mx-auto mb-4" />
-                        <h2 className="text-amber-400 font-black text-3xl font-mono mb-3">
-                            FUSION CLARITY (Safe vs Dangerous)
-                        </h2>
-                        <p className="text-cyan-400 text-lg font-bold font-mono">
-                            Yes plasma. No neutrons. Water-based ZPE = better. ⚡
-                        </p>
-                    </div>
-
                     <div className="grid md:grid-cols-3 gap-4 mb-6">
 
                         <div className="bg-green-900/60 border-4 border-green-500 rounded-xl p-6">
@@ -1333,15 +1303,6 @@ export default function UniversalFrequencyLibrary() {
                     </button>
 
                     {expandedSections.geometry && (<div className="p-8 pt-0">
-                        <Atom className="w-16 h-16 text-purple-400 mx-auto mb-4" />
-                        <h2 className="text-purple-400 font-black text-3xl font-mono mb-3">
-                            SACRED GEOMETRY + CYMATICS (SEE Frequencies)
-                        </h2>
-                        <p className="text-cyan-400 text-lg font-bold font-mono">
-                            Ancient wisdom = Modern science proof ♾️
-                        </p>
-                    </div>
-
                     <div className="grid md:grid-cols-2 gap-6 mb-6">
 
                         <div className="bg-black/60 border-2 border-purple-500 rounded-lg p-6">
@@ -1422,18 +1383,6 @@ export default function UniversalFrequencyLibrary() {
                     </button>
 
                     {expandedSections.plants && (<div className="p-8 pt-0">
-                        <Leaf className="w-24 h-24 text-green-400 mx-auto mb-4 animate-pulse" />
-                        <h2 className="text-green-400 font-black text-5xl font-mono mb-3">
-                            🌱 PLANTS = OXYGEN + FOOD + LOVE
-                        </h2>
-                        <p className="text-white text-2xl font-bold font-mono mb-2">
-                            They breathe for us • Feed us • Talk to us
-                        </p>
-                        <p className="text-gray-400 text-sm font-mono mb-4">
-                            Without plants, humans don't exist ♾️
-                        </p>
-                    </div>
-
                     <div className="grid md:grid-cols-3 gap-4 mb-6">
                         <div className="bg-black/60 border-2 border-green-500 rounded-lg p-4">
                             <p className="text-green-400 font-black text-lg mb-3">WHY PLANTS = SACRED:</p>
@@ -1510,15 +1459,6 @@ export default function UniversalFrequencyLibrary() {
                             </button>
 
                             {expandedSections.offline && (<div className="p-8 pt-0">
-                        <Shield className="w-20 h-20 text-purple-400 mx-auto mb-4" />
-                        <h2 className="text-purple-400 font-black text-4xl font-mono mb-3">
-                            ✓ 100% OFFLINE CAPABLE
-                        </h2>
-                        <p className="text-cyan-400 text-xl font-bold font-mono mb-2">
-                            No internet needed once loaded ⚡
-                        </p>
-                    </div>
-
                     <div className="grid md:grid-cols-2 gap-6">
                         <div className="bg-black/60 border-2 border-green-500 rounded-lg p-6">
                             <p className="text-green-400 font-black text-xl mb-4">WHAT WORKS OFFLINE:</p>
