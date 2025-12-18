@@ -419,11 +419,11 @@ const LayoutInner = ({ children, currentPageName }) => {
                           <NavSection title="TRUST" color="gray" items={trustNav} isActivePage={isActivePage} isMobile />
 
                         {scottNav.length > 0 && (
-                          <>
-                            <div className="h-px bg-cyan-500/30 my-3" />
-                            <NavSection title="STUDENT TOOLS" color="cyan" emoji="🎓" items={scottNav} isActivePage={isActivePage} isMobile defaultOpen={true} />
-                          </>
-                        )}
+                                    <>
+                                        <div className="h-px bg-cyan-500/30 my-3" />
+                                        <NavSection title="CO-MANAGER51" color="cyan" emoji="📻" items={scottNav} isActivePage={isActivePage} isMobile />
+                                    </>
+                                )}
 
               {user && (
                 <>
@@ -493,7 +493,7 @@ const LayoutInner = ({ children, currentPageName }) => {
             {scottNav.length > 0 && (
               <>
                 <div className="h-px bg-cyan-500/30 my-4" />
-                <NavSection title="STUDENT TOOLS" color="cyan" emoji="🎓" items={scottNav} isActivePage={isActivePage} defaultOpen={true} />
+                <NavSection title="CO-MANAGER51" color="cyan" emoji="📻" items={scottNav} isActivePage={isActivePage} />
               </>
             )}
 
