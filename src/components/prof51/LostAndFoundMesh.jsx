@@ -9,6 +9,13 @@ import { Textarea } from '@/components/ui/textarea';
  * LOST & FOUND P2P MESH
  * The killer feature that reaches EVERY student
  * Works offline, Bluetooth mesh, instant alerts
+ * 
+ * ARCHITECTURE (Based on Bitchat + Our Additions):
+ * - Bluetooth LE mesh (Bitchat protocol - Dorsey's work ♾️)
+ * - Noise Protocol XX (Curve25519 + ChaCha20-Poly1305)
+ * - Location triangulation via RSSI
+ * - Offline-first, E2E encrypted, zero servers
+ * - ADDED: Item tracking, safety protocols, student verification
  */
 
 export default function LostAndFoundMesh() {
@@ -407,7 +414,9 @@ export default function LostAndFoundMesh() {
                         <p className="text-cyan-400 font-bold text-xs mb-2">REAL-WORLD PROVEN:</p>
                         <p className="text-white text-[10px] mb-1">→ Tile network = 40M+ users, billions of finds</p>
                         <p className="text-white text-[10px] mb-1">→ Apple AirTags = 2B+ Apple devices meshing</p>
-                        <p className="text-white text-[10px] mb-1">→ Prof51 = Same tech, student-focused, FREE</p>
+                        <p className="text-white text-[10px] mb-1">→ Bitchat (Dorsey) = Bluetooth mesh messaging (July 2025)</p>
+                        <p className="text-white text-[10px] mb-1">→ Prof51 = Bitchat + item tracking, student-safe, FREE</p>
+                        <p className="text-green-400 text-[10px] font-bold mt-2">Dorsey built the messaging • We added lost & found ♾️❤️♾️</p>
                     </div>
                 </motion.div>
             )}
