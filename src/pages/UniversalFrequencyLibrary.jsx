@@ -854,7 +854,6 @@ export default function UniversalFrequencyLibrary() {
                         </div>
                     </div>
                 </div>
-                </div>
 
                 {/* MAGNETICS - 8-BIT */}
                 <div className="mt-4 bg-black border-4 border-blue-500">
