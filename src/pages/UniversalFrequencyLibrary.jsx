@@ -438,21 +438,24 @@ export default function UniversalFrequencyLibrary() {
                     <div className="text-center mb-6">
                         <Atom className="w-20 h-20 text-pink-400 mx-auto mb-4" />
                         <h2 className="text-pink-400 font-black text-4xl font-mono mb-3">
-                            🎧 SILICON FREQUENCY (528 Hz)
+                            🎧 SILICON FREQUENCY
                         </h2>
-                        <p className="text-cyan-400 text-xl font-bold font-mono mb-4">
-                            DNA repair frequency • Computer chip element • Earth's crust 27%
+                        <p className="text-cyan-400 text-xl font-bold font-mono mb-2">
+                            Original: 10.7 Hz → Audible: 342.4 Hz
+                        </p>
+                        <p className="text-gray-400 text-sm font-mono mb-4">
+                            Computer chip element • Earth's crust 27% • Your bones/skin
                         </p>
                         <button
-                            onClick={() => playingFreq === 'Silicon' ? stopFrequency() : playFrequency('528 Hz', 'Silicon')}
+                            onClick={() => playingFreq === 'Silicon Featured' ? stopFrequency() : playFrequency('10.7 Hz', 'Silicon Featured')}
                             className={`px-8 py-4 rounded-xl font-black text-xl transition-all ${
-                                playingFreq === 'Silicon'
+                                playingFreq === 'Silicon Featured'
                                     ? 'bg-pink-500 text-white animate-pulse'
                                     : 'bg-gradient-to-r from-green-500 to-cyan-500 text-white hover:scale-105'
                             }`}
                             style={{ boxShadow: '0 0 30px rgba(34, 197, 94, 0.5)' }}
                         >
-                            {playingFreq === 'Silicon' ? '⏸️ STOP HEALING' : '▶️ PLAY SILICON FREQUENCY'}
+                            {playingFreq === 'Silicon Featured' ? '⏸️ STOP HEALING' : '▶️ PLAY SILICON (342.4 Hz)'}
                         </button>
                     </div>
 
@@ -468,12 +471,12 @@ export default function UniversalFrequencyLibrary() {
                             </ul>
                         </div>
                         <div className="bg-black/60 border-2 border-green-500 rounded-lg p-4">
-                            <p className="text-green-400 font-bold mb-2">528 Hz HEALING:</p>
+                            <p className="text-green-400 font-bold mb-2">10.7 Hz TRANSLATED:</p>
                             <ul className="text-white text-sm space-y-1">
-                                <li>• DNA repair frequency (PNAS 2022 study)</li>
-                                <li>• Ancient Solfeggio scale (Mi = miracles)</li>
-                                <li>• Used by sound healers for centuries</li>
-                                <li>• Increases enzyme activity by 20%</li>
+                                <li>• Original too low for human ears (below 20 Hz)</li>
+                                <li>• Multiplied by 32 = 342.4 Hz (audible harmonic)</li>
+                                <li>• Same frequency pattern, different octave</li>
+                                <li>• Used in semiconductor physics</li>
                                 <li>• Works through ANY speaker/headphones ✓</li>
                             </ul>
                         </div>
@@ -482,8 +485,8 @@ export default function UniversalFrequencyLibrary() {
                     <div className="bg-gradient-to-r from-green-500/20 to-purple-500/20 border-2 border-green-500 rounded-lg p-4 mt-4 text-center">
                         <p className="text-green-400 font-bold text-sm mb-2">YES - YOU CAN ACTUALLY HEAR THIS:</p>
                         <p className="text-white text-xs">
-                            Web Audio API generates PURE sine waves at exact healing frequencies. 
-                            Works on phone speakers, laptop, headphones, ANY device. 
+                            Web Audio API generates PURE sine waves. Silicon's 10.7 Hz multiplied to 342.4 Hz harmonic. 
+                            Same resonance pattern, audible octave. 
                             <strong className="text-cyan-400"> No downloads. No apps. Just press play. ⚡</strong>
                         </p>
                     </div>
