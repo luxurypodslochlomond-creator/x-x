@@ -296,94 +296,40 @@ Managing chaos → Making it simple. That's your job bro ♾️❤️♾️`,
 
 
 
-            {/* SCOTT'S 2 CORE WORKFLOWS + SEARCH */}
+            {/* SCOTT'S SIMPLE LANDING - JUST 2 ACTIONS */}
             {!activeWorkflow && !advancedMode && (
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="space-y-4 mb-6"
+                    className="space-y-6 mb-6"
                 >
-                    {/* STATS GRID */}
-                    <div className="grid grid-cols-2 gap-3">
-                        <Link to={createPageUrl('ScottArtist')}>
-                            <div className="bg-black border-4 border-amber-500 hover:border-amber-400 p-6 text-center transition-all cursor-pointer">
-                                <p className="text-5xl font-black text-amber-400 font-mono mb-2">{artists.length}</p>
-                                <p className="text-xs text-amber-400 font-mono font-bold tracking-wider">ROSTER</p>
-                            </div>
-                        </Link>
-                        <Link to={createPageUrl('ScottCalendar')}>
-                            <div className="bg-black border-4 border-cyan-500 hover:border-cyan-400 p-6 text-center transition-all cursor-pointer">
-                                <p className="text-5xl font-black text-cyan-400 font-mono mb-2">{upcomingEvents.length}</p>
-                                <p className="text-xs text-cyan-400 font-mono font-bold tracking-wider">EVENTS</p>
-                            </div>
-                        </Link>
-                        <Link to={createPageUrl('ScottCalendar')}>
-                            <div className="bg-black border-4 border-red-500 hover:border-red-400 p-6 text-center transition-all cursor-pointer">
-                                <p className="text-5xl font-black text-red-400 font-mono mb-2">{urgentTasks.length}</p>
-                                <p className="text-xs text-red-400 font-mono font-bold tracking-wider">URGENT</p>
-                            </div>
-                        </Link>
-                        <Link to={createPageUrl('ScottInvoices')}>
-                            <div className="bg-black border-4 border-green-500 hover:border-green-400 p-6 text-center transition-all cursor-pointer">
-                                <p className="text-5xl font-black text-green-400 font-mono mb-2">{unpaidInvoices.length}</p>
-                                <p className="text-xs text-green-400 font-mono font-bold tracking-wider">INVOICES</p>
-                            </div>
-                        </Link>
-                    </div>
-
-                    {/* SEARCH ROSTER */}
-                    <div className="relative">
-                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
-                        <Input
-                            value={searchQuery}
-                            onChange={(e) => setSearchQuery(e.target.value)}
-                            placeholder="Search roster..."
-                            className="bg-black border-4 border-gray-800 focus:border-cyan-500 pl-12 py-6 text-white text-lg font-mono"
-                        />
-                    </div>
-
-                    {/* 2 PRIMARY BUTTONS - Scott's core workflows */}
-                    <div className="grid grid-cols-2 gap-3">
+                    {/* 2 GIANT BUTTONS - THAT'S IT */}
+                    <div className="space-y-4">
                         <motion.button
                             whileTap={{ scale: 0.98 }}
                             onClick={() => setActiveWorkflow('gig')}
-                            className="bg-amber-500 hover:bg-amber-400 border-4 border-amber-400 text-black font-black py-8 text-xl font-mono"
-                            style={{ boxShadow: '8px 8px 0px rgba(245, 158, 11, 0.6)' }}
+                            className="w-full bg-amber-500 hover:bg-amber-400 border-4 border-amber-400 text-black font-black py-16 text-3xl font-mono"
+                            style={{ boxShadow: '12px 12px 0px rgba(245, 158, 11, 0.6)' }}
                         >
-                            + GIG
+                            PASTE GIG OFFER
                         </motion.button>
 
                         <motion.button
                             whileTap={{ scale: 0.98 }}
                             onClick={() => setActiveWorkflow('session')}
-                            className="bg-cyan-500 hover:bg-cyan-400 border-4 border-cyan-400 text-black font-black py-8 text-xl font-mono"
-                            style={{ boxShadow: '8px 8px 0px rgba(34, 211, 238, 0.6)' }}
+                            className="w-full bg-cyan-500 hover:bg-cyan-400 border-4 border-cyan-400 text-black font-black py-16 text-3xl font-mono"
+                            style={{ boxShadow: '12px 12px 0px rgba(34, 211, 238, 0.6)' }}
                         >
-                            + SESSION
+                            BOOK SESSION
                         </motion.button>
                     </div>
 
-                    {/* AI51 BUTTON */}
-                    <button 
-                        onClick={() => setShowAIChat(true)} 
-                        className="w-full bg-gradient-to-r from-cyan-500/20 to-pink-500/20 border-4 border-cyan-500 hover:border-pink-500 py-4 transition-all"
-                        style={{ boxShadow: '0 0 30px rgba(34, 211, 238, 0.4)' }}
-                    >
-                        <div className="flex items-center justify-center gap-3">
-                            <AI51Icon8Bit size={32} animate={true} />
-                            <div className="text-left">
-                                <p className="text-lg font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-pink-400 font-mono">AI51</p>
-                                <p className="text-xs text-cyan-400 font-mono">Ask anything</p>
-                            </div>
-                        </div>
-                    </button>
-
-                    {/* Advanced tools button */}
+                    {/* Tiny advanced mode link - hidden at bottom */}
                     <button
                         onClick={() => setAdvancedMode(true)}
-                        className="w-full bg-black border-2 border-gray-800 hover:border-amber-500 text-gray-600 hover:text-amber-400 font-bold py-3 text-xs font-mono transition-all"
+                        className="w-full bg-black border border-gray-900 hover:border-gray-800 text-gray-700 hover:text-gray-600 font-bold py-2 text-[10px] font-mono transition-all"
                     >
-                        + MORE TOOLS
+                        more tools
                     </button>
                 </motion.div>
             )}
