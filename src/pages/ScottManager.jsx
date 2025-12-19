@@ -284,24 +284,32 @@ Keep it SHORT, practical, straight to the point. No bullshit. Real help.`,
                     animate={{ opacity: 1, y: 0 }}
                     className="space-y-4 mb-6"
                 >
-                    {/* STATS GRID - Like screenshot */}
+                    {/* STATS GRID */}
                     <div className="grid grid-cols-2 gap-3">
-                        <div className="bg-black border-4 border-amber-500 p-6 text-center">
-                            <p className="text-5xl font-black text-amber-400 font-mono mb-2">{artists.length}</p>
-                            <p className="text-xs text-amber-400 font-mono font-bold tracking-wider">ROSTER</p>
-                        </div>
-                        <div className="bg-black border-4 border-cyan-500 p-6 text-center">
-                            <p className="text-5xl font-black text-cyan-400 font-mono mb-2">{upcomingEvents.length}</p>
-                            <p className="text-xs text-cyan-400 font-mono font-bold tracking-wider">EVENTS</p>
-                        </div>
-                        <div className="bg-black border-4 border-red-500 p-6 text-center">
-                            <p className="text-5xl font-black text-red-400 font-mono mb-2">{urgentTasks.length}</p>
-                            <p className="text-xs text-red-400 font-mono font-bold tracking-wider">URGENT</p>
-                        </div>
-                        <div className="bg-black border-4 border-green-500 p-6 text-center">
-                            <p className="text-5xl font-black text-green-400 font-mono mb-2">{unpaidInvoices.length}</p>
-                            <p className="text-xs text-green-400 font-mono font-bold tracking-wider">INVOICES</p>
-                        </div>
+                        <Link to={createPageUrl('ScottArtist')}>
+                            <div className="bg-black border-4 border-amber-500 hover:border-amber-400 p-6 text-center transition-all cursor-pointer">
+                                <p className="text-5xl font-black text-amber-400 font-mono mb-2">{artists.length}</p>
+                                <p className="text-xs text-amber-400 font-mono font-bold tracking-wider">ROSTER</p>
+                            </div>
+                        </Link>
+                        <Link to={createPageUrl('ScottCalendar')}>
+                            <div className="bg-black border-4 border-cyan-500 hover:border-cyan-400 p-6 text-center transition-all cursor-pointer">
+                                <p className="text-5xl font-black text-cyan-400 font-mono mb-2">{upcomingEvents.length}</p>
+                                <p className="text-xs text-cyan-400 font-mono font-bold tracking-wider">EVENTS</p>
+                            </div>
+                        </Link>
+                        <Link to={createPageUrl('ScottCalendar')}>
+                            <div className="bg-black border-4 border-red-500 hover:border-red-400 p-6 text-center transition-all cursor-pointer">
+                                <p className="text-5xl font-black text-red-400 font-mono mb-2">{urgentTasks.length}</p>
+                                <p className="text-xs text-red-400 font-mono font-bold tracking-wider">URGENT</p>
+                            </div>
+                        </Link>
+                        <Link to={createPageUrl('ScottInvoices')}>
+                            <div className="bg-black border-4 border-green-500 hover:border-green-400 p-6 text-center transition-all cursor-pointer">
+                                <p className="text-5xl font-black text-green-400 font-mono mb-2">{unpaidInvoices.length}</p>
+                                <p className="text-xs text-green-400 font-mono font-bold tracking-wider">INVOICES</p>
+                            </div>
+                        </Link>
                     </div>
 
                     {/* SEARCH ROSTER */}
