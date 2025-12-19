@@ -290,12 +290,12 @@ export default function OpenSourceFundingProof() {
 
                     <div className="bg-pink-900/60 border-4 border-pink-500 rounded-xl p-6 text-center">
                         <p className="text-pink-400 font-bold text-lg mb-3">
-                            REAL EXAMPLE - UF51 Grant Success:
+                            WHY GRANTS PREFER OPEN SOURCE:
                         </p>
                         <p className="text-white text-sm font-mono">
-                            We said: <strong className="text-cyan-400">"100% open source + CIC asset-locked"</strong>
-                            <br/>Creative Scotland said: <strong className="text-green-400">"Approved - £100k funding"</strong>
-                            <br/><br/>If we said <strong className="text-red-400">"proprietary tech"</strong> = instant rejection.
+                            When applying: <strong className="text-cyan-400">"100% open source + CIC asset-locked"</strong>
+                            <br/>Grant panels see: <strong className="text-green-400">Mission-driven + Auditable</strong>
+                            <br/><br/>If you say <strong className="text-red-400">"proprietary tech"</strong> = instant rejection.
                             <br/><br/><strong className="text-green-400">Open source = PROOF you're mission-driven, not profit-extracting.</strong>
                         </p>
                     </div>
@@ -497,12 +497,12 @@ export default function OpenSourceFundingProof() {
 
                     <div className="space-y-4">
                         <div className="bg-black/60 border-2 border-green-500 rounded-lg p-4">
-                            <p className="text-green-400 font-black text-sm mb-3 font-mono">YEAR 1 (NOW) - GRANTS + PLATFORM REVENUE:</p>
+                            <p className="text-green-400 font-black text-sm mb-3 font-mono">YEAR 1 (NOW) - APPLYING FOR GRANTS + PLATFORM REVENUE:</p>
                             <div className="space-y-2 text-xs font-mono text-white">
-                                <p>• <strong className="text-cyan-400">£100k Creative Scotland</strong> (open source = easy approval)</p>
-                                <p>• <strong className="text-green-400">£50k National Lottery</strong> (public benefit proven)</p>
-                                <p>• <strong className="text-purple-400">£20k/month platform fees</strong> (10% music streaming)</p>
-                                <p className="text-green-400 font-bold mt-2">= £390k year 1 runway • Zero investors needed yet</p>
+                                <p>• <strong className="text-cyan-400">Applying: Creative Scotland</strong> (open source = strong application)</p>
+                                <p>• <strong className="text-green-400">Applying: National Lottery</strong> (public benefit mission)</p>
+                                <p>• <strong className="text-purple-400">£20k/month platform fees</strong> (10% music streaming - already earning)</p>
+                                <p className="text-green-400 font-bold mt-2">Bootstrapping + grant applications • Zero investors needed yet</p>
                             </div>
                         </div>
 
@@ -884,11 +884,11 @@ export default function OpenSourceFundingProof() {
                     </p>
 
                     <div className="bg-black border-2 border-green-500 rounded-xl p-6 mb-6">
-                        <p className="text-green-400 font-black text-lg font-mono mb-4">WHAT WE'RE RAISING:</p>
+                        <p className="text-green-400 font-black text-lg font-mono mb-4">FUNDING APPROACH:</p>
                         <div className="grid md:grid-cols-3 gap-4 text-sm font-mono">
                             <div>
-                                <p className="text-2xl font-black text-green-400">£150k</p>
-                                <p className="text-gray-400 text-xs">Grants (Year 1)</p>
+                                <p className="text-2xl font-black text-green-400">Bootstrap</p>
+                                <p className="text-gray-400 text-xs">+ Grant applications (Year 1)</p>
                             </div>
                             <div>
                                 <p className="text-2xl font-black text-cyan-400">£1-2M</p>

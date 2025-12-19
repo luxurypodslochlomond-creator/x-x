@@ -454,8 +454,8 @@ export default function OpenSourceDeclaration() {
                                     <p className="text-xs text-gray-300">10% fee from music streaming. Artists keep 90%. Sustainable.</p>
                                 </div>
                                 <div className="bg-cyan-900/40 border-2 border-cyan-500 rounded p-3">
-                                    <p className="text-cyan-400 font-bold mb-1">2. GRANT FUNDING</p>
-                                    <p className="text-xs text-gray-300">UK/Scotland environmental + mental health programs. Clean money.</p>
+                                    <p className="text-cyan-400 font-bold mb-1">2. GRANT APPLICATIONS</p>
+                                    <p className="text-xs text-gray-300">Applying to UK/Scotland environmental + mental health programs. Mission-aligned funding.</p>
                                 </div>
                                 <div className="bg-purple-900/40 border-2 border-purple-500 rounded p-3">
                                     <p className="text-purple-400 font-bold mb-1">3. MISSION SUPPORT (OPTIONAL)</p>
