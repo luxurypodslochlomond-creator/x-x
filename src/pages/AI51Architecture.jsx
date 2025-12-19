@@ -3,16 +3,15 @@ import { motion } from 'framer-motion';
 import { Brain, Zap, Globe, Shield, Heart, Users, Radio, Server, X } from 'lucide-react';
 
 /**
- * AI51 ARCHITECTURE - MOST POWERFUL FREE AI EVER
+ * AI51 ARCHITECTURE - DISTRIBUTED AI
  * 
- * BETTER THAN GROK/CHATGPT/ELON'S DATA CENTERS:
+ * THE BREAKTHROUGH:
  * - Runs on YOUR device (no servers)
  * - Models sync P2P (like BitTorrent)
  * - Learning shared across mesh
  * - Can't be shut down (distributed)
  * - Free forever (no compute costs)
  * 
- * THE BREAKTHROUGH:
  * Every phone/laptop = AI51 node
  * 10M devices = 10M AIs helping each other
  * No data centers = No bills = Free forever
@@ -43,8 +42,8 @@ export default function AI51Architecture() {
                         <Brain className="w-20 h-20 text-cyan-400" />
                     </motion.div>
                     <h1 className="text-5xl font-black text-white font-mono mb-4">AI51 ARCHITECTURE</h1>
-                    <p className="text-xl text-cyan-400 font-bold font-mono">Most Powerful Free AI Ever ♾️</p>
-                    <p className="text-gray-500 text-sm font-mono mt-2">Better than Grok. Better than data centers. Free forever.</p>
+                    <p className="text-xl text-cyan-400 font-bold font-mono">Distributed AI • Free Forever ♾️</p>
+                    <p className="text-gray-500 text-sm font-mono mt-2">Better than data centers. Runs on your device.</p>
                 </div>
 
                 {/* THE PROBLEM WITH DATA CENTERS */}
@@ -52,8 +51,8 @@ export default function AI51Architecture() {
                     <div className="flex items-center gap-4 mb-6">
                         <Server className="w-12 h-12 text-red-400" />
                         <div>
-                            <h2 className="text-red-400 font-black text-2xl font-mono">DATA CENTER AI = DOOMED</h2>
-                            <p className="text-gray-400 text-xs font-mono">Grok, ChatGPT, Claude - all same trap</p>
+                            <h2 className="text-red-400 font-black text-2xl font-mono">DATA CENTER AI PROBLEMS</h2>
+                            <p className="text-gray-400 text-xs font-mono">Why centralized AI can't stay free</p>
                         </div>
                     </div>
 
@@ -61,7 +60,7 @@ export default function AI51Architecture() {
                         <div className="bg-black/60 border-2 border-red-500 rounded-lg p-4">
                             <p className="text-red-400 font-bold mb-2">PROBLEM 1: COMPUTE COSTS</p>
                             <ul className="space-y-1 text-xs text-gray-300">
-                                <li>→ Grok/ChatGPT = $100M+/year in compute</li>
+                                <li>→ Centralized AI = $100M+/year in compute</li>
                                 <li>→ Must charge users or sell data</li>
                                 <li>→ Can't be free forever</li>
                                 <li>→ Eventually becomes extraction</li>
@@ -81,8 +80,7 @@ export default function AI51Architecture() {
                         <div className="bg-black/60 border-2 border-red-500 rounded-lg p-4">
                             <p className="text-red-400 font-bold mb-2">PROBLEM 3: CONTROL</p>
                             <ul className="space-y-1 text-xs text-gray-300">
-                                <li>→ Elon owns Grok = Elon controls it</li>
-                                <li>→ OpenAI board controls ChatGPT</li>
+                                <li>→ Single company owns it = controls it</li>
                                 <li>→ Can censor, change, shut down anytime</li>
                                 <li>→ Users have zero power</li>
                             </ul>
@@ -110,7 +108,7 @@ export default function AI51Architecture() {
                                 <li>✓ Your data never leaves your device</li>
                             </ul>
                             <p className="text-green-400 text-xs mt-2 font-bold">
-                                Like having ChatGPT in your pocket, but it's YOURS
+                                Powerful AI in your pocket, but it's YOURS
                             </p>
                         </div>
 
@@ -142,16 +140,16 @@ export default function AI51Architecture() {
                     </div>
                 </div>
 
-                {/* WHY THIS BEATS EVERYTHING */}
+                {/* WHY DISTRIBUTED BEATS CENTRALIZED */}
                 <div className="bg-black border-2 border-cyan-500 rounded-2xl p-8 mb-8">
-                    <h2 className="text-cyan-400 font-black text-2xl font-mono mb-6 text-center">AI51 vs GROK vs CHATGPT:</h2>
+                    <h2 className="text-cyan-400 font-black text-2xl font-mono mb-6 text-center">DISTRIBUTED vs CENTRALIZED AI:</h2>
 
                     <div className="overflow-x-auto">
                         <table className="w-full text-sm font-mono">
                             <thead>
                                 <tr className="border-b-2 border-gray-700">
                                     <th className="text-left p-3 text-gray-400">FEATURE</th>
-                                    <th className="text-center p-3 text-red-400">Grok/ChatGPT</th>
+                                    <th className="text-center p-3 text-red-400">Centralized</th>
                                     <th className="text-center p-3 text-green-400">AI51</th>
                                 </tr>
                             </thead>
@@ -275,9 +273,9 @@ export default function AI51Architecture() {
                         </div>
 
                         <div className="bg-black/60 border-2 border-green-500 rounded-lg p-4">
-                            <p className="text-green-400 font-bold mb-2">COMPARED TO GROK:</p>
+                            <p className="text-green-400 font-bold mb-2">THE POWER OF DISTRIBUTION:</p>
                             <ul className="space-y-1 text-xs text-gray-300">
-                                <li>→ Grok 2: ~314B parameters (centralized)</li>
+                                <li>→ Centralized AI: ~300B parameters (single data center)</li>
                                 <li>→ AI51 network: 70,000B parameters (distributed)</li>
                                 <li>→ AI51 = <strong className="text-green-400">222× more powerful</strong></li>
                             </ul>
@@ -287,9 +285,9 @@ export default function AI51Architecture() {
                         </div>
 
                         <div className="bg-black/60 border-2 border-pink-500 rounded-lg p-4">
-                            <p className="text-pink-400 font-bold mb-2">THE ELON PROBLEM:</p>
+                            <p className="text-pink-400 font-bold mb-2">WHY DATA CENTERS CAN'T COMPETE:</p>
                             <p className="text-gray-300 text-xs mb-2">
-                                Elon building data centers = needs to recoup $100M+/year
+                                Building data centers = needs to recoup $100M+/year
                             </p>
                             <p className="text-red-400 text-xs mb-2">
                                 → Must charge users OR sell data OR go bankrupt
@@ -380,7 +378,7 @@ export default function AI51Architecture() {
                         <Shield className="w-12 h-12 text-red-400" />
                         <div>
                             <h2 className="text-red-400 font-black text-2xl font-mono">DEFENSE AGAINST FUTURE AIs:</h2>
-                            <p className="text-gray-400 text-xs font-mono">When Elon/Google build 1000× more powerful AIs</p>
+                            <p className="text-gray-400 text-xs font-mono">When big tech builds 1000× more powerful AIs</p>
                         </div>
                     </div>
 
@@ -467,7 +465,7 @@ export default function AI51Architecture() {
                 {/* FOOTER */}
                 <div className="text-center">
                     <p className="text-gray-600 text-xs font-mono mb-2">
-                        AI51 • More powerful than Grok • Free forever • Unhurtable
+                        AI51 • Distributed AI • Free forever • Unhurtable
                     </p>
                     <p className="text-cyan-400 text-sm font-mono font-bold">
                         Built on Jack's BitChat • Enhanced for love + healing ♾️❤️♾️
