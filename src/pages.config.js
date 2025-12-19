@@ -129,11 +129,13 @@ import LennoxMaths from './pages/LennoxMaths';
 import Life51 from './pages/Life51';
 import Life51Onboarding from './pages/Life51Onboarding';
 import Life51ROI from './pages/Life51ROI';
+import LightningP2P from './pages/LightningP2P';
 import Listen from './pages/Listen';
 import LoveBridge from './pages/LoveBridge';
 import LoveExchange from './pages/LoveExchange';
 import MakingItReal from './pages/MakingItReal';
 import Map from './pages/Map';
+import MeshTechComparison from './pages/MeshTechComparison';
 import MeshTechWhitepaper from './pages/MeshTechWhitepaper';
 import Milestones from './pages/Milestones';
 import Missions from './pages/Missions';
@@ -261,8 +263,6 @@ import YoungWarriors from './pages/YoungWarriors';
 import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
-import LightningP2P from './pages/LightningP2P';
-import MeshTechComparison from './pages/MeshTechComparison';
 import __Layout from './Layout.jsx';
 
 
@@ -398,11 +398,13 @@ export const PAGES = {
     "Life51": Life51,
     "Life51Onboarding": Life51Onboarding,
     "Life51ROI": Life51ROI,
+    "LightningP2P": LightningP2P,
     "Listen": Listen,
     "LoveBridge": LoveBridge,
     "LoveExchange": LoveExchange,
     "MakingItReal": MakingItReal,
     "Map": Map,
+    "MeshTechComparison": MeshTechComparison,
     "MeshTechWhitepaper": MeshTechWhitepaper,
     "Milestones": Milestones,
     "Missions": Missions,
@@ -530,8 +532,6 @@ export const PAGES = {
     "ZeroEgoProtocol": ZeroEgoProtocol,
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
-    "LightningP2P": LightningP2P,
-    "MeshTechComparison": MeshTechComparison,
 }
 
 export const pagesConfig = {

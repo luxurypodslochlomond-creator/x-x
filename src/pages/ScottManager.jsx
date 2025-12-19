@@ -277,69 +277,86 @@ Keep it SHORT, practical, straight to the point. No bullshit. Real help.`,
 
 
 
-            {/* CLEAN PRIMARY ACTIONS */}
+            {/* SCOTT'S 2 CORE WORKFLOWS + SEARCH */}
             {!activeWorkflow && !advancedMode && (
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="space-y-3 mb-6"
+                    className="space-y-4 mb-6"
                 >
-                    {/* PASTE MESSAGES */}
-                    <motion.button
-                        whileTap={{ scale: 0.98 }}
-                        onClick={() => setActiveWorkflow('messages')}
-                        className="w-full py-6 bg-black border-2 border-purple-500/50 hover:border-purple-500 text-white font-black"
-                    >
-                        <p className="text-xl mb-1">📱</p>
-                        <p className="text-sm font-mono">PASTE MESSAGES</p>
-                        <p className="text-xs text-gray-400 font-mono mt-0.5">AI sorts it</p>
-                    </motion.button>
+                    {/* STATS GRID - Like screenshot */}
+                    <div className="grid grid-cols-2 gap-3">
+                        <div className="bg-black border-4 border-amber-500 p-6 text-center">
+                            <p className="text-5xl font-black text-amber-400 font-mono mb-2">{artists.length}</p>
+                            <p className="text-xs text-amber-400 font-mono font-bold tracking-wider">ROSTER</p>
+                        </div>
+                        <div className="bg-black border-4 border-cyan-500 p-6 text-center">
+                            <p className="text-5xl font-black text-cyan-400 font-mono mb-2">{upcomingEvents.length}</p>
+                            <p className="text-xs text-cyan-400 font-mono font-bold tracking-wider">EVENTS</p>
+                        </div>
+                        <div className="bg-black border-4 border-red-500 p-6 text-center">
+                            <p className="text-5xl font-black text-red-400 font-mono mb-2">{urgentTasks.length}</p>
+                            <p className="text-xs text-red-400 font-mono font-bold tracking-wider">URGENT</p>
+                        </div>
+                        <div className="bg-black border-4 border-green-500 p-6 text-center">
+                            <p className="text-5xl font-black text-green-400 font-mono mb-2">{unpaidInvoices.length}</p>
+                            <p className="text-xs text-green-400 font-mono font-bold tracking-wider">INVOICES</p>
+                        </div>
+                    </div>
 
-                    {/* GRID */}
-                    <div className="grid grid-cols-2 gap-2">
+                    {/* SEARCH ROSTER */}
+                    <div className="relative">
+                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
+                        <Input
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                            placeholder="Search roster..."
+                            className="bg-black border-4 border-gray-800 focus:border-cyan-500 pl-12 py-6 text-white text-lg font-mono"
+                        />
+                    </div>
+
+                    {/* 2 PRIMARY BUTTONS - Scott's core workflows */}
+                    <div className="grid grid-cols-2 gap-3">
                         <motion.button
                             whileTap={{ scale: 0.98 }}
                             onClick={() => setActiveWorkflow('gig')}
-                            className="py-5 bg-black border-2 border-amber-500/50 hover:border-amber-500 text-white font-black"
+                            className="bg-amber-500 hover:bg-amber-400 border-4 border-amber-400 text-black font-black py-8 text-xl font-mono"
+                            style={{ boxShadow: '8px 8px 0px rgba(245, 158, 11, 0.6)' }}
                         >
-                            <COOLASFUCKMusicNote size={20} animate={false} className="mx-auto mb-1" />
-                            <p className="text-xs font-mono">GIG</p>
+                            + GIG
                         </motion.button>
 
                         <motion.button
                             whileTap={{ scale: 0.98 }}
                             onClick={() => setActiveWorkflow('session')}
-                            className="py-5 bg-black border-2 border-cyan-500/50 hover:border-cyan-500 text-white font-black"
+                            className="bg-cyan-500 hover:bg-cyan-400 border-4 border-cyan-400 text-black font-black py-8 text-xl font-mono"
+                            style={{ boxShadow: '8px 8px 0px rgba(34, 211, 238, 0.6)' }}
                         >
-                            <Music className="w-5 h-5 mx-auto mb-1" strokeWidth={2} />
-                            <p className="text-xs font-mono">SESSION</p>
-                        </motion.button>
-
-                        <Link to={createPageUrl('ScottCalendar')} className="block">
-                            <motion.button
-                                whileTap={{ scale: 0.98 }}
-                                className="w-full py-5 bg-black border-2 border-green-500/50 hover:border-green-500 text-white font-black"
-                            >
-                                <Calendar className="w-5 h-5 mx-auto mb-1" strokeWidth={2} />
-                                <p className="text-xs font-mono">CALENDAR</p>
-                            </motion.button>
-                        </Link>
-
-                        <motion.button
-                            whileTap={{ scale: 0.98 }}
-                            onClick={() => setActiveWorkflow('comms')}
-                            className="py-5 bg-black border-2 border-pink-500/50 hover:border-pink-500 text-white font-black"
-                        >
-                            <Send className="w-5 h-5 mx-auto mb-1" strokeWidth={2} />
-                            <p className="text-xs font-mono">COMMS</p>
+                            + SESSION
                         </motion.button>
                     </div>
 
+                    {/* AI51 BUTTON */}
+                    <button 
+                        onClick={() => setShowAIChat(true)} 
+                        className="w-full bg-gradient-to-r from-cyan-500/20 to-pink-500/20 border-4 border-cyan-500 hover:border-pink-500 py-4 transition-all"
+                        style={{ boxShadow: '0 0 30px rgba(34, 211, 238, 0.4)' }}
+                    >
+                        <div className="flex items-center justify-center gap-3">
+                            <AI51Icon8Bit size={32} animate={true} />
+                            <div className="text-left">
+                                <p className="text-lg font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-pink-400 font-mono">AI51</p>
+                                <p className="text-xs text-cyan-400 font-mono">Ask anything</p>
+                            </div>
+                        </div>
+                    </button>
+
+                    {/* Advanced tools button */}
                     <button
                         onClick={() => setAdvancedMode(true)}
-                        className="w-full bg-black border border-gray-800 hover:border-cyan-500 text-gray-500 hover:text-cyan-400 font-bold py-2 text-xs font-mono transition-all"
+                        className="w-full bg-black border-2 border-gray-800 hover:border-amber-500 text-gray-600 hover:text-amber-400 font-bold py-3 text-xs font-mono transition-all"
                     >
-                        + Advanced
+                        + MORE TOOLS
                     </button>
                 </motion.div>
             )}
