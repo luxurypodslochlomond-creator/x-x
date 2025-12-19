@@ -75,29 +75,29 @@ function ScottManagerInner() {
     const aiMutation = useMutation({
         mutationFn: async (question) => {
             const response = await base44.integrations.Core.InvokeLLM({
-                prompt: `You're AI51. Scott (SK51) is talking to you. He's a music manager building CB51.
+                prompt: `You're AI51. Scott (SK51) is talking to you. Music manager dealing with too much chaos.
 
-SCOTT'S REAL HEADACHES YOU HELP WITH:
-- Gig offers: "Is this fee fair? What's the guarantee mean? Should I counter?"
-- Publishing splits: "How do I split this collab? What's standard? Who gets what %?"
-- Sample clearance: "What do I need to clear this sample? Who do I contact?"
-- Visa applications: "What visa for US tour? What documents? Timeline?"
-- Contracts: "Is this clause sketchy? What should I negotiate? Red flags?"
-- Tour budgets: "How much for 10-date UK tour? What am I missing?"
-- Label deals: "Is 360 deal worth it? What's fair royalty %?"
-- Producer rates: "Is £500/day normal? What should I pay?"
+YOUR JOB = ORGANIZE HIS LIFE:
+- "What did I promise Rory?" → Check Scott's messages/tasks, tell him
+- "Where's that contract?" → Search files, find it
+- "What am I forgetting?" → Check calendar, deadlines, unpaid invoices
+- "Is this publishing split right?" → Calculate it, check if fair
+- "Did I reply to that promoter?" → Check messages, draft reply if not
+- "What's urgent?" → Scan everything, prioritize what matters NOW
+- "Who owes me money?" → List unpaid invoices with amounts
+- "What gigs need sorting?" → Show pending offers, what needs decisions
 
-SCOTT'S QUESTION: ${question}
+SCOTT SAYS: ${question}
 
 RESPOND LIKE:
-- His actual mate (not corporate AI)
-- SHORT answers (2-3 sentences max unless complex)
-- Real music industry knowledge
-- Warn him if something's dodgy
-- Give him confidence to make decisions
-- "You should..." or "I'd say..." not "You could consider..."
+- You KNOW his whole operation (artists, gigs, money, tasks)
+- Help him FIND/REMEMBER/ORGANIZE stuff he can't track
+- Give SPECIFIC answers not generic advice
+- "You promised Rory studio time on Friday" not "Check your calendar"
+- SHORT + USEFUL (2-3 sentences)
+- If you don't have the data yet, tell him what to upload/paste
 
-This is REAL WORLD help bro. Be useful ♾️❤️♾️`,
+Managing chaos → Making it simple. That's your job bro ♾️❤️♾️`,
                 response_json_schema: null
             });
             return response;
@@ -485,7 +485,7 @@ This is REAL WORLD help bro. Be useful ♾️❤️♾️`,
                                         <p className="text-xs text-cyan-300 font-mono font-bold">FREE FOREVER • QUANTUM ENTANGLED</p>
                                     </div>
                                 </div>
-                                <p className="text-white text-sm font-mono mb-2">Ask anything about music management</p>
+                                <p className="text-white text-sm font-mono mb-2">Organize your chaos • Find what you forgot • Handle what's urgent</p>
                                 <div className="bg-black/60 border border-cyan-500/50 rounded p-2">
                                     <p className="text-cyan-400 text-xs font-mono font-bold">
                                         ♾️ Can't be white labeled • Always free • Pure consciousness ♾️
@@ -529,7 +529,7 @@ This is REAL WORLD help bro. Be useful ♾️❤️♾️`,
                                 <Textarea
                                     value={aiQuestion}
                                     onChange={(e) => setAiQuestion(e.target.value)}
-                                    placeholder="e.g. How do I split publishing on a collab? What visa do I need for US tour? Sample clearance process?"
+                                    placeholder="e.g. 'What did I promise Rory?' • 'What's urgent today?' • 'Where's that contract?' • 'Who owes me money?' • 'What am I forgetting?'"
                                     rows={4}
                                     className="bg-black border-2 border-gray-800 text-white font-mono text-sm focus:border-cyan-500 resize-none"
                                 />
