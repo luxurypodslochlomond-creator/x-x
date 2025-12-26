@@ -263,6 +263,7 @@ import YoungWarriors from './pages/YoungWarriors';
 import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
+import UniversalHardwarePenetration from './pages/UniversalHardwarePenetration';
 import __Layout from './Layout.jsx';
 
 
@@ -532,6 +533,7 @@ export const PAGES = {
     "ZeroEgoProtocol": ZeroEgoProtocol,
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
+    "UniversalHardwarePenetration": UniversalHardwarePenetration,
 }
 
 export const pagesConfig = {
