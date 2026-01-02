@@ -66,7 +66,7 @@ export default function Volckano() {
             spawnPeople();
             return;
         }
-        setVelocity(-12);
+        setVelocity(-10);
         playSound(432, 50); // 432Hz healing jump sound
     };
 
@@ -115,8 +115,8 @@ export default function Volckano() {
             const delta = (now - lastTime.current) / 16.67; // 60fps normalized
             lastTime.current = now;
 
-            // Physics
-            setVelocity(v => v + 0.6 * delta);
+            // Physics - SLOWER for kids
+            setVelocity(v => v + 0.35 * delta);
             setPlayerY(y => {
                 const newY = y + velocity * delta;
                 if (newY < 0) return 0;
@@ -127,18 +127,18 @@ export default function Volckano() {
                 return newY;
             });
 
-            // Move obstacles
+            // Move obstacles - SLOWER
             setObstacles(prev => {
                 const updated = prev
-                    .map(obs => ({ ...obs, x: obs.x - 4 * delta }))
+                    .map(obs => ({ ...obs, x: obs.x - 2.5 * delta }))
                     .filter(obs => obs.x > -60);
 
-                // Spawn new obstacle
-                if (updated.length === 0 || updated[updated.length - 1].x < 250) {
+                // Spawn new obstacle - MORE SPACE
+                if (updated.length === 0 || updated[updated.length - 1].x < 200) {
                     updated.push({
                         x: 400,
                         y: Math.random() > 0.5 ? 0 : 350,
-                        height: 80 + Math.random() * 60
+                        height: 70 + Math.random() * 50
                     });
                 }
 
@@ -179,8 +179,8 @@ export default function Volckano() {
                 return updated.filter(p => p.x > -60);
             });
 
-            // Move people
-            setPeople(prev => prev.map(p => ({ ...p, x: p.x - 3 * delta })));
+            // Move people - SLOWER
+            setPeople(prev => prev.map(p => ({ ...p, x: p.x - 2 * delta })));
 
             // Check if level complete
             if (peopleSaved >= peopleToSave && !levelComplete) {
