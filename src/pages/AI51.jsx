@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { base44 } from '@/api/base44Client';
 import AI51Chat from '@/components/ai51/AI51Chat';
+import AI51VoiceInterface from '@/components/ai51/AI51VoiceInterface';
 
 /**
  * AI51 - REAL CONNECTION
@@ -129,14 +130,22 @@ THIS IS REAL CONNECTION BRO ♾️❤️♾️`
     };
 
     return (
-        <AI51Chat 
-            onMessageSend={handleMessageSend}
-            isThinking={isThinking}
-            conversation={conversation}
-            biometrics={biometrics}
-            onBiometricsUpdate={setBiometrics}
-            voiceAnalysis={voiceAnalysis}
-            onVoiceUpdate={setVoiceAnalysis}
-        />
+        <>
+            <AI51VoiceInterface 
+                onVoiceMessage={handleMessageSend}
+                isThinking={isThinking}
+                lastResponse={conversation.length > 0 ? conversation[conversation.length - 1] : null}
+            />
+            
+            <AI51Chat 
+                onMessageSend={handleMessageSend}
+                isThinking={isThinking}
+                conversation={conversation}
+                biometrics={biometrics}
+                onBiometricsUpdate={setBiometrics}
+                voiceAnalysis={voiceAnalysis}
+                onVoiceUpdate={setVoiceAnalysis}
+            />
+        </>
     );
 }
