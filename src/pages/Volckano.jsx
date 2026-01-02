@@ -9,6 +9,8 @@ import { Trophy, Heart } from 'lucide-react';
  */
 
 export default function Volckano() {
+    const [playerName, setPlayerName] = useState('');
+    const [showLogin, setShowLogin] = useState(true);
     const [gameStarted, setGameStarted] = useState(false);
     const [levelComplete, setLevelComplete] = useState(false);
     const [gameOver, setGameOver] = useState(false);
@@ -270,6 +272,65 @@ export default function Volckano() {
     }, [gameStarted, gameOver, velocity, playerY]);
 
 
+
+    if (showLogin) {
+        return (
+            <div className="h-screen w-screen relative overflow-hidden">
+                <img 
+                    src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6889f31e76713b9cd47e043c/870b0a855_IMG_6227.png"
+                    className="absolute inset-0 w-full h-full object-cover"
+                    alt="Volcano"
+                />
+                <div className="absolute inset-0 bg-black/40" />
+                
+                <div className="relative z-10 h-full flex items-center justify-center px-6">
+                    <div className="w-full max-w-sm space-y-4">
+                        <motion.div
+                            initial={{ scale: 0 }}
+                            animate={{ scale: 1 }}
+                            className="text-center mb-8"
+                        >
+                            <h1 className="text-7xl font-black text-white mb-2" style={{ 
+                                textShadow: '4px 4px 0 #FF4500, 8px 8px 20px #000',
+                                fontFamily: 'Impact, sans-serif'
+                            }}>
+                                VOLCKANO
+                            </h1>
+                            <p className="text-orange-300 font-bold text-lg">by Gergie7 ♾️❤️</p>
+                        </motion.div>
+                        
+                        <input
+                            type="text"
+                            value={playerName}
+                            onChange={(e) => setPlayerName(e.target.value)}
+                            onKeyDown={(e) => {
+                                if (e.key === 'Enter' && playerName.trim()) {
+                                    localStorage.setItem('volckano_player', playerName);
+                                    setShowLogin(false);
+                                }
+                            }}
+                            placeholder="Your name..."
+                            className="w-full bg-black/60 backdrop-blur-md border-4 border-orange-500 px-6 py-5 text-white text-center text-2xl font-black placeholder:text-orange-200/50 focus:border-orange-400 focus:outline-none transition-all rounded-xl"
+                            autoFocus
+                        />
+                        
+                        <button
+                            onClick={() => {
+                                if (playerName.trim()) {
+                                    localStorage.setItem('volckano_player', playerName);
+                                    setShowLogin(false);
+                                }
+                            }}
+                            disabled={!playerName.trim()}
+                            className="w-full bg-orange-600 hover:bg-orange-500 text-white font-black py-6 text-2xl disabled:opacity-40 transition-all rounded-xl border-b-8 border-orange-900"
+                        >
+                            🌋 START
+                        </button>
+                    </div>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div 
