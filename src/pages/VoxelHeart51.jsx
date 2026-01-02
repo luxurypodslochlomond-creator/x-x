@@ -3,11 +3,12 @@ import * as THREE from 'three';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Play, Pause, RotateCcw, Save, Heart, Info, Volume2, VolumeX, Users, BookOpen, Zap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import VolckanoP2P from '@/components/volckano/VolckanoP2P';
 
 /**
- * VOXELHEART51 - BETTER THAN MINECRAFT FOR KIDS WORLDWIDE
+ * VOLCKANO - THE GAME GEORGIE7 DREAMED OF
  * 
- * Made for Georgie7 + ALL her friends ❤️
+ * Made for Georgie7 + ALL her friends worldwide ❤️
  * 
  * WHAT MAKES IT BETTER:
  * - 100% FREE FOREVER (no ads, no purchases, zero extraction)
@@ -41,6 +42,12 @@ const BLOCK_TYPES = {
         learn: 'Geology: Rocks form from cooled lava',
         texture: 'stone'
     },
+    OBSIDIAN: {
+        color: 0x1a1a2e,
+        name: 'Obsidian',
+        learn: 'Geology: Volcanic glass formed when lava cools FAST!',
+        texture: 'obsidian'
+    },
     WOOD: { 
         color: 0x6d4c41, 
         name: 'Wood',
@@ -53,6 +60,26 @@ const BLOCK_TYPES = {
         glow: true,
         learn: 'Geology: Lava is 700-1200°C molten rock!',
         texture: 'lava'
+    },
+    MAGMA: {
+        color: 0xff6b00,
+        name: 'Magma',
+        glow: true,
+        learn: 'Geology: Underground molten rock = magma, above ground = lava!',
+        texture: 'magma'
+    },
+    ASH: {
+        color: 0x4a4a4a,
+        name: 'Ash',
+        learn: 'Geology: Volcanic ash can travel thousands of miles!',
+        texture: 'ash'
+    },
+    SMOKE: {
+        color: 0x808080,
+        name: 'Smoke',
+        transparent: true,
+        learn: 'Physics: Hot air rises - that\'s why smoke goes up!',
+        texture: 'smoke'
     },
     WATER: { 
         color: 0x2196f3, 
@@ -481,16 +508,16 @@ export default function VoxelHeart51() {
             );
             return { x, y, z, type };
         });
-        localStorage.setItem('voxelheart51_world', JSON.stringify(worldData));
-        localStorage.setItem('voxelheart51_player', playerName);
-        localStorage.setItem('voxelheart51_blocks_placed', blocksPlaced.toString());
-        alert(`${playerName}'s masterpiece saved! ❤️⚡`);
+        localStorage.setItem('volckano_world', JSON.stringify(worldData));
+        localStorage.setItem('volckano_player', playerName);
+        localStorage.setItem('volckano_blocks_placed', blocksPlaced.toString());
+        alert(`${playerName}'s VOLCKANO saved! 🌋❤️⚡`);
     };
 
     const loadWorld = () => {
-        const savedWorld = localStorage.getItem('voxelheart51_world');
-        const savedPlayer = localStorage.getItem('voxelheart51_player');
-        const savedBlocks = localStorage.getItem('voxelheart51_blocks_placed');
+        const savedWorld = localStorage.getItem('volckano_world');
+        const savedPlayer = localStorage.getItem('volckano_player');
+        const savedBlocks = localStorage.getItem('volckano_blocks_placed');
         
         if (savedPlayer) {
             setPlayerName(savedPlayer);
@@ -512,7 +539,7 @@ export default function VoxelHeart51() {
     };
 
     const clearWorld = () => {
-        if (!confirm('Start fresh? This will clear your creation.')) return;
+        if (!confirm('Start fresh? This will clear your VOLCKANO.')) return;
         
         blocksRef.current.forEach(mesh => {
             if (mesh.userData.light) {
@@ -521,7 +548,7 @@ export default function VoxelHeart51() {
             sceneRef.current.remove(mesh);
         });
         blocksRef.current.clear();
-        localStorage.removeItem('voxelheart51_world');
+        localStorage.removeItem('volckano_world');
         setBlocksPlaced(0);
         
         // Rebuild starter ground
@@ -648,8 +675,11 @@ export default function VoxelHeart51() {
                     </div>
 
                     <h1 className="text-6xl font-black text-white text-center mb-2" style={{ textShadow: '6px 6px 0 #000, -2px -2px 0 #fbbf24' }}>
-                        VOXELHEART51
+                        VOLCKANO
                     </h1>
+                    <p className="text-orange-300 text-center text-sm font-black mb-3" style={{ textShadow: '2px 2px 0 #000' }}>
+                        (Georgie7's spelling ❤️)
+                    </p>
                     <div className="bg-black/60 border-4 border-yellow-400 p-4 mb-4">
                         <p className="text-yellow-300 text-center text-lg font-black mb-2" style={{ textShadow: '2px 2px 0 #000' }}>
                             ⚡ BUILD ANYTHING YOU IMAGINE ⚡
@@ -785,6 +815,19 @@ export default function VoxelHeart51() {
                                 <Info className="w-4 h-4 mr-2" />
                                 Help
                             </Button>
+                            <VolckanoP2P 
+                                playerName={playerName}
+                                onBlockPlaced={(x, y, z, type) => addBlock(x, y, z, type)}
+                                onBlockRemoved={(x, y, z) => {
+                                    const key = `${x},${y},${z}`;
+                                    const block = blocksRef.current.get(key);
+                                    if (block) {
+                                        if (block.userData.light) sceneRef.current.remove(block.userData.light);
+                                        sceneRef.current.remove(block);
+                                        blocksRef.current.delete(key);
+                                    }
+                                }}
+                            />
                         </div>
                     </div>
                 </div>
@@ -813,7 +856,7 @@ export default function VoxelHeart51() {
                         </ul>
                         <div className="mt-3 bg-gradient-to-r from-pink-500/20 to-purple-500/20 border border-pink-500 rounded p-2">
                             <p className="text-pink-400 text-xs font-bold">
-                                💡 TIP: Try building a VALCKANO like Georgie7! Stack LAVA blocks high!
+                                🌋 TIP: Stack LAVA + MAGMA high, add OBSIDIAN edges, SMOKE on top = EPIC VOLCKANO!
                             </p>
                         </div>
                     </motion.div>
