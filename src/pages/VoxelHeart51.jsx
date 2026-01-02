@@ -539,28 +539,64 @@ export default function VoxelHeart51() {
 
     if (showNameInput) {
         return (
-            <div className="min-h-screen bg-gradient-to-br from-blue-600 via-cyan-500 to-green-500 flex items-center justify-center p-6 relative overflow-hidden">
-                {/* Animated pixel clouds */}
-                <div className="absolute inset-0 opacity-20">
+            <div className="min-h-screen relative flex items-center justify-center p-6 overflow-hidden">
+                {/* VALCKANO-style dramatic background */}
+                <div className="absolute inset-0 bg-gradient-to-b from-orange-600 via-red-600 to-purple-900" />
+                
+                {/* Animated pixel clouds (darker, more dramatic) */}
+                <div className="absolute inset-0 opacity-30">
                     <motion.div 
                         animate={{ x: [0, 100, 0], y: [0, -20, 0] }}
                         transition={{ duration: 20, repeat: Infinity }}
-                        className="absolute top-20 left-10 w-32 h-20 bg-white" 
+                        className="absolute top-20 left-10 w-32 h-20 bg-gray-800" 
                         style={{ clipPath: 'polygon(0 50%, 25% 50%, 25% 25%, 50% 25%, 50% 0, 75% 0, 75% 25%, 100% 25%, 100% 75%, 75% 75%, 75% 100%, 25% 100%, 25% 75%, 0 75%)' }} 
                     />
                     <motion.div 
                         animate={{ x: [0, -80, 0], y: [0, 30, 0] }}
                         transition={{ duration: 25, repeat: Infinity }}
-                        className="absolute top-40 right-20 w-40 h-24 bg-white" 
+                        className="absolute top-40 right-20 w-40 h-24 bg-gray-700" 
                         style={{ clipPath: 'polygon(0 50%, 25% 50%, 25% 25%, 50% 25%, 50% 0, 75% 0, 75% 25%, 100% 25%, 100% 75%, 75% 75%, 75% 100%, 25% 100%, 25% 75%, 0 75%)' }} 
                     />
+                    <motion.div 
+                        animate={{ x: [0, 60, 0], y: [0, -40, 0] }}
+                        transition={{ duration: 30, repeat: Infinity }}
+                        className="absolute bottom-40 left-1/4 w-36 h-22 bg-gray-900" 
+                        style={{ clipPath: 'polygon(0 50%, 25% 50%, 25% 25%, 50% 25%, 50% 0, 75% 0, 75% 25%, 100% 25%, 100% 75%, 75% 75%, 75% 100%, 25% 100%, 25% 75%, 0 75%)' }} 
+                    />
+                </div>
+
+                {/* Glowing particles (like lava embers) */}
+                <div className="absolute inset-0 pointer-events-none">
+                    {[...Array(20)].map((_, i) => (
+                        <motion.div
+                            key={i}
+                            className="absolute w-1 h-1 bg-orange-400 rounded-full"
+                            style={{
+                                left: `${Math.random() * 100}%`,
+                                top: `${Math.random() * 100}%`,
+                            }}
+                            animate={{
+                                y: [-20, -100, -20],
+                                opacity: [0, 1, 0],
+                                scale: [0, 1.5, 0]
+                            }}
+                            transition={{
+                                duration: 4 + Math.random() * 3,
+                                repeat: Infinity,
+                                delay: Math.random() * 5
+                            }}
+                        />
+                    ))}
                 </div>
 
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="bg-gradient-to-b from-orange-500 to-red-600 border-8 border-yellow-400 p-8 max-w-lg relative z-10"
-                    style={{ boxShadow: '0 0 80px rgba(251, 191, 36, 0.9), inset 0 0 60px rgba(0,0,0,0.3)' }}
+                    className="bg-gradient-to-b from-gray-900 via-gray-800 to-black border-8 border-orange-500 p-8 max-w-lg relative z-10"
+                    style={{ 
+                        boxShadow: '0 0 100px rgba(249, 115, 22, 1), inset 0 0 80px rgba(0,0,0,0.8)',
+                        backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.3) 2px, rgba(0,0,0,0.3) 4px)'
+                    }}
                 >
                     {/* Animated heart with lightning */}
                     <div className="relative mb-6">
@@ -616,7 +652,7 @@ export default function VoxelHeart51() {
                     </h1>
                     <div className="bg-black/60 border-4 border-yellow-400 p-4 mb-4">
                         <p className="text-yellow-300 text-center text-lg font-black mb-2" style={{ textShadow: '2px 2px 0 #000' }}>
-                            ⚡ BETTER THAN MINECRAFT ⚡
+                            ⚡ BUILD ANYTHING YOU IMAGINE ⚡
                         </p>
                         <div className="text-white text-sm space-y-1 font-bold" style={{ textShadow: '1px 1px 0 #000' }}>
                             <p>✓ 100% FREE FOREVER</p>
@@ -790,7 +826,7 @@ export default function VoxelHeart51() {
                     ❤️ FREE FOREVER • 100% OFFLINE • ZERO EXTRACTION ❤️
                 </p>
                 <p className="text-cyan-400 text-[10px] font-bold text-center mt-1">
-                    Better than Minecraft • Made for kids worldwide ⚡
+                    Inspired by what kids love • Made for kids worldwide ⚡
                 </p>
             </div>
         </div>
