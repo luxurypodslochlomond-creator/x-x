@@ -1,150 +1,126 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Heart, Save, Play, Pause } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Trophy, Heart } from 'lucide-react';
 
 /**
  * VOLCKANO - Gergie7's Game
- * Simple 8-bit game: Build shelters, protect people from eruptions
- * Made with ♾️❤️ by BRO51 for GERGIE7
+ * TAP to jump over lava rocks • Save the people • Beat your high score
+ * Simple, smooth, addictive - like Flappy Bird but COOLASFUCK
+ * Made with ♾️❤️ for GERGIE7
  */
-
-const BLOCKS = [
-    { type: 'WALL', emoji: '🧱', color: '#8B4513' },
-    { type: 'ROOF', emoji: '🏠', color: '#DC143C' },
-    { type: 'GLASS', emoji: '🪟', color: '#87CEEB' },
-    { type: 'DOOR', emoji: '🚪', color: '#8B4513' },
-];
 
 export default function Volckano() {
     const [playerName, setPlayerName] = useState('');
     const [showLogin, setShowLogin] = useState(true);
-    const [grid, setGrid] = useState(Array(15).fill(null).map(() => Array(20).fill(null)));
-    const [selectedBlock, setSelectedBlock] = useState('WALL');
-    const [people, setPeople] = useState([{ x: 10, y: 13, safe: true }]);
-    const [erupting, setErupting] = useState(false);
-    const [lava, setLava] = useState([]);
+    const [gameStarted, setGameStarted] = useState(false);
+    const [gameOver, setGameOver] = useState(false);
     const [score, setScore] = useState(0);
-    const canvasRef = useRef(null);
+    const [highScore, setHighScore] = useState(0);
+    const [playerY, setPlayerY] = useState(200);
+    const [velocity, setVelocity] = useState(0);
+    const [obstacles, setObstacles] = useState([]);
+    const gameLoop = useRef(null);
+    const lastTime = useRef(Date.now());
 
     useEffect(() => {
         const saved = localStorage.getItem('volckano_player');
+        const savedHS = localStorage.getItem('volckano_highscore');
         if (saved) {
             setPlayerName(saved);
             setShowLogin(false);
         }
+        if (savedHS) setHighScore(parseInt(savedHS));
     }, []);
 
-    useEffect(() => {
-        if (!canvasRef.current) return;
-        const canvas = canvasRef.current;
-        const ctx = canvas.getContext('2d');
-        const cellSize = Math.min(canvas.width / 20, canvas.height / 15);
-
-        // Clear
-        ctx.fillStyle = '#87CEEB';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-        // Draw ground
-        ctx.fillStyle = '#228B22';
-        ctx.fillRect(0, 14 * cellSize, canvas.width, cellSize);
-
-        // Draw grid
-        grid.forEach((row, y) => {
-            row.forEach((cell, x) => {
-                if (cell) {
-                    const block = BLOCKS.find(b => b.type === cell);
-                    ctx.fillStyle = block.color;
-                    ctx.fillRect(x * cellSize, y * cellSize, cellSize, cellSize);
-                    
-                    // Black outline
-                    ctx.strokeStyle = '#000';
-                    ctx.lineWidth = 2;
-                    ctx.strokeRect(x * cellSize, y * cellSize, cellSize, cellSize);
-                    
-                    // Emoji
-                    ctx.font = `${cellSize * 0.6}px Arial`;
-                    ctx.textAlign = 'center';
-                    ctx.textBaseline = 'middle';
-                    ctx.fillText(block.emoji, x * cellSize + cellSize/2, y * cellSize + cellSize/2);
-                }
-            });
-        });
-
-        // Draw people
-        people.forEach(person => {
-            ctx.font = `${cellSize * 0.8}px Arial`;
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'middle';
-            ctx.fillText(person.safe ? '😊' : '😰', person.x * cellSize + cellSize/2, person.y * cellSize + cellSize/2);
-        });
-
-        // Draw lava
-        lava.forEach(drop => {
-            ctx.fillStyle = '#FF4500';
-            ctx.fillRect(drop.x * cellSize, drop.y * cellSize, cellSize, cellSize);
-            ctx.strokeStyle = '#FF0000';
-            ctx.lineWidth = 2;
-            ctx.strokeRect(drop.x * cellSize, drop.y * cellSize, cellSize, cellSize);
-        });
-    }, [grid, people, lava]);
-
-    const handleTap = (e) => {
-        if (!canvasRef.current || erupting) return;
-        
-        const canvas = canvasRef.current;
-        const rect = canvas.getBoundingClientRect();
-        const cellSize = Math.min(canvas.width / 20, canvas.height / 15);
-        
-        const x = Math.floor((e.clientX - rect.left) / cellSize);
-        const y = Math.floor((e.clientY - rect.top) / cellSize);
-        
-        if (x >= 0 && x < 20 && y >= 0 && y < 14) {
-            const newGrid = [...grid];
-            newGrid[y][x] = newGrid[y][x] ? null : selectedBlock;
-            setGrid(newGrid);
+    const jump = () => {
+        if (gameOver) {
+            resetGame();
+            return;
         }
+        if (!gameStarted) {
+            setGameStarted(true);
+            return;
+        }
+        setVelocity(-12);
     };
 
-    const startEruption = () => {
-        setErupting(true);
-        setLava([]);
-        
-        const interval = setInterval(() => {
-            setLava(prev => {
-                const newLava = prev.map(drop => ({ ...drop, y: drop.y + 1 }))
-                    .filter(drop => drop.y < 15);
-                
-                if (Math.random() > 0.7) {
-                    newLava.push({ x: Math.floor(Math.random() * 20), y: 0 });
+    const resetGame = () => {
+        setGameOver(false);
+        setGameStarted(false);
+        setScore(0);
+        setPlayerY(200);
+        setVelocity(0);
+        setObstacles([]);
+    };
+
+    useEffect(() => {
+        if (!gameStarted || gameOver) return;
+
+        gameLoop.current = setInterval(() => {
+            const now = Date.now();
+            const delta = (now - lastTime.current) / 16.67; // 60fps normalized
+            lastTime.current = now;
+
+            // Physics
+            setVelocity(v => v + 0.6 * delta);
+            setPlayerY(y => {
+                const newY = y + velocity * delta;
+                if (newY < 0) return 0;
+                if (newY > 450) {
+                    setGameOver(true);
+                    return 450;
                 }
-                
-                return newLava;
+                return newY;
             });
-        }, 300);
 
-        setTimeout(() => {
-            clearInterval(interval);
-            setErupting(false);
-            checkSafety();
-        }, 5000);
-    };
+            // Move obstacles
+            setObstacles(prev => {
+                const updated = prev
+                    .map(obs => ({ ...obs, x: obs.x - 4 * delta }))
+                    .filter(obs => obs.x > -60);
 
-    const checkSafety = () => {
-        const newPeople = people.map(person => {
-            const hasRoof = grid[person.y - 1]?.[person.x];
-            const hasWalls = grid[person.y]?.[person.x - 1] && grid[person.y]?.[person.x + 1];
-            return { ...person, safe: !!(hasRoof && hasWalls) };
-        });
-        
-        const savedCount = newPeople.filter(p => p.safe).length;
-        setScore(score + savedCount * 10);
-        setPeople(newPeople);
-    };
+                // Spawn new obstacle
+                if (updated.length === 0 || updated[updated.length - 1].x < 250) {
+                    updated.push({
+                        x: 400,
+                        y: Math.random() > 0.5 ? 0 : 350,
+                        height: 80 + Math.random() * 60
+                    });
+                }
 
-    const saveWorld = () => {
-        localStorage.setItem('volckano_world', JSON.stringify({ grid, people, score }));
-        alert('🌋 Saved!');
-    };
+                return updated;
+            });
+
+            // Collision detection
+            setObstacles(prev => {
+                const hit = prev.some(obs => {
+                    if (obs.x > 50 && obs.x < 110) {
+                        if (obs.y === 0) {
+                            return playerY < obs.height;
+                        } else {
+                            return playerY + 50 > obs.y;
+                        }
+                    }
+                    return false;
+                });
+                
+                if (hit) setGameOver(true);
+                return prev;
+            });
+
+            // Score
+            setScore(s => s + 1);
+        }, 16.67);
+
+        return () => clearInterval(gameLoop.current);
+    }, [gameStarted, gameOver, velocity, playerY]);
+
+    useEffect(() => {
+        if (gameOver && score > highScore) {
+            setHighScore(score);
+            localStorage.setItem('volckano_highscore', score.toString());
+        }
+    }, [gameOver, score, highScore]);
 
     if (showLogin) {
         return (
@@ -163,7 +139,7 @@ export default function Volckano() {
                             animate={{ scale: 1 }}
                             className="text-center mb-8"
                         >
-                            <h1 className="text-6xl font-black text-white mb-2" style={{ 
+                            <h1 className="text-7xl font-black text-white mb-2" style={{ 
                                 textShadow: '4px 4px 0 #FF4500, 8px 8px 20px #000',
                                 fontFamily: 'Impact, sans-serif'
                             }}>
@@ -206,63 +182,105 @@ export default function Volckano() {
     }
 
     return (
-        <div className="h-screen w-screen bg-gradient-to-b from-orange-900 via-red-900 to-black flex flex-col p-2 sm:p-4">
+        <div 
+            className="h-screen w-screen bg-gradient-to-b from-orange-900 via-red-900 to-black overflow-hidden select-none"
+            onClick={jump}
+            onTouchStart={(e) => { e.preventDefault(); jump(); }}
+        >
+            {/* Sky/background */}
+            <div className="absolute inset-0 bg-gradient-to-b from-orange-400 via-red-500 to-orange-900" />
             
-            {/* Header */}
-            <div className="bg-black/80 border-4 border-orange-500 rounded-xl p-3 mb-2">
-                <div className="flex items-center justify-between">
-                    <div>
-                        <h1 className="text-2xl font-black text-orange-400">VOLCKANO</h1>
-                        <p className="text-white text-sm">Score: {score} 🌋</p>
-                    </div>
-                    <button
-                        onClick={saveWorld}
-                        className="bg-green-600 hover:bg-green-700 text-white font-black px-6 py-3 rounded-lg border-2 border-green-800"
-                    >
-                        <Save className="w-5 h-5" />
-                    </button>
-                </div>
-            </div>
-
-            {/* Canvas */}
-            <div className="flex-1 bg-black/60 border-4 border-orange-500 rounded-xl overflow-hidden">
-                <canvas
-                    ref={canvasRef}
-                    width={800}
-                    height={600}
-                    className="w-full h-full cursor-pointer"
-                    onClick={handleTap}
-                />
-            </div>
-
-            {/* Controls */}
-            <div className="bg-black/80 border-4 border-orange-500 rounded-xl p-3 mt-2">
-                <div className="grid grid-cols-5 gap-2 mb-2">
-                    {BLOCKS.map(block => (
-                        <button
-                            key={block.type}
-                            onClick={() => setSelectedBlock(block.type)}
-                            className={`aspect-square rounded-lg border-4 text-4xl flex items-center justify-center transition-all ${
-                                selectedBlock === block.type 
-                                    ? 'border-white bg-orange-600 scale-110' 
-                                    : 'border-gray-600 bg-gray-800 hover:border-gray-400'
-                            }`}
-                        >
-                            {block.emoji}
-                        </button>
-                    ))}
+            {/* Game container */}
+            <div className="relative h-full max-w-md mx-auto flex items-center justify-center">
+                <div className="relative w-full h-[500px] bg-black/20 border-4 border-orange-500 rounded-xl overflow-hidden">
                     
-                    <button
-                        onClick={startEruption}
-                        disabled={erupting}
-                        className="aspect-square rounded-lg border-4 border-red-600 bg-red-700 hover:bg-red-600 disabled:opacity-50 text-4xl flex items-center justify-center"
+                    {/* Player */}
+                    <motion.div
+                        className="absolute left-[80px] w-[50px] h-[50px] flex items-center justify-center text-4xl"
+                        style={{ top: `${playerY}px` }}
+                        animate={{ rotate: velocity > 0 ? 20 : -20 }}
+                        transition={{ duration: 0.1 }}
                     >
-                        🌋
-                    </button>
+                        😊
+                    </motion.div>
+
+                    {/* Obstacles (lava rocks) */}
+                    {obstacles.map((obs, i) => (
+                        <div
+                            key={i}
+                            className="absolute w-[60px] bg-gradient-to-b from-red-600 to-orange-800 border-4 border-red-900 rounded"
+                            style={{
+                                left: `${obs.x}px`,
+                                top: obs.y === 0 ? '0px' : `${obs.y}px`,
+                                height: `${obs.height}px`
+                            }}
+                        >
+                            <div className="text-center text-2xl mt-2">
+                                {obs.y === 0 ? '🌋' : '🔥'}
+                            </div>
+                        </div>
+                    ))}
+
+                    {/* Ground */}
+                    <div className="absolute bottom-0 left-0 right-0 h-[50px] bg-gradient-to-b from-orange-700 to-red-900 border-t-4 border-orange-600" />
+
+                    {/* Score */}
+                    <div className="absolute top-4 left-4 bg-black/60 border-2 border-orange-500 rounded-lg px-4 py-2">
+                        <p className="text-white font-black text-2xl">{Math.floor(score / 10)}</p>
+                    </div>
+
+                    {/* High score */}
+                    <div className="absolute top-4 right-4 bg-black/60 border-2 border-yellow-500 rounded-lg px-4 py-2">
+                        <div className="flex items-center gap-1">
+                            <Trophy className="w-4 h-4 text-yellow-400" />
+                            <p className="text-yellow-400 font-black text-lg">{Math.floor(highScore / 10)}</p>
+                        </div>
+                    </div>
+
+                    {/* Game Over */}
+                    {gameOver && (
+                        <motion.div
+                            initial={{ scale: 0 }}
+                            animate={{ scale: 1 }}
+                            className="absolute inset-0 bg-black/80 flex items-center justify-center"
+                        >
+                            <div className="text-center space-y-4">
+                                <p className="text-6xl">💥</p>
+                                <h2 className="text-4xl font-black text-red-400">BOOM!</h2>
+                                <p className="text-white text-xl font-bold">Score: {Math.floor(score / 10)}</p>
+                                {score > highScore && (
+                                    <p className="text-yellow-400 text-lg font-bold">🏆 NEW HIGH SCORE! 🏆</p>
+                                )}
+                                <button
+                                    onClick={resetGame}
+                                    className="bg-orange-600 hover:bg-orange-500 text-white font-black px-8 py-4 rounded-xl text-xl border-b-4 border-orange-900 mt-4"
+                                >
+                                    🌋 TRY AGAIN
+                                </button>
+                            </div>
+                        </motion.div>
+                    )}
+
+                    {/* Start prompt */}
+                    {!gameStarted && !gameOver && (
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            className="absolute inset-0 flex items-center justify-center pointer-events-none"
+                        >
+                            <div className="bg-black/80 border-4 border-orange-500 rounded-xl p-6 text-center">
+                                <p className="text-white text-2xl font-black mb-2">TAP TO START</p>
+                                <p className="text-orange-300 text-sm">Keep tapping to dodge lava!</p>
+                            </div>
+                        </motion.div>
+                    )}
                 </div>
-                
-                <p className="text-white text-center text-xs font-bold">
-                    TAP blocks to build shelters • Tap 🌋 to start eruption!
+            </div>
+
+            {/* Footer hint */}
+            <div className="absolute bottom-4 left-0 right-0 text-center">
+                <p className="text-white text-sm font-bold">
+                    Made with ♾️❤️ by BRO51 for GERGIE7
                 </p>
             </div>
         </div>
