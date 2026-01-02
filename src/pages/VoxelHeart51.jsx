@@ -47,10 +47,24 @@ export default function VoxelHeart51() {
     useEffect(() => {
         if (!mountRef.current || showNameInput) return;
 
-        // Scene setup
+        // Scene setup with realistic sky
         const scene = new THREE.Scene();
-        scene.background = new THREE.Color(0x87ceeb);
-        scene.fog = new THREE.Fog(0x87ceeb, 50, 200);
+        
+        // Gradient sky background (sunrise/sunset vibes)
+        const canvas = document.createElement('canvas');
+        canvas.width = 512;
+        canvas.height = 512;
+        const ctx = canvas.getContext('2d');
+        const gradient = ctx.createLinearGradient(0, 0, 0, 512);
+        gradient.addColorStop(0, '#ff6b35'); // Orange top
+        gradient.addColorStop(0.5, '#f7b733'); // Yellow middle
+        gradient.addColorStop(1, '#4facfe'); // Blue bottom
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, 512, 512);
+        
+        const skyTexture = new THREE.CanvasTexture(canvas);
+        scene.background = skyTexture;
+        scene.fog = new THREE.Fog(0xf7b733, 30, 150);
         sceneRef.current = scene;
 
         // Camera
@@ -64,25 +78,46 @@ export default function VoxelHeart51() {
         camera.lookAt(0, 0, 0);
         cameraRef.current = camera;
 
-        // Renderer
-        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        // Renderer with realistic settings
+        const renderer = new THREE.WebGLRenderer({ 
+            antialias: true,
+            powerPreference: "high-performance"
+        });
         renderer.setSize(mountRef.current.clientWidth, mountRef.current.clientHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         renderer.shadowMap.enabled = true;
+        renderer.shadowMap.type = THREE.PCFSoftShadowMap; // Soft shadows
+        renderer.toneMapping = THREE.ACESFilmicToneMapping;
+        renderer.toneMappingExposure = 1.2;
         mountRef.current.appendChild(renderer.domElement);
         rendererRef.current = renderer;
 
-        // Lighting
-        const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+        // Realistic lighting
+        const ambientLight = new THREE.AmbientLight(0xffa366, 0.4); // Warm ambient
         scene.add(ambientLight);
 
-        const sunLight = new THREE.DirectionalLight(0xffffff, 0.8);
-        sunLight.position.set(50, 50, 50);
+        // Main sun (dramatic angle)
+        const sunLight = new THREE.DirectionalLight(0xffcc66, 1.2);
+        sunLight.position.set(100, 80, 50);
         sunLight.castShadow = true;
-        sunLight.shadow.camera.left = -50;
-        sunLight.shadow.camera.right = 50;
-        sunLight.shadow.camera.top = 50;
-        sunLight.shadow.camera.bottom = -50;
+        sunLight.shadow.mapSize.width = 2048;
+        sunLight.shadow.mapSize.height = 2048;
+        sunLight.shadow.camera.left = -100;
+        sunLight.shadow.camera.right = 100;
+        sunLight.shadow.camera.top = 100;
+        sunLight.shadow.camera.bottom = -100;
+        sunLight.shadow.bias = -0.0001;
         scene.add(sunLight);
+
+        // Fill light (softer, opposite side)
+        const fillLight = new THREE.DirectionalLight(0x66ccff, 0.3);
+        fillLight.position.set(-50, 30, -50);
+        scene.add(fillLight);
+
+        // Rim light (dramatic edge lighting)
+        const rimLight = new THREE.DirectionalLight(0xff6b35, 0.5);
+        rimLight.position.set(0, 50, -100);
+        scene.add(rimLight);
 
         // Ground plane (initial blocks)
         const groundSize = 20;
@@ -177,17 +212,22 @@ export default function VoxelHeart51() {
         };
         renderer.domElement.addEventListener('wheel', onWheel);
 
-        // Animation loop
+        // Animation loop with dynamic lighting
         let animationId;
         const animate = () => {
             if (!isPlaying) return;
             animationId = requestAnimationFrame(animate);
             
-            // Rotate camera slowly
-            const time = Date.now() * 0.0001;
-            camera.position.x = Math.cos(time) * 30;
-            camera.position.z = Math.sin(time) * 30;
-            camera.lookAt(0, 5, 0);
+            // Rotate camera slowly and smoothly
+            const time = Date.now() * 0.00005;
+            camera.position.x = Math.cos(time) * 35;
+            camera.position.z = Math.sin(time) * 35;
+            camera.position.y = 20 + Math.sin(time * 0.5) * 5; // Gentle up/down
+            camera.lookAt(0, 3, 0);
+
+            // Animate sun position (day/night cycle feel)
+            sunLight.position.x = Math.cos(time * 0.3) * 100;
+            sunLight.position.z = Math.sin(time * 0.3) * 100;
 
             renderer.render(scene, camera);
         };
@@ -240,10 +280,16 @@ export default function VoxelHeart51() {
 
         const blockType = BLOCK_TYPES[type];
         const geometry = new THREE.BoxGeometry(1, 1, 1);
-        const material = new THREE.MeshLambertMaterial({ 
+        
+        // More realistic materials
+        const material = new THREE.MeshStandardMaterial({ 
             color: blockType.color,
             transparent: blockType.transparent || false,
-            opacity: blockType.transparent ? 0.7 : 1
+            opacity: blockType.transparent ? 0.7 : 1,
+            roughness: 0.8,
+            metalness: type === 'GOLD' ? 0.7 : 0.2,
+            emissive: blockType.glow ? blockType.color : 0x000000,
+            emissiveIntensity: blockType.glow ? 0.3 : 0
         });
         
         const mesh = new THREE.Mesh(geometry, material);
@@ -251,9 +297,20 @@ export default function VoxelHeart51() {
         mesh.castShadow = true;
         mesh.receiveShadow = true;
 
+        // Add ambient occlusion effect (darker edges)
+        const edges = new THREE.EdgesGeometry(geometry);
+        const line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ 
+            color: 0x000000, 
+            opacity: 0.2, 
+            transparent: true 
+        }));
+        mesh.add(line);
+
         if (blockType.glow) {
-            const light = new THREE.PointLight(blockType.color, 0.5, 5);
+            // Brighter glow lights
+            const light = new THREE.PointLight(blockType.color, 1.5, 8);
             light.position.copy(mesh.position);
+            light.castShadow = true;
             sceneRef.current.add(light);
         }
 
