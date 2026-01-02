@@ -26,8 +26,10 @@ export default function Volckano() {
     const gameLoop = useRef(null);
     const lastTime = useRef(Date.now());
     const [soundEnabled, setSoundEnabled] = useState(true);
-    const [gameTime, setGameTime] = useState(0);
+    const gameTimeRef = useRef(0);
     const [showShare, setShowShare] = useState(false);
+    const velocityRef = useRef(0);
+    const playerYRef = useRef(200);
 
     useEffect(() => {
         const saved = localStorage.getItem('volckano_player');
@@ -70,8 +72,9 @@ export default function Volckano() {
             spawnPeople();
             return;
         }
+        velocityRef.current = -8;
         setVelocity(-8);
-        playSound(432, 50); // 432Hz healing jump sound
+        playSound(432, 50);
     };
 
     const spawnPeople = () => {
@@ -93,10 +96,13 @@ export default function Volckano() {
         setLevel(1);
         setPeopleToSave(5);
         setPeopleSaved(0);
+        playerYRef.current = 200;
         setPlayerY(200);
+        velocityRef.current = 0;
         setVelocity(0);
         setObstacles([]);
         setPeople([]);
+        gameTimeRef.current = 0;
     };
 
     const nextLevel = () => {
@@ -105,12 +111,14 @@ export default function Volckano() {
         setLevel(l => l + 1);
         setPeopleToSave(p => p + 2);
         setPeopleSaved(0);
+        playerYRef.current = 200;
         setPlayerY(200);
+        velocityRef.current = 0;
         setVelocity(0);
         setObstacles([]);
         setPeople([]);
         setShieldedPeople(new Set());
-        setGameTime(0);
+        gameTimeRef.current = 0;
     };
 
     useEffect(() => {
@@ -118,25 +126,30 @@ export default function Volckano() {
 
         gameLoop.current = setInterval(() => {
             const now = Date.now();
-            const delta = (now - lastTime.current) / 16.67; // 60fps normalized
+            const delta = (now - lastTime.current) / 16.67;
             lastTime.current = now;
             
-            setGameTime(t => t + (1000/60)); // Track time in ms
+            gameTimeRef.current += (1000/60);
 
-            // Physics - MUCH SLOWER for kids to learn
-            setVelocity(v => v + 0.25 * delta);
-            setPlayerY(y => {
-                const newY = y + velocity * delta;
-                if (newY < 0) return 0;
-                if (newY > 450) {
-                    setGameOver(true);
-                    return 450;
-                }
-                return newY;
-            });
+            // Physics
+            velocityRef.current = velocityRef.current + 0.25 * delta;
+            const newY = playerYRef.current + velocityRef.current * delta;
+            
+            if (newY < 0) {
+                playerYRef.current = 0;
+                velocityRef.current = 0;
+            } else if (newY > 450) {
+                playerYRef.current = 450;
+                setGameOver(true);
+            } else {
+                playerYRef.current = newY;
+            }
+            
+            setPlayerY(playerYRef.current);
+            setVelocity(velocityRef.current);
 
-            // Level-specific obstacle logic - WAIT 3 SECONDS BEFORE SPAWNING
-            if (gameTime > 3000) {
+            // Obstacle logic
+            if (gameTimeRef.current > 3000) {
                 if (level === 1) {
                     // LEVEL 1: Lava rocks from sides
                     setObstacles(prev => {
@@ -184,9 +197,9 @@ export default function Volckano() {
                     const hit = prev.some(obs => {
                         if (obs.x > 50 && obs.x < 110) {
                             if (obs.y === 0) {
-                                return playerY < obs.height;
+                                return playerYRef.current < obs.height;
                             } else {
-                                return playerY + 50 > obs.y;
+                                return playerYRef.current + 50 > obs.y;
                             }
                         }
                         return false;
@@ -209,7 +222,7 @@ export default function Volckano() {
                             if (person.saved) return person;
 
                             // Check if player is shielding this person
-                            const isNearPlayer = Math.abs(person.x - 80) < 60 && Math.abs(person.y - playerY) < 60;
+                            const isNearPlayer = Math.abs(person.x - 80) < 60 && Math.abs(person.y - playerYRef.current) < 60;
 
                             if (isNearPlayer) {
                                 newShielded.add(person.x);
@@ -255,7 +268,7 @@ export default function Volckano() {
                 setPeople(prev => {
                     const updated = prev.map(person => {
                         if (!person.saved && person.x > 50 && person.x < 110 && 
-                            Math.abs(person.y - playerY) < 50) {
+                            Math.abs(person.y - playerYRef.current) < 50) {
                             playSound(528, 150);
                             setPeopleSaved(s => s + 1);
                             return { ...person, saved: true };
@@ -277,7 +290,7 @@ export default function Volckano() {
         }, 16.67);
 
         return () => clearInterval(gameLoop.current);
-    }, [gameStarted, gameOver, velocity, playerY]);
+    }, [gameStarted, gameOver, level, peopleToSave, peopleSaved, levelComplete, shieldedPeople, soundEnabled]);
 
 
 
@@ -429,7 +442,7 @@ export default function Volckano() {
                             <div>
                                 <p className="text-cyan-400 text-xs font-bold">LEVEL {level}</p>
                                 <p className="text-white text-sm font-black">{peopleSaved} / {peopleToSave} SAVED</p>
-                                {gameTime < 3000 && (
+                                {gameTimeRef.current < 3000 && gameStarted && (
                                     <p className="text-amber-400 text-xs font-bold animate-pulse">GET READY!</p>
                                 )}
                             </div>
