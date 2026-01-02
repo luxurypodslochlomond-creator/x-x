@@ -298,7 +298,6 @@ const LayoutInner = ({ children, currentPageName }) => {
     { title: "Prof51", url: createPageUrl("Prof51"), icon: GraduationCap, highlight: true, description: "AI co-manager for students" },
     ...(user?.role === 'admin' ? [
       { title: "CB51", url: createPageUrl("ScottManager"), icon: Radio, description: "Artist co-manager" },
-      { title: "🎤 SK51 - What's Painful?", url: createPageUrl("ScottNeeds"), icon: Mic2, description: "Voice or type your pain points", highlight: true },
       { title: "Dec 2024 vs Dec 2025", url: createPageUrl("ScottComparison"), icon: FileText, description: "What Scott asked for vs what's built", highlight: true },
     ] : [])
   ];
