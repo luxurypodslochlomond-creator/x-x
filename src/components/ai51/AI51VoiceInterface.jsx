@@ -144,7 +144,7 @@ export default function AI51VoiceInterface({ onVoiceMessage, isThinking, lastRes
     };
 
     return (
-        <div className="fixed bottom-20 right-6 z-50 flex flex-col items-end gap-3">
+        <div className="fixed bottom-6 right-4 left-4 lg:left-auto lg:right-6 z-50 flex flex-col items-center lg:items-end gap-3">
             {/* Transcript Display */}
             <AnimatePresence>
                 {transcript && (
@@ -152,7 +152,7 @@ export default function AI51VoiceInterface({ onVoiceMessage, isThinking, lastRes
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 10 }}
-                        className="bg-black/90 backdrop-blur-xl border-4 border-pink-500 rounded-2xl px-6 py-4 max-w-xs"
+                        className="bg-black/90 backdrop-blur-xl border-4 border-pink-500 rounded-2xl px-6 py-4 max-w-xs w-full"
                         style={{ boxShadow: '0 0 30px rgba(236, 72, 153, 0.4)' }}
                     >
                         <p className="text-amber-300 text-sm font-mono font-bold">{transcript}</p>
@@ -167,7 +167,7 @@ export default function AI51VoiceInterface({ onVoiceMessage, isThinking, lastRes
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 10 }}
-                        className="bg-red-900/90 backdrop-blur-xl border-2 border-red-500 rounded-2xl px-6 py-3 max-w-xs"
+                        className="bg-red-900/90 backdrop-blur-xl border-2 border-red-500 rounded-2xl px-6 py-3 max-w-xs w-full"
                     >
                         <p className="text-red-300 text-xs font-mono">{error}</p>
                     </motion.div>
@@ -175,7 +175,7 @@ export default function AI51VoiceInterface({ onVoiceMessage, isThinking, lastRes
             </AnimatePresence>
 
             {/* Controls */}
-            <div className="flex items-center gap-3">
+            <div className="flex items-center justify-center gap-3 w-full">
                 {/* Voice Output Toggle - 8-BIT */}
                 <motion.button
                     whileHover={{ scale: 1.05 }}
@@ -203,13 +203,13 @@ export default function AI51VoiceInterface({ onVoiceMessage, isThinking, lastRes
                     )}
                 </motion.button>
 
-                {/* Voice Input Button - COOLASFUCK 8-BIT */}
+                {/* Voice Input Button - COOLASFUCK 8-BIT - BIGGER ON MOBILE */}
                 <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={toggleListening}
                     disabled={isThinking}
-                    className={`relative p-6 rounded-xl border-4 transition-all ${
+                    className={`relative p-8 lg:p-6 rounded-xl border-4 transition-all ${
                         isListening
                             ? 'bg-red-500 border-red-300'
                             : isThinking
@@ -260,11 +260,11 @@ export default function AI51VoiceInterface({ onVoiceMessage, isThinking, lastRes
 
                     {isListening ? (
                         <div className="relative z-10">
-                            <COOLASFUCKHeart size={32} animate={true} />
+                            <COOLASFUCKHeart size={40} animate={true} />
                         </div>
                     ) : (
                         <div className="relative z-10">
-                            <Mic className="w-8 h-8 text-white" />
+                            <Mic className="w-10 h-10 lg:w-8 lg:h-8 text-white" strokeWidth={2.5} />
                         </div>
                     )}
                 </motion.button>
@@ -277,19 +277,19 @@ export default function AI51VoiceInterface({ onVoiceMessage, isThinking, lastRes
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 10 }}
-                        className="bg-black/90 backdrop-blur-xl border-4 border-amber-500 rounded-xl px-6 py-3"
+                        className="bg-black/90 backdrop-blur-xl border-4 border-amber-500 rounded-xl px-6 py-3 w-full max-w-xs"
                         style={{ 
                             boxShadow: '0 0 30px rgba(251, 191, 36, 0.5)',
                             imageRendering: 'pixelated'
                         }}
                     >
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-center justify-center gap-2">
                             {isListening ? (
-                                <COOLASFUCKWaves size={16} animate={true} />
+                                <COOLASFUCKWaves size={20} animate={true} />
                             ) : (
-                                <COOLASFUCKHeart size={16} animate={true} />
+                                <COOLASFUCKHeart size={20} animate={true} />
                             )}
-                            <p className="text-amber-300 text-xs font-mono font-black">
+                            <p className="text-amber-300 text-sm lg:text-xs font-mono font-black">
                                 {isListening ? 'LISTENING...' : 'AI51 SPEAKING...'}
                             </p>
                         </div>
