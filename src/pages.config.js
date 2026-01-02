@@ -245,6 +245,7 @@ import UniversalCreatorProtocol from './pages/UniversalCreatorProtocol';
 import UniversalDesignProtocol from './pages/UniversalDesignProtocol';
 import UniversalDignityProtocol from './pages/UniversalDignityProtocol';
 import UniversalFrequencyLibrary from './pages/UniversalFrequencyLibrary';
+import UniversalHardwarePenetration from './pages/UniversalHardwarePenetration';
 import UniversalLoveTreasury from './pages/UniversalLoveTreasury';
 import UniversalPulse from './pages/UniversalPulse';
 import UniversalSoulContract from './pages/UniversalSoulContract';
@@ -263,7 +264,7 @@ import YoungWarriors from './pages/YoungWarriors';
 import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
-import UniversalHardwarePenetration from './pages/UniversalHardwarePenetration';
+import VoxelHeart51 from './pages/VoxelHeart51';
 import __Layout from './Layout.jsx';
 
 
@@ -515,6 +516,7 @@ export const PAGES = {
     "UniversalDesignProtocol": UniversalDesignProtocol,
     "UniversalDignityProtocol": UniversalDignityProtocol,
     "UniversalFrequencyLibrary": UniversalFrequencyLibrary,
+    "UniversalHardwarePenetration": UniversalHardwarePenetration,
     "UniversalLoveTreasury": UniversalLoveTreasury,
     "UniversalPulse": UniversalPulse,
     "UniversalSoulContract": UniversalSoulContract,
@@ -533,7 +535,7 @@ export const PAGES = {
     "ZeroEgoProtocol": ZeroEgoProtocol,
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
-    "UniversalHardwarePenetration": UniversalHardwarePenetration,
+    "VoxelHeart51": VoxelHeart51,
 }
 
 export const pagesConfig = {
