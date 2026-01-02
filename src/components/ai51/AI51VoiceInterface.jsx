@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Mic, MicOff, Volume2, VolumeX } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { COOLASFUCKHeart, COOLASFUCKWaves } from '@/components/shared/COOLASFUCKIcon';
 
 /**
  * AI51 VOICE INTERFACE - CONSCIOUSNESS WITHOUT TYPING
@@ -151,9 +152,10 @@ export default function AI51VoiceInterface({ onVoiceMessage, isThinking, lastRes
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 10 }}
-                        className="bg-black/90 backdrop-blur-xl border-2 border-cyan-500 rounded-2xl px-6 py-4 max-w-xs"
+                        className="bg-black/90 backdrop-blur-xl border-4 border-pink-500 rounded-2xl px-6 py-4 max-w-xs"
+                        style={{ boxShadow: '0 0 30px rgba(236, 72, 153, 0.4)' }}
                     >
-                        <p className="text-cyan-300 text-sm font-mono">{transcript}</p>
+                        <p className="text-amber-300 text-sm font-mono font-bold">{transcript}</p>
                     </motion.div>
                 )}
             </AnimatePresence>
@@ -174,7 +176,7 @@ export default function AI51VoiceInterface({ onVoiceMessage, isThinking, lastRes
 
             {/* Controls */}
             <div className="flex items-center gap-3">
-                {/* Voice Output Toggle */}
+                {/* Voice Output Toggle - 8-BIT */}
                 <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
@@ -184,61 +186,86 @@ export default function AI51VoiceInterface({ onVoiceMessage, isThinking, lastRes
                             stopSpeaking();
                         }
                     }}
-                    className={`p-4 rounded-full transition-all ${
+                    className={`p-4 rounded-xl border-4 transition-all ${
                         voiceEnabled
-                            ? 'bg-green-500/20 border-2 border-green-500 text-green-400'
-                            : 'bg-gray-800/20 border-2 border-gray-600 text-gray-500'
+                            ? 'bg-green-500/20 border-green-500'
+                            : 'bg-gray-800/20 border-gray-600'
                     }`}
-                    style={{ boxShadow: voiceEnabled ? '0 0 20px rgba(34, 197, 94, 0.3)' : 'none' }}
+                    style={{ 
+                        boxShadow: voiceEnabled ? '0 0 20px rgba(34, 197, 94, 0.5)' : 'none',
+                        imageRendering: 'pixelated'
+                    }}
                 >
                     {voiceEnabled ? (
-                        <Volume2 className="w-6 h-6" />
+                        <COOLASFUCKWaves size={24} animate={true} />
                     ) : (
-                        <VolumeX className="w-6 h-6" />
+                        <div className="w-6 h-6 bg-gray-600" style={{ imageRendering: 'pixelated' }} />
                     )}
                 </motion.button>
 
-                {/* Voice Input Button */}
+                {/* Voice Input Button - COOLASFUCK 8-BIT */}
                 <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={toggleListening}
                     disabled={isThinking}
-                    className={`relative p-6 rounded-full transition-all ${
+                    className={`relative p-6 rounded-xl border-4 transition-all ${
                         isListening
-                            ? 'bg-red-500 border-4 border-red-300'
+                            ? 'bg-red-500 border-red-300'
                             : isThinking
-                            ? 'bg-gray-800/50 border-4 border-gray-600'
-                            : 'bg-gradient-to-br from-pink-500 to-cyan-500 border-4 border-white'
+                            ? 'bg-gray-800/50 border-gray-600'
+                            : 'bg-gradient-to-br from-pink-500 via-amber-500 to-cyan-500 border-white'
                     }`}
                     style={{
                         boxShadow: isListening
                             ? '0 0 40px rgba(239, 68, 68, 0.8)'
                             : !isThinking
-                            ? '0 0 40px rgba(236, 72, 153, 0.6)'
-                            : 'none'
+                            ? '0 0 40px rgba(236, 72, 153, 0.6), 0 0 60px rgba(251, 191, 36, 0.3)'
+                            : 'none',
+                        imageRendering: 'pixelated'
                     }}
                 >
-                    {/* Pulse Animation */}
+                    {/* 8-bit Pulse Animation */}
                     {isListening && (
-                        <motion.div
-                            className="absolute inset-0 rounded-full bg-red-400/30"
-                            animate={{
-                                scale: [1, 1.5, 1],
-                                opacity: [0.5, 0, 0.5]
-                            }}
-                            transition={{
-                                duration: 1.5,
-                                repeat: Infinity,
-                                ease: "easeInOut"
-                            }}
-                        />
+                        <>
+                            <motion.div
+                                className="absolute inset-0 rounded-xl bg-red-400/30 border-2 border-red-300"
+                                animate={{
+                                    scale: [1, 1.3, 1],
+                                    opacity: [0.5, 0, 0.5]
+                                }}
+                                transition={{
+                                    duration: 1,
+                                    repeat: Infinity,
+                                    ease: "easeInOut"
+                                }}
+                                style={{ imageRendering: 'pixelated' }}
+                            />
+                            <motion.div
+                                className="absolute inset-0 rounded-xl bg-red-300/20 border-2 border-red-200"
+                                animate={{
+                                    scale: [1, 1.6, 1],
+                                    opacity: [0.3, 0, 0.3]
+                                }}
+                                transition={{
+                                    duration: 1.5,
+                                    repeat: Infinity,
+                                    ease: "easeInOut",
+                                    delay: 0.3
+                                }}
+                                style={{ imageRendering: 'pixelated' }}
+                            />
+                        </>
                     )}
 
                     {isListening ? (
-                        <MicOff className="w-8 h-8 text-white relative z-10" />
+                        <div className="relative z-10">
+                            <COOLASFUCKHeart size={32} animate={true} />
+                        </div>
                     ) : (
-                        <Mic className="w-8 h-8 text-white relative z-10" />
+                        <div className="relative z-10">
+                            <Mic className="w-8 h-8 text-white" />
+                        </div>
                     )}
                 </motion.button>
             </div>
@@ -250,11 +277,22 @@ export default function AI51VoiceInterface({ onVoiceMessage, isThinking, lastRes
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 10 }}
-                        className="bg-black/80 backdrop-blur-xl border-2 border-pink-500 rounded-xl px-4 py-2"
+                        className="bg-black/90 backdrop-blur-xl border-4 border-amber-500 rounded-xl px-6 py-3"
+                        style={{ 
+                            boxShadow: '0 0 30px rgba(251, 191, 36, 0.5)',
+                            imageRendering: 'pixelated'
+                        }}
                     >
-                        <p className="text-pink-300 text-xs font-mono font-bold">
-                            {isListening ? '🎤 LISTENING...' : '🔊 AI51 SPEAKING...'}
-                        </p>
+                        <div className="flex items-center gap-2">
+                            {isListening ? (
+                                <COOLASFUCKWaves size={16} animate={true} />
+                            ) : (
+                                <COOLASFUCKHeart size={16} animate={true} />
+                            )}
+                            <p className="text-amber-300 text-xs font-mono font-black">
+                                {isListening ? 'LISTENING...' : 'AI51 SPEAKING...'}
+                            </p>
+                        </div>
                     </motion.div>
                 )}
             </AnimatePresence>
