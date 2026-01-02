@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { Trophy, Heart, Users } from 'lucide-react';
+import { Users } from 'lucide-react';
 import VolckanoShare from '../components/volckano/VolckanoShare';
 
 /**
  * VOLCKANO - Gergie7's Game
- * TAP to jump • SAVE PEOPLE TOGETHER • Celebrate connection not addiction
+ * SIMPLE + RELIABLE - No quantum BS, just works
  * Made with ♾️❤️ for GERGIE7 and ALL KIDS
  */
 
@@ -13,23 +13,20 @@ export default function Volckano() {
     const [playerName, setPlayerName] = useState('');
     const [showLogin, setShowLogin] = useState(true);
     const [gameStarted, setGameStarted] = useState(false);
-    const [levelComplete, setLevelComplete] = useState(false);
-    const [gameOver, setGameOver] = useState(false);
-    const [level, setLevel] = useState(1);
-    const [peopleToSave, setPeopleToSave] = useState(5);
-    const [peopleSaved, setPeopleSaved] = useState(0);
-    const [shieldedPeople, setShieldedPeople] = useState(new Set());
-    const [playerY, setPlayerY] = useState(200);
-    const [velocity, setVelocity] = useState(0);
-    const [obstacles, setObstacles] = useState([]);
-    const [people, setPeople] = useState([]);
-    const gameLoop = useRef(null);
-    const lastTime = useRef(Date.now());
-    const [soundEnabled, setSoundEnabled] = useState(true);
-    const gameTimeRef = useRef(0);
     const [showShare, setShowShare] = useState(false);
-    const velocityRef = useRef(0);
-    const playerYRef = useRef(200);
+    const [soundEnabled, setSoundEnabled] = useState(true);
+    
+    // Game state - simple refs, no bullshit
+    const playerY = useRef(250);
+    const velocity = useRef(0);
+    const gameTime = useRef(0);
+    const obstacles = useRef([]);
+    const people = useRef([]);
+    const score = useRef(0);
+    const gameOver = useRef(false);
+    
+    const canvasRef = useRef(null);
+    const animationFrame = useRef(null);
 
     useEffect(() => {
         const saved = localStorage.getItem('volckano_player');
@@ -39,270 +36,187 @@ export default function Volckano() {
         }
     }, []);
 
-    const playSound = (frequency, duration = 100) => {
+    const playSound = (freq, duration = 100) => {
         if (!soundEnabled) return;
         try {
-            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-            const oscillator = audioContext.createOscillator();
-            const gainNode = audioContext.createGain();
-            
-            oscillator.connect(gainNode);
-            gainNode.connect(audioContext.destination);
-            
-            oscillator.frequency.value = frequency;
-            gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
-            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration / 1000);
-            
-            oscillator.start(audioContext.currentTime);
-            oscillator.stop(audioContext.currentTime + duration / 1000);
-        } catch (e) {}
+            const ctx = new (window.AudioContext || window.webkitAudioContext)();
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.frequency.value = freq;
+            gain.gain.setValueAtTime(0.2, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + duration/1000);
+            osc.start();
+            osc.stop(ctx.currentTime + duration/1000);
+        } catch(e) {}
     };
 
     const jump = () => {
-        if (levelComplete) {
-            nextLevel();
+        if (!gameStarted) {
+            startGame();
             return;
         }
-        if (gameOver) {
+        if (gameOver.current) {
             resetGame();
             return;
         }
-        if (!gameStarted) {
-            setGameStarted(true);
-            spawnPeople();
-            return;
-        }
-        velocityRef.current = -8;
-        setVelocity(-8);
+        velocity.current = -7;
         playSound(432, 50);
     };
 
-    const spawnPeople = () => {
-        const newPeople = [];
-        for (let i = 0; i < peopleToSave; i++) {
-            newPeople.push({
-                x: 400 + (i * 100),
+    const startGame = () => {
+        setGameStarted(true);
+        gameOver.current = false;
+        score.current = 0;
+        gameTime.current = 0;
+        playerY.current = 250;
+        velocity.current = 0;
+        obstacles.current = [];
+        people.current = [];
+        
+        // Spawn initial people
+        for (let i = 0; i < 5; i++) {
+            people.current.push({
+                x: 400 + (i * 120),
                 y: 380,
                 saved: false
             });
         }
-        setPeople(newPeople);
     };
 
     const resetGame = () => {
-        setGameOver(false);
-        setLevelComplete(false);
+        gameOver.current = false;
         setGameStarted(false);
-        setLevel(1);
-        setPeopleToSave(5);
-        setPeopleSaved(0);
-        playerYRef.current = 200;
-        setPlayerY(200);
-        velocityRef.current = 0;
-        setVelocity(0);
-        setObstacles([]);
-        setPeople([]);
-        gameTimeRef.current = 0;
     };
 
-    const nextLevel = () => {
-        setLevelComplete(false);
-        setGameStarted(false);
-        setLevel(l => l + 1);
-        setPeopleToSave(p => p + 2);
-        setPeopleSaved(0);
-        playerYRef.current = 200;
-        setPlayerY(200);
-        velocityRef.current = 0;
-        setVelocity(0);
-        setObstacles([]);
-        setPeople([]);
-        setShieldedPeople(new Set());
-        gameTimeRef.current = 0;
-    };
-
+    // SIMPLE GAME LOOP - No bullshit
     useEffect(() => {
-        if (!gameStarted || gameOver) return;
+        if (!gameStarted) return;
 
-        gameLoop.current = setInterval(() => {
-            const now = Date.now();
-            const delta = (now - lastTime.current) / 16.67;
-            lastTime.current = now;
-            
-            gameTimeRef.current += (1000/60);
+        const canvas = canvasRef.current;
+        const ctx = canvas.getContext('2d');
+        let lastTime = Date.now();
 
-            // Physics
-            velocityRef.current = velocityRef.current + 0.25 * delta;
-            const newY = playerYRef.current + velocityRef.current * delta;
-            
-            if (newY < 0) {
-                playerYRef.current = 0;
-                velocityRef.current = 0;
-            } else if (newY > 450) {
-                playerYRef.current = 450;
-                setGameOver(true);
-            } else {
-                playerYRef.current = newY;
+        const gameLoop = () => {
+            if (gameOver.current) {
+                cancelAnimationFrame(animationFrame.current);
+                return;
             }
-            
-            setPlayerY(playerYRef.current);
-            setVelocity(velocityRef.current);
 
-            // Obstacle logic
-            if (gameTimeRef.current > 3000) {
-                if (level === 1) {
-                    // LEVEL 1: Lava rocks from sides
-                    setObstacles(prev => {
-                        const updated = prev
-                            .map(obs => ({ ...obs, x: obs.x - 1.8 * delta }))
-                            .filter(obs => obs.x > -60);
+            const now = Date.now();
+            const dt = (now - lastTime) / 16.67;
+            lastTime = now;
 
-                        // Spawn new obstacle - HUGE SPACE for learning
-                        if (updated.length === 0 || updated[updated.length - 1].x < 180) {
-                            updated.push({
-                                x: 400,
-                                y: Math.random() > 0.5 ? 0 : 350,
-                                height: 60 + Math.random() * 40
-                            });
-                        }
+            gameTime.current += 16.67;
 
-                        return updated;
-                    });
-                } else if (level === 2) {
-                    // LEVEL 2: Meteors from sky
-                    setObstacles(prev => {
-                        const updated = prev
-                            .map(obs => ({ ...obs, y: obs.y + 2.5 * delta }))
-                            .filter(obs => obs.y < 500);
+            // PHYSICS - SIMPLE
+            velocity.current += 0.3 * dt;
+            playerY.current += velocity.current * dt;
 
-                        // Spawn meteors randomly across top
-                        if (updated.length < 3 && Math.random() < 0.02) {
-                            updated.push({
-                                x: 50 + Math.random() * 300,
-                                y: -30,
-                                width: 40,
-                                height: 40
-                            });
-                        }
+            // Bounds
+            if (playerY.current < 0) {
+                playerY.current = 0;
+                velocity.current = 0;
+            }
+            if (playerY.current > 430) {
+                gameOver.current = true;
+                playSound(200, 300);
+                setTimeout(() => setGameStarted(false), 100);
+                return;
+            }
 
-                        return updated;
+            // OBSTACLES - Spawn after 3 seconds
+            if (gameTime.current > 3000) {
+                obstacles.current = obstacles.current
+                    .map(o => ({ ...o, x: o.x - 2 * dt }))
+                    .filter(o => o.x > -60);
+
+                if (obstacles.current.length === 0 || obstacles.current[obstacles.current.length - 1].x < 200) {
+                    obstacles.current.push({
+                        x: 400,
+                        y: Math.random() > 0.5 ? 0 : 350,
+                        h: 60 + Math.random() * 30
                     });
                 }
             }
 
-            // Collision detection with obstacles
-            if (level === 1) {
-                // Level 1: Lava collision
-                setObstacles(prev => {
-                    const hit = prev.some(obs => {
-                        if (obs.x > 50 && obs.x < 110) {
-                            if (obs.y === 0) {
-                                return playerYRef.current < obs.height;
-                            } else {
-                                return playerYRef.current + 50 > obs.y;
-                            }
-                        }
-                        return false;
-                    });
-
-                    if (hit) {
-                        setGameOver(true);
+            // COLLISION
+            for (const obs of obstacles.current) {
+                if (obs.x > 50 && obs.x < 100) {
+                    if ((obs.y === 0 && playerY.current < obs.h) || 
+                        (obs.y > 0 && playerY.current + 40 > obs.y)) {
+                        gameOver.current = true;
                         playSound(200, 300);
+                        setTimeout(() => setGameStarted(false), 100);
+                        return;
                     }
-                    return prev;
-                });
-            } else if (level === 2) {
-                // Level 2: Shield people from meteors
-                setObstacles(obstacles => {
-                    setPeople(prevPeople => {
-                        const newShielded = new Set(shieldedPeople);
-                        let newSaved = 0;
-
-                        const updatedPeople = prevPeople.map(person => {
-                            if (person.saved) return person;
-
-                            // Check if player is shielding this person
-                            const isNearPlayer = Math.abs(person.x - 80) < 60 && Math.abs(person.y - playerYRef.current) < 60;
-
-                            if (isNearPlayer) {
-                                newShielded.add(person.x);
-                            }
-
-                            // Check if unshielded person gets hit by meteor
-                            if (!newShielded.has(person.x)) {
-                                const hit = obstacles.some(obs => 
-                                    Math.abs(obs.x - person.x) < 30 && Math.abs(obs.y - person.y) < 30
-                                );
-
-                                if (hit) {
-                                    setGameOver(true);
-                                    playSound(200, 300);
-                                    return person;
-                                }
-                            }
-
-                            // Save person if they reach end while shielded
-                            if (person.x < 50 && newShielded.has(person.x) && !person.saved) {
-                                playSound(528, 150);
-                                newSaved++;
-                                return { ...person, saved: true };
-                            }
-
-                            return person;
-                        });
-
-                        setShieldedPeople(newShielded);
-                        if (newSaved > 0) {
-                            setPeopleSaved(s => s + newSaved);
-                        }
-
-                        return updatedPeople;
-                    });
-
-                    return obstacles;
-                });
+                }
             }
 
-            // Collect people (Level 1 only)
-            if (level === 1) {
-                setPeople(prev => {
-                    const updated = prev.map(person => {
-                        if (!person.saved && person.x > 50 && person.x < 110 && 
-                            Math.abs(person.y - playerYRef.current) < 50) {
-                            playSound(528, 150);
-                            setPeopleSaved(s => s + 1);
-                            return { ...person, saved: true };
-                        }
-                        return { ...person, x: person.x - 1.5 * delta };
-                    });
-                    return updated.filter(p => p.x > -60);
-                });
-            } else if (level === 2) {
-                // Level 2: People move across, you shield them
-                setPeople(prev => prev.map(p => ({ ...p, x: p.x - 1.5 * delta })).filter(p => p.x > -60));
+            // PEOPLE
+            people.current = people.current.map(p => {
+                if (!p.saved && p.x > 50 && p.x < 100 && Math.abs(p.y - playerY.current) < 50) {
+                    playSound(528, 150);
+                    score.current++;
+                    return { ...p, saved: true };
+                }
+                return { ...p, x: p.x - 1.5 * dt };
+            }).filter(p => p.x > -60);
+
+            // DRAW
+            ctx.fillStyle = '#1a0f2a';
+            ctx.fillRect(0, 0, 400, 500);
+
+            // Ground
+            ctx.fillStyle = '#dc2626';
+            ctx.fillRect(0, 450, 400, 50);
+
+            // Player
+            ctx.fillStyle = score.current > 0 ? '#4ade80' : '#22d3ee';
+            ctx.fillRect(70, playerY.current, 40, 40);
+            ctx.fillText('😊', 75, playerY.current + 30);
+
+            // Obstacles
+            ctx.fillStyle = '#ef4444';
+            obstacles.current.forEach(o => {
+                ctx.fillRect(o.x, o.y, 50, o.h);
+            });
+
+            // People
+            people.current.forEach(p => {
+                if (!p.saved) {
+                    ctx.fillStyle = '#fbbf24';
+                    ctx.fillRect(p.x, p.y, 30, 30);
+                }
+            });
+
+            // Score
+            ctx.fillStyle = '#fff';
+            ctx.font = 'bold 20px monospace';
+            ctx.fillText(`SAVED: ${score.current}`, 10, 30);
+            
+            if (gameTime.current < 3000) {
+                ctx.fillStyle = '#fbbf24';
+                ctx.fillText('GET READY!', 140, 250);
             }
 
-            // Check if level complete
-            if (peopleSaved >= peopleToSave && !levelComplete) {
-                setLevelComplete(true);
-                playSound(432, 500); // Victory sound
-            }
-        }, 16.67);
+            animationFrame.current = requestAnimationFrame(gameLoop);
+        };
 
-        return () => clearInterval(gameLoop.current);
-    }, [gameStarted, gameOver, level, peopleToSave, peopleSaved, levelComplete, shieldedPeople, soundEnabled]);
+        gameLoop();
 
-
+        return () => cancelAnimationFrame(animationFrame.current);
+    }, [gameStarted, soundEnabled]);
 
     if (showLogin) {
         return (
-            <div className="h-screen w-screen relative overflow-hidden">
+            <div className="h-screen w-screen relative overflow-hidden bg-gradient-to-b from-orange-900 to-black">
                 <img 
                     src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6889f31e76713b9cd47e043c/870b0a855_IMG_6227.png"
-                    className="absolute inset-0 w-full h-full object-cover"
+                    className="absolute inset-0 w-full h-full object-cover opacity-50"
                     alt="Volcano"
                 />
-                <div className="absolute inset-0 bg-black/40" />
                 
                 <div className="relative z-10 h-full flex items-center justify-center px-6">
                     <div className="w-full max-w-sm space-y-4">
@@ -312,8 +226,7 @@ export default function Volckano() {
                             className="text-center mb-8"
                         >
                             <h1 className="text-7xl font-black text-white mb-2" style={{ 
-                                textShadow: '4px 4px 0 #FF4500, 8px 8px 20px #000',
-                                fontFamily: 'Impact, sans-serif'
+                                textShadow: '4px 4px 0 #FF4500, 8px 8px 20px #000'
                             }}>
                                 VOLCKANO
                             </h1>
@@ -355,214 +268,60 @@ export default function Volckano() {
 
     return (
         <div 
-            className="h-screen w-screen bg-gradient-to-b from-orange-900 via-red-900 to-black overflow-hidden select-none"
+            className="h-screen w-screen bg-gradient-to-b from-orange-900 via-red-900 to-black overflow-hidden select-none flex items-center justify-center"
             onClick={jump}
             onTouchStart={(e) => { e.preventDefault(); jump(); }}
         >
-            {/* Sky/background */}
-            <div className="absolute inset-0 bg-gradient-to-b from-orange-400 via-red-500 to-orange-900" />
-            
-            {/* Game container */}
-            <div className="relative h-full max-w-md mx-auto flex items-center justify-center">
-                <div className="relative w-full h-[500px] bg-black/20 border-4 border-orange-500 rounded-xl overflow-hidden">
-                    
-                    {/* Player */}
-                    <motion.div
-                        className="absolute left-[80px] w-[50px] h-[50px] flex items-center justify-center text-4xl"
-                        style={{ top: `${playerY}px` }}
-                        animate={{ rotate: velocity > 0 ? 20 : -20 }}
-                        transition={{ duration: 0.1 }}
+            <div className="relative">
+                {/* Canvas Game */}
+                <canvas
+                    ref={canvasRef}
+                    width={400}
+                    height={500}
+                    className="border-4 border-orange-500 rounded-xl bg-black"
+                />
+
+                {/* Controls Overlay */}
+                <div className="absolute top-4 right-4 flex items-center gap-2">
+                    <button
+                        onClick={(e) => { e.stopPropagation(); setShowShare(true); }}
+                        className="p-2 bg-cyan-500/20 hover:bg-cyan-500/30 rounded border-2 border-cyan-500"
                     >
-                        {peopleSaved > 0 ? '😇' : '😊'}
-                    </motion.div>
-
-                    {/* People to save */}
-                    {people.map((person, i) => {
-                        const isShielded = level === 2 && shieldedPeople.has(person.x) && !person.saved;
-                        return (
-                            <motion.div
-                                key={i}
-                                className="absolute w-[40px] h-[40px] flex items-center justify-center text-3xl"
-                                style={{ 
-                                    left: `${person.x}px`, 
-                                    top: `${person.y}px`,
-                                    opacity: person.saved ? 0 : 1
-                                }}
-                                animate={person.saved ? { scale: 2, opacity: 0 } : isShielded ? { scale: [1, 1.1, 1] } : {}}
-                                transition={{ duration: 0.3 }}
-                            >
-                                {isShielded && (
-                                    <div className="absolute inset-0 bg-cyan-400/30 rounded-full animate-pulse" />
-                                )}
-                                🧑
-                            </motion.div>
-                        );
-                    })}
-
-                    {/* Obstacles */}
-                    {level === 1 && obstacles.map((obs, i) => (
-                        <div
-                            key={i}
-                            className="absolute w-[60px] bg-gradient-to-b from-red-600 to-orange-800 border-4 border-red-900 rounded"
-                            style={{
-                                left: `${obs.x}px`,
-                                top: obs.y === 0 ? '0px' : `${obs.y}px`,
-                                height: `${obs.height}px`
-                            }}
-                        >
-                            <div className="text-center text-2xl mt-2">
-                                {obs.y === 0 ? '🌋' : '🔥'}
-                            </div>
-                        </div>
-                    ))}
-
-                    {level === 2 && obstacles.map((obs, i) => (
-                        <motion.div
-                            key={i}
-                            className="absolute bg-gradient-to-br from-purple-600 to-blue-800 border-4 border-purple-900 rounded-full"
-                            style={{
-                                left: `${obs.x}px`,
-                                top: `${obs.y}px`,
-                                width: `${obs.width}px`,
-                                height: `${obs.height}px`
-                            }}
-                            animate={{ rotate: 360 }}
-                            transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-                        >
-                            <div className="text-center text-2xl">☄️</div>
-                        </motion.div>
-                    ))}
-
-                    {/* Ground */}
-                    <div className="absolute bottom-0 left-0 right-0 h-[50px] bg-gradient-to-b from-orange-700 to-red-900 border-t-4 border-orange-600" />
-
-                    {/* Level & Progress */}
-                    <div className="absolute top-4 left-4 right-4 bg-black/60 border-2 border-cyan-500 rounded-lg px-4 py-2">
-                        <div className="flex items-center justify-between">
-                            <div>
-                                <p className="text-cyan-400 text-xs font-bold">LEVEL {level}</p>
-                                <p className="text-white text-sm font-black">{peopleSaved} / {peopleToSave} SAVED</p>
-                                {gameTimeRef.current < 3000 && gameStarted && (
-                                    <p className="text-amber-400 text-xs font-bold animate-pulse">GET READY!</p>
-                                )}
-                            </div>
-                            <div className="flex items-center gap-2">
-                                <button
-                                    onClick={(e) => { e.stopPropagation(); setShowShare(true); }}
-                                    className="p-2 bg-cyan-500/20 hover:bg-cyan-500/30 rounded transition-colors"
-                                    title="Play with friends"
-                                >
-                                    <Users className="w-5 h-5 text-cyan-400" />
-                                </button>
-                                <button
-                                    onClick={(e) => { e.stopPropagation(); setSoundEnabled(!soundEnabled); }}
-                                    className="text-2xl"
-                                >
-                                    {soundEnabled ? '🔊' : '🔇'}
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Level Complete */}
-                    {levelComplete && (
-                        <motion.div
-                            initial={{ scale: 0 }}
-                            animate={{ scale: 1 }}
-                            className="absolute inset-0 bg-gradient-to-b from-green-900/90 to-cyan-900/90 flex items-center justify-center"
-                        >
-                            <div className="text-center space-y-4">
-                                <p className="text-6xl">🎉</p>
-                                <h2 className="text-4xl font-black text-green-400">LEVEL COMPLETE!</h2>
-                                <p className="text-white text-2xl font-bold">You saved {peopleSaved} people! ♾️❤️</p>
-                                <div className="bg-black/60 border-2 border-cyan-500 rounded-xl p-4 mt-4">
-                                    <p className="text-cyan-300 text-sm font-bold">
-                                        Share this with friends to save people TOGETHER!
-                                    </p>
-                                </div>
-                                <button
-                                    onClick={nextLevel}
-                                    className="bg-green-600 hover:bg-green-500 text-white font-black px-8 py-4 rounded-xl text-xl border-b-4 border-green-900 mt-4"
-                                >
-                                    🌋 NEXT LEVEL
-                                </button>
-                                <button
-                                    onClick={resetGame}
-                                    className="bg-gray-700 hover:bg-gray-600 text-white font-bold px-6 py-2 rounded-lg text-sm mt-2"
-                                >
-                                    Rest • Play later ❤️
-                                </button>
-                            </div>
-                        </motion.div>
-                    )}
-
-                    {/* Game Over */}
-                    {gameOver && (
-                        <motion.div
-                            initial={{ scale: 0 }}
-                            animate={{ scale: 1 }}
-                            className="absolute inset-0 bg-black/80 flex items-center justify-center"
-                        >
-                            <div className="text-center space-y-4">
-                                <p className="text-6xl">💥</p>
-                                <h2 className="text-4xl font-black text-red-400">CRASH!</h2>
-                                <p className="text-white text-xl font-bold">You saved {peopleSaved} people</p>
-                                <p className="text-gray-400 text-sm">Every life counts ♾️❤️</p>
-                                <button
-                                    onClick={resetGame}
-                                    className="bg-orange-600 hover:bg-orange-500 text-white font-black px-8 py-4 rounded-xl text-xl border-b-4 border-orange-900 mt-4"
-                                >
-                                    🌋 TRY AGAIN
-                                </button>
-                            </div>
-                        </motion.div>
-                    )}
-
-                    {/* Start prompt */}
-                    {!gameStarted && !gameOver && !levelComplete && (
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            className="absolute inset-0 flex items-center justify-center pointer-events-none"
-                        >
-                            <div className="bg-black/80 border-4 border-cyan-500 rounded-xl p-6 text-center">
-                                <p className="text-cyan-400 text-3xl font-black mb-2">LEVEL {level}</p>
-                                {level === 1 && (
-                                    <>
-                                        <p className="text-white text-xl font-black mb-2">SAVE {peopleToSave} PEOPLE</p>
-                                        <p className="text-gray-300 text-sm">Tap to fly • Collect people • Dodge lava</p>
-                                    </>
-                                )}
-                                {level === 2 && (
-                                    <>
-                                        <p className="text-white text-xl font-black mb-2">SHIELD {peopleToSave} PEOPLE</p>
-                                        <p className="text-gray-300 text-sm">Fly near people • Shield from meteors ☄️</p>
-                                    </>
-                                )}
-                                {level >= 3 && (
-                                    <>
-                                        <p className="text-white text-xl font-black mb-2">UNIVERSE LEVEL {level}</p>
-                                        <p className="text-gray-300 text-sm">Save {peopleToSave} people • New challenge!</p>
-                                    </>
-                                )}
-                                <p className="text-cyan-300 text-xs mt-3">Connection not addiction ♾️❤️</p>
-                            </div>
-                        </motion.div>
-                    )}
+                        <Users className="w-5 h-5 text-cyan-400" />
+                    </button>
+                    <button
+                        onClick={(e) => { e.stopPropagation(); setSoundEnabled(!soundEnabled); }}
+                        className="text-2xl"
+                    >
+                        {soundEnabled ? '🔊' : '🔇'}
+                    </button>
                 </div>
+
+                {/* Start Overlay */}
+                {!gameStarted && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        className="absolute inset-0 flex items-center justify-center bg-black/80 rounded-xl pointer-events-none"
+                    >
+                        <div className="text-center text-white">
+                            <p className="text-4xl font-black text-cyan-400 mb-2">TAP TO START</p>
+                            <p className="text-sm text-gray-400">Tap to fly • Collect people • Dodge lava</p>
+                        </div>
+                    </motion.div>
+                )}
             </div>
 
             {/* Footer */}
-            <div className="absolute bottom-4 left-0 right-0 text-center px-4">
+            <div className="absolute bottom-4 text-center">
                 <p className="text-white text-xs font-bold mb-1">
                     Made with ♾️❤️ for GERGIE7 + ALL KIDS
                 </p>
                 <p className="text-gray-400 text-[10px]">
-                    Every level ends • Rest is important • Connection over competition
+                    Simple • Fast • Fun
                 </p>
             </div>
 
-            {/* Share Modal */}
             {showShare && (
                 <VolckanoShare 
                     playerName={playerName}
