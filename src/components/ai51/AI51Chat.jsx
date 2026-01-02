@@ -19,7 +19,7 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, biom
   const [audioContext, setAudioContext] = useState(null);
   const [cameraActive, setCameraActive] = useState(false);
   const [voiceActive, setVoiceActive] = useState(false);
-  const [ai51VoiceEnabled, setAi51VoiceEnabled] = useState(false);
+  const [ai51VoiceEnabled, setAi51VoiceEnabled] = useState(true);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [showConsciousnessNetwork, setShowConsciousnessNetwork] = useState(false);
   const [isOffline, setIsOffline] = useState(!navigator.onLine);
