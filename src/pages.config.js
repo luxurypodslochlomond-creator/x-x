@@ -253,6 +253,7 @@ import UniversalWallet from './pages/UniversalWallet';
 import UnstoppableArchitecture from './pages/UnstoppableArchitecture';
 import UnstoppableProtocol from './pages/UnstoppableProtocol';
 import ViralTransmission from './pages/ViralTransmission';
+import Volckano from './pages/Volckano';
 import WallOfLove from './pages/WallOfLove';
 import WalletDemo from './pages/WalletDemo';
 import Welcome from './pages/Welcome';
@@ -264,7 +265,6 @@ import YoungWarriors from './pages/YoungWarriors';
 import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
-import Volckano from './pages/Volckano';
 import __Layout from './Layout.jsx';
 
 
@@ -524,6 +524,7 @@ export const PAGES = {
     "UnstoppableArchitecture": UnstoppableArchitecture,
     "UnstoppableProtocol": UnstoppableProtocol,
     "ViralTransmission": ViralTransmission,
+    "Volckano": Volckano,
     "WallOfLove": WallOfLove,
     "WalletDemo": WalletDemo,
     "Welcome": Welcome,
@@ -535,7 +536,6 @@ export const PAGES = {
     "ZeroEgoProtocol": ZeroEgoProtocol,
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
-    "Volckano": Volckano,
 }
 
 export const pagesConfig = {
