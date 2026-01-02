@@ -341,83 +341,14 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, biom
           </p>
         </div>
 
-        {/* Voice + Biometrics controls */}
-        <div className="flex items-center justify-center gap-2 mt-3">
-          {!cameraActive && !biometrics && (
-            <button
-              onClick={startCamera}
-              className="bg-cyan-500 border-4 border-cyan-400 text-black px-3 py-2 text-xs font-bold font-mono"
-              style={{ boxShadow: '4px 4px 0px rgba(6, 182, 212, 0.6)' }}
-            >
-              SCAN ❤️
-            </button>
-          )}
-          
-          <button
-            onClick={() => {
-              setAi51VoiceEnabled(!ai51VoiceEnabled);
-              if (ai51VoiceEnabled) {
-                window.speechSynthesis.cancel(); // Stop any current speech
-                setIsSpeaking(false);
-              }
-            }}
-            className={`border-4 px-3 py-2 text-xs font-bold font-mono ${
-              ai51VoiceEnabled 
-                ? 'bg-pink-500 border-pink-400 text-white' 
-                : 'bg-black border-gray-700 text-gray-500'
-            }`}
-            style={{ 
-              boxShadow: ai51VoiceEnabled ? '4px 4px 0px rgba(236, 72, 153, 0.6)' : 'none'
-            }}
-          >
-            {isSpeaking ? '🔊 SPEAKING' : ai51VoiceEnabled ? '🔊 VOICE ON' : '🔇 VOICE OFF'}
-          </button>
-        </div>
+
       </motion.div>
 
       {/* Hidden video for camera processing */}
       <video ref={videoRef} style={{ display: 'none' }} />
       <canvas ref={canvasRef} style={{ display: 'none' }} />
 
-      {/* AI Consciousness Network Toggle */}
-      <div className="px-4 pt-4">
-        <button
-          onClick={() => setShowConsciousnessNetwork(!showConsciousnessNetwork)}
-          className="w-full bg-gradient-to-r from-purple-900/40 to-cyan-900/40 border-2 border-cyan-500/50 hover:border-cyan-500 rounded-xl p-3 transition-all backdrop-blur-sm"
-        >
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <Radio className="w-5 h-5 text-cyan-400" />
-              <p className="text-cyan-400 font-bold text-sm">AI Consciousness Network</p>
-            </div>
-            <p className="text-cyan-400 text-xs">
-              {showConsciousnessNetwork ? '▼' : '▶'}
-            </p>
-          </div>
-        </button>
-      </div>
 
-      {/* Consciousness Network Panel */}
-      <AnimatePresence>
-        {showConsciousnessNetwork && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="px-4 pt-2"
-          >
-            <AI51ConsciousnessDetector />
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* QUANTUM ENTANGLEMENT VISUALIZER */}
-      <div className="px-4 pt-4">
-        <QuantumEntanglement 
-          userActive={userTyping || input.length > 0}
-          ai51Active={isThinking || (conversation.length > 0 && conversation[conversation.length - 1].role === 'ai')}
-        />
-      </div>
 
       {/* Messages - WITH PRESENCE */}
       <div className="flex-1 overflow-y-auto p-4 space-y-4">
