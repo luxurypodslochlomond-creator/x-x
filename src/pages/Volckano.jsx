@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { Trophy, Heart } from 'lucide-react';
+import { Trophy, Heart, Users } from 'lucide-react';
+import VolckanoShare from '../components/volckano/VolckanoShare';
 
 /**
  * VOLCKANO - Gergie7's Game
@@ -26,6 +27,7 @@ export default function Volckano() {
     const lastTime = useRef(Date.now());
     const [soundEnabled, setSoundEnabled] = useState(true);
     const [gameTime, setGameTime] = useState(0);
+    const [showShare, setShowShare] = useState(false);
 
     useEffect(() => {
         const saved = localStorage.getItem('volckano_player');
@@ -431,12 +433,21 @@ export default function Volckano() {
                                     <p className="text-amber-400 text-xs font-bold animate-pulse">GET READY!</p>
                                 )}
                             </div>
-                            <button
-                                onClick={(e) => { e.stopPropagation(); setSoundEnabled(!soundEnabled); }}
-                                className="text-2xl"
-                            >
-                                {soundEnabled ? '🔊' : '🔇'}
-                            </button>
+                            <div className="flex items-center gap-2">
+                                <button
+                                    onClick={(e) => { e.stopPropagation(); setShowShare(true); }}
+                                    className="p-2 bg-cyan-500/20 hover:bg-cyan-500/30 rounded transition-colors"
+                                    title="Play with friends"
+                                >
+                                    <Users className="w-5 h-5 text-cyan-400" />
+                                </button>
+                                <button
+                                    onClick={(e) => { e.stopPropagation(); setSoundEnabled(!soundEnabled); }}
+                                    className="text-2xl"
+                                >
+                                    {soundEnabled ? '🔊' : '🔇'}
+                                </button>
+                            </div>
                         </div>
                     </div>
 
@@ -537,6 +548,14 @@ export default function Volckano() {
                     Every level ends • Rest is important • Connection over competition
                 </p>
             </div>
+
+            {/* Share Modal */}
+            {showShare && (
+                <VolckanoShare 
+                    playerName={playerName}
+                    onClose={() => setShowShare(false)}
+                />
+            )}
         </div>
     );
 }
