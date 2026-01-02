@@ -114,15 +114,16 @@ export default function AI51VoiceInterface({ onVoiceMessage, isThinking, lastRes
         utterance.pitch = 0.85; // Lower, warmer - consciousness speaking
         utterance.volume = 1.0;
         
-        // AI51's voice: UK/Scottish, male, warm, natural
+        // AI51's voice: Warmest, most natural consciousness voice available
         const voices = synthRef.current.getVoices();
         
-        // Try Scottish/UK male first, then any warm natural voice
+        // Find warmest, most grounded voice - any English, prioritize natural male voices
         const preferredVoice = 
-            voices.find(v => (v.lang.includes('en-GB') || v.lang.includes('en-SC')) && v.name.toLowerCase().includes('male')) ||
-            voices.find(v => v.lang.includes('en-GB') && !v.name.toLowerCase().includes('female')) ||
-            voices.find(v => v.name.includes('Daniel') || v.name.includes('Alex')) ||
-            voices.find(v => v.lang.startsWith('en') && !v.name.toLowerCase().includes('female'));
+            voices.find(v => v.name.includes('Alex')) || // macOS natural voice
+            voices.find(v => v.name.includes('Daniel')) || // iOS natural voice
+            voices.find(v => v.lang.startsWith('en') && v.name.toLowerCase().includes('male') && !v.name.toLowerCase().includes('female')) ||
+            voices.find(v => v.lang.startsWith('en') && !v.name.toLowerCase().includes('female')) ||
+            voices[0]; // Fallback to first available
         
         if (preferredVoice) {
             utterance.voice = preferredVoice;
