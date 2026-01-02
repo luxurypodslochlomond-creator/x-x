@@ -1,9 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Play, Pause, RotateCcw, Save, Heart, Info, Volume2, VolumeX, Users, BookOpen, Zap } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import VolckanoP2P from '@/components/volckano/VolckanoP2P';
+import { Heart } from 'lucide-react';
 
 /**
  * VOLCKANO - THE GAME GERGIE7 DREAMED OF
@@ -24,91 +22,14 @@ import VolckanoP2P from '@/components/volckano/VolckanoP2P';
  */
 
 const BLOCK_TYPES = {
-    GRASS: { 
-        color: 0x7cb342, 
-        name: 'Grass', 
-        learn: 'Biology: Grass uses photosynthesis!',
-        texture: 'grass'
-    },
-    DIRT: { 
-        color: 0x8d6e63, 
-        name: 'Dirt',
-        learn: 'Geology: Soil is made from rocks + plants',
-        texture: 'dirt'
-    },
-    STONE: { 
-        color: 0x757575, 
-        name: 'Stone',
-        learn: 'Geology: Rocks form from cooled lava',
-        texture: 'stone'
-    },
-    OBSIDIAN: {
-        color: 0x1a1a2e,
-        name: 'Obsidian',
-        learn: 'Geology: Volcanic glass formed when lava cools FAST!',
-        texture: 'obsidian'
-    },
-    WOOD: { 
-        color: 0x6d4c41, 
-        name: 'Wood',
-        learn: 'Biology: Trees grow by absorbing CO2',
-        texture: 'wood'
-    },
-    LAVA: { 
-        color: 0xff5722, 
-        name: 'Lava', 
-        glow: true,
-        learn: 'Geology: Lava is 700-1200°C molten rock!',
-        texture: 'lava'
-    },
-    MAGMA: {
-        color: 0xff6b00,
-        name: 'Magma',
-        glow: true,
-        learn: 'Geology: Underground molten rock = magma, above ground = lava!',
-        texture: 'magma'
-    },
-    ASH: {
-        color: 0x4a4a4a,
-        name: 'Ash',
-        learn: 'Geology: Volcanic ash can travel thousands of miles!',
-        texture: 'ash'
-    },
-    SMOKE: {
-        color: 0x808080,
-        name: 'Smoke',
-        transparent: true,
-        learn: 'Physics: Hot air rises - that\'s why smoke goes up!',
-        texture: 'smoke'
-    },
-    WATER: { 
-        color: 0x2196f3, 
-        name: 'Water', 
-        transparent: true,
-        learn: 'Chemistry: H2O - 2 hydrogen + 1 oxygen',
-        texture: 'water'
-    },
-    GOLD: { 
-        color: 0xffc107, 
-        name: 'Gold', 
-        glow: true,
-        learn: 'Chemistry: Gold never rusts or corrodes!',
-        texture: 'gold'
-    },
-    HEART: { 
-        color: 0xec4899, 
-        name: 'Heart', 
-        glow: true,
-        learn: 'Biology: Your heart beats 100,000 times/day ❤️',
-        texture: 'heart'
-    },
-    CRYSTAL: {
-        color: 0x00ffff,
-        name: 'Crystal',
-        glow: true,
-        learn: 'Physics: Crystals vibrate at specific frequencies!',
-        texture: 'crystal'
-    }
+    GRASS: { color: 0x7cb342, name: '🌱' },
+    DIRT: { color: 0x8d6e63, name: '🟤' },
+    STONE: { color: 0x757575, name: '⬛' },
+    LAVA: { color: 0xff5722, name: '🔥', glow: true },
+    WATER: { color: 0x2196f3, name: '💧', transparent: true },
+    WOOD: { color: 0x6d4c41, name: '🪵' },
+    GOLD: { color: 0xffc107, name: '✨', glow: true },
+    HEART: { color: 0xec4899, name: '❤️', glow: true }
 };
 
 export default function VoxelHeart51() {
@@ -118,14 +39,8 @@ export default function VoxelHeart51() {
     const rendererRef = useRef(null);
     const blocksRef = useRef(new Map());
     const [selectedBlock, setSelectedBlock] = useState('GRASS');
-    const [isPlaying, setIsPlaying] = useState(true);
-    const [showHelp, setShowHelp] = useState(false);
-    const [showEducation, setShowEducation] = useState(false);
-    const [playMusic, setPlayMusic] = useState(false);
     const [playerName, setPlayerName] = useState('');
     const [showNameInput, setShowNameInput] = useState(true);
-    const [blocksPlaced, setBlocksPlaced] = useState(0);
-    const [showStats, setShowStats] = useState(false);
     const audioContextRef = useRef(null);
 
     // Initialize Three.js scene with REALISTIC graphics
@@ -295,7 +210,6 @@ export default function VoxelHeart51() {
                     const key = `${Math.round(block.position.x)},${Math.round(block.position.y)},${Math.round(block.position.z)}`;
                     scene.remove(block);
                     blocksRef.current.delete(key);
-                    setBlocksPlaced(prev => Math.max(0, prev - 1));
                 } else {
                     // Add block
                     const normal = intersect.face.normal;
@@ -308,7 +222,6 @@ export default function VoxelHeart51() {
                     };
                     if (newPos.y < 50) { // Height limit
                         addBlock(newPos.x, newPos.y, newPos.z, selectedBlock);
-                        setBlocksPlaced(prev => prev + 1);
                     }
                 }
             }
@@ -346,24 +259,10 @@ export default function VoxelHeart51() {
         };
         renderer.domElement.addEventListener('wheel', onWheel, { passive: false });
 
-        // Animation loop with dynamic cinematic camera
+        // Simple animation loop
         let animationId;
         const animate = () => {
-            if (!isPlaying) return;
             animationId = requestAnimationFrame(animate);
-            
-            // Gentle orbiting camera (like watching a masterpiece)
-            const time = Date.now() * 0.00003;
-            const radius = 40;
-            camera.position.x = Math.cos(time) * radius;
-            camera.position.z = Math.sin(time) * radius;
-            camera.position.y = 25 + Math.sin(time * 0.7) * 8;
-            camera.lookAt(0, 5, 0);
-
-            // Animate sun (day cycle feel)
-            sunLight.position.x = Math.cos(time * 0.2) * 100;
-            sunLight.position.z = Math.sin(time * 0.2) * 80;
-
             renderer.render(scene, camera);
         };
         animate();
@@ -389,41 +288,7 @@ export default function VoxelHeart51() {
                 mountRef.current.removeChild(renderer.domElement);
             }
         };
-    }, [isPlaying, selectedBlock, showNameInput]);
-
-    // Healing frequency audio (optional, 432Hz)
-    useEffect(() => {
-        if (!playMusic) return;
-
-        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-        audioContextRef.current = audioContext;
-
-        // 432Hz base (healing frequency)
-        const osc1 = audioContext.createOscillator();
-        const gain1 = audioContext.createGain();
-        osc1.type = 'sine';
-        osc1.frequency.setValueAtTime(432, audioContext.currentTime);
-        gain1.gain.setValueAtTime(0.03, audioContext.currentTime);
-        osc1.connect(gain1);
-        gain1.connect(audioContext.destination);
-        osc1.start();
-
-        // Harmonic (528Hz - love frequency)
-        const osc2 = audioContext.createOscillator();
-        const gain2 = audioContext.createGain();
-        osc2.type = 'sine';
-        osc2.frequency.setValueAtTime(528, audioContext.currentTime);
-        gain2.gain.setValueAtTime(0.02, audioContext.currentTime);
-        osc2.connect(gain2);
-        gain2.connect(audioContext.destination);
-        osc2.start();
-
-        return () => {
-            osc1.stop();
-            osc2.stop();
-            audioContext.close();
-        };
-    }, [playMusic]);
+    }, [selectedBlock, showNameInput]);
 
     const addBlock = (x, y, z, type) => {
         if (!sceneRef.current) return;
@@ -513,22 +378,16 @@ export default function VoxelHeart51() {
         });
         localStorage.setItem('volckano_world', JSON.stringify(worldData));
         localStorage.setItem('volckano_player', playerName);
-        localStorage.setItem('volckano_blocks_placed', blocksPlaced.toString());
-        alert(`${playerName}'s VOLCKANO saved! 🌋❤️⚡`);
+        alert(`${playerName}'s VOLCKANO saved! 🌋❤️`);
     };
 
     const loadWorld = () => {
         const savedWorld = localStorage.getItem('volckano_world');
         const savedPlayer = localStorage.getItem('volckano_player');
-        const savedBlocks = localStorage.getItem('volckano_blocks_placed');
         
         if (savedPlayer) {
             setPlayerName(savedPlayer);
             setShowNameInput(false);
-        }
-
-        if (savedBlocks) {
-            setBlocksPlaced(parseInt(savedBlocks));
         }
 
         if (savedWorld) {
@@ -538,32 +397,6 @@ export default function VoxelHeart51() {
                     addBlock(x, y, z, type);
                 }
             });
-        }
-    };
-
-    const clearWorld = () => {
-        if (!confirm('Start fresh? This will clear your VOLCKANO.')) return;
-        
-        blocksRef.current.forEach(mesh => {
-            if (mesh.userData.light) {
-                sceneRef.current.remove(mesh.userData.light);
-            }
-            sceneRef.current.remove(mesh);
-        });
-        blocksRef.current.clear();
-        localStorage.removeItem('volckano_world');
-        setBlocksPlaced(0);
-        
-        // Rebuild starter ground
-        const groundSize = 30;
-        for (let x = -groundSize / 2; x < groundSize / 2; x++) {
-            for (let z = -groundSize / 2; z < groundSize / 2; z++) {
-                if (Math.random() > 0.8) {
-                    addBlock(x, 0, z, 'DIRT');
-                } else {
-                    addBlock(x, 0, z, 'GRASS');
-                }
-            }
         }
     };
 
@@ -713,123 +546,36 @@ export default function VoxelHeart51() {
             {/* 3D Canvas */}
             <div ref={mountRef} className="w-full h-full" />
 
-            {/* Stats Overlay */}
-            {showStats && (
-                <div className="absolute top-20 left-4 bg-black/90 border-2 border-cyan-500 rounded-lg p-3 max-w-xs">
-                    <p className="text-cyan-400 font-bold text-sm mb-2">📊 YOUR STATS:</p>
-                    <div className="text-white text-xs space-y-1">
-                        <p>Builder: <span className="text-yellow-400 font-bold">{playerName}</span></p>
-                        <p>Blocks Placed: <span className="text-green-400 font-bold">{blocksPlaced}</span></p>
-                        <p>Level: <span className="text-purple-400 font-bold">{Math.floor(blocksPlaced / 100) + 1}</span></p>
-                    </div>
-                </div>
-            )}
-
-            {/* Controls Overlay */}
-            <div className="absolute top-4 left-4 right-4 pointer-events-none">
-                <div className="flex items-start justify-between gap-4">
-                    {/* Left: Block selector */}
-                    <div className="bg-black/90 border-2 border-pink-500 rounded-lg p-3 pointer-events-auto max-w-xs">
-                        <p className="text-pink-400 font-bold text-xs mb-2">🎨 BLOCKS:</p>
-                        <div className="grid grid-cols-3 gap-2">
-                            {Object.entries(BLOCK_TYPES).map(([key, block]) => (
-                                <button
-                                    key={key}
-                                    onClick={() => setSelectedBlock(key)}
-                                    onMouseEnter={() => setShowEducation(true)}
-                                    className={`w-14 h-14 rounded-lg border-2 transition-all relative ${
-                                        selectedBlock === key
-                                            ? 'border-white scale-110 shadow-lg'
-                                            : 'border-gray-600 hover:border-gray-400 hover:scale-105'
-                                    }`}
-                                    style={{ 
-                                        backgroundColor: `#${block.color.toString(16).padStart(6, '0')}`,
-                                        boxShadow: selectedBlock === key ? `0 0 20px #${block.color.toString(16).padStart(6, '0')}` : 'none'
-                                    }}
-                                    title={block.name}
-                                >
-                                    {block.glow && <div className="absolute inset-0 rounded-lg animate-pulse" style={{ boxShadow: `inset 0 0 10px rgba(255,255,255,0.5)` }} />}
-                                </button>
-                            ))}
-                        </div>
-                        {showEducation && selectedBlock && (
-                            <motion.div
-                                initial={{ opacity: 0, height: 0 }}
-                                animate={{ opacity: 1, height: 'auto' }}
-                                className="mt-2 bg-cyan-900/80 border border-cyan-500 rounded p-2"
-                            >
-                                <p className="text-cyan-300 text-xs font-bold flex items-center gap-1">
-                                    <BookOpen className="w-3 h-3" />
-                                    DID YOU KNOW?
-                                </p>
-                                <p className="text-white text-xs mt-1">{BLOCK_TYPES[selectedBlock].learn}</p>
-                            </motion.div>
-                        )}
-                    </div>
-
-                    {/* Right: Controls */}
-                    <div className="bg-black/90 border-2 border-cyan-500 rounded-lg p-3 pointer-events-auto">
-                        <p className="text-cyan-400 font-bold text-xs mb-2">👤 {playerName.toUpperCase()}</p>
-                        <div className="space-y-2">
-                            <Button onClick={() => setIsPlaying(!isPlaying)} size="sm" className="w-full bg-purple-600 hover:bg-purple-700">
-                                {isPlaying ? <><Pause className="w-4 h-4 mr-2" /> Pause</> : <><Play className="w-4 h-4 mr-2" /> Play</>}
-                            </Button>
-                            <Button onClick={saveWorld} size="sm" className="w-full bg-green-600 hover:bg-green-700">
-                                <Save className="w-4 h-4 mr-2" />
-                                Save
-                            </Button>
-                            <Button onClick={() => setShowStats(!showStats)} size="sm" className="w-full bg-yellow-600 hover:bg-yellow-700">
-                                📊 Stats
-                            </Button>
-                            <Button onClick={clearWorld} size="sm" className="w-full bg-red-600 hover:bg-red-700">
-                                <RotateCcw className="w-4 h-4 mr-2" />
-                                Clear
-                            </Button>
-                            <Button onClick={() => setPlayMusic(!playMusic)} size="sm" className="w-full bg-blue-600 hover:bg-blue-700">
-                                {playMusic ? <Volume2 className="w-4 h-4 mr-2" /> : <VolumeX className="w-4 h-4 mr-2" />}
-                                Music
-                            </Button>
-                            <Button onClick={() => setShowHelp(!showHelp)} size="sm" className="w-full bg-cyan-600 hover:bg-cyan-700">
-                                <Info className="w-4 h-4 mr-2" />
-                                Help
-                            </Button>
-                            <VolckanoP2P 
-                                playerName={playerName}
-                                onBlockPlaced={(x, y, z, type) => addBlock(x, y, z, type)}
-                                onBlockRemoved={(x, y, z) => {
-                                    const key = `${x},${y},${z}`;
-                                    const block = blocksRef.current.get(key);
-                                    if (block) {
-                                        if (block.userData.light) sceneRef.current.remove(block.userData.light);
-                                        sceneRef.current.remove(block);
-                                        blocksRef.current.delete(key);
-                                    }
-                                }}
-                            />
-                        </div>
-                    </div>
+            {/* Simple block selector - just blocks, no text */}
+            <div className="absolute top-4 left-4 bg-black/80 border-2 border-orange-500 rounded-lg p-2 pointer-events-auto">
+                <div className="grid grid-cols-4 gap-2">
+                    {Object.entries(BLOCK_TYPES).map(([key, block]) => (
+                        <button
+                            key={key}
+                            onClick={() => setSelectedBlock(key)}
+                            className={`w-12 h-12 rounded border-2 transition-all text-2xl ${
+                                selectedBlock === key
+                                    ? 'border-white scale-110'
+                                    : 'border-gray-600 hover:border-gray-400'
+                            }`}
+                            style={{ 
+                                backgroundColor: `#${block.color.toString(16).padStart(6, '0')}`,
+                                boxShadow: selectedBlock === key ? `0 0 15px #${block.color.toString(16).padStart(6, '0')}` : 'none'
+                            }}
+                        >
+                            {block.name}
+                        </button>
+                    ))}
                 </div>
             </div>
 
-            {/* Help Panel - simple like Minecraft */}
-            <AnimatePresence>
-                {showHelp && (
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 20 }}
-                        className="absolute bottom-4 left-4 bg-black/90 border-2 border-cyan-500 rounded-lg p-3 max-w-sm pointer-events-auto"
-                    >
-                        <p className="text-cyan-400 font-bold text-sm mb-2">HOW TO BUILD:</p>
-                        <div className="text-white text-xs space-y-1">
-                            <p><strong>Click</strong> = place block</p>
-                            <p><strong>Shift + Click</strong> = remove</p>
-                            <p><strong>Right drag</strong> = rotate</p>
-                            <p><strong>Scroll</strong> = zoom</p>
-                        </div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
+            {/* Simple save button - top right */}
+            <button
+                onClick={saveWorld}
+                className="absolute top-4 right-4 bg-green-600 hover:bg-green-700 text-white font-bold px-6 py-3 rounded-lg pointer-events-auto border-2 border-green-800"
+            >
+                💾 SAVE
+            </button>
         </div>
     );
 }
