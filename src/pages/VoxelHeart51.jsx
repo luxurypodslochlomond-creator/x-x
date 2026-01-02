@@ -567,165 +567,116 @@ export default function VoxelHeart51() {
     if (showNameInput) {
         return (
             <div className="min-h-screen relative flex items-center justify-center overflow-hidden bg-black">
-                {/* Dramatic sunset sky - exact Georgie7 colors */}
+                {/* Georgie7's exact VALCKANO sunset colors */}
                 <div className="absolute inset-0" style={{
-                    background: 'linear-gradient(to bottom, #1a1a2e 0%, #2d1b3d 20%, #4a2545 40%, #d4634d 60%, #f7a063 80%, #87ceeb 100%)'
+                    background: 'linear-gradient(to bottom, #1a1a2e 0%, #2d1b3d 15%, #4a2545 30%, #d4634d 55%, #f7a063 75%, #b4d5f0 100%)'
                 }} />
                 
-                {/* Darker pixel clouds */}
-                <div className="absolute inset-0 opacity-40">
-                    <motion.div 
-                        animate={{ x: [0, 80, 0] }}
-                        transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-                        className="absolute top-16 left-10 w-40 h-24 bg-gray-900/80" 
-                        style={{ clipPath: 'polygon(0 50%, 25% 50%, 25% 25%, 50% 25%, 50% 0, 75% 0, 75% 25%, 100% 25%, 100% 75%, 75% 75%, 75% 100%, 25% 100%, 25% 75%, 0 75%)' }} 
-                    />
-                    <motion.div 
-                        animate={{ x: [0, -100, 0] }}
-                        transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-                        className="absolute top-32 right-16 w-48 h-28 bg-gray-800/80" 
-                        style={{ clipPath: 'polygon(0 50%, 25% 50%, 25% 25%, 50% 25%, 50% 0, 75% 0, 75% 25%, 100% 25%, 100% 75%, 75% 75%, 75% 100%, 25% 100%, 25% 75%, 0 75%)' }} 
-                    />
+                {/* Dramatic metal frame - like the screenshot */}
+                <div className="absolute top-0 left-0 right-0 h-16 z-20 pointer-events-none">
+                    <div className="h-full bg-gradient-to-b from-gray-800 via-gray-700 to-transparent opacity-90" style={{
+                        boxShadow: 'inset 0 -8px 16px rgba(0,0,0,0.9)'
+                    }} />
                 </div>
-
-                {/* Glowing lava embers floating up */}
+                <div className="absolute bottom-0 left-0 right-0 h-16 z-20 pointer-events-none">
+                    <div className="h-full bg-gradient-to-t from-gray-800 via-gray-700 to-transparent opacity-90" style={{
+                        boxShadow: 'inset 0 8px 16px rgba(0,0,0,0.9)'
+                    }} />
+                </div>
+                
+                {/* Floating lava embers */}
                 <div className="absolute inset-0 pointer-events-none">
-                    {[...Array(30)].map((_, i) => (
+                    {[...Array(25)].map((_, i) => (
                         <motion.div
                             key={i}
-                            className="absolute rounded-sm"
+                            className="absolute"
                             style={{
-                                left: `${Math.random() * 100}%`,
-                                top: `${60 + Math.random() * 40}%`,
-                                width: Math.random() * 4 + 2,
-                                height: Math.random() * 4 + 2,
-                                background: Math.random() > 0.5 ? '#ff6b35' : '#ff9500',
-                                boxShadow: '0 0 8px currentColor'
+                                left: `${20 + Math.random() * 60}%`,
+                                bottom: `${-10 + Math.random() * 20}%`,
+                                width: Math.random() * 6 + 3,
+                                height: Math.random() * 6 + 3,
+                                background: Math.random() > 0.6 ? '#ff6b35' : Math.random() > 0.3 ? '#ff9500' : '#ffaa00',
+                                boxShadow: '0 0 12px currentColor',
+                                borderRadius: '1px'
                             }}
                             animate={{
-                                y: [-20, -150 - Math.random() * 100],
-                                opacity: [0, 0.8, 0],
-                                scale: [0.5, 1, 0.5]
+                                y: [-50, -window.innerHeight - 100],
+                                opacity: [0, 1, 0.8, 0],
+                                scale: [0.3, 1.2, 1, 0.5]
                             }}
                             transition={{
-                                duration: 3 + Math.random() * 4,
+                                duration: 4 + Math.random() * 6,
                                 repeat: Infinity,
-                                delay: Math.random() * 6,
+                                delay: Math.random() * 8,
                                 ease: "easeOut"
                             }}
                         />
                     ))}
                 </div>
 
+                {/* Simple centered card - Minecraft simplicity */}
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="bg-gradient-to-b from-gray-900 via-gray-800 to-black border-8 border-orange-500 p-8 max-w-lg relative z-10"
-                    style={{ 
-                        boxShadow: '0 0 100px rgba(249, 115, 22, 1), inset 0 0 80px rgba(0,0,0,0.8)',
-                        backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.3) 2px, rgba(0,0,0,0.3) 4px)'
-                    }}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="relative z-10 mx-4 max-w-md"
                 >
-                    {/* Animated heart with lightning */}
-                    <div className="relative mb-6">
-                        <motion.div
-                            animate={{ 
-                                scale: [1, 1.05, 1],
-                                rotate: [0, 2, -2, 0]
+                    {/* VOLCKANO Title - exact style from image */}
+                    <div className="text-center mb-8">
+                        <motion.h1 
+                            className="text-8xl font-black mb-2"
+                            animate={{
+                                textShadow: [
+                                    '0 0 30px rgba(255, 107, 53, 1), 6px 6px 0 #000, -2px -2px 0 rgba(255, 150, 80, 0.8)',
+                                    '0 0 50px rgba(255, 107, 53, 1), 6px 6px 0 #000, -2px -2px 0 rgba(255, 150, 80, 1)',
+                                    '0 0 30px rgba(255, 107, 53, 1), 6px 6px 0 #000, -2px -2px 0 rgba(255, 150, 80, 0.8)'
+                                ]
                             }}
-                            transition={{ duration: 3, repeat: Infinity }}
-                            className="mx-auto w-40 h-40 relative"
+                            transition={{ duration: 2, repeat: Infinity }}
+                            style={{ 
+                                color: '#d4634d',
+                                fontFamily: 'Impact, sans-serif',
+                                letterSpacing: '3px',
+                                WebkitTextStroke: '2px rgba(0,0,0,0.8)'
+                            }}
                         >
-                            {/* Pixel heart */}
-                            <div className="absolute inset-0 grid grid-cols-8 grid-rows-8 gap-1">
-                                {[
-                                    [0,0,1,1,0,1,1,0],
-                                    [0,1,1,1,1,1,1,1],
-                                    [1,1,1,1,1,1,1,1],
-                                    [1,1,1,1,1,1,1,1],
-                                    [1,1,1,1,1,1,1,1],
-                                    [0,1,1,1,1,1,1,0],
-                                    [0,0,1,1,1,1,0,0],
-                                    [0,0,0,1,1,0,0,0]
-                                ].map((row, i) => row.map((cell, j) => 
-                                    cell ? (
-                                        <motion.div 
-                                            key={`${i}-${j}`} 
-                                            className="bg-gradient-to-br from-red-500 to-red-700 border border-red-400 rounded-sm" 
-                                            animate={{ boxShadow: ['0 0 10px rgba(239, 68, 68, 0.8)', '0 0 20px rgba(239, 68, 68, 1)', '0 0 10px rgba(239, 68, 68, 0.8)'] }}
-                                            transition={{ duration: 2, repeat: Infinity, delay: (i + j) * 0.05 }}
-                                        />
-                                    ) : <div key={`${i}-${j}`} />
-                                ))}
-                            </div>
-                            {/* Lightning bolt */}
-                            <motion.div 
-                                className="absolute inset-0 flex items-center justify-center"
-                                animate={{ opacity: [0.8, 1, 0.8], scale: [1, 1.1, 1] }}
-                                transition={{ duration: 1.5, repeat: Infinity }}
-                            >
-                                <div 
-                                    className="w-12 h-32 bg-gradient-to-b from-cyan-300 to-cyan-500 transform rotate-12" 
-                                    style={{ 
-                                        clipPath: 'polygon(50% 0, 100% 35%, 60% 35%, 75% 100%, 25% 60%, 50% 60%)',
-                                        filter: 'drop-shadow(0 0 15px rgba(34, 211, 238, 1))'
-                                    }} 
-                                />
-                            </motion.div>
-                        </motion.div>
-                    </div>
-
-                    <h1 className="text-6xl font-black text-white text-center mb-2" style={{ textShadow: '6px 6px 0 #000, -2px -2px 0 #fbbf24' }}>
-                        VOLCKANO
-                    </h1>
-                    <p className="text-orange-300 text-center text-sm font-black mb-3" style={{ textShadow: '2px 2px 0 #000' }}>
-                        (Georgie7's spelling ❤️)
-                    </p>
-                    <div className="bg-black/60 border-4 border-yellow-400 p-4 mb-4">
-                        <p className="text-yellow-300 text-center text-lg font-black mb-2" style={{ textShadow: '2px 2px 0 #000' }}>
-                            ⚡ BUILD ANYTHING YOU IMAGINE ⚡
+                            VOLCKANO
+                        </motion.h1>
+                        <p className="text-orange-300 text-sm font-bold" style={{ textShadow: '2px 2px 4px #000' }}>
+                            by Georgie7 ❤️
                         </p>
-                        <div className="text-white text-sm space-y-1 font-bold" style={{ textShadow: '1px 1px 0 #000' }}>
-                            <p>✓ 100% FREE FOREVER</p>
-                            <p>✓ Works OFFLINE (no internet needed)</p>
-                            <p>✓ LEARN while you build (maths, science)</p>
-                            <p>✓ REALISTIC graphics (beautiful!)</p>
-                            <p>✓ Build with friends (P2P, no servers)</p>
-                            <p>✓ ZERO ads, ZERO purchases</p>
-                        </div>
                     </div>
                     
-                    <p className="text-white text-center text-base font-bold mb-4" style={{ textShadow: '2px 2px 0 #000' }}>
-                        What's your name, builder?
-                    </p>
-                    
-                    <input
-                        type="text"
-                        value={playerName}
-                        onChange={(e) => setPlayerName(e.target.value)}
-                        onKeyPress={(e) => e.key === 'Enter' && playerName.trim() && setShowNameInput(false)}
-                        placeholder="Your name..."
-                        className="w-full bg-yellow-600 border-4 border-yellow-900 px-4 py-4 text-black text-center text-2xl font-black mb-4 placeholder:text-yellow-800 focus:bg-yellow-500 transition-colors"
-                        autoFocus
-                    />
-                    
-                    <Button
-                        onClick={() => {
-                            if (playerName.trim()) {
-                                setShowNameInput(false);
-                                localStorage.setItem('voxelheart51_player', playerName);
-                            }
-                        }}
-                        disabled={!playerName.trim()}
-                        className="w-full bg-gradient-to-b from-green-500 to-green-700 hover:from-green-400 hover:to-green-600 border-4 border-green-900 text-white font-black py-5 text-2xl disabled:opacity-50"
-                        style={{ textShadow: '3px 3px 0 #000' }}
-                    >
-                        🚀 START CREATING! 🚀
-                    </Button>
+                    {/* Ultra simple - just name and GO (Minecraft style) */}
+                    <div className="space-y-3">
+                        <input
+                            type="text"
+                            value={playerName}
+                            onChange={(e) => setPlayerName(e.target.value)}
+                            onKeyPress={(e) => e.key === 'Enter' && playerName.trim() && setShowNameInput(false)}
+                            placeholder="Your name..."
+                            className="w-full bg-gray-900/80 backdrop-blur-sm border-4 border-orange-500/80 px-5 py-5 text-white text-center text-2xl font-bold placeholder:text-gray-500 focus:border-orange-400 focus:outline-none transition-all"
+                            style={{ textShadow: '2px 2px 4px #000' }}
+                            autoFocus
+                        />
+                        
+                        <Button
+                            onClick={() => {
+                                if (playerName.trim()) {
+                                    setShowNameInput(false);
+                                    localStorage.setItem('volckano_player', playerName);
+                                }
+                            }}
+                            disabled={!playerName.trim()}
+                            className="w-full bg-gradient-to-b from-orange-500 to-orange-700 hover:from-orange-400 hover:to-orange-600 border-4 border-orange-900 text-white font-black py-6 text-2xl disabled:opacity-50 transition-all"
+                            style={{ textShadow: '3px 3px 0 #000', boxShadow: '0 8px 0 #000, 0 0 30px rgba(249, 115, 22, 0.8)' }}
+                        >
+                            🌋 START BUILDING
+                        </Button>
 
-                    <p className="text-yellow-300 text-xs text-center mt-4 font-bold" style={{ textShadow: '1px 1px 0 #000' }}>
-                        Made with ❤️ for Georgie7 + ALL her friends worldwide ⚡
-                    </p>
+                        <p className="text-white/60 text-xs text-center font-bold pt-2" style={{ textShadow: '1px 1px 2px #000' }}>
+                            FREE • OFFLINE • NO ADS
+                        </p>
+                    </div>
                 </motion.div>
             </div>
         );
