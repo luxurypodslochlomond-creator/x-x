@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Heart } from 'lucide-react';
+import VolckanoP2PSimple from '@/components/volckano/VolckanoP2PSimple';
 
 /**
  * VOLCKANO - THE GAME GERGIE7 DREAMED OF
@@ -402,140 +403,62 @@ export default function VoxelHeart51() {
 
     if (showNameInput) {
         return (
-            <div className="min-h-screen relative flex items-center justify-center overflow-hidden bg-black">
-                {/* Georgie7's exact VALCKANO sunset colors */}
-                <div className="absolute inset-0" style={{
-                    background: 'linear-gradient(to bottom, #1a1a2e 0%, #2d1b3d 15%, #4a2545 30%, #d4634d 55%, #f7a063 75%, #b4d5f0 100%)'
-                }} />
+            <div className="min-h-screen relative overflow-hidden bg-black">
+                {/* HER volcano image as background */}
+                <div 
+                    className="absolute inset-0 bg-cover bg-center"
+                    style={{
+                        backgroundImage: 'url(https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6889f31e76713b9cd47e043c/870b0a855_IMG_6227.png)',
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center'
+                    }}
+                />
                 
-                {/* Dramatic metal frame - like the screenshot */}
-                <div className="absolute top-0 left-0 right-0 h-16 z-20 pointer-events-none">
-                    <div className="h-full bg-gradient-to-b from-gray-800 via-gray-700 to-transparent opacity-90" style={{
-                        boxShadow: 'inset 0 -8px 16px rgba(0,0,0,0.9)'
+                {/* Dark overlay so text readable */}
+                <div className="absolute inset-0 bg-black/40" />
+                
+                {/* Metal frame effect - exactly like her image */}
+                <div className="absolute top-0 left-0 right-0 h-20 z-20 pointer-events-none">
+                    <div className="h-full" style={{
+                        background: 'linear-gradient(to bottom, rgba(50,50,50,0.95) 0%, rgba(70,70,70,0.8) 50%, transparent 100%)',
+                        boxShadow: 'inset 0 -12px 20px rgba(0,0,0,0.9)'
                     }} />
                 </div>
-                <div className="absolute bottom-0 left-0 right-0 h-16 z-20 pointer-events-none">
-                    <div className="h-full bg-gradient-to-t from-gray-800 via-gray-700 to-transparent opacity-90" style={{
-                        boxShadow: 'inset 0 8px 16px rgba(0,0,0,0.9)'
+                <div className="absolute bottom-0 left-0 right-0 h-20 z-20 pointer-events-none">
+                    <div className="h-full" style={{
+                        background: 'linear-gradient(to top, rgba(50,50,50,0.95) 0%, rgba(70,70,70,0.8) 50%, transparent 100%)',
+                        boxShadow: 'inset 0 12px 20px rgba(0,0,0,0.9)'
                     }} />
                 </div>
                 
-                {/* Floating lava embers */}
-                <div className="absolute inset-0 pointer-events-none">
-                    {[...Array(25)].map((_, i) => (
-                        <motion.div
-                            key={i}
-                            className="absolute"
-                            style={{
-                                left: `${20 + Math.random() * 60}%`,
-                                bottom: `${-10 + Math.random() * 20}%`,
-                                width: Math.random() * 6 + 3,
-                                height: Math.random() * 6 + 3,
-                                background: Math.random() > 0.6 ? '#ff6b35' : Math.random() > 0.3 ? '#ff9500' : '#ffaa00',
-                                boxShadow: '0 0 12px currentColor',
-                                borderRadius: '1px'
-                            }}
-                            animate={{
-                                y: [-50, -window.innerHeight - 100],
-                                opacity: [0, 1, 0.8, 0],
-                                scale: [0.3, 1.2, 1, 0.5]
-                            }}
-                            transition={{
-                                duration: 4 + Math.random() * 6,
-                                repeat: Infinity,
-                                delay: Math.random() * 8,
-                                ease: "easeOut"
-                            }}
+                {/* Simple centered form - no extra animations */}
+                <div className="relative z-10 h-full flex items-center justify-center px-4">
+                    <div className="w-full max-w-sm space-y-4">
+                        <input
+                            type="text"
+                            value={playerName}
+                            onChange={(e) => setPlayerName(e.target.value)}
+                            onKeyPress={(e) => e.key === 'Enter' && playerName.trim() && setShowNameInput(false)}
+                            placeholder="Your name..."
+                            className="w-full bg-black/60 backdrop-blur-sm border-2 border-orange-500/50 px-6 py-4 text-white text-center text-xl font-bold placeholder:text-gray-400 focus:border-orange-500 focus:outline-none transition-all"
+                            style={{ textShadow: '2px 2px 4px #000' }}
+                            autoFocus
                         />
-                    ))}
-                </div>
-
-                {/* EXACT Gergie7's screenshot - full viewport centered */}
-                <div className="relative z-10 w-full h-full flex flex-col items-center justify-center px-4">
-                    
-                    {/* Title - EXACT positioning like screenshot */}
-                    <motion.div
-                        initial={{ opacity: 0, y: -30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="text-center mb-auto pt-32"
-                    >
-                        <h1 
-                            className="font-black leading-none mb-2"
-                            style={{ 
-                                fontSize: 'clamp(4rem, 20vw, 8rem)',
-                                color: '#ff6b35',
-                                fontFamily: 'Impact, sans-serif',
-                                letterSpacing: '0.05em',
-                                textShadow: '0 0 40px rgba(255, 107, 53, 0.8), 4px 4px 0 rgba(0,0,0,0.9), -2px -2px 0 rgba(139, 69, 19, 0.6), inset 0 -8px 0 rgba(139, 69, 19, 0.4)',
-                                WebkitTextStroke: '3px rgba(139, 69, 19, 0.8)'
+                        
+                        <button
+                            onClick={() => {
+                                if (playerName.trim()) {
+                                    setShowNameInput(false);
+                                    localStorage.setItem('volckano_player', playerName);
+                                }
                             }}
+                            disabled={!playerName.trim()}
+                            className="w-full bg-gradient-to-b from-orange-500 to-orange-700 hover:from-orange-400 hover:to-orange-600 text-white font-black py-5 text-2xl disabled:opacity-50 transition-all border-b-4 border-orange-900"
+                            style={{ textShadow: '3px 3px 0 #000' }}
                         >
-                            VOLCKANO
-                        </h1>
-                        <div className="flex items-center justify-center gap-2">
-                            <p className="text-orange-200 font-bold" style={{ textShadow: '2px 2px 4px #000', fontSize: 'clamp(0.875rem, 3vw, 1rem)' }}>
-                                by Gergie7
-                            </p>
-                            <svg width="16" height="16" viewBox="0 0 16 16" style={{ imageRendering: 'pixelated' }}>
-                                <rect x="2" y="4" width="2" height="2" fill="#ec4899"/>
-                                <rect x="4" y="2" width="4" height="2" fill="#ec4899"/>
-                                <rect x="8" y="2" width="4" height="2" fill="#ec4899"/>
-                                <rect x="12" y="4" width="2" height="2" fill="#ec4899"/>
-                                <rect x="2" y="6" width="12" height="2" fill="#ff1b8d"/>
-                                <rect x="2" y="8" width="12" height="2" fill="#ff1b8d"/>
-                                <rect x="4" y="10" width="8" height="2" fill="#ff1b8d"/>
-                                <rect x="6" y="12" width="4" height="2" fill="#ff1b8d"/>
-                                <rect x="7" y="14" width="2" height="2" fill="#ff1b8d"/>
-                            </svg>
-                        </div>
-                    </motion.div>
-
-                    {/* Form at bottom - EXACT like screenshot */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="w-full max-w-md mb-20"
-                    >
-                        <div className="space-y-3">
-                            <input
-                                type="text"
-                                value={playerName}
-                                onChange={(e) => setPlayerName(e.target.value)}
-                                onKeyPress={(e) => e.key === 'Enter' && playerName.trim() && setShowNameInput(false)}
-                                placeholder="Your name..."
-                                className="w-full bg-gray-700/50 backdrop-blur-sm border-2 border-gray-500 px-5 py-4 text-white text-center text-lg font-bold placeholder:text-gray-400 focus:border-orange-400 focus:outline-none transition-all rounded"
-                                style={{ textShadow: '1px 1px 2px #000' }}
-                                autoFocus
-                            />
-                            
-                            <button
-                                onClick={() => {
-                                    if (playerName.trim()) {
-                                        setShowNameInput(false);
-                                        localStorage.setItem('volckano_player', playerName);
-                                    }
-                                }}
-                                disabled={!playerName.trim()}
-                                className="w-full bg-gradient-to-b from-orange-500 to-orange-600 hover:from-orange-400 hover:to-orange-500 text-white font-black py-5 text-xl disabled:opacity-50 transition-all rounded border-b-4 border-orange-800"
-                                style={{ textShadow: '2px 2px 0 #000' }}
-                            >
-                                <span className="flex items-center justify-center gap-2">
-                                    <svg width="18" height="18" viewBox="0 0 16 16" style={{ imageRendering: 'pixelated' }}>
-                                        <rect x="7" y="2" width="2" height="2" fill="white"/>
-                                        <rect x="6" y="4" width="4" height="2" fill="white"/>
-                                        <rect x="5" y="6" width="6" height="2" fill="#654321"/>
-                                        <rect x="4" y="8" width="8" height="2" fill="#654321"/>
-                                        <rect x="7" y="6" width="2" height="6" fill="#ffaa00"/>
-                                    </svg>
-                                    START BUILDING
-                                </span>
-                            </button>
-
-                            <p className="text-gray-300 text-xs text-center font-bold tracking-wider" style={{ textShadow: '1px 1px 2px #000' }}>
-                                FREE • OFFLINE • NO ADS
-                            </p>
-                        </div>
-                    </motion.div>
+                            🌋 START BUILDING
+                        </button>
+                    </div>
                 </div>
             </div>
         );
@@ -569,13 +492,31 @@ export default function VoxelHeart51() {
                 </div>
             </div>
 
-            {/* Simple save button - top right */}
-            <button
-                onClick={saveWorld}
-                className="absolute top-4 right-4 bg-green-600 hover:bg-green-700 text-white font-bold px-6 py-3 rounded-lg pointer-events-auto border-2 border-green-800"
-            >
-                💾 SAVE
-            </button>
+            {/* Controls - top right */}
+            <div className="absolute top-4 right-4 space-y-2 pointer-events-auto">
+                <button
+                    onClick={saveWorld}
+                    className="w-full bg-green-600 hover:bg-green-700 text-white font-bold px-6 py-3 rounded-lg border-2 border-green-800"
+                >
+                    💾 SAVE
+                </button>
+                
+                <div className="relative">
+                    <VolckanoP2PSimple
+                        playerName={playerName}
+                        onBlockPlaced={(x, y, z, type) => addBlock(x, y, z, type)}
+                        onBlockRemoved={(x, y, z) => {
+                            const key = `${x},${y},${z}`;
+                            const block = blocksRef.current.get(key);
+                            if (block) {
+                                if (block.userData.light) sceneRef.current.remove(block.userData.light);
+                                sceneRef.current.remove(block);
+                                blocksRef.current.delete(key);
+                            }
+                        }}
+                    />
+                </div>
+            </div>
         </div>
     );
 }
