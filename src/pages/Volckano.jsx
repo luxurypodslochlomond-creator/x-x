@@ -242,22 +242,24 @@ export default function Volckano() {
                 });
             }
 
-            // Collect people (collision with people)
-            setPeople(prev => {
-                const updated = prev.map(person => {
-                    if (!person.saved && person.x > 50 && person.x < 110 && 
-                        Math.abs(person.y - playerY) < 50) {
-                        playSound(528, 150); // 528Hz healing collection sound
-                        setPeopleSaved(s => s + 1);
-                        return { ...person, saved: true };
-                    }
-                    return { ...person, x: person.x - 3 * delta };
+            // Collect people (Level 1 only)
+            if (level === 1) {
+                setPeople(prev => {
+                    const updated = prev.map(person => {
+                        if (!person.saved && person.x > 50 && person.x < 110 && 
+                            Math.abs(person.y - playerY) < 50) {
+                            playSound(528, 150);
+                            setPeopleSaved(s => s + 1);
+                            return { ...person, saved: true };
+                        }
+                        return { ...person, x: person.x - 1.5 * delta };
+                    });
+                    return updated.filter(p => p.x > -60);
                 });
-                return updated.filter(p => p.x > -60);
-            });
-
-            // Move people - MUCH SLOWER
-            setPeople(prev => prev.map(p => ({ ...p, x: p.x - 1.5 * delta })));
+            } else if (level === 2) {
+                // Level 2: People move across, you shield them
+                setPeople(prev => prev.map(p => ({ ...p, x: p.x - 1.5 * delta })).filter(p => p.x > -60));
+            }
 
             // Check if level complete
             if (peopleSaved >= peopleToSave && !levelComplete) {
