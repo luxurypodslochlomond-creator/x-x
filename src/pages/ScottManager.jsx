@@ -5,7 +5,7 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Plus, Search, Wifi, WifiOff, RefreshCw, Brain, DollarSign, FileText, Music, Globe, Briefcase, Camera, Plane, Users, Crown, Palette, Heart, Send, X, Shield, Upload, Calendar, Radio } from 'lucide-react';
+import { Plus, Search, Wifi, WifiOff, RefreshCw, Brain, DollarSign, FileText, Music, Globe, Briefcase, Camera, Plane, Users, Crown, Palette, Heart, Send, X, Shield, Upload, Calendar, Radio, Mic } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import KingdomCrown8Bit from '@/components/shared/KingdomCrown8Bit';
 import BrosBond8Bit from '@/components/shared/BrosBond8Bit';
@@ -62,6 +62,10 @@ function ScottManagerInner() {
     const [showFileUpload, setShowFileUpload] = useState(false);
     const [advancedMode, setAdvancedMode] = useState(false);
     const [activeWorkflow, setActiveWorkflow] = useState(null);
+    const [isListening, setIsListening] = useState(false);
+    const [voiceText, setVoiceText] = useState('');
+    const [quickNote, setQuickNote] = useState('');
+    const recognitionRef = React.useRef(null);
     
     const scott = useScottOffline();
     const [artists, setArtists] = useState([]);
@@ -113,6 +117,28 @@ Managing chaos → Making it simple. That's your job bro ♾️❤️♾️`,
         if (storedPin === '1888') {
             setPinEntered(true);
         }
+        
+        // Init voice
+        if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            recognitionRef.current = new SpeechRecognition();
+            recognitionRef.current.continuous = true;
+            recognitionRef.current.interimResults = true;
+            recognitionRef.current.lang = 'en-GB';
+            recognitionRef.current.onresult = (event) => {
+                let text = '';
+                for (let i = event.resultIndex; i < event.results.length; i++) {
+                    text += event.results[i][0].transcript;
+                }
+                setVoiceText(text);
+            };
+            recognitionRef.current.onerror = () => setIsListening(false);
+            recognitionRef.current.onend = () => setIsListening(false);
+        }
+        
+        return () => {
+            if (recognitionRef.current) recognitionRef.current.stop();
+        };
     }, []);
 
     // Load data from offline storage
@@ -150,6 +176,39 @@ Managing chaos → Making it simple. That's your job bro ♾️❤️♾️`,
             }
         }
     }, [pinEntered, scott.isOnline]);
+
+    const toggleVoice = () => {
+        if (!recognitionRef.current) return;
+        if (isListening) {
+            recognitionRef.current.stop();
+            setIsListening(false);
+        } else {
+            recognitionRef.current.start();
+            setIsListening(true);
+        }
+    };
+    
+    const saveQuickNote = async () => {
+        const note = (quickNote + ' ' + voiceText).trim();
+        if (!note) return;
+        try {
+            await base44.entities.ScottFeatureRequest.create({
+                request: note,
+                priority: 'high',
+                status: 'new',
+                category: 'pain_point'
+            });
+            setQuickNote('');
+            setVoiceText('');
+            if (isListening) {
+                recognitionRef.current.stop();
+                setIsListening(false);
+            }
+            alert('Got it bro ✓');
+        } catch (e) {
+            console.error(e);
+        }
+    };
 
     const handlePinSubmit = () => {
         if (pinInput === '1888') {
@@ -221,6 +280,36 @@ Managing chaos → Making it simple. That's your job bro ♾️❤️♾️`,
         <ScottFeatureRequest />
 
 
+
+            {/* QUICK VOICE/TYPE - TOP */}
+            <div className="mb-4 bg-gradient-to-r from-pink-500/20 to-cyan-500/20 border-2 border-pink-500 p-3 rounded-xl">
+                <div className="flex gap-2 mb-2">
+                    <input
+                        type="text"
+                        value={quickNote + (voiceText ? ' ' + voiceText : '')}
+                        onChange={(e) => setQuickNote(e.target.value)}
+                        placeholder="What's painful? (voice or type)"
+                        className="flex-1 bg-black/60 border border-cyan-500/50 rounded px-3 py-2 text-white text-sm placeholder:text-gray-500 focus:border-cyan-500 focus:outline-none font-mono"
+                        disabled={isListening}
+                    />
+                    <button
+                        onClick={toggleVoice}
+                        className={`px-3 py-2 rounded font-bold transition-all ${
+                            isListening ? 'bg-red-500 text-white' : 'bg-cyan-500 text-black'
+                        }`}
+                    >
+                        <Mic className="w-4 h-4" />
+                    </button>
+                    <button
+                        onClick={saveQuickNote}
+                        disabled={!quickNote.trim() && !voiceText.trim()}
+                        className="px-3 py-2 bg-green-600 disabled:bg-gray-700 disabled:opacity-50 text-white rounded font-bold"
+                    >
+                        <Send className="w-4 h-4" />
+                    </button>
+                </div>
+                <p className="text-xs text-pink-300 font-mono font-bold">BRO51 builds what matters ♾️</p>
+            </div>
 
             {/* HEADER - 8-BIT RETRO CB51 RADIO */}
             <motion.div 
