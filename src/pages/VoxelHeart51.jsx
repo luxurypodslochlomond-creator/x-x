@@ -119,7 +119,7 @@ export default function VoxelHeart51() {
     const blocksRef = useRef(new Map());
     const [selectedBlock, setSelectedBlock] = useState('GRASS');
     const [isPlaying, setIsPlaying] = useState(true);
-    const [showHelp, setShowHelp] = useState(true);
+    const [showHelp, setShowHelp] = useState(false);
     const [showEducation, setShowEducation] = useState(false);
     const [playMusic, setPlayMusic] = useState(false);
     const [playerName, setPlayerName] = useState('');
@@ -816,45 +816,25 @@ export default function VoxelHeart51() {
                 </div>
             </div>
 
-            {/* Help Panel */}
+            {/* Help Panel - simple like Minecraft */}
             <AnimatePresence>
                 {showHelp && (
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 20 }}
-                        className="absolute bottom-4 left-4 bg-black/95 border-2 border-purple-500 rounded-lg p-4 max-w-md pointer-events-auto"
+                        className="absolute bottom-4 left-4 bg-black/90 border-2 border-cyan-500 rounded-lg p-3 max-w-sm pointer-events-auto"
                     >
-                        <h3 className="text-purple-400 font-bold mb-2 flex items-center gap-2">
-                            <Zap className="w-5 h-5" />
-                            HOW TO BUILD:
-                        </h3>
-                        <ul className="text-gray-300 text-sm space-y-1.5">
-                            <li>• <strong className="text-white">Click</strong> on a block to place your selected block</li>
-                            <li>• <strong className="text-white">Shift + Click</strong> to remove a block</li>
-                            <li>• <strong className="text-white">Right Click + Drag</strong> to rotate camera</li>
-                            <li>• <strong className="text-white">Mouse Wheel</strong> to zoom in/out</li>
-                            <li>• <strong className="text-yellow-400">Hover blocks</strong> to learn cool science facts!</li>
-                            <li>• Build anything: VALCKANOs, castles, hearts ❤️⚡</li>
-                        </ul>
-                        <div className="mt-3 bg-gradient-to-r from-pink-500/20 to-purple-500/20 border border-pink-500 rounded p-2">
-                            <p className="text-pink-400 text-xs font-bold">
-                                🌋 TIP: Stack LAVA + MAGMA high, add OBSIDIAN edges, SMOKE on top = EPIC VOLCKANO!
-                            </p>
+                        <p className="text-cyan-400 font-bold text-sm mb-2">HOW TO BUILD:</p>
+                        <div className="text-white text-xs space-y-1">
+                            <p><strong>Click</strong> = place block</p>
+                            <p><strong>Shift + Click</strong> = remove</p>
+                            <p><strong>Right drag</strong> = rotate</p>
+                            <p><strong>Scroll</strong> = zoom</p>
                         </div>
                     </motion.div>
                 )}
             </AnimatePresence>
-
-            {/* Footer */}
-            <div className="absolute bottom-4 right-4 bg-black/90 border-2 border-pink-500 rounded-lg px-4 py-2 pointer-events-none">
-                <p className="text-pink-400 text-xs font-bold">
-                    ❤️ FREE FOREVER • 100% OFFLINE • ZERO EXTRACTION ❤️
-                </p>
-                <p className="text-cyan-400 text-[10px] font-bold text-center mt-1">
-                    Inspired by what kids love • Made for kids worldwide ⚡
-                </p>
-            </div>
         </div>
     );
 }
