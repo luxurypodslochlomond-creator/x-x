@@ -210,6 +210,56 @@ export default function ScottAbout() {
                     </Link>
                 </div>
 
+                {/* SK51 QUESTIONS - IN THE SHED */}
+                <div className="bg-gradient-to-r from-amber-500/30 to-red-500/30 border-4 border-amber-500 rounded-xl p-6" style={{ boxShadow: '0 0 50px rgba(245, 158, 11, 0.6)' }}>
+                    <div className="flex items-center gap-3 mb-4">
+                        <div className="text-4xl">🎸</div>
+                        <div>
+                            <h2 className="text-amber-400 font-black text-xl font-mono">SK51 - QUESTIONS FOR YOU BRO</h2>
+                            <p className="text-gray-400 text-xs font-mono">Answer these in the shed, we'll build it ♾️📻</p>
+                        </div>
+                    </div>
+
+                    <div className="space-y-4 text-sm font-mono">
+                        <div className="bg-black border-2 border-amber-500 rounded-lg p-4">
+                            <p className="text-amber-400 font-bold mb-2">1. WHICH BITS DO YOU USE MOST?</p>
+                            <p className="text-gray-400 text-xs mb-1">• Calendar? Invoices? Gig tracking?</p>
+                            <p className="text-gray-400 text-xs">• What do you check daily?</p>
+                        </div>
+
+                        <div className="bg-black border-2 border-amber-500 rounded-lg p-4">
+                            <p className="text-amber-400 font-bold mb-2">2. WHAT'S STILL A PAIN?</p>
+                            <p className="text-gray-400 text-xs mb-1">• What causes you stress?</p>
+                            <p className="text-gray-400 text-xs">• What takes too long?</p>
+                        </div>
+
+                        <div className="bg-black border-2 border-amber-500 rounded-lg p-4">
+                            <p className="text-amber-400 font-bold mb-2">3. WHEN DO YOU USE IT?</p>
+                            <p className="text-gray-400 text-xs mb-1">• Tour bus? Hotel? Home?</p>
+                            <p className="text-gray-400 text-xs">• Online or offline mostly?</p>
+                        </div>
+
+                        <div className="bg-black border-2 border-cyan-500 rounded-lg p-4">
+                            <p className="text-cyan-400 font-bold mb-2">4. WHAT WOULD SAVE YOU 5 HOURS/WEEK?</p>
+                            <p className="text-gray-400 text-xs mb-1">• What takes most time right now?</p>
+                            <p className="text-gray-400 text-xs">• What would make life easier?</p>
+                        </div>
+
+                        <div className="bg-black border-2 border-pink-500 rounded-lg p-4">
+                            <p className="text-pink-400 font-bold mb-2">5. WHAT'S YOUR DREAM VERSION?</p>
+                            <p className="text-gray-400 text-xs mb-1">• If you could add ONE thing?</p>
+                            <p className="text-gray-400 text-xs">• What would make it perfect for you?</p>
+                        </div>
+
+                        <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-2 border-green-500 rounded-lg p-4">
+                            <p className="text-green-400 font-bold mb-2">JUST VOICE RECORD YOUR ANSWERS BRO</p>
+                            <p className="text-white text-xs mb-1">• Use voice notes on phone</p>
+                            <p className="text-white text-xs mb-1">• Or just chat to BRO51</p>
+                            <p className="text-cyan-400 text-xs font-bold mt-2">We'll build what you need ♾️📻♾️</p>
+                        </div>
+                    </div>
+                </div>
+
                 {/* START */}
                 <div className="text-center space-y-3">
                     <p className="text-gray-400 text-sm font-mono mb-3">Built for the road</p>
