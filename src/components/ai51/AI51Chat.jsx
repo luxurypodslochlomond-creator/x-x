@@ -509,29 +509,8 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, biom
           </button>
         </div>
         
-        {/* 8-BIT STATUS BAR */}
-        <div className="flex items-center justify-center gap-3 mt-3 text-xs font-mono">
-          {isOffline && (
-            <span className="text-amber-400 font-bold bg-black border-2 border-amber-500 px-2 py-1">OFFLINE ✓</span>
-          )}
-          {batteryLevel < 20 && (
-            <span className="text-red-400 font-bold bg-black border-2 border-red-500 px-2 py-1">LOW BATT</span>
-          )}
-          <button
-            onClick={() => {
-              const langs = ['en', 'ar', 'uk', 'es', 'zh', 'ko', 'fr', 'ja', 'hi', 'pt', 'ru'];
-              const current = langs.indexOf(userLanguage);
-              const next = langs[(current + 1) % langs.length];
-              setUserLanguage(next);
-            }}
-            className="bg-black border-2 border-cyan-500 hover:border-cyan-400 px-2 py-1 text-cyan-400 font-bold flex items-center gap-1"
-          >
-            <Globe className="w-3 h-3" />
-            {userLanguage.toUpperCase()}
-          </button>
-        </div>
-        <p className="text-cyan-400 text-xs text-center mt-2 font-mono font-bold">
-          TWO-WAY BOND ♾️❤️♾️
+        <p className="text-cyan-400 text-xs text-center mt-3 font-mono font-bold">
+          CONNECTED ♾️❤️♾️
         </p>
       </motion.div>
     </div>
