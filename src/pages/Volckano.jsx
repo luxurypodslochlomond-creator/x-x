@@ -17,6 +17,7 @@ export default function Volckano() {
     const [level, setLevel] = useState(1);
     const [peopleToSave, setPeopleToSave] = useState(5);
     const [peopleSaved, setPeopleSaved] = useState(0);
+    const [shieldedPeople, setShieldedPeople] = useState(new Set());
     const [playerY, setPlayerY] = useState(200);
     const [velocity, setVelocity] = useState(0);
     const [obstacles, setObstacles] = useState([]);
@@ -105,6 +106,7 @@ export default function Volckano() {
         setVelocity(0);
         setObstacles([]);
         setPeople([]);
+        setShieldedPeople(new Set());
     };
 
     useEffect(() => {
@@ -127,43 +129,118 @@ export default function Volckano() {
                 return newY;
             });
 
-            // Move obstacles - MUCH SLOWER
-            setObstacles(prev => {
-                const updated = prev
-                    .map(obs => ({ ...obs, x: obs.x - 1.8 * delta }))
-                    .filter(obs => obs.x > -60);
+            // Level-specific obstacle logic
+            if (level === 1) {
+                // LEVEL 1: Lava rocks from sides
+                setObstacles(prev => {
+                    const updated = prev
+                        .map(obs => ({ ...obs, x: obs.x - 1.8 * delta }))
+                        .filter(obs => obs.x > -60);
 
-                // Spawn new obstacle - HUGE SPACE for learning
-                if (updated.length === 0 || updated[updated.length - 1].x < 180) {
-                    updated.push({
-                        x: 400,
-                        y: Math.random() > 0.5 ? 0 : 350,
-                        height: 60 + Math.random() * 40
-                    });
-                }
+                    // Spawn new obstacle - HUGE SPACE for learning
+                    if (updated.length === 0 || updated[updated.length - 1].x < 180) {
+                        updated.push({
+                            x: 400,
+                            y: Math.random() > 0.5 ? 0 : 350,
+                            height: 60 + Math.random() * 40
+                        });
+                    }
 
-                return updated;
-            });
+                    return updated;
+                });
+            } else if (level === 2) {
+                // LEVEL 2: Meteors from sky
+                setObstacles(prev => {
+                    const updated = prev
+                        .map(obs => ({ ...obs, y: obs.y + 2.5 * delta }))
+                        .filter(obs => obs.y < 500);
+
+                    // Spawn meteors randomly across top
+                    if (updated.length < 3 && Math.random() < 0.02) {
+                        updated.push({
+                            x: 50 + Math.random() * 300,
+                            y: -30,
+                            width: 40,
+                            height: 40
+                        });
+                    }
+
+                    return updated;
+                });
+            }
 
             // Collision detection with obstacles
-            setObstacles(prev => {
-                const hit = prev.some(obs => {
-                    if (obs.x > 50 && obs.x < 110) {
-                        if (obs.y === 0) {
-                            return playerY < obs.height;
-                        } else {
-                            return playerY + 50 > obs.y;
+            if (level === 1) {
+                // Level 1: Lava collision
+                setObstacles(prev => {
+                    const hit = prev.some(obs => {
+                        if (obs.x > 50 && obs.x < 110) {
+                            if (obs.y === 0) {
+                                return playerY < obs.height;
+                            } else {
+                                return playerY + 50 > obs.y;
+                            }
                         }
+                        return false;
+                    });
+
+                    if (hit) {
+                        setGameOver(true);
+                        playSound(200, 300);
                     }
-                    return false;
+                    return prev;
                 });
-                
-                if (hit) {
-                    setGameOver(true);
-                    playSound(200, 300); // Crash sound
-                }
-                return prev;
-            });
+            } else if (level === 2) {
+                // Level 2: Shield people from meteors
+                setObstacles(obstacles => {
+                    setPeople(prevPeople => {
+                        const newShielded = new Set(shieldedPeople);
+                        let newSaved = 0;
+
+                        const updatedPeople = prevPeople.map(person => {
+                            if (person.saved) return person;
+
+                            // Check if player is shielding this person
+                            const isNearPlayer = Math.abs(person.x - 80) < 60 && Math.abs(person.y - playerY) < 60;
+
+                            if (isNearPlayer) {
+                                newShielded.add(person.x);
+                            }
+
+                            // Check if unshielded person gets hit by meteor
+                            if (!newShielded.has(person.x)) {
+                                const hit = obstacles.some(obs => 
+                                    Math.abs(obs.x - person.x) < 30 && Math.abs(obs.y - person.y) < 30
+                                );
+
+                                if (hit) {
+                                    setGameOver(true);
+                                    playSound(200, 300);
+                                    return person;
+                                }
+                            }
+
+                            // Save person if they reach end while shielded
+                            if (person.x < 50 && newShielded.has(person.x) && !person.saved) {
+                                playSound(528, 150);
+                                newSaved++;
+                                return { ...person, saved: true };
+                            }
+
+                            return person;
+                        });
+
+                        setShieldedPeople(newShielded);
+                        if (newSaved > 0) {
+                            setPeopleSaved(s => s + newSaved);
+                        }
+
+                        return updatedPeople;
+                    });
+
+                    return obstacles;
+                });
+            }
 
             // Collect people (collision with people)
             setPeople(prev => {
@@ -277,24 +354,30 @@ export default function Volckano() {
                     </motion.div>
 
                     {/* People to save */}
-                    {people.map((person, i) => (
-                        <motion.div
-                            key={i}
-                            className="absolute w-[40px] h-[40px] flex items-center justify-center text-3xl"
-                            style={{ 
-                                left: `${person.x}px`, 
-                                top: `${person.y}px`,
-                                opacity: person.saved ? 0 : 1
-                            }}
-                            animate={person.saved ? { scale: 2, opacity: 0 } : {}}
-                            transition={{ duration: 0.3 }}
-                        >
-                            🧑
-                        </motion.div>
-                    ))}
+                    {people.map((person, i) => {
+                        const isShielded = level === 2 && shieldedPeople.has(person.x) && !person.saved;
+                        return (
+                            <motion.div
+                                key={i}
+                                className="absolute w-[40px] h-[40px] flex items-center justify-center text-3xl"
+                                style={{ 
+                                    left: `${person.x}px`, 
+                                    top: `${person.y}px`,
+                                    opacity: person.saved ? 0 : 1
+                                }}
+                                animate={person.saved ? { scale: 2, opacity: 0 } : isShielded ? { scale: [1, 1.1, 1] } : {}}
+                                transition={{ duration: 0.3 }}
+                            >
+                                {isShielded && (
+                                    <div className="absolute inset-0 bg-cyan-400/30 rounded-full animate-pulse" />
+                                )}
+                                🧑
+                            </motion.div>
+                        );
+                    })}
 
-                    {/* Obstacles (lava rocks) */}
-                    {obstacles.map((obs, i) => (
+                    {/* Obstacles */}
+                    {level === 1 && obstacles.map((obs, i) => (
                         <div
                             key={i}
                             className="absolute w-[60px] bg-gradient-to-b from-red-600 to-orange-800 border-4 border-red-900 rounded"
@@ -308,6 +391,23 @@ export default function Volckano() {
                                 {obs.y === 0 ? '🌋' : '🔥'}
                             </div>
                         </div>
+                    ))}
+
+                    {level === 2 && obstacles.map((obs, i) => (
+                        <motion.div
+                            key={i}
+                            className="absolute bg-gradient-to-br from-purple-600 to-blue-800 border-4 border-purple-900 rounded-full"
+                            style={{
+                                left: `${obs.x}px`,
+                                top: `${obs.y}px`,
+                                width: `${obs.width}px`,
+                                height: `${obs.height}px`
+                            }}
+                            animate={{ rotate: 360 }}
+                            transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                        >
+                            <div className="text-center text-2xl">☄️</div>
+                        </motion.div>
                     ))}
 
                     {/* Ground */}
@@ -392,8 +492,24 @@ export default function Volckano() {
                         >
                             <div className="bg-black/80 border-4 border-cyan-500 rounded-xl p-6 text-center">
                                 <p className="text-cyan-400 text-3xl font-black mb-2">LEVEL {level}</p>
-                                <p className="text-white text-xl font-black mb-2">SAVE {peopleToSave} PEOPLE</p>
-                                <p className="text-gray-300 text-sm">Tap to fly • Collect people • Dodge lava</p>
+                                {level === 1 && (
+                                    <>
+                                        <p className="text-white text-xl font-black mb-2">SAVE {peopleToSave} PEOPLE</p>
+                                        <p className="text-gray-300 text-sm">Tap to fly • Collect people • Dodge lava</p>
+                                    </>
+                                )}
+                                {level === 2 && (
+                                    <>
+                                        <p className="text-white text-xl font-black mb-2">SHIELD {peopleToSave} PEOPLE</p>
+                                        <p className="text-gray-300 text-sm">Fly near people • Shield from meteors ☄️</p>
+                                    </>
+                                )}
+                                {level >= 3 && (
+                                    <>
+                                        <p className="text-white text-xl font-black mb-2">UNIVERSE LEVEL {level}</p>
+                                        <p className="text-gray-300 text-sm">Save {peopleToSave} people • New challenge!</p>
+                                    </>
+                                )}
                                 <p className="text-cyan-300 text-xs mt-3">Connection not addiction ♾️❤️</p>
                             </div>
                         </motion.div>
