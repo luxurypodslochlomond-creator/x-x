@@ -27,7 +27,13 @@ export default function Volckano() {
     const [soundEnabled, setSoundEnabled] = useState(true);
     const [gameTime, setGameTime] = useState(0);
 
-
+    useEffect(() => {
+        const saved = localStorage.getItem('volckano_player');
+        if (saved) {
+            setPlayerName(saved);
+            setShowLogin(false);
+        }
+    }, []);
 
     const playSound = (frequency, duration = 100) => {
         if (!soundEnabled) return;
