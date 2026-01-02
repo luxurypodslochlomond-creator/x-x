@@ -566,51 +566,52 @@ export default function VoxelHeart51() {
 
     if (showNameInput) {
         return (
-            <div className="min-h-screen relative flex items-center justify-center p-6 overflow-hidden">
-                {/* VALCKANO-style dramatic background */}
-                <div className="absolute inset-0 bg-gradient-to-b from-orange-600 via-red-600 to-purple-900" />
+            <div className="min-h-screen relative flex items-center justify-center overflow-hidden bg-black">
+                {/* Dramatic sunset sky - exact Georgie7 colors */}
+                <div className="absolute inset-0" style={{
+                    background: 'linear-gradient(to bottom, #1a1a2e 0%, #2d1b3d 20%, #4a2545 40%, #d4634d 60%, #f7a063 80%, #87ceeb 100%)'
+                }} />
                 
-                {/* Animated pixel clouds (darker, more dramatic) */}
-                <div className="absolute inset-0 opacity-30">
+                {/* Darker pixel clouds */}
+                <div className="absolute inset-0 opacity-40">
                     <motion.div 
-                        animate={{ x: [0, 100, 0], y: [0, -20, 0] }}
-                        transition={{ duration: 20, repeat: Infinity }}
-                        className="absolute top-20 left-10 w-32 h-20 bg-gray-800" 
+                        animate={{ x: [0, 80, 0] }}
+                        transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+                        className="absolute top-16 left-10 w-40 h-24 bg-gray-900/80" 
                         style={{ clipPath: 'polygon(0 50%, 25% 50%, 25% 25%, 50% 25%, 50% 0, 75% 0, 75% 25%, 100% 25%, 100% 75%, 75% 75%, 75% 100%, 25% 100%, 25% 75%, 0 75%)' }} 
                     />
                     <motion.div 
-                        animate={{ x: [0, -80, 0], y: [0, 30, 0] }}
-                        transition={{ duration: 25, repeat: Infinity }}
-                        className="absolute top-40 right-20 w-40 h-24 bg-gray-700" 
-                        style={{ clipPath: 'polygon(0 50%, 25% 50%, 25% 25%, 50% 25%, 50% 0, 75% 0, 75% 25%, 100% 25%, 100% 75%, 75% 75%, 75% 100%, 25% 100%, 25% 75%, 0 75%)' }} 
-                    />
-                    <motion.div 
-                        animate={{ x: [0, 60, 0], y: [0, -40, 0] }}
-                        transition={{ duration: 30, repeat: Infinity }}
-                        className="absolute bottom-40 left-1/4 w-36 h-22 bg-gray-900" 
+                        animate={{ x: [0, -100, 0] }}
+                        transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+                        className="absolute top-32 right-16 w-48 h-28 bg-gray-800/80" 
                         style={{ clipPath: 'polygon(0 50%, 25% 50%, 25% 25%, 50% 25%, 50% 0, 75% 0, 75% 25%, 100% 25%, 100% 75%, 75% 75%, 75% 100%, 25% 100%, 25% 75%, 0 75%)' }} 
                     />
                 </div>
 
-                {/* Glowing particles (like lava embers) */}
+                {/* Glowing lava embers floating up */}
                 <div className="absolute inset-0 pointer-events-none">
-                    {[...Array(20)].map((_, i) => (
+                    {[...Array(30)].map((_, i) => (
                         <motion.div
                             key={i}
-                            className="absolute w-1 h-1 bg-orange-400 rounded-full"
+                            className="absolute rounded-sm"
                             style={{
                                 left: `${Math.random() * 100}%`,
-                                top: `${Math.random() * 100}%`,
+                                top: `${60 + Math.random() * 40}%`,
+                                width: Math.random() * 4 + 2,
+                                height: Math.random() * 4 + 2,
+                                background: Math.random() > 0.5 ? '#ff6b35' : '#ff9500',
+                                boxShadow: '0 0 8px currentColor'
                             }}
                             animate={{
-                                y: [-20, -100, -20],
-                                opacity: [0, 1, 0],
-                                scale: [0, 1.5, 0]
+                                y: [-20, -150 - Math.random() * 100],
+                                opacity: [0, 0.8, 0],
+                                scale: [0.5, 1, 0.5]
                             }}
                             transition={{
-                                duration: 4 + Math.random() * 3,
+                                duration: 3 + Math.random() * 4,
                                 repeat: Infinity,
-                                delay: Math.random() * 5
+                                delay: Math.random() * 6,
+                                ease: "easeOut"
                             }}
                         />
                     ))}
