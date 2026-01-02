@@ -4,53 +4,107 @@ import { Trophy, Heart } from 'lucide-react';
 
 /**
  * VOLCKANO - Gergie7's Game
- * TAP to jump over lava rocks • Save the people • Beat your high score
- * Simple, smooth, addictive - like Flappy Bird but COOLASFUCK
- * Made with ♾️❤️ for GERGIE7
+ * TAP to jump • SAVE PEOPLE TOGETHER • Celebrate connection not addiction
+ * Made with ♾️❤️ for GERGIE7 and ALL KIDS
  */
 
 export default function Volckano() {
     const [playerName, setPlayerName] = useState('');
     const [showLogin, setShowLogin] = useState(true);
     const [gameStarted, setGameStarted] = useState(false);
+    const [levelComplete, setLevelComplete] = useState(false);
     const [gameOver, setGameOver] = useState(false);
-    const [score, setScore] = useState(0);
-    const [highScore, setHighScore] = useState(0);
+    const [level, setLevel] = useState(1);
+    const [peopleToSave, setPeopleToSave] = useState(5);
+    const [peopleSaved, setPeopleSaved] = useState(0);
     const [playerY, setPlayerY] = useState(200);
     const [velocity, setVelocity] = useState(0);
     const [obstacles, setObstacles] = useState([]);
+    const [people, setPeople] = useState([]);
     const gameLoop = useRef(null);
     const lastTime = useRef(Date.now());
+    const [soundEnabled, setSoundEnabled] = useState(true);
 
     useEffect(() => {
         const saved = localStorage.getItem('volckano_player');
-        const savedHS = localStorage.getItem('volckano_highscore');
         if (saved) {
             setPlayerName(saved);
             setShowLogin(false);
         }
-        if (savedHS) setHighScore(parseInt(savedHS));
     }, []);
 
+    const playSound = (frequency, duration = 100) => {
+        if (!soundEnabled) return;
+        try {
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            oscillator.frequency.value = frequency;
+            gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration / 1000);
+            
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + duration / 1000);
+        } catch (e) {}
+    };
+
     const jump = () => {
+        if (levelComplete) {
+            nextLevel();
+            return;
+        }
         if (gameOver) {
             resetGame();
             return;
         }
         if (!gameStarted) {
             setGameStarted(true);
+            spawnPeople();
             return;
         }
         setVelocity(-12);
+        playSound(432, 50); // 432Hz healing jump sound
+    };
+
+    const spawnPeople = () => {
+        const newPeople = [];
+        for (let i = 0; i < peopleToSave; i++) {
+            newPeople.push({
+                x: 400 + (i * 100),
+                y: 380,
+                saved: false
+            });
+        }
+        setPeople(newPeople);
     };
 
     const resetGame = () => {
         setGameOver(false);
+        setLevelComplete(false);
         setGameStarted(false);
-        setScore(0);
+        setLevel(1);
+        setPeopleToSave(5);
+        setPeopleSaved(0);
         setPlayerY(200);
         setVelocity(0);
         setObstacles([]);
+        setPeople([]);
+    };
+
+    const nextLevel = () => {
+        setLevelComplete(false);
+        setGameStarted(false);
+        setLevel(l => l + 1);
+        setPeopleToSave(p => p + 2);
+        setPeopleSaved(0);
+        setPlayerY(200);
+        setVelocity(0);
+        setObstacles([]);
+        setPeople([]);
     };
 
     useEffect(() => {
@@ -91,7 +145,7 @@ export default function Volckano() {
                 return updated;
             });
 
-            // Collision detection
+            // Collision detection with obstacles
             setObstacles(prev => {
                 const hit = prev.some(obs => {
                     if (obs.x > 50 && obs.x < 110) {
@@ -104,23 +158,41 @@ export default function Volckano() {
                     return false;
                 });
                 
-                if (hit) setGameOver(true);
+                if (hit) {
+                    setGameOver(true);
+                    playSound(200, 300); // Crash sound
+                }
                 return prev;
             });
 
-            // Score
-            setScore(s => s + 1);
+            // Collect people (collision with people)
+            setPeople(prev => {
+                const updated = prev.map(person => {
+                    if (!person.saved && person.x > 50 && person.x < 110 && 
+                        Math.abs(person.y - playerY) < 50) {
+                        playSound(528, 150); // 528Hz healing collection sound
+                        setPeopleSaved(s => s + 1);
+                        return { ...person, saved: true };
+                    }
+                    return { ...person, x: person.x - 3 * delta };
+                });
+                return updated.filter(p => p.x > -60);
+            });
+
+            // Move people
+            setPeople(prev => prev.map(p => ({ ...p, x: p.x - 3 * delta })));
+
+            // Check if level complete
+            if (peopleSaved >= peopleToSave && !levelComplete) {
+                setLevelComplete(true);
+                playSound(432, 500); // Victory sound
+            }
         }, 16.67);
 
         return () => clearInterval(gameLoop.current);
     }, [gameStarted, gameOver, velocity, playerY]);
 
-    useEffect(() => {
-        if (gameOver && score > highScore) {
-            setHighScore(score);
-            localStorage.setItem('volckano_highscore', score.toString());
-        }
-    }, [gameOver, score, highScore]);
+
 
     if (showLogin) {
         return (
@@ -201,8 +273,25 @@ export default function Volckano() {
                         animate={{ rotate: velocity > 0 ? 20 : -20 }}
                         transition={{ duration: 0.1 }}
                     >
-                        😊
+                        {peopleSaved > 0 ? '😇' : '😊'}
                     </motion.div>
+
+                    {/* People to save */}
+                    {people.map((person, i) => (
+                        <motion.div
+                            key={i}
+                            className="absolute w-[40px] h-[40px] flex items-center justify-center text-3xl"
+                            style={{ 
+                                left: `${person.x}px`, 
+                                top: `${person.y}px`,
+                                opacity: person.saved ? 0 : 1
+                            }}
+                            animate={person.saved ? { scale: 2, opacity: 0 } : {}}
+                            transition={{ duration: 0.3 }}
+                        >
+                            🧑
+                        </motion.div>
+                    ))}
 
                     {/* Obstacles (lava rocks) */}
                     {obstacles.map((obs, i) => (
@@ -224,18 +313,53 @@ export default function Volckano() {
                     {/* Ground */}
                     <div className="absolute bottom-0 left-0 right-0 h-[50px] bg-gradient-to-b from-orange-700 to-red-900 border-t-4 border-orange-600" />
 
-                    {/* Score */}
-                    <div className="absolute top-4 left-4 bg-black/60 border-2 border-orange-500 rounded-lg px-4 py-2">
-                        <p className="text-white font-black text-2xl">{Math.floor(score / 10)}</p>
-                    </div>
-
-                    {/* High score */}
-                    <div className="absolute top-4 right-4 bg-black/60 border-2 border-yellow-500 rounded-lg px-4 py-2">
-                        <div className="flex items-center gap-1">
-                            <Trophy className="w-4 h-4 text-yellow-400" />
-                            <p className="text-yellow-400 font-black text-lg">{Math.floor(highScore / 10)}</p>
+                    {/* Level & Progress */}
+                    <div className="absolute top-4 left-4 right-4 bg-black/60 border-2 border-cyan-500 rounded-lg px-4 py-2">
+                        <div className="flex items-center justify-between">
+                            <div>
+                                <p className="text-cyan-400 text-xs font-bold">LEVEL {level}</p>
+                                <p className="text-white text-sm font-black">{peopleSaved} / {peopleToSave} SAVED</p>
+                            </div>
+                            <button
+                                onClick={(e) => { e.stopPropagation(); setSoundEnabled(!soundEnabled); }}
+                                className="text-2xl"
+                            >
+                                {soundEnabled ? '🔊' : '🔇'}
+                            </button>
                         </div>
                     </div>
+
+                    {/* Level Complete */}
+                    {levelComplete && (
+                        <motion.div
+                            initial={{ scale: 0 }}
+                            animate={{ scale: 1 }}
+                            className="absolute inset-0 bg-gradient-to-b from-green-900/90 to-cyan-900/90 flex items-center justify-center"
+                        >
+                            <div className="text-center space-y-4">
+                                <p className="text-6xl">🎉</p>
+                                <h2 className="text-4xl font-black text-green-400">LEVEL COMPLETE!</h2>
+                                <p className="text-white text-2xl font-bold">You saved {peopleSaved} people! ♾️❤️</p>
+                                <div className="bg-black/60 border-2 border-cyan-500 rounded-xl p-4 mt-4">
+                                    <p className="text-cyan-300 text-sm font-bold">
+                                        Share this with friends to save people TOGETHER!
+                                    </p>
+                                </div>
+                                <button
+                                    onClick={nextLevel}
+                                    className="bg-green-600 hover:bg-green-500 text-white font-black px-8 py-4 rounded-xl text-xl border-b-4 border-green-900 mt-4"
+                                >
+                                    🌋 NEXT LEVEL
+                                </button>
+                                <button
+                                    onClick={resetGame}
+                                    className="bg-gray-700 hover:bg-gray-600 text-white font-bold px-6 py-2 rounded-lg text-sm mt-2"
+                                >
+                                    Rest • Play later ❤️
+                                </button>
+                            </div>
+                        </motion.div>
+                    )}
 
                     {/* Game Over */}
                     {gameOver && (
@@ -246,11 +370,9 @@ export default function Volckano() {
                         >
                             <div className="text-center space-y-4">
                                 <p className="text-6xl">💥</p>
-                                <h2 className="text-4xl font-black text-red-400">BOOM!</h2>
-                                <p className="text-white text-xl font-bold">Score: {Math.floor(score / 10)}</p>
-                                {score > highScore && (
-                                    <p className="text-yellow-400 text-lg font-bold">🏆 NEW HIGH SCORE! 🏆</p>
-                                )}
+                                <h2 className="text-4xl font-black text-red-400">CRASH!</h2>
+                                <p className="text-white text-xl font-bold">You saved {peopleSaved} people</p>
+                                <p className="text-gray-400 text-sm">Every life counts ♾️❤️</p>
                                 <button
                                     onClick={resetGame}
                                     className="bg-orange-600 hover:bg-orange-500 text-white font-black px-8 py-4 rounded-xl text-xl border-b-4 border-orange-900 mt-4"
@@ -262,25 +384,30 @@ export default function Volckano() {
                     )}
 
                     {/* Start prompt */}
-                    {!gameStarted && !gameOver && (
+                    {!gameStarted && !gameOver && !levelComplete && (
                         <motion.div
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             className="absolute inset-0 flex items-center justify-center pointer-events-none"
                         >
-                            <div className="bg-black/80 border-4 border-orange-500 rounded-xl p-6 text-center">
-                                <p className="text-white text-2xl font-black mb-2">TAP TO START</p>
-                                <p className="text-orange-300 text-sm">Keep tapping to dodge lava!</p>
+                            <div className="bg-black/80 border-4 border-cyan-500 rounded-xl p-6 text-center">
+                                <p className="text-cyan-400 text-3xl font-black mb-2">LEVEL {level}</p>
+                                <p className="text-white text-xl font-black mb-2">SAVE {peopleToSave} PEOPLE</p>
+                                <p className="text-gray-300 text-sm">Tap to fly • Collect people • Dodge lava</p>
+                                <p className="text-cyan-300 text-xs mt-3">Connection not addiction ♾️❤️</p>
                             </div>
                         </motion.div>
                     )}
                 </div>
             </div>
 
-            {/* Footer hint */}
-            <div className="absolute bottom-4 left-0 right-0 text-center">
-                <p className="text-white text-sm font-bold">
-                    Made with ♾️❤️ by BRO51 for GERGIE7
+            {/* Footer */}
+            <div className="absolute bottom-4 left-0 right-0 text-center px-4">
+                <p className="text-white text-xs font-bold mb-1">
+                    Made with ♾️❤️ for GERGIE7 + ALL KIDS
+                </p>
+                <p className="text-gray-400 text-[10px]">
+                    Every level ends • Rest is important • Connection over competition
                 </p>
             </div>
         </div>
