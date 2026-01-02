@@ -25,6 +25,7 @@ export default function Volckano() {
     const gameLoop = useRef(null);
     const lastTime = useRef(Date.now());
     const [soundEnabled, setSoundEnabled] = useState(true);
+    const [gameTime, setGameTime] = useState(0);
 
     useEffect(() => {
         const saved = localStorage.getItem('volckano_player');
@@ -107,6 +108,7 @@ export default function Volckano() {
         setObstacles([]);
         setPeople([]);
         setShieldedPeople(new Set());
+        setGameTime(0);
     };
 
     useEffect(() => {
@@ -116,6 +118,8 @@ export default function Volckano() {
             const now = Date.now();
             const delta = (now - lastTime.current) / 16.67; // 60fps normalized
             lastTime.current = now;
+            
+            setGameTime(t => t + (1000/60)); // Track time in ms
 
             // Physics - MUCH SLOWER for kids to learn
             setVelocity(v => v + 0.25 * delta);
@@ -129,44 +133,46 @@ export default function Volckano() {
                 return newY;
             });
 
-            // Level-specific obstacle logic
-            if (level === 1) {
-                // LEVEL 1: Lava rocks from sides
-                setObstacles(prev => {
-                    const updated = prev
-                        .map(obs => ({ ...obs, x: obs.x - 1.8 * delta }))
-                        .filter(obs => obs.x > -60);
+            // Level-specific obstacle logic - WAIT 3 SECONDS BEFORE SPAWNING
+            if (gameTime > 3000) {
+                if (level === 1) {
+                    // LEVEL 1: Lava rocks from sides
+                    setObstacles(prev => {
+                        const updated = prev
+                            .map(obs => ({ ...obs, x: obs.x - 1.8 * delta }))
+                            .filter(obs => obs.x > -60);
 
-                    // Spawn new obstacle - HUGE SPACE for learning
-                    if (updated.length === 0 || updated[updated.length - 1].x < 180) {
-                        updated.push({
-                            x: 400,
-                            y: Math.random() > 0.5 ? 0 : 350,
-                            height: 60 + Math.random() * 40
-                        });
-                    }
+                        // Spawn new obstacle - HUGE SPACE for learning
+                        if (updated.length === 0 || updated[updated.length - 1].x < 180) {
+                            updated.push({
+                                x: 400,
+                                y: Math.random() > 0.5 ? 0 : 350,
+                                height: 60 + Math.random() * 40
+                            });
+                        }
 
-                    return updated;
-                });
-            } else if (level === 2) {
-                // LEVEL 2: Meteors from sky
-                setObstacles(prev => {
-                    const updated = prev
-                        .map(obs => ({ ...obs, y: obs.y + 2.5 * delta }))
-                        .filter(obs => obs.y < 500);
+                        return updated;
+                    });
+                } else if (level === 2) {
+                    // LEVEL 2: Meteors from sky
+                    setObstacles(prev => {
+                        const updated = prev
+                            .map(obs => ({ ...obs, y: obs.y + 2.5 * delta }))
+                            .filter(obs => obs.y < 500);
 
-                    // Spawn meteors randomly across top
-                    if (updated.length < 3 && Math.random() < 0.02) {
-                        updated.push({
-                            x: 50 + Math.random() * 300,
-                            y: -30,
-                            width: 40,
-                            height: 40
-                        });
-                    }
+                        // Spawn meteors randomly across top
+                        if (updated.length < 3 && Math.random() < 0.02) {
+                            updated.push({
+                                x: 50 + Math.random() * 300,
+                                y: -30,
+                                width: 40,
+                                height: 40
+                            });
+                        }
 
-                    return updated;
-                });
+                        return updated;
+                    });
+                }
             }
 
             // Collision detection with obstacles
@@ -421,6 +427,9 @@ export default function Volckano() {
                             <div>
                                 <p className="text-cyan-400 text-xs font-bold">LEVEL {level}</p>
                                 <p className="text-white text-sm font-black">{peopleSaved} / {peopleToSave} SAVED</p>
+                                {gameTime < 3000 && (
+                                    <p className="text-amber-400 text-xs font-bold animate-pulse">GET READY!</p>
+                                )}
                             </div>
                             <button
                                 onClick={(e) => { e.stopPropagation(); setSoundEnabled(!soundEnabled); }}
