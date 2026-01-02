@@ -165,7 +165,7 @@ export default function Volckano() {
                             animate={{ scale: 1 }}
                             className="text-center mb-8"
                         >
-                            <h1 className="text-7xl font-black text-white mb-2" style={{ 
+                            <h1 className="text-5xl sm:text-6xl md:text-7xl font-black text-white mb-2" style={{ 
                                 textShadow: '4px 4px 0 #FF4500, 8px 8px 20px #000'
                             }}>
                                 VOLCKANO
