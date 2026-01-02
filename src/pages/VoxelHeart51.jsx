@@ -286,6 +286,9 @@ export default function VoxelHeart51() {
             if (intersects.length > 0) {
                 const intersect = intersects[0];
                 
+                // Skip if clicked on edge lines (no face)
+                if (!intersect.face) return;
+                
                 if (event.shiftKey) {
                     // Remove block
                     const block = intersect.object;
