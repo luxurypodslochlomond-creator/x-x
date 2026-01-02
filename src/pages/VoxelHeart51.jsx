@@ -94,25 +94,29 @@ export default function Volckano() {
             } catch (e) {}
         }
 
-        // Mouse controls
-        let mouseDown = false;
+        // MOBILE TOUCH CONTROLS
+        let touchStart = null;
+        let touchTime = 0;
+        let lastTouch = { x: 0, y: 0 };
         let rotating = false;
-        let lastX = 0;
-        let lastY = 0;
 
-        const onMouseDown = (e) => {
-            mouseDown = true;
-            lastX = e.clientX;
-            lastY = e.clientY;
-            if (e.button === 2) rotating = true;
+        const onTouchStart = (e) => {
+            if (e.touches.length === 1) {
+                touchStart = Date.now();
+                touchTime = Date.now();
+                lastTouch = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+            } else if (e.touches.length === 2) {
+                rotating = true;
+                lastTouch = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+            }
         };
 
-        const onMouseMove = (e) => {
-            if (!mouseDown) return;
-
-            if (rotating) {
-                const dx = e.clientX - lastX;
-                const dy = e.clientY - lastY;
+        const onTouchMove = (e) => {
+            e.preventDefault();
+            
+            if (e.touches.length === 2 && rotating) {
+                const dx = e.touches[0].clientX - lastTouch.x;
+                const dy = e.touches[0].clientY - lastTouch.y;
                 
                 const radius = Math.sqrt(camera.position.x ** 2 + camera.position.z ** 2);
                 const angle = Math.atan2(camera.position.z, camera.position.x) - dx * 0.01;
@@ -121,56 +125,57 @@ export default function Volckano() {
                 camera.position.z = Math.sin(angle) * radius;
                 camera.position.y = Math.max(5, camera.position.y - dy * 0.1);
                 camera.lookAt(0, 0, 0);
-            }
-
-            lastX = e.clientX;
-            lastY = e.clientY;
-        };
-
-        const onMouseUp = () => {
-            mouseDown = false;
-            rotating = false;
-        };
-
-        const onClick = (e) => {
-            if (rotating) return;
-
-            const raycaster = new THREE.Raycaster();
-            const mouse = new THREE.Vector2();
-            const rect = renderer.domElement.getBoundingClientRect();
-            
-            mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
-            mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
-            
-            raycaster.setFromCamera(mouse, camera);
-            const blocks = Array.from(worldRef.current.values());
-            const hits = raycaster.intersectObjects(blocks);
-
-            if (hits.length > 0 && hits[0].face) {
-                const hit = hits[0];
-                const pos = hit.object.position.clone();
                 
-                if (e.shiftKey) {
-                    // Remove block
-                    const key = `${pos.x},${pos.y},${pos.z}`;
-                    scene.remove(hit.object);
-                    worldRef.current.delete(key);
-                } else {
-                    // Add block
-                    pos.add(hit.face.normal);
-                    if (pos.y >= 0 && pos.y < 30) {
-                        createBlock(Math.round(pos.x), Math.round(pos.y), Math.round(pos.z), selectedBlock);
-                    }
-                }
-                saveWorld();
+                lastTouch = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+            } else if (e.touches.length === 1) {
+                const moved = Math.abs(e.touches[0].clientX - lastTouch.x) + Math.abs(e.touches[0].clientY - lastTouch.y);
+                if (moved > 10) touchStart = null; // Cancel tap if moved
             }
         };
 
-        renderer.domElement.addEventListener('mousedown', onMouseDown);
-        renderer.domElement.addEventListener('mousemove', onMouseMove);
-        renderer.domElement.addEventListener('mouseup', onMouseUp);
-        renderer.domElement.addEventListener('click', onClick);
-        renderer.domElement.addEventListener('contextmenu', (e) => e.preventDefault());
+        const onTouchEnd = (e) => {
+            rotating = false;
+            
+            if (touchStart && Date.now() - touchStart < 300 && e.changedTouches.length > 0) {
+                const touch = e.changedTouches[0];
+                const raycaster = new THREE.Raycaster();
+                const mouse = new THREE.Vector2();
+                const rect = renderer.domElement.getBoundingClientRect();
+                
+                mouse.x = ((touch.clientX - rect.left) / rect.width) * 2 - 1;
+                mouse.y = -((touch.clientY - rect.top) / rect.height) * 2 + 1;
+                
+                raycaster.setFromCamera(mouse, camera);
+                const blocks = Array.from(worldRef.current.values());
+                const hits = raycaster.intersectObjects(blocks);
+
+                if (hits.length > 0 && hits[0].face) {
+                    const hit = hits[0];
+                    const pos = hit.object.position.clone();
+                    const tapDuration = Date.now() - touchTime;
+                    
+                    if (tapDuration > 500) {
+                        // Long press = remove
+                        const key = `${pos.x},${pos.y},${pos.z}`;
+                        if (hit.object.userData.light) scene.remove(hit.object.userData.light);
+                        scene.remove(hit.object);
+                        worldRef.current.delete(key);
+                    } else {
+                        // Quick tap = place
+                        pos.add(hit.face.normal);
+                        if (pos.y >= 0 && pos.y < 30) {
+                            createBlock(Math.round(pos.x), Math.round(pos.y), Math.round(pos.z), selectedBlock);
+                        }
+                    }
+                    saveWorld();
+                }
+            }
+            touchStart = null;
+        };
+
+        renderer.domElement.addEventListener('touchstart', onTouchStart, { passive: false });
+        renderer.domElement.addEventListener('touchmove', onTouchMove, { passive: false });
+        renderer.domElement.addEventListener('touchend', onTouchEnd);
 
         // Animation
         const animate = () => {
@@ -336,10 +341,11 @@ export default function Volckano() {
                 💾 SAVE
             </button>
 
-            {/* Simple controls hint */}
-            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/80 border-2 border-orange-500 rounded-lg px-6 py-3 pointer-events-none">
-                <p className="text-white text-sm font-bold text-center">
-                    <span className="text-orange-400">Click</span> = Place Block • <span className="text-orange-400">Shift+Click</span> = Remove
+            {/* Mobile controls hint */}
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/80 border-2 border-orange-500 rounded-lg px-6 py-3 pointer-events-none max-w-xs">
+                <p className="text-white text-xs font-bold text-center leading-tight">
+                    <span className="text-orange-400">TAP</span> = Place • <span className="text-orange-400">HOLD</span> = Remove<br/>
+                    <span className="text-orange-400">2 FINGERS</span> = Rotate View
                 </p>
             </div>
         </div>
