@@ -6,9 +6,9 @@ import { Button } from '@/components/ui/button';
 import VolckanoP2P from '@/components/volckano/VolckanoP2P';
 
 /**
- * VOLCKANO - THE GAME GEORGIE7 DREAMED OF
+ * VOLCKANO - THE GAME GERGIE7 DREAMED OF
  * 
- * Made for Georgie7 + ALL her friends worldwide ❤️
+ * Made for Gergie7 + ALL her friends worldwide ❤️
  * 
  * WHAT MAKES IT BETTER:
  * - 100% FREE FOREVER (no ads, no purchases, zero extraction)
@@ -20,7 +20,7 @@ import VolckanoP2P from '@/components/volckano/VolckanoP2P';
  * - SAFE (no chat, no strangers, just pure creation)
  * - BUILD ANYTHING (VALCKANOs, castles, cities, whatever you imagine)
  * 
- * INSPIRED BY: Georgie7's pure creativity ⚡❤️
+ * INSPIRED BY: Gergie7's pure creativity ⚡❤️
  */
 
 const BLOCK_TYPES = {
@@ -614,40 +614,32 @@ export default function VoxelHeart51() {
                     ))}
                 </div>
 
-                {/* Centered content - ultra clean like screenshot */}
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    className="relative z-10 w-full max-w-lg mx-auto px-6"
-                >
-                    {/* VOLCKANO Title - sized to fit screen perfectly */}
-                    <div className="text-center mb-12">
-                        <motion.h1 
-                            className="font-black mb-3"
-                            animate={{
-                                textShadow: [
-                                    '0 0 40px rgba(255, 107, 53, 1), 4px 4px 0 #000, -2px -2px 0 rgba(255, 150, 80, 0.9)',
-                                    '0 0 60px rgba(255, 107, 53, 1), 4px 4px 0 #000, -2px -2px 0 rgba(255, 150, 80, 1)',
-                                    '0 0 40px rgba(255, 107, 53, 1), 4px 4px 0 #000, -2px -2px 0 rgba(255, 150, 80, 0.9)'
-                                ]
-                            }}
-                            transition={{ duration: 2, repeat: Infinity }}
+                {/* EXACT Gergie7's screenshot - full viewport centered */}
+                <div className="relative z-10 w-full h-full flex flex-col items-center justify-center px-4">
+                    
+                    {/* Title - EXACT positioning like screenshot */}
+                    <motion.div
+                        initial={{ opacity: 0, y: -30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="text-center mb-auto pt-32"
+                    >
+                        <h1 
+                            className="font-black leading-none mb-2"
                             style={{ 
-                                fontSize: 'clamp(3rem, 15vw, 6rem)',
+                                fontSize: 'clamp(4rem, 20vw, 8rem)',
                                 color: '#ff6b35',
                                 fontFamily: 'Impact, sans-serif',
-                                letterSpacing: '0.1em',
-                                WebkitTextStroke: '3px rgba(0,0,0,0.9)',
-                                lineHeight: 1
+                                letterSpacing: '0.05em',
+                                textShadow: '0 0 40px rgba(255, 107, 53, 0.8), 4px 4px 0 rgba(0,0,0,0.9), -2px -2px 0 rgba(139, 69, 19, 0.6), inset 0 -8px 0 rgba(139, 69, 19, 0.4)',
+                                WebkitTextStroke: '3px rgba(139, 69, 19, 0.8)'
                             }}
                         >
                             VOLCKANO
-                        </motion.h1>
+                        </h1>
                         <div className="flex items-center justify-center gap-2">
-                            <p className="text-orange-200 text-sm font-bold" style={{ textShadow: '2px 2px 4px #000' }}>
-                                by Georgie7
+                            <p className="text-orange-200 font-bold" style={{ textShadow: '2px 2px 4px #000', fontSize: 'clamp(0.875rem, 3vw, 1rem)' }}>
+                                by Gergie7
                             </p>
-                            {/* 8-bit pixel heart */}
                             <svg width="16" height="16" viewBox="0 0 16 16" style={{ imageRendering: 'pixelated' }}>
                                 <rect x="2" y="4" width="2" height="2" fill="#ec4899"/>
                                 <rect x="4" y="2" width="4" height="2" fill="#ec4899"/>
@@ -660,55 +652,55 @@ export default function VoxelHeart51() {
                                 <rect x="7" y="14" width="2" height="2" fill="#ff1b8d"/>
                             </svg>
                         </div>
-                    </div>
-                    
-                    {/* Simple form - Minecraft clean */}
-                    <div className="space-y-4">
-                        <input
-                            type="text"
-                            value={playerName}
-                            onChange={(e) => setPlayerName(e.target.value)}
-                            onKeyPress={(e) => e.key === 'Enter' && playerName.trim() && setShowNameInput(false)}
-                            placeholder="Your name..."
-                            className="w-full bg-gray-800/60 backdrop-blur-sm border-2 border-gray-600 px-5 py-5 text-white text-center text-xl font-bold placeholder:text-gray-500 focus:border-orange-400 focus:outline-none transition-all rounded-lg"
-                            style={{ textShadow: '1px 1px 2px #000' }}
-                            autoFocus
-                        />
-                        
-                        <Button
-                            onClick={() => {
-                                if (playerName.trim()) {
-                                    setShowNameInput(false);
-                                    localStorage.setItem('volckano_player', playerName);
-                                }
-                            }}
-                            disabled={!playerName.trim()}
-                            className="w-full bg-gradient-to-b from-orange-500 to-orange-700 hover:from-orange-400 hover:to-orange-600 text-white font-black py-6 text-xl disabled:opacity-50 transition-all rounded-lg border-b-4 border-orange-900"
-                            style={{ textShadow: '2px 2px 0 #000' }}
-                        >
-                            <span className="flex items-center justify-center gap-3">
-                                {/* 8-bit volcano icon */}
-                                <svg width="20" height="20" viewBox="0 0 16 16" style={{ imageRendering: 'pixelated' }}>
-                                    <rect x="7" y="2" width="2" height="2" fill="#ff6b35"/>
-                                    <rect x="6" y="4" width="4" height="2" fill="#ff6b35"/>
-                                    <rect x="5" y="6" width="6" height="2" fill="#8B4513"/>
-                                    <rect x="4" y="8" width="8" height="2" fill="#8B4513"/>
-                                    <rect x="3" y="10" width="10" height="2" fill="#654321"/>
-                                    <rect x="2" y="12" width="12" height="2" fill="#654321"/>
-                                    <rect x="1" y="14" width="14" height="2" fill="#4a3520"/>
-                                    <rect x="7" y="6" width="2" height="6" fill="#ff9500"/>
-                                    <rect x="6" y="8" width="1" height="2" fill="#ff6b35"/>
-                                    <rect x="9" y="8" width="1" height="2" fill="#ff6b35"/>
-                                </svg>
-                                START BUILDING
-                            </span>
-                        </Button>
+                    </motion.div>
 
-                        <p className="text-gray-300 text-sm text-center font-bold pt-2" style={{ textShadow: '1px 1px 2px #000', letterSpacing: '0.15em' }}>
-                            FREE • OFFLINE • NO ADS
-                        </p>
-                    </div>
-                </motion.div>
+                    {/* Form at bottom - EXACT like screenshot */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="w-full max-w-md mb-20"
+                    >
+                        <div className="space-y-3">
+                            <input
+                                type="text"
+                                value={playerName}
+                                onChange={(e) => setPlayerName(e.target.value)}
+                                onKeyPress={(e) => e.key === 'Enter' && playerName.trim() && setShowNameInput(false)}
+                                placeholder="Your name..."
+                                className="w-full bg-gray-700/50 backdrop-blur-sm border-2 border-gray-500 px-5 py-4 text-white text-center text-lg font-bold placeholder:text-gray-400 focus:border-orange-400 focus:outline-none transition-all rounded"
+                                style={{ textShadow: '1px 1px 2px #000' }}
+                                autoFocus
+                            />
+                            
+                            <button
+                                onClick={() => {
+                                    if (playerName.trim()) {
+                                        setShowNameInput(false);
+                                        localStorage.setItem('volckano_player', playerName);
+                                    }
+                                }}
+                                disabled={!playerName.trim()}
+                                className="w-full bg-gradient-to-b from-orange-500 to-orange-600 hover:from-orange-400 hover:to-orange-500 text-white font-black py-5 text-xl disabled:opacity-50 transition-all rounded border-b-4 border-orange-800"
+                                style={{ textShadow: '2px 2px 0 #000' }}
+                            >
+                                <span className="flex items-center justify-center gap-2">
+                                    <svg width="18" height="18" viewBox="0 0 16 16" style={{ imageRendering: 'pixelated' }}>
+                                        <rect x="7" y="2" width="2" height="2" fill="white"/>
+                                        <rect x="6" y="4" width="4" height="2" fill="white"/>
+                                        <rect x="5" y="6" width="6" height="2" fill="#654321"/>
+                                        <rect x="4" y="8" width="8" height="2" fill="#654321"/>
+                                        <rect x="7" y="6" width="2" height="6" fill="#ffaa00"/>
+                                    </svg>
+                                    START BUILDING
+                                </span>
+                            </button>
+
+                            <p className="text-gray-300 text-xs text-center font-bold tracking-wider" style={{ textShadow: '1px 1px 2px #000' }}>
+                                FREE • OFFLINE • NO ADS
+                            </p>
+                        </div>
+                    </motion.div>
+                </div>
             </div>
         );
     }

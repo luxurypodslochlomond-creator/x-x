@@ -243,7 +243,7 @@ const LayoutInner = ({ children, currentPageName }) => {
   // 2. EARN & CREATE (practical actions)
   const earnCreateNav = [
     { title: "Heal Earth", url: createPageUrl("NewCleanup"), icon: Globe, highlight: true, description: "Clean planet, earn $P51" },
-    { title: "VOLCKANO", url: createPageUrl("VoxelHeart51"), icon: Heart, highlight: true, description: "FREE game for kids 🌋❤️" },
+    { title: "VOLCKANO", url: createPageUrl("VoxelHeart51"), icon: Heart, highlight: true, description: "Gergie7's game 🌋❤️" },
     { title: "For Artists", url: createPageUrl("ForMusicians"), icon: Music, highlight: true, description: "Upload music, keep 90%" },
     { title: "Generate Logo", url: createPageUrl("GenerateLogo"), icon: Sparkles, description: "AI logos for anyone" },
     { title: "Create Demos", url: createPageUrl("LearnGuitar"), icon: Mic2, description: "Studio tools" },
