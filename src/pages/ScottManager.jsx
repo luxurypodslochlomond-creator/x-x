@@ -108,19 +108,30 @@ Managing chaos → Making it simple. That's your job bro ♾️❤️♾️`,
         },
         onSuccess: (data) => {
             setAiResponse(data);
-            // Speak response
+            // Speak response with fallback
             if ('speechSynthesis' in window) {
                 window.speechSynthesis.cancel();
-                const utterance = new SpeechSynthesisUtterance(data);
-                utterance.rate = 0.95;
-                utterance.pitch = 1.1;
-                utterance.volume = 0.8;
-                const voices = window.speechSynthesis.getVoices();
-                const voice = voices.find(v => v.name.includes('Google UK English Female')) 
-                           || voices.find(v => v.lang.startsWith('en-GB'))
-                           || voices.find(v => v.lang.startsWith('en'));
-                if (voice) utterance.voice = voice;
-                window.speechSynthesis.speak(utterance);
+                const speak = () => {
+                    const utterance = new SpeechSynthesisUtterance(data);
+                    utterance.rate = 0.95;
+                    utterance.pitch = 1.1;
+                    utterance.volume = 0.8;
+                    const voices = window.speechSynthesis.getVoices();
+                    if (voices.length > 0) {
+                        const voice = voices.find(v => v.name.includes('Google UK English Female')) 
+                                   || voices.find(v => v.lang.startsWith('en-GB'))
+                                   || voices.find(v => v.lang.startsWith('en'));
+                        if (voice) utterance.voice = voice;
+                    }
+                    utterance.onerror = (e) => console.log('Voice error:', e);
+                    window.speechSynthesis.speak(utterance);
+                };
+                if (window.speechSynthesis.getVoices().length > 0) {
+                    speak();
+                } else {
+                    window.speechSynthesis.addEventListener('voiceschanged', speak, { once: true });
+                    setTimeout(speak, 100);
+                }
             }
         }
     });

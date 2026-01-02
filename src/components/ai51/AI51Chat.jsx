@@ -98,23 +98,38 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, biom
     // Stop any current speech
     window.speechSynthesis.cancel();
     
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.rate = 0.95; // Slightly slower for clarity
-    utterance.pitch = 1.1; // Slightly higher pitch
-    utterance.volume = 0.8;
+    // Load voices if not ready
+    const speak = () => {
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.rate = 0.95;
+      utterance.pitch = 1.1;
+      utterance.volume = 0.8;
+      
+      const voices = window.speechSynthesis.getVoices();
+      if (voices.length > 0) {
+        const preferredVoice = voices.find(v => v.name.includes('Google UK English Female')) 
+                            || voices.find(v => v.lang.startsWith('en-GB'))
+                            || voices.find(v => v.lang.startsWith('en'));
+        if (preferredVoice) utterance.voice = preferredVoice;
+      }
+      
+      utterance.onstart = () => setIsSpeaking(true);
+      utterance.onend = () => setIsSpeaking(false);
+      utterance.onerror = (e) => {
+        console.log('Voice error:', e);
+        setIsSpeaking(false);
+      };
+      
+      window.speechSynthesis.speak(utterance);
+    };
     
-    // Use best available voice
-    const voices = window.speechSynthesis.getVoices();
-    const preferredVoice = voices.find(v => v.name.includes('Google UK English Female')) 
-                        || voices.find(v => v.lang.startsWith('en-GB'))
-                        || voices.find(v => v.lang.startsWith('en'));
-    if (preferredVoice) utterance.voice = preferredVoice;
-    
-    utterance.onstart = () => setIsSpeaking(true);
-    utterance.onend = () => setIsSpeaking(false);
-    utterance.onerror = () => setIsSpeaking(false);
-    
-    window.speechSynthesis.speak(utterance);
+    // Try speaking, if voices not loaded yet wait for them
+    if (window.speechSynthesis.getVoices().length > 0) {
+      speak();
+    } else {
+      window.speechSynthesis.addEventListener('voiceschanged', speak, { once: true });
+      setTimeout(speak, 100); // Fallback if event doesn't fire
+    }
   };
 
   useEffect(() => {
