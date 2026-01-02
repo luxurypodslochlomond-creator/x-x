@@ -38,7 +38,7 @@ export default function VoxelHeart51() {
     const [selectedBlock, setSelectedBlock] = useState('GRASS');
     const [isPlaying, setIsPlaying] = useState(true);
     const [showHelp, setShowHelp] = useState(true);
-    const [playMusic, setPlayMusic] = useState(true);
+    const [playMusic, setPlayMusic] = useState(false);
     const [playerName, setPlayerName] = useState('');
     const [showNameInput, setShowNameInput] = useState(true);
     const audioContextRef = useRef(null);
@@ -311,27 +311,67 @@ export default function VoxelHeart51() {
 
     if (showNameInput) {
         return (
-            <div className="min-h-screen bg-gradient-to-br from-purple-900 via-pink-900 to-orange-900 flex items-center justify-center p-6">
+            <div className="min-h-screen bg-gradient-to-br from-blue-600 via-cyan-500 to-green-500 flex items-center justify-center p-6 relative overflow-hidden">
+                {/* Pixel clouds floating */}
+                <div className="absolute inset-0 opacity-20">
+                    <div className="absolute top-20 left-10 w-32 h-20 bg-white" style={{ clipPath: 'polygon(0 50%, 25% 50%, 25% 25%, 50% 25%, 50% 0, 75% 0, 75% 25%, 100% 25%, 100% 75%, 75% 75%, 75% 100%, 25% 100%, 25% 75%, 0 75%)' }} />
+                    <div className="absolute top-40 right-20 w-40 h-24 bg-white" style={{ clipPath: 'polygon(0 50%, 25% 50%, 25% 25%, 50% 25%, 50% 0, 75% 0, 75% 25%, 100% 25%, 100% 75%, 75% 75%, 75% 100%, 25% 100%, 25% 75%, 0 75%)' }} />
+                </div>
+
                 <motion.div
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    className="bg-black/80 border-4 border-pink-500 rounded-2xl p-8 max-w-md"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="bg-gradient-to-b from-orange-500 to-red-600 border-8 border-yellow-400 p-8 max-w-md relative"
+                    style={{ boxShadow: '0 0 60px rgba(251, 191, 36, 0.8), inset 0 0 40px rgba(0,0,0,0.3)' }}
                 >
-                    <Heart className="w-16 h-16 text-pink-400 mx-auto mb-4" />
-                    <h1 className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400 text-center mb-4">
+                    {/* Blocky lava heart */}
+                    <div className="relative mb-6">
+                        <motion.div
+                            animate={{ scale: [1, 1.1, 1] }}
+                            transition={{ duration: 2, repeat: Infinity }}
+                            className="mx-auto w-32 h-32 relative"
+                        >
+                            {/* Pixel heart in lava colors */}
+                            <div className="absolute inset-0 grid grid-cols-8 grid-rows-8 gap-1">
+                                {[
+                                    [0,0,1,1,0,1,1,0],
+                                    [0,1,1,1,1,1,1,1],
+                                    [1,1,1,1,1,1,1,1],
+                                    [1,1,1,1,1,1,1,1],
+                                    [1,1,1,1,1,1,1,1],
+                                    [0,1,1,1,1,1,1,0],
+                                    [0,0,1,1,1,1,0,0],
+                                    [0,0,0,1,1,0,0,0]
+                                ].map((row, i) => row.map((cell, j) => 
+                                    cell ? <div key={`${i}-${j}`} className="bg-red-600 border border-orange-400" style={{ boxShadow: '0 0 8px rgba(251, 146, 60, 0.8)' }} /> : <div key={`${i}-${j}`} />
+                                ))}
+                            </div>
+                        </motion.div>
+                        {/* Lightning bolt through heart */}
+                        <div className="absolute inset-0 flex items-center justify-center">
+                            <div className="w-8 bg-cyan-400 h-24 transform rotate-12" style={{ clipPath: 'polygon(50% 0, 100% 35%, 60% 35%, 75% 100%, 25% 60%, 50% 60%)' }} />
+                        </div>
+                    </div>
+
+                    <h1 className="text-5xl font-black text-white text-center mb-2" style={{ textShadow: '4px 4px 0 #000, -2px -2px 0 #fbbf24' }}>
                         VOXELHEART51
                     </h1>
-                    <p className="text-gray-300 text-center mb-6">
-                        What's your name, builder? ❤️
+                    <p className="text-yellow-300 text-center text-lg font-bold mb-1" style={{ textShadow: '2px 2px 0 #000' }}>
+                        ⚡ Build Your VALCKANO! ⚡
                     </p>
+                    <p className="text-white text-center text-sm font-bold mb-6" style={{ textShadow: '1px 1px 0 #000' }}>
+                        What's your name, builder?
+                    </p>
+                    
                     <input
                         type="text"
                         value={playerName}
                         onChange={(e) => setPlayerName(e.target.value)}
                         placeholder="Type your name..."
-                        className="w-full bg-purple-900/50 border-2 border-pink-500 rounded-lg px-4 py-3 text-white text-center text-xl mb-4"
+                        className="w-full bg-yellow-600 border-4 border-yellow-900 px-4 py-4 text-black text-center text-2xl font-black mb-4 placeholder:text-yellow-800"
                         autoFocus
                     />
+                    
                     <Button
                         onClick={() => {
                             if (playerName.trim()) {
@@ -340,10 +380,15 @@ export default function VoxelHeart51() {
                             }
                         }}
                         disabled={!playerName.trim()}
-                        className="w-full bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white font-black py-4 text-xl"
+                        className="w-full bg-gradient-to-b from-green-500 to-green-700 hover:from-green-400 hover:to-green-600 border-4 border-green-900 text-white font-black py-4 text-2xl"
+                        style={{ textShadow: '2px 2px 0 #000' }}
                     >
-                        START BUILDING ❤️
+                        🚀 START BUILDING! 🚀
                     </Button>
+
+                    <p className="text-yellow-300 text-xs text-center mt-4 font-bold" style={{ textShadow: '1px 1px 0 #000' }}>
+                        For Georgie7 + ALL her friends ❤️⚡
+                    </p>
                 </motion.div>
             </div>
         );
