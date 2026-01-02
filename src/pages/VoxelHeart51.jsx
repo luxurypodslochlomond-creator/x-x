@@ -614,48 +614,64 @@ export default function VoxelHeart51() {
                     ))}
                 </div>
 
-                {/* Simple centered card - Minecraft simplicity */}
+                {/* Centered content - ultra clean like screenshot */}
                 <motion.div
-                    initial={{ opacity: 0, scale: 0.9 }}
+                    initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    className="relative z-10 mx-4 max-w-md"
+                    className="relative z-10 w-full max-w-lg mx-auto px-6"
                 >
-                    {/* VOLCKANO Title - exact style from image */}
-                    <div className="text-center mb-8">
+                    {/* VOLCKANO Title - sized to fit screen perfectly */}
+                    <div className="text-center mb-12">
                         <motion.h1 
-                            className="text-8xl font-black mb-2"
+                            className="font-black mb-3"
                             animate={{
                                 textShadow: [
-                                    '0 0 30px rgba(255, 107, 53, 1), 6px 6px 0 #000, -2px -2px 0 rgba(255, 150, 80, 0.8)',
-                                    '0 0 50px rgba(255, 107, 53, 1), 6px 6px 0 #000, -2px -2px 0 rgba(255, 150, 80, 1)',
-                                    '0 0 30px rgba(255, 107, 53, 1), 6px 6px 0 #000, -2px -2px 0 rgba(255, 150, 80, 0.8)'
+                                    '0 0 40px rgba(255, 107, 53, 1), 4px 4px 0 #000, -2px -2px 0 rgba(255, 150, 80, 0.9)',
+                                    '0 0 60px rgba(255, 107, 53, 1), 4px 4px 0 #000, -2px -2px 0 rgba(255, 150, 80, 1)',
+                                    '0 0 40px rgba(255, 107, 53, 1), 4px 4px 0 #000, -2px -2px 0 rgba(255, 150, 80, 0.9)'
                                 ]
                             }}
                             transition={{ duration: 2, repeat: Infinity }}
                             style={{ 
-                                color: '#d4634d',
+                                fontSize: 'clamp(3rem, 15vw, 6rem)',
+                                color: '#ff6b35',
                                 fontFamily: 'Impact, sans-serif',
-                                letterSpacing: '3px',
-                                WebkitTextStroke: '2px rgba(0,0,0,0.8)'
+                                letterSpacing: '0.1em',
+                                WebkitTextStroke: '3px rgba(0,0,0,0.9)',
+                                lineHeight: 1
                             }}
                         >
                             VOLCKANO
                         </motion.h1>
-                        <p className="text-orange-300 text-sm font-bold" style={{ textShadow: '2px 2px 4px #000' }}>
-                            by Georgie7 ❤️
-                        </p>
+                        <div className="flex items-center justify-center gap-2">
+                            <p className="text-orange-200 text-sm font-bold" style={{ textShadow: '2px 2px 4px #000' }}>
+                                by Georgie7
+                            </p>
+                            {/* 8-bit pixel heart */}
+                            <svg width="16" height="16" viewBox="0 0 16 16" style={{ imageRendering: 'pixelated' }}>
+                                <rect x="2" y="4" width="2" height="2" fill="#ec4899"/>
+                                <rect x="4" y="2" width="4" height="2" fill="#ec4899"/>
+                                <rect x="8" y="2" width="4" height="2" fill="#ec4899"/>
+                                <rect x="12" y="4" width="2" height="2" fill="#ec4899"/>
+                                <rect x="2" y="6" width="12" height="2" fill="#ff1b8d"/>
+                                <rect x="2" y="8" width="12" height="2" fill="#ff1b8d"/>
+                                <rect x="4" y="10" width="8" height="2" fill="#ff1b8d"/>
+                                <rect x="6" y="12" width="4" height="2" fill="#ff1b8d"/>
+                                <rect x="7" y="14" width="2" height="2" fill="#ff1b8d"/>
+                            </svg>
+                        </div>
                     </div>
                     
-                    {/* Ultra simple - just name and GO (Minecraft style) */}
-                    <div className="space-y-3">
+                    {/* Simple form - Minecraft clean */}
+                    <div className="space-y-4">
                         <input
                             type="text"
                             value={playerName}
                             onChange={(e) => setPlayerName(e.target.value)}
                             onKeyPress={(e) => e.key === 'Enter' && playerName.trim() && setShowNameInput(false)}
                             placeholder="Your name..."
-                            className="w-full bg-gray-900/80 backdrop-blur-sm border-4 border-orange-500/80 px-5 py-5 text-white text-center text-2xl font-bold placeholder:text-gray-500 focus:border-orange-400 focus:outline-none transition-all"
-                            style={{ textShadow: '2px 2px 4px #000' }}
+                            className="w-full bg-gray-800/60 backdrop-blur-sm border-2 border-gray-600 px-5 py-5 text-white text-center text-xl font-bold placeholder:text-gray-500 focus:border-orange-400 focus:outline-none transition-all rounded-lg"
+                            style={{ textShadow: '1px 1px 2px #000' }}
                             autoFocus
                         />
                         
@@ -667,13 +683,28 @@ export default function VoxelHeart51() {
                                 }
                             }}
                             disabled={!playerName.trim()}
-                            className="w-full bg-gradient-to-b from-orange-500 to-orange-700 hover:from-orange-400 hover:to-orange-600 border-4 border-orange-900 text-white font-black py-6 text-2xl disabled:opacity-50 transition-all"
-                            style={{ textShadow: '3px 3px 0 #000', boxShadow: '0 8px 0 #000, 0 0 30px rgba(249, 115, 22, 0.8)' }}
+                            className="w-full bg-gradient-to-b from-orange-500 to-orange-700 hover:from-orange-400 hover:to-orange-600 text-white font-black py-6 text-xl disabled:opacity-50 transition-all rounded-lg border-b-4 border-orange-900"
+                            style={{ textShadow: '2px 2px 0 #000' }}
                         >
-                            🌋 START BUILDING
+                            <span className="flex items-center justify-center gap-3">
+                                {/* 8-bit volcano icon */}
+                                <svg width="20" height="20" viewBox="0 0 16 16" style={{ imageRendering: 'pixelated' }}>
+                                    <rect x="7" y="2" width="2" height="2" fill="#ff6b35"/>
+                                    <rect x="6" y="4" width="4" height="2" fill="#ff6b35"/>
+                                    <rect x="5" y="6" width="6" height="2" fill="#8B4513"/>
+                                    <rect x="4" y="8" width="8" height="2" fill="#8B4513"/>
+                                    <rect x="3" y="10" width="10" height="2" fill="#654321"/>
+                                    <rect x="2" y="12" width="12" height="2" fill="#654321"/>
+                                    <rect x="1" y="14" width="14" height="2" fill="#4a3520"/>
+                                    <rect x="7" y="6" width="2" height="6" fill="#ff9500"/>
+                                    <rect x="6" y="8" width="1" height="2" fill="#ff6b35"/>
+                                    <rect x="9" y="8" width="1" height="2" fill="#ff6b35"/>
+                                </svg>
+                                START BUILDING
+                            </span>
                         </Button>
 
-                        <p className="text-white/60 text-xs text-center font-bold pt-2" style={{ textShadow: '1px 1px 2px #000' }}>
+                        <p className="text-gray-300 text-sm text-center font-bold pt-2" style={{ textShadow: '1px 1px 2px #000', letterSpacing: '0.15em' }}>
                             FREE • OFFLINE • NO ADS
                         </p>
                     </div>
