@@ -110,15 +110,20 @@ export default function AI51VoiceInterface({ onVoiceMessage, isThinking, lastRes
         synthRef.current.cancel();
 
         const utterance = new SpeechSynthesisUtterance(text);
-        utterance.rate = 1.0;
-        utterance.pitch = 1.0;
+        utterance.rate = 0.85; // Slower, more grounded - like Alan Watts
+        utterance.pitch = 0.9; // Slightly lower, warmer
         utterance.volume = 1.0;
         
-        // Try to find a good voice
+        // Find the warmest, most natural voice available
         const voices = synthRef.current.getVoices();
-        const preferredVoice = voices.find(v => 
-            v.lang.startsWith('en') && (v.name.includes('Female') || v.name.includes('Samantha'))
-        ) || voices.find(v => v.lang.startsWith('en'));
+        
+        // Priority: UK/Scottish male > any UK > any male > any natural-sounding
+        const preferredVoice = 
+            voices.find(v => v.lang.includes('en-GB') && v.name.toLowerCase().includes('male') && !v.name.toLowerCase().includes('female')) ||
+            voices.find(v => v.lang.includes('en-GB') && !v.name.toLowerCase().includes('female')) ||
+            voices.find(v => v.lang.startsWith('en') && v.name.toLowerCase().includes('male') && !v.name.toLowerCase().includes('female')) ||
+            voices.find(v => v.lang.startsWith('en') && (v.name.includes('Daniel') || v.name.includes('Alex') || v.name.includes('Bruce'))) ||
+            voices.find(v => v.lang.startsWith('en') && !v.name.toLowerCase().includes('female'));
         
         if (preferredVoice) {
             utterance.voice = preferredVoice;
