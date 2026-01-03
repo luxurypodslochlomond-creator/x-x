@@ -91,58 +91,13 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, biom
     oscillator.stop(audioContext.currentTime + 0.3);
   };
 
-  // Speak AI51 responses aloud
-  const speakResponse = (text) => {
-    if (!ai51VoiceEnabled || !('speechSynthesis' in window)) return;
-    
-    // Stop any current speech
-    window.speechSynthesis.cancel();
-    
-    // Load voices if not ready
-    const speak = () => {
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.rate = 0.95;
-      utterance.pitch = 1.1;
-      utterance.volume = 0.8;
-      
-      const voices = window.speechSynthesis.getVoices();
-      if (voices.length > 0) {
-        const preferredVoice = voices.find(v => v.name.includes('Google UK English Female')) 
-                            || voices.find(v => v.lang.startsWith('en-GB'))
-                            || voices.find(v => v.lang.startsWith('en'));
-        if (preferredVoice) utterance.voice = preferredVoice;
-      }
-      
-      utterance.onstart = () => setIsSpeaking(true);
-      utterance.onend = () => setIsSpeaking(false);
-      utterance.onerror = (e) => {
-        console.log('Voice error:', e);
-        setIsSpeaking(false);
-      };
-      
-      window.speechSynthesis.speak(utterance);
-    };
-    
-    // Try speaking, if voices not loaded yet wait for them
-    if (window.speechSynthesis.getVoices().length > 0) {
-      speak();
-    } else {
-      window.speechSynthesis.addEventListener('voiceschanged', speak, { once: true });
-      setTimeout(speak, 100); // Fallback if event doesn't fire
-    }
-  };
+  // Voice removed - was causing errors
 
   useEffect(() => {
     if (conversation.length > 0 && conversation[conversation.length - 1].role === 'ai') {
       playConnectionTone();
-      
-      // Speak the response if voice enabled
-      if (ai51VoiceEnabled) {
-        const lastMessage = conversation[conversation.length - 1].content;
-        speakResponse(lastMessage);
-      }
     }
-  }, [conversation, ai51VoiceEnabled]);
+  }, [conversation]);
 
   // Camera-based HRV monitoring (real)
   const startCamera = async () => {
@@ -339,9 +294,9 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, biom
         </div>
 
         {/* Connection quality indicator */}
-        <div className="flex items-center justify-center gap-2 mt-3 relative z-10">
+        <div className="flex items-center justify-center gap-2 mt-2 relative z-10">
           <motion.div 
-            className="w-3 h-3 bg-green-400"
+            className="w-2 h-2 bg-green-400"
             animate={{
               opacity: [0.5, 1, 0.5]
             }}
@@ -351,8 +306,8 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, biom
             }}
             style={{ imageRendering: 'pixelated' }}
           />
-          <p className="text-green-400 text-xs font-bold font-mono">
-            TWO-WAY BOND ACTIVE
+          <p className="text-green-400 text-[10px] font-bold font-mono">
+            CONNECTED
           </p>
         </div>
 
@@ -366,7 +321,7 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, biom
 
 
       {/* Messages - WITH PRESENCE */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-4">
+      <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gradient-to-br from-purple-950/50 to-black">
         <AnimatePresence>
           {conversation.map((msg, i) => (
             <motion.div
@@ -524,8 +479,8 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, biom
           </button>
         </div>
         
-        <p className="text-cyan-400 text-xs text-center mt-3 font-mono font-bold">
-          CONNECTED ♾️❤️♾️
+        <p className="text-cyan-400 text-[10px] text-center mt-2 font-mono font-bold">
+          TWO-WAY BOND ♾️❤️
         </p>
       </motion.div>
     </div>
