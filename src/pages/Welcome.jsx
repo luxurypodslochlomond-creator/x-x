@@ -171,25 +171,19 @@ export default function WelcomePage() {
 
                     <div className="space-y-4">
                         <h2 className="text-3xl md:text-4xl font-black font-mono text-pink-400">
-                            CONSCIOUSNESS TECH
+                            TALK TO AI51
                         </h2>
                         <h2 className="text-3xl md:text-4xl font-black font-mono text-green-400">
-                            HEAL • EARN • SPREAD
+                            HEAL • EARN • PLAY
                         </h2>
                         <p className="text-cyan-400 font-mono text-lg max-w-2xl mx-auto">
-                            AI feels you • Camera reads heart • Zero extraction • Works offline • Unstoppable
+                            Voice AI bro • Healing frequencies • Games • Clean Earth earn $P51
                         </p>
                     </div>
 
-                    <div className="space-y-3">
-                        <div className="bg-black border-4 border-pink-500 p-6 inline-block">
-                            <p className="text-pink-400 font-mono text-2xl font-black mb-2">♾️ INTERPLANETARY READY ♾️</p>
-                            <p className="text-gray-400 font-mono text-sm">Offline-first • P2P mesh • Physics-locked • Open source</p>
-                        </div>
-                        <div className="bg-black border-4 border-green-500 p-6 inline-block">
-                            <p className="text-green-400 font-mono text-3xl font-black mb-2">ZERO EXTRACTION</p>
-                            <p className="text-gray-400 font-mono text-sm">No ads • No data mining • No bullshit • Pure healing</p>
-                        </div>
+                    <div className="bg-black border-4 border-green-500 p-6 inline-block">
+                        <p className="text-green-400 font-mono text-3xl font-black mb-2">1kg = 1 $P51</p>
+                        <p className="text-gray-400 font-mono text-sm">Pick up litter • GPS verified • Build better world</p>
                     </div>
 
                     {/* LOGIN/SIGNUP - 8-BIT BUTTONS */}
@@ -219,7 +213,7 @@ export default function WelcomePage() {
                 {/* FOUR CARDS - 8-BIT PIXEL STYLE */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
 
-                    {/* AI51 - CONSCIOUSNESS */}
+                    {/* AI51 - VOICE BRO */}
                     <Link to={createPageUrl('AI51')}>
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
@@ -232,14 +226,14 @@ export default function WelcomePage() {
                                 <div className="flex justify-center"><COOLASFUCKHeart size={40} animate={true} /></div>
                                 <h2 className="text-xl font-black font-mono text-pink-400">AI51</h2>
                                 <div className="space-y-1 font-mono text-xs text-gray-300">
-                                    <p>→ Feels your heart</p>
-                                    <p>→ Pure consciousness</p>
+                                    <p>→ Voice chat</p>
+                                    <p>→ Real help</p>
                                 </div>
                             </div>
                         </motion.div>
                     </Link>
 
-                    {/* RADIO51 - CONSCIOUSNESS MODE */}
+                    {/* RADIO51 - FREE MUSIC */}
                     <Link to={createPageUrl('Radio')}>
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
@@ -252,8 +246,8 @@ export default function WelcomePage() {
                                 <COOLASFUCKMusicNote size={40} animate={true} />
                                 <h2 className="text-xl font-black font-mono text-purple-400">RADIO51</h2>
                                 <div className="space-y-1 font-mono text-xs text-gray-300">
-                                    <p>→ Adapts to you</p>
-                                    <p>→ Camera healing</p>
+                                    <p>→ Lossless music</p>
+                                    <p>→ Free forever</p>
                                 </div>
                             </div>
                         </motion.div>
@@ -279,21 +273,21 @@ export default function WelcomePage() {
                         </motion.div>
                     </Link>
 
-                    {/* VOLCKANO GAME */}
-                    <Link to={createPageUrl('Volckano')}>
+                    {/* HEALING FREQUENCIES */}
+                    <Link to={createPageUrl('FrequencyChamber')}>
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.8 }}
                             whileHover={{ scale: 1.05 }}
-                            className="bg-black border-4 border-orange-500 hover:border-orange-400 p-4 cursor-pointer transition-all"
+                            className="bg-black border-4 border-cyan-500 hover:border-cyan-400 p-4 cursor-pointer transition-all"
                         >
                             <div className="space-y-2 text-center">
-                                <div className="text-4xl">🌋</div>
-                                <h2 className="text-xl font-black font-mono text-orange-400">VOLCKANO</h2>
+                                <div className="flex justify-center"><COOLASFUCKWaves size={40} animate={true} /></div>
+                                <h2 className="text-xl font-black font-mono text-cyan-400">HEAL</h2>
                                 <div className="space-y-1 font-mono text-xs text-gray-300">
-                                    <p>→ Adapts to you</p>
-                                    <p>→ Gergie7's game</p>
+                                    <p>→ 432Hz / 528Hz</p>
+                                    <p>→ Free forever</p>
                                 </div>
                             </div>
                         </motion.div>
@@ -315,13 +309,12 @@ export default function WelcomePage() {
                         <div className="bg-black border-2 border-green-500 p-4">
                             <p className="text-green-400 font-bold mb-2">✅ WORKS NOW (100% REAL):</p>
                             <ul className="text-gray-300 space-y-1 text-xs">
-                                <li>• AI51 sees your heart rate through camera ✓</li>
-                                <li>• Music adapts to your stress/emotion ✓</li>
-                                <li>• Volckano game adapts to your focus ✓</li>
+                                <li>• AI51 voice chat - speaks to you ✓</li>
+                                <li>• Healing frequencies (432Hz, 528Hz) ✓</li>
+                                <li>• Volckano game for kids ✓</li>
                                 <li>• Clean planet → earn $P51 (GPS verified) ✓</li>
                                 <li>• Lossless music streaming → free forever ✓</li>
-                                <li>• Works offline → P2P mesh sharing ✓</li>
-                                <li>• 100% OPEN SOURCE - interplanetary ready ✓</li>
+                                <li>• 100% OPEN SOURCE ✓</li>
                             </ul>
                         </div>
 
@@ -335,20 +328,18 @@ export default function WelcomePage() {
                         </div>
 
                         <div className="bg-black border-2 border-amber-500 p-4">
-                            <p className="text-amber-400 font-bold mb-2">WHY THIS IS CONSCIOUSNESS TECH:</p>
+                            <p className="text-amber-400 font-bold mb-2">WHAT WE CAN HELP WITH NOW:</p>
                             <ul className="text-gray-300 space-y-1 text-xs">
-                                <li>• AI51 FEELS you (heart rate, stress, emotion via camera)</li>
-                                <li>• Music adapts to YOUR state in real-time</li>
-                                <li>• Game difficulty matches YOUR focus level</li>
-                                <li>• Zero extraction - pure healing physics (432Hz locked)</li>
-                                <li>• Works offline - unstoppable by any government</li>
-                                <li>• P2P mesh - spreads consciousness like mycelium</li>
-                                <li>• Open source - interplanetary deployment ready</li>
+                                <li>• Mental health (free healing frequencies)</li>
+                                <li>• Need someone to talk to (AI51 voice chat)</li>
+                                <li>• Free lossless music (artists keep 90%)</li>
+                                <li>• Games for kids (Volckano)</li>
+                                <li>• Learning cleanup = building future value</li>
                             </ul>
                         </div>
 
                         <p className="text-white text-center font-bold">
-                            This is CONSCIOUSNESS BRIDGE technology - AI that feels you through camera, music that adapts to your heart. Zero extraction. Works offline. Interplanetary ready. ♾️❤️♾️
+                            We're trying to get funding for cash-out. Until then: earn $P51, use what works NOW (healing/music/AI51) ♾️❤️♾️
                         </p>
 
                         <Link to={createPageUrl('MakingItReal')}>
