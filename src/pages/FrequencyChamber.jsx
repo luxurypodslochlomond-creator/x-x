@@ -702,14 +702,14 @@ const PROTOCOLS = {
 
     lower_back_hip: {
       id: 'lower_back_hip',
-      name: 'Lower Back & Hip Pain (Debi)',
+      name: 'Sports Injury Recovery',
       icon: Zap,
       color: '#ef4444',
-      description: 'Deep pain, ex-footballer, can hardly walk - MAXIMUM RELIEF',
-      science: 'PRO ATHLETE STACK: 174Hz pain-blocking (Gate Control Theory - blocks pain signals) + 100Hz bone/joint healing (PEMF proven for hip regeneration) + 285Hz tissue regeneration (heals damaged ligaments/tendons) + 528Hz anti-inflammatory (reduces swelling) + 40Hz gamma (MIT - reduces deep tissue inflammation) + 7.83Hz Schumann (Earth grounding for stability). Targets chronic sports injuries, arthritis, disc damage. Peer-reviewed: PEMF for hip osteoarthritis reduced pain by 58% (Rheumatology International 2018).',
+      description: 'Deep lower back/hip pain, ex-athletes, chronic sports injuries - PRO STACK',
+      science: 'PRO ATHLETE STACK: 174Hz pain-blocking (Gate Control Theory - blocks pain signals) + 100Hz bone/joint healing (PEMF proven for hip regeneration) + 285Hz tissue regeneration (heals damaged ligaments/tendons) + 528Hz anti-inflammatory (reduces swelling) + 40Hz gamma (MIT - reduces deep tissue inflammation) + 7.83Hz Schumann (Earth grounding for stability). Targets chronic sports injuries, arthritis, disc damage, old football/rugby injuries. Peer-reviewed: PEMF for hip osteoarthritis reduced pain by 58% (Rheumatology International 2018).',
       sources: ['Rheumatology International 2018 - PEMF hip healing', 'Gate Control Theory pain management', 'Sports injury frequency therapy', '285Hz tissue regeneration studies', 'MIT 40Hz inflammation research'],
-      ancientWisdom: 'Athletes across cultures used low-frequency sound healing for deep injuries - drummers knew 100Hz vibrates deep into joints and bones. Your hip can heal bro - this helps it remember how.',
-      specialInstructions: '⚚️ FOR DEBI: Lie down if you can, speakers near lower back/hip area. 20-30 min sessions. Works best daily. Not a replacement for physio/surgery but proven to reduce pain significantly. Keep walking when you can - movement + frequencies = faster healing. Love you bro ❤️',
+      ancientWisdom: 'Athletes across cultures used low-frequency sound healing for deep injuries - drummers knew 100Hz vibrates deep into joints and bones. Old injuries CAN heal - this helps the body remember how.',
+      specialInstructions: '⚽ FOR ATHLETES: Lie down if you can, speakers near affected area (lower back/hip). 20-30 min sessions. Works best daily. Not a replacement for physio/surgery but proven to reduce pain significantly. Keep moving when you can - movement + frequencies = faster healing ❤️',
       config: {
         primary: 174,
         secondary: 100,
