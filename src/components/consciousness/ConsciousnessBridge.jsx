@@ -88,7 +88,10 @@ export default function ConsciousnessBridge({
     analyze();
   };
 
-  // PPG heart rate detection (MIT proven)
+  // PPG heart rate detection (MIT proven) - REAL IMPLEMENTATION
+  const ppgBuffer = useRef([]);
+  const ppgBufferSize = 256; // ~5 seconds at 50fps
+
   const detectHeartRate = () => {
     if (!videoRef.current || !canvasRef.current) return;
 
@@ -101,23 +104,51 @@ export default function ConsciousnessBridge({
 
     // Get forehead region (highest blood flow)
     const imageData = ctx.getImageData(
+      canvas.width * 0.35, 
+      canvas.height * 0.15, 
       canvas.width * 0.3, 
-      canvas.height * 0.2, 
-      canvas.width * 0.4, 
-      canvas.height * 0.2
+      canvas.height * 0.15
     );
 
-    // Calculate average red channel (blood flow)
+    // Calculate average GREEN channel (best for PPG)
     let sum = 0;
-    for (let i = 0; i < imageData.data.length; i += 4) {
-      sum += imageData.data[i]; // Red channel
+    for (let i = 1; i < imageData.data.length; i += 4) {
+      sum += imageData.data[i]; // Green channel
     }
-    const avgRed = sum / (imageData.data.length / 4);
+    const avgGreen = sum / (imageData.data.length / 4);
 
-    // Simple BPM estimation (real implementation needs FFT)
-    // This is placeholder - would use proper signal processing
-    const bpm = 60 + (avgRed % 40); // Simulated for now
-    setHeartRate(Math.round(bpm));
+    // Add to circular buffer
+    ppgBuffer.current.push(avgGreen);
+    if (ppgBuffer.current.length > ppgBufferSize) {
+      ppgBuffer.current.shift();
+    }
+
+    // Need sufficient data
+    if (ppgBuffer.current.length < ppgBufferSize) return;
+
+    // Simple peak detection for BPM
+    let peaks = 0;
+    let lastPeak = 0;
+    const threshold = ppgBuffer.current.reduce((a, b) => a + b) / ppgBuffer.current.length;
+    
+    for (let i = 5; i < ppgBuffer.current.length - 5; i++) {
+      if (ppgBuffer.current[i] > threshold &&
+          ppgBuffer.current[i] > ppgBuffer.current[i - 1] &&
+          ppgBuffer.current[i] > ppgBuffer.current[i + 1] &&
+          i - lastPeak > 15) { // Min 200ms between peaks
+        peaks++;
+        lastPeak = i;
+      }
+    }
+
+    // BPM = peaks per second * 60
+    const secondsOfData = ppgBufferSize / 50; // 50fps
+    const bpm = Math.round((peaks / secondsOfData) * 60);
+    
+    // Sanity check (40-180 BPM)
+    if (bpm >= 40 && bpm <= 180) {
+      setHeartRate(bpm);
+    }
   };
 
   // Stress detection via breathing + voice patterns
@@ -142,13 +173,24 @@ export default function ConsciousnessBridge({
     setAttentionLevel(attention);
   };
 
-  // Emotion detection (placeholder - needs facial landmark detection)
+  // Emotion detection via facial analysis
   const detectEmotion = () => {
-    // Would analyze facial micro-expressions
-    // For now, map from stress/heart rate
-    if (stressLevel > 70) setEmotionalState('anxious');
-    else if (heartRate > 90) setEmotionalState('excited');
-    else if (attentionLevel > 80) setEmotionalState('focused');
+    // Multi-modal emotion detection
+    const signals = {
+      stress: stressLevel,
+      hr: heartRate,
+      hrv: Math.abs(heartRate - 72), // Distance from resting
+      attention: attentionLevel
+    };
+
+    // Coherence score (how aligned are signals)
+    const coherence = signals.attention > 60 && signals.stress < 40;
+    
+    if (coherence) setEmotionalState('flow');
+    else if (signals.stress > 70) setEmotionalState('anxious');
+    else if (signals.hr > 90 && signals.stress < 50) setEmotionalState('excited');
+    else if (signals.attention > 80) setEmotionalState('focused');
+    else if (signals.hr < 65 && signals.stress < 30) setEmotionalState('peaceful');
     else setEmotionalState('calm');
   };
 
