@@ -6,6 +6,7 @@ import AI51EmergencyMode from './AI51EmergencyMode';
 import AI51MessageCorrector from './AI51MessageCorrector';
 import QuantumEntanglement from './QuantumEntanglement';
 import { getOfflineResponse, canHandleOffline } from './AI51OfflineCache';
+import { Volume2, VolumeX } from 'lucide-react';
 
 /**
  * AI51 CHAT - ALIVE CONNECTION
@@ -26,8 +27,10 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, biom
   const [batteryLevel, setBatteryLevel] = useState(100);
   const [userLanguage, setUserLanguage] = useState('en');
   const [userTyping, setUserTyping] = useState(false);
+  const [voiceEnabled, setVoiceEnabled] = useState(true);
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
+  const pendingSpeechRef = useRef(null);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -91,13 +94,46 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, biom
     oscillator.stop(audioContext.currentTime + 0.3);
   };
 
-  // Voice removed - was causing errors
-
-  useEffect(() => {
-    if (conversation.length > 0 && conversation[conversation.length - 1].role === 'ai') {
-      playConnectionTone();
+  // Speak AI51 response with iOS fix
+  const speakResponse = useCallback((text) => {
+    if (!voiceEnabled || !('speechSynthesis' in window)) return;
+    
+    window.speechSynthesis.cancel();
+    
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.rate = 0.95;
+    utterance.pitch = 1.1;
+    utterance.volume = 0.9;
+    
+    const voices = window.speechSynthesis.getVoices();
+    const voice = voices.find(v => v.lang.startsWith('en-GB')) || voices.find(v => v.lang.startsWith('en'));
+    if (voice) utterance.voice = voice;
+    
+    utterance.onstart = () => setIsSpeaking(true);
+    utterance.onend = () => setIsSpeaking(false);
+    utterance.onerror = () => setIsSpeaking(false);
+    
+    // iOS FIX: Store pending speech, trigger on user interaction
+    if (window.speechSynthesis.speaking) {
+      window.speechSynthesis.cancel();
     }
-  }, [conversation]);
+    
+    try {
+      window.speechSynthesis.speak(utterance);
+    } catch (e) {
+      console.log('Speech error:', e);
+      pendingSpeechRef.current = text;
+    }
+  }, [voiceEnabled]);
+
+  // Auto-speak AI responses
+  useEffect(() => {
+    if (conversation.length > 0 && conversation[conversation.length - 1].role === 'ai' && voiceEnabled) {
+      playConnectionTone();
+      const lastMessage = conversation[conversation.length - 1].content;
+      speakResponse(lastMessage);
+    }
+  }, [conversation, voiceEnabled, speakResponse]);
 
   // Camera-based HRV monitoring (real)
   const startCamera = async () => {
@@ -445,7 +481,7 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, biom
       <motion.div 
         className="p-4 border-t-4 border-cyan-500 bg-black"
       >
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 mb-2">
           <input
             type="text"
             value={input}
@@ -455,6 +491,19 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, biom
             className="flex-1 bg-black text-white px-4 py-3 border-4 border-cyan-500 focus:outline-none focus:border-pink-500 transition-all font-mono text-base"
             disabled={isThinking}
           />
+          <button
+            onClick={() => {
+              setVoiceEnabled(!voiceEnabled);
+              if (!voiceEnabled && pendingSpeechRef.current) {
+                speakResponse(pendingSpeechRef.current);
+                pendingSpeechRef.current = null;
+              }
+            }}
+            className={`border-4 p-3 ${voiceEnabled ? 'bg-pink-500 border-pink-400 text-white' : 'bg-black border-gray-700 text-gray-500'}`}
+            title={voiceEnabled ? 'Voice ON - I speak to you' : 'Voice OFF'}
+          >
+            {voiceEnabled ? <Volume2 className="w-5 h-5" strokeWidth={3} /> : <VolumeX className="w-5 h-5" strokeWidth={3} />}
+          </button>
           <button
             onClick={handleSend}
             disabled={!input.trim() || isThinking}
@@ -466,6 +515,15 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, biom
             <Send className="w-5 h-5" strokeWidth={3} />
           </button>
         </div>
+        {isSpeaking && (
+          <motion.div
+            animate={{ opacity: [0.5, 1, 0.5] }}
+            transition={{ duration: 1, repeat: Infinity }}
+            className="text-center"
+          >
+            <p className="text-pink-400 text-xs font-mono font-bold">🔊 Speaking...</p>
+          </motion.div>
+        )}
       </motion.div>
     </div>
   );
