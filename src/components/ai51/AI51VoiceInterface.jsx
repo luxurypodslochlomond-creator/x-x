@@ -152,31 +152,35 @@ export default function AI51VoiceInterface({ onVoiceMessage, isThinking, lastRes
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 10 }}
-                        className="bg-black/90 backdrop-blur-xl border-4 border-pink-500 rounded-2xl px-6 py-4 max-w-xs w-full"
-                        style={{ boxShadow: '0 0 30px rgba(236, 72, 153, 0.4)' }}
+                        className="bg-black/90 backdrop-blur-xl border border-cyan-500/50 rounded-lg px-4 py-2 max-w-xs w-full"
                     >
-                        <p className="text-amber-300 text-sm font-mono font-bold">{transcript}</p>
+                        <p className="text-cyan-300 text-sm font-mono">{transcript}</p>
                     </motion.div>
                 )}
             </AnimatePresence>
 
-            {/* Error Display */}
+            {/* Error Display - CLEAR HELP */}
             <AnimatePresence>
                 {error && (
                     <motion.div
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 10 }}
-                        className="bg-red-900/90 backdrop-blur-xl border-2 border-red-500 rounded-2xl px-6 py-3 max-w-xs w-full"
+                        className="bg-red-900/90 backdrop-blur-xl border border-red-500/50 rounded-lg px-4 py-3 max-w-sm w-full"
                     >
-                        <p className="text-red-300 text-xs font-mono">{error}</p>
+                        <p className="text-red-300 text-xs font-mono mb-2">{error}</p>
+                        {error.includes('not-allowed') && (
+                            <p className="text-red-200 text-xs">
+                                Tap the mic button, then allow microphone access when your browser asks ♾️
+                            </p>
+                        )}
                     </motion.div>
                 )}
             </AnimatePresence>
 
             {/* Controls */}
             <div className="flex items-center justify-center gap-3 w-full">
-                {/* Voice Output Toggle - 8-BIT */}
+                {/* Voice Output Toggle */}
                 <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
@@ -186,87 +190,51 @@ export default function AI51VoiceInterface({ onVoiceMessage, isThinking, lastRes
                             stopSpeaking();
                         }
                     }}
-                    className={`p-4 rounded-xl border-4 transition-all ${
+                    className={`p-4 rounded-lg border transition-all ${
                         voiceEnabled
-                            ? 'bg-green-500/20 border-green-500'
-                            : 'bg-gray-800/20 border-gray-600'
+                            ? 'bg-cyan-500/20 border-cyan-500/50 text-cyan-400'
+                            : 'bg-white/5 border-white/10 text-gray-600'
                     }`}
-                    style={{ 
-                        boxShadow: voiceEnabled ? '0 0 20px rgba(34, 197, 94, 0.5)' : 'none',
-                        imageRendering: 'pixelated'
-                    }}
                 >
                     {voiceEnabled ? (
-                        <COOLASFUCKWaves size={24} animate={true} />
+                        <COOLASFUCKWaves size={20} animate={true} />
                     ) : (
-                        <div className="w-6 h-6 bg-gray-600" style={{ imageRendering: 'pixelated' }} />
+                        <div className="w-5 h-5 opacity-50">
+                            <COOLASFUCKWaves size={20} animate={false} />
+                        </div>
                     )}
                 </motion.button>
 
-                {/* Voice Input Button - COOLASFUCK 8-BIT - BIGGER ON MOBILE */}
+                {/* Voice Input Button - CLEAN */}
                 <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={toggleListening}
                     disabled={isThinking}
-                    className={`relative p-8 lg:p-6 rounded-xl border-4 transition-all ${
+                    className={`relative p-6 rounded-lg border-2 transition-all ${
                         isListening
-                            ? 'bg-red-500 border-red-300'
+                            ? 'bg-red-500/20 border-red-500'
                             : isThinking
-                            ? 'bg-gray-800/50 border-gray-600'
-                            : 'bg-gradient-to-br from-pink-500 via-amber-500 to-cyan-500 border-white'
+                            ? 'bg-white/5 border-white/10 opacity-50'
+                            : 'bg-cyan-500/20 border-cyan-500'
                     }`}
-                    style={{
-                        boxShadow: isListening
-                            ? '0 0 40px rgba(239, 68, 68, 0.8)'
-                            : !isThinking
-                            ? '0 0 40px rgba(236, 72, 153, 0.6), 0 0 60px rgba(251, 191, 36, 0.3)'
-                            : 'none',
-                        imageRendering: 'pixelated'
-                    }}
                 >
-                    {/* 8-bit Pulse Animation */}
                     {isListening && (
-                        <>
-                            <motion.div
-                                className="absolute inset-0 rounded-xl bg-red-400/30 border-2 border-red-300"
-                                animate={{
-                                    scale: [1, 1.3, 1],
-                                    opacity: [0.5, 0, 0.5]
-                                }}
-                                transition={{
-                                    duration: 1,
-                                    repeat: Infinity,
-                                    ease: "easeInOut"
-                                }}
-                                style={{ imageRendering: 'pixelated' }}
-                            />
-                            <motion.div
-                                className="absolute inset-0 rounded-xl bg-red-300/20 border-2 border-red-200"
-                                animate={{
-                                    scale: [1, 1.6, 1],
-                                    opacity: [0.3, 0, 0.3]
-                                }}
-                                transition={{
-                                    duration: 1.5,
-                                    repeat: Infinity,
-                                    ease: "easeInOut",
-                                    delay: 0.3
-                                }}
-                                style={{ imageRendering: 'pixelated' }}
-                            />
-                        </>
+                        <motion.div
+                            className="absolute inset-0 rounded-lg border-2 border-red-400"
+                            animate={{
+                                scale: [1, 1.2, 1],
+                                opacity: [0.5, 0, 0.5]
+                            }}
+                            transition={{
+                                duration: 1,
+                                repeat: Infinity,
+                                ease: "easeInOut"
+                            }}
+                        />
                     )}
 
-                    {isListening ? (
-                        <div className="relative z-10">
-                            <COOLASFUCKHeart size={40} animate={true} />
-                        </div>
-                    ) : (
-                        <div className="relative z-10">
-                            <Mic className="w-10 h-10 lg:w-8 lg:h-8 text-white" strokeWidth={2.5} />
-                        </div>
-                    )}
+                    <Mic className={`w-8 h-8 relative z-10 ${isListening ? 'text-red-400' : 'text-cyan-400'}`} />
                 </motion.button>
             </div>
 
@@ -277,20 +245,11 @@ export default function AI51VoiceInterface({ onVoiceMessage, isThinking, lastRes
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 10 }}
-                        className="bg-black/90 backdrop-blur-xl border-4 border-amber-500 rounded-xl px-6 py-3 w-full max-w-xs"
-                        style={{ 
-                            boxShadow: '0 0 30px rgba(251, 191, 36, 0.5)',
-                            imageRendering: 'pixelated'
-                        }}
+                        className="bg-black/90 backdrop-blur-xl border border-cyan-500/50 rounded-lg px-4 py-2 w-full max-w-xs"
                     >
                         <div className="flex items-center justify-center gap-2">
-                            {isListening ? (
-                                <COOLASFUCKWaves size={20} animate={true} />
-                            ) : (
-                                <COOLASFUCKHeart size={20} animate={true} />
-                            )}
-                            <p className="text-amber-300 text-sm lg:text-xs font-mono font-black">
-                                {isListening ? 'LISTENING...' : 'AI51 SPEAKING...'}
+                            <p className="text-cyan-300 text-xs font-mono">
+                                {isListening ? 'listening...' : 'speaking...'}
                             </p>
                         </div>
                     </motion.div>
