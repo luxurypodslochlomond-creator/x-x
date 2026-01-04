@@ -41,12 +41,12 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [conversation]);
 
-  // Setup voice recognition
+  // Setup voice recognition ONCE
   useEffect(() => {
     if ('webkitSpeechRecognition' in window) {
       const SpeechRecognition = window.webkitSpeechRecognition;
       recognitionRef.current = new SpeechRecognition();
-      recognitionRef.current.continuous = alwaysListening;
+      recognitionRef.current.continuous = false; // Start false
       recognitionRef.current.interimResults = true;
 
       recognitionRef.current.onresult = (event) => {
@@ -58,19 +58,24 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
           lastSpokeRef.current = Date.now();
           onMessageSend(text);
           setTranscript('');
-          if (!alwaysListening) setIsListening(false);
         }
       };
 
-      recognitionRef.current.onerror = () => {
-        if (!alwaysListening) setIsListening(false);
+      recognitionRef.current.onerror = (e) => {
+        console.log('Recognition error:', e);
+        setIsListening(false);
       };
       
       recognitionRef.current.onend = () => {
         if (alwaysListening && isListening) {
           setTimeout(() => {
-            try { recognitionRef.current.start(); } catch(e) {}
-          }, 100);
+            try { 
+              recognitionRef.current.start(); 
+              console.log('Restarted listening');
+            } catch(e) {
+              console.log('Could not restart:', e);
+            }
+          }, 300);
         } else {
           setIsListening(false);
         }
@@ -78,10 +83,19 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
     }
 
     return () => {
-      if (recognitionRef.current) recognitionRef.current.stop();
+      if (recognitionRef.current) {
+        try { recognitionRef.current.stop(); } catch(e) {}
+      }
       if (window.speechSynthesis) window.speechSynthesis.cancel();
     };
-  }, [onMessageSend, alwaysListening, isListening]);
+  }, []); // Only once
+  
+  // Update continuous mode when alwaysListening changes
+  useEffect(() => {
+    if (recognitionRef.current) {
+      recognitionRef.current.continuous = alwaysListening;
+    }
+  }, [alwaysListening]);
 
   // Auto-speak - FORCE VOICE
   useEffect(() => {
