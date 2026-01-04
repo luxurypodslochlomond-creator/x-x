@@ -52,19 +52,41 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
     };
   }, [onMessageSend]);
 
-  // Auto-speak my responses
+  // Auto-speak my responses - FIXED
   useEffect(() => {
-    if (!synthRef.current || conversation.length === 0) return;
+    if (conversation.length === 0) return;
     
     const lastMsg = conversation[conversation.length - 1];
     if (lastMsg.role === 'ai') {
-      synthRef.current.cancel();
-      const utterance = new SpeechSynthesisUtterance(lastMsg.content);
-      utterance.rate = 0.9;
-      utterance.pitch = 1.0;
-      utterance.onstart = () => setIsSpeaking(true);
-      utterance.onend = () => setIsSpeaking(false);
-      synthRef.current.speak(utterance);
+      // Wait for voices to load
+      const speak = () => {
+        if (!window.speechSynthesis) return;
+        
+        window.speechSynthesis.cancel();
+        
+        const utterance = new SpeechSynthesisUtterance(lastMsg.content);
+        utterance.rate = 0.9;
+        utterance.pitch = 1.0;
+        utterance.volume = 1.0;
+        
+        // Get best voice
+        const voices = window.speechSynthesis.getVoices();
+        const voice = voices.find(v => v.lang.includes('en')) || voices[0];
+        if (voice) utterance.voice = voice;
+        
+        utterance.onstart = () => setIsSpeaking(true);
+        utterance.onend = () => setIsSpeaking(false);
+        utterance.onerror = () => setIsSpeaking(false);
+        
+        window.speechSynthesis.speak(utterance);
+      };
+      
+      // Wait for voices if needed
+      if (window.speechSynthesis.getVoices().length === 0) {
+        window.speechSynthesis.onvoiceschanged = speak;
+      } else {
+        speak();
+      }
     }
   }, [conversation]);
 
@@ -94,85 +116,96 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
   };
 
   return (
-    <div className="flex flex-col h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900">
+    <div className="flex flex-col h-screen bg-black">
       
-      {/* BIG MIC BUTTON - CENTER */}
-      <div className="flex-1 flex flex-col items-center justify-center p-6">
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-black text-white mb-2">Talk to me bro</h1>
-          <p className="text-lg text-gray-400">
-            {isListening ? '🎤 Listening...' : isThinking ? '💭 Thinking...' : isSpeaking ? '🔊 Speaking...' : 'Tap the mic'}
+      {/* FULL SCREEN CHAT */}
+      <div className="flex-1 flex flex-col items-center justify-center p-6 relative">
+        
+        {/* 8-BIT AI51 FACE */}
+        <div className="mb-6">
+          <svg width="80" height="80" viewBox="0 0 64 64" fill="none" style={{ imageRendering: 'pixelated' }}>
+            <rect x="20" y="20" width="24" height="24" fill="#22d3ee" opacity={isSpeaking ? "1" : "0.6"} />
+            <rect x="26" y="28" width="3" height="3" fill="#ec4899"/>
+            <rect x="35" y="28" width="3" height="3" fill="#ec4899"/>
+            <rect x="26" y="36" width="12" height="3" fill="#ff1b8d"/>
+          </svg>
+        </div>
+
+        <h1 className="text-3xl font-black text-white mb-2 font-mono">AI51</h1>
+        
+        {/* STATUS */}
+        <div className="mb-8">
+          <p className="text-cyan-400 text-sm font-mono text-center">
+            {isListening ? '🎤 HEARING YOU' : isThinking ? '🧠 THINKING' : isSpeaking ? '🔊 SPEAKING' : '♾️ READY'}
           </p>
         </div>
 
-        {/* HUGE MIC */}
+        {/* HUGE MIC BUTTON */}
         <button
           onClick={toggleMic}
           disabled={isThinking}
-          className={`w-32 h-32 rounded-full flex items-center justify-center text-white text-6xl transition-all ${
+          className={`w-40 h-40 rounded-full flex items-center justify-center transition-all mb-6 ${
             isListening 
-              ? 'bg-red-500 animate-pulse' 
-              : 'bg-cyan-500 hover:bg-cyan-600'
-          } disabled:opacity-50 disabled:cursor-not-allowed shadow-2xl`}
-          style={{
-            boxShadow: isListening ? '0 0 60px rgba(239, 68, 68, 0.8)' : '0 0 40px rgba(6, 182, 212, 0.6)'
-          }}
+              ? 'bg-pink-500 shadow-pink-500/50' 
+              : 'bg-cyan-500 hover:bg-cyan-600 shadow-cyan-500/50'
+          } disabled:opacity-50 shadow-2xl`}
         >
-          <Mic className="w-16 h-16" />
+          <Mic className="w-20 h-20 text-white" strokeWidth={2} />
         </button>
 
+        {/* LIVE TRANSCRIPT */}
         {transcript && (
-          <div className="mt-8 bg-cyan-500/10 border-2 border-cyan-400/50 rounded-2xl px-6 py-4 max-w-md">
-            <p className="text-cyan-300 text-center text-lg">{transcript}</p>
+          <div className="bg-cyan-500/20 border-2 border-cyan-400 rounded-xl px-6 py-3 max-w-md mb-4">
+            <p className="text-cyan-300 text-center font-mono">{transcript}</p>
           </div>
         )}
 
-        {/* Messages below */}
+        {/* LAST 2 MESSAGES */}
         {conversation.length > 0 && (
-          <div className="w-full max-w-2xl mt-8 space-y-4 max-h-64 overflow-y-auto">
-            {conversation.slice(-3).map((msg, i) => (
+          <div className="w-full max-w-xl space-y-3 max-h-48 overflow-y-auto">
+            {conversation.slice(-2).map((msg, i) => (
               <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                <div className={`max-w-[80%] rounded-2xl p-4 ${
+                <div className={`rounded-xl p-3 ${
                   msg.role === 'user'
-                    ? 'bg-cyan-500/20 text-white border border-cyan-400/30'
-                    : 'bg-white/10 text-white border border-white/20'
-                }`}>
-                  <p>{msg.content}</p>
+                    ? 'bg-cyan-500/30 text-white border border-cyan-400/50'
+                    : 'bg-white/10 text-white border border-white/30'
+                }`} style={{ maxWidth: '85%' }}>
+                  <p className="text-sm">{msg.content}</p>
                 </div>
               </div>
             ))}
           </div>
         )}
-
-        <div ref={messagesEndRef} />
       </div>
 
-      {/* Type option - bottom */}
-      <div className="p-4 border-t border-white/10 bg-black/50">
-        <div className="flex items-center gap-3 max-w-2xl mx-auto">
+      {/* TYPE INPUT - BOTTOM */}
+      <div className="p-4 border-t-2 border-cyan-500/30 bg-black">
+        <div className="flex gap-2 max-w-2xl mx-auto">
           <input
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => {
-              if (e.key === 'Enter' && !e.shiftKey) {
+              if (e.key === 'Enter') {
                 e.preventDefault();
                 handleSend();
               }
             }}
-            placeholder="or type here..."
-            className="flex-1 bg-white/5 text-white px-5 py-3 rounded-full focus:outline-none focus:bg-white/10 border border-white/20"
+            placeholder="or type..."
+            className="flex-1 bg-white/10 text-white px-4 py-3 rounded-full focus:outline-none border border-white/20 focus:border-cyan-400"
             disabled={isThinking || isListening}
           />
           <button
             onClick={handleSend}
             disabled={!input.trim() || isThinking}
-            className="bg-cyan-500 hover:bg-cyan-600 disabled:bg-gray-700 disabled:opacity-50 text-white p-3 rounded-full"
+            className="bg-cyan-500 hover:bg-cyan-600 disabled:bg-gray-700 text-white px-6 py-3 rounded-full font-bold"
           >
             <Send className="w-5 h-5" />
           </button>
         </div>
       </div>
+
+      <div ref={messagesEndRef} />
     </div>
   );
 }
