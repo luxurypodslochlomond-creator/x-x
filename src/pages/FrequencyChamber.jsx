@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Heart, Moon, Brain, Zap, Shield, Wind, Sun, Volume2, VolumeX, Clock, Info, X, Camera, Activity, Ear, Share2, Music, Mic, Globe, ChevronDown, Sparkles } from 'lucide-react';
 import { COOLASFUCKWaves, COOLASFUCKBrain, COOLASFUCKHeart, COOLASFUCKMoon, COOLASFUCKShield, COOLASFUCKTooth } from '@/components/shared/COOLASFUCKIcon';
 import BiometricHealing from '@/components/radio/BiometricHealing';
+import OvernightSleepMonitor from '@/components/healing/OvernightSleepMonitor';
 import { base44 } from '@/api/base44Client';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
@@ -1885,6 +1886,7 @@ export default function FrequencyChamber() {
     const testToneRef = useRef(null);
     const [showBiometric, setShowBiometric] = useState(false);
     const [expandedStats, setExpandedStats] = useState({});
+    const [showOvernightMonitor, setShowOvernightMonitor] = useState(false);
 
 
     // SEO
@@ -3593,6 +3595,32 @@ export default function FrequencyChamber() {
         )}
       </AnimatePresence>
       
+      {/* OVERNIGHT SLEEP MONITOR - THE NUCLEAR OPTION */}
+      {!selectedProtocol && (
+        <div className="max-w-4xl mx-auto p-4">
+          <motion.button
+            onClick={() => setShowOvernightMonitor(true)}
+            whileHover={{ scale: 1.02 }}
+            className="w-full bg-gradient-to-r from-purple-500/30 to-pink-500/30 border-4 border-purple-500 p-6 hover:bg-purple-500/40 transition-all mb-6"
+            style={{ boxShadow: '0 0 60px rgba(168, 85, 247, 0.6)' }}
+          >
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-4">
+                <Moon className="w-12 h-12 text-purple-400 animate-pulse" />
+                <div className="text-left">
+                  <h3 className="text-purple-400 font-black font-mono text-2xl">OVERNIGHT MONITOR</h3>
+                  <p className="text-pink-300 text-sm font-mono font-bold">£15k clinics CAN'T do this</p>
+                  <p className="text-gray-400 text-xs font-mono mt-1">
+                    Track healing ALL NIGHT • Optimal wake time • Morning report
+                  </p>
+                </div>
+              </div>
+              <Sparkles className="w-8 h-8 text-amber-400" />
+            </div>
+          </motion.button>
+        </div>
+      )}
+
       {/* BIOMETRIC HEALING - Collapsible, zero modals */}
       {!selectedProtocol && (
         <div className="max-w-4xl mx-auto p-4">
@@ -3627,6 +3655,13 @@ export default function FrequencyChamber() {
           </AnimatePresence>
         </div>
       )}
+
+      {/* OVERNIGHT MONITOR FULLSCREEN */}
+      <AnimatePresence>
+        {showOvernightMonitor && (
+          <OvernightSleepMonitor onClose={() => setShowOvernightMonitor(false)} />
+        )}
+      </AnimatePresence>
 
       {/* VOICE HEALING - BOTTOM POSITION */}
       {!selectedProtocol && (
