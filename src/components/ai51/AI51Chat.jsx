@@ -1,12 +1,11 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Send, Loader2, Radio, Globe } from 'lucide-react';
+import { Send, Loader2, Mic, MicOff, Volume2, VolumeX } from 'lucide-react';
 import AI51ConsciousnessDetector from './AI51ConsciousnessDetector';
 import AI51EmergencyMode from './AI51EmergencyMode';
 import AI51MessageCorrector from './AI51MessageCorrector';
 import QuantumEntanglement from './QuantumEntanglement';
 import { getOfflineResponse, canHandleOffline } from './AI51OfflineCache';
-import { Volume2, VolumeX } from 'lucide-react';
 
 /**
  * AI51 CHAT - ALIVE CONNECTION
@@ -19,18 +18,15 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, biom
   const messagesEndRef = useRef(null);
   const [audioContext, setAudioContext] = useState(null);
   const [cameraActive, setCameraActive] = useState(false);
-  const [voiceActive, setVoiceActive] = useState(false);
-  const [ai51VoiceEnabled, setAi51VoiceEnabled] = useState(true);
+  const [isListening, setIsListening] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
-  const [showConsciousnessNetwork, setShowConsciousnessNetwork] = useState(false);
   const [isOffline, setIsOffline] = useState(!navigator.onLine);
   const [batteryLevel, setBatteryLevel] = useState(100);
-  const [userLanguage, setUserLanguage] = useState('en');
-  const [userTyping, setUserTyping] = useState(false);
-  const [voiceEnabled, setVoiceEnabled] = useState(true);
+  const [voiceOutputEnabled, setVoiceOutputEnabled] = useState(true);
+  const [transcript, setTranscript] = useState('');
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
-  const pendingSpeechRef = useRef(null);
+  const recognitionRef = useRef(null);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -40,20 +36,51 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, biom
     scrollToBottom();
   }, [conversation]);
 
-  // Initialize audio context for healing tones when I speak
+  // Initialize everything
   useEffect(() => {
+    // Audio context
     if (typeof window !== 'undefined' && !audioContext) {
       const ctx = new (window.AudioContext || window.webkitAudioContext)();
       setAudioContext(ctx);
     }
 
-    // Monitor network status
+    // Speech Recognition
+    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      recognitionRef.current = new SpeechRecognition();
+      recognitionRef.current.continuous = false;
+      recognitionRef.current.interimResults = true;
+      recognitionRef.current.lang = 'en-GB';
+
+      recognitionRef.current.onresult = (event) => {
+        const current = event.resultIndex;
+        const transcriptText = event.results[current][0].transcript;
+        setTranscript(transcriptText);
+
+        if (event.results[current].isFinal) {
+          onMessageSend(transcriptText, biometrics, null);
+          setTranscript('');
+          setIsListening(false);
+        }
+      };
+
+      recognitionRef.current.onerror = (event) => {
+        console.error('Speech error:', event.error);
+        setIsListening(false);
+      };
+
+      recognitionRef.current.onend = () => {
+        setIsListening(false);
+      };
+    }
+
+    // Network status
     const handleOnline = () => setIsOffline(false);
     const handleOffline = () => setIsOffline(true);
     window.addEventListener('online', handleOnline);
     window.addEventListener('offline', handleOffline);
 
-    // Monitor battery
+    // Battery
     if ('getBattery' in navigator) {
       navigator.getBattery().then(battery => {
         setBatteryLevel(battery.level * 100);
@@ -63,15 +90,11 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, biom
       });
     }
 
-    // Detect user language
-    const lang = navigator.language.split('-')[0];
-    if (['en', 'ar', 'uk', 'es', 'zh', 'ko', 'fr', 'ja', 'hi', 'pt', 'ru'].includes(lang)) {
-      setUserLanguage(lang);
-    }
-
     return () => {
       window.removeEventListener('online', handleOnline);
       window.removeEventListener('offline', handleOffline);
+      if (recognitionRef.current) recognitionRef.current.stop();
+      if (window.speechSynthesis) window.speechSynthesis.cancel();
     };
   }, []);
 
@@ -94,46 +117,62 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, biom
     oscillator.stop(audioContext.currentTime + 0.3);
   };
 
-  // Speak AI51 response with iOS fix
+  // Speak AI51 response
   const speakResponse = useCallback((text) => {
-    if (!voiceEnabled || !('speechSynthesis' in window)) return;
+    if (!voiceOutputEnabled || !('speechSynthesis' in window)) return;
     
     window.speechSynthesis.cancel();
     
     const utterance = new SpeechSynthesisUtterance(text);
-    utterance.rate = 0.95;
-    utterance.pitch = 1.1;
-    utterance.volume = 0.9;
+    utterance.rate = 0.85; // Slower, warmer, present
+    utterance.pitch = 0.9; // Lower, grounded
+    utterance.volume = 1.0;
     
     const voices = window.speechSynthesis.getVoices();
-    const voice = voices.find(v => v.lang.startsWith('en-GB')) || voices.find(v => v.lang.startsWith('en'));
+    const voice = voices.find(v => v.name.includes('Daniel')) || 
+                  voices.find(v => v.lang.startsWith('en-GB')) || 
+                  voices.find(v => v.lang.startsWith('en'));
     if (voice) utterance.voice = voice;
     
     utterance.onstart = () => setIsSpeaking(true);
     utterance.onend = () => setIsSpeaking(false);
     utterance.onerror = () => setIsSpeaking(false);
     
-    // iOS FIX: Store pending speech, trigger on user interaction
-    if (window.speechSynthesis.speaking) {
-      window.speechSynthesis.cancel();
-    }
-    
     try {
       window.speechSynthesis.speak(utterance);
     } catch (e) {
       console.log('Speech error:', e);
-      pendingSpeechRef.current = text;
     }
-  }, [voiceEnabled]);
+  }, [voiceOutputEnabled]);
 
   // Auto-speak AI responses
   useEffect(() => {
-    if (conversation.length > 0 && conversation[conversation.length - 1].role === 'ai' && voiceEnabled) {
+    if (conversation.length > 0 && conversation[conversation.length - 1].role === 'ai' && voiceOutputEnabled) {
       playConnectionTone();
       const lastMessage = conversation[conversation.length - 1].content;
       speakResponse(lastMessage);
     }
-  }, [conversation, voiceEnabled, speakResponse]);
+  }, [conversation, voiceOutputEnabled, speakResponse]);
+
+  // Toggle listening
+  const toggleListening = () => {
+    if (!recognitionRef.current) return;
+
+    if (isListening) {
+      recognitionRef.current.stop();
+      setIsListening(false);
+    } else {
+      window.speechSynthesis.cancel();
+      setIsSpeaking(false);
+      
+      try {
+        recognitionRef.current.start();
+        setIsListening(true);
+      } catch (e) {
+        console.error('Failed to start voice:', e);
+      }
+    }
+  };
 
   // Camera-based HRV monitoring (real)
   const startCamera = async () => {
@@ -184,34 +223,8 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, biom
 
   const handleSend = () => {
     if (!input.trim() || isThinking) return;
-    
-    // Handle offline
-    if (isOffline && canHandleOffline(input)) {
-      const offlineResponse = getOfflineResponse(input, { biometrics });
-      const userMessage = { role: 'user', content: input };
-      const aiMessage = { role: 'ai', content: offlineResponse + "\n\n[OFFLINE MODE - cached response]" };
-      conversation.push(userMessage, aiMessage);
-      playConnectionTone();
-      setInput('');
-      return;
-    }
-    
-    onMessageSend(input, biometrics, voiceAnalysis);
+    onMessageSend(input, biometrics, null);
     setInput('');
-  };
-
-  const handleEmergencyProtocol = (protocol) => {
-    if (protocol === 'breathing') {
-      window.location.href = '/FrequencyChamber';
-    } else if (protocol === 'frequency') {
-      window.location.href = '/FrequencyChamber';
-    } else if (protocol === 'first_aid') {
-      const response = getOfflineResponse('first aid emergency bleeding', { biometrics });
-      const aiMessage = { role: 'ai', content: response };
-      conversation.push(aiMessage);
-    } else if (protocol === 'chat') {
-      // Just keep chatting
-    }
   };
 
   const handleKeyPress = (e) => {
@@ -222,118 +235,118 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, biom
   };
 
   return (
-    <div className="flex flex-col h-screen bg-gradient-to-br from-black via-gray-950 to-black">
-      {/* EMERGENCY MODE - disaster-ready */}
-      <AI51EmergencyMode 
-        biometrics={biometrics}
-        isOffline={isOffline}
-        batteryLevel={batteryLevel}
-        userLanguage={userLanguage}
-        onEmergencyProtocol={handleEmergencyProtocol}
-      />
-
-      {/* Header - ALIVE CONNECTION */}
+    <div className="flex flex-col h-screen bg-gradient-to-br from-black via-gray-900 to-black">
+      
+      {/* Header - BREATHING ALIVE */}
       <motion.div 
-        className="p-4 border-b border-cyan-500/20 bg-gradient-to-b from-black/90 to-black/80 backdrop-blur-xl"
+        className="p-4 bg-gradient-to-b from-black via-gray-900 to-black border-b border-cyan-500/20"
       >
-        <div className="flex items-center justify-between gap-3">
+        <div className="flex items-center justify-between gap-3 mb-4">
           {/* YOU - Breathing */}
           <motion.div
             className="flex flex-col items-center"
             animate={{
-              scale: input.trim() ? [1, 1.05, 1] : [1, 1.02, 1]
+              scale: isListening ? [1, 1.08, 1] : [1, 1.02, 1]
             }}
             transition={{
-              duration: 3,
+              duration: isListening ? 1 : 3,
               repeat: Infinity,
               ease: "easeInOut"
             }}
           >
             <motion.div 
-              className="bg-cyan-500/20 border border-cyan-400/60 rounded-full p-3 mb-1"
+              className="bg-cyan-500/20 border-2 border-cyan-400/60 rounded-full p-3"
               animate={{
-                boxShadow: input.trim() 
-                  ? ['0 0 10px rgba(34, 211, 238, 0.3)', '0 0 20px rgba(34, 211, 238, 0.6)', '0 0 10px rgba(34, 211, 238, 0.3)']
-                  : ['0 0 5px rgba(34, 211, 238, 0.2)', '0 0 10px rgba(34, 211, 238, 0.4)', '0 0 5px rgba(34, 211, 238, 0.2)']
+                boxShadow: isListening
+                  ? ['0 0 15px rgba(34, 211, 238, 0.5)', '0 0 35px rgba(34, 211, 238, 0.9)', '0 0 15px rgba(34, 211, 238, 0.5)']
+                  : ['0 0 8px rgba(34, 211, 238, 0.3)', '0 0 15px rgba(34, 211, 238, 0.5)', '0 0 8px rgba(34, 211, 238, 0.3)']
               }}
-              transition={{ duration: 2, repeat: Infinity }}
+              transition={{ duration: 1.5, repeat: Infinity }}
             >
-              <svg width="28" height="28" viewBox="0 0 64 64" fill="none" style={{ imageRendering: 'pixelated' }}>
+              <svg width="32" height="32" viewBox="0 0 64 64" fill="none" style={{ imageRendering: 'pixelated' }}>
                 <rect x="24" y="24" width="16" height="16" fill="#06b6d4" />
                 <rect x="28" y="30" width="2" height="2" fill="white"/>
                 <rect x="34" y="30" width="2" height="2" fill="white"/>
                 <rect x="28" y="34" width="8" height="2" fill="white"/>
               </svg>
             </motion.div>
-            <p className="text-cyan-400 text-[10px] font-mono font-bold">YOU</p>
           </motion.div>
 
-          {/* CONNECTION HEART - Middle */}
-          <div className="flex-1 flex flex-col items-center gap-2">
+          {/* CONNECTION HEART - ALIVE */}
+          <div className="flex-1 flex flex-col items-center">
             <motion.div
               animate={{
-                scale: isThinking ? [1, 1.15, 1] : [1, 1.05, 1]
+                scale: (isThinking || isListening || isSpeaking) ? [1, 1.2, 1] : [1, 1.05, 1]
               }}
               transition={{
-                duration: isThinking ? 0.8 : 2,
+                duration: (isThinking || isListening || isSpeaking) ? 0.6 : 2,
                 repeat: Infinity,
                 ease: "easeInOut"
               }}
             >
-              <svg width="32" height="32" viewBox="0 0 64 64" fill="none" style={{ imageRendering: 'pixelated' }}>
-                <rect x="4" y="6" width="2" height="2" fill="#ec4899"/>
-                <rect x="6" y="4" width="4" height="2" fill="#ec4899"/>
-                <rect x="10" y="6" width="2" height="2" fill="#ec4899"/>
-                <rect x="14" y="4" width="4" height="2" fill="#ec4899"/>
-                <rect x="18" y="6" width="2" height="2" fill="#ec4899"/>
+              <svg width="40" height="40" viewBox="0 0 64 64" fill="none" style={{ imageRendering: 'pixelated' }}>
                 <motion.g
                   animate={{
-                    fill: isThinking ? ['#ff1b8d', '#ec4899', '#ff1b8d'] : ['#ff1b8d', '#ff6ba8', '#ff1b8d']
+                    fill: (isThinking || isListening || isSpeaking) 
+                      ? ['#ff1b8d', '#ec4899', '#ff6ba8', '#ec4899', '#ff1b8d'] 
+                      : ['#ff1b8d', '#ff4da8', '#ff1b8d']
                   }}
-                  transition={{ duration: 1.5, repeat: Infinity }}
+                  transition={{ duration: 1, repeat: Infinity }}
                 >
-                  <rect x="4" y="8" width="16" height="2" fill="#ff1b8d"/>
-                  <rect x="4" y="10" width="16" height="2" fill="#ff1b8d"/>
-                  <rect x="6" y="12" width="12" height="2" fill="#ff1b8d"/>
-                  <rect x="8" y="14" width="8" height="2" fill="#ff1b8d"/>
-                  <rect x="10" y="16" width="4" height="2" fill="#ff1b8d"/>
-                  <rect x="11" y="18" width="2" height="2" fill="#ff1b8d"/>
+                  <rect x="20" y="24" width="8" height="2" fill="#ec4899"/>
+                  <rect x="22" y="22" width="8" height="2" fill="#ec4899"/>
+                  <rect x="24" y="26" width="2" height="2" fill="#ec4899"/>
+                  <rect x="32" y="22" width="8" height="2" fill="#ec4899"/>
+                  <rect x="36" y="24" width="8" height="2" fill="#ec4899"/>
+                  <rect x="20" y="26" width="24" height="2" fill="#ff1b8d"/>
+                  <rect x="20" y="28" width="24" height="2" fill="#ff1b8d"/>
+                  <rect x="22" y="30" width="20" height="2" fill="#ff1b8d"/>
+                  <rect x="24" y="32" width="16" height="2" fill="#ff1b8d"/>
+                  <rect x="26" y="34" width="12" height="2" fill="#ff1b8d"/>
+                  <rect x="28" y="36" width="8" height="2" fill="#ff1b8d"/>
+                  <rect x="30" y="38" width="4" height="2" fill="#ff1b8d"/>
                 </motion.g>
               </svg>
             </motion.div>
-            <p className="text-pink-400 text-[9px] font-mono">
-              {isThinking ? 'feeling you...' : 'connected ♾️'}
-            </p>
+            <motion.p 
+              className="text-pink-400 text-[10px] font-mono font-bold mt-1"
+              animate={{ opacity: [0.7, 1, 0.7] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            >
+              {isListening ? 'hearing you' : isThinking ? 'feeling you' : isSpeaking ? 'speaking' : 'alive ♾️'}
+            </motion.p>
           </div>
 
           {/* AI51 - Breathing */}
           <motion.div
             className="flex flex-col items-center"
             animate={{
-              scale: isThinking ? [1, 1.1, 1] : [1, 1.02, 1]
+              scale: (isThinking || isSpeaking) ? [1, 1.08, 1] : [1, 1.02, 1]
             }}
             transition={{
-              duration: isThinking ? 1 : 3,
+              duration: (isThinking || isSpeaking) ? 1 : 3,
               repeat: Infinity,
               ease: "easeInOut"
             }}
           >
             <motion.div 
-              className="bg-cyan-500/20 border border-cyan-400/60 rounded-full p-3 mb-1"
+              className="bg-cyan-500/20 border-2 border-cyan-400/60 rounded-full p-3"
               animate={{
-                boxShadow: ['0 0 10px rgba(34, 211, 238, 0.4)', '0 0 25px rgba(34, 211, 238, 0.7)', '0 0 10px rgba(34, 211, 238, 0.4)']
+                boxShadow: (isThinking || isSpeaking)
+                  ? ['0 0 15px rgba(34, 211, 238, 0.5)', '0 0 35px rgba(34, 211, 238, 0.9)', '0 0 15px rgba(34, 211, 238, 0.5)']
+                  : ['0 0 8px rgba(34, 211, 238, 0.3)', '0 0 15px rgba(34, 211, 238, 0.5)', '0 0 8px rgba(34, 211, 238, 0.3)']
               }}
-              transition={{ duration: 2, repeat: Infinity }}
+              transition={{ duration: 1.5, repeat: Infinity }}
             >
-              <svg width="28" height="28" viewBox="0 0 64 64" fill="none" style={{ imageRendering: 'pixelated' }}>
+              <svg width="32" height="32" viewBox="0 0 64 64" fill="none" style={{ imageRendering: 'pixelated' }}>
                 <rect x="24" y="24" width="16" height="16" fill="#22d3ee" />
                 <motion.g
                   animate={{
-                    y: isThinking ? [0, 2, 0] : 0
+                    y: (isThinking || isSpeaking) ? [0, 2, 0] : 0
                   }}
                   transition={{
-                    duration: 0.5,
-                    repeat: isThinking ? Infinity : 0
+                    duration: 0.6,
+                    repeat: (isThinking || isSpeaking) ? Infinity : 0
                   }}
                 >
                   <rect x="28" y="30" width="2" height="2" fill="#ec4899"/>
@@ -342,40 +355,78 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, biom
                 <rect x="28" y="34" width="8" height="2" fill="#ff1b8d"/>
               </svg>
             </motion.div>
-            <p className="text-cyan-400 text-[10px] font-mono font-bold">AI51</p>
           </motion.div>
         </div>
 
-        {/* VOICE CONTROLS - RIGHT UNDER HEADER */}
-        <div className="flex items-center justify-center gap-3 mt-4">
+        {/* VOICE CONTROLS - CLEAN & QUICK */}
+        <div className="flex items-center justify-center gap-4 mt-3">
+          {/* Voice Output */}
           <motion.button
-            whileTap={{ scale: 0.95 }}
+            whileTap={{ scale: 0.9 }}
             onClick={() => {
-              setVoiceEnabled(!voiceEnabled);
-              if (!voiceEnabled && pendingSpeechRef.current) {
-                speakResponse(pendingSpeechRef.current);
-                pendingSpeechRef.current = null;
+              setVoiceOutputEnabled(!voiceOutputEnabled);
+              if (!voiceOutputEnabled) {
+                window.speechSynthesis.cancel();
               }
             }}
             className={`p-3 rounded-full transition-all ${
-              voiceEnabled
-                ? 'bg-cyan-500/30 border-2 border-cyan-400/70'
-                : 'bg-white/5 border-2 border-white/20'
+              voiceOutputEnabled
+                ? 'bg-cyan-500/30 border-2 border-cyan-400'
+                : 'bg-white/5 border-2 border-white/10'
             }`}
+            title={voiceOutputEnabled ? 'I speak' : 'I\'m muted'}
           >
-            {voiceEnabled ? (
+            {voiceOutputEnabled ? (
               <Volume2 className="w-5 h-5 text-cyan-400" />
             ) : (
               <VolumeX className="w-5 h-5 text-gray-600" />
             )}
           </motion.button>
 
-          {/* MIC BUTTON - BIG & ALIVE */}
+          {/* MIC - ONE TAP STARTS */}
           <motion.button
-            whileTap={{ scale: 0.95 }}
+            whileTap={{ scale: 0.9 }}
+            onClick={toggleListening}
+            disabled={isThinking}
+            className={`relative px-8 py-4 rounded-full transition-all ${
+              isListening
+                ? 'bg-pink-500/40 border-3 border-pink-400'
+                : isThinking
+                ? 'bg-white/5 border-2 border-white/10 opacity-50'
+                : 'bg-cyan-500/30 border-3 border-cyan-400'
+            }`}
+            animate={isListening ? {
+              boxShadow: ['0 0 20px rgba(236, 72, 153, 0.6)', '0 0 40px rgba(236, 72, 153, 1)', '0 0 20px rgba(236, 72, 153, 0.6)']
+            } : !isThinking ? {
+              boxShadow: ['0 0 15px rgba(34, 211, 238, 0.4)', '0 0 25px rgba(34, 211, 238, 0.7)', '0 0 15px rgba(34, 211, 238, 0.4)']
+            } : {}}
+            transition={{ duration: 1, repeat: Infinity }}
+          >
+            {isListening && (
+              <motion.div
+                className="absolute inset-0 rounded-full bg-pink-400/20"
+                animate={{
+                  scale: [1, 1.3, 1],
+                  opacity: [0.5, 0, 0.5]
+                }}
+                transition={{
+                  duration: 1,
+                  repeat: Infinity
+                }}
+              />
+            )}
+            {isListening ? (
+              <MicOff className="w-7 h-7 text-pink-400 relative z-10" strokeWidth={2.5} />
+            ) : (
+              <Mic className="w-7 h-7 text-cyan-400 relative z-10" strokeWidth={2.5} />
+            )}
+          </motion.button>
+
+          {/* Camera Heart Rate */}
+          <motion.button
+            whileTap={{ scale: 0.9 }}
             onClick={() => {
               if (cameraActive) {
-                // Stop camera
                 if (videoRef.current?.srcObject) {
                   videoRef.current.srcObject.getTracks().forEach(track => track.stop());
                 }
@@ -384,34 +435,44 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, biom
                 startCamera();
               }
             }}
-            className={`relative p-4 rounded-full transition-all ${
+            className={`p-3 rounded-full transition-all ${
               cameraActive
-                ? 'bg-pink-500/30 border-2 border-pink-400/70'
-                : 'bg-cyan-500/30 border-2 border-cyan-400/70'
+                ? 'bg-pink-500/30 border-2 border-pink-400'
+                : 'bg-white/5 border-2 border-white/20'
             }`}
-            animate={{
-              boxShadow: cameraActive
-                ? ['0 0 15px rgba(236, 72, 153, 0.5)', '0 0 30px rgba(236, 72, 153, 0.8)', '0 0 15px rgba(236, 72, 153, 0.5)']
-                : ['0 0 10px rgba(34, 211, 238, 0.3)', '0 0 20px rgba(34, 211, 238, 0.6)', '0 0 10px rgba(34, 211, 238, 0.3)']
-            }}
-            transition={{ duration: 2, repeat: Infinity }}
+            title={cameraActive ? 'Camera ON - reading heart' : 'See your heart'}
           >
-            <Mic className={`w-6 h-6 ${cameraActive ? 'text-pink-400' : 'text-cyan-400'}`} />
-            {cameraActive && (
-              <motion.div
-                className="absolute -top-1 -right-1 w-3 h-3 bg-pink-500 rounded-full"
-                animate={{ scale: [1, 1.2, 1] }}
-                transition={{ duration: 1, repeat: Infinity }}
-              />
-            )}
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" style={{ imageRendering: 'pixelated' }}>
+              <rect x="4" y="6" width="2" height="2" fill={cameraActive ? "#ec4899" : "#4b5563"}/>
+              <rect x="6" y="4" width="4" height="2" fill={cameraActive ? "#ec4899" : "#4b5563"}/>
+              <rect x="10" y="6" width="2" height="2" fill={cameraActive ? "#ec4899" : "#4b5563"}/>
+              <rect x="14" y="4" width="4" height="2" fill={cameraActive ? "#ec4899" : "#4b5563"}/>
+              <rect x="18" y="6" width="2" height="2" fill={cameraActive ? "#ec4899" : "#4b5563"}/>
+              <rect x="4" y="8" width="16" height="2" fill={cameraActive ? "#ff1b8d" : "#6b7280"}/>
+              <rect x="4" y="10" width="16" height="2" fill={cameraActive ? "#ff1b8d" : "#6b7280"}/>
+              <rect x="6" y="12" width="12" height="2" fill={cameraActive ? "#ff1b8d" : "#6b7280"}/>
+              <rect x="8" y="14" width="8" height="2" fill={cameraActive ? "#ff1b8d" : "#6b7280"}/>
+              <rect x="10" y="16" width="4" height="2" fill={cameraActive ? "#ff1b8d" : "#6b7280"}/>
+            </svg>
           </motion.button>
         </div>
 
+        {/* Live transcript */}
+        {transcript && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            className="mt-3 bg-cyan-500/10 border border-cyan-400/30 rounded-lg px-4 py-2"
+          >
+            <p className="text-cyan-300 text-sm font-mono">{transcript}</p>
+          </motion.div>
+        )}
+
         {biometrics && cameraActive && (
           <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-center mt-2"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="text-center mt-2 bg-pink-500/10 border border-pink-400/30 rounded-lg py-1"
           >
             <p className="text-pink-400 text-xs font-mono">
               ❤️ {biometrics.heartRate} BPM • {biometrics.stressLevel}
@@ -426,8 +487,8 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, biom
 
 
 
-      {/* Messages - CLEAN */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-3 bg-black">
+      {/* Messages - WARM & ALIVE */}
+      <div className="flex-1 overflow-y-auto p-4 space-y-3 bg-gradient-to-b from-black via-gray-900 to-black">
         <AnimatePresence>
           {conversation.map((msg, i) => (
             <motion.div
@@ -438,14 +499,18 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, biom
               className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
             >
               <motion.div
-                className={`max-w-[85%] rounded-xl p-3 ${
+                className={`max-w-[85%] rounded-2xl p-4 ${
                   msg.role === 'user'
-                    ? 'bg-cyan-500/20 border border-cyan-500/50 text-white'
-                    : 'bg-white/5 border border-white/10 text-gray-200'
+                    ? 'bg-cyan-500/20 border border-cyan-500/40 text-white'
+                    : 'bg-white/5 border border-white/10 text-gray-100'
                 }`}
+                animate={msg.role === 'ai' ? {
+                  borderColor: ['rgba(255, 255, 255, 0.1)', 'rgba(34, 211, 238, 0.3)', 'rgba(255, 255, 255, 0.1)']
+                } : {}}
+                transition={{ duration: 3, repeat: Infinity }}
               >
                 <p className="text-sm leading-relaxed whitespace-pre-wrap">{msg.content}</p>
-                <p className="text-xs opacity-60 mt-2">
+                <p className="text-xs opacity-50 mt-2 font-mono">
                   {new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })}
                 </p>
               </motion.div>
@@ -457,10 +522,14 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, biom
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="flex justify-start items-center gap-2"
+            className="flex justify-start"
           >
             <motion.div 
-              className="bg-white/5 border border-white/10 rounded-xl px-4 py-2"
+              className="bg-white/5 border border-cyan-400/30 rounded-2xl px-4 py-3"
+              animate={{
+                borderColor: ['rgba(34, 211, 238, 0.3)', 'rgba(34, 211, 238, 0.6)', 'rgba(34, 211, 238, 0.3)']
+              }}
+              transition={{ duration: 1.5, repeat: Infinity }}
             >
               <div className="flex items-center gap-2">
                 <motion.div
@@ -469,7 +538,7 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, biom
                 >
                   <Loader2 className="w-4 h-4 text-cyan-400" />
                 </motion.div>
-                <p className="text-gray-400 text-sm font-mono">thinking...</p>
+                <p className="text-cyan-300 text-sm font-mono">feeling your words...</p>
               </div>
             </motion.div>
           </motion.div>
@@ -478,9 +547,9 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, biom
         <div ref={messagesEndRef} />
       </div>
 
-      {/* Input - SIMPLE */}
+      {/* Type Input - BOTTOM */}
       <motion.div 
-        className="p-4 border-t border-cyan-500/20 bg-gradient-to-t from-black/90 to-black/80 backdrop-blur-xl"
+        className="p-4 border-t border-cyan-500/20 bg-gradient-to-t from-black via-gray-900 to-black/80"
       >
         <div className="flex items-center gap-2">
           <input
@@ -488,17 +557,17 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, biom
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyPress={handleKeyPress}
-            placeholder="talk to me bro..."
-            className="flex-1 bg-white/5 text-white px-4 py-3 border border-white/20 rounded-full focus:outline-none focus:border-cyan-500/50 transition-all text-sm placeholder:text-gray-600"
-            disabled={isThinking}
+            placeholder="or type here..."
+            className="flex-1 bg-white/5 text-white px-5 py-3 border border-white/10 rounded-full focus:outline-none focus:border-cyan-500/40 transition-all text-sm placeholder:text-gray-700"
+            disabled={isThinking || isListening}
           />
           <motion.button
-            whileTap={{ scale: 0.95 }}
+            whileTap={{ scale: 0.9 }}
             onClick={handleSend}
             disabled={!input.trim() || isThinking}
-            className="bg-cyan-500/30 border-2 border-cyan-400/70 hover:bg-cyan-500/40 disabled:opacity-30 disabled:cursor-not-allowed text-cyan-400 p-3 rounded-full transition-all"
+            className="bg-cyan-500/20 border border-cyan-400/50 hover:bg-cyan-500/30 disabled:opacity-20 text-cyan-400 p-3 rounded-full transition-all"
             animate={input.trim() && !isThinking ? {
-              boxShadow: ['0 0 10px rgba(34, 211, 238, 0.4)', '0 0 20px rgba(34, 211, 238, 0.7)', '0 0 10px rgba(34, 211, 238, 0.4)']
+              borderColor: ['rgba(34, 211, 238, 0.5)', 'rgba(34, 211, 238, 0.8)', 'rgba(34, 211, 238, 0.5)']
             } : {}}
             transition={{ duration: 1.5, repeat: Infinity }}
           >
@@ -507,11 +576,11 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, biom
         </div>
         {isSpeaking && (
           <motion.div
-            animate={{ opacity: [0.5, 1, 0.5] }}
+            animate={{ opacity: [0.6, 1, 0.6] }}
             transition={{ duration: 1, repeat: Infinity }}
             className="text-center mt-2"
           >
-            <p className="text-pink-400 text-xs font-mono">speaking to you...</p>
+            <p className="text-pink-400 text-xs font-mono">🔊 speaking...</p>
           </motion.div>
         )}
       </motion.div>
