@@ -97,17 +97,15 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
     }
   }, [alwaysListening]);
 
-  // Auto-speak - FORCE VOICE
+  // Auto-speak - iOS FIXED
   useEffect(() => {
     if (conversation.length === 0) return;
     
     const lastMsg = conversation[conversation.length - 1];
     if (lastMsg.role === 'ai' && lastMsg.content) {
-      const speak = () => {
-        if (!window.speechSynthesis) {
-          console.error('❌ No speech synthesis');
-          return;
-        }
+      // Small delay to ensure user interaction has happened
+      setTimeout(() => {
+        if (!window.speechSynthesis) return;
         
         // Stop any current speech
         window.speechSynthesis.cancel();
@@ -120,7 +118,6 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
         
         // Get voices
         const voices = window.speechSynthesis.getVoices();
-        console.log('🔊 Available voices:', voices.length);
         
         // Prefer UK male voice
         const voice = voices.find(v => v.lang === 'en-GB' && v.name.includes('Male')) 
@@ -130,47 +127,14 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
         
         if (voice) {
           utterance.voice = voice;
-          console.log('✅ Using voice:', voice.name);
         }
         
-        utterance.onstart = () => {
-          console.log('🔊 SPEAKING:', lastMsg.content.substring(0, 50));
-          setIsSpeaking(true);
-        };
+        utterance.onstart = () => setIsSpeaking(true);
+        utterance.onend = () => setIsSpeaking(false);
+        utterance.onerror = () => setIsSpeaking(false);
         
-        utterance.onend = () => {
-          console.log('✅ FINISHED SPEAKING');
-          setIsSpeaking(false);
-        };
-        
-        utterance.onerror = (e) => {
-          console.error('❌ SPEECH ERROR:', e);
-          setIsSpeaking(false);
-        };
-        
-        console.log('🎤 Attempting to speak...');
         window.speechSynthesis.speak(utterance);
-        
-        // iOS fix - speak again if it didn't start
-        setTimeout(() => {
-          if (!window.speechSynthesis.speaking && !isSpeaking) {
-            console.log('🔄 Retrying speech...');
-            window.speechSynthesis.speak(utterance);
-          }
-        }, 100);
-      };
-      
-      // Wait for voices to load
-      const voices = window.speechSynthesis.getVoices();
-      if (voices.length === 0) {
-        console.log('⏳ Waiting for voices...');
-        window.speechSynthesis.onvoiceschanged = () => {
-          console.log('✅ Voices loaded');
-          speak();
-        };
-      } else {
-        speak();
-      }
+      }, 200);
     }
   }, [conversation]);
 
