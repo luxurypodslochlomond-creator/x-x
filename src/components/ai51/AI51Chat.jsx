@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Send, Loader2, Radio, Globe } from 'lucide-react';
 import AI51ConsciousnessDetector from './AI51ConsciousnessDetector';
