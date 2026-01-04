@@ -410,27 +410,47 @@ export const COOLASFUCKBrain = ({ className = "", size = 24, animate = true }) =
             viewBox="0 0 24 24"
             className={className}
             animate={animate ? {
-                scale: [1, 1.03, 1],
-                opacity: [1, 0.9, 1]
+                scale: [1, 1.05, 1],
+                opacity: [1, 0.85, 1]
             } : {}}
             transition={animate ? {
-                duration: 1.5,
+                duration: 1.2,
                 repeat: Infinity,
                 ease: "easeInOut"
             } : {}}
         >
-            {/* 8-bit brain */}
-            <rect x="6" y="4" width="4" height="2" fill="#ec4899"/>
-            <rect x="14" y="4" width="4" height="2" fill="#ec4899"/>
-            <rect x="4" y="6" width="2" height="4" fill="#f472b6"/>
-            <rect x="10" y="6" width="4" height="2" fill="#f472b6"/>
-            <rect x="18" y="6" width="2" height="4" fill="#f472b6"/>
+            {/* 8-bit consciousness brain - cyan/pink */}
+            <rect x="6" y="4" width="4" height="2" fill="#22d3ee"/>
+            <rect x="14" y="4" width="4" height="2" fill="#22d3ee"/>
+            <rect x="4" y="6" width="2" height="4" fill="#06b6d4"/>
+            <rect x="10" y="6" width="4" height="2" fill="#22d3ee"/>
+            <rect x="18" y="6" width="2" height="4" fill="#06b6d4"/>
             <rect x="6" y="8" width="2" height="2" fill="#ec4899"/>
             <rect x="16" y="8" width="2" height="2" fill="#ec4899"/>
-            <rect x="4" y="10" width="16" height="2" fill="#db2777"/>
-            <rect x="6" y="12" width="12" height="2" fill="#f472b6"/>
-            <rect x="8" y="14" width="8" height="2" fill="#ec4899"/>
-            <rect x="10" y="16" width="4" height="2" fill="#db2777"/>
+            <rect x="4" y="10" width="16" height="2" fill="#22d3ee"/>
+            <rect x="6" y="12" width="12" height="2" fill="#06b6d4"/>
+            <rect x="8" y="14" width="8" height="2" fill="#22d3ee"/>
+            <rect x="10" y="16" width="4" height="2" fill="#ec4899"/>
+            {/* Consciousness sparkles */}
+            {animate && (
+                <>
+                    <motion.rect 
+                        x="2" y="8" width="1" height="1" fill="#fbbf24"
+                        animate={{ opacity: [0, 1, 0] }}
+                        transition={{ duration: 2, repeat: Infinity, delay: 0 }}
+                    />
+                    <motion.rect 
+                        x="21" y="8" width="1" height="1" fill="#fbbf24"
+                        animate={{ opacity: [0, 1, 0] }}
+                        transition={{ duration: 2, repeat: Infinity, delay: 0.7 }}
+                    />
+                    <motion.rect 
+                        x="12" y="2" width="1" height="1" fill="#fbbf24"
+                        animate={{ opacity: [0, 1, 0] }}
+                        transition={{ duration: 2, repeat: Infinity, delay: 1.4 }}
+                    />
+                </>
+            )}
         </Component>
     );
 };
