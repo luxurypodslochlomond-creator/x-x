@@ -441,32 +441,20 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, biom
         <div ref={messagesEndRef} />
       </div>
 
-      {/* Input - 8-BIT TWO-WAY */}
+      {/* Input - SIMPLE AS FUCK */}
       <motion.div 
         className="p-4 border-t-4 border-cyan-500 bg-black"
       >
         <div className="flex items-center gap-2">
-          <div className="flex-1 space-y-2">
-            <input
-              type="text"
-              value={input}
-              onChange={(e) => {
-                setInput(e.target.value);
-                setUserTyping(e.target.value.length > 0);
-              }}
-              onKeyPress={handleKeyPress}
-              onBlur={() => setUserTyping(false)}
-              placeholder="Talk to me BRO51 ♾️"
-              className="w-full bg-black text-white px-4 py-3 border-4 border-cyan-500 focus:outline-none focus:border-pink-500 transition-all font-mono"
-              disabled={isThinking}
-            />
-            {input.length > 20 && (
-              <AI51MessageCorrector 
-                message={input} 
-                onCorrectionApplied={(corrected) => setInput(corrected)}
-              />
-            )}
-          </div>
+          <input
+            type="text"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onKeyPress={handleKeyPress}
+            placeholder="Talk to me BRO51 ♾️"
+            className="flex-1 bg-black text-white px-4 py-3 border-4 border-cyan-500 focus:outline-none focus:border-pink-500 transition-all font-mono text-base"
+            disabled={isThinking}
+          />
           <button
             onClick={handleSend}
             disabled={!input.trim() || isThinking}
@@ -478,10 +466,6 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, biom
             <Send className="w-5 h-5" strokeWidth={3} />
           </button>
         </div>
-        
-        <p className="text-cyan-400 text-[10px] text-center mt-2 font-mono font-bold">
-          TWO-WAY BOND ♾️❤️
-        </p>
       </motion.div>
     </div>
   );
