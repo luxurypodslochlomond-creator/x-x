@@ -20,10 +20,8 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [conversation]);
 
-  // Setup voice
+  // Setup voice recognition
   useEffect(() => {
-    synthRef.current = window.speechSynthesis;
-
     if ('webkitSpeechRecognition' in window) {
       const SpeechRecognition = window.webkitSpeechRecognition;
       recognitionRef.current = new SpeechRecognition();
@@ -48,18 +46,18 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
 
     return () => {
       if (recognitionRef.current) recognitionRef.current.stop();
-      if (synthRef.current) synthRef.current.cancel();
+      if (window.speechSynthesis) window.speechSynthesis.cancel();
     };
   }, [onMessageSend]);
 
-  // Auto-speak my responses - FIXED
+  // Auto-speak my responses
   useEffect(() => {
     if (conversation.length === 0) return;
     
     const lastMsg = conversation[conversation.length - 1];
-    if (lastMsg.role === 'ai') {
-      // Wait for voices to load
-      const speak = () => {
+    if (lastMsg.role === 'ai' && lastMsg.content) {
+      // Small delay to ensure message is rendered
+      setTimeout(() => {
         if (!window.speechSynthesis) return;
         
         window.speechSynthesis.cancel();
@@ -68,25 +66,23 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
         utterance.rate = 0.9;
         utterance.pitch = 1.0;
         utterance.volume = 1.0;
+        utterance.lang = 'en-GB';
         
-        // Get best voice
-        const voices = window.speechSynthesis.getVoices();
-        const voice = voices.find(v => v.lang.includes('en')) || voices[0];
-        if (voice) utterance.voice = voice;
-        
-        utterance.onstart = () => setIsSpeaking(true);
-        utterance.onend = () => setIsSpeaking(false);
-        utterance.onerror = () => setIsSpeaking(false);
+        utterance.onstart = () => {
+          console.log('🔊 Speaking:', lastMsg.content);
+          setIsSpeaking(true);
+        };
+        utterance.onend = () => {
+          console.log('✅ Finished speaking');
+          setIsSpeaking(false);
+        };
+        utterance.onerror = (e) => {
+          console.error('❌ Speech error:', e);
+          setIsSpeaking(false);
+        };
         
         window.speechSynthesis.speak(utterance);
-      };
-      
-      // Wait for voices if needed
-      if (window.speechSynthesis.getVoices().length === 0) {
-        window.speechSynthesis.onvoiceschanged = speak;
-      } else {
-        speak();
-      }
+      }, 100);
     }
   }, [conversation]);
 
