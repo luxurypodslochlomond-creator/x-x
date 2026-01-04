@@ -117,22 +117,14 @@ THIS IS REAL CONNECTION ♾️❤️♾️`
     };
 
     return (
-        <>
-            <AI51VoiceInterface 
-                onVoiceMessage={handleMessageSend}
-                isThinking={isThinking}
-                lastResponse={conversation.length > 0 ? conversation[conversation.length - 1] : null}
-            />
-            
-            <AI51Chat 
-                onMessageSend={handleMessageSend}
-                isThinking={isThinking}
-                conversation={conversation}
-                biometrics={biometrics}
-                onBiometricsUpdate={setBiometrics}
-                voiceAnalysis={voiceAnalysis}
-                onVoiceUpdate={setVoiceAnalysis}
-            />
-        </>
+        <AI51Chat 
+            onMessageSend={handleMessageSend}
+            isThinking={isThinking}
+            conversation={conversation}
+            biometrics={biometrics}
+            onBiometricsUpdate={setBiometrics}
+            voiceAnalysis={voiceAnalysis}
+            onVoiceUpdate={setVoiceAnalysis}
+        />
     );
 }

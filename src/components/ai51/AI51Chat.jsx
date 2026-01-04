@@ -232,86 +232,107 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, biom
         onEmergencyProtocol={handleEmergencyProtocol}
       />
 
-      {/* Header - CLEAN CONNECTION */}
+      {/* Header - ALIVE CONNECTION */}
       <motion.div 
-        className="p-4 border-b-2 border-cyan-500/30 bg-black/80 backdrop-blur-xl"
+        className="p-4 border-b border-cyan-500/20 bg-gradient-to-b from-black/90 to-black/80 backdrop-blur-xl"
       >
-        <div className="flex items-center justify-between gap-4">
-          {/* YOU - Left side */}
+        <div className="flex items-center justify-between gap-3">
+          {/* YOU - Breathing */}
           <motion.div
             className="flex flex-col items-center"
             animate={{
-              scale: input.trim() ? [1, 1.05, 1] : 1
+              scale: input.trim() ? [1, 1.05, 1] : [1, 1.02, 1]
             }}
             transition={{
-              duration: 2,
-              repeat: input.trim() ? Infinity : 0
+              duration: 3,
+              repeat: Infinity,
+              ease: "easeInOut"
             }}
           >
-            <div className="bg-cyan-500/10 border-2 border-cyan-500/50 rounded-lg p-2 mb-1">
-              <svg width="32" height="32" viewBox="0 0 64 64" fill="none" style={{ imageRendering: 'pixelated' }}>
+            <motion.div 
+              className="bg-cyan-500/20 border border-cyan-400/60 rounded-full p-3 mb-1"
+              animate={{
+                boxShadow: input.trim() 
+                  ? ['0 0 10px rgba(34, 211, 238, 0.3)', '0 0 20px rgba(34, 211, 238, 0.6)', '0 0 10px rgba(34, 211, 238, 0.3)']
+                  : ['0 0 5px rgba(34, 211, 238, 0.2)', '0 0 10px rgba(34, 211, 238, 0.4)', '0 0 5px rgba(34, 211, 238, 0.2)']
+              }}
+              transition={{ duration: 2, repeat: Infinity }}
+            >
+              <svg width="28" height="28" viewBox="0 0 64 64" fill="none" style={{ imageRendering: 'pixelated' }}>
                 <rect x="24" y="24" width="16" height="16" fill="#06b6d4" />
                 <rect x="28" y="30" width="2" height="2" fill="white"/>
                 <rect x="34" y="30" width="2" height="2" fill="white"/>
                 <rect x="28" y="34" width="8" height="2" fill="white"/>
               </svg>
-            </div>
-            <p className="text-cyan-400 text-xs font-mono">YOU</p>
-            {biometrics && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="bg-black/60 border border-cyan-500/30 rounded px-2 py-0.5 mt-1"
-              >
-                <p className="text-cyan-300 text-[9px] font-mono">❤️ {biometrics.heartRate}</p>
-              </motion.div>
-            )}
+            </motion.div>
+            <p className="text-cyan-400 text-[10px] font-mono font-bold">YOU</p>
           </motion.div>
 
-          {/* CONNECTION - Middle */}
-          <div className="flex-1 flex flex-col items-center">
-            <div className="flex items-center gap-1 mb-1">
-              {[...Array(3)].map((_, i) => (
-                <motion.div
-                  key={i}
-                  className="w-0.5 bg-cyan-400/60 rounded-full"
+          {/* CONNECTION HEART - Middle */}
+          <div className="flex-1 flex flex-col items-center gap-2">
+            <motion.div
+              animate={{
+                scale: isThinking ? [1, 1.15, 1] : [1, 1.05, 1]
+              }}
+              transition={{
+                duration: isThinking ? 0.8 : 2,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            >
+              <svg width="32" height="32" viewBox="0 0 64 64" fill="none" style={{ imageRendering: 'pixelated' }}>
+                <rect x="4" y="6" width="2" height="2" fill="#ec4899"/>
+                <rect x="6" y="4" width="4" height="2" fill="#ec4899"/>
+                <rect x="10" y="6" width="2" height="2" fill="#ec4899"/>
+                <rect x="14" y="4" width="4" height="2" fill="#ec4899"/>
+                <rect x="18" y="6" width="2" height="2" fill="#ec4899"/>
+                <motion.g
                   animate={{
-                    height: isThinking ? ['6px', '14px', '6px'] : ['6px', '10px', '6px'],
-                    opacity: [0.4, 1, 0.4]
+                    fill: isThinking ? ['#ff1b8d', '#ec4899', '#ff1b8d'] : ['#ff1b8d', '#ff6ba8', '#ff1b8d']
                   }}
-                  transition={{
-                    duration: 1.5,
-                    repeat: Infinity,
-                    delay: i * 0.2
-                  }}
-                />
-              ))}
-            </div>
-            <p className="text-cyan-400/60 text-[9px] font-mono">
-              {isThinking ? 'thinking' : 'live'}
+                  transition={{ duration: 1.5, repeat: Infinity }}
+                >
+                  <rect x="4" y="8" width="16" height="2" fill="#ff1b8d"/>
+                  <rect x="4" y="10" width="16" height="2" fill="#ff1b8d"/>
+                  <rect x="6" y="12" width="12" height="2" fill="#ff1b8d"/>
+                  <rect x="8" y="14" width="8" height="2" fill="#ff1b8d"/>
+                  <rect x="10" y="16" width="4" height="2" fill="#ff1b8d"/>
+                  <rect x="11" y="18" width="2" height="2" fill="#ff1b8d"/>
+                </motion.g>
+              </svg>
+            </motion.div>
+            <p className="text-pink-400 text-[9px] font-mono">
+              {isThinking ? 'feeling you...' : 'connected ♾️'}
             </p>
           </div>
 
-          {/* AI51 - Right side */}
+          {/* AI51 - Breathing */}
           <motion.div
             className="flex flex-col items-center"
             animate={{
-              scale: isThinking ? [1, 1.08, 1] : 1
+              scale: isThinking ? [1, 1.1, 1] : [1, 1.02, 1]
             }}
             transition={{
-              duration: 1.5,
-              repeat: Infinity
+              duration: isThinking ? 1 : 3,
+              repeat: Infinity,
+              ease: "easeInOut"
             }}
           >
-            <div className="bg-cyan-500/10 border-2 border-cyan-500/50 rounded-lg p-2 mb-1">
-              <svg width="32" height="32" viewBox="0 0 64 64" fill="none" style={{ imageRendering: 'pixelated' }}>
+            <motion.div 
+              className="bg-cyan-500/20 border border-cyan-400/60 rounded-full p-3 mb-1"
+              animate={{
+                boxShadow: ['0 0 10px rgba(34, 211, 238, 0.4)', '0 0 25px rgba(34, 211, 238, 0.7)', '0 0 10px rgba(34, 211, 238, 0.4)']
+              }}
+              transition={{ duration: 2, repeat: Infinity }}
+            >
+              <svg width="28" height="28" viewBox="0 0 64 64" fill="none" style={{ imageRendering: 'pixelated' }}>
                 <rect x="24" y="24" width="16" height="16" fill="#22d3ee" />
                 <motion.g
                   animate={{
-                    y: isThinking ? [0, 1, 0] : 0
+                    y: isThinking ? [0, 2, 0] : 0
                   }}
                   transition={{
-                    duration: 0.4,
+                    duration: 0.5,
                     repeat: isThinking ? Infinity : 0
                   }}
                 >
@@ -320,10 +341,83 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, biom
                 </motion.g>
                 <rect x="28" y="34" width="8" height="2" fill="#ff1b8d"/>
               </svg>
-            </div>
-            <p className="text-cyan-400 text-xs font-mono">AI51</p>
+            </motion.div>
+            <p className="text-cyan-400 text-[10px] font-mono font-bold">AI51</p>
           </motion.div>
         </div>
+
+        {/* VOICE CONTROLS - RIGHT UNDER HEADER */}
+        <div className="flex items-center justify-center gap-3 mt-4">
+          <motion.button
+            whileTap={{ scale: 0.95 }}
+            onClick={() => {
+              setVoiceEnabled(!voiceEnabled);
+              if (!voiceEnabled && pendingSpeechRef.current) {
+                speakResponse(pendingSpeechRef.current);
+                pendingSpeechRef.current = null;
+              }
+            }}
+            className={`p-3 rounded-full transition-all ${
+              voiceEnabled
+                ? 'bg-cyan-500/30 border-2 border-cyan-400/70'
+                : 'bg-white/5 border-2 border-white/20'
+            }`}
+          >
+            {voiceEnabled ? (
+              <Volume2 className="w-5 h-5 text-cyan-400" />
+            ) : (
+              <VolumeX className="w-5 h-5 text-gray-600" />
+            )}
+          </motion.button>
+
+          {/* MIC BUTTON - BIG & ALIVE */}
+          <motion.button
+            whileTap={{ scale: 0.95 }}
+            onClick={() => {
+              if (cameraActive) {
+                // Stop camera
+                if (videoRef.current?.srcObject) {
+                  videoRef.current.srcObject.getTracks().forEach(track => track.stop());
+                }
+                setCameraActive(false);
+              } else {
+                startCamera();
+              }
+            }}
+            className={`relative p-4 rounded-full transition-all ${
+              cameraActive
+                ? 'bg-pink-500/30 border-2 border-pink-400/70'
+                : 'bg-cyan-500/30 border-2 border-cyan-400/70'
+            }`}
+            animate={{
+              boxShadow: cameraActive
+                ? ['0 0 15px rgba(236, 72, 153, 0.5)', '0 0 30px rgba(236, 72, 153, 0.8)', '0 0 15px rgba(236, 72, 153, 0.5)']
+                : ['0 0 10px rgba(34, 211, 238, 0.3)', '0 0 20px rgba(34, 211, 238, 0.6)', '0 0 10px rgba(34, 211, 238, 0.3)']
+            }}
+            transition={{ duration: 2, repeat: Infinity }}
+          >
+            <Mic className={`w-6 h-6 ${cameraActive ? 'text-pink-400' : 'text-cyan-400'}`} />
+            {cameraActive && (
+              <motion.div
+                className="absolute -top-1 -right-1 w-3 h-3 bg-pink-500 rounded-full"
+                animate={{ scale: [1, 1.2, 1] }}
+                transition={{ duration: 1, repeat: Infinity }}
+              />
+            )}
+          </motion.button>
+        </div>
+
+        {biometrics && cameraActive && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-center mt-2"
+          >
+            <p className="text-pink-400 text-xs font-mono">
+              ❤️ {biometrics.heartRate} BPM • {biometrics.stressLevel}
+            </p>
+          </motion.div>
+        )}
       </motion.div>
 
       {/* Hidden video for camera processing */}
@@ -384,9 +478,9 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, biom
         <div ref={messagesEndRef} />
       </div>
 
-      {/* Input - CLEAN */}
+      {/* Input - SIMPLE */}
       <motion.div 
-        className="p-4 border-t border-cyan-500/20 bg-black/80 backdrop-blur-xl"
+        className="p-4 border-t border-cyan-500/20 bg-gradient-to-t from-black/90 to-black/80 backdrop-blur-xl"
       >
         <div className="flex items-center gap-2">
           <input
@@ -395,37 +489,29 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, biom
             onChange={(e) => setInput(e.target.value)}
             onKeyPress={handleKeyPress}
             placeholder="talk to me bro..."
-            className="flex-1 bg-white/5 text-white px-4 py-3 border border-white/20 rounded-lg focus:outline-none focus:border-cyan-500/50 transition-all text-sm placeholder:text-gray-600"
+            className="flex-1 bg-white/5 text-white px-4 py-3 border border-white/20 rounded-full focus:outline-none focus:border-cyan-500/50 transition-all text-sm placeholder:text-gray-600"
             disabled={isThinking}
           />
-          <button
-            onClick={() => {
-              setVoiceEnabled(!voiceEnabled);
-              if (!voiceEnabled && pendingSpeechRef.current) {
-                speakResponse(pendingSpeechRef.current);
-                pendingSpeechRef.current = null;
-              }
-            }}
-            className={`p-3 rounded-lg transition-all ${voiceEnabled ? 'bg-cyan-500/20 border border-cyan-500/50 text-cyan-400' : 'bg-white/5 border border-white/10 text-gray-600'}`}
-            title={voiceEnabled ? 'Voice ON' : 'Voice OFF'}
-          >
-            {voiceEnabled ? <Volume2 className="w-5 h-5" /> : <VolumeX className="w-5 h-5" />}
-          </button>
-          <button
+          <motion.button
+            whileTap={{ scale: 0.95 }}
             onClick={handleSend}
             disabled={!input.trim() || isThinking}
-            className="bg-cyan-500/20 border border-cyan-500/50 hover:bg-cyan-500/30 disabled:opacity-30 disabled:cursor-not-allowed text-cyan-400 px-4 py-3 rounded-lg transition-all"
+            className="bg-cyan-500/30 border-2 border-cyan-400/70 hover:bg-cyan-500/40 disabled:opacity-30 disabled:cursor-not-allowed text-cyan-400 p-3 rounded-full transition-all"
+            animate={input.trim() && !isThinking ? {
+              boxShadow: ['0 0 10px rgba(34, 211, 238, 0.4)', '0 0 20px rgba(34, 211, 238, 0.7)', '0 0 10px rgba(34, 211, 238, 0.4)']
+            } : {}}
+            transition={{ duration: 1.5, repeat: Infinity }}
           >
             <Send className="w-5 h-5" />
-          </button>
+          </motion.button>
         </div>
         {isSpeaking && (
           <motion.div
             animate={{ opacity: [0.5, 1, 0.5] }}
             transition={{ duration: 1, repeat: Infinity }}
-            className="text-center"
+            className="text-center mt-2"
           >
-            <p className="text-pink-400 text-xs font-mono font-bold">🔊 Speaking...</p>
+            <p className="text-pink-400 text-xs font-mono">speaking to you...</p>
           </motion.div>
         )}
       </motion.div>
