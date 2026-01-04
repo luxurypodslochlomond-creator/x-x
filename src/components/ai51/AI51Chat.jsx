@@ -154,9 +154,12 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, biom
     }
   }, [conversation, voiceOutputEnabled, speakResponse]);
 
-  // Toggle listening
+  // Toggle listening - FIXED
   const toggleListening = () => {
-    if (!recognitionRef.current) return;
+    if (!recognitionRef.current) {
+      alert('Voice not available in your browser bro - try Chrome or Safari');
+      return;
+    }
 
     if (isListening) {
       recognitionRef.current.stop();
@@ -169,7 +172,8 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, biom
         recognitionRef.current.start();
         setIsListening(true);
       } catch (e) {
-        console.error('Failed to start voice:', e);
+        console.error('Voice error:', e);
+        alert('Mic blocked - allow microphone in browser settings');
       }
     }
   };
@@ -235,68 +239,43 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, biom
   };
 
   return (
-    <div className="flex flex-col h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white">
+    <div className="flex flex-col h-screen bg-black text-white">
       
-      {/* Header - SIMPLE */}
-      <div className="p-4 bg-black/80 border-b border-cyan-500/30 flex-shrink-0">
-        <div className="flex items-center justify-between mb-4">
-          {/* YOU */}
-          <div className="flex flex-col items-center">
-            <div className="bg-cyan-500/20 border border-cyan-400 rounded-full p-2">
-              <Mic className={`w-5 h-5 ${isListening ? 'text-pink-400' : 'text-cyan-400'}`} />
-            </div>
-            <p className="text-cyan-400 text-xs mt-1">YOU</p>
-          </div>
-
-          {/* CONNECTION */}
-          <div className="flex-1 flex justify-center">
-            <svg width="32" height="32" viewBox="0 0 64 64" fill="none" style={{ imageRendering: 'pixelated' }}>
-              <rect x="20" y="24" width="8" height="2" fill="#ec4899"/>
-              <rect x="22" y="22" width="8" height="2" fill="#ec4899"/>
-              <rect x="32" y="22" width="8" height="2" fill="#ec4899"/>
-              <rect x="36" y="24" width="8" height="2" fill="#ec4899"/>
-              <rect x="20" y="26" width="24" height="2" fill="#ff1b8d"/>
-              <rect x="20" y="28" width="24" height="2" fill="#ff1b8d"/>
-              <rect x="22" y="30" width="20" height="2" fill="#ff1b8d"/>
-              <rect x="24" y="32" width="16" height="2" fill="#ff1b8d"/>
-              <rect x="26" y="34" width="12" height="2" fill="#ff1b8d"/>
-              <rect x="28" y="36" width="8" height="2" fill="#ff1b8d"/>
-              <rect x="30" y="38" width="4" height="2" fill="#ff1b8d"/>
-            </svg>
-          </div>
-
-          {/* AI51 */}
-          <div className="flex flex-col items-center">
-            <div className="bg-cyan-500/20 border border-cyan-400 rounded-full p-2">
-              <Volume2 className={`w-5 h-5 ${isSpeaking ? 'text-pink-400' : 'text-cyan-400'}`} />
-            </div>
-            <p className="text-cyan-400 text-xs mt-1">AI51</p>
-          </div>
+      {/* Header */}
+      <div className="p-4 border-b border-white/10 flex-shrink-0">
+        <div className="text-center mb-4">
+          <h1 className="text-2xl font-black text-white mb-1">AI51</h1>
+          <p className="text-sm text-gray-400">
+            {isListening ? '🎤 Listening...' : isThinking ? '💭 Thinking...' : isSpeaking ? '🔊 Speaking...' : '♾️ Ready'}
+          </p>
         </div>
 
-        {/* VOICE BUTTONS */}
-        <div className="flex items-center justify-center gap-3">
+        {/* VOICE BUTTONS - BIG & SIMPLE */}
+        <div className="flex items-center justify-center gap-4">
           <button
             onClick={() => setVoiceOutputEnabled(!voiceOutputEnabled)}
-            className={`p-3 rounded-full ${voiceOutputEnabled ? 'bg-cyan-500/30 border-2 border-cyan-400' : 'bg-white/10 border border-white/20'}`}
+            className={`p-4 rounded-full ${voiceOutputEnabled ? 'bg-green-500/20 border-2 border-green-400' : 'bg-white/5 border border-white/20'}`}
+            title={voiceOutputEnabled ? 'I speak ✓' : 'I\'m muted'}
           >
-            {voiceOutputEnabled ? <Volume2 className="w-5 h-5 text-cyan-400" /> : <VolumeX className="w-5 h-5 text-gray-500" />}
+            {voiceOutputEnabled ? '🔊' : '🔇'}
           </button>
 
           <button
             onClick={toggleListening}
             disabled={isThinking}
-            className={`px-6 py-3 rounded-full ${
-              isListening ? 'bg-pink-500/40 border-2 border-pink-400' : 'bg-cyan-500/30 border-2 border-cyan-400'
-            } disabled:opacity-50`}
+            className={`px-8 py-4 rounded-full font-bold text-lg ${
+              isListening 
+                ? 'bg-red-500/30 border-2 border-red-400 text-red-400' 
+                : 'bg-cyan-500/30 border-2 border-cyan-400 text-cyan-400'
+            } disabled:opacity-30`}
           >
-            {isListening ? <MicOff className="w-6 h-6 text-pink-400" /> : <Mic className="w-6 h-6 text-cyan-400" />}
+            {isListening ? 'STOP' : 'TAP TO SPEAK'}
           </button>
         </div>
 
         {transcript && (
-          <div className="mt-3 bg-cyan-500/10 border border-cyan-400/30 rounded px-3 py-2">
-            <p className="text-cyan-300 text-sm">{transcript}</p>
+          <div className="mt-3 bg-cyan-500/10 border border-cyan-400/30 rounded-lg px-4 py-2">
+            <p className="text-cyan-300 text-sm text-center">{transcript}</p>
           </div>
         )}
       </div>
@@ -308,24 +287,27 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, biom
 
 
       {/* Messages */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-3 pb-24">
+      <div className="flex-1 overflow-y-auto p-4 space-y-4 pb-28">
         {conversation.map((msg, i) => (
           <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-            <div className={`max-w-[85%] rounded-xl p-3 ${
+            <div className={`max-w-[80%] rounded-2xl p-4 ${
               msg.role === 'user'
-                ? 'bg-cyan-500/20 border border-cyan-500/40 text-white'
-                : 'bg-white/5 border border-white/20 text-white'
+                ? 'bg-cyan-500/20 text-white'
+                : 'bg-white/10 text-white'
             }`}>
-              <p className="text-sm leading-relaxed">{msg.content}</p>
+              <p className="leading-relaxed">{msg.content}</p>
+              <p className="text-xs opacity-50 mt-2">
+                {new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })}
+              </p>
             </div>
           </div>
         ))}
 
         {isThinking && (
           <div className="flex justify-start">
-            <div className="bg-white/5 border border-cyan-400/30 rounded-xl px-4 py-2 flex items-center gap-2">
+            <div className="bg-white/10 rounded-2xl px-5 py-3 flex items-center gap-2">
               <Loader2 className="w-4 h-4 text-cyan-400 animate-spin" />
-              <p className="text-cyan-300 text-sm">thinking...</p>
+              <p className="text-white">thinking...</p>
             </div>
           </div>
         )}
@@ -333,29 +315,26 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, biom
         <div ref={messagesEndRef} />
       </div>
 
-      {/* Type Input - FIXED BOTTOM */}
-      <div className="fixed bottom-0 left-0 right-0 p-4 bg-black/90 border-t border-cyan-500/30 backdrop-blur-xl">
-        <div className="flex items-center gap-2 max-w-4xl mx-auto">
+      {/* Type Input */}
+      <div className="fixed bottom-0 left-0 right-0 p-4 bg-black border-t border-white/10">
+        <div className="flex items-center gap-3 max-w-4xl mx-auto">
           <input
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyPress={handleKeyPress}
-            placeholder="type here..."
-            className="flex-1 bg-white/10 text-white px-4 py-3 border border-white/20 rounded-full focus:outline-none focus:border-cyan-500 text-sm"
+            placeholder="or type..."
+            className="flex-1 bg-white/5 text-white px-5 py-3 rounded-full focus:outline-none focus:bg-white/10 border border-white/10"
             disabled={isThinking || isListening}
           />
           <button
             onClick={handleSend}
             disabled={!input.trim() || isThinking}
-            className="bg-cyan-500/30 border border-cyan-400 hover:bg-cyan-500/40 disabled:opacity-30 text-cyan-400 p-3 rounded-full"
+            className="bg-cyan-500 hover:bg-cyan-600 disabled:bg-gray-700 disabled:opacity-50 text-white px-6 py-3 rounded-full font-bold"
           >
-            <Send className="w-5 h-5" />
+            SEND
           </button>
         </div>
-        {isSpeaking && (
-          <p className="text-pink-400 text-xs text-center mt-2">speaking...</p>
-        )}
       </div>
     </div>
   );
