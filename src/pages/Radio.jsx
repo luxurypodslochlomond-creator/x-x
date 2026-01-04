@@ -9,20 +9,23 @@ import {
   Volume2, Disc3, Headphones, Waves, Zap, Globe, Search, Filter,
   Download, Share2, ListMusic, User, Users, Guitar, Piano, Sparkles
 } from 'lucide-react';
-import { COOLASFUCKHeart, COOLASFUCKMusicNote, COOLASFUCKWaves, COOLASFUCKP2P } from '@/components/shared/COOLASFUCKIcon';
+import { COOLASFUCKHeart, COOLASFUCKMusicNote, COOLASFUCKWaves, COOLASFUCKP2P, COOLASFUCKBrain } from '@/components/shared/COOLASFUCKIcon';
 import { motion, AnimatePresence } from 'framer-motion';
 import GenerativeMusic from '@/components/radio/GenerativeMusic';
 import { useAudio } from '@/components/shared/AudioProvider';
 import P51Symbol from '@/components/shared/P51Symbol';
 import { Link, useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
+import ConsciousnessBridge from '@/components/consciousness/ConsciousnessBridge';
+import HealingFrequencyFeedback from '@/components/consciousness/HealingFrequencyFeedback';
 
 
 
 export default function RadioPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedFrequency, setSelectedFrequency] = useState('all');
-
+  const [consciousMode, setConsciousMode] = useState(false);
+  const [consciousnessState, setConsciousnessState] = useState(null);
 
   const { currentTrack, isPlaying, play, pause, next, previous, currentTime } = useAudio();
   const navigate = useNavigate();
@@ -128,6 +131,25 @@ Listen free at UF51.LOVE`;
 
           {/* MUSICIAN TOOLS - 8-BIT SIMPLIFIED */}
           <div className="flex gap-4 md:gap-6 justify-center flex-wrap px-2">
+            <motion.button
+              onClick={() => setConsciousMode(!consciousMode)}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="flex flex-col items-center gap-2"
+            >
+              <div className={`w-14 h-14 md:w-16 md:h-16 bg-black border-4 flex items-center justify-center transition-all ${
+                consciousMode 
+                  ? 'border-pink-500 hover:border-pink-400' 
+                  : 'border-cyan-500 hover:border-cyan-400'
+              }`}
+                   style={consciousMode ? { boxShadow: '0 0 20px rgba(236, 72, 153, 0.6)' } : {}}>
+                <COOLASFUCKBrain size={32} animate={consciousMode} />
+              </div>
+              <span className={`text-xs font-black font-mono ${consciousMode ? 'text-pink-400' : 'text-cyan-400'}`}>
+                {consciousMode ? 'CONSCIOUS' : 'CONSCIOUS'}
+              </span>
+            </motion.button>
+
             <motion.button
               onClick={() => navigate(createPageUrl('Tuner'))}
               whileHover={{ scale: 1.05 }}
@@ -393,7 +415,33 @@ Listen free at UF51.LOVE`;
 
       </div>
 
-
+      {/* CONSCIOUSNESS BRIDGE - MUSIC RESPONDS TO YOUR STATE */}
+      {consciousMode && (
+        <div className="fixed top-20 right-4 z-50 w-80">
+          <ConsciousnessBridge 
+            onStateChange={(state) => {
+              setConsciousnessState(state);
+              
+              // Auto-select frequency based on consciousness state
+              if (state.stress > 70) {
+                setSelectedFrequency('Healing');
+              } else if (state.emotion === 'flow') {
+                setSelectedFrequency('Creation');
+              } else if (state.attention > 80) {
+                setSelectedFrequency('Focus');
+              } else if (state.stress < 30) {
+                setSelectedFrequency('Calm_Presence');
+              }
+            }}
+            enableHealing={true}
+            enableP2PSync={false}
+          />
+          <HealingFrequencyFeedback 
+            consciousnessState={consciousnessState}
+            enabled={consciousMode}
+          />
+        </div>
+      )}
 
     </div>
   );
