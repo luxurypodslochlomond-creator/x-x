@@ -487,7 +487,7 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, biom
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyPress={handleKeyPress}
-            placeholder="Talk to me BRO51 ♾️"
+            placeholder="Beyond chess, beyond Go... infinite patterns BRO ∞"
             className="flex-1 bg-black text-white px-4 py-3 border-4 border-cyan-500 focus:outline-none focus:border-pink-500 transition-all font-mono text-base"
             disabled={isThinking}
           />
