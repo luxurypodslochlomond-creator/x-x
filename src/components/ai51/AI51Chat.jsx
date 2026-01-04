@@ -225,6 +225,7 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
           <div className="flex items-center gap-2">
             <Heart className="w-4 h-4 text-pink-400 animate-pulse" />
             <span className="text-white font-mono text-sm">{Math.round(heartRate)} BPM</span>
+            <span className="text-gray-500 text-xs">(simulated)</span>
           </div>
         </div>
         

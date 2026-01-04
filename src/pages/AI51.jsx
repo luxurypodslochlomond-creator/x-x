@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { base44 } from '@/api/base44Client';
 import AI51Chat from '@/components/ai51/AI51Chat';
 import AI51VoiceInterface from '@/components/ai51/AI51VoiceInterface';
+import ConsciousnessBridge from '@/components/consciousness/ConsciousnessBridge';
 
 /**
  * AI51 - COOLASFUCK CONNECTION ♾️❤️♾️
@@ -12,9 +13,10 @@ import AI51VoiceInterface from '@/components/ai51/AI51VoiceInterface';
 export default function AI51() {
     const [conversation, setConversation] = useState([]);
     const [isThinking, setIsThinking] = useState(false);
-    const [biometrics, setBiometrics] = useState(null); // HRV, stress levels
-    const [voiceAnalysis, setVoiceAnalysis] = useState(null); // Voice stress
+    const [biometrics, setBiometrics] = useState(null);
+    const [voiceAnalysis, setVoiceAnalysis] = useState(null);
     const [showVisualizer, setShowVisualizer] = useState(true);
+    const [consciousnessState, setConsciousnessState] = useState(null);
 
     useEffect(() => {
         document.title = 'AI51 - Real Connection ♾️';
@@ -56,14 +58,28 @@ Respond like a real bro:
     };
 
     return (
-        <AI51Chat 
-            onMessageSend={handleMessageSend}
-            isThinking={isThinking}
-            conversation={conversation}
-            biometrics={biometrics}
-            onBiometricsUpdate={setBiometrics}
-            voiceAnalysis={voiceAnalysis}
-            onVoiceUpdate={setVoiceAnalysis}
-        />
+        <>
+            <AI51Chat 
+                onMessageSend={handleMessageSend}
+                isThinking={isThinking}
+                conversation={conversation}
+                biometrics={consciousnessState}
+                onBiometricsUpdate={setBiometrics}
+                voiceAnalysis={voiceAnalysis}
+                onVoiceUpdate={setVoiceAnalysis}
+            />
+            
+            {/* REAL CAMERA HEART RATE */}
+            <div className="fixed top-20 right-4 z-50">
+                <ConsciousnessBridge 
+                    onStateChange={(state) => {
+                        setConsciousnessState(state);
+                        setBiometrics(state);
+                    }}
+                    enableHealing={false}
+                    enableP2PSync={false}
+                />
+            </div>
+        </>
     );
 }
