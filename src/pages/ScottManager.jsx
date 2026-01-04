@@ -417,9 +417,6 @@ Managing chaos → Making it simple. That's your job bro ♾️❤️♾️`,
                     animate={{ opacity: 1, y: 0 }}
                     className="space-y-6 mb-6"
                 >
-                    {/* MANAGEMENT WHEEL - Show pros what we do */}
-                    <ScottManagementWheel artistName={artists.find(a => a.type === 'artist')?.name} />
-                    
                     {/* 2 GIANT BUTTONS - THAT'S IT */}
                     <div className="space-y-4">
                         <motion.button
@@ -513,6 +510,11 @@ Managing chaos → Making it simple. That's your job bro ♾️❤️♾️`,
                 </div>
 
             {showFileUpload && <ScottFileUpload onClose={() => setShowFileUpload(false)} />}
+
+            {/* MANAGEMENT WHEEL - Show pros in advanced mode */}
+            <div className="mb-6">
+                <ScottManagementWheel artistName={artists.find(a => a.type === 'artist')?.name} />
+            </div>
 
             {/* AI51 INSIGHTS - BEHIND SCENES */}
             <ScottAI51Insights />
