@@ -516,6 +516,11 @@ Managing chaos → Making it simple. That's your job bro ♾️❤️♾️`,
                 <ScottManagementWheel artistName={artists.find(a => a.type === 'artist')?.name} />
             </div>
 
+            {/* OFFLINE TEAM CHAT */}
+            <div className="mb-6">
+                <ScottOfflineTeamChat artistId={artists.find(a => a.type === 'artist')?.id} />
+            </div>
+
             {/* AI51 INSIGHTS - BEHIND SCENES */}
             <ScottAI51Insights />
 
