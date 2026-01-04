@@ -26,6 +26,7 @@ import { AI51MemoryProvider } from '@/components/ai51/AI51MemoryLoader';
 import TruthCheckProtocol from '@/components/ai51/TruthCheckProtocol';
 import { MeshProvider, MeshStatusIndicator } from '@/components/shared/MeshNetwork';
 import SubdomainRouter from '@/components/shared/SubdomainRouter';
+import COOLASFUCK8BitLoading from '@/components/shared/COOLASFUCK8BitLoading';
 import {
                                   Menu, X, Heart, Home, LogOut, Leaf, Sparkles, Music, Map, User, Globe,
                               BookOpen, Shield, Target, Briefcase, FileText, Settings, Search, Brain, Presentation, Calculator, GraduationCap, Zap, AlertTriangle, Mic2, Lightbulb, Building, Play, Pause, Atom, Eye, Scale, Users, WifiOff, CheckCircle, Waves, ChevronDown, ChevronRight, Calendar, DollarSign, Moon, Signal, ArrowLeft, Radio
@@ -220,14 +221,7 @@ const LayoutInner = ({ children, currentPageName }) => {
   }
 
   if (isLoading && !isPublicPage && !isOfflineOkPage) {
-    return (
-      <div className="min-h-screen bg-black flex items-center justify-center">
-        <div className="text-center space-y-4">
-          <Heart className="w-16 h-16 text-pink-400 mx-auto animate-pulse" />
-          <p className="text-white text-xl font-mono">Loading UF51...</p>
-        </div>
-      </div>
-    );
+    return <COOLASFUCK8BitLoading message="LOADING UF51" />;
   }
 
   // === NAVIGATION SECTIONS ===
