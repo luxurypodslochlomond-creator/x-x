@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Mic, Heart, Activity, Camera } from 'lucide-react';
+import { Mic, Heart, Activity, Brain } from 'lucide-react';
 import { motion } from 'framer-motion';
 import ConsciousnessBridge from '@/components/consciousness/ConsciousnessBridge';
 
@@ -21,23 +21,33 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
   const recognitionRef = useRef(null);
   const lastSpokeRef = useRef(Date.now());
 
-  // Simulate heartbeat sync
+  // Manage heart rate - use real data if consciousness bridge is active, otherwise simulate
   useEffect(() => {
-    const interval = setInterval(() => {
-      setHeartRate(prev => {
-        const variation = Math.random() * 6 - 3;
-        return Math.max(60, Math.min(90, prev + variation));
-      });
-    }, 2000);
-    return () => clearInterval(interval);
-  }, []);
+    let interval;
+    if (consciousnessActive && consciousnessState?.heartRate) {
+      // Use real heart rate from ConsciousnessBridge if active
+      setHeartRate(consciousnessState.heartRate);
+    } else if (!consciousnessActive) {
+      // Simulate heart rate if ConsciousnessBridge is not active
+      interval = setInterval(() => {
+        setHeartRate(prev => {
+          const variation = Math.random() * 6 - 3;
+          return Math.max(60, Math.min(90, prev + variation));
+        });
+      }, 2000);
+    }
+    return () => {
+      if (interval) clearInterval(interval);
+    };
+  }, [consciousnessActive, consciousnessState?.heartRate]);
 
   // Connection strength based on interaction
   useEffect(() => {
+    if (consciousnessActive && consciousnessState) return; // Use real data if available
     const timeSinceSpoke = Date.now() - lastSpokeRef.current;
     const strength = Math.max(20, 100 - (timeSinceSpoke / 1000) * 2);
     setConnectionStrength(Math.min(100, strength));
-  }, [conversation]);
+  }, [conversation, consciousnessActive, consciousnessState]);
 
   // Auto scroll
   useEffect(() => {
@@ -160,6 +170,7 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
       }
       setIsListening(false);
       setConsciousnessActive(false);
+      setConsciousnessState(null);
       return;
     }
 
@@ -169,6 +180,7 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
     // Start mic
     if (!recognitionRef.current) {
       alert('Voice not supported on this browser bro');
+      setConsciousnessActive(false);
       return;
     }
 
@@ -182,6 +194,7 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
       if (e.message && !e.message.includes('not-allowed')) {
         alert(`Mic error - try refreshing page`);
       }
+      setConsciousnessActive(false);
     }
   };
 
@@ -195,6 +208,11 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
     if (state?.stress !== undefined && state?.attention !== undefined) {
       const coherence = (100 - state.stress + state.attention) / 2;
       setConnectionStrength(Math.round(coherence));
+    }
+    // If ConsciousnessBridge reports permission denied, deactivate it
+    if (state?.error === 'Permission denied') {
+      setConsciousnessActive(false);
+      setConsciousnessState(null);
     }
   };
 
@@ -241,7 +259,7 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
           <div className="flex items-center gap-2">
             <Heart className="w-4 h-4 text-pink-400 animate-pulse" />
             <span className="text-white font-mono text-sm">{Math.round(heartRate)} BPM</span>
-            <span className="text-gray-500 text-xs">(simulated)</span>
+            {!consciousnessActive && <span className="text-gray-500 text-xs">(simulated)</span>}
           </div>
         </div>
         
@@ -347,7 +365,7 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
                 <Mic className={`w-16 h-16 text-cyan-400`} strokeWidth={1.5} />
               )}
             </motion.div>
-            </motion.div>
+          </motion.div>
 
           {/* Status text below */}
           <motion.div
@@ -367,24 +385,23 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
                 : isSpeaking ? 'TRANSMITTING' 
                 : 'CONNECTED'}
             </p>
-            {consciousnessState?.emotion && (
+            {consciousnessActive && consciousnessState?.emotion && (
               <p className="text-xs font-mono text-pink-400 mt-1 capitalize">
                 {consciousnessState.emotion}
               </p>
             )}
           </motion.div>
-          </div>
+        </div>
 
-          {/* CONSCIOUSNESS BRIDGE - HIDDEN UNTIL ACTIVATED */}
-          {consciousnessActive && (
-          <div className="absolute top-0 right-0 w-64 opacity-0 pointer-events-none">
-            <ConsciousnessBridge 
-              onStateChange={handleConsciousnessStateChange}
-              enableHealing={true}
-              enableP2PSync={false}
-            />
-          </div>
-          )}
+        {/* CONSCIOUSNESS BRIDGE - Hidden but active when consciousnessActive is true */}
+        <div className="absolute bottom-4 left-4 p-2 bg-black/60 backdrop-blur-xl border border-cyan-500/30 rounded-xl z-20 md:block hidden">
+          <ConsciousnessBridge 
+            onStateChange={handleConsciousnessStateChange}
+            enableHealing={true}
+            enableP2PSync={false}
+            activated={consciousnessActive}
+          />
+        </div>
 
         {/* ALWAYS LISTENING - ELEGANT TOGGLE */}
         <motion.button
