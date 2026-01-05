@@ -161,13 +161,14 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
       return;
     }
 
-    // Request mic permission explicitly on iOS
+    // Request mic permission explicitly on iOS - no generic alerts, just start
     try {
       if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
         await navigator.mediaDevices.getUserMedia({ audio: true });
       }
     } catch (e) {
-      alert('Mic permission needed bro - check Settings → Safari → Microphone');
+      // Browser will show its own permission prompt
+      console.log('Mic permission needed:', e);
       return;
     }
 
