@@ -1,51 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
-import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Plus, Search, Wifi, WifiOff, RefreshCw, Brain, DollarSign, FileText, Music, Globe, Briefcase, Camera, Plane, Users, Crown, Palette, Heart, Send, X, Shield, Upload, Calendar, Radio, Mic } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
-import KingdomCrown8Bit from '@/components/shared/KingdomCrown8Bit';
-import BrosBond8Bit from '@/components/shared/BrosBond8Bit';
-import AI51Icon8Bit from '@/components/shared/AI51Icon8Bit';
-import { COOLASFUCKMusicNote, COOLASFUCKHeart, COOLASFUCKWaves } from '@/components/shared/COOLASFUCKIcon';
-import { useScottOffline, ScottOfflineProvider } from '@/components/scott/ScottOfflineStorage';
-import ScottOneSentence from '@/components/scott/ScottOneSentence';
-import ScottEnergyMode from '@/components/scott/ScottEnergyMode';
-import ScottCelticMode from '@/components/scott/ScottCelticMode';
-import ScottTimeline from '@/components/scott/ScottTimeline';
-import ScottQuickActions from '@/components/scott/ScottQuickActions';
-import ScottTeamShare from '@/components/scott/ScottTeamShare';
-import ScottMorningBriefing from '@/components/scott/ScottMorningBriefing';
-import ScottFocusMode from '@/components/scott/ScottFocusMode';
-import ScottContextMemory from '@/components/scott/ScottContextMemory';
-import ScottDidIDoThis from '@/components/scott/ScottDidIDoThis';
-import ScottQuickTools from '@/components/scott/ScottQuickTools';
-import ScottGigOffersFeed from '@/components/scott/ScottGigOffersFeed';
-import ScottBrainDump from '@/components/scott/ScottBrainDump';
-import ScottHealthCheck from '@/components/scott/ScottHealthCheck';
-import ScottTestMode from '@/components/scott/ScottTestMode';
-import ScottFeatureRequest from '@/components/scott/ScottFeatureRequest';
-import ScottSampleTools from '@/components/scott/ScottSampleTools';
-import ScottP51Converter from '@/components/scott/ScottP51Converter';
-import ScottFamilyCredit from '@/components/scott/ScottFamilyCredit';
-import ScottP2PSync from '@/components/scott/ScottP2PSync';
-import ScottDailySupport from '@/components/scott/ScottDailySupport';
-import ScottTeamChat from '@/components/scott/ScottTeamChat';
+import { Radio, Mail, CheckCircle, Users, Calendar, ClipboardList, Send, Loader2 } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
-import { useMutation } from '@tanstack/react-query';
-import ScottFileUpload from '@/components/scott/ScottFileUpload';
-import ScottMessageInbox from '@/components/scott/ScottMessageInbox';
-import ScottDecisionCenter from '@/components/scott/ScottDecisionCenter';
-import ScottEmailDrafter from '@/components/scott/ScottEmailDrafter';
-import ScottGigWorkflow from '@/components/scott/ScottGigWorkflow';
-import ScottSessionWorkflow from '@/components/scott/ScottSessionWorkflow';
-import ScottSimpleComms from '@/components/scott/ScottSimpleComms';
-import AI51MessageHandler from '@/components/ai51/AI51MessageHandler';
-import ScottAI51Insights from '@/components/scott/ScottAI51Insights';
-import CB51InstallPrompt from '@/components/scott/CB51InstallPrompt';
+import { useMutation, useQuery } from '@tanstack/react-query';
 
 /**
  * SCOTT'S ARTIST/CLIENT MANAGER
@@ -77,173 +38,72 @@ function ScottManagerInner() {
     const [energyLevel, setEnergyLevel] = useState('high');
     const [celticModeEnabled, setCelticModeEnabled] = useState(true);
 
-    const aiMutation = useMutation({
-        mutationFn: async (question) => {
-            const response = await base44.integrations.Core.InvokeLLM({
-                prompt: `You're AI51. Scott (SK51) is talking to you. Music manager dealing with too much chaos.
+    // Gig offer automation
+    const [gigEmailText, setGigEmailText] = useState('');
+    const [parsedGig, setParsedGig] = useState(null);
 
-YOUR JOB = ORGANIZE HIS LIFE:
-- "What did I promise Rory?" → Check Scott's messages/tasks, tell him
-- "Where's that contract?" → Search files, find it
-- "What am I forgetting?" → Check calendar, deadlines, unpaid invoices
-- "Is this publishing split right?" → Calculate it, check if fair
-- "Did I reply to that promoter?" → Check messages, draft reply if not
-- "What's urgent?" → Scan everything, prioritize what matters NOW
-- "Who owes me money?" → List unpaid invoices with amounts
-- "What gigs need sorting?" → Show pending offers, what needs decisions
-
-SCOTT SAYS: ${question}
-
-RESPOND LIKE:
-- You KNOW his whole operation (artists, gigs, money, tasks)
-- Help him FIND/REMEMBER/ORGANIZE stuff he can't track
-- Give SPECIFIC answers not generic advice
-- "You promised Rory studio time on Friday" not "Check your calendar"
-- SHORT + USEFUL (2-3 sentences)
-- If you don't have the data yet, tell him what to upload/paste
-
-Managing chaos → Making it simple. That's your job bro ♾️❤️♾️`,
-                response_json_schema: null
-            });
-            return response;
-        },
-        onSuccess: (data) => {
-            setAiResponse(data);
-            // Speak response with fallback
-            if ('speechSynthesis' in window) {
-                window.speechSynthesis.cancel();
-                const speak = () => {
-                    const utterance = new SpeechSynthesisUtterance(data);
-                    utterance.rate = 0.95;
-                    utterance.pitch = 1.1;
-                    utterance.volume = 0.8;
-                    const voices = window.speechSynthesis.getVoices();
-                    if (voices.length > 0) {
-                        const voice = voices.find(v => v.name.includes('Google UK English Female')) 
-                                   || voices.find(v => v.lang.startsWith('en-GB'))
-                                   || voices.find(v => v.lang.startsWith('en'));
-                        if (voice) utterance.voice = voice;
+    const parseGigMutation = useMutation({
+        mutationFn: async (email) => {
+            const result = await base44.integrations.Core.InvokeLLM({
+                prompt: `Extract gig details from this email:\n\n${email}\n\nReturn: venue, date (YYYY-MM-DD), fee, artist name, notes`,
+                response_json_schema: {
+                    type: "object",
+                    properties: {
+                        venue: { type: "string" },
+                        date: { type: "string" },
+                        fee: { type: "number" },
+                        artist: { type: "string" },
+                        notes: { type: "string" }
                     }
-                    utterance.onerror = (e) => console.log('Voice error:', e);
-                    window.speechSynthesis.speak(utterance);
-                };
-                if (window.speechSynthesis.getVoices().length > 0) {
-                    speak();
-                } else {
-                    window.speechSynthesis.addEventListener('voiceschanged', speak, { once: true });
-                    setTimeout(speak, 100);
                 }
-            }
+            });
+            return result;
+        },
+        onSuccess: (data) => setParsedGig(data)
+    });
+
+    const sendGigToTeamMutation = useMutation({
+        mutationFn: async () => {
+            await base44.entities.ScottGigOffer.create({
+                venue_name: parsedGig.venue,
+                offer_date: parsedGig.date,
+                guarantee: parsedGig.fee,
+                artist_name: parsedGig.artist,
+                notes: parsedGig.notes,
+                status: 'pending_team'
+            });
+        },
+        onSuccess: () => {
+            setGigEmailText('');
+            setParsedGig(null);
+            alert('Sent to team ✓');
         }
     });
 
-    // Check if PIN already stored + show install prompt + set CB51 metadata
     useEffect(() => {
         const storedPin = localStorage.getItem('scott_access_pin');
-        if (storedPin === '1888') {
-            setPinEntered(true);
-        }
-
-        // Set CB51-specific metadata for PWA
-        document.title = 'CB51';
-        const metaTheme = document.querySelector('meta[name="theme-color"]');
-        if (metaTheme) metaTheme.setAttribute('content', '#22d3ee');
-        const metaAppleTitle = document.querySelector('meta[name="apple-mobile-web-app-title"]');
-        if (metaAppleTitle) metaAppleTitle.setAttribute('content', 'CB51');
-
-
-        
-        // Init voice
-        if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
-            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-            recognitionRef.current = new SpeechRecognition();
-            recognitionRef.current.continuous = true;
-            recognitionRef.current.interimResults = true;
-            recognitionRef.current.lang = 'en-GB';
-            recognitionRef.current.onresult = (event) => {
-                let text = '';
-                for (let i = event.resultIndex; i < event.results.length; i++) {
-                    text += event.results[i][0].transcript;
-                }
-                setVoiceText(text);
-            };
-            recognitionRef.current.onerror = () => setIsListening(false);
-            recognitionRef.current.onend = () => setIsListening(false);
-        }
-        
-        return () => {
-            if (recognitionRef.current) recognitionRef.current.stop();
-        };
+        if (storedPin === '1888') setPinEntered(true);
+        document.title = 'CB51 - Manager Dashboard';
     }, []);
 
-    // Load data from offline storage
-    useEffect(() => {
-        if (pinEntered) {
-            const loadedArtists = scott.getArtists();
-            const loadedEvents = scott.getEvents();
-            const loadedTasks = scott.getTasks();
-            const loadedInvoices = scott.getUnpaidInvoices();
-            const loadedExpenses = scott.getExpenses();
+    // Fetch basic data
+    const { data: artists = [] } = useQuery({
+        queryKey: ['scottArtists'],
+        queryFn: () => base44.entities.ScottArtist.filter({}),
+        enabled: pinEntered
+    });
 
-            setArtists(loadedArtists);
-            setUnpaidInvoices(loadedInvoices);
-            setExpenses(loadedExpenses);
+    const { data: upcomingGigs = [] } = useQuery({
+        queryKey: ['scottUpcomingGigs'],
+        queryFn: () => base44.entities.ScottEvent.filter({ event_type: 'gig' }),
+        enabled: pinEntered
+    });
 
-            const upcoming = loadedEvents.filter(e => new Date(e.date) >= new Date());
-            setUpcomingEvents(upcoming);
-
-            const urgent = loadedTasks.filter(t => 
-                t.status !== 'done' && (t.priority === 'high' || t.priority === 'urgent')
-            );
-            setUrgentTasks(urgent);
-
-            // Pull fresh data if online
-            if (scott.isOnline) {
-                scott.pullFromServer().then(() => {
-                    setArtists(scott.getArtists());
-                    setUnpaidInvoices(scott.getUnpaidInvoices());
-                    setExpenses(scott.getExpenses());
-                    setUpcomingEvents(scott.getEvents().filter(e => new Date(e.date) >= new Date()));
-                    setUrgentTasks(scott.getTasks().filter(t => 
-                        t.status !== 'done' && (t.priority === 'high' || t.priority === 'urgent')
-                    ));
-                });
-            }
-        }
-    }, [pinEntered, scott.isOnline]);
-
-    const toggleVoice = () => {
-        if (!recognitionRef.current) return;
-        if (isListening) {
-            recognitionRef.current.stop();
-            setIsListening(false);
-        } else {
-            recognitionRef.current.start();
-            setIsListening(true);
-        }
-    };
-    
-    const saveQuickNote = async () => {
-        const note = (quickNote + ' ' + voiceText).trim();
-        if (!note) return;
-        try {
-            await base44.entities.ScottFeatureRequest.create({
-                request: note,
-                priority: 'high',
-                status: 'new',
-                category: 'pain_point'
-            });
-            setQuickNote('');
-            setVoiceText('');
-            if (isListening) {
-                recognitionRef.current.stop();
-                setIsListening(false);
-            }
-            alert('Got it bro ✓');
-        } catch (e) {
-            console.error(e);
-        }
-    };
+    const { data: tasks = [] } = useQuery({
+        queryKey: ['scottTasks'],
+        queryFn: () => base44.entities.ScottTask.filter({ status: 'pending' }),
+        enabled: pinEntered
+    });
 
     const handlePinSubmit = () => {
         if (pinInput === '1888') {
@@ -252,12 +112,6 @@ Managing chaos → Making it simple. That's your job bro ♾️❤️♾️`,
         }
     };
 
-    const filteredArtists = artists.filter(a => 
-        a.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        a.type.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-
-    // PIN ENTRY SCREEN - CLEAN SIMPLE
     if (!pinEntered) {
         return (
             <div className="min-h-screen bg-black p-4 flex items-center justify-center">
@@ -303,230 +157,215 @@ Managing chaos → Making it simple. That's your job bro ♾️❤️♾️`,
     }
 
     return (
-        <ScottFocusMode>
-        <div className="min-h-screen bg-black p-4 pb-32">
+        <div className="min-h-screen bg-black text-white p-4">
 
-        {/* CB51 INSTALL PROMPT - NEW CLEAN DESIGN */}
-        <CB51InstallPrompt />
-
-        {/* P2P MESH - RUNS INVISIBLE IN BACKGROUND */}
-        <div className="hidden"><ScottP2PSync /></div>
-
-        <ScottHealthCheck />
-        <ScottBrainDump />
-        <ScottTestMode />
-        <ScottFeatureRequest />
-
-
-
-            {/* QUICK VOICE/TYPE - TOP */}
-            <div className="mb-4 bg-gradient-to-r from-pink-500/20 to-cyan-500/20 border-2 border-pink-500 p-3 rounded-xl">
-                <div className="flex gap-2 mb-2">
-                    <input
-                        type="text"
-                        value={quickNote + (voiceText ? ' ' + voiceText : '')}
-                        onChange={(e) => setQuickNote(e.target.value)}
-                        placeholder="What's painful? (voice or type)"
-                        className="flex-1 bg-black/60 border border-cyan-500/50 rounded px-3 py-2 text-white text-sm placeholder:text-gray-500 focus:border-cyan-500 focus:outline-none font-mono"
-                        disabled={isListening}
-                    />
-                    <button
-                        onClick={toggleVoice}
-                        className={`px-3 py-2 rounded font-bold transition-all ${
-                            isListening ? 'bg-red-500 text-white' : 'bg-cyan-500 text-black'
-                        }`}
-                    >
-                        <Mic className="w-4 h-4" />
-                    </button>
-                    <button
-                        onClick={saveQuickNote}
-                        disabled={!quickNote.trim() && !voiceText.trim()}
-                        className="px-3 py-2 bg-green-600 disabled:bg-gray-700 disabled:opacity-50 text-white rounded font-bold"
-                    >
-                        <Send className="w-4 h-4" />
-                    </button>
+            {/* HEADER */}
+            <div className="mb-6 pb-4 border-b-2 border-cyan-500">
+                <div className="flex items-center gap-3 mb-2">
+                    <Radio className="w-10 h-10 text-cyan-400" />
+                    <div>
+                        <h1 className="text-3xl font-black text-cyan-400 font-mono">CB51</h1>
+                        <p className="text-gray-500 text-xs font-mono">Manager Dashboard</p>
+                    </div>
                 </div>
-                <p className="text-xs text-pink-300 font-mono font-bold">BRO51 builds what matters ♾️</p>
             </div>
 
-            {/* HEADER - 8-BIT RETRO CB51 RADIO */}
-            <motion.div 
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4 }}
-                className="sticky top-0 z-50 mb-6 -mx-4 px-4 py-3 bg-black border-b-4 border-cyan-500"
-            >
-                <div className="bg-black border-4 border-cyan-500 p-4">
-                    {/* Pixel scanlines */}
-                    <div className="absolute inset-0 opacity-10 pointer-events-none" style={{
-                        backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(34, 211, 238, 0.3) 2px, rgba(34, 211, 238, 0.3) 4px)'
-                    }} />
+            {/* NAVIGATION */}
+            <div className="flex gap-2 mb-6">
+                <button
+                    onClick={() => setActiveSection('dashboard')}
+                    className={`flex-1 py-3 rounded-lg font-bold font-mono ${activeSection === 'dashboard' ? 'bg-cyan-500 text-black' : 'bg-gray-900 text-gray-400'}`}
+                >
+                    <Users className="w-4 h-4 inline mr-2" />
+                    DASHBOARD
+                </button>
+                <button
+                    onClick={() => setActiveSection('gig')}
+                    className={`flex-1 py-3 rounded-lg font-bold font-mono ${activeSection === 'gig' ? 'bg-amber-500 text-black' : 'bg-gray-900 text-gray-400'}`}
+                >
+                    <Mail className="w-4 h-4 inline mr-2" />
+                    GIG OFFER
+                </button>
+                <button
+                    onClick={() => setActiveSection('admin')}
+                    className={`flex-1 py-3 rounded-lg font-bold font-mono ${activeSection === 'admin' ? 'bg-green-500 text-black' : 'bg-gray-900 text-gray-400'}`}
+                >
+                    <ClipboardList className="w-4 h-4 inline mr-2" />
+                    ADMIN
+                </button>
+            </div>
 
-                    <div className="relative z-10 flex items-center justify-between">
-                        <div className="flex items-center gap-3">
-                            <motion.div
-                                animate={{
-                                    rotate: [0, 10, -10, 0]
-                                }}
-                                transition={{
-                                    duration: 3,
-                                    repeat: Infinity
-                                }}
-                            >
-                                <Radio className="w-10 h-10 text-cyan-400" strokeWidth={3} />
-                            </motion.div>
-                            <div>
-                                <h1 className="text-2xl font-black text-cyan-400 font-mono" style={{ textShadow: '2px 2px 0px rgba(0,0,0,1)' }}>
-                                    CB51
-                                </h1>
-                                <div className="flex items-center gap-2">
-                                    <motion.div 
-                                        className={`w-2 h-2 ${scott.isOnline ? 'bg-green-400' : 'bg-amber-400'}`}
-                                        animate={{
-                                            opacity: [0.5, 1, 0.5]
-                                        }}
-                                        transition={{
-                                            duration: 1.5,
-                                            repeat: Infinity
-                                        }}
-                                        style={{ imageRendering: 'pixelated' }}
-                                    />
-                                    <p className="text-xs text-gray-400 font-mono">
-                                        {scott.isOnline ? '10-4 ONLINE' : '10-7 OFFLINE'}
-                                    </p>
+
+
+            {/* DASHBOARD SECTION */}
+            {activeSection === 'dashboard' && (
+                <div className="space-y-4">
+                    <div className="bg-gray-900 border-2 border-cyan-500 rounded-lg p-4">
+                        <h2 className="text-cyan-400 font-bold mb-3 font-mono">YOUR ARTISTS</h2>
+                        {artists.length === 0 ? (
+                            <p className="text-gray-500 text-sm">No artists yet</p>
+                        ) : (
+                            <div className="space-y-2">
+                                {artists.map(artist => (
+                                    <div key={artist.id} className="bg-black border border-gray-800 rounded p-3">
+                                        <p className="text-white font-bold">{artist.name}</p>
+                                        <p className="text-gray-500 text-xs">{artist.genre || 'No genre'}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+
+                    <div className="bg-gray-900 border-2 border-amber-500 rounded-lg p-4">
+                        <h2 className="text-amber-400 font-bold mb-3 font-mono">UPCOMING GIGS</h2>
+                        {upcomingGigs.length === 0 ? (
+                            <p className="text-gray-500 text-sm">No upcoming gigs</p>
+                        ) : (
+                            <div className="space-y-2">
+                                {upcomingGigs.slice(0, 3).map(gig => (
+                                    <div key={gig.id} className="bg-black border border-gray-800 rounded p-3">
+                                        <p className="text-white font-bold text-sm">{gig.title}</p>
+                                        <p className="text-gray-500 text-xs">{gig.date}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+
+                    <div className="bg-gray-900 border-2 border-green-500 rounded-lg p-4">
+                        <h2 className="text-green-400 font-bold mb-3 font-mono">PENDING TASKS</h2>
+                        {tasks.length === 0 ? (
+                            <p className="text-gray-500 text-sm">All clear ✓</p>
+                        ) : (
+                            <div className="space-y-2">
+                                {tasks.slice(0, 3).map(task => (
+                                    <div key={task.id} className="bg-black border border-gray-800 rounded p-3">
+                                        <p className="text-white text-sm">{task.title}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+                </div>
+            )}
+
+
+
+            {/* GIG OFFER AUTOMATION */}
+            {activeSection === 'gig' && (
+                <div className="space-y-4">
+                    {!parsedGig ? (
+                        <>
+                            <div className="bg-gray-900 border-2 border-amber-500 rounded-lg p-4">
+                                <h2 className="text-amber-400 font-bold mb-3 font-mono">PASTE GIG EMAIL</h2>
+                                <Textarea
+                                    value={gigEmailText}
+                                    onChange={(e) => setGigEmailText(e.target.value)}
+                                    placeholder="Paste the gig offer email here..."
+                                    rows={8}
+                                    className="bg-black border-2 border-gray-700 text-white mb-3 font-mono text-sm"
+                                />
+                                <Button
+                                    onClick={() => parseGigMutation.mutate(gigEmailText)}
+                                    disabled={!gigEmailText.trim() || parseGigMutation.isPending}
+                                    className="w-full bg-amber-500 hover:bg-amber-600 text-black font-black"
+                                >
+                                    {parseGigMutation.isPending ? (
+                                        <>
+                                            <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                                            SCANNING...
+                                        </>
+                                    ) : (
+                                        <>
+                                            <Send className="w-4 h-4 mr-2" />
+                                            SCAN EMAIL
+                                        </>
+                                    )}
+                                </Button>
+                            </div>
+                        </>
+                    ) : (
+                        <>
+                            <div className="bg-green-900/20 border-2 border-green-500 rounded-lg p-4">
+                                <h2 className="text-green-400 font-bold mb-3 font-mono">✓ GIG DETAILS</h2>
+                                <div className="space-y-2 text-sm">
+                                    <p className="text-white"><strong>Venue:</strong> {parsedGig.venue}</p>
+                                    <p className="text-white"><strong>Date:</strong> {parsedGig.date}</p>
+                                    <p className="text-white"><strong>Fee:</strong> £{parsedGig.fee}</p>
+                                    <p className="text-white"><strong>Artist:</strong> {parsedGig.artist}</p>
+                                    {parsedGig.notes && <p className="text-gray-400 text-xs">{parsedGig.notes}</p>}
                                 </div>
                             </div>
-                        </div>
-                        <div className="flex items-center gap-2">
-                            <Link 
-                                to={createPageUrl('ScottAbout')} 
-                                className="w-10 h-10 bg-black border-2 border-pink-500 hover:border-pink-400 flex items-center justify-center transition-all"
-                            >
-                                <COOLASFUCKHeart size={20} animate={false} />
+
+                            <div className="flex gap-3">
+                                <Button
+                                    onClick={() => { setGigEmailText(''); setParsedGig(null); }}
+                                    className="flex-1 bg-gray-700 hover:bg-gray-600"
+                                >
+                                    CANCEL
+                                </Button>
+                                <Button
+                                    onClick={() => sendGigToTeamMutation.mutate()}
+                                    disabled={sendGigToTeamMutation.isPending}
+                                    className="flex-1 bg-green-500 hover:bg-green-600 text-black font-black"
+                                >
+                                    {sendGigToTeamMutation.isPending ? (
+                                        <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                                    ) : (
+                                        <Users className="w-4 h-4 mr-2" />
+                                    )}
+                                    SEND TO TEAM
+                                </Button>
+                            </div>
+                        </>
+                    )}
+                </div>
+            )}
+
+            {/* ADMIN TASKS */}
+            {activeSection === 'admin' && (
+                <div className="space-y-4">
+                    <div className="bg-gray-900 border-2 border-green-500 rounded-lg p-4">
+                        <h2 className="text-green-400 font-bold mb-3 font-mono">QUICK ADMIN</h2>
+                        <div className="grid grid-cols-2 gap-2">
+                            <Link to={createPageUrl('ScottCalendar')}>
+                                <button className="w-full bg-black border border-gray-700 hover:border-green-500 p-3 rounded">
+                                    <Calendar className="w-6 h-6 text-green-400 mx-auto mb-1" />
+                                    <p className="text-white text-xs font-bold">CALENDAR</p>
+                                </button>
                             </Link>
-                            <Link 
-                                to={createPageUrl('ScottWhiteLabelPricing')} 
-                                className="w-10 h-10 bg-black border-2 border-amber-500 hover:border-amber-400 flex items-center justify-center transition-all"
-                            >
-                                <DollarSign className="w-5 h-5 text-amber-400" strokeWidth={3} />
+                            <Link to={createPageUrl('ScottInvoices')}>
+                                <button className="w-full bg-black border border-gray-700 hover:border-green-500 p-3 rounded">
+                                    <ClipboardList className="w-6 h-6 text-green-400 mx-auto mb-1" />
+                                    <p className="text-white text-xs font-bold">INVOICES</p>
+                                </button>
                             </Link>
-                            <Link 
-                                to={createPageUrl('ScottCalendar')} 
-                                className="w-10 h-10 bg-black border-2 border-cyan-500 hover:border-cyan-400 flex items-center justify-center transition-all"
-                            >
-                                <Calendar className="w-5 h-5 text-cyan-400" strokeWidth={3} />
+                            <Link to={createPageUrl('ScottExpenses')}>
+                                <button className="w-full bg-black border border-gray-700 hover:border-green-500 p-3 rounded">
+                                    <ClipboardList className="w-6 h-6 text-green-400 mx-auto mb-1" />
+                                    <p className="text-white text-xs font-bold">EXPENSES</p>
+                                </button>
+                            </Link>
+                            <Link to={createPageUrl('ScottContracts')}>
+                                <button className="w-full bg-black border border-gray-700 hover:border-green-500 p-3 rounded">
+                                    <ClipboardList className="w-6 h-6 text-green-400 mx-auto mb-1" />
+                                    <p className="text-white text-xs font-bold">CONTRACTS</p>
+                                </button>
                             </Link>
                         </div>
                     </div>
-                </div>
-            </motion.div>
 
-
-
-            {/* SCOTT'S SIMPLE LANDING - JUST 2 ACTIONS */}
-            {!activeWorkflow && !advancedMode && (
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="space-y-6 mb-6"
-                >
-                    {/* 8-BIT RETRO STYLE - COOLASFUCK */}
-                    <div className="space-y-3">
-                        <motion.button
-                            whileTap={{ scale: 0.98 }}
-                            onClick={() => setActiveWorkflow('gig')}
-                            className="w-full bg-amber-500 hover:bg-amber-400 border-4 border-black text-black font-black py-8 text-2xl font-mono relative overflow-hidden"
-                            style={{ boxShadow: '8px 8px 0px black', imageRendering: 'pixelated' }}
-                        >
-                            <div className="absolute inset-0 opacity-10" style={{
-                                backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 4px, rgba(0,0,0,0.3) 4px, rgba(0,0,0,0.3) 8px)'
-                            }} />
-                            <span className="relative z-10">📧 PASTE GIG OFFER</span>
-                        </motion.button>
-
-                        <motion.button
-                            whileTap={{ scale: 0.98 }}
-                            onClick={() => setActiveWorkflow('session')}
-                            className="w-full bg-cyan-500 hover:bg-cyan-400 border-4 border-black text-black font-black py-8 text-2xl font-mono relative overflow-hidden"
-                            style={{ boxShadow: '8px 8px 0px black', imageRendering: 'pixelated' }}
-                        >
-                            <div className="absolute inset-0 opacity-10" style={{
-                                backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 4px, rgba(0,0,0,0.3) 4px, rgba(0,0,0,0.3) 8px)'
-                            }} />
-                            <span className="relative z-10">🎵 BOOK SESSION</span>
-                        </motion.button>
+                    <div className="bg-gray-900 border-2 border-gray-700 rounded-lg p-4">
+                        <p className="text-gray-500 text-sm text-center">More admin tools coming based on your feedback</p>
                     </div>
-
-                    {/* Tiny advanced mode link - hidden at bottom */}
-                    <button
-                        onClick={() => setAdvancedMode(true)}
-                        className="w-full bg-black border border-gray-900 hover:border-gray-800 text-gray-700 hover:text-gray-600 font-bold py-2 text-[10px] font-mono transition-all"
-                    >
-                        more tools
-                    </button>
-                </motion.div>
-            )}
-
-            {/* ACTIVE WORKFLOW */}
-            {activeWorkflow === 'messages' && (
-                <div className="mb-6">
-                    <AI51MessageHandler context="scott" />
-                    <Button
-                        onClick={() => setActiveWorkflow(null)}
-                        className="w-full bg-gray-700 hover:bg-gray-600 font-bold mt-3"
-                    >
-                        BACK
-                    </Button>
                 </div>
             )}
 
-            {activeWorkflow === 'comms' && (
-                <div className="mb-6">
-                    <ScottSimpleComms />
-                    <Button
-                        onClick={() => setActiveWorkflow(null)}
-                        className="w-full bg-gray-700 hover:bg-gray-600 font-bold mt-3"
-                    >
-                        BACK
-                    </Button>
-                </div>
-            )}
-
-            {activeWorkflow === 'gig' && (
-                <div className="mb-6">
-                    <ScottGigWorkflow />
-                    <Button
-                        onClick={() => setActiveWorkflow(null)}
-                        className="w-full bg-gray-700 hover:bg-gray-600 font-bold mt-3"
-                    >
-                        BACK
-                    </Button>
-                </div>
-            )}
-
-            {activeWorkflow === 'session' && (
-                <div className="mb-6">
-                    <ScottSessionWorkflow />
-                    <Button
-                        onClick={() => setActiveWorkflow(null)}
-                        className="w-full bg-gray-700 hover:bg-gray-600 font-bold mt-3"
-                    >
-                        BACK
-                    </Button>
-                </div>
-            )}
-
-            {/* ADVANCED MODE - ALL THE EXTRAS */}
-            {advancedMode && (
-                <>
-                <div className="mb-6">
-                    <Button
-                        onClick={() => setAdvancedMode(false)}
-                        className="w-full bg-amber-500 hover:bg-amber-600 text-black font-black mb-4"
-                    >
-                        ← SIMPLE MODE
-                    </Button>
-                </div>
+            {/* FOOTER */}
+            <div className="mt-12 text-center">
+                <p className="text-gray-600 text-xs font-mono mb-2">CB51 • Clean & Simple</p>
+                <p className="text-gray-700 text-[10px] font-mono">Built on feedback from floor diagrams ♾️📻</p>
+            </div>
 
             {showFileUpload && <ScottFileUpload onClose={() => setShowFileUpload(false)} />}
 
@@ -1140,9 +979,5 @@ Managing chaos → Making it simple. That's your job bro ♾️❤️♾️`,
             }
 
             export default function ScottManager() {
-            return (
-            <ScottOfflineProvider>
-            <ScottManagerInner />
-            </ScottOfflineProvider>
-            );
+                return <ScottManagerInner />;
             }
