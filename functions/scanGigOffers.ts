@@ -15,12 +15,9 @@ Deno.serve(async (req) => {
       return Response.json({ error: 'Admin only' }, { status: 403 });
     }
 
-    const { emailProvider, lastScanDate } = await req.json();
+    const { emailText, artistId } = await req.json();
     
-    // TODO: Connect to email via OAuth (Gmail/Outlook)
-    // For now, we'll simulate with manual forwarding
-    
-    // AI extracts gig offer details
+    // AI extracts gig offer details from email text
     const prompt = `You are scanning an email for a gig/booking offer.
     
 Extract these details if present:
@@ -61,14 +58,49 @@ Return JSON with these fields:
   "raw_email": "full email text"
 }
 
-If field not found, use null.`;
+If field not found, use null.
 
-    // This will be called when we have email access
-    // For now, return structure
+Email text: ${emailText}`;
+
+    const extraction = await base44.integrations.Core.InvokeLLM({
+      prompt,
+      response_json_schema: {
+        type: "object",
+        properties: {
+          artist: { type: "string" },
+          venue: { type: "string" },
+          city: { type: "string" },
+          county: { type: "string" },
+          country: { type: "string" },
+          date: { type: "string" },
+          time: { type: "string" },
+          fee: { type: "number" },
+          currency: { type: "string" },
+          capacity: { type: "number" },
+          promoter: { type: "string" },
+          promoter_contact: { type: "string" },
+          deposit_required: { type: "boolean" },
+          deposit_amount: { type: "number" },
+          is_tour: { type: "boolean" },
+          tour_dates: { type: "array", items: { type: "string" } },
+          distance_to_next: { type: "string" },
+          requirements: { type: "string" },
+          notes: { type: "string" }
+        }
+      }
+    });
+
+    // Create gig offer
+    const offer = await base44.asServiceRole.entities.ScottGigOffer.create({
+      artist_id: artistId,
+      ...extraction,
+      raw_email: emailText,
+      status: 'pending_manager_review'
+    });
     
     return Response.json({ 
       success: true,
-      message: 'Email scanner ready - authorize Gmail/Outlook to start scanning'
+      offer
     });
 
   } catch (error) {

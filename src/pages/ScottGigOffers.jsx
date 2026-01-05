@@ -6,8 +6,11 @@ import { createPageUrl } from '@/utils';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
-import { Mail, MapPin, DollarSign, Users, Calendar, Check, X, MessageSquare, ArrowLeft } from 'lucide-react';
+import { Input } from '@/components/ui/input';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Mail, MapPin, DollarSign, Users, Calendar, Check, X, MessageSquare, ArrowLeft, Clock, AlertCircle, Send, Edit } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { generateGigResponse } from '@/functions/generateGigResponse';
 
 /**
  * SCOTT GIG OFFERS
@@ -20,6 +23,11 @@ export default function ScottGigOffers() {
   const queryClient = useQueryClient();
   const [selectedOffer, setSelectedOffer] = useState(null);
   const [managerNotes, setManagerNotes] = useState('');
+  const [deadlineDays, setDeadlineDays] = useState('2');
+  const [urgency, setUrgency] = useState('normal');
+  const [showResponseDraft, setShowResponseDraft] = useState(null);
+  const [responseDraft, setResponseDraft] = useState('');
+  const [responseType, setResponseType] = useState('accept');
 
   const { data: offers = [] } = useQuery({
     queryKey: ['scottGigOffers'],
@@ -27,13 +35,18 @@ export default function ScottGigOffers() {
   });
 
   const approveMutation = useMutation({
-    mutationFn: ({ id, notes }) => 
-      base44.entities.ScottGigOffer.update(id, { 
+    mutationFn: ({ id, notes, deadline, urgency }) => {
+      const deadlineDate = new Date();
+      deadlineDate.setDate(deadlineDate.getDate() + parseInt(deadline));
+      return base44.entities.ScottGigOffer.update(id, { 
         manager_approved: true,
         manager_notes: notes,
         status: 'sent_to_band',
-        sent_to_band_date: new Date().toISOString()
-      }),
+        sent_to_band_date: new Date().toISOString(),
+        response_deadline: deadlineDate.toISOString(),
+        urgency
+      });
+    },
     onSuccess: () => {
       queryClient.invalidateQueries(['scottGigOffers']);
       setSelectedOffer(null);
@@ -55,8 +68,31 @@ export default function ScottGigOffers() {
     },
   });
 
+  const generateDraft = async (offerId, type) => {
+    try {
+      const result = await generateGigResponse({ offerId, responseType: type });
+      setResponseDraft(result.draft);
+      setResponseType(type);
+      setShowResponseDraft(offerId);
+    } catch (error) {
+      alert('Error: ' + error.message);
+    }
+  };
+
+  const sendResponse = async (offerId) => {
+    await base44.entities.ScottGigOffer.update(offerId, {
+      final_response_sent: responseDraft,
+      status: responseType === 'accept' ? 'confirmed' : 'rejected_by_manager'
+    });
+    queryClient.invalidateQueries(['scottGigOffers']);
+    setShowResponseDraft(null);
+    setResponseDraft('');
+    alert('✅ Response sent!');
+  };
+
   const pendingOffers = offers.filter(o => o.status === 'pending_manager_review');
   const sentToBand = offers.filter(o => o.status === 'sent_to_band');
+  const awaitingResponse = offers.filter(o => o.all_responses_in && !o.final_response_sent);
 
   return (
     <div className="min-h-screen bg-black p-6">
@@ -142,6 +178,41 @@ export default function ScottGigOffers() {
 
                         {/* Manager Actions */}
                         <div className="space-y-4">
+                          <div>
+                            <label className="text-white text-sm font-bold mb-2 block">Deadline</label>
+                            <Select 
+                              value={selectedOffer === offer.id ? deadlineDays : '2'} 
+                              onValueChange={(v) => { setSelectedOffer(offer.id); setDeadlineDays(v); }}
+                            >
+                              <SelectTrigger className="bg-black border-cyan-500 text-white">
+                                <SelectValue />
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="1">1 day</SelectItem>
+                                <SelectItem value="2">2 days</SelectItem>
+                                <SelectItem value="3">3 days</SelectItem>
+                                <SelectItem value="7">1 week</SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </div>
+
+                          <div>
+                            <label className="text-white text-sm font-bold mb-2 block">Urgency</label>
+                            <Select 
+                              value={selectedOffer === offer.id ? urgency : 'normal'} 
+                              onValueChange={(v) => { setSelectedOffer(offer.id); setUrgency(v); }}
+                            >
+                              <SelectTrigger className="bg-black border-cyan-500 text-white">
+                                <SelectValue />
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="normal">Normal</SelectItem>
+                                <SelectItem value="urgent">Urgent</SelectItem>
+                                <SelectItem value="very_urgent">Very Urgent 🔥</SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </div>
+
                           <Textarea
                             placeholder="Add notes for the band..."
                             value={selectedOffer === offer.id ? managerNotes : ''}
@@ -149,12 +220,20 @@ export default function ScottGigOffers() {
                               setSelectedOffer(offer.id);
                               setManagerNotes(e.target.value);
                             }}
-                            className="bg-black border-cyan-500 text-white h-32"
+                            className="bg-black border-cyan-500 text-white h-24"
                           />
 
                           <div className="flex gap-2">
                             <Button
-                              onClick={() => approveMutation.mutate({ id: offer.id, notes: managerNotes })}
+                              onClick={() => {
+                                setSelectedOffer(offer.id);
+                                approveMutation.mutate({ 
+                                  id: offer.id, 
+                                  notes: managerNotes,
+                                  deadline: deadlineDays,
+                                  urgency
+                                });
+                              }}
                               className="flex-1 bg-green-600 hover:bg-green-700 gap-2"
                             >
                               <Check className="w-4 h-4" />
@@ -181,6 +260,76 @@ export default function ScottGigOffers() {
           </div>
         )}
 
+        {/* ALL VOTES IN - Ready to Respond */}
+        {awaitingResponse.length > 0 && (
+          <div className="mb-8">
+            <h2 className="text-2xl font-black text-white mb-4">READY TO RESPOND</h2>
+            <div className="space-y-4">
+              {awaitingResponse.map((offer) => {
+                const allYes = offer.band_responses?.every(r => r.response === 'yes');
+                return (
+                  <Card key={offer.id} className={`bg-black border-2 ${allYes ? 'border-green-500' : 'border-red-500'}`}>
+                    <CardContent className="p-6">
+                      <div className="mb-4">
+                        <h3 className="text-white font-bold text-xl">{offer.venue}</h3>
+                        <p className="text-gray-400">{new Date(offer.date).toLocaleDateString()} • {offer.city}</p>
+                        <p className="text-cyan-400 font-bold">{offer.currency}{offer.fee}</p>
+                      </div>
+
+                      <div className="mb-4 space-y-2">
+                        <p className="text-white font-bold">Band Votes:</p>
+                        {offer.band_responses?.map((r, i) => (
+                          <div key={i} className="flex items-center gap-2">
+                            {r.response === 'yes' ? <Check className="w-4 h-4 text-green-400" /> : <X className="w-4 h-4 text-red-400" />}
+                            <span className="text-gray-300">{r.member_name}: {r.response.toUpperCase()}</span>
+                            {r.notes && <span className="text-gray-500 text-sm">({r.notes})</span>}
+                          </div>
+                        ))}
+                      </div>
+
+                      {showResponseDraft === offer.id ? (
+                        <div className="space-y-3">
+                          <Textarea
+                            value={responseDraft}
+                            onChange={(e) => setResponseDraft(e.target.value)}
+                            className="bg-black border-cyan-500 text-white h-32"
+                          />
+                          <div className="flex gap-2">
+                            <Button
+                              onClick={() => sendResponse(offer.id)}
+                              className="flex-1 bg-cyan-600 hover:bg-cyan-700 gap-2"
+                            >
+                              <Send className="w-4 h-4" />
+                              Send Response
+                            </Button>
+                            <Button
+                              onClick={() => setShowResponseDraft(null)}
+                              variant="outline"
+                              className="border-gray-500"
+                            >
+                              Cancel
+                            </Button>
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="flex gap-2">
+                          <Button
+                            onClick={() => generateDraft(offer.id, allYes ? 'accept' : 'reject')}
+                            className="flex-1 bg-purple-600 hover:bg-purple-700 gap-2"
+                          >
+                            <Edit className="w-4 h-4" />
+                            AI Draft {allYes ? 'Acceptance' : 'Rejection'}
+                          </Button>
+                        </div>
+                      )}
+                    </CardContent>
+                  </Card>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
         {/* Sent to Band - Awaiting Response */}
         {sentToBand.length > 0 && (
           <div>
@@ -189,16 +338,28 @@ export default function ScottGigOffers() {
               {sentToBand.map((offer) => (
                 <Card key={offer.id} className="bg-black border border-cyan-500">
                   <CardContent className="p-4">
-                    <div className="flex justify-between items-center">
-                      <div>
+                    <div className="flex justify-between items-start">
+                      <div className="flex-1">
                         <h3 className="text-white font-bold">{offer.venue}</h3>
                         <p className="text-gray-400 text-sm">
                           {new Date(offer.date).toLocaleDateString()} • {offer.city}
                         </p>
+                        {offer.urgency !== 'normal' && (
+                          <div className="flex items-center gap-1 mt-1">
+                            <AlertCircle className="w-4 h-4 text-red-400" />
+                            <span className="text-red-400 text-xs font-bold">
+                              {offer.urgency === 'very_urgent' ? 'VERY URGENT' : 'URGENT'}
+                            </span>
+                          </div>
+                        )}
                       </div>
                       <div className="text-right">
                         <p className="text-cyan-400 font-bold">{offer.currency}{offer.fee}</p>
                         <p className="text-gray-400 text-sm">Sent {new Date(offer.sent_to_band_date).toLocaleDateString()}</p>
+                        <div className="flex items-center gap-1 text-amber-400 text-xs mt-1">
+                          <Clock className="w-3 h-3" />
+                          <span>Due: {new Date(offer.response_deadline).toLocaleDateString()}</span>
+                        </div>
                       </div>
                     </div>
                     {offer.manager_notes && (

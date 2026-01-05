@@ -186,13 +186,16 @@ import ScottAbout from './pages/ScottAbout';
 import ScottAccommodation from './pages/ScottAccommodation';
 import ScottAddArtist from './pages/ScottAddArtist';
 import ScottArtist from './pages/ScottArtist';
+import ScottArtistHome from './pages/ScottArtistHome';
 import ScottBiggerVision from './pages/ScottBiggerVision';
 import ScottCalendar from './pages/ScottCalendar';
+import ScottCalendarView from './pages/ScottCalendarView';
 import ScottComparison from './pages/ScottComparison';
 import ScottContracts from './pages/ScottContracts';
 import ScottDemos from './pages/ScottDemos';
 import ScottExpenses from './pages/ScottExpenses';
 import ScottFeatureRequests from './pages/ScottFeatureRequests';
+import ScottFinanceAdmin from './pages/ScottFinanceAdmin';
 import ScottFinancialDashboard from './pages/ScottFinancialDashboard';
 import ScottGigOffers from './pages/ScottGigOffers';
 import ScottGigPacks from './pages/ScottGigPacks';
@@ -200,7 +203,10 @@ import ScottGuestList from './pages/ScottGuestList';
 import ScottInvoices from './pages/ScottInvoices';
 import ScottLATrip from './pages/ScottLATrip';
 import ScottLabelContacts from './pages/ScottLabelContacts';
+import ScottLive from './pages/ScottLive';
+import ScottLogin from './pages/ScottLogin';
 import ScottManager from './pages/ScottManager';
+import ScottManagerHome from './pages/ScottManagerHome';
 import ScottMedia from './pages/ScottMedia';
 import ScottMerch from './pages/ScottMerch';
 import ScottOfflineMode from './pages/ScottOfflineMode';
@@ -208,7 +214,9 @@ import ScottPasteGigOffer from './pages/ScottPasteGigOffer';
 import ScottPitchMode from './pages/ScottPitchMode';
 import ScottProducers from './pages/ScottProducers';
 import ScottPublishing from './pages/ScottPublishing';
+import ScottSessions from './pages/ScottSessions';
 import ScottTeam from './pages/ScottTeam';
+import ScottToDo from './pages/ScottToDo';
 import ScottTravelMode from './pages/ScottTravelMode';
 import ScottVisas from './pages/ScottVisas';
 import ScottWhiteLabel from './pages/ScottWhiteLabel';
@@ -265,14 +273,7 @@ import YoungWarriors from './pages/YoungWarriors';
 import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
-import ScottLogin from './pages/ScottLogin';
-import ScottManagerHome from './pages/ScottManagerHome';
-import ScottArtistHome from './pages/ScottArtistHome';
-import ScottLive from './pages/ScottLive';
-import ScottSessions from './pages/ScottSessions';
-import ScottFinanceAdmin from './pages/ScottFinanceAdmin';
-import ScottToDo from './pages/ScottToDo';
-import ScottCalendarView from './pages/ScottCalendarView';
+import ScottBandVote from './pages/ScottBandVote';
 import __Layout from './Layout.jsx';
 
 
@@ -465,13 +466,16 @@ export const PAGES = {
     "ScottAccommodation": ScottAccommodation,
     "ScottAddArtist": ScottAddArtist,
     "ScottArtist": ScottArtist,
+    "ScottArtistHome": ScottArtistHome,
     "ScottBiggerVision": ScottBiggerVision,
     "ScottCalendar": ScottCalendar,
+    "ScottCalendarView": ScottCalendarView,
     "ScottComparison": ScottComparison,
     "ScottContracts": ScottContracts,
     "ScottDemos": ScottDemos,
     "ScottExpenses": ScottExpenses,
     "ScottFeatureRequests": ScottFeatureRequests,
+    "ScottFinanceAdmin": ScottFinanceAdmin,
     "ScottFinancialDashboard": ScottFinancialDashboard,
     "ScottGigOffers": ScottGigOffers,
     "ScottGigPacks": ScottGigPacks,
@@ -479,7 +483,10 @@ export const PAGES = {
     "ScottInvoices": ScottInvoices,
     "ScottLATrip": ScottLATrip,
     "ScottLabelContacts": ScottLabelContacts,
+    "ScottLive": ScottLive,
+    "ScottLogin": ScottLogin,
     "ScottManager": ScottManager,
+    "ScottManagerHome": ScottManagerHome,
     "ScottMedia": ScottMedia,
     "ScottMerch": ScottMerch,
     "ScottOfflineMode": ScottOfflineMode,
@@ -487,7 +494,9 @@ export const PAGES = {
     "ScottPitchMode": ScottPitchMode,
     "ScottProducers": ScottProducers,
     "ScottPublishing": ScottPublishing,
+    "ScottSessions": ScottSessions,
     "ScottTeam": ScottTeam,
+    "ScottToDo": ScottToDo,
     "ScottTravelMode": ScottTravelMode,
     "ScottVisas": ScottVisas,
     "ScottWhiteLabel": ScottWhiteLabel,
@@ -544,14 +553,7 @@ export const PAGES = {
     "ZeroEgoProtocol": ZeroEgoProtocol,
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
-    "ScottLogin": ScottLogin,
-    "ScottManagerHome": ScottManagerHome,
-    "ScottArtistHome": ScottArtistHome,
-    "ScottLive": ScottLive,
-    "ScottSessions": ScottSessions,
-    "ScottFinanceAdmin": ScottFinanceAdmin,
-    "ScottToDo": ScottToDo,
-    "ScottCalendarView": ScottCalendarView,
+    "ScottBandVote": ScottBandVote,
 }
 
 export const pagesConfig = {
