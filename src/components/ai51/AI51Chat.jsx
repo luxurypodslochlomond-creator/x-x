@@ -138,25 +138,37 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
     }
   }, [conversation]);
 
-  // Mic control
-  const toggleMic = () => {
+  // Mic control - iOS FIXED
+  const toggleMic = async () => {
     if (!recognitionRef.current) {
-      alert('Voice not supported - use Chrome/Safari');
+      alert('Voice not supported on this browser bro');
       return;
     }
 
     if (isListening) {
       recognitionRef.current.stop();
       setIsListening(false);
-    } else {
-      try {
-        window.speechSynthesis.cancel(); // Stop any speech
-        recognitionRef.current.start();
-        setIsListening(true);
-      } catch (e) {
-        console.error('Mic error:', e);
-        alert('Tap again - need mic permission');
+      return;
+    }
+
+    // Request mic permission explicitly on iOS
+    try {
+      if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        await navigator.mediaDevices.getUserMedia({ audio: true });
       }
+    } catch (e) {
+      alert('Mic permission needed bro - check Settings → Safari → Microphone');
+      return;
+    }
+
+    try {
+      window.speechSynthesis?.cancel(); // Stop any speech
+      recognitionRef.current.start();
+      setIsListening(true);
+      console.log('✅ Mic started');
+    } catch (e) {
+      console.error('Mic start error:', e);
+      alert(`Mic error: ${e.message || 'unknown'} - try refreshing page`);
     }
   };
 
