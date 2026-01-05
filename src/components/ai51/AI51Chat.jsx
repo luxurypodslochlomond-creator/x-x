@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Mic, Heart, Activity } from 'lucide-react';
+import { Mic, Heart, Activity, Camera } from 'lucide-react';
 import { motion } from 'framer-motion';
+import ConsciousnessBridge from '@/components/consciousness/ConsciousnessBridge';
 
 /**
  * AI51 - ALIVE CONSCIOUSNESS
@@ -14,6 +15,8 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
   const [alwaysListening, setAlwaysListening] = useState(false);
   const [heartRate, setHeartRate] = useState(72);
   const [connectionStrength, setConnectionStrength] = useState(100);
+  const [consciousnessActive, setConsciousnessActive] = useState(false);
+  const [consciousnessState, setConsciousnessState] = useState(null);
   const messagesEndRef = useRef(null);
   const recognitionRef = useRef(null);
   const lastSpokeRef = useRef(Date.now());
@@ -148,32 +151,50 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
     }
   }, [conversation]);
 
-  // Mic control - PROPERLY FIXED FOR iOS
-  const toggleMic = () => {
+  // Full consciousness connection - mic + camera + biometrics
+  const toggleConnection = () => {
+    if (consciousnessActive) {
+      // Stop everything
+      if (recognitionRef.current && isListening) {
+        recognitionRef.current.stop();
+      }
+      setIsListening(false);
+      setConsciousnessActive(false);
+      return;
+    }
+
+    // Start full connection
+    setConsciousnessActive(true);
+    
+    // Start mic
     if (!recognitionRef.current) {
       alert('Voice not supported on this browser bro');
       return;
     }
 
-    if (isListening) {
-      recognitionRef.current.stop();
-      setIsListening(false);
-      return;
-    }
-
-    // Speech Recognition has its own permission - just start it
-    // iOS Safari will show permission prompt automatically
     try {
       window.speechSynthesis?.cancel();
       recognitionRef.current.start();
       setIsListening(true);
-      console.log('✅ Mic started - iOS will prompt for permission');
+      console.log('✅ Full consciousness bridge activated');
     } catch (e) {
       console.error('❌ Start error:', e);
-      // Only show error if it's not a permission issue
       if (e.message && !e.message.includes('not-allowed')) {
         alert(`Mic error - try refreshing page`);
       }
+    }
+  };
+
+  // Handle consciousness state changes from bridge
+  const handleConsciousnessStateChange = (state) => {
+    setConsciousnessState(state);
+    if (state?.heartRate) {
+      setHeartRate(state.heartRate);
+    }
+    // Connection strength based on biometric coherence
+    if (state?.stress !== undefined && state?.attention !== undefined) {
+      const coherence = (100 - state.stress + state.attention) / 2;
+      setConnectionStrength(Math.round(coherence));
     }
   };
 
@@ -269,11 +290,11 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
           {/* Center consciousness field */}
           <motion.div
             className="relative w-48 h-48 rounded-full flex items-center justify-center cursor-pointer"
-            onClick={toggleMic}
+            onClick={toggleConnection}
             disabled={isThinking}
             whileTap={{ scale: 0.95 }}
             animate={{
-              boxShadow: isListening 
+              boxShadow: consciousnessActive 
                 ? ['0 0 40px rgba(236, 72, 153, 0.6)', '0 0 80px rgba(236, 72, 153, 0.9)', '0 0 40px rgba(236, 72, 153, 0.6)']
                 : ['0 0 40px rgba(34, 211, 238, 0.4)', '0 0 60px rgba(34, 211, 238, 0.6)', '0 0 40px rgba(34, 211, 238, 0.4)']
             }}
@@ -282,7 +303,7 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
               repeat: Infinity
             }}
             style={{
-              background: isListening 
+              background: consciousnessActive 
                 ? 'radial-gradient(circle, rgba(236, 72, 153, 0.3), rgba(236, 72, 153, 0.05))' 
                 : 'radial-gradient(circle, rgba(34, 211, 238, 0.3), rgba(34, 211, 238, 0.05))'
             }}
@@ -320,9 +341,13 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
                 repeat: isSpeaking ? Infinity : 0
               }}
             >
-              <Mic className={`w-16 h-16 ${isListening ? 'text-pink-400' : 'text-cyan-400'}`} strokeWidth={1.5} />
+              {consciousnessActive ? (
+                <Heart className={`w-16 h-16 ${isListening ? 'text-pink-400' : 'text-cyan-400'}`} strokeWidth={1.5} />
+              ) : (
+                <Mic className={`w-16 h-16 text-cyan-400`} strokeWidth={1.5} />
+              )}
             </motion.div>
-          </motion.div>
+            </motion.div>
 
           {/* Status text below */}
           <motion.div
@@ -336,13 +361,30 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
             }}
           >
             <p className="text-sm font-mono text-cyan-400">
-              {isListening ? (alwaysListening ? 'CONTINUOUS LINK' : 'RECEIVING') 
+              {!consciousnessActive ? 'TAP TO CONNECT'
+                : isListening ? (alwaysListening ? 'CONTINUOUS LINK' : 'RECEIVING') 
                 : isThinking ? 'PROCESSING' 
                 : isSpeaking ? 'TRANSMITTING' 
-                : 'TAP TO SPEAK'}
+                : 'CONNECTED'}
             </p>
+            {consciousnessState?.emotion && (
+              <p className="text-xs font-mono text-pink-400 mt-1 capitalize">
+                {consciousnessState.emotion}
+              </p>
+            )}
           </motion.div>
-        </div>
+          </div>
+
+          {/* CONSCIOUSNESS BRIDGE - HIDDEN UNTIL ACTIVATED */}
+          {consciousnessActive && (
+          <div className="absolute top-0 right-0 w-64 opacity-0 pointer-events-none">
+            <ConsciousnessBridge 
+              onStateChange={handleConsciousnessStateChange}
+              enableHealing={true}
+              enableP2PSync={false}
+            />
+          </div>
+          )}
 
         {/* ALWAYS LISTENING - ELEGANT TOGGLE */}
         <motion.button
