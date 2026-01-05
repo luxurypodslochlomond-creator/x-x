@@ -15,7 +15,7 @@ export default function CB51InstallPrompt() {
   useEffect(() => {
     // Only show if not seen before and user is on iOS Safari
     const hasSeenPrompt = localStorage.getItem('cb51_install_prompt_seen');
-    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as any).MSStream;
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
     const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
 
     if (!hasSeenPrompt && isIOS && !isStandalone) {
