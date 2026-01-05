@@ -31,22 +31,21 @@ export default function ScottGigWorkflow() {
     const parseEmailMutation = useMutation({
         mutationFn: async (email) => {
             const result = await base44.integrations.Core.InvokeLLM({
-                prompt: `Extract gig offer details from this email:
+                prompt: `Scott pasted this - extract ANY gig/session/event details:
 
 ${email}
 
-Extract:
-- Venue name
-- Date (YYYY-MM-DD format)
-- Guarantee (£ amount)
-- Artist/band name
-- Any other important details
+Extract whatever you can find:
+- Venue/studio name (or "TBC" if not clear)
+- Date (YYYY-MM-DD format, or approximate if not exact)
+- Fee/guarantee (£ amount, or 0 if not mentioned)
+- Artist/band name (or "TBC" if not clear)
+- Any other details
 
-If this isn't a gig offer, say "NOT_A_GIG"`,
+ALWAYS extract something - don't say it's not a gig. Scott needs this to work.`,
                 response_json_schema: {
                     type: "object",
                     properties: {
-                        is_gig: { type: "boolean" },
                         venue_name: { type: "string" },
                         offer_date: { type: "string" },
                         guarantee: { type: "number" },
@@ -58,11 +57,7 @@ If this isn't a gig offer, say "NOT_A_GIG"`,
             return result;
         },
         onSuccess: (data) => {
-            if (data.is_gig) {
-                setParsedGig(data);
-            } else {
-                alert('Not a gig offer - try pasting a different email');
-            }
+            setParsedGig(data);
         }
     });
 
