@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { Radio, Plus, Loader2 } from 'lucide-react';
+import { Radio, Plus, Loader2, Trash2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 
 /**
  * ADMIN HOME PAGE - SCOTT'S FLOOR DIAGRAM
@@ -17,10 +17,12 @@ import { useQuery } from '@tanstack/react-query';
 export default function ScottManager() {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
+    const queryClient = useQueryClient();
 
     useEffect(() => {
         base44.auth.me().then(setUser).catch(() => {
-            base44.auth.redirectToLogin();
+            // Allow public access - no redirect
+            setUser(null);
         }).finally(() => setLoading(false));
     }, []);
 
@@ -29,6 +31,19 @@ export default function ScottManager() {
         queryFn: () => base44.entities.ScottArtist.filter({}),
         enabled: !!user
     });
+
+    const deleteArtistMutation = useMutation({
+        mutationFn: (artistId) => base44.entities.ScottArtist.delete(artistId),
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ['scottArtists'] });
+        }
+    });
+
+    const handleDeleteArtist = (artist) => {
+        if (confirm(`Delete ${artist.name}? This cannot be undone.`)) {
+            deleteArtistMutation.mutate(artist.id);
+        }
+    };
 
     if (loading || isLoading) {
         return (
@@ -77,13 +92,13 @@ export default function ScottManager() {
                     </div>
                 ) : (
                     artists.map((artist, index) => (
-                        <Link key={artist.id} to={createPageUrl(`ScottArtist?id=${artist.id}`)}>
                             <motion.div 
+                                key={artist.id}
                                 whileTap={{ scale: 0.98 }}
                                 className="bg-gray-900 border-2 border-cyan-500 hover:border-cyan-400 rounded-lg p-5 transition-all"
                             >
-                                <div className="flex items-center justify-between">
-                                    <div>
+                                <Link to={createPageUrl(`ScottArtist?id=${artist.id}`)} className="flex items-center justify-between">
+                                    <div className="flex-1">
                                         <p className="text-white font-black text-lg font-mono">
                                             ARTIST {index + 1}: {artist.name}
                                         </p>
@@ -92,10 +107,21 @@ export default function ScottManager() {
                                         </p>
                                     </div>
                                     <div className="text-cyan-400 text-2xl">→</div>
-                                </div>
+                                </Link>
+                                {user?.role === 'admin' && (
+                                    <button
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            handleDeleteArtist(artist);
+                                        }}
+                                        className="mt-3 w-full bg-red-900/20 hover:bg-red-900/40 border border-red-500/50 text-red-400 font-bold px-3 py-2 rounded text-xs flex items-center justify-center gap-2 transition-all"
+                                    >
+                                        <Trash2 className="w-3 h-3" />
+                                        REMOVE ARTIST
+                                    </button>
+                                )}
                             </motion.div>
-                        </Link>
-                    ))
+                        ))
                 )}
             </div>
 

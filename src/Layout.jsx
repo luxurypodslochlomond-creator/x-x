@@ -44,7 +44,9 @@ const PUBLIC_PAGES = [
   'About', 'Whitepaper', 'ConsciousnessWhitepaper', 'ForMusicians', 'TruthTransmission',
   'ViralTransmission', 'Protocols', 'HowYouEarn', 'Portal', 'Welcome', 'TalkToAI51',
   'FrequencyChamber', 'Universal51', 'DecompressionChamber', 'ThePhysics', 'Terms', 'PrivacyPolicy',
-  'ScottManager', 'ScottArtist', 'ScottAddArtist', 'ScottCalendar'
+  'ScottManager', 'ScottArtist', 'ScottAddArtist', 'ScottCalendar', 'ScottArtistHome', 
+  'ScottLive', 'ScottSessions', 'ScottFinanceAdmin', 'ScottToDo', 'ScottCalendarView',
+  'ScottAbout', 'Prof51'
 ];
 
 // OFFLINE-OK PAGES
@@ -287,12 +289,13 @@ const LayoutInner = ({ children, currentPageName }) => {
     { title: "Privacy", url: createPageUrl("PrivacyPolicy"), icon: Eye },
   ];
 
-  // STUDENT TOOLS
+  // STUDENT & ARTIST TOOLS
   const scottNav = [
       { title: "Prof51", url: createPageUrl("Prof51"), icon: GraduationCap, highlight: true, description: "AI co-manager for students" },
+      { title: "CB51", url: createPageUrl("ScottManager"), icon: Radio, description: "Artist co-manager", highlight: true },
+      { title: "CB51 About", url: createPageUrl("ScottAbout"), icon: BookOpen, description: "What is CB51?" },
       ...(user?.role === 'admin' ? [
-        { title: "CB51", url: createPageUrl("ScottManager"), icon: Radio, description: "Artist co-manager" },
-        { title: "Dec 2024 vs Dec 2025", url: createPageUrl("ScottComparison"), icon: FileText, description: "What Scott asked for vs what's built", highlight: true },
+        { title: "Dec 2024 vs Dec 2025", url: createPageUrl("ScottComparison"), icon: FileText, description: "What Scott asked for vs what's built" },
       ] : [])
   ];
 
