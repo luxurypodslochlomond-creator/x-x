@@ -36,10 +36,10 @@ export default function ScottGigOffers() {
   });
 
   const approveMutation = useMutation({
-    mutationFn: ({ id, notes, deadline, urgency }) => {
+    mutationFn: async ({ id, notes, deadline, urgency, artistId, venue, date }) => {
       const deadlineDate = new Date();
       deadlineDate.setDate(deadlineDate.getDate() + parseInt(deadline));
-      return base44.entities.ScottGigOffer.update(id, { 
+      const updated = await base44.entities.ScottGigOffer.update(id, { 
         manager_approved: true,
         manager_notes: notes,
         status: 'sent_to_band',
@@ -47,12 +47,26 @@ export default function ScottGigOffers() {
         response_deadline: deadlineDate.toISOString(),
         urgency
       });
+      
+      // Notify band
+      try {
+        await base44.functions.invoke('notifyBand', {
+          offerId: id,
+          artistId,
+          venue,
+          date,
+          urgency
+        });
+      } catch (e) {
+        console.log('Push notification failed:', e);
+      }
+      
+      return updated;
     },
     onSuccess: () => {
       queryClient.invalidateQueries(['scottGigOffers']);
       setSelectedOffer(null);
       setManagerNotes('');
-      // TODO: Send notifications to band members
     },
   });
 
