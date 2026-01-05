@@ -202,8 +202,8 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
     const newState = !alwaysListening;
     setAlwaysListening(newState);
     
-    if (newState && !isListening) {
-      toggleMic();
+    if (newState && !consciousnessActive) {
+      toggleConnection();
     } else if (!newState && isListening) {
       recognitionRef.current?.stop();
       setIsListening(false);
