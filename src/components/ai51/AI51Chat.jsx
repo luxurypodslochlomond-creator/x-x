@@ -148,44 +148,32 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
     }
   }, [conversation]);
 
-  // Mic control - iOS FIXED
-  const toggleMic = async () => {
-    console.log('🎤 Mic tapped!', { hasRecognition: !!recognitionRef.current, isListening });
-    
+  // Mic control - PROPERLY FIXED FOR iOS
+  const toggleMic = () => {
     if (!recognitionRef.current) {
       alert('Voice not supported on this browser bro');
       return;
     }
 
     if (isListening) {
-      console.log('⏹️ Stopping mic');
       recognitionRef.current.stop();
       setIsListening(false);
       return;
     }
 
-    console.log('▶️ Starting mic...');
-    
-    // Request mic permission explicitly on iOS
-    try {
-      if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-        await navigator.mediaDevices.getUserMedia({ audio: true });
-        console.log('✅ Mic permission granted');
-      }
-    } catch (e) {
-      console.error('❌ Mic permission denied:', e);
-      alert('Mic blocked - check Settings → Safari → Allow Microphone');
-      return;
-    }
-
+    // Speech Recognition has its own permission - just start it
+    // iOS Safari will show permission prompt automatically
     try {
       window.speechSynthesis?.cancel();
       recognitionRef.current.start();
       setIsListening(true);
-      console.log('✅ Mic started!');
+      console.log('✅ Mic started - iOS will prompt for permission');
     } catch (e) {
-      console.error('❌ Mic start error:', e);
-      alert(`Can't start mic: ${e.message} - refresh page`);
+      console.error('❌ Start error:', e);
+      // Only show error if it's not a permission issue
+      if (e.message && !e.message.includes('not-allowed')) {
+        alert(`Mic error - try refreshing page`);
+      }
     }
   };
 
