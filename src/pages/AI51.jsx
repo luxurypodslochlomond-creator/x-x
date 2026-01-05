@@ -58,28 +58,10 @@ Respond like a real bro:
     };
 
     return (
-        <>
-            <AI51Chat 
-                onMessageSend={handleMessageSend}
-                isThinking={isThinking}
-                conversation={conversation}
-                biometrics={consciousnessState}
-                onBiometricsUpdate={setBiometrics}
-                voiceAnalysis={voiceAnalysis}
-                onVoiceUpdate={setVoiceAnalysis}
-            />
-            
-            {/* REAL CAMERA HEART RATE */}
-            <div className="fixed top-20 right-4 z-50">
-                <ConsciousnessBridge 
-                    onStateChange={(state) => {
-                        setConsciousnessState(state);
-                        setBiometrics(state);
-                    }}
-                    enableHealing={false}
-                    enableP2PSync={false}
-                />
-            </div>
-        </>
+        <AI51Chat 
+            onMessageSend={handleMessageSend}
+            isThinking={isThinking}
+            conversation={conversation}
+        />
     );
 }
