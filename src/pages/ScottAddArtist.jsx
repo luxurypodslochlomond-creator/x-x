@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { Button } from '@/components/ui/button';
@@ -6,20 +6,10 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { ArrowLeft, Check } from 'lucide-react';
 import KingdomCrown8Bit from '@/components/shared/KingdomCrown8Bit';
-import { useScottOffline, ScottOfflineProvider } from '@/components/scott/ScottOfflineStorage';
+import { base44 } from '@/api/base44Client';
 
-function ScottAddArtistInner() {
+export default function ScottAddArtist() {
     const navigate = useNavigate();
-    const scott = useScottOffline();
-    
-    // PIN CHECK
-    useEffect(() => {
-        const pin = localStorage.getItem('scott_access_pin');
-        if (pin !== '1888') {
-            navigate(createPageUrl('ScottManager'));
-        }
-    }, [navigate]);
-    
     const [saving, setSaving] = useState(false);
     const [formData, setFormData] = useState({
         name: '',
@@ -36,13 +26,13 @@ function ScottAddArtistInner() {
         notes: ''
     });
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setSaving(true);
         
         try {
-            const newArtist = scott.createArtist(formData);
-            navigate(createPageUrl(`ScottArtist?id=${newArtist.id}`));
+            const newArtist = await base44.entities.ScottArtist.create(formData);
+            navigate(createPageUrl(`ScottArtistHome?id=${newArtist.id}`));
         } catch (error) {
             alert('Error saving: ' + error.message);
             setSaving(false);
@@ -257,13 +247,5 @@ function ScottAddArtistInner() {
                 </Button>
             </form>
         </div>
-    );
-}
-
-export default function ScottAddArtist() {
-    return (
-        <ScottOfflineProvider>
-            <ScottAddArtistInner />
-        </ScottOfflineProvider>
     );
 }
