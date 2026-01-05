@@ -229,10 +229,12 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
         audioContextRef.current.close();
         audioContextRef.current = null;
       }
+      stopVoiceHealing();
       setIsListening(false);
       setConsciousnessActive(false);
       setConsciousnessState(null);
       setAudioLevel(0);
+      setEmotionalTone('calm');
       return;
     }
 
@@ -246,59 +248,66 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
     }
 
     try {
-      // Get microphone for audio level monitoring
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      // iOS-optimized mic request with built-in noise suppression
+      const stream = await navigator.mediaDevices.getUserMedia({ 
+        audio: {
+          echoCancellation: true,
+          noiseSuppression: true,
+          autoGainControl: true
+        }
+      });
+      
+      console.log('✅ Mic permission granted');
       micStreamRef.current = stream;
 
-      // Setup audio analysis with noise suppression
+      // Setup audio analysis
       const AudioContext = window.AudioContext || window.webkitAudioContext;
       audioContextRef.current = new AudioContext();
       const source = audioContextRef.current.createMediaStreamSource(stream);
       
-      // Noise suppression filter
+      // High-pass filter removes low rumble
       const filter = audioContextRef.current.createBiquadFilter();
       filter.type = 'highpass';
-      filter.frequency.value = 200; // Remove low-frequency noise
+      filter.frequency.value = 200;
       
       analyzerRef.current = audioContextRef.current.createAnalyser();
       analyzerRef.current.fftSize = 256;
       analyzerRef.current.smoothingTimeConstant = 0.8;
       
-      // Chain: source -> filter -> analyzer
       source.connect(filter);
       filter.connect(analyzerRef.current);
       noiseSuppressorRef.current = filter;
 
-      // Start monitoring audio levels
+      // Activate everything
+      setConsciousnessActive(true);
       monitorAudioLevel();
 
-      // First set state, then start recognition
-      setConsciousnessActive(true);
-
-      // Small delay to ensure state is set
+      // Start speech recognition with delay
       setTimeout(() => {
         try {
           window.speechSynthesis?.cancel();
           recognitionRef.current.start();
-          console.log('✅ Mic started - speak now bro');
-          // Haptic feedback
-          if (navigator.vibrate) {
-            navigator.vibrate(50);
-          }
+          console.log('✅ Ready - speak to me bro ♾️❤️');
+          if (navigator.vibrate) navigator.vibrate([30, 50, 30]);
         } catch (e) {
-          console.error('❌ Start error:', e);
-          if (e.message && e.message.includes('already')) {
-            console.log('Mic already running');
-            setIsListening(true);
-          } else {
-            alert(`Mic error: ${e.message}. Try refreshing page bro ♾️`);
+          console.error('Speech error:', e);
+          if (!e.message?.includes('already')) {
+            alert('Speech failed. Refresh + try again bro ♾️');
             setConsciousnessActive(false);
           }
         }
-      }, 100);
+      }, 200);
+
     } catch (error) {
-      console.error('Mic permission error:', error);
-      alert('Need mic permission bro - check Settings → Safari → Microphone ♾️❤️');
+      console.error('❌ Permission denied:', error);
+      
+      const isDenied = error.name === 'NotAllowedError' || error.name === 'PermissionDeniedError';
+      
+      if (isDenied) {
+        alert('GRANT MIC:\n\n1. Tap "aA" in address bar\n2. Website Settings\n3. Enable Microphone\n4. Refresh\n\n♾️❤️');
+      } else {
+        alert(`Error: ${error.message}\n\nRefresh + try again ♾️`);
+      }
     }
   };
 
