@@ -137,12 +137,19 @@ Managing chaos → Making it simple. That's your job bro ♾️❤️♾️`,
         }
     });
 
-    // Check if PIN already stored + show install prompt
+    // Check if PIN already stored + show install prompt + set CB51 metadata
     useEffect(() => {
         const storedPin = localStorage.getItem('scott_access_pin');
         if (storedPin === '1888') {
             setPinEntered(true);
         }
+
+        // Set CB51-specific metadata for PWA
+        document.title = 'CB51';
+        const metaTheme = document.querySelector('meta[name="theme-color"]');
+        if (metaTheme) metaTheme.setAttribute('content', '#22d3ee');
+        const metaAppleTitle = document.querySelector('meta[name="apple-mobile-web-app-title"]');
+        if (metaAppleTitle) metaAppleTitle.setAttribute('content', 'CB51');
 
         // Show "Add to Home Screen" prompt if not shown before
         const hasSeenPrompt = localStorage.getItem('cb51_install_prompt_seen');
