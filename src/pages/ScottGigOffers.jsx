@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Mail, MapPin, DollarSign, Users, Calendar, Check, X, MessageSquare, ArrowLeft, Clock, AlertCircle, Send, Edit } from 'lucide-react';
+import { Mail, MapPin, DollarSign, Users, Calendar, Check, X, MessageSquare, ArrowLeft, Clock, AlertCircle, Send, Edit, Plus } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { generateGigResponse } from '@/functions/generateGigResponse';
 import ScottPushNotifications from '@/components/scott/ScottPushNotifications';
@@ -130,18 +130,27 @@ export default function ScottGigOffers() {
   return (
     <div className="min-h-screen bg-black p-6">
       <div className="max-w-6xl mx-auto">
-        <div className="flex items-center gap-4 mb-8">
-          <Button
-            variant="ghost"
-            onClick={() => navigate(createPageUrl('ScottManagerHome'))}
-            className="text-gray-400 hover:text-white"
-          >
-            <ArrowLeft className="w-5 h-5" />
-          </Button>
-          <div>
-            <h1 className="text-4xl font-black text-white">GIG OFFERS</h1>
-            <p className="text-gray-400">AI-scanned from your emails</p>
+        <div className="flex justify-between items-center mb-8">
+          <div className="flex items-center gap-4">
+            <Button
+              variant="ghost"
+              onClick={() => navigate(createPageUrl('ScottManagerHome'))}
+              className="text-gray-400 hover:text-white"
+            >
+              <ArrowLeft className="w-5 h-5" />
+            </Button>
+            <div>
+              <h1 className="text-4xl font-black text-white">GIG OFFERS</h1>
+              <p className="text-gray-400">AI-scanned from your emails</p>
+            </div>
           </div>
+          <Button
+            onClick={() => navigate(createPageUrl('ScottPasteGigOffer'))}
+            className="bg-cyan-600 hover:bg-cyan-700 gap-2"
+          >
+            <Plus className="w-5 h-5" />
+            Add Gig Offer
+          </Button>
         </div>
 
         {/* Pending Manager Review */}
