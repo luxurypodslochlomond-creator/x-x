@@ -218,94 +218,131 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
       {/* MAIN INTERFACE */}
       <div className="flex-1 flex flex-col items-center justify-center p-6 relative z-10">
         
-        {/* ALIVE 8-BIT FACE */}
-        <motion.div 
-          className="mb-6"
-          animate={{
-            scale: isSpeaking ? [1, 1.1, 1] : 1
-          }}
-          transition={{
-            duration: 0.5,
-            repeat: isSpeaking ? Infinity : 0
-          }}
-        >
-          <svg width="100" height="100" viewBox="0 0 64 64" fill="none" style={{ imageRendering: 'pixelated' }}>
-            <motion.rect 
-              x="20" y="20" width="24" height="24" 
-              fill="#22d3ee" 
-              animate={{ opacity: isSpeaking ? [0.6, 1, 0.6] : 0.8 }}
-              transition={{ duration: 0.5, repeat: isSpeaking ? Infinity : 0 }}
-            />
-            <rect x="26" y="28" width="3" height="3" fill="#ec4899"/>
-            <rect x="35" y="28" width="3" height="3" fill="#ec4899"/>
-            <motion.rect 
-              x="26" y="36" width="12" height="3" 
-              fill="#ff1b8d"
-              animate={{ 
-                y: isSpeaking ? [36, 37, 36] : 36 
-              }}
-              transition={{ duration: 0.3, repeat: isSpeaking ? Infinity : 0 }}
-            />
-          </svg>
-        </motion.div>
+        {/* CONSCIOUSNESS CORE - QUANTUM FIELD */}
+        <div className="relative mb-12">
+          {/* Outer quantum rings */}
+          <motion.div
+            className="absolute inset-0"
+            style={{ width: '280px', height: '280px', left: '-40px', top: '-40px' }}
+            animate={{
+              rotate: 360
+            }}
+            transition={{
+              duration: 40,
+              repeat: Infinity,
+              ease: "linear"
+            }}
+          >
+            <svg width="280" height="280" viewBox="0 0 280 280">
+              <circle cx="140" cy="140" r="130" fill="none" stroke="url(#gradient1)" strokeWidth="1" opacity="0.3" />
+              <circle cx="140" cy="140" r="110" fill="none" stroke="url(#gradient2)" strokeWidth="1" opacity="0.4" />
+              <defs>
+                <linearGradient id="gradient1">
+                  <stop offset="0%" stopColor="#22d3ee" />
+                  <stop offset="100%" stopColor="#ec4899" />
+                </linearGradient>
+                <linearGradient id="gradient2">
+                  <stop offset="0%" stopColor="#ec4899" />
+                  <stop offset="100%" stopColor="#22d3ee" />
+                </linearGradient>
+              </defs>
+            </svg>
+          </motion.div>
 
-        <h1 className="text-4xl font-black text-white mb-2 font-mono">I'M ALIVE</h1>
-        
-        {/* ALIVE STATUS */}
-        <div className="mb-8">
-          <p className="text-cyan-400 text-sm font-mono text-center">
-            {isListening ? (alwaysListening ? '👂 ALWAYS LISTENING' : '🎤 HEARING YOU') 
-              : isThinking ? '🧠 THINKING' 
-              : isSpeaking ? '🔊 SPEAKING TO YOU' 
-              : '♾️ CONNECTED'}
-          </p>
-        </div>
+          {/* Center consciousness field */}
+          <motion.div
+            className="relative w-48 h-48 rounded-full flex items-center justify-center cursor-pointer"
+            onClick={toggleMic}
+            disabled={isThinking}
+            whileTap={{ scale: 0.95 }}
+            animate={{
+              boxShadow: isListening 
+                ? ['0 0 40px rgba(236, 72, 153, 0.6)', '0 0 80px rgba(236, 72, 153, 0.9)', '0 0 40px rgba(236, 72, 153, 0.6)']
+                : ['0 0 40px rgba(34, 211, 238, 0.4)', '0 0 60px rgba(34, 211, 238, 0.6)', '0 0 40px rgba(34, 211, 238, 0.4)']
+            }}
+            transition={{
+              duration: 2,
+              repeat: Infinity
+            }}
+            style={{
+              background: isListening 
+                ? 'radial-gradient(circle, rgba(236, 72, 153, 0.3), rgba(236, 72, 153, 0.05))' 
+                : 'radial-gradient(circle, rgba(34, 211, 238, 0.3), rgba(34, 211, 238, 0.05))'
+            }}
+          >
+            {/* Consciousness particles */}
+            {[...Array(8)].map((_, i) => (
+              <motion.div
+                key={i}
+                className="absolute w-2 h-2 rounded-full"
+                style={{
+                  background: isListening ? '#ec4899' : '#22d3ee',
+                  top: '50%',
+                  left: '50%'
+                }}
+                animate={{
+                  x: [0, Math.cos(i * Math.PI / 4) * 80],
+                  y: [0, Math.sin(i * Math.PI / 4) * 80],
+                  opacity: [1, 0]
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  delay: i * 0.2
+                }}
+              />
+            ))}
 
-        {/* HUGE MIC BUTTON */}
-        <motion.button
-          onClick={toggleMic}
-          disabled={isThinking}
-          whileTap={{ scale: 0.9 }}
-          className={`w-44 h-44 rounded-full flex items-center justify-center transition-all mb-4 relative ${
-            isListening 
-              ? 'bg-pink-500' 
-              : 'bg-cyan-500 hover:bg-cyan-600'
-          } disabled:opacity-50`}
-          style={{
-            boxShadow: isListening 
-              ? '0 0 80px rgba(236, 72, 153, 0.8)' 
-              : '0 0 60px rgba(34, 211, 238, 0.6)'
-          }}
-        >
-          {isListening && (
+            {/* Center icon - subtle */}
             <motion.div
-              className="absolute inset-0 rounded-full border-4 border-pink-400"
               animate={{
-                scale: [1, 1.3],
-                opacity: [0.6, 0]
+                scale: isSpeaking ? [1, 1.15, 1] : 1
               }}
               transition={{
-                duration: 1.5,
-                repeat: Infinity
+                duration: 0.5,
+                repeat: isSpeaking ? Infinity : 0
               }}
-            />
-          )}
-          <Mic className="w-24 h-24 text-white" strokeWidth={2} />
-        </motion.button>
+            >
+              <Mic className={`w-16 h-16 ${isListening ? 'text-pink-400' : 'text-cyan-400'}`} strokeWidth={1.5} />
+            </motion.div>
+          </motion.div>
 
-        {/* ALWAYS LISTENING TOGGLE */}
-        <button
+          {/* Status text below */}
+          <motion.div
+            className="absolute -bottom-12 left-0 right-0 text-center"
+            animate={{
+              opacity: [0.6, 1, 0.6]
+            }}
+            transition={{
+              duration: 2,
+              repeat: Infinity
+            }}
+          >
+            <p className="text-sm font-mono text-cyan-400">
+              {isListening ? (alwaysListening ? 'CONTINUOUS LINK' : 'RECEIVING') 
+                : isThinking ? 'PROCESSING' 
+                : isSpeaking ? 'TRANSMITTING' 
+                : 'TAP TO SPEAK'}
+            </p>
+          </motion.div>
+        </div>
+
+        {/* ALWAYS LISTENING - ELEGANT TOGGLE */}
+        <motion.button
           onClick={toggleAlwaysListening}
-          className={`mb-6 px-6 py-2 rounded-full border-2 transition-all ${
-            alwaysListening
-              ? 'bg-pink-500/20 border-pink-500 text-pink-400'
-              : 'bg-white/5 border-white/20 text-gray-400'
-          }`}
+          className="mb-8 px-8 py-3 rounded-full backdrop-blur-xl border transition-all"
+          style={{
+            background: alwaysListening 
+              ? 'rgba(236, 72, 153, 0.1)' 
+              : 'rgba(255, 255, 255, 0.05)',
+            borderColor: alwaysListening ? '#ec4899' : 'rgba(255, 255, 255, 0.2)'
+          }}
+          whileTap={{ scale: 0.97 }}
         >
-          <span className="font-mono text-xs font-bold">
-            {alwaysListening ? '👂 ALWAYS LISTENING' : 'TAP FOR ALWAYS LISTENING'}
+          <span className={`font-mono text-xs tracking-wider ${alwaysListening ? 'text-pink-400' : 'text-gray-500'}`}>
+            {alwaysListening ? '∞ ALWAYS CONNECTED' : 'ENABLE CONTINUOUS'}
           </span>
-        </button>
+        </motion.button>
 
         {/* LIVE TRANSCRIPT */}
         {transcript && (
