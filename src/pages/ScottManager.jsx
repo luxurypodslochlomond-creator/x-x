@@ -151,11 +151,7 @@ Managing chaos → Making it simple. That's your job bro ♾️❤️♾️`,
         const metaAppleTitle = document.querySelector('meta[name="apple-mobile-web-app-title"]');
         if (metaAppleTitle) metaAppleTitle.setAttribute('content', 'CB51');
 
-        // Show "Add to Home Screen" prompt if not shown before
-        const hasSeenPrompt = localStorage.getItem('cb51_install_prompt_seen');
-        if (!hasSeenPrompt && storedPin === '1888') {
-            setTimeout(() => setShowInstallPrompt(true), 2000);
-        }
+
         
         // Init voice
         if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
