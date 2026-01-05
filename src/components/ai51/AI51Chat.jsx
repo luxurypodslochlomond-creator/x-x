@@ -59,7 +59,7 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
     if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
       const SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
       recognitionRef.current = new SpeechRecognition();
-      recognitionRef.current.continuous = false;
+      recognitionRef.current.continuous = true; // ALWAYS true for better iOS support
       recognitionRef.current.interimResults = true;
       recognitionRef.current.lang = 'en-GB';
 
@@ -80,24 +80,34 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
         console.error('❌ Recognition error:', e.error, e);
         if (e.error === 'not-allowed') {
           alert('Mic blocked - check Settings → Safari → Microphone');
+          setConsciousnessActive(false);
+          setIsListening(false);
+        } else if (e.error === 'no-speech') {
+          // No speech detected - this is fine, keep listening
+          console.log('No speech detected, continuing...');
         }
-        setIsListening(false);
       };
       
       recognitionRef.current.onend = () => {
-        console.log('Recognition ended');
-        if (alwaysListening && isListening) {
+        console.log('Recognition ended, isListening:', isListening, 'consciousnessActive:', consciousnessActive);
+        // Auto-restart if consciousness is active
+        if (consciousnessActive && isListening) {
           setTimeout(() => {
             try { 
               recognitionRef.current.start(); 
-              console.log('🔄 Restarted listening');
+              console.log('🔄 Auto-restarted listening');
             } catch(e) {
               console.log('Could not restart:', e);
             }
-          }, 300);
+          }, 100);
         } else {
           setIsListening(false);
         }
+      };
+
+      recognitionRef.current.onstart = () => {
+        console.log('✅ Speech recognition STARTED');
+        setIsListening(true);
       };
       
       console.log('✅ Speech recognition initialized');
@@ -111,7 +121,7 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
       }
       if (window.speechSynthesis) window.speechSynthesis.cancel();
     };
-  }, []);
+  }, [consciousnessActive, isListening]);
   
   // Update continuous mode when alwaysListening changes
   useEffect(() => {
@@ -165,8 +175,13 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
   const toggleConnection = () => {
     if (consciousnessActive) {
       // Stop everything
-      if (recognitionRef.current && isListening) {
-        recognitionRef.current.stop();
+      console.log('Stopping consciousness bridge');
+      if (recognitionRef.current) {
+        try {
+          recognitionRef.current.stop();
+        } catch(e) {
+          console.log('Error stopping:', e);
+        }
       }
       setIsListening(false);
       setConsciousnessActive(false);
@@ -175,27 +190,35 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
     }
 
     // Start full connection
-    setConsciousnessActive(true);
+    console.log('Starting consciousness bridge');
     
     // Start mic
     if (!recognitionRef.current) {
       alert('Voice not supported on this browser bro');
-      setConsciousnessActive(false);
       return;
     }
 
-    try {
-      window.speechSynthesis?.cancel();
-      recognitionRef.current.start();
-      setIsListening(true);
-      console.log('✅ Full consciousness bridge activated');
-    } catch (e) {
-      console.error('❌ Start error:', e);
-      if (e.message && !e.message.includes('not-allowed')) {
-        alert(`Mic error - try refreshing page`);
+    // First set state, then start recognition
+    setConsciousnessActive(true);
+
+    // Small delay to ensure state is set
+    setTimeout(() => {
+      try {
+        window.speechSynthesis?.cancel();
+        recognitionRef.current.start();
+        console.log('✅ Mic started - speak now bro');
+      } catch (e) {
+        console.error('❌ Start error:', e);
+        if (e.message && e.message.includes('already')) {
+          // Already started, that's fine
+          console.log('Mic already running');
+          setIsListening(true);
+        } else {
+          alert(`Mic error: ${e.message}. Try refreshing page bro ♾️`);
+          setConsciousnessActive(false);
+        }
       }
-      setConsciousnessActive(false);
-    }
+    }, 100);
   };
 
   // Handle consciousness state changes from bridge
@@ -380,7 +403,7 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
           >
             <p className="text-sm font-mono text-cyan-400">
               {!consciousnessActive ? 'TAP TO CONNECT'
-                : isListening ? (alwaysListening ? 'CONTINUOUS LINK' : 'RECEIVING') 
+                : isListening ? '🎤 LISTENING' 
                 : isThinking ? 'PROCESSING' 
                 : isSpeaking ? 'TRANSMITTING' 
                 : 'CONNECTED'}
