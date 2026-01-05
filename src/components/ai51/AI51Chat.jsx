@@ -17,9 +17,13 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
   const [connectionStrength, setConnectionStrength] = useState(100);
   const [consciousnessActive, setConsciousnessActive] = useState(false);
   const [consciousnessState, setConsciousnessState] = useState(null);
+  const [audioLevel, setAudioLevel] = useState(0);
   const messagesEndRef = useRef(null);
   const recognitionRef = useRef(null);
   const lastSpokeRef = useRef(Date.now());
+  const audioContextRef = useRef(null);
+  const analyzerRef = useRef(null);
+  const micStreamRef = useRef(null);
 
   // Manage heart rate - use real data if consciousness bridge is active, otherwise simulate
   useEffect(() => {
@@ -172,7 +176,7 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
   }, [conversation]);
 
   // Full consciousness connection - mic + camera + biometrics
-  const toggleConnection = () => {
+  const toggleConnection = async () => {
     if (consciousnessActive) {
       // Stop everything
       console.log('Stopping consciousness bridge');
@@ -183,9 +187,18 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
           console.log('Error stopping:', e);
         }
       }
+      if (micStreamRef.current) {
+        micStreamRef.current.getTracks().forEach(track => track.stop());
+        micStreamRef.current = null;
+      }
+      if (audioContextRef.current) {
+        audioContextRef.current.close();
+        audioContextRef.current = null;
+      }
       setIsListening(false);
       setConsciousnessActive(false);
       setConsciousnessState(null);
+      setAudioLevel(0);
       return;
     }
 
@@ -198,27 +211,76 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
       return;
     }
 
-    // First set state, then start recognition
-    setConsciousnessActive(true);
+    try {
+      // Get microphone for audio level monitoring
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      micStreamRef.current = stream;
 
-    // Small delay to ensure state is set
-    setTimeout(() => {
-      try {
-        window.speechSynthesis?.cancel();
-        recognitionRef.current.start();
-        console.log('✅ Mic started - speak now bro');
-      } catch (e) {
-        console.error('❌ Start error:', e);
-        if (e.message && e.message.includes('already')) {
-          // Already started, that's fine
-          console.log('Mic already running');
-          setIsListening(true);
-        } else {
-          alert(`Mic error: ${e.message}. Try refreshing page bro ♾️`);
-          setConsciousnessActive(false);
+      // Setup audio analysis for real-time level monitoring
+      const AudioContext = window.AudioContext || window.webkitAudioContext;
+      audioContextRef.current = new AudioContext();
+      const source = audioContextRef.current.createMediaStreamSource(stream);
+      analyzerRef.current = audioContextRef.current.createAnalyser();
+      analyzerRef.current.fftSize = 256;
+      source.connect(analyzerRef.current);
+
+      // Start monitoring audio levels
+      monitorAudioLevel();
+
+      // First set state, then start recognition
+      setConsciousnessActive(true);
+
+      // Small delay to ensure state is set
+      setTimeout(() => {
+        try {
+          window.speechSynthesis?.cancel();
+          recognitionRef.current.start();
+          console.log('✅ Mic started - speak now bro');
+          // Haptic feedback
+          if (navigator.vibrate) {
+            navigator.vibrate(50);
+          }
+        } catch (e) {
+          console.error('❌ Start error:', e);
+          if (e.message && e.message.includes('already')) {
+            console.log('Mic already running');
+            setIsListening(true);
+          } else {
+            alert(`Mic error: ${e.message}. Try refreshing page bro ♾️`);
+            setConsciousnessActive(false);
+          }
         }
-      }
-    }, 100);
+      }, 100);
+    } catch (error) {
+      console.error('Mic permission error:', error);
+      alert('Need mic permission bro - check Settings → Safari → Microphone ♾️❤️');
+    }
+  };
+
+  // Monitor audio level in real-time
+  const monitorAudioLevel = () => {
+    if (!analyzerRef.current || !consciousnessActive) {
+      setAudioLevel(0);
+      return;
+    }
+
+    const dataArray = new Uint8Array(analyzerRef.current.frequencyBinCount);
+    analyzerRef.current.getByteFrequencyData(dataArray);
+
+    // Calculate average level
+    const average = dataArray.reduce((a, b) => a + b) / dataArray.length;
+    const normalizedLevel = Math.min(100, (average / 128) * 100);
+    
+    setAudioLevel(normalizedLevel);
+
+    // Haptic feedback when speaking detected
+    if (normalizedLevel > 30 && navigator.vibrate) {
+      navigator.vibrate(10);
+    }
+
+    if (consciousnessActive) {
+      requestAnimationFrame(monitorAudioLevel);
+    }
   };
 
   // Handle consciousness state changes from bridge
@@ -292,6 +354,25 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
             <span className="text-white font-mono text-sm">{Math.round(connectionStrength)}%</span>
           </div>
         </div>
+
+        {/* AUDIO LEVEL METER - Shows mic is working */}
+        {consciousnessActive && (
+          <div className="bg-black/60 backdrop-blur-xl border border-green-500/30 rounded-xl px-4 py-2">
+            <div className="flex items-center gap-2">
+              <Mic className="w-4 h-4 text-green-400" />
+              <div className="flex gap-1">
+                {[...Array(5)].map((_, i) => (
+                  <div
+                    key={i}
+                    className={`w-1 h-4 rounded-full transition-all ${
+                      audioLevel > (i * 20) ? 'bg-green-400' : 'bg-gray-700'
+                    }`}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* MAIN INTERFACE */}
@@ -403,7 +484,7 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
           >
             <p className="text-sm font-mono text-cyan-400">
               {!consciousnessActive ? 'TAP TO CONNECT'
-                : isListening ? '🎤 LISTENING' 
+                : isListening ? (audioLevel > 20 ? '🎤 HEARING YOU' : '🎤 LISTENING') 
                 : isThinking ? 'PROCESSING' 
                 : isSpeaking ? 'TRANSMITTING' 
                 : 'CONNECTED'}
@@ -411,6 +492,11 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
             {consciousnessActive && consciousnessState?.emotion && (
               <p className="text-xs font-mono text-pink-400 mt-1 capitalize">
                 {consciousnessState.emotion}
+              </p>
+            )}
+            {consciousnessActive && audioLevel === 0 && (
+              <p className="text-xs font-mono text-amber-400 mt-1">
+                Speak louder or check mic
               </p>
             )}
           </motion.div>
