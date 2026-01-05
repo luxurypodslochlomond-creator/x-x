@@ -43,11 +43,12 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
 
   // Setup voice recognition ONCE
   useEffect(() => {
-    if ('webkitSpeechRecognition' in window) {
-      const SpeechRecognition = window.webkitSpeechRecognition;
+    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+      const SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
       recognitionRef.current = new SpeechRecognition();
-      recognitionRef.current.continuous = false; // Start false
+      recognitionRef.current.continuous = false;
       recognitionRef.current.interimResults = true;
+      recognitionRef.current.lang = 'en-GB';
 
       recognitionRef.current.onresult = (event) => {
         const current = event.resultIndex;
@@ -55,6 +56,7 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
         setTranscript(text);
 
         if (event.results[current].isFinal) {
+          console.log('✅ Final transcript:', text);
           lastSpokeRef.current = Date.now();
           onMessageSend(text);
           setTranscript('');
@@ -62,16 +64,20 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
       };
 
       recognitionRef.current.onerror = (e) => {
-        console.log('Recognition error:', e);
+        console.error('❌ Recognition error:', e.error, e);
+        if (e.error === 'not-allowed') {
+          alert('Mic blocked - check Settings → Safari → Microphone');
+        }
         setIsListening(false);
       };
       
       recognitionRef.current.onend = () => {
+        console.log('Recognition ended');
         if (alwaysListening && isListening) {
           setTimeout(() => {
             try { 
               recognitionRef.current.start(); 
-              console.log('Restarted listening');
+              console.log('🔄 Restarted listening');
             } catch(e) {
               console.log('Could not restart:', e);
             }
@@ -80,6 +86,10 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
           setIsListening(false);
         }
       };
+      
+      console.log('✅ Speech recognition initialized');
+    } else {
+      console.error('❌ Speech recognition not supported');
     }
 
     return () => {
@@ -88,7 +98,7 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
       }
       if (window.speechSynthesis) window.speechSynthesis.cancel();
     };
-  }, []); // Only once
+  }, []);
   
   // Update continuous mode when alwaysListening changes
   useEffect(() => {
