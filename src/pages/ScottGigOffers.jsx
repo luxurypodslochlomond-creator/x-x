@@ -231,7 +231,10 @@ export default function ScottGigOffers() {
                                   id: offer.id, 
                                   notes: managerNotes,
                                   deadline: deadlineDays,
-                                  urgency
+                                  urgency,
+                                  artistId: offer.artist_id,
+                                  venue: offer.venue,
+                                  date: offer.date
                                 });
                               }}
                               className="flex-1 bg-green-600 hover:bg-green-700 gap-2"

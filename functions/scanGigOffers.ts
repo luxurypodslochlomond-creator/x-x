@@ -98,6 +98,17 @@ Email text: ${emailText}`;
       status: 'pending_manager_review'
     });
     
+    // Notify manager
+    try {
+      await base44.functions.invoke('notifyManager', {
+        offerId: offer.id,
+        venue: offer.venue,
+        date: offer.date
+      });
+    } catch (e) {
+      console.log('Push notification failed:', e);
+    }
+    
     return Response.json({ 
       success: true,
       offer

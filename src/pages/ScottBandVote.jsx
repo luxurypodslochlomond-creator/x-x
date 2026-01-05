@@ -46,14 +46,35 @@ export default function ScottBandVote() {
         responded_at: new Date().toISOString()
       });
 
-      // Check if all responses in
-      // TODO: Get actual band size from ScottTeamMember
-      const allIn = responses.length >= 3; // Temporary
+      // Get band size
+      const teamMembers = await base44.entities.ScottTeamMember.filter({
+        artist_id: offer.artist_id,
+        role: 'band_member',
+        status: 'active'
+      });
+      
+      const allIn = responses.length >= teamMembers.length;
 
-      return base44.entities.ScottGigOffer.update(offerId, {
+      const updated = await base44.entities.ScottGigOffer.update(offerId, {
         band_responses: responses,
         all_responses_in: allIn
       });
+      
+      // If all votes in, notify manager
+      if (allIn) {
+        try {
+          const allYes = responses.every(r => r.response === 'yes');
+          await base44.functions.invoke('notifyManagerAllVotesIn', {
+            offerId,
+            venue: offer.venue,
+            allYes
+          });
+        } catch (e) {
+          console.log('Push notification failed:', e);
+        }
+      }
+      
+      return updated;
     },
     onSuccess: () => {
       queryClient.invalidateQueries(['scottGigOffer']);
