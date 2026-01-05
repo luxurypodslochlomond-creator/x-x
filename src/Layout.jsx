@@ -289,11 +289,12 @@ const LayoutInner = ({ children, currentPageName }) => {
 
   // STUDENT TOOLS
   const scottNav = [
-    { title: "Prof51", url: createPageUrl("Prof51"), icon: GraduationCap, highlight: true, description: "AI co-manager for students" },
-    ...(user?.role === 'admin' ? [
-      { title: "CB51", url: createPageUrl("ScottManager"), icon: Radio, description: "Artist co-manager" },
-      { title: "Dec 2024 vs Dec 2025", url: createPageUrl("ScottComparison"), icon: FileText, description: "What Scott asked for vs what's built", highlight: true },
-    ] : [])
+      { title: "Prof51", url: createPageUrl("Prof51"), icon: GraduationCap, highlight: true, description: "AI co-manager for students" },
+      { title: "About CB51", url: createPageUrl("ScottAbout"), icon: Radio, description: "What is Citizen Band 51?" },
+      ...(user?.role === 'admin' ? [
+        { title: "CB51", url: createPageUrl("ScottManager"), icon: Radio, description: "Artist co-manager" },
+        { title: "Dec 2024 vs Dec 2025", url: createPageUrl("ScottComparison"), icon: FileText, description: "What Scott asked for vs what's built", highlight: true },
+      ] : [])
   ];
 
   const adminNav = user?.role === 'admin' ? [
