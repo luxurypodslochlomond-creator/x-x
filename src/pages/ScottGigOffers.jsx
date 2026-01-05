@@ -11,6 +11,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Mail, MapPin, DollarSign, Users, Calendar, Check, X, MessageSquare, ArrowLeft, Clock, AlertCircle, Send, Edit } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { generateGigResponse } from '@/functions/generateGigResponse';
+import ScottPushNotifications from '@/components/scott/ScottPushNotifications';
 
 /**
  * SCOTT GIG OFFERS
@@ -386,6 +387,8 @@ export default function ScottGigOffers() {
           </div>
         )}
       </div>
+
+      <ScottPushNotifications />
     </div>
   );
 }

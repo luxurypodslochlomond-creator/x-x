@@ -7,6 +7,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { MapPin, DollarSign, Calendar, Check, X, Clock, AlertCircle } from 'lucide-react';
+import ScottPushNotifications from '@/components/scott/ScottPushNotifications';
 
 /**
  * SCOTT BAND VOTE
@@ -186,6 +187,8 @@ export default function ScottBandVote() {
           </Card>
         )}
       </div>
+
+      <ScottPushNotifications />
     </div>
   );
 }
