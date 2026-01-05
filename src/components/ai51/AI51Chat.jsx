@@ -150,36 +150,42 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
 
   // Mic control - iOS FIXED
   const toggleMic = async () => {
+    console.log('🎤 Mic tapped!', { hasRecognition: !!recognitionRef.current, isListening });
+    
     if (!recognitionRef.current) {
       alert('Voice not supported on this browser bro');
       return;
     }
 
     if (isListening) {
+      console.log('⏹️ Stopping mic');
       recognitionRef.current.stop();
       setIsListening(false);
       return;
     }
 
-    // Request mic permission explicitly on iOS - no generic alerts, just start
+    console.log('▶️ Starting mic...');
+    
+    // Request mic permission explicitly on iOS
     try {
       if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
         await navigator.mediaDevices.getUserMedia({ audio: true });
+        console.log('✅ Mic permission granted');
       }
     } catch (e) {
-      // Browser will show its own permission prompt
-      console.log('Mic permission needed:', e);
+      console.error('❌ Mic permission denied:', e);
+      alert('Mic blocked - check Settings → Safari → Allow Microphone');
       return;
     }
 
     try {
-      window.speechSynthesis?.cancel(); // Stop any speech
+      window.speechSynthesis?.cancel();
       recognitionRef.current.start();
       setIsListening(true);
-      console.log('✅ Mic started');
+      console.log('✅ Mic started!');
     } catch (e) {
-      console.error('Mic start error:', e);
-      alert(`Mic error: ${e.message || 'unknown'} - try refreshing page`);
+      console.error('❌ Mic start error:', e);
+      alert(`Can't start mic: ${e.message} - refresh page`);
     }
   };
 
