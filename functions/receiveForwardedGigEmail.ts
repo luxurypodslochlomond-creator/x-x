@@ -48,40 +48,37 @@ Return "valid" if real gig offer, or reason it's spam/nonsense.`,
       });
     }
 
-    // AI51 SMART EXTRACTION - fills gaps, fixes formatting, flags issues
+    // AI51 EXTRACTION - only extract what's ACTUALLY in the email
     const extraction = await base44.integrations.Core.InvokeLLM({
-      prompt: `You are AI51 - extract and IMPROVE this gig offer data.
+      prompt: `Extract gig offer details from this email. CRITICAL: Only extract what's ACTUALLY stated - DO NOT guess or fill in missing info.
 
 Email:
 ${emailBody}
 
 Instructions:
-1. Extract all fields below
-2. If city missing → guess from venue name using knowledge
-3. If time unclear → look for "doors", "show time", or set to "20:00" (common UK gig time)
-4. If currency not mentioned → default GBP for UK venues, USD for US, EUR for EU
-5. Fix any formatting (dates to YYYY-MM-DD, times to HH:MM)
-6. Flag anything uncertain in notes field
+1. Extract ONLY what's clearly stated in the email
+2. If something is missing or unclear → leave it blank/null
+3. Fix formatting: dates to YYYY-MM-DD, times to HH:MM
+4. In notes field → flag what's MISSING so Scott can follow up
 
-Fields:
+Fields to extract (leave blank if not in email):
 - venue (string, required)
-- city (string - MUST FILL even if guessing)
-- county (string - guess from city if possible)
-- country (string, default "UK")
+- city (string - only if stated)
+- county (string - only if stated)
+- country (string - only if stated, else "UK")
 - date (YYYY-MM-DD format, required)
-- time (HH:MM format - default 20:00 if unclear)
+- time (HH:MM format - only if stated)
 - fee (number, required)
-- currency (string, default "GBP")
-- capacity (number - guess from venue if known)
+- currency (string - only if stated, else "GBP")
+- capacity (number - only if stated)
 - promoter (string)
 - promoter_contact (string, email or phone)
 - deposit_required (boolean)
 - deposit_amount (number)
-- is_tour (boolean, check if multiple dates mentioned)
+- is_tour (boolean)
 - tour_dates (array of strings if is_tour)
-- requirements (string, any special requirements)
-- notes (string - ADD HERE: any guesses you made, missing info, or things Scott should double-check)
-- ai51_confidence (string: "high", "medium", "low" - how confident are you in this extraction?)`,
+- requirements (string)
+- notes (string - LIST what's MISSING: "⚠️ Missing: city, time, capacity" etc)`,
       response_json_schema: {
         type: "object",
         properties: {
@@ -101,17 +98,11 @@ Fields:
           is_tour: { type: "boolean" },
           tour_dates: { type: "array", items: { type: "string" } },
           requirements: { type: "string" },
-          notes: { type: "string" },
-          ai51_confidence: { type: "string" }
+          notes: { type: "string" }
         },
         required: ["venue", "date", "fee"]
       }
     });
-
-    // AI51 adds helpful note about what was guessed/unclear
-    if (extraction.ai51_confidence === "low" || extraction.ai51_confidence === "medium") {
-      extraction.notes = (extraction.notes || '') + `\n\n🤖 AI51: ${extraction.ai51_confidence} confidence - please double-check details marked as guesses.`;
-    }
 
     // Check for duplicates (same venue + date)
     const existing = await base44.asServiceRole.entities.ScottGigOffer.filter({
