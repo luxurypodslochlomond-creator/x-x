@@ -2,9 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { Card } from '@/components/ui/card';
-import { ArrowLeft, Calendar, WifiOff } from 'lucide-react';
+import { ArrowLeft, Calendar, WifiOff, Radio } from 'lucide-react';
 import { motion } from 'framer-motion';
-import KingdomCrown8Bit from '@/components/shared/KingdomCrown8Bit';
 import { useScottOffline, ScottOfflineProvider } from '@/components/scott/ScottOfflineStorage';
 
 function ScottCalendarInner() {
@@ -83,10 +82,10 @@ function ScottCalendarInner() {
                 )}
             </div>
 
-            <div className="mb-6 pb-4 border-b border-amber-500/20">
+            <div className="mb-6 pb-4 border-b border-cyan-500/20">
                 <div className="flex items-center justify-center gap-3 mb-4">
-                    <KingdomCrown8Bit size={32} />
-                    <h1 className="text-2xl font-black text-amber-400 tracking-tight" style={{ fontFamily: 'monospace' }}>CALENDAR</h1>
+                    <Radio className="w-8 h-8 text-cyan-400" />
+                    <h1 className="text-2xl font-black text-cyan-400 tracking-tight" style={{ fontFamily: 'monospace' }}>CB51 CALENDAR</h1>
                 </div>
                 
                 <div className="flex gap-2">
@@ -202,10 +201,10 @@ function ScottCalendarInner() {
 
             <div className="mt-12 pt-6 border-t border-gray-900">
                 <div className="flex items-center justify-center gap-3 mb-2">
-                    <KingdomCrown8Bit size={24} />
-                    <p className="text-gray-700 text-xs tracking-widest" style={{ fontFamily: 'monospace' }}>KINGDOM</p>
+                    <Radio className="w-6 h-6 text-cyan-400" />
+                    <p className="text-cyan-400 text-xs tracking-widest font-black" style={{ fontFamily: 'monospace' }}>CB51</p>
                 </div>
-                <p className="text-center text-gray-800 text-[10px] tracking-widest" style={{ fontFamily: 'monospace' }}>EST 1888</p>
+                <p className="text-center text-gray-600 text-[10px] tracking-widest" style={{ fontFamily: 'monospace' }}>ARTIST CO-MANAGER</p>
             </div>
         </div>
     );
