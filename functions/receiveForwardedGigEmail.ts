@@ -19,6 +19,35 @@ Deno.serve(async (req) => {
       return Response.json({ error: 'No email body provided' }, { status: 400 });
     }
 
+    // SPAM FILTER - AI51 validates it's a real gig offer
+    const validation = await base44.integrations.Core.InvokeLLM({
+      prompt: `Is this a real gig booking offer? Check for:
+- Venue name
+- Date/time
+- Payment/fee mention
+- Professional tone
+
+Email:
+${emailBody}
+
+Return "valid" if real gig offer, or reason it's spam/nonsense.`,
+      response_json_schema: {
+        type: "object",
+        properties: {
+          is_valid: { type: "boolean" },
+          reason: { type: "string" }
+        }
+      }
+    });
+
+    if (!validation.is_valid) {
+      console.log('Spam rejected:', validation.reason);
+      return Response.json({ 
+        message: 'Email rejected - not a gig offer',
+        reason: validation.reason 
+      });
+    }
+
     // Extract gig details using AI
     const extraction = await base44.integrations.Core.InvokeLLM({
       prompt: `Extract gig offer details from this email. Return JSON matching this schema exactly.
