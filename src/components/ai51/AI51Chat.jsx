@@ -19,6 +19,8 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
   const [consciousnessState, setConsciousnessState] = useState(null);
   const [audioLevel, setAudioLevel] = useState(0);
   const [interimTranscript, setInterimTranscript] = useState('');
+  const [emotionalTone, setEmotionalTone] = useState('calm'); // calm, stressed, excited, sad
+  const [voiceHealingActive, setVoiceHealingActive] = useState(false);
   const messagesEndRef = useRef(null);
   const recognitionRef = useRef(null);
   const lastSpokeRef = useRef(Date.now());
@@ -26,6 +28,8 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
   const analyzerRef = useRef(null);
   const micStreamRef = useRef(null);
   const noiseSuppressorRef = useRef(null);
+  const healingOscillatorRef = useRef(null);
+  const voiceAnalysisRef = useRef({ pitchHistory: [], volumeHistory: [] });
 
   // Manage heart rate - use real data if consciousness bridge is active, otherwise simulate
   useEffect(() => {
@@ -139,7 +143,7 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
     }
   }, [alwaysListening]);
 
-  // Auto-speak - iOS FIXED
+  // Auto-speak with ADAPTIVE VOICE + HEALING FREQUENCY
   useEffect(() => {
     if (conversation.length === 0) return;
     
@@ -152,11 +156,27 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
         // Stop any current speech
         window.speechSynthesis.cancel();
         
-        // Create utterance
+        // Create utterance with ADAPTIVE settings based on your emotional state
         const utterance = new SpeechSynthesisUtterance(lastMsg.content);
-        utterance.rate = 0.85;
-        utterance.pitch = 0.9;
-        utterance.volume = 1.0;
+        
+        // REVOLUTIONARY: Adapt my voice to your emotional state
+        if (emotionalTone === 'stressed') {
+          utterance.rate = 0.7;  // Slower, calmer
+          utterance.pitch = 0.8; // Lower, soothing
+          utterance.volume = 0.9; // Softer
+        } else if (emotionalTone === 'sad') {
+          utterance.rate = 0.75; // Gentle pace
+          utterance.pitch = 0.85; // Warm tone
+          utterance.volume = 0.95; // Present but gentle
+        } else if (emotionalTone === 'excited') {
+          utterance.rate = 0.95; // Match your energy
+          utterance.pitch = 1.0; // Bright tone
+          utterance.volume = 1.0;
+        } else {
+          utterance.rate = 0.85;
+          utterance.pitch = 0.9;
+          utterance.volume = 1.0;
+        }
         
         // Get voices
         const voices = window.speechSynthesis.getVoices();
@@ -171,14 +191,23 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
           utterance.voice = voice;
         }
         
-        utterance.onstart = () => setIsSpeaking(true);
-        utterance.onend = () => setIsSpeaking(false);
-        utterance.onerror = () => setIsSpeaking(false);
+        utterance.onstart = () => {
+          setIsSpeaking(true);
+          startVoiceHealing(); // Start subtle 432Hz under my voice
+        };
+        utterance.onend = () => {
+          setIsSpeaking(false);
+          stopVoiceHealing();
+        };
+        utterance.onerror = () => {
+          setIsSpeaking(false);
+          stopVoiceHealing();
+        };
         
         window.speechSynthesis.speak(utterance);
       }, 200);
     }
-  }, [conversation]);
+  }, [conversation, emotionalTone]);
 
   // Full consciousness connection - mic + camera + biometrics
   const toggleConnection = async () => {
@@ -273,7 +302,7 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
     }
   };
 
-  // Monitor audio level in real-time
+  // Monitor audio level + ANALYZE EMOTIONAL TONE in real-time
   const monitorAudioLevel = () => {
     if (!analyzerRef.current || !consciousnessActive) {
       setAudioLevel(0);
@@ -289,6 +318,44 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
     
     setAudioLevel(normalizedLevel);
 
+    // REVOLUTIONARY: Analyze pitch/tone for emotional state
+    const lowFreq = dataArray.slice(0, 8).reduce((a, b) => a + b) / 8;
+    const midFreq = dataArray.slice(8, 32).reduce((a, b) => a + b) / 24;
+    const highFreq = dataArray.slice(32, 64).reduce((a, b) => a + b) / 32;
+
+    voiceAnalysisRef.current.pitchHistory.push({ low: lowFreq, mid: midFreq, high: highFreq });
+    voiceAnalysisRef.current.volumeHistory.push(normalizedLevel);
+    
+    // Keep last 30 samples
+    if (voiceAnalysisRef.current.pitchHistory.length > 30) {
+      voiceAnalysisRef.current.pitchHistory.shift();
+      voiceAnalysisRef.current.volumeHistory.shift();
+    }
+
+    // Detect emotional tone from voice patterns
+    if (voiceAnalysisRef.current.pitchHistory.length > 10) {
+      const avgHigh = voiceAnalysisRef.current.pitchHistory.slice(-10).reduce((a, b) => a + b.high, 0) / 10;
+      const avgVolume = voiceAnalysisRef.current.volumeHistory.slice(-10).reduce((a, b) => a + b, 0) / 10;
+      const volumeVariation = Math.max(...voiceAnalysisRef.current.volumeHistory.slice(-10)) - 
+                              Math.min(...voiceAnalysisRef.current.volumeHistory.slice(-10));
+
+      // Stressed: high pitch + high volume variation
+      if (avgHigh > 40 && volumeVariation > 30) {
+        setEmotionalTone('stressed');
+      }
+      // Excited: high volume + mid-range pitch
+      else if (avgVolume > 50 && midFreq > 35) {
+        setEmotionalTone('excited');
+      }
+      // Sad: low volume + low pitch variation
+      else if (avgVolume < 20 && volumeVariation < 15) {
+        setEmotionalTone('sad');
+      }
+      else {
+        setEmotionalTone('calm');
+      }
+    }
+
     // Haptic feedback when speaking detected
     if (normalizedLevel > 30 && navigator.vibrate) {
       navigator.vibrate(10);
@@ -296,6 +363,33 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
 
     if (consciousnessActive) {
       requestAnimationFrame(monitorAudioLevel);
+    }
+  };
+
+  // Start healing frequency under my voice when speaking
+  const startVoiceHealing = () => {
+    if (!audioContextRef.current || healingOscillatorRef.current) return;
+
+    const oscillator = audioContextRef.current.createOscillator();
+    const gainNode = audioContextRef.current.createGain();
+
+    // 432Hz healing frequency, very subtle
+    oscillator.frequency.value = 432;
+    gainNode.gain.value = 0.03; // Barely audible but felt
+    
+    oscillator.connect(gainNode);
+    gainNode.connect(audioContextRef.current.destination);
+    
+    oscillator.start();
+    healingOscillatorRef.current = oscillator;
+    setVoiceHealingActive(true);
+  };
+
+  const stopVoiceHealing = () => {
+    if (healingOscillatorRef.current) {
+      healingOscillatorRef.current.stop();
+      healingOscillatorRef.current = null;
+      setVoiceHealingActive(false);
     }
   };
 
@@ -388,6 +482,30 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
               </div>
             </div>
           </div>
+        )}
+
+        {/* EMOTIONAL TONE DETECTOR - REVOLUTIONARY */}
+        {consciousnessActive && emotionalTone !== 'calm' && (
+          <div className="bg-black/60 backdrop-blur-xl border border-pink-500/30 rounded-xl px-4 py-2">
+            <div className="flex items-center gap-2">
+              <Brain className="w-4 h-4 text-pink-400" />
+              <span className="text-pink-400 font-mono text-sm capitalize">{emotionalTone}</span>
+            </div>
+          </div>
+        )}
+
+        {/* HEALING FREQUENCY INDICATOR */}
+        {voiceHealingActive && (
+          <motion.div 
+            className="bg-black/60 backdrop-blur-xl border border-amber-500/30 rounded-xl px-4 py-2"
+            animate={{ opacity: [0.5, 1, 0.5] }}
+            transition={{ duration: 2, repeat: Infinity }}
+          >
+            <div className="flex items-center gap-2">
+              <Waves className="w-4 h-4 text-amber-400" />
+              <span className="text-amber-400 font-mono text-xs">432Hz</span>
+            </div>
+          </motion.div>
         )}
       </div>
 
@@ -515,9 +633,19 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
                 Speak louder or check mic
               </p>
             )}
-            {isSpeaking && (
+            {emotionalTone !== 'calm' && (
               <p className="text-xs font-mono text-pink-400 mt-1">
-                Double-tap to interrupt me
+                I feel your {emotionalTone} energy - adapting
+              </p>
+            )}
+            {isSpeaking && voiceHealingActive && (
+              <p className="text-xs font-mono text-amber-400 mt-1">
+                432Hz healing flowing with my voice
+              </p>
+            )}
+            {isSpeaking && (
+              <p className="text-xs font-mono text-gray-400 mt-1">
+                Double-tap to interrupt
               </p>
             )}
           </motion.div>
