@@ -430,24 +430,24 @@ Managing chaos → Making it simple. That's your job bro ♾️❤️♾️`,
                     animate={{ opacity: 1, y: 0 }}
                     className="space-y-6 mb-6"
                 >
-                    {/* 2 GIANT BUTTONS - THAT'S IT */}
-                    <div className="space-y-4">
+                    {/* 2 CLEAN BUTTONS */}
+                    <div className="space-y-3">
                         <motion.button
                             whileTap={{ scale: 0.98 }}
                             onClick={() => setActiveWorkflow('gig')}
-                            className="w-full bg-amber-500 hover:bg-amber-400 border-4 border-amber-400 text-black font-black py-16 text-3xl font-mono"
-                            style={{ boxShadow: '12px 12px 0px rgba(245, 158, 11, 0.6)' }}
+                            className="w-full bg-amber-500 hover:bg-amber-400 border-2 border-amber-400 text-black font-black py-6 text-xl font-mono rounded-lg"
+                            style={{ boxShadow: '4px 4px 0px rgba(245, 158, 11, 0.6)' }}
                         >
-                            PASTE GIG OFFER
+                            📧 PASTE GIG OFFER
                         </motion.button>
 
                         <motion.button
                             whileTap={{ scale: 0.98 }}
                             onClick={() => setActiveWorkflow('session')}
-                            className="w-full bg-cyan-500 hover:bg-cyan-400 border-4 border-cyan-400 text-black font-black py-16 text-3xl font-mono"
-                            style={{ boxShadow: '12px 12px 0px rgba(34, 211, 238, 0.6)' }}
+                            className="w-full bg-cyan-500 hover:bg-cyan-400 border-2 border-cyan-400 text-black font-black py-6 text-xl font-mono rounded-lg"
+                            style={{ boxShadow: '4px 4px 0px rgba(34, 211, 238, 0.6)' }}
                         >
-                            BOOK SESSION
+                            🎵 BOOK SESSION
                         </motion.button>
                     </div>
 
