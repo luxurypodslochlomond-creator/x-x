@@ -31,18 +31,19 @@ export default function ScottGigWorkflow() {
     const parseEmailMutation = useMutation({
         mutationFn: async (email) => {
             const result = await base44.integrations.Core.InvokeLLM({
-                prompt: `Scott pasted this - extract ANY gig/session/event details:
+                prompt: `You're CB51's AI parser. Scott pasted an email about a gig/session/event.
 
-${email}
+        EMAIL TEXT:
+        ${email}
 
-Extract whatever you can find:
-- Venue/studio name (or "TBC" if not clear)
-- Date (YYYY-MM-DD format, or approximate if not exact)
-- Fee/guarantee (£ amount, or 0 if not mentioned)
-- Artist/band name (or "TBC" if not clear)
-- Any other details
+        YOUR JOB: Extract ALL details you can find:
+        - Venue/studio name (use "TBC" only if truly not mentioned)
+        - Date in YYYY-MM-DD format (if "next Friday" calculate from today: ${new Date().toISOString().split('T')[0]})
+        - Fee/guarantee as number (0 if not mentioned)
+        - Artist/band name (or "TBC" if not clear)
+        - Any notes/details
 
-ALWAYS extract something - don't say it's not a gig. Scott needs this to work.`,
+        CRITICAL: ALWAYS extract something. Even if it's just a venue name and approximate date. This is a real email about a real gig - parse whatever details exist. Never reject it.`,
                 response_json_schema: {
                     type: "object",
                     properties: {

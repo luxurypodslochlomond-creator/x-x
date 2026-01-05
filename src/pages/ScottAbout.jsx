@@ -1,8 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
-import { ArrowLeft, Music, Brain, Heart, Globe } from 'lucide-react';
-import CoManager51Icon8Bit from '@/components/shared/CoManager51Icon8Bit';
+import { ArrowLeft, Music, Brain, Heart, Globe, Radio } from 'lucide-react';
 import Gill51Sunglasses8Bit from '@/components/shared/Gill51Sunglasses8Bit';
 
 /**
@@ -17,10 +16,10 @@ export default function ScottAbout() {
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black pb-20">
-            {/* HEADER - 8-BIT MUSIC INDUSTRY VIBE */}
-            <div className="sticky top-0 z-50 border-b-4 border-amber-500 px-4 py-3" style={{ background: 'linear-gradient(135deg, #000000 0%, #4a2a0a 50%, #000000 100%)', boxShadow: '0 0 30px rgba(245, 158, 11, 0.6)' }}>
+            {/* HEADER - CB51 CLEAN */}
+            <div className="sticky top-0 z-50 border-b-4 border-cyan-500 px-4 py-3" style={{ background: 'linear-gradient(135deg, #000000 0%, #0a4a4a 50%, #000000 100%)', boxShadow: '0 0 30px rgba(6, 182, 212, 0.6)' }}>
                 <Link to={createPageUrl('ScottManager')} className="flex items-center gap-2 text-white font-mono text-sm font-black">
-                    <div className="bg-amber-500 p-1.5 rounded" style={{ boxShadow: '2px 2px 0 rgba(245, 158, 11, 0.4)' }}>
+                    <div className="bg-cyan-500 p-1.5 rounded" style={{ boxShadow: '2px 2px 0 rgba(6, 182, 212, 0.4)' }}>
                         <ArrowLeft className="w-4 h-4 text-black" />
                     </div>
                     BACK
@@ -31,10 +30,10 @@ export default function ScottAbout() {
                 {/* WHO */}
                 <div className="bg-gradient-to-r from-amber-500/20 to-orange-500/20 border-4 border-amber-500 rounded-xl p-6" style={{ boxShadow: '0 0 40px rgba(245, 158, 11, 0.4)' }}>
                     <div className="flex items-center gap-3 mb-4">
-                        <CoManager51Icon8Bit size={48} animate={true} />
+                        <Radio className="w-12 h-12 text-cyan-400" />
                         <div>
-                            <h1 className="text-amber-400 font-black text-2xl font-mono">CB51 • WHO WE ARE</h1>
-                            <p className="text-gray-400 text-xs font-mono">Music family, love-first business</p>
+                            <h1 className="text-cyan-400 font-black text-2xl font-mono">CB51 • WHO WE ARE</h1>
+                            <p className="text-gray-400 text-xs font-mono">Citizen Band 51 • Zero stress</p>
                         </div>
                     </div>
 
@@ -56,11 +55,11 @@ export default function ScottAbout() {
                     </div>
                 </div>
 
-                {/* WHAT - 8-BIT DIAGRAM */}
-                <div className="bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border-4 border-cyan-500 rounded-xl p-6" style={{ boxShadow: '0 0 40px rgba(6, 182, 212, 0.4)' }}>
+                {/* WHAT - SIMPLE CLEAR */}
+                <div className="bg-gradient-to-r from-cyan-500/20 to-green-500/20 border-4 border-cyan-500 rounded-xl p-6" style={{ boxShadow: '0 0 40px rgba(6, 182, 212, 0.4)' }}>
                     <div className="flex items-center gap-3 mb-4">
-                        <Brain className="w-10 h-10 text-cyan-400" />
-                        <h2 className="text-cyan-400 font-black text-xl font-mono">WHAT WE DO</h2>
+                        <Radio className="w-10 h-10 text-cyan-400" />
+                        <h2 className="text-cyan-400 font-black text-xl font-mono">WHAT CB51 DOES</h2>
                     </div>
 
                     {/* 8-BIT FLOW DIAGRAM */}
@@ -89,8 +88,8 @@ export default function ScottAbout() {
 
                             {/* Co-Manager51 */}
                             <div className="flex items-center gap-3">
-                                <div className="w-16 h-16 bg-amber-500 rounded flex items-center justify-center" style={{ imageRendering: 'pixelated', boxShadow: '4px 4px 0 rgba(245, 158, 11, 0.4)' }}>
-                                    <CoManager51Icon8Bit size={40} animate={false} />
+                                <div className="w-16 h-16 bg-cyan-500 rounded flex items-center justify-center" style={{ imageRendering: 'pixelated', boxShadow: '4px 4px 0 rgba(6, 182, 212, 0.4)' }}>
+                                    <Radio className="w-10 h-10 text-black" />
                                 </div>
                                 <div className="flex-1">
                                     <p className="text-amber-400 font-black text-sm font-mono">CB51</p>
