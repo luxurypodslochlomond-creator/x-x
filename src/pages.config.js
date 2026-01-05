@@ -187,6 +187,7 @@ import ScottAccommodation from './pages/ScottAccommodation';
 import ScottAddArtist from './pages/ScottAddArtist';
 import ScottArtist from './pages/ScottArtist';
 import ScottArtistHome from './pages/ScottArtistHome';
+import ScottBandVote from './pages/ScottBandVote';
 import ScottBiggerVision from './pages/ScottBiggerVision';
 import ScottCalendar from './pages/ScottCalendar';
 import ScottCalendarView from './pages/ScottCalendarView';
@@ -273,7 +274,7 @@ import YoungWarriors from './pages/YoungWarriors';
 import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
-import ScottBandVote from './pages/ScottBandVote';
+import ScottEmailDashboard from './pages/ScottEmailDashboard';
 import __Layout from './Layout.jsx';
 
 
@@ -467,6 +468,7 @@ export const PAGES = {
     "ScottAddArtist": ScottAddArtist,
     "ScottArtist": ScottArtist,
     "ScottArtistHome": ScottArtistHome,
+    "ScottBandVote": ScottBandVote,
     "ScottBiggerVision": ScottBiggerVision,
     "ScottCalendar": ScottCalendar,
     "ScottCalendarView": ScottCalendarView,
@@ -553,7 +555,7 @@ export const PAGES = {
     "ZeroEgoProtocol": ZeroEgoProtocol,
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
-    "ScottBandVote": ScottBandVote,
+    "ScottEmailDashboard": ScottEmailDashboard,
 }
 
 export const pagesConfig = {
