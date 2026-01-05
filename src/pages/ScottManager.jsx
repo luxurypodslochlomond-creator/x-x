@@ -65,6 +65,7 @@ function ScottManagerInner() {
     const [isListening, setIsListening] = useState(false);
     const [voiceText, setVoiceText] = useState('');
     const [quickNote, setQuickNote] = useState('');
+    const [showInstallPrompt, setShowInstallPrompt] = useState(false);
     const recognitionRef = React.useRef(null);
     
     const scott = useScottOffline();
@@ -136,11 +137,17 @@ Managing chaos → Making it simple. That's your job bro ♾️❤️♾️`,
         }
     });
 
-    // Check if PIN already stored
+    // Check if PIN already stored + show install prompt
     useEffect(() => {
         const storedPin = localStorage.getItem('scott_access_pin');
         if (storedPin === '1888') {
             setPinEntered(true);
+        }
+
+        // Show "Add to Home Screen" prompt if not shown before
+        const hasSeenPrompt = localStorage.getItem('cb51_install_prompt_seen');
+        if (!hasSeenPrompt && storedPin === '1888') {
+            setTimeout(() => setShowInstallPrompt(true), 2000);
         }
         
         // Init voice
@@ -295,6 +302,42 @@ Managing chaos → Making it simple. That's your job bro ♾️❤️♾️`,
     return (
         <ScottFocusMode>
         <div className="min-h-screen bg-black p-4 pb-32">
+
+        {/* ADD TO HOME SCREEN PROMPT */}
+        <AnimatePresence>
+            {showInstallPrompt && (
+                <motion.div
+                    initial={{ opacity: 0, y: -100 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -100 }}
+                    className="fixed top-4 left-4 right-4 z-[100] bg-gradient-to-r from-cyan-500 to-pink-500 border-4 border-white p-4 rounded-xl shadow-2xl"
+                    style={{ boxShadow: '0 0 60px rgba(34, 211, 238, 0.8)' }}
+                >
+                    <button
+                        onClick={() => {
+                            setShowInstallPrompt(false);
+                            localStorage.setItem('cb51_install_prompt_seen', 'true');
+                        }}
+                        className="absolute top-2 right-2 w-8 h-8 bg-black/50 hover:bg-black rounded-full flex items-center justify-center"
+                    >
+                        <X className="w-4 h-4 text-white" />
+                    </button>
+                    <div className="flex items-start gap-3">
+                        <Radio className="w-12 h-12 text-white flex-shrink-0" />
+                        <div className="flex-1">
+                            <p className="text-white font-black text-lg font-mono mb-2">SAVE CB51 TO HOME SCREEN</p>
+                            <div className="bg-black/60 rounded p-3 space-y-2 mb-3">
+                                <p className="text-cyan-300 text-xs font-mono font-bold">📱 iPhone:</p>
+                                <p className="text-white text-xs font-mono">Safari → Share → Add to Home Screen</p>
+                                <p className="text-cyan-300 text-xs font-mono font-bold mt-2">🤖 Android:</p>
+                                <p className="text-white text-xs font-mono">Chrome → Menu ⋮ → Add to Home screen</p>
+                            </div>
+                            <p className="text-white text-xs font-mono">One tap = instant access 🚀</p>
+                        </div>
+                    </div>
+                </motion.div>
+            )}
+        </AnimatePresence>
 
         {/* P2P MESH - RUNS INVISIBLE IN BACKGROUND */}
         <div className="hidden"><ScottP2PSync /></div>
