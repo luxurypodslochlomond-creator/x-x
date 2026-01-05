@@ -18,12 +18,14 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
   const [consciousnessActive, setConsciousnessActive] = useState(false);
   const [consciousnessState, setConsciousnessState] = useState(null);
   const [audioLevel, setAudioLevel] = useState(0);
+  const [interimTranscript, setInterimTranscript] = useState('');
   const messagesEndRef = useRef(null);
   const recognitionRef = useRef(null);
   const lastSpokeRef = useRef(Date.now());
   const audioContextRef = useRef(null);
   const analyzerRef = useRef(null);
   const micStreamRef = useRef(null);
+  const noiseSuppressorRef = useRef(null);
 
   // Manage heart rate - use real data if consciousness bridge is active, otherwise simulate
   useEffect(() => {
@@ -70,13 +72,16 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
       recognitionRef.current.onresult = (event) => {
         const current = event.resultIndex;
         const text = event.results[current][0].transcript;
-        setTranscript(text);
-
+        
         if (event.results[current].isFinal) {
           console.log('✅ Final transcript:', text);
           lastSpokeRef.current = Date.now();
           onMessageSend(text);
           setTranscript('');
+          setInterimTranscript('');
+        } else {
+          // Show what you're saying in real-time
+          setInterimTranscript(text);
         }
       };
 
@@ -216,13 +221,24 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
       micStreamRef.current = stream;
 
-      // Setup audio analysis for real-time level monitoring
+      // Setup audio analysis with noise suppression
       const AudioContext = window.AudioContext || window.webkitAudioContext;
       audioContextRef.current = new AudioContext();
       const source = audioContextRef.current.createMediaStreamSource(stream);
+      
+      // Noise suppression filter
+      const filter = audioContextRef.current.createBiquadFilter();
+      filter.type = 'highpass';
+      filter.frequency.value = 200; // Remove low-frequency noise
+      
       analyzerRef.current = audioContextRef.current.createAnalyser();
       analyzerRef.current.fftSize = 256;
-      source.connect(analyzerRef.current);
+      analyzerRef.current.smoothingTimeConstant = 0.8;
+      
+      // Chain: source -> filter -> analyzer
+      source.connect(filter);
+      filter.connect(analyzerRef.current);
+      noiseSuppressorRef.current = filter;
 
       // Start monitoring audio levels
       monitorAudioLevel();
@@ -499,6 +515,11 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
                 Speak louder or check mic
               </p>
             )}
+            {isSpeaking && (
+              <p className="text-xs font-mono text-pink-400 mt-1">
+                Double-tap to interrupt me
+              </p>
+            )}
           </motion.div>
         </div>
 
@@ -529,14 +550,19 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
           </span>
         </motion.button>
 
-        {/* LIVE TRANSCRIPT */}
-        {transcript && (
+        {/* LIVE TRANSCRIPT - Real-time + Interim */}
+        {(transcript || interimTranscript) && (
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             className="bg-cyan-500/20 border-2 border-cyan-400 rounded-xl px-6 py-3 max-w-md mb-4"
           >
-            <p className="text-cyan-300 text-center font-mono text-lg">{transcript}</p>
+            <p className="text-cyan-300 text-center font-mono text-lg">
+              {transcript || interimTranscript}
+              {interimTranscript && !transcript && (
+                <span className="text-cyan-400/50 ml-2 animate-pulse">...</span>
+              )}
+            </p>
           </motion.div>
         )}
 
