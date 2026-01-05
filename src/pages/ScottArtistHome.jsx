@@ -1,145 +1,148 @@
-import React, { useEffect, useState } from 'react';
-import { useSearchParams, useNavigate } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
-import { base44 } from '@/api/base44Client';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
-import { Card, CardContent } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { 
-  Music, Calendar, DollarSign, CheckSquare, 
-  Radio, ArrowLeft, User 
-} from 'lucide-react';
+import { Radio, ArrowLeft, Music, Calendar, ClipboardList, DollarSign, Mic2 } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { base44 } from '@/api/base44Client';
+import { useQuery } from '@tanstack/react-query';
 
 /**
- * SCOTT ARTIST HOME
- * Main hub for each artist - 5 tiles
+ * ARTIST HOME PAGE - SCOTT'S FLOOR DIAGRAM
+ * 5 main sections (can be optional, opted in/out):
+ * - LIVE (Booking, Logistics, Admin)
+ * - WRITING/RECORDING SESSIONS
+ * - FINANCE/ADMIN
+ * - TO-DO LIST
+ * - CALENDAR
  */
 
 export default function ScottArtistHome() {
-  const [searchParams] = useSearchParams();
-  const navigate = useNavigate();
-  const artistId = searchParams.get('id');
-  const [user, setUser] = useState(null);
+    const navigate = useNavigate();
+    const [artist, setArtist] = useState(null);
+    const urlParams = new URLSearchParams(window.location.search);
+    const artistId = urlParams.get('id');
 
-  useEffect(() => {
-    const checkAuth = async () => {
-      try {
-        const currentUser = await base44.auth.me();
-        setUser(currentUser);
-      } catch {
-        navigate(createPageUrl('ScottLogin'));
-      }
+    useEffect(() => {
+        if (!artistId) {
+            navigate(createPageUrl('ScottManager'));
+            return;
+        }
+        base44.entities.ScottArtist.filter({ id: artistId }).then(results => {
+            if (results.length > 0) setArtist(results[0]);
+        });
+    }, [artistId]);
+
+    if (!artist) {
+        return (
+            <div className="min-h-screen bg-black flex items-center justify-center">
+                <p className="text-gray-500 font-mono">Loading...</p>
+            </div>
+        );
+    }
+
+    const sections = [
+        {
+            title: 'LIVE',
+            icon: Mic2,
+            color: 'pink',
+            description: 'Booking • Logistics • Admin',
+            link: createPageUrl(`ScottLive?id=${artistId}`)
+        },
+        {
+            title: 'SESSIONS',
+            icon: Music,
+            color: 'purple',
+            description: 'Writing • Recording • Rehearsals',
+            link: createPageUrl(`ScottSessions?id=${artistId}`)
+        },
+        {
+            title: 'FINANCE / ADMIN',
+            icon: DollarSign,
+            color: 'amber',
+            description: 'Invoices • Visas • Legal',
+            link: createPageUrl(`ScottFinanceAdmin?id=${artistId}`)
+        },
+        {
+            title: 'TO-DO LIST',
+            icon: ClipboardList,
+            color: 'green',
+            description: 'Tasks • Deadlines • Progress',
+            link: createPageUrl(`ScottToDo?id=${artistId}`)
+        },
+        {
+            title: 'CALENDAR',
+            icon: Calendar,
+            color: 'cyan',
+            description: 'Events • TBC • Unavailable',
+            link: createPageUrl(`ScottCalendarView?id=${artistId}`)
+        }
+    ];
+
+    const colorMap = {
+        pink: { bg: 'from-pink-500/20', border: 'border-pink-500', text: 'text-pink-400' },
+        purple: { bg: 'from-purple-500/20', border: 'border-purple-500', text: 'text-purple-400' },
+        amber: { bg: 'from-amber-500/20', border: 'border-amber-500', text: 'text-amber-400' },
+        green: { bg: 'from-green-500/20', border: 'border-green-500', text: 'text-green-400' },
+        cyan: { bg: 'from-cyan-500/20', border: 'border-cyan-500', text: 'text-cyan-400' }
     };
-    checkAuth();
-  }, []);
 
-  const { data: artist } = useQuery({
-    queryKey: ['scottArtist', artistId],
-    queryFn: () => base44.entities.ScottArtist.filter({ id: artistId }),
-    enabled: !!artistId,
-    select: (data) => data[0],
-  });
-
-  if (!artist) {
     return (
-      <div className="min-h-screen bg-black flex items-center justify-center">
-        <p className="text-white">Loading...</p>
-      </div>
-    );
-  }
-
-  const tiles = [
-    {
-      title: 'LIVE',
-      icon: Radio,
-      color: 'pink',
-      url: createPageUrl('ScottLive') + `?artist=${artistId}`,
-    },
-    {
-      title: 'SESSIONS',
-      icon: Music,
-      color: 'cyan',
-      url: createPageUrl('ScottSessions') + `?artist=${artistId}`,
-    },
-    {
-      title: 'FINANCE / ADMIN',
-      icon: DollarSign,
-      color: 'green',
-      url: createPageUrl('ScottFinanceAdmin') + `?artist=${artistId}`,
-    },
-    {
-      title: 'TO-DO LIST',
-      icon: CheckSquare,
-      color: 'amber',
-      url: createPageUrl('ScottToDo') + `?artist=${artistId}`,
-    },
-    {
-      title: 'CALENDAR',
-      icon: Calendar,
-      color: 'purple',
-      url: createPageUrl('ScottCalendarView') + `?artist=${artistId}`,
-    },
-  ];
-
-  const colorMap = {
-    pink: 'border-pink-500 hover:bg-pink-500/10 text-pink-400',
-    cyan: 'border-cyan-500 hover:bg-cyan-500/10 text-cyan-400',
-    green: 'border-green-500 hover:bg-green-500/10 text-green-400',
-    amber: 'border-amber-500 hover:bg-amber-500/10 text-amber-400',
-    purple: 'border-purple-500 hover:bg-purple-500/10 text-purple-400',
-  };
-
-  return (
-    <div className="min-h-screen bg-black p-6">
-      <div className="max-w-5xl mx-auto">
-        {/* Header */}
-        <div className="flex items-center gap-4 mb-8">
-          {user?.role === 'admin' && (
-            <Button
-              variant="ghost"
-              onClick={() => navigate(createPageUrl('ScottManagerHome'))}
-              className="text-gray-400 hover:text-white"
-            >
-              <ArrowLeft className="w-5 h-5" />
-            </Button>
-          )}
-          <div className="flex items-center gap-4 flex-1">
-            <div className="w-16 h-16 bg-cyan-500/20 rounded-full flex items-center justify-center">
-              <User className="w-8 h-8 text-cyan-400" />
-            </div>
-            <div>
-              <h1 className="text-4xl font-black text-white">{artist.name}</h1>
-              <p className="text-gray-400">{artist.genre || 'Artist'}</p>
-            </div>
-          </div>
-        </div>
-
-        {/* 5 Tiles */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {tiles.map((tile, index) => {
-            const Icon = tile.icon;
-            return (
-              <motion.div
-                key={tile.title}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <Card
-                  className={`bg-black border-2 ${colorMap[tile.color]} transition-all cursor-pointer h-full`}
-                  onClick={() => navigate(tile.url)}
+        <div className="min-h-screen bg-black text-white p-4 pb-24">
+            
+            {/* HEADER */}
+            <div className="mb-6">
+                <button
+                    onClick={() => navigate(createPageUrl('ScottManager'))}
+                    className="flex items-center gap-2 text-gray-500 hover:text-cyan-400 transition-all mb-4"
                 >
-                  <CardContent className="p-8">
-                    <Icon className={`w-12 h-12 mb-4 ${colorMap[tile.color].split(' ')[2]}`} />
-                    <h3 className="text-2xl font-black text-white">{tile.title}</h3>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            );
-          })}
+                    <ArrowLeft className="w-4 h-4" />
+                    <span className="text-sm font-bold font-mono">BACK TO ADMIN</span>
+                </button>
+
+                <div className="flex items-center gap-3 pb-4 border-b-2 border-cyan-500">
+                    <Radio className="w-10 h-10 text-cyan-400" />
+                    <div>
+                        <h1 className="text-2xl font-black text-white font-mono">{artist.name}</h1>
+                        <p className="text-gray-500 text-xs font-mono">Artist Hub</p>
+                    </div>
+                </div>
+            </div>
+
+            {/* 5 MAIN SECTIONS */}
+            <div className="space-y-3">
+                {sections.map((section) => {
+                    const Icon = section.icon;
+                    const colors = colorMap[section.color];
+                    
+                    return (
+                        <Link key={section.title} to={section.link}>
+                            <motion.div
+                                whileTap={{ scale: 0.98 }}
+                                className={`bg-gradient-to-r ${colors.bg} to-black border-2 ${colors.border} rounded-lg p-5 hover:shadow-lg transition-all`}
+                            >
+                                <div className="flex items-center gap-4">
+                                    <Icon className={`w-8 h-8 ${colors.text}`} />
+                                    <div className="flex-1">
+                                        <p className={`${colors.text} font-black text-lg font-mono mb-1`}>
+                                            {section.title}
+                                        </p>
+                                        <p className="text-gray-400 text-xs font-mono">
+                                            {section.description}
+                                        </p>
+                                    </div>
+                                    <div className={`${colors.text} text-2xl`}>→</div>
+                                </div>
+                            </motion.div>
+                        </Link>
+                    );
+                })}
+            </div>
+
+            {/* FOOTER */}
+            <div className="mt-12 text-center">
+                <p className="text-gray-600 text-xs font-mono">CB51 • {artist.name}</p>
+                <p className="text-gray-700 text-[10px] font-mono mt-1">Simple hub ♾️📻</p>
+            </div>
         </div>
-      </div>
-    </div>
-  );
+    );
 }
