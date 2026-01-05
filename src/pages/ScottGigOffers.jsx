@@ -95,19 +95,37 @@ export default function ScottGigOffers() {
   };
 
   const sendResponse = async (offerId) => {
+    const offer = offers.find(o => o.id === offerId);
+    
     await base44.entities.ScottGigOffer.update(offerId, {
       final_response_sent: responseDraft,
-      status: responseType === 'accept' ? 'confirmed' : 'rejected_by_manager'
+      status: responseType === 'accept' ? 'confirmed' : 'rejected_by_manager',
+      response_sent_date: new Date().toISOString()
     });
+
+    // If accepted → create calendar event
+    if (responseType === 'accept') {
+      try {
+        await base44.functions.invoke('createCalendarEvent', { offerId });
+      } catch (e) {
+        console.log('Calendar creation failed:', e);
+      }
+    }
+
     queryClient.invalidateQueries(['scottGigOffers']);
     setShowResponseDraft(null);
     setResponseDraft('');
-    alert('✅ Response sent!');
+    alert(responseType === 'accept' ? '✅ Accepted! Calendar event created' : '✅ Response sent!');
   };
 
   const pendingOffers = offers.filter(o => o.status === 'pending_manager_review');
   const sentToBand = offers.filter(o => o.status === 'sent_to_band');
   const awaitingResponse = offers.filter(o => o.all_responses_in && !o.final_response_sent);
+  const needsFollowUp = offers.filter(o => {
+    if (!o.response_sent_date || o.status !== 'confirmed') return false;
+    const daysSinceSent = Math.floor((new Date() - new Date(o.response_sent_date)) / (1000 * 60 * 60 * 24));
+    return daysSinceSent >= 2 && !o.venue_confirmed;
+  });
 
   return (
     <div className="min-h-screen bg-black p-6">
@@ -138,6 +156,18 @@ export default function ScottGigOffers() {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.1 }}
                 >
+                  {(() => {
+                    const duplicate = offers.find(o => 
+                      o.id !== offer.id && 
+                      o.venue === offer.venue && 
+                      o.date === offer.date
+                    );
+                    return duplicate && (
+                      <div className="bg-red-500/20 border border-red-500 rounded p-3 mb-2">
+                        <p className="text-red-400 text-sm font-bold">⚠️ DUPLICATE: Same venue/date already reviewed</p>
+                      </div>
+                    );
+                  })()}
                   <Card className="bg-black border-2 border-amber-500">
                     <CardContent className="p-6">
                       <div className="grid md:grid-cols-2 gap-6">
@@ -344,6 +374,37 @@ export default function ScottGigOffers() {
                   </Card>
                 );
               })}
+            </div>
+          </div>
+        )}
+
+        {/* NEEDS FOLLOW-UP */}
+        {needsFollowUp.length > 0 && (
+          <div className="mb-8">
+            <h2 className="text-2xl font-black text-white mb-4">⏰ NEEDS FOLLOW-UP (48hrs+)</h2>
+            <div className="space-y-4">
+              {needsFollowUp.map((offer) => (
+                <Card key={offer.id} className="bg-black border-2 border-amber-500">
+                  <CardContent className="p-4">
+                    <div className="flex justify-between items-start">
+                      <div>
+                        <h3 className="text-white font-bold">{offer.venue}</h3>
+                        <p className="text-gray-400 text-sm">{new Date(offer.date).toLocaleDateString()} • {offer.city}</p>
+                        <p className="text-amber-400 text-sm mt-1">Response sent {Math.floor((new Date() - new Date(offer.response_sent_date)) / (1000 * 60 * 60 * 24))} days ago</p>
+                      </div>
+                      <Button
+                        onClick={() => {
+                          base44.entities.ScottGigOffer.update(offer.id, { venue_confirmed: true });
+                          queryClient.invalidateQueries(['scottGigOffers']);
+                        }}
+                        className="bg-green-600 hover:bg-green-700"
+                      >
+                        Mark Confirmed
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
             </div>
           </div>
         )}
