@@ -43,6 +43,8 @@ export default function ScottPasteGigOffer() {
   const [isOnline, setIsOnline] = useState(navigator.onLine);
   const [pendingEmails, setPendingEmails] = useState([]);
   const [syncing, setSyncing] = useState(false);
+  const [screenshot, setScreenshot] = useState(null);
+  const [mode, setMode] = useState('text'); // 'text' or 'image'
 
   // Load artists + pending emails on mount
   useEffect(() => {
@@ -140,40 +142,118 @@ export default function ScottPasteGigOffer() {
     setSyncing(false);
   };
 
+  // Handle screenshot paste from clipboard
+  const handlePaste = async (e) => {
+    const items = e.clipboardData?.items;
+    if (!items) return;
+
+    for (const item of items) {
+      if (item.type.startsWith('image/')) {
+        e.preventDefault();
+        const file = item.getAsFile();
+        if (file) {
+          setScreenshot(file);
+          setMode('image');
+        }
+        break;
+      }
+    }
+  };
+
+  // Handle drag and drop
+  const handleDrop = async (e) => {
+    e.preventDefault();
+    const file = e.dataTransfer.files[0];
+    if (file && file.type.startsWith('image/')) {
+      setScreenshot(file);
+      setMode('image');
+    }
+  };
+
+  // Extract text from screenshot using AI51 vision
+  const extractFromScreenshot = async (file) => {
+    try {
+      // Upload screenshot
+      const { file_url } = await base44.integrations.Core.UploadFile({ file });
+      
+      // AI51 vision OCR
+      const result = await base44.integrations.Core.InvokeLLM({
+        prompt: 'Extract ALL text from this email screenshot. Return the complete email text exactly as written.',
+        file_urls: file_url
+      });
+      
+      return result;
+    } catch (error) {
+      console.error('Screenshot extraction failed:', error);
+      throw error;
+    }
+  };
+
   const handleScan = async () => {
-    if (!emailText.trim() || !artistId) {
-      alert('Select artist and paste email');
+    if (!artistId) {
+      alert('Select artist first');
+      return;
+    }
+
+    // Check if we have content
+    if (mode === 'text' && !emailText.trim()) {
+      alert('Paste email text or screenshot');
+      return;
+    }
+    if (mode === 'image' && !screenshot) {
+      alert('Add a screenshot');
       return;
     }
 
     setLoading(true);
     
-    // If offline → save encrypted locally
-    if (!isOnline) {
-      const saved = saveOffline(emailText, artistId);
-      setLoading(false);
-      if (saved) {
-        alert('✅ Saved offline (encrypted)\n\nWill process when back online');
-        setEmailText('');
-      } else {
-        alert('❌ Failed to save offline');
-      }
-      return;
-    }
-
-    // If online → process immediately
     try {
-      await scanGigOffers({ emailText, artistId });
+      let textToProcess = emailText;
+
+      // If screenshot mode → extract text first
+      if (mode === 'image' && screenshot) {
+        if (!isOnline) {
+          alert('❌ Screenshot OCR requires internet\n\nUse text paste for offline mode');
+          setLoading(false);
+          return;
+        }
+        textToProcess = await extractFromScreenshot(screenshot);
+      }
+
+      // If offline → save encrypted locally
+      if (!isOnline) {
+        const saved = saveOffline(textToProcess, artistId);
+        setLoading(false);
+        if (saved) {
+          alert('✅ Saved offline (encrypted)\n\nWill process when back online');
+          setEmailText('');
+          setScreenshot(null);
+          setMode('text');
+        } else {
+          alert('❌ Failed to save offline');
+        }
+        return;
+      }
+
+      // If online → process immediately
+      await scanGigOffers({ emailText: textToProcess, artistId });
       alert('✅ Gig offer extracted!');
       setEmailText('');
+      setScreenshot(null);
+      setMode('text');
       navigate(createPageUrl('ScottGigOffers'));
     } catch (error) {
       // If fails → save offline as backup
-      const saved = saveOffline(emailText, artistId);
-      alert(saved ? 
-        '⚠️ Server error - saved offline (will retry when online)' : 
-        '❌ Error: ' + error.message
-      );
+      const textToSave = mode === 'text' ? emailText : await extractFromScreenshot(screenshot).catch(() => null);
+      if (textToSave) {
+        const saved = saveOffline(textToSave, artistId);
+        alert(saved ? 
+          '⚠️ Server error - saved offline (will retry when online)' : 
+          '❌ Error: ' + error.message
+        );
+      } else {
+        alert('❌ Error: ' + error.message);
+      }
     } finally {
       setLoading(false);
     }
@@ -251,25 +331,95 @@ export default function ScottPasteGigOffer() {
                 </Select>
               </div>
 
-              <div>
-                <label className="text-white font-bold mb-2 block">Paste Email</label>
-                <Textarea
-                  value={emailText}
-                  onChange={(e) => setEmailText(e.target.value)}
-                  placeholder="Paste the full gig offer email here..."
-                  className="bg-black border-cyan-500 text-white h-64 font-mono text-sm"
-                />
+              {/* Mode Toggle */}
+              <div className="flex gap-2">
+                <Button
+                  onClick={() => { setMode('text'); setScreenshot(null); }}
+                  className={mode === 'text' ? 'bg-cyan-600' : 'bg-gray-700'}
+                >
+                  📝 Paste Text
+                </Button>
+                <Button
+                  onClick={() => { setMode('image'); setEmailText(''); }}
+                  className={mode === 'image' ? 'bg-cyan-600' : 'bg-gray-700'}
+                >
+                  📸 Screenshot
+                </Button>
               </div>
+
+              {/* Text Mode */}
+              {mode === 'text' && (
+                <div>
+                  <label className="text-white font-bold mb-2 block">Paste Email</label>
+                  <Textarea
+                    value={emailText}
+                    onChange={(e) => setEmailText(e.target.value)}
+                    onPaste={handlePaste}
+                    placeholder="Paste the full gig offer email here..."
+                    className="bg-black border-cyan-500 text-white h-64 font-mono text-sm"
+                  />
+                </div>
+              )}
+
+              {/* Screenshot Mode */}
+              {mode === 'image' && (
+                <div
+                  onDrop={handleDrop}
+                  onDragOver={(e) => e.preventDefault()}
+                  className="border-2 border-dashed border-cyan-500 rounded-lg p-8 text-center"
+                >
+                  {screenshot ? (
+                    <div className="space-y-3">
+                      <img
+                        src={URL.createObjectURL(screenshot)}
+                        alt="Email screenshot"
+                        className="max-h-64 mx-auto rounded border border-cyan-500"
+                      />
+                      <p className="text-green-400 font-bold">✅ Screenshot ready</p>
+                      <Button
+                        onClick={() => setScreenshot(null)}
+                        variant="outline"
+                        className="border-red-500 text-red-400"
+                      >
+                        Remove
+                      </Button>
+                    </div>
+                  ) : (
+                    <div className="space-y-3">
+                      <Mail className="w-16 h-16 text-cyan-400 mx-auto" />
+                      <p className="text-white font-bold">Drop screenshot or paste from clipboard</p>
+                      <p className="text-gray-400 text-sm">
+                        Take a screenshot of your email → Paste here (Ctrl+V / Cmd+V)
+                      </p>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) => {
+                          const file = e.target.files?.[0];
+                          if (file) setScreenshot(file);
+                        }}
+                        className="hidden"
+                        id="screenshot-upload"
+                      />
+                      <label htmlFor="screenshot-upload">
+                        <Button className="bg-cyan-600 hover:bg-cyan-700" asChild>
+                          <span>Or Choose File</span>
+                        </Button>
+                      </label>
+                    </div>
+                  )}
+                </div>
+              )}
 
               <Button
                 onClick={handleScan}
-                disabled={loading || !emailText.trim() || !artistId}
+                disabled={loading || !artistId || (mode === 'text' && !emailText.trim()) || (mode === 'image' && !screenshot)}
                 className="w-full bg-cyan-600 hover:bg-cyan-700 gap-2"
               >
                 {loading ? (
                   <>
                     <Sparkles className="w-5 h-5 animate-spin" />
-                    {isOnline ? 'AI Extracting...' : 'Saving Encrypted...'}
+                    {mode === 'image' ? 'Reading Screenshot...' : isOnline ? 'AI Extracting...' : 'Saving Encrypted...'}
                   </>
                 ) : (
                   <>
@@ -287,6 +437,7 @@ export default function ScottPasteGigOffer() {
                 </div>
                 <ul className="text-gray-300 text-sm space-y-1">
                   <li>✓ Works 100% offline - paste anytime</li>
+                  <li>✓ Screenshot support with AI vision OCR</li>
                   <li>✓ Stored encrypted on YOUR device</li>
                   <li>✓ Zero inbox access needed</li>
                   <li>✓ You control what gets sent</li>
