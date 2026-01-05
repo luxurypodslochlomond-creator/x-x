@@ -194,6 +194,7 @@ import ScottCalendarView from './pages/ScottCalendarView';
 import ScottComparison from './pages/ScottComparison';
 import ScottContracts from './pages/ScottContracts';
 import ScottDemos from './pages/ScottDemos';
+import ScottEmailDashboard from './pages/ScottEmailDashboard';
 import ScottExpenses from './pages/ScottExpenses';
 import ScottFeatureRequests from './pages/ScottFeatureRequests';
 import ScottFinanceAdmin from './pages/ScottFinanceAdmin';
@@ -274,7 +275,6 @@ import YoungWarriors from './pages/YoungWarriors';
 import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
-import ScottEmailDashboard from './pages/ScottEmailDashboard';
 import __Layout from './Layout.jsx';
 
 
@@ -475,6 +475,7 @@ export const PAGES = {
     "ScottComparison": ScottComparison,
     "ScottContracts": ScottContracts,
     "ScottDemos": ScottDemos,
+    "ScottEmailDashboard": ScottEmailDashboard,
     "ScottExpenses": ScottExpenses,
     "ScottFeatureRequests": ScottFeatureRequests,
     "ScottFinanceAdmin": ScottFinanceAdmin,
@@ -555,7 +556,6 @@ export const PAGES = {
     "ZeroEgoProtocol": ZeroEgoProtocol,
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
-    "ScottEmailDashboard": ScottEmailDashboard,
 }
 
 export const pagesConfig = {

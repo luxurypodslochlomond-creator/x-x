@@ -45,6 +45,8 @@ export default function ScottPasteGigOffer() {
   const [syncing, setSyncing] = useState(false);
   const [screenshot, setScreenshot] = useState(null);
   const [mode, setMode] = useState('text'); // 'text' or 'image'
+  const [gmailConnected, setGmailConnected] = useState(false);
+  const [checkingGmail, setCheckingGmail] = useState(false);
 
   // Load artists + pending emails on mount
   useEffect(() => {
@@ -61,7 +63,40 @@ export default function ScottPasteGigOffer() {
     };
     loadArtists();
     loadPendingEmails();
+    checkGmailConnection();
   }, []);
+
+  // Check if Gmail OAuth connected
+  const checkGmailConnection = async () => {
+    try {
+      const { scanScottInbox } = await import('@/functions/scanScottInbox');
+      const result = await scanScottInbox({});
+      setGmailConnected(!result.needsAuth);
+    } catch {
+      setGmailConnected(false);
+    }
+  };
+
+  // Scan Gmail now
+  const scanGmailNow = async () => {
+    setCheckingGmail(true);
+    try {
+      const { scanScottInbox } = await import('@/functions/scanScottInbox');
+      const result = await scanScottInbox({});
+      if (result.needsAuth) {
+        alert('❌ Gmail not connected\n\nConnect Gmail in settings to enable auto-scan');
+      } else {
+        alert(`✅ ${result.message}\n\nProcessed: ${result.processed}\nSkipped: ${result.skipped}`);
+        if (result.processed > 0) {
+          navigate(createPageUrl('ScottGigOffers'));
+        }
+      }
+    } catch (error) {
+      alert('Error: ' + error.message);
+    } finally {
+      setCheckingGmail(false);
+    }
+  };
 
   // Track online/offline status
   useEffect(() => {
@@ -297,7 +332,7 @@ export default function ScottPasteGigOffer() {
           </div>
         </div>
 
-        <div className="flex items-center gap-4 mb-8">
+        <div className="flex items-center gap-4 mb-6">
           <Button
             variant="ghost"
             onClick={() => navigate(createPageUrl('ScottGigOffers'))}
@@ -306,10 +341,58 @@ export default function ScottPasteGigOffer() {
             <ArrowLeft className="w-5 h-5" />
           </Button>
           <div>
-            <h1 className="text-4xl font-black text-white">PASTE GIG OFFER</h1>
-            <p className="text-gray-400">Works offline • Privacy-first • Auto-syncs</p>
+            <h1 className="text-4xl font-black text-white">ADD GIG OFFER</h1>
+            <p className="text-gray-400">Paste, screenshot, or auto-scan Gmail</p>
           </div>
         </div>
+
+        {/* Gmail Auto-Scan Option */}
+        {isOnline && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mb-6"
+          >
+            <Card className="bg-black border-2 border-purple-500">
+              <CardContent className="p-6">
+                <div className="flex items-start justify-between">
+                  <div className="flex-1">
+                    <h3 className="text-xl font-black text-white mb-2">
+                      ⚡ AUTO-SCAN GMAIL (Optional)
+                    </h3>
+                    <p className="text-gray-400 text-sm mb-3">
+                      {gmailConnected 
+                        ? '✅ Connected - AI51 scans your inbox for gig emails automatically'
+                        : 'Connect Gmail to automatically find and extract gig offers'}
+                    </p>
+                    <ul className="text-gray-500 text-xs space-y-1">
+                      <li>• You control access (opt-in)</li>
+                      <li>• AI51 finds gig emails beyond filters</li>
+                      <li>• Paste/screenshot still works without this</li>
+                      <li>• Read-only access (can't send/delete)</li>
+                    </ul>
+                  </div>
+                  <Button
+                    onClick={scanGmailNow}
+                    disabled={checkingGmail || !gmailConnected}
+                    className={gmailConnected ? 'bg-purple-600 hover:bg-purple-700' : 'bg-gray-700'}
+                  >
+                    {checkingGmail ? (
+                      <>
+                        <Sparkles className="w-4 h-4 animate-spin mr-2" />
+                        Scanning...
+                      </>
+                    ) : gmailConnected ? (
+                      'Scan Now'
+                    ) : (
+                      'Connect Gmail'
+                    )}
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+        )}
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
