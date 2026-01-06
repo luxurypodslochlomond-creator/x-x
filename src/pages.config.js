@@ -206,6 +206,9 @@ import ScottInvoices from './pages/ScottInvoices';
 import ScottLATrip from './pages/ScottLATrip';
 import ScottLabelContacts from './pages/ScottLabelContacts';
 import ScottLive from './pages/ScottLive';
+import ScottLiveAdmin from './pages/ScottLiveAdmin';
+import ScottLiveBookings from './pages/ScottLiveBookings';
+import ScottLiveLogistics from './pages/ScottLiveLogistics';
 import ScottManager from './pages/ScottManager';
 import ScottManagerHome from './pages/ScottManagerHome';
 import ScottMedia from './pages/ScottMedia';
@@ -216,8 +219,12 @@ import ScottPitchMode from './pages/ScottPitchMode';
 import ScottProducers from './pages/ScottProducers';
 import ScottPublishing from './pages/ScottPublishing';
 import ScottSessions from './pages/ScottSessions';
+import ScottSessionsRecording from './pages/ScottSessionsRecording';
+import ScottSessionsRehearsal from './pages/ScottSessionsRehearsal';
+import ScottSessionsWriting from './pages/ScottSessionsWriting';
 import ScottTeam from './pages/ScottTeam';
 import ScottToDo from './pages/ScottToDo';
+import Teachers from './pages/Teachers';
 import ScottTravelMode from './pages/ScottTravelMode';
 import ScottVisas from './pages/ScottVisas';
 import ScottWhiteLabel from './pages/ScottWhiteLabel';
@@ -235,7 +242,6 @@ import SubmitFrequency from './pages/SubmitFrequency';
 import SubmitProofOfLove from './pages/SubmitProofOfLove';
 import SymbolForge from './pages/SymbolForge';
 import TeacherInput from './pages/TeacherInput';
-import Teachers from './pages/Teachers';
 import TechScout from './pages/TechScout';
 import TechStack from './pages/TechStack';
 import TechnicalSpecification from './pages/TechnicalSpecification';
@@ -275,12 +281,6 @@ import YoungWarriors from './pages/YoungWarriors';
 import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
-import ScottLiveBookings from './pages/ScottLiveBookings';
-import ScottLiveLogistics from './pages/ScottLiveLogistics';
-import ScottLiveAdmin from './pages/ScottLiveAdmin';
-import ScottSessionsWriting from './pages/ScottSessionsWriting';
-import ScottSessionsRecording from './pages/ScottSessionsRecording';
-import ScottSessionsRehearsal from './pages/ScottSessionsRehearsal';
 import __Layout from './Layout.jsx';
 
 
@@ -493,6 +493,9 @@ export const PAGES = {
     "ScottLATrip": ScottLATrip,
     "ScottLabelContacts": ScottLabelContacts,
     "ScottLive": ScottLive,
+    "ScottLiveAdmin": ScottLiveAdmin,
+    "ScottLiveBookings": ScottLiveBookings,
+    "ScottLiveLogistics": ScottLiveLogistics,
     "ScottManager": ScottManager,
     "ScottManagerHome": ScottManagerHome,
     "ScottMedia": ScottMedia,
@@ -503,8 +506,12 @@ export const PAGES = {
     "ScottProducers": ScottProducers,
     "ScottPublishing": ScottPublishing,
     "ScottSessions": ScottSessions,
+    "ScottSessionsRecording": ScottSessionsRecording,
+    "ScottSessionsRehearsal": ScottSessionsRehearsal,
+    "ScottSessionsWriting": ScottSessionsWriting,
     "ScottTeam": ScottTeam,
     "ScottToDo": ScottToDo,
+    "Teachers": Teachers,
     "ScottTravelMode": ScottTravelMode,
     "ScottVisas": ScottVisas,
     "ScottWhiteLabel": ScottWhiteLabel,
@@ -522,7 +529,6 @@ export const PAGES = {
     "SubmitProofOfLove": SubmitProofOfLove,
     "SymbolForge": SymbolForge,
     "TeacherInput": TeacherInput,
-    "Teachers": Teachers,
     "TechScout": TechScout,
     "TechStack": TechStack,
     "TechnicalSpecification": TechnicalSpecification,
@@ -562,12 +568,6 @@ export const PAGES = {
     "ZeroEgoProtocol": ZeroEgoProtocol,
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
-    "ScottLiveBookings": ScottLiveBookings,
-    "ScottLiveLogistics": ScottLiveLogistics,
-    "ScottLiveAdmin": ScottLiveAdmin,
-    "ScottSessionsWriting": ScottSessionsWriting,
-    "ScottSessionsRecording": ScottSessionsRecording,
-    "ScottSessionsRehearsal": ScottSessionsRehearsal,
 }
 
 export const pagesConfig = {
