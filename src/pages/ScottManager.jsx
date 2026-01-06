@@ -22,8 +22,25 @@ export default function ScottManager() {
     const queryClient = useQueryClient();
 
     useEffect(() => {
-        // Set page title to CB51, not ScottManager
+        // Set page title and meta tags for CB51 branding
         document.title = 'CB51 • Your AI Co-Manager';
+        
+        // Update meta tags for sharing/bookmarking
+        let metaTheme = document.querySelector('meta[name="theme-color"]');
+        if (!metaTheme) {
+            metaTheme = document.createElement('meta');
+            metaTheme.name = 'theme-color';
+            document.head.appendChild(metaTheme);
+        }
+        metaTheme.content = '#06b6d4';
+        
+        let metaAppName = document.querySelector('meta[name="apple-mobile-web-app-title"]');
+        if (!metaAppName) {
+            metaAppName = document.createElement('meta');
+            metaAppName.name = 'apple-mobile-web-app-title';
+            document.head.appendChild(metaAppName);
+        }
+        metaAppName.content = 'CB51';
         
         base44.auth.me().then(async (currentUser) => {
             setUser(currentUser);

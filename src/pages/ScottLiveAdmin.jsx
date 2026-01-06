@@ -17,6 +17,15 @@ export default function ScottLiveAdmin() {
 
     React.useEffect(() => {
         document.title = 'CB51 • Admin';
+        
+        // CB51 theme color
+        let metaTheme = document.querySelector('meta[name="theme-color"]');
+        if (!metaTheme) {
+            metaTheme = document.createElement('meta');
+            metaTheme.name = 'theme-color';
+            document.head.appendChild(metaTheme);
+        }
+        metaTheme.content = '#06b6d4';
     }, []);
 
     const { data: contracts = [] } = useQuery({

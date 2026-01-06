@@ -32,8 +32,17 @@ export default function ScottArtistHome() {
     });
 
     useEffect(() => {
-        // Set page title
+        // Set page title and CB51 branding
         document.title = 'CB51 • Artist Home';
+        
+        // CB51 theme color
+        let metaTheme = document.querySelector('meta[name="theme-color"]');
+        if (!metaTheme) {
+            metaTheme = document.createElement('meta');
+            metaTheme.name = 'theme-color';
+            document.head.appendChild(metaTheme);
+        }
+        metaTheme.content = '#06b6d4';
         
         if (!artistId) {
             navigate(createPageUrl('ScottManager'));
