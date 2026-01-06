@@ -39,19 +39,19 @@ export default function ScottAbout() {
                         <div className="bg-gray-900/40 border border-gray-800 rounded-lg p-4">
                             <div className="flex items-center gap-2 mb-2">
                                 <Mic2 className="w-6 h-6 text-cyan-400" />
-                                <p className="text-white font-bold">Scott</p>
+                                <p className="text-white font-bold">Built by managers</p>
                             </div>
-                            <p className="text-gray-400 text-xs mb-1">Music manager + band member</p>
-                            <p className="text-gray-500 text-xs">30+ years industry experience</p>
+                            <p className="text-gray-400 text-xs mb-1">Music industry professionals</p>
+                            <p className="text-gray-500 text-xs">30+ years combined experience</p>
                         </div>
 
                         <div className="bg-gray-900/40 border border-gray-800 rounded-lg p-4">
                             <div className="flex items-center gap-2 mb-2">
-                                <Gill51Sunglasses8Bit size={24} animate={true} />
-                                <p className="text-white font-bold">Gill</p>
+                                <Users className="w-6 h-6 text-cyan-400" />
+                                <p className="text-white font-bold">For working artists</p>
                             </div>
-                            <p className="text-gray-400 text-xs mb-1">Family director + operations</p>
-                            <p className="text-gray-500 text-xs">Keeps everyone grounded ♾️</p>
+                            <p className="text-gray-400 text-xs mb-1">Simple tools that actually work</p>
+                            <p className="text-gray-500 text-xs">Offline-first, P2P when you need it</p>
                         </div>
                     </div>
                 </div>
