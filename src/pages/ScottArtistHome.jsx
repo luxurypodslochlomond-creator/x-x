@@ -92,92 +92,67 @@ export default function ScottArtistHome() {
     };
 
     return (
-        <div className="min-h-screen bg-black text-white p-4 pb-24">
+        <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white p-6 pb-24">
             
             {/* HEADER */}
-            <div className="mb-6">
+            <div className="mb-8">
                 <button
                     onClick={() => navigate(createPageUrl('ScottManager'))}
-                    className="flex items-center gap-2 text-gray-500 hover:text-cyan-400 transition-all mb-4"
+                    className="flex items-center gap-2 text-gray-600 hover:text-cyan-400 transition-all mb-6"
                 >
                     <ArrowLeft className="w-4 h-4" />
-                    <span className="text-sm font-bold font-mono">BACK TO ADMIN</span>
+                    <span className="text-sm font-bold font-mono">BACK</span>
                 </button>
 
-                <div className="flex items-center gap-3 pb-4 border-b-2 border-cyan-500">
-                    <Radio className="w-10 h-10 text-cyan-400" />
+                <div className="flex items-center gap-4">
+                    <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-cyan-500 to-purple-500 flex items-center justify-center">
+                        <span className="text-2xl font-black text-white">{artist.name.charAt(0)}</span>
+                    </div>
                     <div>
-                        <h1 className="text-2xl font-black text-white font-mono">{artist.name}</h1>
-                        <p className="text-gray-500 text-xs font-mono">Artist Hub</p>
+                        <h1 className="text-3xl font-black text-white font-mono">{artist.name}</h1>
+                        <p className="text-gray-500 text-sm font-mono">Operations</p>
                     </div>
                 </div>
             </div>
 
-            {/* ARTIST PROFILE CARD */}
-            <div className="mb-6 bg-gradient-to-br from-cyan-500/10 to-purple-500/10 border-2 border-cyan-500/50 rounded-xl p-5">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {/* LEFT COLUMN */}
-                    <div className="space-y-3">
-                        <div>
-                            <p className="text-gray-500 text-xs font-mono mb-1">CONTACT</p>
-                            <div className="space-y-1">
-                                {artist.phone && (
-                                    <p className="text-white font-mono text-sm">📞 {artist.phone}</p>
-                                )}
-                                {artist.email && (
-                                    <p className="text-white font-mono text-sm">✉️ {artist.email}</p>
-                                )}
-                            </div>
+            {/* ARTIST INFO - CLEAN */}
+            {(artist.phone || artist.email || artist.rate || artist.genre) && (
+                <div className="mb-8 bg-gray-900/60 backdrop-blur-sm border border-gray-700/50 rounded-xl p-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="space-y-3">
+                            {artist.phone && (
+                                <div>
+                                    <p className="text-gray-600 text-xs font-mono mb-1">Phone</p>
+                                    <p className="text-white font-mono text-sm">{artist.phone}</p>
+                                </div>
+                            )}
+                            {artist.email && (
+                                <div>
+                                    <p className="text-gray-600 text-xs font-mono mb-1">Email</p>
+                                    <p className="text-white font-mono text-sm">{artist.email}</p>
+                                </div>
+                            )}
                         </div>
-                        {(artist.rate || artist.genre || artist.gear) && (
-                            <div>
-                                <p className="text-gray-500 text-xs font-mono mb-1">INFO</p>
-                                <div className="space-y-1">
-                                    {artist.rate && (
-                                        <p className="text-cyan-400 font-mono text-sm">💰 {artist.rate}</p>
-                                    )}
-                                    {artist.genre && (
-                                        <p className="text-purple-400 font-mono text-sm">🎵 {artist.genre}</p>
-                                    )}
-                                    {artist.gear && (
-                                        <p className="text-pink-400 font-mono text-sm">🎸 {artist.gear}</p>
-                                    )}
+                        <div className="space-y-3">
+                            {artist.rate && (
+                                <div>
+                                    <p className="text-gray-600 text-xs font-mono mb-1">Rate</p>
+                                    <p className="text-cyan-400 font-mono text-sm">{artist.rate}</p>
                                 </div>
-                            </div>
-                        )}
-                    </div>
-
-                    {/* RIGHT COLUMN */}
-                    <div className="space-y-3">
-                        {(artist.social_links?.instagram || artist.social_links?.spotify) && (
-                            <div>
-                                <p className="text-gray-500 text-xs font-mono mb-1">SOCIALS</p>
-                                <div className="space-y-1">
-                                    {artist.social_links?.instagram && (
-                                        <a href={artist.social_links.instagram} target="_blank" rel="noopener noreferrer" className="text-pink-400 font-mono text-sm hover:text-pink-300 block">
-                                            📸 Instagram →
-                                        </a>
-                                    )}
-                                    {artist.social_links?.spotify && (
-                                        <a href={artist.social_links.spotify} target="_blank" rel="noopener noreferrer" className="text-green-400 font-mono text-sm hover:text-green-300 block">
-                                            🎵 Spotify →
-                                        </a>
-                                    )}
+                            )}
+                            {artist.genre && (
+                                <div>
+                                    <p className="text-gray-600 text-xs font-mono mb-1">Genre</p>
+                                    <p className="text-purple-400 font-mono text-sm">{artist.genre}</p>
                                 </div>
-                            </div>
-                        )}
-                        {artist.notes && (
-                            <div>
-                                <p className="text-gray-500 text-xs font-mono mb-1">NOTES</p>
-                                <p className="text-gray-400 font-mono text-sm">{artist.notes}</p>
-                            </div>
-                        )}
+                            )}
+                        </div>
                     </div>
                 </div>
-            </div>
+            )}
 
-            {/* 5 MAIN SECTIONS */}
-            <div className="space-y-3">
+            {/* MAIN SECTIONS - CLEAN GRID */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
                 {sections.map((section) => {
                     const Icon = section.icon;
                     const colors = colorMap[section.color];
@@ -185,20 +160,18 @@ export default function ScottArtistHome() {
                     return (
                         <Link key={section.title} to={section.link}>
                             <motion.div
+                                whileHover={{ y: -4 }}
                                 whileTap={{ scale: 0.98 }}
-                                className={`bg-gradient-to-r ${colors.bg} to-black border-2 ${colors.border} rounded-lg p-5 hover:shadow-lg transition-all`}
+                                className={`bg-gray-900/60 backdrop-blur-sm border ${colors.border}/30 hover:border-${colors.border.split('-')[1]}-500 rounded-xl p-6 transition-all h-32 flex items-center gap-4`}
                             >
-                                <div className="flex items-center gap-4">
-                                    <Icon className={`w-8 h-8 ${colors.text}`} />
-                                    <div className="flex-1">
-                                        <p className={`${colors.text} font-black text-lg font-mono mb-1`}>
-                                            {section.title}
-                                        </p>
-                                        <p className="text-gray-400 text-xs font-mono">
-                                            {section.description}
-                                        </p>
-                                    </div>
-                                    <div className={`${colors.text} text-2xl`}>→</div>
+                                <Icon className={`w-10 h-10 ${colors.text}`} />
+                                <div className="flex-1">
+                                    <p className={`${colors.text} font-black text-xl font-mono mb-1`}>
+                                        {section.title}
+                                    </p>
+                                    <p className="text-gray-500 text-xs font-mono">
+                                        {section.description}
+                                    </p>
                                 </div>
                             </motion.div>
                         </Link>
@@ -207,7 +180,7 @@ export default function ScottArtistHome() {
             </div>
 
             {/* CALENDAR WIDGET */}
-            <div className="bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border-2 border-cyan-500 rounded-lg p-5">
+            <div className="bg-gray-900/60 backdrop-blur-sm border border-cyan-500/30 rounded-xl p-6">
                 <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-2">
                         <Calendar className="w-6 h-6 text-cyan-400" />
@@ -243,9 +216,9 @@ export default function ScottArtistHome() {
                                     >
                                         <div className="flex-1">
                                             <p className="text-white text-sm font-bold font-mono truncate">{event.title}</p>
-                                            <p className="text-gray-400 text-xs font-mono">
+                                            <p className="text-gray-500 text-xs font-mono">
                                                 {format(new Date(event.date), 'd MMM yyyy')}
-                                                {event.location && ` • ${event.location}`}
+                                                {event.location && ` · ${event.location}`}
                                             </p>
                                         </div>
                                         <div className={`w-2 h-2 rounded-full ${statusColors[event.status]} flex-shrink-0 ml-2`}></div>

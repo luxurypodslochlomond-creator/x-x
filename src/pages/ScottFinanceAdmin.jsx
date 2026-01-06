@@ -53,27 +53,22 @@ export default function ScottFinanceAdmin() {
     };
 
     return (
-        <div className="min-h-screen bg-black text-white p-4 pb-24">
+        <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white p-6 pb-24">
             
             <button
                 onClick={() => navigate(-1)}
-                className="flex items-center gap-2 text-gray-500 hover:text-cyan-400 transition-all mb-6"
+                className="flex items-center gap-2 text-gray-600 hover:text-cyan-400 transition-all mb-8"
             >
                 <ArrowLeft className="w-4 h-4" />
                 <span className="text-sm font-bold font-mono">BACK</span>
             </button>
 
-            <div className="mb-6 pb-4 border-b-2 border-amber-500">
-                <div className="flex items-center gap-3">
-                    <Radio className="w-10 h-10 text-amber-400" />
-                    <div>
-                        <h1 className="text-3xl font-black text-amber-400 font-mono">FINANCE / ADMIN</h1>
-                        <p className="text-gray-500 text-xs font-mono">Money • Legal • Travel</p>
-                    </div>
-                </div>
+            <div className="mb-8">
+                <h1 className="text-4xl font-black text-amber-400 font-mono mb-2">FINANCE</h1>
+                <p className="text-gray-500 text-sm font-mono">Money · Legal · Travel</p>
             </div>
 
-            <div className="space-y-3">
+            <div className="grid grid-cols-1 gap-4 max-w-2xl mx-auto">
                 {sections.map((section) => {
                     const Icon = section.icon;
                     const colors = colorMap[section.color];
@@ -81,20 +76,20 @@ export default function ScottFinanceAdmin() {
                     return (
                         <Link key={section.title} to={section.link}>
                             <motion.div
+                                whileHover={{ y: -4 }}
                                 whileTap={{ scale: 0.98 }}
-                                className={`bg-gradient-to-r ${colors.bg} to-black border-2 ${colors.border} rounded-lg p-5 hover:shadow-lg transition-all`}
+                                className={`bg-gray-900/60 backdrop-blur-sm border ${colors.border}/30 hover:${colors.border} rounded-xl p-6 transition-all`}
                             >
                                 <div className="flex items-center gap-4">
-                                    <Icon className={`w-8 h-8 ${colors.text}`} />
+                                    <Icon className={`w-10 h-10 ${colors.text}`} />
                                     <div className="flex-1">
-                                        <p className={`${colors.text} font-black text-lg font-mono mb-1`}>
+                                        <p className={`${colors.text} font-black text-xl font-mono mb-1`}>
                                             {section.title}
                                         </p>
-                                        <p className="text-gray-400 text-xs font-mono">
+                                        <p className="text-gray-500 text-sm font-mono">
                                             {section.subtitle}
                                         </p>
                                     </div>
-                                    <div className={`${colors.text} text-2xl`}>→</div>
                                 </div>
                             </motion.div>
                         </Link>

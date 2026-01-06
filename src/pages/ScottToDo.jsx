@@ -75,33 +75,28 @@ export default function ScottToDo() {
     const doneTasks = tasks.filter(t => t.status === 'done');
 
     return (
-        <div className="min-h-screen bg-black text-white p-4 pb-24">
+        <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white p-6 pb-24">
             
             <button
                 onClick={() => navigate(-1)}
-                className="flex items-center gap-2 text-gray-500 hover:text-cyan-400 transition-all mb-6"
+                className="flex items-center gap-2 text-gray-600 hover:text-cyan-400 transition-all mb-8"
             >
                 <ArrowLeft className="w-4 h-4" />
                 <span className="text-sm font-bold font-mono">BACK</span>
             </button>
 
-            <div className="mb-6 pb-4 border-b-2 border-green-500">
-                <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                        <Radio className="w-10 h-10 text-green-400" />
-                        <div>
-                            <h1 className="text-3xl font-black text-green-400 font-mono">TO-DO</h1>
-                            <p className="text-gray-500 text-xs font-mono">Tasks • Deadlines • Progress</p>
-                        </div>
-                    </div>
-                    <button
-                        onClick={() => setShowAddTask(!showAddTask)}
-                        className="bg-green-500 hover:bg-green-600 text-black font-bold px-4 py-2 rounded-lg text-sm flex items-center gap-2"
-                    >
-                        <Plus className="w-4 h-4" />
-                        ADD
-                    </button>
+            <div className="mb-8 flex items-center justify-between">
+                <div>
+                    <h1 className="text-4xl font-black text-green-400 font-mono mb-2">TASKS</h1>
+                    <p className="text-gray-500 text-sm font-mono">Deadlines · Progress</p>
                 </div>
+                <button
+                    onClick={() => setShowAddTask(!showAddTask)}
+                    className="bg-green-500 hover:bg-green-600 text-black font-bold px-6 py-3 rounded-xl text-sm flex items-center gap-2 transition-all"
+                >
+                    <Plus className="w-5 h-5" />
+                    ADD
+                </button>
             </div>
 
             {/* ADD TASK FORM */}
@@ -177,22 +172,17 @@ export default function ScottToDo() {
                                     </button>
                                     <div className="flex-1">
                                         <p className="text-white font-bold mb-2 font-mono">{task.title}</p>
-                                        <div className="flex flex-wrap gap-3 text-xs">
-                                            {task.responsible && (
-                                                <span className="text-cyan-400 font-mono">
-                                                    👤 {task.responsible}
-                                                </span>
-                                            )}
-                                            {task.deadline && (
-                                                <span className="text-amber-400 font-mono">
-                                                    📅 {new Date(task.deadline).toLocaleDateString('en-GB')}
-                                                </span>
-                                            )}
-                                            {task.created_by && (
-                                                <span className="text-gray-500 font-mono">
-                                                    Added by {task.created_by}
-                                                </span>
-                                            )}
+                                        <div className="flex flex-wrap gap-4 text-xs">
+                                           {task.responsible && (
+                                               <span className="text-cyan-400 font-mono">
+                                                   {task.responsible}
+                                               </span>
+                                           )}
+                                           {task.deadline && (
+                                               <span className="text-amber-400 font-mono">
+                                                   {new Date(task.deadline).toLocaleDateString('en-GB')}
+                                               </span>
+                                           )}
                                         </div>
                                     </div>
                                     <button
