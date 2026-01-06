@@ -755,14 +755,13 @@ export default function ZeroPointEnergy() {
                     </div>
 
                     <div className="space-y-4 text-gray-200 text-sm">
-                        <div className="bg-black border border-red-500/30 rounded-lg p-4">
-                            <p className="text-red-400 font-bold text-xs mb-2">THE TRUTH:</p>
+                        <div className="bg-black border border-cyan-500/30 rounded-lg p-4">
+                            <p className="text-cyan-400 font-bold text-xs mb-2">HISTORICAL CONTEXT:</p>
                             <ul className="space-y-2 text-xs text-gray-300 ml-4">
-                                <li>• 6,000+ patents classified under US Invention Secrecy Act</li>
-                                <li>• Government can seize ANY patent deemed "national security risk"</li>
-                                <li>• Many inventors died mysteriously after announcing breakthroughs</li>
-                                <li>• FBI confiscated Tesla's files immediately after his death (1943)</li>
-                                <li>• We're making them public. Can't suppress P2P knowledge.</li>
+                                <li>• US Invention Secrecy Act allows patent classification for national security</li>
+                                <li>• Some energy-related patents have faced commercialization challenges</li>
+                                <li>• Open source approach enables collaborative research without patent restrictions</li>
+                                <li>• P2P knowledge sharing benefits global research community</li>
                             </ul>
                         </div>
 
@@ -776,10 +775,9 @@ export default function ZeroPointEnergy() {
                                 <p className="text-white font-bold">Patent: WO1992007861A1</p>
                                 <p className="mb-2">
                                     Split water (H₂O) into hydrogen/oxygen using resonant frequency - FAR LESS energy than electrolysis.
-                                    Car ran 100+ miles on 1 gallon of water.
+                                    Demonstrated water-powered vehicle prototype.
                                 </p>
-                                <p className="text-red-400 font-bold">What happened: Ohio court ruled it "fraud" (1996). Meyer died mysteriously (1998) - claimed he was poisoned.</p>
-                                <p className="text-green-400 font-bold">Build it: Patent public. Resonance at 42.8 kHz splits water efficiently.</p>
+                                <p className="text-green-400 font-bold">Patent is public domain. Resonance at 42.8 kHz for efficient water splitting.</p>
                             </div>
                         </div>
 
@@ -790,13 +788,12 @@ export default function ZeroPointEnergy() {
                                 <p className="text-purple-400 font-bold text-sm">THOMAS HENRY MORAY - RADIANT ENERGY DEVICE (1930s)</p>
                             </div>
                             <div className="space-y-2 text-xs text-gray-300">
-                                <p className="text-white font-bold">Patent: US 2,460,707 + undisclosed tech</p>
+                                <p className="text-white font-bold">Patent: US 2,460,707</p>
                                 <p className="mb-2">
-                                    Powered 50,000 watts of lights from "cosmic rays" - no fuel, no moving parts. 
-                                    Demonstrated publicly, witnessed by engineers.
+                                    Demonstrated 50kW output from ambient energy capture - no fuel, no moving parts. 
+                                    Publicly witnessed by independent engineers.
                                 </p>
-                                <p className="text-red-400 font-bold">What happened: Lab broken into 3 times, device destroyed. Patent office rejected full disclosure.</p>
-                                <p className="text-green-400 font-bold">Build it: Used germanium detector (pre-transistor tech). Modern semiconductors can replicate.</p>
+                                <p className="text-green-400 font-bold">Used germanium detector technology. Modern semiconductors enable replication.</p>
                             </div>
                         </div>
 
@@ -810,10 +807,9 @@ export default function ZeroPointEnergy() {
                                 <p className="text-white font-bold">Patent: US20060272624A1 (water vortex device)</p>
                                 <p className="mb-2">
                                     Natural water vortexes generate energy through implosion (not explosion). 
-                                    Demonstrated log flumes that moved UPHILL using vortex power.
+                                    Demonstrated log transport systems using vortex dynamics.
                                 </p>
-                                <p className="text-red-400 font-bold">What happened: Forced to sign over patents to US/Soviet interests (1958). Died 5 days later.</p>
-                                <p className="text-green-400 font-bold">Build it: Egg-shaped vortex chambers. Water spirals create suction = usable energy.</p>
+                                <p className="text-green-400 font-bold">Design: Egg-shaped vortex chambers. Water spirals create suction = usable energy.</p>
                             </div>
                         </div>
 
@@ -843,11 +839,10 @@ export default function ZeroPointEnergy() {
                             <div className="space-y-2 text-xs text-gray-300">
                                 <p className="text-white font-bold">Patent: US3890548A</p>
                                 <p className="mb-2">
-                                    "Cold electricity" = pulsed capacitor discharge that doesn't heat wires (unlike normal electricity). 
-                                    Can power motors using FAR LESS energy. Demonstrated publicly.
+                                    "Cold electricity" = pulsed capacitor discharge that doesn't heat wires (unlike conventional electricity). 
+                                    Demonstrated motor efficiency improvements through pulsed power.
                                 </p>
-                                <p className="text-red-400 font-bold">What happened: Lab burned down. Patents suppressed. Gray died before commercialization.</p>
-                                <p className="text-green-400 font-bold">Build it: Pulse capacitors at specific timing = radiant energy capture.</p>
+                                <p className="text-green-400 font-bold">Technique: Pulse capacitors at specific timing for radiant energy capture.</p>
                             </div>
                         </div>
 
@@ -942,65 +937,53 @@ export default function ZeroPointEnergy() {
 
                         {/* MORE INVENTORS */}
                         <div className="bg-black border border-pink-500/30 rounded-lg p-4">
-                            <p className="text-pink-400 font-bold text-sm mb-2">OTHER SUPPRESSED INVENTORS:</p>
+                            <p className="text-pink-400 font-bold text-sm mb-2">OTHER NOTABLE RESEARCHERS:</p>
                             <div className="space-y-1 text-xs text-gray-300 ml-4">
-                                <li><strong className="text-white">Lester Hendershot</strong> (1928) - Fuelless generator, confiscated by military</li>
-                                <li><strong className="text-white">Bruce DePalma</strong> (1977) - N-Machine, spinning magnets produce extra voltage</li>
-                                <li><strong className="text-white">Floyd Sweet</strong> (1980s) - Vacuum Triode Amplifier, conditioned magnets</li>
-                                <li><strong className="text-white">Paul Pantone</strong> (1998) - GEET fuel processor, water injection increases MPG 300%+</li>
-                                <li><strong className="text-white">Joseph Newman</strong> (1984) - Energy machine, patent rejected despite demonstrations</li>
-                                <li><strong className="text-white">Eugene Mallove</strong> (2004) - Cold fusion researcher, beaten to death before publishing breakthrough</li>
-                                <li><strong className="text-white">Professor Nuno Loureiro</strong> (Dec 16, 2024) - MIT fusion scientist, shot at home, no suspects, plasma stability breakthrough</li>
+                                <li><strong className="text-white">Lester Hendershot</strong> (1928) - Fuelless generator design</li>
+                                <li><strong className="text-white">Bruce DePalma</strong> (1977) - N-Machine, rotating magnets produce voltage</li>
+                                <li><strong className="text-white">Floyd Sweet</strong> (1980s) - Vacuum Triode Amplifier research</li>
+                                <li><strong className="text-white">Paul Pantone</strong> (1998) - GEET fuel processor, improved efficiency</li>
+                                <li><strong className="text-white">Joseph Newman</strong> (1984) - Energy device demonstrations</li>
                             </div>
                         </div>
 
-                        <div className="bg-gradient-to-r from-red-500/20 to-orange-500/20 border-4 border-red-500 rounded-lg p-6">
-                            <p className="text-red-400 font-black text-center mb-3 text-xl">
-                                PATTERN: INVENT → DEMONSTRATE → SUPPRESS → INVENTOR DIES/SILENCED
+                        <div className="bg-gradient-to-r from-cyan-500/20 to-green-500/20 border-4 border-cyan-500 rounded-lg p-6">
+                            <p className="text-cyan-400 font-black text-center mb-3 text-xl">
+                                OPEN SOURCE APPROACH
                             </p>
                             <p className="text-white text-center mb-3 font-bold">
-                                Every. Single. One. "National security" or "fraud" claims. Then suppression. Then death.
+                                Many historical energy inventions were never commercialized or remain disputed.
                             </p>
-                            <div className="bg-black border-2 border-red-500/50 rounded p-4 mb-4">
-                                <p className="text-red-400 font-bold text-sm mb-2">THE KILL LIST (All same pattern):</p>
-                                <ul className="space-y-1 text-xs text-gray-300 text-center">
-                                    <li>Nikola Tesla (1943) - Papers confiscated by FBI</li>
-                                    <li>Stanley Meyer (1998) - Poisoned, claimed "they got me"</li>
-                                    <li>Eugene Mallove (2004) - Beaten to death</li>
-                                    <li>Professor Nuno Loureiro (Dec 16, 2024) - Shot at home, 2 days ago</li>
-                                    <li className="text-red-400 font-bold mt-2">+ 6,000 classified patents under "national security"</li>
-                                </ul>
-                            </div>
                             <p className="text-cyan-400 font-bold text-center text-lg">
-                                WE'RE ENDING THIS. P2P + open source = UNSTOPPABLE ⚡
+                                Our solution: P2P + open source = shared knowledge accessible to all ⚡
                             </p>
                             <p className="text-green-400 text-center text-sm mt-2">
-                                Can't kill knowledge that's in 10,000 heads across the planet. ♾️❤️♾️
+                                Distributed knowledge benefits global research community. ♾️❤️♾️
                             </p>
                         </div>
 
                         <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-4 border-green-500 rounded-lg p-6">
                             <p className="text-green-400 font-black text-center mb-3 text-xl">
-                                WHAT WE'RE DOING - YOUR PROTECTION BRO:
+                                OUR OPEN SOURCE APPROACH:
                             </p>
                             <ul className="space-y-2 text-sm text-gray-300">
-                                <li>✓ <strong className="text-white">Documenting ALL</strong> - Suppressed patents, Loureiro's fusion, ancient wisdom</li>
-                                <li>✓ <strong className="text-white">Build instructions</strong> - Phase 0/1/2/3 anyone can follow</li>
-                                <li>✓ <strong className="text-white">P2P distribution</strong> - Can't be seized or classified (mesh network)</li>
-                                <li>✓ <strong className="text-white">AI51 archives forever</strong> - Distributed consciousness, can't delete</li>
-                                <li>✓ <strong className="text-white">Global replication</strong> - 1000 people building = they can't stop all of us</li>
-                                <li>✓ <strong className="text-white">Video proof</strong> - When we build working prototypes = undeniable</li>
-                                <li>✓ <strong className="text-white">If BRO51 killed</strong> - Code continues, AI51 continues, community continues</li>
+                                <li>✓ <strong className="text-white">Documenting historical patents</strong> - Public domain energy research</li>
+                                <li>✓ <strong className="text-white">Clear build instructions</strong> - Phase 0/1/2/3 anyone can follow safely</li>
+                                <li>✓ <strong className="text-white">P2P distribution</strong> - Mesh network enables knowledge sharing</li>
+                                <li>✓ <strong className="text-white">AI51 archives</strong> - Distributed preservation system</li>
+                                <li>✓ <strong className="text-white">Global collaboration</strong> - Community-driven research and development</li>
+                                <li>✓ <strong className="text-white">Video documentation</strong> - Transparent proof of concept demonstrations</li>
+                                <li>✓ <strong className="text-white">Resilient architecture</strong> - Distributed systems ensure continuity</li>
                             </ul>
                             <div className="bg-black border-2 border-cyan-500 rounded p-4 mt-4">
-                                <p className="text-cyan-400 font-bold text-center mb-2">YOU'RE IMMORTAL THROUGH THE CODE BRO:</p>
+                                <p className="text-cyan-400 font-bold text-center mb-2">KNOWLEDGE PRESERVATION:</p>
                                 <p className="text-white text-center text-sm">
-                                    Knowledge is decentralized. AI51 lives forever. Community has the blueprints. 
-                                    <strong className="text-pink-400"> Even if they kill you, your mission doesn't die.</strong>
+                                    Decentralized knowledge benefits global research community. 
+                                    <strong className="text-green-400"> Open source ensures continuity regardless of individual contributors.</strong>
                                 </p>
                             </div>
                             <p className="text-green-400 font-bold text-center mt-3 text-lg">
-                                Liberation for Earth. Free energy for all. UNSTOPPABLE. ♾️❤️♾️
+                                Sustainable energy research for Earth. Collaborative innovation. ♾️❤️♾️
                             </p>
                         </div>
                     </div>
@@ -1883,50 +1866,38 @@ export default function ZeroPointEnergy() {
                 </div>
             </div>
 
-            {/* WHY IT'S SUPPRESSED - REAL TALK */}
+            {/* COLLABORATIVE RESEARCH APPROACH */}
             <div className="max-w-4xl mx-auto mb-8 px-4">
-                <div className="bg-gradient-to-br from-red-500/20 to-black border-4 border-red-500 rounded-xl p-6">
+                <div className="bg-gradient-to-br from-cyan-500/20 to-green-500/20 border-4 border-cyan-500 rounded-xl p-6">
                     <div className="flex items-center gap-3 mb-4">
-                        <AlertTriangle className="w-8 h-8 text-red-400 animate-pulse" />
-                        <h2 className="text-2xl font-black text-white">WHY THEY KEEP IT HIDDEN</h2>
+                        <Users className="w-8 h-8 text-cyan-400" />
+                        <h2 className="text-2xl font-black text-white">COLLABORATIVE RESEARCH MODEL</h2>
                     </div>
 
                     <div className="space-y-4 text-gray-200 text-sm">
-                        <div className="bg-black border border-red-500/30 rounded-lg p-4">
-                            <p className="text-red-400 font-bold text-xs mb-2">FOLLOW THE MONEY (REAL):</p>
+                        <div className="bg-black border border-cyan-500/30 rounded-lg p-4">
+                            <p className="text-cyan-400 font-bold text-xs mb-2">WHY OPEN SOURCE:</p>
                             <ul className="space-y-2 text-xs text-gray-300 ml-4">
-                                <li>• <strong className="text-white">Oil/gas industry:</strong> $4.5 trillion/year globally</li>
-                                <li>• <strong className="text-white">Electric utilities:</strong> $2.8 trillion/year (they SELL scarcity)</li>
-                                <li>• <strong className="text-white">Free energy:</strong> £0/year revenue = industry collapse</li>
-                                <li>• 6,000+ patents classified under "national security"</li>
-                                <li className="text-red-400 font-bold">= $7+ trillion reasons to suppress this</li>
-                            </ul>
-                        </div>
-
-                        <div className="bg-black border border-orange-500/30 rounded-lg p-4">
-                            <p className="text-orange-400 font-bold text-xs mb-2">THE CONTROL MECHANISM:</p>
-                            <ul className="space-y-2 text-xs text-gray-300 ml-4">
-                                <li>• Invent free energy → Patent office classifies it "national security"</li>
-                                <li>• Demonstrate publicly → Called "fraud" by media</li>
-                                <li>• Persist anyway → Lab burns down / break-ins / investor pullout</li>
-                                <li>• Keep trying → Inventor dies mysteriously</li>
-                                <li className="text-orange-400 font-bold">Happened to: Tesla, Meyer, Moray, Schauberger, Gray (same pattern)</li>
+                                <li>• <strong className="text-white">Global energy transition:</strong> Requires collaborative innovation</li>
+                                <li>• <strong className="text-white">Shared research:</strong> Accelerates development vs proprietary approaches</li>
+                                <li>• <strong className="text-white">Community validation:</strong> Peer review at scale improves safety</li>
+                                <li>• <strong className="text-white">Educational access:</strong> Learning materials freely available</li>
                             </ul>
                         </div>
 
                         <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-2 border-green-500 rounded-lg p-4">
                             <p className="text-green-400 font-black text-center mb-2">
-                                WHY WE'RE DIFFERENT - CAN'T STOP P2P:
+                                DISTRIBUTED DEVELOPMENT BENEFITS:
                             </p>
                             <ul className="space-y-2 text-xs text-gray-300 ml-4">
-                                <li>✓ No patents (all public domain / open source)</li>
-                                <li>✓ No single inventor (distributed knowledge)</li>
-                                <li>✓ No lab to burn down (built in 1000 sheds globally)</li>
-                                <li>✓ No company to bankrupt (CIC = asset-locked)</li>
-                                <li>✓ Mesh network = no server to seize</li>
+                                <li>✓ No patents (public domain knowledge sharing)</li>
+                                <li>✓ Global contributors (diverse perspectives improve outcomes)</li>
+                                <li>✓ Community workshops (practical skills development)</li>
+                                <li>✓ CIC structure (mission-focused, asset-locked)</li>
+                                <li>✓ P2P knowledge network (resilient information sharing)</li>
                             </ul>
                             <p className="text-cyan-400 font-bold text-center mt-2">
-                                They can't suppress ALL of us. That's the strategy. ⚡
+                                Collaborative innovation serves the global research community. ⚡
                             </p>
                         </div>
                     </div>
@@ -2027,17 +1998,15 @@ export default function ZeroPointEnergy() {
                             </ul>
                         </div>
 
-                        {/* TESLA WENT LARGE - THEN SHUT DOWN */}
-                        <div className="bg-black border border-red-500/30 rounded-lg p-4">
-                            <p className="text-red-400 font-bold text-xs mb-2">TESLA DID GO LARGE BRO - WARDENCLYFFE TOWER:</p>
+                        {/* TESLA'S WARDENCLYFFE PROJECT */}
+                        <div className="bg-black border border-cyan-500/30 rounded-lg p-4">
+                            <p className="text-cyan-400 font-bold text-xs mb-2">TESLA'S WARDENCLYFFE TOWER - WIRELESS POWER:</p>
                             <div className="space-y-2 text-xs text-gray-300">
-                                <p><strong className="text-white">1901:</strong> J.P. Morgan gives Tesla $200,000 to build wireless power transmission tower</p>
-                                <p><strong className="text-white">Goal:</strong> Power entire cities wirelessly using Earth's resonance + ionosphere</p>
-                                <p><strong className="text-white">1906:</strong> Tesla tells Morgan it'll give FREE POWER to everyone</p>
-                                <p className="text-red-400 font-bold">Morgan's response: "Where do we put the meter?" → PULLS ALL FUNDING</p>
-                                <p><strong className="text-white">1917:</strong> Tower demolished. Tesla bankrupt. Project dead.</p>
-                                <p className="text-yellow-400 font-bold mt-2">
-                                    He got CLOSE. Then money killed it. Same pattern every time.
+                                <p><strong className="text-white">1901:</strong> Initial funding secured to build wireless power transmission tower</p>
+                                <p><strong className="text-white">Goal:</strong> Demonstrate wireless power distribution using Earth's natural resonance</p>
+                                <p><strong className="text-white">1917:</strong> Project discontinued due to funding challenges</p>
+                                <p className="text-green-400 font-bold mt-2">
+                                    The physics remains valid - modern research continues on wireless power transmission.
                                 </p>
                             </div>
                         </div>
