@@ -46,7 +46,7 @@ const PUBLIC_PAGES = [
   'FrequencyChamber', 'Universal51', 'DecompressionChamber', 'ThePhysics', 'Terms', 'PrivacyPolicy',
   'ScottManager', 'ScottArtist', 'ScottAddArtist', 'ScottCalendar', 'ScottArtistHome', 
   'ScottLive', 'ScottSessions', 'ScottFinanceAdmin', 'ScottToDo', 'ScottCalendarView',
-  'ScottAbout', 'ScottWorkLog', 'Prof51'
+  'ScottAbout', 'Prof51'
 ];
 
 // OFFLINE-OK PAGES

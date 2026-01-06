@@ -20,11 +20,25 @@ export default function ScottManager() {
     const queryClient = useQueryClient();
 
     useEffect(() => {
-        base44.auth.me().then(setUser).catch(() => {
+        base44.auth.me().then(async (currentUser) => {
+            setUser(currentUser);
+            
+            // If user is an artist (not admin), redirect them to their artist home
+            if (currentUser.role !== 'admin') {
+                const artists = await base44.entities.ScottArtist.filter({ email: currentUser.email });
+                if (artists.length > 0) {
+                    navigate(createPageUrl(`ScottArtistHome?id=${artists[0].id}`));
+                    return;
+                }
+            }
+            // If admin or no artist found, stay on this page
+            setLoading(false);
+        }).catch(() => {
             // Allow public access - no redirect
             setUser(null);
-        }).finally(() => setLoading(false));
-    }, []);
+            setLoading(false);
+        });
+    }, [navigate]);
 
     const { data: artists = [], isLoading } = useQuery({
         queryKey: ['scottArtists'],

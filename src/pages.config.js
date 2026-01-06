@@ -206,7 +206,6 @@ import ScottInvoices from './pages/ScottInvoices';
 import ScottLATrip from './pages/ScottLATrip';
 import ScottLabelContacts from './pages/ScottLabelContacts';
 import ScottLive from './pages/ScottLive';
-import ScottLogin from './pages/ScottLogin';
 import ScottManager from './pages/ScottManager';
 import ScottManagerHome from './pages/ScottManagerHome';
 import ScottMedia from './pages/ScottMedia';
@@ -488,7 +487,6 @@ export const PAGES = {
     "ScottLATrip": ScottLATrip,
     "ScottLabelContacts": ScottLabelContacts,
     "ScottLive": ScottLive,
-    "ScottLogin": ScottLogin,
     "ScottManager": ScottManager,
     "ScottManagerHome": ScottManagerHome,
     "ScottMedia": ScottMedia,
