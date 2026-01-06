@@ -183,43 +183,97 @@ export default function ScottGigWorkflow({ offer }) {
                     </div>
                 )}
 
-                <p className="text-center text-cyan-300 text-sm font-mono">
-                    Share this link with band: <br />
-                    <span className="text-white font-bold break-all">
-                        {window.location.origin}/ScottBandVote?offer={offer.id}
-                    </span>
-                </p>
-
-                {offer.all_responses_in && (
-                    <div className="mt-4 pt-4 border-t border-cyan-500">
-                        <p className="text-green-400 font-black text-center mb-3 font-mono">ALL VOTES IN!</p>
-                        
-                        <Textarea
-                            value={finalResponse}
-                            onChange={(e) => setFinalResponse(e.target.value)}
-                            placeholder={yesVotes > noVotes ? offer.ai_draft_accept : offer.ai_draft_reject}
-                            className="bg-black border-2 border-gray-700 text-white mb-3"
-                            rows={4}
+                <div className="bg-black/60 rounded p-3">
+                    <p className="text-xs text-cyan-400 font-mono mb-2">BAND VOTING LINK:</p>
+                    <div className="flex gap-2">
+                        <input
+                            readOnly
+                            value={`${window.location.origin}/ScottBandVote?offer=${offer.id}`}
+                            className="flex-1 bg-gray-900 border border-gray-700 text-white text-xs font-mono p-2 rounded"
                         />
-
-                        <div className="flex gap-3">
-                            <Button
-                                onClick={() => sendResponseMutation.mutate(false)}
-                                disabled={sendResponseMutation.isPending}
-                                className="flex-1 bg-red-600 hover:bg-red-700 text-white font-black"
-                            >
-                                SEND REJECTION
-                            </Button>
-                            <Button
-                                onClick={() => sendResponseMutation.mutate(true)}
-                                disabled={sendResponseMutation.isPending}
-                                className="flex-1 bg-green-600 hover:bg-green-700 text-white font-black"
-                            >
-                                SEND ACCEPTANCE
-                            </Button>
-                        </div>
+                        <Button
+                            onClick={() => {
+                                navigator.clipboard.writeText(`${window.location.origin}/ScottBandVote?offer=${offer.id}`);
+                                alert('Link copied!');
+                            }}
+                            className="bg-cyan-600 hover:bg-cyan-700 text-white text-xs font-bold"
+                        >
+                            COPY
+                        </Button>
                     </div>
-                )}
+                </div>
+
+                <div className="mt-4 pt-4 border-t border-cyan-500">
+                    <p className="text-cyan-300 font-bold text-center mb-3 font-mono">
+                        {yesVotes} YES • {noVotes} NO
+                    </p>
+                    
+                    <Button
+                        onClick={async () => {
+                            // Generate AI draft responses
+                            const accept = await base44.integrations.Core.InvokeLLM({
+                                prompt: `Write a professional acceptance email for this gig offer. Be warm, confirm details, ask about next steps. 
+
+Gig: ${offer.venue}
+Date: ${offer.date}
+Fee: £${offer.fee}
+Location: ${offer.city}
+Promoter: ${offer.promoter}
+
+Band voted YES. Keep it friendly, professional, Scott's voice.`
+                            });
+
+                            const reject = await base44.integrations.Core.InvokeLLM({
+                                prompt: `Write a polite rejection email for this gig offer. Be respectful, leave door open for future.
+
+Gig: ${offer.venue}
+Date: ${offer.date}
+
+Band can't do it. Keep it kind, professional, Scott's voice.`
+                            });
+
+                            await base44.entities.ScottGigOffer.update(offer.id, {
+                                ai_draft_accept: accept,
+                                ai_draft_reject: reject,
+                                all_responses_in: true
+                            });
+
+                            queryClient.invalidateQueries({ queryKey: ['scottGigOffers'] });
+                        }}
+                        className="w-full bg-purple-500 hover:bg-purple-600 text-white font-black mb-4"
+                    >
+                        ✨ GENERATE AI DRAFTS
+                    </Button>
+
+                    {offer.all_responses_in && (
+                        <>
+                            <Textarea
+                                value={finalResponse}
+                                onChange={(e) => setFinalResponse(e.target.value)}
+                                placeholder={yesVotes > noVotes ? offer.ai_draft_accept : offer.ai_draft_reject}
+                                className="bg-black border-2 border-gray-700 text-white mb-3"
+                                rows={4}
+                            />
+
+                            <div className="flex gap-3">
+                                <Button
+                                    onClick={() => sendResponseMutation.mutate(false)}
+                                    disabled={sendResponseMutation.isPending}
+                                    className="flex-1 bg-red-600 hover:bg-red-700 text-white font-black"
+                                >
+                                    SEND REJECTION
+                                </Button>
+                                <Button
+                                    onClick={() => sendResponseMutation.mutate(true)}
+                                    disabled={sendResponseMutation.isPending}
+                                    className="flex-1 bg-green-600 hover:bg-green-700 text-white font-black"
+                                >
+                                    SEND ACCEPTANCE
+                                </Button>
+                            </div>
+                        </>
+                    )}
+                </div>
             </motion.div>
         );
     }
