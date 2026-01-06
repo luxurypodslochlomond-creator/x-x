@@ -289,13 +289,10 @@ const LayoutInner = ({ children, currentPageName }) => {
     { title: "Privacy", url: createPageUrl("PrivacyPolicy"), icon: Eye },
   ];
 
-  // STUDENT & ARTIST TOOLS (CB51 hidden from public menu - access via PIN 1888)
+  // STUDENT & ARTIST TOOLS
   const scottNav = [
+      { title: "CB51", url: createPageUrl("CB51"), icon: Radio, highlight: true, description: "Your AI co-manager" },
       { title: "Prof51", url: createPageUrl("Prof51"), icon: GraduationCap, highlight: true, description: "AI co-manager for students" },
-      ...(user?.role === 'admin' ? [
-        { title: "📝 Scott Work Log", url: createPageUrl("ScottWorkLog"), icon: FileText, description: "Today's session notes" },
-        { title: "Dec 2024 vs Dec 2025", url: createPageUrl("ScottComparison"), icon: FileText, description: "What Scott asked for vs what's built" },
-      ] : [])
   ];
 
   const adminNav = user?.role === 'admin' ? [
