@@ -103,7 +103,7 @@ export default function CB51() {
 
     if (loading || isLoading) {
         return (
-            <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black flex items-center justify-center">
+            <div className="min-h-screen bg-gradient-to-br from-[#0a0f1a] via-[#0f1419] to-[#0a0f1a] flex items-center justify-center">
                 <div className="text-center">
                     <div className="w-12 h-12 border-2 border-gray-800 border-t-cyan-500 rounded-full animate-spin mx-auto mb-3"></div>
                     <p className="text-gray-600 font-mono text-sm">Loading...</p>
@@ -113,14 +113,17 @@ export default function CB51() {
     }
 
     return (
-        <div className="min-h-screen bg-black text-white p-6 pb-24">
+        <div className="min-h-screen bg-gradient-to-br from-[#0a0f1a] via-[#0f1419] to-[#0a0f1a] text-white p-6 pb-24">
             
             <TechStatusBar showP2PSync={true} />
             
             {/* HEADER */}
             <div className="mb-8 pt-4">
-                <h1 className="text-2xl font-black text-white mb-1 font-mono">CB51</h1>
-                <p className="text-gray-600 text-sm font-mono">Artist Management</p>
+                <div className="flex items-center gap-2 mb-2">
+                    <Radio className="w-6 h-6 text-cyan-400" />
+                    <h1 className="text-2xl font-black text-cyan-400 font-mono">CB51</h1>
+                </div>
+                <p className="text-gray-500 text-sm font-mono">Your AI Co-Manager</p>
 
                 {user && totalTimeSaved > 0 && (
                     <div className="mt-6 grid grid-cols-3 gap-3">
@@ -156,38 +159,38 @@ export default function CB51() {
 
             {/* ACTIVE ARTISTS */}
             <div className="mb-10">
-                <h2 className="text-white font-black text-lg mb-4 font-mono">Artists</h2>
+                <h2 className="text-cyan-400 font-black text-lg mb-4 font-mono uppercase tracking-wider">Artists</h2>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                 {artists.length === 0 ? (
-                    <div className="col-span-2 md:col-span-3 bg-gray-900/40 border border-gray-800 rounded-xl p-12 text-center">
-                        <p className="text-gray-500 text-sm font-mono mb-4">No artists yet</p>
+                    <div className="col-span-2 md:col-span-3 bg-gray-900/60 border border-cyan-500/30 rounded-xl p-12 text-center">
+                        <p className="text-gray-500 text-sm font-mono mb-6">No artists yet</p>
                         {user ? (
                             <Link to={createPageUrl('ScottAddArtist')}>
-                                <button className="bg-cyan-500 hover:bg-cyan-600 text-black font-bold px-6 py-3 rounded-lg text-sm font-mono transition-all">
-                                    ADD FIRST ARTIST
+                                <button className="bg-cyan-500 hover:bg-cyan-600 text-black font-black px-8 py-4 rounded-xl text-base font-mono transition-all uppercase tracking-wider">
+                                    Add First Artist
                                 </button>
                             </Link>
                         ) : (
                             <button 
                                 onClick={() => base44.auth.redirectToLogin(window.location.href)}
-                                className="bg-cyan-500 hover:bg-cyan-600 text-black font-bold px-6 py-3 rounded-lg text-sm font-mono transition-all"
+                                className="bg-cyan-500 hover:bg-cyan-600 text-black font-black px-8 py-4 rounded-xl text-base font-mono transition-all uppercase tracking-wider"
                             >
-                                SIGN IN
+                                Sign In
                             </button>
                         )}
                     </div>
                 ) : (
                     artists.map((artist, index) => (
                         <Link key={artist.id} to={createPageUrl(`ScottArtistHome?id=${artist.id}`)} className="block">
-                            <div className="bg-gray-900/40 hover:bg-gray-900/60 border border-gray-800 hover:border-cyan-500/50 rounded-xl p-5 transition-all h-32 flex items-center gap-4">
-                                <div className="w-14 h-14 rounded-xl bg-gray-800 text-white font-black text-xl flex items-center justify-center flex-shrink-0">
+                            <div className="bg-gray-900/60 hover:bg-gray-900/80 border border-cyan-500/30 hover:border-cyan-500/60 rounded-xl p-5 transition-all h-32 flex items-center gap-4">
+                                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-600 text-white font-black text-xl flex items-center justify-center flex-shrink-0">
                                     {artist.name.charAt(0)}
                                 </div>
                                 <div className="flex-1 min-w-0">
                                     <p className="text-white font-bold text-base font-mono truncate">
                                         {artist.name}
                                     </p>
-                                    <p className="text-gray-600 text-xs font-mono mt-0.5">
+                                    <p className="text-gray-500 text-xs font-mono mt-0.5">
                                         {artist.genre || 'Artist'}
                                     </p>
                                 </div>
@@ -199,8 +202,8 @@ export default function CB51() {
                 {/* ADD ARTIST BUTTON */}
                 {user && artists.length > 0 && (
                     <Link to={createPageUrl('ScottAddArtist')}>
-                        <div className="bg-gray-900/40 hover:bg-gray-900/60 border border-dashed border-gray-700 hover:border-cyan-500/50 rounded-xl p-5 transition-all h-32 flex items-center justify-center">
-                            <Plus className="w-8 h-8 text-gray-600" />
+                        <div className="bg-gray-900/60 hover:bg-gray-900/80 border border-dashed border-cyan-500/30 hover:border-cyan-500/60 rounded-xl p-5 transition-all h-32 flex items-center justify-center">
+                            <Plus className="w-8 h-8 text-cyan-400" />
                         </div>
                     </Link>
                 )}
@@ -210,7 +213,7 @@ export default function CB51() {
             {/* ARCHIVED ARTISTS - RESTORE */}
             {archivedArtists.length > 0 && (
                 <div className="mb-10">
-                <h2 className="text-gray-600 font-black text-lg mb-4 font-mono">Archived</h2>
+                <h2 className="text-gray-600 font-black text-lg mb-4 font-mono uppercase tracking-wider">Archived</h2>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                         {archivedArtists.map((artist, index) => (
                             <div 
@@ -239,7 +242,7 @@ export default function CB51() {
             {user?.role === 'admin' && (
                 <div className="space-y-3 mt-10">
                     <Link to={createPageUrl('ScottAbout')}>
-                        <button className="w-full bg-gray-900/40 hover:bg-gray-900/60 border border-gray-800 hover:border-cyan-500/50 text-white font-mono px-5 py-4 rounded-xl text-sm transition-all">
+                        <button className="w-full bg-gray-900/60 hover:bg-gray-900/80 border border-cyan-500/30 hover:border-cyan-500/60 text-white font-mono px-5 py-4 rounded-xl text-sm transition-all">
                             About CB51 →
                         </button>
                     </Link>
