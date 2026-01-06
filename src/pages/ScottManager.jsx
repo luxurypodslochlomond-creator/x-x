@@ -66,7 +66,7 @@ export default function ScottManager() {
                             <p className="text-gray-500 text-xs font-mono">Admin Home</p>
                         </div>
                     </div>
-                    {user?.role === 'admin' && (
+                    {user && (
                         <Link to={createPageUrl('ScottAddArtist')}>
                             <button className="bg-cyan-500 hover:bg-cyan-600 text-black font-bold px-4 py-2 rounded-lg text-sm flex items-center gap-2">
                                 <Plus className="w-4 h-4" />
@@ -82,7 +82,7 @@ export default function ScottManager() {
                 {artists.length === 0 ? (
                     <div className="bg-gray-900 border-2 border-gray-700 rounded-lg p-12 text-center">
                         <p className="text-gray-500 mb-4">No artists yet</p>
-                        {user?.role === 'admin' && (
+                        {user && (
                             <Link to={createPageUrl('ScottAddArtist')}>
                                 <button className="bg-cyan-500 hover:bg-cyan-600 text-black font-bold px-6 py-3 rounded-lg">
                                     ADD FIRST ARTIST
