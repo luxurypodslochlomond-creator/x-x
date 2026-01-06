@@ -1,17 +1,17 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { base44 } from '@/api/base44Client';
 import { useQuery } from '@tanstack/react-query';
-import { ArrowLeft, FileText, Scale, Shield, TrendingUp } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { ArrowLeft, FileText, Scale, Shield } from 'lucide-react';
 
 /**
- * ADMIN DASHBOARD - CONTRACTS & LEGAL
- * Shows contract status, legal docs, quick access
+ * ADMIN - PROFESSIONAL MINIMAL DESIGN
+ * Clean, spacious, industry-ready
  */
 
 export default function ScottLiveAdmin() {
+    const navigate = useNavigate();
     const urlParams = new URLSearchParams(window.location.search);
     const artistId = urlParams.get('id');
 
@@ -25,90 +25,85 @@ export default function ScottLiveAdmin() {
     const expired = contracts.filter(c => c.status === 'expired').length;
 
     return (
-        <div className="min-h-screen bg-black text-white p-4 pb-24">
+        <div className="min-h-screen bg-black text-white">
             
-            {/* HEADER */}
-            <div className="mb-6 pb-4 border-b-2 border-amber-500">
-                <Link to={createPageUrl(`ScottLive?id=${artistId}`)} className="flex items-center gap-2 text-gray-400 hover:text-amber-400 mb-4">
-                    <ArrowLeft className="w-4 h-4" />
-                    <span className="text-xs font-mono font-bold">BACK TO LIVE</span>
-                </Link>
-                <h1 className="text-3xl font-black text-amber-400 font-mono">ADMIN</h1>
-                <p className="text-gray-500 text-sm font-mono">Contracts • Legal • Documents</p>
-            </div>
-
-            {/* STATS */}
-            <div className="grid grid-cols-3 gap-3 mb-6">
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    className="bg-gradient-to-br from-green-500/20 to-emerald-500/20 border-2 border-green-500 rounded-lg p-4"
-                >
-                    <Shield className="w-6 h-6 text-green-400 mb-2" />
-                    <p className="text-green-400 font-black text-2xl font-mono">{active}</p>
-                    <p className="text-green-300 text-xs font-mono">ACTIVE</p>
-                </motion.div>
-
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.1 }}
-                    className="bg-gradient-to-br from-amber-500/20 to-orange-500/20 border-2 border-amber-500 rounded-lg p-4"
-                >
-                    <TrendingUp className="w-6 h-6 text-amber-400 mb-2" />
-                    <p className="text-amber-400 font-black text-2xl font-mono">{pending}</p>
-                    <p className="text-amber-300 text-xs font-mono">PENDING</p>
-                </motion.div>
-
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.2 }}
-                    className="bg-gradient-to-br from-gray-500/20 to-slate-500/20 border-2 border-gray-500 rounded-lg p-4"
-                >
-                    <FileText className="w-6 h-6 text-gray-400 mb-2" />
-                    <p className="text-gray-400 font-black text-2xl font-mono">{expired}</p>
-                    <p className="text-gray-300 text-xs font-mono">EXPIRED</p>
-                </motion.div>
-            </div>
-
-            {/* QUICK ACTIONS */}
-            <div className="space-y-3">
-                <Link to={createPageUrl(`ScottContracts?id=${artistId}`)}>
-                    <motion.button
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                        className="w-full bg-gradient-to-r from-amber-600 to-orange-600 text-white font-black py-4 rounded-lg font-mono flex items-center justify-center gap-2"
+            {/* CLEAN HEADER */}
+            <div className="border-b border-white/10 bg-black/60 backdrop-blur-xl sticky top-0 z-10">
+                <div className="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
+                    <button
+                        onClick={() => navigate(createPageUrl(`ScottLive${artistId ? `?id=${artistId}` : ''}`))}
+                        className="flex items-center gap-2 text-gray-500 hover:text-white transition-colors"
                     >
-                        <FileText className="w-5 h-5" />
-                        VIEW CONTRACTS
-                    </motion.button>
-                </Link>
-
-                <motion.button
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="w-full bg-gradient-to-r from-cyan-600 to-blue-600 text-white font-black py-4 rounded-lg font-mono flex items-center justify-center gap-2"
-                >
-                    <Scale className="w-5 h-5" />
-                    LEGAL DOCS
-                    <span className="text-xs bg-amber-500 px-2 py-1 rounded">COMING SOON</span>
-                </motion.button>
-
-                <motion.button
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="w-full bg-gradient-to-r from-green-600 to-emerald-600 text-white font-black py-4 rounded-lg font-mono flex items-center justify-center gap-2"
-                >
-                    <Shield className="w-5 h-5" />
-                    INSURANCE
-                    <span className="text-xs bg-amber-500 px-2 py-1 rounded">COMING SOON</span>
-                </motion.button>
+                        <ArrowLeft className="w-4 h-4" />
+                        <span className="text-sm font-mono">Back</span>
+                    </button>
+                    <h1 className="text-base font-semibold text-white">Admin</h1>
+                    <div className="w-16"></div>
+                </div>
             </div>
 
-            {/* FOOTER */}
-            <div className="mt-8 text-center">
-                <p className="text-gray-600 text-xs font-mono">CB51 • Admin</p>
+            <div className="max-w-4xl mx-auto px-6 py-8">
+
+                {/* MINIMAL STATS */}
+                <div className="grid grid-cols-3 gap-3 mb-8">
+                    <div className="bg-white/5 rounded-lg p-5 border border-white/10">
+                        <p className="text-2xl font-semibold text-white mb-1">{active}</p>
+                        <p className="text-xs text-gray-500">Active</p>
+                    </div>
+                    <div className="bg-white/5 rounded-lg p-5 border border-white/10">
+                        <p className="text-2xl font-semibold text-white mb-1">{pending}</p>
+                        <p className="text-xs text-gray-500">Pending</p>
+                    </div>
+                    <div className="bg-white/5 rounded-lg p-5 border border-white/10">
+                        <p className="text-2xl font-semibold text-white mb-1">{expired}</p>
+                        <p className="text-xs text-gray-500">Expired</p>
+                    </div>
+                </div>
+
+                {/* CLEAN SECTIONS */}
+                <div className="space-y-2">
+                    <Link to={createPageUrl(`ScottContracts${artistId ? `?id=${artistId}` : ''}`)}>
+                        <div className="bg-white/5 hover:bg-white/10 rounded-lg p-4 border border-white/10 hover:border-white/20 transition-all flex items-center justify-between group">
+                            <div className="flex items-center gap-3">
+                                <FileText className="w-5 h-5 text-gray-400 group-hover:text-cyan-400 transition-colors" />
+                                <div>
+                                    <p className="text-sm font-medium text-white">Contracts</p>
+                                    <p className="text-xs text-gray-500 mt-0.5">View and manage</p>
+                                </div>
+                            </div>
+                            <ArrowLeft className="w-4 h-4 text-gray-600 group-hover:text-gray-400 rotate-180 transition-colors" />
+                        </div>
+                    </Link>
+
+                    <div className="bg-white/5 rounded-lg p-4 border border-white/10 opacity-40">
+                        <div className="flex items-center justify-between">
+                            <div className="flex items-center gap-3">
+                                <Scale className="w-5 h-5 text-gray-500" />
+                                <div>
+                                    <p className="text-sm font-medium text-white">Legal Docs</p>
+                                    <p className="text-xs text-gray-600 mt-0.5">Coming soon</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="bg-white/5 rounded-lg p-4 border border-white/10 opacity-40">
+                        <div className="flex items-center justify-between">
+                            <div className="flex items-center gap-3">
+                                <Shield className="w-5 h-5 text-gray-500" />
+                                <div>
+                                    <p className="text-sm font-medium text-white">Insurance</p>
+                                    <p className="text-xs text-gray-600 mt-0.5">Coming soon</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* SUBTLE CB51 MARK */}
+                <div className="mt-12 text-center">
+                    <p className="text-xs text-gray-700">CB51</p>
+                </div>
             </div>
         </div>
     );
