@@ -27,6 +27,8 @@ import TruthCheckProtocol from '@/components/ai51/TruthCheckProtocol';
 import { MeshProvider, MeshStatusIndicator } from '@/components/shared/MeshNetwork';
 import SubdomainRouter from '@/components/shared/SubdomainRouter';
 import COOLASFUCK8BitLoading from '@/components/shared/COOLASFUCK8BitLoading';
+import ServiceWorkerManager from '@/components/shared/ServiceWorkerManager';
+import BackgroundSync from '@/components/shared/BackgroundSync';
 import {
                                     Menu, X, Heart, Home, LogOut, Leaf, Sparkles, Music, Map, User, Globe,
                                   BookOpen, Shield, Target, Briefcase, FileText, Settings, Search, Brain, Presentation, Calculator, GraduationCap, Zap, AlertTriangle, Mic2, Lightbulb, Building, Play, Pause, Atom, Eye, Scale, Users, WifiOff, CheckCircle, Waves, ChevronDown, ChevronRight, Calendar, DollarSign, Moon, Signal, ArrowLeft, Radio, Activity
@@ -588,6 +590,8 @@ const LayoutInner = ({ children, currentPageName }) => {
                       <SyncStatusIndicator />
                       <MeshStatusIndicator />
                       <ProfessionalModeToggle />
+                      <ServiceWorkerManager />
+                      <BackgroundSync />
                     </SubdomainRouter>
                   </AI51MemoryProvider>
                 </AudioProvider>
