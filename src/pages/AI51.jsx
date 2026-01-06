@@ -58,10 +58,17 @@ Respond like a real bro:
     };
 
     return (
-        <AI51Chat 
-            onMessageSend={handleMessageSend}
-            isThinking={isThinking}
-            conversation={conversation}
-        />
+        <>
+            <AI51Chat 
+                onMessageSend={handleMessageSend}
+                isThinking={isThinking}
+                conversation={conversation}
+            />
+            <AI51VoiceInterface 
+                onVoiceMessage={handleMessageSend}
+                isThinking={isThinking}
+                lastResponse={conversation[conversation.length - 1]}
+            />
+        </>
     );
 }
