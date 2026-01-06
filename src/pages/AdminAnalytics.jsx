@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { base44 } from '@/api/base44Client';
 import { useQuery } from '@tanstack/react-query';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
-import { Activity, Eye, AlertTriangle, Heart, Music, Globe, Clock } from 'lucide-react';
+import { Activity, Eye, AlertTriangle, Heart, Globe } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 /**
