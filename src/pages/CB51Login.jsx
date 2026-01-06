@@ -13,6 +13,9 @@ import { base44 } from '@/api/base44Client';
 export default function CB51Login() {
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = React.useState(true);
+    const [showPinGate, setShowPinGate] = React.useState(false);
+    const [pin, setPin] = React.useState('');
+    const [pinError, setPinError] = React.useState(false);
 
     useEffect(() => {
         document.title = 'CB51 • Login';
@@ -22,8 +25,18 @@ export default function CB51Login() {
             try {
                 const user = await base44.auth.me();
                 if (user) {
-                    // Already logged in, go to CB51
-                    navigate(createPageUrl('CB51'));
+                    // Admins skip PIN
+                    if (user.role === 'admin') {
+                        navigate(createPageUrl('CB51'));
+                        return;
+                    }
+                    // Artists need PIN
+                    const pinEntered = sessionStorage.getItem('cb51_pin_1888');
+                    if (pinEntered === 'true') {
+                        navigate(createPageUrl('CB51'));
+                    } else {
+                        setShowPinGate(true);
+                    }
                 }
             } catch (error) {
                 // Not logged in, show login page
@@ -36,8 +49,20 @@ export default function CB51Login() {
     }, [navigate]);
 
     const handleLogin = () => {
-        // Redirect to login, then back to CB51
-        base44.auth.redirectToLogin(window.location.origin + createPageUrl('CB51'));
+        // Redirect to login, then back to CB51Login
+        base44.auth.redirectToLogin(window.location.origin + createPageUrl('CB51Login'));
+    };
+
+    const handlePinSubmit = (e) => {
+        e.preventDefault();
+        if (pin === '1888') {
+            sessionStorage.setItem('cb51_pin_1888', 'true');
+            navigate(createPageUrl('CB51'));
+        } else {
+            setPinError(true);
+            setPin('');
+            setTimeout(() => setPinError(false), 2000);
+        }
     };
 
     if (isLoading) {
@@ -46,6 +71,52 @@ export default function CB51Login() {
                 <div className="text-center">
                     <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-cyan-400 mx-auto mb-4"></div>
                     <p className="text-gray-500 font-mono">Loading...</p>
+                </div>
+            </div>
+        );
+    }
+
+    // PIN GATE (for logged-in artists)
+    if (showPinGate) {
+        return (
+            <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black flex items-center justify-center p-6">
+                <div className="max-w-md w-full">
+                    <div className="text-center mb-8">
+                        <Radio className="w-16 h-16 text-cyan-400 mx-auto mb-4" />
+                        <h1 className="text-4xl font-black text-white font-mono mb-2">CB51</h1>
+                        <p className="text-gray-500 text-sm font-mono">Enter PIN</p>
+                    </div>
+
+                    <form onSubmit={handlePinSubmit} className="space-y-4">
+                        <div>
+                            <input
+                                type="password"
+                                inputMode="numeric"
+                                pattern="[0-9]*"
+                                maxLength={4}
+                                value={pin}
+                                onChange={(e) => setPin(e.target.value)}
+                                placeholder="••••"
+                                autoFocus
+                                className={`w-full bg-gray-900/60 border-2 ${pinError ? 'border-red-500' : 'border-cyan-500/30'} rounded-xl px-6 py-4 text-center text-3xl font-mono tracking-[0.5em] text-white placeholder-gray-700 focus:outline-none focus:border-cyan-500 transition-all`}
+                            />
+                            {pinError && (
+                                <p className="text-red-400 text-xs font-mono mt-2 text-center animate-pulse">Incorrect PIN</p>
+                            )}
+                        </div>
+
+                        <button
+                            type="submit"
+                            className="w-full bg-cyan-500 hover:bg-cyan-600 text-black font-black py-4 rounded-xl text-lg font-mono uppercase tracking-wider transition-all"
+                            style={{ boxShadow: '0 0 30px rgba(6, 182, 212, 0.5)' }}
+                        >
+                            Enter
+                        </button>
+                    </form>
+
+                    <div className="mt-8 text-center">
+                        <p className="text-gray-600 text-xs font-mono">Security PIN prevents copying</p>
+                    </div>
                 </div>
             </div>
         );
