@@ -120,7 +120,7 @@ export default function ScottArtistHome() {
 
             {/* ARTIST INFO - CLEAN */}
             {(artist.phone || artist.email || artist.rate || artist.genre) && (
-                <div className="mb-8 bg-gray-900/60 backdrop-blur-sm border border-gray-700/50 rounded-xl p-6">
+                <div className="mb-8 bg-black border-4 border-purple-500 rounded-xl p-6" style={{ boxShadow: '0 0 30px rgba(168, 85, 247, 0.5)' }}>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="space-y-3">
                             {artist.phone && (
@@ -165,7 +165,14 @@ export default function ScottArtistHome() {
                             <motion.div
                                 whileHover={{ y: -4 }}
                                 whileTap={{ scale: 0.98 }}
-                                className={`bg-gray-900/60 backdrop-blur-sm border ${colors.border}/30 hover:border-${colors.border.split('-')[1]}-500 rounded-xl p-6 transition-all h-32 flex items-center gap-4`}
+                                className={`bg-black border-4 ${colors.border} rounded-xl p-6 transition-all h-32 flex items-center gap-4`}
+                                style={{ 
+                                    boxShadow: section.color === 'pink' ? '0 0 30px rgba(236, 72, 153, 0.5)' :
+                                              section.color === 'purple' ? '0 0 30px rgba(168, 85, 247, 0.5)' :
+                                              section.color === 'amber' ? '0 0 30px rgba(245, 158, 11, 0.5)' :
+                                              section.color === 'green' ? '0 0 30px rgba(34, 197, 94, 0.5)' :
+                                              '0 0 30px rgba(6, 182, 212, 0.5)'
+                                }}
                             >
                                 <Icon className={`w-10 h-10 ${colors.text}`} />
                                 <div className="flex-1">
@@ -183,7 +190,7 @@ export default function ScottArtistHome() {
             </div>
 
             {/* CALENDAR WIDGET */}
-            <div className="bg-gray-900/60 backdrop-blur-sm border border-cyan-500/30 rounded-xl p-6">
+            <div className="bg-black border-4 border-cyan-500 rounded-xl p-6" style={{ boxShadow: '0 0 30px rgba(6, 182, 212, 0.5)' }}>
                 <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-2">
                         <Calendar className="w-6 h-6 text-cyan-400" />

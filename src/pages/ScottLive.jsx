@@ -70,7 +70,12 @@ export default function ScottLive() {
                             <motion.div
                                 whileHover={{ y: -4 }}
                                 whileTap={{ scale: 0.98 }}
-                                className={`bg-gray-900/60 backdrop-blur-sm border ${colors.border}/30 hover:${colors.border} rounded-xl p-6 transition-all`}
+                                className={`bg-black border-4 ${colors.border} rounded-xl p-6 transition-all`}
+                                style={{ 
+                                    boxShadow: section.color === 'pink' ? '0 0 30px rgba(236, 72, 153, 0.5)' :
+                                              section.color === 'amber' ? '0 0 30px rgba(245, 158, 11, 0.5)' :
+                                              '0 0 30px rgba(6, 182, 212, 0.5)'
+                                }}
                             >
                                 <div className="flex items-center gap-4">
                                     <Icon className={`w-10 h-10 ${colors.text}`} />

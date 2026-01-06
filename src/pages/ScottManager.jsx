@@ -110,7 +110,7 @@ export default function ScottManager() {
                         transition={{ duration: 0.4 }}
                         className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto"
                     >
-                        <div className="bg-gray-900/60 backdrop-blur-sm border border-green-500/30 rounded-xl p-6 hover:border-green-500/60 transition-all">
+                        <div className="bg-black border-4 border-green-500 rounded-xl p-6 transition-all" style={{ boxShadow: '0 0 30px rgba(34, 197, 94, 0.5)' }}>
                             <p className="text-green-400 font-black text-4xl text-center font-mono mb-2">
                                 {hoursPerWeek}h
                             </p>
@@ -119,7 +119,7 @@ export default function ScottManager() {
                             </p>
                         </div>
 
-                        <div className="bg-gray-900/60 backdrop-blur-sm border border-cyan-500/30 rounded-xl p-6 hover:border-cyan-500/60 transition-all">
+                        <div className="bg-black border-4 border-cyan-500 rounded-xl p-6 transition-all" style={{ boxShadow: '0 0 30px rgba(6, 182, 212, 0.5)' }}>
                             <p className="text-cyan-400 font-black text-4xl text-center font-mono mb-2">
                                 {totalOffers}
                             </p>
@@ -128,7 +128,7 @@ export default function ScottManager() {
                             </p>
                         </div>
 
-                        <div className="bg-gray-900/60 backdrop-blur-sm border border-pink-500/30 rounded-xl p-6 hover:border-pink-500/60 transition-all">
+                        <div className="bg-black border-4 border-pink-500 rounded-xl p-6 transition-all" style={{ boxShadow: '0 0 30px rgba(236, 72, 153, 0.5)' }}>
                             <p className="text-pink-400 font-black text-4xl text-center font-mono mb-2">
                                 {confirmedGigs}
                             </p>
@@ -164,7 +164,8 @@ export default function ScottManager() {
                                 transition={{ delay: index * 0.05 }}
                                 whileHover={{ y: -4 }}
                                 whileTap={{ scale: 0.98 }}
-                                className="bg-gray-900/60 backdrop-blur-sm border border-cyan-500/30 hover:border-cyan-500 rounded-xl p-4 md:p-6 transition-all h-40 md:h-44 flex flex-col items-center justify-center"
+                                className="bg-black border-4 border-cyan-500 rounded-xl p-4 md:p-6 transition-all h-40 md:h-44 flex flex-col items-center justify-center"
+                                style={{ boxShadow: '0 0 30px rgba(6, 182, 212, 0.5)' }}
                             >
                                 <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-gradient-to-br from-cyan-500 to-purple-500 text-black font-black text-2xl md:text-3xl flex items-center justify-center mb-3 md:mb-4">
                                     {artist.name.charAt(0)}
@@ -186,10 +187,11 @@ export default function ScottManager() {
                             <motion.div 
                                 whileHover={{ y: -4 }}
                                 whileTap={{ scale: 0.98 }}
-                                className="bg-gray-900/40 backdrop-blur-sm border-2 border-dashed border-gray-700 hover:border-cyan-500 rounded-xl p-4 md:p-6 transition-all h-40 md:h-44 flex flex-col items-center justify-center"
+                                className="bg-black border-4 border-dashed border-green-500 hover:border-green-400 rounded-xl p-4 md:p-6 transition-all h-40 md:h-44 flex flex-col items-center justify-center"
+                                style={{ boxShadow: '0 0 25px rgba(34, 197, 94, 0.4)' }}
                             >
-                                <Plus className="w-10 h-10 md:w-14 md:h-14 text-gray-600 mb-2 md:mb-3" />
-                                <p className="text-gray-500 font-mono text-xs md:text-sm font-bold">ADD</p>
+                                <Plus className="w-10 h-10 md:w-14 md:h-14 text-green-400 mb-2 md:mb-3" />
+                                <p className="text-green-400 font-mono text-xs md:text-sm font-bold">ADD</p>
                             </motion.div>
                         </Link>
                 )}
@@ -231,7 +233,7 @@ export default function ScottManager() {
             {user?.role === 'admin' && (
                 <div className="max-w-5xl mx-auto space-y-4 mt-10">
                     <Link to={createPageUrl('ScottAbout')}>
-                        <button className="w-full bg-gray-900/60 backdrop-blur-sm border border-cyan-500/30 hover:border-cyan-500 text-cyan-400 font-black px-6 py-4 rounded-xl text-sm font-mono transition-all">
+                        <button className="w-full bg-black border-4 border-cyan-500 text-cyan-400 font-black px-6 py-4 rounded-xl text-sm font-mono transition-all" style={{ boxShadow: '0 0 30px rgba(6, 182, 212, 0.5)' }}>
                             ABOUT CB51 →
                         </button>
                     </Link>
