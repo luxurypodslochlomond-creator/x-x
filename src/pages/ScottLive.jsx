@@ -20,21 +20,21 @@ export default function ScottLive() {
             subtitle: '99 overview of App, pick up from Email',
             icon: Mail,
             color: 'pink',
-            link: createPageUrl('ScottGigOffers') + (artistId ? `?id=${artistId}` : '')
+            link: createPageUrl('ScottLiveBookings') + (artistId ? `?id=${artistId}` : '')
         },
         {
             title: 'ADMIN',
             subtitle: 'Advancing / Invoicing etc',
             icon: DollarSign,
             color: 'amber',
-            link: createPageUrl('ScottFinancialDashboard') + (artistId ? `?id=${artistId}` : '')
+            link: createPageUrl('ScottLiveAdmin') + (artistId ? `?id=${artistId}` : '')
         },
         {
             title: 'LOGISTICS',
             subtitle: 'On tour',
             icon: MapPin,
             color: 'cyan',
-            link: createPageUrl('ScottTravelMode') + (artistId ? `?id=${artistId}` : '')
+            link: createPageUrl('ScottLiveLogistics') + (artistId ? `?id=${artistId}` : '')
         }
     ];
 

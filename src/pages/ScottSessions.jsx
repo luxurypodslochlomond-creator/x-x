@@ -20,21 +20,21 @@ export default function ScottSessions() {
             subtitle: 'Writing sessions',
             icon: Music,
             color: 'purple',
-            link: createPageUrl('ScottDemos') + (artistId ? `?id=${artistId}` : '')
+            link: createPageUrl('ScottSessionsWriting') + (artistId ? `?id=${artistId}` : '')
         },
         {
             title: 'RECORDING',
             subtitle: 'Studio sessions',
             icon: Mic2,
             color: 'pink',
-            link: createPageUrl('ScottDemos') + (artistId ? `?id=${artistId}` : '')
+            link: createPageUrl('ScottSessionsRecording') + (artistId ? `?id=${artistId}` : '')
         },
         {
             title: 'REHEARSALS',
             subtitle: 'Band practice',
             icon: Users,
             color: 'cyan',
-            link: createPageUrl('ScottCalendarView') + (artistId ? `?id=${artistId}` : '')
+            link: createPageUrl('ScottSessionsRehearsal') + (artistId ? `?id=${artistId}` : '')
         }
     ];
 
