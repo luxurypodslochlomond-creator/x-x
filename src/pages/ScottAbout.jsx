@@ -191,6 +191,50 @@ export default function ScottAbout() {
                     </div>
                 </div>
 
+                {/* WHY THIS MATTERS */}
+                <div className="bg-gray-900/60 border border-cyan-500/30 rounded-xl p-6">
+                    <div className="flex items-center gap-3 mb-4">
+                        <Heart className="w-10 h-10 text-cyan-400" />
+                        <h2 className="text-cyan-400 font-black text-xl font-mono">Why This Matters</h2>
+                    </div>
+
+                    <div className="space-y-4 text-sm font-mono">
+                        <div className="bg-gray-900/40 border border-gray-800 rounded-lg p-4">
+                            <p className="text-white font-bold mb-2">When artists are free from admin stress:</p>
+                            <p className="text-gray-400 text-xs mb-1">• Better music gets made</p>
+                            <p className="text-gray-400 text-xs mb-1">• Mental health improves</p>
+                            <p className="text-gray-400 text-xs mb-1">• Creativity flows</p>
+                            <p className="text-gray-400 text-xs">• Industry becomes sustainable</p>
+                        </div>
+
+                        <div className="bg-gray-900/40 border border-gray-800 rounded-lg p-4">
+                            <p className="text-white font-bold mb-2">This works because:</p>
+                            <p className="text-gray-400 text-xs mb-1">• Built by actual managers, not tech companies</p>
+                            <p className="text-gray-400 text-xs mb-1">• Works offline when you need it most</p>
+                            <p className="text-gray-400 text-xs mb-1">• P2P = no single point of failure</p>
+                            <p className="text-gray-400 text-xs">• Simple enough to actually use</p>
+                        </div>
+
+                        <div className="bg-gray-900/40 border border-gray-800 rounded-lg p-4">
+                            <p className="text-white font-bold mb-2">The future we're building:</p>
+                            <p className="text-gray-400 text-xs mb-1">• Every artist has zero-stress management</p>
+                            <p className="text-gray-400 text-xs mb-1">• Same tools for sports, property, events</p>
+                            <p className="text-gray-400 text-xs mb-1">• Working class people keep more money</p>
+                            <p className="text-gray-400 text-xs">• Tech that actually helps, not extracts</p>
+                        </div>
+
+                        <div className="bg-gray-900/60 border border-cyan-500/30 rounded-lg p-4">
+                            <p className="text-cyan-400 font-bold mb-2 text-base">Not just a tool - a movement</p>
+                            <p className="text-white text-xs mb-2">
+                                Every subscription funds people to clean the planet. Your money → cleanup crews → healing Earth.
+                            </p>
+                            <p className="text-gray-500 text-xs">
+                                Music industry → Environmental healing ♾️❤️♾️
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
                 {/* BIGGER VISION */}
                 <div className="bg-gray-900/60 border border-cyan-500/30 rounded-lg p-4">
                     <div className="flex items-center gap-2 mb-3">
