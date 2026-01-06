@@ -552,7 +552,7 @@ const LayoutInner = ({ children, currentPageName }) => {
         </main>
       </div>
 
-      {!currentPageName.startsWith('Scott') && (
+      {!currentPageName.startsWith('Scott') && !currentPageName.startsWith('Prof') && (
         <>
           <FloatingMusicPlayer />
           <HealingCircle />
@@ -565,6 +565,13 @@ const LayoutInner = ({ children, currentPageName }) => {
           <AI51Shield />
           <AI51LiveHealer />
           <PendingMessageSender />
+        </>
+      )}
+
+      {currentPageName.startsWith('Scott') && (
+        <>
+          <PWAInstallPrompt manifestUrl="/cb51-manifest.json" />
+          <AutoBugMonitor />
         </>
       )}
     </GlobalErrorBoundary>

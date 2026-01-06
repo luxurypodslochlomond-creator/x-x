@@ -8,7 +8,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Mail, ArrowLeft, Sparkles, WifiOff, CheckCircle, Clock, Shield } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { scanGigOffers } from '@/functions/scanGigOffers';
+// scanGigOffers now called via base44.functions.invoke
 
 /**
  * PASTE GIG OFFER EMAIL - OFFLINE FIRST
@@ -156,13 +156,22 @@ export default function ScottPasteGigOffer() {
 
     setSyncing(true);
     const remaining = [];
+    let successCount = 0;
 
     for (const email of pending) {
       try {
         const decrypted = decrypt(email.emailText);
         if (decrypted) {
-          await scanGigOffers({ emailText: decrypted, artistId: email.artistId });
-          // Successfully synced - don't add to remaining
+          const response = await base44.functions.invoke('scanGigOffers', { 
+            emailText: decrypted, 
+            artistId: email.artistId 
+          });
+          if (response?.data?.success) {
+            successCount++;
+            // Successfully synced - don't add to remaining
+          } else {
+            remaining.push(email);
+          }
         } else {
           remaining.push(email);
         }
@@ -175,6 +184,13 @@ export default function ScottPasteGigOffer() {
     localStorage.setItem('scott_pending_gig_emails', JSON.stringify(remaining));
     setPendingEmails(remaining);
     setSyncing(false);
+
+    if (successCount > 0) {
+      alert(`✅ Synced ${successCount} gig offer${successCount > 1 ? 's' : ''}!`);
+      navigate(createPageUrl('ScottGigOffers'));
+    } else if (remaining.length > 0) {
+      alert('⚠️ Some emails failed to sync. Will retry later.');
+    }
   };
 
   // Handle screenshot paste from clipboard
@@ -271,12 +287,19 @@ export default function ScottPasteGigOffer() {
       }
 
       // If online → process immediately
-      await scanGigOffers({ emailText: textToProcess, artistId });
-      alert('✅ Gig offer extracted!');
-      setEmailText('');
-      setScreenshot(null);
-      setMode('text');
-      navigate(createPageUrl('ScottGigOffers'));
+      const response = await base44.functions.invoke('scanGigOffers', { 
+        emailText: textToProcess, 
+        artistId 
+      });
+      if (response?.data?.success) {
+        alert('✅ Gig offer extracted!');
+        setEmailText('');
+        setScreenshot(null);
+        setMode('text');
+        navigate(createPageUrl('ScottGigOffers'));
+      } else {
+        throw new Error('Failed to extract gig details');
+      }
     } catch (error) {
       // If fails → save offline as backup
       const textToSave = mode === 'text' ? emailText : await extractFromScreenshot(screenshot).catch(() => null);
