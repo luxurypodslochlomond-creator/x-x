@@ -47,6 +47,15 @@ export default function ScottManager() {
         enabled: !!user
     });
 
+    const { data: allOffers = [] } = useQuery({
+        queryKey: ['scottAllGigOffers'],
+        queryFn: () => base44.entities.ScottGigOffer.filter({}),
+        enabled: !!user
+    });
+
+    const totalTimeSaved = allOffers.reduce((sum, offer) => sum + (offer.time_saved_minutes || 120), 0);
+    const hoursPerWeek = Math.round(totalTimeSaved / 60);
+
     const deleteArtistMutation = useMutation({
         mutationFn: (artistId) => base44.entities.ScottArtist.delete(artistId),
         onSuccess: () => {
@@ -81,7 +90,18 @@ export default function ScottManager() {
                     <h1 className="text-4xl font-black text-cyan-400 font-mono">ADMIN HOME</h1>
                 </div>
                 <p className="text-gray-500 text-sm font-mono">Manager Dashboard</p>
-            </div>
+
+                {user && totalTimeSaved > 0 && (
+                    <div className="mt-4 bg-gradient-to-r from-green-500/20 to-emerald-500/20 border-2 border-green-500 rounded-lg p-4 max-w-md mx-auto">
+                        <p className="text-green-400 font-black text-3xl text-center font-mono mb-1">
+                            {hoursPerWeek} HOURS
+                        </p>
+                        <p className="text-green-300 text-sm text-center font-mono">
+                            saved by AI (parsing + drafting + chasing)
+                        </p>
+                    </div>
+                )}
+                </div>
 
             {/* ARTIST GRID - EXACTLY LIKE SKETCH */}
             <div className="grid grid-cols-2 gap-4 max-w-2xl mx-auto">
