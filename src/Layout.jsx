@@ -27,6 +27,7 @@ import TruthCheckProtocol from '@/components/ai51/TruthCheckProtocol';
 import { MeshProvider, MeshStatusIndicator } from '@/components/shared/MeshNetwork';
 import SubdomainRouter from '@/components/shared/SubdomainRouter';
 import COOLASFUCK8BitLoading from '@/components/shared/COOLASFUCK8BitLoading';
+import PrivacyAnalytics from '@/components/shared/PrivacyAnalytics';
 import {
                                   Menu, X, Heart, Home, LogOut, Leaf, Sparkles, Music, Map, User, Globe,
                               BookOpen, Shield, Target, Briefcase, FileText, Settings, Search, Brain, Presentation, Calculator, GraduationCap, Zap, AlertTriangle, Mic2, Lightbulb, Building, Play, Pause, Atom, Eye, Scale, Users, WifiOff, CheckCircle, Waves, ChevronDown, ChevronRight, Calendar, DollarSign, Moon, Signal, ArrowLeft, Radio
@@ -301,6 +302,7 @@ const LayoutInner = ({ children, currentPageName }) => {
   ];
 
   const adminNav = user?.role === 'admin' ? [
+            { title: "📊 Analytics", url: createPageUrl("AdminAnalytics"), icon: Activity },
             { title: "🛡️ AI51 Security", url: createPageUrl("AI51SecurityDashboard"), icon: Shield },
             { title: "💰 Funding Tracker", url: createPageUrl("AdminFundingTracker"), icon: Shield },
     { title: "🏴󠁧󠁢󠁳󠁣󠁴󠁿 Scotland Funding", url: createPageUrl("AdminScotlandFunding"), icon: Heart },
@@ -581,6 +583,7 @@ const LayoutInner = ({ children, currentPageName }) => {
                 <AudioProvider>
                   <AI51MemoryProvider>
                     <SubdomainRouter>
+                      <PrivacyAnalytics />
                       <LayoutInner {...props} />
                       <SyncStatusIndicator />
                       <MeshStatusIndicator />
