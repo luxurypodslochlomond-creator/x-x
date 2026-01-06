@@ -13,7 +13,6 @@ export default function ScottAddArtist() {
     const [saving, setSaving] = useState(false);
     const [formData, setFormData] = useState({
         name: '',
-        type: 'artist',
         phone: '',
         email: '',
         instagram: '',
@@ -29,9 +28,12 @@ export default function ScottAddArtist() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setSaving(true);
-        
+
         try {
-            const newArtist = await base44.entities.ScottArtist.create(formData);
+            const newArtist = await base44.entities.ScottArtist.create({
+                ...formData,
+                type: 'artist'
+            });
             navigate(createPageUrl(`ScottArtistHome?id=${newArtist.id}`));
         } catch (error) {
             alert('Error saving: ' + error.message);
@@ -46,14 +48,6 @@ export default function ScottAddArtist() {
         { value: 'neutral', label: 'Neutral', color: 'bg-gray-500' },
         { value: 'needs_work', label: 'Needs Work', color: 'bg-red-500' },
         { value: 'unknown', label: 'Unknown', color: 'bg-gray-700' }
-    ];
-
-    const typeOptions = [
-        { value: 'artist', label: 'Artist' },
-        { value: 'client', label: 'Client' },
-        { value: 'venue', label: 'Venue' },
-        { value: 'band_crew', label: 'Band/Crew' },
-        { value: 'other', label: 'Other' }
     ];
 
     return (
@@ -76,28 +70,6 @@ export default function ScottAddArtist() {
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-6 max-w-md mx-auto">
-                
-                {/* TYPE - BIG BUTTONS */}
-                <div>
-                    <label className="text-amber-400 text-xs mb-3 block tracking-widest font-bold" style={{ fontFamily: 'monospace' }}>TYPE</label>
-                    <div className="grid grid-cols-3 gap-2">
-                        {typeOptions.map(opt => (
-                            <button
-                                key={opt.value}
-                                type="button"
-                                onClick={() => setFormData({...formData, type: opt.value})}
-                                className={`py-3 px-2 rounded-lg font-bold text-xs transition-all border-2 ${
-                                    formData.type === opt.value 
-                                        ? 'bg-amber-500 text-black border-amber-500' 
-                                        : 'bg-black text-gray-500 border-gray-800 hover:border-amber-500/50'
-                                }`}
-                                style={{ fontFamily: 'monospace' }}
-                            >
-                                {opt.label}
-                            </button>
-                        ))}
-                    </div>
-                </div>
 
                 {/* NAME - BIG INPUT */}
                 <div>
