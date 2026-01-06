@@ -22,6 +22,9 @@ export default function ScottManager() {
     const queryClient = useQueryClient();
 
     useEffect(() => {
+        // Set page title to CB51, not ScottManager
+        document.title = 'CB51 • Your AI Co-Manager';
+        
         base44.auth.me().then(async (currentUser) => {
             setUser(currentUser);
             

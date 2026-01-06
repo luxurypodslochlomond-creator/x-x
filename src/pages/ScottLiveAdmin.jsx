@@ -15,6 +15,10 @@ export default function ScottLiveAdmin() {
     const urlParams = new URLSearchParams(window.location.search);
     const artistId = urlParams.get('id');
 
+    React.useEffect(() => {
+        document.title = 'CB51 • Admin';
+    }, []);
+
     const { data: contracts = [] } = useQuery({
         queryKey: ['scottContracts', artistId],
         queryFn: () => base44.entities.ScottContract.filter(artistId ? { artist_id: artistId } : {}),
