@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
-import { Radio, ArrowLeft, Music, Calendar, ClipboardList, DollarSign, Mic2 } from 'lucide-react';
+import { Radio, ArrowLeft, Music, Calendar, ClipboardList, DollarSign, Mic2, Plus } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
 import { useQuery } from '@tanstack/react-query';
+import { format, isBefore, startOfDay } from 'date-fns';
 
 /**
  * ARTIST HOME PAGE - SCOTT'S FLOOR DIAGRAM
@@ -22,6 +23,13 @@ export default function ScottArtistHome() {
     const urlParams = new URLSearchParams(window.location.search);
     const artistId = urlParams.get('id');
 
+    // Fetch calendar events for widget
+    const { data: events = [] } = useQuery({
+        queryKey: ['scottCalendarEvents', artistId],
+        queryFn: () => base44.entities.ScottEvent.filter({ artist_id: artistId }),
+        enabled: !!artistId
+    });
+
     useEffect(() => {
         if (!artistId) {
             navigate(createPageUrl('ScottManager'));
@@ -35,7 +43,10 @@ export default function ScottArtistHome() {
     if (!artist) {
         return (
             <div className="min-h-screen bg-black flex items-center justify-center">
-                <p className="text-gray-500 font-mono">Loading...</p>
+                <div className="text-center">
+                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-cyan-400 mx-auto mb-4"></div>
+                    <p className="text-gray-500 font-mono">Loading artist...</p>
+                </div>
             </div>
         );
     }
@@ -69,13 +80,7 @@ export default function ScottArtistHome() {
             description: 'Tasks • Deadlines • Progress',
             link: createPageUrl(`ScottToDo?id=${artistId}`)
         },
-        {
-            title: 'CALENDAR',
-            icon: Calendar,
-            color: 'cyan',
-            description: 'Events • TBC • Unavailable',
-            link: createPageUrl(`ScottCalendarView?id=${artistId}`)
-        }
+
     ];
 
     const colorMap = {
@@ -138,11 +143,69 @@ export default function ScottArtistHome() {
                 })}
             </div>
 
+            {/* CALENDAR WIDGET */}
+            <div className="bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border-2 border-cyan-500 rounded-lg p-5">
+                <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center gap-2">
+                        <Calendar className="w-6 h-6 text-cyan-400" />
+                        <h2 className="text-cyan-400 font-black text-lg font-mono">CALENDAR</h2>
+                    </div>
+                    <Link to={createPageUrl(`ScottCalendarView?id=${artistId}`)}>
+                        <button className="text-xs font-bold font-mono text-cyan-400 hover:text-cyan-300 flex items-center gap-1">
+                            <Plus className="w-3 h-3" />
+                            ADD
+                        </button>
+                    </Link>
+                </div>
+
+                <div className="space-y-2 max-h-48 overflow-y-auto">
+                    {events.length === 0 ? (
+                        <p className="text-gray-500 text-sm font-mono text-center py-4">No events yet</p>
+                    ) : (
+                        events
+                            .sort((a, b) => new Date(a.date) - new Date(b.date))
+                            .slice(0, 5)
+                            .map(event => {
+                                const isPast = isBefore(new Date(event.date), startOfDay(new Date()));
+                                const statusColors = {
+                                    confirmed: 'bg-green-500',
+                                    tbc: 'bg-amber-500',
+                                    unavailable: 'bg-red-500'
+                                };
+
+                                return (
+                                    <div 
+                                        key={event.id} 
+                                        className={`flex items-center justify-between bg-black/60 border border-gray-700 rounded p-2 ${isPast ? 'opacity-40' : ''}`}
+                                    >
+                                        <div className="flex-1">
+                                            <p className="text-white text-sm font-bold font-mono truncate">{event.title}</p>
+                                            <p className="text-gray-400 text-xs font-mono">
+                                                {format(new Date(event.date), 'd MMM yyyy')}
+                                                {event.location && ` • ${event.location}`}
+                                            </p>
+                                        </div>
+                                        <div className={`w-2 h-2 rounded-full ${statusColors[event.status]} flex-shrink-0 ml-2`}></div>
+                                    </div>
+                                );
+                            })
+                    )}
+                </div>
+
+                {events.length > 5 && (
+                    <Link to={createPageUrl(`ScottCalendarView?id=${artistId}`)}>
+                        <button className="w-full mt-3 text-xs font-bold font-mono text-cyan-400 hover:text-cyan-300">
+                            VIEW ALL ({events.length})
+                        </button>
+                    </Link>
+                )}
+            </div>
+
             {/* FOOTER */}
-            <div className="mt-12 text-center">
+            <div className="mt-8 text-center">
                 <p className="text-gray-600 text-xs font-mono">CB51 • {artist.name}</p>
                 <p className="text-gray-700 text-[10px] font-mono mt-1">Simple hub ♾️📻</p>
             </div>
-        </div>
-    );
-}
+            </div>
+            );
+            }
