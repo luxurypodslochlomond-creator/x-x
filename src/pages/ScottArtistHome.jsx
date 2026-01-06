@@ -115,7 +115,7 @@ export default function ScottArtistHome() {
             {/* HEADER */}
             <div className="mb-8">
                 <button
-                    onClick={() => navigate(createPageUrl('ScottManager'))}
+                    onClick={() => navigate(createPageUrl('CB51'))}
                     className="flex items-center gap-2 text-gray-600 hover:text-cyan-400 transition-all mb-6"
                 >
                     <ArrowLeft className="w-4 h-4" />

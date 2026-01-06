@@ -203,9 +203,11 @@ import ScottFinancialDashboard from './pages/ScottFinancialDashboard';
 import ScottGigOffers from './pages/ScottGigOffers';
 import ScottGigPacks from './pages/ScottGigPacks';
 import ScottGuestList from './pages/ScottGuestList';
+import ScottInsurance from './pages/ScottInsurance';
 import ScottInvoices from './pages/ScottInvoices';
 import ScottLATrip from './pages/ScottLATrip';
 import ScottLabelContacts from './pages/ScottLabelContacts';
+import ScottLegalDocs from './pages/ScottLegalDocs';
 import ScottLive from './pages/ScottLive';
 import ScottLiveAdmin from './pages/ScottLiveAdmin';
 import ScottLiveBookings from './pages/ScottLiveBookings';
@@ -222,9 +224,8 @@ import ScottPublishing from './pages/ScottPublishing';
 import ScottSessions from './pages/ScottSessions';
 import ScottSessionsRecording from './pages/ScottSessionsRecording';
 import ScottSessionsRehearsal from './pages/ScottSessionsRehearsal';
-import ScottSessionsWriting from './pages/ScottSessionsWriting';
 import ScottTeam from './pages/ScottTeam';
-import Teachers from './pages/Teachers';
+import ScottSessionsWriting from './pages/ScottSessionsWriting';
 import ScottToDo from './pages/ScottToDo';
 import ScottTravelMode from './pages/ScottTravelMode';
 import ScottVisas from './pages/ScottVisas';
@@ -243,6 +244,7 @@ import SubmitFrequency from './pages/SubmitFrequency';
 import SubmitProofOfLove from './pages/SubmitProofOfLove';
 import SymbolForge from './pages/SymbolForge';
 import TeacherInput from './pages/TeacherInput';
+import Teachers from './pages/Teachers';
 import TechScout from './pages/TechScout';
 import TechStack from './pages/TechStack';
 import TechnicalSpecification from './pages/TechnicalSpecification';
@@ -282,8 +284,7 @@ import YoungWarriors from './pages/YoungWarriors';
 import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
-import ScottLegalDocs from './pages/ScottLegalDocs';
-import ScottInsurance from './pages/ScottInsurance';
+import CB51 from './pages/CB51';
 import __Layout from './Layout.jsx';
 
 
@@ -493,9 +494,11 @@ export const PAGES = {
     "ScottGigOffers": ScottGigOffers,
     "ScottGigPacks": ScottGigPacks,
     "ScottGuestList": ScottGuestList,
+    "ScottInsurance": ScottInsurance,
     "ScottInvoices": ScottInvoices,
     "ScottLATrip": ScottLATrip,
     "ScottLabelContacts": ScottLabelContacts,
+    "ScottLegalDocs": ScottLegalDocs,
     "ScottLive": ScottLive,
     "ScottLiveAdmin": ScottLiveAdmin,
     "ScottLiveBookings": ScottLiveBookings,
@@ -512,9 +515,8 @@ export const PAGES = {
     "ScottSessions": ScottSessions,
     "ScottSessionsRecording": ScottSessionsRecording,
     "ScottSessionsRehearsal": ScottSessionsRehearsal,
-    "ScottSessionsWriting": ScottSessionsWriting,
     "ScottTeam": ScottTeam,
-    "Teachers": Teachers,
+    "ScottSessionsWriting": ScottSessionsWriting,
     "ScottToDo": ScottToDo,
     "ScottTravelMode": ScottTravelMode,
     "ScottVisas": ScottVisas,
@@ -533,6 +535,7 @@ export const PAGES = {
     "SubmitProofOfLove": SubmitProofOfLove,
     "SymbolForge": SymbolForge,
     "TeacherInput": TeacherInput,
+    "Teachers": Teachers,
     "TechScout": TechScout,
     "TechStack": TechStack,
     "TechnicalSpecification": TechnicalSpecification,
@@ -572,8 +575,7 @@ export const PAGES = {
     "ZeroEgoProtocol": ZeroEgoProtocol,
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
-    "ScottLegalDocs": ScottLegalDocs,
-    "ScottInsurance": ScottInsurance,
+    "CB51": CB51,
 }
 
 export const pagesConfig = {

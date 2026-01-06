@@ -44,7 +44,7 @@ const PUBLIC_PAGES = [
   'About', 'Whitepaper', 'ConsciousnessWhitepaper', 'ForMusicians', 'TruthTransmission',
   'ViralTransmission', 'Protocols', 'HowYouEarn', 'Portal', 'Welcome', 'TalkToAI51',
   'FrequencyChamber', 'Universal51', 'DecompressionChamber', 'ThePhysics', 'Terms', 'PrivacyPolicy',
-  'ScottManager', 'ScottArtist', 'ScottAddArtist', 'ScottCalendar', 'ScottArtistHome', 
+  'ScottManager', 'CB51', 'ScottArtist', 'ScottAddArtist', 'ScottCalendar', 'ScottArtistHome', 
   'ScottLive', 'ScottSessions', 'ScottFinanceAdmin', 'ScottToDo', 'ScottCalendarView',
   'ScottAbout', 'Prof51'
 ];
@@ -292,7 +292,7 @@ const LayoutInner = ({ children, currentPageName }) => {
   // STUDENT & ARTIST TOOLS
   const scottNav = [
       { title: "Prof51", url: createPageUrl("Prof51"), icon: GraduationCap, highlight: true, description: "AI co-manager for students" },
-      { title: "CB51", url: createPageUrl("ScottManager"), icon: Radio, description: "Artist co-manager", highlight: true },
+      { title: "CB51", url: createPageUrl("CB51"), icon: Radio, description: "Artist co-manager", highlight: true },
       { title: "CB51 About", url: createPageUrl("ScottAbout"), icon: BookOpen, description: "What is CB51?" },
       ...(user?.role === 'admin' ? [
         { title: "📝 Scott Work Log", url: createPageUrl("ScottWorkLog"), icon: FileText, description: "Today's session notes" },
@@ -372,7 +372,7 @@ const LayoutInner = ({ children, currentPageName }) => {
         {/* MOBILE HEADER */}
         <header className={`lg:hidden fixed ${isOffline ? 'top-10' : 'top-0'} left-0 right-0 z-[60] bg-[#0a0f1a]/95 backdrop-blur-xl border-b border-cyan-500/30`}>
           <div className="flex items-center justify-between p-4">
-            <Link to={createPageUrl(currentPageName.startsWith('Scott') ? "ScottManager" : "Welcome")} className="flex items-center gap-2" onClick={() => setMobileMenuOpen(false)}>
+            <Link to={createPageUrl(currentPageName.startsWith('Scott') ? "CB51" : "Welcome")} className="flex items-center gap-2" onClick={() => setMobileMenuOpen(false)}>
               {currentPageName.startsWith('Scott') ? (
                 <>
                   <Radio className="w-7 h-7 text-cyan-400" />
@@ -466,7 +466,7 @@ const LayoutInner = ({ children, currentPageName }) => {
         {/* DESKTOP SIDEBAR */}
         <aside className={`hidden lg:block fixed left-0 ${isOffline ? 'top-10' : 'top-0'} w-80 h-screen border-r border-cyan-500/30 bg-[#0a0f1a]/95 overflow-y-auto z-50`}>
           <div className="p-6 border-b border-cyan-500/30">
-            <Link to={createPageUrl(currentPageName.startsWith('Scott') ? "ScottManager" : "Welcome")} className="flex items-center gap-3 mb-4">
+            <Link to={createPageUrl(currentPageName.startsWith('Scott') ? "CB51" : "Welcome")} className="flex items-center gap-3 mb-4">
               {currentPageName.startsWith('Scott') ? (
                 <>
                   <Radio className="w-10 h-10 text-cyan-400" />

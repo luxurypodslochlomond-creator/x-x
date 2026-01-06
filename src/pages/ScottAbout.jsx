@@ -19,7 +19,7 @@ export default function ScottAbout() {
         <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black pb-20">
             {/* HEADER */}
             <div className="sticky top-0 z-50 border-b-4 border-cyan-500 px-4 py-3" style={{ background: 'linear-gradient(135deg, #000000 0%, #0a4a4a 50%, #000000 100%)', boxShadow: '0 0 30px rgba(6, 182, 212, 0.6)' }}>
-                <Link to={createPageUrl('ScottManager')} className="flex items-center gap-2 text-white font-mono text-sm font-black">
+                <Link to={createPageUrl('CB51')} className="flex items-center gap-2 text-white font-mono text-sm font-black">
                     <div className="bg-cyan-500 p-1.5 rounded" style={{ boxShadow: '2px 2px 0 rgba(6, 182, 212, 0.4)' }}>
                         <ArrowLeft className="w-4 h-4 text-black" />
                     </div>
@@ -266,7 +266,7 @@ export default function ScottAbout() {
                 {/* START */}
                 <div className="text-center space-y-3">
                     <p className="text-gray-400 text-sm font-mono mb-3">Built for the road</p>
-                    <Link to={createPageUrl('ScottManager')}>
+                    <Link to={createPageUrl('CB51')}>
                         <button className="bg-gradient-to-r from-amber-500 to-orange-500 text-black font-black px-8 py-4 rounded-lg text-lg font-mono w-full">
                             OPEN CB51 →
                         </button>
