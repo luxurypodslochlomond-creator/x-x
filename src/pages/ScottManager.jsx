@@ -88,12 +88,8 @@ export default function ScottManager() {
         <div className="min-h-screen bg-black text-white p-4 pb-24">
             
             {/* HEADER */}
-            <div className="mb-8 text-center">
-                <div className="flex items-center justify-center gap-3 mb-3">
-                    <Radio className="w-12 h-12 text-cyan-400" />
-                    <h1 className="text-4xl font-black text-cyan-400 font-mono">CB51</h1>
-                </div>
-                <p className="text-gray-500 text-sm font-mono">Your AI Co-Manager</p>
+            <div className="mb-8 text-center pt-4">
+                <p className="text-gray-500 text-sm font-mono mb-6">Your AI Co-Manager</p>
 
                 {user && totalTimeSaved > 0 && (
                     <motion.div 
