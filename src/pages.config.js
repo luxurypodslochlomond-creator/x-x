@@ -286,7 +286,6 @@ import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
 import CB51Login from './pages/CB51Login';
-import ScottEmailSetup from './pages/ScottEmailSetup';
 import __Layout from './Layout.jsx';
 
 
@@ -579,7 +578,6 @@ export const PAGES = {
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
     "CB51Login": CB51Login,
-    "ScottEmailSetup": ScottEmailSetup,
 }
 
 export const pagesConfig = {
