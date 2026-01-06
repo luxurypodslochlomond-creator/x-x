@@ -1,236 +1,259 @@
 import React, { useState } from 'react';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { base44 } from '@/api/base44Client';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Input } from '@/components/ui/input';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Mail, Send, CheckCircle, XCircle, Loader2, Users } from 'lucide-react';
+import { CheckCircle, XCircle, Send, Clock, Users, ThumbsUp, ThumbsDown } from 'lucide-react';
+import { format } from 'date-fns';
+import { motion } from 'framer-motion';
 
 /**
- * CB51 GIG WORKFLOW - Scott's main use case
- * 1. Email comes in
- * 2. AI scans → extracts gig details
- * 3. Band/crew get YES/NO notification
- * 4. Scott sees results → responds
+ * SCOTT'S CORE WORKFLOW
+ * 1. Manager reviews gig offer
+ * 2. Sends to band for vote
+ * 3. Band members vote yes/no
+ * 4. Manager sees results and responds
  */
 
-export default function ScottGigWorkflow() {
-    const [emailText, setEmailText] = useState('');
-    const [parsedGig, setParsedGig] = useState(null);
-    const [sentToTeam, setSentToTeam] = useState(false);
+export default function ScottGigWorkflow({ offer }) {
     const queryClient = useQueryClient();
+    const [managerNotes, setManagerNotes] = useState(offer.manager_notes || '');
+    const [responseDeadline, setResponseDeadline] = useState('');
+    const [finalResponse, setFinalResponse] = useState('');
 
-    // Fetch team for YES/NO voting
-    const { data: team = [] } = useQuery({
-        queryKey: ['scottTeam'],
-        queryFn: () => base44.entities.ScottTeamMember.filter({ active: true })
-    });
-
-    // Parse email with AI
-    const parseEmailMutation = useMutation({
-        mutationFn: async (email) => {
-            const result = await base44.integrations.Core.InvokeLLM({
-                prompt: `You're CB51's AI parser. Scott pasted an email about a gig/session/event.
-
-        EMAIL TEXT:
-        ${email}
-
-        YOUR JOB: Extract ALL details you can find:
-        - Venue/studio name (use "TBC" only if truly not mentioned)
-        - Date in YYYY-MM-DD format (if "next Friday" calculate from today: ${new Date().toISOString().split('T')[0]})
-        - Fee/guarantee as number (0 if not mentioned)
-        - Artist/band name (or "TBC" if not clear)
-        - Any notes/details
-
-        CRITICAL: ALWAYS extract something. Even if it's just a venue name and approximate date. This is a real email about a real gig - parse whatever details exist. Never reject it.`,
-                response_json_schema: {
-                    type: "object",
-                    properties: {
-                        venue_name: { type: "string" },
-                        offer_date: { type: "string" },
-                        guarantee: { type: "number" },
-                        artist_name: { type: "string" },
-                        notes: { type: "string" }
-                    }
-                }
-            });
-            return result;
-        },
-        onSuccess: (data) => {
-            setParsedGig(data);
-        }
-    });
-
-    // Send YES/NO to team
-    const sendToTeamMutation = useMutation({
+    // Manager approves and sends to band
+    const sendToBandMutation = useMutation({
         mutationFn: async () => {
-            // Create gig offer first
-            const gigOffer = await base44.entities.ScottGigOffer.create({
-                venue_name: parsedGig.venue_name,
-                offer_date: parsedGig.offer_date,
-                guarantee: parsedGig.guarantee,
-                artist_name: parsedGig.artist_name,
-                notes: parsedGig.notes,
-                status: 'pending_team_decision',
-                decision_due: parsedGig.offer_date
+            const deadline = responseDeadline ? new Date(responseDeadline).toISOString() : new Date(Date.now() + 48 * 60 * 60 * 1000).toISOString();
+            return base44.entities.ScottGigOffer.update(offer.id, {
+                status: 'sent_to_band',
+                manager_approved: true,
+                manager_notes: managerNotes,
+                sent_to_band_date: new Date().toISOString(),
+                response_deadline: deadline,
+                urgency: deadline < new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString() ? 'urgent' : 'normal'
             });
-
-            // Create message for each team member
-            const promises = team.map(member =>
-                base44.entities.ScottMessage.create({
-                    team_member_id: member.id,
-                    message_text: `GIG OFFER: ${parsedGig.venue_name} on ${parsedGig.offer_date}${parsedGig.guarantee ? ` - £${parsedGig.guarantee}` : ''}. YES or NO?`,
-                    priority: 'urgent',
-                    category: 'gig_decision',
-                    status: 'pending_response',
-                    related_gig_id: gigOffer.id
-                })
-            );
-            await Promise.all(promises);
         },
         onSuccess: () => {
-            setSentToTeam(true);
-            queryClient.invalidateQueries(['scottMessages']);
-            queryClient.invalidateQueries(['scottGigOffers']);
+            queryClient.invalidateQueries({ queryKey: ['scottGigOffers'] });
         }
     });
 
-    const handleReset = () => {
-        setEmailText('');
-        setParsedGig(null);
-        setSentToTeam(false);
-    };
+    // Manager rejects without sending to band
+    const rejectMutation = useMutation({
+        mutationFn: () => base44.entities.ScottGigOffer.update(offer.id, {
+            status: 'rejected_by_manager',
+            manager_notes: managerNotes,
+            rejection_reason: managerNotes
+        }),
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ['scottGigOffers'] });
+        }
+    });
 
-    return (
-        <div className="bg-black border-2 border-amber-500 rounded-xl p-6">
-            <div className="flex items-center gap-3 mb-4">
-                <Mail className="w-8 h-8 text-amber-400" />
-                <div>
-                    <h2 className="text-amber-400 font-black text-xl font-mono">GIG WORKFLOW</h2>
-                    <p className="text-gray-500 text-xs font-mono">Email → AI → YES/NO → Done</p>
+    // Manager sends final response after band votes
+    const sendResponseMutation = useMutation({
+        mutationFn: (accept) => base44.entities.ScottGigOffer.update(offer.id, {
+            status: accept ? 'confirmed' : 'rejected_by_band',
+            final_response_sent: finalResponse,
+            response_sent_date: new Date().toISOString()
+        }),
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ['scottGigOffers'] });
+        }
+    });
+
+    // PENDING MANAGER REVIEW
+    if (offer.status === 'pending_manager_review') {
+        return (
+            <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="bg-gradient-to-r from-amber-500/20 to-orange-500/20 border-2 border-amber-500 rounded-lg p-6"
+            >
+                <div className="flex items-center gap-2 mb-4">
+                    <Clock className="w-6 h-6 text-amber-400" />
+                    <h3 className="text-amber-400 font-black text-lg font-mono">MANAGER REVIEW</h3>
                 </div>
-            </div>
 
-            <AnimatePresence mode="wait">
-                {!parsedGig ? (
-                    <motion.div
-                        key="input"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        className="space-y-4"
-                    >
+                <div className="space-y-4">
+                    <div>
+                        <label className="text-amber-400 text-xs font-bold font-mono mb-2 block">YOUR NOTES</label>
                         <Textarea
-                            value={emailText}
-                            onChange={(e) => setEmailText(e.target.value)}
-                            placeholder="Paste gig offer email here..."
-                            rows={8}
-                            className="bg-black/60 border-2 border-gray-700 text-white font-mono text-sm focus:border-amber-500"
+                            value={managerNotes}
+                            onChange={(e) => setManagerNotes(e.target.value)}
+                            placeholder="Any thoughts for the band?"
+                            className="bg-black border-2 border-gray-700 text-white"
                         />
-                        <Button
-                            onClick={() => parseEmailMutation.mutate(emailText)}
-                            disabled={!emailText.trim() || parseEmailMutation.isPending}
-                            className="w-full bg-amber-500 hover:bg-amber-600 text-black font-black"
-                        >
-                            {parseEmailMutation.isPending ? (
-                                <>
-                                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                                    AI SCANNING...
-                                </>
-                            ) : (
-                                <>
-                                    <Send className="w-4 h-4 mr-2" />
-                                    SCAN EMAIL
-                                </>
-                            )}
-                        </Button>
-                    </motion.div>
-                ) : !sentToTeam ? (
-                    <motion.div
-                        key="confirm"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        className="space-y-4"
-                    >
-                        <div className="bg-green-900/20 border-2 border-green-500 rounded-lg p-4">
-                            <p className="text-green-400 font-bold mb-3 text-sm">✓ GIG DETAILS EXTRACTED:</p>
-                            <div className="space-y-2 text-sm font-mono">
-                                <p className="text-white"><strong>Venue:</strong> {parsedGig.venue_name}</p>
-                                <p className="text-white"><strong>Date:</strong> {parsedGig.offer_date}</p>
-                                {parsedGig.guarantee && <p className="text-white"><strong>Guarantee:</strong> £{parsedGig.guarantee}</p>}
-                                {parsedGig.artist_name && <p className="text-white"><strong>Artist:</strong> {parsedGig.artist_name}</p>}
-                                {parsedGig.notes && <p className="text-gray-400 text-xs mt-2">{parsedGig.notes}</p>}
-                            </div>
-                        </div>
+                    </div>
 
-                        <div className="bg-cyan-900/20 border-2 border-cyan-500 rounded-lg p-4">
-                            <p className="text-cyan-400 font-bold mb-2 text-sm">SEND YES/NO TO:</p>
-                            <div className="space-y-1">
-                                {team.map(member => (
-                                    <p key={member.id} className="text-white text-xs font-mono flex items-center gap-2">
-                                        <CheckCircle className="w-3 h-3 text-green-400" />
-                                        {member.name} ({member.role})
-                                    </p>
-                                ))}
+                    <div>
+                        <label className="text-amber-400 text-xs font-bold font-mono mb-2 block">BAND MUST RESPOND BY (optional)</label>
+                        <Input
+                            type="datetime-local"
+                            value={responseDeadline}
+                            onChange={(e) => setResponseDeadline(e.target.value)}
+                            className="bg-black border-2 border-gray-700 text-white"
+                        />
+                    </div>
+
+                    <div className="flex gap-3">
+                        <Button
+                            onClick={() => rejectMutation.mutate()}
+                            disabled={rejectMutation.isPending}
+                            className="flex-1 bg-red-600 hover:bg-red-700 text-white font-black"
+                        >
+                            <XCircle className="w-4 h-4 mr-2" />
+                            REJECT
+                        </Button>
+                        <Button
+                            onClick={() => sendToBandMutation.mutate()}
+                            disabled={sendToBandMutation.isPending}
+                            className="flex-1 bg-green-600 hover:bg-green-700 text-white font-black"
+                        >
+                            <Send className="w-4 h-4 mr-2" />
+                            SEND TO BAND
+                        </Button>
+                    </div>
+                </div>
+            </motion.div>
+        );
+    }
+
+    // SENT TO BAND - WAITING FOR VOTES
+    if (offer.status === 'sent_to_band') {
+        const responses = offer.band_responses || [];
+        const yesVotes = responses.filter(r => r.response === 'yes').length;
+        const noVotes = responses.filter(r => r.response === 'no').length;
+
+        return (
+            <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border-2 border-cyan-500 rounded-lg p-6"
+            >
+                <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center gap-2">
+                        <Users className="w-6 h-6 text-cyan-400" />
+                        <h3 className="text-cyan-400 font-black text-lg font-mono">BAND VOTING</h3>
+                    </div>
+                    {offer.response_deadline && (
+                        <p className="text-xs text-gray-400 font-mono">
+                            Deadline: {format(new Date(offer.response_deadline), 'd MMM HH:mm')}
+                        </p>
+                    )}
+                </div>
+
+                {offer.manager_notes && (
+                    <div className="bg-black/60 rounded p-3 mb-4">
+                        <p className="text-xs text-gray-400 font-mono mb-1">YOUR NOTES TO BAND:</p>
+                        <p className="text-white text-sm font-mono">{offer.manager_notes}</p>
+                    </div>
+                )}
+
+                <div className="grid grid-cols-2 gap-3 mb-4">
+                    <div className="bg-green-500/20 border-2 border-green-500 rounded p-3 text-center">
+                        <ThumbsUp className="w-6 h-6 text-green-400 mx-auto mb-1" />
+                        <p className="text-green-400 font-black text-2xl font-mono">{yesVotes}</p>
+                        <p className="text-green-300 text-xs font-mono">YES</p>
+                    </div>
+                    <div className="bg-red-500/20 border-2 border-red-500 rounded p-3 text-center">
+                        <ThumbsDown className="w-6 h-6 text-red-400 mx-auto mb-1" />
+                        <p className="text-red-400 font-black text-2xl font-mono">{noVotes}</p>
+                        <p className="text-red-300 text-xs font-mono">NO</p>
+                    </div>
+                </div>
+
+                {responses.length > 0 && (
+                    <div className="space-y-2 mb-4">
+                        {responses.map((r, i) => (
+                            <div key={i} className="bg-black/60 rounded p-2 flex items-center justify-between">
+                                <span className="text-white text-sm font-mono">{r.member_name}</span>
+                                <div className="flex items-center gap-2">
+                                    {r.response === 'yes' ? (
+                                        <span className="text-green-400 font-black text-xs">YES ✓</span>
+                                    ) : (
+                                        <span className="text-red-400 font-black text-xs">NO ✗</span>
+                                    )}
+                                    {r.notes && <span className="text-gray-400 text-xs">"{r.notes}"</span>}
+                                </div>
                             </div>
-                        </div>
+                        ))}
+                    </div>
+                )}
+
+                <p className="text-center text-cyan-300 text-sm font-mono">
+                    Share this link with band: <br />
+                    <span className="text-white font-bold break-all">
+                        {window.location.origin}/ScottBandVote?offer={offer.id}
+                    </span>
+                </p>
+
+                {offer.all_responses_in && (
+                    <div className="mt-4 pt-4 border-t border-cyan-500">
+                        <p className="text-green-400 font-black text-center mb-3 font-mono">ALL VOTES IN!</p>
+                        
+                        <Textarea
+                            value={finalResponse}
+                            onChange={(e) => setFinalResponse(e.target.value)}
+                            placeholder={yesVotes > noVotes ? offer.ai_draft_accept : offer.ai_draft_reject}
+                            className="bg-black border-2 border-gray-700 text-white mb-3"
+                            rows={4}
+                        />
 
                         <div className="flex gap-3">
                             <Button
-                                onClick={handleReset}
-                                className="flex-1 bg-gray-700 hover:bg-gray-600 font-bold"
+                                onClick={() => sendResponseMutation.mutate(false)}
+                                disabled={sendResponseMutation.isPending}
+                                className="flex-1 bg-red-600 hover:bg-red-700 text-white font-black"
                             >
-                                CANCEL
+                                SEND REJECTION
                             </Button>
                             <Button
-                                onClick={() => sendToTeamMutation.mutate()}
-                                disabled={sendToTeamMutation.isPending || team.length === 0}
-                                className="flex-1 bg-green-500 hover:bg-green-600 text-black font-black"
+                                onClick={() => sendResponseMutation.mutate(true)}
+                                disabled={sendResponseMutation.isPending}
+                                className="flex-1 bg-green-600 hover:bg-green-700 text-white font-black"
                             >
-                                {sendToTeamMutation.isPending ? (
-                                    <>
-                                        <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                                        SENDING...
-                                    </>
-                                ) : (
-                                    <>
-                                        <Users className="w-4 h-4 mr-2" />
-                                        SEND TO {team.length} PEOPLE
-                                    </>
-                                )}
+                                SEND ACCEPTANCE
                             </Button>
                         </div>
-                    </motion.div>
-                ) : (
-                    <motion.div
-                        key="sent"
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0 }}
-                        className="space-y-4"
-                    >
-                        <div className="bg-green-900/40 border-4 border-green-500 rounded-lg p-6 text-center">
-                            <CheckCircle className="w-16 h-16 text-green-400 mx-auto mb-3" />
-                            <p className="text-green-400 font-black text-xl font-mono mb-2">SENT ✓</p>
-                            <p className="text-white text-sm font-mono">
-                                {team.length} people notified
-                            </p>
-                            <p className="text-gray-400 text-xs font-mono mt-2">
-                                You'll see YES/NO responses as they come in
-                            </p>
-                        </div>
-
-                        <Button
-                            onClick={handleReset}
-                            className="w-full bg-amber-500 hover:bg-amber-600 text-black font-black"
-                        >
-                            NEW GIG
-                        </Button>
-                    </motion.div>
+                    </div>
                 )}
-            </AnimatePresence>
-        </div>
-    );
+            </motion.div>
+        );
+    }
+
+    // CONFIRMED OR REJECTED - DONE
+    const isDone = offer.status === 'confirmed' || offer.status === 'rejected_by_band' || offer.status === 'rejected_by_manager';
+    if (isDone) {
+        const isConfirmed = offer.status === 'confirmed';
+        return (
+            <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className={`bg-gradient-to-r ${isConfirmed ? 'from-green-500/20 to-emerald-500/20 border-green-500' : 'from-gray-500/20 to-slate-500/20 border-gray-500'} border-2 rounded-lg p-6`}
+            >
+                <div className="flex items-center gap-2 mb-4">
+                    {isConfirmed ? (
+                        <CheckCircle className="w-6 h-6 text-green-400" />
+                    ) : (
+                        <XCircle className="w-6 h-6 text-gray-400" />
+                    )}
+                    <h3 className={`${isConfirmed ? 'text-green-400' : 'text-gray-400'} font-black text-lg font-mono`}>
+                        {isConfirmed ? 'CONFIRMED' : 'REJECTED'}
+                    </h3>
+                </div>
+
+                {offer.final_response_sent && (
+                    <div className="bg-black/60 rounded p-3">
+                        <p className="text-xs text-gray-400 font-mono mb-1">RESPONSE SENT:</p>
+                        <p className="text-white text-sm font-mono whitespace-pre-wrap">{offer.final_response_sent}</p>
+                    </div>
+                )}
+            </motion.div>
+        );
+    }
+
+    return null;
 }

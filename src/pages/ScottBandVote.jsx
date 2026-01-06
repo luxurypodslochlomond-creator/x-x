@@ -1,194 +1,229 @@
-import React, { useState } from 'react';
-import { useSearchParams, useNavigate } from 'react-router-dom';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import React, { useState, useEffect } from 'react';
 import { base44 } from '@/api/base44Client';
-import { createPageUrl } from '@/utils';
-import { Card, CardContent } from '@/components/ui/card';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { MapPin, DollarSign, Calendar, Check, X, Clock, AlertCircle } from 'lucide-react';
-import ScottPushNotifications from '@/components/scott/ScottPushNotifications';
+import { Radio, ThumbsUp, ThumbsDown, CheckCircle, Music } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { format } from 'date-fns';
 
 /**
- * SCOTT BAND VOTE
- * Band members vote YES/NO on gig offers
+ * BAND MEMBER VOTING PAGE
+ * Band members vote yes/no on gig offers
+ * Simple, no login required - just name
  */
 
 export default function ScottBandVote() {
-  const [searchParams] = useSearchParams();
-  const navigate = useNavigate();
-  const queryClient = useQueryClient();
-  const offerId = searchParams.get('offer');
-  const [notes, setNotes] = useState('');
-  const [user, setUser] = useState(null);
+    const queryClient = useQueryClient();
+    const urlParams = new URLSearchParams(window.location.search);
+    const offerId = urlParams.get('offer');
+    
+    const [memberName, setMemberName] = useState('');
+    const [vote, setVote] = useState(null);
+    const [notes, setNotes] = useState('');
+    const [hasVoted, setHasVoted] = useState(false);
 
-  React.useEffect(() => {
-    const getUser = async () => {
-      const u = await base44.auth.me();
-      setUser(u);
-    };
-    getUser();
-  }, []);
+    const { data: offer, isLoading } = useQuery({
+        queryKey: ['scottGigOffer', offerId],
+        queryFn: () => base44.entities.ScottGigOffer.filter({ id: offerId }).then(r => r[0]),
+        enabled: !!offerId
+    });
 
-  const { data: offer } = useQuery({
-    queryKey: ['scottGigOffer', offerId],
-    queryFn: () => base44.entities.ScottGigOffer.filter({ id: offerId }),
-    enabled: !!offerId,
-    select: (data) => data[0],
-  });
-
-  const voteMutation = useMutation({
-    mutationFn: async ({ response }) => {
-      const responses = offer.band_responses || [];
-      responses.push({
-        member_name: user.full_name,
-        response,
-        notes,
-        responded_at: new Date().toISOString()
-      });
-
-      // Get band size
-      const teamMembers = await base44.entities.ScottTeamMember.filter({
-        artist_id: offer.artist_id,
-        role: 'band_member',
-        status: 'active'
-      });
-      
-      const allIn = responses.length >= teamMembers.length;
-
-      const updated = await base44.entities.ScottGigOffer.update(offerId, {
-        band_responses: responses,
-        all_responses_in: allIn
-      });
-      
-      // If all votes in, notify manager
-      if (allIn) {
-        try {
-          const allYes = responses.every(r => r.response === 'yes');
-          await base44.functions.invoke('notifyManagerAllVotesIn', {
-            offerId,
-            venue: offer.venue,
-            allYes
-          });
-        } catch (e) {
-          console.log('Push notification failed:', e);
+    // Check if this person already voted
+    useEffect(() => {
+        if (offer && memberName) {
+            const alreadyVoted = offer.band_responses?.some(r => r.member_name.toLowerCase() === memberName.toLowerCase());
+            setHasVoted(alreadyVoted);
         }
-      }
-      
-      return updated;
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries(['scottGigOffer']);
-      alert('✅ Vote submitted!');
-      navigate(createPageUrl('ScottArtistHome'));
-    },
-  });
+    }, [offer, memberName]);
 
-  if (!offer) return <div className="min-h-screen bg-black flex items-center justify-center"><p className="text-white">Loading...</p></div>;
+    const voteMutation = useMutation({
+        mutationFn: async () => {
+            const responses = offer.band_responses || [];
+            responses.push({
+                member_name: memberName,
+                response: vote,
+                notes: notes,
+                responded_at: new Date().toISOString()
+            });
 
-  const hasVoted = offer.band_responses?.some(r => r.member_name === user?.full_name);
-  const isUrgent = offer.urgency !== 'normal';
-  const daysLeft = Math.ceil((new Date(offer.response_deadline) - new Date()) / (1000 * 60 * 60 * 24));
+            return base44.entities.ScottGigOffer.update(offer.id, {
+                band_responses: responses,
+                all_responses_in: false // Manager can manually mark this
+            });
+        },
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ['scottGigOffer'] });
+            setHasVoted(true);
+        }
+    });
 
-  return (
-    <div className="min-h-screen bg-black p-6">
-      <div className="max-w-3xl mx-auto">
-        <div className="mb-8">
-          <h1 className="text-4xl font-black text-white mb-2">GIG OFFER</h1>
-          {isUrgent && (
-            <div className="flex items-center gap-2 mb-2">
-              <AlertCircle className="w-5 h-5 text-red-400" />
-              <span className="text-red-400 font-bold">
-                {offer.urgency === 'very_urgent' ? 'VERY URGENT' : 'URGENT'}
-              </span>
+    const handleVote = () => {
+        if (!memberName || !vote) return;
+        voteMutation.mutate();
+    };
+
+    if (isLoading) {
+        return (
+            <div className="min-h-screen bg-black flex items-center justify-center">
+                <div className="text-center">
+                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-cyan-400 mx-auto mb-4"></div>
+                    <p className="text-gray-500 font-mono">Loading gig offer...</p>
+                </div>
             </div>
-          )}
-          <div className="flex items-center gap-2 text-amber-400">
-            <Clock className="w-4 h-4" />
-            <span className="font-bold">Respond by: {new Date(offer.response_deadline).toLocaleDateString()}</span>
-            <span className="text-gray-400">({daysLeft} days left)</span>
-          </div>
+        );
+    }
+
+    if (!offer) {
+        return (
+            <div className="min-h-screen bg-black flex items-center justify-center p-4">
+                <div className="text-center">
+                    <Radio className="w-16 h-16 text-red-400 mx-auto mb-4" />
+                    <h1 className="text-2xl font-black text-red-400 mb-2 font-mono">GIG NOT FOUND</h1>
+                    <p className="text-gray-500 font-mono">Check your link</p>
+                </div>
+            </div>
+        );
+    }
+
+    if (hasVoted) {
+        return (
+            <div className="min-h-screen bg-black flex items-center justify-center p-4">
+                <motion.div
+                    initial={{ scale: 0.9, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    className="max-w-md w-full text-center"
+                >
+                    <CheckCircle className="w-20 h-20 text-green-400 mx-auto mb-4" />
+                    <h1 className="text-3xl font-black text-green-400 mb-2 font-mono">VOTE RECORDED!</h1>
+                    <p className="text-gray-400 font-mono mb-4">Thanks {memberName}! Scott will see your vote.</p>
+                    
+                    <div className="bg-gray-900 border-2 border-green-500 rounded-lg p-6 mt-6">
+                        <Music className="w-8 h-8 text-cyan-400 mx-auto mb-3" />
+                        <p className="text-white font-bold text-lg mb-2">{offer.venue}</p>
+                        <p className="text-gray-400 text-sm font-mono">
+                            {format(new Date(offer.date), 'd MMM yyyy')} • £{offer.fee}
+                        </p>
+                    </div>
+                </motion.div>
+            </div>
+        );
+    }
+
+    return (
+        <div className="min-h-screen bg-black text-white p-4">
+            <div className="max-w-2xl mx-auto py-8">
+                
+                {/* HEADER */}
+                <div className="text-center mb-8">
+                    <Radio className="w-16 h-16 text-cyan-400 mx-auto mb-4" />
+                    <h1 className="text-3xl font-black text-cyan-400 font-mono mb-2">GIG OFFER VOTE</h1>
+                    <p className="text-gray-500 text-sm font-mono">Quick yes or no from you</p>
+                </div>
+
+                {/* GIG DETAILS */}
+                <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-2 border-purple-500 rounded-lg p-6 mb-6">
+                    <h2 className="text-purple-400 font-black text-xl font-mono mb-4">{offer.venue}</h2>
+                    
+                    <div className="grid grid-cols-2 gap-4 mb-4">
+                        <div className="bg-black/60 rounded p-3">
+                            <p className="text-xs text-gray-400 font-mono mb-1">DATE</p>
+                            <p className="text-white font-bold font-mono">{format(new Date(offer.date), 'd MMM yyyy')}</p>
+                        </div>
+                        <div className="bg-black/60 rounded p-3">
+                            <p className="text-xs text-gray-400 font-mono mb-1">FEE</p>
+                            <p className="text-white font-bold font-mono">£{offer.fee}</p>
+                        </div>
+                    </div>
+
+                    {offer.city && (
+                        <div className="bg-black/60 rounded p-3 mb-3">
+                            <p className="text-xs text-gray-400 font-mono mb-1">LOCATION</p>
+                            <p className="text-white font-mono">{offer.city}{offer.county ? `, ${offer.county}` : ''}</p>
+                        </div>
+                    )}
+
+                    {offer.manager_notes && (
+                        <div className="bg-black/60 rounded p-3">
+                            <p className="text-xs text-gray-400 font-mono mb-1">SCOTT'S NOTES</p>
+                            <p className="text-white text-sm font-mono">{offer.manager_notes}</p>
+                        </div>
+                    )}
+                </div>
+
+                {/* VOTING FORM */}
+                <div className="bg-gray-900 border-2 border-cyan-500 rounded-lg p-6">
+                    <div className="space-y-4">
+                        <div>
+                            <label className="text-cyan-400 text-xs font-bold font-mono mb-2 block">YOUR NAME</label>
+                            <Input
+                                value={memberName}
+                                onChange={(e) => setMemberName(e.target.value)}
+                                placeholder="e.g., Sarah, John, etc"
+                                className="bg-black border-2 border-gray-700 text-white h-12 text-lg font-bold"
+                            />
+                        </div>
+
+                        <div>
+                            <label className="text-cyan-400 text-xs font-bold font-mono mb-3 block">YOUR VOTE</label>
+                            <div className="grid grid-cols-2 gap-3">
+                                <button
+                                    onClick={() => setVote('yes')}
+                                    className={`p-6 rounded-lg border-4 transition-all ${
+                                        vote === 'yes'
+                                            ? 'bg-green-500/40 border-green-400'
+                                            : 'bg-gray-800 border-gray-700 hover:border-green-500'
+                                    }`}
+                                >
+                                    <ThumbsUp className={`w-12 h-12 mx-auto mb-2 ${vote === 'yes' ? 'text-green-400' : 'text-gray-500'}`} />
+                                    <p className={`font-black text-xl font-mono ${vote === 'yes' ? 'text-green-400' : 'text-gray-500'}`}>
+                                        YES
+                                    </p>
+                                </button>
+                                <button
+                                    onClick={() => setVote('no')}
+                                    className={`p-6 rounded-lg border-4 transition-all ${
+                                        vote === 'no'
+                                            ? 'bg-red-500/40 border-red-400'
+                                            : 'bg-gray-800 border-gray-700 hover:border-red-500'
+                                    }`}
+                                >
+                                    <ThumbsDown className={`w-12 h-12 mx-auto mb-2 ${vote === 'no' ? 'text-red-400' : 'text-gray-500'}`} />
+                                    <p className={`font-black text-xl font-mono ${vote === 'no' ? 'text-red-400' : 'text-gray-500'}`}>
+                                        NO
+                                    </p>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label className="text-cyan-400 text-xs font-bold font-mono mb-2 block">NOTES (optional)</label>
+                            <Textarea
+                                value={notes}
+                                onChange={(e) => setNotes(e.target.value)}
+                                placeholder="Any thoughts? Conflicts? Excited?"
+                                className="bg-black border-2 border-gray-700 text-white"
+                                rows={3}
+                            />
+                        </div>
+
+                        <Button
+                            onClick={handleVote}
+                            disabled={!memberName || !vote || voteMutation.isPending}
+                            className="w-full bg-cyan-500 hover:bg-cyan-600 text-black font-black text-lg h-14"
+                        >
+                            {voteMutation.isPending ? 'SENDING...' : 'SUBMIT VOTE'}
+                        </Button>
+                    </div>
+                </div>
+
+                {offer.response_deadline && (
+                    <p className="text-center text-gray-500 text-xs font-mono mt-4">
+                        Vote by: {format(new Date(offer.response_deadline), 'd MMM yyyy HH:mm')}
+                    </p>
+                )}
+            </div>
         </div>
-
-        <Card className="bg-black border-2 border-cyan-500 mb-6">
-          <CardContent className="p-6 space-y-4">
-            <div>
-              <h2 className="text-3xl font-black text-white mb-2">{offer.venue}</h2>
-              <div className="flex items-center gap-2 text-gray-300 mb-2">
-                <MapPin className="w-4 h-4 text-cyan-400" />
-                <span>{offer.city}, {offer.county}, {offer.country}</span>
-              </div>
-              <div className="flex items-center gap-2 text-gray-300 mb-2">
-                <Calendar className="w-4 h-4 text-green-400" />
-                <span>{new Date(offer.date).toLocaleDateString()} at {offer.time}</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <DollarSign className="w-4 h-4 text-green-400" />
-                <span className="text-green-400 font-bold text-xl">{offer.currency}{offer.fee}</span>
-              </div>
-            </div>
-
-            {offer.capacity && (
-              <div className="bg-purple-500/20 border border-purple-500 rounded p-3">
-                <p className="text-purple-400">Capacity: {offer.capacity}</p>
-              </div>
-            )}
-
-            {offer.manager_notes && (
-              <div className="bg-gray-800 rounded p-4">
-                <p className="text-white font-bold mb-1">Manager's Notes:</p>
-                <p className="text-gray-300">{offer.manager_notes}</p>
-              </div>
-            )}
-
-            {offer.notes && (
-              <div className="bg-gray-800 rounded p-4">
-                <p className="text-gray-300 text-sm">{offer.notes}</p>
-              </div>
-            )}
-          </CardContent>
-        </Card>
-
-        {hasVoted ? (
-          <Card className="bg-black border-2 border-green-500">
-            <CardContent className="p-6 text-center">
-              <Check className="w-12 h-12 text-green-400 mx-auto mb-3" />
-              <p className="text-white font-bold text-xl">You've voted!</p>
-              <p className="text-gray-400 mt-2">Waiting for other band members...</p>
-            </CardContent>
-          </Card>
-        ) : (
-          <Card className="bg-black border-2 border-amber-500">
-            <CardContent className="p-6 space-y-4">
-              <Textarea
-                placeholder="Add notes (optional)..."
-                value={notes}
-                onChange={(e) => setNotes(e.target.value)}
-                className="bg-black border-cyan-500 text-white"
-              />
-
-              <div className="flex gap-3">
-                <Button
-                  onClick={() => voteMutation.mutate({ response: 'yes' })}
-                  className="flex-1 bg-green-600 hover:bg-green-700 gap-2 text-lg py-6"
-                >
-                  <Check className="w-6 h-6" />
-                  YES - I'm In
-                </Button>
-                <Button
-                  onClick={() => voteMutation.mutate({ response: 'no' })}
-                  className="flex-1 bg-red-600 hover:bg-red-700 gap-2 text-lg py-6"
-                >
-                  <X className="w-6 h-6" />
-                  NO - Can't Do It
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-        )}
-      </div>
-
-      <ScottPushNotifications />
-    </div>
-  );
+    );
 }
