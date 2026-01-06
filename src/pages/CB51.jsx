@@ -44,8 +44,15 @@ export default function CB51() {
         base44.auth.me().then(async (currentUser) => {
             setUser(currentUser);
             
-            // If user is an artist (not admin), redirect them to their artist home
+            // Check PIN for non-admins
             if (currentUser.role !== 'admin') {
+                const pinEntered = sessionStorage.getItem('cb51_pin_1888');
+                if (pinEntered !== 'true') {
+                    navigate(createPageUrl('CB51Login'));
+                    return;
+                }
+                
+                // If user is an artist, redirect them to their artist home
                 const artists = await base44.entities.ScottArtist.filter({ email: currentUser.email });
                 if (artists.length > 0) {
                     navigate(createPageUrl(`ScottArtistHome?id=${artists[0].id}`));
