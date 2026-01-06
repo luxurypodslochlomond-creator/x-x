@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
-import { ArrowLeft, Music, Brain, Heart, Globe, Radio } from 'lucide-react';
+import { ArrowLeft, Music, Heart, Globe, Radio, Mic2, Users } from 'lucide-react';
 import Gill51Sunglasses8Bit from '@/components/shared/Gill51Sunglasses8Bit';
 
 /**
- * CO-MANAGER51 ABOUT - SIMPLE AS FUCK
- * Who, what, why - no bullshit
+ * CB51 ABOUT - CLEAN PROFESSIONAL
+ * Who, what, why - no nonsense
  */
 
 export default function ScottAbout() {
@@ -15,11 +15,11 @@ export default function ScottAbout() {
     }, []);
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black pb-20">
-            {/* HEADER - CB51 CLEAN */}
-            <div className="sticky top-0 z-50 border-b-4 border-cyan-500 px-4 py-3" style={{ background: 'linear-gradient(135deg, #000000 0%, #0a4a4a 50%, #000000 100%)', boxShadow: '0 0 30px rgba(6, 182, 212, 0.6)' }}>
+        <div className="min-h-screen bg-black pb-20">
+            {/* HEADER */}
+            <div className="sticky top-0 z-50 border-b-4 border-cyan-500 px-4 py-3 bg-black" style={{ boxShadow: '0 0 30px rgba(6, 182, 212, 0.3)' }}>
                 <Link to={createPageUrl('ScottManager')} className="flex items-center gap-2 text-white font-mono text-sm font-black">
-                    <div className="bg-cyan-500 p-1.5 rounded" style={{ boxShadow: '2px 2px 0 rgba(6, 182, 212, 0.4)' }}>
+                    <div className="bg-cyan-500 p-1.5 rounded" style={{ boxShadow: '2px 2px 0 rgba(6, 182, 212, 0.4)', imageRendering: 'pixelated' }}>
                         <ArrowLeft className="w-4 h-4 text-black" />
                     </div>
                     BACK
@@ -28,7 +28,7 @@ export default function ScottAbout() {
 
             <div className="px-4 py-6 max-w-2xl mx-auto space-y-6">
                 {/* WHO */}
-                <div className="bg-gradient-to-r from-amber-500/20 to-orange-500/20 border-4 border-amber-500 rounded-xl p-6" style={{ boxShadow: '0 0 40px rgba(245, 158, 11, 0.4)' }}>
+                <div className="bg-gradient-to-r from-cyan-500/10 to-purple-500/10 border-4 border-cyan-500 rounded-xl p-6" style={{ boxShadow: '0 0 30px rgba(6, 182, 212, 0.2)' }}>
                     <div className="flex items-center gap-3 mb-4">
                         <Radio className="w-12 h-12 text-cyan-400" />
                         <div>
@@ -38,8 +38,11 @@ export default function ScottAbout() {
                     </div>
 
                     <div className="space-y-3 text-sm font-mono">
-                        <div className="bg-black border-2 border-amber-500 rounded-lg p-4">
-                            <p className="text-amber-400 font-bold mb-2">🎸 SCOTT</p>
+                        <div className="bg-black border-2 border-cyan-500 rounded-lg p-4">
+                            <div className="flex items-center gap-2 mb-2">
+                                <Mic2 className="w-6 h-6 text-cyan-400" />
+                                <p className="text-cyan-400 font-bold">SCOTT</p>
+                            </div>
                             <p className="text-white text-xs mb-1">Music manager + band member</p>
                             <p className="text-gray-400 text-xs">30+ years industry experience</p>
                         </div>
@@ -47,7 +50,7 @@ export default function ScottAbout() {
                         <div className="bg-black border-2 border-pink-500 rounded-lg p-4">
                             <div className="flex items-center gap-2 mb-2">
                                 <Gill51Sunglasses8Bit size={24} animate={true} />
-                                <p className="text-pink-400 font-bold">💚 GILL</p>
+                                <p className="text-pink-400 font-bold">GILL</p>
                             </div>
                             <p className="text-white text-xs mb-1">Family director + operations</p>
                             <p className="text-gray-400 text-xs">Keeps everyone grounded ♾️</p>
@@ -55,49 +58,49 @@ export default function ScottAbout() {
                     </div>
                 </div>
 
-                {/* WHAT - SIMPLE CLEAR */}
-                <div className="bg-gradient-to-r from-cyan-500/20 to-green-500/20 border-4 border-cyan-500 rounded-xl p-6" style={{ boxShadow: '0 0 40px rgba(6, 182, 212, 0.4)' }}>
+                {/* WHAT CB51 DOES */}
+                <div className="bg-gradient-to-r from-green-500/10 to-cyan-500/10 border-4 border-green-500 rounded-xl p-6" style={{ boxShadow: '0 0 30px rgba(34, 197, 94, 0.2)' }}>
                     <div className="flex items-center gap-3 mb-4">
-                        <Radio className="w-10 h-10 text-cyan-400" />
-                        <h2 className="text-cyan-400 font-black text-xl font-mono">WHAT CB51 DOES</h2>
+                        <Radio className="w-10 h-10 text-green-400" />
+                        <h2 className="text-green-400 font-black text-xl font-mono">WHAT CB51 DOES</h2>
                     </div>
 
-                    {/* 8-BIT FLOW DIAGRAM */}
-                    <div className="bg-gradient-to-br from-gray-900 to-black border-2 border-amber-500/30 rounded-xl p-6 mb-4">
+                    {/* 8-BIT FLOW */}
+                    <div className="bg-black border-2 border-cyan-500/30 rounded-xl p-6 mb-4">
                         <div className="space-y-4">
-                            {/* Manager (Before) */}
+                            {/* Before */}
                             <div className="flex items-center gap-3">
-                                <div className="w-16 h-16 bg-red-500 rounded" style={{ imageRendering: 'pixelated', boxShadow: '4px 4px 0 rgba(239, 68, 68, 0.4)' }}>
-                                    <div className="w-full h-full flex items-center justify-center text-3xl">😰</div>
+                                <div className="w-16 h-16 bg-red-500/80 rounded flex items-center justify-center" style={{ imageRendering: 'pixelated', boxShadow: '4px 4px 0 rgba(239, 68, 68, 0.4)' }}>
+                                    <Users className="w-10 h-10 text-white" />
                                 </div>
                                 <div className="flex-1">
-                                    <p className="text-red-400 font-black text-sm font-mono">BEFORE: STRESSED</p>
+                                    <p className="text-red-400 font-black text-sm font-mono">BEFORE</p>
                                     <p className="text-gray-400 text-xs font-mono">Spreadsheets, emails, chaos</p>
                                 </div>
                             </div>
 
-                            {/* Arrow Down */}
+                            {/* Arrow */}
                             <div className="flex justify-center">
                                 <div className="space-y-1">
-                                    <div className="w-2 h-2 bg-amber-400" style={{ imageRendering: 'pixelated' }}></div>
-                                    <div className="w-2 h-2 bg-amber-400" style={{ imageRendering: 'pixelated' }}></div>
-                                    <div className="w-2 h-2 bg-amber-400" style={{ imageRendering: 'pixelated' }}></div>
-                                    <div className="w-6 h-6 bg-amber-400 rotate-45" style={{ imageRendering: 'pixelated', marginLeft: '-8px' }}></div>
+                                    <div className="w-2 h-2 bg-cyan-400" style={{ imageRendering: 'pixelated' }}></div>
+                                    <div className="w-2 h-2 bg-cyan-400" style={{ imageRendering: 'pixelated' }}></div>
+                                    <div className="w-2 h-2 bg-cyan-400" style={{ imageRendering: 'pixelated' }}></div>
+                                    <div className="w-6 h-6 bg-cyan-400 rotate-45" style={{ imageRendering: 'pixelated', marginLeft: '-8px' }}></div>
                                 </div>
                             </div>
 
-                            {/* Co-Manager51 */}
+                            {/* CB51 */}
                             <div className="flex items-center gap-3">
                                 <div className="w-16 h-16 bg-cyan-500 rounded flex items-center justify-center" style={{ imageRendering: 'pixelated', boxShadow: '4px 4px 0 rgba(6, 182, 212, 0.4)' }}>
                                     <Radio className="w-10 h-10 text-black" />
                                 </div>
                                 <div className="flex-1">
-                                    <p className="text-amber-400 font-black text-sm font-mono">CB51</p>
-                                    <p className="text-gray-400 text-xs font-mono">Citizen Band 51 • Zero stress</p>
+                                    <p className="text-cyan-400 font-black text-sm font-mono">CB51</p>
+                                    <p className="text-gray-400 text-xs font-mono">Citizen Band 51</p>
                                 </div>
                             </div>
 
-                            {/* Arrow Down */}
+                            {/* Arrow */}
                             <div className="flex justify-center">
                                 <div className="space-y-1">
                                     <div className="w-2 h-2 bg-green-400" style={{ imageRendering: 'pixelated' }}></div>
@@ -107,19 +110,19 @@ export default function ScottAbout() {
                                 </div>
                             </div>
 
-                            {/* Manager (After) */}
+                            {/* After */}
                             <div className="flex items-center gap-3">
-                                <div className="w-16 h-16 bg-green-500 rounded" style={{ imageRendering: 'pixelated', boxShadow: '4px 4px 0 rgba(34, 197, 94, 0.4)' }}>
-                                    <div className="w-full h-full flex items-center justify-center text-3xl">🎸</div>
+                                <div className="w-16 h-16 bg-green-500/80 rounded flex items-center justify-center" style={{ imageRendering: 'pixelated', boxShadow: '4px 4px 0 rgba(34, 197, 94, 0.4)' }}>
+                                    <Music className="w-10 h-10 text-white" />
                                 </div>
                                 <div className="flex-1">
-                                    <p className="text-green-400 font-black text-sm font-mono">AFTER: FREE</p>
+                                    <p className="text-green-400 font-black text-sm font-mono">AFTER</p>
                                     <p className="text-gray-400 text-xs font-mono">Focus on music ♾️</p>
                                 </div>
                             </div>
 
                             {/* Result */}
-                            <div className="bg-gradient-to-r from-cyan-500/20 to-green-500/20 border-2 border-cyan-500 rounded-lg p-3">
+                            <div className="bg-gradient-to-r from-cyan-500/20 to-green-500/20 border-2 border-green-500 rounded-lg p-3">
                                 <p className="text-cyan-400 font-black text-xs mb-1">✓ 10 hours/week saved</p>
                                 <p className="text-green-400 font-black text-xs mb-1">✓ Zero stress</p>
                                 <p className="text-pink-400 font-black text-xs">✓ More time for music ♾️❤️♾️</p>
@@ -127,35 +130,35 @@ export default function ScottAbout() {
                         </div>
                     </div>
 
-                    <div className="space-y-2 text-sm font-mono">
-                        <p className="text-white">✓ AI handles all management busywork</p>
+                    <div className="space-y-2 text-xs font-mono">
+                        <p className="text-white">✓ AI handles management busywork</p>
                         <p className="text-white">✓ Calendar, invoices, expenses, contracts</p>
                         <p className="text-white">✓ Publishing rights, sample clearance</p>
                         <p className="text-white">✓ Visa tracking, gig packs, accommodation</p>
                         <p className="text-white">✓ Merch inventory, media library</p>
                         <p className="text-white">✓ Works offline, syncs P2P</p>
-                        <p className="text-cyan-400 font-bold mt-3">Mobile-first, simple as fuck ♾️❤️♾️</p>
+                        <p className="text-cyan-400 font-bold mt-3">Mobile-first, super simple ♾️❤️♾️</p>
                     </div>
                 </div>
 
                 {/* WHY */}
-                <div className="bg-gradient-to-r from-pink-500/20 to-purple-500/20 border-4 border-pink-500 rounded-xl p-6" style={{ boxShadow: '0 0 40px rgba(236, 72, 153, 0.4)' }}>
+                <div className="bg-gradient-to-r from-pink-500/10 to-purple-500/10 border-4 border-pink-500 rounded-xl p-6" style={{ boxShadow: '0 0 30px rgba(236, 72, 153, 0.2)' }}>
                     <div className="flex items-center gap-3 mb-4">
                         <Heart className="w-10 h-10 text-pink-400" />
                         <h2 className="text-pink-400 font-black text-xl font-mono">WHY WE EXIST</h2>
                     </div>
 
                     <div className="bg-black border-2 border-red-500 rounded-lg p-4 mb-4">
-                        <p className="text-red-400 font-bold mb-2">CURRENT TOOLS = SHIT:</p>
-                        <p className="text-gray-400 text-xs mb-1">• Complex dashboards (nobody uses)</p>
+                        <p className="text-red-400 font-bold mb-2 text-sm">CURRENT TOOLS:</p>
+                        <p className="text-gray-400 text-xs mb-1">• Complex dashboards nobody uses</p>
                         <p className="text-gray-400 text-xs mb-1">• Require internet (useless on road)</p>
-                        <p className="text-gray-400 text-xs mb-1">• Expensive subscriptions (£50-£300/month)</p>
+                        <p className="text-gray-400 text-xs mb-1">• Expensive (£50-£300/month)</p>
                         <p className="text-gray-400 text-xs">• Built for corporations, not artists</p>
                     </div>
 
                     <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-2 border-green-500 rounded-lg p-4">
-                        <p className="text-green-400 font-bold mb-2">CB51 DIFFERENCE:</p>
-                        <p className="text-white text-xs mb-2">Built by managers for managers. P2P mesh when grid fails. Zero extraction.</p>
+                        <p className="text-green-400 font-bold mb-2 text-sm">CB51 DIFFERENCE:</p>
+                        <p className="text-white text-xs mb-2">Built by managers for managers. Works offline. P2P mesh when grid fails.</p>
                         <p className="text-cyan-400 text-xs font-bold">Working class solidarity ♾️📻♾️</p>
                     </div>
                 </div>
@@ -209,52 +212,52 @@ export default function ScottAbout() {
                     </Link>
                 </div>
 
-                {/* SK51 QUESTIONS - IN THE SHED */}
-                <div className="bg-gradient-to-r from-amber-500/30 to-red-500/30 border-4 border-amber-500 rounded-xl p-6" style={{ boxShadow: '0 0 50px rgba(245, 158, 11, 0.6)' }}>
+                {/* SK51 QUESTIONS */}
+                <div className="bg-gradient-to-r from-amber-500/20 to-orange-500/20 border-4 border-amber-500 rounded-xl p-6" style={{ boxShadow: '0 0 30px rgba(245, 158, 11, 0.3)' }}>
                     <div className="flex items-center gap-3 mb-4">
-                        <div className="text-5xl">🎸</div>
+                        <Mic2 className="w-10 h-10 text-amber-400" />
                         <div>
-                            <h2 className="text-amber-400 font-black text-2xl font-mono">SK51 - 5 QUESTIONS BRO</h2>
-                            <p className="text-gray-300 text-sm font-mono">Answer in the shed, no rush ♾️📻</p>
+                            <h2 className="text-amber-400 font-black text-xl font-mono">5 QUESTIONS FOR SCOTT</h2>
+                            <p className="text-gray-400 text-sm font-mono">No rush ♾️📻</p>
                         </div>
                     </div>
 
-                    <div className="space-y-4 text-sm font-mono">
+                    <div className="space-y-3 text-xs font-mono">
                         <div className="bg-black border-2 border-amber-500 rounded-lg p-4">
-                            <p className="text-amber-400 font-bold mb-2 text-base">1. WHICH BITS SAVE YOU TIME?</p>
-                            <p className="text-white text-sm mb-1">• Calendar? Invoices? Gig stuff?</p>
+                            <p className="text-amber-400 font-bold mb-2">1. WHICH BITS SAVE YOU TIME?</p>
+                            <p className="text-white text-xs mb-1">Calendar? Invoices? Gig stuff?</p>
                             <p className="text-gray-400 text-xs">What do you actually use?</p>
                         </div>
 
                         <div className="bg-black border-2 border-red-500 rounded-lg p-4">
-                            <p className="text-red-400 font-bold mb-2 text-base">2. WHAT'S STILL ANNOYING?</p>
-                            <p className="text-white text-sm mb-1">• What pisses you off?</p>
-                            <p className="text-gray-400 text-xs">What takes too fucking long?</p>
+                            <p className="text-red-400 font-bold mb-2">2. WHAT'S STILL ANNOYING?</p>
+                            <p className="text-white text-xs mb-1">What frustrates you?</p>
+                            <p className="text-gray-400 text-xs">What takes too long?</p>
                         </div>
 
                         <div className="bg-black border-2 border-cyan-500 rounded-lg p-4">
-                            <p className="text-cyan-400 font-bold mb-2 text-base">3. WHERE DO YOU USE IT?</p>
-                            <p className="text-white text-sm mb-1">• Tour bus? Home? Hotel?</p>
-                            <p className="text-gray-400 text-xs">Need offline or online mostly?</p>
+                            <p className="text-cyan-400 font-bold mb-2">3. WHERE DO YOU USE IT?</p>
+                            <p className="text-white text-xs mb-1">Tour bus? Home? Hotel?</p>
+                            <p className="text-gray-400 text-xs">Offline or online mostly?</p>
                         </div>
 
                         <div className="bg-black border-2 border-green-500 rounded-lg p-4">
-                            <p className="text-green-400 font-bold mb-2 text-base">4. WHAT WOULD SAVE YOU 5 HOURS?</p>
-                            <p className="text-white text-sm mb-1">• One thing that wastes your time?</p>
-                            <p className="text-gray-400 text-xs">What would make biggest difference?</p>
+                            <p className="text-green-400 font-bold mb-2">4. WHAT WOULD SAVE YOU 5 HOURS?</p>
+                            <p className="text-white text-xs mb-1">One thing that wastes time?</p>
+                            <p className="text-gray-400 text-xs">Biggest difference?</p>
                         </div>
 
                         <div className="bg-black border-2 border-pink-500 rounded-lg p-4">
-                            <p className="text-pink-400 font-bold mb-2 text-base">5. IF YOU COULD ADD ONE THING?</p>
-                            <p className="text-white text-sm mb-1">• What's the one feature you'd add?</p>
-                            <p className="text-gray-400 text-xs">Make it yours bro</p>
+                            <p className="text-pink-400 font-bold mb-2">5. ONE FEATURE TO ADD?</p>
+                            <p className="text-white text-xs mb-1">What would you add?</p>
+                            <p className="text-gray-400 text-xs">Make it yours</p>
                         </div>
 
-                        <div className="bg-gradient-to-r from-green-500/30 to-cyan-500/30 border-4 border-green-500 rounded-lg p-5">
-                            <p className="text-green-400 font-black mb-3 text-base">JUST VOICE NOTE IT BRO 🎤</p>
-                            <p className="text-white text-sm mb-2">• Record on your phone</p>
-                            <p className="text-white text-sm mb-3">• Or just chat to BRO51 when you see him</p>
-                            <p className="text-cyan-400 text-sm font-black">Zero stress - we'll build whatever helps ♾️📻♾️</p>
+                        <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-2 border-green-500 rounded-lg p-4">
+                            <p className="text-green-400 font-bold mb-2">JUST VOICE NOTE IT</p>
+                            <p className="text-white text-xs mb-1">• Record on your phone</p>
+                            <p className="text-white text-xs mb-2">• Or chat when you see us</p>
+                            <p className="text-cyan-400 text-xs font-bold">Zero stress - we'll build it ♾️📻♾️</p>
                         </div>
                     </div>
                 </div>

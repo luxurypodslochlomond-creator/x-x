@@ -249,6 +249,17 @@ export default function ScottManager() {
                 </div>
             )}
 
+            {/* ABOUT LINK - ADMIN ONLY */}
+            {user?.role === 'admin' && (
+                <div className="mt-8">
+                    <Link to={createPageUrl('ScottAbout')}>
+                        <button className="w-full bg-gradient-to-r from-cyan-500/20 to-purple-500/20 border-2 border-cyan-500 hover:border-cyan-400 text-cyan-400 font-black px-6 py-3 rounded-lg text-sm font-mono transition-all">
+                            ABOUT CB51 (SHOW CLIENTS) →
+                        </button>
+                    </Link>
+                </div>
+            )}
+
             {/* FOOTER */}
             <div className="mt-12 text-center">
                 <p className="text-gray-600 text-xs font-mono">CB51 • Simple as requested</p>
