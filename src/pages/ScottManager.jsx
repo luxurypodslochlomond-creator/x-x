@@ -108,18 +108,16 @@ export default function ScottManager() {
                                     </div>
                                     <div className="text-cyan-400 text-2xl">→</div>
                                 </Link>
-                                {user?.role === 'admin' && (
-                                    <button
-                                        onClick={(e) => {
-                                            e.preventDefault();
-                                            handleDeleteArtist(artist);
-                                        }}
-                                        className="mt-3 w-full bg-red-900/20 hover:bg-red-900/40 border border-red-500/50 text-red-400 font-bold px-3 py-2 rounded text-xs flex items-center justify-center gap-2 transition-all"
-                                    >
-                                        <Trash2 className="w-3 h-3" />
-                                        REMOVE ARTIST
-                                    </button>
-                                )}
+                                <button
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        handleDeleteArtist(artist);
+                                    }}
+                                    className="mt-3 w-full bg-red-900/20 hover:bg-red-900/40 border border-red-500/50 text-red-400 font-bold px-3 py-2 rounded text-xs flex items-center justify-center gap-2 transition-all"
+                                >
+                                    <Trash2 className="w-3 h-3" />
+                                    REMOVE ARTIST
+                                </button>
                             </motion.div>
                         ))
                 )}

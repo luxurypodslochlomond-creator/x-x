@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { ArrowLeft, Check } from 'lucide-react';
-import KingdomCrown8Bit from '@/components/shared/KingdomCrown8Bit';
+import { Radio } from 'lucide-react';
 import { base44 } from '@/api/base44Client';
 
 export default function ScottAddArtist() {
@@ -64,8 +64,8 @@ export default function ScottAddArtist() {
                 </button>
                 
                 <div className="flex items-center gap-2">
-                    <KingdomCrown8Bit size={32} animate={true} />
-                    <h1 className="text-2xl font-black text-amber-400" style={{ fontFamily: 'monospace' }}>ADD</h1>
+                    <Radio className="w-8 h-8 text-cyan-400" />
+                    <h1 className="text-2xl font-black text-cyan-400" style={{ fontFamily: 'monospace' }}>ADD ARTIST</h1>
                 </div>
             </div>
 
@@ -212,8 +212,8 @@ export default function ScottAddArtist() {
                 <Button
                     type="submit"
                     disabled={saving}
-                    className="w-full bg-amber-500 hover:bg-amber-400 text-black font-black h-16 text-xl transition-all shadow-lg"
-                    style={{ fontFamily: 'monospace', boxShadow: '0 0 30px rgba(245, 158, 11, 0.3)' }}
+                    className="w-full bg-cyan-500 hover:bg-cyan-400 text-black font-black h-16 text-xl transition-all shadow-lg"
+                    style={{ fontFamily: 'monospace', boxShadow: '0 0 30px rgba(6, 182, 212, 0.3)' }}
                 >
                     {saving ? 'SAVING...' : 'SAVE'}
                 </Button>
