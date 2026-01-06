@@ -1,9 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
-import { ArrowLeft, Music, Heart, Globe, Mic2, Users } from 'lucide-react';
+import { ArrowLeft, Music, Heart, Globe, Mic2, Users, Radio } from 'lucide-react';
 import Gill51Sunglasses8Bit from '@/components/shared/Gill51Sunglasses8Bit';
-import CB51Icon8Bit from '@/components/shared/CB51Icon8Bit';
 
 /**
  * CB51 ABOUT - CLEAN PROFESSIONAL
@@ -29,7 +28,7 @@ export default function ScottAbout() {
                 {/* WHO */}
                 <div className="bg-gray-900/60 border border-cyan-500/30 rounded-xl p-6">
                     <div className="flex items-center gap-3 mb-4">
-                        <CB51Icon8Bit size={48} animate={true} />
+                        <Radio className="w-12 h-12 text-cyan-400" />
                         <div>
                             <h1 className="text-cyan-400 font-black text-2xl font-mono">About CB51</h1>
                             <p className="text-gray-500 text-xs font-mono">Your AI Co-Manager</p>
@@ -60,7 +59,7 @@ export default function ScottAbout() {
                 {/* WHAT CB51 DOES */}
                 <div className="bg-gray-900/60 border border-cyan-500/30 rounded-xl p-6">
                     <div className="flex items-center gap-3 mb-4">
-                        <CB51Icon8Bit size={40} animate={true} />
+                        <Music className="w-10 h-10 text-cyan-400" />
                         <h2 className="text-cyan-400 font-black text-xl font-mono">What It Does</h2>
                     </div>
 
@@ -90,12 +89,12 @@ export default function ScottAbout() {
 
                             {/* CB51 */}
                             <div className="flex items-center gap-3">
-                                <div className="w-16 h-16 bg-cyan-500 rounded flex items-center justify-center" style={{ imageRendering: 'pixelated', boxShadow: '4px 4px 0 rgba(6, 182, 212, 0.4)' }}>
-                                    <CB51Icon8Bit size={40} />
+                                <div className="w-16 h-16 bg-cyan-500 rounded flex items-center justify-center">
+                                    <Radio className="w-10 h-10 text-black" />
                                 </div>
                                 <div className="flex-1">
-                                    <p className="text-amber-400 font-black text-sm font-mono">CB51</p>
-                                    <p className="text-gray-400 text-xs font-mono">Citizen Band 51 • Zero stress</p>
+                                    <p className="text-white font-black text-sm font-mono">CB51</p>
+                                    <p className="text-gray-500 text-xs font-mono">Zero stress</p>
                                 </div>
                             </div>
 

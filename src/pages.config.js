@@ -69,6 +69,7 @@ import Beacon from './pages/Beacon';
 import BigIssueFoodRescue from './pages/BigIssueFoodRescue';
 import BuildOnUF51 from './pages/BuildOnUF51';
 import BusinessVault from './pages/BusinessVault';
+import CB51 from './pages/CB51';
 import CICSanctuary from './pages/CICSanctuary';
 import COPPACompliance from './pages/COPPACompliance';
 import CardCollection from './pages/CardCollection';
@@ -224,8 +225,8 @@ import ScottPublishing from './pages/ScottPublishing';
 import ScottSessions from './pages/ScottSessions';
 import ScottSessionsRecording from './pages/ScottSessionsRecording';
 import ScottSessionsRehearsal from './pages/ScottSessionsRehearsal';
-import ScottTeam from './pages/ScottTeam';
 import ScottSessionsWriting from './pages/ScottSessionsWriting';
+import ScottTeam from './pages/ScottTeam';
 import ScottToDo from './pages/ScottToDo';
 import ScottTravelMode from './pages/ScottTravelMode';
 import ScottVisas from './pages/ScottVisas';
@@ -284,7 +285,6 @@ import YoungWarriors from './pages/YoungWarriors';
 import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
-import CB51 from './pages/CB51';
 import __Layout from './Layout.jsx';
 
 
@@ -360,6 +360,7 @@ export const PAGES = {
     "BigIssueFoodRescue": BigIssueFoodRescue,
     "BuildOnUF51": BuildOnUF51,
     "BusinessVault": BusinessVault,
+    "CB51": CB51,
     "CICSanctuary": CICSanctuary,
     "COPPACompliance": COPPACompliance,
     "CardCollection": CardCollection,
@@ -515,8 +516,8 @@ export const PAGES = {
     "ScottSessions": ScottSessions,
     "ScottSessionsRecording": ScottSessionsRecording,
     "ScottSessionsRehearsal": ScottSessionsRehearsal,
-    "ScottTeam": ScottTeam,
     "ScottSessionsWriting": ScottSessionsWriting,
+    "ScottTeam": ScottTeam,
     "ScottToDo": ScottToDo,
     "ScottTravelMode": ScottTravelMode,
     "ScottVisas": ScottVisas,
@@ -575,7 +576,6 @@ export const PAGES = {
     "ZeroEgoProtocol": ZeroEgoProtocol,
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
-    "CB51": CB51,
 }
 
 export const pagesConfig = {
