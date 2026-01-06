@@ -8,6 +8,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { format } from 'date-fns';
+import ScottGigWorkflow from '@/components/scott/ScottGigWorkflow';
 
 export default function ScottGigOffers() {
     const navigate = useNavigate();
@@ -223,8 +224,8 @@ ${emailText}`,
                 )}
             </AnimatePresence>
 
-            {/* EXISTING OFFERS */}
-            <div className="space-y-3">
+            {/* EXISTING OFFERS WITH WORKFLOW */}
+            <div className="space-y-6">
                 <h2 className="text-white font-black font-mono text-xl mb-4">ALL OFFERS</h2>
                 {isLoading ? (
                     <p className="text-gray-500 text-center py-8 font-mono">Loading...</p>
@@ -236,51 +237,52 @@ ${emailText}`,
                 ) : (
                     offers
                         .sort((a, b) => new Date(b.date) - new Date(a.date))
-                        .map(offer => {
-                            const colors = statusColors[offer.status] || statusColors.pending_manager_review;
-                            return (
-                                <motion.div
-                                    key={offer.id}
-                                    initial={{ opacity: 0, y: 20 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    className={`bg-gradient-to-r ${colors.bg} to-black border-2 ${colors.border} rounded-lg p-4`}
-                                >
+                        .map(offer => (
+                            <div key={offer.id} className="space-y-3">
+                                {/* GIG DETAILS */}
+                                <div className="bg-gray-900 border-2 border-purple-500 rounded-lg p-4">
                                     <div className="flex items-start justify-between mb-3">
                                         <div className="flex-1">
-                                            <p className="text-white font-black text-lg font-mono mb-1">{offer.venue}</p>
-                                            <p className="text-gray-400 text-sm font-mono">{offer.city}, {offer.country}</p>
+                                            <p className="text-white font-black text-xl font-mono mb-1">{offer.venue}</p>
+                                            <p className="text-purple-400 font-bold font-mono text-lg">
+                                                {format(new Date(offer.date), 'd MMM yyyy')} • £{offer.fee?.toLocaleString()}
+                                            </p>
+                                            <p className="text-gray-400 text-sm font-mono mt-1">{offer.city}, {offer.country}</p>
                                             {!artistId && (
                                                 <p className="text-gray-500 text-xs font-mono mt-1">{getArtistName(offer.artist_id)}</p>
                                             )}
                                         </div>
-                                        <div className={`${colors.text} font-black text-xs font-mono px-3 py-1 border-2 ${colors.border} rounded-lg`}>
-                                            {offer.status.replace(/_/g, ' ').toUpperCase()}
-                                        </div>
                                     </div>
 
-                                    <div className="grid grid-cols-3 gap-3 mb-3">
-                                        <div className="bg-black/60 rounded p-2">
-                                            <p className="text-xs text-gray-500 font-mono">DATE</p>
-                                            <p className="text-white text-sm font-bold font-mono">{format(new Date(offer.date), 'd MMM')}</p>
+                                    {offer.capacity && (
+                                        <div className="bg-black/60 rounded p-2 mb-2">
+                                            <p className="text-xs text-gray-500 font-mono">CAPACITY</p>
+                                            <p className="text-white text-sm font-bold font-mono">{offer.capacity}</p>
                                         </div>
-                                        <div className="bg-black/60 rounded p-2">
-                                            <p className="text-xs text-gray-500 font-mono">FEE</p>
-                                            <p className="text-white text-sm font-bold font-mono">£{offer.fee?.toLocaleString()}</p>
-                                        </div>
-                                        {offer.capacity && (
-                                            <div className="bg-black/60 rounded p-2">
-                                                <p className="text-xs text-gray-500 font-mono">CAP</p>
-                                                <p className="text-white text-sm font-bold font-mono">{offer.capacity}</p>
-                                            </div>
-                                        )}
-                                    </div>
+                                    )}
 
                                     {offer.promoter && (
-                                        <p className="text-xs text-gray-500 font-mono">Promoter: {offer.promoter}</p>
+                                        <div className="bg-black/60 rounded p-2 mb-2">
+                                            <p className="text-xs text-gray-500 font-mono">PROMOTER</p>
+                                            <p className="text-white text-sm font-mono">{offer.promoter}</p>
+                                            {offer.promoter_contact && (
+                                                <p className="text-gray-400 text-xs font-mono mt-1">{offer.promoter_contact}</p>
+                                            )}
+                                        </div>
                                     )}
-                                </motion.div>
-                            );
-                        })
+
+                                    {offer.requirements && (
+                                        <div className="bg-black/60 rounded p-2">
+                                            <p className="text-xs text-gray-500 font-mono">REQUIREMENTS</p>
+                                            <p className="text-white text-sm font-mono">{offer.requirements}</p>
+                                        </div>
+                                    )}
+                                </div>
+
+                                {/* WORKFLOW */}
+                                <ScottGigWorkflow offer={offer} />
+                            </div>
+                        ))
                 )}
             </div>
         </div>
