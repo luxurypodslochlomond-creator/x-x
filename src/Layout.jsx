@@ -46,7 +46,7 @@ const PUBLIC_PAGES = [
   'FrequencyChamber', 'Universal51', 'DecompressionChamber', 'ThePhysics', 'Terms', 'PrivacyPolicy',
   'ScottManager', 'ScottArtist', 'ScottAddArtist', 'ScottCalendar', 'ScottArtistHome', 
   'ScottLive', 'ScottSessions', 'ScottFinanceAdmin', 'ScottToDo', 'ScottCalendarView',
-  'ScottAbout', 'Prof51'
+  'ScottAbout', 'ScottWorkLog', 'Prof51'
 ];
 
 // OFFLINE-OK PAGES
@@ -295,6 +295,7 @@ const LayoutInner = ({ children, currentPageName }) => {
       { title: "CB51", url: createPageUrl("ScottManager"), icon: Radio, description: "Artist co-manager", highlight: true },
       { title: "CB51 About", url: createPageUrl("ScottAbout"), icon: BookOpen, description: "What is CB51?" },
       ...(user?.role === 'admin' ? [
+        { title: "📝 Scott Work Log", url: createPageUrl("ScottWorkLog"), icon: FileText, description: "Today's session notes" },
         { title: "Dec 2024 vs Dec 2025", url: createPageUrl("ScottComparison"), icon: FileText, description: "What Scott asked for vs what's built" },
       ] : [])
   ];
