@@ -519,7 +519,7 @@ export default function ScottPasteGigOffer() {
 
               <Button
                 onClick={handleScan}
-                disabled={loading || !artistId || (mode === 'text' && !emailText.trim()) || (mode === 'image' && !screenshot)}
+                disabled={loading || !artistId}
                 className="w-full bg-cyan-600 hover:bg-cyan-700 gap-2"
               >
                 {loading ? (
