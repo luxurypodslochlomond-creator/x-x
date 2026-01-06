@@ -222,6 +222,7 @@ import ScottTravelMode from './pages/ScottTravelMode';
 import ScottVisas from './pages/ScottVisas';
 import ScottWhiteLabel from './pages/ScottWhiteLabel';
 import ScottWhiteLabelPricing from './pages/ScottWhiteLabelPricing';
+import ScottWorkLog from './pages/ScottWorkLog';
 import ScottZeroServerArchitecture from './pages/ScottZeroServerArchitecture';
 import SignDocument from './pages/SignDocument';
 import SoulContract from './pages/SoulContract';
@@ -274,7 +275,6 @@ import YoungWarriors from './pages/YoungWarriors';
 import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
-import ScottWorkLog from './pages/ScottWorkLog';
 import __Layout from './Layout.jsx';
 
 
@@ -503,6 +503,7 @@ export const PAGES = {
     "ScottVisas": ScottVisas,
     "ScottWhiteLabel": ScottWhiteLabel,
     "ScottWhiteLabelPricing": ScottWhiteLabelPricing,
+    "ScottWorkLog": ScottWorkLog,
     "ScottZeroServerArchitecture": ScottZeroServerArchitecture,
     "SignDocument": SignDocument,
     "SoulContract": SoulContract,
@@ -555,7 +556,6 @@ export const PAGES = {
     "ZeroEgoProtocol": ZeroEgoProtocol,
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
-    "ScottWorkLog": ScottWorkLog,
 }
 
 export const pagesConfig = {
