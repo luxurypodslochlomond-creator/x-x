@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
-import { Radio, ArrowLeft, Music, Calendar, ClipboardList, DollarSign, Mic2, Plus } from 'lucide-react';
+import { Radio, ArrowLeft, Music, Calendar, ClipboardList, DollarSign, Mic2, Plus, Phone, Mail, Instagram, ExternalLink } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
 import { useQuery } from '@tanstack/react-query';
@@ -110,6 +110,87 @@ export default function ScottArtistHome() {
                         <h1 className="text-2xl font-black text-white font-mono">{artist.name}</h1>
                         <p className="text-gray-500 text-xs font-mono">Artist Hub</p>
                     </div>
+                </div>
+            </div>
+
+            {/* ARTIST PROFILE CARD */}
+            <div className="bg-gradient-to-br from-cyan-500/10 to-purple-500/10 border-2 border-cyan-500/50 rounded-xl p-5 mb-6">
+                <div className="space-y-3">
+                    {/* Contact */}
+                    {artist.phone && (
+                        <div className="flex items-center gap-3">
+                            <Phone className="w-5 h-5 text-cyan-400 flex-shrink-0" />
+                            <a href={`tel:${artist.phone}`} className="text-white font-mono text-sm hover:text-cyan-400 transition-all">
+                                {artist.phone}
+                            </a>
+                        </div>
+                    )}
+                    {artist.email && (
+                        <div className="flex items-center gap-3">
+                            <Mail className="w-5 h-5 text-cyan-400 flex-shrink-0" />
+                            <a href={`mailto:${artist.email}`} className="text-white font-mono text-sm hover:text-cyan-400 transition-all break-all">
+                                {artist.email}
+                            </a>
+                        </div>
+                    )}
+
+                    {/* Details */}
+                    <div className="grid grid-cols-2 gap-3 pt-3 border-t border-cyan-500/30">
+                        {artist.rate && (
+                            <div>
+                                <p className="text-gray-500 text-xs font-mono mb-1">RATE</p>
+                                <p className="text-cyan-400 font-black text-lg font-mono">£{artist.rate}</p>
+                            </div>
+                        )}
+                        {artist.genre && (
+                            <div>
+                                <p className="text-gray-500 text-xs font-mono mb-1">GENRE</p>
+                                <p className="text-white font-bold text-sm font-mono">{artist.genre}</p>
+                            </div>
+                        )}
+                    </div>
+
+                    {artist.gear && (
+                        <div>
+                            <p className="text-gray-500 text-xs font-mono mb-1">GEAR/SKILLS</p>
+                            <p className="text-white text-sm font-mono">{artist.gear}</p>
+                        </div>
+                    )}
+
+                    {/* Socials */}
+                    {(artist.instagram || artist.spotify) && (
+                        <div className="flex gap-3 pt-3 border-t border-cyan-500/30">
+                            {artist.instagram && (
+                                <a 
+                                    href={artist.instagram.startsWith('http') ? artist.instagram : `https://instagram.com/${artist.instagram.replace('@', '')}`}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center gap-2 bg-pink-500/20 hover:bg-pink-500/30 border border-pink-500/50 rounded-lg px-3 py-2 transition-all"
+                                >
+                                    <Instagram className="w-4 h-4 text-pink-400" />
+                                    <span className="text-pink-400 text-xs font-bold font-mono">INSTAGRAM</span>
+                                </a>
+                            )}
+                            {artist.spotify && (
+                                <a 
+                                    href={artist.spotify}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center gap-2 bg-green-500/20 hover:bg-green-500/30 border border-green-500/50 rounded-lg px-3 py-2 transition-all"
+                                >
+                                    <ExternalLink className="w-4 h-4 text-green-400" />
+                                    <span className="text-green-400 text-xs font-bold font-mono">SPOTIFY</span>
+                                </a>
+                            )}
+                        </div>
+                    )}
+
+                    {artist.notes && (
+                        <div className="pt-3 border-t border-cyan-500/30">
+                            <p className="text-gray-500 text-xs font-mono mb-1">NOTES</p>
+                            <p className="text-gray-300 text-sm font-mono">{artist.notes}</p>
+                        </div>
+                    )}
                 </div>
             </div>
 
