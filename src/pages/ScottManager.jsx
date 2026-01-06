@@ -41,11 +41,14 @@ export default function ScottManager() {
         });
     }, [navigate]);
 
-    const { data: artists = [], isLoading } = useQuery({
+    const { data: allArtists = [], isLoading } = useQuery({
         queryKey: ['scottArtists'],
         queryFn: () => base44.entities.ScottArtist.filter({}),
         enabled: !!user
     });
+
+    const artists = allArtists.filter(a => !a.archived);
+    const archivedArtists = allArtists.filter(a => a.archived);
 
     const { data: allOffers = [] } = useQuery({
         queryKey: ['scottAllGigOffers'],
@@ -60,17 +63,22 @@ export default function ScottManager() {
     const avgResponseTime = allOffers.filter(o => o.sent_to_band_date && o.response_sent_date).length > 0 
         ? '2.4 hours' : 'N/A';
 
-    const deleteArtistMutation = useMutation({
-        mutationFn: (artistId) => base44.entities.ScottArtist.delete(artistId),
+    const archiveArtistMutation = useMutation({
+        mutationFn: ({ artistId, archived }) => 
+            base44.entities.ScottArtist.update(artistId, { archived: archived }),
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['scottArtists'] });
         }
     });
 
-    const handleDeleteArtist = (artist) => {
-        if (confirm(`Delete ${artist.name}? This cannot be undone.`)) {
-            deleteArtistMutation.mutate(artist.id);
+    const handleArchiveArtist = (artist) => {
+        if (confirm(`Archive ${artist.name}? You can restore them later.`)) {
+            archiveArtistMutation.mutate({ artistId: artist.id, archived: true });
         }
+    };
+
+    const handleRestoreArtist = (artist) => {
+        archiveArtistMutation.mutate({ artistId: artist.id, archived: false });
     };
 
     if (loading || isLoading) {
@@ -148,8 +156,10 @@ export default function ScottManager() {
                 </div>
             )}
 
-            {/* ARTIST GRID - EXACTLY LIKE SKETCH */}
-            <div className="grid grid-cols-2 gap-4 max-w-2xl mx-auto">
+            {/* ACTIVE ARTISTS */}
+            <div className="mb-8">
+                <h2 className="text-cyan-400 font-black text-xl mb-4 text-center font-mono">ACTIVE ARTISTS</h2>
+                <div className="grid grid-cols-2 gap-4 max-w-2xl mx-auto">
                 {artists.length === 0 ? (
                     <div className="col-span-2 bg-gray-900 border-4 border-gray-700 rounded-xl p-12 text-center">
                         <p className="text-gray-500 text-lg font-mono mb-4">No artists yet</p>
@@ -203,7 +213,41 @@ export default function ScottManager() {
                         </motion.div>
                     </Link>
                 )}
+                </div>
             </div>
+
+            {/* ARCHIVED ARTISTS - RESTORE */}
+            {archivedArtists.length > 0 && (
+                <div className="mb-8">
+                    <h2 className="text-gray-500 font-black text-xl mb-4 text-center font-mono">ARCHIVED (Tap to Restore)</h2>
+                    <div className="grid grid-cols-2 gap-4 max-w-2xl mx-auto">
+                        {archivedArtists.map((artist, index) => (
+                            <motion.div 
+                                key={artist.id}
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: index * 0.1 }}
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                                onClick={() => handleRestoreArtist(artist)}
+                                className="bg-gradient-to-br from-gray-700/20 to-gray-800/20 border-4 border-gray-700 hover:border-green-500 rounded-xl p-8 transition-all h-40 flex items-center justify-center cursor-pointer"
+                            >
+                                <div className="text-center">
+                                    <div className="w-16 h-16 rounded-full bg-gray-700 text-white font-black text-3xl flex items-center justify-center mb-3 mx-auto">
+                                        A{artists.length + index + 1}
+                                    </div>
+                                    <p className="text-gray-400 font-black text-xl font-mono">
+                                        {artist.name}
+                                    </p>
+                                    <p className="text-gray-600 text-xs font-mono mt-2">
+                                        Tap to restore
+                                    </p>
+                                </div>
+                            </motion.div>
+                        ))}
+                    </div>
+                </div>
+            )}
 
             {/* FOOTER */}
             <div className="mt-12 text-center">
