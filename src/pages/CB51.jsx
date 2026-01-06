@@ -55,9 +55,8 @@ export default function CB51() {
             // If admin or no artist found, stay on this page
             setLoading(false);
         }).catch(() => {
-            // Allow public access - no redirect
-            setUser(null);
-            setLoading(false);
+            // Not logged in - redirect to CB51 login page
+            navigate(createPageUrl('CB51Login'));
         });
     }, [navigate]);
 
