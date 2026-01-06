@@ -7,6 +7,7 @@ import { Radio, Plus, Loader2, Trash2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import TechStatusBar from '@/components/scott/TechStatusBar';
 
 /**
  * ADMIN HOME PAGE - SCOTT'S FLOOR DIAGRAM
@@ -94,6 +95,8 @@ export default function ScottManager() {
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white p-6 pb-24">
+            
+            <TechStatusBar showP2PSync={true} />
             
             {/* HEADER */}
             <div className="mb-8 text-center pt-4">
