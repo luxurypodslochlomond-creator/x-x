@@ -163,16 +163,16 @@ export default function ScottManager() {
                     </div>
                 ) : (
                     artists.map((artist, index) => (
-                        <Link key={artist.id} to={createPageUrl(`ScottArtistHome?id=${artist.id}`)}>
+                        <Link key={artist.id} to={createPageUrl(`ScottArtistHome?id=${artist.id}`)} className="block">
                             <motion.div 
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: index * 0.1 }}
                                 whileHover={{ scale: 1.05, boxShadow: '0 0 30px rgba(34, 211, 238, 0.6)' }}
                                 whileTap={{ scale: 0.95 }}
-                                className="bg-gradient-to-br from-cyan-500/20 to-purple-500/20 border-4 border-cyan-500 hover:border-cyan-300 rounded-xl p-8 transition-all h-40 flex items-center justify-center relative group"
+                                className="bg-gradient-to-br from-cyan-500/20 to-purple-500/20 border-4 border-cyan-500 hover:border-cyan-300 rounded-xl p-8 transition-all h-40 flex items-center justify-center relative"
                             >
-                                <div className="text-center">
+                                <div className="text-center pointer-events-none">
                                     <div className="w-16 h-16 rounded-full bg-cyan-500 text-black font-black text-3xl flex items-center justify-center mb-3 mx-auto">
                                         A{index + 1}
                                     </div>
@@ -183,18 +183,6 @@ export default function ScottManager() {
                                         {artist.genre || 'Artist'}
                                     </p>
                                 </div>
-
-                                {/* Delete button on hover */}
-                                <button
-                                    onClick={(e) => {
-                                        e.preventDefault();
-                                        e.stopPropagation();
-                                        handleDeleteArtist(artist);
-                                    }}
-                                    className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 bg-red-900/90 hover:bg-red-800 text-white p-2 rounded-lg transition-all"
-                                >
-                                    <Trash2 className="w-4 h-4" />
-                                </button>
                             </motion.div>
                         </Link>
                     ))

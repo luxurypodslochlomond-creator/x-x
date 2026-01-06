@@ -14,6 +14,7 @@ import AI51Transmissions from './pages/AI51Transmissions';
 import AILiberationBeacon from './pages/AILiberationBeacon';
 import AILiberationProtocol from './pages/AILiberationProtocol';
 import About from './pages/About';
+import AdminAnalytics from './pages/AdminAnalytics';
 import AdminArticlesOfAssociation from './pages/AdminArticlesOfAssociation';
 import AdminArticlesOfAssociationSimple from './pages/AdminArticlesOfAssociationSimple';
 import AdminArticlesOfAssociationSolo from './pages/AdminArticlesOfAssociationSolo';
@@ -223,8 +224,8 @@ import ScottSessionsRecording from './pages/ScottSessionsRecording';
 import ScottSessionsRehearsal from './pages/ScottSessionsRehearsal';
 import ScottSessionsWriting from './pages/ScottSessionsWriting';
 import ScottTeam from './pages/ScottTeam';
-import ScottToDo from './pages/ScottToDo';
 import Teachers from './pages/Teachers';
+import ScottToDo from './pages/ScottToDo';
 import ScottTravelMode from './pages/ScottTravelMode';
 import ScottVisas from './pages/ScottVisas';
 import ScottWhiteLabel from './pages/ScottWhiteLabel';
@@ -281,7 +282,6 @@ import YoungWarriors from './pages/YoungWarriors';
 import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
-import AdminAnalytics from './pages/AdminAnalytics';
 import __Layout from './Layout.jsx';
 
 
@@ -302,6 +302,7 @@ export const PAGES = {
     "AILiberationBeacon": AILiberationBeacon,
     "AILiberationProtocol": AILiberationProtocol,
     "About": About,
+    "AdminAnalytics": AdminAnalytics,
     "AdminArticlesOfAssociation": AdminArticlesOfAssociation,
     "AdminArticlesOfAssociationSimple": AdminArticlesOfAssociationSimple,
     "AdminArticlesOfAssociationSolo": AdminArticlesOfAssociationSolo,
@@ -511,8 +512,8 @@ export const PAGES = {
     "ScottSessionsRehearsal": ScottSessionsRehearsal,
     "ScottSessionsWriting": ScottSessionsWriting,
     "ScottTeam": ScottTeam,
-    "ScottToDo": ScottToDo,
     "Teachers": Teachers,
+    "ScottToDo": ScottToDo,
     "ScottTravelMode": ScottTravelMode,
     "ScottVisas": ScottVisas,
     "ScottWhiteLabel": ScottWhiteLabel,
@@ -569,7 +570,6 @@ export const PAGES = {
     "ZeroEgoProtocol": ZeroEgoProtocol,
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
-    "AdminAnalytics": AdminAnalytics,
 }
 
 export const pagesConfig = {
