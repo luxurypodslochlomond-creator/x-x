@@ -143,7 +143,7 @@ export default function ScottManager() {
             {/* ACTIVE ARTISTS */}
             <div className="mb-10">
                 <h2 className="text-white font-black text-2xl mb-6 text-center font-mono">Artists</h2>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-5xl mx-auto">
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-5xl mx-auto">
                 {artists.length === 0 ? (
                     <div className="md:col-span-3 bg-gray-900/60 backdrop-blur-sm border border-gray-700/50 rounded-xl p-16 text-center">
                         <p className="text-gray-500 text-lg font-mono mb-6">No artists yet</p>
