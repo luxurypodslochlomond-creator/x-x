@@ -147,12 +147,19 @@ export default function ScottManager() {
                 {artists.length === 0 ? (
                     <div className="md:col-span-3 bg-gray-900/60 backdrop-blur-sm border border-gray-700/50 rounded-xl p-16 text-center">
                         <p className="text-gray-500 text-lg font-mono mb-6">No artists yet</p>
-                        {user && (
+                        {user ? (
                             <Link to={createPageUrl('ScottAddArtist')}>
                                 <button className="bg-cyan-500 hover:bg-cyan-600 text-black font-black px-10 py-4 rounded-xl text-lg transition-all">
                                     ADD FIRST ARTIST
                                 </button>
                             </Link>
+                        ) : (
+                            <button 
+                                onClick={() => base44.auth.redirectToLogin(window.location.href)}
+                                className="bg-cyan-500 hover:bg-cyan-600 text-black font-black px-10 py-4 rounded-xl text-lg transition-all"
+                            >
+                                SIGN IN
+                            </button>
                         )}
                     </div>
                 ) : (
