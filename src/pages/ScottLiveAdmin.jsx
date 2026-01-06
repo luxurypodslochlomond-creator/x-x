@@ -75,29 +75,31 @@ export default function ScottLiveAdmin() {
                         </div>
                     </Link>
 
-                    <div className="bg-white/5 rounded-lg p-4 border border-white/10 opacity-40">
-                        <div className="flex items-center justify-between">
+                    <Link to={createPageUrl(`ScottLegalDocs${artistId ? `?id=${artistId}` : ''}`)}>
+                        <div className="bg-white/5 hover:bg-white/10 rounded-lg p-4 border border-white/10 hover:border-white/20 transition-all flex items-center justify-between group">
                             <div className="flex items-center gap-3">
-                                <Scale className="w-5 h-5 text-gray-500" />
+                                <Scale className="w-5 h-5 text-gray-400 group-hover:text-cyan-400 transition-colors" />
                                 <div>
                                     <p className="text-sm font-medium text-white">Legal Docs</p>
-                                    <p className="text-xs text-gray-600 mt-0.5">Coming soon</p>
+                                    <p className="text-xs text-gray-500 mt-0.5">View and manage</p>
                                 </div>
                             </div>
+                            <ArrowLeft className="w-4 h-4 text-gray-600 group-hover:text-gray-400 rotate-180 transition-colors" />
                         </div>
-                    </div>
+                    </Link>
 
-                    <div className="bg-white/5 rounded-lg p-4 border border-white/10 opacity-40">
-                        <div className="flex items-center justify-between">
+                    <Link to={createPageUrl(`ScottInsurance${artistId ? `?id=${artistId}` : ''}`)}>
+                        <div className="bg-white/5 hover:bg-white/10 rounded-lg p-4 border border-white/10 hover:border-white/20 transition-all flex items-center justify-between group">
                             <div className="flex items-center gap-3">
-                                <Shield className="w-5 h-5 text-gray-500" />
+                                <Shield className="w-5 h-5 text-gray-400 group-hover:text-cyan-400 transition-colors" />
                                 <div>
                                     <p className="text-sm font-medium text-white">Insurance</p>
-                                    <p className="text-xs text-gray-600 mt-0.5">Coming soon</p>
+                                    <p className="text-xs text-gray-500 mt-0.5">View and manage</p>
                                 </div>
                             </div>
+                            <ArrowLeft className="w-4 h-4 text-gray-600 group-hover:text-gray-400 rotate-180 transition-colors" />
                         </div>
-                    </div>
+                    </Link>
                 </div>
 
                 {/* SUBTLE CB51 MARK */}
