@@ -103,79 +103,74 @@ export default function CB51() {
 
     if (loading || isLoading) {
         return (
-            <div className="min-h-screen bg-black flex items-center justify-center">
+            <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black flex items-center justify-center">
                 <div className="text-center">
-                    <Loader2 className="w-12 h-12 text-cyan-400 animate-spin mx-auto mb-4" />
-                    <p className="text-gray-500 font-mono">Loading admin home...</p>
+                    <div className="w-12 h-12 border-2 border-gray-800 border-t-cyan-500 rounded-full animate-spin mx-auto mb-3"></div>
+                    <p className="text-gray-600 font-mono text-sm">Loading...</p>
                 </div>
             </div>
         );
     }
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white p-6 pb-24">
+        <div className="min-h-screen bg-black text-white p-6 pb-24">
             
             <TechStatusBar showP2PSync={true} />
             
             {/* HEADER */}
-            <div className="mb-8 text-center pt-4">
-                <h1 className="text-4xl font-black text-cyan-400 mb-2 font-mono tracking-tight">CB51 OPERATIONS</h1>
-                <p className="text-gray-500 text-sm font-mono">Your AI Co-Manager</p>
+            <div className="mb-8 pt-4">
+                <h1 className="text-2xl font-black text-white mb-1 font-mono">CB51</h1>
+                <p className="text-gray-600 text-sm font-mono">Artist Management</p>
 
                 {user && totalTimeSaved > 0 && (
-                    <motion.div 
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.4 }}
-                        className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto"
-                    >
-                        <div className="bg-black border-4 border-green-500 rounded-xl p-6 transition-all" style={{ boxShadow: '0 0 30px rgba(34, 197, 94, 0.5)' }}>
-                            <p className="text-green-400 font-black text-4xl text-center font-mono mb-2">
+                    <div className="mt-6 grid grid-cols-3 gap-3">
+                        <div className="bg-gray-900/40 rounded-xl p-4 border border-gray-800">
+                            <p className="text-2xl font-bold text-white text-center font-mono mb-1">
                                 {hoursPerWeek}h
                             </p>
-                            <p className="text-gray-400 text-sm text-center font-mono">
-                                Time saved
+                            <p className="text-xs text-gray-600 text-center font-mono uppercase tracking-wider">
+                                Saved
                             </p>
                         </div>
 
-                        <div className="bg-black border-4 border-cyan-500 rounded-xl p-6 transition-all" style={{ boxShadow: '0 0 30px rgba(6, 182, 212, 0.5)' }}>
-                            <p className="text-cyan-400 font-black text-4xl text-center font-mono mb-2">
+                        <div className="bg-gray-900/40 rounded-xl p-4 border border-gray-800">
+                            <p className="text-2xl font-bold text-white text-center font-mono mb-1">
                                 {totalOffers}
                             </p>
-                            <p className="text-gray-400 text-sm text-center font-mono">
-                                Offers handled
+                            <p className="text-xs text-gray-600 text-center font-mono uppercase tracking-wider">
+                                Offers
                             </p>
                         </div>
 
-                        <div className="bg-black border-4 border-pink-500 rounded-xl p-6 transition-all" style={{ boxShadow: '0 0 30px rgba(236, 72, 153, 0.5)' }}>
-                            <p className="text-pink-400 font-black text-4xl text-center font-mono mb-2">
+                        <div className="bg-gray-900/40 rounded-xl p-4 border border-gray-800">
+                            <p className="text-2xl font-bold text-white text-center font-mono mb-1">
                                 {confirmedGigs}
                             </p>
-                            <p className="text-gray-400 text-sm text-center font-mono">
-                                Confirmed gigs
+                            <p className="text-xs text-gray-600 text-center font-mono uppercase tracking-wider">
+                                Gigs
                             </p>
                         </div>
-                    </motion.div>
+                    </div>
                 )}
                 </div>
 
             {/* ACTIVE ARTISTS */}
             <div className="mb-10">
-                <h2 className="text-white font-black text-2xl mb-6 text-center font-mono">Artists</h2>
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-5xl mx-auto">
+                <h2 className="text-white font-black text-lg mb-4 font-mono">Artists</h2>
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                 {artists.length === 0 ? (
-                    <div className="md:col-span-3 bg-gray-900/60 backdrop-blur-sm border border-gray-700/50 rounded-xl p-16 text-center">
-                        <p className="text-gray-500 text-lg font-mono mb-6">No artists yet</p>
+                    <div className="col-span-2 md:col-span-3 bg-gray-900/40 border border-gray-800 rounded-xl p-12 text-center">
+                        <p className="text-gray-500 text-sm font-mono mb-4">No artists yet</p>
                         {user ? (
                             <Link to={createPageUrl('ScottAddArtist')}>
-                                <button className="bg-cyan-500 hover:bg-cyan-600 text-black font-black px-10 py-4 rounded-xl text-lg transition-all">
+                                <button className="bg-cyan-500 hover:bg-cyan-600 text-black font-bold px-6 py-3 rounded-lg text-sm font-mono transition-all">
                                     ADD FIRST ARTIST
                                 </button>
                             </Link>
                         ) : (
                             <button 
                                 onClick={() => base44.auth.redirectToLogin(window.location.href)}
-                                className="bg-cyan-500 hover:bg-cyan-600 text-black font-black px-10 py-4 rounded-xl text-lg transition-all"
+                                className="bg-cyan-500 hover:bg-cyan-600 text-black font-bold px-6 py-3 rounded-lg text-sm font-mono transition-all"
                             >
                                 SIGN IN
                             </button>
@@ -184,25 +179,19 @@ export default function CB51() {
                 ) : (
                     artists.map((artist, index) => (
                         <Link key={artist.id} to={createPageUrl(`ScottArtistHome?id=${artist.id}`)} className="block">
-                            <motion.div 
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: index * 0.05 }}
-                                whileHover={{ y: -4 }}
-                                whileTap={{ scale: 0.98 }}
-                                className="bg-black border-4 border-cyan-500 rounded-xl p-4 md:p-6 transition-all h-40 md:h-44 flex flex-col items-center justify-center"
-                                style={{ boxShadow: '0 0 30px rgba(6, 182, 212, 0.5)' }}
-                            >
-                                <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-gradient-to-br from-cyan-500 to-purple-500 text-black font-black text-2xl md:text-3xl flex items-center justify-center mb-3 md:mb-4">
+                            <div className="bg-gray-900/40 hover:bg-gray-900/60 border border-gray-800 hover:border-cyan-500/50 rounded-xl p-5 transition-all h-32 flex items-center gap-4">
+                                <div className="w-14 h-14 rounded-xl bg-gray-800 text-white font-black text-xl flex items-center justify-center flex-shrink-0">
                                     {artist.name.charAt(0)}
                                 </div>
-                                <p className="text-white font-black text-sm md:text-lg font-mono text-center">
-                                    {artist.name}
-                                </p>
-                                <p className="text-gray-500 text-[10px] md:text-xs font-mono mt-1 md:mt-2">
-                                    {artist.genre || 'Artist'}
-                                </p>
-                            </motion.div>
+                                <div className="flex-1 min-w-0">
+                                    <p className="text-white font-bold text-base font-mono truncate">
+                                        {artist.name}
+                                    </p>
+                                    <p className="text-gray-600 text-xs font-mono mt-0.5">
+                                        {artist.genre || 'Artist'}
+                                    </p>
+                                </div>
+                            </div>
                         </Link>
                     ))
                 )}
@@ -210,16 +199,10 @@ export default function CB51() {
                 {/* ADD ARTIST BUTTON */}
                 {user && artists.length > 0 && (
                     <Link to={createPageUrl('ScottAddArtist')}>
-                            <motion.div 
-                                whileHover={{ y: -4 }}
-                                whileTap={{ scale: 0.98 }}
-                                className="bg-black border-4 border-dashed border-green-500 hover:border-green-400 rounded-xl p-4 md:p-6 transition-all h-40 md:h-44 flex flex-col items-center justify-center"
-                                style={{ boxShadow: '0 0 25px rgba(34, 197, 94, 0.4)' }}
-                            >
-                                <Plus className="w-10 h-10 md:w-14 md:h-14 text-green-400 mb-2 md:mb-3" />
-                                <p className="text-green-400 font-mono text-xs md:text-sm font-bold">ADD</p>
-                            </motion.div>
-                        </Link>
+                        <div className="bg-gray-900/40 hover:bg-gray-900/60 border border-dashed border-gray-700 hover:border-cyan-500/50 rounded-xl p-5 transition-all h-32 flex items-center justify-center">
+                            <Plus className="w-8 h-8 text-gray-600" />
+                        </div>
+                    </Link>
                 )}
                 </div>
             </div>
@@ -227,29 +210,26 @@ export default function CB51() {
             {/* ARCHIVED ARTISTS - RESTORE */}
             {archivedArtists.length > 0 && (
                 <div className="mb-10">
-                <h2 className="text-gray-600 font-black text-xl mb-6 text-center font-mono">Archived</h2>
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-5xl mx-auto">
+                <h2 className="text-gray-600 font-black text-lg mb-4 font-mono">Archived</h2>
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                         {archivedArtists.map((artist, index) => (
-                            <motion.div 
+                            <div 
                                 key={artist.id}
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: index * 0.05 }}
-                                whileHover={{ y: -4 }}
-                                whileTap={{ scale: 0.98 }}
                                 onClick={() => handleRestoreArtist(artist)}
-                                className="bg-gray-900/40 backdrop-blur-sm border border-gray-700/50 hover:border-green-500/60 rounded-xl p-4 md:p-6 transition-all h-40 md:h-44 flex flex-col items-center justify-center cursor-pointer"
+                                className="bg-gray-900/20 hover:bg-gray-900/40 border border-gray-800 hover:border-gray-700 rounded-xl p-5 transition-all h-32 flex items-center gap-4 cursor-pointer"
                             >
-                                <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-gray-800 text-gray-500 font-black text-2xl md:text-3xl flex items-center justify-center mb-3 md:mb-4">
+                                <div className="w-14 h-14 rounded-xl bg-gray-900 text-gray-700 font-black text-xl flex items-center justify-center flex-shrink-0">
                                     {artist.name.charAt(0)}
                                 </div>
-                                <p className="text-gray-500 font-black text-sm md:text-lg font-mono text-center">
-                                    {artist.name}
-                                </p>
-                                <p className="text-gray-700 text-[10px] md:text-xs font-mono mt-1 md:mt-2">
-                                    Tap to restore
-                                </p>
-                            </motion.div>
+                                <div className="flex-1 min-w-0">
+                                    <p className="text-gray-600 font-bold text-base font-mono truncate">
+                                        {artist.name}
+                                    </p>
+                                    <p className="text-gray-700 text-xs font-mono mt-0.5">
+                                        Tap to restore
+                                    </p>
+                                </div>
+                            </div>
                         ))}
                     </div>
                 </div>
@@ -257,19 +237,18 @@ export default function CB51() {
 
             {/* QUICK LINKS - ADMIN */}
             {user?.role === 'admin' && (
-                <div className="max-w-5xl mx-auto space-y-4 mt-10">
+                <div className="space-y-3 mt-10">
                     <Link to={createPageUrl('ScottAbout')}>
-                        <button className="w-full bg-black border-4 border-cyan-500 text-cyan-400 font-black px-6 py-4 rounded-xl text-sm font-mono transition-all" style={{ boxShadow: '0 0 30px rgba(6, 182, 212, 0.5)' }}>
-                            ABOUT CB51 →
+                        <button className="w-full bg-gray-900/40 hover:bg-gray-900/60 border border-gray-800 hover:border-cyan-500/50 text-white font-mono px-5 py-4 rounded-xl text-sm transition-all">
+                            About CB51 →
                         </button>
                     </Link>
                 </div>
             )}
 
             {/* FOOTER */}
-            <div className="mt-16 text-center">
-                <p className="text-gray-600 text-xs font-mono">CB51 Operations Centre</p>
-                <p className="text-gray-800 text-[10px] font-mono mt-1">♾️📻♾️</p>
+            <div className="mt-12 text-center">
+                <p className="text-gray-700 text-xs font-mono">CB51</p>
             </div>
             </div>
             );
