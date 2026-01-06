@@ -113,6 +113,69 @@ export default function ScottArtistHome() {
                 </div>
             </div>
 
+            {/* ARTIST PROFILE CARD */}
+            <div className="mb-6 bg-gradient-to-br from-cyan-500/10 to-purple-500/10 border-2 border-cyan-500/50 rounded-xl p-5">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {/* LEFT COLUMN */}
+                    <div className="space-y-3">
+                        <div>
+                            <p className="text-gray-500 text-xs font-mono mb-1">CONTACT</p>
+                            <div className="space-y-1">
+                                {artist.phone && (
+                                    <p className="text-white font-mono text-sm">📞 {artist.phone}</p>
+                                )}
+                                {artist.email && (
+                                    <p className="text-white font-mono text-sm">✉️ {artist.email}</p>
+                                )}
+                            </div>
+                        </div>
+                        {(artist.rate || artist.genre || artist.gear) && (
+                            <div>
+                                <p className="text-gray-500 text-xs font-mono mb-1">INFO</p>
+                                <div className="space-y-1">
+                                    {artist.rate && (
+                                        <p className="text-cyan-400 font-mono text-sm">💰 {artist.rate}</p>
+                                    )}
+                                    {artist.genre && (
+                                        <p className="text-purple-400 font-mono text-sm">🎵 {artist.genre}</p>
+                                    )}
+                                    {artist.gear && (
+                                        <p className="text-pink-400 font-mono text-sm">🎸 {artist.gear}</p>
+                                    )}
+                                </div>
+                            </div>
+                        )}
+                    </div>
+
+                    {/* RIGHT COLUMN */}
+                    <div className="space-y-3">
+                        {(artist.social_links?.instagram || artist.social_links?.spotify) && (
+                            <div>
+                                <p className="text-gray-500 text-xs font-mono mb-1">SOCIALS</p>
+                                <div className="space-y-1">
+                                    {artist.social_links?.instagram && (
+                                        <a href={artist.social_links.instagram} target="_blank" rel="noopener noreferrer" className="text-pink-400 font-mono text-sm hover:text-pink-300 block">
+                                            📸 Instagram →
+                                        </a>
+                                    )}
+                                    {artist.social_links?.spotify && (
+                                        <a href={artist.social_links.spotify} target="_blank" rel="noopener noreferrer" className="text-green-400 font-mono text-sm hover:text-green-300 block">
+                                            🎵 Spotify →
+                                        </a>
+                                    )}
+                                </div>
+                            </div>
+                        )}
+                        {artist.notes && (
+                            <div>
+                                <p className="text-gray-500 text-xs font-mono mb-1">NOTES</p>
+                                <p className="text-gray-400 font-mono text-sm">{artist.notes}</p>
+                            </div>
+                        )}
+                    </div>
+                </div>
+            </div>
+
             {/* 5 MAIN SECTIONS */}
             <div className="space-y-3">
                 {sections.map((section) => {
