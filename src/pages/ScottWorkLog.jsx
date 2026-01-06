@@ -199,26 +199,53 @@ export default function ScottWorkLog() {
                 </div>
             </div>
 
-            {/* NEXT STEPS */}
+            {/* SCOTT'S REALITY CHECK */}
+            <div className="mb-8 bg-gradient-to-r from-red-500/20 to-orange-500/20 border-2 border-red-500 rounded-xl p-6">
+                <h2 className="text-red-400 font-black text-xl font-mono mb-4 flex items-center gap-2">
+                    <AlertCircle className="w-6 h-6" />
+                    SCOTT'S POINT: WHY NOT JUST USE WIX?
+                </h2>
+                
+                <div className="space-y-3 text-sm font-mono">
+                    <p className="text-white font-bold">Scott: "I can go into Wix right now and build a site - what's different?"</p>
+                    <p className="text-amber-400">ANSWER: Nothing yet if basics don't work perfectly first!</p>
+                    
+                    <div className="bg-black border border-red-500/50 rounded-lg p-3 mt-3">
+                        <p className="text-red-400 font-bold mb-2">STOP BUILDING NEW STUFF</p>
+                        <p className="text-white">Focus: Make login → admin home → artist profile PERFECT</p>
+                        <p className="text-gray-400">Everything else comes AFTER Scott tests these 3 screens</p>
+                    </div>
+                </div>
+            </div>
+
+            {/* WHAT NEEDS TO WORK NOW */}
             <div className="mb-8 bg-gradient-to-r from-cyan-500/20 to-purple-500/20 border-2 border-cyan-500 rounded-xl p-6">
                 <h2 className="text-cyan-400 font-black text-xl font-mono mb-4 flex items-center gap-2">
                     <Clock className="w-6 h-6" />
-                    NEXT STEPS
+                    WHAT NEEDS TO WORK NOW (NOT LATER)
                 </h2>
                 
                 <div className="space-y-2 text-sm font-mono">
                     <div className="flex items-start gap-2">
                         <div className="w-4 h-4 bg-cyan-500 rounded-sm mt-0.5 flex-shrink-0"></div>
-                        <p className="text-white">Build LIVE subsections: Bookings, Logistics, Admin</p>
+                        <p className="text-white">Login works (manager → admin home, artist → artist home)</p>
                     </div>
                     <div className="flex items-start gap-2">
                         <div className="w-4 h-4 bg-cyan-500 rounded-sm mt-0.5 flex-shrink-0"></div>
-                        <p className="text-white">Integrate AI51 gig workflow into LIVE section</p>
+                        <p className="text-white">Admin home shows artist list clearly</p>
+                    </div>
+                    <div className="flex items-start gap-2">
+                        <div className="w-4 h-4 bg-cyan-500 rounded-sm mt-0.5 flex-shrink-0"></div>
+                        <p className="text-white">Artist profile shows 4 boxes + calendar (even if empty)</p>
                     </div>
                     <div className="flex items-start gap-2">
                         <div className="w-4 h-4 bg-purple-500 rounded-sm mt-0.5 flex-shrink-0"></div>
-                        <p className="text-white">Test with real artist data (Scott to add first artist)</p>
+                        <p className="text-white">Scott tests it with real data</p>
                     </div>
+                </div>
+                
+                <div className="mt-4 bg-black border border-gray-700 rounded-lg p-3">
+                    <p className="text-gray-400 text-xs">AFTER Scott confirms basics work → then build LIVE/SESSIONS/etc subsections</p>
                 </div>
             </div>
 
