@@ -164,15 +164,15 @@ export default function ScottManager() {
                                 transition={{ delay: index * 0.05 }}
                                 whileHover={{ y: -4 }}
                                 whileTap={{ scale: 0.98 }}
-                                className="bg-gray-900/60 backdrop-blur-sm border border-cyan-500/30 hover:border-cyan-500 rounded-xl p-6 transition-all h-44 flex flex-col items-center justify-center"
+                                className="bg-gray-900/60 backdrop-blur-sm border border-cyan-500/30 hover:border-cyan-500 rounded-xl p-4 md:p-6 transition-all h-40 md:h-44 flex flex-col items-center justify-center"
                             >
-                                <div className="w-20 h-20 rounded-full bg-gradient-to-br from-cyan-500 to-purple-500 text-black font-black text-3xl flex items-center justify-center mb-4">
+                                <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-gradient-to-br from-cyan-500 to-purple-500 text-black font-black text-2xl md:text-3xl flex items-center justify-center mb-3 md:mb-4">
                                     {artist.name.charAt(0)}
                                 </div>
-                                <p className="text-white font-black text-lg font-mono text-center">
+                                <p className="text-white font-black text-sm md:text-lg font-mono text-center">
                                     {artist.name}
                                 </p>
-                                <p className="text-gray-500 text-xs font-mono mt-2">
+                                <p className="text-gray-500 text-[10px] md:text-xs font-mono mt-1 md:mt-2">
                                     {artist.genre || 'Artist'}
                                 </p>
                             </motion.div>
@@ -183,15 +183,15 @@ export default function ScottManager() {
                 {/* ADD ARTIST BUTTON */}
                 {user && artists.length > 0 && (
                     <Link to={createPageUrl('ScottAddArtist')}>
-                        <motion.div 
-                            whileHover={{ y: -4 }}
-                            whileTap={{ scale: 0.98 }}
-                            className="bg-gray-900/40 backdrop-blur-sm border-2 border-dashed border-gray-700 hover:border-cyan-500 rounded-xl p-6 transition-all h-44 flex flex-col items-center justify-center"
-                        >
-                            <Plus className="w-14 h-14 text-gray-600 mb-3" />
-                            <p className="text-gray-500 font-mono text-sm font-bold">ADD ARTIST</p>
-                        </motion.div>
-                    </Link>
+                            <motion.div 
+                                whileHover={{ y: -4 }}
+                                whileTap={{ scale: 0.98 }}
+                                className="bg-gray-900/40 backdrop-blur-sm border-2 border-dashed border-gray-700 hover:border-cyan-500 rounded-xl p-4 md:p-6 transition-all h-40 md:h-44 flex flex-col items-center justify-center"
+                            >
+                                <Plus className="w-10 h-10 md:w-14 md:h-14 text-gray-600 mb-2 md:mb-3" />
+                                <p className="text-gray-500 font-mono text-xs md:text-sm font-bold">ADD</p>
+                            </motion.div>
+                        </Link>
                 )}
                 </div>
             </div>
@@ -199,8 +199,8 @@ export default function ScottManager() {
             {/* ARCHIVED ARTISTS - RESTORE */}
             {archivedArtists.length > 0 && (
                 <div className="mb-10">
-                    <h2 className="text-gray-600 font-black text-xl mb-6 text-center font-mono">Archived</h2>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-5xl mx-auto">
+                <h2 className="text-gray-600 font-black text-xl mb-6 text-center font-mono">Archived</h2>
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-5xl mx-auto">
                         {archivedArtists.map((artist, index) => (
                             <motion.div 
                                 key={artist.id}
@@ -210,15 +210,15 @@ export default function ScottManager() {
                                 whileHover={{ y: -4 }}
                                 whileTap={{ scale: 0.98 }}
                                 onClick={() => handleRestoreArtist(artist)}
-                                className="bg-gray-900/40 backdrop-blur-sm border border-gray-700/50 hover:border-green-500/60 rounded-xl p-6 transition-all h-44 flex flex-col items-center justify-center cursor-pointer"
+                                className="bg-gray-900/40 backdrop-blur-sm border border-gray-700/50 hover:border-green-500/60 rounded-xl p-4 md:p-6 transition-all h-40 md:h-44 flex flex-col items-center justify-center cursor-pointer"
                             >
-                                <div className="w-20 h-20 rounded-full bg-gray-800 text-gray-500 font-black text-3xl flex items-center justify-center mb-4">
+                                <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-gray-800 text-gray-500 font-black text-2xl md:text-3xl flex items-center justify-center mb-3 md:mb-4">
                                     {artist.name.charAt(0)}
                                 </div>
-                                <p className="text-gray-500 font-black text-lg font-mono text-center">
+                                <p className="text-gray-500 font-black text-sm md:text-lg font-mono text-center">
                                     {artist.name}
                                 </p>
-                                <p className="text-gray-700 text-xs font-mono mt-2">
+                                <p className="text-gray-700 text-[10px] md:text-xs font-mono mt-1 md:mt-2">
                                     Tap to restore
                                 </p>
                             </motion.div>
