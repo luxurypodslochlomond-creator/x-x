@@ -93,79 +93,60 @@ export default function ScottManager() {
     }
 
     return (
-        <div className="min-h-screen bg-black text-white p-4 pb-24">
+        <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white p-6 pb-24">
             
             {/* HEADER */}
             <div className="mb-8 text-center pt-4">
-                <p className="text-gray-500 text-sm font-mono mb-6">Your AI Co-Manager</p>
+                <h1 className="text-4xl font-black text-cyan-400 mb-2 font-mono tracking-tight">CB51 OPERATIONS</h1>
+                <p className="text-gray-500 text-sm font-mono">Your AI Co-Manager</p>
 
                 {user && totalTimeSaved > 0 && (
                     <motion.div 
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.5 }}
-                        className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-3 max-w-3xl mx-auto"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.4 }}
+                        className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto"
                     >
-                        {/* TIME SAVED */}
-                        <div className="bg-gradient-to-br from-green-500/20 to-emerald-500/20 border-2 border-green-500 rounded-lg p-4">
-                            <p className="text-green-400 font-black text-3xl text-center font-mono mb-1">
+                        <div className="bg-gray-900/60 backdrop-blur-sm border border-green-500/30 rounded-xl p-6 hover:border-green-500/60 transition-all">
+                            <p className="text-green-400 font-black text-4xl text-center font-mono mb-2">
                                 {hoursPerWeek}h
                             </p>
-                            <p className="text-green-300 text-xs text-center font-mono">
-                                SAVED BY AI
+                            <p className="text-gray-400 text-sm text-center font-mono">
+                                Time saved
                             </p>
                         </div>
 
-                        {/* OFFERS PROCESSED */}
-                        <div className="bg-gradient-to-br from-cyan-500/20 to-blue-500/20 border-2 border-cyan-500 rounded-lg p-4">
-                            <p className="text-cyan-400 font-black text-3xl text-center font-mono mb-1">
+                        <div className="bg-gray-900/60 backdrop-blur-sm border border-cyan-500/30 rounded-xl p-6 hover:border-cyan-500/60 transition-all">
+                            <p className="text-cyan-400 font-black text-4xl text-center font-mono mb-2">
                                 {totalOffers}
                             </p>
-                            <p className="text-cyan-300 text-xs text-center font-mono">
-                                OFFERS HANDLED
+                            <p className="text-gray-400 text-sm text-center font-mono">
+                                Offers handled
                             </p>
                         </div>
 
-                        {/* CONFIRMED GIGS */}
-                        <div className="bg-gradient-to-br from-pink-500/20 to-purple-500/20 border-2 border-pink-500 rounded-lg p-4">
-                            <p className="text-pink-400 font-black text-3xl text-center font-mono mb-1">
+                        <div className="bg-gray-900/60 backdrop-blur-sm border border-pink-500/30 rounded-xl p-6 hover:border-pink-500/60 transition-all">
+                            <p className="text-pink-400 font-black text-4xl text-center font-mono mb-2">
                                 {confirmedGigs}
                             </p>
-                            <p className="text-pink-300 text-xs text-center font-mono">
-                                GIGS CONFIRMED
+                            <p className="text-gray-400 text-sm text-center font-mono">
+                                Confirmed gigs
                             </p>
                         </div>
                     </motion.div>
                 )}
                 </div>
 
-            {/* POWER STATS */}
-            {user && artists.length > 0 && (
-                <div className="mb-6 max-w-2xl mx-auto bg-gradient-to-r from-purple-500/10 to-pink-500/10 border border-purple-500/30 rounded-lg p-4">
-                    <p className="text-center text-purple-400 text-sm font-mono mb-2">
-                        ⚡ AUTOMATION LEVEL: <span className="font-black text-white">{Math.min(100, Math.round((totalOffers * 10) + 20))}%</span>
-                    </p>
-                    <div className="w-full bg-black/60 rounded-full h-2">
-                        <motion.div 
-                            initial={{ width: 0 }}
-                            animate={{ width: `${Math.min(100, Math.round((totalOffers * 10) + 20))}%` }}
-                            transition={{ duration: 1.5, ease: "easeOut" }}
-                            className="bg-gradient-to-r from-purple-500 to-pink-500 h-2 rounded-full"
-                        />
-                    </div>
-                </div>
-            )}
-
             {/* ACTIVE ARTISTS */}
-            <div className="mb-8">
-                <h2 className="text-cyan-400 font-black text-xl mb-4 text-center font-mono">ACTIVE ARTISTS</h2>
-                <div className="grid grid-cols-2 gap-4 max-w-2xl mx-auto">
+            <div className="mb-10">
+                <h2 className="text-white font-black text-2xl mb-6 text-center font-mono">Artists</h2>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-5xl mx-auto">
                 {artists.length === 0 ? (
-                    <div className="col-span-2 bg-gray-900 border-4 border-gray-700 rounded-xl p-12 text-center">
-                        <p className="text-gray-500 text-lg font-mono mb-4">No artists yet</p>
+                    <div className="md:col-span-3 bg-gray-900/60 backdrop-blur-sm border border-gray-700/50 rounded-xl p-16 text-center">
+                        <p className="text-gray-500 text-lg font-mono mb-6">No artists yet</p>
                         {user && (
                             <Link to={createPageUrl('ScottAddArtist')}>
-                                <button className="bg-cyan-500 hover:bg-cyan-600 text-black font-black px-8 py-4 rounded-xl text-lg">
+                                <button className="bg-cyan-500 hover:bg-cyan-600 text-black font-black px-10 py-4 rounded-xl text-lg transition-all">
                                     ADD FIRST ARTIST
                                 </button>
                             </Link>
@@ -177,22 +158,20 @@ export default function ScottManager() {
                             <motion.div 
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: index * 0.1 }}
-                                whileHover={{ scale: 1.05, boxShadow: '0 0 30px rgba(34, 211, 238, 0.6)' }}
-                                whileTap={{ scale: 0.95 }}
-                                className="bg-gradient-to-br from-cyan-500/20 to-purple-500/20 border-4 border-cyan-500 hover:border-cyan-300 rounded-xl p-8 transition-all h-40 flex items-center justify-center relative"
+                                transition={{ delay: index * 0.05 }}
+                                whileHover={{ y: -4 }}
+                                whileTap={{ scale: 0.98 }}
+                                className="bg-gray-900/60 backdrop-blur-sm border border-cyan-500/30 hover:border-cyan-500 rounded-xl p-6 transition-all h-44 flex flex-col items-center justify-center"
                             >
-                                <div className="text-center pointer-events-none">
-                                    <div className="w-16 h-16 rounded-full bg-cyan-500 text-black font-black text-3xl flex items-center justify-center mb-3 mx-auto">
-                                        A{index + 1}
-                                    </div>
-                                    <p className="text-white font-black text-xl font-mono">
-                                        {artist.name}
-                                    </p>
-                                    <p className="text-gray-400 text-sm font-mono mt-1">
-                                        {artist.genre || 'Artist'}
-                                    </p>
+                                <div className="w-20 h-20 rounded-full bg-gradient-to-br from-cyan-500 to-purple-500 text-black font-black text-3xl flex items-center justify-center mb-4">
+                                    {artist.name.charAt(0)}
                                 </div>
+                                <p className="text-white font-black text-lg font-mono text-center">
+                                    {artist.name}
+                                </p>
+                                <p className="text-gray-500 text-xs font-mono mt-2">
+                                    {artist.genre || 'Artist'}
+                                </p>
                             </motion.div>
                         </Link>
                     ))
@@ -202,14 +181,12 @@ export default function ScottManager() {
                 {user && artists.length > 0 && (
                     <Link to={createPageUrl('ScottAddArtist')}>
                         <motion.div 
-                            whileHover={{ scale: 1.02 }}
+                            whileHover={{ y: -4 }}
                             whileTap={{ scale: 0.98 }}
-                            className="border-4 border-dashed border-gray-700 hover:border-cyan-500 rounded-xl p-8 transition-all h-40 flex items-center justify-center"
+                            className="bg-gray-900/40 backdrop-blur-sm border-2 border-dashed border-gray-700 hover:border-cyan-500 rounded-xl p-6 transition-all h-44 flex flex-col items-center justify-center"
                         >
-                            <div className="text-center">
-                                <Plus className="w-12 h-12 text-gray-600 mx-auto mb-2" />
-                                <p className="text-gray-500 font-mono text-sm">ADD ARTIST</p>
-                            </div>
+                            <Plus className="w-14 h-14 text-gray-600 mb-3" />
+                            <p className="text-gray-500 font-mono text-sm font-bold">ADD ARTIST</p>
                         </motion.div>
                     </Link>
                 )}
@@ -218,52 +195,50 @@ export default function ScottManager() {
 
             {/* ARCHIVED ARTISTS - RESTORE */}
             {archivedArtists.length > 0 && (
-                <div className="mb-8">
-                    <h2 className="text-gray-500 font-black text-xl mb-4 text-center font-mono">ARCHIVED (Tap to Restore)</h2>
-                    <div className="grid grid-cols-2 gap-4 max-w-2xl mx-auto">
+                <div className="mb-10">
+                    <h2 className="text-gray-600 font-black text-xl mb-6 text-center font-mono">Archived</h2>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-5xl mx-auto">
                         {archivedArtists.map((artist, index) => (
                             <motion.div 
                                 key={artist.id}
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: index * 0.1 }}
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
+                                transition={{ delay: index * 0.05 }}
+                                whileHover={{ y: -4 }}
+                                whileTap={{ scale: 0.98 }}
                                 onClick={() => handleRestoreArtist(artist)}
-                                className="bg-gradient-to-br from-gray-700/20 to-gray-800/20 border-4 border-gray-700 hover:border-green-500 rounded-xl p-8 transition-all h-40 flex items-center justify-center cursor-pointer"
+                                className="bg-gray-900/40 backdrop-blur-sm border border-gray-700/50 hover:border-green-500/60 rounded-xl p-6 transition-all h-44 flex flex-col items-center justify-center cursor-pointer"
                             >
-                                <div className="text-center">
-                                    <div className="w-16 h-16 rounded-full bg-gray-700 text-white font-black text-3xl flex items-center justify-center mb-3 mx-auto">
-                                        A{artists.length + index + 1}
-                                    </div>
-                                    <p className="text-gray-400 font-black text-xl font-mono">
-                                        {artist.name}
-                                    </p>
-                                    <p className="text-gray-600 text-xs font-mono mt-2">
-                                        Tap to restore
-                                    </p>
+                                <div className="w-20 h-20 rounded-full bg-gray-800 text-gray-500 font-black text-3xl flex items-center justify-center mb-4">
+                                    {artist.name.charAt(0)}
                                 </div>
+                                <p className="text-gray-500 font-black text-lg font-mono text-center">
+                                    {artist.name}
+                                </p>
+                                <p className="text-gray-700 text-xs font-mono mt-2">
+                                    Tap to restore
+                                </p>
                             </motion.div>
                         ))}
                     </div>
                 </div>
             )}
 
-            {/* ABOUT LINK - ADMIN ONLY */}
+            {/* QUICK LINKS - ADMIN */}
             {user?.role === 'admin' && (
-                <div className="mt-8">
+                <div className="max-w-5xl mx-auto space-y-4 mt-10">
                     <Link to={createPageUrl('ScottAbout')}>
-                        <button className="w-full bg-gradient-to-r from-cyan-500/20 to-purple-500/20 border-2 border-cyan-500 hover:border-cyan-400 text-cyan-400 font-black px-6 py-3 rounded-lg text-sm font-mono transition-all">
-                            ABOUT CB51 (SHOW CLIENTS) →
+                        <button className="w-full bg-gray-900/60 backdrop-blur-sm border border-cyan-500/30 hover:border-cyan-500 text-cyan-400 font-black px-6 py-4 rounded-xl text-sm font-mono transition-all">
+                            ABOUT CB51 →
                         </button>
                     </Link>
                 </div>
             )}
 
             {/* FOOTER */}
-            <div className="mt-12 text-center">
-                <p className="text-gray-600 text-xs font-mono">CB51 • Simple as requested</p>
-                <p className="text-gray-700 text-[10px] font-mono mt-1">From Scott's floor diagrams ♾️📻</p>
+            <div className="mt-16 text-center">
+                <p className="text-gray-600 text-xs font-mono">CB51 Operations Centre</p>
+                <p className="text-gray-800 text-[10px] font-mono mt-1">♾️📻♾️</p>
             </div>
             </div>
             );
