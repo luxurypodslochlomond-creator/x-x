@@ -10,6 +10,60 @@ import { Radio, CheckCircle, Clock, AlertCircle, ArrowLeft } from 'lucide-react'
  */
 
 export default function ScottWorkLog() {
+    const [pinEntered, setPinEntered] = React.useState(false);
+    const [pinInput, setPinInput] = React.useState('');
+    const [error, setError] = React.useState(false);
+
+    const handlePinSubmit = (e) => {
+        e.preventDefault();
+        if (pinInput === '1888') {
+            setPinEntered(true);
+            localStorage.setItem('scottWorkLogPin', '1888');
+        } else {
+            setError(true);
+            setTimeout(() => setError(false), 2000);
+        }
+    };
+
+    React.useEffect(() => {
+        const savedPin = localStorage.getItem('scottWorkLogPin');
+        if (savedPin === '1888') setPinEntered(true);
+    }, []);
+
+    if (!pinEntered) {
+        return (
+            <div className="min-h-screen bg-black text-white flex items-center justify-center p-4">
+                <div className="bg-gradient-to-r from-cyan-500/20 to-purple-500/20 border-2 border-cyan-500 rounded-xl p-8 max-w-md w-full">
+                    <div className="flex items-center gap-3 mb-6 justify-center">
+                        <Radio className="w-10 h-10 text-cyan-400" />
+                        <h1 className="text-2xl font-black text-cyan-400 font-mono">WORK LOG</h1>
+                    </div>
+                    <p className="text-gray-400 text-sm text-center mb-6 font-mono">
+                        Protected for Gill, Scott & AI51 only
+                    </p>
+                    <form onSubmit={handlePinSubmit}>
+                        <input
+                            type="password"
+                            value={pinInput}
+                            onChange={(e) => setPinInput(e.target.value)}
+                            placeholder="Enter PIN"
+                            className={`w-full bg-black border-2 ${error ? 'border-red-500' : 'border-cyan-500'} text-white text-center text-2xl font-mono p-4 rounded-lg mb-4`}
+                            maxLength={4}
+                            autoFocus
+                        />
+                        {error && <p className="text-red-400 text-xs text-center mb-4 font-mono">Wrong PIN bro</p>}
+                        <button
+                            type="submit"
+                            className="w-full bg-cyan-500 hover:bg-cyan-400 text-black font-black py-3 rounded-lg font-mono"
+                        >
+                            UNLOCK
+                        </button>
+                    </form>
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div className="min-h-screen bg-black text-white p-4 pb-24">
             
@@ -57,6 +111,32 @@ export default function ScottWorkLog() {
                         <p className="text-white text-sm font-mono mb-2">3 subsections: BOOKINGS, LOGISTICS, ADMIN</p>
                         <p className="text-gray-400 text-xs">Need to build these + integrate AI51 gig workflow</p>
                     </div>
+
+                    <div className="bg-black border border-amber-500/50 rounded-lg p-4">
+                        <h3 className="text-amber-400 font-bold mb-2">5. SESSIONS</h3>
+                        <p className="text-white text-sm font-mono mb-2">WRITING • RECORDING • REHEARSAL</p>
+                        <p className="text-gray-400 text-xs">Links to ScottDemos for writing/recording, calendar for rehearsals</p>
+                    </div>
+
+                    <div className="bg-black border border-amber-500/50 rounded-lg p-4">
+                        <h3 className="text-amber-400 font-bold mb-2">6. FINANCE/ADMIN</h3>
+                        <p className="text-white text-sm font-mono mb-2">VISAS • INVOICES • LEGAL • ACCOUNTS/RECEIVS</p>
+                        <p className="text-gray-400 text-xs">All financial and legal stuff</p>
+                    </div>
+
+                    <div className="bg-black border border-amber-500/50 rounded-lg p-4">
+                        <h3 className="text-amber-400 font-bold mb-2">7. TASKS</h3>
+                        <p className="text-white text-sm font-mono mb-2">TO DO + REMOVE</p>
+                        <p className="text-white text-sm font-mono mb-2">Fields: Track, Added By, Who's Task, Deadline, Status</p>
+                        <p className="text-gray-400 text-xs">Simple task management</p>
+                    </div>
+
+                    <div className="bg-black border border-amber-500/50 rounded-lg p-4">
+                        <h3 className="text-amber-400 font-bold mb-2">8. CALENDAR</h3>
+                        <p className="text-white text-sm font-mono mb-2">SIMPLE/STREAMLINED/CLUTTER FREE</p>
+                        <p className="text-white text-sm font-mono mb-2">Format: D M Y</p>
+                        <p className="text-gray-400 text-xs">Clean diary view - no overload</p>
+                    </div>
                 </div>
             </div>
 
@@ -95,6 +175,26 @@ export default function ScottWorkLog() {
                     <div className="flex items-start gap-2">
                         <CheckCircle className="w-4 h-4 text-green-400 mt-0.5 flex-shrink-0" />
                         <p className="text-white">About page (ScottAbout) explaining CB51</p>
+                    </div>
+                    <div className="flex items-start gap-2">
+                        <CheckCircle className="w-4 h-4 text-green-400 mt-0.5 flex-shrink-0" />
+                        <p className="text-white">Work Log page (this page) - PIN protected 1888</p>
+                    </div>
+                    <div className="flex items-start gap-2">
+                        <CheckCircle className="w-4 h-4 text-green-400 mt-0.5 flex-shrink-0" />
+                        <p className="text-white">SESSIONS section navigation (Writing, Recording, Rehearsal)</p>
+                    </div>
+                    <div className="flex items-start gap-2">
+                        <CheckCircle className="w-4 h-4 text-green-400 mt-0.5 flex-shrink-0" />
+                        <p className="text-white">FINANCE/ADMIN section (Invoices, Accounts/Receivs, Visas, Legal)</p>
+                    </div>
+                    <div className="flex items-start gap-2">
+                        <CheckCircle className="w-4 h-4 text-green-400 mt-0.5 flex-shrink-0" />
+                        <p className="text-white">TASKS section (To-Do with Track, Added By, Who's Task, Deadline, Status)</p>
+                    </div>
+                    <div className="flex items-start gap-2">
+                        <CheckCircle className="w-4 h-4 text-green-400 mt-0.5 flex-shrink-0" />
+                        <p className="text-white">CALENDAR section (Simple/Streamlined D M Y format)</p>
                     </div>
                 </div>
             </div>
