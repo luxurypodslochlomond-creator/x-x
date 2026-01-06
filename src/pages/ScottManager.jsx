@@ -249,11 +249,98 @@ export default function ScottManager() {
                 </div>
             )}
 
+            {/* ADMIN ONLY - COOLASFUCK DEMO VIDEO */}
+            {user?.role === 'admin' && (
+                <div className="mt-12 max-w-2xl mx-auto">
+                    <div className="bg-gradient-to-br from-cyan-500/20 via-purple-500/20 to-pink-500/20 border-4 border-cyan-500 rounded-xl p-6 relative overflow-hidden">
+                        {/* 8-bit corner decorations */}
+                        <div className="absolute top-0 left-0 w-4 h-4 bg-cyan-500" style={{ clipPath: 'polygon(0 0, 100% 0, 0 100%)' }}></div>
+                        <div className="absolute top-0 right-0 w-4 h-4 bg-pink-500" style={{ clipPath: 'polygon(100% 0, 100% 100%, 0 0)' }}></div>
+
+                        <div className="text-center mb-6">
+                            <div className="inline-block bg-black border-2 border-cyan-500 px-4 py-2 mb-4">
+                                <p className="text-cyan-400 font-black text-xs font-mono tracking-wider">
+                                    🎬 ADMIN ONLY • DEMO MODE
+                                </p>
+                            </div>
+                            <h3 className="text-white font-black text-2xl mb-2 font-mono">
+                                60-SECOND DEMO
+                            </h3>
+                            <p className="text-gray-400 text-sm font-mono">
+                                Quick walkthrough for funding/demos
+                            </p>
+                        </div>
+
+                        {/* Video placeholder with 8-bit play button */}
+                        <div className="relative bg-black border-2 border-white/20 rounded-lg overflow-hidden aspect-video mb-4">
+                            <div className="absolute inset-0 flex items-center justify-center">
+                                {/* 8-bit play button */}
+                                <motion.div
+                                    whileHover={{ scale: 1.1 }}
+                                    whileTap={{ scale: 0.95 }}
+                                    className="cursor-pointer"
+                                >
+                                    <svg width="80" height="80" viewBox="0 0 32 32" style={{ imageRendering: 'pixelated' }}>
+                                        {/* Circle */}
+                                        <rect x="8" y="4" width="16" height="2" fill="#22d3ee"/>
+                                        <rect x="6" y="6" width="2" height="2" fill="#22d3ee"/>
+                                        <rect x="24" y="6" width="2" height="2" fill="#22d3ee"/>
+                                        <rect x="4" y="8" width="2" height="16" fill="#22d3ee"/>
+                                        <rect x="26" y="8" width="2" height="16" fill="#22d3ee"/>
+                                        <rect x="6" y="24" width="2" height="2" fill="#22d3ee"/>
+                                        <rect x="24" y="24" width="2" height="2" fill="#22d3ee"/>
+                                        <rect x="8" y="26" width="16" height="2" fill="#22d3ee"/>
+
+                                        {/* Play triangle */}
+                                        <rect x="12" y="12" width="2" height="8" fill="#ec4899"/>
+                                        <rect x="14" y="10" width="2" height="12" fill="#ec4899"/>
+                                        <rect x="16" y="8" width="2" height="16" fill="#ec4899"/>
+                                        <rect x="18" y="10" width="2" height="12" fill="#ec4899"/>
+                                        <rect x="20" y="12" width="2" height="8" fill="#ec4899"/>
+                                    </svg>
+                                </motion.div>
+                            </div>
+                            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
+                                <p className="text-cyan-400 text-xs font-bold font-mono">
+                                    RECORD SCREEN WALKTHROUGH HERE
+                                </p>
+                            </div>
+                        </div>
+
+                        {/* What it shows */}
+                        <div className="bg-black/60 border border-white/10 rounded-lg p-4">
+                            <p className="text-white font-bold text-sm mb-2 font-mono">SHOWS:</p>
+                            <div className="grid grid-cols-2 gap-2 text-xs font-mono">
+                                <div className="flex items-center gap-2">
+                                    <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                                    <span className="text-gray-400">Add Artist</span>
+                                </div>
+                                <div className="flex items-center gap-2">
+                                    <div className="w-2 h-2 bg-cyan-500 rounded-full"></div>
+                                    <span className="text-gray-400">Calendar Event</span>
+                                </div>
+                                <div className="flex items-center gap-2">
+                                    <div className="w-2 h-2 bg-pink-500 rounded-full"></div>
+                                    <span className="text-gray-400">Gig Offer Parse</span>
+                                </div>
+                                <div className="flex items-center gap-2">
+                                    <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+                                    <span className="text-gray-400">Auto Email Draft</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* 8-bit bottom border animation */}
+                        <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500"></div>
+                    </div>
+                </div>
+            )}
+
             {/* FOOTER */}
             <div className="mt-12 text-center">
                 <p className="text-gray-600 text-xs font-mono">CB51 • Simple as requested</p>
                 <p className="text-gray-700 text-[10px] font-mono mt-1">From Scott's floor diagrams ♾️📻</p>
             </div>
-        </div>
-    );
-}
+            </div>
+            );
+            }
