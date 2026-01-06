@@ -71,41 +71,29 @@ export default function ScottArtistHome() {
         {
             title: 'LIVE',
             icon: Mic2,
-            color: 'pink',
             description: 'Booking • Logistics • Admin',
             link: createPageUrl(`ScottLive?id=${artistId}`)
         },
         {
             title: 'SESSIONS',
             icon: Music,
-            color: 'purple',
             description: 'Writing • Recording • Rehearsals',
             link: createPageUrl(`ScottSessions?id=${artistId}`)
         },
         {
             title: 'FINANCE / ADMIN',
             icon: DollarSign,
-            color: 'amber',
             description: 'Invoices • Visas • Legal',
             link: createPageUrl(`ScottFinanceAdmin?id=${artistId}`)
         },
         {
             title: 'TO-DO LIST',
             icon: ClipboardList,
-            color: 'green',
             description: 'Tasks • Deadlines • Progress',
             link: createPageUrl(`ScottToDo?id=${artistId}`)
         },
 
     ];
-
-    const colorMap = {
-        pink: { bg: 'from-pink-500/20', border: 'border-pink-500', text: 'text-pink-400' },
-        purple: { bg: 'from-purple-500/20', border: 'border-purple-500', text: 'text-purple-400' },
-        amber: { bg: 'from-amber-500/20', border: 'border-amber-500', text: 'text-amber-400' },
-        green: { bg: 'from-green-500/20', border: 'border-green-500', text: 'text-green-400' },
-        cyan: { bg: 'from-cyan-500/20', border: 'border-cyan-500', text: 'text-cyan-400' }
-    };
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white p-6 pb-24">
@@ -135,7 +123,7 @@ export default function ScottArtistHome() {
 
             {/* ARTIST INFO - CLEAN */}
             {(artist.phone || artist.email || artist.rate || artist.genre) && (
-                <div className="mb-8 bg-black border-4 border-purple-500 rounded-xl p-6" style={{ boxShadow: '0 0 30px rgba(168, 85, 247, 0.5)' }}>
+                <div className="mb-8 bg-gray-900/40 border border-gray-800 rounded-xl p-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="space-y-3">
                             {artist.phone && (
@@ -155,13 +143,13 @@ export default function ScottArtistHome() {
                             {artist.rate && (
                                 <div>
                                     <p className="text-gray-600 text-xs font-mono mb-1">Rate</p>
-                                    <p className="text-cyan-400 font-mono text-sm">{artist.rate}</p>
+                                    <p className="text-white font-mono text-sm">{artist.rate}</p>
                                 </div>
                             )}
                             {artist.genre && (
                                 <div>
                                     <p className="text-gray-600 text-xs font-mono mb-1">Genre</p>
-                                    <p className="text-purple-400 font-mono text-sm">{artist.genre}</p>
+                                    <p className="text-white font-mono text-sm">{artist.genre}</p>
                                 </div>
                             )}
                         </div>
@@ -173,25 +161,18 @@ export default function ScottArtistHome() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
                 {sections.map((section) => {
                     const Icon = section.icon;
-                    const colors = colorMap[section.color];
                     
                     return (
                         <Link key={section.title} to={section.link}>
                             <motion.div
                                 whileHover={{ y: -4 }}
                                 whileTap={{ scale: 0.98 }}
-                                className={`bg-black border-4 ${colors.border} rounded-xl p-6 transition-all h-32 flex items-center gap-4`}
-                                style={{ 
-                                    boxShadow: section.color === 'pink' ? '0 0 30px rgba(236, 72, 153, 0.5)' :
-                                              section.color === 'purple' ? '0 0 30px rgba(168, 85, 247, 0.5)' :
-                                              section.color === 'amber' ? '0 0 30px rgba(245, 158, 11, 0.5)' :
-                                              section.color === 'green' ? '0 0 30px rgba(34, 197, 94, 0.5)' :
-                                              '0 0 30px rgba(6, 182, 212, 0.5)'
-                                }}
+                                className="bg-black border-4 border-cyan-500 rounded-xl p-6 transition-all h-32 flex items-center gap-4"
+                                style={{ boxShadow: '0 0 30px rgba(6, 182, 212, 0.5)' }}
                             >
-                                <Icon className={`w-10 h-10 ${colors.text}`} />
+                                <Icon className="w-10 h-10 text-cyan-400" />
                                 <div className="flex-1">
-                                    <p className={`${colors.text} font-black text-xl font-mono mb-1`}>
+                                    <p className="text-white font-black text-xl font-mono mb-1">
                                         {section.title}
                                     </p>
                                     <p className="text-gray-500 text-xs font-mono">
@@ -205,7 +186,7 @@ export default function ScottArtistHome() {
             </div>
 
             {/* CALENDAR WIDGET */}
-            <div className="bg-black border-4 border-cyan-500 rounded-xl p-6" style={{ boxShadow: '0 0 30px rgba(6, 182, 212, 0.5)' }}>
+            <div className="bg-gray-900/40 border border-gray-800 rounded-xl p-6">
                 <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-2">
                         <Calendar className="w-6 h-6 text-cyan-400" />
