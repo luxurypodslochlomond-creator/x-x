@@ -183,9 +183,17 @@ export default function CB51() {
                     artists.map((artist, index) => (
                         <Link key={artist.id} to={createPageUrl(`ScottArtistHome?id=${artist.id}`)} className="block">
                             <div className="bg-gray-900/60 hover:bg-gray-900/80 border border-cyan-500/30 hover:border-cyan-500/60 rounded-xl p-5 transition-all h-32 flex items-center gap-4">
-                                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-600 text-white font-black text-xl flex items-center justify-center flex-shrink-0">
-                                    {artist.name.charAt(0)}
-                                </div>
+                                {artist.profile_pic_url ? (
+                                    <img 
+                                        src={artist.profile_pic_url} 
+                                        alt={artist.name}
+                                        className="w-14 h-14 rounded-xl object-cover flex-shrink-0"
+                                    />
+                                ) : (
+                                    <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-600 text-white font-black text-xl flex items-center justify-center flex-shrink-0">
+                                        {artist.name.charAt(0)}
+                                    </div>
+                                )}
                                 <div className="flex-1 min-w-0">
                                     <p className="text-white font-bold text-base font-mono truncate">
                                         {artist.name}

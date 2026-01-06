@@ -111,9 +111,17 @@ export default function ScottArtistHome() {
                 </button>
 
                 <div className="flex items-center gap-4">
-                    <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-cyan-500 to-purple-500 flex items-center justify-center">
-                        <span className="text-2xl font-black text-white">{artist.name.charAt(0)}</span>
-                    </div>
+                    {artist.profile_pic_url ? (
+                        <img 
+                            src={artist.profile_pic_url} 
+                            alt={artist.name}
+                            className="w-16 h-16 rounded-2xl object-cover"
+                        />
+                    ) : (
+                        <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-cyan-500 to-purple-500 flex items-center justify-center">
+                            <span className="text-2xl font-black text-white">{artist.name.charAt(0)}</span>
+                        </div>
+                    )}
                     <div>
                         <h1 className="text-3xl font-black text-white font-mono">{artist.name}</h1>
                         <p className="text-gray-500 text-sm font-mono">Operations</p>
