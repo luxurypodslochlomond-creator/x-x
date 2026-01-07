@@ -287,6 +287,9 @@ import YoungWarriors from './pages/YoungWarriors';
 import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
+import PetSounds51Enterprise from './pages/PetSounds51Enterprise';
+import PetSounds51StripeSetup from './pages/PetSounds51StripeSetup';
+import AdminPetSoundsPayments from './pages/AdminPetSoundsPayments';
 import __Layout from './Layout.jsx';
 
 
@@ -580,6 +583,9 @@ export const PAGES = {
     "ZeroEgoProtocol": ZeroEgoProtocol,
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
+    "PetSounds51Enterprise": PetSounds51Enterprise,
+    "PetSounds51StripeSetup": PetSounds51StripeSetup,
+    "AdminPetSoundsPayments": AdminPetSoundsPayments,
 }
 
 export const pagesConfig = {
