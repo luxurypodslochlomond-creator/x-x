@@ -3,7 +3,8 @@ import { Check, Heart, Video, Wifi, Shield, Zap, ChevronDown, ChevronUp, Play } 
 import PetSounds51Icon8Bit from '@/components/shared/PetSounds51Icon8Bit';
 import AnimalFrequencyEngine from '@/components/petsounds/AnimalFrequencyEngine';
 import AI51PetAnalysis from '@/components/petsounds/AI51PetAnalysis';
-import SimplePetPayment from '@/components/petsounds/SimplePetPayment';
+import UniversalPayment from '@/components/petsounds/UniversalPayment';
+import AI51CustomProtocol from '@/components/petsounds/AI51CustomProtocol';
 import { motion } from 'framer-motion';
 
 /**
@@ -493,14 +494,33 @@ export default function PetSounds51() {
                     <h2 className="text-3xl font-black text-green-400 mb-6 text-center">
                         {selectedTier === 'basic' && 'Basic Tier'}
                         {selectedTier === 'premium' && 'Premium Tier - Most Popular'}
-                        {selectedTier === 'concierge' && 'Concierge Tier'}
+                        {selectedTier === 'concierge' && 'Concierge Tier - COOLASFUCK Custom'}
                     </h2>
-                    <SimplePetPayment 
+                    <UniversalPayment 
                         tier={selectedTier}
                         onSuccess={(purchase) => {
                             alert(`✅ Payment successful! Welcome to PetSounds51 ${selectedTier}!`);
-                            setActiveView('free'); // Show them the player
+                            if (selectedTier === 'concierge') {
+                                setActiveView('custom');
+                            } else {
+                                setActiveView('free');
+                            }
                         }}
+                    />
+                </div>
+            )}
+
+            {activeView === 'custom' && (
+                <div className="max-w-3xl mx-auto">
+                    <button 
+                        onClick={() => setActiveView('home')}
+                        className="mb-6 text-cyan-400 hover:text-cyan-300 font-bold"
+                    >
+                        ← Back
+                    </button>
+                    <AI51CustomProtocol 
+                        species="dog"
+                        userEmail="user@example.com"
                     />
                 </div>
             )}
