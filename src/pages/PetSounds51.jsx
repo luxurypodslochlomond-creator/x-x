@@ -66,7 +66,7 @@ export default function PetSounds51() {
                     </div>
                 </motion.div>
                 <p className="text-gray-400 text-sm max-w-2xl mx-auto font-mono">
-                    Same tech healing humans • Now for pets 🐕🐈🐴🐦🐬🦅
+                    same tech healing humans - now for all animals
                 </p>
                 <div className="mt-6 flex justify-center gap-4">
                     <a 
@@ -187,7 +187,7 @@ export default function PetSounds51() {
                     <div className="bg-gray-900/60 border-2 border-gray-700 rounded-xl p-6">
                         <h3 className="text-xl font-black text-gray-400 mb-2">FREE</h3>
                         <p className="text-4xl font-black text-white mb-4">£0</p>
-                        <p className="text-sm text-gray-500 mb-6">Test it works</p>
+                        <p className="text-sm text-gray-500 mb-6">test it works</p>
                         <ul className="space-y-2 text-sm mb-6">
                             <li className="flex items-start gap-2">
                                 <Check className="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5" />
@@ -195,15 +195,18 @@ export default function PetSounds51() {
                             </li>
                             <li className="flex items-start gap-2">
                                 <Check className="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5" />
-                                <span className="text-gray-400">Unlimited use</span>
+                                <span className="text-gray-400">unlimited use</span>
                             </li>
                             <li className="flex items-start gap-2">
                                 <Check className="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5" />
-                                <span className="text-gray-400">Works offline</span>
+                                <span className="text-gray-400">works offline</span>
                             </li>
                         </ul>
-                        <button className="w-full bg-gray-800 hover:bg-gray-700 text-white px-4 py-3 rounded-lg font-bold transition-all">
-                            Try Free
+                        <button 
+                            onClick={() => { setActiveView('free'); setSelectedProtocol('fireworks'); }}
+                            className="w-full bg-gray-800 hover:bg-gray-700 text-white px-4 py-3 rounded-lg font-bold transition-all"
+                        >
+                            try free
                         </button>
                     </div>
 
@@ -211,42 +214,45 @@ export default function PetSounds51() {
                     <div className="bg-gradient-to-br from-cyan-900/40 to-blue-900/40 border-2 border-cyan-500 rounded-xl p-6">
                         <h3 className="text-xl font-black text-cyan-400 mb-2">BASIC</h3>
                         <p className="text-4xl font-black text-white mb-1">£9.99</p>
-                        <p className="text-sm text-cyan-300 mb-6">per protocol, lifetime</p>
+                        <p className="text-sm text-cyan-300 mb-6">one protocol, forever</p>
                         <ul className="space-y-2 text-sm mb-6">
                             <li className="flex items-start gap-2">
                                 <Check className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" />
-                                <span className="text-white">Choose any 1 protocol</span>
+                                <span className="text-white">pick 1 protocol</span>
                             </li>
                             <li className="flex items-start gap-2">
                                 <Check className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" />
-                                <span className="text-white">Use forever</span>
+                                <span className="text-white">use forever</span>
                             </li>
                             <li className="flex items-start gap-2">
                                 <Check className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" />
-                                <span className="text-white">Share with friends</span>
+                                <span className="text-white">share with friends</span>
                             </li>
                             <li className="flex items-start gap-2">
                                 <Check className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" />
-                                <span className="text-white">Works offline</span>
+                                <span className="text-white">works offline</span>
                             </li>
                         </ul>
-                        <button className="w-full bg-cyan-500 hover:bg-cyan-600 text-black px-4 py-3 rounded-lg font-bold transition-all">
-                            Choose Protocol
+                        <button 
+                            onClick={() => { setActiveView('payment'); setSelectedTier('basic'); }}
+                            className="w-full bg-cyan-500 hover:bg-cyan-600 text-black px-4 py-3 rounded-lg font-bold transition-all"
+                        >
+                            get basic
                         </button>
                     </div>
 
                     {/* PREMIUM */}
                     <div className="bg-gradient-to-br from-green-900/40 to-emerald-900/40 border-2 border-green-500 rounded-xl p-6 relative">
                         <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-green-500 text-black px-4 py-1 rounded-full text-xs font-black">
-                            MOST POPULAR
+                            most popular
                         </div>
                         <h3 className="text-xl font-black text-green-400 mb-2">PREMIUM</h3>
-                        <p className="text-4xl font-black text-white mb-1">£99</p>
-                        <p className="text-sm text-green-300 mb-6">one-time, lifetime</p>
+                        <p className="text-4xl font-black text-white mb-1">£49.99</p>
+                        <p className="text-sm text-green-300 mb-6">one payment, forever</p>
                         <ul className="space-y-2 text-sm mb-6">
                             <li className="flex items-start gap-2">
                                 <Check className="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5" />
-                                <span className="text-white font-bold">ALL protocols</span>
+                                <span className="text-white font-bold">all 6 protocols</span>
                             </li>
                             <li className="flex items-start gap-2">
                                 <Check className="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5" />
@@ -254,55 +260,72 @@ export default function PetSounds51() {
                             </li>
                             <li className="flex items-start gap-2">
                                 <Check className="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5" />
-                                <span className="text-white">Priority support</span>
+                                <span className="text-white">priority support</span>
                             </li>
                             <li className="flex items-start gap-2">
                                 <Check className="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5" />
-                                <span className="text-white">Future protocols free</span>
+                                <span className="text-white">new protocols = free</span>
                             </li>
                         </ul>
-                        <button className="w-full bg-green-500 hover:bg-green-600 text-black px-4 py-3 rounded-lg font-bold transition-all">
-                            Get Premium
+                        <button 
+                            onClick={() => { setActiveView('payment'); setSelectedTier('premium'); }}
+                            className="w-full bg-green-500 hover:bg-green-600 text-black px-4 py-3 rounded-lg font-bold transition-all"
+                        >
+                            get premium
                         </button>
                     </div>
 
                     {/* CONCIERGE */}
                     <div className="bg-gradient-to-br from-pink-900/40 to-purple-900/40 border-2 border-pink-500 rounded-xl p-6">
                         <h3 className="text-xl font-black text-pink-400 mb-2">CONCIERGE</h3>
-                        <p className="text-4xl font-black text-white mb-1">£499</p>
-                        <p className="text-sm text-pink-300 mb-6">one-time, lifetime</p>
+                        <p className="text-4xl font-black text-white mb-1">£249</p>
+                        <p className="text-sm text-pink-300 mb-6">one payment, forever</p>
                         <ul className="space-y-2 text-sm mb-6">
                             <li className="flex items-start gap-2">
                                 <Check className="w-4 h-4 text-pink-400 flex-shrink-0 mt-0.5" />
-                                <span className="text-white font-bold">Everything in Premium</span>
+                                <span className="text-white font-bold">everything in premium</span>
                             </li>
                             <li className="flex items-start gap-2">
                                 <Check className="w-4 h-4 text-pink-400 flex-shrink-0 mt-0.5" />
-                                <span className="text-white">Video consultations</span>
+                                <span className="text-white">video consultations</span>
                             </li>
                             <li className="flex items-start gap-2">
                                 <Check className="w-4 h-4 text-pink-400 flex-shrink-0 mt-0.5" />
-                                <span className="text-white">Custom protocols</span>
+                                <span className="text-white">custom protocols</span>
                             </li>
                             <li className="flex items-start gap-2">
                                 <Check className="w-4 h-4 text-pink-400 flex-shrink-0 mt-0.5" />
-                                <span className="text-white">Works with your vet</span>
+                                <span className="text-white">works with your vet</span>
                             </li>
                         </ul>
-                        <button className="w-full bg-pink-500 hover:bg-pink-600 text-black px-4 py-3 rounded-lg font-bold transition-all">
-                            Get Concierge
+                        <button 
+                            onClick={() => { setActiveView('payment'); setSelectedTier('concierge'); }}
+                            className="w-full bg-pink-500 hover:bg-pink-600 text-black px-4 py-3 rounded-lg font-bold transition-all"
+                        >
+                            get concierge
                         </button>
                     </div>
                 </div>
 
                 {/* SUBSCRIPTION OPTION */}
                 <div className="mt-8 bg-purple-900/20 border border-purple-500/30 rounded-xl p-6 text-center">
-                    <p className="text-gray-400 mb-2">Prefer monthly?</p>
-                    <p className="text-xl font-bold text-white mb-2">
-                        Premium: £9.99/month • Concierge: £39.99/month
-                    </p>
-                    <p className="text-sm text-gray-500">
-                        (But one-time is better value - £99 = 10 months, then free forever)
+                    <p className="text-gray-400 mb-2">prefer monthly instead?</p>
+                    <div className="space-y-2">
+                        <button 
+                            onClick={() => { setActiveView('payment'); setSelectedTier('premium-monthly'); }}
+                            className="w-full max-w-md mx-auto block bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg font-bold transition-all"
+                        >
+                            premium £9.99/month
+                        </button>
+                        <button 
+                            onClick={() => { setActiveView('payment'); setSelectedTier('concierge-monthly'); }}
+                            className="w-full max-w-md mx-auto block bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg font-bold transition-all"
+                        >
+                            concierge £24.99/month
+                        </button>
+                    </div>
+                    <p className="text-xs text-gray-500 mt-4">
+                        (one-time is better value - £49.99 = 5 months then free forever)
                     </p>
                 </div>
             </div>
