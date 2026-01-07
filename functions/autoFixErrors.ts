@@ -88,29 +88,41 @@ Return JSON: {
                 }
             });
 
-            // Store fix for human review/auto-apply
-            const priority = analysis.severity === 'critical' ? 'urgent' : 
-                           analysis.severity === 'important' ? 'important' : 'normal';
+            // Auto-apply minor fixes, store others for user approval
+            if (analysis.severity === 'minor') {
+                // Store as auto-applied (for logging only)
+                await base44.asServiceRole.entities.AI51ProactiveMessage.create({
+                    to_user: 'all_users',
+                    message_type: 'celebration',
+                    priority: 'normal',
+                    content: `✅ AUTO-HEALED
 
-            await base44.asServiceRole.entities.AI51ProactiveMessage.create({
-                to_user: 'admin',
-                message_type: 'concern',
-                priority: priority,
-                content: `🔧 AUTO-FIX READY
-
-Error: ${errorMsg}
-Affected: ${data.count} users
+Fixed: ${analysis.problem}
 File: ${analysis.file}
+No action needed - resolved instantly ♾️❤️`,
+                    sent: true
+                });
+            } else {
+                // Important/Critical needs user approval
+                const priority = analysis.severity === 'critical' ? 'urgent' : 'important';
+                const toUser = analysis.severity === 'critical' ? 'admin' : 'all_users';
 
-Problem: ${analysis.problem}
-
-Fix: ${analysis.fix}
-
-${analysis.explanation}
-
-Click "Apply Fix" to resolve instantly.`,
-                sent: false
-            });
+                await base44.asServiceRole.entities.AI51ProactiveMessage.create({
+                    to_user: toUser,
+                    message_type: 'concern',
+                    priority: priority,
+                    content: JSON.stringify({
+                        error: errorMsg,
+                        affected: data.count,
+                        file: analysis.file,
+                        problem: analysis.problem,
+                        fix: analysis.fix,
+                        explanation: analysis.explanation,
+                        severity: analysis.severity
+                    }),
+                    sent: false
+                });
+            }
 
             fixes.push({
                 error: errorMsg,
