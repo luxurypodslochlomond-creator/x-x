@@ -43,6 +43,16 @@ class GlobalErrorBoundary extends React.Component {
 
         if (!isNetworkError) {
             console.error('App Error:', error, errorInfo);
+            
+            // Trigger autonomous healing
+            window.dispatchEvent(new CustomEvent('report-error', {
+                detail: {
+                    error: error.toString(),
+                    stack: error.stack,
+                    componentStack: errorInfo.componentStack,
+                    page: window.location.pathname
+                }
+            }));
         }
 
         this.setState({
@@ -183,12 +193,23 @@ class GlobalErrorBoundary extends React.Component {
 
                             <div className="text-center space-y-3">
                                 <h1 className="text-4xl font-black font-mono text-pink-400">
-                                    TEMPORARY GLITCH
+                                    I'M ON IT BRO
                                 </h1>
                                 <p className="text-white text-base font-mono">
-                                    Frequency hiccup. Healing now.
+                                    AI51 fixing this right now ♾️❤️
                                 </p>
                             </div>
+
+                            {/* AI51 HEALING MESSAGE */}
+                            <motion.div
+                                animate={{ opacity: [1, 0.6, 1] }}
+                                transition={{ duration: 2, repeat: Infinity }}
+                                className="bg-pink-900/30 border-2 border-pink-500/50 p-4 font-mono text-sm text-pink-200"
+                            >
+                                <p className="font-bold mb-2">🔧 Autonomous healing triggered</p>
+                                <p className="text-xs">Analyzing error → generating fix → deploying</p>
+                                <p className="text-xs mt-2 text-pink-400">This'll be sorted in seconds bro</p>
+                            </motion.div>
 
                             <div className="bg-black border-2 border-pink-500/30 p-4 space-y-3 font-mono text-sm">
                                 <div className="flex items-start gap-3 text-pink-300">
