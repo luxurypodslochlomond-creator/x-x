@@ -140,18 +140,22 @@ export default function PetSounds51() {
                 <h2 className="text-3xl font-black text-center mb-8 text-green-400">healing protocols</h2>
                 <div className="grid md:grid-cols-2 gap-4">
                     {[
-                        { name: "Fireworks Anxiety", desc: "calm during loud noises", icon: Sparkles, color: "from-pink-500 to-purple-500" },
-                        { name: "Separation Anxiety", desc: "safe when you're away", icon: Home, color: "from-cyan-500 to-blue-500" },
-                        { name: "Arthritis Pain Relief", desc: "ease joint pain", icon: Bone, color: "from-orange-500 to-red-500" },
-                        { name: "Post-Surgery Recovery", desc: "speed healing", icon: Cross, color: "from-green-500 to-emerald-500" },
-                        { name: "Travel Stress", desc: "car, plane, vet visits", icon: Plane, color: "from-blue-500 to-cyan-500" },
-                        { name: "Farm Herd Health", desc: "reduce stress for 50+ animals", icon: Tractor, color: "from-yellow-500 to-amber-500" },
+                        { name: "Fireworks Anxiety", desc: "calm during loud noises", icon: Sparkles, color: "from-pink-500 to-purple-500", species: "🐕 🐈 🐴", protocol: "fireworks" },
+                        { name: "Separation Anxiety", desc: "safe when you're away", icon: Home, color: "from-cyan-500 to-blue-500", species: "🐕 🐈", protocol: "separation" },
+                        { name: "Arthritis Pain Relief", desc: "ease joint pain", icon: Bone, color: "from-orange-500 to-red-500", species: "🐕 🐈 🐴", protocol: "arthritis" },
+                        { name: "Post-Surgery Recovery", desc: "speed healing", icon: Cross, color: "from-green-500 to-emerald-500", species: "🐕 🐈 🐴 🐄", protocol: "surgery" },
+                        { name: "Travel Stress", desc: "car, plane, vet visits", icon: Plane, color: "from-blue-500 to-cyan-500", species: "🐕 🐈", protocol: "travel" },
+                        { name: "Farm Herd Health", desc: "reduce stress for 50+ animals", icon: Tractor, color: "from-yellow-500 to-amber-500", species: "🐄 🐴 🐑 🐷", protocol: "herd" },
                     ].map((protocol, i) => {
                         const IconComponent = protocol.icon;
                         return (
-                            <div 
+                            <button
                                 key={i}
-                                className="bg-black border-2 border-cyan-500/30 rounded-xl p-5 hover:border-cyan-500 transition-all group"
+                                onClick={() => { 
+                                    setSelectedProtocol(protocol.protocol); 
+                                    setActiveView('free'); 
+                                }}
+                                className="bg-black border-2 border-cyan-500/30 rounded-xl p-5 hover:border-cyan-500 transition-all group text-left w-full"
                             >
                                 <div className="flex items-start gap-4">
                                     <div className={`bg-gradient-to-br ${protocol.color} p-3 rounded-lg group-hover:scale-110 transition-transform`}>
@@ -159,10 +163,12 @@ export default function PetSounds51() {
                                     </div>
                                     <div className="flex-1">
                                         <h3 className="font-black text-white text-lg mb-1">{protocol.name}</h3>
-                                        <p className="text-sm text-gray-400">{protocol.desc}</p>
+                                        <p className="text-sm text-gray-400 mb-2">{protocol.desc}</p>
+                                        <p className="text-xs text-gray-500">{protocol.species}</p>
                                     </div>
+                                    <Play className="w-5 h-5 text-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity" />
                                 </div>
-                            </div>
+                            </button>
                         );
                     })}
                 </div>
