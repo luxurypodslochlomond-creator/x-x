@@ -48,6 +48,7 @@ import AdminNationalLotteryApp from './pages/AdminNationalLotteryApp';
 import AdminNationalLotteryEnvironmentMH from './pages/AdminNationalLotteryEnvironmentMH';
 import AdminOnePager from './pages/AdminOnePager';
 import AdminPatents from './pages/AdminPatents';
+import AdminPetSoundsPayments from './pages/AdminPetSoundsPayments';
 import AdminPlan from './pages/AdminPlan';
 import AdminPlatformShowcase from './pages/AdminPlatformShowcase';
 import AdminProjectReference from './pages/AdminProjectReference';
@@ -155,6 +156,8 @@ import PRMaterials from './pages/PRMaterials';
 import PassItOn from './pages/PassItOn';
 import PatientZero from './pages/PatientZero';
 import PetSounds51 from './pages/PetSounds51';
+import PetSounds51Enterprise from './pages/PetSounds51Enterprise';
+import PetSounds51StripeSetup from './pages/PetSounds51StripeSetup';
 import Playlists from './pages/Playlists';
 import PrivacyMathematics from './pages/PrivacyMathematics';
 import PrivacyPolicy from './pages/PrivacyPolicy';
@@ -287,9 +290,7 @@ import YoungWarriors from './pages/YoungWarriors';
 import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
-import PetSounds51Enterprise from './pages/PetSounds51Enterprise';
-import PetSounds51StripeSetup from './pages/PetSounds51StripeSetup';
-import AdminPetSoundsPayments from './pages/AdminPetSoundsPayments';
+import PetSounds51Terms from './pages/PetSounds51Terms';
 import __Layout from './Layout.jsx';
 
 
@@ -344,6 +345,7 @@ export const PAGES = {
     "AdminNationalLotteryEnvironmentMH": AdminNationalLotteryEnvironmentMH,
     "AdminOnePager": AdminOnePager,
     "AdminPatents": AdminPatents,
+    "AdminPetSoundsPayments": AdminPetSoundsPayments,
     "AdminPlan": AdminPlan,
     "AdminPlatformShowcase": AdminPlatformShowcase,
     "AdminProjectReference": AdminProjectReference,
@@ -451,6 +453,8 @@ export const PAGES = {
     "PassItOn": PassItOn,
     "PatientZero": PatientZero,
     "PetSounds51": PetSounds51,
+    "PetSounds51Enterprise": PetSounds51Enterprise,
+    "PetSounds51StripeSetup": PetSounds51StripeSetup,
     "Playlists": Playlists,
     "PrivacyMathematics": PrivacyMathematics,
     "PrivacyPolicy": PrivacyPolicy,
@@ -583,9 +587,7 @@ export const PAGES = {
     "ZeroEgoProtocol": ZeroEgoProtocol,
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
-    "PetSounds51Enterprise": PetSounds51Enterprise,
-    "PetSounds51StripeSetup": PetSounds51StripeSetup,
-    "AdminPetSoundsPayments": AdminPetSoundsPayments,
+    "PetSounds51Terms": PetSounds51Terms,
 }
 
 export const pagesConfig = {

@@ -3,6 +3,7 @@ import { Check, Heart, Video, Wifi, Shield, Zap, ChevronDown, ChevronUp, Play } 
 import PetSounds51Icon8Bit from '@/components/shared/PetSounds51Icon8Bit';
 import AnimalFrequencyEngine from '@/components/petsounds/AnimalFrequencyEngine';
 import AI51PetAnalysis from '@/components/petsounds/AI51PetAnalysis';
+import VoiceConsultation from '@/components/petsounds/VoiceConsultation';
 import UniversalPayment from '@/components/petsounds/UniversalPayment';
 import AI51CustomProtocol from '@/components/petsounds/AI51CustomProtocol';
 import { motion } from 'framer-motion';
@@ -65,8 +66,30 @@ export default function PetSounds51() {
                     </div>
                 </motion.div>
                 <p className="text-gray-400 text-sm max-w-2xl mx-auto font-mono">
-                    Same tech healing humans • Now for pets 🐕🐈🐴
+                    Same tech healing humans • Now for pets 🐕🐈🐴🐦🐬🦅
                 </p>
+                <div className="mt-6 flex justify-center gap-4">
+                    <a 
+                        href="/PetSounds51Terms" 
+                        className="text-xs text-gray-600 hover:text-cyan-400 transition-colors"
+                    >
+                        Terms & Conditions
+                    </a>
+                    <span className="text-gray-800">•</span>
+                    <a 
+                        href="/PrivacyPolicy" 
+                        className="text-xs text-gray-600 hover:text-cyan-400 transition-colors"
+                    >
+                        Privacy Policy
+                    </a>
+                    <span className="text-gray-800">•</span>
+                    <a 
+                        href="/PetSounds51StripeSetup" 
+                        className="text-xs text-gray-600 hover:text-cyan-400 transition-colors"
+                    >
+                        Payment Info
+                    </a>
+                </div>
             </div>
 
             {/* THE PROBLEM */}
