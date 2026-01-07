@@ -480,6 +480,13 @@ export default function PetSounds51() {
                     <p className="text-xs text-gray-600">
                         Built with love by UniversalFamily51 • Same tech that's healing humans ♾️❤️
                     </p>
+                    <div className="mt-6 bg-gray-900/60 border border-cyan-500/30 rounded-xl p-6 text-center">
+                        <p className="text-white font-bold mb-2">Questions?</p>
+                        <a href="mailto:family@uf51.love" className="text-cyan-400 hover:text-cyan-300 font-bold">
+                            family@uf51.love
+                        </a>
+                        <p className="text-xs text-gray-500 mt-2">We reply within 24 hours</p>
+                    </div>
                 </div>
             )}
 
