@@ -147,11 +147,8 @@ export default function PetSounds51() {
                         { name: "Travel Stress", desc: "Car, plane, vet visits - stay calm", icon: "✈️" },
                         { name: "Farm Herd Health", desc: "Reduce stress for 50+ animals", icon: "🐄" },
                     ].map((protocol, i) => (
-                        <motion.div 
+                        <div 
                             key={i}
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: i * 0.1 }}
                             className="bg-gray-900/60 border border-white/10 rounded-xl p-4 hover:border-cyan-500/50 transition-all"
                         >
                             <div className="flex items-start gap-3">
@@ -161,7 +158,7 @@ export default function PetSounds51() {
                                     <p className="text-sm text-gray-400 mt-1">{protocol.desc}</p>
                                 </div>
                             </div>
-                        </motion.div>
+                        </div>
                     ))}
                 </div>
             </div>
@@ -360,11 +357,7 @@ export default function PetSounds51() {
                 </button>
                 
                 {showAbout && (
-                    <motion.div 
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: 'auto' }}
-                        className="bg-gray-900/40 border-x border-b border-cyan-500/30 rounded-b-xl p-8 space-y-6"
-                    >
+                    <div className="bg-gray-900/40 border-x border-b border-cyan-500/30 rounded-b-xl p-8 space-y-6">
                         <div>
                             <h3 className="font-bold text-white mb-2">🎵 Why "Pet Sounds"?</h3>
                             <p className="text-gray-400 text-sm">
@@ -411,7 +404,7 @@ export default function PetSounds51() {
                                 • Working dogs (police, service, therapy)
                             </p>
                         </div>
-                    </motion.div>
+                    </div>
                 )}
             </div>
 
