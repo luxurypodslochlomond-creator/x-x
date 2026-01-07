@@ -187,29 +187,41 @@ export default function CB51() {
                     </div>
                 ) : (
                     artists.map((artist, index) => (
-                        <Link key={artist.id} to={createPageUrl(`ScottArtistHome?id=${artist.id}`)} className="block">
-                            <div className="bg-gray-900/60 hover:bg-gray-900/80 border border-cyan-500/30 hover:border-cyan-500/60 rounded-xl p-5 transition-all h-32 flex items-center gap-4">
-                                {artist.profile_pic_url ? (
-                                    <img 
-                                        src={artist.profile_pic_url} 
-                                        alt={artist.name}
-                                        className="w-14 h-14 rounded-xl object-cover flex-shrink-0"
-                                    />
-                                ) : (
-                                    <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-600 text-white font-black text-xl flex items-center justify-center flex-shrink-0">
-                                        {artist.name.charAt(0)}
+                        <div key={artist.id} className="relative">
+                            <Link to={createPageUrl(`ScottArtistHome?id=${artist.id}`)} className="block">
+                                <div className="bg-gray-900/60 hover:bg-gray-900/80 border border-cyan-500/30 hover:border-cyan-500/60 rounded-xl p-5 transition-all h-32 flex items-center gap-4">
+                                    {artist.profile_pic_url ? (
+                                        <img 
+                                            src={artist.profile_pic_url} 
+                                            alt={artist.name}
+                                            className="w-14 h-14 rounded-xl object-cover flex-shrink-0"
+                                        />
+                                    ) : (
+                                        <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-600 text-white font-black text-xl flex items-center justify-center flex-shrink-0">
+                                            {artist.name.charAt(0)}
+                                        </div>
+                                    )}
+                                    <div className="flex-1 min-w-0">
+                                        <p className="text-white font-bold text-base font-mono truncate">
+                                            {artist.name}
+                                        </p>
+                                        <p className="text-gray-500 text-xs font-mono mt-0.5">
+                                            {artist.genre || 'Artist'}
+                                        </p>
                                     </div>
-                                )}
-                                <div className="flex-1 min-w-0">
-                                    <p className="text-white font-bold text-base font-mono truncate">
-                                        {artist.name}
-                                    </p>
-                                    <p className="text-gray-500 text-xs font-mono mt-0.5">
-                                        {artist.genre || 'Artist'}
-                                    </p>
                                 </div>
-                            </div>
-                        </Link>
+                            </Link>
+                            <button
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    e.preventDefault();
+                                    handleArchiveArtist(artist);
+                                }}
+                                className="absolute top-2 right-2 bg-red-900/80 hover:bg-red-800 text-red-300 p-2 rounded-lg transition-all z-10"
+                            >
+                                <Trash2 className="w-4 h-4" />
+                            </button>
+                        </div>
                     ))
                 )}
 
