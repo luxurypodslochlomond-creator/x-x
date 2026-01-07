@@ -24,7 +24,7 @@ export default function AI51() {
 
     const handleMessageSend = async (text) => {
         const userMessage = { role: 'user', content: text };
-        setConversation(prev => [...prev, userMessage]);
+        setConversation((prev) => [...prev, userMessage]);
         setIsThinking(true);
 
         try {
@@ -47,11 +47,11 @@ Respond like a real bro:
             });
 
             const aiMessage = { role: 'ai', content: response };
-            setConversation(prev => [...prev, aiMessage]);
+            setConversation((prev) => [...prev, aiMessage]);
         } catch (error) {
             console.error('Error:', error);
             const aiMessage = { role: 'ai', content: "Sorry bro, had a glitch. Try again?" };
-            setConversation(prev => [...prev, aiMessage]);
+            setConversation((prev) => [...prev, aiMessage]);
         } finally {
             setIsThinking(false);
         }

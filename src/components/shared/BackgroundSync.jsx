@@ -8,15 +8,25 @@ import { useEffect } from 'react';
 export default function BackgroundSync() {
     useEffect(() => {
         // Register sync when back online
-        if ('serviceWorker' in navigator && 'sync' in self.registration) {
-            window.addEventListener('online', () => {
+        const handleOnline = () => {
+            if ('serviceWorker' in navigator) {
                 navigator.serviceWorker.ready.then(registration => {
-                    registration.sync.register('sync-pending')
-                        .then(() => console.log('✅ Background sync registered'))
-                        .catch(err => console.error('Sync registration failed:', err));
+                    if ('sync' in registration) {
+                        registration.sync.register('sync-pending')
+                            .then(() => console.log('✅ Background sync registered'))
+                            .catch(err => console.error('Sync registration failed:', err));
+                    }
                 });
-            });
+            }
+        };
+
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('online', handleOnline);
         }
+
+        return () => {
+            window.removeEventListener('online', handleOnline);
+        };
 
         // Listen for sync messages from service worker
         if ('serviceWorker' in navigator) {
