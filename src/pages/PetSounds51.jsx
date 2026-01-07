@@ -22,21 +22,49 @@ export default function PetSounds51() {
     const [selectedProtocol, setSelectedProtocol] = useState(null);
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-[#0a0514] via-[#1a0f2a] to-[#0a0514] text-white p-6 pb-24">
+        <div className="min-h-screen bg-black text-white p-6 pb-24" style={{
+            backgroundImage: `radial-gradient(circle at 20% 50%, rgba(34, 211, 238, 0.1) 0%, transparent 50%),
+                              radial-gradient(circle at 80% 80%, rgba(236, 72, 153, 0.1) 0%, transparent 50%),
+                              radial-gradient(circle at 40% 20%, rgba(34, 197, 94, 0.1) 0%, transparent 50%)`
+        }}>
             
-            {/* HEADER */}
+            {/* HEADER - COOLASFUCK 8-BIT STYLE */}
             <div className="max-w-4xl mx-auto text-center mb-12">
-                <div className="flex justify-center mb-6">
+                <motion.div 
+                    className="flex justify-center mb-6"
+                    animate={{ y: [0, -10, 0] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                >
                     <PetSounds51Icon8Bit size={120} animate={true} />
-                </div>
-                <h1 className="text-5xl md:text-6xl font-black mb-4 bg-gradient-to-r from-cyan-400 via-green-400 to-pink-400 bg-clip-text text-transparent">
+                </motion.div>
+                <motion.h1 
+                    className="text-5xl md:text-7xl font-black mb-4 font-mono tracking-tight"
+                    style={{
+                        textShadow: '0 0 20px rgba(34, 211, 238, 0.6), 0 0 40px rgba(34, 211, 238, 0.3)',
+                        background: 'linear-gradient(90deg, #22d3ee 0%, #34d399 50%, #ec4899 100%)',
+                        WebkitBackgroundClip: 'text',
+                        WebkitTextFillColor: 'transparent',
+                        imageRendering: 'pixelated'
+                    }}
+                    initial={{ scale: 0.9, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ duration: 0.5 }}
+                >
                     PETSOUNDS51
-                </h1>
-                <p className="text-2xl text-cyan-300 mb-2 font-bold">
-                    Healing Frequencies For All Animals
-                </p>
-                <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-                    Same proven technology as UF51, optimized for animal consciousness
+                </motion.h1>
+                <motion.div
+                    className="inline-block bg-gradient-to-r from-cyan-500 via-green-500 to-pink-500 p-1 rounded-lg mb-3"
+                    animate={{ boxShadow: ['0 0 20px rgba(34, 211, 238, 0.5)', '0 0 40px rgba(236, 72, 153, 0.8)', '0 0 20px rgba(34, 211, 238, 0.5)'] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                >
+                    <div className="bg-black px-6 py-2 rounded-md">
+                        <p className="text-xl md:text-2xl text-white font-black font-mono">
+                            HEALING FREQUENCIES FOR ALL ANIMALS
+                        </p>
+                    </div>
+                </motion.div>
+                <p className="text-gray-400 text-sm max-w-2xl mx-auto font-mono">
+                    Same tech healing humans • Now for pets 🐕🐈🐴
                 </p>
             </div>
 

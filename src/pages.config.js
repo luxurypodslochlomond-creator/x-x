@@ -154,6 +154,7 @@ import P2PFoodRescue from './pages/P2PFoodRescue';
 import PRMaterials from './pages/PRMaterials';
 import PassItOn from './pages/PassItOn';
 import PatientZero from './pages/PatientZero';
+import PetSounds51 from './pages/PetSounds51';
 import Playlists from './pages/Playlists';
 import PrivacyMathematics from './pages/PrivacyMathematics';
 import PrivacyPolicy from './pages/PrivacyPolicy';
@@ -286,7 +287,6 @@ import YoungWarriors from './pages/YoungWarriors';
 import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
-import PetSounds51 from './pages/PetSounds51';
 import __Layout from './Layout.jsx';
 
 
@@ -447,6 +447,7 @@ export const PAGES = {
     "PRMaterials": PRMaterials,
     "PassItOn": PassItOn,
     "PatientZero": PatientZero,
+    "PetSounds51": PetSounds51,
     "Playlists": Playlists,
     "PrivacyMathematics": PrivacyMathematics,
     "PrivacyPolicy": PrivacyPolicy,
@@ -579,7 +580,6 @@ export const PAGES = {
     "ZeroEgoProtocol": ZeroEgoProtocol,
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
-    "PetSounds51": PetSounds51,
 }
 
 export const pagesConfig = {

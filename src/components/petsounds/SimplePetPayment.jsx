@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Check, Loader2, CreditCard, Smartphone } from 'lucide-react';
+import { Check, Loader2, CreditCard, Smartphone, Banknote } from 'lucide-react';
+import CashPayment from './CashPayment';
 import { motion } from 'framer-motion';
 
 /**
@@ -36,6 +37,7 @@ const PRICING = {
 export default function SimplePetPayment({ tier = 'premium', onSuccess }) {
     const [currency, setCurrency] = useState('GBP');
     const [billingType, setBillingType] = useState('oneTime'); // oneTime or monthly
+    const [paymentMethod, setPaymentMethod] = useState('card'); // card or cash
     const [processing, setProcessing] = useState(false);
     const [email, setEmail] = useState('');
 
@@ -76,8 +78,56 @@ export default function SimplePetPayment({ tier = 'premium', onSuccess }) {
         }
     };
 
+    if (paymentMethod === 'cash') {
+        return (
+            <div className="space-y-6">
+                <button
+                    onClick={() => setPaymentMethod('card')}
+                    className="text-cyan-400 hover:text-cyan-300 font-bold text-sm"
+                >
+                    ← Back to Card Payment
+                </button>
+                <CashPayment 
+                    tier={tier}
+                    price={price}
+                    currency={currency}
+                    onSuccess={onSuccess}
+                />
+            </div>
+        );
+    }
+
     return (
         <div className="space-y-6">
+            
+            {/* Payment Method Toggle */}
+            <div>
+                <label className="block text-white font-bold mb-3 text-sm">Payment Method:</label>
+                <div className="grid grid-cols-2 gap-3">
+                    <button
+                        onClick={() => setPaymentMethod('card')}
+                        className={`py-3 px-4 rounded-lg font-bold transition-all ${
+                            paymentMethod === 'card'
+                                ? 'bg-cyan-500 text-black'
+                                : 'bg-gray-800 text-white hover:bg-gray-700'
+                        }`}
+                    >
+                        <CreditCard className="w-5 h-5 mx-auto mb-1" />
+                        Card
+                    </button>
+                    <button
+                        onClick={() => setPaymentMethod('cash')}
+                        className={`py-3 px-4 rounded-lg font-bold transition-all ${
+                            paymentMethod === 'cash'
+                                ? 'bg-green-500 text-black'
+                                : 'bg-gray-800 text-white hover:bg-gray-700'
+                        }`}
+                    >
+                        <Banknote className="w-5 h-5 mx-auto mb-1" />
+                        Cash
+                    </button>
+                </div>
+            </div>
             
             {/* Currency Selector */}
             <div>
