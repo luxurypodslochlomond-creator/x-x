@@ -3,7 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { Radio, Plus, Loader2, Trash2, ChevronDown, ChevronRight, AlertCircle, Calendar, FileText, DollarSign, Music, Zap, TrendingUp } from 'lucide-react';
+import { Radio, Plus, Loader2, Trash2, ChevronDown, ChevronRight, AlertCircle, Calendar, FileText, DollarSign, Music, Zap, TrendingUp, MessageSquare } from 'lucide-react';
+import ScottMessageCentre from '@/components/scott/ScottMessageCentre';
 import { motion, AnimatePresence } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
@@ -24,6 +25,7 @@ export default function CB51() {
     // Expandable sections state
     const [expandedSections, setExpandedSections] = useState({
         urgent: true,
+        messages: false,
         artists: true,
         gigs: false,
         legal: false,
@@ -118,6 +120,12 @@ export default function CB51() {
         enabled: !!user
     });
 
+    const { data: messages = [] } = useQuery({
+        queryKey: ['scottMessages'],
+        queryFn: () => base44.entities.ScottMessage.filter({}),
+        enabled: !!user
+    });
+
     // Intelligence - what needs attention TODAY
     const pendingOffers = allOffers.filter(o => o.status === 'pending_manager_review').length;
     const awaitingBand = allOffers.filter(o => o.status === 'sent_to_band').length;
@@ -125,6 +133,8 @@ export default function CB51() {
     const upcomingGigs = events.filter(e => new Date(e.date) >= new Date() && e.status === 'confirmed').slice(0, 3);
     const overdueInvoices = invoices.filter(i => i.status === 'overdue').length;
     const expiringDocs = legalDocs.filter(d => d.expiry_date && new Date(d.expiry_date) <= new Date(Date.now() + 30*24*60*60*1000)).length;
+    const pendingMessages = messages.filter(m => m.status === 'pending').length;
+    const urgentMessages = messages.filter(m => m.status === 'pending' && m.urgency === 'urgent').length;
     
     const totalTimeSaved = allOffers.reduce((sum, offer) => sum + (offer.time_saved_minutes || 120), 0);
     const hoursPerWeek = Math.round(totalTimeSaved / 60);
@@ -224,8 +234,8 @@ export default function CB51() {
             )}
 
             {/* URGENT - WHAT NEEDS ME TODAY */}
-            <Section id="urgent" title="WHAT NEEDS ME TODAY" icon={AlertCircle} badge={pendingOffers + awaitingBand + overdueInvoices + expiringDocs} color="border-red-500">
-                {pendingOffers === 0 && awaitingBand === 0 && overdueInvoices === 0 && expiringDocs === 0 ? (
+            <Section id="urgent" title="WHAT NEEDS ME TODAY" icon={AlertCircle} badge={pendingOffers + awaitingBand + overdueInvoices + expiringDocs + urgentMessages} color="border-red-500">
+                {pendingOffers === 0 && awaitingBand === 0 && overdueInvoices === 0 && expiringDocs === 0 && urgentMessages === 0 ? (
                     <p className="text-gray-500 font-mono text-sm">✅ All clear bro</p>
                 ) : (
                     <div className="space-y-3">
@@ -261,8 +271,19 @@ export default function CB51() {
                                 </div>
                             </Link>
                         )}
+                        {urgentMessages > 0 && (
+                            <div className="bg-red-500/20 border border-red-500 rounded-lg p-3">
+                                <p className="text-red-400 font-bold font-mono">{urgentMessages} urgent messages need replies</p>
+                                <p className="text-gray-400 text-xs font-mono mt-1">Check message centre ↓</p>
+                            </div>
+                        )}
                     </div>
                 )}
+            </Section>
+
+            {/* MESSAGE CENTRE */}
+            <Section id="messages" title="MESSAGE CENTRE" icon={MessageSquare} badge={pendingMessages} color="border-purple-500">
+                <ScottMessageCentre />
             </Section>
 
             {/* ARTISTS */}
