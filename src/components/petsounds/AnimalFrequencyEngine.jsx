@@ -71,6 +71,7 @@ export default function AnimalFrequencyEngine({ protocol, species = 'dog', onCom
     const oscillatorsRef = useRef([]);
     const gainNodeRef = useRef(null);
     const startTimeRef = useRef(null);
+    const intervalRef = useRef(null);
 
     const protocolData = ANIMAL_PROTOCOLS[protocol];
 
@@ -82,6 +83,7 @@ export default function AnimalFrequencyEngine({ protocol, species = 'dog', onCom
         gainNodeRef.current.gain.value = volume;
 
         return () => {
+            if (intervalRef.current) clearInterval(intervalRef.current);
             stopFrequencies();
             if (audioContextRef.current) {
                 audioContextRef.current.close();
@@ -122,7 +124,8 @@ export default function AnimalFrequencyEngine({ protocol, species = 'dog', onCom
         setIsPlaying(true);
 
         // Progress tracking
-        const interval = setInterval(() => {
+        if (intervalRef.current) clearInterval(intervalRef.current);
+        intervalRef.current = setInterval(() => {
             const elapsed = Date.now() - startTimeRef.current;
             const newProgress = (elapsed / (protocolData.duration * 1000)) * 100;
             
@@ -130,7 +133,7 @@ export default function AnimalFrequencyEngine({ protocol, species = 'dog', onCom
                 stopFrequencies();
                 setProgress(100);
                 if (onComplete) onComplete();
-                clearInterval(interval);
+                if (intervalRef.current) clearInterval(intervalRef.current);
             } else {
                 setProgress(newProgress);
             }
@@ -138,6 +141,10 @@ export default function AnimalFrequencyEngine({ protocol, species = 'dog', onCom
     };
 
     const stopFrequencies = () => {
+        if (intervalRef.current) {
+            clearInterval(intervalRef.current);
+            intervalRef.current = null;
+        }
         oscillatorsRef.current.forEach(({ oscillator, fadeGain }) => {
             try {
                 // Gentle fade out
