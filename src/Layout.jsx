@@ -193,10 +193,17 @@ const LayoutInner = ({ children, currentPageName }) => {
 
   useEffect(() => { 
     setMobileMenuOpen(false); 
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: 'instant' });
     // Check if can go back
     setCanGoBack(window.history.length > 1);
   }, [location.pathname]);
+
+  useEffect(() => {
+    // Disable browser scroll restoration for instant page switches
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+  }, []);
 
   useEffect(() => {
     const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
@@ -545,10 +552,9 @@ const LayoutInner = ({ children, currentPageName }) => {
           <AnimatePresence mode="wait">
             <motion.div
               key={location.pathname}
-              initial={{ opacity: 0 }}
+              initial={{ opacity: 0.7 }}
               animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.15, ease: "easeInOut" }}
+              transition={{ duration: 0.08, ease: "easeOut" }}
             >
               {children}
             </motion.div>
