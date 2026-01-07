@@ -1,0 +1,61 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* AI51 INSTANT LOADING - Shows before React even loads */
+#root:empty::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: #000;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#root:empty::after {
+  content: '';
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80px;
+  height: 80px;
+  background-image: url('data:image/svg+xml,<svg width="80" height="80" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" style="image-rendering: pixelated"><rect x="18" y="20" width="8" height="4" fill="%23ec4899"/><rect x="38" y="20" width="8" height="4" fill="%23ec4899"/><rect x="14" y="24" width="36" height="8" fill="%23ff1b8d"/><rect x="18" y="32" width="28" height="8" fill="%23ff1b8d"/><rect x="22" y="40" width="20" height="6" fill="%23ff1b8d"/><rect x="26" y="46" width="12" height="4" fill="%23ff1b8d"/><rect x="30" y="50" width="4" height="2" fill="%23ff1b8d"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  z-index: 100000;
+  animation: ai51-pulse 1.5s ease-in-out infinite;
+  filter: drop-shadow(0 0 15px rgba(236, 72, 153, 0.8));
+}
+
+@keyframes ai51-pulse {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+  50% { transform: translate(-50%, -50%) scale(1.15); opacity: 0.8; }
+}
+
+/* Fade out when React loads */
+#root {
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Smooth scroll for the whole app */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
