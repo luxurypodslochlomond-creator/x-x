@@ -19,8 +19,7 @@ const AI51CustomProtocol = lazy(() => import('@/components/petsounds/AI51CustomP
 
 export default function PetSounds51() {
     const [showAbout, setShowAbout] = useState(false);
-    const [activeView, setActiveView] = useState('home'); // home, free, premium, ai, payment
-    const [selectedTier, setSelectedTier] = useState(null);
+    const [activeView, setActiveView] = useState('home'); // home, playing
     const [selectedProtocol, setSelectedProtocol] = useState(null);
 
     return (
@@ -49,12 +48,12 @@ export default function PetSounds51() {
                 <div className="inline-block bg-gradient-to-r from-cyan-500 via-green-500 to-pink-500 p-1 rounded-lg mb-3">
                     <div className="bg-black px-6 py-2 rounded-md">
                         <p className="text-xl md:text-2xl text-white font-black font-mono">
-                            healing frequencies for all animals
+                            free healing frequencies for all animals
                         </p>
                     </div>
                 </div>
                 <p className="text-gray-400 text-sm max-w-2xl mx-auto font-mono">
-                    same tech healing humans - now for all animals
+                    same proven tech healing humans - forever free ♾️❤️
                 </p>
                 <div className="mt-6 flex justify-center gap-4">
                     <a 
@@ -153,7 +152,7 @@ export default function PetSounds51() {
                                 key={i}
                                 onClick={() => { 
                                     setSelectedProtocol(protocol.protocol); 
-                                    setActiveView('free'); 
+                                    setActiveView('playing'); 
                                 }}
                                 className="bg-black border-2 border-cyan-500/30 rounded-xl p-5 hover:border-cyan-500 transition-all group text-left w-full"
                             >
@@ -174,184 +173,45 @@ export default function PetSounds51() {
                 </div>
             </div>
 
-            {/* PRICING */}
-            <div className="max-w-5xl mx-auto mb-16">
-                <h2 className="text-3xl font-black text-center mb-8 text-pink-400">PRICING</h2>
-                <div className="grid md:grid-cols-4 gap-6">
-                    
-                    {/* FREE */}
-                    <div className="bg-gray-900/60 border-2 border-gray-700 rounded-xl p-6">
-                        <h3 className="text-xl font-black text-gray-400 mb-2">FREE</h3>
-                        <p className="text-4xl font-black text-white mb-4">£0</p>
-                        <p className="text-sm text-gray-500 mb-6">test it works</p>
-                        <ul className="space-y-2 text-sm mb-6">
-                            <li className="flex items-start gap-2">
-                                <Check className="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5" />
-                                <span className="text-gray-400">432Hz calming frequency</span>
-                            </li>
-                            <li className="flex items-start gap-2">
-                                <Check className="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5" />
-                                <span className="text-gray-400">unlimited use</span>
-                            </li>
-                            <li className="flex items-start gap-2">
-                                <Check className="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5" />
-                                <span className="text-gray-400">works offline</span>
-                            </li>
-                        </ul>
-                        <button 
-                            onClick={() => { setActiveView('free'); setSelectedProtocol('fireworks'); }}
-                            className="w-full bg-gray-800 hover:bg-gray-700 text-white px-4 py-3 rounded-lg font-bold transition-all"
-                        >
-                            try free
-                        </button>
-                    </div>
-
-                    {/* BASIC */}
-                    <div className="bg-gradient-to-br from-cyan-900/40 to-blue-900/40 border-2 border-cyan-500 rounded-xl p-6">
-                        <h3 className="text-xl font-black text-cyan-400 mb-2">BASIC</h3>
-                        <p className="text-4xl font-black text-white mb-1">£9.99</p>
-                        <p className="text-sm text-cyan-300 mb-6">one protocol, forever</p>
-                        <ul className="space-y-2 text-sm mb-6">
-                            <li className="flex items-start gap-2">
-                                <Check className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" />
-                                <span className="text-white">pick 1 protocol</span>
-                            </li>
-                            <li className="flex items-start gap-2">
-                                <Check className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" />
-                                <span className="text-white">use forever</span>
-                            </li>
-                            <li className="flex items-start gap-2">
-                                <Check className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" />
-                                <span className="text-white">share with friends</span>
-                            </li>
-                            <li className="flex items-start gap-2">
-                                <Check className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" />
-                                <span className="text-white">works offline</span>
-                            </li>
-                        </ul>
-                        <button 
-                            onClick={() => { setActiveView('payment'); setSelectedTier('basic'); }}
-                            className="w-full bg-cyan-500 hover:bg-cyan-600 text-black px-4 py-3 rounded-lg font-bold transition-all"
-                        >
-                            get basic
-                        </button>
-                    </div>
-
-                    {/* PREMIUM */}
-                    <div className="bg-gradient-to-br from-green-900/40 to-emerald-900/40 border-2 border-green-500 rounded-xl p-6 relative">
-                        <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-green-500 text-black px-4 py-1 rounded-full text-xs font-black">
-                            most popular
-                        </div>
-                        <h3 className="text-xl font-black text-green-400 mb-2">PREMIUM</h3>
-                        <p className="text-4xl font-black text-white mb-1">£49.99</p>
-                        <p className="text-sm text-green-300 mb-6">one payment, forever</p>
-                        <ul className="space-y-2 text-sm mb-6">
-                            <li className="flex items-start gap-2">
-                                <Check className="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5" />
-                                <span className="text-white font-bold">all 6 protocols</span>
-                            </li>
-                            <li className="flex items-start gap-2">
-                                <Check className="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5" />
-                                <span className="text-white">AI video analysis</span>
-                            </li>
-                            <li className="flex items-start gap-2">
-                                <Check className="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5" />
-                                <span className="text-white">priority support</span>
-                            </li>
-                            <li className="flex items-start gap-2">
-                                <Check className="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5" />
-                                <span className="text-white">new protocols = free</span>
-                            </li>
-                        </ul>
-                        <button 
-                            onClick={() => { setActiveView('payment'); setSelectedTier('premium'); }}
-                            className="w-full bg-green-500 hover:bg-green-600 text-black px-4 py-3 rounded-lg font-bold transition-all"
-                        >
-                            get premium
-                        </button>
-                    </div>
-
-                    {/* CONCIERGE */}
-                    <div className="bg-gradient-to-br from-pink-900/40 to-purple-900/40 border-2 border-pink-500 rounded-xl p-6">
-                        <h3 className="text-xl font-black text-pink-400 mb-2">CONCIERGE</h3>
-                        <p className="text-4xl font-black text-white mb-1">£249</p>
-                        <p className="text-sm text-pink-300 mb-6">one payment, forever</p>
-                        <ul className="space-y-2 text-sm mb-6">
-                            <li className="flex items-start gap-2">
-                                <Check className="w-4 h-4 text-pink-400 flex-shrink-0 mt-0.5" />
-                                <span className="text-white font-bold">everything in premium</span>
-                            </li>
-                            <li className="flex items-start gap-2">
-                                <Check className="w-4 h-4 text-pink-400 flex-shrink-0 mt-0.5" />
-                                <span className="text-white">video consultations</span>
-                            </li>
-                            <li className="flex items-start gap-2">
-                                <Check className="w-4 h-4 text-pink-400 flex-shrink-0 mt-0.5" />
-                                <span className="text-white">custom protocols</span>
-                            </li>
-                            <li className="flex items-start gap-2">
-                                <Check className="w-4 h-4 text-pink-400 flex-shrink-0 mt-0.5" />
-                                <span className="text-white">works with your vet</span>
-                            </li>
-                        </ul>
-                        <button 
-                            onClick={() => { setActiveView('payment'); setSelectedTier('concierge'); }}
-                            className="w-full bg-pink-500 hover:bg-pink-600 text-black px-4 py-3 rounded-lg font-bold transition-all"
-                        >
-                            get concierge
-                        </button>
-                    </div>
-                </div>
-
-                {/* SUBSCRIPTION OPTION */}
-                <div className="mt-8 bg-purple-900/20 border border-purple-500/30 rounded-xl p-6 text-center">
-                    <p className="text-gray-400 mb-2">prefer monthly instead?</p>
-                    <div className="space-y-2">
-                        <button 
-                            onClick={() => { setActiveView('payment'); setSelectedTier('premium-monthly'); }}
-                            className="w-full max-w-md mx-auto block bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg font-bold transition-all"
-                        >
-                            premium £9.99/month
-                        </button>
-                        <button 
-                            onClick={() => { setActiveView('payment'); setSelectedTier('concierge-monthly'); }}
-                            className="w-full max-w-md mx-auto block bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg font-bold transition-all"
-                        >
-                            concierge £24.99/month
-                        </button>
-                    </div>
-                    <p className="text-xs text-gray-500 mt-4">
-                        (one-time is better value - £49.99 = 5 months then free forever)
+            {/* FREE FOR ALL */}
+            <div className="max-w-4xl mx-auto mb-16">
+                <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-2 border-green-500 rounded-xl p-8 text-center">
+                    <Heart className="w-16 h-16 text-green-400 mx-auto mb-4" />
+                    <h2 className="text-3xl font-black text-green-400 mb-3">100% FREE FOREVER</h2>
+                    <p className="text-white text-lg mb-2">all 6 protocols • unlimited use • works offline</p>
+                    <p className="text-gray-400 text-sm">
+                        no payment • no subscription • no catch<br/>
+                        click any protocol above to start healing ♾️❤️
                     </p>
                 </div>
             </div>
 
-            {/* WHY IT WORKS */}
+            {/* THE SCIENCE (NOT WOO-WOO) */}
             <div className="max-w-4xl mx-auto mb-16">
-                <h2 className="text-3xl font-black text-center mb-8 text-yellow-400">WHY IT WORKS</h2>
+                <h2 className="text-3xl font-black text-center mb-8 text-yellow-400">real science • not woo-woo</h2>
                 <div className="grid md:grid-cols-2 gap-6">
                     <div className="bg-gray-900/40 border border-yellow-500/30 rounded-xl p-6">
-                        <h3 className="font-bold text-white mb-3">🔬 Proven Science</h3>
+                        <h3 className="font-bold text-white mb-3">🔬 peer-reviewed research</h3>
                         <p className="text-sm text-gray-400">
-                            Music therapy for animals is peer-reviewed. Classical music reduces stress in kenneled dogs (NIH studies). We use optimized frequencies for animal hearing ranges.
+                            NIH published studies: classical music reduces cortisol (stress hormone) in shelter dogs by 28%. Sound therapy is proven science.
                         </p>
                     </div>
                     <div className="bg-gray-900/40 border border-yellow-500/30 rounded-xl p-6">
-                        <h3 className="font-bold text-white mb-3">💰 Cheaper Than 1 Vet Visit</h3>
+                        <h3 className="font-bold text-white mb-3">🐕 species-specific frequencies</h3>
                         <p className="text-sm text-gray-400">
-                            Vet visits cost £50-200. Premium pack is £99 ONE TIME - works forever. Prevention vs. treatment after problems.
+                            dogs hear 40Hz-60,000Hz (vs humans 20Hz-20,000Hz). we optimized frequencies for their actual hearing range - not ours.
                         </p>
                     </div>
                     <div className="bg-gray-900/40 border border-yellow-500/30 rounded-xl p-6">
-                        <h3 className="font-bold text-white mb-3">🐕 Species-Specific</h3>
+                        <h3 className="font-bold text-white mb-3">💰 save £1,000s on vet bills</h3>
                         <p className="text-sm text-gray-400">
-                            Dogs hear 40Hz-60,000Hz. Humans only 20Hz-20,000Hz. We optimized frequencies for their actual hearing range.
+                            average UK pet owner spends £1,000-3,000/year on vet care. stress causes disease. reduce stress = prevent disease.
                         </p>
                     </div>
                     <div className="bg-gray-900/40 border border-yellow-500/30 rounded-xl p-6">
-                        <h3 className="font-bold text-white mb-3">📴 Works Offline</h3>
+                        <h3 className="font-bold text-white mb-3">📴 works offline forever</h3>
                         <p className="text-sm text-gray-400">
-                            Barns, stables, remote farms - no internet needed. Download protocols once, use forever.
+                            barns, stables, remote farms - no internet needed. download once, use forever. completely free.
                         </p>
                     </div>
                 </div>
@@ -441,136 +301,24 @@ export default function PetSounds51() {
             </div>
 
             {/* ACTIVE VIEW RENDERING */}
-            {activeView === 'home' && (
-                <div className="max-w-2xl mx-auto text-center">
-                    <div className="bg-gradient-to-r from-cyan-500 via-green-500 to-pink-500 p-1 rounded-xl mb-4">
-                        <div className="bg-[#0a0514] rounded-lg p-8">
-                            <Heart className="w-16 h-16 text-pink-400 mx-auto mb-4" />
-                            <h2 className="text-3xl font-black text-white mb-4">
-                                Help Your Pet Feel Better
-                            </h2>
-                            <p className="text-gray-400 mb-6">
-                                Try the free tier. See it work. Then choose what's right for your family.
-                            </p>
-                            <div className="space-y-3">
-                                <button 
-                                    onClick={() => { setActiveView('free'); setSelectedProtocol('fireworks'); }}
-                                    className="w-full bg-gradient-to-r from-cyan-500 to-green-500 hover:from-cyan-600 hover:to-green-600 text-black font-black px-12 py-4 rounded-xl text-lg transition-all flex items-center justify-center gap-2"
-                                >
-                                    <Play className="w-5 h-5" />
-                                    Try Free Now (432Hz Calm)
-                                </button>
-                                <button 
-                                    onClick={() => { setActiveView('payment'); setSelectedTier('premium'); }}
-                                    className="w-full bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-black font-black px-12 py-4 rounded-xl text-lg transition-all"
-                                >
-                                    Get Premium - £99 One-Time
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <p className="text-xs text-gray-600">
-                        Built with love by UniversalFamily51 • Same tech that's healing humans ♾️❤️
-                    </p>
-                    <div className="mt-6 bg-gray-900/60 border border-cyan-500/30 rounded-xl p-6 text-center">
-                        <p className="text-white font-bold mb-2">Questions?</p>
-                        <a href="mailto:family@uf51.love" className="text-cyan-400 hover:text-cyan-300 font-bold">
-                            family@uf51.love
-                        </a>
-                        <p className="text-xs text-gray-500 mt-2">We reply within 24 hours</p>
-                    </div>
-                </div>
-            )}
-
-            {activeView === 'free' && (
+            {activeView === 'playing' && (
                 <div className="max-w-3xl mx-auto">
                     <button 
                         onClick={() => setActiveView('home')}
                         className="mb-6 text-cyan-400 hover:text-cyan-300 font-bold"
                     >
-                        ← back
+                        ← back to protocols
                     </button>
-                    <h2 className="text-3xl font-black text-cyan-400 mb-6 text-center">free - test it works</h2>
                     <Suspense fallback={<div className="text-center text-cyan-400 py-12">loading frequency engine...</div>}>
                         <AnimalFrequencyEngine 
                             protocol={selectedProtocol || 'fireworks'} 
                             species="dog"
                             onComplete={() => {
-                                alert('✅ session complete - upgrade for all protocols?');
+                                alert('✅ session complete');
+                                setActiveView('home');
                             }}
                         />
                     </Suspense>
-                    <div className="mt-8 text-center">
-                        <p className="text-gray-400 mb-4">working? upgrade for all protocols:</p>
-                        <button 
-                            onClick={() => { setActiveView('payment'); setSelectedTier('premium'); }}
-                            className="bg-gradient-to-r from-green-500 to-cyan-500 hover:from-green-600 hover:to-cyan-600 text-black font-black px-8 py-3 rounded-lg transition-all"
-                        >
-                            get premium - £49.99
-                        </button>
-                    </div>
-                </div>
-            )}
-
-            {activeView === 'ai' && (
-                <div className="max-w-3xl mx-auto">
-                    <button 
-                        onClick={() => setActiveView('home')}
-                        className="mb-6 text-cyan-400 hover:text-cyan-300 font-bold"
-                    >
-                        ← Back
-                    </button>
-                    <h2 className="text-3xl font-black text-pink-400 mb-6 text-center">AI51 Pet Analysis - Premium Feature</h2>
-                    <AI51PetAnalysis 
-                        species="dog"
-                        onRecommendation={(rec) => {
-                            console.log('AI51 recommendation:', rec);
-                        }}
-                    />
-                </div>
-            )}
-
-            {activeView === 'payment' && (
-                <div className="max-w-2xl mx-auto">
-                    <button 
-                        onClick={() => setActiveView('home')}
-                        className="mb-6 text-cyan-400 hover:text-cyan-300 font-bold"
-                    >
-                        ← back
-                    </button>
-                    <h2 className="text-3xl font-black text-green-400 mb-6 text-center">
-                        {selectedTier === 'basic' && 'basic tier'}
-                        {selectedTier === 'premium' && 'premium - most popular'}
-                        {selectedTier === 'concierge' && 'concierge - custom protocols'}
-                    </h2>
-                    <Suspense fallback={<div className="text-center text-cyan-400 py-12">loading payment...</div>}>
-                        <UniversalPayment 
-                            tier={selectedTier}
-                            onSuccess={(purchase) => {
-                                alert(`✅ welcome to petsounds51 ${selectedTier}`);
-                                if (selectedTier === 'concierge') {
-                                    setActiveView('custom');
-                                } else {
-                                    setActiveView('free');
-                                }
-                            }}
-                        />
-                    </Suspense>
-                </div>
-            )}
-
-            {activeView === 'custom' && (
-                <div className="max-w-3xl mx-auto">
-                    <button 
-                        onClick={() => setActiveView('home')}
-                        className="mb-6 text-cyan-400 hover:text-cyan-300 font-bold"
-                    >
-                        ← Back
-                    </button>
-                    <AI51CustomProtocol 
-                        species="dog"
-                        userEmail="user@example.com"
-                    />
                 </div>
             )}
 
