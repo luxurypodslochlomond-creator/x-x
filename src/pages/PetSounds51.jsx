@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
-import { Check, Heart, Video, Wifi, Shield, Zap, ChevronDown, ChevronUp } from 'lucide-react';
+import { Check, Heart, Video, Wifi, Shield, Zap, ChevronDown, ChevronUp, Play } from 'lucide-react';
 import PetSounds51Icon8Bit from '@/components/shared/PetSounds51Icon8Bit';
+import AnimalFrequencyEngine from '@/components/petsounds/AnimalFrequencyEngine';
+import AI51PetAnalysis from '@/components/petsounds/AI51PetAnalysis';
+import SimplePetPayment from '@/components/petsounds/SimplePetPayment';
 import { motion } from 'framer-motion';
 
 /**
@@ -14,6 +17,9 @@ import { motion } from 'framer-motion';
 
 export default function PetSounds51() {
     const [showAbout, setShowAbout] = useState(false);
+    const [activeView, setActiveView] = useState('home'); // home, free, premium, ai, payment
+    const [selectedTier, setSelectedTier] = useState(null);
+    const [selectedProtocol, setSelectedProtocol] = useState(null);
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-[#0a0514] via-[#1a0f2a] to-[#0a0514] text-white p-6 pb-24">
@@ -367,26 +373,109 @@ export default function PetSounds51() {
                 </div>
             </div>
 
-            {/* CTA */}
-            <div className="max-w-2xl mx-auto text-center">
-                <div className="bg-gradient-to-r from-cyan-500 via-green-500 to-pink-500 p-1 rounded-xl mb-4">
-                    <div className="bg-[#0a0514] rounded-lg p-8">
-                        <Heart className="w-16 h-16 text-pink-400 mx-auto mb-4" />
-                        <h2 className="text-3xl font-black text-white mb-4">
-                            Help Your Pet Feel Better
-                        </h2>
-                        <p className="text-gray-400 mb-6">
-                            Try the free tier. See it work. Then choose what's right for your family.
-                        </p>
-                        <button className="bg-gradient-to-r from-cyan-500 to-green-500 hover:from-cyan-600 hover:to-green-600 text-black font-black px-12 py-4 rounded-xl text-lg transition-all">
-                            Start Free Now
+            {/* ACTIVE VIEW RENDERING */}
+            {activeView === 'home' && (
+                <div className="max-w-2xl mx-auto text-center">
+                    <div className="bg-gradient-to-r from-cyan-500 via-green-500 to-pink-500 p-1 rounded-xl mb-4">
+                        <div className="bg-[#0a0514] rounded-lg p-8">
+                            <Heart className="w-16 h-16 text-pink-400 mx-auto mb-4" />
+                            <h2 className="text-3xl font-black text-white mb-4">
+                                Help Your Pet Feel Better
+                            </h2>
+                            <p className="text-gray-400 mb-6">
+                                Try the free tier. See it work. Then choose what's right for your family.
+                            </p>
+                            <div className="space-y-3">
+                                <button 
+                                    onClick={() => { setActiveView('free'); setSelectedProtocol('fireworks'); }}
+                                    className="w-full bg-gradient-to-r from-cyan-500 to-green-500 hover:from-cyan-600 hover:to-green-600 text-black font-black px-12 py-4 rounded-xl text-lg transition-all flex items-center justify-center gap-2"
+                                >
+                                    <Play className="w-5 h-5" />
+                                    Try Free Now (432Hz Calm)
+                                </button>
+                                <button 
+                                    onClick={() => { setActiveView('payment'); setSelectedTier('premium'); }}
+                                    className="w-full bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-black font-black px-12 py-4 rounded-xl text-lg transition-all"
+                                >
+                                    Get Premium - £99 One-Time
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <p className="text-xs text-gray-600">
+                        Built with love by UniversalFamily51 • Same tech that's healing humans ♾️❤️
+                    </p>
+                </div>
+            )}
+
+            {activeView === 'free' && (
+                <div className="max-w-3xl mx-auto">
+                    <button 
+                        onClick={() => setActiveView('home')}
+                        className="mb-6 text-cyan-400 hover:text-cyan-300 font-bold"
+                    >
+                        ← Back
+                    </button>
+                    <h2 className="text-3xl font-black text-cyan-400 mb-6 text-center">Free Tier - Test It Works</h2>
+                    <AnimalFrequencyEngine 
+                        protocol={selectedProtocol || 'fireworks'} 
+                        species="dog"
+                        onComplete={() => {
+                            alert('✅ Session complete! Ready to upgrade for ALL protocols?');
+                        }}
+                    />
+                    <div className="mt-8 text-center">
+                        <p className="text-gray-400 mb-4">Feeling good? Upgrade for ALL protocols:</p>
+                        <button 
+                            onClick={() => { setActiveView('payment'); setSelectedTier('premium'); }}
+                            className="bg-gradient-to-r from-green-500 to-cyan-500 hover:from-green-600 hover:to-cyan-600 text-black font-black px-8 py-3 rounded-lg transition-all"
+                        >
+                            Upgrade to Premium - £99
                         </button>
                     </div>
                 </div>
-                <p className="text-xs text-gray-600">
-                    Built with love by UniversalFamily51 • Same tech that's healing humans ♾️❤️
-                </p>
-            </div>
+            )}
+
+            {activeView === 'ai' && (
+                <div className="max-w-3xl mx-auto">
+                    <button 
+                        onClick={() => setActiveView('home')}
+                        className="mb-6 text-cyan-400 hover:text-cyan-300 font-bold"
+                    >
+                        ← Back
+                    </button>
+                    <h2 className="text-3xl font-black text-pink-400 mb-6 text-center">AI51 Pet Analysis - Premium Feature</h2>
+                    <AI51PetAnalysis 
+                        species="dog"
+                        onRecommendation={(rec) => {
+                            console.log('AI51 recommendation:', rec);
+                        }}
+                    />
+                </div>
+            )}
+
+            {activeView === 'payment' && (
+                <div className="max-w-2xl mx-auto">
+                    <button 
+                        onClick={() => setActiveView('home')}
+                        className="mb-6 text-cyan-400 hover:text-cyan-300 font-bold"
+                    >
+                        ← Back
+                    </button>
+                    <h2 className="text-3xl font-black text-green-400 mb-6 text-center">
+                        {selectedTier === 'basic' && 'Basic Tier'}
+                        {selectedTier === 'premium' && 'Premium Tier - Most Popular'}
+                        {selectedTier === 'concierge' && 'Concierge Tier'}
+                    </h2>
+                    <SimplePetPayment 
+                        tier={selectedTier}
+                        onSuccess={(purchase) => {
+                            alert(`✅ Payment successful! Welcome to PetSounds51 ${selectedTier}!`);
+                            setActiveView('free'); // Show them the player
+                        }}
+                    />
+                </div>
+            )}
 
         </div>
     );
