@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { base44 } from '@/api/base44Client';
+import { motion, AnimatePresence } from 'framer-motion';
 import GlobalErrorBoundary from '@/components/shared/GlobalErrorBoundary';
 import COOLASFUCKErrorMonitor from '@/components/shared/COOLASFUCKErrorMonitor';
 import AutoHealingShield from '@/components/shared/AutoHealingShield';
@@ -15,6 +16,7 @@ import { AudioProvider, useAudio } from '@/components/shared/AudioProvider';
 import HealingCircle from '@/components/jukebox/HealingCircle';
 import PWAInstallPrompt from '@/components/shared/PWAInstallPrompt';
 import EmergencyMode from '@/components/shared/EmergencyMode';
+import { AnimatePresence } from 'framer-motion';
 import AutoBugMonitor from '@/components/shared/AutoBugMonitor';
 import PerformanceOptimizer from '@/components/shared/PerformanceOptimizer';
 import EmergencyCalmButton from '@/components/shared/EmergencyCalmButton';
@@ -192,7 +194,7 @@ const LayoutInner = ({ children, currentPageName }) => {
 
   useEffect(() => { 
     setMobileMenuOpen(false); 
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     // Check if can go back
     setCanGoBack(window.history.length > 1);
   }, [location.pathname]);
@@ -541,7 +543,17 @@ const LayoutInner = ({ children, currentPageName }) => {
                             </aside>
 
         <main className={`lg:ml-80 ${isOffline ? 'pt-[122px] lg:pt-10' : 'pt-[72px] lg:pt-0'} min-h-screen`}>
-          {children}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={location.pathname}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.15, ease: "easeInOut" }}
+            >
+              {children}
+            </motion.div>
+          </AnimatePresence>
           <footer className="border-t border-cyan-500/20 bg-[#0a0f1a]/60">
                   <LiveClock />
                   <p className="text-xs text-gray-600 text-center pb-4">Built on <a href="https://base44.com" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-cyan-400">Base44</a></p>
