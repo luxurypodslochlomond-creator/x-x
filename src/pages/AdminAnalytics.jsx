@@ -11,9 +11,7 @@ import { motion } from 'framer-motion';
  */
 
 export default function AdminAnalytics() {
-    const [timeRange, setTimeRange] = useState(7); // days
-
-    const { data: analytics = [], isLoading } = useQuery({
+    const { data: analytics = [], isLoading, error } = useQuery({
         queryKey: ['privacyAnalytics'],
         queryFn: () => base44.entities.PrivacyAnalytics.list('-created_date', 10000)
     });
@@ -23,7 +21,31 @@ export default function AdminAnalytics() {
             <div className="min-h-screen bg-black text-white flex items-center justify-center">
                 <div className="text-center">
                     <Activity className="w-12 h-12 text-cyan-400 animate-spin mx-auto mb-4" />
-                    <p className="text-gray-500 font-mono">Loading analytics...</p>
+                    <p className="text-gray-500 font-mono">loading...</p>
+                </div>
+            </div>
+        );
+    }
+
+    if (error) {
+        return (
+            <div className="min-h-screen bg-black text-white flex items-center justify-center">
+                <div className="text-center">
+                    <AlertTriangle className="w-12 h-12 text-red-400 mx-auto mb-4" />
+                    <p className="text-red-400 font-bold mb-2">error loading analytics</p>
+                    <p className="text-gray-500 text-sm">{error.message}</p>
+                </div>
+            </div>
+        );
+    }
+
+    if (analytics.length === 0) {
+        return (
+            <div className="min-h-screen bg-black text-white flex items-center justify-center">
+                <div className="text-center max-w-md">
+                    <Eye className="w-16 h-16 text-cyan-400 mx-auto mb-4" />
+                    <p className="text-cyan-400 font-bold text-xl mb-2">no data yet</p>
+                    <p className="text-gray-500 text-sm">analytics will appear as users interact with the app</p>
                 </div>
             </div>
         );
@@ -72,8 +94,8 @@ export default function AdminAnalytics() {
             
             {/* HEADER */}
             <div className="mb-8">
-                <h1 className="text-4xl font-black text-cyan-400 mb-2">PRIVACY-FIRST ANALYTICS</h1>
-                <p className="text-gray-500 font-mono text-sm">Aggregate patterns • Zero individual tracking ♾️</p>
+                <h1 className="text-4xl font-black text-cyan-400 mb-2">analytics</h1>
+                <p className="text-gray-500 font-mono text-sm">{analytics.length} events • zero tracking ♾️</p>
             </div>
 
             {/* QUICK STATS */}
