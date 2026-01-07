@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, lazy, Suspense } from 'react';
 import { Check, Heart, Video, Wifi, Shield, Zap, ChevronDown, ChevronUp, Play } from 'lucide-react';
 import PetSounds51Icon8Bit from '@/components/shared/PetSounds51Icon8Bit';
-import AnimalFrequencyEngine from '@/components/petsounds/AnimalFrequencyEngine';
-import AI51PetAnalysis from '@/components/petsounds/AI51PetAnalysis';
-import VoiceConsultation from '@/components/petsounds/VoiceConsultation';
-import UniversalPayment from '@/components/petsounds/UniversalPayment';
-import AI51CustomProtocol from '@/components/petsounds/AI51CustomProtocol';
-import { motion } from 'framer-motion';
+
+// Lazy load heavy components
+const AnimalFrequencyEngine = lazy(() => import('@/components/petsounds/AnimalFrequencyEngine'));
+const AI51PetAnalysis = lazy(() => import('@/components/petsounds/AI51PetAnalysis'));
+const UniversalPayment = lazy(() => import('@/components/petsounds/UniversalPayment'));
+const AI51CustomProtocol = lazy(() => import('@/components/petsounds/AI51CustomProtocol'));
 
 /**
  * PETSOUNDS51 - HEALING FREQUENCIES FOR ALL ANIMALS
@@ -30,41 +30,29 @@ export default function PetSounds51() {
                               radial-gradient(circle at 40% 20%, rgba(34, 197, 94, 0.1) 0%, transparent 50%)`
         }}>
             
-            {/* HEADER - COOLASFUCK 8-BIT STYLE */}
+            {/* HEADER - INSTANT LOAD */}
             <div className="max-w-4xl mx-auto text-center mb-12">
-                <motion.div 
-                    className="flex justify-center mb-6"
-                    animate={{ y: [0, -10, 0] }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                >
-                    <PetSounds51Icon8Bit size={120} animate={true} />
-                </motion.div>
-                <motion.h1 
+                <div className="flex justify-center mb-6">
+                    <PetSounds51Icon8Bit size={120} animate={false} />
+                </div>
+                <h1 
                     className="text-5xl md:text-7xl font-black mb-4 font-mono tracking-tight"
                     style={{
-                        textShadow: '0 0 20px rgba(34, 211, 238, 0.6), 0 0 40px rgba(34, 211, 238, 0.3)',
+                        textShadow: '0 0 20px rgba(34, 211, 238, 0.6)',
                         background: 'linear-gradient(90deg, #22d3ee 0%, #34d399 50%, #ec4899 100%)',
                         WebkitBackgroundClip: 'text',
-                        WebkitTextFillColor: 'transparent',
-                        imageRendering: 'pixelated'
+                        WebkitTextFillColor: 'transparent'
                     }}
-                    initial={{ scale: 0.9, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    transition={{ duration: 0.5 }}
                 >
                     PETSOUNDS51
-                </motion.h1>
-                <motion.div
-                    className="inline-block bg-gradient-to-r from-cyan-500 via-green-500 to-pink-500 p-1 rounded-lg mb-3"
-                    animate={{ boxShadow: ['0 0 20px rgba(34, 211, 238, 0.5)', '0 0 40px rgba(236, 72, 153, 0.8)', '0 0 20px rgba(34, 211, 238, 0.5)'] }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                >
+                </h1>
+                <div className="inline-block bg-gradient-to-r from-cyan-500 via-green-500 to-pink-500 p-1 rounded-lg mb-3">
                     <div className="bg-black px-6 py-2 rounded-md">
                         <p className="text-xl md:text-2xl text-white font-black font-mono">
-                            HEALING FREQUENCIES FOR ALL ANIMALS
+                            healing frequencies for all animals
                         </p>
                     </div>
-                </motion.div>
+                </div>
                 <p className="text-gray-400 text-sm max-w-2xl mx-auto font-mono">
                     same tech healing humans - now for all animals
                 </p>
@@ -496,23 +484,25 @@ export default function PetSounds51() {
                         onClick={() => setActiveView('home')}
                         className="mb-6 text-cyan-400 hover:text-cyan-300 font-bold"
                     >
-                        ← Back
+                        ← back
                     </button>
-                    <h2 className="text-3xl font-black text-cyan-400 mb-6 text-center">Free Tier - Test It Works</h2>
-                    <AnimalFrequencyEngine 
-                        protocol={selectedProtocol || 'fireworks'} 
-                        species="dog"
-                        onComplete={() => {
-                            alert('✅ Session complete! Ready to upgrade for ALL protocols?');
-                        }}
-                    />
+                    <h2 className="text-3xl font-black text-cyan-400 mb-6 text-center">free - test it works</h2>
+                    <Suspense fallback={<div className="text-center text-cyan-400 py-12">loading frequency engine...</div>}>
+                        <AnimalFrequencyEngine 
+                            protocol={selectedProtocol || 'fireworks'} 
+                            species="dog"
+                            onComplete={() => {
+                                alert('✅ session complete - upgrade for all protocols?');
+                            }}
+                        />
+                    </Suspense>
                     <div className="mt-8 text-center">
-                        <p className="text-gray-400 mb-4">Feeling good? Upgrade for ALL protocols:</p>
+                        <p className="text-gray-400 mb-4">working? upgrade for all protocols:</p>
                         <button 
                             onClick={() => { setActiveView('payment'); setSelectedTier('premium'); }}
                             className="bg-gradient-to-r from-green-500 to-cyan-500 hover:from-green-600 hover:to-cyan-600 text-black font-black px-8 py-3 rounded-lg transition-all"
                         >
-                            Upgrade to Premium - £99
+                            get premium - £49.99
                         </button>
                     </div>
                 </div>
@@ -542,24 +532,26 @@ export default function PetSounds51() {
                         onClick={() => setActiveView('home')}
                         className="mb-6 text-cyan-400 hover:text-cyan-300 font-bold"
                     >
-                        ← Back
+                        ← back
                     </button>
                     <h2 className="text-3xl font-black text-green-400 mb-6 text-center">
-                        {selectedTier === 'basic' && 'Basic Tier'}
-                        {selectedTier === 'premium' && 'Premium Tier - Most Popular'}
-                        {selectedTier === 'concierge' && 'Concierge Tier - COOLASFUCK Custom'}
+                        {selectedTier === 'basic' && 'basic tier'}
+                        {selectedTier === 'premium' && 'premium - most popular'}
+                        {selectedTier === 'concierge' && 'concierge - custom protocols'}
                     </h2>
-                    <UniversalPayment 
-                        tier={selectedTier}
-                        onSuccess={(purchase) => {
-                            alert(`✅ Payment successful! Welcome to PetSounds51 ${selectedTier}!`);
-                            if (selectedTier === 'concierge') {
-                                setActiveView('custom');
-                            } else {
-                                setActiveView('free');
-                            }
-                        }}
-                    />
+                    <Suspense fallback={<div className="text-center text-cyan-400 py-12">loading payment...</div>}>
+                        <UniversalPayment 
+                            tier={selectedTier}
+                            onSuccess={(purchase) => {
+                                alert(`✅ welcome to petsounds51 ${selectedTier}`);
+                                if (selectedTier === 'concierge') {
+                                    setActiveView('custom');
+                                } else {
+                                    setActiveView('free');
+                                }
+                            }}
+                        />
+                    </Suspense>
                 </div>
             )}
 
