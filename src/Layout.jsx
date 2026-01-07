@@ -16,7 +16,6 @@ import { AudioProvider, useAudio } from '@/components/shared/AudioProvider';
 import HealingCircle from '@/components/jukebox/HealingCircle';
 import PWAInstallPrompt from '@/components/shared/PWAInstallPrompt';
 import EmergencyMode from '@/components/shared/EmergencyMode';
-import { AnimatePresence } from 'framer-motion';
 import AutoBugMonitor from '@/components/shared/AutoBugMonitor';
 import PerformanceOptimizer from '@/components/shared/PerformanceOptimizer';
 import EmergencyCalmButton from '@/components/shared/EmergencyCalmButton';
