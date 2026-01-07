@@ -566,7 +566,7 @@ const LayoutInner = ({ children, currentPageName }) => {
         </main>
       </div>
 
-      {!currentPageName.startsWith('Scott') && !currentPageName.startsWith('Prof') && (
+      {!currentPageName.startsWith('Scott') && !currentPageName.startsWith('Prof') && currentPageName !== 'CB51' && (
         <>
           <FloatingMusicPlayer />
           <HealingCircle />
@@ -576,8 +576,10 @@ const LayoutInner = ({ children, currentPageName }) => {
           <AutoBugMonitor />
           <PerformanceOptimizer />
           <AI51ProactiveReach />
-          <AI51Shield />
-          <AI51LiveHealer />
+          {/* AI51Shield - Commented out for cleaner CB51 UI */}
+          {/* <AI51Shield /> */}
+          {/* AI51LiveHealer - Commented out for cleaner CB51 UI */}
+          {/* <AI51LiveHealer /> */}
           <PendingMessageSender />
         </>
       )}
