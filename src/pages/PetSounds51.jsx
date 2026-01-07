@@ -1,5 +1,5 @@
 import React, { useState, lazy, Suspense } from 'react';
-import { Check, Heart, Video, Wifi, Shield, Zap, ChevronDown, ChevronUp, Play } from 'lucide-react';
+import { Check, Heart, Video, Wifi, Shield, Zap, ChevronDown, ChevronUp, Play, Sparkles, Home, Bone, Cross, Plane, Tractor } from 'lucide-react';
 import PetSounds51Icon8Bit from '@/components/shared/PetSounds51Icon8Bit';
 
 // Lazy load heavy components
@@ -137,29 +137,34 @@ export default function PetSounds51() {
 
             {/* PROTOCOLS */}
             <div className="max-w-4xl mx-auto mb-16">
-                <h2 className="text-3xl font-black text-center mb-8 text-green-400">HEALING PROTOCOLS</h2>
+                <h2 className="text-3xl font-black text-center mb-8 text-green-400">healing protocols</h2>
                 <div className="grid md:grid-cols-2 gap-4">
                     {[
-                        { name: "Fireworks Anxiety", desc: "Calm your pet during loud noises", icon: "🎆" },
-                        { name: "Separation Anxiety", desc: "Help them feel safe when you're away", icon: "🏠" },
-                        { name: "Arthritis Pain Relief", desc: "Ease joint pain for older pets", icon: "🦴" },
-                        { name: "Post-Surgery Recovery", desc: "Speed healing after operations", icon: "⚕️" },
-                        { name: "Travel Stress", desc: "Car, plane, vet visits - stay calm", icon: "✈️" },
-                        { name: "Farm Herd Health", desc: "Reduce stress for 50+ animals", icon: "🐄" },
-                    ].map((protocol, i) => (
-                        <div 
-                            key={i}
-                            className="bg-gray-900/60 border border-white/10 rounded-xl p-4 hover:border-cyan-500/50 transition-all"
-                        >
-                            <div className="flex items-start gap-3">
-                                <span className="text-3xl">{protocol.icon}</span>
-                                <div className="flex-1">
-                                    <h3 className="font-bold text-white">{protocol.name}</h3>
-                                    <p className="text-sm text-gray-400 mt-1">{protocol.desc}</p>
+                        { name: "Fireworks Anxiety", desc: "calm during loud noises", icon: Sparkles, color: "from-pink-500 to-purple-500" },
+                        { name: "Separation Anxiety", desc: "safe when you're away", icon: Home, color: "from-cyan-500 to-blue-500" },
+                        { name: "Arthritis Pain Relief", desc: "ease joint pain", icon: Bone, color: "from-orange-500 to-red-500" },
+                        { name: "Post-Surgery Recovery", desc: "speed healing", icon: Cross, color: "from-green-500 to-emerald-500" },
+                        { name: "Travel Stress", desc: "car, plane, vet visits", icon: Plane, color: "from-blue-500 to-cyan-500" },
+                        { name: "Farm Herd Health", desc: "reduce stress for 50+ animals", icon: Tractor, color: "from-yellow-500 to-amber-500" },
+                    ].map((protocol, i) => {
+                        const IconComponent = protocol.icon;
+                        return (
+                            <div 
+                                key={i}
+                                className="bg-black border-2 border-cyan-500/30 rounded-xl p-5 hover:border-cyan-500 transition-all group"
+                            >
+                                <div className="flex items-start gap-4">
+                                    <div className={`bg-gradient-to-br ${protocol.color} p-3 rounded-lg group-hover:scale-110 transition-transform`}>
+                                        <IconComponent className="w-6 h-6 text-white" />
+                                    </div>
+                                    <div className="flex-1">
+                                        <h3 className="font-black text-white text-lg mb-1">{protocol.name}</h3>
+                                        <p className="text-sm text-gray-400">{protocol.desc}</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    ))}
+                        );
+                    })}
                 </div>
             </div>
 
