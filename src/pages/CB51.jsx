@@ -172,10 +172,10 @@ export default function CB51() {
     const Section = ({ id, title, icon: Icon, badge, color, children }) => {
         const isExpanded = expandedSections[id];
         return (
-            <div className="mb-0">
+            <div className="mb-3">
                 <button
                     onClick={() => toggleSection(id)}
-                    className={`w-full bg-gray-900/40 border-2 ${color} rounded-xl p-4 flex items-center justify-between hover:bg-gray-900/60 transition-all backdrop-blur-sm`}
+                    className={`w-full bg-gray-900/60 border-2 ${color} rounded-xl p-4 flex items-center justify-between hover:bg-gray-900/80 transition-all`}
                 >
                     <div className="flex items-center gap-3">
                         <Icon className={`w-6 h-6 ${color.replace('border-', 'text-')}`} />
@@ -198,10 +198,10 @@ export default function CB51() {
                             initial={{ height: 0, opacity: 0 }}
                             animate={{ height: 'auto', opacity: 1 }}
                             exit={{ height: 0, opacity: 0 }}
-                            transition={{ duration: 0.15 }}
+                            transition={{ duration: 0.2 }}
                             className="overflow-hidden"
                         >
-                            <div className="p-4 bg-gray-900/20 border-x-2 border-b-2 border-gray-800/60 rounded-b-xl -mt-2 backdrop-blur-sm">
+                            <div className="p-4 bg-gray-900/40 border-2 border-gray-800 rounded-b-xl -mt-2">
                                 {children}
                             </div>
                         </motion.div>
@@ -232,9 +232,6 @@ export default function CB51() {
                     <p className="text-4xl font-black text-white font-mono">{hoursPerWeek}h</p>
                 </div>
             )}
-
-            {/* 2-COLUMN GRID FOR LARGER SCREENS */}
-            <div className="grid lg:grid-cols-2 gap-3">
 
             {/* URGENT - WHAT NEEDS ME TODAY */}
             <Section id="urgent" title="WHAT NEEDS ME TODAY" icon={AlertCircle} badge={pendingOffers + awaitingBand + overdueInvoices + expiringDocs + urgentMessages} color="border-red-400/60">
@@ -288,11 +285,6 @@ export default function CB51() {
             <Section id="messages" title="MESSAGE CENTRE" icon={MessageSquare} badge={pendingMessages} color="border-purple-400/60">
                 <ScottMessageCentre />
             </Section>
-
-            </div>
-
-            {/* 2-COLUMN GRID FOR ARTISTS + GIGS */}
-            <div className="grid lg:grid-cols-2 gap-3">
 
             {/* ARTISTS */}
             <Section id="artists" title="ARTISTS" icon={Music} badge={artists.length} color="border-cyan-400/60">
@@ -360,11 +352,6 @@ export default function CB51() {
                 </div>
             </Section>
 
-            </div>
-
-            {/* 2-COLUMN GRID FOR CALENDAR + LEGAL */}
-            <div className="grid lg:grid-cols-2 gap-3">
-
             {/* UPCOMING GIGS */}
             <Section id="calendar" title="UPCOMING GIGS" icon={Calendar} badge={upcomingGigs.length} color="border-green-400/60">
                 {upcomingGigs.length === 0 ? (
@@ -407,9 +394,7 @@ export default function CB51() {
                 </div>
             </Section>
 
-            </div>
-
-            {/* FINANCE - FULL WIDTH */}
+            {/* FINANCE */}
             <Section id="finance" title="FINANCE" icon={DollarSign} badge={overdueInvoices} color="border-yellow-400/60">
                 <div className="space-y-2">
                     <div className="bg-black/60 rounded-lg p-3">
