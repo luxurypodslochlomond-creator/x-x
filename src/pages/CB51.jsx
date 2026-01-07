@@ -159,9 +159,9 @@ export default function CB51() {
 
     if (loading || isLoading) {
         return (
-            <div className="min-h-screen bg-gradient-to-br from-[#0a0f1a] via-[#0f1419] to-[#0a0f1a] flex items-center justify-center">
+            <div className="min-h-screen bg-black flex items-center justify-center">
                 <div className="text-center">
-                    <div className="w-12 h-12 border-2 border-gray-800 border-t-cyan-500 rounded-full animate-spin mx-auto mb-3"></div>
+                    <div className="w-12 h-12 border-2 border-gray-900 border-t-cyan-500 rounded-full animate-spin mx-auto mb-3"></div>
                     <p className="text-gray-600 font-mono text-sm">Loading...</p>
                 </div>
             </div>
@@ -175,13 +175,13 @@ export default function CB51() {
             <div className="mb-3">
                 <button
                     onClick={() => toggleSection(id)}
-                    className={`w-full bg-gray-900/60 border-2 ${color} rounded-xl p-4 flex items-center justify-between hover:bg-gray-900/80 transition-all`}
+                    className={`w-full bg-black border-2 ${color} rounded-xl p-4 flex items-center justify-between hover:border-opacity-100 transition-all`}
                 >
                     <div className="flex items-center gap-3">
                         <Icon className={`w-6 h-6 ${color.replace('border-', 'text-')}`} />
-                        <span className="text-white font-black font-mono text-lg">{title}</span>
+                        <span className="text-white font-black font-mono text-lg tracking-wider">{title}</span>
                         {badge > 0 && (
-                            <span className={`${color.replace('border-', 'bg-')}/20 ${color.replace('border-', 'text-')} px-2 py-1 rounded-full text-xs font-bold font-mono`}>
+                            <span className={`bg-black ${color.replace('border-', 'text-')} px-2 py-1 rounded-full text-xs font-bold font-mono border ${color}`}>
                                 {badge}
                             </span>
                         )}
@@ -201,7 +201,7 @@ export default function CB51() {
                             transition={{ duration: 0.2 }}
                             className="overflow-hidden"
                         >
-                            <div className="p-4 bg-gray-900/40 border-2 border-gray-800 rounded-b-xl -mt-2">
+                            <div className="p-4 bg-black border-x-2 border-b-2 border-gray-900 rounded-b-xl -mt-2">
                                 {children}
                             </div>
                         </motion.div>
@@ -212,7 +212,7 @@ export default function CB51() {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-[#0a0f1a] via-[#0f1419] to-[#0a0f1a] text-white p-6 pb-24">
+        <div className="min-h-screen bg-black text-white p-6 pb-24">
             
             <TechStatusBar showP2PSync={true} />
             
@@ -222,59 +222,59 @@ export default function CB51() {
                     <Radio className="w-6 h-6 text-cyan-400" />
                     <h1 className="text-2xl font-black text-cyan-400 font-mono">OPERATION CENTRE</h1>
                 </div>
-                <p className="text-gray-500 text-sm font-mono">Everything you need at a glance</p>
+                <p className="text-gray-600 text-sm font-mono">Everything you need at a glance</p>
             </div>
 
             {/* TIME SAVED STAT */}
             {user && totalTimeSaved > 0 && (
-                <div className="mb-6 bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-2 border-green-500 rounded-xl p-4 text-center">
-                    <p className="text-green-400 text-xs font-mono mb-1">TIME SAVED THIS WEEK</p>
+                <div className="mb-6 bg-black border-2 border-amber-500/50 rounded-xl p-4 text-center">
+                    <p className="text-amber-400 text-xs font-mono mb-1 tracking-widest font-bold">TIME SAVED THIS WEEK</p>
                     <p className="text-4xl font-black text-white font-mono">{hoursPerWeek}h</p>
                 </div>
             )}
 
             {/* URGENT - WHAT NEEDS ME TODAY */}
-            <Section id="urgent" title="WHAT NEEDS ME TODAY" icon={AlertCircle} badge={pendingOffers + awaitingBand + overdueInvoices + expiringDocs + urgentMessages} color="border-red-400/60">
+            <Section id="urgent" title="WHAT NEEDS ME TODAY" icon={AlertCircle} badge={pendingOffers + awaitingBand + overdueInvoices + expiringDocs + urgentMessages} color="border-amber-500/50">
                 {pendingOffers === 0 && awaitingBand === 0 && overdueInvoices === 0 && expiringDocs === 0 && urgentMessages === 0 ? (
-                    <p className="text-gray-500 font-mono text-sm">✅ All clear bro</p>
+                    <p className="text-gray-600 font-mono text-sm">✅ All clear bro</p>
                 ) : (
                     <div className="space-y-3">
                         {pendingOffers > 0 && (
                             <Link to={createPageUrl('ScottGigOffers')}>
-                                <div className="bg-amber-500/20 border border-amber-500 rounded-lg p-3 hover:bg-amber-500/30 transition-all">
+                                <div className="bg-black border-2 border-amber-500/50 rounded-lg p-3 hover:border-amber-500 transition-all">
                                     <p className="text-amber-400 font-bold font-mono">{pendingOffers} gig offers need review</p>
-                                    <p className="text-gray-400 text-xs font-mono mt-1">Tap to review →</p>
+                                    <p className="text-gray-600 text-xs font-mono mt-1">Tap to review →</p>
                                 </div>
                             </Link>
                         )}
                         {awaitingBand > 0 && (
                             <Link to={createPageUrl('ScottGigOffers')}>
-                                <div className="bg-cyan-500/20 border border-cyan-500 rounded-lg p-3 hover:bg-cyan-500/30 transition-all">
+                                <div className="bg-black border-2 border-cyan-500/50 rounded-lg p-3 hover:border-cyan-500 transition-all">
                                     <p className="text-cyan-400 font-bold font-mono">{awaitingBand} offers sent to band</p>
-                                    <p className="text-gray-400 text-xs font-mono mt-1">Waiting for votes →</p>
+                                    <p className="text-gray-600 text-xs font-mono mt-1">Waiting for votes →</p>
                                 </div>
                             </Link>
                         )}
                         {overdueInvoices > 0 && (
                             <Link to={createPageUrl('ScottInvoices')}>
-                                <div className="bg-red-500/20 border border-red-500 rounded-lg p-3 hover:bg-red-500/30 transition-all">
+                                <div className="bg-black border-2 border-red-500/50 rounded-lg p-3 hover:border-red-500 transition-all">
                                     <p className="text-red-400 font-bold font-mono">{overdueInvoices} overdue invoices</p>
-                                    <p className="text-gray-400 text-xs font-mono mt-1">Chase payment →</p>
+                                    <p className="text-gray-600 text-xs font-mono mt-1">Chase payment →</p>
                                 </div>
                             </Link>
                         )}
                         {expiringDocs > 0 && (
                             <Link to={createPageUrl('ScottLegalDocs')}>
-                                <div className="bg-orange-500/20 border border-orange-500 rounded-lg p-3 hover:bg-orange-500/30 transition-all">
+                                <div className="bg-black border-2 border-orange-500/50 rounded-lg p-3 hover:border-orange-500 transition-all">
                                     <p className="text-orange-400 font-bold font-mono">{expiringDocs} docs expiring soon</p>
-                                    <p className="text-gray-400 text-xs font-mono mt-1">Renew now →</p>
+                                    <p className="text-gray-600 text-xs font-mono mt-1">Renew now →</p>
                                 </div>
                             </Link>
                         )}
                         {urgentMessages > 0 && (
-                            <div className="bg-red-500/20 border border-red-500 rounded-lg p-3">
+                            <div className="bg-black border-2 border-red-500/50 rounded-lg p-3">
                                 <p className="text-red-400 font-bold font-mono">{urgentMessages} urgent messages need replies</p>
-                                <p className="text-gray-400 text-xs font-mono mt-1">Check message centre ↓</p>
+                                <p className="text-gray-600 text-xs font-mono mt-1">Check message centre ↓</p>
                             </div>
                         )}
                     </div>
@@ -282,16 +282,16 @@ export default function CB51() {
             </Section>
 
             {/* MESSAGE CENTRE */}
-            <Section id="messages" title="MESSAGE CENTRE" icon={MessageSquare} badge={pendingMessages} color="border-purple-400/60">
+            <Section id="messages" title="MESSAGE CENTRE" icon={MessageSquare} badge={pendingMessages} color="border-cyan-500/50">
                 <ScottMessageCentre />
             </Section>
 
             {/* ARTISTS */}
-            <Section id="artists" title="ARTISTS" icon={Music} badge={artists.length} color="border-cyan-400/60">
+            <Section id="artists" title="ARTISTS" icon={Music} badge={artists.length} color="border-cyan-500/50">
                 <div className="grid grid-cols-2 gap-3">
                     {artists.length === 0 ? (
                         <div className="col-span-2 text-center">
-                            <p className="text-gray-500 text-sm font-mono mb-4">No artists yet</p>
+                            <p className="text-gray-600 text-sm font-mono mb-4">No artists yet</p>
                             <Link to={createPageUrl('ScottAddArtist')}>
                                 <button className="bg-cyan-500 hover:bg-cyan-600 text-black font-black px-6 py-3 rounded-lg text-sm font-mono">
                                     ADD FIRST ARTIST
@@ -302,7 +302,7 @@ export default function CB51() {
                         <>
                             {artists.map((artist) => (
                                 <Link key={artist.id} to={createPageUrl(`ScottArtistHome?id=${artist.id}`)}>
-                                    <div className="bg-black/60 hover:bg-black/80 border border-gray-700 hover:border-cyan-500 rounded-lg p-3 transition-all flex items-center gap-3">
+                                    <div className="bg-black border-2 border-gray-900 hover:border-cyan-500/50 rounded-lg p-3 transition-all flex items-center gap-3">
                                         {artist.profile_pic_url ? (
                                             <img 
                                                 src={artist.profile_pic_url} 
@@ -316,13 +316,13 @@ export default function CB51() {
                                         )}
                                         <div className="flex-1 min-w-0">
                                             <p className="text-white font-bold font-mono text-sm truncate">{artist.name}</p>
-                                            <p className="text-gray-500 text-xs font-mono">{artist.genre || 'Artist'}</p>
+                                            <p className="text-gray-600 text-xs font-mono">{artist.genre || 'Artist'}</p>
                                         </div>
                                     </div>
                                 </Link>
                             ))}
                             <Link to={createPageUrl('ScottAddArtist')}>
-                                <div className="bg-black/60 hover:bg-black/80 border border-dashed border-gray-700 hover:border-cyan-500 rounded-lg p-3 h-[72px] flex items-center justify-center transition-all">
+                                <div className="bg-black border-2 border-dashed border-gray-900 hover:border-cyan-500/50 rounded-lg p-3 h-[72px] flex items-center justify-center transition-all">
                                     <Plus className="w-6 h-6 text-cyan-400" />
                                 </div>
                             </Link>
@@ -332,20 +332,20 @@ export default function CB51() {
             </Section>
 
             {/* GIG OFFERS */}
-            <Section id="gigs" title="GIG OFFERS" icon={Zap} badge={allOffers.length} color="border-purple-400/60">
+            <Section id="gigs" title="GIG OFFERS" icon={Zap} badge={allOffers.length} color="border-amber-500/50">
                 <div className="space-y-2">
                     <div className="flex gap-2 mb-3">
-                        <div className="flex-1 bg-amber-500/20 border border-amber-500 rounded-lg p-3 text-center">
+                        <div className="flex-1 bg-black border-2 border-amber-500/50 rounded-lg p-3 text-center">
                             <p className="text-2xl font-black text-white font-mono">{pendingOffers}</p>
-                            <p className="text-xs text-amber-400 font-mono">PENDING</p>
+                            <p className="text-xs text-amber-400 font-mono tracking-widest">PENDING</p>
                         </div>
-                        <div className="flex-1 bg-green-500/20 border border-green-500 rounded-lg p-3 text-center">
+                        <div className="flex-1 bg-black border-2 border-green-500/50 rounded-lg p-3 text-center">
                             <p className="text-2xl font-black text-white font-mono">{confirmedGigs}</p>
-                            <p className="text-xs text-green-400 font-mono">CONFIRMED</p>
+                            <p className="text-xs text-green-400 font-mono tracking-widest">CONFIRMED</p>
                         </div>
                     </div>
                     <Link to={createPageUrl('ScottGigOffers')}>
-                        <button className="w-full bg-purple-500 hover:bg-purple-600 text-white font-black py-3 rounded-lg font-mono">
+                        <button className="w-full bg-cyan-500 hover:bg-cyan-400 text-black font-black py-3 rounded-lg font-mono transition-all">
                             VIEW ALL OFFERS →
                         </button>
                     </Link>
@@ -353,20 +353,20 @@ export default function CB51() {
             </Section>
 
             {/* UPCOMING GIGS */}
-            <Section id="calendar" title="UPCOMING GIGS" icon={Calendar} badge={upcomingGigs.length} color="border-green-400/60">
+            <Section id="calendar" title="UPCOMING GIGS" icon={Calendar} badge={upcomingGigs.length} color="border-green-500/50">
                 {upcomingGigs.length === 0 ? (
-                    <p className="text-gray-500 font-mono text-sm">No upcoming gigs</p>
+                    <p className="text-gray-600 font-mono text-sm">No upcoming gigs</p>
                 ) : (
                     <div className="space-y-2">
                         {upcomingGigs.map(gig => (
-                            <div key={gig.id} className="bg-green-500/20 border border-green-500 rounded-lg p-3">
+                            <div key={gig.id} className="bg-black border-2 border-green-500/50 rounded-lg p-3">
                                 <p className="text-white font-bold font-mono">{gig.title}</p>
                                 <p className="text-green-400 text-sm font-mono">{format(new Date(gig.date), 'd MMM yyyy')}</p>
-                                {gig.location && <p className="text-gray-400 text-xs font-mono mt-1">{gig.location}</p>}
+                                {gig.location && <p className="text-gray-600 text-xs font-mono mt-1">{gig.location}</p>}
                             </div>
                         ))}
                         <Link to={createPageUrl('ScottCalendarView')}>
-                            <button className="w-full bg-green-500 hover:bg-green-600 text-black font-black py-2 rounded-lg font-mono text-sm mt-2">
+                            <button className="w-full bg-cyan-500 hover:bg-cyan-400 text-black font-black py-2 rounded-lg font-mono text-sm mt-2 transition-all">
                                 VIEW CALENDAR →
                             </button>
                         </Link>
@@ -375,19 +375,19 @@ export default function CB51() {
             </Section>
 
             {/* LEGAL */}
-            <Section id="legal" title="LEGAL & DOCS" icon={FileText} badge={expiringDocs} color="border-orange-400/60">
+            <Section id="legal" title="LEGAL & DOCS" icon={FileText} badge={expiringDocs} color="border-amber-500/50">
                 <div className="space-y-2">
-                    <div className="bg-black/60 rounded-lg p-3">
-                        <p className="text-gray-400 text-xs font-mono">TOTAL DOCUMENTS</p>
+                    <div className="bg-black border-2 border-gray-900 rounded-lg p-3">
+                        <p className="text-amber-400 text-xs font-mono tracking-widest font-bold">TOTAL DOCUMENTS</p>
                         <p className="text-2xl font-black text-white font-mono">{legalDocs.length}</p>
                     </div>
                     {expiringDocs > 0 && (
-                        <div className="bg-orange-500/20 border border-orange-500 rounded-lg p-3">
+                        <div className="bg-black border-2 border-orange-500/50 rounded-lg p-3">
                             <p className="text-orange-400 font-bold font-mono">{expiringDocs} expiring within 30 days</p>
                         </div>
                     )}
                     <Link to={createPageUrl('ScottLegalDocs')}>
-                        <button className="w-full bg-orange-500 hover:bg-orange-600 text-black font-black py-3 rounded-lg font-mono">
+                        <button className="w-full bg-cyan-500 hover:bg-cyan-400 text-black font-black py-3 rounded-lg font-mono transition-all">
                             MANAGE DOCS →
                         </button>
                     </Link>
@@ -395,19 +395,19 @@ export default function CB51() {
             </Section>
 
             {/* FINANCE */}
-            <Section id="finance" title="FINANCE" icon={DollarSign} badge={overdueInvoices} color="border-yellow-400/60">
+            <Section id="finance" title="FINANCE" icon={DollarSign} badge={overdueInvoices} color="border-amber-500/50">
                 <div className="space-y-2">
-                    <div className="bg-black/60 rounded-lg p-3">
-                        <p className="text-gray-400 text-xs font-mono">TOTAL INVOICES</p>
+                    <div className="bg-black border-2 border-gray-900 rounded-lg p-3">
+                        <p className="text-amber-400 text-xs font-mono tracking-widest font-bold">TOTAL INVOICES</p>
                         <p className="text-2xl font-black text-white font-mono">{invoices.length}</p>
                     </div>
                     {overdueInvoices > 0 && (
-                        <div className="bg-red-500/20 border border-red-500 rounded-lg p-3">
+                        <div className="bg-black border-2 border-red-500/50 rounded-lg p-3">
                             <p className="text-red-400 font-bold font-mono">{overdueInvoices} OVERDUE - chase now!</p>
                         </div>
                     )}
                     <Link to={createPageUrl('ScottInvoices')}>
-                        <button className="w-full bg-yellow-500 hover:bg-yellow-600 text-black font-black py-3 rounded-lg font-mono">
+                        <button className="w-full bg-cyan-500 hover:bg-cyan-400 text-black font-black py-3 rounded-lg font-mono transition-all">
                             MANAGE INVOICES →
                         </button>
                     </Link>
@@ -416,17 +416,17 @@ export default function CB51() {
 
             {/* ARCHIVED ARTISTS */}
             {archivedArtists.length > 0 && (
-                <div className="mt-6 bg-gray-900/40 border-2 border-gray-800 rounded-xl p-4">
-                    <h3 className="text-gray-600 font-black text-sm mb-3 font-mono">ARCHIVED ARTISTS</h3>
+                <div className="mt-6 bg-black border-2 border-gray-900 rounded-xl p-4">
+                    <h3 className="text-gray-700 font-black text-sm mb-3 font-mono tracking-widest">ARCHIVED ARTISTS</h3>
                     <div className="space-y-2">
                         {archivedArtists.map((artist) => (
                             <div 
                                 key={artist.id}
                                 onClick={() => handleRestoreArtist(artist)}
-                                className="bg-gray-900/20 hover:bg-gray-900/40 border border-gray-800 rounded-lg p-3 cursor-pointer transition-all"
+                                className="bg-black border border-gray-900 hover:border-gray-700 rounded-lg p-3 cursor-pointer transition-all"
                             >
-                                <p className="text-gray-500 font-bold font-mono text-sm">{artist.name}</p>
-                                <p className="text-gray-700 text-xs font-mono">Tap to restore</p>
+                                <p className="text-gray-600 font-bold font-mono text-sm">{artist.name}</p>
+                                <p className="text-gray-800 text-xs font-mono">Tap to restore</p>
                             </div>
                         ))}
                     </div>
@@ -435,7 +435,7 @@ export default function CB51() {
 
             {/* FOOTER */}
             <div className="mt-12 text-center">
-                <p className="text-gray-700 text-xs font-mono">CB51</p>
+                <p className="text-gray-800 text-xs font-mono">CB51</p>
             </div>
             </div>
             );
