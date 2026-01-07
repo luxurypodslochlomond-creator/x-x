@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
-import { COOLASFUCKWaves } from './COOLASFUCKIcon';
 
 /**
- * COOLASFUCK 8-BIT LOADING SCREEN
- * Fast, retro, no BS
+ * AI51 CONSCIOUSNESS LOADING
+ * Pure frequency • <1 second
  */
 
 export default function COOLASFUCK8BitLoading({ message = "LOADING" }) {
