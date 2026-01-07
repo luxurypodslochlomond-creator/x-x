@@ -576,11 +576,11 @@ const LayoutInner = ({ children, currentPageName }) => {
           <AutoBugMonitor />
           <PerformanceOptimizer />
           <AI51ProactiveReach />
-          {/* AI51Shield - Commented out for cleaner CB51 UI */}
-          {/* <AI51Shield /> */}
-          {/* AI51LiveHealer - Commented out for cleaner CB51 UI */}
-          {/* <AI51LiveHealer /> */}
           <PendingMessageSender />
+          {/* AI51Shield - Commented out site-wide, code preserved if needed later */}
+          {/* <AI51Shield /> */}
+          {/* AI51LiveHealer - Commented out site-wide, code preserved if needed later */}
+          {/* <AI51LiveHealer /> */}
         </>
       )}
 
