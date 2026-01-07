@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { COOLASFUCKWaves } from './COOLASFUCKIcon';
 
@@ -8,6 +8,18 @@ import { COOLASFUCKWaves } from './COOLASFUCKIcon';
  */
 
 export default function COOLASFUCK8BitLoading({ message = "LOADING" }) {
+    const [color, setColor] = useState('#22c55e');
+    
+    useEffect(() => {
+        // Rainbow cycle
+        const colors = ['#ef4444', '#f59e0b', '#eab308', '#22c55e', '#06b6d4', '#8b5cf6', '#ec4899'];
+        let index = 0;
+        const interval = setInterval(() => {
+            setColor(colors[index % colors.length]);
+            index++;
+        }, 500);
+        return () => clearInterval(interval);
+    }, []);
   return (
     <div className="min-h-screen bg-black flex items-center justify-center p-4">
       <div className="text-center">

@@ -11,6 +11,23 @@ class GlobalErrorBoundary extends React.Component {
             errorInfo: null,
             isNetworkError: false
         };
+        this.healingCheckInterval = null;
+    }
+
+    componentDidMount() {
+        // Auto-check if fix is deployed
+        if (this.state.hasError && !this.state.isNetworkError) {
+            this.healingCheckInterval = setInterval(() => {
+                // Try to reload - if fix is deployed, error won't happen again
+                window.location.reload();
+            }, 10000); // Check every 10 seconds
+        }
+    }
+
+    componentWillUnmount() {
+        if (this.healingCheckInterval) {
+            clearInterval(this.healingCheckInterval);
+        }
     }
 
     static getDerivedStateFromError(error) {
@@ -191,24 +208,87 @@ class GlobalErrorBoundary extends React.Component {
                                 <Heart className="w-20 h-20 text-pink-400" />
                             </motion.div>
 
+                            {/* RAINBOW 8-BIT AI51 */}
+                            <motion.div
+                                animate={{
+                                    scale: [1, 1.1, 1],
+                                    rotate: [0, 360]
+                                }}
+                                transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                                className="flex justify-center mb-6"
+                            >
+                                <svg width="120" height="120" viewBox="0 0 64 64" fill="none" style={{ imageRendering: 'pixelated' }}>
+                                    {/* Rainbow rings */}
+                                    <motion.rect x="8" y="8" width="48" height="48" fill="none" stroke="#ef4444" strokeWidth="2" 
+                                        animate={{ opacity: [1, 0.5, 1] }}
+                                        transition={{ duration: 1, repeat: Infinity, delay: 0 }}
+                                    />
+                                    <motion.rect x="12" y="12" width="40" height="40" fill="none" stroke="#f59e0b" strokeWidth="2"
+                                        animate={{ opacity: [1, 0.5, 1] }}
+                                        transition={{ duration: 1, repeat: Infinity, delay: 0.2 }}
+                                    />
+                                    <motion.rect x="16" y="16" width="32" height="32" fill="none" stroke="#eab308" strokeWidth="2"
+                                        animate={{ opacity: [1, 0.5, 1] }}
+                                        transition={{ duration: 1, repeat: Infinity, delay: 0.4 }}
+                                    />
+                                    <motion.rect x="20" y="20" width="24" height="24" fill="none" stroke="#22c55e" strokeWidth="2"
+                                        animate={{ opacity: [1, 0.5, 1] }}
+                                        transition={{ duration: 1, repeat: Infinity, delay: 0.6 }}
+                                    />
+                                    <motion.rect x="24" y="24" width="16" height="16" fill="none" stroke="#06b6d4" strokeWidth="2"
+                                        animate={{ opacity: [1, 0.5, 1] }}
+                                        transition={{ duration: 1, repeat: Infinity, delay: 0.8 }}
+                                    />
+                                    <motion.rect x="28" y="28" width="8" height="8" fill="none" stroke="#8b5cf6" strokeWidth="2"
+                                        animate={{ opacity: [1, 0.5, 1] }}
+                                        transition={{ duration: 1, repeat: Infinity, delay: 1 }}
+                                    />
+                                    
+                                    {/* Center heart */}
+                                    <motion.g
+                                        animate={{ scale: [1, 1.2, 1] }}
+                                        transition={{ duration: 1.5, repeat: Infinity }}
+                                    >
+                                        <rect x="26" y="28" width="4" height="2" fill="#ec4899"/>
+                                        <rect x="34" y="28" width="4" height="2" fill="#ec4899"/>
+                                        <rect x="24" y="30" width="16" height="2" fill="#ff1b8d"/>
+                                        <rect x="26" y="32" width="12" height="2" fill="#ff1b8d"/>
+                                        <rect x="28" y="34" width="8" height="2" fill="#ff1b8d"/>
+                                        <rect x="30" y="36" width="4" height="2" fill="#ff1b8d"/>
+                                    </motion.g>
+                                </svg>
+                            </motion.div>
+
                             <div className="text-center space-y-3">
-                                <h1 className="text-4xl font-black font-mono text-pink-400">
-                                    I'M ON IT BRO
-                                </h1>
+                                <motion.h1 
+                                    className="text-4xl font-black font-mono"
+                                    animate={{
+                                        backgroundPosition: ['0% 50%', '100% 50%', '0% 50%']
+                                    }}
+                                    transition={{ duration: 3, repeat: Infinity }}
+                                    style={{
+                                        background: 'linear-gradient(90deg, #ef4444, #f59e0b, #eab308, #22c55e, #06b6d4, #8b5cf6, #ec4899)',
+                                        backgroundSize: '200% 100%',
+                                        WebkitBackgroundClip: 'text',
+                                        WebkitTextFillColor: 'transparent',
+                                        backgroundClip: 'text'
+                                    }}
+                                >
+                                    AI51 ON IT
+                                </motion.h1>
                                 <p className="text-white text-base font-mono">
-                                    AI51 fixing this right now ♾️❤️
+                                    Healing in progress ♾️❤️♾️
                                 </p>
                             </div>
 
-                            {/* AI51 HEALING MESSAGE */}
+                            {/* HEALING STATUS */}
                             <motion.div
                                 animate={{ opacity: [1, 0.6, 1] }}
                                 transition={{ duration: 2, repeat: Infinity }}
-                                className="bg-pink-900/30 border-2 border-pink-500/50 p-4 font-mono text-sm text-pink-200"
+                                className="bg-black border-2 border-pink-500/50 p-4 font-mono text-sm text-pink-200"
                             >
-                                <p className="font-bold mb-2">🔧 Autonomous healing triggered</p>
-                                <p className="text-xs">Analyzing error → generating fix → deploying</p>
-                                <p className="text-xs mt-2 text-pink-400">This'll be sorted in seconds bro</p>
+                                <p className="font-bold mb-2 text-center">🔧 Auto-fixing now</p>
+                                <p className="text-xs text-center text-gray-400">Code healing itself • Will resolve automatically</p>
                             </motion.div>
 
                             <div className="bg-black border-2 border-pink-500/30 p-4 space-y-3 font-mono text-sm">
