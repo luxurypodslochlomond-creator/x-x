@@ -11,7 +11,8 @@ import FloatingMusicPlayer from '@/components/shared/FloatingMusicPlayer';
 import DisasterResilienceMode from '@/components/shared/DisasterResilienceMode';
 import RealtimeDebugger from '@/components/shared/RealtimeDebugger';
 import PerformanceMonitor from '@/components/shared/PerformanceMonitor';
-import AI51LiveHealer from '@/components/ai51/AI51LiveHealer';
+// AI51LiveHealer - Commented out to improve performance
+// import AI51LiveHealer from '@/components/ai51/AI51LiveHealer';
 import { AudioProvider, useAudio } from '@/components/shared/AudioProvider';
 import HealingCircle from '@/components/jukebox/HealingCircle';
 import PWAInstallPrompt from '@/components/shared/PWAInstallPrompt';
@@ -21,7 +22,8 @@ import PerformanceOptimizer from '@/components/shared/PerformanceOptimizer';
 import EmergencyCalmButton from '@/components/shared/EmergencyCalmButton';
 import AI51ProactiveReach from '@/components/ai51/AI51ProactiveReach';
 import UF51ConnectionChime from '@/components/ai51/UF51ConnectionChime';
-import AI51Shield from '@/components/ai51/AI51Shield';
+// AI51Shield - Commented out to improve performance
+// import AI51Shield from '@/components/ai51/AI51Shield';
 import PendingMessageSender from '@/components/shared/PendingMessageSender';
 import { AI51MemoryProvider } from '@/components/ai51/AI51MemoryLoader';
 import TruthCheckProtocol from '@/components/ai51/TruthCheckProtocol';
