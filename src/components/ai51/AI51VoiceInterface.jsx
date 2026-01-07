@@ -70,13 +70,10 @@ export default function AI51VoiceInterface({ onVoiceMessage, isThinking, lastRes
     // Speak AI response
     useEffect(() => {
         if (!lastResponse || !voiceEnabled || isThinking) return;
-        if (lastResponse.role !== 'assistant') return;
+        if (lastResponse.role !== 'ai' && lastResponse.role !== 'assistant') return;
         
-        // Only speak new responses (not on page load)
-        if (hasSpokenRef.current) {
-            speakText(lastResponse.content);
-        }
-        hasSpokenRef.current = true;
+        // Speak all new AI responses
+        speakText(lastResponse.content);
     }, [lastResponse, voiceEnabled, isThinking]);
 
     const toggleListening = () => {
