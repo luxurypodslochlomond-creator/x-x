@@ -172,10 +172,10 @@ export default function CB51() {
     const Section = ({ id, title, icon: Icon, badge, color, children }) => {
         const isExpanded = expandedSections[id];
         return (
-            <div className="mb-3">
+            <div className="mb-0">
                 <button
                     onClick={() => toggleSection(id)}
-                    className={`w-full bg-gray-900/60 border-2 ${color} rounded-xl p-4 flex items-center justify-between hover:bg-gray-900/80 transition-all`}
+                    className={`w-full bg-gray-900/40 border-2 ${color} rounded-xl p-4 flex items-center justify-between hover:bg-gray-900/60 transition-all backdrop-blur-sm`}
                 >
                     <div className="flex items-center gap-3">
                         <Icon className={`w-6 h-6 ${color.replace('border-', 'text-')}`} />
@@ -198,10 +198,10 @@ export default function CB51() {
                             initial={{ height: 0, opacity: 0 }}
                             animate={{ height: 'auto', opacity: 1 }}
                             exit={{ height: 0, opacity: 0 }}
-                            transition={{ duration: 0.2 }}
+                            transition={{ duration: 0.15 }}
                             className="overflow-hidden"
                         >
-                            <div className="p-4 bg-gray-900/40 border-2 border-gray-800 rounded-b-xl -mt-2">
+                            <div className="p-4 bg-gray-900/20 border-x-2 border-b-2 border-gray-800/60 rounded-b-xl -mt-2 backdrop-blur-sm">
                                 {children}
                             </div>
                         </motion.div>
@@ -233,8 +233,11 @@ export default function CB51() {
                 </div>
             )}
 
+            {/* 2-COLUMN GRID FOR LARGER SCREENS */}
+            <div className="grid lg:grid-cols-2 gap-3">
+
             {/* URGENT - WHAT NEEDS ME TODAY */}
-            <Section id="urgent" title="WHAT NEEDS ME TODAY" icon={AlertCircle} badge={pendingOffers + awaitingBand + overdueInvoices + expiringDocs + urgentMessages} color="border-red-500">
+            <Section id="urgent" title="WHAT NEEDS ME TODAY" icon={AlertCircle} badge={pendingOffers + awaitingBand + overdueInvoices + expiringDocs + urgentMessages} color="border-red-400/60">
                 {pendingOffers === 0 && awaitingBand === 0 && overdueInvoices === 0 && expiringDocs === 0 && urgentMessages === 0 ? (
                     <p className="text-gray-500 font-mono text-sm">✅ All clear bro</p>
                 ) : (
@@ -282,12 +285,17 @@ export default function CB51() {
             </Section>
 
             {/* MESSAGE CENTRE */}
-            <Section id="messages" title="MESSAGE CENTRE" icon={MessageSquare} badge={pendingMessages} color="border-purple-500">
+            <Section id="messages" title="MESSAGE CENTRE" icon={MessageSquare} badge={pendingMessages} color="border-purple-400/60">
                 <ScottMessageCentre />
             </Section>
 
+            </div>
+
+            {/* 2-COLUMN GRID FOR ARTISTS + GIGS */}
+            <div className="grid lg:grid-cols-2 gap-3">
+
             {/* ARTISTS */}
-            <Section id="artists" title="ARTISTS" icon={Music} badge={artists.length} color="border-cyan-500">
+            <Section id="artists" title="ARTISTS" icon={Music} badge={artists.length} color="border-cyan-400/60">
                 <div className="grid grid-cols-2 gap-3">
                     {artists.length === 0 ? (
                         <div className="col-span-2 text-center">
@@ -332,7 +340,7 @@ export default function CB51() {
             </Section>
 
             {/* GIG OFFERS */}
-            <Section id="gigs" title="GIG OFFERS" icon={Zap} badge={allOffers.length} color="border-purple-500">
+            <Section id="gigs" title="GIG OFFERS" icon={Zap} badge={allOffers.length} color="border-purple-400/60">
                 <div className="space-y-2">
                     <div className="flex gap-2 mb-3">
                         <div className="flex-1 bg-amber-500/20 border border-amber-500 rounded-lg p-3 text-center">
@@ -352,8 +360,13 @@ export default function CB51() {
                 </div>
             </Section>
 
+            </div>
+
+            {/* 2-COLUMN GRID FOR CALENDAR + LEGAL */}
+            <div className="grid lg:grid-cols-2 gap-3">
+
             {/* UPCOMING GIGS */}
-            <Section id="calendar" title="UPCOMING GIGS" icon={Calendar} badge={upcomingGigs.length} color="border-green-500">
+            <Section id="calendar" title="UPCOMING GIGS" icon={Calendar} badge={upcomingGigs.length} color="border-green-400/60">
                 {upcomingGigs.length === 0 ? (
                     <p className="text-gray-500 font-mono text-sm">No upcoming gigs</p>
                 ) : (
@@ -375,7 +388,7 @@ export default function CB51() {
             </Section>
 
             {/* LEGAL */}
-            <Section id="legal" title="LEGAL & DOCS" icon={FileText} badge={expiringDocs} color="border-orange-500">
+            <Section id="legal" title="LEGAL & DOCS" icon={FileText} badge={expiringDocs} color="border-orange-400/60">
                 <div className="space-y-2">
                     <div className="bg-black/60 rounded-lg p-3">
                         <p className="text-gray-400 text-xs font-mono">TOTAL DOCUMENTS</p>
@@ -394,8 +407,10 @@ export default function CB51() {
                 </div>
             </Section>
 
-            {/* FINANCE */}
-            <Section id="finance" title="FINANCE" icon={DollarSign} badge={overdueInvoices} color="border-yellow-500">
+            </div>
+
+            {/* FINANCE - FULL WIDTH */}
+            <Section id="finance" title="FINANCE" icon={DollarSign} badge={overdueInvoices} color="border-yellow-400/60">
                 <div className="space-y-2">
                     <div className="bg-black/60 rounded-lg p-3">
                         <p className="text-gray-400 text-xs font-mono">TOTAL INVOICES</p>
