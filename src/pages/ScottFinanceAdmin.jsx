@@ -64,32 +64,29 @@ export default function ScottFinanceAdmin() {
             </button>
 
             <div className="mb-8">
-                <h1 className="text-4xl font-black text-amber-400 font-mono mb-2">FINANCE</h1>
+                <h1 className="text-3xl font-black text-cyan-400 font-mono mb-2">FINANCE</h1>
                 <p className="text-gray-600 text-sm font-mono">Money · Legal · Travel</p>
             </div>
 
-            <div className="grid grid-cols-1 gap-4 max-w-2xl mx-auto">
+            <div className="grid grid-cols-1 gap-4">
                 {sections.map((section) => {
                     const Icon = section.icon;
-                    const colors = colorMap[section.color];
                     
                     return (
                         <Link key={section.title} to={section.link}>
                             <motion.div
                                 whileHover={{ scale: 0.98 }}
                                 whileTap={{ scale: 0.96 }}
-                                className={`bg-black border-4 ${colors.border} rounded-xl p-6 transition-all`}
+                                className="bg-black border-4 border-cyan-500 rounded-xl p-6 transition-all h-32 flex items-center gap-4"
                             >
-                                <div className="flex items-center gap-4">
-                                    <Icon className={`w-10 h-10 ${colors.text}`} />
-                                    <div className="flex-1">
-                                        <p className={`${colors.text} font-black text-xl font-mono mb-1`}>
-                                            {section.title}
-                                        </p>
-                                        <p className="text-gray-500 text-sm font-mono">
-                                            {section.subtitle}
-                                        </p>
-                                    </div>
+                                <Icon className="w-10 h-10 text-cyan-400" />
+                                <div className="flex-1">
+                                    <p className="text-white font-black text-xl font-mono mb-1">
+                                        {section.title}
+                                    </p>
+                                    <p className="text-gray-600 text-xs font-mono">
+                                        {section.subtitle}
+                                    </p>
                                 </div>
                             </motion.div>
                         </Link>
