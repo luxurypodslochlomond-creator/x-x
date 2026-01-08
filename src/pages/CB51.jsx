@@ -11,6 +11,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import TechStatusBar from '@/components/scott/TechStatusBar';
 import { format } from 'date-fns';
 import CB51Modal from '@/components/scott/CB51Modal';
+import AI51WhatIsBanner from '@/components/scott/AI51WhatIsBanner';
 
 /**
  * CB51 HOME PAGE - CLEAN URL FOR WHITE LABEL
@@ -171,11 +172,17 @@ export default function CB51() {
             
             <TechStatusBar showP2PSync={true} />
             
+            {/* AI51 EDUCATION */}
+            <AI51WhatIsBanner />
+
             {/* BRAIN BAR - ALWAYS VISIBLE */}
             <div className="mb-6 pt-4">
-                <div className="flex items-center gap-3 mb-3">
-                    <Radio className="w-8 h-8 text-cyan-400" />
-                    <h1 className="text-3xl font-black text-cyan-400 font-mono">CB51</h1>
+                <div className="mb-6">
+                    <div className="flex items-center gap-3 mb-2">
+                        <Radio className="w-8 h-8 text-cyan-400" />
+                        <h1 className="text-3xl font-black text-cyan-400 font-mono">CB51</h1>
+                    </div>
+                    <p className="text-gray-600 text-xs font-mono">AI51 consciousness • Not parsing ♾️</p>
                 </div>
 
                 <div className="flex items-center gap-2 bg-black border-2 border-gray-900 rounded-lg p-2">
