@@ -187,24 +187,25 @@ export default function CB51() {
                     <p className="text-gray-600 text-xs font-mono">AI51 consciousness • Not parsing ♾️</p>
                 </div>
 
-                <div className="flex items-center gap-2 bg-black border-2 border-gray-900 rounded-lg p-2">
+                <div className="flex items-center gap-2 bg-gradient-to-r from-gray-900 to-black border border-cyan-500/20 rounded-xl p-3">
                     <Link to={createPageUrl('ScottGigOffers')} className="flex-1">
-                        <div className="text-center hover:bg-green-500/10 rounded p-1 transition-all">
-                            <p className="text-green-400 text-[10px] font-mono">PIPELINE</p>
-                            <p className="text-white text-sm font-black font-mono">
+                        <div className="text-center hover:bg-green-500/10 rounded-lg p-2 transition-all">
+                            <p className="text-green-400/60 text-[9px] font-mono tracking-wider">PIPELINE</p>
+                            <p className="text-white text-base font-black font-mono mt-1">
                                 £{allOffers.filter(o => o.status === 'pending_manager_review' || o.status === 'sent_to_band').reduce((sum, o) => sum + (o.fee || 0), 0).toLocaleString()}
                             </p>
                         </div>
                     </Link>
-                    <div className="w-px h-8 bg-gray-900"></div>
+                    <div className="w-px h-10 bg-gradient-to-b from-transparent via-cyan-500/30 to-transparent"></div>
                     <button 
                         onClick={() => {
                             setModalContent({
                                 title: 'TIME SAVED',
                                 body: (
-                                    <div className="space-y-3">
-                                        <p className="text-white font-black font-mono text-2xl">{hoursPerWeek} hours this month</p>
-                                        <div className="space-y-2 text-sm font-mono text-gray-400">
+                                    <div className="space-y-4">
+                                        <p className="text-white font-black font-mono text-3xl">{hoursPerWeek} hours</p>
+                                        <p className="text-gray-400 text-sm">this month</p>
+                                        <div className="space-y-2 text-sm font-mono text-gray-400 bg-black/50 rounded-lg p-3">
                                             <p>• Email parsing: ~2h per offer</p>
                                             <p>• Band coordination: ~30m per gig</p>
                                             <p>• Draft responses: ~15m each</p>
@@ -217,12 +218,12 @@ export default function CB51() {
                         }}
                         className="flex-1"
                     >
-                        <div className="text-center hover:bg-cyan-500/10 rounded p-1 transition-all">
-                            <p className="text-cyan-400 text-[10px] font-mono">SAVED</p>
-                            <p className="text-white text-sm font-black font-mono">{hoursPerWeek}h</p>
+                        <div className="text-center hover:bg-cyan-500/10 rounded-lg p-2 transition-all">
+                            <p className="text-cyan-400/60 text-[9px] font-mono tracking-wider">SAVED</p>
+                            <p className="text-white text-base font-black font-mono mt-1">{hoursPerWeek}h</p>
                         </div>
                     </button>
-                    <div className="w-px h-8 bg-gray-900"></div>
+                    <div className="w-px h-10 bg-gradient-to-b from-transparent via-cyan-500/30 to-transparent"></div>
                     <button
                         onClick={() => {
                             const items = [];
@@ -234,22 +235,28 @@ export default function CB51() {
                             setModalContent({
                                 title: 'TODAY',
                                 body: items.length > 0 ? (
-                                    <div className="space-y-2 font-mono text-sm">
+                                    <div className="space-y-3 font-mono text-sm">
                                         {items.map((item, i) => (
-                                            <p key={i} className="text-amber-400">• {item}</p>
+                                            <div key={i} className="flex items-center gap-2 bg-black/50 rounded-lg p-3">
+                                                <div className="w-2 h-2 rounded-full bg-amber-400"></div>
+                                                <p className="text-amber-400">{item}</p>
+                                            </div>
                                         ))}
                                     </div>
                                 ) : (
-                                    <p className="text-green-400 font-bold font-mono text-lg">All clear bro ✓</p>
+                                    <div className="text-center py-6">
+                                        <p className="text-green-400 font-bold font-mono text-2xl mb-2">All clear bro ✓</p>
+                                        <p className="text-gray-400 text-sm">Nothing needs attention right now</p>
+                                    </div>
                                 )
                             });
                             setModalOpen(true);
                         }}
                         className="flex-1"
                     >
-                        <div className="text-center hover:bg-amber-500/10 rounded p-1 transition-all">
-                            <p className="text-amber-400 text-[10px] font-mono">TODAY</p>
-                            <p className="text-white text-sm font-black font-mono">
+                        <div className="text-center hover:bg-amber-500/10 rounded-lg p-2 transition-all">
+                            <p className="text-amber-400/60 text-[9px] font-mono tracking-wider">TODAY</p>
+                            <p className="text-white text-base font-black font-mono mt-1">
                                 {pendingOffers + awaitingBand + overdueInvoices + urgentMessages}
                             </p>
                         </div>
@@ -310,30 +317,44 @@ export default function CB51() {
                     <>
                         {artists.map((artist) => (
                             <Link key={artist.id} to={createPageUrl(`ScottArtistHome?id=${artist.id}`)}>
-                                <div className="bg-black border-4 border-cyan-500 rounded-xl p-6 hover:bg-cyan-500/5 transition-all flex items-center gap-4">
-                                    {artist.profile_pic_url ? (
-                                        <img 
-                                            src={artist.profile_pic_url} 
-                                            alt={artist.name}
-                                            className="w-16 h-16 rounded-xl object-cover"
-                                        />
-                                    ) : (
-                                        <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-cyan-500 to-purple-500 text-white font-black text-2xl flex items-center justify-center">
-                                            {artist.name.charAt(0)}
+                                <motion.div
+                                    whileHover={{ scale: 0.98, y: -2 }}
+                                    whileTap={{ scale: 0.96 }}
+                                    className="relative bg-gradient-to-br from-gray-900 to-black border-2 border-cyan-500/30 rounded-2xl p-5 hover:border-cyan-500 transition-all overflow-hidden group"
+                                    style={{ boxShadow: '0 4px 20px rgba(6, 182, 212, 0.1)' }}
+                                >
+                                    {/* Gradient overlay on hover */}
+                                    <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+
+                                    <div className="relative flex items-center gap-4">
+                                        {artist.profile_pic_url ? (
+                                            <img 
+                                                src={artist.profile_pic_url} 
+                                                alt={artist.name}
+                                                className="w-14 h-14 rounded-xl object-cover ring-2 ring-cyan-500/50"
+                                            />
+                                        ) : (
+                                            <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-cyan-500 via-purple-500 to-pink-500 text-white font-black text-xl flex items-center justify-center">
+                                                {artist.name.charAt(0)}
+                                            </div>
+                                        )}
+                                        <div className="flex-1">
+                                            <p className="text-white font-black text-lg font-mono">{artist.name}</p>
+                                            {artist.genre && <p className="text-cyan-400/60 text-xs font-mono mt-0.5">{artist.genre}</p>}
                                         </div>
-                                    )}
-                                    <div className="flex-1">
-                                        <p className="text-white font-black text-xl font-mono">{artist.name}</p>
-                                        {artist.genre && <p className="text-gray-500 text-sm font-mono">{artist.genre}</p>}
                                     </div>
-                                </div>
+                                </motion.div>
                             </Link>
                         ))}
                         <Link to={createPageUrl('ScottAddArtist')}>
-                            <div className="bg-black border-4 border-dashed border-gray-900 hover:border-cyan-500/50 rounded-xl p-6 flex items-center justify-center gap-3 transition-all">
-                                <Plus className="w-8 h-8 text-cyan-400" />
-                                <span className="text-cyan-400 font-black font-mono text-lg">ADD ARTIST</span>
-                            </div>
+                            <motion.div
+                                whileHover={{ scale: 0.98 }}
+                                whileTap={{ scale: 0.96 }}
+                                className="bg-gradient-to-br from-gray-900 to-black border-2 border-dashed border-gray-800 hover:border-cyan-500/50 rounded-2xl p-6 flex items-center justify-center gap-3 transition-all"
+                            >
+                                <Plus className="w-7 h-7 text-cyan-400" />
+                                <span className="text-cyan-400 font-black font-mono">ADD ARTIST</span>
+                            </motion.div>
                         </Link>
                     </>
                 )}
@@ -342,18 +363,28 @@ export default function CB51() {
             {/* QUICK ACCESS */}
             <div className="mt-8 grid grid-cols-2 gap-3">
                 <Link to={createPageUrl('ScottGigOffers')}>
-                    <div className="bg-black border-4 border-amber-500 hover:bg-amber-500/5 rounded-xl p-4 text-center transition-all">
-                        <Zap className="w-8 h-8 text-amber-400 mx-auto mb-2" />
-                        <p className="text-amber-400 font-black font-mono text-sm">GIG OFFERS</p>
-                        {allOffers.length > 0 && <p className="text-white text-2xl font-black font-mono mt-1">{allOffers.length}</p>}
-                    </div>
+                    <motion.div
+                        whileHover={{ scale: 0.97 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="relative bg-gradient-to-br from-amber-500/20 to-amber-600/10 border-2 border-amber-500/30 hover:border-amber-500 rounded-2xl p-5 text-center transition-all overflow-hidden group"
+                    >
+                        <div className="absolute inset-0 bg-gradient-to-t from-amber-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        <Zap className="w-9 h-9 text-amber-400 mx-auto mb-2 relative z-10" />
+                        <p className="text-amber-400 font-black font-mono text-sm relative z-10">GIG OFFERS</p>
+                        {allOffers.length > 0 && <p className="text-white text-2xl font-black font-mono mt-1 relative z-10">{allOffers.length}</p>}
+                    </motion.div>
                 </Link>
                 <Link to={createPageUrl('ScottCalendarView')}>
-                    <div className="bg-black border-4 border-green-500 hover:bg-green-500/5 rounded-xl p-4 text-center transition-all">
-                        <Calendar className="w-8 h-8 text-green-400 mx-auto mb-2" />
-                        <p className="text-green-400 font-black font-mono text-sm">CALENDAR</p>
-                        {upcomingGigs.length > 0 && <p className="text-white text-2xl font-black font-mono mt-1">{upcomingGigs.length}</p>}
-                    </div>
+                    <motion.div
+                        whileHover={{ scale: 0.97 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="relative bg-gradient-to-br from-green-500/20 to-green-600/10 border-2 border-green-500/30 hover:border-green-500 rounded-2xl p-5 text-center transition-all overflow-hidden group"
+                    >
+                        <div className="absolute inset-0 bg-gradient-to-t from-green-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        <Calendar className="w-9 h-9 text-green-400 mx-auto mb-2 relative z-10" />
+                        <p className="text-green-400 font-black font-mono text-sm relative z-10">CALENDAR</p>
+                        {upcomingGigs.length > 0 && <p className="text-white text-2xl font-black font-mono mt-1 relative z-10">{upcomingGigs.length}</p>}
+                    </motion.div>
                 </Link>
             </div>
 
