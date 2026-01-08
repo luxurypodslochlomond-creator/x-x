@@ -73,57 +73,44 @@ export default function CB51() {
         });
     }, [navigate]);
 
-    const { data: allArtists = [], isLoading } = useQuery({
+    // Load artists IMMEDIATELY (most important)
+    const { data: allArtists = [], isLoading: artistsLoading } = useQuery({
         queryKey: ['scottArtists'],
         queryFn: () => base44.entities.ScottArtist.filter({}),
-        enabled: !!user
+        enabled: !!user,
+        staleTime: 30000 // Cache for 30s
     });
 
     const artists = allArtists.filter(a => !a.archived);
     const archivedArtists = allArtists.filter(a => a.archived);
 
+    // Load everything else in background (don't block UI)
     const { data: allOffers = [] } = useQuery({
         queryKey: ['scottAllGigOffers'],
         queryFn: () => base44.entities.ScottGigOffer.filter({}),
-        enabled: !!user
-    });
-
-    const { data: legalDocs = [] } = useQuery({
-        queryKey: ['scottLegalDocs'],
-        queryFn: () => base44.entities.ScottLegalDoc.filter({}),
-        enabled: !!user
+        enabled: !!user && !artistsLoading,
+        staleTime: 60000
     });
 
     const { data: invoices = [] } = useQuery({
         queryKey: ['scottInvoices'],
         queryFn: () => base44.entities.ScottInvoice.filter({}),
-        enabled: !!user
-    });
-
-    const { data: events = [] } = useQuery({
-        queryKey: ['scottEvents'],
-        queryFn: () => base44.entities.ScottEvent.filter({}),
-        enabled: !!user
+        enabled: !!user && !artistsLoading,
+        staleTime: 60000
     });
 
     const { data: messages = [] } = useQuery({
         queryKey: ['scottMessages'],
         queryFn: () => base44.entities.ScottMessage.filter({}),
-        enabled: !!user
+        enabled: !!user && !artistsLoading,
+        staleTime: 30000
     });
 
-    // Intelligence - what needs attention TODAY
+    // Quick stats (only what we need)
     const pendingOffers = allOffers.filter(o => o.status === 'pending_manager_review').length;
     const awaitingBand = allOffers.filter(o => o.status === 'sent_to_band').length;
-    const confirmedGigs = allOffers.filter(o => o.status === 'confirmed').length;
-    const upcomingGigs = events.filter(e => new Date(e.date) >= new Date() && e.status === 'confirmed').slice(0, 3);
     const overdueInvoices = invoices.filter(i => i.status === 'overdue').length;
-    const expiringDocs = legalDocs.filter(d => d.expiry_date && new Date(d.expiry_date) <= new Date(Date.now() + 30*24*60*60*1000)).length;
-    const pendingMessages = messages.filter(m => m.status === 'pending').length;
     const urgentMessages = messages.filter(m => m.status === 'pending' && m.urgency === 'urgent').length;
-    
-    const totalTimeSaved = allOffers.reduce((sum, offer) => sum + (offer.time_saved_minutes || 120), 0);
-    const hoursPerWeek = Math.round(totalTimeSaved / 60);
 
     const archiveArtistMutation = useMutation({
         mutationFn: ({ artistId, archived }) => 
@@ -299,11 +286,16 @@ export default function CB51() {
                             </div>
                         )}
                     </div>
-                </div>
+                </motion.div>
             )}
 
             {/* ARTISTS - SCOTT'S ACTUAL DESIGN */}
-            <div className="space-y-3">
+            <motion.div 
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.15 }}
+                className="space-y-3"
+            >
                 {artists.length === 0 ? (
                     <div className="text-center py-12">
                         <p className="text-gray-600 text-sm font-mono mb-6">No artists yet</p>
