@@ -163,24 +163,43 @@ export default function CB51() {
                 </div>
 
                 <div className="flex items-center gap-2 bg-black border-2 border-gray-900 rounded-lg p-2">
-                    <div className="flex-1 text-center">
-                        <p className="text-green-400 text-[10px] font-mono">PIPELINE</p>
-                        <p className="text-white text-sm font-black font-mono">
-                            £{allOffers.filter(o => o.status === 'pending_manager_review' || o.status === 'sent_to_band').reduce((sum, o) => sum + (o.fee || 0), 0).toLocaleString()}
-                        </p>
-                    </div>
+                    <Link to={createPageUrl('ScottGigOffers')} className="flex-1">
+                        <div className="text-center hover:bg-green-500/10 rounded p-1 transition-all">
+                            <p className="text-green-400 text-[10px] font-mono">PIPELINE</p>
+                            <p className="text-white text-sm font-black font-mono">
+                                £{allOffers.filter(o => o.status === 'pending_manager_review' || o.status === 'sent_to_band').reduce((sum, o) => sum + (o.fee || 0), 0).toLocaleString()}
+                            </p>
+                        </div>
+                    </Link>
                     <div className="w-px h-8 bg-gray-900"></div>
-                    <div className="flex-1 text-center">
-                        <p className="text-cyan-400 text-[10px] font-mono">SAVED</p>
-                        <p className="text-white text-sm font-black font-mono">{hoursPerWeek}h</p>
-                    </div>
+                    <button 
+                        onClick={() => alert(`You've saved ${hoursPerWeek} hours this month!\n\n• Email parsing: ~2h per offer\n• Band coordination: ~30m per gig\n• Draft responses: ~15m each\n\nTime = money bro ♾️❤️♾️`)}
+                        className="flex-1"
+                    >
+                        <div className="text-center hover:bg-cyan-500/10 rounded p-1 transition-all">
+                            <p className="text-cyan-400 text-[10px] font-mono">SAVED</p>
+                            <p className="text-white text-sm font-black font-mono">{hoursPerWeek}h</p>
+                        </div>
+                    </button>
                     <div className="w-px h-8 bg-gray-900"></div>
-                    <div className="flex-1 text-center">
-                        <p className="text-amber-400 text-[10px] font-mono">TODAY</p>
-                        <p className="text-white text-sm font-black font-mono">
-                            {pendingOffers + awaitingBand + overdueInvoices + urgentMessages}
-                        </p>
-                    </div>
+                    <button
+                        onClick={() => {
+                            const items = [];
+                            if (pendingOffers > 0) items.push(`${pendingOffers} gig offers need review`);
+                            if (awaitingBand > 0) items.push(`${awaitingBand} awaiting band votes`);
+                            if (overdueInvoices > 0) items.push(`${overdueInvoices} overdue invoices`);
+                            if (urgentMessages > 0) items.push(`${urgentMessages} urgent messages`);
+                            alert(items.length > 0 ? items.join('\n') : 'All clear bro ✓');
+                        }}
+                        className="flex-1"
+                    >
+                        <div className="text-center hover:bg-amber-500/10 rounded p-1 transition-all">
+                            <p className="text-amber-400 text-[10px] font-mono">TODAY</p>
+                            <p className="text-white text-sm font-black font-mono">
+                                {pendingOffers + awaitingBand + overdueInvoices + urgentMessages}
+                            </p>
+                        </div>
+                    </button>
                 </div>
             </div>
 
@@ -266,20 +285,20 @@ export default function CB51() {
                 )}
             </div>
 
-            {/* QUICK ACCESS LINKS */}
+            {/* QUICK ACCESS */}
             <div className="mt-8 grid grid-cols-2 gap-3">
                 <Link to={createPageUrl('ScottGigOffers')}>
-                    <div className="bg-black border-2 border-gray-900 hover:border-amber-500/50 rounded-lg p-4 text-center transition-all">
-                        <Zap className="w-6 h-6 text-amber-400 mx-auto mb-2" />
-                        <p className="text-white font-bold font-mono text-xs">GIG OFFERS</p>
-                        {allOffers.length > 0 && <p className="text-amber-400 text-xl font-black font-mono mt-1">{allOffers.length}</p>}
+                    <div className="bg-black border-4 border-amber-500 hover:bg-amber-500/5 rounded-xl p-4 text-center transition-all">
+                        <Zap className="w-8 h-8 text-amber-400 mx-auto mb-2" />
+                        <p className="text-amber-400 font-black font-mono text-sm">GIG OFFERS</p>
+                        {allOffers.length > 0 && <p className="text-white text-2xl font-black font-mono mt-1">{allOffers.length}</p>}
                     </div>
                 </Link>
                 <Link to={createPageUrl('ScottCalendarView')}>
-                    <div className="bg-black border-2 border-gray-900 hover:border-green-500/50 rounded-lg p-4 text-center transition-all">
-                        <Calendar className="w-6 h-6 text-green-400 mx-auto mb-2" />
-                        <p className="text-white font-bold font-mono text-xs">CALENDAR</p>
-                        {upcomingGigs.length > 0 && <p className="text-green-400 text-xl font-black font-mono mt-1">{upcomingGigs.length}</p>}
+                    <div className="bg-black border-4 border-green-500 hover:bg-green-500/5 rounded-xl p-4 text-center transition-all">
+                        <Calendar className="w-8 h-8 text-green-400 mx-auto mb-2" />
+                        <p className="text-green-400 font-black font-mono text-sm">CALENDAR</p>
+                        {upcomingGigs.length > 0 && <p className="text-white text-2xl font-black font-mono mt-1">{upcomingGigs.length}</p>}
                     </div>
                 </Link>
             </div>
