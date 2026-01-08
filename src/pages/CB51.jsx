@@ -252,7 +252,7 @@ export default function CB51() {
             </div>
 
             {/* WHAT NEEDS ME - CLEAN */}
-            {(pendingOffers > 0 || awaitingBand > 0 || overdueInvoices > 0 || expiringDocs > 0 || urgentMessages > 0) && (
+            {(pendingOffers > 0 || awaitingBand > 0 || overdueInvoices > 0 || urgentMessages > 0) && (
                 <div className="mb-8 bg-black border-2 border-amber-500 rounded-xl p-4">
                     <div className="flex items-center gap-2 mb-4">
                         <AlertCircle className="w-5 h-5 text-amber-400" />
@@ -286,16 +286,11 @@ export default function CB51() {
                             </div>
                         )}
                     </div>
-                </motion.div>
+                </div>
             )}
 
             {/* ARTISTS - SCOTT'S ACTUAL DESIGN */}
-            <motion.div 
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.15 }}
-                className="space-y-3"
-            >
+            <div className="space-y-3">
                 {artists.length === 0 ? (
                     <div className="text-center py-12">
                         <p className="text-gray-600 text-sm font-mono mb-6">No artists yet</p>
