@@ -45,7 +45,7 @@ export default function ScottSessions() {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white p-6 pb-24">
+        <div className="min-h-screen bg-black text-white p-6 pb-24">
             
             <button
                 onClick={() => navigate(-1)}
@@ -56,8 +56,8 @@ export default function ScottSessions() {
             </button>
 
             <div className="mb-8">
-                <h1 className="text-4xl font-black text-purple-400 font-mono mb-2">SESSIONS</h1>
-                <p className="text-gray-500 text-sm font-mono">Writing · Recording · Rehearsals</p>
+                <h1 className="text-4xl font-black text-cyan-400 font-mono mb-2">SESSIONS</h1>
+                <p className="text-gray-600 text-sm font-mono">Writing · Recording · Rehearsals</p>
             </div>
 
             <div className="grid grid-cols-1 gap-4 max-w-2xl mx-auto">
@@ -68,14 +68,9 @@ export default function ScottSessions() {
                     return (
                         <Link key={section.title} to={section.link}>
                             <motion.div
-                                whileHover={{ y: -4 }}
-                                whileTap={{ scale: 0.98 }}
+                                whileHover={{ scale: 0.98 }}
+                                whileTap={{ scale: 0.96 }}
                                 className={`bg-black border-4 ${colors.border} rounded-xl p-6 transition-all`}
-                                style={{ 
-                                    boxShadow: section.color === 'purple' ? '0 0 30px rgba(168, 85, 247, 0.5)' :
-                                              section.color === 'pink' ? '0 0 30px rgba(236, 72, 153, 0.5)' :
-                                              '0 0 30px rgba(6, 182, 212, 0.5)'
-                                }}
                             >
                                 <div className="flex items-center gap-4">
                                     <Icon className={`w-10 h-10 ${colors.text}`} />

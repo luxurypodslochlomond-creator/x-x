@@ -53,7 +53,7 @@ export default function ScottFinanceAdmin() {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white p-6 pb-24">
+        <div className="min-h-screen bg-black text-white p-6 pb-24">
             
             <button
                 onClick={() => navigate(-1)}
@@ -65,7 +65,7 @@ export default function ScottFinanceAdmin() {
 
             <div className="mb-8">
                 <h1 className="text-4xl font-black text-amber-400 font-mono mb-2">FINANCE</h1>
-                <p className="text-gray-500 text-sm font-mono">Money · Legal · Travel</p>
+                <p className="text-gray-600 text-sm font-mono">Money · Legal · Travel</p>
             </div>
 
             <div className="grid grid-cols-1 gap-4 max-w-2xl mx-auto">
@@ -76,15 +76,9 @@ export default function ScottFinanceAdmin() {
                     return (
                         <Link key={section.title} to={section.link}>
                             <motion.div
-                                whileHover={{ y: -4 }}
-                                whileTap={{ scale: 0.98 }}
+                                whileHover={{ scale: 0.98 }}
+                                whileTap={{ scale: 0.96 }}
                                 className={`bg-black border-4 ${colors.border} rounded-xl p-6 transition-all`}
-                                style={{ 
-                                    boxShadow: section.color === 'amber' ? '0 0 30px rgba(245, 158, 11, 0.5)' :
-                                              section.color === 'green' ? '0 0 30px rgba(34, 197, 94, 0.5)' :
-                                              section.color === 'purple' ? '0 0 30px rgba(168, 85, 247, 0.5)' :
-                                              '0 0 30px rgba(6, 182, 212, 0.5)'
-                                }}
                             >
                                 <div className="flex items-center gap-4">
                                     <Icon className={`w-10 h-10 ${colors.text}`} />

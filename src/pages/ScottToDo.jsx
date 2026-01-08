@@ -75,7 +75,7 @@ export default function ScottToDo() {
     const doneTasks = tasks.filter(t => t.status === 'done');
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white p-6 pb-24">
+        <div className="min-h-screen bg-black text-white p-6 pb-24">
             
             <button
                 onClick={() => navigate(-1)}
@@ -87,12 +87,12 @@ export default function ScottToDo() {
 
             <div className="mb-8 flex items-center justify-between">
                 <div>
-                    <h1 className="text-4xl font-black text-green-400 font-mono mb-2">TASKS</h1>
-                    <p className="text-gray-500 text-sm font-mono">Deadlines · Progress</p>
+                    <h1 className="text-4xl font-black text-cyan-400 font-mono mb-2">TASKS</h1>
+                    <p className="text-gray-600 text-sm font-mono">Deadlines · Progress</p>
                 </div>
                 <button
                     onClick={() => setShowAddTask(!showAddTask)}
-                    className="bg-green-500 hover:bg-green-600 text-black font-bold px-6 py-3 rounded-xl text-sm flex items-center gap-2 transition-all"
+                    className="bg-cyan-500 hover:bg-cyan-600 text-black font-bold px-6 py-3 rounded-xl text-sm flex items-center gap-2 transition-all"
                 >
                     <Plus className="w-5 h-5" />
                     ADD
@@ -106,7 +106,7 @@ export default function ScottToDo() {
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
-                        className="mb-6 bg-gray-900 border-2 border-green-500 rounded-lg p-4 space-y-3"
+                        className="mb-6 bg-black border-2 border-cyan-500 rounded-lg p-4 space-y-3"
                     >
                         <Input
                             placeholder="What's the task?"
@@ -136,7 +136,7 @@ export default function ScottToDo() {
                             <Button
                                 onClick={handleAddTask}
                                 disabled={!newTask.title.trim() || createTaskMutation.isPending}
-                                className="flex-1 bg-green-500 hover:bg-green-600 text-black font-black"
+                                className="flex-1 bg-cyan-500 hover:bg-cyan-600 text-black font-black"
                             >
                                 SAVE
                             </Button>
@@ -147,13 +147,13 @@ export default function ScottToDo() {
 
             {/* PENDING TASKS */}
             <div className="mb-6">
-                <h2 className="text-green-400 font-bold mb-3 font-mono text-sm">
+                <h2 className="text-cyan-400 font-bold mb-3 font-mono text-sm">
                     PENDING ({pendingTasks.length})
                 </h2>
                 {pendingTasks.length === 0 ? (
-                    <div className="bg-gray-900 border border-gray-700 rounded-lg p-8 text-center">
-                        <CheckCircle className="w-12 h-12 text-green-400 mx-auto mb-3" />
-                        <p className="text-gray-500 font-mono text-sm">All clear ✓</p>
+                    <div className="bg-black border-2 border-gray-900 rounded-lg p-8 text-center">
+                        <CheckCircle className="w-12 h-12 text-cyan-400 mx-auto mb-3" />
+                        <p className="text-gray-600 font-mono text-sm">All clear ✓</p>
                     </div>
                 ) : (
                     <div className="space-y-2">
@@ -161,14 +161,14 @@ export default function ScottToDo() {
                             <motion.div
                                 key={task.id}
                                 whileTap={{ scale: 0.98 }}
-                                className="bg-gray-900 border border-gray-700 hover:border-green-500 rounded-lg p-4 transition-all"
+                                className="bg-black border-2 border-gray-900 hover:border-cyan-500/50 rounded-lg p-4 transition-all"
                             >
                                 <div className="flex items-start gap-3">
                                     <button
                                         onClick={() => toggleTaskMutation.mutate({ id: task.id, currentStatus: task.status })}
                                         className="mt-1"
                                     >
-                                        <Circle className="w-5 h-5 text-gray-500 hover:text-green-400" />
+                                        <Circle className="w-5 h-5 text-gray-600 hover:text-cyan-400" />
                                     </button>
                                     <div className="flex-1">
                                         <p className="text-white font-bold mb-2 font-mono">{task.title}</p>
@@ -200,21 +200,21 @@ export default function ScottToDo() {
 
             {/* DONE TASKS */}
             {doneTasks.length > 0 && (
-                <div>
-                    <h2 className="text-gray-500 font-bold mb-3 font-mono text-sm">
-                        DONE ({doneTasks.length})
-                    </h2>
-                    <div className="space-y-2 opacity-50">
-                        {doneTasks.map(task => (
-                            <div
-                                key={task.id}
-                                className="bg-gray-900 border border-gray-800 rounded-lg p-4"
-                            >
+            <div>
+                <h2 className="text-gray-600 font-bold mb-3 font-mono text-sm">
+                    DONE ({doneTasks.length})
+                </h2>
+                <div className="space-y-2 opacity-50">
+                    {doneTasks.map(task => (
+                        <div
+                            key={task.id}
+                            className="bg-black border-2 border-gray-900 rounded-lg p-4"
+                        >
                                 <div className="flex items-start gap-3">
                                     <button
                                         onClick={() => toggleTaskMutation.mutate({ id: task.id, currentStatus: task.status })}
                                     >
-                                        <CheckCircle className="w-5 h-5 text-green-500" />
+                                        <CheckCircle className="w-5 h-5 text-cyan-500" />
                                     </button>
                                     <div className="flex-1">
                                         <p className="text-gray-500 font-bold line-through font-mono">{task.title}</p>

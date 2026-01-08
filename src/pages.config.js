@@ -71,6 +71,7 @@ import BigIssueFoodRescue from './pages/BigIssueFoodRescue';
 import BuildOnUF51 from './pages/BuildOnUF51';
 import BusinessVault from './pages/BusinessVault';
 import CB51 from './pages/CB51';
+import CB51AAA from './pages/CB51AAA';
 import CB51Login from './pages/CB51Login';
 import CB51Pricing from './pages/CB51Pricing';
 import CICSanctuary from './pages/CICSanctuary';
@@ -292,7 +293,6 @@ import YoungWarriors from './pages/YoungWarriors';
 import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
-import CB51AAA from './pages/CB51AAA';
 import __Layout from './Layout.jsx';
 
 
@@ -370,6 +370,7 @@ export const PAGES = {
     "BuildOnUF51": BuildOnUF51,
     "BusinessVault": BusinessVault,
     "CB51": CB51,
+    "CB51AAA": CB51AAA,
     "CB51Login": CB51Login,
     "CB51Pricing": CB51Pricing,
     "CICSanctuary": CICSanctuary,
@@ -591,7 +592,6 @@ export const PAGES = {
     "ZeroEgoProtocol": ZeroEgoProtocol,
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
-    "CB51AAA": CB51AAA,
 }
 
 export const pagesConfig = {
