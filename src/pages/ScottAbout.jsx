@@ -13,6 +13,10 @@ import { Button } from '@/components/ui/button';
  */
 
 export default function ScottAbout() {
+    const [pinGate, setPinGate] = useState(true);
+    const [pinInput, setPinInput] = useState('');
+    const [pinError, setPinError] = useState('');
+    const [user, setUser] = useState(null);
     const [answers, setAnswers] = useState({
         question_1_saves_time: '',
         question_2_annoying: '',
@@ -23,10 +27,66 @@ export default function ScottAbout() {
     });
     const [submitted, setSubmitted] = useState(false);
     const [submitting, setSubmitting] = useState(false);
+    const [listening, setListening] = useState(null);
 
     React.useEffect(() => {
         document.title = 'About CB51 - Citizen Band 51 • Zero Stress Manager';
+        
+        base44.auth.me().then(currentUser => {
+            setUser(currentUser);
+            if (currentUser.role === 'admin') {
+                setPinGate(false);
+            } else {
+                const pinEntered = sessionStorage.getItem('cb51_about_pin');
+                if (pinEntered === '1888') {
+                    setPinGate(false);
+                }
+            }
+        }).catch(() => {
+            setPinGate(true);
+        });
     }, []);
+
+    const handlePinSubmit = () => {
+        if (pinInput === '1888') {
+            sessionStorage.setItem('cb51_about_pin', '1888');
+            setPinGate(false);
+            setPinError('');
+        } else {
+            setPinError('Wrong PIN bro');
+        }
+    };
+
+    const startVoiceInput = (field) => {
+        if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+            alert('Voice input not supported on this browser bro');
+            return;
+        }
+
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        const recognition = new SpeechRecognition();
+        recognition.continuous = true;
+        recognition.interimResults = false;
+
+        recognition.onstart = () => setListening(field);
+        recognition.onend = () => setListening(null);
+
+        recognition.onresult = (event) => {
+            const transcript = Array.from(event.results)
+                .map(result => result[0].transcript)
+                .join(' ');
+            setAnswers(prev => ({
+                ...prev,
+                [field]: prev[field] ? prev[field] + ' ' + transcript : transcript
+            }));
+        };
+
+        recognition.start();
+    };
+
+    const stopVoiceInput = () => {
+        setListening(null);
+    };
 
     const handleSubmit = async () => {
         setSubmitting(true);
@@ -39,6 +99,37 @@ export default function ScottAbout() {
             setSubmitting(false);
         }
     };
+
+    if (pinGate) {
+        return (
+            <div className="min-h-screen bg-black flex items-center justify-center p-6">
+                <div className="bg-black border-2 border-cyan-500 rounded-xl p-8 max-w-md w-full">
+                    <Radio className="w-12 h-12 text-cyan-400 mx-auto mb-4" />
+                    <h2 className="text-cyan-400 font-black text-2xl font-mono text-center mb-2">CB51 FEEDBACK</h2>
+                    <p className="text-gray-600 text-sm font-mono text-center mb-6">Enter PIN to continue</p>
+                    
+                    <input
+                        type="password"
+                        value={pinInput}
+                        onChange={(e) => setPinInput(e.target.value)}
+                        onKeyPress={(e) => e.key === 'Enter' && handlePinSubmit()}
+                        placeholder="Enter PIN"
+                        className="w-full bg-black border-2 border-gray-900 text-white text-center text-2xl font-mono p-4 rounded-lg mb-4"
+                        autoFocus
+                    />
+                    
+                    {pinError && <p className="text-red-400 text-sm font-mono text-center mb-4">{pinError}</p>}
+                    
+                    <button
+                        onClick={handlePinSubmit}
+                        className="w-full bg-cyan-500 hover:bg-cyan-600 text-black font-black py-3 rounded-lg font-mono"
+                    >
+                        SUBMIT
+                    </button>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-[#0a0f1a] via-[#0f1419] to-[#0a0f1a] pb-20">
@@ -306,6 +397,12 @@ export default function ScottAbout() {
                                     placeholder="Type here..."
                                     className="bg-black border-gray-700 text-white font-mono text-sm min-h-[60px]"
                                 />
+                                <button
+                                    onClick={() => listening === 'question_1_saves_time' ? stopVoiceInput() : startVoiceInput('question_1_saves_time')}
+                                    className={`mt-2 text-xs font-mono px-3 py-1 rounded ${listening === 'question_1_saves_time' ? 'bg-red-500 text-white' : 'bg-gray-800 text-cyan-400'}`}
+                                >
+                                    {listening === 'question_1_saves_time' ? '🔴 STOP' : '🎤 SPEAK'}
+                                </button>
                             </div>
 
                             <div className="bg-gray-900/40 border border-gray-800 rounded-lg p-4">
@@ -317,6 +414,12 @@ export default function ScottAbout() {
                                     placeholder="Type here..."
                                     className="bg-black border-gray-700 text-white font-mono text-sm min-h-[60px]"
                                 />
+                                <button
+                                    onClick={() => listening === 'question_2_annoying' ? stopVoiceInput() : startVoiceInput('question_2_annoying')}
+                                    className={`mt-2 text-xs font-mono px-3 py-1 rounded ${listening === 'question_2_annoying' ? 'bg-red-500 text-white' : 'bg-gray-800 text-cyan-400'}`}
+                                >
+                                    {listening === 'question_2_annoying' ? '🔴 STOP' : '🎤 SPEAK'}
+                                </button>
                             </div>
 
                             <div className="bg-gray-900/40 border border-gray-800 rounded-lg p-4">
@@ -328,6 +431,12 @@ export default function ScottAbout() {
                                     placeholder="Type here..."
                                     className="bg-black border-gray-700 text-white font-mono text-sm min-h-[60px]"
                                 />
+                                <button
+                                    onClick={() => listening === 'question_3_where_use' ? stopVoiceInput() : startVoiceInput('question_3_where_use')}
+                                    className={`mt-2 text-xs font-mono px-3 py-1 rounded ${listening === 'question_3_where_use' ? 'bg-red-500 text-white' : 'bg-gray-800 text-cyan-400'}`}
+                                >
+                                    {listening === 'question_3_where_use' ? '🔴 STOP' : '🎤 SPEAK'}
+                                </button>
                             </div>
 
                             <div className="bg-gray-900/40 border border-gray-800 rounded-lg p-4">
@@ -339,6 +448,12 @@ export default function ScottAbout() {
                                     placeholder="Type here..."
                                     className="bg-black border-gray-700 text-white font-mono text-sm min-h-[60px]"
                                 />
+                                <button
+                                    onClick={() => listening === 'question_4_save_5_hours' ? stopVoiceInput() : startVoiceInput('question_4_save_5_hours')}
+                                    className={`mt-2 text-xs font-mono px-3 py-1 rounded ${listening === 'question_4_save_5_hours' ? 'bg-red-500 text-white' : 'bg-gray-800 text-cyan-400'}`}
+                                >
+                                    {listening === 'question_4_save_5_hours' ? '🔴 STOP' : '🎤 SPEAK'}
+                                </button>
                             </div>
 
                             <div className="bg-gray-900/40 border border-gray-800 rounded-lg p-4">
@@ -350,6 +465,12 @@ export default function ScottAbout() {
                                     placeholder="Type here..."
                                     className="bg-black border-gray-700 text-white font-mono text-sm min-h-[60px]"
                                 />
+                                <button
+                                    onClick={() => listening === 'question_5_add_feature' ? stopVoiceInput() : startVoiceInput('question_5_add_feature')}
+                                    className={`mt-2 text-xs font-mono px-3 py-1 rounded ${listening === 'question_5_add_feature' ? 'bg-red-500 text-white' : 'bg-gray-800 text-cyan-400'}`}
+                                >
+                                    {listening === 'question_5_add_feature' ? '🔴 STOP' : '🎤 SPEAK'}
+                                </button>
                             </div>
 
                             <div className="bg-gray-900/40 border border-gray-800 rounded-lg p-4">
@@ -361,6 +482,21 @@ export default function ScottAbout() {
                                     placeholder="Optional..."
                                     className="bg-black border-gray-700 text-white font-mono text-sm min-h-[60px]"
                                 />
+                                <button
+                                    onClick={() => listening === 'additional_notes' ? stopVoiceInput() : startVoiceInput('additional_notes')}
+                                    className={`mt-2 text-xs font-mono px-3 py-1 rounded ${listening === 'additional_notes' ? 'bg-red-500 text-white' : 'bg-gray-800 text-cyan-400'}`}
+                                >
+                                    {listening === 'additional_notes' ? '🔴 STOP' : '🎤 SPEAK'}
+                                </button>
+                            </div>
+
+                            <div className="bg-black border-2 border-cyan-500/50 rounded-lg p-4 text-center">
+                                <p className="text-cyan-400 text-xs font-mono mb-2">Need help explaining? AI51 can ask you questions ♾️❤️</p>
+                                <Link to={createPageUrl('AI51')}>
+                                    <button className="bg-gray-900/60 hover:bg-gray-900 border border-cyan-500/30 text-cyan-400 font-bold py-2 px-4 rounded text-xs font-mono">
+                                        TALK TO AI51 FIRST →
+                                    </button>
+                                </Link>
                             </div>
 
                             <Button
