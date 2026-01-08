@@ -155,32 +155,32 @@ export default function CB51() {
             
             <TechStatusBar showP2PSync={true} />
             
-            {/* HEADER */}
-            <div className="mb-8 pt-4">
-                <div className="flex items-center gap-3 mb-2">
+            {/* BRAIN BAR - ALWAYS VISIBLE */}
+            <div className="mb-6 pt-4">
+                <div className="flex items-center gap-3 mb-3">
                     <Radio className="w-8 h-8 text-cyan-400" />
                     <h1 className="text-3xl font-black text-cyan-400 font-mono">CB51</h1>
                 </div>
-                <p className="text-gray-500 text-sm font-mono">Intelligence first</p>
-            </div>
 
-            {/* BRAIN - MONEY • TIME • URGENT */}
-            <div className="grid grid-cols-3 gap-3 mb-8">
-                <div className="bg-black border-2 border-green-500 rounded-lg p-4">
-                    <p className="text-green-400 text-xs font-mono mb-1">PIPELINE</p>
-                    <p className="text-white text-2xl font-black font-mono">
-                        £{allOffers.filter(o => o.status === 'pending_manager_review' || o.status === 'sent_to_band').reduce((sum, o) => sum + (o.fee || 0), 0).toLocaleString()}
-                    </p>
-                </div>
-                <div className="bg-black border-2 border-cyan-500 rounded-lg p-4">
-                    <p className="text-cyan-400 text-xs font-mono mb-1">SAVED</p>
-                    <p className="text-white text-2xl font-black font-mono">{hoursPerWeek}h</p>
-                </div>
-                <div className="bg-black border-2 border-amber-500 rounded-lg p-4">
-                    <p className="text-amber-400 text-xs font-mono mb-1">TODAY</p>
-                    <p className="text-white text-2xl font-black font-mono">
-                        {pendingOffers + awaitingBand + overdueInvoices + urgentMessages}
-                    </p>
+                <div className="flex items-center gap-2 bg-black border-2 border-gray-900 rounded-lg p-2">
+                    <div className="flex-1 text-center">
+                        <p className="text-green-400 text-[10px] font-mono">PIPELINE</p>
+                        <p className="text-white text-sm font-black font-mono">
+                            £{allOffers.filter(o => o.status === 'pending_manager_review' || o.status === 'sent_to_band').reduce((sum, o) => sum + (o.fee || 0), 0).toLocaleString()}
+                        </p>
+                    </div>
+                    <div className="w-px h-8 bg-gray-900"></div>
+                    <div className="flex-1 text-center">
+                        <p className="text-cyan-400 text-[10px] font-mono">SAVED</p>
+                        <p className="text-white text-sm font-black font-mono">{hoursPerWeek}h</p>
+                    </div>
+                    <div className="w-px h-8 bg-gray-900"></div>
+                    <div className="flex-1 text-center">
+                        <p className="text-amber-400 text-[10px] font-mono">TODAY</p>
+                        <p className="text-white text-sm font-black font-mono">
+                            {pendingOffers + awaitingBand + overdueInvoices + urgentMessages}
+                        </p>
+                    </div>
                 </div>
             </div>
 
