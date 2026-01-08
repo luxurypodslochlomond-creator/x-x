@@ -68,7 +68,7 @@ export default function ScottAddArtist() {
     ];
 
     return (
-        <div className="min-h-screen bg-black p-4 pb-20">
+        <div className="min-h-screen bg-black p-6 pb-20">
             
             {/* HEADER */}
             <button
@@ -79,12 +79,14 @@ export default function ScottAddArtist() {
                 <span className="text-sm font-bold font-mono">BACK</span>
             </button>
 
-            <div className="mb-6">
-                <h1 className="text-3xl font-black text-cyan-400 font-mono mb-2">ADD ARTIST</h1>
-                <p className="text-gray-600 text-sm font-mono">Quick setup</p>
+            <div className="flex items-start justify-between mb-8">
+                <div>
+                    <h1 className="text-3xl font-black text-cyan-400 font-mono mb-1">ADD ARTIST</h1>
+                    <p className="text-gray-600 text-sm font-mono">New artist profile</p>
+                </div>
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-6 max-w-md mx-auto">
+            <form onSubmit={handleSubmit} className="space-y-4">
 
                 {/* PROFILE PIC */}
                 <div className="flex justify-center">
@@ -119,88 +121,119 @@ export default function ScottAddArtist() {
                     </label>
                 </div>
 
-                {/* NAME */}
-                <Input
-                    required
-                    value={formData.name}
-                    onChange={(e) => setFormData({...formData, name: e.target.value})}
-                    className="bg-black border-2 border-gray-900 text-white font-mono"
-                    placeholder="Name *"
-                />
+                {/* FORM CARD */}
+                <div className="bg-black border-2 border-cyan-500/30 rounded-xl p-6 space-y-5">
+                    
+                    {/* NAME */}
+                    <div>
+                        <label className="text-cyan-400 text-xs font-bold font-mono mb-2 block">ARTIST NAME</label>
+                        <Input
+                            required
+                            value={formData.name}
+                            onChange={(e) => setFormData({...formData, name: e.target.value})}
+                            className="bg-gray-950 border-2 border-gray-800 text-white font-mono placeholder:text-gray-700"
+                            placeholder="Full name or band name"
+                        />
+                    </div>
 
-                {/* PHONE */}
-                <Input
-                    type="tel"
-                    value={formData.phone}
-                    onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                    className="bg-black border-2 border-gray-900 text-white font-mono"
-                    placeholder="Phone"
-                />
+                    {/* CONTACT */}
+                    <div className="grid grid-cols-2 gap-4">
+                        <div>
+                            <label className="text-cyan-400 text-xs font-bold font-mono mb-2 block">PHONE</label>
+                            <Input
+                                type="tel"
+                                value={formData.phone}
+                                onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                                className="bg-gray-950 border-2 border-gray-800 text-white font-mono placeholder:text-gray-700"
+                                placeholder="Phone number"
+                            />
+                        </div>
+                        <div>
+                            <label className="text-cyan-400 text-xs font-bold font-mono mb-2 block">EMAIL</label>
+                            <Input
+                                type="email"
+                                value={formData.email}
+                                onChange={(e) => setFormData({...formData, email: e.target.value})}
+                                className="bg-gray-950 border-2 border-gray-800 text-white font-mono placeholder:text-gray-700"
+                                placeholder="Email address"
+                            />
+                        </div>
+                    </div>
 
-                {/* EMAIL */}
-                <Input
-                    type="email"
-                    value={formData.email}
-                    onChange={(e) => setFormData({...formData, email: e.target.value})}
-                    className="bg-black border-2 border-gray-900 text-white font-mono"
-                    placeholder="Email"
-                />
+                    {/* GENRE & RATE */}
+                    <div className="grid grid-cols-2 gap-4">
+                        <div>
+                            <label className="text-cyan-400 text-xs font-bold font-mono mb-2 block">GENRE</label>
+                            <Input
+                                value={formData.genre}
+                                onChange={(e) => setFormData({...formData, genre: e.target.value})}
+                                className="bg-gray-950 border-2 border-gray-800 text-white font-mono placeholder:text-gray-700"
+                                placeholder="Rock, Pop, etc"
+                            />
+                        </div>
+                        <div>
+                            <label className="text-cyan-400 text-xs font-bold font-mono mb-2 block">RATE</label>
+                            <Input
+                                value={formData.rate}
+                                onChange={(e) => setFormData({...formData, rate: e.target.value})}
+                                className="bg-gray-950 border-2 border-gray-800 text-white font-mono placeholder:text-gray-700"
+                                placeholder="£500/night"
+                            />
+                        </div>
+                    </div>
 
-                {/* SOCIALS */}
-                <div className="grid grid-cols-2 gap-3">
-                    <Input
-                        value={formData.instagram}
-                        onChange={(e) => setFormData({...formData, instagram: e.target.value})}
-                        className="bg-black border-2 border-gray-900 text-white font-mono"
-                        placeholder="Instagram"
-                    />
-                    <Input
-                        value={formData.spotify}
-                        onChange={(e) => setFormData({...formData, spotify: e.target.value})}
-                        className="bg-black border-2 border-gray-900 text-white font-mono"
-                        placeholder="Spotify"
-                    />
+                    {/* SOCIALS */}
+                    <div className="grid grid-cols-2 gap-4">
+                        <div>
+                            <label className="text-cyan-400 text-xs font-bold font-mono mb-2 block">INSTAGRAM</label>
+                            <Input
+                                value={formData.instagram}
+                                onChange={(e) => setFormData({...formData, instagram: e.target.value})}
+                                className="bg-gray-950 border-2 border-gray-800 text-white font-mono placeholder:text-gray-700"
+                                placeholder="@username"
+                            />
+                        </div>
+                        <div>
+                            <label className="text-cyan-400 text-xs font-bold font-mono mb-2 block">SPOTIFY</label>
+                            <Input
+                                value={formData.spotify}
+                                onChange={(e) => setFormData({...formData, spotify: e.target.value})}
+                                className="bg-gray-950 border-2 border-gray-800 text-white font-mono placeholder:text-gray-700"
+                                placeholder="Artist link"
+                            />
+                        </div>
+                    </div>
+
+                    {/* GEAR */}
+                    <div>
+                        <label className="text-cyan-400 text-xs font-bold font-mono mb-2 block">GEAR/SKILLS</label>
+                        <Input
+                            value={formData.gear}
+                            onChange={(e) => setFormData({...formData, gear: e.target.value})}
+                            className="bg-gray-950 border-2 border-gray-800 text-white font-mono placeholder:text-gray-700"
+                            placeholder="Equipment or skills"
+                        />
+                    </div>
+
+                    {/* NOTES */}
+                    <div>
+                        <label className="text-cyan-400 text-xs font-bold font-mono mb-2 block">NOTES</label>
+                        <Textarea
+                            value={formData.notes}
+                            onChange={(e) => setFormData({...formData, notes: e.target.value})}
+                            className="bg-gray-950 border-2 border-gray-800 text-white font-mono min-h-[80px] placeholder:text-gray-700"
+                            placeholder="Any additional info..."
+                        />
+                    </div>
                 </div>
-
-                {/* RATE & GENRE */}
-                <div className="grid grid-cols-2 gap-3">
-                    <Input
-                        value={formData.rate}
-                        onChange={(e) => setFormData({...formData, rate: e.target.value})}
-                        className="bg-black border-2 border-gray-900 text-white font-mono"
-                        placeholder="Rate (£250/night)"
-                    />
-                    <Input
-                        value={formData.genre}
-                        onChange={(e) => setFormData({...formData, genre: e.target.value})}
-                        className="bg-black border-2 border-gray-900 text-white font-mono"
-                        placeholder="Genre"
-                    />
-                </div>
-
-                {/* GEAR */}
-                <Input
-                    value={formData.gear}
-                    onChange={(e) => setFormData({...formData, gear: e.target.value})}
-                    className="bg-black border-2 border-gray-900 text-white font-mono"
-                    placeholder="Gear/Skills"
-                />
-
-                {/* NOTES */}
-                <Textarea
-                    value={formData.notes}
-                    onChange={(e) => setFormData({...formData, notes: e.target.value})}
-                    className="bg-black border-2 border-gray-900 text-white font-mono min-h-[100px]"
-                    placeholder="Notes"
-                />
 
                 {/* SAVE BUTTON */}
                 <Button
                     type="submit"
                     disabled={saving}
-                    className="w-full bg-cyan-500 hover:bg-cyan-600 text-black font-black py-4 font-mono"
+                    className="w-full bg-cyan-500 hover:bg-cyan-600 text-black font-black py-6 text-lg font-mono rounded-xl"
                 >
-                    {saving ? 'SAVING...' : 'SAVE ARTIST'}
+                    {saving ? 'SAVING...' : '+ SAVE ARTIST'}
                 </Button>
             </form>
         </div>
