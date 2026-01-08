@@ -12,6 +12,8 @@ export default function ScottAddArtist() {
     const navigate = useNavigate();
     const [saving, setSaving] = useState(false);
     const [uploading, setUploading] = useState(false);
+    const [magicLoading, setMagicLoading] = useState(false);
+    const [socialLink, setSocialLink] = useState('');
     const [formData, setFormData] = useState({
         name: '',
         profile_pic_url: '',
@@ -26,6 +28,53 @@ export default function ScottAddArtist() {
         availability: 'unknown',
         notes: ''
     });
+
+    const handleMagicFill = async () => {
+        if (!socialLink.trim()) return;
+        
+        setMagicLoading(true);
+        try {
+            const prompt = `Extract artist info from this link: ${socialLink}
+            
+Return ONLY valid JSON (no markdown):
+{
+  "name": "artist name",
+  "genre": "genre if obvious",
+  "instagram": "username if Instagram link",
+  "spotify": "link if Spotify",
+  "bio": "short bio or description"
+}`;
+
+            const result = await base44.integrations.Core.InvokeLLM({
+                prompt: prompt,
+                response_json_schema: {
+                    type: "object",
+                    properties: {
+                        name: { type: "string" },
+                        genre: { type: "string" },
+                        instagram: { type: "string" },
+                        spotify: { type: "string" },
+                        bio: { type: "string" }
+                    }
+                }
+            });
+
+            setFormData({
+                ...formData,
+                name: result.name || formData.name,
+                genre: result.genre || formData.genre,
+                instagram: result.instagram || formData.instagram,
+                spotify: result.spotify || formData.spotify,
+                notes: result.bio || formData.notes
+            });
+            
+            setSocialLink('');
+        } catch (error) {
+            alert('Could not extract info: ' + error.message);
+        } finally {
+            setMagicLoading(false);
+        }
+    };
 
     const handleProfilePicUpload = async (e) => {
         const file = e.target.files?.[0];
@@ -82,8 +131,31 @@ export default function ScottAddArtist() {
             <div className="flex items-start justify-between mb-8">
                 <div>
                     <h1 className="text-3xl font-black text-cyan-400 font-mono mb-1">ADD ARTIST</h1>
-                    <p className="text-gray-600 text-sm font-mono">New artist profile</p>
+                    <p className="text-gray-600 text-sm font-mono">30 second setup</p>
                 </div>
+            </div>
+
+            {/* MAGIC FILL */}
+            <div className="mb-6 bg-gradient-to-r from-purple-900/30 to-cyan-900/30 border-2 border-purple-500/50 rounded-xl p-4">
+                <p className="text-purple-400 text-xs font-bold font-mono mb-3">✨ MAGIC FILL</p>
+                <div className="flex gap-2">
+                    <Input
+                        value={socialLink}
+                        onChange={(e) => setSocialLink(e.target.value)}
+                        className="flex-1 bg-black border-2 border-purple-500/30 text-white font-mono placeholder:text-gray-600"
+                        placeholder="Paste Instagram or Spotify link..."
+                        onKeyDown={(e) => e.key === 'Enter' && (e.preventDefault(), handleMagicFill())}
+                    />
+                    <Button
+                        type="button"
+                        onClick={handleMagicFill}
+                        disabled={magicLoading || !socialLink.trim()}
+                        className="bg-purple-500 hover:bg-purple-600 text-white font-black px-6 font-mono"
+                    >
+                        {magicLoading ? '...' : 'GO'}
+                    </Button>
+                </div>
+                <p className="text-purple-300/60 text-[10px] font-mono mt-2">Auto-fills name, genre, socials</p>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -213,6 +285,46 @@ export default function ScottAddArtist() {
                             className="bg-gray-950 border-2 border-gray-800 text-white font-mono placeholder:text-gray-700"
                             placeholder="Equipment or skills"
                         />
+                    </div>
+
+                    {/* RELATIONSHIP */}
+                    <div>
+                        <label className="text-cyan-400 text-xs font-bold font-mono mb-2 block">RELATIONSHIP</label>
+                        <div className="flex gap-2">
+                            <button
+                                type="button"
+                                onClick={() => setFormData({...formData, relationship: 'sound'})}
+                                className={`flex-1 py-2 px-3 rounded-lg font-mono text-xs font-bold transition-all ${
+                                    formData.relationship === 'sound' 
+                                        ? 'bg-green-500 text-black border-2 border-green-400' 
+                                        : 'bg-gray-900 text-gray-600 border-2 border-gray-800'
+                                }`}
+                            >
+                                SOUND
+                            </button>
+                            <button
+                                type="button"
+                                onClick={() => setFormData({...formData, relationship: 'professional'})}
+                                className={`flex-1 py-2 px-3 rounded-lg font-mono text-xs font-bold transition-all ${
+                                    formData.relationship === 'professional' 
+                                        ? 'bg-cyan-500 text-black border-2 border-cyan-400' 
+                                        : 'bg-gray-900 text-gray-600 border-2 border-gray-800'
+                                }`}
+                            >
+                                PRO
+                            </button>
+                            <button
+                                type="button"
+                                onClick={() => setFormData({...formData, relationship: 'difficult'})}
+                                className={`flex-1 py-2 px-3 rounded-lg font-mono text-xs font-bold transition-all ${
+                                    formData.relationship === 'difficult' 
+                                        ? 'bg-red-500 text-black border-2 border-red-400' 
+                                        : 'bg-gray-900 text-gray-600 border-2 border-gray-800'
+                                }`}
+                            >
+                                DIFFICULT
+                            </button>
+                        </div>
                     </div>
 
                     {/* NOTES */}
