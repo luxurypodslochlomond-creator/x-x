@@ -10,6 +10,7 @@ import { base44 } from '@/api/base44Client';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import TechStatusBar from '@/components/scott/TechStatusBar';
 import { format } from 'date-fns';
+import CB51Modal from '@/components/scott/CB51Modal';
 
 /**
  * CB51 HOME PAGE - CLEAN URL FOR WHITE LABEL
@@ -188,7 +189,23 @@ export default function CB51() {
                     </Link>
                     <div className="w-px h-8 bg-gray-900"></div>
                     <button 
-                        onClick={() => alert(`You've saved ${hoursPerWeek} hours this month!\n\n• Email parsing: ~2h per offer\n• Band coordination: ~30m per gig\n• Draft responses: ~15m each\n\nTime = money bro ♾️❤️♾️`)}
+                        onClick={() => {
+                            setModalContent({
+                                title: 'TIME SAVED',
+                                body: (
+                                    <div className="space-y-3">
+                                        <p className="text-white font-black font-mono text-2xl">{hoursPerWeek} hours this month</p>
+                                        <div className="space-y-2 text-sm font-mono text-gray-400">
+                                            <p>• Email parsing: ~2h per offer</p>
+                                            <p>• Band coordination: ~30m per gig</p>
+                                            <p>• Draft responses: ~15m each</p>
+                                        </div>
+                                        <p className="text-cyan-400 font-bold font-mono mt-4">Time = money bro ♾️❤️♾️</p>
+                                    </div>
+                                )
+                            });
+                            setModalOpen(true);
+                        }}
                         className="flex-1"
                     >
                         <div className="text-center hover:bg-cyan-500/10 rounded p-1 transition-all">
@@ -204,7 +221,20 @@ export default function CB51() {
                             if (awaitingBand > 0) items.push(`${awaitingBand} awaiting band votes`);
                             if (overdueInvoices > 0) items.push(`${overdueInvoices} overdue invoices`);
                             if (urgentMessages > 0) items.push(`${urgentMessages} urgent messages`);
-                            alert(items.length > 0 ? items.join('\n') : 'All clear bro ✓');
+
+                            setModalContent({
+                                title: 'TODAY',
+                                body: items.length > 0 ? (
+                                    <div className="space-y-2 font-mono text-sm">
+                                        {items.map((item, i) => (
+                                            <p key={i} className="text-amber-400">• {item}</p>
+                                        ))}
+                                    </div>
+                                ) : (
+                                    <p className="text-green-400 font-bold font-mono text-lg">All clear bro ✓</p>
+                                )
+                            });
+                            setModalOpen(true);
                         }}
                         className="flex-1"
                     >
@@ -322,6 +352,15 @@ export default function CB51() {
             <div className="mt-12 text-center">
                 <p className="text-gray-800 text-xs font-mono">CB51 • Simple</p>
             </div>
+
+            {/* CB51 MODAL */}
+            <CB51Modal
+                isOpen={modalOpen}
+                onClose={() => setModalOpen(false)}
+                title={modalContent?.title}
+            >
+                {modalContent?.body}
+            </CB51Modal>
             </div>
             );
             }
