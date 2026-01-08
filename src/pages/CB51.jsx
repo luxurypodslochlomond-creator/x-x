@@ -21,24 +21,6 @@ export default function CB51() {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const queryClient = useQueryClient();
-    
-    // Expandable sections state
-    const [expandedSections, setExpandedSections] = useState({
-        urgent: true,
-        messages: false,
-        artists: true,
-        gigs: false,
-        legal: false,
-        finance: false,
-        calendar: false
-    });
-
-    const toggleSection = (section) => {
-        setExpandedSections(prev => ({
-            ...prev,
-            [section]: !prev[section]
-        }));
-    };
 
     useEffect(() => {
         // Set page title and meta tags for CB51 branding
@@ -168,274 +150,123 @@ export default function CB51() {
         );
     }
 
-    // Section component for expandable areas
-    const Section = ({ id, title, icon: Icon, badge, color, children }) => {
-        const isExpanded = expandedSections[id];
-        return (
-            <div className="mb-3">
-                <button
-                    onClick={() => toggleSection(id)}
-                    className={`w-full bg-black border-2 ${color} rounded-xl p-4 flex items-center justify-between hover:border-opacity-100 transition-all`}
-                >
-                    <div className="flex items-center gap-3">
-                        <Icon className={`w-6 h-6 ${color.replace('border-', 'text-')}`} />
-                        <span className="text-white font-black font-mono text-lg tracking-wider">{title}</span>
-                        {badge > 0 && (
-                            <span className={`bg-black ${color.replace('border-', 'text-')} px-2 py-1 rounded-full text-xs font-bold font-mono border ${color}`}>
-                                {badge}
-                            </span>
-                        )}
-                    </div>
-                    {isExpanded ? (
-                        <ChevronDown className="w-5 h-5 text-gray-400" />
-                    ) : (
-                        <ChevronRight className="w-5 h-5 text-gray-400" />
-                    )}
-                </button>
-                <AnimatePresence>
-                    {isExpanded && (
-                        <motion.div
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: 'auto', opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            transition={{ duration: 0.2 }}
-                            className="overflow-hidden"
-                        >
-                            <div className="p-4 bg-black border-x-2 border-b-2 border-gray-900 rounded-b-xl -mt-2">
-                                {children}
-                            </div>
-                        </motion.div>
-                    )}
-                </AnimatePresence>
-            </div>
-        );
-    };
-
     return (
         <div className="min-h-screen bg-black text-white p-6 pb-24">
             
             <TechStatusBar showP2PSync={true} />
             
             {/* HEADER */}
-            <div className="mb-6 pt-4">
-                <div className="flex items-center gap-2 mb-2">
-                    <Radio className="w-6 h-6 text-cyan-400" />
-                    <h1 className="text-2xl font-black text-cyan-400 font-mono">OPERATION CENTRE</h1>
+            <div className="mb-8 pt-4">
+                <div className="flex items-center gap-3 mb-2">
+                    <Radio className="w-8 h-8 text-cyan-400" />
+                    <h1 className="text-3xl font-black text-cyan-400 font-mono">CB51</h1>
                 </div>
-                <p className="text-gray-600 text-sm font-mono">Everything you need at a glance</p>
+                <p className="text-gray-500 text-sm font-mono">Pick your artist</p>
             </div>
 
-            {/* TIME SAVED STAT */}
-            {user && totalTimeSaved > 0 && (
-                <div className="mb-6 bg-black border-2 border-amber-500/50 rounded-xl p-4 text-center">
-                    <p className="text-amber-400 text-xs font-mono mb-1 tracking-widest font-bold">TIME SAVED THIS WEEK</p>
-                    <p className="text-4xl font-black text-white font-mono">{hoursPerWeek}h</p>
-                </div>
-            )}
-
-            {/* URGENT - WHAT NEEDS ME TODAY */}
-            <Section id="urgent" title="WHAT NEEDS ME TODAY" icon={AlertCircle} badge={pendingOffers + awaitingBand + overdueInvoices + expiringDocs + urgentMessages} color="border-amber-500/50">
-                {pendingOffers === 0 && awaitingBand === 0 && overdueInvoices === 0 && expiringDocs === 0 && urgentMessages === 0 ? (
-                    <p className="text-gray-600 font-mono text-sm">✅ All clear bro</p>
-                ) : (
-                    <div className="space-y-3">
+            {/* WHAT NEEDS ME - CLEAN */}
+            {(pendingOffers > 0 || awaitingBand > 0 || overdueInvoices > 0 || expiringDocs > 0 || urgentMessages > 0) && (
+                <div className="mb-8 bg-black border-2 border-amber-500 rounded-xl p-4">
+                    <div className="flex items-center gap-2 mb-4">
+                        <AlertCircle className="w-5 h-5 text-amber-400" />
+                        <h2 className="text-amber-400 font-black font-mono">NEEDS ATTENTION</h2>
+                    </div>
+                    <div className="space-y-2">
                         {pendingOffers > 0 && (
                             <Link to={createPageUrl('ScottGigOffers')}>
-                                <div className="bg-black border-2 border-amber-500/50 rounded-lg p-3 hover:border-amber-500 transition-all">
-                                    <p className="text-amber-400 font-bold font-mono">{pendingOffers} gig offers need review</p>
-                                    <p className="text-gray-600 text-xs font-mono mt-1">Tap to review →</p>
+                                <div className="bg-black border border-amber-500/50 rounded-lg p-3 hover:border-amber-500 transition-all">
+                                    <p className="text-amber-400 font-bold font-mono text-sm">{pendingOffers} gig offers →</p>
                                 </div>
                             </Link>
                         )}
                         {awaitingBand > 0 && (
                             <Link to={createPageUrl('ScottGigOffers')}>
-                                <div className="bg-black border-2 border-cyan-500/50 rounded-lg p-3 hover:border-cyan-500 transition-all">
-                                    <p className="text-cyan-400 font-bold font-mono">{awaitingBand} offers sent to band</p>
-                                    <p className="text-gray-600 text-xs font-mono mt-1">Waiting for votes →</p>
+                                <div className="bg-black border border-cyan-500/50 rounded-lg p-3 hover:border-cyan-500 transition-all">
+                                    <p className="text-cyan-400 font-bold font-mono text-sm">{awaitingBand} awaiting band →</p>
                                 </div>
                             </Link>
                         )}
                         {overdueInvoices > 0 && (
                             <Link to={createPageUrl('ScottInvoices')}>
-                                <div className="bg-black border-2 border-red-500/50 rounded-lg p-3 hover:border-red-500 transition-all">
-                                    <p className="text-red-400 font-bold font-mono">{overdueInvoices} overdue invoices</p>
-                                    <p className="text-gray-600 text-xs font-mono mt-1">Chase payment →</p>
-                                </div>
-                            </Link>
-                        )}
-                        {expiringDocs > 0 && (
-                            <Link to={createPageUrl('ScottLegalDocs')}>
-                                <div className="bg-black border-2 border-orange-500/50 rounded-lg p-3 hover:border-orange-500 transition-all">
-                                    <p className="text-orange-400 font-bold font-mono">{expiringDocs} docs expiring soon</p>
-                                    <p className="text-gray-600 text-xs font-mono mt-1">Renew now →</p>
+                                <div className="bg-black border border-red-500/50 rounded-lg p-3 hover:border-red-500 transition-all">
+                                    <p className="text-red-400 font-bold font-mono text-sm">{overdueInvoices} overdue invoices →</p>
                                 </div>
                             </Link>
                         )}
                         {urgentMessages > 0 && (
-                            <div className="bg-black border-2 border-red-500/50 rounded-lg p-3">
-                                <p className="text-red-400 font-bold font-mono">{urgentMessages} urgent messages need replies</p>
-                                <p className="text-gray-600 text-xs font-mono mt-1">Check message centre ↓</p>
+                            <div className="bg-black border border-red-500/50 rounded-lg p-3">
+                                <p className="text-red-400 font-bold font-mono text-sm">{urgentMessages} urgent messages</p>
                             </div>
                         )}
-                    </div>
-                )}
-            </Section>
-
-            {/* MESSAGE CENTRE */}
-            <Section id="messages" title="MESSAGE CENTRE" icon={MessageSquare} badge={pendingMessages} color="border-cyan-500/50">
-                <ScottMessageCentre />
-            </Section>
-
-            {/* ARTISTS */}
-            <Section id="artists" title="ARTISTS" icon={Music} badge={artists.length} color="border-cyan-500/50">
-                <div className="grid grid-cols-2 gap-3">
-                    {artists.length === 0 ? (
-                        <div className="col-span-2 text-center">
-                            <p className="text-gray-600 text-sm font-mono mb-4">No artists yet</p>
-                            <Link to={createPageUrl('ScottAddArtist')}>
-                                <button className="bg-cyan-500 hover:bg-cyan-600 text-black font-black px-6 py-3 rounded-lg text-sm font-mono">
-                                    ADD FIRST ARTIST
-                                </button>
-                            </Link>
-                        </div>
-                    ) : (
-                        <>
-                            {artists.map((artist) => (
-                                <Link key={artist.id} to={createPageUrl(`ScottArtistHome?id=${artist.id}`)}>
-                                    <div className="bg-black border-2 border-gray-900 hover:border-cyan-500/50 rounded-lg p-3 transition-all flex items-center gap-3">
-                                        {artist.profile_pic_url ? (
-                                            <img 
-                                                src={artist.profile_pic_url} 
-                                                alt={artist.name}
-                                                className="w-12 h-12 rounded-lg object-cover"
-                                            />
-                                        ) : (
-                                            <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-cyan-500 to-blue-600 text-white font-black text-lg flex items-center justify-center">
-                                                {artist.name.charAt(0)}
-                                            </div>
-                                        )}
-                                        <div className="flex-1 min-w-0">
-                                            <p className="text-white font-bold font-mono text-sm truncate">{artist.name}</p>
-                                            <p className="text-gray-600 text-xs font-mono">{artist.genre || 'Artist'}</p>
-                                        </div>
-                                    </div>
-                                </Link>
-                            ))}
-                            <Link to={createPageUrl('ScottAddArtist')}>
-                                <div className="bg-black border-2 border-dashed border-gray-900 hover:border-cyan-500/50 rounded-lg p-3 h-[72px] flex items-center justify-center transition-all">
-                                    <Plus className="w-6 h-6 text-cyan-400" />
-                                </div>
-                            </Link>
-                        </>
-                    )}
-                </div>
-            </Section>
-
-            {/* GIG OFFERS */}
-            <Section id="gigs" title="GIG OFFERS" icon={Zap} badge={allOffers.length} color="border-amber-500/50">
-                <div className="space-y-2">
-                    <div className="flex gap-2 mb-3">
-                        <div className="flex-1 bg-black border-2 border-amber-500/50 rounded-lg p-3 text-center">
-                            <p className="text-2xl font-black text-white font-mono">{pendingOffers}</p>
-                            <p className="text-xs text-amber-400 font-mono tracking-widest">PENDING</p>
-                        </div>
-                        <div className="flex-1 bg-black border-2 border-green-500/50 rounded-lg p-3 text-center">
-                            <p className="text-2xl font-black text-white font-mono">{confirmedGigs}</p>
-                            <p className="text-xs text-green-400 font-mono tracking-widest">CONFIRMED</p>
-                        </div>
-                    </div>
-                    <Link to={createPageUrl('ScottGigOffers')}>
-                        <button className="w-full bg-cyan-500 hover:bg-cyan-400 text-black font-black py-3 rounded-lg font-mono transition-all">
-                            VIEW ALL OFFERS →
-                        </button>
-                    </Link>
-                </div>
-            </Section>
-
-            {/* UPCOMING GIGS */}
-            <Section id="calendar" title="UPCOMING GIGS" icon={Calendar} badge={upcomingGigs.length} color="border-green-500/50">
-                {upcomingGigs.length === 0 ? (
-                    <p className="text-gray-600 font-mono text-sm">No upcoming gigs</p>
-                ) : (
-                    <div className="space-y-2">
-                        {upcomingGigs.map(gig => (
-                            <div key={gig.id} className="bg-black border-2 border-green-500/50 rounded-lg p-3">
-                                <p className="text-white font-bold font-mono">{gig.title}</p>
-                                <p className="text-green-400 text-sm font-mono">{format(new Date(gig.date), 'd MMM yyyy')}</p>
-                                {gig.location && <p className="text-gray-600 text-xs font-mono mt-1">{gig.location}</p>}
-                            </div>
-                        ))}
-                        <Link to={createPageUrl('ScottCalendarView')}>
-                            <button className="w-full bg-cyan-500 hover:bg-cyan-400 text-black font-black py-2 rounded-lg font-mono text-sm mt-2 transition-all">
-                                VIEW CALENDAR →
-                            </button>
-                        </Link>
-                    </div>
-                )}
-            </Section>
-
-            {/* LEGAL */}
-            <Section id="legal" title="LEGAL & DOCS" icon={FileText} badge={expiringDocs} color="border-amber-500/50">
-                <div className="space-y-2">
-                    <div className="bg-black border-2 border-gray-900 rounded-lg p-3">
-                        <p className="text-amber-400 text-xs font-mono tracking-widest font-bold">TOTAL DOCUMENTS</p>
-                        <p className="text-2xl font-black text-white font-mono">{legalDocs.length}</p>
-                    </div>
-                    {expiringDocs > 0 && (
-                        <div className="bg-black border-2 border-orange-500/50 rounded-lg p-3">
-                            <p className="text-orange-400 font-bold font-mono">{expiringDocs} expiring within 30 days</p>
-                        </div>
-                    )}
-                    <Link to={createPageUrl('ScottLegalDocs')}>
-                        <button className="w-full bg-cyan-500 hover:bg-cyan-400 text-black font-black py-3 rounded-lg font-mono transition-all">
-                            MANAGE DOCS →
-                        </button>
-                    </Link>
-                </div>
-            </Section>
-
-            {/* FINANCE */}
-            <Section id="finance" title="FINANCE" icon={DollarSign} badge={overdueInvoices} color="border-amber-500/50">
-                <div className="space-y-2">
-                    <div className="bg-black border-2 border-gray-900 rounded-lg p-3">
-                        <p className="text-amber-400 text-xs font-mono tracking-widest font-bold">TOTAL INVOICES</p>
-                        <p className="text-2xl font-black text-white font-mono">{invoices.length}</p>
-                    </div>
-                    {overdueInvoices > 0 && (
-                        <div className="bg-black border-2 border-red-500/50 rounded-lg p-3">
-                            <p className="text-red-400 font-bold font-mono">{overdueInvoices} OVERDUE - chase now!</p>
-                        </div>
-                    )}
-                    <Link to={createPageUrl('ScottInvoices')}>
-                        <button className="w-full bg-cyan-500 hover:bg-cyan-400 text-black font-black py-3 rounded-lg font-mono transition-all">
-                            MANAGE INVOICES →
-                        </button>
-                    </Link>
-                </div>
-            </Section>
-
-            {/* ARCHIVED ARTISTS */}
-            {archivedArtists.length > 0 && (
-                <div className="mt-6 bg-black border-2 border-gray-900 rounded-xl p-4">
-                    <h3 className="text-gray-700 font-black text-sm mb-3 font-mono tracking-widest">ARCHIVED ARTISTS</h3>
-                    <div className="space-y-2">
-                        {archivedArtists.map((artist) => (
-                            <div 
-                                key={artist.id}
-                                onClick={() => handleRestoreArtist(artist)}
-                                className="bg-black border border-gray-900 hover:border-gray-700 rounded-lg p-3 cursor-pointer transition-all"
-                            >
-                                <p className="text-gray-600 font-bold font-mono text-sm">{artist.name}</p>
-                                <p className="text-gray-800 text-xs font-mono">Tap to restore</p>
-                            </div>
-                        ))}
                     </div>
                 </div>
             )}
 
+            {/* ARTISTS - SCOTT'S ACTUAL DESIGN */}
+            <div className="space-y-3">
+                {artists.length === 0 ? (
+                    <div className="text-center py-12">
+                        <p className="text-gray-600 text-sm font-mono mb-6">No artists yet</p>
+                        <Link to={createPageUrl('ScottAddArtist')}>
+                            <button className="bg-cyan-500 hover:bg-cyan-600 text-black font-black px-8 py-4 rounded-xl font-mono">
+                                ADD FIRST ARTIST
+                            </button>
+                        </Link>
+                    </div>
+                ) : (
+                    <>
+                        {artists.map((artist) => (
+                            <Link key={artist.id} to={createPageUrl(`ScottArtistHome?id=${artist.id}`)}>
+                                <div className="bg-black border-4 border-cyan-500 rounded-xl p-6 hover:bg-cyan-500/5 transition-all flex items-center gap-4">
+                                    {artist.profile_pic_url ? (
+                                        <img 
+                                            src={artist.profile_pic_url} 
+                                            alt={artist.name}
+                                            className="w-16 h-16 rounded-xl object-cover"
+                                        />
+                                    ) : (
+                                        <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-cyan-500 to-purple-500 text-white font-black text-2xl flex items-center justify-center">
+                                            {artist.name.charAt(0)}
+                                        </div>
+                                    )}
+                                    <div className="flex-1">
+                                        <p className="text-white font-black text-xl font-mono">{artist.name}</p>
+                                        {artist.genre && <p className="text-gray-500 text-sm font-mono">{artist.genre}</p>}
+                                    </div>
+                                </div>
+                            </Link>
+                        ))}
+                        <Link to={createPageUrl('ScottAddArtist')}>
+                            <div className="bg-black border-4 border-dashed border-gray-900 hover:border-cyan-500/50 rounded-xl p-6 flex items-center justify-center gap-3 transition-all">
+                                <Plus className="w-8 h-8 text-cyan-400" />
+                                <span className="text-cyan-400 font-black font-mono text-lg">ADD ARTIST</span>
+                            </div>
+                        </Link>
+                    </>
+                )}
+            </div>
+
+            {/* QUICK ACCESS LINKS */}
+            <div className="mt-8 grid grid-cols-2 gap-3">
+                <Link to={createPageUrl('ScottGigOffers')}>
+                    <div className="bg-black border-2 border-gray-900 hover:border-amber-500/50 rounded-lg p-4 text-center transition-all">
+                        <Zap className="w-6 h-6 text-amber-400 mx-auto mb-2" />
+                        <p className="text-white font-bold font-mono text-xs">GIG OFFERS</p>
+                        {allOffers.length > 0 && <p className="text-amber-400 text-xl font-black font-mono mt-1">{allOffers.length}</p>}
+                    </div>
+                </Link>
+                <Link to={createPageUrl('ScottCalendarView')}>
+                    <div className="bg-black border-2 border-gray-900 hover:border-green-500/50 rounded-lg p-4 text-center transition-all">
+                        <Calendar className="w-6 h-6 text-green-400 mx-auto mb-2" />
+                        <p className="text-white font-bold font-mono text-xs">CALENDAR</p>
+                        {upcomingGigs.length > 0 && <p className="text-green-400 text-xl font-black font-mono mt-1">{upcomingGigs.length}</p>}
+                    </div>
+                </Link>
+            </div>
+
             {/* FOOTER */}
             <div className="mt-12 text-center">
-                <p className="text-gray-800 text-xs font-mono">CB51</p>
+                <p className="text-gray-800 text-xs font-mono">CB51 • Simple</p>
             </div>
             </div>
             );
