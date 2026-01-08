@@ -4,7 +4,7 @@ import { createPageUrl } from '@/utils';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { ArrowLeft, Check, Upload, Image as ImageIcon } from 'lucide-react';
+import { ArrowLeft, Check, Upload, Image as ImageIcon, Mic2 } from 'lucide-react';
 import { Radio } from 'lucide-react';
 import { base44 } from '@/api/base44Client';
 
@@ -14,6 +14,8 @@ export default function ScottAddArtist() {
     const [uploading, setUploading] = useState(false);
     const [magicLoading, setMagicLoading] = useState(false);
     const [socialLink, setSocialLink] = useState('');
+    const [voiceRecording, setVoiceRecording] = useState(false);
+    const [photoExtracting, setPhotoExtracting] = useState(false);
     const [formData, setFormData] = useState({
         name: '',
         profile_pic_url: '',
@@ -28,6 +30,105 @@ export default function ScottAddArtist() {
         availability: 'unknown',
         notes: ''
     });
+
+    const handleVoiceInput = () => {
+        if (!('webkitSpeechRecognition' in window)) {
+            alert('Voice input not supported on this browser');
+            return;
+        }
+
+        const recognition = new window.webkitSpeechRecognition();
+        recognition.continuous = false;
+        recognition.interimResults = false;
+
+        recognition.onstart = () => setVoiceRecording(true);
+        recognition.onend = () => setVoiceRecording(false);
+
+        recognition.onresult = async (event) => {
+            const transcript = event.results[0][0].transcript;
+            
+            setMagicLoading(true);
+            try {
+                const result = await base44.integrations.Core.InvokeLLM({
+                    prompt: `Extract artist info from this voice note: "${transcript}"\n\nReturn JSON with: name, phone, email, genre, rate, instagram, spotify, notes`,
+                    response_json_schema: {
+                        type: "object",
+                        properties: {
+                            name: { type: "string" },
+                            phone: { type: "string" },
+                            email: { type: "string" },
+                            genre: { type: "string" },
+                            rate: { type: "string" },
+                            instagram: { type: "string" },
+                            spotify: { type: "string" },
+                            notes: { type: "string" }
+                        }
+                    }
+                });
+
+                setFormData({
+                    ...formData,
+                    name: result.name || formData.name,
+                    phone: result.phone || formData.phone,
+                    email: result.email || formData.email,
+                    genre: result.genre || formData.genre,
+                    rate: result.rate || formData.rate,
+                    instagram: result.instagram || formData.instagram,
+                    spotify: result.spotify || formData.spotify,
+                    notes: result.notes || formData.notes
+                });
+            } catch (error) {
+                alert('Could not process voice: ' + error.message);
+            } finally {
+                setMagicLoading(false);
+            }
+        };
+
+        recognition.start();
+    };
+
+    const handlePhotoExtract = async (e) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+
+        setPhotoExtracting(true);
+        try {
+            const uploadResult = await base44.integrations.Core.UploadFile({ file });
+            
+            const result = await base44.integrations.Core.InvokeLLM({
+                prompt: `Extract artist info from this screenshot of their social media profile. Return JSON with: name, genre, instagram username, spotify link, bio/description.`,
+                file_urls: [uploadResult.file_url],
+                response_json_schema: {
+                    type: "object",
+                    properties: {
+                        name: { type: "string" },
+                        genre: { type: "string" },
+                        instagram: { type: "string" },
+                        spotify: { type: "string" },
+                        bio: { type: "string" }
+                    }
+                }
+            });
+
+            setFormData({
+                ...formData,
+                name: result.name || formData.name,
+                genre: result.genre || formData.genre,
+                instagram: result.instagram || formData.instagram,
+                spotify: result.spotify || formData.spotify,
+                notes: result.bio || formData.notes,
+                profile_pic_url: uploadResult.file_url
+            });
+        } catch (error) {
+            alert('Could not extract from photo: ' + error.message);
+        } finally {
+            setPhotoExtracting(false);
+        }
+    };
+
+    const handleImportFromContacts = () => {
+        alert('Import from contacts coming soon - for now paste their info or use voice 🎤');
+    };
 
     const handleMagicFill = async () => {
         if (!socialLink.trim()) return;
@@ -131,31 +232,56 @@ Return ONLY valid JSON (no markdown):
             <div className="flex items-start justify-between mb-8">
                 <div>
                     <h1 className="text-3xl font-black text-cyan-400 font-mono mb-1">ADD ARTIST</h1>
-                    <p className="text-gray-600 text-sm font-mono">30 second setup</p>
+                    <p className="text-gray-600 text-sm font-mono">Zero typing needed</p>
                 </div>
             </div>
 
-            {/* MAGIC FILL */}
-            <div className="mb-6 bg-gradient-to-r from-purple-900/30 to-cyan-900/30 border-2 border-purple-500/50 rounded-xl p-4">
-                <p className="text-purple-400 text-xs font-bold font-mono mb-3">✨ MAGIC FILL</p>
-                <div className="flex gap-2">
-                    <Input
-                        value={socialLink}
-                        onChange={(e) => setSocialLink(e.target.value)}
-                        className="flex-1 bg-black border-2 border-purple-500/30 text-white font-mono placeholder:text-gray-600"
-                        placeholder="Paste Instagram or Spotify link..."
-                        onKeyDown={(e) => e.key === 'Enter' && (e.preventDefault(), handleMagicFill())}
+            {/* AI51 INNOVATION - ZERO FRICTION */}
+            <div className="mb-6 space-y-3">
+                
+                {/* VOICE INPUT */}
+                <button
+                    type="button"
+                    onClick={handleVoiceInput}
+                    disabled={voiceRecording || magicLoading}
+                    className="w-full bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white font-black py-4 rounded-xl font-mono flex items-center justify-center gap-3"
+                >
+                    <Mic2 className="w-6 h-6" />
+                    {voiceRecording ? 'LISTENING...' : '🎤 SPEAK TO ADD (while driving)'}
+                </button>
+
+                {/* PHOTO EXTRACT */}
+                <label className="w-full bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white font-black py-4 rounded-xl font-mono flex items-center justify-center gap-3 cursor-pointer">
+                    <input 
+                        type="file" 
+                        accept="image/*" 
+                        onChange={handlePhotoExtract}
+                        className="hidden"
                     />
-                    <Button
-                        type="button"
-                        onClick={handleMagicFill}
-                        disabled={magicLoading || !socialLink.trim()}
-                        className="bg-purple-500 hover:bg-purple-600 text-white font-black px-6 font-mono"
-                    >
-                        {magicLoading ? '...' : 'GO'}
-                    </Button>
+                    <ImageIcon className="w-6 h-6" />
+                    {photoExtracting ? 'EXTRACTING...' : '📸 SCREENSHOT THEIR INSTAGRAM'}
+                </label>
+
+                {/* PASTE LINK */}
+                <div className="bg-black border-2 border-purple-500/30 rounded-xl p-3">
+                    <div className="flex gap-2">
+                        <Input
+                            value={socialLink}
+                            onChange={(e) => setSocialLink(e.target.value)}
+                            className="flex-1 bg-gray-950 border-2 border-gray-800 text-white font-mono placeholder:text-gray-600 text-sm"
+                            placeholder="Or paste link..."
+                            onKeyDown={(e) => e.key === 'Enter' && (e.preventDefault(), handleMagicFill())}
+                        />
+                        <Button
+                            type="button"
+                            onClick={handleMagicFill}
+                            disabled={magicLoading || !socialLink.trim()}
+                            className="bg-purple-500 hover:bg-purple-600 text-white font-black px-4 font-mono text-sm"
+                        >
+                            {magicLoading ? '...' : 'GO'}
+                        </Button>
+                    </div>
                 </div>
-                <p className="text-purple-300/60 text-[10px] font-mono mt-2">Auto-fills name, genre, socials</p>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-4">
