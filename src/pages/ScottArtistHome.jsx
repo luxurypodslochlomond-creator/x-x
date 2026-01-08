@@ -96,7 +96,7 @@ export default function ScottArtistHome() {
     ];
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white p-6 pb-24">
+        <div className="min-h-screen bg-black text-white p-6 pb-24">
             
             <TechStatusBar showP2PSync={true} />
             
@@ -124,14 +124,14 @@ export default function ScottArtistHome() {
                     )}
                     <div>
                         <h1 className="text-3xl font-black text-white font-mono">{artist.name}</h1>
-                        <p className="text-gray-500 text-sm font-mono">Operations</p>
+                        <p className="text-gray-600 text-sm font-mono">Operations</p>
                     </div>
                 </div>
             </div>
 
             {/* ARTIST INFO - CLEAN */}
             {(artist.phone || artist.email || artist.rate || artist.genre) && (
-                <div className="mb-8 bg-gray-900/40 border border-gray-800 rounded-xl p-6">
+                <div className="mb-8 bg-black border-2 border-gray-900 rounded-xl p-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="space-y-3">
                             {artist.phone && (
@@ -173,17 +173,16 @@ export default function ScottArtistHome() {
                     return (
                         <Link key={section.title} to={section.link}>
                             <motion.div
-                                whileHover={{ y: -4 }}
-                                whileTap={{ scale: 0.98 }}
+                                whileHover={{ scale: 0.98 }}
+                                whileTap={{ scale: 0.96 }}
                                 className="bg-black border-4 border-cyan-500 rounded-xl p-6 transition-all h-32 flex items-center gap-4"
-                                style={{ boxShadow: '0 0 30px rgba(6, 182, 212, 0.5)' }}
                             >
                                 <Icon className="w-10 h-10 text-cyan-400" />
                                 <div className="flex-1">
                                     <p className="text-white font-black text-xl font-mono mb-1">
                                         {section.title}
                                     </p>
-                                    <p className="text-gray-500 text-xs font-mono">
+                                    <p className="text-gray-600 text-xs font-mono">
                                         {section.description}
                                     </p>
                                 </div>
@@ -194,7 +193,7 @@ export default function ScottArtistHome() {
             </div>
 
             {/* CALENDAR WIDGET */}
-            <div className="bg-gray-900/40 border border-gray-800 rounded-xl p-6">
+            <div className="bg-black border-2 border-gray-900 rounded-xl p-6">
                 <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-2">
                         <Calendar className="w-6 h-6 text-cyan-400" />
@@ -210,7 +209,7 @@ export default function ScottArtistHome() {
 
                 <div className="space-y-2 max-h-48 overflow-y-auto">
                     {events.length === 0 ? (
-                        <p className="text-gray-500 text-sm font-mono text-center py-4">No events yet</p>
+                        <p className="text-gray-600 text-sm font-mono text-center py-4">No events yet</p>
                     ) : (
                         events
                             .sort((a, b) => new Date(a.date) - new Date(b.date))
@@ -226,11 +225,11 @@ export default function ScottArtistHome() {
                                 return (
                                     <div 
                                         key={event.id} 
-                                        className={`flex items-center justify-between bg-black/60 border border-gray-700 rounded p-2 ${isPast ? 'opacity-40' : ''}`}
+                                        className={`flex items-center justify-between bg-black border-2 border-gray-900 rounded p-2 ${isPast ? 'opacity-40' : ''}`}
                                     >
                                         <div className="flex-1">
                                             <p className="text-white text-sm font-bold font-mono truncate">{event.title}</p>
-                                            <p className="text-gray-500 text-xs font-mono">
+                                            <p className="text-gray-600 text-xs font-mono">
                                                 {format(new Date(event.date), 'd MMM yyyy')}
                                                 {event.location && ` · ${event.location}`}
                                             </p>

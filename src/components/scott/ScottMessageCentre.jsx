@@ -107,10 +107,10 @@ Response:`
     return (
         <div className="space-y-4">
             {/* INPUT AREA */}
-            <div className="bg-gray-900/40 border border-gray-700 rounded-lg p-4">
+            <div className="bg-black border-2 border-gray-900 rounded-lg p-4">
                 <div className="flex items-center gap-2 mb-3">
-                    <MessageSquare className="w-5 h-5 text-gray-400" />
-                    <p className="text-gray-400 text-sm font-mono">Paste any message (WhatsApp, Email, SMS)</p>
+                    <MessageSquare className="w-5 h-5 text-gray-600" />
+                    <p className="text-gray-600 text-sm font-mono">Paste any message (WhatsApp, Email, SMS)</p>
                 </div>
                 <Textarea
                     value={rawMessage}
@@ -119,12 +119,12 @@ Response:`
 
 From WhatsApp, email, SMS - doesn't matter
 AI will extract what matters and draft a reply"
-                    className="bg-black border-gray-700 text-white min-h-[120px] font-mono text-sm mb-3"
+                    className="bg-black border-2 border-gray-900 text-white min-h-[120px] font-mono text-sm mb-3"
                 />
                 <Button
                     onClick={analyzeMessage}
                     disabled={processing || !rawMessage.trim()}
-                    className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-black"
+                    className="w-full bg-cyan-500 hover:bg-cyan-400 text-black font-black"
                 >
                     {processing ? (
                         <>
@@ -150,39 +150,39 @@ AI will extract what matters and draft a reply"
                         className="space-y-3"
                     >
                         {/* MESSAGE INTEL */}
-                        <div className={`${urgencyColors[analysis.urgency]?.bg || urgencyColors.normal.bg} border-2 ${urgencyColors[analysis.urgency]?.border || urgencyColors.normal.border} rounded-lg p-4`}>
+                        <div className="bg-black border-2 border-amber-500/50 rounded-lg p-4">
                             <div className="grid grid-cols-2 gap-3 mb-3">
                                 <div>
-                                    <p className="text-xs text-gray-500 font-mono mb-1">FROM</p>
+                                    <p className="text-xs text-amber-400 font-mono mb-1 tracking-widest font-bold">FROM</p>
                                     <p className="text-white font-bold font-mono text-sm">{analysis.from}</p>
                                 </div>
                                 <div>
-                                    <p className="text-xs text-gray-500 font-mono mb-1">URGENCY</p>
+                                    <p className="text-xs text-amber-400 font-mono mb-1 tracking-widest font-bold">URGENCY</p>
                                     <p className={`${urgencyColors[analysis.urgency]?.text || urgencyColors.normal.text} font-black font-mono text-sm uppercase`}>
                                         {analysis.urgency}
                                     </p>
                                 </div>
                             </div>
                             <div className="mb-3">
-                                <p className="text-xs text-gray-500 font-mono mb-1">WHAT THEY WANT</p>
+                                <p className="text-xs text-amber-400 font-mono mb-1 tracking-widest font-bold">WHAT THEY WANT</p>
                                 <p className="text-white font-mono text-sm">{analysis.intent}</p>
                             </div>
-                            <div className="bg-black/40 rounded p-2">
-                                <p className="text-xs text-gray-500 font-mono mb-1">SUMMARY</p>
+                            <div className="bg-black border-2 border-gray-900 rounded p-2">
+                                <p className="text-xs text-amber-400 font-mono mb-1 tracking-widest font-bold">SUMMARY</p>
                                 <p className="text-gray-300 text-sm font-mono">{analysis.summary}</p>
                             </div>
                         </div>
 
                         {/* DRAFT RESPONSE */}
-                        <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-2 border-green-500 rounded-lg p-4">
+                        <div className="bg-black border-2 border-cyan-500/50 rounded-lg p-4">
                             <div className="flex items-center justify-between mb-3">
                                 <div className="flex items-center gap-2">
-                                    <Send className="w-5 h-5 text-green-400" />
-                                    <p className="text-green-400 font-black font-mono">DRAFT REPLY</p>
+                                    <Send className="w-5 h-5 text-cyan-400" />
+                                    <p className="text-cyan-400 font-black font-mono tracking-wider">DRAFT REPLY</p>
                                 </div>
                                 <Button
                                     onClick={copyResponse}
-                                    className="bg-green-500 hover:bg-green-600 text-black font-bold text-xs h-8"
+                                    className="bg-cyan-500 hover:bg-cyan-400 text-black font-bold text-xs h-8"
                                 >
                                     {copied ? (
                                         <>
@@ -200,9 +200,9 @@ AI will extract what matters and draft a reply"
                             <Textarea
                                 value={draftResponse}
                                 onChange={(e) => setDraftResponse(e.target.value)}
-                                className="bg-black border-gray-700 text-white min-h-[100px] font-mono text-sm mb-3"
+                                className="bg-black border-2 border-gray-900 text-white min-h-[100px] font-mono text-sm mb-3"
                             />
-                            <p className="text-xs text-gray-400 font-mono">
+                            <p className="text-xs text-gray-600 font-mono">
                                 ✓ Edit if needed, then copy and paste back to WhatsApp/Email
                             </p>
                         </div>
@@ -212,9 +212,9 @@ AI will extract what matters and draft a reply"
 
             {/* HOW IT WORKS */}
             {!analysis && (
-                <div className="bg-gray-900/20 border border-gray-800 rounded-lg p-4">
-                    <p className="text-gray-600 text-xs font-mono mb-2">HOW IT WORKS:</p>
-                    <ol className="text-gray-500 text-xs font-mono space-y-1">
+                <div className="bg-black border-2 border-gray-900 rounded-lg p-4">
+                    <p className="text-amber-400 text-xs font-mono mb-2 tracking-widest font-bold">HOW IT WORKS:</p>
+                    <ol className="text-gray-600 text-xs font-mono space-y-1">
                         <li>1. Copy any message (WhatsApp, email, SMS)</li>
                         <li>2. Paste here → AI analyzes it</li>
                         <li>3. AI drafts professional reply</li>
