@@ -71,19 +71,17 @@ export default function ScottAddArtist() {
         <div className="min-h-screen bg-black p-4 pb-20">
             
             {/* HEADER */}
-            <div className="flex items-center justify-between mb-6 pb-4 border-b-2 border-amber-500/30">
-                <button
-                    onClick={() => navigate(createPageUrl('ScottManager'))}
-                    className="flex items-center gap-2 text-gray-600 hover:text-amber-400 transition-all"
-                >
-                    <ArrowLeft className="w-5 h-5" />
-                    <span style={{ fontFamily: 'monospace' }} className="text-sm font-bold">BACK</span>
-                </button>
-                
-                <div className="flex items-center gap-2">
-                    <Radio className="w-8 h-8 text-cyan-400" />
-                    <h1 className="text-2xl font-black text-cyan-400" style={{ fontFamily: 'monospace' }}>ADD ARTIST</h1>
-                </div>
+            <button
+                onClick={() => navigate(createPageUrl('CB51'))}
+                className="flex items-center gap-2 text-gray-600 hover:text-cyan-400 transition-all mb-6"
+            >
+                <ArrowLeft className="w-4 h-4" />
+                <span className="text-sm font-bold font-mono">BACK</span>
+            </button>
+
+            <div className="mb-6">
+                <h1 className="text-3xl font-black text-cyan-400 font-mono mb-2">ADD ARTIST</h1>
+                <p className="text-gray-600 text-sm font-mono">Quick setup</p>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-6 max-w-md mx-auto">
@@ -121,151 +119,88 @@ export default function ScottAddArtist() {
                     </label>
                 </div>
 
-                {/* NAME - BIG INPUT */}
-                <div>
-                    <label className="text-amber-400 text-xs mb-3 block tracking-widest font-bold" style={{ fontFamily: 'monospace' }}>NAME *</label>
-                    <Input
-                        required
-                        value={formData.name}
-                        onChange={(e) => setFormData({...formData, name: e.target.value})}
-                        className="bg-black border-2 border-amber-500/50 !text-white h-14 text-lg focus:border-amber-500 transition-all"
-                        style={{ fontFamily: 'monospace', color: '#ffffff !important', WebkitTextFillColor: '#ffffff' }}
-                        placeholder="Full name"
-                    />
-                </div>
+                {/* NAME */}
+                <Input
+                    required
+                    value={formData.name}
+                    onChange={(e) => setFormData({...formData, name: e.target.value})}
+                    className="bg-black border-2 border-gray-900 text-white font-mono"
+                    placeholder="Name *"
+                />
 
                 {/* PHONE */}
-                <div>
-                    <label className="text-amber-400 text-xs mb-3 block tracking-widest font-bold" style={{ fontFamily: 'monospace' }}>PHONE</label>
-                    <Input
-                        type="tel"
-                        value={formData.phone}
-                        onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                        className="bg-black border-2 border-gray-800 !text-white h-14 text-lg focus:border-amber-500 transition-all"
-                        style={{ fontFamily: 'monospace', color: '#ffffff !important', WebkitTextFillColor: '#ffffff' }}
-                        placeholder="+44..."
-                    />
-                </div>
+                <Input
+                    type="tel"
+                    value={formData.phone}
+                    onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                    className="bg-black border-2 border-gray-900 text-white font-mono"
+                    placeholder="Phone"
+                />
 
                 {/* EMAIL */}
-                <div>
-                    <label className="text-amber-400 text-xs mb-3 block tracking-widest font-bold" style={{ fontFamily: 'monospace' }}>EMAIL</label>
-                    <Input
-                        type="email"
-                        value={formData.email}
-                        onChange={(e) => setFormData({...formData, email: e.target.value})}
-                        className="bg-black border-2 border-gray-800 !text-white h-14 text-lg focus:border-amber-500 transition-all"
-                        style={{ fontFamily: 'monospace', color: '#ffffff !important', WebkitTextFillColor: '#ffffff' }}
-                        placeholder="email@example.com"
-                    />
-                </div>
+                <Input
+                    type="email"
+                    value={formData.email}
+                    onChange={(e) => setFormData({...formData, email: e.target.value})}
+                    className="bg-black border-2 border-gray-900 text-white font-mono"
+                    placeholder="Email"
+                />
 
                 {/* SOCIALS */}
                 <div className="grid grid-cols-2 gap-3">
-                    <div>
-                        <label className="text-amber-400 text-xs mb-3 block tracking-widest font-bold" style={{ fontFamily: 'monospace' }}>INSTAGRAM</label>
-                        <Input
-                            value={formData.instagram}
-                            onChange={(e) => setFormData({...formData, instagram: e.target.value})}
-                            className="bg-black border-2 border-gray-800 !text-white h-14 text-base focus:border-amber-500 transition-all"
-                            style={{ fontFamily: 'monospace', color: '#ffffff !important', WebkitTextFillColor: '#ffffff' }}
-                            placeholder="@handle"
-                        />
-                    </div>
-                    <div>
-                        <label className="text-amber-400 text-xs mb-3 block tracking-widest font-bold" style={{ fontFamily: 'monospace' }}>SPOTIFY</label>
-                        <Input
-                            value={formData.spotify}
-                            onChange={(e) => setFormData({...formData, spotify: e.target.value})}
-                            className="bg-black border-2 border-gray-800 !text-white h-14 text-base focus:border-amber-500 transition-all"
-                            style={{ fontFamily: 'monospace', color: '#ffffff !important', WebkitTextFillColor: '#ffffff' }}
-                            placeholder="Link"
-                        />
-                    </div>
+                    <Input
+                        value={formData.instagram}
+                        onChange={(e) => setFormData({...formData, instagram: e.target.value})}
+                        className="bg-black border-2 border-gray-900 text-white font-mono"
+                        placeholder="Instagram"
+                    />
+                    <Input
+                        value={formData.spotify}
+                        onChange={(e) => setFormData({...formData, spotify: e.target.value})}
+                        className="bg-black border-2 border-gray-900 text-white font-mono"
+                        placeholder="Spotify"
+                    />
                 </div>
 
                 {/* RATE & GENRE */}
                 <div className="grid grid-cols-2 gap-3">
-                    <div>
-                        <label className="text-amber-400 text-xs mb-3 block tracking-widest font-bold" style={{ fontFamily: 'monospace' }}>RATE (£)</label>
-                        <Input
-                            type="number"
-                            value={formData.rate}
-                            onChange={(e) => setFormData({...formData, rate: e.target.value})}
-                            className="bg-black border-2 border-gray-800 !text-white h-14 text-lg focus:border-amber-500 transition-all"
-                            style={{ fontFamily: 'monospace', color: '#ffffff !important', WebkitTextFillColor: '#ffffff' }}
-                            placeholder="250"
-                        />
-                    </div>
-                    <div>
-                        <label className="text-amber-400 text-xs mb-3 block tracking-widest font-bold" style={{ fontFamily: 'monospace' }}>GENRE</label>
-                        <Input
-                            value={formData.genre}
-                            onChange={(e) => setFormData({...formData, genre: e.target.value})}
-                            className="bg-black border-2 border-gray-800 !text-white h-14 text-base focus:border-amber-500 transition-all"
-                            style={{ fontFamily: 'monospace', color: '#ffffff !important', WebkitTextFillColor: '#ffffff' }}
-                            placeholder="Rock, Jazz..."
-                        />
-                    </div>
+                    <Input
+                        value={formData.rate}
+                        onChange={(e) => setFormData({...formData, rate: e.target.value})}
+                        className="bg-black border-2 border-gray-900 text-white font-mono"
+                        placeholder="Rate (£250/night)"
+                    />
+                    <Input
+                        value={formData.genre}
+                        onChange={(e) => setFormData({...formData, genre: e.target.value})}
+                        className="bg-black border-2 border-gray-900 text-white font-mono"
+                        placeholder="Genre"
+                    />
                 </div>
 
                 {/* GEAR */}
-                <div>
-                    <label className="text-amber-400 text-xs mb-3 block tracking-widest font-bold" style={{ fontFamily: 'monospace' }}>GEAR/SKILLS</label>
-                    <Input
-                        value={formData.gear}
-                        onChange={(e) => setFormData({...formData, gear: e.target.value})}
-                        className="bg-black border-2 border-gray-800 !text-white h-14 text-base focus:border-amber-500 transition-all"
-                        style={{ fontFamily: 'monospace', color: '#ffffff !important', WebkitTextFillColor: '#ffffff' }}
-                        placeholder="Guitar, keys..."
-                    />
-                </div>
-
-                {/* RELATIONSHIP - BIG BUTTONS */}
-                <div>
-                    <label className="text-amber-400 text-xs mb-3 block tracking-widest font-bold" style={{ fontFamily: 'monospace' }}>RELATIONSHIP</label>
-                    <div className="grid grid-cols-3 gap-2">
-                        {relationshipOptions.map(opt => (
-                            <button
-                                key={opt.value}
-                                type="button"
-                                onClick={() => setFormData({...formData, relationship: opt.value})}
-                                className={`py-3 px-2 rounded-lg font-bold text-xs transition-all border-2 relative ${
-                                    formData.relationship === opt.value 
-                                        ? `${opt.color} text-white border-transparent` 
-                                        : 'bg-black text-gray-500 border-gray-800 hover:border-gray-600'
-                                }`}
-                                style={{ fontFamily: 'monospace' }}
-                            >
-                                {formData.relationship === opt.value && (
-                                    <Check className="w-4 h-4 absolute top-1 right-1" />
-                                )}
-                                {opt.label}
-                            </button>
-                        ))}
-                    </div>
-                </div>
+                <Input
+                    value={formData.gear}
+                    onChange={(e) => setFormData({...formData, gear: e.target.value})}
+                    className="bg-black border-2 border-gray-900 text-white font-mono"
+                    placeholder="Gear/Skills"
+                />
 
                 {/* NOTES */}
-                <div>
-                    <label className="text-amber-400 text-xs mb-3 block tracking-widest font-bold" style={{ fontFamily: 'monospace' }}>NOTES</label>
-                    <Textarea
-                        value={formData.notes}
-                        onChange={(e) => setFormData({...formData, notes: e.target.value})}
-                        className="bg-black border-2 border-gray-800 !text-white focus:border-amber-500 min-h-[100px] transition-all"
-                        style={{ fontFamily: 'monospace', color: '#ffffff !important', WebkitTextFillColor: '#ffffff' }}
-                        placeholder="Quick notes..."
-                    />
-                </div>
+                <Textarea
+                    value={formData.notes}
+                    onChange={(e) => setFormData({...formData, notes: e.target.value})}
+                    className="bg-black border-2 border-gray-900 text-white font-mono min-h-[100px]"
+                    placeholder="Notes"
+                />
 
-                {/* SAVE BUTTON - HUGE */}
+                {/* SAVE BUTTON */}
                 <Button
                     type="submit"
                     disabled={saving}
-                    className="w-full bg-cyan-500 hover:bg-cyan-400 text-black font-black h-16 text-xl transition-all shadow-lg"
-                    style={{ fontFamily: 'monospace', boxShadow: '0 0 30px rgba(6, 182, 212, 0.3)' }}
+                    className="w-full bg-cyan-500 hover:bg-cyan-600 text-black font-black py-4 font-mono"
                 >
-                    {saving ? 'SAVING...' : 'SAVE'}
+                    {saving ? 'SAVING...' : 'SAVE ARTIST'}
                 </Button>
             </form>
         </div>

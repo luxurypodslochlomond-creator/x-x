@@ -109,52 +109,32 @@ ${emailText}`,
             
             <button
                 onClick={() => navigate(-1)}
-                className="flex items-center gap-2 text-gray-500 hover:text-cyan-400 transition-all mb-6"
+                className="flex items-center gap-2 text-gray-600 hover:text-cyan-400 transition-all mb-6"
             >
                 <ArrowLeft className="w-4 h-4" />
                 <span className="text-sm font-bold font-mono">BACK</span>
             </button>
 
-            <div className="mb-6 pb-4 border-b-2 border-pink-500">
-                <div className="flex items-center gap-3">
-                    <Radio className="w-10 h-10 text-pink-400" />
-                    <div>
-                        <h1 className="text-3xl font-black text-pink-400 font-mono">GIG OFFERS</h1>
-                        <p className="text-gray-500 text-xs font-mono">Paste email → AI fills everything</p>
-                    </div>
-                </div>
+            <div className="mb-6">
+                <h1 className="text-3xl font-black text-cyan-400 font-mono mb-2">GIG OFFERS</h1>
+                <p className="text-gray-600 text-sm font-mono">Paste email → AI parses</p>
             </div>
 
             {/* PASTE EMAIL */}
-            <div className="bg-gradient-to-r from-pink-500/20 to-purple-500/20 border-2 border-pink-500 rounded-lg p-6 mb-6">
-                <div className="flex items-center gap-2 mb-4">
-                    <Mail className="w-5 h-5 text-pink-400" />
-                    <h2 className="text-pink-400 font-black text-lg font-mono">PASTE GIG EMAIL</h2>
-                </div>
-
+            <div className="bg-black border-2 border-cyan-500 rounded-lg p-4 mb-6">
                 <Textarea
                     value={emailText}
                     onChange={(e) => setEmailText(e.target.value)}
-                    className="bg-black border-2 border-gray-700 text-white min-h-[200px] font-mono text-sm mb-4"
-                    placeholder="Paste the entire email here... AI will extract all the details."
+                    className="bg-black border-2 border-gray-900 text-white min-h-[150px] font-mono text-sm mb-3"
+                    placeholder="Paste gig email here..."
                 />
 
                 <Button
                     onClick={parseEmail}
                     disabled={parsing || !emailText.trim()}
-                    className="w-full bg-pink-500 hover:bg-pink-400 text-white font-black h-14 text-lg"
+                    className="w-full bg-cyan-500 hover:bg-cyan-600 text-black font-black py-3 font-mono"
                 >
-                    {parsing ? (
-                        <>
-                            <Sparkles className="w-5 h-5 mr-2 animate-spin" />
-                            AI PARSING...
-                        </>
-                    ) : (
-                        <>
-                            <Sparkles className="w-5 h-5 mr-2" />
-                            MAGIC PARSE
-                        </>
-                    )}
+                    {parsing ? 'AI PARSING...' : 'PARSE EMAIL'}
                 </Button>
             </div>
 
@@ -165,59 +145,29 @@ ${emailText}`,
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -20 }}
-                        className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-2 border-green-500 rounded-lg p-6 mb-6"
+                        className="bg-black border-2 border-cyan-500 rounded-lg p-4 mb-6"
                     >
                         <div className="flex items-center justify-between mb-4">
-                            <h3 className="text-green-400 font-black text-lg font-mono">EXTRACTED DATA</h3>
+                            <h3 className="text-cyan-400 font-black font-mono">PARSED DATA</h3>
                             <Button
                                 onClick={handleSave}
                                 disabled={createMutation.isPending}
-                                className="bg-green-500 hover:bg-green-400 text-black font-black"
+                                className="bg-cyan-500 hover:bg-cyan-600 text-black font-black font-mono"
                             >
-                                {createMutation.isPending ? 'SAVING...' : 'SAVE OFFER'}
+                                {createMutation.isPending ? 'SAVING...' : 'SAVE'}
                             </Button>
                         </div>
 
-                        <div className="space-y-3">
-                            {parsedData.venue && (
-                                <div className="flex items-center gap-2">
-                                    <MapPin className="w-4 h-4 text-green-400" />
-                                    <span className="text-white font-bold font-mono">{parsedData.venue}</span>
-                                    {parsedData.city && <span className="text-gray-400 font-mono">• {parsedData.city}</span>}
-                                </div>
-                            )}
-                            {parsedData.date && (
-                                <div className="flex items-center gap-2">
-                                    <Calendar className="w-4 h-4 text-green-400" />
-                                    <span className="text-white font-mono">{parsedData.date}</span>
-                                    {parsedData.time && <span className="text-gray-400 font-mono">• {parsedData.time}</span>}
-                                </div>
-                            )}
-                            {parsedData.fee && (
-                                <div className="flex items-center gap-2">
-                                    <DollarSign className="w-4 h-4 text-green-400" />
-                                    <span className="text-white font-bold font-mono">£{parsedData.fee?.toLocaleString()}</span>
-                                </div>
-                            )}
-                            {parsedData.capacity && (
-                                <div className="flex items-center gap-2">
-                                    <Users className="w-4 h-4 text-green-400" />
-                                    <span className="text-white font-mono">{parsedData.capacity} capacity</span>
-                                </div>
-                            )}
+                        <div className="space-y-2 text-sm font-mono">
+                            {parsedData.venue && <p className="text-white">📍 {parsedData.venue}{parsedData.city ? `, ${parsedData.city}` : ''}</p>}
+                            {parsedData.date && <p className="text-white">📅 {parsedData.date}{parsedData.time ? ` @ ${parsedData.time}` : ''}</p>}
+                            {parsedData.fee && <p className="text-white">💰 £{parsedData.fee?.toLocaleString()}</p>}
+                            {parsedData.capacity && <p className="text-gray-400">Cap: {parsedData.capacity}</p>}
                             {parsedData.promoter && (
-                                <div className="bg-black/60 rounded p-3 mt-3">
-                                    <p className="text-xs text-gray-500 font-mono mb-1">PROMOTER</p>
-                                    <p className="text-white font-mono">{parsedData.promoter}</p>
-                                    {parsedData.promoter_contact && (
-                                        <p className="text-gray-400 text-sm font-mono mt-1">{parsedData.promoter_contact}</p>
-                                    )}
-                                </div>
-                            )}
-                            {parsedData.requirements && (
-                                <div className="bg-black/60 rounded p-3 mt-3">
-                                    <p className="text-xs text-gray-500 font-mono mb-1">REQUIREMENTS</p>
-                                    <p className="text-white text-sm font-mono">{parsedData.requirements}</p>
+                                <div className="bg-black border border-gray-900 rounded p-2 mt-2">
+                                    <p className="text-gray-600 text-xs mb-1">PROMOTER</p>
+                                    <p className="text-white">{parsedData.promoter}</p>
+                                    {parsedData.promoter_contact && <p className="text-gray-400 text-xs">{parsedData.promoter_contact}</p>}
                                 </div>
                             )}
                         </div>
@@ -226,14 +176,14 @@ ${emailText}`,
             </AnimatePresence>
 
             {/* EXISTING OFFERS WITH WORKFLOW */}
-            <div className="space-y-6">
-                <h2 className="text-white font-black font-mono text-xl mb-4">ALL OFFERS</h2>
+            <div className="space-y-4">
+                <h2 className="text-white font-black font-mono text-lg mb-3">ALL OFFERS</h2>
                 {isLoading ? (
-                    <p className="text-gray-500 text-center py-8 font-mono">Loading...</p>
+                    <p className="text-gray-600 text-center py-8 font-mono text-sm">Loading...</p>
                 ) : offers.length === 0 ? (
-                    <div className="bg-gray-900 border-2 border-gray-700 rounded-lg p-12 text-center">
-                        <Mail className="w-12 h-12 text-gray-600 mx-auto mb-3" />
-                        <p className="text-gray-500 font-mono">No gig offers yet</p>
+                    <div className="bg-black border-2 border-gray-900 rounded-lg p-8 text-center">
+                        <Mail className="w-8 h-8 text-gray-600 mx-auto mb-2" />
+                        <p className="text-gray-600 font-mono text-sm">No offers yet</p>
                     </div>
                 ) : (
                     offers
@@ -247,41 +197,21 @@ ${emailText}`,
                                 />
 
                                 {/* GIG DETAILS */}
-                                <div className="bg-gray-900 border-2 border-purple-500 rounded-lg p-4">
-                                    <div className="flex items-start justify-between mb-3">
-                                        <div className="flex-1">
-                                            <p className="text-white font-black text-xl font-mono mb-1">{offer.venue}</p>
-                                            <p className="text-purple-400 font-bold font-mono text-lg">
-                                                {format(new Date(offer.date), 'd MMM yyyy')} • £{offer.fee?.toLocaleString()}
-                                            </p>
-                                            <p className="text-gray-400 text-sm font-mono mt-1">{offer.city}, {offer.country}</p>
-                                            {!artistId && (
-                                                <p className="text-gray-500 text-xs font-mono mt-1">{getArtistName(offer.artist_id)}</p>
-                                            )}
-                                        </div>
-                                    </div>
-
-                                    {offer.capacity && (
-                                        <div className="bg-black/60 rounded p-2 mb-2">
-                                            <p className="text-xs text-gray-500 font-mono">CAPACITY</p>
-                                            <p className="text-white text-sm font-bold font-mono">{offer.capacity}</p>
-                                        </div>
+                                <div className="bg-black border-2 border-gray-900 rounded-lg p-4">
+                                    <p className="text-white font-black font-mono mb-2">{offer.venue}</p>
+                                    <p className="text-cyan-400 font-mono text-sm mb-1">
+                                        {format(new Date(offer.date), 'd MMM yyyy')} • £{offer.fee?.toLocaleString()}
+                                    </p>
+                                    <p className="text-gray-600 text-xs font-mono">{offer.city}, {offer.country}</p>
+                                    {!artistId && (
+                                        <p className="text-gray-600 text-xs font-mono mt-1">{getArtistName(offer.artist_id)}</p>
                                     )}
 
-                                    {offer.promoter && (
-                                        <div className="bg-black/60 rounded p-2 mb-2">
-                                            <p className="text-xs text-gray-500 font-mono">PROMOTER</p>
-                                            <p className="text-white text-sm font-mono">{offer.promoter}</p>
-                                            {offer.promoter_contact && (
-                                                <p className="text-gray-400 text-xs font-mono mt-1">{offer.promoter_contact}</p>
-                                            )}
-                                        </div>
-                                    )}
-
-                                    {offer.requirements && (
-                                        <div className="bg-black/60 rounded p-2">
-                                            <p className="text-xs text-gray-500 font-mono">REQUIREMENTS</p>
-                                            <p className="text-white text-sm font-mono">{offer.requirements}</p>
+                                    {(offer.capacity || offer.promoter || offer.requirements) && (
+                                        <div className="mt-3 pt-3 border-t border-gray-900 space-y-2">
+                                            {offer.capacity && <p className="text-gray-600 text-xs font-mono">Cap: {offer.capacity}</p>}
+                                            {offer.promoter && <p className="text-gray-600 text-xs font-mono">Promoter: {offer.promoter}</p>}
+                                            {offer.requirements && <p className="text-gray-600 text-xs font-mono">{offer.requirements}</p>}
                                         </div>
                                     )}
                                 </div>
