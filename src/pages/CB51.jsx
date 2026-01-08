@@ -22,6 +22,8 @@ export default function CB51() {
     const navigate = useNavigate();
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [modalOpen, setModalOpen] = useState(false);
+    const [modalContent, setModalContent] = useState(null);
     const queryClient = useQueryClient();
 
     useEffect(() => {
