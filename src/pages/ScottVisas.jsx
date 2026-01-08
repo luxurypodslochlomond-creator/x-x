@@ -9,6 +9,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { format } from 'date-fns';
+import AI51DocumentProcessor from '@/components/scott/AI51DocumentProcessor';
 
 export default function ScottVisas() {
     const navigate = useNavigate();
@@ -131,6 +132,41 @@ export default function ScottVisas() {
                         exit={{ opacity: 0, height: 0 }}
                         className="bg-gray-900 border-2 border-cyan-500 rounded-lg p-6 mb-6"
                     >
+                        {/* AI51 DOCUMENT PROCESSOR */}
+                        <div className="mb-6">
+                            <AI51DocumentProcessor
+                                label="📸 SCREENSHOT VISA LETTER"
+                                extractionPrompt={`Extract visa application details from this document. Return JSON with: visa_type, country, application_deadline (YYYY-MM-DD format), tour_dates (as text), agent_contact (name and contact), cost (number only), notes (any important details).`}
+                                jsonSchema={{
+                                    type: "object",
+                                    properties: {
+                                        visa_type: { type: "string" },
+                                        country: { type: "string" },
+                                        application_deadline: { type: "string" },
+                                        tour_dates: { type: "string" },
+                                        agent_contact: { type: "string" },
+                                        cost: { type: "number" },
+                                        notes: { type: "string" }
+                                    }
+                                }}
+                                onExtracted={(data, fileUrl) => {
+                                    setFormData({
+                                        ...formData,
+                                        visa_type: data.visa_type || formData.visa_type,
+                                        country: data.country || formData.country,
+                                        application_deadline: data.application_deadline || formData.application_deadline,
+                                        tour_dates: data.tour_dates || formData.tour_dates,
+                                        agent_contact: data.agent_contact || formData.agent_contact,
+                                        cost: data.cost || formData.cost,
+                                        notes: data.notes || formData.notes
+                                    });
+                                }}
+                            />
+                            <p className="text-xs font-mono text-gray-600 text-center mt-2">
+                                Or fill manually below ↓
+                            </p>
+                        </div>
+
                         <form onSubmit={handleSubmit} className="space-y-4">
                             {!artistId && (
                                 <div>
