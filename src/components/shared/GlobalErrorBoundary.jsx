@@ -14,13 +14,13 @@ class GlobalErrorBoundary extends React.Component {
         this.healingCheckInterval = null;
     }
 
-    componentDidMount() {
-        // Auto-check if fix is deployed
-        if (this.state.hasError && !this.state.isNetworkError) {
+    componentDidUpdate(prevProps, prevState) {
+        // Start auto-reload when error happens
+        if (this.state.hasError && !prevState.hasError && !this.state.isNetworkError) {
             this.healingCheckInterval = setInterval(() => {
-                // Try to reload - if fix is deployed, error won't happen again
+                console.log('♾️ Auto-healing: checking for fix...');
                 window.location.reload();
-            }, 10000); // Check every 10 seconds
+            }, 10000);
         }
     }
 
@@ -79,6 +79,9 @@ class GlobalErrorBoundary extends React.Component {
     }
 
     handleReset = () => {
+        if (this.healingCheckInterval) {
+            clearInterval(this.healingCheckInterval);
+        }
         this.setState({ 
             hasError: false, 
             error: null, 
