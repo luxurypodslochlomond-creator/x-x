@@ -135,7 +135,7 @@ export default function ScottVisas() {
                         {/* AI51 DOCUMENT PROCESSOR */}
                         <div className="mb-6">
                             <AI51DocumentProcessor
-                                label="📸 SCREENSHOT VISA LETTER"
+                                label="📸 SCREENSHOT / UPLOAD DOCUMENT"
                                 extractionPrompt={`Extract visa application details from this document. Return JSON with: visa_type, country, application_deadline (YYYY-MM-DD format), tour_dates (as text), agent_contact (name and contact), cost (number only), notes (any important details).`}
                                 jsonSchema={{
                                     type: "object",
@@ -163,7 +163,7 @@ export default function ScottVisas() {
                                 }}
                             />
                             <p className="text-xs font-mono text-gray-600 text-center mt-2">
-                                Or fill manually below ↓
+                                AI parsing + understanding • Or fill manually below ↓
                             </p>
                         </div>
 
