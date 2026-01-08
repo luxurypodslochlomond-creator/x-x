@@ -60,8 +60,8 @@ export default function ScottArtistHome() {
         return (
             <div className="min-h-screen bg-black flex items-center justify-center">
                 <div className="text-center">
-                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-cyan-400 mx-auto mb-4"></div>
-                    <p className="text-gray-500 font-mono">Loading artist...</p>
+                    <Radio className="w-12 h-12 text-cyan-400 mx-auto mb-3 animate-pulse" />
+                    <p className="text-cyan-400 font-black font-mono">CB51</p>
                 </div>
             </div>
         );
