@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { ArrowLeft, Music, Heart, Globe, Mic2, Users, Radio } from 'lucide-react';
 import Gill51Sunglasses8Bit from '@/components/shared/Gill51Sunglasses8Bit';
+import { base44 } from '@/api/base44Client';
+import { Textarea } from '@/components/ui/textarea';
+import { Button } from '@/components/ui/button';
 
 /**
  * CB51 ABOUT - CLEAN PROFESSIONAL
@@ -10,9 +13,32 @@ import Gill51Sunglasses8Bit from '@/components/shared/Gill51Sunglasses8Bit';
  */
 
 export default function ScottAbout() {
+    const [answers, setAnswers] = useState({
+        question_1_saves_time: '',
+        question_2_annoying: '',
+        question_3_where_use: '',
+        question_4_save_5_hours: '',
+        question_5_add_feature: '',
+        additional_notes: ''
+    });
+    const [submitted, setSubmitted] = useState(false);
+    const [submitting, setSubmitting] = useState(false);
+
     React.useEffect(() => {
         document.title = 'About CB51 - Citizen Band 51 • Zero Stress Manager';
     }, []);
+
+    const handleSubmit = async () => {
+        setSubmitting(true);
+        try {
+            await base44.entities.ScottFeedback.create(answers);
+            setSubmitted(true);
+        } catch (error) {
+            console.error('Failed to submit feedback:', error);
+        } finally {
+            setSubmitting(false);
+        }
+    };
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-[#0a0f1a] via-[#0f1419] to-[#0a0f1a] pb-20">
@@ -260,48 +286,92 @@ export default function ScottAbout() {
                         <div className="text-5xl">🎸</div>
                         <div>
                             <h2 className="text-cyan-400 font-black text-2xl font-mono">SK51 - 5 Questions</h2>
-                            <p className="text-gray-500 text-sm font-mono">Answer in the shed, no rush ♾️📻</p>
+                            <p className="text-gray-500 text-sm font-mono">Type answers directly here ♾️📻</p>
                         </div>
                     </div>
 
-                    <div className="space-y-4 text-sm font-mono">
-                        <div className="bg-gray-900/40 border border-gray-800 rounded-lg p-4">
-                            <p className="text-white font-bold mb-2 text-base">1. Which bits save you time?</p>
-                            <p className="text-white text-sm mb-1">• Calendar? Invoices? Gig stuff?</p>
-                            <p className="text-gray-400 text-xs">What do you actually use?</p>
+                    {submitted ? (
+                        <div className="bg-green-900/40 border border-green-500 rounded-lg p-6 text-center">
+                            <p className="text-green-400 font-black text-xl mb-2">✓ ANSWERS SAVED</p>
+                            <p className="text-white text-sm font-mono">We'll build whatever helps bro ♾️❤️♾️</p>
                         </div>
+                    ) : (
+                        <div className="space-y-4 text-sm font-mono">
+                            <div className="bg-gray-900/40 border border-gray-800 rounded-lg p-4">
+                                <p className="text-white font-bold mb-2 text-base">1. Which bits save you time?</p>
+                                <p className="text-gray-400 text-xs mb-2">Calendar? Invoices? Gig stuff?</p>
+                                <Textarea
+                                    value={answers.question_1_saves_time}
+                                    onChange={(e) => setAnswers({...answers, question_1_saves_time: e.target.value})}
+                                    placeholder="Type here..."
+                                    className="bg-black border-gray-700 text-white font-mono text-sm min-h-[60px]"
+                                />
+                            </div>
 
-                        <div className="bg-gray-900/40 border border-gray-800 rounded-lg p-4">
-                            <p className="text-white font-bold mb-2 text-base">2. What's still annoying?</p>
-                            <p className="text-white text-sm mb-1">• What frustrates you?</p>
-                            <p className="text-gray-400 text-xs">What takes too long?</p>
-                        </div>
+                            <div className="bg-gray-900/40 border border-gray-800 rounded-lg p-4">
+                                <p className="text-white font-bold mb-2 text-base">2. What's still annoying?</p>
+                                <p className="text-gray-400 text-xs mb-2">What frustrates you?</p>
+                                <Textarea
+                                    value={answers.question_2_annoying}
+                                    onChange={(e) => setAnswers({...answers, question_2_annoying: e.target.value})}
+                                    placeholder="Type here..."
+                                    className="bg-black border-gray-700 text-white font-mono text-sm min-h-[60px]"
+                                />
+                            </div>
 
-                        <div className="bg-gray-900/40 border border-gray-800 rounded-lg p-4">
-                            <p className="text-white font-bold mb-2 text-base">3. Where do you use it?</p>
-                            <p className="text-white text-sm mb-1">• Tour bus? Home? Hotel?</p>
-                            <p className="text-gray-400 text-xs">Need offline or online mostly?</p>
-                        </div>
+                            <div className="bg-gray-900/40 border border-gray-800 rounded-lg p-4">
+                                <p className="text-white font-bold mb-2 text-base">3. Where do you use it?</p>
+                                <p className="text-gray-400 text-xs mb-2">Tour bus? Home? Hotel?</p>
+                                <Textarea
+                                    value={answers.question_3_where_use}
+                                    onChange={(e) => setAnswers({...answers, question_3_where_use: e.target.value})}
+                                    placeholder="Type here..."
+                                    className="bg-black border-gray-700 text-white font-mono text-sm min-h-[60px]"
+                                />
+                            </div>
 
-                        <div className="bg-gray-900/40 border border-gray-800 rounded-lg p-4">
-                            <p className="text-white font-bold mb-2 text-base">4. What would save you 5 hours?</p>
-                            <p className="text-white text-sm mb-1">• One thing that wastes your time?</p>
-                            <p className="text-gray-400 text-xs">What would make biggest difference?</p>
-                        </div>
+                            <div className="bg-gray-900/40 border border-gray-800 rounded-lg p-4">
+                                <p className="text-white font-bold mb-2 text-base">4. What would save you 5 hours?</p>
+                                <p className="text-gray-400 text-xs mb-2">One thing that wastes your time?</p>
+                                <Textarea
+                                    value={answers.question_4_save_5_hours}
+                                    onChange={(e) => setAnswers({...answers, question_4_save_5_hours: e.target.value})}
+                                    placeholder="Type here..."
+                                    className="bg-black border-gray-700 text-white font-mono text-sm min-h-[60px]"
+                                />
+                            </div>
 
-                        <div className="bg-gray-900/40 border border-gray-800 rounded-lg p-4">
-                            <p className="text-white font-bold mb-2 text-base">5. If you could add one thing?</p>
-                            <p className="text-white text-sm mb-1">• What's the one feature you'd add?</p>
-                            <p className="text-gray-400 text-xs">Make it yours</p>
-                        </div>
+                            <div className="bg-gray-900/40 border border-gray-800 rounded-lg p-4">
+                                <p className="text-white font-bold mb-2 text-base">5. If you could add one thing?</p>
+                                <p className="text-gray-400 text-xs mb-2">What's the one feature you'd add?</p>
+                                <Textarea
+                                    value={answers.question_5_add_feature}
+                                    onChange={(e) => setAnswers({...answers, question_5_add_feature: e.target.value})}
+                                    placeholder="Type here..."
+                                    className="bg-black border-gray-700 text-white font-mono text-sm min-h-[60px]"
+                                />
+                            </div>
 
-                        <div className="bg-gray-900/60 border border-cyan-500/30 rounded-lg p-5">
-                            <p className="text-cyan-400 font-black mb-3 text-base">Just voice note it 🎤</p>
-                            <p className="text-white text-sm mb-2">• Record on your phone</p>
-                            <p className="text-white text-sm mb-3">• Or just chat when you see us</p>
-                            <p className="text-gray-500 text-sm font-bold">Zero stress - we'll build whatever helps ♾️📻♾️</p>
+                            <div className="bg-gray-900/40 border border-gray-800 rounded-lg p-4">
+                                <p className="text-white font-bold mb-2 text-base">Anything else?</p>
+                                <p className="text-gray-400 text-xs mb-2">Any other thoughts</p>
+                                <Textarea
+                                    value={answers.additional_notes}
+                                    onChange={(e) => setAnswers({...answers, additional_notes: e.target.value})}
+                                    placeholder="Optional..."
+                                    className="bg-black border-gray-700 text-white font-mono text-sm min-h-[60px]"
+                                />
+                            </div>
+
+                            <Button
+                                onClick={handleSubmit}
+                                disabled={submitting}
+                                className="w-full bg-cyan-500 hover:bg-cyan-600 text-black font-black py-4 text-base"
+                            >
+                                {submitting ? 'SAVING...' : 'SUBMIT ANSWERS'}
+                            </Button>
                         </div>
-                    </div>
+                    )}
                 </div>
 
                 {/* START */}
