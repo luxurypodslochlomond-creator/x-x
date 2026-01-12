@@ -7,6 +7,9 @@ import { base44 } from '@/api/base44Client';
 import { useQuery } from '@tanstack/react-query';
 import { format, isBefore, startOfDay } from 'date-fns';
 import TechStatusBar from '@/components/scott/TechStatusBar';
+import ScottBandMembers from '@/components/scott/ScottBandMembers';
+import ScottEmailTaskScanner from '@/components/scott/ScottEmailTaskScanner';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 /**
  * ARTIST HOME PAGE - SCOTT'S FLOOR DIAGRAM
@@ -23,12 +26,22 @@ export default function ScottArtistHome() {
     const [artist, setArtist] = useState(null);
     const urlParams = new URLSearchParams(window.location.search);
     const artistId = urlParams.get('id');
+    const queryClient = useQueryClient();
 
     // Fetch calendar events for widget
     const { data: events = [] } = useQuery({
         queryKey: ['scottCalendarEvents', artistId],
         queryFn: () => base44.entities.ScottEvent.filter({ artist_id: artistId }),
         enabled: !!artistId
+    });
+
+    // Update artist mutation
+    const updateArtistMutation = useMutation({
+        mutationFn: (updates) => base44.entities.ScottArtist.update(artistId, updates),
+        onSuccess: (updated) => {
+            setArtist(updated);
+            queryClient.invalidateQueries({ queryKey: ['scottArtists'] });
+        }
     });
 
     useEffect(() => {
@@ -190,6 +203,25 @@ export default function ScottArtistHome() {
                         </Link>
                     );
                 })}
+            </div>
+
+            {/* BAND MEMBERS */}
+            <div className="mb-8">
+                <ScottBandMembers 
+                    artist={artist} 
+                    onUpdate={updateArtistMutation.mutate}
+                />
+            </div>
+
+            {/* EMAIL TASK SCANNER */}
+            <div className="mb-8">
+                <ScottEmailTaskScanner 
+                    artistId={artistId}
+                    onTasksExtracted={() => {
+                        queryClient.invalidateQueries({ queryKey: ['scottTasks'] });
+                        queryClient.invalidateQueries({ queryKey: ['scottCalendarEvents'] });
+                    }}
+                />
             </div>
 
             {/* CALENDAR WIDGET */}
