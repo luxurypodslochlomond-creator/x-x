@@ -6,6 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 import { ArrowLeft, Calendar, Mail, CheckCircle, Clock, XCircle, TrendingUp } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { format } from 'date-fns';
+import ScottBreadcrumbs from '@/components/scott/ScottBreadcrumbs';
 
 /**
  * BOOKINGS DASHBOARD - GIG OFFERS AT A GLANCE
@@ -21,6 +22,12 @@ export default function ScottLiveBookings() {
         queryFn: () => base44.entities.ScottGigOffer.filter(artistId ? { artist_id: artistId } : {}),
     });
 
+    const { data: artist } = useQuery({
+        queryKey: ['scottArtist', artistId],
+        queryFn: () => base44.entities.ScottArtist.filter({ id: artistId }).then(r => r[0]),
+        enabled: !!artistId
+    });
+
     const pending = offers.filter(o => o.status === 'pending_manager_review').length;
     const sentToBand = offers.filter(o => o.status === 'sent_to_band').length;
     const confirmed = offers.filter(o => o.status === 'confirmed').length;
@@ -31,12 +38,15 @@ export default function ScottLiveBookings() {
     return (
         <div className="min-h-screen bg-black text-white p-4 pb-24">
             
+            <ScottBreadcrumbs path={[
+                { label: 'CB51', url: 'CB51' },
+                { label: artist?.name || 'Artist', url: `ScottArtistHome?id=${artistId}` },
+                { label: 'Live', url: `ScottLive?id=${artistId}` },
+                { label: 'Bookings' }
+            ]} />
+
             {/* HEADER */}
             <div className="mb-6 pb-4 border-b-2 border-pink-500">
-                <Link to={createPageUrl(`ScottLive?id=${artistId}`)} className="flex items-center gap-2 text-gray-400 hover:text-pink-400 mb-4">
-                    <ArrowLeft className="w-4 h-4" />
-                    <span className="text-xs font-mono font-bold">BACK TO LIVE</span>
-                </Link>
                 <h1 className="text-3xl font-black text-pink-400 font-mono">BOOKINGS</h1>
                 <p className="text-gray-500 text-sm font-mono">Gig Offers & Confirmed Shows</p>
             </div>
