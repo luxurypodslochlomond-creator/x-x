@@ -555,9 +555,9 @@ const LayoutInner = ({ children, currentPageName }) => {
           <AnimatePresence mode="wait">
             <motion.div
               key={location.pathname}
-              initial={{ opacity: 0.7 }}
+              initial={{ opacity: 1 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.08, ease: "easeOut" }}
+              transition={{ duration: 0 }}
             >
               {children}
             </motion.div>
