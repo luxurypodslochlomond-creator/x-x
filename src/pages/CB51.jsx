@@ -10,7 +10,6 @@ import { base44 } from '@/api/base44Client';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import TechStatusBar from '@/components/scott/TechStatusBar';
 import { format } from 'date-fns';
-import CB51Modal from '@/components/scott/CB51Modal';
 import AI51WhatIsBanner from '@/components/scott/AI51WhatIsBanner';
 
 /**
@@ -22,8 +21,6 @@ export default function CB51() {
     const navigate = useNavigate();
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
-    const [modalOpen, setModalOpen] = useState(false);
-    const [modalContent, setModalContent] = useState(null);
     const queryClient = useQueryClient();
 
     useEffect(() => {
@@ -184,70 +181,21 @@ export default function CB51() {
                         </div>
                     </Link>
                     <div className="w-px h-10 bg-gradient-to-b from-transparent via-cyan-500/30 to-transparent"></div>
-                    <button 
-                        onClick={() => {
-                            setModalContent({
-                                title: 'TIME SAVED',
-                                body: (
-                                    <div className="space-y-4">
-                                        <p className="text-white font-black font-mono text-3xl">{hoursPerWeek} hours</p>
-                                        <p className="text-gray-400 text-sm">this month</p>
-                                        <div className="space-y-2 text-sm font-mono text-gray-400 bg-black/50 rounded-lg p-3">
-                                            <p>• Email parsing: ~2h per offer</p>
-                                            <p>• Band coordination: ~30m per gig</p>
-                                            <p>• Draft responses: ~15m each</p>
-                                        </div>
-                                        <p className="text-cyan-400 font-bold font-mono mt-4">Time = money bro ♾️❤️♾️</p>
-                                    </div>
-                                )
-                            });
-                            setModalOpen(true);
-                        }}
-                        className="flex-1"
-                    >
+                    <div className="flex-1">
                         <div className="text-center hover:bg-cyan-500/10 rounded-lg p-2 transition-all">
                             <p className="text-cyan-400/60 text-[9px] font-mono tracking-wider">SAVED</p>
                             <p className="text-white text-base font-black font-mono mt-1">{hoursPerWeek}h</p>
                         </div>
-                    </button>
+                    </div>
                     <div className="w-px h-10 bg-gradient-to-b from-transparent via-cyan-500/30 to-transparent"></div>
-                    <button
-                        onClick={() => {
-                            const items = [];
-                            if (pendingOffers > 0) items.push(`${pendingOffers} gig offers need review`);
-                            if (awaitingBand > 0) items.push(`${awaitingBand} awaiting band votes`);
-                            if (overdueInvoices > 0) items.push(`${overdueInvoices} overdue invoices`);
-                            if (urgentMessages > 0) items.push(`${urgentMessages} urgent messages`);
-
-                            setModalContent({
-                                title: 'TODAY',
-                                body: items.length > 0 ? (
-                                    <div className="space-y-3 font-mono text-sm">
-                                        {items.map((item, i) => (
-                                            <div key={i} className="flex items-center gap-2 bg-black/50 rounded-lg p-3">
-                                                <div className="w-2 h-2 rounded-full bg-amber-400"></div>
-                                                <p className="text-amber-400">{item}</p>
-                                            </div>
-                                        ))}
-                                    </div>
-                                ) : (
-                                    <div className="text-center py-6">
-                                        <p className="text-green-400 font-bold font-mono text-2xl mb-2">All clear bro ✓</p>
-                                        <p className="text-gray-400 text-sm">Nothing needs attention right now</p>
-                                    </div>
-                                )
-                            });
-                            setModalOpen(true);
-                        }}
-                        className="flex-1"
-                    >
+                    <div className="flex-1">
                         <div className="text-center hover:bg-amber-500/10 rounded-lg p-2 transition-all">
                             <p className="text-amber-400/60 text-[9px] font-mono tracking-wider">TODAY</p>
                             <p className="text-white text-base font-black font-mono mt-1">
                                 {pendingOffers + awaitingBand + overdueInvoices + urgentMessages}
                             </p>
                         </div>
-                    </button>
+                    </div>
                 </div>
             </div>
 
@@ -379,15 +327,6 @@ export default function CB51() {
             <div className="mt-12 text-center">
                 <p className="text-gray-800 text-xs font-mono">CB51 • Simple</p>
             </div>
-
-            {/* CB51 MODAL */}
-            <CB51Modal
-                isOpen={modalOpen}
-                onClose={() => setModalOpen(false)}
-                title={modalContent?.title}
-            >
-                {modalContent?.body}
-            </CB51Modal>
             </div>
             );
             }
