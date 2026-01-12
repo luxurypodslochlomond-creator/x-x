@@ -23,8 +23,8 @@ export default function ScottLive() {
             link: createPageUrl('ScottLiveBookings') + (artistId ? `?id=${artistId}` : '')
         },
         {
-            title: 'ADMIN',
-            subtitle: 'Advancing / Invoicing etc',
+            title: 'CONTRACTS & DOCS',
+            subtitle: 'Contracts • Legal • Insurance',
             icon: DollarSign,
             color: 'amber',
             link: createPageUrl('ScottLiveAdmin') + (artistId ? `?id=${artistId}` : '')

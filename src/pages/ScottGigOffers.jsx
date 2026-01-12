@@ -120,8 +120,9 @@ ${emailText}`,
                 <p className="text-gray-600 text-sm font-mono">Paste email → AI parses</p>
             </div>
 
-            {/* PASTE EMAIL */}
+            {/* NEW OFFER */}
             <div className="bg-black border-2 border-cyan-500 rounded-lg p-4 mb-6">
+                <h2 className="text-cyan-400 font-black font-mono text-lg mb-4">+ NEW OFFER</h2>
                 <Textarea
                     value={emailText}
                     onChange={(e) => setEmailText(e.target.value)}
