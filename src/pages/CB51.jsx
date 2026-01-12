@@ -127,7 +127,10 @@ export default function CB51() {
         archiveArtistMutation.mutate({ artistId: artist.id, archived: false });
     };
 
-    if (loading || isLoading) {
+    const hoursPerWeek = allOffers.filter(o => o.status === 'pending_manager_review' || o.status === 'sent_to_band').length * 2;
+    const upcomingGigs = allOffers.filter(o => o.status === 'confirmed' && o.date && new Date(o.date) > new Date());
+
+    if (loading || artistsLoading) {
         return (
             <div className="min-h-screen bg-black flex items-center justify-center relative">
                 {/* Content preview behind */}
