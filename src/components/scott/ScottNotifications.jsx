@@ -87,7 +87,12 @@ export default function ScottNotifications({ offer, artist, onResponse }) {
     };
 
     // Check if current user already responded
-    const user = await base44.auth.me().catch(() => null);
+    const [user, setUser] = useState(null);
+    
+    useEffect(() => {
+        base44.auth.me().then(setUser).catch(() => setUser(null));
+    }, []);
+
     const myResponse = (offer.band_responses || []).find(r => 
         r.member_name === (user?.full_name || user?.email)
     );
