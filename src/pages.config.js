@@ -259,6 +259,7 @@ import TechStack from './pages/TechStack';
 import TechnicalSpecification from './pages/TechnicalSpecification';
 import Terms from './pages/Terms';
 import TeslaPeriodicTable from './pages/TeslaPeriodicTable';
+import Test from './pages/Test';
 import TestAI51 from './pages/TestAI51';
 import TheLoveEconomy from './pages/TheLoveEconomy';
 import ThePhysics from './pages/ThePhysics';
@@ -293,7 +294,6 @@ import YoungWarriors from './pages/YoungWarriors';
 import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
-import Test from './pages/Test';
 import __Layout from './Layout.jsx';
 
 
@@ -559,6 +559,7 @@ export const PAGES = {
     "TechnicalSpecification": TechnicalSpecification,
     "Terms": Terms,
     "TeslaPeriodicTable": TeslaPeriodicTable,
+    "Test": Test,
     "TestAI51": TestAI51,
     "TheLoveEconomy": TheLoveEconomy,
     "ThePhysics": ThePhysics,
@@ -593,7 +594,6 @@ export const PAGES = {
     "ZeroEgoProtocol": ZeroEgoProtocol,
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
-    "Test": Test,
 }
 
 export const pagesConfig = {

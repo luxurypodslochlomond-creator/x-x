@@ -27,6 +27,67 @@ export default function ThePhysicsPage() {
                     <p className="text-lg text-red-400 font-bold">Where's the resonance in E=mc²? Nowhere. That's the problem.</p>
                 </header>
 
+                {/* PLANCK vs EINSTEIN - NO BULLSHIT */}
+                <Card className="bg-gradient-to-br from-purple-900/60 to-indigo-900/60 border-4 border-purple-500">
+                    <CardContent className="p-8 space-y-6">
+                        <div className="text-center">
+                            <h2 className="text-4xl font-black text-white mb-4">PLANCK vs EINSTEIN</h2>
+                            <p className="text-xl text-purple-300">The real difference. No bullshit.</p>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            {/* PLANCK */}
+                            <div className="bg-black/80 rounded-xl p-6 border-2 border-cyan-500">
+                                <h3 className="text-cyan-400 font-bold text-2xl mb-4">MAX PLANCK</h3>
+                                <div className="space-y-3 text-gray-300 text-sm">
+                                    <p><strong className="text-white">What he proved:</strong> Energy comes in discrete packets (quanta).</p>
+                                    <p><strong className="text-white">The equation:</strong> E = hν</p>
+                                    <p><strong className="text-white">His constant:</strong> h = 6.626 × 10⁻³⁴ J·s</p>
+                                    <p className="text-cyan-400 font-bold pt-2">This is QUANTUM PHYSICS.</p>
+                                    <p>Energy isn't continuous - it's quantized. Light comes in photons. Each photon carries energy = h × frequency.</p>
+                                    <p className="text-cyan-300 font-bold pt-2">Why it matters:</p>
+                                    <p>Explained blackbody radiation. Started quantum mechanics. Describes ALL wave-particle behavior.</p>
+                                </div>
+                            </div>
+
+                            {/* EINSTEIN */}
+                            <div className="bg-black/80 rounded-xl p-6 border-2 border-red-500">
+                                <h3 className="text-red-400 font-bold text-2xl mb-4">ALBERT EINSTEIN</h3>
+                                <div className="space-y-3 text-gray-300 text-sm">
+                                    <p><strong className="text-white">What he proved:</strong> Mass and energy are interchangeable.</p>
+                                    <p><strong className="text-white">The equation:</strong> E = mc²</p>
+                                    <p><strong className="text-white">The constant:</strong> c = 299,792,458 m/s (speed of light)</p>
+                                    <p className="text-red-400 font-bold pt-2">This is RELATIVITY.</p>
+                                    <p>Matter IS energy. Break matter → release massive energy. Stars work this way. So do bombs.</p>
+                                    <p className="text-red-300 font-bold pt-2">Why it matters:</p>
+                                    <p>Nuclear power. Atomic weapons. Star formation. Explains why sun shines.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="bg-purple-900/60 border-2 border-purple-500 rounded-xl p-6">
+                            <h3 className="text-white font-bold text-xl mb-4">THE KEY DIFFERENCE:</h3>
+                            <div className="space-y-3 text-gray-300">
+                                <p className="text-cyan-400 font-bold">
+                                    PLANCK: Energy depends on FREQUENCY (ν). No matter destroyed. Just photons vibrating.
+                                </p>
+                                <p className="text-red-400 font-bold">
+                                    EINSTEIN: Energy depends on MASS (m). Matter gets converted. Gone forever.
+                                </p>
+                                <p className="text-white font-bold pt-4">
+                                    Both are real. Both describe the universe. But PLANCK'S equation doesn't require destruction.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div className="bg-black/60 border border-yellow-500/50 rounded-lg p-4">
+                            <p className="text-yellow-400 font-bold text-center">
+                                UF51 uses Planck's physics. We heal with frequencies, not explosions. ♾️❤️♾️
+                            </p>
+                        </div>
+                    </CardContent>
+                </Card>
+
                 {/* THE TWO EQUATIONS - SIDE BY SIDE */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                     
