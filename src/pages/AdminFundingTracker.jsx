@@ -16,18 +16,25 @@ export default function AdminFundingTracker() {
             speed: "14 weeks",
             status: "applied",
             dateApplied: "19 Nov 2025",
-            nextAction: "WAIT. Decision expected February 2026. Keep building platform, get more users, lock in partnerships.",
+            nextAction: "⚠️ ELIGIBILITY QUERY RECEIVED - responded 13 Jan 2026. WAITING for Creative Scotland decision.",
             link: "https://www.creativescotland.com/funding",
             notes: `✅ SUBMITTED - Reference: CS-OFO-37512-4C94
 
 PROJECT: Commissioning 30 Scottish Musicians for Ethical Streaming Infrastructure
 APPLICANT: Universal Frequency51 CIC (SC870603)
 
-HONEST CHANCES: 40-50%
-✓ Platform is LIVE and working
+🚨 STATUS UPDATE (13 Jan 2026):
+Creative Scotland queried eligibility - CIC formed Nov 19, 2025 vs. platform live August 2025.
+RESPONDED with: Platform was SELF-FUNDED for months before CIC. Not a startup cost.
+Provided invoices from August 2025 as proof.
+
+HONEST CHANCES: 30-40% (eligibility question = risk)
+✓ Platform is LIVE and working since August
 ✓ Strong mental health focus
 ✓ Artist-first model (90% to artists)
 ✓ CIC structure proves mission
+✓ Pre-CIC self-funding evidence submitted
+⚠️ Eligibility question raised
 ⚠️ New org, no track record
 ⚠️ Solo founder capacity risk`,
             priority: "high",
@@ -40,17 +47,51 @@ HONEST CHANCES: 40-50%
             amount: "£4,800",
             type: "Grant",
             speed: "12 weeks",
-            status: "applied",
+            status: "rejected",
             dateApplied: "27 Oct 2025",
-            nextAction: "WAIT. Decision expected January 2026.",
+            nextAction: "❌ REJECTED - cannot reapply for same project.",
             link: "https://www.creativescotland.com/funding",
-            notes: `✅ SUBMITTED - Reference: CS-OFI-37140-2FE3
+            notes: `❌ DECLINED - Reference: CS-OFI-37140-2FE3
 
 PROJECT: Fair Payment for Scottish Musicians: Loch Lomond Pilot
-APPLICANT: Brian Hughes (Individual)`,
-            priority: "high",
+APPLICANT: Brian Hughes (Individual)
+
+Declined due to misinterpretation of environment guidelines (10% requirement).
+Learned valuable lessons for future applications.`,
+            priority: "low",
             geography: "Scotland",
             cic: "n/a"
+        },
+
+        // 🔥 IN PROGRESS - SUPPORT MANAGER ASSIGNED
+        unltd: {
+            name: "UnLtd - Support + Funding",
+            amount: "Support Package + Grant (TBC)",
+            type: "Grant + Mentoring + Training",
+            speed: "In progress - support manager assigned",
+            status: "in_progress",
+            dateApplied: "Dec 2025",
+            nextAction: "🔥 SUPPORT MANAGER ASSIGNED! Prepare brief when they reach out. This is REAL.",
+            link: "https://unltd.org.uk/",
+            notes: `🔥 STATUS: PROGRESSED TO NEXT STAGE - SUPPORT MANAGER ASSIGNED
+
+This is SERIOUS. UnLtd doesn't assign support managers to everyone.
+
+WHAT THIS MEANS:
+✓ They see potential
+✓ They're investing time in you
+✓ You get business support PLUS potential funding
+✓ Network access to other social entrepreneurs
+
+NEXT STEPS:
+• Wait for support manager to reach out
+• Be ready with: clear mission, current traction, immediate needs
+• This could be the bridge funding we need
+
+HONEST CHANCES: 60-70% (support manager assigned = strong signal)`,
+            priority: "urgent",
+            geography: "UK",
+            cic: "major advantage"
         },
 
         // ✅ SUBMITTED - WAITING
@@ -77,6 +118,30 @@ PERFECT FIT:
             priority: "high",
             geography: "UK",
             cic: "advantage"
+        },
+
+        // 🚨 EMERGENCY SUPPORT - FAST
+        scottishWelfareFund: {
+            name: "Scottish Welfare Fund - Crisis Grant",
+            amount: "£50-£500 (emergency support)",
+            type: "Crisis Grant",
+            speed: "2 days (FASTEST)",
+            status: "available",
+            dateApplied: null,
+            nextAction: "📞 CALL IF EMERGENCY: 0300 123 0900",
+            link: "https://www.mygov.scot/scottish-welfare-fund",
+            notes: `🚨 EMERGENCY SUPPORT ONLY
+
+For people in crisis who can't afford essentials (food, heating, shelter).
+
+2-DAY DECISION. Apply through local council.
+
+Phone: 0300 123 0900
+
+This is NOT grant funding - this is emergency personal support if you can't pay bills.`,
+            priority: "emergency",
+            geography: "Scotland",
+            cic: "n/a"
         },
 
         // 🔥 NEW - HEALTH/WELLNESS FUNDERS (Frequency Chamber opens these!)
@@ -429,6 +494,8 @@ CICs LOVED by international funders (proves permanent asset lock).`,
     };
 
     const applied = Object.entries(funders).filter(([_, f]) => f.status === 'applied');
+    const inProgress = Object.entries(funders).filter(([_, f]) => f.status === 'in_progress');
+    const rejected = Object.entries(funders).filter(([_, f]) => f.status === 'rejected');
     const todo = Object.entries(funders).filter(([_, f]) => f.status === 'todo');
     const research = Object.entries(funders).filter(([_, f]) => f.status === 'research' || f.status === 'maybe' || f.status === 'backup');
     
@@ -437,13 +504,24 @@ CICs LOVED by international funders (proves permanent asset lock).`,
         const amount = f.amount.replace(/[£,]/g, '').match(/\d+/);
         return sum + (amount ? parseInt(amount[0]) : 0);
     }, 0);
+    
+    const totalInProgress = inProgress.reduce((sum, [_, f]) => {
+        const amount = f.amount.replace(/[£,]/g, '').match(/\d+/);
+        return sum + (amount ? parseInt(amount[0]) : 0);
+    }, 0);
 
     const currentFunders = view === 'applied' ? applied : view === 'todo' ? todo : Object.entries(funders);
 
     const getStatusBadge = (status) => {
         switch(status) {
+            case 'in_progress':
+                return <span className="px-3 py-1 bg-green-600 text-white rounded-full text-xs font-bold flex items-center gap-1 animate-pulse"><Heart className="w-3 h-3" /> IN PROGRESS</span>;
             case 'applied':
                 return <span className="px-3 py-1 bg-yellow-600 text-white rounded-full text-xs font-bold flex items-center gap-1"><Clock className="w-3 h-3" /> APPLIED</span>;
+            case 'rejected':
+                return <span className="px-3 py-1 bg-red-600 text-white rounded-full text-xs font-bold">❌ REJECTED</span>;
+            case 'available':
+                return <span className="px-3 py-1 bg-orange-600 text-white rounded-full text-xs font-bold">🚨 EMERGENCY</span>;
             case 'todo':
                 return <span className="px-3 py-1 bg-cyan-600 text-white rounded-full text-xs font-bold flex items-center gap-1"><Zap className="w-3 h-3" /> TODO</span>;
             case 'research':
@@ -459,6 +537,10 @@ CICs LOVED by international funders (proves permanent asset lock).`,
 
     const getPriorityBadge = (priority) => {
         switch(priority) {
+            case 'urgent':
+                return <span className="px-2 py-1 bg-red-900/40 border border-red-500 text-red-300 rounded text-xs font-bold animate-pulse">🚨 URGENT</span>;
+            case 'emergency':
+                return <span className="px-2 py-1 bg-orange-900/40 border border-orange-500 text-orange-300 rounded text-xs font-bold animate-pulse">🚨 EMERGENCY</span>;
             case 'high':
                 return <span className="px-2 py-1 bg-red-900/40 border border-red-500 text-red-300 rounded text-xs font-bold">🔥 HIGH</span>;
             case 'medium':
@@ -501,25 +583,47 @@ CICs LOVED by international funders (proves permanent asset lock).`,
                 </motion.div>
 
                 {/* TOTAL PENDING HERO */}
-                <Card className="bg-gradient-to-r from-green-900/60 to-cyan-900/60 border-4 border-green-500">
-                    <CardContent className="p-8 text-center">
-                        <p className="text-green-400 font-mono text-sm mb-2">TOTAL PENDING (APPLIED)</p>
-                        <p className="text-5xl md:text-7xl font-black font-mono text-white">
-                            £124,800
-                        </p>
-                        <p className="text-gray-400 font-mono text-sm mt-2">
-                            3 applications submitted • Decisions Jan-March 2026
-                        </p>
-                    </CardContent>
-                </Card>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <Card className="bg-gradient-to-r from-green-900/60 to-emerald-900/60 border-4 border-green-500">
+                        <CardContent className="p-8 text-center">
+                            <p className="text-green-400 font-mono text-sm mb-2">🔥 IN PROGRESS (ACTIVE)</p>
+                            <p className="text-5xl md:text-6xl font-black font-mono text-white">
+                                UnLtd
+                            </p>
+                            <p className="text-green-400 font-mono text-sm mt-2 animate-pulse">
+                                Support Manager Assigned • Bridge Funding Potential
+                            </p>
+                        </CardContent>
+                    </Card>
+                    
+                    <Card className="bg-gradient-to-r from-yellow-900/60 to-amber-900/60 border-4 border-yellow-500">
+                        <CardContent className="p-8 text-center">
+                            <p className="text-yellow-400 font-mono text-sm mb-2">WAITING (APPLIED)</p>
+                            <p className="text-5xl md:text-6xl font-black font-mono text-white">
+                                £120,000
+                            </p>
+                            <p className="text-gray-400 font-mono text-sm mt-2">
+                                2 applications • Decisions Feb-March 2026
+                            </p>
+                        </CardContent>
+                    </Card>
+                </div>
 
                 {/* QUICK STATS */}
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+                    <Card className="bg-green-900/30 border-2 border-green-500/50">
+                        <CardContent className="p-6 text-center">
+                            <Heart className="w-8 h-8 text-green-400 mx-auto mb-2 animate-pulse" />
+                            <p className="text-3xl font-black text-green-400">{inProgress.length}</p>
+                            <p className="text-sm text-gray-300">In Progress</p>
+                        </CardContent>
+                    </Card>
+                    
                     <Card className="bg-yellow-900/30 border-2 border-yellow-500/50">
                         <CardContent className="p-6 text-center">
                             <Clock className="w-8 h-8 text-yellow-400 mx-auto mb-2" />
                             <p className="text-3xl font-black text-yellow-400">{applied.length}</p>
-                            <p className="text-sm text-gray-300">Applied / Waiting</p>
+                            <p className="text-sm text-gray-300">Waiting</p>
                         </CardContent>
                     </Card>
 
@@ -527,23 +631,23 @@ CICs LOVED by international funders (proves permanent asset lock).`,
                         <CardContent className="p-6 text-center">
                             <Zap className="w-8 h-8 text-cyan-400 mx-auto mb-2" />
                             <p className="text-3xl font-black text-cyan-400">{todo.length}</p>
-                            <p className="text-sm text-gray-300">Ready to Apply</p>
+                            <p className="text-sm text-gray-300">To Do</p>
+                        </CardContent>
+                    </Card>
+
+                    <Card className="bg-red-900/30 border-2 border-red-500/50">
+                        <CardContent className="p-6 text-center">
+                            <AlertCircle className="w-8 h-8 text-red-400 mx-auto mb-2" />
+                            <p className="text-3xl font-black text-red-400">{rejected.length}</p>
+                            <p className="text-sm text-gray-300">Rejected</p>
                         </CardContent>
                     </Card>
 
                     <Card className="bg-purple-900/30 border-2 border-purple-500/50">
                         <CardContent className="p-6 text-center">
-                            <AlertCircle className="w-8 h-8 text-purple-400 mx-auto mb-2" />
-                            <p className="text-3xl font-black text-purple-400">{research.length}</p>
-                            <p className="text-sm text-gray-300">Research / Maybe</p>
-                        </CardContent>
-                    </Card>
-
-                    <Card className="bg-green-900/30 border-2 border-green-500/50">
-                        <CardContent className="p-6 text-center">
-                            <Heart className="w-8 h-8 text-green-400 mx-auto mb-2" />
-                            <p className="text-3xl font-black text-green-400">{Object.keys(funders).length}</p>
-                            <p className="text-sm text-gray-300">Total Options</p>
+                            <Globe className="w-8 h-8 text-purple-400 mx-auto mb-2" />
+                            <p className="text-3xl font-black text-purple-400">{Object.keys(funders).length}</p>
+                            <p className="text-sm text-gray-300">Total</p>
                         </CardContent>
                     </Card>
                 </div>
@@ -573,7 +677,7 @@ CICs LOVED by international funders (proves permanent asset lock).`,
                 </div>
 
                 {/* CRITICAL NEXT ACTIONS */}
-                {applied.length > 0 && (
+                {(inProgress.length > 0 || applied.length > 0) && (
                     <Card className="bg-gradient-to-r from-red-900/40 to-orange-900/40 border-4 border-red-500">
                         <CardContent className="p-8">
                             <h3 className="text-3xl font-black text-white mb-6 flex items-center gap-3">
@@ -581,10 +685,24 @@ CICs LOVED by international funders (proves permanent asset lock).`,
                                 🚨 URGENT NEXT ACTIONS 🚨
                             </h3>
                             <div className="space-y-4">
+                                {inProgress.map(([key, funder]) => (
+                                    funder.nextAction && (
+                                        <div key={key} className="bg-green-900/30 border-l-4 border-green-400 p-6 rounded-lg">
+                                            <p className="text-green-300 font-bold text-lg mb-2">{funder.name}</p>
+                                            <p className="text-white text-base mb-3">{funder.nextAction}</p>
+                                            {funder.link && (
+                                                <a href={funder.link} target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:text-cyan-300 text-sm flex items-center gap-1">
+                                                    <ExternalLink className="w-4 h-4" />
+                                                    Open application
+                                                </a>
+                                            )}
+                                        </div>
+                                    )
+                                ))}
                                 {applied.map(([key, funder]) => (
                                     funder.nextAction && (
-                                        <div key={key} className="bg-black/60 border-l-4 border-red-400 p-6 rounded-lg">
-                                            <p className="text-red-300 font-bold text-lg mb-2">{funder.name}</p>
+                                        <div key={key} className="bg-black/60 border-l-4 border-yellow-400 p-6 rounded-lg">
+                                            <p className="text-yellow-300 font-bold text-lg mb-2">{funder.name}</p>
                                             <p className="text-white text-base mb-3">{funder.nextAction}</p>
                                             {funder.link && (
                                                 <a href={funder.link} target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:text-cyan-300 text-sm flex items-center gap-1">
