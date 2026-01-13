@@ -7,7 +7,6 @@ import { Radio, ArrowLeft, Plus, Trash2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import ScottBreadcrumbs from '@/components/scott/ScottBreadcrumbs';
 
 /**
  * CALENDAR - Scott's sketch
@@ -77,11 +76,13 @@ export default function ScottCalendarView() {
     return (
         <div className="min-h-screen bg-black text-white p-4 pb-24">
             
-            <ScottBreadcrumbs path={[
-                { label: 'CB51', url: 'CB51' },
-                { label: artistId ? 'Artist' : 'All Artists', url: artistId ? `ScottArtistHome?id=${artistId}` : 'CB51' },
-                { label: 'Calendar' }
-            ]} />
+            <button
+                onClick={() => navigate(-1)}
+                className="flex items-center gap-2 text-gray-600 hover:text-cyan-400 transition-all mb-6"
+            >
+                <ArrowLeft className="w-4 h-4" />
+                <span className="text-sm font-bold font-mono">BACK</span>
+            </button>
 
             <div className="mb-6 pb-4 border-b-2 border-cyan-500">
                 <div className="flex items-center justify-between">

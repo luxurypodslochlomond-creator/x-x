@@ -10,7 +10,6 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { format } from 'date-fns';
 import ScottGigWorkflow from '@/components/scott/ScottGigWorkflow';
 import AI51GigFilter from '@/components/scott/AI51GigFilter';
-import ScottBreadcrumbs from '@/components/scott/ScottBreadcrumbs';
 
 export default function ScottGigOffers() {
     const navigate = useNavigate();
@@ -110,11 +109,13 @@ ${emailText}`,
     return (
         <div className="min-h-screen bg-black text-white p-4 pb-24">
             
-            <ScottBreadcrumbs path={[
-                { label: 'CB51', url: 'CB51' },
-                { label: artist?.name || 'All Artists', url: artistId ? `ScottArtistHome?id=${artistId}` : 'CB51' },
-                { label: 'Gig Offers' }
-            ]} />
+            <button
+                onClick={() => navigate(-1)}
+                className="flex items-center gap-2 text-gray-600 hover:text-cyan-400 transition-all mb-6"
+            >
+                <ArrowLeft className="w-4 h-4" />
+                <span className="text-sm font-bold font-mono">BACK</span>
+            </button>
 
             <div className="mb-6">
                 <h1 className="text-3xl font-black text-cyan-400 font-mono mb-2">GIG OFFERS</h1>

@@ -14,12 +14,6 @@ export default function ScottLive() {
     const urlParams = new URLSearchParams(window.location.search);
     const artistId = urlParams.get('id');
 
-    const { data: artist } = useQuery({
-        queryKey: ['scottArtist', artistId],
-        queryFn: () => base44.entities.ScottArtist.filter({ id: artistId }).then(r => r[0]),
-        enabled: !!artistId
-    });
-
     const sections = [
         {
             title: 'BOOKINGS',
