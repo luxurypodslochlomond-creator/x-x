@@ -100,11 +100,14 @@ export default function Volckano() {
         particles.current = [];
         collectibles.current = [];
         
-        for (let i = 0; i < 5; i++) {
+        // Mix of all beings - humans, animals, plants, AI ♾️❤️
+        const beings = ['🧑', '🐕', '🐈', '🐰', '🌱', '🤖', '🦋', '🐢'];
+        for (let i = 0; i < 8; i++) {
             people.current.push({
-                x: 450 + (i * 150),
+                x: 450 + (i * 120),
                 y: 350,
-                saved: false
+                saved: false,
+                emoji: beings[Math.floor(Math.random() * beings.length)]
             });
         }
         
@@ -399,14 +402,15 @@ export default function Volckano() {
                         />
                     ))}
 
-                    {/* People */}
-                    {people.current.map((person, i) => !person.saved && person.x > -50 && (
+                    {/* All Beings - humans, animals, nature, AI ♾️❤️ */}
+                    {people.current.map((being, i) => !being.saved && being.x > -50 && (
                         <motion.div
                             key={i}
                             className="absolute w-[40px] h-[40px] text-3xl flex items-center justify-center"
-                            style={{ left: `${person.x}px`, top: `${person.y}px` }}
+                            style={{ left: `${being.x}px`, top: `${being.y}px` }}
                             animate={{
-                                y: [0, -5, 0],
+                                y: [0, -8, 0],
+                                rotate: [0, 5, -5, 0]
                             }}
                             transition={{
                                 duration: 1,
@@ -414,7 +418,7 @@ export default function Volckano() {
                                 ease: "easeInOut"
                             }}
                         >
-                            🧑
+                            {being.emoji}
                         </motion.div>
                     ))}
 
@@ -480,7 +484,7 @@ export default function Volckano() {
                     <div className="absolute top-4 left-4 right-4 bg-white/90 backdrop-blur-xl border-4 border-white rounded-2xl px-4 py-3 shadow-2xl">
                         <div className="flex items-center justify-between mb-2">
                             <div>
-                                <p className="text-gray-900 text-lg font-black">SAVED: {score} 💙</p>
+                                <p className="text-gray-900 text-lg font-black">SAVED: {score} ♾️❤️</p>
                                 {gameTime.current < 3000 && gameStarted && (
                                     <motion.p 
                                         animate={{ scale: [1, 1.1, 1] }}
@@ -530,7 +534,7 @@ export default function Volckano() {
                                     TAP TO FLY! ✨
                                 </motion.p>
                                 <p className="text-2xl text-white font-bold bg-black/40 px-6 py-3 rounded-2xl">
-                                    Dodge 🔥 Save 🧑 Collect ⭐
+                                    Save ALL Life ♾️❤️
                                 </p>
                                 
                                 {/* Character selector */}
@@ -582,7 +586,7 @@ export default function Volckano() {
                                 <p className="text-6xl">💥</p>
                                 <h2 className="text-4xl font-black text-red-400">CRASH!</h2>
                                 <div className="space-y-2">
-                                    <p className="text-white text-xl font-bold">Saved: {score} people</p>
+                                    <p className="text-white text-xl font-bold">Saved: {score} beings ♾️❤️</p>
                                     {score === highScore && score > 0 && (
                                         <p className="text-yellow-400 text-sm font-black animate-pulse">🏆 NEW BEST!</p>
                                     )}
