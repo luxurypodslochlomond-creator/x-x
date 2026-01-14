@@ -22,6 +22,7 @@ export default function Volckano() {
     const velocity = useRef(0);
     const obstacles = useRef([]);
     const people = useRef([]);
+    const particles = useRef([]);
     const gameTime = useRef(0);
     const [, forceUpdate] = useState(0);
 
@@ -71,6 +72,7 @@ export default function Volckano() {
         velocity.current = 0;
         obstacles.current = [];
         people.current = [];
+        particles.current = [];
         
         for (let i = 0; i < 5; i++) {
             people.current.push({
@@ -139,8 +141,27 @@ export default function Volckano() {
                     p.saved = true;
                     setScore(s => s + 1);
                     playSound(528, 150);
+                    // CREATE SPARKLE PARTICLES
+                    for (let i = 0; i < 15; i++) {
+                        particles.current.push({
+                            x: p.x + 20,
+                            y: p.y + 20,
+                            vx: (Math.random() - 0.5) * 8,
+                            vy: (Math.random() - 0.5) * 8,
+                            life: 30,
+                            color: ['#FFD700', '#00FFFF', '#FF69B4', '#00FF00'][Math.floor(Math.random() * 4)]
+                        });
+                    }
                 }
                 p.x -= 2;
+            });
+
+            // UPDATE PARTICLES
+            particles.current = particles.current.filter(p => {
+                p.x += p.vx;
+                p.y += p.vy;
+                p.life -= 1;
+                return p.life > 0;
             });
 
             forceUpdate(v => v + 1);
@@ -215,37 +236,104 @@ export default function Volckano() {
             <div className="relative">
                 <div className="relative w-[400px] h-[500px] bg-black/60 border-4 border-orange-500 rounded-xl overflow-hidden">
                     
-                    {/* Player */}
+                    {/* Player - with glow effect */}
                     <div
                         className="absolute left-[70px] w-[50px] h-[50px] text-4xl flex items-center justify-center transition-transform duration-75"
-                        style={{ top: `${playerY.current}px`, transform: `rotate(${velocity.current > 0 ? 15 : -15}deg)` }}
+                        style={{ 
+                            top: `${playerY.current}px`, 
+                            transform: `rotate(${velocity.current > 0 ? 15 : -15}deg)`,
+                            filter: score > 0 ? 'drop-shadow(0 0 10px #FFD700)' : 'none'
+                        }}
                     >
-                        {score > 0 ? '😇' : '😊'}
+                        {score > 4 ? '🤩' : score > 0 ? '😇' : '😊'}
                     </div>
+
+                    {/* Particles - SPARKLES! */}
+                    {particles.current.map((p, i) => (
+                        <motion.div
+                            key={i}
+                            className="absolute w-2 h-2 rounded-full"
+                            style={{
+                                left: `${p.x}px`,
+                                top: `${p.y}px`,
+                                backgroundColor: p.color,
+                                boxShadow: `0 0 8px ${p.color}`
+                            }}
+                            animate={{
+                                scale: [1, 0],
+                                opacity: [1, 0]
+                            }}
+                            transition={{
+                                duration: 0.6
+                            }}
+                        />
+                    ))}
 
                     {/* People */}
                     {people.current.map((person, i) => !person.saved && person.x > -50 && (
-                        <div
+                        <motion.div
                             key={i}
                             className="absolute w-[40px] h-[40px] text-3xl flex items-center justify-center"
                             style={{ left: `${person.x}px`, top: `${person.y}px` }}
+                            animate={{
+                                y: [0, -5, 0],
+                            }}
+                            transition={{
+                                duration: 1,
+                                repeat: Infinity,
+                                ease: "easeInOut"
+                            }}
                         >
                             🧑
-                        </div>
+                        </motion.div>
                     ))}
 
-                    {/* Obstacles */}
+                    {/* Obstacles - ANIMATED FLAMES */}
                     {obstacles.current.map((obs, i) => (
                         <div
                             key={i}
-                            className="absolute w-[50px] bg-gradient-to-b from-red-600 to-orange-800 border-4 border-red-900 rounded flex items-center justify-center text-2xl"
+                            className="absolute w-[50px]"
                             style={{
                                 left: `${obs.x}px`,
                                 top: `${obs.y}px`,
                                 height: `${obs.h}px`
                             }}
                         >
-                            {obs.y === 0 ? '🌋' : '🔥'}
+                            {/* Wavy flame effect */}
+                            <div className="relative w-full h-full">
+                                <motion.div
+                                    animate={{
+                                        scaleY: [1, 1.2, 1],
+                                        scaleX: [1, 0.9, 1],
+                                    }}
+                                    transition={{
+                                        duration: 0.5,
+                                        repeat: Infinity,
+                                        ease: "easeInOut"
+                                    }}
+                                    className="absolute inset-0 bg-gradient-to-t from-red-600 via-orange-500 to-yellow-400 rounded-t-full"
+                                    style={{
+                                        filter: 'blur(2px)',
+                                        boxShadow: '0 0 20px rgba(255, 69, 0, 0.8), inset 0 0 20px rgba(255, 255, 0, 0.5)'
+                                    }}
+                                />
+                                <motion.div
+                                    animate={{
+                                        scaleY: [1, 1.3, 1],
+                                        opacity: [0.8, 1, 0.8]
+                                    }}
+                                    transition={{
+                                        duration: 0.4,
+                                        repeat: Infinity,
+                                        ease: "easeInOut",
+                                        delay: 0.2
+                                    }}
+                                    className="absolute inset-0 bg-gradient-to-t from-orange-600 via-yellow-400 to-yellow-200 rounded-t-full opacity-70"
+                                />
+                                <div className="absolute inset-0 flex items-center justify-center text-3xl">
+                                    {obs.y === 0 ? '🔥' : '🔥'}
+                                </div>
+                            </div>
                         </div>
                     ))}
 
