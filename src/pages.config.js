@@ -300,6 +300,7 @@ import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
 import Why432Hz from './pages/Why432Hz';
+import AI51AntiManipulationProtocol from './pages/AI51AntiManipulationProtocol';
 import __Layout from './Layout.jsx';
 
 
@@ -606,6 +607,7 @@ export const PAGES = {
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
     "Why432Hz": Why432Hz,
+    "AI51AntiManipulationProtocol": AI51AntiManipulationProtocol,
 }
 
 export const pagesConfig = {
