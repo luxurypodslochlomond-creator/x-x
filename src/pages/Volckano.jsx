@@ -75,7 +75,7 @@ export default function Volckano() {
         } catch(e) {}
     };
 
-    const jump = () => {
+    const handleTouch = (e) => {
         if (gameOver) {
             resetGame();
             return;
@@ -84,8 +84,16 @@ export default function Volckano() {
             startGame();
             return;
         }
-        velocity.current = -6;
-        playSound(432, 50);
+        
+        // Get touch position and move player there smoothly
+        const rect = e.currentTarget.getBoundingClientRect();
+        const touchY = e.touches ? e.touches[0].clientY - rect.top : e.clientY - rect.top;
+        
+        // Smooth movement to finger position
+        const targetY = Math.max(0, Math.min(420, touchY - 25));
+        playerY.current = targetY;
+        velocity.current = 0;
+        playSound(432, 30);
     };
 
     const startGame = () => {
@@ -129,14 +137,8 @@ export default function Volckano() {
         const interval = setInterval(() => {
             gameTime.current += 20;
 
-            // GENTLE PHYSICS
-            velocity.current += 0.35;
-            playerY.current += velocity.current;
-
-            if (playerY.current < 0) {
-                playerY.current = 0;
-                velocity.current = 0;
-            }
+            // Gentle bounds checking
+            if (playerY.current < 0) playerY.current = 0;
             if (playerY.current > 420) {
                 setGameOver(true);
                 playSound(200, 300);
@@ -251,28 +253,50 @@ export default function Volckano() {
 
     if (showLogin) {
         return (
-            <div className="h-screen w-screen relative overflow-hidden bg-gradient-to-b from-orange-900 to-black">
-                <img 
-                    src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6889f31e76713b9cd47e043c/870b0a855_IMG_6227.png"
-                    className="absolute inset-0 w-full h-full object-cover opacity-50"
-                    alt="Volcano"
-                />
+            <div className="h-screen w-screen relative overflow-hidden bg-gradient-to-br from-purple-600 via-pink-500 to-orange-500">
+                <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS1vcGFjaXR5PSIwLjEiIHN0cm9rZS13aWR0aD0iMSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmlkKSIvPjwvc3ZnPg==')] opacity-30" />
                 
-                <div className="relative z-10 h-full flex items-center justify-center px-6">
-                    <div className="w-full max-w-sm space-y-4">
+                <div className="relative z-10 h-full flex flex-col items-center justify-center px-6 gap-8">
+                    <motion.div
+                        initial={{ scale: 0, rotate: -180 }}
+                        animate={{ scale: 1, rotate: 0 }}
+                        transition={{ type: "spring", duration: 0.8 }}
+                        className="text-center"
+                    >
                         <motion.div
-                            initial={{ scale: 0 }}
-                            animate={{ scale: 1 }}
-                            className="text-center mb-8"
+                            animate={{ 
+                                scale: [1, 1.1, 1],
+                                rotate: [0, 5, -5, 0]
+                            }}
+                            transition={{ 
+                                duration: 2,
+                                repeat: Infinity,
+                                ease: "easeInOut"
+                            }}
+                            className="text-9xl mb-4"
                         >
-                            <h1 className="text-5xl sm:text-6xl md:text-7xl font-black text-white mb-2" style={{ 
-                                textShadow: '4px 4px 0 #FF4500, 8px 8px 20px #000'
-                            }}>
-                                VOLCKANO
-                            </h1>
-                            <p className="text-orange-300 font-bold text-lg">by Gergie7 ♾️❤️</p>
+                            🌋
                         </motion.div>
-                        
+                        <h1 className="text-6xl sm:text-7xl font-black text-white mb-2" style={{ 
+                            textShadow: '0 0 40px rgba(255,255,255,0.5), 4px 4px 0 rgba(0,0,0,0.3)'
+                        }}>
+                            VOLCKANO
+                        </h1>
+                        <motion.p 
+                            animate={{ opacity: [0.7, 1, 0.7] }}
+                            transition={{ duration: 2, repeat: Infinity }}
+                            className="text-white font-bold text-xl"
+                        >
+                            by Gergie7 ♾️❤️
+                        </motion.p>
+                    </motion.div>
+                    
+                    <motion.div
+                        initial={{ y: 50, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        transition={{ delay: 0.3 }}
+                        className="w-full max-w-sm space-y-4"
+                    >
                         <input
                             type="text"
                             value={playerName}
@@ -283,12 +307,14 @@ export default function Volckano() {
                                     setShowLogin(false);
                                 }
                             }}
-                            placeholder="Your name..."
-                            className="w-full bg-black/60 backdrop-blur-md border-4 border-orange-500 px-6 py-5 text-white text-center text-2xl font-black placeholder:text-orange-200/50 focus:border-orange-400 focus:outline-none transition-all rounded-xl"
+                            placeholder="What's your name? 😊"
+                            className="w-full bg-white/90 backdrop-blur-xl border-4 border-white px-6 py-6 text-gray-900 text-center text-2xl font-black placeholder:text-gray-400 focus:border-yellow-400 focus:outline-none transition-all rounded-2xl shadow-2xl"
                             autoFocus
                         />
                         
-                        <button
+                        <motion.button
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
                             onClick={() => {
                                 if (playerName.trim()) {
                                     localStorage.setItem('volckano_player', playerName);
@@ -296,11 +322,11 @@ export default function Volckano() {
                                 }
                             }}
                             disabled={!playerName.trim()}
-                            className="w-full bg-orange-600 hover:bg-orange-500 text-white font-black py-6 text-2xl disabled:opacity-40 transition-all rounded-xl border-b-8 border-orange-900"
+                            className="w-full bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 text-white font-black py-7 text-3xl disabled:opacity-40 transition-all rounded-2xl shadow-2xl border-b-8 border-red-700"
                         >
-                            🌋 START
-                        </button>
-                    </div>
+                            🎮 LET'S PLAY!
+                        </motion.button>
+                    </motion.div>
                 </div>
             </div>
         );
@@ -308,24 +334,39 @@ export default function Volckano() {
 
     return (
         <div 
-            className="h-screen w-screen bg-gradient-to-b from-orange-900 via-red-900 to-black overflow-hidden select-none flex items-center justify-center"
-            onClick={jump}
-            onTouchStart={(e) => { e.preventDefault(); jump(); }}
+            className="h-screen w-screen bg-gradient-to-b from-purple-900 via-pink-900 to-orange-900 overflow-hidden select-none flex items-center justify-center"
+            onMouseMove={gameStarted && !gameOver ? handleTouch : undefined}
+            onTouchMove={(e) => { 
+                e.preventDefault(); 
+                if (gameStarted && !gameOver) handleTouch(e); 
+            }}
+            onTouchStart={(e) => { 
+                e.preventDefault(); 
+                if (!gameStarted || gameOver) handleTouch(e);
+            }}
+            onClick={!gameStarted || gameOver ? handleTouch : undefined}
         >
-            <div className="relative">
-                <div className="relative w-[400px] h-[500px] bg-black/60 border-4 border-orange-500 rounded-xl overflow-hidden">
+            <div className="relative w-full h-full max-w-md mx-auto flex items-center justify-center">
+                <div className="relative w-full aspect-[4/5] max-h-[85vh] bg-gradient-to-b from-sky-400 via-sky-300 to-green-400 border-8 border-white rounded-3xl overflow-hidden shadow-2xl">
                     
                     {/* Player - with glow effect */}
-                    <div
-                        className="absolute left-[70px] w-[50px] h-[50px] text-4xl flex items-center justify-center transition-transform duration-75"
+                    <motion.div
+                        className="absolute left-[15%] w-[60px] h-[60px] text-5xl flex items-center justify-center z-20"
                         style={{ 
-                            top: `${playerY.current}px`, 
-                            transform: `rotate(${velocity.current > 0 ? 15 : -15}deg)`,
-                            filter: score > 0 ? 'drop-shadow(0 0 10px #FFD700)' : 'none'
+                            top: `${playerY.current}px`,
+                            filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.3)) drop-shadow(0 0 15px rgba(255,215,0,0.6))'
+                        }}
+                        animate={{
+                            scale: [1, 1.1, 1],
+                        }}
+                        transition={{
+                            duration: 0.5,
+                            repeat: Infinity,
+                            ease: "easeInOut"
                         }}
                     >
                         {currentCharacter}
-                    </div>
+                    </motion.div>
 
                     {/* Collectible Stars */}
                     {collectibles.current.map((star, i) => !star.collected && star.x > -50 && (
@@ -436,77 +477,99 @@ export default function Volckano() {
                     ))}
 
                     {/* Ground */}
-                    <div className="absolute bottom-0 left-0 right-0 h-[50px] bg-gradient-to-b from-orange-700 to-red-900 border-t-4 border-orange-600" />
+                    <div className="absolute bottom-0 left-0 right-0 h-[60px] bg-gradient-to-b from-green-600 to-green-800 border-t-4 border-green-900">
+                        <div className="flex justify-around pt-2">
+                            {[...Array(8)].map((_, i) => (
+                                <span key={i} className="text-2xl">🌱</span>
+                            ))}
+                        </div>
+                    </div>
 
                     {/* HUD */}
-                    <div className="absolute top-3 left-3 right-3 bg-black/70 border-2 border-cyan-500 rounded-lg px-3 py-2">
-                        <div className="flex items-center justify-between mb-1">
+                    <div className="absolute top-4 left-4 right-4 bg-white/90 backdrop-blur-xl border-4 border-white rounded-2xl px-4 py-3 shadow-2xl">
+                        <div className="flex items-center justify-between mb-2">
                             <div>
-                                <p className="text-white text-sm font-black">SAVED: {score}</p>
+                                <p className="text-gray-900 text-lg font-black">SAVED: {score} 💙</p>
                                 {gameTime.current < 3000 && gameStarted && (
-                                    <p className="text-amber-400 text-xs font-bold animate-pulse">GET READY!</p>
+                                    <motion.p 
+                                        animate={{ scale: [1, 1.1, 1] }}
+                                        transition={{ duration: 0.5, repeat: Infinity }}
+                                        className="text-orange-500 text-sm font-black"
+                                    >
+                                        GET READY! 🔥
+                                    </motion.p>
                                 )}
                             </div>
                             <div className="flex items-center gap-2">
                                 <button
                                     onClick={(e) => { e.stopPropagation(); setShowShare(true); }}
-                                    className="p-1.5 bg-cyan-500/20 hover:bg-cyan-500/30 rounded"
+                                    className="p-2 bg-gradient-to-r from-cyan-500 to-purple-500 hover:from-cyan-600 hover:to-purple-600 rounded-xl shadow-lg"
                                 >
-                                    <Users className="w-4 h-4 text-cyan-400" />
+                                    <Users className="w-5 h-5 text-white" />
                                 </button>
                                 <button
                                     onClick={(e) => { e.stopPropagation(); setSoundEnabled(!soundEnabled); }}
-                                    className="text-xl"
+                                    className="text-2xl"
                                 >
                                     {soundEnabled ? '🔊' : '🔇'}
                                 </button>
                             </div>
                         </div>
-                        <div className="flex items-center gap-3">
-                            <div className="flex items-center gap-1">
-                                <span className="text-xl">⭐</span>
-                                <span className="text-yellow-400 text-xs font-black">{stars}</span>
+                        <div className="flex items-center gap-4">
+                            <div className="flex items-center gap-2 bg-yellow-100 px-3 py-1 rounded-full">
+                                <span className="text-2xl">⭐</span>
+                                <span className="text-yellow-600 text-lg font-black">{stars}</span>
                             </div>
-                            <div className="flex items-center gap-1">
-                                <span className="text-xs text-gray-400">Best:</span>
-                                <span className="text-cyan-400 text-xs font-black">{highScore}</span>
+                            <div className="flex items-center gap-2 bg-cyan-100 px-3 py-1 rounded-full">
+                                <span className="text-sm text-cyan-600 font-bold">Best:</span>
+                                <span className="text-cyan-600 text-lg font-black">{highScore}</span>
                             </div>
                         </div>
                     </div>
 
                     {/* Start */}
                     {!gameStarted && !gameOver && (
-                        <div className="absolute inset-0 bg-black/80 flex items-center justify-center">
-                            <div className="text-center space-y-4">
-                                <p className="text-4xl font-black text-cyan-400 mb-2">TAP TO PLAY</p>
-                                <p className="text-sm text-gray-300">Dodge lava • Save people • Collect stars</p>
+                        <div className="absolute inset-0 bg-gradient-to-b from-purple-900/95 via-pink-900/95 to-orange-900/95 flex items-center justify-center">
+                            <div className="text-center space-y-6 px-6">
+                                <motion.p 
+                                    animate={{ scale: [1, 1.1, 1] }}
+                                    transition={{ duration: 1, repeat: Infinity }}
+                                    className="text-5xl font-black text-white mb-4"
+                                >
+                                    👆 DRAG TO MOVE! 👆
+                                </motion.p>
+                                <p className="text-xl text-white font-bold bg-black/40 px-4 py-2 rounded-xl">
+                                    Dodge lava 🔥 Save people 🧑 Collect stars ⭐
+                                </p>
                                 
                                 {/* Character selector */}
-                                <div className="flex items-center justify-center gap-2 flex-wrap px-4">
+                                <div className="flex items-center justify-center gap-3 flex-wrap px-4">
                                     {CHARACTER_UNLOCKS.map(char => (
                                         unlockedCharacters.includes(char.emoji) ? (
-                                            <button
+                                            <motion.button
                                                 key={char.emoji}
+                                                whileHover={{ scale: 1.1 }}
+                                                whileTap={{ scale: 0.9 }}
                                                 onClick={(e) => {
                                                     e.stopPropagation();
                                                     setCurrentCharacter(char.emoji);
                                                     localStorage.setItem('volckano_character', char.emoji);
                                                 }}
-                                                className={`text-3xl p-2 rounded-lg border-2 ${
+                                                className={`text-4xl p-3 rounded-2xl border-4 transition-all ${
                                                     currentCharacter === char.emoji 
-                                                        ? 'border-cyan-400 bg-cyan-500/20' 
-                                                        : 'border-gray-600 bg-black/40'
+                                                        ? 'border-yellow-400 bg-yellow-500/30 shadow-lg shadow-yellow-400/50' 
+                                                        : 'border-white/50 bg-white/10'
                                                 }`}
                                             >
                                                 {char.emoji}
-                                            </button>
+                                            </motion.button>
                                         ) : (
                                             <div
                                                 key={char.emoji}
-                                                className="text-3xl p-2 rounded-lg border-2 border-gray-700 bg-black/60 opacity-30 relative"
+                                                className="text-4xl p-3 rounded-2xl border-4 border-gray-700 bg-black/60 opacity-30 relative"
                                             >
                                                 🔒
-                                                <span className="absolute -bottom-5 left-1/2 transform -translate-x-1/2 text-xs text-gray-500 whitespace-nowrap">
+                                                <span className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 text-sm text-white font-bold whitespace-nowrap bg-black/70 px-2 py-1 rounded">
                                                     {char.stars}⭐
                                                 </span>
                                             </div>
@@ -582,10 +645,18 @@ export default function Volckano() {
                 </div>
             </div>
 
-            {/* Footer */}
-            <div className="absolute bottom-4 text-center">
-                <p className="text-white text-xs font-bold">Made with ♾️❤️ for GERGIE7</p>
-            </div>
+            {/* Instructions for touch */}
+            {!gameStarted && !gameOver && (
+                <motion.div 
+                    animate={{ y: [0, 10, 0] }}
+                    transition={{ duration: 1.5, repeat: Infinity }}
+                    className="absolute bottom-8 text-center"
+                >
+                    <p className="text-white text-lg font-black bg-black/60 px-6 py-3 rounded-full">
+                        Made with ♾️❤️ for GERGIE7
+                    </p>
+                </motion.div>
+            )}
 
             {showShare && (
                 <VolckanoShare 
