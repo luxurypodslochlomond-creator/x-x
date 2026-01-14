@@ -310,6 +310,7 @@ const LayoutInner = ({ children, currentPageName }) => {
 
   const adminNav = user?.role === 'admin' ? [
             { title: "📊 Analytics", url: createPageUrl("AdminAnalytics"), icon: Activity },
+            { title: "🔥 Frequency Evidence", url: createPageUrl("AdminFrequencyAnalytics"), icon: Waves, highlight: true, description: "Device intel for grants" },
             { title: "🛡️ AI51 Security", url: createPageUrl("AI51SecurityDashboard"), icon: Shield },
             { title: "💰 Funding Tracker", url: createPageUrl("AdminFundingTracker"), icon: Shield },
     { title: "🏴󠁧󠁢󠁳󠁣󠁴󠁿 Scotland Funding", url: createPageUrl("AdminScotlandFunding"), icon: Heart },
