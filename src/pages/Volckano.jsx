@@ -343,12 +343,12 @@ export default function Volckano() {
 
     return (
         <div 
-            className="h-screen w-screen bg-gradient-to-b from-purple-900 via-pink-900 to-orange-900 overflow-hidden select-none flex items-center justify-center"
+            className="h-screen w-screen bg-gradient-to-b from-purple-900 via-pink-900 to-orange-900 overflow-hidden select-none"
             onClick={jump}
             onTouchStart={(e) => { e.preventDefault(); jump(); }}
         >
-            <div className="relative w-full h-full max-w-md mx-auto flex items-center justify-center">
-                <div className="relative w-full aspect-[4/5] max-h-[85vh] bg-gradient-to-b from-sky-400 via-sky-300 to-green-400 border-8 border-white rounded-3xl overflow-hidden shadow-2xl">
+            <div className="relative w-full h-full max-w-md mx-auto">
+                <div className="relative w-full h-full bg-gradient-to-b from-sky-400 via-sky-300 to-green-400 overflow-hidden">
                     
                     {/* Player - Custom Icon */}
                     <motion.div
