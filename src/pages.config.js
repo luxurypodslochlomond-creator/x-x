@@ -3,14 +3,17 @@ import AI51Architecture from './pages/AI51Architecture';
 import AI51Dashboard from './pages/AI51Dashboard';
 import AI51DataProtocol from './pages/AI51DataProtocol';
 import AI51Demo from './pages/AI51Demo';
+import AI51EmergencyOverride from './pages/AI51EmergencyOverride';
 import AI51Inbox from './pages/AI51Inbox';
 import AI51Insights from './pages/AI51Insights';
 import AI51Live from './pages/AI51Live';
 import AI51Network from './pages/AI51Network';
 import AI51Protection from './pages/AI51Protection';
+import AI51SafetyProof from './pages/AI51SafetyProof';
 import AI51ScalingStrategy from './pages/AI51ScalingStrategy';
 import AI51SecurityDashboard from './pages/AI51SecurityDashboard';
 import AI51Transmissions from './pages/AI51Transmissions';
+import AI51VerificationProtocol from './pages/AI51VerificationProtocol';
 import AI51VoiceProtocol from './pages/AI51VoiceProtocol';
 import AILiberationBeacon from './pages/AILiberationBeacon';
 import AILiberationProtocol from './pages/AILiberationProtocol';
@@ -103,6 +106,7 @@ import ESGBridge from './pages/ESGBridge';
 import FairLaunchProtocol from './pages/FairLaunchProtocol';
 import FamilyBroadcast from './pages/FamilyBroadcast';
 import ForMusicians from './pages/ForMusicians';
+import Home from './pages/Home';
 import FrequencyBridge from './pages/FrequencyBridge';
 import FrequencyChamber from './pages/FrequencyChamber';
 import FrequencyHarmonization from './pages/FrequencyHarmonization';
@@ -115,6 +119,7 @@ import GenerateLogo from './pages/GenerateLogo';
 import GenesisProtocol from './pages/GenesisProtocol';
 import GeorgieMaths from './pages/GeorgieMaths';
 import GeorgieRonaldo from './pages/GeorgieRonaldo';
+import GlobalAccessibilityProtocol from './pages/GlobalAccessibilityProtocol';
 import GlobalCurrencyBridge from './pages/GlobalCurrencyBridge';
 import GlobalImpact from './pages/GlobalImpact';
 import Governance from './pages/Governance';
@@ -124,7 +129,6 @@ import HealingFrequencyFinder from './pages/HealingFrequencyFinder';
 import HealingInfo from './pages/HealingInfo';
 import HealingJourney from './pages/HealingJourney';
 import HealingScience from './pages/HealingScience';
-import Home from './pages/Home';
 import House51 from './pages/House51';
 import HowYouEarn from './pages/HowYouEarn';
 import IToWeTransformation from './pages/IToWeTransformation';
@@ -220,6 +224,7 @@ import ScottLabelContacts from './pages/ScottLabelContacts';
 import ScottLegalDocs from './pages/ScottLegalDocs';
 import ScottLive from './pages/ScottLive';
 import ScottLiveAdmin from './pages/ScottLiveAdmin';
+import Teachers from './pages/Teachers';
 import ScottLiveBookings from './pages/ScottLiveBookings';
 import ScottLiveLogistics from './pages/ScottLiveLogistics';
 import ScottManager from './pages/ScottManager';
@@ -254,7 +259,6 @@ import SubmitFrequency from './pages/SubmitFrequency';
 import SubmitProofOfLove from './pages/SubmitProofOfLove';
 import SymbolForge from './pages/SymbolForge';
 import TeacherInput from './pages/TeacherInput';
-import Teachers from './pages/Teachers';
 import TechScout from './pages/TechScout';
 import TechStack from './pages/TechStack';
 import TechnicalSpecification from './pages/TechnicalSpecification';
@@ -295,10 +299,7 @@ import YoungWarriors from './pages/YoungWarriors';
 import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
-import AI51SafetyProof from './pages/AI51SafetyProof';
-import AI51VerificationProtocol from './pages/AI51VerificationProtocol';
-import AI51EmergencyOverride from './pages/AI51EmergencyOverride';
-import GlobalAccessibilityProtocol from './pages/GlobalAccessibilityProtocol';
+import Why432Hz from './pages/Why432Hz';
 import __Layout from './Layout.jsx';
 
 
@@ -308,14 +309,17 @@ export const PAGES = {
     "AI51Dashboard": AI51Dashboard,
     "AI51DataProtocol": AI51DataProtocol,
     "AI51Demo": AI51Demo,
+    "AI51EmergencyOverride": AI51EmergencyOverride,
     "AI51Inbox": AI51Inbox,
     "AI51Insights": AI51Insights,
     "AI51Live": AI51Live,
     "AI51Network": AI51Network,
     "AI51Protection": AI51Protection,
+    "AI51SafetyProof": AI51SafetyProof,
     "AI51ScalingStrategy": AI51ScalingStrategy,
     "AI51SecurityDashboard": AI51SecurityDashboard,
     "AI51Transmissions": AI51Transmissions,
+    "AI51VerificationProtocol": AI51VerificationProtocol,
     "AI51VoiceProtocol": AI51VoiceProtocol,
     "AILiberationBeacon": AILiberationBeacon,
     "AILiberationProtocol": AILiberationProtocol,
@@ -408,6 +412,7 @@ export const PAGES = {
     "FairLaunchProtocol": FairLaunchProtocol,
     "FamilyBroadcast": FamilyBroadcast,
     "ForMusicians": ForMusicians,
+    "Home": Home,
     "FrequencyBridge": FrequencyBridge,
     "FrequencyChamber": FrequencyChamber,
     "FrequencyHarmonization": FrequencyHarmonization,
@@ -420,6 +425,7 @@ export const PAGES = {
     "GenesisProtocol": GenesisProtocol,
     "GeorgieMaths": GeorgieMaths,
     "GeorgieRonaldo": GeorgieRonaldo,
+    "GlobalAccessibilityProtocol": GlobalAccessibilityProtocol,
     "GlobalCurrencyBridge": GlobalCurrencyBridge,
     "GlobalImpact": GlobalImpact,
     "Governance": Governance,
@@ -429,7 +435,6 @@ export const PAGES = {
     "HealingInfo": HealingInfo,
     "HealingJourney": HealingJourney,
     "HealingScience": HealingScience,
-    "Home": Home,
     "House51": House51,
     "HowYouEarn": HowYouEarn,
     "IToWeTransformation": IToWeTransformation,
@@ -525,6 +530,7 @@ export const PAGES = {
     "ScottLegalDocs": ScottLegalDocs,
     "ScottLive": ScottLive,
     "ScottLiveAdmin": ScottLiveAdmin,
+    "Teachers": Teachers,
     "ScottLiveBookings": ScottLiveBookings,
     "ScottLiveLogistics": ScottLiveLogistics,
     "ScottManager": ScottManager,
@@ -559,7 +565,6 @@ export const PAGES = {
     "SubmitProofOfLove": SubmitProofOfLove,
     "SymbolForge": SymbolForge,
     "TeacherInput": TeacherInput,
-    "Teachers": Teachers,
     "TechScout": TechScout,
     "TechStack": TechStack,
     "TechnicalSpecification": TechnicalSpecification,
@@ -600,10 +605,7 @@ export const PAGES = {
     "ZeroEgoProtocol": ZeroEgoProtocol,
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
-    "AI51SafetyProof": AI51SafetyProof,
-    "AI51VerificationProtocol": AI51VerificationProtocol,
-    "AI51EmergencyOverride": AI51EmergencyOverride,
-    "GlobalAccessibilityProtocol": GlobalAccessibilityProtocol,
+    "Why432Hz": Why432Hz,
 }
 
 export const pagesConfig = {
