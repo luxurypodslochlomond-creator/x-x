@@ -2370,7 +2370,7 @@ export default function FrequencyChamber() {
     }
   };
   
-  const stopAudio = () => {
+  const stopAudio = async () => {
     console.log('🛑 STOPPING AUDIO');
     console.log('Nodes to stop:', nodesRef.current.length);
     
