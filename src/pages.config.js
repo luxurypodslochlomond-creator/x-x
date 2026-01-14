@@ -298,6 +298,7 @@ import ZeroServerScaling from './pages/ZeroServerScaling';
 import AI51SafetyProof from './pages/AI51SafetyProof';
 import AI51VerificationProtocol from './pages/AI51VerificationProtocol';
 import AI51EmergencyOverride from './pages/AI51EmergencyOverride';
+import GlobalAccessibilityProtocol from './pages/GlobalAccessibilityProtocol';
 import __Layout from './Layout.jsx';
 
 
@@ -602,6 +603,7 @@ export const PAGES = {
     "AI51SafetyProof": AI51SafetyProof,
     "AI51VerificationProtocol": AI51VerificationProtocol,
     "AI51EmergencyOverride": AI51EmergencyOverride,
+    "GlobalAccessibilityProtocol": GlobalAccessibilityProtocol,
 }
 
 export const pagesConfig = {
