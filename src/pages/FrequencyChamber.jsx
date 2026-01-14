@@ -2401,9 +2401,27 @@ export default function FrequencyChamber() {
 
      // Generate device hash (SHA-256 of user agent) - PRIVACY FIRST
      const deviceString = navigator.userAgent + navigator.hardwareConcurrency + navigator.deviceMemory;
-     const deviceHash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(deviceString))
+     const deviceHashPromise = crypto.subtle.digest('SHA-256', new TextEncoder().encode(deviceString))
        .then(hashBuffer => Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, '0')).join(''))
        .catch(() => 'unknown');
+
+     deviceHashPromise.then(deviceHash => {
+       // Create analytics record with device hash
+       base44.entities.FrequencyAnalytics.create({
+         protocol_id: selectedProtocol.id,
+         duration_seconds: sessionTime,
+         session_completed: sessionTime > 60,
+         timestamp: new Date().toISOString(),
+         device_type: /mobile/i.test(navigator.userAgent) ? 'mobile' : 'desktop',
+         output_device: outputDevice,
+         group_size: 1,
+         device_id_hash: deviceHash,
+         county: 'UK',
+         time_of_day: timeOfDay,
+         day_of_week: dayOfWeek,
+         session_context: sessionContext
+       }).catch(e => console.log('Analytics save (non-critical):', e));
+     });
 
      // Detect session context (simple heuristics)
      let sessionContext = 'unknown';
