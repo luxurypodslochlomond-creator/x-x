@@ -15,23 +15,48 @@ export default function Volckano() {
     const [gameStarted, setGameStarted] = useState(false);
     const [gameOver, setGameOver] = useState(false);
     const [score, setScore] = useState(0);
+    const [stars, setStars] = useState(0);
+    const [highScore, setHighScore] = useState(0);
+    const [unlockedCharacters, setUnlockedCharacters] = useState(['😊']);
+    const [currentCharacter, setCurrentCharacter] = useState('😊');
     const [showShare, setShowShare] = useState(false);
+    const [showUnlock, setShowUnlock] = useState(false);
     const [soundEnabled, setSoundEnabled] = useState(true);
+    const [achievements, setAchievements] = useState([]);
     
     const playerY = useRef(200);
     const velocity = useRef(0);
     const obstacles = useRef([]);
     const people = useRef([]);
     const particles = useRef([]);
+    const collectibles = useRef([]);
     const gameTime = useRef(0);
     const [, forceUpdate] = useState(0);
 
+    const CHARACTER_UNLOCKS = [
+        { emoji: '😊', name: 'Happy', stars: 0 },
+        { emoji: '🦄', name: 'Unicorn', stars: 10 },
+        { emoji: '🐉', name: 'Dragon', stars: 25 },
+        { emoji: '🐱', name: 'Kitty', stars: 50 },
+        { emoji: '🚀', name: 'Rocket', stars: 100 },
+        { emoji: '⭐', name: 'Star', stars: 200 }
+    ];
+
     useEffect(() => {
         const saved = localStorage.getItem('volckano_player');
+        const savedStars = localStorage.getItem('volckano_stars');
+        const savedHighScore = localStorage.getItem('volckano_highscore');
+        const savedUnlocked = localStorage.getItem('volckano_unlocked');
+        const savedChar = localStorage.getItem('volckano_character');
+        
         if (saved) {
             setPlayerName(saved);
             setShowLogin(false);
         }
+        if (savedStars) setStars(parseInt(savedStars));
+        if (savedHighScore) setHighScore(parseInt(savedHighScore));
+        if (savedUnlocked) setUnlockedCharacters(JSON.parse(savedUnlocked));
+        if (savedChar) setCurrentCharacter(savedChar);
     }, []);
 
     const playSound = (freq, duration = 100) => {
@@ -73,12 +98,22 @@ export default function Volckano() {
         obstacles.current = [];
         people.current = [];
         particles.current = [];
+        collectibles.current = [];
         
         for (let i = 0; i < 5; i++) {
             people.current.push({
                 x: 450 + (i * 150),
                 y: 350,
                 saved: false
+            });
+        }
+        
+        // Add collectible stars
+        for (let i = 0; i < 8; i++) {
+            collectibles.current.push({
+                x: 300 + (i * 100),
+                y: 100 + Math.random() * 200,
+                collected: false
             });
         }
     };
@@ -105,6 +140,25 @@ export default function Volckano() {
             if (playerY.current > 420) {
                 setGameOver(true);
                 playSound(200, 300);
+                
+                // Save high score
+                if (score > highScore) {
+                    setHighScore(score);
+                    localStorage.setItem('volckano_highscore', score.toString());
+                }
+                
+                // Check for unlocks
+                CHARACTER_UNLOCKS.forEach(char => {
+                    if (stars >= char.stars && !unlockedCharacters.includes(char.emoji)) {
+                        setUnlockedCharacters(prev => {
+                            const updated = [...prev, char.emoji];
+                            localStorage.setItem('volckano_unlocked', JSON.stringify(updated));
+                            return updated;
+                        });
+                        setShowUnlock(char);
+                    }
+                });
+                
                 return;
             }
 
@@ -134,6 +188,31 @@ export default function Volckano() {
                     }
                 }
             }
+
+            // COLLECTIBLES (stars)
+            collectibles.current.forEach(c => {
+                if (!c.collected && c.x > 40 && c.x < 120 && Math.abs(c.y - playerY.current) < 40) {
+                    c.collected = true;
+                    setStars(s => {
+                        const newStars = s + 1;
+                        localStorage.setItem('volckano_stars', newStars.toString());
+                        return newStars;
+                    });
+                    playSound(880, 100);
+                    // Sparkles
+                    for (let i = 0; i < 8; i++) {
+                        particles.current.push({
+                            x: c.x,
+                            y: c.y,
+                            vx: (Math.random() - 0.5) * 5,
+                            vy: (Math.random() - 0.5) * 5,
+                            life: 20,
+                            color: '#FFD700'
+                        });
+                    }
+                }
+                c.x -= 2;
+            });
 
             // PEOPLE
             people.current.forEach(p => {
@@ -245,8 +324,27 @@ export default function Volckano() {
                             filter: score > 0 ? 'drop-shadow(0 0 10px #FFD700)' : 'none'
                         }}
                     >
-                        {score > 4 ? '🤩' : score > 0 ? '😇' : '😊'}
+                        {currentCharacter}
                     </div>
+
+                    {/* Collectible Stars */}
+                    {collectibles.current.map((star, i) => !star.collected && star.x > -50 && (
+                        <motion.div
+                            key={i}
+                            className="absolute text-2xl"
+                            style={{ left: `${star.x}px`, top: `${star.y}px` }}
+                            animate={{
+                                rotate: [0, 360],
+                                scale: [1, 1.2, 1]
+                            }}
+                            transition={{
+                                rotate: { duration: 2, repeat: Infinity, ease: "linear" },
+                                scale: { duration: 1, repeat: Infinity, ease: "easeInOut" }
+                            }}
+                        >
+                            ⭐
+                        </motion.div>
+                    ))}
 
                     {/* Particles - SPARKLES! */}
                     {particles.current.map((p, i) => (
@@ -341,35 +439,80 @@ export default function Volckano() {
                     <div className="absolute bottom-0 left-0 right-0 h-[50px] bg-gradient-to-b from-orange-700 to-red-900 border-t-4 border-orange-600" />
 
                     {/* HUD */}
-                    <div className="absolute top-3 left-3 right-3 bg-black/70 border-2 border-cyan-500 rounded-lg px-3 py-2 flex items-center justify-between">
-                        <div>
-                            <p className="text-white text-sm font-black">SAVED: {score}</p>
-                            {gameTime.current < 3000 && gameStarted && (
-                                <p className="text-amber-400 text-xs font-bold animate-pulse">GET READY!</p>
-                            )}
+                    <div className="absolute top-3 left-3 right-3 bg-black/70 border-2 border-cyan-500 rounded-lg px-3 py-2">
+                        <div className="flex items-center justify-between mb-1">
+                            <div>
+                                <p className="text-white text-sm font-black">SAVED: {score}</p>
+                                {gameTime.current < 3000 && gameStarted && (
+                                    <p className="text-amber-400 text-xs font-bold animate-pulse">GET READY!</p>
+                                )}
+                            </div>
+                            <div className="flex items-center gap-2">
+                                <button
+                                    onClick={(e) => { e.stopPropagation(); setShowShare(true); }}
+                                    className="p-1.5 bg-cyan-500/20 hover:bg-cyan-500/30 rounded"
+                                >
+                                    <Users className="w-4 h-4 text-cyan-400" />
+                                </button>
+                                <button
+                                    onClick={(e) => { e.stopPropagation(); setSoundEnabled(!soundEnabled); }}
+                                    className="text-xl"
+                                >
+                                    {soundEnabled ? '🔊' : '🔇'}
+                                </button>
+                            </div>
                         </div>
-                        <div className="flex items-center gap-2">
-                            <button
-                                onClick={(e) => { e.stopPropagation(); setShowShare(true); }}
-                                className="p-1.5 bg-cyan-500/20 hover:bg-cyan-500/30 rounded"
-                            >
-                                <Users className="w-4 h-4 text-cyan-400" />
-                            </button>
-                            <button
-                                onClick={(e) => { e.stopPropagation(); setSoundEnabled(!soundEnabled); }}
-                                className="text-xl"
-                            >
-                                {soundEnabled ? '🔊' : '🔇'}
-                            </button>
+                        <div className="flex items-center gap-3">
+                            <div className="flex items-center gap-1">
+                                <span className="text-xl">⭐</span>
+                                <span className="text-yellow-400 text-xs font-black">{stars}</span>
+                            </div>
+                            <div className="flex items-center gap-1">
+                                <span className="text-xs text-gray-400">Best:</span>
+                                <span className="text-cyan-400 text-xs font-black">{highScore}</span>
+                            </div>
                         </div>
                     </div>
 
                     {/* Start */}
-                    {!gameStarted && (
+                    {!gameStarted && !gameOver && (
                         <div className="absolute inset-0 bg-black/80 flex items-center justify-center">
-                            <div className="text-center">
+                            <div className="text-center space-y-4">
                                 <p className="text-4xl font-black text-cyan-400 mb-2">TAP TO PLAY</p>
-                                <p className="text-sm text-gray-300">Dodge lava • Save people</p>
+                                <p className="text-sm text-gray-300">Dodge lava • Save people • Collect stars</p>
+                                
+                                {/* Character selector */}
+                                <div className="flex items-center justify-center gap-2 flex-wrap px-4">
+                                    {CHARACTER_UNLOCKS.map(char => (
+                                        unlockedCharacters.includes(char.emoji) ? (
+                                            <button
+                                                key={char.emoji}
+                                                onClick={(e) => {
+                                                    e.stopPropagation();
+                                                    setCurrentCharacter(char.emoji);
+                                                    localStorage.setItem('volckano_character', char.emoji);
+                                                }}
+                                                className={`text-3xl p-2 rounded-lg border-2 ${
+                                                    currentCharacter === char.emoji 
+                                                        ? 'border-cyan-400 bg-cyan-500/20' 
+                                                        : 'border-gray-600 bg-black/40'
+                                                }`}
+                                            >
+                                                {char.emoji}
+                                            </button>
+                                        ) : (
+                                            <div
+                                                key={char.emoji}
+                                                className="text-3xl p-2 rounded-lg border-2 border-gray-700 bg-black/60 opacity-30 relative"
+                                            >
+                                                🔒
+                                                <span className="absolute -bottom-5 left-1/2 transform -translate-x-1/2 text-xs text-gray-500 whitespace-nowrap">
+                                                    {char.stars}⭐
+                                                </span>
+                                            </div>
+                                        )
+                                    ))}
+                                </div>
                             </div>
                         </div>
                     )}
@@ -381,15 +524,57 @@ export default function Volckano() {
                             animate={{ scale: 1 }}
                             className="absolute inset-0 bg-black/90 flex items-center justify-center"
                         >
-                            <div className="text-center space-y-4">
+                            <div className="text-center space-y-4 px-4">
                                 <p className="text-6xl">💥</p>
                                 <h2 className="text-4xl font-black text-red-400">CRASH!</h2>
-                                <p className="text-white text-xl font-bold">You saved {score} people</p>
-                                <button
-                                    onClick={resetGame}
-                                    className="bg-orange-600 hover:bg-orange-500 text-white font-black px-8 py-4 rounded-xl text-xl border-b-4 border-orange-900 mt-4"
+                                <div className="space-y-2">
+                                    <p className="text-white text-xl font-bold">Saved: {score} people</p>
+                                    {score === highScore && score > 0 && (
+                                        <p className="text-yellow-400 text-sm font-black animate-pulse">🏆 NEW BEST!</p>
+                                    )}
+                                    <p className="text-gray-400 text-sm">Total Stars: ⭐ {stars}</p>
+                                </div>
+                                <div className="flex gap-3 justify-center">
+                                    <button
+                                        onClick={resetGame}
+                                        className="bg-orange-600 hover:bg-orange-500 text-white font-black px-6 py-3 rounded-xl text-lg border-b-4 border-orange-900"
+                                    >
+                                        🌋 AGAIN
+                                    </button>
+                                    <button
+                                        onClick={(e) => { e.stopPropagation(); setShowShare(true); }}
+                                        className="bg-cyan-600 hover:bg-cyan-500 text-white font-black px-6 py-3 rounded-xl text-lg border-b-4 border-cyan-900"
+                                    >
+                                        📤 SHARE
+                                    </button>
+                                </div>
+                            </div>
+                        </motion.div>
+                    )}
+                    
+                    {/* New Character Unlock! */}
+                    {showUnlock && (
+                        <motion.div
+                            initial={{ scale: 0 }}
+                            animate={{ scale: 1 }}
+                            className="absolute inset-0 bg-black/90 flex items-center justify-center z-20"
+                            onClick={(e) => { e.stopPropagation(); setShowUnlock(false); }}
+                        >
+                            <div className="text-center space-y-4">
+                                <motion.p 
+                                    className="text-8xl"
+                                    animate={{ rotate: [0, 360] }}
+                                    transition={{ duration: 1 }}
                                 >
-                                    🌋 TRY AGAIN
+                                    {showUnlock.emoji}
+                                </motion.p>
+                                <h2 className="text-4xl font-black text-yellow-400">UNLOCKED!</h2>
+                                <p className="text-white text-xl font-bold">{showUnlock.name}</p>
+                                <button
+                                    onClick={(e) => { e.stopPropagation(); setShowUnlock(false); }}
+                                    className="bg-yellow-600 hover:bg-yellow-500 text-white font-black px-8 py-4 rounded-xl text-xl"
+                                >
+                                    ✨ AWESOME!
                                 </button>
                             </div>
                         </motion.div>
