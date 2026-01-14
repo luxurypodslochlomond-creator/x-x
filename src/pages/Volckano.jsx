@@ -87,6 +87,11 @@ export default function Volckano() {
         }
         velocity.current = -8;
         playSound(432, 50);
+        
+        // Haptic feedback - kids love the vibration!
+        if (navigator.vibrate) {
+            navigator.vibrate(50);
+        }
     };
 
     const startGame = () => {
@@ -203,6 +208,7 @@ export default function Volckano() {
                         return newStars;
                     });
                     playSound(880, 100);
+                    if (navigator.vibrate) navigator.vibrate(30);
                     // Sparkles
                     for (let i = 0; i < 8; i++) {
                         particles.current.push({
@@ -224,6 +230,7 @@ export default function Volckano() {
                     p.saved = true;
                     setScore(s => s + 1);
                     playSound(528, 150);
+                    if (navigator.vibrate) navigator.vibrate([30, 50, 30]); // Double buzz for saving life!
                     // CREATE SPARKLE PARTICLES
                     for (let i = 0; i < 15; i++) {
                         particles.current.push({
