@@ -75,7 +75,7 @@ export default function Volckano() {
         } catch(e) {}
     };
 
-    const handleTouch = (e) => {
+    const jump = () => {
         if (gameOver) {
             resetGame();
             return;
@@ -84,16 +84,8 @@ export default function Volckano() {
             startGame();
             return;
         }
-        
-        // Get touch position and move player there smoothly
-        const rect = e.currentTarget.getBoundingClientRect();
-        const touchY = e.touches ? e.touches[0].clientY - rect.top : e.clientY - rect.top;
-        
-        // Smooth movement to finger position
-        const targetY = Math.max(0, Math.min(420, touchY - 25));
-        playerY.current = targetY;
-        velocity.current = 0;
-        playSound(432, 30);
+        velocity.current = -8;
+        playSound(432, 50);
     };
 
     const startGame = () => {
@@ -137,8 +129,14 @@ export default function Volckano() {
         const interval = setInterval(() => {
             gameTime.current += 20;
 
-            // Gentle bounds checking
-            if (playerY.current < 0) playerY.current = 0;
+            // Simple physics
+            velocity.current += 0.4;
+            playerY.current += velocity.current;
+
+            if (playerY.current < 0) {
+                playerY.current = 0;
+                velocity.current = 0;
+            }
             if (playerY.current > 420) {
                 setGameOver(true);
                 playSound(200, 300);
@@ -335,32 +333,25 @@ export default function Volckano() {
     return (
         <div 
             className="h-screen w-screen bg-gradient-to-b from-purple-900 via-pink-900 to-orange-900 overflow-hidden select-none flex items-center justify-center"
-            onMouseMove={gameStarted && !gameOver ? handleTouch : undefined}
-            onTouchMove={(e) => { 
-                e.preventDefault(); 
-                if (gameStarted && !gameOver) handleTouch(e); 
-            }}
-            onTouchStart={(e) => { 
-                e.preventDefault(); 
-                if (!gameStarted || gameOver) handleTouch(e);
-            }}
-            onClick={!gameStarted || gameOver ? handleTouch : undefined}
+            onClick={jump}
+            onTouchStart={(e) => { e.preventDefault(); jump(); }}
         >
             <div className="relative w-full h-full max-w-md mx-auto flex items-center justify-center">
                 <div className="relative w-full aspect-[4/5] max-h-[85vh] bg-gradient-to-b from-sky-400 via-sky-300 to-green-400 border-8 border-white rounded-3xl overflow-hidden shadow-2xl">
                     
-                    {/* Player - with glow effect */}
+                    {/* Player - bouncy and fun */}
                     <motion.div
                         className="absolute left-[15%] w-[60px] h-[60px] text-5xl flex items-center justify-center z-20"
                         style={{ 
                             top: `${playerY.current}px`,
+                            transform: `rotate(${velocity.current > 0 ? 20 : -20}deg)`,
                             filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.3)) drop-shadow(0 0 15px rgba(255,215,0,0.6))'
                         }}
                         animate={{
-                            scale: [1, 1.1, 1],
+                            scale: [1, 1.05, 1],
                         }}
                         transition={{
-                            duration: 0.5,
+                            duration: 0.3,
                             repeat: Infinity,
                             ease: "easeInOut"
                         }}
@@ -532,14 +523,14 @@ export default function Volckano() {
                         <div className="absolute inset-0 bg-gradient-to-b from-purple-900/95 via-pink-900/95 to-orange-900/95 flex items-center justify-center">
                             <div className="text-center space-y-6 px-6">
                                 <motion.p 
-                                    animate={{ scale: [1, 1.1, 1] }}
-                                    transition={{ duration: 1, repeat: Infinity }}
-                                    className="text-5xl font-black text-white mb-4"
+                                    animate={{ scale: [1, 1.2, 1] }}
+                                    transition={{ duration: 0.8, repeat: Infinity }}
+                                    className="text-6xl font-black text-white mb-4"
                                 >
-                                    👆 DRAG TO MOVE! 👆
+                                    TAP TO FLY! ✨
                                 </motion.p>
-                                <p className="text-xl text-white font-bold bg-black/40 px-4 py-2 rounded-xl">
-                                    Dodge lava 🔥 Save people 🧑 Collect stars ⭐
+                                <p className="text-2xl text-white font-bold bg-black/40 px-6 py-3 rounded-2xl">
+                                    Dodge 🔥 Save 🧑 Collect ⭐
                                 </p>
                                 
                                 {/* Character selector */}
