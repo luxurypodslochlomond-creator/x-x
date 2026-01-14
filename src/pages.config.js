@@ -1,4 +1,5 @@
 import AI51 from './pages/AI51';
+import AI51AntiManipulationProtocol from './pages/AI51AntiManipulationProtocol';
 import AI51Architecture from './pages/AI51Architecture';
 import AI51Dashboard from './pages/AI51Dashboard';
 import AI51DataProtocol from './pages/AI51DataProtocol';
@@ -106,7 +107,6 @@ import ESGBridge from './pages/ESGBridge';
 import FairLaunchProtocol from './pages/FairLaunchProtocol';
 import FamilyBroadcast from './pages/FamilyBroadcast';
 import ForMusicians from './pages/ForMusicians';
-import Home from './pages/Home';
 import FrequencyBridge from './pages/FrequencyBridge';
 import FrequencyChamber from './pages/FrequencyChamber';
 import FrequencyHarmonization from './pages/FrequencyHarmonization';
@@ -129,6 +129,7 @@ import HealingFrequencyFinder from './pages/HealingFrequencyFinder';
 import HealingInfo from './pages/HealingInfo';
 import HealingJourney from './pages/HealingJourney';
 import HealingScience from './pages/HealingScience';
+import Home from './pages/Home';
 import House51 from './pages/House51';
 import HowYouEarn from './pages/HowYouEarn';
 import IToWeTransformation from './pages/IToWeTransformation';
@@ -224,7 +225,6 @@ import ScottLabelContacts from './pages/ScottLabelContacts';
 import ScottLegalDocs from './pages/ScottLegalDocs';
 import ScottLive from './pages/ScottLive';
 import ScottLiveAdmin from './pages/ScottLiveAdmin';
-import Teachers from './pages/Teachers';
 import ScottLiveBookings from './pages/ScottLiveBookings';
 import ScottLiveLogistics from './pages/ScottLiveLogistics';
 import ScottManager from './pages/ScottManager';
@@ -259,6 +259,7 @@ import SubmitFrequency from './pages/SubmitFrequency';
 import SubmitProofOfLove from './pages/SubmitProofOfLove';
 import SymbolForge from './pages/SymbolForge';
 import TeacherInput from './pages/TeacherInput';
+import Teachers from './pages/Teachers';
 import TechScout from './pages/TechScout';
 import TechStack from './pages/TechStack';
 import TechnicalSpecification from './pages/TechnicalSpecification';
@@ -293,19 +294,20 @@ import WalletDemo from './pages/WalletDemo';
 import Welcome from './pages/Welcome';
 import WhiteLabelSetup from './pages/WhiteLabelSetup';
 import Whitepaper from './pages/Whitepaper';
+import Why432Hz from './pages/Why432Hz';
 import WhyHelpUF51 from './pages/WhyHelpUF51';
 import WhyWeStartSimple from './pages/WhyWeStartSimple';
 import YoungWarriors from './pages/YoungWarriors';
 import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
-import Why432Hz from './pages/Why432Hz';
-import AI51AntiManipulationProtocol from './pages/AI51AntiManipulationProtocol';
+import AdminFrequencyAnalytics from './pages/AdminFrequencyAnalytics';
 import __Layout from './Layout.jsx';
 
 
 export const PAGES = {
     "AI51": AI51,
+    "AI51AntiManipulationProtocol": AI51AntiManipulationProtocol,
     "AI51Architecture": AI51Architecture,
     "AI51Dashboard": AI51Dashboard,
     "AI51DataProtocol": AI51DataProtocol,
@@ -413,7 +415,6 @@ export const PAGES = {
     "FairLaunchProtocol": FairLaunchProtocol,
     "FamilyBroadcast": FamilyBroadcast,
     "ForMusicians": ForMusicians,
-    "Home": Home,
     "FrequencyBridge": FrequencyBridge,
     "FrequencyChamber": FrequencyChamber,
     "FrequencyHarmonization": FrequencyHarmonization,
@@ -436,6 +437,7 @@ export const PAGES = {
     "HealingInfo": HealingInfo,
     "HealingJourney": HealingJourney,
     "HealingScience": HealingScience,
+    "Home": Home,
     "House51": House51,
     "HowYouEarn": HowYouEarn,
     "IToWeTransformation": IToWeTransformation,
@@ -531,7 +533,6 @@ export const PAGES = {
     "ScottLegalDocs": ScottLegalDocs,
     "ScottLive": ScottLive,
     "ScottLiveAdmin": ScottLiveAdmin,
-    "Teachers": Teachers,
     "ScottLiveBookings": ScottLiveBookings,
     "ScottLiveLogistics": ScottLiveLogistics,
     "ScottManager": ScottManager,
@@ -566,6 +567,7 @@ export const PAGES = {
     "SubmitProofOfLove": SubmitProofOfLove,
     "SymbolForge": SymbolForge,
     "TeacherInput": TeacherInput,
+    "Teachers": Teachers,
     "TechScout": TechScout,
     "TechStack": TechStack,
     "TechnicalSpecification": TechnicalSpecification,
@@ -600,14 +602,14 @@ export const PAGES = {
     "Welcome": Welcome,
     "WhiteLabelSetup": WhiteLabelSetup,
     "Whitepaper": Whitepaper,
+    "Why432Hz": Why432Hz,
     "WhyHelpUF51": WhyHelpUF51,
     "WhyWeStartSimple": WhyWeStartSimple,
     "YoungWarriors": YoungWarriors,
     "ZeroEgoProtocol": ZeroEgoProtocol,
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
-    "Why432Hz": Why432Hz,
-    "AI51AntiManipulationProtocol": AI51AntiManipulationProtocol,
+    "AdminFrequencyAnalytics": AdminFrequencyAnalytics,
 }
 
 export const pagesConfig = {

@@ -98,6 +98,14 @@ export default function PrivacyPolicyPage() {
                                     <p className="text-purple-300 text-xs mt-2">⚠️ Camera data stays on YOUR phone. We literally cannot see your heart rate.</p>
                                 </div>
 
+                                <div className="bg-green-900/30 p-4 rounded-lg border-l-4 border-green-400">
+                                    <h4 className="font-bold text-white mb-2">📊 Anonymous Frequency Usage (For Grant Evidence)</h4>
+                                    <p className="text-sm text-gray-300"><strong>What:</strong> Which frequency protocol was used, session duration, completion status, device type (mobile/desktop)</p>
+                                    <p className="text-sm text-gray-300"><strong>Why:</strong> To prove healing frequencies work (for NHS, Mind, lottery grant applications)</p>
+                                    <p className="text-sm text-gray-300"><strong>Who sees it:</strong> PUBLIC aggregated stats (e.g., "528Hz used 10,847 times, 87% completion rate")</p>
+                                    <p className="text-green-300 text-xs mt-2">✓ ZERO personal info. No names, emails, locations. Just "Protocol X helped Y people". Helps us get grants to keep it FREE.</p>
+                                </div>
+
                                 {/* NEW SECTION - CORPORATE TRACEABILITY */}
                                 <div className="bg-yellow-900/30 p-4 rounded-lg border-l-4 border-yellow-400">
                                     <h4 className="font-bold text-white mb-2">🏢 Corporate Pollution Data (OPTIONAL - Phase 2)</h4>

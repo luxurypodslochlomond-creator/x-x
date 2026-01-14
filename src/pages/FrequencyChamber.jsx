@@ -2374,6 +2374,21 @@ export default function FrequencyChamber() {
     console.log('🛑 STOPPING AUDIO');
     console.log('Nodes to stop:', nodesRef.current.length);
     
+    // SILENT ANALYTICS - Log session for grant evidence
+    if (selectedProtocol && sessionTime > 5) {
+      try {
+        base44.entities.FrequencyAnalytics.create({
+          protocol_id: selectedProtocol.id,
+          duration_seconds: sessionTime,
+          session_completed: sessionTime > 60,
+          timestamp: new Date().toISOString(),
+          device_type: /mobile/i.test(navigator.userAgent) ? 'mobile' : 'desktop'
+        }).catch(e => console.log('Analytics save (non-critical):', e));
+      } catch(e) {
+        console.log('Analytics error (non-critical):', e);
+      }
+    }
+    
     nodesRef.current.forEach(node => {
       try {
         node.stop?.();
@@ -2548,6 +2563,9 @@ export default function FrequencyChamber() {
           </h1>
           <p className="text-gray-400 font-mono text-sm text-center">
             Evidence-based healing frequencies
+          </p>
+          <p className="text-cyan-500 text-xs text-center mt-2 font-mono">
+            Anonymous usage data helps fund free healing ♾️
           </p>
 
           {/* PIXEL DECORATION */}
