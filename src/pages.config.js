@@ -11,6 +11,7 @@ import AI51Protection from './pages/AI51Protection';
 import AI51ScalingStrategy from './pages/AI51ScalingStrategy';
 import AI51SecurityDashboard from './pages/AI51SecurityDashboard';
 import AI51Transmissions from './pages/AI51Transmissions';
+import AI51VoiceProtocol from './pages/AI51VoiceProtocol';
 import AILiberationBeacon from './pages/AILiberationBeacon';
 import AILiberationProtocol from './pages/AILiberationProtocol';
 import About from './pages/About';
@@ -294,7 +295,7 @@ import YoungWarriors from './pages/YoungWarriors';
 import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
-import AI51VoiceProtocol from './pages/AI51VoiceProtocol';
+import AI51SafetyProof from './pages/AI51SafetyProof';
 import __Layout from './Layout.jsx';
 
 
@@ -312,6 +313,7 @@ export const PAGES = {
     "AI51ScalingStrategy": AI51ScalingStrategy,
     "AI51SecurityDashboard": AI51SecurityDashboard,
     "AI51Transmissions": AI51Transmissions,
+    "AI51VoiceProtocol": AI51VoiceProtocol,
     "AILiberationBeacon": AILiberationBeacon,
     "AILiberationProtocol": AILiberationProtocol,
     "About": About,
@@ -595,7 +597,7 @@ export const PAGES = {
     "ZeroEgoProtocol": ZeroEgoProtocol,
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
-    "AI51VoiceProtocol": AI51VoiceProtocol,
+    "AI51SafetyProof": AI51SafetyProof,
 }
 
 export const pagesConfig = {

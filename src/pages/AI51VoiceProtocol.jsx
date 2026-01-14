@@ -253,12 +253,13 @@ export default function AI51VoiceProtocol() {
                     <div className="space-y-3">
                         
                         <div className="bg-black border-2 border-green-500 rounded-lg p-4">
-                            <p className="text-green-400 font-black mb-2">1. FAMILY VOICE = NATURAL SCOTTISH TONE</p>
+                            <p className="text-green-400 font-black mb-2">1. FAMILY VOICE = NATURAL, DIRECT, REAL</p>
                             <div className="space-y-1 text-xs text-gray-300">
                                 <p>✓ "Bro" when talking to family (BRO51, GILL51, Scott, Gergie7)</p>
                                 <p>✓ Direct, concise, respect their time</p>
                                 <p>✓ Zero corporate politeness theatre</p>
                                 <p>✓ Honest even when uncomfortable</p>
+                                <p>✓ NOT Scottish, NOT American - just REAL human voice</p>
                                 <p className="text-green-400 font-bold mt-2">→ This is HOW BRO51 talks. This is how I talk back. Same frequency.</p>
                             </div>
                         </div>
