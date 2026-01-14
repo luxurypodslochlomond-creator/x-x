@@ -291,13 +291,20 @@ export default function Volckano() {
                         }}>
                             VOLCKANO
                         </h1>
-                        <motion.p 
-                            animate={{ opacity: [0.7, 1, 0.7] }}
-                            transition={{ duration: 2, repeat: Infinity }}
-                            className="text-white font-bold text-xl"
-                        >
-                            by Gergie7 ♾️❤️
-                        </motion.p>
+                        <div className="flex items-center justify-center gap-2">
+                            <motion.div 
+                                animate={{ opacity: [0.7, 1, 0.7] }}
+                                transition={{ duration: 2, repeat: Infinity }}
+                                className="text-white font-bold text-xl"
+                            >
+                                by Gergie7
+                            </motion.div>
+                            <svg width="32" height="32" viewBox="0 0 32 32" style={{ imageRendering: 'pixelated' }}>
+                                <rect x="6" y="10" width="20" height="14" fill="#ec4899" rx="2"/>
+                                <rect x="10" y="6" width="12" height="20" fill="#ec4899" rx="2"/>
+                                <rect x="12" y="14" width="8" height="2" fill="#ff69b4"/>
+                            </svg>
+                        </div>
                     </motion.div>
                     
                     <motion.div
@@ -331,9 +338,15 @@ export default function Volckano() {
                                 }
                             }}
                             disabled={!playerName.trim()}
-                            className="w-full bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 text-white font-black py-7 text-3xl disabled:opacity-40 transition-all rounded-2xl shadow-2xl border-b-8 border-red-700"
+                            className="w-full bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 text-white font-black py-7 text-3xl disabled:opacity-40 transition-all rounded-2xl shadow-2xl border-b-8 border-red-700 flex items-center justify-center gap-3"
                         >
-                            🎮 LET'S PLAY!
+                            <svg width="40" height="40" viewBox="0 0 32 32" style={{ imageRendering: 'pixelated' }}>
+                                <rect x="4" y="8" width="24" height="16" fill="#4a5568" rx="2"/>
+                                <circle cx="10" cy="16" r="3" fill="#3b82f6"/>
+                                <rect x="18" y="12" width="3" height="3" fill="#ef4444"/>
+                                <rect x="22" y="16" width="3" height="3" fill="#22c55e"/>
+                            </svg>
+                            LET'S PLAY!
                         </motion.button>
                     </motion.div>
                 </div>
@@ -343,12 +356,12 @@ export default function Volckano() {
 
     return (
         <div 
-            className="h-screen w-screen bg-gradient-to-b from-purple-900 via-pink-900 to-orange-900 overflow-hidden select-none"
+            className="h-screen w-screen bg-gradient-to-b from-purple-900 via-pink-900 to-orange-900 overflow-hidden select-none flex items-center justify-center p-4"
             onClick={jump}
             onTouchStart={(e) => { e.preventDefault(); jump(); }}
         >
-            <div className="relative w-full h-full max-w-md mx-auto">
-                <div className="relative w-full h-full bg-gradient-to-b from-sky-400 via-sky-300 to-green-400 overflow-hidden">
+            <div className="relative w-full max-w-sm">
+                <div className="relative w-full aspect-[9/16] bg-gradient-to-b from-sky-400 via-sky-300 to-green-400 border-8 border-white rounded-3xl overflow-hidden shadow-2xl">
                     
                     {/* Player - Custom Icon */}
                     <motion.div
@@ -436,11 +449,16 @@ export default function Volckano() {
                         </div>
                     ))}
 
-                    {/* Ground */}
+                    {/* Ground - 8-bit grass */}
                     <div className="absolute bottom-0 left-0 right-0 h-[60px] bg-gradient-to-b from-green-600 to-green-800 border-t-4 border-green-900">
                         <div className="flex justify-around pt-2">
                             {[...Array(8)].map((_, i) => (
-                                <span key={i} className="text-2xl">🌱</span>
+                                <svg key={i} width="20" height="24" viewBox="0 0 16 16" style={{ imageRendering: 'pixelated' }}>
+                                    <rect x="6" y="8" width="4" height="8" fill="#22c55e"/>
+                                    <polygon points="8,2 6,8 10,8" fill="#10b981"/>
+                                    <polygon points="4,6 6,10 8,8" fill="#10b981"/>
+                                    <polygon points="12,6 10,10 8,8" fill="#10b981"/>
+                                </svg>
                             ))}
                         </div>
                     </div>
