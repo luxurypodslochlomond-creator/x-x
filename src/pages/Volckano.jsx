@@ -487,23 +487,56 @@ export default function Volckano() {
                         </div>
                     </div>
 
-                    {/* Start */}
+                    {/* Start Screen - Clean & Fun */}
                     {!gameStarted && !gameOver && (
-                        <div className="absolute inset-0 bg-gradient-to-b from-purple-900/95 via-pink-900/95 to-orange-900/95 flex items-center justify-center">
-                            <div className="text-center space-y-6 px-6">
-                                <motion.p 
-                                    animate={{ scale: [1, 1.2, 1] }}
-                                    transition={{ duration: 0.8, repeat: Infinity }}
-                                    className="text-6xl font-black text-white mb-4"
-                                >
-                                    TAP TO FLY! ✨
-                                </motion.p>
-                                <p className="text-2xl text-white font-bold bg-black/40 px-6 py-3 rounded-2xl">
+                        <div className="absolute inset-0 bg-gradient-to-b from-purple-900/98 via-pink-900/98 to-orange-900/98 flex flex-col items-center justify-center px-6 py-8">
+                            {/* Volcano 8-bit */}
+                            <motion.svg 
+                                width="80" 
+                                height="80" 
+                                viewBox="0 0 64 64" 
+                                className="mb-4"
+                                animate={{ 
+                                    rotate: [0, 5, -5, 0],
+                                }}
+                                transition={{ 
+                                    duration: 2,
+                                    repeat: Infinity,
+                                    ease: "easeInOut"
+                                }}
+                                style={{ imageRendering: 'pixelated' }}
+                            >
+                                <polygon points="32,8 12,48 52,48" fill="#8B4513"/>
+                                <polygon points="28,20 24,32 40,32 36,20" fill="#FF4500"/>
+                                <rect x="28" y="8" width="8" height="12" fill="#FFD700"/>
+                                <circle cx="24" cy="6" r="3" fill="#FFD700" opacity="0.8"/>
+                                <circle cx="40" cy="6" r="3" fill="#FFD700" opacity="0.8"/>
+                            </motion.svg>
+
+                            {/* Title - 8-bit style */}
+                            <motion.div 
+                                animate={{ y: [0, -8, 0] }}
+                                transition={{ duration: 1.5, repeat: Infinity }}
+                                className="mb-6 text-center"
+                            >
+                                <h1 className="text-5xl font-black text-white mb-2" style={{ 
+                                    textShadow: '4px 4px 0px rgba(0,0,0,0.5)',
+                                    fontFamily: 'monospace',
+                                    letterSpacing: '2px'
+                                }}>
+                                    TAP TO FLY
+                                </h1>
+                                <p className="text-cyan-300 font-bold text-lg tracking-wide" style={{ fontFamily: 'monospace' }}>
                                     Save ALL Life ♾️❤️
                                 </p>
-                                
-                                {/* Character selector */}
-                                <div className="flex items-center justify-center gap-3 flex-wrap px-4">
+                            </motion.div>
+                            
+                            {/* Character Grid - Cleaner */}
+                            <div className="bg-black/40 backdrop-blur-sm border-4 border-white/30 rounded-3xl p-4 mb-4">
+                                <p className="text-white font-black text-sm text-center mb-3 opacity-80" style={{ fontFamily: 'monospace' }}>
+                                    CHOOSE YOUR HERO
+                                </p>
+                                <div className="grid grid-cols-3 gap-3">
                                     {CHARACTER_UNLOCKS.map(char => (
                                         unlockedCharacters.includes(char.type) ? (
                                             <motion.button
@@ -514,107 +547,230 @@ export default function Volckano() {
                                                     e.stopPropagation();
                                                     setCurrentCharacter(char.type);
                                                     localStorage.setItem('volckano_character', char.type);
+                                                    if (navigator.vibrate) navigator.vibrate(30);
                                                 }}
-                                                className={`p-2 rounded-2xl border-4 transition-all ${
+                                                className={`relative p-3 rounded-2xl border-4 transition-all ${
                                                     currentCharacter === char.type 
-                                                        ? 'border-yellow-400 bg-yellow-500/30 shadow-lg shadow-yellow-400/50' 
-                                                        : 'border-white/50 bg-white/10'
+                                                        ? 'border-yellow-400 bg-gradient-to-br from-yellow-500/40 to-orange-500/40' 
+                                                        : 'border-white/40 bg-white/10 hover:bg-white/20'
                                                 }`}
+                                                style={{ boxShadow: currentCharacter === char.type ? '0 0 20px rgba(255, 215, 0, 0.5)' : 'none' }}
                                             >
-                                                <VolckanoPlayer type={char.type} size={50} />
+                                                <VolckanoPlayer type={char.type} size={48} />
+                                                {currentCharacter === char.type && (
+                                                    <div className="absolute -top-2 -right-2 w-6 h-6 bg-green-500 rounded-full border-2 border-white flex items-center justify-center">
+                                                        <span className="text-white text-xs font-black">✓</span>
+                                                    </div>
+                                                )}
                                             </motion.button>
                                         ) : (
                                             <div
                                                 key={char.type}
-                                                className="p-2 rounded-2xl border-4 border-gray-700 bg-black/60 opacity-30 relative"
+                                                className="relative p-3 rounded-2xl border-4 border-gray-700 bg-black/60"
                                             >
-                                                <div className="w-[50px] h-[50px] flex items-center justify-center text-3xl">🔒</div>
-                                                <span className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 text-sm text-white font-bold whitespace-nowrap bg-black/70 px-2 py-1 rounded">
+                                                <div className="w-[48px] h-[48px] flex items-center justify-center text-3xl opacity-40">
+                                                    🔒
+                                                </div>
+                                                <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 bg-orange-600 text-white text-xs font-black px-2 py-0.5 rounded-full border-2 border-white whitespace-nowrap">
                                                     {char.stars}⭐
-                                                </span>
+                                                </div>
                                             </div>
                                         )
                                     ))}
                                 </div>
                             </div>
+
+                            {/* Quick instruction - 8-bit style */}
+                            <motion.div 
+                                animate={{ opacity: [0.6, 1, 0.6] }}
+                                transition={{ duration: 2, repeat: Infinity }}
+                                className="text-center"
+                            >
+                                <p className="text-white text-sm font-bold" style={{ fontFamily: 'monospace' }}>
+                                    👆 TAP ANYWHERE 👆
+                                </p>
+                            </motion.div>
                         </div>
                     )}
 
-                    {/* Game Over */}
+                    {/* Game Over - 8-bit style */}
                     {gameOver && (
                         <motion.div
                             initial={{ scale: 0 }}
                             animate={{ scale: 1 }}
-                            className="absolute inset-0 bg-black/90 flex items-center justify-center"
+                            className="absolute inset-0 bg-black/95 flex items-center justify-center"
                         >
-                            <div className="text-center space-y-4 px-4">
-                                <p className="text-6xl">💥</p>
-                                <h2 className="text-4xl font-black text-red-400">CRASH!</h2>
-                                <div className="space-y-2">
-                                    <p className="text-white text-xl font-bold">Saved: {score} beings ♾️❤️</p>
+                            <div className="text-center space-y-6 px-4">
+                                {/* 8-bit explosion */}
+                                <motion.svg 
+                                    width="100" 
+                                    height="100" 
+                                    viewBox="0 0 64 64"
+                                    animate={{ rotate: [0, 10, -10, 0] }}
+                                    transition={{ duration: 0.5, repeat: 2 }}
+                                    style={{ imageRendering: 'pixelated' }}
+                                    className="mx-auto"
+                                >
+                                    <circle cx="32" cy="32" r="20" fill="#FF4500"/>
+                                    <circle cx="32" cy="32" r="14" fill="#FFD700"/>
+                                    <polygon points="32,12 34,20 32,18" fill="#FFA500"/>
+                                    <polygon points="52,32 44,34 46,32" fill="#FFA500"/>
+                                    <polygon points="32,52 30,44 32,46" fill="#FFA500"/>
+                                    <polygon points="12,32 20,30 18,32" fill="#FFA500"/>
+                                </motion.svg>
+                                
+                                <h2 className="text-5xl font-black text-red-400" style={{ 
+                                    fontFamily: 'monospace',
+                                    textShadow: '4px 4px 0px rgba(0,0,0,0.5)'
+                                }}>
+                                    OH NO!
+                                </h2>
+                                
+                                <div className="bg-white/10 backdrop-blur-sm border-4 border-white/30 rounded-2xl p-4 space-y-2">
+                                    <p className="text-white text-2xl font-black" style={{ fontFamily: 'monospace' }}>
+                                        SAVED: {score} ♾️❤️
+                                    </p>
                                     {score === highScore && score > 0 && (
-                                        <p className="text-yellow-400 text-sm font-black animate-pulse">🏆 NEW BEST!</p>
+                                        <motion.p 
+                                            animate={{ scale: [1, 1.1, 1] }}
+                                            transition={{ duration: 0.5, repeat: Infinity }}
+                                            className="text-yellow-400 text-lg font-black"
+                                            style={{ fontFamily: 'monospace' }}
+                                        >
+                                            🏆 NEW RECORD!
+                                        </motion.p>
                                     )}
-                                    <p className="text-gray-400 text-sm">Total Stars: ⭐ {stars}</p>
+                                    <p className="text-cyan-300 text-sm font-bold" style={{ fontFamily: 'monospace' }}>
+                                        STARS: ⭐ {stars}
+                                    </p>
                                 </div>
+                                
                                 <div className="flex gap-3 justify-center">
-                                    <button
+                                    <motion.button
+                                        whileHover={{ scale: 1.05 }}
+                                        whileTap={{ scale: 0.95 }}
                                         onClick={resetGame}
-                                        className="bg-orange-600 hover:bg-orange-500 text-white font-black px-6 py-3 rounded-xl text-lg border-b-4 border-orange-900"
+                                        className="bg-gradient-to-b from-orange-500 to-orange-700 text-white font-black px-8 py-4 rounded-xl text-xl border-4 border-orange-400"
+                                        style={{ 
+                                            fontFamily: 'monospace',
+                                            boxShadow: '0 6px 0 rgba(0,0,0,0.3)'
+                                        }}
                                     >
-                                        🌋 AGAIN
-                                    </button>
-                                    <button
+                                        ▶ PLAY AGAIN
+                                    </motion.button>
+                                    <motion.button
+                                        whileHover={{ scale: 1.05 }}
+                                        whileTap={{ scale: 0.95 }}
                                         onClick={(e) => { e.stopPropagation(); setShowShare(true); }}
-                                        className="bg-cyan-600 hover:bg-cyan-500 text-white font-black px-6 py-3 rounded-xl text-lg border-b-4 border-cyan-900"
+                                        className="bg-gradient-to-b from-cyan-500 to-cyan-700 text-white font-black px-6 py-4 rounded-xl text-xl border-4 border-cyan-400"
+                                        style={{ 
+                                            fontFamily: 'monospace',
+                                            boxShadow: '0 6px 0 rgba(0,0,0,0.3)'
+                                        }}
                                     >
-                                        📤 SHARE
-                                    </button>
+                                        📤
+                                    </motion.button>
                                 </div>
                             </div>
                         </motion.div>
                     )}
                     
-                    {/* New Character Unlock! */}
+                    {/* New Character Unlock - 8-bit celebration */}
                     {showUnlock && (
                         <motion.div
                             initial={{ scale: 0 }}
                             animate={{ scale: 1 }}
-                            className="absolute inset-0 bg-black/90 flex items-center justify-center z-20"
+                            className="absolute inset-0 bg-black/95 flex items-center justify-center z-20"
                             onClick={(e) => { e.stopPropagation(); setShowUnlock(false); }}
                         >
-                            <div className="text-center space-y-4">
+                            <div className="text-center space-y-6 px-6">
+                                {/* Confetti pixels */}
+                                {[...Array(12)].map((_, i) => (
+                                    <motion.div
+                                        key={i}
+                                        className="absolute w-3 h-3 rounded-sm"
+                                        style={{
+                                            left: `${30 + Math.random() * 40}%`,
+                                            top: `${20 + Math.random() * 40}%`,
+                                            backgroundColor: ['#FFD700', '#FF69B4', '#00FFFF', '#00FF00'][i % 4],
+                                            imageRendering: 'pixelated'
+                                        }}
+                                        animate={{
+                                            y: [0, 200],
+                                            rotate: [0, 360],
+                                            opacity: [1, 0]
+                                        }}
+                                        transition={{
+                                            duration: 2,
+                                            repeat: Infinity,
+                                            delay: i * 0.1
+                                        }}
+                                    />
+                                ))}
+                                
                                 <motion.div
-                                    animate={{ rotate: [0, 360] }}
-                                    transition={{ duration: 1 }}
+                                    animate={{ 
+                                        rotate: [0, 10, -10, 0],
+                                        scale: [1, 1.1, 1]
+                                    }}
+                                    transition={{ duration: 0.5, repeat: 3 }}
                                 >
-                                    <VolckanoPlayer type={showUnlock.type} size={120} />
+                                    <VolckanoPlayer type={showUnlock.type} size={140} />
                                 </motion.div>
-                                <h2 className="text-4xl font-black text-yellow-400">UNLOCKED!</h2>
-                                <p className="text-white text-xl font-bold">{showUnlock.name}</p>
-                                <button
+                                
+                                <div className="bg-gradient-to-b from-yellow-500 to-orange-600 text-white px-6 py-3 rounded-2xl border-4 border-yellow-400" style={{
+                                    boxShadow: '0 6px 0 rgba(0,0,0,0.3)'
+                                }}>
+                                    <h2 className="text-4xl font-black" style={{ 
+                                        fontFamily: 'monospace',
+                                        textShadow: '3px 3px 0px rgba(0,0,0,0.3)'
+                                    }}>
+                                        UNLOCKED!
+                                    </h2>
+                                    <p className="text-2xl font-bold mt-1" style={{ fontFamily: 'monospace' }}>
+                                        {showUnlock.name}
+                                    </p>
+                                </div>
+                                
+                                <motion.button
+                                    whileHover={{ scale: 1.05 }}
+                                    whileTap={{ scale: 0.95 }}
                                     onClick={(e) => { e.stopPropagation(); setShowUnlock(false); }}
-                                    className="bg-yellow-600 hover:bg-yellow-500 text-white font-black px-8 py-4 rounded-xl text-xl"
+                                    className="bg-gradient-to-b from-green-500 to-green-700 text-white font-black px-10 py-5 rounded-xl text-2xl border-4 border-green-400"
+                                    style={{ 
+                                        fontFamily: 'monospace',
+                                        boxShadow: '0 6px 0 rgba(0,0,0,0.3)'
+                                    }}
                                 >
-                                    ✨ AWESOME!
-                                </button>
+                                    ✨ COOL!
+                                </motion.button>
                             </div>
                         </motion.div>
                     )}
                 </div>
             </div>
 
-            {/* Instructions for touch */}
+            {/* Footer - 8-bit love */}
             {!gameStarted && !gameOver && (
-                <motion.div 
-                    animate={{ y: [0, 10, 0] }}
-                    transition={{ duration: 1.5, repeat: Infinity }}
-                    className="absolute bottom-8 text-center"
-                >
-                    <p className="text-white text-lg font-black bg-black/60 px-6 py-3 rounded-full">
+                <div className="absolute bottom-6 left-0 right-0">
+                    <div className="flex justify-center gap-1 mb-2">
+                        {[...Array(5)].map((_, i) => (
+                            <motion.div
+                                key={i}
+                                className="w-2 h-2 bg-pink-500 rounded-sm"
+                                animate={{ opacity: [0.3, 1, 0.3] }}
+                                transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.2 }}
+                                style={{ imageRendering: 'pixelated' }}
+                            />
+                        ))}
+                    </div>
+                    <p className="text-white text-sm font-black text-center" style={{ 
+                        fontFamily: 'monospace',
+                        textShadow: '2px 2px 0px rgba(0,0,0,0.5)'
+                    }}>
                         Made with ♾️❤️ for GERGIE7
                     </p>
-                </motion.div>
+                </div>
             )}
 
             {showShare && (
