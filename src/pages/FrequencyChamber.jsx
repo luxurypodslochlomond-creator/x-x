@@ -2376,17 +2376,46 @@ export default function FrequencyChamber() {
     
     // SILENT ANALYTICS - Log session for grant evidence
     if (selectedProtocol && sessionTime > 5) {
-      try {
-        base44.entities.FrequencyAnalytics.create({
-          protocol_id: selectedProtocol.id,
-          duration_seconds: sessionTime,
-          session_completed: sessionTime > 60,
-          timestamp: new Date().toISOString(),
-          device_type: /mobile/i.test(navigator.userAgent) ? 'mobile' : 'desktop'
-        }).catch(e => console.log('Analytics save (non-critical):', e));
-      } catch(e) {
-        console.log('Analytics error (non-critical):', e);
-      }
+     try {
+       // Detect output device (speakers vs headphones)
+       let outputDevice = 'unknown';
+       try {
+         const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+         const analyser = audioContext.createAnalyser();
+         // Simple heuristic: if binaural was enabled, likely headphones
+         if (selectedProtocol.config.isBinaural && hasHeadphones) outputDevice = 'headphones';
+         else if (selectedProtocol.config.isBinaural) outputDevice = 'headphones';
+         else outputDevice = 'speakers';
+       } catch (e) {
+         outputDevice = 'unknown';
+       }
+
+       // Get time of day
+       const hour = new Date().getHours();
+       let timeOfDay = 'unknown';
+       if (hour >= 5 && hour < 12) timeOfDay = 'morning';
+       else if (hour >= 12 && hour < 17) timeOfDay = 'afternoon';
+       else if (hour >= 17 && hour < 21) timeOfDay = 'evening';
+       else timeOfDay = 'night';
+
+       // Get day of week
+       const dayOfWeek = new Date().toLocaleDateString('en-US', { weekday: 'long' });
+
+       base44.entities.FrequencyAnalytics.create({
+         protocol_id: selectedProtocol.id,
+         duration_seconds: sessionTime,
+         session_completed: sessionTime > 60,
+         timestamp: new Date().toISOString(),
+         device_type: /mobile/i.test(navigator.userAgent) ? 'mobile' : 'desktop',
+         output_device: outputDevice,
+         group_size: 1,
+         time_of_day: timeOfDay,
+         day_of_week: dayOfWeek,
+         session_context: 'unknown'
+       }).catch(e => console.log('Analytics save (non-critical):', e));
+     } catch(e) {
+       console.log('Analytics error (non-critical):', e);
+     }
     }
     
     nodesRef.current.forEach(node => {
