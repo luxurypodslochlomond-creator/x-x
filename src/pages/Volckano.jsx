@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Users } from 'lucide-react';
 import VolckanoShare from '../components/volckano/VolckanoShare';
+import { VolckanoPlayer, VolckanoLife, VolckanoFlame, VolckanoStar } from '../components/volckano/VolckanoCustomIcons';
 
 /**
  * VOLCKANO - Gergie7's Game
@@ -17,8 +18,8 @@ export default function Volckano() {
     const [score, setScore] = useState(0);
     const [stars, setStars] = useState(0);
     const [highScore, setHighScore] = useState(0);
-    const [unlockedCharacters, setUnlockedCharacters] = useState(['😊']);
-    const [currentCharacter, setCurrentCharacter] = useState('😊');
+    const [unlockedCharacters, setUnlockedCharacters] = useState(['happy']);
+    const [currentCharacter, setCurrentCharacter] = useState('happy');
     const [showShare, setShowShare] = useState(false);
     const [showUnlock, setShowUnlock] = useState(false);
     const [soundEnabled, setSoundEnabled] = useState(true);
@@ -34,12 +35,12 @@ export default function Volckano() {
     const [, forceUpdate] = useState(0);
 
     const CHARACTER_UNLOCKS = [
-        { emoji: '😊', name: 'Happy', stars: 0 },
-        { emoji: '🦄', name: 'Unicorn', stars: 10 },
-        { emoji: '🐉', name: 'Dragon', stars: 25 },
-        { emoji: '🐱', name: 'Kitty', stars: 50 },
-        { emoji: '🚀', name: 'Rocket', stars: 100 },
-        { emoji: '⭐', name: 'Star', stars: 200 }
+        { type: 'happy', name: 'Happy', stars: 0 },
+        { type: 'unicorn', name: 'Unicorn', stars: 10 },
+        { type: 'dragon', name: 'Dragon', stars: 25 },
+        { type: 'kitty', name: 'Kitty', stars: 50 },
+        { type: 'rocket', name: 'Rocket', stars: 100 },
+        { type: 'star', name: 'Star', stars: 200 }
     ];
 
     useEffect(() => {
@@ -101,13 +102,13 @@ export default function Volckano() {
         collectibles.current = [];
         
         // Mix of all beings - humans, animals, plants, AI ♾️❤️
-        const beings = ['🧑', '🐕', '🐈', '🐰', '🌱', '🤖', '🦋', '🐢'];
+        const beings = ['human', 'dog', 'cat', 'plant', 'robot', 'butterfly', 'turtle'];
         for (let i = 0; i < 8; i++) {
             people.current.push({
                 x: 450 + (i * 120),
                 y: 350,
                 saved: false,
-                emoji: beings[Math.floor(Math.random() * beings.length)]
+                type: beings[Math.floor(Math.random() * beings.length)]
             });
         }
         
@@ -152,9 +153,9 @@ export default function Volckano() {
                 
                 // Check for unlocks
                 CHARACTER_UNLOCKS.forEach(char => {
-                    if (stars >= char.stars && !unlockedCharacters.includes(char.emoji)) {
+                    if (stars >= char.stars && !unlockedCharacters.includes(char.type)) {
                         setUnlockedCharacters(prev => {
-                            const updated = [...prev, char.emoji];
+                            const updated = [...prev, char.type];
                             localStorage.setItem('volckano_unlocked', JSON.stringify(updated));
                             return updated;
                         });
@@ -342,16 +343,16 @@ export default function Volckano() {
             <div className="relative w-full h-full max-w-md mx-auto flex items-center justify-center">
                 <div className="relative w-full aspect-[4/5] max-h-[85vh] bg-gradient-to-b from-sky-400 via-sky-300 to-green-400 border-8 border-white rounded-3xl overflow-hidden shadow-2xl">
                     
-                    {/* Player - bouncy and fun */}
+                    {/* Player - Custom Icon */}
                     <motion.div
-                        className="absolute left-[15%] w-[60px] h-[60px] text-5xl flex items-center justify-center z-20"
+                        className="absolute left-[15%] z-20"
                         style={{ 
                             top: `${playerY.current}px`,
-                            transform: `rotate(${velocity.current > 0 ? 20 : -20}deg)`,
-                            filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.3)) drop-shadow(0 0 15px rgba(255,215,0,0.6))'
+                            transform: `rotate(${velocity.current > 0 ? 15 : -15}deg)`,
+                            filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.3))'
                         }}
                         animate={{
-                            scale: [1, 1.05, 1],
+                            scale: [1, 1.08, 1],
                         }}
                         transition={{
                             duration: 0.3,
@@ -359,26 +360,18 @@ export default function Volckano() {
                             ease: "easeInOut"
                         }}
                     >
-                        {currentCharacter}
+                        <VolckanoPlayer type={currentCharacter} size={60} />
                     </motion.div>
 
-                    {/* Collectible Stars */}
+                    {/* Collectible Stars - Custom */}
                     {collectibles.current.map((star, i) => !star.collected && star.x > -50 && (
-                        <motion.div
+                        <div
                             key={i}
-                            className="absolute text-2xl"
+                            className="absolute"
                             style={{ left: `${star.x}px`, top: `${star.y}px` }}
-                            animate={{
-                                rotate: [0, 360],
-                                scale: [1, 1.2, 1]
-                            }}
-                            transition={{
-                                rotate: { duration: 2, repeat: Infinity, ease: "linear" },
-                                scale: { duration: 1, repeat: Infinity, ease: "easeInOut" }
-                            }}
                         >
-                            ⭐
-                        </motion.div>
+                            <VolckanoStar size={32} />
+                        </div>
                     ))}
 
                     {/* Particles - SPARKLES! */}
@@ -402,15 +395,14 @@ export default function Volckano() {
                         />
                     ))}
 
-                    {/* All Beings - humans, animals, nature, AI ♾️❤️ */}
+                    {/* All Beings - Custom Icons ♾️❤️ */}
                     {people.current.map((being, i) => !being.saved && being.x > -50 && (
                         <motion.div
                             key={i}
-                            className="absolute w-[40px] h-[40px] text-3xl flex items-center justify-center"
+                            className="absolute"
                             style={{ left: `${being.x}px`, top: `${being.y}px` }}
                             animate={{
                                 y: [0, -8, 0],
-                                rotate: [0, 5, -5, 0]
                             }}
                             transition={{
                                 duration: 1,
@@ -418,56 +410,22 @@ export default function Volckano() {
                                 ease: "easeInOut"
                             }}
                         >
-                            {being.emoji}
+                            <VolckanoLife type={being.type} size={40} />
                         </motion.div>
                     ))}
 
-                    {/* Obstacles - ANIMATED FLAMES */}
+                    {/* Obstacles - Custom Flames */}
                     {obstacles.current.map((obs, i) => (
                         <div
                             key={i}
-                            className="absolute w-[50px]"
+                            className="absolute"
                             style={{
                                 left: `${obs.x}px`,
                                 top: `${obs.y}px`,
                                 height: `${obs.h}px`
                             }}
                         >
-                            {/* Wavy flame effect */}
-                            <div className="relative w-full h-full">
-                                <motion.div
-                                    animate={{
-                                        scaleY: [1, 1.2, 1],
-                                        scaleX: [1, 0.9, 1],
-                                    }}
-                                    transition={{
-                                        duration: 0.5,
-                                        repeat: Infinity,
-                                        ease: "easeInOut"
-                                    }}
-                                    className="absolute inset-0 bg-gradient-to-t from-red-600 via-orange-500 to-yellow-400 rounded-t-full"
-                                    style={{
-                                        filter: 'blur(2px)',
-                                        boxShadow: '0 0 20px rgba(255, 69, 0, 0.8), inset 0 0 20px rgba(255, 255, 0, 0.5)'
-                                    }}
-                                />
-                                <motion.div
-                                    animate={{
-                                        scaleY: [1, 1.3, 1],
-                                        opacity: [0.8, 1, 0.8]
-                                    }}
-                                    transition={{
-                                        duration: 0.4,
-                                        repeat: Infinity,
-                                        ease: "easeInOut",
-                                        delay: 0.2
-                                    }}
-                                    className="absolute inset-0 bg-gradient-to-t from-orange-600 via-yellow-400 to-yellow-200 rounded-t-full opacity-70"
-                                />
-                                <div className="absolute inset-0 flex items-center justify-center text-3xl">
-                                    {obs.y === 0 ? '🔥' : '🔥'}
-                                </div>
-                            </div>
+                            <VolckanoFlame size={50} inverted={obs.y === 0} />
                         </div>
                     ))}
 
@@ -540,30 +498,30 @@ export default function Volckano() {
                                 {/* Character selector */}
                                 <div className="flex items-center justify-center gap-3 flex-wrap px-4">
                                     {CHARACTER_UNLOCKS.map(char => (
-                                        unlockedCharacters.includes(char.emoji) ? (
+                                        unlockedCharacters.includes(char.type) ? (
                                             <motion.button
-                                                key={char.emoji}
+                                                key={char.type}
                                                 whileHover={{ scale: 1.1 }}
                                                 whileTap={{ scale: 0.9 }}
                                                 onClick={(e) => {
                                                     e.stopPropagation();
-                                                    setCurrentCharacter(char.emoji);
-                                                    localStorage.setItem('volckano_character', char.emoji);
+                                                    setCurrentCharacter(char.type);
+                                                    localStorage.setItem('volckano_character', char.type);
                                                 }}
-                                                className={`text-4xl p-3 rounded-2xl border-4 transition-all ${
-                                                    currentCharacter === char.emoji 
+                                                className={`p-2 rounded-2xl border-4 transition-all ${
+                                                    currentCharacter === char.type 
                                                         ? 'border-yellow-400 bg-yellow-500/30 shadow-lg shadow-yellow-400/50' 
                                                         : 'border-white/50 bg-white/10'
                                                 }`}
                                             >
-                                                {char.emoji}
+                                                <VolckanoPlayer type={char.type} size={50} />
                                             </motion.button>
                                         ) : (
                                             <div
-                                                key={char.emoji}
-                                                className="text-4xl p-3 rounded-2xl border-4 border-gray-700 bg-black/60 opacity-30 relative"
+                                                key={char.type}
+                                                className="p-2 rounded-2xl border-4 border-gray-700 bg-black/60 opacity-30 relative"
                                             >
-                                                🔒
+                                                <div className="w-[50px] h-[50px] flex items-center justify-center text-3xl">🔒</div>
                                                 <span className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 text-sm text-white font-bold whitespace-nowrap bg-black/70 px-2 py-1 rounded">
                                                     {char.stars}⭐
                                                 </span>
@@ -619,13 +577,12 @@ export default function Volckano() {
                             onClick={(e) => { e.stopPropagation(); setShowUnlock(false); }}
                         >
                             <div className="text-center space-y-4">
-                                <motion.p 
-                                    className="text-8xl"
+                                <motion.div
                                     animate={{ rotate: [0, 360] }}
                                     transition={{ duration: 1 }}
                                 >
-                                    {showUnlock.emoji}
-                                </motion.p>
+                                    <VolckanoPlayer type={showUnlock.type} size={120} />
+                                </motion.div>
                                 <h2 className="text-4xl font-black text-yellow-400">UNLOCKED!</h2>
                                 <p className="text-white text-xl font-bold">{showUnlock.name}</p>
                                 <button
