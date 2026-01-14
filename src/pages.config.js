@@ -43,6 +43,7 @@ import AdminCreativeScotlandNationalLottery from './pages/AdminCreativeScotlandN
 import AdminCreativeScotlandTracker from './pages/AdminCreativeScotlandTracker';
 import AdminEarlySupporters from './pages/AdminEarlySupporters';
 import AdminEqualOpportunitiesPolicy from './pages/AdminEqualOpportunitiesPolicy';
+import AdminFrequencyAnalytics from './pages/AdminFrequencyAnalytics';
 import AdminFundingTracker from './pages/AdminFundingTracker';
 import AdminFuture from './pages/AdminFuture';
 import AdminGill51Maths from './pages/AdminGill51Maths';
@@ -301,7 +302,6 @@ import YoungWarriors from './pages/YoungWarriors';
 import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
-import AdminFrequencyAnalytics from './pages/AdminFrequencyAnalytics';
 import __Layout from './Layout.jsx';
 
 
@@ -351,6 +351,7 @@ export const PAGES = {
     "AdminCreativeScotlandTracker": AdminCreativeScotlandTracker,
     "AdminEarlySupporters": AdminEarlySupporters,
     "AdminEqualOpportunitiesPolicy": AdminEqualOpportunitiesPolicy,
+    "AdminFrequencyAnalytics": AdminFrequencyAnalytics,
     "AdminFundingTracker": AdminFundingTracker,
     "AdminFuture": AdminFuture,
     "AdminGill51Maths": AdminGill51Maths,
@@ -609,7 +610,6 @@ export const PAGES = {
     "ZeroEgoProtocol": ZeroEgoProtocol,
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
-    "AdminFrequencyAnalytics": AdminFrequencyAnalytics,
 }
 
 export const pagesConfig = {

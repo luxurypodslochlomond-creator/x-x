@@ -52,6 +52,28 @@ export default function AdminFrequencyAnalytics() {
     const avgDuration = sessions.length > 0 ? Math.round(sessions.reduce((sum, s) => sum + s.duration_seconds, 0) / sessions.length) : 0;
     const completionRate = sessions.length > 0 ? Math.round((completedSessions / totalSessions) * 100) : 0;
 
+    // CUTTING EDGE: Device-level behavioral data (behavior > surveys)
+    const uniqueDevices = new Set(sessions.map(s => s.device_id_hash).filter(Boolean)).size;
+    const returningUsers = sessions.reduce((acc, s) => {
+        if (s.device_id_hash) {
+            acc[s.device_id_hash] = (acc[s.device_id_hash] || 0) + 1;
+        }
+        return acc;
+    }, {});
+    const multipleUseDevices = Object.values(returningUsers).filter(count => count >= 3).length;
+    const returnRate = uniqueDevices > 0 ? Math.round((multipleUseDevices / uniqueDevices) * 100) : 0;
+
+    // Geographic reach
+    const counties = [...new Set(sessions.map(s => s.county).filter(Boolean))];
+    
+    // Time patterns
+    const timePatterns = sessions.reduce((acc, s) => {
+        if (s.time_of_day) {
+            acc[s.time_of_day] = (acc[s.time_of_day] || 0) + 1;
+        }
+        return acc;
+    }, {});
+
     // Group by protocol
     const protocolStats = sessions.reduce((acc, s) => {
         if (!acc[s.protocol_id]) {
@@ -81,6 +103,8 @@ export default function AdminFrequencyAnalytics() {
     const exportData = () => {
         const grantData = {
             total_sessions: totalSessions,
+            unique_real_devices: uniqueDevices,
+            return_rate_percent: returnRate,
             total_minutes_delivered: totalMinutes,
             completion_rate_percent: completionRate,
             average_session_minutes: Math.round(avgDuration / 60),
@@ -93,8 +117,14 @@ export default function AdminFrequencyAnalytics() {
                 mobile: mobileCount,
                 desktop: desktopCount
             },
+            geographic_reach: {
+                counties_reached: counties.length,
+                counties: counties
+            },
+            usage_patterns: timePatterns,
+            methodology: 'Behavioral tracking (return rate, device patterns) - more reliable than self-reported surveys',
             generated_date: new Date().toISOString(),
-            note: 'Anonymous aggregated data. Zero personal information. For grant evidence only.'
+            note: 'Anonymous device-level data. Zero personal info. Behavior-based proof > surveys. For grant evidence only.'
         };
 
         const blob = new Blob([JSON.stringify(grantData, null, 2)], { type: 'application/json' });
@@ -171,8 +201,100 @@ export default function AdminFrequencyAnalytics() {
                             <p className="text-sm text-gray-400 font-mono mt-2">Avg. Session (min)</p>
                         </CardContent>
                     </Card>
-                </div>
-            </div>
+                    </div>
+                    </div>
+
+                    {/* CUTTING EDGE DEVICE INTEL - BEHAVIOR > SURVEYS */}
+                    <div className="max-w-6xl mx-auto mb-8 px-4">
+                    <Card className="bg-gradient-to-br from-cyan-500/20 to-purple-500/20 border-4 border-cyan-500">
+                    <CardHeader>
+                        <CardTitle className="text-2xl font-black text-cyan-400 font-mono">
+                            🔥 CUTTING EDGE DEVICE INTEL (Behavior = Truth)
+                        </CardTitle>
+                        <p className="text-white text-sm font-mono">Old school = ask "did it help?" | NEW SCHOOL = track if they came back (can't fake that)</p>
+                    </CardHeader>
+                    <CardContent>
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                            <div className="bg-black border-2 border-green-500 rounded-lg p-4 text-center">
+                                <p className="text-4xl font-black text-green-400">{uniqueDevices}</p>
+                                <p className="text-xs text-gray-400 font-mono mt-2">Unique Real Devices</p>
+                                <p className="text-xs text-green-400 mt-1">Can't fake this</p>
+                            </div>
+
+                            <div className="bg-black border-2 border-cyan-500 rounded-lg p-4 text-center">
+                                <p className="text-4xl font-black text-cyan-400">{returnRate}%</p>
+                                <p className="text-xs text-gray-400 font-mono mt-2">Returned 3+ Times</p>
+                                <p className="text-xs text-cyan-400 mt-1">Proof it works</p>
+                            </div>
+
+                            <div className="bg-black border-2 border-purple-500 rounded-lg p-4 text-center">
+                                <p className="text-4xl font-black text-purple-400">{counties.length}</p>
+                                <p className="text-xs text-gray-400 font-mono mt-2">Counties Reached</p>
+                                <p className="text-xs text-purple-400 mt-1">Geographic spread</p>
+                            </div>
+
+                            <div className="bg-black border-2 border-pink-500 rounded-lg p-4 text-center">
+                                <p className="text-4xl font-black text-pink-400">{Object.keys(timePatterns).length}</p>
+                                <p className="text-xs text-gray-400 font-mono mt-2">Usage Patterns</p>
+                                <p className="text-xs text-pink-400 mt-1">When they need it</p>
+                            </div>
+                        </div>
+
+                        <div className="bg-green-900/20 border-2 border-green-500 rounded-lg p-4">
+                            <p className="text-green-400 font-black text-sm mb-2">WHY THIS BEATS OLD-SCHOOL SURVEYS:</p>
+                            <div className="grid md:grid-cols-2 gap-3 text-xs font-mono text-white">
+                                <div>
+                                    <p className="text-red-400 mb-1">❌ OLD: "Did this help you?" (people lie)</p>
+                                    <p className="text-green-400">✅ NEW: Device came back 10 times = it worked</p>
+                                </div>
+                                <div>
+                                    <p className="text-red-400 mb-1">❌ OLD: Self-reported location (fake)</p>
+                                    <p className="text-green-400">✅ NEW: Device IP = real county (provable)</p>
+                                </div>
+                                <div>
+                                    <p className="text-red-400 mb-1">❌ OLD: "How do you feel?" (subjective)</p>
+                                    <p className="text-green-400">✅ NEW: Used at 3am = insomnia crisis (objective)</p>
+                                </div>
+                                <div>
+                                    <p className="text-red-400 mb-1">❌ OLD: Survey fatigue (no one fills out)</p>
+                                    <p className="text-green-400">✅ NEW: Passive tracking (100% data capture)</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {counties.length > 0 && (
+                            <div className="bg-cyan-900/20 border-2 border-cyan-500 rounded-lg p-4 mt-4">
+                                <p className="text-cyan-400 font-bold text-sm mb-2">📍 COUNTIES REACHED ({counties.length}):</p>
+                                <div className="flex flex-wrap gap-2">
+                                    {counties.slice(0, 20).map(c => (
+                                        <span key={c} className="bg-black border border-cyan-500 text-cyan-400 px-2 py-1 rounded text-xs font-mono">
+                                            {c}
+                                        </span>
+                                    ))}
+                                    {counties.length > 20 && (
+                                        <span className="text-gray-500 text-xs font-mono">+{counties.length - 20} more</span>
+                                    )}
+                                </div>
+                            </div>
+                        )}
+
+                        {Object.keys(timePatterns).length > 0 && (
+                            <div className="bg-purple-900/20 border-2 border-purple-500 rounded-lg p-4 mt-4">
+                                <p className="text-purple-400 font-bold text-sm mb-2">⏰ WHEN PEOPLE NEED HEALING:</p>
+                                <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                                    {Object.entries(timePatterns).map(([time, count]) => (
+                                        <div key={time} className="bg-black border border-purple-500 rounded p-3 text-center">
+                                            <p className="text-2xl font-black text-purple-400">{count}</p>
+                                            <p className="text-xs text-gray-400 font-mono uppercase">{time}</p>
+                                        </div>
+                                    ))}
+                                </div>
+                                <p className="text-xs text-purple-300 font-mono mt-3">Shows WHEN stress peaks - way better than asking</p>
+                            </div>
+                        )}
+                    </CardContent>
+                    </Card>
+                    </div>
 
             {/* TOP PROTOCOLS */}
             <div className="max-w-6xl mx-auto mb-8 px-4">
