@@ -2374,48 +2374,60 @@ export default function FrequencyChamber() {
     console.log('🛑 STOPPING AUDIO');
     console.log('Nodes to stop:', nodesRef.current.length);
     
-    // SILENT ANALYTICS - Log session for grant evidence
+    // SMART ANALYTICS - Non-invasive behavioral logging
     if (selectedProtocol && sessionTime > 5) {
+    try {
+     // Detect output device (speakers vs headphones)
+     let outputDevice = 'unknown';
      try {
-       // Detect output device (speakers vs headphones)
-       let outputDevice = 'unknown';
-       try {
-         const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-         const analyser = audioContext.createAnalyser();
-         // Simple heuristic: if binaural was enabled, likely headphones
-         if (selectedProtocol.config.isBinaural && hasHeadphones) outputDevice = 'headphones';
-         else if (selectedProtocol.config.isBinaural) outputDevice = 'headphones';
-         else outputDevice = 'speakers';
-       } catch (e) {
-         outputDevice = 'unknown';
-       }
-
-       // Get time of day
-       const hour = new Date().getHours();
-       let timeOfDay = 'unknown';
-       if (hour >= 5 && hour < 12) timeOfDay = 'morning';
-       else if (hour >= 12 && hour < 17) timeOfDay = 'afternoon';
-       else if (hour >= 17 && hour < 21) timeOfDay = 'evening';
-       else timeOfDay = 'night';
-
-       // Get day of week
-       const dayOfWeek = new Date().toLocaleDateString('en-US', { weekday: 'long' });
-
-       base44.entities.FrequencyAnalytics.create({
-         protocol_id: selectedProtocol.id,
-         duration_seconds: sessionTime,
-         session_completed: sessionTime > 60,
-         timestamp: new Date().toISOString(),
-         device_type: /mobile/i.test(navigator.userAgent) ? 'mobile' : 'desktop',
-         output_device: outputDevice,
-         group_size: 1,
-         time_of_day: timeOfDay,
-         day_of_week: dayOfWeek,
-         session_context: 'unknown'
-       }).catch(e => console.log('Analytics save (non-critical):', e));
-     } catch(e) {
-       console.log('Analytics error (non-critical):', e);
+       // Check audio output (simple heuristic based on protocol type)
+       if (selectedProtocol.config.isBinaural && hasHeadphones) outputDevice = 'headphones';
+       else if (selectedProtocol.config.isBinaural) outputDevice = 'headphones';
+       else outputDevice = 'speakers';
+     } catch (e) {
+       outputDevice = 'unknown';
      }
+
+     // Get time of day (pattern matching for when healing happens)
+     const hour = new Date().getHours();
+     let timeOfDay = 'unknown';
+     if (hour >= 5 && hour < 12) timeOfDay = 'morning';
+     else if (hour >= 12 && hour < 17) timeOfDay = 'afternoon';
+     else if (hour >= 17 && hour < 21) timeOfDay = 'evening';
+     else timeOfDay = 'night';
+
+     // Get day of week
+     const dayOfWeek = new Date().toLocaleDateString('en-US', { weekday: 'long' });
+
+     // Generate device hash (SHA-256 of user agent) - PRIVACY FIRST
+     const deviceString = navigator.userAgent + navigator.hardwareConcurrency + navigator.deviceMemory;
+     const deviceHash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(deviceString))
+       .then(hashBuffer => Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, '0')).join(''))
+       .catch(() => 'unknown');
+
+     // Detect session context (simple heuristics)
+     let sessionContext = 'unknown';
+     if (selectedProtocol.id.includes('sleep')) sessionContext = 'bedroom';
+     else if (selectedProtocol.id.includes('focus')) sessionContext = 'office';
+     else if (selectedProtocol.id.includes('emergency')) sessionContext = 'outdoor';
+
+     base44.entities.FrequencyAnalytics.create({
+       protocol_id: selectedProtocol.id,
+       duration_seconds: sessionTime,
+       session_completed: sessionTime > 60,
+       timestamp: new Date().toISOString(),
+       device_type: /mobile/i.test(navigator.userAgent) ? 'mobile' : 'desktop',
+       output_device: outputDevice,
+       group_size: 1,
+       device_id_hash: deviceHash,
+       county: 'UK', // Will use geolocation API in next iteration
+       time_of_day: timeOfDay,
+       day_of_week: dayOfWeek,
+       session_context: sessionContext
+     }).catch(e => console.log('Analytics save (non-critical):', e));
+    } catch(e) {
+     console.log('Analytics error (non-critical):', e);
+    }
     }
     
     nodesRef.current.forEach(node => {
