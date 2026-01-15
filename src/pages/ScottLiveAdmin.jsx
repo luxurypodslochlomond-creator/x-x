@@ -41,13 +41,19 @@ export default function ScottLiveAdmin() {
         <div className="min-h-screen bg-black text-white p-6 pb-24">
             
             {/* CLEAN HEADER */}
-            <button
-                onClick={() => navigate(createPageUrl(`ScottLive${artistId ? `?id=${artistId}` : ''}`))}
-                className="flex items-center gap-2 text-gray-600 hover:text-white transition-colors mb-8"
-            >
-                <ArrowLeft className="w-4 h-4" />
-                <span className="text-sm font-mono uppercase tracking-wider">Back</span>
-            </button>
+            <div className="flex items-center gap-2 mb-8">
+                <button
+                    onClick={() => navigate(createPageUrl(`ScottLive${artistId ? `?id=${artistId}` : ''}`))}
+                    className="flex items-center gap-2 text-gray-500 hover:text-cyan-400 transition-colors"
+                >
+                    <ArrowLeft className="w-4 h-4" />
+                    <span className="text-xs font-mono uppercase tracking-wider font-bold">Back</span>
+                </button>
+                <span className="text-gray-600 text-xs">|</span>
+                <a href={createPageUrl('CB51')} className="flex items-center gap-2 text-gray-500 hover:text-cyan-400 transition-colors">
+                    <span className="text-xs font-mono uppercase tracking-wider font-bold">CB51</span>
+                </a>
+            </div>
 
             {/* BIG CYAN TITLE */}
             <div className="mb-8">

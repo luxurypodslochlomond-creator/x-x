@@ -38,14 +38,19 @@ export default function ScottLiveBookings() {
         <div className="min-h-screen bg-black text-white p-4 pb-24">
             
             {/* HEADER */}
-            <div className="mb-6 pb-4 border-b-2 border-pink-500">
-                <Link to={createPageUrl(`ScottLive?id=${artistId}`)} className="flex items-center gap-2 text-gray-400 hover:text-pink-400 mb-4">
-                    <ArrowLeft className="w-4 h-4" />
-                    <span className="text-xs font-mono font-bold">BACK TO LIVE</span>
-                </Link>
-                <h1 className="text-3xl font-black text-pink-400 font-mono">BOOKINGS</h1>
-                <p className="text-gray-500 text-sm font-mono">Gig Offers & Confirmed Shows</p>
-            </div>
+            <div className="mb-6">
+                <div className="flex items-center gap-2 mb-4">
+                    <Link to={createPageUrl(`ScottLive?id=${artistId}`)} className="flex items-center gap-2 text-gray-500 hover:text-cyan-400 transition-all">
+                        <ArrowLeft className="w-4 h-4" />
+                        <span className="text-xs font-mono font-bold">BACK</span>
+                    </Link>
+                    <span className="text-gray-600 text-xs">|</span>
+                    <a href={createPageUrl('CB51')} className="flex items-center gap-2 text-gray-500 hover:text-cyan-400 transition-all">
+                        <span className="text-xs font-mono font-bold">CB51</span>
+                    </a>
+                </div>
+                <h1 className="text-4xl font-black text-white font-mono mb-2">BOOKINGS</h1>
+                <p className="text-gray-600 text-xs font-mono">Gig Offers & Confirmed Shows</p>
 
             {/* STATS GRID */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
