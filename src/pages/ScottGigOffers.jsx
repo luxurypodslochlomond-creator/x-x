@@ -117,9 +117,18 @@ ${emailText}`,
                 <span className="text-sm font-bold font-mono">BACK</span>
             </button>
 
-            <div className="mb-6">
-                <h1 className="text-3xl font-black text-cyan-400 font-mono mb-2">GIG OFFERS</h1>
-                <p className="text-gray-600 text-sm font-mono">Paste email → AI parses</p>
+            <div className="mb-6 flex items-center justify-between">
+                <div>
+                    <h1 className="text-3xl font-black text-cyan-400 font-mono mb-2">GIG OFFERS</h1>
+                    <p className="text-gray-600 text-sm font-mono">Paste email → AI parses</p>
+                </div>
+                <Button
+                    onClick={() => navigate(createPageUrl('ScottMessageInbox'))}
+                    className="bg-purple-600 hover:bg-purple-700 gap-2"
+                >
+                    <Mail className="w-4 h-4" />
+                    Back to Inbox
+                </Button>
             </div>
 
             {/* NEW OFFER */}

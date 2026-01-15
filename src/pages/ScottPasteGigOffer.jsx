@@ -375,18 +375,27 @@ export default function ScottPasteGigOffer() {
           </div>
         </div>
 
-        <div className="flex items-center gap-4 mb-6">
-          <Button
-            variant="ghost"
-            onClick={() => navigate(createPageUrl('ScottGigOffers'))}
-            className="text-gray-400 hover:text-white"
-          >
-            <ArrowLeft className="w-5 h-5" />
-          </Button>
-          <div>
-            <h1 className="text-4xl font-black text-white">NEW OFFER</h1>
-            <p className="text-gray-400">Paste, screenshot, or auto-scan Gmail</p>
+        <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center gap-4">
+            <Button
+              variant="ghost"
+              onClick={() => navigate(createPageUrl('ScottGigOffers'))}
+              className="text-gray-400 hover:text-white"
+            >
+              <ArrowLeft className="w-5 h-5" />
+            </Button>
+            <div>
+              <h1 className="text-4xl font-black text-white">NEW OFFER</h1>
+              <p className="text-gray-400">Paste, screenshot, or auto-scan Gmail</p>
+            </div>
           </div>
+          <Button
+            onClick={() => navigate(createPageUrl('ScottMessageInbox'))}
+            className="bg-purple-600 hover:bg-purple-700 gap-2"
+          >
+            <Mail className="w-4 h-4" />
+            Back to Inbox
+          </Button>
         </div>
 
         {/* Gmail Auto-Scan Option */}

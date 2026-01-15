@@ -161,26 +161,35 @@ ${emailText}`,
                 <span className="text-sm font-bold font-mono">BACK</span>
             </button>
 
-            <div className="mb-8 flex items-center justify-between">
-                <div>
-                    <h1 className="text-4xl font-black text-cyan-400 font-mono mb-2">TASKS</h1>
-                    <p className="text-gray-600 text-sm font-mono">Deadlines · Progress</p>
-                </div>
-                <div className="flex gap-2">
-                    <button
-                        onClick={() => { setShowEmailScan(!showEmailScan); setShowAddTask(false); }}
-                        className="bg-purple-500 hover:bg-purple-600 text-black font-bold px-4 py-3 rounded-xl text-sm flex items-center gap-2 transition-all"
-                    >
-                        <Mail className="w-5 h-5" />
-                        EMAIL
-                    </button>
-                    <button
-                        onClick={() => { setShowAddTask(!showAddTask); setShowEmailScan(false); }}
-                        className="bg-cyan-500 hover:bg-cyan-600 text-black font-bold px-4 py-3 rounded-xl text-sm flex items-center gap-2 transition-all"
-                    >
-                        <Plus className="w-5 h-5" />
-                        ADD
-                    </button>
+            <div className="mb-8">
+                <div className="flex items-center justify-between mb-2">
+                    <div>
+                        <h1 className="text-4xl font-black text-cyan-400 font-mono mb-2">TASKS</h1>
+                        <p className="text-gray-600 text-sm font-mono">Deadlines · Progress</p>
+                    </div>
+                    <div className="flex gap-2">
+                        <button
+                            onClick={() => navigate(createPageUrl('ScottMessageInbox'))}
+                            className="bg-purple-500 hover:bg-purple-600 text-black font-bold px-4 py-3 rounded-xl text-sm flex items-center gap-2 transition-all"
+                        >
+                            <Mail className="w-5 h-5" />
+                            INBOX
+                        </button>
+                        <button
+                            onClick={() => { setShowEmailScan(!showEmailScan); setShowAddTask(false); }}
+                            className="bg-purple-500 hover:bg-purple-600 text-black font-bold px-4 py-3 rounded-xl text-sm flex items-center gap-2 transition-all"
+                        >
+                            <Mail className="w-5 h-5" />
+                            EMAIL
+                        </button>
+                        <button
+                            onClick={() => { setShowAddTask(!showAddTask); setShowEmailScan(false); }}
+                            className="bg-cyan-500 hover:bg-cyan-600 text-black font-bold px-4 py-3 rounded-xl text-sm flex items-center gap-2 transition-all"
+                        >
+                            <Plus className="w-5 h-5" />
+                            ADD
+                        </button>
+                    </div>
                 </div>
             </div>
 
