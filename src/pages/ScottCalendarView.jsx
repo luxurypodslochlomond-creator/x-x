@@ -95,13 +95,13 @@ export default function ScottCalendarView() {
             {/* ADD EVENT FORM */}
             <AnimatePresence>
                 {showAddEvent && (
-                     <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: 'auto' }}
-                        exit={{ opacity: 0, height: 0 }}
-                        className="mb-6 bg-black border border-gray-800 rounded p-4 space-y-3"
-                    )
-                        <Input
+                    <motion.div
+                       initial={{ opacity: 0, height: 0 }}
+                       animate={{ opacity: 1, height: 'auto' }}
+                       exit={{ opacity: 0, height: 0 }}
+                       className="mb-6 bg-black border border-gray-800 rounded p-4 space-y-3"
+                   >
+                       <Input
                             placeholder="Event name"
                             value={newEvent.title}
                             onChange={(e) => setNewEvent({...newEvent, title: e.target.value})}
