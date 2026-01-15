@@ -73,7 +73,11 @@ export default function ScottToDo() {
 
     const deleteTaskMutation = useMutation({
         mutationFn: (id) => base44.entities.ScottTask.delete(id),
-        onSuccess: () => queryClient.invalidateQueries({ queryKey: ['scottTasks'] })
+        onSuccess: (_, deletedId) => {
+            queryClient.setQueryData(['scottTasks', artistId], (old = []) =>
+                old.filter(t => t.id !== deletedId)
+            );
+        }
     });
 
     const handleAddTask = () => {
