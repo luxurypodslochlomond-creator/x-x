@@ -219,6 +219,16 @@ Return ONLY valid JSON (no markdown):
                 ...formData,
                 type: 'artist'
             });
+            
+            // Auto-invite artist if email provided
+            if (formData.email) {
+                try {
+                    await base44.users.inviteUser(formData.email, 'user');
+                } catch (inviteError) {
+                    console.log('Invite sent or already exists:', inviteError.message);
+                }
+            }
+            
             navigate(createPageUrl(`ScottArtistHome?id=${newArtist.id}`));
         } catch (error) {
             alert('Error saving: ' + error.message);
