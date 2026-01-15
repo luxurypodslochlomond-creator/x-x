@@ -26,7 +26,7 @@ export default function ScottGigWorkflow({ offer }) {
     const sendToBandMutation = useMutation({
         mutationFn: async () => {
             const deadline = responseDeadline ? new Date(responseDeadline).toISOString() : new Date(Date.now() + 48 * 60 * 60 * 1000).toISOString();
-            return base44.entities.ScottGigOffer.update(offer.id, {
+            const updated = await base44.entities.ScottGigOffer.update(offer.id, {
                 status: 'sent_to_band',
                 manager_approved: true,
                 manager_notes: managerNotes,
@@ -34,6 +34,21 @@ export default function ScottGigWorkflow({ offer }) {
                 response_deadline: deadline,
                 urgency: deadline < new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString() ? 'urgent' : 'normal'
             });
+            
+            // NOTIFY BAND
+            try {
+                await base44.functions.invoke('notifyBand', {
+                    offerId: offer.id,
+                    artistId: offer.artist_id,
+                    venue: offer.venue,
+                    date: offer.date,
+                    urgency: deadline < new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString() ? 'urgent' : 'normal'
+                });
+            } catch (err) {
+                console.warn('Notification send failed:', err);
+            }
+            
+            return updated;
         },
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['scottGigOffers'] });
@@ -62,11 +77,26 @@ export default function ScottGigWorkflow({ offer }) {
 
     // Manager sends final response after band votes
     const sendResponseMutation = useMutation({
-        mutationFn: (accept) => base44.entities.ScottGigOffer.update(offer.id, {
-            status: accept ? 'confirmed' : 'rejected_by_band',
-            final_response_sent: finalResponse,
-            response_sent_date: new Date().toISOString()
-        }),
+        mutationFn: async (accept) => {
+            const updated = await base44.entities.ScottGigOffer.update(offer.id, {
+                status: accept ? 'confirmed' : 'rejected_by_band',
+                final_response_sent: finalResponse,
+                response_sent_date: new Date().toISOString()
+            });
+            
+            // NOTIFY MANAGER'S OTHER DEVICES + NOTIFY BAND OF FINAL RESPONSE
+            try {
+                await base44.functions.invoke('notifyManagerAllVotesIn', {
+                    offerId: offer.id,
+                    venue: offer.venue,
+                    finalStatus: accept ? 'CONFIRMED' : 'REJECTED'
+                });
+            } catch (err) {
+                console.warn('Notification send failed:', err);
+            }
+            
+            return updated;
+        },
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['scottGigOffers'] });
         },
