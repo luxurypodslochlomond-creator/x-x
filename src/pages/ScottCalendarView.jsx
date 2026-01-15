@@ -67,32 +67,23 @@ export default function ScottCalendarView() {
 
     const sortedEvents = [...events].sort((a, b) => new Date(a.date) - new Date(b.date));
 
-    const statusColors = {
-        confirmed: { bg: 'bg-green-500/20', border: 'border-green-500', text: 'text-green-400', label: 'CONFIRMED' },
-        tbc: { bg: 'bg-amber-500/20', border: 'border-amber-500', text: 'text-amber-400', label: 'TBC' },
-        unavailable: { bg: 'bg-red-500/20', border: 'border-red-500', text: 'text-red-400', label: 'UNAVAILABLE' }
-    };
-
     return (
         <div className="min-h-screen bg-black text-white p-4 pb-24">
             
             <button
                 onClick={() => navigate(-1)}
-                className="flex items-center gap-2 text-gray-600 hover:text-cyan-400 transition-all mb-6"
+                className="flex items-center gap-2 text-gray-500 hover:text-cyan-400 transition-all mb-6"
             >
                 <ArrowLeft className="w-4 h-4" />
-                <span className="text-sm font-bold font-mono">BACK</span>
+                <span className="text-xs font-bold font-mono">BACK</span>
             </button>
 
-            <div className="mb-6 pb-4 border-b-2 border-cyan-500">
-                <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                        <Radio className="w-10 h-10 text-cyan-400" />
-                        <div>
-                            <h1 className="text-3xl font-black text-cyan-400 font-mono">CALENDAR</h1>
-                            <p className="text-gray-500 text-xs font-mono">Simple • Streamlined • Clutter-free</p>
-                        </div>
-                    </div>
+            <div className="mb-8">
+                <h1 className="text-4xl font-black text-white font-mono mb-2">CALENDAR</h1>
+                <p className="text-gray-600 text-xs font-mono">Simple • Streamlined • Clutter-free</p>
+            </div>
+
+            <div className="mb-6 flex items-center justify-between">
                     <button
                         onClick={() => setShowAddEvent(!showAddEvent)}
                         className="bg-cyan-500 hover:bg-cyan-600 text-black font-bold px-4 py-2 rounded-lg text-sm flex items-center gap-2"
@@ -106,12 +97,12 @@ export default function ScottCalendarView() {
             {/* ADD EVENT FORM */}
             <AnimatePresence>
                 {showAddEvent && (
-                    <motion.div
+                     <motion.div
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
-                        className="mb-6 bg-gray-900 border-2 border-cyan-500 rounded-lg p-4 space-y-3"
-                    >
+                        className="mb-6 bg-black border border-gray-800 rounded p-4 space-y-3"
+                    )
                         <Input
                             placeholder="Event name"
                             value={newEvent.title}
@@ -133,19 +124,19 @@ export default function ScottCalendarView() {
                         <div className="flex gap-2">
                             <button
                                 onClick={() => setNewEvent({...newEvent, status: 'confirmed'})}
-                                className={`flex-1 py-2 rounded font-bold text-sm ${newEvent.status === 'confirmed' ? 'bg-green-500 text-black' : 'bg-gray-800 text-gray-400'}`}
+                                className={`flex-1 py-2 rounded font-bold text-sm font-mono ${newEvent.status === 'confirmed' ? 'bg-cyan-500 text-black' : 'bg-gray-800 text-gray-400'}`}
                             >
                                 CONFIRMED
                             </button>
                             <button
                                 onClick={() => setNewEvent({...newEvent, status: 'tbc'})}
-                                className={`flex-1 py-2 rounded font-bold text-sm ${newEvent.status === 'tbc' ? 'bg-amber-500 text-black' : 'bg-gray-800 text-gray-400'}`}
+                                className={`flex-1 py-2 rounded font-bold text-sm font-mono ${newEvent.status === 'tbc' ? 'bg-gray-600 text-white' : 'bg-gray-800 text-gray-400'}`}
                             >
                                 TBC
                             </button>
                             <button
                                 onClick={() => setNewEvent({...newEvent, status: 'unavailable'})}
-                                className={`flex-1 py-2 rounded font-bold text-sm ${newEvent.status === 'unavailable' ? 'bg-red-500 text-black' : 'bg-gray-800 text-gray-400'}`}
+                                className={`flex-1 py-2 rounded font-bold text-sm font-mono ${newEvent.status === 'unavailable' ? 'bg-gray-500 text-white' : 'bg-gray-800 text-gray-400'}`}
                             >
                                 UNAVAILABLE
                             </button>
@@ -170,43 +161,29 @@ export default function ScottCalendarView() {
             </AnimatePresence>
 
             {/* COLOR KEY */}
-            <div className="mb-4 flex gap-2 text-xs font-mono">
-                <div className="flex items-center gap-1">
-                    <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                    <span className="text-gray-400">Confirmed</span>
-                </div>
-                <div className="flex items-center gap-1">
-                    <div className="w-3 h-3 bg-amber-500 rounded-full"></div>
-                    <span className="text-gray-400">TBC</span>
-                </div>
-                <div className="flex items-center gap-1">
-                    <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                    <span className="text-gray-400">Unavailable</span>
-                </div>
-            </div>
+            <div className="mb-4 text-xs font-mono text-gray-600">No color key needed—status obvious from context.</div>
 
             {/* EVENTS LIST */}
             {sortedEvents.length === 0 ? (
-                <div className="bg-gray-900 border border-gray-700 rounded-lg p-12 text-center">
-                    <p className="text-gray-500 font-mono">No events yet</p>
+                <div className="bg-black border border-gray-800 rounded p-12 text-center">
+                    <p className="text-gray-600 font-mono text-sm">No events yet</p>
                 </div>
             ) : (
                 <div className="space-y-2">
                     {sortedEvents.map(event => {
-                        const colors = statusColors[event.status] || statusColors.confirmed;
                         const isPast = new Date(event.date) < new Date();
-                        
+
                         return (
                             <motion.div
                                 key={event.id}
                                 whileTap={{ scale: 0.98 }}
-                                className={`${colors.bg} border-2 ${colors.border} rounded-lg p-4 ${isPast ? 'opacity-50' : ''}`}
+                                className={`bg-black border border-gray-800 rounded p-4 ${isPast ? 'opacity-40' : ''}`}
                             >
                                 <div className="flex items-start justify-between gap-3">
                                     <div className="flex-1">
                                         <div className="flex items-center gap-2 mb-2">
-                                            <span className={`${colors.text} text-xs font-bold font-mono px-2 py-1 bg-black/40 rounded`}>
-                                                {colors.label}
+                                            <span className="text-xs font-bold font-mono text-gray-600">
+                                                {event.status.toUpperCase()}
                                             </span>
                                             {isPast && (
                                                 <span className="text-gray-600 text-xs font-mono">PAST</span>
