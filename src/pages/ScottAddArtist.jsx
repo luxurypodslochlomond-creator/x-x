@@ -236,47 +236,47 @@ Return ONLY valid JSON (no markdown):
                 </div>
             </div>
 
-            {/* AI51 INNOVATION - ZERO FRICTION */}
+            {/* ZERO FRICTION - 3 WAYS */}
             <div className="mb-6 space-y-3">
                 
-                {/* VOICE INPUT */}
+                {/* 1. SPEAK */}
                 <button
                     type="button"
                     onClick={handleVoiceInput}
                     disabled={voiceRecording || magicLoading}
-                    className="w-full bg-black border-2 border-pink-500 hover:border-pink-400 text-pink-400 hover:text-pink-300 font-black py-4 rounded-xl font-mono flex items-center justify-center gap-3 transition-all"
+                    className="w-full bg-black border-2 border-gray-800 hover:border-cyan-500 text-white font-black py-4 rounded-lg font-mono text-sm transition-all flex items-center justify-center gap-2"
                 >
-                    <Mic2 className="w-6 h-6" />
-                    {voiceRecording ? 'LISTENING...' : '🎤 SPEAK TO ADD (while driving)'}
+                    <Mic2 className="w-5 h-5" />
+                    {voiceRecording ? 'LISTENING...' : 'SPEAK TO ADD (driving mode)'}
                 </button>
 
-                {/* PHOTO EXTRACT */}
-                <label className="w-full bg-black border-2 border-cyan-500 hover:border-cyan-400 text-cyan-400 hover:text-cyan-300 font-black py-4 rounded-xl font-mono flex items-center justify-center gap-3 cursor-pointer transition-all">
+                {/* 2. SCREENSHOT */}
+                <label className="w-full bg-black border-2 border-gray-800 hover:border-cyan-500 text-white font-black py-4 rounded-lg font-mono text-sm cursor-pointer transition-all flex items-center justify-center gap-2">
                     <input 
                         type="file" 
                         accept="image/*" 
                         onChange={handlePhotoExtract}
                         className="hidden"
                     />
-                    <ImageIcon className="w-6 h-6" />
-                    {photoExtracting ? 'EXTRACTING...' : '📸 SCREENSHOT THEIR INSTAGRAM'}
+                    <ImageIcon className="w-5 h-5" />
+                    {photoExtracting ? 'EXTRACTING...' : 'SCREENSHOT THEIR PROFILE'}
                 </label>
 
-                {/* PASTE LINK */}
-                <div className="bg-black border-2 border-purple-500/30 rounded-xl p-3">
+                {/* 3. PASTE LINK */}
+                <div className="bg-black border-2 border-gray-800 rounded-lg p-3">
                     <div className="flex gap-2">
                         <Input
                             value={socialLink}
                             onChange={(e) => setSocialLink(e.target.value)}
-                            className="flex-1 bg-gray-950 border-2 border-gray-800 text-white font-mono placeholder:text-gray-600 text-sm"
-                            placeholder="Or paste link..."
+                            className="flex-1 bg-black border-none text-white font-mono placeholder:text-gray-600 text-sm"
+                            placeholder="Or paste Instagram/Spotify link..."
                             onKeyDown={(e) => e.key === 'Enter' && (e.preventDefault(), handleMagicFill())}
                         />
                         <Button
                             type="button"
                             onClick={handleMagicFill}
                             disabled={magicLoading || !socialLink.trim()}
-                            className="bg-purple-500 hover:bg-purple-600 text-white font-black px-4 font-mono text-sm"
+                            className="bg-cyan-500 hover:bg-cyan-600 text-black font-black px-6 font-mono text-sm"
                         >
                             {magicLoading ? '...' : 'GO'}
                         </Button>
