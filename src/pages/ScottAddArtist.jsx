@@ -33,7 +33,7 @@ export default function ScottAddArtist() {
 
     const handleVoiceInput = () => {
         if (!('webkitSpeechRecognition' in window)) {
-            alert('Voice input not supported on this browser');
+            alert('Voice only works in Safari/Chrome. Use screenshot or paste link instead! 🎤');
             return;
         }
 
@@ -43,6 +43,15 @@ export default function ScottAddArtist() {
 
         recognition.onstart = () => setVoiceRecording(true);
         recognition.onend = () => setVoiceRecording(false);
+
+        recognition.onerror = (event) => {
+            setVoiceRecording(false);
+            if (event.error === 'not-allowed') {
+                alert('🎤 Mic blocked!\n\nSettings → Safari → Microphone → Allow\n\nOr just use screenshot/paste instead ♾️');
+            } else {
+                alert('Voice error. Use screenshot or paste link instead!');
+            }
+        };
 
         recognition.onresult = async (event) => {
             const transcript = event.results[0][0].transcript;
@@ -84,7 +93,12 @@ export default function ScottAddArtist() {
             }
         };
 
-        recognition.start();
+        try {
+            recognition.start();
+        } catch (error) {
+            alert('Voice failed. Use screenshot or paste link instead!');
+            setVoiceRecording(false);
+        }
     };
 
     const handlePhotoExtract = async (e) => {
