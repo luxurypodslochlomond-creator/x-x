@@ -170,23 +170,23 @@ ${emailText}`,
                     <div className="flex gap-2">
                         <button
                             onClick={() => navigate(createPageUrl('ScottMessageInbox'))}
-                            className="bg-purple-500 hover:bg-purple-600 text-black font-bold px-4 py-3 rounded-xl text-sm flex items-center gap-2 transition-all"
+                            className="bg-black border-2 border-gray-800 hover:border-cyan-500 text-white font-bold px-3 py-2 rounded-lg text-xs flex items-center gap-1.5 transition-all"
                         >
-                            <Mail className="w-5 h-5" />
+                            <Mail className="w-4 h-4" />
                             INBOX
                         </button>
                         <button
                             onClick={() => { setShowEmailScan(!showEmailScan); setShowAddTask(false); }}
-                            className="bg-purple-500 hover:bg-purple-600 text-black font-bold px-4 py-3 rounded-xl text-sm flex items-center gap-2 transition-all"
+                            className="bg-black border-2 border-gray-800 hover:border-cyan-500 text-white font-bold px-3 py-2 rounded-lg text-xs flex items-center gap-1.5 transition-all"
                         >
-                            <Mail className="w-5 h-5" />
+                            <Mail className="w-4 h-4" />
                             EMAIL
                         </button>
                         <button
                             onClick={() => { setShowAddTask(!showAddTask); setShowEmailScan(false); }}
-                            className="bg-cyan-500 hover:bg-cyan-600 text-black font-bold px-4 py-3 rounded-xl text-sm flex items-center gap-2 transition-all"
+                            className="bg-cyan-500 hover:bg-cyan-600 text-black font-bold px-3 py-2 rounded-lg text-xs flex items-center gap-1.5 transition-all"
                         >
-                            <Plus className="w-5 h-5" />
+                            <Plus className="w-4 h-4" />
                             ADD
                         </button>
                     </div>

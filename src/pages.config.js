@@ -233,6 +233,7 @@ import ScottManager from './pages/ScottManager';
 import ScottManagerHome from './pages/ScottManagerHome';
 import ScottMedia from './pages/ScottMedia';
 import ScottMerch from './pages/ScottMerch';
+import ScottMessageInbox from './pages/ScottMessageInbox';
 import ScottOfflineMode from './pages/ScottOfflineMode';
 import ScottPasteGigOffer from './pages/ScottPasteGigOffer';
 import ScottPitchMode from './pages/ScottPitchMode';
@@ -243,6 +244,7 @@ import ScottSessionsRecording from './pages/ScottSessionsRecording';
 import ScottSessionsRehearsal from './pages/ScottSessionsRehearsal';
 import ScottSessionsWriting from './pages/ScottSessionsWriting';
 import ScottTeam from './pages/ScottTeam';
+import ScottTeamAccess from './pages/ScottTeamAccess';
 import ScottToDo from './pages/ScottToDo';
 import ScottTravelMode from './pages/ScottTravelMode';
 import ScottVisas from './pages/ScottVisas';
@@ -303,8 +305,6 @@ import YoungWarriors from './pages/YoungWarriors';
 import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
-import ScottMessageInbox from './pages/ScottMessageInbox';
-import ScottTeamAccess from './pages/ScottTeamAccess';
 import __Layout from './Layout.jsx';
 
 
@@ -544,6 +544,7 @@ export const PAGES = {
     "ScottManagerHome": ScottManagerHome,
     "ScottMedia": ScottMedia,
     "ScottMerch": ScottMerch,
+    "ScottMessageInbox": ScottMessageInbox,
     "ScottOfflineMode": ScottOfflineMode,
     "ScottPasteGigOffer": ScottPasteGigOffer,
     "ScottPitchMode": ScottPitchMode,
@@ -554,6 +555,7 @@ export const PAGES = {
     "ScottSessionsRehearsal": ScottSessionsRehearsal,
     "ScottSessionsWriting": ScottSessionsWriting,
     "ScottTeam": ScottTeam,
+    "ScottTeamAccess": ScottTeamAccess,
     "ScottToDo": ScottToDo,
     "ScottTravelMode": ScottTravelMode,
     "ScottVisas": ScottVisas,
@@ -614,8 +616,6 @@ export const PAGES = {
     "ZeroEgoProtocol": ZeroEgoProtocol,
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
-    "ScottMessageInbox": ScottMessageInbox,
-    "ScottTeamAccess": ScottTeamAccess,
 }
 
 export const pagesConfig = {
