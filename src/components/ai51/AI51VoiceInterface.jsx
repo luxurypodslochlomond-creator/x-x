@@ -29,15 +29,32 @@ export default function AI51VoiceInterface({ onVoiceMessage, isThinking, lastRes
             recognitionRef.current.continuous = false;
             recognitionRef.current.interimResults = true;
             recognitionRef.current.lang = 'en-US';
+            recognitionRef.current.maxAlternatives = 1;
+
+            recognitionRef.current.onstart = () => {
+                setIsListening(true);
+                setError('');
+                hasSpokenRef.current = false;
+            };
 
             recognitionRef.current.onresult = (event) => {
-                const current = event.resultIndex;
-                const transcriptText = event.results[current][0].transcript;
-                setTranscript(transcriptText);
+                let isFinal = false;
+                let finalTranscript = '';
+
+                for (let i = event.resultIndex; i < event.results.length; i++) {
+                    const transcript = event.results[i][0].transcript;
+                    if (event.results[i].isFinal) {
+                        finalTranscript += transcript + ' ';
+                        isFinal = true;
+                        hasSpokenRef.current = true;
+                    } else {
+                        setTranscript(transcript);
+                    }
+                }
 
                 // If final result, send message
-                if (event.results[current].isFinal) {
-                    onVoiceMessage(transcriptText);
+                if (isFinal && finalTranscript.trim()) {
+                    onVoiceMessage(finalTranscript.trim());
                     setTranscript('');
                     setIsListening(false);
                 }
@@ -45,13 +62,39 @@ export default function AI51VoiceInterface({ onVoiceMessage, isThinking, lastRes
 
             recognitionRef.current.onerror = (event) => {
                 console.error('Speech recognition error:', event.error);
-                setError(`Voice error: ${event.error}`);
+                let errorMsg = event.error;
+                
+                if (event.error === 'no-speech') {
+                    errorMsg = 'No speech detected. Tap mic and speak clearly ♾️';
+                } else if (event.error === 'not-allowed') {
+                    errorMsg = 'Mic access denied. Allow in browser settings';
+                } else if (event.error === 'network') {
+                    errorMsg = 'Network error. Check internet connection';
+                }
+                
+                setError(errorMsg);
                 setIsListening(false);
-                setTimeout(() => setError(''), 3000);
+                
+                // Auto-retry on no-speech for Android
+                if (event.error === 'no-speech') {
+                    setTimeout(() => {
+                        if (recognitionRef.current && !isListening) {
+                            try {
+                                recognitionRef.current.start();
+                            } catch (e) {
+                                console.error('Failed to auto-retry:', e);
+                            }
+                        }
+                    }, 500);
+                }
             };
 
             recognitionRef.current.onend = () => {
                 setIsListening(false);
+                // Only show error if no speech was detected
+                if (!hasSpokenRef.current) {
+                    // Don't set error, let onError handle it
+                }
             };
         } else {
             setError('Voice not supported in this browser');
@@ -78,7 +121,7 @@ export default function AI51VoiceInterface({ onVoiceMessage, isThinking, lastRes
 
     const toggleListening = () => {
         if (!recognitionRef.current) {
-            setError('Voice recognition not available');
+            setError('Voice recognition not available on this device');
             return;
         }
 
@@ -91,12 +134,20 @@ export default function AI51VoiceInterface({ onVoiceMessage, isThinking, lastRes
             setIsSpeaking(false);
             
             try {
+                // Reset state before starting
+                hasSpokenRef.current = false;
+                setTranscript('');
+                setError('');
                 recognitionRef.current.start();
                 setIsListening(true);
-                setError('');
             } catch (e) {
                 console.error('Failed to start recognition:', e);
-                setError('Failed to start voice');
+                if (e.message.includes('already started')) {
+                    // Already listening, just ignore
+                    setIsListening(true);
+                } else {
+                    setError('Mic access needed. Check browser settings');
+                }
             }
         }
     };
