@@ -36,11 +36,19 @@ export default function ScottGigOffers() {
     const artist = artists.find(a => a.id === artistId);
 
     const createMutation = useMutation({
-        mutationFn: (data) => base44.entities.ScottGigOffer.create(data),
+        mutationFn: (data) => {
+            console.log('Creating gig offer:', data);
+            return base44.entities.ScottGigOffer.create(data);
+        },
         onSuccess: () => {
+            console.log('Gig offer created successfully');
             queryClient.invalidateQueries({ queryKey: ['scottGigOffers'] });
             setEmailText('');
             setParsedData(null);
+        },
+        onError: (error) => {
+            console.error('Failed to create gig offer:', error);
+            alert('Error saving offer: ' + (error.message || 'Unknown error'));
         }
     });
 

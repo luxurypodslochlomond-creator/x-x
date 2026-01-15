@@ -340,7 +340,7 @@ export default function CB51() {
                     >
                         <div className="absolute inset-0 bg-gradient-to-t from-cyan-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                         <Users className="w-9 h-9 text-cyan-400 mx-auto mb-2 relative z-10" />
-                        <p className="text-cyan-400 font-black font-mono text-sm relative z-10">TEAM</p>
+                        <p className="text-cyan-400 font-black font-mono text-sm relative z-10">TEAMS</p>
                     </motion.div>
                 </Link>
             </div>
