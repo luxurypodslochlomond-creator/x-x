@@ -50,6 +50,7 @@ import AdminGill51Maths from './pages/AdminGill51Maths';
 import AdminGill51Tracker from './pages/AdminGill51Tracker';
 import AdminGrantApplications from './pages/AdminGrantApplications';
 import AdminInternationalCharity from './pages/AdminInternationalCharity';
+import AdminLiveAnalytics from './pages/AdminLiveAnalytics';
 import AdminNationalLotteryApp from './pages/AdminNationalLotteryApp';
 import AdminNationalLotteryEnvironmentMH from './pages/AdminNationalLotteryEnvironmentMH';
 import AdminOnePager from './pages/AdminOnePager';
@@ -222,8 +223,8 @@ import ScottGuestList from './pages/ScottGuestList';
 import ScottInsurance from './pages/ScottInsurance';
 import ScottInvoices from './pages/ScottInvoices';
 import ScottLATrip from './pages/ScottLATrip';
-import ScottLabelContacts from './pages/ScottLabelContacts';
 import ScottLegalDocs from './pages/ScottLegalDocs';
+import ScottLabelContacts from './pages/ScottLabelContacts';
 import ScottLive from './pages/ScottLive';
 import ScottLiveAdmin from './pages/ScottLiveAdmin';
 import ScottLiveBookings from './pages/ScottLiveBookings';
@@ -302,7 +303,6 @@ import YoungWarriors from './pages/YoungWarriors';
 import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
-import AdminLiveAnalytics from './pages/AdminLiveAnalytics';
 import __Layout from './Layout.jsx';
 
 
@@ -359,6 +359,7 @@ export const PAGES = {
     "AdminGill51Tracker": AdminGill51Tracker,
     "AdminGrantApplications": AdminGrantApplications,
     "AdminInternationalCharity": AdminInternationalCharity,
+    "AdminLiveAnalytics": AdminLiveAnalytics,
     "AdminNationalLotteryApp": AdminNationalLotteryApp,
     "AdminNationalLotteryEnvironmentMH": AdminNationalLotteryEnvironmentMH,
     "AdminOnePager": AdminOnePager,
@@ -531,8 +532,8 @@ export const PAGES = {
     "ScottInsurance": ScottInsurance,
     "ScottInvoices": ScottInvoices,
     "ScottLATrip": ScottLATrip,
-    "ScottLabelContacts": ScottLabelContacts,
     "ScottLegalDocs": ScottLegalDocs,
+    "ScottLabelContacts": ScottLabelContacts,
     "ScottLive": ScottLive,
     "ScottLiveAdmin": ScottLiveAdmin,
     "ScottLiveBookings": ScottLiveBookings,
@@ -611,7 +612,6 @@ export const PAGES = {
     "ZeroEgoProtocol": ZeroEgoProtocol,
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
-    "AdminLiveAnalytics": AdminLiveAnalytics,
 }
 
 export const pagesConfig = {

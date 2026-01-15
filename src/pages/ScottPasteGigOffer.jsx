@@ -364,7 +364,7 @@ export default function ScottPasteGigOffer() {
             <ArrowLeft className="w-5 h-5" />
           </Button>
           <div>
-            <h1 className="text-4xl font-black text-white">ADD GIG OFFER</h1>
+            <h1 className="text-4xl font-black text-white">NEW OFFER</h1>
             <p className="text-gray-400">Paste, screenshot, or auto-scan Gmail</p>
           </div>
         </div>
