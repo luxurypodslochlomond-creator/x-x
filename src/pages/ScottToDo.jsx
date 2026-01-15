@@ -64,7 +64,11 @@ export default function ScottToDo() {
             base44.entities.ScottTask.update(id, { 
                 status: currentStatus === 'done' ? 'pending' : 'done' 
             }),
-        onSuccess: () => queryClient.invalidateQueries({ queryKey: ['scottTasks'] })
+        onSuccess: (updated) => {
+            queryClient.setQueryData(['scottTasks', artistId], (old = []) =>
+                old.map(t => t.id === updated.id ? updated : t)
+            );
+        }
     });
 
     const deleteTaskMutation = useMutation({
