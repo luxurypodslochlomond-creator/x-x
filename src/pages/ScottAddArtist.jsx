@@ -110,7 +110,11 @@ export default function ScottAddArtist() {
             const uploadResult = await base44.integrations.Core.UploadFile({ file });
             
             const result = await base44.integrations.Core.InvokeLLM({
-                prompt: `Extract artist info from this screenshot of their social media profile. Return JSON with: name, genre, instagram username, spotify link, bio/description.`,
+                prompt: `Extract ALL info from this screenshot (could be Instagram, Spotify, Twitter, any social/music platform).
+
+If you see MULTIPLE links/profiles (e.g. both Instagram AND Spotify visible), extract BOTH.
+
+Return JSON with: name, genre, instagram (username or link), spotify (link), twitter (if visible), bio/description.`,
                 file_urls: [uploadResult.file_url],
                 response_json_schema: {
                     type: "object",
