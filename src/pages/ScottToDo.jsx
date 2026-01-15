@@ -52,8 +52,8 @@ export default function ScottToDo() {
 
     const createTaskMutation = useMutation({
         mutationFn: (taskData) => base44.entities.ScottTask.create(taskData),
-        onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ['scottTasks'] });
+        onSuccess: (newTaskData) => {
+            queryClient.setQueryData(['scottTasks', artistId], (old = []) => [...old, newTaskData]);
             setNewTask({ title: '', responsible: '', deadline: '', status: 'pending' });
             setShowAddTask(false);
         }
