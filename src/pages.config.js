@@ -214,6 +214,7 @@ import ScottComparison from './pages/ScottComparison';
 import ScottContracts from './pages/ScottContracts';
 import ScottDemos from './pages/ScottDemos';
 import ScottEmailDashboard from './pages/ScottEmailDashboard';
+import ScottEmailSyncDiagnostics from './pages/ScottEmailSyncDiagnostics';
 import ScottExpenses from './pages/ScottExpenses';
 import ScottFeatureRequests from './pages/ScottFeatureRequests';
 import ScottFinanceAdmin from './pages/ScottFinanceAdmin';
@@ -221,6 +222,7 @@ import ScottFinancialDashboard from './pages/ScottFinancialDashboard';
 import ScottGigOffers from './pages/ScottGigOffers';
 import ScottGigPacks from './pages/ScottGigPacks';
 import ScottGuestList from './pages/ScottGuestList';
+import Teachers from './pages/Teachers';
 import ScottInsurance from './pages/ScottInsurance';
 import ScottInvoices from './pages/ScottInvoices';
 import ScottLATrip from './pages/ScottLATrip';
@@ -264,7 +266,6 @@ import SubmitFrequency from './pages/SubmitFrequency';
 import SubmitProofOfLove from './pages/SubmitProofOfLove';
 import SymbolForge from './pages/SymbolForge';
 import TeacherInput from './pages/TeacherInput';
-import Teachers from './pages/Teachers';
 import TechScout from './pages/TechScout';
 import TechStack from './pages/TechStack';
 import TechnicalSpecification from './pages/TechnicalSpecification';
@@ -306,7 +307,6 @@ import YoungWarriors from './pages/YoungWarriors';
 import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
-import ScottEmailSyncDiagnostics from './pages/ScottEmailSyncDiagnostics';
 import __Layout from './Layout.jsx';
 
 
@@ -527,6 +527,7 @@ export const PAGES = {
     "ScottContracts": ScottContracts,
     "ScottDemos": ScottDemos,
     "ScottEmailDashboard": ScottEmailDashboard,
+    "ScottEmailSyncDiagnostics": ScottEmailSyncDiagnostics,
     "ScottExpenses": ScottExpenses,
     "ScottFeatureRequests": ScottFeatureRequests,
     "ScottFinanceAdmin": ScottFinanceAdmin,
@@ -534,6 +535,7 @@ export const PAGES = {
     "ScottGigOffers": ScottGigOffers,
     "ScottGigPacks": ScottGigPacks,
     "ScottGuestList": ScottGuestList,
+    "Teachers": Teachers,
     "ScottInsurance": ScottInsurance,
     "ScottInvoices": ScottInvoices,
     "ScottLATrip": ScottLATrip,
@@ -577,7 +579,6 @@ export const PAGES = {
     "SubmitProofOfLove": SubmitProofOfLove,
     "SymbolForge": SymbolForge,
     "TeacherInput": TeacherInput,
-    "Teachers": Teachers,
     "TechScout": TechScout,
     "TechStack": TechStack,
     "TechnicalSpecification": TechnicalSpecification,
@@ -619,7 +620,6 @@ export const PAGES = {
     "ZeroEgoProtocol": ZeroEgoProtocol,
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
-    "ScottEmailSyncDiagnostics": ScottEmailSyncDiagnostics,
 }
 
 export const pagesConfig = {

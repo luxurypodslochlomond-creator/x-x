@@ -80,31 +80,25 @@ ${emailText}`,
         navigate(createPageUrl(`ScottToDo?id=${artistId}&email=${encodeURIComponent(emailText)}`));
     };
 
-    const categoryColors = {
-        GIG_OFFER: { bg: 'bg-green-500/20', border: 'border-green-500', text: 'text-green-400', icon: Mail },
-        TASK: { bg: 'bg-amber-500/20', border: 'border-amber-500', text: 'text-amber-400', icon: Target },
-        GENERAL: { bg: 'bg-gray-500/20', border: 'border-gray-500', text: 'text-gray-400', icon: Archive }
-    };
-
     return (
         <div className="min-h-screen bg-black text-white p-4 pb-24">
             
             <button
                 onClick={() => navigate(-1)}
-                className="flex items-center gap-2 text-gray-600 hover:text-cyan-400 transition-all mb-6"
+                className="flex items-center gap-2 text-gray-500 hover:text-cyan-400 transition-all mb-6"
             >
                 <ArrowLeft className="w-4 h-4" />
-                <span className="text-sm font-bold font-mono">BACK</span>
+                <span className="text-xs font-bold font-mono">BACK</span>
             </button>
 
             <div className="mb-6">
-                <h1 className="text-3xl font-black text-cyan-400 font-mono mb-2">MESSAGE INBOX</h1>
-                <p className="text-gray-600 text-sm font-mono">AI sorts your chaos</p>
+                <h1 className="text-4xl font-black text-white font-mono mb-2">MESSAGE INBOX</h1>
+                <p className="text-gray-600 text-xs font-mono">AI sorts your chaos</p>
             </div>
 
             {/* PASTE EMAIL */}
-            <div className="bg-black border-2 border-cyan-500 rounded-lg p-4 mb-6">
-                <h2 className="text-cyan-400 font-black font-mono text-lg mb-4">PASTE EMAIL</h2>
+            <div className="bg-black border border-gray-800 rounded p-4 mb-6">
+                <h2 className="text-white font-black font-mono text-lg mb-4">PASTE EMAIL</h2>
                 <Textarea
                     value={emailText}
                     onChange={(e) => setEmailText(e.target.value)}
@@ -136,13 +130,10 @@ ${emailText}`,
                         className="space-y-4"
                     >
                         {/* CATEGORY CARD */}
-                        <div className={`${categoryColors[result.category].bg} border-2 ${categoryColors[result.category].border} rounded-lg p-4`}>
+                        <div className="bg-black border border-gray-800 rounded p-4">
                             <div className="flex items-center gap-3 mb-3">
-                                {React.createElement(categoryColors[result.category].icon, {
-                                    className: `w-6 h-6 ${categoryColors[result.category].text}`
-                                })}
                                 <div className="flex-1">
-                                    <p className={`${categoryColors[result.category].text} font-black font-mono text-lg`}>
+                                    <p className="text-white font-black font-mono text-lg">
                                         {result.category.replace('_', ' ')}
                                     </p>
                                     <p className="text-white text-xs font-mono">{result.confidence}% confident</p>
@@ -169,7 +160,7 @@ ${emailText}`,
                             {result.category === 'GIG_OFFER' && (
                                 <Button
                                     onClick={handleCreateGigOffer}
-                                    className="w-full bg-green-500 hover:bg-green-600 text-black font-black py-4 font-mono"
+                                    className="w-full bg-cyan-500 hover:bg-cyan-600 text-black font-black py-4 font-mono"
                                 >
                                     CREATE GIG OFFER
                                 </Button>
@@ -178,7 +169,7 @@ ${emailText}`,
                             {result.category === 'TASK' && (
                                 <Button
                                     onClick={handleCreateTask}
-                                    className="w-full bg-amber-500 hover:bg-amber-600 text-black font-black py-4 font-mono"
+                                    className="w-full bg-cyan-500 hover:bg-cyan-600 text-black font-black py-4 font-mono"
                                 >
                                     ADD TO TO-DO
                                 </Button>
@@ -187,7 +178,7 @@ ${emailText}`,
                             {result.category === 'GENERAL' && (
                                 <Button
                                     onClick={() => { setResult(null); setEmailText(''); }}
-                                    className="w-full bg-gray-500 hover:bg-gray-600 text-black font-black py-4 font-mono"
+                                    className="w-full bg-gray-700 hover:bg-gray-600 text-white font-black py-4 font-mono"
                                 >
                                     ARCHIVE (IGNORE)
                                 </Button>
