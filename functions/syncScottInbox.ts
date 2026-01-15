@@ -29,7 +29,7 @@ Deno.serve(async (req) => {
     for (const msg of messages) {
       try {
         // Skip non-gig-offer messages
-        if (msg.message_type !== 'gig_offer' && !msg.subject?.toLowerCase().includes('gig')) {
+        if (msg.category !== 'gig_offer') {
           continue;
         }
 
@@ -38,9 +38,9 @@ Deno.serve(async (req) => {
           prompt: `Extract gig offer details from this email. Return JSON with: venue, city, county, country (default UK), date (YYYY-MM-DD), time, fee (number), capacity (number), promoter, promoter_contact, requirements, notes.
 
 Email:
-Subject: ${msg.subject || ''}
-From: ${msg.from || ''}
-Body: ${msg.body || ''}`,
+Summary: ${msg.summary || ''}
+From: ${msg.from_contact || ''}
+Message: ${msg.raw_message || ''}`,
           response_json_schema: {
             type: "object",
             properties: {
