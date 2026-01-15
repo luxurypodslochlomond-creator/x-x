@@ -162,34 +162,31 @@ ${emailText}`,
             </button>
 
             <div className="mb-8">
-                <div className="flex items-center justify-between mb-2">
-                    <div>
-                        <h1 className="text-4xl font-black text-cyan-400 font-mono mb-2">TASKS</h1>
-                        <p className="text-gray-600 text-sm font-mono">Deadlines · Progress</p>
-                    </div>
-                    <div className="flex gap-2">
-                        <button
-                            onClick={() => navigate(createPageUrl('ScottMessageInbox'))}
-                            className="bg-black border-2 border-gray-800 hover:border-cyan-500 text-white font-bold px-3 py-2 rounded-lg text-xs flex items-center gap-1.5 transition-all"
-                        >
-                            <Mail className="w-4 h-4" />
-                            INBOX
-                        </button>
-                        <button
-                            onClick={() => { setShowEmailScan(!showEmailScan); setShowAddTask(false); }}
-                            className="bg-black border-2 border-gray-800 hover:border-cyan-500 text-white font-bold px-3 py-2 rounded-lg text-xs flex items-center gap-1.5 transition-all"
-                        >
-                            <Mail className="w-4 h-4" />
-                            EMAIL
-                        </button>
-                        <button
-                            onClick={() => { setShowAddTask(!showAddTask); setShowEmailScan(false); }}
-                            className="bg-cyan-500 hover:bg-cyan-600 text-black font-bold px-3 py-2 rounded-lg text-xs flex items-center gap-1.5 transition-all"
-                        >
-                            <Plus className="w-4 h-4" />
-                            ADD
-                        </button>
-                    </div>
+                <h1 className="text-4xl font-black text-cyan-400 font-mono mb-2">TASKS</h1>
+                <p className="text-gray-600 text-sm font-mono mb-4">Deadlines · Progress</p>
+                
+                <div className="flex gap-2">
+                    <button
+                        onClick={() => navigate(createPageUrl('ScottMessageInbox'))}
+                        className="flex-1 bg-black border-2 border-gray-800 hover:border-cyan-500 text-white font-bold py-3 rounded-lg text-sm flex items-center justify-center gap-2 transition-all"
+                    >
+                        <Mail className="w-4 h-4" />
+                        INBOX
+                    </button>
+                    <button
+                        onClick={() => { setShowEmailScan(!showEmailScan); setShowAddTask(false); }}
+                        className="flex-1 bg-black border-2 border-gray-800 hover:border-cyan-500 text-white font-bold py-3 rounded-lg text-sm flex items-center justify-center gap-2 transition-all"
+                    >
+                        <Mail className="w-4 h-4" />
+                        EMAIL
+                    </button>
+                    <button
+                        onClick={() => { setShowAddTask(!showAddTask); setShowEmailScan(false); }}
+                        className="flex-1 bg-cyan-500 hover:bg-cyan-600 text-black font-bold py-3 rounded-lg text-sm flex items-center justify-center gap-2 transition-all"
+                    >
+                        <Plus className="w-4 h-4" />
+                        ADD
+                    </button>
                 </div>
             </div>
 
