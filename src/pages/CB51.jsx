@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { Radio, Plus, Loader2, Trash2, ChevronDown, ChevronRight, AlertCircle, Calendar, FileText, DollarSign, Music, Zap, TrendingUp, MessageSquare } from 'lucide-react';
+import { Radio, Plus, Loader2, Trash2, ChevronDown, ChevronRight, AlertCircle, Calendar, FileText, DollarSign, Music, Zap, TrendingUp, MessageSquare, Users } from 'lucide-react';
 import ScottMessageCentre from '@/components/scott/ScottMessageCentre';
 import { motion, AnimatePresence } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
@@ -322,6 +322,28 @@ export default function CB51() {
                         <Calendar className="w-9 h-9 text-green-400 mx-auto mb-2 relative z-10" />
                         <p className="text-green-400 font-black font-mono text-sm relative z-10">CALENDAR</p>
                         {upcomingGigs.length > 0 && <p className="text-white text-2xl font-black font-mono mt-1 relative z-10">{upcomingGigs.length}</p>}
+                    </motion.div>
+                </Link>
+                <Link to={createPageUrl('ScottMessageInbox')}>
+                    <motion.div
+                        whileHover={{ scale: 0.97 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="relative bg-gradient-to-br from-purple-500/20 to-purple-600/10 border-2 border-purple-500/30 hover:border-purple-500 rounded-2xl p-5 text-center transition-all overflow-hidden group"
+                    >
+                        <div className="absolute inset-0 bg-gradient-to-t from-purple-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        <MessageSquare className="w-9 h-9 text-purple-400 mx-auto mb-2 relative z-10" />
+                        <p className="text-purple-400 font-black font-mono text-sm relative z-10">EMAIL AI</p>
+                    </motion.div>
+                </Link>
+                <Link to={createPageUrl('ScottTeamAccess')}>
+                    <motion.div
+                        whileHover={{ scale: 0.97 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="relative bg-gradient-to-br from-cyan-500/20 to-cyan-600/10 border-2 border-cyan-500/30 hover:border-cyan-500 rounded-2xl p-5 text-center transition-all overflow-hidden group"
+                    >
+                        <div className="absolute inset-0 bg-gradient-to-t from-cyan-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        <Users className="w-9 h-9 text-cyan-400 mx-auto mb-2 relative z-10" />
+                        <p className="text-cyan-400 font-black font-mono text-sm relative z-10">TEAM</p>
                     </motion.div>
                 </Link>
             </div>
