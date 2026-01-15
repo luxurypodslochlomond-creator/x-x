@@ -74,6 +74,28 @@ export default function ScottBandMembers({ artist, onUpdate }) {
                 </button>
             </div>
 
+            {error && (
+                <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    className="mb-4 bg-red-500/10 border-2 border-red-500 rounded-lg p-3"
+                >
+                    <p className="text-red-400 text-sm font-mono">❌ {error}</p>
+                </motion.div>
+            )}
+
+            {success && (
+                <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    className="mb-4 bg-green-500/10 border-2 border-green-500 rounded-lg p-3"
+                >
+                    <p className="text-green-400 text-sm font-mono">{success}</p>
+                </motion.div>
+            )}
+
             <AnimatePresence>
                 {adding && (
                     <motion.div
@@ -87,12 +109,14 @@ export default function ScottBandMembers({ artist, onUpdate }) {
                             value={newMember.name}
                             onChange={(e) => setNewMember({...newMember, name: e.target.value})}
                             className="bg-gray-950 border-gray-800 text-white font-mono"
+                            disabled={saving}
                         />
                         <Input
                             placeholder="Role (e.g., Guitar, Vocals)"
                             value={newMember.role}
                             onChange={(e) => setNewMember({...newMember, role: e.target.value})}
                             className="bg-gray-950 border-gray-800 text-white font-mono"
+                            disabled={saving}
                         />
                         <Input
                             placeholder="Email"
@@ -100,6 +124,7 @@ export default function ScottBandMembers({ artist, onUpdate }) {
                             value={newMember.email}
                             onChange={(e) => setNewMember({...newMember, email: e.target.value})}
                             className="bg-gray-950 border-gray-800 text-white font-mono"
+                            disabled={saving}
                         />
                         <Input
                             placeholder="Phone"
@@ -107,12 +132,14 @@ export default function ScottBandMembers({ artist, onUpdate }) {
                             value={newMember.phone}
                             onChange={(e) => setNewMember({...newMember, phone: e.target.value})}
                             className="bg-gray-950 border-gray-800 text-white font-mono"
+                            disabled={saving}
                         />
                         <Button
                             onClick={handleAdd}
-                            className="w-full bg-cyan-500 hover:bg-cyan-600 text-black font-bold font-mono"
+                            disabled={saving}
+                            className="w-full bg-cyan-500 hover:bg-cyan-600 text-black font-bold font-mono disabled:opacity-50"
                         >
-                            ADD MEMBER
+                            {saving ? 'SAVING...' : 'ADD MEMBER'}
                         </Button>
                     </motion.div>
                 )}
