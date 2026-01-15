@@ -306,7 +306,6 @@ const LayoutInner = ({ children, currentPageName }) => {
   const scottNav = [
       { title: "CB51", url: createPageUrl("CB51"), icon: Radio, highlight: true, description: "Your AI co-manager" },
       { title: "Prof51", url: createPageUrl("Prof51"), icon: GraduationCap, highlight: true, description: "AI co-manager for students" },
-      { title: "Email Sync Monitor", url: createPageUrl("ScottEmailSyncDiagnostics"), icon: Activity, description: "Live email diagnostics" },
   ];
 
   const adminNav = user?.role === 'admin' ? [
