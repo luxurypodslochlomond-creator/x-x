@@ -51,8 +51,8 @@ export default function ScottLiveAdmin() {
 
             {/* BIG CYAN TITLE */}
             <div className="mb-8">
-                <h1 className="text-4xl font-black text-cyan-400 mb-2 font-mono tracking-tight">ADMIN</h1>
-                <p className="text-gray-600 text-sm font-mono">Contracts • Legal • Insurance</p>
+                <h1 className="text-4xl font-black text-cyan-400 mb-2 font-mono tracking-tight">CONTRACTS & DOCS</h1>
+                <p className="text-gray-600 text-sm font-mono">Legal • Contracts • Insurance</p>
             </div>
 
             {/* SIMPLE STATS */}
@@ -73,26 +73,13 @@ export default function ScottLiveAdmin() {
 
             {/* CLEAN NAVIGATION */}
             <div className="space-y-3">
-                <Link to={createPageUrl(`ScottContracts${artistId ? `?id=${artistId}` : ''}`)}>
+                <Link to={createPageUrl(`ScottLegalDocs${artistId ? `?id=${artistId}` : ''}`)}>
                     <div className="bg-gray-900/40 hover:bg-gray-900/60 border border-gray-800 hover:border-cyan-500/50 rounded-xl p-5 transition-all flex items-center justify-between group">
                         <div className="flex items-center gap-4">
                             <FileText className="w-6 h-6 text-gray-600 group-hover:text-cyan-400 transition-colors" />
                             <div>
-                                <p className="text-white font-mono text-base">Contracts</p>
-                                <p className="text-gray-600 text-xs font-mono mt-0.5">View and manage</p>
-                            </div>
-                        </div>
-                        <ArrowLeft className="w-4 h-4 text-gray-700 group-hover:text-gray-500 rotate-180 transition-all" />
-                    </div>
-                </Link>
-
-                <Link to={createPageUrl(`ScottLegalDocs${artistId ? `?id=${artistId}` : ''}`)}>
-                    <div className="bg-gray-900/40 hover:bg-gray-900/60 border border-gray-800 hover:border-cyan-500/50 rounded-xl p-5 transition-all flex items-center justify-between group">
-                        <div className="flex items-center gap-4">
-                            <Scale className="w-6 h-6 text-gray-600 group-hover:text-cyan-400 transition-colors" />
-                            <div>
-                                <p className="text-white font-mono text-base">Legal Docs</p>
-                                <p className="text-gray-600 text-xs font-mono mt-0.5">View and manage</p>
+                                <p className="text-white font-mono text-base">Legal & Contracts</p>
+                                <p className="text-gray-600 text-xs font-mono mt-0.5">All legal docs + contracts</p>
                             </div>
                         </div>
                         <ArrowLeft className="w-4 h-4 text-gray-700 group-hover:text-gray-500 rotate-180 transition-all" />
@@ -105,7 +92,20 @@ export default function ScottLiveAdmin() {
                             <Shield className="w-6 h-6 text-gray-600 group-hover:text-cyan-400 transition-colors" />
                             <div>
                                 <p className="text-white font-mono text-base">Insurance</p>
-                                <p className="text-gray-600 text-xs font-mono mt-0.5">View and manage</p>
+                                <p className="text-gray-600 text-xs font-mono mt-0.5">Policies and coverage</p>
+                            </div>
+                        </div>
+                        <ArrowLeft className="w-4 h-4 text-gray-700 group-hover:text-gray-500 rotate-180 transition-all" />
+                    </div>
+                </Link>
+
+                <Link to={createPageUrl(`ScottInvoices${artistId ? `?id=${artistId}` : ''}`)}>
+                    <div className="bg-gray-900/40 hover:bg-gray-900/60 border border-gray-800 hover:border-cyan-500/50 rounded-xl p-5 transition-all flex items-center justify-between group">
+                        <div className="flex items-center gap-4">
+                            <FileText className="w-6 h-6 text-gray-600 group-hover:text-cyan-400 transition-colors" />
+                            <div>
+                                <p className="text-white font-mono text-base">Live Invoices</p>
+                                <p className="text-gray-600 text-xs font-mono mt-0.5">Gig invoices from promoters</p>
                             </div>
                         </div>
                         <ArrowLeft className="w-4 h-4 text-gray-700 group-hover:text-gray-500 rotate-180 transition-all" />

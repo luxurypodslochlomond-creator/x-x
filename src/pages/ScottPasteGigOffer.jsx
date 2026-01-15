@@ -149,35 +149,42 @@ export default function ScottPasteGigOffer() {
     }
   };
 
-  // Sync all pending emails when online
+  // Sync all pending emails when online - FIXED
   const syncPendingEmails = async () => {
     const pending = JSON.parse(localStorage.getItem('scott_pending_gig_emails') || '[]');
-    if (pending.length === 0) return;
+    if (pending.length === 0) {
+      alert('✅ Nothing to sync');
+      return;
+    }
 
     setSyncing(true);
     const remaining = [];
     let successCount = 0;
+    let failedCount = 0;
 
     for (const email of pending) {
       try {
         const decrypted = decrypt(email.emailText);
-        if (decrypted) {
-          const response = await base44.functions.invoke('scanGigOffers', { 
-            emailText: decrypted, 
-            artistId: email.artistId 
-          });
-          if (response?.data?.success) {
-            successCount++;
-            // Successfully synced - don't add to remaining
-          } else {
-            remaining.push(email);
-          }
+        if (!decrypted) {
+          failedCount++;
+          continue;
+        }
+
+        const response = await base44.functions.invoke('scanGigOffers', { 
+          emailText: decrypted, 
+          artistId: email.artistId 
+        });
+        
+        if (response?.data?.success) {
+          successCount++;
         } else {
           remaining.push(email);
+          failedCount++;
         }
       } catch (error) {
-        console.error('Sync failed for email:', error);
-        remaining.push(email); // Keep for retry
+        console.error('Sync error:', error);
+        remaining.push(email);
+        failedCount++;
       }
     }
 
@@ -186,10 +193,10 @@ export default function ScottPasteGigOffer() {
     setSyncing(false);
 
     if (successCount > 0) {
-      alert(`✅ Synced ${successCount} gig offer${successCount > 1 ? 's' : ''}!`);
-      navigate(createPageUrl('ScottGigOffers'));
-    } else if (remaining.length > 0) {
-      alert('⚠️ Some emails failed to sync. Will retry later.');
+      alert(`✅ Synced ${successCount} offer${successCount > 1 ? 's' : ''}${failedCount > 0 ? `\n⚠️ ${failedCount} failed (will retry)` : ''}`);
+      if (successCount > 0) navigate(createPageUrl('ScottGigOffers'));
+    } else {
+      alert(`❌ All ${failedCount} sync${failedCount > 1 ? 's' : ''} failed. Check connection.`);
     }
   };
 
@@ -221,21 +228,21 @@ export default function ScottPasteGigOffer() {
     }
   };
 
-  // Extract text from screenshot using AI51 vision
+  // Extract text from screenshot using AI51 vision - FAST MODE
   const extractFromScreenshot = async (file) => {
     try {
       // Upload screenshot
       const { file_url } = await base44.integrations.Core.UploadFile({ file });
       
-      // AI51 vision OCR
+      // AI51 vision OCR - simplified prompt for speed
       const result = await base44.integrations.Core.InvokeLLM({
-        prompt: 'Extract ALL text from this email screenshot. Return the complete email text exactly as written.',
+        prompt: 'Extract text from this gig offer email.',
         file_urls: file_url
       });
       
       return result;
     } catch (error) {
-      console.error('Screenshot extraction failed:', error);
+      alert('❌ Screenshot OCR failed. Try paste instead.');
       throw error;
     }
   };

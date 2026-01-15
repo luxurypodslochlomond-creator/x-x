@@ -24,7 +24,7 @@ export default function ScottLive() {
         },
         {
             title: 'CONTRACTS & DOCS',
-            subtitle: 'Contracts • Legal • Insurance',
+            subtitle: 'Legal • Contracts • Insurance • Invoices',
             icon: DollarSign,
             color: 'amber',
             link: createPageUrl('ScottLiveAdmin') + (artistId ? `?id=${artistId}` : '')

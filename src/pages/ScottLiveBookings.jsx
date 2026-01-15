@@ -144,7 +144,7 @@ export default function ScottLiveBookings() {
                         whileTap={{ scale: 0.98 }}
                         className="w-full bg-gradient-to-r from-cyan-600 to-blue-600 text-white font-black py-4 rounded-lg font-mono"
                     >
-                        + PASTE NEW OFFER
+                        + NEW OFFER
                     </motion.button>
                 </Link>
 
