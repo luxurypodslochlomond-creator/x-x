@@ -10,7 +10,6 @@ import { base44 } from '@/api/base44Client';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import TechStatusBar from '@/components/scott/TechStatusBar';
 import { format } from 'date-fns';
-import AI51WhatIsBanner from '@/components/scott/AI51WhatIsBanner';
 
 /**
  * CB51 HOME PAGE - CLEAN URL FOR WHITE LABEL
