@@ -31,6 +31,13 @@ export default function AI51VoiceInterface({ onVoiceMessage, isThinking, lastRes
             // Auto-detect user's language from browser settings
             recognitionRef.current.lang = navigator.language || 'en-US';
             recognitionRef.current.maxAlternatives = 1;
+            
+            // Android-specific fixes
+            const isAndroid = /Android/.test(navigator.userAgent);
+            if (isAndroid) {
+                recognitionRef.current.continuous = true; // Android needs continuous mode
+                recognitionRef.current.interimResults = false; // Android may struggle with interim results
+            }
 
             recognitionRef.current.onstart = () => {
                 setIsListening(true);
@@ -63,30 +70,43 @@ export default function AI51VoiceInterface({ onVoiceMessage, isThinking, lastRes
 
             recognitionRef.current.onerror = (event) => {
                 console.error('Speech recognition error:', event.error);
+                const isAndroid = /Android/.test(navigator.userAgent);
                 let errorMsg = event.error;
                 
                 if (event.error === 'no-speech') {
-                    errorMsg = 'No speech detected. Tap mic and speak clearly ♾️';
+                    errorMsg = isAndroid 
+                        ? 'Try speaking louder and clearer (Android issue) ♾️'
+                        : 'No speech detected. Tap mic and speak clearly ♾️';
                 } else if (event.error === 'not-allowed') {
-                    errorMsg = 'Mic access denied. Allow in browser settings';
+                    errorMsg = isAndroid
+                        ? 'Allow microphone: Settings → Apps → Browser → Permissions → Microphone'
+                        : 'Mic access denied. Allow in browser settings';
                 } else if (event.error === 'network') {
                     errorMsg = 'Network error. Check internet connection';
+                } else if (event.error === 'aborted') {
+                    errorMsg = 'Voice was interrupted. Try again ♾️';
+                } else if (event.error === 'service-not-allowed') {
+                    errorMsg = isAndroid
+                        ? 'Speech service unavailable on this Android device'
+                        : 'Speech service not available';
                 }
                 
                 setError(errorMsg);
                 setIsListening(false);
                 
-                // Auto-retry on no-speech for Android
-                if (event.error === 'no-speech') {
+                // Smarter retry logic for Android
+                const shouldRetry = event.error === 'no-speech' || event.error === 'aborted';
+                if (shouldRetry && recognitionRef.current) {
                     setTimeout(() => {
                         if (recognitionRef.current && !isListening) {
                             try {
+                                recognitionRef.current.stop();
                                 recognitionRef.current.start();
                             } catch (e) {
                                 console.error('Failed to auto-retry:', e);
                             }
                         }
-                    }, 500);
+                    }, 800);
                 }
             };
 
@@ -127,7 +147,11 @@ export default function AI51VoiceInterface({ onVoiceMessage, isThinking, lastRes
         }
 
         if (isListening) {
-            recognitionRef.current.stop();
+            try {
+                recognitionRef.current.stop();
+            } catch (e) {
+                console.error('Error stopping recognition:', e);
+            }
             setIsListening(false);
         } else {
             // Stop any ongoing speech
@@ -139,13 +163,32 @@ export default function AI51VoiceInterface({ onVoiceMessage, isThinking, lastRes
                 hasSpokenRef.current = false;
                 setTranscript('');
                 setError('');
-                recognitionRef.current.start();
-                setIsListening(true);
+                
+                // Android needs explicit stop before start
+                const isAndroid = /Android/.test(navigator.userAgent);
+                if (isAndroid && recognitionRef.current) {
+                    recognitionRef.current.stop();
+                    // Give Android time to stop
+                    setTimeout(() => {
+                        try {
+                            recognitionRef.current.start();
+                            setIsListening(true);
+                        } catch (e) {
+                            setError('Failed to start voice. Try again ♾️');
+                            console.error('Android start error:', e);
+                        }
+                    }, 100);
+                } else {
+                    recognitionRef.current.start();
+                    setIsListening(true);
+                }
             } catch (e) {
                 console.error('Failed to start recognition:', e);
+                const isAndroid = /Android/.test(navigator.userAgent);
                 if (e.message.includes('already started')) {
-                    // Already listening, just ignore
                     setIsListening(true);
+                } else if (isAndroid) {
+                    setError('Voice not working on Android. Try closing other apps ♾️');
                 } else {
                     setError('Mic access needed. Check browser settings');
                 }
