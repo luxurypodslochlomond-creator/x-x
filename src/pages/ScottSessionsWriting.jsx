@@ -28,37 +28,28 @@ export default function ScottSessionsWriting() {
         <div className="min-h-screen bg-black text-white p-4 pb-24">
             
             {/* HEADER */}
-            <div className="mb-6 pb-4 border-b-2 border-purple-500">
-                <Link to={createPageUrl(`ScottSessions?id=${artistId}`)} className="flex items-center gap-2 text-gray-400 hover:text-purple-400 mb-4">
+            <div className="mb-8 pb-4 border-b border-gray-800">
+                <Link to={createPageUrl(`ScottSessions?id=${artistId}`)} className="flex items-center gap-2 text-gray-500 hover:text-cyan-400 mb-4">
                     <ArrowLeft className="w-4 h-4" />
-                    <span className="text-xs font-mono font-bold">BACK TO SESSIONS</span>
+                    <span className="text-xs font-mono font-bold">BACK</span>
                 </Link>
-                <h1 className="text-3xl font-black text-purple-400 font-mono">WRITING</h1>
-                <p className="text-gray-500 text-sm font-mono">Songwriting • Demos • Ideas</p>
+                <h1 className="text-4xl font-black text-white font-mono">WRITING</h1>
+                <p className="text-gray-600 text-xs font-mono mt-1">Songwriting • Demos • Ideas</p>
             </div>
 
             {/* STATS */}
-            <div className="grid grid-cols-2 gap-3 mb-6">
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    className="bg-gradient-to-br from-purple-500/20 to-pink-500/20 border-2 border-purple-500 rounded-lg p-4"
-                >
-                    <Music className="w-6 h-6 text-purple-400 mb-2" />
-                    <p className="text-purple-400 font-black text-2xl font-mono">{totalDemos}</p>
-                    <p className="text-purple-300 text-xs font-mono">TOTAL DEMOS</p>
-                </motion.div>
+            <div className="grid grid-cols-2 gap-4 mb-8">
+                <div className="bg-black border border-gray-800 rounded-lg p-4">
+                    <Music className="w-5 h-5 text-gray-500 mb-3" />
+                    <p className="text-white font-black text-3xl font-mono">{totalDemos}</p>
+                    <p className="text-gray-600 text-xs font-mono mt-1">Total Demos</p>
+                </div>
 
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.1 }}
-                    className="bg-gradient-to-br from-green-500/20 to-emerald-500/20 border-2 border-green-500 rounded-lg p-4"
-                >
-                    <TrendingUp className="w-6 h-6 text-green-400 mb-2" />
-                    <p className="text-green-400 font-black text-2xl font-mono">{recentDemos.length}</p>
-                    <p className="text-green-300 text-xs font-mono">THIS MONTH</p>
-                </motion.div>
+                <div className="bg-black border border-gray-800 rounded-lg p-4">
+                    <TrendingUp className="w-5 h-5 text-gray-500 mb-3" />
+                    <p className="text-white font-black text-3xl font-mono">{recentDemos.length}</p>
+                    <p className="text-gray-600 text-xs font-mono mt-1">This Month</p>
+                </div>
             </div>
 
             {/* RECENT DEMOS */}
