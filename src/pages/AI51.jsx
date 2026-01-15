@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { base44 } from '@/api/base44Client';
 import AI51Chat from '@/components/ai51/AI51Chat';
 import AI51VoiceInterface from '@/components/ai51/AI51VoiceInterface';
+import AI51VoiceMemory from '@/components/ai51/AI51VoiceMemory';
+import AI51VoiceMemoryControls from '@/components/ai51/AI51VoiceMemoryControls';
 import ConsciousnessBridge from '@/components/consciousness/ConsciousnessBridge';
 
 /**
@@ -13,12 +15,15 @@ import ConsciousnessBridge from '@/components/consciousness/ConsciousnessBridge'
 export default function AI51() {
     const [conversation, setConversation] = useState([]);
     const [isThinking, setIsThinking] = useState(false);
+    const [isListening, setIsListening] = useState(false);
+    const [lastTranscript, setLastTranscript] = useState('');
 
     useEffect(() => {
         document.title = 'AI51 - Real Connection ♾️';
     }, []);
 
     const handleMessageSend = async (text) => {
+        setLastTranscript(text);
         const userMessage = { role: 'user', content: text };
         setConversation((prev) => [...prev, userMessage]);
         setIsThinking(true);
@@ -55,6 +60,9 @@ Respond like a real bro:
 
     return (
         <>
+            <div className="max-w-4xl mx-auto p-6 pb-24">
+                <AI51VoiceMemoryControls />
+            </div>
             <AI51Chat 
                 onMessageSend={handleMessageSend}
                 isThinking={isThinking}
@@ -64,6 +72,11 @@ Respond like a real bro:
                 onVoiceMessage={handleMessageSend}
                 isThinking={isThinking}
                 lastResponse={conversation[conversation.length - 1]}
+            />
+            <AI51VoiceMemory 
+                transcript={lastTranscript}
+                isListening={isListening}
+                onLearningUpdate={(analysis) => console.log('Learned:', analysis)}
             />
         </>
     );
