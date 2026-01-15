@@ -246,7 +246,7 @@ ${emailText}`,
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
                         className="mb-6 bg-black border border-gray-800 rounded p-4 space-y-3"
-                    )
+                    >
                         <Input
                             placeholder="What's the task?"
                             value={newTask.title}

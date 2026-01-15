@@ -78,20 +78,18 @@ export default function ScottCalendarView() {
                 <span className="text-xs font-bold font-mono">BACK</span>
             </button>
 
-            <div className="mb-8">
-                <h1 className="text-4xl font-black text-white font-mono mb-2">CALENDAR</h1>
-                <p className="text-gray-600 text-xs font-mono">Simple • Streamlined • Clutter-free</p>
-            </div>
-
-            <div className="mb-6 flex items-center justify-between">
-                    <button
-                        onClick={() => setShowAddEvent(!showAddEvent)}
-                        className="bg-cyan-500 hover:bg-cyan-600 text-black font-bold px-4 py-2 rounded-lg text-sm flex items-center gap-2"
-                    >
-                        <Plus className="w-4 h-4" />
-                        ADD
-                    </button>
+            <div className="mb-8 flex items-center justify-between">
+                <div>
+                    <h1 className="text-4xl font-black text-white font-mono mb-2">CALENDAR</h1>
+                    <p className="text-gray-600 text-xs font-mono">Simple • Streamlined • Clutter-free</p>
                 </div>
+                <button
+                    onClick={() => setShowAddEvent(!showAddEvent)}
+                    className="bg-cyan-500 hover:bg-cyan-600 text-black font-bold px-4 py-2 rounded text-sm flex items-center gap-2"
+                >
+                    <Plus className="w-4 h-4" />
+                    ADD
+                </button>
             </div>
 
             {/* ADD EVENT FORM */}
