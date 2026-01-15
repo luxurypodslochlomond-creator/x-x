@@ -98,42 +98,25 @@ ${emailText}`,
         return artist?.name || 'Unknown';
     };
 
-    const statusColors = {
-        pending_manager_review: { bg: 'bg-amber-500/20', border: 'border-amber-500', text: 'text-amber-400' },
-        sent_to_band: { bg: 'bg-cyan-500/20', border: 'border-cyan-500', text: 'text-cyan-400' },
-        accepted_by_band: { bg: 'bg-green-500/20', border: 'border-green-500', text: 'text-green-400' },
-        rejected_by_band: { bg: 'bg-red-500/20', border: 'border-red-500', text: 'text-red-400' },
-        confirmed: { bg: 'bg-purple-500/20', border: 'border-purple-500', text: 'text-purple-400' }
-    };
-
     return (
         <div className="min-h-screen bg-black text-white p-4 pb-24">
             
             <button
                 onClick={() => navigate(-1)}
-                className="flex items-center gap-2 text-gray-600 hover:text-cyan-400 transition-all mb-6"
+                className="flex items-center gap-2 text-gray-500 hover:text-cyan-400 transition-all mb-6"
             >
                 <ArrowLeft className="w-4 h-4" />
-                <span className="text-sm font-bold font-mono">BACK</span>
+                <span className="text-xs font-bold font-mono">BACK</span>
             </button>
 
-            <div className="mb-6 flex items-center justify-between">
-                <div>
-                    <h1 className="text-3xl font-black text-cyan-400 font-mono mb-2">GIG OFFERS</h1>
-                    <p className="text-gray-600 text-sm font-mono">Paste email → AI parses</p>
-                </div>
-                <Button
-                    onClick={() => navigate(createPageUrl('ScottMessageInbox'))}
-                    className="bg-purple-600 hover:bg-purple-700 gap-2"
-                >
-                    <Mail className="w-4 h-4" />
-                    Back to Inbox
-                </Button>
+            <div className="mb-6">
+                <h1 className="text-4xl font-black text-white font-mono mb-2">GIG OFFERS</h1>
+                <p className="text-gray-600 text-xs font-mono">Paste email → AI parses</p>
             </div>
 
             {/* NEW OFFER */}
-            <div className="bg-black border-2 border-cyan-500 rounded-lg p-4 mb-6">
-                <h2 className="text-cyan-400 font-black font-mono text-lg mb-4">+ NEW OFFER</h2>
+            <div className="bg-black border border-gray-800 rounded p-4 mb-6">
+                <h2 className="text-white font-black font-mono text-lg mb-4">+ NEW OFFER</h2>
                 <Textarea
                     value={emailText}
                     onChange={(e) => setEmailText(e.target.value)}
@@ -157,10 +140,10 @@ ${emailText}`,
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -20 }}
-                        className="bg-black border-2 border-cyan-500 rounded-lg p-4 mb-6"
+                        className="bg-black border border-gray-800 rounded p-4 mb-6"
                     >
                         <div className="flex items-center justify-between mb-4">
-                            <h3 className="text-cyan-400 font-black font-mono">PARSED DATA</h3>
+                            <h3 className="text-white font-black font-mono">PARSED DATA</h3>
                             <Button
                                 onClick={handleSave}
                                 disabled={createMutation.isPending}
