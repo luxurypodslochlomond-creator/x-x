@@ -61,10 +61,14 @@ export default function ScottArtistHome() {
             navigate(createPageUrl('ScottManager'));
             return;
         }
-        base44.entities.ScottArtist.filter({ id: artistId }).then(results => {
-            if (results.length > 0) {
-                setArtist(results[0]);
-                document.title = `CB51 • ${results[0].name}`;
+        // Optimized fetch with fallback
+        base44.entities.ScottArtist.list().then(allArtists => {
+            const found = allArtists.find(a => a.id === artistId);
+            if (found) {
+                setArtist(found);
+                document.title = `CB51 • ${found.name}`;
+            } else {
+                navigate(createPageUrl('CB51'));
             }
         });
     }, [artistId]);

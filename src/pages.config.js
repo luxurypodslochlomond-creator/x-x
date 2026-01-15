@@ -51,6 +51,7 @@ import AdminGill51Tracker from './pages/AdminGill51Tracker';
 import AdminGrantApplications from './pages/AdminGrantApplications';
 import AdminInternationalCharity from './pages/AdminInternationalCharity';
 import AdminLiveAnalytics from './pages/AdminLiveAnalytics';
+import AdminNatWestMortgage from './pages/AdminNatWestMortgage';
 import AdminNationalLotteryApp from './pages/AdminNationalLotteryApp';
 import AdminNationalLotteryEnvironmentMH from './pages/AdminNationalLotteryEnvironmentMH';
 import AdminOnePager from './pages/AdminOnePager';
@@ -223,8 +224,8 @@ import ScottGuestList from './pages/ScottGuestList';
 import ScottInsurance from './pages/ScottInsurance';
 import ScottInvoices from './pages/ScottInvoices';
 import ScottLATrip from './pages/ScottLATrip';
-import ScottLegalDocs from './pages/ScottLegalDocs';
 import ScottLabelContacts from './pages/ScottLabelContacts';
+import ScottLegalDocs from './pages/ScottLegalDocs';
 import ScottLive from './pages/ScottLive';
 import ScottLiveAdmin from './pages/ScottLiveAdmin';
 import ScottLiveBookings from './pages/ScottLiveBookings';
@@ -305,7 +306,6 @@ import YoungWarriors from './pages/YoungWarriors';
 import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
-import AdminNatWestMortgage from './pages/AdminNatWestMortgage';
 import __Layout from './Layout.jsx';
 
 
@@ -363,6 +363,7 @@ export const PAGES = {
     "AdminGrantApplications": AdminGrantApplications,
     "AdminInternationalCharity": AdminInternationalCharity,
     "AdminLiveAnalytics": AdminLiveAnalytics,
+    "AdminNatWestMortgage": AdminNatWestMortgage,
     "AdminNationalLotteryApp": AdminNationalLotteryApp,
     "AdminNationalLotteryEnvironmentMH": AdminNationalLotteryEnvironmentMH,
     "AdminOnePager": AdminOnePager,
@@ -535,8 +536,8 @@ export const PAGES = {
     "ScottInsurance": ScottInsurance,
     "ScottInvoices": ScottInvoices,
     "ScottLATrip": ScottLATrip,
-    "ScottLegalDocs": ScottLegalDocs,
     "ScottLabelContacts": ScottLabelContacts,
+    "ScottLegalDocs": ScottLegalDocs,
     "ScottLive": ScottLive,
     "ScottLiveAdmin": ScottLiveAdmin,
     "ScottLiveBookings": ScottLiveBookings,
@@ -617,7 +618,6 @@ export const PAGES = {
     "ZeroEgoProtocol": ZeroEgoProtocol,
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
-    "AdminNatWestMortgage": AdminNatWestMortgage,
 }
 
 export const pagesConfig = {
