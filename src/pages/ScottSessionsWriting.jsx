@@ -54,20 +54,20 @@ export default function ScottSessionsWriting() {
 
             {/* RECENT DEMOS */}
             {recentDemos.length > 0 && (
-                <div className="bg-gradient-to-r from-purple-500/10 to-pink-500/10 border border-purple-500/30 rounded-lg p-4 mb-6">
-                    <h2 className="text-purple-400 font-black text-lg font-mono mb-4">RECENT DEMOS</h2>
+                <div className="mb-8">
+                    <h2 className="text-gray-600 font-black text-xs font-mono mb-4 tracking-wider">RECENT</h2>
                     <div className="space-y-2">
                         {recentDemos.map(demo => (
-                            <div key={demo.id} className="bg-black/60 border border-gray-700 rounded p-3 flex items-center justify-between">
-                                <div className="flex-1">
-                                    <p className="text-white text-sm font-bold font-mono">{demo.title}</p>
-                                    <p className="text-gray-400 text-xs font-mono">
+                            <div key={demo.id} className="bg-black border border-gray-800 rounded p-4 flex items-center justify-between hover:border-gray-700 transition-colors">
+                                <div className="flex-1 min-w-0">
+                                    <p className="text-white text-sm font-bold font-mono truncate">{demo.title}</p>
+                                    <p className="text-gray-600 text-xs font-mono mt-1">
                                         {format(new Date(demo.created_date), 'd MMM yyyy')}
                                     </p>
                                 </div>
                                 {demo.audio_url && (
-                                    <a href={demo.audio_url} target="_blank" rel="noopener noreferrer">
-                                        <Play className="w-5 h-5 text-purple-400 hover:text-purple-300" />
+                                    <a href={demo.audio_url} target="_blank" rel="noopener noreferrer" className="ml-4 flex-shrink-0">
+                                        <Play className="w-5 h-5 text-gray-500 hover:text-cyan-400 transition-colors" />
                                     </a>
                                 )}
                             </div>
