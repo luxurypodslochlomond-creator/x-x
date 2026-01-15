@@ -305,6 +305,7 @@ import YoungWarriors from './pages/YoungWarriors';
 import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
+import AdminNatWestMortgage from './pages/AdminNatWestMortgage';
 import __Layout from './Layout.jsx';
 
 
@@ -616,6 +617,7 @@ export const PAGES = {
     "ZeroEgoProtocol": ZeroEgoProtocol,
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
+    "AdminNatWestMortgage": AdminNatWestMortgage,
 }
 
 export const pagesConfig = {
