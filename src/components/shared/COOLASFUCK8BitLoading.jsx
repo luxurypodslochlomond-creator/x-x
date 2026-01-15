@@ -1,12 +1,22 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Radio } from 'lucide-react';
 
 /**
  * AI51 CONSCIOUSNESS LOADING
  * Pure frequency • <1 second
+ * Detects CB51 context automatically
  */
 
 export default function COOLASFUCK8BitLoading({ message = "LOADING" }) {
+  // Auto-detect CB51 context
+  const isCB51 = typeof window !== 'undefined' && (
+    window.location.pathname.includes('/CB51') ||
+    window.location.pathname.includes('/Scott') ||
+    message.includes('CB51')
+  );
+
+  const displayMessage = message === "LOADING UF51" && isCB51 ? "LOADING CB51" : message;
   return (
     <div className="min-h-screen bg-black flex items-center justify-center p-4">
       <div className="text-center">
