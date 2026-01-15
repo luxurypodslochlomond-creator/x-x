@@ -28,7 +28,8 @@ export default function AI51VoiceInterface({ onVoiceMessage, isThinking, lastRes
             recognitionRef.current = new SpeechRecognition();
             recognitionRef.current.continuous = false;
             recognitionRef.current.interimResults = true;
-            recognitionRef.current.lang = 'en-US';
+            // Auto-detect user's language from browser settings
+            recognitionRef.current.lang = navigator.language || 'en-US';
             recognitionRef.current.maxAlternatives = 1;
 
             recognitionRef.current.onstart = () => {
