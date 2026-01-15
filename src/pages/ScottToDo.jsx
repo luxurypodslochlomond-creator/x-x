@@ -170,8 +170,8 @@ ${emailText}`,
             </button>
 
             <div className="mb-8">
-                <h1 className="text-4xl font-black text-cyan-400 font-mono mb-2">TASKS</h1>
-                <p className="text-gray-600 text-sm font-mono mb-4">Deadlines · Progress</p>
+                <h1 className="text-4xl font-black text-white font-mono mb-2">TASKS</h1>
+                <p className="text-gray-600 text-xs font-mono mb-4">Deadlines • Progress</p>
                 
                 <div className="flex gap-2">
                     <button
@@ -201,13 +201,13 @@ ${emailText}`,
             {/* EMAIL SCAN FORM */}
             <AnimatePresence>
                 {showEmailScan && (
-                    <motion.div
+                     <motion.div
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
-                        className="mb-6 bg-black border-2 border-purple-500 rounded-lg p-4 space-y-3"
+                        className="mb-6 bg-black border border-gray-800 rounded p-4 space-y-3"
                     >
-                        <h3 className="text-purple-400 font-black font-mono text-sm">SCAN EMAIL FOR TASKS</h3>
+                        <h3 className="text-white font-black font-mono text-sm">SCAN EMAIL FOR TASKS</h3>
                         <Textarea
                             placeholder="Paste PR/Label/Plugger/Publisher email..."
                             value={emailText}
@@ -224,7 +224,7 @@ ${emailText}`,
                             <Button
                                 onClick={scanEmailForTasks}
                                 disabled={!emailText.trim() || scanning}
-                                className="flex-1 bg-purple-500 hover:bg-purple-600 text-black font-black flex items-center justify-center gap-2"
+                                className="flex-1 bg-cyan-500 hover:bg-cyan-600 text-black font-black flex items-center justify-center gap-2"
                             >
                                 {scanning ? 'SCANNING...' : (
                                     <>
@@ -241,12 +241,12 @@ ${emailText}`,
             {/* ADD TASK FORM */}
             <AnimatePresence>
                 {showAddTask && (
-                    <motion.div
+                     <motion.div
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
-                        className="mb-6 bg-black border-2 border-cyan-500 rounded-lg p-4 space-y-3"
-                    >
+                        className="mb-6 bg-black border border-gray-800 rounded p-4 space-y-3"
+                    )
                         <Input
                             placeholder="What's the task?"
                             value={newTask.title}
@@ -286,7 +286,7 @@ ${emailText}`,
 
             {/* PENDING TASKS */}
             <div className="mb-6">
-                <h2 className="text-cyan-400 font-bold mb-3 font-mono text-sm">
+                <h2 className="text-white font-bold mb-3 font-mono text-sm">
                     PENDING ({pendingTasks.length})
                 </h2>
                 {pendingTasks.length === 0 ? (
