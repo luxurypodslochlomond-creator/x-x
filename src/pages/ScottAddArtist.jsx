@@ -244,14 +244,14 @@ Return ONLY valid JSON (no markdown):
                     type="button"
                     onClick={handleVoiceInput}
                     disabled={voiceRecording || magicLoading}
-                    className="w-full bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white font-black py-4 rounded-xl font-mono flex items-center justify-center gap-3"
+                    className="w-full bg-black border-2 border-pink-500 hover:border-pink-400 text-pink-400 hover:text-pink-300 font-black py-4 rounded-xl font-mono flex items-center justify-center gap-3 transition-all"
                 >
                     <Mic2 className="w-6 h-6" />
                     {voiceRecording ? 'LISTENING...' : '🎤 SPEAK TO ADD (while driving)'}
                 </button>
 
                 {/* PHOTO EXTRACT */}
-                <label className="w-full bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white font-black py-4 rounded-xl font-mono flex items-center justify-center gap-3 cursor-pointer">
+                <label className="w-full bg-black border-2 border-cyan-500 hover:border-cyan-400 text-cyan-400 hover:text-cyan-300 font-black py-4 rounded-xl font-mono flex items-center justify-center gap-3 cursor-pointer transition-all">
                     <input 
                         type="file" 
                         accept="image/*" 
