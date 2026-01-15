@@ -160,9 +160,6 @@ export default function CB51() {
         <div className="min-h-screen bg-black text-white p-6 pb-24">
             
             <TechStatusBar showP2PSync={true} />
-            
-            {/* AI51 EDUCATION */}
-            <AI51WhatIsBanner />
 
             {/* BRAIN BAR - ALWAYS VISIBLE */}
             <div className="mb-6 pt-4">
