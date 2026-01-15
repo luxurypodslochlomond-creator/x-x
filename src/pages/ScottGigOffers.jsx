@@ -20,6 +20,7 @@ export default function ScottGigOffers() {
     const [emailText, setEmailText] = useState('');
     const [parsing, setParsing] = useState(false);
     const [parsedData, setParsedData] = useState(null);
+    const [demoMode, setDemoMode] = useState(false);
 
     const { data: offers = [], isLoading } = useQuery({
         queryKey: ['scottGigOffers', artistId],
@@ -111,6 +112,61 @@ ${emailText}`,
         }
     };
 
+    const runDemoMode = async () => {
+        if (!artistId) {
+            alert('Need to select an artist first');
+            return;
+        }
+        setDemoMode(true);
+        try {
+            // Step 1: Create a demo offer
+            const demoOffer = await base44.entities.ScottGigOffer.create({
+                artist_id: artistId,
+                venue: 'O2 Academy Demo',
+                city: 'London',
+                country: 'UK',
+                date: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+                fee: 2500,
+                currency: 'GBP',
+                promoter: 'Paul\'s Demo Promoter',
+                status: 'pending_manager_review',
+                raw_email: '[DEMO MODE] This is a demo offer to show workflow',
+                notes: '✨ DEMO MODE - Shows full workflow progression'
+            });
+
+            // Step 2: Auto-send to band
+            await new Promise(r => setTimeout(r, 800));
+            await base44.entities.ScottGigOffer.update(demoOffer.id, {
+                status: 'sent_to_band',
+                manager_approved: true,
+                sent_to_band_date: new Date().toISOString(),
+                response_deadline: new Date(Date.now() + 48 * 60 * 60 * 1000).toISOString(),
+                band_responses: [
+                    { member_name: 'Alex', response: 'yes', responded_at: new Date().toISOString() },
+                    { member_name: 'Jamie', response: 'yes', responded_at: new Date().toISOString() },
+                    { member_name: 'Morgan', response: 'yes', responded_at: new Date().toISOString() }
+                ],
+                all_responses_in: true
+            });
+
+            // Step 3: Auto-confirm
+            await new Promise(r => setTimeout(r, 800));
+            await base44.entities.ScottGigOffer.update(demoOffer.id, {
+                status: 'confirmed',
+                final_response_sent: 'Demo acceptance email - showing full workflow ✅',
+                response_sent_date: new Date().toISOString()
+            });
+
+            queryClient.invalidateQueries({ queryKey: ['scottGigOffers'] });
+            alert('✅ DEMO COMPLETE - Full workflow shown! (pending → voting → confirmed)');
+        } catch (error) {
+            console.error('Demo error:', error);
+            alert('Demo error: ' + error.message);
+        } finally {
+            setDemoMode(false);
+        }
+    };
+
     const getArtistName = (id) => {
         const artist = artists.find(a => a.id === id);
         return artist?.name || 'Unknown';
@@ -137,6 +193,13 @@ ${emailText}`,
             <div className="mb-6">
                 <h1 className="text-4xl font-black text-white font-mono mb-2">GIG OFFERS</h1>
                 <p className="text-gray-600 text-xs font-mono">Paste email → AI parses</p>
+                <button
+                    onClick={runDemoMode}
+                    disabled={demoMode || !artistId}
+                    className="mt-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 disabled:opacity-50 text-white px-4 py-2 rounded font-mono text-xs font-black"
+                >
+                    {demoMode ? '⏳ DEMO RUNNING...' : '🎬 SHOW PAUL DEMO'}
+                </button>
             </div>
 
             {/* NEW OFFER */}
