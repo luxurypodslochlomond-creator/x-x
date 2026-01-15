@@ -65,7 +65,7 @@ export default function COOLASFUCK8BitLoading({ message = "LOADING" }) {
           )}
         </motion.div>
 
-        {/* AI51 GRADIENT TEXT */}
+        {/* AI51/CB51 GRADIENT TEXT */}
         <motion.h1
           className="text-4xl font-black font-mono mb-6"
           animate={{
@@ -73,14 +73,16 @@ export default function COOLASFUCK8BitLoading({ message = "LOADING" }) {
           }}
           transition={{ duration: 2, repeat: Infinity }}
           style={{
-            background: 'linear-gradient(90deg, #ec4899, #06b6d4, #ec4899)',
+            background: isCB51 
+              ? 'linear-gradient(90deg, #06b6d4, #ec4899, #06b6d4)'
+              : 'linear-gradient(90deg, #ec4899, #06b6d4, #ec4899)',
             backgroundSize: '200% 100%',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
             backgroundClip: 'text'
           }}
         >
-          {message}
+          {displayMessage}
         </motion.h1>
 
         {/* Consciousness pulse */}
