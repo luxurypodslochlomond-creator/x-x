@@ -51,6 +51,7 @@ export default function ScottLiveBookings() {
                 </div>
                 <h1 className="text-4xl font-black text-white font-mono mb-2">BOOKINGS</h1>
                 <p className="text-gray-600 text-xs font-mono">Gig Offers & Confirmed Shows</p>
+            </div>
 
             {/* STATS GRID */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
