@@ -38,46 +38,39 @@ export default function ScottSessions() {
         }
     ];
 
-    const colorMap = {
-        purple: { bg: 'from-purple-500/20', border: 'border-purple-500', text: 'text-purple-400' },
-        pink: { bg: 'from-pink-500/20', border: 'border-pink-500', text: 'text-pink-400' },
-        cyan: { bg: 'from-cyan-500/20', border: 'border-cyan-500', text: 'text-cyan-400' }
-    };
-
     return (
         <div className="min-h-screen bg-black text-white p-6 pb-24">
             
             <button
                 onClick={() => navigate(-1)}
-                className="flex items-center gap-2 text-gray-600 hover:text-cyan-400 transition-all mb-8"
+                className="flex items-center gap-2 text-gray-500 hover:text-cyan-400 transition-all mb-8"
             >
                 <ArrowLeft className="w-4 h-4" />
-                <span className="text-sm font-bold font-mono">BACK</span>
+                <span className="text-xs font-bold font-mono">BACK</span>
             </button>
 
             <div className="mb-8">
-                <h1 className="text-3xl font-black text-cyan-400 font-mono mb-2">SESSIONS</h1>
-                <p className="text-gray-600 text-sm font-mono">Writing · Recording · Rehearsals</p>
+                <h1 className="text-4xl font-black text-white font-mono mb-2">SESSIONS</h1>
+                <p className="text-gray-600 text-xs font-mono">Writing • Recording • Rehearsals</p>
             </div>
 
             <div className="grid grid-cols-1 gap-4">
                 {sections.map((section) => {
                     const Icon = section.icon;
-                    const colors = colorMap[section.color];
                     
                     return (
                         <Link key={section.title} to={section.link}>
                             <motion.div
                                 whileHover={{ scale: 0.98 }}
                                 whileTap={{ scale: 0.96 }}
-                                className={`bg-black border-4 ${colors.border} rounded-xl p-6 transition-all h-32 flex items-center gap-4`}
+                                className="bg-black border border-gray-800 hover:border-cyan-400 rounded p-6 transition-all flex items-center gap-4"
                             >
-                                <Icon className={`w-10 h-10 ${colors.text}`} />
+                                <Icon className="w-6 h-6 text-gray-500" />
                                 <div className="flex-1">
-                                    <p className={`${colors.text} font-black text-xl font-mono mb-1`}>
+                                    <p className="text-white font-black text-lg font-mono">
                                         {section.title}
                                     </p>
-                                    <p className="text-gray-600 text-xs font-mono">
+                                    <p className="text-gray-600 text-xs font-mono mt-1">
                                         {section.subtitle}
                                     </p>
                                 </div>
