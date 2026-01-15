@@ -37,6 +37,10 @@ export default function ScottGigWorkflow({ offer }) {
         },
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['scottGigOffers'] });
+        },
+        onError: (error) => {
+            console.error('Error sending to band:', error);
+            alert('Failed to send to band: ' + (error.message || 'Unknown error'));
         }
     });
 
@@ -49,6 +53,10 @@ export default function ScottGigWorkflow({ offer }) {
         }),
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['scottGigOffers'] });
+        },
+        onError: (error) => {
+            console.error('Error rejecting offer:', error);
+            alert('Failed to reject: ' + (error.message || 'Unknown error'));
         }
     });
 
@@ -61,6 +69,10 @@ export default function ScottGigWorkflow({ offer }) {
         }),
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['scottGigOffers'] });
+        },
+        onError: (error) => {
+            console.error('Error sending response:', error);
+            alert('Failed to send response: ' + (error.message || 'Unknown error'));
         }
     });
 
