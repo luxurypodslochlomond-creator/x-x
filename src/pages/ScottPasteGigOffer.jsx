@@ -48,8 +48,21 @@ export default function ScottPasteGigOffer() {
   const [gmailConnected, setGmailConnected] = useState(false);
   const [checkingGmail, setCheckingGmail] = useState(false);
 
-  // Load artists + pending emails on mount
+  // Load artists + pending emails + URL params on mount
   useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const emailParam = urlParams.get('email');
+    const idParam = urlParams.get('id');
+    
+    // Pre-fill from URL
+    if (emailParam) {
+      const decoded = decodeURIComponent(emailParam);
+      setEmailText(decoded);
+    }
+    if (idParam) {
+      setArtistId(idParam);
+    }
+
     const loadArtists = async () => {
       try {
         const data = await base44.entities.ScottArtist.list();
