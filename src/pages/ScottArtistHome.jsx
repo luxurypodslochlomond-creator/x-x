@@ -75,8 +75,11 @@ export default function ScottArtistHome() {
 
     if (!artist) {
         return (
-            <div className="min-h-screen bg-black flex items-center justify-center">
-                <div className="text-center">
+            <div className="min-h-screen bg-black flex items-center justify-center relative">
+                <div className="absolute inset-0 opacity-10 blur-3xl">
+                    <div className="absolute top-1/3 left-1/4 w-96 h-96 bg-cyan-500 rounded-full mix-blend-screen"></div>
+                </div>
+                <div className="text-center relative z-10">
                     <Radio className="w-12 h-12 text-cyan-400 mx-auto mb-3 animate-pulse" />
                     <p className="text-cyan-400 font-black font-mono">CB51</p>
                 </div>
