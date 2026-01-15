@@ -90,7 +90,18 @@ ${emailText}`,
                 currency: 'GBP'
             });
         } catch (error) {
-            alert('Error parsing: ' + error.message);
+            // Queue for offline retry
+            const pendingParse = {
+                timestamp: new Date().toISOString(),
+                emailText: emailText,
+                artistId: artistId || ''
+            };
+            const pending = JSON.parse(localStorage.getItem('pending_gig_parses') || '[]');
+            pending.push(pendingParse);
+            localStorage.setItem('pending_gig_parses', JSON.stringify(pending));
+            
+            // Show user-friendly message
+            alert('⚠️ Server error - saved offline\n\nYour email will be parsed when you\'re back online.\nRefresh the page to sync.');
         }
         setParsing(false);
     };
