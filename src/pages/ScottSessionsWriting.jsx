@@ -76,28 +76,20 @@ export default function ScottSessionsWriting() {
                 </div>
             )}
 
-            {/* QUICK ACTIONS */}
-            <div className="space-y-3">
+            {/* ACTIONS */}
+            <div className="space-y-2">
                 <Link to={createPageUrl(`ScottDemos?id=${artistId}`)}>
-                    <motion.button
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                        className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-black py-4 rounded-lg font-mono flex items-center justify-center gap-2"
-                    >
-                        <Upload className="w-5 h-5" />
+                    <button className="w-full bg-cyan-500 hover:bg-cyan-600 text-black font-black py-3 rounded font-mono text-sm flex items-center justify-center gap-2 transition-colors">
+                        <Upload className="w-4 h-4" />
                         UPLOAD DEMO
-                    </motion.button>
+                    </button>
                 </Link>
 
                 <Link to={createPageUrl(`ScottDemos?id=${artistId}`)}>
-                    <motion.button
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                        className="w-full bg-gradient-to-r from-cyan-600 to-blue-600 text-white font-black py-4 rounded-lg font-mono flex items-center justify-center gap-2"
-                    >
-                        <Music className="w-5 h-5" />
-                        VIEW ALL DEMOS
-                    </motion.button>
+                    <button className="w-full bg-black border border-gray-800 hover:border-cyan-400 text-white font-bold py-3 rounded font-mono text-sm flex items-center justify-center gap-2 transition-colors">
+                        <Music className="w-4 h-4" />
+                        VIEW ALL
+                    </button>
                 </Link>
             </div>
 
