@@ -11,6 +11,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 export default function ScottBandMembers({ artist, onUpdate }) {
     const [adding, setAdding] = useState(false);
+    const [saving, setSaving] = useState(false);
+    const [error, setError] = useState(null);
+    const [success, setSuccess] = useState(null);
     const [newMember, setNewMember] = useState({
         name: '',
         role: '',
@@ -20,19 +23,43 @@ export default function ScottBandMembers({ artist, onUpdate }) {
 
     const members = artist?.members || [];
 
-    const handleAdd = () => {
+    const handleAdd = async () => {
         if (!newMember.name.trim()) return;
         
-        const updated = [...members, newMember];
-        onUpdate({ members: updated });
+        setError(null);
+        setSuccess(null);
+        setSaving(true);
         
-        setNewMember({ name: '', role: '', email: '', phone: '' });
-        setAdding(false);
+        try {
+            const updated = [...members, newMember];
+            await onUpdate({ members: updated });
+            
+            setSuccess('Member added ✓');
+            setNewMember({ name: '', role: '', email: '', phone: '' });
+            setAdding(false);
+            
+            setTimeout(() => setSuccess(null), 2000);
+        } catch (err) {
+            setError(err.message || 'Failed to add member');
+        } finally {
+            setSaving(false);
+        }
     };
 
-    const handleRemove = (index) => {
-        const updated = members.filter((_, i) => i !== index);
-        onUpdate({ members: updated });
+    const handleRemove = async (index) => {
+        setError(null);
+        setSaving(true);
+        
+        try {
+            const updated = members.filter((_, i) => i !== index);
+            await onUpdate({ members: updated });
+            setSuccess('Member removed ✓');
+            setTimeout(() => setSuccess(null), 2000);
+        } catch (err) {
+            setError(err.message || 'Failed to remove member');
+        } finally {
+            setSaving(false);
+        }
     };
 
     return (
