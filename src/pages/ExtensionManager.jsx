@@ -248,79 +248,66 @@ export default function ExtensionManager() {
               animate={{ opacity: 1, y: 0 }}
               className="space-y-6"
             >
-              <div className="bg-black border-4 border-green-500 p-6">
+              <div className="bg-black border-4 border-green-500 p-6 space-y-4">
                 <div className="flex items-center gap-2 mb-4">
                   <Code className="w-6 h-6 text-green-400" />
                   <h2 className="text-2xl font-mono font-black text-white">OPEN SOURCE CODE</h2>
                 </div>
                 <p className="text-gray-400 text-sm mb-4">View & customize the extension</p>
-                <div>
-                <div className="space-y-4">
-                   <div className="bg-green-500 text-black p-3 font-mono text-xs font-black">
-                     <p>All code is open source. View, fork, and customize it.</p>
-                    <Button
-                      onClick={() => setShowCode(!showCode)}
-                      className="bg-green-600 hover:bg-green-700 gap-2"
-                    >
-                      <Code className="w-4 h-4" />
-                      {showCode ? 'Hide Code' : 'View Code Structure'}
-                    </Button>
-                  </div>
 
-                  <AnimatePresence>
-                    {showCode && (
-                      <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: 'auto' }}
-                        exit={{ opacity: 0, height: 0 }}
-                        className="space-y-4"
-                      >
-                        <div className="bg-gray-900 border border-gray-700 rounded-lg overflow-auto max-h-96 p-4 font-mono text-xs text-gray-300">
-                          <pre>{`extension/
-├── manifest.json          # Chrome permissions & config
-├── popup.html             # Extension popup UI
-├── popup.js               # Popup logic
-├── background.js          # Email listener & processor
-├── content.js             # Gmail/Outlook integration
-├── scanner.js             # AI extraction engine
-├── storage.js             # Local storage handler
-└── styles.css             # UI styling
-
-Key Features:
-• manifest.json: Requests email read access
-• scanner.js: Uses CB51 AI51 to extract data
-• storage.js: Encrypts sensitive data locally
-• popup.js: Shows extraction preview
-• background.js: Auto-scans new emails
-
-Privacy:
-• No data leaves device until user approves
-• Local encryption of drafts
-• One-click deletion of all local copies
-• GDPR/privacy compliant logging`}</pre>
-                        </div>
-
-                        <div className="space-y-3">
-                               <h4 className="text-white font-bold font-mono">CUSTOMIZE</h4>
-                          <ul className="text-gray-400 text-sm space-y-1 list-disc list-inside">
-                            <li>Change extraction rules in <code className="bg-gray-900 px-2 py-1 rounded text-cyan-400">scanner.js</code></li>
-                            <li>Modify popup UI in <code className="bg-gray-900 px-2 py-1 rounded text-cyan-400">popup.html</code></li>
-                            <li>Add custom integrations in <code className="bg-gray-900 px-2 py-1 rounded text-cyan-400">background.js</code></li>
-                            <li>White-label with your branding</li>
-                          </ul>
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-
+                <div className="bg-green-500 text-black p-3 font-mono text-xs font-black mb-4">
+                  <p className="mb-2">All code is open source. View, fork, and customize it.</p>
                   <Button
-                    className="w-full bg-gray-700 hover:bg-gray-600 gap-2"
-                    onClick={() => window.open('https://github.com/cb51/email-extension', '_blank')}
+                    onClick={() => setShowCode(!showCode)}
+                    className="bg-green-700 hover:bg-green-800 text-white font-mono font-black"
                   >
-                    View Full GitHub Repo
+                    {showCode ? 'HIDE CODE' : 'VIEW CODE'}
                   </Button>
-                </CardContent>
-              </Card>
+                </div>
+
+                <AnimatePresence>
+                  {showCode && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
+                      className="space-y-3"
+                    >
+                      <div className="bg-gray-900 border border-gray-700 overflow-auto max-h-96 p-4 font-mono text-xs text-gray-300">
+                        <pre>{`extension/
+              ├── manifest.json
+              ├── popup.html
+              ├── popup.js
+              ├── background.js
+              ├── content.js
+              ├── scanner.js
+              ├── storage.js
+              └── styles.css
+
+              All code open source. 
+              View, fork, customize.`}</pre>
+                      </div>
+
+                      <div className="space-y-2">
+                        <h4 className="text-white font-bold font-mono">CUSTOMIZE</h4>
+                        <ul className="text-gray-400 text-xs space-y-1 list-disc list-inside">
+                          <li>Change extraction rules in scanner.js</li>
+                          <li>Modify popup UI in popup.html</li>
+                          <li>Add custom integrations in background.js</li>
+                          <li>White-label with your branding</li>
+                        </ul>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+
+                <Button
+                  className="w-full bg-green-500 hover:bg-green-600 text-black font-mono font-black"
+                  onClick={() => window.open('https://github.com/cb51/email-extension', '_blank')}
+                >
+                  GITHUB REPO
+                </Button>
+              </div>
             </motion.div>
           </TabsContent>
 
@@ -332,57 +319,24 @@ Privacy:
               className="space-y-6"
             >
               <div className="bg-black border-4 border-amber-500 p-6 space-y-4">
-                  <div className="space-y-6">
-                    <div>
-                      <h4 className="text-cyan-400 font-bold mb-3 font-mono">DATA DELETION & PRIVACY</h4>
-                      <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4 text-gray-300 text-sm space-y-2">
-                        <p><strong>Delete on Request:</strong> Users can request all extracted data removed from CB51</p>
-                        <p><strong>Local First:</strong> All data encrypted locally before any upload</p>
-                        <p><strong>GDPR Compliant:</strong> Full deletion logs, audit trails</p>
-                        <p><strong>User Control:</strong> Preview every extraction before syncing</p>
-                      </div>
-                    </div>
+                <h2 className="text-2xl font-mono font-black text-white">DOCUMENTATION</h2>
 
-                    <div>
-                      <h4 className="text-cyan-400 font-bold mb-3 font-mono">INSTALLATION & SUPPORT</h4>
-                      <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4 text-gray-300 text-sm space-y-2">
-                        <p><strong>Troubleshooting:</strong> <code className="bg-gray-900 px-2 py-1 rounded">chrome://extensions/ → Debug background page</code></p>
-                        <p><strong>Development:</strong> Fork the GitHub repo and customize</p>
-                        <p><strong>Support:</strong> Email support@cb51.com or use in-app help</p>
-                      </div>
-                    </div>
+                <h3 className="text-cyan-400 font-bold font-mono">DATA DELETION & PRIVACY</h3>
+                <p className="text-gray-300 text-sm">Delete on request • Local encryption • GDPR compliant • Full user control</p>
 
-                    <div>
-                      <h4 className="text-cyan-400 font-bold mb-3 font-mono">WHITE-LABEL SETUP</h4>
-                      <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4 text-gray-300 text-sm space-y-2">
-                        <p>Custom branding (logo, colors, icons)</p>
-                        <p>Branded installation guide</p>
-                        <p>Your own support email</p>
-                        <p>Custom extraction rules</p>
-                        <p>Contact: partnerships@cb51.com</p>
-                      </div>
-                    </div>
+                <h3 className="text-cyan-400 font-bold font-mono">INSTALLATION & SUPPORT</h3>
+                <p className="text-gray-300 text-sm">Debug via chrome://extensions/ • Fork on GitHub • support@cb51.com</p>
 
-                    <div>
-                      <h4 className="text-cyan-400 font-bold mb-3 font-mono">FAQ</h4>
-                      <div className="space-y-3 text-gray-300 text-sm">
-                        <div>
-                          <p className="font-bold text-pink-300">Is my Gmail data safe?</p>
-                          <p className="text-gray-400">Yes. Extension runs locally. Only extracts what you approve. No full email storage.</p>
-                        </div>
-                        <div>
-                          <p className="font-bold text-pink-300">Can I use it offline?</p>
-                          <p className="text-gray-400">Extraction works offline. Syncs to CB51 when back online.</p>
-                        </div>
-                        <div>
-                          <p className="font-bold text-pink-300">Works with Outlook?</p>
-                          <p className="text-gray-400">Yes. Gmail, Outlook, Hotmail, and any email provider.</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+                <h3 className="text-cyan-400 font-bold font-mono">WHITE-LABEL SETUP</h3>
+                <p className="text-gray-300 text-sm">Custom branding • Installation guides • Your support email • partnerships@cb51.com</p>
+
+                <h3 className="text-cyan-400 font-bold font-mono">FAQ</h3>
+                <div className="text-gray-300 text-sm space-y-1">
+                  <p><strong>Gmail data safe?</strong> Yes. Runs locally. You approve every extraction.</p>
+                  <p><strong>Works offline?</strong> Yes. Syncs when back online.</p>
+                  <p><strong>Outlook compatible?</strong> Yes. All email providers supported.</p>
+                </div>
+              </div>
             </motion.div>
           </TabsContent>
         </Tabs>
