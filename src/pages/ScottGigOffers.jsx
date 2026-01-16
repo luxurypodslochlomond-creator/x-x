@@ -65,41 +65,41 @@ export default function ScottGigOffers() {
             try {
                 attempt++;
                 
-                // AI parses the email - LENIENT SCHEMA
+                // AI parses the email - SIMPLE SCHEMA (no required fields)
                 const response = await base44.integrations.Core.InvokeLLM({
-                    prompt: `Extract gig offer details from this email. Be accurate but flexible.
+                    prompt: `Extract gig offer details from this email. Return JSON.
 
-Return JSON with these fields (use null if not found):
-- venue (string): venue name
-- city (string): city name
-- county (string): county/state
-- country (string): country (default "UK")
-- date (string): date in YYYY-MM-DD format
-- time (string): time
-- fee (number): performance fee as number
-- capacity (number): venue capacity
-- promoter (string): promoter/booking agent name
-- promoter_contact (string): email or phone
-- requirements (string): technical/hospitality requirements
-- notes (string): any other important details
+Fields to extract (use null if not found):
+- venue: venue name
+- city: city
+- county: county/state  
+- country: country (default "UK")
+- date: YYYY-MM-DD format
+- time: performance time
+- fee: fee as number (no currency symbol)
+- capacity: venue capacity as number
+- promoter: promoter/agent name
+- promoter_contact: email or phone
+- requirements: tech/hospitality needs
+- notes: other details
 
-Email text:
+Email:
 ${emailText}`,
                     response_json_schema: {
                         type: "object",
                         properties: {
-                            venue: { type: ["string", "null"] },
-                            city: { type: ["string", "null"] },
-                            county: { type: ["string", "null"] },
-                            country: { type: ["string", "null"] },
-                            date: { type: ["string", "null"] },
-                            time: { type: ["string", "null"] },
-                            fee: { type: ["number", "null"] },
-                            capacity: { type: ["number", "null"] },
-                            promoter: { type: ["string", "null"] },
-                            promoter_contact: { type: ["string", "null"] },
-                            requirements: { type: ["string", "null"] },
-                            notes: { type: ["string", "null"] }
+                            venue: { type: "string" },
+                            city: { type: "string" },
+                            county: { type: "string" },
+                            country: { type: "string" },
+                            date: { type: "string" },
+                            time: { type: "string" },
+                            fee: { type: "number" },
+                            capacity: { type: "number" },
+                            promoter: { type: "string" },
+                            promoter_contact: { type: "string" },
+                            requirements: { type: "string" },
+                            notes: { type: "string" }
                         }
                     }
                 });
