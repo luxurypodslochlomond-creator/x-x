@@ -324,9 +324,9 @@ export default function ExtensionManager() {
                   <p><strong>Outlook compatible?</strong> Yes. All email providers supported.</p>
                 </div>
               </div>
-            </motion.div>
-          </TabsContent>
-        </Tabs>
+              </div>
+              </TabsContent>
+              </Tabs>
 
         {/* Footer */}
         <motion.div
