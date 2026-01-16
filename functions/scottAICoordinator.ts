@@ -42,40 +42,40 @@ Return structured JSON.`;
             response_json_schema: {
                 type: "object",
                 properties: {
-                    has_event: { type: "boolean" },
-                    has_task: { type: "boolean" },
-                    has_payment: { type: "boolean" },
-                    artist_name: { type: "string" },
+                    has_event: { type: ["boolean", "null"] },
+                    has_task: { type: ["boolean", "null"] },
+                    has_payment: { type: ["boolean", "null"] },
+                    artist_name: { type: ["string", "null"] },
                     event: {
-                        type: "object",
+                        type: ["object", "null"],
                         properties: {
-                            venue: { type: "string" },
-                            date: { type: "string" },
-                            time: { type: "string" },
-                            load_in: { type: "string" },
-                            soundcheck: { type: "string" },
-                            set_time: { type: "string" },
-                            fee: { type: "string" },
-                            notes: { type: "string" }
+                            venue: { type: ["string", "null"] },
+                            date: { type: ["string", "null"] },
+                            time: { type: ["string", "null"] },
+                            load_in: { type: ["string", "null"] },
+                            soundcheck: { type: ["string", "null"] },
+                            set_time: { type: ["string", "null"] },
+                            fee: { type: ["string", "null"] },
+                            notes: { type: ["string", "null"] }
                         }
                     },
                     task: {
-                        type: "object",
+                        type: ["object", "null"],
                         properties: {
-                            description: { type: "string" },
-                            deadline: { type: "string" },
-                            priority: { type: "string", enum: ["low", "normal", "high", "urgent"] }
+                            description: { type: ["string", "null"] },
+                            deadline: { type: ["string", "null"] },
+                            priority: { type: ["string", "null"], enum: ["low", "normal", "high", "urgent", null] }
                         }
                     },
                     payment: {
-                        type: "object",
+                        type: ["object", "null"],
                         properties: {
-                            type: { type: "string", enum: ["invoice", "expense"] },
-                            amount: { type: "number" },
-                            description: { type: "string" }
+                            type: { type: ["string", "null"], enum: ["invoice", "expense", null] },
+                            amount: { type: ["number", "null"] },
+                            description: { type: ["string", "null"] }
                         }
                     },
-                    general_notes: { type: "string" }
+                    general_notes: { type: ["string", "null"] }
                 }
             }
         });
