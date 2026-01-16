@@ -4,7 +4,7 @@ import { base44 } from '@/api/base44Client';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Download, Code, QrCode, Shield, Mail, FileText, Music, Heart, Copy, CheckCircle, AlertCircle, Smartphone } from 'lucide-react';
+import { Download, Code, Shield, Mail, FileText, Zap, Copy, CheckCircle, AlertCircle, Smartphone } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 

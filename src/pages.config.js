@@ -247,6 +247,7 @@ import ScottSessions from './pages/ScottSessions';
 import ScottSessionsRecording from './pages/ScottSessionsRecording';
 import ScottSessionsRehearsal from './pages/ScottSessionsRehearsal';
 import ScottSessionsWriting from './pages/ScottSessionsWriting';
+import ScottSettings from './pages/ScottSettings';
 import ScottTeam from './pages/ScottTeam';
 import ScottTeamAccess from './pages/ScottTeamAccess';
 import ScottToDo from './pages/ScottToDo';
@@ -308,7 +309,6 @@ import YoungWarriors from './pages/YoungWarriors';
 import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
-import ScottSettings from './pages/ScottSettings';
 import __Layout from './Layout.jsx';
 
 
@@ -562,6 +562,7 @@ export const PAGES = {
     "ScottSessionsRecording": ScottSessionsRecording,
     "ScottSessionsRehearsal": ScottSessionsRehearsal,
     "ScottSessionsWriting": ScottSessionsWriting,
+    "ScottSettings": ScottSettings,
     "ScottTeam": ScottTeam,
     "ScottTeamAccess": ScottTeamAccess,
     "ScottToDo": ScottToDo,
@@ -623,7 +624,6 @@ export const PAGES = {
     "ZeroEgoProtocol": ZeroEgoProtocol,
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
-    "ScottSettings": ScottSettings,
 }
 
 export const pagesConfig = {
