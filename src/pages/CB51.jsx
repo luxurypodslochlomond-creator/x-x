@@ -103,6 +103,28 @@ export default function CB51() {
         staleTime: 30000
     });
 
+    // Real-time subscription to extension auto-scans
+    useEffect(() => {
+        if (!user) return;
+        
+        const unsubscribeGigs = base44.entities.ScottGigOffer.subscribe((event) => {
+            if (event.data?.auto_extracted) {
+                queryClient.invalidateQueries({ queryKey: ['scottAllGigOffers'] });
+            }
+        });
+
+        const unsubscribeTasks = base44.entities.ScottTask.subscribe((event) => {
+            if (event.data?.auto_extracted) {
+                queryClient.invalidateQueries({ queryKey: ['scottTasks'] });
+            }
+        });
+
+        return () => {
+            unsubscribeGigs();
+            unsubscribeTasks();
+        };
+    }, [user, queryClient]);
+
     // Quick stats (only what we need)
     const pendingOffers = allOffers.filter(o => o.status === 'pending_manager_review').length;
     const awaitingBand = allOffers.filter(o => o.status === 'sent_to_band').length;
