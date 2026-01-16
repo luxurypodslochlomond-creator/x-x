@@ -5,10 +5,10 @@ import { Smartphone, Trash2, AlertCircle, CheckCircle } from 'lucide-react';
 import { format } from 'date-fns';
 import { motion } from 'framer-motion';
 
-export default function ScottConnectedDevices({ artistId }) {
+export default function ScottConnectedDevices({ artistId, isManager = false }) {
   const queryClient = useQueryClient();
 
-  // Fetch devices
+  // Fetch devices - manager sees all, artist sees own
   const { data: devices = [], isLoading } = useQuery({
     queryKey: ['extensionSessions', artistId],
     queryFn: async () => {

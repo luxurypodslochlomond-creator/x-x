@@ -82,6 +82,12 @@ Deno.serve(async (req) => {
     const sessionToken = btoa(deviceId + ':' + Date.now() + ':' + Math.random());
     
     // Create extension session record
+    // Need to find manager for this artist
+    const sceneTeamMembers = await base44.asServiceRole.entities.ScottTeamMember.filter({ 
+      artist_access: { $in: [user.id] }
+    });
+    const managerEmail = sceneTeamMembers.length > 0 ? sceneTeamMembers[0].email : user.email;
+
     const existingSession = (await base44.entities.ExtensionSession.filter({ 
       device_id: deviceId, 
       artist_id: user.id 
@@ -97,6 +103,7 @@ Deno.serve(async (req) => {
       await base44.entities.ExtensionSession.create({
         device_id: deviceId,
         artist_id: user.id,
+        manager_id: managerEmail,
         device_name: 'New Device',
         last_active: new Date().toISOString(),
         created_at: new Date().toISOString(),
