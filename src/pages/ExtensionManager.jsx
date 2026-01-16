@@ -91,11 +91,11 @@ export default function ExtensionManager() {
         </motion.div>
 
         <Tabs defaultValue="download" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-3 bg-black border-2 border-cyan-500">
-            <TabsTrigger value="download" className="data-[state=active]:bg-cyan-600 font-mono font-black">DOWNLOAD</TabsTrigger>
-            <TabsTrigger value="code" className="data-[state=active]:bg-cyan-600 font-mono font-black">CODE</TabsTrigger>
-            <TabsTrigger value="docs" className="data-[state=active]:bg-cyan-600 font-mono font-black">DOCS</TabsTrigger>
-          </TabsList>
+          <TabsList className="grid w-full grid-cols-3 bg-black border-4 border-cyan-500 p-1 gap-2">
+             <TabsTrigger value="download" className="data-[state=active]:bg-cyan-500 data-[state=inactive]:bg-gray-900 font-mono font-black text-white">DOWNLOAD</TabsTrigger>
+             <TabsTrigger value="code" className="data-[state=active]:bg-green-500 data-[state=inactive]:bg-gray-900 font-mono font-black text-white">CODE</TabsTrigger>
+             <TabsTrigger value="docs" className="data-[state=active]:bg-amber-500 data-[state=inactive]:bg-gray-900 font-mono font-black text-white">DOCS</TabsTrigger>
+           </TabsList>
 
           {/* DOWNLOAD TAB */}
           <TabsContent value="download">
@@ -106,164 +106,138 @@ export default function ExtensionManager() {
             >
               {/* Mobile Warning */}
               {isMobile && (
-                <Card className="bg-black border-2 border-amber-500">
-                  <CardContent className="pt-6">
-                    <div className="flex items-start gap-3">
-                      <Smartphone className="w-6 h-6 text-amber-400 flex-shrink-0 mt-1" />
-                      <div>
-                        <p className="text-amber-400 font-bold mb-2">Desktop Only</p>
-                        <p className="text-gray-300 text-sm">Chrome extensions only work on desktop/laptop. You can still use CB51 web app on iPhone—it works great on mobile! Share this link with your team on desktop to get the extension.</p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
+                <div className="bg-amber-500 text-black p-4 rounded-lg font-mono font-black">
+                  <p className="mb-2">DESKTOP ONLY</p>
+                  <p className="text-sm font-normal">Chrome extensions work on desktop. Use CB51 web app on iPhone instead.</p>
+                </div>
               )}
 
               {/* Quick Download Card */}
-              <Card className="bg-black border-2 border-cyan-500">
-                <CardHeader>
-                  <CardTitle className="text-white flex items-center gap-3 font-mono font-black">
-                    <Download className="w-6 h-6 text-cyan-400" />
-                    GET THE EXTENSION
-                  </CardTitle>
-                  <CardDescription>Works with Gmail, Outlook, Hotmail + more</CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-6">
-                  <Button
-                    onClick={handleDownload}
-                    disabled={downloading}
-                    className="w-full bg-cyan-600 hover:bg-cyan-700 h-16 text-lg font-black gap-3"
-                  >
-                    {downloading ? (
-                      <>
-                        <span className="animate-spin">⚙</span>
-                        PREPARING ZIP...
-                      </>
-                    ) : (
-                      <>
-                        <Download className="w-6 h-6" />
-                        DOWNLOAD ZIP (READY TO INSTALL)
-                      </>
-                    )}
-                  </Button>
+              <div className="bg-black border-4 border-cyan-500 p-6 space-y-4">
+                <div className="flex items-center gap-2">
+                  <Download className="w-6 h-6 text-cyan-400" />
+                  <h2 className="text-2xl font-mono font-black text-white">GET THE EXTENSION</h2>
+                </div>
+                <p className="text-gray-400 text-sm">Works with Gmail, Outlook, Hotmail & more</p>
 
-                  <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4 space-y-3">
-                    <h4 className="text-cyan-400 font-bold font-mono">INSTALLATION (3 STEPS)</h4>
-                     <ol className="text-gray-300 text-sm space-y-2 list-decimal list-inside">
-                       <li>Click download above (gets 6 files)</li>
-                       <li>Open Chrome → chrome://extensions/ → Enable Developer mode</li>
-                       <li>Drag files folder into Chrome → Done</li>
-                     </ol>
-                     <p className="text-cyan-300 text-xs mt-3">No unzipping needed. Drag & drop the folder with all 6 files.</p>
-                  </div>
+                <Button
+                  onClick={handleDownload}
+                  disabled={downloading}
+                  className="w-full bg-cyan-500 hover:bg-cyan-600 text-black h-14 text-base font-black gap-3 font-mono"
+                >
+                  {downloading ? (
+                     <>
+                       <span className="animate-spin">LOADING</span>
+                     </>
+                  ) : (
+                     <>
+                       DOWNLOAD ZIP
+                     </>
+                  )}
+                </Button>
 
-                  <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4">
-                    <div className="flex gap-2">
-                      <Shield className="w-5 h-5 text-green-400 flex-shrink-0" />
-                      <div className="text-green-300 text-sm">
-                        <p className="font-bold mb-1">Privacy First</p>
-                        <p>Runs locally on your device. Zero tracking. You control what gets sent to CB51.</p>
-                      </div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+                <div className="bg-cyan-500 text-black p-3 space-y-2 font-mono text-sm font-black">
+                  <p>INSTALLATION (3 STEPS)</p>
+                  <ol className="text-xs font-normal space-y-1 list-decimal list-inside">
+                    <li>Click download above (6 files)</li>
+                    <li>chrome://extensions/ → Enable Developer mode</li>
+                    <li>Drag folder into Chrome → Done</li>
+                  </ol>
+                </div>
+
+                <div className="bg-green-500 text-black p-3 font-mono font-black">
+                  <p className="mb-1">PRIVACY FIRST</p>
+                  <p className="text-xs font-normal">Runs locally. Zero tracking. You control everything.</p>
+                </div>
+              </div>
 
               {/* Share Extension Card */}
-              <Card className="bg-black border-2 border-pink-500">
-                <CardHeader>
-                  <CardTitle className="text-white flex items-center gap-3 font-mono font-black">
-                    <Copy className="w-6 h-6 text-pink-400" />
-                    SHARE WITH TEAM
-                  </CardTitle>
-                  <CardDescription>Share download link</CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-6">
-                  <p className="text-gray-400 text-sm">Copy this link to share:</p>
-                  <div className="flex gap-2">
-                    <input
-                      type="text"
-                      value={extensionUrl}
-                      readOnly
-                      className="flex-1 bg-gray-900 border border-gray-700 rounded px-3 py-2 text-gray-300 text-sm font-mono"
-                    />
-                    <Button
-                      onClick={handleCopyUrl}
-                      className={copied ? 'bg-green-600' : 'bg-gray-700 hover:bg-gray-600'}
-                    >
-                      {copied ? <CheckCircle className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
-                    </Button>
-                  </div>
+              <div className="bg-black border-4 border-pink-500 p-6 space-y-4">
+                <div className="flex items-center gap-2">
+                  <Copy className="w-6 h-6 text-pink-400" />
+                  <h2 className="text-2xl font-mono font-black text-white">SHARE WITH TEAM</h2>
+                </div>
+                
+                <div className="flex gap-2">
+                  <input
+                    type="text"
+                    value={extensionUrl}
+                    readOnly
+                    className="flex-1 bg-gray-900 border-2 border-gray-700 px-3 py-2 text-gray-300 text-sm font-mono"
+                  />
+                  <Button
+                    onClick={handleCopyUrl}
+                    className={`font-black font-mono ${copied ? 'bg-green-500 text-black' : 'bg-gray-700 hover:bg-gray-600 text-white'}`}
+                  >
+                    {copied ? 'COPIED' : 'COPY'}
+                  </Button>
+                </div>
 
-                  <div className="space-y-2 pt-4">
-                     <p className="text-gray-300 text-sm font-bold font-mono">PERFECT FOR</p>
-                     <ul className="text-gray-400 text-xs space-y-1">
-                       <li>Team distribution</li>
-                       <li>Artist onboarding</li>
-                       <li>Band management</li>
-                       <li>White-label deployment</li>
-                     </ul>
-                   </div>
-                </CardContent>
-              </Card>
+                <div className="bg-pink-500 text-black p-3 font-mono text-sm font-black">
+                  <p className="mb-2">PERFECT FOR</p>
+                  <ul className="text-xs font-normal space-y-1">
+                    <li>Team distribution</li>
+                    <li>Artist onboarding</li>
+                    <li>Band management</li>
+                    <li>White-label deployment</li>
+                  </ul>
+                </div>
+              </div>
 
               {/* What It Extracts */}
-              <Card className="bg-black border-2 border-purple-500">
-                <CardHeader>
-                  <CardTitle className="text-white font-mono font-black">WHAT GETS EXTRACTED</CardTitle>
-                  <CardDescription>Reads emails + all attachments</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="space-y-3">
-                      <div className="flex items-start gap-3">
-                        <Zap className="w-5 h-5 text-cyan-400 flex-shrink-0 mt-1" />
-                        <div>
-                          <p className="font-bold text-white">Gig Offers</p>
-                          <p className="text-gray-400 text-sm">Venue, date, fee, promoter contact</p>
-                        </div>
-                      </div>
-                      <div className="flex items-start gap-3">
-                        <FileText className="w-5 h-5 text-cyan-400 flex-shrink-0 mt-1" />
-                        <div>
-                          <p className="font-bold text-white">Contracts & Invoices</p>
-                          <p className="text-gray-400 text-sm">PDFs, Word, images automatically parsed</p>
-                        </div>
-                      </div>
-                      <div className="flex items-start gap-3">
-                        <Mail className="w-5 h-5 text-cyan-400 flex-shrink-0 mt-1" />
-                        <div>
-                          <p className="font-bold text-white">Contact Info</p>
-                          <p className="text-gray-400 text-sm">Names, emails, phone numbers</p>
-                        </div>
+              <div className="bg-black border-4 border-purple-500 p-6 space-y-4">
+                <h2 className="text-2xl font-mono font-black text-white">WHAT GETS EXTRACTED</h2>
+                <p className="text-gray-400 text-sm">Reads emails + all attachments</p>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-3">
+                    <div className="flex items-start gap-2">
+                      <Zap className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-1" />
+                      <div>
+                        <p className="font-bold text-white text-sm">Gig Offers</p>
+                        <p className="text-gray-400 text-xs">Venue, date, fee, promoter contact</p>
                       </div>
                     </div>
-                    <div className="space-y-3">
-                      <div className="flex items-start gap-3">
-                        <FileText className="w-5 h-5 text-cyan-400 flex-shrink-0 mt-1" />
-                        <div>
-                          <p className="font-bold text-white">Excel & Sheets</p>
-                          <p className="text-gray-400 text-sm">CSV, Excel, Google Sheets data</p>
-                        </div>
+                    <div className="flex items-start gap-2">
+                      <FileText className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-1" />
+                      <div>
+                        <p className="font-bold text-white text-sm">Contracts & Invoices</p>
+                        <p className="text-gray-400 text-xs">PDFs, Word, images parsed</p>
                       </div>
-                      <div className="flex items-start gap-3">
-                        <AlertCircle className="w-5 h-5 text-cyan-400 flex-shrink-0 mt-1" />
-                        <div>
-                          <p className="font-bold text-white">Bills & Receipts</p>
-                          <p className="text-gray-400 text-sm">Amount, date, vendor extracted</p>
-                        </div>
-                      </div>
-                      <div className="flex items-start gap-3">
-                        <Download className="w-5 h-5 text-cyan-400 flex-shrink-0 mt-1" />
-                        <div>
-                          <p className="font-bold text-white">Any File Type</p>
-                          <p className="text-gray-400 text-sm">Videos, audio, images, creative files</p>
-                        </div>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <Mail className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-1" />
+                      <div>
+                        <p className="font-bold text-white text-sm">Contact Info</p>
+                        <p className="text-gray-400 text-xs">Names, emails, phone numbers</p>
                       </div>
                     </div>
                   </div>
-                </CardContent>
-              </Card>
+                  <div className="space-y-3">
+                    <div className="flex items-start gap-2">
+                      <FileText className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-1" />
+                      <div>
+                        <p className="font-bold text-white text-sm">Excel & Sheets</p>
+                        <p className="text-gray-400 text-xs">CSV, Excel, Google Sheets</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <AlertCircle className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-1" />
+                      <div>
+                        <p className="font-bold text-white text-sm">Bills & Receipts</p>
+                        <p className="text-gray-400 text-xs">Amount, date, vendor extracted</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <Download className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-1" />
+                      <div>
+                        <p className="font-bold text-white text-sm">Any File Type</p>
+                        <p className="text-gray-400 text-xs">Videos, audio, images, files</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </motion.div>
           </TabsContent>
 
@@ -274,19 +248,16 @@ export default function ExtensionManager() {
               animate={{ opacity: 1, y: 0 }}
               className="space-y-6"
             >
-              <Card className="bg-black border-2 border-green-500">
-                <CardHeader>
-                  <CardTitle className="text-white flex items-center gap-3 font-mono font-black">
-                    <Code className="w-6 h-6 text-green-400" />
-                    OPEN SOURCE CODE
-                  </CardTitle>
-                  <CardDescription>View & customize the extension</CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-6">
-                  <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4">
-                    <p className="text-green-300 text-sm mb-4">
-                      All extension code is open source. You can view, fork, and customize it.
-                    </p>
+              <div className="bg-black border-4 border-green-500 p-6">
+                <div className="flex items-center gap-2 mb-4">
+                  <Code className="w-6 h-6 text-green-400" />
+                  <h2 className="text-2xl font-mono font-black text-white">OPEN SOURCE CODE</h2>
+                </div>
+                <p className="text-gray-400 text-sm mb-4">View & customize the extension</p>
+                <div>
+                <div className="space-y-4">
+                   <div className="bg-green-500 text-black p-3 font-mono text-xs font-black">
+                     <p>All code is open source. View, fork, and customize it.</p>
                     <Button
                       onClick={() => setShowCode(!showCode)}
                       className="bg-green-600 hover:bg-green-700 gap-2"
@@ -360,11 +331,7 @@ Privacy:
               animate={{ opacity: 1, y: 0 }}
               className="space-y-6"
             >
-              <Card className="bg-black border-2 border-amber-500">
-                <CardHeader>
-                  <CardTitle className="text-white font-mono font-black">DOCUMENTATION</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-6">
+              <div className="bg-black border-4 border-amber-500 p-6 space-y-4">
                   <div className="space-y-6">
                     <div>
                       <h4 className="text-cyan-400 font-bold mb-3 font-mono">DATA DELETION & PRIVACY</h4>
@@ -427,7 +394,7 @@ Privacy:
           transition={{ delay: 0.3 }}
           className="mt-12 text-center space-y-4 border-t border-gray-700 pt-8"
         >
-          <p className="text-gray-400 font-mono">Built with love for artists, managers, and creators</p>
+          <p className="text-gray-400 font-mono">Built with love for artists managers and creators</p>
           <div className="flex justify-center gap-4 text-sm">
             <a href="https://cb51.com" className="text-cyan-400 hover:text-cyan-300">Learn More</a>
             <span className="text-gray-600">•</span>
