@@ -53,10 +53,12 @@ Deno.serve(async (req) => {
     }
 
     // Validate PIN against user's stored PIN
-    // In real scenario, this would check against user entity
-    const validPin = '1234'; // Example—would come from user settings
+    const user = await base44.auth.me();
+    if (!user?.extension_pin) {
+      return Response.json({ error: 'Extension not set up. Contact manager.' }, { status: 400 });
+    }
     
-    if (pin !== validPin) {
+    if (pin !== user.extension_pin) {
       attempts++;
       
       // Lock after 3 failed attempts
@@ -79,17 +81,28 @@ Deno.serve(async (req) => {
     // PIN correct - generate session token
     const sessionToken = btoa(deviceId + ':' + Date.now() + ':' + Math.random());
     
-    // Get user for artist ID
-    const user = await base44.auth.me();
-    
-    // Store session (in production: use database with TTL)
-    const sessionData = {
-      token: sessionToken,
-      deviceId: deviceId,
-      artistId: user.artist_id || user.id,
-      createdAt: new Date().toISOString(),
-      expiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString() // 30 days
-    };
+    // Create extension session record
+    const existingSession = (await base44.entities.ExtensionSession.filter({ 
+      device_id: deviceId, 
+      artist_id: user.id 
+    }))[0];
+
+    if (existingSession) {
+      // Update last active
+      await base44.entities.ExtensionSession.update(existingSession.id, {
+        last_active: new Date().toISOString()
+      });
+    } else {
+      // Create new session
+      await base44.entities.ExtensionSession.create({
+        device_id: deviceId,
+        artist_id: user.id,
+        device_name: 'New Device',
+        last_active: new Date().toISOString(),
+        created_at: new Date().toISOString(),
+        is_active: true
+      });
+    }
 
     // Clear brute force attempts
     attempts = 0;
@@ -97,7 +110,7 @@ Deno.serve(async (req) => {
     return Response.json({ 
       success: true,
       token: sessionToken,
-      artistId: user.artist_id || user.id,
+      artistId: user.id,
       message: 'Extension authenticated'
     });
 
