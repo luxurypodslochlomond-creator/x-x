@@ -56,54 +56,92 @@ export default function ScottGigOffers() {
         if (!emailText.trim()) return;
         
         setParsing(true);
-        try {
-            // AI parses the email
-            const response = await base44.integrations.Core.InvokeLLM({
-                prompt: `Extract gig offer details from this email. Return JSON with: venue, city, county, country (default UK), date (YYYY-MM-DD), time, fee (number), capacity (number), promoter, promoter_contact, requirements, notes. If not found, use null.
+        
+        // Retry logic: 3 attempts with exponential backoff
+        let attempt = 0;
+        const maxAttempts = 3;
+        
+        while (attempt < maxAttempts) {
+            try {
+                attempt++;
+                
+                // AI parses the email - LENIENT SCHEMA
+                const response = await base44.integrations.Core.InvokeLLM({
+                    prompt: `Extract gig offer details from this email. Be accurate but flexible.
 
-Email:
+Return JSON with these fields (use null if not found):
+- venue (string): venue name
+- city (string): city name
+- county (string): county/state
+- country (string): country (default "UK")
+- date (string): date in YYYY-MM-DD format
+- time (string): time
+- fee (number): performance fee as number
+- capacity (number): venue capacity
+- promoter (string): promoter/booking agent name
+- promoter_contact (string): email or phone
+- requirements (string): technical/hospitality requirements
+- notes (string): any other important details
+
+Email text:
 ${emailText}`,
-                response_json_schema: {
-                    type: "object",
-                    properties: {
-                        venue: { type: "string" },
-                        city: { type: "string" },
-                        county: { type: "string" },
-                        country: { type: "string" },
-                        date: { type: "string" },
-                        time: { type: "string" },
-                        fee: { type: "number" },
-                        capacity: { type: "number" },
-                        promoter: { type: "string" },
-                        promoter_contact: { type: "string" },
-                        requirements: { type: "string" },
-                        notes: { type: "string" }
+                    response_json_schema: {
+                        type: "object",
+                        properties: {
+                            venue: { type: ["string", "null"] },
+                            city: { type: ["string", "null"] },
+                            county: { type: ["string", "null"] },
+                            country: { type: ["string", "null"] },
+                            date: { type: ["string", "null"] },
+                            time: { type: ["string", "null"] },
+                            fee: { type: ["number", "null"] },
+                            capacity: { type: ["number", "null"] },
+                            promoter: { type: ["string", "null"] },
+                            promoter_contact: { type: ["string", "null"] },
+                            requirements: { type: ["string", "null"] },
+                            notes: { type: ["string", "null"] }
+                        }
                     }
-                }
-            });
+                });
 
-            setParsedData({
-                ...response,
-                artist_id: artistId || '',
-                raw_email: emailText,
-                status: 'pending_manager_review',
-                currency: 'GBP'
-            });
-        } catch (error) {
-            // Queue for offline retry
-            const pendingParse = {
-                timestamp: new Date().toISOString(),
-                emailText: emailText,
-                artistId: artistId || ''
-            };
-            const pending = JSON.parse(localStorage.getItem('pending_gig_parses') || '[]');
-            pending.push(pendingParse);
-            localStorage.setItem('pending_gig_parses', JSON.stringify(pending));
-            
-            // Show user-friendly message
-            alert('⚠️ Server error - saved offline\n\nYour email will be parsed when you\'re back online.\nRefresh the page to sync.');
+                // Success! Set parsed data
+                setParsedData({
+                    ...response,
+                    artist_id: artistId || '',
+                    raw_email: emailText,
+                    status: 'pending_manager_review',
+                    currency: 'GBP',
+                    country: response.country || 'UK'
+                });
+                
+                setParsing(false);
+                return; // Exit - success!
+                
+            } catch (error) {
+                console.error(`Parse attempt ${attempt} failed:`, error);
+                
+                // If last attempt, handle error
+                if (attempt >= maxAttempts) {
+                    // Queue for offline retry
+                    const pendingParse = {
+                        timestamp: new Date().toISOString(),
+                        emailText: emailText,
+                        artistId: artistId || ''
+                    };
+                    const pending = JSON.parse(localStorage.getItem('pending_gig_parses') || '[]');
+                    pending.push(pendingParse);
+                    localStorage.setItem('pending_gig_parses', JSON.stringify(pending));
+                    
+                    // Show clear message
+                    alert('✓ SAVED OFFLINE\n\nAI parsing failed after 3 attempts.\nYour email is saved securely.\n\nRefresh when back online to retry.');
+                    setParsing(false);
+                    return;
+                }
+                
+                // Wait before retry (exponential backoff: 1s, 2s, 4s)
+                await new Promise(resolve => setTimeout(resolve, 1000 * Math.pow(2, attempt - 1)));
+            }
         }
-        setParsing(false);
     };
 
     const handleSave = () => {
