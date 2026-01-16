@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Download, Code, QrCode, Shield, Mail, FileText, Music, Heart, Copy, CheckCircle, AlertCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import QRCode from 'qrcode.react';
+
 
 export default function ExtensionManager() {
   const [user, setUser] = useState(null);
@@ -147,17 +147,7 @@ export default function ExtensionManager() {
                   <CardDescription>Scan QR code or share link</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {/* QR Code */}
-                    <div className="flex flex-col items-center gap-4">
-                      <div className="bg-white p-4 rounded-lg">
-                        <QRCode value={extensionUrl} size={256} level="H" includeMargin={true} />
-                      </div>
-                      <p className="text-gray-400 text-sm">Scan to download</p>
-                    </div>
-
-                    {/* Share Link */}
-                    <div className="space-y-4 flex flex-col justify-center">
+                  <div className="space-y-4">
                       <p className="text-gray-400 text-sm">Or copy this link:</p>
                       <div className="flex gap-2">
                         <input
