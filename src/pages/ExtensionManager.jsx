@@ -104,6 +104,21 @@ export default function ExtensionManager() {
               animate={{ opacity: 1, y: 0 }}
               className="space-y-6"
             >
+              {/* Mobile Warning */}
+              {isMobile && (
+                <Card className="bg-black border-2 border-amber-500">
+                  <CardContent className="pt-6">
+                    <div className="flex items-start gap-3">
+                      <Smartphone className="w-6 h-6 text-amber-400 flex-shrink-0 mt-1" />
+                      <div>
+                        <p className="text-amber-400 font-bold mb-2">🖥️ Desktop Only</p>
+                        <p className="text-gray-300 text-sm">Chrome extensions only work on desktop/laptop. You can still use CB51 web app on iPhone—it works great on mobile! Share this link with your team on desktop to get the extension.</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              )}
+
               {/* Quick Download Card */}
               <Card className="bg-black border-2 border-cyan-500">
                 <CardHeader>
