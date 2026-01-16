@@ -299,16 +299,12 @@ export default function ExtensionManager() {
 
 
               </div>
-            </motion.div>
-          </TabsContent>
+              </div>
+              </TabsContent>
 
-          {/* DOCS TAB */}
-          <TabsContent value="docs" className="mt-6 overflow-visible">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="space-y-6 overflow-visible"
-            >
+              {/* DOCS TAB */}
+              <TabsContent value="docs" className="mt-0 md:mt-6 flex-1">
+              <div className="space-y-6">
               <div className="bg-black border-4 border-amber-500 p-6 space-y-4">
                 <h2 className="text-2xl font-mono font-black text-white">DOCUMENTATION</h2>
 
