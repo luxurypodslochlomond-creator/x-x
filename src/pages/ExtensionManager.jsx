@@ -302,12 +302,7 @@ export default function ExtensionManager() {
                   )}
                 </AnimatePresence>
 
-                <Button
-                  className="w-full bg-cyan-600 hover:bg-cyan-700 text-black font-mono font-black"
-                  onClick={() => window.open('https://dev.azure.com/cb51/email-extension', '_blank')}
-                >
-                  OPEN SOURCE REPO
-                </Button>
+
               </div>
             </motion.div>
           </TabsContent>
