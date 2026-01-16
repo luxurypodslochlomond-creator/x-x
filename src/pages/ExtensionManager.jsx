@@ -32,7 +32,7 @@ export default function ExtensionManager() {
     loadUser();
   }, []);
 
-  const extensionUrl = `${window.location.origin}${createPageUrl('ExtensionManager')}?download=true`;
+  const extensionUrl = `${window.location.origin}${createPageUrl('ExtensionManager')}`;
   
   const handleDownloadFile = async (filename) => {
     try {
