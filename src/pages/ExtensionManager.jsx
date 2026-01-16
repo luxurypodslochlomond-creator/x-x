@@ -28,20 +28,33 @@ export default function ExtensionManager() {
 
   const extensionUrl = `${window.location.origin}${createPageUrl('ExtensionManager')}?download=true`;
   
-  const handleDownload = async () => {
-    setDownloading(true);
+  const handleDownloadFile = async (filename) => {
     try {
-      // Create ZIP with extension files
-      const response = await fetch('/extension-files.zip');
+      const response = await fetch(`/api/functions/serveExtensionFiles?file=${filename}`);
       const blob = await response.blob();
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = 'cb51-email-extension.zip';
+      a.download = filename;
       document.body.appendChild(a);
       a.click();
       window.URL.revokeObjectURL(url);
       a.remove();
+    } catch (error) {
+      alert(`Download failed: ${filename}`);
+      console.error(error);
+    }
+  };
+
+  const handleDownload = async () => {
+    setDownloading(true);
+    try {
+      // Download individual files
+      const files = ['manifest.json', 'background.js', 'content.js', 'popup.html', 'popup.js', 'popup.css'];
+      for (const file of files) {
+        await handleDownloadFile(file);
+        await new Promise(resolve => setTimeout(resolve, 200));
+      }
     } catch (error) {
       alert('Download failed. Check console.');
       console.error(error);
@@ -114,15 +127,13 @@ export default function ExtensionManager() {
                   </Button>
 
                   <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4 space-y-3">
-                    <h4 className="text-cyan-400 font-bold">Installation Steps:</h4>
+                    <h4 className="text-cyan-400 font-bold">Installation (3 Steps):</h4>
                     <ol className="text-gray-300 text-sm space-y-2 list-decimal list-inside">
-                      <li>Download ZIP file above</li>
-                      <li>Extract to a folder</li>
-                      <li>Open Chrome → chrome://extensions/</li>
-                      <li>Enable "Developer mode" (top-right)</li>
-                      <li>Click "Load unpacked" → select folder</li>
-                      <li>Done! Icon appears in top-right</li>
+                      <li>Click download above (gets 6 files)</li>
+                      <li>Open Chrome → chrome://extensions/ → Enable "Developer mode"</li>
+                      <li>Drag files folder into Chrome → Done! Icon appears 🚀</li>
                     </ol>
+                    <p className="text-cyan-300 text-xs mt-3">💡 No unzipping needed. Drag & drop the folder with all 6 files.</p>
                   </div>
 
                   <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4">
