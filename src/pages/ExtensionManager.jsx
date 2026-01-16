@@ -152,7 +152,7 @@ export default function ExtensionManager() {
               </div>
 
               {/* Share Extension Card */}
-              <div className="bg-black border-4 border-pink-500 p-6 space-y-4">
+              <div className="bg-black border-4 border-cyan-500 p-6 space-y-4">
                 <div className="flex items-center gap-2">
                   <Copy className="w-6 h-6 text-pink-400" />
                   <h2 className="text-2xl font-mono font-black text-white">SHARE WITH TEAM</h2>
@@ -304,9 +304,9 @@ export default function ExtensionManager() {
 
                 <Button
                   className="w-full bg-cyan-600 hover:bg-cyan-700 text-black font-mono font-black"
-                  onClick={() => window.open('https://github.com/cb51/email-extension', '_blank')}
+                  onClick={() => window.open('https://dev.azure.com/cb51/email-extension', '_blank')}
                 >
-                  GITHUB REPO (OPEN SOURCE)
+                  OPEN SOURCE REPO
                 </Button>
               </div>
             </motion.div>
