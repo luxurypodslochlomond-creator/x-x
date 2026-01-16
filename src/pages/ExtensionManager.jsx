@@ -91,7 +91,7 @@ export default function ExtensionManager() {
 
         <Tabs defaultValue="download" className="space-y-6" orientation="vertical" className="space-y-6 md:flex md:gap-6 md:flex-row">
           <TabsList className="grid w-full grid-cols-3 bg-black border-4 border-cyan-500 p-1 gap-1 md:flex md:flex-col md:w-auto">
-             <TabsTrigger value="download" className="data-[state=active]:bg-cyan-500 data-[state=active]:text-black data-[state=inactive]:bg-gray-900 data-[state=inactive]:text-cyan-400 font-mono font-black text-xs md:text-base px-1 md:px-3 data-[state=active]:z-10">DL</TabsTrigger>
+             <TabsTrigger value="download" className="data-[state=active]:bg-cyan-500 data-[state=active]:text-black data-[state=inactive]:bg-gray-900 data-[state=inactive]:text-cyan-400 font-mono font-black text-xs md:text-base px-1 md:px-3 data-[state=active]:z-10">DOWNLOAD</TabsTrigger>
              <TabsTrigger value="code" className="data-[state=active]:bg-cyan-500 data-[state=active]:text-black data-[state=inactive]:bg-gray-900 data-[state=inactive]:text-cyan-400 font-mono font-black text-xs md:text-base px-1 md:px-3 data-[state=active]:z-10">CODE</TabsTrigger>
              <TabsTrigger value="docs" className="data-[state=active]:bg-cyan-500 data-[state=active]:text-black data-[state=inactive]:bg-gray-900 data-[state=inactive]:text-cyan-400 font-mono font-black text-xs md:text-base px-1 md:px-3 data-[state=active]:z-10">DOCS</TabsTrigger>
            </TabsList>
