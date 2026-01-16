@@ -90,7 +90,7 @@ export default function ExtensionManager() {
           </p>
         </motion.div>
 
-        <Tabs defaultValue="download" className="space-y-6">
+        <Tabs defaultValue="download" className="space-y-6 overflow-visible">
           <TabsList className="grid w-full grid-cols-3 bg-black border-4 border-cyan-500 p-1 gap-2">
              <TabsTrigger value="download" className="data-[state=active]:bg-cyan-500 data-[state=active]:text-black data-[state=inactive]:bg-gray-900 data-[state=inactive]:text-cyan-400 font-mono font-black">DOWNLOAD</TabsTrigger>
              <TabsTrigger value="code" className="data-[state=active]:bg-cyan-500 data-[state=active]:text-black data-[state=inactive]:bg-gray-900 data-[state=inactive]:text-cyan-400 font-mono font-black">CODE</TabsTrigger>
