@@ -106,7 +106,7 @@ export default function ExtensionManager() {
             >
               {/* Mobile Warning */}
               {isMobile && (
-                <div className="bg-amber-500 text-black p-4 rounded-lg font-mono font-black">
+                <div className="bg-black border-4 border-cyan-500 text-cyan-400 p-4 font-mono font-black">
                   <p className="mb-2">DESKTOP ONLY</p>
                   <p className="text-sm font-normal">Chrome extensions work on desktop. Use CB51 web app on iPhone instead.</p>
                 </div>
@@ -136,19 +136,19 @@ export default function ExtensionManager() {
                   )}
                 </Button>
 
-                <div className="bg-cyan-500 text-black p-3 space-y-2 font-mono text-sm font-black">
-                  <p>INSTALLATION (3 STEPS)</p>
-                  <ol className="text-xs font-normal space-y-1 list-decimal list-inside">
-                    <li>Click download above (6 files)</li>
-                    <li>chrome://extensions/ → Enable Developer mode</li>
-                    <li>Drag folder into Chrome → Done</li>
-                  </ol>
-                </div>
+                <div className="bg-black border-2 border-cyan-400 text-cyan-400 p-3 space-y-2 font-mono text-sm font-black">
+                   <p>INSTALLATION (3 STEPS)</p>
+                   <ol className="text-xs font-normal space-y-1 list-decimal list-inside">
+                     <li>Click download above (6 files)</li>
+                     <li>chrome://extensions/ → Enable Developer mode</li>
+                     <li>Drag folder into Chrome → Done</li>
+                   </ol>
+                 </div>
 
-                <div className="bg-green-500 text-black p-3 font-mono font-black">
-                  <p className="mb-1">PRIVACY FIRST</p>
-                  <p className="text-xs font-normal">Runs locally. Zero tracking. You control everything.</p>
-                </div>
+                 <div className="bg-black border-2 border-cyan-400 text-cyan-400 p-3 font-mono font-black">
+                   <p className="mb-1">PRIVACY FIRST</p>
+                   <p className="text-xs font-normal">Runs locally. Zero tracking. You control everything.</p>
+                 </div>
               </div>
 
               {/* Share Extension Card */}
@@ -167,27 +167,27 @@ export default function ExtensionManager() {
                   />
                   <Button
                     onClick={handleCopyUrl}
-                    className={`font-black font-mono ${copied ? 'bg-green-500 text-black' : 'bg-gray-700 hover:bg-gray-600 text-white'}`}
+                    className={`font-black font-mono ${copied ? 'bg-cyan-600 text-black' : 'bg-cyan-600 hover:bg-cyan-700 text-black'}`}
                   >
                     {copied ? 'COPIED' : 'COPY'}
                   </Button>
                 </div>
 
-                <div className="bg-pink-500 text-black p-3 font-mono text-sm font-black">
-                  <p className="mb-2">PERFECT FOR</p>
-                  <ul className="text-xs font-normal space-y-1">
-                    <li>Team distribution</li>
-                    <li>Artist onboarding</li>
-                    <li>Band management</li>
-                    <li>White-label deployment</li>
-                  </ul>
-                </div>
+                <div className="bg-black border-2 border-cyan-400 text-cyan-400 p-3 font-mono text-sm font-black">
+                   <p className="mb-2">PERFECT FOR</p>
+                   <ul className="text-xs font-normal space-y-1">
+                     <li>Team distribution</li>
+                     <li>Artist onboarding</li>
+                     <li>Band management</li>
+                     <li>White-label deployment</li>
+                   </ul>
+                 </div>
               </div>
 
               {/* What It Extracts */}
-              <div className="bg-black border-4 border-purple-500 p-6 space-y-4">
-                <h2 className="text-2xl font-mono font-black text-white">WHAT GETS EXTRACTED</h2>
-                <p className="text-gray-400 text-sm">Reads emails + all attachments</p>
+              <div className="bg-black border-4 border-cyan-500 p-6 space-y-4">
+                 <h2 className="text-2xl font-mono font-black text-white">WHAT GETS EXTRACTED</h2>
+                 <p className="text-gray-400 text-sm">Reads emails + all attachments • Your data stays protected</p>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-3">
@@ -255,11 +255,12 @@ export default function ExtensionManager() {
                 </div>
                 <p className="text-gray-400 text-sm mb-4">View & customize the extension</p>
 
-                <div className="bg-green-500 text-black p-3 font-mono text-xs font-black mb-4">
-                  <p className="mb-2">All code is open source. View, fork, and customize it.</p>
+                <div className="bg-black border-2 border-cyan-400 text-cyan-400 p-3 font-mono text-xs font-black mb-4">
+                  <p className="mb-2">OPEN SOURCE - Community Protected</p>
+                  <p className="text-xs font-normal text-cyan-300 mb-3">All code visible. Artists own their data. No closed-source tricks.</p>
                   <Button
                     onClick={() => setShowCode(!showCode)}
-                    className="bg-green-700 hover:bg-green-800 text-white font-mono font-black"
+                    className="bg-cyan-600 hover:bg-cyan-700 text-black font-mono font-black w-full"
                   >
                     {showCode ? 'HIDE CODE' : 'VIEW CODE'}
                   </Button>
@@ -302,10 +303,10 @@ export default function ExtensionManager() {
                 </AnimatePresence>
 
                 <Button
-                  className="w-full bg-green-500 hover:bg-green-600 text-black font-mono font-black"
+                  className="w-full bg-cyan-600 hover:bg-cyan-700 text-black font-mono font-black"
                   onClick={() => window.open('https://github.com/cb51/email-extension', '_blank')}
                 >
-                  GITHUB REPO
+                  GITHUB REPO (OPEN SOURCE)
                 </Button>
               </div>
             </motion.div>
