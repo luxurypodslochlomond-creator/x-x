@@ -237,16 +237,12 @@ export default function ExtensionManager() {
                   </div>
                 </div>
               </div>
-            </motion.div>
-          </TabsContent>
+              </div>
+              </TabsContent>
 
-          {/* CODE TAB */}
-          <TabsContent value="code" className="mt-6 overflow-visible">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="space-y-6 overflow-visible"
-            >
+              {/* CODE TAB */}
+              <TabsContent value="code" className="mt-0 md:mt-6 flex-1">
+              <div className="space-y-6">
               <div className="bg-black border-4 border-green-500 p-6 space-y-4">
                 <div className="flex items-center gap-2 mb-4">
                   <Code className="w-6 h-6 text-green-400" />
