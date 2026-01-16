@@ -232,11 +232,13 @@ function extractOutlookEmail(item) {
     </div>
 
     <div id="authSection" style="display: none;" class="section">
-      <h2>Connect to CB51</h2>
-      <input type="password" id="authToken" placeholder="Enter your CB51 token" />
-      <input type="text" id="artistId" placeholder="Artist ID" />
-      <button id="saveAuth" class="btn">Save & Activate</button>
-      <p class="hint">Get your token from CB51 dashboard</p>
+      <h2>Enter Your PIN</h2>
+      <p class="hint">Find it in CB51 Settings</p>
+      <input type="password" id="pinInput" placeholder="0000" maxlength="4" inputmode="numeric" />
+      <p id="attemptsLeft" class="error-text" style="display: none;"></p>
+      <p id="errorMsg" class="error-text"></p>
+      <button id="savePinBtn" class="btn">Authenticate</button>
+      <p class="hint-small">4-digit PIN from your dashboard</p>
     </div>
 
     <div id="statusSection" style="display: none;" class="section">
@@ -514,6 +516,20 @@ input:focus {
   font-size: 11px;
   color: #666;
   text-align: center;
+}
+
+.hint-small {
+  font-size: 10px;
+  color: #666;
+  text-align: center;
+  margin-top: 8px;
+}
+
+.error-text {
+  color: #ef4444;
+  font-size: 12px;
+  text-align: center;
+  margin-bottom: 8px;
 }
 
 .footer {
