@@ -147,33 +147,30 @@ export default function ExtensionManager() {
                   <CardDescription>Share download link</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-6">
-                  <div className="space-y-4">
-                      <p className="text-gray-400 text-sm">Or copy this link:</p>
-                      <div className="flex gap-2">
-                        <input
-                          type="text"
-                          value={extensionUrl}
-                          readOnly
-                          className="flex-1 bg-gray-900 border border-gray-700 rounded px-3 py-2 text-gray-300 text-sm font-mono"
-                        />
-                        <Button
-                          onClick={handleCopyUrl}
-                          className={copied ? 'bg-green-600' : 'bg-gray-700 hover:bg-gray-600'}
-                        >
-                          {copied ? <CheckCircle className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
-                        </Button>
-                      </div>
+                  <p className="text-gray-400 text-sm">Copy this link to share:</p>
+                  <div className="flex gap-2">
+                    <input
+                      type="text"
+                      value={extensionUrl}
+                      readOnly
+                      className="flex-1 bg-gray-900 border border-gray-700 rounded px-3 py-2 text-gray-300 text-sm font-mono"
+                    />
+                    <Button
+                      onClick={handleCopyUrl}
+                      className={copied ? 'bg-green-600' : 'bg-gray-700 hover:bg-gray-600'}
+                    >
+                      {copied ? <CheckCircle className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+                    </Button>
+                  </div>
 
-                      <div className="space-y-2 pt-4">
-                        <p className="text-gray-300 text-sm font-bold">Perfect for:</p>
-                        <ul className="text-gray-400 text-xs space-y-1">
-                          <li>✓ Team distribution</li>
-                          <li>✓ Artist onboarding</li>
-                          <li>✓ Band management</li>
-                          <li>✓ White-label deployment</li>
-                        </ul>
-                      </div>
-                    </div>
+                  <div className="space-y-2 pt-4">
+                    <p className="text-gray-300 text-sm font-bold">Perfect for:</p>
+                    <ul className="text-gray-400 text-xs space-y-1">
+                      <li>✓ Team distribution</li>
+                      <li>✓ Artist onboarding</li>
+                      <li>✓ Band management</li>
+                      <li>✓ White-label deployment</li>
+                    </ul>
                   </div>
                 </CardContent>
               </Card>
