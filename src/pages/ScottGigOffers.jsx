@@ -118,7 +118,8 @@ ${emailText}`,
                 return; // Exit - success!
                 
             } catch (error) {
-                console.error(`Parse attempt ${attempt} failed:`, error);
+                const errorMsg = error?.message || String(error);
+                console.error(`Parse attempt ${attempt}/${maxAttempts} failed:`, errorMsg, error);
                 
                 // If last attempt, handle error
                 if (attempt >= maxAttempts) {
@@ -126,17 +127,21 @@ ${emailText}`,
                     const pendingParse = {
                         timestamp: new Date().toISOString(),
                         emailText: emailText,
-                        artistId: artistId || ''
+                        artistId: artistId || '',
+                        error: errorMsg
                     };
                     const pending = JSON.parse(localStorage.getItem('pending_gig_parses') || '[]');
                     pending.push(pendingParse);
                     localStorage.setItem('pending_gig_parses', JSON.stringify(pending));
                     
-                    // Show clear message
-                    alert('✓ SAVED OFFLINE\n\nAI parsing failed after 3 attempts.\nYour email is saved securely.\n\nRefresh when back online to retry.');
+                    // Show detailed error for debugging
+                    alert(`✓ SAVED OFFLINE (will retry when online)\n\nError: ${errorMsg}\n\nAttempted: ${maxAttempts} times\nYour email is saved securely.`);
                     setParsing(false);
                     return;
                 }
+                
+                // Show retry indicator
+                console.log(`Retrying in ${Math.pow(2, attempt - 1)}s...`);
                 
                 // Wait before retry (exponential backoff: 1s, 2s, 4s)
                 await new Promise(resolve => setTimeout(resolve, 1000 * Math.pow(2, attempt - 1)));
