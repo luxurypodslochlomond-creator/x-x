@@ -101,12 +101,8 @@ export default function ExtensionManager() {
            </TabsList>
 
           {/* DOWNLOAD TAB */}
-          <TabsContent value="download" className="mt-6 overflow-visible">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="space-y-6 overflow-visible"
-            >
+          <TabsContent value="download" className="mt-0 md:mt-6 flex-1">
+            <div className="space-y-6">
               {/* Mobile Warning */}
               {isMobile && (
                 <div className="bg-black border-4 border-cyan-500 text-cyan-400 p-4 font-mono font-black">
