@@ -141,10 +141,10 @@ export default function ExtensionManager() {
               <Card className="bg-black border-2 border-pink-500">
                 <CardHeader>
                   <CardTitle className="text-white flex items-center gap-3">
-                    <QrCode className="w-6 h-6 text-pink-400" />
+                    <Copy className="w-6 h-6 text-pink-400" />
                     Share with Team
                   </CardTitle>
-                  <CardDescription>Scan QR code or share link</CardDescription>
+                  <CardDescription>Share download link</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-6">
                   <div className="space-y-4">
