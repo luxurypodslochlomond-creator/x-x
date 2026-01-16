@@ -84,7 +84,7 @@ export default function ExtensionManager() {
           animate={{ opacity: 1, y: 0 }}
           className="mb-8"
         >
-          <h1 className="text-5xl font-black text-white mb-3">CB51 Extension Manager</h1>
+          <h1 className="text-5xl font-black font-mono text-white mb-3">CB51 EXTENSION MANAGER</h1>
           <p className="text-gray-400 text-lg">
             Smart email scanner for artists, managers, and creators • Extracts gigs, contracts, invoices, and more
           </p>
@@ -122,9 +122,9 @@ export default function ExtensionManager() {
               {/* Quick Download Card */}
               <Card className="bg-black border-2 border-cyan-500">
                 <CardHeader>
-                  <CardTitle className="text-white flex items-center gap-3">
+                  <CardTitle className="text-white flex items-center gap-3 font-mono font-black">
                     <Download className="w-6 h-6 text-cyan-400" />
-                    Get the Extension
+                    GET THE EXTENSION
                   </CardTitle>
                   <CardDescription>Works with Gmail, Outlook, Hotmail + more</CardDescription>
                 </CardHeader>
@@ -172,9 +172,9 @@ export default function ExtensionManager() {
               {/* Share Extension Card */}
               <Card className="bg-black border-2 border-pink-500">
                 <CardHeader>
-                  <CardTitle className="text-white flex items-center gap-3">
+                  <CardTitle className="text-white flex items-center gap-3 font-mono font-black">
                     <Copy className="w-6 h-6 text-pink-400" />
-                    Share with Team
+                    SHARE WITH TEAM
                   </CardTitle>
                   <CardDescription>Share download link</CardDescription>
                 </CardHeader>
@@ -210,7 +210,7 @@ export default function ExtensionManager() {
               {/* What It Extracts */}
               <Card className="bg-black border-2 border-purple-500">
                 <CardHeader>
-                  <CardTitle className="text-white">What Gets Extracted</CardTitle>
+                  <CardTitle className="text-white font-mono font-black">WHAT GETS EXTRACTED</CardTitle>
                   <CardDescription>Reads emails + all attachments</CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -276,9 +276,9 @@ export default function ExtensionManager() {
             >
               <Card className="bg-black border-2 border-green-500">
                 <CardHeader>
-                  <CardTitle className="text-white flex items-center gap-3">
+                  <CardTitle className="text-white flex items-center gap-3 font-mono font-black">
                     <Code className="w-6 h-6 text-green-400" />
-                    Open Source Code
+                    OPEN SOURCE CODE
                   </CardTitle>
                   <CardDescription>View & customize the extension</CardDescription>
                 </CardHeader>
@@ -362,7 +362,7 @@ Privacy:
             >
               <Card className="bg-black border-2 border-amber-500">
                 <CardHeader>
-                  <CardTitle className="text-white">Documentation</CardTitle>
+                  <CardTitle className="text-white font-mono font-black">DOCUMENTATION</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-6">
                   <div className="space-y-6">
