@@ -86,10 +86,10 @@ Return JSON:
                 response_json_schema: {
                     type: "object",
                     properties: {
-                        recommendation: { type: "string" },
-                        confidence: { type: "number" },
-                        reasons: { type: "array", items: { type: "string" } },
-                        vibe: { type: "string" }
+                        recommendation: { type: ["string", "null"] },
+                        confidence: { type: ["number", "null"] },
+                        reasons: { type: ["array", "null"], items: { type: "string" } },
+                        vibe: { type: ["string", "null"] }
                     }
                 }
             });
