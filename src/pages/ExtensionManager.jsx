@@ -92,9 +92,9 @@ export default function ExtensionManager() {
 
         <Tabs defaultValue="download" className="space-y-6">
           <TabsList className="grid w-full grid-cols-3 bg-black border-2 border-cyan-500">
-            <TabsTrigger value="download" className="data-[state=active]:bg-cyan-600">📥 Download</TabsTrigger>
-            <TabsTrigger value="code" className="data-[state=active]:bg-cyan-600">💻 Code</TabsTrigger>
-            <TabsTrigger value="docs" className="data-[state=active]:bg-cyan-600">📖 Docs</TabsTrigger>
+            <TabsTrigger value="download" className="data-[state=active]:bg-cyan-600 font-mono font-black">DOWNLOAD</TabsTrigger>
+            <TabsTrigger value="code" className="data-[state=active]:bg-cyan-600 font-mono font-black">CODE</TabsTrigger>
+            <TabsTrigger value="docs" className="data-[state=active]:bg-cyan-600 font-mono font-black">DOCS</TabsTrigger>
           </TabsList>
 
           {/* DOWNLOAD TAB */}
@@ -111,7 +111,7 @@ export default function ExtensionManager() {
                     <div className="flex items-start gap-3">
                       <Smartphone className="w-6 h-6 text-amber-400 flex-shrink-0 mt-1" />
                       <div>
-                        <p className="text-amber-400 font-bold mb-2">🖥️ Desktop Only</p>
+                        <p className="text-amber-400 font-bold mb-2">Desktop Only</p>
                         <p className="text-gray-300 text-sm">Chrome extensions only work on desktop/laptop. You can still use CB51 web app on iPhone—it works great on mobile! Share this link with your team on desktop to get the extension.</p>
                       </div>
                     </div>
@@ -136,25 +136,25 @@ export default function ExtensionManager() {
                   >
                     {downloading ? (
                       <>
-                        <span className="animate-spin">⚙️</span>
-                        Preparing ZIP...
+                        <span className="animate-spin">⚙</span>
+                        PREPARING ZIP...
                       </>
                     ) : (
                       <>
                         <Download className="w-6 h-6" />
-                        Download ZIP (Ready to Install)
+                        DOWNLOAD ZIP (READY TO INSTALL)
                       </>
                     )}
                   </Button>
 
                   <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4 space-y-3">
-                    <h4 className="text-cyan-400 font-bold">Installation (3 Steps):</h4>
-                    <ol className="text-gray-300 text-sm space-y-2 list-decimal list-inside">
-                      <li>Click download above (gets 6 files)</li>
-                      <li>Open Chrome → chrome://extensions/ → Enable "Developer mode"</li>
-                      <li>Drag files folder into Chrome → Done! Icon appears 🚀</li>
-                    </ol>
-                    <p className="text-cyan-300 text-xs mt-3">💡 No unzipping needed. Drag & drop the folder with all 6 files.</p>
+                    <h4 className="text-cyan-400 font-bold font-mono">INSTALLATION (3 STEPS)</h4>
+                     <ol className="text-gray-300 text-sm space-y-2 list-decimal list-inside">
+                       <li>Click download above (gets 6 files)</li>
+                       <li>Open Chrome → chrome://extensions/ → Enable Developer mode</li>
+                       <li>Drag files folder into Chrome → Done</li>
+                     </ol>
+                     <p className="text-cyan-300 text-xs mt-3">No unzipping needed. Drag & drop the folder with all 6 files.</p>
                   </div>
 
                   <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4">
@@ -196,14 +196,14 @@ export default function ExtensionManager() {
                   </div>
 
                   <div className="space-y-2 pt-4">
-                    <p className="text-gray-300 text-sm font-bold">Perfect for:</p>
-                    <ul className="text-gray-400 text-xs space-y-1">
-                      <li>✓ Team distribution</li>
-                      <li>✓ Artist onboarding</li>
-                      <li>✓ Band management</li>
-                      <li>✓ White-label deployment</li>
-                    </ul>
-                  </div>
+                     <p className="text-gray-300 text-sm font-bold font-mono">PERFECT FOR</p>
+                     <ul className="text-gray-400 text-xs space-y-1">
+                       <li>Team distribution</li>
+                       <li>Artist onboarding</li>
+                       <li>Band management</li>
+                       <li>White-label deployment</li>
+                     </ul>
+                   </div>
                 </CardContent>
               </Card>
 
@@ -330,7 +330,7 @@ Privacy:
                         </div>
 
                         <div className="space-y-3">
-                          <h4 className="text-white font-bold">Customize:</h4>
+                               <h4 className="text-white font-bold font-mono">CUSTOMIZE</h4>
                           <ul className="text-gray-400 text-sm space-y-1 list-disc list-inside">
                             <li>Change extraction rules in <code className="bg-gray-900 px-2 py-1 rounded text-cyan-400">scanner.js</code></li>
                             <li>Modify popup UI in <code className="bg-gray-900 px-2 py-1 rounded text-cyan-400">popup.html</code></li>
@@ -367,37 +367,37 @@ Privacy:
                 <CardContent className="space-y-6">
                   <div className="space-y-6">
                     <div>
-                      <h4 className="text-amber-400 font-bold mb-3">Data Deletion & Privacy</h4>
-                      <div className="bg-amber-500/10 border border-amber-500/30 rounded-lg p-4 text-gray-300 text-sm space-y-2">
-                        <p>✓ <strong>Delete on Request:</strong> Users can request all extracted data removed from CB51</p>
-                        <p>✓ <strong>Local First:</strong> All data encrypted locally before any upload</p>
-                        <p>✓ <strong>GDPR Compliant:</strong> Full deletion logs, audit trails</p>
-                        <p>✓ <strong>User Control:</strong> Preview every extraction before syncing</p>
-                      </div>
-                    </div>
-
-                    <div>
-                      <h4 className="text-cyan-400 font-bold mb-3">Installation & Support</h4>
+                      <h4 className="text-cyan-400 font-bold mb-3 font-mono">DATA DELETION & PRIVACY</h4>
                       <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4 text-gray-300 text-sm space-y-2">
-                        <p>📖 <strong>Troubleshooting:</strong> <code className="bg-gray-900 px-2 py-1 rounded">chrome://extensions/ → Debug background page</code></p>
-                        <p>🔧 <strong>Development:</strong> Fork the GitHub repo and customize</p>
-                        <p>💬 <strong>Support:</strong> Email support@cb51.com or use in-app help</p>
+                        <p><strong>Delete on Request:</strong> Users can request all extracted data removed from CB51</p>
+                        <p><strong>Local First:</strong> All data encrypted locally before any upload</p>
+                        <p><strong>GDPR Compliant:</strong> Full deletion logs, audit trails</p>
+                        <p><strong>User Control:</strong> Preview every extraction before syncing</p>
                       </div>
                     </div>
 
                     <div>
-                      <h4 className="text-green-400 font-bold mb-3">White-Label Setup</h4>
-                      <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4 text-gray-300 text-sm space-y-2">
-                        <p>✓ Custom branding (logo, colors, icons)</p>
-                        <p>✓ Branded installation guide</p>
-                        <p>✓ Your own support email</p>
-                        <p>✓ Custom extraction rules</p>
+                      <h4 className="text-cyan-400 font-bold mb-3 font-mono">INSTALLATION & SUPPORT</h4>
+                      <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4 text-gray-300 text-sm space-y-2">
+                        <p><strong>Troubleshooting:</strong> <code className="bg-gray-900 px-2 py-1 rounded">chrome://extensions/ → Debug background page</code></p>
+                        <p><strong>Development:</strong> Fork the GitHub repo and customize</p>
+                        <p><strong>Support:</strong> Email support@cb51.com or use in-app help</p>
+                      </div>
+                    </div>
+
+                    <div>
+                      <h4 className="text-cyan-400 font-bold mb-3 font-mono">WHITE-LABEL SETUP</h4>
+                      <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4 text-gray-300 text-sm space-y-2">
+                        <p>Custom branding (logo, colors, icons)</p>
+                        <p>Branded installation guide</p>
+                        <p>Your own support email</p>
+                        <p>Custom extraction rules</p>
                         <p>Contact: partnerships@cb51.com</p>
                       </div>
                     </div>
 
                     <div>
-                      <h4 className="text-pink-400 font-bold mb-3">FAQ</h4>
+                      <h4 className="text-cyan-400 font-bold mb-3 font-mono">FAQ</h4>
                       <div className="space-y-3 text-gray-300 text-sm">
                         <div>
                           <p className="font-bold text-pink-300">Is my Gmail data safe?</p>
@@ -427,7 +427,7 @@ Privacy:
           transition={{ delay: 0.3 }}
           className="mt-12 text-center space-y-4 border-t border-gray-700 pt-8"
         >
-          <p className="text-gray-400">Built with ♾️❤️ for artists, managers, and creators</p>
+          <p className="text-gray-400 font-mono">Built with love for artists, managers, and creators</p>
           <div className="flex justify-center gap-4 text-sm">
             <a href="https://cb51.com" className="text-cyan-400 hover:text-cyan-300">Learn More</a>
             <span className="text-gray-600">•</span>
