@@ -217,7 +217,7 @@ export default function ExtensionManager() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-3">
                       <div className="flex items-start gap-3">
-                        <Music className="w-5 h-5 text-pink-400 flex-shrink-0 mt-1" />
+                        <Zap className="w-5 h-5 text-cyan-400 flex-shrink-0 mt-1" />
                         <div>
                           <p className="font-bold text-white">Gig Offers</p>
                           <p className="text-gray-400 text-sm">Venue, date, fee, promoter contact</p>
@@ -231,7 +231,7 @@ export default function ExtensionManager() {
                         </div>
                       </div>
                       <div className="flex items-start gap-3">
-                        <Mail className="w-5 h-5 text-green-400 flex-shrink-0 mt-1" />
+                        <Mail className="w-5 h-5 text-cyan-400 flex-shrink-0 mt-1" />
                         <div>
                           <p className="font-bold text-white">Contact Info</p>
                           <p className="text-gray-400 text-sm">Names, emails, phone numbers</p>
@@ -240,21 +240,21 @@ export default function ExtensionManager() {
                     </div>
                     <div className="space-y-3">
                       <div className="flex items-start gap-3">
-                        <Heart className="w-5 h-5 text-red-400 flex-shrink-0 mt-1" />
+                        <FileText className="w-5 h-5 text-cyan-400 flex-shrink-0 mt-1" />
                         <div>
                           <p className="font-bold text-white">Excel & Sheets</p>
                           <p className="text-gray-400 text-sm">CSV, Excel, Google Sheets data</p>
                         </div>
                       </div>
                       <div className="flex items-start gap-3">
-                        <AlertCircle className="w-5 h-5 text-amber-400 flex-shrink-0 mt-1" />
+                        <AlertCircle className="w-5 h-5 text-cyan-400 flex-shrink-0 mt-1" />
                         <div>
                           <p className="font-bold text-white">Bills & Receipts</p>
                           <p className="text-gray-400 text-sm">Amount, date, vendor extracted</p>
                         </div>
                       </div>
                       <div className="flex items-start gap-3">
-                        <FileText className="w-5 h-5 text-blue-400 flex-shrink-0 mt-1" />
+                        <Download className="w-5 h-5 text-cyan-400 flex-shrink-0 mt-1" />
                         <div>
                           <p className="font-bold text-white">Any File Type</p>
                           <p className="text-gray-400 text-sm">Videos, audio, images, creative files</p>
