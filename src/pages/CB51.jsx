@@ -365,6 +365,17 @@ export default function CB51() {
                         <p className="text-cyan-400 font-black font-mono text-sm relative z-10">TEAMS</p>
                     </motion.div>
                 </Link>
+                <Link to={createPageUrl('ExtensionManager')}>
+                    <motion.div
+                        whileHover={{ scale: 0.97 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="relative bg-gradient-to-br from-pink-500/20 to-pink-600/10 border-2 border-pink-500/30 hover:border-pink-500 rounded-2xl p-5 text-center transition-all overflow-hidden group"
+                    >
+                        <div className="absolute inset-0 bg-gradient-to-t from-pink-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        <Zap className="w-9 h-9 text-pink-400 mx-auto mb-2 relative z-10" />
+                        <p className="text-pink-400 font-black font-mono text-sm relative z-10">EXTENSION</p>
+                    </motion.div>
+                </Link>
             </div>
 
             {/* FOOTER */}
