@@ -43,35 +43,35 @@ Return JSON with clear structure. Be specific about dates/times/money.`;
             response_json_schema: {
                 type: "object",
                 properties: {
-                    type: { type: "string", enum: ["gig", "task", "payment", "visa", "general"] },
-                    artist_name: { type: "string" },
+                    type: { type: ["string", "null"], enum: ["gig", "task", "payment", "visa", "general", null] },
+                    artist_name: { type: ["string", "null"] },
                     gig_details: {
-                        type: "object",
+                        type: ["object", "null"],
                         properties: {
-                            venue: { type: "string" },
-                            date: { type: "string" },
-                            time: { type: "string" },
-                            load_in: { type: "string" },
-                            soundcheck: { type: "string" },
-                            set_time: { type: "string" },
-                            fee: { type: "string" }
+                            venue: { type: ["string", "null"] },
+                            date: { type: ["string", "null"] },
+                            time: { type: ["string", "null"] },
+                            load_in: { type: ["string", "null"] },
+                            soundcheck: { type: ["string", "null"] },
+                            set_time: { type: ["string", "null"] },
+                            fee: { type: ["string", "null"] }
                         }
                     },
                     task_details: {
-                        type: "object",
+                        type: ["object", "null"],
                         properties: {
-                            description: { type: "string" },
-                            deadline: { type: "string" }
+                            description: { type: ["string", "null"] },
+                            deadline: { type: ["string", "null"] }
                         }
                     },
                     payment_details: {
-                        type: "object",
+                        type: ["object", "null"],
                         properties: {
-                            amount: { type: "number" },
-                            description: { type: "string" }
+                            amount: { type: ["number", "null"] },
+                            description: { type: ["string", "null"] }
                         }
                     },
-                    notes: { type: "string" }
+                    notes: { type: ["string", "null"] }
                 }
             }
         });
