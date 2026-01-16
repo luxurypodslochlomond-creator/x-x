@@ -7,6 +7,9 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Download, Code, Shield, Mail, FileText, Zap, Copy, CheckCircle, AlertCircle, Smartphone } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
+// Disable motion animations for Radix tabs - they cause z-index issues
+motion.config({ skipAnimations: true });
+
 
 export default function ExtensionManager() {
   const [user, setUser] = useState(null);
