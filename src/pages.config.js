@@ -107,6 +107,7 @@ import DirectFundingRoutes from './pages/DirectFundingRoutes';
 import DopamineHealing from './pages/DopamineHealing';
 import ESGAlignment from './pages/ESGAlignment';
 import ESGBridge from './pages/ESGBridge';
+import ExtensionManager from './pages/ExtensionManager';
 import FairLaunchProtocol from './pages/FairLaunchProtocol';
 import FamilyBroadcast from './pages/FamilyBroadcast';
 import ForMusicians from './pages/ForMusicians';
@@ -221,8 +222,8 @@ import ScottFinanceAdmin from './pages/ScottFinanceAdmin';
 import ScottFinancialDashboard from './pages/ScottFinancialDashboard';
 import ScottGigOffers from './pages/ScottGigOffers';
 import ScottGigPacks from './pages/ScottGigPacks';
-import ScottGuestList from './pages/ScottGuestList';
 import Teachers from './pages/Teachers';
+import ScottGuestList from './pages/ScottGuestList';
 import ScottInsurance from './pages/ScottInsurance';
 import ScottInvoices from './pages/ScottInvoices';
 import ScottLATrip from './pages/ScottLATrip';
@@ -307,7 +308,7 @@ import YoungWarriors from './pages/YoungWarriors';
 import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
-import ExtensionManager from './pages/ExtensionManager';
+import TestExtensionFlow from './pages/TestExtensionFlow';
 import __Layout from './Layout.jsx';
 
 
@@ -421,6 +422,7 @@ export const PAGES = {
     "DopamineHealing": DopamineHealing,
     "ESGAlignment": ESGAlignment,
     "ESGBridge": ESGBridge,
+    "ExtensionManager": ExtensionManager,
     "FairLaunchProtocol": FairLaunchProtocol,
     "FamilyBroadcast": FamilyBroadcast,
     "ForMusicians": ForMusicians,
@@ -535,8 +537,8 @@ export const PAGES = {
     "ScottFinancialDashboard": ScottFinancialDashboard,
     "ScottGigOffers": ScottGigOffers,
     "ScottGigPacks": ScottGigPacks,
-    "ScottGuestList": ScottGuestList,
     "Teachers": Teachers,
+    "ScottGuestList": ScottGuestList,
     "ScottInsurance": ScottInsurance,
     "ScottInvoices": ScottInvoices,
     "ScottLATrip": ScottLATrip,
@@ -621,7 +623,7 @@ export const PAGES = {
     "ZeroEgoProtocol": ZeroEgoProtocol,
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
-    "ExtensionManager": ExtensionManager,
+    "TestExtensionFlow": TestExtensionFlow,
 }
 
 export const pagesConfig = {
