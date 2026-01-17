@@ -10,6 +10,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { format } from 'date-fns';
 import ScottGigWorkflow from '@/components/scott/ScottGigWorkflow';
 import AI51GigFilter from '@/components/scott/AI51GigFilter';
+import { Trash2 } from 'lucide-react';
 
 export default function ScottGigOffers() {
     const navigate = useNavigate();
@@ -51,6 +52,22 @@ export default function ScottGigOffers() {
             alert('Error saving offer: ' + (error.message || 'Unknown error'));
         }
     });
+
+    const deleteMutation = useMutation({
+        mutationFn: (offerId) => base44.entities.ScottGigOffer.delete(offerId),
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ['scottGigOffers'] });
+        },
+        onError: (error) => {
+            alert('Error deleting: ' + (error.message || 'Unknown error'));
+        }
+    });
+
+    const handleDelete = (offerId, venueName) => {
+        if (window.confirm(`Delete ${venueName}?`)) {
+            deleteMutation.mutate(offerId);
+        }
+    };
 
     const parseEmail = async () => {
         if (!emailText.trim()) return;
@@ -191,6 +208,12 @@ ${emailText}`,
             <div className="mb-6">
                 <h1 className="text-4xl font-black text-white font-mono mb-2">GIG OFFERS</h1>
                 <p className="text-gray-600 text-xs font-mono">Paste email → AI parses</p>
+                <button
+                    onClick={() => navigate(createPageUrl('ScottAddShow') + (artistId ? `?id=${artistId}` : ''))}
+                    className="mt-3 bg-cyan-500 hover:bg-cyan-600 text-black font-black py-2 px-4 rounded font-mono text-sm"
+                >
+                    + MANUAL ADD SHOW
+                </button>
             </div>
 
             {/* NEW OFFER */}
@@ -272,7 +295,15 @@ ${emailText}`,
 
                                 {/* GIG DETAILS */}
                                 <div className="bg-black border-2 border-gray-900 rounded-lg p-4">
-                                    <p className="text-white font-black font-mono mb-2">{offer.venue}</p>
+                                    <div className="flex items-start justify-between mb-2">
+                                        <p className="text-white font-black font-mono flex-1">{offer.venue}</p>
+                                        <button
+                                            onClick={() => handleDelete(offer.id, offer.venue)}
+                                            className="text-red-500 hover:text-red-400 p-1"
+                                        >
+                                            <Trash2 className="w-4 h-4" />
+                                        </button>
+                                    </div>
                                     <p className="text-cyan-400 font-mono text-sm mb-1">
                                         {format(new Date(offer.date), 'd MMM yyyy')} • £{offer.fee?.toLocaleString()}
                                     </p>

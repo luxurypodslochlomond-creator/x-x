@@ -6,6 +6,7 @@ import { Settings, Lock, Smartphone } from 'lucide-react';
 import { motion } from 'framer-motion';
 import ScottExtensionSettings from '@/components/scott/ScottExtensionSettings';
 import ScottConnectedDevices from '@/components/scott/ScottConnectedDevices';
+import ScottPushNotifications from '@/components/scott/ScottPushNotifications';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 export default function ScottSettings() {
