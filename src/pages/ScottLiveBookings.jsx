@@ -144,13 +144,13 @@ export default function ScottLiveBookings() {
                     </motion.button>
                 </Link>
 
-                <Link to={createPageUrl(`ScottPasteGigOffer?id=${artistId}`)}>
+                <Link to={createPageUrl(`ScottAddShow?id=${artistId}`)}>
                     <motion.button
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
                         className="w-full bg-gradient-to-r from-cyan-600 to-blue-600 text-white font-black py-4 rounded-lg font-mono"
                     >
-                        + NEW OFFER
+                        + ADD SHOW
                     </motion.button>
                 </Link>
 
