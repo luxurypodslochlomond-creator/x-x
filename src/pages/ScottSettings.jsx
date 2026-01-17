@@ -47,12 +47,15 @@ export default function ScottSettings() {
         </motion.div>
 
         <Tabs defaultValue="extension" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-2 bg-black border-2 border-cyan-500">
-            <TabsTrigger value="extension" className="data-[state=active]:bg-cyan-600 flex items-center gap-2">
+          <TabsList className="grid w-full grid-cols-3 bg-black border-2 border-cyan-500">
+            <TabsTrigger value="extension" className="data-[state=active]:bg-cyan-600 flex items-center gap-2 text-xs">
               <Lock className="w-4 h-4" />
               Extension
             </TabsTrigger>
-            <TabsTrigger value="devices" className="data-[state=active]:bg-cyan-600 flex items-center gap-2">
+            <TabsTrigger value="notifications" className="data-[state=active]:bg-cyan-600 flex items-center gap-2 text-xs">
+              Notifications
+            </TabsTrigger>
+            <TabsTrigger value="devices" className="data-[state=active]:bg-cyan-600 flex items-center gap-2 text-xs">
               <Smartphone className="w-4 h-4" />
               Devices
             </TabsTrigger>
@@ -60,6 +63,10 @@ export default function ScottSettings() {
 
           <TabsContent value="extension">
             <ScottExtensionSettings user={user} />
+          </TabsContent>
+
+          <TabsContent value="notifications">
+            <ScottPushNotifications />
           </TabsContent>
 
           <TabsContent value="devices">
