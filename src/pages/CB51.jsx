@@ -376,6 +376,20 @@ export default function CB51() {
                         <p className="text-pink-400 font-black font-mono text-sm relative z-10">EXTENSION</p>
                     </motion.div>
                 </Link>
+                <Link to={createPageUrl('ScottSettings')}>
+                    <motion.div
+                        whileHover={{ scale: 0.97 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="relative bg-gradient-to-br from-blue-500/20 to-blue-600/10 border-2 border-blue-500/30 hover:border-blue-500 rounded-2xl p-5 text-center transition-all overflow-hidden group"
+                    >
+                        <div className="absolute inset-0 bg-gradient-to-t from-blue-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        <svg className="w-9 h-9 text-blue-400 mx-auto mb-2 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                        <p className="text-blue-400 font-black font-mono text-sm relative z-10">SETTINGS</p>
+                    </motion.div>
+                </Link>
             </div>
 
             {/* FOOTER */}
