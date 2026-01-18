@@ -154,23 +154,8 @@ export default function CB51() {
 
     if (loading || artistsLoading) {
         return (
-            <div className="min-h-screen bg-black flex items-center justify-center relative">
-                {/* Content preview behind */}
-                <div className="absolute inset-0 opacity-20 blur-sm">
-                    <div className="p-6 pt-20">
-                        <div className="flex items-center gap-3 mb-6">
-                            <Radio className="w-8 h-8 text-cyan-400" />
-                            <div className="text-3xl font-black text-cyan-400 font-mono">CB51</div>
-                        </div>
-                        <div className="bg-black border-2 border-gray-900 rounded-lg p-4 mb-4">
-                            <div className="h-8 bg-gray-900 rounded mb-2"></div>
-                            <div className="h-8 bg-gray-900 rounded"></div>
-                        </div>
-                    </div>
-                </div>
-                
-                {/* CB51 loader overlay */}
-                <div className="relative z-10 text-center">
+            <div className="min-h-screen bg-black flex items-center justify-center">
+                <div className="text-center">
                     <Radio className="w-16 h-16 text-cyan-400 mx-auto mb-4 animate-pulse" />
                     <p className="text-cyan-400 font-black font-mono text-xl">CB51</p>
                 </div>
