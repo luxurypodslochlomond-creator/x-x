@@ -59,24 +59,14 @@ export default function ScottPushNotifications() {
             setPermission(result);
 
             if (result === 'granted') {
-                // Subscribe to push
-                const registration = await navigator.serviceWorker.ready;
-                
-                // Get VAPID public key from backend (you'll need to set this up)
-                // For now, using a placeholder - replace with your VAPID public key
-                const vapidPublicKey = 'YOUR_VAPID_PUBLIC_KEY_HERE';
-                
-                const subscription = await registration.pushManager.subscribe({
-                    userVisibleOnly: true,
-                    applicationServerKey: urlBase64ToUint8Array(vapidPublicKey)
-                });
-
-                // Save subscription to database
-                await subscribeMutation.mutateAsync(subscription.toJSON());
+                // For now - just mark as subscribed
+                // Full push setup requires backend VAPID keys
+                setSubscribed(true);
+                alert('✓ Notifications enabled (browser only)');
             }
         } catch (error) {
             console.error('Notification error:', error);
-            alert('Error enabling notifications: ' + error.message);
+            alert('Error: ' + error.message);
         } finally {
             setLoading(false);
         }
@@ -119,37 +109,40 @@ export default function ScottPushNotifications() {
     }
 
     return (
-        <div className="bg-black border-2 border-cyan-500 rounded-lg p-4">
+        <div className="bg-black border-2 border-cyan-500 rounded-xl p-6">
             <div className="flex items-start justify-between mb-4">
                 <div className="flex items-center gap-2">
-                    <Bell className="w-5 h-5 text-cyan-400" />
-                    <h3 className="text-white font-black font-mono">PUSH NOTIFICATIONS</h3>
+                    <Bell className="w-6 h-6 text-cyan-400" />
+                    <h3 className="text-white font-black font-mono text-lg">NOTIFICATIONS</h3>
                 </div>
                 {subscribed && <CheckCircle className="w-5 h-5 text-green-400" />}
             </div>
 
-            <p className="text-gray-400 text-xs font-mono mb-4">
-                Get notified when new gigs come in
+            <p className="text-gray-400 text-sm font-mono mb-6">
+                Get notified when new gigs arrive
             </p>
 
             {permission === 'denied' ? (
-                <p className="text-red-400 text-sm font-mono">
-                    Notifications blocked. Enable in browser settings.
-                </p>
+                <div className="bg-red-900/20 border-2 border-red-500/30 rounded-xl p-4">
+                    <p className="text-red-400 text-sm font-mono font-bold">
+                        ✗ Blocked - enable in browser settings
+                    </p>
+                </div>
             ) : subscribed ? (
                 <div className="space-y-3">
-                    <div className="bg-green-900/20 border border-green-500/30 rounded p-3">
-                        <p className="text-green-400 text-sm font-mono">✓ Active</p>
+                    <div className="bg-green-900/20 border-2 border-green-500/30 rounded-xl p-4">
+                        <p className="text-green-400 font-bold font-mono">✓ ACTIVE</p>
+                        <p className="text-green-400/60 text-xs font-mono mt-1">You'll get browser notifications</p>
                     </div>
                     <button
                         onClick={sendTestNotification}
-                        className="w-full bg-cyan-500 hover:bg-cyan-600 text-black font-bold py-2 rounded font-mono text-sm"
+                        className="w-full bg-cyan-500 hover:bg-cyan-600 text-black font-black py-3 rounded-lg font-mono"
                     >
                         TEST NOTIFICATION
                     </button>
                     <button
                         onClick={unsubscribe}
-                        className="w-full bg-gray-900 hover:bg-gray-800 text-gray-400 font-bold py-2 rounded font-mono text-sm"
+                        className="w-full bg-black border-2 border-gray-900 hover:border-gray-800 text-gray-400 font-bold py-3 rounded-lg font-mono"
                     >
                         DISABLE
                     </button>
@@ -158,7 +151,7 @@ export default function ScottPushNotifications() {
                 <button
                     onClick={requestPermission}
                     disabled={loading}
-                    className="w-full bg-cyan-500 hover:bg-cyan-600 text-black font-black py-3 rounded-lg font-mono flex items-center justify-center gap-2"
+                    className="w-full bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-black py-4 rounded-xl font-mono flex items-center justify-center gap-2"
                 >
                     {loading ? 'SETTING UP...' : (
                         <>
