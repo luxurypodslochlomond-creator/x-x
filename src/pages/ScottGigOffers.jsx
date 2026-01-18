@@ -9,7 +9,7 @@ import { base44 } from '@/api/base44Client';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { format } from 'date-fns';
 import ScottGigWorkflow from '@/components/scott/ScottGigWorkflow';
-import AI51GigFilter from '@/components/scott/AI51GigFilter';
+
 import { Trash2 } from 'lucide-react';
 
 export default function ScottGigOffers() {
@@ -331,12 +331,6 @@ export default function ScottGigOffers() {
                         .sort((a, b) => new Date(b.date) - new Date(a.date))
                         .map(offer => (
                             <div key={offer.id} className="space-y-3">
-                                {/* AI51 SMART FILTER - FIRST */}
-                                <AI51GigFilter 
-                                    offer={offer} 
-                                    artist={artists.find(a => a.id === offer.artist_id)}
-                                />
-
                                 {/* GIG DETAILS */}
                                 <div className="bg-black border-2 border-gray-900 rounded-lg p-4">
                                     <div className="flex items-start justify-between mb-2">
