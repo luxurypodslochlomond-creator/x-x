@@ -552,17 +552,8 @@ const LayoutInner = ({ children, currentPageName }) => {
                             </div>
                             </aside>
 
-        <main className={`lg:ml-80 ${isOffline ? 'pt-[122px] lg:pt-10' : 'pt-[72px] lg:pt-0'} min-h-screen`}>
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={location.pathname}
-              initial={{ opacity: 1 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0 }}
-            >
-              {children}
-            </motion.div>
-          </AnimatePresence>
+        <main className={`lg:ml-80 ${isOffline ? 'pt-[122px] lg:pt-10' : 'pt-[72px] lg:pt-0'} min-h-screen`} style={{ willChange: 'contents' }}>
+          {children}
           <footer className="border-t border-cyan-500/20 bg-[#0a0f1a]/60">
                   <LiveClock />
                   <p className="text-xs text-gray-600 text-center pb-4">Built on <a href="https://base44.com" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-cyan-400">Base44</a></p>
