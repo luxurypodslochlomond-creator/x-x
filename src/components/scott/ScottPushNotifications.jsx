@@ -9,7 +9,7 @@ import { useMutation } from '@tanstack/react-query';
  */
 
 export default function ScottPushNotifications() {
-    const [permission, setPermission] = useState(Notification.permission);
+    const [permission, setPermission] = useState(typeof Notification !== 'undefined' ? Notification.permission : 'default');
     const [subscribed, setSubscribed] = useState(false);
     const [loading, setLoading] = useState(false);
 
@@ -89,7 +89,7 @@ export default function ScottPushNotifications() {
 
     // Test notification
     const sendTestNotification = () => {
-        if (Notification.permission === 'granted') {
+        if (typeof Notification !== 'undefined' && Notification.permission === 'granted') {
             new Notification('CB51 Test', {
                 body: 'Notifications are working! 🎸',
                 icon: '/icon-192x192.png',
