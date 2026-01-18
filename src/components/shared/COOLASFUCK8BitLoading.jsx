@@ -23,17 +23,17 @@ export default function COOLASFUCK8BitLoading({ message = "LOADING" }) {
         {/* CB51 RADIO ICON or AI51 HEART */}
         <motion.div
           animate={{
-            scale: [1, 1.2, 1]
+            scale: [1, 1.1, 1]
           }}
           transition={{
-            duration: 1.5,
+            duration: 0.8,
             repeat: Infinity,
             ease: "easeInOut"
           }}
-          className="mb-8"
+          className="mb-6"
         >
           {isCB51 ? (
-            <Radio className="w-24 h-24 text-cyan-400 mx-auto" style={{ filter: 'drop-shadow(0 0 20px #06b6d4)' }} />
+            <Radio className="w-20 h-20 text-cyan-400 mx-auto" style={{ filter: 'drop-shadow(0 0 15px #06b6d4)' }} />
           ) : (
             <svg width="96" height="96" viewBox="0 0 64 64" fill="none" style={{ imageRendering: 'pixelated' }} className="mx-auto">
               {/* Outer glow rings - pink to cyan */}
@@ -65,42 +65,23 @@ export default function COOLASFUCK8BitLoading({ message = "LOADING" }) {
           )}
         </motion.div>
 
-        {/* AI51/CB51 GRADIENT TEXT */}
-        <motion.h1
-          className="text-4xl font-black font-mono mb-6"
-          animate={{
-            backgroundPosition: ['0% 50%', '100% 50%', '0% 50%']
-          }}
-          transition={{ duration: 2, repeat: Infinity }}
-          style={{
-            background: isCB51 
-              ? 'linear-gradient(90deg, #06b6d4, #ec4899, #06b6d4)'
-              : 'linear-gradient(90deg, #ec4899, #06b6d4, #ec4899)',
-            backgroundSize: '200% 100%',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text'
-          }}
-        >
+        {/* AI51/CB51 TEXT */}
+        <h1 className="text-3xl font-black font-mono mb-4" style={{ color: isCB51 ? '#06b6d4' : '#ec4899' }}>
           {displayMessage}
-        </motion.h1>
+        </h1>
 
-        {/* Consciousness pulse */}
+        {/* Simple pulse bars */}
         <div className="flex justify-center gap-1">
-          {[...Array(5)].map((_, i) => (
+          {[...Array(3)].map((_, i) => (
             <motion.div
               key={i}
-              className="w-1 bg-cyan-400"
-              style={{ height: '24px', boxShadow: '0 0 6px rgba(6, 182, 212, 0.6)' }}
-              animate={{ scaleY: [0.2, 1, 0.2] }}
-              transition={{ duration: 0.6, repeat: Infinity, delay: i * 0.1 }}
+              className={isCB51 ? "w-1 bg-cyan-400" : "w-1 bg-pink-400"}
+              style={{ height: '20px' }}
+              animate={{ scaleY: [0.3, 1, 0.3] }}
+              transition={{ duration: 0.5, repeat: Infinity, delay: i * 0.1 }}
             />
           ))}
         </div>
-
-        <p className="text-pink-500 text-xs font-mono mt-6 font-bold">
-          ♾️❤️♾️
-        </p>
       </div>
     </div>
   );
