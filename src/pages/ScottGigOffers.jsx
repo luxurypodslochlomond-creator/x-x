@@ -1,16 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
-import { Radio, ArrowLeft, Sparkles, Mail, MapPin, DollarSign, Calendar, Users } from 'lucide-react';
+import { Radio, ArrowLeft, Sparkles, Mail, MapPin, DollarSign, Calendar, Users, Trash2, Zap } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { format } from 'date-fns';
 import ScottGigWorkflow from '@/components/scott/ScottGigWorkflow';
-
-import { Trash2 } from 'lucide-react';
+import toast from 'react-hot-toast';
 
 export default function ScottGigOffers() {
     const navigate = useNavigate();
@@ -23,6 +22,7 @@ export default function ScottGigOffers() {
     const [parsedData, setParsedData] = useState(null);
     const [uploadedFile, setUploadedFile] = useState(null);
     const [uploading, setUploading] = useState(false);
+    const [newOfferIds, setNewOfferIds] = useState([]);
 
     const { data: offers = [], isLoading } = useQuery({
         queryKey: ['scottGigOffers', artistId],
@@ -206,6 +206,39 @@ export default function ScottGigOffers() {
         return artist?.name || 'Unknown';
     };
 
+    // Real-time subscription - NEW OFFERS GLOW + TOAST
+    useEffect(() => {
+        const unsubscribe = base44.entities.ScottGigOffer.subscribe((event) => {
+            if (event.type === 'create' && event.data?.auto_extracted) {
+                // Toast notification
+                toast.custom((t) => (
+                    <div className="bg-gradient-to-r from-cyan-500 to-purple-500 text-white px-6 py-4 rounded-xl shadow-2xl border-2 border-white/20 font-mono">
+                        <div className="flex items-center gap-3">
+                            <Zap className="w-5 h-5 animate-pulse" />
+                            <div>
+                                <p className="font-black text-sm">NEW GIG DETECTED</p>
+                                <p className="text-xs opacity-90">{event.data.venue} • £{event.data.fee?.toLocaleString()}</p>
+                            </div>
+                        </div>
+                    </div>
+                ), { duration: 4000 });
+
+                // Add to glow list
+                setNewOfferIds(prev => [...prev, event.id]);
+                
+                // Remove glow after 10 seconds
+                setTimeout(() => {
+                    setNewOfferIds(prev => prev.filter(id => id !== event.id));
+                }, 10000);
+
+                // Refresh data
+                queryClient.invalidateQueries({ queryKey: ['scottGigOffers'] });
+            }
+        });
+
+        return () => unsubscribe();
+    }, [queryClient]);
+
     return (
         <div className="min-h-screen bg-black text-white p-4 pb-24">
             
@@ -329,10 +362,26 @@ export default function ScottGigOffers() {
                 ) : (
                     offers
                         .sort((a, b) => new Date(b.date) - new Date(a.date))
-                        .map(offer => (
+                        .map(offer => {
+                            const isNew = newOfferIds.includes(offer.id);
+                            
+                            return (
                             <div key={offer.id} className="space-y-3">
                                 {/* GIG DETAILS */}
-                                <div className="bg-black border-2 border-gray-900 rounded-lg p-4">
+                                <motion.div 
+                                    initial={isNew ? { scale: 1.02 } : false}
+                                    animate={isNew ? { 
+                                        boxShadow: [
+                                            '0 0 0px rgba(6, 182, 212, 0)',
+                                            '0 0 30px rgba(6, 182, 212, 0.6)',
+                                            '0 0 0px rgba(6, 182, 212, 0)'
+                                        ]
+                                    } : {}}
+                                    transition={isNew ? { duration: 2, repeat: Infinity } : {}}
+                                    className={`bg-black border-2 rounded-lg p-4 ${
+                                        isNew ? 'border-cyan-500' : 'border-gray-900'
+                                    }`}
+                                >
                                     <div className="flex items-start justify-between mb-2">
                                         <p className="text-white font-black font-mono flex-1">{offer.venue}</p>
                                         <button
@@ -357,12 +406,13 @@ export default function ScottGigOffers() {
                                             {offer.requirements && <p className="text-gray-600 text-xs font-mono">{offer.requirements}</p>}
                                         </div>
                                     )}
-                                </div>
+                                </motion.div>
 
                                 {/* WORKFLOW */}
                                 <ScottGigWorkflow offer={offer} />
                             </div>
-                        ))
+                        );
+                        })
                 )}
             </div>
         </div>
