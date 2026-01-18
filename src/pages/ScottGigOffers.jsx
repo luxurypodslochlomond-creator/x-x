@@ -21,6 +21,8 @@ export default function ScottGigOffers() {
     const [emailText, setEmailText] = useState('');
     const [parsing, setParsing] = useState(false);
     const [parsedData, setParsedData] = useState(null);
+    const [uploadedFile, setUploadedFile] = useState(null);
+    const [uploading, setUploading] = useState(false);
 
     const { data: offers = [], isLoading } = useQuery({
         queryKey: ['scottGigOffers', artistId],
@@ -69,8 +71,23 @@ export default function ScottGigOffers() {
         }
     };
 
+    const handleFileUpload = async (e) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+        
+        setUploading(true);
+        try {
+            const { file_url } = await base44.integrations.Core.UploadFile({ file });
+            setUploadedFile(file_url);
+        } catch (error) {
+            alert('Upload failed: ' + error.message);
+        } finally {
+            setUploading(false);
+        }
+    };
+
     const parseEmail = async () => {
-        if (!emailText.trim()) return;
+        if (!emailText.trim() && !uploadedFile) return;
         
         setParsing(true);
         
@@ -82,26 +99,26 @@ export default function ScottGigOffers() {
             try {
                 attempt++;
                 
-                // AI parses the email - SIMPLE SCHEMA (no required fields)
+                // AI parses the email/PDF - SIMPLE SCHEMA (no required fields)
                 const response = await base44.integrations.Core.InvokeLLM({
-                    prompt: `Extract gig offer details from this email. Return JSON.
+                    prompt: `Extract gig offer details from this ${uploadedFile ? 'document/email' : 'email'}. Return JSON.
 
-Fields to extract (use null if not found):
-- venue: venue name
-- city: city
-- county: county/state  
-- country: country (default "UK")
-- date: YYYY-MM-DD format
-- time: performance time
-- fee: fee as number (no currency symbol)
-- capacity: venue capacity as number
-- promoter: promoter/agent name
-- promoter_contact: email or phone
-- requirements: tech/hospitality needs
-- notes: other details
+                Fields to extract (use null if not found):
+                - venue: venue name
+                - city: city
+                - county: county/state  
+                - country: country (default "UK")
+                - date: YYYY-MM-DD format
+                - time: performance time
+                - fee: fee as number (no currency symbol)
+                - capacity: venue capacity as number
+                - promoter: promoter/agent name
+                - promoter_contact: email or phone
+                - requirements: tech/hospitality needs
+                - notes: other details
 
-Email:
-${emailText}`,
+                ${emailText ? `Email text:\n${emailText}` : 'See attached document.'}`,
+                    file_urls: uploadedFile ? [uploadedFile] : undefined,
                     response_json_schema: {
                         type: "object",
                         properties: {
@@ -130,8 +147,10 @@ ${emailText}`,
                     currency: 'GBP',
                     country: response.country || 'UK'
                 });
-                
+
                 setParsing(false);
+                setEmailText('');
+                setUploadedFile(null);
                 return; // Exit - success!
                 
             } catch (error) {
@@ -219,19 +238,44 @@ ${emailText}`,
             {/* NEW OFFER */}
             <div className="bg-black border border-gray-800 rounded p-4 mb-6">
                 <h2 className="text-white font-black font-mono text-lg mb-4">+ NEW OFFER</h2>
+
+                {/* FILE UPLOAD */}
+                <div className="mb-3">
+                    <input
+                        type="file"
+                        accept=".pdf,.png,.jpg,.jpeg"
+                        onChange={handleFileUpload}
+                        className="hidden"
+                        id="file-upload"
+                    />
+                    <label
+                        htmlFor="file-upload"
+                        className="block w-full bg-black border-2 border-dashed border-gray-800 hover:border-cyan-500 rounded p-4 text-center cursor-pointer transition-all"
+                    >
+                        {uploading ? (
+                            <p className="text-cyan-400 font-mono text-sm">UPLOADING...</p>
+                        ) : uploadedFile ? (
+                            <p className="text-green-400 font-mono text-sm">✓ FILE UPLOADED</p>
+                        ) : (
+                            <p className="text-gray-600 font-mono text-sm">UPLOAD PDF/IMAGE</p>
+                        )}
+                    </label>
+                </div>
+
+                {/* TEXT INPUT */}
                 <Textarea
                     value={emailText}
                     onChange={(e) => setEmailText(e.target.value)}
                     className="bg-black border-2 border-gray-900 text-white min-h-[150px] font-mono text-sm mb-3"
-                    placeholder="Paste gig email here..."
+                    placeholder="Or paste gig email here..."
                 />
 
                 <Button
                     onClick={parseEmail}
-                    disabled={parsing || !emailText.trim()}
+                    disabled={parsing || (!emailText.trim() && !uploadedFile)}
                     className="w-full bg-cyan-500 hover:bg-cyan-600 text-black font-black py-3 font-mono"
                 >
-                    {parsing ? 'AI PARSING...' : 'PARSE EMAIL'}
+                    {parsing ? 'AI PARSING...' : 'PARSE EMAIL/PDF'}
                 </Button>
             </div>
 

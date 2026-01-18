@@ -205,6 +205,7 @@ import ScottAICoordinatorArchitecture from './pages/ScottAICoordinatorArchitectu
 import ScottAbout from './pages/ScottAbout';
 import ScottAccommodation from './pages/ScottAccommodation';
 import ScottAddArtist from './pages/ScottAddArtist';
+import ScottAddShow from './pages/ScottAddShow';
 import ScottArtist from './pages/ScottArtist';
 import ScottArtistHome from './pages/ScottArtistHome';
 import ScottBandVote from './pages/ScottBandVote';
@@ -221,8 +222,8 @@ import ScottFeatureRequests from './pages/ScottFeatureRequests';
 import ScottFinanceAdmin from './pages/ScottFinanceAdmin';
 import ScottFinancialDashboard from './pages/ScottFinancialDashboard';
 import ScottGigOffers from './pages/ScottGigOffers';
-import ScottGigPacks from './pages/ScottGigPacks';
 import Teachers from './pages/Teachers';
+import ScottGigPacks from './pages/ScottGigPacks';
 import ScottGuestList from './pages/ScottGuestList';
 import ScottInsurance from './pages/ScottInsurance';
 import ScottInvoices from './pages/ScottInvoices';
@@ -309,7 +310,6 @@ import YoungWarriors from './pages/YoungWarriors';
 import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
-import ScottAddShow from './pages/ScottAddShow';
 import __Layout from './Layout.jsx';
 
 
@@ -521,6 +521,7 @@ export const PAGES = {
     "ScottAbout": ScottAbout,
     "ScottAccommodation": ScottAccommodation,
     "ScottAddArtist": ScottAddArtist,
+    "ScottAddShow": ScottAddShow,
     "ScottArtist": ScottArtist,
     "ScottArtistHome": ScottArtistHome,
     "ScottBandVote": ScottBandVote,
@@ -537,8 +538,8 @@ export const PAGES = {
     "ScottFinanceAdmin": ScottFinanceAdmin,
     "ScottFinancialDashboard": ScottFinancialDashboard,
     "ScottGigOffers": ScottGigOffers,
-    "ScottGigPacks": ScottGigPacks,
     "Teachers": Teachers,
+    "ScottGigPacks": ScottGigPacks,
     "ScottGuestList": ScottGuestList,
     "ScottInsurance": ScottInsurance,
     "ScottInvoices": ScottInvoices,
@@ -625,7 +626,6 @@ export const PAGES = {
     "ZeroEgoProtocol": ZeroEgoProtocol,
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
-    "ScottAddShow": ScottAddShow,
 }
 
 export const pagesConfig = {
