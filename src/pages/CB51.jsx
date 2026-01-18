@@ -258,35 +258,46 @@ export default function CB51() {
                 ) : (
                     <>
                         {artists.map((artist) => (
-                            <Link key={artist.id} to={createPageUrl(`ScottArtistHome?id=${artist.id}`)}>
-                                <motion.div
-                                    whileHover={{ scale: 0.98, y: -2 }}
-                                    whileTap={{ scale: 0.96 }}
-                                    className="relative bg-gradient-to-br from-gray-900 to-black border-2 border-cyan-500/30 rounded-2xl p-5 hover:border-cyan-500 transition-all overflow-hidden group"
-                                    style={{ boxShadow: '0 4px 20px rgba(6, 182, 212, 0.1)' }}
-                                >
-                                    {/* Gradient overlay on hover */}
-                                    <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                            <div key={artist.id} className="relative">
+                                <Link to={createPageUrl(`ScottArtistHome?id=${artist.id}`)}>
+                                    <motion.div
+                                        whileHover={{ scale: 0.98, y: -2 }}
+                                        whileTap={{ scale: 0.96 }}
+                                        className="relative bg-gradient-to-br from-gray-900 to-black border-2 border-cyan-500/30 rounded-2xl p-5 hover:border-cyan-500 transition-all overflow-hidden group"
+                                        style={{ boxShadow: '0 4px 20px rgba(6, 182, 212, 0.1)' }}
+                                    >
+                                        {/* Gradient overlay on hover */}
+                                        <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
 
-                                    <div className="relative flex items-center gap-4">
-                                        {artist.profile_pic_url ? (
-                                            <img 
-                                                src={artist.profile_pic_url} 
-                                                alt={artist.name}
-                                                className="w-14 h-14 rounded-xl object-cover ring-2 ring-cyan-500/50"
-                                            />
-                                        ) : (
-                                            <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-cyan-500 via-purple-500 to-pink-500 text-white font-black text-xl flex items-center justify-center">
-                                                {artist.name.charAt(0)}
+                                        <div className="relative flex items-center gap-4">
+                                            {artist.profile_pic_url ? (
+                                                <img 
+                                                    src={artist.profile_pic_url} 
+                                                    alt={artist.name}
+                                                    className="w-14 h-14 rounded-xl object-cover ring-2 ring-cyan-500/50"
+                                                />
+                                            ) : (
+                                                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-cyan-500 via-purple-500 to-pink-500 text-white font-black text-xl flex items-center justify-center">
+                                                    {artist.name.charAt(0)}
+                                                </div>
+                                            )}
+                                            <div className="flex-1">
+                                                <p className="text-white font-black text-lg font-mono">{artist.name}</p>
+                                                {artist.genre && <p className="text-cyan-400/60 text-xs font-mono mt-0.5">{artist.genre}</p>}
                                             </div>
-                                        )}
-                                        <div className="flex-1">
-                                            <p className="text-white font-black text-lg font-mono">{artist.name}</p>
-                                            {artist.genre && <p className="text-cyan-400/60 text-xs font-mono mt-0.5">{artist.genre}</p>}
                                         </div>
-                                    </div>
-                                </motion.div>
-                            </Link>
+                                    </motion.div>
+                                </Link>
+                                <button
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        handleArchiveArtist(artist);
+                                    }}
+                                    className="absolute top-2 right-2 bg-black/80 hover:bg-red-500/20 text-gray-600 hover:text-red-400 p-2 rounded-lg transition-all z-10"
+                                >
+                                    <Trash2 className="w-4 h-4" />
+                                </button>
+                            </div>
                         ))}
                         <Link to={createPageUrl('ScottAddArtist')}>
                             <motion.div
@@ -376,6 +387,28 @@ export default function CB51() {
                     </motion.div>
                 </Link>
             </div>
+
+            {/* ARCHIVED ARTISTS */}
+            {archivedArtists.length > 0 && (
+                <div className="mt-8">
+                    <details className="text-gray-700">
+                        <summary className="cursor-pointer text-xs font-mono mb-3">Archived ({archivedArtists.length})</summary>
+                        <div className="space-y-2">
+                            {archivedArtists.map((artist) => (
+                                <div key={artist.id} className="flex items-center justify-between bg-black border border-gray-900 rounded-lg p-3">
+                                    <p className="text-gray-700 font-mono text-sm">{artist.name}</p>
+                                    <button
+                                        onClick={() => handleRestoreArtist(artist)}
+                                        className="text-cyan-400 hover:text-cyan-300 text-xs font-mono"
+                                    >
+                                        RESTORE
+                                    </button>
+                                </div>
+                            ))}
+                        </div>
+                    </details>
+                </div>
+            )}
 
             {/* FOOTER */}
             <div className="mt-12 text-center">
