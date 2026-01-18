@@ -16,7 +16,7 @@ export default function COOLASFUCK8BitLoading({ message = "LOADING" }) {
     message.includes('CB51')
   );
 
-  const displayMessage = message === "LOADING UF51" && isCB51 ? "LOADING CB51" : message;
+  const displayMessage = isCB51 ? (message === "LOADING UF51" ? "CB51" : message.replace("UF51", "CB51")) : message;
   return (
     <div className="min-h-screen bg-black flex items-center justify-center p-4">
       <div className="text-center">
