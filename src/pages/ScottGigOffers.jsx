@@ -243,7 +243,7 @@ export default function ScottGigOffers() {
                 <div className="mb-3">
                     <input
                         type="file"
-                        accept=".pdf,.png,.jpg,.jpeg,.doc,.docx,.eml,.txt"
+                        accept=".pdf,.png,.jpg,.jpeg,.doc,.docx,.eml,.txt,.xls,.xlsx"
                         onChange={handleFileUpload}
                         className="hidden"
                         id="file-upload"
