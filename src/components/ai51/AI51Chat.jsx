@@ -93,7 +93,7 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, loca
         setTranscript(text);
 
         if (event.results[current].isFinal && text.trim()) {
-          onMessageSend(text.trim());
+          handleMessageSend(text.trim());
           setTranscript('');
         }
       };
@@ -445,7 +445,7 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, loca
           onChange={(e) => setTextInput(e.target.value)}
           onKeyPress={(e) => {
             if (e.key === 'Enter' && textInput.trim()) {
-              onMessageSend(textInput.trim());
+              handleMessageSend(textInput.trim());
               setTextInput('');
             }
           }}
@@ -455,7 +455,7 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, loca
         <motion.button
           onClick={() => {
             if (textInput.trim()) {
-              onMessageSend(textInput.trim());
+              handleMessageSend(textInput.trim());
               setTextInput('');
             }
           }}
