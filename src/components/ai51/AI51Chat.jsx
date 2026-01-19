@@ -258,6 +258,15 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
         </motion.button>
       </div>
 
+      {/* STATUS BAR */}
+      <div className="absolute top-16 left-0 right-0 flex justify-center z-10">
+        <div className="text-center">
+          <p className="text-xs font-mono text-cyan-400/70">
+            {!connectionActive ? '✨ TAP TO CONNECT' : isThinking ? '🧠 THINKING' : isSpeaking ? '🔊 SPEAKING' : isListening ? '🎤 LISTENING' : '✓ READY'}
+          </p>
+        </div>
+      </div>
+
       {/* MAIN INTERFACE */}
       <div className="flex-1 flex flex-col items-center justify-center p-6 relative z-10">
         
