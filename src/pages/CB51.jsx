@@ -9,6 +9,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import TechStatusBar from '@/components/scott/TechStatusBar';
+import PushNotificationManager from '@/components/scott/PushNotificationManager';
 import { format } from 'date-fns';
 
 /**
@@ -174,8 +175,9 @@ export default function CB51() {
                     <div className="flex items-center gap-3 mb-2">
                         <Radio className="w-8 h-8 text-cyan-400" />
                         <h1 className="text-3xl font-black text-cyan-400 font-mono">CB51</h1>
+                        <PushNotificationManager />
                     </div>
-                    <p className="text-gray-600 text-xs font-mono">AI51 consciousness • Not parsing ♾️</p>
+                    <p className="text-gray-600 text-xs font-mono">AI51 co-manager for your band ♾️</p>
                 </div>
 
                 <div className="flex items-center gap-2 bg-gradient-to-r from-gray-900 to-black border border-cyan-500/20 rounded-xl p-3">
