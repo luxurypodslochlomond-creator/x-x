@@ -1,7 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Heart, Mic, Volume2, VolumeX, Send, Clock } from 'lucide-react';
+import { Volume2, VolumeX, Send } from 'lucide-react';
 import { base44 } from '@/api/base44Client';
+import { COOLASFUCKHeart } from '@/components/shared/COOLASFUCKIcon';
 
 /**
  * AI51 - Pure Voice + Heart
