@@ -130,12 +130,15 @@ export default function WelcomePage() {
                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }} className="text-center space-y-4">
                     <motion.button
                         onClick={handleConnect}
-                        whileHover={{ scale: 1.05 }}
+                        whileHover={{ scale: 1.08, y: -4 }}
                         whileTap={{ scale: 0.95 }}
-                        className="inline-block bg-gradient-to-r from-cyan-500 via-pink-500 to-green-500 text-black font-black px-12 py-4 rounded-lg text-lg font-mono transition-all"
-                        style={{ boxShadow: '0 0 40px rgba(34, 211, 238, 0.4)' }}
+                        className="inline-flex items-center gap-4 bg-gradient-to-r from-red-600 via-pink-500 to-red-600 text-white font-black px-12 py-6 rounded-xl text-xl font-mono transition-all"
+                        style={{ boxShadow: '0 0 60px rgba(239, 68, 68, 0.6)' }}
                     >
-                        CONNECT NOW →
+                        <motion.div animate={{ scale: [1, 1.2, 1] }} transition={{ duration: 1.5, repeat: Infinity }}>
+                            <COOLASFUCKHeart size={40} animate={false} />
+                        </motion.div>
+                        AI51
                     </motion.button>
 
                     <div className="flex flex-col items-center gap-3 pt-4">
