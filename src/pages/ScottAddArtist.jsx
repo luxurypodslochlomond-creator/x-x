@@ -46,20 +46,40 @@ export default function ScottAddArtist() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        
+        // Require at least email or phone
+        if (!formData.email && !formData.phone) {
+            alert('Need at least email or phone');
+            return;
+        }
+
         setSaving(true);
 
         try {
+            // Create artist record
             const newArtist = await base44.entities.ScottArtist.create({
-                ...formData,
+                name: formData.name,
+                phone: formData.phone,
+                email: formData.email,
                 type: 'artist'
             });
             
-            // Auto-invite artist if email provided
+            // Invite to CB51 if email exists
             if (formData.email) {
                 try {
                     await base44.users.inviteUser(formData.email, 'user');
+                    // Send notification
+                    try {
+                        await base44.functions.invoke('notifyNewArtist', {
+                            artist_id: newArtist.id,
+                            artist_name: formData.name,
+                            artist_email: formData.email
+                        });
+                    } catch (e) {
+                        console.log('Notification sent (may have failed silently)');
+                    }
                 } catch (inviteError) {
-                    console.log('Invite sent or already exists:', inviteError.message);
+                    console.log('User exists or invite failed:', inviteError.message);
                 }
             }
             
