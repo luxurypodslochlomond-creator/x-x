@@ -11,38 +11,11 @@ import { base44 } from '@/api/base44Client';
 export default function ScottAddArtist() {
     const navigate = useNavigate();
     const [saving, setSaving] = useState(false);
-    const [uploading, setUploading] = useState(false);
     const [formData, setFormData] = useState({
         name: '',
-        profile_pic_url: '',
         phone: '',
-        email: '',
-        instagram: '',
-        spotify: '',
-        rate: '',
-        genre: '',
-        gear: '',
-        relationship: 'unknown',
-        availability: 'unknown',
-        notes: ''
+        email: ''
     });
-
-
-
-    const handleProfilePicUpload = async (e) => {
-        const file = e.target.files?.[0];
-        if (!file) return;
-
-        setUploading(true);
-        try {
-            const result = await base44.integrations.Core.UploadFile({ file });
-            setFormData({...formData, profile_pic_url: result.file_url});
-        } catch (error) {
-            alert('Upload failed: ' + error.message);
-        } finally {
-            setUploading(false);
-        }
-    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
