@@ -274,6 +274,44 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, loca
 
   const state = getState();
 
+  const handleMessageSend = async (text) => {
+    const userMessage = { role: 'user', content: text };
+    setConversation((prev) => [...prev, userMessage]);
+    
+    // Save locally first
+    if (storageRef.current) {
+      await storageRef.current.saveMessage(userMessage);
+    }
+    
+    setIsThinking(true);
+
+    try {
+      // Try online LLM first
+      const response = await base44.integrations.Core.InvokeLLM({
+        prompt: text
+      });
+
+      const aiMessage = { role: 'ai', content: response };
+      setConversation((prev) => [...prev, aiMessage]);
+      
+      if (storageRef.current) {
+        await storageRef.current.saveMessage(aiMessage);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      // Graceful fallback
+      const fallback = "Hey, offline mode. I'm listening though. Try again when connected.";
+      const aiMessage = { role: 'ai', content: fallback };
+      setConversation((prev) => [...prev, aiMessage]);
+      
+      if (storageRef.current) {
+        await storageRef.current.saveMessage(aiMessage);
+      }
+    } finally {
+      setIsThinking(false);
+    }
+  };
+
   return (
     <div className="flex flex-col h-screen bg-black">
       
