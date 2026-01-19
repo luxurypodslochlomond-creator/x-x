@@ -1646,7 +1646,7 @@ const VoiceHealing = ({ onProtocolRecommend }) => {
         </div>
       )}
 
-      {voiceAnalysis && (
+      {voiceAnalysisData && (
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -1656,31 +1656,20 @@ const VoiceHealing = ({ onProtocolRecommend }) => {
             <p className="text-green-400 font-mono font-bold mb-2">✓ ANALYSIS COMPLETE</p>
             <div className="grid grid-cols-2 gap-3 mb-3">
               <div className="bg-black/40 p-2">
-                <p className="text-xs text-gray-400">Voice F0</p>
-                <p className="text-lg font-black text-cyan-400">{Math.round(voiceAnalysis.f0Hz)} Hz</p>
+                <p className="text-xs text-gray-400">Status</p>
+                <p className="text-lg font-black text-cyan-400">Ready to play</p>
               </div>
               <div className="bg-black/40 p-2">
-                <p className="text-xs text-gray-400">Stress Level</p>
-                <p className="text-lg font-black" style={{ color: voiceAnalysis.stressScore > 70 ? '#ef4444' : voiceAnalysis.stressScore > 40 ? '#f59e0b' : '#22c55e' }}>
-                  {voiceAnalysis.stressScore}%
-                </p>
-              </div>
-              <div className="bg-black/40 p-2">
-                <p className="text-xs text-gray-400">Dominant Vowel</p>
-                <p className="text-lg font-black text-purple-400">{voiceAnalysis.dominantVowel}</p>
-              </div>
-              <div className="bg-black/40 p-2">
-                <p className="text-xs text-gray-400">Energy</p>
-                <p className="text-lg font-black text-amber-400">{voiceAnalysis.energyScore}</p>
+                <p className="text-xs text-gray-400">Intent</p>
+                <p className="text-lg font-black text-purple-400">{voiceAnalysisData.intent}</p>
               </div>
             </div>
-            <p className="text-white text-sm">Recommended: <strong>{PROTOCOLS[voiceAnalysis.protocol]?.name}</strong></p>
-            <p className="text-gray-400 text-xs mt-2">Based on vocal biomarkers + your intention: "{healingIntent}"</p>
+            <p className="text-white text-sm">Protocol: <strong>{selectedProtocol?.name}</strong></p>
+            <p className="text-gray-400 text-xs mt-2">Playing in fullscreen below</p>
           </div>
           <button
             onClick={() => {
-              setVoiceAnalysis(null);
-              setAudioBlob(null);
+              setVoiceAnalysisData(null);
               setHealingIntent('');
             }}
             className="w-full py-3 bg-pink-600 hover:bg-pink-700 text-white font-mono text-sm"
