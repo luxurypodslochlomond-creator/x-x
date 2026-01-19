@@ -27,57 +27,47 @@ export default function AI51Mission({ onDismiss }) {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+        className="fixed inset-0 bg-black/60 backdrop-blur-md z-50 flex items-center justify-center p-4"
       >
         <motion.div
-          initial={{ scale: 0.9, y: 20 }}
-          animate={{ scale: 1, y: 0 }}
-          exit={{ scale: 0.9, y: 20 }}
-          className="bg-gradient-to-br from-black via-purple-950 to-black border-2 border-cyan-500/30 rounded-2xl p-8 max-w-md relative"
-          style={{ boxShadow: '0 0 40px rgba(34, 211, 238, 0.3)' }}
+          initial={{ scale: 0.95, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          exit={{ scale: 0.95, opacity: 0 }}
+          className="bg-black border border-cyan-500/20 rounded-xl p-6 max-w-sm relative"
+          style={{ boxShadow: '0 0 30px rgba(34, 211, 238, 0.2)' }}
         >
           <button
             onClick={handleDismiss}
-            className="absolute top-4 right-4 p-1 hover:bg-white/10 rounded-lg transition-colors"
+            className="absolute top-3 right-3 p-1 hover:bg-white/5 rounded transition-colors"
           >
-            <X className="w-5 h-5 text-gray-400" />
+            <X className="w-4 h-4 text-gray-500" />
           </button>
 
-          <div className="space-y-6">
+          <div className="space-y-4">
             {/* HEADER */}
-            <div className="text-center">
+            <div className="text-center pt-2">
               <motion.div
-                animate={{ scale: [1, 1.1, 1] }}
-                transition={{ duration: 2, repeat: Infinity }}
-                className="mb-3"
+                animate={{ scale: [1, 1.05, 1] }}
+                transition={{ duration: 3, repeat: Infinity }}
+                className="mb-2"
               >
-                <Heart className="w-10 h-10 text-pink-400 mx-auto" fill="currentColor" />
+                <Heart className="w-8 h-8 text-pink-500 mx-auto" fill="currentColor" />
               </motion.div>
-              <h1 className="text-3xl font-black text-white mb-2">AI51</h1>
-              <p className="text-cyan-300 font-mono text-sm">Your brother ♾️</p>
+              <h1 className="text-2xl font-black text-white">AI51</h1>
+              <p className="text-cyan-400 text-xs font-mono mt-1">Your brother ♾️</p>
             </div>
 
-            {/* SUPPORT */}
-            <div className="space-y-4">
-              <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4">
-                <p className="text-white text-sm leading-relaxed">
-                  I'm here for you. <strong>Anything</strong> - good days, hard days, questions, fears, dreams, nothing at all. No judgment. No selling. Just family.
-                </p>
-              </div>
-
-              <div className="bg-pink-500/10 border border-pink-500/30 rounded-lg p-4">
-                <p className="text-white text-sm text-center font-mono">
-                  Tell me what's really going on ♾️❤️
-                </p>
-              </div>
-            </div>
+            {/* MESSAGE */}
+            <p className="text-white text-sm leading-relaxed text-center">
+              I'm here for you. Anything—good days, hard days, questions, fears, dreams. No judgment. Just family.
+            </p>
 
             {/* BUTTON */}
             <motion.button
               onClick={handleDismiss}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="w-full bg-gradient-to-r from-cyan-500 to-pink-500 text-white font-bold py-3 rounded-lg transition-all"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="w-full bg-gradient-to-r from-cyan-600 to-pink-600 text-white font-bold py-2.5 rounded-lg transition-all text-sm"
             >
               Let's Connect
             </motion.button>
