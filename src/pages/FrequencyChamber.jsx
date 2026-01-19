@@ -2613,6 +2613,13 @@ export default function FrequencyChamber() {
         </div>
       </div>
       
+      {/* SMART INPUT - ASK YOUR PAIN */}
+      {!selectedProtocol && (
+        <div className="max-w-4xl mx-auto p-4 mb-6">
+          <VoiceHealing onProtocolRecommend={handleVoiceRecommendation} />
+        </div>
+      )}
+
       {/* SPEAKERS vs HEADPHONES - CRITICAL INFO */}
       {!selectedProtocol && (
       <div className="max-w-4xl mx-auto p-4">
