@@ -260,55 +260,7 @@ Return ONLY valid JSON (no markdown):
             <div className="flex items-start justify-between mb-8">
                 <div>
                     <h1 className="text-3xl font-black text-cyan-400 font-mono mb-1">ADD ARTIST</h1>
-                    <p className="text-gray-600 text-sm font-mono">Zero typing needed</p>
-                </div>
-            </div>
-
-            {/* ZERO FRICTION - 3 WAYS */}
-            <div className="mb-6 space-y-3">
-                
-                {/* 1. SPEAK */}
-                <button
-                    type="button"
-                    onClick={handleVoiceInput}
-                    disabled={voiceRecording || magicLoading}
-                    className="w-full bg-black border-2 border-gray-800 hover:border-cyan-500 text-white font-black py-4 rounded-lg font-mono text-sm transition-all flex items-center justify-center gap-2"
-                >
-                    <Mic2 className="w-5 h-5" />
-                    {voiceRecording ? 'LISTENING...' : 'SPEAK TO ADD (driving mode)'}
-                </button>
-
-                {/* 2. SCREENSHOT */}
-                <label className="w-full bg-black border-2 border-gray-800 hover:border-cyan-500 text-white font-black py-4 rounded-lg font-mono text-sm cursor-pointer transition-all flex items-center justify-center gap-2">
-                    <input 
-                        type="file" 
-                        accept="image/*" 
-                        onChange={handlePhotoExtract}
-                        className="hidden"
-                    />
-                    <ImageIcon className="w-5 h-5" />
-                    {photoExtracting ? 'EXTRACTING...' : 'SCREENSHOT THEIR PROFILE'}
-                </label>
-
-                {/* 3. PASTE LINK */}
-                <div className="bg-black border-2 border-gray-800 rounded-lg p-3">
-                    <div className="flex gap-2">
-                        <Input
-                            value={socialLink}
-                            onChange={(e) => setSocialLink(e.target.value)}
-                            className="flex-1 bg-black border-none text-white font-mono placeholder:text-gray-600 text-sm"
-                            placeholder="Or paste Instagram/Spotify link..."
-                            onKeyDown={(e) => e.key === 'Enter' && (e.preventDefault(), handleMagicFill())}
-                        />
-                        <Button
-                            type="button"
-                            onClick={handleMagicFill}
-                            disabled={magicLoading || !socialLink.trim()}
-                            className="bg-cyan-500 hover:bg-cyan-600 text-black font-black px-6 font-mono text-sm"
-                        >
-                            {magicLoading ? '...' : 'GO'}
-                        </Button>
-                    </div>
+                    <p className="text-gray-600 text-sm font-mono">Name • Phone • Email</p>
                 </div>
             </div>
 
