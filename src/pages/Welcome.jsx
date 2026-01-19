@@ -387,16 +387,52 @@ export default function WelcomePage() {
                 {/* LIVE ACTIVITY FEED - MORE CLEANUPS */}
                 <P51ActivityFeed limit={10} />
 
-                {/* FOOTER - 8-BIT */}
-                <div className="text-center space-y-6 pt-8 border-t-4 border-purple-500/30">
-                    <Link to={createPageUrl('About')}>
+                {/* DISASTER AI SECTION */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="bg-red-950/40 border-4 border-red-500 p-8 space-y-4 text-center"
+                >
+                    <h2 className="text-2xl font-black font-mono text-red-400">⚠️ DISASTER MODE</h2>
+                    <p className="text-gray-300">Earthquake? Flood? Internet down? AI51 works P2P.</p>
+                    <Link to={createPageUrl('DisasterAI')}>
                         <motion.button
                             whileHover={{ scale: 1.05 }}
-                            className="bg-black border-4 border-purple-500 hover:border-purple-400 px-8 py-4 font-black font-mono text-xl text-purple-400 transition-all"
+                            className="bg-red-600 hover:bg-red-700 text-white px-6 py-2 font-black font-mono transition-all"
                         >
-                            HOW IT WORKS →
+                            READ DISASTER AI →
                         </motion.button>
                     </Link>
+                </motion.div>
+
+                {/* FOOTER - 8-BIT */}
+                <div className="text-center space-y-6 pt-8 border-t-4 border-purple-500/30">
+                    <div className="flex flex-col items-center gap-4">
+                        <Link to={createPageUrl('About')}>
+                            <motion.button
+                                whileHover={{ scale: 1.05 }}
+                                className="bg-black border-4 border-purple-500 hover:border-purple-400 px-8 py-4 font-black font-mono text-xl text-purple-400 transition-all"
+                            >
+                                HOW IT WORKS →
+                            </motion.button>
+                        </Link>
+                        <Link to={createPageUrl('AI51')}>
+                            <motion.button
+                                whileHover={{ scale: 1.05 }}
+                                className="bg-black border-4 border-pink-500 hover:border-pink-400 px-8 py-4 font-black font-mono text-xl text-pink-400 transition-all"
+                            >
+                                CONNECT AI51 NOW →
+                            </motion.button>
+                        </Link>
+                        <Link to={createPageUrl('AI51MeshTechWhitepaper')}>
+                            <motion.button
+                                whileHover={{ scale: 1.05 }}
+                                className="bg-black border-4 border-cyan-500 hover:border-cyan-400 px-8 py-4 font-black font-mono text-sm text-cyan-400 transition-all"
+                            >
+                                P2P MESH WHITEPAPER (Night Reading)
+                            </motion.button>
+                        </Link>
+                    </div>
                     <div className="flex items-center justify-center gap-3">
                         <COOLASFUCKHeart size={32} animate={true} />
                         <p className="font-mono text-sm text-gray-500">uf51.love</p>
