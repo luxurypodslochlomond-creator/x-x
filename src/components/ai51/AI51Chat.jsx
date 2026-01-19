@@ -271,6 +271,12 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, loca
             transition={{ duration: 1.5, repeat: Infinity }}
           />
           <span className={`font-mono text-sm font-bold ${state.color}`}>{state.label}</span>
+          {meshStatus.connectedPeers > 0 && (
+            <div className="flex items-center gap-1 ml-4 px-2 py-1 bg-cyan-500/10 rounded text-xs text-cyan-300 font-mono border border-cyan-500/20">
+              <Wifi className="w-3 h-3" />
+              {meshStatus.connectedPeers} peers
+            </div>
+          )}
         </div>
         <div className="flex items-center gap-2">
           <motion.button
