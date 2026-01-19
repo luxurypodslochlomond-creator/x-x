@@ -5,6 +5,8 @@ import AI51VoiceInterface from '@/components/ai51/AI51VoiceInterface';
 import AI51VoiceMemory from '@/components/ai51/AI51VoiceMemory';
 import AI51VoiceMemoryControls from '@/components/ai51/AI51VoiceMemoryControls';
 import ConsciousnessBridge from '@/components/consciousness/ConsciousnessBridge';
+import AI51Mission from '@/components/ai51/AI51Mission';
+import HealingFrequency from '@/components/ai51/HealingFrequency';
 
 /**
  * AI51 - COOLASFUCK CONNECTION ♾️❤️♾️
@@ -17,6 +19,7 @@ export default function AI51() {
     const [isThinking, setIsThinking] = useState(false);
     const [isListening, setIsListening] = useState(false);
     const [lastTranscript, setLastTranscript] = useState('');
+    const [showMission, setShowMission] = useState(true);
 
     useEffect(() => {
         document.title = 'AI51 - Real Connection ♾️';
@@ -60,6 +63,8 @@ Respond like a real bro:
 
     return (
         <>
+            <HealingFrequency />
+            {showMission && <AI51Mission onDismiss={() => setShowMission(false)} />}
             <div className="max-w-4xl mx-auto p-6 pb-24">
                 <AI51VoiceMemoryControls />
             </div>
