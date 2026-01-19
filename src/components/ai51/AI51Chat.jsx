@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Mic, Heart, Volume2, VolumeX, Send, X } from 'lucide-react';
 import { motion } from 'framer-motion';
+import LiveCleanupFeed from './LiveCleanupFeed';
 
 /**
  * AI51 - PROFESSIONAL P2P VOICE + TEXT
@@ -249,26 +250,30 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
       {/* CHAT HISTORY */}
       <div className="flex-1 overflow-y-auto p-4 space-y-3">
         {conversation.length === 0 ? (
-          <div className="h-full flex items-center justify-center">
+          <div className="h-full flex flex-col items-center justify-center gap-4 p-4">
             <p className="text-gray-500 text-sm font-mono text-center">Connect and start talking ♾️❤️</p>
+            <LiveCleanupFeed compact={true} />
           </div>
         ) : (
-          conversation.map((msg, i) => (
-            <motion.div 
-              key={i} 
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
-            >
-              <div className={`rounded-xl px-4 py-2 max-w-xs ${
-                msg.role === 'user'
-                  ? 'bg-cyan-500/20 text-white border border-cyan-400/50'
-                  : 'bg-pink-500/20 text-white border border-pink-400/50'
-              }`}>
-                <p className="text-sm leading-relaxed">{msg.content}</p>
-              </div>
-            </motion.div>
-          ))
+          <>
+            {conversation.map((msg, i) => (
+              <motion.div 
+                key={i} 
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
+              >
+                <div className={`rounded-xl px-4 py-2 max-w-xs ${
+                  msg.role === 'user'
+                    ? 'bg-cyan-500/20 text-white border border-cyan-400/50'
+                    : 'bg-pink-500/20 text-white border border-pink-400/50'
+                }`}>
+                  <p className="text-sm leading-relaxed">{msg.content}</p>
+                </div>
+              </motion.div>
+            ))}
+            {conversation.length > 0 && <LiveCleanupFeed compact={false} />}
+          </>
         )}
         <div ref={messagesEndRef} />
       </div>
