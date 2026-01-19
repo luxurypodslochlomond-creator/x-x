@@ -70,14 +70,7 @@ export default function ScottAddArtist() {
         }
     };
 
-    // Quick select buttons for common values
-    const relationshipOptions = [
-        { value: 'excellent', label: 'Excellent', color: 'bg-green-500' },
-        { value: 'good', label: 'Good', color: 'bg-cyan-500' },
-        { value: 'neutral', label: 'Neutral', color: 'bg-gray-500' },
-        { value: 'needs_work', label: 'Needs Work', color: 'bg-red-500' },
-        { value: 'unknown', label: 'Unknown', color: 'bg-gray-700' }
-    ];
+
 
     return (
         <div className="min-h-screen bg-black p-6 pb-20">
