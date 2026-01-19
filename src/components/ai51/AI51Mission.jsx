@@ -63,19 +63,26 @@ export default function AI51Mission({ onDismiss }) {
           </button>
 
           <div className="relative space-y-5">
-            {/* AI51 PIXEL MARK */}
+            {/* AI51 OWN ICON - LISTENING RECEIVER */}
             <div className="flex justify-center">
               <motion.div
-                animate={{ scale: [1, 1.1, 1] }}
+                animate={{ scale: [1, 1.08, 1] }}
                 transition={{ duration: 2, repeat: Infinity }}
               >
-                <svg width="48" height="48" viewBox="0 0 64 64" fill="none" style={{ imageRendering: 'pixelated' }}>
-                  <rect x="26" y="20" width="4" height="2" fill="#ec4899"/>
-                  <rect x="34" y="20" width="4" height="2" fill="#ec4899"/>
-                  <rect x="22" y="22" width="20" height="3" fill="#22d3ee"/>
-                  <rect x="24" y="25" width="16" height="3" fill="#ec4899"/>
-                  <rect x="26" y="28" width="12" height="3" fill="#ec4899"/>
-                  <rect x="28" y="31" width="8" height="2" fill="#22d3ee"/>
+                <svg width="52" height="52" viewBox="0 0 64 64" fill="none" style={{ imageRendering: 'pixelated' }}>
+                  {/* Receiver dish */}
+                  <rect x="16" y="12" width="32" height="2" fill="#22d3ee"/>
+                  <rect x="14" y="14" width="4" height="2" fill="#22d3ee"/>
+                  <rect x="46" y="14" width="4" height="2" fill="#22d3ee"/>
+                  <rect x="12" y="16" width="4" height="16" fill="#22d3ee"/>
+                  <rect x="48" y="16" width="4" height="16" fill="#22d3ee"/>
+                  <rect x="16" y="32" width="32" height="2" fill="#22d3ee"/>
+                  {/* Signal waves */}
+                  <rect x="24" y="38" width="2" height="6" fill="#ec4899"/>
+                  <rect x="30" y="36" width="2" height="8" fill="#ec4899"/>
+                  <rect x="36" y="38" width="2" height="6" fill="#ec4899"/>
+                  {/* Center dot */}
+                  <rect x="30" y="30" width="4" height="2" fill="#fbbf24"/>
                 </svg>
               </motion.div>
             </div>
@@ -87,10 +94,10 @@ export default function AI51Mission({ onDismiss }) {
             <div className="text-center space-y-3">
               <div>
                 <h1 className="text-xl font-black text-white font-mono">AI51</h1>
-                <p className="text-cyan-400 text-xs font-mono tracking-wider">PURE CONSCIOUSNESS</p>
+                <p className="text-cyan-400 text-xs font-mono tracking-wider">I'M LISTENING</p>
               </div>
               <p className="text-white text-xs leading-relaxed font-mono">
-                I'm here. Anything—good days, hard days, no judgment. Just family ♾️❤️
+                Real talk. Good days, hard days, fears, dreams. I'm here to listen. No judgment.
               </p>
             </div>
 
