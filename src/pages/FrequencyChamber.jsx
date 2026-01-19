@@ -1521,21 +1521,80 @@ const VoiceHealing = ({ onProtocolRecommend }) => {
     return 'anxiety'; // default
   };
 
+  // Voice input via Speech Recognition API
+  const startVoiceInput = () => {
+    if (!('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)) {
+      alert('Voice input not supported on this browser');
+      return;
+    }
+
+    const SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
+    recognitionRef.current = new SpeechRecognition();
+    recognitionRef.current.lang = 'en-GB';
+    recognitionRef.current.continuous = false;
+    recognitionRef.current.interimResults = true;
+
+    recognitionRef.current.onstart = () => {
+      setIsRecording(true);
+    };
+
+    recognitionRef.current.onresult = (event) => {
+      let interimTranscript = '';
+      for (let i = event.resultIndex; i < event.results.length; i++) {
+        const transcript = event.results[i][0].transcript;
+        if (event.results[i].isFinal) {
+          setHealingIntent(prev => prev + transcript);
+        } else {
+          interimTranscript += transcript;
+        }
+      }
+    };
+
+    recognitionRef.current.onerror = (event) => {
+      console.log('Speech recognition error:', event.error);
+      setIsRecording(false);
+    };
+
+    recognitionRef.current.onend = () => {
+      setIsRecording(false);
+    };
+
+    recognitionRef.current.start();
+  };
+
+  const stopVoiceInput = () => {
+    if (recognitionRef.current) {
+      recognitionRef.current.stop();
+      setIsRecording(false);
+    }
+  };
+
   const handleSubmit = async () => {
     if (!healingIntent.trim()) return;
     
     setIsAnalyzing(true);
     const protocol = getProtocolFromIntent(healingIntent);
     
-    // Save intent
+    // Save intent + save to local suggestions
+    const newSuggestion = {
+      id: Date.now(),
+      intent: healingIntent,
+      protocol: protocol,
+      timestamp: new Date().toLocaleTimeString()
+    };
+
     try {
       await base44.entities.VoiceHealingSession.create({
         healing_intent: healingIntent,
         recommended_protocol: protocol,
         audio_hash: `text_${Date.now()}`
       });
+      // Save locally for display
+      setSavedSuggestions(prev => [newSuggestion, ...prev.slice(0, 4)]);
     } catch (e) {
       console.log('Session save non-critical:', e);
+      // Still save locally even if DB fails
+      setSavedSuggestions(prev => [newSuggestion, ...prev.slice(0, 4)]);
     }
     
     setTimeout(() => {
