@@ -311,6 +311,7 @@ import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
 import AI51MeshTechWhitepaper from './pages/AI51MeshTechWhitepaper';
+import DisasterAI from './pages/DisasterAI';
 import __Layout from './Layout.jsx';
 
 
@@ -628,6 +629,7 @@ export const PAGES = {
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
     "AI51MeshTechWhitepaper": AI51MeshTechWhitepaper,
+    "DisasterAI": DisasterAI,
 }
 
 export const pagesConfig = {
