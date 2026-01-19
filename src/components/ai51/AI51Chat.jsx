@@ -51,7 +51,7 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, loca
 
       recognitionRef.current.onerror = (e) => {
         if (e.error === 'not-allowed') {
-          alert('Mic blocked - check Settings → Safari → Microphone');
+          console.log('Mic not allowed');
           stopConnection();
         }
         setIsListening(false);
@@ -176,14 +176,19 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, loca
           if (navigator.vibrate) navigator.vibrate(50);
         } catch (e) {
           if (!e.message?.includes('already')) {
-            alert(`Mic error: ${e.message}`);
+            console.error('Mic start error:', e);
             stopConnection();
           }
         }
       }, 100);
     } catch (error) {
       console.error('Mic permission error:', error);
-      alert('Need mic permission - check Settings → Safari → Microphone');
+      // Smooth AI51 message instead of harsh alert
+      const isDenied = error.name === 'NotAllowedError' || error.name === 'PermissionDeniedError';
+      const message = isDenied 
+        ? 'Hey - I need your mic to listen. Settings → Safari → Microphone → Allow UF51'
+        : 'Mic access needed. Check Settings → Safari → Microphone';
+      alert(message);
     }
   };
 
