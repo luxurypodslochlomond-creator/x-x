@@ -150,7 +150,7 @@ export default function AI51Page() {
 
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ 
-        audio: { echoCancellation: true, noiseSuppression: true }
+        audio: { echoCancellation: false, noiseSuppression: false }
       });
       micStreamRef.current = stream;
 
@@ -158,7 +158,8 @@ export default function AI51Page() {
       audioContextRef.current = new AudioContext();
       const source = audioContextRef.current.createMediaStreamSource(stream);
       analyzerRef.current = audioContextRef.current.createAnalyser();
-      analyzerRef.current.fftSize = 64;
+      analyzerRef.current.fftSize = 256;
+      analyzerRef.current.smoothingTimeConstant = 0.1;
       source.connect(analyzerRef.current);
 
       connectionActiveRef.current = true;
