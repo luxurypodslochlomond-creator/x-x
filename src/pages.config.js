@@ -82,6 +82,7 @@ import BusinessVault from './pages/BusinessVault';
 import CB51 from './pages/CB51';
 import CB51AAA from './pages/CB51AAA';
 import CB51Login from './pages/CB51Login';
+import CB51LoginDirect from './pages/CB51LoginDirect';
 import CB51Pricing from './pages/CB51Pricing';
 import CICSanctuary from './pages/CICSanctuary';
 import COPPACompliance from './pages/COPPACompliance';
@@ -222,8 +223,8 @@ import ScottEmailSyncDiagnostics from './pages/ScottEmailSyncDiagnostics';
 import ScottExpenses from './pages/ScottExpenses';
 import ScottFeatureRequests from './pages/ScottFeatureRequests';
 import ScottFinanceAdmin from './pages/ScottFinanceAdmin';
-import ScottGigOffers from './pages/ScottGigOffers';
 import ScottFinancialDashboard from './pages/ScottFinancialDashboard';
+import ScottGigOffers from './pages/ScottGigOffers';
 import ScottGigPacks from './pages/ScottGigPacks';
 import ScottGuestList from './pages/ScottGuestList';
 import ScottInsurance from './pages/ScottInsurance';
@@ -312,7 +313,6 @@ import YoungWarriors from './pages/YoungWarriors';
 import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
-import CB51LoginDirect from './pages/CB51LoginDirect';
 import __Layout from './Layout.jsx';
 
 
@@ -401,6 +401,7 @@ export const PAGES = {
     "CB51": CB51,
     "CB51AAA": CB51AAA,
     "CB51Login": CB51Login,
+    "CB51LoginDirect": CB51LoginDirect,
     "CB51Pricing": CB51Pricing,
     "CICSanctuary": CICSanctuary,
     "COPPACompliance": COPPACompliance,
@@ -541,8 +542,8 @@ export const PAGES = {
     "ScottExpenses": ScottExpenses,
     "ScottFeatureRequests": ScottFeatureRequests,
     "ScottFinanceAdmin": ScottFinanceAdmin,
-    "ScottGigOffers": ScottGigOffers,
     "ScottFinancialDashboard": ScottFinancialDashboard,
+    "ScottGigOffers": ScottGigOffers,
     "ScottGigPacks": ScottGigPacks,
     "ScottGuestList": ScottGuestList,
     "ScottInsurance": ScottInsurance,
@@ -631,7 +632,6 @@ export const PAGES = {
     "ZeroEgoProtocol": ZeroEgoProtocol,
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
-    "CB51LoginDirect": CB51LoginDirect,
 }
 
 export const pagesConfig = {
