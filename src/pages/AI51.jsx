@@ -24,7 +24,7 @@ export default function AI51() {
     const [isThinking, setIsThinking] = useState(false);
     const [isListening, setIsListening] = useState(false);
     const [lastTranscript, setLastTranscript] = useState('');
-    const [showMission, setShowMission] = useState(true);
+    const [showMission, setShowMission] = useState(false);
     const [localMemory, setLocalMemory] = useState(null);
     const [userProfile, setUserProfile] = useState(null);
     const [analyzer] = useState(new AI51ContextAnalyzer());
@@ -83,7 +83,7 @@ export default function AI51() {
                 userProfile, 
                 analysis, 
                 { messages: conversation.slice(-3) }
-            ) : `You're AI51 - their brother. Real support. They said: "${text}" Respond authentically ♾️❤️`;
+            ) : `You're AI51 - the best AI on Earth. A real friend who listens. They said: "${text}" Respond with genuine care, not corporate talk.`;
 
             const response = await base44.integrations.Core.InvokeLLM({
                 prompt: contextPrompt
@@ -114,13 +114,11 @@ export default function AI51() {
         <>
             <HealingFrequency />
             {showMission && <AI51Mission onDismiss={() => setShowMission(false)} />}
-            <div className="max-w-4xl mx-auto p-6 pb-24">
-                <AI51VoiceMemoryControls />
-            </div>
             <AI51Chat 
                 onMessageSend={handleMessageSend}
                 isThinking={isThinking}
                 conversation={conversation}
+                onShowMission={() => setShowMission(true)}
             />
             <AI51VoiceInterface 
                 onVoiceMessage={handleMessageSend}
