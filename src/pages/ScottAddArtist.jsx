@@ -12,10 +12,6 @@ export default function ScottAddArtist() {
     const navigate = useNavigate();
     const [saving, setSaving] = useState(false);
     const [uploading, setUploading] = useState(false);
-    const [magicLoading, setMagicLoading] = useState(false);
-    const [socialLink, setSocialLink] = useState('');
-    const [voiceRecording, setVoiceRecording] = useState(false);
-    const [photoExtracting, setPhotoExtracting] = useState(false);
     const [formData, setFormData] = useState({
         name: '',
         profile_pic_url: '',
