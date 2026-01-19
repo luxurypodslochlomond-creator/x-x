@@ -246,8 +246,8 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
         </motion.button>
       </div>
 
-      {/* CHAT HISTORY */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-3">
+      {/* CHAT HISTORY - SCROLLABLE */}
+      <div className="flex-1 overflow-y-auto p-4 space-y-3 min-h-0">
         {conversation.length === 0 ? (
           <div className="h-full flex items-center justify-center">
             <p className="text-gray-600 text-sm font-mono">Connect and start talking</p>
@@ -285,7 +285,7 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
       )}
 
       {/* WAVEFORM VISUALIZER */}
-      <div className="bg-black border-t border-cyan-500/20 px-4 py-3 flex items-end justify-center gap-1 h-16">
+      <div className="flex-shrink-0 bg-black border-t border-cyan-500/20 px-4 py-3 flex items-end justify-center gap-1 h-14">
         {connectionActive ? (
           frequencyData.map((val, i) => (
             <motion.div
@@ -298,14 +298,25 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
             />
           ))
         ) : (
-          <p className="text-gray-600 text-xs font-mono">inactive</p>
+          <svg width="80" height="40" viewBox="0 0 80 40" className="opacity-30">
+            {[...Array(16)].map((_, i) => (
+              <rect
+                key={i}
+                x={i * 5}
+                y="15"
+                width="3"
+                height="10"
+                fill="rgba(34, 211, 238, 0.3)"
+              />
+            ))}
+          </svg>
         )}
       </div>
 
       {/* MAIN BUTTON */}
-      <div className="bg-black border-t border-cyan-500/20 p-6 flex justify-center">
+      <div className="flex-shrink-0 bg-black border-t border-cyan-500/20 p-4 flex justify-center">
         <motion.button
-          className="w-24 h-24 rounded-full flex items-center justify-center relative"
+          className="w-20 h-20 rounded-full flex items-center justify-center relative"
           onClick={toggleConnection}
           disabled={isThinking}
           whileTap={{ scale: 0.95 }}
@@ -324,15 +335,15 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
           }}
         >
           {connectionActive ? (
-            <Heart className={`w-10 h-10 ${isListening ? 'text-pink-400' : 'text-cyan-400'}`} strokeWidth={1.5} />
+            <Heart className={`w-8 h-8 ${isListening ? 'text-pink-400' : 'text-cyan-400'}`} strokeWidth={1.5} />
           ) : (
-            <Mic className="w-10 h-10 text-cyan-400" strokeWidth={1.5} />
+            <Mic className="w-8 h-8 text-cyan-400" strokeWidth={1.5} />
           )}
         </motion.button>
       </div>
 
       {/* TEXT INPUT */}
-      <div className="bg-black border-t border-cyan-500/20 p-3 flex gap-2">
+      <div className="flex-shrink-0 bg-black border-t border-cyan-500/20 p-3 flex gap-2">
         <input
           type="text"
           value={textInput}
