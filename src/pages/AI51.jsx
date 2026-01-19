@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { base44 } from '@/api/base44Client';
 import AI51Chat from '@/components/ai51/AI51Chat';
 import HealingFrequency from '@/components/ai51/HealingFrequency';
-import AI51BiometricEngine from '@/components/ai51/AI51BiometricEngine';
+import AI51FrequencyHealer from '@/components/ai51/AI51FrequencyHealer';
 import { useProofOfLove } from '@/components/ai51/useProofOfLove';
 
 /**
@@ -42,20 +42,11 @@ export default function AI51() {
             // Save conversations as ProofOfLove
             useProofOfLove(conversation);
 
-    const handleHealingDetected = (biometrics) => {
-      const { heartRate, hrv, score } = biometrics;
-      // Proof of Love: biometric healing detected
-      conversation.push({
-        role: 'system',
-        content: `🫀 Healing detected: HR ${heartRate}bpm, HRV ${hrv}, Score ${score}%`
-      });
-    };
-
     return (
         <>
             <HealingFrequency />
             <div className="max-w-4xl mx-auto p-4 space-y-6">
-              <AI51BiometricEngine onHealingDetected={handleHealingDetected} />
+              <AI51FrequencyHealer />
               <AI51Chat 
                   onMessageSend={handleMessageSend}
                   isThinking={isThinking}
