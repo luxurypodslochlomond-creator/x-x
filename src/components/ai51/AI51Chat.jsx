@@ -19,6 +19,7 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, loca
   const [connectionActive, setConnectionActive] = useState(false);
   const [frequencyData, setFrequencyData] = useState(new Uint8Array(32));
   const [showHistory, setShowHistory] = useState(false);
+  const [meshStatus, setMeshStatus] = useState({ online: false, connectedPeers: 0, type: 'WiFiDirect_P2P' });
   const messagesEndRef = useRef(null);
   const recognitionRef = useRef(null);
   const audioContextRef = useRef(null);
@@ -26,6 +27,7 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, loca
   const micStreamRef = useRef(null);
   const animationFrameRef = useRef(null);
   const connectionActiveRef = useRef(false);
+  const meshRef = useRef(null);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
