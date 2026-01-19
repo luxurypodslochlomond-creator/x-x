@@ -1,7 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Mic, Heart, Volume2, VolumeX, Send, Clock } from 'lucide-react';
+import { Mic, Heart, Volume2, VolumeX, Send, Clock, Wifi } from 'lucide-react';
 import { motion } from 'framer-motion';
 import AI51ChatHistory from './AI51ChatHistory';
+import AI51WiFiDirectMesh from './AI51WiFiDirectMesh';
 
 /**
  * AI51 - PROFESSIONAL P2P VOICE + TEXT
