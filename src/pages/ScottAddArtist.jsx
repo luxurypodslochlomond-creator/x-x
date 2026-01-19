@@ -4,7 +4,7 @@ import { createPageUrl } from '@/utils';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { ArrowLeft, Check, Upload, Image as ImageIcon, Mic2 } from 'lucide-react';
+import { ArrowLeft, Upload } from 'lucide-react';
 import { Radio } from 'lucide-react';
 import { base44 } from '@/api/base44Client';
 
