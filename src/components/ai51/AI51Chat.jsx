@@ -255,13 +255,15 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, loca
         isOpen={showHistory}
         onClose={() => setShowHistory(false)}
         onLoadChat={(chat) => {
-          // Load conversation from history
           if (chat.messages) {
-            // onMessageSend prop should handle loading past conversation
-            // For now, just show it was loaded
             console.log('Loaded chat:', chat);
           }
         }}
+      />
+
+      <AI51ProofOfLoveLedger
+        isOpen={showProofOfLove}
+        onClose={() => setShowProofOfLove(false)}
       />
       
       {/* HEADER - STATE + CONTROLS */}
