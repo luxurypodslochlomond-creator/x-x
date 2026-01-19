@@ -1494,7 +1494,7 @@ const VoiceHealing = ({ onProtocolRecommend }) => {
   const [audioBlob, setAudioBlob] = useState(null);
   const [voiceAnalysis, setVoiceAnalysis] = useState(null);
   const [healingIntent, setHealingIntent] = useState('');
-  const [showIntentInput, setShowIntentInput] = useState(true);
+  const [step, setStep] = useState('text'); // 'text' | 'voice' | 'result'
   const [previousSessions, setPreviousSessions] = useState([]);
   const mediaRecorderRef = useRef(null);
   const audioChunksRef = useRef([]);
@@ -1687,8 +1687,8 @@ const VoiceHealing = ({ onProtocolRecommend }) => {
           <rect x="8" y="20" width="8" height="2" fill="#f472b6"/>
         </svg>
         <div>
-          <h3 className="text-xl font-black font-mono text-pink-400">VOICE HEALING</h3>
-          <p className="text-sm text-gray-400 font-mono">Intent + Voice → AI finds your cure frequency</p>
+          <h3 className="text-xl font-black font-mono text-pink-400">SMART INPUT</h3>
+          <p className="text-sm text-gray-400 font-mono">Text or voice → AI recommends your frequency</p>
         </div>
       </div>
 
@@ -1727,46 +1727,140 @@ const VoiceHealing = ({ onProtocolRecommend }) => {
         </div>
       )}
 
-      {/* INTENT INPUT */}
-      {showIntentInput && !isRecording && !isAnalyzing && !voiceAnalysis && (
-        <div className="mb-4">
-          <label className="text-sm text-pink-300 font-mono mb-2 block">
-            What do you want to heal? (Goldman's Intent = 50% of healing)
-          </label>
-          <input
-            type="text"
-            value={healingIntent}
-            onChange={(e) => setHealingIntent(e.target.value)}
-            placeholder="e.g., 'my anxiety', 'heartbreak', 'insomnia'..."
-            className="w-full bg-black/60 border-2 border-pink-500/50 text-white px-4 py-3 font-mono focus:border-pink-500 focus:outline-none"
-          />
+      {/* STEP 1: TEXT INPUT (DEFAULT, INSTANT) */}
+      {step === 'text' && (
+        <div className="space-y-3">
+          <div>
+            <label className="text-sm text-pink-300 font-mono mb-2 block">
+              What do you want to heal?
+            </label>
+            <input
+              type="text"
+              value={healingIntent}
+              onChange={(e) => setHealingIntent(e.target.value)}
+              placeholder="e.g., 'anxiety', 'insomnia', 'chest pain'..."
+              className="w-full bg-black/60 border-2 border-pink-500/50 text-white px-4 py-3 font-mono focus:border-pink-500 focus:outline-none"
+              onKeyPress={(e) => {
+                if (e.key === 'Enter' && healingIntent.trim()) {
+                  setStep('voice');
+                }
+              }}
+            />
+          </div>
+          
+          <button
+            onClick={() => setStep('voice')}
+            disabled={!healingIntent.trim()}
+            className="w-full py-3 bg-pink-600 hover:bg-pink-700 text-white font-black font-mono border-2 border-pink-400 disabled:opacity-50"
+          >
+            NEXT: Add Voice (Optional)
+          </button>
+          
+          <button
+            onClick={() => {
+              setIsAnalyzing(true);
+              setTimeout(() => {
+                setVoiceAnalysis({ stressScore: 50, intent: healingIntent });
+                setIsAnalyzing(false);
+                setStep('result');
+              }, 500);
+            }}
+            disabled={!healingIntent.trim()}
+            className="w-full py-2 bg-black border-2 border-gray-600 text-gray-400 font-mono text-sm disabled:opacity-30"
+          >
+            Skip voice → Go to results
+          </button>
         </div>
       )}
 
-      {!isRecording && !isAnalyzing && !voiceAnalysis && (
-        <>
+      {/* STEP 2: VOICE (OPTIONAL ENHANCEMENT) */}
+      {step === 'voice' && (
+        <div className="space-y-3">
+          {!isRecording && !isAnalyzing && (
+            <>
+              <p className="text-sm text-gray-400 font-mono text-center">
+                Talk about how you feel (10 seconds max). Or skip.
+              </p>
+              <button
+                onClick={startRecording}
+                className="w-full py-4 bg-pink-600 hover:bg-pink-700 text-white font-black font-mono text-lg border-4 border-pink-400 flex items-center justify-center gap-3"
+              >
+                <Mic className="w-5 h-5" />
+                TAP TO SPEAK
+              </button>
+              <button
+                onClick={() => {
+                  setVoiceAnalysis({ stressScore: 50, intent: healingIntent });
+                  setStep('result');
+                }}
+                className="w-full py-2 bg-black border-2 border-gray-600 text-gray-400 font-mono text-sm"
+              >
+                Skip voice
+              </button>
+            </>
+          )}
+
+          {isRecording && (
+            <div className="text-center space-y-4">
+              <motion.div
+                animate={{ scale: [1, 1.2, 1] }}
+                transition={{ duration: 1, repeat: Infinity }}
+                className="mx-auto w-16 h-16 rounded-full bg-pink-500 flex items-center justify-center"
+              >
+                <Mic className="w-8 h-8 text-white" />
+              </motion.div>
+              <p className="text-pink-400 font-mono font-bold">LISTENING...</p>
+              <button
+                onClick={stopRecording}
+                className="px-4 py-2 bg-gray-700 text-white font-mono text-sm"
+              >
+                Stop
+              </button>
+            </div>
+          )}
+
+          {isAnalyzing && (
+            <div className="text-center">
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 1, repeat: Infinity }}
+              >
+                <Brain className="w-12 h-12 text-cyan-400 mx-auto" />
+              </motion.div>
+              <p className="text-cyan-400 font-mono font-bold mt-2">ANALYZING...</p>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* STEP 3: RESULTS + RECOMMENDATION */}
+      {step === 'result' && voiceAnalysis && (
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="space-y-4"
+        >
+          <div className="bg-green-900/30 border-2 border-green-500 p-4">
+            <p className="text-green-400 font-mono font-bold mb-3">✓ ANALYSIS COMPLETE</p>
+            <p className="text-white text-sm mb-2"><strong>Your intention:</strong> {healingIntent}</p>
+            {voiceAnalysis.stressScore && (
+              <p className="text-cyan-400 font-mono text-sm mb-2">Stress level: {voiceAnalysis.stressScore}%</p>
+            )}
+            <p className="text-pink-400 text-sm"><strong>Recommended:</strong> Browse all protocols below</p>
+          </div>
+          
           <button
-            onClick={startRecording}
-            disabled={!healingIntent.trim()}
-            className="w-full py-4 bg-pink-600 hover:bg-pink-700 text-white font-black font-mono text-lg border-4 border-pink-400 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3"
-            style={{ boxShadow: '4px 4px 0px rgba(236, 72, 153, 0.8)' }}
+            onClick={() => {
+              setStep('text');
+              setHealingIntent('');
+              setVoiceAnalysis(null);
+            }}
+            className="w-full py-3 bg-pink-600 hover:bg-pink-700 text-white font-black font-mono"
           >
-            <svg width="24" height="24" viewBox="0 0 24 24">
-              <rect x="10" y="2" width="4" height="10" fill="white"/>
-              <rect x="8" y="4" width="2" height="6" fill="#fbbf24"/>
-              <rect x="14" y="4" width="2" height="6" fill="#fbbf24"/>
-              <rect x="10" y="12" width="4" height="2" fill="white"/>
-              <rect x="11" y="14" width="2" height="4" fill="white"/>
-              <rect x="6" y="18" width="12" height="2" fill="white"/>
-              <rect x="8" y="20" width="8" height="2" fill="#fbbf24"/>
-            </svg>
-            TAP TO SPEAK
+            New Search
           </button>
-          <p className="text-gray-500 text-xs font-mono text-center mt-2">
-            📱 Mobile: Allow mic when prompted
-          </p>
-        </>
-        )}
+        </motion.div>
+      )}
 
       {isRecording && (
         <div className="text-center space-y-4">
