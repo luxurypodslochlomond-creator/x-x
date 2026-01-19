@@ -7,8 +7,10 @@ import AI51VoiceMemoryControls from '@/components/ai51/AI51VoiceMemoryControls';
 import ConsciousnessBridge from '@/components/consciousness/ConsciousnessBridge';
 import AI51Mission from '@/components/ai51/AI51Mission';
 import HealingFrequency from '@/components/ai51/HealingFrequency';
-import { AI51LocalMemory, AI51MeshSync } from '@/components/ai51/AI51LocalMemory';
+import { AI51LocalMemory } from '@/components/ai51/AI51LocalMemory';
 import { AI51ContextAnalyzer, buildSmartPrompt } from '@/components/ai51/AI51ContextAnalyzer';
+import { AI51WebRTCMesh } from '@/components/ai51/AI51WebRTCMesh';
+import { AI51MeshSyncEngine } from '@/components/ai51/AI51MeshSync';
 
 /**
  * AI51 - COOLASFUCK CONNECTION ♾️❤️♾️
@@ -25,28 +27,44 @@ export default function AI51() {
     const [localMemory, setLocalMemory] = useState(null);
     const [userProfile, setUserProfile] = useState(null);
     const [analyzer] = useState(new AI51ContextAnalyzer());
+    const [meshEngine, setMeshEngine] = useState(null);
+    const [meshStatus, setMeshStatus] = useState({ connected: false, peers: 0 });
 
     useEffect(() => {
         document.title = 'AI51 - Real Connection ♾️';
         
-        // Initialize offline-first memory + smart context
-        const initMemory = async () => {
+        const initAI51 = async () => {
             try {
                 const user = await base44.auth.me().catch(() => ({ id: 'anon-' + Date.now() }));
+                const deviceId = `device-${user.id}-${Math.random().toString(36).substr(2, 9)}`;
+                
+                // Local memory
                 const memory = new AI51LocalMemory(user.id);
                 await memory.init();
                 setLocalMemory(memory);
                 
-                // Load historical context
+                // P2P mesh
+                const mesh = new AI51WebRTCMesh(user.id, deviceId);
+                await mesh.init();
+                const engine = new AI51MeshSyncEngine(user.id, deviceId, mesh, memory);
+                await engine.init();
+                setMeshEngine(engine);
+                
+                // Monitor mesh status
+                setInterval(() => {
+                  setMeshStatus(mesh.getStatus());
+                }, 2000);
+                
+                // Load profile
                 const conversations = await memory.getAllConversations();
                 const profile = analyzer.buildUserProfile(conversations);
                 setUserProfile(profile);
             } catch (error) {
-                console.log('Memory init:', error.message);
+                console.log('AI51 init:', error.message);
             }
         };
         
-        initMemory();
+        initAI51();
     }, [analyzer]);
 
     const handleMessageSend = async (text) => {
@@ -73,14 +91,14 @@ export default function AI51() {
             const aiMessage = { role: 'ai', content: response };
             setConversation((prev) => [...prev, aiMessage]);
 
-            // Save to local memory asynchronously
-            if (localMemory) {
-                setTimeout(() => {
-                    localMemory.saveConversation([...conversation, userMessage, aiMessage], {
-                        emotionalState: analysis.emotion,
-                        context: { needs: analysis.needs, topics: analysis.topics }
-                    }).catch(e => console.log('Memory save:', e));
-                }, 100);
+            // Save & sync
+            if (localMemory && meshEngine) {
+                const conv = [...conversation, userMessage, aiMessage];
+                await localMemory.saveConversation(conv, {
+                    emotionalState: analysis.emotion,
+                    context: { needs: analysis.needs, topics: analysis.topics }
+                });
+                await meshEngine.syncConversation(conv);
             }
         } catch (error) {
             console.error('Error:', error);
