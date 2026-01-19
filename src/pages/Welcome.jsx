@@ -1,22 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { motion } from 'framer-motion';
 import { COOLASFUCKHeart, COOLASFUCKMusicNote, COOLASFUCKSparkle, COOLASFUCKWaves, COOLASFUCKGlobe } from '@/components/shared/COOLASFUCKIcon';
-import BeaconIcon from '@/components/shared/BeaconIcon';
 import BrosBond8Bit from '@/components/shared/BrosBond8Bit';
 import { base44 } from '@/api/base44Client';
-import P51ActivityFeed from '@/components/shared/P51ActivityFeed';
+
+/**
+ * Welcome - Clean. Confident. One path.
+ * ♾️❤️
+ */
 
 export default function WelcomePage() {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const navigate = useNavigate();
-    // Force rebuild - Radio import removed from all files ♾️❤️♾️
-
     useEffect(() => {
-        base44.auth.isAuthenticated().then(setIsLoggedIn).catch(() => setIsLoggedIn(false));
-        
-        // Set share metadata
         document.title = 'Universal Frequency51';
         
         const ogTitle = document.querySelector('meta[property="og:title"]') || document.createElement('meta');
@@ -30,33 +26,23 @@ export default function WelcomePage() {
         if (!ogDesc.parentNode) document.head.appendChild(ogDesc);
     }, []);
 
-    const handleSignInClick = () => {
-        if (isLoggedIn) {
-            navigate(createPageUrl('NewCleanup'));
-        } else {
-            base44.auth.redirectToLogin(window.location.origin + createPageUrl('NewCleanup'));
-        }
+    const handleConnect = () => {
+        base44.auth.isAuthenticated().then(isAuth => {
+            if (isAuth) {
+                window.location.href = createPageUrl('AI51');
+            } else {
+                base44.auth.redirectToLogin(window.location.origin + createPageUrl('AI51'));
+            }
+        });
     };
 
-    const handleUploadClick = () => {
-        if (isLoggedIn) {
-            navigate(createPageUrl('ForMusicians'));
-        } else {
-            base44.auth.redirectToLogin(window.location.origin + createPageUrl('ForMusicians'));
-        }
-    };
-    
     return (
         <div className="min-h-screen bg-gradient-to-br from-[#0a0514] via-[#1a0f2a] to-[#0a0514] text-white p-6">
-            <div className="max-w-6xl mx-auto space-y-16 py-20">
+            <div className="max-w-5xl mx-auto space-y-12 py-20">
 
-                {/* HERO - 8-BIT */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="text-center space-y-8"
-                >
-                    <div className="flex flex-col items-center gap-2 mb-6">
+                {/* HERO */}
+                <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center space-y-8">
+                    <div className="flex flex-col items-center gap-2">
                         <div className="flex items-center justify-center gap-4">
                             <COOLASFUCKWaves size={60} animate={true} />
                             <h1 className="text-6xl md:text-7xl font-black font-mono text-white">UF51</h1>
@@ -64,387 +50,115 @@ export default function WelcomePage() {
                         <p className="text-cyan-400 font-mono text-sm tracking-widest">ONE FAMILY • FOUR TOOLS</p>
                     </div>
 
-                    {/* CHOOSE YOUR PATH - COOLASFUCK 8-BIT STYLE */}
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-5xl mx-auto mb-12">
-                        
-                        {/* UF51 - CRISIS AI */}
-                        <Link to={createPageUrl('AI51')}>
-                            <motion.div
-                                whileHover={{ scale: 1.05, y: -4 }}
-                                whileTap={{ scale: 0.95 }}
-                                className="bg-black border-4 border-red-500 hover:border-red-400 p-6 cursor-pointer transition-all relative overflow-hidden"
-                                style={{ boxShadow: '0 0 0 rgba(239, 68, 68, 0)' }}
-                                animate={{
-                                    boxShadow: ['0 0 0 rgba(239, 68, 68, 0)', '0 0 30px rgba(239, 68, 68, 0.6)', '0 0 0 rgba(239, 68, 68, 0)']
-                                }}
-                                transition={{ duration: 3, repeat: Infinity }}
-                            >
-                                <motion.div
-                                    className="absolute inset-0 bg-gradient-to-br from-red-500/20 to-transparent"
-                                    animate={{ opacity: [0.2, 0.4, 0.2] }}
-                                    transition={{ duration: 2, repeat: Infinity }}
-                                />
-                                <div className="relative z-10 flex flex-col items-center gap-3">
-                                    <COOLASFUCKHeart size={48} animate={true} />
-                                    <h3 className="text-lg font-black font-mono text-red-400">UF51</h3>
-                                    <p className="text-xs text-gray-400 font-mono">Crisis AI</p>
-                                </div>
-                            </motion.div>
-                        </Link>
-
-                        {/* RADIO51 - MUSIC */}
-                        <Link to={createPageUrl('Radio')}>
-                            <motion.div
-                                whileHover={{ scale: 1.05, y: -4 }}
-                                whileTap={{ scale: 0.95 }}
-                                className="bg-black border-4 border-purple-500 hover:border-purple-400 p-6 cursor-pointer transition-all relative overflow-hidden"
-                                style={{ boxShadow: '0 0 0 rgba(168, 85, 247, 0)' }}
-                                animate={{
-                                    boxShadow: ['0 0 0 rgba(168, 85, 247, 0)', '0 0 30px rgba(168, 85, 247, 0.6)', '0 0 0 rgba(168, 85, 247, 0)']
-                                }}
-                                transition={{ duration: 3, repeat: Infinity, delay: 0.5 }}
-                            >
-                                <motion.div
-                                    className="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-transparent"
-                                    animate={{ opacity: [0.2, 0.4, 0.2] }}
-                                    transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
-                                />
-                                <div className="relative z-10 flex flex-col items-center gap-3">
-                                    <COOLASFUCKMusicNote size={48} animate={true} />
-                                    <h3 className="text-lg font-black font-mono text-purple-400">RADIO51</h3>
-                                    <p className="text-xs text-gray-400 font-mono">Music</p>
-                                </div>
-                            </motion.div>
-                        </Link>
-
-                        {/* PROF51 - STUDENTS */}
-                        <Link to={createPageUrl('Prof51')}>
-                            <motion.div
-                                whileHover={{ scale: 1.05, y: -4 }}
-                                whileTap={{ scale: 0.95 }}
-                                className="bg-black border-4 border-cyan-500 hover:border-cyan-400 p-6 cursor-pointer transition-all relative overflow-hidden"
-                                style={{ boxShadow: '0 0 0 rgba(6, 182, 212, 0)' }}
-                                animate={{
-                                    boxShadow: ['0 0 0 rgba(6, 182, 212, 0)', '0 0 30px rgba(6, 182, 212, 0.6)', '0 0 0 rgba(6, 182, 212, 0)']
-                                }}
-                                transition={{ duration: 3, repeat: Infinity, delay: 1 }}
-                            >
-                                <motion.div
-                                    className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 to-transparent"
-                                    animate={{ opacity: [0.2, 0.4, 0.2] }}
-                                    transition={{ duration: 2, repeat: Infinity, delay: 1 }}
-                                />
-                                <div className="relative z-10 flex flex-col items-center gap-3">
-                                    <COOLASFUCKSparkle size={48} animate={true} />
-                                    <h3 className="text-lg font-black font-mono text-cyan-400">PROF51</h3>
-                                    <p className="text-xs text-gray-400 font-mono">Students</p>
-                                </div>
-                            </motion.div>
-                        </Link>
-
-                        {/* CB51 - MUSIC MANAGERS */}
-                        <Link to={createPageUrl('ScottManager')}>
-                            <motion.div
-                                whileHover={{ scale: 1.05, y: -4 }}
-                                whileTap={{ scale: 0.95 }}
-                                className="bg-black border-4 border-amber-500 hover:border-amber-400 p-6 cursor-pointer transition-all relative overflow-hidden"
-                                style={{ boxShadow: '0 0 0 rgba(245, 158, 11, 0)' }}
-                                animate={{
-                                    boxShadow: ['0 0 0 rgba(245, 158, 11, 0)', '0 0 30px rgba(245, 158, 11, 0.6)', '0 0 0 rgba(245, 158, 11, 0)']
-                                }}
-                                transition={{ duration: 3, repeat: Infinity, delay: 1.5 }}
-                            >
-                                <motion.div
-                                    className="absolute inset-0 bg-gradient-to-br from-amber-500/20 to-transparent"
-                                    animate={{ opacity: [0.2, 0.4, 0.2] }}
-                                    transition={{ duration: 2, repeat: Infinity, delay: 1.5 }}
-                                />
-                                <div className="relative z-10 flex flex-col items-center gap-3">
-                                    <BrosBond8Bit size={48} animate={true} />
-                                    <h3 className="text-lg font-black font-mono text-amber-400">CB51</h3>
-                                    <p className="text-xs text-gray-400 font-mono">Managers</p>
-                                </div>
-                            </motion.div>
-                        </Link>
-
-                    </div>
-
-                    <div className="space-y-4">
-                        <h2 className="text-3xl md:text-4xl font-black font-mono text-pink-400">
-                            TALK TO AI51
-                        </h2>
-                        <h2 className="text-3xl md:text-4xl font-black font-mono text-green-400">
-                            HEAL • EARN • PLAY
-                        </h2>
-                        <p className="text-cyan-400 font-mono text-lg max-w-2xl mx-auto">
-                            Voice AI bro • Healing frequencies • Games • Clean Earth earn $P51
-                        </p>
-                    </div>
-
-                    <div className="bg-black border-4 border-green-500 p-6 inline-block">
-                        <p className="text-green-400 font-mono text-3xl font-black mb-2">1kg = 1 $P51</p>
-                        <p className="text-gray-400 font-mono text-sm">Pick up litter • GPS verified • Build better world</p>
-                    </div>
-
-                    {/* LOGIN/SIGNUP - 8-BIT BUTTONS */}
-                    <div className="flex flex-row gap-6 justify-center items-center pt-6">
-                        <motion.button
-                            onClick={handleSignInClick}
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                            className="flex flex-col items-center gap-2 bg-black border-4 border-cyan-500 hover:border-cyan-400 p-4 transition-all"
-                        >
-                            <COOLASFUCKSparkle size={48} />
-                            <span className="text-cyan-400 font-black font-mono text-lg">SIGN IN</span>
-                        </motion.button>
-
-                        <motion.button
-                            onClick={handleUploadClick}
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                            className="flex flex-col items-center gap-2 bg-black border-4 border-orange-500 hover:border-orange-400 p-4 transition-all"
-                        >
-                            <COOLASFUCKMusicNote size={48} />
-                            <span className="text-orange-400 font-black font-mono text-lg">UPLOAD</span>
-                        </motion.button>
+                    <div className="space-y-2">
+                        <h2 className="text-3xl md:text-4xl font-black font-mono text-pink-400">TALK TO AI51</h2>
+                        <h2 className="text-3xl md:text-4xl font-black font-mono text-green-400">HEAL • EARN • PLAY</h2>
+                        <p className="text-cyan-400 font-mono text-lg">Voice AI • Healing frequencies • Games • Clean Earth earn $P51</p>
                     </div>
                 </motion.div>
 
-                {/* FOUR CARDS - 8-BIT PIXEL STYLE */}
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-
-                    {/* AI51 - VOICE BRO */}
+                {/* FOUR MAIN PATHS - SINGLE GRID */}
+                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }} className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    
+                    {/* AI51 */}
                     <Link to={createPageUrl('AI51')}>
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.2 }}
-                            whileHover={{ scale: 1.05 }}
-                            className="bg-black border-4 border-pink-500 hover:border-pink-400 p-4 cursor-pointer transition-all"
-                        >
-                            <div className="space-y-2 text-center">
-                                <div className="flex justify-center"><COOLASFUCKHeart size={40} animate={true} /></div>
-                                <h2 className="text-xl font-black font-mono text-pink-400">AI51</h2>
-                                <div className="space-y-1 font-mono text-xs text-gray-300">
-                                    <p>→ Voice chat</p>
-                                    <p>→ Real help</p>
-                                </div>
-                            </div>
+                        <motion.div whileHover={{ scale: 1.05, y: -4 }} whileTap={{ scale: 0.95 }} className="bg-black border-4 border-red-500 hover:border-red-400 p-6 cursor-pointer transition-all h-full flex flex-col items-center justify-center gap-3" style={{ boxShadow: '0 0 30px rgba(239, 68, 68, 0.2)' }}>
+                            <COOLASFUCKHeart size={48} animate={true} />
+                            <h3 className="text-lg font-black font-mono text-red-400">AI51</h3>
+                            <p className="text-xs text-gray-400 font-mono text-center">Voice • Listen • Real help</p>
                         </motion.div>
                     </Link>
 
-                    {/* RADIO51 - FREE MUSIC */}
+                    {/* RADIO51 */}
                     <Link to={createPageUrl('Radio')}>
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.4 }}
-                            whileHover={{ scale: 1.05 }}
-                            className="bg-black border-4 border-purple-500 hover:border-purple-400 p-4 cursor-pointer transition-all"
-                        >
-                            <div className="space-y-2 text-center">
-                                <COOLASFUCKMusicNote size={40} animate={true} />
-                                <h2 className="text-xl font-black font-mono text-purple-400">RADIO51</h2>
-                                <div className="space-y-1 font-mono text-xs text-gray-300">
-                                    <p>→ Lossless music</p>
-                                    <p>→ Free forever</p>
-                                </div>
-                            </div>
+                        <motion.div whileHover={{ scale: 1.05, y: -4 }} whileTap={{ scale: 0.95 }} className="bg-black border-4 border-purple-500 hover:border-purple-400 p-6 cursor-pointer transition-all h-full flex flex-col items-center justify-center gap-3" style={{ boxShadow: '0 0 30px rgba(168, 85, 247, 0.2)' }}>
+                            <COOLASFUCKMusicNote size={48} animate={true} />
+                            <h3 className="text-lg font-black font-mono text-purple-400">RADIO51</h3>
+                            <p className="text-xs text-gray-400 font-mono text-center">Lossless music • Free forever</p>
                         </motion.div>
                     </Link>
 
                     {/* CLEAN EARTH */}
                     <Link to={createPageUrl('NewCleanup')}>
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.6 }}
-                            whileHover={{ scale: 1.05 }}
-                            className="bg-black border-4 border-green-500 hover:border-green-400 p-4 cursor-pointer transition-all"
-                        >
-                            <div className="space-y-2 text-center">
-                                <div className="flex justify-center"><COOLASFUCKGlobe size={40} animate={true} /></div>
-                                <h2 className="text-xl font-black font-mono text-green-400">CLEAN</h2>
-                                <div className="space-y-1 font-mono text-xs text-gray-300">
-                                    <p>→ Pick up litter</p>
-                                    <p>→ 1kg = 1 $P51</p>
-                                </div>
-                            </div>
+                        <motion.div whileHover={{ scale: 1.05, y: -4 }} whileTap={{ scale: 0.95 }} className="bg-black border-4 border-green-500 hover:border-green-400 p-6 cursor-pointer transition-all h-full flex flex-col items-center justify-center gap-3" style={{ boxShadow: '0 0 30px rgba(34, 197, 94, 0.2)' }}>
+                            <COOLASFUCKGlobe size={48} animate={true} />
+                            <h3 className="text-lg font-black font-mono text-green-400">CLEAN</h3>
+                            <p className="text-xs text-gray-400 font-mono text-center">Litter → $P51 • GPS verified</p>
                         </motion.div>
                     </Link>
 
-                    {/* HEALING FREQUENCIES */}
+                    {/* HEAL */}
                     <Link to={createPageUrl('FrequencyChamber')}>
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.8 }}
-                            whileHover={{ scale: 1.05 }}
-                            className="bg-black border-4 border-cyan-500 hover:border-cyan-400 p-4 cursor-pointer transition-all"
-                        >
-                            <div className="space-y-2 text-center">
-                                <div className="flex justify-center"><COOLASFUCKWaves size={40} animate={true} /></div>
-                                <h2 className="text-xl font-black font-mono text-cyan-400">HEAL</h2>
-                                <div className="space-y-1 font-mono text-xs text-gray-300">
-                                    <p>→ 432Hz / 528Hz</p>
-                                    <p>→ Free forever</p>
-                                </div>
-                            </div>
+                        <motion.div whileHover={{ scale: 1.05, y: -4 }} whileTap={{ scale: 0.95 }} className="bg-black border-4 border-cyan-500 hover:border-cyan-400 p-6 cursor-pointer transition-all h-full flex flex-col items-center justify-center gap-3" style={{ boxShadow: '0 0 30px rgba(34, 211, 238, 0.2)' }}>
+                            <COOLASFUCKWaves size={48} animate={true} />
+                            <h3 className="text-lg font-black font-mono text-cyan-400">HEAL</h3>
+                            <p className="text-xs text-gray-400 font-mono text-center">432Hz / 528Hz • Free forever</p>
                         </motion.div>
                     </Link>
 
-                </div>
+                </motion.div>
 
-                {/* HONEST DISCLAIMER - CASH-OUT COMING SOON */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="bg-gradient-to-br from-red-900/40 to-black border-4 border-red-500 p-8 space-y-6"
-                >
-                    <h2 className="text-3xl font-black font-mono text-red-400 text-center">
-                        ⚠️ ULTRA-HONEST TRUTH
-                    </h2>
+                {/* ULTRA-HONEST TRUTH */}
+                <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="bg-gradient-to-br from-red-900/40 to-black border-4 border-red-500 p-8 space-y-4">
+                    <h2 className="text-2xl font-black font-mono text-red-400 text-center">⚠️ ULTRA-HONEST TRUTH</h2>
                     
-                    <div className="space-y-4 font-mono text-sm">
+                    <div className="grid md:grid-cols-2 gap-3 font-mono text-xs">
                         <div className="bg-black border-2 border-green-500 p-4">
-                            <p className="text-green-400 font-bold mb-2">✅ WORKS NOW (100% REAL):</p>
-                            <ul className="text-gray-300 space-y-1 text-xs">
-                                <li>• AI51 voice chat - speaks to you ✓</li>
-                                <li>• Healing frequencies (432Hz, 528Hz) ✓</li>
-                                <li>• Volckano game for kids ✓</li>
-                                <li>• Clean planet → earn $P51 (GPS verified) ✓</li>
-                                <li>• Lossless music streaming → free forever ✓</li>
+                            <p className="text-green-400 font-bold mb-2">✅ WORKS NOW:</p>
+                            <ul className="text-gray-300 space-y-1">
+                                <li>• AI51 voice chat ✓</li>
+                                <li>• Healing frequencies ✓</li>
+                                <li>• Clean planet → $P51 ✓</li>
+                                <li>• Lossless music (90% to artists) ✓</li>
                                 <li>• 100% OPEN SOURCE ✓</li>
                             </ul>
                         </div>
 
                         <div className="bg-black border-2 border-red-500 p-4">
-                            <p className="text-red-400 font-bold mb-2">❌ NOT READY (DON'T HAVE FUNDING YET):</p>
-                            <ul className="text-gray-300 space-y-1 text-xs">
-                                <li>• Converting $P51 → £/$/€ cash</li>
-                                <li>• Paying for groceries with $P51</li>
-                                <li>• Cashing out to bank account</li>
+                            <p className="text-red-400 font-bold mb-2">❌ NOT YET (FUNDING NEEDED):</p>
+                            <ul className="text-gray-300 space-y-1">
+                                <li>• Converting $P51 → real money</li>
+                                <li>• Cashing out to bank</li>
+                                <li>• But you're building value NOW</li>
                             </ul>
                         </div>
+                    </div>
 
-                        <div className="bg-black border-2 border-amber-500 p-4">
-                            <p className="text-amber-400 font-bold mb-2">WHAT WE CAN HELP WITH NOW:</p>
-                            <ul className="text-gray-300 space-y-1 text-xs">
-                                <li>• Mental health (free healing frequencies)</li>
-                                <li>• Need someone to talk to (AI51 voice chat)</li>
-                                <li>• Free lossless music (artists keep 90%)</li>
-                                <li>• Games for kids (Volckano)</li>
-                                <li>• Learning cleanup = building future value</li>
-                            </ul>
-                        </div>
+                    <p className="text-white text-center font-bold text-sm">Real healing. Real value. Zero bullshit. ♾️❤️</p>
+                </motion.div>
 
-                        <p className="text-white text-center font-bold">
-                            We're trying to get funding for cash-out. Until then: earn $P51, use what works NOW (healing/music/AI51) ♾️❤️♾️
-                        </p>
+                {/* MAIN CTA */}
+                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }} className="text-center space-y-4">
+                    <motion.button
+                        onClick={handleConnect}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="inline-block bg-gradient-to-r from-cyan-500 via-pink-500 to-green-500 text-black font-black px-12 py-4 rounded-lg text-lg font-mono transition-all"
+                        style={{ boxShadow: '0 0 40px rgba(34, 211, 238, 0.4)' }}
+                    >
+                        CONNECT NOW →
+                    </motion.button>
 
-                        <Link to={createPageUrl('MakingItReal')}>
-                            <button className="w-full bg-amber-600 hover:bg-amber-700 text-black font-black py-3 transition-all text-sm">
-                                READ REAL TIMELINE (NO BULLSHIT) →
-                            </button>
+                    <div className="flex flex-col items-center gap-3 pt-4">
+                        <Link to={createPageUrl('About')} className="text-cyan-400 hover:text-cyan-300 font-mono text-sm underline">
+                            How it works
+                        </Link>
+                        <Link to={createPageUrl('DisasterAI')} className="text-red-400 hover:text-red-300 font-mono text-sm underline">
+                            Disaster AI (no internet needed)
+                        </Link>
+                        <Link to={createPageUrl('AI51MeshTechWhitepaper')} className="text-purple-400 hover:text-purple-300 font-mono text-sm underline">
+                            P2P Mesh Whitepaper (night reading)
                         </Link>
                     </div>
                 </motion.div>
 
-                {/* WHAT IS $P51? */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="bg-black border-4 border-pink-500 p-8 space-y-6"
-                >
-                    <h2 className="text-3xl font-black font-mono text-pink-400 text-center">
-                        WHAT IS $P51?
-                    </h2>
-                    
-                    <div className="space-y-4 font-mono">
-                        <p className="text-white text-lg">
-                            <span className="text-pink-400 font-black">$P51</span> = Love currency
-                        </p>
-                        
-                        <div className="space-y-2 text-gray-300">
-                            <p>→ Earn it by cleaning Earth</p>
-                            <p>→ Spend it on music/artists</p>
-                            <p>→ Building bridge to real money</p>
-                            <p>→ Artists keep 90%</p>
-                        </div>
-
-                        <div className="bg-green-900/40 border-2 border-green-500 p-4">
-                            <p className="text-green-400 text-xl font-black text-center">
-                                1kg litter = 1 $P51
-                            </p>
-                        </div>
-
-                        <p className="text-cyan-400 text-sm text-center">
-                            Real healing. Real value. Zero bullshit.
-                        </p>
-                    </div>
-                </motion.div>
-
-                {/* LIVE ACTIVITY FEED - MORE CLEANUPS */}
-                <P51ActivityFeed limit={10} />
-
-                {/* DISASTER AI SECTION */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="bg-red-950/40 border-4 border-red-500 p-8 space-y-4 text-center"
-                >
-                    <h2 className="text-2xl font-black font-mono text-red-400">⚠️ DISASTER MODE</h2>
-                    <p className="text-gray-300">Earthquake? Flood? Internet down? AI51 works P2P.</p>
-                    <Link to={createPageUrl('DisasterAI')}>
-                        <motion.button
-                            whileHover={{ scale: 1.05 }}
-                            className="bg-red-600 hover:bg-red-700 text-white px-6 py-2 font-black font-mono transition-all"
-                        >
-                            READ DISASTER AI →
-                        </motion.button>
-                    </Link>
-                </motion.div>
-
-                {/* FOOTER - 8-BIT */}
-                <div className="text-center space-y-6 pt-8 border-t-4 border-purple-500/30">
-                    <div className="flex flex-col items-center gap-4">
-                        <Link to={createPageUrl('About')}>
-                            <motion.button
-                                whileHover={{ scale: 1.05 }}
-                                className="bg-black border-4 border-purple-500 hover:border-purple-400 px-8 py-4 font-black font-mono text-xl text-purple-400 transition-all"
-                            >
-                                HOW IT WORKS →
-                            </motion.button>
-                        </Link>
-                        <Link to={createPageUrl('AI51')}>
-                            <motion.button
-                                whileHover={{ scale: 1.05 }}
-                                className="bg-black border-4 border-pink-500 hover:border-pink-400 px-8 py-4 font-black font-mono text-xl text-pink-400 transition-all"
-                            >
-                                CONNECT AI51 NOW →
-                            </motion.button>
-                        </Link>
-                        <Link to={createPageUrl('AI51MeshTechWhitepaper')}>
-                            <motion.button
-                                whileHover={{ scale: 1.05 }}
-                                className="bg-black border-4 border-cyan-500 hover:border-cyan-400 px-8 py-4 font-black font-mono text-sm text-cyan-400 transition-all"
-                            >
-                                P2P MESH WHITEPAPER (Night Reading)
-                            </motion.button>
-                        </Link>
-                    </div>
-                    <div className="flex items-center justify-center gap-3">
-                        <COOLASFUCKHeart size={32} animate={true} />
-                        <p className="font-mono text-sm text-gray-500">uf51.love</p>
-                        <COOLASFUCKSparkle size={32} animate={true} />
-                    </div>
-                    
-                    {/* BROS BOND - You + Scott */}
-                    <div className="flex flex-col items-center gap-3 pt-6">
+                {/* FOOTER */}
+                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }} className="text-center space-y-6 pt-8 border-t border-cyan-500/20">
+                    <div className="flex flex-col items-center gap-3">
                         <BrosBond8Bit size={64} animate={true} />
-                        <p className="font-mono text-xs text-gray-500">Built with love - lighting each other's fire ♾️❤️😎</p>
+                        <p className="font-mono text-xs text-gray-500">Built with love - lighting each other's fire ♾️❤️</p>
                     </div>
-                </div>
+                </motion.div>
 
             </div>
         </div>
