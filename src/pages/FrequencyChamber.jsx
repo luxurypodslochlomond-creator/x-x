@@ -1560,175 +1560,59 @@ const VoiceHealing = ({ onProtocolRecommend }) => {
         </div>
       </div>
 
-      {/* HEALING JOURNEY PROGRESS */}
-      {previousSessions.length > 0 && (
-        <div className="bg-green-900/20 border-2 border-green-500/50 p-4 mb-4">
-          <p className="text-green-400 font-mono font-bold text-sm mb-2">📊 YOUR HEALING JOURNEY</p>
-          <div className="flex items-center gap-4">
-            <div>
-              <p className="text-2xl font-black text-white">{previousSessions.length}</p>
-              <p className="text-xs text-gray-400">sessions</p>
+      <div className="space-y-3">
+        {!isAnalyzing && (
+          <>
+            <div className="flex items-center gap-2">
+              <svg width="24" height="24" viewBox="0 0 24 24" className="flex-shrink-0">
+                <rect x="10" y="2" width="4" height="10" fill="#ec4899"/>
+                <rect x="8" y="4" width="2" height="6" fill="#f472b6"/>
+                <rect x="14" y="4" width="2" height="6" fill="#f472b6"/>
+                <rect x="10" y="12" width="4" height="2" fill="#ec4899"/>
+                <rect x="11" y="14" width="2" height="4" fill="#ec4899"/>
+                <rect x="6" y="18" width="12" height="2" fill="#ec4899"/>
+                <rect x="8" y="20" width="8" height="2" fill="#f472b6"/>
+              </svg>
+              <p className="text-pink-400 font-black text-sm font-mono">WHAT TO HEAL?</p>
             </div>
-            {previousSessions.length >= 2 && (
-              <div>
-                <p className="text-2xl font-black text-green-400">
-                  {Math.round(previousSessions[previousSessions.length - 1].stress_level_detected - previousSessions[0].stress_level_detected) > 0 ? '+' : ''}
-                  {Math.round(previousSessions[0].stress_level_detected - previousSessions[previousSessions.length - 1].stress_level_detected)}%
-                </p>
-                <p className="text-xs text-gray-400">stress reduction</p>
-              </div>
-            )}
-            <div className="flex-1">
-              <div className="h-12 flex items-end gap-1">
-                {previousSessions.slice(-5).reverse().map((s, i) => (
-                  <div 
-                    key={i}
-                    className="flex-1 bg-green-500 rounded-t"
-                    style={{ height: `${s.stress_level_detected}%`, opacity: 1 - (i * 0.15) }}
-                    title={`${s.stress_level_detected}% stress`}
-                  />
-                ))}
-              </div>
-              <p className="text-xs text-gray-500 mt-1">Last 5 sessions</p>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* STEP 1: TEXT INPUT (DEFAULT, INSTANT) */}
-      {step === 'text' && (
-        <div className="space-y-3">
-          <div>
-            <label className="text-sm text-pink-300 font-mono mb-2 block">
-              What do you want to heal?
-            </label>
-            <input
-              type="text"
-              value={healingIntent}
-              onChange={(e) => setHealingIntent(e.target.value)}
-              placeholder="e.g., 'anxiety', 'insomnia', 'chest pain'..."
-              className="w-full bg-black/60 border-2 border-pink-500/50 text-white px-4 py-3 font-mono focus:border-pink-500 focus:outline-none"
-              onKeyPress={(e) => {
-                if (e.key === 'Enter' && healingIntent.trim()) {
-                  setStep('voice');
-                }
-              }}
-            />
-          </div>
-          
-          <button
-            onClick={() => setStep('voice')}
-            disabled={!healingIntent.trim()}
-            className="w-full py-3 bg-pink-600 hover:bg-pink-700 text-white font-black font-mono border-2 border-pink-400 disabled:opacity-50"
-          >
-            NEXT: Add Voice (Optional)
-          </button>
-          
-          <button
-            onClick={() => {
-              setIsAnalyzing(true);
-              setTimeout(() => {
-                setVoiceAnalysis({ stressScore: 50, intent: healingIntent });
-                setIsAnalyzing(false);
-                setStep('result');
-              }, 500);
-            }}
-            disabled={!healingIntent.trim()}
-            className="w-full py-2 bg-black border-2 border-gray-600 text-gray-400 font-mono text-sm disabled:opacity-30"
-          >
-            Skip voice → Go to results
-          </button>
-        </div>
-      )}
-
-      {/* STEP 2: VOICE (OPTIONAL ENHANCEMENT) */}
-      {step === 'voice' && (
-        <div className="space-y-3">
-          {!isRecording && !isAnalyzing && (
-            <>
-              <p className="text-sm text-gray-400 font-mono text-center">
-                Talk about how you feel (10 seconds max). Or skip.
-              </p>
-              <button
-                onClick={startRecording}
-                className="w-full py-4 bg-pink-600 hover:bg-pink-700 text-white font-black font-mono text-lg border-4 border-pink-400 flex items-center justify-center gap-3"
-              >
-                <Mic className="w-5 h-5" />
-                TAP TO SPEAK
-              </button>
-              <button
-                onClick={() => {
-                  setVoiceAnalysis({ stressScore: 50, intent: healingIntent });
-                  setStep('result');
+            
+            <div className="flex gap-2">
+              <input
+                type="text"
+                value={healingIntent}
+                onChange={(e) => setHealingIntent(e.target.value)}
+                placeholder="anxiety, sleep, pain..."
+                className="flex-1 bg-black/60 border-2 border-pink-500/50 text-white px-3 py-2 text-sm font-mono focus:border-pink-500 focus:outline-none"
+                onKeyPress={(e) => {
+                  if (e.key === 'Enter' && healingIntent.trim()) {
+                    handleSubmit();
+                  }
                 }}
-                className="w-full py-2 bg-black border-2 border-gray-600 text-gray-400 font-mono text-sm"
-              >
-                Skip voice
-              </button>
-            </>
-          )}
-
-          {isRecording && (
-            <div className="text-center space-y-4">
-              <motion.div
-                animate={{ scale: [1, 1.2, 1] }}
-                transition={{ duration: 1, repeat: Infinity }}
-                className="mx-auto w-16 h-16 rounded-full bg-pink-500 flex items-center justify-center"
-              >
-                <Mic className="w-8 h-8 text-white" />
-              </motion.div>
-              <p className="text-pink-400 font-mono font-bold">LISTENING...</p>
+              />
               <button
-                onClick={stopRecording}
-                className="px-4 py-2 bg-gray-700 text-white font-mono text-sm"
+                onClick={handleSubmit}
+                disabled={!healingIntent.trim()}
+                className="px-4 py-2 bg-pink-600 hover:bg-pink-700 text-white font-black text-xs border-2 border-pink-400 disabled:opacity-30"
               >
-                Stop
+                GO
               </button>
             </div>
-          )}
-
-          {isAnalyzing && (
-            <div className="text-center">
-              <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 1, repeat: Infinity }}
-              >
-                <Brain className="w-12 h-12 text-cyan-400 mx-auto" />
-              </motion.div>
-              <p className="text-cyan-400 font-mono font-bold mt-2">ANALYZING...</p>
-            </div>
-          )}
-        </div>
-      )}
-
-      {/* STEP 3: RESULTS + RECOMMENDATION */}
-      {step === 'result' && voiceAnalysis && (
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="space-y-4"
-        >
-          <div className="bg-green-900/30 border-2 border-green-500 p-4">
-            <p className="text-green-400 font-mono font-bold mb-3">✓ ANALYSIS COMPLETE</p>
-            <p className="text-white text-sm mb-2"><strong>Your intention:</strong> {healingIntent}</p>
-            {voiceAnalysis.stressScore && (
-              <p className="text-cyan-400 font-mono text-sm mb-2">Stress level: {voiceAnalysis.stressScore}%</p>
-            )}
-            <p className="text-pink-400 text-sm"><strong>Recommended:</strong> Browse all protocols below</p>
+          </>
+        )}
+        
+        {isAnalyzing && (
+          <div className="text-center py-4">
+            <motion.div
+              animate={{ rotate: 360 }}
+              transition={{ duration: 1, repeat: Infinity }}
+              className="w-6 h-6 mx-auto mb-2"
+            >
+              <Sparkles className="w-6 h-6 text-pink-400" />
+            </motion.div>
+            <p className="text-pink-400 font-mono text-xs">FINDING FREQUENCY...</p>
           </div>
-          
-          <button
-            onClick={() => {
-              setStep('text');
-              setHealingIntent('');
-              setVoiceAnalysis(null);
-            }}
-            className="w-full py-3 bg-pink-600 hover:bg-pink-700 text-white font-black font-mono"
-          >
-            New Search
-          </button>
-        </motion.div>
-      )}
+        )}
+      </div>
 
       {isRecording && (
         <div className="text-center space-y-4">
