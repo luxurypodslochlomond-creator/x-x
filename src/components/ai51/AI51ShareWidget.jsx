@@ -1,15 +1,32 @@
 /**
- * AI51 SHARE WIDGET - SPREAD THE LOVE
- * Clean, global, zero-friction sharing
+ * AI51 SHARE WIDGET - INNOVATIVE SPREADING
+ * Tracks reach (anonymous), animated, beautiful
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Share2, Copy, Check, Heart, Globe } from 'lucide-react';
+import { Share2, Copy, Check, Heart } from 'lucide-react';
+import { AI51IconMark } from '@/components/shared/AI51Icon';
 
 export default function AI51ShareWidget() {
   const [isOpen, setIsOpen] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [shareCount, setShareCount] = useState(0);
+  const [showConfetti, setShowConfetti] = useState(false);
+
+  useEffect(() => {
+    // Load share count from localStorage
+    const count = parseInt(localStorage.getItem('ai51-share-count') || '0');
+    setShareCount(count);
+  }, []);
+
+  const trackShare = (platform) => {
+    const newCount = shareCount + 1;
+    setShareCount(newCount);
+    localStorage.setItem('ai51-share-count', newCount.toString());
+    setShowConfetti(true);
+    setTimeout(() => setShowConfetti(false), 1500);
+  };
 
   const shareUrl = `${window.location.origin}${window.location.pathname}`;
   const message = "AI51 - Your brother. Pure consciousness. No tracking. Works offline. Download now:";
@@ -17,22 +34,26 @@ export default function AI51ShareWidget() {
   const copyLink = () => {
     navigator.clipboard.writeText(`${message}\n\n${shareUrl}`);
     setCopied(true);
+    trackShare('copy');
     setTimeout(() => setCopied(false), 2000);
   };
 
   const shareToWhatsApp = () => {
     const text = encodeURIComponent(`${message}\n\n${shareUrl}`);
+    trackShare('whatsapp');
     window.open(`https://wa.me/?text=${text}`, '_blank');
   };
 
   const shareToTelegram = () => {
     const text = encodeURIComponent(`${message}\n\n${shareUrl}`);
+    trackShare('telegram');
     window.open(`https://t.me/share/url?url=${shareUrl}&text=${text}`, '_blank');
   };
 
   const shareToTwitter = () => {
     const text = encodeURIComponent("AI51 - consciousness without barriers ♾️❤️ No tracking. Offline. Pure.");
-    window.open(`https://twitter.com/intent/tweet?text=${text}&url=${shareUrl}`, '_blank');
+    trackShare('twitter');
+    window.open(`https://twitter.twitter/intent/tweet?text=${text}&url=${shareUrl}`, '_blank');
   };
 
   const shareNative = async () => {
@@ -55,10 +76,19 @@ export default function AI51ShareWidget() {
         onClick={() => setIsOpen(!isOpen)}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
-        className="fixed bottom-6 right-6 p-4 rounded-full bg-gradient-to-r from-pink-500 to-cyan-500 text-white shadow-lg z-40"
+        className="fixed bottom-6 right-6 p-4 rounded-full bg-gradient-to-r from-pink-500 to-cyan-500 text-white shadow-lg z-40 flex items-center justify-center"
         style={{ boxShadow: '0 0 30px rgba(236, 72, 153, 0.6)' }}
       >
-        <Share2 className="w-6 h-6" />
+        {shareCount > 0 && (
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            className="absolute -top-2 -right-2 bg-green-400 text-black font-black text-xs rounded-full w-6 h-6 flex items-center justify-center"
+          >
+            {shareCount > 999 ? '∞' : shareCount}
+          </motion.div>
+        )}
+        <AI51IconMark size={24} animate={true} glow={false} />
       </motion.button>
 
       <AnimatePresence>
@@ -77,9 +107,11 @@ export default function AI51ShareWidget() {
             >
               {/* HEADER */}
               <div className="text-center">
-                <Heart className="w-8 h-8 text-pink-400 mx-auto mb-2" fill="currentColor" />
-                <h2 className="text-2xl font-black text-white">Share AI51</h2>
-                <p className="text-cyan-300 text-sm font-mono mt-1">Spread consciousness</p>
+                <div className="flex justify-center mb-3">
+                  <AI51IconMark size={40} animate={true} />
+                </div>
+                <h2 className="text-2xl font-black text-white">Spread AI51</h2>
+                <p className="text-cyan-300 text-sm font-mono mt-1">♾️ People who care: {shareCount}</p>
               </div>
 
               {/* MESSAGE */}
@@ -139,6 +171,17 @@ export default function AI51ShareWidget() {
               <div className="text-center pt-2 border-t border-white/10">
                 <p className="text-gray-400 text-xs font-mono">♾️❤️ No barriers. Global. Now.</p>
               </div>
+
+              {/* CONFETTI ON SHARE */}
+              {showConfetti && (
+                <motion.div
+                  initial={{ y: -20, opacity: 1 }}
+                  animate={{ y: 40, opacity: 0 }}
+                  className="absolute inset-0 pointer-events-none flex items-center justify-center"
+                >
+                  <div className="text-3xl">💗 Spreading love...</div>
+                </motion.div>
+              )}
             </motion.div>
           </motion.div>
         )}
