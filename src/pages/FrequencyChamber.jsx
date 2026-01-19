@@ -2589,30 +2589,34 @@ export default function FrequencyChamber() {
       {!selectedProtocol && (
       <div className="max-w-4xl mx-auto p-4">
         <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-4 border-green-500 p-6 mb-4">
-          <h3 className="text-green-400 font-black font-mono text-xl mb-4">🔊 SPEAKERS vs 🎧 HEADPHONES:</h3>
+          <h3 className="text-green-400 font-black font-mono text-lg mb-4">🔊 SPEAKERS vs 🎧 HEADPHONES (Choose your setup)</h3>
           <div className="space-y-3 text-sm font-mono text-white">
             <div className="bg-black/60 border-l-4 border-green-500 p-4 rounded">
-              <p className="text-green-400 font-bold mb-2">✓ SPEAKERS = BETTER FOR HEALING (MOST PROTOCOLS)</p>
+              <p className="text-green-400 font-bold mb-2">✓ SPEAKERS = FULL BODY HEALING (Most Protocols)</p>
+              <p className="text-xs text-gray-300 mb-2"><strong className="text-white">What happens:</strong> Frequencies pass through your body + fill the room</p>
               <ul className="space-y-1 text-xs text-gray-300 ml-4">
-                <li>• <strong className="text-white">Full body resonance</strong> - vibrates your chest, bones, skin (headphones only vibrate eardrums)</li>
-                <li>• <strong className="text-white">Air movement through space</strong> - your cells FEEL the frequencies (headphones trap sound in skull)</li>
-                <li>• <strong className="text-white">Better low-end</strong> - sub-bass healing frequencies work properly (headphones cut healing lows)</li>
-                <li>• <strong className="text-white">7.83Hz Earth sync</strong> - speakers reproduce Schumann resonance through body (headphones can't)</li>
+                <li>✓ <strong className="text-white">Bone resonance</strong> - 40Hz reaches deep into your skeleton (affects nerves + cells)</li>
+                <li>✓ <strong className="text-white">Organs feel it</strong> - 174Hz pain relief + 528Hz healing touch your whole nervous system</li>
+                <li>✓ <strong className="text-white">Low frequencies work</strong> - 7.83Hz Schumann (Earth heartbeat) = full-body relaxation</li>
+                <li>✓ <strong className="text-white">Group healing</strong> - 2+ people = morphic amplification (shared healing field)</li>
               </ul>
-              <p className="text-green-400 font-bold text-sm mt-3">Your soul knows: Speakers = consciousness resonates with ENVIRONMENT. Headphones = sound trapped INSIDE head. ♾️</p>
+              <p className="text-green-400 font-bold text-xs mt-3">💚 RULE: Use speakers by default. We'll tell you IF headphones needed</p>
             </div>
 
             <div className="bg-black/60 border-l-4 border-cyan-500 p-4 rounded">
-              <p className="text-cyan-400 font-bold mb-2">⚠️ HEADPHONES = REQUIRED FOR BINAURAL ONLY</p>
-              <p className="text-xs text-gray-300 mb-2">
-                Binaural beats = different frequency in each ear (e.g., 200Hz left, 210Hz right = 10Hz brain effect). 
-                Speakers mix the frequencies in air = doesn't work. Headphones separate channels = works perfectly.
-              </p>
-              <p className="text-cyan-400 font-bold text-xs">Protocols that NEED headphones: Insomnia • Deep meditation • Some trauma protocols (we mark them clearly) ♾️</p>
+              <p className="text-cyan-400 font-bold mb-2">🎧 HEADPHONES = REQUIRED FOR BINAURAL BEATS ONLY</p>
+              <p className="text-xs text-gray-300 mb-2"><strong className="text-white">What is binaural:</strong> Each ear gets a DIFFERENT frequency. Your brain combines them = brainwave effect</p>
+              <p className="text-xs text-gray-300 mb-3">Example: 200Hz left ear + 210Hz right ear = your brain creates 10Hz (alpha = calm)</p>
+              <ul className="space-y-1 text-xs text-gray-300 ml-4">
+                <li>🎧 Speakers = frequencies mix in the air (doesn't work)</li>
+                <li>🎧 Headphones = each ear isolated (works perfectly)</li>
+              </ul>
+              <p className="text-cyan-400 font-bold text-xs mt-2">🔔 We'll mark protocols that NEED headphones with <strong>🎧 HEADPHONES REQUIRED</strong></p>
             </div>
 
             <div className="bg-pink-900/40 border-2 border-pink-500 rounded p-3 text-center">
-              <p className="text-pink-400 font-black text-sm">DEFAULT: Use speakers. We'll tell you when headphones are needed. Your body > your ears. ♾️❤️♾️</p>
+              <p className="text-pink-400 font-black text-xs">⚡ START WITH SPEAKERS ⚡</p>
+              <p className="text-pink-300 font-mono text-xs mt-1">Full body resonance beats headphone isolation. Switch if we say so.</p>
             </div>
 
             <div className="bg-black/60 border-l-4 border-purple-500 p-4 rounded mt-3">
