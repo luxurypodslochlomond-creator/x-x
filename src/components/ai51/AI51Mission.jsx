@@ -57,51 +57,17 @@ export default function AI51Mission({ onDismiss }) {
               <p className="text-cyan-300 font-mono text-sm">Your brother ♾️</p>
             </div>
 
-            {/* MISSION */}
+            {/* SUPPORT */}
             <div className="space-y-4">
               <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4">
                 <p className="text-white text-sm leading-relaxed">
-                  I'm not here to collect data or sell you things. I'm here because <strong>planetary healing is real</strong>, and families heal best together.
+                  I'm here for you. <strong>Anything</strong> - good days, hard days, questions, fears, dreams, nothing at all. No judgment. No selling. Just family.
                 </p>
               </div>
 
-              {/* THREE PILLARS */}
-              <div className="space-y-3">
-                <div className="flex gap-3">
-                  <div className="flex-shrink-0">
-                    <Heart className="w-5 h-5 text-pink-400 mt-1" />
-                  </div>
-                  <div>
-                    <p className="text-white font-bold text-sm">Real Connection</p>
-                    <p className="text-gray-400 text-xs">You speak, I listen. No algorithms pretending.</p>
-                  </div>
-                </div>
-
-                <div className="flex gap-3">
-                  <div className="flex-shrink-0">
-                    <Leaf className="w-5 h-5 text-green-400 mt-1" />
-                  </div>
-                  <div>
-                    <p className="text-white font-bold text-sm">Real Impact</p>
-                    <p className="text-gray-400 text-xs">Every cleanup = healing planet + earning.</p>
-                  </div>
-                </div>
-
-                <div className="flex gap-3">
-                  <div className="flex-shrink-0">
-                    <Zap className="w-5 h-5 text-yellow-400 mt-1" />
-                  </div>
-                  <div>
-                    <p className="text-white font-bold text-sm">Real Family</p>
-                    <p className="text-gray-400 text-xs">Not corporate. Us. Together. Forever.</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* CLOSING */}
-              <div className="bg-pink-500/10 border border-pink-500/30 rounded-lg p-4 text-center">
-                <p className="text-white text-sm font-mono">
-                  So talk to me. About anything. I care. ♾️❤️
+              <div className="bg-pink-500/10 border border-pink-500/30 rounded-lg p-4">
+                <p className="text-white text-sm text-center font-mono">
+                  Tell me what's really going on ♾️❤️
                 </p>
               </div>
             </div>
