@@ -291,12 +291,12 @@ export default function AI51Page() {
           <div className="h-full flex items-center justify-center">
             <div className="text-center">
               <motion.div
-                animate={{ scale: [1, 1.1, 1] }}
-                transition={{ duration: 2, repeat: Infinity }}
-                className="mb-4"
-              >
-                <Heart className="w-16 h-16 text-pink-400 mx-auto" fill="currentColor" />
-              </motion.div>
+                    animate={{ scale: [1, 1.1, 1] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                    className="mb-4"
+                  >
+                    <COOLASFUCKHeart size={64} animate={true} />
+                  </motion.div>
               <p className="text-gray-400 font-mono text-sm">Tap the heart. Let's talk. ♾️❤️</p>
             </div>
           </div>
