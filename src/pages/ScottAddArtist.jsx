@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
+
 import { ArrowLeft, Upload } from 'lucide-react';
 import { Radio } from 'lucide-react';
 import { base44 } from '@/api/base44Client';
