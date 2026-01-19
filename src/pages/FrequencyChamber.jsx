@@ -2597,48 +2597,19 @@ export default function FrequencyChamber() {
   }, [emergencyMode, panicDetected, isPlaying]);
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-gradient-to-b from-black via-purple-950/20 to-black text-white">
       
-      {/* HEADER */}
-      <div className="border-b-4 border-cyan-500 p-6 md:p-8 bg-black">
-        <div className="max-w-4xl mx-auto">
-          <div className="flex items-center justify-center gap-4 mb-4">
-            <motion.div
-              animate={{
-                scale: [1, 1.2, 1],
-                rotate: [0, 5, -5, 0]
-              }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-            >
-              <COOLASFUCKWaves size={56} animate={true} />
-            </motion.div>
-          </div>
-          <h1 className="text-4xl md:text-5xl font-black font-mono text-white text-center mb-3 tracking-wider" style={{ textShadow: '4px 4px 0px rgba(0,0,0,0.8)' }}>
-            FREQUENCY CHAMBER
-          </h1>
-          <p className="text-gray-400 font-mono text-sm text-center">
-            Evidence-based healing frequencies
-          </p>
-          <p className="text-cyan-500 text-xs text-center mt-2 font-mono">
-            Anonymous usage data helps fund free healing ♾️
-          </p>
-
-          {/* PIXEL DECORATION */}
-          <div className="flex justify-center gap-2 mt-4">
-            {[...Array(5)].map((_, i) => (
-              <motion.div
-                key={i}
-                className="w-3 h-3 bg-cyan-500"
-                animate={{ opacity: [0.3, 1, 0.3] }}
-                transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.2 }}
-                style={{ imageRendering: 'pixelated' }}
-              />
-            ))}
-          </div>
+      {/* SIMPLE BEAUTIFUL HEADER */}
+      <div className="p-6 md:p-8 bg-black/40 backdrop-blur-sm">
+        <div className="max-w-4xl mx-auto text-center space-y-4">
+          <motion.div
+            animate={{ scale: [1, 1.15, 1] }}
+            transition={{ duration: 3, repeat: Infinity }}
+          >
+            <COOLASFUCKWaves size={48} animate={true} />
+          </motion.div>
+          <h1 className="text-4xl md:text-5xl font-black text-white">Frequency Chamber</h1>
+          <p className="text-gray-300 text-sm">Ask your body what it needs. AI51 finds the frequency.</p>
         </div>
       </div>
       
