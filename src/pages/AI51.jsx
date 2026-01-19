@@ -118,6 +118,7 @@ export default function AI51() {
                 onMessageSend={handleMessageSend}
                 isThinking={isThinking}
                 conversation={conversation}
+                localMemory={localMemory}
                 onShowMission={() => setShowMission(true)}
             />
             <AI51VoiceInterface 

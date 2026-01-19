@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Mic, Heart, Volume2, VolumeX, Send } from 'lucide-react';
+import { Mic, Heart, Volume2, VolumeX, Send, Clock } from 'lucide-react';
 import { motion } from 'framer-motion';
+import AI51ChatHistory from './AI51ChatHistory';
 
 /**
  * AI51 - PROFESSIONAL P2P VOICE + TEXT
@@ -8,7 +9,7 @@ import { motion } from 'framer-motion';
  * ♾️❤️
  */
 
-export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
+export default function AI51Chat({ onMessageSend, isThinking, conversation, localMemory }) {
   const [isListening, setIsListening] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [transcript, setTranscript] = useState('');
@@ -16,6 +17,7 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
   const [voiceEnabled, setVoiceEnabled] = useState(true);
   const [connectionActive, setConnectionActive] = useState(false);
   const [frequencyData, setFrequencyData] = useState(new Uint8Array(32));
+  const [showHistory, setShowHistory] = useState(false);
   const messagesEndRef = useRef(null);
   const recognitionRef = useRef(null);
   const audioContextRef = useRef(null);
@@ -221,6 +223,20 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
   return (
     <div className="flex flex-col h-screen bg-black">
       
+      <AI51ChatHistory 
+        localMemory={localMemory}
+        isOpen={showHistory}
+        onClose={() => setShowHistory(false)}
+        onLoadChat={(chat) => {
+          // Load conversation from history
+          if (chat.messages) {
+            // onMessageSend prop should handle loading past conversation
+            // For now, just show it was loaded
+            console.log('Loaded chat:', chat);
+          }
+        }}
+      />
+      
       {/* HEADER - STATE + CONTROLS */}
       <div className="bg-black border-b border-cyan-500/20 p-4 flex items-center justify-between">
         <div className="flex items-center gap-3">
@@ -231,19 +247,28 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
           />
           <span className={`font-mono text-sm font-bold ${state.color}`}>{state.label}</span>
         </div>
-        <motion.button
-          onClick={() => setVoiceEnabled(!voiceEnabled)}
-          whileTap={{ scale: 0.9 }}
-          className={`p-2 rounded-lg border transition-all ${
-            voiceEnabled ? 'border-cyan-500/50 bg-cyan-500/10' : 'border-gray-600 bg-black/40'
-          }`}
-        >
-          {voiceEnabled ? (
-            <Volume2 className="w-4 h-4 text-cyan-400" />
-          ) : (
-            <VolumeX className="w-4 h-4 text-gray-500" />
-          )}
-        </motion.button>
+        <div className="flex items-center gap-2">
+          <motion.button
+            onClick={() => setShowHistory(true)}
+            whileTap={{ scale: 0.9 }}
+            className="p-2 rounded-lg border border-cyan-500/30 hover:border-cyan-500/60 bg-black/40 hover:bg-cyan-500/10 transition-all"
+          >
+            <Clock className="w-4 h-4 text-cyan-400" />
+          </motion.button>
+          <motion.button
+            onClick={() => setVoiceEnabled(!voiceEnabled)}
+            whileTap={{ scale: 0.9 }}
+            className={`p-2 rounded-lg border transition-all ${
+              voiceEnabled ? 'border-cyan-500/50 bg-cyan-500/10' : 'border-gray-600 bg-black/40'
+            }`}
+          >
+            {voiceEnabled ? (
+              <Volume2 className="w-4 h-4 text-cyan-400" />
+            ) : (
+              <VolumeX className="w-4 h-4 text-gray-500" />
+            )}
+          </motion.button>
+        </div>
       </div>
 
       {/* CHAT HISTORY - SCROLLABLE */}
