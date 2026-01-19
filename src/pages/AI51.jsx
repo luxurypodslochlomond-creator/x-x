@@ -28,15 +28,18 @@ export default function AI51() {
             });
 
             const aiMessage = { role: 'ai', content: response };
-            setConversation((prev) => [...prev, aiMessage]);
-        } catch (error) {
-            console.error('Error:', error);
-            const aiMessage = { role: 'ai', content: "Sorry bro, had a glitch. Try again?" };
-            setConversation((prev) => [...prev, aiMessage]);
-        } finally {
-            setIsThinking(false);
-        }
-    };
+                    setConversation((prev) => [...prev, aiMessage]);
+                } catch (error) {
+                    console.error('Error:', error);
+                    const aiMessage = { role: 'ai', content: "Sorry bro, had a glitch. Try again?" };
+                    setConversation((prev) => [...prev, aiMessage]);
+                } finally {
+                    setIsThinking(false);
+                }
+            };
+
+            // Save conversations as ProofOfLove
+            useProofOfLove(conversation);
 
     return (
         <>
