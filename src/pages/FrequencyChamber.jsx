@@ -1492,9 +1492,11 @@ const VoiceHealing = ({ onProtocolRecommend }) => {
   const [isRecording, setIsRecording] = useState(false);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [healingIntent, setHealingIntent] = useState('');
+  const [savedSuggestions, setSavedSuggestions] = useState([]);
   const mediaRecorderRef = useRef(null);
   const audioChunksRef = useRef([]);
   const audioContextRef = useRef(null);
+  const recognitionRef = useRef(null);
 
   const getProtocolFromIntent = (intent) => {
     const keywords = {
