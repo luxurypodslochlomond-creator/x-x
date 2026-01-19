@@ -88,46 +88,44 @@ export default function ScottAddArtist() {
 
 
 
-                {/* FORM CARD */}
-                <div className="bg-black border-2 border-cyan-500/30 rounded-xl p-6 space-y-5">
-                    
+                {/* FORM CARD - JUST 3 FIELDS */}
+                <div className="bg-black border-2 border-cyan-500/30 rounded-xl p-6 space-y-4">
+
                     {/* NAME */}
                     <div>
-                        <label className="text-cyan-400 text-xs font-bold font-mono mb-2 block">ARTIST NAME</label>
+                        <label className="text-cyan-400 text-xs font-bold font-mono mb-2 block">NAME</label>
                         <Input
                             required
                             value={formData.name}
                             onChange={(e) => setFormData({...formData, name: e.target.value})}
                             className="bg-gray-950 border-2 border-gray-800 text-white font-mono placeholder:text-gray-700"
-                            placeholder="Full name or band name"
+                            placeholder="Full name"
                         />
                     </div>
 
-                    {/* CONTACT */}
-                    <div className="grid grid-cols-2 gap-4">
-                        <div>
-                            <label className="text-cyan-400 text-xs font-bold font-mono mb-2 block">PHONE</label>
-                            <Input
-                                type="tel"
-                                value={formData.phone}
-                                onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                                className="bg-gray-950 border-2 border-gray-800 text-white font-mono placeholder:text-gray-700"
-                                placeholder="Phone number"
-                            />
-                        </div>
-                        <div>
-                            <label className="text-cyan-400 text-xs font-bold font-mono mb-2 block">EMAIL</label>
-                            <Input
-                                type="email"
-                                value={formData.email}
-                                onChange={(e) => setFormData({...formData, email: e.target.value})}
-                                className="bg-gray-950 border-2 border-gray-800 text-white font-mono placeholder:text-gray-700"
-                                placeholder="Email address"
-                            />
-                        </div>
+                    {/* PHONE */}
+                    <div>
+                        <label className="text-cyan-400 text-xs font-bold font-mono mb-2 block">PHONE</label>
+                        <Input
+                            type="tel"
+                            value={formData.phone}
+                            onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                            className="bg-gray-950 border-2 border-gray-800 text-white font-mono placeholder:text-gray-700"
+                            placeholder="Phone"
+                        />
                     </div>
 
-
+                    {/* EMAIL */}
+                    <div>
+                        <label className="text-cyan-400 text-xs font-bold font-mono mb-2 block">EMAIL</label>
+                        <Input
+                            type="email"
+                            value={formData.email}
+                            onChange={(e) => setFormData({...formData, email: e.target.value})}
+                            className="bg-gray-950 border-2 border-gray-800 text-white font-mono placeholder:text-gray-700"
+                            placeholder="Email"
+                        />
+                    </div>
                 </div>
 
                 {/* SAVE BUTTON */}
