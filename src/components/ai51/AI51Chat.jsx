@@ -240,41 +240,22 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
         />
       </div>
 
-      {/* TOP BAR */}
-      <div className="absolute top-4 left-4 right-4 flex justify-between items-center z-10">
-        <button
+      {/* TOP BAR - MINIMAL MOBILE */}
+      <div className="absolute top-3 right-3 z-10">
+        <motion.button
           onClick={() => setVoiceEnabled(!voiceEnabled)}
-          className={`bg-black/60 backdrop-blur-xl border rounded-xl px-4 py-2 flex items-center gap-2 transition-all ${
-            voiceEnabled ? 'border-cyan-500/50' : 'border-gray-600'
+          whileTap={{ scale: 0.9 }}
+          className={`p-2 rounded-lg backdrop-blur-xl border transition-all ${
+            voiceEnabled ? 'border-cyan-500/50 bg-cyan-500/10' : 'border-gray-600 bg-black/40'
           }`}
+          title={voiceEnabled ? 'Voice On' : 'Voice Off'}
         >
           {voiceEnabled ? (
             <Volume2 className="w-4 h-4 text-cyan-400" />
           ) : (
             <VolumeX className="w-4 h-4 text-gray-500" />
           )}
-          <span className={`font-mono text-xs ${voiceEnabled ? 'text-cyan-400' : 'text-gray-500'}`}>
-            {voiceEnabled ? 'VOICE ON' : 'VOICE OFF'}
-          </span>
-        </button>
-
-        {connectionActive && (
-          <div className="bg-black/60 backdrop-blur-xl border border-green-500/30 rounded-xl px-4 py-2">
-            <div className="flex items-center gap-2">
-              <Mic className={`w-4 h-4 ${isListening ? 'text-green-400' : 'text-gray-500'}`} />
-              <div className="flex gap-1">
-                {[...Array(5)].map((_, i) => (
-                  <div
-                    key={i}
-                    className={`w-1.5 h-4 rounded-full transition-all ${
-                      audioLevel > (i * 20) ? 'bg-green-400' : 'bg-gray-700'
-                    }`}
-                  />
-                ))}
-              </div>
-            </div>
-          </div>
-        )}
+        </motion.button>
       </div>
 
       {/* MAIN INTERFACE */}
