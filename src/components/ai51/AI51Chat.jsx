@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Mic, Heart, Volume2, VolumeX } from 'lucide-react';
+import { Mic, Heart, Volume2, VolumeX, Send } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 /**
