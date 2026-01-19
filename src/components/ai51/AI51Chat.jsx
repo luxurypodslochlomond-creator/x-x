@@ -396,6 +396,13 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, loca
           <Send className="w-4 h-4" />
         </motion.button>
       </div>
-    </div>
-  );
-}
+
+      {/* FOOTER - COOLASFUCK DATE/TIME ONLY */}
+      <div className="flex-shrink-0 bg-black border-t border-cyan-500/20 px-4 py-3 text-center">
+        <div className="font-mono text-cyan-400 text-sm font-bold">
+          {new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
+        </div>
+      </div>
+      </div>
+      );
+      }
