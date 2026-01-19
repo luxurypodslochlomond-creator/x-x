@@ -1614,70 +1614,7 @@ const VoiceHealing = ({ onProtocolRecommend }) => {
         )}
       </div>
 
-      {isRecording && (
-        <div className="text-center space-y-4">
-          <motion.div
-            animate={{ scale: [1, 1.2, 1] }}
-            transition={{ duration: 1, repeat: Infinity }}
-            className="mx-auto w-20 h-20 rounded-full bg-pink-500 flex items-center justify-center"
-          >
-            <Mic className="w-10 h-10 text-white" />
-          </motion.div>
-          <p className="text-pink-400 font-mono font-bold">LISTENING...</p>
-          <p className="text-gray-500 text-xs">Tell me how you feel (auto-stops in 10s)</p>
-          <button
-            onClick={stopRecording}
-            className="px-6 py-2 bg-gray-700 hover:bg-gray-600 text-white font-mono text-sm"
-          >
-            Stop Early
-          </button>
-        </div>
-      )}
 
-      {isAnalyzing && (
-        <div className="text-center space-y-4">
-          <motion.div
-            animate={{ rotate: 360 }}
-            transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
-          >
-            <Brain className="w-16 h-16 text-cyan-400 mx-auto" />
-          </motion.div>
-          <p className="text-cyan-400 font-mono font-bold">ANALYZING VOICE STRESS...</p>
-        </div>
-      )}
-
-      {voiceAnalysisData && (
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="space-y-4"
-        >
-          <div className="bg-green-900/30 border-2 border-green-500 p-4">
-            <p className="text-green-400 font-mono font-bold mb-2">✓ ANALYSIS COMPLETE</p>
-            <div className="grid grid-cols-2 gap-3 mb-3">
-              <div className="bg-black/40 p-2">
-                <p className="text-xs text-gray-400">Status</p>
-                <p className="text-lg font-black text-cyan-400">Ready to play</p>
-              </div>
-              <div className="bg-black/40 p-2">
-                <p className="text-xs text-gray-400">Intent</p>
-                <p className="text-lg font-black text-purple-400">{voiceAnalysisData.intent}</p>
-              </div>
-            </div>
-            <p className="text-white text-sm">Protocol: <strong>{selectedProtocol?.name}</strong></p>
-            <p className="text-gray-400 text-xs mt-2">Playing in fullscreen below</p>
-          </div>
-          <button
-            onClick={() => {
-              setVoiceAnalysisData(null);
-              setHealingIntent('');
-            }}
-            className="w-full py-3 bg-pink-600 hover:bg-pink-700 text-white font-mono text-sm"
-          >
-            New Session
-          </button>
-        </motion.div>
-      )}
 
       {/* SCIENCE SOURCES */}
       <div className="mt-6 bg-cyan-900/20 border-2 border-cyan-500/50 p-3">
