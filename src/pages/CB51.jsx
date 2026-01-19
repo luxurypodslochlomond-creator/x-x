@@ -54,11 +54,14 @@ export default function CB51() {
                     navigate(createPageUrl('CB51Login'));
                     return;
                 }
-                
+
                 // If user is an artist, redirect them to their artist home
                 const artists = await base44.entities.ScottArtist.filter({ email: currentUser.email });
                 if (artists.length > 0) {
-                    navigate(createPageUrl(`ScottArtistHome?id=${artists[0].id}`));
+                    setUser(currentUser);
+                    setLoading(false);
+                    // Auto-redirect to artist home after render
+                    setTimeout(() => navigate(createPageUrl(`ScottArtistHome?id=${artists[0].id}`)), 0);
                     return;
                 }
             }
