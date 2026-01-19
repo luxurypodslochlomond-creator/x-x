@@ -263,6 +263,27 @@ export default function AI51Page() {
         </motion.button>
       </div>
 
+      {/* WAVEFORM VISUALIZER (always visible when connected) */}
+      {connectionActive && (
+        <div className="flex-shrink-0 bg-gradient-to-b from-black/20 to-black border-y border-pink-500/20 px-4 py-4">
+          <p className="text-pink-300 text-[10px] font-mono mb-2 text-center">{state.label}</p>
+          <div className="flex items-end justify-center gap-1 h-14">
+            {frequencyData.map((val, i) => (
+              <motion.div
+                key={i}
+                className={`flex-1 rounded-full ${
+                  isListening ? 'bg-gradient-to-t from-pink-500 to-pink-400' 
+                  : isSpeaking ? 'bg-gradient-to-t from-green-500 to-green-400' 
+                  : 'bg-gradient-to-t from-cyan-500 to-cyan-400'
+                }`}
+                animate={{ height: `${Math.min(100, (val / 255) * 100)}%` }}
+                transition={{ type: 'tween', duration: 0.05 }}
+              />
+            ))}
+          </div>
+        </div>
+      )}
+
       {/* CHAT AREA */}
       <div className="flex-1 overflow-y-auto p-4 space-y-4">
         {conversation.length === 0 && !connectionActive ? (
@@ -287,7 +308,7 @@ export default function AI51Page() {
                 animate={{ opacity: 1, y: 0 }}
                 className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
               >
-                <div className={`rounded-xl px-4 py-2 max-w-sm ${
+                <div className={`rounded-xl px-4 py-2 max-w-[80%] ${
                   msg.role === 'user'
                     ? 'bg-cyan-500/20 text-white border border-cyan-400/50'
                     : 'bg-pink-500/20 text-white border border-pink-400/50'
@@ -296,6 +317,17 @@ export default function AI51Page() {
                 </div>
               </motion.div>
             ))}
+            {isThinking && (
+              <motion.div 
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="flex justify-start"
+              >
+                <div className="bg-amber-500/20 text-white border border-amber-400/50 rounded-xl px-4 py-2">
+                  <p className="text-sm font-mono">thinking...</p>
+                </div>
+              </motion.div>
+            )}
             <div ref={messagesEndRef} />
           </>
         )}
