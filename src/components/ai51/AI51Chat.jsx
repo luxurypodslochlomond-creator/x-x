@@ -5,6 +5,8 @@ import { base44 } from '@/api/base44Client';
 import AI51ChatHistory from './AI51ChatHistory';
 import AI51WiFiDirectMesh from './AI51WiFiDirectMesh';
 import AI51ProofOfLoveLedger from './AI51ProofOfLoveLedger';
+import AI51LocalConversationStorage from './AI51LocalConversationStorage';
+import AI51P2PSync from './AI51P2PSync';
 
 /**
  * AI51 - PROFESSIONAL P2P VOICE + TEXT
@@ -23,33 +25,58 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, loca
   const [showHistory, setShowHistory] = useState(false);
   const [meshStatus, setMeshStatus] = useState({ online: false, connectedPeers: 0, type: 'WiFiDirect_P2P' });
   const messagesEndRef = useRef(null);
-  const recognitionRef = useRef(null);
-  const audioContextRef = useRef(null);
-  const analyzerRef = useRef(null);
-  const micStreamRef = useRef(null);
-  const animationFrameRef = useRef(null);
-  const connectionActiveRef = useRef(false);
-  const meshRef = useRef(null);
+    const recognitionRef = useRef(null);
+    const audioContextRef = useRef(null);
+    const analyzerRef = useRef(null);
+    const micStreamRef = useRef(null);
+    const animationFrameRef = useRef(null);
+    const connectionActiveRef = useRef(false);
+    const meshRef = useRef(null);
+    const storageRef = useRef(null);
+    const syncRef = useRef(null);
+    const [showProofOfLove, setShowProofOfLove] = useState(false);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [conversation]);
 
-  // Initialize WiFi Direct P2P mesh
+  // Initialize P2P: Local Storage + Mesh Sync
   useEffect(() => {
-    const userId = localStorage.getItem('ai51_user_id') || 'anon_' + Math.random().toString(36).substr(2, 9);
-    const deviceId = localStorage.getItem('ai51_device_id') || crypto.randomUUID();
-    localStorage.setItem('ai51_user_id', userId);
-    localStorage.setItem('ai51_device_id', deviceId);
+    const init = async () => {
+      const userId = localStorage.getItem('ai51_user_id') || 'anon_' + Math.random().toString(36).substr(2, 9);
+      const deviceId = localStorage.getItem('ai51_device_id') || crypto.randomUUID();
+      localStorage.setItem('ai51_user_id', userId);
+      localStorage.setItem('ai51_device_id', deviceId);
+      
+      // Initialize local storage
+      storageRef.current = new AI51LocalConversationStorage(userId);
+      await storageRef.current.init();
+      
+      // Load existing conversation from local storage
+      const stored = await storageRef.current.loadConversation();
+      if (stored.length > 0) {
+        setConversation(stored.map(m => ({ role: m.role, content: m.content })));
+      }
+      
+      // Initialize mesh
+      meshRef.current = new AI51WiFiDirectMesh(userId, deviceId);
+      meshRef.current.announcePresence();
+      
+      // Initialize P2P sync
+      syncRef.current = new AI51P2PSync(meshRef.current, storageRef.current);
+      syncRef.current.start();
+      
+      const statusInterval = setInterval(() => {
+        setMeshStatus(meshRef.current.getStatus());
+      }, 5000);
+      
+      return () => {
+        clearInterval(statusInterval);
+        syncRef.current.stop();
+      };
+    };
     
-    meshRef.current = new AI51WiFiDirectMesh(userId, deviceId);
-    meshRef.current.announcePresence();
-    
-    const statusInterval = setInterval(() => {
-      setMeshStatus(meshRef.current.getStatus());
-    }, 5000);
-    
-    return () => clearInterval(statusInterval);
+    init();
   }, []);
 
   useEffect(() => {
