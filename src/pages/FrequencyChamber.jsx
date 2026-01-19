@@ -4,6 +4,7 @@ import { Heart, Moon, Brain, Zap, Shield, Wind, Sun, Volume2, VolumeX, Clock, In
 import { COOLASFUCKWaves, COOLASFUCKBrain, COOLASFUCKHeart, COOLASFUCKMoon, COOLASFUCKShield, COOLASFUCKTooth } from '@/components/shared/COOLASFUCKIcon';
 import BiometricHealing from '@/components/radio/BiometricHealing';
 import OvernightSleepMonitor from '@/components/healing/OvernightSleepMonitor';
+import AI51CustomFrequencyGenerator from '@/components/ai51/AI51CustomFrequencyGenerator';
 import { base44 } from '@/api/base44Client';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
@@ -1887,6 +1888,7 @@ export default function FrequencyChamber() {
     const [showBiometric, setShowBiometric] = useState(false);
     const [expandedStats, setExpandedStats] = useState({});
     const [showOvernightMonitor, setShowOvernightMonitor] = useState(false);
+    const [voiceAnalysisData, setVoiceAnalysisData] = useState(null);
 
 
     // SEO
@@ -2496,8 +2498,9 @@ export default function FrequencyChamber() {
     }
   };
 
-  const handleVoiceRecommendation = (protocolId) => {
+  const handleVoiceRecommendation = (protocolId, voiceAnalysis, intent) => {
     setSelectedProtocol(PROTOCOLS[protocolId]);
+    setVoiceAnalysisData({ voiceAnalysis, intent });
     // Scroll to top smoothly
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };

@@ -7,6 +7,7 @@ import AI51WiFiDirectMesh from './AI51WiFiDirectMesh';
 import AI51ProofOfLoveLedger from './AI51ProofOfLoveLedger';
 import AI51LocalConversationStorage from './AI51LocalConversationStorage';
 import AI51P2PSync from './AI51P2PSync';
+import AI51CustomFrequencyGenerator from './AI51CustomFrequencyGenerator';
 
 /**
  * AI51 - PROFESSIONAL P2P VOICE + TEXT
