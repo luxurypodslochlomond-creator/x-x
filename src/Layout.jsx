@@ -209,6 +209,14 @@ const LayoutInner = ({ children, currentPageName }) => {
   }, []);
 
   useEffect(() => {
+    // Add manifest link if not already present
+    if (!document.querySelector('link[rel="manifest"]')) {
+      const link = document.createElement('link');
+      link.rel = 'manifest';
+      link.href = '/manifest.json';
+      document.head.appendChild(link);
+    }
+
     const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
     if (isStandalone) {
       document.documentElement.setAttribute('data-standalone', 'true');
