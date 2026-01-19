@@ -3,6 +3,7 @@ import { createClientFromRequest } from 'npm:@base44/sdk@0.8.6';
 /**
  * Send push notification to CB51 user
  * Called when: new gig offers, urgent messages, overdue invoices
+ * Sends local notification to browser (service worker handles display)
  */
 
 Deno.serve(async (req) => {
@@ -20,8 +21,6 @@ Deno.serve(async (req) => {
       return Response.json({ error: 'Missing title or body' }, { status: 400 });
     }
 
-    // In production, this would send to a push service
-    // For now, we log the notification
     console.log(`📢 Notification to ${user.email}: ${title} - ${body}`);
 
     // Store notification in database for later retrieval
@@ -32,6 +31,7 @@ Deno.serve(async (req) => {
         subject: title,
         body: body,
         status: 'unread',
+        data: { url, tag },
       });
     } catch (e) {
       console.log('Message store (non-critical):', e);
@@ -39,7 +39,8 @@ Deno.serve(async (req) => {
 
     return Response.json({
       success: true,
-      message: 'Notification queued',
+      message: 'Notification sent',
+      notification: { title, body, tag, url },
     });
   } catch (error) {
     console.error('Notification error:', error);

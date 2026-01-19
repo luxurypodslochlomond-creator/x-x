@@ -55,7 +55,7 @@ export default function PushNotificationManager({ onSubscriptionChange }) {
       // Get service worker registration
       const registration = await navigator.serviceWorker.ready;
 
-      // Subscribe to push notifications (local only - no server needed yet)
+      // Subscribe to push notifications
       const subscription = await registration.pushManager.subscribe({
         userVisibleOnly: true,
         applicationServerKey: urlBase64ToUint8Array(
@@ -65,6 +65,16 @@ export default function PushNotificationManager({ onSubscriptionChange }) {
 
       setIsSubscribed(true);
       onSubscriptionChange?.(subscription);
+      
+      // Send subscription to backend for storage (optional - for server-side push later)
+      try {
+        await fetch('/api/subscribe', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ subscription }),
+        }).catch(() => {}); // Non-critical - don't block UI
+      } catch {}
+      
       alert('✓ Notifications enabled! You\'ll get alerts for gig offers & urgent messages.');
     } catch (error) {
       console.error('Permission request error:', error);
