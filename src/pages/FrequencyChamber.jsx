@@ -1491,187 +1491,55 @@ const HRVBiofeedback = ({ isActive, onHRVUpdate, color }) => {
 const VoiceHealing = ({ onProtocolRecommend }) => {
   const [isRecording, setIsRecording] = useState(false);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
-  const [audioBlob, setAudioBlob] = useState(null);
-  const [voiceAnalysis, setVoiceAnalysis] = useState(null);
   const [healingIntent, setHealingIntent] = useState('');
-  const [step, setStep] = useState('text'); // 'text' | 'voice' | 'result'
-  const [previousSessions, setPreviousSessions] = useState([]);
   const mediaRecorderRef = useRef(null);
   const audioChunksRef = useRef([]);
   const audioContextRef = useRef(null);
 
-  // Load previous sessions for progress tracking
-  useEffect(() => {
-    const loadSessions = async () => {
-      try {
-        const sessions = await base44.entities.VoiceHealingSession.list('-session_date', 10);
-        setPreviousSessions(sessions);
-      } catch (e) {
-        console.log('No previous sessions');
-      }
+  const getProtocolFromIntent = (intent) => {
+    const keywords = {
+      'anxiety|panic|stressed|worried': 'anxiety',
+      'sleep|insomnia|tired|rest': 'sleep',
+      'pain|hurt|ache|sore': 'pain',
+      'focus|attention|brain|foggy': 'brain_fog',
+      'sad|depressed|down|mood': 'depression',
+      'angry|rage|anger|frustrated': 'anger',
+      'trauma|ptsd|scared|fear': 'trauma',
+      'grief|loss|heartbreak|mourn': 'grief',
+      'tooth|dental|jaw|infection': 'dental_emergency',
+      'migraine|headache|head': 'migraine',
     };
-    loadSessions();
-  }, []);
 
-  const analyzeVoiceStress = async (audioBuffer) => {
-    // Advanced analysis: F0 (fundamental frequency), vowel detection, stress markers
-    const ctx = audioContextRef.current || new (window.AudioContext || window.webkitAudioContext)();
-    audioContextRef.current = ctx;
-
-    const analyser = ctx.createAnalyser();
-    analyser.fftSize = 4096; // Higher resolution
-    const bufferLength = analyser.frequencyBinCount;
-    const dataArray = new Uint8Array(bufferLength);
-    const floatData = new Float32Array(bufferLength);
-
-    // Get frequency data
-    const source = ctx.createBufferSource();
-    source.buffer = audioBuffer;
-    source.connect(analyser);
-    analyser.getByteFrequencyData(dataArray);
-    analyser.getFloatFrequencyData(floatData);
-
-    // Calculate F0 (fundamental frequency) - stress biomarker
-    let maxMagnitude = -Infinity;
-    let f0Index = 0;
-    for (let i = 20; i < 400; i++) { // 85-1700 Hz range (human voice)
-      if (floatData[i] > maxMagnitude) {
-        maxMagnitude = floatData[i];
-        f0Index = i;
+    const lowerIntent = intent.toLowerCase();
+    for (const [pattern, protocol] of Object.entries(keywords)) {
+      if (pattern.split('|').some(word => lowerIntent.includes(word))) {
+        return protocol;
       }
     }
-    const f0Hz = (f0Index * ctx.sampleRate) / analyser.fftSize;
-
-    // Frequency bands
-    const lowFreq = dataArray.slice(0, 50).reduce((a, b) => a + b, 0) / 50;
-    const midFreq = dataArray.slice(50, 150).reduce((a, b) => a + b, 0) / 100;
-    const highFreq = dataArray.slice(150, 300).reduce((a, b) => a + b, 0) / 150;
-    const veryHighFreq = dataArray.slice(300, 500).reduce((a, b) => a + b, 0) / 200;
-
-    // Stress score calculation (0-100)
-    // High F0 + high-frequency energy = stress/anxiety
-    const f0Stress = f0Hz > 200 ? ((f0Hz - 200) / 200) * 50 : 0;
-    const highFreqStress = (veryHighFreq / 255) * 30;
-    const varianceStress = (Math.abs(highFreq - lowFreq) / 255) * 20;
-    const stressScore = Math.min(100, Math.round(f0Stress + highFreqStress + varianceStress));
-
-    // Vowel detection (simplified - real would need formant analysis)
-    const dominantVowel = midFreq > highFreq ? 'AH' : lowFreq > midFreq ? 'OH' : 'EE';
-
-    // Energy level
-    const totalEnergy = lowFreq + midFreq + highFreq;
-    const energyScore = totalEnergy < 150 ? 'low' : totalEnergy > 300 ? 'high' : 'normal';
-
-    // Protocol recommendation
-    let protocol = 'anxiety';
-    if (stressScore > 70) protocol = 'emergency';
-    else if (stressScore > 50) protocol = 'anxiety';
-    else if (energyScore === 'low' && midFreq < 80) protocol = 'depression';
-    else if (varianceStress > 15) protocol = 'trauma';
-    else if (midFreq > 120 && highFreq > 100) protocol = 'anger';
-    else if (totalEnergy < 120) protocol = 'burnout';
-
-    return { protocol, stressScore, f0Hz, dominantVowel, energyScore };
+    return 'anxiety'; // default
   };
 
-  const startRecording = async () => {
-    if (!healingIntent.trim()) {
-      alert('Please state your healing intention first ❤️');
-      return;
-    }
-
+  const handleSubmit = async () => {
+    if (!healingIntent.trim()) return;
+    
+    setIsAnalyzing(true);
+    const protocol = getProtocolFromIntent(healingIntent);
+    
+    // Save intent
     try {
-      // Request microphone with mobile-friendly constraints
-      const stream = await navigator.mediaDevices.getUserMedia({ 
-        audio: {
-          echoCancellation: true,
-          noiseSuppression: true,
-          autoGainControl: true
-        }
+      await base44.entities.VoiceHealingSession.create({
+        healing_intent: healingIntent,
+        recommended_protocol: protocol,
+        audio_hash: `text_${Date.now()}`
       });
-      mediaRecorderRef.current = new MediaRecorder(stream);
-      audioChunksRef.current = [];
-
-      mediaRecorderRef.current.ondataavailable = (event) => {
-        audioChunksRef.current.push(event.data);
-      };
-
-      mediaRecorderRef.current.onstop = async () => {
-        const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/webm' });
-        setAudioBlob(audioBlob);
-        setIsAnalyzing(true);
-
-        try {
-          // Analyze audio
-          const arrayBuffer = await audioBlob.arrayBuffer();
-          const ctx = new (window.AudioContext || window.webkitAudioContext)();
-          const audioBuffer = await ctx.decodeAudioData(arrayBuffer);
-
-          const analysis = await analyzeVoiceStress(audioBuffer);
-
-          // Create hash for privacy
-          const hashBuffer = await crypto.subtle.digest('SHA-256', arrayBuffer);
-          const audioHash = Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, '0')).join('');
-
-          // Save session
-          await base44.entities.VoiceHealingSession.create({
-            healing_intent: healingIntent,
-            voice_f0_hz: analysis.f0Hz,
-            stress_level_detected: analysis.stressScore,
-            dominant_vowel: analysis.dominantVowel,
-            recommended_protocol: analysis.protocol,
-            audio_hash: audioHash
-          });
-
-          setVoiceAnalysis(analysis);
-          setIsAnalyzing(false);
-
-          // Auto-recommend protocol
-          onProtocolRecommend(analysis.protocol);
-        } catch (error) {
-          console.error('Analysis error:', error);
-          setIsAnalyzing(false);
-        }
-
-        // Stop all tracks
-        stream.getTracks().forEach(track => track.stop());
-      };
-
-      mediaRecorderRef.current.start();
-      setIsRecording(true);
-
-      // Auto-stop after 10 seconds
-      setTimeout(() => {
-        if (mediaRecorderRef.current && mediaRecorderRef.current.state === 'recording') {
-          mediaRecorderRef.current.stop();
-          setIsRecording(false);
-        }
-      }, 10000);
-    } catch (err) {
-      console.error('Microphone access error:', err);
-      
-      // Mobile-friendly error messages
-      let errorMsg = '🎤 Microphone access needed\n\n';
-      if (err.name === 'NotAllowedError' || err.name === 'PermissionDeniedError') {
-        errorMsg += 'Please allow microphone access in your browser settings:\n\n';
-        errorMsg += '1. Tap the "AA" or lock icon in address bar\n';
-        errorMsg += '2. Enable microphone permissions\n';
-        errorMsg += '3. Reload page and try again';
-      } else if (err.name === 'NotFoundError' || err.name === 'DevicesNotFoundError') {
-        errorMsg += 'No microphone detected on this device.';
-      } else {
-        errorMsg += 'Unable to access microphone. Try reloading the page.';
-      }
-      
-      alert(errorMsg);
+    } catch (e) {
+      console.log('Session save non-critical:', e);
     }
-  };
-
-  const stopRecording = () => {
-    if (mediaRecorderRef.current && mediaRecorderRef.current.state === 'recording') {
-      mediaRecorderRef.current.stop();
-      setIsRecording(false);
-    }
+    
+    setTimeout(() => {
+      setIsAnalyzing(false);
+      onProtocolRecommend(protocol, null, healingIntent);
+    }, 300);
   };
 
   return (
