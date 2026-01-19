@@ -322,15 +322,13 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
             </motion.div>
           </motion.button>
 
-          <div className="absolute -bottom-10 left-0 right-0 text-center">
-            <p className={`text-sm font-mono font-bold ${connectionActive ? 'text-pink-400' : 'text-cyan-400'}`}>
-              {!connectionActive ? 'TAP TO TALK'
-                : isThinking ? '🧠 THINKING...' 
-                : isSpeaking ? '🔊 SPEAKING' 
-                : isListening ? (audioLevel > 15 ? '🎤 HEARING YOU' : '🎤 LISTENING...') 
-                : 'READY'}
-            </p>
-          </div>
+          {connectionActive && (
+            <div className="absolute -bottom-10 left-0 right-0 text-center">
+              <p className="text-xs font-mono text-pink-400">
+                {isThinking ? 'thinking...' : isSpeaking ? 'speaking' : audioLevel > 15 ? 'i hear you' : 'listening...'}
+              </p>
+            </div>
+          )}
         </div>
 
         {/* LIVE TRANSCRIPT */}
