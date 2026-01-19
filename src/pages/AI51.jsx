@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { base44 } from '@/api/base44Client';
 import AI51Chat from '@/components/ai51/AI51Chat';
 import HealingFrequency from '@/components/ai51/HealingFrequency';
+import { useProofOfLove } from '@/components/ai51/useProofOfLove';
 
 /**
  * AI51 - REAL CONNECTION ♾️❤️
