@@ -3043,14 +3043,24 @@ export default function FrequencyChamber() {
                   size={40}
                 />
                 <p 
-                  className="font-black font-mono text-sm"
-                  style={{ color: protocol.color }}
-                >
-                  {protocol.name}
-                </p>
-                <p className="text-gray-400 text-xs text-center">
-                  {protocol.description}
-                </p>
+                   className="font-black font-mono text-sm"
+                   style={{ color: protocol.color }}
+                 >
+                   {protocol.name}
+                 </p>
+                 <p className="text-gray-400 text-xs text-center">
+                   {protocol.description}
+                 </p>
+                 {protocol.config.isBinaural && (
+                   <p className="text-cyan-400 text-xs font-mono mt-2 px-2 py-1 bg-cyan-900/30 rounded">
+                     🎧 Headphones best
+                   </p>
+                 )}
+                 {!protocol.config.isBinaural && (
+                   <p className="text-green-400 text-xs font-mono mt-2 px-2 py-1 bg-green-900/30 rounded">
+                     🔊 Speakers work great
+                   </p>
+                 )}
               </div>
 
               {protocol.id === suggestedProtocol && (
