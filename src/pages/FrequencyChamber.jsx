@@ -1849,7 +1849,7 @@ export default function FrequencyChamber() {
     const testToneRef = useRef(null);
     const [showBiometric, setShowBiometric] = useState(false);
     const [expandedStats, setExpandedStats] = useState({});
-    const [showOvernightMonitor, setShowOvernightMonitor] = useState(false);
+
     const [voiceAnalysisData, setVoiceAnalysisData] = useState(null);
 
 
@@ -3615,48 +3615,24 @@ export default function FrequencyChamber() {
         )}
       </AnimatePresence>
       
-      {/* OVERNIGHT SLEEP MONITOR - THE NUCLEAR OPTION */}
-      {!selectedProtocol && (
-        <div className="max-w-4xl mx-auto p-4">
-          <motion.button
-            onClick={() => setShowOvernightMonitor(true)}
-            whileHover={{ scale: 1.02 }}
-            className="w-full bg-gradient-to-r from-purple-500/30 to-pink-500/30 border-4 border-purple-500 p-6 hover:bg-purple-500/40 transition-all mb-6"
-            style={{ boxShadow: '0 0 60px rgba(168, 85, 247, 0.6)' }}
-          >
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-4">
-                <Moon className="w-12 h-12 text-purple-400 animate-pulse" />
-                <div className="text-left">
-                  <h3 className="text-purple-400 font-black font-mono text-2xl">OVERNIGHT MONITOR</h3>
-                  <p className="text-pink-300 text-sm font-mono font-bold">£15k clinics CAN'T do this</p>
-                  <p className="text-gray-400 text-xs font-mono mt-1">
-                    Track healing ALL NIGHT • Optimal wake time • Morning report
-                  </p>
-                </div>
-              </div>
-              <Sparkles className="w-8 h-8 text-amber-400" />
-            </div>
-          </motion.button>
-        </div>
-      )}
 
-      {/* BIOMETRIC HEALING - Collapsible, zero modals */}
+
+      {/* BIOMETRIC HEALING - Inline collapsible */}
       {!selectedProtocol && (
         <div className="max-w-4xl mx-auto p-4">
           <button
             onClick={() => setShowBiometric(!showBiometric)}
-            className="w-full border-4 border-pink-500 bg-black p-6 hover:bg-pink-500/10 transition-all mb-4"
+            className="w-full border-4 border-pink-500 bg-black p-4 hover:bg-pink-500/10 transition-all"
           >
             <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <COOLASFUCKHeart size={32} animate={false} />
+              <div className="flex items-center gap-2">
+                <COOLASFUCKHeart size={24} animate={false} />
                 <div className="text-left">
-                  <h3 className="text-pink-400 font-black font-mono text-lg">BIOMETRIC HEALING</h3>
-                  <p className="text-gray-400 text-xs font-mono">Watch your heart heal in real-time</p>
+                  <h3 className="text-pink-400 font-black font-mono text-sm">BIOMETRIC HEALING</h3>
+                  <p className="text-gray-400 text-xs font-mono">Real-time heart healing</p>
                 </div>
               </div>
-              <span className="text-pink-400 font-black text-2xl">{showBiometric ? '−' : '+'}</span>
+              <span className="text-pink-400 font-black">{showBiometric ? '−' : '+'}</span>
             </div>
           </button>
 
@@ -3667,7 +3643,7 @@ export default function FrequencyChamber() {
                 animate={{ height: 'auto', opacity: 1 }}
                 exit={{ height: 0, opacity: 0 }}
                 transition={{ duration: 0.3 }}
-                className="overflow-hidden"
+                className="overflow-hidden border-l-4 border-r-4 border-b-4 border-pink-500"
               >
                 <BiometricHealing />
               </motion.div>
@@ -3676,12 +3652,7 @@ export default function FrequencyChamber() {
         </div>
       )}
 
-      {/* OVERNIGHT MONITOR FULLSCREEN */}
-      <AnimatePresence>
-        {showOvernightMonitor && (
-          <OvernightSleepMonitor onClose={() => setShowOvernightMonitor(false)} />
-        )}
-      </AnimatePresence>
+
 
 
 
