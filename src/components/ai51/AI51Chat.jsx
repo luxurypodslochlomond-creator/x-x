@@ -33,6 +33,23 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, loca
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [conversation]);
 
+  // Initialize WiFi Direct P2P mesh
+  useEffect(() => {
+    const userId = localStorage.getItem('ai51_user_id') || 'anon_' + Math.random().toString(36).substr(2, 9);
+    const deviceId = localStorage.getItem('ai51_device_id') || crypto.randomUUID();
+    localStorage.setItem('ai51_user_id', userId);
+    localStorage.setItem('ai51_device_id', deviceId);
+    
+    meshRef.current = new AI51WiFiDirectMesh(userId, deviceId);
+    meshRef.current.announcePresence();
+    
+    const statusInterval = setInterval(() => {
+      setMeshStatus(meshRef.current.getStatus());
+    }, 5000);
+    
+    return () => clearInterval(statusInterval);
+  }, []);
+
   useEffect(() => {
     if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
       const SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
