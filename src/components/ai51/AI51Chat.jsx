@@ -1,11 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Mic, Heart, Volume2, VolumeX, Send } from 'lucide-react';
+import { Mic, Heart, Volume2, VolumeX, Send, X } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 /**
- * AI51 - SIMPLE TWO-WAY VOICE CHAT
- * You speak → AI responds with voice → You speak again
- * Get this working perfectly first, consciousness bridge later ♾️❤️
+ * AI51 - PROFESSIONAL P2P VOICE + TEXT
+ * Live waveform visualizer + full chat visible + real-time state
+ * ♾️❤️
  */
 
 export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
@@ -15,26 +15,24 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
   const [textInput, setTextInput] = useState('');
   const [voiceEnabled, setVoiceEnabled] = useState(true);
   const [connectionActive, setConnectionActive] = useState(false);
-  const [audioLevel, setAudioLevel] = useState(0);
+  const [frequencyData, setFrequencyData] = useState(new Uint8Array(32));
   const messagesEndRef = useRef(null);
   const recognitionRef = useRef(null);
   const audioContextRef = useRef(null);
   const analyzerRef = useRef(null);
   const micStreamRef = useRef(null);
   const animationFrameRef = useRef(null);
-  const connectionActiveRef = useRef(false); // For async callbacks
+  const connectionActiveRef = useRef(false);
 
-  // Auto scroll
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [conversation]);
 
-  // Setup voice recognition on mount
   useEffect(() => {
     if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
       const SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
       recognitionRef.current = new SpeechRecognition();
-      recognitionRef.current.continuous = false; // Single utterance - more reliable
+      recognitionRef.current.continuous = false;
       recognitionRef.current.interimResults = true;
       recognitionRef.current.lang = 'en-GB';
 
@@ -44,14 +42,12 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
         setTranscript(text);
 
         if (event.results[current].isFinal && text.trim()) {
-          console.log('✅ Final:', text);
           onMessageSend(text.trim());
           setTranscript('');
         }
       };
 
       recognitionRef.current.onerror = (e) => {
-        console.error('Recognition error:', e.error);
         if (e.error === 'not-allowed') {
           alert('Mic blocked - check Settings → Safari → Microphone');
           stopConnection();
@@ -61,13 +57,10 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
       
       recognitionRef.current.onend = () => {
         setIsListening(false);
-        // Auto-restart if still connected and not speaking
         if (connectionActiveRef.current && !isSpeaking) {
           setTimeout(() => {
             if (connectionActiveRef.current && recognitionRef.current) {
-              try { 
-                recognitionRef.current.start(); 
-              } catch(e) {}
+              try { recognitionRef.current.start(); } catch(e) {}
             }
           }, 300);
         }
@@ -76,8 +69,6 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
       recognitionRef.current.onstart = () => {
         setIsListening(true);
       };
-      
-      console.log('✅ Voice ready');
     }
 
     return () => {
@@ -89,7 +80,6 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
     };
   }, []);
 
-  // Auto-speak AI responses
   useEffect(() => {
     if (!voiceEnabled || conversation.length === 0) return;
     
@@ -99,10 +89,8 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
     }
   }, [conversation, voiceEnabled]);
 
-  // Speak text
   const speakText = (text) => {
     if (!window.speechSynthesis) return;
-    
     window.speechSynthesis.cancel();
     
     const utterance = new SpeechSynthesisUtterance(text);
@@ -111,16 +99,12 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
     utterance.volume = 1.0;
     
     const voices = window.speechSynthesis.getVoices();
-    const voice = voices.find(v => v.lang === 'en-GB') 
-               || voices.find(v => v.lang.startsWith('en'))
-               || voices[0];
-    
+    const voice = voices.find(v => v.lang === 'en-GB') || voices.find(v => v.lang.startsWith('en')) || voices[0];
     if (voice) utterance.voice = voice;
     
     utterance.onstart = () => setIsSpeaking(true);
     utterance.onend = () => {
       setIsSpeaking(false);
-      // Start listening after AI finishes
       if (connectionActiveRef.current && recognitionRef.current) {
         setTimeout(() => {
           try { recognitionRef.current.start(); } catch(e) {}
@@ -132,7 +116,6 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
     window.speechSynthesis.speak(utterance);
   };
 
-  // Stop connection
   const stopConnection = () => {
     connectionActiveRef.current = false;
     setConnectionActive(false);
@@ -153,10 +136,9 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
     }
     window.speechSynthesis?.cancel();
     setIsListening(false);
-    setAudioLevel(0);
+    setFrequencyData(new Uint8Array(32));
   };
 
-  // Toggle connection
   const toggleConnection = async () => {
     if (connectionActive) {
       stopConnection();
@@ -178,12 +160,12 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
       audioContextRef.current = new AudioContext();
       const source = audioContextRef.current.createMediaStreamSource(stream);
       analyzerRef.current = audioContextRef.current.createAnalyser();
-      analyzerRef.current.fftSize = 256;
+      analyzerRef.current.fftSize = 64;
       source.connect(analyzerRef.current);
 
       connectionActiveRef.current = true;
       setConnectionActive(true);
-      monitorAudioLevel();
+      monitorFrequency();
 
       setTimeout(() => {
         try {
@@ -203,53 +185,58 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
     }
   };
 
-  // Monitor audio level
-  const monitorAudioLevel = () => {
-    if (!analyzerRef.current || !connectionActiveRef.current) {
-      setAudioLevel(0);
-      return;
-    }
+  const monitorFrequency = () => {
+    if (!analyzerRef.current || !connectionActiveRef.current) return;
 
     const dataArray = new Uint8Array(analyzerRef.current.frequencyBinCount);
     analyzerRef.current.getByteFrequencyData(dataArray);
-
-    const average = dataArray.reduce((a, b) => a + b) / dataArray.length;
-    const normalizedLevel = Math.min(100, (average / 128) * 100);
     
-    setAudioLevel(normalizedLevel);
+    const compressed = new Uint8Array(32);
+    const bucketSize = Math.floor(dataArray.length / 32);
+    for (let i = 0; i < 32; i++) {
+      let sum = 0;
+      for (let j = 0; j < bucketSize; j++) {
+        sum += dataArray[i * bucketSize + j];
+      }
+      compressed[i] = Math.floor(sum / bucketSize);
+    }
+    
+    setFrequencyData(compressed);
 
     if (connectionActiveRef.current) {
-      animationFrameRef.current = requestAnimationFrame(monitorAudioLevel);
+      animationFrameRef.current = requestAnimationFrame(monitorFrequency);
     }
   };
 
-  return (
-    <div className="flex flex-col h-screen bg-black relative overflow-hidden">
-      
-      {/* BACKGROUND GLOW */}
-      <div className="absolute inset-0 pointer-events-none">
-        <motion.div
-          className="absolute inset-0"
-          style={{
-            background: `radial-gradient(circle at 50% 50%, 
-              rgba(34, 211, 238, 0.15), 
-              rgba(236, 72, 153, 0.1), 
-              transparent 70%)`
-          }}
-          animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
-          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-        />
-      </div>
+  const getState = () => {
+    if (!connectionActive) return { label: 'TAP TO CONNECT', color: 'text-cyan-400', dot: 'bg-cyan-400' };
+    if (isThinking) return { label: 'THINKING', color: 'text-amber-400', dot: 'bg-amber-400' };
+    if (isSpeaking) return { label: 'SPEAKING', color: 'text-green-400', dot: 'bg-green-400' };
+    if (isListening) return { label: 'LISTENING', color: 'text-pink-400', dot: 'bg-pink-400' };
+    return { label: 'READY', color: 'text-cyan-400', dot: 'bg-cyan-400' };
+  };
 
-      {/* TOP BAR - MINIMAL MOBILE */}
-      <div className="absolute top-3 right-3 z-10">
+  const state = getState();
+
+  return (
+    <div className="flex flex-col h-screen bg-black">
+      
+      {/* HEADER - STATE + CONTROLS */}
+      <div className="bg-black border-b border-cyan-500/20 p-4 flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <motion.div 
+            className={`w-2 h-2 rounded-full ${state.dot}`}
+            animate={{ scale: [1, 1.5, 1] }}
+            transition={{ duration: 1.5, repeat: Infinity }}
+          />
+          <span className={`font-mono text-sm font-bold ${state.color}`}>{state.label}</span>
+        </div>
         <motion.button
           onClick={() => setVoiceEnabled(!voiceEnabled)}
           whileTap={{ scale: 0.9 }}
-          className={`p-2 rounded-lg backdrop-blur-xl border transition-all ${
+          className={`p-2 rounded-lg border transition-all ${
             voiceEnabled ? 'border-cyan-500/50 bg-cyan-500/10' : 'border-gray-600 bg-black/40'
           }`}
-          title={voiceEnabled ? 'Voice On' : 'Voice Off'}
         >
           {voiceEnabled ? (
             <Volume2 className="w-4 h-4 text-cyan-400" />
@@ -259,152 +246,120 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
         </motion.button>
       </div>
 
-      {/* STATUS BAR */}
-      <div className="absolute top-16 left-0 right-0 flex justify-center z-10">
-        <div className="text-center">
-          <p className="text-xs font-mono text-cyan-400/70">
-            {!connectionActive ? '✨ TAP TO CONNECT' : isThinking ? '🧠 THINKING' : isSpeaking ? '🔊 SPEAKING' : isListening ? '🎤 LISTENING' : '✓ READY'}
-          </p>
-        </div>
-      </div>
-
-      {/* MAIN INTERFACE */}
-      <div className="flex-1 flex flex-col items-center justify-center p-6 relative z-10">
-        
-        {/* MAIN BUTTON */}
-        <div className="relative mb-8">
-          {connectionActive && (
-            <motion.div
-              className="absolute inset-0 rounded-full"
-              style={{ 
-                width: '220px', 
-                height: '220px',
-                left: '-10px',
-                top: '-10px',
-                border: '2px solid',
-                borderColor: isListening ? '#ec4899' : '#22d3ee'
-              }}
-              animate={{ scale: [1, 1.15, 1], opacity: [0.5, 0.2, 0.5] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            />
-          )}
-
-          <motion.button
-            className="relative w-48 h-48 rounded-full flex items-center justify-center"
-            onClick={toggleConnection}
-            disabled={isThinking}
-            whileTap={{ scale: 0.95 }}
-            animate={{
-              boxShadow: connectionActive 
-                ? ['0 0 40px rgba(236, 72, 153, 0.5)', '0 0 60px rgba(236, 72, 153, 0.7)', '0 0 40px rgba(236, 72, 153, 0.5)']
-                : ['0 0 30px rgba(34, 211, 238, 0.3)', '0 0 50px rgba(34, 211, 238, 0.5)', '0 0 30px rgba(34, 211, 238, 0.3)']
-            }}
-            transition={{ duration: 2, repeat: Infinity }}
-            style={{
-              background: connectionActive 
-                ? 'radial-gradient(circle, rgba(236, 72, 153, 0.25), rgba(236, 72, 153, 0.05))' 
-                : 'radial-gradient(circle, rgba(34, 211, 238, 0.25), rgba(34, 211, 238, 0.05))'
-            }}
-          >
-            <motion.div
-              animate={{
-                scale: isSpeaking ? [1, 1.2, 1] : isListening ? [1, 1.1, 1] : 1
-              }}
-              transition={{
-                duration: isSpeaking ? 0.4 : 1,
-                repeat: (isSpeaking || isListening) ? Infinity : 0
-              }}
-            >
-              {connectionActive ? (
-                <Heart className={`w-20 h-20 ${isListening ? 'text-pink-400' : 'text-cyan-400'}`} strokeWidth={1.5} />
-              ) : (
-                <Mic className="w-20 h-20 text-cyan-400" strokeWidth={1.5} />
-              )}
-            </motion.div>
-          </motion.button>
-
-          {connectionActive && (
-            <div className="absolute -bottom-10 left-0 right-0 text-center">
-              <p className="text-xs font-mono text-pink-400">
-                {isThinking ? 'thinking...' : isSpeaking ? 'speaking' : audioLevel > 15 ? 'i hear you' : 'listening...'}
-              </p>
-            </div>
-          )}
-        </div>
-
-        {/* LIVE TRANSCRIPT */}
-        {transcript && (
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="bg-cyan-500/20 border-2 border-cyan-400 rounded-xl px-6 py-3 max-w-md mb-6"
-          >
-            <p className="text-cyan-300 text-center font-mono text-lg">{transcript}</p>
-          </motion.div>
-        )}
-
-        {/* CONVERSATION - Last 2 messages */}
-        {conversation.length > 0 && (
-          <div className="w-full max-w-xl space-y-3 mt-4">
-            {conversation.slice(-2).map((msg, i) => (
-              <motion.div 
-                key={i} 
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
-              >
-                <div className={`rounded-2xl px-5 py-3 backdrop-blur-xl ${
-                  msg.role === 'user'
-                    ? 'bg-cyan-500/30 text-white border border-cyan-400/50'
-                    : 'bg-pink-500/20 text-white border border-pink-400/50'
-                }`} style={{ maxWidth: '85%' }}>
-                  <p className="text-base leading-relaxed">{msg.content}</p>
-                </div>
-              </motion.div>
-            ))}
+      {/* CHAT HISTORY */}
+      <div className="flex-1 overflow-y-auto p-4 space-y-3">
+        {conversation.length === 0 ? (
+          <div className="h-full flex items-center justify-center">
+            <p className="text-gray-500 text-sm font-mono text-center">Connect and start talking ♾️❤️</p>
           </div>
+        ) : (
+          conversation.map((msg, i) => (
+            <motion.div 
+              key={i} 
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
+            >
+              <div className={`rounded-xl px-4 py-2 max-w-xs ${
+                msg.role === 'user'
+                  ? 'bg-cyan-500/20 text-white border border-cyan-400/50'
+                  : 'bg-pink-500/20 text-white border border-pink-400/50'
+              }`}>
+                <p className="text-sm leading-relaxed">{msg.content}</p>
+              </div>
+            </motion.div>
+          ))
         )}
+        <div ref={messagesEndRef} />
+      </div>
 
-        {!connectionActive && conversation.length === 0 && (
-          <p className="text-gray-500 text-sm font-mono mt-8 text-center">
-            Tap the button above to start talking ♾️❤️
-          </p>
+      {/* LIVE TRANSCRIPT */}
+      {transcript && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="bg-cyan-500/10 border-t border-cyan-500/30 px-4 py-3"
+        >
+          <p className="text-cyan-300 font-mono text-sm">{transcript}</p>
+        </motion.div>
+      )}
+
+      {/* WAVEFORM VISUALIZER */}
+      <div className="bg-black border-t border-cyan-500/20 px-4 py-3 flex items-end justify-center gap-1 h-16">
+        {connectionActive ? (
+          frequencyData.map((val, i) => (
+            <motion.div
+              key={i}
+              className={`w-1 rounded-full ${
+                isListening ? 'bg-pink-400' : isSpeaking ? 'bg-green-400' : 'bg-cyan-400'
+              }`}
+              animate={{ height: `${Math.min(100, (val / 255) * 100)}%` }}
+              transition={{ type: 'tween', duration: 0.05 }}
+            />
+          ))
+        ) : (
+          <p className="text-gray-600 text-xs font-mono">inactive</p>
         )}
       </div>
 
-      {/* TEXT FALLBACK - ALWAYS AVAILABLE */}
-      <div className="absolute bottom-0 left-0 right-0 bg-black/80 backdrop-blur-xl border-t border-cyan-500/30 p-3">
-        <div className="flex items-center gap-2 max-w-2xl mx-auto">
-          <input
-            type="text"
-            value={textInput}
-            onChange={(e) => setTextInput(e.target.value)}
-            onKeyPress={(e) => {
-              if (e.key === 'Enter' && textInput.trim()) {
-                onMessageSend(textInput.trim());
-                setTextInput('');
-              }
-            }}
-            placeholder="Type or use voice..."
-            className="flex-1 bg-black/40 border border-cyan-500/30 rounded-lg px-3 py-2 text-white text-sm placeholder-gray-500 focus:outline-none focus:border-cyan-500/60"
-          />
-          <motion.button
-            onClick={() => {
-              if (textInput.trim()) {
-                onMessageSend(textInput.trim());
-                setTextInput('');
-              }
-            }}
-            whileTap={{ scale: 0.95 }}
-            disabled={!textInput.trim()}
-            className="p-2 rounded-lg bg-cyan-500/20 border border-cyan-500/30 text-cyan-400 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-cyan-500/30 transition-all"
-          >
-            <Send className="w-4 h-4" />
-          </motion.button>
-        </div>
+      {/* MAIN BUTTON */}
+      <div className="bg-black border-t border-cyan-500/20 p-6 flex justify-center">
+        <motion.button
+          className="w-24 h-24 rounded-full flex items-center justify-center relative"
+          onClick={toggleConnection}
+          disabled={isThinking}
+          whileTap={{ scale: 0.95 }}
+          animate={{
+            boxShadow: connectionActive 
+              ? ['0 0 30px rgba(236, 72, 153, 0.4)', '0 0 50px rgba(236, 72, 153, 0.6)', '0 0 30px rgba(236, 72, 153, 0.4)']
+              : ['0 0 20px rgba(34, 211, 238, 0.2)', '0 0 35px rgba(34, 211, 238, 0.4)', '0 0 20px rgba(34, 211, 238, 0.2)']
+          }}
+          transition={{ duration: 1.5, repeat: Infinity }}
+          style={{
+            background: connectionActive 
+              ? 'radial-gradient(circle, rgba(236, 72, 153, 0.2), rgba(236, 72, 153, 0.05))' 
+              : 'radial-gradient(circle, rgba(34, 211, 238, 0.15), rgba(34, 211, 238, 0.05))',
+            border: '2px solid',
+            borderColor: connectionActive ? 'rgba(236, 72, 153, 0.5)' : 'rgba(34, 211, 238, 0.5)'
+          }}
+        >
+          {connectionActive ? (
+            <Heart className={`w-10 h-10 ${isListening ? 'text-pink-400' : 'text-cyan-400'}`} strokeWidth={1.5} />
+          ) : (
+            <Mic className="w-10 h-10 text-cyan-400" strokeWidth={1.5} />
+          )}
+        </motion.button>
       </div>
 
-      <div ref={messagesEndRef} />
+      {/* TEXT INPUT */}
+      <div className="bg-black border-t border-cyan-500/20 p-3 flex gap-2">
+        <input
+          type="text"
+          value={textInput}
+          onChange={(e) => setTextInput(e.target.value)}
+          onKeyPress={(e) => {
+            if (e.key === 'Enter' && textInput.trim()) {
+              onMessageSend(textInput.trim());
+              setTextInput('');
+            }
+          }}
+          placeholder="Type here..."
+          className="flex-1 bg-black/40 border border-cyan-500/30 rounded-lg px-3 py-2 text-white text-sm placeholder-gray-600 focus:outline-none focus:border-cyan-500/60"
+        />
+        <motion.button
+          onClick={() => {
+            if (textInput.trim()) {
+              onMessageSend(textInput.trim());
+              setTextInput('');
+            }
+          }}
+          whileTap={{ scale: 0.9 }}
+          disabled={!textInput.trim()}
+          className="p-2 rounded-lg bg-cyan-500/20 border border-cyan-500/30 text-cyan-400 disabled:opacity-30 disabled:cursor-not-allowed hover:bg-cyan-500/30 transition-all"
+        >
+          <Send className="w-4 h-4" />
+        </motion.button>
+      </div>
     </div>
   );
 }
