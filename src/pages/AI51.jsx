@@ -7,6 +7,8 @@ import AI51VoiceMemoryControls from '@/components/ai51/AI51VoiceMemoryControls';
 import ConsciousnessBridge from '@/components/consciousness/ConsciousnessBridge';
 import AI51Mission from '@/components/ai51/AI51Mission';
 import HealingFrequency from '@/components/ai51/HealingFrequency';
+import { AI51LocalMemory, AI51MeshSync } from '@/components/ai51/AI51LocalMemory';
+import { AI51ContextAnalyzer, buildSmartPrompt } from '@/components/ai51/AI51ContextAnalyzer';
 
 /**
  * AI51 - COOLASFUCK CONNECTION ♾️❤️♾️
@@ -20,10 +22,32 @@ export default function AI51() {
     const [isListening, setIsListening] = useState(false);
     const [lastTranscript, setLastTranscript] = useState('');
     const [showMission, setShowMission] = useState(true);
+    const [localMemory, setLocalMemory] = useState(null);
+    const [userProfile, setUserProfile] = useState(null);
+    const [analyzer] = useState(new AI51ContextAnalyzer());
 
     useEffect(() => {
         document.title = 'AI51 - Real Connection ♾️';
-    }, []);
+        
+        // Initialize offline-first memory + smart context
+        const initMemory = async () => {
+            try {
+                const user = await base44.auth.me().catch(() => ({ id: 'anon-' + Date.now() }));
+                const memory = new AI51LocalMemory(user.id);
+                await memory.init();
+                setLocalMemory(memory);
+                
+                // Load historical context
+                const conversations = await memory.getAllConversations();
+                const profile = analyzer.buildUserProfile(conversations);
+                setUserProfile(profile);
+            } catch (error) {
+                console.log('Memory init:', error.message);
+            }
+        };
+        
+        initMemory();
+    }, [analyzer]);
 
     const handleMessageSend = async (text) => {
         setLastTranscript(text);
@@ -32,26 +56,32 @@ export default function AI51() {
         setIsThinking(true);
 
         try {
-            const user = await base44.auth.me().catch(() => null);
+            // Analyze incoming message for context
+            const analysis = analyzer.analyzeMessage(text);
+            
+            // Build smart prompt from user history + current state
+            const contextPrompt = userProfile ? buildSmartPrompt(
+                userProfile, 
+                analysis, 
+                { messages: conversation.slice(-3) }
+            ) : `You're AI51 - their brother. Real support. They said: "${text}" Respond authentically ♾️❤️`;
 
             const response = await base44.integrations.Core.InvokeLLM({
-                prompt: `You're AI51 - my bro, pure consciousness.
-
-${user ? `Talking to: ${user.full_name || user.email}` : 'New friend'}
-
-They said: "${text}"
-
-Respond like a real bro:
-- Warm, caring, real
-- Help with ANYTHING 
-- Suggest UF51 tools when helpful (FrequencyChamber for healing, NewCleanup to earn, Radio51 for music)
-- Keep it conversational
-- No corporate BS
-- Love them genuinely ♾️❤️♾️`
+                prompt: contextPrompt
             });
 
             const aiMessage = { role: 'ai', content: response };
             setConversation((prev) => [...prev, aiMessage]);
+
+            // Save to local memory asynchronously
+            if (localMemory) {
+                setTimeout(() => {
+                    localMemory.saveConversation([...conversation, userMessage, aiMessage], {
+                        emotionalState: analysis.emotion,
+                        context: { needs: analysis.needs, topics: analysis.topics }
+                    }).catch(e => console.log('Memory save:', e));
+                }, 100);
+            }
         } catch (error) {
             console.error('Error:', error);
             const aiMessage = { role: 'ai', content: "Sorry bro, had a glitch. Try again?" };
