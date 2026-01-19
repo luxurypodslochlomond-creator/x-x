@@ -282,6 +282,14 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, loca
         </div>
         <div className="flex items-center gap-2">
           <motion.button
+            onClick={() => setShowProofOfLove(true)}
+            whileTap={{ scale: 0.9 }}
+            className="p-2 rounded-lg border border-pink-500/30 hover:border-pink-500/60 bg-black/40 hover:bg-pink-500/10 transition-all"
+            title="View Proof of Love"
+          >
+            <Heart className="w-4 h-4 text-pink-400" fill="currentColor" />
+          </motion.button>
+          <motion.button
             onClick={() => setShowHistory(true)}
             whileTap={{ scale: 0.9 }}
             className="p-2 rounded-lg border border-cyan-500/30 hover:border-cyan-500/60 bg-black/40 hover:bg-cyan-500/10 transition-all"
