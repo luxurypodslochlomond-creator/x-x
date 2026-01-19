@@ -1637,6 +1637,7 @@ const VoiceHealing = ({ onProtocolRecommend }) => {
               <p className="text-pink-400 font-black text-sm font-mono">WHAT TO HEAL?</p>
             </div>
             
+            {/* Text Input + Voice Button */}
             <div className="flex gap-2">
               <input
                 type="text"
@@ -1651,6 +1652,17 @@ const VoiceHealing = ({ onProtocolRecommend }) => {
                 }}
               />
               <button
+                onClick={isRecording ? stopVoiceInput : startVoiceInput}
+                className={`px-3 py-2 font-black text-xs border-2 transition-all ${
+                  isRecording 
+                    ? 'bg-red-600 border-red-400 text-white' 
+                    : 'bg-cyan-600 hover:bg-cyan-700 text-white border-cyan-400'
+                }`}
+                title={isRecording ? 'Stop listening' : 'Start voice input'}
+              >
+                {isRecording ? '🎙️ STOP' : '🎙️'}
+              </button>
+              <button
                 onClick={handleSubmit}
                 disabled={!healingIntent.trim()}
                 className="px-4 py-2 bg-pink-600 hover:bg-pink-700 text-white font-black text-xs border-2 border-pink-400 disabled:opacity-30"
@@ -1658,6 +1670,30 @@ const VoiceHealing = ({ onProtocolRecommend }) => {
                 GO
               </button>
             </div>
+
+            {/* Saved Suggestions Display */}
+            {savedSuggestions.length > 0 && (
+              <div className="mt-4 p-3 bg-purple-900/30 border-2 border-purple-500 rounded">
+                <p className="text-purple-400 font-black text-xs font-mono mb-2">💾 SAVED SUGGESTIONS:</p>
+                <div className="space-y-1">
+                  {savedSuggestions.map((suggestion) => (
+                    <button
+                      key={suggestion.id}
+                      onClick={() => {
+                        setHealingIntent(suggestion.intent);
+                        setTimeout(() => {
+                          onProtocolRecommend(PROTOCOLS[suggestion.protocol].id, null, suggestion.intent);
+                        }, 100);
+                      }}
+                      className="w-full text-left py-2 px-2 bg-black/40 border-l-2 border-purple-500 text-purple-300 hover:bg-purple-500/20 transition-all text-xs font-mono rounded"
+                    >
+                      <p className="font-bold">{suggestion.intent}</p>
+                      <p className="text-gray-500 text-[10px]">{suggestion.timestamp}</p>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
           </>
         )}
         
