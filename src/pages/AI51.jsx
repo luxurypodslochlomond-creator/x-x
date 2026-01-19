@@ -11,6 +11,7 @@ import { AI51LocalMemory } from '@/components/ai51/AI51LocalMemory';
 import { AI51ContextAnalyzer, buildSmartPrompt } from '@/components/ai51/AI51ContextAnalyzer';
 import { AI51WebRTCMesh } from '@/components/ai51/AI51WebRTCMesh';
 import { AI51MeshSyncEngine } from '@/components/ai51/AI51MeshSync';
+import AI51ShareWidget from '@/components/ai51/AI51ShareWidget';
 
 /**
  * AI51 - COOLASFUCK CONNECTION ♾️❤️♾️
@@ -131,6 +132,7 @@ export default function AI51() {
                 isListening={isListening}
                 onLearningUpdate={(analysis) => console.log('Learned:', analysis)}
             />
+            <AI51ShareWidget />
         </>
     );
 }
