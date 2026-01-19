@@ -1722,7 +1722,7 @@ export default function FrequencyChamber() {
     const [hrvEnabled, setHrvEnabled] = useState(false);
     const [currentHRV, setCurrentHRV] = useState(null);
     const [hasHeadphones, setHasHeadphones] = useState(false);
-    const [showHeadphonePrompt, setShowHeadphonePrompt] = useState(false);
+
     const [visualEntrainment, setVisualEntrainment] = useState(true);
     const [breathHapticActive, setBreathHapticActive] = useState(true);
     const [emergencyMode, setEmergencyMode] = useState(false);
@@ -1822,11 +1822,7 @@ export default function FrequencyChamber() {
         console.log('Session save error (non-critical):', e);
       }
 
-      // Warn about headphones for binaural but don't block
-      if (protocol.config.isBinaural && !hasHeadphones) {
-        console.log('⚠️ Binaural beats - headphones recommended');
-        setShowHeadphonePrompt(true);
-      }
+
       
       console.log('Creating AudioContext...');
       const AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -2972,28 +2968,7 @@ export default function FrequencyChamber() {
         )}
       </AnimatePresence>
 
-      {/* HEADPHONE PROMPT */}
-      {showHeadphonePrompt && (
-        <div className="max-w-4xl mx-auto p-4">
-          <div className="bg-amber-900/20 border-4 border-amber-500 p-4">
-            <div className="flex items-center gap-3 mb-2">
-              <Volume2 className="w-6 h-6 text-amber-400" />
-              <h3 className="text-amber-400 font-black font-mono">HEADPHONES NEEDED</h3>
-            </div>
-            <p className="text-amber-200 text-sm mb-3">
-              This protocol uses binaural beats (different frequencies in each ear). Headphones are required for it to work.
-            </p>
-            <div className="flex gap-2">
-              <button 
-                onClick={() => setShowHeadphonePrompt(false)}
-                className="px-4 py-2 bg-amber-600 border-2 border-amber-400 text-white font-black font-mono text-sm"
-              >
-                Got it
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+
 
 
       
