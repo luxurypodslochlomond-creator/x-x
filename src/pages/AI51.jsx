@@ -345,35 +345,27 @@ export default function AI51Page() {
         </motion.div>
       )}
 
-      {/* HEART BUTTON */}
-      <div className="flex-shrink-0 bg-black border-t border-pink-500/20 p-6 flex justify-center">
+      {/* AI51 CONNECTION BUTTON */}
+      <div className="flex-shrink-0 bg-black border-t border-cyan-500/20 p-6 flex justify-center">
         <motion.button
-          className="w-24 h-24 rounded-full flex items-center justify-center relative"
+          className="relative"
           onClick={toggleConnection}
           disabled={isThinking}
           whileTap={{ scale: 0.95 }}
           animate={{
             boxShadow: connectionActive 
-              ? ['0 0 40px rgba(236, 72, 153, 0.4)', '0 0 60px rgba(236, 72, 153, 0.6)', '0 0 40px rgba(236, 72, 153, 0.4)']
-              : ['0 0 30px rgba(236, 72, 153, 0.2)', '0 0 45px rgba(236, 72, 153, 0.4)', '0 0 30px rgba(236, 72, 153, 0.2)']
+              ? ['0 0 40px rgba(34, 211, 238, 0.4)', '0 0 60px rgba(34, 211, 238, 0.6)', '0 0 40px rgba(34, 211, 238, 0.4)']
+              : ['0 0 30px rgba(34, 211, 238, 0.2)', '0 0 45px rgba(34, 211, 238, 0.4)', '0 0 30px rgba(34, 211, 238, 0.2)']
           }}
           transition={{ duration: 1.2, repeat: Infinity }}
-          style={{
-            background: connectionActive 
-              ? 'radial-gradient(circle, rgba(236, 72, 153, 0.3), rgba(236, 72, 153, 0.1))' 
-              : 'radial-gradient(circle, rgba(236, 72, 153, 0.2), rgba(236, 72, 153, 0.05))',
-            border: '3px solid',
-            borderColor: connectionActive ? 'rgba(236, 72, 153, 0.7)' : 'rgba(236, 72, 153, 0.4)'
-          }}
         >
           <motion.div
-            animate={connectionActive ? { scale: [1, 1.1, 1] } : {}}
+            animate={connectionActive ? { scale: [1, 1.15, 1] } : {}}
             transition={{ duration: 0.8, repeat: Infinity }}
           >
-            <Heart 
-              className={`w-12 h-12 ${connectionActive ? 'text-pink-400' : 'text-pink-500'}`} 
-              fill="currentColor" 
-              strokeWidth={1}
+            <COOLASFUCKHeart 
+              size={80} 
+              animate={connectionActive}
             />
           </motion.div>
         </motion.button>
