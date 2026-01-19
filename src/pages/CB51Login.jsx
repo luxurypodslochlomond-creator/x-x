@@ -137,20 +137,19 @@ export default function CB51Login() {
                 {/* LOGIN CARD */}
                 <div className="bg-gray-900/60 border border-cyan-500/30 rounded-xl p-8">
                     <div className="text-center mb-6">
-                        <Lock className="w-12 h-12 text-cyan-400 mx-auto mb-3" />
-                        <h2 className="text-white font-black text-xl font-mono mb-2">Login Required</h2>
+                        <Radio className="w-12 h-12 text-cyan-400 mx-auto mb-3" />
+                        <h2 className="text-white font-black text-xl font-mono mb-2">CB51</h2>
                         <p className="text-gray-400 text-sm font-mono">
-                            Sign in to access your artist management hub
+                            Artist co-manager
                         </p>
                     </div>
 
                     <button
                         onClick={handleLogin}
-                        className="w-full bg-cyan-500 hover:bg-cyan-600 text-black font-black py-4 rounded-lg text-lg font-mono transition-all flex items-center justify-center gap-2"
+                        className="w-full bg-cyan-500 hover:bg-cyan-600 text-black font-black py-4 rounded-lg text-lg font-mono transition-all"
                         style={{ boxShadow: '0 0 30px rgba(6, 182, 212, 0.5)' }}
                     >
-                        Login to CB51
-                        <ArrowRight className="w-5 h-5" />
+                        Login
                     </button>
 
                     <div className="mt-4 text-center">
