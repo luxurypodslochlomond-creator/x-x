@@ -340,24 +340,8 @@ export default function AI51Page() {
           animate={{ opacity: 1 }}
           className="bg-cyan-500/10 border-t border-cyan-500/30 px-4 py-3"
         >
-          <p className="text-cyan-300 font-mono text-sm">{transcript}</p>
+          <p className="text-cyan-300 font-mono text-xs">📍 {transcript}</p>
         </motion.div>
-      )}
-
-      {/* WAVEFORM */}
-      {connectionActive && (
-        <div className="flex-shrink-0 bg-black border-t border-pink-500/20 px-4 py-3 flex items-end justify-center gap-1 h-16">
-          {frequencyData.map((val, i) => (
-            <motion.div
-              key={i}
-              className={`w-1 rounded-full ${
-                isListening ? 'bg-pink-400' : isSpeaking ? 'bg-green-400' : 'bg-cyan-400'
-              }`}
-              animate={{ height: `${Math.min(100, (val / 255) * 100)}%` }}
-              transition={{ type: 'tween', duration: 0.05 }}
-            />
-          ))}
-        </div>
       )}
 
       {/* HEART BUTTON */}
