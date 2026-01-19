@@ -8,6 +8,7 @@ import AI51EmergencyOverride from './pages/AI51EmergencyOverride';
 import AI51Inbox from './pages/AI51Inbox';
 import AI51Insights from './pages/AI51Insights';
 import AI51Live from './pages/AI51Live';
+import AI51MeshTechWhitepaper from './pages/AI51MeshTechWhitepaper';
 import AI51Network from './pages/AI51Network';
 import AI51Protection from './pages/AI51Protection';
 import AI51SafetyProof from './pages/AI51SafetyProof';
@@ -104,6 +105,7 @@ import DeployUF51Anywhere from './pages/DeployUF51Anywhere';
 import DeviceLabResearch from './pages/DeviceLabResearch';
 import DimensionsExplained from './pages/DimensionsExplained';
 import DirectFundingRoutes from './pages/DirectFundingRoutes';
+import DisasterAI from './pages/DisasterAI';
 import DopamineHealing from './pages/DopamineHealing';
 import ESGAlignment from './pages/ESGAlignment';
 import ESGBridge from './pages/ESGBridge';
@@ -220,9 +222,8 @@ import ScottEmailSyncDiagnostics from './pages/ScottEmailSyncDiagnostics';
 import ScottExpenses from './pages/ScottExpenses';
 import ScottFeatureRequests from './pages/ScottFeatureRequests';
 import ScottFinanceAdmin from './pages/ScottFinanceAdmin';
-import ScottFinancialDashboard from './pages/ScottFinancialDashboard';
 import ScottGigOffers from './pages/ScottGigOffers';
-import Teachers from './pages/Teachers';
+import ScottFinancialDashboard from './pages/ScottFinancialDashboard';
 import ScottGigPacks from './pages/ScottGigPacks';
 import ScottGuestList from './pages/ScottGuestList';
 import ScottInsurance from './pages/ScottInsurance';
@@ -269,6 +270,7 @@ import SubmitFrequency from './pages/SubmitFrequency';
 import SubmitProofOfLove from './pages/SubmitProofOfLove';
 import SymbolForge from './pages/SymbolForge';
 import TeacherInput from './pages/TeacherInput';
+import Teachers from './pages/Teachers';
 import TechScout from './pages/TechScout';
 import TechStack from './pages/TechStack';
 import TechnicalSpecification from './pages/TechnicalSpecification';
@@ -310,8 +312,6 @@ import YoungWarriors from './pages/YoungWarriors';
 import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
-import AI51MeshTechWhitepaper from './pages/AI51MeshTechWhitepaper';
-import DisasterAI from './pages/DisasterAI';
 import __Layout from './Layout.jsx';
 
 
@@ -326,6 +326,7 @@ export const PAGES = {
     "AI51Inbox": AI51Inbox,
     "AI51Insights": AI51Insights,
     "AI51Live": AI51Live,
+    "AI51MeshTechWhitepaper": AI51MeshTechWhitepaper,
     "AI51Network": AI51Network,
     "AI51Protection": AI51Protection,
     "AI51SafetyProof": AI51SafetyProof,
@@ -422,6 +423,7 @@ export const PAGES = {
     "DeviceLabResearch": DeviceLabResearch,
     "DimensionsExplained": DimensionsExplained,
     "DirectFundingRoutes": DirectFundingRoutes,
+    "DisasterAI": DisasterAI,
     "DopamineHealing": DopamineHealing,
     "ESGAlignment": ESGAlignment,
     "ESGBridge": ESGBridge,
@@ -538,9 +540,8 @@ export const PAGES = {
     "ScottExpenses": ScottExpenses,
     "ScottFeatureRequests": ScottFeatureRequests,
     "ScottFinanceAdmin": ScottFinanceAdmin,
-    "ScottFinancialDashboard": ScottFinancialDashboard,
     "ScottGigOffers": ScottGigOffers,
-    "Teachers": Teachers,
+    "ScottFinancialDashboard": ScottFinancialDashboard,
     "ScottGigPacks": ScottGigPacks,
     "ScottGuestList": ScottGuestList,
     "ScottInsurance": ScottInsurance,
@@ -587,6 +588,7 @@ export const PAGES = {
     "SubmitProofOfLove": SubmitProofOfLove,
     "SymbolForge": SymbolForge,
     "TeacherInput": TeacherInput,
+    "Teachers": Teachers,
     "TechScout": TechScout,
     "TechStack": TechStack,
     "TechnicalSpecification": TechnicalSpecification,
@@ -628,8 +630,6 @@ export const PAGES = {
     "ZeroEgoProtocol": ZeroEgoProtocol,
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
-    "AI51MeshTechWhitepaper": AI51MeshTechWhitepaper,
-    "DisasterAI": DisasterAI,
 }
 
 export const pagesConfig = {
