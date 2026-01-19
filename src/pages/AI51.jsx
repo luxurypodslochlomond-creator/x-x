@@ -191,17 +191,21 @@ export default function AI51Page() {
 
     const dataArray = new Uint8Array(analyzerRef.current.frequencyBinCount);
     analyzerRef.current.getByteFrequencyData(dataArray);
-    
+
+    // Compress to 32 bars, boost low values for visibility
     const compressed = new Uint8Array(32);
-    const bucketSize = Math.floor(dataArray.length / 32);
+    const bucketSize = Math.ceil(dataArray.length / 32);
     for (let i = 0; i < 32; i++) {
       let sum = 0;
       for (let j = 0; j < bucketSize; j++) {
-        sum += dataArray[i * bucketSize + j];
+        const idx = i * bucketSize + j;
+        if (idx < dataArray.length) sum += dataArray[idx];
       }
-      compressed[i] = Math.floor(sum / bucketSize);
+      const avg = Math.floor(sum / bucketSize);
+      // Boost visibility: multiply low values by 1.5
+      compressed[i] = avg < 50 ? Math.min(255, avg * 1.5) : avg;
     }
-    
+
     setFrequencyData(compressed);
 
     if (connectionActiveRef.current) {
