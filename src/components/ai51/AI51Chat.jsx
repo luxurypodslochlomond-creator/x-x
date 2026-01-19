@@ -12,6 +12,7 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation }) {
   const [isListening, setIsListening] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [transcript, setTranscript] = useState('');
+  const [textInput, setTextInput] = useState('');
   const [voiceEnabled, setVoiceEnabled] = useState(true);
   const [connectionActive, setConnectionActive] = useState(false);
   const [audioLevel, setAudioLevel] = useState(0);
