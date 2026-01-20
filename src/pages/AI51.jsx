@@ -278,13 +278,13 @@ export default function AI51Page() {
   }
 
   return (
-    <div className="min-h-screen bg-black flex flex-col">
+    <div className="h-screen bg-black flex flex-col overflow-hidden">
       
-      {/* HEADER */}
-      <div className="bg-black border-b border-pink-500/20 p-4 flex items-center justify-between">
+      {/* HEADER - COMPACT */}
+      <div className="flex-shrink-0 bg-black border-b border-pink-500/20 p-3 flex items-center justify-between">
         <div className="flex-1">
-          <h1 className="text-2xl font-black text-pink-400 font-mono">AI51</h1>
-          <p className={`text-xs font-mono ${state.color}`}>{state.label}</p>
+          <h1 className="text-xl font-black text-pink-400 font-mono">AI51</h1>
+          <p className={`text-[10px] font-mono ${state.color}`}>{state.label}</p>
         </div>
         <motion.button
           onClick={() => setVoiceEnabled(!voiceEnabled)}
@@ -301,11 +301,10 @@ export default function AI51Page() {
         </motion.button>
       </div>
 
-      {/* WAVEFORM VISUALIZER (always visible when connected) */}
+      {/* WAVEFORM (compact when connected) */}
       {connectionActive && (
-        <div className="flex-shrink-0 bg-gradient-to-b from-black/20 to-black border-y border-pink-500/20 px-4 py-4">
-          <p className="text-pink-300 text-[10px] font-mono mb-2 text-center">{state.label}</p>
-          <div className="flex items-end justify-center gap-1 h-14">
+        <div className="flex-shrink-0 bg-gradient-to-b from-black/20 to-black border-b border-pink-500/20 px-4 py-2">
+          <div className="flex items-end justify-center gap-1 h-12">
             {frequencyData.map((val, i) => (
               <motion.div
                 key={i}
@@ -322,19 +321,19 @@ export default function AI51Page() {
         </div>
       )}
 
-      {/* CHAT AREA */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-4">
+      {/* CHAT AREA - SCROLLABLE */}
+      <div className="flex-1 overflow-y-auto px-4 py-3 space-y-3">
         {conversation.length === 0 && !connectionActive ? (
           <div className="h-full flex items-center justify-center">
             <div className="text-center">
               <motion.div
-                    animate={{ scale: [1, 1.1, 1] }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                    className="mb-4"
-                  >
-                    <COOLASFUCKWaves size={64} animate={true} />
-                  </motion.div>
-              <p className="text-gray-400 font-mono text-sm">Tap waves. I'll listen.</p>
+                animate={{ scale: [1, 1.1, 1] }}
+                transition={{ duration: 2, repeat: Infinity }}
+                className="mb-4"
+              >
+                <COOLASFUCKWaves size={64} animate={true} />
+              </motion.div>
+              <p className="text-gray-400 font-mono text-sm">Tap waves below</p>
             </div>
           </div>
         ) : (
@@ -346,7 +345,7 @@ export default function AI51Page() {
                 animate={{ opacity: 1, y: 0 }}
                 className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
               >
-                <div className={`rounded-xl px-4 py-2 max-w-[80%] ${
+                <div className={`rounded-xl px-3 py-2 max-w-[80%] ${
                   msg.role === 'user'
                     ? 'bg-cyan-500/20 text-white border border-cyan-400/50'
                     : 'bg-pink-500/20 text-white border border-pink-400/50'
@@ -361,7 +360,7 @@ export default function AI51Page() {
                 animate={{ opacity: 1, y: 0 }}
                 className="flex justify-start"
               >
-                <div className="bg-amber-500/20 text-white border border-amber-400/50 rounded-xl px-4 py-2">
+                <div className="bg-amber-500/20 text-white border border-amber-400/50 rounded-xl px-3 py-2">
                   <p className="text-sm font-mono">thinking...</p>
                 </div>
               </motion.div>
@@ -371,83 +370,85 @@ export default function AI51Page() {
         )}
       </div>
 
-      {/* LIVE TRANSCRIPT */}
+      {/* LIVE TRANSCRIPT (compact) */}
       {transcript && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="bg-cyan-500/10 border-t border-cyan-500/30 px-4 py-3"
+          className="flex-shrink-0 bg-cyan-500/10 border-t border-cyan-500/30 px-3 py-2"
         >
-          <p className="text-cyan-300 font-mono text-xs">📍 {transcript}</p>
+          <p className="text-cyan-300 font-mono text-xs truncate">📍 {transcript}</p>
         </motion.div>
       )}
 
-      {/* AI51 CONNECTION BUTTON - REACTS TO VOICE */}
-      <div className="flex-shrink-0 bg-black border-t border-cyan-500/20 p-6 flex justify-center">
-        <motion.button
-          className="relative"
-          onClick={toggleConnection}
-          disabled={isThinking}
-          whileTap={{ scale: 0.95 }}
-          animate={connectionActive ? {
-            scale: frequencyData.reduce((a, b) => a + b, 0) > 1000 
-              ? [1, 1.2, 1] 
-              : [1, 1.05, 1],
-            boxShadow: [
-              '0 0 40px rgba(34, 211, 238, 0.4)', 
-              '0 0 80px rgba(34, 211, 238, 0.8)', 
-              '0 0 40px rgba(34, 211, 238, 0.4)'
-            ]
-          } : {
-            boxShadow: [
-              '0 0 30px rgba(34, 211, 238, 0.2)', 
-              '0 0 45px rgba(34, 211, 238, 0.4)', 
-              '0 0 30px rgba(34, 211, 238, 0.2)'
-            ]
-          }}
-          transition={{ duration: connectionActive ? 0.15 : 1.2, repeat: Infinity }}
-        >
-          <COOLASFUCKWaves 
-            size={80} 
-            animate={connectionActive}
+      {/* BOTTOM SECTION - ALWAYS VISIBLE */}
+      <div className="flex-shrink-0 bg-black border-t border-cyan-500/20">
+        {/* CONNECTION BUTTON */}
+        <div className="flex justify-center py-4">
+          <motion.button
+            onClick={toggleConnection}
+            disabled={isThinking}
+            whileTap={{ scale: 0.95 }}
+            animate={connectionActive ? {
+              scale: frequencyData.reduce((a, b) => a + b, 0) > 1000 
+                ? [1, 1.15, 1] 
+                : [1, 1.05, 1],
+              boxShadow: [
+                '0 0 40px rgba(34, 211, 238, 0.4)', 
+                '0 0 80px rgba(34, 211, 238, 0.8)', 
+                '0 0 40px rgba(34, 211, 238, 0.4)'
+              ]
+            } : {
+              boxShadow: [
+                '0 0 30px rgba(34, 211, 238, 0.2)', 
+                '0 0 45px rgba(34, 211, 238, 0.4)', 
+                '0 0 30px rgba(34, 211, 238, 0.2)'
+              ]
+            }}
+            transition={{ duration: connectionActive ? 0.15 : 1.2, repeat: Infinity }}
+          >
+            <COOLASFUCKWaves 
+              size={64} 
+              animate={connectionActive}
+            />
+          </motion.button>
+        </div>
+
+        {/* TEXT INPUT */}
+        <div className="border-t border-pink-500/20 p-3 flex gap-2">
+          <input
+            type="text"
+            value={textInput}
+            onChange={(e) => setTextInput(e.target.value)}
+            onKeyPress={(e) => {
+              if (e.key === 'Enter' && textInput.trim()) {
+                handleMessageSend(textInput.trim());
+                setTextInput('');
+              }
+            }}
+            placeholder="Type or speak..."
+            className="flex-1 bg-black/40 border border-pink-500/30 rounded-lg px-3 py-2 text-white text-sm placeholder-gray-600 focus:outline-none focus:border-pink-500/60"
           />
-        </motion.button>
-      </div>
+          <motion.button
+            onClick={() => {
+              if (textInput.trim()) {
+                handleMessageSend(textInput.trim());
+                setTextInput('');
+              }
+            }}
+            whileTap={{ scale: 0.9 }}
+            disabled={!textInput.trim()}
+            className="p-2 rounded-lg bg-pink-500/20 border border-pink-500/30 text-pink-400 disabled:opacity-30 disabled:cursor-not-allowed hover:bg-pink-500/30 transition-all"
+          >
+            <Send className="w-4 h-4" />
+          </motion.button>
+        </div>
 
-      {/* TEXT INPUT */}
-      <div className="flex-shrink-0 bg-black border-t border-pink-500/20 p-4 flex gap-2">
-        <input
-          type="text"
-          value={textInput}
-          onChange={(e) => setTextInput(e.target.value)}
-          onKeyPress={(e) => {
-            if (e.key === 'Enter' && textInput.trim()) {
-              handleMessageSend(textInput.trim());
-              setTextInput('');
-            }
-          }}
-          placeholder="Type or speak..."
-          className="flex-1 bg-black/40 border border-pink-500/30 rounded-lg px-3 py-2 text-white text-sm placeholder-gray-600 focus:outline-none focus:border-pink-500/60"
-        />
-        <motion.button
-          onClick={() => {
-            if (textInput.trim()) {
-              handleMessageSend(textInput.trim());
-              setTextInput('');
-            }
-          }}
-          whileTap={{ scale: 0.9 }}
-          disabled={!textInput.trim()}
-          className="p-2 rounded-lg bg-pink-500/20 border border-pink-500/30 text-pink-400 disabled:opacity-30 disabled:cursor-not-allowed hover:bg-pink-500/30 transition-all"
-        >
-          <Send className="w-4 h-4" />
-        </motion.button>
-      </div>
-
-      {/* TIME */}
-      <div className="flex-shrink-0 bg-black border-t border-pink-500/20 px-4 py-2 text-center">
-        <div className="font-mono text-pink-400 text-xs">
-          {new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })}
+        {/* TIME */}
+        <div className="border-t border-pink-500/20 px-3 py-2 text-center">
+          <div className="font-mono text-pink-400 text-xs">
+            {new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })}
+          </div>
         </div>
       </div>
 
