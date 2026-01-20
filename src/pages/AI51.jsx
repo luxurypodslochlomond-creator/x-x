@@ -410,74 +410,79 @@ export default function AI51Page() {
         </div>
       </div>
 
-      {/* WAVEFORM */}
-      {connectionActive && (
-        <div className="flex-shrink-0 bg-gradient-to-b from-black/20 to-black border-b border-pink-500/20 px-4 py-2">
-          <div className="flex items-end justify-center gap-1 h-12">
-            {frequencyData.map((val, i) => (
-              <motion.div
-                key={i}
-                className={`flex-1 rounded-full ${
-                  isListening ? 'bg-gradient-to-t from-pink-500 to-pink-400' 
-                  : isSpeaking ? 'bg-gradient-to-t from-green-500 to-green-400' 
-                  : 'bg-gradient-to-t from-cyan-500 to-cyan-400'
-                }`}
-                animate={{ height: `${Math.min(100, (val / 255) * 100)}%` }}
-                transition={{ type: 'tween', duration: 0.05 }}
-              />
-            ))}
-          </div>
-        </div>
-      )}
 
-      {/* CONVERSATION */}
-      <div className="flex-1 overflow-y-auto px-4 py-3 space-y-3">
-        {conversation.length === 0 ? (
-          <div className="h-full flex items-center justify-center">
-            <div className="text-center px-6">
+
+      {/* VISUALIZER + CONVERSATION */}
+      <div className="flex-1 overflow-hidden flex flex-col">
+        
+        {/* ALWAYS-ON VISUALIZER */}
+        <motion.div 
+          onClick={conversation.length === 0 ? toggleConnection : undefined}
+          className={`flex-shrink-0 ${conversation.length === 0 ? 'flex-1' : 'h-32'} transition-all duration-500 ${conversation.length === 0 ? 'cursor-pointer' : ''}`}
+        >
+          <div className="h-full flex flex-col items-center justify-center gap-4 px-4">
+            {conversation.length === 0 && (
               <motion.div
-                animate={{ 
-                  scale: [1, 1.15, 1],
-                  rotate: [0, 5, -5, 0]
-                }}
-                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                className="mb-8"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="text-center mb-4"
               >
-                <COOLASFUCKWaves size={96} animate={true} />
+                <p className="text-white font-black text-2xl mb-2 font-mono">AI51</p>
+                <p className="text-gray-500 text-sm">Tap visualizer to connect</p>
               </motion.div>
-              <motion.p 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
-                className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-cyan-400 to-purple-400 font-mono text-2xl mb-3 font-black"
-              >
-                AI51
-              </motion.p>
-              <motion.p 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5 }}
-                className="text-gray-300 text-base mb-8 leading-relaxed"
-              >
-                Pure intelligence. Natural conversation.<br/>
-                No assumptions. Just understanding.
-              </motion.p>
-              {!permissionsGranted && (
-                <motion.button
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.7 }}
-                  onClick={() => setShowPermissionRequest(true)}
-                  className="bg-gradient-to-r from-pink-500 to-cyan-500 hover:from-pink-600 hover:to-cyan-600 text-white font-black py-4 px-8 rounded-xl transition-all text-base shadow-lg"
-                  style={{ boxShadow: '0 0 30px rgba(236, 72, 153, 0.3)' }}
-                >
-                  Start Conversation
-                </motion.button>
+            )}
+            
+            <div className="w-full flex items-end justify-center gap-1 h-24">
+              {connectionActive ? (
+                // Real frequency data when connected
+                frequencyData.map((val, i) => (
+                  <motion.div
+                    key={i}
+                    className={`flex-1 rounded-full ${
+                      isListening ? 'bg-gradient-to-t from-pink-500 to-pink-400' 
+                      : isSpeaking ? 'bg-gradient-to-t from-green-500 to-green-400' 
+                      : 'bg-gradient-to-t from-cyan-500 to-cyan-400'
+                    }`}
+                    animate={{ height: `${Math.min(100, (val / 255) * 100)}%` }}
+                    transition={{ type: 'tween', duration: 0.05 }}
+                  />
+                ))
+              ) : (
+                // Ambient breathing animation when idle
+                Array.from({ length: 32 }).map((_, i) => {
+                  const baseHeight = 20 + Math.sin(i * 0.5) * 15;
+                  return (
+                    <motion.div
+                      key={i}
+                      className="flex-1 rounded-full bg-gradient-to-t from-cyan-500/40 to-cyan-400/40"
+                      animate={{ 
+                        height: [`${baseHeight}%`, `${baseHeight + 20}%`, `${baseHeight}%`],
+                        opacity: [0.3, 0.6, 0.3]
+                      }}
+                      transition={{ 
+                        duration: 2 + (i % 5) * 0.3,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                        delay: i * 0.05
+                      }}
+                    />
+                  );
+                })
               )}
             </div>
+            
+            {connectionActive && (
+              <p className={`text-xs font-mono font-bold ${state.color}`}>
+                {state.label}
+              </p>
+            )}
           </div>
-        ) : (
-          <>
+        </motion.div>
+
+        {/* CONVERSATION AREA */}
+        {conversation.length > 0 && (
+          <div className="flex-1 overflow-y-auto px-4 py-3 space-y-3 bg-black/50"
+          >
             {conversation.map((msg, i) => (
               <motion.div 
                 key={i} 
@@ -485,12 +490,12 @@ export default function AI51Page() {
                 animate={{ opacity: 1, y: 0 }}
                 className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
               >
-                <div className={`rounded-xl px-3 py-2 max-w-[80%] ${
+                <div className={`rounded-2xl px-4 py-2.5 max-w-[85%] ${
                   msg.role === 'user'
-                    ? 'bg-cyan-500/20 text-white border border-cyan-400/50'
-                    : 'bg-pink-500/20 text-white border border-pink-400/50'
+                    ? 'bg-cyan-500/20 text-white border border-cyan-400/30'
+                    : 'bg-white/5 text-white border border-white/10'
                 }`}>
-                  <p className="text-sm leading-relaxed">{msg.content}</p>
+                  <p className="text-[15px] leading-relaxed">{msg.content}</p>
                 </div>
               </motion.div>
             ))}
@@ -500,13 +505,19 @@ export default function AI51Page() {
                 animate={{ opacity: 1, y: 0 }}
                 className="flex justify-start"
               >
-                <div className="bg-amber-500/20 text-white border border-amber-400/50 rounded-xl px-3 py-2">
-                  <p className="text-sm font-mono">thinking...</p>
+                <div className="bg-white/5 text-white/60 border border-white/10 rounded-2xl px-4 py-2.5">
+                  <motion.p 
+                    className="text-sm font-mono"
+                    animate={{ opacity: [0.4, 1, 0.4] }}
+                    transition={{ duration: 1.5, repeat: Infinity }}
+                  >
+                    thinking...
+                  </motion.p>
                 </div>
               </motion.div>
             )}
             <div ref={messagesEndRef} />
-          </>
+          </div>
         )}
       </div>
 
