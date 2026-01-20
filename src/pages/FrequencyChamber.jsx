@@ -3444,20 +3444,26 @@ export default function FrequencyChamber() {
 
             {/* BOTTOM INFO */}
             <div className="p-6 border-t" style={{ borderColor: `${selectedProtocol.color}30`, background: `linear-gradient(to top, black, transparent)` }}>
-              <div className="flex items-center justify-between mb-4">
-                <div className="text-center flex-1">
-                  <p className="text-4xl font-black font-mono" style={{ color: selectedProtocol.color }}>
-                    {currentHz} Hz
-                  </p>
-                  <p className="text-gray-600 text-xs font-mono mt-1">FREQUENCY</p>
-                </div>
-                <div className="text-center flex-1">
-                  <p className="text-4xl font-black font-mono text-cyan-400">
-                    {selectedProtocol.config.breathRate}
-                  </p>
-                  <p className="text-gray-600 text-xs font-mono mt-1">BREATHS/MIN</p>
-                </div>
-              </div>
+             <div className="flex items-center justify-between mb-4">
+               <div className="text-center flex-1">
+                 <p className="text-4xl font-black font-mono" style={{ color: selectedProtocol.color }}>
+                   {currentHz} Hz
+                 </p>
+                 <p className="text-gray-600 text-xs font-mono mt-1">FREQUENCY</p>
+               </div>
+               <div className="text-center flex-1">
+                 <p className="text-4xl font-black font-mono text-cyan-400">
+                   {selectedProtocol.config.breathRate}
+                 </p>
+                 <p className="text-gray-600 text-xs font-mono mt-1">BREATHS/MIN</p>
+               </div>
+               <div className="text-center flex-1">
+                 <p className="text-4xl font-black font-mono text-green-400">
+                   {sessionDuration}
+                 </p>
+                 <p className="text-gray-600 text-xs font-mono mt-1">MIN TOTAL</p>
+               </div>
+             </div>
 
               {currentHRV && hrvEnabled && (
                 <div className="mb-4 p-3 border" style={{ 
