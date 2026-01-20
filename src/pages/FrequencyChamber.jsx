@@ -2837,27 +2837,29 @@ export default function FrequencyChamber() {
                 <p className="font-bold mb-1">• <span className="text-amber-400">Global</span> - works anywhere</p>
                 <p className="text-gray-400">War zones, space, offline. Clinics = cities only.</p>
               </div>
+            </div>
+
             <div className="space-y-4 text-sm font-mono text-white mt-4">
-            <div>
-              <p className="text-purple-400 font-bold mb-2">LATEST RESEARCH:</p>
-              <p>• <strong>MIT (Nature 2016-2023):</strong> 40Hz gamma reduces brain inflammation, improves memory</p>
-              <p>• <strong>Cephalalgia Journal (2019):</strong> Binaural beats reduced migraines 63%</p>
-              <p>• <strong>Journal of Women's Health (2020):</strong> Frequency therapy = ibuprofen for period pain, zero side effects</p>
-              <p>• <strong>Addiction Journal (2017):</strong> 72% reduction in opioid withdrawal symptoms</p>
-              <p>• <strong>British Journal of Midwifery (2018):</strong> Music therapy reduced epidural use 40%</p>
+              <div>
+                <p className="text-purple-400 font-bold mb-2">LATEST RESEARCH:</p>
+                <p>• <strong>MIT (Nature 2016-2023):</strong> 40Hz gamma reduces brain inflammation, improves memory</p>
+                <p>• <strong>Cephalalgia Journal (2019):</strong> Binaural beats reduced migraines 63%</p>
+                <p>• <strong>Journal of Women's Health (2020):</strong> Frequency therapy = ibuprofen for period pain, zero side effects</p>
+                <p>• <strong>Addiction Journal (2017):</strong> 72% reduction in opioid withdrawal symptoms</p>
+                <p>• <strong>British Journal of Midwifery (2018):</strong> Music therapy reduced epidural use 40%</p>
+              </div>
+              <div>
+                <p className="text-amber-400 font-bold mb-2">ANCIENT WISDOM (Proved Right):</p>
+                <p>• Tibetan monks: 10Hz singing bowls = alpha waves (now proven to reduce anxiety)</p>
+                <p>• Temple healers: 528Hz for DNA repair = confirmed by modern bioacoustics</p>
+                <p>• Indigenous ceremonies: 4Hz drumming = theta brainwaves (trauma healing validated)</p>
+              </div>
+              <div className="bg-green-900/30 border-2 border-green-500 p-3 mt-3">
+                <p className="text-green-400 font-bold mb-2">♾️ WHY IT'S FREE:</p>
+                <p className="text-white">Everyone deserves healing. Disaster zones, war, poverty - if you hurt, this is yours. No payment. No permission. Just healing.</p>
+              </div>
             </div>
-            <div>
-              <p className="text-amber-400 font-bold mb-2">ANCIENT WISDOM (Proved Right):</p>
-              <p>• Tibetan monks: 10Hz singing bowls = alpha waves (now proven to reduce anxiety)</p>
-              <p>• Temple healers: 528Hz for DNA repair = confirmed by modern bioacoustics</p>
-              <p>• Indigenous ceremonies: 4Hz drumming = theta brainwaves (trauma healing validated)</p>
-            </div>
-            <div className="bg-green-900/30 border-2 border-green-500 p-3 mt-3">
-              <p className="text-green-400 font-bold mb-2">♾️ WHY IT'S FREE:</p>
-              <p className="text-white">Everyone deserves healing. Disaster zones, war, poverty - if you hurt, this is yours. No payment. No permission. Just healing.</p>
-            </div>
-          </div>
-            </motion.div>
+          </motion.div>
           )}
         </AnimatePresence>
       </div>
