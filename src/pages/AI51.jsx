@@ -461,10 +461,10 @@ export default function AI51Page() {
         </motion.div>
       )}
 
-      {/* FOOTER - JUST CLOCK */}
+      {/* FOOTER - DATE + CLOCK */}
       <div className="absolute bottom-0 left-0 right-0 bg-black/80 backdrop-blur-xl border-t border-white/10 px-4 py-3">
         <div className="font-mono text-cyan-400 text-sm text-center font-black">
-          {currentTime.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
+          {currentTime.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' })} • {currentTime.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
         </div>
       </div>
 
