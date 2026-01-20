@@ -351,19 +351,13 @@ Listen free at UF51.LOVE`;
                             )}
                           </Button>
 
-                          <motion.button
-                            onClick={() => handleShare(track)}
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                            className="w-12 h-12 bg-green-600 hover:bg-green-700 border-4 border-green-400 flex items-center justify-center transition-all"
-                            style={{ 
-                              boxShadow: '4px 4px 0px rgba(34, 197, 94, 0.5)',
-                              imageRendering: 'pixelated'
+                          <FrequencyShareButton 
+                            frequency={track}
+                            onShared={() => {
+                              // Also do web share
+                              handleShare(track);
                             }}
-                            title="Share"
-                          >
-                            <Share2 className="w-5 h-5 text-white" strokeWidth={3} style={{ filter: 'drop-shadow(0 0 4px #22c55e)' }} />
-                          </motion.button>
+                          />
                         </div>
                       </div>
                     </CardContent>
