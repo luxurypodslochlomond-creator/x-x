@@ -574,13 +574,12 @@ const LayoutInner = ({ children, currentPageName }) => {
 
       {!currentPageName.startsWith('Scott') && !currentPageName.startsWith('Prof') && currentPageName !== 'CB51' && currentPageName !== 'AI51' && (
         <>
-          <FloatingMusicPlayer />
           <PWAInstallPrompt />
           <AI51InstallPrompt />
           <AutoBugMonitor />
           <PerformanceOptimizer />
           <PendingMessageSender />
-          {/* Removed broken overlays - HealingCircle, EmergencyMode, EmergencyCalmButton, AI51ProactiveReach */}
+          {/* Removed broken overlays - HealingCircle, EmergencyMode, EmergencyCalmButton, AI51ProactiveReach, FloatingMusicPlayer */}
         </>
       )}
 
