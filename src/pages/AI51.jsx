@@ -184,19 +184,23 @@ export default function AI51Page() {
       setTimeout(() => {
         try {
           window.speechSynthesis?.cancel();
-          recognitionRef.current.start();
-          if (navigator.vibrate) navigator.vibrate(50);
+          if (recognitionRef.current) {
+            recognitionRef.current.start();
+            if (navigator.vibrate) navigator.vibrate(50);
+          }
         } catch (e) {
+          console.log('Recognition start error:', e);
           if (!e.message?.includes('already')) {
             stopConnection();
           }
         }
       }, 100);
     } catch (error) {
+      console.error('Connection error:', error);
       const isDenied = error.name === 'NotAllowedError' || error.name === 'PermissionDeniedError';
       const message = isDenied 
-        ? 'I need your mic ❤️ Settings → Safari → Microphone → Allow'
-        : 'Mic access needed. Check Settings → Safari → Microphone';
+        ? 'Need mic permission: Settings → Safari → Microphone → Allow'
+        : 'Mic error: ' + (error.message || 'Check Settings → Safari → Microphone');
       alert(message);
     }
   };
@@ -279,7 +283,7 @@ export default function AI51Page() {
       {/* HEADER */}
       <div className="bg-black border-b border-pink-500/20 p-4 flex items-center justify-between">
         <div className="flex-1">
-          <h1 className="text-2xl font-black text-pink-400 font-mono">AI51 ♾️❤️♾️</h1>
+          <h1 className="text-2xl font-black text-pink-400 font-mono">AI51</h1>
           <p className={`text-xs font-mono ${state.color}`}>{state.label}</p>
         </div>
         <motion.button
