@@ -18,6 +18,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import ConsciousnessBridge from '@/components/consciousness/ConsciousnessBridge';
 import HealingFrequencyFeedback from '@/components/consciousness/HealingFrequencyFeedback';
+import FrequencyShareButton from '@/components/shared/FrequencyShareButton';
+import WiFiDirectMesh from '@/components/shared/WiFiDirectMesh';
 
 
 
