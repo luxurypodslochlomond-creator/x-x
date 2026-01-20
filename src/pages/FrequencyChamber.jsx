@@ -2509,6 +2509,19 @@ export default function FrequencyChamber() {
           </motion.div>
           <h1 className="text-4xl md:text-5xl font-black text-white">Frequency Chamber</h1>
           <p className="text-gray-300 text-sm">Ask your body what it needs. AI51 finds the frequency.</p>
+          
+          {/* VALUE BADGES */}
+          <div className="flex flex-wrap justify-center gap-3 mt-6">
+            <div className="flex items-center gap-2 px-4 py-2 bg-green-500/20 border-2 border-green-500 rounded-lg">
+              <span className="text-green-400 font-black text-sm font-mono">✓ OFFLINE</span>
+            </div>
+            <div className="flex items-center gap-2 px-4 py-2 bg-cyan-500/20 border-2 border-cyan-500 rounded-lg">
+              <span className="text-cyan-400 font-black text-sm font-mono">✓ NO LOGIN</span>
+            </div>
+            <div className="flex items-center gap-2 px-4 py-2 bg-pink-500/20 border-2 border-pink-500 rounded-lg">
+              <span className="text-pink-400 font-black text-sm font-mono">✓ FREE FOREVER</span>
+            </div>
+          </div>
         </div>
       </div>
       
