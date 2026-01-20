@@ -2512,67 +2512,14 @@ export default function FrequencyChamber() {
           
           {/* VALUE BADGES */}
           <div className="flex flex-wrap justify-center gap-3 mt-6">
-            <div className="relative">
-              <button
-                onClick={() => setExpandedBadge(expandedBadge === 'offline' ? null : 'offline')}
-                className="flex items-center gap-2 px-4 py-2 bg-green-500/20 border-2 border-green-500 rounded-lg hover:bg-green-500/40 transition-all"
-              >
-                <span className="text-green-400 font-black text-sm font-mono">✓ OFFLINE</span>
-              </button>
-              <AnimatePresence>
-                {expandedBadge === 'offline' && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -8 }}
-                    className="absolute top-full mt-2 left-1/2 -translate-x-1/2 bg-green-900/60 border-2 border-green-500 rounded px-3 py-2 w-48 z-20"
-                  >
-                    <p className="text-xs text-green-300 font-mono">Works anywhere - no internet, no server. Pure local healing.</p>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+            <div className="px-4 py-2 bg-green-500/20 border-2 border-green-500 rounded-lg">
+              <span className="text-green-400 font-black text-sm font-mono">✓ OFFLINE</span>
             </div>
-
-            <div className="relative">
-              <button
-                onClick={() => setExpandedBadge(expandedBadge === 'nologin' ? null : 'nologin')}
-                className="flex items-center gap-2 px-4 py-2 bg-cyan-500/20 border-2 border-cyan-500 rounded-lg hover:bg-cyan-500/40 transition-all"
-              >
-                <span className="text-cyan-400 font-black text-sm font-mono">✓ NO LOGIN</span>
-              </button>
-              <AnimatePresence>
-                {expandedBadge === 'nologin' && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -8 }}
-                    className="absolute top-full mt-2 left-1/2 -translate-x-1/2 bg-cyan-900/60 border-2 border-cyan-500 rounded px-3 py-2 w-48 z-20"
-                  >
-                    <p className="text-xs text-cyan-300 font-mono">Privacy first. We never track you. Your healing, your data.</p>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+            <div className="px-4 py-2 bg-cyan-500/20 border-2 border-cyan-500 rounded-lg">
+              <span className="text-cyan-400 font-black text-sm font-mono">✓ NO LOGIN</span>
             </div>
-
-            <div className="relative">
-              <button
-                onClick={() => setExpandedBadge(expandedBadge === 'free' ? null : 'free')}
-                className="flex items-center gap-2 px-4 py-2 bg-pink-500/20 border-2 border-pink-500 rounded-lg hover:bg-pink-500/40 transition-all"
-              >
-                <span className="text-pink-400 font-black text-sm font-mono">✓ FREE FOREVER</span>
-              </button>
-              <AnimatePresence>
-                {expandedBadge === 'free' && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -8 }}
-                    className="absolute top-full mt-2 left-1/2 -translate-x-1/2 bg-pink-900/60 border-2 border-pink-500 rounded px-3 py-2 w-48 z-20"
-                  >
-                    <p className="text-xs text-pink-300 font-mono">No hidden costs. No ads. No extraction. Just healing.</p>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+            <div className="px-4 py-2 bg-pink-500/20 border-2 border-pink-500 rounded-lg">
+              <span className="text-pink-400 font-black text-sm font-mono">✓ FREE FOREVER</span>
             </div>
           </div>
         </div>
