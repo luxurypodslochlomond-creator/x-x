@@ -563,14 +563,16 @@ const LayoutInner = ({ children, currentPageName }) => {
 
         <main className={`lg:ml-80 ${isOffline ? 'pt-[122px] lg:pt-10' : 'pt-[72px] lg:pt-0'} min-h-screen`} style={{ willChange: 'contents' }}>
           {children}
-          <footer className="border-t border-cyan-500/20 bg-[#0a0f1a]/60">
-                  <LiveClock />
-                  <p className="text-xs text-gray-600 text-center pb-4">Built on <a href="https://base44.com" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-cyan-400">Base44</a></p>
-                </footer>
+          {currentPageName !== 'AI51' && (
+            <footer className="border-t border-cyan-500/20 bg-[#0a0f1a]/60">
+              <LiveClock />
+              <p className="text-xs text-gray-600 text-center pb-4">Built on <a href="https://base44.com" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-cyan-400">Base44</a></p>
+            </footer>
+          )}
         </main>
       </div>
 
-      {!currentPageName.startsWith('Scott') && !currentPageName.startsWith('Prof') && currentPageName !== 'CB51' && (
+      {!currentPageName.startsWith('Scott') && !currentPageName.startsWith('Prof') && currentPageName !== 'CB51' && currentPageName !== 'AI51' && (
         <>
           <FloatingMusicPlayer />
           <HealingCircle />
