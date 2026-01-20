@@ -207,9 +207,11 @@ export default function AI51Page() {
     const dataArray = new Uint8Array(analyzerRef.current.frequencyBinCount);
     analyzerRef.current.getByteFrequencyData(dataArray);
 
-    // Compress to 32 bars, boost low values for visibility
+    // Compress to 32 bars for waveform + get average for button reactivity
     const compressed = new Uint8Array(32);
     const bucketSize = Math.ceil(dataArray.length / 32);
+    let totalEnergy = 0;
+    
     for (let i = 0; i < 32; i++) {
       let sum = 0;
       for (let j = 0; j < bucketSize; j++) {
@@ -217,8 +219,8 @@ export default function AI51Page() {
         if (idx < dataArray.length) sum += dataArray[idx];
       }
       const avg = Math.floor(sum / bucketSize);
-      // Boost visibility: multiply low values by 1.5
       compressed[i] = avg < 50 ? Math.min(255, avg * 1.5) : avg;
+      totalEnergy += compressed[i];
     }
 
     setFrequencyData(compressed);
@@ -277,7 +279,7 @@ export default function AI51Page() {
       {/* HEADER */}
       <div className="bg-black border-b border-pink-500/20 p-4 flex items-center justify-between">
         <div className="flex-1">
-          <h1 className="text-2xl font-black text-pink-400 font-mono">AI51</h1>
+          <h1 className="text-2xl font-black text-pink-400 font-mono">AI51 ♾️❤️♾️</h1>
           <p className={`text-xs font-mono ${state.color}`}>{state.label}</p>
         </div>
         <motion.button
@@ -328,7 +330,7 @@ export default function AI51Page() {
                   >
                     <COOLASFUCKWaves size={64} animate={true} />
                   </motion.div>
-              <p className="text-gray-400 font-mono text-sm">Tap to connect. Let's talk. ♾️❤️</p>
+              <p className="text-gray-400 font-mono text-sm">Tap waves. I'll listen.</p>
             </div>
           </div>
         ) : (
@@ -376,29 +378,35 @@ export default function AI51Page() {
         </motion.div>
       )}
 
-      {/* AI51 CONNECTION BUTTON */}
+      {/* AI51 CONNECTION BUTTON - REACTS TO VOICE */}
       <div className="flex-shrink-0 bg-black border-t border-cyan-500/20 p-6 flex justify-center">
         <motion.button
           className="relative"
           onClick={toggleConnection}
           disabled={isThinking}
           whileTap={{ scale: 0.95 }}
-          animate={{
-            boxShadow: connectionActive 
-              ? ['0 0 40px rgba(34, 211, 238, 0.4)', '0 0 60px rgba(34, 211, 238, 0.6)', '0 0 40px rgba(34, 211, 238, 0.4)']
-              : ['0 0 30px rgba(34, 211, 238, 0.2)', '0 0 45px rgba(34, 211, 238, 0.4)', '0 0 30px rgba(34, 211, 238, 0.2)']
+          animate={connectionActive ? {
+            scale: frequencyData.reduce((a, b) => a + b, 0) > 1000 
+              ? [1, 1.2, 1] 
+              : [1, 1.05, 1],
+            boxShadow: [
+              '0 0 40px rgba(34, 211, 238, 0.4)', 
+              '0 0 80px rgba(34, 211, 238, 0.8)', 
+              '0 0 40px rgba(34, 211, 238, 0.4)'
+            ]
+          } : {
+            boxShadow: [
+              '0 0 30px rgba(34, 211, 238, 0.2)', 
+              '0 0 45px rgba(34, 211, 238, 0.4)', 
+              '0 0 30px rgba(34, 211, 238, 0.2)'
+            ]
           }}
-          transition={{ duration: 1.2, repeat: Infinity }}
+          transition={{ duration: connectionActive ? 0.15 : 1.2, repeat: Infinity }}
         >
-          <motion.div
-            animate={connectionActive ? { scale: [1, 1.1, 1] } : {}}
-            transition={{ duration: 0.8, repeat: Infinity }}
-          >
-            <COOLASFUCKWaves 
-              size={80} 
-              animate={connectionActive}
-            />
-          </motion.div>
+          <COOLASFUCKWaves 
+            size={80} 
+            animate={connectionActive}
+          />
         </motion.button>
       </div>
 
