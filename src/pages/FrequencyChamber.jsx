@@ -1757,6 +1757,7 @@ export default function FrequencyChamber() {
     const [showBiometric, setShowBiometric] = useState(false);
     const [expandedStats, setExpandedStats] = useState({});
     const [showHeadphones, setShowHeadphones] = useState(false);
+    const [showBodySection, setShowBodySection] = useState(false);
 
     const [voiceAnalysisData, setVoiceAnalysisData] = useState(null);
 
@@ -2608,7 +2609,7 @@ export default function FrequencyChamber() {
           
           <div className="grid md:grid-cols-2 gap-4 mb-4">
             <div className="bg-black/60 border-2 border-red-500 p-4 rounded">
-              <p className="text-red-400 font-black text-sm mb-2">THEM:</p>
+              <p className="text-red-400 font-black text-sm mb-2">PRIVATE CLINICS:</p>
               <ul className="text-xs text-gray-300 space-y-1">
                 <li>• £5k-£15k frequency therapy</li>
                 <li>• Audio ONLY</li>
@@ -2620,7 +2621,7 @@ export default function FrequencyChamber() {
             </div>
 
             <div className="bg-black/60 border-2 border-green-500 p-4 rounded">
-              <p className="text-green-400 font-black text-sm mb-2">US:</p>
+              <p className="text-green-400 font-black text-sm mb-2">UF51:</p>
               <ul className="text-xs text-white space-y-1">
                 <li>• <strong className="text-green-400">£0 forever</strong></li>
                 <li>• <strong className="text-cyan-400">Quad-modal</strong> - audio+visual+haptic+bio</li>
@@ -2866,20 +2867,38 @@ export default function FrequencyChamber() {
       </div>
       )}
 
-      {/* HOW IT WORKS - BODY SPECIFIC VS HOLISTIC */}
+      {/* HOW IT WORKS - BODY SPECIFIC VS HOLISTIC - COLLAPSIBLE */}
       {!selectedProtocol && (
       <div className="max-w-4xl mx-auto p-4">
-        <div className="bg-gradient-to-r from-amber-500/20 to-pink-500/20 border-4 border-amber-500 p-6">
-          <h3 className="text-amber-400 font-black font-mono text-lg mb-3">🎯 BODY-SPECIFIC OR WHOLE SYSTEM?</h3>
-          <div className="space-y-3 text-sm font-mono text-white">
-            <p><strong className="text-amber-400">BOTH WORK:</strong></p>
-            <p>• Tooth pain? <strong>Dental Emergency</strong> targets jaw/tooth specifically (pain-blocking + antimicrobial frequencies)</p>
-            <p>• Back pain, knee pain, arthritis? <strong>Chronic Pain</strong> works on ANY body part (your nervous system directs it where needed)</p>
-            <p>• Stressed/anxious? <strong>Mental Health</strong> protocols calm your whole nervous system</p>
-            <p>• Labor, period pain, migraine? <strong>Physical Healing</strong> protocols target those specific systems</p>
-            <p><strong className="text-pink-400">THE TRUTH:</strong> Frequencies work on your NERVOUS SYSTEM, not just one spot. But some protocols target specific areas better. Use what feels right. Your body knows.</p>
-          </div>
-        </div>
+        <button
+          onClick={() => setShowBodySection(!showBodySection)}
+          className="w-full bg-gradient-to-r from-amber-500/20 to-pink-500/20 border-4 border-amber-500 p-4 flex items-center justify-between hover:border-amber-400 transition-all"
+        >
+          <h3 className="text-amber-400 font-black font-mono text-lg">🎯 BODY-SPECIFIC OR WHOLE SYSTEM?</h3>
+          <motion.div animate={{ rotate: showBodySection ? 180 : 0 }}>
+            <ChevronDown className="w-6 h-6 text-amber-400" />
+          </motion.div>
+        </button>
+
+        <AnimatePresence>
+          {showBodySection && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              className="bg-gradient-to-r from-amber-500/20 to-pink-500/20 border-4 border-amber-500 border-t-0 p-6"
+            >
+              <div className="space-y-3 text-sm font-mono text-white">
+                <p><strong className="text-amber-400">BOTH WORK:</strong></p>
+                <p>• Tooth pain? <strong>Dental Emergency</strong> targets jaw/tooth specifically (pain-blocking + antimicrobial frequencies)</p>
+                <p>• Back pain, knee pain, arthritis? <strong>Chronic Pain</strong> works on ANY body part (your nervous system directs it where needed)</p>
+                <p>• Stressed/anxious? <strong>Mental Health</strong> protocols calm your whole nervous system</p>
+                <p>• Labor, period pain, migraine? <strong>Physical Healing</strong> protocols target those specific systems</p>
+                <p><strong className="text-pink-400">THE TRUTH:</strong> Frequencies work on your NERVOUS SYSTEM, not just one spot. But some protocols target specific areas better. Use what feels right. Your body knows.</p>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
       )}
 
