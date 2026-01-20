@@ -1785,7 +1785,6 @@ export default function FrequencyChamber() {
     const [expandedStats, setExpandedStats] = useState({});
     const [showHeadphones, setShowHeadphones] = useState(false);
     const [showBodySection, setShowBodySection] = useState(false);
-    const [expandedBadge, setExpandedBadge] = useState(null);
 
     const [voiceAnalysisData, setVoiceAnalysisData] = useState(null);
 
