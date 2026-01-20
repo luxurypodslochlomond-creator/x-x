@@ -379,13 +379,48 @@ export default function AI51Page() {
         </motion.div>
       )}
 
+      {/* TEXT INPUT FALLBACK */}
+      {textInputOpen && (
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="absolute bottom-16 left-0 right-0 px-4 py-3 bg-black/80 backdrop-blur-xl border-t border-cyan-500/30 flex gap-2"
+        >
+          <input
+            type="text"
+            value={textInput}
+            onChange={(e) => setTextInput(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' && textInput.trim()) {
+                handleMessageSend(textInput.trim());
+              }
+            }}
+            placeholder="Type here..."
+            className="flex-1 bg-black/60 border border-cyan-500/30 rounded px-3 py-2 text-white text-sm font-mono focus:outline-none focus:border-cyan-500"
+            autoFocus
+          />
+          <button
+            onClick={() => setTextInputOpen(false)}
+            className="px-3 py-2 text-xs text-gray-500 hover:text-white transition-colors"
+          >
+            ✕
+          </button>
+        </motion.div>
+      )}
+
       {/* FOOTER */}
       <div className="absolute bottom-0 left-0 right-0 bg-black/80 backdrop-blur-xl border-t border-white/10 px-4 py-3 flex items-center justify-between">
-        <p className="text-xs text-gray-600">Built on <a href="https://base44.com" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-cyan-400">Base44</a></p>
+        <button
+          onClick={() => setTextInputOpen(!textInputOpen)}
+          className="text-xs text-gray-600 hover:text-cyan-400 transition-colors"
+          title="Text input"
+        >
+          ⌨️
+        </button>
         <div className="font-mono text-cyan-400 text-sm font-black">
           {currentTime.toLocaleDateString(navigator.language || 'en-GB', { weekday: 'short', day: 'numeric', month: 'short' })} • {currentTime.toLocaleTimeString(navigator.language || 'en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
         </div>
-        <div className="w-16" />
+        <p className="text-xs text-gray-600">Built on <a href="https://base44.com" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-cyan-400">Base44</a></p>
       </div>
 
     </div>
