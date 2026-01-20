@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Heart, Moon, Brain, Zap, Shield, Wind, Sun, Volume2, VolumeX, Clock, Info, X, Camera, Activity, Ear, Share2, Music, Mic, Globe, ChevronDown, Sparkles } from 'lucide-react';
-import { COOLASFUCKWaves, COOLASFUCKBrain, COOLASFUCKHeart, COOLASFUCKMoon, COOLASFUCKShield, COOLASFUCKTooth } from '@/components/shared/COOLASFUCKIcon';
+import { COOLASFUCKWaves, COOLASFUCKBrain, COOLASFUCKHeart, COOLASFUCKMoon, COOLASFUCKShield, COOLASFUCKTooth, COOLASFUCKZap, COOLASFUCKTarget } from '@/components/shared/COOLASFUCKIcon';
 import BiometricHealing from '@/components/radio/BiometricHealing';
 import OvernightSleepMonitor from '@/components/healing/OvernightSleepMonitor';
 import AI51CustomFrequencyGenerator from '@/components/ai51/AI51CustomFrequencyGenerator';
@@ -2874,7 +2874,7 @@ export default function FrequencyChamber() {
           onClick={() => setShowBodySection(!showBodySection)}
           className="w-full bg-gradient-to-r from-amber-500/20 to-pink-500/20 border-4 border-amber-500 p-4 flex items-center justify-between hover:border-amber-400 transition-all"
         >
-          <h3 className="text-amber-400 font-black font-mono text-lg">🎯 BODY-SPECIFIC OR WHOLE SYSTEM?</h3>
+          <h3 className="text-amber-400 font-black font-mono text-lg">BODY-SPECIFIC OR WHOLE SYSTEM?</h3>
           <motion.div animate={{ rotate: showBodySection ? 180 : 0 }}>
             <ChevronDown className="w-6 h-6 text-amber-400" />
           </motion.div>
@@ -2946,9 +2946,10 @@ export default function FrequencyChamber() {
       {!selectedProtocol && (
         <div className="max-w-4xl mx-auto p-4">
           <div className="bg-gradient-to-r from-purple-500/30 to-pink-500/30 border-4 border-purple-500 rounded-2xl p-6 mb-6" style={{ boxShadow: '0 0 60px rgba(168, 85, 247, 0.7)' }}>
-            <h2 className="text-purple-400 font-black text-2xl font-mono mb-4 text-center">
-              ⚡ INSTANT ACCESS (For Pain/Crisis):
-            </h2>
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <COOLASFUCKZap size={28} animate={true} />
+              <h2 className="text-purple-400 font-black text-2xl font-mono">INSTANT ACCESS (For Pain/Crisis)</h2>
+            </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
               {['neural_pathways', 'dental_emergency', 'lower_back_hip', 'brain_fog'].map(protocolId => {
                 const protocol = PROTOCOLS[protocolId];

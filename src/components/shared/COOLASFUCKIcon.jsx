@@ -793,5 +793,50 @@ export const COOLASFUCKBeacon = ({ className = "", size = 24, animate = true }) 
     );
 };
 
+// 8-bit Target (bullseye/aim)
+export const COOLASFUCKTarget = ({ className = "", size = 24, animate = true }) => {
+    const Component = animate ? motion.svg : 'svg';
+    
+    return (
+        <Component
+            width={size}
+            height={size}
+            viewBox="0 0 24 24"
+            className={className}
+            animate={animate ? {
+                scale: [1, 1.05, 1]
+            } : {}}
+            transition={animate ? {
+                duration: 1.5,
+                repeat: Infinity,
+                ease: "easeInOut"
+            } : {}}
+        >
+            {/* 8-bit bullseye target */}
+            {/* Outer ring */}
+            <rect x="4" y="4" width="2" height="2" fill="#f59e0b"/>
+            <rect x="8" y="2" width="8" height="2" fill="#f59e0b"/>
+            <rect x="18" y="4" width="2" height="2" fill="#f59e0b"/>
+            <rect x="2" y="8" width="2" height="8" fill="#f59e0b"/>
+            <rect x="20" y="8" width="2" height="8" fill="#f59e0b"/>
+            <rect x="4" y="18" width="2" height="2" fill="#f59e0b"/>
+            <rect x="8" y="20" width="8" height="2" fill="#f59e0b"/>
+            <rect x="18" y="18" width="2" height="2" fill="#f59e0b"/>
+            
+            {/* Middle ring */}
+            <rect x="6" y="6" width="2" height="2" fill="#fbbf24"/>
+            <rect x="8" y="6" width="8" height="2" fill="#fbbf24"/>
+            <rect x="16" y="6" width="2" height="2" fill="#fbbf24"/>
+            <rect x="6" y="16" width="2" height="2" fill="#fbbf24"/>
+            <rect x="8" y="16" width="8" height="2" fill="#fbbf24"/>
+            <rect x="16" y="16" width="2" height="2" fill="#fbbf24"/>
+            
+            {/* Center bullseye - red/pink */}
+            <rect x="10" y="10" width="4" height="4" fill="#ec4899"/>
+            <rect x="11" y="11" width="2" height="2" fill="#ff1b8d"/>
+        </Component>
+    );
+};
+
 // Default export (defaults to Sparkle - most commonly used)
 export default COOLASFUCKSparkle;
