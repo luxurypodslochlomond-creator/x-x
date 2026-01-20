@@ -1859,6 +1859,14 @@ export default function FrequencyChamber() {
       console.log('🎵 START AUDIO - Protocol:', protocol.name);
       console.log('Config:', protocol.config);
 
+      // Set session auto-stop timer
+      const durationMs = sessionDuration * 60 * 1000;
+      const timerRef = setTimeout(() => {
+        console.log(`⏰ Auto-stopping after ${sessionDuration} minutes`);
+        stopAudio();
+      }, durationMs);
+      sessionTimerRef.current = timerRef;
+
       // Save session to dashboard (all frequency plays, not just voice)
       try {
         await base44.entities.VoiceHealingSession.create({
