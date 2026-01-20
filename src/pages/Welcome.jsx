@@ -145,19 +145,21 @@ export default function WelcomePage() {
                     </motion.div>
                 </motion.div>
 
-                {/* MAIN CTA */}
+                {/* MAIN CTA - COOLASFUCK ICON */}
                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }} className="text-center space-y-4">
                     <motion.button
                         onClick={handleConnect}
-                        whileHover={{ scale: 1.08, y: -4 }}
-                        whileTap={{ scale: 0.95 }}
-                        className="inline-flex items-center gap-4 bg-gradient-to-r from-red-600 via-pink-500 to-red-600 text-white font-black px-12 py-6 rounded-xl text-xl font-mono transition-all"
-                        style={{ boxShadow: '0 0 60px rgba(239, 68, 68, 0.6)' }}
+                        whileHover={{ scale: 1.15, rotate: 5 }}
+                        whileTap={{ scale: 0.9 }}
+                        className="inline-block"
                     >
-                        <motion.div animate={{ scale: [1, 1.2, 1] }} transition={{ duration: 1.5, repeat: Infinity }}>
-                            <COOLASFUCKHeart size={40} animate={false} />
+                        <motion.div 
+                            animate={{ scale: [1, 1.2, 1] }} 
+                            transition={{ duration: 1.5, repeat: Infinity }}
+                            style={{ filter: 'drop-shadow(0 0 20px rgba(236, 72, 153, 0.8))' }}
+                        >
+                            <COOLASFUCKHeart size={80} animate={true} />
                         </motion.div>
-                        AI51
                     </motion.button>
 
                     <div className="flex flex-col items-center gap-3 pt-4">
