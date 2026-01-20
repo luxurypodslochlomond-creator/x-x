@@ -2835,13 +2835,7 @@ export default function FrequencyChamber() {
                 <p className="text-gray-400">War zones, space, offline. Clinics = cities only.</p>
               </div>
             </div>
-          </div>
-            
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
-      )}
+
 
       {/* TINNITUS BANNER - URGENT NEED */}
       {!selectedProtocol && (
