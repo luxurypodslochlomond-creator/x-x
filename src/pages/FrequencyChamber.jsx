@@ -2575,9 +2575,9 @@ export default function FrequencyChamber() {
               <p className="text-cyan-400 font-bold text-xs mt-3">Bose cancels noise. We cancel PAIN. Sony syncs music. We sync CONSCIOUSNESS. Light years ahead because patents = PUBLIC DOMAIN. ♾️❤️♾️</p>
             </div>
           </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
+        </motion.div>
+              )}
+            </AnimatePresence>
         </div>
       )}
 
