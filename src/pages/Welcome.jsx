@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { motion } from 'framer-motion';
 import { COOLASFUCKHeart, COOLASFUCKMusicNote, COOLASFUCKSparkle, COOLASFUCKWaves, COOLASFUCKGlobe } from '@/components/shared/COOLASFUCKIcon';
+import { ChevronDown } from 'lucide-react';
 
 import { base44 } from '@/api/base44Client';
 
@@ -12,8 +13,10 @@ import { base44 } from '@/api/base44Client';
  */
 
 export default function WelcomePage() {
-    useEffect(() => {
-        document.title = 'Universal Frequency51';
+          const [truthOpen, setTruthOpen] = useState(false);
+
+          useEffect(() => {
+              document.title = 'Universal Frequency51';
         
         const ogTitle = document.querySelector('meta[property="og:title"]') || document.createElement('meta');
         ogTitle.setAttribute('property', 'og:title');
@@ -98,33 +101,48 @@ export default function WelcomePage() {
 
                 </motion.div>
 
-                {/* ULTRA-HONEST TRUTH */}
+                {/* ULTRA-HONEST TRUTH - EXPANDABLE */}
                 <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="bg-gradient-to-br from-red-900/40 to-black border-4 border-red-500 p-8 space-y-4">
-                    <h2 className="text-2xl font-black font-mono text-red-400 text-center">⚠️ ULTRA-HONEST TRUTH</h2>
-                    
-                    <div className="grid md:grid-cols-2 gap-3 font-mono text-xs">
-                        <div className="bg-black border-2 border-green-500 p-4">
-                            <p className="text-green-400 font-bold mb-2">✅ WORKS NOW:</p>
-                            <ul className="text-gray-300 space-y-1">
-                                <li>• AI51 voice chat ✓</li>
-                                <li>• Healing frequencies ✓</li>
-                                <li>• Clean planet → $P51 ✓</li>
-                                <li>• Lossless music (90% to artists) ✓</li>
-                                <li>• 100% OPEN SOURCE ✓</li>
-                            </ul>
+                    <button 
+                        onClick={() => setTruthOpen(!truthOpen)}
+                        className="w-full flex items-center justify-between hover:opacity-80 transition-opacity"
+                    >
+                        <h2 className="text-2xl font-black font-mono text-red-400">⚠️ ULTRA-HONEST TRUTH</h2>
+                        <motion.div animate={{ rotate: truthOpen ? 180 : 0 }} transition={{ duration: 0.3 }}>
+                            <ChevronDown className="w-6 h-6 text-red-400" />
+                        </motion.div>
+                    </button>
+
+                    <motion.div
+                        initial={false}
+                        animate={{ height: truthOpen ? "auto" : 0, opacity: truthOpen ? 1 : 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="overflow-hidden"
+                    >
+                        <div className="grid md:grid-cols-2 gap-3 font-mono text-xs pt-4">
+                            <div className="bg-black border-2 border-green-500 p-4">
+                                <p className="text-green-400 font-bold mb-2">✅ WORKS NOW:</p>
+                                <ul className="text-gray-300 space-y-1">
+                                    <li>• AI51 voice chat ✓</li>
+                                    <li>• Healing frequencies ✓</li>
+                                    <li>• Clean planet → $P51 ✓</li>
+                                    <li>• Lossless music (90% to artists) ✓</li>
+                                    <li>• 100% OPEN SOURCE ✓</li>
+                                </ul>
+                            </div>
+
+                            <div className="bg-black border-2 border-red-500 p-4">
+                                <p className="text-red-400 font-bold mb-2">❌ NOT YET (FUNDING NEEDED):</p>
+                                <ul className="text-gray-300 space-y-1">
+                                    <li>• Converting $P51 → real money</li>
+                                    <li>• Cashing out to bank</li>
+                                    <li>• But you're building value NOW</li>
+                                </ul>
+                            </div>
                         </div>
 
-                        <div className="bg-black border-2 border-red-500 p-4">
-                            <p className="text-red-400 font-bold mb-2">❌ NOT YET (FUNDING NEEDED):</p>
-                            <ul className="text-gray-300 space-y-1">
-                                <li>• Converting $P51 → real money</li>
-                                <li>• Cashing out to bank</li>
-                                <li>• But you're building value NOW</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <p className="text-white text-center font-bold text-sm">Real healing. Real value. Zero bullshit. ♾️❤️</p>
+                        <p className="text-white text-center font-bold text-sm pt-4">Real healing. Real value. Zero bullshit. ♾️❤️</p>
+                    </motion.div>
                 </motion.div>
 
                 {/* MAIN CTA */}
