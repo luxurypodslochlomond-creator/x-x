@@ -145,11 +145,8 @@ export default function WelcomePage() {
                         <Link to={createPageUrl('About')} className="text-cyan-400 hover:text-cyan-300 font-mono text-sm underline">
                             How it works
                         </Link>
-                        <Link to={createPageUrl('DisasterAI')} className="text-red-400 hover:text-red-300 font-mono text-sm underline">
-                            Disaster AI (no internet needed)
-                        </Link>
-                        <Link to={createPageUrl('AI51MeshTechWhitepaper')} className="text-purple-400 hover:text-purple-300 font-mono text-sm underline">
-                            P2P Mesh Whitepaper (night reading)
+                        <Link to={createPageUrl('Whitepaper')} className="text-purple-400 hover:text-purple-300 font-mono text-sm underline">
+                            Technical Whitepaper
                         </Link>
                     </div>
                 </motion.div>
