@@ -21,6 +21,7 @@ export default function AI51Page() {
   const [frequencyData, setFrequencyData] = useState(new Uint8Array(32));
   const [permissionsGranted, setPermissionsGranted] = useState(false);
   const [showPermissionRequest, setShowPermissionRequest] = useState(false);
+  const [currentTime, setCurrentTime] = useState(new Date());
 
   const recognitionRef = useRef(null);
   const audioContextRef = useRef(null);
@@ -47,6 +48,13 @@ export default function AI51Page() {
       }
     };
     loadUser();
+
+    // Clock updater
+    const timer = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000);
+
+    return () => clearInterval(timer);
   }, []);
 
   // Setup speech recognition
@@ -456,7 +464,7 @@ export default function AI51Page() {
       {/* FOOTER - JUST CLOCK */}
       <div className="absolute bottom-0 left-0 right-0 bg-black/80 backdrop-blur-xl border-t border-white/10 px-4 py-3">
         <div className="font-mono text-cyan-400 text-sm text-center font-black">
-          {new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
+          {currentTime.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
         </div>
       </div>
 
