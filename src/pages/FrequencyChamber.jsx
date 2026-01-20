@@ -3597,52 +3597,6 @@ Try it: https://uf51.love/FrequencyChamber`;
         </div>
       )}
 
-      {/* TESLA + OPEN SOURCE - BOTTOM CALLS TO ACTION */}
-      {!selectedProtocol && (
-        <div className="max-w-4xl mx-auto p-4 space-y-4">
-          <motion.div
-            whileHover={{ scale: 1.02 }}
-            className="bg-gradient-to-r from-purple-500/20 via-amber-500/20 to-cyan-500/20 border-4 border-purple-500 p-6 rounded-2xl"
-            style={{ boxShadow: '0 0 60px rgba(168, 85, 247, 0.5)' }}
-          >
-            <div className="flex items-center gap-4 mb-4">
-              <Zap className="w-12 h-12 text-amber-400 animate-pulse" />
-              <div>
-                <h3 className="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-purple-400 font-mono">
-                  TESLA FREE ENERGY
-                </h3>
-                <p className="text-purple-300 text-sm font-mono font-bold">SUPPRESSED PATENTS • BUILD IT YOURSELF</p>
-              </div>
-            </div>
-            <Link
-              to={createPageUrl('ZeroPointEnergy')}
-              className="block w-full py-4 bg-gradient-to-r from-amber-500 to-purple-500 hover:from-amber-400 hover:to-purple-400 text-black font-black text-lg font-mono text-center transition-all rounded-lg"
-              style={{ boxShadow: '0 4px 20px rgba(245, 158, 11, 0.5)' }}
-            >
-              GET TESLA BLUEPRINTS →
-            </Link>
-          </motion.div>
-
-          <motion.div
-            whileHover={{ scale: 1.02 }}
-            className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-4 border-green-500 p-6 rounded-2xl"
-            style={{ boxShadow: '0 0 60px rgba(34, 197, 94, 0.5)' }}
-          >
-            <div className="flex items-center gap-4 mb-4">
-              <Globe className="w-12 h-12 text-green-400" />
-              <h3 className="text-2xl font-black text-green-400 font-mono">🌍 100% OPEN SOURCE</h3>
-            </div>
-            <Link
-              to={createPageUrl('OpenSourceDeclaration')}
-              className="block w-full py-4 bg-gradient-to-r from-green-500 to-cyan-500 hover:from-green-400 hover:to-cyan-400 text-black font-black text-lg font-mono text-center transition-all rounded-lg"
-              style={{ boxShadow: '0 4px 20px rgba(34, 197, 94, 0.5)' }}
-            >
-              READ OPEN SOURCE PLEDGE →
-            </Link>
-          </motion.div>
-        </div>
-      )}
-
       {/* Footer - only show when no protocol selected */}
       {!selectedProtocol && (
         <div className="max-w-4xl mx-auto p-4 text-center">
