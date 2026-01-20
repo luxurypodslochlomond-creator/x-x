@@ -575,19 +575,12 @@ const LayoutInner = ({ children, currentPageName }) => {
       {!currentPageName.startsWith('Scott') && !currentPageName.startsWith('Prof') && currentPageName !== 'CB51' && currentPageName !== 'AI51' && (
         <>
           <FloatingMusicPlayer />
-          <HealingCircle />
           <PWAInstallPrompt />
           <AI51InstallPrompt />
-          <EmergencyMode />
-          <EmergencyCalmButton />
           <AutoBugMonitor />
           <PerformanceOptimizer />
-          <AI51ProactiveReach />
           <PendingMessageSender />
-          {/* AI51Shield - Commented out site-wide, code preserved if needed later */}
-          {/* <AI51Shield /> */}
-          {/* AI51LiveHealer - Commented out site-wide, code preserved if needed later */}
-          {/* <AI51LiveHealer /> */}
+          {/* Removed broken overlays - HealingCircle, EmergencyMode, EmergencyCalmButton, AI51ProactiveReach */}
         </>
       )}
 
