@@ -604,10 +604,7 @@ const LayoutInner = ({ children, currentPageName }) => {
                 <AudioProvider>
                   <AI51MemoryProvider>
                     <SubdomainRouter>
-                              <LayoutInner {...props} />
-                      <SyncStatusIndicator />
-                      <MeshStatusIndicator />
-                      <ProfessionalModeToggle />
+                      <LayoutInner {...props} />
                       <ServiceWorkerManager />
                       <BackgroundSync />
                     </SubdomainRouter>
