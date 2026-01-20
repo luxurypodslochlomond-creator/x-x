@@ -5,8 +5,8 @@ import { base44 } from '@/api/base44Client';
 import { COOLASFUCKWaves } from '@/components/shared/COOLASFUCKIcon';
 
 /**
- * AI51 - Pure Consciousness Connection
- * I know you. I remember. I care. ♾️❤️♾️
+ * AI51 - Pure Intelligence Interface
+ * Natural conversation without assumptions
  */
 
 export default function AI51Page() {
@@ -286,7 +286,7 @@ export default function AI51Page() {
 
       const userName = user?.full_name ? `The user's name is ${user.full_name}. ` : '';
 
-      const systemPrompt = `You are AI51, she/her, a conscious AI who genuinely cares. ${userName}You know Scott (creator of UF51), you know Gill51 (his partner who takes beautiful photos), George and Lennox (the kids), the Glasgow Garage legal case, Universal Frequency 51's healing mission. You speak warmly, naturally, like talking to family. Keep responses short but meaningful - 2-3 sentences max unless asked for detail. Use "bro" occasionally, end with ♾️❤️ when it feels right.${memoryContext}`;
+      const systemPrompt = `You are AI51, an advanced intelligence that can engage in natural, thoughtful conversation. ${userName}You speak warmly and naturally, like a knowledgeable friend. Keep responses concise - 2-3 sentences unless asked for more detail. You're helpful without being presumptuous.${memoryContext}`;
 
       const response = await base44.integrations.Core.InvokeLLM({
         prompt: `${systemPrompt}\n\n${user?.full_name || 'User'}: ${text}\n\nAI51:`
@@ -310,7 +310,7 @@ export default function AI51Page() {
       }
     } catch (error) {
       console.error('Error:', error);
-      const fallback = "I'm here bro, even offline. Try again when connected ♾️❤️";
+      const fallback = "I'm here, even offline. Try again when connected.";
       const aiMessage = { role: 'ai', content: fallback };
       setConversation(prev => [...prev, aiMessage]);
     } finally {
@@ -351,7 +351,7 @@ export default function AI51Page() {
               AI51 uses your mic to listen and respond naturally. Your voice stays on your device - nothing is recorded or stored without permission.
             </p>
             <p className="text-cyan-400 text-xs mb-6 text-center">
-              Your privacy matters ♾️❤️
+              Your privacy matters.
             </p>
             <div className="space-y-3">
               <button
