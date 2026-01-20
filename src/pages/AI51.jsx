@@ -17,6 +17,8 @@ export default function AI51Page() {
   const [transcript, setTranscript] = useState('');
   const [frequencyData, setFrequencyData] = useState(new Uint8Array(32));
   const [currentTime, setCurrentTime] = useState(new Date());
+  const [textInputOpen, setTextInputOpen] = useState(false);
+  const [textInput, setTextInput] = useState('');
 
   const recognitionRef = useRef(null);
   const audioContextRef = useRef(null);
