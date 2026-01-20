@@ -2467,10 +2467,11 @@ export default function FrequencyChamber() {
     lastHRVRef.current = { bpm, coherence };
   }, [emergencyMode, panicDetected, isPlaying]);
 
-  return (
-    <div className="min-h-screen bg-gradient-to-b from-black via-purple-950/20 to-black text-white">
-      
-      {/* SIMPLE BEAUTIFUL HEADER */}
+  if (!selectedProtocol) {
+    return (
+      <div className="min-h-screen bg-gradient-to-b from-black via-purple-950/20 to-black text-white">
+        
+        {/* SIMPLE BEAUTIFUL HEADER */}
       <div className="p-6 md:p-8 bg-black/40 backdrop-blur-sm">
         <div className="max-w-4xl mx-auto text-center space-y-4">
           <motion.div
