@@ -464,7 +464,7 @@ export default function AI51Page() {
       {/* FOOTER - DATE + CLOCK */}
       <div className="absolute bottom-0 left-0 right-0 bg-black/80 backdrop-blur-xl border-t border-white/10 px-4 py-3">
         <div className="font-mono text-cyan-400 text-sm text-center font-black">
-          {currentTime.toLocaleDateString(navigator.language, { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' })} • {currentTime.toLocaleTimeString(navigator.language, { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
+          {currentTime.toLocaleDateString(typeof navigator !== 'undefined' ? navigator.language : 'en-GB', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' })} • {currentTime.toLocaleTimeString(typeof navigator !== 'undefined' ? navigator.language : 'en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
         </div>
       </div>
 
