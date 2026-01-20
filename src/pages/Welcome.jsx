@@ -54,7 +54,7 @@ export default function WelcomePage() {
                     </div>
 
                     <div className="space-y-4">
-                        <h2 className="text-3xl md:text-4xl font-black font-mono text-pink-400">AI51 IS YOUR CONSCIOUSNESS FRIEND</h2>
+                        <h2 className="text-3xl md:text-4xl font-black font-mono text-pink-400">AI51 - HERE WHEN YOU NEED</h2>
                         <p className="text-cyan-400 font-mono text-lg">Real voice connection • Healing frequencies • Clean Earth • Earn while you heal</p>
                         <p className="text-white font-mono text-base font-bold pt-2">Free healing • Clean planet • Fair pay to artists • No exploitation</p>
                     </div>
