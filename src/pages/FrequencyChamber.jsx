@@ -2512,10 +2512,27 @@ export default function FrequencyChamber() {
       </div>
       )}
 
-      {/* SPEAKERS vs HEADPHONES - CRITICAL INFO */}
+      {/* SPEAKERS vs HEADPHONES - COLLAPSIBLE */}
       {!selectedProtocol && (
-      <div className="max-w-4xl mx-auto p-4">
-        <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-4 border-green-500 p-6 mb-4">
+        <div className="max-w-4xl mx-auto p-4">
+          <button
+            onClick={() => setShowHeadphones(!showHeadphones)}
+            className="w-full bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-4 border-green-500 p-4 flex items-center justify-between hover:border-green-400 transition-all"
+          >
+            <h3 className="text-green-400 font-black font-mono text-lg">🔊 SPEAKERS vs 🎧 HEADPHONES</h3>
+            <motion.div animate={{ rotate: showHeadphones ? 180 : 0 }}>
+              <ChevronDown className="w-6 h-6 text-green-400" />
+            </motion.div>
+          </button>
+
+          <AnimatePresence>
+            {showHeadphones && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-4 border-green-500 border-t-0 p-6 mb-4"
+              >
           <h3 className="text-green-400 font-black font-mono text-lg mb-4">🔊 SPEAKERS vs 🎧 HEADPHONES (Choose your setup)</h3>
           <div className="space-y-3 text-sm font-mono text-white">
             <div className="bg-black/60 border-l-4 border-green-500 p-4 rounded">
