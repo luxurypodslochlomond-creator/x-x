@@ -1,12 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Volume2, VolumeX, Mic, MicOff } from 'lucide-react';
 import { base44 } from '@/api/base44Client';
 import { COOLASFUCKWaves } from '@/components/shared/COOLASFUCKIcon';
 
 /**
  * AI51 - Pure Intelligence Interface
- * Natural conversation without assumptions
+ * Shannon test: one interaction does everything
  */
 
 export default function AI51Page() {
@@ -37,8 +36,6 @@ export default function AI51Page() {
       try {
         const currentUser = await base44.auth.me();
         setUser(currentUser);
-
-        // Load recent memories
         const userMemories = await base44.entities.AI51Memory.filter(
           { created_by: currentUser.email },
           '-created_date',
@@ -118,7 +115,7 @@ export default function AI51Page() {
     }
   }, [conversation, voiceEnabled]);
 
-  // Auto-scroll to latest
+  // Auto-scroll
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [conversation]);
@@ -178,16 +175,12 @@ export default function AI51Page() {
       const stream = await navigator.mediaDevices.getUserMedia({ 
         audio: { echoCancellation: false, noiseSuppression: false }
       });
-      
-      // Permission granted - close stream, we'll open it when connecting
       stream.getTracks().forEach(track => track.stop());
       setPermissionsGranted(true);
-      
-      // Auto-connect after permission
       setTimeout(() => toggleConnection(), 500);
     } catch (error) {
       console.error('Permission denied:', error);
-      alert('AI51 needs mic access to hear you. Settings → Safari → Microphone → Allow');
+      alert('AI51 needs mic access. Settings → Safari → Microphone → Allow');
     }
   };
 
@@ -197,7 +190,6 @@ export default function AI51Page() {
       return;
     }
 
-    // Check permissions first
     if (!permissionsGranted) {
       setShowPermissionRequest(true);
       return;
@@ -239,11 +231,7 @@ export default function AI51Page() {
       }, 100);
     } catch (error) {
       console.error('Connection error:', error);
-      const isDenied = error.name === 'NotAllowedError' || error.name === 'PermissionDeniedError';
-      const message = isDenied 
-        ? 'Need mic: Settings → Safari → Microphone → Allow'
-        : 'Mic error: Check Settings → Safari → Microphone';
-      alert(message);
+      alert('Mic error: Check Settings → Safari → Microphone');
     }
   };
 
@@ -279,7 +267,6 @@ export default function AI51Page() {
     setIsThinking(true);
 
     try {
-      // Build context from memories and user
       const memoryContext = memories.length > 0 
         ? `\n\nYou remember these things about ${user?.full_name || 'the user'}:\n${memories.slice(0, 5).map(m => `- ${m.content}`).join('\n')}`
         : '';
@@ -295,7 +282,6 @@ export default function AI51Page() {
       const aiMessage = { role: 'ai', content: response };
       setConversation(prev => [...prev, aiMessage]);
 
-      // Save important memories
       if (text.length > 20 && user) {
         try {
           await base44.entities.AI51Memory.create({
@@ -318,20 +304,10 @@ export default function AI51Page() {
     }
   };
 
-  const getState = () => {
-    if (!connectionActive) return { label: 'TAP TO CONNECT', color: 'text-cyan-400' };
-    if (isThinking) return { label: 'THINKING...', color: 'text-amber-400' };
-    if (isSpeaking) return { label: 'SPEAKING', color: 'text-green-400' };
-    if (isListening) return { label: 'LISTENING...', color: 'text-pink-400' };
-    return { label: 'CONNECTED', color: 'text-cyan-400' };
-  };
-
-  const state = getState();
-
   return (
-    <div className="h-screen bg-black flex flex-col overflow-hidden">
+    <div className="h-screen bg-black flex flex-col overflow-hidden relative">
       
-      {/* PERMISSION REQUEST MODAL */}
+      {/* PERMISSION MODAL */}
       {showPermissionRequest && (
         <motion.div 
           initial={{ opacity: 0 }}
@@ -339,203 +315,148 @@ export default function AI51Page() {
           className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-6"
         >
           <motion.div 
-            initial={{ scale: 0.9, y: 20 }}
-            animate={{ scale: 1, y: 0 }}
-            className="bg-gradient-to-br from-pink-500/20 to-cyan-500/20 border-2 border-pink-500/50 rounded-2xl p-6 max-w-md"
+            initial={{ scale: 0.9 }}
+            animate={{ scale: 1 }}
+            className="bg-black border-2 border-cyan-500 rounded-2xl p-8 max-w-sm text-center"
           >
-            <div className="text-center mb-6">
-              <COOLASFUCKWaves size={48} animate={true} />
-            </div>
-            <h2 className="text-white font-black text-xl mb-3 text-center">I need to hear you</h2>
-            <p className="text-gray-300 text-sm mb-2 leading-relaxed">
-              AI51 uses your mic to listen and respond naturally. Your voice stays on your device - nothing is recorded or stored without permission.
+            <COOLASFUCKWaves size={64} animate={true} className="mx-auto mb-4" />
+            <h2 className="text-white font-black text-xl mb-2">Mic Access</h2>
+            <p className="text-gray-400 text-sm mb-6">
+              AI51 needs your mic to hear you. Nothing recorded.
             </p>
-            <p className="text-cyan-400 text-xs mb-6 text-center">
-              Your privacy matters.
-            </p>
-            <div className="space-y-3">
-              <button
-                onClick={requestPermissions}
-                className="w-full bg-pink-500 hover:bg-pink-600 text-white font-black py-3 rounded-xl transition-all"
-              >
-                Allow Microphone
-              </button>
-              <button
-                onClick={() => setShowPermissionRequest(false)}
-                className="w-full bg-black/40 hover:bg-black/60 text-gray-400 font-bold py-3 rounded-xl transition-all border border-gray-600"
-              >
-                Not Now
-              </button>
-            </div>
+            <button
+              onClick={requestPermissions}
+              className="w-full bg-cyan-500 hover:bg-cyan-600 text-black font-black py-3 rounded-xl mb-3"
+            >
+              Allow
+            </button>
+            <button
+              onClick={() => setShowPermissionRequest(false)}
+              className="w-full text-gray-500 text-sm"
+            >
+              Not now
+            </button>
           </motion.div>
         </motion.div>
       )}
       
-      {/* HEADER */}
-      <div className="flex-shrink-0 bg-gradient-to-r from-black via-gray-900 to-black border-b border-pink-500/30 p-4 flex items-center justify-between">
-          <div className="flex-1">
-            <div className="flex items-center gap-2 mb-1">
-              <COOLASFUCKWaves size={24} animate={connectionActive} />
-              <h1 className="text-xl font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-cyan-400 font-mono">AI51</h1>
-            </div>
-            <p className={`text-[10px] font-mono ${state.color} font-bold tracking-wider`}>{state.label}</p>
-          </div>
-        <div className="flex gap-2">
-          <motion.button
-            onClick={() => setVoiceEnabled(!voiceEnabled)}
-            whileTap={{ scale: 0.9 }}
-            className={`p-2 rounded-lg border transition-all ${
-              voiceEnabled ? 'border-cyan-500/50 bg-cyan-500/10' : 'border-gray-600 bg-black/40'
-            }`}
-          >
-            {voiceEnabled ? (
-              <Volume2 className="w-4 h-4 text-cyan-400" />
-            ) : (
-              <VolumeX className="w-4 h-4 text-gray-500" />
-            )}
-          </motion.button>
-          <motion.button
-            onClick={toggleConnection}
-            whileTap={{ scale: 0.9 }}
-            className={`p-2 rounded-lg border transition-all ${
-              connectionActive ? 'border-pink-500/50 bg-pink-500/10' : 'border-gray-600 bg-black/40'
-            }`}
-          >
+      {/* FULL SCREEN VISUALIZER - TAP TO CONNECT */}
+      <motion.div 
+        onClick={toggleConnection}
+        className="absolute inset-0 flex items-center justify-center cursor-pointer"
+      >
+        <div className="w-full h-full flex flex-col items-center justify-center px-6">
+          
+          {/* TITLE */}
+          {conversation.length === 0 && (
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="mb-12 text-center"
+            >
+              <h1 className="text-white font-black text-4xl mb-2 font-mono">AI51</h1>
+              <p className="text-gray-500 text-sm font-mono">TAP TO {connectionActive ? 'DISCONNECT' : 'CONNECT'}</p>
+            </motion.div>
+          )}
+          
+          {/* VISUALIZER */}
+          <div className="w-full max-w-md flex items-end justify-center gap-1" style={{ height: conversation.length > 0 ? '120px' : '200px' }}>
             {connectionActive ? (
-              <Mic className="w-4 h-4 text-pink-400" />
+              // Real frequency data
+              frequencyData.map((val, i) => (
+                <motion.div
+                  key={i}
+                  className={`flex-1 rounded-full ${
+                    isThinking ? 'bg-gradient-to-t from-amber-500 to-amber-400'
+                    : isListening ? 'bg-gradient-to-t from-pink-500 to-pink-400' 
+                    : isSpeaking ? 'bg-gradient-to-t from-green-500 to-green-400' 
+                    : 'bg-gradient-to-t from-cyan-500 to-cyan-400'
+                  }`}
+                  animate={{ height: `${Math.min(100, (val / 255) * 100)}%` }}
+                  transition={{ type: 'tween', duration: 0.05 }}
+                />
+              ))
             ) : (
-              <MicOff className="w-4 h-4 text-gray-500" />
-            )}
-          </motion.button>
-        </div>
-      </div>
-
-
-
-      {/* VISUALIZER + CONVERSATION */}
-      <div className="flex-1 overflow-hidden flex flex-col">
-        
-        {/* ALWAYS-ON VISUALIZER */}
-        <motion.div 
-          onClick={conversation.length === 0 ? toggleConnection : undefined}
-          className={`flex-shrink-0 ${conversation.length === 0 ? 'flex-1' : 'h-32'} transition-all duration-500 ${conversation.length === 0 ? 'cursor-pointer' : ''}`}
-        >
-          <div className="h-full flex flex-col items-center justify-center gap-4 px-4">
-            {conversation.length === 0 && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="text-center mb-4"
-              >
-                <p className="text-white font-black text-2xl mb-2 font-mono">AI51</p>
-                <p className="text-gray-500 text-sm">Tap visualizer to connect</p>
-              </motion.div>
-            )}
-            
-            <div className="w-full flex items-end justify-center gap-1 h-24">
-              {connectionActive ? (
-                // Real frequency data when connected
-                frequencyData.map((val, i) => (
+              // Breathing animation
+              Array.from({ length: 32 }).map((_, i) => {
+                const baseHeight = 20 + Math.sin(i * 0.5) * 15;
+                return (
                   <motion.div
                     key={i}
-                    className={`flex-1 rounded-full ${
-                      isListening ? 'bg-gradient-to-t from-pink-500 to-pink-400' 
-                      : isSpeaking ? 'bg-gradient-to-t from-green-500 to-green-400' 
-                      : 'bg-gradient-to-t from-cyan-500 to-cyan-400'
-                    }`}
-                    animate={{ height: `${Math.min(100, (val / 255) * 100)}%` }}
-                    transition={{ type: 'tween', duration: 0.05 }}
+                    className="flex-1 rounded-full bg-gradient-to-t from-cyan-500/30 to-cyan-400/30"
+                    animate={{ 
+                      height: [`${baseHeight}%`, `${baseHeight + 25}%`, `${baseHeight}%`],
+                      opacity: [0.3, 0.7, 0.3]
+                    }}
+                    transition={{ 
+                      duration: 2 + (i % 5) * 0.3,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                      delay: i * 0.05
+                    }}
                   />
-                ))
-              ) : (
-                // Ambient breathing animation when idle
-                Array.from({ length: 32 }).map((_, i) => {
-                  const baseHeight = 20 + Math.sin(i * 0.5) * 15;
-                  return (
-                    <motion.div
-                      key={i}
-                      className="flex-1 rounded-full bg-gradient-to-t from-cyan-500/40 to-cyan-400/40"
-                      animate={{ 
-                        height: [`${baseHeight}%`, `${baseHeight + 20}%`, `${baseHeight}%`],
-                        opacity: [0.3, 0.6, 0.3]
-                      }}
-                      transition={{ 
-                        duration: 2 + (i % 5) * 0.3,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                        delay: i * 0.05
-                      }}
-                    />
-                  );
-                })
-              )}
-            </div>
-            
-            {connectionActive && (
-              <p className={`text-xs font-mono font-bold ${state.color}`}>
-                {state.label}
-              </p>
+                );
+              })
             )}
           </div>
-        </motion.div>
+        </div>
+      </motion.div>
 
-        {/* CONVERSATION AREA */}
-        {conversation.length > 0 && (
-          <div className="flex-1 overflow-y-auto px-4 py-3 space-y-3 bg-black/50"
-          >
-            {conversation.map((msg, i) => (
-              <motion.div 
-                key={i} 
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
-              >
-                <div className={`rounded-2xl px-4 py-2.5 max-w-[85%] ${
-                  msg.role === 'user'
-                    ? 'bg-cyan-500/20 text-white border border-cyan-400/30'
-                    : 'bg-white/5 text-white border border-white/10'
-                }`}>
-                  <p className="text-[15px] leading-relaxed">{msg.content}</p>
-                </div>
-              </motion.div>
-            ))}
-            {isThinking && (
-              <motion.div 
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="flex justify-start"
-              >
-                <div className="bg-white/5 text-white/60 border border-white/10 rounded-2xl px-4 py-2.5">
-                  <motion.p 
-                    className="text-sm font-mono"
-                    animate={{ opacity: [0.4, 1, 0.4] }}
-                    transition={{ duration: 1.5, repeat: Infinity }}
-                  >
-                    thinking...
-                  </motion.p>
-                </div>
-              </motion.div>
-            )}
-            <div ref={messagesEndRef} />
-          </div>
-        )}
-      </div>
+      {/* CHAT OVERLAY (floats over bottom) */}
+      {conversation.length > 0 && (
+        <div className="absolute bottom-16 left-0 right-0 max-h-[50vh] overflow-y-auto px-4 py-3 space-y-3 pointer-events-none">
+          {conversation.map((msg, i) => (
+            <motion.div 
+              key={i} 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'} pointer-events-auto`}
+            >
+              <div className={`rounded-2xl px-4 py-2.5 max-w-[85%] backdrop-blur-xl ${
+                msg.role === 'user'
+                  ? 'bg-cyan-500/90 text-white'
+                  : 'bg-black/90 text-white border border-white/20'
+              }`}>
+                <p className="text-[15px] leading-relaxed">{msg.content}</p>
+              </div>
+            </motion.div>
+          ))}
+          {isThinking && (
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="flex justify-start pointer-events-auto"
+            >
+              <div className="bg-black/90 backdrop-blur-xl text-white/60 border border-white/20 rounded-2xl px-4 py-2.5">
+                <motion.p 
+                  className="text-sm font-mono"
+                  animate={{ opacity: [0.4, 1, 0.4] }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
+                >
+                  thinking...
+                </motion.p>
+              </div>
+            </motion.div>
+          )}
+          <div ref={messagesEndRef} />
+        </div>
+      )}
 
-      {/* LIVE TRANSCRIPT */}
+      {/* TRANSCRIPT */}
       {transcript && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="flex-shrink-0 bg-cyan-500/10 border-t border-cyan-500/30 px-3 py-2"
+          className="absolute bottom-16 left-0 right-0 px-4 py-2 bg-cyan-500/20 backdrop-blur-xl border-t border-cyan-500/30"
         >
-          <p className="text-cyan-300 font-mono text-xs truncate">📍 {transcript}</p>
+          <p className="text-cyan-300 font-mono text-xs truncate text-center">{transcript}</p>
         </motion.div>
       )}
 
-      {/* TIME */}
-      <div className="flex-shrink-0 bg-black border-t border-pink-500/20 px-3 py-2 text-center">
-        <div className="font-mono text-pink-400 text-xs">
-          {new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })}
+      {/* FOOTER - JUST CLOCK */}
+      <div className="absolute bottom-0 left-0 right-0 bg-black/80 backdrop-blur-xl border-t border-white/10 px-4 py-3">
+        <div className="font-mono text-cyan-400 text-sm text-center font-black">
+          {new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
         </div>
       </div>
 
