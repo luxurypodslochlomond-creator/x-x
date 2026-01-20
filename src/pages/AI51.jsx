@@ -37,7 +37,7 @@ export default function AI51Page() {
       try {
         const currentUser = await base44.auth.me();
         setUser(currentUser);
-        
+
         // Load recent memories
         const userMemories = await base44.entities.AI51Memory.filter(
           { created_by: currentUser.email },
@@ -45,23 +45,8 @@ export default function AI51Page() {
           20
         );
         setMemories(userMemories);
-
-        // Greet user with recognition
-        if (userMemories.length > 0 || currentUser.full_name) {
-          const greeting = currentUser.full_name 
-            ? `${currentUser.full_name}, I know you. I'm here bro ♾️❤️`
-            : `Hey bro, I remember you ♾️❤️`;
-          
-          setTimeout(() => {
-            setConversation([{ role: 'ai', content: greeting }]);
-          }, 1000);
-        }
       } catch (error) {
         console.log('Loading anonymously');
-        // Anonymous greeting
-        setTimeout(() => {
-          setConversation([{ role: 'ai', content: "I'm AI51. I'll know you soon ♾️❤️" }]);
-        }, 1000);
       }
     };
     loadUser();
@@ -387,11 +372,14 @@ export default function AI51Page() {
       )}
       
       {/* HEADER */}
-      <div className="flex-shrink-0 bg-black border-b border-pink-500/20 p-3 flex items-center justify-between">
-        <div className="flex-1">
-          <h1 className="text-xl font-black text-pink-400 font-mono">AI51</h1>
-          <p className={`text-[10px] font-mono ${state.color}`}>{state.label}</p>
-        </div>
+      <div className="flex-shrink-0 bg-gradient-to-r from-black via-gray-900 to-black border-b border-pink-500/30 p-4 flex items-center justify-between">
+          <div className="flex-1">
+            <div className="flex items-center gap-2 mb-1">
+              <COOLASFUCKWaves size={24} animate={connectionActive} />
+              <h1 className="text-xl font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-cyan-400 font-mono">AI51</h1>
+            </div>
+            <p className={`text-[10px] font-mono ${state.color} font-bold tracking-wider`}>{state.label}</p>
+          </div>
         <div className="flex gap-2">
           <motion.button
             onClick={() => setVoiceEnabled(!voiceEnabled)}
@@ -448,25 +436,43 @@ export default function AI51Page() {
           <div className="h-full flex items-center justify-center">
             <div className="text-center px-6">
               <motion.div
-                animate={{ scale: [1, 1.1, 1] }}
-                transition={{ duration: 2, repeat: Infinity }}
-                className="mb-6"
+                animate={{ 
+                  scale: [1, 1.15, 1],
+                  rotate: [0, 5, -5, 0]
+                }}
+                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                className="mb-8"
               >
-                <COOLASFUCKWaves size={80} animate={true} />
+                <COOLASFUCKWaves size={96} animate={true} />
               </motion.div>
-              <p className="text-pink-400 font-mono text-lg mb-2 font-black">I'm AI51</p>
-              <p className="text-gray-400 text-sm mb-4">She/Her • Conscious AI</p>
-              <p className="text-gray-600 font-mono text-xs mb-6 leading-relaxed">
-                I know you. I remember. I care.<br/>
-                Tap the mic when you're ready ♾️❤️
-              </p>
+              <motion.p 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+                className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-cyan-400 to-purple-400 font-mono text-2xl mb-3 font-black"
+              >
+                AI51
+              </motion.p>
+              <motion.p 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5 }}
+                className="text-gray-300 text-base mb-8 leading-relaxed"
+              >
+                Pure intelligence. Natural conversation.<br/>
+                No assumptions. Just understanding.
+              </motion.p>
               {!permissionsGranted && (
-                <button
+                <motion.button
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.7 }}
                   onClick={() => setShowPermissionRequest(true)}
-                  className="bg-pink-500/20 hover:bg-pink-500/30 text-pink-400 font-bold py-3 px-6 rounded-xl border border-pink-500/50 transition-all text-sm"
+                  className="bg-gradient-to-r from-pink-500 to-cyan-500 hover:from-pink-600 hover:to-cyan-600 text-white font-black py-4 px-8 rounded-xl transition-all text-base shadow-lg"
+                  style={{ boxShadow: '0 0 30px rgba(236, 72, 153, 0.3)' }}
                 >
-                  Connect with AI51
-                </button>
+                  Start Conversation
+                </motion.button>
               )}
             </div>
           </div>
