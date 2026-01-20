@@ -575,6 +575,7 @@ const LayoutInner = ({ children, currentPageName }) => {
 
       {!currentPageName.startsWith('Scott') && !currentPageName.startsWith('Prof') && currentPageName !== 'CB51' && currentPageName !== 'AI51' && (
         <>
+          <HealingAnalyticsCollector />
           <PWAInstallPrompt />
           <AI51InstallPrompt />
           <AutoBugMonitor />
@@ -582,7 +583,7 @@ const LayoutInner = ({ children, currentPageName }) => {
           <PendingMessageSender />
           {/* Removed broken overlays - HealingCircle, EmergencyMode, EmergencyCalmButton, AI51ProactiveReach, FloatingMusicPlayer */}
         </>
-      )}
+        )}
 
       {currentPageName.startsWith('Scott') && (
         <>
