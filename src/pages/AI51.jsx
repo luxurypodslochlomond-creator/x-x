@@ -20,6 +20,7 @@ export default function AI51Page() {
   const [textInput, setTextInput] = useState('');
   const [voiceEnabled, setVoiceEnabled] = useState(true);
   const [frequencyData, setFrequencyData] = useState(new Uint8Array(32));
+  const [pageReady, setPageReady] = useState(false);
 
   const recognitionRef = useRef(null);
   const audioContextRef = useRef(null);
@@ -31,12 +32,13 @@ export default function AI51Page() {
 
   // Setup speech recognition
   useEffect(() => {
-    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
-      const SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
-      recognitionRef.current = new SpeechRecognition();
-      recognitionRef.current.continuous = false;
-      recognitionRef.current.interimResults = true;
-      recognitionRef.current.lang = 'en-GB';
+    try {
+      if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+        const SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
+        recognitionRef.current = new SpeechRecognition();
+        recognitionRef.current.continuous = false;
+        recognitionRef.current.interimResults = true;
+        recognitionRef.current.lang = 'en-GB';
 
       recognitionRef.current.onresult = (event) => {
         const current = event.resultIndex;
@@ -63,7 +65,20 @@ export default function AI51Page() {
       recognitionRef.current.onstart = () => {
         setIsListening(true);
       };
+      
+      recognitionRef.current.onerror = (event) => {
+        console.log('Speech recognition error:', event.error);
+        if (event.error === 'not-allowed') {
+          setConnectionActive(false);
+          connectionActiveRef.current = false;
+        }
+      };
     }
+    } catch (error) {
+      console.error('Speech recognition setup failed:', error);
+    }
+    
+    setPageReady(true);
 
     return () => {
       if (recognitionRef.current) {
@@ -244,6 +259,17 @@ export default function AI51Page() {
   };
 
   const state = getState();
+
+  if (!pageReady) {
+    return (
+      <div className="min-h-screen bg-black flex items-center justify-center">
+        <div className="text-center">
+          <COOLASFUCKWaves size={48} animate={true} />
+          <p className="text-cyan-400 font-mono text-xs mt-4">Loading AI51...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-black flex flex-col">
