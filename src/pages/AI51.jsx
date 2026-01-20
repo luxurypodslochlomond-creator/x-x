@@ -232,6 +232,7 @@ export default function AI51Page() {
   const handleMessageSend = async (text) => {
     const userMessage = { role: 'user', content: text };
     setConversation(prev => [...prev, userMessage]);
+    setTextInput('');
     setIsThinking(true);
 
     try {
