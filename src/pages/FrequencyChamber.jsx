@@ -2870,30 +2870,7 @@ export default function FrequencyChamber() {
 
 
 
-      {/* WHY THIS WORKS - COLLAPSIBLE */}
-      {!selectedProtocol && (
-      <div className="max-w-4xl mx-auto p-4">
-        <button
-          onClick={() => setShowFullEvidence(!showFullEvidence)}
-          className="w-full bg-gradient-to-r from-cyan-900/40 to-purple-900/40 border-4 border-cyan-500 p-4 flex items-center justify-between hover:border-cyan-400 transition-all"
-        >
-          <div className="flex items-center gap-3">
-            <Brain className="w-8 h-8 text-cyan-400" />
-            <h3 className="text-cyan-400 font-black text-xl font-mono">PEER-REVIEWED SCIENCE</h3>
-          </div>
-          <motion.div animate={{ rotate: showFullEvidence ? 180 : 0 }}>
-            <ChevronDown className="w-6 h-6 text-cyan-400" />
-          </motion.div>
-        </button>
 
-        <AnimatePresence>
-          {showFullEvidence && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              className="bg-gradient-to-r from-cyan-900/40 to-purple-900/40 border-4 border-cyan-500 border-t-0 rounded-b-xl p-6"
-            >
           <div className="space-y-4 text-sm font-mono text-white">
             <div>
               <p className="text-purple-400 font-bold mb-2">LATEST RESEARCH:</p>
