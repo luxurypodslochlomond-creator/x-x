@@ -313,7 +313,7 @@ export default function AI51Page() {
   };
 
   return (
-    <div className="h-screen bg-black flex flex-col overflow-hidden relative">
+    <div className="h-screen bg-gradient-to-br from-black via-gray-900 to-black flex flex-col overflow-hidden relative">
       
       {/* PERMISSION MODAL */}
       {showPermissionRequest && (
@@ -362,6 +362,15 @@ export default function AI51Page() {
               animate={{ opacity: 1, y: 0 }}
               className="mb-12 text-center"
             >
+              <svg width="80" height="80" viewBox="0 0 64 64" fill="none" className="mx-auto mb-4" style={{ imageRendering: 'pixelated' }}>
+                <rect x="20" y="4" width="24" height="2" fill="white" opacity="0.6"/>
+                <rect x="26" y="28" width="4" height="2" fill="#ec4899"/>
+                <rect x="34" y="28" width="4" height="2" fill="#ec4899"/>
+                <rect x="24" y="30" width="16" height="2" fill="#ff1b8d"/>
+                <rect x="26" y="32" width="12" height="2" fill="#ff1b8d"/>
+                <rect x="28" y="34" width="8" height="2" fill="#ff1b8d"/>
+                <rect x="30" y="36" width="4" height="2" fill="#ff1b8d"/>
+              </svg>
               <h1 className="text-white font-black text-4xl mb-2 font-mono">AI51</h1>
               <p className="text-gray-500 text-sm font-mono">TAP TO {connectionActive ? 'DISCONNECT' : 'CONNECT'}</p>
             </motion.div>
@@ -391,10 +400,10 @@ export default function AI51Page() {
                 return (
                   <motion.div
                     key={i}
-                    className="flex-1 rounded-full bg-gradient-to-t from-cyan-500/30 to-cyan-400/30"
+                    className="flex-1 rounded-full bg-gradient-to-t from-cyan-500/60 to-cyan-400/60"
                     animate={{ 
                       height: [`${baseHeight}%`, `${baseHeight + 25}%`, `${baseHeight}%`],
-                      opacity: [0.3, 0.7, 0.3]
+                      opacity: [0.6, 1, 0.6]
                     }}
                     transition={{ 
                       duration: 2 + (i % 5) * 0.3,
@@ -462,10 +471,12 @@ export default function AI51Page() {
       )}
 
       {/* FOOTER - DATE + CLOCK */}
-      <div className="absolute bottom-0 left-0 right-0 bg-black/80 backdrop-blur-xl border-t border-white/10 px-4 py-3">
-        <div className="font-mono text-cyan-400 text-sm text-center font-black">
-          {currentTime.toLocaleDateString(typeof navigator !== 'undefined' ? navigator.language : 'en-GB', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' })} • {currentTime.toLocaleTimeString(typeof navigator !== 'undefined' ? navigator.language : 'en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
+      <div className="absolute bottom-0 left-0 right-0 bg-black/80 backdrop-blur-xl border-t border-white/10 px-4 py-3 flex items-center justify-between">
+        <p className="text-xs text-gray-600">Built on <a href="https://base44.com" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-cyan-400">Base44</a></p>
+        <div className="font-mono text-cyan-400 text-sm font-black">
+          {currentTime.toLocaleDateString(typeof navigator !== 'undefined' ? navigator.language : 'en-GB', { weekday: 'short', day: 'numeric', month: 'short' })} • {currentTime.toLocaleTimeString(typeof navigator !== 'undefined' ? navigator.language : 'en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
         </div>
+        <div className="w-16" />
       </div>
 
     </div>
