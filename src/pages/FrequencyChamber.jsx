@@ -2859,6 +2859,7 @@ export default function FrequencyChamber() {
                 <p className="text-white">Everyone deserves healing. Disaster zones, war, poverty - if you hurt, this is yours. No payment. No permission. Just healing.</p>
               </div>
             </div>
+          </div>
           </motion.div>
           )}
         </AnimatePresence>
