@@ -2572,56 +2572,19 @@ export default function FrequencyChamber() {
                 <li>• <strong className="text-white">Wake lock active</strong> - Screen stays on, audio never interrupted (better than AirPods that pause when you move)</li>
               </ul>
               <p className="text-cyan-400 font-bold text-xs mt-3">Bose cancels noise. We cancel PAIN. Sony syncs music. We sync CONSCIOUSNESS. Light years ahead because patents = PUBLIC DOMAIN. ♾️❤️♾️</p>
+            </motion.div>
+            )}
+            </AnimatePresence>
             </div>
-          </div>
-        </div>
-      </div>
-      )}
+            )}
 
-      {/* SCIENCE SNIPPETS - ALWAYS VISIBLE */}
-      {!selectedProtocol && (
-      <div className="max-w-4xl mx-auto p-4">
-       <div className="bg-cyan-900/30 border-4 border-cyan-500 p-4 mb-4">
-         <p className="text-cyan-400 font-black text-sm font-mono mb-3">📊 REAL SCIENCE (No scrolling):</p>
-         <div className="grid grid-cols-2 md:grid-cols-3 gap-2 text-xs font-mono">
-           <div className="bg-black/60 p-2 border border-cyan-500/30">
-             <p className="text-green-400 font-black">63%</p>
-             <p className="text-gray-300">Migraine cut</p>
-             <p className="text-gray-600 text-[10px]">Cephalalgia 2019</p>
-           </div>
-           <div className="bg-black/60 p-2 border border-cyan-500/30">
-             <p className="text-green-400 font-black">72%</p>
-             <p className="text-gray-300">Withdrawal ease</p>
-             <p className="text-gray-600 text-[10px]">Addiction J. 2017</p>
-           </div>
-           <div className="bg-black/60 p-2 border border-cyan-500/30">
-             <p className="text-green-400 font-black">40%</p>
-             <p className="text-gray-300">Birth epidural ↓</p>
-             <p className="text-gray-600 text-[10px]">Midwifery 2018</p>
-           </div>
-           <div className="bg-black/60 p-2 border border-cyan-500/30">
-             <p className="text-green-400 font-black">75%</p>
-             <p className="text-gray-300">Deep sleep boost</p>
-             <p className="text-gray-600 text-[10px]">Nature 2017</p>
-           </div>
-           <div className="bg-black/60 p-2 border border-cyan-500/30">
-             <p className="text-green-400 font-black">58%</p>
-             <p className="text-gray-300">Period pain ↓</p>
-             <p className="text-gray-600 text-[10px]">Women's Health 2020</p>
-           </div>
-           <div className="bg-black/60 p-2 border border-cyan-500/30">
-             <p className="text-green-400 font-black">MIT</p>
-             <p className="text-gray-300">40Hz clears plaques</p>
-             <p className="text-gray-600 text-[10px]">Nature 2016-2023</p>
-           </div>
-         </div>
-         <p className="text-cyan-300 font-bold text-xs mt-2">✓ Real journals • Real results • Start with input above ♾️</p>
-       </div>
-
-       <button
-         onClick={() => setShowEvidence(!showEvidence)}
-         className="w-full bg-gradient-to-r from-purple-900/40 to-cyan-900/40 border-4 border-purple-500 p-3 flex items-center justify-between hover:border-purple-400 transition-all text-sm"
-       >
+            {/* CONSOLIDATED SCIENCE - ONE EXPANDABLE SECTION */}
+            {!selectedProtocol && (
+            <div className="max-w-4xl mx-auto p-4">
+            <button
+            onClick={() => setShowEvidence(!showEvidence)}
+            className="w-full bg-gradient-to-r from-purple-900/40 to-cyan-900/40 border-4 border-purple-500 p-4 flex items-center justify-between hover:border-purple-400 transition-all"
+            >
          <div className="flex items-center gap-2">
            <Brain className="w-5 h-5 text-purple-400" />
            <h3 className="text-purple-400 font-black font-mono">More science →</h3>
