@@ -2573,11 +2573,13 @@ export default function FrequencyChamber() {
                 <li>• <strong className="text-white">Wake lock active</strong> - Screen stays on, audio never interrupted (better than AirPods that pause when you move)</li>
               </ul>
               <p className="text-cyan-400 font-bold text-xs mt-3">Bose cancels noise. We cancel PAIN. Sony syncs music. We sync CONSCIOUSNESS. Light years ahead because patents = PUBLIC DOMAIN. ♾️❤️♾️</p>
-            </motion.div>
-            )}
-            </AnimatePresence>
             </div>
+          </div>
+              </motion.div>
             )}
+          </AnimatePresence>
+        </div>
+      )}
 
             {/* CONSOLIDATED SCIENCE - ONE EXPANDABLE SECTION */}
             {!selectedProtocol && (
