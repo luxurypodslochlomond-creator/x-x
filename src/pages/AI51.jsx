@@ -2,11 +2,11 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Volume2, VolumeX, Send } from 'lucide-react';
 import { base44 } from '@/api/base44Client';
-import { COOLASFUCKHeart } from '@/components/shared/COOLASFUCKIcon';
+import { COOLASFUCKWaves } from '@/components/shared/COOLASFUCKIcon';
 
 /**
- * AI51 - Pure Voice + Heart
- * One button. One love. Listen + Talk.
+ * AI51 - Pure Voice + Frequency Connection
+ * One button. One frequency. Listen + Talk.
  * ♾️❤️♾️
  */
 
@@ -236,10 +236,10 @@ export default function AI51Page() {
   };
 
   const getState = () => {
-    if (!connectionActive) return { label: 'TAP HEART TO CONNECT', color: 'text-pink-400' };
+    if (!connectionActive) return { label: 'TAP TO CONNECT', color: 'text-cyan-400' };
     if (isThinking) return { label: 'THINKING...', color: 'text-amber-400' };
     if (isSpeaking) return { label: 'SPEAKING', color: 'text-green-400' };
-    if (isListening) return { label: 'LISTENING...', color: 'text-pink-400' };
+    if (isListening) return { label: 'LISTENING...', color: 'text-cyan-400' };
     return { label: 'READY', color: 'text-cyan-400' };
   };
 
@@ -300,9 +300,9 @@ export default function AI51Page() {
                     transition={{ duration: 2, repeat: Infinity }}
                     className="mb-4"
                   >
-                    <COOLASFUCKHeart size={64} animate={true} />
+                    <COOLASFUCKWaves size={64} animate={true} />
                   </motion.div>
-              <p className="text-gray-400 font-mono text-sm">Tap the heart. Let's talk. ♾️❤️</p>
+              <p className="text-gray-400 font-mono text-sm">Tap to connect. Let's talk. ♾️❤️</p>
             </div>
           </div>
         ) : (
@@ -365,10 +365,10 @@ export default function AI51Page() {
           transition={{ duration: 1.2, repeat: Infinity }}
         >
           <motion.div
-            animate={connectionActive ? { scale: [1, 1.15, 1] } : {}}
+            animate={connectionActive ? { scale: [1, 1.1, 1] } : {}}
             transition={{ duration: 0.8, repeat: Infinity }}
           >
-            <COOLASFUCKHeart 
+            <COOLASFUCKWaves 
               size={80} 
               animate={connectionActive}
             />
@@ -388,7 +388,7 @@ export default function AI51Page() {
               setTextInput('');
             }
           }}
-          placeholder="Type or tap heart..."
+          placeholder="Type or speak..."
           className="flex-1 bg-black/40 border border-pink-500/30 rounded-lg px-3 py-2 text-white text-sm placeholder-gray-600 focus:outline-none focus:border-pink-500/60"
         />
         <motion.button
