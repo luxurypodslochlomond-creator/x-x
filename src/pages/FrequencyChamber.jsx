@@ -3353,6 +3353,32 @@ export default function FrequencyChamber() {
                   </span>
                 </div>
               </div>
+
+              {/* SESSION DURATION - BEFORE START BUTTON */}
+              <div className="mb-6">
+                <div className="flex items-center justify-between mb-2">
+                  <label className="text-gray-400 font-mono text-sm">AUTO-STOP IN:</label>
+                  <span className="text-lg font-black font-mono" style={{ color: selectedProtocol.color }}>
+                    {sessionDuration} minutes
+                  </span>
+                </div>
+                <div className="flex gap-2">
+                  {[10, 15, 20, 30].map(mins => (
+                    <button
+                      key={mins}
+                      onClick={() => setSessionDuration(mins)}
+                      className={`flex-1 py-2 rounded font-black font-mono text-xs transition-all border-2 ${
+                        sessionDuration === mins
+                          ? 'border-green-500 bg-green-500/20 text-green-400'
+                          : 'border-gray-600 bg-black text-gray-400 hover:border-gray-400'
+                      }`}
+                    >
+                      {mins}m
+                    </button>
+                  ))}
+                </div>
+                <p className="text-gray-500 text-xs font-mono mt-2">Healing stops automatically. Adjust if needed bro ♾️</p>
+              </div>
             </div>
           </motion.div>
         )}
