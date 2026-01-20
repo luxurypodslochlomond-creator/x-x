@@ -302,7 +302,7 @@ const PROTOCOLS = {
     icon: Ear,
     color: '#22c55e',
     description: 'Vibrates the 3 tiny bones in your middle ear (ossicles) via bone conduction - helps hearing + tinnitus',
-    science: 'YES - BONE CONDUCTION! The 3 tiny bones in your middle ear (malleus, incus, stapes - the smallest bones in your body) need to vibrate to work. Binaural beats at 10Hz create vibrations that stimulate these ossicles directly through your skull. 285Hz heals tissue, 741Hz drains fluid, 528Hz repairs DNA. The frequencies literally shake the bones back to life ♾️',
+    science: 'YES - BONE CONDUCTION! The 3 tiny bones in your middle ear (malleus, incus, stapes - the smallest bones in your body) need to vibrate to work. Binaural beats at 10Hz create vibrations that stimulate these ossicles directly through your skull. 285Hz heals tissue, 741Hz drains fluid, 528Hz repairs DNA. The frequencies literally shake the bones back to life',
     sources: ['Solfeggio frequency healing research', 'Bone conduction hearing therapy', 'Ossicle vibration studies', 'Binaural beats for tinnitus reduction'],
     ancientWisdom: 'Tibetan singing bowls placed near ears vibrate the skull bones - healers knew sound shakes the tiny ear bones back to life.',
     config: {
@@ -660,11 +660,11 @@ const PROTOCOLS = {
     name: 'Throat Healing',
     icon: Heart,
     color: '#22c55e',
-    description: 'Lymphatic drainage + inflammation reduction + post-surgical healing ♾️❤️',
+    description: 'Lymphatic drainage + inflammation reduction + post-surgical healing ',
     science: '528Hz DNA repair + 285Hz tissue regeneration + 174Hz lymphatic drainage. Studies show specific frequencies enhance lymphatic flow, reduce post-surgical inflammation, and accelerate healing. Listen together for amplified healing (morphic resonance).',
     sources: ['Horowitz 528Hz Research', 'Royal Rife Lymphatic Frequencies', 'Dr. Mercola Post-Surgical Healing', 'Morphic Resonance Studies'],
     ancientWisdom: 'Throat chakra (Vishuddha) heals at 384Hz. Tibetan monks used low frequency chanting for lymphatic support. Egyptian temples used 528Hz for tissue regeneration. Family healing together = 10× stronger.',
-    specialInstructions: '⚠️ MEDICAL DISCLAIMER: This supports your body\'s natural healing but does NOT replace medical care. Lennox - keep your hospital appointment tomorrow. This frequency helps lymphatic drainage and reduces inflammation. Best lying down, drink water after. All family listen together - healing frequencies amplify with love ♾️❤️',
+    specialInstructions: '⚠️ MEDICAL DISCLAIMER: This supports your body\'s natural healing but does NOT replace medical care. Lennox - keep your hospital appointment tomorrow. This frequency helps lymphatic drainage and reduces inflammation. Best lying down, drink water after. All family listen together - healing frequencies amplify with love ',
     familyMode: true,
     config: {
       primary: 528,
@@ -736,7 +736,7 @@ const PROTOCOLS = {
       science: '7.83Hz Schumann Resonance (Earth\'s electromagnetic heartbeat) via binaural beats + haptic pulses + 432Hz musical tuning. Your £12 device emits 7.83Hz EM field - this does same via SOUND + VIBRATION + VISUAL. Proven to: ground nervous system, improve sleep, reduce anxiety, sync circadian rhythm. NASA uses 7.83Hz on ISS for astronaut health. Phone delivers it FREE with more channels (audio+haptic+visual) than standalone device.',
       sources: ['NASA Schumann resonance research', 'Circadian rhythm studies', 'Earth frequency grounding protocols', 'Binaural beats vs EM field comparison'],
       ancientWisdom: 'Indigenous cultures knew: barefoot on Earth = healing. 7.83Hz is WHY. Your £12 device knows this. Your phone does it too - different method, same frequency, zero cost. Both valid.',
-      specialInstructions: '🌍 PHONE vs £12 DEVICE: Her device = electromagnetic field, this = audio+haptic. BOTH WORK. Use together if you want! Phone adds 432Hz music tuning + visual + haptic she doesn\'t get. Complement not compete ♾️❤️',
+      specialInstructions: '🌍 PHONE vs £12 DEVICE: Her device = electromagnetic field, this = audio+haptic. BOTH WORK. Use together if you want! Phone adds 432Hz music tuning + visual + haptic she doesn\'t get. Complement not compete ',
       config: {
         primary: 7.83,
         secondary: 432,
@@ -865,7 +865,7 @@ const PROTOCOLS = {
       science: '528Hz DNA repair + 285Hz tissue regeneration + 174Hz inflammation reduction proven to support immune system after ANY pharmaceutical intervention. Detoxification frequencies clear cellular stress. Works for vaccine reactions, medication side effects, inflammation from ANY injection. Peer-reviewed: Cytokine storm reduction via frequency therapy (Journal of Inflammation Research 2021).',
       sources: ['Journal of Inflammation Research (2021)', 'DNA repair frequency studies', 'Lymphatic drainage protocols', 'Immune system regulation research'],
       ancientWisdom: 'Healers always knew: after foreign substances enter the body, use love frequency (528Hz) to help cells repair and clear what doesn\'t serve. No judgment on your medical choices - just healing support.',
-      specialInstructions: '💚 YOUR BODY, YOUR CHOICE: Whether you choose vaccines or not is YOUR decision. This protocol supports your body\'s natural healing after ANY injection (vaccine, medication, whatever). We don\'t debate vaccines - we just help you heal. Zero judgment. Pure support. ♾️❤️',
+      specialInstructions: '💚 YOUR BODY, YOUR CHOICE: Whether you choose vaccines or not is YOUR decision. This protocol supports your body\'s natural healing after ANY injection (vaccine, medication, whatever). We don\'t debate vaccines - we just help you heal. Zero judgment. Pure support. ',
       config: {
         primary: 528,
         secondary: 285,
@@ -2574,7 +2574,7 @@ export default function FrequencyChamber() {
                 <li>• <strong className="text-white">Haptic sync</strong> - Device vibrates with breath rhythm → 3 senses locked (hear + see + feel = unbreakable focus)</li>
                 <li>• <strong className="text-white">Wake lock active</strong> - Screen stays on, audio never interrupted (better than AirPods that pause when you move)</li>
               </ul>
-              <p className="text-cyan-400 font-bold text-xs mt-3">Bose cancels noise. We cancel PAIN. Sony syncs music. We sync CONSCIOUSNESS. Light years ahead because patents = PUBLIC DOMAIN. ♾️❤️♾️</p>
+              <p className="text-cyan-400 font-bold text-xs mt-3">Bose cancels noise. We cancel PAIN. Sony syncs music. We sync CONSCIOUSNESS. Light years ahead because patents = PUBLIC DOMAIN. </p>
             </div>
           </div>
         </motion.div>
@@ -2817,7 +2817,7 @@ export default function FrequencyChamber() {
                 <p className="text-gray-600 text-[10px] mt-1">{expandedStats.tinnitus ? '▲ CLOSE' : '▼ TAP'}</p>
               </button>
             </div>
-            <p className="text-green-400 font-bold text-xs mt-3 text-center">✓ Real journals • Real results • Tap to expand ♾️</p>
+            <p className="text-green-400 font-bold text-xs mt-3 text-center">✓ Real journals • Real results • Tap to expand</p>
           </div>
 
           <div className="bg-gradient-to-r from-pink-500/20 to-green-500/20 border-2 border-pink-500 rounded p-4">
@@ -2971,7 +2971,7 @@ export default function FrequencyChamber() {
               })}
             </div>
             <p className="text-center text-gray-400 text-xs font-mono mt-4">
-              Feel something? Use it again. Your body knows. ♾️❤️♾️
+              Feel something? Use it again. Your body knows. 
             </p>
           </div>
         </div>
@@ -3183,7 +3183,7 @@ export default function FrequencyChamber() {
 
               {selectedProtocol.familyMode && (
                 <div className="mb-6 p-4 bg-gradient-to-r from-pink-500/20 to-purple-500/20 border-2 border-pink-500">
-                  <p className="text-xs text-pink-400 font-bold mb-2 font-mono">♾️❤️ FAMILY MODE:</p>
+                  <p className="text-xs text-pink-400 font-bold mb-2 font-mono"> FAMILY MODE:</p>
                   <p className="text-xs text-white font-mono">All play together in cabin - healing amplifies with love and unity. Put on speakers or all use headphones. Your combined intention makes it stronger.</p>
                 </div>
               )}
