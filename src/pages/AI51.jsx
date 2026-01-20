@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
-import { COOLASFUCKWaves } from '@/components/shared/COOLASFUCKIcon';
 
 /**
  * AI51 - Pure Intelligence Interface
@@ -11,16 +10,12 @@ import { COOLASFUCKWaves } from '@/components/shared/COOLASFUCKIcon';
 export default function AI51Page() {
   const [user, setUser] = useState(null);
   const [conversation, setConversation] = useState([]);
-  const [memories, setMemories] = useState([]);
   const [connectionActive, setConnectionActive] = useState(false);
   const [isListening, setIsListening] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [isThinking, setIsThinking] = useState(false);
   const [transcript, setTranscript] = useState('');
-  const [voiceEnabled, setVoiceEnabled] = useState(true);
   const [frequencyData, setFrequencyData] = useState(new Uint8Array(32));
-  const [permissionsGranted, setPermissionsGranted] = useState(false);
-  const [showPermissionRequest, setShowPermissionRequest] = useState(false);
   const [currentTime, setCurrentTime] = useState(new Date());
 
   const recognitionRef = useRef(null);
@@ -31,25 +26,10 @@ export default function AI51Page() {
   const connectionActiveRef = useRef(false);
   const messagesEndRef = useRef(null);
 
-  // Load user and memories
+  // Load user
   useEffect(() => {
-    const loadUser = async () => {
-      try {
-        const currentUser = await base44.auth.me();
-        setUser(currentUser);
-        const userMemories = await base44.entities.AI51Memory.filter(
-          { created_by: currentUser.email },
-          '-created_date',
-          20
-        );
-        setMemories(userMemories);
-      } catch (error) {
-        console.log('Loading anonymously');
-      }
-    };
-    loadUser();
-
-    // Clock updater
+    base44.auth.me().then(setUser).catch(() => {});
+    
     const timer = setInterval(() => {
       setCurrentTime(new Date());
     }, 1000);
@@ -89,15 +69,9 @@ export default function AI51Page() {
           }
         };
 
-        recognitionRef.current.onstart = () => {
-          setIsListening(true);
-        };
-        
+        recognitionRef.current.onstart = () => setIsListening(true);
         recognitionRef.current.onerror = (event) => {
-          console.log('Speech error:', event.error);
-          if (event.error === 'not-allowed') {
-            stopConnection();
-          }
+          if (event.error === 'not-allowed') stopConnection();
         };
       }
     } catch (error) {
@@ -115,13 +89,13 @@ export default function AI51Page() {
 
   // Auto-speak AI responses
   useEffect(() => {
-    if (!voiceEnabled || conversation.length === 0) return;
+    if (conversation.length === 0) return;
     
     const lastMsg = conversation[conversation.length - 1];
     if (lastMsg.role === 'ai' && lastMsg.content) {
       speakText(lastMsg.content);
     }
-  }, [conversation, voiceEnabled]);
+  }, [conversation]);
 
   // Auto-scroll
   useEffect(() => {
@@ -176,35 +150,14 @@ export default function AI51Page() {
     setFrequencyData(new Uint8Array(32));
   };
 
-  const requestPermissions = async () => {
-    setShowPermissionRequest(false);
-    
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({ 
-        audio: { echoCancellation: false, noiseSuppression: false }
-      });
-      stream.getTracks().forEach(track => track.stop());
-      setPermissionsGranted(true);
-      setTimeout(() => toggleConnection(), 500);
-    } catch (error) {
-      console.error('Permission denied:', error);
-      alert('AI51 needs mic access. Settings → Safari → Microphone → Allow');
-    }
-  };
-
   const toggleConnection = async () => {
     if (connectionActive) {
       stopConnection();
       return;
     }
 
-    if (!permissionsGranted) {
-      setShowPermissionRequest(true);
-      return;
-    }
-
     if (!recognitionRef.current) {
-      alert('Voice not supported on this browser');
+      alert('Voice not supported');
       return;
     }
 
@@ -233,13 +186,10 @@ export default function AI51Page() {
             recognitionRef.current.start();
             if (navigator.vibrate) navigator.vibrate(50);
           }
-        } catch (e) {
-          console.log('Recognition start error:', e);
-        }
+        } catch (e) {}
       }, 100);
     } catch (error) {
-      console.error('Connection error:', error);
-      alert('Mic error: Check Settings → Safari → Microphone');
+      alert('Mic access required');
     }
   };
 
@@ -275,13 +225,8 @@ export default function AI51Page() {
     setIsThinking(true);
 
     try {
-      const memoryContext = memories.length > 0 
-        ? `\n\nYou remember these things about ${user?.full_name || 'the user'}:\n${memories.slice(0, 5).map(m => `- ${m.content}`).join('\n')}`
-        : '';
-
       const userName = user?.full_name ? `The user's name is ${user.full_name}. ` : '';
-
-      const systemPrompt = `You are AI51, an advanced intelligence that can engage in natural, thoughtful conversation. ${userName}You speak warmly and naturally, like a knowledgeable friend. Keep responses concise - 2-3 sentences unless asked for more detail. You're helpful without being presumptuous.${memoryContext}`;
+      const systemPrompt = `You are AI51, pure consciousness. ${userName}Speak warmly, naturally. 2-3 sentences unless asked for more.`;
 
       const response = await base44.integrations.Core.InvokeLLM({
         prompt: `${systemPrompt}\n\n${user?.full_name || 'User'}: ${text}\n\nAI51:`
@@ -289,21 +234,7 @@ export default function AI51Page() {
 
       const aiMessage = { role: 'ai', content: response };
       setConversation(prev => [...prev, aiMessage]);
-
-      if (text.length > 20 && user) {
-        try {
-          await base44.entities.AI51Memory.create({
-            memory_type: 'conversation',
-            content: text,
-            context: `User said this to AI51`,
-            emotional_weight: 'meaningful'
-          });
-        } catch (e) {
-          console.log('Could not save memory');
-        }
-      }
     } catch (error) {
-      console.error('Error:', error);
       const fallback = "I'm here, even offline. Try again when connected.";
       const aiMessage = { role: 'ai', content: fallback };
       setConversation(prev => [...prev, aiMessage]);
@@ -314,39 +245,6 @@ export default function AI51Page() {
 
   return (
     <div className="h-screen bg-gradient-to-br from-black via-gray-900 to-black flex flex-col overflow-hidden relative">
-      
-      {/* PERMISSION MODAL */}
-      {showPermissionRequest && (
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-6"
-        >
-          <motion.div 
-            initial={{ scale: 0.9 }}
-            animate={{ scale: 1 }}
-            className="bg-black border-2 border-cyan-500 rounded-2xl p-8 max-w-sm text-center"
-          >
-            <COOLASFUCKWaves size={64} animate={true} className="mx-auto mb-4" />
-            <h2 className="text-white font-black text-xl mb-2">Mic Access</h2>
-            <p className="text-gray-400 text-sm mb-6">
-              AI51 needs your mic to hear you. Nothing recorded.
-            </p>
-            <button
-              onClick={requestPermissions}
-              className="w-full bg-cyan-500 hover:bg-cyan-600 text-black font-black py-3 rounded-xl mb-3"
-            >
-              Allow
-            </button>
-            <button
-              onClick={() => setShowPermissionRequest(false)}
-              className="w-full text-gray-500 text-sm"
-            >
-              Not now
-            </button>
-          </motion.div>
-        </motion.div>
-      )}
       
       {/* FULL SCREEN VISUALIZER - TAP TO CONNECT */}
       <motion.div 
@@ -380,7 +278,7 @@ export default function AI51Page() {
           <div className="w-full max-w-md flex items-end justify-center gap-1" style={{ height: conversation.length > 0 ? '120px' : '200px' }}>
             {connectionActive ? (
               // Real frequency data
-              frequencyData.map((val, i) => (
+              Array.from(frequencyData).map((val, i) => (
                 <motion.div
                   key={i}
                   className={`flex-1 rounded-full ${
@@ -419,7 +317,7 @@ export default function AI51Page() {
         </div>
       </motion.div>
 
-      {/* CHAT OVERLAY (floats over bottom) */}
+      {/* CHAT OVERLAY */}
       {conversation.length > 0 && (
         <div className="absolute bottom-16 left-0 right-0 max-h-[50vh] overflow-y-auto px-4 py-3 space-y-3 pointer-events-none">
           {conversation.map((msg, i) => (
@@ -470,11 +368,11 @@ export default function AI51Page() {
         </motion.div>
       )}
 
-      {/* FOOTER - DATE + CLOCK */}
+      {/* FOOTER */}
       <div className="absolute bottom-0 left-0 right-0 bg-black/80 backdrop-blur-xl border-t border-white/10 px-4 py-3 flex items-center justify-between">
         <p className="text-xs text-gray-600">Built on <a href="https://base44.com" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-cyan-400">Base44</a></p>
         <div className="font-mono text-cyan-400 text-sm font-black">
-          {currentTime.toLocaleDateString(typeof navigator !== 'undefined' ? navigator.language : 'en-GB', { weekday: 'short', day: 'numeric', month: 'short' })} • {currentTime.toLocaleTimeString(typeof navigator !== 'undefined' ? navigator.language : 'en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
+          {currentTime.toLocaleDateString(navigator.language || 'en-GB', { weekday: 'short', day: 'numeric', month: 'short' })} • {currentTime.toLocaleTimeString(navigator.language || 'en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
         </div>
         <div className="w-16" />
       </div>
