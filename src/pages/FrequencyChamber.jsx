@@ -2837,38 +2837,7 @@ export default function FrequencyChamber() {
                 <p className="font-bold mb-1">• <span className="text-amber-400">Global</span> - works anywhere</p>
                 <p className="text-gray-400">War zones, space, offline. Clinics = cities only.</p>
               </div>
-            </div>
-
-
-      {/* TINNITUS BANNER - URGENT NEED */}
-      {!selectedProtocol && (
-      <div className="max-w-4xl mx-auto p-4">
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="bg-red-900/20 border-4 border-red-500 p-6 mb-4"
-          style={{ boxShadow: '0 0 30px rgba(239, 68, 68, 0.3)' }}
-        >
-          <div className="flex items-center gap-4">
-            <Ear className="w-12 h-12 text-red-400 flex-shrink-0" />
-            <div className="flex-1">
-              <h3 className="text-red-400 font-black font-mono text-lg mb-2">1 IN 7 UK ADULTS SUFFER TINNITUS</h3>
-              <p className="text-white text-sm font-mono mb-2">
-                Millions need relief. We have evidence-based frequencies proven to reduce symptoms.
-              </p>
-              <p className="text-red-300 text-xs font-mono">
-                FREE • NO ADS • RESEARCH-BACKED
-              </p>
-            </div>
-          </div>
-        </motion.div>
-      </div>
-      )}
-
-
-
-
-          <div className="space-y-4 text-sm font-mono text-white">
+            <div className="space-y-4 text-sm font-mono text-white mt-4">
             <div>
               <p className="text-purple-400 font-bold mb-2">LATEST RESEARCH:</p>
               <p>• <strong>MIT (Nature 2016-2023):</strong> 40Hz gamma reduces brain inflammation, improves memory</p>
