@@ -106,9 +106,10 @@ export default function AI51Page() {
     }
   }, [conversation]);
 
-  // Auto-scroll
+  // Auto-scroll & persist
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    localStorage.setItem('ai51_conversation', JSON.stringify(conversation));
   }, [conversation]);
 
   const speakText = (text) => {
