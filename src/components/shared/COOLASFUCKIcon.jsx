@@ -838,5 +838,59 @@ export const COOLASFUCKTarget = ({ className = "", size = 24, animate = true }) 
     );
 };
 
+// 8-bit Fire/Flame (urgent/emergency healing)
+export const COOLASFUCKFire = ({ className = "", size = 24, animate = true }) => {
+    const Component = animate ? motion.svg : 'svg';
+    
+    return (
+        <Component
+            width={size}
+            height={size}
+            viewBox="0 0 24 24"
+            className={className}
+            animate={animate ? {
+                y: [-2, 2, -2],
+                opacity: [1, 0.8, 1]
+            } : {}}
+            transition={animate ? {
+                duration: 1.5,
+                repeat: Infinity,
+                ease: "easeInOut"
+            } : {}}
+        >
+            {/* 8-bit flame */}
+            {/* Base - red/orange */}
+            <rect x="8" y="12" width="8" height="2" fill="#ef4444"/>
+            <rect x="6" y="14" width="12" height="2" fill="#f97316"/>
+            
+            {/* Main flame - orange/red */}
+            <rect x="10" y="10" width="4" height="2" fill="#ef4444"/>
+            <rect x="8" y="8" width="8" height="2" fill="#f97316"/>
+            <rect x="10" y="6" width="4" height="2" fill="#ef4444"/>
+            
+            {/* Inner flame - yellow/bright */}
+            <rect x="11" y="9" width="2" height="2" fill="#fbbf24"/>
+            <rect x="10" y="7" width="4" height="2" fill="#fbbf24" opacity="0.8"/>
+            <rect x="11" y="11" width="2" height="2" fill="#f59e0b" opacity="0.9"/>
+            
+            {/* Spark sparkles */}
+            {animate && (
+                <>
+                    <motion.rect 
+                        x="4" y="8" width="1" height="1" fill="#fbbf24"
+                        animate={{ opacity: [0, 1, 0] }}
+                        transition={{ duration: 1.5, repeat: Infinity, delay: 0 }}
+                    />
+                    <motion.rect 
+                        x="19" y="8" width="1" height="1" fill="#fbbf24"
+                        animate={{ opacity: [0, 1, 0] }}
+                        transition={{ duration: 1.5, repeat: Infinity, delay: 0.5 }}
+                    />
+                </>
+            )}
+        </Component>
+    );
+};
+
 // Default export (defaults to Sparkle - most commonly used)
 export default COOLASFUCKSparkle;

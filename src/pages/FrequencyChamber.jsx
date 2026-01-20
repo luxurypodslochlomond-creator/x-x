@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Heart, Moon, Brain, Zap, Shield, Wind, Sun, Volume2, VolumeX, Clock, Info, X, Camera, Activity, Ear, Share2, Music, Mic, Globe, ChevronDown, Sparkles } from 'lucide-react';
-import { COOLASFUCKWaves, COOLASFUCKBrain, COOLASFUCKHeart, COOLASFUCKMoon, COOLASFUCKShield, COOLASFUCKTooth, COOLASFUCKZap, COOLASFUCKTarget } from '@/components/shared/COOLASFUCKIcon';
+import { COOLASFUCKWaves, COOLASFUCKBrain, COOLASFUCKHeart, COOLASFUCKMoon, COOLASFUCKShield, COOLASFUCKTooth, COOLASFUCKZap, COOLASFUCKTarget, COOLASFUCKFire } from '@/components/shared/COOLASFUCKIcon';
 import BiometricHealing from '@/components/radio/BiometricHealing';
 import OvernightSleepMonitor from '@/components/healing/OvernightSleepMonitor';
 import AI51CustomFrequencyGenerator from '@/components/ai51/AI51CustomFrequencyGenerator';
@@ -18,8 +18,9 @@ import { createPageUrl } from '@/utils';
 const PROTOCOL_SECTIONS = [
   {
     id: 'urgent',
-    name: '🔥 URGENT HEALING',
+    name: 'URGENT HEALING',
     color: '#ef4444',
+    icon: COOLASFUCKFire,
     description: 'Neural pathways + Tooth/jaw pain + Brain fog + Tinnitus + Throat + Emergency + Chronic pain + Lower back/hip + Alzheimer\'s + Vision',
     protocols: ['neural_pathways', 'dental_emergency', 'brain_fog', 'tinnitus', 'throat_healing', 'emergency_universal', 'chronic_pain', 'lower_back_hip', 'body_specific', 'vaccine_recovery', 'alzheimers', 'vision_healing']
   },
@@ -2983,9 +2984,12 @@ export default function FrequencyChamber() {
           <div key={section.id}>
             <div className="border-4 bg-black p-6" style={{ borderColor: section.color }}>
               <div className="mb-4">
-                <h3 className="text-xl font-black font-mono" style={{ color: section.color }}>
-                  {section.name}
-                </h3>
+                <div className="flex items-center gap-2 mb-2">
+                  {section.icon && <section.icon size={24} animate={false} />}
+                  <h3 className="text-xl font-black font-mono" style={{ color: section.color }}>
+                    {section.name}
+                  </h3>
+                </div>
                 <p className="text-gray-500 text-sm font-mono">{section.description}</p>
               </div>
               <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
