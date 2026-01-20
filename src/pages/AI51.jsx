@@ -28,9 +28,16 @@ export default function AI51Page() {
   const connectionActiveRef = useRef(false);
   const messagesEndRef = useRef(null);
 
-  // Load user
+  // Load user & conversation memory
   useEffect(() => {
     base44.auth.me().then(setUser).catch(() => {});
+    
+    const saved = localStorage.getItem('ai51_conversation');
+    if (saved) {
+      try {
+        setConversation(JSON.parse(saved));
+      } catch (e) {}
+    }
     
     const timer = setInterval(() => {
       setCurrentTime(new Date());
