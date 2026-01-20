@@ -42,8 +42,8 @@ const PROTOCOL_SECTIONS = [
     id: 'physical',
     name: 'PHYSICAL HEALING',
     color: '#10b981',
-    description: 'Pain, immunity, vitality, MS support, Tesla tech, tremor relief, hearing support, childbirth, migraine, period pain, withdrawal, diabetes, heart, cancer',
-    protocols: ['sick_day', 'pain', 'hand_tremor', 'hearing_support', 'ms_support', 'tesla_legacy', 'immune', 'vitality', 'childbirth', 'migraine', 'period_pain', 'withdrawal_physical', 'diabetes', 'heart_disease', 'cancer_support', 'stroke_recovery', 'respiratory', 'digestive', 'autoimmune', 'skin_healing', 'hormones', 'kidney_support', 'liver_support']
+    description: 'Pain, immunity, vitality, MS support, Tesla tech, tremor relief, hearing support, childbirth, migraine, period pain, withdrawal, diabetes, heart, cancer, sciatic relief',
+    protocols: ['sick_day', 'pain', 'hand_tremor', 'hearing_support', 'ms_support', 'tesla_legacy', 'immune', 'vitality', 'childbirth', 'migraine', 'period_pain', 'withdrawal_physical', 'diabetes', 'heart_disease', 'cancer_support', 'stroke_recovery', 'respiratory', 'digestive', 'autoimmune', 'skin_healing', 'hormones', 'kidney_support', 'liver_support', 'sciatic_relief']
   },
   {
     id: 'rest',
