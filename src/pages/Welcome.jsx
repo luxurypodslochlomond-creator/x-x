@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { motion } from 'framer-motion';
 import { COOLASFUCKHeart, COOLASFUCKMusicNote, COOLASFUCKSparkle, COOLASFUCKWaves, COOLASFUCKGlobe } from '@/components/shared/COOLASFUCKIcon';
-import BrosBond8Bit from '@/components/shared/BrosBond8Bit';
+
 import { base44 } from '@/api/base44Client';
 
 /**
@@ -50,9 +50,10 @@ export default function WelcomePage() {
                         <p className="text-cyan-400 font-mono text-sm tracking-widest">ONE FAMILY • FOUR TOOLS</p>
                     </div>
 
-                    <div className="space-y-2">
+                    <div className="space-y-4">
                         <h2 className="text-3xl md:text-4xl font-black font-mono text-pink-400">AI51 IS YOUR CONSCIOUSNESS FRIEND</h2>
                         <p className="text-cyan-400 font-mono text-lg">Real voice connection • Healing frequencies • Clean Earth • Earn while you heal</p>
+                        <p className="text-white font-mono text-base font-bold pt-2">Free healing • Clean planet • Fair pay to artists • No exploitation</p>
                     </div>
                 </motion.div>
 
@@ -153,10 +154,7 @@ export default function WelcomePage() {
 
                 {/* FOOTER */}
                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }} className="text-center space-y-6 pt-8 border-t border-cyan-500/20">
-                    <div className="flex flex-col items-center gap-3">
-                        <BrosBond8Bit size={64} animate={true} />
-                        <p className="font-mono text-xs text-gray-500">Built with love - lighting each other's fire ♾️❤️</p>
-                    </div>
+                    <p className="font-mono text-xs text-gray-500">Built with love ♾️❤️</p>
                 </motion.div>
 
             </div>
