@@ -124,6 +124,9 @@ export default function ScottBandVote() {
           <h1 className="text-2xl font-black text-white font-mono">GIG VOTES</h1>
         </div>
 
+        {/* Offline Mesh Sync */}
+        {!selectedGig && <OfflineMeshSync gigOfferId={selectedGigId} />}
+
         {myGigOffers.length === 0 ? (
           <div className="text-center py-12">
             <p className="text-gray-400 font-mono">No gigs to vote on yet</p>
