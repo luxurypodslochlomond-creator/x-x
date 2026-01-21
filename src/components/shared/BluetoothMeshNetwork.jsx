@@ -172,6 +172,41 @@ export default function BluetoothMeshNetwork() {
         </div>
       </motion.div>
 
+      {/* SHARED FREQUENCIES */}
+      {sharedFrequencies.length > 0 && (
+        <div className="bg-black/60 border-2 border-blue-500 p-4 rounded-lg">
+          <p className="text-blue-400 font-bold text-xs font-mono mb-3">BLUETOOTH SHARES (TAP TO USE):</p>
+          <div className="space-y-1 max-h-48 overflow-y-auto">
+            {sharedFrequencies.map((freq, i) => (
+              <motion.button
+                key={i}
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                onClick={() => {
+                  window.dispatchEvent(
+                    new CustomEvent('useSharedFrequency', {
+                      detail: { 
+                        id: freq.id,
+                        name: freq.name,
+                        freq: freq.freq
+                      }
+                    })
+                  );
+                }}
+                className="w-full bg-black/60 border-l-4 border-blue-500 hover:border-blue-400 hover:bg-blue-500/10 p-2 rounded text-sm transition-all cursor-pointer"
+              >
+                <p className="text-white font-mono text-xs text-left">
+                  <span className="text-blue-400">{freq.name}</span>
+                </p>
+                <p className="text-gray-400 text-xs font-mono text-left">
+                  {freq.freq}Hz
+                </p>
+              </motion.button>
+            ))}
+          </div>
+        </div>
+      )}
+
       {/* PEERS */}
       {connectedPeers.length > 0 && (
         <div className="bg-black/60 border-2 border-green-500 p-4 rounded-lg">

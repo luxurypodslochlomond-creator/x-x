@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import FrequencyShareButton from '@/components/shared/FrequencyShareButton';
 import WiFiDirectMesh from '@/components/shared/WiFiDirectMesh';
+import BluetoothMeshNetwork from '@/components/shared/BluetoothMeshNetwork';
 
 /**
  * UF51 FREQUENCY CHAMBER
@@ -1790,6 +1791,21 @@ export default function FrequencyChamber() {
     const [sessionDuration, setSessionDuration] = useState(20); // minutes
 
     const [voiceAnalysisData, setVoiceAnalysisData] = useState(null);
+
+  // Listen for shared frequencies from mesh networks
+  useEffect(() => {
+    const handleSharedFrequency = (event) => {
+      const { detail } = event;
+      // Auto-select the protocol if it exists
+      if (PROTOCOLS[detail.id]) {
+        handleProtocolSelect(detail.id);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    };
+
+    window.addEventListener('useSharedFrequency', handleSharedFrequency);
+    return () => window.removeEventListener('useSharedFrequency', handleSharedFrequency);
+  }, []);
 
 
     // SEO
@@ -3639,10 +3655,22 @@ Try it: https://uf51.love/FrequencyChamber`;
         </div>
       )}
 
-      {/* MESH NETWORK */}
+      {/* MESH NETWORKS - Both Bluetooth + WiFi Direct */}
       {!selectedProtocol && (
-        <div className="max-w-4xl mx-auto p-4">
-          <WiFiDirectMesh />
+        <div className="max-w-4xl mx-auto p-4 space-y-4">
+          <div className="bg-black border-4 border-green-500 p-4">
+            <div className="flex items-center gap-2 mb-4">
+              <Share2 className="w-6 h-6 text-green-400" />
+              <h3 className="text-green-400 font-black font-mono text-lg">P2P MESH NETWORKS</h3>
+            </div>
+            <p className="text-gray-400 text-sm font-mono mb-4">
+              Receive healing frequencies from nearby devices. Tap to use them instantly ♾️
+            </p>
+            <div className="grid md:grid-cols-2 gap-4">
+              <WiFiDirectMesh />
+              <BluetoothMeshNetwork />
+            </div>
+          </div>
         </div>
       )}
 
