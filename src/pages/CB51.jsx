@@ -1,16 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import { Radio, Plus, Loader2, Trash2, ChevronDown, ChevronRight, AlertCircle, Calendar, FileText, DollarSign, Music, Zap, TrendingUp, MessageSquare, Users } from 'lucide-react';
-import ScottMessageCentre from '@/components/scott/ScottMessageCentre';
-import { motion, AnimatePresence } from 'framer-motion';
+import { Radio, Plus, Trash2, AlertCircle, Calendar, MessageSquare, Users, Zap } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import TechStatusBar from '@/components/scott/TechStatusBar';
 import PushNotificationManager from '@/components/scott/PushNotificationManager';
-import { format } from 'date-fns';
 
 /**
  * CB51 HOME PAGE - CLEAN URL FOR WHITE LABEL
