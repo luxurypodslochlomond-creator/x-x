@@ -32,12 +32,16 @@ Deno.serve(async (req) => {
       return Response.json({ error: 'No band members found' }, { status: 400 });
     }
 
-    // Send push notifications to each band member
+    // Create push notifications for each band member
     const notificationPromises = bandMembers.map(member => 
-      base44.asServiceRole.integrations.Core.SendEmail({
-        to: member.email,
-        subject: `🎵 GIGA VOTE: ${gigOffer.venue_name} - ${gigOffer.date}`,
-        body: `${artist.name} has a gig offer for you to vote on!\n\nVenue: ${gigOffer.venue_name}\nDate: ${gigOffer.date}\nFee: £${gigOffer.fee}\n\nManager Notes: ${gigOffer.manager_notes || 'None'}\n\n👍 YES or 👎 NO - no middle ground!\n\nYour response matters. Band needs your vote.`
+      base44.asServiceRole.entities.ScottNotification.create({
+        recipient_email: member.email,
+        notification_type: 'band_gig_offer',
+        gig_offer_id: gigOffer.id,
+        title: `VOTE: ${gigOffer.venue_name}`,
+        message: `${artist.name} • ${gigOffer.date} • £${gigOffer.fee}`,
+        decision_button: 'yes',
+        action_url: `/pages/ScottBandVote?gig=${gigOffer.id}`
       })
     );
 

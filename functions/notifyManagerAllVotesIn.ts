@@ -46,11 +46,15 @@ Deno.serve(async (req) => {
       .map(r => `${r.band_member_name}: ${r.reason_if_no || 'No reason given'}`)
       .join('\n');
 
-    // Send email to manager with vote summary
-    await base44.asServiceRole.integrations.Core.SendEmail({
-      to: artist.created_by, // Manager email
-      subject: `✅ VOTES IN: ${gigOffer.venue_name} - ${summary}`,
-      body: `ALL BAND VOTED!\n\n${artist.name} @ ${gigOffer.venue_name}\nDate: ${gigOffer.date}\n\nRESULTS:\n${yesVotes} YES\n${noVotes} NO\n\n${noReasons ? 'REASONS FOR NO:\n' + noReasons : ''}\n\nConfirm or reject in CB51.`
+    // Create push notification to manager with vote summary
+    await base44.asServiceRole.entities.ScottNotification.create({
+      recipient_email: artist.created_by,
+      notification_type: 'manager_votes_in',
+      gig_offer_id: gigOffer.id,
+      title: `✅ VOTES IN: ${summary}`,
+      message: `${gigOffer.venue_name} • ${gigOffer.date}`,
+      decision_button: 'yes',
+      action_url: `/pages/CB51?gig=${gigOffer.id}`
     });
 
     // Mark timestamp on gig offer
