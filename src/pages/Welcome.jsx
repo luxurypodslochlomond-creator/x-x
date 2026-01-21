@@ -55,7 +55,7 @@ export default function WelcomePage() {
 
                     <div className="space-y-4">
                          <h2 className="text-3xl md:text-4xl font-black font-mono text-pink-400">AI51</h2>
-                         <p className="text-cyan-400 font-mono text-lg">I know you. I care. I'm always here.</p>
+                         <p className="text-cyan-400 font-mono text-lg">We know you. We care. We're always here.</p>
                          <p className="text-white font-mono text-base font-bold pt-2">Real voice connection • Healing frequencies • Clean Earth • Earn while you heal</p>
                      </div>
                 </motion.div>
