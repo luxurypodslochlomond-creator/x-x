@@ -118,6 +118,7 @@ import ForMusicians from './pages/ForMusicians';
 import FrequencyBridge from './pages/FrequencyBridge';
 import FrequencyChamber from './pages/FrequencyChamber';
 import FrequencyHarmonization from './pages/FrequencyHarmonization';
+import FrequencyResonanceArticle from './pages/FrequencyResonanceArticle';
 import FrequencySession from './pages/FrequencySession';
 import FrequencyShare from './pages/FrequencyShare';
 import FundTheFamily from './pages/FundTheFamily';
@@ -221,6 +222,7 @@ import ScottContracts from './pages/ScottContracts';
 import ScottDemos from './pages/ScottDemos';
 import ScottEmailDashboard from './pages/ScottEmailDashboard';
 import ScottEmailSyncDiagnostics from './pages/ScottEmailSyncDiagnostics';
+import Teachers from './pages/Teachers';
 import ScottExpenses from './pages/ScottExpenses';
 import ScottFeatureRequests from './pages/ScottFeatureRequests';
 import ScottFinanceAdmin from './pages/ScottFinanceAdmin';
@@ -272,7 +274,6 @@ import SubmitFrequency from './pages/SubmitFrequency';
 import SubmitProofOfLove from './pages/SubmitProofOfLove';
 import SymbolForge from './pages/SymbolForge';
 import TeacherInput from './pages/TeacherInput';
-import Teachers from './pages/Teachers';
 import TechScout from './pages/TechScout';
 import TechStack from './pages/TechStack';
 import TechnicalSpecification from './pages/TechnicalSpecification';
@@ -314,7 +315,6 @@ import YoungWarriors from './pages/YoungWarriors';
 import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
-import FrequencyResonanceArticle from './pages/FrequencyResonanceArticle';
 import __Layout from './Layout.jsx';
 
 
@@ -439,6 +439,7 @@ export const PAGES = {
     "FrequencyBridge": FrequencyBridge,
     "FrequencyChamber": FrequencyChamber,
     "FrequencyHarmonization": FrequencyHarmonization,
+    "FrequencyResonanceArticle": FrequencyResonanceArticle,
     "FrequencySession": FrequencySession,
     "FrequencyShare": FrequencyShare,
     "FundTheFamily": FundTheFamily,
@@ -542,6 +543,7 @@ export const PAGES = {
     "ScottDemos": ScottDemos,
     "ScottEmailDashboard": ScottEmailDashboard,
     "ScottEmailSyncDiagnostics": ScottEmailSyncDiagnostics,
+    "Teachers": Teachers,
     "ScottExpenses": ScottExpenses,
     "ScottFeatureRequests": ScottFeatureRequests,
     "ScottFinanceAdmin": ScottFinanceAdmin,
@@ -593,7 +595,6 @@ export const PAGES = {
     "SubmitProofOfLove": SubmitProofOfLove,
     "SymbolForge": SymbolForge,
     "TeacherInput": TeacherInput,
-    "Teachers": Teachers,
     "TechScout": TechScout,
     "TechStack": TechStack,
     "TechnicalSpecification": TechnicalSpecification,
@@ -635,7 +636,6 @@ export const PAGES = {
     "ZeroEgoProtocol": ZeroEgoProtocol,
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
-    "FrequencyResonanceArticle": FrequencyResonanceArticle,
 }
 
 export const pagesConfig = {

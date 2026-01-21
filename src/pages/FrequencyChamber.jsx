@@ -1579,10 +1579,11 @@ const VoiceHealing = ({ onProtocolRecommend }) => {
 
   const getProtocolFromIntent = (intent) => {
     const keywords = {
+      'concussion|head injury|impact|concussed|brain injury|hit head|knocked out': 'concussion_recovery',
       'anxiety|panic|stressed|worried': 'anxiety',
       'sleep|insomnia|tired|rest': 'sleep',
       'pain|hurt|ache|sore': 'pain',
-      'focus|attention|brain|foggy': 'brain_fog',
+      'focus|attention|brain|foggy|confusion|confused': 'brain_fog',
       'sad|depressed|down|mood': 'depression',
       'angry|rage|anger|frustrated': 'anger',
       'trauma|ptsd|scared|fear': 'trauma',
