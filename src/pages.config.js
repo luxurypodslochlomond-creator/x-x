@@ -315,6 +315,7 @@ import YoungWarriors from './pages/YoungWarriors';
 import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
+import AdminScottNotificationsSpec from './pages/AdminScottNotificationsSpec';
 import __Layout from './Layout.jsx';
 
 
@@ -636,6 +637,7 @@ export const PAGES = {
     "ZeroEgoProtocol": ZeroEgoProtocol,
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
+    "AdminScottNotificationsSpec": AdminScottNotificationsSpec,
 }
 
 export const pagesConfig = {
