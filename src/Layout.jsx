@@ -391,8 +391,8 @@ const LayoutInner = ({ children, currentPageName }) => {
         {/* MOBILE HEADER */}
         <header className={`lg:hidden fixed ${isOffline ? 'top-10' : 'top-0'} left-0 right-0 z-[60] bg-[#0a0f1a]/95 backdrop-blur-xl border-b border-cyan-500/30`}>
           <div className="flex items-center justify-between p-4">
-            <Link to={createPageUrl(currentPageName.startsWith('Scott') || currentPageName === 'CB51' ? "CB51" : "Welcome")} className="flex items-center gap-2" onClick={() => setMobileMenuOpen(false)}>
-                {(currentPageName.startsWith('Scott') || currentPageName === 'CB51') ? (
+            <Link to={createPageUrl(currentPageName.startsWith('Scott') || currentPageName.startsWith('CB51') ? "CB51" : "Welcome")} className="flex items-center gap-2" onClick={() => setMobileMenuOpen(false)}>
+                {(currentPageName.startsWith('Scott') || currentPageName.startsWith('CB51')) ? (
                   <>
                     <Radio className="w-7 h-7 text-cyan-400" />
                     <span className="text-xl font-black text-cyan-400">CB51</span>
@@ -485,8 +485,8 @@ const LayoutInner = ({ children, currentPageName }) => {
         {/* DESKTOP SIDEBAR */}
         <aside className={`hidden lg:block fixed left-0 ${isOffline ? 'top-10' : 'top-0'} w-80 h-screen border-r border-cyan-500/30 bg-[#0a0f1a]/95 overflow-y-auto z-50`}>
           <div className="p-6 border-b border-cyan-500/30">
-            <Link to={createPageUrl(currentPageName.startsWith('Scott') || currentPageName === 'CB51' ? "CB51" : "Welcome")} className="flex items-center gap-3 mb-4">
-              {(currentPageName.startsWith('Scott') || currentPageName === 'CB51') ? (
+            <Link to={createPageUrl(currentPageName.startsWith('Scott') || currentPageName.startsWith('CB51') ? "CB51" : "Welcome")} className="flex items-center gap-3 mb-4">
+              {(currentPageName.startsWith('Scott') || currentPageName.startsWith('CB51')) ? (
                 <>
                   <Radio className="w-10 h-10 text-cyan-400" />
                   <span className="text-3xl font-black text-cyan-400">CB51</span>
@@ -573,7 +573,7 @@ const LayoutInner = ({ children, currentPageName }) => {
         </main>
       </div>
 
-      {!currentPageName.startsWith('Scott') && !currentPageName.startsWith('Prof') && currentPageName !== 'CB51' && currentPageName !== 'AI51' && (
+      {!currentPageName.startsWith('Scott') && !currentPageName.startsWith('Prof') && !currentPageName.startsWith('CB51') && currentPageName !== 'AI51' && (
         <>
           <HealingAnalyticsCollector />
           <PWAInstallPrompt />
