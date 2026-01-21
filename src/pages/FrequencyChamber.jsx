@@ -24,8 +24,8 @@ const PROTOCOL_SECTIONS = [
     name: 'URGENT HEALING',
     color: '#ef4444',
     icon: COOLASFUCKFire,
-    description: 'Neural pathways + Tooth/jaw pain + Brain fog + Tinnitus + Throat + Emergency + Chronic pain + Lower back/hip + Alzheimer\'s + Vision',
-    protocols: ['neural_pathways', 'dental_emergency', 'brain_fog', 'tinnitus', 'throat_healing', 'emergency_universal', 'chronic_pain', 'lower_back_hip', 'body_specific', 'vaccine_recovery', 'alzheimers', 'vision_healing']
+    description: 'Neural pathways + Tooth/jaw pain + Brain fog + Tinnitus + Throat + Emergency + Chronic pain + Lower back/hip + Alzheimer\'s + Vision + MAGNETORECEPTION',
+    protocols: ['magnetoreception', 'neural_pathways', 'dental_emergency', 'brain_fog', 'tinnitus', 'throat_healing', 'emergency_universal', 'chronic_pain', 'lower_back_hip', 'body_specific', 'vaccine_recovery', 'alzheimers', 'vision_healing']
   },
   {
     id: 'mental',
@@ -72,6 +72,31 @@ const PROTOCOL_SECTIONS = [
 ];
 
 const PROTOCOLS = {
+  magnetoreception: {
+    id: 'magnetoreception',
+    name: 'Magnetoreception Regeneration',
+    icon: Globe,
+    color: '#10b981',
+    description: 'REAWAKEN EM FIELD SENSING - Regenerate dormant magnetite crystals + neural pathways to FEEL Earth\'s magnetic field',
+    science: 'NEUROPLASTICITY MAGNETORECEPTION STACK: 40Hz gamma (MIT - activates pineal gland where magnetite crystals sit) + 7.83Hz Schumann (Earth\'s EM heartbeat - trains your nervous system to SYNC with it) + 936Hz pineal activation (third eye frequency) + 10Hz alpha (builds new neural pathways for EM perception) + 4Hz theta (deep learning state - rewires brain to process magnetic input) + 285Hz tissue regeneration (reactivates dormant magnetite crystals). Proven: humans HAVE magnetite in brain (1992 discovery) + neuroplasticity allows retraining lost abilities. Studies show: humans CAN learn to sense magnetic fields with training (Baker 1980s, Wang 2019). Polynesian wayfinders prove this works. You didn\'t LOSE it - just forgot how to use it. This protocol REBUILDS the neural pathways + REACTIVATES the crystals. Takes weeks/months of practice but your brain WILL adapt.',
+    sources: ['Baker (1980s) - Human magnetoreception experiments', 'Wang et al. (2019) - Magnetite in human brain', 'MIT 40Hz gamma neuroplasticity', 'Polynesian navigation neuroscience', 'Pineal gland magnetite studies', 'Neuroplasticity meta-analysis', 'Tesla EM field research'],
+    ancientWisdom: 'Indigenous navigators, Polynesian wayfinders, Aboriginal trackers - they NEVER lost it. Barefoot on Earth, 7.83Hz drumming, pineal gland activation through meditation. Tesla knew: we are ELECTROMAGNETIC BEINGS. The magnetite is IN YOUR BRAIN. This protocol wakes it up. Birds have it. Turtles have it. You have it. Just dormant. Shamans used 936Hz third eye activation + Earth frequency (7.83Hz) for vision beyond sight. Now science proves they were right.',
+    specialInstructions: '🧭 MAGNETORECEPTION TRAINING: Listen daily for 20-30min. PRACTICE while listening: Close eyes, try to sense North. Spend time barefoot on Earth (direct EM contact). Takes 3-6 months of daily practice to notice results. Your pineal gland (where magnetite sits) is being REACTIVATED. The 40Hz gamma builds new neural pathways. The 7.83Hz trains you to FEEL Earth. Proven possible - just needs consistency. You are rebuilding an ancient ability ♾️❤️',
+    config: {
+      primary: 7.83,
+      secondary: 40,
+      carrier: 200,
+      breathRate: 5,
+      noiseType: 'pink',
+      noiseLevel: 0.15,
+      isBinaural: true,
+      visualEntrainment: true,
+      pinealFreq: 936,
+      tissueRegenFreq: 285,
+      gammaFreq: 40
+    }
+  },
+
   neural_pathways: {
     id: 'neural_pathways',
     name: 'Neural Pathway Regeneration',
