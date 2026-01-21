@@ -130,6 +130,33 @@ export default function CB51AboutPage() {
           </div>
         </div>
 
+        {/* FEELS LIKE AN APP */}
+        <div className="bg-gradient-to-br from-purple-900/30 to-purple-900/10 border-2 border-purple-500/50 rounded-2xl p-10 mb-16">
+          <h2 className="text-3xl font-black text-white mb-8 text-center">Works Like An App</h2>
+          
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="bg-black/60 border border-purple-500/30 rounded-xl p-6">
+              <p className="text-white font-black text-lg mb-3">Add to home screen</p>
+              <p className="text-gray-400">iPhone, Android, laptop. One tap. Feels native.</p>
+            </div>
+
+            <div className="bg-black/60 border border-purple-500/30 rounded-xl p-6">
+              <p className="text-white font-black text-lg mb-3">Works offline</p>
+              <p className="text-gray-400">Flight mode, dodgy wifi, basement venue. Still works.</p>
+            </div>
+
+            <div className="bg-black/60 border border-purple-500/30 rounded-xl p-6">
+              <p className="text-white font-black text-lg mb-3">No App Store</p>
+              <p className="text-gray-400">No Apple tax. No Google approval. Just use it.</p>
+            </div>
+
+            <div className="bg-black/60 border border-purple-500/30 rounded-xl p-6">
+              <p className="text-white font-black text-lg mb-3">Updates instant</p>
+              <p className="text-gray-400">New features live immediately. No downloads.</p>
+            </div>
+          </div>
+        </div>
+
         {/* NUMBERS */}
         <div className="bg-gradient-to-br from-green-900/30 to-green-900/10 border-2 border-green-500/50 rounded-2xl p-10 mb-16">
           <h2 className="text-3xl font-black text-white mb-8 text-center">The Reality</h2>
@@ -148,16 +175,6 @@ export default function CB51AboutPage() {
             <div className="text-center">
               <p className="text-6xl font-black text-purple-400 mb-3">£0</p>
               <p className="text-gray-400">Lost to missed invoices</p>
-            </div>
-          </div>
-
-          <div className="mt-10 bg-black/60 border border-green-500/30 rounded-xl p-6">
-            <div className="flex items-start gap-4">
-              <CheckCircle className="w-8 h-8 text-green-400 flex-shrink-0" />
-              <div>
-                <p className="text-white font-black text-xl mb-2">Music Industry Specific</p>
-                <p className="text-gray-400">Not adapted from generic business software. Built from scratch for how managers actually work. By people who've managed artists.</p>
-              </div>
             </div>
           </div>
         </div>
@@ -197,13 +214,13 @@ export default function CB51AboutPage() {
             {/* WHITE LABEL */}
             <div className="bg-gradient-to-br from-purple-900/30 to-purple-900/10 border-2 border-purple-500/50 rounded-2xl p-8">
               <p className="text-purple-400 font-black text-sm mb-3">MAJOR LABELS</p>
-              <p className="text-5xl font-black text-white mb-2">£5k</p>
-              <p className="text-gray-400 text-sm mb-6">one-time setup</p>
+              <p className="text-5xl font-black text-white mb-2">Custom</p>
+              <p className="text-gray-400 text-sm mb-6">your own version</p>
               <div className="space-y-3 text-gray-300 text-sm">
-                <p>→ Your branding</p>
-                <p>→ Your domain</p>
-                <p>→ Custom features</p>
-                <p>→ White label everything</p>
+                <p>→ universalmusic.cb51.com</p>
+                <p>→ Your logo, your colours</p>
+                <p>→ Feels like yours</p>
+                <p>→ We handle everything</p>
               </div>
             </div>
 
