@@ -310,7 +310,7 @@ export default function CB51() {
                         <div className="absolute inset-0 bg-gradient-to-t from-amber-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                         <Zap className="w-9 h-9 text-amber-400 mx-auto mb-2 relative z-10" />
                         <p className="text-amber-400 font-black font-mono text-sm relative z-10">GIG OFFERS</p>
-                        {allOffers.length > 0 && <p className="text-white text-2xl font-black font-mono mt-1 relative z-10">{allOffers.length}</p>}
+                        {allOffers.length > 0 && <p className="text-white text-2xl font-black font-mono mt-1 relative z-10">{stats.pendingOffers + stats.awaitingBand}</p>}
                     </motion.div>
                 </Link>
                 <Link to={createPageUrl('ScottCalendarView')}>
