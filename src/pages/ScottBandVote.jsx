@@ -46,21 +46,35 @@ export default function ScottBandVote() {
     enabled: !!user?.email
   });
 
-  // Submit vote
+  // Submit vote (online or offline)
   const submitVoteMutation = useMutation({
     mutationFn: async (voteData) => {
-      const response = await base44.entities.ScottBandResponse.update(
-        voteData.responseId,
-        {
+      if (navigator.onLine) {
+        // Online: send directly
+        const response = await base44.entities.ScottBandResponse.update(
+          voteData.responseId,
+          {
+            decision: voteData.decision,
+            reason_if_no: voteData.decision === 'no' ? voteData.reason : null,
+            responded_at: new Date().toISOString()
+          }
+        );
+        return response;
+      } else {
+        // Offline: store locally
+        await storeVoteOffline(selectedGigId, {
+          responseId: voteData.responseId,
           decision: voteData.decision,
           reason_if_no: voteData.decision === 'no' ? voteData.reason : null,
           responded_at: new Date().toISOString()
-        }
-      );
-      return response;
+        });
+        return { offline: true };
+      }
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['myGigOffers'] });
+      if (navigator.onLine) {
+        queryClient.invalidateQueries({ queryKey: ['myGigOffers'] });
+      }
       setSelectedGigId(null);
       setSelectedAnswer(null);
       setReasonText('');
