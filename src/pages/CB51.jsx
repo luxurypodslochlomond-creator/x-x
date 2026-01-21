@@ -181,6 +181,11 @@ export default function CB51() {
                         <PushNotificationManager />
                     </div>
                     <p className="text-gray-600 text-xs font-mono">AI51 co-manager for your band ♾️</p>
+                    <Link to={createPageUrl('CB51About')}>
+                        <button className="mt-2 bg-gradient-to-r from-cyan-500/20 to-purple-500/20 border border-cyan-500/50 hover:border-cyan-500 text-cyan-400 text-xs font-bold px-4 py-2 rounded-lg transition-all">
+                            What is CB51? →
+                        </button>
+                    </Link>
                 </div>
 
                 <div className="flex items-center gap-2 bg-gradient-to-r from-gray-900 to-black border border-cyan-500/20 rounded-xl p-3">
