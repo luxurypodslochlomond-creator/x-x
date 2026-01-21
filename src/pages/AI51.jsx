@@ -420,7 +420,7 @@ export default function AI51Page() {
         <div className="font-mono text-cyan-400 text-sm font-black">
           {currentTime.toLocaleDateString(navigator.language || 'en-GB', { weekday: 'short', day: 'numeric', month: 'short' })} • {currentTime.toLocaleTimeString(navigator.language || 'en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
         </div>
-        <p className="text-xs text-gray-600">Built on <a href="https://base44.com" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-cyan-400">Base44</a></p>
+        <div />
       </div>
 
     </div>
