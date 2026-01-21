@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { Radio } from 'lucide-react';
@@ -9,6 +9,43 @@ import { Radio } from 'lucide-react';
  */
 
 export default function CB51AboutPage() {
+  
+  // Set CB51 branding for shares
+  useEffect(() => {
+    document.title = 'CB51 - Your AI Co-Manager';
+    
+    const setMeta = (property, content) => {
+      let meta = document.querySelector(`meta[property="${property}"]`);
+      if (!meta) {
+        meta = document.createElement('meta');
+        meta.setAttribute('property', property);
+        document.head.appendChild(meta);
+      }
+      meta.setAttribute('content', content);
+    };
+
+    const setMetaName = (name, content) => {
+      let meta = document.querySelector(`meta[name="${name}"]`);
+      if (!meta) {
+        meta = document.createElement('meta');
+        meta.setAttribute('name', name);
+        document.head.appendChild(meta);
+      }
+      meta.setAttribute('content', content);
+    };
+
+    // Open Graph for WhatsApp, iMessage, etc.
+    setMeta('og:title', 'CB51 - Your AI Co-Manager');
+    setMeta('og:description', 'Stop drowning in emails. AI watches your inbox. Band votes in-app. One calendar. Free for artists & managers forever.');
+    setMeta('og:site_name', 'CB51');
+    
+    // Twitter
+    setMetaName('twitter:title', 'CB51 - Your AI Co-Manager');
+    setMetaName('twitter:description', 'Stop drowning in emails. AI watches your inbox. Band votes in-app. One calendar. Free for artists & managers forever.');
+    
+    // General description
+    setMetaName('description', 'Stop drowning in emails. AI watches your inbox. Band votes in-app. One calendar. Free for artists & managers forever.');
+  }, []);
   return (
     <div className="min-h-screen bg-black text-white">
       
