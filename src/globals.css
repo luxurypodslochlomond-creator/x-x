@@ -36,6 +36,40 @@
   50% { transform: translate(-50%, -50%) scale(1.15); opacity: 0.8; }
 }
 
+/* CB51 INSTANT LOADING - Radio icon cyan loader */
+#root[data-cb51]:empty::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: #000;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#root[data-cb51]:empty::after {
+  content: '';
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80px;
+  height: 80px;
+  background-image: url('data:image/svg+xml,<svg width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 1C6.48 1 2 5.48 2 11s4.48 10 10 10 10-4.48 10-10S17.52 1 12 1zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 7 15.5 7 14 7.67 14 8.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 7 8.5 7 7 7.67 7 8.5 7.67 10 8.5 10zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z" fill="%2306b6d4"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  z-index: 100000;
+  animation: cb51-pulse 1.5s ease-in-out infinite;
+  filter: drop-shadow(0 0 15px rgba(6, 182, 212, 0.8));
+}
+
+@keyframes cb51-pulse {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+  50% { transform: translate(-50%, -50%) scale(1.15); opacity: 0.8; }
+}
+
 /* Fade out when React loads */
 #root {
   animation: fadeIn 0.3s ease-out;
