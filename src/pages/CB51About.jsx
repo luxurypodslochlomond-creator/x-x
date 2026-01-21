@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
-import { Radio, Calendar, FileText, DollarSign, Users, Briefcase, Shield, Clock, Heart, CheckCircle, Zap } from 'lucide-react';
+import { Radio, Calendar, FileText, DollarSign, Users, Briefcase, Shield, Clock, CheckCircle, Zap, Brain, Mail, TrendingUp } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 /**
- * CB51 - What It Is & Why It Matters
- * Simple explainer for artists, managers, labels, investors
- * No tech jargon - just real problems solved
+ * CB51 - For Artist Managers
+ * What it does, why it's different
+ * No tech jargon
  */
 
 export default function CB51AboutPage() {
@@ -15,20 +15,19 @@ export default function CB51AboutPage() {
     <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white">
       
       {/* HERO */}
-      <div className="relative overflow-hidden border-b border-cyan-500/30 bg-gradient-to-br from-cyan-900/20 via-purple-900/20 to-pink-900/20">
-        <div className="max-w-4xl mx-auto px-6 py-16 text-center">
+      <div className="relative overflow-hidden border-b border-cyan-500/30">
+        <div className="max-w-4xl mx-auto px-6 py-20 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mb-6"
           >
-            <Radio className="w-16 h-16 text-cyan-400 mx-auto mb-4" />
-            <h1 className="text-5xl md:text-6xl font-black mb-4 bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+            <Radio className="w-20 h-20 text-cyan-400 mx-auto mb-6" />
+            <h1 className="text-6xl md:text-7xl font-black mb-4 text-white">
               CB51
             </h1>
-            <p className="text-2xl md:text-3xl font-bold text-white mb-2">Your AI Co-Manager</p>
-            <p className="text-lg text-gray-300 max-w-2xl mx-auto">
-              Everything a working musician needs to run their career. Nothing they don't.
+            <p className="text-3xl md:text-4xl font-bold text-cyan-400 mb-4">For Artist Managers</p>
+            <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+              Manage multiple artists without drowning in admin
             </p>
           </motion.div>
         </div>
@@ -36,170 +35,183 @@ export default function CB51AboutPage() {
 
       {/* THE PROBLEM */}
       <div className="max-w-4xl mx-auto px-6 py-16">
-        <div className="bg-red-900/20 border-2 border-red-500/30 rounded-xl p-8 mb-12">
-          <h2 className="text-2xl font-black text-red-400 mb-4">The Problem</h2>
-          <div className="space-y-3 text-gray-300">
+        <div className="bg-gradient-to-br from-red-900/30 to-red-900/10 border-2 border-red-500/50 rounded-2xl p-10 mb-16">
+          <h2 className="text-3xl font-black text-white mb-6">You're Managing 5 Artists</h2>
+          <div className="space-y-4 text-gray-300 text-lg">
             <p className="flex items-start gap-3">
-              <span className="text-red-400 mt-1">•</span>
-              <span>Artists juggle 20 different apps: email, calendar, spreadsheets, notes, WhatsApp, Instagram...</span>
+              <span className="text-red-400 text-2xl">→</span>
+              <span>127 unread emails with gig offers buried somewhere</span>
             </p>
             <p className="flex items-start gap-3">
-              <span className="text-red-400 mt-1">•</span>
-              <span>Gig offers buried in 500 unread emails</span>
+              <span className="text-red-400 text-2xl">→</span>
+              <span>Band members asking "did you reply to that promoter?"</span>
             </p>
             <p className="flex items-start gap-3">
-              <span className="text-red-400 mt-1">•</span>
-              <span>Band members can't see what's happening</span>
+              <span className="text-red-400 text-2xl">→</span>
+              <span>£4,000 in unpaid invoices you forgot to chase</span>
             </p>
             <p className="flex items-start gap-3">
-              <span className="text-red-400 mt-1">•</span>
-              <span>No time to actually make music</span>
+              <span className="text-red-400 text-2xl">→</span>
+              <span>Double-booked a session because you use 3 different calendars</span>
             </p>
           </div>
+          <p className="text-gray-500 text-sm mt-6 italic">Sound familiar?</p>
         </div>
 
-        {/* THE SOLUTION */}
-        <div className="bg-green-900/20 border-2 border-green-500/30 rounded-xl p-8 mb-12">
-          <h2 className="text-2xl font-black text-green-400 mb-6">CB51 = Everything In One Place</h2>
+        {/* THE INNOVATION */}
+        <div className="bg-gradient-to-br from-cyan-900/30 to-purple-900/20 border-2 border-cyan-500/50 rounded-2xl p-10 mb-16">
+          <h2 className="text-3xl font-black text-white mb-8 text-center">What Makes It Different</h2>
           
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="bg-black/60 border border-cyan-500/30 rounded-lg p-6">
-              <Calendar className="w-8 h-8 text-cyan-400 mb-3" />
-              <h3 className="font-bold text-white mb-2">Smart Calendar</h3>
-              <p className="text-gray-400 text-sm">All gigs, sessions, deadlines in one view. Share with band instantly.</p>
+          <div className="space-y-6">
+            <div className="bg-black/60 border border-cyan-500/30 rounded-xl p-6">
+              <div className="flex items-start gap-4">
+                <Mail className="w-10 h-10 text-cyan-400 flex-shrink-0 mt-1" />
+                <div>
+                  <h3 className="font-black text-white text-xl mb-2">AI Reads Your Email</h3>
+                  <p className="text-gray-400">Scans Gmail automatically. Finds gig offers. Extracts fee, date, venue. Drafts professional replies for you to approve.</p>
+                </div>
+              </div>
             </div>
 
-            <div className="bg-black/60 border border-purple-500/30 rounded-lg p-6">
-              <FileText className="w-8 h-8 text-purple-400 mb-3" />
-              <h3 className="font-bold text-white mb-2">Gig Offers</h3>
-              <p className="text-gray-400 text-sm">AI scans your email, extracts gig details, drafts professional replies.</p>
+            <div className="bg-black/60 border border-purple-500/30 rounded-xl p-6">
+              <div className="flex items-start gap-4">
+                <Users className="w-10 h-10 text-purple-400 flex-shrink-0 mt-1" />
+                <div>
+                  <h3 className="font-black text-white text-xl mb-2">Band Coordination</h3>
+                  <p className="text-gray-400">Send offers to the band. They vote yes/no in-app. You reply when everyone's in. Zero WhatsApp chaos.</p>
+                </div>
+              </div>
             </div>
 
-            <div className="bg-black/60 border border-green-500/30 rounded-lg p-6">
-              <DollarSign className="w-8 h-8 text-green-400 mb-3" />
-              <h3 className="font-bold text-white mb-2">Money Tracking</h3>
-              <p className="text-gray-400 text-sm">Invoices, expenses, who owes what. Simple as WhatsApp.</p>
+            <div className="bg-black/60 border border-green-500/30 rounded-xl p-6">
+              <div className="flex items-start gap-4">
+                <Calendar className="w-10 h-10 text-green-400 flex-shrink-0 mt-1" />
+                <div>
+                  <h3 className="font-black text-white text-xl mb-2">One Calendar For Everything</h3>
+                  <p className="text-gray-400">All your artists. All their gigs, sessions, deadlines. One view. Export to Google Calendar if you want.</p>
+                </div>
+              </div>
             </div>
 
-            <div className="bg-black/60 border border-pink-500/30 rounded-lg p-6">
-              <Users className="w-8 h-8 text-pink-400 mb-3" />
-              <h3 className="font-bold text-white mb-2">Band Dashboard</h3>
-              <p className="text-gray-400 text-sm">Everyone sees the same info. No more "did you get that email?"</p>
+            <div className="bg-black/60 border border-amber-500/30 rounded-xl p-6">
+              <div className="flex items-start gap-4">
+                <Brain className="w-10 h-10 text-amber-400 flex-shrink-0 mt-1" />
+                <div>
+                  <h3 className="font-black text-white text-xl mb-2">Learns Your Style</h3>
+                  <p className="text-gray-400">AI learns how you write emails, your fee negotiations, your standard terms. Gets better every time.</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
         {/* WHO IT'S FOR */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-black text-white mb-6 text-center">Who Uses CB51?</h2>
+        <div className="mb-16">
+          <h2 className="text-3xl font-black text-white mb-8 text-center">Built For</h2>
           
           <div className="grid md:grid-cols-3 gap-6">
-            <div className="bg-gradient-to-br from-cyan-900/30 to-cyan-900/10 border-2 border-cyan-500/50 rounded-xl p-6 text-center">
-              <Radio className="w-12 h-12 text-cyan-400 mx-auto mb-4" />
-              <h3 className="font-bold text-white mb-2">Working Musicians</h3>
-              <p className="text-gray-400 text-sm">DJs, bands, solo artists juggling gigs + studio + admin</p>
+            <div className="bg-gradient-to-br from-purple-900/30 to-purple-900/10 border-2 border-purple-500/50 rounded-2xl p-8 text-center">
+              <Briefcase className="w-16 h-16 text-purple-400 mx-auto mb-4" />
+              <h3 className="font-black text-white text-xl mb-3">Managers</h3>
+              <p className="text-gray-400">Managing 3-10 artists. Need everything in one place.</p>
             </div>
 
-            <div className="bg-gradient-to-br from-purple-900/30 to-purple-900/10 border-2 border-purple-500/50 rounded-xl p-6 text-center">
-              <Briefcase className="w-12 h-12 text-purple-400 mx-auto mb-4" />
-              <h3 className="font-bold text-white mb-2">Managers</h3>
-              <p className="text-gray-400 text-sm">Handling multiple artists without drowning in spreadsheets</p>
+            <div className="bg-gradient-to-br from-cyan-900/30 to-cyan-900/10 border-2 border-cyan-500/50 rounded-2xl p-8 text-center">
+              <Users className="w-16 h-16 text-cyan-400 mx-auto mb-4" />
+              <h3 className="font-black text-white text-xl mb-3">Indie Labels</h3>
+              <p className="text-gray-400">Small roster. Can't afford enterprise tools.</p>
             </div>
 
-            <div className="bg-gradient-to-br from-pink-900/30 to-pink-900/10 border-2 border-pink-500/50 rounded-xl p-6 text-center">
-              <Users className="w-12 h-12 text-pink-400 mx-auto mb-4" />
-              <h3 className="font-bold text-white mb-2">Small Labels</h3>
-              <p className="text-gray-400 text-sm">Managing roster without enterprise software costs</p>
+            <div className="bg-gradient-to-br from-pink-900/30 to-pink-900/10 border-2 border-pink-500/50 rounded-2xl p-8 text-center">
+              <TrendingUp className="w-16 h-16 text-pink-400 mx-auto mb-4" />
+              <h3 className="font-black text-white text-xl mb-3">Self-Managed Artists</h3>
+              <p className="text-gray-400">Doing it yourself. Need a co-manager.</p>
             </div>
           </div>
         </div>
 
-        {/* WHY IT WORKS */}
-        <div className="bg-gradient-to-br from-cyan-900/20 via-purple-900/20 to-pink-900/20 border-2 border-cyan-500/30 rounded-xl p-8 mb-12">
-          <h2 className="text-2xl font-black text-cyan-400 mb-6 text-center">Why CB51 Works</h2>
+        {/* NUMBERS */}
+        <div className="bg-gradient-to-br from-green-900/30 to-green-900/10 border-2 border-green-500/50 rounded-2xl p-10 mb-16">
+          <h2 className="text-3xl font-black text-white mb-8 text-center">The Reality</h2>
           
-          <div className="space-y-4">
-            <div className="flex items-start gap-4">
-              <CheckCircle className="w-6 h-6 text-green-400 flex-shrink-0 mt-1" />
-              <div>
-                <p className="text-white font-bold mb-1">Built by musicians, for musicians</p>
-                <p className="text-gray-400 text-sm">Not generic project management. Music industry specific.</p>
-              </div>
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="text-center">
+              <p className="text-6xl font-black text-green-400 mb-3">5hrs</p>
+              <p className="text-gray-400">Saved per artist per week</p>
             </div>
 
-            <div className="flex items-start gap-4">
-              <Zap className="w-6 h-6 text-yellow-400 flex-shrink-0 mt-1" />
-              <div>
-                <p className="text-white font-bold mb-1">AI does the boring stuff</p>
-                <p className="text-gray-400 text-sm">Email parsing, contract drafting, schedule conflicts - handled automatically.</p>
-              </div>
+            <div className="text-center">
+              <p className="text-6xl font-black text-cyan-400 mb-3">100%</p>
+              <p className="text-gray-400">Gig offers tracked</p>
             </div>
 
-            <div className="flex items-start gap-4">
-              <Clock className="w-6 h-6 text-cyan-400 flex-shrink-0 mt-1" />
-              <div>
-                <p className="text-white font-bold mb-1">5 hours/week back to making music</p>
-                <p className="text-gray-400 text-sm">Less admin, more studio time.</p>
-              </div>
+            <div className="text-center">
+              <p className="text-6xl font-black text-purple-400 mb-3">£0</p>
+              <p className="text-gray-400">Lost to missed invoices</p>
             </div>
+          </div>
 
+          <div className="mt-10 bg-black/60 border border-green-500/30 rounded-xl p-6">
             <div className="flex items-start gap-4">
-              <Shield className="w-6 h-6 text-purple-400 flex-shrink-0 mt-1" />
+              <CheckCircle className="w-8 h-8 text-green-400 flex-shrink-0" />
               <div>
-                <p className="text-white font-bold mb-1">Your data stays yours</p>
-                <p className="text-gray-400 text-sm">P2P sync. Works offline. No Big Tech.</p>
+                <p className="text-white font-black text-xl mb-2">Music Industry Specific</p>
+                <p className="text-gray-400">Not adapted from generic business software. Built from scratch for how managers actually work. By people who've managed artists.</p>
               </div>
             </div>
           </div>
         </div>
 
         {/* PRICING */}
-        <div className="bg-black/60 border-2 border-cyan-500/30 rounded-xl p-8 mb-12">
-          <h2 className="text-2xl font-black text-white mb-6 text-center">Simple Pricing</h2>
+        <div className="bg-black/60 border-2 border-cyan-500/50 rounded-2xl p-10 mb-16">
+          <h2 className="text-3xl font-black text-white mb-8 text-center">Pricing</h2>
           
-          <div className="max-w-md mx-auto">
-            <div className="bg-gradient-to-br from-cyan-900/40 to-purple-900/40 border-2 border-cyan-500 rounded-xl p-8 text-center">
-              <p className="text-5xl font-black text-cyan-400 mb-2">£25/mo</p>
-              <p className="text-gray-300 mb-6">Per artist or manager</p>
-              <ul className="text-left space-y-2 text-gray-300 text-sm mb-6">
-                <li className="flex items-center gap-2">
-                  <CheckCircle className="w-4 h-4 text-green-400" />
-                  Unlimited gigs & calendar
-                </li>
-                <li className="flex items-center gap-2">
-                  <CheckCircle className="w-4 h-4 text-green-400" />
-                  AI email assistant
-                </li>
-                <li className="flex items-center gap-2">
-                  <CheckCircle className="w-4 h-4 text-green-400" />
-                  Band/team sharing
-                </li>
-                <li className="flex items-center gap-2">
-                  <CheckCircle className="w-4 h-4 text-green-400" />
-                  Finance tracking
-                </li>
-                <li className="flex items-center gap-2">
-                  <CheckCircle className="w-4 h-4 text-green-400" />
-                  Contract templates
-                </li>
-              </ul>
-              <p className="text-xs text-gray-500">First month free for beta testers</p>
+          <div className="max-w-lg mx-auto">
+            <div className="bg-gradient-to-br from-cyan-900/40 to-purple-900/40 border-2 border-cyan-500 rounded-2xl p-10">
+              <div className="text-center mb-8">
+                <p className="text-6xl font-black text-cyan-400 mb-3">£25</p>
+                <p className="text-gray-400 text-xl">per month per manager</p>
+                <p className="text-gray-500 text-sm mt-2">Manage unlimited artists</p>
+              </div>
+              <div className="space-y-3 text-gray-300">
+                <div className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0" />
+                  <span>AI email scanning & parsing</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0" />
+                  <span>Unlimited artists & gigs</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0" />
+                  <span>Band voting & coordination</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0" />
+                  <span>Calendar & finance tools</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0" />
+                  <span>Team access (band members free)</span>
+                </div>
+              </div>
+              <div className="mt-8 pt-6 border-t border-cyan-500/30">
+                <p className="text-center text-gray-500 text-sm">First month free</p>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* THE DIFFERENCE */}
-        <div className="text-center mb-12">
-          <h2 className="text-2xl font-black text-white mb-6">What Makes CB51 Different?</h2>
+        {/* WHY NOW */}
+        <div className="text-center mb-16">
+          <h2 className="text-3xl font-black text-white mb-8">Why This Exists</h2>
           
-          <div className="bg-gradient-to-r from-pink-900/20 via-purple-900/20 to-cyan-900/20 border-2 border-pink-500/30 rounded-xl p-8">
-            <Heart className="w-12 h-12 text-pink-400 mx-auto mb-4" />
-            <p className="text-xl text-gray-300 mb-4 max-w-2xl mx-auto">
-              We're not selling software. We're giving musicians their time back.
+          <div className="bg-gradient-to-br from-gray-900 to-black border-2 border-gray-700 rounded-2xl p-10 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-300 leading-relaxed mb-6">
+              Every manager we spoke to said the same thing: "I spend 15 hours a week on emails and admin. I became a manager to help artists, not to be a glorified PA."
             </p>
-            <p className="text-gray-400 max-w-2xl mx-auto">
-              Built by UniversalFamily51 - the same team behind UF51 healing frequencies. 
-              We understand artists because we <span className="text-pink-400 font-bold">are</span> artists.
+            <p className="text-lg text-gray-400 leading-relaxed">
+              So we built this. AI that actually understands the music industry. No learning curve. No enterprise nonsense. Just works.
             </p>
           </div>
         </div>
@@ -208,13 +220,11 @@ export default function CB51AboutPage() {
         <div className="text-center">
           <Link 
             to={createPageUrl("CB51")}
-            className="inline-flex items-center gap-3 bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 hover:from-cyan-400 hover:via-purple-400 hover:to-pink-400 text-white font-black px-8 py-4 rounded-xl text-lg transition-all shadow-lg hover:shadow-xl"
-            style={{ boxShadow: '0 0 30px rgba(34, 211, 238, 0.3)' }}
+            className="inline-block bg-cyan-500 hover:bg-cyan-400 text-black font-black px-12 py-5 rounded-xl text-xl transition-all"
           >
-            <Radio className="w-6 h-6" />
-            Try CB51 Now
+            Get Early Access
           </Link>
-          <p className="text-gray-500 text-sm mt-4">First month free • Cancel anytime</p>
+          <p className="text-gray-500 text-sm mt-4">First 100 managers get first 3 months free</p>
         </div>
 
       </div>
@@ -222,8 +232,7 @@ export default function CB51AboutPage() {
       {/* FOOTER */}
       <div className="border-t border-cyan-500/30 bg-black/60 py-8">
         <div className="max-w-4xl mx-auto px-6 text-center">
-          <p className="text-gray-500 text-sm mb-2">Built with ♾️❤️ by UniversalFamily51</p>
-          <p className="text-gray-600 text-xs">Part of the UF51 ecosystem - healing frequencies, conscious tech, artist tools</p>
+          <p className="text-gray-600 text-sm">Built by UniversalFamily51</p>
         </div>
       </div>
 
