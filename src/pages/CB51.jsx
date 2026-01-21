@@ -89,22 +89,22 @@ export default function CB51() {
         queryKey: ['scottAllGigOffers'],
         queryFn: () => base44.entities.ScottGigOffer.filter({}),
         enabled: !!user && !artistsLoading,
-        staleTime: 10000,
-        refetchInterval: 5000 // Auto-refresh every 5s so Scott sees new offers instantly
+        staleTime: 30000,
+        refetchInterval: false // Removed auto-refresh - manual refresh or realtime only
     });
 
     const { data: invoices = [] } = useQuery({
         queryKey: ['scottInvoices'],
         queryFn: () => base44.entities.ScottInvoice.filter({}),
         enabled: !!user && !artistsLoading,
-        staleTime: 60000
+        staleTime: 120000 // 2 min cache
     });
 
     const { data: messages = [] } = useQuery({
         queryKey: ['scottMessages'],
         queryFn: () => base44.entities.ScottMessage.filter({}),
         enabled: !!user && !artistsLoading,
-        staleTime: 30000
+        staleTime: 120000 // 2 min cache
     });
 
     // Real-time subscription to extension auto-scans
