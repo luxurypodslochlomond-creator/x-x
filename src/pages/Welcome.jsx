@@ -50,7 +50,7 @@ export default function WelcomePage() {
                             <COOLASFUCKWaves size={60} animate={true} />
                             <h1 className="text-6xl md:text-7xl font-black font-mono text-white">UF51</h1>
                         </div>
-                        <p className="text-cyan-400 font-mono text-sm tracking-widest">ONE FAMILY • FOUR TOOLS</p>
+                        <p className="text-cyan-400 font-mono text-sm tracking-widest">ONE FREQUENCY • FOUR TOOLS</p>
                     </div>
 
                     <div className="space-y-4">
