@@ -5,6 +5,7 @@ import { COOLASFUCKWaves, COOLASFUCKBrain, COOLASFUCKHeart, COOLASFUCKMoon, COOL
 import BiometricHealing from '@/components/radio/BiometricHealing';
 import OvernightSleepMonitor from '@/components/healing/OvernightSleepMonitor';
 import AI51CustomFrequencyGenerator from '@/components/ai51/AI51CustomFrequencyGenerator';
+import AI51FrequencyIntelligence from '@/components/ai51/AI51FrequencyIntelligence';
 import { base44 } from '@/api/base44Client';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
