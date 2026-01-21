@@ -193,37 +193,37 @@ export default function CB51() {
             </div>
 
             {/* WHAT NEEDS ME - CLEAN */}
-            {(pendingOffers > 0 || awaitingBand > 0 || overdueInvoices > 0 || urgentMessages > 0) && (
+            {(stats.pendingOffers > 0 || stats.awaitingBand > 0 || stats.overdueInvoices > 0 || stats.urgentMessages > 0) && (
                 <div className="mb-8 bg-black border-2 border-amber-500 rounded-xl p-4">
                     <div className="flex items-center gap-2 mb-4">
                         <AlertCircle className="w-5 h-5 text-amber-400" />
                         <h2 className="text-amber-400 font-black font-mono">NEEDS ATTENTION</h2>
                     </div>
                     <div className="space-y-2">
-                        {pendingOffers > 0 && (
+                        {stats.pendingOffers > 0 && (
                             <Link to={createPageUrl('ScottGigOffers')}>
                                 <div className="bg-black border border-amber-500/50 rounded-lg p-3 hover:border-amber-500 transition-all">
-                                    <p className="text-amber-400 font-bold font-mono text-sm">{pendingOffers} gig offers →</p>
+                                    <p className="text-amber-400 font-bold font-mono text-sm">{stats.pendingOffers} gig offers →</p>
                                 </div>
                             </Link>
                         )}
-                        {awaitingBand > 0 && (
+                        {stats.awaitingBand > 0 && (
                             <Link to={createPageUrl('ScottGigOffers')}>
                                 <div className="bg-black border border-cyan-500/50 rounded-lg p-3 hover:border-cyan-500 transition-all">
-                                    <p className="text-cyan-400 font-bold font-mono text-sm">{awaitingBand} awaiting band →</p>
+                                    <p className="text-cyan-400 font-bold font-mono text-sm">{stats.awaitingBand} awaiting band →</p>
                                 </div>
                             </Link>
                         )}
-                        {overdueInvoices > 0 && (
+                        {stats.overdueInvoices > 0 && (
                             <Link to={createPageUrl('ScottInvoices')}>
                                 <div className="bg-black border border-red-500/50 rounded-lg p-3 hover:border-red-500 transition-all">
-                                    <p className="text-red-400 font-bold font-mono text-sm">{overdueInvoices} overdue invoices →</p>
+                                    <p className="text-red-400 font-bold font-mono text-sm">{stats.overdueInvoices} overdue invoices →</p>
                                 </div>
                             </Link>
                         )}
-                        {urgentMessages > 0 && (
+                        {stats.urgentMessages > 0 && (
                             <div className="bg-black border border-red-500/50 rounded-lg p-3">
-                                <p className="text-red-400 font-bold font-mono text-sm">{urgentMessages} urgent messages</p>
+                                <p className="text-red-400 font-bold font-mono text-sm">{stats.urgentMessages} urgent messages</p>
                             </div>
                         )}
                     </div>
