@@ -200,7 +200,16 @@ const LayoutInner = ({ children, currentPageName }) => {
     window.scrollTo({ top: 0, behavior: 'instant' });
     // Check if can go back
     setCanGoBack(window.history.length > 1);
-  }, [location.pathname]);
+
+    // Set CB51 data attribute for loader styling
+    const isCB51Page = currentPageName.startsWith('CB51') || currentPageName.startsWith('Scott');
+    const rootEl = document.getElementById('root');
+    if (isCB51Page && rootEl) {
+      rootEl.setAttribute('data-cb51', 'true');
+    } else if (rootEl) {
+      rootEl.removeAttribute('data-cb51');
+    }
+    }, [location.pathname, currentPageName]);
 
   useEffect(() => {
     // Disable browser scroll restoration for instant page switches
