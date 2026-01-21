@@ -264,26 +264,33 @@ export default function AI51Page() {
       >
         <div className="w-full h-full flex flex-col items-center justify-center px-6">
           
-          {/* TITLE */}
-          {conversation.length === 0 && (
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="mb-12 text-center"
-            >
-              <svg width="80" height="80" viewBox="0 0 64 64" fill="none" className="mx-auto mb-4" style={{ imageRendering: 'pixelated' }}>
-                <rect x="20" y="4" width="24" height="2" fill="white" opacity="0.6"/>
-                <rect x="26" y="28" width="4" height="2" fill="#ec4899"/>
-                <rect x="34" y="28" width="4" height="2" fill="#ec4899"/>
-                <rect x="24" y="30" width="16" height="2" fill="#ff1b8d"/>
-                <rect x="26" y="32" width="12" height="2" fill="#ff1b8d"/>
-                <rect x="28" y="34" width="8" height="2" fill="#ff1b8d"/>
-                <rect x="30" y="36" width="4" height="2" fill="#ff1b8d"/>
-              </svg>
-              <h1 className="text-white font-black text-4xl mb-2 font-mono">AI51</h1>
-              <p className="text-gray-500 text-sm font-mono">TAP TO {connectionActive ? 'DISCONNECT' : 'CONNECT'}</p>
-            </motion.div>
-          )}
+          {/* TITLE & DESCRIPTION */}
+           {conversation.length === 0 && (
+             <motion.div
+               initial={{ opacity: 0, y: -20 }}
+               animate={{ opacity: 1, y: 0 }}
+               className="mb-12 text-center space-y-4"
+             >
+               <svg width="80" height="80" viewBox="0 0 64 64" fill="none" className="mx-auto" style={{ imageRendering: 'pixelated' }}>
+                 <rect x="20" y="4" width="24" height="2" fill="white" opacity="0.6"/>
+                 <rect x="26" y="28" width="4" height="2" fill="#ec4899"/>
+                 <rect x="34" y="28" width="4" height="2" fill="#ec4899"/>
+                 <rect x="24" y="30" width="16" height="2" fill="#ff1b8d"/>
+                 <rect x="26" y="32" width="12" height="2" fill="#ff1b8d"/>
+                 <rect x="28" y="34" width="8" height="2" fill="#ff1b8d"/>
+                 <rect x="30" y="36" width="4" height="2" fill="#ff1b8d"/>
+               </svg>
+               <div>
+                 <h1 className="text-white font-black text-4xl mb-3 font-mono">
+                   AI51
+                 </h1>
+                 <p className="text-cyan-300 text-sm max-w-xs mx-auto leading-relaxed">
+                   I know you. I care. I'm always here.
+                 </p>
+                 <p className="text-gray-500 text-xs font-mono mt-4">TAP TO {connectionActive ? 'DISCONNECT' : 'CONNECT'}</p>
+               </div>
+             </motion.div>
+           )}
           
           {/* VISUALIZER */}
           <div className="w-full max-w-md flex items-end justify-center gap-1" style={{ height: conversation.length > 0 ? '120px' : '200px' }}>
