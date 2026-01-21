@@ -370,23 +370,26 @@ Listen free at UF51.LOVE`;
 
 
 
-        {/* P2P MESH - 8-BIT */}
-        <Card className="bg-black border-4 border-green-500">
-          <CardContent className="p-6">
-            <div className="flex items-start gap-4">
-              <COOLASFUCKP2P size={40} animate={true} />
-              <div>
-                <h3 className="text-xl font-black font-mono text-green-400 mb-2">P2P SHARE</h3>
-                <p className="text-gray-300 font-mono text-sm mb-3">
-                  Share button → WhatsApp/Bluetooth. Artist gets paid when they connect.
-                </p>
-                <p className="text-green-400 text-xs font-mono">
-                  🍄 Mesh network. Unstoppable.
-                </p>
+        {/* P2P MESH - BLUETOOTH + WiFi DIRECT */}
+        <div className="space-y-4">
+          <Card className="bg-black border-4 border-green-500">
+            <CardContent className="p-6">
+              <div className="flex items-start gap-4">
+                <COOLASFUCKP2P size={40} animate={true} />
+                <div>
+                  <h3 className="text-xl font-black font-mono text-green-400 mb-2">P2P MESH</h3>
+                  <p className="text-gray-300 font-mono text-sm mb-3">
+                    Bluetooth + WiFi Direct. AI51 picks best route. Zero ego. Wired. ♾️❤️
+                  </p>
+                  <p className="text-green-400 text-xs font-mono">
+                    🍄 Mesh network. Unstoppable.
+                  </p>
+                </div>
               </div>
-            </div>
-          </CardContent>
-        </Card>
+            </CardContent>
+          </Card>
+          <WiFiDirectMesh />
+        </div>
 
         {/* NO ADS - 8-BIT */}
         <Card className="bg-black border-4 border-red-500">
