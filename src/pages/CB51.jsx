@@ -169,7 +169,7 @@ export default function CB51() {
                         <div className="text-center hover:bg-green-500/10 rounded-lg p-2 transition-all">
                             <p className="text-green-400/60 text-[9px] font-mono tracking-wider">PIPELINE</p>
                             <p className="text-white text-base font-black font-mono mt-1">
-                                £{allOffers.filter(o => o.status === 'pending_manager_review' || o.status === 'sent_to_band').reduce((sum, o) => sum + (o.fee || 0), 0).toLocaleString()}
+                                £{stats.pipelineValue.toLocaleString()}
                             </p>
                         </div>
                     </Link>
@@ -177,7 +177,7 @@ export default function CB51() {
                     <div className="flex-1">
                         <div className="text-center hover:bg-cyan-500/10 rounded-lg p-2 transition-all">
                             <p className="text-cyan-400/60 text-[9px] font-mono tracking-wider">SAVED</p>
-                            <p className="text-white text-base font-black font-mono mt-1">{hoursPerWeek}h</p>
+                            <p className="text-white text-base font-black font-mono mt-1">{stats.hoursPerWeek}h</p>
                         </div>
                     </div>
                     <div className="w-px h-10 bg-gradient-to-b from-transparent via-cyan-500/30 to-transparent"></div>
@@ -185,7 +185,7 @@ export default function CB51() {
                         <div className="text-center hover:bg-amber-500/10 rounded-lg p-2 transition-all">
                             <p className="text-amber-400/60 text-[9px] font-mono tracking-wider">TODAY</p>
                             <p className="text-white text-base font-black font-mono mt-1">
-                                {pendingOffers + awaitingBand + overdueInvoices + urgentMessages}
+                                {stats.pendingOffers + stats.awaitingBand + stats.overdueInvoices + stats.urgentMessages}
                             </p>
                         </div>
                     </div>
