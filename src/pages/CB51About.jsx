@@ -25,9 +25,9 @@ export default function CB51AboutPage() {
             <h1 className="text-6xl md:text-7xl font-black mb-4 text-white">
               CB51
             </h1>
-            <p className="text-3xl md:text-4xl font-bold text-cyan-400 mb-4">For Artist Managers</p>
+            <p className="text-3xl md:text-4xl font-bold text-cyan-400 mb-4">Your AI Co-Manager</p>
             <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-              Manage multiple artists without drowning in admin
+              Stop drowning in emails
             </p>
           </motion.div>
         </div>
@@ -36,39 +36,38 @@ export default function CB51AboutPage() {
       {/* THE PROBLEM */}
       <div className="max-w-4xl mx-auto px-6 py-16">
         <div className="bg-gradient-to-br from-red-900/30 to-red-900/10 border-2 border-red-500/50 rounded-2xl p-10 mb-16">
-          <h2 className="text-3xl font-black text-white mb-6">You're Managing 5 Artists</h2>
+          <h2 className="text-3xl font-black text-white mb-6">You Know This Feeling</h2>
           <div className="space-y-4 text-gray-300 text-lg">
             <p className="flex items-start gap-3">
               <span className="text-red-400 text-2xl">→</span>
-              <span>127 unread emails with gig offers buried somewhere</span>
+              <span>Saturday 11pm. Promoter emails about Tuesday. Band's asleep. You reply Monday. Gig's gone.</span>
             </p>
             <p className="flex items-start gap-3">
               <span className="text-red-400 text-2xl">→</span>
-              <span>Band members asking "did you reply to that promoter?"</span>
+              <span>Drummer asks "did we say yes to that?" You search 4 WhatsApp groups. Can't find it.</span>
             </p>
             <p className="flex items-start gap-3">
               <span className="text-red-400 text-2xl">→</span>
-              <span>£4,000 in unpaid invoices you forgot to chase</span>
+              <span>Invoice from March still unpaid. You forgot. They forgot. £800 gone.</span>
             </p>
             <p className="flex items-start gap-3">
               <span className="text-red-400 text-2xl">→</span>
-              <span>Double-booked a session because you use 3 different calendars</span>
+              <span>Artist 3 has a gig same night as Artist 5's session. Didn't spot it til yesterday.</span>
             </p>
           </div>
-          <p className="text-gray-500 text-sm mt-6 italic">Sound familiar?</p>
         </div>
 
         {/* THE INNOVATION */}
         <div className="bg-gradient-to-br from-cyan-900/30 to-purple-900/20 border-2 border-cyan-500/50 rounded-2xl p-10 mb-16">
-          <h2 className="text-3xl font-black text-white mb-8 text-center">What Makes It Different</h2>
+          <h2 className="text-3xl font-black text-white mb-8 text-center">How It Actually Works</h2>
           
           <div className="space-y-6">
             <div className="bg-black/60 border border-cyan-500/30 rounded-xl p-6">
               <div className="flex items-start gap-4">
                 <div className="text-cyan-400 text-3xl flex-shrink-0">→</div>
                 <div>
-                  <h3 className="font-black text-white text-xl mb-2">AI Reads Your Email</h3>
-                  <p className="text-gray-400">Scans Gmail automatically. Finds gig offers. Extracts fee, date, venue. Drafts replies.</p>
+                  <h3 className="font-black text-white text-xl mb-2">Watches Your Inbox</h3>
+                  <p className="text-gray-400">Gig offer arrives 11pm Saturday. AI spots it, pulls out fee/date/venue, drafts reply. You wake up, approve, send. Done.</p>
                 </div>
               </div>
             </div>
@@ -77,8 +76,8 @@ export default function CB51AboutPage() {
               <div className="flex items-start gap-4">
                 <div className="text-purple-400 text-3xl flex-shrink-0">→</div>
                 <div>
-                  <h3 className="font-black text-white text-xl mb-2">Band Votes In-App</h3>
-                  <p className="text-gray-400">Send offer to band. They vote yes/no. You reply when everyone's in. Zero WhatsApp chaos.</p>
+                  <h3 className="font-black text-white text-xl mb-2">Band Sees It In-App</h3>
+                  <p className="text-gray-400">Tap "send to band". Everyone votes on their phone. All yes? You reply. Someone says no? Move on. No group chat mess.</p>
                 </div>
               </div>
             </div>
@@ -87,8 +86,8 @@ export default function CB51AboutPage() {
               <div className="flex items-start gap-4">
                 <div className="text-green-400 text-3xl flex-shrink-0">→</div>
                 <div>
-                  <h3 className="font-black text-white text-xl mb-2">One Calendar</h3>
-                  <p className="text-gray-400">All your artists. All their gigs, sessions, deadlines. One view.</p>
+                  <h3 className="font-black text-white text-xl mb-2">Spots Clashes Before You</h3>
+                  <p className="text-gray-400">One calendar. All artists. Flags double-bookings. Warns you before you say yes to something impossible.</p>
                 </div>
               </div>
             </div>
@@ -97,8 +96,8 @@ export default function CB51AboutPage() {
               <div className="flex items-start gap-4">
                 <div className="text-amber-400 text-3xl flex-shrink-0">→</div>
                 <div>
-                  <h3 className="font-black text-white text-xl mb-2">Learns Your Style</h3>
-                  <p className="text-gray-400">How you write emails, your fee negotiations, your terms. Gets better every time.</p>
+                  <h3 className="font-black text-white text-xl mb-2">Remembers How You Work</h3>
+                  <p className="text-gray-400">Learns your email style. Your standard fee. Your rider requirements. Writes like you. Gets smarter with every reply.</p>
                 </div>
               </div>
             </div>
@@ -107,25 +106,25 @@ export default function CB51AboutPage() {
 
         {/* WHO IT'S FOR */}
         <div className="mb-16">
-          <h2 className="text-3xl font-black text-white mb-8 text-center">Built For</h2>
+          <h2 className="text-3xl font-black text-white mb-8 text-center">Who This Is For</h2>
           
           <div className="grid md:grid-cols-3 gap-6">
             <div className="bg-gradient-to-br from-purple-900/30 to-purple-900/10 border-2 border-purple-500/50 rounded-2xl p-8 text-center">
               <Briefcase className="w-16 h-16 text-purple-400 mx-auto mb-4" />
-              <h3 className="font-black text-white text-xl mb-3">Managers</h3>
-              <p className="text-gray-400">Managing 3-10 artists. Need everything in one place.</p>
+              <h3 className="font-black text-white text-xl mb-3">Working Managers</h3>
+              <p className="text-gray-400">3-10 artists. Too many emails. Not enough hours.</p>
             </div>
 
             <div className="bg-gradient-to-br from-cyan-900/30 to-cyan-900/10 border-2 border-cyan-500/50 rounded-2xl p-8 text-center">
               <Users className="w-16 h-16 text-cyan-400 mx-auto mb-4" />
               <h3 className="font-black text-white text-xl mb-3">Indie Labels</h3>
-              <p className="text-gray-400">Small roster. Can't afford enterprise tools.</p>
+              <p className="text-gray-400">6-12 acts. Budget tight. Need something that just works.</p>
             </div>
 
             <div className="bg-gradient-to-br from-pink-900/30 to-pink-900/10 border-2 border-pink-500/50 rounded-2xl p-8 text-center">
               <TrendingUp className="w-16 h-16 text-pink-400 mx-auto mb-4" />
-              <h3 className="font-black text-white text-xl mb-3">Self-Managed Artists</h3>
-              <p className="text-gray-400">Doing it yourself. Need a co-manager.</p>
+              <h3 className="font-black text-white text-xl mb-3">DIY Artists</h3>
+              <p className="text-gray-400">Managing yourself. Want help without hiring someone.</p>
             </div>
           </div>
         </div>
@@ -229,14 +228,14 @@ export default function CB51AboutPage() {
 
         {/* WHY NOW */}
         <div className="text-center mb-16">
-          <h2 className="text-3xl font-black text-white mb-8">Why This Exists</h2>
+          <h2 className="text-3xl font-black text-white mb-8">Why We Built This</h2>
           
           <div className="bg-gradient-to-br from-gray-900 to-black border-2 border-gray-700 rounded-2xl p-10 max-w-3xl mx-auto">
             <p className="text-xl text-gray-300 leading-relaxed mb-6">
-              Managers spend 15 hours a week on emails and admin. That's 15 hours not spent on what actually matters.
+              We managed bands. Spent 15 hours a week chasing emails and invoices. Thought "there has to be a better way."
             </p>
             <p className="text-lg text-gray-400 leading-relaxed">
-              Built by people who've managed artists. Free for working musicians. Paid for labels who can afford it.
+              Built by musicians for musicians. Free for working artists and managers. Labels who can afford it pay so everyone else doesn't have to.
             </p>
           </div>
         </div>
