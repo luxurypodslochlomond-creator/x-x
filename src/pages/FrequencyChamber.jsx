@@ -3461,10 +3461,18 @@ export default function FrequencyChamber() {
         )}
       </AnimatePresence>
 
+      {/* AI51 ADAPTIVE INTELLIGENCE */}
+      <AI51FrequencyIntelligence 
+        selectedProtocol={selectedProtocol}
+        currentHRV={currentHRV}
+        isPlaying={isPlaying}
+        onProtocolRecommend={handleVoiceRecommendation}
+      />
+
       {/* FULLSCREEN PLAYER - COMPLETELY SEPARATE */}
       <AnimatePresence>
         {isPlaying && selectedProtocol && (
-          <motion.div
+           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
