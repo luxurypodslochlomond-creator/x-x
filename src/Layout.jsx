@@ -476,7 +476,6 @@ const LayoutInner = ({ children, currentPageName }) => {
                   {/* MOBILE FOOTER */}
                   <div className="mt-4 pt-4 border-t border-white/10 text-center">
                     <LiveClock />
-                    <p className="text-xs text-gray-600 mt-2 pb-4">Built on <a href="https://base44.com" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-cyan-400">Base44</a></p>
                   </div>
                   </div>
                   </div>
@@ -557,7 +556,6 @@ const LayoutInner = ({ children, currentPageName }) => {
             {/* MISSION & FOOTER */}
             <div className="mt-8 pt-6 border-t border-white/10">
                               <LiveClock />
-                              <p className="text-xs text-gray-600 text-center mt-2">Built on <a href="https://base44.com" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-cyan-400">Base44</a></p>
                             </div>
                             </div>
                             </aside>
@@ -567,7 +565,6 @@ const LayoutInner = ({ children, currentPageName }) => {
           {currentPageName !== 'AI51' && (
             <footer className="border-t border-cyan-500/20 bg-[#0a0f1a]/60">
               <LiveClock />
-              <p className="text-xs text-gray-600 text-center pb-4">Built on <a href="https://base44.com" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-cyan-400">Base44</a></p>
             </footer>
           )}
         </main>
