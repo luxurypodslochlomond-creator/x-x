@@ -8,6 +8,8 @@ import AI51CustomFrequencyGenerator from '@/components/ai51/AI51CustomFrequencyG
 import { base44 } from '@/api/base44Client';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
+import FrequencyShareButton from '@/components/shared/FrequencyShareButton';
+import WiFiDirectMesh from '@/components/shared/WiFiDirectMesh';
 
 /**
  * UF51 FREQUENCY CHAMBER
@@ -3236,18 +3238,26 @@ export default function FrequencyChamber() {
                 </div>
               )}
 
-              {/* START BUTTON */}
-              <button
-                onClick={handlePlayPause}
-                className="w-full py-4 text-xl font-black font-mono transition-all border-2 mb-6"
-                style={{
-                  backgroundColor: 'transparent',
-                  borderColor: selectedProtocol.color,
-                  color: selectedProtocol.color,
-                }}
-              >
-                START
-              </button>
+              {/* START BUTTON + SHARE */}
+              <div className="flex gap-3 mb-6">
+                <button
+                  onClick={handlePlayPause}
+                  className="flex-1 py-4 text-xl font-black font-mono transition-all border-2"
+                  style={{
+                    backgroundColor: 'transparent',
+                    borderColor: selectedProtocol.color,
+                    color: selectedProtocol.color,
+                  }}
+                >
+                  START
+                </button>
+                <div className="flex items-center">
+                  <FrequencyShareButton 
+                    frequency={selectedProtocol}
+                    onShared={() => {}}
+                  />
+                </div>
+              </div>
 
               {/* TINNITUS FREQUENCY FINDER */}
               {selectedProtocol.id === 'tinnitus' && (
@@ -3626,6 +3636,13 @@ Try it: https://uf51.love/FrequencyChamber`;
             </div>
             </div>
           </motion.button>
+        </div>
+      )}
+
+      {/* MESH NETWORK */}
+      {!selectedProtocol && (
+        <div className="max-w-4xl mx-auto p-4">
+          <WiFiDirectMesh />
         </div>
       )}
 
