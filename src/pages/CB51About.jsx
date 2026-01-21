@@ -38,6 +38,8 @@ export default function CB51AboutPage() {
     setMeta('og:title', 'CB51 - Your AI Co-Manager');
     setMeta('og:description', 'Stop drowning in emails. AI watches your inbox. Band votes in-app. One calendar. Free for artists & managers forever.');
     setMeta('og:site_name', 'CB51');
+    setMeta('og:type', 'website');
+    setMeta('og:image', 'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/cb51-share.png');
     
     // Twitter
     setMetaName('twitter:title', 'CB51 - Your AI Co-Manager');
