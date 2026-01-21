@@ -109,22 +109,34 @@ export default function WiFiDirectMesh() {
       {/* Shared Frequencies */}
       {sharedFrequencies.length > 0 && (
         <div className="space-y-2">
-          <p className="text-cyan-400 font-bold text-xs font-mono px-1">RECENT SHARES:</p>
+          <p className="text-cyan-400 font-bold text-xs font-mono px-1">RECENT SHARES (TAP TO USE):</p>
           <div className="space-y-1 max-h-48 overflow-y-auto">
             {sharedFrequencies.map((freq, i) => (
-              <motion.div
+              <motion.button
                 key={i}
                 initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}
-                className="bg-black/60 border-l-4 border-cyan-500 p-2 rounded text-sm"
+                onClick={() => {
+                  // Dispatch event to use this frequency
+                  window.dispatchEvent(
+                    new CustomEvent('useSharedFrequency', {
+                      detail: { 
+                        id: freq.frequency_id || freq.frequency_name.toLowerCase().replace(/\s+/g, '_'),
+                        name: freq.frequency_name,
+                        freq: freq.frequency_hz
+                      }
+                    })
+                  );
+                }}
+                className="w-full bg-black/60 border-l-4 border-cyan-500 hover:border-cyan-400 hover:bg-cyan-500/10 p-2 rounded text-sm transition-all cursor-pointer"
               >
-                <p className="text-white font-mono text-xs">
+                <p className="text-white font-mono text-xs text-left">
                   <span className="text-cyan-400">{freq.frequency_name}</span>
                 </p>
-                <p className="text-gray-400 text-xs font-mono">
+                <p className="text-gray-400 text-xs font-mono text-left">
                   {freq.frequency_hz}Hz • {new Date(freq.received_at).toLocaleTimeString()}
                 </p>
-              </motion.div>
+              </motion.button>
             ))}
           </div>
         </div>
