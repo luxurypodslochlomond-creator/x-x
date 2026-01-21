@@ -1,229 +1,269 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { base44 } from '@/api/base44Client';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { Radio, ThumbsUp, ThumbsDown, CheckCircle, Music } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { format } from 'date-fns';
-
-/**
- * BAND MEMBER VOTING PAGE
- * Band members vote yes/no on gig offers
- * Simple, no login required - just name
- */
+import { CheckCircle2, XCircle, Clock, ArrowLeft } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { createPageUrl } from '@/utils';
 
 export default function ScottBandVote() {
-    const queryClient = useQueryClient();
-    const urlParams = new URLSearchParams(window.location.search);
-    const offerId = urlParams.get('offer');
-    
-    const [memberName, setMemberName] = useState('');
-    const [vote, setVote] = useState(null);
-    const [notes, setNotes] = useState('');
-    const [hasVoted, setHasVoted] = useState(false);
+  const [selectedGigId, setSelectedGigId] = useState(null);
+  const [selectedAnswer, setSelectedAnswer] = useState(null);
+  const [reasonText, setReasonText] = useState('');
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
-    const { data: offer, isLoading } = useQuery({
-        queryKey: ['scottGigOffer', offerId],
-        queryFn: () => base44.entities.ScottGigOffer.filter({ id: offerId }).then(r => r[0]),
-        enabled: !!offerId
-    });
+  // Get current user
+  const { data: user } = useQuery({
+    queryKey: ['currentUser'],
+    queryFn: () => base44.auth.me()
+  });
 
-    // Check if this person already voted
-    useEffect(() => {
-        if (offer && memberName) {
-            const alreadyVoted = offer.band_responses?.some(r => r.member_name.toLowerCase() === memberName.toLowerCase());
-            setHasVoted(alreadyVoted);
+  // Get all gig offers where band member has a response pending
+  const { data: myGigOffers = [], isLoading } = useQuery({
+    queryKey: ['myGigOffers', user?.email],
+    queryFn: async () => {
+      if (!user?.email) return [];
+      
+      // Get all responses for this band member
+      const responses = await base44.entities.ScottBandResponse.filter({
+        band_member_email: user.email
+      });
+      
+      if (!responses.length) return [];
+      
+      // Get full gig offer details for each
+      const offers = await Promise.all(
+        responses.map(async (response) => {
+          const gig = await base44.entities.ScottGigOffer.get(response.gig_offer_id);
+          return { ...gig, myResponse: response };
+        })
+      );
+      
+      return offers.sort((a, b) => new Date(b.date) - new Date(a.date));
+    },
+    enabled: !!user?.email
+  });
+
+  // Submit vote
+  const submitVoteMutation = useMutation({
+    mutationFn: async (voteData) => {
+      const response = await base44.entities.ScottBandResponse.update(
+        voteData.responseId,
+        {
+          decision: voteData.decision,
+          reason_if_no: voteData.decision === 'no' ? voteData.reason : null,
+          responded_at: new Date().toISOString()
         }
-    }, [offer, memberName]);
+      );
+      return response;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['myGigOffers'] });
+      setSelectedGigId(null);
+      setSelectedAnswer(null);
+      setReasonText('');
+    }
+  });
 
-    const voteMutation = useMutation({
-        mutationFn: async () => {
-            const responses = offer.band_responses || [];
-            responses.push({
-                member_name: memberName,
-                response: vote,
-                notes: notes,
-                responded_at: new Date().toISOString()
-            });
+  const handleSubmitVote = () => {
+    const gig = myGigOffers.find(g => g.id === selectedGigId);
+    if (!gig) return;
 
-            return base44.entities.ScottGigOffer.update(offer.id, {
-                band_responses: responses,
-                all_responses_in: false // Manager can manually mark this
-            });
-        },
-        onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ['scottGigOffer'] });
-            setHasVoted(true);
-        }
+    submitVoteMutation.mutate({
+      responseId: gig.myResponse.id,
+      decision: selectedAnswer,
+      reason: reasonText
     });
+  };
 
-    const handleVote = () => {
-        if (!memberName || !vote) return;
-        voteMutation.mutate();
-    };
-
-    if (isLoading) {
-        return (
-            <div className="min-h-screen bg-black flex items-center justify-center">
-                <div className="text-center">
-                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-cyan-400 mx-auto mb-4"></div>
-                    <p className="text-gray-500 font-mono">Loading gig offer...</p>
-                </div>
-            </div>
-        );
-    }
-
-    if (!offer) {
-        return (
-            <div className="min-h-screen bg-black flex items-center justify-center p-4">
-                <div className="text-center">
-                    <Radio className="w-16 h-16 text-red-400 mx-auto mb-4" />
-                    <h1 className="text-2xl font-black text-red-400 mb-2 font-mono">GIG NOT FOUND</h1>
-                    <p className="text-gray-500 font-mono">Check your link</p>
-                </div>
-            </div>
-        );
-    }
-
-    if (hasVoted) {
-        return (
-            <div className="min-h-screen bg-black flex items-center justify-center p-4">
-                <motion.div
-                    initial={{ scale: 0.9, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    className="max-w-md w-full text-center"
-                >
-                    <CheckCircle className="w-20 h-20 text-green-400 mx-auto mb-4" />
-                    <h1 className="text-3xl font-black text-green-400 mb-2 font-mono">VOTE RECORDED!</h1>
-                    <p className="text-gray-400 font-mono mb-4">Thanks {memberName}! Scott will see your vote.</p>
-                    
-                    <div className="bg-gray-900 border-2 border-green-500 rounded-lg p-6 mt-6">
-                        <Music className="w-8 h-8 text-cyan-400 mx-auto mb-3" />
-                        <p className="text-white font-bold text-lg mb-2">{offer.venue}</p>
-                        <p className="text-gray-400 text-sm font-mono">
-                            {format(new Date(offer.date), 'd MMM yyyy')} • £{offer.fee}
-                        </p>
-                    </div>
-                </motion.div>
-            </div>
-        );
-    }
-
+  if (isLoading) {
     return (
-        <div className="min-h-screen bg-black text-white p-4">
-            <div className="max-w-2xl mx-auto py-8">
-                
-                {/* HEADER */}
-                <div className="text-center mb-8">
-                    <Radio className="w-16 h-16 text-cyan-400 mx-auto mb-4" />
-                    <h1 className="text-3xl font-black text-cyan-400 font-mono mb-2">GIG OFFER VOTE</h1>
-                    <p className="text-gray-500 text-sm font-mono">Quick yes or no from you</p>
-                </div>
-
-                {/* GIG DETAILS */}
-                <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-2 border-purple-500 rounded-lg p-6 mb-6">
-                    <h2 className="text-purple-400 font-black text-xl font-mono mb-4">{offer.venue}</h2>
-                    
-                    <div className="grid grid-cols-2 gap-4 mb-4">
-                        <div className="bg-black/60 rounded p-3">
-                            <p className="text-xs text-gray-400 font-mono mb-1">DATE</p>
-                            <p className="text-white font-bold font-mono">{format(new Date(offer.date), 'd MMM yyyy')}</p>
-                        </div>
-                        <div className="bg-black/60 rounded p-3">
-                            <p className="text-xs text-gray-400 font-mono mb-1">FEE</p>
-                            <p className="text-white font-bold font-mono">£{offer.fee}</p>
-                        </div>
-                    </div>
-
-                    {offer.city && (
-                        <div className="bg-black/60 rounded p-3 mb-3">
-                            <p className="text-xs text-gray-400 font-mono mb-1">LOCATION</p>
-                            <p className="text-white font-mono">{offer.city}{offer.county ? `, ${offer.county}` : ''}</p>
-                        </div>
-                    )}
-
-                    {offer.manager_notes && (
-                        <div className="bg-black/60 rounded p-3">
-                            <p className="text-xs text-gray-400 font-mono mb-1">SCOTT'S NOTES</p>
-                            <p className="text-white text-sm font-mono">{offer.manager_notes}</p>
-                        </div>
-                    )}
-                </div>
-
-                {/* VOTING FORM */}
-                <div className="bg-gray-900 border-2 border-cyan-500 rounded-lg p-6">
-                    <div className="space-y-4">
-                        <div>
-                            <label className="text-cyan-400 text-xs font-bold font-mono mb-2 block">YOUR NAME</label>
-                            <Input
-                                value={memberName}
-                                onChange={(e) => setMemberName(e.target.value)}
-                                placeholder="e.g., Sarah, John, etc"
-                                className="bg-black border-2 border-gray-700 text-white h-12 text-lg font-bold"
-                            />
-                        </div>
-
-                        <div>
-                            <label className="text-cyan-400 text-xs font-bold font-mono mb-3 block">YOUR VOTE</label>
-                            <div className="grid grid-cols-2 gap-3">
-                                <button
-                                    onClick={() => setVote('yes')}
-                                    className={`p-6 rounded-lg border-4 transition-all ${
-                                        vote === 'yes'
-                                            ? 'bg-green-500/40 border-green-400'
-                                            : 'bg-gray-800 border-gray-700 hover:border-green-500'
-                                    }`}
-                                >
-                                    <ThumbsUp className={`w-12 h-12 mx-auto mb-2 ${vote === 'yes' ? 'text-green-400' : 'text-gray-500'}`} />
-                                    <p className={`font-black text-xl font-mono ${vote === 'yes' ? 'text-green-400' : 'text-gray-500'}`}>
-                                        YES
-                                    </p>
-                                </button>
-                                <button
-                                    onClick={() => setVote('no')}
-                                    className={`p-6 rounded-lg border-4 transition-all ${
-                                        vote === 'no'
-                                            ? 'bg-red-500/40 border-red-400'
-                                            : 'bg-gray-800 border-gray-700 hover:border-red-500'
-                                    }`}
-                                >
-                                    <ThumbsDown className={`w-12 h-12 mx-auto mb-2 ${vote === 'no' ? 'text-red-400' : 'text-gray-500'}`} />
-                                    <p className={`font-black text-xl font-mono ${vote === 'no' ? 'text-red-400' : 'text-gray-500'}`}>
-                                        NO
-                                    </p>
-                                </button>
-                            </div>
-                        </div>
-
-                        <div>
-                            <label className="text-cyan-400 text-xs font-bold font-mono mb-2 block">NOTES (optional)</label>
-                            <Textarea
-                                value={notes}
-                                onChange={(e) => setNotes(e.target.value)}
-                                placeholder="Any thoughts? Conflicts? Excited?"
-                                className="bg-black border-2 border-gray-700 text-white"
-                                rows={3}
-                            />
-                        </div>
-
-                        <Button
-                            onClick={handleVote}
-                            disabled={!memberName || !vote || voteMutation.isPending}
-                            className="w-full bg-cyan-500 hover:bg-cyan-600 text-black font-black text-lg h-14"
-                        >
-                            {voteMutation.isPending ? 'SENDING...' : 'SUBMIT VOTE'}
-                        </Button>
-                    </div>
-                </div>
-
-                {offer.response_deadline && (
-                    <p className="text-center text-gray-500 text-xs font-mono mt-4">
-                        Vote by: {format(new Date(offer.response_deadline), 'd MMM yyyy HH:mm')}
-                    </p>
-                )}
-            </div>
-        </div>
+      <div className="min-h-screen bg-gradient-to-br from-[#0a0514] via-[#1a0f2a] to-[#0a0514] p-4 flex items-center justify-center">
+        <p className="text-cyan-400 font-mono">LOADING GIGS...</p>
+      </div>
     );
+  }
+
+  if (!user) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-[#0a0514] via-[#1a0f2a] to-[#0a0514] p-4 flex items-center justify-center">
+        <p className="text-red-400 font-mono">NOT LOGGED IN</p>
+      </div>
+    );
+  }
+
+  const selectedGig = myGigOffers.find(g => g.id === selectedGigId);
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-[#0a0514] via-[#1a0f2a] to-[#0a0514] p-4">
+      <div className="max-w-2xl mx-auto">
+        {/* Header */}
+        <div className="flex items-center gap-3 mb-8">
+          <button
+            onClick={() => navigate(-1)}
+            className="p-2 hover:bg-cyan-500/10 rounded-lg transition-colors"
+          >
+            <ArrowLeft className="w-5 h-5 text-cyan-400" />
+          </button>
+          <h1 className="text-2xl font-black text-white font-mono">GIG VOTES</h1>
+        </div>
+
+        {myGigOffers.length === 0 ? (
+          <div className="text-center py-12">
+            <p className="text-gray-400 font-mono">No gigs to vote on yet</p>
+          </div>
+        ) : !selectedGig ? (
+          // List of gigs
+          <div className="space-y-3">
+            {myGigOffers.map(gig => {
+              const hasVoted = gig.myResponse?.decision && gig.myResponse.decision !== 'pending';
+              const voted = gig.myResponse?.decision || 'pending';
+
+              return (
+                <motion.button
+                  key={gig.id}
+                  onClick={() => setSelectedGigId(gig.id)}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  whileHover={{ scale: 1.02 }}
+                  className={`w-full text-left p-4 rounded-lg border-2 transition-all ${
+                    voted === 'yes'
+                      ? 'border-green-500/50 bg-green-500/10'
+                      : voted === 'no'
+                      ? 'border-red-500/50 bg-red-500/10'
+                      : 'border-cyan-500/50 bg-cyan-500/10 hover:border-cyan-500'
+                  }`}
+                >
+                  <div className="flex items-start justify-between">
+                    <div className="flex-1">
+                      <h3 className="text-white font-bold mb-1">{gig.venue_name}</h3>
+                      <p className="text-gray-300 text-sm">{gig.promoter_name}</p>
+                      <p className="text-cyan-300 text-xs mt-2">{gig.date} • £{gig.fee}</p>
+                    </div>
+                    <div className="flex-shrink-0 flex items-center gap-2">
+                      {voted === 'yes' && <CheckCircle2 className="w-5 h-5 text-green-400" />}
+                      {voted === 'no' && <XCircle className="w-5 h-5 text-red-400" />}
+                      {voted === 'pending' && <Clock className="w-5 h-5 text-amber-400 animate-pulse" />}
+                      <span className="text-xs font-mono">
+                        {voted === 'yes' && 'YES'}
+                        {voted === 'no' && 'NO'}
+                        {voted === 'pending' && 'PENDING'}
+                      </span>
+                    </div>
+                  </div>
+                </motion.button>
+              );
+            })}
+          </div>
+        ) : (
+          // Voting interface
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="space-y-6"
+          >
+            {/* Back button */}
+            <button
+              onClick={() => {
+                setSelectedGigId(null);
+                setSelectedAnswer(null);
+                setReasonText('');
+              }}
+              className="text-cyan-400 hover:text-cyan-300 font-mono text-sm flex items-center gap-2"
+            >
+              ← BACK TO LIST
+            </button>
+
+            {/* Gig details */}
+            <div className="bg-gradient-to-br from-cyan-500/10 to-purple-500/10 border border-cyan-500/30 rounded-lg p-6">
+              <h2 className="text-2xl font-black text-white mb-4">{selectedGig.venue_name}</h2>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <p className="text-gray-400 text-xs font-mono mb-1">PROMOTER</p>
+                  <p className="text-white font-bold">{selectedGig.promoter_name}</p>
+                </div>
+                <div>
+                  <p className="text-gray-400 text-xs font-mono mb-1">DATE</p>
+                  <p className="text-white font-bold">{selectedGig.date}</p>
+                </div>
+                <div>
+                  <p className="text-gray-400 text-xs font-mono mb-1">FEE</p>
+                  <p className="text-green-400 font-bold">£{selectedGig.fee}</p>
+                </div>
+                <div>
+                  <p className="text-gray-400 text-xs font-mono mb-1">MANAGER NOTES</p>
+                  <p className="text-gray-300 text-sm">{selectedGig.manager_notes || 'None'}</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Vote buttons */}
+            <div className="space-y-3">
+              <p className="text-gray-400 font-mono text-sm">YOUR DECISION:</p>
+              <div className="grid grid-cols-2 gap-3">
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => setSelectedAnswer('yes')}
+                  className={`py-4 rounded-lg font-black text-lg border-2 transition-all ${
+                    selectedAnswer === 'yes'
+                      ? 'bg-green-500 border-green-500 text-black'
+                      : 'border-green-500/50 text-green-400 hover:border-green-500'
+                  }`}
+                >
+                  👍 YES
+                </motion.button>
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => setSelectedAnswer('no')}
+                  className={`py-4 rounded-lg font-black text-lg border-2 transition-all ${
+                    selectedAnswer === 'no'
+                      ? 'bg-red-500 border-red-500 text-white'
+                      : 'border-red-500/50 text-red-400 hover:border-red-500'
+                  }`}
+                >
+                  👎 NO
+                </motion.button>
+              </div>
+            </div>
+
+            {/* Reason if NO */}
+            {selectedAnswer === 'no' && (
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="space-y-2"
+              >
+                <p className="text-gray-400 font-mono text-sm">WHY NOT? (CRITICAL FOR MANAGER)</p>
+                <textarea
+                  value={reasonText}
+                  onChange={(e) => setReasonText(e.target.value)}
+                  placeholder="Tell manager why you can't do this gig..."
+                  className="w-full bg-gray-900 border border-gray-700 rounded-lg p-3 text-white placeholder-gray-500 focus:outline-none focus:border-cyan-500 resize-none"
+                  rows={3}
+                />
+              </motion.div>
+            )}
+
+            {/* Submit button */}
+            <motion.button
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={handleSubmitVote}
+              disabled={!selectedAnswer || submitVoteMutation.isPending}
+              className={`w-full py-4 rounded-lg font-black text-lg font-mono transition-all ${
+                selectedAnswer
+                  ? 'bg-cyan-500 hover:bg-cyan-600 text-black'
+                  : 'bg-gray-700 text-gray-500 cursor-not-allowed'
+              }`}
+            >
+              {submitVoteMutation.isPending ? 'SUBMITTING...' : 'SUBMIT VOTE'}
+            </motion.button>
+          </motion.div>
+        )}
+      </div>
+    </div>
+  );
 }

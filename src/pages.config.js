@@ -63,6 +63,7 @@ import AdminPlatformShowcase from './pages/AdminPlatformShowcase';
 import AdminProjectReference from './pages/AdminProjectReference';
 import AdminQuickGrants from './pages/AdminQuickGrants';
 import AdminScotlandFunding from './pages/AdminScotlandFunding';
+import AdminScottNotificationsSpec from './pages/AdminScottNotificationsSpec';
 import AdminStarlingSetup from './pages/AdminStarlingSetup';
 import AdminStrategicNotes from './pages/AdminStrategicNotes';
 import AdminUKNewCICFunding from './pages/AdminUKNewCICFunding';
@@ -221,9 +222,8 @@ import ScottComparison from './pages/ScottComparison';
 import ScottContracts from './pages/ScottContracts';
 import ScottDemos from './pages/ScottDemos';
 import ScottEmailDashboard from './pages/ScottEmailDashboard';
-import ScottEmailSyncDiagnostics from './pages/ScottEmailSyncDiagnostics';
-import Teachers from './pages/Teachers';
 import ScottExpenses from './pages/ScottExpenses';
+import ScottEmailSyncDiagnostics from './pages/ScottEmailSyncDiagnostics';
 import ScottFeatureRequests from './pages/ScottFeatureRequests';
 import ScottFinanceAdmin from './pages/ScottFinanceAdmin';
 import ScottFinancialDashboard from './pages/ScottFinancialDashboard';
@@ -274,6 +274,7 @@ import SubmitFrequency from './pages/SubmitFrequency';
 import SubmitProofOfLove from './pages/SubmitProofOfLove';
 import SymbolForge from './pages/SymbolForge';
 import TeacherInput from './pages/TeacherInput';
+import Teachers from './pages/Teachers';
 import TechScout from './pages/TechScout';
 import TechStack from './pages/TechStack';
 import TechnicalSpecification from './pages/TechnicalSpecification';
@@ -315,7 +316,6 @@ import YoungWarriors from './pages/YoungWarriors';
 import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
-import AdminScottNotificationsSpec from './pages/AdminScottNotificationsSpec';
 import __Layout from './Layout.jsx';
 
 
@@ -385,6 +385,7 @@ export const PAGES = {
     "AdminProjectReference": AdminProjectReference,
     "AdminQuickGrants": AdminQuickGrants,
     "AdminScotlandFunding": AdminScotlandFunding,
+    "AdminScottNotificationsSpec": AdminScottNotificationsSpec,
     "AdminStarlingSetup": AdminStarlingSetup,
     "AdminStrategicNotes": AdminStrategicNotes,
     "AdminUKNewCICFunding": AdminUKNewCICFunding,
@@ -543,9 +544,8 @@ export const PAGES = {
     "ScottContracts": ScottContracts,
     "ScottDemos": ScottDemos,
     "ScottEmailDashboard": ScottEmailDashboard,
-    "ScottEmailSyncDiagnostics": ScottEmailSyncDiagnostics,
-    "Teachers": Teachers,
     "ScottExpenses": ScottExpenses,
+    "ScottEmailSyncDiagnostics": ScottEmailSyncDiagnostics,
     "ScottFeatureRequests": ScottFeatureRequests,
     "ScottFinanceAdmin": ScottFinanceAdmin,
     "ScottFinancialDashboard": ScottFinancialDashboard,
@@ -596,6 +596,7 @@ export const PAGES = {
     "SubmitProofOfLove": SubmitProofOfLove,
     "SymbolForge": SymbolForge,
     "TeacherInput": TeacherInput,
+    "Teachers": Teachers,
     "TechScout": TechScout,
     "TechStack": TechStack,
     "TechnicalSpecification": TechnicalSpecification,
@@ -637,7 +638,6 @@ export const PAGES = {
     "ZeroEgoProtocol": ZeroEgoProtocol,
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
-    "AdminScottNotificationsSpec": AdminScottNotificationsSpec,
 }
 
 export const pagesConfig = {
