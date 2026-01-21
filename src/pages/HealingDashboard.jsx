@@ -110,6 +110,50 @@ export default function HealingDashboard() {
 
 
 
+                {/* YOUR PERSONAL JOURNEY */}
+                {hasPersonalData && (
+                    <div className="bg-black border-4 border-cyan-500 p-6 mb-6">
+                        <div className="flex items-center gap-3 mb-4">
+                            <COOLASFUCKHeart size={32} animate={true} />
+                            <div>
+                                <h2 className="text-2xl font-black font-mono text-cyan-400">
+                                    YOUR PERSONAL JOURNEY
+                                </h2>
+                                <p className="text-cyan-300 font-mono text-xs">
+                                    Your healing data, your progress
+                                </p>
+                            </div>
+                        </div>
+
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                            <div className="bg-cyan-900/20 border-2 border-cyan-500 p-4 text-center">
+                                <p className="text-3xl font-black text-cyan-400 font-mono">
+                                    {totalSessions}
+                                </p>
+                                <p className="text-xs text-gray-500 font-mono mt-1">sessions done</p>
+                            </div>
+                            <div className="bg-purple-900/20 border-2 border-purple-500 p-4 text-center">
+                                <p className="text-3xl font-black text-purple-400 font-mono">
+                                    {topProtocol ? (topProtocol[0] === 'menopause' ? 'vitality' : topProtocol[0].split('_')[0]) : '—'}
+                                </p>
+                                <p className="text-xs text-gray-500 font-mono mt-1">your fave</p>
+                            </div>
+                            <div className="bg-green-900/20 border-2 border-green-500 p-4 text-center">
+                                <p className="text-3xl font-black text-green-400 font-mono">
+                                    -{Math.round(Math.abs(improvement))}
+                                </p>
+                                <p className="text-xs text-gray-500 font-mono mt-1">stress drop</p>
+                            </div>
+                            <div className="bg-pink-900/20 border-2 border-pink-500 p-4 text-center">
+                                <p className="text-3xl font-black text-pink-400 font-mono">
+                                    ✓
+                                </p>
+                                <p className="text-xs text-gray-500 font-mono mt-1">keep healing</p>
+                            </div>
+                        </div>
+                    </div>
+                )}
+
                 {/* COLLECTIVE HEALING FIELD */}
                 <div className="bg-black border-4 border-purple-500 p-6 mb-6">
                     <div className="flex items-center gap-3 mb-4">
