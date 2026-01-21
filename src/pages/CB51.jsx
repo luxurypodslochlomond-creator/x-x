@@ -322,7 +322,7 @@ export default function CB51() {
                         <div className="absolute inset-0 bg-gradient-to-t from-green-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                         <Calendar className="w-9 h-9 text-green-400 mx-auto mb-2 relative z-10" />
                         <p className="text-green-400 font-black font-mono text-sm relative z-10">CALENDAR</p>
-                        {upcomingGigs.length > 0 && <p className="text-white text-2xl font-black font-mono mt-1 relative z-10">{upcomingGigs.length}</p>}
+                        {stats.upcomingGigs > 0 && <p className="text-white text-2xl font-black font-mono mt-1 relative z-10">{stats.upcomingGigs}</p>}
                     </motion.div>
                 </Link>
                 <Link to={createPageUrl('ScottMessageInbox')}>
