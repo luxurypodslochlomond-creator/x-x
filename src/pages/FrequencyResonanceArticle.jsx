@@ -5,7 +5,6 @@ import { createPageUrl } from '@/utils';
 
 /**
  * RESONANCE AS FUNDAMENTAL PHYSICS
- * Popular Science Article for Feeley / London Publishing
  * 
  * Credible. Non-woo. Applied physics.
  * Shows why Frequency Chamber works without the mysticism.
@@ -216,7 +215,7 @@ We just forgot to apply it *intentionally* to healing.
 
       <div className="max-w-4xl mx-auto">
         <div className="mb-8 flex items-center justify-between">
-          <h1 className="text-3xl font-black text-cyan-400 font-mono">ARTICLE FOR FEELEY</h1>
+          <h1 className="text-3xl font-black text-cyan-400 font-mono">RESONANCE ARTICLE</h1>
           <button
             onClick={handleCopyArticle}
             className="flex items-center gap-2 bg-cyan-500 hover:bg-cyan-600 text-black font-bold px-4 py-2 rounded-lg transition-all"
@@ -273,10 +272,9 @@ We just forgot to apply it *intentionally* to healing.
         <div className="mt-8 bg-gradient-to-r from-cyan-500/10 to-purple-500/10 border border-cyan-500/30 rounded-xl p-6">
           <p className="text-cyan-400 font-mono text-sm mb-3">💡 NEXT STEPS:</p>
           <ul className="text-gray-300 space-y-2 text-sm font-mono">
-            <li>✓ Send to Feeley for feedback</li>
             <li>✓ Gather UF51 user data (outcomes, before/after)</li>
             <li>✓ Add real case studies from your mates</li>
-            <li>✓ Feeley shapes for publication</li>
+            <li>✓ Submit to publications</li>
           </ul>
         </div>
       </div>
