@@ -1,59 +1,67 @@
 import { createClientFromRequest } from 'npm:@base44/sdk@0.8.6';
 
 /**
- * NOTIFY MANAGER ALL VOTES IN
- * Grouped notification when all band members voted
+ * NOTIFY MANAGER - All band votes received
+ * Check if all band members have voted, alert manager
  */
 
 Deno.serve(async (req) => {
   try {
     const base44 = createClientFromRequest(req);
-    const user = await base44.auth.me();
-    
-    if (!user || user.role !== 'admin') {
-      return Response.json({ error: 'Admin only' }, { status: 403 });
-    }
+    const payload = await req.json();
 
-    const { offerId, venue, allYes } = await req.json();
+    const { event, data } = payload;
+
+    // Get gig offer
+    const gigOffer = await base44.asServiceRole.entities.ScottGigOffer.get(data.id);
     
-    // Get manager's push subscriptions
-    const subscriptions = await base44.entities.ScottPushSubscription.filter({
-      enabled: true
+    // Get all band responses for this gig
+    const responses = await base44.asServiceRole.entities.ScottBandResponse.filter({
+      gig_offer_id: gigOffer.id
     });
-    
-    if (subscriptions.length === 0) {
-      return Response.json({ success: true, sent: 0 });
+
+    if (!responses || responses.length === 0) {
+      return Response.json({ skipped: true });
     }
 
-    const result = allYes ? '✅ All YES' : '⚠️ Mixed Votes';
-
-    // Send grouped notification
-    const notifications = await Promise.all(
-      subscriptions.map(async (sub) => {
-        const subscription = JSON.parse(sub.subscription);
-        
-        const payload = JSON.stringify({
-          title: `${result} - Band Voted`,
-          body: `${venue} - Ready to respond`,
-          data: {
-            url: `/ScottGigOffers`,
-            offerId
-          },
-          icon: '/icon-192x192.png',
-          badge: '/badge-72x72.png',
-          requireInteraction: true
-        });
-
-        // TODO: Send via Web Push API
-        console.log('Would send:', payload);
-        
-        return true;
-      })
-    );
+    // Check if all have voted (no pending)
+    const allVoted = responses.every(r => r.decision !== 'pending');
     
+    if (!allVoted) {
+      return Response.json({ skipped: true, reason: 'Not all votes in yet' });
+    }
+
+    // Count yes/no
+    const yesVotes = responses.filter(r => r.decision === 'yes').length;
+    const noVotes = responses.filter(r => r.decision === 'no').length;
+    const totalMembers = responses.length;
+
+    // Get artist for manager
+    const artist = await base44.asServiceRole.entities.ScottArtist.get(gigOffer.artist_id);
+
+    // Build summary
+    const summary = `${yesVotes}/${totalMembers} YES • ${noVotes} NO`;
+    const noReasons = responses
+      .filter(r => r.decision === 'no')
+      .map(r => `${r.band_member_name}: ${r.reason_if_no || 'No reason given'}`)
+      .join('\n');
+
+    // Send email to manager with vote summary
+    await base44.asServiceRole.integrations.Core.SendEmail({
+      to: artist.created_by, // Manager email
+      subject: `✅ VOTES IN: ${gigOffer.venue_name} - ${summary}`,
+      body: `ALL BAND VOTED!\n\n${artist.name} @ ${gigOffer.venue_name}\nDate: ${gigOffer.date}\n\nRESULTS:\n${yesVotes} YES\n${noVotes} NO\n\n${noReasons ? 'REASONS FOR NO:\n' + noReasons : ''}\n\nConfirm or reject in CB51.`
+    });
+
+    // Mark timestamp on gig offer
+    await base44.asServiceRole.entities.ScottGigOffer.update(gigOffer.id, {
+      all_responses_received_at: new Date().toISOString()
+    });
+
     return Response.json({ 
       success: true,
-      sent: notifications.length
+      votes_summary: summary,
+      gig: gigOffer.venue_name
     });
 
   } catch (error) {
