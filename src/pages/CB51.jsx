@@ -77,59 +77,42 @@ export default function CB51() {
         staleTime: 30000 // Cache for 30s
     });
 
-    const artists = allArtists.filter(a => !a.archived);
-    const archivedArtists = allArtists.filter(a => a.archived);
+    // Memoize filtered artists to avoid recalculating
+    const artists = useMemo(() => allArtists.filter(a => !a.archived), [allArtists]);
+    const archivedArtists = useMemo(() => allArtists.filter(a => a.archived), [allArtists]);
 
-    // Load everything else in background (don't block UI)
+    // Load stats data lazily - only when artists are loaded
     const { data: allOffers = [] } = useQuery({
         queryKey: ['scottAllGigOffers'],
         queryFn: () => base44.entities.ScottGigOffer.filter({}),
-        enabled: !!user && !artistsLoading,
-        staleTime: 30000,
-        refetchInterval: false // Removed auto-refresh - manual refresh or realtime only
+        enabled: !!user && artists.length > 0,
+        staleTime: 60000
     });
 
     const { data: invoices = [] } = useQuery({
         queryKey: ['scottInvoices'],
         queryFn: () => base44.entities.ScottInvoice.filter({}),
-        enabled: !!user && !artistsLoading,
-        staleTime: 120000 // 2 min cache
+        enabled: !!user && artists.length > 0,
+        staleTime: 120000
     });
 
     const { data: messages = [] } = useQuery({
         queryKey: ['scottMessages'],
         queryFn: () => base44.entities.ScottMessage.filter({}),
-        enabled: !!user && !artistsLoading,
-        staleTime: 120000 // 2 min cache
+        enabled: !!user && artists.length > 0,
+        staleTime: 120000
     });
 
-    // Real-time subscription to extension auto-scans
-    useEffect(() => {
-        if (!user) return;
-        
-        const unsubscribeGigs = base44.entities.ScottGigOffer.subscribe((event) => {
-            if (event.data?.auto_extracted) {
-                queryClient.invalidateQueries({ queryKey: ['scottAllGigOffers'] });
-            }
-        });
-
-        const unsubscribeTasks = base44.entities.ScottTask.subscribe((event) => {
-            if (event.data?.auto_extracted) {
-                queryClient.invalidateQueries({ queryKey: ['scottTasks'] });
-            }
-        });
-
-        return () => {
-            unsubscribeGigs();
-            unsubscribeTasks();
-        };
-    }, [user, queryClient]);
-
-    // Quick stats (only what we need)
-    const pendingOffers = allOffers.filter(o => o.status === 'pending_manager_review').length;
-    const awaitingBand = allOffers.filter(o => o.status === 'sent_to_band').length;
-    const overdueInvoices = invoices.filter(i => i.status === 'overdue').length;
-    const urgentMessages = messages.filter(m => m.status === 'pending' && m.urgency === 'urgent').length;
+    // Memoize stats calculations
+    const stats = useMemo(() => ({
+        pendingOffers: allOffers.filter(o => o.status === 'pending_manager_review').length,
+        awaitingBand: allOffers.filter(o => o.status === 'sent_to_band').length,
+        overdueInvoices: invoices.filter(i => i.status === 'overdue').length,
+        urgentMessages: messages.filter(m => m.status === 'pending' && m.urgency === 'urgent').length,
+        hoursPerWeek: allOffers.filter(o => o.status === 'pending_manager_review' || o.status === 'sent_to_band').length * 2,
+        upcomingGigs: allOffers.filter(o => o.status === 'confirmed' && o.date && new Date(o.date) > new Date()).length,
+        pipelineValue: allOffers.filter(o => o.status === 'pending_manager_review' || o.status === 'sent_to_band').reduce((sum, o) => sum + (o.fee || 0), 0)
+    }), [allOffers, invoices, messages]);
 
     const archiveArtistMutation = useMutation({
         mutationFn: ({ artistId, archived }) => 
