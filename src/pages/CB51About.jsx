@@ -65,40 +65,40 @@ export default function CB51AboutPage() {
           <div className="space-y-6">
             <div className="bg-black/60 border border-cyan-500/30 rounded-xl p-6">
               <div className="flex items-start gap-4">
-                <Mail className="w-10 h-10 text-cyan-400 flex-shrink-0 mt-1" />
+                <div className="text-cyan-400 text-3xl flex-shrink-0">→</div>
                 <div>
                   <h3 className="font-black text-white text-xl mb-2">AI Reads Your Email</h3>
-                  <p className="text-gray-400">Scans Gmail automatically. Finds gig offers. Extracts fee, date, venue. Drafts professional replies for you to approve.</p>
+                  <p className="text-gray-400">Scans Gmail automatically. Finds gig offers. Extracts fee, date, venue. Drafts replies.</p>
                 </div>
               </div>
             </div>
 
             <div className="bg-black/60 border border-purple-500/30 rounded-xl p-6">
               <div className="flex items-start gap-4">
-                <Users className="w-10 h-10 text-purple-400 flex-shrink-0 mt-1" />
+                <div className="text-purple-400 text-3xl flex-shrink-0">→</div>
                 <div>
-                  <h3 className="font-black text-white text-xl mb-2">Band Coordination</h3>
-                  <p className="text-gray-400">Send offers to the band. They vote yes/no in-app. You reply when everyone's in. Zero WhatsApp chaos.</p>
+                  <h3 className="font-black text-white text-xl mb-2">Band Votes In-App</h3>
+                  <p className="text-gray-400">Send offer to band. They vote yes/no. You reply when everyone's in. Zero WhatsApp chaos.</p>
                 </div>
               </div>
             </div>
 
             <div className="bg-black/60 border border-green-500/30 rounded-xl p-6">
               <div className="flex items-start gap-4">
-                <Calendar className="w-10 h-10 text-green-400 flex-shrink-0 mt-1" />
+                <div className="text-green-400 text-3xl flex-shrink-0">→</div>
                 <div>
-                  <h3 className="font-black text-white text-xl mb-2">One Calendar For Everything</h3>
-                  <p className="text-gray-400">All your artists. All their gigs, sessions, deadlines. One view. Export to Google Calendar if you want.</p>
+                  <h3 className="font-black text-white text-xl mb-2">One Calendar</h3>
+                  <p className="text-gray-400">All your artists. All their gigs, sessions, deadlines. One view.</p>
                 </div>
               </div>
             </div>
 
             <div className="bg-black/60 border border-amber-500/30 rounded-xl p-6">
               <div className="flex items-start gap-4">
-                <Brain className="w-10 h-10 text-amber-400 flex-shrink-0 mt-1" />
+                <div className="text-amber-400 text-3xl flex-shrink-0">→</div>
                 <div>
                   <h3 className="font-black text-white text-xl mb-2">Learns Your Style</h3>
-                  <p className="text-gray-400">AI learns how you write emails, your fee negotiations, your standard terms. Gets better every time.</p>
+                  <p className="text-gray-400">How you write emails, your fee negotiations, your terms. Gets better every time.</p>
                 </div>
               </div>
             </div>
@@ -163,42 +163,50 @@ export default function CB51AboutPage() {
         </div>
 
         {/* PRICING */}
-        <div className="bg-black/60 border-2 border-cyan-500/50 rounded-2xl p-10 mb-16">
-          <h2 className="text-3xl font-black text-white mb-8 text-center">Pricing</h2>
+        <div className="mb-16">
+          <h2 className="text-3xl font-black text-white mb-8 text-center">How It Works</h2>
           
-          <div className="max-w-lg mx-auto">
-            <div className="bg-gradient-to-br from-cyan-900/40 to-purple-900/40 border-2 border-cyan-500 rounded-2xl p-10">
-              <div className="text-center mb-8">
-                <p className="text-6xl font-black text-cyan-400 mb-3">£25</p>
-                <p className="text-gray-400 text-xl">per month per manager</p>
-                <p className="text-gray-500 text-sm mt-2">Manage unlimited artists</p>
-              </div>
-              <div className="space-y-3 text-gray-300">
-                <div className="flex items-center gap-3">
-                  <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0" />
-                  <span>AI email scanning & parsing</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0" />
-                  <span>Unlimited artists & gigs</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0" />
-                  <span>Band voting & coordination</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0" />
-                  <span>Calendar & finance tools</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0" />
-                  <span>Team access (band members free)</span>
-                </div>
-              </div>
-              <div className="mt-8 pt-6 border-t border-cyan-500/30">
-                <p className="text-center text-gray-500 text-sm">First month free</p>
+          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            
+            {/* FREE */}
+            <div className="bg-gradient-to-br from-green-900/30 to-green-900/10 border-2 border-green-500/50 rounded-2xl p-8">
+              <p className="text-green-400 font-black text-sm mb-3">ARTISTS & MANAGERS</p>
+              <p className="text-5xl font-black text-white mb-2">FREE</p>
+              <p className="text-gray-400 text-sm mb-6">Forever</p>
+              <div className="space-y-3 text-gray-300 text-sm">
+                <p>→ Full AI email parsing</p>
+                <p>→ Unlimited artists & gigs</p>
+                <p>→ Band coordination</p>
+                <p>→ Calendar & invoices</p>
               </div>
             </div>
+
+            {/* INDIE LABELS */}
+            <div className="bg-gradient-to-br from-cyan-900/30 to-cyan-900/10 border-2 border-cyan-500/50 rounded-2xl p-8">
+              <p className="text-cyan-400 font-black text-sm mb-3">INDIE LABELS</p>
+              <p className="text-5xl font-black text-white mb-2">£50</p>
+              <p className="text-gray-400 text-sm mb-6">per month</p>
+              <div className="space-y-3 text-gray-300 text-sm">
+                <p>→ Everything in Free</p>
+                <p>→ Manage full roster</p>
+                <p>→ Label dashboard</p>
+                <p>→ Priority support</p>
+              </div>
+            </div>
+
+            {/* WHITE LABEL */}
+            <div className="bg-gradient-to-br from-purple-900/30 to-purple-900/10 border-2 border-purple-500/50 rounded-2xl p-8">
+              <p className="text-purple-400 font-black text-sm mb-3">MAJOR LABELS</p>
+              <p className="text-5xl font-black text-white mb-2">£5k</p>
+              <p className="text-gray-400 text-sm mb-6">one-time setup</p>
+              <div className="space-y-3 text-gray-300 text-sm">
+                <p>→ Your branding</p>
+                <p>→ Your domain</p>
+                <p>→ Custom features</p>
+                <p>→ White label everything</p>
+              </div>
+            </div>
+
           </div>
         </div>
 
@@ -208,10 +216,10 @@ export default function CB51AboutPage() {
           
           <div className="bg-gradient-to-br from-gray-900 to-black border-2 border-gray-700 rounded-2xl p-10 max-w-3xl mx-auto">
             <p className="text-xl text-gray-300 leading-relaxed mb-6">
-              Every manager we spoke to said the same thing: "I spend 15 hours a week on emails and admin. I became a manager to help artists, not to be a glorified PA."
+              Managers spend 15 hours a week on emails and admin. That's 15 hours not spent on what actually matters.
             </p>
             <p className="text-lg text-gray-400 leading-relaxed">
-              So we built this. AI that actually understands the music industry. No learning curve. No enterprise nonsense. Just works.
+              Built by people who've managed artists. Free for working musicians. Paid for labels who can afford it.
             </p>
           </div>
         </div>
@@ -222,9 +230,9 @@ export default function CB51AboutPage() {
             to={createPageUrl("CB51")}
             className="inline-block bg-cyan-500 hover:bg-cyan-400 text-black font-black px-12 py-5 rounded-xl text-xl transition-all"
           >
-            Get Early Access
+            Start Using CB51
           </Link>
-          <p className="text-gray-500 text-sm mt-4">First 100 managers get first 3 months free</p>
+          <p className="text-gray-500 text-sm mt-4">Free for artists & managers forever</p>
         </div>
 
       </div>
