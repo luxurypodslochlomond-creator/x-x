@@ -7,6 +7,7 @@ import { createPageUrl } from '@/utils';
 import { COOLASFUCKHeart, COOLASFUCKWaves, COOLASFUCKBrain } from '@/components/shared/COOLASFUCKIcon';
 import { TrendingDown, Sparkles, Activity, Calendar, Info } from 'lucide-react';
 import MorphicResonance from '@/components/dashboard/MorphicResonance';
+import PersonalJourneyCard from '@/components/dashboard/PersonalJourneyCard';
 
 
 /**
@@ -133,9 +134,14 @@ export default function HealingDashboard() {
                     </div>
 
                     <MorphicResonance />
-                </div>
+                    </div>
 
-                {/* START HEALING CTA - IF NO PERSONAL DATA */}
+                    {/* PERSONAL JOURNEY */}
+                    {hasPersonalData && (
+                        <PersonalJourneyCard sessions={sessions} />
+                    )}
+
+                    {/* START HEALING CTA - IF NO PERSONAL DATA */}
                 {!hasPersonalData && (
                     <div className="bg-black border-4 border-pink-500 p-8 text-center mb-6">
                         <COOLASFUCKHeart size={64} animate={true} className="mx-auto mb-6" />
