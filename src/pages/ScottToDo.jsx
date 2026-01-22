@@ -4,7 +4,7 @@ import { createPageUrl } from '@/utils';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Radio, ArrowLeft, Plus, Trash2, CheckCircle, Circle, Mail, Sparkles } from 'lucide-react';
+import { Radio, ArrowLeft, Plus, Trash2, CheckCircle, Circle, Mail, Sparkles, Users } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
@@ -28,7 +28,8 @@ export default function ScottToDo() {
         responsible_name: '',
         responsible_email: '',
         deadline: '',
-        status: 'pending'
+        status: 'pending',
+        sendToAll: false
     });
     
     const { data: teamMembers = [] } = useQuery({
@@ -61,7 +62,7 @@ export default function ScottToDo() {
         mutationFn: (taskData) => base44.entities.ScottTask.create(taskData),
         onSuccess: (newTaskData) => {
             queryClient.setQueryData(['scottTasks', artistId], (old = []) => [...old, newTaskData]);
-            setNewTask({ title: '', responsible_name: '', responsible_email: '', deadline: '', status: 'pending' });
+            setNewTask({ title: '', responsible_name: '', responsible_email: '', deadline: '', status: 'pending', sendToAll: false });
             setShowAddTask(false);
         }
     });
@@ -90,17 +91,30 @@ export default function ScottToDo() {
     const handleAddTask = () => {
         if (!newTask.title.trim()) return;
         
-        // If team member selected, populate email
-        const taskData = {
-            title: newTask.title,
-            responsible_name: newTask.responsible_name,
-            responsible_email: newTask.responsible_email,
-            deadline: newTask.deadline,
-            status: newTask.status,
-            artist_id: artistId || null
-        };
-        
-        createTaskMutation.mutate(taskData);
+        // If "send to all", create task for each member
+        if (newTask.sendToAll && teamMembers.length > 0) {
+            teamMembers.forEach(member => {
+                createTaskMutation.mutate({
+                    title: newTask.title,
+                    responsible_name: member.name,
+                    responsible_email: member.email,
+                    deadline: newTask.deadline,
+                    status: newTask.status,
+                    artist_id: artistId || null
+                });
+            });
+        } else {
+            // Single task for selected member
+            createTaskMutation.mutate({
+                title: newTask.title,
+                responsible_name: newTask.responsible_name,
+                responsible_email: newTask.responsible_email,
+                deadline: newTask.deadline,
+                status: newTask.status,
+                artist_id: artistId || null
+            });
+        }
+        setNewTask({ title: '', responsible_name: '', responsible_email: '', deadline: '', status: 'pending', sendToAll: false });
     };
 
     const scanEmailForTasks = async () => {
@@ -268,28 +282,56 @@ ${emailText}`,
                             onChange={(e) => setNewTask({...newTask, title: e.target.value})}
                             className="bg-black border-gray-700 text-white font-mono"
                         />
-                        
-                        {teamMembers.length > 0 ? (
-                            <select
-                                value={newTask.responsible_email}
-                                onChange={(e) => {
-                                    const member = teamMembers.find(m => m.email === e.target.value);
-                                    setNewTask({
-                                        ...newTask, 
-                                        responsible_email: e.target.value,
-                                        responsible_name: member?.name || ''
-                                    });
-                                }}
-                                className="w-full bg-black border-2 border-gray-700 text-white font-mono px-3 py-2 rounded"
-                            >
-                                <option value="">Who's responsible?</option>
-                                {teamMembers.map(member => (
-                                    <option key={member.id} value={member.email}>
-                                        {member.name}
-                                    </option>
-                                ))}
-                            </select>
-                        ) : (
+
+                        {teamMembers.length > 0 && (
+                            <div className="space-y-2">
+                                <div className="flex gap-2">
+                                    <button
+                                        onClick={() => setNewTask({...newTask, sendToAll: false, responsible_email: '', responsible_name: ''})}
+                                        className={`flex-1 py-2 rounded font-mono text-sm font-bold transition-all ${
+                                            !newTask.sendToAll
+                                                ? 'bg-cyan-600 text-black'
+                                                : 'bg-gray-800 text-gray-400 hover:bg-gray-700'
+                                        }`}
+                                    >
+                                        INDIVIDUAL
+                                    </button>
+                                    <button
+                                        onClick={() => setNewTask({...newTask, sendToAll: true, responsible_email: '', responsible_name: ''})}
+                                        className={`flex-1 py-2 rounded font-mono text-sm font-bold transition-all flex items-center justify-center gap-1 ${
+                                            newTask.sendToAll
+                                                ? 'bg-cyan-600 text-black'
+                                                : 'bg-gray-800 text-gray-400 hover:bg-gray-700'
+                                        }`}
+                                    >
+                                        <Users className="w-4 h-4" />
+                                        ALL MEMBERS
+                                    </button>
+                                </div>
+                                {!newTask.sendToAll && (
+                                    <select
+                                        value={newTask.responsible_email}
+                                        onChange={(e) => {
+                                            const member = teamMembers.find(m => m.email === e.target.value);
+                                            setNewTask({
+                                                ...newTask, 
+                                                responsible_email: e.target.value,
+                                                responsible_name: member?.name || ''
+                                            });
+                                        }}
+                                        className="w-full bg-black border-2 border-gray-700 text-white font-mono px-3 py-2 rounded"
+                                    >
+                                        <option value="">Pick member...</option>
+                                        {teamMembers.map(member => (
+                                            <option key={member.id} value={member.email}>
+                                                {member.name}
+                                            </option>
+                                        ))}
+                                    </select>
+                                )}
+                            </div>
+                        )}
+                        {teamMembers.length === 0 && (
                             <Input
                                 placeholder="Who's responsible?"
                                 value={newTask.responsible_name}
