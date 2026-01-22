@@ -11,6 +11,8 @@ import { createPageUrl } from '@/utils';
  */
 
 export default function AI51Page() {
+  const navigate = useNavigate();
+  const [isOnline, setIsOnline] = useState(navigator.onLine);
   const [user, setUser] = useState(null);
   const [conversation, setConversation] = useState([]);
   const [connectionActive, setConnectionActive] = useState(false);
