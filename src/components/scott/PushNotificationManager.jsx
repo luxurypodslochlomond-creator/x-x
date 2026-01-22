@@ -85,55 +85,30 @@ export default function PushNotificationManager({ onSubscriptionChange }) {
   const requestNotificationPermission = async () => {
     try {
       setIsLoading(true);
+      const { base44 } = await import('@/api/base44Client');
 
-      // Request permission from user
+      // Step 1: Browser permission
       const permission = await Notification.requestPermission();
       if (permission !== 'granted') {
-        alert('❌ Permission denied - need notification permission for gig alerts');
+        alert('Need notification permission for gig alerts - check browser settings');
         setIsLoading(false);
         return;
       }
 
-      // Auto-generate VAPID keys if not exists
-      const { base44 } = await import('@/api/base44Client');
-      let keysResponse;
-      try {
-        keysResponse = await base44.functions.invoke('generateVapidKeys', {});
-      } catch (keyError) {
-        console.error('VAPID key error:', keyError);
-        alert('⚠️ Server setup needed - contact admin');
-        setIsLoading(false);
-        return;
-      }
-      
+      // Step 2: Get VAPID keys (auto-generates if needed)
+      const keysResponse = await base44.functions.invoke('generateVapidKeys', {});
       const vapidPublicKey = keysResponse.data.publicKey;
 
-      // Get service worker registration
-      let registration;
-      try {
-        registration = await navigator.serviceWorker.ready;
-      } catch (swError) {
-        console.error('Service worker error:', swError);
-        alert('⚠️ Browser compatibility issue - try Chrome/Safari');
-        setIsLoading(false);
-        return;
-      }
+      // Step 3: Service worker ready
+      const registration = await navigator.serviceWorker.ready;
 
-      // Subscribe to push notifications
-      let subscription;
-      try {
-        subscription = await registration.pushManager.subscribe({
-          userVisibleOnly: true,
-          applicationServerKey: urlBase64ToUint8Array(vapidPublicKey),
-        });
-      } catch (subError) {
-        console.error('Subscription error:', subError);
-        alert('⚠️ Could not subscribe - try again or contact support');
-        setIsLoading(false);
-        return;
-      }
+      // Step 4: Subscribe to push
+      const subscription = await registration.pushManager.subscribe({
+        userVisibleOnly: true,
+        applicationServerKey: urlBase64ToUint8Array(vapidPublicKey),
+      });
 
-      // Save subscription to database
+      // Step 5: Save to database
       const user = await base44.auth.me();
       await base44.entities.ScottPushSubscription.create({
         user_email: user.email,
@@ -143,25 +118,29 @@ export default function PushNotificationManager({ onSubscriptionChange }) {
       setIsSubscribed(true);
       onSubscriptionChange?.(subscription);
       
-      console.log('✓ Push subscription created:', subscription);
+      // Test notification
+      await registration.showNotification('CB51 Notifications ✓', {
+        body: 'You\'ll get gig alerts now',
+        icon: '/icon-192x192.png',
+        badge: '/icon-192x192.png',
+        tag: 'cb51-welcome',
+      });
       
-      // Test notification immediately
-      try {
-        await registration.showNotification('CB51 Notifications Enabled ✓', {
-          body: 'You\'ll get alerts for gig offers & urgent messages',
-          icon: '/icon-192x192.png',
-          badge: '/icon-192x192.png',
-          tag: 'cb51-welcome',
-          requireInteraction: false,
-        });
-      } catch (e) {
-        console.log('Test notification:', e);
+      alert('✓ Notifications enabled!');
+    } catch (error) {
+      console.error('Notification setup error:', error);
+      
+      // Smart error messages
+      let message = 'Could not enable notifications';
+      if (error.message?.includes('subscription')) {
+        message = 'Browser blocked push notifications - check settings';
+      } else if (error.message?.includes('service worker')) {
+        message = 'Service worker issue - try refreshing page';
+      } else if (error.message?.includes('VAPID')) {
+        message = 'Server configuration issue - contact admin';
       }
       
-      alert('✓ Notifications enabled! You\'ll get alerts for gig offers & urgent messages.');
-    } catch (error) {
-      console.error('Permission request error:', error);
-      alert(`❌ Setup failed: ${error.message || 'Unknown error'}`);
+      alert(`❌ ${message}\n\nError: ${error.message}`);
     } finally {
       setIsLoading(false);
     }
