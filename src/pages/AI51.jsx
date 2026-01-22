@@ -1,9 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
-import { Send, Home } from 'lucide-react';
+import { Send, Home, AlertCircle } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
+import AI51AtomIcon from '@/components/ai51/AI51AtomIcon';
 
 /**
  * AI51 - Text Chat + Voice Response
