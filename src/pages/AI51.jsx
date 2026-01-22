@@ -1,11 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
-import { WifiOff, Home, RotateCcw } from 'lucide-react';
+import { Send, Home, Volume2 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
-import AI51BiometricEngine from '@/components/ai51/AI51BiometricEngine';
-import { useAI51Store } from '@/components/ai51/AI51SessionStore';
 
 /**
  * AI51 - Pure Intelligence Interface
