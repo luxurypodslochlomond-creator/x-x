@@ -46,19 +46,14 @@ Deno.serve(async (req) => {
       .map(r => `${r.band_member_name}: ${r.reason_if_no || 'No reason given'}`)
       .join('\n');
 
-    // Create PendingApproval for manager review instead of direct notification
-    await base44.asServiceRole.entities.PendingApproval.create({
+    // Send notification directly to manager
+    await base44.asServiceRole.entities.ScottNotification.create({
+      recipient_email: gigOffer.created_by,
+      notification_type: 'manager_votes_in',
       gig_offer_id: gigOffer.id,
-      approval_type: 'band_vote_summary',
-      content: {
-        summary,
-        venue: gigOffer.venue_name,
-        date: gigOffer.date,
-        yesVotes,
-        noVotes,
-        totalMembers,
-        noReasons: noReasons.split('\n').filter(r => r.trim())
-      }
+      title: `✅ VOTES IN: ${gigOffer.venue}`,
+      message: `${summary}${noReasons ? '\n\nNO votes:\n' + noReasons : ''}`,
+      action_url: `/ScottGigOffers?id=${gigOffer.artist_id}`
     });
 
     // Mark timestamp on gig offer

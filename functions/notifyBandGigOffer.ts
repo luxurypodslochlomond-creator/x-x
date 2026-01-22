@@ -45,23 +45,26 @@ Deno.serve(async (req) => {
 
       await Promise.all(responsePromises);
 
-      // Create PendingApproval for manager to approve notification to band
-      await base44.asServiceRole.entities.PendingApproval.create({
-        gig_offer_id: gigOffer.id,
-        approval_type: 'notification',
-        content: {
-          type: 'band_gig_offer',
-          message: `VOTE: ${gigOffer.venue_name}`,
-          details: `${artist.name} • ${gigOffer.date} • £${gigOffer.fee}`,
-          recipientCount: bandMembers.length
-        }
-      });
+      // Send notifications directly to band members
+      const notificationPromises = bandMembers.map(member =>
+        base44.asServiceRole.entities.ScottNotification.create({
+          recipient_email: member.email,
+          notification_type: 'band_gig_offer',
+          gig_offer_id: gigOffer.id,
+          title: `🎸 NEW GIG: ${gigOffer.venue}`,
+          message: `${gigOffer.date} • £${gigOffer.fee?.toLocaleString()} • Vote YES or NO`,
+          decision_button: 'yes',
+          action_url: `/ScottBandVote?gig=${gigOffer.id}`
+        })
+      );
+
+      await Promise.all(notificationPromises);
 
       return Response.json({ 
         success: true,
         responses_created: bandMembers.length,
-        approval_queued: true,
-        gig: gigOffer.venue_name
+        notifications_sent: bandMembers.length,
+        gig: gigOffer.venue
       });
 
     } catch (error) {
