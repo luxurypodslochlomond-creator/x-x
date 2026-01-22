@@ -106,6 +106,13 @@ export default function PushNotificationManager({ onSubscriptionChange }) {
         applicationServerKey: urlBase64ToUint8Array(vapidPublicKey),
       });
 
+      // Save subscription to database
+      const user = await base44.auth.me();
+      await base44.entities.ScottPushSubscription.create({
+        user_email: user.email,
+        subscription_data: subscription.toJSON()
+      });
+
       setIsSubscribed(true);
       onSubscriptionChange?.(subscription);
       
@@ -136,10 +143,18 @@ export default function PushNotificationManager({ onSubscriptionChange }) {
   const disableNotifications = async () => {
     try {
       setIsLoading(true);
+      const { base44 } = await import('@/api/base44Client');
+      const user = await base44.auth.me();
       const registration = await navigator.serviceWorker.ready;
       const subscription = await registration.pushManager.getSubscription();
       
       if (subscription) {
+        // Remove from database
+        const subs = await base44.entities.ScottPushSubscription.filter({ user_email: user.email });
+        for (const sub of subs) {
+          await base44.entities.ScottPushSubscription.delete(sub.id);
+        }
+        
         await subscription.unsubscribe();
         setIsSubscribed(false);
         onSubscriptionChange?.(null);
