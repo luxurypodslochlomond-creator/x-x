@@ -694,6 +694,7 @@ const LayoutInner = ({ children, currentPageName }) => {
 
       {currentPageName.startsWith('Scott') && (
         <>
+          <CB51OfflineHandler />
           <PWAInstallPrompt manifestUrl="/cb51-manifest.json" />
           <AutoBugMonitor />
         </>
