@@ -6,36 +6,22 @@ import { useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 
 /**
- * AI51 - Pure Intelligence Interface
- * Shannon test: one interaction does everything
+ * AI51 - Text Chat + Voice Response
+ * Bulletproof. Beautiful. World-class.
  */
 
 export default function AI51Page() {
   const navigate = useNavigate();
-  const [isOnline, setIsOnline] = useState(navigator.onLine);
   const [user, setUser] = useState(null);
   const [conversation, setConversation] = useState([]);
-  const [connectionActive, setConnectionActive] = useState(false);
-  const [isListening, setIsListening] = useState(false);
-  const [isSpeaking, setIsSpeaking] = useState(false);
-  const [isThinking, setIsThinking] = useState(false);
-  const [transcript, setTranscript] = useState('');
-  const [frequencyData, setFrequencyData] = useState(new Uint8Array(32));
-  const [currentTime, setCurrentTime] = useState(new Date());
-  const [textInputOpen, setTextInputOpen] = useState(false);
   const [textInput, setTextInput] = useState('');
-  const [expandedPillar, setExpandedPillar] = useState(null);
-  const [currentStress, setCurrentStress] = useState(0);
-  const [personalFrequency, setPersonalFrequency] = useState(null);
-  const { store, ready } = useAI51Store();
+  const [isThinking, setIsThinking] = useState(false);
+  const [isSpeaking, setIsSpeaking] = useState(false);
+  const [error, setError] = useState(null);
+  const [isOnline, setIsOnline] = useState(navigator.onLine);
 
-  const recognitionRef = useRef(null);
-  const audioContextRef = useRef(null);
-  const analyzerRef = useRef(null);
-  const micStreamRef = useRef(null);
-  const animationFrameRef = useRef(null);
-  const connectionActiveRef = useRef(false);
   const messagesEndRef = useRef(null);
+  const inputRef = useRef(null);
 
   // Monitor online/offline
   useEffect(() => {
