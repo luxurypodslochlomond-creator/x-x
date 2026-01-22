@@ -82,10 +82,7 @@ export default function WelcomePage() {
                         </svg>
                         </motion.button>
                         
-                        <div className="relative inline-block">
-                            <h1 className="absolute text-9xl md:text-[160px] font-black font-mono text-pink-400 leading-none z-10">AI</h1>
-                            <h1 className="text-9xl md:text-[160px] font-black font-mono text-pink-400/30 leading-none blur-sm">51</h1>
-                        </div>
+                        <h1 className="text-9xl md:text-[160px] font-black font-mono text-pink-400 leading-none" style={{ textShadow: '0 0 40px rgba(236, 72, 153, 0.8)' }}>AI51</h1>
                         <p className="text-gray-400 font-mono text-xs tracking-widest">UNIVERSAL FREQUENCY 51</p>
                     </div>
 
