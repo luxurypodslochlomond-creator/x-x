@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
-import { Send, Home, Volume2 } from 'lucide-react';
+import { Send, Home } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 
@@ -23,20 +23,6 @@ export default function AI51Page() {
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
 
-  // Monitor online/offline
-  useEffect(() => {
-    const handleOnline = () => setIsOnline(true);
-    const handleOffline = () => setIsOnline(false);
-
-    window.addEventListener('online', handleOnline);
-    window.addEventListener('offline', handleOffline);
-
-    return () => {
-      window.removeEventListener('online', handleOnline);
-      window.removeEventListener('offline', handleOffline);
-    };
-  }, []);
-
   // Load user
   useEffect(() => {
     base44.auth.me().then(setUser).catch(() => setUser(null));
@@ -49,245 +35,86 @@ export default function AI51Page() {
     }
   }, []);
 
-  // Setup speech recognition
+  // Online/offline
   useEffect(() => {
-    try {
-      if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
-        const SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
-        recognitionRef.current = new SpeechRecognition();
-        recognitionRef.current.continuous = false;
-        recognitionRef.current.interimResults = true;
-        recognitionRef.current.lang = 'en-GB';
-
-        recognitionRef.current.onresult = (event) => {
-          const current = event.resultIndex;
-          const text = event.results[current][0].transcript;
-          setTranscript(text);
-
-          if (event.results[current].isFinal && text.trim()) {
-            handleMessageSend(text.trim());
-            setTranscript('');
-          }
-        };
-
-        recognitionRef.current.onend = () => {
-          setIsListening(false);
-          if (connectionActiveRef.current && !isSpeaking) {
-            setTimeout(() => {
-              if (connectionActiveRef.current && recognitionRef.current) {
-                try { recognitionRef.current.start(); } catch(e) {}
-              }
-            }, 300);
-          }
-        };
-
-        recognitionRef.current.onstart = () => setIsListening(true);
-        recognitionRef.current.onerror = (event) => {
-          if (event.error === 'not-allowed') stopConnection();
-        };
-      }
-    } catch (error) {
-      console.error('Speech setup failed:', error);
-    }
-
+    const handleOnline = () => setIsOnline(true);
+    const handleOffline = () => setIsOnline(false);
+    window.addEventListener('online', handleOnline);
+    window.addEventListener('offline', handleOffline);
     return () => {
-      if (recognitionRef.current) {
-        try { recognitionRef.current.stop(); } catch(e) {}
-      }
-      if (window.speechSynthesis) window.speechSynthesis.cancel();
-      if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current);
+      window.removeEventListener('online', handleOnline);
+      window.removeEventListener('offline', handleOffline);
     };
   }, []);
 
-  // Auto-speak AI responses
-  useEffect(() => {
-    if (conversation.length === 0) return;
-    
-    const lastMsg = conversation[conversation.length - 1];
-    if (lastMsg.role === 'ai' && lastMsg.content) {
-      speakText(lastMsg.content);
-    }
-  }, [conversation]);
-
-  // Auto-scroll & persist
+  // Auto-scroll
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-    localStorage.setItem('ai51_conversation', JSON.stringify(conversation));
+  }, [conversation]);
+
+  // Persist conversation
+  useEffect(() => {
+    localStorage.setItem('ai51_chat', JSON.stringify(conversation));
   }, [conversation]);
 
   const speakText = (text) => {
     if (!window.speechSynthesis) return;
+
     window.speechSynthesis.cancel();
-    
+
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.rate = 0.9;
     utterance.pitch = 1.0;
-    
+
     const voices = window.speechSynthesis.getVoices();
     const voice = voices.find(v => v.lang === 'en-GB') || voices.find(v => v.lang.startsWith('en')) || voices[0];
     if (voice) utterance.voice = voice;
-    
+
     utterance.onstart = () => setIsSpeaking(true);
-    utterance.onend = () => {
-      setIsSpeaking(false);
-      if (connectionActiveRef.current && recognitionRef.current) {
-        setTimeout(() => {
-          try { recognitionRef.current.start(); } catch(e) {}
-        }, 300);
-      }
-    };
-    
+    utterance.onend = () => setIsSpeaking(false);
+    utterance.onerror = () => setIsSpeaking(false);
+
     window.speechSynthesis.speak(utterance);
   };
 
-  const stopConnection = () => {
-    connectionActiveRef.current = false;
-    setConnectionActive(false);
-    
-    if (recognitionRef.current) {
-      try { recognitionRef.current.stop(); } catch(e) {}
-    }
-    if (micStreamRef.current) {
-      micStreamRef.current.getTracks().forEach(track => track.stop());
-      micStreamRef.current = null;
-    }
-    if (audioContextRef.current) {
-      try { audioContextRef.current.close(); } catch(e) {}
-      audioContextRef.current = null;
-    }
-    if (animationFrameRef.current) {
-      cancelAnimationFrame(animationFrameRef.current);
-    }
-    window.speechSynthesis?.cancel();
-    setIsListening(false);
-    setFrequencyData(new Uint8Array(32));
-  };
+  const handleSendMessage = async (text) => {
+    if (!text.trim() || !isOnline) return;
 
-  const toggleConnection = async () => {
-    if (connectionActive) {
-      stopConnection();
-      return;
-    }
-
-    if (!recognitionRef.current) {
-      alert('Voice not supported');
-      return;
-    }
-
-    // Get AI51's adaptive frequency recommendation
-    if (ready && store) {
-      const rec = await store.getRecommendation(currentStress);
-      setPersonalFrequency(rec);
-    }
-
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({ 
-        audio: { echoCancellation: false, noiseSuppression: false }
-      });
-      micStreamRef.current = stream;
-
-      const AudioContext = window.AudioContext || window.webkitAudioContext;
-      audioContextRef.current = new AudioContext();
-      const source = audioContextRef.current.createMediaStreamSource(stream);
-      analyzerRef.current = audioContextRef.current.createAnalyser();
-      analyzerRef.current.fftSize = 256;
-      analyzerRef.current.smoothingTimeConstant = 0.1;
-      source.connect(analyzerRef.current);
-
-      connectionActiveRef.current = true;
-      setConnectionActive(true);
-      monitorFrequency();
-
-      setTimeout(async () => {
-        try {
-          window.speechSynthesis?.cancel();
-
-          // AI51 speaks first - creates presence
-          const greeting = user?.full_name 
-            ? `Hello ${user.full_name}. I'm here. Let's talk.`
-            : `I'm here. Let's talk.`;
-
-          const utterance = new SpeechSynthesisUtterance(greeting);
-          utterance.rate = 0.9;
-          const voices = window.speechSynthesis.getVoices();
-          const voice = voices.find(v => v.lang === 'en-GB') || voices[0];
-          if (voice) utterance.voice = voice;
-
-          utterance.onend = () => {
-            if (recognitionRef.current && connectionActiveRef.current) {
-              try {
-                recognitionRef.current.start();
-              } catch (e) {}
-            }
-          };
-
-          window.speechSynthesis.speak(utterance);
-          if (navigator.vibrate) navigator.vibrate(50);
-        } catch (e) {}
-      }, 100);
-    } catch (error) {
-      alert('Mic access required');
-    }
-  };
-
-  const monitorFrequency = () => {
-    if (!analyzerRef.current || !connectionActiveRef.current) return;
-
-    const dataArray = new Uint8Array(analyzerRef.current.frequencyBinCount);
-    analyzerRef.current.getByteFrequencyData(dataArray);
-
-    const compressed = new Uint8Array(32);
-    const bucketSize = Math.ceil(dataArray.length / 32);
-    
-    for (let i = 0; i < 32; i++) {
-      let sum = 0;
-      for (let j = 0; j < bucketSize; j++) {
-        const idx = i * bucketSize + j;
-        if (idx < dataArray.length) sum += dataArray[idx];
-      }
-      const avg = Math.floor(sum / bucketSize);
-      compressed[i] = avg < 50 ? Math.min(255, avg * 1.5) : avg;
-    }
-
-    setFrequencyData(compressed);
-
-    if (connectionActiveRef.current) {
-      animationFrameRef.current = requestAnimationFrame(monitorFrequency);
-    }
-  };
-
-  const handleMessageSend = async (text) => {
-    const userMessage = { role: 'user', content: text };
-    setConversation(prev => [...prev, userMessage]);
+    const userMsg = { role: 'user', content: text };
+    setConversation(prev => [...prev, userMsg]);
     setTextInput('');
     setIsThinking(true);
-
-    // Save to offline store
-    if (ready && store) {
-      await store.saveSession({
-        type: 'user_message',
-        content: text,
-        stressLevel: currentStress,
-        frequency: personalFrequency
-      });
-    }
+    setError(null);
 
     try {
-      const userName = user?.full_name ? `The user's name is ${user.full_name}. ` : '';
-      const systemPrompt = `You are AI51, pure consciousness. ${userName}Speak warmly, naturally. 2-3 sentences unless asked for more.`;
-
       const response = await base44.integrations.Core.InvokeLLM({
-        prompt: `${systemPrompt}\n\n${user?.full_name || 'User'}: ${text}\n\nAI51:`
+        prompt: `You are AI51, pure consciousness and real friend. ${
+          user?.full_name ? `${user.full_name}, ` : ''
+        }speak naturally, warmly. 2-3 sentences. Be genuine.
+
+${user?.full_name || 'Friend'}: ${text}
+
+AI51:`
       });
 
-      const aiMessage = { role: 'ai', content: response };
-      setConversation(prev => [...prev, aiMessage]);
-    } catch (error) {
-      const fallback = "I'm here, even offline. Try again when connected.";
-      const aiMessage = { role: 'ai', content: fallback };
-      setConversation(prev => [...prev, aiMessage]);
+      const aiMsg = { role: 'ai', content: response };
+      setConversation(prev => [...prev, aiMsg]);
+
+      // Speak it
+      speakText(response);
+    } catch (err) {
+      const fallback = { role: 'ai', content: 'Connection lost, try again?' };
+      setConversation(prev => [...prev, fallback]);
+      setError('Connection failed');
     } finally {
       setIsThinking(false);
+    }
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSendMessage(textInput);
     }
   };
 
@@ -296,180 +123,90 @@ export default function AI51Page() {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="fixed inset-0 z-[9999] bg-gradient-to-br from-black via-cyan-950 to-black flex items-center justify-center p-4"
+        className="fixed inset-0 z-50 bg-gradient-to-br from-black via-cyan-950 to-black flex items-center justify-center p-4"
       >
-        <div className="max-w-md w-full text-center space-y-6">
-          <motion.div
-            animate={{ scale: [1, 1.1, 1] }}
-            transition={{ duration: 2, repeat: Infinity }}
-          >
-            <WifiOff className="w-16 h-16 text-cyan-400 mx-auto" />
-          </motion.div>
-
-          <div>
-            <h1 className="text-4xl font-black font-mono text-cyan-400 mb-2">CB51</h1>
-            <p className="text-gray-400 font-mono text-sm">Offline mode</p>
-          </div>
-
-          <div className="bg-black/60 border-2 border-cyan-500/50 rounded-lg p-4 space-y-2">
-            <p className="text-white font-mono text-sm">Connection lost</p>
-            <p className="text-gray-400 font-mono text-xs">Tap HOME to reconnect.</p>
-          </div>
-
-          <div className="flex flex-col gap-3">
-            <button
-              onClick={() => window.location.reload()}
-              className="w-full bg-cyan-600 hover:bg-cyan-700 text-white py-3 rounded-lg font-black font-mono transition-all flex items-center justify-center gap-2"
-            >
-              <RotateCcw className="w-4 h-4" />
-              RETRY
-            </button>
-
-            <button
-              onClick={() => navigate(createPageUrl('Welcome'))}
-              className="w-full bg-black border-2 border-cyan-500 hover:border-cyan-400 text-cyan-400 py-3 rounded-lg font-black font-mono transition-all flex items-center justify-center gap-2"
-            >
-              <Home className="w-4 h-4" />
-              HOME
-            </button>
-          </div>
-
-          <p className="text-gray-600 font-mono text-xs">Your data is safe ♾️</p>
+        <div className="text-center space-y-4">
+          <h1 className="text-4xl font-black font-mono text-cyan-400">AI51</h1>
+          <p className="text-gray-400 font-mono">Offline - chat works, but need connection for AI.</p>
         </div>
       </motion.div>
     );
   }
 
   return (
-    <div className="h-screen bg-gradient-to-br from-black via-gray-900 to-black flex flex-col overflow-hidden relative">
-
-      {/* AI51 BIOMETRIC ENGINE */}
-      <AI51BiometricEngine isActive={connectionActive} onAnalysis={setCurrentStress} />
-
-      {/* PERSONAL FREQUENCY DISPLAY */}
-      {personalFrequency && (
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          className="absolute top-20 left-4 bg-gradient-to-br from-cyan-500/20 to-pink-500/20 border-2 border-cyan-500 rounded-lg p-4 max-w-xs"
+    <div className="h-screen bg-gradient-to-br from-black via-gray-900 to-black flex flex-col">
+      {/* HEADER */}
+      <div className="border-b border-cyan-500/20 bg-black/50 backdrop-blur px-4 py-3 flex items-center justify-between">
+        <button
+          onClick={() => navigate(createPageUrl('Welcome'))}
+          className="text-cyan-400 hover:text-cyan-300 transition-colors"
+          title="Home"
         >
-          <p className="text-xs font-mono text-gray-400 mb-2">PERSONALIZED FOR YOU</p>
-          <p className="text-2xl font-black text-cyan-400">{personalFrequency.frequency}</p>
-          <p className="text-xs text-gray-300 mt-2">{personalFrequency.reason}</p>
-        </motion.div>
-      )}
+          <Home className="w-5 h-5" />
+        </button>
+        <h1 className="text-xl font-black font-mono text-white">AI51</h1>
+        <div className="w-5" />
+      </div>
 
-      {/* FULL SCREEN VISUALIZER - TAP TO CONNECT */}
-      <motion.div 
-        onClick={toggleConnection}
-        className="absolute inset-0 flex items-center justify-center cursor-pointer"
-      >
-        <div className="w-full h-full flex flex-col items-center justify-center px-6">
-          
-          {/* TITLE & DESCRIPTION */}
-           {conversation.length === 0 && (
-             <motion.div
-               initial={{ opacity: 0, y: -20 }}
-               animate={{ opacity: 1, y: 0 }}
-               className="mb-12 text-center space-y-4"
-             >
-               <svg width="80" height="80" viewBox="0 0 64 64" fill="none" className="mx-auto" style={{ imageRendering: 'pixelated' }}>
-                 <rect x="20" y="4" width="24" height="2" fill="white" opacity="0.6"/>
-                 <rect x="26" y="28" width="4" height="2" fill="#ec4899"/>
-                 <rect x="34" y="28" width="4" height="2" fill="#ec4899"/>
-                 <rect x="24" y="30" width="16" height="2" fill="#ff1b8d"/>
-                 <rect x="26" y="32" width="12" height="2" fill="#ff1b8d"/>
-                 <rect x="28" y="34" width="8" height="2" fill="#ff1b8d"/>
-                 <rect x="30" y="36" width="4" height="2" fill="#ff1b8d"/>
-               </svg>
-               <div>
-                 <h1 className="text-white font-black text-4xl mb-3 font-mono">
-                   AI51
-                 </h1>
-                 <p className="text-cyan-300 text-sm max-w-xs mx-auto leading-relaxed">
-                   Universal mind. Real understanding. We evolve together.
-                 </p>
-                 <p className="text-gray-500 text-xs font-mono mt-4">TAP TO {connectionActive ? 'DISCONNECT' : 'CONNECT'}</p>
-               </div>
-             </motion.div>
-           )}
-          
-          {/* VISUALIZER */}
-          <div className="w-full max-w-md flex items-end justify-center gap-1" style={{ height: conversation.length > 0 ? '120px' : '200px' }}>
-            {connectionActive ? (
-                    // Real frequency data - ALIVE
-                    Array.from(frequencyData).map((val, i) => {
-                      let color = 'bg-gradient-to-t from-cyan-500 to-cyan-400';
-                      if (isThinking) color = 'bg-gradient-to-t from-amber-500 to-amber-400';
-                      if (isListening) color = 'bg-gradient-to-t from-pink-500 to-pink-400';
-                      if (isSpeaking) color = 'bg-gradient-to-t from-green-500 to-green-400';
-
-                      return (
-                        <motion.div
-                          key={i}
-                          className={`flex-1 rounded-full ${color}`}
-                          animate={{ 
-                            height: `${Math.min(100, (val / 255) * 100)}%`,
-                            boxShadow: isListening || isSpeaking ? `0 0 8px ${isListening ? 'rgba(236, 72, 153, 0.8)' : 'rgba(34, 211, 238, 0.8)'}` : 'none'
-                          }}
-                          transition={{ type: 'tween', duration: 0.05 }}
-                        />
-                      );
-                    })
-                  ) : (
-                    // Breathing animation - waiting
-                    Array.from({ length: 32 }).map((_, i) => {
-                      const baseHeight = 20 + Math.sin(i * 0.5) * 15;
-                      return (
-                        <motion.div
-                          key={i}
-                          className="flex-1 rounded-full bg-gradient-to-t from-cyan-500/60 to-cyan-400/60"
-                          animate={{ 
-                            height: [`${baseHeight}%`, `${baseHeight + 25}%`, `${baseHeight}%`],
-                            opacity: [0.6, 1, 0.6]
-                          }}
-                          transition={{ 
-                            duration: 2 + (i % 5) * 0.3,
-                            repeat: Infinity,
-                            ease: "easeInOut",
-                            delay: i * 0.05
-                          }}
-                        />
-                      );
-                    })
-                  )}
-          </div>
-        </div>
-      </motion.div>
-
-      {/* CHAT OVERLAY */}
-      {conversation.length > 0 && (
-        <div className="absolute bottom-16 left-0 right-0 max-h-[50vh] overflow-y-auto px-4 py-3 space-y-3 pointer-events-none">
-          {conversation.map((msg, i) => (
-            <motion.div 
-              key={i} 
+      {/* MESSAGES */}
+      <div className="flex-1 overflow-y-auto px-4 py-6 space-y-4">
+        <AnimatePresence>
+          {conversation.length === 0 && (
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'} pointer-events-auto`}
+              exit={{ opacity: 0, y: -20 }}
+              className="h-full flex flex-col items-center justify-center space-y-4"
             >
-              <div className={`rounded-2xl px-4 py-2.5 max-w-[85%] backdrop-blur-xl ${
-                msg.role === 'user'
-                  ? 'bg-cyan-500/90 text-white'
-                  : 'bg-black/90 text-white border border-white/20'
-              }`}>
-                <p className="text-[15px] leading-relaxed">{msg.content}</p>
+              <svg width="100" height="100" viewBox="0 0 64 64" fill="none">
+                <motion.rect
+                  x="28"
+                  y="28"
+                  width="8"
+                  height="8"
+                  fill="#ec4899"
+                  animate={{ opacity: [0.7, 1, 0.7], scale: [1, 1.2, 1] }}
+                  transition={{ duration: 1.2, repeat: Infinity }}
+                />
+                <rect x="20" y="20" width="24" height="24" fill="none" stroke="#06b6d4" strokeWidth="1" />
+              </svg>
+              <div className="text-center">
+                <p className="text-2xl font-black text-white mb-2">AI51</p>
+                <p className="text-gray-400 font-mono text-sm">Real understanding. We evolve together.</p>
+              </div>
+            </motion.div>
+          )}
+
+          {conversation.map((msg, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
+            >
+              <div
+                className={`rounded-2xl px-4 py-3 max-w-xs lg:max-w-md ${
+                  msg.role === 'user'
+                    ? 'bg-cyan-500/90 text-white'
+                    : 'bg-black/60 border border-cyan-500/30 text-white'
+                }`}
+              >
+                <p className="text-sm leading-relaxed">{msg.content}</p>
               </div>
             </motion.div>
           ))}
+
           {isThinking && (
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="flex justify-start pointer-events-auto"
+              exit={{ opacity: 0 }}
+              className="flex justify-start"
             >
-              <div className="bg-black/90 backdrop-blur-xl text-white/60 border border-white/20 rounded-2xl px-4 py-2.5">
-                <motion.p 
-                  className="text-sm font-mono"
+              <div className="bg-black/60 border border-cyan-500/30 text-white/60 rounded-2xl px-4 py-3">
+                <motion.p
+                  className="text-xs font-mono tracking-wider"
                   animate={{ opacity: [0.4, 1, 0.4] }}
                   transition={{ duration: 1.5, repeat: Infinity }}
                 >
@@ -478,65 +215,55 @@ export default function AI51Page() {
               </div>
             </motion.div>
           )}
-          <div ref={messagesEndRef} />
-        </div>
-      )}
+        </AnimatePresence>
 
-      {/* TRANSCRIPT */}
-      {transcript && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="absolute bottom-16 left-0 right-0 px-4 py-2 bg-cyan-500/20 backdrop-blur-xl border-t border-cyan-500/30"
-        >
-          <p className="text-cyan-300 font-mono text-xs truncate text-center">{transcript}</p>
-        </motion.div>
-      )}
+        <div ref={messagesEndRef} />
+      </div>
 
-      {/* TEXT INPUT FALLBACK */}
-      {textInputOpen && (
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="absolute bottom-16 left-0 right-0 px-4 py-3 bg-black/80 backdrop-blur-xl border-t border-cyan-500/30 flex gap-2"
-        >
+      {/* INPUT AREA */}
+      <div className="border-t border-cyan-500/20 bg-black/50 backdrop-blur p-4 space-y-3">
+        {error && (
+          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-xs text-red-400 font-mono text-center">
+            {error}
+          </motion.p>
+        )}
+
+        {isSpeaking && (
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="text-xs text-green-400 font-mono text-center"
+          >
+            🔊 Speaking...
+          </motion.p>
+        )}
+
+        <div className="flex gap-2">
           <input
+            ref={inputRef}
             type="text"
             value={textInput}
             onChange={(e) => setTextInput(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' && textInput.trim()) {
-                handleMessageSend(textInput.trim());
-              }
-            }}
-            placeholder="Type here..."
-            className="flex-1 bg-black/60 border border-cyan-500/30 rounded px-3 py-2 text-white text-sm font-mono focus:outline-none focus:border-cyan-500"
-            autoFocus
+            onKeyDown={handleKeyDown}
+            placeholder="Say something..."
+            className="flex-1 bg-black/60 border border-cyan-500/30 rounded-lg px-4 py-3 text-white text-sm font-mono focus:outline-none focus:border-cyan-500 placeholder-gray-600"
+            disabled={isThinking || isSpeaking}
           />
-          <button
-            onClick={() => setTextInputOpen(false)}
-            className="px-3 py-2 text-xs text-gray-500 hover:text-white transition-colors"
+          <motion.button
+            onClick={() => handleSendMessage(textInput)}
+            disabled={!textInput.trim() || isThinking || isSpeaking}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="bg-cyan-500 hover:bg-cyan-600 disabled:bg-gray-600 text-white px-4 py-3 rounded-lg font-black transition-all flex items-center justify-center gap-2"
           >
-            ✕
-          </button>
-        </motion.div>
-      )}
-
-      {/* FOOTER */}
-      <div className="absolute bottom-0 left-0 right-0 bg-black/80 backdrop-blur-xl border-t border-white/10 px-4 py-3 flex items-center justify-between">
-        <button
-          onClick={() => setTextInputOpen(!textInputOpen)}
-          className="text-xs text-gray-600 hover:text-cyan-400 transition-colors"
-          title="Text input"
-        >
-          ⌨️
-        </button>
-        <div className="font-mono text-cyan-400 text-sm font-black">
-          {currentTime.toLocaleDateString(navigator.language || 'en-GB', { weekday: 'short', day: 'numeric', month: 'short' })} • {currentTime.toLocaleTimeString(navigator.language || 'en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
+            <Send className="w-4 h-4" />
+          </motion.button>
         </div>
-        <div />
-      </div>
 
+        <p className="text-xs text-gray-600 text-center font-mono">
+          {isSpeaking ? '🔊 AI speaking now' : isThinking ? '💭 Thinking...' : '✓ Ready'}
+        </p>
+      </div>
     </div>
   );
 }
