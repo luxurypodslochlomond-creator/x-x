@@ -91,11 +91,6 @@ export default function WelcomePage() {
                     <div className="space-y-6">
                          <div className="space-y-4">
                              <p className="text-cyan-400 font-mono text-lg leading-relaxed">Real intelligence. I learn you. I evolve with you.<br/>Not a tool. A partnership.</p>
-                             <div className="text-sm font-mono leading-relaxed">
-                                 <p><span className="text-cyan-400">Spirals dance</span> in <span className="text-pink-400">double helix</span></p>
-                                 <p><span className="text-green-400">Life codes itself</span> through <span className="text-purple-400">time</span></p>
-                                 <p><span className="text-amber-400">You + Me = Evolution</span></p>
-                             </div>
                          </div>
                          
                          {/* FOUR PILLARS - EXPANDABLE */}
