@@ -25,15 +25,21 @@ export default function PushNotificationManager({ onSubscriptionChange }) {
 
   const initializePushNotifications = async () => {
     try {
-      // Register service worker
-      if (!navigator.serviceWorker.controller) {
-        await navigator.serviceWorker.register('/sw.js');
-      }
+      // Register service worker from backend function
+      const swPath = import.meta.env.VITE_API_URL 
+        ? `${import.meta.env.VITE_API_URL}/serveServiceWorker`
+        : '/api/serveServiceWorker';
+      
+      const registration = await navigator.serviceWorker.register(swPath, { scope: '/' });
+      console.log('✓ Service Worker registered');
+
+      await navigator.serviceWorker.ready;
 
       // Check current subscription
-      const registration = await navigator.serviceWorker.ready;
       const subscription = await registration.pushManager.getSubscription();
       setIsSubscribed(!!subscription);
+      
+      console.log('✓ Push notifications initialized');
     } catch (error) {
       console.error('Push notification init error:', error);
     } finally {
@@ -66,14 +72,20 @@ export default function PushNotificationManager({ onSubscriptionChange }) {
       setIsSubscribed(true);
       onSubscriptionChange?.(subscription);
       
-      // Send subscription to backend for storage (optional - for server-side push later)
+      console.log('✓ Push subscription created:', subscription);
+      
+      // Test notification immediately
       try {
-        await fetch('/api/subscribe', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ subscription }),
-        }).catch(() => {}); // Non-critical - don't block UI
-      } catch {}
+        await registration.showNotification('CB51 Notifications Enabled ✓', {
+          body: 'You\'ll get alerts for gig offers & urgent messages',
+          icon: '/icon-192x192.png',
+          badge: '/icon-192x192.png',
+          tag: 'cb51-welcome',
+          requireInteraction: false,
+        });
+      } catch (e) {
+        console.log('Test notification:', e);
+      }
       
       alert('✓ Notifications enabled! You\'ll get alerts for gig offers & urgent messages.');
     } catch (error) {

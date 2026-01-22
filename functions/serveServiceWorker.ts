@@ -1,62 +1,80 @@
 /**
- * Service Worker for CB51 push notifications
- * Serves the service worker file
+ * Serve CB51 Service Worker for push notifications
+ * Registers at /sw.js
  */
 
-Deno.serve(async (req) => {
+Deno.serve((req) => {
   const swCode = `
-// CB51 Service Worker - handles push notifications
+// CB51 Service Worker - Push Notifications
+self.addEventListener('install', (event) => {
+  console.log('[SW] Installing...');
+  self.skipWaiting();
+});
+
+self.addEventListener('activate', (event) => {
+  console.log('[SW] Activating...');
+  event.waitUntil(clients.claim());
+});
+
+// Handle push notifications
 self.addEventListener('push', (event) => {
-  const data = event.data?.json() || {};
-  const title = data.title || 'CB51 Alert';
+  console.log('[SW] Push received');
+  
+  let data = {};
+  try {
+    data = event.data ? event.data.json() : {};
+  } catch (e) {
+    data = { title: 'CB51', body: event.data?.text() || 'New notification' };
+  }
+
+  const title = data.title || 'CB51';
   const options = {
-    body: data.body || 'You have a new notification',
+    body: data.body || 'You have a new update',
     icon: '/icon-192x192.png',
-    badge: '/badge-72x72.png',
+    badge: '/icon-192x192.png',
     tag: data.tag || 'cb51-notification',
-    requireInteraction: data.tag === 'urgent',
     data: {
       url: data.url || '/',
-      timestamp: Date.now(),
     },
+    requireInteraction: true,
+    vibrate: [200, 100, 200],
   };
 
-  event.waitUntil(self.registration.showNotification(title, options));
+  event.waitUntil(
+    self.registration.showNotification(title, options)
+  );
 });
 
 // Handle notification clicks
 self.addEventListener('notificationclick', (event) => {
+  console.log('[SW] Notification clicked');
   event.notification.close();
-  const url = event.notification.data?.url || '/';
+
+  const urlToOpen = event.notification.data?.url || '/';
+
   event.waitUntil(
-    clients.matchAll({ type: 'window' }).then((clientList) => {
+    clients.matchAll({ type: 'window', includeUncontrolled: true }).then((clientList) => {
+      // Check if CB51 is already open
       for (const client of clientList) {
-        if (client.url === url && 'focus' in client) {
-          return client.focus();
+        if (client.url.includes('CB51') && 'focus' in client) {
+          return client.focus().then(() => client.navigate(urlToOpen));
         }
       }
+      // Open new window
       if (clients.openWindow) {
-        return clients.openWindow(url);
+        return clients.openWindow(urlToOpen);
       }
     })
   );
 });
 
-// Install event
-self.addEventListener('install', (event) => {
-  self.skipWaiting();
-});
-
-// Activate event
-self.addEventListener('activate', (event) => {
-  event.waitUntil(clients.claim());
-});
-  `;
+console.log('[SW] CB51 Service Worker loaded');
+`;
 
   return new Response(swCode, {
     headers: {
       'Content-Type': 'application/javascript',
-      'Cache-Control': 'no-cache, no-store, must-revalidate',
+      'Cache-Control': 'no-cache',
     },
   });
 });
