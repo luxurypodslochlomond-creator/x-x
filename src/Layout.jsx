@@ -595,12 +595,16 @@ const LayoutInner = ({ children, currentPageName }) => {
           </div>
 
           <div className="p-6 space-y-3">
-            <NavSection title="HEAL" color="pink" items={healNav} isActivePage={isActivePage} defaultOpen={true} />
-            <NavSection title="EARN & CREATE" color="green" items={earnCreateNav} isActivePage={isActivePage} />
-            <NavSection title="LEARN" color="cyan" items={learnNav} isActivePage={isActivePage} />
-            <NavSection title="AI51 & TECH" color="pink" emoji="♾️" items={ai51TechNav} isActivePage={isActivePage} />
-            <NavSection title="RESEARCH" color="cyan" items={researchNav} isActivePage={isActivePage} />
-            <NavSection title="TRUST" color="gray" items={trustNav} isActivePage={isActivePage} />
+            {!isCB51Page && (
+              <>
+                <NavSection title="HEAL" color="pink" items={healNav} isActivePage={isActivePage} defaultOpen={true} />
+                <NavSection title="EARN & CREATE" color="green" items={earnCreateNav} isActivePage={isActivePage} />
+                <NavSection title="LEARN" color="cyan" items={learnNav} isActivePage={isActivePage} />
+                <NavSection title="AI51 & TECH" color="pink" emoji="♾️" items={ai51TechNav} isActivePage={isActivePage} />
+                <NavSection title="RESEARCH" color="cyan" items={researchNav} isActivePage={isActivePage} />
+                <NavSection title="TRUST" color="gray" items={trustNav} isActivePage={isActivePage} />
+              </>
+            )}
 
             {scottNav.length > 0 && (
               <>
