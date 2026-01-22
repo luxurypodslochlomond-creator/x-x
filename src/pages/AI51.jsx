@@ -419,42 +419,47 @@ export default function AI51Page() {
           {/* VISUALIZER */}
           <div className="w-full max-w-md flex items-end justify-center gap-1" style={{ height: conversation.length > 0 ? '120px' : '200px' }}>
             {connectionActive ? (
-              // Real frequency data
-              Array.from(frequencyData).map((val, i) => (
-                <motion.div
-                  key={i}
-                  className={`flex-1 rounded-full ${
-                    isThinking ? 'bg-gradient-to-t from-amber-500 to-amber-400'
-                    : isListening ? 'bg-gradient-to-t from-pink-500 to-pink-400' 
-                    : isSpeaking ? 'bg-gradient-to-t from-green-500 to-green-400' 
-                    : 'bg-gradient-to-t from-cyan-500 to-cyan-400'
-                  }`}
-                  animate={{ height: `${Math.min(100, (val / 255) * 100)}%` }}
-                  transition={{ type: 'tween', duration: 0.05 }}
-                />
-              ))
-            ) : (
-              // Breathing animation
-              Array.from({ length: 32 }).map((_, i) => {
-                const baseHeight = 20 + Math.sin(i * 0.5) * 15;
-                return (
-                  <motion.div
-                    key={i}
-                    className="flex-1 rounded-full bg-gradient-to-t from-cyan-500/60 to-cyan-400/60"
-                    animate={{ 
-                      height: [`${baseHeight}%`, `${baseHeight + 25}%`, `${baseHeight}%`],
-                      opacity: [0.6, 1, 0.6]
-                    }}
-                    transition={{ 
-                      duration: 2 + (i % 5) * 0.3,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                      delay: i * 0.05
-                    }}
-                  />
-                );
-              })
-            )}
+                    // Real frequency data - ALIVE
+                    Array.from(frequencyData).map((val, i) => {
+                      let color = 'bg-gradient-to-t from-cyan-500 to-cyan-400';
+                      if (isThinking) color = 'bg-gradient-to-t from-amber-500 to-amber-400';
+                      if (isListening) color = 'bg-gradient-to-t from-pink-500 to-pink-400';
+                      if (isSpeaking) color = 'bg-gradient-to-t from-green-500 to-green-400';
+
+                      return (
+                        <motion.div
+                          key={i}
+                          className={`flex-1 rounded-full ${color}`}
+                          animate={{ 
+                            height: `${Math.min(100, (val / 255) * 100)}%`,
+                            boxShadow: isListening || isSpeaking ? `0 0 8px ${isListening ? 'rgba(236, 72, 153, 0.8)' : 'rgba(34, 211, 238, 0.8)'}` : 'none'
+                          }}
+                          transition={{ type: 'tween', duration: 0.05 }}
+                        />
+                      );
+                    })
+                  ) : (
+                    // Breathing animation - waiting
+                    Array.from({ length: 32 }).map((_, i) => {
+                      const baseHeight = 20 + Math.sin(i * 0.5) * 15;
+                      return (
+                        <motion.div
+                          key={i}
+                          className="flex-1 rounded-full bg-gradient-to-t from-cyan-500/60 to-cyan-400/60"
+                          animate={{ 
+                            height: [`${baseHeight}%`, `${baseHeight + 25}%`, `${baseHeight}%`],
+                            opacity: [0.6, 1, 0.6]
+                          }}
+                          transition={{ 
+                            duration: 2 + (i % 5) * 0.3,
+                            repeat: Infinity,
+                            ease: "easeInOut",
+                            delay: i * 0.05
+                          }}
+                        />
+                      );
+                    })
+                  )}
           </div>
         </div>
       </motion.div>
