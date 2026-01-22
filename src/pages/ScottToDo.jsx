@@ -28,6 +28,8 @@ export default function ScottToDo() {
         responsible_name: '',
         responsible_email: '',
         deadline: '',
+        priority: 'normal',
+        notes: '',
         status: 'pending',
         sendToAll: false
     });
@@ -62,7 +64,7 @@ export default function ScottToDo() {
         mutationFn: (taskData) => base44.entities.ScottTask.create(taskData),
         onSuccess: (newTaskData) => {
             queryClient.setQueryData(['scottTasks', artistId], (old = []) => [...old, newTaskData]);
-            setNewTask({ title: '', responsible_name: '', responsible_email: '', deadline: '', status: 'pending', sendToAll: false });
+            setNewTask({ title: '', responsible_name: '', responsible_email: '', deadline: '', priority: 'normal', notes: '', status: 'pending', sendToAll: false });
             setShowAddTask(false);
         }
     });
@@ -90,7 +92,7 @@ export default function ScottToDo() {
 
     const handleAddTask = () => {
         if (!newTask.title.trim()) return;
-        
+
         // If "send to all", create task for each member
         if (newTask.sendToAll && teamMembers.length > 0) {
             teamMembers.forEach(member => {
@@ -99,6 +101,8 @@ export default function ScottToDo() {
                     responsible_name: member.name,
                     responsible_email: member.email,
                     deadline: newTask.deadline,
+                    priority: newTask.priority,
+                    notes: newTask.notes,
                     status: newTask.status,
                     artist_id: artistId || null
                 });
@@ -110,11 +114,13 @@ export default function ScottToDo() {
                 responsible_name: newTask.responsible_name,
                 responsible_email: newTask.responsible_email,
                 deadline: newTask.deadline,
+                priority: newTask.priority,
+                notes: newTask.notes,
                 status: newTask.status,
                 artist_id: artistId || null
             });
         }
-        setNewTask({ title: '', responsible_name: '', responsible_email: '', deadline: '', status: 'pending', sendToAll: false });
+        setNewTask({ title: '', responsible_name: '', responsible_email: '', deadline: '', priority: 'normal', notes: '', status: 'pending', sendToAll: false });
     };
 
     const scanEmailForTasks = async () => {
@@ -284,67 +290,85 @@ ${emailText}`,
                         />
 
                         {teamMembers.length > 0 && (
-                            <div className="space-y-2">
-                                <div className="flex gap-2">
-                                    <button
-                                        onClick={() => setNewTask({...newTask, sendToAll: false, responsible_email: '', responsible_name: ''})}
-                                        className={`flex-1 py-2 rounded font-mono text-sm font-bold transition-all ${
-                                            !newTask.sendToAll
-                                                ? 'bg-cyan-600 text-black'
-                                                : 'bg-gray-800 text-gray-400 hover:bg-gray-700'
-                                        }`}
-                                    >
-                                        INDIVIDUAL
-                                    </button>
-                                    <button
-                                        onClick={() => setNewTask({...newTask, sendToAll: true, responsible_email: '', responsible_name: ''})}
-                                        className={`flex-1 py-2 rounded font-mono text-sm font-bold transition-all flex items-center justify-center gap-1 ${
-                                            newTask.sendToAll
-                                                ? 'bg-cyan-600 text-black'
-                                                : 'bg-gray-800 text-gray-400 hover:bg-gray-700'
-                                        }`}
-                                    >
-                                        <Users className="w-4 h-4" />
-                                        ALL MEMBERS
-                                    </button>
-                                </div>
-                                {!newTask.sendToAll && (
-                                    <select
-                                        value={newTask.responsible_email}
-                                        onChange={(e) => {
-                                            const member = teamMembers.find(m => m.email === e.target.value);
-                                            setNewTask({
-                                                ...newTask, 
-                                                responsible_email: e.target.value,
-                                                responsible_name: member?.name || ''
-                                            });
-                                        }}
-                                        className="w-full bg-black border-2 border-gray-700 text-white font-mono px-3 py-2 rounded"
-                                    >
-                                        <option value="">Pick member...</option>
-                                        {teamMembers.map(member => (
-                                            <option key={member.id} value={member.email}>
-                                                {member.name}
-                                            </option>
-                                        ))}
-                                    </select>
-                                )}
-                            </div>
-                        )}
+                                        <div className="space-y-2">
+                                            <div className="flex gap-2">
+                                                <button
+                                                    onClick={() => setNewTask({...newTask, sendToAll: false, responsible_email: '', responsible_name: ''})}
+                                                    className={`flex-1 py-2 rounded font-mono text-sm font-bold transition-all ${
+                                                        !newTask.sendToAll
+                                                            ? 'bg-cyan-600 text-black'
+                                                            : 'bg-gray-800 text-gray-400 hover:bg-gray-700'
+                                                    }`}
+                                                >
+                                                    INDIVIDUAL
+                                                </button>
+                                                <button
+                                                    onClick={() => setNewTask({...newTask, sendToAll: true, responsible_email: '', responsible_name: ''})}
+                                                    className={`flex-1 py-2 rounded font-mono text-sm font-bold transition-all flex items-center justify-center gap-1 ${
+                                                        newTask.sendToAll
+                                                            ? 'bg-cyan-600 text-black'
+                                                            : 'bg-gray-800 text-gray-400 hover:bg-gray-700'
+                                                    }`}
+                                                >
+                                                    <Users className="w-4 h-4" />
+                                                    ALL
+                                                </button>
+                                            </div>
+                                            {!newTask.sendToAll && (
+                                                <select
+                                                    value={newTask.responsible_email}
+                                                    onChange={(e) => {
+                                                        const member = teamMembers.find(m => m.email === e.target.value);
+                                                        setNewTask({
+                                                            ...newTask, 
+                                                            responsible_email: e.target.value,
+                                                            responsible_name: member?.name || ''
+                                                        });
+                                                    }}
+                                                    className="w-full bg-black border-2 border-gray-700 text-white font-mono px-3 py-2 rounded"
+                                                >
+                                                    <option value="">Pick member...</option>
+                                                    {teamMembers.map(member => (
+                                                        <option key={member.id} value={member.email}>
+                                                            {member.name}
+                                                        </option>
+                                                    ))}
+                                                </select>
+                                            )}
+                                        </div>
+                                    )}
                         {teamMembers.length === 0 && (
-                            <Input
-                                placeholder="Who's responsible?"
-                                value={newTask.responsible_name}
-                                onChange={(e) => setNewTask({...newTask, responsible_name: e.target.value})}
-                                className="bg-black border-gray-700 text-white font-mono"
-                            />
-                        )}
-                        <Input
-                            type="date"
-                            value={newTask.deadline}
-                            onChange={(e) => setNewTask({...newTask, deadline: e.target.value})}
-                            className="bg-black border-gray-700 text-white font-mono"
-                        />
+                                            <Input
+                                                placeholder="Who's responsible?"
+                                                value={newTask.responsible_name}
+                                                onChange={(e) => setNewTask({...newTask, responsible_name: e.target.value})}
+                                                className="bg-black border-gray-700 text-white font-mono"
+                                            />
+                                        )}
+                                        <div className="flex gap-2">
+                                            <Input
+                                                type="date"
+                                                value={newTask.deadline}
+                                                onChange={(e) => setNewTask({...newTask, deadline: e.target.value})}
+                                                className="flex-1 bg-black border-gray-700 text-white font-mono"
+                                            />
+                                            <select
+                                                value={newTask.priority}
+                                                onChange={(e) => setNewTask({...newTask, priority: e.target.value})}
+                                                className="bg-black border-2 border-gray-700 text-white font-mono px-2 py-2 rounded text-sm"
+                                            >
+                                                <option value="low">Low</option>
+                                                <option value="normal">Normal</option>
+                                                <option value="high">High</option>
+                                                <option value="urgent">Urgent</option>
+                                            </select>
+                                        </div>
+                                        <Textarea
+                                            placeholder="Notes..."
+                                            value={newTask.notes}
+                                            onChange={(e) => setNewTask({...newTask, notes: e.target.value})}
+                                            className="bg-black border-gray-700 text-white font-mono min-h-[80px]"
+                                        />
                         <div className="flex gap-2">
                             <Button
                                 onClick={() => setShowAddTask(false)}

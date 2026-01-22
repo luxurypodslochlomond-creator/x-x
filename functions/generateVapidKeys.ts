@@ -10,25 +10,27 @@ Deno.serve(async (req) => {
       return Response.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    // Check if VAPID keys already exist for any admin user
-    const admins = await base44.asServiceRole.entities.User.filter({ role: 'admin' });
-    const adminWithKeys = admins.find(a => a.vapid_public_key && a.vapid_private_key);
-    
-    if (adminWithKeys) {
-      // Return existing keys (any user can get public key)
-      return Response.json({
-        success: true,
-        publicKey: adminWithKeys.vapid_public_key,
-        message: 'VAPID keys retrieved ✓'
-      });
-    }
+    // Step 1: Check if VAPID keys already exist for any admin user
+        const admins = await base44.asServiceRole.entities.User.filter({ role: 'admin' });
+        const adminWithKeys = admins.find(a => a.vapid_public_key && a.vapid_private_key);
 
-    // Only admin can generate new keys
-    if (user.role !== 'admin') {
-      return Response.json({ error: 'No VAPID keys configured. Ask admin to enable notifications.' }, { status: 403 });
-    }
+        if (adminWithKeys) {
+          // Return existing keys (any user can get public key) ✓
+          return Response.json({
+            success: true,
+            publicKey: adminWithKeys.vapid_public_key,
+            message: 'VAPID keys retrieved ✓'
+          });
+        }
 
-    // Generate new VAPID keys (admin only)
+        // Step 2: If no keys exist, only admin can generate them
+        if (user.role !== 'admin') {
+          return Response.json({ 
+            error: 'No VAPID keys configured. Ask admin to enable notifications in CB51 first.' 
+          }, { status: 403 });
+        }
+
+    // Step 3: Generate new VAPID keys (admin only)
     const vapidKeys = webpush.generateVAPIDKeys();
 
     // Store in current admin user
@@ -42,9 +44,6 @@ Deno.serve(async (req) => {
       publicKey: vapidKeys.publicKey,
       message: 'VAPID keys generated and stored ✓'
     });
-    
-    // If no keys exist and user isn't admin - admin must generate first
-    return Response.json({ error: 'No VAPID keys configured. Ask admin to enable notifications.' }, { status: 403 });
 
   } catch (error) {
     return Response.json({ error: error.message }, { status: 500 });
