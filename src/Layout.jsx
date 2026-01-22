@@ -498,8 +498,8 @@ const LayoutInner = ({ children, currentPageName }) => {
                 </svg>
                 <span className="text-[9px] font-black font-mono text-pink-400 mt-0.5">HEAL</span>
               </Link>
-              <Link to={createPageUrl("AI51")} className="p-2 rounded-xl" style={{ boxShadow: '0 0 20px rgba(34, 211, 238, 0.4)' }}>
-                <COOLASFUCKHeart size={32} animate={true} />
+              <Link to={createPageUrl("AI51")} className="p-2" style={{ boxShadow: '0 0 20px rgba(34, 211, 238, 0.4)' }}>
+                <AI51AtomIcon size={36} animate={true} />
               </Link>
               <button onClick={() => setMobileMenuOpen(!isMobileMenuOpen)} className="p-2 rounded-xl bg-purple-900/50">
                 {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
