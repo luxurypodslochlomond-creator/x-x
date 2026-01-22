@@ -114,7 +114,12 @@ For areas with radio but no internet (Palestine, disasters):
 Ancient tech + sacred frequencies = unstoppable healing ♾️❤️`);
     };
 
-    if (!disasterMode) return null;
+    // Don't show on CB51 pages - it's confusing for Scott
+    const isCB51 = window.location.pathname.includes('CB51') || 
+                   window.location.pathname.includes('Scott') ||
+                   window.location.hostname.startsWith('cb51.');
+    
+    if (!disasterMode || isCB51) return null;
 
     return (
         <AnimatePresence>

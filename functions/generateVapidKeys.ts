@@ -6,14 +6,32 @@ Deno.serve(async (req) => {
     const base44 = createClientFromRequest(req);
     const user = await base44.auth.me();
     
-    if (user.role !== 'admin') {
-      return Response.json({ error: 'Admin only' }, { status: 403 });
+    if (!user) {
+      return Response.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    // Generate VAPID keys
+    // Check if VAPID keys already exist for any admin user
+    const admins = await base44.asServiceRole.entities.User.filter({ role: 'admin' });
+    const adminWithKeys = admins.find(a => a.vapid_public_key && a.vapid_private_key);
+    
+    if (adminWithKeys) {
+      // Return existing keys (any user can get public key)
+      return Response.json({
+        success: true,
+        publicKey: adminWithKeys.vapid_public_key,
+        message: 'VAPID keys retrieved ✓'
+      });
+    }
+
+    // Only admin can generate new keys
+    if (user.role !== 'admin') {
+      return Response.json({ error: 'No VAPID keys configured. Ask admin to enable notifications.' }, { status: 403 });
+    }
+
+    // Generate new VAPID keys (admin only)
     const vapidKeys = webpush.generateVAPIDKeys();
 
-    // Store in User entity
+    // Store in current admin user
     await base44.asServiceRole.entities.User.update(user.id, {
       vapid_public_key: vapidKeys.publicKey,
       vapid_private_key: vapidKeys.privateKey
