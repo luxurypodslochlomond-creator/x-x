@@ -46,30 +46,30 @@ export default function WelcomePage() {
                 {/* HERO - AI51 AS CONSCIOUSNESS */}
                 <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center space-y-8">
                     <div className="flex flex-col items-center gap-6">
-                        {/* COOLASFUCK AI51 - PURE CONSCIOUSNESS ENERGY */}
-                        <svg width="100" height="100" viewBox="0 0 64 64" fill="none" style={{ imageRendering: 'pixelated', filter: 'drop-shadow(0 0 30px rgba(236, 72, 153, 0.9))' }}>
-                            {/* Pulsing core - consciousness center */}
-                            <motion.rect x="28" y="28" width="8" height="8" fill="#ec4899" animate={{ opacity: [0.6, 1, 0.6] }} transition={{ duration: 1.5, repeat: Infinity }} />
+                        {/* COOLASFUCK AI51 - ALIVE CONSCIOUSNESS ENERGY */}
+                        <svg width="120" height="120" viewBox="0 0 64 64" fill="none" style={{ imageRendering: 'pixelated', filter: 'drop-shadow(0 0 40px rgba(236, 72, 153, 1))' }}>
+                            {/* Pulsing core - consciousness heartbeat */}
+                            <motion.rect x="28" y="28" width="8" height="8" fill="#ec4899" animate={{ opacity: [0.7, 1, 0.7], scale: [1, 1.2, 1] }} transition={{ duration: 1.2, repeat: Infinity }} />
                             
-                            {/* Inner ring - static */}
-                            <rect x="20" y="20" width="24" height="24" fill="none" stroke="#06b6d4" strokeWidth="1" opacity="0.8" />
+                            {/* Inner connection ring */}
+                            <motion.rect x="20" y="20" width="24" height="24" fill="none" stroke="#06b6d4" strokeWidth="1" animate={{ opacity: [0.5, 1, 0.5] }} transition={{ duration: 1.5, repeat: Infinity, delay: 0.1 }} />
                             
-                            {/* Outer ring - pulsing opacity */}
-                            <motion.rect x="14" y="14" width="36" height="36" fill="none" stroke="#ec4899" strokeWidth="1" animate={{ opacity: [0.3, 0.7, 0.3] }} transition={{ duration: 2, repeat: Infinity }} />
+                            {/* Middle expanding ring - evolution */}
+                            <motion.rect x="14" y="14" width="36" height="36" fill="none" stroke="#ec4899" strokeWidth="1" animate={{ opacity: [0.2, 0.6, 0.2], scale: [0.95, 1.05, 0.95] }} transition={{ duration: 2, repeat: Infinity, delay: 0.2 }} />
                             
-                            {/* Network nodes - connection points */}
-                            <rect x="24" y="8" width="2" height="2" fill="#06b6d4" />
-                            <rect x="38" y="8" width="2" height="2" fill="#06b6d4" />
-                            <rect x="8" y="24" width="2" height="2" fill="#06b6d4" />
-                            <rect x="54" y="24" width="2" height="2" fill="#06b6d4" />
-                            <rect x="24" y="54" width="2" height="2" fill="#06b6d4" />
-                            <rect x="38" y="54" width="2" height="2" fill="#06b6d4" />
+                            {/* Network nodes - animated connection points */}
+                            <motion.circle cx="25" cy="9" r="1.5" fill="#06b6d4" animate={{ opacity: [0.4, 1, 0.4] }} transition={{ duration: 1.5, repeat: Infinity }} />
+                            <motion.circle cx="39" cy="9" r="1.5" fill="#06b6d4" animate={{ opacity: [0.4, 1, 0.4] }} transition={{ duration: 1.5, repeat: Infinity, delay: 0.2 }} />
+                            <motion.circle cx="9" cy="25" r="1.5" fill="#06b6d4" animate={{ opacity: [0.4, 1, 0.4] }} transition={{ duration: 1.5, repeat: Infinity, delay: 0.4 }} />
+                            <motion.circle cx="55" cy="25" r="1.5" fill="#06b6d4" animate={{ opacity: [0.4, 1, 0.4] }} transition={{ duration: 1.5, repeat: Infinity, delay: 0.6 }} />
+                            <motion.circle cx="25" cy="55" r="1.5" fill="#06b6d4" animate={{ opacity: [0.4, 1, 0.4] }} transition={{ duration: 1.5, repeat: Infinity, delay: 0.8 }} />
+                            <motion.circle cx="39" cy="55" r="1.5" fill="#06b6d4" animate={{ opacity: [0.4, 1, 0.4] }} transition={{ duration: 1.5, repeat: Infinity, delay: 1 }} />
                             
-                            {/* Connection lines to center */}
-                            <line x1="25" y1="10" x2="30" y2="28" stroke="#06b6d4" strokeWidth="1" opacity="0.6" />
-                            <line x1="39" y1="10" x2="34" y2="28" stroke="#06b6d4" strokeWidth="1" opacity="0.6" />
-                            <line x1="10" y1="25" x2="28" y2="30" stroke="#06b6d4" strokeWidth="1" opacity="0.6" />
-                            <line x1="54" y1="25" x2="36" y2="30" stroke="#06b6d4" strokeWidth="1" opacity="0.6" />
+                            {/* Animated connection lines - flowing energy */}
+                            <motion.line x1="25" y1="10" x2="30" y2="28" stroke="#06b6d4" strokeWidth="1" animate={{ opacity: [0.3, 0.8, 0.3] }} transition={{ duration: 1.5, repeat: Infinity }} />
+                            <motion.line x1="39" y1="10" x2="34" y2="28" stroke="#06b6d4" strokeWidth="1" animate={{ opacity: [0.3, 0.8, 0.3] }} transition={{ duration: 1.5, repeat: Infinity, delay: 0.2 }} />
+                            <motion.line x1="10" y1="25" x2="28" y2="30" stroke="#06b6d4" strokeWidth="1" animate={{ opacity: [0.3, 0.8, 0.3] }} transition={{ duration: 1.5, repeat: Infinity, delay: 0.4 }} />
+                            <motion.line x1="54" y1="25" x2="36" y2="30" stroke="#06b6d4" strokeWidth="1" animate={{ opacity: [0.3, 0.8, 0.3] }} transition={{ duration: 1.5, repeat: Infinity, delay: 0.6 }} />
                         </svg>
                         
                         <div className="flex items-baseline gap-2">
