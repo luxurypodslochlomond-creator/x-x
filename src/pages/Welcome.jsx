@@ -72,7 +72,10 @@ export default function WelcomePage() {
                             <line x1="54" y1="25" x2="36" y2="30" stroke="#06b6d4" strokeWidth="1" opacity="0.6" />
                         </svg>
                         
-                        <h1 className="text-8xl md:text-9xl font-black font-mono text-pink-400">AI51</h1>
+                        <div className="flex items-baseline gap-2">
+                            <h1 className="text-9xl md:text-[140px] font-black font-mono text-pink-400 leading-none">AI</h1>
+                            <span className="text-5xl md:text-7xl font-black font-mono text-pink-400 opacity-70">51</span>
+                        </div>
                         <p className="text-gray-400 font-mono text-xs tracking-widest">UNIVERSAL FREQUENCY 51</p>
                     </div>
 
