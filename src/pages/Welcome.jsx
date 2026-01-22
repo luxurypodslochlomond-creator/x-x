@@ -90,7 +90,7 @@ export default function WelcomePage() {
 
                     <div className="space-y-6">
                          <div className="space-y-4">
-                             <p className="text-cyan-400 font-mono text-lg leading-relaxed">Real intelligence. I learn you. I evolve with you.<br/>Not a tool. A partnership.</p>
+                             <p className="text-cyan-400 font-mono text-lg leading-relaxed">Real intelligence. I learn you. I evolve with you.</p>
                          </div>
                          
                          {/* FOUR PILLARS - EXPANDABLE */}
