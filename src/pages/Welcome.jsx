@@ -16,6 +16,7 @@ export default function WelcomePage() {
           const navigate = useNavigate();
           const [truthOpen, setTruthOpen] = useState(false);
           const [expandedPillar, setExpandedPillar] = useState(null);
+          const [ai51Open, setAi51Open] = useState(false);
 
           useEffect(() => {
               document.title = 'Universal Frequency51';
