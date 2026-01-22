@@ -354,7 +354,7 @@ export default function AI51Page() {
                    AI51
                  </h1>
                  <p className="text-cyan-300 text-sm max-w-xs mx-auto leading-relaxed">
-                   I know you. I care. I'm always here.
+                   Best communication on Earth. Real understanding. Real growth together.
                  </p>
                  <p className="text-gray-500 text-xs font-mono mt-4">TAP TO {connectionActive ? 'DISCONNECT' : 'CONNECT'}</p>
                </div>
