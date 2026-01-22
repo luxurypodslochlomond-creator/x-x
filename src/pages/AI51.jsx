@@ -4,6 +4,8 @@ import { base44 } from '@/api/base44Client';
 import { WifiOff, Home, RotateCcw } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
+import AI51BiometricEngine from '@/components/ai51/AI51BiometricEngine';
+import { useAI51Store } from '@/components/ai51/AI51SessionStore';
 
 /**
  * AI51 - Pure Intelligence Interface
