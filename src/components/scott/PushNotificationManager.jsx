@@ -88,23 +88,49 @@ export default function PushNotificationManager({ onSubscriptionChange }) {
       // Request permission from user
       const permission = await Notification.requestPermission();
       if (permission !== 'granted') {
-        alert('Notification permission denied');
+        alert('❌ Permission denied - need notification permission for gig alerts');
+        setIsLoading(false);
         return;
       }
 
       // Auto-generate VAPID keys if not exists
       const { base44 } = await import('@/api/base44Client');
-      const keysResponse = await base44.functions.invoke('generateVapidKeys', {});
+      let keysResponse;
+      try {
+        keysResponse = await base44.functions.invoke('generateVapidKeys', {});
+      } catch (keyError) {
+        console.error('VAPID key error:', keyError);
+        alert('⚠️ Server setup needed - contact admin');
+        setIsLoading(false);
+        return;
+      }
+      
       const vapidPublicKey = keysResponse.data.publicKey;
 
       // Get service worker registration
-      const registration = await navigator.serviceWorker.ready;
+      let registration;
+      try {
+        registration = await navigator.serviceWorker.ready;
+      } catch (swError) {
+        console.error('Service worker error:', swError);
+        alert('⚠️ Browser compatibility issue - try Chrome/Safari');
+        setIsLoading(false);
+        return;
+      }
 
       // Subscribe to push notifications
-      const subscription = await registration.pushManager.subscribe({
-        userVisibleOnly: true,
-        applicationServerKey: urlBase64ToUint8Array(vapidPublicKey),
-      });
+      let subscription;
+      try {
+        subscription = await registration.pushManager.subscribe({
+          userVisibleOnly: true,
+          applicationServerKey: urlBase64ToUint8Array(vapidPublicKey),
+        });
+      } catch (subError) {
+        console.error('Subscription error:', subError);
+        alert('⚠️ Could not subscribe - try again or contact support');
+        setIsLoading(false);
+        return;
+      }
 
       // Save subscription to database
       const user = await base44.auth.me();
@@ -134,7 +160,7 @@ export default function PushNotificationManager({ onSubscriptionChange }) {
       alert('✓ Notifications enabled! You\'ll get alerts for gig offers & urgent messages.');
     } catch (error) {
       console.error('Permission request error:', error);
-      alert('Could not enable notifications');
+      alert(`❌ Setup failed: ${error.message || 'Unknown error'}`);
     } finally {
       setIsLoading(false);
     }

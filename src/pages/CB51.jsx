@@ -51,12 +51,22 @@ export default function CB51() {
                     return;
                 }
 
-                // If user is an artist, redirect them to their artist home
+                // Check if user is a band member (stored in ScottTeamMember)
+                const teamMembers = await base44.entities.ScottTeamMember.filter({ email: currentUser.email });
+                if (teamMembers.length > 0) {
+                    // Band member found - redirect to their artist's home
+                    const artistId = teamMembers[0].artist_id;
+                    setUser(currentUser);
+                    setLoading(false);
+                    setTimeout(() => navigate(createPageUrl(`ScottArtistHome?id=${artistId}`)), 0);
+                    return;
+                }
+
+                // Check if user is an artist (has their own ScottArtist record)
                 const artists = await base44.entities.ScottArtist.filter({ email: currentUser.email });
                 if (artists.length > 0) {
                     setUser(currentUser);
                     setLoading(false);
-                    // Auto-redirect to artist home after render
                     setTimeout(() => navigate(createPageUrl(`ScottArtistHome?id=${artists[0].id}`)), 0);
                     return;
                 }
