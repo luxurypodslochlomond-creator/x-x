@@ -37,22 +37,16 @@ export default function AI51Page() {
     };
   }, []);
 
-  // Load user & conversation memory
+  // Load user
   useEffect(() => {
-    base44.auth.me().then(setUser).catch(() => {});
+    base44.auth.me().then(setUser).catch(() => setUser(null));
     
-    const saved = localStorage.getItem('ai51_conversation');
+    const saved = localStorage.getItem('ai51_chat');
     if (saved) {
       try {
         setConversation(JSON.parse(saved));
       } catch (e) {}
     }
-    
-    const timer = setInterval(() => {
-      setCurrentTime(new Date());
-    }, 1000);
-
-    return () => clearInterval(timer);
   }, []);
 
   // Setup speech recognition
