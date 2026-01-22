@@ -15,6 +15,7 @@ import { base44 } from '@/api/base44Client';
 export default function WelcomePage() {
           const navigate = useNavigate();
           const [truthOpen, setTruthOpen] = useState(false);
+          const [expandedPillar, setExpandedPillar] = useState(null);
 
           useEffect(() => {
               document.title = 'Universal Frequency51';
