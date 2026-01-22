@@ -500,10 +500,9 @@ const LayoutInner = ({ children, currentPageName }) => {
               </Link>
               <motion.button
                 onClick={() => navigate(createPageUrl("AI51"))}
-                whileHover={{ scale: 1.15 }}
-                whileTap={{ scale: 0.9 }}
-                className="p-2.5 rounded-lg bg-gradient-to-br from-pink-500/30 to-cyan-500/30 border border-pink-500/50 hover:border-pink-500 transition-all"
-                style={{ filter: 'drop-shadow(0 0 20px rgba(236, 72, 153, 0.8))' }}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                className="p-2"
               >
                 <AI51AtomIcon size={36} animate={true} />
               </motion.button>
