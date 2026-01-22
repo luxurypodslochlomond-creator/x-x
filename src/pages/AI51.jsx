@@ -273,6 +273,55 @@ export default function AI51Page() {
     }
   };
 
+  if (!isOnline) {
+    return (
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        className="fixed inset-0 z-[9999] bg-gradient-to-br from-black via-cyan-950 to-black flex items-center justify-center p-4"
+      >
+        <div className="max-w-md w-full text-center space-y-6">
+          <motion.div
+            animate={{ scale: [1, 1.1, 1] }}
+            transition={{ duration: 2, repeat: Infinity }}
+          >
+            <WifiOff className="w-16 h-16 text-cyan-400 mx-auto" />
+          </motion.div>
+
+          <div>
+            <h1 className="text-4xl font-black font-mono text-cyan-400 mb-2">CB51</h1>
+            <p className="text-gray-400 font-mono text-sm">Offline mode</p>
+          </div>
+
+          <div className="bg-black/60 border-2 border-cyan-500/50 rounded-lg p-4 space-y-2">
+            <p className="text-white font-mono text-sm">Connection lost</p>
+            <p className="text-gray-400 font-mono text-xs">Tap HOME to reconnect.</p>
+          </div>
+
+          <div className="flex flex-col gap-3">
+            <button
+              onClick={() => window.location.reload()}
+              className="w-full bg-cyan-600 hover:bg-cyan-700 text-white py-3 rounded-lg font-black font-mono transition-all flex items-center justify-center gap-2"
+            >
+              <RotateCcw className="w-4 h-4" />
+              RETRY
+            </button>
+
+            <button
+              onClick={() => navigate(createPageUrl('Welcome'))}
+              className="w-full bg-black border-2 border-cyan-500 hover:border-cyan-400 text-cyan-400 py-3 rounded-lg font-black font-mono transition-all flex items-center justify-center gap-2"
+            >
+              <Home className="w-4 h-4" />
+              HOME
+            </button>
+          </div>
+
+          <p className="text-gray-600 font-mono text-xs">Your data is safe ♾️</p>
+        </div>
+      </motion.div>
+    );
+  }
+
   return (
     <div className="h-screen bg-gradient-to-br from-black via-gray-900 to-black flex flex-col overflow-hidden relative">
       
