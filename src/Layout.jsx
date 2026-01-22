@@ -502,9 +502,10 @@ const LayoutInner = ({ children, currentPageName }) => {
                 onClick={() => navigate(createPageUrl("AI51"))}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="text-pink-400 font-black font-mono text-lg hover:text-pink-300 transition-colors"
+                className="flex flex-col items-center justify-center px-3 py-2 border-2 border-pink-400 rounded-lg bg-black/40 hover:bg-black/60 transition-colors"
               >
-                AI51
+                <span className="text-pink-400 font-black font-mono text-sm leading-none">AI</span>
+                <span className="text-pink-400 font-black font-mono text-xs leading-none">51</span>
               </motion.button>
               <button onClick={() => setMobileMenuOpen(!isMobileMenuOpen)} className="p-2 rounded-lg hover:bg-cyan-500/20 transition-colors">
                 {isMobileMenuOpen ? <X className="w-6 h-6 text-cyan-400" /> : <Menu className="w-6 h-6 text-cyan-400" />}
