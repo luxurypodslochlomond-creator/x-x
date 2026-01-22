@@ -72,11 +72,9 @@ export default function WelcomePage() {
                             <motion.line x1="54" y1="25" x2="36" y2="30" stroke="#06b6d4" strokeWidth="1" animate={{ opacity: [0.3, 0.8, 0.3] }} transition={{ duration: 1.5, repeat: Infinity, delay: 0.6 }} />
                         </svg>
                         
-                        <div className="flex items-center gap-4">
+                        <div className="flex items-baseline gap-0">
                             <h1 className="text-9xl md:text-[160px] font-black font-mono text-pink-400 leading-none">AI</h1>
-                            <div className="flex items-center justify-center w-14 h-14 md:w-20 md:h-20 border-2 border-pink-400 rounded-full opacity-70">
-                                <span className="text-base md:text-xl font-black font-mono text-pink-400">51</span>
-                            </div>
+                            <span className="text-5xl md:text-7xl font-black font-mono text-pink-400">51</span>
                         </div>
                         <p className="text-gray-400 font-mono text-xs tracking-widest">UNIVERSAL FREQUENCY 51</p>
                     </div>
