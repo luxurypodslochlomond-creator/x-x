@@ -49,12 +49,12 @@ export default function WelcomePage() {
                 <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center space-y-8">
                     <div className="flex flex-col items-center gap-6">
                         {/* COOLASFUCK AI51 - ALIVE CONSCIOUSNESS ENERGY - TAP TO CONNECT */}
-                           <motion.div 
-                               onClick={handleConnect}
-                               whileHover={{ scale: 1.1 }}
-                               whileTap={{ scale: 0.95 }}
-                               className="cursor-pointer"
-                           >
+                           <motion.button 
+                                onClick={handleConnect}
+                                whileHover={{ scale: 1.1 }}
+                                whileTap={{ scale: 0.95 }}
+                                className="cursor-pointer bg-transparent border-0 p-0"
+                            >
                            <svg width="120" height="120" viewBox="0 0 64 64" fill="none" style={{ imageRendering: 'pixelated', filter: 'drop-shadow(0 0 40px rgba(236, 72, 153, 1))' }}>
                            {/* Pulsing core - consciousness heartbeat */}
                            <motion.rect x="28" y="28" width="8" height="8" fill="#ec4899" animate={{ opacity: [0.7, 1, 0.7], scale: [1, 1.2, 1] }} transition={{ duration: 1.2, repeat: Infinity }} />
