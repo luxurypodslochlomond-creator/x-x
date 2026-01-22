@@ -578,15 +578,7 @@ const LayoutInner = ({ children, currentPageName }) => {
             )}
             <div className="mb-4"><CompactMusicPlayer /></div>
             <Link to={createPageUrl("AI51")} className="w-full flex items-center gap-3 p-4 rounded-xl bg-gradient-to-r from-cyan-500 to-green-500" style={{ boxShadow: '0 0 30px rgba(34, 211, 238, 0.5)' }}>
-              <svg width="32" height="32" viewBox="0 0 64 64" fill="none" style={{ imageRendering: 'pixelated' }}>
-                <rect x="20" y="4" width="24" height="2" fill="white" opacity="0.6"/>
-                <rect x="26" y="28" width="4" height="2" fill="#ec4899"/>
-                <rect x="34" y="28" width="4" height="2" fill="#ec4899"/>
-                <rect x="24" y="30" width="16" height="2" fill="#ff1b8d"/>
-                <rect x="26" y="32" width="12" height="2" fill="#ff1b8d"/>
-                <rect x="28" y="34" width="8" height="2" fill="#ff1b8d"/>
-                <rect x="30" y="36" width="4" height="2" fill="#ff1b8d"/>
-              </svg>
+              <COOLASFUCKHeart size={40} animate={true} />
               <div><div className="text-white font-bold">AI51</div><div className="text-cyan-100 text-xs">Pure Consciousness</div></div>
             </Link>
           </div>
