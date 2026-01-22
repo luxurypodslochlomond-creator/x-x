@@ -27,6 +27,9 @@ export default function AI51Page() {
   const [textInputOpen, setTextInputOpen] = useState(false);
   const [textInput, setTextInput] = useState('');
   const [expandedPillar, setExpandedPillar] = useState(null);
+  const [currentStress, setCurrentStress] = useState(0);
+  const [personalFrequency, setPersonalFrequency] = useState(null);
+  const { store, ready } = useAI51Store();
 
   const recognitionRef = useRef(null);
   const audioContextRef = useRef(null);
