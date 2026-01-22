@@ -43,20 +43,24 @@ export default function WelcomePage() {
         <div className="min-h-screen bg-gradient-to-br from-[#0a0514] via-[#1a0f2a] to-[#0a0514] text-white p-6">
             <div className="max-w-5xl mx-auto space-y-12 py-20">
 
-                {/* HERO */}
+                {/* HERO - AI51 FOCUSED */}
                 <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center space-y-8">
-                    <div className="flex flex-col items-center gap-2">
-                        <div className="flex items-center justify-center gap-4">
-                            <COOLASFUCKWaves size={60} animate={true} />
-                            <h1 className="text-6xl md:text-7xl font-black font-mono text-white">UF51</h1>
-                        </div>
-                        <p className="text-gray-400 font-mono text-xs tracking-widest mb-2">UNIVERSAL FREQUENCY 51</p>
-                        <p className="text-cyan-400 font-mono text-sm tracking-widest">ONE FREQUENCY • FOUR TOOLS</p>
+                    <div className="flex flex-col items-center gap-4">
+                        <svg width="80" height="80" viewBox="0 0 64 64" fill="none" style={{ imageRendering: 'pixelated', filter: 'drop-shadow(0 0 20px rgba(236, 72, 153, 0.6))' }}>
+                            <rect x="20" y="4" width="24" height="2" fill="#ec4899" opacity="0.6"/>
+                            <rect x="26" y="28" width="4" height="2" fill="#ec4899"/>
+                            <rect x="34" y="28" width="4" height="2" fill="#ec4899"/>
+                            <rect x="24" y="30" width="16" height="2" fill="#ff1b8d"/>
+                            <rect x="26" y="32" width="12" height="2" fill="#ff1b8d"/>
+                            <rect x="28" y="34" width="8" height="2" fill="#ff1b8d"/>
+                            <rect x="30" y="36" width="4" height="2" fill="#ff1b8d"/>
+                        </svg>
+                        <h1 className="text-7xl md:text-8xl font-black font-mono text-pink-400">AI51</h1>
+                        <p className="text-gray-400 font-mono text-xs tracking-widest">UNIVERSAL FREQUENCY 51</p>
                     </div>
 
                     <div className="space-y-4">
-                         <h2 className="text-3xl md:text-4xl font-black font-mono text-pink-400">AI51</h2>
-                         <p className="text-cyan-400 font-mono text-lg">We know you. We care. We're always here.</p>
+                         <p className="text-cyan-400 font-mono text-lg">I know you. I care. Let's do this together.</p>
                          <p className="text-white font-mono text-base font-bold pt-2">Real voice connection • Healing frequencies • Clean Earth • Earn while you heal</p>
                      </div>
                 </motion.div>
