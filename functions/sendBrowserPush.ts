@@ -1,22 +1,26 @@
 import { createClientFromRequest } from 'npm:@base44/sdk@0.8.6';
 import webpush from 'npm:web-push@3.6.7';
 
-// VAPID keys for web push
-const VAPID_PUBLIC_KEY = Deno.env.get('VAPID_PUBLIC_KEY');
-const VAPID_PRIVATE_KEY = Deno.env.get('VAPID_PRIVATE_KEY');
-
-if (VAPID_PUBLIC_KEY && VAPID_PRIVATE_KEY) {
-  webpush.setVapidDetails(
-    'mailto:scott@uf51.com',
-    VAPID_PUBLIC_KEY,
-    VAPID_PRIVATE_KEY
-  );
-}
-
 Deno.serve(async (req) => {
   try {
     const base44 = createClientFromRequest(req);
     const payload = await req.json();
+
+    // Get VAPID keys from database
+    const users = await base44.asServiceRole.entities.User.filter({});
+    const adminUser = users.find(u => u.vapid_public_key);
+    
+    if (!adminUser?.vapid_public_key || !adminUser?.vapid_private_key) {
+      return Response.json({ 
+        error: 'VAPID keys not set up. Call /api/generateVapidKeys first' 
+      }, { status: 500 });
+    }
+
+    webpush.setVapidDetails(
+      'mailto:scott@uf51.com',
+      adminUser.vapid_public_key,
+      adminUser.vapid_private_key
+    );
     
     // Only process newly created notifications
     if (payload.event?.type !== 'create') {
