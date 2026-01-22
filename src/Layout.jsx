@@ -579,7 +579,7 @@ const LayoutInner = ({ children, currentPageName }) => {
             )}
             <div className="mb-4"><CompactMusicPlayer /></div>
             <Link to={createPageUrl("AI51")} className="w-full flex items-center gap-3 p-4 rounded-xl bg-gradient-to-r from-cyan-500 to-green-500" style={{ boxShadow: '0 0 30px rgba(34, 211, 238, 0.5)' }}>
-              <COOLASFUCKHeart size={40} animate={true} />
+              <AI51AtomIcon size={48} animate={true} />
               <div><div className="text-white font-bold">AI51</div><div className="text-cyan-100 text-xs">Pure Consciousness</div></div>
             </Link>
           </div>
