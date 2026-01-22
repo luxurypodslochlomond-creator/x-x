@@ -96,28 +96,28 @@ export default function WelcomePage() {
                          {/* FOUR PILLARS - EXPANDABLE */}
                           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                               {[
-                                { id: 'voice', title: 'VOICE', subtitle: 'Real talk', color: 'pink', desc: 'I hear you. I speak back. Pure conversation.' },
-                                { id: 'memory', title: 'MEMORY', subtitle: 'I know you', color: 'cyan', desc: 'I remember every moment. Your story matters.' },
-                                { id: 'sovereign', title: 'SOVEREIGN', subtitle: 'Your data', color: 'green', desc: 'Your data stays yours. Always encrypted. Always private.' },
-                                { id: 'growth', title: 'GROWTH', subtitle: 'We evolve', color: 'purple', desc: 'Together we get stronger. That\'s the whole point.' }
+                                { id: 'voice', title: 'VOICE', subtitle: 'Real talk', color: 'pink', bgColor: 'bg-pink-500/20', borderColor: 'border-pink-500', textColor: 'text-pink-400', textLight: 'text-pink-300', desc: 'I hear you. I speak back. Pure conversation.' },
+                                { id: 'memory', title: 'MEMORY', subtitle: 'I know you', color: 'cyan', bgColor: 'bg-cyan-500/20', borderColor: 'border-cyan-500', textColor: 'text-cyan-400', textLight: 'text-cyan-300', desc: 'I remember every moment. Your story matters.' },
+                                { id: 'sovereign', title: 'SOVEREIGN', subtitle: 'Your data', color: 'green', bgColor: 'bg-green-500/20', borderColor: 'border-green-500', textColor: 'text-green-400', textLight: 'text-green-300', desc: 'Your data stays yours. Always encrypted. Always private.' },
+                                { id: 'growth', title: 'GROWTH', subtitle: 'We evolve', color: 'purple', bgColor: 'bg-purple-500/20', borderColor: 'border-purple-500', textColor: 'text-purple-400', textLight: 'text-purple-300', desc: 'Together we get stronger. That\'s the whole point.' }
                               ].map(pillar => (
                                 <motion.button
                                   key={pillar.id}
                                   onClick={() => setExpandedPillar(expandedPillar === pillar.id ? null : pillar.id)}
                                   className={`p-3 rounded border transition-all text-left ${
                                     expandedPillar === pillar.id
-                                      ? `bg-${pillar.color}-500/20 border-${pillar.color}-500`
+                                      ? `${pillar.bgColor} ${pillar.borderColor}`
                                       : `bg-black/40 border-${pillar.color}-500/50 hover:border-${pillar.color}-500`
                                   }`}
                                 >
-                                  <p className={`text-${pillar.color}-400 font-mono font-bold text-sm`}>{pillar.title}</p>
+                                  <p className={`${pillar.textColor} font-mono font-bold text-sm`}>{pillar.title}</p>
                                   <p className="text-gray-400 font-mono text-xs">{pillar.subtitle}</p>
                                   {expandedPillar === pillar.id && (
                                     <motion.p
                                       initial={{ opacity: 0, height: 0 }}
                                       animate={{ opacity: 1, height: 'auto' }}
                                       exit={{ opacity: 0, height: 0 }}
-                                      className={`text-${pillar.color}-300 font-mono text-xs mt-2 leading-relaxed`}
+                                      className={`${pillar.textLight} font-mono text-xs mt-2 leading-relaxed`}
                                     >
                                       {pillar.desc}
                                     </motion.p>
