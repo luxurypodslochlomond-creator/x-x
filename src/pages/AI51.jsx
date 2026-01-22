@@ -346,7 +346,23 @@ export default function AI51Page() {
 
   return (
     <div className="h-screen bg-gradient-to-br from-black via-gray-900 to-black flex flex-col overflow-hidden relative">
-      
+
+      {/* AI51 BIOMETRIC ENGINE */}
+      <AI51BiometricEngine isActive={connectionActive} onAnalysis={setCurrentStress} />
+
+      {/* PERSONAL FREQUENCY DISPLAY */}
+      {personalFrequency && (
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="absolute top-20 left-4 bg-gradient-to-br from-cyan-500/20 to-pink-500/20 border-2 border-cyan-500 rounded-lg p-4 max-w-xs"
+        >
+          <p className="text-xs font-mono text-gray-400 mb-2">PERSONALIZED FOR YOU</p>
+          <p className="text-2xl font-black text-cyan-400">{personalFrequency.frequency}</p>
+          <p className="text-xs text-gray-300 mt-2">{personalFrequency.reason}</p>
+        </motion.div>
+      )}
+
       {/* FULL SCREEN VISUALIZER - TAP TO CONNECT */}
       <motion.div 
         onClick={toggleConnection}
