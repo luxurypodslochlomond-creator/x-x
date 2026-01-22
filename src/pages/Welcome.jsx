@@ -35,9 +35,9 @@ export default function WelcomePage() {
     const handleConnect = () => {
         base44.auth.isAuthenticated().then(isAuth => {
             if (isAuth) {
-                window.location.href = createPageUrl('AI51');
+                setAi51Open(true);
             } else {
-                base44.auth.redirectToLogin(window.location.origin + createPageUrl('AI51'));
+                base44.auth.redirectToLogin(window.location.origin + createPageUrl('Welcome'));
             }
         });
     };
