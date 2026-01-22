@@ -482,7 +482,7 @@ const LayoutInner = ({ children, currentPageName }) => {
                 )}
               </Link>
 
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1.5">
               {canGoBack && (
                 <button
                   onClick={() => navigate(-1)}
@@ -498,9 +498,15 @@ const LayoutInner = ({ children, currentPageName }) => {
                 </svg>
                 <span className="text-[9px] font-black font-mono text-pink-400 mt-0.5">HEAL</span>
               </Link>
-              <Link to={createPageUrl("AI51")} className="p-2" style={{ boxShadow: '0 0 20px rgba(34, 211, 238, 0.4)' }}>
-                <AI51AtomIcon size={36} animate={true} />
-              </Link>
+              <motion.button
+                onClick={() => navigate(createPageUrl("AI51"))}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                className="p-2 transition-all"
+                style={{ filter: 'drop-shadow(0 0 15px rgba(236, 72, 153, 0.6))' }}
+              >
+                <AI51AtomIcon size={32} animate={true} />
+              </motion.button>
               <button onClick={() => setMobileMenuOpen(!isMobileMenuOpen)} className="p-2 rounded-xl bg-purple-900/50">
                 {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
               </button>
