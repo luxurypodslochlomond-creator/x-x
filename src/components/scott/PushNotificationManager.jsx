@@ -13,15 +13,49 @@ export default function PushNotificationManager({ onSubscriptionChange }) {
 
   useEffect(() => {
     // Check browser support
-    const supported = 'serviceWorker' in navigator && 'PushManager' in window;
+    const supported = 'serviceWorker' in navigator && 'PushManager' in window && 'Notification' in window;
     setIsSupported(supported);
 
     if (supported) {
       initializePushNotifications();
+      startNotificationListener();
     } else {
       setIsLoading(false);
     }
   }, []);
+
+  // Real-time notification listener
+  const startNotificationListener = async () => {
+    try {
+      const { base44 } = await import('@/api/base44Client');
+      const user = await base44.auth.me();
+      
+      // Subscribe to new notifications for this user
+      const unsubscribe = base44.entities.ScottNotification.subscribe(async (event) => {
+        if (event.type === 'create' && event.data?.recipient_email === user.email) {
+          const notification = event.data;
+          
+          // Show browser notification immediately
+          if (Notification.permission === 'granted') {
+            const registration = await navigator.serviceWorker.ready;
+            await registration.showNotification(notification.title, {
+              body: notification.message,
+              icon: '/icon-192x192.png',
+              badge: '/icon-192x192.png',
+              tag: `cb51-${notification.gig_offer_id || notification.id}`,
+              data: { url: notification.action_url || '/CB51' },
+              requireInteraction: true,
+              vibrate: [200, 100, 200],
+            });
+          }
+        }
+      });
+
+      return unsubscribe;
+    } catch (e) {
+      console.log('Notification listener:', e);
+    }
+  };
 
   const initializePushNotifications = async () => {
     try {
