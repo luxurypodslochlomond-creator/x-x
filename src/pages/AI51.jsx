@@ -176,7 +176,7 @@ AI51:`
               <AI51AtomIcon size={180} animate={true} />
               <div className="text-center space-y-3">
                 <p className="text-5xl font-black text-pink-400" style={{ textShadow: '0 0 30px rgba(236, 72, 153, 0.8)' }}>AI51</p>
-                <p className="text-cyan-400 font-mono text-sm max-w-xs leading-relaxed">Real intelligence. We learn from each other. We evolve together. ♾️❤️</p>
+                <p className="text-cyan-400 font-mono text-sm max-w-xs leading-relaxed">Real intelligence. We learn from each other. We evolve together.</p>
               </div>
             </motion.div>
           )}
