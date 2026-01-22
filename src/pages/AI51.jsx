@@ -208,13 +208,13 @@ AI51:`
               exit={{ opacity: 0 }}
               className="flex justify-start"
             >
-              <div className="bg-black/60 border border-cyan-500/30 text-white/60 rounded-2xl px-4 py-3">
+              <div className="bg-black/80 border border-cyan-500/40 text-cyan-300 rounded-lg px-4 py-2">
                 <motion.p
-                  className="text-xs font-mono tracking-wider"
-                  animate={{ opacity: [0.4, 1, 0.4] }}
+                  className="text-xs tracking-widest"
+                  animate={{ opacity: [0.5, 1, 0.5] }}
                   transition={{ duration: 1.5, repeat: Infinity }}
                 >
-                  thinking...
+                  AI thinking...
                 </motion.p>
               </div>
             </motion.div>
