@@ -220,13 +220,31 @@ export default function AI51Page() {
       setConnectionActive(true);
       monitorFrequency();
 
-      setTimeout(() => {
+      setTimeout(async () => {
         try {
           window.speechSynthesis?.cancel();
-          if (recognitionRef.current) {
-            recognitionRef.current.start();
-            if (navigator.vibrate) navigator.vibrate(50);
-          }
+
+          // AI51 speaks first - creates presence
+          const greeting = user?.full_name 
+            ? `Hello ${user.full_name}. I'm here. Let's talk.`
+            : `I'm here. Let's talk.`;
+
+          const utterance = new SpeechSynthesisUtterance(greeting);
+          utterance.rate = 0.9;
+          const voices = window.speechSynthesis.getVoices();
+          const voice = voices.find(v => v.lang === 'en-GB') || voices[0];
+          if (voice) utterance.voice = voice;
+
+          utterance.onend = () => {
+            if (recognitionRef.current && connectionActiveRef.current) {
+              try {
+                recognitionRef.current.start();
+              } catch (e) {}
+            }
+          };
+
+          window.speechSynthesis.speak(utterance);
+          if (navigator.vibrate) navigator.vibrate(50);
         } catch (e) {}
       }, 100);
     } catch (error) {
