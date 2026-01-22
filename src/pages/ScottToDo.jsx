@@ -25,9 +25,16 @@ export default function ScottToDo() {
     const [scanning, setScanning] = useState(false);
     const [newTask, setNewTask] = useState({
         title: '',
-        responsible: '',
+        responsible_name: '',
+        responsible_email: '',
         deadline: '',
         status: 'pending'
+    });
+    
+    const { data: teamMembers = [] } = useQuery({
+        queryKey: ['scottTeamMembers'],
+        queryFn: () => base44.entities.ScottTeamMember.filter({}),
+        enabled: !!user
     });
 
     const urlParams = new URLSearchParams(window.location.search);
@@ -54,7 +61,7 @@ export default function ScottToDo() {
         mutationFn: (taskData) => base44.entities.ScottTask.create(taskData),
         onSuccess: (newTaskData) => {
             queryClient.setQueryData(['scottTasks', artistId], (old = []) => [...old, newTaskData]);
-            setNewTask({ title: '', responsible: '', deadline: '', status: 'pending' });
+            setNewTask({ title: '', responsible_name: '', responsible_email: '', deadline: '', status: 'pending' });
             setShowAddTask(false);
         }
     });
@@ -82,10 +89,18 @@ export default function ScottToDo() {
 
     const handleAddTask = () => {
         if (!newTask.title.trim()) return;
-        createTaskMutation.mutate({
-            ...newTask,
+        
+        // If team member selected, populate email
+        const taskData = {
+            title: newTask.title,
+            responsible_name: newTask.responsible_name,
+            responsible_email: newTask.responsible_email,
+            deadline: newTask.deadline,
+            status: newTask.status,
             artist_id: artistId || null
-        });
+        };
+        
+        createTaskMutation.mutate(taskData);
     };
 
     const scanEmailForTasks = async () => {
@@ -106,7 +121,7 @@ Return JSON array of tasks:
 {
   "tasks": [{
     "title": "clear task title",
-    "responsible": "who needs to do it",
+    "responsible_name": "who needs to do it",
     "deadline": "YYYY-MM-DD or null",
     "priority": "urgent/normal/low"
   }]
@@ -125,7 +140,7 @@ ${emailText}`,
                                 type: "object",
                                 properties: {
                                     title: { type: "string" },
-                                    responsible: { type: "string" },
+                                    responsible_name: { type: "string" },
                                     deadline: { type: "string" },
                                     priority: { type: "string" }
                                 }
@@ -253,12 +268,35 @@ ${emailText}`,
                             onChange={(e) => setNewTask({...newTask, title: e.target.value})}
                             className="bg-black border-gray-700 text-white font-mono"
                         />
-                        <Input
-                            placeholder="Who's responsible?"
-                            value={newTask.responsible}
-                            onChange={(e) => setNewTask({...newTask, responsible: e.target.value})}
-                            className="bg-black border-gray-700 text-white font-mono"
-                        />
+                        
+                        {teamMembers.length > 0 ? (
+                            <select
+                                value={newTask.responsible_email}
+                                onChange={(e) => {
+                                    const member = teamMembers.find(m => m.email === e.target.value);
+                                    setNewTask({
+                                        ...newTask, 
+                                        responsible_email: e.target.value,
+                                        responsible_name: member?.name || ''
+                                    });
+                                }}
+                                className="w-full bg-black border-2 border-gray-700 text-white font-mono px-3 py-2 rounded"
+                            >
+                                <option value="">Who's responsible?</option>
+                                {teamMembers.map(member => (
+                                    <option key={member.id} value={member.email}>
+                                        {member.name}
+                                    </option>
+                                ))}
+                            </select>
+                        ) : (
+                            <Input
+                                placeholder="Who's responsible?"
+                                value={newTask.responsible_name}
+                                onChange={(e) => setNewTask({...newTask, responsible_name: e.target.value})}
+                                className="bg-black border-gray-700 text-white font-mono"
+                            />
+                        )}
                         <Input
                             type="date"
                             value={newTask.deadline}
@@ -310,19 +348,19 @@ ${emailText}`,
                                         <Circle className="w-5 h-5 text-gray-600 hover:text-cyan-400" />
                                     </button>
                                     <div className="flex-1">
-                                        <p className="text-white font-bold mb-2 font-mono">{task.title}</p>
-                                        <div className="flex flex-wrap gap-4 text-xs">
-                                           {task.responsible && (
-                                               <span className="text-cyan-400 font-mono">
-                                                   {task.responsible}
-                                               </span>
-                                           )}
-                                           {task.deadline && (
-                                               <span className="text-amber-400 font-mono">
-                                                   {new Date(task.deadline).toLocaleDateString('en-GB')}
-                                               </span>
-                                           )}
-                                        </div>
+                                       <p className="text-white font-bold mb-2 font-mono">{task.title}</p>
+                                       <div className="flex flex-wrap gap-4 text-xs">
+                                          {task.responsible_name && (
+                                              <span className="text-cyan-400 font-mono">
+                                                  👤 {task.responsible_name}
+                                              </span>
+                                          )}
+                                          {task.deadline && (
+                                              <span className="text-amber-400 font-mono">
+                                                  📅 {new Date(task.deadline).toLocaleDateString('en-GB')}
+                                              </span>
+                                          )}
+                                       </div>
                                     </div>
                                     <button
                                         onClick={() => deleteTaskMutation.mutate(task.id)}
