@@ -74,7 +74,9 @@ export default function WelcomePage() {
                         
                         <div className="relative inline-block">
                             <h1 className="text-9xl md:text-[160px] font-black font-mono text-pink-400 leading-none">AI</h1>
-                            <sup className="absolute -right-6 -top-6 text-2xl md:text-4xl font-black font-mono text-pink-400 opacity-70">51</sup>
+                            <div className="absolute -right-8 bottom-6 md:bottom-8 flex items-center justify-center w-12 h-12 md:w-16 md:h-16 border-2 border-pink-400 rounded-full opacity-70">
+                                <span className="text-lg md:text-2xl font-black font-mono text-pink-400">51</span>
+                            </div>
                         </div>
                         <p className="text-gray-400 font-mono text-xs tracking-widest">UNIVERSAL FREQUENCY 51</p>
                     </div>
