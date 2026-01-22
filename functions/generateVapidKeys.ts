@@ -42,6 +42,9 @@ Deno.serve(async (req) => {
       publicKey: vapidKeys.publicKey,
       message: 'VAPID keys generated and stored ✓'
     });
+    
+    // If no keys exist and user isn't admin - admin must generate first
+    return Response.json({ error: 'No VAPID keys configured. Ask admin to enable notifications.' }, { status: 403 });
 
   } catch (error) {
     return Response.json({ error: error.message }, { status: 500 });
