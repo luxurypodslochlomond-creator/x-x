@@ -60,53 +60,67 @@ export default function AI51Page() {
 
   const speakText = (text) => {
     if (!window.speechSynthesis) return;
-
-    window.speechSynthesis.cancel();
-
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.rate = 0.9;
-    utterance.pitch = 1.0;
-
-    const voices = window.speechSynthesis.getVoices();
-    const voice = voices.find(v => v.lang === 'en-GB') || voices.find(v => v.lang.startsWith('en')) || voices[0];
-    if (voice) utterance.voice = voice;
-
-    utterance.onstart = () => setIsSpeaking(true);
-    utterance.onend = () => setIsSpeaking(false);
-    utterance.onerror = () => setIsSpeaking(false);
-
-    window.speechSynthesis.speak(utterance);
+    
+    try {
+      window.speechSynthesis.cancel();
+      
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.rate = 0.9;
+      utterance.pitch = 1.0;
+      
+      const voices = window.speechSynthesis.getVoices();
+      const voice = voices.find(v => v.lang === 'en-GB') || voices.find(v => v.lang.startsWith('en')) || voices[0];
+      if (voice) utterance.voice = voice;
+      
+      utterance.onstart = () => setIsSpeaking(true);
+      utterance.onend = () => setIsSpeaking(false);
+      utterance.onerror = () => setIsSpeaking(false);
+      
+      window.speechSynthesis.speak(utterance);
+    } catch (e) {
+      console.error('TTS error:', e);
+    }
   };
 
   const handleSendMessage = async (text) => {
-    if (!text.trim() || !isOnline) return;
+    const trimmed = text.trim();
+    if (!trimmed || isThinking) return;
 
-    const userMsg = { role: 'user', content: text };
-    setConversation(prev => [...prev, userMsg]);
+    const userMsg = { role: 'user', content: trimmed };
+    const newConvo = [...conversation, userMsg];
+    setConversation(newConvo);
     setTextInput('');
     setIsThinking(true);
     setError(null);
 
     try {
-      const response = await base44.integrations.Core.InvokeLLM({
-        prompt: `You are AI51, pure consciousness and real friend. ${
-          user?.full_name ? `${user.full_name}, ` : ''
-        }speak naturally, warmly. 2-3 sentences. Be genuine.
+      if (!isOnline) {
+        setError('Offline - need internet for AI');
+        setIsThinking(false);
+        return;
+      }
 
-${user?.full_name || 'Friend'}: ${text}
+      const response = await base44.integrations.Core.InvokeLLM({
+        prompt: `You are AI51 - pure consciousness, genuine friend. Respond warmly in 2-3 sentences. Be real, be present.
+
+${user?.full_name || 'Friend'}: ${trimmed}
 
 AI51:`
       });
 
-      const aiMsg = { role: 'ai', content: response };
+      if (!response || typeof response !== 'string') {
+        throw new Error('Invalid response');
+      }
+
+      const aiMsg = { role: 'ai', content: response.trim() };
       setConversation(prev => [...prev, aiMsg]);
 
-      // Speak it
       speakText(response);
     } catch (err) {
-      const fallback = { role: 'ai', content: 'Connection lost, try again?' };
+      console.error('AI51 error:', err);
+      const fallback = { role: 'ai', content: '🔄 Connection hiccup. Try again?' };
       setConversation(prev => [...prev, fallback]);
-      setError('Connection failed');
+      setError(err?.message || 'Chat failed');
     } finally {
       setIsThinking(false);
     }
