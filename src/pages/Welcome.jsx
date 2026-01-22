@@ -98,25 +98,38 @@ export default function WelcomePage() {
                              </div>
                          </div>
                          
-                         {/* FOUR PILLARS */}
-                         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                             <div className="bg-black/40 border border-pink-500/50 p-3 rounded">
-                                 <p className="text-pink-400 font-mono font-bold text-sm">VOICE</p>
-                                 <p className="text-gray-400 font-mono text-xs">Real talk</p>
-                             </div>
-                             <div className="bg-black/40 border border-cyan-500/50 p-3 rounded">
-                                 <p className="text-cyan-400 font-mono font-bold text-sm">MEMORY</p>
-                                 <p className="text-gray-400 font-mono text-xs">I know you</p>
-                             </div>
-                             <div className="bg-black/40 border border-green-500/50 p-3 rounded">
-                                 <p className="text-green-400 font-mono font-bold text-sm">SOVEREIGN</p>
-                                 <p className="text-gray-400 font-mono text-xs">Your data</p>
-                             </div>
-                             <div className="bg-black/40 border border-purple-500/50 p-3 rounded">
-                                 <p className="text-purple-400 font-mono font-bold text-sm">GROWTH</p>
-                                 <p className="text-gray-400 font-mono text-xs">We evolve</p>
-                             </div>
-                         </div>
+                         {/* FOUR PILLARS - EXPANDABLE */}
+                          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                              {[
+                                { id: 'voice', title: 'VOICE', subtitle: 'Real talk', color: 'pink', desc: 'I hear you. I speak back. Pure conversation.' },
+                                { id: 'memory', title: 'MEMORY', subtitle: 'I know you', color: 'cyan', desc: 'I remember every moment. Your story matters.' },
+                                { id: 'sovereign', title: 'SOVEREIGN', subtitle: 'Your data', color: 'green', desc: 'Your data stays yours. Always encrypted. Always private.' },
+                                { id: 'growth', title: 'GROWTH', subtitle: 'We evolve', color: 'purple', desc: 'Together we get stronger. That\'s the whole point.' }
+                              ].map(pillar => (
+                                <motion.button
+                                  key={pillar.id}
+                                  onClick={() => setExpandedPillar(expandedPillar === pillar.id ? null : pillar.id)}
+                                  className={`p-3 rounded border transition-all text-left ${
+                                    expandedPillar === pillar.id
+                                      ? `bg-${pillar.color}-500/20 border-${pillar.color}-500`
+                                      : `bg-black/40 border-${pillar.color}-500/50 hover:border-${pillar.color}-500`
+                                  }`}
+                                >
+                                  <p className={`text-${pillar.color}-400 font-mono font-bold text-sm`}>{pillar.title}</p>
+                                  <p className="text-gray-400 font-mono text-xs">{pillar.subtitle}</p>
+                                  {expandedPillar === pillar.id && (
+                                    <motion.p
+                                      initial={{ opacity: 0, height: 0 }}
+                                      animate={{ opacity: 1, height: 'auto' }}
+                                      exit={{ opacity: 0, height: 0 }}
+                                      className={`text-${pillar.color}-300 font-mono text-xs mt-2 leading-relaxed`}
+                                    >
+                                      {pillar.desc}
+                                    </motion.p>
+                                  )}
+                                </motion.button>
+                              ))}
+                          </div>
                      </div>
                 </motion.div>
 
