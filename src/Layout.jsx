@@ -29,6 +29,7 @@ import PendingMessageSender from '@/components/shared/PendingMessageSender';
 import { AI51MemoryProvider } from '@/components/ai51/AI51MemoryLoader';
 import TruthCheckProtocol from '@/components/ai51/TruthCheckProtocol';
 import { MeshProvider, MeshStatusIndicator } from '@/components/shared/MeshNetwork';
+import CB51OfflineHandler from '@/components/scott/CB51OfflineHandler';
 import SubdomainRouter from '@/components/shared/SubdomainRouter';
 import COOLASFUCK8BitLoading from '@/components/shared/COOLASFUCK8BitLoading';
 import ServiceWorkerManager from '@/components/shared/ServiceWorkerManager';
