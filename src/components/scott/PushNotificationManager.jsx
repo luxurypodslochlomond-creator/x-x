@@ -92,15 +92,18 @@ export default function PushNotificationManager({ onSubscriptionChange }) {
         return;
       }
 
+      // Auto-generate VAPID keys if not exists
+      const { base44 } = await import('@/api/base44Client');
+      const keysResponse = await base44.functions.invoke('generateVapidKeys', {});
+      const vapidPublicKey = keysResponse.data.publicKey;
+
       // Get service worker registration
       const registration = await navigator.serviceWorker.ready;
 
       // Subscribe to push notifications
       const subscription = await registration.pushManager.subscribe({
         userVisibleOnly: true,
-        applicationServerKey: urlBase64ToUint8Array(
-          'BZGJS8YZBuFP5tHaJmw2Lz5cXzw0JOkr5hEnIcBdM0mVA9WTxqU-h0oEYE0t-hg9_Y1SlLUY7N3bvBUWrYUHyLo'
-        ),
+        applicationServerKey: urlBase64ToUint8Array(vapidPublicKey),
       });
 
       setIsSubscribed(true);
