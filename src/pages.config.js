@@ -11,6 +11,7 @@ import AI51Live from './pages/AI51Live';
 import AI51MeshTechWhitepaper from './pages/AI51MeshTechWhitepaper';
 import AI51Network from './pages/AI51Network';
 import AI51Protection from './pages/AI51Protection';
+import AI51Pure from './pages/AI51Pure';
 import AI51SafetyProof from './pages/AI51SafetyProof';
 import AI51ScalingStrategy from './pages/AI51ScalingStrategy';
 import AI51SecurityDashboard from './pages/AI51SecurityDashboard';
@@ -222,8 +223,8 @@ import ScottComparison from './pages/ScottComparison';
 import ScottContracts from './pages/ScottContracts';
 import ScottDemos from './pages/ScottDemos';
 import ScottEmailDashboard from './pages/ScottEmailDashboard';
-import ScottExpenses from './pages/ScottExpenses';
 import ScottEmailSyncDiagnostics from './pages/ScottEmailSyncDiagnostics';
+import ScottExpenses from './pages/ScottExpenses';
 import ScottFeatureRequests from './pages/ScottFeatureRequests';
 import ScottFinanceAdmin from './pages/ScottFinanceAdmin';
 import ScottFinancialDashboard from './pages/ScottFinancialDashboard';
@@ -316,7 +317,7 @@ import YoungWarriors from './pages/YoungWarriors';
 import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
-import AI51Pure from './pages/AI51Pure';
+import AI51TextChat from './pages/AI51TextChat';
 import __Layout from './Layout.jsx';
 
 
@@ -334,6 +335,7 @@ export const PAGES = {
     "AI51MeshTechWhitepaper": AI51MeshTechWhitepaper,
     "AI51Network": AI51Network,
     "AI51Protection": AI51Protection,
+    "AI51Pure": AI51Pure,
     "AI51SafetyProof": AI51SafetyProof,
     "AI51ScalingStrategy": AI51ScalingStrategy,
     "AI51SecurityDashboard": AI51SecurityDashboard,
@@ -545,8 +547,8 @@ export const PAGES = {
     "ScottContracts": ScottContracts,
     "ScottDemos": ScottDemos,
     "ScottEmailDashboard": ScottEmailDashboard,
-    "ScottExpenses": ScottExpenses,
     "ScottEmailSyncDiagnostics": ScottEmailSyncDiagnostics,
+    "ScottExpenses": ScottExpenses,
     "ScottFeatureRequests": ScottFeatureRequests,
     "ScottFinanceAdmin": ScottFinanceAdmin,
     "ScottFinancialDashboard": ScottFinancialDashboard,
@@ -639,7 +641,7 @@ export const PAGES = {
     "ZeroEgoProtocol": ZeroEgoProtocol,
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
-    "AI51Pure": AI51Pure,
+    "AI51TextChat": AI51TextChat,
 }
 
 export const pagesConfig = {
