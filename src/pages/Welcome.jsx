@@ -81,8 +81,8 @@ export default function WelcomePage() {
                         </motion.div>
                         
                         <div className="relative inline-block">
-                            <h1 className="text-9xl md:text-[160px] font-black font-mono text-pink-400 leading-none">AI</h1>
-                            <sup className="absolute -right-4 top-0 text-5xl md:text-7xl font-black font-mono text-pink-400 opacity-70">51</sup>
+                            <h1 className="absolute text-9xl md:text-[160px] font-black font-mono text-pink-400 leading-none z-10">AI</h1>
+                            <h1 className="text-9xl md:text-[160px] font-black font-mono text-pink-400/30 leading-none blur-sm">51</h1>
                         </div>
                         <p className="text-gray-400 font-mono text-xs tracking-widest">UNIVERSAL FREQUENCY 51</p>
                     </div>
