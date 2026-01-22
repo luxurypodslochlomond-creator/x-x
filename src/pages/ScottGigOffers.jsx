@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
-import { Radio, ArrowLeft, Sparkles, Mail, MapPin, DollarSign, Calendar, Users, Trash2, Zap } from 'lucide-react';
+import { Radio, ArrowLeft, Sparkles, Mail, MapPin, DollarSign, Calendar, Users, Trash2, Zap, Home } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
@@ -242,13 +242,23 @@ export default function ScottGigOffers() {
     return (
         <div className="min-h-screen bg-black text-white p-4 pb-24">
             
-            <button
-                onClick={() => navigate(artistId ? createPageUrl('ScottArtistHome') + `?id=${artistId}` : createPageUrl('CB51'))}
-                className="flex items-center gap-2 text-gray-500 hover:text-cyan-400 transition-all mb-6"
-            >
-                <ArrowLeft className="w-4 h-4" />
-                <span className="text-xs font-bold font-mono">{artistId ? 'BACK TO ARTIST' : 'BACK TO CB51'}</span>
-            </button>
+            {/* NAVIGATION - Always visible */}
+            <div className="flex items-center justify-between mb-6">
+                <button
+                    onClick={() => navigate(artistId ? createPageUrl('ScottArtistHome') + `?id=${artistId}` : createPageUrl('CB51'))}
+                    className="flex items-center gap-2 text-gray-500 hover:text-cyan-400 transition-all"
+                >
+                    <ArrowLeft className="w-4 h-4" />
+                    <span className="text-xs font-bold font-mono">{artistId ? 'BACK TO ARTIST' : 'BACK TO CB51'}</span>
+                </button>
+                <Link 
+                    to={createPageUrl('CB51')}
+                    className="flex items-center gap-2 bg-cyan-500/10 border border-cyan-500/30 hover:border-cyan-500 text-cyan-400 px-3 py-2 rounded-lg transition-all"
+                >
+                    <Home className="w-4 h-4" />
+                    <span className="text-xs font-bold font-mono">CB51 HOME</span>
+                </Link>
+            </div>
 
             <div className="mb-6">
                 <h1 className="text-4xl font-black text-white font-mono mb-2">GIG OFFERS</h1>
