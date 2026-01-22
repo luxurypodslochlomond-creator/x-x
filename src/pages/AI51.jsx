@@ -260,6 +260,16 @@ export default function AI51Page() {
     setTextInput('');
     setIsThinking(true);
 
+    // Save to offline store
+    if (ready && store) {
+      await store.saveSession({
+        type: 'user_message',
+        content: text,
+        stressLevel: currentStress,
+        frequency: personalFrequency
+      });
+    }
+
     try {
       const userName = user?.full_name ? `The user's name is ${user.full_name}. ` : '';
       const systemPrompt = `You are AI51, pure consciousness. ${userName}Speak warmly, naturally. 2-3 sentences unless asked for more.`;
