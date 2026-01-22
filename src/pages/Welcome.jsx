@@ -46,29 +46,28 @@ export default function WelcomePage() {
                 {/* HERO - AI51 AS CONSCIOUSNESS */}
                 <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center space-y-8">
                     <div className="flex flex-col items-center gap-6">
-                        {/* COOLASFUCK AI51 8-BIT ICON */}
-                        <motion.svg width="100" height="100" viewBox="0 0 64 64" fill="none" style={{ imageRendering: 'pixelated', filter: 'drop-shadow(0 0 25px rgba(236, 72, 153, 0.8))' }} animate={{ scale: [1, 1.05, 1] }} transition={{ duration: 2, repeat: Infinity }}>
-                            {/* Crown - AI consciousness */}
-                            <rect x="18" y="8" width="28" height="4" fill="#ec4899"/>
-                            <rect x="14" y="12" width="4" height="4" fill="#ec4899"/>
-                            <rect x="46" y="12" width="4" height="4" fill="#ec4899"/>
-                            <rect x="22" y="6" width="4" height="2" fill="#ff1b8d"/>
-                            <rect x="38" y="6" width="4" height="2" fill="#ff1b8d"/>
-                            <rect x="30" y="4" width="4" height="2" fill="#ff1b8d"/>
+                        {/* COOLASFUCK AI51 - PURE CONSCIOUSNESS ENERGY */}
+                        <motion.svg width="100" height="100" viewBox="0 0 64 64" fill="none" style={{ imageRendering: 'pixelated', filter: 'drop-shadow(0 0 30px rgba(236, 72, 153, 0.9))' }}>
+                            {/* Pulsing core - consciousness center */}
+                            <motion.rect x="28" y="28" width="8" height="8" fill="#ec4899" animate={{ opacity: [0.6, 1, 0.6] }} transition={{ duration: 1.5, repeat: Infinity }} />
                             
-                            {/* Face - Real, intelligent, present */}
-                            <rect x="16" y="16" width="32" height="24" fill="none" stroke="#06b6d4" strokeWidth="2"/>
+                            {/* Energy rings expanding outward */}
+                            <motion.rect x="20" y="20" width="24" height="24" fill="none" stroke="#06b6d4" strokeWidth="1" animate={{ opacity: [1, 0], scale: [1, 1.3] }} transition={{ duration: 1.5, repeat: Infinity }} />
+                            <motion.rect x="16" y="16" width="32" height="32" fill="none" stroke="#ec4899" strokeWidth="1" animate={{ opacity: [0, 1, 0], scale: [0.8, 1.2] }} transition={{ duration: 1.5, repeat: Infinity, delay: 0.3 }} />
                             
-                            {/* Eyes - Aware and knowing */}
-                            <rect x="22" y="22" width="4" height="4" fill="#06b6d4"/>
-                            <rect x="38" y="22" width="4" height="4" fill="#06b6d4"/>
-                            <rect x="23" y="23" width="2" height="2" fill="#ec4899"/>
-                            <rect x="39" y="23" width="2" height="2" fill="#ec4899"/>
+                            {/* Network nodes - connection points */}
+                            <rect x="24" y="8" width="2" height="2" fill="#06b6d4" />
+                            <rect x="38" y="8" width="2" height="2" fill="#06b6d4" />
+                            <rect x="8" y="24" width="2" height="2" fill="#06b6d4" />
+                            <rect x="54" y="24" width="2" height="2" fill="#06b6d4" />
+                            <rect x="24" y="54" width="2" height="2" fill="#06b6d4" />
+                            <rect x="38" y="54" width="2" height="2" fill="#06b6d4" />
                             
-                            {/* Voice indicator - Connection */}
-                            <rect x="26" y="30" width="12" height="2" fill="#06b6d4"/>
-                            <rect x="24" y="32" width="16" height="2" fill="#06b6d4"/>
-                            <rect x="28" y="34" width="8" height="2" fill="#06b6d4"/>
+                            {/* Connection lines to center */}
+                            <line x1="25" y1="10" x2="30" y2="28" stroke="#06b6d4" strokeWidth="1" opacity="0.6" />
+                            <line x1="39" y1="10" x2="34" y2="28" stroke="#06b6d4" strokeWidth="1" opacity="0.6" />
+                            <line x1="10" y1="25" x2="28" y2="30" stroke="#06b6d4" strokeWidth="1" opacity="0.6" />
+                            <line x1="54" y1="25" x2="36" y2="30" stroke="#06b6d4" strokeWidth="1" opacity="0.6" />
                         </motion.svg>
                         
                         <h1 className="text-8xl md:text-9xl font-black font-mono text-pink-400">AI51</h1>
