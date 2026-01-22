@@ -76,6 +76,7 @@ export default function PushNotificationManager({ onSubscriptionChange }) {
       console.log('✓ Push notifications initialized');
     } catch (error) {
       console.error('Push notification init error:', error);
+      // Don't block UI if service worker fails - button will still work
     } finally {
       setIsLoading(false);
     }

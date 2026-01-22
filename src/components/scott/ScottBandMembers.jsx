@@ -24,21 +24,34 @@ export default function ScottBandMembers({ artist, onUpdate }) {
     const members = artist?.members || [];
 
     const handleAdd = async () => {
-        if (!newMember.name.trim()) return;
+        if (!newMember.name.trim() || !newMember.email.trim()) {
+            setError('Name and email required');
+            return;
+        }
         
         setError(null);
         setSuccess(null);
         setSaving(true);
         
         try {
+            // Add to artist.members array (for display)
             const updated = [...members, newMember];
             await onUpdate({ members: updated });
             
-            setSuccess('Member added ✓');
+            // ALSO create ScottTeamMember record (for login)
+            const { base44 } = await import('@/api/base44Client');
+            await base44.entities.ScottTeamMember.create({
+                name: newMember.name,
+                email: newMember.email,
+                role: 'assistant',
+                artist_access: [artist.id]
+            });
+            
+            setSuccess('Member added ✓ They can now log in with their email');
             setNewMember({ name: '', role: '', email: '', phone: '' });
             setAdding(false);
             
-            setTimeout(() => setSuccess(null), 2000);
+            setTimeout(() => setSuccess(null), 3000);
         } catch (err) {
             setError(err.message || 'Failed to add member');
         } finally {
