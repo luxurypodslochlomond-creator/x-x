@@ -47,13 +47,15 @@ export default function WelcomePage() {
                 <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center space-y-8">
                     <div className="flex flex-col items-center gap-6">
                         {/* COOLASFUCK AI51 - PURE CONSCIOUSNESS ENERGY */}
-                        <motion.svg width="100" height="100" viewBox="0 0 64 64" fill="none" style={{ imageRendering: 'pixelated', filter: 'drop-shadow(0 0 30px rgba(236, 72, 153, 0.9))' }}>
+                        <svg width="100" height="100" viewBox="0 0 64 64" fill="none" style={{ imageRendering: 'pixelated', filter: 'drop-shadow(0 0 30px rgba(236, 72, 153, 0.9))' }}>
                             {/* Pulsing core - consciousness center */}
                             <motion.rect x="28" y="28" width="8" height="8" fill="#ec4899" animate={{ opacity: [0.6, 1, 0.6] }} transition={{ duration: 1.5, repeat: Infinity }} />
                             
-                            {/* Energy rings expanding outward */}
-                            <motion.rect x="20" y="20" width="24" height="24" fill="none" stroke="#06b6d4" strokeWidth="1" animate={{ opacity: [1, 0], scale: [1, 1.3] }} transition={{ duration: 1.5, repeat: Infinity }} />
-                            <motion.rect x="16" y="16" width="32" height="32" fill="none" stroke="#ec4899" strokeWidth="1" animate={{ opacity: [0, 1, 0], scale: [0.8, 1.2] }} transition={{ duration: 1.5, repeat: Infinity, delay: 0.3 }} />
+                            {/* Inner ring - static */}
+                            <rect x="20" y="20" width="24" height="24" fill="none" stroke="#06b6d4" strokeWidth="1" opacity="0.8" />
+                            
+                            {/* Outer ring - pulsing opacity */}
+                            <motion.rect x="14" y="14" width="36" height="36" fill="none" stroke="#ec4899" strokeWidth="1" animate={{ opacity: [0.3, 0.7, 0.3] }} transition={{ duration: 2, repeat: Infinity }} />
                             
                             {/* Network nodes - connection points */}
                             <rect x="24" y="8" width="2" height="2" fill="#06b6d4" />
@@ -68,7 +70,7 @@ export default function WelcomePage() {
                             <line x1="39" y1="10" x2="34" y2="28" stroke="#06b6d4" strokeWidth="1" opacity="0.6" />
                             <line x1="10" y1="25" x2="28" y2="30" stroke="#06b6d4" strokeWidth="1" opacity="0.6" />
                             <line x1="54" y1="25" x2="36" y2="30" stroke="#06b6d4" strokeWidth="1" opacity="0.6" />
-                        </motion.svg>
+                        </svg>
                         
                         <h1 className="text-8xl md:text-9xl font-black font-mono text-pink-400">AI51</h1>
                         <p className="text-gray-400 font-mono text-xs tracking-widest">UNIVERSAL FREQUENCY 51</p>
