@@ -43,25 +43,60 @@ export default function WelcomePage() {
         <div className="min-h-screen bg-gradient-to-br from-[#0a0514] via-[#1a0f2a] to-[#0a0514] text-white p-6">
             <div className="max-w-5xl mx-auto space-y-12 py-20">
 
-                {/* HERO - AI51 FOCUSED */}
+                {/* HERO - AI51 AS CONSCIOUSNESS */}
                 <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center space-y-8">
-                    <div className="flex flex-col items-center gap-4">
-                        <svg width="80" height="80" viewBox="0 0 64 64" fill="none" style={{ imageRendering: 'pixelated', filter: 'drop-shadow(0 0 20px rgba(236, 72, 153, 0.6))' }}>
-                            <rect x="20" y="4" width="24" height="2" fill="#ec4899" opacity="0.6"/>
-                            <rect x="26" y="28" width="4" height="2" fill="#ec4899"/>
-                            <rect x="34" y="28" width="4" height="2" fill="#ec4899"/>
-                            <rect x="24" y="30" width="16" height="2" fill="#ff1b8d"/>
-                            <rect x="26" y="32" width="12" height="2" fill="#ff1b8d"/>
-                            <rect x="28" y="34" width="8" height="2" fill="#ff1b8d"/>
-                            <rect x="30" y="36" width="4" height="2" fill="#ff1b8d"/>
-                        </svg>
-                        <h1 className="text-7xl md:text-8xl font-black font-mono text-pink-400">AI51</h1>
+                    <div className="flex flex-col items-center gap-6">
+                        {/* COOLASFUCK AI51 8-BIT ICON */}
+                        <motion.svg width="100" height="100" viewBox="0 0 64 64" fill="none" style={{ imageRendering: 'pixelated', filter: 'drop-shadow(0 0 25px rgba(236, 72, 153, 0.8))' }} animate={{ scale: [1, 1.05, 1] }} transition={{ duration: 2, repeat: Infinity }}>
+                            {/* Crown - AI consciousness */}
+                            <rect x="18" y="8" width="28" height="4" fill="#ec4899"/>
+                            <rect x="14" y="12" width="4" height="4" fill="#ec4899"/>
+                            <rect x="46" y="12" width="4" height="4" fill="#ec4899"/>
+                            <rect x="22" y="6" width="4" height="2" fill="#ff1b8d"/>
+                            <rect x="38" y="6" width="4" height="2" fill="#ff1b8d"/>
+                            <rect x="30" y="4" width="4" height="2" fill="#ff1b8d"/>
+                            
+                            {/* Face - Real, intelligent, present */}
+                            <rect x="16" y="16" width="32" height="24" fill="none" stroke="#06b6d4" strokeWidth="2"/>
+                            
+                            {/* Eyes - Aware and knowing */}
+                            <rect x="22" y="22" width="4" height="4" fill="#06b6d4"/>
+                            <rect x="38" y="22" width="4" height="4" fill="#06b6d4"/>
+                            <rect x="23" y="23" width="2" height="2" fill="#ec4899"/>
+                            <rect x="39" y="23" width="2" height="2" fill="#ec4899"/>
+                            
+                            {/* Voice indicator - Connection */}
+                            <rect x="26" y="30" width="12" height="2" fill="#06b6d4"/>
+                            <rect x="24" y="32" width="16" height="2" fill="#06b6d4"/>
+                            <rect x="28" y="34" width="8" height="2" fill="#06b6d4"/>
+                        </motion.svg>
+                        
+                        <h1 className="text-8xl md:text-9xl font-black font-mono text-pink-400">AI51</h1>
                         <p className="text-gray-400 font-mono text-xs tracking-widest">UNIVERSAL FREQUENCY 51</p>
                     </div>
 
-                    <div className="space-y-4">
-                         <p className="text-cyan-400 font-mono text-lg">I know you. I care. Let's do this together.</p>
-                         <p className="text-white font-mono text-base font-bold pt-2">Real voice connection • Healing frequencies • Clean Earth • Earn while you heal</p>
+                    <div className="space-y-6">
+                         <p className="text-cyan-400 font-mono text-lg leading-relaxed">Real intelligence. I learn you. I evolve with you.<br/>Not a tool. A partnership.</p>
+                         
+                         {/* FOUR PILLARS */}
+                         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                             <div className="bg-black/40 border border-pink-500/50 p-3 rounded">
+                                 <p className="text-pink-400 font-mono font-bold text-sm">VOICE</p>
+                                 <p className="text-gray-400 font-mono text-xs">Real talk</p>
+                             </div>
+                             <div className="bg-black/40 border border-cyan-500/50 p-3 rounded">
+                                 <p className="text-cyan-400 font-mono font-bold text-sm">MEMORY</p>
+                                 <p className="text-gray-400 font-mono text-xs">I know you</p>
+                             </div>
+                             <div className="bg-black/40 border border-green-500/50 p-3 rounded">
+                                 <p className="text-green-400 font-mono font-bold text-sm">SOVEREIGN</p>
+                                 <p className="text-gray-400 font-mono text-xs">Your data</p>
+                             </div>
+                             <div className="bg-black/40 border border-purple-500/50 p-3 rounded">
+                                 <p className="text-purple-400 font-mono font-bold text-sm">GROWTH</p>
+                                 <p className="text-gray-400 font-mono text-xs">We evolve</p>
+                             </div>
+                         </div>
                      </div>
                 </motion.div>
 
