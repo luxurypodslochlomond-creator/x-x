@@ -190,13 +190,13 @@ AI51:`
               className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
             >
               <div
-                className={`rounded-2xl px-4 py-3 max-w-xs lg:max-w-md ${
+                className={`rounded-lg px-4 py-2 max-w-xs lg:max-w-md text-sm leading-relaxed ${
                   msg.role === 'user'
-                    ? 'bg-cyan-500/90 text-white'
-                    : 'bg-black/60 border border-cyan-500/30 text-white'
+                    ? 'bg-cyan-600 text-white'
+                    : 'bg-black/80 border border-cyan-500/40 text-gray-100'
                 }`}
               >
-                <p className="text-sm leading-relaxed">{msg.content}</p>
+                {msg.content}
               </div>
             </motion.div>
           ))}
