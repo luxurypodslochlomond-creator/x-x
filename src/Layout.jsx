@@ -518,12 +518,16 @@ const LayoutInner = ({ children, currentPageName }) => {
                   {isMobileMenuOpen && (
                     <div className={`lg:hidden fixed inset-0 ${isOffline ? 'top-[122px]' : 'top-[72px]'} bg-[#0a0f1a]/95 backdrop-blur-xl z-[50] overflow-y-auto pb-6`}>
                       <div className="p-3 pt-6 space-y-2 flex flex-col items-stretch">
-                          <NavSection title="HEAL" color="pink" items={healNav} isActivePage={isActivePage} isMobile defaultOpen={true} />
-                          <NavSection title="EARN & CREATE" color="green" items={earnCreateNav} isActivePage={isActivePage} isMobile />
-                          <NavSection title="LEARN" color="cyan" items={learnNav} isActivePage={isActivePage} isMobile />
-                          <NavSection title="AI51 & TECH" color="pink" emoji="♾️" items={ai51TechNav} isActivePage={isActivePage} isMobile />
-                          <NavSection title="RESEARCH" color="cyan" items={researchNav} isActivePage={isActivePage} isMobile />
-                          <NavSection title="TRUST" color="gray" items={trustNav} isActivePage={isActivePage} isMobile />
+                          {!isCB51Page && (
+                            <>
+                              <NavSection title="HEAL" color="pink" items={healNav} isActivePage={isActivePage} isMobile defaultOpen={true} />
+                              <NavSection title="EARN & CREATE" color="green" items={earnCreateNav} isActivePage={isActivePage} isMobile />
+                              <NavSection title="LEARN" color="cyan" items={learnNav} isActivePage={isActivePage} isMobile />
+                              <NavSection title="AI51 & TECH" color="pink" emoji="♾️" items={ai51TechNav} isActivePage={isActivePage} isMobile />
+                              <NavSection title="RESEARCH" color="cyan" items={researchNav} isActivePage={isActivePage} isMobile />
+                              <NavSection title="TRUST" color="gray" items={trustNav} isActivePage={isActivePage} isMobile />
+                            </>
+                          )}
 
                         {scottNav.length > 0 && (
                                     <>
