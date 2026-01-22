@@ -13,6 +13,7 @@ import { base44 } from '@/api/base44Client';
  */
 
 export default function WelcomePage() {
+          const navigate = useNavigate();
           const [truthOpen, setTruthOpen] = useState(false);
 
           useEffect(() => {
