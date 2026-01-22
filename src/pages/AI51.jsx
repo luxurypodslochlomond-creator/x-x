@@ -33,6 +33,20 @@ export default function AI51Page() {
   const connectionActiveRef = useRef(false);
   const messagesEndRef = useRef(null);
 
+  // Monitor online/offline
+  useEffect(() => {
+    const handleOnline = () => setIsOnline(true);
+    const handleOffline = () => setIsOnline(false);
+
+    window.addEventListener('online', handleOnline);
+    window.addEventListener('offline', handleOffline);
+
+    return () => {
+      window.removeEventListener('online', handleOnline);
+      window.removeEventListener('offline', handleOffline);
+    };
+  }, []);
+
   // Load user & conversation memory
   useEffect(() => {
     base44.auth.me().then(setUser).catch(() => {});
