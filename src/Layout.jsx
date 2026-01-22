@@ -145,14 +145,15 @@ const NavSection = ({ title, color, emoji, items, isActivePage, isMobile = false
 };
 
 const LayoutInner = ({ children, currentPageName }) => {
-  const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [user, setUser] = useState(null);
-  const [authError, setAuthError] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-  const [isOffline, setIsOffline] = useState(!navigator.onLine);
-  const [canGoBack, setCanGoBack] = useState(false);
-  const location = useLocation();
-  const navigate = useNavigate();
+    const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const [user, setUser] = useState(null);
+    const [authError, setAuthError] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
+    const [isOffline, setIsOffline] = useState(!navigator.onLine);
+    const [canGoBack, setCanGoBack] = useState(false);
+    const [pageTransitioning, setPageTransitioning] = useState(false);
+    const location = useLocation();
+    const navigate = useNavigate();
 
   const isPublicPage = PUBLIC_PAGES.includes(currentPageName);
   const isOfflineOkPage = OFFLINE_OK_PAGES.includes(currentPageName);
@@ -196,20 +197,22 @@ const LayoutInner = ({ children, currentPageName }) => {
   }, [location.pathname, isPublicPage, isOffline, isOfflineOkPage]);
 
   useEffect(() => { 
-    setMobileMenuOpen(false); 
-    window.scrollTo({ top: 0, behavior: 'instant' });
-    // Check if can go back
-    setCanGoBack(window.history.length > 1);
+      setPageTransitioning(true);
+      setMobileMenuOpen(false); 
+      window.scrollTo({ top: 0, behavior: 'instant' });
+      setCanGoBack(window.history.length > 1);
 
-    // Set CB51 data attribute for loader styling
-    const isCB51Page = currentPageName.startsWith('CB51') || currentPageName.startsWith('Scott');
-    const rootEl = document.getElementById('root');
-    if (isCB51Page && rootEl) {
-      rootEl.setAttribute('data-cb51', 'true');
-    } else if (rootEl) {
-      rootEl.removeAttribute('data-cb51');
-    }
-    }, [location.pathname, currentPageName]);
+      const isCB51Page = currentPageName.startsWith('CB51') || currentPageName.startsWith('Scott');
+      const rootEl = document.getElementById('root');
+      if (isCB51Page && rootEl) {
+        rootEl.setAttribute('data-cb51', 'true');
+      } else if (rootEl) {
+        rootEl.removeAttribute('data-cb51');
+      }
+
+      const timer = setTimeout(() => setPageTransitioning(false), 150);
+      return () => clearTimeout(timer);
+      }, [location.pathname, currentPageName]);
 
   useEffect(() => {
     // Disable browser scroll restoration for instant page switches
@@ -573,7 +576,38 @@ const LayoutInner = ({ children, currentPageName }) => {
                             </aside>
 
         <main className={`lg:ml-80 ${isOffline ? 'pt-[122px] lg:pt-10' : 'pt-[72px] lg:pt-0'} min-h-screen`} style={{ willChange: 'contents' }}>
-          {children}
+          <AnimatePresence mode="wait">
+            {pageTransitioning ? (
+              <motion.div
+                key="loader"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.1 }}
+                className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center"
+              >
+                <motion.div
+                  animate={{ scale: [1, 1.1, 1] }}
+                  transition={{ duration: 0.6, repeat: Infinity }}
+                >
+                  {currentPageName.startsWith('CB51') || currentPageName.startsWith('Scott') ? (
+                    <Radio className="w-12 h-12 text-cyan-400" style={{ filter: 'drop-shadow(0 0 10px rgba(6, 182, 212, 0.6))' }} />
+                  ) : (
+                    <COOLASFUCKWaves size={48} animate={true} />
+                  )}
+                </motion.div>
+              </motion.div>
+            ) : (
+              <motion.div
+                key={location.pathname}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.15 }}
+              >
+                {children}
+              </motion.div>
+            )}
+          </AnimatePresence>
           {currentPageName !== 'AI51' && (
             <footer className="border-t border-cyan-500/20 bg-[#0a0f1a]/60">
               <LiveClock />
