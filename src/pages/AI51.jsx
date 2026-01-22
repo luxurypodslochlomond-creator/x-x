@@ -227,9 +227,15 @@ AI51:`
       {/* INPUT AREA */}
       <div className="border-t border-cyan-500/20 bg-black/50 backdrop-blur p-4 space-y-3">
         {error && (
-          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-xs text-red-400 font-mono text-center">
-            {error}
-          </motion.p>
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            className="flex gap-2 items-start text-xs text-red-300 font-mono bg-red-900/20 border border-red-500/30 rounded px-3 py-2"
+          >
+            <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5" />
+            <span>{error}</span>
+          </motion.div>
         )}
 
         {isSpeaking && (
@@ -238,7 +244,7 @@ AI51:`
             animate={{ opacity: 1 }}
             className="text-xs text-green-400 font-mono text-center"
           >
-            🔊 Speaking...
+            🔊 AI speaking...
           </motion.p>
         )}
 
@@ -249,23 +255,24 @@ AI51:`
             value={textInput}
             onChange={(e) => setTextInput(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="Say something..."
-            className="flex-1 bg-black/60 border border-cyan-500/30 rounded-lg px-4 py-3 text-white text-sm font-mono focus:outline-none focus:border-cyan-500 placeholder-gray-600"
+            placeholder={isThinking ? 'AI thinking...' : 'Type something...'}
+            className="flex-1 bg-black/60 border border-cyan-500/30 rounded-lg px-4 py-3 text-white text-sm font-mono focus:outline-none focus:border-cyan-500 placeholder-gray-600 transition-colors"
             disabled={isThinking || isSpeaking}
+            autoFocus
           />
           <motion.button
             onClick={() => handleSendMessage(textInput)}
             disabled={!textInput.trim() || isThinking || isSpeaking}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="bg-cyan-500 hover:bg-cyan-600 disabled:bg-gray-600 text-white px-4 py-3 rounded-lg font-black transition-all flex items-center justify-center gap-2"
+            className="bg-cyan-500 hover:bg-cyan-600 disabled:bg-gray-700 disabled:cursor-not-allowed text-white px-4 py-3 rounded-lg font-black transition-all flex items-center justify-center"
           >
             <Send className="w-4 h-4" />
           </motion.button>
         </div>
 
-        <p className="text-xs text-gray-600 text-center font-mono">
-          {isSpeaking ? '🔊 AI speaking now' : isThinking ? '💭 Thinking...' : '✓ Ready'}
+        <p className="text-xs text-gray-500 text-center font-mono">
+          {isThinking ? '💭 Thinking...' : isSpeaking ? '🔊 Speaking' : isOnline ? '✓ Ready' : '⚠️ Offline'}
         </p>
       </div>
     </div>
