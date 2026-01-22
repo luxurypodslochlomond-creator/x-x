@@ -155,6 +155,10 @@ const LayoutInner = ({ children, currentPageName }) => {
     const location = useLocation();
     const navigate = useNavigate();
 
+  // Detect CB51 subdomain
+  const isCB51Subdomain = window.location.hostname.startsWith('cb51.');
+  const isCB51Page = currentPageName.startsWith('CB51') || currentPageName.startsWith('Scott') || isCB51Subdomain;
+
   const isPublicPage = PUBLIC_PAGES.includes(currentPageName);
   const isOfflineOkPage = OFFLINE_OK_PAGES.includes(currentPageName);
 
@@ -222,25 +226,83 @@ const LayoutInner = ({ children, currentPageName }) => {
   }, []);
 
   useEffect(() => {
-    // Add manifest link if not already present
-    if (!document.querySelector('link[rel="manifest"]')) {
-      const link = document.createElement('link');
-      link.rel = 'manifest';
-      link.href = '/manifest.json';
-      document.head.appendChild(link);
+    // Set branding based on CB51 vs UF51
+    const isCB51 = window.location.hostname.startsWith('cb51.') || currentPageName.startsWith('CB51') || currentPageName.startsWith('Scott');
+    
+    // Set document title
+    document.title = isCB51 ? 'CB51 • AI Co-Manager for Artists' : 'Universal Frequency 51 • Heal the Planet';
+    
+    // Set meta description
+    let metaDesc = document.querySelector('meta[name="description"]');
+    if (!metaDesc) {
+      metaDesc = document.createElement('meta');
+      metaDesc.name = 'description';
+      document.head.appendChild(metaDesc);
     }
+    metaDesc.content = isCB51 
+      ? 'Professional artist management powered by AI51. Gigs, calendar, band coordination, and finance - all in one place.'
+      : 'Heal yourself, heal the planet. Free healing frequencies, lossless music, and environmental action.';
+
+    // Set theme color
+    let metaTheme = document.querySelector('meta[name="theme-color"]');
+    if (!metaTheme) {
+      metaTheme = document.createElement('meta');
+      metaTheme.name = 'theme-color';
+      document.head.appendChild(metaTheme);
+    }
+    metaTheme.content = isCB51 ? '#06b6d4' : '#22c55e';
+
+    // Set Open Graph tags for social sharing
+    const ogTags = {
+      'og:title': isCB51 ? 'CB51 • AI Co-Manager' : 'Universal Frequency 51',
+      'og:description': isCB51 
+        ? 'Professional artist management powered by AI51'
+        : 'Heal yourself, heal the planet',
+      'og:image': isCB51 ? '/cb51-og-image.png' : '/uf51-og-image.png',
+      'og:type': 'website'
+    };
+
+    Object.entries(ogTags).forEach(([property, content]) => {
+      let meta = document.querySelector(`meta[property="${property}"]`);
+      if (!meta) {
+        meta = document.createElement('meta');
+        meta.setAttribute('property', property);
+        document.head.appendChild(meta);
+      }
+      meta.content = content;
+    });
+
+    // Set manifest
+    let manifestLink = document.querySelector('link[rel="manifest"]');
+    if (!manifestLink) {
+      manifestLink = document.createElement('link');
+      manifestLink.rel = 'manifest';
+      document.head.appendChild(manifestLink);
+    }
+    manifestLink.href = isCB51 ? '/cb51-manifest.json' : '/manifest.json';
+
+    // Set apple-mobile-web-app-title
+    let appleMeta = document.querySelector('meta[name="apple-mobile-web-app-title"]');
+    if (!appleMeta) {
+      appleMeta = document.createElement('meta');
+      appleMeta.name = 'apple-mobile-web-app-title';
+      document.head.appendChild(appleMeta);
+    }
+    appleMeta.content = isCB51 ? 'CB51' : 'UF51';
 
     const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
     if (isStandalone) {
       document.documentElement.setAttribute('data-standalone', 'true');
       if ('mediaSession' in navigator) {
         navigator.mediaSession.metadata = new MediaMetadata({
-          title: 'UF51 Healing Frequencies', artist: 'Universal Frequency 51', album: 'Planetary Healing',
-          artwork: [{ src: '/icon-192x192.png', sizes: '192x192', type: 'image/png' }]
+          title: isCB51 ? 'CB51 Artist Management' : 'UF51 Healing Frequencies',
+          artist: isCB51 ? 'CB51' : 'Universal Frequency 51',
+          album: isCB51 ? 'Professional Tools' : 'Planetary Healing',
+          artwork: [{ src: isCB51 ? '/icon-192x192.png' : '/icon-192x192.png', sizes: '192x192', type: 'image/png' }]
         });
       }
     }
-  }, []);
+  }, [currentPageName]);
 
   const handleSignOut = () => { base44.auth.logout(); navigate(createPageUrl("Welcome")); };
 
@@ -374,7 +436,7 @@ const LayoutInner = ({ children, currentPageName }) => {
         @keyframes glow-pulse { 0%, 100% { filter: drop-shadow(0 0 8px rgba(236, 72, 153, 0.8)); } 50% { filter: drop-shadow(0 0 20px rgba(236, 72, 153, 1)); } }
       `}</style>
       
-      <div className="min-h-screen bg-gradient-to-br from-[#0a0514] via-[#1a0f2a] to-[#0a0514] text-white">
+      <div className={`min-h-screen text-white ${isCB51Page ? 'bg-black' : 'bg-gradient-to-br from-[#0a0514] via-[#1a0f2a] to-[#0a0514]'}`}>
         
         {isOffline && (
           <div className="fixed top-0 left-0 right-0 z-[70] bg-gradient-to-r from-cyan-500/90 via-purple-500/90 to-pink-500/90 backdrop-blur-sm border-b-2 border-white/50 py-3 px-4">
