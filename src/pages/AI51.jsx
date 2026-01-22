@@ -196,6 +196,12 @@ export default function AI51Page() {
       return;
     }
 
+    // Get AI51's adaptive frequency recommendation
+    if (ready && store) {
+      const rec = await store.getRecommendation(currentStress);
+      setPersonalFrequency(rec);
+    }
+
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ 
         audio: { echoCancellation: false, noiseSuppression: false }
