@@ -23,6 +23,42 @@ export default function ScottBandMembers({ artist, onUpdate }) {
 
     const members = artist?.members || [];
 
+    // AUTO-MIGRATE: Check existing members and create ScottTeamMember records
+    React.useEffect(() => {
+        const autoMigrate = async () => {
+            if (!artist?.id || members.length === 0) return;
+            
+            try {
+                const { base44 } = await import('@/api/base44Client');
+                
+                for (const member of members) {
+                    if (!member.email) continue;
+                    
+                    // Check if ScottTeamMember already exists
+                    const existing = await base44.entities.ScottTeamMember.filter({ 
+                        email: member.email,
+                        artist_access: { $contains: artist.id }
+                    });
+                    
+                    if (existing.length === 0) {
+                        // Create it
+                        await base44.entities.ScottTeamMember.create({
+                            name: member.name,
+                            email: member.email,
+                            role: 'assistant',
+                            artist_access: [artist.id]
+                        });
+                        console.log(`✓ Migrated ${member.name} to ScottTeamMember`);
+                    }
+                }
+            } catch (err) {
+                console.log('Migration check:', err);
+            }
+        };
+        
+        autoMigrate();
+    }, [artist?.id, members.length]);
+
     const handleAdd = async () => {
         if (!newMember.name.trim() || !newMember.email.trim()) {
             setError('Name and email required');
