@@ -497,15 +497,8 @@ const LayoutInner = ({ children, currentPageName }) => {
                 </svg>
                 <span className="text-[9px] font-black font-mono text-pink-400 mt-0.5">HEAL</span>
               </Link>
-              <Link to={createPageUrl("AI51")} className="p-3 rounded-xl bg-gradient-to-r from-cyan-500 to-green-500" style={{ boxShadow: '0 0 20px rgba(34, 211, 238, 0.4)' }}>
-                <svg width="24" height="24" viewBox="0 0 64 64" fill="none" style={{ imageRendering: 'pixelated' }}>
-                  <rect x="26" y="28" width="4" height="2" fill="#ec4899"/>
-                  <rect x="34" y="28" width="4" height="2" fill="#ec4899"/>
-                  <rect x="24" y="30" width="16" height="2" fill="#ff1b8d"/>
-                  <rect x="26" y="32" width="12" height="2" fill="#ff1b8d"/>
-                  <rect x="28" y="34" width="8" height="2" fill="#ff1b8d"/>
-                  <rect x="30" y="36" width="4" height="2" fill="#ff1b8d"/>
-                </svg>
+              <Link to={createPageUrl("AI51")} className="p-2 rounded-xl" style={{ boxShadow: '0 0 20px rgba(34, 211, 238, 0.4)' }}>
+                <COOLASFUCKHeart size={32} animate={true} />
               </Link>
               <button onClick={() => setMobileMenuOpen(!isMobileMenuOpen)} className="p-2 rounded-xl bg-purple-900/50">
                 {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
