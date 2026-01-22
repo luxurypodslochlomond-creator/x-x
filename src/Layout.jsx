@@ -500,11 +500,12 @@ const LayoutInner = ({ children, currentPageName }) => {
               </Link>
               <motion.button
                 onClick={() => navigate(createPageUrl("AI51"))}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-                className="p-2"
+                whileHover={{ scale: 1.15 }}
+                whileTap={{ scale: 0.9 }}
+                className="p-2.5 rounded-lg border-2 border-pink-400 bg-black/40 backdrop-blur-sm"
+                style={{ boxShadow: '0 0 25px rgba(236, 72, 153, 0.9), inset 0 0 15px rgba(236, 72, 153, 0.2)' }}
               >
-                <AI51AtomIcon size={36} animate={true} />
+                <AI51AtomIcon size={40} animate={true} />
               </motion.button>
               <button onClick={() => setMobileMenuOpen(!isMobileMenuOpen)} className="p-2 rounded-lg hover:bg-cyan-500/20 transition-colors">
                 {isMobileMenuOpen ? <X className="w-6 h-6 text-cyan-400" /> : <Menu className="w-6 h-6 text-cyan-400" />}
