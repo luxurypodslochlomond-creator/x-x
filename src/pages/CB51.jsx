@@ -21,7 +21,7 @@ export default function CB51() {
 
     useEffect(() => {
         // Set page title and meta tags for CB51 branding
-        document.title = 'CB51 • Your AI Co-Manager';
+        document.title = 'CB51 • Artist Management';
         
         // Update meta tags for sharing/bookmarking
         let metaTheme = document.querySelector('meta[name="theme-color"]');
@@ -166,7 +166,7 @@ export default function CB51() {
                         <h1 className="text-3xl font-black text-cyan-400 font-mono">CB51</h1>
                         <PushNotificationManager />
                     </div>
-                    <p className="text-gray-600 text-xs font-mono">AI51 co-manager for your band ♾️</p>
+                    <p className="text-gray-600 text-xs font-mono">Artist management system</p>
                     <Link to={createPageUrl('CB51About')}>
                         <button className="mt-2 bg-gradient-to-r from-cyan-500/20 to-purple-500/20 border border-cyan-500/50 hover:border-cyan-500 text-cyan-400 text-xs font-bold px-4 py-2 rounded-lg transition-all">
                             What is CB51? →
