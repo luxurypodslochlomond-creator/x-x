@@ -37,9 +37,9 @@ import ServiceWorkerManager from '@/components/shared/ServiceWorkerManager';
 import BackgroundSync from '@/components/shared/BackgroundSync';
 import HealingAnalyticsCollector from '@/components/shared/HealingAnalyticsCollector';
 import {
-                                    Menu, X, Heart, Home, LogOut, Leaf, Sparkles, Music, Map, User, Globe,
-                                  BookOpen, Shield, Target, Briefcase, FileText, Settings, Search, Brain, Presentation, Calculator, GraduationCap, Zap, AlertTriangle, Mic2, Lightbulb, Building, Play, Pause, Atom, Eye, Scale, Users, WifiOff, CheckCircle, Waves, ChevronDown, ChevronRight, Calendar, DollarSign, Moon, Signal, ArrowLeft, Radio, Activity
-                                } from 'lucide-react';
+                                          Menu, X, Heart, Home, LogOut, Leaf, Sparkles, Music, Map, User, Globe,
+                                        BookOpen, Shield, Target, Briefcase, FileText, Settings, Search, Brain, Presentation, Calculator, GraduationCap, Zap, AlertTriangle, Mic2, Lightbulb, Building, Play, Pause, Atom, Eye, Scale, Users, WifiOff, CheckCircle, Waves, ChevronDown, ChevronRight, Calendar, DollarSign, Moon, Signal, ArrowLeft, Radio, Activity, Mail
+                                      } from 'lucide-react';
 
 import { COOLASFUCKHeart, COOLASFUCKWaves, COOLASFUCKHouse, COOLASFUCKHouse51 } from '@/components/shared/COOLASFUCKIcon';
 import LiveClock from '@/components/shared/LiveClock';
@@ -398,10 +398,10 @@ const LayoutInner = ({ children, currentPageName }) => {
   // CB51 ARTIST MANAGEMENT MENU
   const cb51Nav = [
       { title: "Dashboard", url: createPageUrl("CB51"), icon: Home, description: "Overview" },
-      { title: "Artists", url: createPageUrl("ScottArtist"), icon: User, description: "Manage roster" },
-      { title: "Gig Offers", url: createPageUrl("ScottGigOffers"), icon: Calendar, description: "Incoming shows" },
+      { title: "Artists", url: createPageUrl("ScottArtist"), icon: Users, description: "Manage roster" },
+      { title: "Gig Offers", url: createPageUrl("ScottGigOffers"), icon: Music, description: "Incoming shows" },
       { title: "Calendar", url: createPageUrl("ScottCalendarView"), icon: Calendar, description: "All shows" },
-      { title: "Messages", url: createPageUrl("ScottMessageInbox"), icon: Settings, description: "Inbox" },
+      { title: "Messages", url: createPageUrl("ScottMessageInbox"), icon: Mail, description: "Inbox" },
       { title: "Finance", url: createPageUrl("ScottFinanceAdmin"), icon: DollarSign, description: "Money tracker" },
       { title: "Tasks", url: createPageUrl("ScottToDo"), icon: CheckCircle, description: "To-do list" },
   ];
