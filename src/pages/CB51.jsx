@@ -154,47 +154,40 @@ export default function CB51() {
     }
 
     return (
-        <div className="min-h-screen bg-black text-white p-6 pb-24">
-            
+        <div className="min-h-screen bg-black text-white p-3 pb-20">
+
             <TechStatusBar showP2PSync={true} />
 
-            {/* BRAIN BAR - ALWAYS VISIBLE */}
-            <div className="mb-6 pt-4">
-                <div className="mb-6">
-                    <div className="flex items-center gap-3 mb-2">
-                        <Radio className="w-8 h-8 text-cyan-400" />
-                        <h1 className="text-3xl font-black text-cyan-400 font-mono">CB51</h1>
-                        <PushNotificationManager />
+            {/* COMPACT HEADER */}
+            <div className="mb-3 pt-2">
+                <div className="flex items-center justify-between mb-2">
+                    <div className="flex items-center gap-2">
+                        <Radio className="w-6 h-6 text-cyan-400" />
+                        <h1 className="text-xl font-black text-cyan-400 font-mono">CB51</h1>
                     </div>
-                    <p className="text-gray-600 text-xs font-mono">Artist management system</p>
-                    <Link to={createPageUrl('CB51About')}>
-                        <button className="mt-2 bg-gradient-to-r from-cyan-500/20 to-purple-500/20 border border-cyan-500/50 hover:border-cyan-500 text-cyan-400 text-xs font-bold px-4 py-2 rounded-lg transition-all">
-                            What is CB51? →
-                        </button>
-                    </Link>
+                    <PushNotificationManager />
                 </div>
 
-                <div className="flex items-center gap-2 bg-gradient-to-r from-gray-900 to-black border border-cyan-500/20 rounded-xl p-3">
+                {/* COMPACT STATS BAR */}
+                <div className="flex items-center gap-1 bg-black border border-cyan-500/20 rounded-lg p-2">
                     <Link to={createPageUrl('ScottGigOffers')} className="flex-1">
-                        <div className="text-center hover:bg-green-500/10 rounded-lg p-2 transition-all">
-                            <p className="text-green-400/60 text-[9px] font-mono tracking-wider">PIPELINE</p>
-                            <p className="text-white text-base font-black font-mono mt-1">
-                                £{stats.pipelineValue.toLocaleString()}
-                            </p>
+                        <div className="text-center hover:bg-green-500/10 rounded p-1 transition-all">
+                            <p className="text-green-400/60 text-[8px] font-mono">PIPELINE</p>
+                            <p className="text-white text-xs font-black font-mono">£{stats.pipelineValue.toLocaleString()}</p>
                         </div>
                     </Link>
-                    <div className="w-px h-10 bg-gradient-to-b from-transparent via-cyan-500/30 to-transparent"></div>
+                    <div className="w-px h-6 bg-cyan-500/20"></div>
                     <div className="flex-1">
-                        <div className="text-center hover:bg-cyan-500/10 rounded-lg p-2 transition-all">
-                            <p className="text-cyan-400/60 text-[9px] font-mono tracking-wider">SAVED</p>
-                            <p className="text-white text-base font-black font-mono mt-1">{stats.hoursPerWeek}h</p>
+                        <div className="text-center hover:bg-cyan-500/10 rounded p-1 transition-all">
+                            <p className="text-cyan-400/60 text-[8px] font-mono">SAVED</p>
+                            <p className="text-white text-xs font-black font-mono">{stats.hoursPerWeek}h</p>
                         </div>
                     </div>
-                    <div className="w-px h-10 bg-gradient-to-b from-transparent via-cyan-500/30 to-transparent"></div>
+                    <div className="w-px h-6 bg-cyan-500/20"></div>
                     <div className="flex-1">
-                        <div className="text-center hover:bg-amber-500/10 rounded-lg p-2 transition-all">
-                            <p className="text-amber-400/60 text-[9px] font-mono tracking-wider">TODAY</p>
-                            <p className="text-white text-base font-black font-mono mt-1">
+                        <div className="text-center hover:bg-amber-500/10 rounded p-1 transition-all">
+                            <p className="text-amber-400/60 text-[8px] font-mono">TODAY</p>
+                            <p className="text-white text-xs font-black font-mono">
                                 {stats.pendingOffers + stats.awaitingBand + stats.overdueInvoices + stats.urgentMessages}
                             </p>
                         </div>
@@ -202,96 +195,75 @@ export default function CB51() {
                 </div>
             </div>
 
-            {/* WHAT NEEDS ME - CLEAN */}
+            {/* COMPACT ALERTS */}
             {(stats.pendingOffers > 0 || stats.awaitingBand > 0 || stats.overdueInvoices > 0 || stats.urgentMessages > 0) && (
-                <div className="mb-8 bg-black border-2 border-amber-500 rounded-xl p-4">
-                    <div className="flex items-center gap-2 mb-4">
-                        <AlertCircle className="w-5 h-5 text-amber-400" />
-                        <h2 className="text-amber-400 font-black font-mono">NEEDS ATTENTION</h2>
+                <div className="mb-3 bg-black border border-amber-500/50 rounded-lg p-2">
+                    <div className="flex items-center gap-1 mb-1">
+                        <AlertCircle className="w-3 h-3 text-amber-400" />
+                        <h2 className="text-amber-400 font-black font-mono text-[10px]">NEEDS ATTENTION</h2>
                     </div>
-                    <div className="space-y-2">
+                    <div className="space-y-1">
                         {stats.pendingOffers > 0 && (
                             <Link to={createPageUrl('ScottGigOffers')}>
-                                <div className="bg-black border border-amber-500/50 rounded-lg p-3 hover:border-amber-500 transition-all">
-                                    <p className="text-amber-400 font-bold font-mono text-sm">{stats.pendingOffers} gig offers →</p>
+                                <div className="bg-black border border-amber-500/30 rounded p-1.5 hover:border-amber-500 transition-all">
+                                    <p className="text-amber-400 font-bold font-mono text-[10px]">{stats.pendingOffers} gig offers →</p>
                                 </div>
                             </Link>
                         )}
                         {stats.awaitingBand > 0 && (
                             <Link to={createPageUrl('ScottGigOffers')}>
-                                <div className="bg-black border border-cyan-500/50 rounded-lg p-3 hover:border-cyan-500 transition-all">
-                                    <p className="text-cyan-400 font-bold font-mono text-sm">{stats.awaitingBand} awaiting band →</p>
+                                <div className="bg-black border border-cyan-500/30 rounded p-1.5 hover:border-cyan-500 transition-all">
+                                    <p className="text-cyan-400 font-bold font-mono text-[10px]">{stats.awaitingBand} awaiting band →</p>
                                 </div>
                             </Link>
-                        )}
-                        {stats.overdueInvoices > 0 && (
-                            <Link to={createPageUrl('ScottInvoices')}>
-                                <div className="bg-black border border-red-500/50 rounded-lg p-3 hover:border-red-500 transition-all">
-                                    <p className="text-red-400 font-bold font-mono text-sm">{stats.overdueInvoices} overdue invoices →</p>
-                                </div>
-                            </Link>
-                        )}
-                        {stats.urgentMessages > 0 && (
-                            <div className="bg-black border border-red-500/50 rounded-lg p-3">
-                                <p className="text-red-400 font-bold font-mono text-sm">{stats.urgentMessages} urgent messages</p>
-                            </div>
                         )}
                     </div>
                 </div>
             )}
 
-            {/* ARTISTS - COOLASFUCK GRID */}
+            {/* COMPACT ARTISTS GRID */}
             <div>
                 {artists.length === 0 ? (
-                    <div className="text-center py-12">
-                        <p className="text-gray-600 text-sm font-mono mb-6">No artists yet</p>
+                    <div className="text-center py-6">
+                        <p className="text-gray-600 text-xs font-mono mb-3">No artists yet</p>
                         <Link to={createPageUrl('ScottAddArtist')}>
-                            <button className="bg-cyan-500 hover:bg-cyan-600 text-black font-black px-8 py-4 rounded-xl font-mono">
+                            <button className="bg-cyan-500 hover:bg-cyan-600 text-black font-black px-6 py-3 rounded-lg font-mono text-sm">
                                 ADD FIRST ARTIST
                             </button>
                         </Link>
                     </div>
                 ) : (
                     <>
-                        <div className="grid grid-cols-2 gap-3">
+                        <div className="grid grid-cols-3 gap-2">
                             {artists.map((artist) => (
                                 <motion.div
                                     key={artist.id}
-                                    whileHover={{ scale: 0.98 }}
                                     whileTap={{ scale: 0.96 }}
-                                    className="relative bg-black border-2 border-cyan-500 rounded-xl p-3 overflow-hidden group"
-                                    style={{ boxShadow: '0 0 20px rgba(6, 182, 212, 0.3)' }}
+                                    className="relative bg-black border-2 border-cyan-500 rounded-lg overflow-hidden group"
+                                    style={{ boxShadow: '0 0 15px rgba(6, 182, 212, 0.3)' }}
                                 >
-                                    {/* Glow on hover */}
-                                    <div className="absolute inset-0 bg-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-
-                                    <Link to={createPageUrl(`ScottArtistHome?id=${artist.id}`)} className="relative block">
-                                        <div className="flex flex-col items-center text-center gap-2">
+                                    <Link to={createPageUrl(`ScottArtistHome?id=${artist.id}`)} className="relative block p-2">
+                                        <div className="flex flex-col items-center text-center gap-1">
                                             {artist.profile_pic_url ? (
                                                 <img 
                                                     src={artist.profile_pic_url} 
                                                     alt={artist.name}
-                                                    className="w-16 h-16 rounded-lg object-cover border-2 border-cyan-500"
+                                                    className="w-12 h-12 rounded object-cover border border-cyan-500"
                                                 />
                                             ) : (
-                                                <div className="w-16 h-16 rounded-lg bg-cyan-500 text-black font-black text-2xl flex items-center justify-center border-2 border-cyan-400">
+                                                <div className="w-12 h-12 rounded bg-cyan-500 text-black font-black text-lg flex items-center justify-center">
                                                     {artist.name.charAt(0)}
                                                 </div>
                                             )}
-                                            <div className="w-full">
-                                                <p className="text-white font-black text-sm font-mono leading-tight">{artist.name}</p>
-                                                {artist.genre && (
-                                                    <p className="text-cyan-400 text-[10px] font-mono mt-0.5 uppercase tracking-wider">{artist.genre}</p>
-                                                )}
-                                            </div>
+                                            <p className="text-white font-black text-[10px] font-mono leading-tight">{artist.name}</p>
                                         </div>
                                     </Link>
 
-                                    {/* Edit + Archive buttons - ALWAYS VISIBLE on mobile */}
-                                    <div className="absolute bottom-2 left-2 right-2 flex gap-1 z-20">
+                                    {/* Edit + Archive - Always visible */}
+                                    <div className="flex border-t border-cyan-500/20">
                                         <Link 
                                             to={createPageUrl(`ScottAddArtist?edit=${artist.id}`)}
-                                            className="flex-1 bg-black/90 border border-cyan-500/50 hover:border-cyan-500 text-cyan-400 text-[10px] font-bold font-mono px-2 py-1 rounded transition-all text-center"
+                                            className="flex-1 bg-black/90 text-cyan-400 text-[8px] font-bold font-mono py-1 text-center border-r border-cyan-500/20 hover:bg-cyan-500/10"
                                             onClick={(e) => e.stopPropagation()}
                                         >
                                             EDIT
@@ -302,7 +274,7 @@ export default function CB51() {
                                                 e.stopPropagation();
                                                 handleArchiveArtist(artist);
                                             }}
-                                            className="flex-1 bg-black/90 border border-red-500/50 hover:border-red-500 text-red-400 text-[10px] font-bold font-mono px-2 py-1 rounded transition-all"
+                                            className="flex-1 bg-black/90 text-red-400 text-[8px] font-bold font-mono py-1 hover:bg-red-500/10"
                                         >
                                             ARCHIVE
                                         </button>
@@ -313,13 +285,12 @@ export default function CB51() {
                             {/* Add Artist Card */}
                             <Link to={createPageUrl('ScottAddArtist')}>
                                 <motion.div
-                                    whileHover={{ scale: 0.98 }}
                                     whileTap={{ scale: 0.96 }}
-                                    className="bg-black border-2 border-dashed border-gray-800 hover:border-cyan-500 rounded-xl p-3 h-full flex flex-col items-center justify-center gap-2 transition-all cursor-pointer"
-                                    style={{ minHeight: '120px' }}
+                                    className="bg-black border-2 border-dashed border-gray-800 hover:border-cyan-500 rounded-lg p-2 h-full flex flex-col items-center justify-center gap-1 transition-all cursor-pointer"
+                                    style={{ minHeight: '85px' }}
                                 >
-                                    <Plus className="w-8 h-8 text-cyan-400" />
-                                    <span className="text-cyan-400 font-black font-mono text-xs">ADD</span>
+                                    <Plus className="w-6 h-6 text-cyan-400" />
+                                    <span className="text-cyan-400 font-black font-mono text-[8px]">ADD</span>
                                 </motion.div>
                             </Link>
                         </div>
@@ -327,93 +298,81 @@ export default function CB51() {
                 )}
             </div>
 
-            {/* QUICK ACCESS */}
-            <div className="mt-8 grid grid-cols-2 gap-3">
+            {/* COMPACT QUICK ACCESS */}
+            <div className="mt-3 grid grid-cols-3 gap-2">
                 <Link to={createPageUrl('ScottGigOffers')}>
                     <motion.div
-                        whileHover={{ scale: 0.97 }}
                         whileTap={{ scale: 0.95 }}
-                        className="relative bg-gradient-to-br from-amber-500/20 to-amber-600/10 border-2 border-amber-500/30 hover:border-amber-500 rounded-2xl p-5 text-center transition-all overflow-hidden group"
+                        className="bg-gradient-to-br from-amber-500/20 to-amber-600/10 border border-amber-500/30 rounded-lg p-2 text-center"
                     >
-                        <div className="absolute inset-0 bg-gradient-to-t from-amber-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                        <Zap className="w-9 h-9 text-amber-400 mx-auto mb-2 relative z-10" />
-                        <p className="text-amber-400 font-black font-mono text-sm relative z-10">GIG OFFERS</p>
-                        {allOffers.length > 0 && <p className="text-white text-2xl font-black font-mono mt-1 relative z-10">{stats.pendingOffers + stats.awaitingBand}</p>}
+                        <Zap className="w-5 h-5 text-amber-400 mx-auto mb-1" />
+                        <p className="text-amber-400 font-black font-mono text-[8px]">GIGS</p>
+                        {allOffers.length > 0 && <p className="text-white text-sm font-black font-mono">{stats.pendingOffers + stats.awaitingBand}</p>}
                     </motion.div>
                 </Link>
                 <Link to={createPageUrl('ScottCalendarView')}>
                     <motion.div
-                        whileHover={{ scale: 0.97 }}
                         whileTap={{ scale: 0.95 }}
-                        className="relative bg-gradient-to-br from-green-500/20 to-green-600/10 border-2 border-green-500/30 hover:border-green-500 rounded-2xl p-5 text-center transition-all overflow-hidden group"
+                        className="bg-gradient-to-br from-green-500/20 to-green-600/10 border border-green-500/30 rounded-lg p-2 text-center"
                     >
-                        <div className="absolute inset-0 bg-gradient-to-t from-green-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                        <Calendar className="w-9 h-9 text-green-400 mx-auto mb-2 relative z-10" />
-                        <p className="text-green-400 font-black font-mono text-sm relative z-10">CALENDAR</p>
-                        {stats.upcomingGigs > 0 && <p className="text-white text-2xl font-black font-mono mt-1 relative z-10">{stats.upcomingGigs}</p>}
+                        <Calendar className="w-5 h-5 text-green-400 mx-auto mb-1" />
+                        <p className="text-green-400 font-black font-mono text-[8px]">CAL</p>
+                        {stats.upcomingGigs > 0 && <p className="text-white text-sm font-black font-mono">{stats.upcomingGigs}</p>}
                     </motion.div>
                 </Link>
                 <Link to={createPageUrl('ScottMessageInbox')}>
                     <motion.div
-                        whileHover={{ scale: 0.97 }}
                         whileTap={{ scale: 0.95 }}
-                        className="relative bg-gradient-to-br from-purple-500/20 to-purple-600/10 border-2 border-purple-500/30 hover:border-purple-500 rounded-2xl p-5 text-center transition-all overflow-hidden group"
+                        className="bg-gradient-to-br from-purple-500/20 to-purple-600/10 border border-purple-500/30 rounded-lg p-2 text-center"
                     >
-                        <div className="absolute inset-0 bg-gradient-to-t from-purple-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                        <MessageSquare className="w-9 h-9 text-purple-400 mx-auto mb-2 relative z-10" />
-                        <p className="text-purple-400 font-black font-mono text-sm relative z-10">EMAIL AI</p>
+                        <MessageSquare className="w-5 h-5 text-purple-400 mx-auto mb-1" />
+                        <p className="text-purple-400 font-black font-mono text-[8px]">EMAIL</p>
                     </motion.div>
                 </Link>
                 <Link to={createPageUrl('ScottTeamAccess')}>
                     <motion.div
-                        whileHover={{ scale: 0.97 }}
                         whileTap={{ scale: 0.95 }}
-                        className="relative bg-gradient-to-br from-cyan-500/20 to-cyan-600/10 border-2 border-cyan-500/30 hover:border-cyan-500 rounded-2xl p-5 text-center transition-all overflow-hidden group"
+                        className="bg-gradient-to-br from-cyan-500/20 to-cyan-600/10 border border-cyan-500/30 rounded-lg p-2 text-center"
                     >
-                        <div className="absolute inset-0 bg-gradient-to-t from-cyan-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                        <Users className="w-9 h-9 text-cyan-400 mx-auto mb-2 relative z-10" />
-                        <p className="text-cyan-400 font-black font-mono text-sm relative z-10">TEAMS</p>
+                        <Users className="w-5 h-5 text-cyan-400 mx-auto mb-1" />
+                        <p className="text-cyan-400 font-black font-mono text-[8px]">TEAMS</p>
                     </motion.div>
                 </Link>
                 <Link to={createPageUrl('ExtensionManager')}>
                     <motion.div
-                        whileHover={{ scale: 0.97 }}
                         whileTap={{ scale: 0.95 }}
-                        className="relative bg-gradient-to-br from-pink-500/20 to-pink-600/10 border-2 border-pink-500/30 hover:border-pink-500 rounded-2xl p-5 text-center transition-all overflow-hidden group"
+                        className="bg-gradient-to-br from-pink-500/20 to-pink-600/10 border border-pink-500/30 rounded-lg p-2 text-center"
                     >
-                        <div className="absolute inset-0 bg-gradient-to-t from-pink-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                        <Zap className="w-9 h-9 text-pink-400 mx-auto mb-2 relative z-10" />
-                        <p className="text-pink-400 font-black font-mono text-sm relative z-10">EXTENSION</p>
+                        <Zap className="w-5 h-5 text-pink-400 mx-auto mb-1" />
+                        <p className="text-pink-400 font-black font-mono text-[8px]">EXT</p>
                     </motion.div>
                 </Link>
                 <Link to={createPageUrl('ScottSettings')}>
                     <motion.div
-                        whileHover={{ scale: 0.97 }}
                         whileTap={{ scale: 0.95 }}
-                        className="relative bg-gradient-to-br from-blue-500/20 to-blue-600/10 border-2 border-blue-500/30 hover:border-blue-500 rounded-2xl p-5 text-center transition-all overflow-hidden group"
+                        className="bg-gradient-to-br from-blue-500/20 to-blue-600/10 border border-blue-500/30 rounded-lg p-2 text-center"
                     >
-                        <div className="absolute inset-0 bg-gradient-to-t from-blue-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                        <svg className="w-9 h-9 text-blue-400 mx-auto mb-2 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-5 h-5 text-blue-400 mx-auto mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                         </svg>
-                        <p className="text-blue-400 font-black font-mono text-sm relative z-10">SETTINGS</p>
+                        <p className="text-blue-400 font-black font-mono text-[8px]">SET</p>
                     </motion.div>
                 </Link>
             </div>
 
             {/* ARCHIVED ARTISTS */}
             {archivedArtists.length > 0 && (
-                <div className="mt-8">
+                <div className="mt-3">
                     <details className="text-gray-700">
-                        <summary className="cursor-pointer text-xs font-mono mb-3">Archived ({archivedArtists.length})</summary>
-                        <div className="space-y-2">
+                        <summary className="cursor-pointer text-[9px] font-mono mb-2">Archived ({archivedArtists.length})</summary>
+                        <div className="space-y-1">
                             {archivedArtists.map((artist) => (
-                                <div key={artist.id} className="flex items-center justify-between bg-black border border-gray-900 rounded-lg p-3">
-                                    <p className="text-gray-700 font-mono text-sm">{artist.name}</p>
+                                <div key={artist.id} className="flex items-center justify-between bg-black border border-gray-900 rounded p-2">
+                                    <p className="text-gray-700 font-mono text-[9px]">{artist.name}</p>
                                     <button
                                         onClick={() => handleRestoreArtist(artist)}
-                                        className="text-cyan-400 hover:text-cyan-300 text-xs font-mono"
+                                        className="text-cyan-400 hover:text-cyan-300 text-[9px] font-mono"
                                     >
                                         RESTORE
                                     </button>
@@ -423,11 +382,6 @@ export default function CB51() {
                     </details>
                 </div>
             )}
-
-            {/* FOOTER */}
-            <div className="mt-12 text-center">
-                <p className="text-gray-800 text-xs font-mono">CB51 • Simple</p>
-            </div>
             </div>
             );
             }
