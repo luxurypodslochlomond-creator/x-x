@@ -608,7 +608,9 @@ const LayoutInner = ({ children, currentPageName }) => {
           </div>
 
           <div className="p-6 space-y-3">
-            {!isCB51Page && (
+            {isCB51Page ? (
+              <NavSection title="ARTIST MANAGEMENT" color="cyan" items={cb51Nav} isActivePage={isActivePage} defaultOpen={true} />
+            ) : (
               <>
                 <NavSection title="HEAL" color="pink" items={healNav} isActivePage={isActivePage} defaultOpen={true} />
                 <NavSection title="EARN & CREATE" color="green" items={earnCreateNav} isActivePage={isActivePage} />
@@ -619,7 +621,7 @@ const LayoutInner = ({ children, currentPageName }) => {
               </>
             )}
 
-            {scottNav.length > 0 && (
+            {!isCB51Page && scottNav.length > 0 && (
               <>
                 <div className="h-px bg-cyan-500/30 my-4" />
                 <NavSection title="STUDENT & ARTIST TOOLS" color="cyan" items={scottNav} isActivePage={isActivePage} />
