@@ -395,6 +395,17 @@ const LayoutInner = ({ children, currentPageName }) => {
       { title: "Prof51", url: createPageUrl("Prof51"), icon: GraduationCap, highlight: true, description: "AI co-manager for students" },
   ];
 
+  // CB51 ARTIST MANAGEMENT MENU
+  const cb51Nav = [
+      { title: "Dashboard", url: createPageUrl("CB51"), icon: Home, description: "Overview" },
+      { title: "Artists", url: createPageUrl("ScottArtist"), icon: User, description: "Manage roster" },
+      { title: "Gig Offers", url: createPageUrl("ScottGigOffers"), icon: Calendar, description: "Incoming shows" },
+      { title: "Calendar", url: createPageUrl("ScottCalendarView"), icon: Calendar, description: "All shows" },
+      { title: "Messages", url: createPageUrl("ScottMessageInbox"), icon: Settings, description: "Inbox" },
+      { title: "Finance", url: createPageUrl("ScottFinanceAdmin"), icon: DollarSign, description: "Money tracker" },
+      { title: "Tasks", url: createPageUrl("ScottToDo"), icon: CheckCircle, description: "To-do list" },
+  ];
+
   const adminNav = user?.role === 'admin' ? [
             { title: "📊 Analytics", url: createPageUrl("AdminAnalytics"), icon: Activity },
             { title: "🔥 Frequency Evidence", url: createPageUrl("AdminFrequencyAnalytics"), icon: Waves, highlight: true, description: "Device intel for grants" },
