@@ -120,9 +120,10 @@ AI51:`
       speakText(response);
     } catch (err) {
       console.error('AI51 error:', err);
+      const errorMsg = err?.message || err?.error || 'Chat failed';
       const fallback = { role: 'ai', content: '🔄 Connection hiccup. Try again?' };
       setConversation(prev => [...prev, fallback]);
-      setError(err?.message || 'Chat failed');
+      setError(`Error: ${errorMsg}`);
     } finally {
       setIsThinking(false);
     }
