@@ -529,7 +529,9 @@ const LayoutInner = ({ children, currentPageName }) => {
                   {isMobileMenuOpen && (
                     <div className={`lg:hidden fixed inset-0 ${isOffline ? 'top-[122px]' : 'top-[72px]'} bg-[#0a0f1a]/95 backdrop-blur-xl z-[50] overflow-y-auto pb-6`}>
                       <div className="p-3 pt-6 space-y-2 flex flex-col items-stretch">
-                          {!isCB51Page && (
+                          {isCB51Page ? (
+                            <NavSection title="ARTIST MANAGEMENT" color="cyan" items={cb51Nav} isActivePage={isActivePage} isMobile defaultOpen={true} />
+                          ) : (
                             <>
                               <NavSection title="HEAL" color="pink" items={healNav} isActivePage={isActivePage} isMobile defaultOpen={true} />
                               <NavSection title="EARN & CREATE" color="green" items={earnCreateNav} isActivePage={isActivePage} isMobile />
@@ -540,7 +542,7 @@ const LayoutInner = ({ children, currentPageName }) => {
                             </>
                           )}
 
-                        {scottNav.length > 0 && (
+                        {!isCB51Page && scottNav.length > 0 && (
                                     <>
                                         <div className="h-px bg-cyan-500/30 my-3" />
                                         <NavSection title="STUDENT & ARTIST TOOLS" color="cyan" items={scottNav} isActivePage={isActivePage} isMobile />
