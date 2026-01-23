@@ -20,6 +20,7 @@ export default function AI51Page() {
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [error, setError] = useState(null);
   const [isOnline, setIsOnline] = useState(navigator.onLine);
+  const [volume, setVolume] = useState(1.0);
 
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
@@ -67,6 +68,7 @@ export default function AI51Page() {
       const utterance = new SpeechSynthesisUtterance(text);
       utterance.rate = 0.9;
       utterance.pitch = 1.0;
+      utterance.volume = volume;
       
       const voices = window.speechSynthesis.getVoices();
       const voice = voices.find(v => v.lang === 'en-GB') || voices.find(v => v.lang.startsWith('en')) || voices[0];
@@ -247,6 +249,20 @@ AI51:`
             🔊 AI speaking...
           </motion.p>
         )}
+
+        <div className="flex items-center gap-3">
+          <span className="text-xs text-gray-500 font-mono">VOL</span>
+          <input
+            type="range"
+            min="0"
+            max="1"
+            step="0.1"
+            value={volume}
+            onChange={(e) => setVolume(parseFloat(e.target.value))}
+            className="flex-1 accent-cyan-500"
+          />
+          <span className="text-xs text-cyan-400 font-bold font-mono w-8">{Math.round(volume * 100)}%</span>
+        </div>
 
         <div className="flex gap-2">
           <input
