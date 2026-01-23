@@ -273,7 +273,7 @@ export default function CB51() {
                                                     className="w-14 h-14 rounded-xl object-cover ring-2 ring-cyan-500/50"
                                                 />
                                             ) : (
-                                                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-cyan-500 via-purple-500 to-pink-500 text-white font-black text-xl flex items-center justify-center">
+                                                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-cyan-500 to-cyan-700 text-white font-black text-xl flex items-center justify-center ring-2 ring-cyan-500/50">
                                                     {artist.name.charAt(0)}
                                                 </div>
                                             )}
