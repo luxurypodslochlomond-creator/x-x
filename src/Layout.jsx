@@ -216,7 +216,7 @@ const LayoutInner = ({ children, currentPageName }) => {
         rootEl.removeAttribute('data-cb51');
       }
 
-      const timer = setTimeout(() => setPageTransitioning(false), 150);
+      const timer = setTimeout(() => setPageTransitioning(false), 100);
       return () => clearTimeout(timer);
       }, [location.pathname, currentPageName]);
 
@@ -659,36 +659,14 @@ const LayoutInner = ({ children, currentPageName }) => {
 
         <main className={`${currentPageName !== 'AI51' ? 'lg:ml-80' : ''} ${currentPageName !== 'AI51' ? (isOffline ? 'pt-[122px] lg:pt-10' : 'pt-[72px] lg:pt-0') : ''} min-h-screen`} style={{ willChange: 'contents' }}>
           <AnimatePresence mode="wait">
-            {pageTransitioning ? (
-              <motion.div
-                key="loader"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.1 }}
-                className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center"
-              >
-                <motion.div
-                  animate={{ scale: [1, 1.1, 1] }}
-                  transition={{ duration: 0.6, repeat: Infinity }}
-                >
-                  {currentPageName.startsWith('CB51') || currentPageName.startsWith('Scott') ? (
-                    <Radio className="w-12 h-12 text-cyan-400" style={{ filter: 'drop-shadow(0 0 10px rgba(6, 182, 212, 0.6))' }} />
-                  ) : (
-                    <COOLASFUCKWaves size={48} animate={true} />
-                  )}
-                </motion.div>
-              </motion.div>
-            ) : (
-              <motion.div
-                key={location.pathname}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.15 }}
-              >
-                {children}
-              </motion.div>
-            )}
+            <motion.div
+              key={location.pathname}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.1 }}
+            >
+              {children}
+            </motion.div>
           </AnimatePresence>
           {currentPageName !== 'AI51' && (
             <footer className="border-t border-cyan-500/20 bg-[#0a0f1a]/60">
