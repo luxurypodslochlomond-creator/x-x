@@ -259,7 +259,7 @@ export default function CB51() {
                                     <motion.div
                                         whileHover={{ scale: 0.97, y: -4 }}
                                         whileTap={{ scale: 0.95 }}
-                                        className="relative bg-black border-3 border-cyan-500 rounded-2xl p-4 overflow-hidden group cursor-pointer"
+                                        className="relative bg-black border-4 border-cyan-500 rounded-2xl p-4 overflow-hidden group cursor-pointer"
                                         style={{ boxShadow: '0 0 30px rgba(6, 182, 212, 0.3)' }}
                                     >
                                         {/* Cyber glow effect */}
@@ -312,7 +312,7 @@ export default function CB51() {
                                 <motion.div
                                     whileHover={{ scale: 0.97, y: -4 }}
                                     whileTap={{ scale: 0.95 }}
-                                    className="bg-black border-3 border-dashed border-gray-800 hover:border-cyan-500 rounded-2xl p-4 h-full flex flex-col items-center justify-center gap-2 transition-all cursor-pointer"
+                                    className="bg-black border-4 border-dashed border-gray-800 hover:border-cyan-500 rounded-2xl p-4 h-full flex flex-col items-center justify-center gap-2 transition-all cursor-pointer"
                                     style={{ minHeight: '140px' }}
                                 >
                                     <Plus className="w-10 h-10 text-cyan-400" />
