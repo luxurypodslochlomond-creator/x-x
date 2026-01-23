@@ -240,8 +240,8 @@ export default function CB51() {
                 </div>
             )}
 
-            {/* ARTISTS - SCOTT'S ACTUAL DESIGN */}
-            <div className="space-y-3">
+            {/* ARTISTS - COOLASFUCK GRID */}
+            <div>
                 {artists.length === 0 ? (
                     <div className="text-center py-12">
                         <p className="text-gray-600 text-sm font-mono mb-6">No artists yet</p>
@@ -253,58 +253,73 @@ export default function CB51() {
                     </div>
                 ) : (
                     <>
-                        {artists.map((artist) => (
-                            <div key={artist.id} className="relative">
-                                <Link to={createPageUrl(`ScottArtistHome?id=${artist.id}`)}>
+                        <div className="grid grid-cols-2 gap-3">
+                            {artists.map((artist) => (
+                                <Link key={artist.id} to={createPageUrl(`ScottArtistHome?id=${artist.id}`)}>
                                     <motion.div
-                                        whileHover={{ scale: 0.98, y: -2 }}
-                                        whileTap={{ scale: 0.96 }}
-                                        className="relative bg-gradient-to-br from-gray-900 to-black border-2 border-cyan-500/30 rounded-2xl p-5 hover:border-cyan-500 transition-all overflow-hidden group"
-                                        style={{ boxShadow: '0 4px 20px rgba(6, 182, 212, 0.1)' }}
+                                        whileHover={{ scale: 0.97, y: -4 }}
+                                        whileTap={{ scale: 0.95 }}
+                                        className="relative bg-black border-3 border-cyan-500 rounded-2xl p-4 overflow-hidden group cursor-pointer"
+                                        style={{ boxShadow: '0 0 30px rgba(6, 182, 212, 0.3)' }}
                                     >
-                                        {/* Gradient overlay on hover */}
-                                        <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                                        {/* Cyber glow effect */}
+                                        <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 via-transparent to-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
 
-                                        <div className="relative flex items-center gap-4">
+                                        {/* Animated border pulse */}
+                                        <div className="absolute inset-0 border-2 border-cyan-400 rounded-2xl opacity-0 group-hover:opacity-100 group-hover:animate-pulse"></div>
+
+                                        <div className="relative flex flex-col items-center text-center gap-3">
                                             {artist.profile_pic_url ? (
                                                 <img 
                                                     src={artist.profile_pic_url} 
                                                     alt={artist.name}
-                                                    className="w-14 h-14 rounded-xl object-cover ring-2 ring-cyan-500/50"
+                                                    className="w-20 h-20 rounded-xl object-cover border-2 border-cyan-500"
+                                                    style={{ boxShadow: '0 0 20px rgba(6, 182, 212, 0.5)' }}
                                                 />
                                             ) : (
-                                                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-cyan-500 to-cyan-700 text-white font-black text-xl flex items-center justify-center ring-2 ring-cyan-500/50">
+                                                <div 
+                                                    className="w-20 h-20 rounded-xl bg-cyan-500 text-black font-black text-3xl flex items-center justify-center border-2 border-cyan-400"
+                                                    style={{ boxShadow: '0 0 20px rgba(6, 182, 212, 0.5)' }}
+                                                >
                                                     {artist.name.charAt(0)}
                                                 </div>
                                             )}
-                                            <div className="flex-1">
-                                                <p className="text-white font-black text-lg font-mono">{artist.name}</p>
-                                                {artist.genre && <p className="text-cyan-400/60 text-xs font-mono mt-0.5">{artist.genre}</p>}
+                                            <div className="w-full">
+                                                <p className="text-white font-black text-base font-mono leading-tight">{artist.name}</p>
+                                                {artist.genre && (
+                                                    <p className="text-cyan-400 text-xs font-mono mt-1 uppercase tracking-wider">{artist.genre}</p>
+                                                )}
                                             </div>
                                         </div>
+
+                                        {/* Delete button - hidden by default, shows on hover */}
+                                        <button
+                                            onClick={(e) => {
+                                                e.preventDefault();
+                                                e.stopPropagation();
+                                                handleArchiveArtist(artist);
+                                            }}
+                                            className="absolute top-2 right-2 bg-black/90 hover:bg-red-500/30 text-gray-600 hover:text-red-400 p-1.5 rounded-lg transition-all opacity-0 group-hover:opacity-100 z-10"
+                                        >
+                                            <Trash2 className="w-3.5 h-3.5" />
+                                        </button>
                                     </motion.div>
                                 </Link>
-                                <button
-                                    onClick={(e) => {
-                                        e.preventDefault();
-                                        handleArchiveArtist(artist);
-                                    }}
-                                    className="absolute top-2 right-2 bg-black/80 hover:bg-red-500/20 text-gray-600 hover:text-red-400 p-2 rounded-lg transition-all z-10"
+                            ))}
+
+                            {/* Add Artist Card */}
+                            <Link to={createPageUrl('ScottAddArtist')}>
+                                <motion.div
+                                    whileHover={{ scale: 0.97, y: -4 }}
+                                    whileTap={{ scale: 0.95 }}
+                                    className="bg-black border-3 border-dashed border-gray-800 hover:border-cyan-500 rounded-2xl p-4 h-full flex flex-col items-center justify-center gap-2 transition-all cursor-pointer"
+                                    style={{ minHeight: '140px' }}
                                 >
-                                    <Trash2 className="w-4 h-4" />
-                                </button>
-                            </div>
-                        ))}
-                        <Link to={createPageUrl('ScottAddArtist')}>
-                            <motion.div
-                                whileHover={{ scale: 0.98 }}
-                                whileTap={{ scale: 0.96 }}
-                                className="bg-gradient-to-br from-gray-900 to-black border-2 border-dashed border-gray-800 hover:border-cyan-500/50 rounded-2xl p-6 flex items-center justify-center gap-3 transition-all"
-                            >
-                                <Plus className="w-7 h-7 text-cyan-400" />
-                                <span className="text-cyan-400 font-black font-mono">ADD ARTIST</span>
-                            </motion.div>
-                        </Link>
+                                    <Plus className="w-10 h-10 text-cyan-400" />
+                                    <span className="text-cyan-400 font-black font-mono text-sm">ADD</span>
+                                </motion.div>
+                            </Link>
+                        </div>
                     </>
                 )}
             </div>
