@@ -165,6 +165,8 @@ export default function CB51() {
                         <Radio className="w-6 h-6 text-cyan-400" />
                         <h1 className="text-xl font-black text-cyan-400 font-mono">CB51</h1>
                     </div>
+                </div>
+                <div className="mb-2">
                     <PushNotificationManager />
                 </div>
 
