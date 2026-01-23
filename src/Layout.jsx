@@ -477,6 +477,7 @@ const LayoutInner = ({ children, currentPageName }) => {
         )}
 
         {/* MOBILE HEADER */}
+        {currentPageName !== 'AI51' && (
         <header className={`lg:hidden fixed ${isOffline ? 'top-10' : 'top-0'} left-0 right-0 z-[60] bg-[#0a0f1a]/95 backdrop-blur-xl border-b border-cyan-500/30`}>
           <div className="flex items-center justify-between p-4">
             <Link to={createPageUrl(currentPageName.startsWith('Scott') || currentPageName.startsWith('CB51') ? "CB51" : "Welcome")} className="flex items-center gap-2" onClick={() => setMobileMenuOpen(false)}>
@@ -522,8 +523,9 @@ const LayoutInner = ({ children, currentPageName }) => {
                 {isMobileMenuOpen ? <X className="w-6 h-6 text-cyan-400" /> : <Menu className="w-6 h-6 text-cyan-400" />}
               </button>
             </div>
-          </div>
-        </header>
+            </div>
+            </header>
+            )}
 
         {/* MOBILE MENU */}
                   {isMobileMenuOpen && (
@@ -576,6 +578,7 @@ const LayoutInner = ({ children, currentPageName }) => {
                   )}
 
         {/* DESKTOP SIDEBAR */}
+        {currentPageName !== 'AI51' && (
         <aside className={`hidden lg:block fixed left-0 ${isOffline ? 'top-10' : 'top-0'} w-80 h-screen border-r border-cyan-500/30 bg-[#0a0f1a]/95 overflow-y-auto z-50`}>
           <div className="p-6 border-b border-cyan-500/30">
             <Link to={createPageUrl(currentPageName.startsWith('Scott') || currentPageName.startsWith('CB51') ? "CB51" : "Welcome")} className="flex items-center gap-3 mb-4">
@@ -652,8 +655,9 @@ const LayoutInner = ({ children, currentPageName }) => {
                             </div>
                             </div>
                             </aside>
+                            )}
 
-        <main className={`lg:ml-80 ${isOffline ? 'pt-[122px] lg:pt-10' : 'pt-[72px] lg:pt-0'} min-h-screen`} style={{ willChange: 'contents' }}>
+        <main className={`${currentPageName !== 'AI51' ? 'lg:ml-80' : ''} ${currentPageName !== 'AI51' ? (isOffline ? 'pt-[122px] lg:pt-10' : 'pt-[72px] lg:pt-0') : ''} min-h-screen`} style={{ willChange: 'contents' }}>
           <AnimatePresence mode="wait">
             {pageTransitioning ? (
               <motion.div
