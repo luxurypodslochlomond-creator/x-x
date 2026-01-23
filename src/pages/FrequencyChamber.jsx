@@ -1603,6 +1603,7 @@ const VoiceHealing = ({ onProtocolRecommend }) => {
 
   const getProtocolFromIntent = (intent) => {
     const keywords = {
+      'sciatica|sciatic|chakra|energy center|spine pain|lower back nerve': 'chakra51',
       'concussion|head injury|impact|concussed|brain injury|hit head|knocked out': 'concussion_recovery',
       'anxiety|panic|stressed|worried': 'anxiety',
       'sleep|insomnia|tired|rest': 'sleep',
