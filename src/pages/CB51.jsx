@@ -255,83 +255,71 @@ export default function CB51() {
                     <>
                         <div className="grid grid-cols-2 gap-3">
                             {artists.map((artist) => (
-                                <Link key={artist.id} to={createPageUrl(`ScottArtistHome?id=${artist.id}`)}>
-                                    <motion.div
-                                        whileHover={{ scale: 0.98, y: -6 }}
-                                        whileTap={{ scale: 0.96 }}
-                                        className="relative bg-gradient-to-b from-black to-gray-950 border-4 border-cyan-500 rounded-2xl p-5 overflow-visible group cursor-pointer"
-                                        style={{ 
-                                            boxShadow: '0 0 40px rgba(6, 182, 212, 0.6), inset 0 1px 0 rgba(6, 182, 212, 0.3)',
-                                            filter: 'brightness(1.05)'
-                                        }}
-                                    >
-                                        {/* CYBER GLOW RING - ALWAYS VISIBLE */}
-                                        <div className="absolute -inset-1 bg-gradient-to-br from-cyan-500/40 via-cyan-400/20 to-cyan-500/40 rounded-2xl blur-xl group-hover:blur-2xl transition-all"></div>
+                                <motion.div
+                                    key={artist.id}
+                                    whileHover={{ scale: 0.98 }}
+                                    whileTap={{ scale: 0.96 }}
+                                    className="relative bg-black border-2 border-cyan-500 rounded-xl p-3 overflow-hidden group"
+                                    style={{ boxShadow: '0 0 20px rgba(6, 182, 212, 0.3)' }}
+                                >
+                                    {/* Glow on hover */}
+                                    <div className="absolute inset-0 bg-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
 
-                                        {/* Inner glow on hover */}
-                                        <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/30 via-transparent to-cyan-500/20 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
-
-                                        {/* Animated corner accents */}
-                                        <div className="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-cyan-300 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                                        <div className="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-cyan-300 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-
-                                        <div className="relative flex flex-col items-center text-center gap-4 z-10">
+                                    <Link to={createPageUrl(`ScottArtistHome?id=${artist.id}`)} className="relative block">
+                                        <div className="flex flex-col items-center text-center gap-2">
                                             {artist.profile_pic_url ? (
-                                                <div className="relative">
-                                                    <div className="absolute -inset-2 bg-cyan-500/50 rounded-2xl blur-lg"></div>
-                                                    <img 
-                                                        src={artist.profile_pic_url} 
-                                                        alt={artist.name}
-                                                        className="relative w-24 h-24 rounded-2xl object-cover border-3 border-cyan-400"
-                                                        style={{ boxShadow: '0 0 30px rgba(6, 182, 212, 0.8)' }}
-                                                    />
-                                                </div>
+                                                <img 
+                                                    src={artist.profile_pic_url} 
+                                                    alt={artist.name}
+                                                    className="w-16 h-16 rounded-lg object-cover border-2 border-cyan-500"
+                                                />
                                             ) : (
-                                                <div className="relative">
-                                                    <div className="absolute -inset-2 bg-cyan-500/50 rounded-2xl blur-lg"></div>
-                                                    <div 
-                                                        className="relative w-24 h-24 rounded-2xl bg-gradient-to-br from-cyan-400 to-cyan-600 text-black font-black text-4xl flex items-center justify-center border-3 border-cyan-300"
-                                                        style={{ boxShadow: '0 0 30px rgba(6, 182, 212, 0.8), inset 0 2px 10px rgba(255, 255, 255, 0.3)' }}
-                                                    >
-                                                        {artist.name.charAt(0)}
-                                                    </div>
+                                                <div className="w-16 h-16 rounded-lg bg-cyan-500 text-black font-black text-2xl flex items-center justify-center border-2 border-cyan-400">
+                                                    {artist.name.charAt(0)}
                                                 </div>
                                             )}
                                             <div className="w-full">
-                                                <p className="text-white font-black text-lg font-mono leading-tight tracking-wide drop-shadow-lg">{artist.name}</p>
+                                                <p className="text-white font-black text-sm font-mono leading-tight">{artist.name}</p>
                                                 {artist.genre && (
-                                                    <p className="text-cyan-300 text-xs font-black font-mono mt-1.5 uppercase tracking-widest" style={{ textShadow: '0 0 10px rgba(6, 182, 212, 0.8)' }}>
-                                                        {artist.genre}
-                                                    </p>
+                                                    <p className="text-cyan-400 text-[10px] font-mono mt-0.5 uppercase tracking-wider">{artist.genre}</p>
                                                 )}
                                             </div>
                                         </div>
+                                    </Link>
 
-                                        {/* Delete button */}
+                                    {/* Edit + Archive buttons - ALWAYS VISIBLE on mobile */}
+                                    <div className="absolute bottom-2 left-2 right-2 flex gap-1 z-20">
+                                        <Link 
+                                            to={createPageUrl(`ScottAddArtist?edit=${artist.id}`)}
+                                            className="flex-1 bg-black/90 border border-cyan-500/50 hover:border-cyan-500 text-cyan-400 text-[10px] font-bold font-mono px-2 py-1 rounded transition-all text-center"
+                                            onClick={(e) => e.stopPropagation()}
+                                        >
+                                            EDIT
+                                        </Link>
                                         <button
                                             onClick={(e) => {
                                                 e.preventDefault();
                                                 e.stopPropagation();
                                                 handleArchiveArtist(artist);
                                             }}
-                                            className="absolute top-2 right-2 bg-black border-2 border-red-500/50 hover:border-red-500 hover:bg-red-500/20 text-red-400 p-2 rounded-lg transition-all opacity-0 group-hover:opacity-100 z-20"
+                                            className="flex-1 bg-black/90 border border-red-500/50 hover:border-red-500 text-red-400 text-[10px] font-bold font-mono px-2 py-1 rounded transition-all"
                                         >
-                                            <Trash2 className="w-4 h-4" />
+                                            ARCHIVE
                                         </button>
-                                    </motion.div>
-                                </Link>
+                                    </div>
+                                </motion.div>
                             ))}
 
                             {/* Add Artist Card */}
                             <Link to={createPageUrl('ScottAddArtist')}>
                                 <motion.div
-                                    whileHover={{ scale: 0.98, y: -6 }}
+                                    whileHover={{ scale: 0.98 }}
                                     whileTap={{ scale: 0.96 }}
-                                    className="bg-black border-4 border-dashed border-gray-800 hover:border-cyan-500 rounded-2xl p-4 h-full flex flex-col items-center justify-center gap-3 transition-all cursor-pointer group"
-                                    style={{ minHeight: '180px' }}
+                                    className="bg-black border-2 border-dashed border-gray-800 hover:border-cyan-500 rounded-xl p-3 h-full flex flex-col items-center justify-center gap-2 transition-all cursor-pointer"
+                                    style={{ minHeight: '120px' }}
                                 >
-                                    <Plus className="w-12 h-12 text-cyan-400 group-hover:text-cyan-300 transition-colors" style={{ filter: 'drop-shadow(0 0 10px rgba(6, 182, 212, 0.5))' }} />
-                                    <span className="text-cyan-400 font-black font-mono text-base group-hover:text-cyan-300 transition-colors">ADD ARTIST</span>
+                                    <Plus className="w-8 h-8 text-cyan-400" />
+                                    <span className="text-cyan-400 font-black font-mono text-xs">ADD</span>
                                 </motion.div>
                             </Link>
                         </div>
