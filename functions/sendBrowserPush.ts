@@ -6,21 +6,27 @@ Deno.serve(async (req) => {
     const base44 = createClientFromRequest(req);
     const payload = await req.json();
 
-    // Get VAPID keys from database
-    const users = await base44.asServiceRole.entities.User.filter({});
-    const adminUser = users.find(u => u.vapid_public_key);
+    // Get VAPID keys from environment or database
+    let vapidPublic = Deno.env.get('VAPID_PUBLIC_KEY');
+    let vapidPrivate = Deno.env.get('VAPID_PRIVATE_KEY');
+    const vapidSubject = Deno.env.get('VAPID_SUBJECT') || 'mailto:scott@cb51.com';
     
-    if (!adminUser?.vapid_public_key || !adminUser?.vapid_private_key) {
-      return Response.json({ 
-        error: 'VAPID keys not set up. Call /api/generateVapidKeys first' 
-      }, { status: 500 });
+    // Fallback to database if env vars not set
+    if (!vapidPublic || !vapidPrivate) {
+      const users = await base44.asServiceRole.entities.User.filter({});
+      const adminUser = users.find(u => u.vapid_public_key);
+      
+      if (!adminUser?.vapid_public_key || !adminUser?.vapid_private_key) {
+        return Response.json({ 
+          error: 'VAPID keys not configured. Set VAPID_PUBLIC_KEY and VAPID_PRIVATE_KEY secrets, or call /api/generateVapidKeys' 
+        }, { status: 500 });
+      }
+      
+      vapidPublic = adminUser.vapid_public_key;
+      vapidPrivate = adminUser.vapid_private_key;
     }
 
-    webpush.setVapidDetails(
-      'mailto:scott@uf51.com',
-      adminUser.vapid_public_key,
-      adminUser.vapid_private_key
-    );
+    webpush.setVapidDetails(vapidSubject, vapidPublic, vapidPrivate);
     
     // Only process newly created notifications
     if (payload.event?.type !== 'create') {
@@ -38,7 +44,18 @@ Deno.serve(async (req) => {
     });
 
     if (subscriptions.length === 0) {
-      return Response.json({ message: 'No subscriptions found for user' });
+      // No push subscriptions - send email fallback
+      try {
+        await base44.asServiceRole.integrations.Core.SendEmail({
+          to: notification.recipient_email,
+          subject: notification.title,
+          body: `${notification.message}\n\n${notification.action_url ? `View: ${notification.action_url}` : ''}`
+        });
+        return Response.json({ message: 'No push subscriptions - email sent instead' });
+      } catch (emailError) {
+        console.error('Email fallback failed:', emailError);
+        return Response.json({ message: 'No subscriptions and email failed', error: emailError.message });
+      }
     }
 
     // Send push notification to all subscriptions
