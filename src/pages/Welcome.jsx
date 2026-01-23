@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { motion } from 'framer-motion';
 import { COOLASFUCKHeart, COOLASFUCKMusicNote, COOLASFUCKSparkle, COOLASFUCKWaves, COOLASFUCKGlobe } from '@/components/shared/COOLASFUCKIcon';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, Radio } from 'lucide-react';
 
 import { base44 } from '@/api/base44Client';
 
@@ -126,15 +126,24 @@ export default function WelcomePage() {
                      </div>
                 </motion.div>
 
-                {/* FOUR MAIN PATHS - SINGLE GRID */}
-                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }} className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    
+                {/* FIVE MAIN PATHS - CB51 ADDED */}
+                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }} className="grid grid-cols-2 md:grid-cols-5 gap-4">
+
                     {/* AI51 */}
                     <Link to={createPageUrl('AI51')}>
                         <motion.div whileHover={{ scale: 1.05, y: -4 }} whileTap={{ scale: 0.95 }} className="bg-black border-4 border-red-500 hover:border-red-400 p-6 cursor-pointer transition-all h-full flex flex-col items-center justify-center gap-3" style={{ boxShadow: '0 0 30px rgba(239, 68, 68, 0.2)' }}>
                             <COOLASFUCKHeart size={48} animate={true} />
                             <h3 className="text-lg font-black font-mono text-red-400">AI51</h3>
                             <p className="text-xs text-gray-400 font-mono text-center">Voice • Listen • Real help</p>
+                        </motion.div>
+                    </Link>
+
+                    {/* CB51 */}
+                    <Link to={createPageUrl('CB51')}>
+                        <motion.div whileHover={{ scale: 1.05, y: -4 }} whileTap={{ scale: 0.95 }} className="bg-black border-4 border-cyan-500 hover:border-cyan-400 p-6 cursor-pointer transition-all h-full flex flex-col items-center justify-center gap-3" style={{ boxShadow: '0 0 30px rgba(6, 182, 212, 0.2)' }}>
+                            <Radio className="w-12 h-12 text-cyan-400" />
+                            <h3 className="text-lg font-black font-mono text-cyan-400">CB51</h3>
+                            <p className="text-xs text-gray-400 font-mono text-center">Artist AI • Manage bands</p>
                         </motion.div>
                     </Link>
 
