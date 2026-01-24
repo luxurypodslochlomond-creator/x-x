@@ -147,7 +147,7 @@ export default function CB51AboutPage() {
           {/* WHITE LABEL */}
           <div className="border-8 border-purple-400 p-8">
             <div className="text-center mb-6">
-              <p className="text-7xl font-black text-purple-400 font-mono mb-2">WHITE LABEL</p>
+              <p className="text-7xl font-black text-purple-400 font-mono mb-2">CUSTOM</p>
               <p className="text-gray-400 font-mono text-sm">MAJOR LABELS & DISTRIBUTORS</p>
             </div>
             <div className="space-y-2 text-white font-mono text-base max-w-xl mx-auto">

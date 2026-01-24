@@ -57,7 +57,7 @@ export default function CB51Terms() {
                         <div className="bg-black border border-gray-900 rounded-lg p-4 space-y-3">
                             <p className="text-gray-300 font-mono text-sm"><strong className="text-white">Artists & Managers:</strong> FREE forever</p>
                             <p className="text-gray-300 font-mono text-sm"><strong className="text-white">Indie Labels:</strong> £99/month</p>
-                            <p className="text-gray-300 font-mono text-sm"><strong className="text-white">Major Labels:</strong> £25k-£75k annually (roster based)</p>
+                            <p className="text-gray-300 font-mono text-sm"><strong className="text-white">Custom (Majors):</strong> £25k-£75k annually (roster based)</p>
                             <p className="text-gray-300 font-mono text-sm"><strong className="text-white">Payment:</strong> Monthly for paid tiers via Stripe</p>
                             <p className="text-green-400 font-mono text-sm font-bold mt-3">Cancel anytime. No contracts. No BS.</p>
                         </div>
