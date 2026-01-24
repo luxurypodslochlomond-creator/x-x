@@ -36,6 +36,24 @@ export default function AI51Page() {
         setConversation(JSON.parse(saved));
       } catch (e) {}
     }
+
+    // Handle CB51 shortcuts
+    const urlParams = new URLSearchParams(window.location.search);
+    const promptParam = urlParams.get('prompt');
+    
+    const promptMap = {
+      draft_email: "Help me draft a professional email response to a promoter or contact.",
+      parse_gig: "I have a gig offer email - help me extract the key details (venue, date, fee, promoter).",
+      create_task: "Help me create a task or reminder for something I need to do.",
+      schedule: "Help me plan out my schedule or calendar for upcoming events."
+    };
+
+    if (promptParam && promptMap[promptParam]) {
+      setTextInput(promptMap[promptParam]);
+      if (inputRef.current) {
+        inputRef.current.focus();
+      }
+    }
   }, []);
 
   // Online/offline
