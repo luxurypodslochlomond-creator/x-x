@@ -88,6 +88,9 @@ import CB51About from './pages/CB51About';
 import CB51Login from './pages/CB51Login';
 import CB51LoginDirect from './pages/CB51LoginDirect';
 import CB51Pricing from './pages/CB51Pricing';
+import CB51Privacy from './pages/CB51Privacy';
+import CB51Support from './pages/CB51Support';
+import CB51Terms from './pages/CB51Terms';
 import CICSanctuary from './pages/CICSanctuary';
 import COPPACompliance from './pages/COPPACompliance';
 import CardCollection from './pages/CardCollection';
@@ -220,6 +223,7 @@ import ScottBandVote from './pages/ScottBandVote';
 import ScottBiggerVision from './pages/ScottBiggerVision';
 import ScottCalendar from './pages/ScottCalendar';
 import ScottCalendarView from './pages/ScottCalendarView';
+import Teachers from './pages/Teachers';
 import ScottComparison from './pages/ScottComparison';
 import ScottContracts from './pages/ScottContracts';
 import ScottDemos from './pages/ScottDemos';
@@ -276,7 +280,6 @@ import SubmitFrequency from './pages/SubmitFrequency';
 import SubmitProofOfLove from './pages/SubmitProofOfLove';
 import SymbolForge from './pages/SymbolForge';
 import TeacherInput from './pages/TeacherInput';
-import Teachers from './pages/Teachers';
 import TechScout from './pages/TechScout';
 import TechStack from './pages/TechStack';
 import TechnicalSpecification from './pages/TechnicalSpecification';
@@ -318,9 +321,6 @@ import YoungWarriors from './pages/YoungWarriors';
 import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
-import CB51Privacy from './pages/CB51Privacy';
-import CB51Terms from './pages/CB51Terms';
-import CB51Support from './pages/CB51Support';
 import __Layout from './Layout.jsx';
 
 
@@ -415,6 +415,9 @@ export const PAGES = {
     "CB51Login": CB51Login,
     "CB51LoginDirect": CB51LoginDirect,
     "CB51Pricing": CB51Pricing,
+    "CB51Privacy": CB51Privacy,
+    "CB51Support": CB51Support,
+    "CB51Terms": CB51Terms,
     "CICSanctuary": CICSanctuary,
     "COPPACompliance": COPPACompliance,
     "CardCollection": CardCollection,
@@ -547,6 +550,7 @@ export const PAGES = {
     "ScottBiggerVision": ScottBiggerVision,
     "ScottCalendar": ScottCalendar,
     "ScottCalendarView": ScottCalendarView,
+    "Teachers": Teachers,
     "ScottComparison": ScottComparison,
     "ScottContracts": ScottContracts,
     "ScottDemos": ScottDemos,
@@ -603,7 +607,6 @@ export const PAGES = {
     "SubmitProofOfLove": SubmitProofOfLove,
     "SymbolForge": SymbolForge,
     "TeacherInput": TeacherInput,
-    "Teachers": Teachers,
     "TechScout": TechScout,
     "TechStack": TechStack,
     "TechnicalSpecification": TechnicalSpecification,
@@ -645,9 +648,6 @@ export const PAGES = {
     "ZeroEgoProtocol": ZeroEgoProtocol,
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
-    "CB51Privacy": CB51Privacy,
-    "CB51Terms": CB51Terms,
-    "CB51Support": CB51Support,
 }
 
 export const pagesConfig = {

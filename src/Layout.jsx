@@ -274,14 +274,14 @@ const LayoutInner = ({ children, currentPageName }) => {
       meta.content = content;
     });
 
-    // Set manifest
+    // Set manifest (served dynamically by serveManifest function)
     let manifestLink = document.querySelector('link[rel="manifest"]');
     if (!manifestLink) {
       manifestLink = document.createElement('link');
       manifestLink.rel = 'manifest';
       document.head.appendChild(manifestLink);
     }
-    manifestLink.href = isCB51 ? '/cb51-manifest.json' : '/manifest.json';
+    manifestLink.href = '/api/functions/serveManifest';
 
     // Set apple-mobile-web-app-title
     let appleMeta = document.querySelector('meta[name="apple-mobile-web-app-title"]');
