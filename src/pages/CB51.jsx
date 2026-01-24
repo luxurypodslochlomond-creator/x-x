@@ -427,6 +427,6 @@ export default function CB51() {
                     </details>
                 </div>
             )}
-            </div>
-            );
-            }
+        </div>
+    );
+}
