@@ -71,12 +71,20 @@ export default function PushNotificationManager({ onSubscriptionChange }) {
 
   const initializePushNotifications = async () => {
     try {
-      // Register service worker from backend function
+      // Register service worker with timeout
       const swPath = import.meta.env.VITE_API_URL 
         ? `${import.meta.env.VITE_API_URL}/serveServiceWorker`
         : '/api/serveServiceWorker';
       
-      const registration = await navigator.serviceWorker.register(swPath, { scope: '/' });
+      // Timeout after 5 seconds to prevent hanging
+      const timeoutPromise = new Promise((_, reject) => 
+        setTimeout(() => reject(new Error('Service worker registration timeout')), 5000)
+      );
+      
+      const registration = await Promise.race([
+        navigator.serviceWorker.register(swPath, { scope: '/' }),
+        timeoutPromise
+      ]);
       console.log('✓ Service Worker registered');
 
       await navigator.serviceWorker.ready;
