@@ -10,12 +10,34 @@ import { base44 } from '@/api/base44Client';
 
 export default function ScottAddArtist() {
     const navigate = useNavigate();
+    const urlParams = new URLSearchParams(window.location.search);
+    const editId = urlParams.get('edit');
     const [saving, setSaving] = useState(false);
+    const [loading, setLoading] = useState(!!editId);
     const [formData, setFormData] = useState({
         name: '',
         phone: '',
         email: ''
     });
+
+    // Load artist data if editing
+    React.useEffect(() => {
+        if (editId) {
+            setLoading(true);
+            base44.entities.ScottArtist.filter({ id: editId })
+                .then(artists => {
+                    if (artists.length > 0) {
+                        const artist = artists[0];
+                        setFormData({
+                            name: artist.name || '',
+                            phone: artist.phone || '',
+                            email: artist.email || ''
+                        });
+                    }
+                })
+                .finally(() => setLoading(false));
+        }
+    }, [editId]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -29,34 +51,44 @@ export default function ScottAddArtist() {
         setSaving(true);
 
         try {
-            // Create artist record
-            const newArtist = await base44.entities.ScottArtist.create({
-                name: formData.name,
-                phone: formData.phone,
-                email: formData.email,
-                type: 'artist'
-            });
-            
-            // Invite to CB51 if email exists
-            if (formData.email) {
-                try {
-                    await base44.users.inviteUser(formData.email, 'user');
-                    // Send notification
+            if (editId) {
+                // UPDATE existing artist
+                await base44.entities.ScottArtist.update(editId, {
+                    name: formData.name,
+                    phone: formData.phone,
+                    email: formData.email
+                });
+                navigate(createPageUrl(`ScottArtistHome?id=${editId}`));
+            } else {
+                // CREATE new artist
+                const newArtist = await base44.entities.ScottArtist.create({
+                    name: formData.name,
+                    phone: formData.phone,
+                    email: formData.email,
+                    type: 'artist'
+                });
+                
+                // Invite to CB51 if email exists
+                if (formData.email) {
                     try {
-                        await base44.functions.invoke('notifyNewArtist', {
-                            artist_id: newArtist.id,
-                            artist_name: formData.name,
-                            artist_email: formData.email
-                        });
-                    } catch (e) {
-                        console.log('Notification sent (may have failed silently)');
+                        await base44.users.inviteUser(formData.email, 'user');
+                        // Send notification
+                        try {
+                            await base44.functions.invoke('notifyNewArtist', {
+                                artist_id: newArtist.id,
+                                artist_name: formData.name,
+                                artist_email: formData.email
+                            });
+                        } catch (e) {
+                            console.log('Notification sent (may have failed silently)');
+                        }
+                    } catch (inviteError) {
+                        console.log('User exists or invite failed:', inviteError.message);
                     }
-                } catch (inviteError) {
-                    console.log('User exists or invite failed:', inviteError.message);
                 }
+                
+                navigate(createPageUrl(`ScottArtistHome?id=${newArtist.id}`));
             }
-            
-            navigate(createPageUrl(`ScottArtistHome?id=${newArtist.id}`));
         } catch (error) {
             alert('Error saving: ' + error.message);
             setSaving(false);
@@ -79,10 +111,17 @@ export default function ScottAddArtist() {
 
             <div className="flex items-start justify-between mb-8">
                 <div>
-                    <h1 className="text-3xl font-black text-cyan-400 font-mono mb-1">ADD ARTIST</h1>
+                    <h1 className="text-3xl font-black text-cyan-400 font-mono mb-1">{editId ? 'EDIT ARTIST' : 'ADD ARTIST'}</h1>
                     <p className="text-gray-600 text-sm font-mono">Name • Phone • Email</p>
                 </div>
             </div>
+
+            {loading && (
+                <div className="bg-black border-2 border-cyan-500/30 rounded-xl p-8 text-center mb-6">
+                    <Radio className="w-8 h-8 text-cyan-400 mx-auto mb-2 animate-pulse" />
+                    <p className="text-cyan-400 font-mono text-sm">Loading artist...</p>
+                </div>
+            )}
 
             <form onSubmit={handleSubmit} className="space-y-4">
 
@@ -131,10 +170,10 @@ export default function ScottAddArtist() {
                 {/* SAVE BUTTON */}
                 <Button
                     type="submit"
-                    disabled={saving}
+                    disabled={saving || loading}
                     className="w-full bg-cyan-500 hover:bg-cyan-600 text-black font-black py-6 text-lg font-mono rounded-xl"
                 >
-                    {saving ? 'SAVING...' : '+ SAVE ARTIST'}
+                    {saving ? 'SAVING...' : editId ? 'UPDATE ARTIST' : '+ SAVE ARTIST'}
                 </Button>
             </form>
         </div>
