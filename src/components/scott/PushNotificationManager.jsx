@@ -70,37 +70,39 @@ export default function PushNotificationManager({ onSubscriptionChange }) {
   };
 
   const initializePushNotifications = async () => {
-    try {
-      // Register service worker with timeout
-      const swPath = import.meta.env.VITE_API_URL 
-        ? `${import.meta.env.VITE_API_URL}/serveServiceWorker`
-        : '/api/serveServiceWorker';
-      
-      // Timeout after 5 seconds to prevent hanging
-      const timeoutPromise = new Promise((_, reject) => 
-        setTimeout(() => reject(new Error('Service worker registration timeout')), 5000)
-      );
-      
-      const registration = await Promise.race([
-        navigator.serviceWorker.register(swPath, { scope: '/' }),
-        timeoutPromise
-      ]);
-      console.log('✓ Service Worker registered');
+        try {
+            setIsLoading(true);
+            // Register service worker with timeout
+            const swPath = import.meta.env.VITE_API_URL 
+              ? `${import.meta.env.VITE_API_URL}/serveServiceWorker`
+              : '/api/serveServiceWorker';
 
-      await navigator.serviceWorker.ready;
+            // Timeout after 3 seconds to prevent hanging
+            const timeoutPromise = new Promise((_, reject) => 
+              setTimeout(() => reject(new Error('Service worker registration timeout')), 3000)
+            );
 
-      // Check current subscription
-      const subscription = await registration.pushManager.getSubscription();
-      setIsSubscribed(!!subscription);
-      
-      console.log('✓ Push notifications initialized');
-    } catch (error) {
-      console.error('Push notification init error:', error);
-      // Don't block UI if service worker fails - button will still work
-    } finally {
-      setIsLoading(false);
-    }
-  };
+            const registration = await Promise.race([
+              navigator.serviceWorker.register(swPath, { scope: '/' }),
+              timeoutPromise
+            ]);
+            console.log('✓ Service Worker registered');
+
+            await navigator.serviceWorker.ready;
+
+            // Check current subscription
+            const subscription = await registration.pushManager.getSubscription();
+            setIsSubscribed(!!subscription);
+
+            console.log('✓ Push notifications initialized');
+          } catch (error) {
+            console.error('Push notification init error:', error);
+            // Don't block UI if service worker fails - button will still work
+            setIsLoading(false);
+          } finally {
+            setIsLoading(false);
+          }
+        };
 
   const requestNotificationPermission = async () => {
     try {
