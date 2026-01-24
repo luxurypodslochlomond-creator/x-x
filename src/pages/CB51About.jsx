@@ -137,9 +137,9 @@ export default function CB51AboutPage() {
               <p className="text-gray-400 font-mono text-sm">PER MONTH • INDIE LABELS</p>
             </div>
             <div className="space-y-2 text-white font-mono text-base max-w-xl mx-auto">
-              <p>→ Everything in Free</p>
-              <p>→ Manage full roster</p>
-              <p>→ Label dashboard</p>
+              <p>→ Unlimited artists & gigs</p>
+              <p>→ Full label dashboard</p>
+              <p>→ Advanced analytics</p>
               <p>→ Priority support</p>
             </div>
           </div>

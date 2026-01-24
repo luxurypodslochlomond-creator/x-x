@@ -27,13 +27,13 @@ export default function CB51Terms() {
                 <div className="bg-cyan-500/10 border-2 border-cyan-500 rounded-lg p-6 mb-8">
                     <h2 className="text-cyan-400 font-black font-mono text-xl mb-4">THE DEAL</h2>
                     <ul className="space-y-2 text-white font-mono text-sm">
-                        <li>✓ FREE for artists & managers forever</li>
-                        <li>✓ £99/month for indie labels</li>
-                        <li>✓ Enterprise pricing for majors (£25k-£75k/year)</li>
-                        <li>✓ Cancel anytime</li>
-                        <li>✓ Your data stays yours</li>
-                        <li>✓ No hidden fees</li>
-                    </ul>
+                            <li>✓ FREE for artists & managers (max 5 artists)</li>
+                            <li>✓ £99/month for indie labels (unlimited artists)</li>
+                            <li>✓ Custom pricing for majors (£25k-£75k/year)</li>
+                            <li>✓ Cancel anytime</li>
+                            <li>✓ Your data stays yours</li>
+                            <li>✓ No hidden fees</li>
+                        </ul>
                 </div>
 
                 {/* Main Content */}
