@@ -42,7 +42,7 @@ export default function CB51Terms() {
                     <section>
                         <h2 className="text-white font-black font-mono text-2xl mb-3">WHAT YOU GET</h2>
                         <div className="bg-black border border-gray-900 rounded-lg p-4 space-y-3">
-                            <p className="text-gray-300 font-mono text-sm">• Unlimited artists</p>
+                            <p className="text-gray-300 font-mono text-sm">• Up to 5 artists (free tier)</p>
                             <p className="text-gray-300 font-mono text-sm">• AI gig parsing</p>
                             <p className="text-gray-300 font-mono text-sm">• Calendar sync</p>
                             <p className="text-gray-300 font-mono text-sm">• Finance tracking</p>
