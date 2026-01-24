@@ -151,7 +151,7 @@ export default function CB51AboutPage() {
               <p className="text-gray-400 font-mono text-sm">MAJOR LABELS & DISTRIBUTORS</p>
             </div>
             <div className="space-y-2 text-white font-mono text-base max-w-xl mx-auto">
-              <p>→ universalmusic.cb51.com</p>
+              <p>→ universalmusic.cb51.io</p>
               <p>→ Your logo, your colours</p>
               <p>→ We handle setup & hosting</p>
               <p>→ £25k-£75k annually (roster size based)</p>
