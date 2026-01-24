@@ -133,7 +133,7 @@ export default function CB51AboutPage() {
           {/* INDIE */}
           <div className="border-8 border-cyan-400 p-8">
             <div className="text-center mb-6">
-              <p className="text-7xl font-black text-cyan-400 font-mono mb-2">£50</p>
+              <p className="text-7xl font-black text-cyan-400 font-mono mb-2">£99</p>
               <p className="text-gray-400 font-mono text-sm">PER MONTH • INDIE LABELS</p>
             </div>
             <div className="space-y-2 text-white font-mono text-base max-w-xl mx-auto">
@@ -147,14 +147,14 @@ export default function CB51AboutPage() {
           {/* WHITE LABEL */}
           <div className="border-8 border-purple-400 p-8">
             <div className="text-center mb-6">
-              <p className="text-7xl font-black text-purple-400 font-mono mb-2">CUSTOM</p>
-              <p className="text-gray-400 font-mono text-sm">MAJOR LABELS</p>
+              <p className="text-7xl font-black text-purple-400 font-mono mb-2">ENTERPRISE</p>
+              <p className="text-gray-400 font-mono text-sm">MAJOR LABELS & DISTRIBUTORS</p>
             </div>
             <div className="space-y-2 text-white font-mono text-base max-w-xl mx-auto">
               <p>→ universalmusic.cb51.com</p>
               <p>→ Your logo, your colours</p>
               <p>→ We handle setup & hosting</p>
-              <p>→ £5k one-time setup</p>
+              <p>→ £25k-£75k annually (roster size based)</p>
             </div>
           </div>
 
