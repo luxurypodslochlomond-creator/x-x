@@ -20,6 +20,12 @@ export default function ExtensionManager() {
   }, []);
 
   useEffect(() => {
+    // Set CB51 branding
+    const rootEl = document.getElementById('root');
+    if (rootEl) {
+      rootEl.setAttribute('data-cb51', 'true');
+    }
+    
     const loadUser = async () => {
       try {
         const currentUser = await base44.auth.me();
