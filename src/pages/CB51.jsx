@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
-import { Radio, Plus, Trash2, AlertCircle, Calendar, MessageSquare, Users, Zap } from 'lucide-react';
+import { Radio, Plus, Trash2, AlertCircle, Calendar, MessageSquare, Users, Zap, Mail, CheckCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
@@ -298,6 +298,49 @@ export default function CB51() {
                         </div>
                     </>
                 )}
+            </div>
+
+            {/* COMPACT AI QUICK ACTIONS */}
+            <div className="mt-3 mb-3">
+                <p className="text-gray-600 font-mono text-[10px] mb-2">AI SHORTCUTS</p>
+                <div className="grid grid-cols-2 gap-2">
+                    <Link to={createPageUrl('AI51')}>
+                        <motion.div
+                            whileTap={{ scale: 0.95 }}
+                            className="bg-gradient-to-br from-cyan-500/10 to-cyan-600/5 border border-cyan-500/30 rounded-lg p-2 text-center hover:border-cyan-500"
+                        >
+                            <Mail className="w-4 h-4 text-cyan-400 mx-auto mb-1" />
+                            <p className="text-cyan-400 font-black font-mono text-[8px]">DRAFT EMAIL</p>
+                        </motion.div>
+                    </Link>
+                    <Link to={createPageUrl('AI51')}>
+                        <motion.div
+                            whileTap={{ scale: 0.95 }}
+                            className="bg-gradient-to-br from-green-500/10 to-green-600/5 border border-green-500/30 rounded-lg p-2 text-center hover:border-green-500"
+                        >
+                            <Zap className="w-4 h-4 text-green-400 mx-auto mb-1" />
+                            <p className="text-green-400 font-black font-mono text-[8px]">PARSE GIG</p>
+                        </motion.div>
+                    </Link>
+                    <Link to={createPageUrl('AI51')}>
+                        <motion.div
+                            whileTap={{ scale: 0.95 }}
+                            className="bg-gradient-to-br from-amber-500/10 to-amber-600/5 border border-amber-500/30 rounded-lg p-2 text-center hover:border-amber-500"
+                        >
+                            <CheckCircle className="w-4 h-4 text-amber-400 mx-auto mb-1" />
+                            <p className="text-amber-400 font-black font-mono text-[8px]">CREATE TASK</p>
+                        </motion.div>
+                    </Link>
+                    <Link to={createPageUrl('AI51')}>
+                        <motion.div
+                            whileTap={{ scale: 0.95 }}
+                            className="bg-gradient-to-br from-purple-500/10 to-purple-600/5 border border-purple-500/30 rounded-lg p-2 text-center hover:border-purple-500"
+                        >
+                            <Calendar className="w-4 h-4 text-purple-400 mx-auto mb-1" />
+                            <p className="text-purple-400 font-black font-mono text-[8px]">SCHEDULE</p>
+                        </motion.div>
+                    </Link>
+                </div>
             </div>
 
             {/* COMPACT QUICK ACCESS */}

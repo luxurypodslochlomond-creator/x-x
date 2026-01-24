@@ -137,31 +137,31 @@ AI51:`
     }
   };
 
-  // QUICK ACTIONS for managers
+  // QUICK ACTIONS for everyday healing & life
   const quickActions = [
     {
-      icon: Mail,
-      label: 'Draft Email',
+      icon: Zap,
+      label: 'Find My Frequency',
       color: 'cyan',
-      prompt: "Draft a professional email reply to a promoter confirming a gig booking. Keep it warm but professional."
-    },
-    {
-      icon: FileText,
-      label: 'Parse Gig Offer',
-      color: 'green',
-      prompt: "I'll paste a gig offer email. Extract: venue, date, fee, promoter contact, and any tech requirements."
+      prompt: "I'm feeling [stressed/tired/anxious/etc] - what frequency would help me right now?"
     },
     {
       icon: CheckCircle,
-      label: 'Create Task',
-      color: 'amber',
-      prompt: "Help me break down this into clear action items with deadlines."
+      label: 'Daily Reset',
+      color: 'green',
+      prompt: "Help me reset my energy - what should I do in the next 5 minutes?"
     },
     {
       icon: Calendar,
-      label: 'Schedule Help',
+      label: 'Sleep Better',
       color: 'purple',
-      prompt: "Help me figure out if this gig date clashes with anything and what I need to confirm."
+      prompt: "I'm struggling to sleep - what frequency and routine would help me tonight?"
+    },
+    {
+      icon: Mail,
+      label: 'Calm My Mind',
+      color: 'pink',
+      prompt: "My mind won't stop racing - guide me through calming down right now."
     }
   ];
 
