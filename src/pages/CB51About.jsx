@@ -48,6 +48,7 @@ export default function CB51AboutPage() {
     // General description
     setMetaName('description', 'Stop drowning in emails. AI watches your inbox. Band votes in-app. One calendar. Free for artists & managers forever.');
   }, []);
+  
   return (
     <div className="min-h-screen bg-black text-white">
       
