@@ -10,11 +10,23 @@ export default function PushNotificationManager({ onSubscriptionChange }) {
   const [isSupported, setIsSupported] = useState(false);
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [needsPWA, setNeedsPWA] = useState(false);
 
   useEffect(() => {
+    // Check if running as PWA (added to home screen)
+    const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+    
     // Check browser support
     const supported = 'serviceWorker' in navigator && 'PushManager' in window && 'Notification' in window;
     setIsSupported(supported);
+
+    // iOS Safari needs PWA mode for push notifications
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    if (isIOS && !isStandalone) {
+      setNeedsPWA(true);
+      setIsLoading(false);
+      return;
+    }
 
     if (supported) {
       initializePushNotifications();
@@ -177,6 +189,21 @@ export default function PushNotificationManager({ onSubscriptionChange }) {
     return null;
   }
 
+  // iOS needs PWA mode
+  if (needsPWA) {
+    return (
+      <div className="bg-amber-500/20 border border-amber-500/50 rounded-lg p-3">
+        <p className="text-amber-400 font-mono text-xs font-bold mb-2">📱 iPhone Setup:</p>
+        <ol className="text-amber-300 font-mono text-xs space-y-1 list-decimal list-inside">
+          <li>Tap Share button ⬆️</li>
+          <li>Tap "Add to Home Screen"</li>
+          <li>Open CB51 from home screen</li>
+          <li>Enable notifications</li>
+        </ol>
+      </div>
+    );
+  }
+
   return (
     <button
       onClick={isSubscribed ? disableNotifications : requestNotificationPermission}
@@ -184,10 +211,15 @@ export default function PushNotificationManager({ onSubscriptionChange }) {
       className={`flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-mono font-bold transition-all ${
         isSubscribed
           ? 'bg-green-500/20 border border-green-500/50 text-green-400 hover:border-green-500'
-          : 'bg-gray-700/50 border border-gray-600 text-gray-400 hover:bg-gray-600'
+          : 'bg-gray-700/50 border border-gray-600 text-gray-400 hover:bg-gray-600 active:bg-cyan-500/20 active:border-cyan-500'
       } ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
     >
-      {isSubscribed ? (
+      {isLoading ? (
+        <>
+          <div className="w-4 h-4 border-2 border-gray-400 border-t-transparent rounded-full animate-spin"></div>
+          Setting up...
+        </>
+      ) : isSubscribed ? (
         <>
           <Bell className="w-4 h-4" />
           Notifications On
