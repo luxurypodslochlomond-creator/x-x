@@ -405,6 +405,9 @@ const LayoutInner = ({ children, currentPageName }) => {
       { title: "Messages", url: createPageUrl("ScottMessageInbox"), icon: Mail, description: "Inbox" },
       { title: "Finance", url: createPageUrl("ScottFinanceAdmin"), icon: DollarSign, description: "Money tracker" },
       { title: "Tasks", url: createPageUrl("ScottToDo"), icon: CheckCircle, description: "To-do list" },
+      { title: "Privacy", url: createPageUrl("CB51Privacy"), icon: Eye, description: "Data protection" },
+      { title: "Terms", url: createPageUrl("CB51Terms"), icon: FileText, description: "Service terms" },
+      { title: "Support", url: createPageUrl("CB51Support"), icon: Users, description: "Get help" },
   ];
 
   const adminNav = user?.role === 'admin' ? [
