@@ -533,14 +533,14 @@ const LayoutInner = ({ children, currentPageName }) => {
                       <div className="p-3 pt-6 space-y-2 flex flex-col items-stretch">
                           {isCB51Page ? (
                             <>
-                              <NavSection title="ARTIST MANAGEMENT" color="cyan" items={cb51Nav} isActivePage={isActivePage} isMobile defaultOpen={true} />
-                              <Link to={createPageUrl('CB51About')} className="flex items-center gap-3 p-3 border-2 border-white/10 hover:border-white/30 text-white">
+                              <Link to={createPageUrl('CB51About')} className="flex items-center gap-3 p-3 border-2 border-white/10 hover:border-white/30 text-white mb-2">
                                 <Radio className="w-5 h-5 flex-shrink-0" />
                                 <div className="flex-1">
                                   <span className="text-sm font-bold block">About CB51</span>
                                   <span className="text-xs text-cyan-300 block mt-1">Why we built this</span>
                                 </div>
                               </Link>
+                              <NavSection title="ARTIST MANAGEMENT" color="cyan" items={cb51Nav} isActivePage={isActivePage} isMobile defaultOpen={true} />
                             </>
                           ) : (
                             <>
@@ -622,7 +622,6 @@ const LayoutInner = ({ children, currentPageName }) => {
           <div className="p-6 space-y-3">
             {isCB51Page ? (
               <>
-                <NavSection title="ARTIST MANAGEMENT" color="cyan" items={cb51Nav} isActivePage={isActivePage} defaultOpen={true} />
                 <Link to={createPageUrl('CB51About')} className="flex items-center gap-3 p-4 transition-all border-2 border-white/10 hover:border-white/30 text-white mb-2">
                   <Radio className="w-6 h-6 flex-shrink-0" />
                   <div className="flex-1">
@@ -630,6 +629,7 @@ const LayoutInner = ({ children, currentPageName }) => {
                     <span className="text-xs text-cyan-300 block mt-1">Why we built this</span>
                   </div>
                 </Link>
+                <NavSection title="ARTIST MANAGEMENT" color="cyan" items={cb51Nav} isActivePage={isActivePage} defaultOpen={true} />
               </>
             ) : (
               <>
