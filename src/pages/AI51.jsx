@@ -1,13 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
-import { Send, Home, AlertCircle } from 'lucide-react';
+import { Send, Home, AlertCircle, Mail, Calendar, CheckCircle, FileText, Zap } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import AI51AtomIcon from '@/components/ai51/AI51AtomIcon';
 
 /**
- * AI51 - Text Chat + Voice Response
+ * AI51 - Text Chat + Voice Response + MANAGER SHORTCUTS
  * Bulletproof. Beautiful. World-class.
  */
 
@@ -21,6 +21,7 @@ export default function AI51Page() {
   const [error, setError] = useState(null);
   const [isOnline, setIsOnline] = useState(navigator.onLine);
   const [volume, setVolume] = useState(1.0);
+  const [showQuickActions, setShowQuickActions] = useState(false);
 
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
@@ -136,6 +137,40 @@ AI51:`
     }
   };
 
+  // QUICK ACTIONS for managers
+  const quickActions = [
+    {
+      icon: Mail,
+      label: 'Draft Email',
+      color: 'cyan',
+      prompt: "Draft a professional email reply to a promoter confirming a gig booking. Keep it warm but professional."
+    },
+    {
+      icon: FileText,
+      label: 'Parse Gig Offer',
+      color: 'green',
+      prompt: "I'll paste a gig offer email. Extract: venue, date, fee, promoter contact, and any tech requirements."
+    },
+    {
+      icon: CheckCircle,
+      label: 'Create Task',
+      color: 'amber',
+      prompt: "Help me break down this into clear action items with deadlines."
+    },
+    {
+      icon: Calendar,
+      label: 'Schedule Help',
+      color: 'purple',
+      prompt: "Help me figure out if this gig date clashes with anything and what I need to confirm."
+    }
+  ];
+
+  const handleQuickAction = (action) => {
+    setTextInput(action.prompt);
+    setShowQuickActions(false);
+    inputRef.current?.focus();
+  };
+
   if (!isOnline) {
     return (
       <motion.div
@@ -163,7 +198,13 @@ AI51:`
           <Home className="w-5 h-5" />
         </button>
         <h1 className="text-xl font-black font-mono text-white">AI51</h1>
-        <div className="w-5" />
+        <button
+          onClick={() => setShowQuickActions(!showQuickActions)}
+          className="text-cyan-400 hover:text-cyan-300 transition-colors"
+          title="Quick Actions"
+        >
+          <Zap className="w-5 h-5" />
+        </button>
       </div>
 
       {/* MESSAGES */}
@@ -229,6 +270,41 @@ AI51:`
 
       {/* INPUT AREA */}
       <div className="border-t border-cyan-500/20 bg-black/50 backdrop-blur p-4 space-y-3">
+        {/* QUICK ACTIONS */}
+        <AnimatePresence>
+          {showQuickActions && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              className="grid grid-cols-2 gap-2"
+            >
+              {quickActions.map((action, i) => {
+                const Icon = action.icon;
+                const colorMap = {
+                  cyan: 'border-cyan-500 text-cyan-400 hover:bg-cyan-500/10',
+                  green: 'border-green-500 text-green-400 hover:bg-green-500/10',
+                  amber: 'border-amber-500 text-amber-400 hover:bg-amber-500/10',
+                  purple: 'border-purple-500 text-purple-400 hover:bg-purple-500/10'
+                };
+                return (
+                  <motion.button
+                    key={i}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: i * 0.05 }}
+                    onClick={() => handleQuickAction(action)}
+                    className={`border-2 ${colorMap[action.color]} rounded-lg p-3 transition-all flex items-center gap-2 text-left`}
+                  >
+                    <Icon className="w-4 h-4 flex-shrink-0" />
+                    <span className="text-xs font-bold font-mono">{action.label}</span>
+                  </motion.button>
+                );
+              })}
+            </motion.div>
+          )}
+        </AnimatePresence>
+
         {error && (
           <motion.div
             initial={{ opacity: 0, y: -10 }}
