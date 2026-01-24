@@ -124,7 +124,7 @@ export default function CB51AboutPage() {
             </div>
             <div className="space-y-2 text-white font-mono text-base max-w-xl mx-auto">
               <p>→ Full AI email parsing</p>
-              <p>→ Unlimited artists & gigs</p>
+              <p>→ Up to 5 artists & unlimited gigs</p>
               <p>→ Band coordination</p>
               <p>→ Calendar & invoices</p>
             </div>
