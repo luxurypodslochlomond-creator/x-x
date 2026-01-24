@@ -27,11 +27,12 @@ export default function CB51Terms() {
                 <div className="bg-cyan-500/10 border-2 border-cyan-500 rounded-lg p-6 mb-8">
                     <h2 className="text-cyan-400 font-black font-mono text-xl mb-4">THE DEAL</h2>
                     <ul className="space-y-2 text-white font-mono text-sm">
-                        <li>✓ £99/month or white label pricing</li>
+                        <li>✓ FREE for artists & managers forever</li>
+                        <li>✓ £99/month for indie labels</li>
+                        <li>✓ Enterprise pricing for majors (£25k-£75k/year)</li>
                         <li>✓ Cancel anytime</li>
                         <li>✓ Your data stays yours</li>
                         <li>✓ No hidden fees</li>
-                        <li>✓ We improve the tool, you benefit</li>
                     </ul>
                 </div>
 
@@ -54,9 +55,10 @@ export default function CB51Terms() {
                     <section>
                         <h2 className="text-white font-black font-mono text-2xl mb-3">PRICING</h2>
                         <div className="bg-black border border-gray-900 rounded-lg p-4 space-y-3">
-                            <p className="text-gray-300 font-mono text-sm"><strong className="text-white">Individual:</strong> £99/month</p>
-                            <p className="text-gray-300 font-mono text-sm"><strong className="text-white">White Label:</strong> Custom pricing for agencies/labels</p>
-                            <p className="text-gray-300 font-mono text-sm"><strong className="text-white">Payment:</strong> Monthly via Stripe</p>
+                            <p className="text-gray-300 font-mono text-sm"><strong className="text-white">Artists & Managers:</strong> FREE forever</p>
+                            <p className="text-gray-300 font-mono text-sm"><strong className="text-white">Indie Labels:</strong> £99/month</p>
+                            <p className="text-gray-300 font-mono text-sm"><strong className="text-white">Major Labels:</strong> £25k-£75k annually (roster based)</p>
+                            <p className="text-gray-300 font-mono text-sm"><strong className="text-white">Payment:</strong> Monthly for paid tiers via Stripe</p>
                             <p className="text-green-400 font-mono text-sm font-bold mt-3">Cancel anytime. No contracts. No BS.</p>
                         </div>
                     </section>
