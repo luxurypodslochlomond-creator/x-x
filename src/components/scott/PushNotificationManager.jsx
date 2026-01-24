@@ -70,35 +70,38 @@ export default function PushNotificationManager({ onSubscriptionChange }) {
   };
 
   const initializePushNotifications = async () => {
+        let timeoutId = null;
         try {
             setIsLoading(true);
-            // Register service worker with timeout
             const swPath = import.meta.env.VITE_API_URL 
               ? `${import.meta.env.VITE_API_URL}/serveServiceWorker`
               : '/api/serveServiceWorker';
 
-            // Timeout after 3 seconds to prevent hanging
-            const timeoutPromise = new Promise((_, reject) => 
-              setTimeout(() => reject(new Error('Service worker registration timeout')), 3000)
-            );
+            // Timeout after 2 seconds - aggressive for mobile
+            const timeoutPromise = new Promise((_, reject) => {
+              timeoutId = setTimeout(() => reject(new Error('timeout')), 2000);
+            });
 
             const registration = await Promise.race([
               navigator.serviceWorker.register(swPath, { scope: '/' }),
               timeoutPromise
             ]);
+
+            clearTimeout(timeoutId);
             console.log('✓ Service Worker registered');
 
-            await navigator.serviceWorker.ready;
+            // Don't wait indefinitely for ready
+            await Promise.race([
+              navigator.serviceWorker.ready,
+              new Promise((_, reject) => setTimeout(() => reject(new Error('ready timeout')), 1000))
+            ]);
 
-            // Check current subscription
             const subscription = await registration.pushManager.getSubscription();
             setIsSubscribed(!!subscription);
-
             console.log('✓ Push notifications initialized');
           } catch (error) {
-            console.error('Push notification init error:', error);
-            // Don't block UI if service worker fails - button will still work
-            setIsLoading(false);
+            clearTimeout(timeoutId);
+            console.error('Push init:', error.message);
           } finally {
             setIsLoading(false);
           }
