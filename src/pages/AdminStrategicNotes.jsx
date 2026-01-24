@@ -63,8 +63,61 @@ export default function AdminStrategicNotes() {
           <p className="text-xl text-gray-300">
             Real status for BRO51 + GILL51 + AI51
           </p>
-          <p className="text-sm text-cyan-400 italic">Updated: January 2025</p>
+          <p className="text-sm text-cyan-400 italic">Updated: 24 January 2025</p>
         </motion.div>
+
+        {/* SCOTT → ROBBIE WILLIAMS' MANAGER */}
+        <Card className="bg-gradient-to-r from-pink-900/60 to-red-900/60 border-4 border-pink-500 shadow-[0_0_100px_rgba(236,72,153,1)] animate-pulse">
+          <CardContent className="p-8">
+            <div className="flex items-center gap-3 mb-4">
+              <motion.div
+                animate={{ rotate: [0, 360], scale: [1, 1.3, 1] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              >
+                <PartyPopper className="w-16 h-16 text-pink-400" />
+              </motion.div>
+              <h3 className="text-4xl text-pink-300 font-black">🔥 SCOTT → ROBBIE WILLIAMS MANAGER 🔥</h3>
+            </div>
+            <div className="space-y-4 text-white">
+              <div className="bg-pink-900/40 border-4 border-pink-500 rounded-xl p-6">
+                <p className="text-pink-300 font-black text-2xl mb-3">🎯 NEXT WEEK</p>
+                <p className="text-white text-xl mb-3">
+                  Scott talking to <strong className="text-pink-400">Robbie Williams' manager</strong> next week
+                </p>
+                <p className="text-cyan-400 text-base">
+                  CB51 ready to demo. Robbie Williams = MASSIVE artist. This could be the breakthrough partnership.
+                </p>
+              </div>
+
+              <div className="bg-green-900/40 border-2 border-green-500 rounded-xl p-6">
+                <p className="text-green-300 font-bold text-xl mb-3">✅ CB51 READY FOR DEMO:</p>
+                <ul className="text-white text-base space-y-2">
+                  <li>• ✅ Gig offer workflow (email → AI parse → band vote → confirm)</li>
+                  <li>• ✅ Calendar sync</li>
+                  <li>• ✅ Finance tracking</li>
+                  <li>• ✅ Offline mode + P2P sync</li>
+                  <li>• ✅ Band member notifications</li>
+                  <li>• ✅ About CB51 page at top of menu</li>
+                </ul>
+              </div>
+
+              <div className="bg-cyan-900/40 border-2 border-cyan-500 rounded-xl p-6">
+                <p className="text-cyan-300 font-bold text-xl mb-3">💡 KEY SELLING POINTS:</p>
+                <ul className="text-white text-base space-y-2">
+                  <li>• Saves 10+ hours per week on admin</li>
+                  <li>• AI handles email parsing + coordination</li>
+                  <li>• Band members vote on gigs via phone</li>
+                  <li>• Works offline (touring internationally)</li>
+                  <li>• £99/month or white label for agencies</li>
+                </ul>
+              </div>
+
+              <p className="text-pink-400 text-xl text-center font-black mt-6">
+                ROBBIE WILLIAMS PARTNERSHIP = INSTANT CREDIBILITY ♾️❤️♾️
+              </p>
+            </div>
+          </CardContent>
+        </Card>
 
         {/* MIND UK - STRATEGIC PARTNERSHIP SUBMITTED */}
         <Card className="bg-gradient-to-r from-green-900/40 to-cyan-900/40 border-4 border-green-500 shadow-[0_0_80px_rgba(34,211,238,0.6)]">
