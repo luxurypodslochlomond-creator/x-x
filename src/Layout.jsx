@@ -397,6 +397,7 @@ const LayoutInner = ({ children, currentPageName }) => {
 
   // CB51 ARTIST MANAGEMENT MENU
   const cb51Nav = [
+      { title: "About CB51", url: createPageUrl("CB51About"), icon: Radio, description: "Why we built this" },
       { title: "Dashboard", url: createPageUrl("CB51"), icon: Home, description: "Overview" },
       { title: "Artists", url: createPageUrl("ScottArtist"), icon: Users, description: "Manage roster" },
       { title: "Gig Offers", url: createPageUrl("ScottGigOffers"), icon: Music, description: "Incoming shows" },
@@ -532,16 +533,7 @@ const LayoutInner = ({ children, currentPageName }) => {
                     <div className={`lg:hidden fixed inset-0 ${isOffline ? 'top-[122px]' : 'top-[72px]'} bg-[#0a0f1a]/95 backdrop-blur-xl z-[50] overflow-y-auto pb-6`}>
                       <div className="p-3 pt-6 space-y-2 flex flex-col items-stretch">
                           {isCB51Page ? (
-                            <>
-                              <Link to={createPageUrl('CB51About')} className="flex items-center gap-3 p-3 border-2 border-white/10 hover:border-white/30 text-white mb-2">
-                                <Radio className="w-5 h-5 flex-shrink-0" />
-                                <div className="flex-1">
-                                  <span className="text-sm font-bold block">About CB51</span>
-                                  <span className="text-xs text-cyan-300 block mt-1">Why we built this</span>
-                                </div>
-                              </Link>
-                              <NavSection title="ARTIST MANAGEMENT" color="cyan" items={cb51Nav} isActivePage={isActivePage} isMobile defaultOpen={true} />
-                            </>
+                            <NavSection title="ARTIST MANAGEMENT" color="cyan" items={cb51Nav} isActivePage={isActivePage} isMobile defaultOpen={true} />
                           ) : (
                             <>
                               <NavSection title="HEAL" color="pink" items={healNav} isActivePage={isActivePage} isMobile defaultOpen={true} />
@@ -621,16 +613,7 @@ const LayoutInner = ({ children, currentPageName }) => {
 
           <div className="p-6 space-y-3">
             {isCB51Page ? (
-              <>
-                <Link to={createPageUrl('CB51About')} className="flex items-center gap-3 p-4 transition-all border-2 border-white/10 hover:border-white/30 text-white mb-2">
-                  <Radio className="w-6 h-6 flex-shrink-0" />
-                  <div className="flex-1">
-                    <span className="text-sm font-bold block">About CB51</span>
-                    <span className="text-xs text-cyan-300 block mt-1">Why we built this</span>
-                  </div>
-                </Link>
-                <NavSection title="ARTIST MANAGEMENT" color="cyan" items={cb51Nav} isActivePage={isActivePage} defaultOpen={true} />
-              </>
+              <NavSection title="ARTIST MANAGEMENT" color="cyan" items={cb51Nav} isActivePage={isActivePage} defaultOpen={true} />
             ) : (
               <>
                 <NavSection title="HEAL" color="pink" items={healNav} isActivePage={isActivePage} defaultOpen={true} />
