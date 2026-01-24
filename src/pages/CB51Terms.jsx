@@ -137,7 +137,7 @@ export default function CB51Terms() {
                         <h2 className="text-white font-black font-mono text-2xl mb-3">CONTACT</h2>
                         <div className="bg-black border border-gray-900 rounded-lg p-4">
                             <p className="text-gray-300 font-mono text-sm">Questions about terms?</p>
-                            <p className="text-cyan-400 font-mono text-sm mt-2">Email: legal@cb51.co.uk</p>
+                            <p className="text-cyan-400 font-mono text-sm mt-2">Email: family@uf51.love</p>
                         </div>
                     </section>
 

@@ -28,8 +28,8 @@ export default function CB51Support() {
                         <Mail className="w-8 h-8 text-cyan-400 mb-3" />
                         <h3 className="text-white font-black font-mono text-xl mb-2">EMAIL</h3>
                         <p className="text-gray-400 font-mono text-sm mb-3">Best for detailed questions</p>
-                        <a href="mailto:support@cb51.co.uk" className="text-cyan-400 font-mono text-sm hover:text-cyan-300">
-                            support@cb51.co.uk
+                        <a href="mailto:family@uf51.love" className="text-cyan-400 font-mono text-sm hover:text-cyan-300">
+                            family@uf51.love
                         </a>
                         <p className="text-gray-600 font-mono text-xs mt-2">Response: Within 24 hours</p>
                     </div>
@@ -120,7 +120,7 @@ export default function CB51Support() {
                             <p>• Email includes venue name</p>
                             <p>• Date is clear (not "next week")</p>
                             <p>• Fee is mentioned</p>
-                            <p>If still failing, email support@cb51.co.uk with the text</p>
+                            <p>If still failing, email family@uf51.love with the text</p>
                         </div>
                     </details>
 
@@ -131,7 +131,7 @@ export default function CB51Support() {
                             <p>• Custom domain (youragency.co.uk)</p>
                             <p>• Your branding</p>
                             <p>• Priority support</p>
-                            <p>Email: whitelabel@cb51.co.uk</p>
+                            <p>Email: family@uf51.love</p>
                         </div>
                     </details>
 
@@ -142,7 +142,7 @@ export default function CB51Support() {
                     <h3 className="text-white font-black font-mono text-xl mb-3">STILL STUCK?</h3>
                     <p className="text-gray-300 font-mono text-sm mb-4">We'll sort it. Promise.</p>
                     <a 
-                        href="mailto:support@cb51.co.uk"
+                        href="mailto:family@uf51.love"
                         className="inline-block bg-cyan-500 hover:bg-cyan-600 text-black font-black px-6 py-3 rounded-lg font-mono"
                     >
                         EMAIL SUPPORT
