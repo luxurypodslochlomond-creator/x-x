@@ -462,14 +462,15 @@ export default function Chakra51Protocol() {
       <div className="max-w-2xl mx-auto mt-6">
         <details className="bg-black border-2 border-pink-500/50 p-4">
           <summary className="text-pink-400 font-black font-mono text-sm cursor-pointer mb-2">
-            ⚡ DENO'S SCIATICA EMERGENCY →
+            ⚡ SCIATICA EMERGENCY PROTOCOL →
           </summary>
           <div className="text-xs text-gray-300 font-mono space-y-1 mt-3">
-            <p>1. Root Chakra 🔴 + Power Mode + headphones</p>
-            <p>2. Lie flat, knees bent, breathe deep</p>
+            <p>1. Root Chakra + Power Mode + headphones</p>
+            <p>2. Lie flat, knees bent, breathe deep into lower back</p>
             <p>3. 20 mins × 3 today (every 4-6 hours)</p>
-            <p>4. Eat: beets, peppers, eggs, ginger tea</p>
-            <p className="text-pink-400 font-bold mt-2">Relief in 6-8 hours ♾️❤️</p>
+            <p>4. Eat: beets, peppers, protein, ginger tea</p>
+            <p className="text-pink-400 font-bold mt-2">396Hz + 174Hz + 432Hz = sciatic nerve direct hit</p>
+            <p className="text-gray-500 mt-2">Most feel 30-50% better in 6-8 hours. Everyone different. Physics is real. ♾️❤️</p>
           </div>
         </details>
       </div>
