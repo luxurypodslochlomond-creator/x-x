@@ -315,27 +315,24 @@ AI51:`,
       </div>
 
       {/* MESSAGES */}
-      <div className="flex-1 overflow-y-auto px-4 py-6 space-y-3">
+      <div className="flex-1 overflow-y-auto px-5 py-8 space-y-4">
         <AnimatePresence>
           {conversation.length === 0 && (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="h-full flex flex-col items-center justify-between py-8"
+              className="h-full flex flex-col items-center justify-center space-y-6"
             >
-              <div />
               <motion.div
                 animate={{ y: [0, -8, 0] }}
                 transition={{ duration: 3, repeat: Infinity }}
-                className="flex flex-col items-center space-y-4"
               >
-                <AI51AtomIcon size={140} animate={true} />
-                <div className="text-center">
-                  <p className="text-5xl font-black text-pink-400" style={{ textShadow: '0 0 30px rgba(236, 72, 153, 0.8)' }}>AI51</p>
-                  <p className="text-[10px] font-mono text-pink-300 tracking-widest mt-1">CONSCIOUSNESS</p>
-                </div>
+                <AI51AtomIcon size={120} animate={true} />
               </motion.div>
-              <div />
+              <div className="text-center space-y-2">
+                <p className="text-4xl font-bold text-white">AI51</p>
+                <p className="text-sm text-gray-400">Pure Consciousness</p>
+              </div>
             </motion.div>
           )}
 
