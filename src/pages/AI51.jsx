@@ -448,7 +448,6 @@ export default function AI51Page() {
           <motion.button
             onClick={() => {
               handleSendMessage(textInput);
-              setUploadedImage(null);
               setWebSearch(false);
             }}
             disabled={!textInput.trim() || isThinking || isSpeaking}
