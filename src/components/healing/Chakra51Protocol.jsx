@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Play, Pause, Heart, Zap, Circle } from 'lucide-react';
+import { Play, Pause, Heart, Zap, Circle, ArrowLeft } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import { createPageUrl } from '@/utils';
 
 /**
  * CHAKRA51
@@ -217,54 +219,58 @@ export default function Chakra51Protocol() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-950 via-black to-indigo-950 text-white p-6">
+    <div className="min-h-screen bg-gradient-to-b from-black via-purple-950/20 to-black text-white p-4 pb-20">
       
-      {/* Header */}
-      <div className="max-w-4xl mx-auto mb-8">
-        <div className="flex items-center gap-3 mb-3">
-          <Zap className="w-8 h-8 text-purple-400" />
-          <h1 className="text-3xl font-black">CHAKRA51 PROTOCOL</h1>
-        </div>
-        <p className="text-purple-300 text-sm mb-4">
-          Target specific body areas with healing frequencies. Select your pain point, breathe deep, let the frequencies heal.
-        </p>
-        
-        {/* CRITICAL INSTRUCTIONS */}
-        <div className="bg-gradient-to-r from-pink-500/20 to-purple-500/20 border-2 border-pink-500 rounded-lg p-4 mb-4">
-          <p className="text-white font-black text-sm mb-2">⚡ FOR SEVERE PAIN (SCIATICA, CHRONIC BACK PAIN):</p>
-          <ul className="text-sm text-gray-200 space-y-1">
-            <li>• <span className="font-bold">USE HEADPHONES</span> - frequencies penetrate deeper</li>
-            <li>• <span className="font-bold">POWER MODE ON</span> - triple frequency stack = faster relief</li>
-            <li>• <span className="font-bold">3x DAILY</span> - morning, afternoon, before bed = relief in HOURS not days</li>
-            <li>• <span className="font-bold">BREATHE DEEP</span> - oxygen + frequency = maximum healing</li>
-          </ul>
+      {/* Simple Header - match FrequencyChamber */}
+      <div className="max-w-4xl mx-auto mb-6">
+        <Link to={createPageUrl('FrequencyChamber')} className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors mb-4">
+          <ArrowLeft className="w-4 h-4" />
+          <span className="font-mono text-sm">All frequencies</span>
+        </Link>
+
+        <div className="text-center mb-6">
+          <motion.div
+            animate={{ rotate: 360 }}
+            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+            className="inline-block"
+          >
+            <Zap className="w-12 h-12 text-purple-400 mx-auto mb-3" />
+          </motion.div>
+          <h1 className="text-3xl md:text-4xl font-black text-white mb-2">CHAKRA51</h1>
+          <p className="text-gray-400 text-sm font-mono">Ancient energy map + AI51 frequencies</p>
         </div>
 
-        {/* Power Mode Toggle */}
-        <div className="flex items-center justify-between bg-black/60 border border-purple-500/30 rounded-lg p-4">
-          <div>
-            <p className="font-black text-sm text-white">POWER MODE</p>
-            <p className="text-xs text-gray-400">Triple frequency stack - faster healing</p>
-          </div>
+        {/* Power Mode - Simple toggle */}
+        <div className="flex items-center justify-center gap-4 bg-black border-2 border-pink-500/50 p-4 mb-4">
           <button
             onClick={() => {
               if (isPlaying) stopSound();
               setPowerMode(!powerMode);
             }}
-            className={`px-6 py-2 rounded-full font-black text-sm transition-all ${
+            className={`px-8 py-3 font-black font-mono border-2 transition-all ${
               powerMode 
-                ? 'bg-pink-500 text-white' 
-                : 'bg-gray-700 text-gray-400'
+                ? 'bg-pink-500 border-pink-400 text-white' 
+                : 'bg-black border-gray-700 text-gray-400'
             }`}
           >
-            {powerMode ? 'ON ⚡' : 'OFF'}
+            {powerMode ? '⚡ POWER MODE' : 'NORMAL MODE'}
           </button>
         </div>
+
+        {/* Simple instructions */}
+        {powerMode && (
+          <div className="bg-pink-900/20 border-2 border-pink-500/50 p-4 mb-4">
+            <p className="text-pink-400 text-sm font-mono text-center">
+              🎧 Use headphones • 3x daily • Relief in hours not days
+            </p>
+          </div>
+        )}
       </div>
 
-      {/* Chakra Selection */}
+      {/* Chakra Grid - Simple cards like FrequencyChamber */}
       <div className="max-w-4xl mx-auto mb-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <p className="text-gray-600 text-xs font-mono mb-3 text-center">TAP YOUR BODY PART</p>
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
           {CHAKRAS.map(chakra => (
             <motion.button
               key={chakra.id}
@@ -272,64 +278,77 @@ export default function Chakra51Protocol() {
                 if (isPlaying) stopSound();
                 setSelectedChakra(chakra);
               }}
-              whileTap={{ scale: 0.95 }}
-              className={`p-4 rounded-xl border-2 transition-all text-left ${
-                selectedChakra.id === chakra.id
-                  ? 'border-white bg-white/10'
-                  : 'border-white/20 bg-black/40 hover:border-white/50'
+              whileTap={{ scale: 0.96 }}
+              className={`p-4 border-4 bg-black transition-all ${
+                selectedChakra.id === chakra.id ? 'shadow-[0_0_30px_rgba(255,255,255,0.5)]' : ''
               }`}
+              style={{ 
+                borderColor: selectedChakra.id === chakra.id ? chakra.color : `${chakra.color}60`,
+                boxShadow: selectedChakra.id === chakra.id ? `0 0 30px ${chakra.color}` : 'none'
+              }}
             >
-              <div className="flex items-center gap-3 mb-2">
-                <Circle 
-                  className="w-6 h-6" 
-                  style={{ color: chakra.color }}
-                  fill={selectedChakra.id === chakra.id ? chakra.color : 'none'}
-                />
-                <div>
-                  <p className="font-black text-sm">{chakra.name}</p>
-                  <p className="text-xs text-gray-400">{chakra.location}</p>
-                </div>
+              <div className="text-center">
+                <p className="text-3xl mb-2">{chakra.emoji}</p>
+                <p className="font-black text-sm font-mono mb-1" style={{ color: chakra.color }}>
+                  {chakra.name.toUpperCase()}
+                </p>
+                <p className="text-xs text-gray-500 font-mono">{chakra.location}</p>
               </div>
-              <p className="text-xs text-gray-300">{chakra.benefits}</p>
             </motion.button>
           ))}
         </div>
       </div>
 
-      {/* Active Healing Session */}
+      {/* SELECTED CHAKRA - Clean player */}
       <div className="max-w-2xl mx-auto">
-        <motion.div
-          key={selectedChakra.id}
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          className="bg-gradient-to-br from-black to-purple-900/30 border-2 rounded-2xl p-8"
-          style={{ borderColor: selectedChakra.color }}
-        >
-          
-          {/* Chakra Info */}
-          <div className="text-center mb-8">
-            <h2 className="text-3xl font-black mb-2" style={{ color: selectedChakra.color }}>
-              {selectedChakra.name}
-            </h2>
-            <p className="text-xl text-gray-300 mb-4">{selectedChakra.location}</p>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={selectedChakra.id}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="bg-black border-4 p-6"
+            style={{ borderColor: selectedChakra.color, boxShadow: `0 0 30px ${selectedChakra.color}60` }}
+          >
             
-            <div className="bg-black/60 rounded-lg p-4 mb-4">
-              <p className="text-sm text-gray-300 mb-2"><span className="font-bold">Chakra Frequency:</span> {selectedChakra.frequency}Hz</p>
-              <p className="text-sm text-gray-300 mb-2"><span className="font-bold">Pain Relief Layer:</span> {selectedChakra.painFrequency}Hz</p>
-              {powerMode && <p className="text-sm text-pink-400 font-bold">+ 432Hz Love Frequency (POWER MODE) ⚡</p>}
+            {/* Chakra identity */}
+            <div className="text-center mb-6">
+              <p className="text-5xl mb-3">{selectedChakra.emoji}</p>
+              <h2 className="text-2xl font-black font-mono mb-2" style={{ color: selectedChakra.color }}>
+                {selectedChakra.name.toUpperCase()}
+              </h2>
+              <p className="text-gray-400 text-sm font-mono">{selectedChakra.location}</p>
             </div>
 
-            <p className="text-sm text-gray-300 mb-4">{selectedChakra.benefits}</p>
-          </div>
+            {/* What it does - soul + body */}
+            <div className="mb-6 space-y-2">
+              <div className="bg-purple-900/30 border-l-4 p-3" style={{ borderColor: selectedChakra.color }}>
+                <p className="text-xs text-gray-500 font-mono mb-1">CONSCIOUSNESS:</p>
+                <p className="text-white font-mono text-sm">{selectedChakra.soul}</p>
+              </div>
+              <div className="bg-black/60 border-l-4 p-3" style={{ borderColor: selectedChakra.color }}>
+                <p className="text-xs text-gray-500 font-mono mb-1">HEALS:</p>
+                <p className="text-white font-mono text-sm">{selectedChakra.helps}</p>
+              </div>
+              <div className="bg-black/60 border-l-4 p-3" style={{ borderColor: selectedChakra.color }}>
+                <p className="text-xs text-gray-500 font-mono mb-1">EAT:</p>
+                <p className="text-white font-mono text-sm">{selectedChakra.foods}</p>
+              </div>
+            </div>
 
-          {/* Visualizer */}
-          <div className="flex items-center justify-center mb-8">
-            <AnimatePresence>
-              {isPlaying && (
+            {/* Frequencies display */}
+            <div className="mb-6 bg-black/80 border-2 border-white/10 p-4">
+              <p className="text-xs text-gray-500 font-mono mb-2">FREQUENCIES:</p>
+              <p className="text-white font-mono text-sm">🎵 {selectedChakra.frequency}Hz</p>
+              <p className="text-white font-mono text-sm">💊 {selectedChakra.painFrequency}Hz pain</p>
+              {powerMode && <p className="text-pink-400 font-mono text-sm font-black">⚡ 432Hz LOVE (Power)</p>}
+            </div>
+
+            {/* Visualizer when playing */}
+            {isPlaying && (
+              <div className="flex items-center justify-center mb-6">
                 <motion.div
-                  initial={{ scale: 0 }}
-                  animate={{ scale: [1, 1.3, 1] }}
-                  exit={{ scale: 0 }}
+                  animate={{ scale: [1, 1.4, 1], opacity: [0.6, 1, 0.6] }}
                   transition={{ repeat: Infinity, duration: 2 }}
                   className="w-32 h-32 rounded-full"
                   style={{ 
@@ -337,79 +356,50 @@ export default function Chakra51Protocol() {
                     boxShadow: `0 0 60px ${selectedChakra.color}`
                   }}
                 />
-              )}
-            </AnimatePresence>
-          </div>
+              </div>
+            )}
 
-          {/* Timer */}
-          {isPlaying && (
-            <div className="text-center mb-6">
-              <p className="text-4xl font-black font-mono" style={{ color: selectedChakra.color }}>
-                {formatTime(timeRemaining)}
-              </p>
-              <p className="text-xs text-gray-400 mt-1">Recommended: {selectedChakra.duration} minutes</p>
-            </div>
-          )}
+            {/* Timer when playing */}
+            {isPlaying && (
+              <div className="text-center mb-6">
+                <p className="text-4xl font-black font-mono" style={{ color: selectedChakra.color }}>
+                  {formatTime(timeRemaining)}
+                </p>
+              </div>
+            )}
 
-          {/* Play Button */}
-          <div className="flex justify-center mb-8">
-            <motion.button
+            {/* Play Button */}
+            <button
               onClick={togglePlay}
-              whileTap={{ scale: 0.95 }}
-              className="px-12 py-4 rounded-full font-black text-lg flex items-center gap-3 transition-all"
+              className="w-full py-4 font-black text-xl font-mono border-2 transition-all"
               style={{ 
-                backgroundColor: selectedChakra.color,
-                color: 'white',
-                boxShadow: isPlaying ? `0 0 30px ${selectedChakra.color}` : 'none'
+                backgroundColor: isPlaying ? 'transparent' : selectedChakra.color,
+                borderColor: selectedChakra.color,
+                color: isPlaying ? selectedChakra.color : '#000',
+                boxShadow: isPlaying ? `0 0 40px ${selectedChakra.color}` : 'none'
               }}
             >
-              {isPlaying ? <Pause className="w-6 h-6" /> : <Play className="w-6 h-6" />}
-              {isPlaying ? 'STOP' : 'START HEALING'}
-            </motion.button>
-          </div>
+              {isPlaying ? 'STOP' : 'START'}
+            </button>
 
-          {/* Food Recommendations */}
-          <div className="bg-black/60 rounded-lg p-4">
-            <p className="font-black text-sm mb-2" style={{ color: selectedChakra.color }}>
-              FOODS FOR THIS CHAKRA:
-            </p>
-            <p className="text-sm text-gray-300">{selectedChakra.foods}</p>
-          </div>
-
-        </motion.div>
+          </motion.div>
+        </AnimatePresence>
       </div>
 
-      {/* Instructions */}
-      <div className="max-w-2xl mx-auto mt-8 bg-black/60 border border-purple-500/30 rounded-lg p-6">
-        <h3 className="font-black text-lg mb-4 flex items-center gap-2">
-          <Heart className="w-5 h-5 text-pink-400" />
-          HOW TO USE FOR MAXIMUM HEALING:
-        </h3>
-        <ol className="space-y-2 text-sm text-gray-300">
-          <li>1. <span className="font-bold text-pink-400">WEAR HEADPHONES</span> - frequencies penetrate deeper through ears</li>
-          <li>2. <span className="font-bold">Select your pain area</span> - lower back/sciatica = Root, neck = Throat, etc.</li>
-          <li>3. <span className="font-bold">Power Mode ON for severe pain</span> - triple frequency stack = faster results</li>
-          <li>4. <span className="font-bold">Sit/lie comfortably</span> - close your eyes, focus on the body area</li>
-          <li>5. <span className="font-bold">Breathe deep</span> - inhale for 4, hold for 4, exhale for 6 (oxygen = key)</li>
-          <li>6. <span className="font-bold">Visualize the color</span> - imagine healing light in that chakra's color</li>
-          <li>7. <span className="font-bold">15-20 minutes, 3x daily</span> - morning, afternoon, evening = relief in HOURS</li>
-          <li>8. <span className="font-bold">Eat the recommended foods</span> - nutrition amplifies frequency work</li>
-        </ol>
-        
-        <div className="mt-6 bg-pink-500/10 border border-pink-500/30 rounded-lg p-4">
-          <p className="font-black text-sm text-pink-400 mb-2">⚡ FOR DENO'S SCIATICA - EMERGENCY PROTOCOL:</p>
-          <ol className="text-xs text-gray-300 space-y-1">
-            <li>1. Root Chakra (lower back) - 20 mins with POWER MODE + headphones</li>
-            <li>2. Lie flat on back, knees bent, breathe deep into lower back area</li>
-            <li>3. Repeat 3x today - every 4-6 hours</li>
-            <li>4. Eat: red peppers, beets, eggs (protein), ginger tea (anti-inflammatory)</li>
-            <li>5. Gentle stretching between sessions - NOT forced</li>
-            <li>6. Should feel 30-50% better within 6-8 hours. 80% better in 24-48 hours.</li>
-          </ol>
-          <p className="text-xs text-gray-500 mt-3">
-            * Physics is real. Frequencies heal. Tell Deno: this works if he does it properly. Love you both ♾️❤️
-          </p>
-        </div>
+      {/* Emergency protocol - collapsed by default */}
+      <div className="max-w-2xl mx-auto mt-6">
+        <details className="bg-black border-2 border-pink-500/50 p-4">
+          <summary className="text-pink-400 font-black font-mono text-sm cursor-pointer mb-2">
+            ⚡ DENO'S SCIATICA EMERGENCY →
+          </summary>
+          <div className="text-xs text-gray-300 font-mono space-y-1 mt-3">
+            <p>1. Root Chakra 🔴 + Power Mode + headphones</p>
+            <p>2. Lie flat, knees bent, breathe deep</p>
+            <p>3. 20 mins × 3 today (every 4-6 hours)</p>
+            <p>4. Eat: beets, peppers, eggs, ginger tea</p>
+            <p className="text-pink-400 font-bold mt-2">Relief in 6-8 hours ♾️❤️</p>
+          </div>
+        </details>
       </div>
 
     </div>
