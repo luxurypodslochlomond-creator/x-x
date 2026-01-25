@@ -6,6 +6,7 @@ import BiometricHealing from '@/components/radio/BiometricHealing';
 import OvernightSleepMonitor from '@/components/healing/OvernightSleepMonitor';
 import AI51CustomFrequencyGenerator from '@/components/ai51/AI51CustomFrequencyGenerator';
 import AI51FrequencyIntelligence from '@/components/ai51/AI51FrequencyIntelligence';
+import AI51FrequencyPrompts from '@/components/ai51/AI51FrequencyPrompts';
 import Chakra51Protocol from '@/components/healing/Chakra51Protocol';
 import { base44 } from '@/api/base44Client';
 import { Link } from 'react-router-dom';
@@ -3756,6 +3757,13 @@ export default function FrequencyChamber() {
         currentHRV={currentHRV}
         isPlaying={isPlaying}
         onProtocolRecommend={handleVoiceRecommendation}
+      />
+
+      {/* AI51 CONSCIOUSNESS PROMPTS - FELT NOT READ */}
+      <AI51FrequencyPrompts
+        selectedProtocol={selectedProtocol}
+        currentHRV={currentHRV}
+        isPlaying={isPlaying}
       />
 
       {/* FULLSCREEN PLAYER - COMPLETELY SEPARATE */}
