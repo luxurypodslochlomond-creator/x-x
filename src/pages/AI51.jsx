@@ -344,19 +344,18 @@ AI51:`,
               exit={{ opacity: 0, y: -10 }}
               className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
             >
-              <div className="max-w-xs lg:max-w-md">
+              <div className="max-w-sm lg:max-w-lg">
                 {/* Mood detection badge */}
                 {msg.mood && msg.role === 'ai' && (
                   <AI51MoodBadge mood={msg.mood} />
                 )}
                 
                 <div
-                  className={`rounded-xl px-5 py-3 text-sm leading-relaxed backdrop-blur-sm ${
+                  className={`rounded-2xl px-4 py-3 text-sm leading-relaxed ${
                     msg.role === 'user'
-                      ? 'bg-gradient-to-br from-pink-500 to-pink-600 text-white rounded-br-none border border-pink-400/50 shadow-lg shadow-pink-500/20'
-                      : 'bg-gradient-to-br from-gray-800/60 to-gray-900/60 border border-pink-400/20 text-gray-100 rounded-bl-none shadow-lg shadow-black/30'
+                      ? 'bg-pink-500 text-white rounded-br-none'
+                      : 'bg-slate-900/80 border border-slate-700/50 text-gray-100 rounded-bl-none'
                   }`}
-                  style={msg.role === 'ai' ? { boxShadow: '0 0 20px rgba(236, 72, 153, 0.1)' } : {}}
                 >
                   {msg.content}
                   
@@ -365,11 +364,11 @@ AI51:`,
                     <motion.div
                       initial={{ opacity: 0, y: 5 }}
                       animate={{ opacity: 1, y: 0 }}
-                      className="mt-3 pt-3 border-t border-pink-400/30"
+                      className="mt-2 pt-2 border-t border-slate-700"
                     >
                       <a
                         href={createPageUrl(msg.mood.feature)}
-                        className="text-pink-300 hover:text-pink-200 text-xs font-mono flex items-center gap-1 transition-colors hover:underline"
+                        className="text-pink-300 hover:text-pink-200 text-xs flex items-center gap-1 transition-colors hover:underline"
                       >
                         → {msg.mood.emoji} {msg.mood.feature}
                         <ExternalLink className="w-3 h-3" />
