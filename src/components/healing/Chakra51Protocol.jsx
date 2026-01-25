@@ -416,16 +416,60 @@ export default function Chakra51Protocol() {
               {powerMode && <p className="text-pink-400 font-mono text-sm font-black">432Hz LOVE (Power)</p>}
             </div>
 
-            {/* Visualizer when playing */}
+            {/* Enhanced Visualizer - Frequency Entrainment */}
             {isPlaying && (
-              <div className="flex items-center justify-center mb-6">
+              <div className="flex items-center justify-center mb-6 relative h-48">
+                {/* Center chakra pulse */}
                 <motion.div
-                  animate={{ scale: [1, 1.4, 1], opacity: [0.6, 1, 0.6] }}
+                  animate={{ scale: [1, 1.3, 1], opacity: [0.8, 1, 0.8] }}
                   transition={{ repeat: Infinity, duration: 2 }}
-                  className="w-32 h-32 rounded-full"
+                  className="absolute w-20 h-20 rounded-full"
                   style={{ 
                     background: `radial-gradient(circle, ${selectedChakra.color}, transparent)`,
-                    boxShadow: `0 0 60px ${selectedChakra.color}`
+                    boxShadow: `0 0 40px ${selectedChakra.color}`
+                  }}
+                />
+                
+                {/* Main frequency ring */}
+                <motion.div
+                  animate={{ rotate: 360 }}
+                  transition={{ repeat: Infinity, duration: selectedChakra.frequency / 100, ease: "linear" }}
+                  className="absolute w-32 h-32 rounded-full border-4"
+                  style={{ 
+                    borderColor: selectedChakra.color,
+                    opacity: 0.6
+                  }}
+                />
+                
+                {/* Pain frequency ring (counter-rotating) */}
+                <motion.div
+                  animate={{ rotate: -360 }}
+                  transition={{ repeat: Infinity, duration: selectedChakra.painFrequency / 100, ease: "linear" }}
+                  className="absolute w-44 h-44 rounded-full border-2"
+                  style={{ 
+                    borderColor: selectedChakra.color,
+                    opacity: 0.4
+                  }}
+                />
+                
+                {/* Power mode - 432Hz love ring */}
+                {powerMode && (
+                  <motion.div
+                    animate={{ rotate: 360, scale: [1, 1.1, 1] }}
+                    transition={{ repeat: Infinity, duration: 4.32, ease: "linear" }}
+                    className="absolute w-56 h-56 rounded-full border-2 border-pink-400"
+                    style={{ opacity: 0.5 }}
+                  />
+                )}
+                
+                {/* Outer energy field */}
+                <motion.div
+                  animate={{ scale: [1, 1.2, 1], opacity: [0.2, 0.4, 0.2] }}
+                  transition={{ repeat: Infinity, duration: 3 }}
+                  className="absolute w-64 h-64 rounded-full"
+                  style={{ 
+                    background: `radial-gradient(circle, transparent 50%, ${selectedChakra.color}20)`,
+                    boxShadow: `0 0 80px ${selectedChakra.color}40`
                   }}
                 />
               </div>
@@ -470,7 +514,7 @@ export default function Chakra51Protocol() {
             <p>3. 20 mins × 3 today (every 4-6 hours)</p>
             <p>4. Eat: beets, peppers, protein, ginger tea</p>
             <p className="text-pink-400 font-bold mt-2">396Hz + 174Hz + 432Hz = sciatic nerve direct hit</p>
-            <p className="text-gray-500 mt-2">Most feel 30-50% better in 6-8 hours. Everyone different. Physics is real. ♾️❤️</p>
+            <p className="text-gray-500 mt-2">Most feel 30-50% better in 6-8 hours. Everyone different. Physics is real.</p>
           </div>
         </details>
       </div>
