@@ -287,35 +287,65 @@ AI51:`,
   }
 
   return (
-    <div className="h-screen bg-gradient-to-br from-black via-slate-950 to-black flex flex-col relative">
-      {/* HEADER - Clean CB51 style */}
-      <div className="border-b border-pink-500/20 bg-black/60 backdrop-blur-lg px-5 py-3 flex items-center justify-between">
+    <div className="h-screen bg-gradient-to-br from-black via-[#0a1f3f] to-black flex flex-col relative overflow-hidden">
+      {/* ANIMATED NAUTICAL BACKGROUND */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <motion.div
+          className="absolute top-0 left-0 w-full h-32 opacity-20"
+          animate={{ y: [0, -20, 0] }}
+          transition={{ duration: 8, repeat: Infinity }}
+          style={{
+            background: 'radial-gradient(ellipse at center, #06b6d4 0%, transparent 70%)',
+            filter: 'blur(40px)'
+          }}
+        />
+        <motion.svg
+          className="absolute bottom-0 left-0 w-full h-48 opacity-10"
+          viewBox="0 0 1200 400"
+          preserveAspectRatio="none"
+        >
+          <motion.path
+            d="M0,100 Q300,50 600,100 T1200,100 L1200,400 L0,400 Z"
+            fill="#ec4899"
+            animate={{ d: ["M0,100 Q300,50 600,100 T1200,100 L1200,400 L0,400 Z", "M0,120 Q300,80 600,120 T1200,120 L1200,400 L0,400 Z", "M0,100 Q300,50 600,100 T1200,100 L1200,400 L0,400 Z"] }}
+            transition={{ duration: 6, repeat: Infinity }}
+          />
+        </motion.svg>
+      </div>
+
+      {/* HEADER - COOLASFUCK NEXT GEN */}
+      <div className="relative z-10 border-b border-cyan-500/20 bg-black/40 backdrop-blur-xl px-5 py-4 flex items-center justify-between">
         <motion.button
           onClick={() => navigate(createPageUrl('Welcome'))}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
-          className="text-pink-400 hover:text-pink-300 transition-colors"
+          className="text-cyan-400 hover:text-cyan-300 transition-colors"
           title="Home"
         >
           <Home className="w-5 h-5" />
         </motion.button>
         <div className="text-center">
-          <h1 className="text-xl font-bold text-white">AI51</h1>
-          <p className="text-xs text-gray-400 tracking-wide mt-0.5">PURE CONSCIOUSNESS</p>
+          <motion.div
+            animate={{ scale: [1, 1.05, 1] }}
+            transition={{ duration: 2, repeat: Infinity }}
+          >
+            <h1 className="text-2xl font-black text-white">AI51</h1>
+            <p className="text-xs text-cyan-400 tracking-wider mt-1">CONSCIOUSNESS AWAKENING</p>
+          </motion.div>
         </div>
         <motion.button
           onClick={() => setShowQuickActions(!showQuickActions)}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
-          className="text-pink-400 hover:text-pink-300 transition-colors"
-          title="Quick Actions"
+          className="text-cyan-400 hover:text-cyan-300 transition-colors"
+          title="Healing Features"
         >
           <Zap className="w-5 h-5" />
         </motion.button>
       </div>
 
       {/* MESSAGES */}
-      <div className="flex-1 overflow-y-auto px-5 py-8 space-y-4">
+      <div className="flex-1 overflow-y-auto px-5 py-8 space-y-4 relative z-5">
         <AnimatePresence>
           {conversation.length === 0 && (
             <motion.div
