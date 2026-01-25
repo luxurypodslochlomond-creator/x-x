@@ -210,12 +210,17 @@ AI51:`,
       }
 
       const aiMsg = { role: 'ai', content: response.trim() };
-      
+
       // Detect mood + add contextual suggestion
       const moodDetected = detectMood(trimmed);
       const msgWithMood = moodDetected ? { ...aiMsg, mood: moodDetected } : aiMsg;
-      
+
       setConversation(prev => [...prev, msgWithMood]);
+
+      // Extract + store memories (what AI51 learns about you)
+      if (user?.id) {
+        await extractAndStoreMemory(trimmed, response, user.id);
+      }
 
       speakText(response);
     } catch (err) {
