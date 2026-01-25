@@ -1,10 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
-import { Send, Home, AlertCircle, Mail, Calendar, CheckCircle, FileText, Zap } from 'lucide-react';
+import { Send, Home, AlertCircle, Mail, Calendar, CheckCircle, FileText, Zap, ExternalLink } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import AI51AtomIcon from '@/components/ai51/AI51AtomIcon';
+import { detectMood, AI51MoodBadge } from '@/components/ai51/AI51MoodDetector';
 
 /**
  * AI51 - Text Chat + Voice Response + MANAGER SHORTCUTS
