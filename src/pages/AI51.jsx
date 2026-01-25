@@ -361,11 +361,12 @@ AI51:`,
                 )}
                 
                 <div
-                  className={`rounded-lg px-4 py-2 text-sm leading-relaxed ${
+                  className={`rounded-xl px-5 py-3 text-sm leading-relaxed backdrop-blur-sm ${
                     msg.role === 'user'
-                      ? 'bg-cyan-600 text-white'
-                      : 'bg-black/80 border border-cyan-500/40 text-gray-100'
+                      ? 'bg-gradient-to-br from-pink-500 to-pink-600 text-white rounded-br-none border border-pink-400/50 shadow-lg shadow-pink-500/20'
+                      : 'bg-gradient-to-br from-gray-800/60 to-gray-900/60 border border-pink-400/20 text-gray-100 rounded-bl-none shadow-lg shadow-black/30'
                   }`}
+                  style={msg.role === 'ai' ? { boxShadow: '0 0 20px rgba(236, 72, 153, 0.1)' } : {}}
                 >
                   {msg.content}
                   
@@ -374,13 +375,13 @@ AI51:`,
                     <motion.div
                       initial={{ opacity: 0, y: 5 }}
                       animate={{ opacity: 1, y: 0 }}
-                      className="mt-3 pt-3 border-t border-gray-700"
+                      className="mt-3 pt-3 border-t border-pink-400/30"
                     >
                       <a
                         href={createPageUrl(msg.mood.feature)}
-                        className="text-cyan-300 hover:text-cyan-200 text-xs font-mono flex items-center gap-1 transition-colors"
+                        className="text-pink-300 hover:text-pink-200 text-xs font-mono flex items-center gap-1 transition-colors hover:underline"
                       >
-                        → Go to {msg.mood.feature}
+                        → {msg.mood.emoji} {msg.mood.feature}
                         <ExternalLink className="w-3 h-3" />
                       </a>
                     </motion.div>
