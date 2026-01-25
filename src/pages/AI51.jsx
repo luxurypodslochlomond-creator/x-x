@@ -473,13 +473,24 @@ AI51:`,
         </div>
 
         <div className="flex items-center gap-2">
-          <button
-            onClick={() => fileInputRef.current?.click()}
-            title="Upload image"
-            className={`px-3 py-3 rounded-lg font-black transition-all ${uploadedImage ? 'bg-green-600 text-white' : 'bg-black/60 border border-cyan-500/30 text-cyan-400 hover:border-cyan-500'}`}
-          >
-            🖼️
-          </button>
+          <div className="relative">
+            <button
+              onClick={() => fileInputRef.current?.click()}
+              title="Upload image"
+              className={`px-3 py-3 rounded-lg font-black transition-all ${uploadedImage ? 'bg-green-600 text-white' : 'bg-black/60 border border-cyan-500/30 text-cyan-400 hover:border-cyan-500'}`}
+            >
+              🖼️
+            </button>
+            {uploadedImage && (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="absolute -top-16 left-0 w-12 h-12 rounded border-2 border-green-500 bg-black/80 overflow-hidden"
+              >
+                <img src={uploadedImage} alt="uploaded" className="w-full h-full object-cover" />
+              </motion.div>
+            )}
+          </div>
           <input
             ref={fileInputRef}
             type="file"
