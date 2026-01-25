@@ -3,87 +3,102 @@ import { Play, Pause, Heart, Zap, Circle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 /**
- * CHAKRA51 PROTOCOL
- * Target specific body areas with healing frequencies
- * For pain relief, emotional healing, physical recovery
+ * CHAKRA51
+ * Ancient energy centers - your body's consciousness map
+ * Not woo woo - physics + 5000 years of human knowledge
+ * Pain relief + remembering who you are
  */
 
 const CHAKRAS = [
   {
     id: 'root',
-    name: 'Root Chakra',
-    location: 'Lower Back / Base of Spine',
+    name: 'Root',
+    emoji: '🔴',
+    location: 'Lower Back',
     frequency: 396,
-    painFrequency: 174, // Add pain relief layer
+    painFrequency: 174,
     color: '#DC2626',
-    benefits: 'Lower back pain, leg pain, survival anxiety, grounding',
-    foods: 'Red foods: beets, tomatoes, red peppers. Protein: eggs, meat, beans',
+    soul: 'Safety, survival, who you are physically',
+    helps: 'Back pain, sciatica, feeling lost',
+    foods: 'Red: beets, peppers, protein',
     duration: 15
   },
   {
     id: 'sacral',
-    name: 'Sacral Chakra',
-    location: 'Lower Abdomen / Hips',
+    name: 'Sacral',
+    emoji: '🟠',
+    location: 'Lower Belly',
     frequency: 417,
     painFrequency: 174,
     color: '#EA580C',
-    benefits: 'Hip pain, reproductive health, creativity blocks, emotional flow',
-    foods: 'Orange foods: oranges, carrots, sweet potatoes. Healthy fats: nuts, seeds',
+    soul: 'Creativity, pleasure, emotional flow',
+    helps: 'Hip pain, creative blocks, shame',
+    foods: 'Orange: carrots, oranges, nuts',
     duration: 15
   },
   {
     id: 'solar',
     name: 'Solar Plexus',
-    location: 'Upper Abdomen / Stomach',
+    emoji: '🟡',
+    location: 'Stomach',
     frequency: 528,
-    painFrequency: 285, // Quantum healing
+    painFrequency: 285,
     color: '#EAB308',
-    benefits: 'Stomach pain, digestive issues, confidence, personal power',
-    foods: 'Yellow foods: bananas, corn, pineapple. Ginger, turmeric (anti-inflammatory)',
+    soul: 'Power, confidence, who you choose to be',
+    helps: 'Gut pain, low confidence, fear',
+    foods: 'Yellow: bananas, ginger, turmeric',
     duration: 15
   },
   {
     id: 'heart',
-    name: 'Heart Chakra',
-    location: 'Chest / Heart',
+    name: 'Heart',
+    emoji: '💚',
+    location: 'Chest',
     frequency: 639,
-    painFrequency: 432, // Love frequency
+    painFrequency: 432,
     color: '#10B981',
-    benefits: 'Chest pain, breathing issues, heartbreak, love blocks, grief',
-    foods: 'Green foods: spinach, kale, broccoli. Green tea. Omega-3: fish, flax',
+    soul: 'Love, connection, remembering we are one',
+    helps: 'Heartbreak, loneliness, chest pain',
+    foods: 'Green: spinach, kale, omega-3',
     duration: 20
   },
   {
     id: 'throat',
-    name: 'Throat Chakra',
-    location: 'Throat / Neck',
+    name: 'Throat',
+    emoji: '🔵',
+    location: 'Neck',
     frequency: 741,
     painFrequency: 396,
     color: '#3B82F6',
-    benefits: 'Neck pain, throat issues, communication blocks, truth expression',
-    foods: 'Blue/purple foods: blueberries, blackberries. Herbal teas. Water.',
+    soul: 'Truth, expression, your real voice',
+    helps: 'Neck pain, can\'t speak truth, silenced',
+    foods: 'Blue: berries, water, herbal tea',
     duration: 15
   },
   {
     id: 'third_eye',
     name: 'Third Eye',
-    location: 'Forehead / Between Eyes',
+    emoji: '🟣',
+    location: 'Forehead',
     frequency: 852,
-    painFrequency: 963, // Divine healing
+    painFrequency: 963,
     color: '#6366F1',
-    benefits: 'Headaches, eye strain, intuition blocks, clarity',
-    foods: 'Purple foods: grapes, eggplant, purple cabbage. Dark chocolate (magnesium)',
+    soul: 'Intuition, seeing truth, inner knowing',
+    helps: 'Headaches, confusion, can\'t see clearly',
+    foods: 'Purple: grapes, dark chocolate',
     duration: 15
   },
   {
     id: 'crown',
-    name: 'Crown Chakra',
+    name: 'Crown',
+    emoji: '⚪',
     location: 'Top of Head',
     frequency: 963,
     painFrequency: 852,
     color: '#A855F7',
-    benefits: 'Migraines, spiritual disconnection, consciousness expansion',
-    foods: 'Fasting, light foods, pure water. Less is more for crown work.',
+    soul: 'Pure consciousness, remembering you are infinite',
+    helps: 'Migraines, existential pain, disconnection',
+    foods: 'Light eating, water, fasting',
     duration: 20
   }
 ];
