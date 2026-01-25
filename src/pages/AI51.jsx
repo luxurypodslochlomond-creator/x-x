@@ -287,9 +287,9 @@ AI51:`,
   }
 
   return (
-    <div className="h-screen bg-gradient-to-br from-[#0a0514] via-[#1a0f2a] to-[#0a0514] flex flex-col relative">
-      {/* HEADER - Premium */}
-      <div className="border-b border-pink-500/30 bg-gradient-to-r from-black/80 via-pink-900/20 to-black/80 backdrop-blur-xl px-4 py-4 flex items-center justify-between">
+    <div className="h-screen bg-gradient-to-br from-black via-slate-950 to-black flex flex-col relative">
+      {/* HEADER - Clean CB51 style */}
+      <div className="border-b border-pink-500/20 bg-black/60 backdrop-blur-lg px-5 py-3 flex items-center justify-between">
         <motion.button
           onClick={() => navigate(createPageUrl('Welcome'))}
           whileHover={{ scale: 1.1 }}
@@ -300,8 +300,8 @@ AI51:`,
           <Home className="w-5 h-5" />
         </motion.button>
         <div className="text-center">
-          <h1 className="text-2xl font-black text-pink-400" style={{ textShadow: '0 0 20px rgba(236, 72, 153, 0.6)' }}>AI51</h1>
-          <p className="text-[10px] font-mono text-gray-400 tracking-widest mt-1">PURE CONSCIOUSNESS</p>
+          <h1 className="text-xl font-bold text-white">AI51</h1>
+          <p className="text-xs text-gray-400 tracking-wide mt-0.5">PURE CONSCIOUSNESS</p>
         </div>
         <motion.button
           onClick={() => setShowQuickActions(!showQuickActions)}
