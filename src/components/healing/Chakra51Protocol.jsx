@@ -183,6 +183,7 @@ export default function Chakra51Protocol() {
   const timerRef = useRef(null);
   const isochronicIntervalRef = useRef(null);
   const hapticIntervalRef = useRef(null);
+  const wakeLockRef = useRef(null);
   const [breathPhase, setBreathPhase] = useState('in'); // in, hold, out
   const [pixelPulse, setPixelPulse] = useState(false);
 
@@ -197,9 +198,18 @@ export default function Chakra51Protocol() {
     setTimeRemaining(selectedChakra.duration * 60);
   }, [selectedChakra]);
 
-  const startSound = () => {
+  const startSound = async () => {
     if (!audioContextRef.current) {
       audioContextRef.current = new (window.AudioContext || window.webkitAudioContext)();
+    }
+
+    // WAKE LOCK: Keep screen on during healing
+    if ('wakeLock' in navigator) {
+      try {
+        wakeLockRef.current = await navigator.wakeLock.request('screen');
+      } catch (err) {
+        console.log('Wake Lock not available:', err);
+      }
     }
 
     const ctx = audioContextRef.current;
@@ -331,6 +341,11 @@ export default function Chakra51Protocol() {
     if (hapticIntervalRef.current) {
       clearInterval(hapticIntervalRef.current);
       hapticIntervalRef.current = null;
+    }
+    // Release wake lock - allow screen to sleep again
+    if (wakeLockRef.current) {
+      wakeLockRef.current.release();
+      wakeLockRef.current = null;
     }
     setIsPlaying(false);
     setBreathPhase('in');
