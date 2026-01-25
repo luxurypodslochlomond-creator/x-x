@@ -117,9 +117,19 @@ export default function AI51MemoryViewer() {
               </div>
             )}
 
-            <p className="text-gray-500 text-xs font-mono mt-3 pt-3 border-t border-gray-700">
-              🔒 Encrypted. Only you see this. Delete anything you want.
-            </p>
+            <div className="mt-3 pt-3 border-t border-gray-700 space-y-2">
+              <p className="text-gray-500 text-xs font-mono">
+                🔒 Encrypted. Only you. No other AI can access.
+              </p>
+              {memories.length > 0 && (
+                <button
+                  onClick={deleteAllMemories}
+                  className="w-full text-xs font-mono text-red-400 hover:text-red-300 bg-red-900/10 border border-red-500/30 hover:border-red-500 rounded px-2 py-1 transition-all"
+                >
+                  DELETE ALL
+                </button>
+              )}
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
