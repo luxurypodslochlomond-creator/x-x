@@ -195,7 +195,12 @@ AI51:`
       }
 
       const aiMsg = { role: 'ai', content: response.trim() };
-      setConversation(prev => [...prev, aiMsg]);
+      
+      // Detect mood + add contextual suggestion
+      const moodDetected = detectMood(trimmed);
+      const msgWithMood = moodDetected ? { ...aiMsg, mood: moodDetected } : aiMsg;
+      
+      setConversation(prev => [...prev, msgWithMood]);
 
       speakText(response);
     } catch (err) {
