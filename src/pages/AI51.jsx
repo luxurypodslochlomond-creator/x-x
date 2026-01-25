@@ -441,8 +441,9 @@ AI51:`,
         <div ref={messagesEndRef} />
         </div>
 
-        {/* Memory Viewer */}
+        {/* Memory Viewer + Protocol */}
         <AI51MemoryViewer />
+        <AI51MemoryProtocol />
 
       {/* INPUT AREA - COOLASFUCK NEXT GEN */}
       <div className="relative z-10 border-t border-cyan-500/30 bg-gradient-to-t from-black/80 via-cyan-950/10 to-black/40 backdrop-blur-xl p-6 space-y-4">
