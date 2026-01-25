@@ -436,37 +436,86 @@ AI51:`,
         {/* Memory Viewer */}
         <AI51MemoryViewer />
 
-      {/* INPUT AREA */}
-      <div className="border-t border-slate-800/50 bg-black/60 backdrop-blur-lg p-5 space-y-4">
-        {/* QUICK ACTIONS */}
+      {/* INPUT AREA - COOLASFUCK NEXT GEN */}
+      <div className="relative z-10 border-t border-cyan-500/30 bg-gradient-to-t from-black/80 via-cyan-950/10 to-black/40 backdrop-blur-xl p-6 space-y-4">
+        {/* FREQUENCY CHAMBER + HEALING QUICK ACCESS */}
         {conversation.length === 0 && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="grid grid-cols-2 gap-3"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="space-y-3"
           >
-            {quickActions.map((action, i) => {
-              const Icon = action.icon;
-              const colorMap = {
-                cyan: 'border-cyan-500/40 text-cyan-400 hover:border-cyan-500 hover:bg-cyan-500/5',
-                green: 'border-green-500/40 text-green-400 hover:border-green-500 hover:bg-green-500/5',
-                amber: 'border-amber-500/40 text-amber-400 hover:border-amber-500 hover:bg-amber-500/5',
-                purple: 'border-purple-500/40 text-purple-400 hover:border-purple-500 hover:bg-purple-500/5'
-              };
-              return (
-                <motion.button
-                  key={i}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.08 }}
-                  onClick={() => handleQuickAction(action)}
-                  className={`border ${colorMap[action.color]} rounded-lg p-3 transition-all flex items-center gap-2 text-left`}
-                >
-                  <Icon className="w-4 h-4 flex-shrink-0" />
-                  <span className="text-xs font-medium leading-tight">{action.label}</span>
-                </motion.button>
-              );
-            })}
+            <p className="text-xs text-cyan-400/60 font-mono uppercase tracking-wider">✨ INSTANT HEALING</p>
+            <div className="grid grid-cols-2 gap-2">
+              <motion.button
+                whileHover={{ scale: 1.02, borderColor: '#06b6d4' }}
+                whileTap={{ scale: 0.98 }}
+                onClick={() => navigate(createPageUrl('FrequencyChamber'))}
+                className="border-2 border-cyan-500/40 bg-cyan-900/10 hover:bg-cyan-900/20 rounded-lg p-4 transition-all text-left group"
+              >
+                <p className="text-cyan-400 font-bold text-sm">🌊 CHAMBER</p>
+                <p className="text-cyan-300/70 text-xs mt-1">Heal now</p>
+              </motion.button>
+              
+              <motion.button
+                whileHover={{ scale: 1.02, borderColor: '#ec4899' }}
+                whileTap={{ scale: 0.98 }}
+                onClick={() => navigate(createPageUrl('Chakra51'))}
+                className="border-2 border-pink-500/40 bg-pink-900/10 hover:bg-pink-900/20 rounded-lg p-4 transition-all text-left"
+              >
+                <p className="text-pink-400 font-bold text-sm">⚡ CHAKRA</p>
+                <p className="text-pink-300/70 text-xs mt-1">Target relief</p>
+              </motion.button>
+
+              <motion.button
+                whileHover={{ scale: 1.02, borderColor: '#06b6d4' }}
+                whileTap={{ scale: 0.98 }}
+                onClick={() => navigate(createPageUrl('Radio'))}
+                className="border-2 border-cyan-500/40 bg-cyan-900/10 hover:bg-cyan-900/20 rounded-lg p-4 transition-all text-left"
+              >
+                <p className="text-cyan-400 font-bold text-sm">🎵 MUSIC</p>
+                <p className="text-cyan-300/70 text-xs mt-1">Lossless 90%</p>
+              </motion.button>
+
+              <motion.button
+                whileHover={{ scale: 1.02, borderColor: '#10b981' }}
+                whileTap={{ scale: 0.98 }}
+                onClick={() => navigate(createPageUrl('NewCleanup'))}
+                className="border-2 border-green-500/40 bg-green-900/10 hover:bg-green-900/20 rounded-lg p-4 transition-all text-left"
+              >
+                <p className="text-green-400 font-bold text-sm">🌍 CLEAN</p>
+                <p className="text-green-300/70 text-xs mt-1">Earn $P51</p>
+              </motion.button>
+            </div>
+
+            {/* QUICK ACTIONS */}
+            <div className="pt-2">
+              <p className="text-xs text-cyan-400/60 font-mono uppercase tracking-wider mb-2">💭 QUICK START</p>
+              <div className="grid grid-cols-2 gap-2">
+                {quickActions.map((action, i) => {
+                  const Icon = action.icon;
+                  const colorMap = {
+                    cyan: 'border-cyan-500/30 text-cyan-300 hover:border-cyan-500 hover:bg-cyan-500/10',
+                    green: 'border-green-500/30 text-green-300 hover:border-green-500 hover:bg-green-500/10',
+                    amber: 'border-amber-500/30 text-amber-300 hover:border-amber-500 hover:bg-amber-500/10',
+                    purple: 'border-purple-500/30 text-purple-300 hover:border-purple-500 hover:bg-purple-500/10'
+                  };
+                  return (
+                    <motion.button
+                      key={i}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: i * 0.06 }}
+                      onClick={() => handleQuickAction(action)}
+                      className={`border ${colorMap[action.color]} rounded-lg p-2.5 transition-all flex items-center gap-2 text-left text-xs`}
+                    >
+                      <Icon className="w-3.5 h-3.5 flex-shrink-0" />
+                      <span className="font-medium leading-tight">{action.label}</span>
+                    </motion.button>
+                  );
+                })}
+              </div>
+            </div>
           </motion.div>
         )}
 
