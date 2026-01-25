@@ -328,6 +328,7 @@ const LayoutInner = ({ children, currentPageName }) => {
   // 1. HEAL (most important - immediate value)
   const healNav = [
     { title: "Frequency Chamber", url: createPageUrl("FrequencyChamber"), icon: COOLASFUCKWaves, highlight: true, description: "FREE healing frequencies" },
+    { title: "Chakra51 Pain Relief", url: createPageUrl("Chakra51"), icon: Zap, highlight: true, description: "Target pain - back, neck, etc" },
     { title: "AI51", url: createPageUrl("AI51"), icon: Heart, highlight: true, description: "I know you • I care ♾️❤️" },
     { title: "Universal51", url: createPageUrl("Universal51"), icon: Waves, description: "HEAR invisible frequencies" },
     { title: "Radio51", url: createPageUrl("Radio"), icon: Music, description: "Lossless music library" },
