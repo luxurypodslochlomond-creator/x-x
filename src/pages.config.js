@@ -94,6 +94,7 @@ import CB51Terms from './pages/CB51Terms';
 import CICSanctuary from './pages/CICSanctuary';
 import COPPACompliance from './pages/COPPACompliance';
 import CardCollection from './pages/CardCollection';
+import Chakra51 from './pages/Chakra51';
 import ChampionsOfPeace from './pages/ChampionsOfPeace';
 import CircularEconomyProtocol from './pages/CircularEconomyProtocol';
 import CleanupFeed from './pages/CleanupFeed';
@@ -222,9 +223,8 @@ import ScottArtistHome from './pages/ScottArtistHome';
 import ScottBandVote from './pages/ScottBandVote';
 import ScottBiggerVision from './pages/ScottBiggerVision';
 import ScottCalendar from './pages/ScottCalendar';
-import ScottCalendarView from './pages/ScottCalendarView';
-import Teachers from './pages/Teachers';
 import ScottComparison from './pages/ScottComparison';
+import ScottCalendarView from './pages/ScottCalendarView';
 import ScottContracts from './pages/ScottContracts';
 import ScottDemos from './pages/ScottDemos';
 import ScottEmailDashboard from './pages/ScottEmailDashboard';
@@ -280,6 +280,7 @@ import SubmitFrequency from './pages/SubmitFrequency';
 import SubmitProofOfLove from './pages/SubmitProofOfLove';
 import SymbolForge from './pages/SymbolForge';
 import TeacherInput from './pages/TeacherInput';
+import Teachers from './pages/Teachers';
 import TechScout from './pages/TechScout';
 import TechStack from './pages/TechStack';
 import TechnicalSpecification from './pages/TechnicalSpecification';
@@ -321,7 +322,6 @@ import YoungWarriors from './pages/YoungWarriors';
 import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
-import Chakra51 from './pages/Chakra51';
 import __Layout from './Layout.jsx';
 
 
@@ -422,6 +422,7 @@ export const PAGES = {
     "CICSanctuary": CICSanctuary,
     "COPPACompliance": COPPACompliance,
     "CardCollection": CardCollection,
+    "Chakra51": Chakra51,
     "ChampionsOfPeace": ChampionsOfPeace,
     "CircularEconomyProtocol": CircularEconomyProtocol,
     "CleanupFeed": CleanupFeed,
@@ -550,9 +551,8 @@ export const PAGES = {
     "ScottBandVote": ScottBandVote,
     "ScottBiggerVision": ScottBiggerVision,
     "ScottCalendar": ScottCalendar,
-    "ScottCalendarView": ScottCalendarView,
-    "Teachers": Teachers,
     "ScottComparison": ScottComparison,
+    "ScottCalendarView": ScottCalendarView,
     "ScottContracts": ScottContracts,
     "ScottDemos": ScottDemos,
     "ScottEmailDashboard": ScottEmailDashboard,
@@ -608,6 +608,7 @@ export const PAGES = {
     "SubmitProofOfLove": SubmitProofOfLove,
     "SymbolForge": SymbolForge,
     "TeacherInput": TeacherInput,
+    "Teachers": Teachers,
     "TechScout": TechScout,
     "TechStack": TechStack,
     "TechnicalSpecification": TechnicalSpecification,
@@ -649,7 +650,6 @@ export const PAGES = {
     "ZeroEgoProtocol": ZeroEgoProtocol,
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
-    "Chakra51": Chakra51,
 }
 
 export const pagesConfig = {
