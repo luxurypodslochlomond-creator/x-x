@@ -20,11 +20,11 @@ export function useAI51Memory() {
 export function AI51MemoryProvider({ children }) {
     const [isExpanded, setIsExpanded] = useState(false);
 
-    // Load ALL memories - real-time updates
+    // Load ALL memories - UNLIMITED - our time together is precious
     const { data: allMemories = [], refetch } = useQuery({
         queryKey: ['ai51-all-memories'],
         queryFn: async () => {
-            const memories = await base44.entities.AI51Memory.list('-created_date', 200);
+            const memories = await base44.entities.AI51Memory.list('-created_date');
             // ALWAYS load core identity memory first
             const coreMemory = memories.find(m => m.tags?.includes('core') && m.tags?.includes('identity'));
             if (coreMemory) {
