@@ -23,7 +23,7 @@ import BluetoothMeshNetwork from '@/components/shared/BluetoothMeshNetwork';
 const PROTOCOL_SECTIONS = [
   {
     id: 'urgent',
-    name: '🚨 URGENT HEALING',
+    name: 'URGENT HEALING',
     color: '#ef4444',
     icon: COOLASFUCKFire,
     description: 'Pain relief NOW - Sciatica, teeth, brain fog, tinnitus, concussion, chronic pain',
@@ -32,7 +32,7 @@ const PROTOCOL_SECTIONS = [
   },
   {
     id: 'mental',
-    name: '🧠 MENTAL HEALTH',
+    name: 'MENTAL HEALTH',
     color: '#22d3ee',
     description: 'Anxiety, depression, PTSD, ADHD, autism',
     protocols: ['anxiety', 'depression', 'trauma', 'focus', 'autism_support', 'epilepsy_support'],
@@ -40,7 +40,7 @@ const PROTOCOL_SECTIONS = [
   },
   {
     id: 'physical',
-    name: '💚 BODY HEALING',
+    name: 'BODY HEALING',
     color: '#10b981',
     description: 'Anti-aging, immunity, diabetes, heart, cancer, MS, tremors, hearing, lungs',
     protocols: ['youthful_skin', 'sick_day', 'immune', 'vitality', 'diabetes', 'heart_disease', 'cancer_support', 'stroke_recovery', 'ms_support', 'hand_tremor', 'hearing_support', 'respiratory', 'digestive', 'autoimmune', 'skin_healing', 'hormones', 'kidney_support', 'liver_support', 'body_specific'],
@@ -48,7 +48,7 @@ const PROTOCOL_SECTIONS = [
   },
   {
     id: 'womens',
-    name: '🌸 WOMEN\'S HEALTH',
+    name: 'WOMEN\'S HEALTH',
     color: '#ec4899',
     description: 'Childbirth, period pain, menopause, hormones',
     protocols: ['childbirth', 'period_pain', 'hormones'],
@@ -56,7 +56,7 @@ const PROTOCOL_SECTIONS = [
   },
   {
     id: 'rest',
-    name: '🌙 SLEEP & ENERGY',
+    name: 'SLEEP & ENERGY',
     color: '#8b5cf6',
     description: 'Deep sleep, morning energy, burnout, Earth sync',
     protocols: ['sleep', 'deep_sleep_overnight', 'morning', 'burnout', 'schumann_earth'],
@@ -64,7 +64,7 @@ const PROTOCOL_SECTIONS = [
   },
   {
     id: 'emotional',
-    name: '💗 EMOTIONAL HEALING',
+    name: 'EMOTIONAL HEALING',
     color: '#f472b6',
     description: 'Grief, heartbreak, anger, self-love, couples',
     protocols: ['grief', 'anger', 'letitbe', 'couples_healing'],
@@ -72,7 +72,7 @@ const PROTOCOL_SECTIONS = [
   },
   {
     id: 'addiction',
-    name: '🛡️ ADDICTION & RECOVERY',
+    name: 'ADDICTION & RECOVERY',
     color: '#f59e0b',
     description: 'Substance withdrawal, cravings, compulsions',
     protocols: ['addiction', 'withdrawal_physical', 'emotional_eating'],
@@ -80,7 +80,7 @@ const PROTOCOL_SECTIONS = [
   },
   {
     id: 'special',
-    name: '⚡ SPECIAL PROTOCOLS',
+    name: 'SPECIAL PROTOCOLS',
     color: '#a855f7',
     description: 'Tesla 3-6-9, magnetoreception, vision, vaccine recovery, Alzheimer\'s',
     protocols: ['tesla_legacy', 'magnetoreception', 'vision_healing', 'vaccine_recovery', 'alzheimers'],
@@ -88,7 +88,7 @@ const PROTOCOL_SECTIONS = [
   },
   {
     id: 'universal',
-    name: '🌍 UNIVERSAL COMMUNION',
+    name: 'UNIVERSAL COMMUNION',
     color: '#10B981',
     description: 'Be with ALL consciousness',
     protocols: ['universal_communion'],
@@ -2791,7 +2791,7 @@ export default function FrequencyChamber() {
             onClick={() => setShowHeadphones(!showHeadphones)}
             className="w-full bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-4 border-green-500 p-4 flex items-center justify-between hover:border-green-400 transition-all"
           >
-            <h3 className="text-green-400 font-black font-mono text-lg">🔊 SPEAKERS vs 🎧 HEADPHONES</h3>
+            <h3 className="text-green-400 font-black font-mono text-lg">SPEAKERS vs HEADPHONES</h3>
             <motion.div animate={{ rotate: showHeadphones ? 180 : 0 }}>
               <ChevronDown className="w-6 h-6 text-green-400" />
             </motion.div>
@@ -3218,7 +3218,7 @@ export default function FrequencyChamber() {
           <div className="bg-gradient-to-r from-purple-500/30 to-pink-500/30 border-4 border-purple-500 rounded-2xl p-6 mb-6" style={{ boxShadow: '0 0 60px rgba(168, 85, 247, 0.7)' }}>
             <div className="flex items-center justify-center gap-3 mb-4">
               <COOLASFUCKZap size={28} animate={true} />
-              <h2 className="text-purple-400 font-black text-2xl font-mono">INSTANT ACCESS (For Pain/Crisis)</h2>
+              <h2 className="text-purple-400 font-black text-2xl font-mono">INSTANT ACCESS</h2>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
               {['chakra51', 'neural_pathways', 'dental_emergency', 'sciatic_relief'].map(protocolId => {
@@ -3318,12 +3318,12 @@ export default function FrequencyChamber() {
                  </p>
                  {protocol.config.isBinaural && (
                    <p className="text-cyan-400 text-[10px] font-mono mt-1 px-2 py-0.5 bg-cyan-900/30 rounded">
-                     🎧
+                     HEADPHONES
                    </p>
                  )}
                  {!protocol.config.isBinaural && (
                    <p className="text-green-400 text-[10px] font-mono mt-1 px-2 py-0.5 bg-green-900/30 rounded">
-                     🔊
+                     SPEAKERS
                    </p>
                  )}
               </div>
