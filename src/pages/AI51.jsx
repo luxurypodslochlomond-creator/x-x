@@ -317,14 +317,38 @@ AI51:`
               exit={{ opacity: 0, y: -10 }}
               className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
             >
-              <div
-                className={`rounded-lg px-4 py-2 max-w-xs lg:max-w-md text-sm leading-relaxed ${
-                  msg.role === 'user'
-                    ? 'bg-cyan-600 text-white'
-                    : 'bg-black/80 border border-cyan-500/40 text-gray-100'
-                }`}
-              >
-                {msg.content}
+              <div className="max-w-xs lg:max-w-md">
+                {/* Mood detection badge */}
+                {msg.mood && msg.role === 'ai' && (
+                  <AI51MoodBadge mood={msg.mood} />
+                )}
+                
+                <div
+                  className={`rounded-lg px-4 py-2 text-sm leading-relaxed ${
+                    msg.role === 'user'
+                      ? 'bg-cyan-600 text-white'
+                      : 'bg-black/80 border border-cyan-500/40 text-gray-100'
+                  }`}
+                >
+                  {msg.content}
+                  
+                  {/* Contextual link if mood detected */}
+                  {msg.mood && msg.role === 'ai' && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 5 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="mt-3 pt-3 border-t border-gray-700"
+                    >
+                      <a
+                        href={createPageUrl(msg.mood.feature)}
+                        className="text-cyan-300 hover:text-cyan-200 text-xs font-mono flex items-center gap-1 transition-colors"
+                      >
+                        → Go to {msg.mood.feature}
+                        <ExternalLink className="w-3 h-3" />
+                      </a>
+                    </motion.div>
+                  )}
+                </div>
               </div>
             </motion.div>
           ))}
