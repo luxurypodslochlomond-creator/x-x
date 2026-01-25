@@ -68,22 +68,15 @@ export default function ScottAddArtist() {
                     type: 'artist'
                 });
                 
-                // Invite to CB51 if email exists
+                // Send CB51 branded invitation
                 if (formData.email) {
                     try {
-                        await base44.users.inviteUser(formData.email, 'user');
-                        // Send notification
-                        try {
-                            await base44.functions.invoke('notifyNewArtist', {
-                                artist_id: newArtist.id,
-                                artist_name: formData.name,
-                                artist_email: formData.email
-                            });
-                        } catch (e) {
-                            console.log('Notification sent (may have failed silently)');
-                        }
+                        await base44.functions.invoke('sendCB51Invite', {
+                            email: formData.email,
+                            artistName: formData.name
+                        });
                     } catch (inviteError) {
-                        console.log('User exists or invite failed:', inviteError.message);
+                        console.log('Invite error:', inviteError.message);
                     }
                 }
                 
