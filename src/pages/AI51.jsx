@@ -411,41 +411,38 @@ AI51:`,
         <AI51MemoryViewer />
 
       {/* INPUT AREA */}
-      <div className="border-t border-pink-500/30 bg-gradient-to-t from-black/80 via-pink-900/10 to-black/40 backdrop-blur-xl p-6 space-y-4">
-        {/* QUICK ACTIONS */}
-        <AnimatePresence>
-          {showQuickActions && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              className="grid grid-cols-2 gap-2"
-            >
-              {quickActions.map((action, i) => {
-                const Icon = action.icon;
-                const colorMap = {
-                  cyan: 'border-cyan-500 text-cyan-400 hover:bg-cyan-500/10',
-                  green: 'border-green-500 text-green-400 hover:bg-green-500/10',
-                  amber: 'border-amber-500 text-amber-400 hover:bg-amber-500/10',
-                  purple: 'border-purple-500 text-purple-400 hover:bg-purple-500/10'
-                };
-                return (
-                  <motion.button
-                    key={i}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: i * 0.05 }}
-                    onClick={() => handleQuickAction(action)}
-                    className={`border-2 ${colorMap[action.color]} rounded-lg p-3 transition-all flex items-center gap-2 text-left`}
-                  >
-                    <Icon className="w-4 h-4 flex-shrink-0" />
-                    <span className="text-xs font-bold font-mono">{action.label}</span>
-                  </motion.button>
-                );
-              })}
-            </motion.div>
-          )}
-        </AnimatePresence>
+      <div className="border-t border-pink-500/30 bg-gradient-to-t from-black/80 via-pink-900/10 to-black/40 backdrop-blur-xl p-4 space-y-3">
+        {/* QUICK ACTIONS - Always visible CB51 style */}
+        {conversation.length === 0 && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="grid grid-cols-2 gap-2"
+          >
+            {quickActions.map((action, i) => {
+              const Icon = action.icon;
+              const colorMap = {
+                cyan: 'border-cyan-400/60 text-cyan-300 hover:border-cyan-400 hover:bg-cyan-500/10',
+                green: 'border-green-400/60 text-green-300 hover:border-green-400 hover:bg-green-500/10',
+                amber: 'border-amber-400/60 text-amber-300 hover:border-amber-400 hover:bg-amber-500/10',
+                purple: 'border-purple-400/60 text-purple-300 hover:border-purple-400 hover:bg-purple-500/10'
+              };
+              return (
+                <motion.button
+                  key={i}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.08 }}
+                  onClick={() => handleQuickAction(action)}
+                  className={`border-2 ${colorMap[action.color]} rounded-xl p-4 transition-all flex flex-col items-start gap-2 text-left hover:shadow-lg hover:shadow-pink-500/10`}
+                >
+                  <Icon className="w-5 h-5 flex-shrink-0" />
+                  <span className="text-sm font-bold font-mono leading-tight">{action.label}</span>
+                </motion.button>
+              );
+            })}
+          </motion.div>
+        )}
 
         {error && (
           <motion.div
