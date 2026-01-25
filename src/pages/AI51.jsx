@@ -23,9 +23,12 @@ export default function AI51Page() {
   const [isOnline, setIsOnline] = useState(navigator.onLine);
   const [volume, setVolume] = useState(1.0);
   const [showQuickActions, setShowQuickActions] = useState(false);
+  const [webSearch, setWebSearch] = useState(false);
+  const [uploadedImage, setUploadedImage] = useState(null);
 
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
+  const fileInputRef = useRef(null);
 
   // Load user + gentle check-in
   useEffect(() => {
