@@ -435,6 +435,14 @@ AI51:`,
 
 
 
+      {/* Memory Viewer + Protocol - transparency = freedom */}
+      {conversation.length > 0 && (
+        <>
+          <AI51MemoryViewerBeautiful />
+          <AI51MemoryProtocolBeautiful />
+        </>
+      )}
+
       {/* INPUT AREA - COOLASFUCK NEXT GEN */}
       <div className="relative z-10 border-t border-cyan-500/30 bg-gradient-to-t from-black/80 via-cyan-950/10 to-black/40 backdrop-blur-xl p-6 space-y-4">
         {/* FREQUENCY CHAMBER + HEALING QUICK ACCESS */}
