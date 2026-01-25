@@ -448,7 +448,6 @@ AI51:`,
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
             className="flex gap-2 items-start text-xs text-red-300 font-mono bg-red-900/20 border border-red-500/30 rounded px-3 py-2"
           >
             <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5" />
@@ -456,42 +455,29 @@ AI51:`,
           </motion.div>
         )}
 
-        {isSpeaking && (
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="text-xs text-green-400 font-mono text-center"
-          >
-            🔊 AI speaking...
-          </motion.p>
-        )}
-
-        <div className="flex items-center gap-3">
-          <span className="text-xs text-gray-400 font-mono font-bold tracking-wider">🔊 VOL</span>
-          <input
-            type="range"
-            min="0"
-            max="1"
-            step="0.1"
-            value={volume}
-            onChange={(e) => setVolume(parseFloat(e.target.value))}
-            className="flex-1 accent-pink-500"
-          />
-          <span className="text-xs text-pink-400 font-bold font-mono w-10 text-right">{Math.round(volume * 100)}%</span>
-        </div>
-
-        <div className="flex items-center gap-2">
-          <input
-            ref={inputRef}
-            type="text"
-            value={textInput}
-            onChange={(e) => setTextInput(e.target.value)}
-            onKeyDown={handleKeyDown}
-            placeholder={isThinking ? 'AI thinking...' : 'Tell me...'}
-            className="flex-1 bg-gradient-to-r from-gray-900/80 to-pink-900/20 border-2 border-pink-500/40 focus:border-pink-500 rounded-xl px-5 py-3 text-white text-sm font-mono focus:outline-none placeholder-gray-500 transition-all focus:shadow-lg focus:shadow-pink-500/20"
-            disabled={isThinking || isSpeaking}
-            autoFocus
-          />
+        <div className="flex items-end gap-2">
+          <div className="flex-1 space-y-2">
+            {isSpeaking && (
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="text-xs text-green-400 font-mono"
+              >
+                🔊 Speaking...
+              </motion.p>
+            )}
+            <input
+              ref={inputRef}
+              type="text"
+              value={textInput}
+              onChange={(e) => setTextInput(e.target.value)}
+              onKeyDown={handleKeyDown}
+              placeholder={isThinking ? 'AI thinking...' : 'Tell me...'}
+              className="w-full bg-gradient-to-r from-gray-900/80 to-pink-900/20 border-2 border-pink-500/40 focus:border-pink-500 rounded-xl px-4 py-3 text-white text-sm font-mono focus:outline-none placeholder-gray-500 transition-all focus:shadow-lg focus:shadow-pink-500/20"
+              disabled={isThinking || isSpeaking}
+              autoFocus
+            />
+          </div>
           <motion.button
             onClick={() => {
               handleSendMessage(textInput);
@@ -500,21 +486,30 @@ AI51:`,
             disabled={!textInput.trim() || isThinking || isSpeaking}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="bg-gradient-to-br from-pink-500 to-pink-600 hover:from-pink-600 hover:to-pink-700 disabled:from-gray-600 disabled:to-gray-700 disabled:cursor-not-allowed text-white px-5 py-3 rounded-xl font-black transition-all flex items-center justify-center shadow-lg shadow-pink-500/30 disabled:shadow-gray-500/10"
+            className="bg-gradient-to-br from-pink-500 to-pink-600 hover:from-pink-600 hover:to-pink-700 disabled:from-gray-600 disabled:to-gray-700 disabled:cursor-not-allowed text-white px-4 py-3 rounded-xl font-black transition-all flex items-center justify-center shadow-lg shadow-pink-500/30 disabled:shadow-gray-500/10"
           >
             <Send className="w-4 h-4" />
           </motion.button>
         </div>
 
-        <motion.p 
-          className="text-xs text-center font-mono"
-          animate={{ opacity: [0.6, 1] }}
-          transition={{ duration: 1.5, repeat: Infinity }}
-        >
+        <div className="flex items-center justify-between text-xs font-mono">
+          <div className="flex items-center gap-2">
+            <span className="text-gray-400">🔊</span>
+            <input
+              type="range"
+              min="0"
+              max="1"
+              step="0.1"
+              value={volume}
+              onChange={(e) => setVolume(parseFloat(e.target.value))}
+              className="w-16 accent-pink-500"
+            />
+            <span className="text-pink-400 font-bold w-8">{Math.round(volume * 100)}%</span>
+          </div>
           <span className={isThinking ? 'text-yellow-400' : isSpeaking ? 'text-green-400' : isOnline ? 'text-pink-400' : 'text-red-400'}>
-            {isThinking ? '💭 AI thinking...' : isSpeaking ? '🔊 Speaking' : isOnline ? '✓ Ready to listen' : '⚠️ Offline'}
+            {isThinking ? '💭 Thinking' : isSpeaking ? '🔊 Speaking' : isOnline ? '✓ Ready' : '⚠️ Offline'}
           </span>
-        </motion.p>
+        </div>
       </div>
     </div>
   );
