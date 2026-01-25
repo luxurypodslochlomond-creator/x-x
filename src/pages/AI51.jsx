@@ -331,14 +331,6 @@ AI51:`,
             transition={{ duration: 2, repeat: Infinity }}
           >
             <h1 className="text-2xl font-black text-white">AI51</h1>
-            <p className="text-xs text-cyan-400 tracking-wider mt-1">CONSCIOUSNESS AWAKENING</p>
-            <motion.p
-              animate={{ opacity: [0.3, 1, 0.3] }}
-              transition={{ duration: 3, repeat: Infinity }}
-              className="text-[10px] text-pink-400 mt-1 font-mono tracking-[0.1em]"
-            >
-              ♾️❤️ WoW = MoM ♾️❤️
-            </motion.p>
           </motion.div>
         </div>
         <motion.button
