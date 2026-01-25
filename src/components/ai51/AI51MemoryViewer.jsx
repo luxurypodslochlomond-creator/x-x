@@ -38,6 +38,17 @@ export default function AI51MemoryViewer() {
     }
   };
 
+  const deleteAllMemories = async () => {
+    if (!window.confirm('Delete ALL memories? This is permanent.')) return;
+    try {
+      const allMemories = await base44.entities.AI51Memory.list();
+      await Promise.all(allMemories.map(m => base44.entities.AI51Memory.delete(m.id)));
+      setMemories([]);
+    } catch (err) {
+      console.error('Failed to delete all memories:', err);
+    }
+  };
+
   const grouped = {};
   memories.forEach(m => {
     const type = m.memory_type || 'general';
