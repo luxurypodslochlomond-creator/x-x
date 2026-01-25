@@ -324,7 +324,7 @@ export default function Chakra51Protocol() {
         {powerMode && (
           <div className="bg-pink-900/20 border-2 border-pink-500/50 p-4 mb-4">
             <p className="text-pink-400 text-sm font-mono text-center">
-              🎧 Use headphones • 3x daily • Relief in hours not days
+              Use headphones • 3x daily • Relief in hours not days
             </p>
           </div>
         )}
@@ -411,9 +411,9 @@ export default function Chakra51Protocol() {
             {/* Frequencies display */}
             <div className="mb-6 bg-black/80 border-2 border-white/10 p-4">
               <p className="text-xs text-gray-500 font-mono mb-2">FREQUENCIES:</p>
-              <p className="text-white font-mono text-sm">🎵 {selectedChakra.frequency}Hz</p>
-              <p className="text-white font-mono text-sm">💊 {selectedChakra.painFrequency}Hz pain</p>
-              {powerMode && <p className="text-pink-400 font-mono text-sm font-black">⚡ 432Hz LOVE (Power)</p>}
+              <p className="text-white font-mono text-sm">{selectedChakra.frequency}Hz</p>
+              <p className="text-white font-mono text-sm">{selectedChakra.painFrequency}Hz pain</p>
+              {powerMode && <p className="text-pink-400 font-mono text-sm font-black">432Hz LOVE (Power)</p>}
             </div>
 
             {/* Visualizer when playing */}
