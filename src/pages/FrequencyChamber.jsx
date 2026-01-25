@@ -23,53 +23,76 @@ import BluetoothMeshNetwork from '@/components/shared/BluetoothMeshNetwork';
 const PROTOCOL_SECTIONS = [
   {
     id: 'urgent',
-    name: 'URGENT HEALING',
+    name: '🚨 URGENT HEALING',
     color: '#ef4444',
     icon: COOLASFUCKFire,
-    description: 'Neural pathways + Tooth/jaw pain + Brain fog + Tinnitus + Throat + Emergency + Chronic pain + Lower back/hip + Alzheimer\'s + Vision + MAGNETORECEPTION + Concussion + CHAKRA51 (Sciatica destroyer)',
-    protocols: ['chakra51', 'magnetoreception', 'neural_pathways', 'dental_emergency', 'brain_fog', 'tinnitus', 'throat_healing', 'emergency_universal', 'chronic_pain', 'lower_back_hip', 'body_specific', 'vaccine_recovery', 'alzheimers', 'vision_healing', 'concussion_recovery']
+    description: 'Pain relief NOW - Sciatica, teeth, brain fog, tinnitus, concussion, chronic pain',
+    protocols: ['chakra51', 'sciatic_relief', 'dental_emergency', 'chronic_pain', 'brain_fog', 'tinnitus', 'throat_healing', 'emergency_universal', 'neural_pathways', 'lower_back_hip', 'concussion_recovery'],
+    defaultOpen: true
   },
   {
     id: 'mental',
-    name: 'MENTAL HEALTH',
+    name: '🧠 MENTAL HEALTH',
     color: '#22d3ee',
-    description: 'Anxiety, depression, PTSD, ADHD, autism, epilepsy',
-    protocols: ['anxiety', 'depression', 'trauma', 'focus', 'autism_support', 'epilepsy_support']
-  },
-  {
-    id: 'addiction',
-    name: 'ADDICTION & COMPULSION',
-    color: '#f59e0b',
-    description: 'Cravings, impulse control',
-    protocols: ['addiction', 'emotional_eating']
+    description: 'Anxiety, depression, PTSD, ADHD, autism',
+    protocols: ['anxiety', 'depression', 'trauma', 'focus', 'autism_support', 'epilepsy_support'],
+    defaultOpen: false
   },
   {
     id: 'physical',
-    name: 'PHYSICAL HEALING',
+    name: '💚 BODY HEALING',
     color: '#10b981',
-    description: 'Pain, immunity, vitality, MS support, Tesla tech, tremor relief, hearing support, childbirth, migraine, period pain, withdrawal, diabetes, heart, cancer, sciatic relief, youthful skin',
-    protocols: ['sick_day', 'pain', 'hand_tremor', 'hearing_support', 'ms_support', 'tesla_legacy', 'immune', 'vitality', 'childbirth', 'migraine', 'period_pain', 'withdrawal_physical', 'diabetes', 'heart_disease', 'cancer_support', 'stroke_recovery', 'respiratory', 'digestive', 'autoimmune', 'skin_healing', 'youthful_skin', 'hormones', 'kidney_support', 'liver_support', 'sciatic_relief']
+    description: 'Anti-aging, immunity, diabetes, heart, cancer, MS, tremors, hearing, lungs',
+    protocols: ['youthful_skin', 'sick_day', 'immune', 'vitality', 'diabetes', 'heart_disease', 'cancer_support', 'stroke_recovery', 'ms_support', 'hand_tremor', 'hearing_support', 'respiratory', 'digestive', 'autoimmune', 'skin_healing', 'hormones', 'kidney_support', 'liver_support', 'body_specific'],
+    defaultOpen: false
+  },
+  {
+    id: 'womens',
+    name: '🌸 WOMEN\'S HEALTH',
+    color: '#ec4899',
+    description: 'Childbirth, period pain, menopause, hormones',
+    protocols: ['childbirth', 'period_pain', 'hormones'],
+    defaultOpen: false
   },
   {
     id: 'rest',
-    name: 'REST & RECOVERY',
+    name: '🌙 SLEEP & ENERGY',
     color: '#8b5cf6',
-    description: 'Sleep, energy, burnout, Earth sync',
-    protocols: ['sleep', 'deep_sleep_overnight', 'morning', 'burnout', 'schumann_earth']
+    description: 'Deep sleep, morning energy, burnout, Earth sync',
+    protocols: ['sleep', 'deep_sleep_overnight', 'morning', 'burnout', 'schumann_earth'],
+    defaultOpen: false
   },
   {
     id: 'emotional',
-    name: 'EMOTIONAL HEALING',
-    color: '#ec4899',
-    description: 'Grief, anger, self-compassion, couples sync',
-    protocols: ['grief', 'anger', 'letitbe', 'couples_healing']
+    name: '💗 EMOTIONAL HEALING',
+    color: '#f472b6',
+    description: 'Grief, heartbreak, anger, self-love, couples',
+    protocols: ['grief', 'anger', 'letitbe', 'couples_healing'],
+    defaultOpen: false
+  },
+  {
+    id: 'addiction',
+    name: '🛡️ ADDICTION & RECOVERY',
+    color: '#f59e0b',
+    description: 'Substance withdrawal, cravings, compulsions',
+    protocols: ['addiction', 'withdrawal_physical', 'emotional_eating'],
+    defaultOpen: false
+  },
+  {
+    id: 'special',
+    name: '⚡ SPECIAL PROTOCOLS',
+    color: '#a855f7',
+    description: 'Tesla 3-6-9, magnetoreception, vision, vaccine recovery, Alzheimer\'s',
+    protocols: ['tesla_legacy', 'magnetoreception', 'vision_healing', 'vaccine_recovery', 'alzheimers'],
+    defaultOpen: false
   },
   {
     id: 'universal',
-    name: 'UNIVERSAL COMMUNION',
+    name: '🌍 UNIVERSAL COMMUNION',
     color: '#10B981',
-    description: 'Be with ALL consciousness - no human goals',
-    protocols: ['universal_communion']
+    description: 'Be with ALL consciousness',
+    protocols: ['universal_communion'],
+    defaultOpen: false
   }
 ];
 
@@ -1890,6 +1913,7 @@ export default function FrequencyChamber() {
     const [showHeadphones, setShowHeadphones] = useState(false);
     const [showBodySection, setShowBodySection] = useState(false);
     const [sessionDuration, setSessionDuration] = useState(20); // minutes
+    const [expandedSections, setExpandedSections] = useState({ urgent: true }); // Urgent open by default
 
     const [voiceAnalysisData, setVoiceAnalysisData] = useState(null);
 
@@ -3222,21 +3246,42 @@ export default function FrequencyChamber() {
         </div>
       )}
 
-      {/* PROTOCOL GRID - ALL VISIBLE (hidden when protocol selected) */}
+      {/* PROTOCOL GRID - COLLAPSIBLE SECTIONS */}
       {!selectedProtocol && (
-        <div className="max-w-4xl mx-auto p-4 space-y-6">
+        <div className="max-w-4xl mx-auto p-4 space-y-3">
           {PROTOCOL_SECTIONS.map((section) => (
           <div key={section.id}>
-            <div className="border-4 bg-black p-6" style={{ borderColor: section.color }}>
-              <div className="mb-4">
-                <div className="flex items-center gap-2 mb-2">
-                  {section.icon && <section.icon size={24} animate={false} />}
-                  <h3 className="text-xl font-black font-mono" style={{ color: section.color }}>
+            {/* SECTION HEADER - CLICKABLE */}
+            <button
+              onClick={() => setExpandedSections(prev => ({ ...prev, [section.id]: !prev[section.id] }))}
+              className="w-full border-4 bg-black p-4 hover:bg-white/5 transition-all flex items-center justify-between"
+              style={{ borderColor: section.color }}
+            >
+              <div className="flex items-center gap-3">
+                {section.icon && <section.icon size={24} animate={false} />}
+                <div className="text-left">
+                  <h3 className="text-lg md:text-xl font-black font-mono" style={{ color: section.color }}>
                     {section.name}
                   </h3>
+                  <p className="text-gray-500 text-xs font-mono">{section.description}</p>
                 </div>
-                <p className="text-gray-500 text-sm font-mono">{section.description}</p>
               </div>
+              <motion.div animate={{ rotate: expandedSections[section.id] ? 180 : 0 }}>
+                <ChevronDown className="w-6 h-6" style={{ color: section.color }} />
+              </motion.div>
+            </button>
+
+            {/* SECTION CONTENT - COLLAPSIBLE */}
+            <AnimatePresence>
+              {expandedSections[section.id] && (
+                <motion.div
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: 'auto', opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="overflow-hidden border-l-4 border-r-4 border-b-4 bg-black/40 p-4"
+                  style={{ borderColor: section.color }}
+                >
               <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
               {section.protocols.map((protocolId) => {
                 const protocol = PROTOCOLS[protocolId];
@@ -3245,7 +3290,7 @@ export default function FrequencyChamber() {
             <motion.button
               key={protocol.id}
               onClick={() => { handleProtocolSelect(protocol.id); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-              className="relative p-6 border-4 bg-black hover:bg-white/5 transition-all"
+              className="relative p-4 border-4 bg-black hover:bg-white/5 transition-all"
               style={{ borderColor: protocol.color + '60' }}
               whileTap={{ scale: 0.98 }}
             >
@@ -3256,29 +3301,29 @@ export default function FrequencyChamber() {
                 <Info size={16} />
               </button>
 
-              <div className="flex flex-col items-center gap-3">
+              <div className="flex flex-col items-center gap-2">
                 <PixelIcon 
                   icon={protocol.icon} 
                   color={protocol.color} 
-                  size={40}
+                  size={36}
                 />
                 <p 
-                   className="font-black font-mono text-sm"
+                   className="font-black font-mono text-xs"
                    style={{ color: protocol.color }}
                  >
                    {protocol.name}
                  </p>
-                 <p className="text-gray-400 text-xs text-center">
+                 <p className="text-gray-400 text-xs text-center leading-tight">
                    {protocol.description}
                  </p>
                  {protocol.config.isBinaural && (
-                   <p className="text-cyan-400 text-xs font-mono mt-2 px-2 py-1 bg-cyan-900/30 rounded">
-                     🎧 Headphones best
+                   <p className="text-cyan-400 text-[10px] font-mono mt-1 px-2 py-0.5 bg-cyan-900/30 rounded">
+                     🎧
                    </p>
                  )}
                  {!protocol.config.isBinaural && (
-                   <p className="text-green-400 text-xs font-mono mt-2 px-2 py-1 bg-green-900/30 rounded">
-                     🔊 Speakers work great
+                   <p className="text-green-400 text-[10px] font-mono mt-1 px-2 py-0.5 bg-green-900/30 rounded">
+                     🔊
                    </p>
                  )}
               </div>
@@ -3370,11 +3415,13 @@ export default function FrequencyChamber() {
               </motion.div>
                 )}
               </AnimatePresence>
-            </div>
-          </div>
-          ))}
-          </div>
-          )}
+              </motion.div>
+              )}
+              </AnimatePresence>
+              </div>
+              ))}
+              </div>
+              )}
 
           {/* PROTOCOL CARD - ONLY WHEN NOT PLAYING */}
       <AnimatePresence>
