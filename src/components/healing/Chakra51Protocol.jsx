@@ -11,11 +11,80 @@ import { createPageUrl } from '@/utils';
  * Pain relief + remembering who you are
  */
 
+// 8-BIT CHAKRA ICONS - COOLASFUCK style
+const ChakraIcon = ({ color, type }) => {
+  const icons = {
+    root: ( // Square = grounded, stable
+      <svg width="32" height="32" viewBox="0 0 24 24" style={{ imageRendering: 'pixelated' }}>
+        <rect x="6" y="6" width="12" height="12" fill={color} />
+        <rect x="4" y="4" width="2" height="2" fill={color} opacity="0.6" />
+        <rect x="18" y="4" width="2" height="2" fill={color} opacity="0.6" />
+        <rect x="4" y="18" width="2" height="2" fill={color} opacity="0.6" />
+        <rect x="18" y="18" width="2" height="2" fill={color} opacity="0.6" />
+      </svg>
+    ),
+    sacral: ( // Water drop = flow
+      <svg width="32" height="32" viewBox="0 0 24 24" style={{ imageRendering: 'pixelated' }}>
+        <rect x="10" y="6" width="4" height="2" fill={color} />
+        <rect x="8" y="8" width="8" height="2" fill={color} />
+        <rect x="6" y="10" width="12" height="6" fill={color} />
+        <rect x="8" y="16" width="8" height="2" fill={color} />
+      </svg>
+    ),
+    solar: ( // Sun rays = power
+      <svg width="32" height="32" viewBox="0 0 24 24" style={{ imageRendering: 'pixelated' }}>
+        <rect x="10" y="10" width="4" height="4" fill={color} />
+        <rect x="12" y="4" width="2" height="4" fill={color} />
+        <rect x="12" y="16" width="2" height="4" fill={color} />
+        <rect x="4" y="12" width="4" height="2" fill={color} />
+        <rect x="16" y="12" width="4" height="2" fill={color} />
+      </svg>
+    ),
+    heart: ( // Heart = love
+      <svg width="32" height="32" viewBox="0 0 24 24" style={{ imageRendering: 'pixelated' }}>
+        <rect x="6" y="6" width="4" height="2" fill={color} />
+        <rect x="14" y="6" width="4" height="2" fill={color} />
+        <rect x="4" y="8" width="16" height="6" fill={color} />
+        <rect x="6" y="14" width="12" height="2" fill={color} />
+        <rect x="8" y="16" width="8" height="2" fill={color} />
+        <rect x="10" y="18" width="4" height="2" fill={color} />
+      </svg>
+    ),
+    throat: ( // Sound waves = voice
+      <svg width="32" height="32" viewBox="0 0 24 24" style={{ imageRendering: 'pixelated' }}>
+        <rect x="10" y="8" width="4" height="8" fill={color} />
+        <rect x="6" y="10" width="2" height="4" fill={color} opacity="0.7" />
+        <rect x="16" y="10" width="2" height="4" fill={color} opacity="0.7" />
+        <rect x="4" y="11" width="2" height="2" fill={color} opacity="0.4" />
+        <rect x="18" y="11" width="2" height="2" fill={color} opacity="0.4" />
+      </svg>
+    ),
+    third_eye: ( // Eye = seeing
+      <svg width="32" height="32" viewBox="0 0 24 24" style={{ imageRendering: 'pixelated' }}>
+        <rect x="6" y="10" width="12" height="4" fill={color} />
+        <rect x="4" y="12" width="2" height="2" fill={color} opacity="0.5" />
+        <rect x="18" y="12" width="2" height="2" fill={color} opacity="0.5" />
+        <rect x="10" y="11" width="4" height="2" fill="#000" />
+      </svg>
+    ),
+    crown: ( // Crown = infinite
+      <svg width="32" height="32" viewBox="0 0 24 24" style={{ imageRendering: 'pixelated' }}>
+        <rect x="6" y="14" width="12" height="2" fill={color} />
+        <rect x="8" y="10" width="2" height="4" fill={color} />
+        <rect x="14" y="10" width="2" height="4" fill={color} />
+        <rect x="10" y="8" width="4" height="2" fill={color} />
+        <rect x="11" y="6" width="2" height="2" fill={color} />
+      </svg>
+    )
+  };
+  
+  return icons[type] || icons.root;
+};
+
 const CHAKRAS = [
   {
     id: 'root',
     name: 'Root',
-    emoji: '🔴',
     location: 'Lower Back',
     frequency: 396,
     painFrequency: 174,
@@ -28,7 +97,6 @@ const CHAKRAS = [
   {
     id: 'sacral',
     name: 'Sacral',
-    emoji: '🟠',
     location: 'Lower Belly',
     frequency: 417,
     painFrequency: 174,
@@ -41,7 +109,6 @@ const CHAKRAS = [
   {
     id: 'solar',
     name: 'Solar Plexus',
-    emoji: '🟡',
     location: 'Stomach',
     frequency: 528,
     painFrequency: 285,
@@ -54,7 +121,6 @@ const CHAKRAS = [
   {
     id: 'heart',
     name: 'Heart',
-    emoji: '💚',
     location: 'Chest',
     frequency: 639,
     painFrequency: 432,
@@ -67,7 +133,6 @@ const CHAKRAS = [
   {
     id: 'throat',
     name: 'Throat',
-    emoji: '🔵',
     location: 'Neck',
     frequency: 741,
     painFrequency: 396,
@@ -80,7 +145,6 @@ const CHAKRAS = [
   {
     id: 'third_eye',
     name: 'Third Eye',
-    emoji: '🟣',
     location: 'Forehead',
     frequency: 852,
     painFrequency: 963,
@@ -93,7 +157,6 @@ const CHAKRAS = [
   {
     id: 'crown',
     name: 'Crown',
-    emoji: '⚪',
     location: 'Top of Head',
     frequency: 963,
     painFrequency: 852,
@@ -288,7 +351,9 @@ export default function Chakra51Protocol() {
               }}
             >
               <div className="text-center">
-                <p className="text-3xl mb-2">{chakra.emoji}</p>
+                <div className="mb-2 flex justify-center">
+                  <ChakraIcon color={chakra.color} type={chakra.id} />
+                </div>
                 <p className="font-black text-sm font-mono mb-1" style={{ color: chakra.color }}>
                   {chakra.name.toUpperCase()}
                 </p>
@@ -313,7 +378,14 @@ export default function Chakra51Protocol() {
             
             {/* Chakra identity */}
             <div className="text-center mb-6">
-              <p className="text-5xl mb-3">{selectedChakra.emoji}</p>
+              <div className="mb-3 flex justify-center">
+                <motion.div
+                  animate={{ scale: [1, 1.1, 1] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                >
+                  <ChakraIcon color={selectedChakra.color} type={selectedChakra.id} />
+                </motion.div>
+              </div>
               <h2 className="text-2xl font-black font-mono mb-2" style={{ color: selectedChakra.color }}>
                 {selectedChakra.name.toUpperCase()}
               </h2>
