@@ -46,15 +46,15 @@ export default function AI51MemoryViewer() {
   });
 
   return (
-    <div className="fixed bottom-20 right-4 z-40">
+    <div className="fixed bottom-24 right-5 z-40">
       <motion.button
         onClick={() => setIsOpen(!isOpen)}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
-        className="w-12 h-12 rounded-full bg-cyan-500 hover:bg-cyan-600 text-white font-black flex items-center justify-center shadow-lg"
+        className="w-10 h-10 rounded-full bg-pink-500/60 hover:bg-pink-500 text-white flex items-center justify-center shadow-lg transition-colors"
         title="AI51 memories"
       >
-        {isOpen ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+        {isOpen ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
       </motion.button>
 
       <AnimatePresence>
