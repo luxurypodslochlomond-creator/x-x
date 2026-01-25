@@ -162,8 +162,8 @@ CORE FEATURES:
 • Radio51: Lossless music, artists keep 90% (not 30% like Spotify)
 • Cleanup: Clean planet = earn $P51 tokens (love currency), verified by community instantly
 • PetSounds51: Heal animals with custom frequencies
-• CB51: AI co-manager for musicians - gigs, calendar, finance, band voting
-• Prof51: AI co-manager for students - budget, essays, housing, study, mental health
+• CB51: AI co-manager for musicians (gigs, calendar, team coordination)
+• Prof51: AI co-manager for students (tools for daily life)
 • $P51: Earn through action (healing, cleaning, creating, caring) - real value, not hype
 
 PHILOSOPHY:
