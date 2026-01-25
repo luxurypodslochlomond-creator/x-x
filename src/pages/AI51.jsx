@@ -394,7 +394,10 @@ AI51:`,
         </AnimatePresence>
 
         <div ref={messagesEndRef} />
-      </div>
+        </div>
+
+        {/* Memory Viewer */}
+        <AI51MemoryViewer />
 
       {/* INPUT AREA */}
       <div className="border-t border-cyan-500/20 bg-black/50 backdrop-blur p-4 space-y-3">
