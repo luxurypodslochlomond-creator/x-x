@@ -490,10 +490,20 @@ AI51:`,
                 const reader = new FileReader();
                 reader.onload = async () => {
                   try {
-                    const uploadRes = await base44.integrations.Core.UploadFile({ file: reader.result });
+                    // Convert ArrayBuffer to Blob, then to base64
+                    const blob = new Blob([reader.result], { type: file.type });
+                    const base64 = await new Promise((resolve) => {
+                      const reader2 = new FileReader();
+                      reader2.onload = () => resolve(reader2.result);
+                      reader2.readAsDataURL(blob);
+                    });
+                    
+                    const uploadRes = await base44.integrations.Core.UploadFile({ file: base64 });
                     setUploadedImage(uploadRes.file_url);
+                    setError(null);
                   } catch (err) {
                     console.error('Image upload failed:', err);
+                    setError(`Image upload failed: ${err.message}`);
                   }
                 };
                 reader.readAsArrayBuffer(file);
