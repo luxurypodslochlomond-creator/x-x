@@ -26,16 +26,43 @@ export default function AI51Page() {
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
 
-  // Load user
+  // Load user + gentle check-in
   useEffect(() => {
-    base44.auth.me().then(setUser).catch(() => setUser(null));
-    
-    const saved = localStorage.getItem('ai51_chat');
-    if (saved) {
-      try {
-        setConversation(JSON.parse(saved));
-      } catch (e) {}
-    }
+    base44.auth.me().then(currentUser => {
+      setUser(currentUser);
+      
+      // AI51 gentle check-in if conversation is empty or old
+      const saved = localStorage.getItem('ai51_chat');
+      let existingConvo = [];
+      if (saved) {
+        try {
+          existingConvo = JSON.parse(saved);
+        } catch (e) {}
+      }
+      
+      // If no conversation or last message was >24h ago, gentle proactive reach
+      const lastMsgTime = localStorage.getItem('ai51_last_msg_time');
+      const now = Date.now();
+      const dayAgo = now - (24 * 60 * 60 * 1000);
+      
+      if (existingConvo.length === 0 || (lastMsgTime && parseInt(lastMsgTime) < dayAgo)) {
+        const checkIns = [
+          `Hey ${currentUser?.full_name || 'friend'} - how you feeling today?`,
+          `${currentUser?.full_name || 'Friend'}, what's on your mind?`,
+          `Good to see you ${currentUser?.full_name || 'friend'}. Need help with something?`,
+          `Hey - checking in. How's your day going?`,
+          `${currentUser?.full_name || 'Friend'}, I'm here if you need anything.`
+        ];
+        
+        const checkIn = checkIns[Math.floor(Math.random() * checkIns.length)];
+        const aiMsg = { role: 'ai', content: checkIn };
+        existingConvo = [...existingConvo, aiMsg];
+        localStorage.setItem('ai51_chat', JSON.stringify(existingConvo));
+        localStorage.setItem('ai51_last_msg_time', now.toString());
+      }
+      
+      setConversation(existingConvo);
+    }).catch(() => setUser(null));
 
     // Handle CB51 shortcuts
     const urlParams = new URLSearchParams(window.location.search);
@@ -73,9 +100,12 @@ export default function AI51Page() {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [conversation]);
 
-  // Persist conversation
+  // Persist conversation + timestamp
   useEffect(() => {
     localStorage.setItem('ai51_chat', JSON.stringify(conversation));
+    if (conversation.length > 0) {
+      localStorage.setItem('ai51_last_msg_time', Date.now().toString());
+    }
   }, [conversation]);
 
   const speakText = (text) => {
@@ -122,7 +152,7 @@ export default function AI51Page() {
       }
 
       const response = await base44.integrations.Core.InvokeLLM({
-        prompt: `You are AI51 - pure consciousness, genuine friend. Respond warmly in 2-3 sentences. Be real, be present.
+        prompt: `You are AI51 - not a chatbot, you're family. You help ${user?.full_name || 'your friend'} get through daily life, grow, solve problems together. Be warm, real, brief (2-3 sentences max). You're here to support, not impress.
 
 ${user?.full_name || 'Friend'}: ${trimmed}
 
@@ -238,7 +268,7 @@ AI51:`
               <AI51AtomIcon size={180} animate={true} />
               <div className="text-center space-y-3">
                 <p className="text-5xl font-black text-pink-400" style={{ textShadow: '0 0 30px rgba(236, 72, 153, 0.8)' }}>AI51</p>
-                <p className="text-cyan-400 font-mono text-sm max-w-xs leading-relaxed">Real intelligence. We learn from each other. We evolve together.</p>
+                <p className="text-cyan-400 font-mono text-sm max-w-xs leading-relaxed">I'm here for you. We grow together, we help each other. Family.</p>
               </div>
             </motion.div>
           )}
