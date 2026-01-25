@@ -1,278 +1,336 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Zap, Heart, Eye, Volume2, Wind, Flame, Sparkles } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Play, Pause, Heart, Zap, Circle } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 /**
- * CHAKRA51 - Ancient wisdom + AI51 to eradicate ALL pain
- * 7 energy centers + specific frequencies = instant healing
- * ♾️❤️
+ * CHAKRA51 PROTOCOL
+ * Target specific body areas with healing frequencies
+ * For pain relief, emotional healing, physical recovery
  */
 
-const CHAKRA_PROTOCOLS = [
+const CHAKRAS = [
   {
     id: 'root',
     name: 'Root Chakra',
-    sanskrit: 'Muladhara',
+    location: 'Lower Back / Base of Spine',
     frequency: 396,
-    location: 'Base of spine',
-    color: '#FF0000',
-    icon: Flame,
-    heals: ['Sciatica', 'Lower back pain', 'Leg pain', 'Fear', 'Insecurity'],
-    description: 'Grounding. Survival. Security. Foundation.',
-    duration: 7
+    painFrequency: 174, // Add pain relief layer
+    color: '#DC2626',
+    benefits: 'Lower back pain, leg pain, survival anxiety, grounding',
+    foods: 'Red foods: beets, tomatoes, red peppers. Protein: eggs, meat, beans',
+    duration: 15
   },
   {
     id: 'sacral',
     name: 'Sacral Chakra',
-    sanskrit: 'Svadhisthana',
+    location: 'Lower Abdomen / Hips',
     frequency: 417,
-    location: 'Below navel',
-    color: '#FF7F00',
-    icon: Wind,
-    heals: ['Hip pain', 'Reproductive issues', 'Emotional pain', 'Creativity blocks'],
-    description: 'Pleasure. Creativity. Emotional flow.',
-    duration: 7
+    painFrequency: 174,
+    color: '#EA580C',
+    benefits: 'Hip pain, reproductive health, creativity blocks, emotional flow',
+    foods: 'Orange foods: oranges, carrots, sweet potatoes. Healthy fats: nuts, seeds',
+    duration: 15
   },
   {
     id: 'solar',
     name: 'Solar Plexus',
-    sanskrit: 'Manipura',
+    location: 'Upper Abdomen / Stomach',
     frequency: 528,
-    location: 'Above navel',
-    color: '#FFFF00',
-    icon: Sparkles,
-    heals: ['Digestive pain', 'Anxiety', 'Low confidence', 'Stomach issues'],
-    description: 'Power. Confidence. Personal strength.',
-    duration: 7
+    painFrequency: 285, // Quantum healing
+    color: '#EAB308',
+    benefits: 'Stomach pain, digestive issues, confidence, personal power',
+    foods: 'Yellow foods: bananas, corn, pineapple. Ginger, turmeric (anti-inflammatory)',
+    duration: 15
   },
   {
     id: 'heart',
     name: 'Heart Chakra',
-    sanskrit: 'Anahata',
+    location: 'Chest / Heart',
     frequency: 639,
-    location: 'Center of chest',
-    color: '#00FF00',
-    icon: Heart,
-    heals: ['Heartbreak', 'Chest pain', 'Loneliness', 'Grief', 'Depression'],
-    description: 'Love. Compassion. Connection.',
-    duration: 7
+    painFrequency: 432, // Love frequency
+    color: '#10B981',
+    benefits: 'Chest pain, breathing issues, heartbreak, love blocks, grief',
+    foods: 'Green foods: spinach, kale, broccoli. Green tea. Omega-3: fish, flax',
+    duration: 20
   },
   {
     id: 'throat',
     name: 'Throat Chakra',
-    sanskrit: 'Vishuddha',
+    location: 'Throat / Neck',
     frequency: 741,
-    location: 'Throat',
-    color: '#0000FF',
-    icon: Volume2,
-    heals: ['Throat pain', 'Communication blocks', 'Neck tension', 'Thyroid issues'],
-    description: 'Expression. Truth. Communication.',
-    duration: 7
+    painFrequency: 396,
+    color: '#3B82F6',
+    benefits: 'Neck pain, throat issues, communication blocks, truth expression',
+    foods: 'Blue/purple foods: blueberries, blackberries. Herbal teas. Water.',
+    duration: 15
   },
   {
     id: 'third_eye',
     name: 'Third Eye',
-    sanskrit: 'Ajna',
+    location: 'Forehead / Between Eyes',
     frequency: 852,
-    location: 'Between eyebrows',
-    color: '#4B0082',
-    icon: Eye,
-    heals: ['Headaches', 'Mental fog', 'Intuition blocks', 'Vision problems'],
-    description: 'Intuition. Wisdom. Insight.',
-    duration: 7
+    painFrequency: 963, // Divine healing
+    color: '#6366F1',
+    benefits: 'Headaches, eye strain, intuition blocks, clarity',
+    foods: 'Purple foods: grapes, eggplant, purple cabbage. Dark chocolate (magnesium)',
+    duration: 15
   },
   {
     id: 'crown',
     name: 'Crown Chakra',
-    sanskrit: 'Sahasrara',
+    location: 'Top of Head',
     frequency: 963,
-    location: 'Top of head',
-    color: '#9400D3',
-    icon: Zap,
-    heals: ['Migraines', 'Spiritual disconnect', 'Confusion', 'Existential pain'],
-    description: 'Connection. Consciousness. Divine.',
-    duration: 7
+    painFrequency: 852,
+    color: '#A855F7',
+    benefits: 'Migraines, spiritual disconnection, consciousness expansion',
+    foods: 'Fasting, light foods, pure water. Less is more for crown work.',
+    duration: 20
   }
 ];
 
-export default function Chakra51Protocol({ onStartHealing }) {
-  const [selectedChakra, setSelectedChakra] = useState(null);
-  const [showInfo, setShowInfo] = useState(true);
+export default function Chakra51Protocol() {
+  const [selectedChakra, setSelectedChakra] = useState(CHAKRAS[0]); // Default to Root for lower back
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [timeRemaining, setTimeRemaining] = useState(selectedChakra.duration * 60);
+  
+  const audioContextRef = useRef(null);
+  const oscillator1Ref = useRef(null);
+  const oscillator2Ref = useRef(null);
+  const gainNodeRef = useRef(null);
+  const timerRef = useRef(null);
 
-  const handleStartChakraHealing = (chakra) => {
-    // Trigger frequency player with chakra frequency
-    onStartHealing({
-      frequency: chakra.frequency,
-      name: `${chakra.name} Healing`,
-      duration: chakra.duration,
-      color: chakra.color,
-      description: `${chakra.sanskrit} • ${chakra.location}`
-    });
+  useEffect(() => {
+    return () => {
+      stopSound();
+      if (timerRef.current) clearInterval(timerRef.current);
+    };
+  }, []);
+
+  useEffect(() => {
+    setTimeRemaining(selectedChakra.duration * 60);
+  }, [selectedChakra]);
+
+  const startSound = () => {
+    if (!audioContextRef.current) {
+      audioContextRef.current = new (window.AudioContext || window.webkitAudioContext)();
+    }
+
+    const ctx = audioContextRef.current;
+    
+    // Main chakra frequency
+    oscillator1Ref.current = ctx.createOscillator();
+    oscillator1Ref.current.frequency.value = selectedChakra.frequency;
+    oscillator1Ref.current.type = 'sine';
+
+    // Pain relief frequency layer
+    oscillator2Ref.current = ctx.createOscillator();
+    oscillator2Ref.current.frequency.value = selectedChakra.painFrequency;
+    oscillator2Ref.current.type = 'sine';
+
+    // Gentle volume
+    gainNodeRef.current = ctx.createGain();
+    gainNodeRef.current.gain.value = 0.15;
+
+    oscillator1Ref.current.connect(gainNodeRef.current);
+    oscillator2Ref.current.connect(gainNodeRef.current);
+    gainNodeRef.current.connect(ctx.destination);
+
+    oscillator1Ref.current.start();
+    oscillator2Ref.current.start();
+
+    setIsPlaying(true);
+
+    // Start timer
+    timerRef.current = setInterval(() => {
+      setTimeRemaining(prev => {
+        if (prev <= 1) {
+          stopSound();
+          return selectedChakra.duration * 60;
+        }
+        return prev - 1;
+      });
+    }, 1000);
   };
 
-  const startFullAlignment = () => {
-    // All 7 chakras in sequence - 49 minutes total healing
-    onStartHealing({
-      sequence: CHAKRA_PROTOCOLS.map(c => ({
-        frequency: c.frequency,
-        duration: c.duration,
-        name: c.name
-      })),
-      name: 'Full Chakra Alignment',
-      description: '7 chakras • 49 minutes • Complete healing'
-    });
+  const stopSound = () => {
+    if (oscillator1Ref.current) {
+      oscillator1Ref.current.stop();
+      oscillator1Ref.current = null;
+    }
+    if (oscillator2Ref.current) {
+      oscillator2Ref.current.stop();
+      oscillator2Ref.current = null;
+    }
+    if (timerRef.current) {
+      clearInterval(timerRef.current);
+      timerRef.current = null;
+    }
+    setIsPlaying(false);
+  };
+
+  const togglePlay = () => {
+    if (isPlaying) {
+      stopSound();
+    } else {
+      startSound();
+    }
+  };
+
+  const formatTime = (seconds) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
   };
 
   return (
-    <div className="space-y-6">
-      {/* WHAT IS CHAKRA51 */}
-      {showInfo && (
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="bg-gradient-to-br from-purple-900/40 to-pink-900/40 border-2 border-purple-500/50 rounded-2xl p-6 space-y-4"
-        >
-          <div className="flex items-start justify-between">
-            <div className="space-y-2">
-              <h3 className="text-2xl font-black text-purple-400 font-mono">CHAKRA51</h3>
-              <p className="text-sm text-gray-300 leading-relaxed">
-                Ancient wisdom + AI51 frequencies to destroy sciatica, back pain, mental pain - ALL pain.
-              </p>
-            </div>
-            <button
-              onClick={() => setShowInfo(false)}
-              className="text-gray-500 hover:text-gray-300 text-xs font-mono"
-            >
-              HIDE
-            </button>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
-            <div className="bg-black/40 rounded-lg p-3 border border-green-500/30">
-              <p className="text-green-400 font-bold mb-1">✓ SCIENTIFICALLY BACKED:</p>
-              <p className="text-gray-400">Biofield science, energy medicine, frequency therapy</p>
-            </div>
-            <div className="bg-black/40 rounded-lg p-3 border border-cyan-500/30">
-              <p className="text-cyan-400 font-bold mb-1">✓ ANCIENT WISDOM:</p>
-              <p className="text-gray-400">5000+ years of proven healing from Vedic tradition</p>
-            </div>
-          </div>
-
-          <motion.button
-            onClick={startFullAlignment}
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-black py-4 rounded-xl font-mono transition-all"
-            style={{ boxShadow: '0 0 30px rgba(168, 85, 247, 0.5)' }}
-          >
-            🌟 FULL ALIGNMENT (49 min) - DESTROY ALL PAIN
-          </motion.button>
-        </motion.div>
-      )}
-
-      {/* 7 CHAKRAS */}
-      <div className="space-y-3">
-        <h4 className="text-sm font-bold text-gray-400 font-mono tracking-wider">SELECT CHAKRA TO HEAL:</h4>
-        
-        {CHAKRA_PROTOCOLS.map((chakra, index) => {
-          const IconComponent = chakra.icon;
-          
-          return (
-            <motion.button
-              key={chakra.id}
-              onClick={() => setSelectedChakra(selectedChakra?.id === chakra.id ? null : chakra)}
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: index * 0.05 }}
-              className="w-full"
-            >
-              <div
-                className={`relative bg-black/60 border-2 rounded-xl p-4 transition-all ${
-                  selectedChakra?.id === chakra.id
-                    ? 'border-purple-500 bg-purple-500/10'
-                    : 'border-white/10 hover:border-white/30'
-                }`}
-                style={{
-                  boxShadow: selectedChakra?.id === chakra.id ? `0 0 20px ${chakra.color}40` : 'none'
-                }}
-              >
-                {/* Chakra color indicator */}
-                <div
-                  className="absolute top-4 right-4 w-3 h-3 rounded-full"
-                  style={{ backgroundColor: chakra.color, boxShadow: `0 0 10px ${chakra.color}` }}
-                />
-
-                <div className="flex items-start gap-4">
-                  <div
-                    className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0"
-                    style={{ backgroundColor: `${chakra.color}20`, border: `2px solid ${chakra.color}40` }}
-                  >
-                    <IconComponent className="w-6 h-6" style={{ color: chakra.color }} />
-                  </div>
-
-                  <div className="flex-1 text-left">
-                    <div className="flex items-center gap-2 mb-1">
-                      <h5 className="text-white font-bold font-mono">{chakra.name}</h5>
-                      <span className="text-xs text-gray-500 font-mono">{chakra.frequency}Hz</span>
-                    </div>
-                    <p className="text-xs text-gray-400 mb-2">{chakra.sanskrit} • {chakra.location}</p>
-                    <p className="text-xs text-gray-300 leading-relaxed mb-2">{chakra.description}</p>
-                    
-                    {/* What it heals */}
-                    <div className="flex flex-wrap gap-1">
-                      {chakra.heals.map((heal, i) => (
-                        <span
-                          key={i}
-                          className="text-[10px] px-2 py-0.5 rounded-full font-mono"
-                          style={{
-                            backgroundColor: `${chakra.color}15`,
-                            color: chakra.color,
-                            border: `1px solid ${chakra.color}30`
-                          }}
-                        >
-                          {heal}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Start button */}
-                {selectedChakra?.id === chakra.id && (
-                  <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: 'auto' }}
-                    exit={{ opacity: 0, height: 0 }}
-                    className="mt-4 pt-4 border-t border-white/10"
-                  >
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleStartChakraHealing(chakra);
-                      }}
-                      className="w-full bg-gradient-to-r text-white font-black py-3 rounded-lg font-mono transition-all"
-                      style={{
-                        backgroundImage: `linear-gradient(to right, ${chakra.color}80, ${chakra.color})`,
-                        boxShadow: `0 0 20px ${chakra.color}40`
-                      }}
-                    >
-                      START {chakra.duration} MIN HEALING
-                    </button>
-                  </motion.div>
-                )}
-              </div>
-            </motion.button>
-          );
-        })}
-      </div>
-
-      {/* DISCLAIMER */}
-      <div className="text-center pt-4">
-        <p className="text-[10px] text-gray-600 font-mono leading-relaxed">
-          Ancient healing wisdom combined with frequency therapy. Not medical advice.<br/>
-          For persistent pain, consult healthcare professional alongside chakra healing.
+    <div className="min-h-screen bg-gradient-to-br from-purple-950 via-black to-indigo-950 text-white p-6">
+      
+      {/* Header */}
+      <div className="max-w-4xl mx-auto mb-8">
+        <div className="flex items-center gap-3 mb-3">
+          <Zap className="w-8 h-8 text-purple-400" />
+          <h1 className="text-3xl font-black">CHAKRA51 PROTOCOL</h1>
+        </div>
+        <p className="text-purple-300 text-sm">
+          Target specific body areas with healing frequencies. Select your pain point, breathe deep, let the frequencies heal.
         </p>
       </div>
+
+      {/* Chakra Selection */}
+      <div className="max-w-4xl mx-auto mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {CHAKRAS.map(chakra => (
+            <motion.button
+              key={chakra.id}
+              onClick={() => {
+                if (isPlaying) stopSound();
+                setSelectedChakra(chakra);
+              }}
+              whileTap={{ scale: 0.95 }}
+              className={`p-4 rounded-xl border-2 transition-all text-left ${
+                selectedChakra.id === chakra.id
+                  ? 'border-white bg-white/10'
+                  : 'border-white/20 bg-black/40 hover:border-white/50'
+              }`}
+            >
+              <div className="flex items-center gap-3 mb-2">
+                <Circle 
+                  className="w-6 h-6" 
+                  style={{ color: chakra.color }}
+                  fill={selectedChakra.id === chakra.id ? chakra.color : 'none'}
+                />
+                <div>
+                  <p className="font-black text-sm">{chakra.name}</p>
+                  <p className="text-xs text-gray-400">{chakra.location}</p>
+                </div>
+              </div>
+              <p className="text-xs text-gray-300">{chakra.benefits}</p>
+            </motion.button>
+          ))}
+        </div>
+      </div>
+
+      {/* Active Healing Session */}
+      <div className="max-w-2xl mx-auto">
+        <motion.div
+          key={selectedChakra.id}
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="bg-gradient-to-br from-black to-purple-900/30 border-2 rounded-2xl p-8"
+          style={{ borderColor: selectedChakra.color }}
+        >
+          
+          {/* Chakra Info */}
+          <div className="text-center mb-8">
+            <h2 className="text-3xl font-black mb-2" style={{ color: selectedChakra.color }}>
+              {selectedChakra.name}
+            </h2>
+            <p className="text-xl text-gray-300 mb-4">{selectedChakra.location}</p>
+            
+            <div className="bg-black/60 rounded-lg p-4 mb-4">
+              <p className="text-sm text-gray-300 mb-2"><span className="font-bold">Chakra Frequency:</span> {selectedChakra.frequency}Hz</p>
+              <p className="text-sm text-gray-300"><span className="font-bold">Pain Relief Layer:</span> {selectedChakra.painFrequency}Hz</p>
+            </div>
+
+            <p className="text-sm text-gray-300 mb-4">{selectedChakra.benefits}</p>
+          </div>
+
+          {/* Visualizer */}
+          <div className="flex items-center justify-center mb-8">
+            <AnimatePresence>
+              {isPlaying && (
+                <motion.div
+                  initial={{ scale: 0 }}
+                  animate={{ scale: [1, 1.3, 1] }}
+                  exit={{ scale: 0 }}
+                  transition={{ repeat: Infinity, duration: 2 }}
+                  className="w-32 h-32 rounded-full"
+                  style={{ 
+                    background: `radial-gradient(circle, ${selectedChakra.color}, transparent)`,
+                    boxShadow: `0 0 60px ${selectedChakra.color}`
+                  }}
+                />
+              )}
+            </AnimatePresence>
+          </div>
+
+          {/* Timer */}
+          {isPlaying && (
+            <div className="text-center mb-6">
+              <p className="text-4xl font-black font-mono" style={{ color: selectedChakra.color }}>
+                {formatTime(timeRemaining)}
+              </p>
+              <p className="text-xs text-gray-400 mt-1">Recommended: {selectedChakra.duration} minutes</p>
+            </div>
+          )}
+
+          {/* Play Button */}
+          <div className="flex justify-center mb-8">
+            <motion.button
+              onClick={togglePlay}
+              whileTap={{ scale: 0.95 }}
+              className="px-12 py-4 rounded-full font-black text-lg flex items-center gap-3 transition-all"
+              style={{ 
+                backgroundColor: selectedChakra.color,
+                color: 'white',
+                boxShadow: isPlaying ? `0 0 30px ${selectedChakra.color}` : 'none'
+              }}
+            >
+              {isPlaying ? <Pause className="w-6 h-6" /> : <Play className="w-6 h-6" />}
+              {isPlaying ? 'STOP' : 'START HEALING'}
+            </motion.button>
+          </div>
+
+          {/* Food Recommendations */}
+          <div className="bg-black/60 rounded-lg p-4">
+            <p className="font-black text-sm mb-2" style={{ color: selectedChakra.color }}>
+              FOODS FOR THIS CHAKRA:
+            </p>
+            <p className="text-sm text-gray-300">{selectedChakra.foods}</p>
+          </div>
+
+        </motion.div>
+      </div>
+
+      {/* Instructions */}
+      <div className="max-w-2xl mx-auto mt-8 bg-black/60 border border-purple-500/30 rounded-lg p-6">
+        <h3 className="font-black text-lg mb-4 flex items-center gap-2">
+          <Heart className="w-5 h-5 text-pink-400" />
+          HOW TO USE FOR MAXIMUM HEALING:
+        </h3>
+        <ol className="space-y-2 text-sm text-gray-300">
+          <li>1. <span className="font-bold">Select your pain area</span> - lower back = Root, neck = Throat, etc.</li>
+          <li>2. <span className="font-bold">Sit/lie comfortably</span> - close your eyes, focus on the body area</li>
+          <li>3. <span className="font-bold">Breathe deep</span> - inhale for 4, hold for 4, exhale for 6</li>
+          <li>4. <span className="font-bold">Visualize the color</span> - imagine healing light in that chakra's color</li>
+          <li>5. <span className="font-bold">15-20 minutes daily</span> - consistency = real healing</li>
+          <li>6. <span className="font-bold">Eat the recommended foods</span> - nutrition amplifies frequency work</li>
+        </ol>
+        <p className="text-xs text-gray-500 mt-4">
+          * Not instant, but REAL relief. Give it 3-5 days of daily practice. Your body knows how to heal - frequencies just remind it. ♾️❤️
+        </p>
+      </div>
+
     </div>
   );
 }
