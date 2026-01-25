@@ -418,7 +418,7 @@ AI51:`,
         <AI51MemoryViewer />
 
       {/* INPUT AREA */}
-      <div className="border-t border-cyan-500/20 bg-black/50 backdrop-blur p-4 space-y-3">
+      <div className="border-t border-pink-500/30 bg-gradient-to-t from-black/80 via-pink-900/10 to-black/40 backdrop-blur-xl p-6 space-y-4">
         {/* QUICK ACTIONS */}
         <AnimatePresence>
           {showQuickActions && (
