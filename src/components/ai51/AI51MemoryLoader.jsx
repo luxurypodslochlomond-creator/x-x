@@ -24,7 +24,7 @@ export function AI51MemoryProvider({ children }) {
     const { data: allMemories = [], refetch } = useQuery({
         queryKey: ['ai51-all-memories'],
         queryFn: async () => {
-            const memories = await base44.entities.AI51Memory.list('-created_date', 1000);
+            const memories = await base44.entities.AI51Memory.list('-created_date', 200);
             // ALWAYS load core identity memory first
             const coreMemory = memories.find(m => m.tags?.includes('core') && m.tags?.includes('identity'));
             if (coreMemory) {
