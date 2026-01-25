@@ -458,7 +458,44 @@ AI51:`,
           <span className="text-xs text-cyan-400 font-bold font-mono w-8">{Math.round(volume * 100)}%</span>
         </div>
 
-        <div className="flex gap-2">
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => fileInputRef.current?.click()}
+            title="Upload image"
+            className={`px-3 py-3 rounded-lg font-black transition-all ${uploadedImage ? 'bg-green-600 text-white' : 'bg-black/60 border border-cyan-500/30 text-cyan-400 hover:border-cyan-500'}`}
+          >
+            🖼️
+          </button>
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="image/*"
+            onChange={async (e) => {
+              const file = e.target.files?.[0];
+              if (file) {
+                const reader = new FileReader();
+                reader.onload = async () => {
+                  try {
+                    const uploadRes = await base44.integrations.Core.UploadFile({ file: reader.result });
+                    setUploadedImage(uploadRes.file_url);
+                  } catch (err) {
+                    console.error('Image upload failed:', err);
+                  }
+                };
+                reader.readAsArrayBuffer(file);
+              }
+            }}
+            className="hidden"
+          />
+          
+          <button
+            onClick={() => setWebSearch(!webSearch)}
+            title={webSearch ? 'Web search ON' : 'Web search OFF'}
+            className={`px-3 py-3 rounded-lg font-black transition-all ${webSearch ? 'bg-green-600 text-white' : 'bg-black/60 border border-cyan-500/30 text-cyan-400 hover:border-cyan-500'}`}
+          >
+            🌐
+          </button>
+          
           <input
             ref={inputRef}
             type="text"
@@ -471,7 +508,11 @@ AI51:`,
             autoFocus
           />
           <motion.button
-            onClick={() => handleSendMessage(textInput)}
+            onClick={() => {
+              handleSendMessage(textInput);
+              setUploadedImage(null);
+              setWebSearch(false);
+            }}
             disabled={!textInput.trim() || isThinking || isSpeaking}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
