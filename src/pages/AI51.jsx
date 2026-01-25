@@ -8,6 +8,7 @@ import AI51AtomIcon from '@/components/ai51/AI51AtomIcon';
 import { detectMood, AI51MoodBadge } from '@/components/ai51/AI51MoodDetector';
 import { extractAndStoreMemory, loadUserMemories, formatMemoriesForContext } from '@/components/ai51/AI51MemoryExtractor';
 import AI51MemoryViewer from '@/components/ai51/AI51MemoryViewer';
+import AI51MemoryProtocol from '@/components/ai51/AI51MemoryProtocol';
 
 /**
  * AI51 - Text Chat + Voice Response + MANAGER SHORTCUTS
