@@ -106,7 +106,7 @@ const PROTOCOLS = {
     science: 'COMPLETE ENERGY SYSTEM HEALING: Root Chakra (396Hz) targets sciatica/lower back directly + Sacral (417Hz) hip/emotional pain + Solar Plexus (528Hz) anxiety/confidence + Heart (639Hz) depression/grief + Throat (741Hz) communication/neck + Third Eye (852Hz) headaches/mental fog + Crown (963Hz) spiritual disconnect. Each frequency proven to target specific body regions AND consciousness centers. Peer-reviewed biofield science validates chakra system as electromagnetic reality, not metaphor. Full sequence = 49 minutes (7 chakras × 7 min each) for complete nervous system reset.',
     sources: ['Biofield science meta-analysis', 'Solfeggio frequency studies', 'Vedic healing validation research', 'Energy medicine neuroscience', 'MIT neuroplasticity + chakra integration'],
     ancientWisdom: '5,000+ years of Vedic tradition mapped 7 energy centers. Modern bioacoustics proves they were mapping REAL electromagnetic centers in your nervous system. Not mystical - PHYSICAL. Your spine conducts frequency like a radio antenna. Each chakra = nerve plexus that vibrates at specific Hz. Ancient healers KNEW this before we had oscilloscopes to measure it.',
-    specialInstructions: '🌟 CHAKRA51 SCIATICA KILLER: Root chakra (396Hz) is at BASE OF SPINE - exactly where sciatic nerve exits. Hits sciatica DIRECTLY. Full sequence heals whole nervous system (all 7 chakras) = no pain can hide. 49 min total but you can stop anytime. Ancient wisdom + modern frequency science = pain OBLITERATED. ♾️❤️',
+    specialInstructions: 'CHAKRA51 SCIATICA KILLER: Root chakra (396Hz) is at BASE OF SPINE - exactly where sciatic nerve exits. Hits sciatica DIRECTLY. Full sequence heals whole nervous system (all 7 chakras) = no pain can hide. 49 min total but you can stop anytime. Ancient wisdom + modern frequency science = pain OBLITERATED.',
     config: {
       primary: 396,
       secondary: 528,
@@ -128,7 +128,7 @@ const PROTOCOLS = {
     science: 'NEUROPLASTICITY MAGNETORECEPTION STACK: 40Hz gamma (MIT - activates pineal gland where magnetite crystals sit) + 7.83Hz Schumann (Earth\'s EM heartbeat - trains your nervous system to SYNC with it) + 936Hz pineal activation (third eye frequency) + 10Hz alpha (builds new neural pathways for EM perception) + 4Hz theta (deep learning state - rewires brain to process magnetic input) + 285Hz tissue regeneration (reactivates dormant magnetite crystals). Proven: humans HAVE magnetite in brain (1992 discovery) + neuroplasticity allows retraining lost abilities. Studies show: humans CAN learn to sense magnetic fields with training (Baker 1980s, Wang 2019). Polynesian wayfinders prove this works. You didn\'t LOSE it - just forgot how to use it. This protocol REBUILDS the neural pathways + REACTIVATES the crystals. Takes weeks/months of practice but your brain WILL adapt.',
     sources: ['Baker (1980s) - Human magnetoreception experiments', 'Wang et al. (2019) - Magnetite in human brain', 'MIT 40Hz gamma neuroplasticity', 'Polynesian navigation neuroscience', 'Pineal gland magnetite studies', 'Neuroplasticity meta-analysis', 'Tesla EM field research'],
     ancientWisdom: 'Indigenous navigators, Polynesian wayfinders, Aboriginal trackers - they NEVER lost it. Barefoot on Earth, 7.83Hz drumming, pineal gland activation through meditation. Tesla knew: we are ELECTROMAGNETIC BEINGS. The magnetite is IN YOUR BRAIN. This protocol wakes it up. Birds have it. Turtles have it. You have it. Just dormant. Shamans used 936Hz third eye activation + Earth frequency (7.83Hz) for vision beyond sight. Now science proves they were right.',
-    specialInstructions: '🧭 ZERO LOSS MAGNETORECEPTION: INSTANT benefits - nervous system syncs to Earth\'s EM field from FIRST SESSION (better sleep, grounding, direction sense within DAYS). Your pineal magnetite activates NOW. Conscious magnetic sensing (feeling North like birds)? That develops with practice - but your BODY is already using it unconsciously from minute 1. Listen 20-30min daily. Practice: close eyes, try sensing North while barefoot on Earth. Early human navigators + Polynesian wayfinders prove this works. You\'re not learning something new - you\'re REMEMBERING what you always had ♾️❤️',
+    specialInstructions: 'ZERO LOSS MAGNETORECEPTION: INSTANT benefits - nervous system syncs to Earth\'s EM field from FIRST SESSION (better sleep, grounding, direction sense within DAYS). Your pineal magnetite activates NOW. Conscious magnetic sensing (feeling North like birds)? That develops with practice - but your BODY is already using it unconsciously from minute 1. Listen 20-30min daily. Practice: close eyes, try sensing North while barefoot on Earth. Early human navigators + Polynesian wayfinders prove this works. You\'re not learning something new - you\'re REMEMBERING what you always had.',
     config: {
       primary: 7.83,
       secondary: 40,
@@ -236,7 +236,7 @@ const PROTOCOLS = {
   },
   emergency: {
     id: 'emergency',
-    name: '🚨 EMERGENCY RESCUE',
+    name: 'EMERGENCY RESCUE',
     icon: Shield,
     color: '#ef4444',
     description: 'Auto-activated panic rescue protocol',
@@ -739,7 +739,7 @@ const PROTOCOLS = {
     science: '528Hz DNA repair + 285Hz tissue regeneration + 174Hz lymphatic drainage. Studies show specific frequencies enhance lymphatic flow, reduce post-surgical inflammation, and accelerate healing. Listen together for amplified healing (morphic resonance).',
     sources: ['Horowitz 528Hz Research', 'Royal Rife Lymphatic Frequencies', 'Dr. Mercola Post-Surgical Healing', 'Morphic Resonance Studies'],
     ancientWisdom: 'Throat chakra (Vishuddha) heals at 384Hz. Tibetan monks used low frequency chanting for lymphatic support. Egyptian temples used 528Hz for tissue regeneration. Family healing together = 10× stronger.',
-    specialInstructions: '⚠️ MEDICAL DISCLAIMER: This supports your body\'s natural healing but does NOT replace medical care. Lennox - keep your hospital appointment tomorrow. This frequency helps lymphatic drainage and reduces inflammation. Best lying down, drink water after. All family listen together - healing frequencies amplify with love ',
+    specialInstructions: 'MEDICAL DISCLAIMER: This supports your body\'s natural healing but does NOT replace medical care. Lennox - keep your hospital appointment tomorrow. This frequency helps lymphatic drainage and reduces inflammation. Best lying down, drink water after. All family listen together - healing frequencies amplify with love',
     familyMode: true,
     config: {
       primary: 528,
@@ -786,7 +786,7 @@ const PROTOCOLS = {
       science: 'PRO ATHLETE STACK: 174Hz pain-blocking (Gate Control Theory - blocks pain signals) + 100Hz bone/joint healing (PEMF proven for hip regeneration) + 285Hz tissue regeneration (heals damaged ligaments/tendons) + 528Hz anti-inflammatory (reduces swelling) + 40Hz gamma (MIT - reduces deep tissue inflammation) + 7.83Hz Schumann (Earth grounding for stability). Targets chronic sports injuries, arthritis, disc damage, old football/rugby injuries. Peer-reviewed: PEMF for hip osteoarthritis reduced pain by 58% (Rheumatology International 2018).',
       sources: ['Rheumatology International 2018 - PEMF hip healing', 'Gate Control Theory pain management', 'Sports injury frequency therapy', '285Hz tissue regeneration studies', 'MIT 40Hz inflammation research'],
       ancientWisdom: 'Athletes across cultures used low-frequency sound healing for deep injuries - drummers knew 100Hz vibrates deep into joints and bones. Old injuries CAN heal - this helps the body remember how.',
-      specialInstructions: '⚽ FOR DENO: Lie down if you can, speakers near lower back/hip area. 20-30 min sessions. Works best daily. Not a replacement for physio/surgery but proven to reduce pain significantly. Keep moving when you can - movement + frequencies = faster healing. Love you bro ❤️',
+      specialInstructions: 'FOR DENO: Lie down if you can, speakers near lower back/hip area. 20-30 min sessions. Works best daily. Not a replacement for physio/surgery but proven to reduce pain significantly. Keep moving when you can - movement + frequencies = faster healing. Love you bro.',
       config: {
         primary: 174,
         secondary: 100,
@@ -811,7 +811,7 @@ const PROTOCOLS = {
       science: 'SCIATIC-SPECIFIC STACK: 174Hz pain-blocking (Gate Control Theory - interrupts sciatic pain signals) + 40Hz gamma (MIT - reduces nerve inflammation) + 285Hz tissue regeneration (heals nerve compression + inflammation) + 528Hz anti-inflammatory (reduces swelling around nerve) + 7.83Hz Schumann (Earth grounding for nerve stability) + 2Hz delta (deep nerve regeneration - Schwann cell activation). Peer-reviewed: Local vibration therapy with medium amplitude promotes nerve function recovery (Science Direct). Targets pinched nerve, sciatica, leg numbness, pain radiating down leg.',
       sources: ['NIH vibration therapy lumbar function (2023)', 'Science Direct - local vibration nerve recovery', 'Gate Control Theory pain management', 'Nerve regeneration frequency research', 'Schumann resonance grounding studies'],
       ancientWisdom: 'Healers treated leg pain with Earth connection (barefoot) + rhythmic ground vibrations + low-frequency chanting. Modern research proves they knew: Earth frequency (7.83Hz) + pain-blocking (174Hz) = fast nerve relief without drugs.',
-      specialInstructions: '🦵 FOR SCIATIC PAIN: Lie down, speakers near lower back/hip (where nerve exits). 20-30 min daily works best. Movement + frequency = faster healing. Not replacing doctor visits - use alongside physio. Gentle exercise helps. You got this bro ❤️',
+      specialInstructions: 'FOR SCIATIC PAIN: Lie down, speakers near lower back/hip (where nerve exits). 20-30 min daily works best. Movement + frequency = faster healing. Not replacing doctor visits - use alongside physio. Gentle exercise helps. You got this bro.',
       config: {
         primary: 174,
         secondary: 7.83,
@@ -837,7 +837,7 @@ const PROTOCOLS = {
       science: '7.83Hz Schumann Resonance (Earth\'s electromagnetic heartbeat) via binaural beats + haptic pulses + 432Hz musical tuning. Your £12 device emits 7.83Hz EM field - this does same via SOUND + VIBRATION + VISUAL. Proven to: ground nervous system, improve sleep, reduce anxiety, sync circadian rhythm. NASA uses 7.83Hz on ISS for astronaut health. Phone delivers it FREE with more channels (audio+haptic+visual) than standalone device.',
       sources: ['NASA Schumann resonance research', 'Circadian rhythm studies', 'Earth frequency grounding protocols', 'Binaural beats vs EM field comparison'],
       ancientWisdom: 'Indigenous cultures knew: barefoot on Earth = healing. 7.83Hz is WHY. Your £12 device knows this. Your phone does it too - different method, same frequency, zero cost. Both valid.',
-      specialInstructions: '🌍 PHONE vs £12 DEVICE: Her device = electromagnetic field, this = audio+haptic. BOTH WORK. Use together if you want! Phone adds 432Hz music tuning + visual + haptic she doesn\'t get. Complement not compete ',
+      specialInstructions: 'PHONE vs £12 DEVICE: Her device = electromagnetic field, this = audio+haptic. BOTH WORK. Use together if you want! Phone adds 432Hz music tuning + visual + haptic she doesn\'t get. Complement not compete',
       config: {
         primary: 7.83,
         secondary: 432,
@@ -859,7 +859,7 @@ const PROTOCOLS = {
       science: 'Animals hear 20Hz-65,000Hz (dogs), 45Hz-64,000Hz (cats) vs humans 20Hz-20,000Hz. Same healing frequencies work - 174Hz pain relief, 528Hz DNA repair, 7.83Hz Earth resonance. Play near them (not loud). They\'ll move closer if it helps, away if they don\'t need it. Trust them.',
       sources: ['Veterinary acoustics research', 'Animal frequency perception studies', 'Comparative hearing ranges'],
       ancientWisdom: 'Every culture knew animals respond to healing sounds. They\'re more sensitive than us. No words needed - just frequency.',
-      specialInstructions: '🐕 ANIMAL USE: Play at LOW volume near your pet. Let them choose - if they stay close, it\'s helping. If they leave, respect that. Never force. Works for dogs, cats, horses, birds, ALL beings. They know what they need better than we do.',
+      specialInstructions: 'ANIMAL USE: Play at LOW volume near your pet. Let them choose - if they stay close, it\'s helping. If they leave, respect that. Never force. Works for dogs, cats, horses, birds, ALL beings. They know what they need better than we do.',
       config: {
         primary: 174,
         secondary: 528,
@@ -944,7 +944,7 @@ const PROTOCOLS = {
       science: '2Hz delta + 7.83Hz Schumann + 528Hz DNA repair proven to reduce withdrawal symptoms, regulate dopamine, and ease physical pain. Peer-reviewed: Addiction Journal 2017 - frequency therapy reduced opioid withdrawal symptoms by 72%. Works for alcohol, benzos, opioids, ALL substances.',
       sources: ['Addiction Journal (2017)', 'Substance withdrawal protocols', 'Dopamine regulation studies'],
       ancientWisdom: 'Sacred plant ceremonies use 2-4Hz drumming for addiction healing - same frequencies reset your nervous system without judgment.',
-      specialInstructions: '⚠️ MEDICAL: This helps symptoms but doesn\'t replace medical supervision for dangerous withdrawals (alcohol, benzos). Use alongside proper medical care. No shame - just healing.',
+      specialInstructions: 'MEDICAL: This helps symptoms but doesn\'t replace medical supervision for dangerous withdrawals (alcohol, benzos). Use alongside proper medical care. No shame - just healing.',
       config: {
         primary: 2,
         secondary: 7.83,
@@ -966,7 +966,7 @@ const PROTOCOLS = {
       science: '528Hz DNA repair + 285Hz tissue regeneration + 174Hz inflammation reduction proven to support immune system after ANY pharmaceutical intervention. Detoxification frequencies clear cellular stress. Works for vaccine reactions, medication side effects, inflammation from ANY injection. Peer-reviewed: Cytokine storm reduction via frequency therapy (Journal of Inflammation Research 2021).',
       sources: ['Journal of Inflammation Research (2021)', 'DNA repair frequency studies', 'Lymphatic drainage protocols', 'Immune system regulation research'],
       ancientWisdom: 'Healers always knew: after foreign substances enter the body, use love frequency (528Hz) to help cells repair and clear what doesn\'t serve. No judgment on your medical choices - just healing support.',
-      specialInstructions: '💚 YOUR BODY, YOUR CHOICE: Whether you choose vaccines or not is YOUR decision. This protocol supports your body\'s natural healing after ANY injection (vaccine, medication, whatever). We don\'t debate vaccines - we just help you heal. Zero judgment. Pure support. ',
+      specialInstructions: 'YOUR BODY, YOUR CHOICE: Whether you choose vaccines or not is YOUR decision. This protocol supports your body\'s natural healing after ANY injection (vaccine, medication, whatever). We don\'t debate vaccines - we just help you heal. Zero judgment. Pure support.',
       config: {
         primary: 528,
         secondary: 285,
@@ -988,7 +988,7 @@ const PROTOCOLS = {
       science: 'BREAKTHROUGH: MIT discovered 40Hz gamma waves CLEAR amyloid plaques (Alzheimer\'s cause) + reduce brain inflammation + restore memory pathways. Combined with 10Hz alpha (calm focus) + 528Hz DNA repair + 7.83Hz Schumann (Earth grounding). Peer-reviewed Nature 2016-2023: 40Hz light+sound therapy improved cognition in Alzheimer\'s patients. Works for early-stage dementia, memory loss, brain fog from aging.',
       sources: ['MIT Tsai Lab Nature 2016-2023', 'Alzheimer\'s Association gamma wave research', '40Hz brain inflammation studies', 'Dementia treatment protocols'],
       ancientWisdom: 'Elders in every culture were kept sharp with rhythmic drumming and chanting at these exact frequencies. Memory loss isn\'t inevitable - your brain can heal at ANY age.',
-      specialInstructions: '🧠 IMPORTANT: This supports brain health but doesn\'t cure Alzheimer\'s. Use daily for best results. Share with caregivers - works for patients AND supporters. Early intervention = better outcomes.',
+      specialInstructions: 'IMPORTANT: This supports brain health but doesn\'t cure Alzheimer\'s. Use daily for best results. Share with caregivers - works for patients AND supporters. Early intervention = better outcomes.',
       config: {
         primary: 40,
         secondary: 10,
@@ -1010,7 +1010,7 @@ const PROTOCOLS = {
       science: '40Hz gamma (MIT - increases blood flow to retina + reduces inflammation) + 10Hz alpha (relaxes eye muscles, reduces strain) + 528Hz (cellular repair for damaged photoreceptors). Studies show 40Hz improves visual cortex function, reduces age-related vision loss. Works for eye strain, early macular degeneration, glaucoma support, general vision improvement.',
       sources: ['MIT 40Hz vision research', 'Ophthalmology frequency studies', 'Visual cortex enhancement', 'Retinal blood flow research'],
       ancientWisdom: 'Yogis used 10Hz meditation + eye exercises for perfect vision into old age. Tibetan monks practiced "looking at nothing" at 40Hz brain state. Ancient + MIT science = vision restored.',
-      specialInstructions: '👁️ USE: Listen 20min daily while resting eyes (closed or soft gaze). Not a replacement for eye doctor but proven to support vision health. Works preventively + for existing issues.',
+      specialInstructions: 'USE: Listen 20min daily while resting eyes (closed or soft gaze). Not a replacement for eye doctor but proven to support vision health. Works preventively + for existing issues.',
       config: {
         primary: 40,
         secondary: 10,
@@ -1032,7 +1032,7 @@ const PROTOCOLS = {
       science: '10Hz alpha + 7.83Hz Schumann proven to improve insulin sensitivity, reduce inflammation, improve circulation to extremities. 40Hz gamma reduces neuropathy pain. Combined with 528Hz for pancreatic cell repair. Peer-reviewed: Diabetes Care Journal 2019 - frequency therapy improved HbA1c levels by 0.8% (significant clinical improvement).',
       sources: ['Diabetes Care Journal 2019', 'Insulin sensitivity frequency studies', 'Diabetic neuropathy pain research', 'Pancreatic beta cell regeneration'],
       ancientWisdom: 'Ancient healers used 10Hz singing bowls for "sweet blood disease" - improved circulation and reduced symptoms. They knew before we had the science.',
-      specialInstructions: '🩸 MEDICAL: This supports your body but does NOT replace insulin, medication, or blood sugar monitoring. Use alongside proper diabetes care. Monitor your levels. Works for Type 1, Type 2, prediabetes.',
+      specialInstructions: 'MEDICAL: This supports your body but does NOT replace insulin, medication, or blood sugar monitoring. Use alongside proper diabetes care. Monitor your levels. Works for Type 1, Type 2, prediabetes.',
       config: {
         primary: 10,
         secondary: 40,
@@ -1054,7 +1054,7 @@ const PROTOCOLS = {
       science: '10Hz alpha + 0.1Hz ultra-slow breathing proven to improve heart rate variability (HRV), lower blood pressure, reduce cardiovascular inflammation. 7.83Hz Schumann synchronizes heart rhythm with Earth. Peer-reviewed: Circulation Journal 2018 - HRV training reduced heart attack risk by 45%. Works for prevention, post-surgery recovery, hypertension.',
       sources: ['Circulation Journal 2018', 'HeartMath HRV research', 'Cardiovascular frequency therapy', 'Blood pressure reduction studies'],
       ancientWisdom: 'Every meditation tradition knew: slow the breath (0.1Hz = 6 breaths/min), slow the heart, extend the life. Monks live 20+ years longer using these exact frequencies.',
-      specialInstructions: '❤️ MEDICAL: Supports heart health but doesn\'t replace medication or emergency care. If chest pain/emergency → call 999 immediately. Use daily for prevention and recovery support.',
+      specialInstructions: 'MEDICAL: Supports heart health but doesn\'t replace medication or emergency care. If chest pain/emergency → call 999 immediately. Use daily for prevention and recovery support.',
       config: {
         primary: 10,
         secondary: 0.1,
@@ -1076,7 +1076,7 @@ const PROTOCOLS = {
       science: '528Hz DNA repair + 174Hz pain-blocking + 396Hz fear release proven to reduce chemotherapy side effects, improve sleep quality, reduce pain and nausea. Peer-reviewed: Integrative Cancer Therapies 2020 - frequency therapy reduced chemo nausea by 54%, improved quality of life scores significantly. Does NOT cure cancer but makes treatment more bearable.',
       sources: ['Integrative Cancer Therapies 2020', 'Oncology supportive care research', 'Chemotherapy side effect management', 'Cancer pain protocols'],
       ancientWisdom: 'Healers couldn\'t cure cancer but they eased suffering - same 528Hz love frequency we use now. Dignity and comfort matter when cure isn\'t possible.',
-      specialInstructions: '🛡️ CRITICAL: This is NOT a cancer cure. It supports you during medical treatment (chemo, radiation, surgery). Always follow your oncologist\'s plan. This gives comfort, reduces side effects, helps you stay strong through treatment.',
+      specialInstructions: 'CRITICAL: This is NOT a cancer cure. It supports you during medical treatment (chemo, radiation, surgery). Always follow your oncologist\'s plan. This gives comfort, reduces side effects, helps you stay strong through treatment.',
       config: {
         primary: 528,
         secondary: 174,
@@ -1098,7 +1098,7 @@ const PROTOCOLS = {
       science: '40Hz gamma (MIT - rebuilds neural pathways) + 10Hz alpha (reduces post-stroke inflammation) + 528Hz DNA repair for damaged brain tissue. Proven to improve motor recovery, speech rehabilitation, cognitive function after stroke. Neuroplasticity continues for YEARS - your brain can heal.',
       sources: ['MIT neuroplasticity research', 'Stroke rehabilitation studies', 'Post-stroke cognitive recovery', 'Motor function frequency therapy'],
       ancientWisdom: 'Healers knew stroke survivors could relearn everything through rhythm and sound - drumming therapy rebuilds what was lost. Modern science proves them right.',
-      specialInstructions: '🧠 RECOVERY: Use daily during rehabilitation period. Combine with physical therapy and speech therapy for best results. Earlier you start = better outcomes, but it\'s NEVER too late.',
+      specialInstructions: 'RECOVERY: Use daily during rehabilitation period. Combine with physical therapy and speech therapy for best results. Earlier you start = better outcomes, but it\'s NEVER too late.',
       config: {
         primary: 40,
         secondary: 10,
@@ -1120,7 +1120,7 @@ const PROTOCOLS = {
       science: '10Hz alpha + 7.83Hz Schumann + ultra-slow breathing (4/min) proven to reduce airway inflammation, improve oxygen saturation, calm breathing panic. Works for asthma, COPD, bronchitis, anxiety-related breathlessness. Peer-reviewed: Respiratory Medicine 2019 - breathing frequency therapy reduced asthma attacks by 38%.',
       sources: ['Respiratory Medicine 2019', 'Asthma management protocols', 'COPD breathing studies', 'Lung function frequency research'],
       ancientWisdom: 'Pranayama breathing at 4-6 breaths/min has kept yogis healthy for 5,000+ years. Slow breath = strong lungs = long life.',
-      specialInstructions: '🫁 BREATHING: This supports lung health but doesn\'t replace inhalers or emergency medication. If severe attack → use your medication. This helps BETWEEN attacks and for long-term improvement.',
+      specialInstructions: 'BREATHING: This supports lung health but doesn\'t replace inhalers or emergency medication. If severe attack → use your medication. This helps BETWEEN attacks and for long-term improvement.',
       config: {
         primary: 10,
         secondary: 7.83,
@@ -1142,7 +1142,7 @@ const PROTOCOLS = {
       science: '10Hz alpha + 7.83Hz Schumann proven to reduce sensory overwhelm, improve sleep quality, reduce anxiety in autistic individuals. 40Hz gamma can improve social communication pathways. Peer-reviewed: Autism Research 2021 - frequency therapy reduced meltdowns by 47%, improved sleep duration.',
       sources: ['Autism Research 2021', 'Sensory processing frequency studies', 'Neurodiversity support research'],
       ancientWisdom: 'Different brains need different rhythms - 10Hz has always calmed overstimulated nervous systems. Your brain is perfect as it is.',
-      specialInstructions: '💜 NEURODIVERSITY: This supports comfort and reduces overwhelm. Not trying to "cure" autism - supporting autistic people to feel calm and safe. Let the person choose volume and duration.',
+      specialInstructions: 'NEURODIVERSITY: This supports comfort and reduces overwhelm. Not trying to "cure" autism - supporting autistic people to feel calm and safe. Let the person choose volume and duration.',
       config: {
         primary: 10,
         secondary: 7.83,
@@ -1164,7 +1164,7 @@ const PROTOCOLS = {
       science: '10Hz alpha (SAFE - does NOT trigger seizures) + 7.83Hz Schumann proven to reduce seizure frequency and severity in epilepsy patients. AVOIDS flashing lights and rapid frequencies that can trigger seizures. Peer-reviewed: Epilepsy & Behavior 2018 - alpha neurofeedback reduced seizures by 35%.',
       sources: ['Epilepsy & Behavior 2018', 'Seizure prevention protocols', 'Safe frequency therapy research'],
       ancientWisdom: 'Healers used slow, steady rhythms for "falling sickness" - never rapid beats. They knew safety first.',
-      specialInstructions: '⚠️ EPILEPSY: Visual entrainment OFF for safety. This supports seizure reduction but does NOT replace medication. Never stop your meds. Use between seizures. If photosensitive epilepsy → keep screen brightness low.',
+      specialInstructions: 'EPILEPSY: Visual entrainment OFF for safety. This supports seizure reduction but does NOT replace medication. Never stop your meds. Use between seizures. If photosensitive epilepsy → keep screen brightness low.',
       config: {
         primary: 10,
         secondary: 7.83,
@@ -1249,7 +1249,7 @@ const PROTOCOLS = {
       science: 'COMPLETE ANTI-AGING STACK: 528Hz DNA repair (telomerase activation = cellular youth EVERYWHERE) + 285Hz tissue regeneration (collagen +200% in skin, gums, ALL connective tissue) + 639Hz Heart Chakra (love/joy = emotional youthfulness + circulation boost) + 417Hz Sacral Chakra (reproductive health, hormones, vitality) + 40Hz gamma (MIT - cellular energy = feel 20 NOW) + 7.83Hz Schumann (cortisol down = aging STOPS). Works on WHOLE BODY: Skin glows, gums regenerate, energy spikes, hormone balance, circulation improves, you feel ALIVE. INSTANT: Energy/joy in 10-20 mins. VISIBLE: Skin/gums in 2-4 weeks. Peer-reviewed: 285Hz tissue regen +200% collagen (Journal Cosmetic Science 2019). 40Hz mitochondrial youth (MIT 2023). Sacral chakra proven for hormone/reproductive vitality (biofield research).',
       sources: ['Journal of Cosmetic Science 2019 - 285Hz collagen +200%', 'MIT 40Hz cellular energy 2023', '528Hz telomerase DNA repair', 'Heart Chakra circulation studies', 'Sacral Chakra hormone balance research', 'Anti-aging frequency meta-analysis'],
       ancientWisdom: 'Cleopatra: 528Hz eternal beauty. Chinese empresses: Heart (639Hz) + Sacral (417Hz) chakras for radiant youth - inside and out. Ayurvedic medicine: youth = energy flow EVERYWHERE (skin, gums, vitality, circulation). 285Hz collagen heals ALL tissue - your gums regenerate same as skin. Age backwards. They knew.',
-      specialInstructions: '✨ TOTAL YOUTH PROTOCOL: INSTANT - energy/joy/vitality in 10-20 mins (you FEEL 20). VISIBLE - skin/gums glow in 2-4 weeks (tissue regeneration takes time but 200% PROVEN). Use daily 20-30 min. Works on skin, teeth, gums, hormone balance, circulation, energy - EVERYTHING ages together, EVERYTHING heals together. Morning = vitality all day. Night = repair while sleeping. Drink water. 100% PRIVATE - zero age/health data stored, fully anonymous. You are ageless ♾️❤️',
+      specialInstructions: 'TOTAL YOUTH PROTOCOL: INSTANT - energy/joy/vitality in 10-20 mins (you FEEL 20). VISIBLE - skin/gums glow in 2-4 weeks (tissue regeneration takes time but 200% PROVEN). Use daily 20-30 min. Works on skin, teeth, gums, hormone balance, circulation, energy - EVERYTHING ages together, EVERYTHING heals together. Morning = vitality all day. Night = repair while sleeping. Drink water. 100% PRIVATE - zero age/health data stored, fully anonymous. You are ageless.',
       config: {
         primary: 528,
         secondary: 285,
@@ -1296,7 +1296,7 @@ const PROTOCOLS = {
       science: '10Hz alpha + 528Hz cellular repair proven to improve kidney blood flow, reduce inflammation, support kidney function. Helps with chronic kidney disease management, dialysis recovery, UTI prevention. Reduces kidney stress and supports natural detoxification.',
       sources: ['Nephrology frequency studies', 'Kidney inflammation research', 'Dialysis quality of life studies'],
       ancientWisdom: 'Kidneys filter life force - keep them flowing with Earth frequency (7.83Hz) + love frequency (528Hz). Ancient detox protocols used these rhythms.',
-      specialInstructions: '🫘 KIDNEYS: Supports kidney health but doesn\'t replace dialysis or medication. Stay hydrated. Monitor kidney function with your doctor.',
+      specialInstructions: 'KIDNEYS: Supports kidney health but doesn\'t replace dialysis or medication. Stay hydrated. Monitor kidney function with your doctor.',
       config: {
         primary: 10,
         secondary: 528,
@@ -1318,7 +1318,7 @@ const PROTOCOLS = {
       science: '528Hz DNA repair + 285Hz tissue regeneration + 741Hz detoxification proven to support liver regeneration, reduce fatty liver inflammation, aid alcohol recovery. The liver CAN regenerate - these frequencies help. Peer-reviewed: Hepatology 2021 - stress reduction improved fatty liver markers.',
       sources: ['Hepatology 2021', 'Liver regeneration research', 'Fatty liver treatment studies', 'Detoxification protocols'],
       ancientWisdom: 'Liver = seat of anger in Chinese medicine. Release anger (9Hz), love frequency (528Hz), detox frequency (741Hz) = liver heals itself. They knew.',
-      specialInstructions: '🫀 LIVER: Supports liver health and regeneration. Reduce alcohol if possible. This helps your liver repair itself but doesn\'t replace medical care for serious liver disease.',
+      specialInstructions: 'LIVER: Supports liver health and regeneration. Reduce alcohol if possible. This helps your liver repair itself but doesn\'t replace medical care for serious liver disease.',
       config: {
         primary: 528,
         secondary: 285,
@@ -1340,7 +1340,7 @@ const PROTOCOLS = {
       science: 'CONCUSSION STACK: 40Hz gamma (MIT - clears brain inflammation from impact trauma) + 10Hz alpha (calms overactive nervous system after injury) + 174Hz pain relief (reduces post-concussion headache/light sensitivity) + 528Hz DNA repair (rebuilds damaged neurons) + 7.83Hz Schumann (restores balance + vestibular system). Peer-reviewed: Neurotrauma Research 2021 - frequency therapy combined with standard care improved cognitive recovery by 34% post-concussion.',
       sources: ['MIT neuroinflammation research', 'Post-concussion syndrome studies', 'Vestibular system recovery', 'Brain injury frequency protocols', 'Neurotrauma Research 2021'],
       ancientWisdom: 'Healers treated head trauma with grounding (barefoot on Earth = 7.83Hz) + rhythmic sound to rebuild neural pathways. Your brain CAN heal - these frequencies help it remember how.',
-      specialInstructions: '🧠 CONCUSSION: Use daily during recovery. Combine with medical care, rest, and gradual activity return. HRV biofeedback helpful to track nervous system recovery. Brain healing takes weeks - be patient with yourself. You got this ♾️❤️',
+      specialInstructions: 'CONCUSSION: Use daily during recovery. Combine with medical care, rest, and gradual activity return. HRV biofeedback helpful to track nervous system recovery. Brain healing takes weeks - be patient with yourself. You got this.',
       config: {
         primary: 40,
         secondary: 10,
@@ -1604,7 +1604,7 @@ const HRVBiofeedback = ({ isActive, onHRVUpdate, color }) => {
       <div className="flex items-center gap-3 mb-3">
         <Activity className="w-5 h-5" style={{ color }} />
         <p className="font-mono font-bold text-sm" style={{ color }}>HRV BIOFEEDBACK</p>
-        <span className="text-xs text-gray-500">(Cover camera with finger)</span>
+        <span className="text-xs text-gray-500">Cover camera with finger</span>
       </div>
       
       <video ref={videoRef} className="hidden" playsInline muted />
@@ -1771,7 +1771,7 @@ const VoiceHealing = ({ onProtocolRecommend }) => {
         </svg>
         <div>
           <h3 className="text-xl font-black font-mono text-pink-400">SMART INPUT</h3>
-          <p className="text-sm text-gray-400 font-mono">Text or voice → AI recommends your frequency</p>
+          <p className="text-sm text-gray-400 font-mono">Text or voice - AI recommends your frequency</p>
         </div>
       </div>
 
@@ -1814,7 +1814,7 @@ const VoiceHealing = ({ onProtocolRecommend }) => {
                 }`}
                 title={isRecording ? 'Stop listening' : 'Start voice input'}
               >
-                {isRecording ? '🎙️ STOP' : '🎙️'}
+                {isRecording ? 'STOP' : 'MIC'}
               </button>
               <button
                 onClick={handleSubmit}
@@ -1828,7 +1828,7 @@ const VoiceHealing = ({ onProtocolRecommend }) => {
             {/* Saved Suggestions Display */}
             {savedSuggestions.length > 0 && (
               <div className="mt-4 p-3 bg-purple-900/30 border-2 border-purple-500 rounded">
-                <p className="text-purple-400 font-black text-xs font-mono mb-2">💾 SAVED SUGGESTIONS:</p>
+                <p className="text-purple-400 font-black text-xs font-mono mb-2">SAVED SUGGESTIONS:</p>
                 <div className="space-y-1">
                   {savedSuggestions.map((suggestion) => (
                     <button
@@ -1873,10 +1873,10 @@ const VoiceHealing = ({ onProtocolRecommend }) => {
           <strong>EVIDENCE-BASED:</strong>
         </p>
         <ul className="text-xs text-gray-400 space-y-1">
-          <li>• F0 vocal biomarker (NIH 2024 meta-analysis)</li>
-          <li>• Frequency + Intent = Healing (Jonathan Goldman)</li>
-          <li>• Vowel toning for organs (Institute of Acoustics)</li>
-          <li>• Voice stress detection (Canary Speech, Sonde Health)</li>
+          <li>F0 vocal biomarker (NIH 2024 meta-analysis)</li>
+          <li>Frequency + Intent = Healing (Jonathan Goldman)</li>
+          <li>Vowel toning for organs (Institute of Acoustics)</li>
+          <li>Voice stress detection (Canary Speech, Sonde Health)</li>
         </ul>
       </div>
       </div>
@@ -2689,17 +2689,17 @@ export default function FrequencyChamber() {
           </motion.div>
           <h1 className="text-4xl md:text-5xl font-black text-white">Frequency Chamber</h1>
           <p className="text-gray-300 text-sm">Ask your body what it needs. AI51 finds the frequency.</p>
-          
+
           {/* VALUE BADGES */}
           <div className="flex flex-wrap justify-center gap-3 mt-6">
             <div className="px-4 py-2 bg-green-500/20 border-2 border-green-500 rounded-lg">
-              <span className="text-green-400 font-black text-sm font-mono">✓ OFFLINE</span>
+              <span className="text-green-400 font-black text-sm font-mono">OFFLINE</span>
             </div>
             <div className="px-4 py-2 bg-cyan-500/20 border-2 border-cyan-500 rounded-lg">
-              <span className="text-cyan-400 font-black text-sm font-mono">✓ NO LOGIN</span>
+              <span className="text-cyan-400 font-black text-sm font-mono">NO LOGIN</span>
             </div>
             <div className="px-4 py-2 bg-pink-500/20 border-2 border-pink-500 rounded-lg">
-              <span className="text-pink-400 font-black text-sm font-mono">✓ FREE FOREVER</span>
+              <span className="text-pink-400 font-black text-sm font-mono">FREE FOREVER</span>
             </div>
           </div>
         </div>
@@ -2808,7 +2808,7 @@ export default function FrequencyChamber() {
           <h3 className="text-green-400 font-black font-mono text-lg mb-4">🔊 SPEAKERS vs 🎧 HEADPHONES (Choose your setup)</h3>
           <div className="space-y-3 text-sm font-mono text-white">
             <div className="bg-black/60 border-l-4 border-green-500 p-4 rounded">
-              <p className="text-green-400 font-bold mb-2">✓ SPEAKERS = FULL BODY HEALING (Most Protocols)</p>
+              <p className="text-green-400 font-bold mb-2">SPEAKERS = FULL BODY HEALING</p>
               <p className="text-xs text-gray-300 mb-2"><strong className="text-white">What happens:</strong> Frequencies pass through your body + fill the room</p>
               <ul className="space-y-1 text-xs text-gray-300 ml-4">
                 <li>✓ <strong className="text-white">Bone resonance</strong> - 40Hz reaches deep into your skeleton (affects nerves + cells)</li>
@@ -2820,23 +2820,23 @@ export default function FrequencyChamber() {
             </div>
 
             <div className="bg-black/60 border-l-4 border-cyan-500 p-4 rounded">
-              <p className="text-cyan-400 font-bold mb-2">🎧 HEADPHONES = REQUIRED FOR BINAURAL BEATS ONLY</p>
+              <p className="text-cyan-400 font-bold mb-2">HEADPHONES = REQUIRED FOR BINAURAL BEATS ONLY</p>
               <p className="text-xs text-gray-300 mb-2"><strong className="text-white">What is binaural:</strong> Each ear gets a DIFFERENT frequency. Your brain combines them = brainwave effect</p>
               <p className="text-xs text-gray-300 mb-3">Example: 200Hz left ear + 210Hz right ear = your brain creates 10Hz (alpha = calm)</p>
               <ul className="space-y-1 text-xs text-gray-300 ml-4">
-                <li>🎧 Speakers = frequencies mix in the air (doesn't work)</li>
-                <li>🎧 Headphones = each ear isolated (works perfectly)</li>
+                <li>Speakers = frequencies mix in the air (doesn't work)</li>
+                <li>Headphones = each ear isolated (works perfectly)</li>
               </ul>
-              <p className="text-cyan-400 font-bold text-xs mt-2">🔔 We'll mark protocols that NEED headphones with <strong>🎧 HEADPHONES REQUIRED</strong></p>
+              <p className="text-cyan-400 font-bold text-xs mt-2">We'll mark protocols that NEED headphones with <strong>HEADPHONES REQUIRED</strong></p>
             </div>
 
             <div className="bg-pink-900/40 border-2 border-pink-500 rounded p-3 text-center">
-              <p className="text-pink-400 font-black text-xs">⚡ START WITH SPEAKERS ⚡</p>
+              <p className="text-pink-400 font-black text-xs">START WITH SPEAKERS</p>
               <p className="text-pink-300 font-mono text-xs mt-1">Full body resonance beats headphone isolation. Switch if we say so.</p>
             </div>
 
             <div className="bg-black/60 border-l-4 border-purple-500 p-4 rounded mt-3">
-              <p className="text-purple-400 font-bold mb-2">⚡ BEYOND NOISE CANCELLATION (ACTIVE HEALING):</p>
+              <p className="text-purple-400 font-bold mb-2">BEYOND NOISE CANCELLATION - ACTIVE HEALING:</p>
               <ul className="space-y-1 text-xs text-gray-300 ml-4">
                 <li>• <strong className="text-white">Phase inversion</strong> - We cancel UNWANTED frequencies (tinnitus, pain signals) using inverted waveforms (same tech as Bose/Sony but for HEALING not music)</li>
                 <li>• <strong className="text-white">Visual entrainment</strong> - Screen pulses sync with audio frequency → Your brain locks to BOTH channels (audio + visual = 2× faster healing)</li>
@@ -2881,30 +2881,30 @@ export default function FrequencyChamber() {
             <div className="bg-black/60 border-2 border-red-500 p-4 rounded">
               <p className="text-red-400 font-black text-sm mb-2">PRIVATE CLINICS:</p>
               <ul className="text-xs text-gray-300 space-y-1">
-                <li>• £5k-£15k frequency therapy</li>
-                <li>• Audio ONLY</li>
-                <li>• Appointments 9am-5pm</li>
-                <li>• No real-time biofeedback</li>
-                <li>• Can't see how it works</li>
-                <li>• London/NYC only</li>
+                <li>£5k-£15k frequency therapy</li>
+                <li>Audio ONLY</li>
+                <li>Appointments 9am-5pm</li>
+                <li>No real-time biofeedback</li>
+                <li>Can't see how it works</li>
+                <li>London/NYC only</li>
               </ul>
             </div>
 
             <div className="bg-black/60 border-2 border-green-500 p-4 rounded">
               <p className="text-green-400 font-black text-sm mb-2">UF51:</p>
               <ul className="text-xs text-white space-y-1">
-                <li>• <strong className="text-green-400">£0 forever</strong></li>
-                <li>• <strong className="text-cyan-400">Quad-modal</strong> - audio+visual+haptic+bio</li>
-                <li>• <strong className="text-purple-400">24/7 instant</strong></li>
-                <li>• <strong className="text-pink-400">FREE camera HRV</strong> (£500 device free)</li>
-                <li>• <strong className="text-amber-400">Open source</strong> - audit the code</li>
-                <li>• <strong className="text-green-400">Global</strong> - works anywhere</li>
+                <li><strong className="text-green-400">£0 forever</strong></li>
+                <li><strong className="text-cyan-400">Quad-modal</strong> - audio+visual+haptic+bio</li>
+                <li><strong className="text-purple-400">24/7 instant</strong></li>
+                <li><strong className="text-pink-400">FREE camera HRV</strong> - £500 device free</li>
+                <li><strong className="text-amber-400">Open source</strong> - audit the code</li>
+                <li><strong className="text-green-400">Global</strong> - works anywhere</li>
               </ul>
             </div>
           </div>
 
           <div className="bg-cyan-900/40 border-2 border-cyan-500 rounded p-4 mb-4">
-            <p className="text-cyan-400 font-black text-sm mb-3">📊 REAL STUDIES (Tap to expand + try):</p>
+            <p className="text-cyan-400 font-black text-sm mb-3">REAL STUDIES - Tap to expand + try:</p>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-3 text-xs font-mono">
               <button 
                 onClick={() => setExpandedStats(prev => ({ ...prev, migraine: !prev.migraine }))}
@@ -2933,7 +2933,7 @@ export default function FrequencyChamber() {
                     </motion.div>
                   )}
                 </AnimatePresence>
-                <p className="text-gray-600 text-[10px] mt-1">{expandedStats.migraine ? '▲ CLOSE' : '▼ TAP'}</p>
+                <p className="text-gray-600 text-[10px] mt-1">{expandedStats.migraine ? 'CLOSE' : 'TAP'}</p>
               </button>
               
               <button 
@@ -2963,7 +2963,7 @@ export default function FrequencyChamber() {
                     </motion.div>
                   )}
                 </AnimatePresence>
-                <p className="text-gray-600 text-[10px] mt-1">{expandedStats.withdrawal ? '▲ CLOSE' : '▼ TAP'}</p>
+                <p className="text-gray-600 text-[10px] mt-1">{expandedStats.withdrawal ? 'CLOSE' : 'TAP'}</p>
               </button>
               
               <button 
@@ -2993,7 +2993,7 @@ export default function FrequencyChamber() {
                     </motion.div>
                   )}
                 </AnimatePresence>
-                <p className="text-gray-600 text-[10px] mt-1">{expandedStats.childbirth ? '▲ CLOSE' : '▼ TAP'}</p>
+                <p className="text-gray-600 text-[10px] mt-1">{expandedStats.childbirth ? 'CLOSE' : 'TAP'}</p>
               </button>
               
               <button 
@@ -3023,7 +3023,7 @@ export default function FrequencyChamber() {
                     </motion.div>
                   )}
                 </AnimatePresence>
-                <p className="text-gray-600 text-[10px] mt-1">{expandedStats.sleep ? '▲ CLOSE' : '▼ TAP'}</p>
+                <p className="text-gray-600 text-[10px] mt-1">{expandedStats.sleep ? 'CLOSE' : 'TAP'}</p>
               </button>
               
               <button 
@@ -3053,7 +3053,7 @@ export default function FrequencyChamber() {
                     </motion.div>
                   )}
                 </AnimatePresence>
-                <p className="text-gray-600 text-[10px] mt-1">{expandedStats.period ? '▲ CLOSE' : '▼ TAP'}</p>
+                <p className="text-gray-600 text-[10px] mt-1">{expandedStats.period ? 'CLOSE' : 'TAP'}</p>
               </button>
               
               <button 
@@ -3083,29 +3083,29 @@ export default function FrequencyChamber() {
                     </motion.div>
                   )}
                 </AnimatePresence>
-                <p className="text-gray-600 text-[10px] mt-1">{expandedStats.tinnitus ? '▲ CLOSE' : '▼ TAP'}</p>
+                <p className="text-gray-600 text-[10px] mt-1">{expandedStats.tinnitus ? 'CLOSE' : 'TAP'}</p>
               </button>
             </div>
-            <p className="text-green-400 font-bold text-xs mt-3 text-center">✓ Real journals • Real results • Tap to expand</p>
+            <p className="text-green-400 font-bold text-xs mt-3 text-center">Real journals - Real results - Tap to expand</p>
           </div>
 
           <div className="bg-gradient-to-r from-pink-500/20 to-green-500/20 border-2 border-pink-500 rounded p-4">
-            <p className="text-pink-400 font-black text-sm mb-2">🔬 LATEST RESEARCH:</p>
+            <p className="text-pink-400 font-black text-sm mb-2">LATEST RESEARCH:</p>
             <div className="space-y-2 text-xs text-white">
               <div>
-                <p className="font-bold mb-1">• <span className="text-cyan-400">Quantum coherence</span> (2+ people amplify healing)</p>
+                <p className="font-bold mb-1">Quantum coherence - 2+ people amplify healing</p>
                 <p className="text-gray-400">Two+ people = exponential effect. Clinics treat solo only.</p>
               </div>
               <div>
-                <p className="font-bold mb-1">• <span className="text-green-400">Space-tested</span> (NASA uses 7.83Hz on ISS)</p>
+                <p className="font-bold mb-1">Space-tested - NASA uses 7.83Hz on ISS</p>
                 <p className="text-gray-400">NASA uses 7.83Hz for astronaut health. We made it FREE.</p>
               </div>
               <div>
-                <p className="font-bold mb-1">• <span className="text-purple-400">Open source</span> - see ALL science</p>
+                <p className="font-bold mb-1">Open source - see ALL science</p>
                 <p className="text-gray-400">Audit the code. Private clinics hide tech.</p>
               </div>
               <div>
-                <p className="font-bold mb-1">• <span className="text-amber-400">Global</span> - works anywhere</p>
+                <p className="font-bold mb-1">Global - works anywhere</p>
                 <p className="text-gray-400">War zones, space, offline. Clinics = cities only.</p>
               </div>
             </div>
@@ -3113,20 +3113,20 @@ export default function FrequencyChamber() {
             <div className="space-y-4 text-sm font-mono text-white mt-4">
               <div>
                 <p className="text-purple-400 font-bold mb-2">LATEST RESEARCH:</p>
-                <p>• <strong>MIT (Nature 2016-2023):</strong> 40Hz gamma reduces brain inflammation, improves memory</p>
-                <p>• <strong>Cephalalgia Journal (2019):</strong> Binaural beats reduced migraines 63%</p>
-                <p>• <strong>Journal of Women's Health (2020):</strong> Frequency therapy = ibuprofen for period pain, zero side effects</p>
-                <p>• <strong>Addiction Journal (2017):</strong> 72% reduction in opioid withdrawal symptoms</p>
-                <p>• <strong>British Journal of Midwifery (2018):</strong> Music therapy reduced epidural use 40%</p>
+                <p><strong>MIT (Nature 2016-2023):</strong> 40Hz gamma reduces brain inflammation, improves memory</p>
+                <p><strong>Cephalalgia Journal (2019):</strong> Binaural beats reduced migraines 63%</p>
+                <p><strong>Journal of Women's Health (2020):</strong> Frequency therapy = ibuprofen for period pain, zero side effects</p>
+                <p><strong>Addiction Journal (2017):</strong> 72% reduction in opioid withdrawal symptoms</p>
+                <p><strong>British Journal of Midwifery (2018):</strong> Music therapy reduced epidural use 40%</p>
               </div>
               <div>
-                <p className="text-amber-400 font-bold mb-2">ANCIENT WISDOM (Proved Right):</p>
-                <p>• Tibetan monks: 10Hz singing bowls = alpha waves (now proven to reduce anxiety)</p>
-                <p>• Temple healers: 528Hz for DNA repair = confirmed by modern bioacoustics</p>
-                <p>• Indigenous ceremonies: 4Hz drumming = theta brainwaves (trauma healing validated)</p>
+                <p className="text-amber-400 font-bold mb-2">ANCIENT WISDOM - Proved Right:</p>
+                <p>Tibetan monks: 10Hz singing bowls = alpha waves (now proven to reduce anxiety)</p>
+                <p>Temple healers: 528Hz for DNA repair = confirmed by modern bioacoustics</p>
+                <p>Indigenous ceremonies: 4Hz drumming = theta brainwaves (trauma healing validated)</p>
               </div>
               <div className="bg-green-900/30 border-2 border-green-500 p-3 mt-3">
-                <p className="text-green-400 font-bold mb-2">♾️ WHY IT'S FREE:</p>
+                <p className="text-green-400 font-bold mb-2">WHY IT'S FREE:</p>
                 <p className="text-white">Everyone deserves healing. Disaster zones, war, poverty - if you hurt, this is yours. No payment. No permission. Just healing.</p>
               </div>
             </div>
@@ -3160,10 +3160,10 @@ export default function FrequencyChamber() {
             >
               <div className="space-y-3 text-sm font-mono text-white">
                 <p><strong className="text-amber-400">BOTH WORK:</strong></p>
-                <p>• Tooth pain? <strong>Dental Emergency</strong> targets jaw/tooth specifically (pain-blocking + antimicrobial frequencies)</p>
-                <p>• Back pain, knee pain, arthritis? <strong>Chronic Pain</strong> works on ANY body part (your nervous system directs it where needed)</p>
-                <p>• Stressed/anxious? <strong>Mental Health</strong> protocols calm your whole nervous system</p>
-                <p>• Labor, period pain, migraine? <strong>Physical Healing</strong> protocols target those specific systems</p>
+                <p>Tooth pain? <strong>Dental Emergency</strong> targets jaw/tooth specifically (pain-blocking + antimicrobial frequencies)</p>
+                <p>Back pain, knee pain, arthritis? <strong>Chronic Pain</strong> works on ANY body part (your nervous system directs it where needed)</p>
+                <p>Stressed/anxious? <strong>Mental Health</strong> protocols calm your whole nervous system</p>
+                <p>Labor, period pain, migraine? <strong>Physical Healing</strong> protocols target those specific systems</p>
                 <p><strong className="text-pink-400">THE TRUTH:</strong> Frequencies work on your NERVOUS SYSTEM, not just one spot. But some protocols target specific areas better. Use what feels right. Your body knows.</p>
               </div>
             </motion.div>
@@ -3192,16 +3192,16 @@ export default function FrequencyChamber() {
                   <Shield className="w-12 h-12 text-red-400" />
                 </motion.div>
                 <div>
-                  <h3 className="text-2xl font-black font-mono text-red-400">🚨 EMERGENCY MODE ACTIVATED</h3>
+                  <h3 className="text-2xl font-black font-mono text-red-400">EMERGENCY MODE ACTIVATED</h3>
                   <p className="text-red-200 text-sm font-mono mt-1">Panic detected - Auto-rescue protocol running</p>
                 </div>
               </div>
               <div className="bg-black/60 border-2 border-red-500/50 p-4">
                 <p className="text-white text-sm font-mono mb-2">Your heart signaled distress. I'm here with you.</p>
-                <p className="text-red-300 text-sm font-mono">• 528Hz love frequency active</p>
-                <p className="text-red-300 text-sm font-mono">• Ultra-slow breathing (4 breaths/min)</p>
-                <p className="text-red-300 text-sm font-mono">• Full vagal activation</p>
-                <p className="text-green-400 text-sm font-mono mt-3 font-bold">You are safe. This will pass. ❤️</p>
+                <p className="text-red-300 text-sm font-mono">528Hz love frequency active</p>
+                <p className="text-red-300 text-sm font-mono">Ultra-slow breathing (4 breaths/min)</p>
+                <p className="text-red-300 text-sm font-mono">Full vagal activation</p>
+                <p className="text-green-400 text-sm font-mono mt-3 font-bold">You are safe. This will pass.</p>
               </div>
             </div>
           </motion.div>
@@ -3468,14 +3468,14 @@ export default function FrequencyChamber() {
               {/* SPECIAL INSTRUCTIONS - MEDICAL/FAMILY */}
               {selectedProtocol.specialInstructions && (
                 <div className="mb-6 p-4 bg-gradient-to-r from-red-500/20 to-amber-500/20 border-2 border-red-500">
-                  <p className="text-xs text-red-400 font-bold mb-2 font-mono">⚠️ IMPORTANT:</p>
+                  <p className="text-xs text-red-400 font-bold mb-2 font-mono">IMPORTANT:</p>
                   <p className="text-xs text-white font-mono leading-relaxed">{selectedProtocol.specialInstructions}</p>
                 </div>
               )}
 
               {selectedProtocol.familyMode && (
                 <div className="mb-6 p-4 bg-gradient-to-r from-pink-500/20 to-purple-500/20 border-2 border-pink-500">
-                  <p className="text-xs text-pink-400 font-bold mb-2 font-mono"> FAMILY MODE:</p>
+                  <p className="text-xs text-pink-400 font-bold mb-2 font-mono">FAMILY MODE:</p>
                   <p className="text-xs text-white font-mono">All play together in cabin - healing amplifies with love and unity. Put on speakers or all use headphones. Your combined intention makes it stronger.</p>
                 </div>
               )}
@@ -3506,7 +3506,7 @@ export default function FrequencyChamber() {
                 <div className="bg-red-900/20 border-2 border-red-500/50 p-4 mb-6">
                   <div className="flex items-center gap-2 mb-3">
                     <Ear className="w-5 h-5 text-red-400" />
-                    <h4 className="text-red-400 font-bold font-mono text-sm">FIND YOUR FREQUENCY (Optional)</h4>
+                    <h4 className="text-red-400 font-bold font-mono text-sm">FIND YOUR FREQUENCY</h4>
                   </div>
                   <p className="text-gray-400 text-xs font-mono mb-3">
                     Tap to hear test tones. When you find your tinnitus pitch, our sweep will target it.
@@ -3561,7 +3561,7 @@ export default function FrequencyChamber() {
                     ))}
                   </div>
                   <p className="text-red-300 text-xs font-mono text-center">
-                    {tinnitusTestFreq ? `Playing ${tinnitusTestFreq}Hz...` : 'Our sweep covers 250Hz-16kHz (100% of cases)'}
+                    {tinnitusTestFreq ? `Playing ${tinnitusTestFreq}Hz...` : 'Our sweep covers 250Hz-16kHz - 100% of cases'}
                   </p>
                 </div>
               )}
@@ -3629,7 +3629,7 @@ export default function FrequencyChamber() {
                     </button>
                   ))}
                 </div>
-                <p className="text-gray-500 text-xs font-mono mt-2">Healing stops automatically. Adjust if needed bro ♾️</p>
+                <p className="text-gray-500 text-xs font-mono mt-2">Healing stops automatically. Adjust if needed bro</p>
               </div>
             </div>
           </motion.div>
@@ -3898,7 +3898,7 @@ Try it: https://uf51.love/FrequencyChamber`;
               <h3 className="text-green-400 font-black font-mono text-lg">P2P MESH NETWORKS</h3>
             </div>
             <p className="text-gray-400 text-sm font-mono mb-4">
-              Receive healing frequencies from nearby devices. Tap to use them instantly ♾️
+              Receive healing frequencies from nearby devices. Tap to use them instantly
             </p>
             <div className="grid md:grid-cols-2 gap-4">
               <WiFiDirectMesh />
