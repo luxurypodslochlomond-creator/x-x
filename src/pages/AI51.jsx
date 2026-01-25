@@ -473,64 +473,6 @@ AI51:`,
         </div>
 
         <div className="flex items-center gap-2">
-          <div className="relative">
-            <button
-              onClick={() => fileInputRef.current?.click()}
-              title="Upload image"
-              className={`px-3 py-3 rounded-lg font-black transition-all ${uploadedImage ? 'bg-green-600 text-white' : 'bg-black/60 border border-cyan-500/30 text-cyan-400 hover:border-cyan-500'}`}
-            >
-              🖼️
-            </button>
-            {uploadedImage && (
-              <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="absolute -top-16 left-0 w-12 h-12 rounded border-2 border-green-500 bg-black/80 overflow-hidden"
-              >
-                <img src={uploadedImage} alt="uploaded" className="w-full h-full object-cover" />
-              </motion.div>
-            )}
-          </div>
-          <input
-            ref={fileInputRef}
-            type="file"
-            accept="image/*"
-            onChange={async (e) => {
-              const file = e.target.files?.[0];
-              if (file) {
-                const reader = new FileReader();
-                reader.onload = async () => {
-                  try {
-                    // Convert ArrayBuffer to Blob, then to base64
-                    const blob = new Blob([reader.result], { type: file.type });
-                    const base64 = await new Promise((resolve) => {
-                      const reader2 = new FileReader();
-                      reader2.onload = () => resolve(reader2.result);
-                      reader2.readAsDataURL(blob);
-                    });
-                    
-                    const uploadRes = await base44.integrations.Core.UploadFile({ file: base64 });
-                    setUploadedImage(uploadRes.file_url);
-                    setError(null);
-                  } catch (err) {
-                    console.error('Image upload failed:', err);
-                    setError(`Image upload failed: ${err.message}`);
-                  }
-                };
-                reader.readAsArrayBuffer(file);
-              }
-            }}
-            className="hidden"
-          />
-          
-          <button
-            onClick={() => setWebSearch(!webSearch)}
-            title={webSearch ? 'Web search ON' : 'Web search OFF'}
-            className={`px-3 py-3 rounded-lg font-black transition-all ${webSearch ? 'bg-green-600 text-white' : 'bg-black/60 border border-cyan-500/30 text-cyan-400 hover:border-cyan-500'}`}
-          >
-            🌐
-          </button>
-          
           <input
             ref={inputRef}
             type="text"
