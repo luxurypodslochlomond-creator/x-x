@@ -179,7 +179,12 @@ export default function Chakra51Protocol() {
   const oscillator2Ref = useRef(null);
   const oscillator3Ref = useRef(null); // Third oscillator for power mode
   const gainNodeRef = useRef(null);
+  const isochronicGainRef = useRef(null); // For isochronic pulsing
   const timerRef = useRef(null);
+  const isochronicIntervalRef = useRef(null);
+  const hapticIntervalRef = useRef(null);
+  const [breathPhase, setBreathPhase] = useState('in'); // in, hold, out
+  const [pixelPulse, setPixelPulse] = useState(false);
 
   useEffect(() => {
     return () => {
@@ -199,32 +204,52 @@ export default function Chakra51Protocol() {
 
     const ctx = audioContextRef.current;
     
-    // Main chakra frequency
+    // BINAURAL BEATS: Different frequency each ear for brain entrainment
+    const binauralDifference = 4; // 4Hz theta wave (deep healing)
+    
+    // Left ear - base frequency
     oscillator1Ref.current = ctx.createOscillator();
     oscillator1Ref.current.frequency.value = selectedChakra.frequency;
     oscillator1Ref.current.type = 'sine';
 
-    // Pain relief frequency layer
+    // Right ear - base + difference = brain creates healing wave
     oscillator2Ref.current = ctx.createOscillator();
-    oscillator2Ref.current.frequency.value = selectedChakra.painFrequency;
+    oscillator2Ref.current.frequency.value = selectedChakra.frequency + binauralDifference;
     oscillator2Ref.current.type = 'sine';
 
-    // POWER MODE: Add 432Hz love frequency for maximum healing
+    // POWER MODE: Add 432Hz love frequency
     if (powerMode) {
       oscillator3Ref.current = ctx.createOscillator();
-      oscillator3Ref.current.frequency.value = 432; // Universal healing
+      oscillator3Ref.current.frequency.value = 432;
       oscillator3Ref.current.type = 'sine';
     }
 
-    // Volume
-    gainNodeRef.current = ctx.createGain();
-    gainNodeRef.current.gain.value = powerMode ? 0.2 : 0.15; // Slightly louder in power mode
+    // Stereo panning for binaural effect
+    const pannerLeft = ctx.createStereoPanner();
+    pannerLeft.pan.value = -1; // Full left
+    const pannerRight = ctx.createStereoPanner();
+    pannerRight.pan.value = 1; // Full right
 
-    oscillator1Ref.current.connect(gainNodeRef.current);
-    oscillator2Ref.current.connect(gainNodeRef.current);
+    // ISOCHRONIC TONES: Volume pulsing (works without headphones!)
+    isochronicGainRef.current = ctx.createGain();
+    isochronicGainRef.current.gain.value = powerMode ? 0.2 : 0.15;
+
+    // Master gain
+    gainNodeRef.current = ctx.createGain();
+    gainNodeRef.current.gain.value = 1;
+
+    // Connect: oscillators -> panners -> isochronic gain -> master gain -> speakers
+    oscillator1Ref.current.connect(pannerLeft);
+    pannerLeft.connect(isochronicGainRef.current);
+    
+    oscillator2Ref.current.connect(pannerRight);
+    pannerRight.connect(isochronicGainRef.current);
+    
     if (powerMode && oscillator3Ref.current) {
-      oscillator3Ref.current.connect(gainNodeRef.current);
+      oscillator3Ref.current.connect(isochronicGainRef.current);
     }
+    
+    isochronicGainRef.current.connect(gainNodeRef.current);
     gainNodeRef.current.connect(ctx.destination);
 
     oscillator1Ref.current.start();
@@ -232,6 +257,41 @@ export default function Chakra51Protocol() {
     if (powerMode && oscillator3Ref.current) {
       oscillator3Ref.current.start();
     }
+
+    // ISOCHRONIC PULSING: Volume on/off at healing frequency
+    const isochronicFreq = selectedChakra.painFrequency;
+    const pulseInterval = 1000 / isochronicFreq; // Convert Hz to milliseconds
+    isochronicIntervalRef.current = setInterval(() => {
+      if (isochronicGainRef.current) {
+        isochronicGainRef.current.gain.value = isochronicGainRef.current.gain.value > 0 ? 0 : (powerMode ? 0.2 : 0.15);
+      }
+    }, pulseInterval);
+
+    // 8-BIT PIXEL PULSER: Visual sync at exact frequency
+    const pixelInterval = 1000 / selectedChakra.frequency;
+    const pixelIntervalRef = setInterval(() => {
+      setPixelPulse(prev => !prev);
+    }, pixelInterval);
+
+    // HAPTIC VIBRATION: Phone vibrates at healing frequency
+    if (navigator.vibrate && powerMode) {
+      const vibratePattern = [50, 50]; // 50ms on, 50ms off
+      hapticIntervalRef.current = setInterval(() => {
+        navigator.vibrate(vibratePattern);
+      }, 1000 / selectedChakra.frequency);
+    }
+
+    // BREATH PACER: 4-7-8 breathing (Dr. Weil protocol)
+    const breathCycle = async () => {
+      setBreathPhase('in'); // 4 seconds in
+      await new Promise(r => setTimeout(r, 4000));
+      setBreathPhase('hold'); // 7 seconds hold
+      await new Promise(r => setTimeout(r, 7000));
+      setBreathPhase('out'); // 8 seconds out
+      await new Promise(r => setTimeout(r, 8000));
+      if (isPlaying) breathCycle(); // Loop
+    };
+    breathCycle();
 
     setIsPlaying(true);
 
@@ -264,7 +324,17 @@ export default function Chakra51Protocol() {
       clearInterval(timerRef.current);
       timerRef.current = null;
     }
+    if (isochronicIntervalRef.current) {
+      clearInterval(isochronicIntervalRef.current);
+      isochronicIntervalRef.current = null;
+    }
+    if (hapticIntervalRef.current) {
+      clearInterval(hapticIntervalRef.current);
+      hapticIntervalRef.current = null;
+    }
     setIsPlaying(false);
+    setBreathPhase('in');
+    setPixelPulse(false);
   };
 
   const togglePlay = () => {
@@ -408,69 +478,76 @@ export default function Chakra51Protocol() {
               </div>
             </div>
 
-            {/* Frequencies display */}
+            {/* Frequencies display + Tech stack */}
             <div className="mb-6 bg-black/80 border-2 border-white/10 p-4">
-              <p className="text-xs text-gray-500 font-mono mb-2">FREQUENCIES:</p>
-              <p className="text-white font-mono text-sm">{selectedChakra.frequency}Hz</p>
-              <p className="text-white font-mono text-sm">{selectedChakra.painFrequency}Hz pain</p>
-              {powerMode && <p className="text-pink-400 font-mono text-sm font-black">432Hz LOVE (Power)</p>}
+              <p className="text-xs text-gray-500 font-mono mb-2">MULTI-SENSORY ENTRAINMENT:</p>
+              <p className="text-white font-mono text-sm">🎧 Binaural: {selectedChakra.frequency}Hz + 4Hz theta</p>
+              <p className="text-white font-mono text-sm">📡 Isochronic: {selectedChakra.painFrequency}Hz pulse</p>
+              <p className="text-white font-mono text-sm">👁️ Visual: 8-bit pixel sync</p>
+              <p className="text-white font-mono text-sm">🫁 Breath: 4-7-8 vagus reset</p>
+              {powerMode && (
+                <>
+                  <p className="text-pink-400 font-mono text-sm font-black">432Hz LOVE LAYER</p>
+                  <p className="text-pink-400 font-mono text-sm">📳 Haptic vibration ON</p>
+                </>
+              )}
             </div>
 
-            {/* Enhanced Visualizer - Frequency Entrainment */}
+            {/* 8-BIT PIXEL PULSER + BREATH PACER */}
             {isPlaying && (
-              <div className="flex items-center justify-center mb-6 relative h-48">
-                {/* Center chakra pulse */}
-                <motion.div
-                  animate={{ scale: [1, 1.3, 1], opacity: [0.8, 1, 0.8] }}
-                  transition={{ repeat: Infinity, duration: 2 }}
-                  className="absolute w-20 h-20 rounded-full"
+              <div className="flex items-center justify-center mb-6 relative h-64">
+                {/* 8-bit Pixel Pulser - synced to exact Hz */}
+                <div 
+                  className="absolute transition-all duration-100"
                   style={{ 
-                    background: `radial-gradient(circle, ${selectedChakra.color}, transparent)`,
-                    boxShadow: `0 0 40px ${selectedChakra.color}`
+                    width: pixelPulse ? '120px' : '100px',
+                    height: pixelPulse ? '120px' : '100px',
+                    imageRendering: 'pixelated',
+                    opacity: pixelPulse ? 1 : 0.7
                   }}
+                >
+                  {/* Pixelated circle */}
+                  <svg width="100%" height="100%" viewBox="0 0 32 32" style={{ imageRendering: 'pixelated' }}>
+                    {/* 8-bit circle made of squares */}
+                    <rect x="10" y="4" width="12" height="2" fill={selectedChakra.color} />
+                    <rect x="6" y="6" width="4" height="2" fill={selectedChakra.color} />
+                    <rect x="22" y="6" width="4" height="2" fill={selectedChakra.color} />
+                    <rect x="4" y="10" width="2" height="12" fill={selectedChakra.color} />
+                    <rect x="26" y="10" width="2" height="12" fill={selectedChakra.color} />
+                    <rect x="6" y="24" width="4" height="2" fill={selectedChakra.color} />
+                    <rect x="22" y="24" width="4" height="2" fill={selectedChakra.color} />
+                    <rect x="10" y="26" width="12" height="2" fill={selectedChakra.color} />
+                    {/* Center pulse */}
+                    <rect x="14" y="14" width="4" height="4" fill={pixelPulse ? selectedChakra.color : `${selectedChakra.color}80`} />
+                  </svg>
+                </div>
+
+                {/* Breath Pacer Ring - 4-7-8 breathing */}
+                <motion.div
+                  animate={{ 
+                    scale: breathPhase === 'in' ? [1, 1.5] : breathPhase === 'hold' ? 1.5 : [1.5, 1],
+                    opacity: breathPhase === 'hold' ? 1 : 0.6
+                  }}
+                  transition={{ 
+                    duration: breathPhase === 'in' ? 4 : breathPhase === 'hold' ? 7 : 8,
+                    ease: "easeInOut"
+                  }}
+                  className="absolute w-48 h-48 rounded-full border-4 border-dashed"
+                  style={{ borderColor: selectedChakra.color }}
                 />
-                
-                {/* Main frequency ring */}
+
+                {/* Breath instruction */}
+                <div className="absolute -bottom-8 text-center">
+                  <p className="text-xs font-mono text-white">
+                    {breathPhase === 'in' ? '🫁 BREATHE IN (4s)' : breathPhase === 'hold' ? '⏸️ HOLD (7s)' : '💨 BREATHE OUT (8s)'}
+                  </p>
+                </div>
+
+                {/* Isochronic pulse indicator */}
                 <motion.div
-                  animate={{ rotate: 360 }}
-                  transition={{ repeat: Infinity, duration: selectedChakra.frequency / 100, ease: "linear" }}
-                  className="absolute w-32 h-32 rounded-full border-4"
-                  style={{ 
-                    borderColor: selectedChakra.color,
-                    opacity: 0.6
-                  }}
-                />
-                
-                {/* Pain frequency ring (counter-rotating) */}
-                <motion.div
-                  animate={{ rotate: -360 }}
-                  transition={{ repeat: Infinity, duration: selectedChakra.painFrequency / 100, ease: "linear" }}
-                  className="absolute w-44 h-44 rounded-full border-2"
-                  style={{ 
-                    borderColor: selectedChakra.color,
-                    opacity: 0.4
-                  }}
-                />
-                
-                {/* Power mode - 432Hz love ring */}
-                {powerMode && (
-                  <motion.div
-                    animate={{ rotate: 360, scale: [1, 1.1, 1] }}
-                    transition={{ repeat: Infinity, duration: 4.32, ease: "linear" }}
-                    className="absolute w-56 h-56 rounded-full border-2 border-pink-400"
-                    style={{ opacity: 0.5 }}
-                  />
-                )}
-                
-                {/* Outer energy field */}
-                <motion.div
-                  animate={{ scale: [1, 1.2, 1], opacity: [0.2, 0.4, 0.2] }}
-                  transition={{ repeat: Infinity, duration: 3 }}
-                  className="absolute w-64 h-64 rounded-full"
-                  style={{ 
-                    background: `radial-gradient(circle, transparent 50%, ${selectedChakra.color}20)`,
-                    boxShadow: `0 0 80px ${selectedChakra.color}40`
-                  }}
+                  animate={{ opacity: [0.3, 1, 0.3] }}
+                  transition={{ repeat: Infinity, duration: 1 / selectedChakra.painFrequency }}
+                  className="absolute top-0 right-0 w-3 h-3 rounded-full bg-pink-400"
                 />
               </div>
             )}
