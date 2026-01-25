@@ -291,7 +291,7 @@ AI51:`,
   }
 
   return (
-    <div className="h-screen bg-gradient-to-br from-black via-gray-900 to-black flex flex-col">
+    <div className="h-screen bg-gradient-to-br from-black via-gray-900 to-black flex flex-col relative">
       {/* HEADER */}
       <div className="border-b border-cyan-500/20 bg-black/50 backdrop-blur px-4 py-3 flex items-center justify-between">
         <button
