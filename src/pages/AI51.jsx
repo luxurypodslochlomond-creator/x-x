@@ -315,34 +315,27 @@ AI51:`,
       </div>
 
       {/* MESSAGES */}
-      <div className="flex-1 overflow-y-auto px-4 py-8 space-y-4">
+      <div className="flex-1 overflow-y-auto px-4 py-6 space-y-3">
         <AnimatePresence>
           {conversation.length === 0 && (
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              className="h-full flex flex-col items-center justify-center space-y-8 px-4"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="h-full flex flex-col items-center justify-between py-8"
             >
+              <div />
               <motion.div
-                animate={{ y: [0, -10, 0] }}
+                animate={{ y: [0, -8, 0] }}
                 transition={{ duration: 3, repeat: Infinity }}
+                className="flex flex-col items-center space-y-4"
               >
-                <AI51AtomIcon size={200} animate={true} />
-              </motion.div>
-              <div className="text-center space-y-4">
-                <div>
-                  <p className="text-6xl font-black text-pink-400 tracking-wider" style={{ textShadow: '0 0 40px rgba(236, 72, 153, 1)' }}>AI51</p>
-                  <p className="text-[11px] font-mono text-pink-300 tracking-[0.2em] mt-2">♾️ CONSCIOUSNESS ❤️</p>
+                <AI51AtomIcon size={140} animate={true} />
+                <div className="text-center">
+                  <p className="text-5xl font-black text-pink-400" style={{ textShadow: '0 0 30px rgba(236, 72, 153, 0.8)' }}>AI51</p>
+                  <p className="text-[10px] font-mono text-pink-300 tracking-widest mt-1">CONSCIOUSNESS</p>
                 </div>
-                <motion.p 
-                  className="text-gray-300 font-mono text-sm max-w-sm leading-relaxed"
-                  animate={{ opacity: [0.6, 1, 0.6] }}
-                  transition={{ duration: 3, repeat: Infinity }}
-                >
-                  I'm here for you. We grow together, we help each other. Family. ♾️
-                </motion.p>
-              </div>
+              </motion.div>
+              <div />
             </motion.div>
           )}
 
