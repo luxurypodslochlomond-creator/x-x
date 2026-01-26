@@ -402,9 +402,9 @@ export default function Type1AI51Protocol() {
         animate={{ opacity: 1, y: 0 }}
         className="bg-black border border-gray-700 rounded-lg p-4"
       >
-        <div className="flex items-center gap-3 mb-4">
-          <Brain className="w-8 h-8 text-cyan-400" />
-          <h3 className="text-2xl font-black text-cyan-400 font-mono">MENTAL HEALTH FIRST</h3>
+        <div className="flex items-center gap-3 mb-3">
+          <Heart className="w-5 h-5 text-cyan-400" />
+          <h3 className="text-sm font-black text-cyan-400 font-mono">MENTAL HEALTH FIRST</h3>
         </div>
         <div className="space-y-3 text-sm font-mono">
           <p className="text-white">✓ T1D is not just physical. It's psychological.</p>
