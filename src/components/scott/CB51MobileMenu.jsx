@@ -76,8 +76,8 @@ const CB51MobileMenu = ({ isOpen, onClose }) => {
                         initial={{ x: '100%' }}
                         animate={{ x: 0 }}
                         exit={{ x: '100%' }}
-                        transition={{ type: 'spring', damping: 30, stiffness: 300, mass: 0.8 }}
-                        className="fixed top-0 right-0 bottom-0 w-[85vw] max-w-sm bg-[#0a0f1a] border-l border-cyan-500/30 z-[70] overflow-y-auto"
+                        transition={{ type: 'spring', damping: 50, stiffness: 400, mass: 0.5, velocity: 100 }}
+                        className="fixed top-0 right-0 bottom-0 w-[85vw] max-w-sm bg-[#0a0f1a] border-l border-cyan-500/30 z-[70] overflow-y-auto will-change-transform"
                     >
                         {/* HEADER */}
                         <div className="sticky top-0 bg-[#0a0f1a] border-b border-cyan-500/30 p-4 flex items-center justify-between">
@@ -108,14 +108,15 @@ const CB51MobileMenu = ({ isOpen, onClose }) => {
                                         className="block"
                                     >
                                         <motion.div
-                                            whileTap={{ scale: 0.97 }}
-                                            className={`flex items-center gap-3 p-3 rounded-lg border-2 transition-all ${
-                                                active
-                                                    ? `${colors.bg} ${colors.border}`
-                                                    : 'border-transparent hover:border-gray-800'
-                                            }`}
-                                            style={active ? { boxShadow: colors.glow } : {}}
-                                        >
+                                             whileTap={{ scale: 0.98 }}
+                                             transition={{ type: 'spring', stiffness: 400, damping: 40 }}
+                                             className={`flex items-center gap-3 p-3 rounded-lg border-2 will-change-transform ${
+                                                 active
+                                                     ? `${colors.bg} ${colors.border}`
+                                                     : 'border-transparent hover:border-gray-800'
+                                             }`}
+                                             style={active ? { boxShadow: colors.glow } : {}}
+                                         >
                                             <div className={`w-10 h-10 rounded-lg ${colors.bg} border ${colors.border} flex items-center justify-center flex-shrink-0`}>
                                                 <Icon className={`w-5 h-5 ${colors.text}`} />
                                             </div>
