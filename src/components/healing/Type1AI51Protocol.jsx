@@ -81,7 +81,6 @@ export default function Type1AI51Protocol() {
     {
       id: 'nutrition',
       label: 'NUTRITION GUIDE',
-      icon: '🍽️',
       color: 'green',
       content: [
         { title: 'CARB COUNTING BASICS', items: ['1 portion carbs = 10-15g', 'Read food labels for total carbs', 'Fiber slows carb absorption (subtract half)', 'Protein + fat slow glucose rise', 'Apps: MyFitnessPal, Carbs & Cals'] },
