@@ -171,7 +171,7 @@ export default function CB51() {
             )}
 
             {/* COMPACT ARTISTS GRID */}
-            <div>
+            <div className="mb-8 pt-4">
                 {artists.length === 0 ? (
                     <div className="text-center py-6">
                         <p className="text-gray-600 text-xs font-mono mb-3">No artists yet</p>
@@ -183,7 +183,7 @@ export default function CB51() {
                     </div>
                 ) : (
                     <>
-                        <div className="grid grid-cols-3 gap-2">
+                        <div className="grid grid-cols-3 gap-4">
                             {artists.map((artist) => (
                                 <motion.div
                                     key={artist.id}
