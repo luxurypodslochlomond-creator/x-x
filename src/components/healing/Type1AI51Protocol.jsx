@@ -83,12 +83,39 @@ export default function Type1AI51Protocol() {
       ]
     },
     stress: {
-      title: 'STRESS + HEALING',
+      title: 'STRESS + HEALING FREQUENCIES',
+      subtitle: 'Stress = high cortisol = insulin resistance. These frequencies calm your nervous system.',
       items: [
-        { frequency: '432 Hz', benefit: 'Baseline calm + insulin response support' },
-        { frequency: '528 Hz', benefit: 'Cellular healing + immune balance' },
-        { frequency: '174 Hz', benefit: 'Pain relief + tissue healing' },
-        { frequency: '639 Hz', benefit: 'Emotional balance + resilience' }
+        { 
+          frequency: '432 Hz', 
+          benefit: 'BASELINE CALM - Heart coherence',
+          science: 'Activates parasympathetic nervous system (rest-digest). Cortisol drops. Insulin sensitivity improves.',
+          use: 'Morning (20min) + any time stressed'
+        },
+        { 
+          frequency: '528 Hz', 
+          benefit: 'CELLULAR REPAIR - Immune rebalancing',
+          science: 'DNA repair frequency. Reduces inflammatory T-cell activity. Immune system calms.',
+          use: 'Evening (30min) - let your immune system rest'
+        },
+        { 
+          frequency: '174 Hz', 
+          benefit: 'PAIN + TISSUE - Neuropathy relief',
+          science: 'Reduces inflammation. Helps with needle sites, neuropathy, any T1D pain.',
+          use: 'When you have aches (15min sessions)'
+        },
+        { 
+          frequency: '639 Hz', 
+          benefit: 'EMOTIONAL HEALING - Resilience',
+          science: 'Balances nervous system after trauma (yes, diagnosis is trauma). Reduces anxiety.',
+          use: 'Before bed + after difficult glucose days'
+        },
+        {
+          frequency: '8 Hz (Delta)',
+          benefit: 'DEEP SLEEP - Glucose regulation',
+          science: 'Poor sleep = poor glucose control. Delta waves = deepest rest = immune recovery.',
+          use: '30min before sleep, during sleep if possible'
+        }
       ]
     },
     track: {
