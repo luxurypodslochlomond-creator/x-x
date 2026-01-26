@@ -192,31 +192,31 @@ export default function CB51() {
                                 <motion.div
                                     key={artist.id}
                                     whileTap={{ scale: 0.96 }}
-                                    className="relative bg-black border-2 border-cyan-500 rounded-lg overflow-hidden group"
+                                    className="relative w-20 h-20 bg-black border-2 border-cyan-500 rounded-full overflow-hidden group flex flex-col items-center justify-center"
                                     style={{ boxShadow: '0 0 15px rgba(6, 182, 212, 0.3)' }}
                                 >
-                                    <Link to={createPageUrl(`ScottArtistHome?id=${artist.id}`)} className="relative block p-2">
+                                    <Link to={createPageUrl(`ScottArtistHome?id=${artist.id}`)} className="relative w-full h-full flex flex-col items-center justify-center">
                                         <div className="flex flex-col items-center text-center gap-1">
                                             {artist.profile_pic_url ? (
                                                 <img 
                                                     src={artist.profile_pic_url} 
                                                     alt={artist.name}
-                                                    className="w-12 h-12 rounded object-cover border border-cyan-500"
+                                                    className="w-14 h-14 rounded-full object-cover border border-cyan-500"
                                                 />
                                             ) : (
-                                                <div className="w-12 h-12 rounded bg-cyan-500 text-black font-black text-lg flex items-center justify-center">
+                                                <div className="w-14 h-14 rounded-full bg-cyan-500 text-black font-black text-lg flex items-center justify-center">
                                                     {artist.name.charAt(0)}
                                                 </div>
                                             )}
-                                            <p className="text-white font-black text-[10px] font-mono leading-tight">{artist.name}</p>
                                         </div>
                                     </Link>
 
-                                    {/* Edit + Archive - Always visible */}
-                                    <div className="flex border-t border-cyan-500/20">
+                                    {/* Hover menu - Edit + Archive */}
+                                    <div className="absolute inset-0 bg-black/90 rounded-full opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-1">
+                                        <p className="text-white font-black text-[8px] font-mono text-center px-1">{artist.name}</p>
                                         <Link 
                                             to={createPageUrl(`ScottAddArtist?edit=${artist.id}`)}
-                                            className="flex-1 bg-black/90 text-cyan-400 text-[8px] font-bold font-mono py-1 text-center border-r border-cyan-500/20 hover:bg-cyan-500/10"
+                                            className="text-cyan-400 text-[7px] font-bold font-mono hover:text-cyan-300"
                                             onClick={(e) => e.stopPropagation()}
                                         >
                                             EDIT
@@ -227,7 +227,7 @@ export default function CB51() {
                                                 e.stopPropagation();
                                                 handleArchiveArtist(artist);
                                             }}
-                                            className="flex-1 bg-black/90 text-red-400 text-[8px] font-bold font-mono py-1 hover:bg-red-500/10"
+                                            className="text-red-400 text-[7px] font-bold font-mono hover:text-red-300"
                                         >
                                             ARCHIVE
                                         </button>
@@ -235,15 +235,13 @@ export default function CB51() {
                                 </motion.div>
                             ))}
 
-                            {/* Add Artist Card */}
+                            {/* Add Artist Circle */}
                             <Link to={createPageUrl('ScottAddArtist')}>
                                 <motion.div
                                     whileTap={{ scale: 0.96 }}
-                                    className="bg-black border-2 border-dashed border-gray-800 hover:border-cyan-500 rounded-lg p-2 h-full flex flex-col items-center justify-center gap-1 transition-all cursor-pointer"
-                                    style={{ minHeight: '85px' }}
+                                    className="w-20 h-20 bg-black border-2 border-dashed border-gray-800 hover:border-cyan-500 rounded-full flex items-center justify-center transition-all cursor-pointer"
                                 >
                                     <Plus className="w-6 h-6 text-cyan-400" />
-                                    <span className="text-cyan-400 font-black font-mono text-[8px]">ADD</span>
                                 </motion.div>
                             </Link>
                         </div>
