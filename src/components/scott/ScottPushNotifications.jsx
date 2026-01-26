@@ -59,14 +59,12 @@ export default function ScottPushNotifications() {
             setPermission(result);
 
             if (result === 'granted') {
-                // For now - just mark as subscribed
-                // Full push setup requires backend VAPID keys
                 setSubscribed(true);
-                alert('✓ Notifications enabled (browser only)');
+            } else if (result === 'denied') {
+                alert('Notifications blocked. Enable in browser settings.');
             }
         } catch (error) {
             console.error('Notification error:', error);
-            alert('Error: ' + error.message);
         } finally {
             setLoading(false);
         }
