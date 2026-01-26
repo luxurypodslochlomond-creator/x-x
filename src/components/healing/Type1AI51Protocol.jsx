@@ -386,11 +386,12 @@ export default function Type1AI51Protocol() {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="bg-gradient-to-r from-cyan-500/20 to-green-500/20 border-2 border-cyan-500 rounded-xl p-6 mt-6"
+        className="bg-gradient-to-r from-cyan-500/30 to-cyan-600/20 border-2 border-cyan-500 rounded-xl p-6 mt-6"
+        style={{ boxShadow: '0 0 25px rgba(6, 182, 212, 0.3)' }}
       >
         <div className="flex items-center gap-3 mb-4">
-          <Heart className="w-8 h-8 text-cyan-400" />
-          <h3 className="text-2xl font-black text-cyan-400 font-mono">REAL HELP</h3>
+          <Heart className="w-8 h-8 text-cyan-400 animate-pulse" />
+          <h3 className="text-2xl font-black text-cyan-400 font-mono">RESOURCES</h3>
         </div>
         <div className="space-y-3 text-sm font-mono">
           <p className="text-white">🏥 JDRF (Juvenile Diabetes Research Foundation) - jdrf.org.uk</p>
