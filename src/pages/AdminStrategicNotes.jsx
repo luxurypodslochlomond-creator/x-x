@@ -556,8 +556,10 @@ export default function AdminStrategicNotes() {
 
           </CardContent>
         </Card>
+        )}
 
         {/* WHAT HAPPENS NEXT */}
+        {(!searchQuery || "next week month share button p2p stoneymollan scottish enterprise".includes(searchQuery)) && (
         <Card className="bg-gradient-to-r from-cyan-900/40 to-blue-900/40 border-2 border-cyan-500/50">
           <CardHeader>
             <CardTitle className="text-2xl text-cyan-300 flex items-center gap-2">
