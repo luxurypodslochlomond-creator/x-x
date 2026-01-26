@@ -19,21 +19,21 @@ export default function ScottLive() {
             title: 'BOOKINGS',
             subtitle: '99 overview of App, pick up from Email',
             icon: Mail,
-            color: 'pink',
+            color: 'green',
             link: createPageUrl('ScottLiveBookings') + (artistId ? `?id=${artistId}` : '')
         },
         {
             title: 'CONTRACTS & DOCS',
             subtitle: 'Legal • Contracts • Insurance • Invoices',
             icon: DollarSign,
-            color: 'amber',
+            color: 'green',
             link: createPageUrl('ScottLiveAdmin') + (artistId ? `?id=${artistId}` : '')
         },
         {
             title: 'LOGISTICS',
             subtitle: 'On tour',
             icon: MapPin,
-            color: 'cyan',
+            color: 'green',
             link: createPageUrl('ScottLiveLogistics') + (artistId ? `?id=${artistId}` : '')
         }
     ];
@@ -70,9 +70,10 @@ export default function ScottLive() {
                             <motion.div
                                 whileHover={{ scale: 0.98 }}
                                 whileTap={{ scale: 0.96 }}
-                                className="bg-black border border-gray-800 hover:border-cyan-400 rounded p-6 transition-all flex items-center gap-4"
+                                className="bg-black border-2 border-green-500 hover:border-green-400 rounded p-6 transition-all flex items-center gap-4"
+                                style={{ boxShadow: '0 0 15px rgba(16, 185, 129, 0.3)' }}
                             >
-                                <Icon className="w-6 h-6 text-gray-500" />
+                                <Icon className="w-6 h-6 text-green-400" />
                                 <div className="flex-1">
                                     <p className="text-white font-black text-lg font-mono">
                                         {section.title}

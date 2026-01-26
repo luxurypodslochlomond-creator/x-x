@@ -19,21 +19,21 @@ export default function ScottSessions() {
             title: 'WRITING',
             subtitle: 'Writing sessions',
             icon: Music,
-            color: 'purple',
+            color: 'orange',
             link: createPageUrl('ScottSessionsWriting') + (artistId ? `?id=${artistId}` : '')
         },
         {
             title: 'RECORDING',
             subtitle: 'Studio sessions',
             icon: Mic2,
-            color: 'pink',
+            color: 'orange',
             link: createPageUrl('ScottSessionsRecording') + (artistId ? `?id=${artistId}` : '')
         },
         {
             title: 'REHEARSALS',
             subtitle: 'Band practice',
             icon: Users,
-            color: 'cyan',
+            color: 'orange',
             link: createPageUrl('ScottSessionsRehearsal') + (artistId ? `?id=${artistId}` : '')
         }
     ];
@@ -63,9 +63,10 @@ export default function ScottSessions() {
                             <motion.div
                                 whileHover={{ scale: 0.98 }}
                                 whileTap={{ scale: 0.96 }}
-                                className="bg-black border border-gray-800 hover:border-cyan-400 rounded p-6 transition-all flex items-center gap-4"
+                                className="bg-black border-2 border-orange-500 hover:border-orange-400 rounded p-6 transition-all flex items-center gap-4"
+                                style={{ boxShadow: '0 0 15px rgba(249, 115, 22, 0.3)' }}
                             >
-                                <Icon className="w-6 h-6 text-gray-500" />
+                                <Icon className="w-6 h-6 text-orange-400" />
                                 <div className="flex-1">
                                     <p className="text-white font-black text-lg font-mono">
                                         {section.title}

@@ -26,21 +26,21 @@ export default function ScottFinanceAdmin() {
             title: 'ACCOUNTS / RECEIVS',
             subtitle: 'Money tracking',
             icon: FileText,
-            color: 'green',
+            color: 'amber',
             link: createPageUrl('ScottFinancialDashboard') + (artistId ? `?id=${artistId}` : '')
         },
         {
             title: 'VISAS',
             subtitle: 'Travel documents',
             icon: Globe,
-            color: 'cyan',
+            color: 'amber',
             link: createPageUrl('ScottVisas') + (artistId ? `?id=${artistId}` : '')
         },
         {
             title: 'LEGAL',
             subtitle: 'Contracts & clearances',
             icon: Scale,
-            color: 'purple',
+            color: 'amber',
             link: createPageUrl('ScottContracts') + (artistId ? `?id=${artistId}` : '')
         }
     ];
@@ -70,9 +70,10 @@ export default function ScottFinanceAdmin() {
                             <motion.div
                                 whileHover={{ scale: 0.98 }}
                                 whileTap={{ scale: 0.96 }}
-                                className="bg-black border border-gray-800 hover:border-cyan-400 rounded p-6 transition-all flex items-center gap-4"
+                                className="bg-black border-2 border-amber-500 hover:border-amber-400 rounded p-6 transition-all flex items-center gap-4"
+                                style={{ boxShadow: '0 0 15px rgba(245, 158, 11, 0.3)' }}
                             >
-                                <Icon className="w-6 h-6 text-gray-500" />
+                                <Icon className="w-6 h-6 text-amber-400" />
                                 <div className="flex-1">
                                     <p className="text-white font-black text-lg font-mono">
                                         {section.title}
