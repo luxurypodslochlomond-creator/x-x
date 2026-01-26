@@ -280,14 +280,14 @@ export default function Type1AI51Protocol() {
 
 
 
-      {/* PRIVACY NOTICE */}
+      {/* FOOTER TRUTH */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="bg-black border-2 border-gray-700 rounded-lg p-4 mt-8"
+        className="bg-black border-2 border-cyan-500/50 rounded-lg p-4 mt-8"
       >
-        <p className="text-gray-400 text-xs font-mono">
-          🔒 Privacy: This guide does NOT collect your health data. Everything stays on YOUR device. No tracking. No servers. Just you + your health.
+        <p className="text-cyan-300 text-xs font-mono">
+          You know what to do. This is guidance + frequencies. No tracking. No servers. Just learning + healing ♾️❤️
         </p>
       </motion.div>
 
