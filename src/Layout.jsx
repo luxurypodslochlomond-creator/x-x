@@ -36,6 +36,7 @@ import COOLASFUCK8BitLoading from '@/components/shared/COOLASFUCK8BitLoading';
 import ServiceWorkerManager from '@/components/shared/ServiceWorkerManager';
 import BackgroundSync from '@/components/shared/BackgroundSync';
 import HealingAnalyticsCollector from '@/components/shared/HealingAnalyticsCollector';
+import CB51MobileMenu from '@/components/scott/CB51MobileMenu';
 import {
                                           Menu, X, Heart, Home, LogOut, Leaf, Sparkles, Music, Map, User, Globe,
                                         BookOpen, Shield, Target, Briefcase, FileText, Settings, Search, Brain, Presentation, Calculator, GraduationCap, Zap, AlertTriangle, Mic2, Lightbulb, Building, Play, Pause, Atom, Eye, Scale, Users, WifiOff, CheckCircle, Waves, ChevronDown, ChevronRight, Calendar, DollarSign, Moon, Signal, ArrowLeft, Radio, Activity, Mail
@@ -485,19 +486,17 @@ const LayoutInner = ({ children, currentPageName }) => {
         {currentPageName !== 'AI51' && (
         <header className={`lg:hidden fixed ${isOffline ? 'top-10' : 'top-0'} left-0 right-0 z-[60] bg-[#0a0f1a]/95 backdrop-blur-xl border-b border-cyan-500/30`}>
           <div className="flex items-center justify-between p-4">
-            <Link to={createPageUrl(currentPageName.startsWith('Scott') || currentPageName.startsWith('CB51') ? "CB51" : "Welcome")} className="flex items-center gap-2" onClick={() => setMobileMenuOpen(false)}>
-                {(currentPageName.startsWith('Scott') || currentPageName.startsWith('CB51')) ? (
-                  <>
-                    <Radio className="w-7 h-7 text-cyan-400" />
-                    <span className="text-xl font-black text-cyan-400">CB51</span>
-                  </>
-                ) : (
-                  <>
-                    <COOLASFUCKWaves size={28} animate={true} />
-                    <span className="text-xl font-black text-white">UF51</span>
-                  </>
-                )}
+            {(currentPageName.startsWith('Scott') || currentPageName.startsWith('CB51')) ? (
+              <div className="flex items-center gap-2">
+                <Radio className="w-7 h-7 text-cyan-400" />
+                <span className="text-xl font-black text-cyan-400">CB51</span>
+              </div>
+            ) : (
+              <Link to={createPageUrl("Welcome")} className="flex items-center gap-2" onClick={() => setMobileMenuOpen(false)}>
+                <COOLASFUCKWaves size={28} animate={true} />
+                <span className="text-xl font-black text-white">UF51</span>
               </Link>
+            )}
 
             <div className="flex items-center gap-1.5">
               {canGoBack && (
@@ -524,16 +523,27 @@ const LayoutInner = ({ children, currentPageName }) => {
                 <span className="text-pink-400 font-black font-mono text-sm leading-none">AI</span>
                 <span className="text-pink-400 font-black font-mono text-xs leading-none">51</span>
               </motion.button>
-              <button onClick={() => setMobileMenuOpen(!isMobileMenuOpen)} className="p-2 rounded-lg hover:bg-cyan-500/20 transition-colors">
-                {isMobileMenuOpen ? <X className="w-6 h-6 text-cyan-400" /> : <Menu className="w-6 h-6 text-cyan-400" />}
-              </button>
+              {(currentPageName.startsWith('Scott') || currentPageName.startsWith('CB51')) ? (
+                <button onClick={() => setMobileMenuOpen(!isMobileMenuOpen)} className="p-2 rounded-lg hover:bg-cyan-500/20 transition-colors">
+                  <Menu className="w-6 h-6 text-cyan-400" />
+                </button>
+              ) : (
+                <button onClick={() => setMobileMenuOpen(!isMobileMenuOpen)} className="p-2 rounded-lg hover:bg-cyan-500/20 transition-colors">
+                  {isMobileMenuOpen ? <X className="w-6 h-6 text-cyan-400" /> : <Menu className="w-6 h-6 text-cyan-400" />}
+                </button>
+              )}
             </div>
             </div>
             </header>
             )}
 
-        {/* MOBILE MENU */}
-                  {isMobileMenuOpen && (
+        {/* CB51 CUSTOM MOBILE MENU */}
+        {(currentPageName.startsWith('Scott') || currentPageName.startsWith('CB51')) && (
+          <CB51MobileMenu isOpen={isMobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
+        )}
+
+        {/* MOBILE MENU (UF51 ONLY) */}
+                  {isMobileMenuOpen && !currentPageName.startsWith('Scott') && !currentPageName.startsWith('CB51') && (
                     <div className={`lg:hidden fixed inset-0 ${isOffline ? 'top-[122px]' : 'top-[72px]'} bg-[#0a0f1a]/95 backdrop-blur-xl z-[50] overflow-y-auto pb-6`}>
                       <div className="p-3 pt-6 space-y-2 flex flex-col items-stretch">
                           {isCB51Page ? (
