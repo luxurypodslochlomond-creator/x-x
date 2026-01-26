@@ -7,36 +7,7 @@ export default function Type1AI51Protocol() {
   const [expandedSection, setExpandedSection] = useState(null);
 
   // QUICK ACTION CARDS - 2x2 GRID
-  const actionCards = [
-    {
-      time: 'MORNING',
-      icon: Sun,
-      color: 'amber',
-      tasks: ['Long-acting insulin', 'Check glucose', 'Protein breakfast', '432 Hz (20min)'],
-      description: 'Start with rhythm'
-    },
-    {
-      time: 'MIDDAY',
-      icon: Cloud,
-      color: 'cyan',
-      tasks: ['Check glucose', 'Count carbs', 'Rapid insulin', 'Walk 10min'],
-      description: 'Stay balanced'
-    },
-    {
-      time: 'EVENING',
-      icon: Moon,
-      color: 'purple',
-      tasks: ['Check glucose', '528 Hz healing', 'Light stretch', 'Dinner prep'],
-      description: 'Begin unwinding'
-    },
-    {
-      time: 'NIGHT',
-      icon: Star,
-      color: 'blue',
-      tasks: ['Final glucose', 'Nighttime insulin', '8 Hz sleep', 'Rest well'],
-      description: 'Recovery mode'
-    }
-  ];
+
 
   const sections = [
     {
