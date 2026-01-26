@@ -365,11 +365,12 @@ export default function Type1AI51Protocol() {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-2 border-purple-500 rounded-xl p-6 mt-6"
+        className="bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border-2 border-cyan-500 rounded-xl p-6 mt-6"
+        style={{ boxShadow: '0 0 20px rgba(6, 182, 212, 0.2)' }}
       >
         <div className="flex items-center gap-3 mb-4">
-          <Brain className="w-8 h-8 text-purple-400" />
-          <h3 className="text-2xl font-black text-purple-400 font-mono">THE HARDEST PART</h3>
+          <Brain className="w-8 h-8 text-cyan-400" />
+          <h3 className="text-2xl font-black text-cyan-400 font-mono">MENTAL HEALTH FIRST</h3>
         </div>
         <div className="space-y-3 text-sm font-mono">
           <p className="text-white">✓ T1D is not just physical. It's psychological.</p>
