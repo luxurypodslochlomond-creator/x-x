@@ -267,12 +267,13 @@ export default function Type1AI51Protocol() {
         })}
       </div>
 
-      {/* CONTENT */}
+      {/* CONTENT GRID CARD */}
       <motion.div
         key={selectedTab}
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
-        className="bg-black border-2 border-cyan-500/50 rounded-lg p-6 space-y-4"
+        className="bg-black border-2 border-cyan-500 rounded-lg p-6 space-y-4"
+        style={{ boxShadow: '0 0 25px rgba(6, 182, 212, 0.2)' }}
       >
         <h3 className="text-2xl font-black text-cyan-400 font-mono">{activeProtocol.title}</h3>
 
