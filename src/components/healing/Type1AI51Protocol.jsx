@@ -280,14 +280,7 @@ export default function Type1AI51Protocol() {
         ))}
       </div>
 
-      {/* FREQUENCY ENGINE */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="mt-8"
-      >
-        <Type1FrequencyEngine />
-      </motion.div>
+
 
       {/* PRIVACY NOTICE */}
       <motion.div
