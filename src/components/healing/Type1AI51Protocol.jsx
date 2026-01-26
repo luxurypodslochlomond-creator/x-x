@@ -159,23 +159,28 @@ export default function Type1AI51Protocol() {
   const FrequencyVisualizer = ({ frequency }) => {
     const barWidth = (frequency.power / 100) * 100;
     return (
-      <div className="bg-black border border-purple-500/30 rounded p-3 mb-3">
-        <div className="flex items-center justify-between mb-2">
-          <p className="text-purple-400 text-xs font-black font-mono">{frequency.hz} HZ</p>
-          <span className="text-purple-300 text-xs font-mono">{frequency.power}%</span>
+      <motion.div 
+        initial={{ scale: 0.95, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        className="bg-gradient-to-br from-purple-950 to-black border-2 border-purple-500 rounded-lg p-4 mb-4"
+        style={{ boxShadow: '0 0 20px rgba(168, 85, 247, 0.4)' }}
+      >
+        <div className="flex items-center justify-between mb-3">
+          <p className="text-purple-300 text-lg font-black font-mono">{frequency.hz} HZ</p>
+          <span className="text-purple-400 text-sm font-mono">{frequency.power}% POWER</span>
         </div>
-        <h4 className="text-white text-xs font-bold mb-2">{frequency.name}</h4>
-        <p className="text-gray-400 text-xs font-mono mb-3 leading-relaxed">{frequency.science}</p>
-        <div className="w-full bg-purple-950 rounded-full h-2 overflow-hidden">
+        <h4 className="text-white text-lg font-black mb-2">{frequency.name}</h4>
+        <p className="text-gray-300 text-sm font-mono mb-4 leading-relaxed">{frequency.science}</p>
+        <div className="w-full bg-purple-950 rounded-full h-3 overflow-hidden">
           <motion.div
             initial={{ width: 0 }}
             animate={{ width: `${barWidth}%` }}
             transition={{ duration: 1.5, ease: 'easeOut' }}
             className="h-full bg-gradient-to-r from-purple-500 to-pink-500"
-            style={{ boxShadow: '0 0 10px rgba(168, 85, 247, 0.8)' }}
+            style={{ boxShadow: '0 0 15px rgba(168, 85, 247, 1)' }}
           />
         </div>
-      </div>
+      </motion.div>
     );
   };
 
