@@ -48,8 +48,10 @@ export default function CB51NotificationInbox() {
                 sent_to_band_at: approved ? new Date().toISOString() : null
             });
             setExpandedOfferId(null);
+            toast.success(approved ? '✓ SENT TO BAND' : '✗ REJECTED');
         } catch (error) {
             console.error('Error updating offer:', error);
+            toast.error('Failed to save decision');
         }
     };
 
