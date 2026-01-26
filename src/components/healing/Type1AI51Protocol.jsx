@@ -391,10 +391,11 @@ export default function Type1AI51Protocol() {
               <p className="text-red-300 text-xs font-mono font-bold">🚨 DKA IS LIFE-THREATENING. If confused, nauseous, or hard to breathe = CALL 999 NOW</p>
             </div>
           </div>
-            )}
+            </div>
+          )}
           </div>
-        </motion.div>
-      )}
+          </motion.div>
+          )}
 
       {/* PSYCHOLOGICAL + EMOTIONAL SUPPORT */}
       <motion.div
