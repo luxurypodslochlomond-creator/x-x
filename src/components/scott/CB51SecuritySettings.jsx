@@ -55,7 +55,7 @@ export default function CB51SecuritySettings() {
       icon: Eye,
       description: 'Built in from the start',
       details: [
-        'Minimal data collection—only what's essential for management',
+        "Minimal data collection—only what's essential for management",
         'No tracking pixels, analytics cookies, or fingerprinting',
         'No third-party data brokers',
         'Your activity stays between you and CB51'
