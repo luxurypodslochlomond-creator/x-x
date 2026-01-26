@@ -404,16 +404,6 @@ export default function CB51() {
                         <p className="text-amber-400 font-black font-mono text-[8px]">SET</p>
                     </motion.div>
                 </Link>
-                <Link to={createPageUrl('ScottFeedback')}>
-                    <motion.div
-                        whileTap={{ scale: 0.95 }}
-                        className="bg-black border-2 border-pink-500 rounded-lg p-2 text-center hover:bg-pink-500/10"
-                        style={{ boxShadow: '0 0 15px rgba(236, 72, 153, 0.3)' }}
-                    >
-                        <Heart className="w-5 h-5 text-pink-400 mx-auto mb-1" />
-                        <p className="text-pink-400 font-black font-mono text-[8px]">MEMO</p>
-                    </motion.div>
-                </Link>
                 </div>
 
             {/* ARCHIVED ARTISTS */}
