@@ -68,14 +68,12 @@ export default function Type1AI51Protocol() {
     },
     {
       id: 'frequencies',
-      label: 'UNIFIED FREQUENCY PROTOCOL',
+      label: 'HEALING FREQUENCIES',
       color: 'purple',
       isFrequencySection: true,
       frequencies: [
         { hz: 432, name: 'BASELINE CALM', science: 'Activates parasympathetic nervous system. Lowers cortisol. Improves insulin sensitivity.', power: 85 },
-        { hz: 528, name: 'CELLULAR REPAIR', science: 'DNA repair activation. Reduces inflammatory T-cells. Supports immune healing.', power: 92 },
-        { hz: 174, name: 'PAIN + TISSUE', science: 'Reduces inflammation & neuropathy. Tissue regeneration. Anti-swelling.', power: 88 },
-        { hz: 8, name: 'DELTA SLEEP', science: 'Deepest rest state. Glucose control improves with delta sleep. HbA1c impact.', power: 90 }
+        { hz: 528, name: 'CELLULAR REPAIR', science: 'DNA repair activation. Reduces inflammatory T-cells. Supports immune healing.', power: 92 }
       ]
     },
     {
