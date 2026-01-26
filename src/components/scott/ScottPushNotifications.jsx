@@ -12,8 +12,10 @@ export default function ScottPushNotifications() {
     const [permission, setPermission] = useState(typeof Notification !== 'undefined' ? Notification.permission : 'default');
     const [subscribed, setSubscribed] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [isIOS, setIsIOS] = useState(false);
 
     useEffect(() => {
+        setIsIOS(/iPad|iPhone|iPod/.test(navigator.userAgent));
         checkSubscription();
     }, []);
 
