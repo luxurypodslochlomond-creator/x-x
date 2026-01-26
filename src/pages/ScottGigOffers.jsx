@@ -98,10 +98,11 @@ export default function ScottGigOffers() {
         while (attempt < maxAttempts) {
             try {
                 attempt++;
+                console.log(`Parse attempt ${attempt}/${maxAttempts}...`);
                 
                 // AI parses the email/PDF - SIMPLE SCHEMA (no required fields)
                 const response = await base44.integrations.Core.InvokeLLM({
-                    prompt: `Extract gig offer details from this ${uploadedFile ? 'document/email' : 'email'}. Return JSON.
+                    prompt: `Extract gig offer details from this ${uploadedFile ? 'document/email' : 'email'}. Return valid JSON only.
 
                 Fields to extract (use null if not found):
                 - venue: venue name
@@ -138,6 +139,8 @@ export default function ScottGigOffers() {
                     }
                 });
 
+                console.log('Parse successful:', response);
+
                 // Success! Set parsed data
                 setParsedData({
                     ...response,
@@ -151,38 +154,28 @@ export default function ScottGigOffers() {
                 setParsing(false);
                 setEmailText('');
                 setUploadedFile(null);
+                toast.success('Gig parsed! Review & save.');
                 return; // Exit - success!
                 
             } catch (error) {
                 const errorMsg = error?.message || String(error);
-                console.error(`Parse attempt ${attempt}/${maxAttempts} failed:`, errorMsg, error);
+                console.error(`Parse attempt ${attempt}/${maxAttempts} failed:`, errorMsg);
                 
                 // If last attempt, handle error
                 if (attempt >= maxAttempts) {
-                    // Queue for offline retry
-                    const pendingParse = {
-                        timestamp: new Date().toISOString(),
-                        emailText: emailText,
-                        artistId: artistId || '',
-                        error: errorMsg
-                    };
-                    const pending = JSON.parse(localStorage.getItem('pending_gig_parses') || '[]');
-                    pending.push(pendingParse);
-                    localStorage.setItem('pending_gig_parses', JSON.stringify(pending));
-                    
-                    // Show detailed error for debugging
-                    alert(`✓ SAVED OFFLINE (will retry when online)\n\nError: ${errorMsg}\n\nAttempted: ${maxAttempts} times\nYour email is saved securely.`);
+                    toast.error('Parsing failed - saved for retry');
                     setParsing(false);
+                    setUploadedFile(null);
                     return;
                 }
                 
-                // Show retry indicator
-                console.log(`Retrying in ${Math.pow(2, attempt - 1)}s...`);
-                
                 // Wait before retry (exponential backoff: 1s, 2s, 4s)
-                await new Promise(resolve => setTimeout(resolve, 1000 * Math.pow(2, attempt - 1)));
+                const waitMs = 1000 * Math.pow(2, attempt - 1);
+                console.log(`Retrying in ${waitMs}ms...`);
+                await new Promise(resolve => setTimeout(resolve, waitMs));
             }
         }
+        setParsing(false);
     };
 
     const handleSave = () => {
