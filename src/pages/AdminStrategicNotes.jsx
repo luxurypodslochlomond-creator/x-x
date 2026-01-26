@@ -624,8 +624,10 @@ export default function AdminStrategicNotes() {
             </p>
           </CardContent>
         </Card>
+        )}
 
         {/* CORE TRUTHS */}
+        {(!searchQuery || "core truths wow mom artists 90 percent p51 family genesis protocol nature".includes(searchQuery)) && (
         <Card className="bg-gradient-to-r from-pink-900/40 to-purple-900/40 border-2 border-pink-500/50">
           <CardHeader>
             <CardTitle className="text-2xl text-pink-300">CORE TRUTHS (Never Forget)</CardTitle>
