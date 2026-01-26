@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
-import { Radio, ArrowLeft, Music, Calendar, ClipboardList, DollarSign, Mic2, Plus, Upload, X } from 'lucide-react';
+import { Radio, ArrowLeft, Music, Calendar, ClipboardList, DollarSign, Mic2, Plus, Upload, X, Phone, Mail, MessageCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
 import { useQuery } from '@tanstack/react-query';
@@ -194,21 +194,38 @@ export default function ScottArtistHome() {
                 </div>
             </div>
 
-            {/* ARTIST INFO - COMPACT */}
-            {(artist.phone || artist.email || artist.rate || artist.genre) && (
-                <div className="mb-3 bg-black border border-cyan-500/20 rounded-lg p-3">
-                    <div className="space-y-2">
+            {/* ARTIST INFO - COMPACT WITH QUICK CONTACT */}
+            {(artist.phone || artist.email) && (
+                <div className="mb-3 bg-black border border-cyan-500/20 rounded-lg p-2">
+                    <div className="flex items-center gap-2">
                         {artist.phone && (
-                            <div className="flex items-center justify-between">
-                                <p className="text-gray-600 text-[9px] font-mono">Phone</p>
-                                <p className="text-white font-mono text-xs">{artist.phone}</p>
-                            </div>
+                            <>
+                                <a 
+                                    href={`https://wa.me/${artist.phone.replace(/\D/g, '')}`}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex-1 flex items-center justify-center gap-2 bg-green-500/10 hover:bg-green-500/20 border border-green-500/30 rounded p-2 transition-all"
+                                >
+                                    <MessageCircle className="w-4 h-4 text-green-400" />
+                                    <span className="text-green-400 font-mono text-[9px] font-bold">WhatsApp</span>
+                                </a>
+                                <a 
+                                    href={`tel:${artist.phone}`}
+                                    className="flex-1 flex items-center justify-center gap-2 bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 rounded p-2 transition-all"
+                                >
+                                    <Phone className="w-4 h-4 text-cyan-400" />
+                                    <span className="text-cyan-400 font-mono text-[9px] font-bold">Call</span>
+                                </a>
+                            </>
                         )}
                         {artist.email && (
-                            <div className="flex items-center justify-between">
-                                <p className="text-gray-600 text-[9px] font-mono">Email</p>
-                                <p className="text-white font-mono text-xs truncate ml-2">{artist.email}</p>
-                            </div>
+                            <a 
+                                href={`mailto:${artist.email}`}
+                                className="flex-1 flex items-center justify-center gap-2 bg-purple-500/10 hover:bg-purple-500/20 border border-purple-500/30 rounded p-2 transition-all"
+                            >
+                                <Mail className="w-4 h-4 text-purple-400" />
+                                <span className="text-purple-400 font-mono text-[9px] font-bold">Email</span>
+                            </a>
                         )}
                     </div>
                 </div>
