@@ -242,7 +242,7 @@ export default function Type1AI51Protocol() {
         <p className="text-cyan-300/80 text-sm font-mono">Private. Offline. No intercept. ♾️❤️</p>
       </motion.div>
 
-      {/* TAB SELECTOR */}
+      {/* TAB GRID */}
       <div className="grid grid-cols-5 gap-2">
         {tabs.map(tab => {
           const IconComponent = tab.icon;
@@ -253,11 +253,12 @@ export default function Type1AI51Protocol() {
               onClick={() => setSelectedTab(tab.id)}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className={`p-3 rounded-lg border-2 font-bold text-xs font-mono transition-all flex flex-col items-center gap-1 ${
+              className={`p-3 rounded border-2 font-bold text-xs font-mono transition-all flex flex-col items-center gap-1 ${
                 isActive
                   ? 'bg-cyan-500/30 border-cyan-500 text-cyan-300'
-                  : 'border-gray-700 text-gray-600 hover:border-cyan-500/50'
+                  : 'bg-black/50 border-cyan-500/20 text-cyan-600 hover:border-cyan-500/50'
               }`}
+              style={isActive ? { boxShadow: '0 0 15px rgba(6, 182, 212, 0.3)' } : {}}
             >
               <IconComponent className="w-4 h-4" />
               <span className="text-[8px]">{tab.label.split(' ')[1]}</span>
