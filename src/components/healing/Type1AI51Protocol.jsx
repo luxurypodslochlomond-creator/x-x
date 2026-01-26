@@ -400,12 +400,21 @@ export default function Type1AI51Protocol() {
         </div>
       </motion.div>
 
+      {/* FREQUENCY ENGINE - OFFLINE AUDIO */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="mt-8"
+      >
+        <Type1FrequencyEngine />
+      </motion.div>
+
       {/* FOOTER */}
       <div className="text-center text-gray-600 text-xs font-mono space-y-2 mt-6">
         <p className="text-white font-bold">This protocol is NOT medical advice. Always follow your doctor's guidance.</p>
         <p className="text-cyan-300">Type 1 requires insulin. No frequency or AI replaces it. Frequencies + insulin + love = life.</p>
         <p className="text-pink-300 font-bold">You are never alone. {user && `Welcome, ${user.full_name}.`} ♾️❤️</p>
-        <p className="text-gray-600 text-[10px]">Built with love for every person living with T1D. Freedom comes through community.</p>
+        <p className="text-gray-600 text-[10px]">Built with love for every person living with T1D. Freedom comes through community. 100% offline. 100% free. ♾️</p>
       </div>
     </div>
   );
