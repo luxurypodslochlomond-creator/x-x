@@ -40,8 +40,7 @@ export default function Type1AI51Protocol() {
           { title: 'REAL BENEFITS', items: ['Fewer stress-induced spikes', 'Better sleep = more stable glucose', 'Less anxiety = less hypos', 'Calmer nervous system = better decisions', 'You feel the difference in 3-5 days'] }
         ],
         resources: [
-          { name: 'Diabetes UK - Stress & Glucose', url: 'https://www.diabetes.org.uk/guide-to-diabetes/managing-your-diabetes/stress' },
-          { name: 'JDRF - Mental Health Support', url: 'https://www.jdrf.org.uk/' }
+          { name: 'Diabetes UK - Stress & Glucose', url: 'https://www.diabetes.org.uk/guide-to-diabetes/managing-your-diabetes/stress' }
         ]
       }
     ];
