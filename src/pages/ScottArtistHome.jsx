@@ -354,6 +354,6 @@ export default function ScottArtistHome() {
                     )}
                 </AnimatePresence>
             </div>
-            </div>
-            );
-            }
+        </div>
+    );
+}
