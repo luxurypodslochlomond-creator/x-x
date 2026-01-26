@@ -239,10 +239,10 @@ export default function Type1AI51Protocol() {
       {/* HEADER WITH BACK BUTTON */}
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-3">
-          <span className="text-gray-500 text-sm font-mono">← BACK</span>
+          <span className="text-cyan-400 text-sm font-mono font-bold hover:opacity-70 cursor-pointer">← BACK</span>
         </div>
         <div className="flex items-center gap-2">
-          <span className="text-green-400 text-xs font-mono font-bold px-3 py-1 border border-green-500 rounded">🟢 ONLINE</span>
+          <span className="text-green-400 text-xs font-mono font-bold px-3 py-1 border-2 border-green-500 rounded">🟢 ONLINE</span>
         </div>
       </div>
 
