@@ -264,8 +264,8 @@ export default function Type1AI51Protocol() {
           <span className="text-3xl font-black text-black">T1</span>
         </div>
         <div>
-          <h1 className="text-2xl font-black text-white">Type1 AI51</h1>
-          <p className="text-cyan-300 text-xs font-mono">Your daily diabetes manager</p>
+          <h1 className="text-2xl font-black text-white">Type1 AI51 Guide</h1>
+          <p className="text-cyan-300 text-xs font-mono">Understand + heal with frequencies</p>
         </div>
       </div>
 
