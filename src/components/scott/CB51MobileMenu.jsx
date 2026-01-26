@@ -131,15 +131,15 @@ const CB51MobileMenu = ({ isOpen, onClose }) => {
                              })}
 
                             {/* SIGN OUT */}
-                            <div className="mt-6 pt-4 border-t border-cyan-500/20 pb-6">
-                                <button
-                                    onClick={() => { base44.auth.logout(); }}
-                                    className="w-full flex items-center gap-2 p-3 border-2 border-red-500/50 hover:border-red-500 rounded-lg transition-all"
-                                >
-                                    <LogOut className="w-5 h-5 text-red-500" />
-                                    <span className="text-red-500 font-mono text-sm font-bold">Sign Out</span>
-                                </button>
-                            </div>
+                             <div className="mt-4 pt-2 border-t border-cyan-500/20 pb-4">
+                                 <button
+                                     onClick={() => { base44.auth.logout(); }}
+                                     className="w-full flex items-center gap-2 px-3 py-2 border border-red-500/40 hover:border-red-500 hover:bg-red-500/10 rounded-lg transition-all"
+                                 >
+                                     <LogOut className="w-4 h-4 text-red-400" />
+                                     <span className="text-red-400 font-mono text-xs font-bold">Sign Out</span>
+                                 </button>
+                             </div>
                         </div>
 
                         {/* FOOTER */}
