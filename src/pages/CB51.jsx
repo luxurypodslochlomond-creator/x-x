@@ -158,49 +158,19 @@ export default function CB51() {
     return (
         <div className="min-h-screen bg-black text-white p-3 pb-20">
 
-            <TechStatusBar showP2PSync={true} />
-
-            {/* COMPACT HEADER */}
-            <div className="mb-3 pt-2">
-                <div className="flex items-center justify-between mb-2">
+            {/* MINIMAL HEADER - Just the brand + notifications button */}
+            <div className="mb-4 pt-2">
+                <div className="flex items-center justify-between mb-3">
                     <div className="flex items-center gap-2">
                         <Radio className="w-6 h-6 text-cyan-400" />
                         <h1 className="text-xl font-black text-cyan-400 font-mono">CB51</h1>
                     </div>
-                </div>
-                <div className="mb-2">
                     <PushNotificationManager />
-                </div>
-
-                {/* COMPACT STATS BAR */}
-                <div className="flex items-center gap-1 bg-black border border-cyan-500/20 rounded-lg p-2">
-                    <Link to={createPageUrl('ScottGigOffers')} className="flex-1">
-                        <div className="text-center hover:bg-green-500/10 rounded p-1 transition-all">
-                            <p className="text-green-400/60 text-[8px] font-mono">PIPELINE</p>
-                            <p className="text-white text-xs font-black font-mono">£{stats.pipelineValue.toLocaleString()}</p>
-                        </div>
-                    </Link>
-                    <div className="w-px h-6 bg-cyan-500/20"></div>
-                    <div className="flex-1">
-                        <div className="text-center hover:bg-cyan-500/10 rounded p-1 transition-all">
-                            <p className="text-cyan-400/60 text-[8px] font-mono">SAVED</p>
-                            <p className="text-white text-xs font-black font-mono">{stats.hoursPerWeek}h</p>
-                        </div>
-                    </div>
-                    <div className="w-px h-6 bg-cyan-500/20"></div>
-                    <div className="flex-1">
-                        <div className="text-center hover:bg-amber-500/10 rounded p-1 transition-all">
-                            <p className="text-amber-400/60 text-[8px] font-mono">TODAY</p>
-                            <p className="text-white text-xs font-black font-mono">
-                                {stats.pendingOffers + stats.awaitingBand + stats.overdueInvoices + stats.urgentMessages}
-                            </p>
-                        </div>
-                    </div>
                 </div>
             </div>
 
-            {/* IN-APP NOTIFICATION INBOX - WORKS ON iOS */}
-            <div className="mb-3">
+            {/* IN-APP NOTIFICATION INBOX - MAIN FEATURE */}
+            <div className="mb-6">
                 <CB51NotificationInbox />
             </div>
 
@@ -281,84 +251,19 @@ export default function CB51() {
                 )}
             </div>
 
-            {/* MAIN QUICK ACCESS GRID */}
-            <div className="mt-3 grid grid-cols-3 gap-2">
-                <Link to={createPageUrl('ScottGigOffers')}>
-                    <motion.div
-                        whileTap={{ scale: 0.95 }}
-                        className="bg-black border-2 border-green-500 rounded-lg p-2 text-center hover:bg-green-500/10"
-                        style={{ boxShadow: '0 0 15px rgba(16, 185, 129, 0.3)' }}
-                    >
-                        <Zap className="w-5 h-5 text-green-400 mx-auto mb-1" />
-                        <p className="text-green-400 font-black font-mono text-[8px]">GIGS</p>
-                        {allOffers.length > 0 && <p className="text-white text-sm font-black font-mono">{stats.pendingOffers + stats.awaitingBand}</p>}
-                    </motion.div>
+            {/* QUICK LINKS - Keep minimal, only essential */}
+            <div className="flex gap-2">
+                <Link to={createPageUrl('ScottGigOffers')} className="flex-1">
+                    <button className="w-full bg-green-500/10 border border-green-500/50 text-green-400 py-2 rounded-lg font-mono text-xs font-bold hover:bg-green-500/20 transition-all">
+                        + NEW GIG
+                    </button>
                 </Link>
-                <Link to={createPageUrl('ScottMessageInbox')}>
-                    <motion.div
-                        whileTap={{ scale: 0.95 }}
-                        className="bg-black border-2 border-cyan-500 rounded-lg p-2 text-center hover:bg-cyan-500/10"
-                        style={{ boxShadow: '0 0 15px rgba(6, 182, 212, 0.3)' }}
-                    >
-                        <Mail className="w-5 h-5 text-cyan-400 mx-auto mb-1" />
-                        <p className="text-cyan-400 font-black font-mono text-[8px]">EMAIL</p>
-                    </motion.div>
+                <Link to={createPageUrl('ScottSettings')} className="flex-1">
+                    <button className="w-full bg-amber-500/10 border border-amber-500/50 text-amber-400 py-2 rounded-lg font-mono text-xs font-bold hover:bg-amber-500/20 transition-all">
+                        SETTINGS
+                    </button>
                 </Link>
-                <Link to={createPageUrl('ScottCalendarView')}>
-                    <motion.div
-                        whileTap={{ scale: 0.95 }}
-                        className="bg-black border-2 border-cyan-500 rounded-lg p-2 text-center hover:bg-cyan-500/10"
-                        style={{ boxShadow: '0 0 15px rgba(6, 182, 212, 0.3)' }}
-                    >
-                        <Calendar className="w-5 h-5 text-cyan-400 mx-auto mb-1" />
-                        <p className="text-cyan-400 font-black font-mono text-[8px]">CAL</p>
-                        {stats.upcomingGigs > 0 && <p className="text-white text-sm font-black font-mono">{stats.upcomingGigs}</p>}
-                    </motion.div>
-                </Link>
-                <Link to={createPageUrl('ScottToDo')}>
-                    <motion.div
-                        whileTap={{ scale: 0.95 }}
-                        className="bg-black border-2 border-cyan-500 rounded-lg p-2 text-center hover:bg-cyan-500/10"
-                        style={{ boxShadow: '0 0 15px rgba(6, 182, 212, 0.3)' }}
-                    >
-                        <CheckCircle className="w-5 h-5 text-cyan-400 mx-auto mb-1" />
-                        <p className="text-cyan-400 font-black font-mono text-[8px]">TASKS</p>
-                    </motion.div>
-                </Link>
-                <Link to={createPageUrl('ScottTeamAccess')}>
-                    <motion.div
-                        whileTap={{ scale: 0.95 }}
-                        className="bg-black border-2 border-cyan-500 rounded-lg p-2 text-center hover:bg-cyan-500/10"
-                        style={{ boxShadow: '0 0 15px rgba(6, 182, 212, 0.3)' }}
-                    >
-                        <Users className="w-5 h-5 text-cyan-400 mx-auto mb-1" />
-                        <p className="text-cyan-400 font-black font-mono text-[8px]">TEAMS</p>
-                    </motion.div>
-                </Link>
-                <Link to={createPageUrl('ScottFinanceAdmin')}>
-                    <motion.div
-                        whileTap={{ scale: 0.95 }}
-                        className="bg-black border-2 border-cyan-500 rounded-lg p-2 text-center hover:bg-cyan-500/10"
-                        style={{ boxShadow: '0 0 15px rgba(6, 182, 212, 0.3)' }}
-                    >
-                        <DollarSign className="w-5 h-5 text-cyan-400 mx-auto mb-1" />
-                        <p className="text-cyan-400 font-black font-mono text-[8px]">FIN</p>
-                    </motion.div>
-                </Link>
-                <Link to={createPageUrl('ScottSettings')}>
-                    <motion.div
-                        whileTap={{ scale: 0.95 }}
-                        className="bg-black border-2 border-amber-500 rounded-lg p-2 text-center hover:bg-amber-500/10"
-                        style={{ boxShadow: '0 0 15px rgba(245, 158, 11, 0.3)' }}
-                    >
-                        <svg className="w-5 h-5 text-amber-400 mx-auto mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                        </svg>
-                        <p className="text-amber-400 font-black font-mono text-[8px]">SET</p>
-                    </motion.div>
-                </Link>
-                </div>
+            </div>
 
             {/* ARCHIVED ARTISTS */}
             {archivedArtists.length > 0 && (
