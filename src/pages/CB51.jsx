@@ -209,28 +209,33 @@ export default function CB51() {
                                                 )}
                                             </div>
 
-                                    {/* Hover menu - Edit + Archive */}
-                                    <div className="absolute inset-0 bg-black/90 rounded-full opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-1">
-                                        <p className="text-white font-black text-[8px] font-mono text-center px-1">{artist.name}</p>
-                                        <Link 
-                                            to={createPageUrl(`ScottAddArtist?edit=${artist.id}`)}
-                                            className="text-cyan-400 text-[7px] font-bold font-mono hover:text-cyan-300"
-                                            onClick={(e) => e.stopPropagation()}
-                                        >
-                                            EDIT
-                                        </Link>
-                                        <button
-                                            onClick={(e) => {
-                                                e.preventDefault();
-                                                e.stopPropagation();
-                                                handleArchiveArtist(artist);
-                                            }}
-                                            className="text-red-400 text-[7px] font-bold font-mono hover:text-red-300"
-                                        >
-                                            ARCHIVE
-                                        </button>
-                                    </div>
-                                </motion.div>
+                                            {/* Hover menu - Edit + Archive */}
+                                            <div className="absolute inset-0 bg-black/90 rounded-full opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-1 pointer-events-none group-hover:pointer-events-auto">
+                                               <p className="text-white font-black text-[8px] font-mono text-center px-1">{artist.name}</p>
+                                               <button
+                                                   onClick={(e) => {
+                                                       e.preventDefault();
+                                                       e.stopPropagation();
+                                                       navigate(createPageUrl(`ScottAddArtist?edit=${artist.id}`));
+                                                   }}
+                                                   className="text-cyan-400 text-[7px] font-bold font-mono hover:text-cyan-300"
+                                               >
+                                                   EDIT
+                                               </button>
+                                               <button
+                                                   onClick={(e) => {
+                                                       e.preventDefault();
+                                                       e.stopPropagation();
+                                                       handleArchiveArtist(artist);
+                                                   }}
+                                                   className="text-red-400 text-[7px] font-bold font-mono hover:text-red-300"
+                                               >
+                                                   ARCHIVE
+                                               </button>
+                                            </div>
+                                            </motion.div>
+                                            </Link>
+                                            )}
                             ))}
 
                             {/* Add Artist Circle */}
