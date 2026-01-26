@@ -281,17 +281,22 @@ export default function Type1AI51Protocol() {
         })}
       </div>
 
-      {/* CONTENT GRID CARD */}
-      <motion.div
-        key={selectedTab}
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="bg-black border-2 border-cyan-500 rounded-lg p-6 space-y-4"
-        style={{ boxShadow: '0 0 25px rgba(6, 182, 212, 0.2)' }}
-      >
-        <h3 className="text-2xl font-black text-cyan-400 font-mono">{activeProtocol.title}</h3>
+      {/* EXPANDABLE SECTIONS */}
+      {expandedSection && (
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -10 }}
+          key={expandedSection}
+          className="bg-black border border-gray-700 rounded-lg overflow-hidden space-y-0"
+        >
+          <div className="p-4 border-b border-gray-700">
+            <h3 className="text-lg font-black text-cyan-400 font-mono">{activeProtocol.title}</h3>
+            <p className="text-xs text-gray-500 font-mono mt-1">{activeProtocol.subtitle}</p>
+          </div>
 
-        {selectedTab === 'daily' && (
+          <div className="p-4 space-y-3 max-h-[60vh] overflow-y-auto">
+            {expandedSection === 'daily' && (
           <div className="space-y-3">
             {activeProtocol.items.map((block, i) => (
               <motion.div 
