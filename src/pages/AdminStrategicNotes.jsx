@@ -7,6 +7,7 @@ import { motion } from 'framer-motion';
 export default function AdminStrategicNotes() {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     base44.auth.me()
