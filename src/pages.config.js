@@ -296,6 +296,7 @@ import TheQuantumConnection from './pages/TheQuantumConnection';
 import TradeCards from './pages/TradeCards';
 import Tuner from './pages/Tuner';
 import TunerTogether from './pages/TunerTogether';
+import Type1AI51 from './pages/Type1AI51';
 import UNSDGAlignment from './pages/UNSDGAlignment';
 import Universal51 from './pages/Universal51';
 import UniversalCreatorProtocol from './pages/UniversalCreatorProtocol';
@@ -323,7 +324,6 @@ import YoungWarriors from './pages/YoungWarriors';
 import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
-import Type1AI51 from './pages/Type1AI51';
 import __Layout from './Layout.jsx';
 
 
@@ -626,6 +626,7 @@ export const PAGES = {
     "TradeCards": TradeCards,
     "Tuner": Tuner,
     "TunerTogether": TunerTogether,
+    "Type1AI51": Type1AI51,
     "UNSDGAlignment": UNSDGAlignment,
     "Universal51": Universal51,
     "UniversalCreatorProtocol": UniversalCreatorProtocol,
@@ -653,7 +654,6 @@ export const PAGES = {
     "ZeroEgoProtocol": ZeroEgoProtocol,
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
-    "Type1AI51": Type1AI51,
 }
 
 export const pagesConfig = {
