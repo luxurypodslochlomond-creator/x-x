@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { motion, AnimatePresence } from 'framer-motion';
+import { base44 } from '@/api/base44Client';
 import { 
     Radio, Home, Users, Calendar, Mail, Settings, 
     Zap, Music, ClipboardList, DollarSign, 
@@ -80,11 +81,11 @@ const CB51MobileMenu = ({ isOpen, onClose }) => {
 
                     {/* MENU PANEL */}
                     <motion.div
-                        initial={{ x: '-100%' }}
+                        initial={{ x: '100%' }}
                         animate={{ x: 0 }}
-                        exit={{ x: '-100%' }}
+                        exit={{ x: '100%' }}
                         transition={{ type: 'spring', damping: 30, stiffness: 300, mass: 0.8 }}
-                        className="fixed top-0 left-0 bottom-0 w-[85vw] max-w-sm bg-[#0a0f1a] border-r border-cyan-500/30 z-[70] overflow-y-auto"
+                        className="fixed top-0 right-0 bottom-0 w-[85vw] max-w-sm bg-[#0a0f1a] border-l border-cyan-500/30 z-[70] overflow-y-auto"
                     >
                         {/* HEADER */}
                         <div className="sticky top-0 bg-[#0a0f1a] border-b border-cyan-500/30 p-4 flex items-center justify-between">
