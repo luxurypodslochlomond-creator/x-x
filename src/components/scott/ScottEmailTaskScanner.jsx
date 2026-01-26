@@ -105,16 +105,16 @@ Return JSON array of tasks.`,
     const [expanded, setExpanded] = useState(false);
 
     return (
-        <div className="bg-black border border-purple-500/20 rounded-lg p-2">
+        <div className="bg-black border border-cyan-500/20 rounded-lg p-2">
             <button
                 onClick={() => setExpanded(!expanded)}
                 className="w-full flex items-center justify-between p-1"
             >
                 <div className="flex items-center gap-2">
-                    <Sparkles className="w-4 h-4 text-purple-400" />
-                    <h2 className="text-purple-400 font-black text-xs font-mono">AI EMAIL SCANNER</h2>
+                    <Sparkles className="w-4 h-4 text-cyan-400" />
+                    <h2 className="text-cyan-400 font-black text-xs font-mono">AI EMAIL SCANNER</h2>
                 </div>
-                <div className="text-purple-400">
+                <div className="text-cyan-400">
                     {expanded ? '−' : '+'}
                 </div>
             </button>
@@ -141,7 +141,7 @@ Return JSON array of tasks.`,
                         <Button
                             onClick={handleParse}
                             disabled={parsing || !email.trim()}
-                            className="w-full bg-purple-500 hover:bg-purple-600 text-white font-bold font-mono mb-2 text-xs py-2"
+                            className="w-full bg-cyan-500 hover:bg-cyan-600 text-black font-bold font-mono mb-2 text-xs py-2"
                         >
                             {parsing ? (
                                 <>
