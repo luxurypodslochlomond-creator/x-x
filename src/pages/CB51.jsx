@@ -327,11 +327,11 @@ export default function CB51() {
                     <Link to={createPageUrl('ScottCalendarView')}>
                         <motion.div
                             whileTap={{ scale: 0.95 }}
-                            className="bg-black border-2 border-blue-500 rounded-lg p-2 text-center hover:bg-blue-500/10"
-                            style={{ boxShadow: '0 0 15px rgba(59, 130, 246, 0.3)' }}
+                            className="bg-black border-2 border-cyan-500 rounded-lg p-2 text-center hover:bg-cyan-500/10"
+                            style={{ boxShadow: '0 0 15px rgba(6, 182, 212, 0.3)' }}
                         >
-                            <Calendar className="w-4 h-4 text-blue-400 mx-auto mb-1" />
-                            <p className="text-blue-400 font-black font-mono text-[8px]">SCHEDULE</p>
+                            <Calendar className="w-4 h-4 text-cyan-400 mx-auto mb-1" />
+                            <p className="text-cyan-400 font-black font-mono text-[8px]">SCHEDULE</p>
                         </motion.div>
                     </Link>
                 </div>
@@ -353,22 +353,22 @@ export default function CB51() {
                 <Link to={createPageUrl('ScottCalendarView')}>
                     <motion.div
                         whileTap={{ scale: 0.95 }}
-                        className="bg-black border-2 border-blue-500 rounded-lg p-2 text-center hover:bg-blue-500/10"
-                        style={{ boxShadow: '0 0 15px rgba(59, 130, 246, 0.3)' }}
+                        className="bg-black border-2 border-cyan-500 rounded-lg p-2 text-center hover:bg-cyan-500/10"
+                        style={{ boxShadow: '0 0 15px rgba(6, 182, 212, 0.3)' }}
                     >
-                        <Calendar className="w-5 h-5 text-blue-400 mx-auto mb-1" />
-                        <p className="text-blue-400 font-black font-mono text-[8px]">CAL</p>
+                        <Calendar className="w-5 h-5 text-cyan-400 mx-auto mb-1" />
+                        <p className="text-cyan-400 font-black font-mono text-[8px]">CAL</p>
                         {stats.upcomingGigs > 0 && <p className="text-white text-sm font-black font-mono">{stats.upcomingGigs}</p>}
                     </motion.div>
                 </Link>
                 <Link to={createPageUrl('ScottMessageInbox')}>
                     <motion.div
                         whileTap={{ scale: 0.95 }}
-                        className="bg-black border-2 border-pink-500 rounded-lg p-2 text-center hover:bg-pink-500/10"
-                        style={{ boxShadow: '0 0 15px rgba(236, 72, 153, 0.3)' }}
+                        className="bg-black border-2 border-cyan-500 rounded-lg p-2 text-center hover:bg-cyan-500/10"
+                        style={{ boxShadow: '0 0 15px rgba(6, 182, 212, 0.3)' }}
                     >
-                        <MessageSquare className="w-5 h-5 text-pink-400 mx-auto mb-1" />
-                        <p className="text-pink-400 font-black font-mono text-[8px]">EMAIL</p>
+                        <MessageSquare className="w-5 h-5 text-cyan-400 mx-auto mb-1" />
+                        <p className="text-cyan-400 font-black font-mono text-[8px]">EMAIL</p>
                     </motion.div>
                 </Link>
                 <Link to={createPageUrl('ScottTeamAccess')}>
