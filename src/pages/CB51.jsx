@@ -324,13 +324,23 @@ export default function CB51() {
                         {stats.upcomingGigs > 0 && <p className="text-white text-sm font-black font-mono">{stats.upcomingGigs}</p>}
                     </motion.div>
                 </Link>
+                <Link to={createPageUrl('ScottToDo')}>
+                    <motion.div
+                        whileTap={{ scale: 0.95 }}
+                        className="bg-black border-2 border-cyan-500 rounded-lg p-2 text-center hover:bg-cyan-500/10"
+                        style={{ boxShadow: '0 0 15px rgba(6, 182, 212, 0.3)' }}
+                    >
+                        <CheckCircle className="w-5 h-5 text-cyan-400 mx-auto mb-1" />
+                        <p className="text-cyan-400 font-black font-mono text-[8px]">TASKS</p>
+                    </motion.div>
+                </Link>
                 <Link to={createPageUrl('ScottMessageInbox')}>
                     <motion.div
                         whileTap={{ scale: 0.95 }}
                         className="bg-black border-2 border-cyan-500 rounded-lg p-2 text-center hover:bg-cyan-500/10"
                         style={{ boxShadow: '0 0 15px rgba(6, 182, 212, 0.3)' }}
                     >
-                        <MessageSquare className="w-5 h-5 text-cyan-400 mx-auto mb-1" />
+                        <Mail className="w-5 h-5 text-cyan-400 mx-auto mb-1" />
                         <p className="text-cyan-400 font-black font-mono text-[8px]">EMAIL</p>
                     </motion.div>
                 </Link>
@@ -342,16 +352,6 @@ export default function CB51() {
                     >
                         <Users className="w-5 h-5 text-cyan-400 mx-auto mb-1" />
                         <p className="text-cyan-400 font-black font-mono text-[8px]">TEAMS</p>
-                    </motion.div>
-                </Link>
-                <Link to={createPageUrl('ExtensionManager')}>
-                    <motion.div
-                        whileTap={{ scale: 0.95 }}
-                        className="bg-black border-2 border-amber-500 rounded-lg p-2 text-center hover:bg-amber-500/10"
-                        style={{ boxShadow: '0 0 15px rgba(245, 158, 11, 0.3)' }}
-                    >
-                        <Zap className="w-5 h-5 text-amber-400 mx-auto mb-1" />
-                        <p className="text-amber-400 font-black font-mono text-[8px]">EXT</p>
                     </motion.div>
                 </Link>
                 <Link to={createPageUrl('ScottSettings')}>
