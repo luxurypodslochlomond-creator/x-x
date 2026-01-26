@@ -301,8 +301,12 @@ export default function Type1AI51Protocol() {
         {selectedTab === 'insulin' && (
           <div className="space-y-3">
             {activeProtocol.items.map((block, i) => (
-              <div key={i} className="bg-black/50 border border-cyan-500/30 rounded p-4">
-                <p className="text-green-400 font-black font-mono mb-2">{block.label}</p>
+              <motion.div 
+                key={i} 
+                whileHover={{ x: 5 }}
+                className="bg-black border border-cyan-500/40 rounded p-4 hover:border-cyan-500/80 transition-all"
+              >
+                <p className="text-cyan-400 font-black font-mono mb-2">{block.label}</p>
                 <ul className="space-y-1">
                   {block.tips.map((tip, j) => (
                     <li key={j} className="text-white text-sm font-mono flex items-start gap-2">
@@ -311,7 +315,7 @@ export default function Type1AI51Protocol() {
                     </li>
                   ))}
                 </ul>
-              </div>
+              </motion.div>
             ))}
           </div>
         )}
