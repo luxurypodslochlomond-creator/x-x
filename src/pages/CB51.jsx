@@ -300,44 +300,7 @@ export default function CB51() {
                 )}
             </div>
 
-            {/* COMPACT AI QUICK ACTIONS */}
-            <div className="mt-3 mb-3">
-                <p className="text-gray-600 font-mono text-[10px] mb-2">AI SHORTCUTS</p>
-                <div className="grid grid-cols-2 gap-2">
-                    <Link to={createPageUrl('ScottGigOffers')}>
-                        <motion.div
-                            whileTap={{ scale: 0.95 }}
-                            className="bg-black border-2 border-green-500 rounded-lg p-2 text-center hover:bg-green-500/10"
-                            style={{ boxShadow: '0 0 15px rgba(16, 185, 129, 0.3)' }}
-                        >
-                            <Zap className="w-4 h-4 text-green-400 mx-auto mb-1" />
-                            <p className="text-green-400 font-black font-mono text-[8px]">PARSE GIG</p>
-                        </motion.div>
-                    </Link>
-                    <Link to={createPageUrl('ScottToDo')}>
-                        <motion.div
-                            whileTap={{ scale: 0.95 }}
-                            className="bg-black border-2 border-cyan-500 rounded-lg p-2 text-center hover:bg-cyan-500/10"
-                            style={{ boxShadow: '0 0 15px rgba(6, 182, 212, 0.3)' }}
-                        >
-                            <CheckCircle className="w-4 h-4 text-cyan-400 mx-auto mb-1" />
-                            <p className="text-cyan-400 font-black font-mono text-[8px]">CREATE TASK</p>
-                        </motion.div>
-                    </Link>
-                    <Link to={createPageUrl('ScottCalendarView')}>
-                        <motion.div
-                            whileTap={{ scale: 0.95 }}
-                            className="bg-black border-2 border-cyan-500 rounded-lg p-2 text-center hover:bg-cyan-500/10"
-                            style={{ boxShadow: '0 0 15px rgba(6, 182, 212, 0.3)' }}
-                        >
-                            <Calendar className="w-4 h-4 text-cyan-400 mx-auto mb-1" />
-                            <p className="text-cyan-400 font-black font-mono text-[8px]">SCHEDULE</p>
-                        </motion.div>
-                    </Link>
-                </div>
-            </div>
-
-            {/* COMPACT QUICK ACCESS */}
+            {/* MAIN QUICK ACCESS GRID */}
             <div className="mt-3 grid grid-cols-3 gap-2">
                 <Link to={createPageUrl('ScottGigOffers')}>
                     <motion.div
