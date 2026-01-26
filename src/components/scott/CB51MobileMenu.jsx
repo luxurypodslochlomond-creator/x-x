@@ -19,18 +19,18 @@ const CB51MobileMenu = ({ isOpen, onClose }) => {
     const location = useLocation();
 
     const menuItems = [
-        { title: 'Dashboard', url: createPageUrl('CB51'), icon: Home, color: 'cyan', desc: 'Overview' },
-        { title: 'Artists', url: createPageUrl('ScottArtist'), icon: Users, color: 'cyan', desc: 'Manage roster' },
-        { title: 'Gig Offers', url: createPageUrl('ScottGigOffers'), icon: Zap, color: 'green', desc: 'Incoming shows' },
-        { title: 'Calendar', url: createPageUrl('ScottCalendarView'), icon: Calendar, color: 'cyan', desc: 'All shows' },
-        { title: 'Messages', url: createPageUrl('ScottMessageInbox'), icon: Mail, color: 'cyan', desc: 'Inbox' },
-        { title: 'Tasks', url: createPageUrl('ScottToDo'), icon: ClipboardList, color: 'cyan', desc: 'To-do list' },
-        { title: 'Finance', url: createPageUrl('ScottFinanceAdmin'), icon: DollarSign, color: 'amber', desc: 'Money tracker' },
-        { title: 'Settings', url: createPageUrl('ScottSettings'), icon: Settings, color: 'amber', desc: 'App config' },
-        { title: 'About', url: createPageUrl('CB51About'), icon: Radio, color: 'cyan', desc: 'Why we exist' },
-        { title: 'Support', url: createPageUrl('CB51Support'), icon: Users, color: 'cyan', desc: 'Get help' },
-        { title: 'Privacy', url: createPageUrl('CB51Privacy'), icon: Eye, color: 'cyan', desc: 'Data protection' },
-        { title: 'Terms', url: createPageUrl('CB51Terms'), icon: FileText, color: 'cyan', desc: 'Service terms' },
+        { title: 'Dashboard', url: createPageUrl('CB51'), icon: Home, color: 'cyan' },
+        { title: 'Artists', url: createPageUrl('ScottArtist'), icon: Users, color: 'cyan' },
+        { title: 'Gigs', url: createPageUrl('ScottGigOffers'), icon: Zap, color: 'green' },
+        { title: 'Calendar', url: createPageUrl('ScottCalendarView'), icon: Calendar, color: 'cyan' },
+        { title: 'Messages', url: createPageUrl('ScottMessageInbox'), icon: Mail, color: 'cyan' },
+        { title: 'Tasks', url: createPageUrl('ScottToDo'), icon: ClipboardList, color: 'cyan' },
+        { title: 'Finance', url: createPageUrl('ScottFinanceAdmin'), icon: DollarSign, color: 'amber' },
+        { title: 'Settings', url: createPageUrl('ScottSettings'), icon: Settings, color: 'amber' },
+        { title: 'About', url: createPageUrl('CB51About'), icon: Radio, color: 'cyan' },
+        { title: 'Support', url: createPageUrl('CB51Support'), icon: Users, color: 'cyan' },
+        { title: 'Privacy', url: createPageUrl('CB51Privacy'), icon: Eye, color: 'cyan' },
+        { title: 'Terms', url: createPageUrl('CB51Terms'), icon: FileText, color: 'cyan' },
     ];
 
     const colorMap = {
