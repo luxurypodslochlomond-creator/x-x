@@ -341,13 +341,17 @@ export default function Type1AI51Protocol() {
         {selectedTab === 'track' && (
           <div className="space-y-3">
             {activeProtocol.items.map((item, i) => (
-              <div key={i} className="bg-black/50 border border-cyan-500/30 rounded p-4">
+              <motion.div 
+                key={i} 
+                whileHover={{ x: 5 }}
+                className="bg-black border border-cyan-500/40 rounded p-4 hover:border-cyan-500/80 transition-all"
+              >
                 <p className="text-cyan-400 font-black font-mono mb-1">{item.metric}</p>
                 <p className="text-white text-sm">{item.why}</p>
-              </div>
+              </motion.div>
             ))}
-            <div className="bg-blue-500/10 border border-blue-500/30 rounded p-3 mt-4">
-              <p className="text-blue-300 text-xs font-mono">📱 Use any app (Freestyle, Dexcom, etc). AI51 learns your patterns.</p>
+            <div className="bg-cyan-500/10 border border-cyan-500/30 rounded p-3 mt-4">
+              <p className="text-cyan-300 text-xs font-mono">📱 Use any app (Freestyle, Dexcom). AI51 learns YOUR patterns.</p>
             </div>
           </div>
         )}
