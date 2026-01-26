@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { Radio, ArrowLeft, Music, Calendar, ClipboardList, DollarSign, Mic2, Plus, Upload, X, Phone, Mail, MessageCircle } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
 import { useQuery } from '@tanstack/react-query';
 import { format, isBefore, startOfDay } from 'date-fns';
@@ -26,6 +26,7 @@ export default function ScottArtistHome() {
     const [artist, setArtist] = useState(null);
     const [isEditingPic, setIsEditingPic] = useState(false);
     const [picLoading, setPicLoading] = useState(false);
+    const [calendarExpanded, setCalendarExpanded] = useState(false);
     const urlParams = new URLSearchParams(window.location.search);
     const artistId = urlParams.get('id');
     const queryClient = useQueryClient();
@@ -201,9 +202,7 @@ export default function ScottArtistHome() {
                         {artist.phone && (
                             <>
                                 <a 
-                                    href={`https://wa.me/${artist.phone.replace(/\D/g, '')}`}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
+                                    href={`https://wa.me/${artist.phone.replace(/[^0-9]/g, '').replace(/^0/, '44')}`}
                                     className="flex-1 flex items-center justify-center gap-2 bg-green-500/10 hover:bg-green-500/20 border border-green-500/30 rounded p-2 transition-all"
                                 >
                                     <MessageCircle className="w-4 h-4 text-green-400" />
@@ -221,10 +220,10 @@ export default function ScottArtistHome() {
                         {artist.email && (
                             <a 
                                 href={`mailto:${artist.email}`}
-                                className="flex-1 flex items-center justify-center gap-2 bg-purple-500/10 hover:bg-purple-500/20 border border-purple-500/30 rounded p-2 transition-all"
+                                className="flex-1 flex items-center justify-center gap-2 bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 rounded p-2 transition-all"
                             >
-                                <Mail className="w-4 h-4 text-purple-400" />
-                                <span className="text-purple-400 font-mono text-[9px] font-bold">Email</span>
+                                <Mail className="w-4 h-4 text-cyan-400" />
+                                <span className="text-cyan-400 font-mono text-[9px] font-bold">Email</span>
                             </a>
                         )}
                     </div>
@@ -276,62 +275,84 @@ export default function ScottArtistHome() {
                 />
             </div>
 
-            {/* CALENDAR WIDGET - COMPACT */}
-            <div className="bg-black border border-cyan-500/20 rounded-lg p-3">
-                <div className="flex items-center justify-between mb-2">
+            {/* CALENDAR WIDGET - EXPANDABLE */}
+            <div className="bg-black border border-cyan-500/20 rounded-lg p-2">
+                <button
+                    onClick={() => setCalendarExpanded(!calendarExpanded)}
+                    className="w-full flex items-center justify-between p-1"
+                >
                     <div className="flex items-center gap-2">
                         <Calendar className="w-4 h-4 text-cyan-400" />
-                        <h2 className="text-cyan-400 font-black text-sm font-mono">CALENDAR</h2>
+                        <h2 className="text-cyan-400 font-black text-xs font-mono">CALENDAR</h2>
+                        {events.length > 0 && (
+                            <span className="text-gray-600 text-[9px] font-mono">({events.length})</span>
+                        )}
                     </div>
-                    <Link to={createPageUrl(`ScottCalendarView?id=${artistId}`)}>
-                        <button className="text-[9px] font-bold font-mono text-cyan-400 hover:text-cyan-300 flex items-center gap-1">
-                            <Plus className="w-3 h-3" />
-                            ADD
-                        </button>
-                    </Link>
-                </div>
+                    <div className="text-cyan-400">
+                        {calendarExpanded ? '−' : '+'}
+                    </div>
+                </button>
 
-                <div className="space-y-1 max-h-32 overflow-y-auto">
-                    {events.length === 0 ? (
-                        <p className="text-gray-600 text-xs font-mono text-center py-2">No events yet</p>
-                    ) : (
-                        events
-                            .sort((a, b) => new Date(a.date) - new Date(b.date))
-                            .slice(0, 3)
-                            .map(event => {
-                                const isPast = isBefore(new Date(event.date), startOfDay(new Date()));
-                                const statusColors = {
-                                    confirmed: 'bg-green-500',
-                                    tbc: 'bg-amber-500',
-                                    unavailable: 'bg-red-500'
-                                };
+                <AnimatePresence>
+                    {calendarExpanded && (
+                        <motion.div
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: 'auto' }}
+                            exit={{ opacity: 0, height: 0 }}
+                            className="pt-2"
+                        >
+                            <div className="flex items-center justify-between mb-2">
+                                <Link to={createPageUrl(`ScottCalendarView?id=${artistId}`)}>
+                                    <button className="text-[9px] font-bold font-mono text-cyan-400 hover:text-cyan-300">
+                                        + ADD EVENT
+                                    </button>
+                                </Link>
+                            </div>
 
-                                return (
-                                    <div 
-                                        key={event.id} 
-                                        className={`flex items-center justify-between bg-black border border-gray-900 rounded p-1.5 ${isPast ? 'opacity-40' : ''}`}
-                                    >
-                                        <div className="flex-1 min-w-0">
-                                            <p className="text-white text-xs font-bold font-mono truncate">{event.title}</p>
-                                            <p className="text-gray-600 text-[9px] font-mono truncate">
-                                                {format(new Date(event.date), 'd MMM')}
-                                                {event.location && ` · ${event.location}`}
-                                            </p>
-                                        </div>
-                                        <div className={`w-2 h-2 rounded-full ${statusColors[event.status]} flex-shrink-0 ml-2`}></div>
-                                    </div>
-                                );
-                            })
+                            <div className="space-y-1">
+                                {events.length === 0 ? (
+                                    <p className="text-gray-600 text-xs font-mono text-center py-2">No events yet</p>
+                                ) : (
+                                    events
+                                        .sort((a, b) => new Date(a.date) - new Date(b.date))
+                                        .slice(0, 5)
+                                        .map(event => {
+                                            const isPast = isBefore(new Date(event.date), startOfDay(new Date()));
+                                            const statusColors = {
+                                                confirmed: 'bg-green-500',
+                                                tbc: 'bg-amber-500',
+                                                unavailable: 'bg-red-500'
+                                            };
+
+                                            return (
+                                                <div 
+                                                    key={event.id} 
+                                                    className={`flex items-center justify-between bg-black border border-gray-900 rounded p-1.5 ${isPast ? 'opacity-40' : ''}`}
+                                                >
+                                                    <div className="flex-1 min-w-0">
+                                                        <p className="text-white text-xs font-bold font-mono truncate">{event.title}</p>
+                                                        <p className="text-gray-600 text-[9px] font-mono truncate">
+                                                            {format(new Date(event.date), 'd MMM')}
+                                                            {event.location && ` · ${event.location}`}
+                                                        </p>
+                                                    </div>
+                                                    <div className={`w-2 h-2 rounded-full ${statusColors[event.status]} flex-shrink-0 ml-2`}></div>
+                                                </div>
+                                            );
+                                        })
+                                )}
+                            </div>
+
+                            {events.length > 5 && (
+                                <Link to={createPageUrl(`ScottCalendarView?id=${artistId}`)}>
+                                    <button className="w-full mt-2 text-[9px] font-bold font-mono text-cyan-400 hover:text-cyan-300">
+                                        VIEW ALL ({events.length})
+                                    </button>
+                                </Link>
+                            )}
+                        </motion.div>
                     )}
-                </div>
-
-                {events.length > 3 && (
-                    <Link to={createPageUrl(`ScottCalendarView?id=${artistId}`)}>
-                        <button className="w-full mt-2 text-[9px] font-bold font-mono text-cyan-400 hover:text-cyan-300">
-                            VIEW ALL ({events.length})
-                        </button>
-                    </Link>
-                )}
+                </AnimatePresence>
             </div>
             </div>
             );
