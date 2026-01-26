@@ -269,12 +269,7 @@ export default function Type1AI51Protocol() {
         </div>
       </div>
 
-      {/* 2x2 ACTION GRID - MOBILE FIRST */}
-      <div className="grid grid-cols-2 gap-3 lg:grid-cols-4 lg:gap-4">
-        {actionCards.map((card, i) => (
-          <ActionCard key={i} card={card} />
-        ))}
-      </div>
+
 
       {/* COLLAPSIBLE SECTIONS */}
       <div className="space-y-2 mt-6">
