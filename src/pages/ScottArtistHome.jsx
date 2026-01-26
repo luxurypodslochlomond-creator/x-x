@@ -202,7 +202,14 @@ export default function ScottArtistHome() {
                         {artist.phone && (
                             <>
                                 <a 
-                                    href={`https://wa.me/${artist.phone.replace(/[\s\-\(\)\+]/g, '').replace(/^0/, '44')}`}
+                                    href={`https://wa.me/${(() => {
+                                        const cleaned = artist.phone.replace(/\D/g, '');
+                                        if (cleaned.startsWith('44')) return cleaned;
+                                        if (cleaned.startsWith('0')) return '44' + cleaned.substring(1);
+                                        return cleaned.length > 10 ? cleaned : '44' + cleaned;
+                                    })()}`}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
                                     className="flex-1 flex items-center justify-center gap-2 bg-green-500/10 hover:bg-green-500/20 border border-green-500/30 rounded p-2 transition-all"
                                 >
                                     <MessageCircle className="w-4 h-4 text-green-400" />
