@@ -18,7 +18,7 @@ import {
 const CB51MobileMenu = ({ isOpen, onClose }) => {
     const location = useLocation();
 
-    const menuItems = [
+    const workItems = [
         { title: 'Dashboard', url: createPageUrl('CB51'), icon: Home, color: 'cyan' },
         { title: 'Artists', url: createPageUrl('ScottArtist'), icon: Users, color: 'cyan' },
         { title: 'Gigs', url: createPageUrl('ScottGigOffers'), icon: Zap, color: 'green' },
@@ -26,7 +26,13 @@ const CB51MobileMenu = ({ isOpen, onClose }) => {
         { title: 'Messages', url: createPageUrl('ScottMessageInbox'), icon: Mail, color: 'cyan' },
         { title: 'Tasks', url: createPageUrl('ScottToDo'), icon: ClipboardList, color: 'cyan' },
         { title: 'Finance', url: createPageUrl('ScottFinanceAdmin'), icon: DollarSign, color: 'amber' },
+    ];
+
+    const accountItems = [
         { title: 'Settings', url: createPageUrl('ScottSettings'), icon: Settings, color: 'amber' },
+    ];
+
+    const trustItems = [
         { title: 'About', url: createPageUrl('CB51About'), icon: Radio, color: 'cyan' },
         { title: 'Support', url: createPageUrl('CB51Support'), icon: Users, color: 'cyan' },
         { title: 'Privacy', url: createPageUrl('CB51Privacy'), icon: Eye, color: 'cyan' },
