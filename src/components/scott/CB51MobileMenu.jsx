@@ -173,42 +173,39 @@ const CB51MobileMenu = ({ isOpen, onClose }) => {
                                 </div>
                             ))}
 
-                            {/* ABOUT & TRUST */}
-                            <div className="mt-6 pt-4 border-t border-cyan-500/20 space-y-2">
+                            {/* FOOTER LINKS */}
+                            <div className="mt-6 pt-4 border-t border-cyan-500/20 space-y-1 pb-6">
                                 <Link to={createPageUrl('CB51About')} onClick={onClose}>
-                                    <div className="flex items-center gap-3 p-3 border-2 border-gray-800 hover:border-cyan-500 rounded-lg transition-all">
-                                        <Radio className="w-5 h-5 text-cyan-400" />
-                                        <span className="text-white font-bold text-sm">About CB51</span>
-                                    </div>
-                                </Link>
-                                <Link to={createPageUrl('CB51Privacy')} onClick={onClose}>
-                                    <div className="flex items-center gap-3 p-3 border-2 border-gray-800 hover:border-gray-600 rounded-lg transition-all">
-                                        <Eye className="w-5 h-5 text-gray-400" />
-                                        <span className="text-gray-400 font-bold text-sm">Privacy</span>
-                                    </div>
-                                </Link>
-                                <Link to={createPageUrl('CB51Terms')} onClick={onClose}>
-                                    <div className="flex items-center gap-3 p-3 border-2 border-gray-800 hover:border-gray-600 rounded-lg transition-all">
-                                        <FileText className="w-5 h-5 text-gray-400" />
-                                        <span className="text-gray-400 font-bold text-sm">Terms</span>
+                                    <div className="flex items-center gap-2 p-2 hover:bg-cyan-500/10 rounded transition-all">
+                                        <Radio className="w-4 h-4 text-cyan-400" />
+                                        <span className="text-cyan-400 font-mono text-xs">About</span>
                                     </div>
                                 </Link>
                                 <Link to={createPageUrl('CB51Support')} onClick={onClose}>
-                                    <div className="flex items-center gap-3 p-3 border-2 border-gray-800 hover:border-gray-600 rounded-lg transition-all">
-                                        <Users className="w-5 h-5 text-gray-400" />
-                                        <span className="text-gray-400 font-bold text-sm">Support</span>
+                                    <div className="flex items-center gap-2 p-2 hover:bg-gray-800 rounded transition-all">
+                                        <Users className="w-4 h-4 text-gray-500" />
+                                        <span className="text-gray-500 font-mono text-xs">Support</span>
                                     </div>
                                 </Link>
-                            </div>
-
-                            {/* SIGN OUT */}
-                            <div className="mt-6 pb-6">
+                                <Link to={createPageUrl('CB51Privacy')} onClick={onClose}>
+                                    <div className="flex items-center gap-2 p-2 hover:bg-gray-800 rounded transition-all">
+                                        <Eye className="w-4 h-4 text-gray-500" />
+                                        <span className="text-gray-500 font-mono text-xs">Privacy</span>
+                                    </div>
+                                </Link>
+                                <Link to={createPageUrl('CB51Terms')} onClick={onClose}>
+                                    <div className="flex items-center gap-2 p-2 hover:bg-gray-800 rounded transition-all">
+                                        <FileText className="w-4 h-4 text-gray-500" />
+                                        <span className="text-gray-500 font-mono text-xs">Terms</span>
+                                    </div>
+                                </Link>
+                                <div className="h-px bg-gray-800 my-2"></div>
                                 <button
                                     onClick={() => { base44.auth.logout(); }}
-                                    className="w-full flex items-center gap-3 p-3 border-2 border-red-500/50 hover:border-red-500 bg-black/60 text-red-400 rounded-lg transition-all"
+                                    className="w-full flex items-center gap-2 p-2 hover:bg-red-500/10 rounded transition-all"
                                 >
-                                    <LogOut className="w-5 h-5" />
-                                    <span className="font-bold text-sm">Sign Out</span>
+                                    <LogOut className="w-4 h-4 text-red-500" />
+                                    <span className="text-red-500 font-mono text-xs">Sign Out</span>
                                 </button>
                             </div>
                         </div>
