@@ -50,15 +50,15 @@ Deno.serve(async (req) => {
       .map(r => r.band_member_name)
       .join(', ');
 
-    // Send notification directly to manager
-    await base44.asServiceRole.entities.ScottNotification.create({
-      recipient_email: gigOffer.created_by,
-      notification_type: 'manager_votes_in',
-      gig_offer_id: gigOffer.id,
-      title: `✅ VOTES IN: ${gigOffer.venue}`,
-      message: `${summary}${noReasons ? '\n\nNO votes:\n' + noReasons : ''}`,
-      action_url: `/ScottGigOffers?id=${gigOffer.artist_id}`
-    });
+    // Send notification directly to manager with real-time vote breakdown
+     await base44.asServiceRole.entities.ScottNotification.create({
+       recipient_email: gigOffer.created_by,
+       notification_type: 'manager_votes_in',
+       gig_offer_id: gigOffer.id,
+       title: `✅ VOTES IN: ${gigOffer.venue}`,
+       message: `${summary}\n\n✓ YES: ${yesVoters}${noReasons ? '\n\n✗ NO:\n' + noReasons : ''}`,
+       action_url: `/ScottGigOffers?id=${gigOffer.artist_id}`
+     });
 
     // Mark timestamp on gig offer
     await base44.asServiceRole.entities.ScottGigOffer.update(gigOffer.id, {
