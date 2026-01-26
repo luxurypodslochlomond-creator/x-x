@@ -161,8 +161,8 @@ const CB51MobileMenu = ({ isOpen, onClose }) => {
                                                    }`}
                                                    style={active ? { boxShadow: colors.glow } : {}}
                                               >
-                                                   <Icon className={`w-5 h-5 flex-shrink-0 ${colors.text}`} />
-                                                   <p className={`text-sm font-bold font-mono ${active ? colors.text : 'text-gray-300'}`}>
+                                                   <Icon className={`w-4 h-4 flex-shrink-0 ${colors.text}`} />
+                                                   <p className={`text-xs font-bold font-mono ${active ? colors.text : 'text-gray-300'}`}>
                                                        {item.title}
                                                    </p>
                                                </motion.div>
