@@ -184,28 +184,30 @@ export default function CB51() {
                 ) : (
                     <>
                         <div className="grid grid-cols-3 gap-4">
-                            {artists.map((artist) => (
-                                <motion.div
-                                    key={artist.id}
-                                    whileTap={{ scale: 0.96 }}
-                                    className="relative w-20 h-20 bg-black border-2 border-cyan-500 rounded-full overflow-hidden group flex flex-col items-center justify-center"
-                                    style={{ boxShadow: '0 0 15px rgba(6, 182, 212, 0.3)' }}
-                                >
-                                    <Link to={createPageUrl(`ScottArtistHome?id=${artist.id}`)} className="relative w-full h-full flex flex-col items-center justify-center">
-                                        <div className="flex flex-col items-center text-center gap-1">
-                                            {artist.profile_pic_url ? (
-                                                <img 
-                                                    src={artist.profile_pic_url} 
-                                                    alt={artist.name}
-                                                    className="w-14 h-14 rounded-full object-cover border border-cyan-500"
-                                                />
-                                            ) : (
-                                                <div className="w-14 h-14 rounded-full bg-cyan-500 text-black font-black text-lg flex items-center justify-center">
-                                                    {artist.name.charAt(0)}
-                                                </div>
-                                            )}
-                                        </div>
-                                    </Link>
+                                  {artists.map((artist) => (
+                                      <Link 
+                                        key={artist.id}
+                                        to={createPageUrl(`ScottArtistHome?id=${artist.id}`)}
+                                        className="relative w-20 h-20"
+                                      >
+                                        <motion.div
+                                            whileTap={{ scale: 0.96 }}
+                                            className="relative w-full h-full bg-black border-2 border-cyan-500 rounded-full overflow-hidden group flex flex-col items-center justify-center"
+                                            style={{ boxShadow: '0 0 15px rgba(6, 182, 212, 0.3)' }}
+                                        >
+                                            <div className="flex flex-col items-center text-center gap-1">
+                                                {artist.profile_pic_url ? (
+                                                    <img 
+                                                        src={artist.profile_pic_url} 
+                                                        alt={artist.name}
+                                                        className="w-14 h-14 rounded-full object-cover border border-cyan-500"
+                                                    />
+                                                ) : (
+                                                    <div className="w-14 h-14 rounded-full bg-cyan-500 text-black font-black text-lg flex items-center justify-center">
+                                                        {artist.name.charAt(0)}
+                                                    </div>
+                                                )}
+                                            </div>
 
                                     {/* Hover menu - Edit + Archive */}
                                     <div className="absolute inset-0 bg-black/90 rounded-full opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-1">
