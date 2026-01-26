@@ -260,8 +260,10 @@ export default function AdminStrategicNotes() {
             </div>
           </CardContent>
         </Card>
+        )}
 
         {/* AUDIO STEGANOGRAPHY - THE BIG ONE */}
+        {(!searchQuery || "audio steganography wallet encoding music ultrasonic".includes(searchQuery)) && (
         <Card className="bg-gradient-to-r from-cyan-900/60 to-purple-900/60 border-4 border-cyan-500 shadow-[0_0_80px_rgba(6,182,212,0.9)]">
           <CardContent className="p-8 space-y-6">
             <div className="flex items-center gap-3">
