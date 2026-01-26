@@ -438,8 +438,10 @@ export default function AdminStrategicNotes() {
 
           </CardContent>
         </Card>
+        )}
 
         {/* INNOVATIONS WE DISCOVERED */}
+        {(!searchQuery || "innovations discoveries tinnitus p2p material detection offline anonymous verified audio zero loss artist".includes(searchQuery)) && (
         <Card className="bg-gradient-to-r from-purple-900/40 to-pink-900/40 border-2 border-purple-500/50">
           <CardHeader>
             <CardTitle className="text-2xl text-purple-300 flex items-center gap-2">
