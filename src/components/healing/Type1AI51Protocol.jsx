@@ -194,8 +194,7 @@ export default function Type1AI51Protocol() {
 
       {/* FOOTER */}
       <div className="text-center text-xs font-mono text-gray-600 space-y-1 mt-8">
-        <p className="text-white font-bold">⚠️ Not medical advice. Always follow your GP.</p>
-        <p className="text-cyan-300">Insulin is life. Data + love = freedom. ♾️❤️</p>
+        <p className="text-white font-bold">Medical decisions = your GP. Frequencies = your choice.</p>
       </div>
     </div>
   );
