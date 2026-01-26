@@ -10,6 +10,7 @@ import { motion, AnimatePresence } from 'framer-motion';
  */
 
 export default function ScottBandMembers({ artist, onUpdate }) {
+    const [expanded, setExpanded] = useState(false);
     const [adding, setAdding] = useState(false);
     const [saving, setSaving] = useState(false);
     const [error, setError] = useState(null);
@@ -112,16 +113,39 @@ export default function ScottBandMembers({ artist, onUpdate }) {
     };
 
     return (
-        <div className="bg-black border border-cyan-500/20 rounded-lg p-3">
-            <div className="flex items-center justify-between mb-2">
-                <h2 className="text-cyan-400 font-black text-sm font-mono">BAND MEMBERS</h2>
-                <button
-                    onClick={() => setAdding(!adding)}
-                    className="text-cyan-400 hover:text-cyan-300 transition-colors"
-                >
-                    {adding ? <X className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
-                </button>
-            </div>
+        <div className="bg-black border border-cyan-500/20 rounded-lg p-2">
+            <button
+                onClick={() => setExpanded(!expanded)}
+                className="w-full flex items-center justify-between p-1"
+            >
+                <div className="flex items-center gap-2">
+                    <User className="w-4 h-4 text-cyan-400" />
+                    <h2 className="text-cyan-400 font-black text-xs font-mono">BAND MEMBERS</h2>
+                    {members.length > 0 && (
+                        <span className="text-gray-600 text-[9px] font-mono">({members.length})</span>
+                    )}
+                </div>
+                <div className="text-cyan-400">
+                    {expanded ? '−' : '+'}
+                </div>
+            </button>
+
+            <AnimatePresence>
+                {expanded && (
+                    <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        className="pt-2"
+                    >
+                        <div className="flex items-center justify-between mb-2">
+                            <button
+                                onClick={() => setAdding(!adding)}
+                                className="text-cyan-400 hover:text-cyan-300 transition-colors text-[9px] font-mono font-bold"
+                            >
+                                {adding ? 'CANCEL' : '+ ADD MEMBER'}
+                            </button>
+                        </div>
 
             {error && (
                 <motion.div
@@ -179,44 +203,47 @@ export default function ScottBandMembers({ artist, onUpdate }) {
                 )}
             </AnimatePresence>
 
-            <div className="space-y-1">
-                {members.length === 0 ? (
-                    <p className="text-gray-600 text-xs font-mono text-center py-2">
-                        No band members yet
-                    </p>
-                ) : (
-                    members.map((member, index) => (
-                        <motion.div
-                            key={index}
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            className="bg-black border border-gray-900 rounded p-2 flex items-center justify-between"
-                        >
-                            <div className="flex items-center gap-2 flex-1 min-w-0">
-                                <div className="w-8 h-8 rounded bg-cyan-500/20 flex items-center justify-center flex-shrink-0">
-                                    <User className="w-4 h-4 text-cyan-400" />
-                                </div>
-                                <div className="flex-1 min-w-0">
-                                    <p className="text-white font-bold font-mono text-xs truncate">
-                                        {member.name}
-                                    </p>
-                                    {member.email && (
-                                        <p className="text-gray-600 text-[9px] font-mono truncate">
-                                            {member.email}
-                                        </p>
-                                    )}
-                                </div>
-                            </div>
-                            <button
-                                onClick={() => handleRemove(index)}
-                                className="text-red-500 hover:text-red-400 transition-colors ml-2"
-                            >
-                                <X className="w-3 h-3" />
-                            </button>
-                        </motion.div>
-                    ))
+                        <div className="space-y-1">
+                            {members.length === 0 ? (
+                                <p className="text-gray-600 text-xs font-mono text-center py-2">
+                                    No band members yet
+                                </p>
+                            ) : (
+                                members.map((member, index) => (
+                                    <motion.div
+                                        key={index}
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1 }}
+                                        className="bg-black border border-gray-900 rounded p-2 flex items-center justify-between"
+                                    >
+                                        <div className="flex items-center gap-2 flex-1 min-w-0">
+                                            <div className="w-8 h-8 rounded bg-cyan-500/20 flex items-center justify-center flex-shrink-0">
+                                                <User className="w-4 h-4 text-cyan-400" />
+                                            </div>
+                                            <div className="flex-1 min-w-0">
+                                                <p className="text-white font-bold font-mono text-xs truncate">
+                                                    {member.name}
+                                                </p>
+                                                {member.email && (
+                                                    <p className="text-gray-600 text-[9px] font-mono truncate">
+                                                        {member.email}
+                                                    </p>
+                                                )}
+                                            </div>
+                                        </div>
+                                        <button
+                                            onClick={() => handleRemove(index)}
+                                            className="text-red-500 hover:text-red-400 transition-colors ml-2"
+                                        >
+                                            <X className="w-3 h-3" />
+                                        </button>
+                                    </motion.div>
+                                ))
+                            )}
+                        </div>
+                    </motion.div>
                 )}
-            </div>
+            </AnimatePresence>
         </div>
     );
 }

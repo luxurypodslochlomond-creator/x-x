@@ -3,6 +3,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { base44 } from '@/api/base44Client';
 import { Sparkles, Loader2, Calendar, ClipboardList } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 /**
  * Email Task Scanner
@@ -101,93 +102,100 @@ Return JSON array of tasks.`,
         }
     };
 
+    const [expanded, setExpanded] = useState(false);
+
     return (
-        <div className="bg-black border-2 border-purple-500/30 rounded-xl p-6">
-            <div className="flex items-center gap-2 mb-4">
-                <Sparkles className="w-6 h-6 text-purple-400" />
-                <h2 className="text-purple-400 font-black text-lg font-mono">EMAIL TASK SCANNER</h2>
-            </div>
-
-            <p className="text-gray-600 text-xs font-mono mb-4">
-                Paste an email, AI extracts tasks and adds them to your to-do list + calendar
-            </p>
-
-            <Textarea
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Paste email here..."
-                className="bg-gray-950 border-gray-800 text-white font-mono min-h-[120px] mb-3"
-            />
-
-            <Button
-                onClick={handleParse}
-                disabled={parsing || !email.trim()}
-                className="w-full bg-purple-500 hover:bg-purple-600 text-white font-bold font-mono mb-4"
+        <div className="bg-black border border-purple-500/20 rounded-lg p-2">
+            <button
+                onClick={() => setExpanded(!expanded)}
+                className="w-full flex items-center justify-between p-1"
             >
-                {parsing ? (
-                    <>
-                        <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                        SCANNING...
-                    </>
-                ) : (
-                    <>
-                        <Sparkles className="w-4 h-4 mr-2" />
-                        SCAN EMAIL
-                    </>
-                )}
-            </Button>
-
-            {tasks.length > 0 && (
-                <div className="space-y-3">
-                    <div className="border-t border-gray-800 pt-4">
-                        <p className="text-cyan-400 font-bold font-mono text-sm mb-3">
-                            FOUND {tasks.length} TASK{tasks.length > 1 ? 'S' : ''}
-                        </p>
-                        {tasks.map((task, i) => (
-                            <div key={i} className="bg-black border-2 border-gray-900 rounded-lg p-3 mb-2">
-                                <div className="flex items-start gap-2">
-                                    {task.is_calendar_event ? (
-                                        <Calendar className="w-4 h-4 text-green-400 mt-0.5 flex-shrink-0" />
-                                    ) : (
-                                        <ClipboardList className="w-4 h-4 text-cyan-400 mt-0.5 flex-shrink-0" />
-                                    )}
-                                    <div className="flex-1">
-                                        <p className="text-white font-bold text-sm font-mono">
-                                            {task.title}
-                                        </p>
-                                        {task.description && (
-                                            <p className="text-gray-600 text-xs font-mono mt-1">
-                                                {task.description}
-                                            </p>
-                                        )}
-                                        <div className="flex gap-2 mt-2">
-                                            {task.due_date && (
-                                                <span className="text-xs font-mono text-cyan-400">
-                                                    {task.due_date}
-                                                </span>
-                                            )}
-                                            <span className={`text-xs font-mono ${
-                                                task.priority === 'urgent' ? 'text-red-400' :
-                                                task.priority === 'normal' ? 'text-amber-400' :
-                                                'text-gray-600'
-                                            }`}>
-                                                {task.priority.toUpperCase()}
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-
-                    <Button
-                        onClick={handleAddTasks}
-                        className="w-full bg-green-500 hover:bg-green-600 text-black font-bold font-mono"
-                    >
-                        ADD ALL TO CB51
-                    </Button>
+                <div className="flex items-center gap-2">
+                    <Sparkles className="w-4 h-4 text-purple-400" />
+                    <h2 className="text-purple-400 font-black text-xs font-mono">AI EMAIL SCANNER</h2>
                 </div>
-            )}
+                <div className="text-purple-400">
+                    {expanded ? '−' : '+'}
+                </div>
+            </button>
+
+            <AnimatePresence>
+                {expanded && (
+                    <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        className="pt-2"
+                    >
+                        <p className="text-gray-600 text-[9px] font-mono mb-2">
+                            Paste an email, AI extracts tasks
+                        </p>
+
+                        <Textarea
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            placeholder="Paste email here..."
+                            className="bg-gray-950 border-gray-800 text-white font-mono min-h-[80px] mb-2 text-xs"
+                        />
+
+                        <Button
+                            onClick={handleParse}
+                            disabled={parsing || !email.trim()}
+                            className="w-full bg-purple-500 hover:bg-purple-600 text-white font-bold font-mono mb-2 text-xs py-2"
+                        >
+                            {parsing ? (
+                                <>
+                                    <Loader2 className="w-3 h-3 mr-2 animate-spin" />
+                                    SCANNING...
+                                </>
+                            ) : (
+                                <>
+                                    <Sparkles className="w-3 h-3 mr-2" />
+                                    SCAN EMAIL
+                                </>
+                            )}
+                        </Button>
+
+                        {tasks.length > 0 && (
+                            <div className="space-y-2">
+                                <div className="border-t border-gray-800 pt-2">
+                                    <p className="text-cyan-400 font-bold font-mono text-[9px] mb-2">
+                                        FOUND {tasks.length} TASK{tasks.length > 1 ? 'S' : ''}
+                                    </p>
+                                    {tasks.map((task, i) => (
+                                        <div key={i} className="bg-black border border-gray-900 rounded p-1.5 mb-1">
+                                            <div className="flex items-start gap-2">
+                                                {task.is_calendar_event ? (
+                                                    <Calendar className="w-3 h-3 text-green-400 mt-0.5 flex-shrink-0" />
+                                                ) : (
+                                                    <ClipboardList className="w-3 h-3 text-cyan-400 mt-0.5 flex-shrink-0" />
+                                                )}
+                                                <div className="flex-1 min-w-0">
+                                                    <p className="text-white font-bold text-[9px] font-mono truncate">
+                                                        {task.title}
+                                                    </p>
+                                                    {task.due_date && (
+                                                        <span className="text-[8px] font-mono text-cyan-400">
+                                                            {task.due_date}
+                                                        </span>
+                                                    )}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+
+                                <Button
+                                    onClick={handleAddTasks}
+                                    className="w-full bg-green-500 hover:bg-green-600 text-black font-bold font-mono text-xs py-2"
+                                >
+                                    ADD ALL
+                                </Button>
+                            </div>
+                        )}
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </div>
     );
 }
