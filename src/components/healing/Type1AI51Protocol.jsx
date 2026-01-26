@@ -372,11 +372,11 @@ export default function Type1AI51Protocol() {
             <div className="bg-cyan-500/10 border border-cyan-500/30 rounded p-3 mt-4">
               <p className="text-cyan-300 text-xs font-mono">📱 Use any app (Freestyle, Dexcom). AI51 learns YOUR patterns.</p>
             </div>
-          </div>
-        )}
+              </div>
+            )}
 
             {expandedSection === 'emergency' && (
-          <div className="space-y-3">
+              <div className="space-y-3">
             {activeProtocol.items.map((item, i) => (
               <div key={i} className={`rounded p-4 border-2 ${
                 i === 2 ? 'bg-red-500/20 border-red-500' : 'bg-amber-500/10 border-amber-500/30'
