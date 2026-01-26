@@ -322,8 +322,10 @@ export default function AdminStrategicNotes() {
 
           </CardContent>
         </Card>
+        )}
 
         {/* WHAT WE ACTUALLY BUILT */}
+        {(!searchQuery || "shipped tinnitus p2p material detection offline anonymous verified audio steganography".includes(searchQuery)) && (
         <Card className="bg-gradient-to-r from-green-900/40 to-cyan-900/40 border-2 border-green-500/50">
           <CardHeader>
             <CardTitle className="text-2xl text-green-300 flex items-center gap-2">
