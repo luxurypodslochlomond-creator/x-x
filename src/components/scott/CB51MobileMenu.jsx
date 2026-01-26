@@ -33,7 +33,6 @@ const CB51MobileMenu = ({ isOpen, onClose }) => {
     ];
 
     const trustItems = [
-        { title: 'About', url: createPageUrl('CB51About'), icon: Radio, color: 'cyan' },
         { title: 'Support', url: createPageUrl('CB51Support'), icon: Users, color: 'cyan' },
         { title: 'Privacy', url: createPageUrl('CB51Privacy'), icon: Eye, color: 'cyan' },
         { title: 'Terms', url: createPageUrl('CB51Terms'), icon: FileText, color: 'cyan' },
