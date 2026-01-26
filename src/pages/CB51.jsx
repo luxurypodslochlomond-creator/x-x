@@ -246,7 +246,7 @@ export default function CB51() {
             </div>
 
             {/* QUICK LINKS - Keep minimal, only essential */}
-            <div className="flex gap-2 mb-4">
+            <div className="flex gap-2 mb-6 mt-6">
                 <Link to={createPageUrl('ScottGigOffers')} className="flex-1">
                     <button className="w-full bg-green-500/10 border border-green-500/50 text-green-400 py-2 rounded-lg font-mono text-xs font-bold hover:bg-green-500/20 transition-all">
                         + NEW GIG
