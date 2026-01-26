@@ -27,9 +27,10 @@ Deno.serve(async (req) => {
     try {
       await base44.entities.AI51Message.create({
         recipient_email: user.email,
+        from_name: 'CB51',
         message_type: 'notification',
+        message: body,
         subject: title,
-        body: body,
         status: 'unread',
         data: { url, tag },
       });
