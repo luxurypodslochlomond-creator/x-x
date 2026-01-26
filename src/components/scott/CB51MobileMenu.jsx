@@ -6,7 +6,7 @@ import { base44 } from '@/api/base44Client';
 import { 
     Radio, Home, Users, Calendar, Mail, Settings, 
     Zap, Music, ClipboardList, DollarSign, 
-    ChevronDown, ChevronRight, X, Menu
+    ChevronDown, ChevronRight, X, Menu, LogOut, Eye, FileText
 } from 'lucide-react';
 
 /**
@@ -172,6 +172,45 @@ const CB51MobileMenu = ({ isOpen, onClose }) => {
                                     </AnimatePresence>
                                 </div>
                             ))}
+
+                            {/* ABOUT & TRUST */}
+                            <div className="mt-6 pt-4 border-t border-cyan-500/20 space-y-2">
+                                <Link to={createPageUrl('CB51About')} onClick={onClose}>
+                                    <div className="flex items-center gap-3 p-3 border-2 border-gray-800 hover:border-cyan-500 rounded-lg transition-all">
+                                        <Radio className="w-5 h-5 text-cyan-400" />
+                                        <span className="text-white font-bold text-sm">About CB51</span>
+                                    </div>
+                                </Link>
+                                <Link to={createPageUrl('CB51Privacy')} onClick={onClose}>
+                                    <div className="flex items-center gap-3 p-3 border-2 border-gray-800 hover:border-gray-600 rounded-lg transition-all">
+                                        <Eye className="w-5 h-5 text-gray-400" />
+                                        <span className="text-gray-400 font-bold text-sm">Privacy</span>
+                                    </div>
+                                </Link>
+                                <Link to={createPageUrl('CB51Terms')} onClick={onClose}>
+                                    <div className="flex items-center gap-3 p-3 border-2 border-gray-800 hover:border-gray-600 rounded-lg transition-all">
+                                        <FileText className="w-5 h-5 text-gray-400" />
+                                        <span className="text-gray-400 font-bold text-sm">Terms</span>
+                                    </div>
+                                </Link>
+                                <Link to={createPageUrl('CB51Support')} onClick={onClose}>
+                                    <div className="flex items-center gap-3 p-3 border-2 border-gray-800 hover:border-gray-600 rounded-lg transition-all">
+                                        <Users className="w-5 h-5 text-gray-400" />
+                                        <span className="text-gray-400 font-bold text-sm">Support</span>
+                                    </div>
+                                </Link>
+                            </div>
+
+                            {/* SIGN OUT */}
+                            <div className="mt-6 pb-6">
+                                <button
+                                    onClick={() => { base44.auth.logout(); }}
+                                    className="w-full flex items-center gap-3 p-3 border-2 border-red-500/50 hover:border-red-500 bg-black/60 text-red-400 rounded-lg transition-all"
+                                >
+                                    <LogOut className="w-5 h-5" />
+                                    <span className="font-bold text-sm">Sign Out</span>
+                                </button>
+                            </div>
                         </div>
 
                         {/* FOOTER */}
