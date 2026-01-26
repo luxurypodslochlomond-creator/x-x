@@ -357,7 +357,7 @@ export default function Type1AI51Protocol() {
           </div>
         )}
 
-        {selectedTab === 'track' && (
+            {expandedSection === 'track' && (
           <div className="space-y-3">
             {activeProtocol.items.map((item, i) => (
               <motion.div 
