@@ -354,11 +354,11 @@ export default function Type1AI51Protocol() {
             <div className="bg-amber-500/10 border border-amber-500/30 rounded p-3 mt-4">
               <p className="text-amber-300 text-xs font-mono">💡 Stress affects blood glucose. Use frequencies daily for immune + nervous system support.</p>
             </div>
-          </div>
-        )}
+              </div>
+            )}
 
             {expandedSection === 'track' && (
-          <div className="space-y-3">
+              <div className="space-y-3">
             {activeProtocol.items.map((item, i) => (
               <motion.div 
                 key={i} 
