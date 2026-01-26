@@ -112,14 +112,14 @@ export default function ScottBandMembers({ artist, onUpdate }) {
     };
 
     return (
-        <div className="bg-black border-2 border-cyan-500/30 rounded-xl p-6">
-            <div className="flex items-center justify-between mb-4">
-                <h2 className="text-cyan-400 font-black text-lg font-mono">BAND MEMBERS</h2>
+        <div className="bg-black border border-cyan-500/20 rounded-lg p-3">
+            <div className="flex items-center justify-between mb-2">
+                <h2 className="text-cyan-400 font-black text-sm font-mono">BAND MEMBERS</h2>
                 <button
                     onClick={() => setAdding(!adding)}
                     className="text-cyan-400 hover:text-cyan-300 transition-colors"
                 >
-                    {adding ? <X className="w-5 h-5" /> : <Plus className="w-5 h-5" />}
+                    {adding ? <X className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
                 </button>
             </div>
 
@@ -151,20 +151,13 @@ export default function ScottBandMembers({ artist, onUpdate }) {
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
-                        className="mb-4 bg-black border-2 border-gray-900 rounded-lg p-4 space-y-3"
+                        className="mb-2 bg-black border border-gray-900 rounded-lg p-2 space-y-2"
                     >
                         <Input
                             placeholder="Name"
                             value={newMember.name}
                             onChange={(e) => setNewMember({...newMember, name: e.target.value})}
-                            className="bg-gray-950 border-gray-800 text-white font-mono"
-                            disabled={saving}
-                        />
-                        <Input
-                            placeholder="Role (e.g., Guitar, Vocals)"
-                            value={newMember.role}
-                            onChange={(e) => setNewMember({...newMember, role: e.target.value})}
-                            className="bg-gray-950 border-gray-800 text-white font-mono"
+                            className="bg-gray-950 border-gray-800 text-white font-mono text-xs"
                             disabled={saving}
                         />
                         <Input
@@ -172,31 +165,23 @@ export default function ScottBandMembers({ artist, onUpdate }) {
                             type="email"
                             value={newMember.email}
                             onChange={(e) => setNewMember({...newMember, email: e.target.value})}
-                            className="bg-gray-950 border-gray-800 text-white font-mono"
-                            disabled={saving}
-                        />
-                        <Input
-                            placeholder="Phone"
-                            type="tel"
-                            value={newMember.phone}
-                            onChange={(e) => setNewMember({...newMember, phone: e.target.value})}
-                            className="bg-gray-950 border-gray-800 text-white font-mono"
+                            className="bg-gray-950 border-gray-800 text-white font-mono text-xs"
                             disabled={saving}
                         />
                         <Button
                             onClick={handleAdd}
                             disabled={saving}
-                            className="w-full bg-cyan-500 hover:bg-cyan-600 text-black font-bold font-mono disabled:opacity-50"
+                            className="w-full bg-cyan-500 hover:bg-cyan-600 text-black font-bold font-mono disabled:opacity-50 text-xs py-2"
                         >
-                            {saving ? 'SAVING...' : 'ADD MEMBER'}
+                            {saving ? 'SAVING...' : 'ADD'}
                         </Button>
                     </motion.div>
                 )}
             </AnimatePresence>
 
-            <div className="space-y-2">
+            <div className="space-y-1">
                 {members.length === 0 ? (
-                    <p className="text-gray-600 text-sm font-mono text-center py-4">
+                    <p className="text-gray-600 text-xs font-mono text-center py-2">
                         No band members yet
                     </p>
                 ) : (
@@ -205,38 +190,28 @@ export default function ScottBandMembers({ artist, onUpdate }) {
                             key={index}
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
-                            className="bg-black border-2 border-gray-900 rounded-lg p-3 flex items-start justify-between"
+                            className="bg-black border border-gray-900 rounded p-2 flex items-center justify-between"
                         >
-                            <div className="flex items-start gap-3">
-                                <div className="w-10 h-10 rounded-full bg-cyan-500/20 flex items-center justify-center flex-shrink-0">
-                                    <User className="w-5 h-5 text-cyan-400" />
+                            <div className="flex items-center gap-2 flex-1 min-w-0">
+                                <div className="w-8 h-8 rounded bg-cyan-500/20 flex items-center justify-center flex-shrink-0">
+                                    <User className="w-4 h-4 text-cyan-400" />
                                 </div>
-                                <div>
-                                    <p className="text-white font-bold font-mono text-sm">
+                                <div className="flex-1 min-w-0">
+                                    <p className="text-white font-bold font-mono text-xs truncate">
                                         {member.name}
                                     </p>
-                                    {member.role && (
-                                        <p className="text-cyan-400 text-xs font-mono">
-                                            {member.role}
-                                        </p>
-                                    )}
                                     {member.email && (
-                                        <p className="text-gray-600 text-xs font-mono">
+                                        <p className="text-gray-600 text-[9px] font-mono truncate">
                                             {member.email}
-                                        </p>
-                                    )}
-                                    {member.phone && (
-                                        <p className="text-gray-600 text-xs font-mono">
-                                            {member.phone}
                                         </p>
                                     )}
                                 </div>
                             </div>
                             <button
                                 onClick={() => handleRemove(index)}
-                                className="text-red-500 hover:text-red-400 transition-colors"
+                                className="text-red-500 hover:text-red-400 transition-colors ml-2"
                             >
-                                <X className="w-4 h-4" />
+                                <X className="w-3 h-3" />
                             </button>
                         </motion.div>
                     ))

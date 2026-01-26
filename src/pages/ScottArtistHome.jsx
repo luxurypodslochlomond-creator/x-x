@@ -134,38 +134,38 @@ export default function ScottArtistHome() {
     ];
 
     return (
-        <div className="min-h-screen bg-black text-white p-6 pb-24">
+        <div className="min-h-screen bg-black text-white p-3 pb-20">
             
             <TechStatusBar showP2PSync={true} />
             
-            {/* HEADER */}
-            <div className="mb-8">
+            {/* COMPACT HEADER */}
+            <div className="mb-3 pt-2">
                 <button
                     onClick={() => navigate(createPageUrl('CB51'))}
-                    className="flex items-center gap-2 text-gray-600 hover:text-cyan-400 transition-all mb-6"
+                    className="flex items-center gap-2 text-gray-600 hover:text-cyan-400 transition-all mb-3"
                 >
                     <ArrowLeft className="w-4 h-4" />
-                    <span className="text-sm font-bold font-mono">BACK</span>
+                    <span className="text-xs font-bold font-mono">BACK</span>
                 </button>
 
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-3 mb-3">
                     <div className="relative group">
                         {artist.profile_pic_url ? (
                             <img 
                                 src={artist.profile_pic_url} 
                                 alt={artist.name}
-                                className="w-16 h-16 rounded-2xl object-cover"
+                                className="w-12 h-12 rounded object-cover border border-cyan-500"
                             />
                         ) : (
-                            <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-cyan-500 to-purple-500 flex items-center justify-center">
-                                <span className="text-2xl font-black text-white">{artist.name.charAt(0)}</span>
+                            <div className="w-12 h-12 rounded bg-cyan-500 text-black font-black text-lg flex items-center justify-center">
+                                {artist.name.charAt(0)}
                             </div>
                         )}
                         <button
                             onClick={() => setIsEditingPic(!isEditingPic)}
-                            className="absolute inset-0 rounded-2xl bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center"
+                            className="absolute inset-0 rounded bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center"
                         >
-                            <Upload className="w-5 h-5 text-white" />
+                            <Upload className="w-4 h-4 text-white" />
                         </button>
                         {isEditingPic && (
                             <div className="absolute top-full mt-2 left-0 z-50">
@@ -188,67 +188,50 @@ export default function ScottArtistHome() {
                         )}
                     </div>
                     <div>
-                        <h1 className="text-3xl font-black text-white font-mono">{artist.name}</h1>
-                        <p className="text-gray-600 text-sm font-mono">Operations</p>
+                        <h1 className="text-xl font-black text-white font-mono">{artist.name}</h1>
+                        <p className="text-gray-600 text-xs font-mono">Operations</p>
                     </div>
                 </div>
             </div>
 
-            {/* ARTIST INFO - CLEAN */}
+            {/* ARTIST INFO - COMPACT */}
             {(artist.phone || artist.email || artist.rate || artist.genre) && (
-                <div className="mb-8 bg-black border-2 border-gray-900 rounded-xl p-6">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div className="space-y-3">
-                            {artist.phone && (
-                                <div>
-                                    <p className="text-gray-600 text-xs font-mono mb-1">Phone</p>
-                                    <p className="text-white font-mono text-sm">{artist.phone}</p>
-                                </div>
-                            )}
-                            {artist.email && (
-                                <div>
-                                    <p className="text-gray-600 text-xs font-mono mb-1">Email</p>
-                                    <p className="text-white font-mono text-sm">{artist.email}</p>
-                                </div>
-                            )}
-                        </div>
-                        <div className="space-y-3">
-                            {artist.rate && (
-                                <div>
-                                    <p className="text-gray-600 text-xs font-mono mb-1">Rate</p>
-                                    <p className="text-white font-mono text-sm">{artist.rate}</p>
-                                </div>
-                            )}
-                            {artist.genre && (
-                                <div>
-                                    <p className="text-gray-600 text-xs font-mono mb-1">Genre</p>
-                                    <p className="text-white font-mono text-sm">{artist.genre}</p>
-                                </div>
-                            )}
-                        </div>
+                <div className="mb-3 bg-black border border-cyan-500/20 rounded-lg p-3">
+                    <div className="space-y-2">
+                        {artist.phone && (
+                            <div className="flex items-center justify-between">
+                                <p className="text-gray-600 text-[9px] font-mono">Phone</p>
+                                <p className="text-white font-mono text-xs">{artist.phone}</p>
+                            </div>
+                        )}
+                        {artist.email && (
+                            <div className="flex items-center justify-between">
+                                <p className="text-gray-600 text-[9px] font-mono">Email</p>
+                                <p className="text-white font-mono text-xs truncate ml-2">{artist.email}</p>
+                            </div>
+                        )}
                     </div>
                 </div>
             )}
 
-            {/* MAIN SECTIONS - CLEAN GRID */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+            {/* MAIN SECTIONS - COMPACT GRID LIKE HOME */}
+            <div className="grid grid-cols-2 gap-2 mb-3">
                 {sections.map((section) => {
                     const Icon = section.icon;
                     
                     return (
                         <Link key={section.title} to={section.link}>
                             <motion.div
-                                whileHover={{ scale: 0.98 }}
                                 whileTap={{ scale: 0.96 }}
-                                className="bg-black border-4 border-cyan-500 rounded-xl p-6 transition-all h-32 flex items-center gap-4"
+                                className="bg-black border-2 border-cyan-500 rounded-lg p-2"
+                                style={{ boxShadow: '0 0 15px rgba(6, 182, 212, 0.3)' }}
                             >
-                                <Icon className="w-10 h-10 text-cyan-400" />
-                                <div className="flex-1">
-                                    <p className="text-white font-black text-xl font-mono mb-1">
+                                <div className="flex flex-col items-center text-center gap-1">
+                                    <div className="w-12 h-12 rounded bg-cyan-500 text-black font-black text-lg flex items-center justify-center">
+                                        <Icon className="w-6 h-6" />
+                                    </div>
+                                    <p className="text-white font-black text-[10px] font-mono leading-tight">
                                         {section.title}
-                                    </p>
-                                    <p className="text-gray-600 text-xs font-mono">
-                                        {section.description}
                                     </p>
                                 </div>
                             </motion.div>
@@ -257,16 +240,16 @@ export default function ScottArtistHome() {
                 })}
             </div>
 
-            {/* BAND MEMBERS */}
-            <div className="mb-8">
+            {/* BAND MEMBERS - COMPACT */}
+            <div className="mb-3">
                 <ScottBandMembers 
                     artist={artist} 
                     onUpdate={updateArtistMutation.mutate}
                 />
             </div>
 
-            {/* EMAIL TASK SCANNER */}
-            <div className="mb-8">
+            {/* EMAIL TASK SCANNER - COMPACT */}
+            <div className="mb-3">
                 <ScottEmailTaskScanner 
                     artistId={artistId}
                     onTasksExtracted={() => {
@@ -276,28 +259,28 @@ export default function ScottArtistHome() {
                 />
             </div>
 
-            {/* CALENDAR WIDGET */}
-            <div className="bg-black border-2 border-gray-900 rounded-xl p-6">
-                <div className="flex items-center justify-between mb-4">
+            {/* CALENDAR WIDGET - COMPACT */}
+            <div className="bg-black border border-cyan-500/20 rounded-lg p-3">
+                <div className="flex items-center justify-between mb-2">
                     <div className="flex items-center gap-2">
-                        <Calendar className="w-6 h-6 text-cyan-400" />
-                        <h2 className="text-cyan-400 font-black text-lg font-mono">CALENDAR</h2>
+                        <Calendar className="w-4 h-4 text-cyan-400" />
+                        <h2 className="text-cyan-400 font-black text-sm font-mono">CALENDAR</h2>
                     </div>
                     <Link to={createPageUrl(`ScottCalendarView?id=${artistId}`)}>
-                        <button className="text-xs font-bold font-mono text-cyan-400 hover:text-cyan-300 flex items-center gap-1">
+                        <button className="text-[9px] font-bold font-mono text-cyan-400 hover:text-cyan-300 flex items-center gap-1">
                             <Plus className="w-3 h-3" />
                             ADD
                         </button>
                     </Link>
                 </div>
 
-                <div className="space-y-2 max-h-48 overflow-y-auto">
+                <div className="space-y-1 max-h-32 overflow-y-auto">
                     {events.length === 0 ? (
-                        <p className="text-gray-600 text-sm font-mono text-center py-4">No events yet</p>
+                        <p className="text-gray-600 text-xs font-mono text-center py-2">No events yet</p>
                     ) : (
                         events
                             .sort((a, b) => new Date(a.date) - new Date(b.date))
-                            .slice(0, 5)
+                            .slice(0, 3)
                             .map(event => {
                                 const isPast = isBefore(new Date(event.date), startOfDay(new Date()));
                                 const statusColors = {
@@ -309,12 +292,12 @@ export default function ScottArtistHome() {
                                 return (
                                     <div 
                                         key={event.id} 
-                                        className={`flex items-center justify-between bg-black border-2 border-gray-900 rounded p-2 ${isPast ? 'opacity-40' : ''}`}
+                                        className={`flex items-center justify-between bg-black border border-gray-900 rounded p-1.5 ${isPast ? 'opacity-40' : ''}`}
                                     >
-                                        <div className="flex-1">
-                                            <p className="text-white text-sm font-bold font-mono truncate">{event.title}</p>
-                                            <p className="text-gray-600 text-xs font-mono">
-                                                {format(new Date(event.date), 'd MMM yyyy')}
+                                        <div className="flex-1 min-w-0">
+                                            <p className="text-white text-xs font-bold font-mono truncate">{event.title}</p>
+                                            <p className="text-gray-600 text-[9px] font-mono truncate">
+                                                {format(new Date(event.date), 'd MMM')}
                                                 {event.location && ` · ${event.location}`}
                                             </p>
                                         </div>
@@ -325,19 +308,13 @@ export default function ScottArtistHome() {
                     )}
                 </div>
 
-                {events.length > 5 && (
+                {events.length > 3 && (
                     <Link to={createPageUrl(`ScottCalendarView?id=${artistId}`)}>
-                        <button className="w-full mt-3 text-xs font-bold font-mono text-cyan-400 hover:text-cyan-300">
+                        <button className="w-full mt-2 text-[9px] font-bold font-mono text-cyan-400 hover:text-cyan-300">
                             VIEW ALL ({events.length})
                         </button>
                     </Link>
                 )}
-            </div>
-
-            {/* FOOTER */}
-            <div className="mt-8 text-center">
-                <p className="text-gray-600 text-xs font-mono">CB51 • {artist.name}</p>
-                <p className="text-gray-700 text-[10px] font-mono mt-1">Simple hub ♾️📻</p>
             </div>
             </div>
             );
