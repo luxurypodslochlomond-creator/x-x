@@ -8,6 +8,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import TechStatusBar from '@/components/scott/TechStatusBar';
 import PushNotificationManager from '@/components/scott/PushNotificationManager';
 import CB51NotificationInbox from '@/components/scott/CB51NotificationInbox';
+import CB51SecurityNotice from '@/components/scott/CB51SecurityNotice';
 
 /**
  * CB51 HOME PAGE - CLEAN URL FOR WHITE LABEL
