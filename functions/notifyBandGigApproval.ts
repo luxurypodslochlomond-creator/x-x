@@ -37,6 +37,14 @@ Deno.serve(async (req) => {
             artist_id: offer.artist_id
         });
 
+        if (bandMembers.length === 0) {
+            return Response.json({
+                success: true,
+                notificationsSent: 0,
+                message: 'No band members to notify'
+            });
+        }
+
         // Create in-app notification for each band member
         const notifications = bandMembers.map(member => ({
             recipient_email: member.email,
@@ -49,9 +57,7 @@ Deno.serve(async (req) => {
         }));
 
         // Bulk create notifications
-        if (notifications.length > 0) {
-            await base44.entities.ScottNotification.bulkCreate(notifications);
-        }
+        await base44.entities.ScottNotification.bulkCreate(notifications);
 
         return Response.json({
             success: true,
