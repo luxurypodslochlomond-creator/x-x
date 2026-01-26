@@ -27,6 +27,10 @@ const CB51MobileMenu = ({ isOpen, onClose }) => {
         { title: 'Tasks', url: createPageUrl('ScottToDo'), icon: ClipboardList, color: 'cyan', desc: 'To-do list' },
         { title: 'Finance', url: createPageUrl('ScottFinanceAdmin'), icon: DollarSign, color: 'amber', desc: 'Money tracker' },
         { title: 'Settings', url: createPageUrl('ScottSettings'), icon: Settings, color: 'amber', desc: 'App config' },
+        { title: 'About', url: createPageUrl('CB51About'), icon: Radio, color: 'cyan', desc: 'Why we exist' },
+        { title: 'Support', url: createPageUrl('CB51Support'), icon: Users, color: 'cyan', desc: 'Get help' },
+        { title: 'Privacy', url: createPageUrl('CB51Privacy'), icon: Eye, color: 'cyan', desc: 'Data protection' },
+        { title: 'Terms', url: createPageUrl('CB51Terms'), icon: FileText, color: 'cyan', desc: 'Service terms' },
     ];
 
     const colorMap = {
@@ -76,8 +80,8 @@ const CB51MobileMenu = ({ isOpen, onClose }) => {
                         initial={{ x: '100%' }}
                         animate={{ x: 0 }}
                         exit={{ x: '100%' }}
-                        transition={{ type: 'spring', damping: 50, stiffness: 400, mass: 0.5, velocity: 100 }}
-                        className="fixed top-0 right-0 bottom-0 w-[85vw] max-w-sm bg-[#0a0f1a] border-l border-cyan-500/30 z-[70] overflow-y-auto will-change-transform"
+                        transition={{ duration: 0.25, ease: 'easeOut' }}
+                        className="fixed top-0 right-0 bottom-0 w-[85vw] max-w-sm bg-[#0a0f1a] border-l border-cyan-500/30 z-[70] overflow-y-auto"
                     >
                         {/* HEADER */}
                         <div className="sticky top-0 bg-[#0a0f1a] border-b border-cyan-500/30 p-4 flex items-center justify-between">
@@ -109,63 +113,37 @@ const CB51MobileMenu = ({ isOpen, onClose }) => {
                                     >
                                         <motion.div
                                              whileTap={{ scale: 0.98 }}
-                                             transition={{ type: 'spring', stiffness: 400, damping: 40 }}
-                                             className={`flex items-center gap-3 p-3 rounded-lg border-2 will-change-transform ${
+                                             className={`flex items-center gap-3 p-3 rounded-lg border-2 transition-colors ${
                                                  active
                                                      ? `${colors.bg} ${colors.border}`
                                                      : 'border-transparent hover:border-gray-800'
                                              }`}
                                              style={active ? { boxShadow: colors.glow } : {}}
-                                         >
-                                            <div className={`w-10 h-10 rounded-lg ${colors.bg} border ${colors.border} flex items-center justify-center flex-shrink-0`}>
-                                                <Icon className={`w-5 h-5 ${colors.text}`} />
-                                            </div>
-                                            <div className="flex-1 min-w-0">
-                                                <p className={`font-bold text-sm font-mono ${active ? colors.text : 'text-white'}`}>
-                                                    {item.title}
-                                                </p>
-                                                <p className="text-xs text-gray-600 font-mono truncate">
-                                                    {item.desc}
-                                                </p>
-                                            </div>
-                                        </motion.div>
+                                        >
+                                             <div className={`w-10 h-10 rounded-lg ${colors.bg} border ${colors.border} flex items-center justify-center flex-shrink-0`}>
+                                                 <Icon className={`w-5 h-5 ${colors.text}`} />
+                                             </div>
+                                             <div className="flex-1 min-w-0">
+                                                 <p className={`font-bold text-sm font-mono ${active ? colors.text : 'text-white'}`}>
+                                                     {item.title}
+                                                 </p>
+                                                 <p className="text-xs text-gray-600 font-mono truncate">
+                                                     {item.desc}
+                                                 </p>
+                                             </div>
+                                         </motion.div>
                                     </Link>
                                 );
                             })}
 
-                            {/* FOOTER LINKS */}
-                            <div className="mt-6 pt-4 border-t border-cyan-500/20 space-y-1 pb-6">
-                                <Link to={createPageUrl('CB51About')} onClick={onClose}>
-                                    <div className="flex items-center gap-2 p-2 hover:bg-cyan-500/10 rounded transition-all">
-                                        <Radio className="w-4 h-4 text-cyan-400" />
-                                        <span className="text-cyan-400 font-mono text-xs">About</span>
-                                    </div>
-                                </Link>
-                                <Link to={createPageUrl('CB51Support')} onClick={onClose}>
-                                    <div className="flex items-center gap-2 p-2 hover:bg-gray-800 rounded transition-all">
-                                        <Users className="w-4 h-4 text-gray-500" />
-                                        <span className="text-gray-500 font-mono text-xs">Support</span>
-                                    </div>
-                                </Link>
-                                <Link to={createPageUrl('CB51Privacy')} onClick={onClose}>
-                                    <div className="flex items-center gap-2 p-2 hover:bg-gray-800 rounded transition-all">
-                                        <Eye className="w-4 h-4 text-gray-500" />
-                                        <span className="text-gray-500 font-mono text-xs">Privacy</span>
-                                    </div>
-                                </Link>
-                                <Link to={createPageUrl('CB51Terms')} onClick={onClose}>
-                                    <div className="flex items-center gap-2 p-2 hover:bg-gray-800 rounded transition-all">
-                                        <FileText className="w-4 h-4 text-gray-500" />
-                                        <span className="text-gray-500 font-mono text-xs">Terms</span>
-                                    </div>
-                                </Link>
-                                <div className="h-px bg-gray-800 my-2"></div>
+                            {/* SIGN OUT */}
+                            <div className="mt-6 pt-4 border-t border-cyan-500/20 pb-6">
                                 <button
                                     onClick={() => { base44.auth.logout(); }}
-                                    className="w-full flex items-center gap-2 p-2 hover:bg-red-500/10 rounded transition-all"
+                                    className="w-full flex items-center gap-2 p-3 border-2 border-red-500/50 hover:border-red-500 rounded-lg transition-all"
                                 >
-                                    <LogOut className="w-4 h-4 text-red-500" />
-                                    <span className="text-red-500 font-mono text-xs">Sign Out</span>
+                                    <LogOut className="w-5 h-5 text-red-500" />
+                                    <span className="text-red-500 font-mono text-sm font-bold">Sign Out</span>
                                 </button>
                             </div>
                         </div>
