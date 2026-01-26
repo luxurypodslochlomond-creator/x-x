@@ -105,48 +105,115 @@ const CB51MobileMenu = ({ isOpen, onClose }) => {
 
                         {/* MENU ITEMS */}
                          <div className="p-2 space-y-0.5">
-                             {menuItems.map((item) => {
-                                 const Icon = item.icon;
-                                 const colors = colorMap[item.color];
-                                 const active = isActive(item.url);
+                              {/* WORK SECTION */}
+                              {workItems.map((item) => {
+                                  const Icon = item.icon;
+                                  const colors = colorMap[item.color];
+                                  const active = isActive(item.url);
 
-                                 return (
-                                     <Link
-                                         key={item.url}
-                                         to={item.url}
-                                         onClick={onClose}
-                                         className="block"
-                                     >
-                                         <motion.div
-                                              whileTap={{ scale: 0.97 }}
-                                              transition={{ duration: 0.1 }}
-                                              className={`flex items-center gap-2 px-3 py-2 rounded-lg border transition-all ${
-                                                  active
-                                                      ? `${colors.border} border-2 ${colors.bg}`
-                                                      : 'border border-transparent hover:border-gray-700'
-                                              }`}
-                                              style={active ? { boxShadow: colors.glow } : {}}
-                                         >
-                                              <Icon className={`w-5 h-5 flex-shrink-0 ${colors.text}`} />
-                                              <p className={`text-sm font-bold font-mono ${active ? colors.text : 'text-gray-300'}`}>
-                                                  {item.title}
-                                              </p>
-                                          </motion.div>
-                                     </Link>
-                                 );
-                             })}
+                                  return (
+                                      <Link
+                                          key={item.url}
+                                          to={item.url}
+                                          onClick={onClose}
+                                          className="block"
+                                      >
+                                          <motion.div
+                                               whileTap={{ scale: 0.97 }}
+                                               transition={{ duration: 0.1 }}
+                                               className={`flex items-center gap-2 px-3 py-2 rounded-lg border transition-all ${
+                                                   active
+                                                       ? `${colors.border} border-2 ${colors.bg}`
+                                                       : 'border border-transparent hover:border-gray-700'
+                                               }`}
+                                               style={active ? { boxShadow: colors.glow } : {}}
+                                          >
+                                               <Icon className={`w-5 h-5 flex-shrink-0 ${colors.text}`} />
+                                               <p className={`text-sm font-bold font-mono ${active ? colors.text : 'text-gray-300'}`}>
+                                                   {item.title}
+                                               </p>
+                                           </motion.div>
+                                      </Link>
+                                  );
+                              })}
 
-                            {/* SIGN OUT */}
-                             <div className="mt-4 pt-2 border-t border-cyan-500/20 pb-4">
-                                 <button
-                                     onClick={() => { base44.auth.logout(); }}
-                                     className="w-full flex items-center gap-2 px-3 py-2 border border-red-500/40 hover:border-red-500 hover:bg-red-500/10 rounded-lg transition-all"
-                                 >
-                                     <LogOut className="w-4 h-4 text-red-400" />
-                                     <span className="text-red-400 font-mono text-xs font-bold">Sign Out</span>
-                                 </button>
-                             </div>
-                        </div>
+                              {/* TRUST SECTION */}
+                              <div className="mt-4 pt-2 border-t border-cyan-500/20">
+                                  {trustItems.map((item) => {
+                                      const Icon = item.icon;
+                                      const colors = colorMap[item.color];
+                                      const active = isActive(item.url);
+
+                                      return (
+                                          <Link
+                                              key={item.url}
+                                              to={item.url}
+                                              onClick={onClose}
+                                              className="block"
+                                          >
+                                              <motion.div
+                                                   whileTap={{ scale: 0.97 }}
+                                                   transition={{ duration: 0.1 }}
+                                                   className={`flex items-center gap-2 px-3 py-2 rounded-lg border transition-all ${
+                                                       active
+                                                           ? `${colors.border} border-2 ${colors.bg}`
+                                                           : 'border border-transparent hover:border-gray-700'
+                                                   }`}
+                                                   style={active ? { boxShadow: colors.glow } : {}}
+                                              >
+                                                   <Icon className={`w-5 h-5 flex-shrink-0 ${colors.text}`} />
+                                                   <p className={`text-sm font-bold font-mono ${active ? colors.text : 'text-gray-300'}`}>
+                                                       {item.title}
+                                                   </p>
+                                               </motion.div>
+                                          </Link>
+                                      );
+                                  })}
+                              </div>
+
+                              {/* ACCOUNT SECTION */}
+                              <div className="mt-4 pt-2 border-t border-cyan-500/20">
+                                  {accountItems.map((item) => {
+                                      const Icon = item.icon;
+                                      const colors = colorMap[item.color];
+                                      const active = isActive(item.url);
+
+                                      return (
+                                          <Link
+                                              key={item.url}
+                                              to={item.url}
+                                              onClick={onClose}
+                                              className="block"
+                                          >
+                                              <motion.div
+                                                   whileTap={{ scale: 0.97 }}
+                                                   transition={{ duration: 0.1 }}
+                                                   className={`flex items-center gap-2 px-3 py-2 rounded-lg border transition-all ${
+                                                       active
+                                                           ? `${colors.border} border-2 ${colors.bg}`
+                                                           : 'border border-transparent hover:border-gray-700'
+                                                   }`}
+                                                   style={active ? { boxShadow: colors.glow } : {}}
+                                              >
+                                                   <Icon className={`w-5 h-5 flex-shrink-0 ${colors.text}`} />
+                                                   <p className={`text-sm font-bold font-mono ${active ? colors.text : 'text-gray-300'}`}>
+                                                       {item.title}
+                                                   </p>
+                                               </motion.div>
+                                          </Link>
+                                      );
+                                  })}
+
+                                  {/* SIGN OUT */}
+                                  <button
+                                      onClick={() => { base44.auth.logout(); }}
+                                      className="w-full mt-2 flex items-center gap-2 px-3 py-2 border border-red-500/40 hover:border-red-500 hover:bg-red-500/10 rounded-lg transition-all"
+                                  >
+                                      <LogOut className="w-4 h-4 text-red-400" />
+                                      <span className="text-red-400 font-mono text-xs font-bold">Sign Out</span>
+                                  </button>
+                              </div>
+                         </div>
 
                         {/* FOOTER */}
                         <div className="sticky bottom-0 bg-[#0a0f1a] border-t border-cyan-500/30 p-4 text-center">
