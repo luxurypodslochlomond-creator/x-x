@@ -37,15 +37,18 @@ Deno.serve(async (req) => {
     const noVotes = responses.filter(r => r.decision === 'no').length;
     const totalMembers = responses.length;
 
-    // Get artist for manager
-    const artist = await base44.asServiceRole.entities.ScottArtist.get(gigOffer.artist_id);
-
-    // Build summary
+    // Build summary with real-time vote breakdown
     const summary = `${yesVotes}/${totalMembers} YES • ${noVotes} NO`;
     const noReasons = responses
       .filter(r => r.decision === 'no')
       .map(r => `${r.band_member_name}: ${r.reason_if_no || 'No reason given'}`)
       .join('\n');
+
+    // List who voted yes (real-time context for manager)
+    const yesVoters = responses
+      .filter(r => r.decision === 'yes')
+      .map(r => r.band_member_name)
+      .join(', ');
 
     // Send notification directly to manager
     await base44.asServiceRole.entities.ScottNotification.create({
