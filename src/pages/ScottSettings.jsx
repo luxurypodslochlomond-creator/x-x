@@ -2,11 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { base44 } from '@/api/base44Client';
 import { useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
-import { Settings, Lock, Smartphone } from 'lucide-react';
+import { Settings, Lock, Smartphone, Shield } from 'lucide-react';
 import { motion } from 'framer-motion';
 import ScottExtensionSettings from '@/components/scott/ScottExtensionSettings';
 import ScottConnectedDevices from '@/components/scott/ScottConnectedDevices';
 import ScottPushNotifications from '@/components/scott/ScottPushNotifications';
+import CB51SecuritySettings from '@/components/scott/CB51SecuritySettings';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 export default function ScottSettings() {
@@ -46,8 +47,12 @@ export default function ScottSettings() {
           <p className="text-gray-400">Manage extension, devices & security</p>
         </motion.div>
 
-        <Tabs defaultValue="extension" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-3 bg-black border-2 border-cyan-500">
+        <Tabs defaultValue="security" className="space-y-6">
+          <TabsList className="grid w-full grid-cols-4 bg-black border-2 border-cyan-500">
+            <TabsTrigger value="security" className="data-[state=active]:bg-cyan-600 flex items-center gap-2 text-xs">
+              <Shield className="w-4 h-4" />
+              Security
+            </TabsTrigger>
             <TabsTrigger value="extension" className="data-[state=active]:bg-cyan-600 flex items-center gap-2 text-xs">
               <Lock className="w-4 h-4" />
               Extension
@@ -60,6 +65,10 @@ export default function ScottSettings() {
               Devices
             </TabsTrigger>
           </TabsList>
+
+          <TabsContent value="security">
+            <CB51SecuritySettings />
+          </TabsContent>
 
           <TabsContent value="extension">
             <ScottExtensionSettings user={user} />
