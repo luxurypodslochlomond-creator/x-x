@@ -199,6 +199,11 @@ export default function CB51() {
                 </div>
             </div>
 
+            {/* SECURITY NOTICE */}
+            <div className="mb-3">
+                <CB51SecurityNotice />
+            </div>
+
             {/* IN-APP NOTIFICATION INBOX - WORKS ON iOS */}
             <div className="mb-3">
                 <CB51NotificationInbox />
