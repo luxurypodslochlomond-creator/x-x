@@ -5,8 +5,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
 import { 
     Radio, Home, Users, Calendar, Mail, Settings, 
-    Zap, Music, ClipboardList, DollarSign, 
-    ChevronDown, ChevronRight, X, Menu, LogOut, Eye, FileText
+    Zap, ClipboardList, DollarSign, 
+    X, LogOut, Eye, FileText
 } from 'lucide-react';
 
 /**
@@ -17,24 +17,16 @@ import {
 
 const CB51MobileMenu = ({ isOpen, onClose }) => {
     const location = useLocation();
-    const [expandedSection, setExpandedSection] = useState(null);
 
-    const sections = [
-        {
-            id: 'artist_management',
-            title: 'ARTIST MANAGEMENT',
-            color: 'cyan',
-            items: [
-                { title: 'Dashboard', url: createPageUrl('CB51'), icon: Home, color: 'cyan', desc: 'Overview' },
-                { title: 'Artists', url: createPageUrl('ScottArtist'), icon: Users, color: 'cyan', desc: 'Manage roster' },
-                { title: 'Gig Offers', url: createPageUrl('ScottGigOffers'), icon: Zap, color: 'green', desc: 'Incoming shows' },
-                { title: 'Calendar', url: createPageUrl('ScottCalendarView'), icon: Calendar, color: 'cyan', desc: 'All shows' },
-                { title: 'Messages', url: createPageUrl('ScottMessageInbox'), icon: Mail, color: 'cyan', desc: 'Inbox' },
-                { title: 'Tasks', url: createPageUrl('ScottToDo'), icon: ClipboardList, color: 'cyan', desc: 'To-do list' },
-                { title: 'Finance', url: createPageUrl('ScottFinanceAdmin'), icon: DollarSign, color: 'amber', desc: 'Money tracker' },
-                { title: 'Settings', url: createPageUrl('ScottSettings'), icon: Settings, color: 'amber', desc: 'App config' },
-            ]
-        }
+    const menuItems = [
+        { title: 'Dashboard', url: createPageUrl('CB51'), icon: Home, color: 'cyan', desc: 'Overview' },
+        { title: 'Artists', url: createPageUrl('ScottArtist'), icon: Users, color: 'cyan', desc: 'Manage roster' },
+        { title: 'Gig Offers', url: createPageUrl('ScottGigOffers'), icon: Zap, color: 'green', desc: 'Incoming shows' },
+        { title: 'Calendar', url: createPageUrl('ScottCalendarView'), icon: Calendar, color: 'cyan', desc: 'All shows' },
+        { title: 'Messages', url: createPageUrl('ScottMessageInbox'), icon: Mail, color: 'cyan', desc: 'Inbox' },
+        { title: 'Tasks', url: createPageUrl('ScottToDo'), icon: ClipboardList, color: 'cyan', desc: 'To-do list' },
+        { title: 'Finance', url: createPageUrl('ScottFinanceAdmin'), icon: DollarSign, color: 'amber', desc: 'Money tracker' },
+        { title: 'Settings', url: createPageUrl('ScottSettings'), icon: Settings, color: 'amber', desc: 'App config' },
     ];
 
     const colorMap = {
@@ -102,76 +94,43 @@ const CB51MobileMenu = ({ isOpen, onClose }) => {
                         </div>
 
                         {/* MENU ITEMS */}
-                        <div className="p-3">
-                            {sections.map((section) => (
-                                <div key={section.id} className="mb-2">
-                                    {/* SECTION HEADER */}
-                                    <button
-                                        onClick={() => setExpandedSection(
-                                            expandedSection === section.id ? null : section.id
-                                        )}
-                                        className="w-full flex items-center justify-between p-3 rounded-lg hover:bg-cyan-500/10 transition-colors mb-2"
+                        <div className="p-3 space-y-1">
+                            {menuItems.map((item) => {
+                                const Icon = item.icon;
+                                const colors = colorMap[item.color];
+                                const active = isActive(item.url);
+
+                                return (
+                                    <Link
+                                        key={item.url}
+                                        to={item.url}
+                                        onClick={onClose}
+                                        className="block"
                                     >
-                                        <span className="text-cyan-400 font-black text-xs font-mono tracking-wider">
-                                            {section.title}
-                                        </span>
-                                        {expandedSection === section.id ? (
-                                            <ChevronDown className="w-4 h-4 text-cyan-400" />
-                                        ) : (
-                                            <ChevronRight className="w-4 h-4 text-cyan-400" />
-                                        )}
-                                    </button>
-
-                                    {/* SECTION ITEMS */}
-                                    <AnimatePresence>
-                                        {(expandedSection === section.id || expandedSection === null) && (
-                                            <motion.div
-                                                initial={{ height: 0, opacity: 0 }}
-                                                animate={{ height: 'auto', opacity: 1 }}
-                                                exit={{ height: 0, opacity: 0 }}
-                                                className="space-y-1"
-                                            >
-                                                {section.items.map((item) => {
-                                                    const Icon = item.icon;
-                                                    const colors = colorMap[item.color];
-                                                    const active = isActive(item.url);
-
-                                                    return (
-                                                        <Link
-                                                            key={item.url}
-                                                            to={item.url}
-                                                            onClick={onClose}
-                                                            className="block"
-                                                        >
-                                                            <motion.div
-                                                                whileTap={{ scale: 0.98 }}
-                                                                className={`flex items-center gap-3 p-3 rounded-lg border-2 transition-all ${
-                                                                    active
-                                                                        ? `${colors.bg} ${colors.border}`
-                                                                        : 'border-transparent hover:border-gray-800'
-                                                                }`}
-                                                                style={active ? { boxShadow: colors.glow } : {}}
-                                                            >
-                                                                <div className={`w-10 h-10 rounded-lg ${colors.bg} border ${colors.border} flex items-center justify-center`}>
-                                                                    <Icon className={`w-5 h-5 ${colors.text}`} />
-                                                                </div>
-                                                                <div className="flex-1 min-w-0">
-                                                                    <p className={`font-bold text-sm font-mono ${active ? colors.text : 'text-white'}`}>
-                                                                        {item.title}
-                                                                    </p>
-                                                                    <p className="text-xs text-gray-600 font-mono truncate">
-                                                                        {item.desc}
-                                                                    </p>
-                                                                </div>
-                                                            </motion.div>
-                                                        </Link>
-                                                    );
-                                                })}
-                                            </motion.div>
-                                        )}
-                                    </AnimatePresence>
-                                </div>
-                            ))}
+                                        <motion.div
+                                            whileTap={{ scale: 0.97 }}
+                                            className={`flex items-center gap-3 p-3 rounded-lg border-2 transition-all ${
+                                                active
+                                                    ? `${colors.bg} ${colors.border}`
+                                                    : 'border-transparent hover:border-gray-800'
+                                            }`}
+                                            style={active ? { boxShadow: colors.glow } : {}}
+                                        >
+                                            <div className={`w-10 h-10 rounded-lg ${colors.bg} border ${colors.border} flex items-center justify-center flex-shrink-0`}>
+                                                <Icon className={`w-5 h-5 ${colors.text}`} />
+                                            </div>
+                                            <div className="flex-1 min-w-0">
+                                                <p className={`font-bold text-sm font-mono ${active ? colors.text : 'text-white'}`}>
+                                                    {item.title}
+                                                </p>
+                                                <p className="text-xs text-gray-600 font-mono truncate">
+                                                    {item.desc}
+                                                </p>
+                                            </div>
+                                        </motion.div>
+                                    </Link>
+                                );
+                            })}
 
                             {/* FOOTER LINKS */}
                             <div className="mt-6 pt-4 border-t border-cyan-500/20 space-y-1 pb-6">
