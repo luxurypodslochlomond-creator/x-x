@@ -57,7 +57,6 @@ export default function Type1AI51Protocol() {
     {
       id: 'monitoring',
       label: 'BLOOD GLUCOSE MONITORING',
-      icon: '📊',
       color: 'cyan',
       content: [
         { title: 'CGM vs FINGER PRICKS', items: ['CGM (continuous): Every 5min data, trends, alarms', 'Finger pricks: Before meals, before bed, when low', 'Both give you PATTERNS - what foods spike you?', 'NHS may fund CGM if you meet criteria - ask your GP', 'Track patterns in notes app or diabetes app'] },
