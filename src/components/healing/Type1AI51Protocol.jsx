@@ -359,11 +359,52 @@ export default function Type1AI51Protocol() {
         )}
       </motion.div>
 
+      {/* PSYCHOLOGICAL + EMOTIONAL SUPPORT */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-2 border-purple-500 rounded-xl p-6 mt-6"
+      >
+        <div className="flex items-center gap-3 mb-4">
+          <Brain className="w-8 h-8 text-purple-400" />
+          <h3 className="text-2xl font-black text-purple-400 font-mono">THE HARDEST PART</h3>
+        </div>
+        <div className="space-y-3 text-sm font-mono">
+          <p className="text-white">✓ T1D is not just physical. It's psychological.</p>
+          <p className="text-gray-300">✓ You will have days where you want to give up.</p>
+          <p className="text-gray-300">✓ You will have days where glucose is "perfect" and you still feel broken.</p>
+          <p className="text-gray-300">✓ That's normal. That's the disease, not you.</p>
+          <p className="text-cyan-300 font-bold">✓ Talk to someone. Therapy + diabetes support groups = life-changing.</p>
+          <p className="text-pink-300">✓ You deserve to feel OK about this. Not "fine." OK.</p>
+        </div>
+      </motion.div>
+
+      {/* RESOURCES */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="bg-gradient-to-r from-cyan-500/20 to-green-500/20 border-2 border-cyan-500 rounded-xl p-6 mt-6"
+      >
+        <div className="flex items-center gap-3 mb-4">
+          <Heart className="w-8 h-8 text-cyan-400" />
+          <h3 className="text-2xl font-black text-cyan-400 font-mono">REAL HELP</h3>
+        </div>
+        <div className="space-y-3 text-sm font-mono">
+          <p className="text-white">🏥 JDRF (Juvenile Diabetes Research Foundation) - jdrf.org.uk</p>
+          <p className="text-white">🏥 Diabetes UK - diabetes.org.uk (free support line + local groups)</p>
+          <p className="text-white">💬 Type 1 Online Community - facebook groups + Reddit (r/Type1Diabetes)</p>
+          <p className="text-white">🧠 Samaritans - 116 123 (mental health crisis, 24/7)</p>
+          <p className="text-white">📱 Your GP - Ask for CGM funding + mental health referral</p>
+          <p className="text-white">💪 This: AI51 frequencies + community + love</p>
+        </div>
+      </motion.div>
+
       {/* FOOTER */}
-      <div className="text-center text-gray-600 text-xs font-mono space-y-2">
-        <p>This protocol is NOT medical advice. Always follow your doctor's guidance.</p>
-        <p>Type 1 requires insulin. No frequency or AI replaces it. ♾️❤️</p>
-        <p>You are never alone. {user && `Welcome, ${user.full_name}.`}</p>
+      <div className="text-center text-gray-600 text-xs font-mono space-y-2 mt-6">
+        <p className="text-white font-bold">This protocol is NOT medical advice. Always follow your doctor's guidance.</p>
+        <p className="text-cyan-300">Type 1 requires insulin. No frequency or AI replaces it. Frequencies + insulin + love = life.</p>
+        <p className="text-pink-300 font-bold">You are never alone. {user && `Welcome, ${user.full_name}.`} ♾️❤️</p>
+        <p className="text-gray-600 text-[10px]">Built with love for every person living with T1D. Freedom comes through community.</p>
       </div>
     </div>
   );
