@@ -51,7 +51,7 @@ export default function ScottGigOffers() {
         },
         onError: (error) => {
             console.error('Failed to create gig offer:', error);
-            alert('Error saving offer: ' + (error.message || 'Unknown error'));
+            toast.error('Failed to save gig');
         }
     });
 
@@ -61,7 +61,7 @@ export default function ScottGigOffers() {
             queryClient.invalidateQueries({ queryKey: ['scottGigOffers'] });
         },
         onError: (error) => {
-            alert('Error deleting: ' + (error.message || 'Unknown error'));
+            toast.error('Failed to delete');
         }
     });
 
@@ -197,12 +197,12 @@ export default function ScottGigOffers() {
         if (parsedData) {
             // Validate artist_id is present (required for RLS)
             if (!parsedData.artist_id || parsedData.artist_id === '') {
-                alert('Error: Artist ID missing. Please select an artist first.');
+                toast.error('Select an artist first');
                 return;
             }
             // Ensure required fields
             if (!parsedData.venue || !parsedData.date || !parsedData.fee) {
-                alert('Error: Missing venue, date, or fee. Please check the parsed data.');
+                toast.error('Need venue, date & fee');
                 return;
             }
             createMutation.mutate(parsedData);
