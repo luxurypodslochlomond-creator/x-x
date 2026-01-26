@@ -158,15 +158,9 @@ export default function CB51() {
     return (
         <div className="min-h-screen bg-black text-white p-3 pb-20">
 
-            {/* MINIMAL HEADER - Just the brand + notifications button */}
-            <div className="mb-4 pt-2">
-                <div className="flex items-center justify-between mb-3">
-                    <div className="flex items-center gap-2">
-                        <Radio className="w-6 h-6 text-cyan-400" />
-                        <h1 className="text-xl font-black text-cyan-400 font-mono">CB51</h1>
-                    </div>
-                    <PushNotificationManager />
-                </div>
+            {/* NOTIFICATION MANAGER IN TOP RIGHT */}
+            <div className="mb-6 flex justify-end">
+                <PushNotificationManager />
             </div>
 
             {/* IN-APP NOTIFICATION INBOX - ONLY SHOW IF OFFERS PENDING */}
