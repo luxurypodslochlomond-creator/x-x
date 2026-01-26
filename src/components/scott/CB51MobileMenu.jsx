@@ -98,43 +98,37 @@ const CB51MobileMenu = ({ isOpen, onClose }) => {
                         </div>
 
                         {/* MENU ITEMS */}
-                        <div className="p-3 space-y-1">
-                            {menuItems.map((item) => {
-                                const Icon = item.icon;
-                                const colors = colorMap[item.color];
-                                const active = isActive(item.url);
+                         <div className="p-2 space-y-0.5">
+                             {menuItems.map((item) => {
+                                 const Icon = item.icon;
+                                 const colors = colorMap[item.color];
+                                 const active = isActive(item.url);
 
-                                return (
-                                    <Link
-                                        key={item.url}
-                                        to={item.url}
-                                        onClick={onClose}
-                                        className="block"
-                                    >
-                                        <motion.div
-                                             whileTap={{ scale: 0.98 }}
-                                             className={`flex items-center gap-3 p-3 rounded-lg border-2 transition-colors ${
-                                                 active
-                                                     ? `${colors.bg} ${colors.border}`
-                                                     : 'border-transparent hover:border-gray-800'
-                                             }`}
-                                             style={active ? { boxShadow: colors.glow } : {}}
-                                        >
-                                             <div className={`w-10 h-10 rounded-lg ${colors.bg} border ${colors.border} flex items-center justify-center flex-shrink-0`}>
-                                                 <Icon className={`w-5 h-5 ${colors.text}`} />
-                                             </div>
-                                             <div className="flex-1 min-w-0">
-                                                 <p className={`font-bold text-base font-mono ${active ? colors.text : 'text-white'}`}>
-                                                     {item.title}
-                                                 </p>
-                                                 <p className="text-sm text-gray-500 font-mono truncate">
-                                                     {item.desc}
-                                                 </p>
-                                             </div>
-                                         </motion.div>
-                                    </Link>
-                                );
-                            })}
+                                 return (
+                                     <Link
+                                         key={item.url}
+                                         to={item.url}
+                                         onClick={onClose}
+                                         className="block"
+                                     >
+                                         <motion.div
+                                              whileTap={{ scale: 0.97 }}
+                                              transition={{ duration: 0.1 }}
+                                              className={`flex items-center gap-2 px-3 py-2 rounded-lg border transition-all ${
+                                                  active
+                                                      ? `${colors.border} border-2 ${colors.bg}`
+                                                      : 'border border-transparent hover:border-gray-700'
+                                              }`}
+                                              style={active ? { boxShadow: colors.glow } : {}}
+                                         >
+                                              <Icon className={`w-5 h-5 flex-shrink-0 ${colors.text}`} />
+                                              <p className={`text-sm font-bold font-mono ${active ? colors.text : 'text-gray-300'}`}>
+                                                  {item.title}
+                                              </p>
+                                          </motion.div>
+                                     </Link>
+                                 );
+                             })}
 
                             {/* SIGN OUT */}
                             <div className="mt-6 pt-4 border-t border-cyan-500/20 pb-6">
