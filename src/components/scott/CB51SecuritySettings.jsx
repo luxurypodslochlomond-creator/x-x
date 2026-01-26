@@ -43,9 +43,9 @@ export default function CB51SecuritySettings() {
       icon: Database,
       description: 'Clean separation',
       details: [
-        'Each artist's data completely isolated',
+        "Each artist's data completely isolated",
         'Team members only see artists you assign them to',
-        'Manager admins cannot see other managers' data',
+        "Manager admins cannot see other managers' data",
         'No cross-contamination between your roster and other users'
       ]
     },
