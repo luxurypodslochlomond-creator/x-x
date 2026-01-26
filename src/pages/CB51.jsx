@@ -169,10 +169,12 @@ export default function CB51() {
                 </div>
             </div>
 
-            {/* IN-APP NOTIFICATION INBOX - MAIN FEATURE */}
-            <div className="mb-6">
-                <CB51NotificationInbox />
-            </div>
+            {/* IN-APP NOTIFICATION INBOX - ONLY SHOW IF OFFERS PENDING */}
+            {stats.pendingOffers > 0 && (
+                <div className="mb-6">
+                    <CB51NotificationInbox />
+                </div>
+            )}
 
             {/* COMPACT ARTISTS GRID */}
             <div>
