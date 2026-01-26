@@ -158,6 +158,29 @@ export default function Type1AI51Protocol() {
     );
   };
 
+  const FrequencyVisualizer = ({ frequency }) => {
+    const barWidth = (frequency.power / 100) * 100;
+    return (
+      <div className="bg-black border border-purple-500/30 rounded p-3 mb-3">
+        <div className="flex items-center justify-between mb-2">
+          <p className="text-purple-400 text-xs font-black font-mono">{frequency.hz} HZ</p>
+          <span className="text-purple-300 text-xs font-mono">{frequency.power}%</span>
+        </div>
+        <h4 className="text-white text-xs font-bold mb-2">{frequency.name}</h4>
+        <p className="text-gray-400 text-xs font-mono mb-3 leading-relaxed">{frequency.science}</p>
+        <div className="w-full bg-purple-950 rounded-full h-2 overflow-hidden">
+          <motion.div
+            initial={{ width: 0 }}
+            animate={{ width: `${barWidth}%` }}
+            transition={{ duration: 1.5, ease: 'easeOut' }}
+            className="h-full bg-gradient-to-r from-purple-500 to-pink-500"
+            style={{ boxShadow: '0 0 10px rgba(168, 85, 247, 0.8)' }}
+          />
+        </div>
+      </div>
+    );
+  };
+
   const CollapsibleSection = ({ section }) => {
     const isExpanded = expandedSection === section.id;
     const c = colorMap[section.color];
@@ -168,10 +191,7 @@ export default function Type1AI51Protocol() {
           onClick={() => setExpandedSection(isExpanded ? null : section.id)}
           className="w-full flex items-center justify-between p-4 hover:bg-black/40 transition-all"
         >
-          <div className="flex items-center gap-3">
-            <span className="text-2xl">{section.icon}</span>
-            <h3 className={`text-sm font-black font-mono tracking-wider ${c.text}`}>{section.label}</h3>
-          </div>
+          <h3 className={`text-sm font-black font-mono tracking-wider ${c.text}`}>{section.label}</h3>
           {isExpanded ? (
             <ChevronDown className={`w-5 h-5 ${c.text}`} />
           ) : (
@@ -186,16 +206,27 @@ export default function Type1AI51Protocol() {
             exit={{ height: 0, opacity: 0 }}
             className="border-t border-gray-700 bg-black/50 p-4 space-y-4"
           >
-            {section.content.map((block, i) => (
-              <div key={i} className={`bg-black border border-gray-700 rounded p-3`}>
-                <p className={`text-xs font-black font-mono mb-2 ${c.text}`}>{block.title}</p>
-                <ul className="space-y-1">
-                  {block.items.map((item, j) => (
-                    <li key={j} className="text-white text-xs font-mono leading-relaxed">→ {item}</li>
-                  ))}
-                </ul>
+            {section.isFrequencySection ? (
+              <div className="space-y-4">
+                {section.frequencies.map((freq, i) => (
+                  <FrequencyVisualizer key={i} frequency={freq} />
+                ))}
+                <div className="mt-6 border-t border-purple-500/30 pt-4">
+                  <Type1FrequencyEngine />
+                </div>
               </div>
-            ))}
+            ) : (
+              section.content.map((block, i) => (
+                <div key={i} className={`bg-black border border-gray-700 rounded p-3`}>
+                  <p className={`text-xs font-black font-mono mb-2 ${c.text}`}>{block.title}</p>
+                  <ul className="space-y-1">
+                    {block.items.map((item, j) => (
+                      <li key={j} className="text-white text-xs font-mono leading-relaxed">→ {item}</li>
+                    ))}
+                  </ul>
+                </div>
+              ))
+            )}
 
             {section.resources && section.resources.length > 0 && (
               <div className="border-t border-gray-700 pt-3 mt-3">
