@@ -258,24 +258,31 @@ export default function Type1AI51Protocol() {
       </div>
 
       {/* 2x2 GRID OF ACTION CARDS */}
-      <div className="grid grid-cols-2 gap-3 mb-6">
+      <div className="grid grid-cols-2 gap-2 mb-6">
         {sections.map((section, i) => {
           const c = colorMap[section.color];
           const IconComponent = section.icon;
           const isActive = expandedSection === section.id;
+          const glowColors = {
+            green: 'rgba(34, 197, 94, 0.5)',
+            cyan: 'rgba(6, 182, 212, 0.5)',
+            purple: 'rgba(168, 85, 247, 0.5)',
+            amber: 'rgba(245, 158, 11, 0.5)',
+            red: 'rgba(239, 68, 68, 0.5)'
+          };
           return (
             <motion.button
               key={section.id}
               onClick={() => setExpandedSection(isActive ? null : section.id)}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className={`${c.bg} border-2 ${c.border} rounded-lg p-4 flex flex-col items-center justify-center gap-3 transition-all ${isActive ? 'ring-2 ring-offset-2 ring-offset-black' : ''}`}
-              style={isActive ? { boxShadow: `0 0 20px ${c.border.split('-')[1] === 'green' ? 'rgba(34, 197, 94, 0.5)' : c.border.split('-')[1] === 'cyan' ? 'rgba(6, 182, 212, 0.5)' : c.border.split('-')[1] === 'purple' ? 'rgba(168, 85, 247, 0.5)' : c.border.split('-')[1] === 'amber' ? 'rgba(245, 158, 11, 0.5)' : 'rgba(239, 68, 68, 0.5)'}` } : {}}
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+              className={`border-2 ${c.border} rounded-lg p-4 flex flex-col items-center justify-center gap-2 transition-all bg-black/80 hover:bg-black`}
+              style={isActive ? { boxShadow: `0 0 25px ${glowColors[section.color]}` } : {}}
             >
-              <div className={`${c.icon} p-3 rounded-lg`}>
-                <IconComponent className="w-6 h-6 text-black" />
+              <div className={`${c.icon} p-2.5 rounded`}>
+                <IconComponent className="w-5 h-5 text-black" />
               </div>
-              <span className={`font-black font-mono text-sm ${c.text}`}>{section.label}</span>
+              <span className={`font-black font-mono text-xs ${c.text} tracking-wider`}>{section.label}</span>
             </motion.button>
           );
         })}
