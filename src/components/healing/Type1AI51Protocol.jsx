@@ -155,12 +155,70 @@ export default function Type1AI51Protocol() {
       ]
     },
     emergency: {
-      title: 'EMERGENCY PROTOCOL',
+      title: '🚨 EMERGENCY PROTOCOL - LIFESAVING',
+      subtitle: 'Read this when you\'re calm. Memorize it. Share with people around you.',
       items: [
-        { scenario: 'SEVERE HYPOGLYCEMIA', action: 'Glucagon kit → Call 999' },
-        { scenario: 'SEVERE HYPERGLYCEMIA', action: 'Extra insulin + water → Call doctor' },
-        { scenario: 'KETOACIDOSIS (DKA)', action: 'CALL 999 IMMEDIATELY - this is critical' },
-        { scenario: 'LOST INSULIN', action: 'Call doctor for emergency supply + prescription' }
+        { 
+          scenario: 'SEVERE HYPOGLYCEMIA (Can\'t think. Shaking. Scared.)',
+          action: 'GLUCAGON KIT (if available) → Call 999',
+          symptoms: 'Confusion, can\'t focus, shaking badly, sweating, loss of consciousness',
+          steps: [
+            '1. If you have glucagon: Use it (inject or nasal spray) - ask someone to help',
+            '2. CALL 999 - tell them "severe hypoglycemia"',
+            '3. Don\'t be alone after - someone needs to stay with you',
+            '4. Hospital will stabilize you with glucose IV',
+            '5. TELL people around you where your glucagon is'
+          ]
+        },
+        { 
+          scenario: 'SEVERE HYPERGLYCEMIA (Blood sugar 300+)',
+          action: 'Extra insulin + water + call doctor SAME DAY',
+          symptoms: 'Extreme thirst, peeing lots, tired, blurry vision, maybe nausea',
+          steps: [
+            '1. Check blood sugar (if it\'s 300+, take action)',
+            '2. Drink water (dehydration makes it worse)',
+            '3. Take extra rapid-acting insulin (10-15% more than normal)',
+            '4. Light movement (short walk = helps insulin work)',
+            '5. Recheck in 2 hours. Still high? Call doctor.'
+          ]
+        },
+        { 
+          scenario: '⚠️ DIABETIC KETOACIDOSIS (DKA) - LIFE-THREATENING',
+          action: 'CALL 999 IMMEDIATELY',
+          symptoms: 'Nausea/vomiting + fruity breath + confusion + severe tiredness + stomach pain',
+          science: 'Your body is breaking down fat too fast = acidic blood = organ damage risk',
+          steps: [
+            '1. CALL 999 NOW - don\'t wait',
+            '2. Tell them "suspected DKA"',
+            '3. Hospital: IV fluids + insulin + electrolytes (they stabilize you)',
+            '4. DKA = usually from missing insulin doses or extreme stress',
+            '5. After recovery: Talk to doctor about what happened'
+          ]
+        },
+        { 
+          scenario: 'LOST OR DAMAGED INSULIN',
+          action: 'Call NHS 111 or your doctor IMMEDIATELY',
+          steps: [
+            '1. Don\'t panic - this is solvable today',
+            '2. Call NHS 111 (dial 111 UK)',
+            '3. Tell them: "I\'ve lost my insulin supply"',
+            '4. They can authorize emergency prescription SAME DAY',
+            '5. Pharmacy: Get replacement insulin + syringes',
+            '6. Don\'t skip doses - that\'s when DKA happens'
+          ]
+        },
+        {
+          scenario: 'YOU\'RE NOT COPING (Mental health crisis)',
+          action: 'Call Samaritans: 116 123 (free, 24/7)',
+          why: 'T1D is hard. Depression is real. Asking for help = strength.',
+          steps: [
+            '1. Call Samaritans (anyone, anytime - confidential)',
+            '2. Tell your GP: "I\'m struggling with T1D management"',
+            '3. Ask about therapy/counseling (NHS covers it)',
+            '4. Join T1D support groups (you\'re not alone)',
+            '5. Tell someone you trust TODAY'
+          ]
+        }
       ]
     }
   };
