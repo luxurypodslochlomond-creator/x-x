@@ -3,6 +3,7 @@ import { Bell, CheckCircle, XCircle, Clock, AlertCircle } from 'lucide-react';
 import { base44 } from '@/api/base44Client';
 import { useQuery } from '@tanstack/react-query';
 import { motion, AnimatePresence } from 'framer-motion';
+import { toast } from 'sonner';
 
 /**
  * CB51 NOTIFICATION INBOX
