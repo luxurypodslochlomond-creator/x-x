@@ -313,6 +313,16 @@ export default function CB51() {
                         {allOffers.length > 0 && <p className="text-white text-sm font-black font-mono">{stats.pendingOffers + stats.awaitingBand}</p>}
                     </motion.div>
                 </Link>
+                <Link to={createPageUrl('ScottMessageInbox')}>
+                    <motion.div
+                        whileTap={{ scale: 0.95 }}
+                        className="bg-black border-2 border-cyan-500 rounded-lg p-2 text-center hover:bg-cyan-500/10"
+                        style={{ boxShadow: '0 0 15px rgba(6, 182, 212, 0.3)' }}
+                    >
+                        <Mail className="w-5 h-5 text-cyan-400 mx-auto mb-1" />
+                        <p className="text-cyan-400 font-black font-mono text-[8px]">EMAIL</p>
+                    </motion.div>
+                </Link>
                 <Link to={createPageUrl('ScottCalendarView')}>
                     <motion.div
                         whileTap={{ scale: 0.95 }}
@@ -332,16 +342,6 @@ export default function CB51() {
                     >
                         <CheckCircle className="w-5 h-5 text-cyan-400 mx-auto mb-1" />
                         <p className="text-cyan-400 font-black font-mono text-[8px]">TASKS</p>
-                    </motion.div>
-                </Link>
-                <Link to={createPageUrl('ScottMessageInbox')}>
-                    <motion.div
-                        whileTap={{ scale: 0.95 }}
-                        className="bg-black border-2 border-cyan-500 rounded-lg p-2 text-center hover:bg-cyan-500/10"
-                        style={{ boxShadow: '0 0 15px rgba(6, 182, 212, 0.3)' }}
-                    >
-                        <Mail className="w-5 h-5 text-cyan-400 mx-auto mb-1" />
-                        <p className="text-cyan-400 font-black font-mono text-[8px]">EMAIL</p>
                     </motion.div>
                 </Link>
                 <Link to={createPageUrl('ScottTeamAccess')}>
