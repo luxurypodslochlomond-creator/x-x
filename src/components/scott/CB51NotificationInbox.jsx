@@ -43,12 +43,28 @@ export default function CB51NotificationInbox() {
 
     const handleManagerApproval = async (offerId, approved) => {
         try {
+            const offerToUpdate = pendingOffers.find(o => o.id === offerId);
+            
             await base44.entities.ScottGigOffers.update(offerId, {
                 status: approved ? 'sent_to_band' : 'rejected',
                 sent_to_band_at: approved ? new Date().toISOString() : null
             });
+
+            // If YES: notify band members via in-app notifications (pure CB51, no email)
+            if (approved && offerToUpdate) {
+                await base44.functions.invoke('notifyBandGigApproval', {
+                    gigOfferId: offerId,
+                    gigDetails: {
+                        venue: offerToUpdate.venue_name,
+                        date: offerToUpdate.date,
+                        promoter: offerToUpdate.promoter_name,
+                        fee: offerToUpdate.fee
+                    }
+                });
+            }
+
             setExpandedOfferId(null);
-            toast.success(approved ? '✓ SENT TO BAND' : '✗ REJECTED');
+            toast.success(approved ? '✓ BAND NOTIFIED' : '✗ REJECTED');
         } catch (error) {
             console.error('Error updating offer:', error);
             toast.error('Failed to save decision');
