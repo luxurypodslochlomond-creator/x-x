@@ -106,6 +106,7 @@ export default function ScottArtistHome() {
         );
     }
 
+    // COLOR SYSTEM: Green=LIVE, Orange=SESSIONS, Amber=ADMIN, Cyan=DAILY OPS
     const sections = [
         {
             title: 'LIVE',
@@ -122,18 +123,18 @@ export default function ScottArtistHome() {
             color: 'orange'
         },
         {
-            title: 'FINANCE / ADMIN',
-            icon: DollarSign,
-            description: 'Invoices • Visas • Legal',
-            link: createPageUrl(`ScottFinanceAdmin?id=${artistId}`),
-            color: 'amber'
-        },
-        {
             title: 'TO-DO LIST',
             icon: ClipboardList,
             description: 'Tasks • Deadlines • Progress',
             link: createPageUrl(`ScottToDo?id=${artistId}`),
             color: 'cyan'
+        },
+        {
+            title: 'FINANCE / ADMIN',
+            icon: DollarSign,
+            description: 'Invoices • Visas • Legal',
+            link: createPageUrl(`ScottFinanceAdmin?id=${artistId}`),
+            color: 'amber'
         },
 
     ];
