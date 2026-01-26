@@ -644,6 +644,14 @@ export default function AdminStrategicNotes() {
             <p>🍄 <strong>NATURE = TEACHER</strong> • Mushrooms showed us mesh networks</p>
           </CardContent>
         </Card>
+        )}
+
+        {searchQuery && !("robbie williams manager scott next week demo".includes(searchQuery) || "mind uk mental health form submitted partnerships".includes(searchQuery) || "icon urgent uf51 8bit heart png".includes(searchQuery) || "gill51 p2p transmission web share mesh".includes(searchQuery) || "audio steganography wallet encoding music ultrasonic".includes(searchQuery) || "shipped tinnitus p2p material detection offline anonymous verified audio steganography".includes(searchQuery) || "innovations discoveries tinnitus p2p material detection offline anonymous verified audio zero loss artist".includes(searchQuery) || "next week month share button p2p stoneymollan scottish enterprise".includes(searchQuery) || "nature mycelium trees mushrooms cows water house music heartbeat harmony".includes(searchQuery) || "core truths wow mom artists 90 percent p51 family genesis protocol nature".includes(searchQuery)) && (
+          <div className="text-center py-12">
+            <p className="text-gray-400 text-lg">No results for "<span className="text-cyan-400 font-bold">{searchQuery}</span>"</p>
+            <p className="text-gray-500 text-sm mt-2">Try: robbie, mind, icon, gill, audio, tinnitus, innovations, next, nature, truths</p>
+          </div>
+        )}
 
         {/* FOOTER */}
         <div className="text-center py-8 space-y-4">
