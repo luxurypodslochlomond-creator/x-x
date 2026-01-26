@@ -295,11 +295,12 @@ export default function Type1AI51Protocol() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
           key={expandedSection}
-          className="bg-black border border-gray-700 rounded-lg overflow-hidden space-y-0"
+          className="bg-black border-2 border-cyan-500 rounded-lg overflow-hidden space-y-0"
+          style={{ boxShadow: '0 0 20px rgba(6, 182, 212, 0.3)' }}
         >
-          <div className="p-4 border-b border-gray-700">
-            <h3 className="text-lg font-black text-cyan-400 font-mono">{activeProtocol.title}</h3>
-            <p className="text-xs text-gray-500 font-mono mt-1">{activeProtocol.subtitle}</p>
+          <div className="p-4 border-b border-cyan-500/30 bg-black">
+            <h3 className="text-lg font-black text-cyan-400 font-mono tracking-wider">{activeProtocol.title}</h3>
+            <p className="text-xs text-cyan-300/60 font-mono mt-1">{activeProtocol.subtitle}</p>
           </div>
 
           <div className="p-4 space-y-3 max-h-[60vh] overflow-y-auto">
