@@ -200,8 +200,10 @@ export default function AdminStrategicNotes() {
             </div>
           </CardContent>
         </Card>
+        )}
 
         {/* URGENT - ICONS NEEDED */}
+        {(!searchQuery || "icon urgent uf51 8bit heart png".includes(searchQuery)) && (
         <Card className="bg-gradient-to-r from-red-900/40 to-orange-900/40 border-4 border-red-500">
           <CardContent className="p-8">
             <div className="flex items-center gap-2 mb-4">
