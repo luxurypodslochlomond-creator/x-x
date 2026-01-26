@@ -252,7 +252,7 @@ export default function CB51() {
             </div>
 
             {/* QUICK LINKS - Keep minimal, only essential */}
-            <div className="flex gap-2">
+            <div className="flex gap-2 mb-4">
                 <Link to={createPageUrl('ScottGigOffers')} className="flex-1">
                     <button className="w-full bg-green-500/10 border border-green-500/50 text-green-400 py-2 rounded-lg font-mono text-xs font-bold hover:bg-green-500/20 transition-all">
                         + NEW GIG
@@ -264,6 +264,43 @@ export default function CB51() {
                     </button>
                 </Link>
             </div>
+
+            {/* HIDDEN MENU - Collapsible for power users */}
+            <details className="mb-4">
+                <summary className="cursor-pointer text-cyan-400 font-mono text-xs font-bold hover:text-cyan-300">More Tools ▼</summary>
+                <div className="mt-3 grid grid-cols-3 gap-2">
+                    <Link to={createPageUrl('ScottMessageInbox')}>
+                        <div className="bg-black border border-cyan-500/30 rounded p-2 text-center hover:bg-cyan-500/10 transition-all">
+                            <Mail className="w-4 h-4 text-cyan-400 mx-auto mb-1" />
+                            <p className="text-cyan-400 font-mono text-[8px]">EMAIL</p>
+                        </div>
+                    </Link>
+                    <Link to={createPageUrl('ScottCalendarView')}>
+                        <div className="bg-black border border-cyan-500/30 rounded p-2 text-center hover:bg-cyan-500/10 transition-all">
+                            <Calendar className="w-4 h-4 text-cyan-400 mx-auto mb-1" />
+                            <p className="text-cyan-400 font-mono text-[8px]">CALENDAR</p>
+                        </div>
+                    </Link>
+                    <Link to={createPageUrl('ScottToDo')}>
+                        <div className="bg-black border border-cyan-500/30 rounded p-2 text-center hover:bg-cyan-500/10 transition-all">
+                            <CheckCircle className="w-4 h-4 text-cyan-400 mx-auto mb-1" />
+                            <p className="text-cyan-400 font-mono text-[8px]">TASKS</p>
+                        </div>
+                    </Link>
+                    <Link to={createPageUrl('ScottTeamAccess')}>
+                        <div className="bg-black border border-cyan-500/30 rounded p-2 text-center hover:bg-cyan-500/10 transition-all">
+                            <Users className="w-4 h-4 text-cyan-400 mx-auto mb-1" />
+                            <p className="text-cyan-400 font-mono text-[8px]">TEAMS</p>
+                        </div>
+                    </Link>
+                    <Link to={createPageUrl('ScottFinanceAdmin')}>
+                        <div className="bg-black border border-cyan-500/30 rounded p-2 text-center hover:bg-cyan-500/10 transition-all">
+                            <DollarSign className="w-4 h-4 text-cyan-400 mx-auto mb-1" />
+                            <p className="text-cyan-400 font-mono text-[8px]">FINANCE</p>
+                        </div>
+                    </Link>
+                </div>
+            </details>
 
             {/* ARCHIVED ARTISTS */}
             {archivedArtists.length > 0 && (
