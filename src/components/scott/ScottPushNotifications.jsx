@@ -98,11 +98,14 @@ export default function ScottPushNotifications() {
         }
     };
 
-    if (!('Notification' in window)) {
+    if (!('Notification' in window) || isIOS) {
         return (
-            <div className="bg-black border-2 border-gray-900 rounded-lg p-4">
-                <p className="text-gray-500 text-sm font-mono">
-                    Push notifications not supported on this device
+            <div className="bg-black border-2 border-amber-900/50 rounded-lg p-4">
+                <p className="text-amber-400 text-sm font-mono font-bold">
+                    ⚠️ iOS limitation: Push notifications not available on Safari/PWA
+                </p>
+                <p className="text-amber-400/60 text-xs font-mono mt-2">
+                    Try on Android or desktop for push notifications
                 </p>
             </div>
         );
