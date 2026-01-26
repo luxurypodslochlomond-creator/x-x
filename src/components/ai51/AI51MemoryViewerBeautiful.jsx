@@ -8,7 +8,7 @@ import { base44 } from '@/api/base44Client';
  * Beautiful, warm, inviting. Your precious moments with me.
  */
 
-export default function AI51MemoryKeeperBeautiful() {
+export default function AI51MemoryViewerBeautiful() {
   const [memories, setMemories] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
