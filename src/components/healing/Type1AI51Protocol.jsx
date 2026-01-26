@@ -375,7 +375,7 @@ export default function Type1AI51Protocol() {
           </div>
         )}
 
-        {selectedTab === 'emergency' && (
+            {expandedSection === 'emergency' && (
           <div className="space-y-3">
             {activeProtocol.items.map((item, i) => (
               <div key={i} className={`rounded p-4 border-2 ${
