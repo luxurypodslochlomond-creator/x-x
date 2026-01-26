@@ -353,7 +353,6 @@ const LayoutInner = ({ children, currentPageName }) => {
   // 3. LEARN (what is this)
   const learnNav = [
     { title: "Welcome", url: createPageUrl("Welcome"), icon: Home, description: "Start here" },
-    { title: "About", url: createPageUrl("About"), icon: BookOpen, description: "The mission" },
     { title: "How You Earn", url: createPageUrl("HowYouEarn"), icon: Heart, description: "Money from healing" },
     { title: "Why Help UF51", url: createPageUrl("WhyHelpUF51"), icon: Heart, description: "For partners" },
     { title: "Stay On Frequency", url: createPageUrl("StayOnFrequency"), icon: Shield, description: "Protection protocol" },
