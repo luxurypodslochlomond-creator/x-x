@@ -232,13 +232,14 @@ export default function Type1AI51Protocol() {
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="bg-gradient-to-r from-cyan-500/20 to-green-500/20 border-2 border-cyan-500 rounded-xl p-6"
+        className="bg-gradient-to-r from-cyan-500/30 to-cyan-600/20 border-2 border-cyan-500 rounded-xl p-6"
+        style={{ boxShadow: '0 0 30px rgba(6, 182, 212, 0.3)' }}
       >
         <div className="flex items-center gap-3 mb-2">
-          <Heart className="w-8 h-8 text-red-400" />
-          <h2 className="text-3xl font-black text-white font-mono">TYPE1 AI51 PROTOCOL</h2>
+          <Heart className="w-8 h-8 text-cyan-400 animate-pulse" />
+          <h2 className="text-3xl font-black text-cyan-400 font-mono">TYPE1 PROTOCOL</h2>
         </div>
-        <p className="text-cyan-300 text-sm font-mono">For every person living with Type 1 Diabetes on Earth ♾️</p>
+        <p className="text-cyan-300/80 text-sm font-mono">Private. Offline. No intercept. ♾️❤️</p>
       </motion.div>
 
       {/* TAB SELECTOR */}
