@@ -80,7 +80,7 @@ const CB51MobileMenu = ({ isOpen, onClose }) => {
                         initial={{ x: '100%' }}
                         animate={{ x: 0 }}
                         exit={{ x: '100%' }}
-                        transition={{ duration: 0.25, ease: 'easeOut' }}
+                        transition={{ duration: 0.15, ease: 'easeOut' }}
                         className="fixed top-0 right-0 bottom-0 w-[85vw] max-w-sm bg-[#0a0f1a] border-l border-cyan-500/30 z-[70] overflow-y-auto"
                     >
                         {/* HEADER */}
@@ -124,10 +124,10 @@ const CB51MobileMenu = ({ isOpen, onClose }) => {
                                                  <Icon className={`w-5 h-5 ${colors.text}`} />
                                              </div>
                                              <div className="flex-1 min-w-0">
-                                                 <p className={`font-bold text-sm font-mono ${active ? colors.text : 'text-white'}`}>
+                                                 <p className={`font-bold text-base font-mono ${active ? colors.text : 'text-white'}`}>
                                                      {item.title}
                                                  </p>
-                                                 <p className="text-xs text-gray-600 font-mono truncate">
+                                                 <p className="text-sm text-gray-500 font-mono truncate">
                                                      {item.desc}
                                                  </p>
                                              </div>
