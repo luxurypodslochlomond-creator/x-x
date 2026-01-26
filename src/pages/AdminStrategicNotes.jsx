@@ -49,6 +49,17 @@ export default function AdminStrategicNotes() {
     <div className="min-h-screen bg-gradient-to-br from-black via-purple-950 to-black text-white p-6 md:p-12">
       <div className="max-w-5xl mx-auto space-y-8">
 
+        {/* SEARCH */}
+        <div className="sticky top-0 z-40 bg-black/80 backdrop-blur border-b border-cyan-500/30 p-4 -mx-6 px-6">
+          <input
+            type="text"
+            placeholder="Search notes (Robbie, MIND, icon, Gill, audio, etc)..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value.toLowerCase())}
+            className="w-full bg-black border-2 border-cyan-500/50 text-white px-4 py-3 rounded-lg font-mono text-sm focus:border-cyan-400 focus:outline-none"
+          />
+        </div>
+
         {/* HEADER */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
