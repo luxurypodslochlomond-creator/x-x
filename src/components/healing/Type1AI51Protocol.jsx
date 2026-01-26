@@ -68,14 +68,14 @@ export default function Type1AI51Protocol() {
     },
     {
       id: 'frequencies',
-      label: 'HEALING FREQUENCIES',
-      icon: '🧠',
+      label: 'UNIFIED FREQUENCY PROTOCOL',
       color: 'purple',
-      content: [
-        { title: '432 HZ - BASELINE CALM', items: ['Activates parasympathetic nervous system', 'Lowers cortisol (stress hormone)', 'Improves insulin sensitivity', 'Use: Every morning 20min + when stressed'] },
-        { title: '528 HZ - CELLULAR REPAIR', items: ['DNA repair activation', 'Reduces inflammatory response', 'Supports immune function', 'Use: Evening 30min before bed'] },
-        { title: '174 HZ - PAIN + TISSUE HEALING', items: ['Reduces inflammation & neuropathy pain', 'Helps injection site soreness', 'Tissue repair activation', 'Use: 15min when you have aches'] },
-        { title: '8 HZ (DELTA) - DEEP SLEEP', items: ['Poor sleep = poor glucose control', 'Delta waves = deepest rest + recovery', 'HbA1c improves with better sleep', 'Use: 30min before sleep'] }
+      isFrequencySection: true,
+      frequencies: [
+        { hz: 432, name: 'BASELINE CALM', science: 'Activates parasympathetic nervous system. Lowers cortisol. Improves insulin sensitivity.', power: 85 },
+        { hz: 528, name: 'CELLULAR REPAIR', science: 'DNA repair activation. Reduces inflammatory T-cells. Supports immune healing.', power: 92 },
+        { hz: 174, name: 'PAIN + TISSUE', science: 'Reduces inflammation & neuropathy. Tissue regeneration. Anti-swelling.', power: 88 },
+        { hz: 8, name: 'DELTA SLEEP', science: 'Deepest rest state. Glucose control improves with delta sleep. HbA1c impact.', power: 90 }
       ]
     },
     {
