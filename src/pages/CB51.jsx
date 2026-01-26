@@ -198,31 +198,10 @@ export default function CB51() {
                 </div>
             </div>
 
-            {/* COMPACT ALERTS */}
-            {(stats.pendingOffers > 0 || stats.awaitingBand > 0 || stats.overdueInvoices > 0 || stats.urgentMessages > 0) && (
-                <div className="mb-3 bg-black border border-amber-500/50 rounded-lg p-2">
-                    <div className="flex items-center gap-1 mb-1">
-                        <AlertCircle className="w-3 h-3 text-amber-400" />
-                        <h2 className="text-amber-400 font-black font-mono text-[10px]">NEEDS ATTENTION</h2>
-                    </div>
-                    <div className="space-y-1">
-                        {stats.pendingOffers > 0 && (
-                            <Link to={createPageUrl('ScottGigOffers')}>
-                                <div className="bg-black border border-amber-500/30 rounded p-1.5 hover:border-amber-500 transition-all">
-                                    <p className="text-amber-400 font-bold font-mono text-[10px]">{stats.pendingOffers} gig offers →</p>
-                                </div>
-                            </Link>
-                        )}
-                        {stats.awaitingBand > 0 && (
-                            <Link to={createPageUrl('ScottGigOffers')}>
-                                <div className="bg-black border border-cyan-500/30 rounded p-1.5 hover:border-cyan-500 transition-all">
-                                    <p className="text-cyan-400 font-bold font-mono text-[10px]">{stats.awaitingBand} awaiting band →</p>
-                                </div>
-                            </Link>
-                        )}
-                    </div>
-                </div>
-            )}
+            {/* IN-APP NOTIFICATION INBOX - WORKS ON iOS */}
+            <div className="mb-3">
+                <CB51NotificationInbox />
+            </div>
 
             {/* COMPACT ARTISTS GRID */}
             <div>
