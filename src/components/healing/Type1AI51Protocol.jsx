@@ -108,7 +108,6 @@ export default function Type1AI51Protocol() {
     {
       id: 'emergency',
       label: 'EMERGENCY PROTOCOL',
-      icon: '🚨',
       color: 'red',
       content: [
         { title: 'SEVERE HYPOGLYCEMIA', items: ['Unconscious or seizures = CALL 999', 'Use glucagon kit if trained', 'Hospital: IV glucose stabilization', 'After: Rest + recovery plan with GP'] },
