@@ -400,8 +400,7 @@ export default function Type1AI51Protocol() {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border-2 border-cyan-500 rounded-xl p-6 mt-6"
-        style={{ boxShadow: '0 0 20px rgba(6, 182, 212, 0.2)' }}
+        className="bg-black border border-gray-700 rounded-lg p-4"
       >
         <div className="flex items-center gap-3 mb-4">
           <Brain className="w-8 h-8 text-cyan-400" />
