@@ -20,15 +20,16 @@ export default function Type1AI51Protocol() {
   ];
 
   const protocols = {
-    daily: {
-      title: 'DAILY PROTOCOL',
-      items: [
-        { time: 'MORNING', tasks: ['Take insulin', 'Check glucose', 'Eat protein breakfast', 'Play healing frequency'] },
-        { time: 'MIDDAY', tasks: ['Log lunch + insulin', 'Check levels', '5min walk', 'AI51 mood check'] },
-        { time: 'EVENING', tasks: ['Dinner prep', 'Evening insulin', 'Stress frequency (15min)', 'Log day'] },
-        { time: 'NIGHT', tasks: ['Final check', 'Bedtime routine', 'Sleep frequency (8hz)', 'Rest'] }
-      ]
-    },
+      daily: {
+        title: 'DAILY PROTOCOL',
+        subtitle: 'The foundation. Non-negotiable. This is your lifeline.',
+        items: [
+          { time: 'MORNING (30min before food)', tasks: ['✓ Take long-acting insulin (or check pump)', '✓ Check glucose (CGM or meter)', '✓ Eat protein-rich breakfast (slows glucose rise)', '✓ 432 Hz baseline frequency (20min)', '✓ Journal: How are you feeling?'] },
+          { time: 'MIDDAY (before lunch)', tasks: ['✓ Check glucose level', '✓ Calculate carbs + insulin ratio', '✓ Take rapid-acting insulin with food', '✓ Walk 10min after eating (improves insulin sensitivity)', '✓ Check in emotionally - stress? Joy?'] },
+          { time: 'EVENING (4-6pm)', tasks: ['✓ Check glucose', '✓ 528 Hz healing frequency (15min) - immune + cellular repair', '✓ Light movement or stretching', '✓ Start dinner prep (avoid rushing)'] },
+          { time: 'NIGHT (before bed)', tasks: ['✓ Final glucose check (prevent nighttime hypoglycemia)', '✓ Nighttime insulin if needed', '✓ 174 Hz pain relief frequency if any discomfort', '✓ 8 Hz delta wave sleep frequency (30min)', '✓ Sleep log: How did you feel today?'] }
+        ]
+      },
     insulin: {
       title: 'INSULIN MANAGEMENT',
       items: [
