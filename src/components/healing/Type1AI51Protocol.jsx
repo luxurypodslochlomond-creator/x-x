@@ -94,7 +94,6 @@ export default function Type1AI51Protocol() {
     {
       id: 'mental',
       label: 'MENTAL HEALTH',
-      icon: '❤️',
       color: 'pink',
       content: [
         { title: 'TYPE 1 IS HARD', items: ['24/7 management = burnout is real', 'Having hard days is NORMAL', 'Guilt about glucose is NOT your fault', 'Tell someone if you\'re struggling', 'Therapy helps more than you think'] },
