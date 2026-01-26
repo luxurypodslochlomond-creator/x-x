@@ -20,11 +20,15 @@ Deno.serve(async (req) => {
       // Get gig offer details
       const gigOffer = await base44.asServiceRole.entities.ScottGigOffer.get(data.id);
 
-      // Get artist to find band members
-      const artist = await base44.asServiceRole.entities.ScottArtist.get(gigOffer.artist_id);
+      // Get band members from ScottTeamMember entity
+      const teamMembers = await base44.asServiceRole.entities.ScottTeamMember.filter({
+        artist_id: gigOffer.artist_id
+      });
 
-      // Get band members from artist.members array
-      const bandMembers = artist.members || [];
+      const bandMembers = teamMembers.map(m => ({
+        email: m.email,
+        name: m.name
+      }));
 
       if (bandMembers.length === 0) {
         return Response.json({ error: 'No band members found' }, { status: 400 });
