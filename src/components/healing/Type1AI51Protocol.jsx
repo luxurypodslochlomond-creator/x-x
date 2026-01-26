@@ -314,11 +314,11 @@ export default function Type1AI51Protocol() {
                 </ul>
               </motion.div>
             ))}
-          </div>
-        )}
+              </div>
+            )}
 
             {expandedSection === 'insulin' && (
-          <div className="space-y-3">
+              <div className="space-y-3">
             {activeProtocol.items.map((block, i) => (
               <motion.div 
                 key={i} 
