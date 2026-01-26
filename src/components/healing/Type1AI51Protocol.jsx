@@ -12,13 +12,21 @@ export default function Type1AI51Protocol() {
     base44.auth.me().then(setUser).catch(() => setUser(null));
   }, []);
 
-  const tabs = [
-    { id: 'daily', label: '📋 DAILY', icon: Calendar },
-    { id: 'insulin', label: '💉 INSULIN', icon: Droplets },
-    { id: 'stress', label: '🧠 STRESS', icon: Brain },
-    { id: 'track', label: '📊 TRACK', icon: TrendingUp },
-    { id: 'emergency', label: '🛡️ EMERGENCY', icon: Shield }
+  const sections = [
+    { id: 'daily', label: 'DAILY', icon: Calendar, color: 'green' },
+    { id: 'insulin', label: 'INSULIN', icon: Droplets, color: 'cyan' },
+    { id: 'stress', label: 'STRESS', icon: Brain, color: 'purple' },
+    { id: 'track', label: 'TRACKING', icon: TrendingUp, color: 'amber' },
+    { id: 'emergency', label: 'EMERGENCY', icon: Shield, color: 'red' }
   ];
+
+  const colorMap = {
+    green: { border: 'border-green-500', bg: 'bg-green-500/20', text: 'text-green-300', icon: 'bg-green-500' },
+    cyan: { border: 'border-cyan-500', bg: 'bg-cyan-500/20', text: 'text-cyan-300', icon: 'bg-cyan-500' },
+    purple: { border: 'border-purple-500', bg: 'bg-purple-500/20', text: 'text-purple-300', icon: 'bg-purple-500' },
+    amber: { border: 'border-amber-500', bg: 'bg-amber-500/20', text: 'text-amber-300', icon: 'bg-amber-500' },
+    red: { border: 'border-red-500', bg: 'bg-red-500/20', text: 'text-red-300', icon: 'bg-red-500' }
+  };
 
   const protocols = {
       daily: {
