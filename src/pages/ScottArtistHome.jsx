@@ -111,25 +111,29 @@ export default function ScottArtistHome() {
             title: 'LIVE',
             icon: Mic2,
             description: 'Booking • Logistics • Admin',
-            link: createPageUrl(`ScottLive?id=${artistId}`)
+            link: createPageUrl(`ScottLive?id=${artistId}`),
+            color: 'green'
         },
         {
             title: 'SESSIONS',
             icon: Music,
             description: 'Writing • Recording • Rehearsals',
-            link: createPageUrl(`ScottSessions?id=${artistId}`)
+            link: createPageUrl(`ScottSessions?id=${artistId}`),
+            color: 'orange'
         },
         {
             title: 'FINANCE / ADMIN',
             icon: DollarSign,
             description: 'Invoices • Visas • Legal',
-            link: createPageUrl(`ScottFinanceAdmin?id=${artistId}`)
+            link: createPageUrl(`ScottFinanceAdmin?id=${artistId}`),
+            color: 'amber'
         },
         {
             title: 'TO-DO LIST',
             icon: ClipboardList,
             description: 'Tasks • Deadlines • Progress',
-            link: createPageUrl(`ScottToDo?id=${artistId}`)
+            link: createPageUrl(`ScottToDo?id=${artistId}`),
+            color: 'cyan'
         },
 
     ];
@@ -199,16 +203,23 @@ export default function ScottArtistHome() {
             <div className="grid grid-cols-2 gap-2 mb-3">
                 {sections.map((section) => {
                     const Icon = section.icon;
-                    
+                    const colorMap = {
+                        green: { border: 'border-green-500', bg: 'bg-green-500', shadow: '0 0 15px rgba(16, 185, 129, 0.3)' },
+                        orange: { border: 'border-orange-500', bg: 'bg-orange-500', shadow: '0 0 15px rgba(249, 115, 22, 0.3)' },
+                        amber: { border: 'border-amber-500', bg: 'bg-amber-500', shadow: '0 0 15px rgba(245, 158, 11, 0.3)' },
+                        cyan: { border: 'border-cyan-500', bg: 'bg-cyan-500', shadow: '0 0 15px rgba(6, 182, 212, 0.3)' }
+                    };
+                    const colors = colorMap[section.color];
+
                     return (
                         <Link key={section.title} to={section.link}>
                             <motion.div
                                 whileTap={{ scale: 0.96 }}
-                                className="bg-black border-2 border-cyan-500 rounded-lg p-2"
-                                style={{ boxShadow: '0 0 15px rgba(6, 182, 212, 0.3)' }}
+                                className={`bg-black border-2 ${colors.border} rounded-lg p-2`}
+                                style={{ boxShadow: colors.shadow }}
                             >
                                 <div className="flex flex-col items-center text-center gap-1">
-                                    <div className="w-12 h-12 rounded bg-cyan-500 text-black font-black text-lg flex items-center justify-center">
+                                    <div className={`w-12 h-12 rounded ${colors.bg} text-black font-black text-lg flex items-center justify-center`}>
                                         <Icon className="w-6 h-6" />
                                     </div>
                                     <p className="text-white font-black text-[10px] font-mono leading-tight">
