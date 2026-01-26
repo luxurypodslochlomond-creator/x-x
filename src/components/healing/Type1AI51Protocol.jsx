@@ -232,44 +232,50 @@ export default function Type1AI51Protocol() {
     }
   };
 
-  const activeProtocol = protocols[selectedTab];
+  const activeProtocol = protocols[expandedSection];
 
   return (
-    <div className="space-y-6">
-      {/* HEADER */}
-      <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="bg-gradient-to-r from-cyan-500/30 to-cyan-600/20 border-2 border-cyan-500 rounded-xl p-6"
-        style={{ boxShadow: '0 0 30px rgba(6, 182, 212, 0.3)' }}
-      >
-        <div className="flex items-center gap-3 mb-2">
-          <Heart className="w-8 h-8 text-cyan-400 animate-pulse" />
-          <h2 className="text-3xl font-black text-cyan-400 font-mono">TYPE1 PROTOCOL</h2>
+    <div className="space-y-4">
+      {/* HEADER WITH BACK BUTTON */}
+      <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center gap-3">
+          <span className="text-gray-500 text-sm font-mono">← BACK</span>
         </div>
-        <p className="text-cyan-300/80 text-sm font-mono">Private. Offline. No intercept. ♾️❤️</p>
-      </motion.div>
+        <div className="flex items-center gap-2">
+          <span className="text-green-400 text-xs font-mono font-bold px-3 py-1 border border-green-500 rounded">🟢 ONLINE</span>
+        </div>
+      </div>
 
-      {/* TAB GRID */}
-      <div className="grid grid-cols-5 gap-2">
-        {tabs.map(tab => {
-          const IconComponent = tab.icon;
-          const isActive = selectedTab === tab.id;
+      {/* AVATAR + TITLE */}
+      <div className="flex items-center gap-4 mb-6">
+        <div className="w-20 h-20 bg-cyan-500 rounded-lg flex items-center justify-center">
+          <span className="text-4xl font-black text-black">T1</span>
+        </div>
+        <div>
+          <h1 className="text-3xl font-black text-white">Type1</h1>
+          <p className="text-gray-400 font-mono text-sm">Protocol</p>
+        </div>
+      </div>
+
+      {/* 2x2 GRID OF ACTION CARDS */}
+      <div className="grid grid-cols-2 gap-3 mb-6">
+        {sections.map((section, i) => {
+          const c = colorMap[section.color];
+          const IconComponent = section.icon;
+          const isActive = expandedSection === section.id;
           return (
             <motion.button
-              key={tab.id}
-              onClick={() => setSelectedTab(tab.id)}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className={`p-3 rounded border-2 font-bold text-xs font-mono transition-all flex flex-col items-center gap-1 ${
-                isActive
-                  ? 'bg-cyan-500/30 border-cyan-500 text-cyan-300'
-                  : 'bg-black/50 border-cyan-500/20 text-cyan-600 hover:border-cyan-500/50'
-              }`}
-              style={isActive ? { boxShadow: '0 0 15px rgba(6, 182, 212, 0.3)' } : {}}
+              key={section.id}
+              onClick={() => setExpandedSection(isActive ? null : section.id)}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className={`${c.bg} border-2 ${c.border} rounded-lg p-4 flex flex-col items-center justify-center gap-3 transition-all ${isActive ? 'ring-2 ring-offset-2 ring-offset-black' : ''}`}
+              style={isActive ? { boxShadow: `0 0 20px ${c.border.split('-')[1] === 'green' ? 'rgba(34, 197, 94, 0.5)' : c.border.split('-')[1] === 'cyan' ? 'rgba(6, 182, 212, 0.5)' : c.border.split('-')[1] === 'purple' ? 'rgba(168, 85, 247, 0.5)' : c.border.split('-')[1] === 'amber' ? 'rgba(245, 158, 11, 0.5)' : 'rgba(239, 68, 68, 0.5)'}` } : {}}
             >
-              <IconComponent className="w-4 h-4" />
-              <span className="text-[8px]">{tab.label.split(' ')[1]}</span>
+              <div className={`${c.icon} p-3 rounded-lg`}>
+                <IconComponent className="w-6 h-6 text-black" />
+              </div>
+              <span className={`font-black font-mono text-sm ${c.text}`}>{section.label}</span>
             </motion.button>
           );
         })}
