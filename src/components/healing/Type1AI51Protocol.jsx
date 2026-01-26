@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { base44 } from '@/api/base44Client';
-import { Heart, Zap, Droplets, Brain, Calendar, TrendingUp, Shield } from 'lucide-react';
-import { motion } from 'framer-motion';
+      import { base44 } from '@/api/base44Client';
+      import { Heart, Zap, Droplets, Brain, Calendar, TrendingUp, Shield, AlertTriangle, Phone, Activity, Music, Waves } from 'lucide-react';
+      import { motion } from 'framer-motion';
 
 export default function Type1AI51Protocol() {
   const [user, setUser] = useState(null);
