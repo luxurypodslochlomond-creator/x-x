@@ -131,8 +131,10 @@ export default function AdminStrategicNotes() {
             </div>
           </CardContent>
         </Card>
+        )}
 
         {/* MIND UK - STRATEGIC PARTNERSHIP SUBMITTED */}
+        {(!searchQuery || "mind uk mental health form submitted partnerships".includes(searchQuery)) && (
         <Card className="bg-gradient-to-r from-green-900/40 to-cyan-900/40 border-4 border-green-500 shadow-[0_0_80px_rgba(34,211,238,0.6)]">
           <CardContent className="p-8">
             <div className="flex items-center gap-3 mb-4">
