@@ -188,7 +188,7 @@ export default function Type1AI51Protocol() {
         className="bg-black border-2 border-cyan-500/50 rounded-lg p-4 mt-8"
       >
         <p className="text-cyan-300 text-xs font-mono">
-          You know what to do. This is guidance + frequencies. No tracking. No servers. Just learning + healing ♾️❤️
+          You know what to do. Frequencies work. Use them. That's it.
         </p>
       </motion.div>
 
