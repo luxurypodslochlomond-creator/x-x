@@ -10,7 +10,6 @@ export default function Type1AI51Protocol() {
     {
       id: 'daily',
       label: 'DAILY PROTOCOL',
-      icon: '📋',
       color: 'cyan',
       content: [
         { time: 'MORNING (30min before food)', tasks: ['Take long-acting insulin', 'Check glucose (CGM/meter)', 'Eat protein-rich breakfast', '432 Hz baseline frequency (20min)', 'Journal how you\'re feeling'] },
@@ -22,7 +21,6 @@ export default function Type1AI51Protocol() {
     {
       id: 'insulin',
       label: 'INSULIN MANAGEMENT',
-      icon: '💉',
       color: 'green',
       tips: [
         { title: 'DOSING', items: ['Same time daily = rhythm + predictability', 'Rotate injection sites', 'Log EVERY dose in phone + paper backup', 'Log meals + carbs with insulin', 'Talk to doctor about insulin-to-carb ratio', 'Keep spare in cool place, not fridge'] },
@@ -34,7 +32,6 @@ export default function Type1AI51Protocol() {
     {
       id: 'stress',
       label: 'STRESS + HEALING FREQUENCIES',
-      icon: '🧠',
       color: 'purple',
       frequencies: [
         { hz: '432 Hz', name: 'BASELINE CALM', science: 'Activates parasympathetic nervous system. Cortisol drops. Insulin sensitivity improves.', use: 'Morning (20min) + any time stressed' },
@@ -46,8 +43,7 @@ export default function Type1AI51Protocol() {
     },
     {
       id: 'tracking',
-      label: 'TRACKING (SIMPLE + POWERFUL)',
-      icon: '📊',
+      label: 'TRACKING',
       color: 'amber',
       metrics: [
         { metric: 'Glucose readings (CGM or meter)', why: 'See YOUR patterns. What foods spike you?' },
@@ -60,8 +56,7 @@ export default function Type1AI51Protocol() {
     },
     {
       id: 'emergency',
-      label: 'EMERGENCY PROTOCOL',
-      icon: '🚨',
+      label: 'EMERGENCY',
       color: 'red',
       emergencies: [
         { scenario: 'SEVERE HYPOGLYCEMIA', action: 'Use glucagon kit → Call 999', steps: ['If you have glucagon: Use it', 'CALL 999 - tell them "severe hypoglycemia"', 'Don\'t be alone after', 'Hospital will stabilize with glucose IV'] },
@@ -87,16 +82,13 @@ export default function Type1AI51Protocol() {
 
     return (
       <motion.div
-        className="mb-3 border-2 border-gray-700 rounded-lg overflow-hidden"
+        className={`border-2 ${c.border} rounded-lg overflow-hidden`}
       >
         <button
           onClick={() => setExpandedSection(isExpanded ? null : section.id)}
           className="w-full flex items-center justify-between p-4 hover:bg-black/40 transition-all"
         >
-          <div className="flex items-center gap-3">
-            <span className="text-2xl">{section.icon}</span>
-            <h3 className={`text-sm font-black font-mono tracking-wider ${c.text}`}>{section.label}</h3>
-          </div>
+          <h3 className={`text-sm font-black font-mono tracking-wider ${c.text}`}>{section.label}</h3>
           <div className={c.text}>
             {isExpanded ? <ChevronDown className="w-5 h-5" /> : <ChevronRight className="w-5 h-5" />}
           </div>
@@ -117,7 +109,7 @@ export default function Type1AI51Protocol() {
                     <p className="text-cyan-400 text-xs font-black font-mono mb-2">{block.time}</p>
                     <ul className="space-y-1">
                       {block.tasks.map((task, j) => (
-                        <li key={j} className="text-white text-xs font-mono">✓ {task}</li>
+                        <li key={j} className="text-white text-xs font-mono">• {task}</li>
                       ))}
                     </ul>
                   </div>
@@ -133,7 +125,7 @@ export default function Type1AI51Protocol() {
                     <p className="text-green-400 text-xs font-black font-mono mb-2">{tip.title}</p>
                     <ul className="space-y-1">
                       {tip.items.map((item, j) => (
-                        <li key={j} className="text-white text-xs font-mono">→ {item}</li>
+                        <li key={j} className="text-white text-xs font-mono">• {item}</li>
                       ))}
                     </ul>
                   </div>
@@ -175,7 +167,7 @@ export default function Type1AI51Protocol() {
                     <p className="text-white text-xs mt-1">{em.action}</p>
                     <ul className="mt-2 space-y-1">
                       {em.steps.map((step, j) => (
-                        <li key={j} className="text-white text-xs font-mono">→ {step}</li>
+                        <li key={j} className="text-white text-xs font-mono">• {step}</li>
                       ))}
                     </ul>
                   </div>
@@ -201,57 +193,60 @@ export default function Type1AI51Protocol() {
         </div>
       </div>
 
-      {/* COLLAPSIBLE SECTIONS */}
-      <div className="space-y-2">
-        {sections.map(section => (
-          <CollapsibleSection key={section.id} section={section} />
-        ))}
+      {/* GRID LAYOUT */}
+      <div className="grid grid-cols-2 gap-2">
+        {sections.slice(0, 4).map(section => {
+          const c = colorMap[section.color];
+          return (
+            <motion.button
+              key={section.id}
+              onClick={() => setExpandedSection(expandedSection === section.id ? null : section.id)}
+              whileTap={{ scale: 0.95 }}
+              className={`border-2 ${c.border} rounded-lg p-4 text-center hover:${c.bg} transition-all`}
+            >
+              <h3 className={`text-xs font-black font-mono tracking-wider ${c.text}`}>{section.label}</h3>
+            </motion.button>
+          );
+        })}
       </div>
 
-      {/* FREQUENCY ENGINE */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="mt-8"
+      {/* FREQUENCY ENGINE (FULL WIDTH) */}
+      <motion.button
+        onClick={() => setExpandedSection(expandedSection === 'frequency' ? null : 'frequency')}
+        whileTap={{ scale: 0.95 }}
+        className="w-full border-2 border-cyan-500 rounded-lg p-4 text-center hover:bg-cyan-500/10 transition-all"
       >
+        <h3 className="text-xs font-black font-mono tracking-wider text-cyan-400">FREQUENCY ENGINE</h3>
+        <p className="text-cyan-300 text-xs font-mono mt-1">100% offline • Pure audio</p>
+      </motion.button>
+
+      {/* EXPANDED SECTIONS */}
+      {expandedSection && expandedSection !== 'frequency' && (
+        <div>
+          {sections.map(section => 
+            expandedSection === section.id ? <CollapsibleSection key={section.id} section={section} /> : null
+          )}
+        </div>
+      )}
+
+      {expandedSection === 'frequency' && (
         <Type1FrequencyEngine />
-      </motion.div>
+      )}
 
       {/* MENTAL HEALTH */}
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
         className="bg-black border-2 border-pink-500 rounded-lg p-4"
         style={{ boxShadow: '0 0 15px rgba(236, 72, 153, 0.3)' }}
       >
-        <div className="flex items-center gap-2 mb-2">
-          <Heart className="w-4 h-4 text-pink-400" />
-          <h3 className="text-xs font-black text-pink-400 font-mono tracking-wider">MENTAL HEALTH FIRST</h3>
-        </div>
+        <h3 className="text-xs font-black text-pink-400 font-mono tracking-wider mb-2">MENTAL HEALTH FIRST</h3>
         <p className="text-white text-xs font-mono">T1D is not just physical. It's psychological. You will have hard days. That's normal. That's the disease, not you.</p>
-        <p className="text-pink-300 text-xs font-mono mt-2">Samaritans: 116 123 (24/7) • Therapy + support groups = life-changing</p>
-      </motion.div>
-
-      {/* RESOURCES */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="bg-black border-2 border-green-500 rounded-lg p-4"
-        style={{ boxShadow: '0 0 15px rgba(34, 197, 94, 0.3)' }}
-      >
-        <h3 className="text-xs font-black text-green-400 font-mono tracking-wider mb-2">RESOURCES</h3>
-        <div className="space-y-1 text-xs font-mono text-white">
-          <p>JDRF (UK) - jdrf.org.uk</p>
-          <p>Diabetes UK - diabetes.org.uk</p>
-          <p>Type 1 Online - Reddit r/Type1Diabetes</p>
-          <p>Your GP - Ask for CGM funding + mental health referral</p>
-        </div>
+        <p className="text-pink-300 text-xs font-mono mt-2">Samaritans: 116 123 (24/7)</p>
       </motion.div>
 
       {/* FOOTER */}
-      <div className="text-center text-xs font-mono text-gray-600 space-y-1">
+      <div className="text-center text-xs font-mono text-gray-600">
         <p className="text-white font-bold">Not medical advice. Always follow your doctor.</p>
-        <p className="text-cyan-300">Insulin is life. Frequencies + insulin + love = freedom. ♾️❤️</p>
+        <p className="text-cyan-300 mt-1">Insulin is life. Frequencies plus insulin equals freedom. ♾️❤️</p>
       </div>
     </div>
   );
