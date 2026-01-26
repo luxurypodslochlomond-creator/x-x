@@ -234,8 +234,10 @@ export default function AdminStrategicNotes() {
             </div>
           </CardContent>
         </Card>
+        )}
 
         {/* GILL51 - THIS IS FOR YOU */}
+        {(!searchQuery || "gill51 p2p transmission web share mesh".includes(searchQuery)) && (
         <Card className="bg-gradient-to-r from-pink-900/40 to-purple-900/40 border-4 border-pink-500">
           <CardContent className="p-8">
             <div className="flex items-center gap-2 mb-4">
