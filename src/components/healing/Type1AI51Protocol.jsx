@@ -119,12 +119,39 @@ export default function Type1AI51Protocol() {
       ]
     },
     track: {
-      title: 'TRACKING (SIMPLE)',
+      title: 'TRACKING (SIMPLE + POWERFUL)',
+      subtitle: 'Data = power. But simple data. Not obsession.',
       items: [
-        { metric: 'Glucose readings', why: 'See patterns + adjust insulin' },
-        { metric: 'Insulin doses', why: 'Consistency = better control' },
-        { metric: 'Meals + carbs', why: 'Predict glucose response' },
-        { metric: 'Stress + sleep', why: 'Affects glucose + healing' }
+        { 
+          metric: 'Glucose readings (CGM or meter)', 
+          why: 'See YOUR patterns. What foods spike you? What calms you? Only YOU know.',
+          how: 'Log time + reading. Weekly review: Are patterns getting better?'
+        },
+        { 
+          metric: 'Insulin doses + types',
+          why: 'Consistency = prediction. You\'ll see what dose works best.',
+          how: 'Write down (phone or paper): Type + amount + time. Compare to glucose.'
+        },
+        { 
+          metric: 'Meals + carbs (be real)',
+          why: 'Carbs + insulin = glucose. Understanding this = freedom.',
+          how: 'Use app or rough guess. Don\'t obsess. But log it.'
+        },
+        { 
+          metric: 'EMOTIONAL DATA (the secret weapon)',
+          why: 'Stress = cortisol = high glucose. Happy = low cortisol = better control.',
+          how: 'Daily: "How did I FEEL today?" Angry? Happy? Lonely? Compare to glucose trends.'
+        },
+        { 
+          metric: 'Sleep hours + quality',
+          why: 'Bad sleep = bad glucose control (proven). Sleep is medication.',
+          how: 'Track: Did you sleep 7-9 hours? How did you feel?'
+        },
+        {
+          metric: 'Exercise (any movement)',
+          why: 'Movement = insulin sensitivity WITHOUT injections.',
+          how: '10-30min walk after meals drops glucose naturally. Log it.'
+        }
       ]
     },
     emergency: {
