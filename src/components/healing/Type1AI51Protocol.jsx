@@ -32,11 +32,54 @@ export default function Type1AI51Protocol() {
       },
     insulin: {
       title: 'INSULIN MANAGEMENT',
+      subtitle: 'Insulin is LIFE. Treat it with sacred respect.',
       items: [
-        { label: 'DOSING', tips: ['Time injections same time daily', 'Rotate injection sites', 'Log every dose', 'Note meals + carbs'] },
-        { label: 'STORAGE', tips: ['Keep at correct temp', 'Check expiry dates', 'Have backup supply', 'Travel kit ready'] },
-        { label: 'HYPOGLYCEMIA', tips: ['Recognize symptoms', 'Keep fast carbs nearby', '15-15 rule (15g carbs, recheck 15min)', 'Tell people around you'] },
-        { label: 'SICK DAYS', tips: ['Never skip insulin', 'Check more often', 'Stay hydrated', 'Call doctor if unsure'] }
+        { 
+          label: '💉 DOSING', 
+          tips: [
+            'Same time daily = rhythm + predictability',
+            'Rotate injection sites (thigh, belly, arm) - prevents lipohypertrophy (fat lumps that ruin absorption)',
+            'Log EVERY dose + amount in phone + paper backup',
+            'Log meals + carbs TOGETHER with insulin (pattern recognition)',
+            'Talk to your doctor about your insulin-to-carb ratio (ICR)',
+            'Keep spare insulin in COOL place, not fridge (damaged at extremes)'
+          ] 
+        },
+        { 
+          label: '🧊 STORAGE', 
+          tips: [
+            'Current vial: Room temp (below 30°C)',
+            'Backup vials: Fridge (2-8°C exactly)',
+            'NEVER freeze. NEVER heat.',
+            'Check expiry - expired insulin = high blood sugar + confusion',
+            'Have 2-week backup supply hidden at home + work + bag',
+            'Travel kit: Insulated pouch with ice packs'
+          ] 
+        },
+        { 
+          label: '⚡ HYPOGLYCEMIA (LOW BLOOD SUGAR - THE EMERGENCY)',
+          tips: [
+            'SYMPTOMS: Shaking, sweating, fast heart, confusion, anxiety, hunger',
+            'FAST: Glucose tablets (15g) or juice (small glass) - ALWAYS carry',
+            '15-15 RULE: Take 15g carbs. Wait 15min. Check again. If still low, repeat.',
+            'DON\'T give up. DON\'T go to sleep. DON\'T drive.',
+            'Tell friends/family what hypo looks like. Give them fast carbs.',
+            'After recovery: Eat slow carbs + protein (prevents next low in 2 hours)',
+            'Log it: WHEN + WHY (too much insulin? Not enough food? Exercise?)'
+          ] 
+        },
+        { 
+          label: '🤒 SICK DAYS (Cold, flu, stomach bug)',
+          tips: [
+            'GOLDEN RULE: NEVER SKIP INSULIN - sickness increases glucose',
+            'Check glucose EVERY 2-3 HOURS (not every 8)',
+            'Stay hydrated (water, sugar-free fluids)',
+            'Eat soft carbs if stomach OK (toast, rice, broth)',
+            'Insulin might INCREASE (counterintuitive but real)',
+            'Call your doctor SAME DAY - don\'t guess',
+            'If vomiting: Call doctor IMMEDIATELY (risk of DKA)'
+          ] 
+        }
       ]
     },
     stress: {
