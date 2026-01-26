@@ -354,6 +354,16 @@ export default function CB51() {
                         <p className="text-cyan-400 font-black font-mono text-[8px]">TEAMS</p>
                     </motion.div>
                 </Link>
+                <Link to={createPageUrl('ScottFinanceAdmin')}>
+                    <motion.div
+                        whileTap={{ scale: 0.95 }}
+                        className="bg-black border-2 border-cyan-500 rounded-lg p-2 text-center hover:bg-cyan-500/10"
+                        style={{ boxShadow: '0 0 15px rgba(6, 182, 212, 0.3)' }}
+                    >
+                        <DollarSign className="w-5 h-5 text-cyan-400 mx-auto mb-1" />
+                        <p className="text-cyan-400 font-black font-mono text-[8px]">FIN</p>
+                    </motion.div>
+                </Link>
                 <Link to={createPageUrl('ScottSettings')}>
                     <motion.div
                         whileTap={{ scale: 0.95 }}
