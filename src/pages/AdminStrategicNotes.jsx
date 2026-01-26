@@ -79,6 +79,7 @@ export default function AdminStrategicNotes() {
         </motion.div>
 
         {/* SCOTT → ROBBIE WILLIAMS' MANAGER */}
+        {(!searchQuery || "robbie williams manager scott next week demo".includes(searchQuery)) && (
         <Card className="bg-gradient-to-r from-pink-900/60 to-red-900/60 border-4 border-pink-500 shadow-[0_0_100px_rgba(236,72,153,1)] animate-pulse">
           <CardContent className="p-8">
             <div className="flex items-center gap-3 mb-4">
