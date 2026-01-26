@@ -56,32 +56,7 @@ export default function Type1AI51Protocol() {
     red: { border: 'border-red-500', text: 'text-red-400', bg: 'bg-red-500/10', icon: 'text-red-400' }
   };
 
-  const ActionCard = ({ card }) => {
-    const c = colorMap[card.color];
-    const IconComponent = card.icon;
 
-    return (
-      <motion.div
-        whileTap={{ scale: 0.95 }}
-        className={`bg-black border-2 ${c.border} rounded-lg p-4 ${c.bg}`}
-        style={{ boxShadow: `0 0 15px rgba(${card.color === 'amber' ? '251, 146, 60' : card.color === 'cyan' ? '6, 182, 212' : card.color === 'purple' ? '168, 85, 247' : '59, 130, 246'}, 0.3)` }}
-      >
-        <div className="flex items-center gap-2 mb-3">
-          <IconComponent className={`w-5 h-5 ${c.icon}`} />
-          <h3 className={`text-sm font-black font-mono ${c.text}`}>{card.time}</h3>
-        </div>
-        <p className="text-gray-400 text-xs font-mono mb-3">{card.description}</p>
-        <div className="space-y-1">
-          {card.tasks.map((task, i) => (
-            <div key={i} className="text-white text-xs font-mono flex items-start gap-2">
-              <span className={c.text}>▪</span>
-              <span>{task}</span>
-            </div>
-          ))}
-        </div>
-      </motion.div>
-    );
-  };
 
   const FrequencyVisualizer = ({ frequency }) => {
     const barWidth = (frequency.power / 100) * 100;
