@@ -85,7 +85,7 @@ ${emailText}`,
             
             <button
                 onClick={() => navigate(-1)}
-                className="flex items-center gap-2 text-gray-500 hover:text-cyan-400 transition-all mb-6"
+                className="flex items-center gap-2 text-gray-600 hover:text-cyan-400 transition-all mb-6"
             >
                 <ArrowLeft className="w-4 h-4" />
                 <span className="text-xs font-bold font-mono">BACK</span>
@@ -97,8 +97,8 @@ ${emailText}`,
             </div>
 
             {/* PASTE EMAIL */}
-            <div className="bg-black border border-gray-800 rounded p-4 mb-6">
-                <h2 className="text-white font-black font-mono text-lg mb-4">PASTE EMAIL</h2>
+            <div className="bg-black border-2 border-cyan-500 rounded p-4 mb-6" style={{ boxShadow: '0 0 15px rgba(6, 182, 212, 0.3)' }}>
+                <h2 className="text-cyan-400 font-black font-mono text-lg mb-4">PASTE EMAIL</h2>
                 <Textarea
                     value={emailText}
                     onChange={(e) => setEmailText(e.target.value)}

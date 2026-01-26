@@ -260,20 +260,20 @@ export default function ScottGigOffers() {
                 </Link>
             </div>
 
-            <div className="mb-6">
-                <h1 className="text-4xl font-black text-white font-mono mb-2">GIG OFFERS</h1>
+            <div className="mb-6 pb-4 border-b-2 border-green-500">
+                <h1 className="text-4xl font-black text-green-400 font-mono mb-2">GIG OFFERS</h1>
                 <p className="text-gray-600 text-xs font-mono">Paste email → AI parses</p>
                 <button
                     onClick={() => navigate(createPageUrl('ScottAddShow') + (artistId ? `?id=${artistId}` : ''))}
-                    className="mt-3 bg-cyan-500 hover:bg-cyan-600 text-black font-black py-2 px-4 rounded font-mono text-sm"
+                    className="mt-3 bg-green-500 hover:bg-green-600 text-black font-black py-2 px-4 rounded font-mono text-sm"
                 >
                     + MANUAL ADD SHOW
                 </button>
             </div>
 
             {/* NEW OFFER */}
-            <div className="bg-black border border-gray-800 rounded p-4 mb-6">
-                <h2 className="text-white font-black font-mono text-lg mb-4">+ NEW OFFER</h2>
+            <div className="bg-black border-2 border-green-500 rounded p-4 mb-6" style={{ boxShadow: '0 0 15px rgba(16, 185, 129, 0.3)' }}>
+                <h2 className="text-green-400 font-black font-mono text-lg mb-4">+ NEW OFFER</h2>
 
                 {/* FILE UPLOAD */}
                 <div className="mb-3">
@@ -309,7 +309,7 @@ export default function ScottGigOffers() {
                 <Button
                     onClick={parseEmail}
                     disabled={parsing || (!emailText.trim() && !uploadedFile)}
-                    className="w-full bg-cyan-500 hover:bg-cyan-600 text-black font-black py-3 font-mono"
+                    className="w-full bg-green-500 hover:bg-green-600 text-black font-black py-3 font-mono"
                 >
                     {parsing ? 'AI PARSING...' : 'PARSE EMAIL/PDF'}
                 </Button>
@@ -322,14 +322,14 @@ export default function ScottGigOffers() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -20 }}
-                        className="bg-black border border-gray-800 rounded p-4 mb-6"
+                        className="bg-black border-2 border-green-500 rounded p-4 mb-6" style={{ boxShadow: '0 0 15px rgba(16, 185, 129, 0.3)' }}
                     >
                         <div className="flex items-center justify-between mb-4">
-                            <h3 className="text-white font-black font-mono">PARSED DATA</h3>
+                            <h3 className="text-green-400 font-black font-mono">PARSED DATA</h3>
                             <Button
                                 onClick={handleSave}
                                 disabled={createMutation.isPending}
-                                className="bg-cyan-500 hover:bg-cyan-600 text-black font-black font-mono"
+                                className="bg-green-500 hover:bg-green-600 text-black font-black font-mono"
                             >
                                 {createMutation.isPending ? 'SAVING...' : 'SAVE'}
                             </Button>
@@ -354,7 +354,7 @@ export default function ScottGigOffers() {
 
             {/* EXISTING OFFERS WITH WORKFLOW */}
             <div className="space-y-4">
-                <h2 className="text-white font-black font-mono text-lg mb-3">ALL OFFERS</h2>
+                <h2 className="text-green-400 font-black font-mono text-lg mb-3">ALL OFFERS</h2>
                 {isLoading ? (
                     <p className="text-gray-600 text-center py-8 font-mono text-sm">Loading...</p>
                 ) : offers.length === 0 ? (
@@ -394,7 +394,7 @@ export default function ScottGigOffers() {
                                             <Trash2 className="w-4 h-4" />
                                         </button>
                                     </div>
-                                    <p className="text-cyan-400 font-mono text-sm mb-1">
+                                    <p className="text-green-400 font-mono text-sm mb-1">
                                         {format(new Date(offer.date), 'd MMM yyyy')} • £{offer.fee?.toLocaleString()}
                                     </p>
                                     <p className="text-gray-600 text-xs font-mono">{offer.city}, {offer.country}</p>

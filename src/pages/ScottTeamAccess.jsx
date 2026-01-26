@@ -81,13 +81,13 @@ export default function ScottTeamAccess() {
                 <span className="text-sm font-bold font-mono">BACK</span>
             </button>
 
-            <div className="mb-6">
+            <div className="mb-6 pb-4 border-b-2 border-cyan-500">
                 <h1 className="text-3xl font-black text-cyan-400 font-mono mb-2">TEAM ACCESS</h1>
                 <p className="text-gray-600 text-sm font-mono">Add assistants & managers</p>
             </div>
 
             {/* ADD MEMBER FORM */}
-            <div className="bg-black border-2 border-cyan-500 rounded-lg p-4 mb-6">
+            <div className="bg-black border-2 border-cyan-500 rounded-lg p-4 mb-6" style={{ boxShadow: '0 0 15px rgba(6, 182, 212, 0.3)' }}>
                 <h2 className="text-cyan-400 font-black font-mono text-lg mb-4">+ ADD TEAM MEMBER</h2>
                 
                 <div className="space-y-3 mb-4">

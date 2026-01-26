@@ -94,7 +94,7 @@ export default function ScottInvoices() {
             
             <button
                 onClick={() => navigate(-1)}
-                className="flex items-center gap-2 text-gray-500 hover:text-cyan-400 transition-all mb-6"
+                className="flex items-center gap-2 text-gray-600 hover:text-amber-400 transition-all mb-6"
             >
                 <ArrowLeft className="w-4 h-4" />
                 <span className="text-sm font-bold font-mono">BACK</span>
@@ -111,7 +111,7 @@ export default function ScottInvoices() {
                     </div>
                     <button
                         onClick={() => setShowForm(!showForm)}
-                        className="bg-cyan-500 hover:bg-cyan-400 text-black font-black px-6 py-3 rounded-xl flex items-center gap-2"
+                        className="bg-amber-500 hover:bg-amber-400 text-black font-black px-6 py-3 rounded-xl flex items-center gap-2"
                     >
                         <Plus className="w-5 h-5" />
                         NEW
@@ -142,12 +142,12 @@ export default function ScottInvoices() {
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
-                        className="bg-gray-900 border-2 border-cyan-500 rounded-lg p-6 mb-6"
+                        className="bg-black border-2 border-amber-500 rounded-lg p-6 mb-6" style={{ boxShadow: '0 0 15px rgba(245, 158, 11, 0.3)' }}
                     >
                         <form onSubmit={handleSubmit} className="space-y-4">
                             {!artistId && (
                                 <div>
-                                    <label className="text-cyan-400 text-xs font-bold font-mono mb-2 block">ARTIST</label>
+                                    <label className="text-amber-400 text-xs font-bold font-mono mb-2 block">ARTIST</label>
                                     <select
                                         required
                                         value={formData.artist_id}
@@ -164,7 +164,7 @@ export default function ScottInvoices() {
 
                             <div className="grid grid-cols-2 gap-3">
                                 <div>
-                                    <label className="text-cyan-400 text-xs font-bold font-mono mb-2 block">AMOUNT</label>
+                                    <label className="text-amber-400 text-xs font-bold font-mono mb-2 block">AMOUNT</label>
                                     <Input
                                         type="number"
                                         required
@@ -175,7 +175,7 @@ export default function ScottInvoices() {
                                     />
                                 </div>
                                 <div>
-                                    <label className="text-cyan-400 text-xs font-bold font-mono mb-2 block">DATE</label>
+                                    <label className="text-amber-400 text-xs font-bold font-mono mb-2 block">DATE</label>
                                     <Input
                                         type="date"
                                         required
@@ -187,7 +187,7 @@ export default function ScottInvoices() {
                             </div>
 
                             <div>
-                                <label className="text-cyan-400 text-xs font-bold font-mono mb-2 block">DESCRIPTION</label>
+                                <label className="text-amber-400 text-xs font-bold font-mono mb-2 block">DESCRIPTION</label>
                                 <Input
                                     required
                                     value={formData.description}
@@ -198,7 +198,7 @@ export default function ScottInvoices() {
                             </div>
 
                             <div>
-                                <label className="text-cyan-400 text-xs font-bold font-mono mb-2 block">NOTES FOR ACCOUNTANT</label>
+                                <label className="text-amber-400 text-xs font-bold font-mono mb-2 block">NOTES FOR ACCOUNTANT</label>
                                 <Textarea
                                     value={formData.accountant_notes}
                                     onChange={(e) => setFormData({...formData, accountant_notes: e.target.value})}
@@ -218,7 +218,7 @@ export default function ScottInvoices() {
                                 <Button
                                     type="submit"
                                     disabled={createMutation.isPending}
-                                    className="flex-1 bg-cyan-500 hover:bg-cyan-400 text-black font-black"
+                                    className="flex-1 bg-amber-500 hover:bg-amber-400 text-black font-black"
                                 >
                                     {createMutation.isPending ? 'SAVING...' : 'CREATE INVOICE'}
                                 </Button>
