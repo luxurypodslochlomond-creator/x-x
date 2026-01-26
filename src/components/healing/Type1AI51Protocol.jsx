@@ -42,7 +42,6 @@ export default function Type1AI51Protocol() {
     {
       id: 'insulin',
       label: 'INSULIN MANAGEMENT',
-      icon: '💉',
       color: 'green',
       content: [
         { title: 'DOSING BASICS', items: ['Same time daily = predictability', 'Rotate injection sites (prevent lumps)', 'Log EVERY dose in your diary', 'Keep 2-week backup supply: home + work + bag', 'Check expiry dates monthly'] },
