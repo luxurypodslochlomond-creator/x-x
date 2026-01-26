@@ -75,12 +75,27 @@ export default function ScottGigOffers() {
         const file = e.target.files?.[0];
         if (!file) return;
         
+        // Validate file size (max 10MB)
+        const MAX_SIZE = 10 * 1024 * 1024;
+        if (file.size > MAX_SIZE) {
+            toast.error('File too large (max 10MB)');
+            return;
+        }
+        
         setUploading(true);
         try {
-            const { file_url } = await base44.integrations.Core.UploadFile({ file });
+            // Timeout protection: 15 seconds max
+            const uploadPromise = base44.integrations.Core.UploadFile({ file });
+            const timeoutPromise = new Promise((_, reject) => 
+                setTimeout(() => reject(new Error('Upload timeout')), 15000)
+            );
+            
+            const { file_url } = await Promise.race([uploadPromise, timeoutPromise]);
             setUploadedFile(file_url);
+            toast.success('File uploaded ✓');
         } catch (error) {
-            alert('Upload failed: ' + error.message);
+            toast.error(`Upload failed: ${error.message}`);
+            setUploadedFile(null);
         } finally {
             setUploading(false);
         }
