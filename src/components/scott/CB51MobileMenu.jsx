@@ -83,7 +83,7 @@ const CB51MobileMenu = ({ isOpen, onClose }) => {
                         initial={{ x: '-100%' }}
                         animate={{ x: 0 }}
                         exit={{ x: '-100%' }}
-                        transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+                        transition={{ type: 'spring', damping: 30, stiffness: 300, mass: 0.8 }}
                         className="fixed top-0 left-0 bottom-0 w-[85vw] max-w-sm bg-[#0a0f1a] border-r border-cyan-500/30 z-[70] overflow-y-auto"
                     >
                         {/* HEADER */}
