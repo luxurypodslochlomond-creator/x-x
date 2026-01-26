@@ -280,16 +280,20 @@ export default function Type1AI51Protocol() {
         {selectedTab === 'daily' && (
           <div className="space-y-3">
             {activeProtocol.items.map((block, i) => (
-              <div key={i} className="bg-black/50 border border-cyan-500/30 rounded p-4">
-                <p className="text-green-400 font-black font-mono mb-2">{block.time}</p>
+              <motion.div 
+                key={i} 
+                whileHover={{ x: 5 }}
+                className="bg-black border border-cyan-500/40 rounded p-4 hover:border-cyan-500/80 transition-all"
+              >
+                <p className="text-cyan-400 font-black font-mono mb-2">{block.time}</p>
                 <ul className="space-y-1">
                   {block.tasks.map((task, j) => (
-                    <li key={j} className="text-white text-sm font-mono flex items-center gap-2">
-                      <span className="text-cyan-400">✓</span> {task}
+                    <li key={j} className="text-white text-sm font-mono flex items-start gap-2">
+                      <span className="text-cyan-400 flex-shrink-0">✓</span> {task}
                     </li>
                   ))}
                 </ul>
-              </div>
+              </motion.div>
             ))}
           </div>
         )}
