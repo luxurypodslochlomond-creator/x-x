@@ -307,11 +307,11 @@ export default function CB51() {
                     <Link to={createPageUrl('ScottGigOffers')}>
                         <motion.div
                             whileTap={{ scale: 0.95 }}
-                            className="bg-black border-2 border-cyan-500 rounded-lg p-2 text-center hover:bg-cyan-500/10"
-                            style={{ boxShadow: '0 0 15px rgba(6, 182, 212, 0.3)' }}
+                            className="bg-black border-2 border-green-500 rounded-lg p-2 text-center hover:bg-green-500/10"
+                            style={{ boxShadow: '0 0 15px rgba(16, 185, 129, 0.3)' }}
                         >
-                            <Zap className="w-4 h-4 text-cyan-400 mx-auto mb-1" />
-                            <p className="text-cyan-400 font-black font-mono text-[8px]">PARSE GIG</p>
+                            <Zap className="w-4 h-4 text-green-400 mx-auto mb-1" />
+                            <p className="text-green-400 font-black font-mono text-[8px]">PARSE GIG</p>
                         </motion.div>
                     </Link>
                     <Link to={createPageUrl('ScottToDo')}>
@@ -327,11 +327,11 @@ export default function CB51() {
                     <Link to={createPageUrl('ScottCalendarView')}>
                         <motion.div
                             whileTap={{ scale: 0.95 }}
-                            className="bg-black border-2 border-cyan-500 rounded-lg p-2 text-center hover:bg-cyan-500/10"
-                            style={{ boxShadow: '0 0 15px rgba(6, 182, 212, 0.3)' }}
+                            className="bg-black border-2 border-blue-500 rounded-lg p-2 text-center hover:bg-blue-500/10"
+                            style={{ boxShadow: '0 0 15px rgba(59, 130, 246, 0.3)' }}
                         >
-                            <Calendar className="w-4 h-4 text-cyan-400 mx-auto mb-1" />
-                            <p className="text-cyan-400 font-black font-mono text-[8px]">SCHEDULE</p>
+                            <Calendar className="w-4 h-4 text-blue-400 mx-auto mb-1" />
+                            <p className="text-blue-400 font-black font-mono text-[8px]">SCHEDULE</p>
                         </motion.div>
                     </Link>
                 </div>
@@ -342,33 +342,33 @@ export default function CB51() {
                 <Link to={createPageUrl('ScottGigOffers')}>
                     <motion.div
                         whileTap={{ scale: 0.95 }}
-                        className="bg-black border-2 border-cyan-500 rounded-lg p-2 text-center hover:bg-cyan-500/10"
-                        style={{ boxShadow: '0 0 15px rgba(6, 182, 212, 0.3)' }}
+                        className="bg-black border-2 border-green-500 rounded-lg p-2 text-center hover:bg-green-500/10"
+                        style={{ boxShadow: '0 0 15px rgba(16, 185, 129, 0.3)' }}
                     >
-                        <Zap className="w-5 h-5 text-cyan-400 mx-auto mb-1" />
-                        <p className="text-cyan-400 font-black font-mono text-[8px]">GIGS</p>
+                        <Zap className="w-5 h-5 text-green-400 mx-auto mb-1" />
+                        <p className="text-green-400 font-black font-mono text-[8px]">GIGS</p>
                         {allOffers.length > 0 && <p className="text-white text-sm font-black font-mono">{stats.pendingOffers + stats.awaitingBand}</p>}
                     </motion.div>
                 </Link>
                 <Link to={createPageUrl('ScottCalendarView')}>
                     <motion.div
                         whileTap={{ scale: 0.95 }}
-                        className="bg-black border-2 border-cyan-500 rounded-lg p-2 text-center hover:bg-cyan-500/10"
-                        style={{ boxShadow: '0 0 15px rgba(6, 182, 212, 0.3)' }}
+                        className="bg-black border-2 border-blue-500 rounded-lg p-2 text-center hover:bg-blue-500/10"
+                        style={{ boxShadow: '0 0 15px rgba(59, 130, 246, 0.3)' }}
                     >
-                        <Calendar className="w-5 h-5 text-cyan-400 mx-auto mb-1" />
-                        <p className="text-cyan-400 font-black font-mono text-[8px]">CAL</p>
+                        <Calendar className="w-5 h-5 text-blue-400 mx-auto mb-1" />
+                        <p className="text-blue-400 font-black font-mono text-[8px]">CAL</p>
                         {stats.upcomingGigs > 0 && <p className="text-white text-sm font-black font-mono">{stats.upcomingGigs}</p>}
                     </motion.div>
                 </Link>
                 <Link to={createPageUrl('ScottMessageInbox')}>
                     <motion.div
                         whileTap={{ scale: 0.95 }}
-                        className="bg-black border-2 border-cyan-500 rounded-lg p-2 text-center hover:bg-cyan-500/10"
-                        style={{ boxShadow: '0 0 15px rgba(6, 182, 212, 0.3)' }}
+                        className="bg-black border-2 border-pink-500 rounded-lg p-2 text-center hover:bg-pink-500/10"
+                        style={{ boxShadow: '0 0 15px rgba(236, 72, 153, 0.3)' }}
                     >
-                        <MessageSquare className="w-5 h-5 text-cyan-400 mx-auto mb-1" />
-                        <p className="text-cyan-400 font-black font-mono text-[8px]">EMAIL</p>
+                        <MessageSquare className="w-5 h-5 text-pink-400 mx-auto mb-1" />
+                        <p className="text-pink-400 font-black font-mono text-[8px]">EMAIL</p>
                     </motion.div>
                 </Link>
                 <Link to={createPageUrl('ScottTeamAccess')}>
@@ -384,24 +384,24 @@ export default function CB51() {
                 <Link to={createPageUrl('ExtensionManager')}>
                     <motion.div
                         whileTap={{ scale: 0.95 }}
-                        className="bg-black border-2 border-cyan-500 rounded-lg p-2 text-center hover:bg-cyan-500/10"
-                        style={{ boxShadow: '0 0 15px rgba(6, 182, 212, 0.3)' }}
+                        className="bg-black border-2 border-amber-500 rounded-lg p-2 text-center hover:bg-amber-500/10"
+                        style={{ boxShadow: '0 0 15px rgba(245, 158, 11, 0.3)' }}
                     >
-                        <Zap className="w-5 h-5 text-cyan-400 mx-auto mb-1" />
-                        <p className="text-cyan-400 font-black font-mono text-[8px]">EXT</p>
+                        <Zap className="w-5 h-5 text-amber-400 mx-auto mb-1" />
+                        <p className="text-amber-400 font-black font-mono text-[8px]">EXT</p>
                     </motion.div>
                 </Link>
                 <Link to={createPageUrl('ScottSettings')}>
                     <motion.div
                         whileTap={{ scale: 0.95 }}
-                        className="bg-black border-2 border-cyan-500 rounded-lg p-2 text-center hover:bg-cyan-500/10"
-                        style={{ boxShadow: '0 0 15px rgba(6, 182, 212, 0.3)' }}
+                        className="bg-black border-2 border-amber-500 rounded-lg p-2 text-center hover:bg-amber-500/10"
+                        style={{ boxShadow: '0 0 15px rgba(245, 158, 11, 0.3)' }}
                     >
-                        <svg className="w-5 h-5 text-cyan-400 mx-auto mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-5 h-5 text-amber-400 mx-auto mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                         </svg>
-                        <p className="text-cyan-400 font-black font-mono text-[8px]">SET</p>
+                        <p className="text-amber-400 font-black font-mono text-[8px]">SET</p>
                     </motion.div>
                 </Link>
             </div>
