@@ -10,85 +10,41 @@ export default function Type1AI51Protocol() {
 
 
   const sections = [
-    {
-      id: 'insulin',
-      label: 'INSULIN MANAGEMENT',
-      color: 'green',
-      content: [
-        { title: 'DOSING BASICS', items: ['Same time daily = predictability', 'Rotate injection sites (prevent lumps)', 'Log EVERY dose in your diary', 'Keep 2-week backup supply: home + work + bag', 'Check expiry dates monthly'] },
-        { title: 'STORAGE & TRAVEL', items: ['Current vial: Room temp (below 30°C)', 'Backup vials: Fridge (2-8°C)', 'NEVER freeze or heat insulin', 'Travel kit: Insulated pouch + ice packs', 'Always carry backup needle + meter'] },
-        { title: 'HYPOGLYCEMIA (LOW)', items: ['SYMPTOMS: Shaking, sweating, confusion, anxiety', 'FAST: 15g carbs (glucose tablets or juice)', '15-15 RULE: Eat 15g, wait 15min, recheck', 'After recovery: Eat slow carbs + protein', 'Tell friends/family what hypo looks like'] },
-        { title: 'SICK DAYS', items: ['NEVER SKIP INSULIN - ever', 'Check glucose EVERY 2-3 HOURS', 'Stay hydrated (water only)', 'Soft carbs if stomach OK', 'Call NHS 111 SAME DAY if vomiting'] }
-      ],
-      resources: [
-        { name: 'Diabetes UK Insulin Guide', url: 'https://www.diabetes.org.uk/guide-to-diabetes/managing-your-diabetes/treating-your-diabetes/insulin' },
-        { name: 'NHS Type 1 Diabetes', url: 'https://www.nhs.uk/conditions/type-1-diabetes/' }
-      ]
-    },
-    {
-      id: 'monitoring',
-      label: 'BLOOD GLUCOSE MONITORING',
-      color: 'cyan',
-      content: [
-        { title: 'CGM vs FINGER PRICKS', items: ['CGM (continuous): Every 5min data, trends, alarms', 'Finger pricks: Before meals, before bed, when low', 'Both give you PATTERNS - what foods spike you?', 'NHS may fund CGM if you meet criteria - ask your GP', 'Track patterns in notes app or diabetes app'] },
-        { title: 'TARGET RANGES', items: ['Fasting (morning): 5-7 mmol/L', 'Before meals: 4-7 mmol/L', 'After meals (2hrs): 8-10 mmol/L', 'Bedtime: 6-8 mmol/L', 'Above 20 mmol/L = contact GP', 'Below 3.5 mmol/L = emergency'] }
-      ],
-      resources: [
-        { name: 'NICE Diabetes Management', url: 'https://www.nice.org.uk/guidance/ng17' }
-      ]
-    },
-    {
-      id: 'frequencies',
-      label: 'HEALING FREQUENCIES',
-      color: 'purple',
-      isFrequencySection: true,
-      frequencies: [
-        { hz: 432, name: 'BASELINE CALM', science: 'Activates parasympathetic nervous system. Lowers cortisol. Improves insulin sensitivity.', power: 85 },
-        { hz: 528, name: 'CELLULAR REPAIR', science: 'DNA repair activation. Reduces inflammatory T-cells. Supports immune healing.', power: 92 }
-      ]
-    },
-    {
-      id: 'nutrition',
-      label: 'NUTRITION GUIDE',
-      color: 'green',
-      content: [
-        { title: 'CARB COUNTING BASICS', items: ['1 portion carbs = 10-15g', 'Read food labels for total carbs', 'Fiber slows carb absorption (subtract half)', 'Protein + fat slow glucose rise', 'Apps: MyFitnessPal, Carbs & Cals'] },
-        { title: 'FOODS THAT SPIKE YOU', items: ['White bread, sugary drinks (avoid)', 'But everyone is different - YOUR data is key', 'Track what you eat + your glucose rise', 'Some foods spike you, not others', 'Find your personal triggers'] },
-        { title: 'MEAL PREP SAVES LIFE', items: ['Know carbs BEFORE eating = better insulin dosing', 'Batch cook proteins on Sunday', 'Keep emergency snacks: nuts, cheese, dark chocolate', 'Eat regular meals = stable glucose'] }
-      ],
-      resources: [
-        { name: 'Diabetes UK Nutrition', url: 'https://www.diabetes.org.uk/guide-to-diabetes/managing-your-diabetes/eating-well' }
-      ]
-    },
-    {
-      id: 'mental',
-      label: 'MENTAL HEALTH',
-      color: 'pink',
-      content: [
-        { title: 'TYPE 1 IS HARD', items: ['24/7 management = burnout is real', 'Having hard days is NORMAL', 'Guilt about glucose is NOT your fault', 'Tell someone if you\'re struggling', 'Therapy helps more than you think'] },
-        { title: 'SUPPORT + RESOURCES', items: ['Samaritans: 116 123 (24/7 free)', 'JDRF Peer Support: jdrf.org.uk', 'Your GP can refer to counseling', 'Type 1 Online Reddit: r/Type1Diabetes', 'Support groups near you: Diabetes UK'] },
-        { title: 'DAILY MENTAL CHECK-IN', items: ['Journal: How are you actually feeling today?', 'Emotions affect glucose (cortisol = high glucose)', 'Breathwork helps: 4-7-8 breathing (calms nervous system)', 'Move your body daily (even 10min walk)', 'Sleep = mental health foundation'] }
-      ],
-      resources: [
-        { name: 'Samaritans 24/7', url: 'https://www.samaritans.org/' },
-        { name: 'JDRF Support Groups', url: 'https://www.jdrf.org.uk/' }
-      ]
-    },
-    {
-      id: 'emergency',
-      label: 'EMERGENCY PROTOCOL',
-      color: 'red',
-      content: [
-        { title: 'SEVERE HYPOGLYCEMIA', items: ['Unconscious or seizures = CALL 999', 'Use glucagon kit if trained', 'Hospital: IV glucose stabilization', 'After: Rest + recovery plan with GP'] },
-        { title: 'SEVERE HYPERGLYCEMIA (300+)', items: ['Check blood sugar', 'Drink water', 'Extra rapid-acting insulin', 'Light movement', 'Recheck in 2 hours'] },
-        { title: 'DKA (Diabetic Ketoacidosis)', items: ['CALL 999 IMMEDIATELY', 'Symptoms: Nausea, vomiting, confusion, fruity breath', 'Hospital: IV fluids + insulin + electrolytes', 'This is life-threatening - do not wait'] },
-        { title: 'LOST/DAMAGED INSULIN', items: ['CALL NHS 111 IMMEDIATELY', 'Emergency prescription SAME DAY', 'Pharmacy can help in crisis'] }
-      ],
-      resources: [
-        { name: 'NHS 111 - Urgent Care', url: 'https://www.nhs.uk/using-the-nhs/nhs-services/urgent-and-emergency-services/nhs-111/' }
-      ]
-    }
-  ];
+      {
+        id: 'frequencies',
+        label: 'HEALING FREQUENCIES FOR TYPE 1',
+        color: 'purple',
+        isFrequencySection: true,
+        frequencies: [
+          { hz: 432, name: 'BASELINE CALM', science: 'Parasympathetic activation. Lowers cortisol. Improves insulin sensitivity & glucose stability.', power: 85 },
+          { hz: 528, name: 'CELLULAR REPAIR', science: 'DNA repair + immune healing. Reduces inflammatory T-cells. Anti-stress at cellular level.', power: 92 }
+        ]
+      },
+      {
+        id: 'nervous',
+        label: 'NERVOUS SYSTEM HEALING',
+        color: 'pink',
+        content: [
+          { title: 'WHY FREQUENCIES MATTER', items: ['Type 1 = nervous system stress 24/7', 'Cortisol spikes = glucose spikes', '432 Hz calms sympathetic (fight/flight)', '528 Hz activates parasympathetic (rest/heal)', 'Consistent frequency use = smoother glucose patterns'] },
+          { title: 'DAILY PROTOCOL', items: ['20min 432 Hz morning (baseline)', '20min 528 Hz evening (repair)', 'Or: 10min whenever anxiety hits', 'Use headphones or phone speaker', 'Just breathe + listen. That\'s it.'] },
+          { title: 'WHEN IT WORKS BEST', items: ['Before meals (calm nervous system first)', 'During stress/anxiety (immediate effect)', 'Before sleep (better glucose overnight)', 'After highs/lows (emotional reset)', 'Anytime cortisol is running hot'] }
+        ]
+      },
+      {
+        id: 'truth',
+        label: 'PURE TRUTH',
+        color: 'cyan',
+        content: [
+          { title: 'WHAT THIS IS', items: ['NOT a replacement for insulin', 'IS nervous system regulation', 'Frequencies affect cortisol → glucose stability', 'Works alongside medical care, not instead of it', 'Your GP still matters. Always.'] },
+          { title: 'WHAT YOU ALREADY KNOW', items: ['You manage your own Type 1', 'You know your patterns', 'You know what spikes you', 'You know when you\'re stressed', 'Use frequencies + that knowledge'] },
+          { title: 'REAL BENEFITS', items: ['Fewer stress-induced spikes', 'Better sleep = more stable glucose', 'Less anxiety = less hypos', 'Calmer nervous system = better decisions', 'You feel the difference in 3-5 days'] }
+        ],
+        resources: [
+          { name: 'Diabetes UK - Stress & Glucose', url: 'https://www.diabetes.org.uk/guide-to-diabetes/managing-your-diabetes/stress' },
+          { name: 'JDRF - Mental Health Support', url: 'https://www.jdrf.org.uk/' }
+        ]
+      }
+    ];
 
   const colorMap = {
     amber: { border: 'border-amber-500', text: 'text-amber-400', bg: 'bg-amber-500/10', icon: 'text-amber-400' },
