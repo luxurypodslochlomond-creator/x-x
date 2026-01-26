@@ -297,7 +297,7 @@ export default function Type1AI51Protocol() {
 
           <div className="p-4 space-y-3 max-h-[60vh] overflow-y-auto">
             {expandedSection === 'daily' && (
-          <div className="space-y-3">
+              <div className="space-y-3">
             {activeProtocol.items.map((block, i) => (
               <motion.div 
                 key={i} 
