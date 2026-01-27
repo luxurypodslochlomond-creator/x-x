@@ -163,12 +163,7 @@ export default function CB51() {
                 <PushNotificationManager />
             </div>
 
-            {/* IN-APP NOTIFICATION INBOX - ONLY SHOW IF OFFERS PENDING */}
-            {stats.pendingOffers > 0 && (
-                <div className="mb-6">
-                    <CB51NotificationInbox />
-                </div>
-            )}
+
 
             {/* COMPACT ARTISTS GRID */}
             <div className="mb-8 pt-4">
@@ -185,56 +180,42 @@ export default function CB51() {
                     <>
                         <div className="grid grid-cols-3 gap-4">
                             {artists.map((artist) => (
-                                <Link 
-                                    key={artist.id}
-                                    to={createPageUrl(`ScottArtistHome?id=${artist.id}`)}
-                                    className="relative w-20 h-20"
-                                >
-                                    <motion.div
-                                        whileTap={{ scale: 0.96 }}
-                                        className="relative w-full h-full bg-black border-2 border-cyan-500 rounded-full overflow-hidden group flex flex-col items-center justify-center"
-                                        style={{ boxShadow: '0 0 15px rgba(6, 182, 212, 0.3)' }}
+                                <div key={artist.id} className="relative">
+                                    <Link 
+                                        to={createPageUrl(`ScottArtistHome?id=${artist.id}`)}
+                                        className="block"
                                     >
-                                        <div className="flex flex-col items-center text-center gap-1">
+                                        <motion.div
+                                            whileTap={{ scale: 0.96 }}
+                                            className="w-20 h-20 bg-black border-2 border-cyan-500 rounded-full overflow-hidden flex items-center justify-center"
+                                            style={{ boxShadow: '0 0 15px rgba(6, 182, 212, 0.3)' }}
+                                        >
                                             {artist.profile_pic_url ? (
                                                 <img 
                                                     src={artist.profile_pic_url} 
                                                     alt={artist.name}
-                                                    className="w-14 h-14 rounded-full object-cover border border-cyan-500"
+                                                    className="w-full h-full object-cover"
                                                 />
                                             ) : (
-                                                <div className="w-14 h-14 rounded-full bg-cyan-500 text-black font-black text-lg flex items-center justify-center">
+                                                <div className="w-full h-full bg-cyan-500 text-black font-black text-2xl flex items-center justify-center">
                                                     {artist.name.charAt(0)}
                                                 </div>
                                             )}
-                                        </div>
+                                        </motion.div>
+                                    </Link>
 
-                                        {/* Hover menu - Edit + Archive */}
-                                        <div className="absolute inset-0 bg-black/90 rounded-full opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-1 pointer-events-none group-hover:pointer-events-auto">
-                                            <p className="text-white font-black text-[8px] font-mono text-center px-1">{artist.name}</p>
-                                            <button
-                                                onClick={(e) => {
-                                                    e.preventDefault();
-                                                    e.stopPropagation();
-                                                    navigate(createPageUrl(`ScottAddArtist?edit=${artist.id}`));
-                                                }}
-                                                className="text-cyan-400 text-[7px] font-bold font-mono hover:text-cyan-300"
-                                            >
-                                                EDIT
-                                            </button>
-                                            <button
-                                                onClick={(e) => {
-                                                    e.preventDefault();
-                                                    e.stopPropagation();
-                                                    handleArchiveArtist(artist);
-                                                }}
-                                                className="text-red-400 text-[7px] font-bold font-mono hover:text-red-300"
-                                            >
-                                                ARCHIVE
-                                            </button>
-                                        </div>
-                                    </motion.div>
-                                </Link>
+                                    {/* Edit button - bottom right corner */}
+                                    <button
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            navigate(createPageUrl(`ScottAddArtist?edit=${artist.id}`));
+                                        }}
+                                        className="absolute -bottom-1 -right-1 w-6 h-6 bg-amber-500 hover:bg-amber-600 rounded-full flex items-center justify-center text-black transition-all"
+                                        style={{ boxShadow: '0 0 10px rgba(245, 158, 11, 0.5)' }}
+                                    >
+                                        <span className="text-[10px] font-black">✎</span>
+                                    </button>
+                                </div>
                             ))}
 
                             {/* Add Artist Circle */}
