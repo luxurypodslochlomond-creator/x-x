@@ -21,7 +21,6 @@ const CB51MobileMenu = ({ isOpen, onClose }) => {
     const workItems = [
         { title: 'Dashboard', url: createPageUrl('CB51'), icon: Home, color: 'cyan' },
         { title: 'Artists', url: createPageUrl('ScottArtist'), icon: Users, color: 'cyan' },
-        { title: 'Gigs', url: createPageUrl('ScottGigOffers'), icon: Zap, color: 'green' },
         { title: 'Calendar', url: createPageUrl('ScottCalendarView'), icon: Calendar, color: 'cyan' },
         { title: 'Messages', url: createPageUrl('ScottMessageInbox'), icon: Mail, color: 'cyan' },
         { title: 'Tasks', url: createPageUrl('ScottToDo'), icon: ClipboardList, color: 'cyan' },

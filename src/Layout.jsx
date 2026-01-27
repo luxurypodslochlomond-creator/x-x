@@ -402,7 +402,6 @@ const LayoutInner = ({ children, currentPageName }) => {
       { title: "About CB51", url: createPageUrl("CB51About"), icon: Radio, description: "Why we built this" },
       { title: "Dashboard", url: createPageUrl("CB51"), icon: Home, description: "Overview" },
       { title: "Artists", url: createPageUrl("ScottArtist"), icon: Users, description: "Manage roster" },
-      { title: "Gig Offers", url: createPageUrl("ScottGigOffers"), icon: Music, description: "Incoming shows" },
       { title: "Calendar", url: createPageUrl("ScottCalendarView"), icon: Calendar, description: "All shows" },
       { title: "Messages", url: createPageUrl("ScottMessageInbox"), icon: Mail, description: "Inbox" },
       { title: "Finance", url: createPageUrl("ScottFinanceAdmin"), icon: DollarSign, description: "Money tracker" },
