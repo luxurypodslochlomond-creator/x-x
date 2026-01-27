@@ -145,7 +145,7 @@ export default function CB51SecuritySettings() {
       {/* FOOTER NOTE */}
       <div className="bg-black border border-cyan-500/30 rounded-lg p-3">
         <p className="text-gray-400 text-xs font-mono leading-relaxed">
-          Questions? Email <span className="text-cyan-400 font-black">security@cb51.com</span> — we answer everything.
+          Questions? Email <span className="text-cyan-400 font-black">family@uf51.love</span> — we answer everything.
         </p>
       </div>
     </div>
