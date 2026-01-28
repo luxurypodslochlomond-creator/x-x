@@ -1,287 +1,234 @@
-import React, { useState } from 'react';
-      import { base44 } from '@/api/base44Client';
-      import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-      import { motion } from 'framer-motion';
-      import { CheckCircle2, XCircle, Clock, ArrowLeft } from 'lucide-react';
-      import { useNavigate } from 'react-router-dom';
-      import { createPageUrl } from '@/utils';
-      import OfflineMeshSync, { storeVoteOffline } from '@/components/scott/OfflineMeshSync';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { createPageUrl } from '@/utils';
+import { Button } from '@/components/ui/button';
+import { Textarea } from '@/components/ui/textarea';
+import { CheckCircle, XCircle, Calendar, DollarSign, MapPin, Music } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { base44 } from '@/api/base44Client';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+
+/**
+ * BAND MEMBER VOTE PAGE
+ * Band member sees gig → GREEN YES / RED NO
+ * If NO → Must explain why (critical for manager)
+ */
 
 export default function ScottBandVote() {
-  const [selectedGigId, setSelectedGigId] = useState(null);
-  const [selectedAnswer, setSelectedAnswer] = useState(null);
-  const [reasonText, setReasonText] = useState('');
-  const navigate = useNavigate();
-  const queryClient = useQueryClient();
+    const navigate = useNavigate();
+    const queryClient = useQueryClient();
+    const [user, setUser] = useState(null);
+    const [decision, setDecision] = useState(null);
+    const [reason, setReason] = useState('');
+    const [submitting, setSubmitting] = useState(false);
 
-  // Get current user
-  const { data: user } = useQuery({
-    queryKey: ['currentUser'],
-    queryFn: () => base44.auth.me()
-  });
+    const urlParams = new URLSearchParams(window.location.search);
+    const offerId = urlParams.get('offerId');
 
-  // Get all gig offers where band member has a response pending
-  const { data: myGigOffers = [], isLoading } = useQuery({
-    queryKey: ['myGigOffers', user?.email],
-    queryFn: async () => {
-      if (!user?.email) return [];
-      
-      // Get all responses for this band member
-      const responses = await base44.entities.ScottBandResponse.filter({
-        band_member_email: user.email
-      });
-      
-      if (!responses.length) return [];
-      
-      // Get full gig offer details for each
-      const offers = await Promise.all(
-        responses.map(async (response) => {
-          const gig = await base44.entities.ScottGigOffer.get(response.gig_offer_id);
-          return { ...gig, myResponse: response };
-        })
-      );
-      
-      return offers.sort((a, b) => new Date(b.date) - new Date(a.date));
-    },
-    enabled: !!user?.email
-  });
+    useEffect(() => {
+        base44.auth.me().then(setUser);
+    }, []);
 
-  // Submit vote (online or offline)
-  const submitVoteMutation = useMutation({
-    mutationFn: async (voteData) => {
-      if (navigator.onLine) {
-        // Online: send directly
-        const response = await base44.entities.ScottBandResponse.update(
-          voteData.responseId,
-          {
-            decision: voteData.decision,
-            reason_if_no: voteData.decision === 'no' ? voteData.reason : null,
-            responded_at: new Date().toISOString()
-          }
-        );
-        return response;
-      } else {
-        // Offline: store locally
-        await storeVoteOffline(selectedGigId, {
-          responseId: voteData.responseId,
-          decision: voteData.decision,
-          reason_if_no: voteData.decision === 'no' ? voteData.reason : null,
-          responded_at: new Date().toISOString()
-        });
-        return { offline: true };
-      }
-    },
-    onSuccess: () => {
-      if (navigator.onLine) {
-        queryClient.invalidateQueries({ queryKey: ['myGigOffers'] });
-      }
-      setSelectedGigId(null);
-      setSelectedAnswer(null);
-      setReasonText('');
-    }
-  });
-
-  const handleSubmitVote = () => {
-    const gig = myGigOffers.find(g => g.id === selectedGigId);
-    if (!gig) return;
-
-    submitVoteMutation.mutate({
-      responseId: gig.myResponse.id,
-      decision: selectedAnswer,
-      reason: reasonText
+    const { data: gigOffer } = useQuery({
+        queryKey: ['gigOffer', offerId],
+        queryFn: () => base44.entities.ScottGigOffer.filter({ id: offerId }).then(r => r[0]),
+        enabled: !!offerId
     });
-  };
 
-  if (isLoading) {
+    const { data: existingResponse } = useQuery({
+        queryKey: ['bandResponse', offerId, user?.email],
+        queryFn: () => base44.entities.ScottBandResponse.filter({ 
+            gig_offer_id: offerId,
+            band_member_email: user?.email 
+        }).then(r => r[0]),
+        enabled: !!offerId && !!user
+    });
+
+    const submitVoteMutation = useMutation({
+        mutationFn: async ({ decision, reason }) => {
+            if (existingResponse) {
+                // Update existing
+                return base44.entities.ScottBandResponse.update(existingResponse.id, {
+                    decision,
+                    reason_if_no: decision === 'no' ? reason : null,
+                    responded_at: new Date().toISOString()
+                });
+            } else {
+                // Create new
+                return base44.entities.ScottBandResponse.create({
+                    gig_offer_id: offerId,
+                    band_member_email: user.email,
+                    band_member_name: user.full_name,
+                    decision,
+                    reason_if_no: decision === 'no' ? reason : null,
+                    responded_at: new Date().toISOString()
+                });
+            }
+        },
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ['bandResponse'] });
+            navigate(createPageUrl('ScottArtistHome') + `?id=${gigOffer.artist_id}`);
+        }
+    });
+
+    const handleSubmit = async () => {
+        if (!decision) return;
+        if (decision === 'no' && !reason.trim()) {
+            alert('Please explain why you\'re saying NO');
+            return;
+        }
+
+        setSubmitting(true);
+        await submitVoteMutation.mutateAsync({ decision, reason });
+        setSubmitting(false);
+    };
+
+    if (!gigOffer) {
+        return (
+            <div className="min-h-screen bg-black text-white flex items-center justify-center">
+                <p className="text-gray-600 font-mono">Loading...</p>
+            </div>
+        );
+    }
+
+    // Already voted
+    if (existingResponse && !decision) {
+        return (
+            <div className="min-h-screen bg-black text-white p-6">
+                <div className="max-w-md mx-auto text-center space-y-6">
+                    <div className={`w-20 h-20 rounded-full flex items-center justify-center mx-auto ${
+                        existingResponse.decision === 'yes' ? 'bg-green-500/20' : 'bg-red-500/20'
+                    }`}>
+                        {existingResponse.decision === 'yes' ? (
+                            <CheckCircle className="w-12 h-12 text-green-400" />
+                        ) : (
+                            <XCircle className="w-12 h-12 text-red-400" />
+                        )}
+                    </div>
+                    <h1 className="text-2xl font-black text-white font-mono">
+                        YOU VOTED {existingResponse.decision === 'yes' ? 'YES' : 'NO'}
+                    </h1>
+                    <p className="text-gray-600 text-sm font-mono">{gigOffer.venue_name}</p>
+                    <Button
+                        onClick={() => setDecision(existingResponse.decision)}
+                        className="bg-cyan-500 hover:bg-cyan-600 text-black font-black"
+                    >
+                        CHANGE VOTE
+                    </Button>
+                </div>
+            </div>
+        );
+    }
+
     return (
-      <div className="min-h-screen bg-gradient-to-br from-[#0a0514] via-[#1a0f2a] to-[#0a0514] p-4 flex items-center justify-center">
-        <p className="text-cyan-400 font-mono">LOADING GIGS...</p>
-      </div>
-    );
-  }
+        <div className="min-h-screen bg-black text-white p-6 pb-24">
+            <div className="max-w-md mx-auto space-y-6">
 
-  if (!user) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-[#0a0514] via-[#1a0f2a] to-[#0a0514] p-4 flex items-center justify-center">
-        <p className="text-red-400 font-mono">NOT LOGGED IN</p>
-      </div>
-    );
-  }
+                <div className="text-center mb-8">
+                    <h1 className="text-3xl font-black text-cyan-400 font-mono mb-2">GIG VOTE</h1>
+                    <p className="text-gray-600 text-xs font-mono">Manager says YES • You in?</p>
+                </div>
 
-  const selectedGig = myGigOffers.find(g => g.id === selectedGigId);
+                {/* GIG DETAILS */}
+                <div className="bg-black border-2 border-cyan-500 rounded-lg p-6 space-y-4" style={{ boxShadow: '0 0 15px rgba(6, 182, 212, 0.3)' }}>
+                    <div>
+                        <p className="text-cyan-400 font-mono text-xs mb-1">VENUE</p>
+                        <p className="text-white font-black text-xl">{gigOffer.venue_name}</p>
+                    </div>
 
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0a0514] via-[#1a0f2a] to-[#0a0514] p-4">
-      <div className="max-w-2xl mx-auto">
-        {/* Header */}
-        <div className="flex items-center gap-3 mb-8">
-          <button
-            onClick={() => navigate(-1)}
-            className="p-2 hover:bg-cyan-500/10 rounded-lg transition-colors"
-          >
-            <ArrowLeft className="w-5 h-5 text-cyan-400" />
-          </button>
-          <h1 className="text-2xl font-black text-white font-mono">GIG VOTES</h1>
+                    <div className="grid grid-cols-2 gap-4">
+                        <div>
+                            <p className="text-cyan-400 font-mono text-xs mb-1">DATE</p>
+                            <div className="flex items-center gap-2">
+                                <Calendar className="w-4 h-4 text-white" />
+                                <p className="text-white font-mono text-sm">
+                                    {new Date(gigOffer.date).toLocaleDateString('en-GB')}
+                                </p>
+                            </div>
+                        </div>
+                        <div>
+                            <p className="text-cyan-400 font-mono text-xs mb-1">FEE</p>
+                            <div className="flex items-center gap-2">
+                                <DollarSign className="w-4 h-4 text-white" />
+                                <p className="text-white font-mono text-sm">£{gigOffer.fee?.toLocaleString()}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    {gigOffer.manager_notes && (
+                        <div className="bg-black border border-cyan-500/30 rounded p-3">
+                            <p className="text-cyan-400 font-mono text-xs mb-1">MANAGER NOTES</p>
+                            <p className="text-white font-mono text-xs">{gigOffer.manager_notes}</p>
+                        </div>
+                    )}
+                </div>
+
+                {/* DECISION BUTTONS */}
+                {!decision ? (
+                    <div className="space-y-3">
+                        <motion.button
+                            whileTap={{ scale: 0.98 }}
+                            onClick={() => setDecision('yes')}
+                            className="w-full bg-green-900/40 hover:bg-green-900/60 border-4 border-green-500 text-green-400 font-black py-6 rounded-xl transition-all font-mono text-xl flex items-center justify-center gap-3"
+                            style={{ boxShadow: '0 0 20px rgba(34, 197, 94, 0.4)' }}
+                        >
+                            <CheckCircle className="w-8 h-8" />
+                            YES - I'M IN
+                        </motion.button>
+
+                        <motion.button
+                            whileTap={{ scale: 0.98 }}
+                            onClick={() => setDecision('no')}
+                            className="w-full bg-red-900/40 hover:bg-red-900/60 border-4 border-red-500 text-red-400 font-black py-6 rounded-xl transition-all font-mono text-xl flex items-center justify-center gap-3"
+                            style={{ boxShadow: '0 0 20px rgba(239, 68, 68, 0.4)' }}
+                        >
+                            <XCircle className="w-8 h-8" />
+                            NO - CAN'T DO IT
+                        </motion.button>
+                    </div>
+                ) : (
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="space-y-4"
+                    >
+                        {/* REASON (if NO) */}
+                        {decision === 'no' && (
+                            <div className="bg-black border-2 border-red-500 rounded-lg p-4">
+                                <p className="text-red-400 font-mono text-sm mb-2">WHY CAN'T YOU DO IT?</p>
+                                <Textarea
+                                    value={reason}
+                                    onChange={(e) => setReason(e.target.value)}
+                                    placeholder="Manager needs to know why..."
+                                    className="bg-black border-2 border-gray-900 text-white font-mono min-h-[100px]"
+                                />
+                            </div>
+                        )}
+
+                        {/* SUBMIT */}
+                        <div className="flex gap-3">
+                            <Button
+                                onClick={() => setDecision(null)}
+                                variant="outline"
+                                className="flex-1 border-2 border-gray-700 text-gray-400 font-mono"
+                            >
+                                BACK
+                            </Button>
+                            <Button
+                                onClick={handleSubmit}
+                                disabled={submitting || (decision === 'no' && !reason.trim())}
+                                className={`flex-1 font-black font-mono ${
+                                    decision === 'yes' 
+                                        ? 'bg-green-500 hover:bg-green-600 text-black' 
+                                        : 'bg-red-500 hover:bg-red-600 text-black'
+                                }`}
+                            >
+                                {submitting ? 'SAVING...' : 'CONFIRM'}
+                            </Button>
+                        </div>
+                    </motion.div>
+                )}
+            </div>
         </div>
-
-        {/* Offline Mesh Sync */}
-        {!selectedGig && <OfflineMeshSync gigOfferId={selectedGigId} />}
-
-        {myGigOffers.length === 0 ? (
-          <div className="text-center py-12">
-            <p className="text-gray-400 font-mono">No gigs to vote on yet</p>
-          </div>
-        ) : !selectedGig ? (
-          // List of gigs
-          <div className="space-y-3">
-            {myGigOffers.map(gig => {
-              const hasVoted = gig.myResponse?.decision && gig.myResponse.decision !== 'pending';
-              const voted = gig.myResponse?.decision || 'pending';
-
-              return (
-                <motion.button
-                  key={gig.id}
-                  onClick={() => setSelectedGigId(gig.id)}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  whileHover={{ scale: 1.02 }}
-                  className={`w-full text-left p-4 rounded-lg border-2 transition-all ${
-                    voted === 'yes'
-                      ? 'border-green-500/50 bg-green-500/10'
-                      : voted === 'no'
-                      ? 'border-red-500/50 bg-red-500/10'
-                      : 'border-cyan-500/50 bg-cyan-500/10 hover:border-cyan-500'
-                  }`}
-                >
-                  <div className="flex items-start justify-between">
-                    <div className="flex-1">
-                      <h3 className="text-white font-bold mb-1">{gig.venue_name}</h3>
-                      <p className="text-gray-300 text-sm">{gig.promoter_name}</p>
-                      <p className="text-cyan-300 text-xs mt-2">{gig.date} • £{gig.fee}</p>
-                    </div>
-                    <div className="flex-shrink-0 flex items-center gap-2">
-                      {voted === 'yes' && <CheckCircle2 className="w-5 h-5 text-green-400" />}
-                      {voted === 'no' && <XCircle className="w-5 h-5 text-red-400" />}
-                      {voted === 'pending' && <Clock className="w-5 h-5 text-amber-400 animate-pulse" />}
-                      <span className="text-xs font-mono">
-                        {voted === 'yes' && 'YES'}
-                        {voted === 'no' && 'NO'}
-                        {voted === 'pending' && 'PENDING'}
-                      </span>
-                    </div>
-                  </div>
-                </motion.button>
-              );
-            })}
-          </div>
-        ) : (
-          // Voting interface
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="space-y-6"
-          >
-            {/* Back button */}
-            <button
-              onClick={() => {
-                setSelectedGigId(null);
-                setSelectedAnswer(null);
-                setReasonText('');
-              }}
-              className="text-cyan-400 hover:text-cyan-300 font-mono text-sm flex items-center gap-2"
-            >
-              ← BACK TO LIST
-            </button>
-
-            {/* Gig details */}
-            <div className="bg-gradient-to-br from-cyan-500/10 to-purple-500/10 border border-cyan-500/30 rounded-lg p-6">
-              <h2 className="text-2xl font-black text-white mb-4">{selectedGig.venue_name}</h2>
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <p className="text-gray-400 text-xs font-mono mb-1">PROMOTER</p>
-                  <p className="text-white font-bold">{selectedGig.promoter_name}</p>
-                </div>
-                <div>
-                  <p className="text-gray-400 text-xs font-mono mb-1">DATE</p>
-                  <p className="text-white font-bold">{selectedGig.date}</p>
-                </div>
-                <div>
-                  <p className="text-gray-400 text-xs font-mono mb-1">FEE</p>
-                  <p className="text-green-400 font-bold">£{selectedGig.fee}</p>
-                </div>
-                <div>
-                  <p className="text-gray-400 text-xs font-mono mb-1">MANAGER NOTES</p>
-                  <p className="text-gray-300 text-sm">{selectedGig.manager_notes || 'None'}</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Vote buttons */}
-            <div className="space-y-3">
-              <p className="text-gray-400 font-mono text-sm">YOUR DECISION:</p>
-              <div className="grid grid-cols-2 gap-3">
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={() => setSelectedAnswer('yes')}
-                  className={`py-4 rounded-lg font-black text-lg border-2 transition-all ${
-                    selectedAnswer === 'yes'
-                      ? 'bg-green-500 border-green-500 text-black'
-                      : 'border-green-500/50 text-green-400 hover:border-green-500'
-                  }`}
-                >
-                  👍 YES
-                </motion.button>
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={() => setSelectedAnswer('no')}
-                  className={`py-4 rounded-lg font-black text-lg border-2 transition-all ${
-                    selectedAnswer === 'no'
-                      ? 'bg-red-500 border-red-500 text-white'
-                      : 'border-red-500/50 text-red-400 hover:border-red-500'
-                  }`}
-                >
-                  👎 NO
-                </motion.button>
-              </div>
-            </div>
-
-            {/* Reason if NO */}
-            {selectedAnswer === 'no' && (
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="space-y-2"
-              >
-                <p className="text-gray-400 font-mono text-sm">WHY NOT? (CRITICAL FOR MANAGER)</p>
-                <textarea
-                  value={reasonText}
-                  onChange={(e) => setReasonText(e.target.value)}
-                  placeholder="Tell manager why you can't do this gig..."
-                  className="w-full bg-gray-900 border border-gray-700 rounded-lg p-3 text-white placeholder-gray-500 focus:outline-none focus:border-cyan-500 resize-none"
-                  rows={3}
-                />
-              </motion.div>
-            )}
-
-            {/* Submit button */}
-            <motion.button
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              onClick={handleSubmitVote}
-              disabled={!selectedAnswer || submitVoteMutation.isPending}
-              className={`w-full py-4 rounded-lg font-black text-lg font-mono transition-all ${
-                selectedAnswer
-                  ? 'bg-cyan-500 hover:bg-cyan-600 text-black'
-                  : 'bg-gray-700 text-gray-500 cursor-not-allowed'
-              }`}
-            >
-              {submitVoteMutation.isPending ? 'SUBMITTING...' : 'SUBMIT VOTE'}
-            </motion.button>
-          </motion.div>
-        )}
-      </div>
-    </div>
-  );
+    );
 }

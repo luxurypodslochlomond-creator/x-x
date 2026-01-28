@@ -65,9 +65,19 @@ Deno.serve(async (req) => {
       all_responses_received_at: new Date().toISOString()
     });
 
+    // IF ALL YES → Auto-confirm, sync calendar, draft email
+    if (yesVotes === totalMembers && noVotes === 0) {
+      await base44.asServiceRole.entities.ScottGigOffer.update(gigOffer.id, {
+        status: 'confirmed'
+      });
+      
+      // This will trigger syncGigToCalendar and draftPromoterEmail automations
+    }
+
     return Response.json({ 
       success: true,
       votes_summary: summary,
+      all_yes: yesVotes === totalMembers,
       gig: gigOffer.venue_name
     });
 
