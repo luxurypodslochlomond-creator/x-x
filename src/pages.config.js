@@ -338,6 +338,7 @@ import Terms from './pages/Terms';
 import TeslaPeriodicTable from './pages/TeslaPeriodicTable';
 import Test from './pages/Test';
 import TestAI51 from './pages/TestAI51';
+import TestGigWorkflow from './pages/TestGigWorkflow';
 import TheLoveEconomy from './pages/TheLoveEconomy';
 import ThePhysics from './pages/ThePhysics';
 import ThePowerOfTwoSouls from './pages/ThePowerOfTwoSouls';
@@ -373,7 +374,6 @@ import YoungWarriors from './pages/YoungWarriors';
 import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
-import TestGigWorkflow from './pages/TestGigWorkflow';
 import __Layout from './Layout.jsx';
 
 
@@ -669,6 +669,7 @@ export const PAGES = {
     "TeslaPeriodicTable": TeslaPeriodicTable,
     "Test": Test,
     "TestAI51": TestAI51,
+    "TestGigWorkflow": TestGigWorkflow,
     "TheLoveEconomy": TheLoveEconomy,
     "ThePhysics": ThePhysics,
     "ThePowerOfTwoSouls": ThePowerOfTwoSouls,
@@ -704,7 +705,6 @@ export const PAGES = {
     "ZeroEgoProtocol": ZeroEgoProtocol,
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
-    "TestGigWorkflow": TestGigWorkflow,
 }
 
 export const pagesConfig = {

@@ -72,12 +72,93 @@ ${emailText}`,
         setAnalyzing(false);
     };
 
+    const [creatingGig, setCreatingGig] = useState(false);
+    const [creatingTask, setCreatingTask] = useState(false);
+
     const handleCreateGigOffer = async () => {
-        navigate(createPageUrl(`ScottPasteGigOffer?id=${artistId}&email=${encodeURIComponent(emailText)}`));
+        setCreatingGig(true);
+        try {
+            const response = await base44.functions.invoke('scanGigOffers', { 
+                emailText, 
+                artistId 
+            });
+            if (response?.data?.success) {
+                alert('✅ Gig offer created!');
+                setResult(null);
+                setEmailText('');
+            } else {
+                throw new Error('Failed to extract gig details');
+            }
+        } catch (error) {
+            alert('❌ Error: ' + error.message);
+        }
+        setCreatingGig(false);
     };
 
     const handleCreateTask = async () => {
-        navigate(createPageUrl(`ScottToDo?id=${artistId}&email=${encodeURIComponent(emailText)}`));
+        setCreatingTask(true);
+        try {
+            const taskResult = await base44.integrations.Core.InvokeLLM({
+                prompt: `Extract task/action items from this email. Look for:
+- PR requests (social posts, interviews, content)
+- Label tasks (deliverables, marketing)
+- Plugger follow-ups (radio, playlists)
+- Publisher admin (splits, registrations)
+- Sample clearance needs
+- General action items
+
+Return JSON array of tasks:
+{
+  "tasks": [{
+    "title": "clear task title",
+    "responsible_name": "who needs to do it",
+    "deadline": "YYYY-MM-DD or null",
+    "priority": "urgent/normal/low"
+  }]
+}
+
+If no clear tasks, return empty array.
+
+Email:
+${emailText}`,
+                response_json_schema: {
+                    type: "object",
+                    properties: {
+                        tasks: {
+                            type: "array",
+                            items: {
+                                type: "object",
+                                properties: {
+                                    title: { type: "string" },
+                                    responsible_name: { type: "string" },
+                                    deadline: { type: "string" },
+                                    priority: { type: "string" }
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            if (taskResult.tasks && taskResult.tasks.length > 0) {
+                for (const task of taskResult.tasks) {
+                    await base44.entities.ScottTask.create({
+                        ...task,
+                        artist_id: artistId || null,
+                        status: 'pending'
+                    });
+                }
+                queryClient.invalidateQueries({ queryKey: ['scottTasks'] });
+                alert(`✅ Created ${taskResult.tasks.length} task${taskResult.tasks.length > 1 ? 's' : ''}`);
+                setResult(null);
+                setEmailText('');
+            } else {
+                alert('No tasks found in email');
+            }
+        } catch (error) {
+            alert('❌ Error: ' + error.message);
+        }
+        setCreatingTask(false);
     };
 
     return (
@@ -160,18 +241,20 @@ ${emailText}`,
                             {result.category === 'GIG_OFFER' && (
                                 <Button
                                     onClick={handleCreateGigOffer}
+                                    disabled={creatingGig}
                                     className="w-full bg-cyan-500 hover:bg-cyan-600 text-black font-black py-4 font-mono"
                                 >
-                                    CREATE GIG OFFER
+                                    {creatingGig ? 'CREATING...' : 'CREATE GIG OFFER'}
                                 </Button>
                             )}
 
                             {result.category === 'TASK' && (
                                 <Button
                                     onClick={handleCreateTask}
+                                    disabled={creatingTask}
                                     className="w-full bg-cyan-500 hover:bg-cyan-600 text-black font-black py-4 font-mono"
                                 >
-                                    ADD TO TO-DO
+                                    {creatingTask ? 'CREATING...' : 'ADD TO TO-DO'}
                                 </Button>
                             )}
 
