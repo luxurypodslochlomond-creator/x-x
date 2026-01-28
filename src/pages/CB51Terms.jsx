@@ -27,12 +27,11 @@ export default function CB51Terms() {
                 <div className="bg-cyan-500/10 border-2 border-cyan-500 rounded-lg p-6 mb-8">
                     <h2 className="text-cyan-400 font-black font-mono text-xl mb-4">THE DEAL</h2>
                     <ul className="space-y-2 text-white font-mono text-sm">
-                            <li>✓ FREE for artists & managers (max 5 artists)</li>
-                            <li>✓ £99/month for indie labels (unlimited artists)</li>
-                            <li>✓ Custom pricing for majors (£25k-£75k/year)</li>
-                            <li>✓ Cancel anytime</li>
+                            <li>✓ Professional tools built for artists</li>
                             <li>✓ Your data stays yours</li>
-                            <li>✓ No hidden fees</li>
+                            <li>✓ Heading toward white label possibilities</li>
+                            <li>✓ No lock-in contracts</li>
+                            <li>✓ Built by artists, for artists</li>
                         </ul>
                 </div>
 
@@ -42,34 +41,21 @@ export default function CB51Terms() {
                     <section>
                         <h2 className="text-white font-black font-mono text-2xl mb-3">WHAT YOU GET</h2>
                         <div className="bg-black border border-gray-900 rounded-lg p-4 space-y-3">
-                            <p className="text-gray-300 font-mono text-sm">• Up to 5 artists (free tier)</p>
-                            <p className="text-gray-300 font-mono text-sm">• AI gig parsing</p>
-                            <p className="text-gray-300 font-mono text-sm">• Calendar sync</p>
+                            <p className="text-gray-300 font-mono text-sm">• AI gig parsing & workflow</p>
+                            <p className="text-gray-300 font-mono text-sm">• Calendar sync (Google Calendar)</p>
                             <p className="text-gray-300 font-mono text-sm">• Finance tracking</p>
-                            <p className="text-gray-300 font-mono text-sm">• Band notifications</p>
+                            <p className="text-gray-300 font-mono text-sm">• Band notifications & voting</p>
                             <p className="text-gray-300 font-mono text-sm">• Offline mode</p>
-                            <p className="text-gray-300 font-mono text-sm">• Priority support</p>
+                            <p className="text-gray-300 font-mono text-sm">• Team collaboration</p>
                         </div>
                     </section>
 
                     <section>
-                        <h2 className="text-white font-black font-mono text-2xl mb-3">PRICING</h2>
+                        <h2 className="text-white font-black font-mono text-2xl mb-3">ACCESS MODEL</h2>
                         <div className="bg-black border border-gray-900 rounded-lg p-4 space-y-3">
-                            <p className="text-gray-300 font-mono text-sm"><strong className="text-white">Artists & Managers:</strong> FREE forever</p>
-                            <p className="text-gray-300 font-mono text-sm"><strong className="text-white">Indie Labels:</strong> £99/month</p>
-                            <p className="text-gray-300 font-mono text-sm"><strong className="text-white">Custom (Majors):</strong> £25k-£75k annually (roster based)</p>
-                            <p className="text-gray-300 font-mono text-sm"><strong className="text-white">Payment:</strong> Monthly for paid tiers via Stripe</p>
-                            <p className="text-green-400 font-mono text-sm font-bold mt-3">Cancel anytime. No contracts. No BS.</p>
-                        </div>
-                    </section>
-
-                    <section>
-                        <h2 className="text-white font-black font-mono text-2xl mb-3">CANCELLATION</h2>
-                        <div className="bg-black border border-gray-900 rounded-lg p-4 space-y-3">
-                            <p className="text-gray-300 font-mono text-sm">• Cancel from settings anytime</p>
-                            <p className="text-gray-300 font-mono text-sm">• Access until end of billing period</p>
-                            <p className="text-gray-300 font-mono text-sm">• Export your data before cancelling</p>
-                            <p className="text-gray-300 font-mono text-sm">• No exit fees</p>
+                            <p className="text-gray-300 font-mono text-sm">CB51 is currently in development with trusted artists and managers.</p>
+                            <p className="text-gray-300 font-mono text-sm">We're building this with the people who'll use it - not for profit, but for progress.</p>
+                            <p className="text-green-400 font-mono text-sm font-bold mt-3">White label possibilities coming soon for labels and agencies.</p>
                         </div>
                     </section>
 
