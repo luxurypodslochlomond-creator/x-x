@@ -1,5 +1,5 @@
 import React from 'react';
-import { RefreshCw, WifiOff, Heart, Zap, Shield } from 'lucide-react';
+import { RefreshCw, WifiOff, Heart, Zap, Shield, Radio } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 class GlobalErrorBoundary extends React.Component {
@@ -93,6 +93,11 @@ class GlobalErrorBoundary extends React.Component {
 
     render() {
         if (this.state.hasError) {
+            // Detect CB51 context
+            const isCB51 = window.location.hostname.startsWith('cb51.') || 
+                           window.location.pathname.startsWith('/CB51') ||
+                           window.location.pathname.startsWith('/Scott');
+            
             // NETWORK ERROR - 8-BIT QUANTUM
             if (this.state.isNetworkError || !navigator.onLine) {
                 return (
@@ -124,15 +129,19 @@ class GlobalErrorBoundary extends React.Component {
                                     transition={{ duration: 2, repeat: Infinity }}
                                     className="flex justify-center"
                                 >
-                                    <WifiOff className="w-20 h-20 text-cyan-400" />
+                                    {isCB51 ? (
+                                        <Radio className="w-20 h-20 text-cyan-400" />
+                                    ) : (
+                                        <WifiOff className="w-20 h-20 text-cyan-400" />
+                                    )}
                                 </motion.div>
 
                                 <div className="text-center space-y-3">
                                     <h1 className="text-4xl font-black font-mono text-cyan-400">
-                                        FREQUENCY PAUSED
+                                        {isCB51 ? 'CONNECTION LOST' : 'FREQUENCY PAUSED'}
                                     </h1>
                                     <p className="text-white text-base font-mono">
-                                        Quantum link offline. State preserved.
+                                        {isCB51 ? 'CB51 offline. Data preserved.' : 'Quantum link offline. State preserved.'}
                                     </p>
                                 </div>
 
