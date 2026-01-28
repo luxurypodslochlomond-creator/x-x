@@ -215,10 +215,10 @@ export default function CB51() {
                                     <Plus className="w-6 h-6 text-cyan-400" />
                                 </motion.div>
                             </Link>
-                            </div>
+                        </div>
 
-                            {/* Edit Artists - Quick Access */}
-                            <details className="mt-3">
+                        {/* Edit Artists - Quick Access */}
+                        <details className="mt-3">
                             <summary className="cursor-pointer text-cyan-400 font-mono text-xs font-bold hover:text-cyan-300">Edit Artists ▼</summary>
                             <div className="mt-2 space-y-2">
                                 {artists.map((artist) => (
@@ -232,8 +232,7 @@ export default function CB51() {
                                     </button>
                                 ))}
                             </div>
-                            </details>
-                        </div>
+                        </details>
                     </>
                 )}
             </div>
