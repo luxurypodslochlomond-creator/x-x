@@ -8,6 +8,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import TechStatusBar from '@/components/scott/TechStatusBar';
 import PushNotificationManager from '@/components/scott/PushNotificationManager';
 import CB51NotificationInbox from '@/components/scott/CB51NotificationInbox';
+import CB51BandNotifications from '@/components/scott/CB51BandNotifications';
 import CB51SecurityNotice from '@/components/scott/CB51SecurityNotice';
 
 /**
@@ -162,6 +163,13 @@ export default function CB51() {
             <div className="mb-6 flex justify-end">
                 <PushNotificationManager />
             </div>
+
+            {/* BAND MEMBER NOTIFICATIONS */}
+            {user && user.role !== 'admin' && (
+                <div className="mb-6">
+                    <CB51BandNotifications userEmail={user.email} />
+                </div>
+            )}
 
 
 

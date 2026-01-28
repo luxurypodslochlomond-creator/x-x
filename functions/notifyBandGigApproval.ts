@@ -53,7 +53,7 @@ Deno.serve(async (req) => {
             title: `Manager says YES - ${offer.venue_name}`,
             message: `${offer.date} • Manager approved the gig. You in? Answer now.`,
             decision_button: 'yes_no',
-            action_url: `/cb51/gig-vote?offerId=${gigOfferId}`
+            action_url: `/ScottBandVote?offerId=${gigOfferId}`
         }));
 
         // Bulk create notifications
