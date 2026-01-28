@@ -203,18 +203,6 @@ export default function CB51() {
                                             )}
                                         </motion.div>
                                     </Link>
-
-                                    {/* Edit button - bottom right corner */}
-                                    <button
-                                        onClick={(e) => {
-                                            e.stopPropagation();
-                                            navigate(createPageUrl(`ScottAddArtist?edit=${artist.id}`));
-                                        }}
-                                        className="absolute -bottom-1 -right-1 w-6 h-6 bg-amber-500 hover:bg-amber-600 rounded-full flex items-center justify-center text-black transition-all"
-                                        style={{ boxShadow: '0 0 10px rgba(245, 158, 11, 0.5)' }}
-                                    >
-                                        <span className="text-[10px] font-black">✎</span>
-                                    </button>
                                 </div>
                             ))}
 
@@ -227,6 +215,24 @@ export default function CB51() {
                                     <Plus className="w-6 h-6 text-cyan-400" />
                                 </motion.div>
                             </Link>
+                            </div>
+
+                            {/* Edit Artists - Quick Access */}
+                            <details className="mt-3">
+                            <summary className="cursor-pointer text-cyan-400 font-mono text-xs font-bold hover:text-cyan-300">Edit Artists ▼</summary>
+                            <div className="mt-2 space-y-2">
+                                {artists.map((artist) => (
+                                    <button
+                                        key={artist.id}
+                                        onClick={() => navigate(createPageUrl(`ScottAddArtist?edit=${artist.id}`))}
+                                        className="w-full bg-black border border-cyan-500/30 rounded p-2 text-left hover:bg-cyan-500/10 transition-all flex items-center justify-between"
+                                    >
+                                        <span className="text-cyan-400 font-mono text-xs">{artist.name}</span>
+                                        <span className="text-amber-400 text-xs">✎</span>
+                                    </button>
+                                ))}
+                            </div>
+                            </details>
                         </div>
                     </>
                 )}
