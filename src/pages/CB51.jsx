@@ -20,18 +20,9 @@ export default function CB51() {
     const navigate = useNavigate();
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
-    const [pinVerified, setPinVerified] = useState(false);
-    const [pinInput, setPinInput] = useState('');
-    const [pinError, setPinError] = useState('');
     const queryClient = useQueryClient();
 
     useEffect(() => {
-        // Check if PIN was already verified in this session
-        const hasPinVerified = sessionStorage.getItem('cb51_pin_1888') === 'true';
-        if (hasPinVerified) {
-            setPinVerified(true);
-        }
-
         // Set page title and meta tags for CB51 branding
         document.title = 'CB51 • Artist Management';
         
@@ -42,7 +33,7 @@ export default function CB51() {
             metaTheme.name = 'theme-color';
             document.head.appendChild(metaTheme);
         }
-        metaTheme.content = '#f4a9a8';
+        metaTheme.content = '#06b6d4';
         
         let metaAppName = document.querySelector('meta[name="apple-mobile-web-app-title"]');
         if (!metaAppName) {
@@ -60,17 +51,6 @@ export default function CB51() {
             navigate(createPageUrl('CB51Login'));
         });
     }, [navigate]);
-
-    const handlePinSubmit = () => {
-        if (pinInput === '1888') {
-            sessionStorage.setItem('cb51_pin_1888', 'true');
-            setPinVerified(true);
-            setPinInput('');
-        } else {
-            setPinError('Wrong PIN');
-            setPinInput('');
-        }
-    };
 
     // Load artists IMMEDIATELY (most important)
     const { data: allArtists = [], isLoading: artistsLoading } = useQuery({
