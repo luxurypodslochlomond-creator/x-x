@@ -201,7 +201,7 @@ export default function CB51() {
 
                         {/* Edit Artists - Quick Access */}
                         <details className="mt-3">
-                            <summary className="cursor-pointer text-cyan-400 font-mono text-xs font-bold hover:text-cyan-300">Edit Artists ▼</summary>
+                            <summary className="cursor-pointer font-mono text-xs font-bold hover:opacity-80" style={{ color: 'var(--cb51-rose)' }}>Edit Artists ▼</summary>
                             <div className="mt-2 space-y-2">
                                 {artists.map((artist) => (
                                     <button
