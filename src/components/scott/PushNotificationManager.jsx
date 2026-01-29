@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Bell, BellOff } from 'lucide-react';
+import CB51NotificationStatus from './CB51NotificationStatus';
 
 /**
  * PushNotificationManager - Web Push Notifications for CB51
@@ -218,32 +219,36 @@ export default function PushNotificationManager({ onSubscriptionChange }) {
   }
 
   return (
-    <button
-      onClick={isSubscribed ? disableNotifications : requestNotificationPermission}
-      disabled={isLoading}
-      className={`flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-mono font-bold transition-all ${
-        isSubscribed
-          ? 'bg-green-500/20 border border-green-500/50 text-green-400 hover:border-green-500'
-          : 'bg-gray-700/50 border border-gray-600 text-gray-400 hover:bg-gray-600 active:bg-cyan-500/20 active:border-cyan-500'
-      } ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
-    >
-      {isLoading ? (
-        <>
-          <div className="w-4 h-4 border-2 border-gray-400 border-t-transparent rounded-full animate-spin"></div>
-          Setting up...
-        </>
-      ) : isSubscribed ? (
-        <>
-          <Bell className="w-4 h-4" />
-          Notifications On
-        </>
-      ) : (
-        <>
-          <BellOff className="w-4 h-4" />
-          Enable Notifications
-        </>
-      )}
-    </button>
+    <div className="space-y-4">
+      <CB51NotificationStatus />
+      
+      <button
+        onClick={isSubscribed ? disableNotifications : requestNotificationPermission}
+        disabled={isLoading}
+        className={`w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg text-sm font-mono font-bold transition-all ${
+          isSubscribed
+            ? 'bg-green-500/20 border-2 border-green-500 text-green-400 hover:bg-green-500/30'
+            : 'bg-cyan-500 hover:bg-cyan-600 text-black border-2 border-cyan-500'
+        } ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
+      >
+        {isLoading ? (
+          <>
+            <div className="w-4 h-4 border-2 border-gray-400 border-t-transparent rounded-full animate-spin"></div>
+            SETTING UP...
+          </>
+        ) : isSubscribed ? (
+          <>
+            <Bell className="w-5 h-5" />
+            NOTIFICATIONS ON
+          </>
+        ) : (
+          <>
+            <Bell className="w-5 h-5" />
+            ENABLE NOTIFICATIONS
+          </>
+        )}
+      </button>
+    </div>
   );
 }
 
