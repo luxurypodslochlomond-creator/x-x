@@ -140,10 +140,46 @@ export default function CB51() {
 
     if (loading) {
         return (
-            <div className="min-h-screen bg-black flex items-center justify-center">
+            <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: 'var(--cb51-bg-primary)' }}>
                 <div className="text-center">
                     <Radio className="w-16 h-16 mx-auto mb-4 animate-pulse" style={{ color: 'var(--cb51-rose)' }} />
                     <p className="font-black font-mono text-xl" style={{ color: 'var(--cb51-rose)' }}>CB51</p>
+                </div>
+            </div>
+        );
+    }
+
+    if (!pinVerified) {
+        return (
+            <div className="min-h-screen flex items-center justify-center p-4" style={{ backgroundColor: 'var(--cb51-bg-primary)' }}>
+                <div className="max-w-md w-full">
+                    <div className="text-center mb-8">
+                        <Radio className="w-16 h-16 mx-auto mb-4" style={{ color: 'var(--cb51-rose)' }} />
+                        <h1 className="text-4xl font-black font-mono mb-2" style={{ color: 'var(--cb51-rose)' }}>CB51</h1>
+                        <p className="font-mono text-sm" style={{ color: 'var(--cb51-calendar)' }}>Enter PIN</p>
+                    </div>
+
+                    <input
+                        type="password"
+                        inputMode="numeric"
+                        value={pinInput}
+                        onChange={(e) => setPinInput(e.target.value.slice(0, 4))}
+                        onKeyDown={(e) => e.key === 'Enter' && handlePinSubmit()}
+                        placeholder="••••"
+                        autoFocus
+                        className="w-full text-white text-center text-4xl font-black py-4 rounded-lg font-mono mb-4 placeholder-gray-700"
+                        style={{ backgroundColor: 'var(--cb51-bg-card)', border: '2px solid var(--cb51-rose)' }}
+                    />
+
+                    {pinError && <p className="text-red-400 font-mono text-sm text-center mb-4">{pinError}</p>}
+
+                    <button
+                        onClick={handlePinSubmit}
+                        className="w-full font-black py-4 rounded-lg text-lg font-mono hover:opacity-90 transition-all text-black"
+                        style={{ backgroundColor: 'var(--cb51-rose)' }}
+                    >
+                        ENTER
+                    </button>
                 </div>
             </div>
         );
