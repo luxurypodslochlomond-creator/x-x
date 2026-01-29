@@ -19,7 +19,7 @@ import LiveClock from '@/components/shared/LiveClock';
  */
 
 export default function CB51() {
-          const navigate = useNavigate();
+                const navigate = useNavigate();
           const [user, setUser] = useState(null);
           const [loading, setLoading] = useState(true);
           const [editArtistsOpen, setEditArtistsOpen] = useState(false);
