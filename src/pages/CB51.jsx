@@ -139,9 +139,14 @@ export default function CB51() {
                 <div className="min-h-screen bg-black text-white p-4 pb-20">
 
                     {/* NOTIFICATION MANAGER */}
-                    <div className="mb-6 flex justify-end">
-                        <PushNotificationManager />
-                    </div>
+                                    <div className="mb-6 flex justify-end">
+                                        <PushNotificationManager />
+                                    </div>
+
+                                    {/* REAL-TIME BAND VOTE ALERTS */}
+                                    {user && (
+                                        <CB51BandVoteAlert userEmail={user.email} />
+                                    )}
 
                     {/* PENDING APPROVALS - PRIORITY */}
                                     {stats.pendingOffers > 0 && (
