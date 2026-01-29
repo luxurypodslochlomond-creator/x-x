@@ -309,6 +309,9 @@ export default function CB51() {
                         </div>
                         <p className="text-gray-600 font-mono text-xs">Built on Base44</p>
                     </div>
-                </div>
-            );
-        }
+
+                    {/* SETTINGS MODAL */}
+                    <ScottSettingsModal isOpen={settingsOpen} onClose={() => setSettingsOpen(false)} />
+                    </div>
+                    );
+                    }
