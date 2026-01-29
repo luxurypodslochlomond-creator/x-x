@@ -220,13 +220,21 @@ export default function CB51() {
                         )}
                     </div>
 
-                    {/* SETTINGS BUTTON - GOLD/ORANGE BORDER */}
-                    <button 
-                        onClick={() => setSettingsOpen(true)}
-                        className="w-full border-2 border-yellow-600 hover:border-yellow-500 text-yellow-600 hover:text-yellow-500 py-3 rounded-lg font-mono text-sm font-bold transition-all mb-4"
-                    >
-                        SETTINGS
-                    </button>
+                    {/* SETTINGS SECTION */}
+                    <div className="mb-4">
+                        <button 
+                            onClick={() => setSettingsOpen(!settingsOpen)}
+                            className="w-full font-mono text-xs font-bold text-yellow-600 hover:text-yellow-500 text-left py-2 flex items-center justify-between px-4 py-3 border-2 border-yellow-600 rounded hover:border-yellow-500 transition-all"
+                        >
+                            <span>⚙️ SETTINGS</span>
+                            <span>{settingsOpen ? '▼' : '▶'}</span>
+                        </button>
+                        {settingsOpen && (
+                            <div className="mt-2 p-4 bg-black border border-yellow-600/30 rounded">
+                                <p className="text-gray-600 font-mono text-xs">Settings coming soon</p>
+                            </div>
+                        )}
+                    </div>
 
                     {/* MORE TOOLS SECTION */}
                     <div className="mb-4">
