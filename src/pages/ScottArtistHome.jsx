@@ -59,13 +59,13 @@ export default function ScottArtistHome() {
 
             <div className="flex items-center gap-3 mb-6">
                 {artist.profile_pic_url ? (
-                    <img src={artist.profile_pic_url} alt={artist.name} className="w-12 h-12 rounded object-cover border border-cyan-500" />
+                    <img src={artist.profile_pic_url} alt={artist.name} className="w-12 h-12 rounded object-cover" style={{ border: '2px solid var(--cb51-rose)' }} />
                 ) : (
-                    <div className="w-12 h-12 rounded bg-cyan-500 text-black font-black text-lg flex items-center justify-center">{artist.name.charAt(0)}</div>
+                    <div className="w-12 h-12 rounded text-black font-black text-lg flex items-center justify-center" style={{ backgroundColor: 'var(--cb51-rose)' }}>{artist.name.charAt(0)}</div>
                 )}
                 <div>
-                    <h1 className="text-xl font-black text-white font-mono">{artist.name}</h1>
-                    <p className="text-gray-600 text-xs font-mono">Operations</p>
+                    <h1 className="text-xl font-black font-mono" style={{ color: 'var(--cb51-rose)' }}>{artist.name}</h1>
+                    <p className="text-xs font-mono" style={{ color: 'var(--cb51-text-muted)' }}>Operations</p>
                 </div>
             </div>
 
