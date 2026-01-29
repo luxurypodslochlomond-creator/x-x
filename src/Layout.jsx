@@ -507,22 +507,26 @@ const LayoutInner = ({ children, currentPageName }) => {
                   <ArrowLeft className="w-5 h-5 text-cyan-400" />
                 </button>
               )}
-              <CompactMusicPlayer />
-              <Link to={createPageUrl("FrequencyChamber")} className="flex flex-col items-center p-1.5" style={{ animation: 'glow-pulse 2s ease-in-out infinite' }}>
-                <svg width="28" height="28" viewBox="0 0 32 32" fill="none" style={{ overflow: 'visible' }}>
-                  <path d="M2 16 L6 16 L8 8 L10 24 L12 12 L14 20 L16 6 L18 26 L20 10 L22 22 L24 14 L26 18 L30 16" stroke="#ec4899" strokeWidth="2.5" strokeLinecap="round" fill="none" style={{ filter: 'drop-shadow(0 0 6px #ec4899)', strokeDasharray: '200', animation: 'heartbeat-line 2s ease-in-out infinite' }} />
-                </svg>
-                <span className="text-[9px] font-black font-mono text-pink-400 mt-0.5">HEAL</span>
-              </Link>
-              <motion.button
-                onClick={() => navigate(createPageUrl("AI51"))}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="flex flex-col items-center justify-center px-3 py-2 border-2 border-pink-400 rounded-lg bg-black/40 hover:bg-black/60 transition-colors"
-              >
-                <span className="text-pink-400 font-black font-mono text-sm leading-none">AI</span>
-                <span className="text-pink-400 font-black font-mono text-xs leading-none">51</span>
-              </motion.button>
+              {!isCB51Page && <CompactMusicPlayer />}
+              {!isCB51Page && (
+                <Link to={createPageUrl("FrequencyChamber")} className="flex flex-col items-center p-1.5" style={{ animation: 'glow-pulse 2s ease-in-out infinite' }}>
+                  <svg width="28" height="28" viewBox="0 0 32 32" fill="none" style={{ overflow: 'visible' }}>
+                    <path d="M2 16 L6 16 L8 8 L10 24 L12 12 L14 20 L16 6 L18 26 L20 10 L22 22 L24 14 L26 18 L30 16" stroke="#ec4899" strokeWidth="2.5" strokeLinecap="round" fill="none" style={{ filter: 'drop-shadow(0 0 6px #ec4899)', strokeDasharray: '200', animation: 'heartbeat-line 2s ease-in-out infinite' }} />
+                  </svg>
+                  <span className="text-[9px] font-black font-mono text-pink-400 mt-0.5">HEAL</span>
+                </Link>
+              )}
+              {!isCB51Page && (
+                <motion.button
+                  onClick={() => navigate(createPageUrl("AI51"))}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="flex flex-col items-center justify-center px-3 py-2 border-2 border-pink-400 rounded-lg bg-black/40 hover:bg-black/60 transition-colors"
+                >
+                  <span className="text-pink-400 font-black font-mono text-sm leading-none">AI</span>
+                  <span className="text-pink-400 font-black font-mono text-xs leading-none">51</span>
+                </motion.button>
+              )}
               {(currentPageName.startsWith('Scott') || currentPageName.startsWith('CB51')) ? (
                 <button onClick={() => setMobileMenuOpen(!isMobileMenuOpen)} className="p-2 rounded-lg hover:bg-cyan-500/20 transition-colors">
                   <Menu className="w-6 h-6 text-cyan-400" />
