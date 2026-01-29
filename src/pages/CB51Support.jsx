@@ -116,16 +116,7 @@ export default function CB51Support() {
                         </div>
                     </details>
 
-                    <details className="bg-black border border-gray-900 rounded-lg p-4 cursor-pointer">
-                        <summary className="text-white font-bold font-mono text-sm">White label pricing?</summary>
-                        <div className="mt-3 text-gray-400 font-mono text-sm space-y-2">
-                            <p>For agencies/labels managing 5+ artists:</p>
-                            <p>• Custom domain (youragency.co.uk)</p>
-                            <p>• Your branding</p>
-                            <p>• Priority support</p>
-                            <p>Email: family@uf51.love</p>
-                        </div>
-                    </details>
+
 
                 </div>
 
