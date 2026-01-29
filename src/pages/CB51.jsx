@@ -122,8 +122,8 @@ export default function CB51() {
         return (
             <div className="min-h-screen bg-black flex items-center justify-center">
                 <div className="text-center">
-                    <Radio className="w-16 h-16 text-cyan-400 mx-auto mb-4 animate-pulse" />
-                    <p className="text-cyan-400 font-black font-mono text-xl">CB51</p>
+                    <Radio className="w-16 h-16 mx-auto mb-4 animate-pulse" style={{ color: 'var(--cb51-rose)' }} />
+                    <p className="font-black font-mono text-xl" style={{ color: 'var(--cb51-rose)' }}>CB51</p>
                 </div>
             </div>
         );
