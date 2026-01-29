@@ -135,7 +135,6 @@ import CB51 from './pages/CB51';
 import CB51AAA from './pages/CB51AAA';
 import CB51About from './pages/CB51About';
 import CB51Contact from './pages/CB51Contact';
-import CB51Login from './pages/CB51Login';
 import CB51LoginDirect from './pages/CB51LoginDirect';
 import CB51Pricing from './pages/CB51Pricing';
 import CB51Privacy from './pages/CB51Privacy';
@@ -269,11 +268,9 @@ import ScottAccommodation from './pages/ScottAccommodation';
 import ScottAddArtist from './pages/ScottAddArtist';
 import ScottAddShow from './pages/ScottAddShow';
 import ScottArtist from './pages/ScottArtist';
-import ScottArtistHome from './pages/ScottArtistHome';
 import ScottBandVote from './pages/ScottBandVote';
 import ScottBiggerVision from './pages/ScottBiggerVision';
 import ScottCalendar from './pages/ScottCalendar';
-import ScottCalendarView from './pages/ScottCalendarView';
 import ScottComparison from './pages/ScottComparison';
 import ScottContracts from './pages/ScottContracts';
 import ScottDemos from './pages/ScottDemos';
@@ -282,7 +279,6 @@ import ScottEmailSyncDiagnostics from './pages/ScottEmailSyncDiagnostics';
 import ScottExpenses from './pages/ScottExpenses';
 import ScottFeatureRequests from './pages/ScottFeatureRequests';
 import ScottFeedback from './pages/ScottFeedback';
-import ScottFinanceAdmin from './pages/ScottFinanceAdmin';
 import ScottFinancialDashboard from './pages/ScottFinancialDashboard';
 import ScottGigOffers from './pages/ScottGigOffers';
 import ScottGigPacks from './pages/ScottGigPacks';
@@ -300,7 +296,6 @@ import ScottManager from './pages/ScottManager';
 import ScottManagerHome from './pages/ScottManagerHome';
 import ScottMedia from './pages/ScottMedia';
 import ScottMerch from './pages/ScottMerch';
-import ScottMessageInbox from './pages/ScottMessageInbox';
 import ScottOfflineMode from './pages/ScottOfflineMode';
 import ScottPasteGigOffer from './pages/ScottPasteGigOffer';
 import ScottPitchMode from './pages/ScottPitchMode';
@@ -310,10 +305,7 @@ import ScottSessions from './pages/ScottSessions';
 import ScottSessionsRecording from './pages/ScottSessionsRecording';
 import ScottSessionsRehearsal from './pages/ScottSessionsRehearsal';
 import ScottSessionsWriting from './pages/ScottSessionsWriting';
-import ScottSettings from './pages/ScottSettings';
 import ScottTeam from './pages/ScottTeam';
-import ScottTeamAccess from './pages/ScottTeamAccess';
-import ScottToDo from './pages/ScottToDo';
 import ScottTravelMode from './pages/ScottTravelMode';
 import ScottVisas from './pages/ScottVisas';
 import ScottWhiteLabel from './pages/ScottWhiteLabel';
@@ -467,7 +459,6 @@ export const PAGES = {
     "CB51AAA": CB51AAA,
     "CB51About": CB51About,
     "CB51Contact": CB51Contact,
-    "CB51Login": CB51Login,
     "CB51LoginDirect": CB51LoginDirect,
     "CB51Pricing": CB51Pricing,
     "CB51Privacy": CB51Privacy,
@@ -601,11 +592,9 @@ export const PAGES = {
     "ScottAddArtist": ScottAddArtist,
     "ScottAddShow": ScottAddShow,
     "ScottArtist": ScottArtist,
-    "ScottArtistHome": ScottArtistHome,
     "ScottBandVote": ScottBandVote,
     "ScottBiggerVision": ScottBiggerVision,
     "ScottCalendar": ScottCalendar,
-    "ScottCalendarView": ScottCalendarView,
     "ScottComparison": ScottComparison,
     "ScottContracts": ScottContracts,
     "ScottDemos": ScottDemos,
@@ -614,7 +603,6 @@ export const PAGES = {
     "ScottExpenses": ScottExpenses,
     "ScottFeatureRequests": ScottFeatureRequests,
     "ScottFeedback": ScottFeedback,
-    "ScottFinanceAdmin": ScottFinanceAdmin,
     "ScottFinancialDashboard": ScottFinancialDashboard,
     "ScottGigOffers": ScottGigOffers,
     "ScottGigPacks": ScottGigPacks,
@@ -632,7 +620,6 @@ export const PAGES = {
     "ScottManagerHome": ScottManagerHome,
     "ScottMedia": ScottMedia,
     "ScottMerch": ScottMerch,
-    "ScottMessageInbox": ScottMessageInbox,
     "ScottOfflineMode": ScottOfflineMode,
     "ScottPasteGigOffer": ScottPasteGigOffer,
     "ScottPitchMode": ScottPitchMode,
@@ -642,10 +629,7 @@ export const PAGES = {
     "ScottSessionsRecording": ScottSessionsRecording,
     "ScottSessionsRehearsal": ScottSessionsRehearsal,
     "ScottSessionsWriting": ScottSessionsWriting,
-    "ScottSettings": ScottSettings,
     "ScottTeam": ScottTeam,
-    "ScottTeamAccess": ScottTeamAccess,
-    "ScottToDo": ScottToDo,
     "ScottTravelMode": ScottTravelMode,
     "ScottVisas": ScottVisas,
     "ScottWhiteLabel": ScottWhiteLabel,
