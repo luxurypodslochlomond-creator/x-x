@@ -112,7 +112,7 @@ export default function CB51Support() {
                             <p>• Email includes venue name</p>
                             <p>• Date is clear (not "next week")</p>
                             <p>• Fee is mentioned</p>
-                            <p>If still failing, email family@uf51.love with the text</p>
+                            <p>If still failing, email support@cb51.io with the text</p>
                         </div>
                     </details>
 
