@@ -218,7 +218,7 @@ export default function CB51() {
                         {/* SETTINGS - COLLAPSIBLE */}
                         <button 
                             onClick={() => setSettingsOpen(!settingsOpen)}
-                            className="w-full font-mono text-xs font-bold text-gray-500 hover:text-gray-400 px-3 py-2 border border-gray-700 rounded hover:border-gray-600 transition-all flex items-center justify-between"
+                            className="w-full font-mono text-xs font-bold text-amber-600 hover:text-amber-500 px-3 py-2 border border-amber-600 rounded hover:border-amber-500 transition-all flex items-center justify-between"
                         >
                             <span>{settingsOpen ? '▼' : '▶'} SETTINGS</span>
                         </button>
