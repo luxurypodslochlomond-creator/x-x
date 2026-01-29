@@ -64,6 +64,33 @@ export default function AdminPlanPage() {
                     </CardContent>
                 </Card>
 
+                {/* KIDS UF51 - FUTURE */}
+                <Card className="bg-gradient-to-r from-yellow-900/40 to-orange-900/40 border-2 border-yellow-500/50">
+                    <CardHeader>
+                        <CardTitle className="text-2xl text-yellow-300 flex items-center gap-2">
+                            👶 KIDS UF51 (2026 ROADMAP)
+                        </CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                        <div className="space-y-3 text-gray-300">
+                            <p className="text-sm font-bold text-white">The Anti-YouTube: Progression Without Extraction</p>
+                            <ul className="space-y-1 ml-4">
+                                <li>🎮 <strong>Cleanups unlock Volckano levels</strong> (no cash, just fun)</li>
+                                <li>🎯 <strong>Zero behavioral tracking</strong> (no ads, no dopamine traps)</li>
+                                <li>👶 <strong>Parental dashboards</strong> (see what kids did, not how they felt)</li>
+                                <li>🔒 <strong>Monetization off until 18+</strong> (grow into adult UF51 naturally)</li>
+                                <li>📱 <strong>Simplified UI</strong> (built for Georgie's crew)</li>
+                                <li>🌍 <strong>Safer frequencies only</strong> (no experimental protocols)</li>
+                                <li>🎵 <strong>Spotify-style progression</strong> (play for joy, unlock levels, eventually earn if they choose)</li>
+                            </ul>
+                            <div className="p-3 bg-yellow-900/30 border-l-4 border-yellow-400 mt-3">
+                                <p className="text-yellow-300 text-xs font-bold">Philosophy:</p>
+                                <p className="text-xs text-gray-300">Zero extraction. Zero greed. Zero dopamine manipulation. They heal the planet for love first, money later (if ever).</p>
+                            </div>
+                        </div>
+                    </CardContent>
+                </Card>
+
                 {/* THE PHILOSOPHY */}
                 <Card className="bg-gradient-to-r from-pink-900/40 to-purple-900/40 border-2 border-pink-500/50">
                     <CardHeader>

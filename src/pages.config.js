@@ -134,6 +134,7 @@ import BusinessVault from './pages/BusinessVault';
 import CB51 from './pages/CB51';
 import CB51AAA from './pages/CB51AAA';
 import CB51About from './pages/CB51About';
+import CB51Contact from './pages/CB51Contact';
 import CB51Login from './pages/CB51Login';
 import CB51LoginDirect from './pages/CB51LoginDirect';
 import CB51Pricing from './pages/CB51Pricing';
@@ -272,8 +273,8 @@ import ScottArtistHome from './pages/ScottArtistHome';
 import ScottBandVote from './pages/ScottBandVote';
 import ScottBiggerVision from './pages/ScottBiggerVision';
 import ScottCalendar from './pages/ScottCalendar';
-import ScottComparison from './pages/ScottComparison';
 import ScottCalendarView from './pages/ScottCalendarView';
+import ScottComparison from './pages/ScottComparison';
 import ScottContracts from './pages/ScottContracts';
 import ScottDemos from './pages/ScottDemos';
 import ScottEmailDashboard from './pages/ScottEmailDashboard';
@@ -374,7 +375,6 @@ import YoungWarriors from './pages/YoungWarriors';
 import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
-import CB51Contact from './pages/CB51Contact';
 import __Layout from './Layout.jsx';
 
 
@@ -466,6 +466,7 @@ export const PAGES = {
     "CB51": CB51,
     "CB51AAA": CB51AAA,
     "CB51About": CB51About,
+    "CB51Contact": CB51Contact,
     "CB51Login": CB51Login,
     "CB51LoginDirect": CB51LoginDirect,
     "CB51Pricing": CB51Pricing,
@@ -604,8 +605,8 @@ export const PAGES = {
     "ScottBandVote": ScottBandVote,
     "ScottBiggerVision": ScottBiggerVision,
     "ScottCalendar": ScottCalendar,
-    "ScottComparison": ScottComparison,
     "ScottCalendarView": ScottCalendarView,
+    "ScottComparison": ScottComparison,
     "ScottContracts": ScottContracts,
     "ScottDemos": ScottDemos,
     "ScottEmailDashboard": ScottEmailDashboard,
@@ -706,7 +707,6 @@ export const PAGES = {
     "ZeroEgoProtocol": ZeroEgoProtocol,
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
-    "CB51Contact": CB51Contact,
 }
 
 export const pagesConfig = {
