@@ -51,7 +51,7 @@ export default function ScottArtistHome() {
     ];
 
     return (
-        <div className="min-h-screen text-white p-3 pb-20" style={{ backgroundColor: 'var(--cb51-bg-primary)' }}>
+        <div className="min-h-screen bg-black text-white p-3 pb-20">
             <button onClick={() => navigate(createPageUrl('CB51'))} className="flex items-center gap-2 hover:opacity-80 transition-all mb-3" style={{ color: 'var(--cb51-text-muted)' }}>
                 <ArrowLeft className="w-4 h-4" />
                 <span className="text-xs font-bold font-mono">BACK</span>
