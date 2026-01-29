@@ -149,43 +149,68 @@ export default function CB51() {
                     )}
 
                     {/* ARTIST CIRCLES - BIG AND CENTERED */}
-                    {artists.length > 0 && (
-                        <div className="mb-8 mt-6">
-                            <div className="flex justify-center items-center gap-8 flex-wrap">
-                                {artists.slice(0, 3).map((artist) => (
-                                    <Link 
+                     {artists.length > 0 && (
+                         <div className="mb-4 mt-6">
+                             <div className="flex justify-center items-center gap-8 flex-wrap">
+                                 {artists.slice(0, 3).map((artist) => (
+                                     <Link 
+                                         key={artist.id}
+                                         to={createPageUrl(`ScottArtistHome?id=${artist.id}`)}
+                                     >
+                                         <motion.div
+                                             whileTap={{ scale: 0.95 }}
+                                             className="w-24 h-24 bg-cyan-400 rounded-full flex items-center justify-center font-black text-3xl text-black cursor-pointer hover:opacity-90 transition-opacity"
+                                         >
+                                             {artist.profile_pic_url ? (
+                                                 <img 
+                                                     src={artist.profile_pic_url} 
+                                                     alt={artist.name}
+                                                     className="w-full h-full object-cover rounded-full"
+                                                 />
+                                             ) : (
+                                                 artist.name.charAt(0).toUpperCase()
+                                             )}
+                                         </motion.div>
+                                     </Link>
+                                 ))}
+                                 {artists.length < 5 && (
+                                     <Link to={createPageUrl('ScottAddArtist')}>
+                                         <motion.div
+                                             whileTap={{ scale: 0.95 }}
+                                             className="w-24 h-24 border-2 border-dashed border-gray-600 rounded-full flex items-center justify-center cursor-pointer hover:border-cyan-400 transition-colors"
+                                         >
+                                             <Plus className="w-8 h-8 text-cyan-400" />
+                                         </motion.div>
+                                     </Link>
+                                 )}
+                             </div>
+                         </div>
+                     )}
+
+                    {/* EDIT ARTISTS - RIGHT AFTER CIRCLES */}
+                    <div className="mb-4 lg:hidden">
+                        <button 
+                            onClick={() => setEditArtistsOpen(!editArtistsOpen)}
+                            className="w-full font-mono text-xs font-bold text-cyan-400 text-left py-2 flex items-center gap-2"
+                        >
+                            <span>{editArtistsOpen ? '▼' : '▶'}</span>
+                            Edit Artists
+                        </button>
+                        {editArtistsOpen && (
+                            <div className="space-y-1 mt-1">
+                                {artists.map((artist) => (
+                                    <button
                                         key={artist.id}
-                                        to={createPageUrl(`ScottArtistHome?id=${artist.id}`)}
+                                        onClick={() => navigate(createPageUrl(`ScottAddArtist?edit=${artist.id}`))}
+                                        className="w-full bg-black border border-cyan-500/30 rounded p-2 text-left hover:border-cyan-500 transition-all flex items-center justify-between text-xs"
                                     >
-                                        <motion.div
-                                            whileTap={{ scale: 0.95 }}
-                                            className="w-24 h-24 bg-cyan-400 rounded-full flex items-center justify-center font-black text-3xl text-black cursor-pointer hover:opacity-90 transition-opacity"
-                                        >
-                                            {artist.profile_pic_url ? (
-                                                <img 
-                                                    src={artist.profile_pic_url} 
-                                                    alt={artist.name}
-                                                    className="w-full h-full object-cover rounded-full"
-                                                />
-                                            ) : (
-                                                artist.name.charAt(0).toUpperCase()
-                                            )}
-                                        </motion.div>
-                                    </Link>
+                                        <span className="font-mono text-cyan-400">{artist.name}</span>
+                                        <span className="text-cyan-400">♪</span>
+                                    </button>
                                 ))}
-                                {artists.length < 5 && (
-                                    <Link to={createPageUrl('ScottAddArtist')}>
-                                        <motion.div
-                                            whileTap={{ scale: 0.95 }}
-                                            className="w-24 h-24 border-2 border-dashed border-gray-600 rounded-full flex items-center justify-center cursor-pointer hover:border-cyan-400 transition-colors"
-                                        >
-                                            <Plus className="w-8 h-8 text-cyan-400" />
-                                        </motion.div>
-                                    </Link>
-                                )}
                             </div>
-                        </div>
-                    )}
+                        )}
+                    </div>
 
                     {/* SETTINGS & TOOLS - ALWAYS VISIBLE ON MOBILE */}
                     <div className="space-y-2">
