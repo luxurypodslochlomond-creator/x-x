@@ -375,6 +375,7 @@ import ScottMessageInbox from './pages/ScottMessageInbox';
 import ScottSettings from './pages/ScottSettings';
 import CB51Login from './pages/CB51Login';
 import ScottTeamAccess from './pages/ScottTeamAccess';
+import CB51NotificationsSpec from './pages/CB51NotificationsSpec';
 import __Layout from './Layout.jsx';
 
 
@@ -707,6 +708,7 @@ export const PAGES = {
     "ScottSettings": ScottSettings,
     "CB51Login": CB51Login,
     "ScottTeamAccess": ScottTeamAccess,
+    "CB51NotificationsSpec": CB51NotificationsSpec,
 }
 
 export const pagesConfig = {
