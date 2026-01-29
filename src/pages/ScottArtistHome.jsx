@@ -71,24 +71,24 @@ export default function ScottArtistHome() {
 
             <div className="grid grid-cols-2 gap-2 mb-6">
                 {sections.map((section) => {
-                                const Icon = section.icon;
-                                const colorMap = {
-                                    cyan: { border: 'border-cyan-500', bg: 'bg-cyan-500' },
-                                    orange: { border: 'border-orange-500', bg: 'bg-orange-500' }
-                                };
-                                const color = colorMap[section.color] || colorMap.cyan;
+                    const Icon = section.icon;
+                    const colorMap = {
+                        cyan: { border: 'border-cyan-500', bg: 'bg-cyan-500' },
+                        orange: { border: 'border-orange-500', bg: 'bg-orange-500' }
+                    };
+                    const color = colorMap[section.color] || colorMap.cyan;
 
-                                return (
-                                    <Link key={section.title} to={section.link}>
-                                        <motion.div whileTap={{ scale: 0.96 }} className={`bg-black border-2 ${color.border} rounded-lg p-2 text-center`}>
-                                            <div className={`w-12 h-12 rounded ${color.bg} text-black font-black flex items-center justify-center mx-auto mb-1`}>
-                                                <Icon className="w-6 h-6" />
-                                            </div>
-                                            <p className="text-white font-black text-[10px] font-mono">{section.title}</p>
-                                        </motion.div>
-                                    </Link>
-                                );
-                            })}
+                    return (
+                        <Link key={section.title} to={section.link}>
+                            <motion.div whileTap={{ scale: 0.96 }} className={`bg-black border-2 ${color.border} rounded-lg p-2 text-center`}>
+                                <div className={`w-12 h-12 rounded ${color.bg} text-black font-black flex items-center justify-center mx-auto mb-1`}>
+                                    <Icon className="w-6 h-6" />
+                                </div>
+                                <p className="text-white font-black text-[10px] font-mono">{section.title}</p>
+                            </motion.div>
+                        </Link>
+                    );
+                })}
             </div>
 
             <div className="bg-black border border-cyan-500/20 rounded-lg p-2 mb-3">
