@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
-import { Radio, ArrowLeft, Music, Calendar, ClipboardList, DollarSign, Mic2, Plus, Upload, X, Phone, Mail, MessageCircle } from 'lucide-react';
+import { Radio, ArrowLeft, Music, Calendar, ClipboardList, DollarSign, Mic2, Plus, Phone, Mail, MessageCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
 import { useQuery } from '@tanstack/react-query';
@@ -24,8 +24,6 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 export default function ScottArtistHome() {
     const navigate = useNavigate();
     const [artist, setArtist] = useState(null);
-    const [isEditingPic, setIsEditingPic] = useState(false);
-    const [picLoading, setPicLoading] = useState(false);
     const [calendarExpanded, setCalendarExpanded] = useState(false);
     const urlParams = new URLSearchParams(window.location.search);
     const artistId = urlParams.get('id');
@@ -47,21 +45,7 @@ export default function ScottArtistHome() {
         }
     });
 
-    const handlePicUpload = async (e) => {
-        const file = e.target.files?.[0];
-        if (!file) return;
-        
-        try {
-            setPicLoading(true);
-            const { file_url } = await base44.integrations.Core.UploadFile({ file });
-            await updateArtistMutation.mutateAsync({ profile_pic_url: file_url });
-            setIsEditingPic(false);
-        } catch (err) {
-            console.error('Upload failed:', err);
-        } finally {
-            setPicLoading(false);
-        }
-    };
+
 
     useEffect(() => {
         // Set page title and CB51 branding
@@ -155,53 +139,17 @@ export default function ScottArtistHome() {
                 </button>
 
                 <div className="flex items-center gap-3 mb-3">
-                    <div className="relative">
-                        <div className="relative group">
-                            {artist.profile_pic_url ? (
-                                <img 
-                                    src={artist.profile_pic_url} 
-                                    alt={artist.name}
-                                    className="w-12 h-12 rounded object-cover border border-cyan-500"
-                                />
-                            ) : (
-                                <div className="w-12 h-12 rounded bg-cyan-500 text-black font-black text-lg flex items-center justify-center">
-                                    {artist.name.charAt(0)}
-                                </div>
-                            )}
-                            <button
-                                onClick={() => setIsEditingPic(!isEditingPic)}
-                                className="absolute inset-0 rounded bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center"
-                            >
-                                <Upload className="w-4 h-4 text-cyan-400" />
-                            </button>
+                    {artist.profile_pic_url ? (
+                        <img 
+                            src={artist.profile_pic_url} 
+                            alt={artist.name}
+                            className="w-12 h-12 rounded object-cover border border-cyan-500"
+                        />
+                    ) : (
+                        <div className="w-12 h-12 rounded bg-cyan-500 text-black font-black text-lg flex items-center justify-center">
+                            {artist.name.charAt(0)}
                         </div>
-                        {isEditingPic && (
-                            <div className="absolute top-full mt-2 left-0 z-50 min-w-[200px]">
-                                <div className="bg-black border-2 border-cyan-500 rounded-lg p-3 shadow-[0_0_20px_rgba(6,182,212,0.3)]">
-                                    <input
-                                        id="profile-pic-upload"
-                                        type="file"
-                                        accept="image/*"
-                                        onChange={handlePicUpload}
-                                        disabled={picLoading}
-                                        className="hidden"
-                                    />
-                                    <label 
-                                        htmlFor="profile-pic-upload"
-                                        className={`block text-center bg-cyan-500 text-black font-mono font-bold text-xs py-2 px-3 rounded cursor-pointer hover:bg-cyan-600 transition-colors ${picLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
-                                    >
-                                        {picLoading ? 'UPLOADING...' : 'CHOOSE PHOTO'}
-                                    </label>
-                                    <button
-                                        onClick={() => setIsEditingPic(false)}
-                                        className="w-full mt-2 text-gray-500 hover:text-gray-400 font-mono text-xs"
-                                    >
-                                        Cancel
-                                    </button>
-                                </div>
-                            </div>
-                        )}
-                    </div>
+                    )}
                     <div>
                         <h1 className="text-xl font-black text-white font-mono">{artist.name}</h1>
                         <p className="text-gray-600 text-xs font-mono">Operations</p>
