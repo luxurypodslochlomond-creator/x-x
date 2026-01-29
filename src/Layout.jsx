@@ -399,8 +399,7 @@ const LayoutInner = ({ children, currentPageName }) => {
 
   // CB51 ARTIST MANAGEMENT MENU
   const cb51Nav = [
-      { title: "About CB51", url: createPageUrl("CB51About"), icon: Radio, description: "Why we built this" },
-      { title: "Dashboard", url: createPageUrl("CB51"), icon: Home, description: "Overview" },
+        { title: "Dashboard", url: createPageUrl("CB51"), icon: Home, description: "Overview" },
       { title: "Artists", url: createPageUrl("ScottArtist"), icon: Users, description: "Manage roster" },
       { title: "Calendar", url: createPageUrl("ScottCalendarView"), icon: Calendar, description: "All shows" },
       { title: "Messages", url: createPageUrl("ScottMessageInbox"), icon: Mail, description: "Inbox" },
