@@ -17,40 +17,43 @@ import CB51SecurityNotice from '@/components/scott/CB51SecurityNotice';
  */
 
 export default function CB51() {
-    const navigate = useNavigate();
-    const [user, setUser] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const queryClient = useQueryClient();
+          const navigate = useNavigate();
+          const [user, setUser] = useState(null);
+          const [loading, setLoading] = useState(true);
+          const [editArtistsOpen, setEditArtistsOpen] = useState(false);
+          const [moreToolsOpen, setMoreToolsOpen] = useState(false);
+          const [archivedOpen, setArchivedOpen] = useState(false);
+          const queryClient = useQueryClient();
 
-    useEffect(() => {
-        // Set page title and meta tags for CB51 branding
-        document.title = 'CB51 • Artist Management';
-        
-        // Update meta tags for sharing/bookmarking
-        let metaTheme = document.querySelector('meta[name="theme-color"]');
-        if (!metaTheme) {
-            metaTheme = document.createElement('meta');
-            metaTheme.name = 'theme-color';
-            document.head.appendChild(metaTheme);
-        }
-        metaTheme.content = '#06b6d4';
-        
-        let metaAppName = document.querySelector('meta[name="apple-mobile-web-app-title"]');
-        if (!metaAppName) {
-            metaAppName = document.createElement('meta');
-            metaAppName.name = 'apple-mobile-web-app-title';
-            document.head.appendChild(metaAppName);
-        }
-        metaAppName.content = 'CB51';
-        
-        base44.auth.me().then(async (currentUser) => {
-            setUser(currentUser);
-            setLoading(false);
-        }).catch(() => {
-            // Not logged in - redirect to CB51 login page
-            navigate(createPageUrl('CB51Login'));
-        });
-    }, [navigate]);
+          useEffect(() => {
+              // Set page title and meta tags for CB51 branding
+              document.title = 'CB51 • Artist Management';
+
+              // Update meta tags for sharing/bookmarking
+              let metaTheme = document.querySelector('meta[name="theme-color"]');
+              if (!metaTheme) {
+                  metaTheme = document.createElement('meta');
+                  metaTheme.name = 'theme-color';
+                  document.head.appendChild(metaTheme);
+              }
+              metaTheme.content = '#06b6d4';
+
+              let metaAppName = document.querySelector('meta[name="apple-mobile-web-app-title"]');
+              if (!metaAppName) {
+                  metaAppName = document.createElement('meta');
+                  metaAppName.name = 'apple-mobile-web-app-title';
+                  document.head.appendChild(metaAppName);
+              }
+              metaAppName.content = 'CB51';
+
+              base44.auth.me().then(async (currentUser) => {
+                  setUser(currentUser);
+                  setLoading(false);
+              }).catch(() => {
+                  // Not logged in - redirect to CB51 login page
+                  navigate(createPageUrl('CB51Login'));
+              });
+          }, [navigate]);
 
     // Load artists IMMEDIATELY (most important)
     const { data: allArtists = [], isLoading: artistsLoading } = useQuery({
