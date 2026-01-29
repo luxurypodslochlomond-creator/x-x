@@ -190,10 +190,9 @@ export default function CB51() {
                             <Link to={createPageUrl('ScottAddArtist')}>
                                 <motion.div
                                     whileTap={{ scale: 0.96 }}
-                                    className="w-20 h-20 border-2 border-dashed rounded-full flex items-center justify-center transition-all cursor-pointer"
-                                    style={{ backgroundColor: 'var(--cb51-bg-card)', borderColor: 'var(--cb51-border)' }}
+                                    className="w-20 h-20 border-2 border-dashed border-gray-600 rounded-full flex items-center justify-center transition-all cursor-pointer bg-black"
                                 >
-                                    <Plus className="w-6 h-6" style={{ color: 'var(--cb51-rose)' }} />
+                                    <Plus className="w-6 h-6 text-cyan-400" />
                                 </motion.div>
                             </Link>
                         </div>
