@@ -86,7 +86,7 @@ export default function CB51() {
         staleTime: 120000
     });
 
-    // Memoize stats calculations
+    // Memoize stats - but don't display them yet
     const stats = useMemo(() => ({
         pendingOffers: allOffers.filter(o => o.status === 'pending_manager_review').length,
         awaitingBand: allOffers.filter(o => o.status === 'sent_to_band').length,
@@ -96,6 +96,9 @@ export default function CB51() {
         upcomingGigs: allOffers.filter(o => o.status === 'confirmed' && o.date && new Date(o.date) > new Date()).length,
         pipelineValue: allOffers.filter(o => o.status === 'pending_manager_review' || o.status === 'sent_to_band').reduce((sum, o) => sum + (o.fee || 0), 0)
     }), [allOffers, invoices, messages]);
+
+    // Quick link to pending offers if any
+    const hasPendingOffers = stats.pendingOffers > 0;
 
     const archiveArtistMutation = useMutation({
         mutationFn: ({ artistId, archived }) => 
@@ -215,7 +218,16 @@ export default function CB51() {
                 )}
             </div>
 
-            {/* QUICK LINKS - Keep minimal, only essential */}
+            {/* QUICK LINKS - Only show when needed */}
+            {hasPendingOffers && (
+                <div className="flex gap-2 mb-6 mt-6">
+                    <Link to={createPageUrl('ScottGigOffers')} className="flex-1">
+                        <button className="w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded-lg font-mono text-xs font-bold transition-all animate-pulse">
+                            {stats.pendingOffers} PENDING OFFER{stats.pendingOffers !== 1 ? 'S' : ''}
+                        </button>
+                    </Link>
+                </div>
+            )}
             <div className="flex gap-2 mb-6 mt-6">
                 <Link to={createPageUrl('ScottSettings')} className="flex-1">
                     <button className="w-full bg-amber-500/10 border border-amber-500/50 text-amber-400 py-2 rounded-lg font-mono text-xs font-bold hover:bg-amber-500/20 transition-all">
