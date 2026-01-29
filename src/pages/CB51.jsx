@@ -309,8 +309,7 @@ export default function CB51() {
                         </div>
                     )}
 
-                    {/* SETTINGS MODAL */}
-                    <ScottSettingsModal isOpen={settingsOpen} onClose={() => setSettingsOpen(false)} />
+
                     </div>
                     );
                     }
