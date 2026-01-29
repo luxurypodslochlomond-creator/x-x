@@ -177,7 +177,7 @@ export default function CB51() {
                                                     className="w-full h-full object-cover"
                                                 />
                                             ) : (
-                                                <div className="w-full h-full text-black font-black text-2xl flex items-center justify-center" style={{ backgroundColor: 'var(--cb51-rose)' }}>
+                                                <div className="w-full h-full text-black font-black text-2xl flex items-center justify-center bg-cyan-400">
                                                     {artist.name.charAt(0)}
                                                 </div>
                                             )}
