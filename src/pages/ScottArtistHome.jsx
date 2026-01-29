@@ -44,10 +44,10 @@ export default function ScottArtistHome() {
     }
 
     const sections = [
-        { title: 'LIVE', icon: Mic2, link: createPageUrl(`ScottLive?id=${artistId}`), color: 'green' },
+        { title: 'LIVE', icon: Mic2, link: createPageUrl(`ScottLive?id=${artistId}`), color: 'cyan' },
         { title: 'SESSIONS', icon: Music, link: createPageUrl(`ScottSessions?id=${artistId}`), color: 'orange' },
         { title: 'TO-DO', icon: ClipboardList, link: createPageUrl(`ScottToDo?id=${artistId}`), color: 'cyan' },
-        { title: 'FINANCE', icon: DollarSign, link: createPageUrl(`ScottFinanceAdmin?id=${artistId}`), color: 'amber' },
+        { title: 'FINANCE', icon: DollarSign, link: createPageUrl(`ScottFinanceAdmin?id=${artistId}`), color: 'orange' },
     ];
 
     return (
@@ -73,10 +73,8 @@ export default function ScottArtistHome() {
                 {sections.map((section) => {
                                 const Icon = section.icon;
                                 const colorMap = {
-                                    green: { border: 'border-green-500', bg: 'bg-green-500' },
-                                    orange: { border: 'border-amber-500', bg: 'bg-amber-500' },
                                     cyan: { border: 'border-cyan-500', bg: 'bg-cyan-500' },
-                                    amber: { border: 'border-yellow-500', bg: 'bg-yellow-500' }
+                                    orange: { border: 'border-orange-500', bg: 'bg-orange-500' }
                                 };
                                 const color = colorMap[section.color] || colorMap.cyan;
 
