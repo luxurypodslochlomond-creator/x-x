@@ -68,6 +68,7 @@ export default function TermsPage() {
                                         <li>• Respect other family members</li>
                                         <li>• Help build a better world</li>
                                         <li>• Share music you love</li>
+                                        <li>• <strong className="text-yellow-300">Be careful when picking up litter - avoid sharp objects, broken glass, needles, or anything dangerous</strong></li>
                                     </ul>
                                 </div>
                                 <div className="bg-red-900/30 p-4 rounded-lg border-l-4 border-red-400">
@@ -311,10 +312,43 @@ export default function TermsPage() {
                         </section>
 
                         <section>
-                            <h3 className="text-2xl font-black text-cyan-400 mb-3">8. Age Requirements</h3>
-                            <p className="text-gray-300 leading-relaxed">
-                                You must be 13+ to create an account. Under 18? Get parent permission first.
-                            </p>
+                            <h3 className="text-2xl font-black text-cyan-400 mb-3">8. Age Requirements & Parental Consent</h3>
+                            <div className="space-y-4 text-gray-300 leading-relaxed">
+                                <p>
+                                    You must be 13+ to use UF51. <strong className="text-white">If you're under 13, a parent or guardian MUST approve first.</strong>
+                                </p>
+                                
+                                <div className="bg-amber-900/30 p-4 rounded-lg border-l-4 border-amber-400">
+                                    <p className="font-bold text-amber-300 mb-2">🚨 FOR PARENTS:</p>
+                                    <p className="text-sm mb-3">
+                                        <strong className="text-white">What UF51 Collects From Kids:</strong>
+                                    </p>
+                                    <ul className="text-sm space-y-1 ml-4">
+                                        <li>✓ Cleanup location (county-level only, not exact address)</li>
+                                        <li>✓ Photo of litter collected (hashed fingerprint for fraud prevention)</li>
+                                        <li>✓ Weight of litter collected</li>
+                                        <li>✓ Which healing frequencies they used (anonymous, no personal data)</li>
+                                    </ul>
+                                </div>
+                                
+                                <div className="bg-red-900/30 p-4 rounded-lg border-l-4 border-red-400">
+                                    <p className="font-bold text-red-300 mb-2">🚫 WHAT WE NEVER COLLECT:</p>
+                                    <ul className="text-sm space-y-1 ml-4">
+                                        <li>✗ Email address (not required)</li>
+                                        <li>✗ Real name (can use nickname)</li>
+                                        <li>✗ Exact GPS location</li>
+                                        <li>✗ Face recognition data</li>
+                                        <li>✗ Browsing history</li>
+                                        <li>✗ Friend lists or contacts</li>
+                                        <li>✗ Any behavioral tracking for ads</li>
+                                        <li>✗ Personal conversations (AI51 chats are private)</li>
+                                    </ul>
+                                </div>
+                                
+                                <p>
+                                    <strong className="text-white">Zero data harvesting.</strong> We literally cannot sell children's data because we don't collect enough to sell. We only collect what's needed to verify cleanups and prevent fraud.
+                                </p>
+                            </div>
                         </section>
 
                         <section>
