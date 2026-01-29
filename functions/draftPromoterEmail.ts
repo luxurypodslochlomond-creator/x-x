@@ -1,58 +1,64 @@
 import { createClientFromRequest } from 'npm:@base44/sdk@0.8.6';
 
-/**
- * DRAFT EMAIL TO PROMOTER - When gig confirmed
- * Creates email body Scott can review & send
- */
-
 Deno.serve(async (req) => {
   try {
     const base44 = createClientFromRequest(req);
-    const payload = await req.json();
+    const user = await base44.auth.me();
 
-    const { event, data } = payload;
-
-    // Only trigger on confirmed status
-    if (data?.status !== 'confirmed') {
-      return Response.json({ skipped: true });
+    if (!user) {
+      return Response.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    // Get gig offer
-    const gigOffer = await base44.asServiceRole.entities.ScottGigOffer.get(data.id);
-    
-    // Get artist
-    const artist = await base44.asServiceRole.entities.ScottArtist.get(gigOffer.artist_id);
+    const { gig_offer_id } = await req.json();
 
-    // Get band members
-    const bandMembers = await base44.asServiceRole.entities.ScottBandMember.filter({
-      artist_id: gigOffer.artist_id
+    // Fetch gig offer details
+    const offers = await base44.entities.ScottGigOffer.filter({ id: gig_offer_id });
+    if (!offers.length) {
+      return Response.json({ error: 'Gig offer not found' }, { status: 404 });
+    }
+
+    const gig = offers[0];
+
+    // Fetch band votes
+    const responses = await base44.entities.ScottBandResponse.filter({ 
+      gig_offer_id: gig_offer_id 
     });
 
-    // Draft email
-    const emailBody = `Hi ${gigOffer.promoter_name},
+    const yesList = responses
+      .filter(r => r.decision === 'yes')
+      .map(r => r.band_member_name)
+      .join(', ');
 
-Great news! ${artist.name} is confirmed for the gig at ${gigOffer.venue_name} on ${gigOffer.date}.
+    const noList = responses
+      .filter(r => r.decision === 'no')
+      .map(r => `${r.band_member_name}${r.reason_if_no ? ` (${r.reason_if_no})` : ''}`)
+      .join(', ');
 
-All band members are locked in and ready:
-${bandMembers.map(m => `• ${m.name}`).join('\n')}
+    // Draft professional email
+    const emailDraft = `Subject: Gig Confirmation - ${gig.venue || 'Your Event'} ${gig.date || ''}
 
-Fee: £${gigOffer.fee}
+Dear ${gig.promoter_contact_name || 'Event Organizer'},
 
-Looking forward to it!
+I'm delighted to confirm that the band is available for ${gig.venue || 'your event'} on ${gig.date || 'the date discussed'}.
 
-${artist.name}`;
+Band Status:
+✓ Confirmed: ${yesList}
+${noList ? `✕ Unavailable: ${noList}` : ''}
 
-    // Save draft to gig offer
-    await base44.asServiceRole.entities.ScottGigOffer.update(gigOffer.id, {
-      promoter_email_draft: emailBody
-    });
+Fee: £${gig.fee || '[TO CONFIRM]'}
+Load-in: ${gig.load_in_time || '[TO CONFIRM]'}
+Set Duration: ${gig.set_duration || '[TO CONFIRM]'}
+
+Looking forward to a great performance.
+
+Best regards,
+${user.full_name}`;
 
     return Response.json({ 
-      success: true,
-      draft_created: true,
-      gig: gigOffer.venue_name
+      email_draft: emailDraft,
+      band_confirmed: yesList.split(', ').length,
+      band_unavailable: noList ? noList.split(', ').length : 0
     });
-
   } catch (error) {
     return Response.json({ error: error.message }, { status: 500 });
   }
