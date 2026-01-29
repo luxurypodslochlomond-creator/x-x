@@ -312,11 +312,60 @@ export default function PrivacyPolicyPage() {
                         </section>
 
                         <section>
-                            <h3 className="text-3xl font-black text-cyan-400 mb-4">Children's Privacy</h3>
-                            <p className="text-gray-300">
-                                UF51 is for ages 13+. We don't knowingly collect data from children under 13. 
-                                If we discover underage use, we'll delete the account immediately.
-                            </p>
+                            <h3 className="text-3xl font-black text-cyan-400 mb-4">Children's Privacy & Parental Consent (COPPA Compliance)</h3>
+                            <div className="space-y-4">
+                                <p className="text-gray-300">
+                                    UF51 is for ages 13+. <strong className="text-white">Children under 13 can only use UF51 with verifiable parental consent.</strong>
+                                </p>
+                                
+                                <div className="bg-yellow-900/30 p-4 rounded-lg border-2 border-yellow-500/50">
+                                    <p className="font-bold text-yellow-300 mb-3">📋 PARENTAL CONSENT REQUIRED:</p>
+                                    <p className="text-sm text-gray-300 mb-3">
+                                        Parents/guardians must confirm they:
+                                    </p>
+                                    <ul className="text-sm text-gray-300 space-y-1 ml-4">
+                                        <li>✓ Understand what data UF51 collects (cleanup location, photo hash, weight, frequency usage)</li>
+                                        <li>✓ Understand what UF51 does NOT collect (email, name, face data, browsing history, ads tracking)</li>
+                                        <li>✓ Approve their child's participation in cleanup activities</li>
+                                        <li>✓ Accept that UF51 uses AI to verify cleanups and prevent fraud</li>
+                                        <li>✓ Acknowledge litter cleanup safety risks and will supervise</li>
+                                    </ul>
+                                </div>
+                                
+                                <div className="bg-green-900/30 p-4 rounded-lg border-2 border-green-500/50">
+                                    <p className="font-bold text-green-300 mb-2">✅ ZERO DATA HARVESTING PROMISE:</p>
+                                    <p className="text-sm text-gray-300">
+                                        We collect ONLY the minimum data needed to:
+                                        <ul className="mt-2 space-y-1 ml-4">
+                                            <li>1. Verify cleanups are real (photo hash + weight)</li>
+                                            <li>2. Calculate $P51 rewards fairly</li>
+                                            <li>3. Prevent fraud (duplicate photos, fake locations)</li>
+                                        </ul>
+                                    </p>
+                                    <p className="text-sm text-green-300 font-bold mt-2">
+                                        We CANNOT and WILL NOT:
+                                        <ul className="mt-2 space-y-1 ml-4 text-gray-300 font-normal">
+                                            <li>• Sell your child's data</li>
+                                            <li>• Use it for targeted advertising</li>
+                                            <li>• Create psychological profiles</li>
+                                            <li>• Track their behavior</li>
+                                            <li>• Share it with third parties</li>
+                                        </ul>
+                                    </p>
+                                </div>
+                                
+                                <div className="bg-red-900/30 p-4 rounded-lg border-l-4 border-red-400">
+                                    <p className="font-bold text-red-300 mb-2">⚠️ SAFETY NOTICE:</p>
+                                    <p className="text-sm text-gray-300">
+                                        Litter cleanup can be dangerous. Children may encounter broken glass, sharp objects, needles, or hazardous materials. 
+                                        <strong className="text-white"> Parents must supervise all cleanup activities</strong> and ensure proper safety equipment (gloves, appropriate footwear).
+                                    </p>
+                                </div>
+                                
+                                <p className="text-gray-300 text-sm">
+                                    If we discover a child under 13 using UF51 without parental consent, we'll delete the account and all associated data immediately.
+                                </p>
+                            </div>
                         </section>
 
                         <section>
