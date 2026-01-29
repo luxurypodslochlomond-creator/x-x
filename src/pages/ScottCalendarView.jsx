@@ -100,61 +100,61 @@ export default function ScottCalendarView() {
                        animate={{ opacity: 1, height: 'auto' }}
                        exit={{ opacity: 0, height: 0 }}
                        className="mb-6 bg-black border border-gray-800 rounded p-4 space-y-3"
-                   >
-                       <Input
-                            placeholder="Event name"
-                            value={newEvent.title}
-                            onChange={(e) => setNewEvent({...newEvent, title: e.target.value})}
-                            className="bg-black border-gray-700 text-white font-mono"
-                        />
+                    >
                         <Input
-                            type="date"
-                            value={newEvent.date}
-                            onChange={(e) => setNewEvent({...newEvent, date: e.target.value})}
-                            className="bg-black border-gray-700 text-white font-mono"
-                        />
-                        <Input
-                            placeholder="Location (optional)"
-                            value={newEvent.location}
-                            onChange={(e) => setNewEvent({...newEvent, location: e.target.value})}
-                            className="bg-black border-gray-700 text-white font-mono"
-                        />
-                        <div className="flex gap-2">
-                            <button
-                                onClick={() => setNewEvent({...newEvent, status: 'confirmed'})}
-                                className={`flex-1 py-2 rounded font-bold text-sm font-mono ${newEvent.status === 'confirmed' ? 'bg-cyan-500 text-black' : 'bg-gray-800 text-gray-400'}`}
-                            >
-                                CONFIRMED
-                            </button>
-                            <button
-                                onClick={() => setNewEvent({...newEvent, status: 'tbc'})}
-                                className={`flex-1 py-2 rounded font-bold text-sm font-mono ${newEvent.status === 'tbc' ? 'bg-gray-600 text-white' : 'bg-gray-800 text-gray-400'}`}
-                            >
-                                TBC
-                            </button>
-                            <button
-                                onClick={() => setNewEvent({...newEvent, status: 'unavailable'})}
-                                className={`flex-1 py-2 rounded font-bold text-sm font-mono ${newEvent.status === 'unavailable' ? 'bg-gray-500 text-white' : 'bg-gray-800 text-gray-400'}`}
-                            >
-                                UNAVAILABLE
-                            </button>
-                        </div>
-                        <div className="flex gap-2">
-                            <Button
-                                onClick={() => setShowAddEvent(false)}
-                                className="flex-1 bg-gray-700 hover:bg-gray-600"
-                            >
-                                CANCEL
-                            </Button>
-                            <Button
-                                onClick={handleAddEvent}
-                                disabled={!newEvent.title.trim() || !newEvent.date || createEventMutation.isPending}
-                                className="flex-1 bg-cyan-500 hover:bg-cyan-600 text-black font-black"
-                            >
-                                SAVE
-                            </Button>
-                        </div>
-                    </motion.div>
+                             placeholder="Event name"
+                             value={newEvent.title}
+                             onChange={(e) => setNewEvent({...newEvent, title: e.target.value})}
+                             className="bg-black border-gray-700 text-white font-mono"
+                         />
+                         <Input
+                             type="date"
+                             value={newEvent.date}
+                             onChange={(e) => setNewEvent({...newEvent, date: e.target.value})}
+                             className="bg-black border-gray-700 text-white font-mono"
+                         />
+                         <Input
+                             placeholder="Location (optional)"
+                             value={newEvent.location}
+                             onChange={(e) => setNewEvent({...newEvent, location: e.target.value})}
+                             className="bg-black border-gray-700 text-white font-mono"
+                         />
+                         <div className="flex gap-2">
+                             <button
+                                 onClick={() => setNewEvent({...newEvent, status: 'confirmed'})}
+                                 className={`flex-1 py-2 rounded font-bold text-sm font-mono ${newEvent.status === 'confirmed' ? 'bg-cyan-500 text-black' : 'bg-gray-800 text-gray-400'}`}
+                             >
+                                 CONFIRMED
+                             </button>
+                             <button
+                                 onClick={() => setNewEvent({...newEvent, status: 'tbc'})}
+                                 className={`flex-1 py-2 rounded font-bold text-sm font-mono ${newEvent.status === 'tbc' ? 'bg-gray-600 text-white' : 'bg-gray-800 text-gray-400'}`}
+                             >
+                                 TBC
+                             </button>
+                             <button
+                                 onClick={() => setNewEvent({...newEvent, status: 'unavailable'})}
+                                 className={`flex-1 py-2 rounded font-bold text-sm font-mono ${newEvent.status === 'unavailable' ? 'bg-gray-500 text-white' : 'bg-gray-800 text-gray-400'}`}
+                             >
+                                 UNAVAILABLE
+                             </button>
+                         </div>
+                         <div className="flex gap-2">
+                             <Button
+                                 onClick={() => setShowAddEvent(false)}
+                                 className="flex-1 bg-gray-700 hover:bg-gray-600"
+                             >
+                                 CANCEL
+                             </Button>
+                             <Button
+                                 onClick={handleAddEvent}
+                                 disabled={!newEvent.title.trim() || !newEvent.date || createEventMutation.isPending}
+                                 className="flex-1 bg-cyan-500 hover:bg-cyan-600 text-black font-black"
+                             >
+                                 SAVE
+                             </Button>
+                         </div>
+                     </motion.div>
                 )}
             </AnimatePresence>
 
