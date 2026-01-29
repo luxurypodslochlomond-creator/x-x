@@ -155,39 +155,48 @@ export default function ScottArtistHome() {
                 </button>
 
                 <div className="flex items-center gap-3 mb-3">
-                    <div className="relative group">
-                        {artist.profile_pic_url ? (
-                            <img 
-                                src={artist.profile_pic_url} 
-                                alt={artist.name}
-                                className="w-12 h-12 rounded object-cover border border-cyan-500"
-                            />
-                        ) : (
-                            <div className="w-12 h-12 rounded bg-cyan-500 text-black font-black text-lg flex items-center justify-center">
-                                {artist.name.charAt(0)}
-                            </div>
-                        )}
-                        <button
-                            onClick={() => setIsEditingPic(!isEditingPic)}
-                            className="absolute inset-0 rounded bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center"
-                        >
-                            <Upload className="w-4 h-4 text-white" />
-                        </button>
+                    <div className="relative">
+                        <div className="relative group">
+                            {artist.profile_pic_url ? (
+                                <img 
+                                    src={artist.profile_pic_url} 
+                                    alt={artist.name}
+                                    className="w-12 h-12 rounded object-cover border border-cyan-500"
+                                />
+                            ) : (
+                                <div className="w-12 h-12 rounded bg-cyan-500 text-black font-black text-lg flex items-center justify-center">
+                                    {artist.name.charAt(0)}
+                                </div>
+                            )}
+                            <button
+                                onClick={() => setIsEditingPic(!isEditingPic)}
+                                className="absolute inset-0 rounded bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center"
+                            >
+                                <Upload className="w-4 h-4 text-cyan-400" />
+                            </button>
+                        </div>
                         {isEditingPic && (
-                            <div className="absolute top-full mt-2 left-0 z-50">
-                                <div className="bg-gray-900 border-2 border-cyan-500 rounded-lg p-3 whitespace-nowrap">
+                            <div className="absolute top-full mt-2 left-0 z-50 min-w-[200px]">
+                                <div className="bg-black border-2 border-cyan-500 rounded-lg p-3 shadow-[0_0_20px_rgba(6,182,212,0.3)]">
                                     <input
+                                        id="profile-pic-upload"
                                         type="file"
                                         accept="image/*"
                                         onChange={handlePicUpload}
                                         disabled={picLoading}
-                                        className="text-xs file:bg-cyan-500 file:text-white file:border-0 file:px-2 file:py-1 file:rounded file:cursor-pointer cursor-pointer"
+                                        className="hidden"
                                     />
+                                    <label 
+                                        htmlFor="profile-pic-upload"
+                                        className={`block text-center bg-cyan-500 text-black font-mono font-bold text-xs py-2 px-3 rounded cursor-pointer hover:bg-cyan-600 transition-colors ${picLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
+                                    >
+                                        {picLoading ? 'UPLOADING...' : 'CHOOSE PHOTO'}
+                                    </label>
                                     <button
                                         onClick={() => setIsEditingPic(false)}
-                                        className="absolute -top-2 -right-2 bg-gray-900 p-1 rounded-full"
+                                        className="w-full mt-2 text-gray-500 hover:text-gray-400 font-mono text-xs"
                                     >
-                                        <X className="w-3 h-3 text-gray-600" />
+                                        Cancel
                                     </button>
                                 </div>
                             </div>
