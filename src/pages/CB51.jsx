@@ -46,34 +46,26 @@ export default function CB51() {
         base44.auth.me().then(async (currentUser) => {
             setUser(currentUser);
             
-            // Check PIN for non-admins
-            if (currentUser.role !== 'admin') {
-                const pinEntered = sessionStorage.getItem('cb51_pin_1888');
-                if (pinEntered !== 'true') {
-                    navigate(createPageUrl('CB51Login'));
-                    return;
-                }
-
-                // Check if user is a band member (stored in ScottTeamMember)
-                const teamMembers = await base44.entities.ScottTeamMember.filter({ email: currentUser.email });
-                if (teamMembers.length > 0) {
-                    // Band member found - redirect to their artist's home
-                    const artistId = teamMembers[0].artist_id;
-                    setUser(currentUser);
-                    setLoading(false);
-                    setTimeout(() => navigate(createPageUrl(`ScottArtistHome?id=${artistId}`)), 0);
-                    return;
-                }
-
-                // Check if user is an artist (has their own ScottArtist record)
-                const artists = await base44.entities.ScottArtist.filter({ email: currentUser.email });
-                if (artists.length > 0) {
-                    setUser(currentUser);
-                    setLoading(false);
-                    setTimeout(() => navigate(createPageUrl(`ScottArtistHome?id=${artists[0].id}`)), 0);
-                    return;
-                }
+            // Check if user is a band member (stored in ScottTeamMember)
+            const teamMembers = await base44.entities.ScottTeamMember.filter({ email: currentUser.email });
+            if (teamMembers.length > 0) {
+                // Band member found - redirect to their artist's home
+                const artistId = teamMembers[0].artist_id;
+                setUser(currentUser);
+                setLoading(false);
+                setTimeout(() => navigate(createPageUrl(`ScottArtistHome?id=${artistId}`)), 0);
+                return;
             }
+
+            // Check if user is an artist (has their own ScottArtist record)
+            const artists = await base44.entities.ScottArtist.filter({ email: currentUser.email });
+            if (artists.length > 0) {
+                setUser(currentUser);
+                setLoading(false);
+                setTimeout(() => navigate(createPageUrl(`ScottArtistHome?id=${artists[0].id}`)), 0);
+                return;
+            }
+
             // If admin or no artist found, stay on this page
             setLoading(false);
         }).catch(() => {

@@ -135,6 +135,7 @@ import CB51 from './pages/CB51';
 import CB51AAA from './pages/CB51AAA';
 import CB51About from './pages/CB51About';
 import CB51Contact from './pages/CB51Contact';
+import ScottArtistHome from './pages/ScottArtistHome';
 import CB51LoginDirect from './pages/CB51LoginDirect';
 import CB51Pricing from './pages/CB51Pricing';
 import CB51Privacy from './pages/CB51Privacy';
@@ -268,6 +269,7 @@ import ScottAccommodation from './pages/ScottAccommodation';
 import ScottAddArtist from './pages/ScottAddArtist';
 import ScottAddShow from './pages/ScottAddShow';
 import ScottArtist from './pages/ScottArtist';
+import ScottToDo from './pages/ScottToDo';
 import ScottBandVote from './pages/ScottBandVote';
 import ScottBiggerVision from './pages/ScottBiggerVision';
 import ScottCalendar from './pages/ScottCalendar';
@@ -367,8 +369,6 @@ import YoungWarriors from './pages/YoungWarriors';
 import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
-import ScottArtistHome from './pages/ScottArtistHome';
-import ScottToDo from './pages/ScottToDo';
 import ScottCalendarView from './pages/ScottCalendarView';
 import ScottFinanceAdmin from './pages/ScottFinanceAdmin';
 import ScottMessageInbox from './pages/ScottMessageInbox';
@@ -467,6 +467,7 @@ export const PAGES = {
     "CB51AAA": CB51AAA,
     "CB51About": CB51About,
     "CB51Contact": CB51Contact,
+    "ScottArtistHome": ScottArtistHome,
     "CB51LoginDirect": CB51LoginDirect,
     "CB51Pricing": CB51Pricing,
     "CB51Privacy": CB51Privacy,
@@ -600,6 +601,7 @@ export const PAGES = {
     "ScottAddArtist": ScottAddArtist,
     "ScottAddShow": ScottAddShow,
     "ScottArtist": ScottArtist,
+    "ScottToDo": ScottToDo,
     "ScottBandVote": ScottBandVote,
     "ScottBiggerVision": ScottBiggerVision,
     "ScottCalendar": ScottCalendar,
@@ -699,8 +701,6 @@ export const PAGES = {
     "ZeroEgoProtocol": ZeroEgoProtocol,
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
-    "ScottArtistHome": ScottArtistHome,
-    "ScottToDo": ScottToDo,
     "ScottCalendarView": ScottCalendarView,
     "ScottFinanceAdmin": ScottFinanceAdmin,
     "ScottMessageInbox": ScottMessageInbox,
