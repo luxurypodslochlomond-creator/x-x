@@ -37,8 +37,8 @@ export default function ScottArtistHome() {
 
     if (!artist) {
         return (
-            <div className="min-h-screen bg-black flex items-center justify-center">
-                <Radio className="w-12 h-12 text-cyan-400 mx-auto animate-pulse" />
+            <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: 'var(--cb51-bg-primary)' }}>
+                <Radio className="w-12 h-12 mx-auto animate-pulse" style={{ color: 'var(--cb51-rose)' }} />
             </div>
         );
     }
