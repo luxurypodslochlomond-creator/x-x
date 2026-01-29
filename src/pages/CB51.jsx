@@ -215,14 +215,30 @@ export default function CB51() {
 
                     {/* SETTINGS & TOOLS - ALWAYS VISIBLE ON MOBILE */}
                     <div className="space-y-2">
-                        {/* SETTINGS */}
+                        {/* SETTINGS - COLLAPSIBLE */}
                         <button 
-                            onClick={() => navigate(createPageUrl('ScottSettings'))}
+                            onClick={() => setSettingsOpen(!settingsOpen)}
                             className="w-full font-mono text-xs font-bold text-gray-500 hover:text-gray-400 px-3 py-2 border border-gray-700 rounded hover:border-gray-600 transition-all flex items-center justify-between"
                         >
-                            <span>⚙️ SETTINGS</span>
-                            <span className="text-gray-600">→</span>
+                            <span>{settingsOpen ? '▼' : '▶'} SETTINGS</span>
                         </button>
+                        {settingsOpen && (
+                            <div className="bg-black/50 border border-gray-700 rounded p-3 space-y-2 text-xs text-gray-400 font-mono">
+                                <div className="flex items-center justify-between pb-2 border-b border-gray-700">
+                                    <span>EXTENSION PIN</span>
+                                    <span className="text-cyan-400 font-bold">••••</span>
+                                </div>
+                                <button className="w-full text-left hover:text-cyan-400 transition-colors">
+                                    🔐 SECURITY
+                                </button>
+                                <button className="w-full text-left hover:text-cyan-400 transition-colors">
+                                    🔔 NOTIFICATIONS
+                                </button>
+                                <button className="w-full text-left hover:text-cyan-400 transition-colors">
+                                    📱 DEVICES
+                                </button>
+                            </div>
+                        )}
 
                         {/* QUICK TOOLS - NO COLLAPSE ON MOBILE */}
                         <div className="grid grid-cols-2 gap-2 lg:hidden">
