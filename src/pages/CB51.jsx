@@ -207,10 +207,11 @@ export default function CB51() {
                                     <button
                                         key={artist.id}
                                         onClick={() => navigate(createPageUrl(`ScottAddArtist?edit=${artist.id}`))}
-                                        className="w-full bg-black border border-cyan-500/30 rounded p-2 text-left hover:bg-cyan-500/10 transition-all flex items-center justify-between"
+                                        className="w-full rounded p-2 text-left hover:opacity-80 transition-all flex items-center justify-between"
+                                        style={{ backgroundColor: 'var(--cb51-bg-card)', border: '1px solid var(--cb51-border)' }}
                                     >
-                                        <span className="text-cyan-400 font-mono text-xs">{artist.name}</span>
-                                        <span className="text-amber-400 text-xs">✎</span>
+                                        <span className="font-mono text-xs" style={{ color: 'var(--cb51-rose)' }}>{artist.name}</span>
+                                        <span className="text-xs" style={{ color: 'var(--cb51-calendar)' }}>✎</span>
                                     </button>
                                 ))}
                             </div>
