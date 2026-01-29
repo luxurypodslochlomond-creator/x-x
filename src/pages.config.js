@@ -140,6 +140,7 @@ import CB51Pricing from './pages/CB51Pricing';
 import CB51Privacy from './pages/CB51Privacy';
 import CB51Support from './pages/CB51Support';
 import CB51Terms from './pages/CB51Terms';
+import CB51TestSuite from './pages/CB51TestSuite';
 import CICSanctuary from './pages/CICSanctuary';
 import COPPACompliance from './pages/COPPACompliance';
 import CardCollection from './pages/CardCollection';
@@ -272,8 +273,8 @@ import ScottArtistHome from './pages/ScottArtistHome';
 import ScottBandVote from './pages/ScottBandVote';
 import ScottBiggerVision from './pages/ScottBiggerVision';
 import ScottCalendar from './pages/ScottCalendar';
-import ScottComparison from './pages/ScottComparison';
 import ScottCalendarView from './pages/ScottCalendarView';
+import ScottComparison from './pages/ScottComparison';
 import ScottContracts from './pages/ScottContracts';
 import ScottDemos from './pages/ScottDemos';
 import ScottEmailDashboard from './pages/ScottEmailDashboard';
@@ -374,7 +375,6 @@ import YoungWarriors from './pages/YoungWarriors';
 import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
-import CB51TestSuite from './pages/CB51TestSuite';
 import __Layout from './Layout.jsx';
 
 
@@ -472,6 +472,7 @@ export const PAGES = {
     "CB51Privacy": CB51Privacy,
     "CB51Support": CB51Support,
     "CB51Terms": CB51Terms,
+    "CB51TestSuite": CB51TestSuite,
     "CICSanctuary": CICSanctuary,
     "COPPACompliance": COPPACompliance,
     "CardCollection": CardCollection,
@@ -604,8 +605,8 @@ export const PAGES = {
     "ScottBandVote": ScottBandVote,
     "ScottBiggerVision": ScottBiggerVision,
     "ScottCalendar": ScottCalendar,
-    "ScottComparison": ScottComparison,
     "ScottCalendarView": ScottCalendarView,
+    "ScottComparison": ScottComparison,
     "ScottContracts": ScottContracts,
     "ScottDemos": ScottDemos,
     "ScottEmailDashboard": ScottEmailDashboard,
@@ -706,7 +707,6 @@ export const PAGES = {
     "ZeroEgoProtocol": ZeroEgoProtocol,
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
-    "CB51TestSuite": CB51TestSuite,
 }
 
 export const pagesConfig = {

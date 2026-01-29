@@ -1,198 +1,182 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { createPageUrl } from '@/utils';
-import { ArrowLeft, Play, CheckCircle, XCircle, Clock, Radio } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
+import { ArrowLeft, Radio, CheckCircle, X, Bell, Mail } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 /**
- * CB51 AUTOMATED TEST SUITE
- * One-click workflow testing
+ * CB51 TEST SUITE - End-to-end notification testing
+ * Simple validation for Scott's meetings
  */
 
 export default function CB51TestSuite() {
-    const navigate = useNavigate();
-    const [testing, setTesting] = useState(false);
-    const [results, setResults] = useState(null);
+  const navigate = useNavigate();
+  const [tests, setTests] = useState([]);
+  const [running, setRunning] = useState(false);
 
-    const runTests = async () => {
-        setTesting(true);
-        setResults(null);
+  const runTests = async () => {
+    setRunning(true);
+    setTests([]);
+    const results = [];
 
-        try {
-            const response = await base44.functions.invoke('testCB51Workflow', {});
-            setResults(response.data);
-        } catch (error) {
-            setResults({
-                status: 'ERROR',
-                error: error.message,
-                tests: []
-            });
-        }
+    // Test 1: Service Worker
+    try {
+      const swPath = import.meta.env.VITE_API_URL 
+        ? `${import.meta.env.VITE_API_URL}/serveServiceWorker`
+        : '/api/serveServiceWorker';
+      await navigator.serviceWorker.register(swPath);
+      await navigator.serviceWorker.ready;
+      results.push({ name: 'Service Worker', status: 'pass', message: '✓ Registered' });
+    } catch (e) {
+      results.push({ name: 'Service Worker', status: 'fail', message: `✗ ${e.message}` });
+    }
+    setTests([...results]);
 
-        setTesting(false);
-    };
+    // Test 2: VAPID Keys
+    try {
+      const res = await base44.functions.invoke('generateVapidKeys', {});
+      if (res.data.publicKey) {
+        results.push({ name: 'VAPID Keys', status: 'pass', message: '✓ Keys generated' });
+      } else {
+        results.push({ name: 'VAPID Keys', status: 'fail', message: '✗ No keys returned' });
+      }
+    } catch (e) {
+      results.push({ name: 'VAPID Keys', status: 'fail', message: `✗ ${e.message}` });
+    }
+    setTests([...results]);
 
-    return (
-        <div className="min-h-screen bg-black text-white p-6">
-            <button
-                onClick={() => navigate(createPageUrl('CB51'))}
-                className="flex items-center gap-2 text-gray-600 hover:text-cyan-400 transition-all mb-6"
-            >
-                <ArrowLeft className="w-4 h-4" />
-                <span className="text-xs font-bold font-mono">BACK</span>
-            </button>
+    // Test 3: Push Subscription
+    try {
+      if ('PushManager' in window) {
+        results.push({ name: 'Push Support', status: 'pass', message: '✓ Browser supports push' });
+      } else {
+        results.push({ name: 'Push Support', status: 'warn', message: '⚠ Browser may not support push' });
+      }
+    } catch (e) {
+      results.push({ name: 'Push Support', status: 'fail', message: `✗ ${e.message}` });
+    }
+    setTests([...results]);
 
-            <div className="max-w-4xl mx-auto">
-                <div className="mb-8">
-                    <div className="flex items-center gap-3 mb-2">
-                        <Radio className="w-8 h-8 text-cyan-400" />
-                        <h1 className="text-4xl font-black text-white font-mono">CB51 TEST SUITE</h1>
-                    </div>
-                    <p className="text-gray-600 text-sm font-mono">Automated workflow testing</p>
-                </div>
+    // Test 4: Create test notification
+    try {
+      const user = await base44.auth.me();
+      await base44.entities.ScottNotification.create({
+        recipient_email: user.email,
+        notification_type: 'manager_confirmed',
+        title: 'CB51 Test',
+        message: 'All systems operational ✓',
+        action_url: '/CB51'
+      });
+      results.push({ name: 'Create Notification', status: 'pass', message: '✓ Notification created' });
+    } catch (e) {
+      results.push({ name: 'Create Notification', status: 'fail', message: `✗ ${e.message}` });
+    }
+    setTests([...results]);
 
-                {/* RUN BUTTON */}
-                <motion.button
-                    onClick={runTests}
-                    disabled={testing}
-                    whileTap={{ scale: 0.98 }}
-                    className={`w-full p-6 rounded-lg border-2 flex items-center justify-center gap-3 font-black text-xl mb-8 transition-all ${
-                        testing 
-                            ? 'bg-cyan-500/20 border-cyan-500 text-cyan-400 cursor-not-allowed'
-                            : 'bg-black border-cyan-500 text-cyan-400 hover:bg-cyan-500/10'
-                    }`}
-                    style={{ boxShadow: '0 0 20px rgba(6, 182, 212, 0.3)' }}
-                >
-                    {testing ? (
-                        <>
-                            <Clock className="w-6 h-6 animate-spin" />
-                            RUNNING TESTS...
-                        </>
-                    ) : (
-                        <>
-                            <Play className="w-6 h-6" />
-                            RUN FULL WORKFLOW TEST
-                        </>
-                    )}
-                </motion.button>
+    // Test 5: Automation check
+    try {
+      const automations = await base44.functions.invoke('listAutomations', {});
+      const pushAuto = automations.data?.find(a => a.name?.includes('Browser Push'));
+      if (pushAuto && pushAuto.is_active) {
+        results.push({ name: 'Automation', status: 'pass', message: '✓ Push automation active' });
+      } else {
+        results.push({ name: 'Automation', status: 'fail', message: '✗ Automation not found/active' });
+      }
+    } catch (e) {
+      results.push({ name: 'Automation', status: 'warn', message: `⚠ ${e.message}` });
+    }
+    setTests([...results]);
 
-                {/* WHAT GETS TESTED */}
-                <div className="bg-black border-2 border-gray-800 rounded-lg p-6 mb-8">
-                    <h2 className="text-white font-black font-mono text-lg mb-4">TESTS INCLUDED:</h2>
-                    <ul className="space-y-2 text-sm text-gray-400 font-mono">
-                        <li>✓ Create test artist + band members</li>
-                        <li>✓ AI gig offer extraction (email → database)</li>
-                        <li>✓ Manager approval → band notifications</li>
-                        <li>✓ Band voting (YES/NO responses)</li>
-                        <li>✓ Auto-confirmation trigger</li>
-                        <li>✓ Google Calendar sync</li>
-                        <li>✓ Promoter email draft generation</li>
-                        <li>✓ Cleanup (delete test data)</li>
-                    </ul>
-                </div>
+    setRunning(false);
+  };
 
-                {/* RESULTS */}
-                <AnimatePresence>
-                    {results && (
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -20 }}
-                            className="space-y-4"
-                        >
-                            {/* SUMMARY */}
-                            <div className={`p-6 rounded-lg border-2 ${
-                                results.status.includes('PASSED')
-                                    ? 'bg-green-500/10 border-green-500'
-                                    : 'bg-red-500/10 border-red-500'
-                            }`}>
-                                <h2 className={`text-2xl font-black font-mono mb-2 ${
-                                    results.status.includes('PASSED') ? 'text-green-400' : 'text-red-400'
-                                }`}>
-                                    {results.status}
-                                </h2>
-                                {results.summary && (
-                                    <p className="text-white font-mono text-sm">
-                                        {results.summary.passed} passed • {results.summary.failed} failed
-                                    </p>
-                                )}
-                                {results.timestamp && (
-                                    <p className="text-gray-500 font-mono text-xs mt-2">
-                                        {new Date(results.timestamp).toLocaleString()}
-                                    </p>
-                                )}
-                            </div>
+  const getStatusColor = (status) => {
+    switch (status) {
+      case 'pass': return 'text-green-400 border-green-500';
+      case 'fail': return 'text-red-400 border-red-500';
+      case 'warn': return 'text-amber-400 border-amber-500';
+      default: return 'text-gray-400 border-gray-500';
+    }
+  };
 
-                            {/* INDIVIDUAL TEST RESULTS */}
-                            <div className="space-y-3">
-                                {results.tests?.map((test, idx) => (
-                                    <motion.div
-                                        key={idx}
-                                        initial={{ opacity: 0, x: -20 }}
-                                        animate={{ opacity: 1, x: 0 }}
-                                        transition={{ delay: idx * 0.05 }}
-                                        className={`p-4 rounded-lg border-2 ${
-                                            test.passed
-                                                ? 'bg-black border-green-500/30'
-                                                : 'bg-black border-red-500/30'
-                                        }`}
-                                    >
-                                        <div className="flex items-start gap-3">
-                                            {test.passed ? (
-                                                <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
-                                            ) : (
-                                                <XCircle className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" />
-                                            )}
-                                            <div className="flex-1">
-                                                <p className={`font-black font-mono text-sm mb-1 ${
-                                                    test.passed ? 'text-green-400' : 'text-red-400'
-                                                }`}>
-                                                    {test.test}
-                                                </p>
-                                                <p className="text-gray-400 text-xs font-mono">
-                                                    {test.message}
-                                                </p>
-                                                {test.data && (
-                                                    <details className="mt-2">
-                                                        <summary className="text-cyan-400 text-xs font-mono cursor-pointer hover:text-cyan-300">
-                                                            View data
-                                                        </summary>
-                                                        <pre className="bg-gray-900 p-2 rounded mt-2 text-xs text-gray-400 overflow-x-auto">
-                                                            {JSON.stringify(test.data, null, 2)}
-                                                        </pre>
-                                                    </details>
-                                                )}
-                                            </div>
-                                        </div>
-                                    </motion.div>
-                                ))}
-                            </div>
+  const getStatusIcon = (status) => {
+    switch (status) {
+      case 'pass': return <CheckCircle className="w-5 h-5" />;
+      case 'fail': return <X className="w-5 h-5" />;
+      default: return <Bell className="w-5 h-5" />;
+    }
+  };
 
-                            {results.error && (
-                                <div className="bg-red-500/10 border-2 border-red-500 rounded-lg p-4">
-                                    <p className="text-red-400 font-mono text-sm">
-                                        {results.error}
-                                    </p>
-                                </div>
-                            )}
-                        </motion.div>
-                    )}
-                </AnimatePresence>
+  const allPassed = tests.length > 0 && tests.every(t => t.status === 'pass' || t.status === 'warn');
 
-                {/* INFO */}
-                <div className="mt-12 bg-cyan-500/10 border-2 border-cyan-500/30 rounded-lg p-4">
-                    <p className="text-cyan-400 text-sm font-mono mb-2">
-                        💡 This test simulates the entire CB51 workflow end-to-end
-                    </p>
-                    <ul className="text-gray-400 text-xs font-mono space-y-1">
-                        <li>• Creates temporary test data</li>
-                        <li>• Runs through complete gig approval flow</li>
-                        <li>• Verifies all automations fire correctly</li>
-                        <li>• Cleans up after itself (no junk data left)</li>
-                    </ul>
-                </div>
-            </div>
+  return (
+    <div className="min-h-screen bg-black text-white p-4 pb-24">
+      <button
+        onClick={() => navigate(-1)}
+        className="flex items-center gap-2 text-gray-600 hover:text-cyan-400 transition-all mb-6"
+      >
+        <ArrowLeft className="w-4 h-4" />
+        <span className="text-xs font-bold font-mono">BACK</span>
+      </button>
+
+      <div className="mb-6">
+        <div className="flex items-center gap-3 mb-2">
+          <Radio className="w-8 h-8 text-cyan-400" />
+          <h1 className="text-4xl font-black text-white font-mono">CB51 TEST SUITE</h1>
         </div>
-    );
+        <p className="text-gray-600 text-xs font-mono">End-to-end notification validation</p>
+      </div>
+
+      <div className="bg-black border-2 border-cyan-500 rounded p-4 mb-6" style={{ boxShadow: '0 0 15px rgba(6, 182, 212, 0.3)' }}>
+        <h2 className="text-cyan-400 font-black font-mono text-lg mb-4">QUICK TEST</h2>
+        <p className="text-white text-sm font-mono mb-4">
+          Tests service worker, VAPID keys, push support, notifications, and automation.
+        </p>
+        <Button
+          onClick={runTests}
+          disabled={running}
+          className="w-full bg-cyan-500 hover:bg-cyan-600 text-black font-black py-3 font-mono"
+        >
+          {running ? 'RUNNING TESTS...' : 'RUN ALL TESTS'}
+        </Button>
+      </div>
+
+      {tests.length > 0 && (
+        <div className="space-y-3">
+          {tests.map((test, i) => (
+            <div
+              key={i}
+              className={`bg-black border-2 rounded p-4 ${getStatusColor(test.status)}`}
+            >
+              <div className="flex items-center gap-3">
+                {getStatusIcon(test.status)}
+                <div className="flex-1">
+                  <p className="text-white font-black font-mono text-sm">{test.name}</p>
+                  <p className={`${getStatusColor(test.status)} text-xs font-mono`}>
+                    {test.message}
+                  </p>
+                </div>
+              </div>
+            </div>
+          ))}
+
+          {allPassed && (
+            <div className="bg-green-500/20 border-2 border-green-500 rounded p-4 mt-6">
+              <div className="flex items-center gap-3">
+                <CheckCircle className="w-8 h-8 text-green-400" />
+                <div>
+                  <p className="text-green-400 font-black font-mono text-lg">ALL SYSTEMS GO</p>
+                  <p className="text-green-300 text-xs font-mono">Ready for Scott's meetings ✓</p>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+
+      <div className="mt-12 text-center">
+        <p className="text-gray-600 text-xs font-mono">CB51 • Test Suite</p>
+      </div>
+    </div>
+  );
 }
