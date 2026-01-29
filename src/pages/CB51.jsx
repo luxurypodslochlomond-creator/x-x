@@ -236,20 +236,20 @@ export default function CB51() {
                 </Link>
             </div>
 
-            {/* HIDDEN MENU - Collapsible for power users */}
+            {/* HIDDEN MENU - Color-coded by function */}
             <details className="mb-4">
                 <summary className="cursor-pointer text-cyan-400 font-mono text-xs font-bold hover:text-cyan-300">More Tools ▼</summary>
                 <div className="mt-3 grid grid-cols-3 gap-2">
                     <Link to={createPageUrl('ScottMessageInbox')}>
-                        <div className="bg-black border border-cyan-500/30 rounded p-2 text-center hover:bg-cyan-500/10 transition-all">
-                            <Mail className="w-4 h-4 text-cyan-400 mx-auto mb-1" />
-                            <p className="text-cyan-400 font-mono text-[8px]">EMAIL</p>
+                        <div className="bg-black border border-purple-500/30 rounded p-2 text-center hover:bg-purple-500/10 transition-all">
+                            <Mail className="w-4 h-4 text-purple-400 mx-auto mb-1" />
+                            <p className="text-purple-400 font-mono text-[8px]">EMAIL</p>
                         </div>
                     </Link>
                     <Link to={createPageUrl('ScottCalendarView')}>
-                        <div className="bg-black border border-cyan-500/30 rounded p-2 text-center hover:bg-cyan-500/10 transition-all">
-                            <Calendar className="w-4 h-4 text-cyan-400 mx-auto mb-1" />
-                            <p className="text-cyan-400 font-mono text-[8px]">CALENDAR</p>
+                        <div className="bg-black border border-green-500/30 rounded p-2 text-center hover:bg-green-500/10 transition-all">
+                            <Calendar className="w-4 h-4 text-green-400 mx-auto mb-1" />
+                            <p className="text-green-400 font-mono text-[8px]">CALENDAR</p>
                         </div>
                     </Link>
                     <Link to={createPageUrl('ScottToDo')}>
@@ -259,15 +259,15 @@ export default function CB51() {
                         </div>
                     </Link>
                     <Link to={createPageUrl('ScottTeamAccess')}>
-                        <div className="bg-black border border-cyan-500/30 rounded p-2 text-center hover:bg-cyan-500/10 transition-all">
-                            <Users className="w-4 h-4 text-cyan-400 mx-auto mb-1" />
-                            <p className="text-cyan-400 font-mono text-[8px]">TEAMS</p>
+                        <div className="bg-black border border-purple-500/30 rounded p-2 text-center hover:bg-purple-500/10 transition-all">
+                            <Users className="w-4 h-4 text-purple-400 mx-auto mb-1" />
+                            <p className="text-purple-400 font-mono text-[8px]">TEAMS</p>
                         </div>
                     </Link>
                     <Link to={createPageUrl('ScottFinanceAdmin')}>
-                        <div className="bg-black border border-cyan-500/30 rounded p-2 text-center hover:bg-cyan-500/10 transition-all">
-                            <DollarSign className="w-4 h-4 text-cyan-400 mx-auto mb-1" />
-                            <p className="text-cyan-400 font-mono text-[8px]">FINANCE</p>
+                        <div className="bg-black border border-yellow-500/30 rounded p-2 text-center hover:bg-yellow-500/10 transition-all">
+                            <DollarSign className="w-4 h-4 text-yellow-400 mx-auto mb-1" />
+                            <p className="text-yellow-400 font-mono text-[8px]">FINANCE</p>
                         </div>
                     </Link>
                 </div>
