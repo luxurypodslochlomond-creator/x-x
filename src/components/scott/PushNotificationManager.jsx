@@ -200,7 +200,12 @@ export default function PushNotificationManager({ onSubscriptionChange }) {
   };
 
   if (!isSupported) {
-    return null;
+    return (
+      <div className="bg-red-500/20 border border-red-500/50 rounded-lg p-3">
+        <p className="text-red-400 font-mono text-xs font-bold mb-2">⚠️ Not Supported</p>
+        <p className="text-red-300 font-mono text-xs">Your browser doesn't support push notifications. Try Chrome, Firefox, or Safari on iOS 16.4+</p>
+      </div>
+    );
   }
 
   // iOS needs PWA mode
