@@ -25,6 +25,7 @@ export default function CB51() {
           const [editArtistsOpen, setEditArtistsOpen] = useState(false);
           const [moreToolsOpen, setMoreToolsOpen] = useState(false);
           const [archivedOpen, setArchivedOpen] = useState(false);
+          const [settingsOpen, setSettingsOpen] = useState(false);
           const queryClient = useQueryClient();
 
           useEffect(() => {
