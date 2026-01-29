@@ -142,12 +142,62 @@ export default function CB51() {
                         <PushNotificationManager />
                     </div>
 
-                    {/* BAND MEMBER NOTIFICATIONS */}
-                    {user && user.role !== 'admin' && (
-                        <div className="mb-6">
-                            <CB51BandNotifications userEmail={user.email} />
-                        </div>
-                    )}
+                    {/* PENDING APPROVALS - PRIORITY */}
+                                    {stats.pendingOffers > 0 && (
+                                        <div className="mb-6 bg-black border-2 border-cyan-500 rounded-lg p-4">
+                                            <h2 className="text-cyan-400 font-black font-mono text-sm mb-3 flex items-center gap-2">
+                                                <AlertCircle className="w-4 h-4" />
+                                                PENDING APPROVALS ({stats.pendingOffers})
+                                            </h2>
+                                            <div className="space-y-2">
+                                                {allOffers
+                                                    .filter(o => o.status === 'pending_manager_review')
+                                                    .slice(0, 3)
+                                                    .map(offer => (
+                                                        <div key={offer.id} className="bg-black/60 border border-cyan-500/30 rounded p-2 flex items-between justify-between text-xs">
+                                                            <div className="flex-1">
+                                                                <p className="text-white font-bold">{offer.venue || 'Gig Offer'}</p>
+                                                                <p className="text-cyan-400 text-[10px] font-mono">{offer.date || 'TBD'}</p>
+                                                            </div>
+                                                            <div className="flex gap-1">
+                                                                <button 
+                                                                    onClick={() => {
+                                                                        queryClient.setQueryData(['scottAllGigOffers'], allOffers.map(o => o.id === offer.id ? {...o, status: 'sent_to_band'} : o));
+                                                                        base44.entities.ScottGigOffer.update(offer.id, {status: 'sent_to_band'}).then(() => queryClient.invalidateQueries({queryKey: ['scottAllGigOffers']}));
+                                                                    }}
+                                                                    className="bg-green-600/40 hover:bg-green-600 text-white px-2 py-1 rounded text-[10px] font-bold"
+                                                                >
+                                                                    ✓
+                                                                </button>
+                                                                <button 
+                                                                    onClick={() => {
+                                                                        if(confirm('Reject this gig?')) {
+                                                                            queryClient.setQueryData(['scottAllGigOffers'], allOffers.map(o => o.id === offer.id ? {...o, status: 'rejected'} : o));
+                                                                            base44.entities.ScottGigOffer.update(offer.id, {status: 'rejected'}).then(() => queryClient.invalidateQueries({queryKey: ['scottAllGigOffers']}));
+                                                                        }
+                                                                    }}
+                                                                    className="bg-red-600/40 hover:bg-red-600 text-white px-2 py-1 rounded text-[10px] font-bold"
+                                                                >
+                                                                    ✕
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    ))}
+                                            </div>
+                                            {stats.pendingOffers > 3 && (
+                                                <Link to={createPageUrl('ScottGigOffers')} className="text-cyan-400 hover:text-cyan-300 text-[10px] font-mono font-bold mt-2 block">
+                                                    See all ({stats.pendingOffers}) →
+                                                </Link>
+                                            )}
+                                        </div>
+                                    )}
+
+                                    {/* BAND MEMBER NOTIFICATIONS */}
+                                    {user && user.role !== 'admin' && (
+                                        <div className="mb-6">
+                                            <CB51BandNotifications userEmail={user.email} />
+                                        </div>
+                                    )}
 
                     {/* ARTIST CIRCLES - BIG AND CENTERED */}
                      {artists.length > 0 && (
