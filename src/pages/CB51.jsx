@@ -217,10 +217,10 @@ export default function CB51() {
                         {/* SETTINGS */}
                         <button 
                             onClick={() => navigate(createPageUrl('ScottSettings'))}
-                            className="w-full font-mono text-xs font-bold text-yellow-600 hover:text-yellow-500 px-4 py-3 border-2 border-yellow-600 rounded hover:border-yellow-500 transition-all flex items-center justify-between"
+                            className="w-full font-mono text-xs font-bold text-gray-500 hover:text-gray-400 px-3 py-2 border border-gray-700 rounded hover:border-gray-600 transition-all flex items-center justify-between"
                         >
                             <span>⚙️ SETTINGS</span>
-                            <span>→</span>
+                            <span className="text-gray-600">→</span>
                         </button>
 
                         {/* QUICK TOOLS - NO COLLAPSE ON MOBILE */}
