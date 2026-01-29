@@ -106,14 +106,6 @@ export default function CB51Support() {
                     </details>
 
                     <details className="bg-black border border-gray-900 rounded-lg p-4 cursor-pointer">
-                        <summary className="text-white font-bold font-mono text-sm">How do I cancel?</summary>
-                        <div className="mt-3 text-gray-400 font-mono text-sm space-y-2">
-                            <p>Settings → Subscription → Cancel</p>
-                            <p>Access until end of billing period. No exit fees.</p>
-                        </div>
-                    </details>
-
-                    <details className="bg-black border border-gray-900 rounded-lg p-4 cursor-pointer">
                         <summary className="text-white font-bold font-mono text-sm">AI parsing isn't working</summary>
                         <div className="mt-3 text-gray-400 font-mono text-sm space-y-2">
                             <p>Check:</p>
