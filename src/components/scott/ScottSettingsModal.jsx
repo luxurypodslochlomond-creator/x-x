@@ -11,14 +11,14 @@ export default function ScottSettingsModal({ isOpen, onClose }) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4"
+            className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 md:p-6"
         >
             <motion.div
-                initial={{ scale: 0.95, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                exit={{ scale: 0.95, opacity: 0 }}
+                initial={{ scale: 0.95, opacity: 0, y: 20 }}
+                animate={{ scale: 1, opacity: 1, y: 0 }}
+                exit={{ scale: 0.95, opacity: 0, y: 20 }}
                 onClick={(e) => e.stopPropagation()}
-                className="bg-black border-2 border-cyan-500 rounded-lg w-full max-w-sm"
+                className="bg-black border-2 border-cyan-500 rounded-lg w-full max-w-sm max-h-[90vh] overflow-y-auto"
             >
                 <div className="flex items-center justify-between p-4 border-b border-cyan-500/30">
                     <h2 className="text-cyan-400 font-black font-mono text-lg">SETTINGS</h2>
