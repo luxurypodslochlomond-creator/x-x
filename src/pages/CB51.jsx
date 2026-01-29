@@ -224,7 +224,7 @@ export default function CB51() {
             {hasPendingOffers && (
                 <div className="flex gap-2 mb-6 mt-6">
                     <Link to={createPageUrl('ScottGigOffers')} className="flex-1">
-                        <button className="w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded-lg font-mono text-xs font-bold transition-all animate-pulse">
+                        <button className="w-full text-white py-2 rounded-lg font-mono text-xs font-bold transition-all animate-pulse hover:opacity-90" style={{ backgroundColor: 'var(--cb51-rose)' }}>
                             {stats.pendingOffers} PENDING OFFER{stats.pendingOffers !== 1 ? 'S' : ''}
                         </button>
                     </Link>
@@ -232,7 +232,7 @@ export default function CB51() {
             )}
             <div className="flex gap-2 mb-6 mt-6">
                 <Link to={createPageUrl('ScottSettings')} className="flex-1">
-                    <button className="w-full bg-amber-500/10 border border-amber-500/50 text-amber-400 py-2 rounded-lg font-mono text-xs font-bold hover:bg-amber-500/20 transition-all">
+                    <button className="w-full py-2 rounded-lg font-mono text-xs font-bold hover:opacity-80 transition-all" style={{ backgroundColor: 'var(--cb51-bg-card)', color: 'var(--cb51-rose)', border: '1px solid var(--cb51-border)' }}>
                         SETTINGS
                     </button>
                 </Link>
