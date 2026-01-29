@@ -199,17 +199,16 @@ export default function CB51() {
 
                         {/* Edit Artists - Quick Access */}
                         <details className="mt-3">
-                            <summary className="cursor-pointer font-mono text-xs font-bold hover:opacity-80" style={{ color: 'var(--cb51-rose)' }}>Edit Artists ▼</summary>
+                            <summary className="cursor-pointer font-mono text-xs font-bold text-cyan-400 hover:opacity-80">Edit Artists ▼</summary>
                             <div className="mt-2 space-y-2">
                                 {artists.map((artist) => (
                                     <button
                                         key={artist.id}
                                         onClick={() => navigate(createPageUrl(`ScottAddArtist?edit=${artist.id}`))}
-                                        className="w-full rounded p-2 text-left hover:opacity-80 transition-all flex items-center justify-between"
-                                        style={{ backgroundColor: 'var(--cb51-bg-card)', border: '1px solid var(--cb51-border)' }}
+                                        className="w-full bg-gray-900 border border-gray-700 rounded p-2 text-left hover:border-cyan-500 transition-all flex items-center justify-between"
                                     >
-                                        <span className="font-mono text-xs" style={{ color: 'var(--cb51-rose)' }}>{artist.name}</span>
-                                        <span className="text-xs" style={{ color: 'var(--cb51-calendar)' }}>✎</span>
+                                        <span className="font-mono text-xs text-cyan-400">{artist.name}</span>
+                                        <span className="text-xs text-cyan-400">✎</span>
                                     </button>
                                 ))}
                             </div>
