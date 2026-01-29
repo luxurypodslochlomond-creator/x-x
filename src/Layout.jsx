@@ -486,10 +486,10 @@ const LayoutInner = ({ children, currentPageName }) => {
         <header className={`lg:hidden fixed ${isOffline ? 'top-10' : 'top-0'} left-0 right-0 z-[60] bg-[#0a0f1a]/95 backdrop-blur-xl border-b border-cyan-500/30`}>
           <div className="flex items-center justify-between p-4">
             {(currentPageName.startsWith('Scott') || currentPageName.startsWith('CB51')) ? (
-              <div className="flex items-center gap-2">
+              <Link to={createPageUrl("CB51")} className="flex items-center gap-2" onClick={() => setMobileMenuOpen(false)}>
                 <Radio className="w-7 h-7 text-cyan-400" />
                 <span className="text-xl font-black text-cyan-400">CB51</span>
-              </div>
+              </Link>
             ) : (
               <Link to={createPageUrl("Welcome")} className="flex items-center gap-2" onClick={() => setMobileMenuOpen(false)}>
                 <COOLASFUCKWaves size={28} animate={true} />
