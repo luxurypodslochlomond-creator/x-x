@@ -130,7 +130,7 @@ export default function CB51() {
     }
 
     return (
-        <div className="min-h-screen text-white p-3 pb-20" style={{ backgroundColor: 'var(--cb51-bg-primary)' }}>
+        <div className="min-h-screen bg-black text-white p-3 pb-20">
 
             {/* NOTIFICATION MANAGER IN TOP RIGHT */}
             <div className="mb-6 flex justify-end">
