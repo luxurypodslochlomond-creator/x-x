@@ -218,24 +218,24 @@ export default function CB51() {
                         {/* SETTINGS - COLLAPSIBLE */}
                         <button 
                             onClick={() => setSettingsOpen(!settingsOpen)}
-                            className="w-full font-mono text-xs font-bold text-amber-600 hover:text-amber-500 px-3 py-2 border border-amber-600 rounded hover:border-amber-500 transition-all flex items-center justify-between"
+                            className="w-full font-mono text-xs font-bold text-amber-600 hover:text-amber-500 px-3 py-2 border-2 border-amber-600 rounded hover:border-amber-500 transition-all flex items-center justify-between"
                         >
                             <span>{settingsOpen ? '▼' : '▶'} SETTINGS</span>
                         </button>
                         {settingsOpen && (
-                            <div className="bg-black/50 border border-gray-700 rounded p-3 space-y-2 text-xs text-gray-400 font-mono">
-                                <div className="flex items-center justify-between pb-2 border-b border-gray-700">
-                                    <span>EXTENSION PIN</span>
+                            <div className="bg-black border-2 border-amber-600/50 rounded p-3 space-y-2 text-xs text-amber-400 font-mono mt-1">
+                                <div className="flex items-center justify-between pb-2 border-b border-amber-600/30">
+                                    <span className="text-amber-600">EXTENSION PIN</span>
                                     <span className="text-cyan-400 font-bold">••••</span>
                                 </div>
-                                <button className="w-full text-left hover:text-cyan-400 transition-colors">
-                                    🔐 SECURITY
+                                <button className="w-full text-left hover:text-cyan-400 transition-colors py-1">
+                                    SECURITY
                                 </button>
-                                <button className="w-full text-left hover:text-cyan-400 transition-colors">
-                                    🔔 NOTIFICATIONS
+                                <button className="w-full text-left hover:text-cyan-400 transition-colors py-1">
+                                    NOTIFICATIONS
                                 </button>
-                                <button className="w-full text-left hover:text-cyan-400 transition-colors">
-                                    📱 DEVICES
+                                <button className="w-full text-left hover:text-cyan-400 transition-colors py-1">
+                                    DEVICES
                                 </button>
                             </div>
                         )}
