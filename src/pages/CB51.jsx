@@ -276,15 +276,14 @@ export default function CB51() {
             {archivedArtists.length > 0 && (
                 <div className="mt-3">
                     <details>
-                        <summary className="cursor-pointer text-[9px] font-mono mb-2 hover:opacity-80" style={{ color: 'var(--cb51-text-muted)' }}>Archived ({archivedArtists.length})</summary>
+                        <summary className="cursor-pointer text-[9px] font-mono mb-2 text-gray-600 hover:opacity-80">Archived ({archivedArtists.length})</summary>
                         <div className="space-y-1">
                             {archivedArtists.map((artist) => (
-                                <div key={artist.id} className="flex items-center justify-between rounded p-2" style={{ backgroundColor: 'var(--cb51-bg-card)', border: '1px solid var(--cb51-border)' }}>
-                                    <p className="font-mono text-[9px]" style={{ color: 'var(--cb51-text-muted)' }}>{artist.name}</p>
+                                <div key={artist.id} className="flex items-center justify-between bg-gray-900 border border-gray-700 rounded p-2">
+                                    <p className="font-mono text-[9px] text-gray-600">{artist.name}</p>
                                     <button
                                         onClick={() => handleRestoreArtist(artist)}
-                                        className="text-[9px] font-mono hover:opacity-80"
-                                        style={{ color: 'var(--cb51-rose)' }}
+                                        className="text-[9px] font-mono text-cyan-400 hover:opacity-80"
                                     >
                                         RESTORE
                                     </button>
