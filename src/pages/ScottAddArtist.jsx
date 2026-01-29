@@ -17,8 +17,10 @@ export default function ScottAddArtist() {
     const [formData, setFormData] = useState({
         name: '',
         phone: '',
-        email: ''
+        email: '',
+        profile_pic_url: ''
     });
+    const [uploadingImage, setUploadingImage] = useState(false);
 
     // Load artist data if editing
     React.useEffect(() => {
@@ -31,7 +33,8 @@ export default function ScottAddArtist() {
                         setFormData({
                             name: artist.name || '',
                             phone: artist.phone || '',
-                            email: artist.email || ''
+                            email: artist.email || '',
+                            profile_pic_url: artist.profile_pic_url || ''
                         });
                     }
                 })
@@ -56,7 +59,8 @@ export default function ScottAddArtist() {
                 await base44.entities.ScottArtist.update(editId, {
                     name: formData.name,
                     phone: formData.phone,
-                    email: formData.email
+                    email: formData.email,
+                    profile_pic_url: formData.profile_pic_url
                 });
                 navigate(createPageUrl(`ScottArtistHome?id=${editId}`));
             } else {
@@ -65,6 +69,7 @@ export default function ScottAddArtist() {
                     name: formData.name,
                     phone: formData.phone,
                     email: formData.email,
+                    profile_pic_url: formData.profile_pic_url,
                     type: 'artist'
                 });
                 
@@ -88,7 +93,20 @@ export default function ScottAddArtist() {
         }
     };
 
+    const handleImageUpload = async (e) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
 
+        setUploadingImage(true);
+        try {
+            const { file_url } = await base44.integrations.Core.UploadFile({ file });
+            setFormData({ ...formData, profile_pic_url: file_url });
+        } catch (error) {
+            alert('Image upload failed: ' + error.message);
+        } finally {
+            setUploadingImage(false);
+        }
+    };
 
     return (
         <div className="min-h-screen bg-black p-6 pb-20">
@@ -118,7 +136,34 @@ export default function ScottAddArtist() {
 
             <form onSubmit={handleSubmit} className="space-y-4">
 
-
+                {/* IMAGE UPLOAD */}
+                <div className="bg-black border-2 border-cyan-500/30 rounded-xl p-6">
+                    <label className="text-cyan-400 text-xs font-bold font-mono mb-3 block">ARTIST PHOTO</label>
+                    <div className="flex items-center gap-4">
+                        <div className="w-20 h-20 bg-black border-2 border-cyan-500 rounded-full overflow-hidden flex items-center justify-center flex-shrink-0">
+                            {formData.profile_pic_url ? (
+                                <img src={formData.profile_pic_url} alt="Artist" className="w-full h-full object-cover" />
+                            ) : (
+                                <div className="w-full h-full bg-cyan-500 text-black font-black text-2xl flex items-center justify-center">
+                                    {formData.name.charAt(0) || '?'}
+                                </div>
+                            )}
+                        </div>
+                        <div className="flex-1">
+                            <input
+                                type="file"
+                                accept="image/*"
+                                onChange={handleImageUpload}
+                                disabled={uploadingImage}
+                                className="hidden"
+                                id="image-upload"
+                            />
+                            <label htmlFor="image-upload" className={`block w-full text-center bg-cyan-500/20 border border-cyan-500 text-cyan-400 py-2 px-4 rounded-lg font-mono text-xs font-bold cursor-pointer hover:bg-cyan-500/30 transition-all ${uploadingImage ? 'opacity-50' : ''}`}>
+                                {uploadingImage ? 'UPLOADING...' : formData.profile_pic_url ? 'CHANGE PHOTO' : 'ADD PHOTO'}
+                            </label>
+                        </div>
+                    </div>
+                </div>
 
                 {/* FORM CARD - JUST 3 FIELDS */}
                 <div className="bg-black border-2 border-cyan-500/30 rounded-xl p-6 space-y-4">
