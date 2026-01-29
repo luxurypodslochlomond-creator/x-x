@@ -115,7 +115,7 @@ export default function CB51() {
         archiveArtistMutation.mutate({ artistId: artist.id, archived: false });
     };
 
-    if (loading || artistsLoading) {
+    if (loading) {
         return (
             <div className="min-h-screen bg-black flex items-center justify-center">
                 <div className="text-center">
