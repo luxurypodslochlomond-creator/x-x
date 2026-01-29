@@ -100,13 +100,18 @@ Email text: ${emailText}`;
     
     // Notify manager
     try {
-      await base44.functions.invoke('notifyManager', {
-        offerId: offer.id,
-        venue: offer.venue,
-        date: offer.date
+      await base44.functions.invoke('notifyManagerGigOffer', {
+        gigOfferId: offer.id,
+        gigDetails: {
+          artist_id: artistId,
+          venue_name: offer.venue,
+          date: offer.date,
+          promoter_name: offer.promoter,
+          fee: offer.fee
+        }
       });
     } catch (e) {
-      console.log('Push notification failed:', e);
+      console.log('Notification creation failed:', e);
     }
     
     return Response.json({ 

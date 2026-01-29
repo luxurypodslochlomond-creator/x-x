@@ -34,6 +34,7 @@ Deno.serve(async (req) => {
         const manager = artists[0];
 
         // Create in-app notification
+        // Push notification automatically sent by entity automation
         const notification = await base44.entities.ScottNotification.create({
             recipient_email: manager.email,
             notification_type: 'manager_new_gig_offer',
@@ -44,19 +45,10 @@ Deno.serve(async (req) => {
             action_url: `/cb51/gig-offers?id=${gigOfferId}`
         });
 
-        // Send push notification (web push for Android, email fallback for iOS)
-        await base44.asServiceRole.functions.invoke('sendBrowserPush', {
-            title: `NEW GIG: ${gigDetails.venue_name}`,
-            body: `${gigDetails.date} • £${gigDetails.fee}`,
-            recipient_email: manager.email,
-            url: `/cb51/gig-offers?id=${gigOfferId}`,
-            tag: 'gig_offer'
-        });
-
         return Response.json({
             success: true,
             notificationId: notification.id,
-            message: 'Manager notified'
+            message: 'Manager notified - push will be sent automatically'
         });
     } catch (error) {
         console.error('Notification error:', error);
