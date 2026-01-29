@@ -3,37 +3,32 @@ css
 @tailwind components;
 @tailwind utilities;
 
-/* CB51 COLOR PALETTE - Consistent across all CB51 pages */
+/* CB51 COLOR PALETTE - Unified Warm Creative Home */
 :root {
-  /* Primary Brand */
-  --cb51-cyan: #06b6d4;
-  --cb51-cyan-dark: #0891b2;
-  --cb51-cyan-light: #22d3ee;
-  
-  /* Status Colors */
-  --cb51-green: #10b981;
-  --cb51-green-dark: #059669;
-  --cb51-amber: #f59e0b;
-  --cb51-amber-dark: #d97706;
-  --cb51-red: #ef4444;
-  --cb51-red-dark: #dc2626;
-  --cb51-purple: #a855f7;
-  --cb51-purple-dark: #9333ea;
-  --cb51-pink: #ec4899;
-  
+  /* Primary Warm Rose Base - The feeling of creative home */
+  --cb51-rose: #f4a9a8;
+  --cb51-rose-dark: #e89897;
+  --cb51-rose-light: #f5b9b8;
+
+  /* Task Hints - Subtle warmth, all connected */
+  --cb51-calendar: #f5c89a;     /* Warm gold for time */
+  --cb51-sessions: #f4b8c4;     /* Warm coral for creativity */
+  --cb51-finance: #f5b8a8;      /* Warm amber for grounded */
+  --cb51-tasks: #f4a9a8;        /* Rose for doing */
+
   /* Backgrounds */
-  --cb51-bg-primary: #000000;
-  --cb51-bg-card: #0a0a0a;
-  --cb51-bg-hover: rgba(6, 182, 212, 0.1);
-  
+  --cb51-bg-primary: #0a0805;
+  --cb51-bg-card: #1a1410;
+  --cb51-bg-hover: rgba(244, 169, 168, 0.08);
+
   /* Borders */
-  --cb51-border: rgba(6, 182, 212, 0.3);
-  --cb51-border-hover: rgba(6, 182, 212, 0.6);
-  
+  --cb51-border: rgba(244, 169, 168, 0.25);
+  --cb51-border-hover: rgba(244, 169, 168, 0.5);
+
   /* Text */
   --cb51-text-primary: #ffffff;
-  --cb51-text-secondary: #9ca3af;
-  --cb51-text-muted: #6b7280;
+  --cb51-text-secondary: #d4c5b8;
+  --cb51-text-muted: #9d8b7f;
 }
 
 /* CB51 Utility Classes */
