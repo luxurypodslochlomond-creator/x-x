@@ -237,36 +237,36 @@ export default function CB51() {
 
             {/* HIDDEN MENU - Clean & simple */}
             <details className="mb-4">
-                <summary className="cursor-pointer font-mono text-xs font-bold hover:opacity-80" style={{ color: 'var(--cb51-rose)' }}>More Tools ▼</summary>
+                <summary className="cursor-pointer font-mono text-xs font-bold text-cyan-400 hover:opacity-80">More Tools ▼</summary>
                 <div className="mt-3 grid grid-cols-3 gap-2">
                     <Link to={createPageUrl('ScottMessageInbox')}>
-                        <div className="rounded p-2 text-center hover:opacity-90 transition-all" style={{ backgroundColor: 'var(--cb51-bg-card)', border: '1px solid var(--cb51-border)' }}>
-                            <Mail className="w-4 h-4 mx-auto mb-1" style={{ color: 'var(--cb51-rose)' }} />
-                            <p className="font-mono text-[8px]" style={{ color: 'var(--cb51-rose)' }}>EMAIL</p>
+                        <div className="bg-gray-900 border border-gray-700 rounded p-2 text-center hover:border-cyan-500 transition-all">
+                            <Mail className="w-4 h-4 mx-auto mb-1 text-cyan-400" />
+                            <p className="font-mono text-[8px] text-cyan-400">EMAIL</p>
                         </div>
                     </Link>
                     <Link to={createPageUrl('ScottCalendarView')}>
-                        <div className="rounded p-2 text-center hover:opacity-90 transition-all" style={{ backgroundColor: 'var(--cb51-bg-card)', border: '1px solid var(--cb51-border)' }}>
-                            <Calendar className="w-4 h-4 mx-auto mb-1" style={{ color: 'var(--cb51-calendar)' }} />
-                            <p className="font-mono text-[8px]" style={{ color: 'var(--cb51-calendar)' }}>CALENDAR</p>
+                        <div className="bg-gray-900 border border-gray-700 rounded p-2 text-center hover:border-cyan-500 transition-all">
+                            <Calendar className="w-4 h-4 mx-auto mb-1 text-cyan-400" />
+                            <p className="font-mono text-[8px] text-cyan-400">CALENDAR</p>
                         </div>
                     </Link>
                     <Link to={createPageUrl('ScottToDo')}>
-                        <div className="rounded p-2 text-center hover:opacity-90 transition-all" style={{ backgroundColor: 'var(--cb51-bg-card)', border: '1px solid var(--cb51-border)' }}>
-                            <CheckCircle className="w-4 h-4 mx-auto mb-1" style={{ color: 'var(--cb51-tasks)' }} />
-                            <p className="font-mono text-[8px]" style={{ color: 'var(--cb51-tasks)' }}>TASKS</p>
+                        <div className="bg-gray-900 border border-gray-700 rounded p-2 text-center hover:border-cyan-500 transition-all">
+                            <CheckCircle className="w-4 h-4 mx-auto mb-1 text-cyan-400" />
+                            <p className="font-mono text-[8px] text-cyan-400">TASKS</p>
                         </div>
                     </Link>
                     <Link to={createPageUrl('ScottTeamAccess')}>
-                        <div className="rounded p-2 text-center hover:opacity-90 transition-all" style={{ backgroundColor: 'var(--cb51-bg-card)', border: '1px solid var(--cb51-border)' }}>
-                            <Users className="w-4 h-4 mx-auto mb-1" style={{ color: 'var(--cb51-rose)' }} />
-                            <p className="font-mono text-[8px]" style={{ color: 'var(--cb51-rose)' }}>TEAMS</p>
+                        <div className="bg-gray-900 border border-gray-700 rounded p-2 text-center hover:border-cyan-500 transition-all">
+                            <Users className="w-4 h-4 mx-auto mb-1 text-cyan-400" />
+                            <p className="font-mono text-[8px] text-cyan-400">TEAMS</p>
                         </div>
                     </Link>
                     <Link to={createPageUrl('ScottFinanceAdmin')}>
-                        <div className="rounded p-2 text-center hover:opacity-90 transition-all" style={{ backgroundColor: 'var(--cb51-bg-card)', border: '1px solid var(--cb51-border)' }}>
-                            <DollarSign className="w-4 h-4 mx-auto mb-1" style={{ color: 'var(--cb51-finance)' }} />
-                            <p className="font-mono text-[8px]" style={{ color: 'var(--cb51-finance)' }}>FINANCE</p>
+                        <div className="bg-gray-900 border border-gray-700 rounded p-2 text-center hover:border-cyan-500 transition-all">
+                            <DollarSign className="w-4 h-4 mx-auto mb-1 text-cyan-400" />
+                            <p className="font-mono text-[8px] text-cyan-400">FINANCE</p>
                         </div>
                     </Link>
                 </div>
