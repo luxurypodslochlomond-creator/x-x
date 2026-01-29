@@ -200,35 +200,9 @@ export default function PushNotificationManager({ onSubscriptionChange }) {
     }
   };
 
-  if (!isSupported) {
-    if (dismissed) return null;
-    return (
-      <div className="bg-red-500/20 border border-red-500/50 rounded-lg p-3 relative">
-        <button 
-          onClick={() => setDismissed(true)}
-          className="absolute top-2 right-2 text-red-400 hover:text-red-300"
-        >
-          ✕
-        </button>
-        <p className="text-red-400 font-mono text-xs font-bold mb-2">⚠️ Not Supported</p>
-        <p className="text-red-300 font-mono text-xs pr-6">Your browser doesn't support push notifications. Try Chrome, Firefox, or Safari on iOS 16.4+</p>
-      </div>
-    );
-  }
-
-  // iOS needs PWA mode
-  if (needsPWA) {
-    return (
-      <div className="bg-amber-500/20 border border-amber-500/50 rounded-lg p-3">
-        <p className="text-amber-400 font-mono text-xs font-bold mb-2">📱 iPhone Setup:</p>
-        <ol className="text-amber-300 font-mono text-xs space-y-1 list-decimal list-inside">
-          <li>Tap Share button ⬆️</li>
-          <li>Tap "Add to Home Screen"</li>
-          <li>Open CB51 from home screen</li>
-          <li>Enable notifications</li>
-        </ol>
-      </div>
-    );
+  // If notifications aren't supported, just hide the feature - no scary warnings
+  if (!isSupported || needsPWA) {
+    return null;
   }
 
   return (
