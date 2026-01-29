@@ -6,26 +6,21 @@ Deno.serve(async (req) => {
     const base44 = createClientFromRequest(req);
     const payload = await req.json();
 
-    // Get VAPID keys from environment or database
-    let vapidPublic = Deno.env.get('VAPID_PUBLIC_KEY');
-    let vapidPrivate = Deno.env.get('VAPID_PRIVATE_KEY');
-    const vapidSubject = Deno.env.get('VAPID_SUBJECT') || 'mailto:scott@cb51.com';
-    
-    // Fallback to database if env vars not set
-    if (!vapidPublic || !vapidPrivate) {
-      const users = await base44.asServiceRole.entities.User.filter({});
-      let adminUser = users.find(u => u.vapid_public_key);
-      
-      // Auto-generate keys if none exist
-      if (!adminUser?.vapid_public_key || !adminUser?.vapid_private_key) {
-        const generateResponse = await base44.asServiceRole.functions.invoke('generateVapidKeys', {});
-        vapidPublic = generateResponse.data.publicKey;
-        vapidPrivate = generateResponse.data.privateKey;
-      } else {
-        vapidPublic = adminUser.vapid_public_key;
-        vapidPrivate = adminUser.vapid_private_key;
-      }
+    // ALWAYS get VAPID keys from database (single source of truth)
+    const users = await base44.asServiceRole.entities.User.filter({});
+    let adminUser = users.find(u => u.vapid_public_key);
+
+    // Auto-generate keys if none exist
+    if (!adminUser?.vapid_public_key || !adminUser?.vapid_private_key) {
+      const generateResponse = await base44.asServiceRole.functions.invoke('generateVapidKeys', {});
+      vapidPublic = generateResponse.data.publicKey;
+      vapidPrivate = generateResponse.data.privateKey;
+    } else {
+      var vapidPublic = adminUser.vapid_public_key;
+      var vapidPrivate = adminUser.vapid_private_key;
     }
+
+    const vapidSubject = 'mailto:scott@cb51.com';
 
     webpush.setVapidDetails(vapidSubject, vapidPublic, vapidPrivate);
     
