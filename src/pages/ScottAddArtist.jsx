@@ -99,9 +99,10 @@ export default function ScottAddArtist() {
 
         setUploadingImage(true);
         try {
-            const { file_url } = await base44.integrations.Core.UploadFile({ file });
-            setFormData({ ...formData, profile_pic_url: file_url });
+            const result = await base44.integrations.Core.UploadFile({ file });
+            setFormData({ ...formData, profile_pic_url: result.file_url });
         } catch (error) {
+            console.error('Upload error:', error);
             alert('Image upload failed: ' + error.message);
         } finally {
             setUploadingImage(false);
