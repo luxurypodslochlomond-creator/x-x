@@ -222,11 +222,12 @@ export default function CB51() {
                     </div>
 
                     {/* SETTINGS BUTTON - GOLD/ORANGE BORDER */}
-                    <Link to={createPageUrl('ScottSettings')} className="block mb-4">
-                        <button className="w-full border-2 border-yellow-600 hover:border-yellow-500 text-yellow-600 hover:text-yellow-500 py-3 rounded-lg font-mono text-sm font-bold transition-all">
-                            SETTINGS
-                        </button>
-                    </Link>
+                    <button 
+                        onClick={() => setSettingsOpen(true)}
+                        className="w-full border-2 border-yellow-600 hover:border-yellow-500 text-yellow-600 hover:text-yellow-500 py-3 rounded-lg font-mono text-sm font-bold transition-all mb-4"
+                    >
+                        SETTINGS
+                    </button>
 
                     {/* MORE TOOLS SECTION */}
                     <div className="mb-4">
