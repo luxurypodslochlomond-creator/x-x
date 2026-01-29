@@ -272,8 +272,8 @@ import ScottArtistHome from './pages/ScottArtistHome';
 import ScottBandVote from './pages/ScottBandVote';
 import ScottBiggerVision from './pages/ScottBiggerVision';
 import ScottCalendar from './pages/ScottCalendar';
-import ScottCalendarView from './pages/ScottCalendarView';
 import ScottComparison from './pages/ScottComparison';
+import ScottCalendarView from './pages/ScottCalendarView';
 import ScottContracts from './pages/ScottContracts';
 import ScottDemos from './pages/ScottDemos';
 import ScottEmailDashboard from './pages/ScottEmailDashboard';
@@ -603,8 +603,8 @@ export const PAGES = {
     "ScottBandVote": ScottBandVote,
     "ScottBiggerVision": ScottBiggerVision,
     "ScottCalendar": ScottCalendar,
-    "ScottCalendarView": ScottCalendarView,
     "ScottComparison": ScottComparison,
+    "ScottCalendarView": ScottCalendarView,
     "ScottContracts": ScottContracts,
     "ScottDemos": ScottDemos,
     "ScottEmailDashboard": ScottEmailDashboard,
