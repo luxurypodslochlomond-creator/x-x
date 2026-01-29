@@ -14,16 +14,17 @@ Deno.serve(async (req) => {
     // Fallback to database if env vars not set
     if (!vapidPublic || !vapidPrivate) {
       const users = await base44.asServiceRole.entities.User.filter({});
-      const adminUser = users.find(u => u.vapid_public_key);
+      let adminUser = users.find(u => u.vapid_public_key);
       
+      // Auto-generate keys if none exist
       if (!adminUser?.vapid_public_key || !adminUser?.vapid_private_key) {
-        return Response.json({ 
-          error: 'VAPID keys not configured. Set VAPID_PUBLIC_KEY and VAPID_PRIVATE_KEY secrets, or call /api/generateVapidKeys' 
-        }, { status: 500 });
+        const generateResponse = await base44.asServiceRole.functions.invoke('generateVapidKeys', {});
+        vapidPublic = generateResponse.data.publicKey;
+        vapidPrivate = generateResponse.data.privateKey;
+      } else {
+        vapidPublic = adminUser.vapid_public_key;
+        vapidPrivate = adminUser.vapid_private_key;
       }
-      
-      vapidPublic = adminUser.vapid_public_key;
-      vapidPrivate = adminUser.vapid_private_key;
     }
 
     webpush.setVapidDetails(vapidSubject, vapidPublic, vapidPrivate);
