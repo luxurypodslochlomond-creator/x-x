@@ -91,18 +91,18 @@ export default function ScottArtistHome() {
                 })}
             </div>
 
-            <div className="bg-black border border-cyan-500/20 rounded-lg p-2 mb-3">
-                <button onClick={() => setCalendarExpanded(!calendarExpanded)} className="w-full flex items-center justify-between p-1">
+            <div className="rounded-lg p-2 mb-3" style={{ backgroundColor: 'var(--cb51-bg-card)', border: '1px solid var(--cb51-border)' }}>
+                <button onClick={() => setCalendarExpanded(!calendarExpanded)} className="w-full flex items-center justify-between p-1 hover:opacity-80">
                     <div className="flex items-center gap-2">
-                        <Calendar className="w-4 h-4 text-cyan-400" />
-                        <h2 className="text-cyan-400 font-black text-xs font-mono">CALENDAR</h2>
+                        <Calendar className="w-4 h-4" style={{ color: 'var(--cb51-calendar)' }} />
+                        <h2 className="font-black text-xs font-mono" style={{ color: 'var(--cb51-calendar)' }}>CALENDAR</h2>
                     </div>
-                    <div className="text-cyan-400">{calendarExpanded ? '−' : '+'}</div>
+                    <div style={{ color: 'var(--cb51-calendar)' }}>{calendarExpanded ? '−' : '+'}</div>
                 </button>
                 {calendarExpanded && (
                     <div className="pt-2">
                         <Link to={createPageUrl(`ScottCalendarView?id=${artistId}`)}>
-                            <button className="w-full text-[9px] font-bold font-mono text-cyan-400 hover:text-cyan-300">+ ADD EVENT</button>
+                            <button className="w-full text-[9px] font-bold font-mono hover:opacity-80" style={{ color: 'var(--cb51-calendar)' }}>+ ADD EVENT</button>
                         </Link>
                     </div>
                 )}
