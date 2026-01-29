@@ -302,14 +302,6 @@ export default function CB51() {
                         </div>
                     )}
 
-                    {/* LIVE CLOCK FOOTER */}
-                    <div className="fixed bottom-6 left-0 right-0 flex flex-col items-center gap-2">
-                        <div className="border-2 border-cyan-400 rounded px-6 py-3">
-                            <LiveClock fontSize="24px" fontWeight="bold" format="HH:mm:ss" />
-                        </div>
-                        <p className="text-gray-600 font-mono text-xs">Built on Base44</p>
-                    </div>
-
                     {/* SETTINGS MODAL */}
                     <ScottSettingsModal isOpen={settingsOpen} onClose={() => setSettingsOpen(false)} />
                     </div>
