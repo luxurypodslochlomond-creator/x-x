@@ -125,7 +125,7 @@ export default function CB51Support() {
                     <h3 className="text-white font-black font-mono text-xl mb-3">STILL STUCK?</h3>
                     <p className="text-gray-300 font-mono text-sm mb-4">We'll sort it. Promise.</p>
                     <a 
-                        href="mailto:family@uf51.love"
+                        href="mailto:support@cb51.io"
                         className="inline-block bg-cyan-500 hover:bg-cyan-600 text-black font-black px-6 py-3 rounded-lg font-mono"
                     >
                         EMAIL SUPPORT
