@@ -159,7 +159,7 @@ const LayoutInner = ({ children, currentPageName }) => {
     const navigate = useNavigate();
 
   // Detect CB51 subdomain
-  const isCB51Subdomain = window.location.hostname.startsWith('cb51.');
+  const isCB51Subdomain = window.location.hostname.startsWith('cb51.') || window.location.hostname === 'cb51.io';
   const isCB51Page = currentPageName.startsWith('CB51') || currentPageName.startsWith('Scott') || isCB51Subdomain;
 
   const isPublicPage = PUBLIC_PAGES.includes(currentPageName);
