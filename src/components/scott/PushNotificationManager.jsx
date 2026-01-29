@@ -138,7 +138,7 @@ export default function PushNotificationManager({ onSubscriptionChange }) {
       const user = await base44.auth.me();
       await base44.entities.ScottPushSubscription.create({
         user_email: user.email,
-        subscription_data: subscription.toJSON()
+        subscription_data: JSON.stringify(subscription.toJSON())
       });
 
       setIsSubscribed(true);
