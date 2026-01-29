@@ -6,7 +6,7 @@ import { Settings, Lock, Smartphone, Shield } from 'lucide-react';
 import { motion } from 'framer-motion';
 import ScottExtensionSettings from '@/components/scott/ScottExtensionSettings';
 import ScottConnectedDevices from '@/components/scott/ScottConnectedDevices';
-import ScottPushNotifications from '@/components/scott/ScottPushNotifications';
+import PushNotificationManager from '@/components/scott/PushNotificationManager';
 import CB51SecuritySettings from '@/components/scott/CB51SecuritySettings';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
@@ -75,7 +75,11 @@ export default function ScottSettings() {
           </TabsContent>
 
           <TabsContent value="notifications">
-            <ScottPushNotifications />
+            <div className="bg-black border-2 border-cyan-500 rounded-xl p-6">
+              <h3 className="text-white font-black font-mono text-lg mb-4">PUSH NOTIFICATIONS</h3>
+              <p className="text-gray-400 text-sm font-mono mb-6">Get notified when new gigs arrive</p>
+              <PushNotificationManager />
+            </div>
           </TabsContent>
 
           <TabsContent value="devices">
