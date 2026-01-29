@@ -55,10 +55,6 @@ function getAppUrl() {
     const isLocal = Deno.env.get('ENV') === 'development';
     if (isLocal) return 'http://localhost:3000';
     
-    // Check for custom domain
-    if (Deno.env.get('CB51_DOMAIN')) {
-        return `https://${Deno.env.get('CB51_DOMAIN')}`;
-    }
-    
-    return 'https://cb51.base44.app'; // fallback
+    // Use request origin for domain detection
+    return typeof window !== 'undefined' ? window.location.origin : 'https://cb51.base44.app';
 }
