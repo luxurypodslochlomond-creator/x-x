@@ -152,7 +152,7 @@ export default function CB51() {
                     <div className="text-center py-6">
                         <p className="text-gray-600 text-xs font-mono mb-3">No artists yet</p>
                         <Link to={createPageUrl('ScottAddArtist')}>
-                            <button className="bg-cyan-500 hover:bg-cyan-600 text-black font-black px-6 py-3 rounded-lg font-mono text-sm">
+                            <button className="text-black font-black px-6 py-3 rounded-lg font-mono text-sm hover:opacity-90 transition-all" style={{ backgroundColor: 'var(--cb51-rose)' }}>
                                 ADD FIRST ARTIST
                             </button>
                         </Link>
