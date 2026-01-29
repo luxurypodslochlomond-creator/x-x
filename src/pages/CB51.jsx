@@ -133,169 +133,178 @@ export default function CB51() {
     }
 
     return (
-        <div className="min-h-screen bg-black text-white p-3 pb-20">
+                <div className="min-h-screen bg-black text-white p-4 pb-20">
 
-            {/* NOTIFICATION MANAGER IN TOP RIGHT */}
-            <div className="mb-6 flex justify-end">
-                <PushNotificationManager />
-            </div>
-
-            {/* BAND MEMBER NOTIFICATIONS */}
-            {user && user.role !== 'admin' && (
-                <div className="mb-6">
-                    <CB51BandNotifications userEmail={user.email} />
-                </div>
-            )}
-
-
-
-            {/* COMPACT ARTISTS GRID */}
-            <div className="mb-8 pt-4">
-                {artists.length === 0 ? (
-                    <div className="text-center py-6">
-                        <p className="text-gray-600 text-xs font-mono mb-3">No artists yet</p>
-                        <Link to={createPageUrl('ScottAddArtist')}>
-                            <button className="bg-cyan-500 text-black font-black px-6 py-3 rounded-lg font-mono text-sm hover:bg-cyan-600 transition-all">
-                                ADD FIRST ARTIST
-                            </button>
-                        </Link>
+                    {/* NOTIFICATION MANAGER */}
+                    <div className="mb-6 flex justify-end">
+                        <PushNotificationManager />
                     </div>
-                ) : (
-                    <>
-                        <div className="grid grid-cols-3 gap-4">
-                            {artists.map((artist) => (
-                                <div key={artist.id} className="relative">
+
+                    {/* BAND MEMBER NOTIFICATIONS */}
+                    {user && user.role !== 'admin' && (
+                        <div className="mb-6">
+                            <CB51BandNotifications userEmail={user.email} />
+                        </div>
+                    )}
+
+                    {/* ARTIST CIRCLES - BIG AND CENTERED */}
+                    {artists.length > 0 && (
+                        <div className="mb-8 mt-6">
+                            <div className="flex justify-center items-center gap-8 flex-wrap">
+                                {artists.slice(0, 3).map((artist) => (
                                     <Link 
+                                        key={artist.id}
                                         to={createPageUrl(`ScottArtistHome?id=${artist.id}`)}
-                                        className="block"
                                     >
                                         <motion.div
-                                            whileTap={{ scale: 0.96 }}
-                                            className="w-20 h-20 border-2 border-cyan-500 rounded-full overflow-hidden flex items-center justify-center bg-black"
+                                            whileTap={{ scale: 0.95 }}
+                                            className="w-24 h-24 bg-cyan-400 rounded-full flex items-center justify-center font-black text-3xl text-black cursor-pointer hover:opacity-90 transition-opacity"
                                         >
                                             {artist.profile_pic_url ? (
                                                 <img 
                                                     src={artist.profile_pic_url} 
                                                     alt={artist.name}
-                                                    className="w-full h-full object-cover"
+                                                    className="w-full h-full object-cover rounded-full"
                                                 />
                                             ) : (
-                                                <div className="w-full h-full text-black font-black text-2xl flex items-center justify-center bg-cyan-400">
-                                                    {artist.name.charAt(0)}
-                                                </div>
+                                                artist.name.charAt(0).toUpperCase()
                                             )}
                                         </motion.div>
                                     </Link>
-                                </div>
-                            ))}
-
-                            {/* Add Artist Circle */}
-                            <Link to={createPageUrl('ScottAddArtist')}>
-                                <motion.div
-                                    whileTap={{ scale: 0.96 }}
-                                    className="w-20 h-20 border-2 border-dashed border-gray-600 rounded-full flex items-center justify-center transition-all cursor-pointer bg-black"
-                                >
-                                    <Plus className="w-6 h-6 text-cyan-400" />
-                                </motion.div>
-                            </Link>
+                                ))}
+                                {artists.length < 5 && (
+                                    <Link to={createPageUrl('ScottAddArtist')}>
+                                        <motion.div
+                                            whileTap={{ scale: 0.95 }}
+                                            className="w-24 h-24 border-2 border-dashed border-gray-600 rounded-full flex items-center justify-center cursor-pointer hover:border-cyan-400 transition-colors"
+                                        >
+                                            <Plus className="w-8 h-8 text-cyan-400" />
+                                        </motion.div>
+                                    </Link>
+                                )}
+                            </div>
                         </div>
+                    )}
 
-                        {/* Edit Artists - Quick Access */}
-                        <details className="mt-3">
-                            <summary className="cursor-pointer font-mono text-xs font-bold text-cyan-400 hover:opacity-80">Edit Artists ▼</summary>
-                            <div className="mt-2 space-y-2">
+                    {/* EDIT ARTISTS SECTION */}
+                    <div className="mb-4">
+                        <button 
+                            onClick={() => setEditArtistsOpen(!editArtistsOpen)}
+                            className="w-full font-mono text-xs font-bold text-cyan-400 text-left py-2 flex items-center gap-2"
+                        >
+                            <span>{editArtistsOpen ? '▼' : '▶'}</span>
+                            Edit Artists
+                        </button>
+                        {editArtistsOpen && (
+                            <div className="space-y-2">
                                 {artists.map((artist) => (
                                     <button
                                         key={artist.id}
                                         onClick={() => navigate(createPageUrl(`ScottAddArtist?edit=${artist.id}`))}
-                                        className="w-full bg-gray-900 border border-gray-700 rounded p-2 text-left hover:border-cyan-500 transition-all flex items-center justify-between"
+                                        className="w-full bg-black border border-cyan-500/30 rounded p-3 text-left hover:border-cyan-500 transition-all flex items-center justify-between"
                                     >
                                         <span className="font-mono text-xs text-cyan-400">{artist.name}</span>
-                                        <span className="text-xs text-cyan-400">✎</span>
+                                        <span className="text-cyan-400 text-lg">♪</span>
                                     </button>
                                 ))}
+                                {artists.length === 0 && (
+                                    <Link to={createPageUrl('ScottAddArtist')} className="block">
+                                        <button className="w-full bg-cyan-500 text-black font-black py-2 rounded font-mono text-xs hover:bg-cyan-600 transition-all">
+                                            ADD FIRST ARTIST
+                                        </button>
+                                    </Link>
+                                )}
                             </div>
-                        </details>
-                    </>
-                )}
-            </div>
+                        )}
+                    </div>
 
-            {/* QUICK LINKS - Only show when needed */}
-            {hasPendingOffers && (
-                <div className="flex gap-2 mb-6 mt-6">
-                    <Link to={createPageUrl('ScottGigOffers')} className="flex-1">
-                        <button className="w-full bg-cyan-600 text-black py-2 rounded-lg font-mono text-xs font-bold transition-all animate-pulse hover:bg-cyan-500">
-                            {stats.pendingOffers} PENDING OFFER{stats.pendingOffers !== 1 ? 'S' : ''}
+                    {/* SETTINGS BUTTON - GOLD/ORANGE BORDER */}
+                    <Link to={createPageUrl('ScottSettings')} className="block mb-4">
+                        <button className="w-full border-2 border-yellow-600 hover:border-yellow-500 text-yellow-600 hover:text-yellow-500 py-3 rounded-lg font-mono text-sm font-bold transition-all">
+                            SETTINGS
                         </button>
                     </Link>
-                </div>
-            )}
-            <div className="flex gap-2 mb-6 mt-6">
-                <Link to={createPageUrl('ScottSettings')} className="flex-1">
-                    <button className="w-full bg-gray-900 border border-gray-700 py-2 rounded-lg font-mono text-xs font-bold text-cyan-400 hover:border-cyan-500 transition-all">
-                        SETTINGS
-                    </button>
-                </Link>
-            </div>
 
-            {/* HIDDEN MENU - Clean & simple */}
-            <details className="mb-4">
-                <summary className="cursor-pointer font-mono text-xs font-bold text-cyan-400 hover:opacity-80">More Tools ▼</summary>
-                <div className="mt-3 grid grid-cols-3 gap-2">
-                    <Link to={createPageUrl('ScottMessageInbox')}>
-                        <div className="bg-gray-900 border border-gray-700 rounded p-2 text-center hover:border-cyan-500 transition-all">
-                            <Mail className="w-4 h-4 mx-auto mb-1 text-cyan-400" />
-                            <p className="font-mono text-[8px] text-cyan-400">EMAIL</p>
-                        </div>
-                    </Link>
-                    <Link to={createPageUrl('ScottCalendarView')}>
-                        <div className="bg-gray-900 border border-gray-700 rounded p-2 text-center hover:border-cyan-500 transition-all">
-                            <Calendar className="w-4 h-4 mx-auto mb-1 text-cyan-400" />
-                            <p className="font-mono text-[8px] text-cyan-400">CALENDAR</p>
-                        </div>
-                    </Link>
-                    <Link to={createPageUrl('ScottToDo')}>
-                        <div className="bg-gray-900 border border-gray-700 rounded p-2 text-center hover:border-cyan-500 transition-all">
-                            <CheckCircle className="w-4 h-4 mx-auto mb-1 text-cyan-400" />
-                            <p className="font-mono text-[8px] text-cyan-400">TASKS</p>
-                        </div>
-                    </Link>
-                    <Link to={createPageUrl('ScottTeamAccess')}>
-                        <div className="bg-gray-900 border border-gray-700 rounded p-2 text-center hover:border-cyan-500 transition-all">
-                            <Users className="w-4 h-4 mx-auto mb-1 text-cyan-400" />
-                            <p className="font-mono text-[8px] text-cyan-400">TEAMS</p>
-                        </div>
-                    </Link>
-                    <Link to={createPageUrl('ScottFinanceAdmin')}>
-                        <div className="bg-gray-900 border border-gray-700 rounded p-2 text-center hover:border-cyan-500 transition-all">
-                            <DollarSign className="w-4 h-4 mx-auto mb-1 text-cyan-400" />
-                            <p className="font-mono text-[8px] text-cyan-400">FINANCE</p>
-                        </div>
-                    </Link>
-                </div>
-            </details>
+                    {/* MORE TOOLS SECTION */}
+                    <div className="mb-4">
+                        <button 
+                            onClick={() => setMoreToolsOpen(!moreToolsOpen)}
+                            className="w-full font-mono text-xs font-bold text-cyan-400 text-left py-2 flex items-center gap-2"
+                        >
+                            <span>{moreToolsOpen ? '▼' : '▶'}</span>
+                            More Tools
+                        </button>
+                        {moreToolsOpen && (
+                            <div className="grid grid-cols-2 gap-3">
+                                <Link to={createPageUrl('ScottMessageInbox')}>
+                                    <div className="bg-black border border-cyan-500/30 rounded p-3 text-center hover:border-cyan-500 transition-all">
+                                        <Mail className="w-5 h-5 mx-auto mb-2 text-cyan-400" />
+                                        <p className="font-mono text-[10px] text-cyan-400 font-bold">EMAIL</p>
+                                    </div>
+                                </Link>
+                                <Link to={createPageUrl('ScottCalendarView')}>
+                                    <div className="bg-black border border-cyan-500/30 rounded p-3 text-center hover:border-cyan-500 transition-all">
+                                        <Calendar className="w-5 h-5 mx-auto mb-2 text-cyan-400" />
+                                        <p className="font-mono text-[10px] text-cyan-400 font-bold">CALENDAR</p>
+                                    </div>
+                                </Link>
+                                <Link to={createPageUrl('ScottToDo')}>
+                                    <div className="bg-black border border-cyan-500/30 rounded p-3 text-center hover:border-cyan-500 transition-all">
+                                        <CheckCircle className="w-5 h-5 mx-auto mb-2 text-cyan-400" />
+                                        <p className="font-mono text-[10px] text-cyan-400 font-bold">TASKS</p>
+                                    </div>
+                                </Link>
+                                <Link to={createPageUrl('ScottTeamAccess')}>
+                                    <div className="bg-black border border-cyan-500/30 rounded p-3 text-center hover:border-cyan-500 transition-all">
+                                        <Users className="w-5 h-5 mx-auto mb-2 text-cyan-400" />
+                                        <p className="font-mono text-[10px] text-cyan-400 font-bold">TEAMS</p>
+                                    </div>
+                                </Link>
+                                <Link to={createPageUrl('ScottFinanceAdmin')} className="col-span-2">
+                                    <div className="bg-black border border-cyan-500/30 rounded p-3 text-center hover:border-cyan-500 transition-all">
+                                        <DollarSign className="w-5 h-5 mx-auto mb-2 text-cyan-400" />
+                                        <p className="font-mono text-[10px] text-cyan-400 font-bold">FINANCE</p>
+                                    </div>
+                                </Link>
+                            </div>
+                        )}
+                    </div>
 
-            {/* ARCHIVED ARTISTS */}
-            {archivedArtists.length > 0 && (
-                <div className="mt-3">
-                    <details>
-                        <summary className="cursor-pointer text-[9px] font-mono mb-2 text-gray-600 hover:opacity-80">Archived ({archivedArtists.length})</summary>
-                        <div className="space-y-1">
-                            {archivedArtists.map((artist) => (
-                                <div key={artist.id} className="flex items-center justify-between bg-gray-900 border border-gray-700 rounded p-2">
-                                    <p className="font-mono text-[9px] text-gray-600">{artist.name}</p>
-                                    <button
-                                        onClick={() => handleRestoreArtist(artist)}
-                                        className="text-[9px] font-mono text-cyan-400 hover:opacity-80"
-                                    >
-                                        RESTORE
-                                    </button>
+                    {/* ARCHIVED ARTISTS */}
+                    {archivedArtists.length > 0 && (
+                        <div className="mt-6">
+                            <button 
+                                onClick={() => setArchivedOpen(!archivedOpen)}
+                                className="w-full font-mono text-xs font-bold text-gray-600 text-left py-2 flex items-center gap-2"
+                            >
+                                <span>{archivedOpen ? '▼' : '▶'}</span>
+                                Archived ({archivedArtists.length})
+                            </button>
+                            {archivedOpen && (
+                                <div className="space-y-2">
+                                    {archivedArtists.map((artist) => (
+                                        <div key={artist.id} className="flex items-center justify-between bg-black border border-gray-700 rounded p-3">
+                                            <p className="font-mono text-xs text-gray-600">{artist.name}</p>
+                                            <button
+                                                onClick={() => handleRestoreArtist(artist)}
+                                                className="text-[10px] font-mono text-cyan-400 hover:text-cyan-300 transition-colors font-bold"
+                                            >
+                                                RESTORE
+                                            </button>
+                                        </div>
+                                    ))}
                                 </div>
-                            ))}
+                            )}
                         </div>
-                    </details>
+                    )}
+
+                    {/* LIVE CLOCK FOOTER */}
+                    <div className="fixed bottom-6 left-0 right-0 flex flex-col items-center gap-2">
+                        <div className="border-2 border-cyan-400 rounded px-6 py-3">
+                            <LiveClock fontSize="24px" fontWeight="bold" format="HH:mm:ss" />
+                        </div>
+                        <p className="text-gray-600 font-mono text-xs">Built on Base44</p>
+                    </div>
                 </div>
-            )}
-        </div>
-    );
-}
+            );
+        }
