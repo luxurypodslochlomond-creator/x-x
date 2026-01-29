@@ -168,8 +168,8 @@ export default function CB51() {
                                     >
                                         <motion.div
                                             whileTap={{ scale: 0.96 }}
-                                            className="w-20 h-20 bg-black border-2 border-cyan-500 rounded-full overflow-hidden flex items-center justify-center"
-                                            style={{ boxShadow: '0 0 15px rgba(6, 182, 212, 0.3)' }}
+                                            className="w-20 h-20 border-2 rounded-full overflow-hidden flex items-center justify-center"
+                                            style={{ backgroundColor: 'var(--cb51-bg-card)', borderColor: 'var(--cb51-rose)', boxShadow: '0 0 15px rgba(244, 169, 168, 0.2)' }}
                                         >
                                             {artist.profile_pic_url ? (
                                                 <img 
