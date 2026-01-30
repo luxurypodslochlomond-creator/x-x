@@ -422,7 +422,17 @@ export default function Chakra51Protocol() {
           </button>
         </div>
 
-        {/* Simple instructions */}
+        {/* HEADPHONES = MAX HEALING */}
+        <div className="bg-green-900/20 border-2 border-green-500 p-4 mb-4">
+          <p className="text-green-400 text-lg font-black font-mono text-center mb-2">
+            🎧 HEADPHONES = MAX STRENGTH
+          </p>
+          <p className="text-white text-xs font-mono text-center">
+            Binaural beats ONLY work with headphones • Different Hz each ear = brain creates healing frequency
+          </p>
+        </div>
+
+        {/* Quick/Power mode instructions */}
         {(quickMode || powerMode) && (
           <div className="bg-pink-900/20 border-2 border-pink-500/50 p-4 mb-4">
             {quickMode && (
@@ -432,7 +442,7 @@ export default function Chakra51Protocol() {
             )}
             {powerMode && (
               <p className="text-pink-400 text-sm font-mono text-center">
-                Use headphones • 3x daily • Relief in hours not days
+                Power Mode ON • 3x daily • Relief in hours not days
               </p>
             )}
           </div>
