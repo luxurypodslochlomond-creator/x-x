@@ -245,11 +245,11 @@ export default function Chakra51Protocol() {
 
     // ISOCHRONIC TONES: Volume pulsing (works without headphones!)
     isochronicGainRef.current = ctx.createGain();
-    isochronicGainRef.current.gain.value = powerMode ? 0.2 : 0.15;
+    isochronicGainRef.current.gain.value = 0; // Start at 0 for smooth ramp
 
     // Master gain
     gainNodeRef.current = ctx.createGain();
-    gainNodeRef.current.gain.value = 1;
+    gainNodeRef.current.gain.value = 0; // Start at 0 for smooth ramp
 
     // Connect: oscillators -> panners -> isochronic gain -> master gain -> speakers
     oscillator1Ref.current.connect(pannerLeft);
@@ -270,6 +270,11 @@ export default function Chakra51Protocol() {
     if (powerMode && oscillator3Ref.current) {
       oscillator3Ref.current.start();
     }
+
+    // SMOOTH RAMP UP: 2 seconds from 0 to full volume
+    const targetGain = powerMode ? 0.2 : 0.15;
+    isochronicGainRef.current.gain.linearRampToValueAtTime(targetGain, ctx.currentTime + 2);
+    gainNodeRef.current.gain.linearRampToValueAtTime(1, ctx.currentTime + 2);
 
     // ISOCHRONIC PULSING: Volume on/off at healing frequency
     const isochronicFreq = selectedChakra.painFrequency;
@@ -322,18 +327,26 @@ export default function Chakra51Protocol() {
   };
 
   const stopSound = () => {
-    if (oscillator1Ref.current) {
-      oscillator1Ref.current.stop();
-      oscillator1Ref.current = null;
+    // SMOOTH RAMP DOWN: 1 second fade out
+    if (audioContextRef.current && gainNodeRef.current) {
+      gainNodeRef.current.gain.linearRampToValueAtTime(0, audioContextRef.current.currentTime + 1);
     }
-    if (oscillator2Ref.current) {
-      oscillator2Ref.current.stop();
-      oscillator2Ref.current = null;
-    }
-    if (oscillator3Ref.current) {
-      oscillator3Ref.current.stop();
-      oscillator3Ref.current = null;
-    }
+    
+    // Stop oscillators after fade
+    setTimeout(() => {
+      if (oscillator1Ref.current) {
+        oscillator1Ref.current.stop();
+        oscillator1Ref.current = null;
+      }
+      if (oscillator2Ref.current) {
+        oscillator2Ref.current.stop();
+        oscillator2Ref.current = null;
+      }
+      if (oscillator3Ref.current) {
+        oscillator3Ref.current.stop();
+        oscillator3Ref.current = null;
+      }
+    }, 1000);
     if (timerRef.current) {
       clearInterval(timerRef.current);
       timerRef.current = null;
@@ -536,14 +549,14 @@ export default function Chakra51Protocol() {
             {/* Frequencies display + Tech stack */}
             <div className="mb-6 bg-black/80 border-2 border-white/10 p-4">
               <p className="text-xs text-gray-500 font-mono mb-2">MULTI-SENSORY ENTRAINMENT:</p>
-              <p className="text-white font-mono text-sm">🎧 Binaural: {selectedChakra.frequency}Hz + 4Hz theta</p>
-              <p className="text-white font-mono text-sm">📡 Isochronic: {selectedChakra.painFrequency}Hz pulse</p>
-              <p className="text-white font-mono text-sm">👁️ Visual: 8-bit pixel sync</p>
-              <p className="text-white font-mono text-sm">🫁 Breath: 4-7-8 vagus reset</p>
+              <p className="text-white font-mono text-sm">Binaural: {selectedChakra.frequency}Hz + 4Hz theta</p>
+              <p className="text-white font-mono text-sm">Isochronic: {selectedChakra.painFrequency}Hz pulse</p>
+              <p className="text-white font-mono text-sm">Visual: 8-bit pixel sync</p>
+              <p className="text-white font-mono text-sm">Breath: 4-7-8 vagus reset</p>
               {powerMode && (
                 <>
                   <p className="text-pink-400 font-mono text-sm font-black">432Hz LOVE LAYER</p>
-                  <p className="text-pink-400 font-mono text-sm">📳 Haptic vibration ON</p>
+                  <p className="text-pink-400 font-mono text-sm">Haptic vibration ON</p>
                 </>
               )}
             </div>
@@ -591,13 +604,6 @@ export default function Chakra51Protocol() {
                   style={{ borderColor: selectedChakra.color }}
                 />
 
-                {/* Breath instruction */}
-                <div className="absolute -bottom-8 text-center">
-                  <p className="text-xs font-mono text-white">
-                    {breathPhase === 'in' ? '🫁 BREATHE IN (4s)' : breathPhase === 'hold' ? '⏸️ HOLD (7s)' : '💨 BREATHE OUT (8s)'}
-                  </p>
-                </div>
-
                 {/* Isochronic pulse indicator */}
                 <motion.div
                   animate={{ opacity: [0.3, 1, 0.3] }}
@@ -640,7 +646,7 @@ export default function Chakra51Protocol() {
         {/* Heart/Chest pain protocol */}
         <details className="bg-black border-2 border-green-500/50 p-4" open>
           <summary className="text-green-400 font-black font-mono text-sm cursor-pointer mb-2">
-            ❤️ HEART HEALING PROTOCOL (CHEST HURTING) →
+            HEART HEALING PROTOCOL (CHEST HURTING)
           </summary>
           <div className="text-xs text-gray-300 font-mono space-y-1 mt-3">
             <p className="text-green-400 font-bold mb-2">NOT DOPAMINE - REAL HEALING:</p>
@@ -657,7 +663,7 @@ export default function Chakra51Protocol() {
         {/* Back pain protocol */}
         <details className="bg-black border-2 border-pink-500/50 p-4">
           <summary className="text-pink-400 font-black font-mono text-sm cursor-pointer mb-2">
-            ⚡ BACK/SCIATICA PROTOCOL →
+            BACK/SCIATICA PROTOCOL
           </summary>
           <div className="text-xs text-gray-300 font-mono space-y-1 mt-3">
             <p>1. Root Chakra + Power Mode + headphones</p>
