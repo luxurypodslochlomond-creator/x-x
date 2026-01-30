@@ -156,38 +156,41 @@ export default function CB51() {
                                                 <AlertCircle className="w-4 h-4" />
                                                 PENDING APPROVALS ({stats.pendingOffers})
                                             </h2>
-                                            <div className="space-y-2">
+                                            <div className="space-y-3">
                                                 {allOffers
                                                     .filter(o => o.status === 'pending_manager_review')
                                                     .slice(0, 3)
                                                     .map(offer => (
-                                                        <div key={offer.id} className="bg-black/60 border border-cyan-500/30 rounded p-2 flex items-between justify-between text-xs">
-                                                            <div className="flex-1">
-                                                                <p className="text-white font-bold">{offer.venue || 'Gig Offer'}</p>
-                                                                <p className="text-cyan-400 text-[10px] font-mono">{offer.date || 'TBD'}</p>
+                                                        <div key={offer.id} className="bg-black/60 border border-cyan-500/30 rounded p-3 space-y-2">
+                                                            <div className="flex items-between justify-between">
+                                                                <div className="flex-1">
+                                                                    <p className="text-white font-bold text-sm">{offer.venue || 'Gig Offer'}</p>
+                                                                    <p className="text-cyan-400 text-[10px] font-mono">{offer.date || 'TBD'} • £{offer.fee || '?'}</p>
+                                                                </div>
+                                                                <div className="flex gap-1">
+                                                                    <button 
+                                                                        onClick={() => {
+                                                                            queryClient.setQueryData(['scottAllGigOffers'], allOffers.map(o => o.id === offer.id ? {...o, status: 'sent_to_band'} : o));
+                                                                            base44.entities.ScottGigOffer.update(offer.id, {status: 'sent_to_band'}).then(() => queryClient.invalidateQueries({queryKey: ['scottAllGigOffers']}));
+                                                                        }}
+                                                                        className="bg-green-600/40 hover:bg-green-600 text-white px-2 py-1 rounded text-[10px] font-bold"
+                                                                    >
+                                                                        ✓
+                                                                    </button>
+                                                                    <button 
+                                                                        onClick={() => {
+                                                                            if(confirm('Reject this gig?')) {
+                                                                                queryClient.setQueryData(['scottAllGigOffers'], allOffers.map(o => o.id === offer.id ? {...o, status: 'rejected'} : o));
+                                                                                base44.entities.ScottGigOffer.update(offer.id, {status: 'rejected'}).then(() => queryClient.invalidateQueries({queryKey: ['scottAllGigOffers']}));
+                                                                            }
+                                                                        }}
+                                                                        className="bg-red-600/40 hover:bg-red-600 text-white px-2 py-1 rounded text-[10px] font-bold"
+                                                                    >
+                                                                        ✕
+                                                                    </button>
+                                                                </div>
                                                             </div>
-                                                            <div className="flex gap-1">
-                                                                <button 
-                                                                    onClick={() => {
-                                                                        queryClient.setQueryData(['scottAllGigOffers'], allOffers.map(o => o.id === offer.id ? {...o, status: 'sent_to_band'} : o));
-                                                                        base44.entities.ScottGigOffer.update(offer.id, {status: 'sent_to_band'}).then(() => queryClient.invalidateQueries({queryKey: ['scottAllGigOffers']}));
-                                                                    }}
-                                                                    className="bg-green-600/40 hover:bg-green-600 text-white px-2 py-1 rounded text-[10px] font-bold"
-                                                                >
-                                                                    ✓
-                                                                </button>
-                                                                <button 
-                                                                    onClick={() => {
-                                                                        if(confirm('Reject this gig?')) {
-                                                                            queryClient.setQueryData(['scottAllGigOffers'], allOffers.map(o => o.id === offer.id ? {...o, status: 'rejected'} : o));
-                                                                            base44.entities.ScottGigOffer.update(offer.id, {status: 'rejected'}).then(() => queryClient.invalidateQueries({queryKey: ['scottAllGigOffers']}));
-                                                                        }
-                                                                    }}
-                                                                    className="bg-red-600/40 hover:bg-red-600 text-white px-2 py-1 rounded text-[10px] font-bold"
-                                                                >
-                                                                    ✕
-                                                                </button>
-                                                            </div>
+                                                            <CB51VoteBreakdown gigOfferId={offer.id} />
                                                         </div>
                                                     ))}
                                             </div>
