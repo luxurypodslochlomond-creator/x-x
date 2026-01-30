@@ -312,7 +312,8 @@ export default function Chakra51Protocol() {
       setTimeRemaining(prev => {
         if (prev <= 1) {
           stopSound();
-          return selectedChakra.duration * 60;
+          const duration = quickMode ? 5 : selectedChakra.duration;
+          return duration * 60;
         }
         return prev - 1;
       });
