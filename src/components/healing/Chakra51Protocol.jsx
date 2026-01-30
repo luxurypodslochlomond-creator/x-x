@@ -126,8 +126,9 @@ const CHAKRAS = [
     painFrequency: 432,
     color: '#10B981',
     soul: 'Love, connection, remembering we are one',
-    helps: 'Heartbreak, loneliness, chest pain',
-    foods: 'Green: spinach, kale, omega-3',
+    helps: 'Heartbreak, loneliness, chest pain, anxiety, emotional wounds',
+    physics: 'REAL HEALING: Vagus nerve stimulation (432Hz) + heart rate variability + cellular resonance. Not dopamine manipulation - actual tissue repair + nervous system reset.',
+    foods: 'Green: spinach, kale, omega-3, dark chocolate',
     duration: 20
   },
   {
