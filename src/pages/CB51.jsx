@@ -11,6 +11,7 @@ import CB51NotificationInbox from '@/components/scott/CB51NotificationInbox';
 import CB51BandNotifications from '@/components/scott/CB51BandNotifications';
 import CB51SecurityNotice from '@/components/scott/CB51SecurityNotice';
 import CB51BandVoteAlert from '@/components/scott/CB51BandVoteAlert';
+import CB51VoteBreakdown from '@/components/scott/CB51VoteBreakdown';
 import LiveClock from '@/components/shared/LiveClock';
 
 /**
