@@ -624,11 +624,30 @@ export default function Chakra51Protocol() {
         </AnimatePresence>
       </div>
 
-      {/* Emergency protocol - collapsed by default */}
-      <div className="max-w-2xl mx-auto mt-6">
+      {/* Emergency protocols - collapsed by default */}
+      <div className="max-w-2xl mx-auto mt-6 space-y-3">
+        
+        {/* Heart/Chest pain protocol */}
+        <details className="bg-black border-2 border-green-500/50 p-4" open>
+          <summary className="text-green-400 font-black font-mono text-sm cursor-pointer mb-2">
+            ❤️ HEART HEALING PROTOCOL (CHEST HURTING) →
+          </summary>
+          <div className="text-xs text-gray-300 font-mono space-y-1 mt-3">
+            <p className="text-green-400 font-bold mb-2">NOT DOPAMINE - REAL HEALING:</p>
+            <p>1. Heart Chakra + 5 MIN mode + headphones</p>
+            <p>2. Sit or lie down, hand on chest, breathe deep into heart</p>
+            <p>3. Do it NOW - then every 2-3 hours today</p>
+            <p>4. Eat: dark chocolate, omega-3, spinach, water</p>
+            <p className="text-green-400 font-bold mt-2">639Hz (heart) + 432Hz (love) = vagus nerve reset + cellular repair</p>
+            <p className="text-pink-400 mt-2">Physical heart + emotional heart + mind = ONE SYSTEM</p>
+            <p className="text-gray-500 mt-2">This heals INSIDE OUT - body tissue + nervous system + consciousness. Not masking pain. Real physics. Most feel calmer in 5-20 mins.</p>
+          </div>
+        </details>
+
+        {/* Back pain protocol */}
         <details className="bg-black border-2 border-pink-500/50 p-4">
           <summary className="text-pink-400 font-black font-mono text-sm cursor-pointer mb-2">
-            ⚡ SCIATICA EMERGENCY PROTOCOL →
+            ⚡ BACK/SCIATICA PROTOCOL →
           </summary>
           <div className="text-xs text-gray-300 font-mono space-y-1 mt-3">
             <p>1. Root Chakra + Power Mode + headphones</p>
