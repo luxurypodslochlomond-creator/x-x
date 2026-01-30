@@ -391,20 +391,33 @@ export default function Chakra51Protocol() {
           <p className="text-gray-400 text-sm font-mono">Ancient energy map + AI51 frequencies</p>
         </div>
 
-        {/* Power Mode - Simple toggle */}
-        <div className="flex items-center justify-center gap-4 bg-black border-2 border-pink-500/50 p-4 mb-4">
+        {/* Quick Mode + Power Mode */}
+        <div className="flex items-center justify-center gap-3 bg-black border-2 border-pink-500/50 p-4 mb-4">
+          <button
+            onClick={() => {
+              if (isPlaying) stopSound();
+              setQuickMode(!quickMode);
+            }}
+            className={`px-6 py-3 font-black font-mono text-sm border-2 transition-all ${
+              quickMode 
+                ? 'bg-cyan-500 border-cyan-400 text-black' 
+                : 'bg-black border-gray-700 text-gray-400'
+            }`}
+          >
+            {quickMode ? '⚡ 5 MIN' : '5 MIN?'}
+          </button>
           <button
             onClick={() => {
               if (isPlaying) stopSound();
               setPowerMode(!powerMode);
             }}
-            className={`px-8 py-3 font-black font-mono border-2 transition-all ${
+            className={`px-6 py-3 font-black font-mono text-sm border-2 transition-all ${
               powerMode 
                 ? 'bg-pink-500 border-pink-400 text-white' 
                 : 'bg-black border-gray-700 text-gray-400'
             }`}
           >
-            {powerMode ? '⚡ POWER MODE' : 'NORMAL MODE'}
+            {powerMode ? '⚡ POWER' : 'POWER?'}
           </button>
         </div>
 
