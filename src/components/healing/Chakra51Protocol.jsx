@@ -384,7 +384,7 @@ export default function Chakra51Protocol() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-black via-purple-950/20 to-black text-white p-4 pb-20">
+    <div className="min-h-screen bg-black text-white p-4 pb-20">
       
       {/* Simple Header - match FrequencyChamber */}
       <div className="max-w-4xl mx-auto mb-6">
