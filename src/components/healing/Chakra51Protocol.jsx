@@ -196,8 +196,9 @@ export default function Chakra51Protocol() {
   }, []);
 
   useEffect(() => {
-    setTimeRemaining(selectedChakra.duration * 60);
-  }, [selectedChakra]);
+    const duration = quickMode ? 5 : selectedChakra.duration;
+    setTimeRemaining(duration * 60);
+  }, [selectedChakra, quickMode]);
 
   const startSound = async () => {
     if (!audioContextRef.current) {
