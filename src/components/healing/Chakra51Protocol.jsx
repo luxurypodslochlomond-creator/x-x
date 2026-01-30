@@ -511,6 +511,12 @@ export default function Chakra51Protocol() {
                 <p className="text-xs text-gray-500 font-mono mb-1">HEALS:</p>
                 <p className="text-white font-mono text-sm">{selectedChakra.helps}</p>
               </div>
+              {selectedChakra.physics && (
+                <div className="bg-green-900/30 border-l-4 border-green-500 p-3">
+                  <p className="text-xs text-gray-500 font-mono mb-1">NOT PHARMA - REAL PHYSICS:</p>
+                  <p className="text-green-400 font-mono text-xs leading-relaxed">{selectedChakra.physics}</p>
+                </div>
+              )}
               <div className="bg-black/60 border-l-4 p-3" style={{ borderColor: selectedChakra.color }}>
                 <p className="text-xs text-gray-500 font-mono mb-1">EAT:</p>
                 <p className="text-white font-mono text-sm">{selectedChakra.foods}</p>
