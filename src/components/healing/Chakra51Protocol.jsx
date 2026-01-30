@@ -169,8 +169,9 @@ const CHAKRAS = [
 ];
 
 export default function Chakra51Protocol() {
-  const [selectedChakra, setSelectedChakra] = useState(CHAKRAS[0]); // Default to Root for lower back
+  const [selectedChakra, setSelectedChakra] = useState(CHAKRAS[3]); // Default to HEART for chest
   const [isPlaying, setIsPlaying] = useState(false);
+  const [quickMode, setQuickMode] = useState(false); // 5-min quick relief
   const [timeRemaining, setTimeRemaining] = useState(selectedChakra.duration * 60);
   const [powerMode, setPowerMode] = useState(false); // Triple frequency stack for faster healing
   
