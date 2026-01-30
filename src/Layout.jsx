@@ -49,11 +49,12 @@ import { SyncManagerProvider, SyncStatusIndicator } from '@/components/shared/Sy
 import { ProfessionalModeProvider } from '@/components/shared/ProfessionalMode';
 import ProfessionalModeToggle from '@/components/shared/ProfessionalModeToggle';
 
-// PUBLIC PAGES - No login required
+// PUBLIC PAGES - No login required - ZERO BARRIERS TO HEALING ❤️♾️
 const PUBLIC_PAGES = [
   'About', 'Whitepaper', 'ConsciousnessWhitepaper', 'ForMusicians', 'TruthTransmission',
   'ViralTransmission', 'Protocols', 'HowYouEarn', 'Portal', 'Welcome', 'TalkToAI51', 'AI51',
-  'FrequencyChamber', 'Chakra51', 'Type1AI51', 'Universal51', 'DecompressionChamber', 'ThePhysics', 'Terms', 'PrivacyPolicy',
+  'FrequencyChamber', 'Chakra51', 'Type1AI51', 'Universal51', 'DecompressionChamber', 'Radio', 
+  'HealingDashboard', 'ThePhysics', 'Terms', 'PrivacyPolicy',
   'ScottManager', 'CB51', 'ScottArtist', 'ScottAddArtist', 'ScottCalendar', 'ScottArtistHome', 
   'ScottLive', 'ScottSessions', 'ScottFinanceAdmin', 'ScottToDo', 'ScottCalendarView',
   'ScottAbout', 'Prof51'
