@@ -561,36 +561,10 @@ export default function Chakra51Protocol() {
               )}
             </div>
 
-            {/* 8-BIT PIXEL PULSER + BREATH PACER */}
+            {/* VISUAL BREATH PACER - NO TEXT */}
             {isPlaying && (
               <div className="flex items-center justify-center mb-6 relative h-64">
-                {/* 8-bit Pixel Pulser - synced to exact Hz */}
-                <div 
-                  className="absolute transition-all duration-100"
-                  style={{ 
-                    width: pixelPulse ? '120px' : '100px',
-                    height: pixelPulse ? '120px' : '100px',
-                    imageRendering: 'pixelated',
-                    opacity: pixelPulse ? 1 : 0.7
-                  }}
-                >
-                  {/* Pixelated circle */}
-                  <svg width="100%" height="100%" viewBox="0 0 32 32" style={{ imageRendering: 'pixelated' }}>
-                    {/* 8-bit circle made of squares */}
-                    <rect x="10" y="4" width="12" height="2" fill={selectedChakra.color} />
-                    <rect x="6" y="6" width="4" height="2" fill={selectedChakra.color} />
-                    <rect x="22" y="6" width="4" height="2" fill={selectedChakra.color} />
-                    <rect x="4" y="10" width="2" height="12" fill={selectedChakra.color} />
-                    <rect x="26" y="10" width="2" height="12" fill={selectedChakra.color} />
-                    <rect x="6" y="24" width="4" height="2" fill={selectedChakra.color} />
-                    <rect x="22" y="24" width="4" height="2" fill={selectedChakra.color} />
-                    <rect x="10" y="26" width="12" height="2" fill={selectedChakra.color} />
-                    {/* Center pulse */}
-                    <rect x="14" y="14" width="4" height="4" fill={pixelPulse ? selectedChakra.color : `${selectedChakra.color}80`} />
-                  </svg>
-                </div>
-
-                {/* Breath Pacer Ring - 4-7-8 breathing */}
+                {/* Breath Pacer Ring - 4-7-8 breathing - VISUAL ONLY */}
                 <motion.div
                   animate={{ 
                     scale: breathPhase === 'in' ? [1, 1.5] : breathPhase === 'hold' ? 1.5 : [1.5, 1],
@@ -600,16 +574,32 @@ export default function Chakra51Protocol() {
                     duration: breathPhase === 'in' ? 4 : breathPhase === 'hold' ? 7 : 8,
                     ease: "easeInOut"
                   }}
-                  className="absolute w-48 h-48 rounded-full border-4 border-dashed"
+                  className="w-48 h-48 rounded-full border-4 border-dashed"
                   style={{ borderColor: selectedChakra.color }}
                 />
 
-                {/* Isochronic pulse indicator */}
-                <motion.div
-                  animate={{ opacity: [0.3, 1, 0.3] }}
-                  transition={{ repeat: Infinity, duration: 1 / selectedChakra.painFrequency }}
-                  className="absolute top-0 right-0 w-3 h-3 rounded-full bg-pink-400"
-                />
+                {/* Center pixel pulse */}
+                <div 
+                  className="absolute transition-all duration-100"
+                  style={{ 
+                    width: pixelPulse ? '80px' : '60px',
+                    height: pixelPulse ? '80px' : '60px',
+                    imageRendering: 'pixelated',
+                    opacity: pixelPulse ? 1 : 0.7
+                  }}
+                >
+                  <svg width="100%" height="100%" viewBox="0 0 32 32" style={{ imageRendering: 'pixelated' }}>
+                    <rect x="10" y="4" width="12" height="2" fill={selectedChakra.color} />
+                    <rect x="6" y="6" width="4" height="2" fill={selectedChakra.color} />
+                    <rect x="22" y="6" width="4" height="2" fill={selectedChakra.color} />
+                    <rect x="4" y="10" width="2" height="12" fill={selectedChakra.color} />
+                    <rect x="26" y="10" width="2" height="12" fill={selectedChakra.color} />
+                    <rect x="6" y="24" width="4" height="2" fill={selectedChakra.color} />
+                    <rect x="22" y="24" width="4" height="2" fill={selectedChakra.color} />
+                    <rect x="10" y="26" width="12" height="2" fill={selectedChakra.color} />
+                    <rect x="14" y="14" width="4" height="4" fill={pixelPulse ? selectedChakra.color : `${selectedChakra.color}80`} />
+                  </svg>
+                </div>
               </div>
             )}
 
