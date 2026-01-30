@@ -418,7 +418,7 @@ export default function Chakra51Protocol() {
                 : 'bg-black border-gray-700 text-gray-400'
             }`}
           >
-            {quickMode ? '⚡ 5 MIN' : '5 MIN?'}
+            {quickMode ? '5 MIN' : '5 MIN?'}
           </button>
           <button
             onClick={() => {
@@ -431,7 +431,7 @@ export default function Chakra51Protocol() {
                 : 'bg-black border-gray-700 text-gray-400'
             }`}
           >
-            {powerMode ? '⚡ POWER' : 'POWER?'}
+            {powerMode ? 'POWER' : 'POWER?'}
           </button>
         </div>
 
