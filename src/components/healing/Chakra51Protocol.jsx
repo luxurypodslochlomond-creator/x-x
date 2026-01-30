@@ -450,12 +450,12 @@ export default function Chakra51Protocol() {
           <div className="bg-black/60 border-2 border-cyan-500 p-2 mb-4">
             {quickMode && (
               <p className="text-cyan-400 text-xs font-mono text-center font-black">
-                QUICK MODE • Repeat every 2-3 hours
+                QUICK MODE - Repeat every 2-3 hours
               </p>
             )}
             {powerMode && (
               <p className="text-pink-400 text-xs font-mono text-center font-black">
-                POWER MODE • 3x daily for max healing
+                POWER MODE - 3x daily for max healing
               </p>
             )}
           </div>
