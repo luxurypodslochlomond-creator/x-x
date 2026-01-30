@@ -289,29 +289,79 @@ AI51:`,
 
   return (
     <div className="h-screen bg-gradient-to-br from-black via-[#0a1f3f] to-black flex flex-col relative overflow-hidden">
-      {/* ANIMATED NAUTICAL BACKGROUND */}
+      {/* SMOOTH HEALING BACKGROUND - faster visual = calmer nervous system */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {/* Top flowing aura */}
         <motion.div
-          className="absolute top-0 left-0 w-full h-32 opacity-20"
-          animate={{ y: [0, -20, 0] }}
-          transition={{ duration: 8, repeat: Infinity }}
+          className="absolute top-0 left-0 w-full h-48 opacity-30"
+          animate={{ 
+            y: [0, -30, 0],
+            scale: [1, 1.05, 1]
+          }}
+          transition={{ 
+            duration: 6, 
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
           style={{
             background: 'radial-gradient(ellipse at center, #06b6d4 0%, transparent 70%)',
-            filter: 'blur(40px)'
+            filter: 'blur(60px)'
           }}
         />
+        
+        {/* Bottom flowing wave */}
         <motion.svg
-          className="absolute bottom-0 left-0 w-full h-48 opacity-10"
+          className="absolute bottom-0 left-0 w-full h-64 opacity-20"
           viewBox="0 0 1200 400"
           preserveAspectRatio="none"
         >
           <motion.path
             d="M0,100 Q300,50 600,100 T1200,100 L1200,400 L0,400 Z"
-            fill="#ec4899"
-            animate={{ d: ["M0,100 Q300,50 600,100 T1200,100 L1200,400 L0,400 Z", "M0,120 Q300,80 600,120 T1200,120 L1200,400 L0,400 Z", "M0,100 Q300,50 600,100 T1200,100 L1200,400 L0,400 Z"] }}
-            transition={{ duration: 6, repeat: Infinity }}
+            fill="url(#gradient1)"
+            animate={{ 
+              d: [
+                "M0,100 Q300,50 600,100 T1200,100 L1200,400 L0,400 Z", 
+                "M0,130 Q300,90 600,130 T1200,130 L1200,400 L0,400 Z", 
+                "M0,100 Q300,50 600,100 T1200,100 L1200,400 L0,400 Z"
+              ] 
+            }}
+            transition={{ 
+              duration: 8, 
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
           />
+          <defs>
+            <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#ec4899" stopOpacity="1" />
+              <stop offset="50%" stopColor="#06b6d4" stopOpacity="0.8" />
+              <stop offset="100%" stopColor="#ec4899" stopOpacity="1" />
+            </linearGradient>
+          </defs>
         </motion.svg>
+
+        {/* Floating particles for depth */}
+        {[...Array(5)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-2 h-2 rounded-full bg-cyan-400/20"
+            style={{
+              left: `${20 + i * 15}%`,
+              top: `${30 + i * 10}%`,
+            }}
+            animate={{
+              y: [-20, 20, -20],
+              x: [-10, 10, -10],
+              opacity: [0.2, 0.5, 0.2]
+            }}
+            transition={{
+              duration: 4 + i,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: i * 0.5
+            }}
+          />
+        ))}
       </div>
 
       {/* HEADER - COOLASFUCK NEXT GEN */}
