@@ -34,7 +34,7 @@ export default function SubdomainRouter({ children }) {
             } else if (subdomain === 'prof51') {
                 navigate(createPageUrl('Prof51'), { replace: true });
             } else if (subdomain === 'cb51') {
-                navigate(createPageUrl('ScottManager'), { replace: true });
+                navigate(createPageUrl('CB51'), { replace: true });
             }
         }
         // uf51 or www or no subdomain = stay on main site
