@@ -62,6 +62,28 @@ Deno.serve(async (req) => {
 
       await Promise.all(notificationPromises);
 
+      // Send emails to band members
+      const emailPromises = bandMembers.map(member =>
+        base44.asServiceRole.integrations.Core.SendEmail({
+          from_name: 'CB51',
+          to: member.email,
+          subject: `🎸 New Gig: ${gigOffer.venue}`,
+          body: `Hi ${member.name},
+
+      New gig offer to vote on:
+
+      ${gigOffer.venue}
+      ${gigOffer.date}
+      Fee: £${gigOffer.fee?.toLocaleString()}
+
+      Vote YES or NO in CB51 → https://app.base44.com/ScottBandVote?gig=${gigOffer.id}
+
+      CB51 • Your AI Co-Manager`
+        }).catch(e => console.log('Email failed:', e))
+      );
+
+      await Promise.all(emailPromises);
+
       return Response.json({ 
         success: true,
         responses_created: bandMembers.length,
