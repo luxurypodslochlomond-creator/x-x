@@ -32,6 +32,7 @@ export default function CB51() {
           const [pasteModalOpen, setPasteModalOpen] = useState(false);
           const [pastedText, setPastedText] = useState('');
           const [scanning, setScanning] = useState(false);
+          const [expandedTool, setExpandedTool] = useState(null);
           const queryClient = useQueryClient();
 
           useEffect(() => {
@@ -94,6 +95,20 @@ export default function CB51() {
     const { data: messages = [] } = useQuery({
         queryKey: ['scottMessages'],
         queryFn: () => base44.entities.ScottMessage.filter({}),
+        enabled: !!user && artists.length > 0,
+        staleTime: 120000
+    });
+
+    const { data: events = [] } = useQuery({
+        queryKey: ['scottEvents'],
+        queryFn: () => base44.entities.ScottEvent.filter({}),
+        enabled: !!user && artists.length > 0,
+        staleTime: 120000
+    });
+
+    const { data: tasks = [] } = useQuery({
+        queryKey: ['scottTasks'],
+        queryFn: () => base44.entities.ScottTask.filter({}),
         enabled: !!user && artists.length > 0,
         staleTime: 120000
     });
@@ -378,32 +393,148 @@ export default function CB51() {
                     <div className="space-y-2">
 
 
-                        {/* QUICK TOOLS - NO COLLAPSE ON MOBILE */}
-                        <div className="grid grid-cols-2 gap-2 lg:hidden">
-                            <Link to={createPageUrl('ScottMessageInbox')}>
-                                <div className="bg-black border border-cyan-500/30 rounded p-2 text-center hover:border-cyan-500 transition-all">
-                                    <Mail className="w-4 h-4 mx-auto mb-1 text-cyan-400" />
-                                    <p className="font-mono text-[9px] text-cyan-400 font-bold">EMAIL</p>
-                                </div>
-                            </Link>
-                            <Link to={createPageUrl('ScottCalendarView')}>
-                                <div className="bg-black border border-cyan-500/30 rounded p-2 text-center hover:border-cyan-500 transition-all">
-                                    <Calendar className="w-4 h-4 mx-auto mb-1 text-cyan-400" />
-                                    <p className="font-mono text-[9px] text-cyan-400 font-bold">CALENDAR</p>
-                                </div>
-                            </Link>
-                            <Link to={createPageUrl('ScottToDo')}>
-                                <div className="bg-black border border-cyan-500/30 rounded p-2 text-center hover:border-cyan-500 transition-all">
-                                    <CheckCircle className="w-4 h-4 mx-auto mb-1 text-cyan-400" />
-                                    <p className="font-mono text-[9px] text-cyan-400 font-bold">TASKS</p>
-                                </div>
-                            </Link>
-                            <Link to={createPageUrl('ScottFinanceAdmin')}>
-                                <div className="bg-black border border-cyan-500/30 rounded p-2 text-center hover:border-cyan-500 transition-all">
-                                    <DollarSign className="w-4 h-4 mx-auto mb-1 text-cyan-400" />
-                                    <p className="font-mono text-[9px] text-cyan-400 font-bold">FINANCE</p>
-                                </div>
-                            </Link>
+                        {/* QUICK TOOLS - EXPANDABLE INLINE */}
+                        <div className="space-y-2 lg:hidden">
+                            {/* EMAIL */}
+                            <div className="bg-black border border-cyan-500/30 rounded-lg overflow-hidden">
+                                <button
+                                    onClick={() => setExpandedTool(expandedTool === 'email' ? null : 'email')}
+                                    className="w-full p-3 flex items-center justify-between hover:bg-cyan-500/10 transition-all"
+                                >
+                                    <div className="flex items-center gap-2">
+                                        <Mail className="w-4 h-4 text-cyan-400" />
+                                        <span className="font-mono text-xs text-cyan-400 font-bold">EMAIL</span>
+                                        {messages.filter(m => m.status === 'pending').length > 0 && (
+                                            <span className="bg-cyan-500 text-black text-[8px] font-black px-1.5 py-0.5 rounded">
+                                                {messages.filter(m => m.status === 'pending').length}
+                                            </span>
+                                        )}
+                                    </div>
+                                    <span className="text-cyan-400 text-xs">{expandedTool === 'email' ? '−' : '+'}</span>
+                                </button>
+                                {expandedTool === 'email' && (
+                                    <motion.div
+                                        initial={{ height: 0, opacity: 0 }}
+                                        animate={{ height: 'auto', opacity: 1 }}
+                                        exit={{ height: 0, opacity: 0 }}
+                                        className="border-t border-cyan-500/30 p-3 space-y-2"
+                                    >
+                                        {messages.filter(m => m.status === 'pending').slice(0, 3).map(msg => (
+                                            <div key={msg.id} className="bg-black/60 border border-cyan-500/20 rounded p-2">
+                                                <p className="text-white text-xs font-bold">{msg.subject || 'Message'}</p>
+                                                <p className="text-gray-500 text-[9px] font-mono">{msg.from || 'Unknown'}</p>
+                                            </div>
+                                        ))}
+                                        <Link to={createPageUrl('ScottMessageInbox')} className="text-cyan-400 hover:text-cyan-300 text-[9px] font-mono font-bold block text-center pt-1">
+                                            See all →
+                                        </Link>
+                                    </motion.div>
+                                )}
+                            </div>
+
+                            {/* CALENDAR */}
+                            <div className="bg-black border border-cyan-500/30 rounded-lg overflow-hidden">
+                                <button
+                                    onClick={() => setExpandedTool(expandedTool === 'calendar' ? null : 'calendar')}
+                                    className="w-full p-3 flex items-center justify-between hover:bg-cyan-500/10 transition-all"
+                                >
+                                    <div className="flex items-center gap-2">
+                                        <Calendar className="w-4 h-4 text-cyan-400" />
+                                        <span className="font-mono text-xs text-cyan-400 font-bold">CALENDAR</span>
+                                    </div>
+                                    <span className="text-cyan-400 text-xs">{expandedTool === 'calendar' ? '−' : '+'}</span>
+                                </button>
+                                {expandedTool === 'calendar' && (
+                                    <motion.div
+                                        initial={{ height: 0, opacity: 0 }}
+                                        animate={{ height: 'auto', opacity: 1 }}
+                                        exit={{ height: 0, opacity: 0 }}
+                                        className="border-t border-cyan-500/30 p-3 space-y-2"
+                                    >
+                                        {events.slice(0, 3).map(event => (
+                                            <div key={event.id} className="bg-black/60 border border-cyan-500/20 rounded p-2">
+                                                <p className="text-white text-xs font-bold">{event.title}</p>
+                                                <p className="text-gray-500 text-[9px] font-mono">{event.date || 'TBD'}</p>
+                                            </div>
+                                        ))}
+                                        <Link to={createPageUrl('ScottCalendarView')} className="text-cyan-400 hover:text-cyan-300 text-[9px] font-mono font-bold block text-center pt-1">
+                                            See all →
+                                        </Link>
+                                    </motion.div>
+                                )}
+                            </div>
+
+                            {/* TASKS */}
+                            <div className="bg-black border border-cyan-500/30 rounded-lg overflow-hidden">
+                                <button
+                                    onClick={() => setExpandedTool(expandedTool === 'tasks' ? null : 'tasks')}
+                                    className="w-full p-3 flex items-center justify-between hover:bg-cyan-500/10 transition-all"
+                                >
+                                    <div className="flex items-center gap-2">
+                                        <CheckCircle className="w-4 h-4 text-cyan-400" />
+                                        <span className="font-mono text-xs text-cyan-400 font-bold">TASKS</span>
+                                        {tasks.filter(t => t.status !== 'done').length > 0 && (
+                                            <span className="bg-cyan-500 text-black text-[8px] font-black px-1.5 py-0.5 rounded">
+                                                {tasks.filter(t => t.status !== 'done').length}
+                                            </span>
+                                        )}
+                                    </div>
+                                    <span className="text-cyan-400 text-xs">{expandedTool === 'tasks' ? '−' : '+'}</span>
+                                </button>
+                                {expandedTool === 'tasks' && (
+                                    <motion.div
+                                        initial={{ height: 0, opacity: 0 }}
+                                        animate={{ height: 'auto', opacity: 1 }}
+                                        exit={{ height: 0, opacity: 0 }}
+                                        className="border-t border-cyan-500/30 p-3 space-y-2"
+                                    >
+                                        {tasks.filter(t => t.status !== 'done').slice(0, 3).map(task => (
+                                            <div key={task.id} className="bg-black/60 border border-cyan-500/20 rounded p-2">
+                                                <p className="text-white text-xs font-bold">{task.title}</p>
+                                                <p className="text-gray-500 text-[9px] font-mono">{task.responsible_name || 'Unassigned'}</p>
+                                            </div>
+                                        ))}
+                                        <Link to={createPageUrl('ScottToDo')} className="text-cyan-400 hover:text-cyan-300 text-[9px] font-mono font-bold block text-center pt-1">
+                                            See all →
+                                        </Link>
+                                    </motion.div>
+                                )}
+                            </div>
+
+                            {/* FINANCE */}
+                            <div className="bg-black border border-cyan-500/30 rounded-lg overflow-hidden">
+                                <button
+                                    onClick={() => setExpandedTool(expandedTool === 'finance' ? null : 'finance')}
+                                    className="w-full p-3 flex items-center justify-between hover:bg-cyan-500/10 transition-all"
+                                >
+                                    <div className="flex items-center gap-2">
+                                        <DollarSign className="w-4 h-4 text-cyan-400" />
+                                        <span className="font-mono text-xs text-cyan-400 font-bold">FINANCE</span>
+                                    </div>
+                                    <span className="text-cyan-400 text-xs">{expandedTool === 'finance' ? '−' : '+'}</span>
+                                </button>
+                                {expandedTool === 'finance' && (
+                                    <motion.div
+                                        initial={{ height: 0, opacity: 0 }}
+                                        animate={{ height: 'auto', opacity: 1 }}
+                                        exit={{ height: 0, opacity: 0 }}
+                                        className="border-t border-cyan-500/30 p-3 space-y-2"
+                                    >
+                                        {invoices.slice(0, 3).map(invoice => (
+                                            <div key={invoice.id} className="bg-black/60 border border-cyan-500/20 rounded p-2 flex justify-between items-center">
+                                                <div>
+                                                    <p className="text-white text-xs font-bold">{invoice.description || 'Invoice'}</p>
+                                                    <p className="text-gray-500 text-[9px] font-mono">{invoice.status}</p>
+                                                </div>
+                                                <p className="text-cyan-400 text-xs font-bold">£{invoice.amount}</p>
+                                            </div>
+                                        ))}
+                                        <Link to={createPageUrl('ScottFinanceAdmin')} className="text-cyan-400 hover:text-cyan-300 text-[9px] font-mono font-bold block text-center pt-1">
+                                            See all →
+                                        </Link>
+                                    </motion.div>
+                                )}
+                            </div>
                         </div>
 
                         {/* ARCHIVED - COLLAPSIBLE */}
