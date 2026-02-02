@@ -384,32 +384,14 @@ export default function CB51() {
                             <span>{settingsOpen ? '▼' : '▶'} SETTINGS</span>
                         </button>
                         {settingsOpen && (
-                            <div className="bg-black border-2 border-amber-600/50 rounded p-3 space-y-3 text-xs font-mono mt-1">
-                                <div>
-                                    <div className="flex items-center justify-between mb-2">
-                                        <span className="text-gray-600 text-[10px]">EXTENSION PIN</span>
-                                        <button 
-                                            onClick={() => {
-                                                navigator.clipboard.writeText('5717');
-                                                alert('PIN copied: 5717');
-                                            }}
-                                            className="text-cyan-400 font-black text-lg hover:text-cyan-300"
-                                        >
-                                            5717
-                                        </button>
-                                    </div>
-                                    <p className="text-gray-600 text-[9px]">For browser extension (coming soon)</p>
+                            <div className="bg-black border-2 border-amber-600/50 rounded p-3 space-y-2 text-xs font-mono mt-1">
+                                <div className="flex items-center gap-2 text-gray-500">
+                                    <Shield className="w-3 h-3" />
+                                    <span className="text-[10px]">Military-grade encryption</span>
                                 </div>
-                                
-                                <div className="border-t border-amber-600/30 pt-2 space-y-2">
-                                    <div className="flex items-center gap-2 text-gray-500">
-                                        <Shield className="w-3 h-3" />
-                                        <span className="text-[10px]">Military-grade encryption</span>
-                                    </div>
-                                    <div className="flex items-center gap-2 text-gray-500">
-                                        <Bell className="w-3 h-3" />
-                                        <span className="text-[10px]">Push notifications active</span>
-                                    </div>
+                                <div className="flex items-center gap-2 text-gray-500">
+                                    <Bell className="w-3 h-3" />
+                                    <span className="text-[10px]">Push notifications active</span>
                                 </div>
                             </div>
                         )}
