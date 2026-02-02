@@ -26,7 +26,10 @@ export default function ScottArtistHome() {
 
     const { data: bandMembers = [] } = useQuery({
         queryKey: ['scottBandMembers', artistId],
-        queryFn: () => base44.entities.ScottTeamMember.filter({ artist_id: artistId }),
+        queryFn: async () => {
+            const allMembers = await base44.entities.ScottTeamMember.list();
+            return allMembers.filter(m => m.artist_access?.includes(artistId));
+        },
         enabled: !!artistId
     });
 
@@ -46,16 +49,24 @@ export default function ScottArtistHome() {
         }
     });
 
-    const handleAddMember = () => {
+    const handleAddMember = async () => {
         if (!newMember.name || !newMember.email) {
             alert('Need name and email');
             return;
         }
+        
+        // Send invite email first
+        try {
+            await base44.users.inviteUser(newMember.email, 'user');
+        } catch (e) {
+            console.log('Invite failed (may already be registered):', e);
+        }
+        
         addMemberMutation.mutate({
             name: newMember.name,
             email: newMember.email,
-            artist_id: artistId,
-            role: 'band_member'
+            artist_access: [artistId],
+            role: 'assistant'
         });
     };
 
