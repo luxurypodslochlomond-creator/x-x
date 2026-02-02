@@ -134,10 +134,11 @@ export default function CB51() {
 
         setScanning(true);
         try {
-            const { scanGigOffers } = await import('@/functions/scanGigOffers');
-            await scanGigOffers({ emailText: pastedText, artistId: activeArtists[0]?.id });
+            await base44.functions.invoke('scanGigOffers', { 
+                emailText: pastedText, 
+                artistId: activeArtists[0]?.id 
+            });
 
-            // Refresh data
             queryClient.invalidateQueries({ queryKey: ['scottAllGigOffers'] });
             queryClient.invalidateQueries({ queryKey: ['scottInvoices'] });
 
