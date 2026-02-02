@@ -35,6 +35,26 @@ Deno.serve(async (req) => {
       action_url: `/CB51`
     });
 
+    // Send email to manager
+    try {
+      await base44.asServiceRole.integrations.Core.SendEmail({
+        from_name: 'CB51',
+        to: gigOffer.created_by,
+        subject: `🎸 New Gig: ${gigOffer.venue || gigOffer.venue_name}`,
+        body: `New gig offer:
+
+${gigOffer.venue || gigOffer.venue_name}
+${gigOffer.date || 'No date'}
+Fee: £${gigOffer.fee?.toLocaleString() || '?'}
+
+Review in CB51 → https://app.base44.com/CB51
+
+CB51 • Your AI Co-Manager`
+      });
+    } catch (e) {
+      console.log('Email failed:', e);
+    }
+
     return Response.json({ 
       success: true,
       manager_notified: true,

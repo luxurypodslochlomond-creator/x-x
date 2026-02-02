@@ -60,6 +60,30 @@ Deno.serve(async (req) => {
        action_url: `/ScottGigOffers?id=${gigOffer.artist_id}`
      });
 
+    // Send email to manager
+    try {
+      await base44.asServiceRole.integrations.Core.SendEmail({
+        from_name: 'CB51',
+        to: gigOffer.created_by,
+        subject: `✅ All Votes In: ${gigOffer.venue}`,
+        body: `All votes received:
+
+${gigOffer.venue}
+${gigOffer.date}
+
+${summary}
+
+✓ YES: ${yesVoters}
+${noReasons ? '\n✗ NO:\n' + noReasons : ''}
+
+Check CB51 → https://app.base44.com/CB51
+
+CB51 • Your AI Co-Manager`
+      });
+    } catch (e) {
+      console.log('Email failed:', e);
+    }
+
     // Mark timestamp on gig offer
     await base44.asServiceRole.entities.ScottGigOffer.update(gigOffer.id, {
       all_responses_received_at: new Date().toISOString()
