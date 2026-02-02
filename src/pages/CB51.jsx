@@ -136,7 +136,7 @@ export default function CB51() {
         try {
             await base44.functions.invoke('scanGigOffers', { 
                 emailText: pastedText, 
-                artistId: activeArtists[0]?.id 
+                artistId: artists[0]?.id 
             });
 
             queryClient.invalidateQueries({ queryKey: ['scottAllGigOffers'] });
@@ -358,19 +358,19 @@ export default function CB51() {
                         </button>
                         {settingsOpen && (
                             <div className="bg-black border-2 border-amber-600/50 rounded p-3 space-y-2 text-xs text-amber-400 font-mono mt-1">
-                                <div className="flex items-center justify-between pb-2 border-b border-amber-600/30">
+                                <Link to={createPageUrl('ScottSettings')} className="flex items-center justify-between pb-2 border-b border-amber-600/30 hover:text-cyan-400 transition-colors">
                                     <span className="text-amber-600">EXTENSION PIN</span>
-                                    <span className="text-cyan-400 font-bold">••••</span>
-                                </div>
-                                <button className="w-full text-left hover:text-cyan-400 transition-colors py-1">
+                                    <span className="text-cyan-400 font-bold">→</span>
+                                </Link>
+                                <Link to={createPageUrl('ScottSettings')} className="block w-full text-left hover:text-cyan-400 transition-colors py-1">
                                     SECURITY
-                                </button>
-                                <button className="w-full text-left hover:text-cyan-400 transition-colors py-1">
+                                </Link>
+                                <Link to={createPageUrl('ScottSettings')} className="block w-full text-left hover:text-cyan-400 transition-colors py-1">
                                     NOTIFICATIONS
-                                </button>
-                                <button className="w-full text-left hover:text-cyan-400 transition-colors py-1">
+                                </Link>
+                                <Link to={createPageUrl('ScottSettings')} className="block w-full text-left hover:text-cyan-400 transition-colors py-1">
                                     DEVICES
-                                </button>
+                                </Link>
                             </div>
                         )}
 
