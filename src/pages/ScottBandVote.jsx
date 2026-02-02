@@ -23,7 +23,7 @@ export default function ScottBandVote() {
     const [submitting, setSubmitting] = useState(false);
 
     const urlParams = new URLSearchParams(window.location.search);
-    const offerId = urlParams.get('offerId');
+    const offerId = urlParams.get('offerId') || urlParams.get('gig');
 
     useEffect(() => {
         base44.auth.me().then(setUser);
