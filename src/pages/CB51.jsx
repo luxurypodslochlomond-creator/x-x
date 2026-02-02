@@ -171,40 +171,46 @@ export default function CB51() {
                                         <PushNotificationManager />
                                     </div>
 
-                                    {/* PASTE MESSAGE EXPANDABLE */}
+                                    {/* AI51 SMART SCAN */}
                                                     {user?.role === 'admin' && (
                                                         <div className="mb-6">
                                                             <button
                                                                 onClick={() => setPasteModalOpen(!pasteModalOpen)}
-                                                                className="w-full bg-gradient-to-r from-cyan-500 to-cyan-600 hover:from-cyan-600 hover:to-cyan-700 text-black font-black font-mono text-lg py-4 rounded-lg shadow-lg border-2 border-cyan-400 flex items-center justify-center gap-2"
+                                                                className="w-full bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 hover:from-pink-600 hover:via-purple-600 hover:to-cyan-600 text-white font-black font-mono text-sm py-3 rounded-lg shadow-lg flex items-center justify-center gap-2 border border-white/20"
+                                                                style={{ boxShadow: '0 0 20px rgba(236, 72, 153, 0.3)' }}
                                                             >
-                                                                📋 PASTE MESSAGE
+                                                                <span className="text-xl">🧠</span>
+                                                                <span>AI51 SMART SCAN</span>
                                                             </button>
 
                                                             {pasteModalOpen && (
-                                                                <div className="mt-4 bg-black border-2 border-cyan-500 rounded-lg p-4">
-                                                                    <p className="text-gray-400 text-sm font-mono mb-3">
-                                                                        Paste WhatsApp/email - CB51 scans for gigs automatically
-                                                                    </p>
+                                                                <div className="mt-3 bg-gradient-to-br from-black to-gray-900 border border-cyan-500/50 rounded-lg p-4">
+                                                                    <div className="flex items-start gap-2 mb-3">
+                                                                        <span className="text-2xl">🧠</span>
+                                                                        <div>
+                                                                            <p className="text-cyan-400 font-bold text-sm">AI51 extracts everything:</p>
+                                                                            <p className="text-gray-500 text-xs">Dates • Venues • Fees • Tasks • Invoices</p>
+                                                                        </div>
+                                                                    </div>
                                                                     <Textarea
                                                                         value={pastedText}
                                                                         onChange={(e) => setPastedText(e.target.value)}
-                                                                        placeholder="Paste here..."
-                                                                        className="bg-black border-cyan-500/50 text-white font-mono text-sm min-h-[200px] mb-3"
+                                                                        placeholder="Paste WhatsApp or email text here..."
+                                                                        className="bg-black/50 border-cyan-500/30 text-white text-sm min-h-[180px] mb-3 focus:border-pink-500"
                                                                     />
                                                                     <div className="flex gap-2">
                                                                         <button
                                                                             onClick={() => { setPasteModalOpen(false); setPastedText(''); }}
-                                                                            className="flex-1 bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 rounded-lg font-mono"
+                                                                            className="flex-1 bg-gray-800 hover:bg-gray-700 text-gray-400 font-bold py-2.5 rounded-lg text-sm"
                                                                         >
                                                                             CANCEL
                                                                         </button>
                                                                         <button
                                                                             onClick={handlePaste}
                                                                             disabled={scanning || !pastedText.trim()}
-                                                                            className="flex-1 bg-cyan-500 hover:bg-cyan-600 text-black font-black py-3 rounded-lg font-mono disabled:opacity-50"
+                                                                            className="flex-1 bg-gradient-to-r from-pink-500 to-cyan-500 hover:from-pink-600 hover:to-cyan-600 text-white font-black py-2.5 rounded-lg text-sm disabled:opacity-50 disabled:cursor-not-allowed"
                                                                         >
-                                                                            {scanning ? 'SCANNING...' : 'SCAN'}
+                                                                            {scanning ? '🧠 AI51 SCANNING...' : '🧠 AI51 SCAN'}
                                                                         </button>
                                                                     </div>
                                                                 </div>
