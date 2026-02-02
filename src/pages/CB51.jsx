@@ -376,25 +376,7 @@ export default function CB51() {
 
                     {/* SETTINGS & TOOLS - ALWAYS VISIBLE ON MOBILE */}
                     <div className="space-y-2">
-                        {/* SETTINGS - COLLAPSIBLE */}
-                        <button 
-                            onClick={() => setSettingsOpen(!settingsOpen)}
-                            className="w-full font-mono text-xs font-bold text-amber-600 hover:text-amber-500 px-3 py-2 border-2 border-amber-600 rounded hover:border-amber-500 transition-all flex items-center justify-between"
-                        >
-                            <span>{settingsOpen ? '▼' : '▶'} SETTINGS</span>
-                        </button>
-                        {settingsOpen && (
-                            <div className="bg-black border-2 border-amber-600/50 rounded p-3 space-y-2 text-xs font-mono mt-1">
-                                <div className="flex items-center gap-2 text-gray-500">
-                                    <Shield className="w-3 h-3" />
-                                    <span className="text-[10px]">Data encrypted</span>
-                                </div>
-                                <div className="flex items-center gap-2 text-green-500">
-                                    <Bell className="w-3 h-3" />
-                                    <span className="text-[10px]">Notifications enabled</span>
-                                </div>
-                            </div>
-                        )}
+
 
                         {/* QUICK TOOLS - NO COLLAPSE ON MOBILE */}
                         <div className="grid grid-cols-2 gap-2 lg:hidden">
