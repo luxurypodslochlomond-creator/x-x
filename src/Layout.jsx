@@ -262,7 +262,7 @@ const LayoutInner = ({ children, currentPageName }) => {
       'og:description': isCB51 
         ? 'Professional artist management powered by AI51'
         : 'Heal yourself, heal the planet',
-      'og:image': isCB51 ? '/cb51-og-image.png' : '/uf51-og-image.png',
+      'og:image': window.location.origin + '/api/functions/serveOGImage',
       'og:type': 'website'
     };
 
