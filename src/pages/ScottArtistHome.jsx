@@ -1,15 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
-import { Radio, ArrowLeft, Music, Calendar, ClipboardList, DollarSign, Mic2, Users } from 'lucide-react';
+import { Radio, ArrowLeft, Music, Calendar, ClipboardList, DollarSign, Mic2, Users, Plus, Trash2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { Input } from '@/components/ui/input';
 
 export default function ScottArtistHome() {
     const navigate = useNavigate();
+    const queryClient = useQueryClient();
     const [artist, setArtist] = useState(null);
     const [calendarExpanded, setCalendarExpanded] = useState(false);
+    const [bandExpanded, setBandExpanded] = useState(false);
+    const [addingMember, setAddingMember] = useState(false);
+    const [newMember, setNewMember] = useState({ name: '', email: '' });
     const urlParams = new URLSearchParams(window.location.search);
     const artistId = urlParams.get('id');
 
@@ -18,6 +23,41 @@ export default function ScottArtistHome() {
         queryFn: () => base44.entities.ScottEvent.filter({ artist_id: artistId }),
         enabled: !!artistId
     });
+
+    const { data: bandMembers = [] } = useQuery({
+        queryKey: ['scottBandMembers', artistId],
+        queryFn: () => base44.entities.ScottTeamMember.filter({ artist_id: artistId }),
+        enabled: !!artistId
+    });
+
+    const addMemberMutation = useMutation({
+        mutationFn: (memberData) => base44.entities.ScottTeamMember.create(memberData),
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ['scottBandMembers', artistId] });
+            setNewMember({ name: '', email: '' });
+            setAddingMember(false);
+        }
+    });
+
+    const deleteMemberMutation = useMutation({
+        mutationFn: (memberId) => base44.entities.ScottTeamMember.delete(memberId),
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ['scottBandMembers', artistId] });
+        }
+    });
+
+    const handleAddMember = () => {
+        if (!newMember.name || !newMember.email) {
+            alert('Need name and email');
+            return;
+        }
+        addMemberMutation.mutate({
+            name: newMember.name,
+            email: newMember.email,
+            artist_id: artistId,
+            role: 'band_member'
+        });
+    };
 
     useEffect(() => {
         if (!artistId) {
@@ -104,6 +144,81 @@ export default function ScottArtistHome() {
                         <Link to={createPageUrl(`ScottCalendarView?id=${artistId}`)}>
                             <button className="w-full text-[9px] font-bold font-mono text-cyan-400 hover:text-cyan-300">+ ADD EVENT</button>
                         </Link>
+                    </div>
+                )}
+            </div>
+
+            <div className="bg-black border-2 border-green-500 rounded-lg p-3 mb-3">
+                <button onClick={() => setBandExpanded(!bandExpanded)} className="w-full flex items-center justify-between p-1">
+                    <div className="flex items-center gap-2">
+                        <Users className="w-4 h-4 text-green-400" />
+                        <h2 className="text-green-400 font-black text-xs font-mono">BAND MEMBERS ({bandMembers.length})</h2>
+                    </div>
+                    <div className="text-green-400">{bandExpanded ? '−' : '+'}</div>
+                </button>
+                {bandExpanded && (
+                    <div className="pt-3 space-y-2">
+                        {bandMembers.map(member => (
+                            <div key={member.id} className="flex items-center justify-between bg-black/60 border border-green-500/30 rounded p-2">
+                                <div>
+                                    <p className="text-white text-xs font-bold">{member.name}</p>
+                                    <p className="text-gray-600 text-[9px] font-mono">{member.email}</p>
+                                </div>
+                                <button
+                                    onClick={() => {
+                                        if (confirm(`Remove ${member.name}?`)) {
+                                            deleteMemberMutation.mutate(member.id);
+                                        }
+                                    }}
+                                    className="text-red-400 hover:text-red-300"
+                                >
+                                    <Trash2 className="w-3 h-3" />
+                                </button>
+                            </div>
+                        ))}
+                        
+                        {!addingMember ? (
+                            <button
+                                onClick={() => setAddingMember(true)}
+                                className="w-full text-[10px] font-bold font-mono text-green-400 hover:text-green-300 py-2 border border-dashed border-green-500/30 rounded"
+                            >
+                                + ADD MEMBER
+                            </button>
+                        ) : (
+                            <div className="space-y-2 pt-2 border-t border-green-500/30">
+                                <Input
+                                    placeholder="Name"
+                                    value={newMember.name}
+                                    onChange={(e) => setNewMember({...newMember, name: e.target.value})}
+                                    className="bg-black border-green-500/50 text-white text-xs"
+                                />
+                                <Input
+                                    type="email"
+                                    placeholder="Email"
+                                    value={newMember.email}
+                                    onChange={(e) => setNewMember({...newMember, email: e.target.value})}
+                                    className="bg-black border-green-500/50 text-white text-xs"
+                                />
+                                <div className="flex gap-2">
+                                    <button
+                                        onClick={handleAddMember}
+                                        disabled={addMemberMutation.isPending}
+                                        className="flex-1 bg-green-600 hover:bg-green-700 text-white text-[10px] font-bold py-2 rounded"
+                                    >
+                                        {addMemberMutation.isPending ? 'SAVING...' : 'SAVE'}
+                                    </button>
+                                    <button
+                                        onClick={() => {
+                                            setAddingMember(false);
+                                            setNewMember({ name: '', email: '' });
+                                        }}
+                                        className="flex-1 bg-gray-700 hover:bg-gray-600 text-white text-[10px] font-bold py-2 rounded"
+                                    >
+                                        CANCEL
+                                    </button>
+                                </div>
+                            </div>
+                        )}
                     </div>
                 )}
             </div>

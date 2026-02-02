@@ -148,18 +148,15 @@ Looking forward to it!`;
           promoter_email_draft: emailBody
         });
 
-        // Notify manager
-        const manager = await base44.auth.me();
-        if (manager) {
-          await base44.asServiceRole.entities.ScottNotification.create({
-            recipient_email: manager.email,
-            notification_type: 'manager_confirmed',
-            gig_offer_id: gigOffer.id,
-            title: `✅ ${gigOffer.venue} CONFIRMED`,
-            message: `All band members said YES - calendar synced, email drafted`,
-            action_url: `/ScottGigOffers?id=${gigOffer.artist_id}`
-          });
-        }
+        // Notify manager (use gig creator email)
+        await base44.asServiceRole.entities.ScottNotification.create({
+          recipient_email: gigOffer.created_by,
+          notification_type: 'manager_confirmed',
+          gig_offer_id: gigOffer.id,
+          title: `✅ ${gigOffer.venue} CONFIRMED`,
+          message: `All band members said YES - calendar synced, email drafted`,
+          action_url: `/ScottGigOffers?id=${gigOffer.artist_id}`
+        });
 
         return Response.json({ success: true, stage: 'confirmed_auto_synced' });
 
@@ -167,7 +164,7 @@ Looking forward to it!`;
         // === ANY NO → CAPTURE REASONS ===
         const noVotes = responses.filter(r => r.decision === 'no');
         
-        // Notify manager with reasons
+        // Notify manager with reasons (use gig creator email)
         const reasons = noVotes.map(r => `${r.band_member_name}: ${r.reason_if_no || 'No reason given'}`).join('\n');
         
         await base44.asServiceRole.entities.ScottGigOffer.update(gigOffer.id, {
@@ -175,17 +172,14 @@ Looking forward to it!`;
           band_rejection_reasons: reasons
         });
 
-        const manager = await base44.auth.me();
-        if (manager) {
-          await base44.asServiceRole.entities.ScottNotification.create({
-            recipient_email: manager.email,
-            notification_type: 'manager_votes_in',
-            gig_offer_id: gigOffer.id,
-            title: `⚠️ ${gigOffer.venue} - Band vote failed`,
-            message: `${noVotes.length} member(s) said NO. Review reasons in CB51.`,
-            action_url: `/ScottGigOffers?id=${gigOffer.artist_id}`
-          });
-        }
+        await base44.asServiceRole.entities.ScottNotification.create({
+          recipient_email: gigOffer.created_by,
+          notification_type: 'manager_votes_in',
+          gig_offer_id: gigOffer.id,
+          title: `⚠️ ${gigOffer.venue} - Band vote failed`,
+          message: `${noVotes.length} member(s) said NO. Review reasons in CB51.`,
+          action_url: `/ScottGigOffers?id=${gigOffer.artist_id}`
+        });
 
         return Response.json({ success: true, stage: 'needs_discussion', no_votes: noVotes.length });
       }
