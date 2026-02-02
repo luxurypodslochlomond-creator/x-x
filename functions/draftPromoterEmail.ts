@@ -47,6 +47,28 @@ ${gigOffer.created_by}`;
       email_drafted_at: new Date().toISOString()
     });
 
+    // Send email to manager with the draft
+    try {
+      await base44.asServiceRole.integrations.Core.SendEmail({
+        from_name: 'CB51',
+        to: gigOffer.created_by,
+        subject: `✅ Gig Confirmed: ${gigOffer.venue || gigOffer.venue_name}`,
+        body: `Gig confirmed! Email draft ready:
+
+━━━━━━━━━━━━━━━━━━━━
+
+${emailDraft}
+
+━━━━━━━━━━━━━━━━━━━━
+
+Copy this and send to promoter when ready.
+
+CB51 • Your AI Co-Manager`
+      });
+    } catch (e) {
+      console.log('Email failed:', e);
+    }
+
     return Response.json({ 
       success: true, 
       email_draft_created: true,
