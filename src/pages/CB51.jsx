@@ -330,25 +330,30 @@ export default function CB51() {
                          <div className="mb-4 mt-6">
                              <div className="flex justify-center items-center gap-8 flex-wrap">
                                  {artists.slice(0, 3).map((artist) => (
-                                     <Link 
-                                         key={artist.id}
-                                         to={createPageUrl(`ScottArtistHome?id=${artist.id}`)}
-                                     >
-                                         <motion.div
-                                             whileTap={{ scale: 0.95 }}
-                                             className="w-24 h-24 bg-cyan-400 rounded-full flex items-center justify-center font-black text-3xl text-black cursor-pointer hover:opacity-90 transition-opacity"
+                                     <div key={artist.id} className="relative">
+                                         <Link to={createPageUrl(`ScottArtistHome?id=${artist.id}`)}>
+                                             <motion.div
+                                                 whileTap={{ scale: 0.95 }}
+                                                 className="w-24 h-24 bg-cyan-400 rounded-full flex items-center justify-center font-black text-3xl text-black cursor-pointer hover:opacity-90 transition-opacity"
+                                             >
+                                                 {artist.profile_pic_url ? (
+                                                     <img 
+                                                         src={artist.profile_pic_url} 
+                                                         alt={artist.name}
+                                                         className="w-full h-full object-cover rounded-full"
+                                                     />
+                                                 ) : (
+                                                     artist.name.charAt(0).toUpperCase()
+                                                 )}
+                                             </motion.div>
+                                         </Link>
+                                         <button
+                                             onClick={() => navigate(createPageUrl(`ScottAddArtist?edit=${artist.id}`))}
+                                             className="absolute -top-1 -right-1 w-6 h-6 bg-black border-2 border-cyan-400 rounded-full flex items-center justify-center hover:bg-cyan-400/20 transition-all"
                                          >
-                                             {artist.profile_pic_url ? (
-                                                 <img 
-                                                     src={artist.profile_pic_url} 
-                                                     alt={artist.name}
-                                                     className="w-full h-full object-cover rounded-full"
-                                                 />
-                                             ) : (
-                                                 artist.name.charAt(0).toUpperCase()
-                                             )}
-                                         </motion.div>
-                                     </Link>
+                                             <span className="text-cyan-400 text-xs font-black">✎</span>
+                                         </button>
+                                     </div>
                                  ))}
                                  {artists.length < 5 && (
                                      <Link to={createPageUrl('ScottAddArtist')}>
@@ -361,6 +366,33 @@ export default function CB51() {
                                      </Link>
                                  )}
                              </div>
+                             {artists.length > 3 && (
+                                 <div className="text-center mt-3">
+                                     <button
+                                         onClick={() => setEditArtistsOpen(!editArtistsOpen)}
+                                         className="text-cyan-400 text-xs font-mono font-bold"
+                                     >
+                                         {editArtistsOpen ? '− Hide More Artists' : '+ Show More Artists'}
+                                     </button>
+                                     {editArtistsOpen && (
+                                         <div className="mt-3 space-y-2">
+                                             {artists.slice(3).map((artist) => (
+                                                 <div key={artist.id} className="flex items-center justify-between bg-black border border-cyan-500/30 rounded p-2">
+                                                     <Link to={createPageUrl(`ScottArtistHome?id=${artist.id}`)} className="flex-1 text-left">
+                                                         <span className="text-cyan-400 font-mono text-xs font-bold">{artist.name}</span>
+                                                     </Link>
+                                                     <button
+                                                         onClick={() => navigate(createPageUrl(`ScottAddArtist?edit=${artist.id}`))}
+                                                         className="text-cyan-400 hover:text-cyan-300 text-xs mr-2"
+                                                     >
+                                                         ✎
+                                                     </button>
+                                                 </div>
+                                             ))}
+                                         </div>
+                                     )}
+                                 </div>
+                             )}
                          </div>
                      )}
 
