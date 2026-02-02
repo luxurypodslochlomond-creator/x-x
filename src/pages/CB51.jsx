@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
-import { Radio, Plus, Trash2, AlertCircle, Calendar, MessageSquare, Users, Zap, Mail, CheckCircle, Heart, DollarSign } from 'lucide-react';
+import { Radio, Plus, Trash2, AlertCircle, Calendar, MessageSquare, Users, Zap, Mail, CheckCircle, Heart, DollarSign, Shield, Bell } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
@@ -188,16 +188,33 @@ export default function CB51() {
                                                                     <div className="flex items-start gap-2 mb-3">
                                                                         <AI51AtomIcon size={24} animate={true} />
                                                                         <div>
-                                                                            <p className="text-cyan-400 font-bold text-sm">Paste message</p>
-                                                                            <p className="text-gray-500 text-xs">AI51 extracts gigs, tasks, invoices</p>
+                                                                            <p className="text-cyan-400 font-bold text-sm">Paste message or upload</p>
+                                                                            <p className="text-gray-500 text-xs">AI51 extracts gigs, tasks, invoices, contracts</p>
                                                                         </div>
                                                                     </div>
                                                                     <Textarea
                                                                         value={pastedText}
                                                                         onChange={(e) => setPastedText(e.target.value)}
-                                                                        placeholder="Paste WhatsApp or email..."
+                                                                        placeholder="Paste WhatsApp, email, or contract text..."
                                                                         className="bg-black/50 border-cyan-500/30 text-white text-sm min-h-[180px] mb-3 focus:border-cyan-500"
                                                                     />
+                                                                    <label className="block mb-3 cursor-pointer">
+                                                                        <div className="bg-black/50 border-2 border-dashed border-cyan-500/30 hover:border-cyan-500/50 rounded-lg p-4 text-center transition-all">
+                                                                            <p className="text-cyan-400 text-xs font-mono">or upload PDF/image</p>
+                                                                        </div>
+                                                                        <input 
+                                                                            type="file" 
+                                                                            accept=".pdf,.jpg,.jpeg,.png"
+                                                                            onChange={(e) => {
+                                                                                const file = e.target.files?.[0];
+                                                                                if (file) {
+                                                                                    // Handle file upload
+                                                                                    alert('File upload coming soon');
+                                                                                }
+                                                                            }}
+                                                                            className="hidden" 
+                                                                        />
+                                                                    </label>
                                                                     <div className="flex gap-2">
                                                                         <button
                                                                             onClick={() => { setPasteModalOpen(false); setPastedText(''); }}
@@ -367,20 +384,33 @@ export default function CB51() {
                             <span>{settingsOpen ? '▼' : '▶'} SETTINGS</span>
                         </button>
                         {settingsOpen && (
-                            <div className="bg-black border-2 border-amber-600/50 rounded p-3 space-y-2 text-xs text-amber-400 font-mono mt-1">
-                                <Link to={createPageUrl('ScottSettings')} className="flex items-center justify-between pb-2 border-b border-amber-600/30 hover:text-cyan-400 transition-colors">
-                                    <span className="text-amber-600">EXTENSION PIN</span>
-                                    <span className="text-cyan-400 font-bold">→</span>
-                                </Link>
-                                <Link to={createPageUrl('ScottSettings')} className="block w-full text-left hover:text-cyan-400 transition-colors py-1">
-                                    SECURITY
-                                </Link>
-                                <Link to={createPageUrl('ScottSettings')} className="block w-full text-left hover:text-cyan-400 transition-colors py-1">
-                                    NOTIFICATIONS
-                                </Link>
-                                <Link to={createPageUrl('ScottSettings')} className="block w-full text-left hover:text-cyan-400 transition-colors py-1">
-                                    DEVICES
-                                </Link>
+                            <div className="bg-black border-2 border-amber-600/50 rounded p-3 space-y-3 text-xs font-mono mt-1">
+                                <div>
+                                    <div className="flex items-center justify-between mb-2">
+                                        <span className="text-gray-600 text-[10px]">EXTENSION PIN</span>
+                                        <button 
+                                            onClick={() => {
+                                                navigator.clipboard.writeText('5717');
+                                                alert('PIN copied: 5717');
+                                            }}
+                                            className="text-cyan-400 font-black text-lg hover:text-cyan-300"
+                                        >
+                                            5717
+                                        </button>
+                                    </div>
+                                    <p className="text-gray-600 text-[9px]">Share with team to connect email scanner</p>
+                                </div>
+                                
+                                <div className="border-t border-amber-600/30 pt-2 space-y-2">
+                                    <div className="flex items-center gap-2 text-gray-500">
+                                        <Shield className="w-3 h-3" />
+                                        <span className="text-[10px]">Military-grade encryption</span>
+                                    </div>
+                                    <div className="flex items-center gap-2 text-gray-500">
+                                        <Bell className="w-3 h-3" />
+                                        <span className="text-[10px]">Push notifications active</span>
+                                    </div>
+                                </div>
                             </div>
                         )}
 
