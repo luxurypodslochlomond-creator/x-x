@@ -364,30 +364,7 @@ export default function CB51() {
                          </div>
                      )}
 
-                    {/* EDIT ARTISTS - RIGHT AFTER CIRCLES */}
-                    <div className="mb-4 lg:hidden">
-                        <button 
-                            onClick={() => setEditArtistsOpen(!editArtistsOpen)}
-                            className="w-full font-mono text-xs font-bold text-cyan-400 text-left py-2 flex items-center gap-2"
-                        >
-                            <span>{editArtistsOpen ? '▼' : '▶'}</span>
-                            Edit Artists
-                        </button>
-                        {editArtistsOpen && (
-                            <div className="space-y-1 mt-1">
-                                {artists.map((artist) => (
-                                    <button
-                                        key={artist.id}
-                                        onClick={() => navigate(createPageUrl(`ScottAddArtist?edit=${artist.id}`))}
-                                        className="w-full bg-black border border-cyan-500/30 rounded p-2 text-left hover:border-cyan-500 transition-all flex items-center justify-between text-xs"
-                                    >
-                                        <span className="font-mono text-cyan-400">{artist.name}</span>
-                                        <span className="text-cyan-400">♪</span>
-                                    </button>
-                                ))}
-                            </div>
-                        )}
-                    </div>
+
 
                     {/* SETTINGS & TOOLS - ALWAYS VISIBLE ON MOBILE */}
                     <div className="space-y-2">
