@@ -14,6 +14,7 @@ import CB51SecurityNotice from '@/components/scott/CB51SecurityNotice';
 import CB51BandVoteAlert from '@/components/scott/CB51BandVoteAlert';
 import CB51VoteBreakdown from '@/components/scott/CB51VoteBreakdown';
 import LiveClock from '@/components/shared/LiveClock';
+import AI51AtomIcon from '@/components/ai51/AI51AtomIcon';
 
 /**
  * CB51 HOME PAGE - CLEAN URL FOR WHITE LABEL
@@ -176,41 +177,50 @@ export default function CB51() {
                                                         <div className="mb-6">
                                                             <button
                                                                 onClick={() => setPasteModalOpen(!pasteModalOpen)}
-                                                                className="w-full bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 hover:from-pink-600 hover:via-purple-600 hover:to-cyan-600 text-white font-black font-mono text-sm py-3 rounded-lg shadow-lg flex items-center justify-center gap-2 border border-white/20"
-                                                                style={{ boxShadow: '0 0 20px rgba(236, 72, 153, 0.3)' }}
+                                                                className="w-full bg-black hover:bg-gray-900 text-cyan-400 font-bold font-mono text-sm py-3 rounded-lg border border-cyan-500/50 hover:border-cyan-500 flex items-center justify-center gap-2 transition-all"
                                                             >
-                                                                <span className="text-xl">🧠</span>
-                                                                <span>AI51 SMART SCAN</span>
+                                                                <AI51AtomIcon size={20} animate={true} />
+                                                                <span>AI51 SCAN</span>
                                                             </button>
 
                                                             {pasteModalOpen && (
-                                                                <div className="mt-3 bg-gradient-to-br from-black to-gray-900 border border-cyan-500/50 rounded-lg p-4">
+                                                                <div className="mt-3 bg-black border border-cyan-500/50 rounded-lg p-4">
                                                                     <div className="flex items-start gap-2 mb-3">
-                                                                        <span className="text-2xl">🧠</span>
+                                                                        <AI51AtomIcon size={24} animate={true} />
                                                                         <div>
-                                                                            <p className="text-cyan-400 font-bold text-sm">AI51 extracts everything:</p>
-                                                                            <p className="text-gray-500 text-xs">Dates • Venues • Fees • Tasks • Invoices</p>
+                                                                            <p className="text-cyan-400 font-bold text-sm">Paste message</p>
+                                                                            <p className="text-gray-500 text-xs">AI51 extracts gigs, tasks, invoices</p>
                                                                         </div>
                                                                     </div>
                                                                     <Textarea
                                                                         value={pastedText}
                                                                         onChange={(e) => setPastedText(e.target.value)}
-                                                                        placeholder="Paste WhatsApp or email text here..."
-                                                                        className="bg-black/50 border-cyan-500/30 text-white text-sm min-h-[180px] mb-3 focus:border-pink-500"
+                                                                        placeholder="Paste WhatsApp or email..."
+                                                                        className="bg-black/50 border-cyan-500/30 text-white text-sm min-h-[180px] mb-3 focus:border-cyan-500"
                                                                     />
                                                                     <div className="flex gap-2">
                                                                         <button
                                                                             onClick={() => { setPasteModalOpen(false); setPastedText(''); }}
-                                                                            className="flex-1 bg-gray-800 hover:bg-gray-700 text-gray-400 font-bold py-2.5 rounded-lg text-sm"
+                                                                            className="flex-1 bg-gray-900 hover:bg-gray-800 text-gray-400 font-bold py-2.5 rounded-lg text-sm border border-gray-700"
                                                                         >
                                                                             CANCEL
                                                                         </button>
                                                                         <button
                                                                             onClick={handlePaste}
                                                                             disabled={scanning || !pastedText.trim()}
-                                                                            className="flex-1 bg-gradient-to-r from-pink-500 to-cyan-500 hover:from-pink-600 hover:to-cyan-600 text-white font-black py-2.5 rounded-lg text-sm disabled:opacity-50 disabled:cursor-not-allowed"
+                                                                            className="flex-1 bg-cyan-500 hover:bg-cyan-600 text-black font-bold py-2.5 rounded-lg text-sm disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-1.5"
                                                                         >
-                                                                            {scanning ? '🧠 AI51 SCANNING...' : '🧠 AI51 SCAN'}
+                                                                            {scanning ? (
+                                                                                <>
+                                                                                    <AI51AtomIcon size={16} animate={true} />
+                                                                                    <span>SCANNING...</span>
+                                                                                </>
+                                                                            ) : (
+                                                                                <>
+                                                                                    <AI51AtomIcon size={16} animate={true} />
+                                                                                    <span>SCAN</span>
+                                                                                </>
+                                                                            )}
                                                                         </button>
                                                                     </div>
                                                                 </div>
