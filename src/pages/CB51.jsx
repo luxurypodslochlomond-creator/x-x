@@ -398,7 +398,7 @@ export default function CB51() {
                                             5717
                                         </button>
                                     </div>
-                                    <p className="text-gray-600 text-[9px]">Share with team to connect email scanner</p>
+                                    <p className="text-gray-600 text-[9px]">For browser extension (coming soon)</p>
                                 </div>
                                 
                                 <div className="border-t border-amber-600/30 pt-2 space-y-2">
