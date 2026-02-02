@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
-import { Radio, Plus, Trash2, AlertCircle, Calendar, MessageSquare, Users, Zap, Mail, CheckCircle, Heart, DollarSign } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { Radio, Plus, Trash2, AlertCircle, Calendar, MessageSquare, Users, Zap, Mail, CheckCircle, Heart, DollarSign, X } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { Textarea } from '@/components/ui/textarea';
 import TechStatusBar from '@/components/scott/TechStatusBar';
 import PushNotificationManager from '@/components/scott/PushNotificationManager';
 import CB51NotificationInbox from '@/components/scott/CB51NotificationInbox';
@@ -27,6 +28,9 @@ export default function CB51() {
           const [moreToolsOpen, setMoreToolsOpen] = useState(false);
           const [archivedOpen, setArchivedOpen] = useState(false);
           const [settingsOpen, setSettingsOpen] = useState(false);
+          const [pasteModalOpen, setPasteModalOpen] = useState(false);
+          const [pastedText, setPastedText] = useState('');
+          const [scanning, setScanning] = useState(false);
           const queryClient = useQueryClient();
 
           useEffect(() => {
@@ -125,6 +129,28 @@ export default function CB51() {
         archiveArtistMutation.mutate({ artistId: artist.id, archived: false });
     };
 
+    const handlePaste = async () => {
+        if (!pastedText.trim()) return;
+
+        setScanning(true);
+        try {
+            const { scottEmailParser } = await import('@/functions/scottEmailParser');
+            await scottEmailParser({ emailText: pastedText });
+
+            // Refresh data
+            queryClient.invalidateQueries({ queryKey: ['scottAllGigOffers'] });
+            queryClient.invalidateQueries({ queryKey: ['scottInvoices'] });
+
+            setPastedText('');
+            setPasteModalOpen(false);
+            alert('✅ Scanned and processed!');
+        } catch (e) {
+            alert('Error scanning message: ' + e.message);
+        } finally {
+            setScanning(false);
+        }
+    };
+
     if (loading) {
         return (
             <div className="min-h-screen bg-black flex items-center justify-center">
@@ -143,6 +169,17 @@ export default function CB51() {
                                     <div className="mb-6 flex justify-end">
                                         <PushNotificationManager />
                                     </div>
+
+                                    {/* PASTE MESSAGE - BIG BUTTON */}
+                                    {user?.role === 'admin' && (
+                                        <motion.button
+                                            whileTap={{ scale: 0.98 }}
+                                            onClick={() => setPasteModalOpen(true)}
+                                            className="w-full mb-6 bg-gradient-to-r from-cyan-500 to-cyan-600 hover:from-cyan-600 hover:to-cyan-700 text-black font-black font-mono text-lg py-4 rounded-lg shadow-lg border-2 border-cyan-400"
+                                        >
+                                            📋 PASTE MESSAGE
+                                        </motion.button>
+                                    )}
 
                                     {/* REAL-TIME BAND VOTE ALERTS */}
                                     {user && (
@@ -357,6 +394,60 @@ export default function CB51() {
                         )}
                     </div>
 
+                    {/* PASTE MODAL */}
+                    <AnimatePresence>
+                        {pasteModalOpen && (
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] flex items-center justify-center p-4"
+                                onClick={() => setPasteModalOpen(false)}
+                            >
+                                <motion.div
+                                    initial={{ scale: 0.9, opacity: 0 }}
+                                    animate={{ scale: 1, opacity: 1 }}
+                                    exit={{ scale: 0.9, opacity: 0 }}
+                                    onClick={(e) => e.stopPropagation()}
+                                    className="bg-black border-2 border-cyan-500 rounded-lg p-6 max-w-2xl w-full"
+                                >
+                                    <div className="flex items-center justify-between mb-4">
+                                        <h2 className="text-cyan-400 font-black font-mono text-xl">PASTE MESSAGE</h2>
+                                        <button onClick={() => setPasteModalOpen(false)} className="text-gray-600 hover:text-cyan-400">
+                                            <X className="w-6 h-6" />
+                                        </button>
+                                    </div>
+
+                                    <p className="text-gray-400 text-sm font-mono mb-4">
+                                        Paste WhatsApp, email, or text. CB51 scans for gigs, tasks, invoices automatically.
+                                    </p>
+
+                                    <Textarea
+                                        value={pastedText}
+                                        onChange={(e) => setPastedText(e.target.value)}
+                                        placeholder="Paste your message here..."
+                                        className="bg-black border-cyan-500/50 text-white font-mono text-sm min-h-[300px] mb-4"
+                                    />
+
+                                    <div className="flex gap-3">
+                                        <button
+                                            onClick={() => setPasteModalOpen(false)}
+                                            className="flex-1 bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 rounded-lg font-mono"
+                                        >
+                                            CANCEL
+                                        </button>
+                                        <button
+                                            onClick={handlePaste}
+                                            disabled={scanning || !pastedText.trim()}
+                                            className="flex-1 bg-cyan-500 hover:bg-cyan-600 text-black font-black py-3 rounded-lg font-mono disabled:opacity-50"
+                                        >
+                                            {scanning ? 'SCANNING...' : 'SCAN'}
+                                        </button>
+                                    </div>
+                                </motion.div>
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
 
                     </div>
                     );
