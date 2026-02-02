@@ -387,11 +387,11 @@ export default function CB51() {
                             <div className="bg-black border-2 border-amber-600/50 rounded p-3 space-y-2 text-xs font-mono mt-1">
                                 <div className="flex items-center gap-2 text-gray-500">
                                     <Shield className="w-3 h-3" />
-                                    <span className="text-[10px]">Military-grade encryption</span>
+                                    <span className="text-[10px]">Data encrypted</span>
                                 </div>
-                                <div className="flex items-center gap-2 text-gray-500">
+                                <div className="flex items-center gap-2 text-green-500">
                                     <Bell className="w-3 h-3" />
-                                    <span className="text-[10px]">Push notifications active</span>
+                                    <span className="text-[10px]">Notifications enabled</span>
                                 </div>
                             </div>
                         )}
