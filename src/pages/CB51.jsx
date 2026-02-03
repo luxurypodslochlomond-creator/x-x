@@ -1006,40 +1006,35 @@ export default function CB51() {
                             )}
 
                             {/* FINANCE */}
-                            <div className="bg-black border border-cyan-500/30 rounded-lg overflow-hidden">
-                                <button
-                                    onClick={() => setExpandedTool(expandedTool === 'finance' ? null : 'finance')}
-                                    className="w-full p-3 flex items-center justify-between hover:bg-cyan-500/10 transition-all"
+                            <CB51NavBio
+                              icon={DollarSign}
+                              title="FINANCE"
+                              shortBio="Invoices, payments & money tracking"
+                              fullBio="All gig fees, invoices to promoters, and payment tracking in one place. See what's owed, when it's due, and history of paid gigs. Export for tax."
+                              onClick={() => setExpandedTool(expandedTool === 'finance' ? null : 'finance')}
+                            />
+                            {expandedTool === 'finance' && (
+                                <motion.div
+                                    initial={{ height: 0, opacity: 0 }}
+                                    animate={{ height: 'auto', opacity: 1 }}
+                                    exit={{ height: 0, opacity: 0 }}
+                                    className="ml-4 border-l border-cyan-500/30 pl-3 space-y-2"
                                 >
-                                    <div className="flex items-center gap-2">
-                                        <DollarSign className="w-4 h-4 text-cyan-400" />
-                                        <span className="font-mono text-xs text-cyan-400 font-bold">FINANCE</span>
-                                    </div>
-                                    <span className="text-cyan-400 text-xs">{expandedTool === 'finance' ? '−' : '+'}</span>
-                                </button>
-                                {expandedTool === 'finance' && (
-                                    <motion.div
-                                        initial={{ height: 0, opacity: 0 }}
-                                        animate={{ height: 'auto', opacity: 1 }}
-                                        exit={{ height: 0, opacity: 0 }}
-                                        className="border-t border-cyan-500/30 p-3 space-y-2"
-                                    >
-                                        {invoices.slice(0, 3).map(invoice => (
-                                            <div key={invoice.id} className="bg-black/60 border border-cyan-500/20 rounded p-2 flex justify-between items-center">
-                                                <div>
-                                                    <p className="text-white text-xs font-bold">{invoice.description || 'Invoice'}</p>
-                                                    <p className="text-gray-500 text-[9px] font-mono">{invoice.status}</p>
-                                                </div>
-                                                <p className="text-cyan-400 text-xs font-bold">£{invoice.amount}</p>
+                                    {invoices.slice(0, 3).map(invoice => (
+                                        <div key={invoice.id} className="bg-black/60 border border-cyan-500/20 rounded p-2 flex justify-between items-center">
+                                            <div>
+                                                <p className="text-white text-xs font-bold">{invoice.description || 'Invoice'}</p>
+                                                <p className="text-gray-500 text-[9px] font-mono">{invoice.status}</p>
                                             </div>
-                                        ))}
-                                        <Link to={createPageUrl('ScottFinanceAdmin')} className="text-cyan-400 hover:text-cyan-300 text-[9px] font-mono font-bold block text-center pt-1">
-                                            See all →
-                                        </Link>
-                                    </motion.div>
-                                )}
+                                            <p className="text-cyan-400 text-xs font-bold">£{invoice.amount}</p>
+                                        </div>
+                                    ))}
+                                    <Link to={createPageUrl('ScottFinanceAdmin')} className="text-cyan-400 hover:text-cyan-300 text-[9px] font-mono font-bold block text-center pt-1">
+                                        See all →
+                                    </Link>
+                                </motion.div>
+                            )}
                             </div>
-                        </div>
 
                         {/* ARCHIVED - COLLAPSIBLE */}
                         {archivedArtists.length > 0 && (
