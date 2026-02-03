@@ -5,6 +5,7 @@ import { Radio, Plus, Trash2, AlertCircle, Calendar, MessageSquare, Users, Zap, 
 import { motion } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { Bell } from 'lucide-react';
 import { Textarea } from '@/components/ui/textarea';
 import { Input } from '@/components/ui/input';
 import TechStatusBar from '@/components/scott/TechStatusBar';
