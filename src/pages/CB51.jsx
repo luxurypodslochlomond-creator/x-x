@@ -503,104 +503,96 @@ export default function CB51() {
                                             </button>
                                             <button
                                                 onClick={async () => {
-                                                    setProcessingYes(true);
-
                                                     const offerId = allOffers.find(o => o.venue === scannedOffer.venue && o.status === 'pending_manager_review')?.id;
-                                                    if (offerId) {
+                                                    if (!offerId) return;
+
+                                                    const offerData = {...scannedOffer};
+
+                                                    // INSTANT: Hide card and show success immediately
+                                                    setScannedOffer(null);
+                                                    const toast = document.createElement('div');
+                                                    toast.className = 'fixed top-20 left-1/2 -translate-x-1/2 bg-green-500 text-black font-black font-mono text-xs px-4 py-2 rounded-lg z-[200] shadow-2xl';
+                                                    toast.textContent = `✓ ${offerData.venue} syncing...`;
+                                                    document.body.appendChild(toast);
+
+                                                    // BACKGROUND: Do all work async
+                                                    (async () => {
                                                         try {
-                                                            // OPTIMISTIC: Hide card immediately
-                                                            const offerData = {...scannedOffer};
-                                                            setScannedOffer(null);
+                                                            // Parallel batch: Update offer + create event + create tasks
+                                                            const tasks = [
+                                                                base44.entities.ScottGigOffer.update(offerId, { status: 'sent_to_band' }),
+                                                                base44.entities.ScottEvent.create({
+                                                                    artist_id: artists[0]?.id,
+                                                                    title: offerData.venue || 'Gig',
+                                                                    date: offerData.date,
+                                                                    time: offerData.time || '20:00',
+                                                                    venue: offerData.venue,
+                                                                    city: offerData.city,
+                                                                    country: offerData.country,
+                                                                    fee: offerData.fee,
+                                                                    currency: offerData.currency || 'GBP',
+                                                                    promoter: offerData.promoter,
+                                                                    capacity: offerData.capacity,
+                                                                    event_type: 'live_show',
+                                                                    notes: `Approved by manager - sent to band for vote`
+                                                                })
+                                                            ];
 
-                                                            // MYCELIUM SYNC: Approve and send to band
-                                                            await base44.entities.ScottGigOffer.update(offerId, { status: 'sent_to_band' });
-
-                                                            // Auto-create calendar event with scanned info
-                                                            await base44.entities.ScottEvent.create({
-                                                                artist_id: artists[0]?.id,
-                                                                title: offerData.venue || 'Gig',
-                                                                date: offerData.date,
-                                                                time: offerData.time || '20:00',
-                                                                venue: offerData.venue,
-                                                                city: offerData.city,
-                                                                country: offerData.country,
-                                                                fee: offerData.fee,
-                                                                currency: offerData.currency || 'GBP',
-                                                                promoter: offerData.promoter,
-                                                                capacity: offerData.capacity,
-                                                                event_type: 'live_show',
-                                                                notes: `Approved by manager - sent to band for vote`
-                                                            });
-
-                                                            // MYCELIUM: Auto-create tasks if needed
+                                                            // Add travel task if date exists
                                                             if (offerData.date) {
                                                                 const gigDate = new Date(offerData.date);
                                                                 const dayBefore = new Date(gigDate);
                                                                 dayBefore.setDate(dayBefore.getDate() - 1);
 
-                                                                await base44.entities.ScottTask.create({
+                                                                tasks.push(base44.entities.ScottTask.create({
                                                                     artist_id: artists[0]?.id,
                                                                     title: `Travel to ${offerData.city || offerData.venue}`,
                                                                     due_date: dayBefore.toISOString().split('T')[0],
                                                                     status: 'pending',
-                                                                    category: 'travel',
-                                                                    notes: `Day before gig at ${offerData.venue}`
-                                                                });
+                                                                    category: 'travel'
+                                                                }));
                                                             }
 
+                                                            // Add invoice task if fee exists
                                                             if (offerData.fee && offerData.date) {
                                                                 const gigDate = new Date(offerData.date);
                                                                 const weekAfter = new Date(gigDate);
                                                                 weekAfter.setDate(weekAfter.getDate() + 7);
 
-                                                                await base44.entities.ScottTask.create({
+                                                                tasks.push(base44.entities.ScottTask.create({
                                                                     artist_id: artists[0]?.id,
                                                                     title: `Invoice ${offerData.promoter || offerData.venue}`,
                                                                     due_date: weekAfter.toISOString().split('T')[0],
                                                                     status: 'pending',
                                                                     category: 'finance',
-                                                                    notes: `${offerData.currency || 'GBP'}${offerData.fee} for ${offerData.venue}`
-                                                                });
+                                                                    notes: `${offerData.currency || 'GBP'}${offerData.fee}`
+                                                                }));
                                                             }
 
-                                                            // Refresh data
-                                                            await Promise.all([
-                                                                queryClient.invalidateQueries({ queryKey: ['scottAllGigOffers'] }),
-                                                                queryClient.invalidateQueries({ queryKey: ['scottEvents'] }),
-                                                                queryClient.invalidateQueries({ queryKey: ['scottTasks'] })
-                                                            ]);
+                                                            // Execute all in parallel
+                                                            await Promise.all(tasks);
 
-                                                            // Success feedback
-                                                            const successDiv = document.createElement('div');
-                                                            successDiv.className = 'fixed top-20 left-1/2 -translate-x-1/2 bg-green-500 text-black font-black font-mono text-sm px-6 py-3 rounded-lg z-[200] shadow-2xl';
-                                                            successDiv.textContent = `✓ ${offerData.venue} → Calendar + Tasks`;
-                                                            document.body.appendChild(successDiv);
-                                                            setTimeout(() => successDiv.remove(), 3000);
+                                                            // Refresh data
+                                                            queryClient.invalidateQueries({ queryKey: ['scottAllGigOffers'] });
+                                                            queryClient.invalidateQueries({ queryKey: ['scottEvents'] });
+                                                            queryClient.invalidateQueries({ queryKey: ['scottTasks'] });
+
+                                                            // Update toast to success
+                                                            toast.textContent = `✓ ${offerData.venue} → Calendar + Tasks`;
+                                                            toast.className = 'fixed top-20 left-1/2 -translate-x-1/2 bg-green-500 text-black font-black font-mono text-xs px-4 py-2 rounded-lg z-[200] shadow-2xl';
+                                                            setTimeout(() => toast.remove(), 2000);
 
                                                         } catch (e) {
-                                                            console.error('Approval failed:', e);
-                                                            alert('Failed to approve - try again');
-                                                            setScannedOffer(offerData);
-                                                        } finally {
-                                                            setProcessingYes(false);
+                                                            console.error('Sync failed:', e);
+                                                            toast.textContent = `✗ Sync failed`;
+                                                            toast.className = 'fixed top-20 left-1/2 -translate-x-1/2 bg-red-500 text-white font-black font-mono text-xs px-4 py-2 rounded-lg z-[200]';
+                                                            setTimeout(() => toast.remove(), 2000);
                                                         }
-                                                    }
+                                                    })();
                                                 }}
-                                                disabled={processingYes}
-                                                className="flex-1 bg-green-900/40 hover:bg-green-900/60 border-2 border-green-500/50 hover:border-green-500 text-green-400 font-black py-2.5 rounded-lg font-mono text-sm disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-1.5"
+                                                className="flex-1 bg-green-900/40 hover:bg-green-900/60 border-2 border-green-500/50 hover:border-green-500 text-green-400 font-black py-2.5 rounded-lg font-mono text-sm flex items-center justify-center gap-1.5"
                                             >
-                                                {processingYes ? (
-                                                    <>
-                                                        <motion.div
-                                                            animate={{ rotate: 360 }}
-                                                            transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
-                                                            className="w-3 h-3 border-2 border-green-400 border-t-transparent rounded-full"
-                                                        />
-                                                        <span>SYNCING...</span>
-                                                    </>
-                                                ) : (
-                                                    '✓ YES'
-                                                )}
+                                                ✓ YES
                                             </button>
                                         </div>
                                     </>
