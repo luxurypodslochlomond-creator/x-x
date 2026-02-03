@@ -385,6 +385,38 @@ export default function CB51() {
                                                         </div>
                                                     )}
 
+                                    {/* REAL-TIME NOTIFICATIONS BANNER */}
+                                    <div className="mb-6 space-y-2">
+                                        {stats.pendingOffers > 0 && (
+                                            <div className="bg-gradient-to-r from-cyan-900/40 to-cyan-800/40 border-l-4 border-cyan-500 rounded-lg p-4 flex items-center justify-between">
+                                                <div>
+                                                    <p className="text-cyan-400 font-black font-mono text-sm">PENDING APPROVALS</p>
+                                                    <p className="text-gray-400 text-xs font-mono">{stats.pendingOffers} gig{stats.pendingOffers !== 1 ? 's' : ''} awaiting review</p>
+                                                </div>
+                                                <button
+                                                    onClick={() => document.getElementById('pending-approvals')?.scrollIntoView({ behavior: 'smooth' })}
+                                                    className="bg-cyan-500 hover:bg-cyan-600 text-black font-black px-3 py-1.5 rounded text-xs transition-all"
+                                                >
+                                                    REVIEW
+                                                </button>
+                                            </div>
+                                        )}
+                                        {stats.awaitingBand > 0 && (
+                                            <div className="bg-gradient-to-r from-green-900/40 to-green-800/40 border-l-4 border-green-500 rounded-lg p-4 flex items-center justify-between">
+                                                <div>
+                                                    <p className="text-green-400 font-black font-mono text-sm">AWAITING BAND VOTES</p>
+                                                    <p className="text-gray-400 text-xs font-mono">{stats.awaitingBand} offer{stats.awaitingBand !== 1 ? 's' : ''} sent to band</p>
+                                                </div>
+                                                <button
+                                                    onClick={() => navigate(createPageUrl('ScottGigOffers'))}
+                                                    className="bg-green-500 hover:bg-green-600 text-black font-black px-3 py-1.5 rounded text-xs transition-all"
+                                                >
+                                                    VIEW
+                                                </button>
+                                            </div>
+                                        )}
+                                    </div>
+
                                     {/* REAL-TIME BAND VOTE ALERTS */}
                                     {user && (
                                         <CB51BandVoteAlert userEmail={user.email} />
