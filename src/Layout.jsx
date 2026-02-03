@@ -707,7 +707,6 @@ const LayoutInner = ({ children, currentPageName }) => {
           <AutoBugMonitor />
           <PerformanceOptimizer />
           <PendingMessageSender />
-          {/* Removed broken overlays - HealingCircle, EmergencyMode, EmergencyCalmButton, AI51ProactiveReach, FloatingMusicPlayer */}
         </>
         )}
 
