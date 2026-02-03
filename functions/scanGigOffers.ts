@@ -129,23 +129,47 @@ Deno.serve(async (req) => {
       extraction.raw_text = extraction.emailText.substring(0, 500);
     }
 
+    // SANITIZE INPUT (prevent XSS)
+    const sanitize = (str) => {
+      if (!str) return '';
+      return str
+        .replace(/[<>\"']/g, '') // Remove HTML special chars
+        .substring(0, 500) // Max length
+        .trim();
+    };
+
     // Create gig offer with smart defaults
     const offer = await base44.asServiceRole.entities.ScottGigOffer.create({
       artist_id: artistId,
-      venue: extraction.venue,
-      city: extraction.city,
-      country: extraction.country || 'UK',
+      venue: sanitize(extraction.venue),
+      city: sanitize(extraction.city),
+      country: sanitize(extraction.country) || 'UK',
       date: extraction.date,
       time: extraction.time,
       fee: extraction.fee || 0,
       currency: extraction.currency || 'GBP',
       capacity: extraction.capacity,
-      promoter: extraction.promoter,
+      promoter: sanitize(extraction.promoter),
       deposit_required: extraction.deposit_required || false,
       red_flags: extraction.red_flags?.join(', '),
-      notes: extraction.raw_text,
+      notes: sanitize(extraction.raw_text),
       status: extraction.red_flags?.length > 0 ? 'flagged_for_review' : 'pending_manager_review'
     });
+
+    // LOG AUDIT TRAIL
+    try {
+      await base44.asServiceRole.functions.invoke('logAuditTrail', {
+        action: 'gig_scanned',
+        actor_email: user.email,
+        actor_name: user.full_name,
+        gig_offer_id: offer.id,
+        venue: offer.venue,
+        fee: offer.fee,
+        details: `Scanned via AI51 • ${extraction.red_flags?.length > 0 ? 'flagged' : 'clean'}`
+      });
+    } catch (e) {
+      console.error('Audit log failed:', e);
+    }
 
     // MYCELIUM: Auto-create message record if extracted
     if (extraction.from || extraction.subject) {

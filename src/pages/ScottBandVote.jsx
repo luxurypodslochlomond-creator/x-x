@@ -46,6 +46,11 @@ export default function ScottBandVote() {
 
     const submitVoteMutation = useMutation({
         mutationFn: async ({ decision, reason }) => {
+            // RATE LIMIT: Only 1 vote per band member per gig
+            if (existingResponse?.decision && existingResponse.decision !== 'pending') {
+                throw new Error('You already voted on this gig');
+            }
+
             if (existingResponse) {
                 // Update existing
                 return base44.entities.ScottBandResponse.update(existingResponse.id, {
@@ -65,7 +70,22 @@ export default function ScottBandVote() {
                 });
             }
         },
-        onSuccess: () => {
+        onSuccess: async () => {
+            // LOG AUDIT TRAIL
+            try {
+                await base44.functions.invoke('logAuditTrail', {
+                    action: `band_voted_${decision}`,
+                    actor_email: user.email,
+                    actor_name: user.full_name,
+                    gig_offer_id: offerId,
+                    venue: gigOffer.venue,
+                    fee: gigOffer.fee,
+                    details: decision === 'no' ? reason : 'Band member approved'
+                });
+            } catch (e) {
+                console.error('Audit log failed:', e);
+            }
+            
             queryClient.invalidateQueries({ queryKey: ['bandResponse'] });
             navigate(createPageUrl('ScottArtistHome') + `?id=${gigOffer.artist_id}`);
         }

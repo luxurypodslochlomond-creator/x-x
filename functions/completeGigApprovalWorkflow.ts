@@ -158,6 +158,21 @@ Looking forward to it!`;
           action_url: `/ScottGigOffers?id=${gigOffer.artist_id}`
         });
 
+        // LOG AUDIT TRAIL
+        try {
+          await base44.asServiceRole.functions.invoke('logAuditTrail', {
+            action: 'gig_confirmed',
+            actor_email: gigOffer.created_by,
+            actor_name: 'Auto-confirm',
+            gig_offer_id: gigOffer.id,
+            venue: gigOffer.venue,
+            fee: gigOffer.fee,
+            details: `All band voted YES • Calendar synced`
+          });
+        } catch (e) {
+          console.error('Audit log failed:', e);
+        }
+
         return Response.json({ success: true, stage: 'confirmed_auto_synced' });
 
       } else {
@@ -180,6 +195,21 @@ Looking forward to it!`;
           message: `${noVotes.length} member(s) said NO. Review reasons in CB51.`,
           action_url: `/ScottGigOffers?id=${gigOffer.artist_id}`
         });
+
+        // LOG AUDIT TRAIL
+        try {
+          await base44.asServiceRole.functions.invoke('logAuditTrail', {
+            action: 'gig_rejected_by_band',
+            actor_email: gigOffer.created_by,
+            actor_name: 'Auto-detect',
+            gig_offer_id: gigOffer.id,
+            venue: gigOffer.venue,
+            fee: gigOffer.fee,
+            details: `${noVotes.length} member(s) voted NO: ${reasons}`
+          });
+        } catch (e) {
+          console.error('Audit log failed:', e);
+        }
 
         return Response.json({ success: true, stage: 'needs_discussion', no_votes: noVotes.length });
       }
