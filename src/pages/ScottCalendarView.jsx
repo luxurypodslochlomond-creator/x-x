@@ -73,9 +73,30 @@ export default function ScottCalendarView() {
 
             {showAddEvent && (
                 <div className="bg-black border border-gray-800 rounded p-4 mb-4 space-y-3">
-                    <Input placeholder="Event name" value={newEvent.title} onChange={(e) => setNewEvent({...newEvent, title: e.target.value})} className="bg-black border-gray-700 text-white" />
-                    <Input type="date" value={newEvent.date} onChange={(e) => setNewEvent({...newEvent, date: e.target.value})} className="bg-black border-gray-700 text-white" />
-                    <Input placeholder="Location" value={newEvent.location} onChange={(e) => setNewEvent({...newEvent, location: e.target.value})} className="bg-black border-gray-700 text-white" />
+                    <Input placeholder="Event name" value={newEvent.title} onChange={(e) => setNewEvent({...newEvent, title: e.target.value})} className="bg-black border-gray-700 text-white text-xs" />
+                    <div className="flex gap-2">
+                        <Input type="date" value={newEvent.date} onChange={(e) => setNewEvent({...newEvent, date: e.target.value})} className="bg-black border-gray-700 text-white text-xs flex-1" />
+                        <Input type="time" value={newEvent.time} onChange={(e) => setNewEvent({...newEvent, time: e.target.value})} className="bg-black border-gray-700 text-white text-xs flex-1" />
+                    </div>
+                    <div className="flex gap-2">
+                        <Input placeholder="Venue" value={newEvent.venue} onChange={(e) => setNewEvent({...newEvent, venue: e.target.value})} className="bg-black border-gray-700 text-white text-xs flex-1" />
+                        <Input placeholder="City" value={newEvent.city} onChange={(e) => setNewEvent({...newEvent, city: e.target.value})} className="bg-black border-gray-700 text-white text-xs flex-1" />
+                    </div>
+                    <Input placeholder="Address/Location" value={newEvent.location} onChange={(e) => setNewEvent({...newEvent, location: e.target.value})} className="bg-black border-gray-700 text-white text-xs" />
+                    <Input placeholder="Promoter name" value={newEvent.promoter} onChange={(e) => setNewEvent({...newEvent, promoter: e.target.value})} className="bg-black border-gray-700 text-white text-xs" />
+                    <div className="flex gap-2">
+                        <Input placeholder="Promoter phone" value={newEvent.promoter_phone} onChange={(e) => setNewEvent({...newEvent, promoter_phone: e.target.value})} className="bg-black border-gray-700 text-white text-xs flex-1" />
+                        <Input placeholder="Promoter email" value={newEvent.promoter_email} onChange={(e) => setNewEvent({...newEvent, promoter_email: e.target.value})} className="bg-black border-gray-700 text-white text-xs flex-1" />
+                    </div>
+                    <div className="flex gap-2">
+                        <Input placeholder="Emergency contact" value={newEvent.emergency_contact_name} onChange={(e) => setNewEvent({...newEvent, emergency_contact_name: e.target.value})} className="bg-black border-gray-700 text-white text-xs flex-1" />
+                        <Input placeholder="Emergency phone" value={newEvent.emergency_contact_phone} onChange={(e) => setNewEvent({...newEvent, emergency_contact_phone: e.target.value})} className="bg-black border-gray-700 text-white text-xs flex-1" />
+                    </div>
+                    <div className="flex gap-2">
+                        <Input type="number" placeholder="Fee" value={newEvent.fee} onChange={(e) => setNewEvent({...newEvent, fee: e.target.value})} className="bg-black border-gray-700 text-white text-xs flex-1" />
+                        <Input type="number" placeholder="Capacity" value={newEvent.capacity} onChange={(e) => setNewEvent({...newEvent, capacity: e.target.value})} className="bg-black border-gray-700 text-white text-xs flex-1" />
+                    </div>
+                    <Input placeholder="Notes" value={newEvent.notes} onChange={(e) => setNewEvent({...newEvent, notes: e.target.value})} className="bg-black border-gray-700 text-white text-xs" />
                     <div className="flex gap-2">
                         <Button onClick={() => setShowAddEvent(false)} className="flex-1 bg-gray-700">CANCEL</Button>
                         <Button onClick={handleAddEvent} className="flex-1 bg-cyan-500 text-black font-black">SAVE</Button>
