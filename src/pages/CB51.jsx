@@ -293,22 +293,15 @@ export default function CB51() {
                                                                                 setScanningStep(0);
 
                                                                                 try {
-                                                                                    // Step 1: Reading file
                                                                                     setScanningStep(1);
                                                                                     const { file_url } = await base44.integrations.Core.UploadFile({ file });
 
-                                                                                    // Step 2: AI extraction
                                                                                     setScanningStep(2);
-                                                                                    const stepInterval = setInterval(() => {
-                                                                                        setScanningStep(prev => prev < 4 ? prev + 1 : prev);
-                                                                                    }, 1500);
-
                                                                                     const result = await base44.functions.invoke('scanGigOffers', { 
                                                                                         file_url,
                                                                                         artistId: artists[0]?.id 
                                                                                     });
 
-                                                                                    clearInterval(stepInterval);
                                                                                     setScanningStep(5);
 
                                                                                     // Refresh data FIRST
@@ -513,49 +506,39 @@ export default function CB51() {
 
                                                     (async () => {
                                                         try {
-                                                            // Get band members to notify
-                                                            const teamMembers = await base44.entities.ScottTeamMember.filter({ 
+                                                            // Parallel execution - no awaits until end
+                                                            const teamMembersPromise = base44.entities.ScottTeamMember.filter({ 
                                                                 artist_id: artists[0]?.id,
                                                                 role: 'band_member'
                                                             });
 
-                                                            const tasks = [
-                                                                base44.entities.ScottGigOffer.update(offerData.id, { status: 'sent_to_band' }),
-                                                                base44.entities.ScottEvent.create({
-                                                                    artist_id: artists[0]?.id,
-                                                                    title: offerData.venue || 'Gig',
-                                                                    date: offerData.date,
-                                                                    time: offerData.time || '20:00',
-                                                                    venue: offerData.venue,
-                                                                    city: offerData.city,
-                                                                    country: offerData.country,
-                                                                    fee: offerData.fee,
-                                                                    currency: offerData.currency || 'GBP',
-                                                                    promoter: offerData.promoter,
-                                                                    capacity: offerData.capacity,
-                                                                    event_type: 'live_show',
-                                                                    notes: `Approved by manager`
-                                                                })
-                                                            ];
+                                                            // Start offer status update immediately
+                                                            const updateOfferPromise = base44.entities.ScottGigOffer.update(offerData.id, { status: 'sent_to_band' });
 
-                                                            // Notify each band member
-                                                            teamMembers.forEach(member => {
-                                                                tasks.push(base44.entities.ScottNotification.create({
-                                                                    artist_id: artists[0]?.id,
-                                                                    recipient_email: member.email,
-                                                                    notification_type: 'band_gig_offer',
-                                                                    title: `New gig: ${offerData.venue}`,
-                                                                    message: `Manager approved. Vote YES or NO.`,
-                                                                    gig_offer_id: offerData.id,
-                                                                    status: 'pending'
-                                                                }));
+                                                            // Create event immediately
+                                                            const createEventPromise = base44.entities.ScottEvent.create({
+                                                                artist_id: artists[0]?.id,
+                                                                title: offerData.venue || 'Gig',
+                                                                date: offerData.date,
+                                                                time: offerData.time || '20:00',
+                                                                venue: offerData.venue,
+                                                                city: offerData.city,
+                                                                country: offerData.country,
+                                                                fee: offerData.fee,
+                                                                currency: offerData.currency || 'GBP',
+                                                                promoter: offerData.promoter,
+                                                                capacity: offerData.capacity,
+                                                                event_type: 'live_show',
+                                                                notes: `Approved by manager`
                                                             });
 
+                                                            // Build task promises
+                                                            const taskPromises = [];
                                                             if (offerData.date) {
                                                                 const gigDate = new Date(offerData.date);
                                                                 const dayBefore = new Date(gigDate);
                                                                 dayBefore.setDate(dayBefore.getDate() - 1);
-                                                                tasks.push(base44.entities.ScottTask.create({
+                                                                taskPromises.push(base44.entities.ScottTask.create({
                                                                     artist_id: artists[0]?.id,
                                                                     title: `Travel to ${offerData.city || offerData.venue}`,
                                                                     due_date: dayBefore.toISOString().split('T')[0],
@@ -568,7 +551,7 @@ export default function CB51() {
                                                                 const gigDate = new Date(offerData.date);
                                                                 const weekAfter = new Date(gigDate);
                                                                 weekAfter.setDate(weekAfter.getDate() + 7);
-                                                                tasks.push(base44.entities.ScottTask.create({
+                                                                taskPromises.push(base44.entities.ScottTask.create({
                                                                     artist_id: artists[0]?.id,
                                                                     title: `Invoice ${offerData.promoter || offerData.venue}`,
                                                                     due_date: weekAfter.toISOString().split('T')[0],
@@ -578,7 +561,27 @@ export default function CB51() {
                                                                 }));
                                                             }
 
-                                                            await Promise.all(tasks);
+                                                            // Wait for team members, then notify all in parallel
+                                                            const teamMembers = await teamMembersPromise;
+                                                            const notificationPromises = teamMembers.map(member => 
+                                                                base44.entities.ScottNotification.create({
+                                                                    artist_id: artists[0]?.id,
+                                                                    recipient_email: member.email,
+                                                                    notification_type: 'band_gig_offer',
+                                                                    title: `New gig: ${offerData.venue}`,
+                                                                    message: `Manager approved. Vote YES or NO.`,
+                                                                    gig_offer_id: offerData.id,
+                                                                    status: 'pending'
+                                                                })
+                                                            );
+
+                                                            // All parallel
+                                                            await Promise.all([
+                                                                updateOfferPromise,
+                                                                createEventPromise,
+                                                                ...taskPromises,
+                                                                ...notificationPromises
+                                                            ]);
                                                             queryClient.invalidateQueries({ queryKey: ['scottAllGigOffers'] });
                                                             queryClient.invalidateQueries({ queryKey: ['scottEvents'] });
                                                             queryClient.invalidateQueries({ queryKey: ['scottTasks'] });
