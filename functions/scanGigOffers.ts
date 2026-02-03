@@ -21,6 +21,28 @@ Deno.serve(async (req) => {
       return Response.json({ error: 'Missing artistId and text/file' }, { status: 400 });
     }
 
+    // FAST CHECK: Quick duplicate scan before expensive AI extraction
+    const existingOffers = await base44.asServiceRole.entities.ScottGigOffer.filter({
+      artist_id: artistId
+    });
+
+    // Look for venue mentions in text first (instant)
+    if (emailText) {
+      const textLower = emailText.toLowerCase();
+      const recentDupe = existingOffers.find(e => {
+        const venueLower = e.venue?.toLowerCase() || '';
+        return venueLower.length > 3 && textLower.includes(venueLower) && 
+               new Date(e.date) > new Date(Date.now() - 7*24*60*60*1000); // Last 7 days
+      });
+      if (recentDupe) {
+        return Response.json({ 
+          error: 'Duplicate detected - already have ' + recentDupe.venue,
+          existingOfferId: recentDupe.id,
+          isDuplicate: true
+        }, { status: 409 });
+      }
+    }
+
     // Smart AI extraction with context
     const extraction = await base44.integrations.Core.InvokeLLM({
       prompt: `Extract gig offer - be smart about context.
