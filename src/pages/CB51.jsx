@@ -253,12 +253,12 @@ export default function CB51() {
                                                                                     <div className="flex items-center justify-center gap-2">
                                                                                         <AI51AtomIcon size={16} animate={true} />
                                                                                         <p className="text-cyan-400 text-xs font-mono font-black">
-                                                                                            {scanningStep === 1 && '📄 Reading file...'}
-                                                                                            {scanningStep === 2 && '🔍 Finding venue...'}
-                                                                                            {scanningStep === 3 && '📅 Extracting dates...'}
-                                                                                            {scanningStep === 4 && '💰 Reading fee...'}
-                                                                                            {scanningStep === 5 && '✓ Building offer...'}
-                                                                                        </p>
+                                                                                                            {scanningStep === 1 && 'Reading file'}
+                                                                                                            {scanningStep === 2 && 'Finding venue'}
+                                                                                                            {scanningStep === 3 && 'Extracting dates'}
+                                                                                                            {scanningStep === 4 && 'Reading fee'}
+                                                                                                            {scanningStep === 5 && 'Building offer'}
+                                                                                                        </p>
                                                                                     </div>
                                                                                     <div className="flex gap-1 justify-center">
                                                                                         {[1,2,3,4,5].map(step => (
@@ -275,9 +275,9 @@ export default function CB51() {
                                                                             ) : (
                                                                                 <>
                                                                                     <div className="flex items-center justify-center gap-2">
-                                                                                        <p className="text-cyan-400 text-xs font-mono font-black">📄 Upload PDF/Screenshot</p>
+                                                                                        <p className="text-cyan-400 text-xs font-mono font-black">Upload PDF or Screenshot</p>
                                                                                     </div>
-                                                                                    <p className="text-gray-600 text-[9px] font-mono mt-1">Instant extraction</p>
+                                                                                    <p className="text-gray-600 text-[9px] font-mono mt-1">AI extraction</p>
                                                                                 </>
                                                                             )}
                                                                         </div>
@@ -497,9 +497,9 @@ export default function CB51() {
                                                     }
                                                     setScannedOffer(null);
                                                 }}
-                                                className="flex-1 bg-red-900/40 hover:bg-red-900/60 border-2 border-red-500/50 hover:border-red-500 text-red-400 font-black py-2.5 rounded-lg font-mono text-sm"
+                                                className="flex-1 bg-black border-2 border-red-500/50 hover:border-red-500 text-red-400 font-black py-3 rounded-lg font-mono text-sm transition-all"
                                             >
-                                                ✗ NO
+                                                NO
                                             </button>
                                             <button
                                                 onClick={async () => {
@@ -508,17 +508,18 @@ export default function CB51() {
 
                                                     const offerData = {...scannedOffer};
 
-                                                    // INSTANT: Hide card and show success immediately
+                                                    // INSTANT: Card vanishes
                                                     setScannedOffer(null);
+
+                                                    // Toast feedback
                                                     const toast = document.createElement('div');
-                                                    toast.className = 'fixed top-20 left-1/2 -translate-x-1/2 bg-green-500 text-black font-black font-mono text-xs px-4 py-2 rounded-lg z-[200] shadow-2xl';
-                                                    toast.textContent = `✓ ${offerData.venue} syncing...`;
+                                                    toast.className = 'fixed top-20 left-1/2 -translate-x-1/2 bg-cyan-500 text-black font-black font-mono text-xs px-4 py-2 rounded-lg z-[200]';
+                                                    toast.textContent = `${offerData.venue} syncing`;
                                                     document.body.appendChild(toast);
 
-                                                    // BACKGROUND: Do all work async
+                                                    // BACKGROUND: Parallel execution
                                                     (async () => {
                                                         try {
-                                                            // Parallel batch: Update offer + create event + create tasks
                                                             const tasks = [
                                                                 base44.entities.ScottGigOffer.update(offerId, { status: 'sent_to_band' }),
                                                                 base44.entities.ScottEvent.create({
@@ -534,11 +535,10 @@ export default function CB51() {
                                                                     promoter: offerData.promoter,
                                                                     capacity: offerData.capacity,
                                                                     event_type: 'live_show',
-                                                                    notes: `Approved by manager - sent to band for vote`
+                                                                    notes: `Approved by manager`
                                                                 })
                                                             ];
 
-                                                            // Add travel task if date exists
                                                             if (offerData.date) {
                                                                 const gigDate = new Date(offerData.date);
                                                                 const dayBefore = new Date(gigDate);
@@ -553,7 +553,6 @@ export default function CB51() {
                                                                 }));
                                                             }
 
-                                                            // Add invoice task if fee exists
                                                             if (offerData.fee && offerData.date) {
                                                                 const gigDate = new Date(offerData.date);
                                                                 const weekAfter = new Date(gigDate);
@@ -569,30 +568,27 @@ export default function CB51() {
                                                                 }));
                                                             }
 
-                                                            // Execute all in parallel
                                                             await Promise.all(tasks);
 
-                                                            // Refresh data
                                                             queryClient.invalidateQueries({ queryKey: ['scottAllGigOffers'] });
                                                             queryClient.invalidateQueries({ queryKey: ['scottEvents'] });
                                                             queryClient.invalidateQueries({ queryKey: ['scottTasks'] });
 
-                                                            // Update toast to success
-                                                            toast.textContent = `✓ ${offerData.venue} → Calendar + Tasks`;
-                                                            toast.className = 'fixed top-20 left-1/2 -translate-x-1/2 bg-green-500 text-black font-black font-mono text-xs px-4 py-2 rounded-lg z-[200] shadow-2xl';
-                                                            setTimeout(() => toast.remove(), 2000);
+                                                            toast.textContent = `${offerData.venue} synced`;
+                                                            toast.className = 'fixed top-20 left-1/2 -translate-x-1/2 bg-green-500 text-black font-black font-mono text-xs px-4 py-2 rounded-lg z-[200]';
+                                                            setTimeout(() => toast.remove(), 1500);
 
                                                         } catch (e) {
-                                                            console.error('Sync failed:', e);
-                                                            toast.textContent = `✗ Sync failed`;
+                                                            console.error('Sync error:', e);
+                                                            toast.textContent = 'Sync failed';
                                                             toast.className = 'fixed top-20 left-1/2 -translate-x-1/2 bg-red-500 text-white font-black font-mono text-xs px-4 py-2 rounded-lg z-[200]';
                                                             setTimeout(() => toast.remove(), 2000);
                                                         }
                                                     })();
                                                 }}
-                                                className="flex-1 bg-green-900/40 hover:bg-green-900/60 border-2 border-green-500/50 hover:border-green-500 text-green-400 font-black py-2.5 rounded-lg font-mono text-sm flex items-center justify-center gap-1.5"
+                                                className="flex-1 bg-black border-2 border-green-500/50 hover:border-green-500 text-green-400 font-black py-3 rounded-lg font-mono text-sm transition-all"
                                             >
-                                                ✓ YES
+                                                YES
                                             </button>
                                         </div>
                                     </>
