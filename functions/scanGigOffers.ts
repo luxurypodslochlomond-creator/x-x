@@ -101,20 +101,17 @@ Deno.serve(async (req) => {
       extraction.red_flags = [...(extraction.red_flags || []), 'DATE_IN_PAST'];
     }
 
-    // Check for duplicates (same venue + date within 2 days)
-    const existing = await base44.asServiceRole.entities.ScottGigOffer.filter({
-      artist_id: artistId
-    });
-
-    const dupe = existing.find(e => 
+    // Check for exact duplicates (same venue + exact date)
+    const dupe = existingOffers.find(e => 
       e.venue?.toLowerCase() === extraction.venue?.toLowerCase() &&
       e.date === extraction.date
     );
 
     if (dupe) {
       return Response.json({ 
-        error: 'Duplicate offer detected',
-        existingOfferId: dupe.id
+        error: 'Already have this gig',
+        existingOfferId: dupe.id,
+        isDuplicate: true
       }, { status: 409 });
     }
 
