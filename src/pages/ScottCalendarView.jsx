@@ -72,19 +72,101 @@ export default function ScottCalendarView() {
                     <div className="text-center py-8 text-gray-600 font-mono">No events</div>
                 ) : (
                     [...events].sort((a, b) => new Date(a.date) - new Date(b.date)).map(event => (
-                        <div key={event.id} className="bg-black border border-gray-800 rounded p-3 flex items-start justify-between">
+                        <button 
+                            key={event.id} 
+                            onClick={() => setSelectedEvent(event)}
+                            className="w-full bg-black border border-gray-800 hover:border-cyan-500/50 rounded p-3 flex items-start justify-between transition-all text-left"
+                        >
                             <div className="flex-1">
                                 <p className="text-white font-bold font-mono text-sm">{event.title}</p>
                                 <p className="text-gray-600 text-xs font-mono">{new Date(event.date).toLocaleDateString()}</p>
                                 {event.location && <p className="text-gray-500 text-xs font-mono">{event.location}</p>}
                             </div>
-                            <button onClick={() => deleteEventMutation.mutate(event.id)}>
+                            <button 
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    deleteEventMutation.mutate(event.id);
+                                }}
+                                className="flex-shrink-0"
+                            >
                                 <Trash2 className="w-4 h-4 text-red-400" />
                             </button>
-                        </div>
+                        </button>
                     ))
                 )}
             </div>
+
+            {/* EVENT DETAIL MODAL */}
+            {selectedEvent && (
+                <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
+                    <div className="bg-black border-2 border-cyan-500 rounded-lg p-6 max-w-sm w-full space-y-4">
+                        <div className="flex items-start justify-between mb-4">
+                            <h2 className="text-white font-black font-mono text-lg flex-1">{selectedEvent.title}</h2>
+                            <button onClick={() => setSelectedEvent(null)} className="text-cyan-400 hover:text-cyan-300 text-xl">✕</button>
+                        </div>
+
+                        <div className="space-y-3 text-sm">
+                            <div>
+                                <p className="text-cyan-400 font-mono font-bold text-xs">DATE</p>
+                                <p className="text-white font-mono">{new Date(selectedEvent.date).toLocaleDateString()}</p>
+                            </div>
+                            {selectedEvent.location && (
+                                <div>
+                                    <p className="text-cyan-400 font-mono font-bold text-xs">LOCATION</p>
+                                    <p className="text-white font-mono">{selectedEvent.location}</p>
+                                </div>
+                            )}
+                            {selectedEvent.venue && (
+                                <div>
+                                    <p className="text-cyan-400 font-mono font-bold text-xs">VENUE</p>
+                                    <p className="text-white font-mono">{selectedEvent.venue}</p>
+                                </div>
+                            )}
+                            {selectedEvent.city && (
+                                <div>
+                                    <p className="text-cyan-400 font-mono font-bold text-xs">CITY</p>
+                                    <p className="text-white font-mono">{selectedEvent.city}{selectedEvent.country ? `, ${selectedEvent.country}` : ''}</p>
+                                </div>
+                            )}
+                            {selectedEvent.fee && (
+                                <div>
+                                    <p className="text-cyan-400 font-mono font-bold text-xs">FEE</p>
+                                    <p className="text-green-400 font-black font-mono">{selectedEvent.currency || 'GBP'}{selectedEvent.fee}</p>
+                                </div>
+                            )}
+                            {selectedEvent.promoter && (
+                                <div>
+                                    <p className="text-cyan-400 font-mono font-bold text-xs">PROMOTER</p>
+                                    <p className="text-white font-mono">{selectedEvent.promoter}</p>
+                                </div>
+                            )}
+                            {selectedEvent.capacity && (
+                                <div>
+                                    <p className="text-cyan-400 font-mono font-bold text-xs">CAPACITY</p>
+                                    <p className="text-white font-mono">{selectedEvent.capacity}</p>
+                                </div>
+                            )}
+                            {selectedEvent.time && (
+                                <div>
+                                    <p className="text-cyan-400 font-mono font-bold text-xs">TIME</p>
+                                    <p className="text-white font-mono">{selectedEvent.time}</p>
+                                </div>
+                            )}
+                            {selectedEvent.notes && (
+                                <div>
+                                    <p className="text-cyan-400 font-mono font-bold text-xs">NOTES</p>
+                                    <p className="text-gray-400 text-xs">{selectedEvent.notes}</p>
+                                </div>
+                            )}
+                        </div>
+
+                        <div className="flex gap-2 pt-2">
+                            <button onClick={() => setSelectedEvent(null)} className="flex-1 bg-gray-700 hover:bg-gray-600 text-white font-bold py-2 rounded text-sm">CLOSE</button>
+                            <button onClick={() => { deleteEventMutation.mutate(selectedEvent.id); setSelectedEvent(null); }} className="flex-1 bg-red-600 hover:bg-red-700 text-white font-bold py-2 rounded text-sm">DELETE</button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
