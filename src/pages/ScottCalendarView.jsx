@@ -57,7 +57,30 @@ export default function ScottCalendarView() {
 
     const handleAddEvent = () => {
         if (!newEvent.title.trim() || !newEvent.date) return;
-        createEventMutation.mutate({ ...newEvent, artist_id: artistId });
+        createEventMutation.mutate({ 
+            ...newEvent, 
+            artist_id: artistId,
+            fee: newEvent.fee ? parseFloat(newEvent.fee) : undefined,
+            capacity: newEvent.capacity ? parseInt(newEvent.capacity) : undefined
+        });
+        setNewEvent({ 
+            title: '', 
+            date: '', 
+            time: '',
+            venue: '',
+            location: '',
+            city: '',
+            country: '',
+            promoter: '',
+            promoter_phone: '',
+            promoter_email: '',
+            emergency_contact_name: '',
+            emergency_contact_phone: '',
+            fee: '',
+            currency: 'GBP',
+            capacity: '',
+            notes: ''
+        });
     };
 
     const isMobile = window.innerWidth < 1024;
