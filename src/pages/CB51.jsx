@@ -317,12 +317,29 @@ export default function CB51() {
                                                                                     // Show CB51-style success modal with instant YES/NO
                                                                                     setScannedOffer(offer);
                                                                                 } catch (e) {
-                                                                                    console.error('Scan error:', e);
-                                                                                    setScanning(false);
-                                                                                    setPasteModalOpen(false);
-                                                                                    // Show CB51 error
-                                                                                    setScannedOffer({ error: e.message });
-                                                                                }
+                                                                                        console.error('Scan error:', e);
+                                                                                        setScanning(false);
+                                                                                        setPasteModalOpen(false);
+
+                                                                                        // Parse error response
+                                                                                        let errorMsg = e.message;
+                                                                                        let isDuplicate = false;
+                                                                                        let existingId = null;
+
+                                                                                        try {
+                                                                                            const errorData = typeof e.response?.data === 'string' ? 
+                                                                                                JSON.parse(e.response.data) : e.response?.data;
+                                                                                            errorMsg = errorData?.error || errorMsg;
+                                                                                            isDuplicate = errorData?.isDuplicate;
+                                                                                            existingId = errorData?.existingOfferId;
+                                                                                        } catch {}
+
+                                                                                        setScannedOffer({ 
+                                                                                            error: errorMsg,
+                                                                                            isDuplicate,
+                                                                                            existingId
+                                                                                        });
+                                                                                    }
                                                                             }}
                                                                             className="hidden" 
                                                                         />
