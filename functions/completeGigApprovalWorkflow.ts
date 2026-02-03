@@ -63,6 +63,17 @@ Deno.serve(async (req) => {
         )
       );
 
+      // Also send email with action links (for iPhone/Mac users)
+      await Promise.all(
+        teamMembers.map(m =>
+          base44.asServiceRole.functions.invoke('sendNotificationEmail', {
+            gig_id: gigOffer.id,
+            recipient_email: m.email,
+            decision_type: 'band_vote'
+          }).catch(e => console.log('Email send skipped:', e.message))
+        )
+      );
+
       // Mark band notified
       await base44.asServiceRole.entities.ScottGigOffer.update(gigOffer.id, {
         band_notified: true
