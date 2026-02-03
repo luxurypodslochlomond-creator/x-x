@@ -253,9 +253,43 @@ export default function ScottSettings() {
             {activeTab === 'devices' && (
                 <div className="space-y-4">
                     <div className="border border-cyan-500/50 rounded-lg p-6 bg-black/40">
-                        <h3 className="text-lg font-black text-cyan-400 mb-2">Connected Devices</h3>
-                        <p className="text-sm text-gray-400 mb-4">Remove devices to revoke access instantly</p>
-                        <p className="text-sm text-gray-600">No connected devices yet</p>
+                        <div className="flex items-start gap-3 mb-4">
+                            <Smartphone className="w-6 h-6 text-cyan-400 flex-shrink-0 mt-1" />
+                            <div className="flex-1">
+                                <h3 className="text-lg font-black text-cyan-400 mb-1">PWA Installation Status</h3>
+                                <p className="text-sm text-gray-400">Manage CB51 on your devices</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    {pwaInstalled ? (
+                        <div className="border border-green-500/50 rounded-lg p-4 bg-green-900/20 flex items-start gap-3">
+                            <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
+                            <div className="flex-1">
+                                <p className="text-sm font-bold text-green-400">This Device — PWA Active</p>
+                                <p className="text-xs text-green-400/60">{navigator.userAgent.includes('iPhone') ? 'iOS' : navigator.userAgent.includes('Android') ? 'Android' : 'Desktop'} • Running standalone</p>
+                            </div>
+                        </div>
+                    ) : (
+                        <div className="border border-amber-500/50 rounded-lg p-4 bg-amber-900/20">
+                            <div className="flex items-start gap-3">
+                                <Download className="w-5 h-5 text-amber-400 flex-shrink-0 mt-0.5" />
+                                <div>
+                                    <p className="text-sm font-bold text-amber-400 mb-2">Install CB51 as PWA</p>
+                                    <div className="text-xs text-amber-400/80 space-y-1 mb-3">
+                                        <p>📱 iOS: Safari → Share → Add to Home Screen</p>
+                                        <p>🤖 Android: Menu → Install app</p>
+                                        <p>💻 Desktop: Menu → Install CB51</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+                    <div className="border border-cyan-500/30 rounded-lg p-4 bg-black/40">
+                        <p className="text-xs text-gray-500">
+                            <span className="text-cyan-400 font-bold">PWA Benefits:</span> Offline access • Home screen icon • Push notifications • Zero data tracking
+                        </p>
                     </div>
                 </div>
             )}
