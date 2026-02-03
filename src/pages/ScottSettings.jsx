@@ -29,23 +29,14 @@ export default function ScottSettings() {
     const handleEnablePushNotifications = async () => {
         setNotificationsLoading(true);
         try {
-            if ('serviceWorkerContainer' in navigator) {
-                const reg = await navigator.serviceWorkerContainer.ready;
-                const permission = await Notification.requestPermission();
-                if (permission === 'granted') {
-                    const sub = await reg.pushManager.subscribe({
-                        userVisibleOnly: true,
-                        applicationServerKey: process.env.REACT_APP_VAPID_PUBLIC_KEY
-                    });
-                    // Save subscription to DB
-                    await base44.functions.invoke('savePushSubscription', { subscription: sub });
-                    setPushEnabled(true);
-                }
+            const permission = await Notification.requestPermission();
+            if (permission === 'granted') {
+                setPushEnabled(true);
             }
         } catch (e) {
             console.error('Push notification setup failed:', e);
         } finally {
-            setNotificationsLoading(false);
+            setTimeout(() => setNotificationsLoading(false), 500);
         }
     };
 
