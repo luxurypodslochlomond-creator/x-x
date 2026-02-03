@@ -178,61 +178,76 @@ export default function ScottSettings() {
             )}
 
             {activeTab === 'notifications' && (
-                <div className="space-y-6">
-                    <div className="border-2 border-cyan-500/40 rounded-lg p-6 bg-cyan-500/5">
-                        <div className="flex items-start gap-3">
-                            <Bell className="w-7 h-7 text-cyan-400 flex-shrink-0 mt-0.5" />
+                <div className="space-y-8 pb-8">
+                    <div className="border-2 border-cyan-500/40 rounded-xl p-8 bg-cyan-500/5">
+                        <div className="flex items-start gap-4">
+                            <Bell className="w-8 h-8 text-cyan-400 flex-shrink-0 mt-1" />
                             <div className="flex-1">
-                                <h3 className="text-xl font-black text-cyan-400 mb-1">Push Notifications</h3>
-                                <p className="text-sm text-gray-300">Get instant alerts when gigs arrive</p>
+                                <h3 className="text-2xl font-black text-cyan-400 mb-2">Push Notifications</h3>
+                                <p className="text-base text-gray-300 leading-relaxed">Get instant alerts on your phone when gigs arrive</p>
                             </div>
                         </div>
                     </div>
 
-                    {!pwaInstalled && (
-                        <div className="border-2 border-amber-500/50 rounded-lg p-6 bg-amber-900/20">
-                            <div className="flex items-start gap-3 mb-4">
-                                <Download className="w-6 h-6 text-amber-400 flex-shrink-0 mt-0.5" />
-                                <div className="flex-1">
-                                    <p className="font-black text-amber-300 mb-2">Step 1: Add CB51 to Home Screen</p>
-                                    <div className="space-y-2 text-sm text-amber-200">
-                                        <p>🍎 <span className="font-mono">Safari → Share → Add to Home Screen</span></p>
-                                        <p>🤖 <span className="font-mono">Menu → Install app</span></p>
+                    {!pwaInstalled ? (
+                        <button
+                            onClick={() => {
+                                if (window.deferredPrompt) {
+                                    window.deferredPrompt.prompt();
+                                } else if (navigator.userAgent.includes('iPhone')) {
+                                    alert('📱 Tap Share → Add to Home Screen in Safari');
+                                } else if (navigator.userAgent.includes('Android')) {
+                                    alert('🤖 Tap menu (⋮) → Install app');
+                                }
+                            }}
+                            className="w-full border-3 border-amber-500/60 rounded-xl p-8 bg-amber-900/20 hover:bg-amber-900/30 transition-all active:scale-95"
+                        >
+                            <div className="flex items-start gap-4">
+                                <Download className="w-7 h-7 text-amber-400 flex-shrink-0 mt-0.5" />
+                                <div className="flex-1 text-left">
+                                    <p className="font-black text-amber-300 text-lg mb-2">Step 1: Add CB51 to Home Screen</p>
+                                    <div className="space-y-3 text-sm text-amber-200">
+                                        <p className="font-mono bg-black/40 p-3 rounded text-amber-100">🍎 Safari → Share → Add to Home Screen</p>
+                                        <p className="font-mono bg-black/40 p-3 rounded text-amber-100">🤖 Menu (⋮) → Install app</p>
                                     </div>
                                 </div>
                             </div>
+                        </button>
+                    ) : (
+                        <div className="border-3 border-green-500/50 rounded-xl p-8 bg-green-900/20">
+                            <div className="flex items-center gap-4">
+                                <CheckCircle className="w-7 h-7 text-green-400 flex-shrink-0" />
+                                <div className="flex-1 text-left">
+                                    <p className="font-black text-green-300 text-lg">✓ PWA Installed</p>
+                                    <p className="text-base text-green-200">Ready for notifications</p>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+                    {pwaInstalled && !pushEnabled && (
+                        <div className="text-center">
+                            <p className="text-gray-400 text-sm font-mono mb-4">Step 2: Turn on notifications</p>
                         </div>
                     )}
 
                     {pwaInstalled && (
-                        <div className="border-2 border-green-500/50 rounded-lg p-6 bg-green-900/20">
-                            <div className="flex items-center gap-3">
-                                <CheckCircle className="w-6 h-6 text-green-400 flex-shrink-0" />
-                                <div>
-                                    <p className="font-black text-green-300">✓ PWA Installed</p>
-                                    <p className="text-sm text-green-200">Ready for notifications</p>
-                                </div>
-                            </div>
-                        </div>
+                        <button
+                            onClick={pushEnabled ? handleDisablePushNotifications : handleEnablePushNotifications}
+                            disabled={notificationsLoading}
+                            className={`w-full py-6 rounded-xl font-black text-lg transition-all active:scale-95 ${
+                                pushEnabled
+                                    ? 'bg-red-600/40 hover:bg-red-600/60 text-red-300'
+                                    : 'bg-cyan-500 hover:bg-cyan-600 text-black'
+                            } disabled:opacity-60 disabled:cursor-not-allowed`}
+                        >
+                            {notificationsLoading ? '⏳ Setting up...' : pushEnabled ? '❌ Disable Notifications' : '✓ Enable Notifications'}
+                        </button>
                     )}
 
-                    <button
-                        onClick={pushEnabled ? handleDisablePushNotifications : handleEnablePushNotifications}
-                        disabled={notificationsLoading || !pwaInstalled}
-                        className={`w-full py-4 rounded-lg font-black text-lg transition-all ${
-                            pushEnabled
-                                ? 'bg-red-600/40 hover:bg-red-600/60 text-red-300'
-                                : pwaInstalled
-                                ? 'bg-cyan-500 hover:bg-cyan-600 text-black'
-                                : 'bg-gray-600/30 text-gray-500 cursor-not-allowed'
-                        } disabled:opacity-60`}
-                    >
-                        {notificationsLoading ? '⏳ Setting up...' : pushEnabled ? '❌ Disable Notifications' : '✓ Enable Notifications'}
-                    </button>
-
                     {pushEnabled && (
-                        <div className="bg-green-900/20 border border-green-500/50 rounded-lg p-4">
-                            <p className="text-sm text-green-300 font-mono">✓ Active — you'll get notified for new gigs</p>
+                        <div className="bg-green-900/20 border-2 border-green-500/50 rounded-xl p-6">
+                            <p className="text-base text-green-300 font-mono text-center">✓ Active — you're set!</p>
                         </div>
                     )}
                 </div>
