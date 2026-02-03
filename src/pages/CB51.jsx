@@ -506,17 +506,10 @@ export default function CB51() {
 
                                                     (async () => {
                                                         try {
-                                                            // Parallel execution - no awaits until end
-                                                            const teamMembersPromise = base44.entities.ScottTeamMember.filter({ 
-                                                                artist_id: artists[0]?.id,
-                                                                role: 'band_member'
-                                                            });
+                                                            // FOUNDATION FIRST: sync to calendar
+                                                            await base44.entities.ScottGigOffer.update(offerData.id, { status: 'sent_to_band' });
 
-                                                            // Start offer status update immediately
-                                                            const updateOfferPromise = base44.entities.ScottGigOffer.update(offerData.id, { status: 'sent_to_band' });
-
-                                                            // Create event immediately
-                                                            const createEventPromise = base44.entities.ScottEvent.create({
+                                                            await base44.entities.ScottEvent.create({
                                                                 artist_id: artists[0]?.id,
                                                                 title: offerData.venue || 'Gig',
                                                                 date: offerData.date,
@@ -532,38 +525,13 @@ export default function CB51() {
                                                                 notes: `Approved by manager`
                                                             });
 
-                                                            // Build task promises
-                                                            const taskPromises = [];
-                                                            if (offerData.date) {
-                                                                const gigDate = new Date(offerData.date);
-                                                                const dayBefore = new Date(gigDate);
-                                                                dayBefore.setDate(dayBefore.getDate() - 1);
-                                                                taskPromises.push(base44.entities.ScottTask.create({
-                                                                    artist_id: artists[0]?.id,
-                                                                    title: `Travel to ${offerData.city || offerData.venue}`,
-                                                                    due_date: dayBefore.toISOString().split('T')[0],
-                                                                    status: 'pending',
-                                                                    category: 'travel'
-                                                                }));
-                                                            }
+                                                            // Then notify band
+                                                            const teamMembers = await base44.entities.ScottTeamMember.filter({ 
+                                                                artist_id: artists[0]?.id,
+                                                                role: 'band_member'
+                                                            });
 
-                                                            if (offerData.fee && offerData.date) {
-                                                                const gigDate = new Date(offerData.date);
-                                                                const weekAfter = new Date(gigDate);
-                                                                weekAfter.setDate(weekAfter.getDate() + 7);
-                                                                taskPromises.push(base44.entities.ScottTask.create({
-                                                                    artist_id: artists[0]?.id,
-                                                                    title: `Invoice ${offerData.promoter || offerData.venue}`,
-                                                                    due_date: weekAfter.toISOString().split('T')[0],
-                                                                    status: 'pending',
-                                                                    category: 'finance',
-                                                                    notes: `${offerData.currency || 'GBP'}${offerData.fee}`
-                                                                }));
-                                                            }
-
-                                                            // Wait for team members, then notify all in parallel
-                                                            const teamMembers = await teamMembersPromise;
-                                                            const notificationPromises = teamMembers.map(member => 
+                                                            await Promise.all(teamMembers.map(member => 
                                                                 base44.entities.ScottNotification.create({
                                                                     artist_id: artists[0]?.id,
                                                                     recipient_email: member.email,
@@ -573,15 +541,7 @@ export default function CB51() {
                                                                     gig_offer_id: offerData.id,
                                                                     status: 'pending'
                                                                 })
-                                                            );
-
-                                                            // All parallel
-                                                            await Promise.all([
-                                                                updateOfferPromise,
-                                                                createEventPromise,
-                                                                ...taskPromises,
-                                                                ...notificationPromises
-                                                            ]);
+                                                            ));
                                                             queryClient.invalidateQueries({ queryKey: ['scottAllGigOffers'] });
                                                             queryClient.invalidateQueries({ queryKey: ['scottEvents'] });
                                                             queryClient.invalidateQueries({ queryKey: ['scottTasks'] });
