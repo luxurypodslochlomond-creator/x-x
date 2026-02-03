@@ -402,8 +402,27 @@ export default function CB51() {
                                                 onClick={async () => {
                                                     const offerId = allOffers.find(o => o.venue === scannedOffer.venue && o.status === 'pending_manager_review')?.id;
                                                     if (offerId) {
+                                                        // Approve and send to band
                                                         await base44.entities.ScottGigOffer.update(offerId, { status: 'sent_to_band' });
+
+                                                        // Auto-create calendar event with scanned info
+                                                        await base44.entities.ScottEvent.create({
+                                                            artist_id: artists[0]?.id,
+                                                            title: scannedOffer.venue || 'Gig',
+                                                            date: scannedOffer.date,
+                                                            time: scannedOffer.time || '20:00',
+                                                            venue: scannedOffer.venue,
+                                                            city: scannedOffer.city,
+                                                            country: scannedOffer.country,
+                                                            fee: scannedOffer.fee,
+                                                            currency: scannedOffer.currency || 'GBP',
+                                                            promoter: scannedOffer.promoter,
+                                                            capacity: scannedOffer.capacity,
+                                                            event_type: 'live_show'
+                                                        });
+
                                                         queryClient.invalidateQueries({ queryKey: ['scottAllGigOffers'] });
+                                                        queryClient.invalidateQueries({ queryKey: ['scottEvents'] });
                                                     }
                                                     setScannedOffer(null);
                                                 }}
@@ -514,9 +533,28 @@ export default function CB51() {
                                                                                    ✎
                                                                                </button>
                                                                                <button 
-                                                                                   onClick={() => {
+                                                                                   onClick={async () => {
                                                                                        queryClient.setQueryData(['scottAllGigOffers'], allOffers.map(o => o.id === offer.id ? {...o, status: 'sent_to_band'} : o));
-                                                                                       base44.entities.ScottGigOffer.update(offer.id, {status: 'sent_to_band'}).then(() => queryClient.invalidateQueries({queryKey: ['scottAllGigOffers']}));
+                                                                                       await base44.entities.ScottGigOffer.update(offer.id, {status: 'sent_to_band'});
+
+                                                                                       // Auto-create calendar event
+                                                                                       await base44.entities.ScottEvent.create({
+                                                                                           artist_id: offer.artist_id,
+                                                                                           title: offer.venue || 'Gig',
+                                                                                           date: offer.date,
+                                                                                           time: offer.time || '20:00',
+                                                                                           venue: offer.venue,
+                                                                                           city: offer.city,
+                                                                                           country: offer.country,
+                                                                                           fee: offer.fee,
+                                                                                           currency: offer.currency || 'GBP',
+                                                                                           promoter: offer.promoter,
+                                                                                           capacity: offer.capacity,
+                                                                                           event_type: 'live_show'
+                                                                                       });
+
+                                                                                       queryClient.invalidateQueries({queryKey: ['scottAllGigOffers']});
+                                                                                       queryClient.invalidateQueries({queryKey: ['scottEvents']});
                                                                                    }}
                                                                                    className="bg-green-600/40 hover:bg-green-600 text-white px-2 py-1 rounded text-[10px] font-bold"
                                                                                >
