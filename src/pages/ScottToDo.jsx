@@ -11,6 +11,7 @@ export default function ScottToDo() {
     const navigate = useNavigate();
     const queryClient = useQueryClient();
     const [showAddTask, setShowAddTask] = useState(false);
+    const [selectedTask, setSelectedTask] = useState(null);
     const [newTask, setNewTask] = useState({ title: '', responsible_name: '', deadline: '' });
 
     const urlParams = new URLSearchParams(window.location.search);
