@@ -8,13 +8,14 @@ import { base44 } from '@/api/base44Client';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 
 export default function ScottCalendarView() {
-    const navigate = useNavigate();
-    const queryClient = useQueryClient();
-    const [showAddEvent, setShowAddEvent] = useState(false);
-    const [newEvent, setNewEvent] = useState({ title: '', date: '', location: '' });
+          const navigate = useNavigate();
+          const queryClient = useQueryClient();
+          const [showAddEvent, setShowAddEvent] = useState(false);
+          const [selectedEvent, setSelectedEvent] = useState(null);
+          const [newEvent, setNewEvent] = useState({ title: '', date: '', location: '' });
 
-    const urlParams = new URLSearchParams(window.location.search);
-    const artistId = urlParams.get('id');
+          const urlParams = new URLSearchParams(window.location.search);
+          const artistId = urlParams.get('id');
 
     const { data: events = [] } = useQuery({
         queryKey: ['scottEvents', artistId],
