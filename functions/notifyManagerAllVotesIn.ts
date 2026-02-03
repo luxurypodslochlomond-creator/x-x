@@ -99,10 +99,10 @@ CB51 • Your AI Co-Manager`
     }
 
     return Response.json({ 
-      success: true,
-      votes_summary: summary,
-      all_yes: yesVotes === totalMembers,
-      gig: gigOffer.venue_name
+     success: true,
+     votes_summary: summary,
+     all_yes: yesVotes === totalMembers,
+     gig: gigOffer.venue
     });
 
   } catch (error) {

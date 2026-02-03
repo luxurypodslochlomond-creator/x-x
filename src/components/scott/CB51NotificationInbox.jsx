@@ -50,18 +50,7 @@ export default function CB51NotificationInbox() {
                 sent_to_band_at: approved ? new Date().toISOString() : null
             });
 
-            // If YES: notify band members via in-app notifications (pure CB51, no email)
-            if (approved && offerToUpdate) {
-                await base44.functions.invoke('notifyBandGigApproval', {
-                    gigOfferId: offerId,
-                    gigDetails: {
-                        venue: offerToUpdate.venue_name,
-                        date: offerToUpdate.date,
-                        promoter: offerToUpdate.promoter_name,
-                        fee: offerToUpdate.fee
-                    }
-                });
-            }
+            // If YES: automations handle band notification via entity update
 
             setExpandedOfferId(null);
             toast.success(approved ? '✓ BAND NOTIFIED' : '✗ REJECTED');
@@ -115,7 +104,7 @@ export default function CB51NotificationInbox() {
                         >
                             <div className="flex-1 text-left">
                                 <h3 className="text-white font-black font-mono text-sm">
-                                    {offer.venue_name}
+                                    {offer.venue}
                                 </h3>
                                 <div className="flex items-center gap-2 mt-2">
                                     <Clock className="w-4 h-4 text-cyan-400" />
@@ -123,7 +112,7 @@ export default function CB51NotificationInbox() {
                                         {new Date(offer.date).toLocaleDateString()}
                                     </p>
                                     <span className="text-gray-500">•</span>
-                                    <p className="text-gray-400 text-xs font-mono">{offer.promoter_name}</p>
+                                    <p className="text-gray-400 text-xs font-mono">{offer.promoter}</p>
                                 </div>
                             </div>
                             <AlertCircle className="w-5 h-5 text-pink-400 flex-shrink-0 animate-pulse" />
