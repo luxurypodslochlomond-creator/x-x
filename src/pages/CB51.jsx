@@ -254,31 +254,38 @@ export default function CB51() {
                                                                                 setScanning(true);
                                                                                 try {
                                                                                     // Upload file
+                                                                                    console.log('📄 Uploading PDF...');
                                                                                     const { file_url } = await base44.integrations.Core.UploadFile({ file });
+                                                                                    console.log('✓ Uploaded:', file_url);
 
                                                                                     // Extract text from image/PDF using AI
+                                                                                    console.log('🤖 AI51 extracting text from PDF...');
                                                                                     const extractedText = await base44.integrations.Core.InvokeLLM({
-                                                                                        prompt: "Extract all text from this image/document. Include everything - dates, names, fees, locations, emails, phone numbers.",
+                                                                                        prompt: "Extract all text from this PDF document. Include EVERYTHING - artist name, venue name, dates, fees, city, country, promoter name, contact details, capacity, technical details. Keep original formatting and all details intact.",
                                                                                         file_urls: [file_url]
                                                                                     });
+                                                                                    console.log('✓ Extracted text:', extractedText.substring(0, 200) + '...');
 
                                                                                     // Set extracted text into textarea
                                                                                     setPastedText(extractedText);
 
                                                                                     // Auto-scan it
-                                                                                    await base44.functions.invoke('scanGigOffers', { 
+                                                                                    console.log('🔍 Scanning for gig details...');
+                                                                                    const result = await base44.functions.invoke('scanGigOffers', { 
                                                                                         emailText: extractedText, 
                                                                                         artistId: artists[0]?.id 
                                                                                     });
+                                                                                    console.log('✓ Scan result:', result);
 
                                                                                     queryClient.invalidateQueries({ queryKey: ['scottAllGigOffers'] });
                                                                                     queryClient.invalidateQueries({ queryKey: ['scottInvoices'] });
 
                                                                                     setPastedText('');
                                                                                     setPasteModalOpen(false);
-                                                                                    alert('✅ Scanned!');
+                                                                                    alert('✅ Scanned!\n\nVenue: ' + (result.data?.offer?.venue || 'Unknown') + '\nDate: ' + (result.data?.offer?.date || 'TBC'));
                                                                                 } catch (e) {
-                                                                                    alert('Error: ' + e.message);
+                                                                                    console.error('❌ Scan error:', e);
+                                                                                    alert('❌ Scan failed:\n\n' + e.message + '\n\nCheck console (F12) for details');
                                                                                 } finally {
                                                                                     setScanning(false);
                                                                                 }
