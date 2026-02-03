@@ -37,6 +37,8 @@ export default function CB51() {
                 const [editingOffer, setEditingOffer] = useState(null);
                 const [editForm, setEditForm] = useState({});
                 const [scannedOffer, setScannedOffer] = useState(null);
+                const [editingScanned, setEditingScanned] = useState(false);
+                const [scannedEditForm, setScannedEditForm] = useState({});
                 const queryClient = useQueryClient();
 
           useEffect(() => {
@@ -366,20 +368,84 @@ export default function CB51() {
                                             </div>
                                         </div>
 
-                                        <div className="bg-black/60 border border-cyan-500/30 rounded-lg p-3 mb-4 space-y-2">
-                                            <p className="text-white font-black text-base">{scannedOffer.venue || 'Venue TBC'}</p>
-                                            <div className="flex items-center gap-2 text-sm">
-                                                <span className="text-cyan-400 font-mono text-xs">{scannedOffer.date || 'Date TBC'}</span>
-                                                <span className="text-gray-500">•</span>
-                                                <span className="text-green-400 font-black font-mono text-xs">{scannedOffer.currency || 'GBP'}{scannedOffer.fee || '?'}</span>
+                                        {editingScanned ? (
+                                            <div className="bg-black/60 border border-cyan-500/30 rounded-lg p-3 mb-4 space-y-2">
+                                                <Input 
+                                                    placeholder="Venue" 
+                                                    value={scannedEditForm.venue || ''} 
+                                                    onChange={(e) => setScannedEditForm({...scannedEditForm, venue: e.target.value})}
+                                                    className="bg-black border-cyan-500/30 text-white text-xs"
+                                                />
+                                                <div className="flex gap-2">
+                                                    <Input 
+                                                        type="date" 
+                                                        value={scannedEditForm.date || ''} 
+                                                        onChange={(e) => setScannedEditForm({...scannedEditForm, date: e.target.value})}
+                                                        className="bg-black border-cyan-500/30 text-white text-xs"
+                                                    />
+                                                    <Input 
+                                                        type="number" 
+                                                        placeholder="Fee" 
+                                                        value={scannedEditForm.fee || ''} 
+                                                        onChange={(e) => setScannedEditForm({...scannedEditForm, fee: e.target.value})}
+                                                        className="bg-black border-cyan-500/30 text-white text-xs"
+                                                    />
+                                                </div>
+                                                <Input 
+                                                    placeholder="City" 
+                                                    value={scannedEditForm.city || ''} 
+                                                    onChange={(e) => setScannedEditForm({...scannedEditForm, city: e.target.value})}
+                                                    className="bg-black border-cyan-500/30 text-white text-xs"
+                                                />
+                                                <Input 
+                                                    placeholder="Promoter" 
+                                                    value={scannedEditForm.promoter || ''} 
+                                                    onChange={(e) => setScannedEditForm({...scannedEditForm, promoter: e.target.value})}
+                                                    className="bg-black border-cyan-500/30 text-white text-xs"
+                                                />
+                                                <button
+                                                    onClick={() => {
+                                                        setScannedOffer({...scannedOffer, ...scannedEditForm});
+                                                        setEditingScanned(false);
+                                                    }}
+                                                    className="w-full bg-cyan-500 hover:bg-cyan-600 text-black font-bold py-1.5 rounded text-xs"
+                                                >
+                                                    SAVE CHANGES
+                                                </button>
                                             </div>
-                                            {scannedOffer.city && (
-                                                <p className="text-gray-400 text-xs font-mono">📍 {scannedOffer.city}</p>
-                                            )}
-                                            {scannedOffer.promoter && (
-                                                <p className="text-gray-400 text-xs font-mono">👤 {scannedOffer.promoter}</p>
-                                            )}
-                                        </div>
+                                        ) : (
+                                            <div className="bg-black/60 border border-cyan-500/30 rounded-lg p-3 mb-4 space-y-2">
+                                                <div className="flex items-start justify-between">
+                                                    <p className="text-white font-black text-base flex-1">{scannedOffer.venue || 'Venue TBC'}</p>
+                                                    <button
+                                                        onClick={() => {
+                                                            setScannedEditForm({
+                                                                venue: scannedOffer.venue || '',
+                                                                date: scannedOffer.date || '',
+                                                                fee: scannedOffer.fee || '',
+                                                                city: scannedOffer.city || '',
+                                                                promoter: scannedOffer.promoter || ''
+                                                            });
+                                                            setEditingScanned(true);
+                                                        }}
+                                                        className="text-cyan-400 hover:text-cyan-300 text-xs font-mono font-bold ml-2"
+                                                    >
+                                                        ✎ FIX
+                                                    </button>
+                                                </div>
+                                                <div className="flex items-center gap-2 text-sm">
+                                                    <span className="text-cyan-400 font-mono text-xs">{scannedOffer.date || 'Date TBC'}</span>
+                                                    <span className="text-gray-500">•</span>
+                                                    <span className="text-green-400 font-black font-mono text-xs">{scannedOffer.currency || 'GBP'}{scannedOffer.fee || '?'}</span>
+                                                </div>
+                                                {scannedOffer.city && (
+                                                    <p className="text-gray-400 text-xs font-mono">📍 {scannedOffer.city}</p>
+                                                )}
+                                                {scannedOffer.promoter && (
+                                                    <p className="text-gray-400 text-xs font-mono">👤 {scannedOffer.promoter}</p>
+                                                )}
+                                            </div>
+                                        )}
 
                                         <div className="flex gap-2">
                                             <button
