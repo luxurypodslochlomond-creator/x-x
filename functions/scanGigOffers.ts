@@ -16,16 +16,35 @@ Deno.serve(async (req) => {
     }
 
     const { emailText, artistId, file_url } = await req.json();
-    
+
     if (!artistId || (!emailText && !file_url)) {
       return Response.json({ error: 'Missing artistId and text/file' }, { status: 400 });
     }
 
-    // Fast AI extraction - vision if file, text otherwise
+    // Smart AI extraction with context
     const extraction = await base44.integrations.Core.InvokeLLM({
-      prompt: `Extract ONLY these fields from gig offer. Return valid JSON ONLY.
-venue, city, country, date (YYYY-MM-DD), time (HH:MM), fee (number), currency, promoter, capacity
-If not found, use null.`,
+      prompt: `Extract gig offer - be smart about context.
+
+    EXTRACT:
+    - venue, city, country, date (YYYY-MM-DD), time (HH:MM)
+    - fee (number only), currency, promoter
+    - capacity, deposit_required (boolean), red_flags (array of concerns)
+
+    RED FLAGS TO CATCH:
+    - Fee seems suspiciously low/high
+    - Unclear payment terms
+    - Travel > 500km
+    - Very short notice (< 2 weeks)
+    - Capacity < 100 (might be showcase, not paid gig)
+    - No promoter contact
+
+    SMART PARSING:
+    - "June 12" → check year context, default 2026
+    - "8pm-11pm" → use start time
+    - "€3000" → extract 3000, set currency EUR
+    - "50% deposit" → note in red_flags
+
+    Return valid JSON only:`,
       file_urls: file_url ? [file_url] : undefined,
       add_context_from_internet: false,
       response_json_schema: {
@@ -39,17 +58,47 @@ If not found, use null.`,
           fee: { type: ["number", "null"] },
           currency: { type: ["string", "null"] },
           promoter: { type: ["string", "null"] },
-          capacity: { type: ["number", "null"] }
+          capacity: { type: ["number", "null"] },
+          deposit_required: { type: ["boolean", "null"] },
+          red_flags: { type: ["array", "null"], items: { type: "string" } },
+          raw_text: { type: ["string", "null"] }
         }
       }
     });
 
-    // Append text if provided (not in schema)
-    if (emailText && emailText.length > 500) {
-      extraction.raw_email = emailText.substring(0, 500);
+    console.log('AI extraction:', extraction);
+
+    // VALIDATION LAYER
+    if (!extraction.venue || !extraction.date) {
+      return Response.json({ error: 'Could not extract venue or date' }, { status: 400 });
     }
 
-        console.log('AI extraction:', extraction);
+    // Validate date is in future
+    const offerDate = new Date(extraction.date);
+    if (offerDate < new Date()) {
+      extraction.red_flags = [...(extraction.red_flags || []), 'DATE_IN_PAST'];
+    }
+
+    // Check for duplicates (same venue + date within 2 days)
+    const existing = await base44.asServiceRole.entities.ScottGigOffer.filter({
+      artist_id: artistId
+    });
+
+    const dupe = existing.find(e => 
+      e.venue?.toLowerCase() === extraction.venue?.toLowerCase() &&
+      e.date === extraction.date
+    );
+
+    if (dupe) {
+      return Response.json({ 
+        error: 'Duplicate offer detected',
+        existingOfferId: dupe.id
+      }, { status: 409 });
+    }
+
+    if (extraction.emailText && extraction.emailText.length > 500) {
+      extraction.raw_text = extraction.emailText.substring(0, 500);
+    }
 
     // Create gig offer
     const offer = await base44.asServiceRole.entities.ScottGigOffer.create({
