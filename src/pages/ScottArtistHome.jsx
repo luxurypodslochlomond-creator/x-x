@@ -142,21 +142,41 @@ export default function ScottArtistHome() {
                 })}
             </div>
 
-            <div className="bg-black border border-cyan-500/20 rounded-lg p-2 mb-3">
-                <button onClick={() => setCalendarExpanded(!calendarExpanded)} className="w-full flex items-center justify-between p-1">
-                    <div className="flex items-center gap-2">
-                        <Calendar className="w-4 h-4 text-cyan-400" />
-                        <h2 className="text-cyan-400 font-black text-xs font-mono">CALENDAR</h2>
+            <div className="bg-black border-2 border-cyan-500 rounded-lg p-3 mb-3">
+                <div className="flex items-center gap-2 mb-3">
+                    <Calendar className="w-5 h-5 text-cyan-400" />
+                    <h2 className="text-cyan-400 font-black text-sm font-mono">UPCOMING GIGS</h2>
+                </div>
+                {events.filter(e => e.date && new Date(e.date) >= new Date()).length > 0 ? (
+                    <div className="space-y-2 mb-3">
+                        {events
+                            .filter(e => e.date && new Date(e.date) >= new Date())
+                            .sort((a, b) => new Date(a.date) - new Date(b.date))
+                            .slice(0, 3)
+                            .map(event => (
+                                <div key={event.id} className="bg-black/60 border border-cyan-500/30 rounded p-2">
+                                    <p className="text-white font-bold text-xs">{event.venue || event.title}</p>
+                                    <div className="flex items-center gap-2 text-[10px] mt-1">
+                                        <span className="text-cyan-400 font-mono">{event.date}</span>
+                                        {event.fee && (
+                                            <>
+                                                <span className="text-gray-600">•</span>
+                                                <span className="text-green-400 font-bold">{event.currency || 'GBP'}{event.fee}</span>
+                                            </>
+                                        )}
+                                    </div>
+                                    {event.city && <p className="text-gray-500 text-[9px] mt-1">{event.city}</p>}
+                                </div>
+                            ))}
                     </div>
-                    <div className="text-cyan-400">{calendarExpanded ? '−' : '+'}</div>
-                </button>
-                {calendarExpanded && (
-                    <div className="pt-2">
-                        <Link to={createPageUrl(`ScottCalendarView?id=${artistId}`)}>
-                            <button className="w-full text-[9px] font-bold font-mono text-cyan-400 hover:text-cyan-300">+ ADD EVENT</button>
-                        </Link>
-                    </div>
+                ) : (
+                    <p className="text-gray-600 text-xs text-center py-2">No upcoming gigs</p>
                 )}
+                <Link to={createPageUrl(`ScottCalendarView?id=${artistId}`)}>
+                    <button className="w-full bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-400 text-xs font-bold font-mono py-2 rounded border border-cyan-500/50">
+                        VIEW CALENDAR
+                    </button>
+                </Link>
             </div>
 
             <div className="bg-black border-2 border-green-500 rounded-lg p-3 mb-3">
