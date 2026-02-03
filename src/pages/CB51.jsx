@@ -220,11 +220,40 @@ export default function CB51() {
                                                                         <input 
                                                                             type="file" 
                                                                             accept=".pdf,.jpg,.jpeg,.png"
-                                                                            onChange={(e) => {
+                                                                            onChange={async (e) => {
                                                                                 const file = e.target.files?.[0];
-                                                                                if (file) {
-                                                                                    // Handle file upload
-                                                                                    alert('File upload coming soon');
+                                                                                if (!file) return;
+
+                                                                                setScanning(true);
+                                                                                try {
+                                                                                    // Upload file
+                                                                                    const { file_url } = await base44.integrations.Core.UploadFile({ file });
+
+                                                                                    // Extract text from image/PDF using AI
+                                                                                    const extractedText = await base44.integrations.Core.InvokeLLM({
+                                                                                        prompt: "Extract all text from this image/document. Include everything - dates, names, fees, locations, emails, phone numbers.",
+                                                                                        file_urls: [file_url]
+                                                                                    });
+
+                                                                                    // Set extracted text into textarea
+                                                                                    setPastedText(extractedText);
+
+                                                                                    // Auto-scan it
+                                                                                    await base44.functions.invoke('scanGigOffers', { 
+                                                                                        emailText: extractedText, 
+                                                                                        artistId: artists[0]?.id 
+                                                                                    });
+
+                                                                                    queryClient.invalidateQueries({ queryKey: ['scottAllGigOffers'] });
+                                                                                    queryClient.invalidateQueries({ queryKey: ['scottInvoices'] });
+
+                                                                                    setPastedText('');
+                                                                                    setPasteModalOpen(false);
+                                                                                    alert('✅ Scanned!');
+                                                                                } catch (e) {
+                                                                                    alert('Error: ' + e.message);
+                                                                                } finally {
+                                                                                    setScanning(false);
                                                                                 }
                                                                             }}
                                                                             className="hidden" 
