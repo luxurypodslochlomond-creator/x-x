@@ -265,26 +265,27 @@ export default function CB51() {
                                                                                         artistId: artists[0]?.id 
                                                                                     });
 
-                                                                                    // Refresh offers and wait for it
-                                                                                    await queryClient.invalidateQueries({ queryKey: ['scottAllGigOffers'] });
+                                                                                    const offer = result.data?.offer;
 
-                                                                                    // Close modal
+                                                                                    // Close modal first
                                                                                     setPastedText('');
                                                                                     setPasteModalOpen(false);
+                                                                                    setScanning(false);
+
+                                                                                    // Show success
+                                                                                    alert(`✅ GIG SCANNED!\n\n${offer?.venue || 'Venue TBC'}\n${offer?.date || 'Date TBC'}\n${offer?.currency || 'GBP'}${offer?.fee || '0'}\n\n↓ Check below for YES/NO`);
                                                                                     
-                                                                                    // Show success and scroll to pending section
-                                                                                    const offer = result.data?.offer;
-                                                                                    alert(`✅ GIG SCANNED!\n\n${offer?.venue || 'Venue TBC'}\n${offer?.date || 'Date TBC'}\n${offer?.currency || 'GBP'}${offer?.fee || '0'}\n\nScroll down to approve/reject`);
+                                                                                    // Refresh data and scroll
+                                                                                    await queryClient.refetchQueries({ queryKey: ['scottAllGigOffers'] });
                                                                                     
-                                                                                    // Scroll to pending approvals
                                                                                     setTimeout(() => {
-                                                                                        document.getElementById('pending-approvals')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                                                                                    }, 300);
+                                                                                        document.getElementById('pending-approvals')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                                                                    }, 100);
                                                                                 } catch (e) {
                                                                                     console.error('Scan error:', e);
-                                                                                    alert('Scan failed: ' + e.message);
-                                                                                } finally {
+                                                                                    alert('❌ SCAN FAILED\n\n' + e.message);
                                                                                     setScanning(false);
+                                                                                    setPasteModalOpen(false);
                                                                                 }
                                                                             }}
                                                                             className="hidden" 
