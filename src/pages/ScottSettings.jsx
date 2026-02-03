@@ -192,12 +192,10 @@ export default function ScottSettings() {
                     {!pwaInstalled ? (
                         <button
                             onClick={() => {
-                                if (window.deferredPrompt) {
-                                    window.deferredPrompt.prompt();
-                                } else if (navigator.userAgent.includes('iPhone')) {
-                                    alert('📱 Tap Share → Add to Home Screen in Safari');
+                                if (navigator.userAgent.includes('iPhone')) {
+                                    alert('Open Safari and tap Share → Add to Home Screen');
                                 } else if (navigator.userAgent.includes('Android')) {
-                                    alert('🤖 Tap menu (⋮) → Install app');
+                                    alert('Tap menu button (three dots) → Install app');
                                 }
                             }}
                             className="w-full border-3 border-amber-500/60 rounded-xl p-8 bg-amber-900/20 hover:bg-amber-900/30 transition-all active:scale-95"
@@ -205,10 +203,10 @@ export default function ScottSettings() {
                             <div className="flex items-start gap-4">
                                 <Download className="w-7 h-7 text-amber-400 flex-shrink-0 mt-0.5" />
                                 <div className="flex-1 text-left">
-                                    <p className="font-black text-amber-300 text-lg mb-2">Step 1: Add CB51 to Home Screen</p>
+                                    <p className="font-black text-amber-300 text-lg mb-2">Add CB51 to Home Screen First</p>
                                     <div className="space-y-3 text-sm text-amber-200">
-                                        <p className="font-mono bg-black/40 p-3 rounded text-amber-100">🍎 Safari → Share → Add to Home Screen</p>
-                                        <p className="font-mono bg-black/40 p-3 rounded text-amber-100">🤖 Menu (⋮) → Install app</p>
+                                        <p className="font-mono bg-black/40 p-3 rounded text-amber-100">iPhone: Safari — Share — Add to Home Screen</p>
+                                        <p className="font-mono bg-black/40 p-3 rounded text-amber-100">Android: Menu — Install app</p>
                                     </div>
                                 </div>
                             </div>
@@ -218,16 +216,10 @@ export default function ScottSettings() {
                             <div className="flex items-center gap-4">
                                 <CheckCircle className="w-7 h-7 text-green-400 flex-shrink-0" />
                                 <div className="flex-1 text-left">
-                                    <p className="font-black text-green-300 text-lg">✓ PWA Installed</p>
-                                    <p className="text-base text-green-200">Ready for notifications</p>
+                                    <p className="font-black text-green-300 text-lg">CB51 Installed</p>
+                                    <p className="text-base text-green-200">Now enable notifications below</p>
                                 </div>
                             </div>
-                        </div>
-                    )}
-
-                    {pwaInstalled && !pushEnabled && (
-                        <div className="text-center">
-                            <p className="text-gray-400 text-sm font-mono mb-4">Step 2: Turn on notifications</p>
                         </div>
                     )}
 
@@ -241,13 +233,13 @@ export default function ScottSettings() {
                                     : 'bg-cyan-500 hover:bg-cyan-600 text-black'
                             } disabled:opacity-60 disabled:cursor-not-allowed`}
                         >
-                            {notificationsLoading ? '⏳ Setting up...' : pushEnabled ? '❌ Disable Notifications' : '✓ Enable Notifications'}
+                            {notificationsLoading ? 'Setting up...' : pushEnabled ? 'Disable Notifications' : 'Enable Notifications'}
                         </button>
                     )}
 
                     {pushEnabled && (
                         <div className="bg-green-900/20 border-2 border-green-500/50 rounded-xl p-6">
-                            <p className="text-base text-green-300 font-mono text-center">✓ Active — you're set!</p>
+                            <p className="text-base text-green-300 font-mono text-center">Active — notifications enabled</p>
                         </div>
                     )}
                 </div>
