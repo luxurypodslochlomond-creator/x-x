@@ -72,7 +72,12 @@ Deno.serve(async (req) => {
 
     for (const sub of subscriptions) {
       try {
-        await webpush.sendNotification(sub.subscription_data, pushPayload);
+        // Parse subscription_data if it's a string
+        const subscriptionObj = typeof sub.subscription_data === 'string' 
+          ? JSON.parse(sub.subscription_data) 
+          : sub.subscription_data;
+        
+        await webpush.sendNotification(subscriptionObj, pushPayload);
         sentCount++;
       } catch (error) {
         console.error(`Failed to send to subscription ${sub.id}:`, error);
