@@ -242,8 +242,8 @@ export default function CB51() {
                                                                     />
                                                                     <label className="block mb-3 cursor-pointer">
                                                                         <div className="bg-black/50 border-2 border-dashed border-cyan-500/30 hover:border-cyan-500/50 rounded-lg p-4 text-center transition-all">
-                                                                            <p className="text-cyan-400 text-xs font-mono">📄 Upload PDF/Screenshot</p>
-                                                                            <p className="text-gray-600 text-[9px] font-mono mt-1">Instant extraction</p>
+                                                                            <p className="text-cyan-400 text-xs font-mono">📄 {scanning ? 'SCANNING...' : 'Upload PDF/Screenshot'}</p>
+                                                                            <p className="text-gray-600 text-[9px] font-mono mt-1">{scanning ? 'AI51 reading document...' : 'Instant extraction'}</p>
                                                                         </div>
                                                                         <input 
                                                                             type="file" 
@@ -264,16 +264,21 @@ export default function CB51() {
                                                                                         artistId: artists[0]?.id 
                                                                                     });
 
-                                                                                    // Refresh offers
-                                                                                    queryClient.invalidateQueries({ queryKey: ['scottAllGigOffers'] });
+                                                                                    // Refresh offers and wait for it
+                                                                                    await queryClient.invalidateQueries({ queryKey: ['scottAllGigOffers'] });
 
                                                                                     // Close modal
                                                                                     setPastedText('');
                                                                                     setPasteModalOpen(false);
                                                                                     
-                                                                                    // Show success
+                                                                                    // Show success and scroll to pending section
                                                                                     const offer = result.data?.offer;
-                                                                                    alert(`✅ GIG SCANNED!\n\n${offer?.venue || 'Venue TBC'}\n${offer?.date || 'Date TBC'}\n${offer?.currency || 'GBP'}${offer?.fee || '0'}\n\n→ Check PENDING APPROVALS below`);
+                                                                                    alert(`✅ GIG SCANNED!\n\n${offer?.venue || 'Venue TBC'}\n${offer?.date || 'Date TBC'}\n${offer?.currency || 'GBP'}${offer?.fee || '0'}\n\nScroll down to approve/reject`);
+                                                                                    
+                                                                                    // Scroll to pending approvals
+                                                                                    setTimeout(() => {
+                                                                                        document.getElementById('pending-approvals')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                                                                    }, 300);
                                                                                 } catch (e) {
                                                                                     console.error('Scan error:', e);
                                                                                     alert('Scan failed: ' + e.message);
@@ -319,13 +324,15 @@ export default function CB51() {
                                         <CB51BandVoteAlert userEmail={user.email} />
                                     )}
 
-                    {/* PENDING APPROVALS - PRIORITY */}
-                                    {stats.pendingOffers > 0 && (
-                                        <div className="mb-6 bg-black border-2 border-cyan-500 rounded-lg p-4">
-                                            <h2 className="text-cyan-400 font-black font-mono text-sm mb-3 flex items-center gap-2">
-                                                <AlertCircle className="w-4 h-4" />
-                                                PENDING APPROVALS ({stats.pendingOffers})
-                                            </h2>
+                    {/* PENDING APPROVALS - ALWAYS VISIBLE */}
+                                    <div id="pending-approvals" className="mb-6 bg-black border-2 border-cyan-500 rounded-lg p-4">
+                                        <h2 className="text-cyan-400 font-black font-mono text-sm mb-3 flex items-center gap-2">
+                                            <AlertCircle className="w-4 h-4" />
+                                            PENDING APPROVALS {stats.pendingOffers > 0 && `(${stats.pendingOffers})`}
+                                        </h2>
+                                        {stats.pendingOffers > 0 ? (
+                                            <>
+                                            <div className="space-y-3">
                                             <div className="space-y-3">
                                                 {allOffers
                                                     .filter(o => o.status === 'pending_manager_review')
@@ -438,14 +445,19 @@ export default function CB51() {
                                                             )}
                                                         </div>
                                                     ))}
-                                            </div>
-                                            {stats.pendingOffers > 3 && (
-                                                <Link to={createPageUrl('ScottGigOffers')} className="text-cyan-400 hover:text-cyan-300 text-[10px] font-mono font-bold mt-2 block">
+                                                    </div>
+                                                    {stats.pendingOffers > 3 && (
+                                                    <Link to={createPageUrl('ScottGigOffers')} className="text-cyan-400 hover:text-cyan-300 text-[10px] font-mono font-bold mt-2 block">
                                                     See all ({stats.pendingOffers}) →
-                                                </Link>
-                                            )}
-                                        </div>
-                                    )}
+                                                    </Link>
+                                                    )}
+                                                    </>
+                                                    ) : (
+                                                    <p className="text-gray-500 text-xs font-mono text-center py-3">
+                                                    No pending gigs - upload a PDF above to scan ↑
+                                                    </p>
+                                                    )}
+                                                    </div>
 
                                     {/* BAND MEMBER NOTIFICATIONS */}
                                     {user && user.role !== 'admin' && (
