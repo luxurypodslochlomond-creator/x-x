@@ -30,9 +30,10 @@ export default function PushNotificationManager({ onSubscriptionChange }) {
       return;
     }
 
+    // Just check support, DON'T init yet - wait for user click
     if (supported) {
-      initializePushNotifications();
       startNotificationListener();
+      setIsLoading(false);
     } else {
       setIsLoading(false);
     }
