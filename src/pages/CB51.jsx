@@ -943,40 +943,35 @@ export default function CB51() {
                             )}
 
                             {/* CALENDAR */}
-                            <div className="bg-black border border-cyan-500/30 rounded-lg overflow-hidden">
-                                <button
-                                    onClick={() => setExpandedTool(expandedTool === 'calendar' ? null : 'calendar')}
-                                    className="w-full p-3 flex items-center justify-between hover:bg-cyan-500/10 transition-all"
+                            <CB51NavBio
+                              icon={Calendar}
+                              title="CALENDAR"
+                              shortBio="All events & gigs at a glance"
+                              fullBio="Full event calendar with gigs, rehearsals, studio time, and band meetings. Syncs with Google Calendar. Drag to reschedule. Auto-populated from approved gig offers."
+                              onClick={() => setExpandedTool(expandedTool === 'calendar' ? null : 'calendar')}
+                            />
+                            {expandedTool === 'calendar' && (
+                                <motion.div
+                                    initial={{ height: 0, opacity: 0 }}
+                                    animate={{ height: 'auto', opacity: 1 }}
+                                    exit={{ height: 0, opacity: 0 }}
+                                    className="ml-4 border-l border-cyan-500/30 pl-3 space-y-2"
                                 >
-                                    <div className="flex items-center gap-2">
-                                        <Calendar className="w-4 h-4 text-cyan-400" />
-                                        <span className="font-mono text-xs text-cyan-400 font-bold">CALENDAR</span>
-                                    </div>
-                                    <span className="text-cyan-400 text-xs">{expandedTool === 'calendar' ? '−' : '+'}</span>
-                                </button>
-                                {expandedTool === 'calendar' && (
-                                    <motion.div
-                                        initial={{ height: 0, opacity: 0 }}
-                                        animate={{ height: 'auto', opacity: 1 }}
-                                        exit={{ height: 0, opacity: 0 }}
-                                        className="border-t border-cyan-500/30 p-3 space-y-2"
-                                    >
-                                        {events.slice(0, 3).map(event => (
-                                            <button
-                                                key={event.id}
-                                                onClick={() => navigate(createPageUrl('ScottCalendarView') + (artists[0]?.id ? `?id=${artists[0].id}` : ''))}
-                                                className="w-full bg-black/60 border border-cyan-500/20 rounded p-2 hover:border-cyan-500/50 hover:bg-black/40 transition-all text-left"
-                                            >
-                                                <p className="text-white text-xs font-bold">{event.title}</p>
-                                                <p className="text-gray-500 text-[9px] font-mono">{event.date || 'TBD'}</p>
-                                            </button>
-                                        ))}
-                                        <Link to={createPageUrl('ScottCalendarView')} className="text-cyan-400 hover:text-cyan-300 text-[9px] font-mono font-bold block text-center pt-1">
-                                            See all →
-                                        </Link>
-                                    </motion.div>
-                                )}
-                            </div>
+                                    {events.slice(0, 3).map(event => (
+                                        <button
+                                            key={event.id}
+                                            onClick={() => navigate(createPageUrl('ScottCalendarView') + (artists[0]?.id ? `?id=${artists[0].id}` : ''))}
+                                            className="w-full bg-black/60 border border-cyan-500/20 rounded p-2 hover:border-cyan-500/50 hover:bg-black/40 transition-all text-left"
+                                        >
+                                            <p className="text-white text-xs font-bold">{event.title}</p>
+                                            <p className="text-gray-500 text-[9px] font-mono">{event.date || 'TBD'}</p>
+                                        </button>
+                                    ))}
+                                    <Link to={createPageUrl('ScottCalendarView')} className="text-cyan-400 hover:text-cyan-300 text-[9px] font-mono font-bold block text-center pt-1">
+                                        See all →
+                                    </Link>
+                                </motion.div>
+                            )}
 
                             {/* TASKS */}
                             <div className="bg-black border border-cyan-500/30 rounded-lg overflow-hidden">
