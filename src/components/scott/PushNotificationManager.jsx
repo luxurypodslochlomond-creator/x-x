@@ -118,19 +118,24 @@ export default function PushNotificationManager({ onSubscriptionChange }) {
       // Step 1: Browser permission
       const permission = await Notification.requestPermission();
       if (permission !== 'granted') {
-        alert('Need notification permission for gig alerts - check browser settings');
         setIsLoading(false);
         return;
       }
 
-      // Step 2: Get VAPID keys (auto-generates if needed)
+      // Step 2: Register service worker if not already
+      if (!navigator.serviceWorker.controller) {
+        const swPath = import.meta.env.VITE_API_URL 
+          ? `${import.meta.env.VITE_API_URL}/serveServiceWorker`
+          : '/api/serveServiceWorker';
+        await navigator.serviceWorker.register(swPath, { scope: '/' });
+      }
+
+      // Step 3: Get VAPID keys
       const keysResponse = await base44.functions.invoke('generateVapidKeys', {});
       const vapidPublicKey = keysResponse.data.publicKey;
 
-      // Step 3: Service worker ready
+      // Step 4: Service worker ready + subscribe
       const registration = await navigator.serviceWorker.ready;
-
-      // Step 4: Subscribe to push
       const subscription = await registration.pushManager.subscribe({
         userVisibleOnly: true,
         applicationServerKey: urlBase64ToUint8Array(vapidPublicKey),
@@ -146,29 +151,15 @@ export default function PushNotificationManager({ onSubscriptionChange }) {
       setIsSubscribed(true);
       onSubscriptionChange?.(subscription);
       
-      // Test notification
-      await registration.showNotification('CB51 Notifications ✓', {
-        body: 'You\'ll get gig alerts now',
+      // Success notification
+      await registration.showNotification('✓ Ready for gig alerts', {
+        body: 'You\'ll get notified when team decisions are needed',
         icon: '/icon-192x192.png',
         badge: '/icon-192x192.png',
         tag: 'cb51-welcome',
       });
-      
-      alert('✓ Notifications enabled!');
     } catch (error) {
-      console.error('Notification setup error:', error);
-      
-      // Smart error messages
-      let message = 'Could not enable notifications';
-      if (error.message?.includes('subscription')) {
-        message = 'Browser blocked push notifications - check settings';
-      } else if (error.message?.includes('service worker')) {
-        message = 'Service worker issue - try refreshing page';
-      } else if (error.message?.includes('VAPID')) {
-        message = 'Server configuration issue - contact admin';
-      }
-      
-      alert(`❌ ${message}\n\nError: ${error.message}`);
+      console.error('Setup:', error);
     } finally {
       setIsLoading(false);
     }
