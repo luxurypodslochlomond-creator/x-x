@@ -17,50 +17,72 @@ Deno.serve(async (req) => {
 
     const { emailText, artistId } = await req.json();
     
-    // AI extracts gig offer details from email text
-    const prompt = `You are scanning an email for a gig/booking offer.
-    
-Extract these details if present:
-- Artist/Band name
-- Venue name
-- Full location (city, county/state, country)
-- Date and time
-- Fee/payment amount
-- Capacity
-- Promoter name and contact
-- Deposit info
-- Is this part of a tour? Any other dates mentioned?
-- Distance to next show (if tour)
-- Any special requirements or notes
-- Contact email/phone for confirmation
+    // World-class AI extraction - detailed prompt for perfect accuracy
+    const prompt = `You are a professional tour manager's assistant extracting gig offer details.
 
-Return JSON with these fields:
-{
-  "artist": "string",
-  "venue": "string", 
-  "city": "string",
-  "county": "string",
-  "country": "string",
-  "date": "YYYY-MM-DD",
-  "time": "HH:MM",
-  "fee": "number",
-  "currency": "GBP/USD/EUR",
-  "capacity": "number",
-  "promoter": "string",
-  "promoter_contact": "string",
-  "deposit_required": "boolean",
-  "deposit_amount": "number",
-  "is_tour": "boolean",
-  "tour_dates": ["array of dates"],
-  "distance_to_next": "string",
-  "requirements": "string",
-  "notes": "string",
-  "raw_email": "full email text"
-}
+    CRITICAL: Be thorough and accurate. This is going into a calendar and contracts.
 
-If field not found, use null.
+    Extract from this document:
 
-Email text: ${emailText}`;
+    ESSENTIAL:
+    - Artist/Band name (who is performing?)
+    - Venue name (exact name, don't abbreviate)
+    - City (e.g., "Palma", "London", "Glasgow")
+    - County/Region (e.g., "Mallorca", "Greater London", "Scotland")
+    - Country (full name: "Spain", "United Kingdom", etc.)
+    - Date (YYYY-MM-DD format - convert any date format to this)
+    - Show time (HH:MM format in 24h, e.g., "20:00" for 8pm)
+    - Fee (just the number, no currency symbol)
+    - Currency (GBP/USD/EUR/JPY/KRW/AUD/CAD)
+
+    IMPORTANT DETAILS:
+    - Venue capacity (how many people?)
+    - Promoter name (who is offering the gig?)
+    - Promoter email and phone
+    - Deposit required? (yes/no)
+    - Deposit amount if mentioned
+
+    TOUR INFO:
+    - Is this part of a tour? (multiple dates mentioned?)
+    - All tour dates as array
+    - Distance/travel time to next show
+
+    TECHNICAL/RIDER:
+    - Stage size, backline, sound requirements
+    - Accommodation included?
+    - Food/hospitality details
+    - Load-in time
+
+    NOTES:
+    - Any special requirements
+    - Unusual terms
+    - Red flags or concerns
+
+    Return JSON:
+    {
+    "artist": "string or null",
+    "venue": "string or null", 
+    "city": "string or null",
+    "county": "string or null",
+    "country": "string or null",
+    "date": "YYYY-MM-DD or null",
+    "time": "HH:MM or null",
+    "fee": number or null,
+    "currency": "GBP/USD/EUR/etc or null",
+    "capacity": number or null,
+    "promoter": "string or null",
+    "promoter_contact": "string or null",
+    "deposit_required": boolean or null,
+    "deposit_amount": number or null,
+    "is_tour": boolean or null,
+    "tour_dates": ["YYYY-MM-DD"] or null,
+    "distance_to_next": "string or null",
+    "requirements": "string or null",
+    "notes": "string or null"
+    }
+
+    Document text:
+    ${emailText}`;
 
     const extraction = await base44.integrations.Core.InvokeLLM({
       prompt,
