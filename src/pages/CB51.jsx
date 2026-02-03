@@ -242,11 +242,13 @@ export default function CB51() {
                                                                     />
                                                                     <label className="block mb-3 cursor-pointer">
                                                                         <div className="bg-black/50 border-2 border-dashed border-cyan-500/30 hover:border-cyan-500/50 rounded-lg p-4 text-center transition-all">
-                                                                            <p className="text-cyan-400 text-xs font-mono">or upload PDF/image</p>
+                                                                            <p className="text-cyan-400 text-xs font-mono">📄 Upload PDF/Screenshot</p>
+                                                                            <p className="text-gray-600 text-[9px] font-mono mt-1">Instant extraction</p>
                                                                         </div>
                                                                         <input 
                                                                             type="file" 
                                                                             accept=".pdf,.jpg,.jpeg,.png"
+                                                                            disabled={scanning}
                                                                             onChange={async (e) => {
                                                                                 const file = e.target.files?.[0];
                                                                                 if (!file) return;
@@ -254,38 +256,27 @@ export default function CB51() {
                                                                                 setScanning(true);
                                                                                 try {
                                                                                     // Upload file
-                                                                                    console.log('📄 Uploading PDF...');
                                                                                     const { file_url } = await base44.integrations.Core.UploadFile({ file });
-                                                                                    console.log('✓ Uploaded:', file_url);
 
-                                                                                    // Extract text from image/PDF using AI
-                                                                                    console.log('🤖 AI51 extracting text from PDF...');
-                                                                                    const extractedText = await base44.integrations.Core.InvokeLLM({
-                                                                                        prompt: "Extract all text from this PDF document. Include EVERYTHING - artist name, venue name, dates, fees, city, country, promoter name, contact details, capacity, technical details. Keep original formatting and all details intact.",
-                                                                                        file_urls: [file_url]
-                                                                                    });
-                                                                                    console.log('✓ Extracted text:', extractedText.substring(0, 200) + '...');
-
-                                                                                    // Set extracted text into textarea
-                                                                                    setPastedText(extractedText);
-
-                                                                                    // Auto-scan it
-                                                                                    console.log('🔍 Scanning for gig details...');
+                                                                                    // SINGLE AI call - extract + parse in one go
                                                                                     const result = await base44.functions.invoke('scanGigOffers', { 
-                                                                                        emailText: extractedText, 
+                                                                                        file_url,
                                                                                         artistId: artists[0]?.id 
                                                                                     });
-                                                                                    console.log('✓ Scan result:', result);
 
+                                                                                    // Refresh offers
                                                                                     queryClient.invalidateQueries({ queryKey: ['scottAllGigOffers'] });
-                                                                                    queryClient.invalidateQueries({ queryKey: ['scottInvoices'] });
 
+                                                                                    // Close modal
                                                                                     setPastedText('');
                                                                                     setPasteModalOpen(false);
-                                                                                    alert('✅ Scanned!\n\nVenue: ' + (result.data?.offer?.venue || 'Unknown') + '\nDate: ' + (result.data?.offer?.date || 'TBC'));
+                                                                                    
+                                                                                    // Show success
+                                                                                    const offer = result.data?.offer;
+                                                                                    alert(`✅ GIG SCANNED!\n\n${offer?.venue || 'Venue TBC'}\n${offer?.date || 'Date TBC'}\n${offer?.currency || 'GBP'}${offer?.fee || '0'}\n\n→ Check PENDING APPROVALS below`);
                                                                                 } catch (e) {
-                                                                                    console.error('❌ Scan error:', e);
-                                                                                    alert('❌ Scan failed:\n\n' + e.message + '\n\nCheck console (F12) for details');
+                                                                                    console.error('Scan error:', e);
+                                                                                    alert('Scan failed: ' + e.message);
                                                                                 } finally {
                                                                                     setScanning(false);
                                                                                 }
