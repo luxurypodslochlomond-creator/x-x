@@ -39,6 +39,7 @@ export default function CB51() {
                 const [scannedOffer, setScannedOffer] = useState(null);
                 const [editingScanned, setEditingScanned] = useState(false);
                 const [scannedEditForm, setScannedEditForm] = useState({});
+                const [processingYes, setProcessingYes] = useState(false);
                 const queryClient = useQueryClient();
 
           useEffect(() => {
@@ -463,68 +464,104 @@ export default function CB51() {
                                             </button>
                                             <button
                                                 onClick={async () => {
+                                                    setProcessingYes(true);
+
                                                     const offerId = allOffers.find(o => o.venue === scannedOffer.venue && o.status === 'pending_manager_review')?.id;
                                                     if (offerId) {
-                                                        // MYCELIUM SYNC: Approve and send to band
-                                                        await base44.entities.ScottGigOffer.update(offerId, { status: 'sent_to_band' });
+                                                        try {
+                                                            // OPTIMISTIC: Hide card immediately
+                                                            const offerData = {...scannedOffer};
+                                                            setScannedOffer(null);
 
-                                                        // Auto-create calendar event with scanned info
-                                                        await base44.entities.ScottEvent.create({
-                                                            artist_id: artists[0]?.id,
-                                                            title: scannedOffer.venue || 'Gig',
-                                                            date: scannedOffer.date,
-                                                            time: scannedOffer.time || '20:00',
-                                                            venue: scannedOffer.venue,
-                                                            city: scannedOffer.city,
-                                                            country: scannedOffer.country,
-                                                            fee: scannedOffer.fee,
-                                                            currency: scannedOffer.currency || 'GBP',
-                                                            promoter: scannedOffer.promoter,
-                                                            capacity: scannedOffer.capacity,
-                                                            event_type: 'live_show',
-                                                            notes: `Approved by manager - sent to band for vote`
-                                                        });
+                                                            // MYCELIUM SYNC: Approve and send to band
+                                                            await base44.entities.ScottGigOffer.update(offerId, { status: 'sent_to_band' });
 
-                                                        // MYCELIUM: Auto-create tasks if needed
-                                                        if (scannedOffer.date) {
-                                                            const gigDate = new Date(scannedOffer.date);
-                                                            const dayBefore = new Date(gigDate);
-                                                            dayBefore.setDate(dayBefore.getDate() - 1);
-
-                                                            await base44.entities.ScottTask.create({
+                                                            // Auto-create calendar event with scanned info
+                                                            await base44.entities.ScottEvent.create({
                                                                 artist_id: artists[0]?.id,
-                                                                title: `Travel to ${scannedOffer.city || scannedOffer.venue}`,
-                                                                due_date: dayBefore.toISOString().split('T')[0],
-                                                                status: 'pending',
-                                                                category: 'travel',
-                                                                notes: `Day before gig at ${scannedOffer.venue}`
+                                                                title: offerData.venue || 'Gig',
+                                                                date: offerData.date,
+                                                                time: offerData.time || '20:00',
+                                                                venue: offerData.venue,
+                                                                city: offerData.city,
+                                                                country: offerData.country,
+                                                                fee: offerData.fee,
+                                                                currency: offerData.currency || 'GBP',
+                                                                promoter: offerData.promoter,
+                                                                capacity: offerData.capacity,
+                                                                event_type: 'live_show',
+                                                                notes: `Approved by manager - sent to band for vote`
                                                             });
+
+                                                            // MYCELIUM: Auto-create tasks if needed
+                                                            if (offerData.date) {
+                                                                const gigDate = new Date(offerData.date);
+                                                                const dayBefore = new Date(gigDate);
+                                                                dayBefore.setDate(dayBefore.getDate() - 1);
+
+                                                                await base44.entities.ScottTask.create({
+                                                                    artist_id: artists[0]?.id,
+                                                                    title: `Travel to ${offerData.city || offerData.venue}`,
+                                                                    due_date: dayBefore.toISOString().split('T')[0],
+                                                                    status: 'pending',
+                                                                    category: 'travel',
+                                                                    notes: `Day before gig at ${offerData.venue}`
+                                                                });
+                                                            }
+
+                                                            if (offerData.fee && offerData.date) {
+                                                                const gigDate = new Date(offerData.date);
+                                                                const weekAfter = new Date(gigDate);
+                                                                weekAfter.setDate(weekAfter.getDate() + 7);
+
+                                                                await base44.entities.ScottTask.create({
+                                                                    artist_id: artists[0]?.id,
+                                                                    title: `Invoice ${offerData.promoter || offerData.venue}`,
+                                                                    due_date: weekAfter.toISOString().split('T')[0],
+                                                                    status: 'pending',
+                                                                    category: 'finance',
+                                                                    notes: `${offerData.currency || 'GBP'}${offerData.fee} for ${offerData.venue}`
+                                                                });
+                                                            }
+
+                                                            // Refresh data
+                                                            await Promise.all([
+                                                                queryClient.invalidateQueries({ queryKey: ['scottAllGigOffers'] }),
+                                                                queryClient.invalidateQueries({ queryKey: ['scottEvents'] }),
+                                                                queryClient.invalidateQueries({ queryKey: ['scottTasks'] })
+                                                            ]);
+
+                                                            // Success feedback
+                                                            const successDiv = document.createElement('div');
+                                                            successDiv.className = 'fixed top-20 left-1/2 -translate-x-1/2 bg-green-500 text-black font-black font-mono text-sm px-6 py-3 rounded-lg z-[200] shadow-2xl';
+                                                            successDiv.textContent = `✓ ${offerData.venue} → Calendar + Tasks`;
+                                                            document.body.appendChild(successDiv);
+                                                            setTimeout(() => successDiv.remove(), 3000);
+
+                                                        } catch (e) {
+                                                            console.error('Approval failed:', e);
+                                                            alert('Failed to approve - try again');
+                                                            setScannedOffer(offerData);
+                                                        } finally {
+                                                            setProcessingYes(false);
                                                         }
-
-                                                        if (scannedOffer.fee && scannedOffer.date) {
-                                                            const gigDate = new Date(scannedOffer.date);
-                                                            const weekAfter = new Date(gigDate);
-                                                            weekAfter.setDate(weekAfter.getDate() + 7);
-
-                                                            await base44.entities.ScottTask.create({
-                                                                artist_id: artists[0]?.id,
-                                                                title: `Invoice ${scannedOffer.promoter || scannedOffer.venue}`,
-                                                                due_date: weekAfter.toISOString().split('T')[0],
-                                                                status: 'pending',
-                                                                category: 'finance',
-                                                                notes: `${scannedOffer.currency || 'GBP'}${scannedOffer.fee} for ${scannedOffer.venue}`
-                                                            });
-                                                        }
-
-                                                        queryClient.invalidateQueries({ queryKey: ['scottAllGigOffers'] });
-                                                        queryClient.invalidateQueries({ queryKey: ['scottEvents'] });
-                                                        queryClient.invalidateQueries({ queryKey: ['scottTasks'] });
                                                     }
-                                                    setScannedOffer(null);
                                                 }}
-                                                className="flex-1 bg-green-900/40 hover:bg-green-900/60 border-2 border-green-500/50 hover:border-green-500 text-green-400 font-black py-2.5 rounded-lg font-mono text-sm"
+                                                disabled={processingYes}
+                                                className="flex-1 bg-green-900/40 hover:bg-green-900/60 border-2 border-green-500/50 hover:border-green-500 text-green-400 font-black py-2.5 rounded-lg font-mono text-sm disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-1.5"
                                             >
-                                                ✓ YES
+                                                {processingYes ? (
+                                                    <>
+                                                        <motion.div
+                                                            animate={{ rotate: 360 }}
+                                                            transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
+                                                            className="w-3 h-3 border-2 border-green-400 border-t-transparent rounded-full"
+                                                        />
+                                                        <span>SYNCING...</span>
+                                                    </>
+                                                ) : (
+                                                    '✓ YES'
+                                                )}
                                             </button>
                                         </div>
                                     </>
