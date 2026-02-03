@@ -82,71 +82,68 @@ export default function ScottToDo() {
                     <div className="text-center py-8 text-gray-600 font-mono">No tasks</div>
                 ) : (
                     pendingTasks.map(task => (
-                        <button key={task.id} onClick={() => setSelectedTask(task)} className="w-full bg-black border border-gray-800 hover:border-cyan-500/50 rounded p-3 flex items-start gap-3 transition-all text-left">
-                            <button onClick={(e) => { e.stopPropagation(); toggleTaskMutation.mutate({ id: task.id, status: task.status }); }}>
-                                <Circle className="w-5 h-5 text-gray-600" />
+                        <motion.div key={task.id} layout className="bg-black border border-gray-800 rounded overflow-hidden">
+                            <button 
+                                onClick={() => setSelectedTask(selectedTask?.id === task.id ? null : task)} 
+                                className="w-full p-3 flex items-start gap-3 hover:bg-cyan-500/10 transition-all text-left"
+                            >
+                                <button onClick={(e) => { e.stopPropagation(); toggleTaskMutation.mutate({ id: task.id, status: task.status }); }}>
+                                    <Circle className="w-5 h-5 text-gray-600" />
+                                </button>
+                                <div className="flex-1">
+                                    <p className="text-white font-bold font-mono text-sm">{task.title}</p>
+                                    <p className="text-gray-600 text-xs font-mono">{task.responsible_name}</p>
+                                </div>
+                                <button onClick={(e) => { e.stopPropagation(); deleteTaskMutation.mutate(task.id); }}>
+                                    <Trash2 className="w-4 h-4 text-red-400" />
+                                </button>
                             </button>
-                            <div className="flex-1">
-                                <p className="text-white font-bold font-mono text-sm">{task.title}</p>
-                                <p className="text-gray-600 text-xs font-mono">{task.responsible_name}</p>
-                            </div>
-                            <button onClick={(e) => { e.stopPropagation(); deleteTaskMutation.mutate(task.id); }}>
-                                <Trash2 className="w-4 h-4 text-red-400" />
-                            </button>
-                        </button>
+
+                            {selectedTask?.id === task.id && (
+                                <motion.div
+                                    initial={{ height: 0, opacity: 0 }}
+                                    animate={{ height: 'auto', opacity: 1 }}
+                                    exit={{ height: 0, opacity: 0 }}
+                                    className="border-t border-gray-800 bg-black/60 p-4 space-y-3 text-sm"
+                                >
+                                    {task.responsible_name && (
+                                        <div>
+                                            <p className="text-cyan-400 font-mono font-bold text-xs">ASSIGNED TO</p>
+                                            <p className="text-white font-mono">{task.responsible_name}</p>
+                                        </div>
+                                    )}
+                                    {task.deadline && (
+                                        <div>
+                                            <p className="text-cyan-400 font-mono font-bold text-xs">DEADLINE</p>
+                                            <p className="text-white font-mono">{new Date(task.deadline).toLocaleDateString()}</p>
+                                        </div>
+                                    )}
+                                    {task.category && (
+                                        <div>
+                                            <p className="text-cyan-400 font-mono font-bold text-xs">CATEGORY</p>
+                                            <p className="text-white font-mono capitalize">{task.category}</p>
+                                        </div>
+                                    )}
+                                    {task.status && (
+                                        <div>
+                                            <p className="text-cyan-400 font-mono font-bold text-xs">STATUS</p>
+                                            <p className="text-white font-mono capitalize">{task.status}</p>
+                                        </div>
+                                    )}
+                                    {task.notes && (
+                                        <div>
+                                            <p className="text-cyan-400 font-mono font-bold text-xs">NOTES</p>
+                                            <p className="text-gray-400 text-xs">{task.notes}</p>
+                                        </div>
+                                    )}
+
+                                    <button onClick={() => { deleteTaskMutation.mutate(task.id); setSelectedTask(null); }} className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-2 rounded text-sm mt-2">DELETE</button>
+                                </motion.div>
+                            )}
+                        </motion.div>
                     ))
                 )}
             </div>
-
-            {/* TASK DETAIL MODAL */}
-            {selectedTask && (
-                <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
-                    <div className="bg-black border-2 border-cyan-500 rounded-lg p-6 max-w-sm w-full space-y-4">
-                        <div className="flex items-start justify-between mb-4">
-                            <h2 className="text-white font-black font-mono text-lg flex-1">{selectedTask.title}</h2>
-                            <button onClick={() => setSelectedTask(null)} className="text-cyan-400 hover:text-cyan-300 text-xl">✕</button>
-                        </div>
-
-                        <div className="space-y-3 text-sm">
-                            {selectedTask.responsible_name && (
-                                <div>
-                                    <p className="text-cyan-400 font-mono font-bold text-xs">ASSIGNED TO</p>
-                                    <p className="text-white font-mono">{selectedTask.responsible_name}</p>
-                                </div>
-                            )}
-                            {selectedTask.deadline && (
-                                <div>
-                                    <p className="text-cyan-400 font-mono font-bold text-xs">DEADLINE</p>
-                                    <p className="text-white font-mono">{new Date(selectedTask.deadline).toLocaleDateString()}</p>
-                                </div>
-                            )}
-                            {selectedTask.category && (
-                                <div>
-                                    <p className="text-cyan-400 font-mono font-bold text-xs">CATEGORY</p>
-                                    <p className="text-white font-mono capitalize">{selectedTask.category}</p>
-                                </div>
-                            )}
-                            {selectedTask.status && (
-                                <div>
-                                    <p className="text-cyan-400 font-mono font-bold text-xs">STATUS</p>
-                                    <p className="text-white font-mono capitalize">{selectedTask.status}</p>
-                                </div>
-                            )}
-                            {selectedTask.notes && (
-                                <div>
-                                    <p className="text-cyan-400 font-mono font-bold text-xs">NOTES</p>
-                                    <p className="text-gray-400 text-xs">{selectedTask.notes}</p>
-                                </div>
-                            )}
-                        </div>
-
-                        <div className="flex gap-2 pt-2">
-                            <button onClick={() => setSelectedTask(null)} className="flex-1 bg-gray-700 hover:bg-gray-600 text-white font-bold py-2 rounded text-sm">CLOSE</button>
-                            <button onClick={() => { deleteTaskMutation.mutate(selectedTask.id); setSelectedTask(null); }} className="flex-1 bg-red-600 hover:bg-red-700 text-white font-bold py-2 rounded text-sm">DELETE</button>
-                        </div>
-                    </div>
-                </div>
-            )}
 
             {doneTasks.length > 0 && (
                 <div className="mt-6 opacity-50">
