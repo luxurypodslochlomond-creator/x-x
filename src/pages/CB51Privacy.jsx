@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
-import { Radio, Shield, Lock, Eye } from 'lucide-react';
+import { Radio, Shield, Lock, Eye, KeyRound, Database, UserCheck, AlertCircle } from 'lucide-react';
+import CB51NavBio from '@/components/scott/CB51NavBio';
+import { motion } from 'framer-motion';
 
 export default function CB51Privacy() {
     return (
