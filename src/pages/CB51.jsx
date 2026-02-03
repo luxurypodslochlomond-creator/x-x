@@ -402,7 +402,7 @@ export default function CB51() {
                                                 onClick={async () => {
                                                     const offerId = allOffers.find(o => o.venue === scannedOffer.venue && o.status === 'pending_manager_review')?.id;
                                                     if (offerId) {
-                                                        // Approve and send to band
+                                                        // MYCELIUM SYNC: Approve and send to band
                                                         await base44.entities.ScottGigOffer.update(offerId, { status: 'sent_to_band' });
 
                                                         // Auto-create calendar event with scanned info
@@ -418,8 +418,42 @@ export default function CB51() {
                                                             currency: scannedOffer.currency || 'GBP',
                                                             promoter: scannedOffer.promoter,
                                                             capacity: scannedOffer.capacity,
-                                                            event_type: 'live_show'
+                                                            event_type: 'live_show',
+                                                            notes: `Approved by manager - sent to band for vote`
                                                         });
+
+                                                        // MYCELIUM: Auto-create tasks if needed
+                                                        if (scannedOffer.date) {
+                                                            const gigDate = new Date(scannedOffer.date);
+                                                            const dayBefore = new Date(gigDate);
+                                                            dayBefore.setDate(dayBefore.getDate() - 1);
+
+                                                            // Task: Travel day before gig
+                                                            await base44.entities.ScottTask.create({
+                                                                artist_id: artists[0]?.id,
+                                                                title: `Travel to ${scannedOffer.city || scannedOffer.venue}`,
+                                                                due_date: dayBefore.toISOString().split('T')[0],
+                                                                status: 'pending',
+                                                                category: 'travel',
+                                                                notes: `Day before gig at ${scannedOffer.venue}`
+                                                            });
+                                                        }
+
+                                                        // MYCELIUM: Auto-create invoice reminder if fee exists
+                                                        if (scannedOffer.fee && scannedOffer.date) {
+                                                            const gigDate = new Date(scannedOffer.date);
+                                                            const weekAfter = new Date(gigDate);
+                                                            weekAfter.setDate(weekAfter.getDate() + 7);
+
+                                                            await base44.entities.ScottTask.create({
+                                                                artist_id: artists[0]?.id,
+                                                                title: `Invoice ${scannedOffer.promoter || scannedOffer.venue}`,
+                                                                due_date: weekAfter.toISOString().split('T')[0],
+                                                                status: 'pending',
+                                                                category: 'finance',
+                                                                notes: `${scannedOffer.currency || 'GBP'}${scannedOffer.fee} for ${scannedOffer.venue}`
+                                                            });
+                                                        }
 
                                                         queryClient.invalidateQueries({ queryKey: ['scottAllGigOffers'] });
                                                         queryClient.invalidateQueries({ queryKey: ['scottEvents'] });
@@ -537,7 +571,7 @@ export default function CB51() {
                                                                                        queryClient.setQueryData(['scottAllGigOffers'], allOffers.map(o => o.id === offer.id ? {...o, status: 'sent_to_band'} : o));
                                                                                        await base44.entities.ScottGigOffer.update(offer.id, {status: 'sent_to_band'});
 
-                                                                                       // Auto-create calendar event
+                                                                                       // MYCELIUM: Auto-create calendar event
                                                                                        await base44.entities.ScottEvent.create({
                                                                                            artist_id: offer.artist_id,
                                                                                            title: offer.venue || 'Gig',
@@ -550,8 +584,39 @@ export default function CB51() {
                                                                                            currency: offer.currency || 'GBP',
                                                                                            promoter: offer.promoter,
                                                                                            capacity: offer.capacity,
-                                                                                           event_type: 'live_show'
+                                                                                           event_type: 'live_show',
+                                                                                           notes: `Approved by manager - sent to band for vote`
                                                                                        });
+
+                                                                                       // MYCELIUM: Auto-create related tasks
+                                                                                       if (offer.date) {
+                                                                                           const gigDate = new Date(offer.date);
+                                                                                           const dayBefore = new Date(gigDate);
+                                                                                           dayBefore.setDate(dayBefore.getDate() - 1);
+
+                                                                                           await base44.entities.ScottTask.create({
+                                                                                               artist_id: offer.artist_id,
+                                                                                               title: `Travel to ${offer.city || offer.venue}`,
+                                                                                               due_date: dayBefore.toISOString().split('T')[0],
+                                                                                               status: 'pending',
+                                                                                               category: 'travel'
+                                                                                           });
+                                                                                       }
+
+                                                                                       if (offer.fee && offer.date) {
+                                                                                           const gigDate = new Date(offer.date);
+                                                                                           const weekAfter = new Date(gigDate);
+                                                                                           weekAfter.setDate(weekAfter.getDate() + 7);
+
+                                                                                           await base44.entities.ScottTask.create({
+                                                                                               artist_id: offer.artist_id,
+                                                                                               title: `Invoice ${offer.promoter || offer.venue}`,
+                                                                                               due_date: weekAfter.toISOString().split('T')[0],
+                                                                                               status: 'pending',
+                                                                                               category: 'finance',
+                                                                                               notes: `${offer.currency || 'GBP'}${offer.fee} for ${offer.venue}`
+                                                                                           });
+                                                                                       }
 
                                                                                        queryClient.invalidateQueries({queryKey: ['scottAllGigOffers']});
                                                                                        queryClient.invalidateQueries({queryKey: ['scottEvents']});
