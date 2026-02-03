@@ -149,6 +149,38 @@ export default function ScottCalendarView() {
                                             <p className="text-white font-mono">{event.time}</p>
                                         </div>
                                     )}
+                                    {event.promoter_phone && (
+                                        <div>
+                                            <p className="text-cyan-400 font-mono font-bold text-xs">PROMOTER PHONE</p>
+                                            <p className="text-white font-mono">{event.promoter_phone}</p>
+                                        </div>
+                                    )}
+                                    {event.promoter_email && (
+                                        <div>
+                                            <p className="text-cyan-400 font-mono font-bold text-xs">PROMOTER EMAIL</p>
+                                            <p className="text-white font-mono text-xs">{event.promoter_email}</p>
+                                        </div>
+                                    )}
+                                    {event.emergency_contact_name && (
+                                        <div>
+                                            <p className="text-cyan-400 font-mono font-bold text-xs">EMERGENCY CONTACT</p>
+                                            <p className="text-white font-mono">{event.emergency_contact_name}</p>
+                                            {event.emergency_contact_phone && <p className="text-gray-400 font-mono text-xs">{event.emergency_contact_phone}</p>}
+                                        </div>
+                                    )}
+                                    {event.location && event.city && (
+                                        <div>
+                                            <p className="text-cyan-400 font-mono font-bold text-xs">DIRECTIONS</p>
+                                            <a 
+                                                href={`https://maps.google.com/maps?q=${encodeURIComponent(`${event.location}, ${event.city}${event.country ? ', ' + event.country : ''}`)}`}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="text-cyan-400 hover:text-cyan-300 text-xs font-mono underline"
+                                            >
+                                                Open in Google Maps →
+                                            </a>
+                                        </div>
+                                    )}
                                     {event.notes && (
                                         <div>
                                             <p className="text-cyan-400 font-mono font-bold text-xs">NOTES</p>
