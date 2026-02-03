@@ -100,25 +100,22 @@ Deno.serve(async (req) => {
       extraction.raw_text = extraction.emailText.substring(0, 500);
     }
 
-    // Create gig offer
+    // Create gig offer with smart defaults
     const offer = await base44.asServiceRole.entities.ScottGigOffer.create({
-    artist_id: artistId,
-    venue: extraction.venue || 'Unknown Venue',
-    city: extraction.city,
-    country: extraction.country || 'UK',
-    date: extraction.date || '2026-12-31',
-    time: extraction.time,
-    fee: extraction.fee || 0,
-    currency: extraction.currency || 'GBP',
-    capacity: extraction.capacity,
-    promoter: extraction.promoter,
-    promoter_contact: extraction.promoter_contact,
-    deposit_required: extraction.deposit_required || false,
-    deposit_amount: extraction.deposit_amount,
-    requirements: extraction.requirements,
-    notes: extraction.notes,
-    raw_email: emailText || 'Scanned from PDF',
-    status: 'pending_manager_review'
+      artist_id: artistId,
+      venue: extraction.venue,
+      city: extraction.city,
+      country: extraction.country || 'UK',
+      date: extraction.date,
+      time: extraction.time,
+      fee: extraction.fee || 0,
+      currency: extraction.currency || 'GBP',
+      capacity: extraction.capacity,
+      promoter: extraction.promoter,
+      deposit_required: extraction.deposit_required || false,
+      red_flags: extraction.red_flags?.join(', '),
+      notes: extraction.raw_text,
+      status: extraction.red_flags?.length > 0 ? 'flagged_for_review' : 'pending_manager_review'
     });
     
     // Notify manager
