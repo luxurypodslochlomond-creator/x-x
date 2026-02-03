@@ -180,13 +180,13 @@ export default function ScottSettings() {
             )}
 
             {activeTab === 'notifications' && (
-                <div className="space-y-8 pb-8">
-                    <div className="border-2 border-cyan-500/40 rounded-xl p-8 bg-cyan-500/5">
-                        <div className="flex items-start gap-4">
-                            <Bell className="w-8 h-8 text-cyan-400 flex-shrink-0 mt-1" />
+                <div className="space-y-4">
+                    <div className="border-2 border-cyan-500/40 rounded-lg p-4 bg-cyan-500/5">
+                        <div className="flex items-start gap-3">
+                            <Bell className="w-6 h-6 text-cyan-400 flex-shrink-0 mt-0.5" />
                             <div className="flex-1">
-                                <h3 className="text-2xl font-black text-cyan-400 mb-2">Push Notifications</h3>
-                                <p className="text-base text-gray-300 leading-relaxed">Get instant alerts on your phone when gigs arrive</p>
+                                <h3 className="text-lg font-black text-cyan-400 mb-1">Push Notifications</h3>
+                                <p className="text-sm text-gray-300">Get instant alerts when gigs arrive</p>
                             </div>
                         </div>
                     </div>
@@ -200,26 +200,26 @@ export default function ScottSettings() {
                                     alert('Tap menu button (three dots) → Install app');
                                 }
                             }}
-                            className="w-full border-3 border-amber-500/60 rounded-xl p-8 bg-amber-900/20 hover:bg-amber-900/30 transition-all active:scale-95"
+                            className="w-full border-2 border-amber-500/60 rounded-lg p-4 bg-amber-900/20 hover:bg-amber-900/30 transition-all active:scale-95 text-left"
                         >
-                            <div className="flex items-start gap-4">
-                                <Download className="w-7 h-7 text-amber-400 flex-shrink-0 mt-0.5" />
-                                <div className="flex-1 text-left">
-                                    <p className="font-black text-amber-300 text-lg mb-2">Add CB51 to Home Screen First</p>
-                                    <div className="space-y-3 text-sm text-amber-200">
-                                        <p className="font-mono bg-black/40 p-3 rounded text-amber-100">iPhone: Safari — Share — Add to Home Screen</p>
-                                        <p className="font-mono bg-black/40 p-3 rounded text-amber-100">Android: Menu — Install app</p>
+                            <div className="flex items-start gap-3">
+                                <Download className="w-5 h-5 text-amber-400 flex-shrink-0 mt-0.5" />
+                                <div className="flex-1">
+                                    <p className="font-black text-amber-300 text-sm mb-2">Add CB51 to Home Screen First</p>
+                                    <div className="space-y-1 text-xs text-amber-200">
+                                        <p className="font-mono">iPhone: Safari — Share — Add to Home Screen</p>
+                                        <p className="font-mono">Android: Menu — Install app</p>
                                     </div>
                                 </div>
                             </div>
                         </button>
                     ) : (
-                        <div className="border-3 border-green-500/50 rounded-xl p-8 bg-green-900/20">
-                            <div className="flex items-center gap-4">
-                                <CheckCircle className="w-7 h-7 text-green-400 flex-shrink-0" />
-                                <div className="flex-1 text-left">
-                                    <p className="font-black text-green-300 text-lg">CB51 Installed</p>
-                                    <p className="text-base text-green-200">Now enable notifications below</p>
+                        <div className="border-2 border-green-500/50 rounded-lg p-4 bg-green-900/20">
+                            <div className="flex items-center gap-3">
+                                <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0" />
+                                <div className="flex-1">
+                                    <p className="font-black text-green-300 text-sm">CB51 Installed</p>
+                                    <p className="text-xs text-green-200">Enable notifications below</p>
                                 </div>
                             </div>
                         </div>
@@ -229,7 +229,7 @@ export default function ScottSettings() {
                         <button
                             onClick={pushEnabled ? handleDisablePushNotifications : handleEnablePushNotifications}
                             disabled={notificationsLoading}
-                            className={`w-full py-6 rounded-xl font-black text-lg transition-all active:scale-95 ${
+                            className={`w-full py-3 rounded-lg font-black text-sm transition-all active:scale-95 ${
                                 pushEnabled
                                     ? 'bg-red-600/40 hover:bg-red-600/60 text-red-300'
                                     : 'bg-cyan-500 hover:bg-cyan-600 text-black'
@@ -240,8 +240,8 @@ export default function ScottSettings() {
                     )}
 
                     {pushEnabled && (
-                        <div className="bg-green-900/20 border-2 border-green-500/50 rounded-xl p-6">
-                            <p className="text-base text-green-300 font-mono text-center">Active — notifications enabled</p>
+                        <div className="bg-green-900/20 border border-green-500/50 rounded-lg p-3">
+                            <p className="text-xs text-green-300 font-mono text-center">Active — notifications enabled</p>
                         </div>
                     )}
                 </div>
