@@ -197,33 +197,43 @@ export default function PushNotificationManager({ onSubscriptionChange }) {
     return null;
   }
 
+  if (isSubscribed) {
+    return (
+      <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-green-500/10 border border-green-500/50">
+        <Bell className="w-4 h-4 text-green-400" />
+        <span className="text-xs font-mono font-bold text-green-400">Notifications enabled ✓</span>
+        <button
+          onClick={disableNotifications}
+          className="ml-auto text-green-400 hover:text-green-300 text-xs font-mono underline"
+        >
+          Off
+        </button>
+      </div>
+    );
+  }
+
   return (
-    <div className="space-y-4">
+    <div className="space-y-2">
       <CB51NotificationStatus />
       
       <button
-        onClick={isSubscribed ? disableNotifications : requestNotificationPermission}
+        onClick={requestNotificationPermission}
         disabled={isLoading}
-        className={`w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg text-sm font-mono font-bold transition-all ${
-          isSubscribed
-            ? 'bg-green-500/20 border-2 border-green-500 text-green-400 hover:bg-green-500/30'
-            : 'bg-cyan-500 hover:bg-cyan-600 text-black border-2 border-cyan-500'
-        } ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
+        className={`w-full flex items-center justify-center gap-2 px-3 py-2.5 rounded-lg text-xs font-mono font-bold transition-all ${
+          isLoading 
+            ? 'bg-gray-700 text-gray-400 cursor-not-allowed opacity-60'
+            : 'bg-cyan-500/20 border border-cyan-500/50 text-cyan-400 hover:bg-cyan-500/30 hover:border-cyan-500'
+        }`}
       >
         {isLoading ? (
           <>
-            <div className="w-4 h-4 border-2 border-gray-400 border-t-transparent rounded-full animate-spin"></div>
-            SETTING UP...
-          </>
-        ) : isSubscribed ? (
-          <>
-            <Bell className="w-5 h-5" />
-            NOTIFICATIONS ON
+            <div className="w-3 h-3 border-2 border-cyan-400 border-t-transparent rounded-full animate-spin"></div>
+            <span>Enabling...</span>
           </>
         ) : (
           <>
-            <Bell className="w-5 h-5" />
-            ENABLE NOTIFICATIONS
+            <Bell className="w-4 h-4" />
+            <span>Enable alerts for your team</span>
           </>
         )}
       </button>
