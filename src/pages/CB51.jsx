@@ -968,10 +968,14 @@ export default function CB51() {
                                         className="border-t border-cyan-500/30 p-3 space-y-2"
                                     >
                                         {tasks.filter(t => t.status !== 'done').slice(0, 3).map(task => (
-                                            <div key={task.id} className="bg-black/60 border border-cyan-500/20 rounded p-2">
+                                            <button
+                                                key={task.id}
+                                                onClick={() => navigate(createPageUrl('ScottToDo') + (artistId ? `?id=${artistId}` : ''))}
+                                                className="w-full bg-black/60 border border-cyan-500/20 rounded p-2 hover:border-cyan-500/50 hover:bg-black/40 transition-all text-left"
+                                            >
                                                 <p className="text-white text-xs font-bold">{task.title}</p>
                                                 <p className="text-gray-500 text-[9px] font-mono">{task.responsible_name || 'Unassigned'}</p>
-                                            </div>
+                                            </button>
                                         ))}
                                         <Link to={createPageUrl('ScottToDo')} className="text-cyan-400 hover:text-cyan-300 text-[9px] font-mono font-bold block text-center pt-1">
                                             See all →
