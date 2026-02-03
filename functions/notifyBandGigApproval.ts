@@ -22,7 +22,7 @@ Deno.serve(async (req) => {
         }
 
         // Get the gig offer
-        const gigOffer = await base44.entities.ScottGigOffers.filter({
+        const gigOffer = await base44.entities.ScottGigOffer.filter({
             id: gigOfferId
         });
 
@@ -33,7 +33,7 @@ Deno.serve(async (req) => {
         const offer = gigOffer[0];
 
         // Get all band members for this artist
-        const bandMembers = await base44.entities.ScottTeamMember.filter({
+        const bandMembers = await base44.asServiceRole.entities.ScottTeamMember.filter({
             artist_id: offer.artist_id
         });
 
@@ -57,7 +57,7 @@ Deno.serve(async (req) => {
         }));
 
         // Bulk create notifications
-        await base44.entities.ScottNotification.bulkCreate(notifications);
+        await base44.asServiceRole.entities.ScottNotification.bulkCreate(notifications);
 
         return Response.json({
             success: true,
