@@ -974,45 +974,36 @@ export default function CB51() {
                             )}
 
                             {/* TASKS */}
-                            <div className="bg-black border border-cyan-500/30 rounded-lg overflow-hidden">
-                                <button
-                                    onClick={() => setExpandedTool(expandedTool === 'tasks' ? null : 'tasks')}
-                                    className="w-full p-3 flex items-center justify-between hover:bg-cyan-500/10 transition-all"
+                            <CB51NavBio
+                              icon={CheckCircle}
+                              title="TASKS"
+                              shortBio="To-do list & action items"
+                              fullBio="Organize tour logistics, studio prep, promoter follow-ups, and band coordination. Assign tasks to team, set deadlines, and track progress. Auto-populated from gigs (travel, invoicing, etc)."
+                              badge={tasks.filter(t => t.status !== 'done').length || undefined}
+                              onClick={() => setExpandedTool(expandedTool === 'tasks' ? null : 'tasks')}
+                            />
+                            {expandedTool === 'tasks' && (
+                                <motion.div
+                                    initial={{ height: 0, opacity: 0 }}
+                                    animate={{ height: 'auto', opacity: 1 }}
+                                    exit={{ height: 0, opacity: 0 }}
+                                    className="ml-4 border-l border-cyan-500/30 pl-3 space-y-2"
                                 >
-                                    <div className="flex items-center gap-2">
-                                        <CheckCircle className="w-4 h-4 text-cyan-400" />
-                                        <span className="font-mono text-xs text-cyan-400 font-bold">TASKS</span>
-                                        {tasks.filter(t => t.status !== 'done').length > 0 && (
-                                            <span className="bg-cyan-500 text-black text-[8px] font-black px-1.5 py-0.5 rounded">
-                                                {tasks.filter(t => t.status !== 'done').length}
-                                            </span>
-                                        )}
-                                    </div>
-                                    <span className="text-cyan-400 text-xs">{expandedTool === 'tasks' ? '−' : '+'}</span>
-                                </button>
-                                {expandedTool === 'tasks' && (
-                                    <motion.div
-                                        initial={{ height: 0, opacity: 0 }}
-                                        animate={{ height: 'auto', opacity: 1 }}
-                                        exit={{ height: 0, opacity: 0 }}
-                                        className="border-t border-cyan-500/30 p-3 space-y-2"
-                                    >
-                                        {tasks.filter(t => t.status !== 'done').slice(0, 3).map(task => (
-                                            <button
-                                                key={task.id}
-                                                onClick={() => navigate(createPageUrl('ScottToDo') + (artists[0]?.id ? `?id=${artists[0].id}` : ''))}
-                                                className="w-full bg-black/60 border border-cyan-500/20 rounded p-2 hover:border-cyan-500/50 hover:bg-black/40 transition-all text-left"
-                                            >
-                                                <p className="text-white text-xs font-bold">{task.title}</p>
-                                                <p className="text-gray-500 text-[9px] font-mono">{task.responsible_name || 'Unassigned'}</p>
-                                            </button>
-                                        ))}
-                                        <Link to={createPageUrl('ScottToDo')} className="text-cyan-400 hover:text-cyan-300 text-[9px] font-mono font-bold block text-center pt-1">
-                                            See all →
-                                        </Link>
-                                    </motion.div>
-                                )}
-                            </div>
+                                    {tasks.filter(t => t.status !== 'done').slice(0, 3).map(task => (
+                                        <button
+                                            key={task.id}
+                                            onClick={() => navigate(createPageUrl('ScottToDo') + (artists[0]?.id ? `?id=${artists[0].id}` : ''))}
+                                            className="w-full bg-black/60 border border-cyan-500/20 rounded p-2 hover:border-cyan-500/50 hover:bg-black/40 transition-all text-left"
+                                        >
+                                            <p className="text-white text-xs font-bold">{task.title}</p>
+                                            <p className="text-gray-500 text-[9px] font-mono">{task.responsible_name || 'Unassigned'}</p>
+                                        </button>
+                                    ))}
+                                    <Link to={createPageUrl('ScottToDo')} className="text-cyan-400 hover:text-cyan-300 text-[9px] font-mono font-bold block text-center pt-1">
+                                        See all →
+                                    </Link>
+                                </motion.div>
+                            )}
 
                             {/* FINANCE */}
                             <div className="bg-black border border-cyan-500/30 rounded-lg overflow-hidden">
