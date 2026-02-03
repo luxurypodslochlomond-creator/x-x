@@ -90,10 +90,27 @@ Email text: ${emailText}`;
       }
     });
 
-    // Create gig offer
+    // Create gig offer - ensure required fields have values
     const offer = await base44.asServiceRole.entities.ScottGigOffer.create({
       artist_id: artistId,
-      ...extraction,
+      venue: extraction.venue || 'TBC',
+      city: extraction.city,
+      county: extraction.county,
+      country: extraction.country || 'UK',
+      date: extraction.date || '2026-12-31',
+      time: extraction.time,
+      fee: extraction.fee || 0,
+      currency: extraction.currency || 'GBP',
+      capacity: extraction.capacity,
+      promoter: extraction.promoter,
+      promoter_contact: extraction.promoter_contact,
+      deposit_required: extraction.deposit_required || false,
+      deposit_amount: extraction.deposit_amount,
+      is_tour: extraction.is_tour || false,
+      tour_dates: extraction.tour_dates,
+      distance_to_next: extraction.distance_to_next,
+      requirements: extraction.requirements,
+      notes: extraction.notes,
       raw_email: emailText,
       status: 'pending_manager_review'
     });
