@@ -31,8 +31,10 @@ export default function CB51() {
           const [settingsOpen, setSettingsOpen] = useState(false);
           const [pasteModalOpen, setPasteModalOpen] = useState(false);
           const [pastedText, setPastedText] = useState('');
-          const [scanning, setScanning] = useState(false);
-          const [expandedTool, setExpandedTool] = useState(null);
+                const [scanning, setScanning] = useState(false);
+                const [expandedTool, setExpandedTool] = useState(null);
+                const [editingOffer, setEditingOffer] = useState(null);
+                const [editForm, setEditForm] = useState({});
           const queryClient = useQueryClient();
 
           useEffect(() => {
@@ -143,6 +145,31 @@ export default function CB51() {
 
     const handleRestoreArtist = (artist) => {
         archiveArtistMutation.mutate({ artistId: artist.id, archived: false });
+    };
+
+    const updateOfferMutation = useMutation({
+        mutationFn: ({ offerId, data }) => base44.entities.ScottGigOffer.update(offerId, data),
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ['scottAllGigOffers'] });
+            setEditingOffer(null);
+            setEditForm({});
+        }
+    });
+
+    const handleEditOffer = (offer) => {
+        setEditingOffer(offer.id);
+        setEditForm({
+            venue: offer.venue || '',
+            date: offer.date || '',
+            fee: offer.fee || '',
+            city: offer.city || '',
+            promoter: offer.promoter || '',
+            notes: offer.notes || ''
+        });
+    };
+
+    const handleSaveEdit = () => {
+        updateOfferMutation.mutate({ offerId: editingOffer, data: editForm });
     };
 
     const handlePaste = async () => {
@@ -307,35 +334,96 @@ export default function CB51() {
                                                     .slice(0, 3)
                                                     .map(offer => (
                                                         <div key={offer.id} className="bg-black/60 border border-cyan-500/30 rounded p-3 space-y-2">
-                                                            <div className="flex items-between justify-between">
-                                                                <div className="flex-1">
-                                                                    <p className="text-white font-bold text-sm">{offer.venue || 'Gig Offer'}</p>
-                                                                    <p className="text-cyan-400 text-[10px] font-mono">{offer.date || 'TBD'} • £{offer.fee || '?'}</p>
+                                                            {editingOffer === offer.id ? (
+                                                                <div className="space-y-2">
+                                                                    <Input 
+                                                                        placeholder="Venue" 
+                                                                        value={editForm.venue} 
+                                                                        onChange={(e) => setEditForm({...editForm, venue: e.target.value})}
+                                                                        className="bg-black border-cyan-500/30 text-white text-xs"
+                                                                    />
+                                                                    <div className="flex gap-2">
+                                                                        <Input 
+                                                                            type="date" 
+                                                                            value={editForm.date} 
+                                                                            onChange={(e) => setEditForm({...editForm, date: e.target.value})}
+                                                                            className="bg-black border-cyan-500/30 text-white text-xs"
+                                                                        />
+                                                                        <Input 
+                                                                            type="number" 
+                                                                            placeholder="Fee" 
+                                                                            value={editForm.fee} 
+                                                                            onChange={(e) => setEditForm({...editForm, fee: e.target.value})}
+                                                                            className="bg-black border-cyan-500/30 text-white text-xs"
+                                                                        />
+                                                                    </div>
+                                                                    <Input 
+                                                                        placeholder="City" 
+                                                                        value={editForm.city} 
+                                                                        onChange={(e) => setEditForm({...editForm, city: e.target.value})}
+                                                                        className="bg-black border-cyan-500/30 text-white text-xs"
+                                                                    />
+                                                                    <Input 
+                                                                        placeholder="Promoter" 
+                                                                        value={editForm.promoter} 
+                                                                        onChange={(e) => setEditForm({...editForm, promoter: e.target.value})}
+                                                                        className="bg-black border-cyan-500/30 text-white text-xs"
+                                                                    />
+                                                                    <div className="flex gap-1">
+                                                                        <button 
+                                                                            onClick={() => { setEditingOffer(null); setEditForm({}); }}
+                                                                            className="flex-1 bg-gray-700 hover:bg-gray-600 text-white px-2 py-1.5 rounded text-[10px] font-bold"
+                                                                        >
+                                                                            CANCEL
+                                                                        </button>
+                                                                        <button 
+                                                                            onClick={handleSaveEdit}
+                                                                            className="flex-1 bg-cyan-500 hover:bg-cyan-600 text-black px-2 py-1.5 rounded text-[10px] font-bold"
+                                                                        >
+                                                                            SAVE
+                                                                        </button>
+                                                                    </div>
                                                                 </div>
-                                                                <div className="flex gap-1">
-                                                                    <button 
-                                                                        onClick={() => {
-                                                                            queryClient.setQueryData(['scottAllGigOffers'], allOffers.map(o => o.id === offer.id ? {...o, status: 'sent_to_band'} : o));
-                                                                            base44.entities.ScottGigOffer.update(offer.id, {status: 'sent_to_band'}).then(() => queryClient.invalidateQueries({queryKey: ['scottAllGigOffers']}));
-                                                                        }}
-                                                                        className="bg-green-600/40 hover:bg-green-600 text-white px-2 py-1 rounded text-[10px] font-bold"
-                                                                    >
-                                                                        ✓
-                                                                    </button>
-                                                                    <button 
-                                                                        onClick={() => {
-                                                                            if(confirm('Reject this gig?')) {
-                                                                                queryClient.setQueryData(['scottAllGigOffers'], allOffers.map(o => o.id === offer.id ? {...o, status: 'rejected'} : o));
-                                                                                base44.entities.ScottGigOffer.update(offer.id, {status: 'rejected'}).then(() => queryClient.invalidateQueries({queryKey: ['scottAllGigOffers']}));
-                                                                            }
-                                                                        }}
-                                                                        className="bg-red-600/40 hover:bg-red-600 text-white px-2 py-1 rounded text-[10px] font-bold"
-                                                                    >
-                                                                        ✕
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                            <CB51VoteBreakdown gigOfferId={offer.id} />
+                                                            ) : (
+                                                                <>
+                                                                    <div className="flex items-between justify-between">
+                                                                        <div className="flex-1">
+                                                                            <p className="text-white font-bold text-sm">{offer.venue || 'Gig Offer'}</p>
+                                                                            <p className="text-cyan-400 text-[10px] font-mono">{offer.date || 'TBD'} • £{offer.fee || '?'}</p>
+                                                                            {offer.city && <p className="text-gray-500 text-[9px] font-mono">{offer.city}</p>}
+                                                                        </div>
+                                                                        <div className="flex gap-1">
+                                                                            <button 
+                                                                                onClick={() => handleEditOffer(offer)}
+                                                                                className="bg-cyan-600/40 hover:bg-cyan-600 text-white px-2 py-1 rounded text-[10px] font-bold"
+                                                                            >
+                                                                                ✎
+                                                                            </button>
+                                                                            <button 
+                                                                                onClick={() => {
+                                                                                    queryClient.setQueryData(['scottAllGigOffers'], allOffers.map(o => o.id === offer.id ? {...o, status: 'sent_to_band'} : o));
+                                                                                    base44.entities.ScottGigOffer.update(offer.id, {status: 'sent_to_band'}).then(() => queryClient.invalidateQueries({queryKey: ['scottAllGigOffers']}));
+                                                                                }}
+                                                                                className="bg-green-600/40 hover:bg-green-600 text-white px-2 py-1 rounded text-[10px] font-bold"
+                                                                            >
+                                                                                ✓
+                                                                            </button>
+                                                                            <button 
+                                                                                onClick={() => {
+                                                                                    if(confirm('Reject this gig?')) {
+                                                                                        queryClient.setQueryData(['scottAllGigOffers'], allOffers.map(o => o.id === offer.id ? {...o, status: 'rejected'} : o));
+                                                                                        base44.entities.ScottGigOffer.update(offer.id, {status: 'rejected'}).then(() => queryClient.invalidateQueries({queryKey: ['scottAllGigOffers']}));
+                                                                                    }
+                                                                                }}
+                                                                                className="bg-red-600/40 hover:bg-red-600 text-white px-2 py-1 rounded text-[10px] font-bold"
+                                                                            >
+                                                                                ✕
+                                                                            </button>
+                                                                        </div>
+                                                                    </div>
+                                                                    <CB51VoteBreakdown gigOfferId={offer.id} />
+                                                                </>
+                                                            )}
                                                         </div>
                                                     ))}
                                             </div>
