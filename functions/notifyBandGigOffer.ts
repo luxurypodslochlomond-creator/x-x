@@ -20,6 +20,15 @@ Deno.serve(async (req) => {
       // Get gig offer details
       const gigOffer = await base44.asServiceRole.entities.ScottGigOffer.get(data.id);
 
+      // Check if already notified (prevent duplicates)
+      const existingResponses = await base44.asServiceRole.entities.ScottBandResponse.filter({
+        gig_offer_id: gigOffer.id
+      });
+      
+      if (existingResponses.length > 0) {
+        return Response.json({ skipped: true, reason: 'Already notified' });
+      }
+
       // Get band members from ScottTeamMember entity
       const teamMembers = await base44.asServiceRole.entities.ScottTeamMember.filter({
         artist_id: gigOffer.artist_id
@@ -28,10 +37,17 @@ Deno.serve(async (req) => {
       const bandMembers = teamMembers.map(m => ({
         email: m.email,
         name: m.name
-      }));
+      })).filter(m => {
+        // Validate email
+        if (!m.email || !m.email.includes('@')) {
+          console.error('Invalid email:', m.email);
+          return false;
+        }
+        return true;
+      });
 
       if (bandMembers.length === 0) {
-        return Response.json({ error: 'No band members found' }, { status: 400 });
+        return Response.json({ error: 'No valid band members found' }, { status: 400 });
       }
 
       // Create ScottBandResponse records with pending status for each member
@@ -78,7 +94,10 @@ Deno.serve(async (req) => {
       Vote YES or NO in CB51 → https://app.base44.com/ScottBandVote?gig=${gigOffer.id}
 
       CB51 • Your AI Co-Manager`
-        }).catch(e => console.log('Email failed:', e))
+        }).catch(e => {
+         console.error('Email failed to', member.email, ':', e.message);
+         throw e; // FAIL if any email fails - don't silently hide
+       })
       );
 
       await Promise.all(emailPromises);
