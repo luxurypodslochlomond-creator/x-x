@@ -22,7 +22,7 @@ Deno.serve(async (req) => {
     const gigOffer = await base44.asServiceRole.entities.ScottGigOffer.get(data.id);
 
     // Check if already drafted
-    if (gigOffer.promoter_email_draft) {
+    if (gigOffer.ai_draft_accept) {
       return Response.json({ skipped: true, reason: 'Email already drafted' });
     }
 
@@ -43,7 +43,7 @@ ${gigOffer.created_by}`;
 
     // Save draft to gig offer
     await base44.asServiceRole.entities.ScottGigOffer.update(gigOffer.id, {
-      promoter_email_draft: emailDraft,
+      ai_draft_accept: emailDraft,
       email_drafted_at: new Date().toISOString()
     });
 

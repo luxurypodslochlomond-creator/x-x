@@ -101,7 +101,7 @@ Deno.serve(async (req) => {
           
           const event_data = {
             summary: `🎵 ${artist.name} @ ${gigOffer.venue}`,
-            description: `Confirmed gig\nPromoter: ${gigOffer.promoter_name}\nFee: £${gigOffer.fee}`,
+            description: `Confirmed gig\nPromoter: ${gigOffer.promoter}\nFee: £${gigOffer.fee}`,
             start: {
               dateTime: new Date(gigOffer.date).toISOString(),
               timeZone: 'Europe/London'
@@ -136,7 +136,7 @@ Deno.serve(async (req) => {
         }
 
         // Auto-draft email
-        const emailBody = `Hi ${gigOffer.promoter_name || 'there'},
+        const emailBody = `Hi ${gigOffer.promoter || 'there'},
 
 Confirmed: ${artist.name} for ${gigOffer.venue} on ${gigOffer.date}
 
@@ -145,7 +145,7 @@ Fee: £${gigOffer.fee}
 Looking forward to it!`;
 
         await base44.asServiceRole.entities.ScottGigOffer.update(gigOffer.id, {
-          promoter_email_draft: emailBody
+          ai_draft_accept: emailBody
         });
 
         // Notify manager (use gig creator email)
