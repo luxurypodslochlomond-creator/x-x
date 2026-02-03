@@ -286,8 +286,8 @@ export default function ScottSettings() {
                     )}
 
                     <div className="border border-cyan-500/30 rounded-lg p-4 bg-black/40">
-                        <p className="text-xs text-gray-500">
-                            <span className="text-cyan-400 font-bold">PWA Benefits:</span> Offline access • Home screen icon • Push notifications • Zero data tracking
+                        <p className="text-xs text-gray-400 leading-relaxed">
+                            <span className="text-cyan-400 font-bold">Why install?</span> You get a home screen icon like any app, instant push notifications when gigs arrive, and works offline. That's it. ♾️
                         </p>
                     </div>
                 </div>
