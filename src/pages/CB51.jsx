@@ -390,18 +390,33 @@ export default function CB51() {
                                 {scannedOffer.error ? (
                                     <>
                                         <div className="flex items-center gap-3 mb-3">
-                                            <div className="w-10 h-10 bg-red-500/20 rounded-full flex items-center justify-center flex-shrink-0">
-                                                <span className="text-xl">❌</span>
+                                            <div className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 ${scannedOffer.isDuplicate ? 'bg-amber-500/20' : 'bg-red-500/20'}`}>
+                                                <span className="text-xl">{scannedOffer.isDuplicate ? '⚠️' : '❌'}</span>
                                             </div>
                                             <div>
-                                                <h3 className="text-red-400 font-black font-mono text-sm">SCAN FAILED</h3>
-                                                <p className="text-red-400/60 text-xs font-mono">Try again bro</p>
+                                                <h3 className={`font-black font-mono text-sm ${scannedOffer.isDuplicate ? 'text-amber-400' : 'text-red-400'}`}>
+                                                    {scannedOffer.isDuplicate ? 'ALREADY IN SYSTEM' : 'SCAN FAILED'}
+                                                </h3>
+                                                <p className={`text-xs font-mono ${scannedOffer.isDuplicate ? 'text-amber-400/60' : 'text-red-400/60'}`}>
+                                                    {scannedOffer.isDuplicate ? 'This gig is already logged' : 'Try again bro'}
+                                                </p>
                                             </div>
                                         </div>
                                         <p className="text-gray-400 text-xs font-mono mb-4">{scannedOffer.error}</p>
+                                        {scannedOffer.isDuplicate && scannedOffer.existingId && (
+                                            <button
+                                                onClick={() => {
+                                                    navigate(createPageUrl('ScottGigOffers') + `?id=${scannedOffer.existingId}`);
+                                                    setScannedOffer(null);
+                                                }}
+                                                className="w-full bg-amber-600 hover:bg-amber-700 text-white font-black py-2 rounded-lg font-mono text-sm mb-2"
+                                            >
+                                                VIEW EXISTING
+                                            </button>
+                                        )}
                                         <button
                                             onClick={() => setScannedOffer(null)}
-                                            className="w-full bg-red-600 hover:bg-red-700 text-white font-black py-2 rounded-lg font-mono text-sm"
+                                            className={`w-full font-black py-2 rounded-lg font-mono text-sm ${scannedOffer.isDuplicate ? 'bg-gray-700 hover:bg-gray-600 text-white' : 'bg-red-600 hover:bg-red-700 text-white'}`}
                                         >
                                             CLOSE
                                         </button>
