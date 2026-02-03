@@ -36,7 +36,8 @@ export default function CB51() {
                 const [expandedTool, setExpandedTool] = useState(null);
                 const [editingOffer, setEditingOffer] = useState(null);
                 const [editForm, setEditForm] = useState({});
-          const queryClient = useQueryClient();
+                const [scannedOffer, setScannedOffer] = useState(null);
+                const queryClient = useQueryClient();
 
           useEffect(() => {
               // Set page title and meta tags for CB51 branding
@@ -265,27 +266,24 @@ export default function CB51() {
                                                                                         artistId: artists[0]?.id 
                                                                                     });
 
+                                                                                    // Refresh data FIRST
+                                                                                    await queryClient.refetchQueries({ queryKey: ['scottAllGigOffers'] });
+
                                                                                     const offer = result.data?.offer;
 
-                                                                                    // Close modal first
+                                                                                    // Close modal
                                                                                     setPastedText('');
                                                                                     setPasteModalOpen(false);
                                                                                     setScanning(false);
 
-                                                                                    // Show success
-                                                                                    alert(`✅ GIG SCANNED!\n\n${offer?.venue || 'Venue TBC'}\n${offer?.date || 'Date TBC'}\n${offer?.currency || 'GBP'}${offer?.fee || '0'}\n\n↓ Check below for YES/NO`);
-                                                                                    
-                                                                                    // Refresh data and scroll
-                                                                                    await queryClient.refetchQueries({ queryKey: ['scottAllGigOffers'] });
-                                                                                    
-                                                                                    setTimeout(() => {
-                                                                                        document.getElementById('pending-approvals')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                                                                                    }, 100);
+                                                                                    // Show CB51-style success modal with instant YES/NO
+                                                                                    setScannedOffer(offer);
                                                                                 } catch (e) {
                                                                                     console.error('Scan error:', e);
-                                                                                    alert('❌ SCAN FAILED\n\n' + e.message);
                                                                                     setScanning(false);
                                                                                     setPasteModalOpen(false);
+                                                                                    // Show CB51 error
+                                                                                    setScannedOffer({ error: e.message });
                                                                                 }
                                                                             }}
                                                                             className="hidden" 
@@ -325,6 +323,109 @@ export default function CB51() {
                                     {user && (
                                         <CB51BandVoteAlert userEmail={user.email} />
                                     )}
+
+                    {/* CB51-STYLE SCANNED OFFER MODAL - INSTANT YES/NO */}
+                    {scannedOffer && (
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            className="fixed inset-0 bg-black/90 backdrop-blur-sm z-[100] flex items-center justify-center p-4"
+                            onClick={() => setScannedOffer(null)}
+                        >
+                            <motion.div
+                                initial={{ scale: 0.9, opacity: 0 }}
+                                animate={{ scale: 1, opacity: 1 }}
+                                onClick={(e) => e.stopPropagation()}
+                                className="bg-black border-2 border-cyan-500 rounded-lg p-6 max-w-md w-full"
+                            >
+                                {scannedOffer.error ? (
+                                    <>
+                                        <div className="flex items-center gap-3 mb-4">
+                                            <div className="w-12 h-12 bg-red-500/20 rounded-full flex items-center justify-center">
+                                                <span className="text-2xl">❌</span>
+                                            </div>
+                                            <div>
+                                                <h3 className="text-red-400 font-black font-mono text-lg">SCAN FAILED</h3>
+                                                <p className="text-red-400/60 text-xs font-mono">Try again bro</p>
+                                            </div>
+                                        </div>
+                                        <p className="text-gray-400 text-sm font-mono mb-6">{scannedOffer.error}</p>
+                                        <button
+                                            onClick={() => setScannedOffer(null)}
+                                            className="w-full bg-red-600 hover:bg-red-700 text-white font-black py-3 rounded-lg font-mono"
+                                        >
+                                            CLOSE
+                                        </button>
+                                    </>
+                                ) : (
+                                    <>
+                                        <div className="flex items-center gap-3 mb-4">
+                                            <div className="w-12 h-12 bg-cyan-500/20 rounded-full flex items-center justify-center">
+                                                <AI51AtomIcon size={32} animate={true} />
+                                            </div>
+                                            <div>
+                                                <h3 className="text-cyan-400 font-black font-mono text-lg">GIG SCANNED ✓</h3>
+                                                <p className="text-cyan-400/60 text-xs font-mono">Instant decision</p>
+                                            </div>
+                                        </div>
+
+                                        <div className="bg-black/60 border border-cyan-500/30 rounded-lg p-4 mb-6 space-y-2">
+                                            <p className="text-white font-black text-lg">{scannedOffer.venue || 'Venue TBC'}</p>
+                                            <div className="flex items-center gap-2 text-sm">
+                                                <span className="text-cyan-400 font-mono">{scannedOffer.date || 'Date TBC'}</span>
+                                                <span className="text-gray-500">•</span>
+                                                <span className="text-green-400 font-black font-mono">{scannedOffer.currency || 'GBP'}{scannedOffer.fee || '?'}</span>
+                                            </div>
+                                            {scannedOffer.city && (
+                                                <p className="text-gray-400 text-xs font-mono">📍 {scannedOffer.city}</p>
+                                            )}
+                                        </div>
+
+                                        <div className="flex gap-3">
+                                            <button
+                                                onClick={async () => {
+                                                    const offerId = allOffers.find(o => o.venue === scannedOffer.venue && o.status === 'pending_manager_review')?.id;
+                                                    if (offerId) {
+                                                        await base44.entities.ScottGigOffer.update(offerId, { status: 'rejected' });
+                                                        queryClient.invalidateQueries({ queryKey: ['scottAllGigOffers'] });
+                                                    }
+                                                    setScannedOffer(null);
+                                                }}
+                                                className="flex-1 bg-red-900/40 hover:bg-red-900/60 border-2 border-red-500/50 hover:border-red-500 text-red-400 font-black py-3 rounded-lg font-mono text-sm"
+                                            >
+                                                ✗ NO
+                                            </button>
+                                            <button
+                                                onClick={async () => {
+                                                    const offerId = allOffers.find(o => o.venue === scannedOffer.venue && o.status === 'pending_manager_review')?.id;
+                                                    if (offerId) {
+                                                        await base44.entities.ScottGigOffer.update(offerId, { status: 'sent_to_band' });
+                                                        queryClient.invalidateQueries({ queryKey: ['scottAllGigOffers'] });
+                                                    }
+                                                    setScannedOffer(null);
+                                                }}
+                                                className="flex-1 bg-green-900/40 hover:bg-green-900/60 border-2 border-green-500/50 hover:border-green-500 text-green-400 font-black py-3 rounded-lg font-mono text-sm"
+                                            >
+                                                ✓ YES
+                                            </button>
+                                        </div>
+
+                                        <button
+                                            onClick={() => {
+                                                setScannedOffer(null);
+                                                setTimeout(() => {
+                                                    document.getElementById('pending-approvals')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                                }, 100);
+                                            }}
+                                            className="w-full mt-3 text-gray-500 hover:text-cyan-400 text-xs font-mono font-bold"
+                                        >
+                                            Or check in Pending Approvals ↓
+                                        </button>
+                                    </>
+                                )}
+                            </motion.div>
+                        </motion.div>
+                    )}
 
                     {/* PENDING APPROVALS - ALWAYS VISIBLE */}
                                     <div id="pending-approvals" className="mb-6 bg-black border-2 border-cyan-500 rounded-lg p-4">
