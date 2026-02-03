@@ -14,9 +14,6 @@ import CB51BandNotifications from '@/components/scott/CB51BandNotifications';
 import CB51SecurityNotice from '@/components/scott/CB51SecurityNotice';
 import CB51BandVoteAlert from '@/components/scott/CB51BandVoteAlert';
 import CB51VoteBreakdown from '@/components/scott/CB51VoteBreakdown';
-import CB51PriorityInbox from '@/components/scott/CB51PriorityInbox';
-import CB51ArtistHealth from '@/components/scott/CB51ArtistHealth';
-import CB51WeekView from '@/components/scott/CB51WeekView';
 import LiveClock from '@/components/shared/LiveClock';
 import AI51AtomIcon from '@/components/ai51/AI51AtomIcon';
 
