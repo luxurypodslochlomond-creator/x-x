@@ -30,7 +30,7 @@ Deno.serve(async (req) => {
       recipient_email: gigOffer.created_by,
       notification_type: 'manager_gig_review',
       gig_offer_id: gigOffer.id,
-      title: `🎸 NEW GIG: ${gigOffer.venue || gigOffer.venue_name || 'Unnamed venue'}`,
+      title: `🎸 NEW GIG: ${gigOffer.venue || 'Unnamed venue'}`,
       message: `${gigOffer.date || 'No date'} • £${gigOffer.fee?.toLocaleString() || '?'} • Review in CB51`,
       action_url: `/CB51`
     });
@@ -40,10 +40,10 @@ Deno.serve(async (req) => {
       await base44.asServiceRole.integrations.Core.SendEmail({
         from_name: 'CB51',
         to: gigOffer.created_by,
-        subject: `🎸 New Gig: ${gigOffer.venue || gigOffer.venue_name}`,
+        subject: `🎸 New Gig: ${gigOffer.venue}`,
         body: `New gig offer:
 
-${gigOffer.venue || gigOffer.venue_name}
+${gigOffer.venue}
 ${gigOffer.date || 'No date'}
 Fee: £${gigOffer.fee?.toLocaleString() || '?'}
 
@@ -58,7 +58,7 @@ CB51 • Your AI Co-Manager`
     return Response.json({ 
       success: true,
       manager_notified: true,
-      gig: gigOffer.venue || gigOffer.venue_name
+      gig: gigOffer.venue
     });
 
   } catch (error) {

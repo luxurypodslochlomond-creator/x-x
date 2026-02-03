@@ -55,7 +55,6 @@ Deno.serve(async (req) => {
           gig_offer_id: gigOffer.id,
           title: `🎸 NEW GIG: ${gigOffer.venue}`,
           message: `${gigOffer.date} • £${gigOffer.fee?.toLocaleString()} • Vote YES or NO`,
-          decision_button: 'yes',
           action_url: `/ScottBandVote?gig=${gigOffer.id}`
         })
       );

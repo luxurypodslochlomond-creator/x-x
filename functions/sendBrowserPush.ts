@@ -11,13 +11,16 @@ Deno.serve(async (req) => {
     let adminUser = users.find(u => u.vapid_public_key);
 
     // Auto-generate keys if none exist
+    let vapidPublic;
+    let vapidPrivate;
+    
     if (!adminUser?.vapid_public_key || !adminUser?.vapid_private_key) {
       const generateResponse = await base44.asServiceRole.functions.invoke('generateVapidKeys', {});
       vapidPublic = generateResponse.data.publicKey;
       vapidPrivate = generateResponse.data.privateKey;
     } else {
-      var vapidPublic = adminUser.vapid_public_key;
-      var vapidPrivate = adminUser.vapid_private_key;
+      vapidPublic = adminUser.vapid_public_key;
+      vapidPrivate = adminUser.vapid_private_key;
     }
 
     const vapidSubject = 'mailto:scott@cb51.com';
@@ -43,6 +46,7 @@ Deno.serve(async (req) => {
       // No push subscriptions - send email fallback
       try {
         await base44.asServiceRole.integrations.Core.SendEmail({
+          from_name: 'CB51',
           to: notification.recipient_email,
           subject: notification.title,
           body: `${notification.message}\n\n${notification.action_url ? `View: ${notification.action_url}` : ''}`

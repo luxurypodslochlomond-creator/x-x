@@ -30,9 +30,9 @@ Deno.serve(async (req) => {
     const artist = await base44.asServiceRole.entities.ScottArtist.get(gigOffer.artist_id);
 
     // Draft email
-    const emailDraft = `Hi ${gigOffer.promoter_name || 'there'},
+    const emailDraft = `Hi ${gigOffer.promoter || 'there'},
 
-Great news - we can confirm ${artist.name} for ${gigOffer.venue || gigOffer.venue_name} on ${new Date(gigOffer.date).toLocaleDateString('en-GB')}.
+Great news - we can confirm ${artist.name} for ${gigOffer.venue} on ${new Date(gigOffer.date).toLocaleDateString('en-GB')}.
 
 Fee: £${gigOffer.fee?.toLocaleString() || '?'}
 
@@ -52,7 +52,7 @@ ${gigOffer.created_by}`;
       await base44.asServiceRole.integrations.Core.SendEmail({
         from_name: 'CB51',
         to: gigOffer.created_by,
-        subject: `✅ Gig Confirmed: ${gigOffer.venue || gigOffer.venue_name}`,
+        subject: `✅ Gig Confirmed: ${gigOffer.venue}`,
         body: `Gig confirmed! Email draft ready:
 
 ━━━━━━━━━━━━━━━━━━━━
@@ -72,7 +72,7 @@ CB51 • Your AI Co-Manager`
     return Response.json({ 
       success: true, 
       email_draft_created: true,
-      gig: gigOffer.venue || gigOffer.venue_name
+      gig: gigOffer.venue
     });
 
   } catch (error) {
