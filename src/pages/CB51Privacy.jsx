@@ -6,6 +6,8 @@ import CB51NavBio from '@/components/scott/CB51NavBio';
 import { motion } from 'framer-motion';
 
 export default function CB51Privacy() {
+    const [expandedSection, setExpandedSection] = useState(null);
+
     return (
         <div className="min-h-screen bg-black text-white">
             <div className="max-w-4xl mx-auto p-6 pb-24">
