@@ -603,15 +603,45 @@ export default function CB51() {
                         </motion.div>
                     )}
 
-                    {/* PENDING APPROVALS - ALWAYS VISIBLE */}
-                                    <div id="pending-approvals" className="mb-6 bg-black border-2 border-cyan-500 rounded-lg p-4">
-                                        <h2 className="text-cyan-400 font-black font-mono text-sm mb-3 flex items-center gap-2">
-                                            <AlertCircle className="w-4 h-4" />
-                                            PENDING APPROVALS {stats.pendingOffers > 0 && `(${stats.pendingOffers})`}
-                                        </h2>
-                                        {stats.pendingOffers > 0 ? (
-                                            <>
-                                            <div className="space-y-3">
+                    {/* NEW UNIFIED DASHBOARD */}
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+                      {/* LEFT: PRIORITY INBOX + CALENDAR */}
+                      <div className="lg:col-span-2 space-y-6">
+                        {/* PRIORITY INBOX - unified offers + votes + tasks */}
+                        <CB51PriorityInbox 
+                          offers={allOffers}
+                          votes={allOffers.filter(o => o.status === 'sent_to_band')}
+                          tasks={tasks}
+                          events={events}
+                        />
+
+                        {/* CALENDAR - see all gigs + conflicts */}
+                        <CB51WeekView 
+                          events={events}
+                          offers={allOffers}
+                        />
+                      </div>
+
+                      {/* RIGHT: ARTIST HEALTH */}
+                      <div>
+                        <CB51ArtistHealth 
+                          artists={artists}
+                          offers={allOffers}
+                          votes={allOffers.filter(o => o.status === 'sent_to_band')}
+                          onAddArtist={() => navigate(createPageUrl('ScottAddArtist'))}
+                        />
+                      </div>
+                    </div>
+
+                    {/* PENDING APPROVALS - DETAILED LIST (collapsed on mobile) */}
+                                  <div id="pending-approvals" className="mb-6 bg-black border-2 border-cyan-500 rounded-lg p-4">
+                                      <h2 className="text-cyan-400 font-black font-mono text-sm mb-3 flex items-center gap-2">
+                                          <AlertCircle className="w-4 h-4" />
+                                          PENDING APPROVALS {stats.pendingOffers > 0 && `(${stats.pendingOffers})`}
+                                      </h2>
+                                      {stats.pendingOffers > 0 ? (
+                                          <>
+                                          <div className="space-y-3">
                                                 {allOffers
                                                     .filter(o => o.status === 'pending_manager_review')
                                                     .slice(0, 3)
