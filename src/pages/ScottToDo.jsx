@@ -13,6 +13,7 @@ export default function ScottToDo() {
     const [showAddTask, setShowAddTask] = useState(false);
     const [selectedTask, setSelectedTask] = useState(null);
     const [newTask, setNewTask] = useState({ title: '', responsible_name: '', deadline: '' });
+    const isMobile = window.innerWidth < 1024;
 
     const urlParams = new URLSearchParams(window.location.search);
     const artistId = urlParams.get('id');
