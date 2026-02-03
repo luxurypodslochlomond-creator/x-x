@@ -13,7 +13,24 @@ export default function ScottCalendarView() {
           const queryClient = useQueryClient();
           const [showAddEvent, setShowAddEvent] = useState(false);
           const [selectedEvent, setSelectedEvent] = useState(null);
-          const [newEvent, setNewEvent] = useState({ title: '', date: '', location: '' });
+          const [newEvent, setNewEvent] = useState({ 
+        title: '', 
+        date: '', 
+        time: '',
+        venue: '',
+        location: '',
+        city: '',
+        country: '',
+        promoter: '',
+        promoter_phone: '',
+        promoter_email: '',
+        emergency_contact_name: '',
+        emergency_contact_phone: '',
+        fee: '',
+        currency: 'GBP',
+        capacity: '',
+        notes: ''
+    });
 
           const urlParams = new URLSearchParams(window.location.search);
           const artistId = urlParams.get('id');
