@@ -40,6 +40,7 @@ export default function CB51() {
                 const [editingScanned, setEditingScanned] = useState(false);
                 const [scannedEditForm, setScannedEditForm] = useState({});
                 const [processingYes, setProcessingYes] = useState(false);
+                const [scanningStep, setScanningStep] = useState(0);
                 const queryClient = useQueryClient();
 
           useEffect(() => {
@@ -247,11 +248,38 @@ export default function CB51() {
                                                                     />
                                                                     <label className="block mb-3 cursor-pointer">
                                                                         <div className="bg-black/50 border-2 border-dashed border-cyan-500/30 hover:border-cyan-500/50 rounded-lg p-4 text-center transition-all">
-                                                                            <div className="flex items-center justify-center gap-2">
-                                                                                {scanning && <AI51AtomIcon size={16} animate={true} />}
-                                                                                <p className="text-cyan-400 text-xs font-mono font-black">{scanning ? 'AI51 SCANNING...' : '📄 Upload PDF/Screenshot'}</p>
-                                                                            </div>
-                                                                            <p className="text-gray-600 text-[9px] font-mono mt-1">{scanning ? 'Lightning-fast extraction ⚡' : 'Instant extraction'}</p>
+                                                                            {scanning ? (
+                                                                                <div className="space-y-2">
+                                                                                    <div className="flex items-center justify-center gap-2">
+                                                                                        <AI51AtomIcon size={16} animate={true} />
+                                                                                        <p className="text-cyan-400 text-xs font-mono font-black">
+                                                                                            {scanningStep === 1 && '📄 Reading file...'}
+                                                                                            {scanningStep === 2 && '🔍 Finding venue...'}
+                                                                                            {scanningStep === 3 && '📅 Extracting dates...'}
+                                                                                            {scanningStep === 4 && '💰 Reading fee...'}
+                                                                                            {scanningStep === 5 && '✓ Building offer...'}
+                                                                                        </p>
+                                                                                    </div>
+                                                                                    <div className="flex gap-1 justify-center">
+                                                                                        {[1,2,3,4,5].map(step => (
+                                                                                            <motion.div
+                                                                                                key={step}
+                                                                                                className={`w-1.5 h-1.5 rounded-full ${scanningStep >= step ? 'bg-cyan-400' : 'bg-gray-700'}`}
+                                                                                                animate={scanningStep === step ? { scale: [1, 1.3, 1] } : {}}
+                                                                                                transition={{ duration: 0.6, repeat: Infinity }}
+                                                                                            />
+                                                                                        ))}
+                                                                                    </div>
+                                                                                    <p className="text-gray-600 text-[9px] font-mono">AI51 extraction ⚡</p>
+                                                                                </div>
+                                                                            ) : (
+                                                                                <>
+                                                                                    <div className="flex items-center justify-center gap-2">
+                                                                                        <p className="text-cyan-400 text-xs font-mono font-black">📄 Upload PDF/Screenshot</p>
+                                                                                    </div>
+                                                                                    <p className="text-gray-600 text-[9px] font-mono mt-1">Instant extraction</p>
+                                                                                </>
+                                                                            )}
                                                                         </div>
                                                                         <input 
                                                                             type="file" 
@@ -262,15 +290,26 @@ export default function CB51() {
                                                                                 if (!file) return;
 
                                                                                 setScanning(true);
+                                                                                setScanningStep(0);
+
                                                                                 try {
-                                                                                    // Upload file
+                                                                                    // Step 1: Reading file
+                                                                                    setScanningStep(1);
                                                                                     const { file_url } = await base44.integrations.Core.UploadFile({ file });
 
-                                                                                    // SINGLE AI call - extract + parse in one go
+                                                                                    // Step 2: AI extraction
+                                                                                    setScanningStep(2);
+                                                                                    const stepInterval = setInterval(() => {
+                                                                                        setScanningStep(prev => prev < 4 ? prev + 1 : prev);
+                                                                                    }, 1500);
+
                                                                                     const result = await base44.functions.invoke('scanGigOffers', { 
                                                                                         file_url,
                                                                                         artistId: artists[0]?.id 
                                                                                     });
+
+                                                                                    clearInterval(stepInterval);
+                                                                                    setScanningStep(5);
 
                                                                                     // Refresh data FIRST
                                                                                     await queryClient.refetchQueries({ queryKey: ['scottAllGigOffers'] });
