@@ -513,6 +513,12 @@ export default function CB51() {
 
                                                     (async () => {
                                                         try {
+                                                            // Get band members to notify
+                                                            const teamMembers = await base44.entities.ScottTeamMember.filter({ 
+                                                                artist_id: artists[0]?.id,
+                                                                role: 'band_member'
+                                                            });
+
                                                             const tasks = [
                                                                 base44.entities.ScottGigOffer.update(offerData.id, { status: 'sent_to_band' }),
                                                                 base44.entities.ScottEvent.create({
@@ -531,6 +537,19 @@ export default function CB51() {
                                                                     notes: `Approved by manager`
                                                                 })
                                                             ];
+
+                                                            // Notify each band member
+                                                            teamMembers.forEach(member => {
+                                                                tasks.push(base44.entities.ScottNotification.create({
+                                                                    artist_id: artists[0]?.id,
+                                                                    recipient_email: member.email,
+                                                                    notification_type: 'band_gig_offer',
+                                                                    title: `New gig: ${offerData.venue}`,
+                                                                    message: `Manager approved. Vote YES or NO.`,
+                                                                    gig_offer_id: offerData.id,
+                                                                    status: 'pending'
+                                                                }));
+                                                            });
 
                                                             if (offerData.date) {
                                                                 const gigDate = new Date(offerData.date);
