@@ -940,7 +940,7 @@ export default function CB51() {
                                         {events.slice(0, 3).map(event => (
                                             <button
                                                 key={event.id}
-                                                onClick={() => navigate(createPageUrl('ScottCalendarView') + (artistId ? `?id=${artistId}` : ''))}
+                                                onClick={() => navigate(createPageUrl('ScottCalendarView') + (artists[0]?.id ? `?id=${artists[0].id}` : ''))}
                                                 className="w-full bg-black/60 border border-cyan-500/20 rounded p-2 hover:border-cyan-500/50 hover:bg-black/40 transition-all text-left"
                                             >
                                                 <p className="text-white text-xs font-bold">{event.title}</p>
