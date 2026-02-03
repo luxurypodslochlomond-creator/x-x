@@ -165,21 +165,7 @@ Deno.serve(async (req) => {
       }
     }
 
-    // Notify manager
-    try {
-      await base44.functions.invoke('notifyManagerGigOffer', {
-        gigOfferId: offer.id,
-        gigDetails: {
-          artist_id: artistId,
-          venue_name: offer.venue,
-          date: offer.date,
-          promoter_name: offer.promoter,
-          fee: offer.fee
-        }
-      });
-    } catch (e) {
-      console.log('Notification creation failed:', e);
-    }
+    // Let entity automation handle notification (triggered by create)
     
     return Response.json({ 
       success: true,
