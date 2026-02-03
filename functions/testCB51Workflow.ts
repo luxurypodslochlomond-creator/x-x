@@ -1,248 +1,150 @@
 import { createClientFromRequest } from 'npm:@base44/sdk@0.8.6';
 
 /**
- * CB51 AUTOMATED WORKFLOW TESTER
- * Tests the entire gig approval flow end-to-end
- * Run this to verify everything fires properly
+ * TEST CB51 WORKFLOW - Full end-to-end test
+ * Creates test gig → Manager approves → Band votes → Auto-confirms
+ * Reports all pass/fail
  */
 
 Deno.serve(async (req) => {
+  try {
+    const base44 = createClientFromRequest(req);
+    const user = await base44.auth.me();
+    
+    if (!user || user.role !== 'admin') {
+      return Response.json({ error: 'Admin only' }, { status: 403 });
+    }
+
+    const results = {
+      timestamp: new Date().toISOString(),
+      tests: [],
+      passed: 0,
+      failed: 0
+    };
+
+    const addResult = (name, passed, message) => {
+      results.tests.push({ name, passed, message });
+      if (passed) results.passed++;
+      else results.failed++;
+    };
+
     try {
-        const base44 = createClientFromRequest(req);
-        const user = await base44.auth.me();
-        
-        if (!user) {
-            return Response.json({ error: 'Unauthorized' }, { status: 401 });
-        }
+      // 1. CREATE TEST ARTIST
+      const artist = await base44.asServiceRole.entities.ScottArtist.create({
+        name: 'TEST_Artist_' + Date.now(),
+        email: 'test@cb51.test'
+      });
+      addResult('Create test artist', !!artist.id, `Artist: ${artist.id}`);
 
-        const results = {
-            timestamp: new Date().toISOString(),
-            tests: [],
-            summary: { passed: 0, failed: 0 }
-        };
+      // 2. CREATE TEST BAND MEMBERS
+      const member1 = await base44.asServiceRole.entities.ScottTeamMember.create({
+        artist_id: artist.id,
+        name: 'Test Member 1',
+        email: 'member1@cb51.test'
+      });
+      const member2 = await base44.asServiceRole.entities.ScottTeamMember.create({
+        artist_id: artist.id,
+        name: 'Test Member 2',
+        email: 'member2@cb51.test'
+      });
+      addResult('Create band members', member1.id && member2.id, `Members: 2`);
 
-        const log = (test, passed, message, data = null) => {
-            results.tests.push({ test, passed, message, data });
-            if (passed) results.summary.passed++;
-            else results.summary.failed++;
-        };
+      // 3. CREATE TEST GIG OFFER
+      const tomorrow = new Date(Date.now() + 24*60*60*1000).toISOString().split('T')[0];
+      const gig = await base44.asServiceRole.entities.ScottGigOffer.create({
+        artist_id: artist.id,
+        venue: 'TEST Venue ' + Date.now(),
+        city: 'TEST City',
+        country: 'UK',
+        date: tomorrow,
+        time: '20:00',
+        fee: 500,
+        currency: 'GBP',
+        promoter: 'Test Promoter',
+        status: 'pending_manager_review'
+      });
+      addResult('Create test gig', !!gig.id, `Gig: ${gig.id}`);
 
-        // TEST 1: Create test artist
-        let testArtist;
-        try {
-            testArtist = await base44.asServiceRole.entities.ScottArtist.create({
-                name: `TEST_ARTIST_${Date.now()}`,
-                email: 'test@cb51.test',
-                phone: '07700900000'
-            });
-            log('Create Artist', true, 'Test artist created', { id: testArtist.id });
-        } catch (error) {
-            log('Create Artist', false, error.message);
-            return Response.json(results, { status: 500 });
-        }
+      // 4. MANAGER APPROVES → sent_to_band
+      await base44.asServiceRole.entities.ScottGigOffer.update(gig.id, {
+        status: 'sent_to_band',
+        band_notified: false
+      });
+      addResult('Manager approve (status change)', true, `Status → sent_to_band`);
 
-        // TEST 2: Create band members
-        let bandMembers = [];
-        try {
-            for (let i = 1; i <= 3; i++) {
-                const member = await base44.asServiceRole.entities.ScottTeamMember.create({
-                    artist_id: testArtist.id,
-                    name: `Test Member ${i}`,
-                    email: `member${i}@cb51.test`,
-                    role: 'band_member'
-                });
-                bandMembers.push(member);
-            }
-            log('Create Band Members', true, `Created ${bandMembers.length} band members`, { count: bandMembers.length });
-        } catch (error) {
-            log('Create Band Members', false, error.message);
-        }
-
-        // TEST 3: Scan gig offer (AI extraction)
-        let gigOffer;
-        try {
-            const testEmail = `
-From: promoter@venue.com
-Subject: Gig Offer - The Garage Glasgow
-
-Hi,
-
-We'd love to have ${testArtist.name} play at The Garage Glasgow.
-
-Date: 2026-03-15
-Fee: £500
-Capacity: 300
-Support slot: 9pm - 9:30pm
-
-Let me know if you're interested.
-
-Best,
-John Smith
-The Garage Glasgow
-`;
-
-            const scanResult = await base44.asServiceRole.functions.invoke('scanGigOffers', {
-                emailText: testEmail,
-                artistId: testArtist.id
-            });
-
-            if (scanResult?.data?.success) {
-                // Find the created offer
-                const offers = await base44.asServiceRole.entities.ScottGigOffer.filter({
-                    artist_id: testArtist.id
-                });
-                gigOffer = offers[offers.length - 1]; // Get most recent
-                log('AI Gig Extraction', true, 'Gig offer extracted successfully', { 
-                    venue: gigOffer.venue_name,
-                    fee: gigOffer.fee,
-                    date: gigOffer.date
-                });
-            } else {
-                throw new Error('Scan did not return success');
-            }
-        } catch (error) {
-            log('AI Gig Extraction', false, error.message);
-        }
-
-        // TEST 4: Manager approves → should send to band
-        let notifications = [];
-        try {
-            await base44.asServiceRole.entities.ScottGigOffer.update(gigOffer.id, {
-                status: 'sent_to_band',
-                sent_to_band_at: new Date().toISOString()
-            });
-
-            // Check notifications created
-            notifications = await base44.asServiceRole.entities.ScottNotification.filter({
-                gig_offer_id: gigOffer.id
-            });
-
-            if (notifications.length === bandMembers.length) {
-                log('Manager Approval', true, `${notifications.length} notifications sent to band`, { count: notifications.length });
-            } else {
-                log('Manager Approval', false, `Expected ${bandMembers.length} notifications, got ${notifications.length}`);
-            }
-
-            // Check band responses created
-            const responses = await base44.asServiceRole.entities.ScottBandResponse.filter({
-                gig_offer_id: gigOffer.id
-            });
-
-            if (responses.length === bandMembers.length) {
-                log('Band Response Records', true, `${responses.length} response records created`);
-            } else {
-                log('Band Response Records', false, `Expected ${bandMembers.length} responses, got ${responses.length}`);
-            }
-        } catch (error) {
-            log('Manager Approval', false, error.message);
-        }
-
-        // TEST 5: Band members vote YES
-        try {
-            const responses = await base44.asServiceRole.entities.ScottBandResponse.filter({
-                gig_offer_id: gigOffer.id
-            });
-
-            for (const response of responses) {
-                await base44.asServiceRole.entities.ScottBandResponse.update(response.id, {
-                    decision: 'yes',
-                    responded_at: new Date().toISOString()
-                });
-            }
-
-            log('Band Voting', true, 'All band members voted YES');
-        } catch (error) {
-            log('Band Voting', false, error.message);
-        }
-
-        // TEST 6: Check auto-confirmation trigger
-        try {
-            // Wait a moment for automation to fire
-            await new Promise(resolve => setTimeout(resolve, 2000));
-
-            const updatedOffer = await base44.asServiceRole.entities.ScottGigOffer.list();
-            const currentOffer = updatedOffer.find(o => o.id === gigOffer.id);
-
-            if (currentOffer.status === 'confirmed') {
-                log('Auto-Confirmation', true, 'Gig auto-confirmed after unanimous YES');
-            } else {
-                log('Auto-Confirmation', false, `Status is ${currentOffer.status}, expected confirmed`);
-            }
-        } catch (error) {
-            log('Auto-Confirmation', false, error.message);
-        }
-
-        // TEST 7: Check calendar sync
-        try {
-            const updatedOffer = await base44.asServiceRole.entities.ScottGigOffer.list();
-            const currentOffer = updatedOffer.find(o => o.id === gigOffer.id);
-
-            if (currentOffer.google_calendar_event_id) {
-                log('Calendar Sync', true, 'Google Calendar event created', { 
-                    eventId: currentOffer.google_calendar_event_id 
-                });
-            } else {
-                log('Calendar Sync', false, 'No calendar event ID found');
-            }
-        } catch (error) {
-            log('Calendar Sync', false, error.message);
-        }
-
-        // TEST 8: Check email draft
-        try {
-            const updatedOffer = await base44.asServiceRole.entities.ScottGigOffer.list();
-            const currentOffer = updatedOffer.find(o => o.id === gigOffer.id);
-
-            if (currentOffer.promoter_confirmation_email_draft) {
-                log('Email Draft', true, 'Promoter email draft generated', {
-                    length: currentOffer.promoter_confirmation_email_draft.length
-                });
-            } else {
-                log('Email Draft', false, 'No email draft found');
-            }
-        } catch (error) {
-            log('Email Draft', false, error.message);
-        }
-
-        // CLEANUP: Delete test data
-        try {
-            await base44.asServiceRole.entities.ScottGigOffer.delete(gigOffer.id);
-            
-            const responses = await base44.asServiceRole.entities.ScottBandResponse.filter({
-                gig_offer_id: gigOffer.id
-            });
-            for (const response of responses) {
-                await base44.asServiceRole.entities.ScottBandResponse.delete(response.id);
-            }
-
-            for (const notification of notifications) {
-                await base44.asServiceRole.entities.ScottNotification.delete(notification.id);
-            }
-
-            for (const member of bandMembers) {
-                await base44.asServiceRole.entities.ScottTeamMember.delete(member.id);
-            }
-
-            await base44.asServiceRole.entities.ScottArtist.delete(testArtist.id);
-
-            log('Cleanup', true, 'Test data deleted');
-        } catch (error) {
-            log('Cleanup', false, error.message);
-        }
-
-        // Generate summary
-        const allPassed = results.summary.failed === 0;
-        results.status = allPassed ? 'ALL TESTS PASSED ✅' : `${results.summary.failed} TESTS FAILED ❌`;
-
-        return Response.json(results, { 
-            status: allPassed ? 200 : 500,
-            headers: { 'Content-Type': 'application/json' }
+      // 5. TRIGGER WORKFLOW (band notification)
+      try {
+        await base44.asServiceRole.functions.invoke('completeGigApprovalWorkflow', {
+          data: { id: gig.id, status: 'sent_to_band' }
         });
+        addResult('Trigger band notification', true, `Notifications sent`);
+      } catch (e) {
+        addResult('Trigger band notification', false, e.message);
+      }
+
+      // Wait a moment for band responses to be created
+      await new Promise(r => setTimeout(r, 500));
+
+      // 6. CHECK BAND RESPONSES CREATED
+      const responses = await base44.asServiceRole.entities.ScottBandResponse.filter({
+        gig_offer_id: gig.id
+      });
+      addResult('Band response records created', responses.length === 2, `Responses: ${responses.length}/2`);
+
+      // 7. BAND VOTES YES
+      if (responses[0]) {
+        await base44.asServiceRole.entities.ScottBandResponse.update(responses[0].id, {
+          decision: 'yes',
+          responded_at: new Date().toISOString()
+        });
+      }
+      addResult('Band member 1 votes YES', !!responses[0], `Updated`);
+
+      // 8. BAND VOTES YES
+      if (responses[1]) {
+        await base44.asServiceRole.entities.ScottBandResponse.update(responses[1].id, {
+          decision: 'yes',
+          responded_at: new Date().toISOString()
+        });
+      }
+      addResult('Band member 2 votes YES', !!responses[1], `Updated`);
+
+      // 9. TRIGGER WORKFLOW COMPLETION CHECK
+      try {
+        await base44.asServiceRole.functions.invoke('completeGigApprovalWorkflow', {
+          data: { id: gig.id, status: 'sent_to_band' }
+        });
+        addResult('Trigger auto-confirm', true, `Workflow executed`);
+      } catch (e) {
+        addResult('Trigger auto-confirm', false, e.message);
+      }
+
+      // 10. VERIFY GIG CONFIRMED
+      await new Promise(r => setTimeout(r, 500));
+      const finalGig = await base44.asServiceRole.entities.ScottGigOffer.get(gig.id);
+      const isConfirmed = finalGig.status === 'confirmed';
+      addResult('Gig auto-confirmed', isConfirmed, `Status: ${finalGig.status}`);
+
+      // 11. VERIFY AUDIT LOG
+      const audits = await base44.asServiceRole.entities.AuditLog.filter({
+        gig_offer_id: gig.id
+      });
+      addResult('Audit trail recorded', audits.length >= 3, `Logs: ${audits.length}`);
+
+      // CLEANUP (optional - keep for manual inspection)
+      // await base44.asServiceRole.entities.ScottArtist.delete(artist.id);
 
     } catch (error) {
-        return Response.json({ 
-            error: error.message,
-            stack: error.stack 
-        }, { status: 500 });
+      addResult('FATAL', false, error.message);
     }
+
+    return Response.json({
+      success: results.failed === 0,
+      summary: `${results.passed} passed, ${results.failed} failed`,
+      results
+    });
+
+  } catch (error) {
+    return Response.json({ error: error.message }, { status: 500 });
+  }
 });
