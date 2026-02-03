@@ -146,7 +146,24 @@ Deno.serve(async (req) => {
       notes: extraction.raw_text,
       status: extraction.red_flags?.length > 0 ? 'flagged_for_review' : 'pending_manager_review'
     });
-    
+
+    // MYCELIUM: Auto-create message record if extracted
+    if (extraction.from || extraction.subject) {
+      try {
+        await base44.asServiceRole.entities.ScottMessage.create({
+          artist_id: artistId,
+          from: extraction.from || 'Unknown Promoter',
+          subject: extraction.subject || `Gig offer: ${extraction.venue}`,
+          body: extraction.body || `Gig at ${extraction.venue} on ${extraction.date}`,
+          status: 'pending',
+          message_type: extraction.message_type || 'gig_offer',
+          related_gig_id: offer.id
+        });
+      } catch (e) {
+        console.log('Message creation skipped:', e);
+      }
+    }
+
     // Notify manager
     try {
       await base44.functions.invoke('notifyManagerGigOffer', {
