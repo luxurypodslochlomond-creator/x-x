@@ -89,7 +89,11 @@ Deno.serve(async (req) => {
           capacity: { type: ["number", "null"] },
           deposit_required: { type: ["boolean", "null"] },
           red_flags: { type: ["array", "null"], items: { type: "string" } },
-          raw_text: { type: ["string", "null"] }
+          raw_text: { type: ["string", "null"] },
+          from: { type: ["string", "null"] },
+          subject: { type: ["string", "null"] },
+          body: { type: ["string", "null"] },
+          message_type: { type: ["string", "null"] }
         }
       }
     });
