@@ -152,12 +152,13 @@ Deno.serve(async (req) => {
       try {
         await base44.asServiceRole.entities.ScottMessage.create({
           artist_id: artistId,
-          from: extraction.from || 'Unknown Promoter',
-          subject: extraction.subject || `Gig offer: ${extraction.venue}`,
-          body: extraction.body || `Gig at ${extraction.venue} on ${extraction.date}`,
+          from_contact: extraction.from || 'Unknown Promoter',
+          raw_message: extraction.body || `Gig at ${extraction.venue} on ${extraction.date}`,
+          intent: extraction.subject || `Gig offer: ${extraction.venue}`,
+          category: extraction.message_type || 'gig_offer',
+          summary: `${extraction.venue} • ${extraction.date} • £${extraction.fee || '?'}`,
           status: 'pending',
-          message_type: extraction.message_type || 'gig_offer',
-          related_gig_id: offer.id
+          source: 'other'
         });
       } catch (e) {
         console.log('Message creation skipped:', e);
