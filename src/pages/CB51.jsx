@@ -915,41 +915,32 @@ export default function CB51() {
                         {/* QUICK TOOLS - EXPANDABLE INLINE */}
                         <div className="space-y-2 lg:hidden">
                             {/* EMAIL */}
-                            <div className="bg-black border border-cyan-500/30 rounded-lg overflow-hidden">
-                                <button
-                                    onClick={() => setExpandedTool(expandedTool === 'email' ? null : 'email')}
-                                    className="w-full p-3 flex items-center justify-between hover:bg-cyan-500/10 transition-all"
+                            <CB51NavBio
+                              icon={Mail}
+                              title="EMAIL"
+                              shortBio="Messages & inbox management"
+                              fullBio="Track all incoming WhatsApp, SMS, and email from promoters, band, and team. Reply, forward, and organize all communications in one place. Integrated with your CB51 workflow."
+                              badge={messages.filter(m => m.status === 'pending').length || undefined}
+                              onClick={() => setExpandedTool(expandedTool === 'email' ? null : 'email')}
+                            />
+                            {expandedTool === 'email' && (
+                                <motion.div
+                                    initial={{ height: 0, opacity: 0 }}
+                                    animate={{ height: 'auto', opacity: 1 }}
+                                    exit={{ height: 0, opacity: 0 }}
+                                    className="ml-4 border-l border-cyan-500/30 pl-3 space-y-2"
                                 >
-                                    <div className="flex items-center gap-2">
-                                        <Mail className="w-4 h-4 text-cyan-400" />
-                                        <span className="font-mono text-xs text-cyan-400 font-bold">EMAIL</span>
-                                        {messages.filter(m => m.status === 'pending').length > 0 && (
-                                            <span className="bg-cyan-500 text-black text-[8px] font-black px-1.5 py-0.5 rounded">
-                                                {messages.filter(m => m.status === 'pending').length}
-                                            </span>
-                                        )}
-                                    </div>
-                                    <span className="text-cyan-400 text-xs">{expandedTool === 'email' ? '−' : '+'}</span>
-                                </button>
-                                {expandedTool === 'email' && (
-                                    <motion.div
-                                        initial={{ height: 0, opacity: 0 }}
-                                        animate={{ height: 'auto', opacity: 1 }}
-                                        exit={{ height: 0, opacity: 0 }}
-                                        className="border-t border-cyan-500/30 p-3 space-y-2"
-                                    >
-                                        {messages.filter(m => m.status === 'pending').slice(0, 3).map(msg => (
-                                            <div key={msg.id} className="bg-black/60 border border-cyan-500/20 rounded p-2">
-                                                <p className="text-white text-xs font-bold">{msg.subject || 'Message'}</p>
-                                                <p className="text-gray-500 text-[9px] font-mono">{msg.from || 'Unknown'}</p>
-                                            </div>
-                                        ))}
-                                        <Link to={createPageUrl('ScottMessageInbox')} className="text-cyan-400 hover:text-cyan-300 text-[9px] font-mono font-bold block text-center pt-1">
-                                            See all →
-                                        </Link>
-                                    </motion.div>
-                                )}
-                            </div>
+                                    {messages.filter(m => m.status === 'pending').slice(0, 3).map(msg => (
+                                        <div key={msg.id} className="bg-black/60 border border-cyan-500/20 rounded p-2">
+                                            <p className="text-white text-xs font-bold">{msg.subject || 'Message'}</p>
+                                            <p className="text-gray-500 text-[9px] font-mono">{msg.from || 'Unknown'}</p>
+                                        </div>
+                                    ))}
+                                    <Link to={createPageUrl('ScottMessageInbox')} className="text-cyan-400 hover:text-cyan-300 text-[9px] font-mono font-bold block text-center pt-1">
+                                        See all →
+                                    </Link>
+                                </motion.div>
+                            )}
 
                             {/* CALENDAR */}
                             <div className="bg-black border border-cyan-500/30 rounded-lg overflow-hidden">
