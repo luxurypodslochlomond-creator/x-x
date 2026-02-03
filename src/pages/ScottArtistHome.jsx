@@ -33,6 +33,16 @@ export default function ScottArtistHome() {
         enabled: !!artistId
     });
 
+    const { data: pendingVotes = [] } = useQuery({
+        queryKey: ['scottPendingVotes', artistId],
+        queryFn: () => base44.entities.ScottGigOffer.filter({ 
+            artist_id: artistId,
+            status: 'sent_to_band'
+        }),
+        enabled: !!artistId,
+        refetchInterval: 10000 // Poll every 10s for new votes
+    });
+
     const addMemberMutation = useMutation({
         mutationFn: (memberData) => base44.entities.ScottTeamMember.create(memberData),
         onSuccess: () => {
@@ -119,6 +129,43 @@ export default function ScottArtistHome() {
                     <p className="text-gray-600 text-xs font-mono">Operations</p>
                 </div>
             </div>
+
+            {/* PENDING VOTES - Only gigs manager already approved */}
+            {pendingVotes.length > 0 && (
+                <div className="bg-gradient-to-br from-pink-900/40 to-purple-900/40 border-2 border-pink-500 rounded-lg p-3 mb-6">
+                    <div className="flex items-center gap-2 mb-3">
+                        <motion.div
+                            animate={{ scale: [1, 1.2, 1] }}
+                            transition={{ duration: 2, repeat: Infinity }}
+                            className="w-2 h-2 bg-pink-400 rounded-full"
+                        />
+                        <h2 className="text-pink-400 font-black text-sm font-mono">YOUR VOTE NEEDED ({pendingVotes.length})</h2>
+                    </div>
+                    <div className="space-y-2">
+                        {pendingVotes.map(offer => (
+                            <Link key={offer.id} to={createPageUrl(`ScottBandVote?id=${offer.id}`)}>
+                                <motion.div
+                                    whileTap={{ scale: 0.98 }}
+                                    className="bg-black/60 border border-pink-500/50 rounded p-3 hover:border-pink-500 transition-all"
+                                >
+                                    <p className="text-white font-bold text-sm">{offer.venue || 'Gig Offer'}</p>
+                                    <div className="flex items-center gap-2 text-xs mt-1">
+                                        <span className="text-pink-400 font-mono">{offer.date || 'TBD'}</span>
+                                        {offer.fee && (
+                                            <>
+                                                <span className="text-gray-600">•</span>
+                                                <span className="text-green-400 font-bold">{offer.currency || 'GBP'}{offer.fee}</span>
+                                            </>
+                                        )}
+                                    </div>
+                                    {offer.city && <p className="text-gray-500 text-[10px] mt-1">📍 {offer.city}</p>}
+                                    <p className="text-pink-400 text-[10px] font-bold mt-2">TAP TO VOTE →</p>
+                                </motion.div>
+                            </Link>
+                        ))}
+                    </div>
+                </div>
+            )}
 
             <div className="grid grid-cols-2 gap-2 mb-6">
                 {sections.map((section) => {
