@@ -17,50 +17,17 @@ Deno.serve(async (req) => {
 
     const { emailText, artistId, file_url } = await req.json();
     
-    // World-class AI extraction - SINGLE CALL (text or vision)
-    const prompt = `Extract gig offer details from this ${file_url ? 'PDF/image' : 'text'}.
+    if (!artistId || (!emailText && !file_url)) {
+      return Response.json({ error: 'Missing artistId and text/file' }, { status: 400 });
+    }
 
-    WHAT I NEED:
-
-    - Venue name (e.g. "Mallorca Live Festival")
-    - City (e.g. "Palma", "Glasgow")
-    - Country (e.g. "Spain", "UK")
-    - Date (YYYY-MM-DD - if it says "June 12 2026" → "2026-06-12")
-    - Show time (HH:MM in 24h - if it says "8pm" → "20:00")
-    - Fee (just the number - if it says "3000€" → 3000)
-    - Currency (GBP/USD/EUR/etc)
-    - Promoter name
-    - Promoter contact (email/phone)
-    - Capacity (venue size)
-
-    OPTIONAL:
-    - Deposit details
-    - Technical rider/requirements
-    - Travel/accommodation
-    - Any red flags
-
-    Return ONLY this JSON (no markdown, no explanation):
-    {
-      "venue": "string or null",
-      "city": "string or null",
-      "country": "string or null",
-      "date": "YYYY-MM-DD or null",
-      "time": "HH:MM or null",
-      "fee": number or null,
-      "currency": "GBP/USD/EUR/etc or null",
-      "promoter": "string or null",
-      "promoter_contact": "string or null",
-      "capacity": number or null,
-      "deposit_required": boolean or null,
-      "deposit_amount": number or null,
-      "requirements": "string or null",
-      "notes": "string or null"
-    }`;
-
-    // Single AI call with vision if file_url provided
+    // Fast AI extraction - vision if file, text otherwise
     const extraction = await base44.integrations.Core.InvokeLLM({
-      prompt: file_url ? prompt : `${prompt}\n\nDocument text:\n${emailText}`,
+      prompt: `Extract ONLY these fields from gig offer. Return valid JSON ONLY.
+venue, city, country, date (YYYY-MM-DD), time (HH:MM), fee (number), currency, promoter, capacity
+If not found, use null.`,
       file_urls: file_url ? [file_url] : undefined,
+      add_context_from_internet: false,
       response_json_schema: {
         type: "object",
         properties: {
@@ -72,15 +39,15 @@ Deno.serve(async (req) => {
           fee: { type: ["number", "null"] },
           currency: { type: ["string", "null"] },
           promoter: { type: ["string", "null"] },
-          promoter_contact: { type: ["string", "null"] },
-          capacity: { type: ["number", "null"] },
-          deposit_required: { type: ["boolean", "null"] },
-          deposit_amount: { type: ["number", "null"] },
-          requirements: { type: ["string", "null"] },
-          notes: { type: ["string", "null"] }
+          capacity: { type: ["number", "null"] }
         }
-        }
-        });
+      }
+    });
+
+    // Append text if provided (not in schema)
+    if (emailText && emailText.length > 500) {
+      extraction.raw_email = emailText.substring(0, 500);
+    }
 
         console.log('AI extraction:', extraction);
 
