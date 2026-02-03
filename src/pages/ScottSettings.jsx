@@ -266,8 +266,8 @@ export default function ScottSettings() {
                         <div className="border border-green-500/50 rounded-lg p-4 bg-green-900/20 flex items-start gap-3">
                             <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
                             <div className="flex-1">
-                                <p className="text-sm font-bold text-green-400">This Device — PWA Active</p>
-                                <p className="text-xs text-green-400/60">{navigator.userAgent.includes('iPhone') ? 'iOS' : navigator.userAgent.includes('Android') ? 'Android' : 'Desktop'} • Running standalone</p>
+                                <p className="text-sm font-bold text-green-400">✓ CB51 Installed</p>
+                                <p className="text-xs text-green-400/60">Runs on your home screen • You'll get push notifications</p>
                             </div>
                         </div>
                     ) : (
@@ -275,11 +275,10 @@ export default function ScottSettings() {
                             <div className="flex items-start gap-3">
                                 <Download className="w-5 h-5 text-amber-400 flex-shrink-0 mt-0.5" />
                                 <div>
-                                    <p className="text-sm font-bold text-amber-400 mb-2">Install CB51 as PWA</p>
-                                    <div className="text-xs text-amber-400/80 space-y-1 mb-3">
-                                        <p>📱 iOS: Safari → Share → Add to Home Screen</p>
-                                        <p>🤖 Android: Menu → Install app</p>
-                                        <p>💻 Desktop: Menu → Install CB51</p>
+                                    <p className="text-sm font-bold text-amber-400 mb-3">Add CB51 to your home screen</p>
+                                    <div className="text-xs text-amber-400/80 space-y-2 mb-3 bg-black/40 p-2 rounded">
+                                        <p className="font-mono"><span className="text-amber-300">🍎 iPhone:</span> open Safari, tap Share, scroll down → Add to Home Screen</p>
+                                        <p className="font-mono"><span className="text-amber-300">🤖 Android:</span> tap menu (three dots), scroll down → Install app</p>
                                     </div>
                                 </div>
                             </div>
