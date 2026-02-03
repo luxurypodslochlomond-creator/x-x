@@ -45,12 +45,18 @@ Deno.serve(async (req) => {
 
     // Smart AI extraction with context
     const extraction = await base44.integrations.Core.InvokeLLM({
-      prompt: `Extract gig offer - be smart about context.
+      prompt: `Extract gig offer AND extract any message context - be smart about context.
 
-    EXTRACT:
+    EXTRACT GIG OFFER:
     - venue, city, country, date (YYYY-MM-DD), time (HH:MM)
     - fee (number only), currency, promoter
     - capacity, deposit_required (boolean), red_flags (array of concerns)
+
+    EXTRACT MESSAGE:
+    - from (promoter name/email if visible)
+    - subject (main ask/request)
+    - body (core message, max 200 chars)
+    - message_type (gig_offer, payment_request, follow_up, other)
 
     RED FLAGS TO CATCH:
     - Fee seems suspiciously low/high
