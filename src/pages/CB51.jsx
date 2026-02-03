@@ -244,8 +244,11 @@ export default function CB51() {
                                                                     />
                                                                     <label className="block mb-3 cursor-pointer">
                                                                         <div className="bg-black/50 border-2 border-dashed border-cyan-500/30 hover:border-cyan-500/50 rounded-lg p-4 text-center transition-all">
-                                                                            <p className="text-cyan-400 text-xs font-mono">📄 {scanning ? 'SCANNING...' : 'Upload PDF/Screenshot'}</p>
-                                                                            <p className="text-gray-600 text-[9px] font-mono mt-1">{scanning ? 'AI51 reading document...' : 'Instant extraction'}</p>
+                                                                            <div className="flex items-center justify-center gap-2">
+                                                                                {scanning && <AI51AtomIcon size={16} animate={true} />}
+                                                                                <p className="text-cyan-400 text-xs font-mono font-black">{scanning ? 'AI51 SCANNING...' : '📄 Upload PDF/Screenshot'}</p>
+                                                                            </div>
+                                                                            <p className="text-gray-600 text-[9px] font-mono mt-1">{scanning ? 'Lightning-fast extraction ⚡' : 'Instant extraction'}</p>
                                                                         </div>
                                                                         <input 
                                                                             type="file" 
