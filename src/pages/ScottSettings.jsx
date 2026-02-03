@@ -8,6 +8,62 @@ export default function ScottSettings() {
     const navigate = useNavigate();
     const [activeTab, setActiveTab] = useState('security');
     const [extensionPin] = useState('5717');
+    const [pushEnabled, setPushEnabled] = useState(false);
+    const [pwaInstalled, setPwaInstalled] = useState(false);
+    const [notificationsLoading, setNotificationsLoading] = useState(false);
+
+    useEffect(() => {
+        // Check if PWA is installed
+        const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+        setPwaInstalled(isStandalone);
+
+        // Check if push notifications enabled
+        if ('serviceWorkerContainer' in navigator && 'PushManager' in window) {
+            navigator.serviceWorkerContainer.ready.then(async (reg) => {
+                const sub = await reg.pushManager.getSubscription();
+                setPushEnabled(!!sub);
+            });
+        }
+    }, []);
+
+    const handleEnablePushNotifications = async () => {
+        setNotificationsLoading(true);
+        try {
+            if ('serviceWorkerContainer' in navigator) {
+                const reg = await navigator.serviceWorkerContainer.ready;
+                const permission = await Notification.requestPermission();
+                if (permission === 'granted') {
+                    const sub = await reg.pushManager.subscribe({
+                        userVisibleOnly: true,
+                        applicationServerKey: process.env.REACT_APP_VAPID_PUBLIC_KEY
+                    });
+                    // Save subscription to DB
+                    await base44.functions.invoke('savePushSubscription', { subscription: sub });
+                    setPushEnabled(true);
+                }
+            }
+        } catch (e) {
+            console.error('Push notification setup failed:', e);
+        } finally {
+            setNotificationsLoading(false);
+        }
+    };
+
+    const handleDisablePushNotifications = async () => {
+        try {
+            if ('serviceWorkerContainer' in navigator) {
+                const reg = await navigator.serviceWorkerContainer.ready;
+                const sub = await reg.pushManager.getSubscription();
+                if (sub) {
+                    await sub.unsubscribe();
+                    await base44.functions.invoke('removePushSubscription', {});
+                    setPushEnabled(false);
+                }
+            }
+        } catch (e) {
+            console.error('Push notification disable failed:', e);
+        }
+    };
 
     const tabs = [
         { id: 'security', label: 'Security', icon: Shield },
