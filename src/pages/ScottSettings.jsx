@@ -189,10 +189,64 @@ export default function ScottSettings() {
             {activeTab === 'notifications' && (
                 <div className="space-y-4">
                     <div className="border border-cyan-500/50 rounded-lg p-6 bg-black/40">
-                        <h3 className="text-lg font-black text-cyan-400 mb-2">Push Notifications</h3>
-                        <p className="text-sm text-gray-400">Get notified when new gigs arrive</p>
+                        <div className="flex items-start gap-3 mb-4">
+                            <Bell className="w-6 h-6 text-cyan-400 flex-shrink-0 mt-1" />
+                            <div className="flex-1">
+                                <h3 className="text-lg font-black text-cyan-400 mb-1">PWA Push Notifications</h3>
+                                <p className="text-sm text-gray-400">Get instant alerts on your home screen when gigs arrive</p>
+                            </div>
+                        </div>
                     </div>
-                    <p className="text-gray-500 font-mono text-xs text-center py-8">Notification settings coming soon</p>
+
+                    {pwaInstalled ? (
+                        <div className="border border-green-500/50 rounded-lg p-4 bg-green-900/20 flex items-start gap-3">
+                            <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
+                            <div className="flex-1">
+                                <p className="text-sm font-bold text-green-400">PWA Installed</p>
+                                <p className="text-xs text-green-400/60">Running as standalone app</p>
+                            </div>
+                        </div>
+                    ) : (
+                        <div className="border border-amber-500/50 rounded-lg p-4 bg-amber-900/20 flex items-start gap-3">
+                            <AlertCircle className="w-5 h-5 text-amber-400 flex-shrink-0 mt-0.5" />
+                            <div className="flex-1">
+                                <p className="text-sm font-bold text-amber-400">Install PWA for Notifications</p>
+                                <p className="text-xs text-amber-400/60">Add CB51 to home screen to enable push notifications</p>
+                            </div>
+                        </div>
+                    )}
+
+                    <div className="border border-cyan-500/30 rounded-lg p-4 bg-black/40 space-y-3">
+                        <div className="flex items-center justify-between">
+                            <div>
+                                <p className="text-sm font-bold text-cyan-400">Push Notifications</p>
+                                <p className="text-xs text-gray-500">New gigs, band votes, approvals</p>
+                            </div>
+                            {pushEnabled ? (
+                                <button
+                                    onClick={handleDisablePushNotifications}
+                                    disabled={notificationsLoading}
+                                    className="bg-red-600/40 hover:bg-red-600/60 text-red-400 font-bold px-4 py-2 rounded text-xs transition-all disabled:opacity-50"
+                                >
+                                    Disable
+                                </button>
+                            ) : (
+                                <button
+                                    onClick={handleEnablePushNotifications}
+                                    disabled={notificationsLoading || !pwaInstalled}
+                                    className="bg-cyan-500 hover:bg-cyan-600 text-black font-bold px-4 py-2 rounded text-xs transition-all disabled:opacity-50"
+                                >
+                                    {notificationsLoading ? 'Setting up...' : 'Enable'}
+                                </button>
+                            )}
+                        </div>
+                        {pushEnabled && (
+                            <div className="flex items-center gap-2 text-xs text-green-400">
+                                <CheckCircle className="w-4 h-4" />
+                                <span>Active — you'll get notified</span>
+                            </div>
+                        )}
+                    </div>
                 </div>
             )}
 
