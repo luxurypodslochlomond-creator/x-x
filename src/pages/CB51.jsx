@@ -327,35 +327,29 @@ export default function CB51() {
                                         <CB51BandVoteAlert userEmail={user.email} />
                                     )}
 
-                    {/* CB51-STYLE SCANNED OFFER MODAL - INSTANT YES/NO */}
+                    {/* CB51-STYLE SCANNED OFFER - EXPANDABLE INLINE */}
                     {scannedOffer && (
                         <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            className="fixed inset-0 bg-black/90 backdrop-blur-sm z-[100] flex items-center justify-center p-4"
-                            onClick={() => setScannedOffer(null)}
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: 'auto' }}
+                            className="mb-6"
                         >
-                            <motion.div
-                                initial={{ scale: 0.9, opacity: 0 }}
-                                animate={{ scale: 1, opacity: 1 }}
-                                onClick={(e) => e.stopPropagation()}
-                                className="bg-black border-2 border-cyan-500 rounded-lg p-6 max-w-md w-full"
-                            >
+                            <div className="bg-gradient-to-br from-cyan-900/40 to-green-900/40 border-2 border-cyan-500 rounded-lg p-4">
                                 {scannedOffer.error ? (
                                     <>
-                                        <div className="flex items-center gap-3 mb-4">
-                                            <div className="w-12 h-12 bg-red-500/20 rounded-full flex items-center justify-center">
-                                                <span className="text-2xl">❌</span>
+                                        <div className="flex items-center gap-3 mb-3">
+                                            <div className="w-10 h-10 bg-red-500/20 rounded-full flex items-center justify-center flex-shrink-0">
+                                                <span className="text-xl">❌</span>
                                             </div>
                                             <div>
-                                                <h3 className="text-red-400 font-black font-mono text-lg">SCAN FAILED</h3>
+                                                <h3 className="text-red-400 font-black font-mono text-sm">SCAN FAILED</h3>
                                                 <p className="text-red-400/60 text-xs font-mono">Try again bro</p>
                                             </div>
                                         </div>
-                                        <p className="text-gray-400 text-sm font-mono mb-6">{scannedOffer.error}</p>
+                                        <p className="text-gray-400 text-xs font-mono mb-4">{scannedOffer.error}</p>
                                         <button
                                             onClick={() => setScannedOffer(null)}
-                                            className="w-full bg-red-600 hover:bg-red-700 text-white font-black py-3 rounded-lg font-mono"
+                                            className="w-full bg-red-600 hover:bg-red-700 text-white font-black py-2 rounded-lg font-mono text-sm"
                                         >
                                             CLOSE
                                         </button>
@@ -363,28 +357,31 @@ export default function CB51() {
                                 ) : (
                                     <>
                                         <div className="flex items-center gap-3 mb-4">
-                                            <div className="w-12 h-12 bg-cyan-500/20 rounded-full flex items-center justify-center">
-                                                <AI51AtomIcon size={32} animate={true} />
+                                            <div className="w-10 h-10 bg-cyan-500/20 rounded-full flex items-center justify-center flex-shrink-0">
+                                                <AI51AtomIcon size={28} animate={true} />
                                             </div>
                                             <div>
-                                                <h3 className="text-cyan-400 font-black font-mono text-lg">GIG SCANNED ✓</h3>
-                                                <p className="text-cyan-400/60 text-xs font-mono">Instant decision</p>
+                                                <h3 className="text-cyan-400 font-black font-mono text-sm">GIG SCANNED ✓</h3>
+                                                <p className="text-cyan-400/60 text-xs font-mono">Instant decision needed</p>
                                             </div>
                                         </div>
 
-                                        <div className="bg-black/60 border border-cyan-500/30 rounded-lg p-4 mb-6 space-y-2">
-                                            <p className="text-white font-black text-lg">{scannedOffer.venue || 'Venue TBC'}</p>
+                                        <div className="bg-black/60 border border-cyan-500/30 rounded-lg p-3 mb-4 space-y-2">
+                                            <p className="text-white font-black text-base">{scannedOffer.venue || 'Venue TBC'}</p>
                                             <div className="flex items-center gap-2 text-sm">
-                                                <span className="text-cyan-400 font-mono">{scannedOffer.date || 'Date TBC'}</span>
+                                                <span className="text-cyan-400 font-mono text-xs">{scannedOffer.date || 'Date TBC'}</span>
                                                 <span className="text-gray-500">•</span>
-                                                <span className="text-green-400 font-black font-mono">{scannedOffer.currency || 'GBP'}{scannedOffer.fee || '?'}</span>
+                                                <span className="text-green-400 font-black font-mono text-xs">{scannedOffer.currency || 'GBP'}{scannedOffer.fee || '?'}</span>
                                             </div>
                                             {scannedOffer.city && (
                                                 <p className="text-gray-400 text-xs font-mono">📍 {scannedOffer.city}</p>
                                             )}
+                                            {scannedOffer.promoter && (
+                                                <p className="text-gray-400 text-xs font-mono">👤 {scannedOffer.promoter}</p>
+                                            )}
                                         </div>
 
-                                        <div className="flex gap-3">
+                                        <div className="flex gap-2">
                                             <button
                                                 onClick={async () => {
                                                     const offerId = allOffers.find(o => o.venue === scannedOffer.venue && o.status === 'pending_manager_review')?.id;
@@ -394,7 +391,7 @@ export default function CB51() {
                                                     }
                                                     setScannedOffer(null);
                                                 }}
-                                                className="flex-1 bg-red-900/40 hover:bg-red-900/60 border-2 border-red-500/50 hover:border-red-500 text-red-400 font-black py-3 rounded-lg font-mono text-sm"
+                                                className="flex-1 bg-red-900/40 hover:bg-red-900/60 border-2 border-red-500/50 hover:border-red-500 text-red-400 font-black py-2.5 rounded-lg font-mono text-sm"
                                             >
                                                 ✗ NO
                                             </button>
@@ -428,7 +425,6 @@ export default function CB51() {
                                                             const dayBefore = new Date(gigDate);
                                                             dayBefore.setDate(dayBefore.getDate() - 1);
 
-                                                            // Task: Travel day before gig
                                                             await base44.entities.ScottTask.create({
                                                                 artist_id: artists[0]?.id,
                                                                 title: `Travel to ${scannedOffer.city || scannedOffer.venue}`,
@@ -439,7 +435,6 @@ export default function CB51() {
                                                             });
                                                         }
 
-                                                        // MYCELIUM: Auto-create invoice reminder if fee exists
                                                         if (scannedOffer.fee && scannedOffer.date) {
                                                             const gigDate = new Date(scannedOffer.date);
                                                             const weekAfter = new Date(gigDate);
@@ -457,29 +452,18 @@ export default function CB51() {
 
                                                         queryClient.invalidateQueries({ queryKey: ['scottAllGigOffers'] });
                                                         queryClient.invalidateQueries({ queryKey: ['scottEvents'] });
+                                                        queryClient.invalidateQueries({ queryKey: ['scottTasks'] });
                                                     }
                                                     setScannedOffer(null);
                                                 }}
-                                                className="flex-1 bg-green-900/40 hover:bg-green-900/60 border-2 border-green-500/50 hover:border-green-500 text-green-400 font-black py-3 rounded-lg font-mono text-sm"
+                                                className="flex-1 bg-green-900/40 hover:bg-green-900/60 border-2 border-green-500/50 hover:border-green-500 text-green-400 font-black py-2.5 rounded-lg font-mono text-sm"
                                             >
                                                 ✓ YES
                                             </button>
                                         </div>
-
-                                        <button
-                                            onClick={() => {
-                                                setScannedOffer(null);
-                                                setTimeout(() => {
-                                                    document.getElementById('pending-approvals')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                                                }, 100);
-                                            }}
-                                            className="w-full mt-3 text-gray-500 hover:text-cyan-400 text-xs font-mono font-bold"
-                                        >
-                                            Or check in Pending Approvals ↓
-                                        </button>
                                     </>
                                 )}
-                            </motion.div>
+                            </div>
                         </motion.div>
                     )}
 
