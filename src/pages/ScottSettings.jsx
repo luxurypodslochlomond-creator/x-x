@@ -32,11 +32,13 @@ export default function ScottSettings() {
             const permission = await Notification.requestPermission();
             if (permission === 'granted') {
                 setPushEnabled(true);
+                setNotificationsLoading(false);
+            } else {
+                setNotificationsLoading(false);
             }
         } catch (e) {
             console.error('Push notification setup failed:', e);
-        } finally {
-            setTimeout(() => setNotificationsLoading(false), 500);
+            setNotificationsLoading(false);
         }
     };
 
