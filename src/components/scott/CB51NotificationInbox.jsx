@@ -21,7 +21,7 @@ export default function CB51NotificationInbox() {
         queryKey: ['pendingGigOffers'],
         queryFn: async () => {
             try {
-                const offers = await base44.entities.ScottGigOffers.filter({
+                const offers = await base44.entities.ScottGigOffer.filter({
                     status: 'pending_manager_review'
                 });
                 setUnreadCount(offers.length);
@@ -45,7 +45,7 @@ export default function CB51NotificationInbox() {
         try {
             const offerToUpdate = pendingOffers.find(o => o.id === offerId);
             
-            await base44.entities.ScottGigOffers.update(offerId, {
+            await base44.entities.ScottGigOffer.update(offerId, {
                 status: approved ? 'sent_to_band' : 'rejected',
                 sent_to_band_at: approved ? new Date().toISOString() : null
             });
