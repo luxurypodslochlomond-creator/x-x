@@ -42,6 +42,8 @@ export default function ScottCalendarView() {
         createEventMutation.mutate({ ...newEvent, artist_id: artistId });
     };
 
+    const isMobile = window.innerWidth < 1024;
+
     return (
         <div className="min-h-screen bg-black text-white p-4 pb-24">
             <button onClick={() => navigate(-1)} className="flex items-center gap-2 text-gray-600 hover:text-cyan-400 transition-all mb-6">
