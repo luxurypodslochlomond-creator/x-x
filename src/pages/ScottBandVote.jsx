@@ -108,7 +108,7 @@ export default function ScottBandVote() {
                     <h1 className="text-2xl font-black text-white font-mono">
                         YOU VOTED {existingResponse.decision === 'yes' ? 'YES' : 'NO'}
                     </h1>
-                    <p className="text-gray-600 text-sm font-mono">{gigOffer.venue_name}</p>
+                    <p className="text-gray-600 text-sm font-mono">{gigOffer.venue}</p>
                     <Button
                         onClick={() => setDecision(existingResponse.decision)}
                         className="bg-cyan-500 hover:bg-cyan-600 text-black font-black"
@@ -133,7 +133,7 @@ export default function ScottBandVote() {
                 <div className="bg-black border-2 border-cyan-500 rounded-lg p-6 space-y-4" style={{ boxShadow: '0 0 15px rgba(6, 182, 212, 0.3)' }}>
                     <div>
                         <p className="text-cyan-400 font-mono text-xs mb-1">VENUE</p>
-                        <p className="text-white font-black text-xl">{gigOffer.venue_name}</p>
+                        <p className="text-white font-black text-xl">{gigOffer.venue}</p>
                     </div>
 
                     <div className="grid grid-cols-2 gap-4">

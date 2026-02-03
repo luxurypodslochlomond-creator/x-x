@@ -31,8 +31,8 @@ Deno.serve(async (req) => {
       const artist = await base44.asServiceRole.entities.ScottArtist.get(gigOffer.artist_id);
       
       const event_data = {
-        summary: `🎵 ${artist.name} @ ${gigOffer.venue || gigOffer.venue_name}`,
-        description: `Confirmed gig\nPromoter: ${gigOffer.promoter_name || 'Unknown'}\nFee: £${gigOffer.fee || 0}`,
+        summary: `🎵 ${artist.name} @ ${gigOffer.venue}`,
+        description: `Confirmed gig\nPromoter: ${gigOffer.promoter || 'Unknown'}\nFee: £${gigOffer.fee || 0}`,
         start: {
           dateTime: new Date(gigOffer.date).toISOString(),
           timeZone: 'Europe/London'
@@ -41,7 +41,7 @@ Deno.serve(async (req) => {
           dateTime: new Date(new Date(gigOffer.date).getTime() + 2 * 60 * 60 * 1000).toISOString(),
           timeZone: 'Europe/London'
         },
-        location: gigOffer.venue || gigOffer.venue_name || 'TBC'
+        location: gigOffer.venue
       };
 
       const calendarRes = await fetch(
@@ -71,7 +71,7 @@ Deno.serve(async (req) => {
       return Response.json({ 
         success: true, 
         calendar_event_id: calEvent.id,
-        gig: gigOffer.venue || gigOffer.venue_name
+        gig: gigOffer.venue
       });
 
     } catch (calError) {
