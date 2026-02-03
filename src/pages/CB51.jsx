@@ -392,44 +392,58 @@ export default function CB51() {
                                                                     </div>
                                                                 </div>
                                                             ) : (
-                                                                <>
-                                                                    <div className="flex items-between justify-between">
-                                                                        <div className="flex-1">
-                                                                            <p className="text-white font-bold text-sm">{offer.venue || 'Gig Offer'}</p>
-                                                                            <p className="text-cyan-400 text-[10px] font-mono">{offer.date || 'TBD'} • £{offer.fee || '?'}</p>
-                                                                            {offer.city && <p className="text-gray-500 text-[9px] font-mono">{offer.city}</p>}
-                                                                        </div>
-                                                                        <div className="flex gap-1">
-                                                                            <button 
-                                                                                onClick={() => handleEditOffer(offer)}
-                                                                                className="bg-cyan-600/40 hover:bg-cyan-600 text-white px-2 py-1 rounded text-[10px] font-bold"
-                                                                            >
-                                                                                ✎
-                                                                            </button>
-                                                                            <button 
-                                                                                onClick={() => {
-                                                                                    queryClient.setQueryData(['scottAllGigOffers'], allOffers.map(o => o.id === offer.id ? {...o, status: 'sent_to_band'} : o));
-                                                                                    base44.entities.ScottGigOffer.update(offer.id, {status: 'sent_to_band'}).then(() => queryClient.invalidateQueries({queryKey: ['scottAllGigOffers']}));
-                                                                                }}
-                                                                                className="bg-green-600/40 hover:bg-green-600 text-white px-2 py-1 rounded text-[10px] font-bold"
-                                                                            >
-                                                                                ✓
-                                                                            </button>
-                                                                            <button 
-                                                                                onClick={() => {
-                                                                                    if(confirm('Reject this gig?')) {
-                                                                                        queryClient.setQueryData(['scottAllGigOffers'], allOffers.map(o => o.id === offer.id ? {...o, status: 'rejected'} : o));
-                                                                                        base44.entities.ScottGigOffer.update(offer.id, {status: 'rejected'}).then(() => queryClient.invalidateQueries({queryKey: ['scottAllGigOffers']}));
-                                                                                    }
-                                                                                }}
-                                                                                className="bg-red-600/40 hover:bg-red-600 text-white px-2 py-1 rounded text-[10px] font-bold"
-                                                                            >
-                                                                                ✕
-                                                                            </button>
-                                                                        </div>
-                                                                    </div>
-                                                                    <CB51VoteBreakdown gigOfferId={offer.id} />
-                                                                </>
+                                                               <>
+                                                                   <div className="space-y-2">
+                                                                       <div className="flex items-start justify-between">
+                                                                           <div className="flex-1">
+                                                                               <p className="text-white font-bold text-sm">{offer.venue || 'Gig Offer'}</p>
+                                                                               <p className="text-cyan-400 text-[10px] font-mono">{offer.date || 'TBD'} • {offer.currency || 'GBP'}{offer.fee || '?'}</p>
+                                                                               {offer.city && <p className="text-gray-400 text-[9px] font-mono">📍 {offer.city}{offer.country ? `, ${offer.country}` : ''}</p>}
+                                                                               {offer.promoter && <p className="text-gray-500 text-[9px] font-mono">👤 {offer.promoter}</p>}
+                                                                               {offer.capacity && <p className="text-gray-500 text-[9px] font-mono">👥 {offer.capacity} cap</p>}
+                                                                               {offer.time && <p className="text-gray-500 text-[9px] font-mono">🕐 {offer.time}</p>}
+                                                                           </div>
+                                                                           <div className="flex gap-1">
+                                                                               <button 
+                                                                                   onClick={() => handleEditOffer(offer)}
+                                                                                   className="bg-cyan-600/40 hover:bg-cyan-600 text-white px-2 py-1 rounded text-[10px] font-bold"
+                                                                               >
+                                                                                   ✎
+                                                                               </button>
+                                                                               <button 
+                                                                                   onClick={() => {
+                                                                                       queryClient.setQueryData(['scottAllGigOffers'], allOffers.map(o => o.id === offer.id ? {...o, status: 'sent_to_band'} : o));
+                                                                                       base44.entities.ScottGigOffer.update(offer.id, {status: 'sent_to_band'}).then(() => queryClient.invalidateQueries({queryKey: ['scottAllGigOffers']}));
+                                                                                   }}
+                                                                                   className="bg-green-600/40 hover:bg-green-600 text-white px-2 py-1 rounded text-[10px] font-bold"
+                                                                               >
+                                                                                   ✓
+                                                                               </button>
+                                                                               <button 
+                                                                                   onClick={() => {
+                                                                                       if(confirm('Reject this gig?')) {
+                                                                                           queryClient.setQueryData(['scottAllGigOffers'], allOffers.map(o => o.id === offer.id ? {...o, status: 'rejected'} : o));
+                                                                                           base44.entities.ScottGigOffer.update(offer.id, {status: 'rejected'}).then(() => queryClient.invalidateQueries({queryKey: ['scottAllGigOffers']}));
+                                                                                       }
+                                                                                   }}
+                                                                                   className="bg-red-600/40 hover:bg-red-600 text-white px-2 py-1 rounded text-[10px] font-bold"
+                                                                               >
+                                                                                   ✕
+                                                                               </button>
+                                                                           </div>
+                                                                       </div>
+                                                                       {offer.notes && (
+                                                                           <p className="text-gray-400 text-[9px] italic bg-black/40 p-2 rounded">{offer.notes}</p>
+                                                                       )}
+                                                                       {events.filter(e => e.date === offer.date).length > 0 && (
+                                                                           <div className="bg-amber-500/20 border border-amber-500/50 rounded p-2 flex items-center gap-1">
+                                                                               <AlertCircle className="w-3 h-3 text-amber-400 flex-shrink-0" />
+                                                                               <p className="text-amber-400 text-[9px] font-bold">⚠️ CALENDAR CLASH: {events.filter(e => e.date === offer.date)[0]?.title}</p>
+                                                                           </div>
+                                                                       )}
+                                                                   </div>
+                                                                   <CB51VoteBreakdown gigOfferId={offer.id} />
+                                                               </>
                                                             )}
                                                         </div>
                                                     ))}
