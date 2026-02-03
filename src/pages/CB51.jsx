@@ -490,11 +490,9 @@ export default function CB51() {
                                         <div className="flex gap-2">
                                             <button
                                                 onClick={async () => {
-                                                    const offerId = allOffers.find(o => o.venue === scannedOffer.venue && o.status === 'pending_manager_review')?.id;
-                                                    if (offerId) {
-                                                        await base44.entities.ScottGigOffer.update(offerId, { status: 'rejected' });
-                                                        queryClient.invalidateQueries({ queryKey: ['scottAllGigOffers'] });
-                                                    }
+                                                    if (!scannedOffer?.id) return;
+                                                    await base44.entities.ScottGigOffer.update(scannedOffer.id, { status: 'rejected' });
+                                                    queryClient.invalidateQueries({ queryKey: ['scottAllGigOffers'] });
                                                     setScannedOffer(null);
                                                 }}
                                                 className="flex-1 bg-black border-2 border-red-500/50 hover:border-red-500 text-red-400 font-black py-3 rounded-lg font-mono text-sm transition-all"
@@ -503,25 +501,20 @@ export default function CB51() {
                                             </button>
                                             <button
                                                 onClick={async () => {
-                                                    const offerId = allOffers.find(o => o.venue === scannedOffer.venue && o.status === 'pending_manager_review')?.id;
-                                                    if (!offerId) return;
+                                                    if (!scannedOffer?.id) return;
 
                                                     const offerData = {...scannedOffer};
-
-                                                    // INSTANT: Card vanishes
                                                     setScannedOffer(null);
 
-                                                    // Toast feedback
                                                     const toast = document.createElement('div');
                                                     toast.className = 'fixed top-20 left-1/2 -translate-x-1/2 bg-cyan-500 text-black font-black font-mono text-xs px-4 py-2 rounded-lg z-[200]';
                                                     toast.textContent = `${offerData.venue} syncing`;
                                                     document.body.appendChild(toast);
 
-                                                    // BACKGROUND: Parallel execution
                                                     (async () => {
                                                         try {
                                                             const tasks = [
-                                                                base44.entities.ScottGigOffer.update(offerId, { status: 'sent_to_band' }),
+                                                                base44.entities.ScottGigOffer.update(offerData.id, { status: 'sent_to_band' }),
                                                                 base44.entities.ScottEvent.create({
                                                                     artist_id: artists[0]?.id,
                                                                     title: offerData.venue || 'Gig',
@@ -543,7 +536,6 @@ export default function CB51() {
                                                                 const gigDate = new Date(offerData.date);
                                                                 const dayBefore = new Date(gigDate);
                                                                 dayBefore.setDate(dayBefore.getDate() - 1);
-
                                                                 tasks.push(base44.entities.ScottTask.create({
                                                                     artist_id: artists[0]?.id,
                                                                     title: `Travel to ${offerData.city || offerData.venue}`,
@@ -557,7 +549,6 @@ export default function CB51() {
                                                                 const gigDate = new Date(offerData.date);
                                                                 const weekAfter = new Date(gigDate);
                                                                 weekAfter.setDate(weekAfter.getDate() + 7);
-
                                                                 tasks.push(base44.entities.ScottTask.create({
                                                                     artist_id: artists[0]?.id,
                                                                     title: `Invoice ${offerData.promoter || offerData.venue}`,
@@ -569,7 +560,6 @@ export default function CB51() {
                                                             }
 
                                                             await Promise.all(tasks);
-
                                                             queryClient.invalidateQueries({ queryKey: ['scottAllGigOffers'] });
                                                             queryClient.invalidateQueries({ queryKey: ['scottEvents'] });
                                                             queryClient.invalidateQueries({ queryKey: ['scottTasks'] });
@@ -577,7 +567,6 @@ export default function CB51() {
                                                             toast.textContent = `${offerData.venue} synced`;
                                                             toast.className = 'fixed top-20 left-1/2 -translate-x-1/2 bg-green-500 text-black font-black font-mono text-xs px-4 py-2 rounded-lg z-[200]';
                                                             setTimeout(() => toast.remove(), 1500);
-
                                                         } catch (e) {
                                                             console.error('Sync error:', e);
                                                             toast.textContent = 'Sync failed';
