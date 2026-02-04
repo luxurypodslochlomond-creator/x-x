@@ -409,7 +409,7 @@ export default function CB51() {
                                                     <p className="text-gray-400 text-xs font-mono">{stats.awaitingBand} offer{stats.awaitingBand !== 1 ? 's' : ''} sent to band</p>
                                                 </div>
                                                 <button
-                                                    onClick={() => navigate(createPageUrl('ScottGigOffers'))}
+                                                    onClick={() => navigate(createPageUrl('ScottGigOffers') + '?status=sent_to_band')}
                                                     className="bg-green-500 hover:bg-green-600 text-black font-black px-3 py-1.5 rounded text-xs transition-all"
                                                 >
                                                     VIEW
