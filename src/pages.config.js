@@ -170,6 +170,7 @@ import DisasterAI from './pages/DisasterAI';
 import DopamineHealing from './pages/DopamineHealing';
 import ESGAlignment from './pages/ESGAlignment';
 import ESGBridge from './pages/ESGBridge';
+import Earth51 from './pages/Earth51';
 import ExtensionManager from './pages/ExtensionManager';
 import FairLaunchProtocol from './pages/FairLaunchProtocol';
 import FamilyBroadcast from './pages/FamilyBroadcast';
@@ -377,7 +378,6 @@ import YoungWarriors from './pages/YoungWarriors';
 import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
-import Earth51 from './pages/Earth51';
 import __Layout from './Layout.jsx';
 
 
@@ -505,6 +505,7 @@ export const PAGES = {
     "DopamineHealing": DopamineHealing,
     "ESGAlignment": ESGAlignment,
     "ESGBridge": ESGBridge,
+    "Earth51": Earth51,
     "ExtensionManager": ExtensionManager,
     "FairLaunchProtocol": FairLaunchProtocol,
     "FamilyBroadcast": FamilyBroadcast,
@@ -712,7 +713,6 @@ export const PAGES = {
     "ZeroEgoProtocol": ZeroEgoProtocol,
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
-    "Earth51": Earth51,
 }
 
 export const pagesConfig = {
