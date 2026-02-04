@@ -16,9 +16,17 @@ export default function CB51() {
 
   useEffect(() => {
     document.title = 'CB51 • Artist Management';
-    base44.auth.me().then(setUser).catch(() => {
-      navigate(createPageUrl('CB51Login'));
-    });
+    const checkAuth = async () => {
+      try {
+        const currentUser = await base44.auth.me();
+        setUser(currentUser);
+      } catch (err) {
+        navigate(createPageUrl('CB51Login'));
+      } finally {
+        setLoading(false);
+      }
+    };
+    checkAuth();
   }, [navigate]);
 
   const { data: artists = [] } = useQuery({
