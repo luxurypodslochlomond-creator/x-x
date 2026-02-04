@@ -47,35 +47,14 @@ export default function CB51NotificationCenter({ userEmail, userRole = 'manager'
     enabled: userRole === 'band_member' && !!userEmail,
   });
 
-  // Manager approves offer → band gets notification
+  // Manager approves offer → send to band
   const managerApproveMutation = useMutation({
     mutationFn: async (offer) => {
-      // Update offer status
       await base44.entities.ScottGigOffer.update(offer.id, {
         status: 'sent_to_band',
         manager_approved: true,
         sent_to_band_date: new Date().toISOString(),
       });
-      
-      // Get band members for this artist
-      const teamMembers = await base44.entities.ScottTeamMember.filter({
-        artist_access: { $in: [offer.artist_id] }
-      });
-      
-      // Create notifications for each band member
-      for (const member of teamMembers) {
-        await base44.entities.ScottNotification.create({
-          type: 'manager_approved_offer',
-          gig_offer_id: offer.id,
-          recipient_email: member.email,
-          recipient_name: member.name,
-          title: `🎸 Gig Offer: ${offer.venue}`,
-          message: `${offer.fee}${offer.currency || 'GBP'} • ${offer.date} • Your vote needed`,
-          action_url: `/CB51?vote=${offer.id}`,
-          status: 'unread',
-        });
-      }
-
       return offer;
     },
     onSuccess: () => {
@@ -102,8 +81,6 @@ export default function CB51NotificationCenter({ userEmail, userRole = 'manager'
   const bandVoteYesMutation = useMutation({
     mutationFn: async (offer) => {
       const user = await base44.auth.me();
-      
-      // Record their vote
       await base44.entities.ScottBandResponse.create({
         gig_offer_id: offer.id,
         band_member_email: user.email,
@@ -112,41 +89,6 @@ export default function CB51NotificationCenter({ userEmail, userRole = 'manager'
         vote: 'yes',
         responded_at: new Date().toISOString(),
       });
-
-      // Check if all members have voted
-      const allResponses = await base44.entities.ScottBandResponse.filter({
-        gig_offer_id: offer.id,
-      });
-      const teamMembers = await base44.entities.ScottTeamMember.filter({
-        artist_access: { $in: [offer.artist_id] }
-      });
-
-      if (allResponses.length === teamMembers.length) {
-        const allYes = allResponses.every(r => r.vote === 'yes');
-        
-        // Notify manager of result
-        const offerCreator = offer.created_by;
-        const resultMessage = allYes 
-          ? `✅ All band members said YES to ${offer.venue}`
-          : `⚠️ Not everyone said YES to ${offer.venue}`;
-
-        await base44.entities.ScottNotification.create({
-          type: 'band_voting_complete',
-          gig_offer_id: offer.id,
-          recipient_email: offerCreator,
-          title: 'Band Voting Complete',
-          message: resultMessage,
-          action_url: `/CB51?result=${offer.id}`,
-          status: 'unread',
-        });
-
-        // Update offer status
-        await base44.entities.ScottGigOffer.update(offer.id, {
-          status: allYes ? 'accepted_by_band' : 'rejected_by_band',
-          all_responses_in: true,
-        });
-      }
-
       return offer;
     },
     onSuccess: () => {
@@ -159,8 +101,6 @@ export default function CB51NotificationCenter({ userEmail, userRole = 'manager'
   const bandVoteNoMutation = useMutation({
     mutationFn: async (offer) => {
       const user = await base44.auth.me();
-      
-      // Record their vote with reason
       await base44.entities.ScottBandResponse.create({
         gig_offer_id: offer.id,
         band_member_email: user.email,
@@ -170,19 +110,6 @@ export default function CB51NotificationCenter({ userEmail, userRole = 'manager'
         reason: reason,
         responded_at: new Date().toISOString(),
       });
-
-      // Notify manager immediately of NO vote
-      const offerCreator = offer.created_by;
-      await base44.entities.ScottNotification.create({
-        type: 'band_member_voted_no',
-        gig_offer_id: offer.id,
-        recipient_email: offerCreator,
-        title: `${user.full_name} said NO`,
-        message: `"${reason}"`,
-        action_url: `/CB51?discuss=${offer.id}`,
-        status: 'unread',
-      });
-
       return offer;
     },
     onSuccess: () => {
