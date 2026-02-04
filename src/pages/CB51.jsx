@@ -35,8 +35,9 @@ export default function CB51() {
           const [pasteModalOpen, setPasteModalOpen] = useState(false);
           const [pastedText, setPastedText] = useState('');
                 const [scanning, setScanning] = useState(false);
-                const [expandedTool, setExpandedTool] = useState(null);
-                const [editingOffer, setEditingOffer] = useState(null);
+                      const [expandedTool, setExpandedTool] = useState(null);
+                      const [expandedSection, setExpandedSection] = useState({});
+                      const [editingOffer, setEditingOffer] = useState(null);
                 const [editForm, setEditForm] = useState({});
                 const [scannedOffer, setScannedOffer] = useState(null);
                 const [editingScanned, setEditingScanned] = useState(false);
