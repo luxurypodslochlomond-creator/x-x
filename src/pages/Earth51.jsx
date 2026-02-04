@@ -7,11 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import AI51AtomIcon from '@/components/ai51/AI51AtomIcon';
 import P51Symbol from '@/components/shared/P51Symbol';
-import AILitterVerification from '@/components/earth51/AILitterVerification';
-import PerceptualHashDetector from '@/components/earth51/PerceptualHashDetector';
-import LivenessDetector from '@/components/earth51/LivenessDetector';
-import AdvancedWeightEstimator from '@/components/earth51/AdvancedWeightEstimator';
-import TrustScoreEngine from '@/components/earth51/TrustScoreEngine';
+import PrivacyFirstEngine from '@/components/earth51/PrivacyFirstEngine';
 
 /**
  * EARTH51 - KIDS EDITION
@@ -23,6 +19,7 @@ export default function Earth51() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const [step, setStep] = useState('landing');
+  const [photoFile, setPhotoFile] = useState(null);
   const [photoUrl, setPhotoUrl] = useState(null);
   const [weight, setWeight] = useState('');
   const [location, setLocation] = useState('');
@@ -30,12 +27,9 @@ export default function Earth51() {
   const [tokensEarned, setTokensEarned] = useState(0);
   const [error, setError] = useState(null);
   const [isOffline, setIsOffline] = useState(!navigator.onLine);
-  const [aiVerification, setAiVerification] = useState(null);
   const [showP51Explainer, setShowP51Explainer] = useState(false);
   const [showParentInfo, setShowParentInfo] = useState(false);
-  const [photoHash, setPhotoHash] = useState(null);
-  const [livenessResult, setLivenessResult] = useState(null);
-  const [weightEstimate, setWeightEstimate] = useState(null);
+  const [allChecks, setAllChecks] = useState(null);
   const [trustScore, setTrustScore] = useState(null);
   const [fraudBlocked, setFraudBlocked] = useState(false);
 
@@ -72,6 +66,7 @@ export default function Earth51() {
     try {
       setIsLoading(true);
       setError(null);
+      setPhotoFile(file);
 
       if (isOffline) {
         const reader = new FileReader();
@@ -91,21 +86,7 @@ export default function Earth51() {
       setError('Upload failed. Try again!');
       setIsLoading(false);
     }
-    };
-
-    // FRAUD BLOCKING - If any check fails
-    useEffect(() => {
-    if (livenessResult && !livenessResult.is_live_photo) {
-    setFraudBlocked(true);
-    setError('⚠️ Photo looks suspicious. Please take a fresh photo of real litter!');
-    } else if (livenessResult && !livenessResult.safe_for_kids) {
-    setFraudBlocked(true);
-    setError('⚠️ Photo blocked for safety. Try again!');
-    } else {
-    setFraudBlocked(false);
-    setError(null);
-    }
-    }, [livenessResult]);
+  };
 
   const handleSubmit = async () => {
     if (!weight || parseFloat(weight) < 0.005) {
@@ -144,19 +125,18 @@ export default function Earth51() {
         verification_status: instantPercentage === 100 ? 'instant_paid' : 'pending_verification',
         instant_payout_percentage: instantPercentage,
         quantum_processing_speed: trustScore?.quantum_speed || 'standard',
-        // 2025 ANTI-FRAUD DATA
-        photo_hash: photoHash?.sha256_hash || null,
-        perceptual_hash: photoHash?.perceptual_hash || null,
-        liveness_score: livenessResult?.liveness_score || null,
-        fraud_flags: livenessResult?.fraud_flags || [],
-        ai_weight_confidence: weightEstimate?.confidence_level || null,
-        ai_weight_range_min: weightEstimate?.weight_range?.min_kg || null,
-        ai_weight_range_max: weightEstimate?.weight_range?.max_kg || null,
-        ai_items_detected: weightEstimate?.items_detected?.map(i => `${i.count}x ${i.item_type}`).join(', ') || null,
-        // EXISTING AI VERIFICATION
-        ai_brands_detected: aiVerification?.brands?.map(b => b.brand_name).join(', ') || null,
-        ai_corporate_accountability: aiVerification?.corporate_accountability || null,
-        ai_verification_summary: aiVerification?.verification_summary || null
+        // 2026 PRIVACY-FIRST FRAUD DATA
+        perceptual_hash: allChecks?.client_safe ? 'client_verified' : null,
+        liveness_score: allChecks?.liveness?.liveness_score || null,
+        fraud_flags: allChecks?.liveness?.fraud_flags || [],
+        ai_weight_confidence: allChecks?.weight?.confidence_level || null,
+        ai_weight_range_min: allChecks?.weight?.weight_range?.min_kg || null,
+        ai_weight_range_max: allChecks?.weight?.weight_range?.max_kg || null,
+        ai_items_detected: allChecks?.weight?.items_detected?.map(i => `${i.count}x ${i.item_type}`).join(', ') || null,
+        ai_brands_detected: allChecks?.brands?.brands?.map(b => b.brand_name).join(', ') || null,
+        ai_corporate_accountability: allChecks?.brands?.corporate_accountability || null,
+        ai_verification_summary: allChecks?.brands?.verification_summary || null,
+        privacy_mode: allChecks?.ai_consent === false ? 'client_only' : 'ai_enhanced'
       };
 
       if (!isOffline) {
@@ -480,39 +460,24 @@ export default function Earth51() {
             <img src={photoUrl} alt="Cleanup" className="w-full h-48 object-cover" />
           </div>
 
-          {/* TRUST SCORE */}
-          <TrustScoreEngine onTrustCalculated={setTrustScore} />
-
-          {/* 2025 ANTI-FRAUD CHECKS */}
-          <PerceptualHashDetector 
-            photoUrl={photoUrl}
-            onHashGenerated={setPhotoHash}
-          />
-
-          <LivenessDetector
-            photoUrl={photoUrl}
-            onLivenessChecked={setLivenessResult}
-          />
-
-          <AdvancedWeightEstimator
+          {/* PRIVACY-FIRST ENGINE - 2026 GOLD STANDARD */}
+          <PrivacyFirstEngine
+            photoFile={photoFile}
             photoUrl={photoUrl}
             onWeightEstimated={(data) => {
-              setWeightEstimate(data);
               if (data?.estimated_weight_kg) {
                 setWeight(data.estimated_weight_kg.toString());
               }
             }}
-          />
-
-          {/* AI BRAND DETECTION */}
-          <AILitterVerification 
-            photoUrl={photoUrl}
-            onVerified={(data) => {
-              setAiVerification(data);
-              if (data.litter_analysis?.location_type) {
-                setLocation(data.litter_analysis.location_type);
-              }
+            onFraudDetected={(reason) => {
+              setFraudBlocked(true);
+              setError(reason === 'duplicate_or_suspicious' 
+                ? '⚠️ This photo was already submitted. Try a new one!'
+                : '⚠️ Photo looks suspicious. Please take a fresh photo of real litter!'
+              );
             }}
+            onTrustCalculated={setTrustScore}
+            onAllChecksComplete={setAllChecks}
           />
 
           {/* AI51 ESTIMATE MESSAGE */}
