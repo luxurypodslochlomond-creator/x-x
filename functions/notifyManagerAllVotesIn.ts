@@ -10,10 +10,10 @@ Deno.serve(async (req) => {
     const base44 = createClientFromRequest(req);
     const payload = await req.json();
 
-    const { event, data } = payload;
+    const { event, data, gigOfferId: directGigOfferId } = payload;
 
-    // Get gig offer - handle both update events (data.id) and direct gig_offer_id
-    const gigOfferId = data.gig_offer_id || data.id;
+    // Get gig offer - handle multiple input formats
+    const gigOfferId = directGigOfferId || (data && (data.gig_offer_id || data.id));
     const gigOffer = await base44.asServiceRole.entities.ScottGigOffer.get(gigOfferId);
     
     // Get all band responses for this gig
