@@ -28,6 +28,7 @@ export default function Earth51() {
   const [error, setError] = useState(null);
   const [isOffline, setIsOffline] = useState(!navigator.onLine);
   const [showP51Explainer, setShowP51Explainer] = useState(false);
+  const [showResonance, setShowResonance] = useState(false);
   const [allChecks, setAllChecks] = useState(null);
   const [trustScore, setTrustScore] = useState(null);
   const [fraudBlocked, setFraudBlocked] = useState(false);
