@@ -50,13 +50,13 @@ Deno.serve(async (req) => {
     // Build summary with real-time vote breakdown
     const summary = `${yesVotes}/${totalMembers} YES • ${noVotes} NO`;
     const noReasons = responses
-      .filter(r => r.decision === 'no')
-      .map(r => `${r.band_member_name}: ${r.reason_if_no || 'No reason given'}`)
+      .filter(r => (r.vote || r.decision) === 'no')
+      .map(r => `${r.band_member_name}: ${r.reason || r.reason_if_no || 'No reason given'}`)
       .join('\n');
 
     // List who voted yes (real-time context for manager)
     const yesVoters = responses
-      .filter(r => r.decision === 'yes')
+      .filter(r => (r.vote || r.decision) === 'yes')
       .map(r => r.band_member_name)
       .join(', ');
 
