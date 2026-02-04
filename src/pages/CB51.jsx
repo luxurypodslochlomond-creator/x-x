@@ -57,22 +57,21 @@ export default function CB51() {
 
   return (
     <div className="min-h-screen bg-black text-white p-4 pb-20">
-      <div className="flex justify-between items-center mb-8">
+      <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-black font-mono">CB51</h1>
-        <div className="flex gap-3">
-          {pendingCount > 0 && (
-            <motion.button
-              onClick={() => navigate(createPageUrl('CB51NotificationInbox'))}
-              className="relative px-4 py-2 bg-red-600/20 border border-red-500 text-red-400 rounded-lg font-bold text-sm"
-              whileHover={{ scale: 1.05 }}
-            >
-              <Bell className="w-4 h-4 inline mr-2" />
-              {pendingCount} PENDING
-            </motion.button>
-          )}
-          <PushNotificationManager />
-        </div>
+        <PushNotificationManager />
       </div>
+
+      {pendingCount > 0 && (
+        <motion.button
+          onClick={() => navigate(createPageUrl('CB51NotificationInbox'))}
+          className="w-full mb-6 px-6 py-3 bg-red-600/20 hover:bg-red-600/30 border-2 border-red-500 text-red-400 rounded-lg font-black text-sm font-mono flex items-center justify-center gap-2 transition-all"
+          whileHover={{ scale: 1.02 }}
+        >
+          <Bell className="w-5 h-5" />
+          {pendingCount} PENDING APPROVALS
+        </motion.button>
+      )}
 
       {awaitingCount > 0 && (
         <motion.div
