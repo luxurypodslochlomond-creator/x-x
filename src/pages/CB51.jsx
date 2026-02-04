@@ -867,8 +867,8 @@ export default function CB51() {
                     <div className="space-y-2">
 
 
-                        {/* QUICK TOOLS - EXPANDABLE INLINE */}
-                        <div className="space-y-2 lg:hidden">
+                        {/* QUICK TOOLS - GRID LAYOUT */}
+                        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 lg:hidden">
                             {/* EMAIL */}
                             <CB51NavBio
                               icon={Mail}
