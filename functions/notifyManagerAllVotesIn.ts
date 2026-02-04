@@ -60,8 +60,8 @@ Deno.serve(async (req) => {
       .map(r => r.band_member_name)
       .join(', ');
 
-    // Send notification directly to manager with real-time vote breakdown
-     await base44.asServiceRole.entities.ScottNotification.create({
+    // Create notification + send push + email
+     const notif = await base44.asServiceRole.entities.ScottNotification.create({
        recipient_email: gigOffer.created_by,
        notification_type: 'manager_votes_in',
        gig_offer_id: gigOffer.id,
@@ -69,6 +69,19 @@ Deno.serve(async (req) => {
        message: `${summary}\n\n✓ YES: ${yesVoters}${noReasons ? '\n\n✗ NO:\n' + noReasons : ''}`,
        action_url: `/ScottGigOffers?id=${gigOffer.artist_id}`
      });
+
+    // Send browser push notification
+    try {
+      await base44.asServiceRole.functions.invoke('sendBrowserPush', {
+        recipient_email: gigOffer.created_by,
+        title: `✅ VOTES IN: ${gigOffer.venue}`,
+        message: summary,
+        notification_type: 'manager_votes_in',
+        gig_offer_id: gigOffer.id
+      });
+    } catch (e) {
+      console.log('Push failed:', e);
+    }
 
     // Send email to manager
     try {
@@ -78,17 +91,17 @@ Deno.serve(async (req) => {
         subject: `✅ All Votes In: ${gigOffer.venue}`,
         body: `All votes received:
 
-${gigOffer.venue}
-${gigOffer.date}
+    ${gigOffer.venue}
+    ${gigOffer.date}
 
-${summary}
+    ${summary}
 
-✓ YES: ${yesVoters}
-${noReasons ? '\n✗ NO:\n' + noReasons : ''}
+    ✓ YES: ${yesVoters}
+    ${noReasons ? '\n✗ NO:\n' + noReasons : ''}
 
-Check CB51 → https://app.base44.com/CB51
+    Check CB51 → https://app.base44.com/CB51
 
-CB51 • Your AI Co-Manager`
+    CB51 • Your AI Co-Manager`
       });
     } catch (e) {
       console.log('Email failed:', e);

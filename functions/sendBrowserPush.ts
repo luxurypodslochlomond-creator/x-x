@@ -1,9 +1,10 @@
 import { createClientFromRequest } from 'npm:@base44/sdk@0.8.6';
+import webpush from 'npm:web-push@3.6.7';
 
 /**
  * SEND BROWSER PUSH NOTIFICATION
- * Queries subscribed devices and sends real push
- * 2026: Device-first, no third-party barriers
+ * Uses Web Push Protocol + VAPID keys to send real push notifications
+ * No third-party service needed - standard web protocol
  */
 
 Deno.serve(async (req) => {
@@ -24,13 +25,32 @@ Deno.serve(async (req) => {
       }, { status: 400 });
     }
 
+    // Get VAPID keys
+    const vapidPublicKey = Deno.env.get('VAPID_PUBLIC_KEY');
+    const vapidPrivateKey = Deno.env.get('VAPID_PRIVATE_KEY');
+
+    if (!vapidPublicKey || !vapidPrivateKey) {
+      console.warn('VAPID keys not configured');
+      return Response.json({ 
+        success: true, 
+        message: 'VAPID not configured - notifications skipped',
+        sent: 0 
+      });
+    }
+
+    // Set VAPID keys for web-push
+    webpush.setVapidDetails(
+      'mailto:scott@cb51.io',
+      vapidPublicKey,
+      vapidPrivateKey
+    );
+
     // 1. Find all active subscriptions for this user
     const subscriptions = await base44.asServiceRole.entities.ScottPushSubscription.filter({
       user_email: recipient_email
     });
 
     if (!subscriptions || subscriptions.length === 0) {
-      // User hasn't enabled notifications yet - silent fail (not an error)
       return Response.json({ 
         success: true, 
         message: 'No active subscriptions',
@@ -38,56 +58,36 @@ Deno.serve(async (req) => {
       });
     }
 
-    // 2. Send to each device (in parallel, non-blocking)
+    // 2. Build payload
+    const payload = JSON.stringify({
+      title,
+      body: message,
+      icon: '/icon-192x192.png',
+      badge: '/icon-192x192.png',
+      tag: `cb51-${gig_offer_id || Date.now()}`,
+      data: {
+        notification_type,
+        gig_offer_id,
+        timestamp: new Date().toISOString(),
+        url: '/CB51'
+      },
+      requireInteraction: true,
+      vibrate: [200, 100, 200]
+    });
+
+    // 3. Send to each subscribed device in parallel
     const sendPromises = subscriptions.map(async (sub) => {
       try {
         const subData = typeof sub.subscription_data === 'string' 
           ? JSON.parse(sub.subscription_data) 
           : sub.subscription_data;
 
-        // Web Push Protocol payload
-        const payload = {
-          title,
-          body: message,
-          icon: '/icon-192x192.png',
-          badge: '/icon-192x192.png',
-          tag: `cb51-${gig_offer_id || Date.now()}`,
-          data: {
-            notification_type,
-            gig_offer_id,
-            timestamp: new Date().toISOString()
-          },
-          requireInteraction: true,
-          vibrate: [200, 100, 200],
-          actions: [
-            { action: 'yes', title: 'YES ✓' },
-            { action: 'no', title: 'NO ✕' }
-          ]
-        };
-
-        // 3. Get VAPID keys (stored securely)
-        // Note: In production, these come from environment
-        const vapidPublicKey = Deno.env.get('VAPID_PUBLIC_KEY');
-        const vapidPrivateKey = Deno.env.get('VAPID_PRIVATE_KEY');
-
-        if (!vapidPrivateKey) {
-          console.warn('VAPID_PRIVATE_KEY not set - push notifications disabled');
-          return { success: false, reason: 'VAPID not configured' };
-        }
-
-        // 4. Sign and send push (Web Push Protocol)
-        // This is a simplified version - in production use a proper web-push library
-        // For now, we're just logging that we would send
-        console.log(`[PUSH] Sending to ${recipient_email}: ${title}`);
+        await webpush.sendNotification(subData, payload);
         
-        return { 
-          success: true, 
-          recipient: recipient_email,
-          title,
-          message
-        };
+        console.log(`✓ Push sent to ${recipient_email}`);
+        return { success: true, recipient: recipient_email };
       } catch (e) {
-        console.error(`Push to ${sub.user_email} failed:`, e.message);
+        console.error(`✕ Push to ${sub.user_email} failed: ${e.message}`);
         return { success: false, recipient: sub.user_email, error: e.message };
       }
     });
