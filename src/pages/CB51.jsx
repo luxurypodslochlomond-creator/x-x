@@ -583,6 +583,7 @@ export default function CB51() {
                                                     (async () => {
                                                         try {
                                                             // FOUNDATION FIRST: sync to calendar
+                                                            toast.textContent = `${offerData.venue} creating calendar event...`;
                                                             await base44.entities.ScottGigOffer.update(offerData.id, { status: 'sent_to_band' });
 
                                                             await base44.entities.ScottEvent.create({
@@ -602,12 +603,13 @@ export default function CB51() {
                                                             });
 
                                                             // Then notify band
+                                                            toast.textContent = `${offerData.venue} notifying band...`;
                                                             const allTeamMembers = await base44.entities.ScottTeamMember.list();
                                                             const teamMembers = allTeamMembers.filter(m => 
                                                                 m.artist_access?.includes(artists[0]?.id)
                                                             );
 
-                                                            await Promise.all(teamMembers.map(member => 
+                                                            const notificationCount = await Promise.all(teamMembers.map(member => 
                                                                 base44.entities.ScottNotification.create({
                                                                     artist_id: artists[0]?.id,
                                                                     recipient_email: member.email,
@@ -622,14 +624,14 @@ export default function CB51() {
                                                             queryClient.invalidateQueries({ queryKey: ['scottEvents'] });
                                                             queryClient.invalidateQueries({ queryKey: ['scottTasks'] });
 
-                                                            toast.textContent = `${offerData.venue} synced`;
+                                                            toast.textContent = `✓ ${offerData.venue} sent to ${notificationCount.length} band member${notificationCount.length !== 1 ? 's' : ''}`;
                                                             toast.className = 'fixed top-20 left-1/2 -translate-x-1/2 bg-green-500 text-black font-black font-mono text-xs px-4 py-2 rounded-lg z-[200]';
-                                                            setTimeout(() => toast.remove(), 1500);
+                                                            setTimeout(() => toast.remove(), 2500);
                                                         } catch (e) {
                                                             console.error('Sync error:', e);
-                                                            toast.textContent = 'Sync failed';
+                                                            toast.textContent = `✕ Sync failed: ${e.message?.substring(0, 30)}`;
                                                             toast.className = 'fixed top-20 left-1/2 -translate-x-1/2 bg-red-500 text-white font-black font-mono text-xs px-4 py-2 rounded-lg z-[200]';
-                                                            setTimeout(() => toast.remove(), 2000);
+                                                            setTimeout(() => toast.remove(), 3000);
                                                         }
                                                     })();
                                                 }}
