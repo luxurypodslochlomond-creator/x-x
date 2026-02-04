@@ -211,11 +211,9 @@ export default function CB51() {
                     <Radio className="w-16 h-16 mx-auto mb-4 animate-pulse text-cyan-400" />
                     <p className="text-cyan-400 font-black font-mono text-xl">CB51</p>
                 </div>
-
-                </div>
-                </div>
-                );
-                }
+            </div>
+        );
+    }
 
     return (
                 <div className="min-h-screen bg-black text-white p-4 pb-20">
