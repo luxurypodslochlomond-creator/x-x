@@ -1,0 +1,175 @@
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Play, Pause, ChevronDown } from 'lucide-react';
+
+/**
+ * SCIATICA51 - Deep Gluteal Syndrome Relief
+ * 528Hz + 40Hz + Movement = Healing at the SOURCE
+ * Frequencies soothe, movement heals
+ */
+
+export default function Sciatica51Protocol({ onStartHealing }) {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [selectedMode, setSelectedMode] = useState(null);
+
+  const modes = [
+    {
+      id: 'frequency_only',
+      name: 'Frequencies Only',
+      duration: 20,
+      description: 'Pure 528Hz + 40Hz healing while resting',
+      benefits: 'Pain relief, inflammation reduction, nerve calming'
+    },
+    {
+      id: 'frequency_stretch',
+      name: 'Frequency + Guided Stretch',
+      duration: 25,
+      description: 'Audio frequencies + 3-min guided piriformis stretch',
+      benefits: 'Complete healing: sound + movement targeting deep glute'
+    }
+  ];
+
+  const handleStartHealing = (mode) => {
+    onStartHealing({
+      name: 'Sciatica51 - Deep Gluteal Healing',
+      frequency: 528,
+      frequency_secondary: 40,
+      duration: modes.find(m => m.id === mode).duration,
+      mode: mode
+    });
+  };
+
+  return (
+    <div className="space-y-4">
+      {/* Collapsed Header */}
+      <button
+        onClick={() => setIsExpanded(!isExpanded)}
+        className="w-full bg-gradient-to-r from-orange-500/20 to-amber-500/20 border-4 border-orange-500 p-4 flex items-center justify-between hover:border-orange-400 transition-all"
+      >
+        <div className="text-left">
+          <h3 className="text-orange-400 font-black font-mono text-lg">SCIATICA51</h3>
+          <p className="text-gray-400 text-xs font-mono">Deep Gluteal Syndrome • Piriformis Relief</p>
+        </div>
+        <motion.div animate={{ rotate: isExpanded ? 180 : 0 }}>
+          <ChevronDown className="w-6 h-6 text-orange-400" />
+        </motion.div>
+      </button>
+
+      {/* Expanded Content */}
+      <AnimatePresence>
+        {isExpanded && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="bg-gradient-to-r from-orange-500/10 to-amber-500/10 border-4 border-orange-500 border-t-0 p-6 space-y-4"
+          >
+            {/* THE SCIENCE */}
+            <div className="bg-black/60 border-2 border-orange-500/50 p-4 rounded">
+              <p className="text-orange-400 font-black text-sm mb-2">THE SCIENCE:</p>
+              <p className="text-white text-sm font-mono leading-relaxed mb-3">
+                <strong>Deep Gluteal Syndrome</strong> = Piriformis muscle compresses sciatic nerve at deep glute level. 
+                Frequencies can't fix it alone (needs movement), but combined with stretching = powerful healing.
+              </p>
+              <ul className="text-xs text-gray-300 space-y-1 ml-3">
+                <li>✓ <strong className="text-white">528Hz</strong> = DNA repair + anti-inflammatory (reduce nerve irritation)</li>
+                <li>✓ <strong className="text-white">40Hz gamma</strong> = MIT proven to reduce nerve inflammation</li>
+                <li>✓ <strong className="text-white">Piriformis stretch</strong> = Decompress nerve (the actual cure)</li>
+                <li>✓ <strong className="text-white">Together</strong> = Paraympathetic nervous system (rest mode) + physical decompression</li>
+              </ul>
+            </div>
+
+            {/* HONEST DISCLAIMER */}
+            <div className="bg-red-900/20 border-2 border-red-500/50 p-4 rounded">
+              <p className="text-red-400 font-black text-xs mb-2">HONEST TALK:</p>
+              <p className="text-white text-xs font-mono">
+                Frequencies ease PAIN & INFLAMMATION. Movement (stretching) FIXES the root cause. 
+                This protocol does BOTH—but you have to do the stretch. Frequencies won't decompress a muscle for you.
+              </p>
+            </div>
+
+            {/* MODE SELECTION */}
+            <div className="space-y-2">
+              <p className="text-amber-400 font-black text-sm font-mono">CHOOSE YOUR MODE:</p>
+              {modes.map(mode => (
+                <button
+                  key={mode.id}
+                  onClick={() => setSelectedMode(mode.id)}
+                  className={`w-full text-left p-4 border-4 transition-all ${
+                    selectedMode === mode.id
+                      ? 'bg-orange-500/30 border-orange-400'
+                      : 'bg-black border-orange-500/50 hover:border-orange-500'
+                  }`}
+                >
+                  <div className="flex items-start justify-between">
+                    <div>
+                      <p className="font-black text-orange-400 font-mono">{mode.name}</p>
+                      <p className="text-xs text-gray-400 font-mono mt-1">{mode.description}</p>
+                      <p className="text-xs text-gray-500 font-mono mt-1">✓ {mode.benefits}</p>
+                    </div>
+                    <p className="text-sm font-black text-white font-mono">{mode.duration}m</p>
+                  </div>
+                </button>
+              ))}
+            </div>
+
+            {/* GUIDED STRETCH (if selected) */}
+            {selectedMode === 'frequency_stretch' && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-2 border-green-500 p-4 rounded space-y-3"
+              >
+                <p className="text-green-400 font-black text-sm font-mono">3-MIN PIRIFORMIS STRETCH:</p>
+                
+                <div className="space-y-2">
+                  <div className="bg-black/60 p-3 border border-green-500/30 rounded">
+                    <p className="text-green-300 font-black text-xs font-mono mb-1">POSITION 1: Lying Piriformis Stretch (90/90)</p>
+                    <p className="text-white text-xs font-mono">
+                      • Lie on back, knees bent, feet flat<br/>
+                      • Place right ankle on left knee (4-shape)<br/>
+                      • Pull left knee toward chest gently<br/>
+                      • Feel deep stretch in right glute<br/>
+                      • Hold 1.5 min each side (3 min total)
+                    </p>
+                  </div>
+                </div>
+
+                <div className="bg-green-900/30 border-2 border-green-500 p-3 rounded">
+                  <p className="text-green-400 font-bold text-xs font-mono">WHY THIS WORKS:</p>
+                  <p className="text-white text-xs font-mono">
+                    The piriformis sits right over the sciatic nerve. When tight (from pain, stress, sitting), it crushes the nerve. 
+                    This stretch decompress it directly. Frequencies calm inflammation WHILE you stretch = faster healing.
+                  </p>
+                </div>
+              </motion.div>
+            )}
+
+            {/* START BUTTON */}
+            {selectedMode && (
+              <motion.button
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                onClick={() => handleStartHealing(selectedMode)}
+                className="w-full bg-orange-600 hover:bg-orange-700 text-white py-4 font-black font-mono text-lg border-4 border-orange-500 transition-all"
+                style={{ boxShadow: '0 0 30px rgba(234, 88, 12, 0.5)' }}
+              >
+                <div className="flex items-center justify-center gap-3">
+                  <Play className="w-5 h-5" />
+                  START {modes.find(m => m.id === selectedMode)?.name.toUpperCase()}
+                </div>
+              </motion.button>
+            )}
+
+            {/* FOOTER */}
+            <div className="text-center">
+              <p className="text-xs text-gray-500 font-mono">
+                AI51 Recommendation: Do stretch daily for 2-4 weeks. Frequencies help NOW, stretch fixes it PERMANENT. ♾️❤️
+              </p>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}

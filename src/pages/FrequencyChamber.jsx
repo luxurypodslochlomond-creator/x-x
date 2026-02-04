@@ -8,6 +8,7 @@ import AI51CustomFrequencyGenerator from '@/components/ai51/AI51CustomFrequencyG
 import AI51FrequencyIntelligence from '@/components/ai51/AI51FrequencyIntelligence';
 import AI51FrequencyPrompts from '@/components/ai51/AI51FrequencyPrompts';
 import Chakra51Protocol from '@/components/healing/Chakra51Protocol';
+import Sciatica51Protocol from '@/components/healing/Sciatica51Protocol';
 import { base44 } from '@/api/base44Client';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
@@ -2827,7 +2828,7 @@ export default function FrequencyChamber() {
         </div>
       )}
 
-      {/* CHAKRA51 PROTOCOL - INTEGRATED SEAMLESSLY */}
+      {/* CHAKRA51 + SCIATICA51 PROTOCOLS */}
       {selectedProtocol?.id === 'chakra51' && !isPlaying && (
         <div className="max-w-4xl mx-auto p-4">
           <motion.div
@@ -2871,6 +2872,48 @@ export default function FrequencyChamber() {
                   }
                 };
                 startAudio(chakraProtocol);
+              }}
+            />
+          </motion.div>
+        </div>
+      )}
+
+      {/* SCIATICA51 PROTOCOL - INTEGRATED SEAMLESSLY */}
+      {selectedProtocol?.id === 'sciatic_relief' && !isPlaying && (
+        <div className="max-w-4xl mx-auto p-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="bg-black border-4 border-orange-500 p-6"
+          >
+            <button
+              onClick={() => setSelectedProtocol(null)}
+              className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors mb-6"
+            >
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <rect x="12" y="8" width="2" height="4"/>
+                <rect x="10" y="6" width="2" height="2"/>
+                <rect x="10" y="12" width="2" height="2"/>
+                <rect x="8" y="4" width="2" height="2"/>
+                <rect x="8" y="14" width="2" height="2"/>
+                <rect x="6" y="9" width="2" height="2"/>
+              </svg>
+              <span className="font-mono text-sm">All protocols</span>
+            </button>
+            
+            <Sciatica51Protocol 
+              onStartHealing={(healingConfig) => {
+                const sciaticaProtocol = {
+                  ...selectedProtocol,
+                  name: healingConfig.name || selectedProtocol.name,
+                  config: {
+                    ...selectedProtocol.config,
+                    primary: healingConfig.frequency || selectedProtocol.config.primary,
+                    secondary: healingConfig.frequency_secondary || selectedProtocol.config.secondary,
+                  },
+                  sciaticaMode: healingConfig.mode
+                };
+                startAudio(sciaticaProtocol);
               }}
             />
           </motion.div>
