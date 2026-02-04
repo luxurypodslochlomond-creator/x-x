@@ -15,12 +15,13 @@ export default function ScottGigOffers() {
     const queryClient = useQueryClient();
     const urlParams = new URLSearchParams(window.location.search);
     const artistId = urlParams.get('id');
+    const filterStatus = urlParams.get('status') || 'pending_manager_review';
 
     const { data: pendingOffers = [] } = useQuery({
-        queryKey: ['scottPendingOffers', artistId],
+        queryKey: ['scottPendingOffers', artistId, filterStatus],
         queryFn: async () => {
             const offers = await base44.entities.ScottGigOffer.filter({
-                status: 'pending_manager_review'
+                status: filterStatus
             });
             return artistId ? offers.filter(o => o.artist_id === artistId) : offers;
         },
