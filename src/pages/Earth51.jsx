@@ -376,6 +376,23 @@ export default function Earth51() {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              onClick={() => setShowResonance(!showResonance)}
+              className="w-full bg-pink-500 border-4 border-pink-400 p-5 aspect-square flex flex-col items-center justify-center"
+              style={{ boxShadow: '4px 4px 0px #000' }}
+            >
+              <motion.div
+                animate={{ scale: [1, 1.1, 1] }}
+                transition={{ duration: 1.5, repeat: Infinity }}
+                className="w-16 h-16 bg-black border-2 border-white mb-3 flex items-center justify-center"
+              >
+                <Sparkles className="w-8 h-8 text-pink-400" />
+              </motion.div>
+              <p className="text-black font-black font-mono text-[10px] text-center">RESONANCE!</p>
+            </motion.button>
+
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               onClick={() => setShowParentInfo(!showParentInfo)}
               className="w-full bg-blue-500 border-4 border-blue-400 p-5 aspect-square flex flex-col items-center justify-center"
               style={{ boxShadow: '4px 4px 0px #000' }}
