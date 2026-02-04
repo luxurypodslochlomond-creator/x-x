@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import AI51AtomIcon from '@/components/ai51/AI51AtomIcon';
 import P51Symbol from '@/components/shared/P51Symbol';
+import AILitterVerification from '@/components/earth51/AILitterVerification';
 
 /**
  * EARTH51 - KIDS EDITION
@@ -25,6 +26,7 @@ export default function Earth51() {
   const [tokensEarned, setTokensEarned] = useState(0);
   const [error, setError] = useState(null);
   const [isOffline, setIsOffline] = useState(!navigator.onLine);
+  const [aiVerification, setAiVerification] = useState(null);
 
   useEffect(() => {
     const handleOnline = () => setIsOffline(false);
@@ -98,7 +100,11 @@ export default function Earth51() {
         tokens_awarded: total,
         tokens_instant: total,
         tokens_pending: 0,
-        verification_status: 'instant_paid'
+        verification_status: 'instant_paid',
+        // AI VERIFICATION DATA
+        ai_brands_detected: aiVerification?.brands?.map(b => b.brand_name).join(', ') || null,
+        ai_corporate_accountability: aiVerification?.corporate_accountability || null,
+        ai_verification_summary: aiVerification?.verification_summary || null
       };
 
       if (!isOffline) {
@@ -233,6 +239,20 @@ export default function Earth51() {
           <div className="border-4 border-green-500 rounded-lg overflow-hidden">
             <img src={photoUrl} alt="Cleanup" className="w-full h-64 object-cover" />
           </div>
+
+          {/* AI VERIFICATION */}
+          <AILitterVerification 
+            photoUrl={photoUrl}
+            onVerified={(data) => {
+              setAiVerification(data);
+              if (data.litter_analysis?.estimated_weight_kg) {
+                setWeight(data.litter_analysis.estimated_weight_kg.toString());
+              }
+              if (data.litter_analysis?.location_type) {
+                setLocation(data.litter_analysis.location_type);
+              }
+            }}
+          />
 
           {/* INPUT */}
           <div className="space-y-3">
