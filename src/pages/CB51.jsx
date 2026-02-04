@@ -644,8 +644,7 @@ export default function CB51() {
                                           <span className="ml-auto text-xs">{expandedSection.pendingApprovals ? '▼' : '▶'}</span>
                                       </h2>
                                       {expandedSection.pendingApprovals && (
-                                          <>
-                                          <div className="space-y-3">
+                                         <div className="space-y-3">
                                                 {allOffers
                                                     .filter(o => o.status === 'pending_manager_review')
                                                     .slice(0, 3)
