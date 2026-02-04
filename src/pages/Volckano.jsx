@@ -24,6 +24,8 @@ export default function Volckano() {
     const [showUnlock, setShowUnlock] = useState(false);
     const [soundEnabled, setSoundEnabled] = useState(true);
     const [achievements, setAchievements] = useState([]);
+    const [p51Balance, setP51Balance] = useState(0);
+    const [inGameP51, setInGameP51] = useState(0);
     
     const playerY = useRef(200);
     const velocity = useRef(0);
@@ -35,12 +37,12 @@ export default function Volckano() {
     const [, forceUpdate] = useState(0);
 
     const CHARACTER_UNLOCKS = [
-        { type: 'happy', name: 'Happy', stars: 0 },
-        { type: 'unicorn', name: 'Unicorn', stars: 10 },
-        { type: 'dragon', name: 'Dragon', stars: 25 },
-        { type: 'kitty', name: 'Kitty', stars: 50 },
-        { type: 'rocket', name: 'Rocket', stars: 100 },
-        { type: 'star', name: 'Star', stars: 200 }
+        { type: 'happy', name: 'Happy', stars: 0, p51Required: 0 },
+        { type: 'unicorn', name: 'Unicorn', stars: 10, p51Required: 0 },
+        { type: 'dragon', name: 'Dragon', stars: 25, p51Required: 5 },
+        { type: 'kitty', name: 'Kitty', stars: 50, p51Required: 10 },
+        { type: 'rocket', name: 'Rocket', stars: 100, p51Required: 20 },
+        { type: 'star', name: 'Star', stars: 200, p51Required: 50 }
     ];
 
     useEffect(() => {
@@ -49,6 +51,8 @@ export default function Volckano() {
         const savedHighScore = localStorage.getItem('volckano_highscore');
         const savedUnlocked = localStorage.getItem('volckano_unlocked');
         const savedChar = localStorage.getItem('volckano_character');
+        const earth51Balance = parseFloat(localStorage.getItem('earth51_local_balance') || '0');
+        const savedInGameP51 = parseFloat(localStorage.getItem('volckano_ingame_p51') || '0');
         
         if (saved) {
             setPlayerName(saved);
@@ -58,6 +62,8 @@ export default function Volckano() {
         if (savedHighScore) setHighScore(parseInt(savedHighScore));
         if (savedUnlocked) setUnlockedCharacters(JSON.parse(savedUnlocked));
         if (savedChar) setCurrentCharacter(savedChar);
+        setP51Balance(earth51Balance);
+        setInGameP51(savedInGameP51);
     }, []);
 
     const playSound = (freq, duration = 100) => {
@@ -117,12 +123,13 @@ export default function Volckano() {
             });
         }
         
-        // Add collectible stars
+        // Add collectible stars AND in-game litter (earns small $P51)
         for (let i = 0; i < 8; i++) {
             collectibles.current.push({
                 x: 300 + (i * 100),
                 y: 100 + Math.random() * 200,
-                collected: false
+                collected: false,
+                type: Math.random() > 0.7 ? 'litter' : 'star' // 30% litter, 70% stars
             });
         }
     };
@@ -156,9 +163,13 @@ export default function Volckano() {
                     localStorage.setItem('volckano_highscore', score.toString());
                 }
                 
-                // Check for unlocks
+                // Check for unlocks (stars + $P51 requirement)
                 CHARACTER_UNLOCKS.forEach(char => {
-                    if (stars >= char.stars && !unlockedCharacters.includes(char.type)) {
+                    const hasStars = stars >= char.stars;
+                    const hasP51 = p51Balance >= char.p51Required;
+                    const canUnlock = hasStars && hasP51;
+
+                    if (canUnlock && !unlockedCharacters.includes(char.type)) {
                         setUnlockedCharacters(prev => {
                             const updated = [...prev, char.type];
                             localStorage.setItem('volckano_unlocked', JSON.stringify(updated));
@@ -198,16 +209,29 @@ export default function Volckano() {
                 }
             }
 
-            // COLLECTIBLES (stars)
+            // COLLECTIBLES (stars + in-game litter)
             collectibles.current.forEach(c => {
                 if (!c.collected && c.x > 40 && c.x < 120 && Math.abs(c.y - playerY.current) < 40) {
                     c.collected = true;
-                    setStars(s => {
-                        const newStars = s + 1;
-                        localStorage.setItem('volckano_stars', newStars.toString());
-                        return newStars;
-                    });
-                    playSound(880, 100);
+                    
+                    if (c.type === 'litter') {
+                        // IN-GAME LITTER: Small $P51 reward (0.1 per pickup)
+                        setInGameP51(prev => {
+                            const newBalance = prev + 0.1;
+                            localStorage.setItem('volckano_ingame_p51', newBalance.toFixed(1));
+                            return newBalance;
+                        });
+                        playSound(528, 100);
+                    } else {
+                        // STARS: Unlock characters
+                        setStars(s => {
+                            const newStars = s + 1;
+                            localStorage.setItem('volckano_stars', newStars.toString());
+                            return newStars;
+                        });
+                        playSound(880, 100);
+                    }
+                    
                     if (navigator.vibrate) navigator.vibrate(30);
                     // Sparkles
                     for (let i = 0; i < 8; i++) {
@@ -217,7 +241,7 @@ export default function Volckano() {
                             vx: (Math.random() - 0.5) * 5,
                             vy: (Math.random() - 0.5) * 5,
                             life: 20,
-                            color: '#FFD700'
+                            color: c.type === 'litter' ? '#22c55e' : '#FFD700'
                         });
                     }
                 }
@@ -383,14 +407,22 @@ export default function Volckano() {
                         <VolckanoPlayer type={currentCharacter} size={60} />
                     </motion.div>
 
-                    {/* Collectible Stars - Custom */}
-                    {collectibles.current.map((star, i) => !star.collected && star.x > -50 && (
+                    {/* Collectibles - Stars + In-Game Litter */}
+                    {collectibles.current.map((item, i) => !item.collected && item.x > -50 && (
                         <div
                             key={i}
                             className="absolute"
-                            style={{ left: `${star.x}px`, top: `${star.y}px` }}
+                            style={{ left: `${item.x}px`, top: `${item.y}px` }}
                         >
-                            <VolckanoStar size={32} />
+                            {item.type === 'litter' ? (
+                                <svg width="28" height="28" viewBox="0 0 32 32" style={{ imageRendering: 'pixelated', filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))' }}>
+                                    <rect x="10" y="8" width="12" height="16" fill="#22c55e" rx="2"/>
+                                    <rect x="8" y="6" width="16" height="3" fill="#16a34a"/>
+                                    <rect x="14" y="11" width="4" height="10" fill="#86efac"/>
+                                </svg>
+                            ) : (
+                                <VolckanoStar size={32} />
+                            )}
                         </div>
                     ))}
 
@@ -463,44 +495,48 @@ export default function Volckano() {
                         </div>
                     </div>
 
-                    {/* HUD */}
-                    <div className="absolute top-4 left-4 right-4 bg-white/90 backdrop-blur-xl border-4 border-white rounded-2xl px-4 py-3 shadow-2xl">
+                    {/* HUD - 8-BIT EARTH.LOVE STYLE */}
+                    <div className="absolute top-4 left-4 right-4 bg-black border-4 border-cyan-500 px-3 py-2 shadow-2xl" style={{ boxShadow: '4px 4px 0px rgba(0,0,0,0.5)' }}>
                         <div className="flex items-center justify-between mb-2">
                             <div>
-                                <p className="text-gray-900 text-lg font-black">SAVED: {score} ♾️❤️</p>
+                                <p className="text-white text-sm font-black font-mono">SAVED: {score} ♾️❤️</p>
                                 {gameTime.current < 3000 && gameStarted && (
                                     <motion.p 
                                         animate={{ scale: [1, 1.1, 1] }}
                                         transition={{ duration: 0.5, repeat: Infinity }}
-                                        className="text-orange-500 text-sm font-black"
+                                        className="text-orange-400 text-xs font-black font-mono"
                                     >
                                         GET READY! 🔥
                                     </motion.p>
                                 )}
                             </div>
-                            <div className="flex items-center gap-2">
+                            <div className="flex items-center gap-1">
                                 <button
                                     onClick={(e) => { e.stopPropagation(); setShowShare(true); }}
-                                    className="p-2 bg-gradient-to-r from-cyan-500 to-purple-500 hover:from-cyan-600 hover:to-purple-600 rounded-xl shadow-lg"
+                                    className="p-1.5 bg-cyan-500 hover:bg-cyan-400 border-2 border-cyan-400"
                                 >
-                                    <Users className="w-5 h-5 text-white" />
+                                    <Users className="w-4 h-4 text-black" />
                                 </button>
                                 <button
                                     onClick={(e) => { e.stopPropagation(); setSoundEnabled(!soundEnabled); }}
-                                    className="text-2xl"
+                                    className="text-xl"
                                 >
                                     {soundEnabled ? '🔊' : '🔇'}
                                 </button>
                             </div>
                         </div>
-                        <div className="flex items-center gap-4">
-                            <div className="flex items-center gap-2 bg-yellow-100 px-3 py-1 rounded-full">
-                                <span className="text-2xl">⭐</span>
-                                <span className="text-yellow-600 text-lg font-black">{stars}</span>
+                        <div className="flex items-center gap-2 flex-wrap">
+                            <div className="flex items-center gap-1 bg-yellow-500 border-2 border-yellow-400 px-2 py-0.5">
+                                <span className="text-base">⭐</span>
+                                <span className="text-black text-sm font-black font-mono">{stars}</span>
                             </div>
-                            <div className="flex items-center gap-2 bg-cyan-100 px-3 py-1 rounded-full">
-                                <span className="text-sm text-cyan-600 font-bold">Best:</span>
-                                <span className="text-cyan-600 text-lg font-black">{highScore}</span>
+                            <div className="flex items-center gap-1 bg-green-500 border-2 border-green-400 px-2 py-0.5">
+                                <span className="text-black text-[10px] font-black font-mono">GAME:</span>
+                                <span className="text-black text-sm font-black font-mono">{inGameP51.toFixed(1)}</span>
+                            </div>
+                            <div className="flex items-center gap-1 bg-pink-500 border-2 border-pink-400 px-2 py-0.5">
+                                <span className="text-black text-[10px] font-black font-mono">REAL:</span>
+                                <span className="text-black text-sm font-black font-mono">{p51Balance.toFixed(1)}</span>
                             </div>
                         </div>
                     </div>
@@ -555,8 +591,13 @@ export default function Volckano() {
                                     CHOOSE YOUR HERO
                                 </p>
                                 <div className="grid grid-cols-3 gap-3">
-                                    {CHARACTER_UNLOCKS.map(char => (
-                                        unlockedCharacters.includes(char.type) ? (
+                                    {CHARACTER_UNLOCKS.map(char => {
+                                        const hasStars = stars >= char.stars;
+                                        const hasP51 = p51Balance >= char.p51Required;
+                                        const canUnlock = hasStars && hasP51;
+                                        const isUnlocked = unlockedCharacters.includes(char.type);
+                                        
+                                        return isUnlocked ? (
                                             <motion.button
                                                 key={char.type}
                                                 whileHover={{ scale: 1.1 }}
@@ -567,16 +608,16 @@ export default function Volckano() {
                                                     localStorage.setItem('volckano_character', char.type);
                                                     if (navigator.vibrate) navigator.vibrate(30);
                                                 }}
-                                                className={`relative p-3 rounded-2xl border-4 transition-all ${
+                                                className={`relative p-2 border-4 transition-all ${
                                                     currentCharacter === char.type 
-                                                        ? 'border-yellow-400 bg-gradient-to-br from-yellow-500/40 to-orange-500/40' 
+                                                        ? 'border-yellow-400 bg-yellow-500/40' 
                                                         : 'border-white/40 bg-white/10 hover:bg-white/20'
                                                 }`}
                                                 style={{ boxShadow: currentCharacter === char.type ? '0 0 20px rgba(255, 215, 0, 0.5)' : 'none' }}
                                             >
-                                                <VolckanoPlayer type={char.type} size={48} />
+                                                <VolckanoPlayer type={char.type} size={40} />
                                                 {currentCharacter === char.type && (
-                                                    <div className="absolute -top-2 -right-2 w-6 h-6 bg-green-500 rounded-full border-2 border-white flex items-center justify-center">
+                                                    <div className="absolute -top-1 -right-1 w-5 h-5 bg-green-500 border-2 border-white flex items-center justify-center">
                                                         <span className="text-white text-xs font-black">✓</span>
                                                     </div>
                                                 )}
@@ -584,17 +625,39 @@ export default function Volckano() {
                                         ) : (
                                             <div
                                                 key={char.type}
-                                                className="relative p-3 rounded-2xl border-4 border-gray-700 bg-black/60"
+                                                className="relative p-2 border-4 border-gray-700 bg-black/60"
                                             >
-                                                <div className="w-[48px] h-[48px] flex items-center justify-center text-3xl opacity-40">
+                                                <div className="w-[40px] h-[40px] flex items-center justify-center text-2xl opacity-40">
                                                     🔒
                                                 </div>
-                                                <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 bg-orange-600 text-white text-xs font-black px-2 py-0.5 rounded-full border-2 border-white whitespace-nowrap">
-                                                    {char.stars}⭐
+                                                <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 space-y-0.5">
+                                                    <div className="bg-orange-600 text-white text-[9px] font-black px-1.5 py-0.5 border-2 border-white whitespace-nowrap font-mono">
+                                                        {char.stars}⭐
+                                                    </div>
+                                                    {char.p51Required > 0 && (
+                                                        <div className={`${hasP51 ? 'bg-green-600' : 'bg-pink-600'} text-white text-[9px] font-black px-1.5 py-0.5 border-2 border-white whitespace-nowrap font-mono`}>
+                                                            {char.p51Required} $P51
+                                                        </div>
+                                                    )}
                                                 </div>
                                             </div>
-                                        )
-                                    ))}
+                                        );
+                                    })}
+                                </div>
+                            </div>
+
+                            {/* $P51 EXPLAINER */}
+                            <div className="bg-black border-4 border-green-500 p-4 mb-4" style={{ boxShadow: '4px 4px 0px #000' }}>
+                                <p className="text-green-400 font-black font-mono text-xs mb-2">HOW $P51 WORKS:</p>
+                                <div className="space-y-1 text-white font-mono text-[9px]">
+                                    <p>🌍 Clean real Earth = 1.2 $P51/kg</p>
+                                    <p>🎮 Clean in-game = 0.1 $P51/pickup</p>
+                                    <p>💡 Real > Virtual (teach habits!)</p>
+                                </div>
+                                <div className="bg-pink-500 border-2 border-pink-400 p-2 mt-2">
+                                    <p className="text-black font-black font-mono text-[9px] text-center">
+                                        Unlock levels with REAL cleanups!
+                                    </p>
                                 </div>
                             </div>
 
@@ -644,22 +707,30 @@ export default function Volckano() {
                                     OH NO!
                                 </h2>
                                 
-                                <div className="bg-white/10 backdrop-blur-sm border-4 border-white/30 rounded-2xl p-4 space-y-2">
-                                    <p className="text-white text-2xl font-black" style={{ fontFamily: 'monospace' }}>
+                                <div className="bg-black border-4 border-cyan-500 p-4 space-y-2" style={{ boxShadow: '4px 4px 0px #000' }}>
+                                    <p className="text-white text-2xl font-black font-mono">
                                         SAVED: {score} ♾️❤️
                                     </p>
                                     {score === highScore && score > 0 && (
                                         <motion.p 
                                             animate={{ scale: [1, 1.1, 1] }}
                                             transition={{ duration: 0.5, repeat: Infinity }}
-                                            className="text-yellow-400 text-lg font-black"
-                                            style={{ fontFamily: 'monospace' }}
+                                            className="text-yellow-400 text-lg font-black font-mono"
                                         >
                                             🏆 NEW RECORD!
                                         </motion.p>
                                     )}
-                                    <p className="text-cyan-300 text-sm font-bold" style={{ fontFamily: 'monospace' }}>
-                                        STARS: ⭐ {stars}
+                                    <div className="flex items-center gap-2">
+                                        <div className="bg-yellow-500 border-2 border-yellow-400 px-2 py-1 flex items-center gap-1">
+                                            <span className="text-sm">⭐</span>
+                                            <span className="text-black text-sm font-black font-mono">{stars}</span>
+                                        </div>
+                                        <div className="bg-green-500 border-2 border-green-400 px-2 py-1 flex items-center gap-1">
+                                            <span className="text-black text-[9px] font-black font-mono">+{inGameP51.toFixed(1)}</span>
+                                        </div>
+                                    </div>
+                                    <p className="text-pink-400 text-[9px] font-mono">
+                                        Real Earth: {p51Balance.toFixed(1)} $P51
                                     </p>
                                 </div>
                                 
