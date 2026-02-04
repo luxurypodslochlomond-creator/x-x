@@ -228,24 +228,32 @@ export default function Earth51() {
                 transition={{ duration: 1.5, repeat: Infinity }}
                 className="w-14 h-14 bg-black border-2 border-white flex items-center justify-center flex-shrink-0"
               >
-                <span className="text-3xl">🤖</span>
+                <svg width="24" height="24" viewBox="0 0 32 32" fill="none">
+                  <rect x="4" y="8" width="6" height="6" fill="#06b6d4" />
+                  <rect x="14" y="8" width="6" height="6" fill="#06b6d4" />
+                  <rect x="4" y="18" width="6" height="6" fill="#06b6d4" />
+                  <rect x="14" y="18" width="6" height="6" fill="#06b6d4" />
+                  <rect x="24" y="12" width="4" height="10" fill="#06b6d4" />
+                </svg>
               </motion.div>
               <p className="text-black font-black font-mono text-sm">I'M AI51</p>
             </div>
             <p className="text-black font-bold font-mono text-xs leading-relaxed">
-              Take a real photo of litter. I'll verify it. You earn $P51. That's it. ♾️❤️
+              Take a real photo of litter. I'll verify it. You earn $P51. That's it.
             </p>
           </motion.div>
 
           {/* THE FLOW - 3 SIMPLE STEPS */}
           <div className="space-y-3">
             {[
-              { num: '1️⃣', title: 'TAKE PHOTO', desc: 'Real litter you picked up' },
-              { num: '2️⃣', title: 'I VERIFY', desc: 'I check its real + weight' },
-              { num: '3️⃣', title: 'YOU EARN', desc: 'Real $P51 for Volckano' }
+              { num: 1, title: 'TAKE PHOTO', desc: 'Real litter you picked up' },
+              { num: 2, title: 'I VERIFY', desc: 'I check its real + weight' },
+              { num: 3, title: 'YOU EARN', desc: 'Real $P51 for Volckano' }
             ].map((step, i) => (
               <div key={i} className="bg-black border-2 border-green-500 p-4 flex items-center gap-3">
-                <span className="text-2xl">{step.num}</span>
+                <div className="w-10 h-10 bg-green-500 border-2 border-green-400 flex items-center justify-center flex-shrink-0">
+                  <span className="text-black font-black font-mono text-sm">{step.num}</span>
+                </div>
                 <div>
                   <p className="font-black font-mono text-green-400 text-sm">{step.title}</p>
                   <p className="text-gray-400 font-mono text-xs">{step.desc}</p>
@@ -272,7 +280,9 @@ export default function Earth51() {
               className="w-full bg-green-500 border-4 border-green-400 py-8 disabled:opacity-50 flex flex-col items-center justify-center gap-3"
               style={{ boxShadow: '6px 6px 0px #000' }}
             >
-              <Camera className="w-10 h-10 text-black" />
+              <div className="w-14 h-14 bg-black border-2 border-white flex items-center justify-center">
+                <Camera className="w-8 h-8 text-green-400" />
+              </div>
               <p className="text-black font-black font-mono text-lg">TAKE PHOTO</p>
             </motion.button>
           </label>
@@ -286,7 +296,11 @@ export default function Earth51() {
               className="bg-orange-500 border-4 border-orange-400 py-6 flex flex-col items-center justify-center gap-2"
               style={{ boxShadow: '4px 4px 0px #000' }}
             >
-              <span className="text-3xl">🌋</span>
+              <div className="w-12 h-12 bg-black border-2 border-white flex items-center justify-center">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                  <polygon points="12,2 20,8 18,18 6,18 4,8" fill="none" stroke="white" strokeWidth="2"/>
+                </svg>
+              </div>
               <p className="text-black font-black font-mono text-xs">PLAY VOLCKANO</p>
             </motion.button>
 
