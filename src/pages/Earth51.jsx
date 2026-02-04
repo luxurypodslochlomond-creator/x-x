@@ -34,6 +34,7 @@ export default function Earth51() {
   const [localBalance, setLocalBalance] = useState(() => {
     return parseFloat(localStorage.getItem('earth51_local_balance') || '0');
   });
+  const [showParentInfo, setShowParentInfo] = useState(false);
 
   // HIDE MAIN NAV FOR KIDS EXPERIENCE
   useEffect(() => {
@@ -104,9 +105,8 @@ export default function Earth51() {
     try {
       setIsLoading(true);
       const weightNum = parseFloat(weight);
-      const baseTokens = weightNum * 1;
-      const bonus = baseTokens * 0.2;
-      const total = baseTokens + bonus;
+      const baseTokens = weightNum * 10; // 10 $P51 per kg (whole numbers!)
+      const total = baseTokens;
 
       // TRUST SCORE SPLITS PAYOUT
       const instantPercentage = trustScore?.instant_payout_percentage || 50;
@@ -288,8 +288,8 @@ export default function Earth51() {
                     </div>
 
                     <div className="bg-purple-500 border-2 border-purple-400 p-3">
-                      <p className="text-black font-black font-mono text-xs mb-1">$PHOTO51</p>
-                      <p className="text-black font-mono text-[10px]">Game coins. Not real money. Named after scientist!</p>
+                      <p className="text-black font-black font-mono text-xs mb-1">$P51</p>
+                      <p className="text-black font-mono text-[10px]">Named after scientist! Earn by cleaning Earth.</p>
                     </div>
 
                     <div className="bg-pink-500 border-2 border-pink-400 p-3">
@@ -369,13 +369,13 @@ export default function Earth51() {
               >
                 <Sparkles className="w-8 h-8 text-purple-400" />
               </motion.div>
-              <p className="text-black font-black font-mono text-xs text-center">WHAT IS $PHOTO51?</p>
+              <p className="text-black font-black font-mono text-xs text-center">WHAT IS $P51?</p>
             </motion.button>
 
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              onClick={() => navigate(createPageUrl('Earth51Terms'))}
+              onClick={() => setShowParentInfo(!showParentInfo)}
               className="w-full bg-blue-500 border-4 border-blue-400 p-5 aspect-square flex flex-col items-center justify-center"
               style={{ boxShadow: '4px 4px 0px #000' }}
             >
@@ -386,7 +386,7 @@ export default function Earth51() {
               >
                 <Shield className="w-8 h-8 text-blue-400" />
               </motion.div>
-              <p className="text-black font-black font-mono text-xs text-center">RULES & INFO</p>
+              <p className="text-black font-black font-mono text-xs text-center">FOR PARENTS</p>
             </motion.button>
           </div>
 
@@ -410,22 +410,29 @@ export default function Earth51() {
 
                   <div className="space-y-2">
                     <div className="bg-green-500 border-2 border-green-400 p-3">
-                      <p className="text-black font-black font-mono text-xs mb-2">HOW YOU EARN:</p>
-                      <p className="text-black font-mono text-[10px]">• 1kg litter = 1 $P51</p>
-                      <p className="text-black font-mono text-[10px]">• +20% bonus!</p>
-                      <p className="text-black font-mono text-[10px]">• Even tiny cleanups count</p>
+                      <p className="text-black font-black font-mono text-xs mb-2">REAL EARTH:</p>
+                      <p className="text-black font-mono text-[10px]">• 1kg = 10 $P51</p>
+                      <p className="text-black font-mono text-[10px]">• Even 0.1kg = 1 $P51!</p>
+                      <p className="text-black font-mono text-[10px]">• Best way to earn!</p>
                     </div>
 
-                    <div className="bg-cyan-500 border-2 border-cyan-400 p-3">
-                      <p className="text-black font-black font-mono text-xs mb-2">WHAT YOU DO:</p>
-                      <p className="text-black font-mono text-[10px]">• Unlock Volckano powers</p>
-                      <p className="text-black font-mono text-[10px]">• Send to friends</p>
-                      <p className="text-black font-mono text-[10px]">• Save up!</p>
+                    <div className="bg-amber-500 border-2 border-amber-400 p-3">
+                      <p className="text-black font-black font-mono text-xs mb-2">IN VOLCKANO GAME:</p>
+                      <p className="text-black font-mono text-[10px]">• Pick litter = 1 $P51</p>
+                      <p className="text-black font-mono text-[10px]">• 10x less than real!</p>
+                      <p className="text-black font-mono text-[10px]">• Real Earth better!</p>
+                    </div>
+
+                    <div className="bg-pink-500 border-2 border-pink-400 p-3">
+                      <p className="text-black font-black font-mono text-xs mb-2">UNLOCK LEVELS:</p>
+                      <p className="text-black font-mono text-[10px]">• Use $P51 in Volckano</p>
+                      <p className="text-black font-mono text-[10px]">• Get new characters</p>
+                      <p className="text-black font-mono text-[10px]">• Have fun!</p>
                     </div>
 
                     <div className="bg-black border-2 border-white p-3">
-                      <p className="text-green-400 font-mono text-[10px] text-center">
-                        Not real money - just fun game coins!
+                      <p className="text-cyan-400 font-mono text-[10px] text-center leading-relaxed">
+                        Named after scientist Rosalind Franklin! One day: buy real stuff globally ❤️
                       </p>
                     </div>
                   </div>
