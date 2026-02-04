@@ -136,118 +136,97 @@ export default function Earth51() {
   // LANDING
   if (step === 'landing') {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-emerald-950 via-black to-cyan-950 text-white">
-        {/* AI51 GREETING HEADER - KIDS EDITION */}
-        <div className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-b from-black via-black/98 to-black/95 backdrop-blur-xl border-b border-green-500/20">
-          <div className="max-w-xl mx-auto p-3">
-            <div className="flex items-center justify-between mb-2">
-              <motion.button
-                onClick={() => navigate(createPageUrl('Welcome'))}
-                whileHover={{ scale: 1.05, x: -2 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-gradient-to-r from-green-900/40 to-emerald-900/40 border-2 border-green-500/40 rounded-xl px-4 py-2 flex items-center gap-2"
-              >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                  <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" strokeWidth="3" strokeLinecap="round"/>
-                </svg>
-                <span className="font-black text-xs text-green-300">BACK</span>
-              </motion.button>
-              
-              <motion.div 
-                animate={{ rotate: [0, 360] }}
-                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                className="w-10 h-10"
-              >
-                <AI51AtomIcon size={40} animate={true} />
-              </motion.div>
-            </div>
+      <div className="min-h-screen bg-gradient-to-br from-purple-900 via-pink-900 to-orange-900 text-white">
+        {/* FUN HEADER - KIDS */}
+        <div className="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-xl border-b-4 border-pink-500">
+          <div className="max-w-xl mx-auto p-4 flex items-center justify-between">
+            <motion.button
+              onClick={() => navigate(createPageUrl('Welcome'))}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              className="w-12 h-12 bg-gradient-to-br from-pink-500 to-purple-500 rounded-2xl flex items-center justify-center shadow-lg"
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="white" strokeWidth="4" strokeLinecap="round"/>
+              </svg>
+            </motion.button>
 
-            <div className="bg-gradient-to-r from-green-900/30 via-cyan-900/30 to-emerald-900/30 border-2 border-green-500/30 rounded-2xl p-4">
-              <div className="flex items-start gap-3">
-                <motion.div
-                  animate={{ scale: [1, 1.1, 1] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                  className="w-12 h-12 bg-gradient-to-br from-green-400 to-cyan-400 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg"
-                >
-                  <Heart className="w-6 h-6 text-black" />
-                </motion.div>
-                <div className="flex-1">
-                  <h1 className="text-2xl font-black bg-gradient-to-r from-green-300 via-cyan-300 to-emerald-300 bg-clip-text text-transparent mb-1">
-                    earth.love
-                  </h1>
-                  <p className="text-xs text-green-200/80 leading-relaxed">
-                    <strong className="text-cyan-300">Hey friend!</strong> I'm AI51. Clean Earth → earn $PHOTO51 → power up in Volckano 🌋
-                  </p>
-                </div>
-              </div>
-            </div>
+            <motion.div
+              animate={{ rotate: [0, 5, 0, -5, 0] }}
+              transition={{ duration: 2, repeat: Infinity }}
+              className="text-center"
+            >
+              <h1 className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-green-400 via-cyan-400 to-pink-400">
+                earth.love
+              </h1>
+              <p className="text-xs text-white/80 font-bold">Clean Earth, Get Rewards!</p>
+            </motion.div>
+
+            <motion.div
+              animate={{ scale: [1, 1.2, 1], rotate: [0, 180, 360] }}
+              transition={{ duration: 3, repeat: Infinity }}
+              className="w-12 h-12"
+            >
+              <AI51AtomIcon size={48} animate={false} />
+            </motion.div>
           </div>
         </div>
 
-        <div className="max-w-xl mx-auto space-y-6 pt-[140px] p-4 pb-32">
+        <div className="max-w-xl mx-auto space-y-5 pt-24 p-4 pb-32">
           
-          {/* HERO SECTION */}
+          {/* HEY FRIEND CARD */}
           <motion.div
-            initial={{ scale: 0.9, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            className="text-center space-y-3"
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            className="relative bg-gradient-to-br from-cyan-500 via-blue-500 to-purple-500 rounded-3xl p-6 shadow-2xl"
           >
-            <motion.div 
-              className="flex justify-center mb-4"
-              animate={{ rotate: [0, 360] }}
-              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-            >
-              <div className="relative">
-                <AI51AtomIcon size={64} animate={true} />
-                <motion.div
-                  className="absolute -top-2 -right-2 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center"
-                  animate={{ scale: [1, 1.2, 1] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                >
-                  <Sparkles className="w-3 h-3 text-white" />
-                </motion.div>
-              </div>
-            </motion.div>
-            
-            <motion.div
-              animate={{ scale: [1, 1.05, 1] }}
-              transition={{ duration: 3, repeat: Infinity }}
-            >
-              <h1 className="text-6xl md:text-7xl font-black bg-gradient-to-r from-green-400 via-emerald-300 to-cyan-400 bg-clip-text text-transparent" 
-                  style={{ textShadow: '0 0 40px rgba(34, 197, 94, 0.3)' }}>
-                earth.love
-              </h1>
-            </motion.div>
+            <div className="absolute top-2 right-2">
+              <motion.div animate={{ rotate: [0, 360] }} transition={{ duration: 5, repeat: Infinity, ease: "linear" }}>
+                <Sparkles className="w-6 h-6 text-yellow-300" />
+              </motion.div>
+            </div>
 
-            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-cyan-900/40 to-green-900/40 border-2 border-cyan-500/50 rounded-full px-5 py-2">
-              <motion.div animate={{ rotate: [0, 360] }} transition={{ duration: 3, repeat: Infinity }}>
-                <Heart className="w-5 h-5 text-pink-400" />
+            <div className="flex items-center gap-4 mb-3">
+              <motion.div
+                animate={{ scale: [1, 1.1, 1] }}
+                transition={{ duration: 2, repeat: Infinity }}
+                className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center shadow-lg"
+              >
+                <span className="text-4xl">🌍</span>
               </motion.div>
-              <p className="text-base font-black text-cyan-300">Clean → Earn → Power Up</p>
-              <motion.div animate={{ rotate: [0, 360] }} transition={{ duration: 3, repeat: Infinity }}>
-                <Sparkles className="w-5 h-5 text-green-400" />
-              </motion.div>
+              <div>
+                <h2 className="text-3xl font-black text-white">Hey Friend!</h2>
+                <p className="text-cyan-100 text-sm font-bold">I'm AI51, your planet helper</p>
+              </div>
+            </div>
+
+            <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-4 border-2 border-white/30">
+              <p className="text-white font-bold text-base leading-relaxed">
+                Take a photo of litter → I'll check it → You get $PHOTO51 coins → Use them in Volckano game! 🌋
+              </p>
             </div>
           </motion.div>
 
-          {/* PARENT SAFETY BADGE */}
+          {/* PARENT INFO */}
           <motion.button
             onClick={() => setShowParentInfo(!showParentInfo)}
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            className="w-full bg-gradient-to-r from-blue-900/40 to-purple-900/40 border-2 border-blue-500/30 rounded-2xl p-4"
+            className="w-full bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl p-5 shadow-xl"
           >
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-blue-500/20 rounded-full flex items-center justify-center">
-                  <Shield className="w-5 h-5 text-blue-400" />
+                <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center">
+                  <Shield className="w-6 h-6 text-blue-600" />
                 </div>
                 <div className="text-left">
-                  <p className="text-blue-300 font-bold text-sm">Parents: Tap for Safety Info</p>
-                  <p className="text-blue-400/60 text-xs">Privacy • Safety • How it works</p>
+                  <p className="text-white font-black text-base">Parents: Safety Info</p>
+                  <p className="text-white/70 text-xs font-bold">Tap to learn more</p>
                 </div>
               </div>
-              {showParentInfo ? <ChevronUp className="w-5 h-5 text-blue-400" /> : <ChevronDown className="w-5 h-5 text-blue-400" />}
+              <motion.div animate={{ rotate: showParentInfo ? 180 : 0 }}>
+                <ChevronDown className="w-6 h-6 text-white" />
+              </motion.div>
             </div>
           </motion.button>
 
@@ -309,68 +288,60 @@ export default function Earth51() {
             )}
           </AnimatePresence>
 
-          {/* HOW IT WORKS - TILE GRID */}
-          <div className="grid grid-cols-2 gap-3">
-            <motion.div
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="relative bg-gradient-to-br from-green-900/30 to-emerald-900/30 border-2 border-green-500/40 rounded-3xl p-5 overflow-hidden aspect-square flex flex-col items-center justify-center text-center"
-            >
-              <div className="absolute inset-0 bg-green-500/5 rounded-full blur-3xl"></div>
-              <div className="relative space-y-2">
-                <div className="w-14 h-14 bg-gradient-to-br from-green-400 to-emerald-500 rounded-2xl flex items-center justify-center mx-auto shadow-xl">
-                  <Camera className="w-7 h-7 text-black" />
+          {/* BIG ACTION TILES */}
+          <div className="space-y-4">
+            <label className="block">
+              <input
+                type="file"
+                accept="image/*"
+                capture="environment"
+                onChange={handlePhotoCapture}
+                className="hidden"
+                id="photo-upload-main"
+              />
+              <motion.button
+                onClick={() => document.getElementById('photo-upload-main').click()}
+                disabled={isLoading}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="w-full bg-gradient-to-br from-green-400 to-emerald-500 rounded-3xl p-8 shadow-2xl disabled:opacity-50"
+              >
+                <div className="flex items-center justify-between">
+                  <div className="text-left">
+                    <h3 className="text-3xl font-black text-black mb-2">📸 Take Photo</h3>
+                    <p className="text-black/70 font-bold text-sm">Show me the litter!</p>
+                  </div>
+                  <motion.div
+                    animate={{ scale: [1, 1.1, 1] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                    className="w-20 h-20 bg-white rounded-2xl flex items-center justify-center shadow-lg"
+                  >
+                    <Camera className="w-10 h-10 text-green-500" />
+                  </motion.div>
                 </div>
-                <p className="text-green-300 font-black text-sm">Take Photo</p>
-                <p className="text-green-200/50 text-xs px-2">Show the litter</p>
-              </div>
-            </motion.div>
+              </motion.button>
+            </label>
 
-            <motion.div
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="relative bg-gradient-to-br from-cyan-900/30 to-blue-900/30 border-2 border-cyan-500/40 rounded-3xl p-5 overflow-hidden aspect-square flex flex-col items-center justify-center text-center"
-            >
-              <div className="absolute inset-0 bg-cyan-500/5 rounded-full blur-3xl"></div>
-              <div className="relative space-y-2">
-                <div className="w-14 h-14 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-2xl flex items-center justify-center mx-auto shadow-xl">
-                  <Zap className="w-7 h-7 text-black" />
-                </div>
-                <p className="text-cyan-300 font-black text-sm">AI Checks</p>
-                <p className="text-cyan-200/50 text-xs px-2">Finds brands</p>
-              </div>
-            </motion.div>
-
-            <motion.div
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="relative bg-gradient-to-br from-purple-900/30 to-pink-900/30 border-2 border-purple-500/40 rounded-3xl p-5 overflow-hidden aspect-square flex flex-col items-center justify-center text-center"
-            >
-              <div className="absolute inset-0 bg-purple-500/5 rounded-full blur-3xl"></div>
-              <div className="relative space-y-2">
-                <div className="w-14 h-14 bg-gradient-to-br from-purple-400 to-pink-500 rounded-2xl flex items-center justify-center mx-auto shadow-xl">
-                  <Sparkles className="w-7 h-7 text-black" />
-                </div>
-                <p className="text-purple-300 font-black text-sm">Get $PHOTO51</p>
-                <p className="text-purple-200/50 text-xs px-2">Instant reward</p>
-              </div>
-            </motion.div>
-
-            <motion.div
+            <motion.button
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               onClick={() => navigate(createPageUrl('Volckano'))}
-              className="relative bg-gradient-to-br from-orange-900/30 to-red-900/30 border-2 border-orange-500/40 rounded-3xl p-5 overflow-hidden aspect-square flex flex-col items-center justify-center text-center cursor-pointer"
+              className="w-full bg-gradient-to-br from-orange-500 to-red-600 rounded-3xl p-8 shadow-2xl"
             >
-              <div className="absolute inset-0 bg-orange-500/5 rounded-full blur-3xl"></div>
-              <div className="relative space-y-2">
-                <div className="w-14 h-14 bg-gradient-to-br from-orange-400 to-red-500 rounded-2xl flex items-center justify-center mx-auto shadow-xl">
-                  <Heart className="w-7 h-7 text-black" />
+              <div className="flex items-center justify-between">
+                <div className="text-left">
+                  <h3 className="text-3xl font-black text-white mb-2">🌋 Volckano</h3>
+                  <p className="text-white/80 font-bold text-sm">Use your $PHOTO51!</p>
                 </div>
-                <p className="text-orange-300 font-black text-sm">Volckano</p>
-                <p className="text-orange-200/50 text-xs px-2">Unlock powers</p>
+                <motion.div
+                  animate={{ rotate: [0, 10, -10, 0] }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
+                  className="w-20 h-20 bg-white rounded-2xl flex items-center justify-center shadow-lg"
+                >
+                  <span className="text-5xl">🌋</span>
+                </motion.div>
               </div>
-            </motion.div>
+            </motion.button>
           </div>
 
           {/* WHAT IS P51 EXPLAINER */}
