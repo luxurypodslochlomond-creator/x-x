@@ -404,14 +404,14 @@ export default function CB51() {
                                             </div>
                                         )}
                                         {stats.awaitingBand > 0 && (
-                                            <div className="bg-gradient-to-r from-green-900/40 to-green-800/40 border-l-4 border-green-500 rounded-lg p-4 flex items-center justify-between">
+                                            <div className="bg-black border-2 border-green-500/50 hover:border-green-500 rounded-lg p-4 flex items-center justify-between transition-all">
                                                 <div>
                                                     <p className="text-green-400 font-black font-mono text-sm">AWAITING BAND VOTES</p>
                                                     <p className="text-gray-400 text-xs font-mono">{stats.awaitingBand} offer{stats.awaitingBand !== 1 ? 's' : ''} sent to band</p>
                                                 </div>
                                                 <button
                                                     onClick={() => navigate(createPageUrl('ScottGigOffers') + '?status=sent_to_band')}
-                                                    className="bg-green-500 hover:bg-green-600 text-black font-black px-3 py-1.5 rounded text-xs transition-all"
+                                                    className="bg-green-600 hover:bg-green-700 text-black font-black px-3 py-1.5 rounded text-xs transition-all"
                                                 >
                                                     VIEW
                                                 </button>
