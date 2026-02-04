@@ -64,7 +64,9 @@ export default function ScottGigOffers() {
                 <span className="text-xs font-bold font-mono">BACK</span>
             </button>
 
-            <h1 className="text-2xl font-black text-white font-mono mb-6">PENDING OFFERS</h1>
+            <h1 className="text-2xl font-black text-white font-mono mb-6">
+                {filterStatus === 'sent_to_band' ? 'AWAITING BAND VOTES' : filterStatus === 'pending_manager_review' ? 'PENDING APPROVALS' : 'GIGS'}
+            </h1>
 
             {pendingOffers.length === 0 ? (
                 <div className="text-center py-12">
