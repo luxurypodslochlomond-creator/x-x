@@ -411,6 +411,52 @@ export default function Earth51() {
 
 
           <AnimatePresence>
+            {showResonance && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: 'auto', opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                className="overflow-hidden"
+              >
+                <div className="bg-pink-500 border-4 border-pink-400 p-4" style={{ boxShadow: '4px 4px 0px #000' }}>
+                  <div className="bg-black border-2 border-white p-4 mb-3">
+                    <h3 className="text-pink-400 font-black font-mono text-lg mb-2">HOW HEALING WORKS</h3>
+                    <p className="text-white font-mono text-xs leading-relaxed">
+                      The whole universe vibrates. Your body listens. Simple science!
+                    </p>
+                  </div>
+
+                  <div className="space-y-2">
+                    <div className="bg-cyan-500 border-2 border-cyan-400 p-3">
+                      <p className="text-black font-black font-mono text-xs mb-2">PLANCK FREQUENCY:</p>
+                      <p className="text-black font-mono text-[10px]">The universe's native vibration</p>
+                      <p className="text-black font-mono text-[10px]">Everything sings to this beat</p>
+                    </div>
+
+                    <div className="bg-purple-500 border-2 border-purple-400 p-3">
+                      <p className="text-black font-black font-mono text-xs mb-2">432 Hz & 528 Hz:</p>
+                      <p className="text-black font-mono text-[10px]">Harmonic ratios to Planck</p>
+                      <p className="text-black font-mono text-[10px]">Your body naturally resonates</p>
+                    </div>
+
+                    <div className="bg-green-500 border-2 border-green-400 p-3">
+                      <p className="text-black font-black font-mono text-xs mb-2">RESONANCE = HEALING:</p>
+                      <p className="text-black font-mono text-[10px]">Like tuning a guitar string</p>
+                      <p className="text-black font-mono text-[10px]">Perfect pitch = perfect calm</p>
+                    </div>
+
+                    <div className="bg-black border-2 border-white p-3">
+                      <p className="text-pink-400 font-mono text-[10px] text-center leading-relaxed">
+                        We're not inventing healing. We're listening to what's already there ♾️
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          <AnimatePresence>
             {showP51Explainer && (
               <motion.div
                 initial={{ height: 0, opacity: 0 }}
