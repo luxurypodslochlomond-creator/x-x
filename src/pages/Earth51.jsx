@@ -75,11 +75,42 @@ export default function Earth51() {
       } else {
         const uploadResult = await base44.functions.invoke('uploadToIPFS', { file });
         setPhotoUrl(uploadResult.file_url);
+
+        // AI51 AUTO-ESTIMATES WEIGHT - MAGIC FOR KIDS
+        try {
+          const aiResult = await base44.integrations.Core.InvokeLLM({
+            prompt: `Analyze this litter cleanup photo and estimate the total weight of litter in kilograms. 
+
+  Look at:
+  - Number of items visible
+  - Size of items (bottles, cans, wrappers, bags, etc.)
+  - Comparison to environment/surroundings for scale
+  - Types of materials
+
+  Return ONLY a JSON object with your estimate.`,
+            file_urls: uploadResult.file_url,
+            response_json_schema: {
+              type: "object",
+              properties: {
+                estimated_weight_kg: { type: "number" },
+                confidence: { type: "string" },
+                items_detected: { type: "string" }
+              }
+            }
+          });
+
+          if (aiResult?.estimated_weight_kg) {
+            setWeight(aiResult.estimated_weight_kg.toString());
+          }
+        } catch (aiErr) {
+          console.log('AI estimation failed, manual entry needed:', aiErr);
+        }
+
         setStep('weight');
         setIsLoading(false);
       }
     } catch (err) {
-      setError('Upload failed. Try again bro.');
+      setError('Upload failed. Try again!');
       setIsLoading(false);
     }
   };
@@ -450,10 +481,27 @@ export default function Earth51() {
             }}
           />
 
+          {/* AI51 ESTIMATE MESSAGE */}
+          {weight && (
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              className="bg-cyan-500 border-4 border-cyan-400 p-3"
+              style={{ boxShadow: '4px 4px 0px #000' }}
+            >
+              <div className="flex items-center gap-2">
+                <span className="text-2xl">🤖</span>
+                <p className="text-black font-black font-mono text-xs">
+                  I THINK IT'S {weight}KG! YOU CAN CHANGE IT IF I'M WRONG :)
+                </p>
+              </div>
+            </motion.div>
+          )}
+
           {/* INPUT */}
           <div className="space-y-3">
             <label className="block">
-              <p className="text-green-400 font-black font-mono text-sm mb-2">HOW MUCH LITTER? (kg)</p>
+              <p className="text-green-400 font-black font-mono text-sm mb-2">WEIGHT (kg)</p>
               <input
                 type="number"
                 step="0.01"
@@ -464,7 +512,7 @@ export default function Earth51() {
                 className="w-full bg-black border-4 border-cyan-500 text-white text-2xl font-black font-mono p-4 text-center"
                 style={{ boxShadow: '4px 4px 0px rgba(6, 182, 212, 0.5)' }}
               />
-              <p className="text-cyan-300 text-[10px] font-mono mt-2 text-center">Even 5g counts • Be honest!</p>
+              <p className="text-cyan-300 text-[10px] font-mono mt-2 text-center">Change if needed • Be honest!</p>
             </label>
 
             <label className="block">
