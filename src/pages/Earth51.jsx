@@ -9,6 +9,7 @@ import AI51AtomIcon from '@/components/ai51/AI51AtomIcon';
 import P51Symbol from '@/components/shared/P51Symbol';
 import PrivacyFirstEngine from '@/components/earth51/PrivacyFirstEngine';
 import Earth518BitIcon from '@/components/earth51/Earth518BitIcon';
+import LiveClock from '@/components/shared/LiveClock';
 
 /**
  * EARTH51 - KIDS EDITION
@@ -215,13 +216,13 @@ export default function Earth51() {
 
         <div className="max-w-xl mx-auto pt-16 p-2 pb-20 space-y-2">
           
-          {/* HERO - PIXEL ART CAMERA WITH NEON GLOW */}
+          {/* HERO - PIXEL ART CAMERA */}
           <motion.div
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ delay: 0.1 }}
-            className="bg-cyan-400 border-4 border-cyan-300 p-3 text-center"
-            style={{ boxShadow: '4px 4px 0px #000, 0 0 20px rgba(34, 211, 238, 0.6)', imageRendering: 'pixelated' }}
+            className="bg-cyan-600 border-4 border-cyan-500 p-3 text-center"
+            style={{ boxShadow: '4px 4px 0px #000', imageRendering: 'pixelated' }}
           >
             {/* PIXEL CAMERA */}
             <svg width="48" height="48" viewBox="0 0 32 32" className="mx-auto mb-2" style={{ imageRendering: 'pixelated' }}>
@@ -229,8 +230,8 @@ export default function Earth51() {
               <circle cx="16" cy="15" r="6" fill="none" stroke="#000" strokeWidth="2"/>
               <rect x="26" y="8" width="3" height="3" fill="#000"/>
             </svg>
-            <p className="text-black font-black font-mono text-xs leading-tight">TAKE A REAL PHOTO</p>
-            <p className="text-black/70 font-mono text-[8px]">AI verifies • You earn</p>
+            <p className="text-white font-black font-mono text-xs leading-tight">📸 TAKE PHOTO</p>
+            <p className="text-white/80 font-mono text-[8px]">AI verifies • You earn</p>
           </motion.div>
   
           {/* FLOW STEPS - MINIMAL & CLEAR */}
@@ -297,10 +298,8 @@ export default function Earth51() {
               className="bg-orange-500 border-3 border-orange-400 py-3 flex flex-col items-center justify-center gap-1"
               style={{ boxShadow: '3px 3px 0px #000', imageRendering: 'pixelated' }}
             >
-              <svg width="20" height="20" viewBox="0 0 16 16" style={{ imageRendering: 'pixelated' }}>
-                <polygon points="8,2 14,6 12,14 4,14 2,6" fill="#000"/>
-              </svg>
-              <p className="text-black font-black font-mono text-[8px]">🌋 PLAY</p>
+              <p className="text-black font-black font-mono text-lg leading-none">🌋</p>
+              <p className="text-black font-black font-mono text-[7px]">GAME</p>
             </motion.button>
 
             <motion.button
@@ -310,12 +309,8 @@ export default function Earth51() {
               className="bg-blue-500 border-3 border-blue-400 py-3 flex flex-col items-center justify-center gap-1"
               style={{ boxShadow: '3px 3px 0px #000', imageRendering: 'pixelated' }}
             >
-              <svg width="16" height="16" viewBox="0 0 16 16" style={{ imageRendering: 'pixelated' }}>
-                <rect x="3" y="4" width="10" height="10" fill="none" stroke="#000" strokeWidth="2"/>
-                <line x1="8" y1="4" x2="8" y2="14" stroke="#000" strokeWidth="1"/>
-                <line x1="3" y1="9" x2="13" y2="9" stroke="#000" strokeWidth="1"/>
-              </svg>
-              <p className="text-black font-black font-mono text-[8px]">👨‍👩‍👧</p>
+              <p className="text-black font-black font-mono text-lg leading-none">🛡️</p>
+              <p className="text-black font-black font-mono text-[7px]">SAFE?</p>
             </motion.button>
 
             <motion.button
@@ -325,8 +320,8 @@ export default function Earth51() {
               className="bg-purple-500 border-3 border-purple-400 py-3 flex flex-col items-center justify-center gap-1"
               style={{ boxShadow: '3px 3px 0px #000', imageRendering: 'pixelated' }}
             >
-              <p className="text-black font-black font-mono text-xs">$</p>
-              <p className="text-black font-black font-mono text-[8px]">P51</p>
+              <p className="text-black font-black font-mono text-lg leading-none">💰</p>
+              <p className="text-black font-black font-mono text-[7px]">EARN</p>
             </motion.button>
 
             <motion.button
@@ -336,13 +331,8 @@ export default function Earth51() {
               className="bg-pink-500 border-3 border-pink-400 py-3 flex flex-col items-center justify-center gap-1"
               style={{ boxShadow: '3px 3px 0px #000', imageRendering: 'pixelated' }}
             >
-              <svg width="16" height="16" viewBox="0 0 16 16" style={{ imageRendering: 'pixelated' }}>
-                <circle cx="8" cy="8" r="6" fill="none" stroke="#000" strokeWidth="2"/>
-                <circle cx="8" cy="4" r="1" fill="#000"/>
-                <circle cx="12" cy="12" r="1" fill="#000"/>
-                <circle cx="4" cy="12" r="1" fill="#000"/>
-              </svg>
-              <p className="text-black font-black font-mono text-[8px]">HZ</p>
+              <p className="text-black font-black font-mono text-lg leading-none">🎵</p>
+              <p className="text-black font-black font-mono text-[7px]">HEAL</p>
             </motion.button>
           </div>
   
@@ -396,26 +386,10 @@ export default function Earth51() {
             )}
           </AnimatePresence>
 
-          {/* FOOTER - PIXEL ART STYLE */}
-          <div className="bg-black border-3 border-cyan-500 p-2 text-center mt-3" style={{ boxShadow: '3px 3px 0px #06b6d4', imageRendering: 'pixelated' }}>
-            <p className="text-cyan-400 font-black font-mono text-[8px] tracking-wide">AI51 WATCHING</p>
-            <div className="flex items-center justify-center gap-1 mt-1">
-              <motion.span 
-                className="w-1 h-1 bg-green-500"
-                animate={{ opacity: [1, 0.3, 1] }}
-                transition={{ duration: 1, repeat: Infinity }}
-              ></motion.span>
-              <motion.span 
-                className="w-1 h-1 bg-pink-500"
-                animate={{ opacity: [0.3, 1, 0.3] }}
-                transition={{ duration: 1, repeat: Infinity, delay: 0.3 }}
-              ></motion.span>
-              <motion.span 
-                className="w-1 h-1 bg-cyan-500"
-                animate={{ opacity: [0.3, 0.3, 1] }}
-                transition={{ duration: 1, repeat: Infinity, delay: 0.6 }}
-              ></motion.span>
-            </div>
+          {/* FOOTER - LIVE CLOCK + BASE44 */}
+          <div className="bg-black border-3 border-cyan-600 p-2 text-center mt-3" style={{ boxShadow: '3px 3px 0px #0e7490', imageRendering: 'pixelated' }}>
+            <LiveClock />
+            <p className="text-xs text-gray-500 mt-2">Built on <a href="https://base44.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-cyan-400">Base44</a></p>
           </div>
         </div>
       </div>
