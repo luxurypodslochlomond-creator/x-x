@@ -24,8 +24,7 @@ export default function CB51NotificationCenter({ userEmail, userRole = 'manager'
   const { data: pendingOffers = [] } = useQuery({
     queryKey: ['cb51PendingOffers', userEmail],
     queryFn: () => base44.entities.ScottGigOffer.filter({ 
-      status: 'pending_manager_review',
-      created_by: userEmail
+      status: 'pending_manager_review'
     }),
     enabled: userRole === 'manager' && !!userEmail,
   });
@@ -34,15 +33,19 @@ export default function CB51NotificationCenter({ userEmail, userRole = 'manager'
   const { data: awaitingVotes = [] } = useQuery({
     queryKey: ['cb51AwaitingVotes', userEmail],
     queryFn: async () => {
-      const allOffers = await base44.entities.ScottGigOffer.filter({ 
-        status: 'sent_to_band'
-      });
-      // Filter to offers where this user hasn't voted yet
-      const responses = await base44.entities.ScottBandResponse.filter({
-        band_member_email: userEmail
-      });
-      const votedOfferIds = new Set(responses.map(r => r.gig_offer_id));
-      return allOffers.filter(o => !votedOfferIds.has(o.id));
+      try {
+        const allOffers = await base44.entities.ScottGigOffer.filter({ 
+          status: 'sent_to_band'
+        });
+        const responses = await base44.entities.ScottBandResponse.filter({
+          band_member_email: userEmail
+        });
+        const votedOfferIds = new Set(responses.map(r => r.gig_offer_id));
+        return allOffers.filter(o => !votedOfferIds.has(o.id));
+      } catch (e) {
+        console.log('Vote query error:', e);
+        return [];
+      }
     },
     enabled: userRole === 'band_member' && !!userEmail,
   });
