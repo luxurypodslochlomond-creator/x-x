@@ -30,6 +30,12 @@ export default function Earth51() {
   const [showP51Explainer, setShowP51Explainer] = useState(false);
   const [showParentInfo, setShowParentInfo] = useState(false);
 
+  // HIDE MAIN NAV FOR KIDS EXPERIENCE
+  useEffect(() => {
+    document.body.style.setProperty('--hide-main-nav', 'true');
+    return () => document.body.style.removeProperty('--hide-main-nav');
+  }, []);
+
   useEffect(() => {
     const handleOnline = () => setIsOffline(false);
     const handleOffline = () => setIsOffline(true);
@@ -130,8 +136,32 @@ export default function Earth51() {
   // LANDING
   if (step === 'landing') {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-emerald-950 via-black to-cyan-950 text-white p-4 pt-20 lg:pt-6 pb-32">
-        <div className="max-w-xl mx-auto space-y-6">
+      <div className="min-h-screen bg-gradient-to-b from-emerald-950 via-black to-cyan-950 text-white">
+        {/* CUSTOM HEADER - KIDS EDITION */}
+        <div className="fixed top-0 left-0 right-0 z-50 bg-black/95 backdrop-blur-xl border-b border-green-500/30">
+          <div className="flex items-center justify-between p-4">
+            <button
+              onClick={() => navigate(createPageUrl('Welcome'))}
+              className="flex items-center gap-2 text-green-400 hover:text-green-300 transition-colors"
+            >
+              <motion.div whileHover={{ x: -4 }} whileTap={{ scale: 0.95 }}>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </motion.div>
+              <span className="font-black text-sm">BACK</span>
+            </button>
+            
+            <div className="flex items-center gap-2">
+              <AI51AtomIcon size={28} animate={true} />
+              <span className="font-black text-xl bg-gradient-to-r from-green-400 to-cyan-400 bg-clip-text text-transparent">earth.love</span>
+            </div>
+            
+            <div className="w-16"></div>
+          </div>
+        </div>
+
+        <div className="max-w-xl mx-auto space-y-6 pt-20 p-4 pb-32">
           
           {/* HERO SECTION */}
           <motion.div
@@ -251,46 +281,68 @@ export default function Earth51() {
             )}
           </AnimatePresence>
 
-          {/* HOW IT WORKS */}
-          <div className="space-y-2">
-            <div className="relative bg-gradient-to-br from-green-900/30 to-emerald-900/30 border-2 border-green-500/40 rounded-2xl p-5 overflow-hidden">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-green-500/10 rounded-full blur-3xl"></div>
-              <div className="relative flex items-start gap-4">
-                <div className="w-12 h-12 bg-gradient-to-br from-green-400 to-emerald-500 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg">
-                  <Camera className="w-6 h-6 text-black" />
+          {/* HOW IT WORKS - TILE GRID */}
+          <div className="grid grid-cols-2 gap-3">
+            <motion.div
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="relative bg-gradient-to-br from-green-900/30 to-emerald-900/30 border-2 border-green-500/40 rounded-3xl p-5 overflow-hidden aspect-square flex flex-col items-center justify-center text-center"
+            >
+              <div className="absolute inset-0 bg-green-500/5 rounded-full blur-3xl"></div>
+              <div className="relative space-y-2">
+                <div className="w-14 h-14 bg-gradient-to-br from-green-400 to-emerald-500 rounded-2xl flex items-center justify-center mx-auto shadow-xl">
+                  <Camera className="w-7 h-7 text-black" />
                 </div>
-                <div className="flex-1">
-                  <p className="text-green-300 font-black text-base mb-1">1. Take a Photo</p>
-                  <p className="text-green-200/60 text-xs leading-relaxed">Snap the litter you collected - even one wrapper counts</p>
-                </div>
+                <p className="text-green-300 font-black text-sm">Take Photo</p>
+                <p className="text-green-200/50 text-xs px-2">Show the litter</p>
               </div>
-            </div>
+            </motion.div>
 
-            <div className="relative bg-gradient-to-br from-cyan-900/30 to-blue-900/30 border-2 border-cyan-500/40 rounded-2xl p-5 overflow-hidden">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-500/10 rounded-full blur-3xl"></div>
-              <div className="relative flex items-start gap-4">
-                <div className="w-12 h-12 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg">
-                  <Zap className="w-6 h-6 text-black" />
+            <motion.div
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="relative bg-gradient-to-br from-cyan-900/30 to-blue-900/30 border-2 border-cyan-500/40 rounded-3xl p-5 overflow-hidden aspect-square flex flex-col items-center justify-center text-center"
+            >
+              <div className="absolute inset-0 bg-cyan-500/5 rounded-full blur-3xl"></div>
+              <div className="relative space-y-2">
+                <div className="w-14 h-14 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-2xl flex items-center justify-center mx-auto shadow-xl">
+                  <Zap className="w-7 h-7 text-black" />
                 </div>
-                <div className="flex-1">
-                  <p className="text-cyan-300 font-black text-base mb-1">2. AI Verifies</p>
-                  <p className="text-cyan-200/60 text-xs leading-relaxed">AI51 scans for brands and checks it's real (Coca-Cola, Pepsi, etc)</p>
-                </div>
+                <p className="text-cyan-300 font-black text-sm">AI Checks</p>
+                <p className="text-cyan-200/50 text-xs px-2">Finds brands</p>
               </div>
-            </div>
+            </motion.div>
 
-            <div className="relative bg-gradient-to-br from-purple-900/30 to-pink-900/30 border-2 border-purple-500/40 rounded-2xl p-5 overflow-hidden">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/10 rounded-full blur-3xl"></div>
-              <div className="relative flex items-start gap-4">
-                <div className="w-12 h-12 bg-gradient-to-br from-purple-400 to-pink-500 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg">
-                  <Sparkles className="w-6 h-6 text-black" />
+            <motion.div
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="relative bg-gradient-to-br from-purple-900/30 to-pink-900/30 border-2 border-purple-500/40 rounded-3xl p-5 overflow-hidden aspect-square flex flex-col items-center justify-center text-center"
+            >
+              <div className="absolute inset-0 bg-purple-500/5 rounded-full blur-3xl"></div>
+              <div className="relative space-y-2">
+                <div className="w-14 h-14 bg-gradient-to-br from-purple-400 to-pink-500 rounded-2xl flex items-center justify-center mx-auto shadow-xl">
+                  <Sparkles className="w-7 h-7 text-black" />
                 </div>
-                <div className="flex-1">
-                  <p className="text-purple-300 font-black text-base mb-1">3. Earn Rewards</p>
-                  <p className="text-purple-200/60 text-xs leading-relaxed">Get $P51 instantly - use it to unlock Volckano powers</p>
-                </div>
+                <p className="text-purple-300 font-black text-sm">Get $P51</p>
+                <p className="text-purple-200/50 text-xs px-2">Instant reward</p>
               </div>
-            </div>
+            </motion.div>
+
+            <motion.div
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={() => navigate(createPageUrl('Volckano'))}
+              className="relative bg-gradient-to-br from-orange-900/30 to-red-900/30 border-2 border-orange-500/40 rounded-3xl p-5 overflow-hidden aspect-square flex flex-col items-center justify-center text-center cursor-pointer"
+            >
+              <div className="absolute inset-0 bg-orange-500/5 rounded-full blur-3xl"></div>
+              <div className="relative space-y-2">
+                <div className="w-14 h-14 bg-gradient-to-br from-orange-400 to-red-500 rounded-2xl flex items-center justify-center mx-auto shadow-xl">
+                  <Heart className="w-7 h-7 text-black" />
+                </div>
+                <p className="text-orange-300 font-black text-sm">Volckano</p>
+                <p className="text-orange-200/50 text-xs px-2">Unlock powers</p>
+              </div>
+            </motion.div>
           </div>
 
           {/* WHAT IS P51 EXPLAINER */}
@@ -437,8 +489,32 @@ export default function Earth51() {
   // WEIGHT STEP
   if (step === 'weight') {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-green-900 via-black to-cyan-900 text-white p-6 pt-24 lg:pt-6">
-        <div className="max-w-xl mx-auto space-y-6">
+      <div className="min-h-screen bg-gradient-to-b from-green-900 via-black to-cyan-900 text-white">
+        {/* HEADER */}
+        <div className="fixed top-0 left-0 right-0 z-50 bg-black/95 backdrop-blur-xl border-b border-green-500/30">
+          <div className="flex items-center justify-between p-4">
+            <button
+              onClick={() => {
+                setStep('landing');
+                setPhotoUrl(null);
+                setWeight('');
+                setLocation('');
+              }}
+              className="flex items-center gap-2 text-green-400 hover:text-green-300"
+            >
+              <motion.div whileHover={{ x: -4 }}>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" strokeWidth="3" strokeLinecap="round"/>
+                </svg>
+              </motion.div>
+              <span className="font-black text-sm">BACK</span>
+            </button>
+            <span className="font-black text-green-400">STEP 2</span>
+            <div className="w-16"></div>
+          </div>
+        </div>
+
+        <div className="max-w-xl mx-auto space-y-6 pt-20 p-4">
           {/* PHOTO PREVIEW */}
           <div className="border-4 border-green-500 rounded-lg overflow-hidden">
             <img src={photoUrl} alt="Cleanup" className="w-full h-64 object-cover" />
@@ -492,37 +568,24 @@ export default function Earth51() {
             </div>
           )}
 
-          {/* BUTTONS */}
-          <div className="flex gap-3">
-            <button
-              onClick={() => {
-                setStep('landing');
-                setPhotoUrl(null);
-                setWeight('');
-                setLocation('');
-              }}
-              className="flex-1 bg-black border-2 border-gray-600 text-white py-4 font-bold text-sm hover:border-gray-500"
-            >
-              BACK
-            </button>
-            <button
-              onClick={handleSubmit}
-              disabled={isLoading || !weight}
-              className="flex-1 bg-gradient-to-r from-green-600 to-cyan-600 border-4 border-green-400 text-black py-4 font-black disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              {isLoading ? (
-                <>
-                  <Loader2 className="w-4 h-4 animate-spin inline mr-2" />
-                  SUBMIT
-                </>
-              ) : (
-                <>
-                  <CheckCircle2 className="w-4 h-4 inline mr-2" />
-                  SUBMIT
-                </>
-              )}
-            </button>
-          </div>
+          {/* SUBMIT BUTTON */}
+          <button
+            onClick={handleSubmit}
+            disabled={isLoading || !weight}
+            className="w-full bg-gradient-to-r from-green-500 to-cyan-500 rounded-2xl py-6 text-black font-black text-xl shadow-2xl disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {isLoading ? (
+              <div className="flex items-center justify-center gap-3">
+                <Loader2 className="w-6 h-6 animate-spin" />
+                <span>Submitting...</span>
+              </div>
+            ) : (
+              <div className="flex items-center justify-center gap-3">
+                <CheckCircle2 className="w-6 h-6" />
+                <span>Submit Cleanup</span>
+              </div>
+            )}
+          </button>
         </div>
       </div>
     );
@@ -531,8 +594,15 @@ export default function Earth51() {
   // SUCCESS
   if (step === 'success') {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-green-900 via-black to-cyan-900 text-white p-6 pt-24 lg:pt-6">
-        <div className="max-w-xl mx-auto space-y-6">
+      <div className="min-h-screen bg-gradient-to-b from-green-900 via-black to-cyan-900 text-white">
+        {/* HEADER */}
+        <div className="fixed top-0 left-0 right-0 z-50 bg-black/95 backdrop-blur-xl border-b border-green-500/30">
+          <div className="flex items-center justify-center p-4">
+            <span className="font-black text-xl bg-gradient-to-r from-green-400 to-cyan-400 bg-clip-text text-transparent">SUCCESS!</span>
+          </div>
+        </div>
+
+        <div className="max-w-xl mx-auto space-y-6 pt-20 p-4">
           {/* CELEBRATION */}
           <motion.div
             initial={{ scale: 0.5, opacity: 0 }}
