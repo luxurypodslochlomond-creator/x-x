@@ -5,6 +5,7 @@ import { Bell, CheckCircle, XCircle, Music } from 'lucide-react';
 import { base44 } from '@/api/base44Client';
 import { useQuery } from '@tanstack/react-query';
 import { motion, AnimatePresence } from 'framer-motion';
+import CB51BandVotingUI from './CB51BandVotingUI';
 
 /**
  * BAND MEMBER NOTIFICATIONS
@@ -65,38 +66,25 @@ export default function CB51BandNotifications({ userEmail }) {
                 </div>
             </motion.div>
 
-            {/* NOTIFICATIONS */}
+            {/* NOTIFICATIONS - EXPANDABLE VOTING */}
             <AnimatePresence>
                 {notifications.map((notif, idx) => (
-                    <motion.button
+                    <motion.div
                         key={notif.id}
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -10 }}
                         transition={{ delay: idx * 0.1 }}
-                        onClick={() => handleClick(notif)}
-                        className="w-full bg-black border-2 border-cyan-500/50 hover:border-cyan-500 rounded-lg p-4 text-left transition-all"
                     >
-                        <div className="flex items-start justify-between mb-2">
-                            <h3 className="text-white font-black font-mono text-sm flex-1">
-                                {notif.title}
-                            </h3>
-                            <Music className="w-5 h-5 text-cyan-400 flex-shrink-0 animate-pulse" />
-                        </div>
-                        <p className="text-cyan-400 text-xs font-mono whitespace-pre-line">
-                            {notif.message}
-                        </p>
-                        <div className="flex items-center gap-2 mt-3 pt-3 border-t border-cyan-500/20">
-                            <div className="flex-1 flex items-center justify-center gap-2 bg-green-900/20 border border-green-500/50 text-green-400 py-1 px-2 rounded font-mono text-xs">
-                                <CheckCircle className="w-3 h-3" />
-                                YES
-                            </div>
-                            <div className="flex-1 flex items-center justify-center gap-2 bg-red-900/20 border border-red-500/50 text-red-400 py-1 px-2 rounded font-mono text-xs">
-                                <XCircle className="w-3 h-3" />
-                                NO
-                            </div>
-                        </div>
-                    </motion.button>
+                        <CB51BandVotingUI 
+                            notification={notif}
+                            onVoted={() => {
+                                base44.entities.ScottNotification.update(notif.id, {
+                                    read_at: new Date().toISOString()
+                                });
+                            }}
+                        />
+                    </motion.div>
                 ))}
             </AnimatePresence>
         </div>
