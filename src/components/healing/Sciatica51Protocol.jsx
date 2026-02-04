@@ -65,18 +65,15 @@ export default function Sciatica51Protocol({ onStartHealing }) {
             exit={{ opacity: 0, height: 0 }}
             className="bg-gradient-to-r from-orange-500/10 to-amber-500/10 border-4 border-orange-500 border-t-0 p-6 space-y-4"
           >
-            {/* THE SCIENCE */}
+            {/* THE TWO-SLIDER MODEL */}
             <div className="bg-black/60 border-2 border-orange-500/50 p-4 rounded">
-              <p className="text-orange-400 font-black text-sm mb-2">THE SCIENCE:</p>
+              <p className="text-orange-400 font-black text-sm mb-2">TWO SEPARATE SYSTEMS:</p>
               <p className="text-white text-sm font-mono leading-relaxed mb-3">
-                <strong>Deep Gluteal Syndrome</strong> = Piriformis muscle compresses sciatic nerve at deep glute level. 
-                Frequencies can't fix it alone (needs movement), but combined with stretching = powerful healing.
+                <strong>Deep Gluteal Syndrome</strong> = Piriformis compresses sciatic nerve. Recovery has two phases:
               </p>
-              <ul className="text-xs text-gray-300 space-y-1 ml-3">
-                <li>✓ <strong className="text-white">528Hz</strong> = DNA repair + anti-inflammatory (reduce nerve irritation)</li>
-                <li>✓ <strong className="text-white">40Hz gamma</strong> = MIT proven to reduce nerve inflammation</li>
-                <li>✓ <strong className="text-white">Piriformis stretch</strong> = Decompress nerve (the actual cure)</li>
-                <li>✓ <strong className="text-white">Together</strong> = Paraympathetic nervous system (rest mode) + physical decompression</li>
+              <ul className="text-xs text-gray-300 space-y-2 ml-3">
+                <li>🎚️ <strong className="text-white">SLIDER #1: Nervous System Sensitivity</strong><br/>• 528Hz + 40Hz calm anxiety + reduce pain perception<br/>• Helps you tolerate movement without fear</li>
+                <li>🎚️ <strong className="text-white">SLIDER #2: Mechanical Capacity</strong><br/>• Only graded movement (over weeks) builds tolerance<br/>• Frequencies don't improve this — only movement does</li>
               </ul>
             </div>
 
