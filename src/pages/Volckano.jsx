@@ -155,7 +155,7 @@ export default function Volckano() {
             startGame();
             return;
         }
-        velocity.current = -8;
+        velocity.current = -10; // Bigger jump = easier for kids
         playSound(432, 50);
         
         // Haptic feedback - kids love the vibration!
@@ -223,8 +223,8 @@ export default function Volckano() {
             
             gameTime.current += 20;
 
-            // Simple physics
-            velocity.current += 0.4;
+            // Simple physics - gentler gravity for kids
+            velocity.current += 0.35;
             playerY.current += velocity.current;
 
             if (playerY.current < 0) {
@@ -260,13 +260,13 @@ export default function Volckano() {
                 return;
             }
 
-            // OBSTACLES - slow and spaced out
+            // OBSTACLES - slow and spaced out for kids
             if (gameTime.current > 3000) {
                 obstacles.current = obstacles.current
-                    .map(o => ({ ...o, x: o.x - 2.5 }))
+                    .map(o => ({ ...o, x: o.x - 2 })) // Slower = easier
                     .filter(o => o.x > -60);
 
-                if (obstacles.current.length === 0 || obstacles.current[obstacles.current.length - 1].x < 150) {
+                if (obstacles.current.length === 0 || obstacles.current[obstacles.current.length - 1].x < 200) {
                     obstacles.current.push({
                         x: 400,
                         y: Math.random() > 0.5 ? 0 : 320,
@@ -274,11 +274,11 @@ export default function Volckano() {
                     });
                 }
 
-                // CHECK COLLISION
+                // CHECK COLLISION - forgiving hitbox for kids
                 for (const obs of obstacles.current) {
-                    if (obs.x > 40 && obs.x < 100) {
-                        if ((obs.y === 0 && playerY.current < obs.h) || 
-                            (obs.y > 0 && playerY.current + 50 > obs.y)) {
+                    if (obs.x > 50 && obs.x < 90) { // Smaller collision window
+                        if ((obs.y === 0 && playerY.current < obs.h - 10) || // Top obstacle more forgiving
+                            (obs.y > 0 && playerY.current + 60 > obs.y)) { // Bottom obstacle more forgiving
                             setGameOver(true);
                             playSound(200, 300);
                             return;
@@ -287,9 +287,9 @@ export default function Volckano() {
                 }
             }
 
-            // COLLECTIBLES (stars + in-game litter)
+            // COLLECTIBLES (stars + in-game litter) - bigger zone
             collectibles.current.forEach(c => {
-                if (!c.collected && c.x > 40 && c.x < 120 && Math.abs(c.y - playerY.current) < 40) {
+                if (!c.collected && c.x > 30 && c.x < 130 && Math.abs(c.y - playerY.current) < 50) {
                     c.collected = true;
                     
                     if (c.type === 'litter') {
@@ -326,9 +326,9 @@ export default function Volckano() {
                 c.x -= 2;
             });
 
-            // PEOPLE
+            // PEOPLE - bigger collection zone for kids
             people.current.forEach(p => {
-                if (!p.saved && p.x > 40 && p.x < 100 && Math.abs(p.y - playerY.current) < 60) {
+                if (!p.saved && p.x > 30 && p.x < 110 && Math.abs(p.y - playerY.current) < 70) {
                     p.saved = true;
                     setScore(s => s + 1);
                     playSound(528, 150);
@@ -462,7 +462,7 @@ export default function Volckano() {
 
     return (
         <div 
-            className="h-screen w-screen bg-gradient-to-b from-purple-900 via-pink-900 to-orange-900 overflow-hidden select-none flex items-center justify-center p-4"
+            className="h-screen w-screen bg-gradient-to-b from-purple-900 via-pink-900 to-orange-900 overflow-hidden select-none flex items-center justify-center p-4 active:bg-purple-800 transition-colors"
             onClick={jump}
             onTouchStart={(e) => { e.preventDefault(); jump(); }}
         >
