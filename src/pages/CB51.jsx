@@ -659,13 +659,18 @@ export default function CB51() {
                         </motion.div>
                     )}
 
-                    {/* PENDING APPROVALS - ALWAYS VISIBLE */}
+                    {/* PENDING APPROVALS - COLLAPSIBLE */}
+                    {stats.pendingOffers > 0 && (
                                   <div id="pending-approvals" className="mb-6 bg-black border-2 border-cyan-500 rounded-lg p-4">
-                                      <h2 className="text-cyan-400 font-black font-mono text-sm mb-3 flex items-center gap-2">
+                                      <h2 
+                                          onClick={() => setExpandedSection({...expandedSection, pendingApprovals: !expandedSection.pendingApprovals})}
+                                          className="text-cyan-400 font-black font-mono text-sm mb-3 flex items-center gap-2 cursor-pointer hover:text-cyan-300 transition-colors"
+                                      >
                                           <AlertCircle className="w-4 h-4" />
-                                          PENDING APPROVALS {stats.pendingOffers > 0 && `(${stats.pendingOffers})`}
+                                          PENDING APPROVALS ({stats.pendingOffers})
+                                          <span className="ml-auto text-xs">{expandedSection.pendingApprovals ? '▼' : '▶'}</span>
                                       </h2>
-                                      {stats.pendingOffers > 0 ? (
+                                      {expandedSection.pendingApprovals && (
                                           <>
                                           <div className="space-y-3">
                                                 {allOffers
