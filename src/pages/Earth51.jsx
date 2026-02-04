@@ -8,7 +8,7 @@ import { createPageUrl } from '@/utils';
 import AI51AtomIcon from '@/components/ai51/AI51AtomIcon';
 import P51Symbol from '@/components/shared/P51Symbol';
 import PrivacyFirstEngine from '@/components/earth51/PrivacyFirstEngine';
-import Earth51AI51Icon from '@/components/earth51/Earth51AI51Icon';
+import Earth518BitIcon from '@/components/earth51/Earth518BitIcon';
 
 /**
  * EARTH51 - KIDS EDITION
@@ -214,43 +214,40 @@ export default function Earth51() {
           </div>
         </div>
 
-        <div className="max-w-xl mx-auto pt-20 p-4 pb-32 space-y-6">
+        <div className="max-w-xl mx-auto pt-20 p-3 pb-32">
           
-          {/* AI51 GREETING */}
+          {/* AI51 GREETING - COMPACT 8-BIT */}
           <motion.div
             initial={{ y: 10, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            className="bg-gradient-to-br from-cyan-500 to-green-500 border-4 border-white p-8 flex flex-col items-center text-center"
-            style={{ boxShadow: '6px 6px 0px #000' }}
+            className="bg-cyan-500 border-4 border-white p-4 mb-4 flex items-center gap-3"
+            style={{ boxShadow: '4px 4px 0px #000' }}
           >
-            <Earth51AI51Icon size={100} animate={true} />
-            <p className="text-black font-black font-mono text-sm mt-4 mb-3">I'M AI51</p>
-            <p className="text-black font-bold font-mono text-xs leading-relaxed">
-              Take a real photo of litter. I'll verify it. You earn $P51. That's it.
-            </p>
+            <Earth518BitIcon size={56} animate={true} />
+            <div>
+              <p className="text-black font-black font-mono text-xs">AI51</p>
+              <p className="text-black font-mono text-[9px] leading-tight">Photo → verify → earn</p>
+            </div>
           </motion.div>
 
-          {/* THE FLOW - 3 SIMPLE STEPS */}
-          <div className="space-y-3">
+          {/* THE FLOW - COMPACT GRID */}
+          <div className="space-y-2 mb-4">
             {[
-              { num: 1, title: 'TAKE PHOTO', desc: 'Real litter you picked up' },
-              { num: 2, title: 'I VERIFY', desc: 'I check its real + weight' },
-              { num: 3, title: 'YOU EARN', desc: 'Real $P51 for Volckano' }
+              { num: 1, title: 'PHOTO' },
+              { num: 2, title: 'VERIFY' },
+              { num: 3, title: 'EARN' }
             ].map((step, i) => (
-              <div key={i} className="bg-black border-2 border-green-500 p-4 flex items-center gap-3">
-                <div className="w-10 h-10 bg-green-500 border-2 border-green-400 flex items-center justify-center flex-shrink-0">
-                  <span className="text-black font-black font-mono text-sm">{step.num}</span>
+              <div key={i} className="bg-black border-2 border-green-500 p-3 flex items-center gap-2">
+                <div className="w-8 h-8 bg-green-500 border border-green-400 flex items-center justify-center flex-shrink-0">
+                  <span className="text-black font-black font-mono text-xs">{step.num}</span>
                 </div>
-                <div>
-                  <p className="font-black font-mono text-green-400 text-sm">{step.title}</p>
-                  <p className="text-gray-400 font-mono text-xs">{step.desc}</p>
-                </div>
+                <p className="font-black font-mono text-green-400 text-xs">{step.title}</p>
               </div>
             ))}
           </div>
   
-          {/* BIG CTA */}
-          <label className="block mt-6">
+          {/* MAIN CTA - GRID */}
+          <label className="block mb-4">
             <input
               type="file"
               accept="image/*"
@@ -264,46 +261,68 @@ export default function Earth51() {
               disabled={isLoading}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="w-full bg-green-500 border-4 border-green-400 py-8 disabled:opacity-50 flex flex-col items-center justify-center gap-3"
-              style={{ boxShadow: '6px 6px 0px #000' }}
+              className="w-full bg-green-500 border-4 border-green-400 py-6 disabled:opacity-50 flex items-center justify-center gap-2"
+              style={{ boxShadow: '4px 4px 0px #000' }}
             >
-              <div className="w-14 h-14 bg-black border-2 border-white flex items-center justify-center">
-                <Camera className="w-8 h-8 text-green-400" />
+              <div className="w-10 h-10 bg-black border-2 border-white flex items-center justify-center">
+                <Camera className="w-5 h-5 text-green-400" />
               </div>
-              <p className="text-black font-black font-mono text-lg">TAKE PHOTO</p>
+              <p className="text-black font-black font-mono text-sm">TAKE PHOTO</p>
             </motion.button>
           </label>
 
-          {/* SECONDARY OPTIONS */}
-          <div className="grid grid-cols-2 gap-3">
+          {/* GRID BUTTONS - 2x2 */}
+          <div className="grid grid-cols-2 gap-2 mb-4">
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => navigate(createPageUrl('Volckano'))}
-              className="bg-orange-500 border-4 border-orange-400 py-6 flex flex-col items-center justify-center gap-2"
-              style={{ boxShadow: '4px 4px 0px #000' }}
+              className="bg-orange-500 border-3 border-orange-400 py-4 flex flex-col items-center justify-center gap-1"
+              style={{ boxShadow: '3px 3px 0px #000' }}
             >
-              <div className="w-12 h-12 bg-black border-2 border-white flex items-center justify-center">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <div className="w-8 h-8 bg-black border-2 border-white flex items-center justify-center">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
                   <polygon points="12,2 20,8 18,18 6,18 4,8" fill="none" stroke="white" strokeWidth="2"/>
                 </svg>
               </div>
-              <p className="text-black font-black font-mono text-xs">PLAY VOLCKANO</p>
+              <p className="text-black font-black font-mono text-[9px]">VOLCKANO</p>
             </motion.button>
 
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => setShowParentInfo(!showParentInfo)}
-              className="bg-blue-500 border-4 border-blue-400 py-6 flex flex-col items-center justify-center gap-2"
-              style={{ boxShadow: '4px 4px 0px #000' }}
+              className="bg-blue-500 border-3 border-blue-400 py-4 flex flex-col items-center justify-center gap-1"
+              style={{ boxShadow: '3px 3px 0px #000' }}
             >
-              <Shield className="w-8 h-8 text-black" />
-              <p className="text-black font-black font-mono text-xs">FOR PARENTS</p>
+              <Shield className="w-6 h-6 text-black" />
+              <p className="text-black font-black font-mono text-[9px]">PARENTS</p>
+            </motion.button>
+
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setShowP51Explainer(!showP51Explainer)}
+              className="bg-purple-500 border-3 border-purple-400 py-4 flex flex-col items-center justify-center gap-1"
+              style={{ boxShadow: '3px 3px 0px #000' }}
+            >
+              <Sparkles className="w-6 h-6 text-black" />
+              <p className="text-black font-black font-mono text-[9px]">WHAT $P51?</p>
+            </motion.button>
+
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setShowResonance(!showResonance)}
+              className="bg-pink-500 border-3 border-pink-400 py-4 flex flex-col items-center justify-center gap-1"
+              style={{ boxShadow: '3px 3px 0px #000' }}
+            >
+              <Sparkles className="w-6 h-6 text-black" />
+              <p className="text-black font-black font-mono text-[9px]">RESONANCE</p>
             </motion.button>
           </div>
   
-          {/* PARENT INFO EXPANDABLE */}
+          {/* EXPANDABLES */}
           <AnimatePresence>
             {showParentInfo && (
               <motion.div
@@ -312,13 +331,10 @@ export default function Earth51() {
                 exit={{ height: 0, opacity: 0 }}
                 className="overflow-hidden"
               >
-                <div className="bg-blue-500 border-4 border-blue-400 p-4" style={{ boxShadow: '4px 4px 0px #000' }}>
-                  <h3 className="text-black font-black font-mono text-sm mb-3">SAFE FOR KIDS ✓</h3>
-                  <div className="space-y-2">
-                    <p className="text-black font-mono text-xs">✓ Zero personal data</p>
-                    <p className="text-black font-mono text-xs">✓ AI safety verification on every photo</p>
-                    <p className="text-black font-mono text-xs">✓ COPPA/GDPR compliant</p>
-                    <p className="text-black font-mono text-xs">✓ Teaches real responsibility</p>
+                <div className="bg-blue-500 border-3 border-blue-400 p-3" style={{ boxShadow: '3px 3px 0px #000' }}>
+                  <p className="text-black font-black font-mono text-[9px] mb-2">SAFE FOR KIDS ✓</p>
+                  <div className="space-y-1">
+                    <p className="text-black font-mono text-[8px]">✓ Zero data • ✓ AI checks • ✓ COPPA safe</p>
                   </div>
                 </div>
               </motion.div>
@@ -422,20 +438,15 @@ export default function Earth51() {
             )}
           </AnimatePresence>
 
-          {/* 8-BIT FOOTER */}
-          <div className="bg-black border-4 border-cyan-500 p-4 text-center" style={{ boxShadow: '4px 4px 0px rgba(6, 182, 212, 0.5)' }}>
-            <motion.div
-              animate={{ scale: [1, 1.05, 1] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            >
-              <p className="text-cyan-400 font-black font-mono text-xs">
-                🤖 I'M HERE TO HELP! 🌍
-              </p>
-            </motion.div>
-            <div className="flex items-center justify-center gap-1 mt-2">
-              <span className="w-2 h-2 bg-green-500 animate-pulse"></span>
-              <span className="w-2 h-2 bg-pink-500 animate-pulse"></span>
-              <span className="w-2 h-2 bg-cyan-500 animate-pulse"></span>
+          {/* FOOTER */}
+          <div className="bg-black border-3 border-cyan-500 p-3 text-center" style={{ boxShadow: '3px 3px 0px #06b6d4' }}>
+            <p className="text-cyan-400 font-black font-mono text-[9px] mb-1">
+              AI51 HERE TO HELP
+            </p>
+            <div className="flex items-center justify-center gap-1">
+              <span className="w-1.5 h-1.5 bg-green-500"></span>
+              <span className="w-1.5 h-1.5 bg-pink-500"></span>
+              <span className="w-1.5 h-1.5 bg-cyan-500"></span>
             </div>
           </div>
         </div>
