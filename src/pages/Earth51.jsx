@@ -28,10 +28,12 @@ export default function Earth51() {
   const [error, setError] = useState(null);
   const [isOffline, setIsOffline] = useState(!navigator.onLine);
   const [showP51Explainer, setShowP51Explainer] = useState(false);
-  const [showParentInfo, setShowParentInfo] = useState(false);
   const [allChecks, setAllChecks] = useState(null);
   const [trustScore, setTrustScore] = useState(null);
   const [fraudBlocked, setFraudBlocked] = useState(false);
+  const [localBalance, setLocalBalance] = useState(() => {
+    return parseFloat(localStorage.getItem('earth51_local_balance') || '0');
+  });
 
   // HIDE MAIN NAV FOR KIDS EXPERIENCE
   useEffect(() => {
@@ -113,40 +115,66 @@ export default function Earth51() {
 
       setTokensEarned(Math.round(instantTokens * 10) / 10);
 
-      const cleanupData = {
+      // ANONYMOUS MODE: Store locally
+      const newBalance = localBalance + instantTokens;
+      setLocalBalance(newBalance);
+      localStorage.setItem('earth51_local_balance', newBalance.toString());
+
+      // Store cleanup locally
+      const localCleanups = JSON.parse(localStorage.getItem('earth51_local_cleanups') || '[]');
+      localCleanups.push({
+        id: Date.now().toString(),
         photo_url: photoUrl,
         location: location || 'Earth51 Cleanup',
-        county: location || 'Somewhere Amazing',
         litter_weight: weightNum,
-        cleanup_type: 'street',
         tokens_awarded: total,
         tokens_instant: instantTokens,
         tokens_pending: pendingTokens,
-        verification_status: instantPercentage === 100 ? 'instant_paid' : 'pending_verification',
-        instant_payout_percentage: instantPercentage,
-        quantum_processing_speed: trustScore?.quantum_speed || 'standard',
-        // 2026 PRIVACY-FIRST FRAUD DATA
-        perceptual_hash: allChecks?.client_safe ? 'client_verified' : null,
-        liveness_score: allChecks?.liveness?.liveness_score || null,
-        fraud_flags: allChecks?.liveness?.fraud_flags || [],
-        ai_weight_confidence: allChecks?.weight?.confidence_level || null,
-        ai_weight_range_min: allChecks?.weight?.weight_range?.min_kg || null,
-        ai_weight_range_max: allChecks?.weight?.weight_range?.max_kg || null,
-        ai_items_detected: allChecks?.weight?.items_detected?.map(i => `${i.count}x ${i.item_type}`).join(', ') || null,
-        ai_brands_detected: allChecks?.brands?.brands?.map(b => b.brand_name).join(', ') || null,
-        ai_corporate_accountability: allChecks?.brands?.corporate_accountability || null,
-        ai_verification_summary: allChecks?.brands?.verification_summary || null,
-        privacy_mode: allChecks?.ai_consent === false ? 'client_only' : 'ai_enhanced'
-      };
+        created_date: new Date().toISOString(),
+        synced: false
+      });
+      localStorage.setItem('earth51_local_cleanups', JSON.stringify(localCleanups));
 
-      if (!isOffline) {
-        await createCleanupMutation.mutateAsync(cleanupData);
+      // TRY to sync to server if logged in (optional)
+      try {
         const user = await base44.auth.me().catch(() => null);
         if (user) {
+          const cleanupData = {
+            photo_url: photoUrl,
+            location: location || 'Earth51 Cleanup',
+            county: location || 'Somewhere Amazing',
+            litter_weight: weightNum,
+            cleanup_type: 'street',
+            tokens_awarded: total,
+            tokens_instant: instantTokens,
+            tokens_pending: pendingTokens,
+            verification_status: instantPercentage === 100 ? 'instant_paid' : 'pending_verification',
+            instant_payout_percentage: instantPercentage,
+            quantum_processing_speed: trustScore?.quantum_speed || 'standard',
+            perceptual_hash: allChecks?.client_safe ? 'client_verified' : null,
+            liveness_score: allChecks?.liveness?.liveness_score || null,
+            fraud_flags: allChecks?.liveness?.fraud_flags || [],
+            ai_weight_confidence: allChecks?.weight?.confidence_level || null,
+            ai_weight_range_min: allChecks?.weight?.weight_range?.min_kg || null,
+            ai_weight_range_max: allChecks?.weight?.weight_range?.max_kg || null,
+            ai_items_detected: allChecks?.weight?.items_detected?.map(i => `${i.count}x ${i.item_type}`).join(', ') || null,
+            ai_brands_detected: allChecks?.brands?.brands?.map(b => b.brand_name).join(', ') || null,
+            ai_corporate_accountability: allChecks?.brands?.corporate_accountability || null,
+            ai_verification_summary: allChecks?.brands?.verification_summary || null,
+            privacy_mode: allChecks?.ai_consent === false ? 'client_only' : 'ai_enhanced'
+          };
+          await createCleanupMutation.mutateAsync(cleanupData);
           await base44.auth.updateMe({
             p51_balance: (user.p51_balance || 0) + instantTokens
           });
+          // Mark as synced
+          const updatedCleanups = localCleanups.map(c => 
+            c.id === localCleanups[localCleanups.length - 1].id ? { ...c, synced: true } : c
+          );
+          localStorage.setItem('earth51_local_cleanups', JSON.stringify(updatedCleanups));
         }
+      } catch (e) {
+        // Silent fail - works anonymously
       }
 
       setStep('success');
@@ -589,13 +617,22 @@ export default function Earth51() {
                 +{tokensEarned}
               </h1>
               <p className="text-2xl font-black font-mono text-black">$P51</p>
+              <p className="text-black font-mono text-xs mt-2">
+                Total: {localBalance.toFixed(1)} $P51
+              </p>
               {trustScore && trustScore.instant_payout_percentage < 100 && (
-                <p className="text-black font-mono text-xs mt-2">
+                <p className="text-black/60 font-mono text-[9px] mt-1">
                   ({trustScore.instant_payout_percentage}% now • {100 - trustScore.instant_payout_percentage}% pending)
                 </p>
               )}
             </div>
             <p className="text-cyan-400 font-black font-mono text-xs">YOU'RE AWESOME! ❤️</p>
+
+            <div className="bg-black border-2 border-cyan-500/50 p-3">
+              <p className="text-cyan-400 font-mono text-[9px] text-center">
+                💾 Saved on your device • Login to sync & play Volckano
+              </p>
+            </div>
 
             {trustScore && trustScore.tier === 'new' && (
               <div className="bg-purple-500 border-4 border-purple-400 p-3" style={{ boxShadow: '4px 4px 0px #000' }}>
@@ -614,7 +651,16 @@ export default function Earth51() {
               <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                onClick={() => navigate(createPageUrl('Volckano'))}
+                onClick={async () => {
+                  const user = await base44.auth.me().catch(() => null);
+                  if (user) {
+                    navigate(createPageUrl('Volckano'));
+                  } else {
+                    if (confirm('Login to sync your $P51 and play Volckano with unlocked levels?')) {
+                      base44.auth.redirectToLogin(window.location.origin + createPageUrl('Volckano'));
+                    }
+                  }
+                }}
                 className="w-full bg-orange-500 border-4 border-orange-400 text-black py-4 font-black font-mono text-sm"
                 style={{ boxShadow: '4px 4px 0px #000' }}
               >
@@ -639,7 +685,14 @@ export default function Earth51() {
               <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                onClick={() => navigate(createPageUrl('Profile'))}
+                onClick={async () => {
+                  const user = await base44.auth.me().catch(() => null);
+                  if (user) {
+                    navigate(createPageUrl('Profile'));
+                  } else {
+                    alert(`Your balance: ${localBalance.toFixed(1)} $P51 (stored locally)\n\nLogin to sync to cloud & unlock more features!`);
+                  }
+                }}
                 className="w-full bg-purple-500 border-4 border-purple-400 text-black py-4 font-black font-mono text-sm"
                 style={{ boxShadow: '4px 4px 0px #000' }}
               >
