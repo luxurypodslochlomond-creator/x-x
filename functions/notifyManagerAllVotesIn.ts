@@ -35,8 +35,8 @@ Deno.serve(async (req) => {
       return Response.json({ skipped: true });
     }
 
-    // Check if all have voted (no pending)
-    const allVoted = responses.every(r => r.decision !== 'pending');
+    // Check if all have voted (no pending) - handle both 'vote' and 'decision' field names
+    const allVoted = responses.every(r => (r.vote || r.decision) !== 'pending');
     
     if (!allVoted) {
       return Response.json({ skipped: true, reason: 'Not all votes in yet' });
