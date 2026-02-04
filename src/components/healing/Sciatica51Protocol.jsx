@@ -129,26 +129,27 @@ export default function Sciatica51Protocol({ onStartHealing }) {
                 animate={{ opacity: 1, y: 0 }}
                 className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-2 border-green-500 p-4 rounded space-y-3"
               >
-                <p className="text-green-400 font-black text-sm font-mono">3-MIN PIRIFORMIS STRETCH:</p>
+                <p className="text-green-400 font-black text-sm font-mono">GRADED MOVEMENT (STAY IN TOLERANCE):</p>
                 
                 <div className="space-y-2">
                   <div className="bg-black/60 p-3 border border-green-500/30 rounded">
-                    <p className="text-green-300 font-black text-xs font-mono mb-1">POSITION 1: Lying Piriformis Stretch (90/90)</p>
+                    <p className="text-green-300 font-black text-xs font-mono mb-1">90/90 PIRIFORMIS POSITION</p>
                     <p className="text-white text-xs font-mono">
                       • Lie on back, knees bent, feet flat<br/>
                       • Place right ankle on left knee (4-shape)<br/>
-                      • Pull left knee toward chest gently<br/>
-                      • Feel deep stretch in right glute<br/>
-                      • Hold 1.5 min each side (3 min total)
+                      • GENTLY bring left knee toward chest<br/>
+                      • STOP if electrical pain appears<br/>
+                      • Hold what's comfortable for 1-2 min
                     </p>
                   </div>
                 </div>
 
                 <div className="bg-green-900/30 border-2 border-green-500 p-3 rounded">
-                  <p className="text-green-400 font-bold text-xs font-mono">WHY THIS WORKS:</p>
+                  <p className="text-green-400 font-bold text-xs font-mono">THE KEY PRINCIPLE:</p>
                   <p className="text-white text-xs font-mono">
-                    The piriformis sits right over the sciatic nerve. When tight (from pain, stress, sitting), it crushes the nerve. 
-                    This stretch decompress it directly. Frequencies calm inflammation WHILE you stretch = faster healing.
+                    Calm + neutral movement = good. Calm + electrical pain = too much.<br/>
+                    Only increase depth/duration when it stays pain-free AFTER the session.<br/>
+                    Frequencies help you stay calm while you do the work. They don't change how much your nerve tolerates yet.
                   </p>
                 </div>
               </motion.div>
