@@ -27,9 +27,9 @@ Deno.serve(async (req) => {
 
     // === STEP 2: Manager approved → notify band ===
     if (data?.status === 'sent_to_band' && !data.band_notified) {
-      const teamMembers = await base44.asServiceRole.entities.ScottTeamMember.filter({
-        artist_id: gigOffer.artist_id
-      });
+      // Get ALL team members, then filter by artist_access array
+      const allTeamMembers = await base44.asServiceRole.entities.ScottTeamMember.list();
+      const teamMembers = allTeamMembers.filter(m => m.artist_access?.includes(gigOffer.artist_id));
 
       if (teamMembers.length === 0) {
         return Response.json({ error: 'No band members' }, { status: 400 });
