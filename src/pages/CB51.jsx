@@ -770,7 +770,7 @@ export default function CB51() {
                                                     </div>
                                                     )}
 
-                                    {/* BAND MEMBER NOTIFICATIONS */}
+                                                    {/* BAND MEMBER NOTIFICATIONS */}
                                     {user && user.role !== 'admin' && (
                                         <div className="mb-6">
                                             <CB51BandNotifications userEmail={user.email} />
