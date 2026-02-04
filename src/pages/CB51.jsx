@@ -1005,9 +1005,6 @@ export default function CB51() {
                             </div>
                         )}
                     </div>
-
-                    </div>
-
                     </div>
                     );
                     }
