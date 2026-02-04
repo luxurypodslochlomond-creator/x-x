@@ -794,7 +794,7 @@ export default function CB51() {
 
                     {/* ARTIST CIRCLES - BIG AND CENTERED */}
                      {artists.length > 0 && (
-                         <div className="mb-4 mt-6">
+                         <div className="mb-6 mt-6">
                              <div className="flex justify-center items-center gap-8 flex-wrap">
                                  {artists.slice(0, 3).map((artist) => (
                                      <div key={artist.id} className="relative">
@@ -822,17 +822,14 @@ export default function CB51() {
                                          </button>
                                      </div>
                                  ))}
-                                 {artists.length < 5 && (
-                                     <Link to={createPageUrl('ScottAddArtist')}>
-                                         <motion.div
-                                             whileTap={{ scale: 0.95 }}
-                                             className="w-16 h-16 border-2 border-dashed border-cyan-500/50 hover:border-cyan-500 rounded-full flex items-center justify-center cursor-pointer transition-colors"
-                                         >
-                                             <Plus className="w-6 h-6 text-cyan-400" />
-                                         </motion.div>
-                                     </Link>
-                                 )}
                              </div>
+                             {artists.length < 5 && (
+                                 <div className="flex justify-center mt-3">
+                                     <Link to={createPageUrl('ScottAddArtist')} className="bg-cyan-600 hover:bg-cyan-700 text-black font-black px-3 py-1.5 rounded text-xs font-mono transition-all">
+                                         + ADD
+                                     </Link>
+                                 </div>
+                             )}
                              {artists.length > 3 && (
                                  <div className="text-center mt-3">
                                      <button
