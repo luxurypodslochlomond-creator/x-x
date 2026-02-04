@@ -830,13 +830,7 @@ export default function CB51() {
                                      </div>
                                  ))}
                              </div>
-                             {artists.length < 5 && (
-                                 <div className="flex justify-center mt-3">
-                                     <Link to={createPageUrl('ScottAddArtist')} className="bg-cyan-600 hover:bg-cyan-700 text-black font-black px-3 py-1.5 rounded text-xs font-mono transition-all">
-                                         + ADD
-                                     </Link>
-                                 </div>
-                             )}
+
                              {artists.length > 3 && (
                                  <div className="text-center mt-3">
                                      <button
