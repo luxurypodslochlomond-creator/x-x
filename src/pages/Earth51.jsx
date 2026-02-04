@@ -210,7 +210,7 @@ export default function Earth51() {
                 className="text-2xl font-black font-mono text-green-400"
                 style={{ textShadow: '2px 2px 0px #000, 4px 4px 0px rgba(6, 182, 212, 0.5)' }}
               >
-                earth.love
+                earth51.love
               </motion.h1>
               <div className="flex items-center justify-center gap-1 mt-1">
                 <span className="w-2 h-2 bg-pink-500 animate-pulse"></span>
