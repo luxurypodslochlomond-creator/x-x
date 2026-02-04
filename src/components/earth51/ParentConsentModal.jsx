@@ -38,7 +38,7 @@ export default function ParentConsentModal({ onConsent, onDecline }) {
               🤖 ADVANCED AI FRAUD DETECTION
             </p>
             <p className="text-black font-mono text-xs">
-              We can use AI to check photos are real (not fake/duplicate). This helps stop cheating.
+              We can use AI to check photos are real (not fake/duplicate). Helps kids learn fair play.
             </p>
           </div>
 

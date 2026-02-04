@@ -347,7 +347,7 @@ export default function Earth51() {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              onClick={() => setShowParentInfo(!showParentInfo)}
+              onClick={() => navigate(createPageUrl('Earth51Terms'))}
               className="w-full bg-blue-500 border-4 border-blue-400 p-5 aspect-square flex flex-col items-center justify-center"
               style={{ boxShadow: '4px 4px 0px #000' }}
             >
@@ -358,7 +358,7 @@ export default function Earth51() {
               >
                 <Shield className="w-8 h-8 text-blue-400" />
               </motion.div>
-              <p className="text-black font-black font-mono text-xs text-center">PARENTS INFO</p>
+              <p className="text-black font-black font-mono text-xs text-center">RULES & INFO</p>
             </motion.button>
           </div>
 
@@ -383,7 +383,7 @@ export default function Earth51() {
                   <div className="space-y-2">
                     <div className="bg-green-500 border-2 border-green-400 p-3">
                       <p className="text-black font-black font-mono text-xs mb-2">HOW YOU EARN:</p>
-                      <p className="text-black font-mono text-[10px]">• 1kg litter = 1 $PHOTO51</p>
+                      <p className="text-black font-mono text-[10px]">• 1kg litter = 1 $P51</p>
                       <p className="text-black font-mono text-[10px]">• +20% bonus!</p>
                       <p className="text-black font-mono text-[10px]">• Even tiny cleanups count</p>
                     </div>
@@ -588,7 +588,7 @@ export default function Earth51() {
               <h1 className="text-4xl font-black font-mono text-black">
                 +{tokensEarned}
               </h1>
-              <p className="text-2xl font-black font-mono text-black">$PHOTO51</p>
+              <p className="text-2xl font-black font-mono text-black">$P51</p>
               {trustScore && trustScore.instant_payout_percentage < 100 && (
                 <p className="text-black font-mono text-xs mt-2">
                   ({trustScore.instant_payout_percentage}% now • {100 - trustScore.instant_payout_percentage}% pending)
