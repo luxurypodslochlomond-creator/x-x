@@ -172,9 +172,12 @@ export default function Sciatica51Protocol({ onStartHealing }) {
             )}
 
             {/* FOOTER */}
-            <div className="text-center">
-              <p className="text-xs text-gray-500 font-mono">
-                AI51 Recommendation: Do stretch daily for 2-4 weeks. Frequencies help NOW, stretch fixes it PERMANENT. ♾️❤️
+            <div className="text-center space-y-2">
+              <p className="text-xs text-gray-400 font-mono">
+                Daily gentle work (not weekly pushes).
+              </p>
+              <p className="text-xs text-yellow-400 font-mono font-bold">
+                Respect electrical pain as a boundary. Keep both sliders improving together. ♾️❤️
               </p>
             </div>
           </motion.div>
