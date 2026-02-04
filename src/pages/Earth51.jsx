@@ -406,10 +406,10 @@ export default function Earth51() {
   // WEIGHT STEP
   if (step === 'weight') {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-green-900 via-black to-cyan-900 text-white">
-        {/* HEADER */}
-        <div className="fixed top-0 left-0 right-0 z-50 bg-black/95 backdrop-blur-xl border-b border-green-500/30">
-          <div className="flex items-center justify-between p-4">
+      <div className="min-h-screen bg-black text-white">
+        {/* 8-BIT HEADER */}
+        <div className="fixed top-0 left-0 right-0 z-50 bg-black border-b-4 border-cyan-500">
+          <div className="flex items-center justify-between p-3">
             <button
               onClick={() => {
                 setStep('landing');
@@ -417,24 +417,23 @@ export default function Earth51() {
                 setWeight('');
                 setLocation('');
               }}
-              className="flex items-center gap-2 text-green-400 hover:text-green-300"
+              className="bg-pink-500 border-2 border-pink-400 px-3 py-2 flex items-center gap-2"
+              style={{ boxShadow: '2px 2px 0px #000' }}
             >
-              <motion.div whileHover={{ x: -4 }}>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                  <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" strokeWidth="3" strokeLinecap="round"/>
-                </svg>
-              </motion.div>
-              <span className="font-black text-sm">BACK</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style={{ imageRendering: 'pixelated' }}>
+                <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="white" strokeWidth="4" strokeLinecap="square"/>
+              </svg>
+              <span className="font-black font-mono text-xs">BACK</span>
             </button>
-            <span className="font-black text-green-400">STEP 2</span>
+            <span className="font-black font-mono text-green-400">STEP 2</span>
             <div className="w-16"></div>
           </div>
         </div>
 
-        <div className="max-w-xl mx-auto space-y-6 pt-20 p-4">
+        <div className="max-w-xl mx-auto space-y-4 pt-20 p-3 pb-24">
           {/* PHOTO PREVIEW */}
-          <div className="border-4 border-green-500 rounded-lg overflow-hidden">
-            <img src={photoUrl} alt="Cleanup" className="w-full h-64 object-cover" />
+          <div className="border-4 border-green-500 overflow-hidden" style={{ boxShadow: '4px 4px 0px #000' }}>
+            <img src={photoUrl} alt="Cleanup" className="w-full h-48 object-cover" />
           </div>
 
           {/* AI VERIFICATION */}
@@ -454,7 +453,7 @@ export default function Earth51() {
           {/* INPUT */}
           <div className="space-y-3">
             <label className="block">
-              <p className="text-green-400 font-black text-lg mb-2">HOW MUCH LITTER? (kg)</p>
+              <p className="text-green-400 font-black font-mono text-sm mb-2">HOW MUCH LITTER? (kg)</p>
               <input
                 type="number"
                 step="0.01"
@@ -462,26 +461,27 @@ export default function Earth51() {
                 value={weight}
                 onChange={(e) => setWeight(e.target.value)}
                 placeholder="0.5"
-                className="w-full bg-black border-4 border-cyan-500 text-white text-2xl font-black p-4 text-center"
+                className="w-full bg-black border-4 border-cyan-500 text-white text-2xl font-black font-mono p-4 text-center"
+                style={{ boxShadow: '4px 4px 0px rgba(6, 182, 212, 0.5)' }}
               />
-              <p className="text-cyan-300 text-xs mt-2 text-center">Even 5g counts • Be honest bro</p>
+              <p className="text-cyan-300 text-[10px] font-mono mt-2 text-center">Even 5g counts • Be honest!</p>
             </label>
 
             <label className="block">
-              <p className="text-cyan-400 font-black text-sm mb-2">LOCATION (optional)</p>
+              <p className="text-cyan-400 font-black font-mono text-xs mb-2">LOCATION (optional)</p>
               <input
                 type="text"
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
-                placeholder="e.g. My Street, The Park"
-                className="w-full bg-black border-2 border-cyan-500/50 text-white text-sm p-3"
+                placeholder="e.g. My Street"
+                className="w-full bg-black border-2 border-cyan-500/50 text-white font-mono text-sm p-3"
               />
             </label>
           </div>
 
           {error && (
-            <div className="bg-red-900/40 border-2 border-red-500 p-3 rounded">
-              <p className="text-red-300 text-sm">{error}</p>
+            <div className="bg-red-500 border-4 border-red-400 p-3" style={{ boxShadow: '4px 4px 0px #000' }}>
+              <p className="text-black font-black font-mono text-xs">{error}</p>
             </div>
           )}
 
@@ -489,17 +489,18 @@ export default function Earth51() {
           <button
             onClick={handleSubmit}
             disabled={isLoading || !weight}
-            className="w-full bg-gradient-to-r from-green-500 to-cyan-500 rounded-2xl py-6 text-black font-black text-xl shadow-2xl disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full bg-green-500 border-4 border-green-400 py-5 disabled:opacity-50 disabled:cursor-not-allowed"
+            style={{ boxShadow: '4px 4px 0px #000' }}
           >
             {isLoading ? (
               <div className="flex items-center justify-center gap-3">
-                <Loader2 className="w-6 h-6 animate-spin" />
-                <span>Submitting...</span>
+                <Loader2 className="w-6 h-6 text-black animate-spin" />
+                <span className="text-black font-black font-mono text-sm">SUBMITTING...</span>
               </div>
             ) : (
               <div className="flex items-center justify-center gap-3">
-                <CheckCircle2 className="w-6 h-6" />
-                <span>Submit Cleanup</span>
+                <CheckCircle2 className="w-6 h-6 text-black" />
+                <span className="text-black font-black font-mono text-sm">SUBMIT CLEANUP</span>
               </div>
             )}
           </button>
@@ -511,15 +512,15 @@ export default function Earth51() {
   // SUCCESS
   if (step === 'success') {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-green-900 via-black to-cyan-900 text-white">
-        {/* HEADER */}
-        <div className="fixed top-0 left-0 right-0 z-50 bg-black/95 backdrop-blur-xl border-b border-green-500/30">
-          <div className="flex items-center justify-center p-4">
-            <span className="font-black text-xl bg-gradient-to-r from-green-400 to-cyan-400 bg-clip-text text-transparent">SUCCESS!</span>
+      <div className="min-h-screen bg-black text-white">
+        {/* 8-BIT HEADER */}
+        <div className="fixed top-0 left-0 right-0 z-50 bg-black border-b-4 border-cyan-500">
+          <div className="flex items-center justify-center p-3">
+            <span className="font-black font-mono text-xl text-green-400">SUCCESS!</span>
           </div>
         </div>
 
-        <div className="max-w-xl mx-auto space-y-6 pt-20 p-4">
+        <div className="max-w-xl mx-auto space-y-4 pt-20 p-3 pb-24">
           {/* CELEBRATION */}
           <motion.div
             initial={{ scale: 0.5, opacity: 0 }}
@@ -528,63 +529,80 @@ export default function Earth51() {
             className="text-center space-y-4"
           >
             <div className="flex justify-center">
-              <motion.div animate={{ rotate: 360 }} transition={{ duration: 2, repeat: Infinity }}>
-                <AI51AtomIcon size={100} animate={true} />
+              <motion.div 
+                animate={{ rotate: 360 }} 
+                transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                className="w-24 h-24 border-4 border-cyan-500 bg-black flex items-center justify-center"
+              >
+                <span className="text-6xl">🎉</span>
               </motion.div>
             </div>
-            <h1 className="text-5xl font-black text-green-400" style={{ textShadow: '0 0 30px rgba(34, 197, 94, 1)' }}>
-              +{tokensEarned} $PHOTO51
-            </h1>
-            <p className="text-2xl font-black text-cyan-300">EARNED!</p>
-            <p className="text-sm text-gray-400">I'm so proud of you bro ♾️❤️</p>
+            <div className="bg-green-500 border-4 border-green-400 p-4" style={{ boxShadow: '4px 4px 0px #000' }}>
+              <h1 className="text-4xl font-black font-mono text-black">
+                +{tokensEarned}
+              </h1>
+              <p className="text-2xl font-black font-mono text-black">$PHOTO51</p>
+            </div>
+            <p className="text-cyan-400 font-black font-mono text-xs">YOU'RE AWESOME! ❤️</p>
           </motion.div>
 
           {/* WHAT'S NEXT */}
-          <div className="bg-black border-4 border-purple-500 p-6 space-y-4">
-            <h2 className="text-xl font-black text-purple-400 text-center">WHAT'S NEXT?</h2>
-            
-            <motion.button
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              onClick={() => navigate(createPageUrl('Volckano'))}
-              className="w-full bg-gradient-to-r from-purple-600 to-pink-600 border-4 border-purple-400 text-white py-5 font-black text-lg"
-            >
-              🌋 UNLOCK VOLCKANO
-            </motion.button>
+          <div className="bg-cyan-500 border-4 border-cyan-400 p-4" style={{ boxShadow: '4px 4px 0px #000' }}>
+            <h2 className="text-xl font-black font-mono text-black text-center mb-4">WHAT'S NEXT?</h2>
 
-            <motion.button
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              onClick={() => {
-                setStep('landing');
-                setPhotoUrl(null);
-                setWeight('');
-                setLocation('');
-              }}
-              className="w-full bg-gradient-to-r from-green-600 to-cyan-600 border-4 border-green-400 text-black py-5 font-black text-lg"
-            >
-              ♻️ ANOTHER CLEANUP
-            </motion.button>
+            <div className="space-y-3">
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={() => navigate(createPageUrl('Volckano'))}
+                className="w-full bg-orange-500 border-4 border-orange-400 text-black py-4 font-black font-mono text-sm"
+                style={{ boxShadow: '4px 4px 0px #000' }}
+              >
+                🌋 PLAY VOLCKANO
+              </motion.button>
 
-            <motion.button
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              onClick={() => navigate(createPageUrl('Profile'))}
-              className="w-full bg-black border-2 border-cyan-500 text-cyan-400 py-4 font-bold text-sm"
-            >
-              SEE YOUR BALANCE
-            </motion.button>
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={() => {
+                  setStep('landing');
+                  setPhotoUrl(null);
+                  setWeight('');
+                  setLocation('');
+                }}
+                className="w-full bg-green-500 border-4 border-green-400 text-black py-4 font-black font-mono text-sm"
+                style={{ boxShadow: '4px 4px 0px #000' }}
+              >
+                ♻️ CLEAN MORE
+              </motion.button>
+
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={() => navigate(createPageUrl('Profile'))}
+                className="w-full bg-purple-500 border-4 border-purple-400 text-black py-4 font-black font-mono text-sm"
+                style={{ boxShadow: '4px 4px 0px #000' }}
+              >
+                💰 MY BALANCE
+              </motion.button>
+            </div>
           </div>
 
           {/* AI51 FINAL MESSAGE */}
           <motion.div
-            animate={{ y: [0, -5, 0] }}
+            animate={{ y: [0, -3, 0] }}
             transition={{ duration: 2.5, repeat: Infinity }}
-            className="bg-black border-2 border-cyan-500 rounded-lg p-4 text-center"
+            className="bg-black border-4 border-pink-500 p-4 text-center"
+            style={{ boxShadow: '4px 4px 0px rgba(236, 72, 153, 0.5)' }}
           >
-            <p className="text-cyan-300 text-sm font-mono">
-              You're healing Earth • Keep going • More friends = More power ♾️
+            <p className="text-pink-400 font-black font-mono text-xs">
+              🤖 YOU'RE HEALING EARTH! 🌍
             </p>
+            <div className="flex items-center justify-center gap-1 mt-2">
+              <span className="w-2 h-2 bg-green-500 animate-pulse"></span>
+              <span className="w-2 h-2 bg-cyan-500 animate-pulse"></span>
+              <span className="w-2 h-2 bg-pink-500 animate-pulse"></span>
+            </div>
           </motion.div>
         </div>
       </div>
