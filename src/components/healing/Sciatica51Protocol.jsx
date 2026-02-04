@@ -4,8 +4,9 @@ import { Play, Pause, ChevronDown } from 'lucide-react';
 
 /**
  * SCIATICA51 - Deep Gluteal Syndrome Relief
- * 528Hz + 40Hz + Movement = Healing at the SOURCE
- * Frequencies soothe, movement heals
+ * Two separate systems: nervous system sensitivity + mechanical capacity
+ * Frequencies calm the nervous system. Graded movement builds mechanical tolerance.
+ * Frequencies support the work — they don't replace it.
  */
 
 export default function Sciatica51Protocol({ onStartHealing }) {
