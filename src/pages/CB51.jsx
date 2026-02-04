@@ -887,15 +887,18 @@ export default function CB51() {
                                     exit={{ height: 0, opacity: 0 }}
                                     className="ml-4 border-l border-cyan-500/30 pl-3 space-y-2"
                                 >
-                                    {messages.filter(m => m.status === 'pending').slice(0, 3).map(msg => (
-                                        <div key={msg.id} className="bg-black/60 border border-cyan-500/20 rounded p-2">
-                                            <p className="text-white text-xs font-bold">{msg.subject || 'Message'}</p>
-                                            <p className="text-gray-500 text-[9px] font-mono">{msg.from || 'Unknown'}</p>
-                                        </div>
-                                    ))}
-                                    <Link to={createPageUrl('ScottMessageInbox')} className="text-cyan-400 hover:text-cyan-300 text-[9px] font-mono font-bold block text-center pt-1">
-                                        See all →
-                                    </Link>
+                                    <CB51EmailSettings onClose={() => setExpandedTool(null)} />
+                                    <div className="space-y-2">
+                                        {messages.filter(m => m.status === 'pending').slice(0, 3).map(msg => (
+                                            <div key={msg.id} className="bg-black/60 border border-cyan-500/20 rounded p-2">
+                                                <p className="text-white text-xs font-bold">{msg.subject || 'Message'}</p>
+                                                <p className="text-gray-500 text-[9px] font-mono">{msg.from || 'Unknown'}</p>
+                                            </div>
+                                        ))}
+                                        <Link to={createPageUrl('ScottMessageInbox')} className="text-cyan-400 hover:text-cyan-300 text-[9px] font-mono font-bold block text-center pt-1">
+                                            See all →
+                                        </Link>
+                                    </div>
                                 </motion.div>
                             )}
 
