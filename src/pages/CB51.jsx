@@ -89,7 +89,6 @@ export default function CB51() {
 
         {/* AI51 SCAN BUTTON */}
         <motion.button
-          onClick={() => navigate(createPageUrl('CB51'))}
           whileHover={{ scale: 1.02 }}
           className="w-full px-6 py-4 bg-black border-2 border-cyan-500/50 hover:border-cyan-500 text-cyan-400 rounded-lg font-black text-sm font-mono flex items-center justify-center gap-2 transition-all"
         >
