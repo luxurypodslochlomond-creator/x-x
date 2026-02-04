@@ -187,67 +187,80 @@ export default function Earth51() {
     }
   };
 
-  // LANDING - STRIPPED DOWN & HONEST
+  // LANDING - TRUE 8-BIT GAME BOY RETRO
   if (step === 'landing') {
     return (
-      <div className="min-h-screen bg-black text-white">
-        {/* HEADER */}
+      <div className="min-h-screen bg-black text-white" style={{ imageRendering: 'pixelated' }}>
+        {/* HEADER - AUTHENTIC 8-BIT */}
         <div className="fixed top-0 left-0 right-0 z-50 bg-black border-b-4 border-green-500">
-          <div className="max-w-xl mx-auto p-4 flex items-center justify-between">
+          <div className="max-w-xl mx-auto p-3 flex items-center justify-between">
             <motion.button
               onClick={() => navigate(createPageUrl('Welcome'))}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              className="w-10 h-10 bg-pink-500 flex items-center justify-center border-2 border-pink-400"
+              whileHover={{ scale: 1.15 }}
+              whileTap={{ scale: 0.85 }}
+              className="w-10 h-10 bg-pink-500 border-3 border-pink-400 flex items-center justify-center font-black"
+              style={{ boxShadow: '3px 3px 0px #000', imageRendering: 'pixelated' }}
             >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style={{ imageRendering: 'pixelated' }}>
-                <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="white" strokeWidth="4" strokeLinecap="square"/>
-              </svg>
+              &lt;
             </motion.button>
 
             <div className="text-center">
-              <h1 className="text-xl font-black font-mono text-green-400">earth51.love</h1>
-              <p className="text-[9px] font-black font-mono text-cyan-400">KIDS • REAL IMPACT</p>
+              <h1 className="text-lg font-black font-mono text-green-400" style={{ textShadow: '2px 2px #000' }}>earth51.love</h1>
+              <p className="text-[8px] font-black font-mono text-cyan-400 tracking-widest">KIDS ▪ REAL IMPACT</p>
             </div>
 
             <div className="w-10"></div>
           </div>
         </div>
 
-        <div className="max-w-xl mx-auto pt-20 p-3 pb-32">
+        <div className="max-w-xl mx-auto pt-16 p-2 pb-20 space-y-2">
           
-          {/* AI51 GREETING - COMPACT 8-BIT */}
+          {/* HERO - PIXEL ART CAMERA WITH NEON GLOW */}
           <motion.div
-            initial={{ y: 10, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            className="bg-cyan-500 border-4 border-white p-4 mb-4 flex items-center gap-3"
-            style={{ boxShadow: '4px 4px 0px #000' }}
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ delay: 0.1 }}
+            className="bg-cyan-400 border-4 border-cyan-300 p-3 text-center"
+            style={{ boxShadow: '4px 4px 0px #000, 0 0 20px rgba(34, 211, 238, 0.6)', imageRendering: 'pixelated' }}
           >
-            <Earth518BitIcon size={56} animate={true} />
-            <div>
-              <p className="text-black font-black font-mono text-xs">AI51</p>
-              <p className="text-black font-mono text-[9px] leading-tight">Photo → verify → earn</p>
-            </div>
+            {/* PIXEL CAMERA */}
+            <svg width="48" height="48" viewBox="0 0 32 32" className="mx-auto mb-2" style={{ imageRendering: 'pixelated' }}>
+              <rect x="4" y="6" width="24" height="18" fill="none" stroke="#000" strokeWidth="2"/>
+              <circle cx="16" cy="15" r="6" fill="none" stroke="#000" strokeWidth="2"/>
+              <rect x="26" y="8" width="3" height="3" fill="#000"/>
+            </svg>
+            <p className="text-black font-black font-mono text-xs leading-tight">TAKE A REAL PHOTO</p>
+            <p className="text-black/70 font-mono text-[8px]">AI verifies • You earn</p>
           </motion.div>
-
-          {/* THE FLOW - COMPACT GRID */}
-          <div className="space-y-2 mb-4">
+  
+          {/* FLOW STEPS - MINIMAL & CLEAR */}
+          <div className="space-y-1">
             {[
-              { num: 1, title: 'PHOTO' },
-              { num: 2, title: 'VERIFY' },
-              { num: 3, title: 'EARN' }
-            ].map((step, i) => (
-              <div key={i} className="bg-black border-2 border-green-500 p-3 flex items-center gap-2">
-                <div className="w-8 h-8 bg-green-500 border border-green-400 flex items-center justify-center flex-shrink-0">
-                  <span className="text-black font-black font-mono text-xs">{step.num}</span>
+              { num: 1, title: 'PHOTO', desc: 'Real litter' },
+              { num: 2, title: 'VERIFY', desc: 'I check it' },
+              { num: 3, title: 'EARN', desc: '$P51' }
+            ].map((s, i) => (
+              <motion.div 
+                key={i}
+                initial={{ x: -20, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ delay: 0.2 + i * 0.1 }}
+                className="bg-black border-3 border-green-500 p-2 flex items-center gap-2"
+                style={{ boxShadow: '3px 3px 0px rgba(34, 197, 94, 0.4)' }}
+              >
+                <div className="w-7 h-7 bg-green-500 border-2 border-green-400 flex items-center justify-center flex-shrink-0" style={{ imageRendering: 'pixelated' }}>
+                  <span className="text-black font-black font-mono text-xs">{s.num}</span>
                 </div>
-                <p className="font-black font-mono text-green-400 text-xs">{step.title}</p>
-              </div>
+                <div className="flex-1">
+                  <p className="font-black font-mono text-green-400 text-[9px]">{s.title}</p>
+                  <p className="text-gray-500 font-mono text-[7px]">{s.desc}</p>
+                </div>
+              </motion.div>
             ))}
           </div>
   
-          {/* MAIN CTA - GRID */}
-          <label className="block mb-4">
+          {/* MAIN CTA - BIG PIXEL BUTTON */}
+          <label className="block mt-3">
             <input
               type="file"
               accept="image/*"
@@ -259,66 +272,77 @@ export default function Earth51() {
             <motion.button
               onClick={() => document.getElementById('photo-upload-main').click()}
               disabled={isLoading}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="w-full bg-green-500 border-4 border-green-400 py-6 disabled:opacity-50 flex items-center justify-center gap-2"
-              style={{ boxShadow: '4px 4px 0px #000' }}
+              whileHover={{ scale: 1.08 }}
+              whileTap={{ scale: 0.92 }}
+              className="w-full bg-green-500 border-4 border-green-400 py-5 disabled:opacity-60 flex items-center justify-center gap-3"
+              style={{ boxShadow: '5px 5px 0px #000, 0 0 15px rgba(34, 197, 94, 0.5)', imageRendering: 'pixelated' }}
             >
-              <div className="w-10 h-10 bg-black border-2 border-white flex items-center justify-center">
-                <Camera className="w-5 h-5 text-green-400" />
-              </div>
-              <p className="text-black font-black font-mono text-sm">TAKE PHOTO</p>
+              {/* PIXEL CAMERA ICON */}
+              <svg width="28" height="28" viewBox="0 0 24 24" style={{ imageRendering: 'pixelated' }}>
+                <rect x="3" y="5" width="18" height="14" fill="none" stroke="#000" strokeWidth="2"/>
+                <circle cx="12" cy="12" r="4" fill="none" stroke="#000" strokeWidth="2"/>
+                <rect x="19" y="7" width="2" height="2" fill="#000"/>
+              </svg>
+              <p className="text-black font-black font-mono text-sm leading-none">TAKE</p>
+              <p className="text-black font-black font-mono text-sm leading-none">PHOTO</p>
             </motion.button>
           </label>
 
-          {/* GRID BUTTONS - 2x2 */}
-          <div className="grid grid-cols-2 gap-2 mb-4">
+          {/* ACTION GRID - 2x2 PIXEL BUTTONS */}
+          <div className="grid grid-cols-2 gap-1.5 mt-2">
             <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={{ scale: 1.08 }}
+              whileTap={{ scale: 0.9 }}
               onClick={() => navigate(createPageUrl('Volckano'))}
-              className="bg-orange-500 border-3 border-orange-400 py-4 flex flex-col items-center justify-center gap-1"
-              style={{ boxShadow: '3px 3px 0px #000' }}
+              className="bg-orange-500 border-3 border-orange-400 py-3 flex flex-col items-center justify-center gap-1"
+              style={{ boxShadow: '3px 3px 0px #000', imageRendering: 'pixelated' }}
             >
-              <div className="w-8 h-8 bg-black border-2 border-white flex items-center justify-center">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-                  <polygon points="12,2 20,8 18,18 6,18 4,8" fill="none" stroke="white" strokeWidth="2"/>
-                </svg>
-              </div>
-              <p className="text-black font-black font-mono text-[9px]">VOLCKANO</p>
+              <svg width="20" height="20" viewBox="0 0 16 16" style={{ imageRendering: 'pixelated' }}>
+                <polygon points="8,2 14,6 12,14 4,14 2,6" fill="#000"/>
+              </svg>
+              <p className="text-black font-black font-mono text-[8px]">🌋 PLAY</p>
             </motion.button>
 
             <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={{ scale: 1.08 }}
+              whileTap={{ scale: 0.9 }}
               onClick={() => setShowParentInfo(!showParentInfo)}
-              className="bg-blue-500 border-3 border-blue-400 py-4 flex flex-col items-center justify-center gap-1"
-              style={{ boxShadow: '3px 3px 0px #000' }}
+              className="bg-blue-500 border-3 border-blue-400 py-3 flex flex-col items-center justify-center gap-1"
+              style={{ boxShadow: '3px 3px 0px #000', imageRendering: 'pixelated' }}
             >
-              <Shield className="w-6 h-6 text-black" />
-              <p className="text-black font-black font-mono text-[9px]">PARENTS</p>
+              <svg width="16" height="16" viewBox="0 0 16 16" style={{ imageRendering: 'pixelated' }}>
+                <rect x="3" y="4" width="10" height="10" fill="none" stroke="#000" strokeWidth="2"/>
+                <line x1="8" y1="4" x2="8" y2="14" stroke="#000" strokeWidth="1"/>
+                <line x1="3" y1="9" x2="13" y2="9" stroke="#000" strokeWidth="1"/>
+              </svg>
+              <p className="text-black font-black font-mono text-[8px]">👨‍👩‍👧</p>
             </motion.button>
 
             <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={{ scale: 1.08 }}
+              whileTap={{ scale: 0.9 }}
               onClick={() => setShowP51Explainer(!showP51Explainer)}
-              className="bg-purple-500 border-3 border-purple-400 py-4 flex flex-col items-center justify-center gap-1"
-              style={{ boxShadow: '3px 3px 0px #000' }}
+              className="bg-purple-500 border-3 border-purple-400 py-3 flex flex-col items-center justify-center gap-1"
+              style={{ boxShadow: '3px 3px 0px #000', imageRendering: 'pixelated' }}
             >
-              <Sparkles className="w-6 h-6 text-black" />
-              <p className="text-black font-black font-mono text-[9px]">WHAT $P51?</p>
+              <p className="text-black font-black font-mono text-xs">$</p>
+              <p className="text-black font-black font-mono text-[8px]">P51</p>
             </motion.button>
 
             <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={{ scale: 1.08 }}
+              whileTap={{ scale: 0.9 }}
               onClick={() => setShowResonance(!showResonance)}
-              className="bg-pink-500 border-3 border-pink-400 py-4 flex flex-col items-center justify-center gap-1"
-              style={{ boxShadow: '3px 3px 0px #000' }}
+              className="bg-pink-500 border-3 border-pink-400 py-3 flex flex-col items-center justify-center gap-1"
+              style={{ boxShadow: '3px 3px 0px #000', imageRendering: 'pixelated' }}
             >
-              <Sparkles className="w-6 h-6 text-black" />
-              <p className="text-black font-black font-mono text-[9px]">RESONANCE</p>
+              <svg width="16" height="16" viewBox="0 0 16 16" style={{ imageRendering: 'pixelated' }}>
+                <circle cx="8" cy="8" r="6" fill="none" stroke="#000" strokeWidth="2"/>
+                <circle cx="8" cy="4" r="1" fill="#000"/>
+                <circle cx="12" cy="12" r="1" fill="#000"/>
+                <circle cx="4" cy="12" r="1" fill="#000"/>
+              </svg>
+              <p className="text-black font-black font-mono text-[8px]">HZ</p>
             </motion.button>
           </div>
   
@@ -331,59 +355,9 @@ export default function Earth51() {
                 exit={{ height: 0, opacity: 0 }}
                 className="overflow-hidden"
               >
-                <div className="bg-blue-500 border-3 border-blue-400 p-3" style={{ boxShadow: '3px 3px 0px #000' }}>
-                  <p className="text-black font-black font-mono text-[9px] mb-2">SAFE FOR KIDS ✓</p>
-                  <div className="space-y-1">
-                    <p className="text-black font-mono text-[8px]">✓ Zero data • ✓ AI checks • ✓ COPPA safe</p>
-                  </div>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-
-
-
-          <AnimatePresence>
-            {showResonance && (
-              <motion.div
-                initial={{ height: 0, opacity: 0 }}
-                animate={{ height: 'auto', opacity: 1 }}
-                exit={{ height: 0, opacity: 0 }}
-                className="overflow-hidden"
-              >
-                <div className="bg-pink-500 border-4 border-pink-400 p-4" style={{ boxShadow: '4px 4px 0px #000' }}>
-                  <div className="bg-black border-2 border-white p-4 mb-3">
-                    <h3 className="text-pink-400 font-black font-mono text-lg mb-2">HOW HEALING WORKS</h3>
-                    <p className="text-white font-mono text-xs leading-relaxed">
-                      The whole universe vibrates. Your body listens. Simple science!
-                    </p>
-                  </div>
-
-                  <div className="space-y-2">
-                    <div className="bg-cyan-500 border-2 border-cyan-400 p-3">
-                      <p className="text-black font-black font-mono text-xs mb-2">PLANCK FREQUENCY:</p>
-                      <p className="text-black font-mono text-[10px]">The universe's native vibration</p>
-                      <p className="text-black font-mono text-[10px]">Everything sings to this beat</p>
-                    </div>
-
-                    <div className="bg-purple-500 border-2 border-purple-400 p-3">
-                      <p className="text-black font-black font-mono text-xs mb-2">432 Hz & 528 Hz:</p>
-                      <p className="text-black font-mono text-[10px]">Harmonic ratios to Planck</p>
-                      <p className="text-black font-mono text-[10px]">Your body naturally resonates</p>
-                    </div>
-
-                    <div className="bg-green-500 border-2 border-green-400 p-3">
-                      <p className="text-black font-black font-mono text-xs mb-2">RESONANCE = HEALING:</p>
-                      <p className="text-black font-mono text-[10px]">Like tuning a guitar string</p>
-                      <p className="text-black font-mono text-[10px]">Perfect pitch = perfect calm</p>
-                    </div>
-
-                    <div className="bg-black border-2 border-white p-3">
-                      <p className="text-pink-400 font-mono text-[10px] text-center leading-relaxed">
-                        We're not inventing healing. We're listening to what's already there ♾️
-                      </p>
-                    </div>
-                  </div>
+                <div className="bg-blue-500 border-3 border-blue-400 p-2 mt-1" style={{ boxShadow: '3px 3px 0px #000' }}>
+                  <p className="text-black font-black font-mono text-[8px] mb-1">SAFE ✓ NO DATA ✓ COPPA ✓</p>
+                  <p className="text-black font-mono text-[7px]">Zero tracking. AI checks photos. Teaches responsibility.</p>
                 </div>
               </motion.div>
             )}
@@ -397,56 +371,50 @@ export default function Earth51() {
                 exit={{ height: 0, opacity: 0 }}
                 className="overflow-hidden"
               >
-                <div className="bg-purple-500 border-4 border-purple-400 p-4" style={{ boxShadow: '4px 4px 0px #000' }}>
-                  <div className="bg-black border-2 border-white p-4 mb-3">
-                    <h3 className="text-purple-400 font-black font-mono text-xl mb-2">$PHOTO51</h3>
-                    <p className="text-white font-mono text-xs leading-relaxed">
-                      Named after scientist Rosalind Franklin's DNA photo! Your reward for cleaning Earth.
-                    </p>
-                  </div>
-
-                  <div className="space-y-2">
-                    <div className="bg-green-500 border-2 border-green-400 p-3">
-                      <p className="text-black font-black font-mono text-xs mb-2">REAL EARTH:</p>
-                      <p className="text-black font-mono text-[10px]">• 1kg = 10 $P51</p>
-                      <p className="text-black font-mono text-[10px]">• Even 0.1kg = 1 $P51!</p>
-                      <p className="text-black font-mono text-[10px]">• Best way to earn!</p>
-                    </div>
-
-                    <div className="bg-amber-500 border-2 border-amber-400 p-3">
-                      <p className="text-black font-black font-mono text-xs mb-2">IN VOLCKANO GAME:</p>
-                      <p className="text-black font-mono text-[10px]">• Pick litter = 1 $P51</p>
-                      <p className="text-black font-mono text-[10px]">• 10x less than real!</p>
-                      <p className="text-black font-mono text-[10px]">• Real Earth better!</p>
-                    </div>
-
-                    <div className="bg-pink-500 border-2 border-pink-400 p-3">
-                      <p className="text-black font-black font-mono text-xs mb-2">UNLOCK LEVELS:</p>
-                      <p className="text-black font-mono text-[10px]">• Use $P51 in Volckano</p>
-                      <p className="text-black font-mono text-[10px]">• Get new characters</p>
-                      <p className="text-black font-mono text-[10px]">• Have fun!</p>
-                    </div>
-
-                    <div className="bg-black border-2 border-white p-3">
-                      <p className="text-cyan-400 font-mono text-[10px] text-center leading-relaxed">
-                        Named after scientist Rosalind Franklin! One day: buy real stuff globally ❤️
-                      </p>
-                    </div>
-                  </div>
+                <div className="bg-purple-500 border-3 border-purple-400 p-2 mt-1" style={{ boxShadow: '3px 3px 0px #000' }}>
+                  <p className="text-black font-black font-mono text-[8px] mb-1">$P51 = PHOTO51</p>
+                  <p className="text-black font-mono text-[7px]">Named after Rosalind Franklin's DNA photo. Real reward for real impact.</p>
+                  <p className="text-black font-mono text-[7px] mt-1">1kg litter = 10 $P51. Use in Volckano to unlock levels!</p>
                 </div>
               </motion.div>
             )}
           </AnimatePresence>
 
-          {/* FOOTER */}
-          <div className="bg-black border-3 border-cyan-500 p-3 text-center" style={{ boxShadow: '3px 3px 0px #06b6d4' }}>
-            <p className="text-cyan-400 font-black font-mono text-[9px] mb-1">
-              AI51 HERE TO HELP
-            </p>
-            <div className="flex items-center justify-center gap-1">
-              <span className="w-1.5 h-1.5 bg-green-500"></span>
-              <span className="w-1.5 h-1.5 bg-pink-500"></span>
-              <span className="w-1.5 h-1.5 bg-cyan-500"></span>
+          <AnimatePresence>
+            {showResonance && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: 'auto', opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                className="overflow-hidden"
+              >
+                <div className="bg-pink-500 border-3 border-pink-400 p-2 mt-1" style={{ boxShadow: '3px 3px 0px #000' }}>
+                  <p className="text-black font-black font-mono text-[8px] mb-1">HEALING FREQUENCIES</p>
+                  <p className="text-black font-mono text-[7px]">432Hz & 528Hz match your body's natural rhythm. We just listen to what's already there. ♾️❤️</p>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* FOOTER - PIXEL ART STYLE */}
+          <div className="bg-black border-3 border-cyan-500 p-2 text-center mt-3" style={{ boxShadow: '3px 3px 0px #06b6d4', imageRendering: 'pixelated' }}>
+            <p className="text-cyan-400 font-black font-mono text-[8px] tracking-wide">AI51 WATCHING</p>
+            <div className="flex items-center justify-center gap-1 mt-1">
+              <motion.span 
+                className="w-1 h-1 bg-green-500"
+                animate={{ opacity: [1, 0.3, 1] }}
+                transition={{ duration: 1, repeat: Infinity }}
+              ></motion.span>
+              <motion.span 
+                className="w-1 h-1 bg-pink-500"
+                animate={{ opacity: [0.3, 1, 0.3] }}
+                transition={{ duration: 1, repeat: Infinity, delay: 0.3 }}
+              ></motion.span>
+              <motion.span 
+                className="w-1 h-1 bg-cyan-500"
+                animate={{ opacity: [0.3, 0.3, 1] }}
+                transition={{ duration: 1, repeat: Infinity, delay: 0.6 }}
+              ></motion.span>
             </div>
           </div>
         </div>
