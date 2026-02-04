@@ -26,6 +26,7 @@ export default function Volckano() {
     const [achievements, setAchievements] = useState([]);
     const [p51Balance, setP51Balance] = useState(0);
     const [inGameP51, setInGameP51] = useState(0);
+    const [saveIndicator, setSaveIndicator] = useState(false);
     
     const playerY = useRef(200);
     const velocity = useRef(0);
@@ -35,6 +36,7 @@ export default function Volckano() {
     const collectibles = useRef([]);
     const gameTime = useRef(0);
     const [, forceUpdate] = useState(0);
+    const autoSaveInterval = useRef(null);
 
     const CHARACTER_UNLOCKS = [
         { type: 'happy', name: 'Happy', stars: 0, p51Required: 0 },
@@ -45,6 +47,25 @@ export default function Volckano() {
         { type: 'star', name: 'Star', stars: 200, p51Required: 50 }
     ];
 
+    // AUTO-SAVE GAME STATE
+    const saveGameState = () => {
+        try {
+            const gameState = {
+                stars,
+                highScore,
+                unlockedCharacters,
+                currentCharacter,
+                inGameP51,
+                lastSaved: Date.now()
+            };
+            localStorage.setItem('volckano_gamestate', JSON.stringify(gameState));
+            setSaveIndicator(true);
+            setTimeout(() => setSaveIndicator(false), 1000);
+        } catch (e) {
+            console.error('Save failed:', e);
+        }
+    };
+
     useEffect(() => {
         const saved = localStorage.getItem('volckano_player');
         const savedStars = localStorage.getItem('volckano_stars');
@@ -54,17 +75,60 @@ export default function Volckano() {
         const earth51Balance = parseFloat(localStorage.getItem('earth51_local_balance') || '0');
         const savedInGameP51 = parseFloat(localStorage.getItem('volckano_ingame_p51') || '0');
         
+        // Try loading full game state backup
+        try {
+            const gameState = localStorage.getItem('volckano_gamestate');
+            if (gameState) {
+                const state = JSON.parse(gameState);
+                setStars(state.stars || 0);
+                setHighScore(state.highScore || 0);
+                setUnlockedCharacters(state.unlockedCharacters || ['happy']);
+                setCurrentCharacter(state.currentCharacter || 'happy');
+                setInGameP51(state.inGameP51 || 0);
+            } else {
+                // Fallback to old method
+                if (saved) {
+                    setPlayerName(saved);
+                    setShowLogin(false);
+                }
+                if (savedStars) setStars(parseInt(savedStars));
+                if (savedHighScore) setHighScore(parseInt(savedHighScore));
+                if (savedUnlocked) setUnlockedCharacters(JSON.parse(savedUnlocked));
+                if (savedChar) setCurrentCharacter(savedChar);
+                setInGameP51(savedInGameP51);
+            }
+        } catch (e) {
+            // If backup fails, use old method
+            if (saved) {
+                setPlayerName(saved);
+                setShowLogin(false);
+            }
+            if (savedStars) setStars(parseInt(savedStars));
+            if (savedHighScore) setHighScore(parseInt(savedHighScore));
+            if (savedUnlocked) setUnlockedCharacters(JSON.parse(savedUnlocked));
+            if (savedChar) setCurrentCharacter(savedChar);
+            setInGameP51(savedInGameP51);
+        }
+        
         if (saved) {
             setPlayerName(saved);
             setShowLogin(false);
         }
-        if (savedStars) setStars(parseInt(savedStars));
-        if (savedHighScore) setHighScore(parseInt(savedHighScore));
-        if (savedUnlocked) setUnlockedCharacters(JSON.parse(savedUnlocked));
-        if (savedChar) setCurrentCharacter(savedChar);
         setP51Balance(earth51Balance);
-        setInGameP51(savedInGameP51);
-    }, []);
+        
+        // Auto-save every 10 seconds
+        autoSaveInterval.current = setInterval(saveGameState, 10000);
+        
+        // Save on page unload (before crash/close)
+        const handleUnload = () => saveGameState();
+        window.addEventListener('beforeunload', handleUnload);
+        
+        return () => {
+            clearInterval(autoSaveInterval.current);
+            window.removeEventListener('beforeunload', handleUnload);
+            saveGameState(); // Final save
+        };
+    }, [stars, highScore, unlockedCharacters, currentCharacter, inGameP51]);
 
     const playSound = (freq, duration = 100) => {
         if (!soundEnabled) return;
@@ -142,7 +206,21 @@ export default function Volckano() {
     useEffect(() => {
         if (!gameStarted || gameOver) return;
 
-        const interval = setInterval(() => {
+        // Use requestAnimationFrame for smoother performance
+        let animationId;
+        let lastTime = Date.now();
+        
+        const gameLoop = () => {
+            const currentTime = Date.now();
+            const deltaTime = currentTime - lastTime;
+            lastTime = currentTime;
+            
+            if (deltaTime > 100) {
+                // Skip frame if too much time passed (tab was hidden)
+                animationId = requestAnimationFrame(gameLoop);
+                return;
+            }
+            
             gameTime.current += 20;
 
             // Simple physics
@@ -279,9 +357,13 @@ export default function Volckano() {
             });
 
             forceUpdate(v => v + 1);
-        }, 20);
-
-        return () => clearInterval(interval);
+            animationId = requestAnimationFrame(gameLoop);
+        };
+        
+        animationId = requestAnimationFrame(gameLoop);
+        return () => {
+            if (animationId) cancelAnimationFrame(animationId);
+        };
     }, [gameStarted, gameOver, soundEnabled]);
 
     if (showLogin) {
@@ -538,6 +620,16 @@ export default function Volckano() {
                                 <span className="text-black text-[10px] font-black font-mono">REAL:</span>
                                 <span className="text-black text-sm font-black font-mono">{Math.round(p51Balance)}</span>
                             </div>
+                            {saveIndicator && (
+                                <motion.div
+                                    initial={{ scale: 0 }}
+                                    animate={{ scale: 1 }}
+                                    exit={{ scale: 0 }}
+                                    className="flex items-center gap-1 bg-cyan-500 border-2 border-cyan-400 px-2 py-0.5"
+                                >
+                                    <span className="text-black text-[9px] font-black font-mono">✓ SAVED</span>
+                                </motion.div>
+                            )}
                         </div>
                     </div>
 
