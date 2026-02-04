@@ -140,19 +140,20 @@ export default function CB51() {
         )}
       </div>
 
-      {artists.length > 0 && (
-        <div className="mt-8 text-center">
-          <Link
-            to={createPageUrl('ScottAddArtist')}
-            className="text-cyan-400 hover:text-cyan-300 font-mono text-sm font-bold"
-          >
-            + ADD ANOTHER
-          </Link>
-        </div>
-      )}
+        {artists.length > 0 && (
+          <div className="mt-8 text-center">
+            <Link
+              to={createPageUrl('ScottAddArtist')}
+              className="text-cyan-400 hover:text-cyan-300 font-mono text-sm font-bold"
+            >
+              + ADD ANOTHER
+            </Link>
+          </div>
+        )}
 
-      <div className="mt-12 pt-8 border-t border-gray-800 text-center">
-        <p className="text-gray-500 font-mono text-xs">CB51 • AI Co-Manager ♾️❤️</p>
+        <div className="mt-12 pt-8 border-t border-gray-800 text-center">
+          <p className="text-gray-500 font-mono text-xs">CB51 • AI Co-Manager ♾️❤️</p>
+        </div>
       </div>
     </div>
   );
