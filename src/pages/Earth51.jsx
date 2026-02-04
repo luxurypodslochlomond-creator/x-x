@@ -137,31 +137,54 @@ export default function Earth51() {
   if (step === 'landing') {
     return (
       <div className="min-h-screen bg-gradient-to-b from-emerald-950 via-black to-cyan-950 text-white">
-        {/* CUSTOM HEADER - KIDS EDITION */}
-        <div className="fixed top-0 left-0 right-0 z-50 bg-black/95 backdrop-blur-xl border-b border-green-500/30">
-          <div className="flex items-center justify-between p-4">
-            <button
-              onClick={() => navigate(createPageUrl('Welcome'))}
-              className="flex items-center gap-2 text-green-400 hover:text-green-300 transition-colors"
-            >
-              <motion.div whileHover={{ x: -4 }} whileTap={{ scale: 0.95 }}>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                  <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+        {/* AI51 GREETING HEADER - KIDS EDITION */}
+        <div className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-b from-black via-black/98 to-black/95 backdrop-blur-xl border-b border-green-500/20">
+          <div className="max-w-xl mx-auto p-3">
+            <div className="flex items-center justify-between mb-2">
+              <motion.button
+                onClick={() => navigate(createPageUrl('Welcome'))}
+                whileHover={{ scale: 1.05, x: -2 }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-gradient-to-r from-green-900/40 to-emerald-900/40 border-2 border-green-500/40 rounded-xl px-4 py-2 flex items-center gap-2"
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                  <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" strokeWidth="3" strokeLinecap="round"/>
                 </svg>
+                <span className="font-black text-xs text-green-300">BACK</span>
+              </motion.button>
+              
+              <motion.div 
+                animate={{ rotate: [0, 360] }}
+                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                className="w-10 h-10"
+              >
+                <AI51AtomIcon size={40} animate={true} />
               </motion.div>
-              <span className="font-black text-sm">BACK</span>
-            </button>
-            
-            <div className="flex items-center gap-2">
-              <AI51AtomIcon size={28} animate={true} />
-              <span className="font-black text-xl bg-gradient-to-r from-green-400 to-cyan-400 bg-clip-text text-transparent">earth.love</span>
             </div>
-            
-            <div className="w-16"></div>
+
+            <div className="bg-gradient-to-r from-green-900/30 via-cyan-900/30 to-emerald-900/30 border-2 border-green-500/30 rounded-2xl p-4">
+              <div className="flex items-start gap-3">
+                <motion.div
+                  animate={{ scale: [1, 1.1, 1] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                  className="w-12 h-12 bg-gradient-to-br from-green-400 to-cyan-400 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg"
+                >
+                  <Heart className="w-6 h-6 text-black" />
+                </motion.div>
+                <div className="flex-1">
+                  <h1 className="text-2xl font-black bg-gradient-to-r from-green-300 via-cyan-300 to-emerald-300 bg-clip-text text-transparent mb-1">
+                    earth.love
+                  </h1>
+                  <p className="text-xs text-green-200/80 leading-relaxed">
+                    <strong className="text-cyan-300">Hey friend!</strong> I'm AI51. Let's clean Earth and unlock Volckano together
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div className="max-w-xl mx-auto space-y-6 pt-20 p-4 pb-32">
+        <div className="max-w-xl mx-auto space-y-6 pt-[140px] p-4 pb-32">
           
           {/* HERO SECTION */}
           <motion.div
