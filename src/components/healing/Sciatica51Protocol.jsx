@@ -18,15 +18,15 @@ export default function Sciatica51Protocol({ onStartHealing }) {
       id: 'frequency_only',
       name: 'Frequencies Only',
       duration: 20,
-      description: 'Pure 528Hz + 40Hz healing while resting',
-      benefits: 'Pain relief, inflammation reduction, nerve calming'
+      description: 'Calm your nervous system while resting',
+      benefits: 'Reduces pain perception, lowers anxiety'
     },
     {
       id: 'frequency_stretch',
-      name: 'Frequency + Guided Stretch',
+      name: 'Frequency + Gentle Movement',
       duration: 25,
-      description: 'Audio frequencies + 3-min guided piriformis stretch',
-      benefits: 'Complete healing: sound + movement targeting deep glute'
+      description: 'Frequencies + graded piriformis movement (within tolerance)',
+      benefits: 'Nervous system calm + mechanical progression'
     }
   ];
 
