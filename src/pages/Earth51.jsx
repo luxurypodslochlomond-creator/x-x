@@ -8,6 +8,10 @@ import { createPageUrl } from '@/utils';
 import AI51AtomIcon from '@/components/ai51/AI51AtomIcon';
 import P51Symbol from '@/components/shared/P51Symbol';
 import AILitterVerification from '@/components/earth51/AILitterVerification';
+import PerceptualHashDetector from '@/components/earth51/PerceptualHashDetector';
+import LivenessDetector from '@/components/earth51/LivenessDetector';
+import AdvancedWeightEstimator from '@/components/earth51/AdvancedWeightEstimator';
+import TrustScoreEngine from '@/components/earth51/TrustScoreEngine';
 
 /**
  * EARTH51 - KIDS EDITION
@@ -29,6 +33,11 @@ export default function Earth51() {
   const [aiVerification, setAiVerification] = useState(null);
   const [showP51Explainer, setShowP51Explainer] = useState(false);
   const [showParentInfo, setShowParentInfo] = useState(false);
+  const [photoHash, setPhotoHash] = useState(null);
+  const [livenessResult, setLivenessResult] = useState(null);
+  const [weightEstimate, setWeightEstimate] = useState(null);
+  const [trustScore, setTrustScore] = useState(null);
+  const [fraudBlocked, setFraudBlocked] = useState(false);
 
   // HIDE MAIN NAV FOR KIDS EXPERIENCE
   useEffect(() => {
@@ -75,37 +84,6 @@ export default function Earth51() {
       } else {
         const uploadResult = await base44.functions.invoke('uploadToIPFS', { file });
         setPhotoUrl(uploadResult.file_url);
-
-        // AI51 AUTO-ESTIMATES WEIGHT - MAGIC FOR KIDS
-        try {
-          const aiResult = await base44.integrations.Core.InvokeLLM({
-            prompt: `Analyze this litter cleanup photo and estimate the total weight of litter in kilograms. 
-
-  Look at:
-  - Number of items visible
-  - Size of items (bottles, cans, wrappers, bags, etc.)
-  - Comparison to environment/surroundings for scale
-  - Types of materials
-
-  Return ONLY a JSON object with your estimate.`,
-            file_urls: uploadResult.file_url,
-            response_json_schema: {
-              type: "object",
-              properties: {
-                estimated_weight_kg: { type: "number" },
-                confidence: { type: "string" },
-                items_detected: { type: "string" }
-              }
-            }
-          });
-
-          if (aiResult?.estimated_weight_kg) {
-            setWeight(aiResult.estimated_weight_kg.toString());
-          }
-        } catch (aiErr) {
-          console.log('AI estimation failed, manual entry needed:', aiErr);
-        }
-
         setStep('weight');
         setIsLoading(false);
       }
@@ -113,11 +91,30 @@ export default function Earth51() {
       setError('Upload failed. Try again!');
       setIsLoading(false);
     }
-  };
+    };
+
+    // FRAUD BLOCKING - If any check fails
+    useEffect(() => {
+    if (livenessResult && !livenessResult.is_live_photo) {
+    setFraudBlocked(true);
+    setError('⚠️ Photo looks suspicious. Please take a fresh photo of real litter!');
+    } else if (livenessResult && !livenessResult.safe_for_kids) {
+    setFraudBlocked(true);
+    setError('⚠️ Photo blocked for safety. Try again!');
+    } else {
+    setFraudBlocked(false);
+    setError(null);
+    }
+    }, [livenessResult]);
 
   const handleSubmit = async () => {
     if (!weight || parseFloat(weight) < 0.005) {
       setError('Need at least 5g (even one wrapper!)');
+      return;
+    }
+
+    if (fraudBlocked) {
+      setError('⚠️ Please take a fresh photo of real litter');
       return;
     }
 
@@ -128,7 +125,12 @@ export default function Earth51() {
       const bonus = baseTokens * 0.2;
       const total = baseTokens + bonus;
 
-      setTokensEarned(Math.round(total * 10) / 10);
+      // TRUST SCORE SPLITS PAYOUT
+      const instantPercentage = trustScore?.instant_payout_percentage || 50;
+      const instantTokens = (total * instantPercentage) / 100;
+      const pendingTokens = total - instantTokens;
+
+      setTokensEarned(Math.round(instantTokens * 10) / 10);
 
       const cleanupData = {
         photo_url: photoUrl,
@@ -137,10 +139,21 @@ export default function Earth51() {
         litter_weight: weightNum,
         cleanup_type: 'street',
         tokens_awarded: total,
-        tokens_instant: total,
-        tokens_pending: 0,
-        verification_status: 'instant_paid',
-        // AI VERIFICATION DATA
+        tokens_instant: instantTokens,
+        tokens_pending: pendingTokens,
+        verification_status: instantPercentage === 100 ? 'instant_paid' : 'pending_verification',
+        instant_payout_percentage: instantPercentage,
+        quantum_processing_speed: trustScore?.quantum_speed || 'standard',
+        // 2025 ANTI-FRAUD DATA
+        photo_hash: photoHash?.sha256_hash || null,
+        perceptual_hash: photoHash?.perceptual_hash || null,
+        liveness_score: livenessResult?.liveness_score || null,
+        fraud_flags: livenessResult?.fraud_flags || [],
+        ai_weight_confidence: weightEstimate?.confidence_level || null,
+        ai_weight_range_min: weightEstimate?.weight_range?.min_kg || null,
+        ai_weight_range_max: weightEstimate?.weight_range?.max_kg || null,
+        ai_items_detected: weightEstimate?.items_detected?.map(i => `${i.count}x ${i.item_type}`).join(', ') || null,
+        // EXISTING AI VERIFICATION
         ai_brands_detected: aiVerification?.brands?.map(b => b.brand_name).join(', ') || null,
         ai_corporate_accountability: aiVerification?.corporate_accountability || null,
         ai_verification_summary: aiVerification?.verification_summary || null
@@ -151,7 +164,7 @@ export default function Earth51() {
         const user = await base44.auth.me().catch(() => null);
         if (user) {
           await base44.auth.updateMe({
-            p51_balance: (user.p51_balance || 0) + total
+            p51_balance: (user.p51_balance || 0) + instantTokens
           });
         }
       }
@@ -467,14 +480,35 @@ export default function Earth51() {
             <img src={photoUrl} alt="Cleanup" className="w-full h-48 object-cover" />
           </div>
 
-          {/* AI VERIFICATION */}
+          {/* TRUST SCORE */}
+          <TrustScoreEngine onTrustCalculated={setTrustScore} />
+
+          {/* 2025 ANTI-FRAUD CHECKS */}
+          <PerceptualHashDetector 
+            photoUrl={photoUrl}
+            onHashGenerated={setPhotoHash}
+          />
+
+          <LivenessDetector
+            photoUrl={photoUrl}
+            onLivenessChecked={setLivenessResult}
+          />
+
+          <AdvancedWeightEstimator
+            photoUrl={photoUrl}
+            onWeightEstimated={(data) => {
+              setWeightEstimate(data);
+              if (data?.estimated_weight_kg) {
+                setWeight(data.estimated_weight_kg.toString());
+              }
+            }}
+          />
+
+          {/* AI BRAND DETECTION */}
           <AILitterVerification 
             photoUrl={photoUrl}
             onVerified={(data) => {
               setAiVerification(data);
-              if (data.litter_analysis?.estimated_weight_kg) {
-                setWeight(data.litter_analysis.estimated_weight_kg.toString());
-              }
               if (data.litter_analysis?.location_type) {
                 setLocation(data.litter_analysis.location_type);
               }
@@ -482,7 +516,7 @@ export default function Earth51() {
           />
 
           {/* AI51 ESTIMATE MESSAGE */}
-          {weight && (
+          {weight && !fraudBlocked && (
             <motion.div
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
@@ -536,7 +570,7 @@ export default function Earth51() {
           {/* SUBMIT BUTTON */}
           <button
             onClick={handleSubmit}
-            disabled={isLoading || !weight}
+            disabled={isLoading || !weight || fraudBlocked}
             className="w-full bg-green-500 border-4 border-green-400 py-5 disabled:opacity-50 disabled:cursor-not-allowed"
             style={{ boxShadow: '4px 4px 0px #000' }}
           >
@@ -590,8 +624,21 @@ export default function Earth51() {
                 +{tokensEarned}
               </h1>
               <p className="text-2xl font-black font-mono text-black">$PHOTO51</p>
+              {trustScore && trustScore.instant_payout_percentage < 100 && (
+                <p className="text-black font-mono text-xs mt-2">
+                  ({trustScore.instant_payout_percentage}% now • {100 - trustScore.instant_payout_percentage}% pending)
+                </p>
+              )}
             </div>
             <p className="text-cyan-400 font-black font-mono text-xs">YOU'RE AWESOME! ❤️</p>
+
+            {trustScore && trustScore.tier === 'new' && (
+              <div className="bg-purple-500 border-4 border-purple-400 p-3" style={{ boxShadow: '4px 4px 0px #000' }}>
+                <p className="text-black font-black font-mono text-xs">
+                  💜 KEEP CLEANING! +10% INSTANT TRUST PER CLEANUP
+                </p>
+              </div>
+            )}
           </motion.div>
 
           {/* WHAT'S NEXT */}
