@@ -768,6 +768,7 @@ export default function CB51() {
                                                     )}
                                                     )}
                                                     </div>
+                                                    )}
 
                                     {/* BAND MEMBER NOTIFICATIONS */}
                                     {user && user.role !== 'admin' && (
