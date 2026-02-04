@@ -140,6 +140,47 @@ export default function ScottFeedback() {
           </div>
         )}
 
+        {/* NOTIFICATION SPEC */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="bg-gradient-to-r from-cyan-900/40 to-green-900/40 border-2 border-cyan-500/50 rounded-lg p-6"
+        >
+          <h3 className="text-cyan-300 font-bold mb-4 flex items-center gap-2">
+            🔔 NOTIFICATION DESIGN SPEC
+          </h3>
+          <div className="text-sm text-gray-300 space-y-3">
+            <div>
+              <p className="font-bold text-cyan-200 mb-2">DESIGN PRINCIPLES:</p>
+              <ul className="ml-4 space-y-1 text-xs">
+                <li>✓ CLUTTER FREE • SIMPLE • ACTIONABLE • EASY • STRESS FREE</li>
+              </ul>
+            </div>
+            <div>
+              <p className="font-bold text-green-200 mb-2">VOTE FLOW:</p>
+              <ul className="ml-4 space-y-1 text-xs">
+                <li>• Artist receives: <strong>GREEN YES / RED NO</strong></li>
+                <li>• Artist checks personal diary</li>
+                <li>• Artist answers YES or NO</li>
+                <li>• If all YES → goes to agent/promoter</li>
+                <li>• If any NO → easy discussion to find resolution</li>
+              </ul>
+            </div>
+            <div>
+              <p className="font-bold text-green-200 mb-2">MANAGER CONTROL (NOT SURVEILLANCE):</p>
+              <ul className="ml-4 space-y-1 text-xs">
+                <li>• Manager pastes gig offer or AI scans email</li>
+                <li>• CB51 sends notification to Manager phone</li>
+                <li>• Manager decides: YES/NO via GREEN/RED</li>
+                <li>• If YES: Band gets same notification for their vote</li>
+                <li>• If all band members YES: Manager gets confirmation + draft email</li>
+                <li>• If any band member NO: Manager receives notification + discusses to resolve</li>
+                <li>• Notification messages can be sorted on text/email or confirmed on CB51</li>
+              </ul>
+            </div>
+          </div>
+        </motion.div>
+
         {/* INFO BOX */}
         <div className="bg-black/60 border-2 border-cyan-500/30 rounded-lg p-6">
           <h3 className="text-cyan-300 font-bold mb-3">🔐 HOW THIS WORKS:</h3>
