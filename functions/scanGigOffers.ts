@@ -100,9 +100,35 @@ Deno.serve(async (req) => {
 
     console.log('AI extraction:', extraction);
 
-    // VALIDATION LAYER
+    // VALIDATION LAYER - Smart routing
+    const isGigOffer = extraction.venue && extraction.date && extraction.message_type === 'gig_offer';
+    
+    // If NOT a gig, create Task instead
+    if (!isGigOffer) {
+      try {
+        const task = await base44.asServiceRole.entities.ScottTask.create({
+          artist_id: artistId,
+          title: extraction.subject || 'Extracted from email/doc',
+          description: extraction.body || extraction.raw_text || '',
+          category: extraction.message_type || 'other',
+          status: 'pending',
+          from_contact: extraction.from || 'Unknown',
+          notes: `Auto-extracted • Type: ${extraction.message_type || 'document'}`
+        });
+        
+        return Response.json({ 
+          success: true,
+          type: 'task',
+          task
+        });
+      } catch (e) {
+        return Response.json({ error: `Task creation failed: ${e.message}` }, { status: 500 });
+      }
+    }
+    
+    // If IS a gig, continue with gig extraction
     if (!extraction.venue || !extraction.date) {
-      return Response.json({ error: 'Could not extract venue or date' }, { status: 400 });
+      return Response.json({ error: 'Could not extract venue or date for gig' }, { status: 400 });
     }
 
     // Validate date is in future
