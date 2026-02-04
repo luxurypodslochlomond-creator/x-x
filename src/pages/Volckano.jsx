@@ -206,21 +206,7 @@ export default function Volckano() {
     useEffect(() => {
         if (!gameStarted || gameOver) return;
 
-        // Use requestAnimationFrame for smoother performance
-        let animationId;
-        let lastTime = Date.now();
-        
-        const gameLoop = () => {
-            const currentTime = Date.now();
-            const deltaTime = currentTime - lastTime;
-            lastTime = currentTime;
-            
-            if (deltaTime > 100) {
-                // Skip frame if too much time passed (tab was hidden)
-                animationId = requestAnimationFrame(gameLoop);
-                return;
-            }
-            
+        const interval = setInterval(() => {
             gameTime.current += 20;
 
             // Simple physics - gentler gravity for kids
@@ -357,14 +343,10 @@ export default function Volckano() {
             });
 
             forceUpdate(v => v + 1);
-            animationId = requestAnimationFrame(gameLoop);
-        };
-        
-        animationId = requestAnimationFrame(gameLoop);
-        return () => {
-            if (animationId) cancelAnimationFrame(animationId);
-        };
-    }, [gameStarted, gameOver, soundEnabled]);
+        }, 20);
+
+        return () => clearInterval(interval);
+    }, [gameStarted, gameOver]);
 
     if (showLogin) {
         return (
