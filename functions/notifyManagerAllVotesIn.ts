@@ -42,9 +42,9 @@ Deno.serve(async (req) => {
       return Response.json({ skipped: true, reason: 'Not all votes in yet' });
     }
 
-    // Count yes/no
-    const yesVotes = responses.filter(r => r.decision === 'yes').length;
-    const noVotes = responses.filter(r => r.decision === 'no').length;
+    // Count yes/no - handle both 'vote' and 'decision' field names
+    const yesVotes = responses.filter(r => (r.vote || r.decision) === 'yes').length;
+    const noVotes = responses.filter(r => (r.vote || r.decision) === 'no').length;
     const totalMembers = responses.length;
 
     // Build summary with real-time vote breakdown
