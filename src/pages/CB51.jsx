@@ -3,7 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { base44 } from '@/api/base44Client';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { Radio, ArrowLeft, Bell, AlertCircle, Calendar, Mail, DollarSign } from 'lucide-react';
+import { Radio, ArrowLeft, Bell, AlertCircle, Calendar, Mail, DollarSign, Menu, X } from 'lucide-react';
 import { motion } from 'framer-motion';
 import AI51AtomIcon from '@/components/ai51/AI51AtomIcon';
 import PushNotificationManager from '@/components/scott/PushNotificationManager';
