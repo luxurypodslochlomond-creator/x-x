@@ -8,6 +8,7 @@ import { createPageUrl } from '@/utils';
 import AI51AtomIcon from '@/components/ai51/AI51AtomIcon';
 import P51Symbol from '@/components/shared/P51Symbol';
 import PrivacyFirstEngine from '@/components/earth51/PrivacyFirstEngine';
+import Earth51AI51Icon from '@/components/earth51/Earth51AI51Icon';
 
 /**
  * EARTH51 - KIDS EDITION
@@ -219,25 +220,11 @@ export default function Earth51() {
           <motion.div
             initial={{ y: 10, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            className="bg-gradient-to-br from-cyan-500 to-green-500 border-4 border-white p-6"
+            className="bg-gradient-to-br from-cyan-500 to-green-500 border-4 border-white p-8 flex flex-col items-center text-center"
             style={{ boxShadow: '6px 6px 0px #000' }}
           >
-            <div className="flex items-center gap-3 mb-3">
-              <motion.div
-                animate={{ scale: [1, 1.1, 1] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
-                className="w-14 h-14 bg-black border-2 border-white flex items-center justify-center flex-shrink-0"
-              >
-                <svg width="24" height="24" viewBox="0 0 32 32" fill="none">
-                  <rect x="4" y="8" width="6" height="6" fill="#06b6d4" />
-                  <rect x="14" y="8" width="6" height="6" fill="#06b6d4" />
-                  <rect x="4" y="18" width="6" height="6" fill="#06b6d4" />
-                  <rect x="14" y="18" width="6" height="6" fill="#06b6d4" />
-                  <rect x="24" y="12" width="4" height="10" fill="#06b6d4" />
-                </svg>
-              </motion.div>
-              <p className="text-black font-black font-mono text-sm">I'M AI51</p>
-            </div>
+            <Earth51AI51Icon size={100} animate={true} />
+            <p className="text-black font-black font-mono text-sm mt-4 mb-3">I'M AI51</p>
             <p className="text-black font-bold font-mono text-xs leading-relaxed">
               Take a real photo of litter. I'll verify it. You earn $P51. That's it.
             </p>
