@@ -602,10 +602,10 @@ export default function CB51() {
                                                             });
 
                                                             // Then notify band
-                                                            const teamMembers = await base44.entities.ScottTeamMember.filter({ 
-                                                                artist_id: artists[0]?.id,
-                                                                role: 'band_member'
-                                                            });
+                                                            const allTeamMembers = await base44.entities.ScottTeamMember.list();
+                                                            const teamMembers = allTeamMembers.filter(m => 
+                                                                m.artist_access?.includes(artists[0]?.id)
+                                                            );
 
                                                             await Promise.all(teamMembers.map(member => 
                                                                 base44.entities.ScottNotification.create({
