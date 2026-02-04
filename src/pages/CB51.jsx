@@ -760,12 +760,10 @@ export default function CB51() {
                                                             )}
                                                         </div>
                                                     ))}
-                                                    </div>
                                                     {stats.pendingOffers > 3 && (
                                                     <Link to={createPageUrl('ScottGigOffers')} className="text-cyan-400 hover:text-cyan-300 text-[10px] font-mono font-bold mt-2 block">
                                                     See all ({stats.pendingOffers}) →
                                                     </Link>
-                                                    )}
                                                     )}
                                                     </div>
                                                     )}
