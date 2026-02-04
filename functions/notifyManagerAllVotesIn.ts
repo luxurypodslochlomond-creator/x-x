@@ -14,7 +14,17 @@ Deno.serve(async (req) => {
 
     // Get gig offer - handle multiple input formats
     const gigOfferId = directGigOfferId || (data && (data.gig_offer_id || data.id));
-    const gigOffer = await base44.asServiceRole.entities.ScottGigOffer.get(gigOfferId);
+    
+    if (!gigOfferId) {
+      return Response.json({ error: 'No gig offer ID provided' }, { status: 400 });
+    }
+
+    let gigOffer;
+    try {
+      gigOffer = await base44.asServiceRole.entities.ScottGigOffer.get(gigOfferId);
+    } catch (e) {
+      return Response.json({ error: 'Gig offer not found', id: gigOfferId }, { status: 404 });
+    }
     
     // Get all band responses for this gig
     const responses = await base44.asServiceRole.entities.ScottBandResponse.filter({
