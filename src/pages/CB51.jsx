@@ -792,6 +792,13 @@ export default function CB51() {
                                         </div>
                                     )}
 
+                    {/* ADD ARTIST QUICK BUTTON */}
+                    <div className="mb-4 flex justify-center">
+                        <Link to={createPageUrl('ScottAddArtist')} className="bg-cyan-600 hover:bg-cyan-700 text-black font-black px-4 py-2 rounded-lg text-xs font-mono transition-all">
+                            + ADD ARTIST
+                        </Link>
+                    </div>
+
                     {/* ARTIST CIRCLES - BIG AND CENTERED */}
                      {artists.length > 0 && (
                          <div className="mb-4 mt-6">
