@@ -198,7 +198,7 @@ export default function Earth51() {
             </div>
             
             <p className="text-sm text-gray-400 max-w-sm mx-auto leading-relaxed">
-              Clean up litter, earn rewards, unlock powers in Volckano. Every piece counts.
+              Clean up litter, earn $PHOTO51, unlock powers in Volckano. Every piece counts.
             </p>
           </motion.div>
 
@@ -257,8 +257,8 @@ export default function Earth51() {
                     <div className="flex gap-3">
                       <Zap className="w-5 h-5 text-purple-400 flex-shrink-0 mt-0.5" />
                       <div>
-                        <p className="text-white font-bold">$P51 Currency</p>
-                        <p className="text-gray-400 text-xs">In-app points for cleaning Earth. Can be used in Volckano game or saved. Not real money.</p>
+                        <p className="text-white font-bold">$PHOTO51 Currency</p>
+                        <p className="text-gray-400 text-xs">In-app points for cleaning Earth. Named after Rosalind Franklin's DNA photo. Use in Volckano game. Not real money.</p>
                       </div>
                     </div>
                     
@@ -323,7 +323,7 @@ export default function Earth51() {
                 <div className="w-14 h-14 bg-gradient-to-br from-purple-400 to-pink-500 rounded-2xl flex items-center justify-center mx-auto shadow-xl">
                   <Sparkles className="w-7 h-7 text-black" />
                 </div>
-                <p className="text-purple-300 font-black text-sm">Get $P51</p>
+                <p className="text-purple-300 font-black text-sm">Get $PHOTO51</p>
                 <p className="text-purple-200/50 text-xs px-2">Instant reward</p>
               </div>
             </motion.div>
@@ -358,7 +358,7 @@ export default function Earth51() {
                   <Info className="w-5 h-5 text-purple-400" />
                 </div>
                 <div className="text-left">
-                  <p className="text-purple-300 font-bold text-sm">What is $P51?</p>
+                  <p className="text-purple-300 font-bold text-sm">What is $PHOTO51?</p>
                   <p className="text-purple-400/60 text-xs">Tap to learn about your rewards</p>
                 </div>
               </div>
@@ -383,8 +383,9 @@ export default function Earth51() {
                     >
                       <Sparkles className="w-12 h-12 text-purple-400" />
                     </motion.div>
-                    <h3 className="text-2xl font-black text-purple-300 mb-2">$P51 = Planet 51 Points</h3>
-                    <p className="text-purple-200/80 text-sm">Your reward for healing Earth</p>
+                    <h3 className="text-2xl font-black text-purple-300 mb-2">$PHOTO51</h3>
+                    <p className="text-purple-200/80 text-sm">Named after Rosalind Franklin's famous DNA photo</p>
+                    <p className="text-purple-300/60 text-xs mt-1">Your reward for healing Earth</p>
                   </div>
 
                   <div className="space-y-3">
@@ -393,7 +394,7 @@ export default function Earth51() {
                       <ul className="text-xs text-gray-300 space-y-1">
                         <li className="flex items-start gap-2">
                           <span className="text-green-400 mt-0.5">•</span>
-                          <span>Clean up 1kg of litter = 1 $P51</span>
+                          <span>Clean up 1kg of litter = 1 $PHOTO51</span>
                         </li>
                         <li className="flex items-start gap-2">
                           <span className="text-cyan-400 mt-0.5">•</span>
@@ -616,7 +617,7 @@ export default function Earth51() {
               </motion.div>
             </div>
             <h1 className="text-5xl font-black text-green-400" style={{ textShadow: '0 0 30px rgba(34, 197, 94, 1)' }}>
-              +{tokensEarned} <P51Symbol />
+              +{tokensEarned} $PHOTO51
             </h1>
             <p className="text-2xl font-black text-cyan-300">EARNED!</p>
             <p className="text-sm text-gray-400">I'm so proud of you bro ♾️❤️</p>
