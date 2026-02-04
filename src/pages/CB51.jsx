@@ -98,7 +98,7 @@ export default function CB51() {
 
         <PushNotificationManager />
 
-      <div className="grid gap-4 max-w-2xl">
+        <div className="grid gap-4 max-w-2xl mt-8">
         {artists.length === 0 ? (
           <div className="text-center py-12">
             <p className="text-gray-500 font-mono mb-4">No artists yet</p>
