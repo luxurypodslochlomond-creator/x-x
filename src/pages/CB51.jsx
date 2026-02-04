@@ -766,11 +766,6 @@ export default function CB51() {
                                                     See all ({stats.pendingOffers}) →
                                                     </Link>
                                                     )}
-                                                    </>
-                                                    ) : (
-                                                    <p className="text-gray-500 text-xs font-mono text-center py-3">
-                                                    No pending gigs - upload a PDF above to scan ↑
-                                                    </p>
                                                     )}
                                                     </div>
 
