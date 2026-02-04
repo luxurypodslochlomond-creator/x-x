@@ -1,0 +1,137 @@
+import React, { useState, useEffect } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import { createPageUrl } from '@/utils';
+import { base44 } from '@/api/base44Client';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { Radio, ArrowLeft, Bell, AlertCircle, Calendar, Mail, DollarSign } from 'lucide-react';
+import { motion } from 'framer-motion';
+import AI51AtomIcon from '@/components/ai51/AI51AtomIcon';
+import PushNotificationManager from '@/components/scott/PushNotificationManager';
+
+export default function CB51() {
+  const navigate = useNavigate();
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const queryClient = useQueryClient();
+
+  useEffect(() => {
+    document.title = 'CB51 • Artist Management';
+    base44.auth.me().then(setUser).catch(() => {
+      navigate(createPageUrl('CB51Login'));
+    });
+  }, [navigate]);
+
+  const { data: artists = [] } = useQuery({
+    queryKey: ['cb51Artists'],
+    queryFn: () => base44.entities.ScottArtist.filter({}),
+    enabled: !!user,
+  });
+
+  const { data: offers = [] } = useQuery({
+    queryKey: ['cb51Offers'],
+    queryFn: () => base44.entities.ScottGigOffer.filter({}),
+    enabled: !!user,
+  });
+
+  const pendingCount = offers.filter(o => o.status === 'pending_manager_review').length;
+  const awaitingCount = offers.filter(o => o.status === 'sent_to_band').length;
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-black flex items-center justify-center">
+        <div className="text-center">
+          <Radio className="w-16 h-16 mx-auto mb-4 text-cyan-400 animate-pulse" />
+          <p className="text-cyan-400 font-black text-xl font-mono">CB51</p>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-black text-white p-4 pb-20">
+      <div className="flex justify-between items-center mb-8">
+        <h1 className="text-3xl font-black font-mono">CB51</h1>
+        <div className="flex gap-3">
+          {pendingCount > 0 && (
+            <motion.button
+              onClick={() => navigate(createPageUrl('CB51NotificationInbox'))}
+              className="relative px-4 py-2 bg-red-600/20 border border-red-500 text-red-400 rounded-lg font-bold text-sm"
+              whileHover={{ scale: 1.05 }}
+            >
+              <Bell className="w-4 h-4 inline mr-2" />
+              {pendingCount} PENDING
+            </motion.button>
+          )}
+          <PushNotificationManager />
+        </div>
+      </div>
+
+      {awaitingCount > 0 && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="mb-6 bg-green-900/20 border border-green-500 rounded-lg p-4"
+        >
+          <p className="text-green-400 font-mono">⏳ {awaitingCount} gigs awaiting band votes</p>
+        </motion.div>
+      )}
+
+      <div className="grid gap-4 max-w-2xl">
+        {artists.length === 0 ? (
+          <div className="text-center py-12">
+            <p className="text-gray-500 font-mono mb-4">No artists yet</p>
+            <Link
+              to={createPageUrl('ScottAddArtist')}
+              className="inline-block bg-cyan-600 hover:bg-cyan-700 text-black font-bold px-6 py-3 rounded-lg transition-all"
+            >
+              + ADD ARTIST
+            </Link>
+          </div>
+        ) : (
+          artists.map(artist => {
+            const artistOffers = offers.filter(o => o.artist_id === artist.id);
+            const pending = artistOffers.filter(o => o.status === 'pending_manager_review').length;
+
+            return (
+              <motion.div
+                key={artist.id}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                onClick={() => navigate(createPageUrl('ScottArtistHome') + `?id=${artist.id}`)}
+                className="bg-black border border-cyan-500/30 hover:border-cyan-500 rounded-lg p-6 cursor-pointer transition-all"
+              >
+                <div className="flex items-start justify-between mb-4">
+                  <div>
+                    <h2 className="text-xl font-black text-white">{artist.name}</h2>
+                    <p className="text-cyan-400 text-sm font-mono mt-1">{artistOffers.length} gigs</p>
+                  </div>
+                  {pending > 0 && (
+                    <span className="bg-red-600 text-white text-xs font-black px-3 py-1 rounded-full">
+                      {pending} TO REVIEW
+                    </span>
+                  )}
+                </div>
+                <p className="text-gray-400 text-sm">{artist.genres?.join(', ') || 'No genres'}</p>
+              </motion.div>
+            );
+          })
+        )}
+      </div>
+
+      {artists.length > 0 && (
+        <div className="mt-8 text-center">
+          <Link
+            to={createPageUrl('ScottAddArtist')}
+            className="text-cyan-400 hover:text-cyan-300 font-mono text-sm font-bold"
+          >
+            + ADD ANOTHER
+          </Link>
+        </div>
+      )}
+
+      <div className="mt-12 pt-8 border-t border-gray-800 text-center">
+        <p className="text-gray-500 font-mono text-xs">CB51 • AI Co-Manager ♾️❤️</p>
+      </div>
+    </div>
+  );
+}
