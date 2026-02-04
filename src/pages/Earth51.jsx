@@ -625,7 +625,7 @@ export default function Earth51() {
               </h1>
               <p className="text-2xl font-black font-mono text-black">$P51</p>
               <p className="text-black font-mono text-xs mt-2">
-                Total: {localBalance.toFixed(1)} $P51
+                Total: {Math.round(localBalance)} $P51
               </p>
               {trustScore && trustScore.instant_payout_percentage < 100 && (
                 <p className="text-black/60 font-mono text-[9px] mt-1">
@@ -697,7 +697,7 @@ export default function Earth51() {
                   if (user) {
                     navigate(createPageUrl('Profile'));
                   } else {
-                    alert(`Your balance: ${localBalance.toFixed(1)} $P51 (stored locally)\n\nLogin to sync to cloud & unlock more features!`);
+                    alert(`Your balance: ${Math.round(localBalance)} $P51 (stored locally)\n\nLogin to sync to cloud & unlock more features!`);
                   }
                 }}
                 className="w-full bg-purple-500 border-4 border-purple-400 text-black py-4 font-black font-mono text-sm"

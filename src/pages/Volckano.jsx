@@ -215,10 +215,10 @@ export default function Volckano() {
                     c.collected = true;
                     
                     if (c.type === 'litter') {
-                        // IN-GAME LITTER: Small $P51 reward (0.1 per pickup)
+                        // IN-GAME LITTER: 1 $P51 per pickup (whole numbers!)
                         setInGameP51(prev => {
-                            const newBalance = prev + 0.1;
-                            localStorage.setItem('volckano_ingame_p51', newBalance.toFixed(1));
+                            const newBalance = prev + 1;
+                            localStorage.setItem('volckano_ingame_p51', newBalance.toString());
                             return newBalance;
                         });
                         playSound(528, 100);
@@ -532,11 +532,11 @@ export default function Volckano() {
                             </div>
                             <div className="flex items-center gap-1 bg-green-500 border-2 border-green-400 px-2 py-0.5">
                                 <span className="text-black text-[10px] font-black font-mono">GAME:</span>
-                                <span className="text-black text-sm font-black font-mono">{inGameP51.toFixed(1)}</span>
+                                <span className="text-black text-sm font-black font-mono">{Math.round(inGameP51)}</span>
                             </div>
                             <div className="flex items-center gap-1 bg-pink-500 border-2 border-pink-400 px-2 py-0.5">
                                 <span className="text-black text-[10px] font-black font-mono">REAL:</span>
-                                <span className="text-black text-sm font-black font-mono">{p51Balance.toFixed(1)}</span>
+                                <span className="text-black text-sm font-black font-mono">{Math.round(p51Balance)}</span>
                             </div>
                         </div>
                     </div>
@@ -650,9 +650,9 @@ export default function Volckano() {
                             <div className="bg-black border-4 border-green-500 p-4 mb-4" style={{ boxShadow: '4px 4px 0px #000' }}>
                                 <p className="text-green-400 font-black font-mono text-xs mb-2">HOW $P51 WORKS:</p>
                                 <div className="space-y-1 text-white font-mono text-[9px]">
-                                    <p>🌍 Clean real Earth = 1.2 $P51/kg</p>
-                                    <p>🎮 Clean in-game = 0.1 $P51/pickup</p>
-                                    <p>💡 Real > Virtual (teach habits!)</p>
+                                    <p>🌍 Clean REAL Earth = 10 $P51/kg</p>
+                                    <p>🎮 Clean in-game = 1 $P51/pickup</p>
+                                    <p>💡 Real Earth 10x better!</p>
                                 </div>
                                 <div className="bg-pink-500 border-2 border-pink-400 p-2 mt-2">
                                     <p className="text-black font-black font-mono text-[9px] text-center">
@@ -726,11 +726,11 @@ export default function Volckano() {
                                             <span className="text-black text-sm font-black font-mono">{stars}</span>
                                         </div>
                                         <div className="bg-green-500 border-2 border-green-400 px-2 py-1 flex items-center gap-1">
-                                            <span className="text-black text-[9px] font-black font-mono">+{inGameP51.toFixed(1)}</span>
+                                            <span className="text-black text-[9px] font-black font-mono">+{Math.round(inGameP51)}</span>
                                         </div>
                                     </div>
                                     <p className="text-pink-400 text-[9px] font-mono">
-                                        Real Earth: {p51Balance.toFixed(1)} $P51
+                                        Real Earth: {Math.round(p51Balance)} $P51
                                     </p>
                                 </div>
                                 
