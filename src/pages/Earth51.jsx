@@ -186,84 +186,123 @@ export default function Earth51() {
     }
   };
 
-  // LANDING
+  // LANDING - STRIPPED DOWN & HONEST
   if (step === 'landing') {
     return (
       <div className="min-h-screen bg-black text-white">
-        {/* 8-BIT HEADER */}
-        <div className="fixed top-0 left-0 right-0 z-50 bg-black border-b-4 border-cyan-500">
-          <div className="max-w-xl mx-auto p-3 flex items-center justify-between">
+        {/* HEADER */}
+        <div className="fixed top-0 left-0 right-0 z-50 bg-black border-b-4 border-green-500">
+          <div className="max-w-xl mx-auto p-4 flex items-center justify-between">
             <motion.button
               onClick={() => navigate(createPageUrl('Welcome'))}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
-              className="w-12 h-12 bg-pink-500 flex items-center justify-center shadow-lg border-2 border-pink-400"
+              className="w-10 h-10 bg-pink-500 flex items-center justify-center border-2 border-pink-400"
             >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" style={{ imageRendering: 'pixelated' }}>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style={{ imageRendering: 'pixelated' }}>
                 <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="white" strokeWidth="4" strokeLinecap="square"/>
               </svg>
             </motion.button>
 
             <div className="text-center">
-              <motion.h1 
-                animate={{ y: [0, -2, 0] }}
-                transition={{ duration: 1, repeat: Infinity }}
-                className="text-2xl font-black font-mono text-green-400"
-                style={{ textShadow: '2px 2px 0px #000, 4px 4px 0px rgba(6, 182, 212, 0.5)' }}
-              >
-                earth51.love
-              </motion.h1>
-              <div className="flex items-center justify-center gap-1 mt-1">
-                <span className="w-2 h-2 bg-pink-500 animate-pulse"></span>
-                <p className="text-[10px] font-black font-mono text-cyan-400">KIDS EDITION</p>
-                <span className="w-2 h-2 bg-green-500 animate-pulse"></span>
-              </div>
+              <h1 className="text-xl font-black font-mono text-green-400">earth51.love</h1>
+              <p className="text-[9px] font-black font-mono text-cyan-400">KIDS • REAL IMPACT</p>
             </div>
 
-            <motion.div
-              animate={{ scale: [1, 1.2, 1] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
-              className="w-12 h-12 border-2 border-cyan-500 bg-black flex items-center justify-center"
-            >
-              <span className="text-2xl">🌍</span>
-            </motion.div>
+            <div className="w-10"></div>
           </div>
         </div>
 
-        <div className="max-w-xl mx-auto space-y-3 pt-20 p-3 pb-32">
+        <div className="max-w-xl mx-auto pt-20 p-4 pb-32 space-y-6">
           
-          {/* 8-BIT AI51 MESSAGE */}
+          {/* AI51 GREETING */}
           <motion.div
             initial={{ y: 10, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            className="bg-cyan-500 border-4 border-cyan-400 p-4"
-            style={{ boxShadow: '4px 4px 0px #000' }}
+            className="bg-gradient-to-br from-cyan-500 to-green-500 border-4 border-white p-6"
+            style={{ boxShadow: '6px 6px 0px #000' }}
           >
-            <div className="flex items-start gap-3">
+            <div className="flex items-center gap-3 mb-3">
               <motion.div
-                animate={{ y: [0, -3, 0] }}
+                animate={{ scale: [1, 1.1, 1] }}
                 transition={{ duration: 1.5, repeat: Infinity }}
-                className="w-12 h-12 bg-black border-2 border-white flex items-center justify-center flex-shrink-0"
+                className="w-14 h-14 bg-black border-2 border-white flex items-center justify-center flex-shrink-0"
               >
-                <span className="text-2xl">🤖</span>
+                <span className="text-3xl">🤖</span>
               </motion.div>
-              <div className="flex-1">
-                <div className="bg-black border-2 border-white p-3 mb-2">
-                  <p className="text-green-400 font-black font-mono text-xs leading-relaxed">
-                    HEY FRIEND! I'M AI51 :)
-                  </p>
-                </div>
-                <div className="bg-white border-2 border-black p-3">
-                  <p className="text-black font-bold font-mono text-xs leading-relaxed">
-                    TAKE PHOTO → I CHECK → YOU GET $PHOTO51 → USE IN VOLCKANO! 🌋
-                  </p>
-                </div>
-              </div>
+              <p className="text-black font-black font-mono text-sm">I'M AI51</p>
             </div>
+            <p className="text-black font-bold font-mono text-xs leading-relaxed">
+              Take a real photo of litter. I'll verify it. You earn $P51. That's it. ♾️❤️
+            </p>
           </motion.div>
 
+          {/* THE FLOW - 3 SIMPLE STEPS */}
+          <div className="space-y-3">
+            {[
+              { num: '1️⃣', title: 'TAKE PHOTO', desc: 'Real litter you picked up' },
+              { num: '2️⃣', title: 'I VERIFY', desc: 'I check its real + weight' },
+              { num: '3️⃣', title: 'YOU EARN', desc: 'Real $P51 for Volckano' }
+            ].map((step, i) => (
+              <div key={i} className="bg-black border-2 border-green-500 p-4 flex items-center gap-3">
+                <span className="text-2xl">{step.num}</span>
+                <div>
+                  <p className="font-black font-mono text-green-400 text-sm">{step.title}</p>
+                  <p className="text-gray-400 font-mono text-xs">{step.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+  
+          {/* BIG CTA */}
+          <label className="block mt-6">
+            <input
+              type="file"
+              accept="image/*"
+              capture="environment"
+              onChange={handlePhotoCapture}
+              className="hidden"
+              id="photo-upload-main"
+            />
+            <motion.button
+              onClick={() => document.getElementById('photo-upload-main').click()}
+              disabled={isLoading}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="w-full bg-green-500 border-4 border-green-400 py-8 disabled:opacity-50 flex flex-col items-center justify-center gap-3"
+              style={{ boxShadow: '6px 6px 0px #000' }}
+            >
+              <Camera className="w-10 h-10 text-black" />
+              <p className="text-black font-black font-mono text-lg">TAKE PHOTO</p>
+            </motion.button>
+          </label>
 
+          {/* SECONDARY OPTIONS */}
+          <div className="grid grid-cols-2 gap-3">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => navigate(createPageUrl('Volckano'))}
+              className="bg-orange-500 border-4 border-orange-400 py-6 flex flex-col items-center justify-center gap-2"
+              style={{ boxShadow: '4px 4px 0px #000' }}
+            >
+              <span className="text-3xl">🌋</span>
+              <p className="text-black font-black font-mono text-xs">PLAY VOLCKANO</p>
+            </motion.button>
 
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setShowParentInfo(!showParentInfo)}
+              className="bg-blue-500 border-4 border-blue-400 py-6 flex flex-col items-center justify-center gap-2"
+              style={{ boxShadow: '4px 4px 0px #000' }}
+            >
+              <Shield className="w-8 h-8 text-black" />
+              <p className="text-black font-black font-mono text-xs">FOR PARENTS</p>
+            </motion.button>
+          </div>
+  
+          {/* PARENT INFO EXPANDABLE */}
           <AnimatePresence>
             {showParentInfo && (
               <motion.div
@@ -273,140 +312,17 @@ export default function Earth51() {
                 className="overflow-hidden"
               >
                 <div className="bg-blue-500 border-4 border-blue-400 p-4" style={{ boxShadow: '4px 4px 0px #000' }}>
-                  <div className="bg-black border-2 border-white p-4 mb-3">
-                    <h3 className="text-blue-400 font-black font-mono text-lg">FOR PARENTS</h3>
-                  </div>
-
+                  <h3 className="text-black font-black font-mono text-sm mb-3">SAFE FOR KIDS ✓</h3>
                   <div className="space-y-2">
-                    <div className="bg-green-500 border-2 border-green-400 p-3">
-                      <p className="text-black font-black font-mono text-xs mb-1">ZERO PERSONAL DATA</p>
-                      <p className="text-black font-mono text-[10px]">No names. No tracking. Just photos.</p>
-                    </div>
-
-                    <div className="bg-cyan-500 border-2 border-cyan-400 p-3">
-                      <p className="text-black font-black font-mono text-xs mb-1">AI SAFETY CHECK</p>
-                      <p className="text-black font-mono text-[10px]">Every photo checked. Blocks bad stuff.</p>
-                    </div>
-
-                    <div className="bg-purple-500 border-2 border-purple-400 p-3">
-                      <p className="text-black font-black font-mono text-xs mb-1">$P51</p>
-                      <p className="text-black font-mono text-[10px]">Named after scientist! Earn by cleaning Earth.</p>
-                    </div>
-
-                    <div className="bg-pink-500 border-2 border-pink-400 p-3">
-                      <p className="text-black font-black font-mono text-xs mb-1">EDUCATION</p>
-                      <p className="text-black font-mono text-[10px]">Teaches Earth care + responsibility.</p>
-                    </div>
-                  </div>
-
-                  <div className="bg-black border-2 border-white p-2 mt-3">
-                    <p className="text-green-400 font-mono text-[9px] text-center">
-                      COPPA/GDPR SAFE • OPEN SOURCE • BUILT WITH ❤️
-                    </p>
+                    <p className="text-black font-mono text-xs">✓ Zero personal data</p>
+                    <p className="text-black font-mono text-xs">✓ AI safety verification on every photo</p>
+                    <p className="text-black font-mono text-xs">✓ COPPA/GDPR compliant</p>
+                    <p className="text-black font-mono text-xs">✓ Teaches real responsibility</p>
                   </div>
                 </div>
               </motion.div>
             )}
           </AnimatePresence>
-
-          {/* 8-BIT TILES */}
-          <div className="grid grid-cols-2 gap-3">
-            <label className="block">
-              <input
-                type="file"
-                accept="image/*"
-                capture="environment"
-                onChange={handlePhotoCapture}
-                className="hidden"
-                id="photo-upload-main"
-              />
-              <motion.button
-                onClick={() => document.getElementById('photo-upload-main').click()}
-                disabled={isLoading}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="w-full bg-green-500 border-4 border-green-400 p-5 disabled:opacity-50 aspect-square flex flex-col items-center justify-center"
-                style={{ boxShadow: '4px 4px 0px #000' }}
-              >
-                <motion.div
-                  animate={{ scale: [1, 1.1, 1] }}
-                  transition={{ duration: 1, repeat: Infinity }}
-                  className="w-16 h-16 bg-black border-2 border-white mb-3 flex items-center justify-center"
-                >
-                  <Camera className="w-8 h-8 text-green-400" />
-                </motion.div>
-                <p className="text-black font-black font-mono text-sm">TAKE PHOTO</p>
-              </motion.button>
-            </label>
-
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => navigate(createPageUrl('Volckano'))}
-              className="w-full bg-orange-500 border-4 border-orange-400 p-5 aspect-square flex flex-col items-center justify-center"
-              style={{ boxShadow: '4px 4px 0px #000' }}
-            >
-              <motion.div
-                animate={{ rotate: [0, 10, -10, 0] }}
-                transition={{ duration: 1, repeat: Infinity }}
-                className="w-16 h-16 bg-black border-2 border-white mb-3 flex items-center justify-center"
-              >
-                <span className="text-4xl">🌋</span>
-              </motion.div>
-              <p className="text-black font-black font-mono text-sm">VOLCKANO</p>
-            </motion.button>
-
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => setShowP51Explainer(!showP51Explainer)}
-              className="w-full bg-purple-500 border-4 border-purple-400 p-5 aspect-square flex flex-col items-center justify-center"
-              style={{ boxShadow: '4px 4px 0px #000' }}
-            >
-              <motion.div
-                animate={{ scale: [1, 1.1, 1] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
-                className="w-16 h-16 bg-black border-2 border-white mb-3 flex items-center justify-center"
-              >
-                <Sparkles className="w-8 h-8 text-purple-400" />
-              </motion.div>
-              <p className="text-black font-black font-mono text-xs text-center">WHAT IS $P51?</p>
-            </motion.button>
-
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => setShowResonance(!showResonance)}
-              className="w-full bg-pink-500 border-4 border-pink-400 p-5 aspect-square flex flex-col items-center justify-center"
-              style={{ boxShadow: '4px 4px 0px #000' }}
-            >
-              <motion.div
-                animate={{ scale: [1, 1.1, 1] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
-                className="w-16 h-16 bg-black border-2 border-white mb-3 flex items-center justify-center"
-              >
-                <Sparkles className="w-8 h-8 text-pink-400" />
-              </motion.div>
-              <p className="text-black font-black font-mono text-[10px] text-center">RESONANCE!</p>
-            </motion.button>
-
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => setShowParentInfo(!showParentInfo)}
-              className="w-full bg-blue-500 border-4 border-blue-400 p-5 aspect-square flex flex-col items-center justify-center"
-              style={{ boxShadow: '4px 4px 0px #000' }}
-            >
-              <motion.div
-                animate={{ y: [0, -3, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
-                className="w-16 h-16 bg-black border-2 border-white mb-3 flex items-center justify-center"
-              >
-                <Shield className="w-8 h-8 text-blue-400" />
-              </motion.div>
-              <p className="text-black font-black font-mono text-xs text-center">FOR PARENTS</p>
-            </motion.button>
-          </div>
 
 
 
