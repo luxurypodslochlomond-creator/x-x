@@ -390,6 +390,17 @@ export default function CB51() {
 
                                     {/* REAL-TIME NOTIFICATIONS BANNER */}
                                     <div className="mb-6 space-y-2">
+                                        {stats.awaitingBand > 0 && (
+                                            <div className="bg-black border-2 border-green-500/50 hover:border-green-500 rounded-lg p-4 flex items-center justify-between transition-all cursor-pointer" onClick={() => setExpandedSection({...expandedSection, awaitingBand: !expandedSection.awaitingBand})}>
+                                                <div>
+                                                    <p className="text-green-400 font-black font-mono text-sm">AWAITING BAND VOTES</p>
+                                                    <p className="text-gray-400 text-xs font-mono">{stats.awaitingBand} offer{stats.awaitingBand !== 1 ? 's' : ''} sent to band</p>
+                                                </div>
+                                                <button className="bg-green-600 hover:bg-green-700 text-black font-black px-3 py-1.5 rounded text-xs transition-all">
+                                                    {expandedSection.awaitingBand ? 'HIDE' : 'VIEW'}
+                                                </button>
+                                            </div>
+                                        )}
                                         {stats.pendingOffers > 0 && (
                                             <div className="bg-gradient-to-r from-cyan-900/40 to-cyan-800/40 border-l-4 border-cyan-500 rounded-lg p-4 flex items-center justify-between">
                                                 <div>
