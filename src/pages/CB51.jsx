@@ -56,32 +56,47 @@ export default function CB51() {
   }
 
   return (
-    <div className="min-h-screen bg-black text-white p-4 pb-20">
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-black font-mono">CB51</h1>
-        <PushNotificationManager />
+    <div className="min-h-screen bg-black text-white">
+      {/* HEADER */}
+      <div className="sticky top-0 z-40 bg-cyan-950/40 backdrop-blur-xl border-b border-cyan-500/30 px-4 py-3">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <Radio className="w-6 h-6 text-cyan-400" />
+            <span className="text-lg font-black text-cyan-400 font-mono">CB51</span>
+          </div>
+          <button onClick={() => navigate(-1)} className="p-2 hover:bg-cyan-500/10 rounded transition-colors">
+            <ArrowLeft className="w-5 h-5 text-cyan-400" />
+          </button>
+        </div>
       </div>
 
-      {pendingCount > 0 && (
-        <motion.button
-          onClick={() => navigate(createPageUrl('CB51NotificationInbox'))}
-          className="w-full mb-6 px-6 py-3 bg-red-600/20 hover:bg-red-600/30 border-2 border-red-500 text-red-400 rounded-lg font-black text-sm font-mono flex items-center justify-center gap-2 transition-all"
-          whileHover={{ scale: 1.02 }}
-        >
-          <Bell className="w-5 h-5" />
-          {pendingCount} PENDING APPROVALS
-        </motion.button>
-      )}
+      <div className="p-4 pb-20">
+        <h1 className="text-4xl font-black text-white font-mono mb-6">CB51</h1>
 
-      {awaitingCount > 0 && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="mb-6 bg-green-900/20 border border-green-500 rounded-lg p-4"
-        >
-          <p className="text-green-400 font-mono">⏳ {awaitingCount} gigs awaiting band votes</p>
-        </motion.div>
-      )}
+        {pendingCount > 0 && (
+          <motion.button
+            onClick={() => navigate(createPageUrl('CB51NotificationInbox'))}
+            className="w-full mb-6 px-6 py-4 bg-red-600/20 hover:bg-red-600/30 border-2 border-red-500 text-red-400 rounded-lg font-black text-sm font-mono flex items-center justify-center gap-2 transition-all"
+            whileHover={{ scale: 1.02 }}
+          >
+            <Bell className="w-5 h-5" />
+            {pendingCount} PENDING APPROVALS
+          </motion.button>
+        )}
+
+        {awaitingCount > 0 && (
+          <motion.button
+            onClick={() => navigate(createPageUrl('ScottArtistHome'))}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="w-full mb-6 px-6 py-4 bg-green-900/30 hover:bg-green-900/40 border-2 border-green-500 text-green-400 rounded-lg font-black text-sm font-mono flex items-center justify-center gap-2 transition-all"
+          >
+            <span className="text-xl">👤</span>
+            {awaitingCount} gigs awaiting band votes
+          </motion.button>
+        )}
+
+        <PushNotificationManager />
 
       <div className="grid gap-4 max-w-2xl">
         {artists.length === 0 ? (
