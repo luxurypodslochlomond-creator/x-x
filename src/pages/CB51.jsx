@@ -731,56 +731,10 @@ export default function CB51() {
                                                                                </button>
                                                                                <button 
                                                                                    onClick={async () => {
-                                                                                       queryClient.setQueryData(['scottAllGigOffers'], allOffers.map(o => o.id === offer.id ? {...o, status: 'sent_to_band'} : o));
-                                                                                       await base44.entities.ScottGigOffer.update(offer.id, {status: 'sent_to_band'});
-
-                                                                                       // MYCELIUM: Auto-create calendar event
-                                                                                       await base44.entities.ScottEvent.create({
-                                                                                           artist_id: offer.artist_id,
-                                                                                           title: offer.venue || 'Gig',
-                                                                                           date: offer.date,
-                                                                                           time: offer.time || '20:00',
-                                                                                           venue: offer.venue,
-                                                                                           city: offer.city,
-                                                                                           country: offer.country,
-                                                                                           fee: offer.fee,
-                                                                                           currency: offer.currency || 'GBP',
-                                                                                           promoter: offer.promoter,
-                                                                                           capacity: offer.capacity,
-                                                                                           event_type: 'live_show',
-                                                                                           notes: `Approved by manager - sent to band for vote`
+                                                                                       await base44.functions.invoke('approveGigAndNotifyBand', {
+                                                                                           offerId: offer.id,
+                                                                                           artistId: offer.artist_id
                                                                                        });
-
-                                                                                       // MYCELIUM: Auto-create related tasks
-                                                                                       if (offer.date) {
-                                                                                           const gigDate = new Date(offer.date);
-                                                                                           const dayBefore = new Date(gigDate);
-                                                                                           dayBefore.setDate(dayBefore.getDate() - 1);
-
-                                                                                           await base44.entities.ScottTask.create({
-                                                                                               artist_id: offer.artist_id,
-                                                                                               title: `Travel to ${offer.city || offer.venue}`,
-                                                                                               due_date: dayBefore.toISOString().split('T')[0],
-                                                                                               status: 'pending',
-                                                                                               category: 'travel'
-                                                                                           });
-                                                                                       }
-
-                                                                                       if (offer.fee && offer.date) {
-                                                                                           const gigDate = new Date(offer.date);
-                                                                                           const weekAfter = new Date(gigDate);
-                                                                                           weekAfter.setDate(weekAfter.getDate() + 7);
-
-                                                                                           await base44.entities.ScottTask.create({
-                                                                                               artist_id: offer.artist_id,
-                                                                                               title: `Invoice ${offer.promoter || offer.venue}`,
-                                                                                               due_date: weekAfter.toISOString().split('T')[0],
-                                                                                               status: 'pending',
-                                                                                               category: 'finance',
-                                                                                               notes: `${offer.currency || 'GBP'}${offer.fee} for ${offer.venue}`
-                                                                                           });
-                                                                                       }
-
                                                                                        queryClient.invalidateQueries({queryKey: ['scottAllGigOffers']});
                                                                                        queryClient.invalidateQueries({queryKey: ['scottEvents']});
                                                                                    }}
