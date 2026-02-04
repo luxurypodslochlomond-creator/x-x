@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { base44 } from '@/api/base44Client';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { Camera, Loader2, CheckCircle2, Zap, Share2, X, MapPin } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { Camera, Loader2, CheckCircle2, Zap, Share2, X, MapPin, Shield, Lock, Eye, Heart, Sparkles, ChevronDown, ChevronUp, Info } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import AI51AtomIcon from '@/components/ai51/AI51AtomIcon';
@@ -27,6 +27,8 @@ export default function Earth51() {
   const [error, setError] = useState(null);
   const [isOffline, setIsOffline] = useState(!navigator.onLine);
   const [aiVerification, setAiVerification] = useState(null);
+  const [showP51Explainer, setShowP51Explainer] = useState(false);
+  const [showParentInfo, setShowParentInfo] = useState(false);
 
   useEffect(() => {
     const handleOnline = () => setIsOffline(false);
@@ -128,62 +130,258 @@ export default function Earth51() {
   // LANDING
   if (step === 'landing') {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-green-900 via-black to-cyan-900 text-white p-6 pt-24 lg:pt-6">
-        <div className="max-w-xl mx-auto space-y-8">
-          {/* AI51 INTRO */}
+      <div className="min-h-screen bg-gradient-to-b from-emerald-950 via-black to-cyan-950 text-white p-4 pt-20 lg:pt-6 pb-32">
+        <div className="max-w-xl mx-auto space-y-6">
+          
+          {/* HERO SECTION */}
           <motion.div
-            initial={{ scale: 0.8, opacity: 0 }}
+            initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            className="text-center space-y-4"
+            className="text-center space-y-3"
           >
-            <div className="flex justify-center">
-              <AI51AtomIcon size={80} animate={true} />
-            </div>
-            <h1 className="text-5xl font-black text-green-400" style={{ textShadow: '0 0 20px rgba(34, 197, 94, 0.8)' }}>
-              EARTH51
+            <motion.div 
+              className="flex justify-center mb-4"
+              animate={{ rotate: [0, 360] }}
+              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+            >
+              <div className="relative">
+                <AI51AtomIcon size={64} animate={true} />
+                <motion.div
+                  className="absolute -top-2 -right-2 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center"
+                  animate={{ scale: [1, 1.2, 1] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                >
+                  <Sparkles className="w-3 h-3 text-white" />
+                </motion.div>
+              </div>
+            </motion.div>
+            
+            <h1 className="text-6xl font-black bg-gradient-to-r from-green-400 via-emerald-300 to-cyan-400 bg-clip-text text-transparent" 
+                style={{ textShadow: '0 0 40px rgba(34, 197, 94, 0.3)' }}>
+              earth.love
             </h1>
-            <p className="text-lg font-bold text-cyan-300">
-              Hey friend 👋 I'm AI51. Let's heal Earth together ♾️❤️
-            </p>
-            <p className="text-sm text-gray-300">
-              Pick up litter → Earn $P51 → Unlock Volckano levels with your friends
+            
+            <div className="flex items-center justify-center gap-2 text-cyan-300">
+              <Heart className="w-4 h-4 text-pink-400" />
+              <p className="text-base font-bold">Hey friend! I'm AI51</p>
+              <Heart className="w-4 h-4 text-pink-400" />
+            </div>
+            
+            <p className="text-sm text-gray-400 max-w-sm mx-auto leading-relaxed">
+              Clean up litter, earn rewards, unlock powers in Volckano. Every piece counts.
             </p>
           </motion.div>
 
+          {/* PARENT SAFETY BADGE */}
+          <motion.button
+            onClick={() => setShowParentInfo(!showParentInfo)}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            className="w-full bg-gradient-to-r from-blue-900/40 to-purple-900/40 border-2 border-blue-500/30 rounded-2xl p-4"
+          >
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-blue-500/20 rounded-full flex items-center justify-center">
+                  <Shield className="w-5 h-5 text-blue-400" />
+                </div>
+                <div className="text-left">
+                  <p className="text-blue-300 font-bold text-sm">Parents: Tap for Safety Info</p>
+                  <p className="text-blue-400/60 text-xs">Privacy • Safety • How it works</p>
+                </div>
+              </div>
+              {showParentInfo ? <ChevronUp className="w-5 h-5 text-blue-400" /> : <ChevronDown className="w-5 h-5 text-blue-400" />}
+            </div>
+          </motion.button>
+
+          <AnimatePresence>
+            {showParentInfo && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: 'auto', opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                className="overflow-hidden"
+              >
+                <div className="bg-blue-950/40 border-2 border-blue-500/30 rounded-2xl p-5 space-y-4">
+                  <h3 className="text-blue-300 font-black text-lg flex items-center gap-2">
+                    <Shield className="w-5 h-5" />
+                    For Parents
+                  </h3>
+                  
+                  <div className="space-y-3 text-sm">
+                    <div className="flex gap-3">
+                      <Lock className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
+                      <div>
+                        <p className="text-white font-bold">Zero Personal Data</p>
+                        <p className="text-gray-400 text-xs">No names, no addresses, no tracking. Just cleanup photos and weights.</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex gap-3">
+                      <Eye className="w-5 h-5 text-cyan-400 flex-shrink-0 mt-0.5" />
+                      <div>
+                        <p className="text-white font-bold">AI Safety Check</p>
+                        <p className="text-gray-400 text-xs">Every photo analyzed for child safety. Blocks inappropriate content automatically.</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex gap-3">
+                      <Zap className="w-5 h-5 text-purple-400 flex-shrink-0 mt-0.5" />
+                      <div>
+                        <p className="text-white font-bold">$P51 Currency</p>
+                        <p className="text-gray-400 text-xs">In-app points for cleaning Earth. Can be used in Volckano game or saved. Not real money.</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex gap-3">
+                      <Heart className="w-5 h-5 text-pink-400 flex-shrink-0 mt-0.5" />
+                      <div>
+                        <p className="text-white font-bold">Educational Mission</p>
+                        <p className="text-gray-400 text-xs">Teaches environmental responsibility, brand accountability, and community action.</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="pt-3 border-t border-blue-500/20">
+                    <p className="text-xs text-gray-500 text-center">
+                      COPPA/GDPR-K compliant • Open source • Built with love by real humans
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
           {/* HOW IT WORKS */}
-          <div className="space-y-3">
-            <div className="bg-black border-4 border-green-500 p-4">
-              <div className="flex items-center gap-3 mb-2">
-                <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center font-black text-black">1</div>
-                <span className="font-bold text-green-400">📸 Take a photo</span>
+          <div className="space-y-2">
+            <div className="relative bg-gradient-to-br from-green-900/30 to-emerald-900/30 border-2 border-green-500/40 rounded-2xl p-5 overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-green-500/10 rounded-full blur-3xl"></div>
+              <div className="relative flex items-start gap-4">
+                <div className="w-12 h-12 bg-gradient-to-br from-green-400 to-emerald-500 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg">
+                  <Camera className="w-6 h-6 text-black" />
+                </div>
+                <div className="flex-1">
+                  <p className="text-green-300 font-black text-base mb-1">1. Take a Photo</p>
+                  <p className="text-green-200/60 text-xs leading-relaxed">Snap the litter you collected - even one wrapper counts</p>
+                </div>
               </div>
-              <p className="text-xs text-gray-400 ml-11">Show me the litter you collected</p>
             </div>
 
-            <div className="bg-black border-4 border-cyan-500 p-4">
-              <div className="flex items-center gap-3 mb-2">
-                <div className="w-8 h-8 bg-cyan-500 rounded-full flex items-center justify-center font-black text-black">2</div>
-                <span className="font-bold text-cyan-400">⚖️ Tell me the weight</span>
+            <div className="relative bg-gradient-to-br from-cyan-900/30 to-blue-900/30 border-2 border-cyan-500/40 rounded-2xl p-5 overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-500/10 rounded-full blur-3xl"></div>
+              <div className="relative flex items-start gap-4">
+                <div className="w-12 h-12 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg">
+                  <Zap className="w-6 h-6 text-black" />
+                </div>
+                <div className="flex-1">
+                  <p className="text-cyan-300 font-black text-base mb-1">2. AI Verifies</p>
+                  <p className="text-cyan-200/60 text-xs leading-relaxed">AI51 scans for brands and checks it's real (Coca-Cola, Pepsi, etc)</p>
+                </div>
               </div>
-              <p className="text-xs text-gray-400 ml-11">Even 5g (one wrapper) counts bro</p>
             </div>
 
-            <div className="bg-black border-4 border-purple-500 p-4">
-              <div className="flex items-center gap-3 mb-2">
-                <div className="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center font-black text-white">3</div>
-                <span className="font-bold text-purple-400">💰 Get $P51 Instantly</span>
+            <div className="relative bg-gradient-to-br from-purple-900/30 to-pink-900/30 border-2 border-purple-500/40 rounded-2xl p-5 overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/10 rounded-full blur-3xl"></div>
+              <div className="relative flex items-start gap-4">
+                <div className="w-12 h-12 bg-gradient-to-br from-purple-400 to-pink-500 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg">
+                  <Sparkles className="w-6 h-6 text-black" />
+                </div>
+                <div className="flex-1">
+                  <p className="text-purple-300 font-black text-base mb-1">3. Earn Rewards</p>
+                  <p className="text-purple-200/60 text-xs leading-relaxed">Get $P51 instantly - use it to unlock Volckano powers</p>
+                </div>
               </div>
-              <p className="text-xs text-gray-400 ml-11">1kg = 1 $P51 + 20% bonus. No waiting.</p>
-            </div>
-
-            <div className="bg-black border-4 border-pink-500 p-4">
-              <div className="flex items-center gap-3 mb-2">
-                <div className="w-8 h-8 bg-pink-500 rounded-full flex items-center justify-center font-black text-white">4</div>
-                <span className="font-bold text-pink-400">🌋 Unlock Volckano</span>
-              </div>
-              <p className="text-xs text-gray-400 ml-11">Use $P51 to level up in the game. Invite friends.</p>
             </div>
           </div>
+
+          {/* WHAT IS P51 EXPLAINER */}
+          <motion.button
+            onClick={() => setShowP51Explainer(!showP51Explainer)}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            className="w-full bg-gradient-to-r from-purple-900/40 to-pink-900/40 border-2 border-purple-500/30 rounded-2xl p-4"
+          >
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-purple-500/20 rounded-full flex items-center justify-center">
+                  <Info className="w-5 h-5 text-purple-400" />
+                </div>
+                <div className="text-left">
+                  <p className="text-purple-300 font-bold text-sm">What is $P51?</p>
+                  <p className="text-purple-400/60 text-xs">Tap to learn about your rewards</p>
+                </div>
+              </div>
+              {showP51Explainer ? <ChevronUp className="w-5 h-5 text-purple-400" /> : <ChevronDown className="w-5 h-5 text-purple-400" />}
+            </div>
+          </motion.button>
+
+          <AnimatePresence>
+            {showP51Explainer && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: 'auto', opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                className="overflow-hidden"
+              >
+                <div className="bg-purple-950/40 border-2 border-purple-500/30 rounded-2xl p-6 space-y-4">
+                  <div className="text-center">
+                    <motion.div
+                      animate={{ rotate: [0, 360] }}
+                      transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                      className="inline-block mb-3"
+                    >
+                      <Sparkles className="w-12 h-12 text-purple-400" />
+                    </motion.div>
+                    <h3 className="text-2xl font-black text-purple-300 mb-2">$P51 = Planet 51 Points</h3>
+                    <p className="text-purple-200/80 text-sm">Your reward for healing Earth</p>
+                  </div>
+
+                  <div className="space-y-3">
+                    <div className="bg-black/40 rounded-xl p-4">
+                      <p className="text-white font-bold text-sm mb-2">How You Earn It</p>
+                      <ul className="text-xs text-gray-300 space-y-1">
+                        <li className="flex items-start gap-2">
+                          <span className="text-green-400 mt-0.5">•</span>
+                          <span>Clean up 1kg of litter = 1 $P51</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-cyan-400 mt-0.5">•</span>
+                          <span>Plus 20% bonus for being awesome</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-purple-400 mt-0.5">•</span>
+                          <span>Even tiny cleanups count (5g minimum)</span>
+                        </li>
+                      </ul>
+                    </div>
+
+                    <div className="bg-black/40 rounded-xl p-4">
+                      <p className="text-white font-bold text-sm mb-2">What You Can Do</p>
+                      <ul className="text-xs text-gray-300 space-y-1">
+                        <li className="flex items-start gap-2">
+                          <span className="text-pink-400 mt-0.5">•</span>
+                          <span>Unlock special powers in Volckano game</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-amber-400 mt-0.5">•</span>
+                          <span>Send to friends who help you clean</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-blue-400 mt-0.5">•</span>
+                          <span>Save up and watch your impact grow</span>
+                        </li>
+                      </ul>
+                    </div>
+
+                    <div className="bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-xl p-4 border border-purple-500/20">
+                      <p className="text-purple-200 text-xs text-center leading-relaxed">
+                        <strong className="text-white">Not real money</strong> - it's a fun reward system that shows how much you've helped Earth. The more you clean, the more you earn!
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           {/* START BUTTON */}
           <label className="block">
@@ -195,35 +393,41 @@ export default function Earth51() {
               className="hidden"
               id="photo-upload"
             />
-            <button
+            <motion.button
               onClick={() => document.getElementById('photo-upload').click()}
               disabled={isLoading}
-              className="w-full bg-gradient-to-r from-green-600 to-cyan-600 hover:from-green-700 hover:to-cyan-700 border-4 border-green-400 text-black py-6 text-xl font-black font-mono transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-              style={{ boxShadow: '0 0 30px rgba(34, 197, 94, 0.5)' }}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="w-full bg-gradient-to-r from-green-500 via-emerald-500 to-cyan-500 rounded-2xl py-6 text-black font-black text-xl shadow-2xl disabled:opacity-50 disabled:cursor-not-allowed relative overflow-hidden"
+              style={{ boxShadow: '0 8px 32px rgba(34, 197, 94, 0.4)' }}
             >
-              {isLoading ? (
-                <>
-                  <Loader2 className="w-6 h-6 animate-spin inline mr-2" />
-                  LOADING
-                </>
-              ) : (
-                <>
-                  <Camera className="w-6 h-6 inline mr-2" />
-                  START CLEANUP
-                </>
-              )}
-            </button>
+              <div className="absolute inset-0 bg-gradient-to-r from-green-400 to-cyan-400 opacity-0 hover:opacity-20 transition-opacity"></div>
+              <div className="relative flex items-center justify-center gap-3">
+                {isLoading ? (
+                  <>
+                    <Loader2 className="w-6 h-6 animate-spin" />
+                    <span>Loading...</span>
+                  </>
+                ) : (
+                  <>
+                    <Camera className="w-6 h-6" />
+                    <span>Start Your First Cleanup</span>
+                  </>
+                )}
+              </div>
+            </motion.button>
           </label>
 
-          {/* AI51 MESSAGE */}
+          {/* AI51 TRUST MESSAGE */}
           <motion.div
-            animate={{ y: [0, -10, 0] }}
-            transition={{ duration: 3, repeat: Infinity }}
-            className="bg-black border-2 border-cyan-500/50 rounded-lg p-4 text-center"
+            animate={{ y: [0, -4, 0] }}
+            transition={{ duration: 4, repeat: Infinity }}
+            className="bg-gradient-to-r from-cyan-900/20 to-blue-900/20 border border-cyan-500/30 rounded-2xl p-4"
           >
-            <p className="text-cyan-300 text-sm font-mono">
-              🤖 I'm watching • I trust you • Real cleanups = Real rewards ♾️
-            </p>
+            <div className="flex items-center justify-center gap-2 text-cyan-300 text-sm">
+              <AI51AtomIcon size={20} animate={false} />
+              <p className="font-medium">I'm here to help. Every cleanup counts.</p>
+            </div>
           </motion.div>
         </div>
       </div>
