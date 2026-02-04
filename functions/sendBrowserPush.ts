@@ -39,11 +39,21 @@ Deno.serve(async (req) => {
     }
 
     // Set VAPID keys for web-push
-    webpush.setVapidDetails(
-      'mailto:scott@cb51.io',
-      vapidPublicKey,
-      vapidPrivateKey
-    );
+    try {
+      webpush.setVapidDetails(
+        'mailto:scott@cb51.io',
+        vapidPublicKey,
+        vapidPrivateKey
+      );
+    } catch (e) {
+      console.error('VAPID validation error:', e.message);
+      console.error('Public key length:', vapidPublicKey?.length);
+      console.error('Private key length:', vapidPrivateKey?.length);
+      return Response.json({ 
+        error: `VAPID configuration invalid: ${e.message}`,
+        debug: { publicLength: vapidPublicKey?.length, privateLength: vapidPrivateKey?.length }
+      }, { status: 500 });
+    }
 
     // 1. Find all active subscriptions for this user
     const subscriptions = await base44.asServiceRole.entities.ScottPushSubscription.filter({
