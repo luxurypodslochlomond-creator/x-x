@@ -17,6 +17,7 @@ import CB51VoteBreakdown from '@/components/scott/CB51VoteBreakdown';
 import LiveClock from '@/components/shared/LiveClock';
 import AI51AtomIcon from '@/components/ai51/AI51AtomIcon';
 import CB51NavBio from '@/components/scott/CB51NavBio';
+import CB51EmailSettings from '@/components/scott/CB51EmailSettings';
 
 /**
  * CB51 HOME PAGE - CLEAN URL FOR WHITE LABEL
