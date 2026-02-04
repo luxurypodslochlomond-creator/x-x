@@ -8,7 +8,7 @@ import AI51CustomFrequencyGenerator from '@/components/ai51/AI51CustomFrequencyG
 import AI51FrequencyIntelligence from '@/components/ai51/AI51FrequencyIntelligence';
 import AI51FrequencyPrompts from '@/components/ai51/AI51FrequencyPrompts';
 import Chakra51Protocol from '@/components/healing/Chakra51Protocol';
-import Sciatica51Protocol from '@/components/healing/Sciatica51Protocol';
+import Sciatica51ProtocolVisual from '@/components/healing/Sciatica51ProtocolVisual';
 import { base44 } from '@/api/base44Client';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
@@ -2901,7 +2901,7 @@ export default function FrequencyChamber() {
               <span className="font-mono text-sm">All protocols</span>
             </button>
             
-            <Sciatica51Protocol 
+            <Sciatica51ProtocolVisual 
               onStartHealing={(healingConfig) => {
                 const sciaticaProtocol = {
                   ...selectedProtocol,
