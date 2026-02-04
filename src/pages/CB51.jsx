@@ -2,17 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { base44 } from '@/api/base44Client';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { Radio, ArrowLeft, Bell, AlertCircle, Calendar, Mail, DollarSign, Menu, X } from 'lucide-react';
+import { useQuery } from '@tanstack/react-query';
+import { Radio, ArrowLeft, Menu, Bell, Mail, Calendar, CheckCircle, DollarSign, ChevronRight, Upload, AlertCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
-import AI51AtomIcon from '@/components/ai51/AI51AtomIcon';
+import LiveClock from '@/components/shared/LiveClock';
 import PushNotificationManager from '@/components/scott/PushNotificationManager';
 
 export default function CB51() {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const queryClient = useQueryClient();
+  const [showMoreArtists, setShowMoreArtists] = useState(false);
 
   useEffect(() => {
     document.title = 'CB51 • Artist Management';
@@ -55,105 +55,158 @@ export default function CB51() {
     );
   }
 
+  const displayedArtists = showMoreArtists ? artists : artists.slice(0, 3);
+
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-black text-white flex flex-col">
       {/* HEADER */}
-      <div className="sticky top-0 z-40 bg-cyan-950/40 backdrop-blur-xl border-b border-cyan-500/30 px-4 py-3">
+      <div className="sticky top-0 z-40 bg-cyan-950/60 backdrop-blur-xl border-b border-cyan-500/30 px-4 py-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Radio className="w-6 h-6 text-cyan-400" />
             <span className="text-lg font-black text-cyan-400 font-mono">CB51</span>
           </div>
-          <button onClick={() => navigate(-1)} className="p-2 hover:bg-cyan-500/10 rounded transition-colors">
-            <ArrowLeft className="w-5 h-5 text-cyan-400" />
-          </button>
+          <div className="flex items-center gap-2">
+            <button onClick={() => navigate(-1)} className="p-2 hover:bg-cyan-500/10 rounded transition-colors">
+              <ArrowLeft className="w-5 h-5 text-cyan-400" />
+            </button>
+            <button className="p-2 hover:bg-cyan-500/10 rounded transition-colors">
+              <Menu className="w-5 h-5 text-cyan-400" />
+            </button>
+          </div>
         </div>
       </div>
 
-      <div className="p-4 pb-20">
-        <h1 className="text-4xl font-black text-white font-mono mb-6">CB51</h1>
-
-        {pendingCount > 0 && (
-          <motion.button
-            onClick={() => navigate(createPageUrl('CB51NotificationInbox'))}
-            className="w-full mb-6 px-6 py-4 bg-red-600/20 hover:bg-red-600/30 border-2 border-red-500 text-red-400 rounded-lg font-black text-sm font-mono flex items-center justify-center gap-2 transition-all"
-            whileHover={{ scale: 1.02 }}
-          >
-            <Bell className="w-5 h-5" />
-            {pendingCount} PENDING APPROVALS
-          </motion.button>
+      {/* CONTENT */}
+      <div className="flex-1 overflow-y-auto p-4 pb-20 space-y-4">
+        
+        {/* NOTIFICATION BELL */}
+        {(pendingCount > 0 || awaitingCount > 0) && (
+          <div className="flex justify-center">
+            <Bell className="w-6 h-6 text-cyan-400 animate-bounce" />
+          </div>
         )}
 
+        {/* AI51 SCAN BUTTON */}
+        <motion.button
+          onClick={() => navigate(createPageUrl('CB51'))}
+          whileHover={{ scale: 1.02 }}
+          className="w-full px-6 py-4 bg-black border-2 border-cyan-500/50 hover:border-cyan-500 text-cyan-400 rounded-lg font-black text-sm font-mono flex items-center justify-center gap-2 transition-all"
+        >
+          <span className="text-xl">·</span>
+          AI51 SCAN
+        </motion.button>
+
+        {/* AWAITING BAND VOTES */}
         {awaitingCount > 0 && (
           <motion.button
             onClick={() => navigate(createPageUrl('ScottArtistHome'))}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="w-full mb-6 px-6 py-4 bg-green-900/30 hover:bg-green-900/40 border-2 border-green-500 text-green-400 rounded-lg font-black text-sm font-mono flex items-center justify-center gap-2 transition-all"
+            whileHover={{ scale: 1.02 }}
+            className="w-full px-6 py-4 bg-green-900/40 border-2 border-green-500 text-green-400 rounded-lg font-black text-sm font-mono flex items-center justify-between transition-all"
           >
-            <span className="text-xl">👤</span>
-            {awaitingCount} gigs awaiting band votes
+            <span>👤 AWAITING BAND VOTES</span>
+            <span className="text-sm font-mono">{awaitingCount} offers sent to band</span>
+            <ChevronRight className="w-4 h-4 text-green-400 ml-auto" />
           </motion.button>
         )}
 
-        <PushNotificationManager />
+        {/* PENDING APPROVALS */}
+        <motion.div
+          className="w-full px-6 py-4 bg-black border-2 border-cyan-500/30 text-cyan-400 rounded-lg font-mono text-sm"
+        >
+          {pendingCount > 0 ? (
+            <>
+              <p className="font-black mb-2">⚠ PENDING APPROVALS</p>
+              <p className="text-cyan-300 text-xs">{pendingCount} gigs awaiting your decision</p>
+            </>
+          ) : (
+            <>
+              <p className="font-black mb-2">ℹ PENDING APPROVALS</p>
+              <p className="text-cyan-300 text-xs">No pending gigs – upload a PDF above to scan ↑</p>
+            </>
+          )}
+        </motion.div>
 
-        <div className="grid gap-4 max-w-2xl mt-8">
-        {artists.length === 0 ? (
-          <div className="text-center py-12">
-            <p className="text-gray-500 font-mono mb-4">No artists yet</p>
-            <Link
-              to={createPageUrl('ScottAddArtist')}
-              className="inline-block bg-cyan-600 hover:bg-cyan-700 text-black font-bold px-6 py-3 rounded-lg transition-all"
-            >
-              + ADD ARTIST
-            </Link>
-          </div>
-        ) : (
-          artists.map(artist => {
-            const artistOffers = offers.filter(o => o.artist_id === artist.id);
-            const pending = artistOffers.filter(o => o.status === 'pending_manager_review').length;
-
-            return (
-              <motion.div
-                key={artist.id}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                onClick={() => navigate(createPageUrl('ScottArtistHome') + `?id=${artist.id}`)}
-                className="bg-black border border-cyan-500/30 hover:border-cyan-500 rounded-lg p-6 cursor-pointer transition-all"
-              >
-                <div className="flex items-start justify-between mb-4">
-                  <div>
-                    <h2 className="text-xl font-black text-white">{artist.name}</h2>
-                    <p className="text-cyan-400 text-sm font-mono mt-1">{artistOffers.length} gigs</p>
-                  </div>
-                  {pending > 0 && (
-                    <span className="bg-red-600 text-white text-xs font-black px-3 py-1 rounded-full">
-                      {pending} TO REVIEW
-                    </span>
-                  )}
-                </div>
-                <p className="text-gray-400 text-sm">{artist.genres?.join(', ') || 'No genres'}</p>
-              </motion.div>
-            );
-          })
-        )}
-        </div>
-
+        {/* ARTISTS CAROUSEL */}
         {artists.length > 0 && (
-          <div className="mt-8 text-center">
-            <Link
-              to={createPageUrl('ScottAddArtist')}
-              className="text-cyan-400 hover:text-cyan-300 font-mono text-sm font-bold"
-            >
-              + ADD ANOTHER
-            </Link>
+          <div className="space-y-4">
+            <div className="flex gap-3 overflow-x-auto pb-2">
+              {displayedArtists.map((artist) => (
+                <motion.button
+                  key={artist.id}
+                  onClick={() => navigate(createPageUrl('ScottArtistHome') + `?id=${artist.id}`)}
+                  whileHover={{ scale: 1.05 }}
+                  className="relative flex-shrink-0 w-20 h-20 rounded-full bg-cyan-400 text-black font-black text-xl font-mono flex items-center justify-center transition-all hover:shadow-lg hover:shadow-cyan-500/50"
+                >
+                  {artist.name.charAt(0).toUpperCase()}
+                  <div className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-cyan-200 border-2 border-cyan-400 text-black text-[10px] font-black flex items-center justify-center">
+                    ⚙
+                  </div>
+                </motion.button>
+              ))}
+            </div>
+            
+            {artists.length > 3 && (
+              <button
+                onClick={() => setShowMoreArtists(!showMoreArtists)}
+                className="w-full text-center text-cyan-400 hover:text-cyan-300 font-mono text-sm font-bold py-2"
+              >
+                {showMoreArtists ? '- Show Less' : '+ Show More Artists'}
+              </button>
+            )}
           </div>
         )}
 
-        <div className="mt-12 pt-8 border-t border-gray-800 text-center">
-          <p className="text-gray-500 font-mono text-xs">CB51 • AI Co-Manager ♾️❤️</p>
+        {/* QUICK ACTIONS */}
+        <div className="space-y-2 pt-4 border-t border-cyan-500/20">
+          <Link to={createPageUrl('CB51')}>
+            <motion.button whileHover={{ x: 4 }} className="w-full px-4 py-3 bg-black border border-cyan-500/30 hover:border-cyan-500 text-cyan-400 rounded-lg font-mono text-sm flex items-center justify-between transition-all">
+              <div className="flex items-center gap-2">
+                <Mail className="w-4 h-4" />
+                <span>EMAIL</span>
+              </div>
+              <ChevronRight className="w-4 h-4" />
+            </motion.button>
+          </Link>
+
+          <Link to={createPageUrl('ScottCalendarView')}>
+            <motion.button whileHover={{ x: 4 }} className="w-full px-4 py-3 bg-black border border-cyan-500/30 hover:border-cyan-500 text-cyan-400 rounded-lg font-mono text-sm flex items-center justify-between transition-all">
+              <div className="flex items-center gap-2">
+                <Calendar className="w-4 h-4" />
+                <span>CALENDAR</span>
+              </div>
+              <ChevronRight className="w-4 h-4" />
+            </motion.button>
+          </Link>
+
+          <Link to={createPageUrl('ScottToDo')}>
+            <motion.button whileHover={{ x: 4 }} className="w-full px-4 py-3 bg-black border border-cyan-500/30 hover:border-cyan-500 text-cyan-400 rounded-lg font-mono text-sm flex items-center justify-between transition-all">
+              <div className="flex items-center gap-2">
+                <CheckCircle className="w-4 h-4" />
+                <span>TASKS</span>
+              </div>
+              <ChevronRight className="w-4 h-4" />
+            </motion.button>
+          </Link>
+
+          <Link to={createPageUrl('ScottFinanceAdmin')}>
+            <motion.button whileHover={{ x: 4 }} className="w-full px-4 py-3 bg-black border border-cyan-500/30 hover:border-cyan-500 text-cyan-400 rounded-lg font-mono text-sm flex items-center justify-between transition-all">
+              <div className="flex items-center gap-2">
+                <DollarSign className="w-4 h-4" />
+                <span>FINANCE</span>
+              </div>
+              <ChevronRight className="w-4 h-4" />
+            </motion.button>
+          </Link>
         </div>
+      </div>
+
+      {/* FOOTER CLOCK */}
+      <div className="border-t border-cyan-500/20 bg-black/60 backdrop-blur-sm p-4 text-center space-y-3">
+        <div className="border-2 border-cyan-500 rounded p-3 font-mono font-black text-cyan-400">
+          <LiveClock />
+        </div>
+        <p className="text-gray-600 text-xs font-mono">Built on Base44</p>
       </div>
     </div>
   );
