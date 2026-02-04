@@ -10,6 +10,7 @@ import P51Symbol from '@/components/shared/P51Symbol';
 import PrivacyFirstEngine from '@/components/earth51/PrivacyFirstEngine';
 import Earth518BitIcon from '@/components/earth51/Earth518BitIcon';
 import LiveClock from '@/components/shared/LiveClock';
+import { GameIcon, SafeIcon, EarnIcon, HealIcon, CameraIcon } from '@/components/earth51/Earth51PixelButtons';
 
 /**
  * EARTH51 - KIDS EDITION
@@ -214,24 +215,23 @@ export default function Earth51() {
           </div>
         </div>
 
-        <div className="max-w-xl mx-auto pt-16 p-2 pb-20 space-y-2">
+        <div className="max-w-xl mx-auto pt-16 p-2 pb-16 space-y-1.5">
           
           {/* HERO - PIXEL ART CAMERA */}
           <motion.div
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ delay: 0.1 }}
-            className="bg-cyan-600 border-4 border-cyan-500 p-3 text-center"
+            className="bg-green-600 border-4 border-green-500 p-2 text-center"
             style={{ boxShadow: '4px 4px 0px #000', imageRendering: 'pixelated' }}
           >
-            {/* PIXEL CAMERA */}
-            <svg width="48" height="48" viewBox="0 0 32 32" className="mx-auto mb-2" style={{ imageRendering: 'pixelated' }}>
-              <rect x="4" y="6" width="24" height="18" fill="none" stroke="#000" strokeWidth="2"/>
-              <circle cx="16" cy="15" r="6" fill="none" stroke="#000" strokeWidth="2"/>
-              <rect x="26" y="8" width="3" height="3" fill="#000"/>
-            </svg>
-            <p className="text-white font-black font-mono text-xs leading-tight">📸 TAKE PHOTO</p>
-            <p className="text-white/80 font-mono text-[8px]">AI verifies • You earn</p>
+            <div className="flex items-center justify-center gap-2">
+              <CameraIcon />
+              <div className="text-left">
+                <p className="text-white font-black font-mono text-xs leading-tight">TAKE PHOTO</p>
+                <p className="text-white/80 font-mono text-[7px]">AI verifies</p>
+              </div>
+            </div>
           </motion.div>
   
           {/* FLOW STEPS - MINIMAL & CLEAR */}
@@ -273,65 +273,59 @@ export default function Earth51() {
             <motion.button
               onClick={() => document.getElementById('photo-upload-main').click()}
               disabled={isLoading}
-              whileHover={{ scale: 1.08 }}
-              whileTap={{ scale: 0.92 }}
-              className="w-full bg-green-500 border-4 border-green-400 py-5 disabled:opacity-60 flex items-center justify-center gap-3"
-              style={{ boxShadow: '5px 5px 0px #000, 0 0 15px rgba(34, 197, 94, 0.5)', imageRendering: 'pixelated' }}
+              whileHover={{ scale: 1.06 }}
+              whileTap={{ scale: 0.94 }}
+              className="w-full bg-green-500 border-4 border-green-400 py-4 disabled:opacity-60 flex items-center justify-center gap-2 font-black"
+              style={{ boxShadow: '4px 4px 0px #000', imageRendering: 'pixelated' }}
             >
-              {/* PIXEL CAMERA ICON */}
-              <svg width="28" height="28" viewBox="0 0 24 24" style={{ imageRendering: 'pixelated' }}>
-                <rect x="3" y="5" width="18" height="14" fill="none" stroke="#000" strokeWidth="2"/>
-                <circle cx="12" cy="12" r="4" fill="none" stroke="#000" strokeWidth="2"/>
-                <rect x="19" y="7" width="2" height="2" fill="#000"/>
-              </svg>
-              <p className="text-black font-black font-mono text-sm leading-none">TAKE</p>
-              <p className="text-black font-black font-mono text-sm leading-none">PHOTO</p>
+              <CameraIcon />
+              <span className="text-black font-mono text-sm leading-none">GO</span>
             </motion.button>
           </label>
 
           {/* ACTION GRID - 2x2 PIXEL BUTTONS */}
-          <div className="grid grid-cols-2 gap-1.5 mt-2">
+          <div className="grid grid-cols-2 gap-1 mt-1">
             <motion.button
-              whileHover={{ scale: 1.08 }}
-              whileTap={{ scale: 0.9 }}
+              whileHover={{ scale: 1.06 }}
+              whileTap={{ scale: 0.94 }}
               onClick={() => navigate(createPageUrl('Volckano'))}
-              className="bg-orange-500 border-3 border-orange-400 py-3 flex flex-col items-center justify-center gap-1"
+              className="bg-orange-600 border-3 border-orange-500 py-2 flex flex-col items-center justify-center gap-0.5"
               style={{ boxShadow: '3px 3px 0px #000', imageRendering: 'pixelated' }}
             >
-              <p className="text-black font-black font-mono text-lg leading-none">🌋</p>
+              <GameIcon />
               <p className="text-black font-black font-mono text-[7px]">GAME</p>
             </motion.button>
 
             <motion.button
-              whileHover={{ scale: 1.08 }}
-              whileTap={{ scale: 0.9 }}
+              whileHover={{ scale: 1.06 }}
+              whileTap={{ scale: 0.94 }}
               onClick={() => setShowParentInfo(!showParentInfo)}
-              className="bg-blue-500 border-3 border-blue-400 py-3 flex flex-col items-center justify-center gap-1"
+              className="bg-blue-600 border-3 border-blue-500 py-2 flex flex-col items-center justify-center gap-0.5"
               style={{ boxShadow: '3px 3px 0px #000', imageRendering: 'pixelated' }}
             >
-              <p className="text-black font-black font-mono text-lg leading-none">🛡️</p>
+              <SafeIcon />
               <p className="text-black font-black font-mono text-[7px]">SAFE?</p>
             </motion.button>
 
             <motion.button
-              whileHover={{ scale: 1.08 }}
-              whileTap={{ scale: 0.9 }}
+              whileHover={{ scale: 1.06 }}
+              whileTap={{ scale: 0.94 }}
               onClick={() => setShowP51Explainer(!showP51Explainer)}
-              className="bg-purple-500 border-3 border-purple-400 py-3 flex flex-col items-center justify-center gap-1"
+              className="bg-purple-600 border-3 border-purple-500 py-2 flex flex-col items-center justify-center gap-0.5"
               style={{ boxShadow: '3px 3px 0px #000', imageRendering: 'pixelated' }}
             >
-              <p className="text-black font-black font-mono text-lg leading-none">💰</p>
+              <EarnIcon />
               <p className="text-black font-black font-mono text-[7px]">EARN</p>
             </motion.button>
 
             <motion.button
-              whileHover={{ scale: 1.08 }}
-              whileTap={{ scale: 0.9 }}
+              whileHover={{ scale: 1.06 }}
+              whileTap={{ scale: 0.94 }}
               onClick={() => setShowResonance(!showResonance)}
-              className="bg-pink-500 border-3 border-pink-400 py-3 flex flex-col items-center justify-center gap-1"
+              className="bg-pink-600 border-3 border-pink-500 py-2 flex flex-col items-center justify-center gap-0.5"
               style={{ boxShadow: '3px 3px 0px #000', imageRendering: 'pixelated' }}
             >
-              <p className="text-black font-black font-mono text-lg leading-none">🎵</p>
+              <HealIcon />
               <p className="text-black font-black font-mono text-[7px]">HEAL</p>
             </motion.button>
           </div>
@@ -345,9 +339,9 @@ export default function Earth51() {
                 exit={{ height: 0, opacity: 0 }}
                 className="overflow-hidden"
               >
-                <div className="bg-blue-500 border-3 border-blue-400 p-2 mt-1" style={{ boxShadow: '3px 3px 0px #000' }}>
-                  <p className="text-black font-black font-mono text-[8px] mb-1">SAFE ✓ NO DATA ✓ COPPA ✓</p>
-                  <p className="text-black font-mono text-[7px]">Zero tracking. AI checks photos. Teaches responsibility.</p>
+                <div className="bg-blue-600 border-3 border-blue-500 p-2 mt-1" style={{ boxShadow: '3px 3px 0px #000' }}>
+                  <p className="text-black font-black font-mono text-[7px] mb-1">SAFE ✓ NO DATA ✓ COPPA ✓</p>
+                  <p className="text-black font-mono text-[6px]">Zero tracking. AI checks photos. Teaches responsibility.</p>
                 </div>
               </motion.div>
             )}
@@ -361,10 +355,9 @@ export default function Earth51() {
                 exit={{ height: 0, opacity: 0 }}
                 className="overflow-hidden"
               >
-                <div className="bg-purple-500 border-3 border-purple-400 p-2 mt-1" style={{ boxShadow: '3px 3px 0px #000' }}>
-                  <p className="text-black font-black font-mono text-[8px] mb-1">$P51 = PHOTO51</p>
-                  <p className="text-black font-mono text-[7px]">Named after Rosalind Franklin's DNA photo. Real reward for real impact.</p>
-                  <p className="text-black font-mono text-[7px] mt-1">1kg litter = 10 $P51. Use in Volckano to unlock levels!</p>
+                <div className="bg-purple-600 border-3 border-purple-500 p-2 mt-1" style={{ boxShadow: '3px 3px 0px #000' }}>
+                  <p className="text-black font-black font-mono text-[7px] mb-1">$P51 = PHOTO51</p>
+                  <p className="text-black font-mono text-[6px]">Named after Rosalind Franklin. 1kg = 10 $P51. Unlock Volckano!</p>
                 </div>
               </motion.div>
             )}
@@ -378,9 +371,9 @@ export default function Earth51() {
                 exit={{ height: 0, opacity: 0 }}
                 className="overflow-hidden"
               >
-                <div className="bg-pink-500 border-3 border-pink-400 p-2 mt-1" style={{ boxShadow: '3px 3px 0px #000' }}>
-                  <p className="text-black font-black font-mono text-[8px] mb-1">HEALING FREQUENCIES</p>
-                  <p className="text-black font-mono text-[7px]">432Hz & 528Hz match your body's natural rhythm. We just listen to what's already there. ♾️❤️</p>
+                <div className="bg-pink-600 border-3 border-pink-500 p-2 mt-1" style={{ boxShadow: '3px 3px 0px #000' }}>
+                  <p className="text-black font-black font-mono text-[7px] mb-1">FREQUENCIES</p>
+                  <p className="text-black font-mono text-[6px]">432Hz & 528Hz. Your body's natural rhythm. ♾️❤️</p>
                 </div>
               </motion.div>
             )}
