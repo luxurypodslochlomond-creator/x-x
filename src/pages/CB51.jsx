@@ -138,7 +138,7 @@ export default function CB51() {
             );
           })
         )}
-      </div>
+        </div>
 
         {artists.length > 0 && (
           <div className="mt-8 text-center">
