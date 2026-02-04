@@ -482,7 +482,7 @@ const LayoutInner = ({ children, currentPageName }) => {
         )}
 
         {/* MOBILE HEADER */}
-        {currentPageName !== 'AI51' && (
+        {currentPageName !== 'AI51' && currentPageName !== 'Earth51' && (
         <header className={`lg:hidden fixed ${isOffline ? 'top-10' : 'top-0'} left-0 right-0 z-[60] bg-[#0a0f1a]/95 backdrop-blur-xl border-b border-cyan-500/30`}>
           <div className="flex items-center justify-between p-4">
             {(currentPageName.startsWith('Scott') || currentPageName.startsWith('CB51')) ? (
@@ -596,7 +596,7 @@ const LayoutInner = ({ children, currentPageName }) => {
                   )}
 
         {/* DESKTOP SIDEBAR */}
-        {currentPageName !== 'AI51' && (
+        {currentPageName !== 'AI51' && currentPageName !== 'Earth51' && (
         <aside className={`hidden lg:block fixed left-0 ${isOffline ? 'top-10' : 'top-0'} w-80 h-screen border-r border-cyan-500/30 bg-[#0a0f1a]/95 overflow-y-auto z-50`}>
           <div className="p-6 border-b border-cyan-500/30">
             <Link to={createPageUrl(currentPageName.startsWith('Scott') || currentPageName.startsWith('CB51') ? "CB51" : "Welcome")} className="flex items-center gap-3 mb-4">
@@ -679,7 +679,7 @@ const LayoutInner = ({ children, currentPageName }) => {
                             </aside>
                             )}
 
-        <main className={`${currentPageName !== 'AI51' ? 'lg:ml-80' : ''} ${currentPageName !== 'AI51' ? (isOffline ? 'pt-[122px] lg:pt-10' : 'pt-[72px] lg:pt-0') : ''} min-h-screen`} style={{ willChange: 'contents' }}>
+        <main className={`${currentPageName !== 'AI51' && currentPageName !== 'Earth51' ? 'lg:ml-80' : ''} ${currentPageName !== 'AI51' && currentPageName !== 'Earth51' ? (isOffline ? 'pt-[122px] lg:pt-10' : 'pt-[72px] lg:pt-0') : ''} min-h-screen`} style={{ willChange: 'contents' }}>
           <AnimatePresence mode="wait">
             <motion.div
               key={location.pathname}
@@ -688,10 +688,10 @@ const LayoutInner = ({ children, currentPageName }) => {
               transition={{ duration: 0.1 }}
             >
               {children}
-            </motion.div>
-          </AnimatePresence>
-          {currentPageName !== 'AI51' && (
-            <footer className="border-t border-cyan-500/20 bg-[#0a0f1a]/60">
+              </motion.div>
+              </AnimatePresence>
+              {currentPageName !== 'AI51' && currentPageName !== 'Earth51' && (
+              <footer className="border-t border-cyan-500/20 bg-[#0a0f1a]/60">
               <LiveClock />
               <p className="text-xs text-gray-600 text-center pb-4">Built on <a href="https://base44.com" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-cyan-400">Base44</a></p>
             </footer>

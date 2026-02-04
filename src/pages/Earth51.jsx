@@ -176,7 +176,7 @@ export default function Earth51() {
                     earth.love
                   </h1>
                   <p className="text-xs text-green-200/80 leading-relaxed">
-                    <strong className="text-cyan-300">Hey friend!</strong> I'm AI51. Let's clean Earth and unlock Volckano together
+                    <strong className="text-cyan-300">Hey friend!</strong> I'm AI51. Clean Earth → earn $PHOTO51 → power up in Volckano 🌋
                   </p>
                 </div>
               </div>
@@ -209,20 +209,25 @@ export default function Earth51() {
               </div>
             </motion.div>
             
-            <h1 className="text-6xl font-black bg-gradient-to-r from-green-400 via-emerald-300 to-cyan-400 bg-clip-text text-transparent" 
-                style={{ textShadow: '0 0 40px rgba(34, 197, 94, 0.3)' }}>
-              earth.love
-            </h1>
-            
-            <div className="flex items-center justify-center gap-2 text-cyan-300">
-              <Heart className="w-4 h-4 text-pink-400" />
-              <p className="text-base font-bold">Hey friend! I'm AI51</p>
-              <Heart className="w-4 h-4 text-pink-400" />
+            <motion.div
+              animate={{ scale: [1, 1.05, 1] }}
+              transition={{ duration: 3, repeat: Infinity }}
+            >
+              <h1 className="text-6xl md:text-7xl font-black bg-gradient-to-r from-green-400 via-emerald-300 to-cyan-400 bg-clip-text text-transparent" 
+                  style={{ textShadow: '0 0 40px rgba(34, 197, 94, 0.3)' }}>
+                earth.love
+              </h1>
+            </motion.div>
+
+            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-cyan-900/40 to-green-900/40 border-2 border-cyan-500/50 rounded-full px-5 py-2">
+              <motion.div animate={{ rotate: [0, 360] }} transition={{ duration: 3, repeat: Infinity }}>
+                <Heart className="w-5 h-5 text-pink-400" />
+              </motion.div>
+              <p className="text-base font-black text-cyan-300">Clean → Earn → Power Up</p>
+              <motion.div animate={{ rotate: [0, 360] }} transition={{ duration: 3, repeat: Infinity }}>
+                <Sparkles className="w-5 h-5 text-green-400" />
+              </motion.div>
             </div>
-            
-            <p className="text-sm text-gray-400 max-w-sm mx-auto leading-relaxed">
-              Clean up litter, earn $PHOTO51, unlock powers in Volckano. Every piece counts.
-            </p>
           </motion.div>
 
           {/* PARENT SAFETY BADGE */}
