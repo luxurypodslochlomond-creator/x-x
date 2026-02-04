@@ -826,9 +826,9 @@ export default function CB51() {
                                      <Link to={createPageUrl('ScottAddArtist')}>
                                          <motion.div
                                              whileTap={{ scale: 0.95 }}
-                                             className="w-24 h-24 border-2 border-dashed border-gray-600 rounded-full flex items-center justify-center cursor-pointer hover:border-cyan-400 transition-colors"
+                                             className="w-16 h-16 border-2 border-dashed border-cyan-500/50 hover:border-cyan-500 rounded-full flex items-center justify-center cursor-pointer transition-colors"
                                          >
-                                             <Plus className="w-8 h-8 text-cyan-400" />
+                                             <Plus className="w-6 h-6 text-cyan-400" />
                                          </motion.div>
                                      </Link>
                                  )}
