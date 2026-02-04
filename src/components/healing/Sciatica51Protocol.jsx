@@ -78,11 +78,22 @@ export default function Sciatica51Protocol({ onStartHealing }) {
             </div>
 
             {/* HONEST DISCLAIMER */}
-            <div className="bg-red-900/20 border-2 border-red-500/50 p-4 rounded">
-              <p className="text-red-400 font-black text-xs mb-2">HONEST TALK:</p>
+            <div className="bg-red-900/20 border-2 border-red-500/50 p-4 rounded space-y-2">
+              <p className="text-red-400 font-black text-xs">HONEST TALK:</p>
               <p className="text-white text-xs font-mono">
-                Frequencies ease PAIN & INFLAMMATION. Movement (stretching) FIXES the root cause. 
-                This protocol does BOTH—but you have to do the stretch. Frequencies won't decompress a muscle for you.
+                Frequencies can calm the nervous system so anxiety doesn't amplify pain.
+              </p>
+              <p className="text-white text-xs font-mono">
+                But that's NOT permission to push into more stretch.
+              </p>
+              <p className="text-white text-xs font-mono">
+                You stay within what the nerve can tolerate WHILE calm.
+              </p>
+              <p className="text-white text-xs font-mono">
+                Only graded movement over weeks builds mechanical tolerance.
+              </p>
+              <p className="text-yellow-400 font-black text-xs font-mono mt-2">
+                Frequencies support the work — they don't replace it.
               </p>
             </div>
 
