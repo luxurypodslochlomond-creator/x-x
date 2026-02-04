@@ -26,29 +26,22 @@ Deno.serve(async (req) => {
       return Response.json({ success: true, sent: 0 });
     }
 
-    // Send push to all manager's devices
-    const notifications = await Promise.all(
-      subscriptions.map(async (sub) => {
-        const subscription = JSON.parse(sub.subscription);
-        
-        const payload = JSON.stringify({
-          title: '🎸 New Gig Offer!',
-          body: `${venue} • ${new Date(date).toLocaleDateString()}`,
-          data: {
-            url: `/ScottGigOffers`,
-            offerId
-          },
-          icon: '/icon-192x192.png',
-          badge: '/badge-72x72.png'
-        });
-
-        // TODO: Send via Web Push API
-        // For now, just log
-        console.log('Would send:', payload);
-        
-        return true;
-      })
-    );
+    // Get manager email (assuming user is manager)
+    const managerEmail = user.email;
+    
+    // Create ScottNotification - sendBrowserPush automation will send it
+    await base44.asServiceRole.entities.ScottNotification.create({
+      recipient_email: managerEmail,
+      notification_type: 'new_gig',
+      title: '🎸 New Gig Offer!',
+      message: `${venue} • ${new Date(date).toLocaleDateString()}`,
+      action_url: `/ScottGigOffers`,
+      gig_offer_id: offerId,
+      urgency: 'normal',
+      read: false
+    });
+    
+    const notifications = [true];
     
     return Response.json({ 
       success: true,

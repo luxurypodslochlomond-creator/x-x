@@ -41,28 +41,19 @@ Deno.serve(async (req) => {
 
     const urgencyEmoji = urgency === 'very_urgent' ? '🔥' : urgency === 'urgent' ? '⚡' : '🎸';
 
-    // Send push to all band members
+    // Create ScottNotification records - sendBrowserPush automation will send them
     const notifications = await Promise.all(
-      subscriptions.map(async (sub) => {
-        const subscription = JSON.parse(sub.subscription);
-        
-        const payload = JSON.stringify({
+      teamMembers.map(async (member) => {
+        return await base44.asServiceRole.entities.ScottNotification.create({
+          recipient_email: member.email,
+          notification_type: 'gig_vote',
           title: `${urgencyEmoji} Vote on Gig Offer`,
-          body: `${venue} • ${new Date(date).toLocaleDateString()}`,
-          data: {
-            url: `/ScottBandVote?offer=${offerId}`,
-            offerId,
-            urgency
-          },
-          icon: '/icon-192x192.png',
-          badge: '/badge-72x72.png',
-          requireInteraction: urgency !== 'normal'
+          message: `${venue} • ${new Date(date).toLocaleDateString()}`,
+          action_url: `/ScottBandVote?offer=${offerId}`,
+          gig_offer_id: offerId,
+          urgency: urgency || 'normal',
+          read: false
         });
-
-        // TODO: Send via Web Push API
-        console.log('Would send:', payload);
-        
-        return true;
       })
     );
     
