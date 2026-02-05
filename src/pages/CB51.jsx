@@ -61,27 +61,8 @@ export default function CB51() {
   const displayedArtists = showMoreArtists ? artists : artists.slice(0, 3);
 
   return (
-    <div className="min-h-screen bg-black text-white flex flex-col">
-      {/* HEADER */}
-      <div className="sticky top-0 z-40 bg-cyan-950/60 backdrop-blur-xl border-b border-cyan-500/30 px-4 py-3">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Radio className="w-6 h-6 text-cyan-400" />
-            <span className="text-lg font-black text-cyan-400 font-mono">CB51</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <button onClick={() => navigate(-1)} className="p-2 hover:bg-cyan-500/10 rounded transition-colors">
-              <ArrowLeft className="w-5 h-5 text-cyan-400" />
-            </button>
-            <button className="p-2 hover:bg-cyan-500/10 rounded transition-colors">
-              <Menu className="w-5 h-5 text-cyan-400" />
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* CONTENT */}
-      <div className="flex-1 overflow-y-auto p-4 pb-20 space-y-4">
+    <div className="min-h-screen bg-black text-white">
+      <div className="max-w-2xl mx-auto p-4 pb-24 space-y-4">
         
         {/* LIVE NOTIFICATION CENTER */}
         <CB51NotificationCenter key={testRole} userEmail={user?.email} userRole={testRole} />
@@ -167,15 +148,7 @@ export default function CB51() {
           </Link>
         </div>
       </div>
-
-      {/* FOOTER CLOCK */}
-      <div className="border-t border-cyan-500/20 bg-black/60 backdrop-blur-sm p-4 text-center space-y-3">
-        <div className="border-2 border-cyan-500 rounded p-3 font-mono font-black text-cyan-400">
-          <LiveClock />
-        </div>
-        <p className="text-gray-600 text-xs font-mono">Built on Base44</p>
-      </div>
-
+      
       {/* TEST ROLE SWITCHER */}
       {user && <CB51TestRoleSwitcher currentRole={testRole} onRoleChange={setTestRole} />}
     </div>
