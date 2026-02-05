@@ -104,6 +104,9 @@ export default function CB51NotificationCenter({ userEmail, userRole = 'manager'
   const bandVoteNoMutation = useMutation({
     mutationFn: async (offer) => {
       const user = await base44.auth.me();
+      if (!reason.trim()) {
+        throw new Error('Please provide a reason');
+      }
       await base44.entities.ScottBandResponse.create({
         gig_offer_id: offer.id,
         band_member_email: user.email,
