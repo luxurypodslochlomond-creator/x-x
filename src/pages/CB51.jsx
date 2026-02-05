@@ -82,7 +82,7 @@ export default function CB51() {
       <div className="flex-1 overflow-y-auto p-4 pb-20 space-y-4">
         
         {/* LIVE NOTIFICATION CENTER */}
-        <CB51NotificationCenter userEmail={user?.email} userRole="manager" />
+        <CB51NotificationCenter key={Date.now()} userEmail={user?.email} userRole="manager" />
 
         {/* NOTIFICATION BELL */}
         {(pendingCount > 0 || awaitingCount > 0) && (
