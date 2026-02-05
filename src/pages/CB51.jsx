@@ -7,6 +7,7 @@ import { Calendar, CheckCircle, DollarSign, Plus, Sparkles, Mic2, Music, Clipboa
 import { motion, AnimatePresence } from 'framer-motion';
 import CB51NotificationCenter from '@/components/scott/CB51NotificationCenter';
 import CB51TestRoleSwitcher from '@/components/scott/CB51TestRoleSwitcher';
+import CB51ErrorBoundary from '@/components/scott/CB51ErrorBoundary';
 
 export default function CB51() {
   const navigate = useNavigate();
@@ -47,7 +48,7 @@ export default function CB51() {
   }
 
   return (
-    <>
+    <CB51ErrorBoundary>
       <div className="min-h-screen bg-black text-white p-3 pb-20">
         
         {/* NOTIFICATIONS - TOP PRIORITY */}
@@ -92,11 +93,13 @@ export default function CB51() {
               orange: { border: 'border-orange-500', bg: 'bg-orange-500' }
             };
             const c = colorMap[color];
+            const firstArtistId = artists.length > 0 ? artists[0].id : null;
+            const pageUrl = firstArtistId ? `${page}?id=${firstArtistId}` : page;
             
             return (
               <motion.button
                 key={page}
-                onClick={() => navigate(createPageUrl(page))}
+                onClick={() => navigate(createPageUrl(pageUrl))}
                 whileTap={{ scale: 0.96 }}
                 className={`bg-black border-2 ${c.border} rounded-lg p-2 text-center`}
               >
@@ -140,6 +143,6 @@ export default function CB51() {
       </div>
       
       {user && <CB51TestRoleSwitcher currentRole={testRole} onRoleChange={setTestRole} />}
-    </>
+    </CB51ErrorBoundary>
   );
 }
