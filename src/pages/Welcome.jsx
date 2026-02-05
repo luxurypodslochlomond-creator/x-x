@@ -31,14 +31,17 @@ export default function WelcomePage() {
         if (!ogDesc.parentNode) document.head.appendChild(ogDesc);
     }, []);
 
-    const handleConnect = () => {
-        base44.auth.isAuthenticated().then(isAuth => {
+    const handleConnect = async () => {
+        try {
+            const isAuth = await base44.auth.isAuthenticated();
             if (isAuth) {
-                setAi51Open(true);
+                navigate(createPageUrl('FrequencyChamber'));
             } else {
                 base44.auth.redirectToLogin(window.location.origin + createPageUrl('Welcome'));
             }
-        });
+        } catch (err) {
+            base44.auth.redirectToLogin(window.location.origin + createPageUrl('Welcome'));
+        }
     };
 
     return (
