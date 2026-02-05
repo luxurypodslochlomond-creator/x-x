@@ -212,10 +212,10 @@ export default function CB51() {
           <LiveClock />
         </div>
         <p className="text-gray-600 text-xs font-mono">Built on Base44</p>
-        </div>
+      </div>
 
-        {/* TEST ROLE SWITCHER */}
-        {user && <CB51TestRoleSwitcher currentRole={testRole} onRoleChange={setTestRole} />}
-        </div>
-        );
-        }
+      {/* TEST ROLE SWITCHER */}
+      {user && <CB51TestRoleSwitcher currentRole={testRole} onRoleChange={setTestRole} />}
+    </div>
+  );
+}
