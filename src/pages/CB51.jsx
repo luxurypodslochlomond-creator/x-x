@@ -139,12 +139,14 @@ export default function CB51() {
               {/* MAIN CONTENT */}
               <div className="px-4 space-y-4 pt-4">
 
-                {/* GIG UPLOAD */}
+                {/* GIG UPLOAD - Desktop only */}
                 {currentArtistId && (
-                  <CB51GigUploadParser 
-                    artistId={currentArtistId}
-                    onGigCreated={() => {}}
-                  />
+                  <div className="hidden lg:block">
+                    <CB51GigUploadParser 
+                      artistId={currentArtistId}
+                      onGigCreated={() => {}}
+                    />
+                  </div>
                 )}
 
                 {/* QUICK ACTIONS GRID */}
