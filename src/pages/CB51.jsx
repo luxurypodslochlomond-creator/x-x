@@ -140,9 +140,9 @@ export default function CB51() {
               <div className="px-4 space-y-4 pt-4">
 
                 {/* GIG UPLOAD */}
-                {firstArtistId && (
+                {currentArtistId && (
                   <CB51GigUploadParser 
-                    artistId={firstArtistId}
+                    artistId={currentArtistId}
                     onGigCreated={() => {}}
                   />
                 )}
@@ -150,7 +150,7 @@ export default function CB51() {
                 {/* QUICK ACTIONS GRID */}
                 <div className="grid grid-cols-3 gap-2">
                   <button
-                    onClick={() => navigate(createPageUrl(firstArtistId ? `ScottCalendarView?id=${firstArtistId}` : 'ScottCalendarView'))}
+                    onClick={() => navigate(createPageUrl(currentArtistId ? `ScottCalendarView?id=${currentArtistId}` : 'ScottCalendarView'))}
                     className="bg-gradient-to-br from-cyan-900/40 to-black border-2 border-cyan-500/40 hover:border-cyan-500 rounded-lg p-3 text-center transition-all group"
                   >
                     <Calendar className="w-5 h-5 text-cyan-400 mx-auto mb-1 group-hover:scale-110 transition-transform" />
@@ -158,7 +158,7 @@ export default function CB51() {
                   </button>
 
                   <button
-                    onClick={() => navigate(createPageUrl(firstArtistId ? `ScottToDo?id=${firstArtistId}` : 'ScottToDo'))}
+                    onClick={() => navigate(createPageUrl(currentArtistId ? `ScottToDo?id=${currentArtistId}` : 'ScottToDo'))}
                     className="bg-gradient-to-br from-cyan-900/40 to-black border-2 border-cyan-500/40 hover:border-cyan-500 rounded-lg p-3 text-center transition-all group"
                   >
                     <CheckCircle className="w-5 h-5 text-cyan-400 mx-auto mb-1 group-hover:scale-110 transition-transform" />
@@ -166,7 +166,7 @@ export default function CB51() {
                   </button>
 
                   <button
-                    onClick={() => navigate(createPageUrl(firstArtistId ? `ScottFinanceAdmin?id=${firstArtistId}` : 'ScottFinanceAdmin'))}
+                    onClick={() => navigate(createPageUrl(currentArtistId ? `ScottFinanceAdmin?id=${currentArtistId}` : 'ScottFinanceAdmin'))}
                     className="bg-gradient-to-br from-green-900/40 to-black border-2 border-green-500/40 hover:border-green-500 rounded-lg p-3 text-center transition-all group"
                   >
                     <DollarSign className="w-5 h-5 text-green-400 mx-auto mb-1 group-hover:scale-110 transition-transform" />
@@ -175,7 +175,7 @@ export default function CB51() {
                 </div>
 
                 {/* PENDING GIGS */}
-                {firstArtistId && <CB51NotificationInbox artistId={firstArtistId} />}
+                {currentArtistId && <CB51NotificationInbox artistId={currentArtistId} />}
               </div>
             </div>
 
