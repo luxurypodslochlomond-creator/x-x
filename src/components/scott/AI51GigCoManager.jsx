@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { base44 } from '@/api/base44Client';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sparkles, Mail, MessageSquare, Calendar, Zap, X } from 'lucide-react';
-import { COOLASFUCKWaves } from '@/components/shared/COOLASFUCKIcon';
+import { Sparkles, Mail, MessageSquare, Zap, X, Heart } from 'lucide-react';
 
 /**
  * AI51 GIG CO-MANAGER
@@ -99,7 +98,7 @@ Return structured JSON.`,
         className="w-full bg-gradient-to-r from-cyan-600 via-purple-600 to-pink-600 hover:from-cyan-700 hover:via-purple-700 hover:to-pink-700 text-white font-black py-6 rounded-2xl text-lg border-2 border-cyan-500 flex items-center justify-center gap-3"
         style={{ boxShadow: '0 0 30px rgba(6, 182, 212, 0.5)' }}
       >
-        <COOLASFUCKWaves size={28} animate={true} />
+        <Heart className="w-7 h-7" />
         <span>AI51 CO-MANAGER</span>
         <Sparkles className="w-6 h-6" />
       </motion.button>
@@ -115,7 +114,7 @@ Return structured JSON.`,
     >
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-3">
-          <COOLASFUCKWaves size={32} animate={true} />
+          <Heart className="w-8 h-8 text-pink-400" />
           <div>
             <h2 className="text-white font-black text-xl">AI51 CO-MANAGER</h2>
             <p className="text-cyan-400 text-xs font-mono">I know you ♾️❤️ I'll handle this</p>
