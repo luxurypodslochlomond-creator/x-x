@@ -244,7 +244,7 @@ const LayoutInner = ({ children, currentPageName }) => {
       document.head.appendChild(metaDesc);
     }
     metaDesc.content = isCB51 
-      ? 'Professional artist management powered by AI51. Gigs, calendar, band coordination, and finance - all in one place.'
+      ? 'CB51 : CitizenBand51 : Avoid the Noise'
       : 'Heal yourself, heal the planet. Free healing frequencies, lossless music, and environmental action.';
 
     // Set theme color
@@ -258,9 +258,9 @@ const LayoutInner = ({ children, currentPageName }) => {
 
     // Set Open Graph tags for social sharing
     const ogTags = {
-      'og:title': isCB51 ? 'CB51 • Your AI Co-Manager' : 'Universal Frequency 51',
+      'og:title': isCB51 ? 'CB51 : CitizenBand51 : Avoid the Noise' : 'Universal Frequency 51',
       'og:description': isCB51 
-        ? 'Professional artist management • Gigs • Calendar • Finance • Band coordination'
+        ? 'CB51 : CitizenBand51 : Avoid the Noise'
         : 'Heal yourself, heal the planet. Free healing frequencies, lossless music, planetary action.',
       'og:image': window.location.origin + '/api/functions/serveOGImage',
       'og:type': 'website'
