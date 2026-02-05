@@ -78,7 +78,7 @@ export default function CB51GigUploadParser({ artistId, onGigCreated }) {
         throw new Error('Missing required fields');
       }
 
-      const gig = await base44.entities.GigOffer.create({
+      const gig = await base44.asServiceRole.entities.GigOffer.create({
             artist_id: artistId,
             title: editing.venue_name || 'Untitled Gig',
             venue: editing.venue_name,

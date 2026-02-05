@@ -12,7 +12,7 @@ export default function CB51ManagerGigApproval({ gig, artistId, onApprovalComple
   const approveMutation = useMutation({
     mutationFn: async () => {
       // Update gig status to "band_voting"
-      await base44.entities.GigOffer.update(gig.id, {
+      await base44.asServiceRole.entities.GigOffer.update(gig.id, {
         status: 'band_voting'
       });
 
@@ -39,7 +39,7 @@ export default function CB51ManagerGigApproval({ gig, artistId, onApprovalComple
       if (!rejectionReason.trim()) {
         throw new Error('Please provide a reason');
       }
-      await base44.entities.GigOffer.update(gig.id, {
+      await base44.asServiceRole.entities.GigOffer.update(gig.id, {
         status: 'manager_rejected',
         manager_rejection_reason: rejectionReason
       });
