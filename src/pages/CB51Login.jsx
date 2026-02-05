@@ -32,7 +32,7 @@ export default function CB51Login() {
 
     const handlePinSubmit = () => {
         if (pinEntered === '1888') {
-            sessionStorage.setItem('cb51_pin_1888', 'true');
+            sessionStorage.setItem('cb51_pin_verified', 'true');
             navigate(createPageUrl('CB51'), { replace: true });
         } else {
             setError('Wrong PIN');

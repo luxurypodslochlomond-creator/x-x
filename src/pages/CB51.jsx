@@ -7,6 +7,7 @@ import { Calendar, CheckCircle, DollarSign, Plus, Sparkles, Mic2, Music, Clipboa
 import { motion, AnimatePresence } from 'framer-motion';
 import CB51TestRoleSwitcher from '@/components/scott/CB51TestRoleSwitcher';
 import CB51ErrorBoundary from '@/components/scott/CB51ErrorBoundary';
+import CB51PINGuard from '@/components/scott/CB51PINGuard';
 
 export default function CB51() {
   const navigate = useNavigate();
@@ -49,8 +50,9 @@ export default function CB51() {
   const firstArtistId = artists.length > 0 ? artists[0].id : null;
 
   return (
-    <CB51ErrorBoundary>
-      <div className="min-h-screen bg-black text-white p-3 pb-20">
+          <CB51PINGuard>
+            <CB51ErrorBoundary>
+            <div className="min-h-screen bg-black text-white p-3 pb-20">
         
         {/* HEADER */}
         <div className="flex items-center justify-between mb-6">
@@ -150,6 +152,7 @@ export default function CB51() {
       </div>
       
       {user && <CB51TestRoleSwitcher currentRole={testRole} onRoleChange={setTestRole} />}
-    </CB51ErrorBoundary>
-  );
-}
+      </CB51ErrorBoundary>
+      </CB51PINGuard>
+      );
+      }
