@@ -116,7 +116,7 @@ export default function CB51() {
         )}
 
         {/* PENDING GIGS - MANAGER APPROVAL */}
-        {firstArtistId && <CB51PendingGigs artistId={firstArtistId} />}
+        {firstArtistId ? <CB51PendingGigs artistId={firstArtistId} /> : null}
 
         {/* UPCOMING GIGS */}
         <div className="bg-black border-2 border-cyan-500 rounded-lg p-3 mb-3">
