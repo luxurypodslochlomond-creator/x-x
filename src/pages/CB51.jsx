@@ -163,42 +163,20 @@ export default function CB51() {
                       )}
                     </AnimatePresence>
 
-              {/* MAIN CONTENT */}
-              <div className="px-4 pt-6 pb-32 space-y-5">
+              {/* MAIN CONTENT - Manager-focused flow */}
+              <div className="px-4 pt-4 pb-32 space-y-4">
 
-                {/* AI51 SCAN - Minimal science */}
-                <button
-                  onClick={() => document.querySelector('input[type="file"]')?.click()}
-                  className="w-full bg-black border border-cyan-500/50 hover:border-cyan-400 rounded-lg p-4 transition-all text-left group"
-                >
-                  <div className="flex items-start gap-3">
-                    <Zap className="w-5 h-5 text-cyan-400 flex-shrink-0 mt-0.5" />
-                    <div className="flex-1">
-                      <h2 className="text-white font-bold text-sm">AI51 SCAN</h2>
-                      <p className="text-gray-500 text-xs mt-1">Contracts → Auto-parsed → Ready</p>
-                    </div>
-                  </div>
-                </button>
-
-                {/* GIG UPLOAD - Hidden file input */}
+                {/* PENDING APPROVALS BANNER - Urgent first */}
                 {currentArtistId && (
-                  <div className="hidden">
-                    <CB51GigUploadParser 
-                      artistId={currentArtistId}
-                      onGigCreated={() => {}}
-                    />
+                  <div>
+                    <h3 className="text-red-400 text-xs font-bold uppercase tracking-wider mb-2">⚠️ Action Required</h3>
+                    <CB51NotificationFeed artistId={currentArtistId} />
                   </div>
                 )}
 
-                {/* APPROVALS */}
+                {/* QUICK ACTIONS - Grid system */}
                 <div>
-                  <h3 className="text-cyan-300 text-xs font-bold uppercase tracking-wider mb-2">Pending</h3>
-                  {currentArtistId && <CB51NotificationFeed artistId={currentArtistId} />}
-                </div>
-
-                {/* QUICK ACCESS - Grid system */}
-                <div>
-                  <h3 className="text-cyan-300 text-xs font-bold uppercase tracking-wider mb-2">Access</h3>
+                  <h3 className="text-cyan-300 text-xs font-bold uppercase tracking-wider mb-2">Manager Tools</h3>
                   <div className="grid grid-cols-2 gap-2">
                     {[
                       { icon: Mail, label: 'Email', color: 'cyan', route: 'ScottMessageInbox' },
@@ -223,6 +201,17 @@ export default function CB51() {
                       </button>
                     ))}
                   </div>
+                </div>
+
+                {/* GIG UPLOAD */}
+                <div>
+                  <h3 className="text-cyan-300 text-xs font-bold uppercase tracking-wider mb-2">New Gig</h3>
+                  {currentArtistId && (
+                    <CB51GigUploadParser 
+                      artistId={currentArtistId}
+                      onGigCreated={() => {}}
+                    />
+                  )}
                 </div>
               </div>
             </div>
