@@ -154,8 +154,7 @@ export default function CB51() {
           </div>
         </div>
       </div>
-      
-      {user && <CB51TestRoleSwitcher currentRole={testRole} onRoleChange={setTestRole} />}
+
       </CB51ErrorBoundary>
       </CB51PINGuard>
       );
