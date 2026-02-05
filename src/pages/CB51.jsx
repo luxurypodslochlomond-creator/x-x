@@ -8,12 +8,14 @@ import { motion } from 'framer-motion';
 import LiveClock from '@/components/shared/LiveClock';
 import PushNotificationManager from '@/components/scott/PushNotificationManager';
 import CB51NotificationCenter from '@/components/scott/CB51NotificationCenter';
+import CB51TestRoleSwitcher from '@/components/scott/CB51TestRoleSwitcher';
 
 export default function CB51() {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [showMoreArtists, setShowMoreArtists] = useState(false);
+  const [testRole, setTestRole] = useState('manager');
 
   useEffect(() => {
     document.title = 'CB51 • Artist Management';
@@ -82,7 +84,7 @@ export default function CB51() {
       <div className="flex-1 overflow-y-auto p-4 pb-20 space-y-4">
         
         {/* LIVE NOTIFICATION CENTER */}
-        <CB51NotificationCenter key={Date.now()} userEmail={user?.email} userRole="manager" />
+        <CB51NotificationCenter key={testRole} userEmail={user?.email} userRole={testRole} />
 
         {/* NOTIFICATION BELL */}
         {(pendingCount > 0 || awaitingCount > 0) && (
@@ -211,6 +213,9 @@ export default function CB51() {
         </div>
         <p className="text-gray-600 text-xs font-mono">Built on Base44</p>
       </div>
-    </div>
-  );
-}
+
+      {/* TEST ROLE SWITCHER */}
+      <CB51TestRoleSwitcher currentRole={testRole} onRoleChange={setTestRole} />
+      </div>
+      );
+      }
