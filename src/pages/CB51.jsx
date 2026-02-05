@@ -55,86 +55,113 @@ export default function CB51() {
   const currentArtist = artists.find(a => a.id === currentArtistId);
 
   return (
-                <CB51PINGuard>
-                  <CB51ErrorBoundary>
-                  <div className="min-h-screen bg-black text-white pb-20">
+                      <CB51PINGuard>
+                        <CB51ErrorBoundary>
+                        <div className="min-h-screen bg-black text-white pb-20">
 
-              {/* ARTIST SELECTOR - Clean & minimal */}
-              {artists.length > 0 && currentArtist && (
-                <div className="px-4 py-3 border-b border-cyan-500/20">
-                  <div className="relative inline-block w-full">
-                    <motion.button
-                      onClick={() => setShowArtistMenu(!showArtistMenu)}
-                      className="w-full flex items-center gap-3 p-3 bg-black border-2 border-cyan-500/40 hover:border-cyan-500 rounded-lg transition-all group"
-                    >
-                      {currentArtist.profile_pic_url ? (
-                        <img 
-                          src={currentArtist.profile_pic_url} 
-                          alt={currentArtist.name}
-                          className="w-10 h-10 rounded-full object-cover border-2 border-cyan-500/40 group-hover:border-cyan-500"
-                        />
-                      ) : (
-                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-cyan-500 to-cyan-600 text-white font-black text-sm flex items-center justify-center border-2 border-cyan-500/40">
-                          {currentArtist.name.charAt(0).toUpperCase()}
-                        </div>
-                      )}
-                      <div className="flex-1 text-left">
-                        <p className="text-cyan-400 font-black text-sm">{currentArtist.name}</p>
-                        <p className="text-gray-500 text-xs">Select artist</p>
-                      </div>
-                      <ChevronDown className={`w-4 h-4 text-cyan-400 transition-transform ${showArtistMenu ? 'rotate-180' : ''}`} />
-                    </motion.button>
-
-                    {/* DROPDOWN MENU */}
-                    <AnimatePresence>
-                      {showArtistMenu && (
-                        <motion.div
-                          initial={{ opacity: 0, y: -10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: -10 }}
-                          className="absolute top-full left-0 right-0 mt-2 bg-black border-2 border-cyan-500/40 rounded-lg overflow-y-auto z-10 max-h-48"
-                        >
-                          {artists.map((artist) => (
-                            <motion.button
+                    {/* ARTIST GRID - Show 3 */}
+                    {artists.length > 0 && (
+                      <div className="px-4 pt-4 pb-2">
+                        <h3 className="text-cyan-400 text-xs font-bold uppercase tracking-wider mb-3">Artists</h3>
+                        <div className="grid grid-cols-3 gap-2 mb-4">
+                          {artists.slice(0, 3).map((artist) => (
+                            <button
                               key={artist.id}
-                              onClick={() => {
-                                setActiveArtistId(artist.id);
-                                setShowArtistMenu(false);
-                              }}
-                              className={`w-full flex items-center gap-2 px-3 py-2 border-b border-cyan-500/20 last:border-b-0 hover:bg-cyan-500/10 transition-colors ${
-                                artist.id === currentArtistId ? 'bg-cyan-500/20' : ''
+                              onClick={() => setActiveArtistId(artist.id)}
+                              className={`flex flex-col items-center gap-2 p-2 rounded-lg transition-all ${
+                                artist.id === currentArtistId
+                                  ? 'bg-cyan-500/20 border border-cyan-400'
+                                  : 'bg-black border border-cyan-500/30 hover:border-cyan-400'
                               }`}
                             >
                               {artist.profile_pic_url ? (
                                 <img 
                                   src={artist.profile_pic_url} 
                                   alt={artist.name}
-                                  className="w-6 h-6 rounded-full object-cover border border-cyan-500/40 flex-shrink-0"
+                                  className="w-10 h-10 rounded-full object-cover border border-cyan-500/40"
                                 />
                               ) : (
-                                <div className="w-6 h-6 rounded-full bg-gradient-to-br from-cyan-500 to-cyan-600 text-white font-black text-[10px] flex items-center justify-center border border-cyan-500/40 flex-shrink-0">
+                                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-cyan-500 to-cyan-600 text-white font-black text-xs flex items-center justify-center">
                                   {artist.name.charAt(0).toUpperCase()}
                                 </div>
                               )}
-                              <span className="text-cyan-400 font-bold text-xs truncate">{artist.name}</span>
-                            </motion.button>
+                              <p className="text-cyan-300 font-bold text-[10px] text-center truncate w-full px-1">{artist.name}</p>
+                            </button>
                           ))}
-                          <motion.button
-                            onClick={() => {
-                              setShowArtistMenu(false);
-                              navigate(createPageUrl('ScottAddArtist'));
-                            }}
-                            className="w-full flex items-center justify-center gap-2 px-3 py-2 border-t border-cyan-500/20 hover:bg-green-500/10 text-green-400 font-bold text-xs transition-colors"
+                          {artists.length > 3 && (
+                            <button
+                              onClick={() => setShowArtistMenu(true)}
+                              className="flex flex-col items-center justify-center gap-1 p-2 rounded-lg bg-black border border-cyan-500/30 hover:border-cyan-400 transition-all"
+                            >
+                              <Plus className="w-4 h-4 text-cyan-400" />
+                              <p className="text-cyan-300 font-bold text-[10px]">More</p>
+                            </button>
+                          )}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* ARTIST MENU - Hidden dropdown */}
+                    <AnimatePresence>
+                      {showArtistMenu && (
+                        <motion.div
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                          onClick={() => setShowArtistMenu(false)}
+                          className="fixed inset-0 z-40 bg-black/80"
+                        >
+                          <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: 20 }}
+                            onClick={(e) => e.stopPropagation()}
+                            className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-black border border-cyan-500/40 rounded-lg p-4 w-80 max-h-96 overflow-y-auto z-50"
                           >
-                            <Plus className="w-3 h-3" />
-                            Add
-                          </motion.button>
+                            <h2 className="text-cyan-400 font-bold text-sm mb-3">Select Artist</h2>
+                            <div className="space-y-2">
+                              {artists.map((artist) => (
+                                <button
+                                  key={artist.id}
+                                  onClick={() => {
+                                    setActiveArtistId(artist.id);
+                                    setShowArtistMenu(false);
+                                  }}
+                                  className={`w-full flex items-center gap-2 px-3 py-2 rounded transition-colors ${
+                                    artist.id === currentArtistId
+                                      ? 'bg-cyan-500/20 border border-cyan-400'
+                                      : 'bg-black border border-cyan-500/20 hover:border-cyan-400'
+                                  }`}
+                                >
+                                  {artist.profile_pic_url ? (
+                                    <img 
+                                      src={artist.profile_pic_url} 
+                                      alt={artist.name}
+                                      className="w-6 h-6 rounded-full object-cover flex-shrink-0"
+                                    />
+                                  ) : (
+                                    <div className="w-6 h-6 rounded-full bg-cyan-500 text-white font-black text-[9px] flex items-center justify-center flex-shrink-0">
+                                      {artist.name.charAt(0).toUpperCase()}
+                                    </div>
+                                  )}
+                                  <span className="text-cyan-300 font-bold text-xs flex-1 text-left truncate">{artist.name}</span>
+                                </button>
+                              ))}
+                              <button
+                                onClick={() => {
+                                  setShowArtistMenu(false);
+                                  navigate(createPageUrl('ScottAddArtist'));
+                                }}
+                                className="w-full flex items-center justify-center gap-2 px-3 py-2 border border-green-500/30 hover:border-green-400 text-green-400 font-bold text-xs rounded transition-colors mt-2"
+                              >
+                                <Plus className="w-3 h-3" />
+                                Add New
+                              </button>
+                            </div>
+                          </motion.div>
                         </motion.div>
                       )}
                     </AnimatePresence>
-                  </div>
-                </div>
-              )}
 
               {/* MAIN CONTENT */}
               <div className="px-4 pt-6 pb-32 space-y-5">
