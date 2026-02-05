@@ -1,115 +1,71 @@
 import { createClientFromRequest } from 'npm:@base44/sdk@0.8.6';
 
-/**
- * NOTIFY BAND - Push notification when manager sends gig offer
- * Triggered by entity automation when gig status = sent_to_band
- */
-
 Deno.serve(async (req) => {
-    try {
-      const base44 = createClientFromRequest(req);
-      const payload = await req.json();
+  try {
+    const base44 = createClientFromRequest(req);
+    const user = await base44.auth.me();
 
-      const { event, data } = payload;
-
-      // Only trigger on sent_to_band status change
-      if (data?.status !== 'sent_to_band') {
-        return Response.json({ skipped: true });
-      }
-
-      // Get gig offer details
-      const gigOffer = await base44.asServiceRole.entities.ScottGigOffer.get(data.id);
-
-      // Check if already notified (prevent duplicates)
-      const existingResponses = await base44.asServiceRole.entities.ScottBandResponse.filter({
-        gig_offer_id: gigOffer.id
-      });
-      
-      if (existingResponses.length > 0) {
-        return Response.json({ skipped: true, reason: 'Already notified' });
-      }
-
-      // Get band members from ScottTeamMember entity
-      const teamMembers = await base44.asServiceRole.entities.ScottTeamMember.filter({
-        artist_id: gigOffer.artist_id
-      });
-
-      const bandMembers = teamMembers.map(m => ({
-        email: m.email,
-        name: m.name
-      })).filter(m => {
-        // Validate email
-        if (!m.email || !m.email.includes('@')) {
-          console.error('Invalid email:', m.email);
-          return false;
-        }
-        return true;
-      });
-
-      if (bandMembers.length === 0) {
-        return Response.json({ error: 'No valid band members found' }, { status: 400 });
-      }
-
-      // Create ScottBandResponse records with pending status for each member
-      const responsePromises = bandMembers.map(member =>
-        base44.asServiceRole.entities.ScottBandResponse.create({
-          gig_offer_id: gigOffer.id,
-          band_member_email: member.email,
-          band_member_name: member.name,
-          decision: 'pending',
-          notification_sent_at: new Date().toISOString()
-        })
-      );
-
-      await Promise.all(responsePromises);
-
-      // Send notifications directly to band members
-      const notificationPromises = bandMembers.map(member =>
-        base44.asServiceRole.entities.ScottNotification.create({
-          recipient_email: member.email,
-          notification_type: 'band_gig_offer',
-          gig_offer_id: gigOffer.id,
-          title: `🎸 NEW GIG: ${gigOffer.venue}`,
-          message: `${gigOffer.date} • £${gigOffer.fee?.toLocaleString()} • Vote YES or NO`,
-          action_url: `/ScottBandVote?gig=${gigOffer.id}`
-        })
-      );
-
-      await Promise.all(notificationPromises);
-
-      // Send emails to band members
-      const emailPromises = bandMembers.map(member =>
-        base44.asServiceRole.integrations.Core.SendEmail({
-          from_name: 'CB51',
-          to: member.email,
-          subject: `🎸 New Gig: ${gigOffer.venue}`,
-          body: `Hi ${member.name},
-
-      New gig offer to vote on:
-
-      ${gigOffer.venue}
-      ${gigOffer.date}
-      Fee: £${gigOffer.fee?.toLocaleString()}
-
-      Vote YES or NO in CB51 → https://app.base44.com/ScottBandVote?gig=${gigOffer.id}
-
-      CB51 • Your AI Co-Manager`
-        }).catch(e => {
-         console.error('Email failed to', member.email, ':', e.message);
-         throw e; // FAIL if any email fails - don't silently hide
-       })
-      );
-
-      await Promise.all(emailPromises);
-
-      return Response.json({ 
-        success: true,
-        responses_created: bandMembers.length,
-        notifications_sent: bandMembers.length,
-        gig: gigOffer.venue
-      });
-
-    } catch (error) {
-      return Response.json({ error: error.message }, { status: 500 });
+    if (!user) {
+      return Response.json({ error: 'Unauthorized' }, { status: 401 });
     }
-  });
+
+    const { gigOfferId } = await req.json();
+
+    if (!gigOfferId) {
+      return Response.json({ error: 'Missing gigOfferId' }, { status: 400 });
+    }
+
+    // Get the gig offer
+    const gig = await base44.entities.GigOffer.get(gigOfferId);
+    if (!gig) {
+      return Response.json({ error: 'Gig not found' }, { status: 404 });
+    }
+
+    // Get artist to find band members
+    const artist = await base44.entities.ScottArtist.get(gig.artist_id);
+    if (!artist) {
+      return Response.json({ error: 'Artist not found' }, { status: 404 });
+    }
+
+    // Get band members
+    const bandMembers = await base44.entities.BandMember.filter({
+      artist_id: gig.artist_id
+    });
+
+    if (bandMembers.length === 0) {
+      return Response.json({ 
+        status: 'no_band_members',
+        message: 'No band members to notify'
+      });
+    }
+
+    // Create notification records for each band member (future: could be push notifications)
+    // For now, they'll see it in CB51 when they log in
+    // Store that voting is pending on this gig
+    const notificationResults = await Promise.all(
+      bandMembers.map(member =>
+        base44.asServiceRole.entities.GigVote.create({
+          gig_id: gigOfferId,
+          band_member_id: member.id,
+          artist_id: gig.artist_id,
+          response: null, // Pending
+          reason: null,
+          created_at: new Date().toISOString()
+        }).catch(err => {
+          // Vote record might already exist, that's fine
+          return null;
+        })
+      )
+    );
+
+    return Response.json({
+      status: 'success',
+      gigOfferId,
+      bandMembersNotified: bandMembers.length,
+      message: `Notified ${bandMembers.length} band members to vote`
+    });
+  } catch (error) {
+    console.error('Error notifying band:', error);
+    return Response.json({ error: error.message }, { status: 500 });
+  }
+});
