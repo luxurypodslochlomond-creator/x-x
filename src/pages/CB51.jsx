@@ -2,21 +2,19 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { base44 } from '@/api/base44Client';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { Calendar, CheckCircle, DollarSign, Plus, Sparkles, Mic2, Music, ClipboardList, Users } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import CB51NotificationCenter from '@/components/scott/CB51NotificationCenter';
 import CB51TestRoleSwitcher from '@/components/scott/CB51TestRoleSwitcher';
 import CB51ErrorBoundary from '@/components/scott/CB51ErrorBoundary';
 import PushNotificationManager from '@/components/scott/PushNotificationManager';
-import AI51GigCoManager from '@/components/scott/AI51GigCoManager';
 
 export default function CB51() {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [testRole, setTestRole] = useState('manager');
-  const queryClient = useQueryClient();
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -52,10 +50,6 @@ export default function CB51() {
 
   const firstArtistId = artists.length > 0 ? artists[0].id : null;
 
-  const handleGigCreated = () => {
-    queryClient.invalidateQueries({ queryKey: ['cb51PendingOffers'] });
-  };
-
   return (
     <CB51ErrorBoundary>
       <div className="min-h-screen bg-black text-white p-3 pb-20">
@@ -75,9 +69,6 @@ export default function CB51() {
 
         {/* NOTIFICATIONS - TOP PRIORITY */}
         <CB51NotificationCenter key={testRole} userEmail={user?.email} userRole={testRole} />
-
-        {/* AI51 CO-MANAGER - Only show if artists exist */}
-        {firstArtistId && <AI51GigCoManager artistId={firstArtistId} onGigCreated={handleGigCreated} />}
 
         {/* ARTISTS SECTION */}
         {artists.length > 0 ? (
