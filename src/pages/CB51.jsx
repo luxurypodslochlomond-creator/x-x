@@ -81,85 +81,85 @@ export default function CB51() {
       </div>
 
       {/* CONTENT */}
-      <div className="flex-1 overflow-y-auto p-4 pb-20 space-y-4">
+      <div className="flex-1 overflow-y-auto p-6 pb-24 space-y-6 max-w-2xl mx-auto">
         
+        {/* HERO STATS */}
+        <div className="grid grid-cols-2 gap-4">
+          <motion.div 
+            whileHover={{ scale: 1.02 }}
+            className="bg-gradient-to-br from-cyan-500/20 to-cyan-600/10 border-2 border-cyan-500/40 rounded-2xl p-6 text-center"
+          >
+            <p className="text-4xl font-black text-cyan-400 font-mono mb-1">{artists.length}</p>
+            <p className="text-cyan-300 text-xs font-bold font-mono">ARTISTS</p>
+          </motion.div>
+          
+          <motion.div 
+            whileHover={{ scale: 1.02 }}
+            className="bg-gradient-to-br from-green-500/20 to-green-600/10 border-2 border-green-500/40 rounded-2xl p-6 text-center"
+          >
+            <p className="text-4xl font-black text-green-400 font-mono mb-1">{pendingCount}</p>
+            <p className="text-green-300 text-xs font-bold font-mono">PENDING</p>
+          </motion.div>
+        </div>
+
         {/* LIVE NOTIFICATION CENTER */}
         <CB51NotificationCenter key={testRole} userEmail={user?.email} userRole={testRole} />
 
-        {/* NOTIFICATION BELL */}
-        {(pendingCount > 0 || awaitingCount > 0) && (
-          <div className="flex justify-center">
-            <Bell className="w-6 h-6 text-cyan-400 animate-bounce" />
-          </div>
-        )}
-
-        {/* AI51 SCAN BUTTON */}
-        <motion.button
-          whileHover={{ scale: 1.02 }}
-          className="w-full px-6 py-4 bg-black border-2 border-cyan-500/50 hover:border-cyan-500 text-cyan-400 rounded-lg font-black text-sm font-mono flex items-center justify-center gap-2 transition-all"
-        >
-          <span className="text-xl">·</span>
-          AI51 SCAN
-        </motion.button>
-
-        {/* AWAITING BAND VOTES */}
+        {/* AWAITING BAND VOTES - HIGH PRIORITY */}
         {awaitingCount > 0 && (
           <motion.button
             onClick={() => navigate(createPageUrl('ScottArtistHome'))}
             whileHover={{ scale: 1.02 }}
-            className="w-full px-6 py-4 bg-green-900/40 border-2 border-green-500 text-green-400 rounded-lg font-black text-sm font-mono flex items-center justify-between transition-all"
+            whileTap={{ scale: 0.98 }}
+            className="w-full p-6 bg-gradient-to-r from-green-600 to-emerald-600 rounded-2xl shadow-xl border-2 border-green-400"
           >
-            <span>👤 AWAITING BAND VOTES</span>
-            <span className="text-sm font-mono">{awaitingCount} offers sent to band</span>
-            <ChevronRight className="w-4 h-4 text-green-400 ml-auto" />
+            <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center">
+                  <Bell className="w-6 h-6 text-green-600 animate-pulse" />
+                </div>
+                <div className="text-left">
+                  <p className="text-white font-black text-lg font-mono">BAND VOTING</p>
+                  <p className="text-green-100 text-sm font-mono">{awaitingCount} offer{awaitingCount > 1 ? 's' : ''} awaiting response</p>
+                </div>
+              </div>
+              <ChevronRight className="w-6 h-6 text-white" />
+            </div>
           </motion.button>
         )}
 
-        {/* PENDING APPROVALS */}
-        <motion.div
-          className="w-full px-6 py-4 bg-black border-2 border-cyan-500/30 text-cyan-400 rounded-lg font-mono text-sm"
-        >
-          {pendingCount > 0 ? (
-            <>
-              <p className="font-black mb-2">⚠ PENDING APPROVALS</p>
-              <p className="text-cyan-300 text-xs">{pendingCount} gigs awaiting your decision</p>
-            </>
-          ) : (
-            <>
-              <p className="font-black mb-2">ℹ PENDING APPROVALS</p>
-              <p className="text-cyan-300 text-xs">No pending gigs – upload a PDF above to scan ↑</p>
-            </>
-          )}
-        </motion.div>
-
-        {/* ADD ARTIST BUTTON */}
+        {/* ADD ARTIST - PRIMARY CTA */}
         <Link to={createPageUrl('ScottAddArtist')}>
           <motion.button
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            className="w-full px-6 py-4 bg-gradient-to-r from-cyan-500 to-green-500 text-white rounded-lg font-black text-lg font-mono flex items-center justify-center gap-2 transition-all shadow-lg"
+            className="w-full p-6 bg-gradient-to-r from-cyan-500 to-blue-500 text-white rounded-2xl font-black text-xl font-mono shadow-xl border-2 border-cyan-300"
           >
-            + ADD ARTIST
+            + ADD NEW ARTIST
           </motion.button>
         </Link>
 
-        {/* ARTISTS CAROUSEL */}
+        {/* YOUR ARTISTS */}
         {artists.length > 0 && (
-          <div className="space-y-4">
-            <p className="text-cyan-400 font-mono text-xs font-bold">TAP ARTIST TO MANAGE ↓</p>
-            <div className="flex gap-3 overflow-x-auto pb-2">
+          <div className="bg-black/40 border-2 border-cyan-500/30 rounded-2xl p-6">
+            <h2 className="text-cyan-400 font-black text-lg font-mono mb-4">YOUR ARTISTS</h2>
+            <div className="space-y-3">
               {displayedArtists.map((artist) => (
                 <motion.button
                   key={artist.id}
                   onClick={() => navigate(createPageUrl('ScottArtistHome') + `?id=${artist.id}`)}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="relative flex-shrink-0 w-20 h-20 rounded-full bg-cyan-400 text-black font-black text-xl font-mono flex items-center justify-center transition-all hover:shadow-lg hover:shadow-cyan-500/50"
+                  whileHover={{ scale: 1.02, x: 4 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="w-full flex items-center gap-4 p-4 bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 hover:border-cyan-500 rounded-xl transition-all"
                 >
-                  {artist.name.charAt(0).toUpperCase()}
-                  <div className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-cyan-200 border-2 border-cyan-400 text-black text-[10px] font-black flex items-center justify-center">
-                    ⚙
+                  <div className="w-14 h-14 rounded-full bg-gradient-to-br from-cyan-400 to-cyan-600 text-white font-black text-2xl font-mono flex items-center justify-center flex-shrink-0 shadow-lg">
+                    {artist.name.charAt(0).toUpperCase()}
                   </div>
+                  <div className="flex-1 text-left">
+                    <p className="text-white font-black text-lg font-mono">{artist.name}</p>
+                    <p className="text-cyan-400 text-sm font-mono">Tap to manage →</p>
+                  </div>
+                  <ChevronRight className="w-5 h-5 text-cyan-400" />
                 </motion.button>
               ))}
             </div>
@@ -167,55 +167,62 @@ export default function CB51() {
             {artists.length > 3 && (
               <button
                 onClick={() => setShowMoreArtists(!showMoreArtists)}
-                className="w-full text-center text-cyan-400 hover:text-cyan-300 font-mono text-sm font-bold py-2"
+                className="w-full mt-4 text-center text-cyan-400 hover:text-cyan-300 font-mono text-sm font-bold py-2 border-t border-cyan-500/20 pt-4"
               >
-                {showMoreArtists ? '- Show Less' : '+ Show More Artists'}
+                {showMoreArtists ? '↑ Show Less' : '↓ Show All Artists'}
               </button>
             )}
           </div>
         )}
 
-        {/* QUICK ACTIONS */}
-        <div className="space-y-2 pt-4 border-t border-cyan-500/20">
-          <Link to={createPageUrl('CB51')}>
-            <motion.button whileHover={{ x: 4 }} className="w-full px-4 py-3 bg-black border border-cyan-500/30 hover:border-cyan-500 text-cyan-400 rounded-lg font-mono text-sm flex items-center justify-between transition-all">
-              <div className="flex items-center gap-2">
-                <Mail className="w-4 h-4" />
-                <span>EMAIL</span>
-              </div>
-              <ChevronRight className="w-4 h-4" />
-            </motion.button>
-          </Link>
+        {/* QUICK ACCESS */}
+        <div className="bg-black/40 border-2 border-cyan-500/30 rounded-2xl p-6">
+          <h2 className="text-cyan-400 font-black text-lg font-mono mb-4">QUICK ACCESS</h2>
+          <div className="grid grid-cols-2 gap-3">
+            <Link to={createPageUrl('ScottCalendarView')}>
+              <motion.button 
+                whileHover={{ scale: 1.05 }} 
+                whileTap={{ scale: 0.95 }}
+                className="w-full aspect-square bg-gradient-to-br from-amber-500/20 to-amber-600/10 border-2 border-amber-500/40 rounded-xl flex flex-col items-center justify-center gap-2 hover:border-amber-500 transition-all"
+              >
+                <Calendar className="w-8 h-8 text-amber-400" />
+                <span className="text-amber-400 font-bold text-sm font-mono">CALENDAR</span>
+              </motion.button>
+            </Link>
 
-          <Link to={createPageUrl('ScottCalendarView')}>
-            <motion.button whileHover={{ x: 4 }} className="w-full px-4 py-3 bg-black border border-cyan-500/30 hover:border-cyan-500 text-cyan-400 rounded-lg font-mono text-sm flex items-center justify-between transition-all">
-              <div className="flex items-center gap-2">
-                <Calendar className="w-4 h-4" />
-                <span>CALENDAR</span>
-              </div>
-              <ChevronRight className="w-4 h-4" />
-            </motion.button>
-          </Link>
+            <Link to={createPageUrl('ScottToDo')}>
+              <motion.button 
+                whileHover={{ scale: 1.05 }} 
+                whileTap={{ scale: 0.95 }}
+                className="w-full aspect-square bg-gradient-to-br from-green-500/20 to-green-600/10 border-2 border-green-500/40 rounded-xl flex flex-col items-center justify-center gap-2 hover:border-green-500 transition-all"
+              >
+                <CheckCircle className="w-8 h-8 text-green-400" />
+                <span className="text-green-400 font-bold text-sm font-mono">TASKS</span>
+              </motion.button>
+            </Link>
 
-          <Link to={createPageUrl('ScottToDo')}>
-            <motion.button whileHover={{ x: 4 }} className="w-full px-4 py-3 bg-black border border-cyan-500/30 hover:border-cyan-500 text-cyan-400 rounded-lg font-mono text-sm flex items-center justify-between transition-all">
-              <div className="flex items-center gap-2">
-                <CheckCircle className="w-4 h-4" />
-                <span>TASKS</span>
-              </div>
-              <ChevronRight className="w-4 h-4" />
-            </motion.button>
-          </Link>
+            <Link to={createPageUrl('ScottFinanceAdmin')}>
+              <motion.button 
+                whileHover={{ scale: 1.05 }} 
+                whileTap={{ scale: 0.95 }}
+                className="w-full aspect-square bg-gradient-to-br from-emerald-500/20 to-emerald-600/10 border-2 border-emerald-500/40 rounded-xl flex flex-col items-center justify-center gap-2 hover:border-emerald-500 transition-all"
+              >
+                <DollarSign className="w-8 h-8 text-emerald-400" />
+                <span className="text-emerald-400 font-bold text-sm font-mono">FINANCE</span>
+              </motion.button>
+            </Link>
 
-          <Link to={createPageUrl('ScottFinanceAdmin')}>
-            <motion.button whileHover={{ x: 4 }} className="w-full px-4 py-3 bg-black border border-cyan-500/30 hover:border-cyan-500 text-cyan-400 rounded-lg font-mono text-sm flex items-center justify-between transition-all">
-              <div className="flex items-center gap-2">
-                <DollarSign className="w-4 h-4" />
-                <span>FINANCE</span>
-              </div>
-              <ChevronRight className="w-4 h-4" />
-            </motion.button>
-          </Link>
+            <Link to={createPageUrl('CB51')}>
+              <motion.button 
+                whileHover={{ scale: 1.05 }} 
+                whileTap={{ scale: 0.95 }}
+                className="w-full aspect-square bg-gradient-to-br from-purple-500/20 to-purple-600/10 border-2 border-purple-500/40 rounded-xl flex flex-col items-center justify-center gap-2 hover:border-purple-500 transition-all"
+              >
+                <Mail className="w-8 h-8 text-purple-400" />
+                <span className="text-purple-400 font-bold text-sm font-mono">INBOX</span>
+              </motion.button>
+            </Link>
+          </div>
         </div>
       </div>
 
