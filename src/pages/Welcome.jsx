@@ -256,30 +256,7 @@ export default function WelcomePage() {
 
                 </div>
 
-                {/* AI51 INLINE MODAL */}
-                {ai51Open && (
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        onClick={() => setAi51Open(false)}
-                        className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
-                    >
-                        <motion.div
-                            initial={{ scale: 0.95, opacity: 0 }}
-                            animate={{ scale: 1, opacity: 1 }}
-                            exit={{ scale: 0.95, opacity: 0 }}
-                            onClick={(e) => e.stopPropagation()}
-                            className="w-full max-w-2xl h-[80vh] rounded-2xl overflow-hidden"
-                        >
-                            <iframe
-                                src={createPageUrl('AI51')}
-                                className="w-full h-full border-0"
-                                title="AI51"
-                            />
-                        </motion.div>
-                    </motion.div>
-                )}
+
                 </div>
                 );
                 }
