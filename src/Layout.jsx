@@ -33,8 +33,8 @@ import { MeshProvider, MeshStatusIndicator } from '@/components/shared/MeshNetwo
 import CB51OfflineHandler from '@/components/scott/CB51OfflineHandler';
 import SubdomainRouter from '@/components/shared/SubdomainRouter';
 import COOLASFUCK8BitLoading from '@/components/shared/COOLASFUCK8BitLoading';
-import ServiceWorkerManager from '@/components/shared/ServiceWorkerManager';
-import BackgroundSync from '@/components/shared/BackgroundSync';
+// import ServiceWorkerManager from '@/components/shared/ServiceWorkerManager';
+// import BackgroundSync from '@/components/shared/BackgroundSync';
 import HealingAnalyticsCollector from '@/components/shared/HealingAnalyticsCollector';
 // import CB51MobileMenu from '@/components/scott/CB51MobileMenu';
 import {
@@ -730,8 +730,6 @@ const LayoutInner = ({ children, currentPageName }) => {
                   <AI51MemoryProvider>
                     <SubdomainRouter>
                       <LayoutInner {...props} />
-                      <ServiceWorkerManager />
-                      <BackgroundSync />
                     </SubdomainRouter>
                   </AI51MemoryProvider>
                 </AudioProvider>
