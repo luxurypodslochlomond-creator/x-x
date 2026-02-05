@@ -73,19 +73,13 @@ export default function ScottAddArtist() {
                     type: 'artist'
                 });
                 
-                // Send CB51 branded invitation
+                // Send CB51 branded invitation (non-blocking - artist already saved)
                 if (formData.email) {
-                    try {
-                        await base44.functions.invoke('sendCB51BrandedInvite', {
-                            email: formData.email,
-                            name: formData.name,
-                            artistName: formData.name
-                        });
-                        alert(`✓ CB51 invite sent to ${formData.email}`);
-                    } catch (inviteError) {
-                        console.log('Invite error:', inviteError.message);
-                        alert('Email failed - ask them to sign up at cb51.io directly');
-                    }
+                    base44.functions.invoke('sendCB51BrandedInvite', {
+                        email: formData.email,
+                        name: formData.name,
+                        artistName: formData.name
+                    }).catch(e => console.log('Email send failed:', e));
                 }
                 
                 navigate(createPageUrl(`ScottArtistHome?id=${newArtist.id}`));
