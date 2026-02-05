@@ -192,9 +192,23 @@ export default function PushNotificationManager({ onSubscriptionChange }) {
     }
   };
 
-  // If notifications aren't supported, just hide the feature - no scary warnings
-  if (!isSupported || needsPWA) {
-    return null;
+  // Show status even if not supported - be transparent
+  if (!isSupported) {
+    return (
+      <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-gray-800/50 border border-gray-700">
+        <BellOff className="w-4 h-4 text-gray-500" />
+        <span className="text-xs font-mono text-gray-500">Browser doesn't support push</span>
+      </div>
+    );
+  }
+
+  if (needsPWA) {
+    return (
+      <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-cyan-500/10 border border-cyan-500/50">
+        <Bell className="w-4 h-4 text-cyan-400" />
+        <span className="text-xs font-mono text-cyan-400">Add to home screen for alerts</span>
+      </div>
+    );
   }
 
   if (isSubscribed) {
