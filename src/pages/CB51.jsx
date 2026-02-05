@@ -76,8 +76,8 @@ export default function CB51() {
         {/* NOTIFICATIONS - TOP PRIORITY */}
         <CB51NotificationCenter key={testRole} userEmail={user?.email} userRole={testRole} />
 
-        {/* AI51 CO-MANAGER */}
-        <AI51GigCoManager artistId={firstArtistId} onGigCreated={handleGigCreated} />
+        {/* AI51 CO-MANAGER - Only show if artists exist */}
+        {firstArtistId && <AI51GigCoManager artistId={firstArtistId} onGigCreated={handleGigCreated} />}
 
         {/* ARTISTS SECTION */}
         {artists.length > 0 ? (
