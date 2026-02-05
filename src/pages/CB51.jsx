@@ -9,6 +9,7 @@ import CB51NotificationCenter from '@/components/scott/CB51NotificationCenter';
 import CB51TestRoleSwitcher from '@/components/scott/CB51TestRoleSwitcher';
 import CB51ErrorBoundary from '@/components/scott/CB51ErrorBoundary';
 import PushNotificationManager from '@/components/scott/PushNotificationManager';
+import AI51GigCoManager from '@/components/scott/AI51GigCoManager';
 
 export default function CB51() {
   const navigate = useNavigate();
@@ -69,6 +70,9 @@ export default function CB51() {
 
         {/* NOTIFICATIONS - TOP PRIORITY */}
         <CB51NotificationCenter key={testRole} userEmail={user?.email} userRole={testRole} />
+
+        {/* AI51 CO-MANAGER - Only show if artists exist */}
+        {firstArtistId && <AI51GigCoManager artistId={firstArtistId} />}
 
         {/* ARTISTS SECTION */}
         {artists.length > 0 ? (
