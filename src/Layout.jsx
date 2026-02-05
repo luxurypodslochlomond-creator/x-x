@@ -36,7 +36,7 @@ import COOLASFUCK8BitLoading from '@/components/shared/COOLASFUCK8BitLoading';
 import ServiceWorkerManager from '@/components/shared/ServiceWorkerManager';
 import BackgroundSync from '@/components/shared/BackgroundSync';
 import HealingAnalyticsCollector from '@/components/shared/HealingAnalyticsCollector';
-import CB51MobileMenu from '@/components/scott/CB51MobileMenu';
+// import CB51MobileMenu from '@/components/scott/CB51MobileMenu';
 import {
                                           Menu, X, Heart, Home, LogOut, Leaf, Sparkles, Music, Map, User, Globe,
                                         BookOpen, Shield, Target, Briefcase, FileText, Settings, Search, Brain, Presentation, Calculator, GraduationCap, Zap, AlertTriangle, Mic2, Lightbulb, Building, Play, Pause, Atom, Eye, Scale, Users, WifiOff, CheckCircle, Waves, ChevronDown, ChevronRight, Calendar, DollarSign, Moon, Signal, ArrowLeft, Radio, Activity, Mail
@@ -540,10 +540,7 @@ const LayoutInner = ({ children, currentPageName }) => {
             </header>
             )}
 
-        {/* CB51 CUSTOM MOBILE MENU */}
-        {(currentPageName.startsWith('Scott') || currentPageName.startsWith('CB51')) && (
-          <CB51MobileMenu isOpen={isMobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
-        )}
+
 
         {/* MOBILE MENU (UF51 ONLY) */}
                   {isMobileMenuOpen && !currentPageName.startsWith('Scott') && !currentPageName.startsWith('CB51') && (
