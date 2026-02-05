@@ -52,79 +52,98 @@ export default function CB51() {
   const firstArtistId = artists.length > 0 ? artists[0].id : null;
 
   return (
-          <CB51PINGuard>
-            <CB51ErrorBoundary>
-            <div className="min-h-screen bg-black text-white p-3 pb-20">
-        
-        {/* HEADER + ARTIST QUICK PICK */}
-                <div className="flex items-center justify-between mb-4">
-                  <h1 className="text-xl font-black text-cyan-400 font-mono">CB51</h1>
-                  {artists.length > 0 && (
-                    <select
-                      onChange={(e) => {
-                        const artist = artists.find(a => a.id === e.target.value);
-                        if (artist && e.target.value !== firstArtistId) {
-                          navigate(createPageUrl('ScottArtistHome') + `?id=${artist.id}`);
-                        }
-                      }}
-                      value={firstArtistId || ''}
-                      className="bg-black border-2 border-cyan-500/50 text-cyan-400 text-xs font-bold rounded px-3 py-1"
-                    >
-                      {artists.map(a => (
-                        <option key={a.id} value={a.id}>{a.name}</option>
-                      ))}
-                    </select>
-                  )}
+                <CB51PINGuard>
+                  <CB51ErrorBoundary>
+                  <div className="min-h-screen bg-black text-white pb-20">
+
+              {/* ARTIST CIRCLES - Horizontal scroll */}
+              {artists.length > 0 && (
+                <div className="px-4 py-4 border-b border-cyan-500/20">
+                  <div className="flex gap-3 overflow-x-auto pb-2">
+                    {artists.map((artist) => (
+                      <motion.button
+                        key={artist.id}
+                        onClick={() => navigate(createPageUrl('ScottArtistHome') + `?id=${artist.id}`)}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        className={`flex-shrink-0 relative ${
+                          artist.id === firstArtistId 
+                            ? 'ring-2 ring-cyan-400' 
+                            : 'hover:ring-1 hover:ring-cyan-400/50'
+                        } transition-all`}
+                      >
+                        {artist.profile_pic_url ? (
+                          <img 
+                            src={artist.profile_pic_url} 
+                            alt={artist.name}
+                            className="w-14 h-14 rounded-full object-cover border-2 border-cyan-500/40 hover:border-cyan-500"
+                          />
+                        ) : (
+                          <div className="w-14 h-14 rounded-full bg-gradient-to-br from-cyan-500 to-cyan-600 text-white font-black text-lg flex items-center justify-center border-2 border-cyan-500/40">
+                            {artist.name.charAt(0).toUpperCase()}
+                          </div>
+                        )}
+                        <span className="text-[9px] font-bold text-cyan-400 absolute -bottom-3 left-1/2 -translate-x-1/2 whitespace-nowrap">{artist.name}</span>
+                      </motion.button>
+                    ))}
+                    {artists.length > 0 && (
+                      <motion.button
+                        whileHover={{ scale: 1.05 }}
+                        onClick={() => navigate(createPageUrl('ScottAddArtist'))}
+                        className="flex-shrink-0 w-14 h-14 rounded-full border-2 border-dashed border-cyan-500/40 hover:border-cyan-500 flex items-center justify-center text-cyan-400 hover:bg-cyan-500/10 transition-all"
+                      >
+                        <Plus className="w-5 h-5" />
+                      </motion.button>
+                    )}
+                  </div>
+                  <div className="h-6" />
+                </div>
+              )}
+
+              {/* MAIN CONTENT */}
+              <div className="px-4 space-y-4 pt-4">
+
+                {/* GIG UPLOAD */}
+                {firstArtistId && (
+                  <CB51GigUploadParser 
+                    artistId={firstArtistId}
+                    onGigCreated={() => {}}
+                  />
+                )}
+
+                {/* QUICK ACTIONS GRID */}
+                <div className="grid grid-cols-3 gap-2">
+                  <button
+                    onClick={() => navigate(createPageUrl(firstArtistId ? `ScottCalendarView?id=${firstArtistId}` : 'ScottCalendarView'))}
+                    className="bg-gradient-to-br from-cyan-900/40 to-black border-2 border-cyan-500/40 hover:border-cyan-500 rounded-lg p-3 text-center transition-all group"
+                  >
+                    <Calendar className="w-5 h-5 text-cyan-400 mx-auto mb-1 group-hover:scale-110 transition-transform" />
+                    <p className="text-cyan-400 font-black text-[9px] font-mono">CALENDAR</p>
+                  </button>
+
+                  <button
+                    onClick={() => navigate(createPageUrl(firstArtistId ? `ScottToDo?id=${firstArtistId}` : 'ScottToDo'))}
+                    className="bg-gradient-to-br from-cyan-900/40 to-black border-2 border-cyan-500/40 hover:border-cyan-500 rounded-lg p-3 text-center transition-all group"
+                  >
+                    <CheckCircle className="w-5 h-5 text-cyan-400 mx-auto mb-1 group-hover:scale-110 transition-transform" />
+                    <p className="text-cyan-400 font-black text-[9px] font-mono">TASKS</p>
+                  </button>
+
+                  <button
+                    onClick={() => navigate(createPageUrl(firstArtistId ? `ScottFinanceAdmin?id=${firstArtistId}` : 'ScottFinanceAdmin'))}
+                    className="bg-gradient-to-br from-green-900/40 to-black border-2 border-green-500/40 hover:border-green-500 rounded-lg p-3 text-center transition-all group"
+                  >
+                    <DollarSign className="w-5 h-5 text-green-400 mx-auto mb-1 group-hover:scale-110 transition-transform" />
+                    <p className="text-green-400 font-black text-[9px] font-mono">FINANCE</p>
+                  </button>
                 </div>
 
-        {/* TWO COLUMN LAYOUT */}
-        <div className="grid grid-cols-2 gap-3 mb-3">
-          {/* LEFT: UPLOAD & PENDING */}
-          <div className="space-y-3">
-            {firstArtistId && (
-              <>
-                <CB51GigUploadParser 
-                  artistId={firstArtistId}
-                  onGigCreated={() => {}}
-                />
+                {/* PENDING GIGS */}
                 {firstArtistId && <CB51NotificationInbox artistId={firstArtistId} />}
-              </>
-            )}
-          </div>
+              </div>
+            </div>
 
-          {/* RIGHT: QUICK ACTIONS */}
-          <div className="space-y-3">
-            <button
-              onClick={() => navigate(createPageUrl(firstArtistId ? `ScottCalendarView?id=${firstArtistId}` : 'ScottCalendarView'))}
-              className="w-full bg-gradient-to-br from-cyan-900/40 to-cyan-900/20 border-2 border-cyan-500/50 hover:border-cyan-500 rounded-lg p-4 text-left transition-all"
-            >
-              <Calendar className="w-5 h-5 text-cyan-400 mb-2" />
-              <p className="text-cyan-400 font-black text-xs font-mono">CALENDAR</p>
-              <p className="text-gray-600 text-[9px] mt-1">View all shows</p>
-            </button>
-
-            <button
-              onClick={() => navigate(createPageUrl(firstArtistId ? `ScottToDo?id=${firstArtistId}` : 'ScottToDo'))}
-              className="w-full bg-gradient-to-br from-cyan-900/40 to-cyan-900/20 border-2 border-cyan-500/50 hover:border-cyan-500 rounded-lg p-4 text-left transition-all"
-            >
-              <CheckCircle className="w-5 h-5 text-cyan-400 mb-2" />
-              <p className="text-cyan-400 font-black text-xs font-mono">TASKS</p>
-              <p className="text-gray-600 text-[9px] mt-1">To-do list</p>
-            </button>
-
-            <button
-              onClick={() => navigate(createPageUrl(firstArtistId ? `ScottFinanceAdmin?id=${firstArtistId}` : 'ScottFinanceAdmin'))}
-              className="w-full bg-gradient-to-br from-green-900/40 to-green-900/20 border-2 border-green-500/50 hover:border-green-500 rounded-lg p-4 text-left transition-all"
-            >
-              <DollarSign className="w-5 h-5 text-green-400 mb-2" />
-              <p className="text-green-400 font-black text-xs font-mono">FINANCE</p>
-              <p className="text-gray-600 text-[9px] mt-1">Money tracker</p>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      </CB51ErrorBoundary>
-      </CB51PINGuard>
-      );
+            </CB51ErrorBoundary>
+            </CB51PINGuard>
+            );
       }
