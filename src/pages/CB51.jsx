@@ -7,7 +7,7 @@ import { Calendar, CheckCircle, DollarSign, Plus, Sparkles, Mic2, Music, Clipboa
 import { motion, AnimatePresence } from 'framer-motion';
 import CB51TestRoleSwitcher from '@/components/scott/CB51TestRoleSwitcher';
 import CB51ErrorBoundary from '@/components/scott/CB51ErrorBoundary';
-import CB51PINGuard from '@/components/scott/CB51PINGuard';
+import CB51PINGuard from '@/components/cb51/CB51PINGuard';
 
 export default function CB51() {
   const navigate = useNavigate();
