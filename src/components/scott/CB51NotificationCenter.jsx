@@ -127,164 +127,123 @@ export default function CB51NotificationCenter({ userEmail, userRole = 'manager'
   });
 
   if (userRole === 'manager') {
-    return (
-      <div className="space-y-3">
-        {pendingOffers.length === 0 ? (
-          <div className="text-center py-6 text-gray-500 text-sm">
-            No pending offers awaiting your decision
-          </div>
-        ) : (
-          <AnimatePresence>
-            {pendingOffers.map((offer) => (
-              <motion.div
-                key={offer.id}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                className="bg-black border-2 border-cyan-500/50 rounded-lg p-4"
-              >
-                <div className="flex items-start justify-between mb-3">
-                  <div>
-                    <h3 className="text-white font-bold text-sm">{offer.venue}</h3>
-                    <p className="text-cyan-400 text-xs font-mono mt-1">
-                      {offer.date} • {offer.currency || 'GBP'}{offer.fee}
-                    </p>
-                    {offer.city && <p className="text-gray-500 text-xs mt-1">📍 {offer.city}</p>}
-                  </div>
-                </div>
+    return pendingOffers.length === 0 ? null : (
+      <div className="space-y-3 mb-6">
+        <AnimatePresence>
+          {pendingOffers.map((offer) => (
+            <motion.div
+              key={offer.id}
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              className="p-4 rounded-2xl backdrop-blur-xl bg-gradient-to-br from-cyan-500/20 to-green-500/20 border-2 border-cyan-500/50"
+            >
+              <div className="mb-4">
+                <h3 className="text-white font-black text-lg mb-1">{offer.venue}</h3>
+                <p className="text-cyan-300 text-sm font-semibold">
+                  {offer.date} • {offer.currency || 'GBP'}{offer.fee}
+                </p>
+                {offer.city && <p className="text-white/60 text-xs mt-1">📍 {offer.city}</p>}
+              </div>
 
-                {!selectedOffer || selectedOffer.id !== offer.id ? (
-                  <button
-                    onClick={() => setSelectedOffer(offer)}
-                    className="text-cyan-400 hover:text-cyan-300 text-xs font-bold font-mono"
-                  >
-                    SHOW OPTIONS →
-                  </button>
-                ) : (
-                  <div className="flex gap-2">
-                    <motion.button
-                      whileTap={{ scale: 0.95 }}
-                      onClick={() => managerApproveMutation.mutate(offer)}
-                      disabled={managerApproveMutation.isPending}
-                      className="flex-1 bg-green-600 hover:bg-green-700 text-white text-xs font-bold py-2 rounded disabled:opacity-60"
-                    >
-                      {managerApproveMutation.isPending ? '...' : '✓ YES SEND TO BAND'}
-                    </motion.button>
-                    <motion.button
-                      whileTap={{ scale: 0.95 }}
-                      onClick={() => managerRejectMutation.mutate(offer)}
-                      disabled={managerRejectMutation.isPending}
-                      className="flex-1 bg-red-600 hover:bg-red-700 text-white text-xs font-bold py-2 rounded disabled:opacity-60"
-                    >
-                      {managerRejectMutation.isPending ? '...' : '✕ NO REJECT'}
-                    </motion.button>
-                    <button
-                      onClick={() => setSelectedOffer(null)}
-                      className="px-3 bg-gray-700 hover:bg-gray-600 text-white rounded"
-                    >
-                      <X className="w-4 h-4" />
-                    </button>
-                  </div>
-                )}
-              </motion.div>
-            ))}
-          </AnimatePresence>
-        )}
+              <div className="grid grid-cols-2 gap-3">
+                <motion.button
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => managerApproveMutation.mutate(offer)}
+                  disabled={managerApproveMutation.isPending}
+                  className="h-14 rounded-2xl bg-gradient-to-r from-green-500 to-emerald-500 text-white font-black text-base disabled:opacity-50"
+                >
+                  {managerApproveMutation.isPending ? '...' : '✓ YES'}
+                </motion.button>
+                <motion.button
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => managerRejectMutation.mutate(offer)}
+                  disabled={managerRejectMutation.isPending}
+                  className="h-14 rounded-2xl bg-gradient-to-r from-red-500 to-rose-500 text-white font-black text-base disabled:opacity-50"
+                >
+                  {managerRejectMutation.isPending ? '...' : '✕ NO'}
+                </motion.button>
+              </div>
+            </motion.div>
+          ))}
+        </AnimatePresence>
       </div>
     );
   }
 
   // Band member view
   if (userRole === 'band_member') {
-    return (
-      <div className="space-y-3">
-        {awaitingVotes.length === 0 ? (
-          <div className="text-center py-6 text-gray-500 text-sm">
-            No pending votes - you're all caught up
-          </div>
-        ) : (
-          <AnimatePresence>
-            {awaitingVotes.map((offer) => (
-              <motion.div
-                key={offer.id}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                className="bg-black border-2 border-green-500/50 rounded-lg p-4"
-              >
-                <div className="mb-3">
-                  <h3 className="text-white font-bold text-sm">{offer.venue}</h3>
-                  <p className="text-green-400 text-xs font-mono mt-1">
-                    {offer.date} • {offer.currency || 'GBP'}{offer.fee}
-                  </p>
-                  {offer.city && <p className="text-gray-500 text-xs mt-1">📍 {offer.city}</p>}
-                </div>
+    return awaitingVotes.length === 0 ? null : (
+      <div className="space-y-3 mb-6">
+        <AnimatePresence>
+          {awaitingVotes.map((offer) => (
+            <motion.div
+              key={offer.id}
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              className="p-4 rounded-2xl backdrop-blur-xl bg-gradient-to-br from-green-500/20 to-emerald-500/20 border-2 border-green-500/50"
+            >
+              <div className="mb-4">
+                <h3 className="text-white font-black text-lg mb-1">{offer.venue}</h3>
+                <p className="text-green-300 text-sm font-semibold">
+                  {offer.date} • {offer.currency || 'GBP'}{offer.fee}
+                </p>
+                {offer.city && <p className="text-white/60 text-xs mt-1">📍 {offer.city}</p>}
+              </div>
 
-                {!selectedOffer || selectedOffer.id !== offer.id ? (
-                  <button
-                    onClick={() => setSelectedOffer(offer)}
-                    className="text-green-400 hover:text-green-300 text-xs font-bold font-mono"
+              {!showReasonPrompt ? (
+                <div className="grid grid-cols-2 gap-3">
+                  <motion.button
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => bandVoteYesMutation.mutate(offer)}
+                    disabled={bandVoteYesMutation.isPending}
+                    className="h-14 rounded-2xl bg-gradient-to-r from-green-500 to-emerald-500 text-white font-black text-base disabled:opacity-50"
                   >
-                    YOUR VOTE? →
-                  </button>
-                ) : !showReasonPrompt ? (
-                  <div className="flex gap-2">
+                    {bandVoteYesMutation.isPending ? '...' : '✓ YES'}
+                  </motion.button>
+                  <motion.button
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => setShowReasonPrompt(true)}
+                    className="h-14 rounded-2xl bg-gradient-to-r from-red-500 to-rose-500 text-white font-black text-base"
+                  >
+                    ✕ NO
+                  </motion.button>
+                </div>
+              ) : (
+                <div className="space-y-3">
+                  <textarea
+                    placeholder="Why not? (one sentence)"
+                    value={reason}
+                    onChange={(e) => setReason(e.target.value)}
+                    className="w-full bg-black/40 border border-red-500/50 rounded-xl px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:border-red-500"
+                    rows={2}
+                  />
+                  <div className="grid grid-cols-2 gap-3">
                     <motion.button
                       whileTap={{ scale: 0.95 }}
-                      onClick={() => bandVoteYesMutation.mutate(offer)}
-                      disabled={bandVoteYesMutation.isPending}
-                      className="flex-1 bg-green-600 hover:bg-green-700 text-white text-xs font-bold py-2 rounded disabled:opacity-60"
+                      onClick={() => bandVoteNoMutation.mutate(offer)}
+                      disabled={bandVoteNoMutation.isPending || !reason.trim()}
+                      className="h-12 bg-red-600 text-white font-bold rounded-2xl disabled:opacity-50"
                     >
-                      {bandVoteYesMutation.isPending ? '...' : '✓ YES'}
+                      {bandVoteNoMutation.isPending ? '...' : 'SEND'}
                     </motion.button>
                     <motion.button
                       whileTap={{ scale: 0.95 }}
-                      onClick={() => setShowReasonPrompt(true)}
-                      className="flex-1 bg-red-600 hover:bg-red-700 text-white text-xs font-bold py-2 rounded"
+                      onClick={() => {
+                        setShowReasonPrompt(false);
+                        setReason('');
+                      }}
+                      className="h-12 bg-white/10 text-white font-bold rounded-2xl"
                     >
-                      ✕ NO
+                      CANCEL
                     </motion.button>
-                    <button
-                      onClick={() => setSelectedOffer(null)}
-                      className="px-3 bg-gray-700 hover:bg-gray-600 text-white rounded"
-                    >
-                      <X className="w-4 h-4" />
-                    </button>
                   </div>
-                ) : (
-                  <div className="space-y-2">
-                    <textarea
-                      placeholder="Why not? (one sentence)"
-                      value={reason}
-                      onChange={(e) => setReason(e.target.value)}
-                      className="w-full bg-black border border-red-500/50 rounded px-3 py-2 text-white text-xs placeholder-gray-600 focus:outline-none focus:border-red-500"
-                      rows={2}
-                    />
-                    <div className="flex gap-2">
-                      <motion.button
-                        whileTap={{ scale: 0.95 }}
-                        onClick={() => bandVoteNoMutation.mutate(offer)}
-                        disabled={bandVoteNoMutation.isPending || !reason.trim()}
-                        className="flex-1 bg-red-600 hover:bg-red-700 text-white text-xs font-bold py-2 rounded disabled:opacity-60"
-                      >
-                        {bandVoteNoMutation.isPending ? '...' : 'SEND'}
-                      </motion.button>
-                      <button
-                        onClick={() => {
-                          setShowReasonPrompt(false);
-                          setReason('');
-                        }}
-                        className="px-3 bg-gray-700 hover:bg-gray-600 text-white rounded"
-                      >
-                        <X className="w-4 h-4" />
-                      </button>
-                    </div>
-                  </div>
-                )}
-              </motion.div>
-            ))}
-          </AnimatePresence>
-        )}
+                </div>
+              )}
+            </motion.div>
+          ))}
+        </AnimatePresence>
       </div>
     );
   }
