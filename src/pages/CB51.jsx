@@ -8,6 +8,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import CB51NotificationCenter from '@/components/scott/CB51NotificationCenter';
 import CB51TestRoleSwitcher from '@/components/scott/CB51TestRoleSwitcher';
 import CB51ErrorBoundary from '@/components/scott/CB51ErrorBoundary';
+import PushNotificationManager from '@/components/scott/PushNotificationManager';
 
 export default function CB51() {
   const navigate = useNavigate();
@@ -64,6 +65,11 @@ export default function CB51() {
         {/* NOTIFICATIONS - TOP PRIORITY */}
         <CB51NotificationCenter key={testRole} userEmail={user?.email} userRole={testRole} />
 
+        {/* PUSH NOTIFICATIONS */}
+        <div className="mb-6">
+          <PushNotificationManager />
+        </div>
+
         {/* ARTISTS SECTION */}
         {artists.length > 0 ? (
           <div className="mb-6">
@@ -76,30 +82,29 @@ export default function CB51() {
                 + ADD
               </button>
             </div>
-            {artists.slice(0, 2).map((artist) => (
-              <motion.button
-                key={artist.id}
-                onClick={() => navigate(createPageUrl('ScottArtistHome') + `?id=${artist.id}`)}
-                whileTap={{ scale: 0.98 }}
-                className="w-full flex items-center gap-3 mb-2 bg-black border-2 border-white/10 hover:border-cyan-500/50 rounded-lg p-3"
-              >
-                {artist.profile_pic_url ? (
-                  <img src={artist.profile_pic_url} alt="" className="w-10 h-10 rounded object-cover border border-cyan-500" />
-                ) : (
-                  <div className="w-10 h-10 rounded bg-cyan-500 text-black font-black text-base flex items-center justify-center">
-                    {artist.name.charAt(0)}
-                  </div>
-                )}
-                <div className="flex-1 text-left">
-                  <p className="text-white font-bold text-sm">{artist.name}</p>
-                  <p className="text-gray-600 text-xs font-mono">Tap to manage</p>
-                </div>
-                <Sparkles className="w-4 h-4 text-cyan-400" />
-              </motion.button>
-            ))}
+            <div className="grid grid-cols-2 gap-3">
+              {artists.slice(0, 2).map((artist) => (
+                <motion.button
+                  key={artist.id}
+                  onClick={() => navigate(createPageUrl('ScottArtistHome') + `?id=${artist.id}`)}
+                  whileTap={{ scale: 0.96 }}
+                  className="bg-black border-2 border-white/10 hover:border-cyan-500/50 rounded-lg p-3 text-center"
+                >
+                  {artist.profile_pic_url ? (
+                    <img src={artist.profile_pic_url} alt="" className="w-16 h-16 rounded-full object-cover border-2 border-cyan-500 mx-auto mb-2" />
+                  ) : (
+                    <div className="w-16 h-16 rounded-full bg-cyan-500 text-black font-black text-xl flex items-center justify-center mx-auto mb-2">
+                      {artist.name.charAt(0)}
+                    </div>
+                  )}
+                  <p className="text-white font-bold text-xs truncate">{artist.name}</p>
+                  <p className="text-gray-600 text-[9px] font-mono">Manage</p>
+                </motion.button>
+              ))}
+            </div>
             {artists.length > 2 && (
               <p className="text-gray-600 text-xs text-center mt-2">
-                +{artists.length - 2} more artist{artists.length - 2 > 1 ? 's' : ''}
+                +{artists.length - 2} more
               </p>
             )}
           </div>
