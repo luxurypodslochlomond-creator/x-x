@@ -258,10 +258,10 @@ const LayoutInner = ({ children, currentPageName }) => {
 
     // Set Open Graph tags for social sharing
     const ogTags = {
-      'og:title': isCB51 ? 'CB51 • AI Co-Manager' : 'Universal Frequency 51',
+      'og:title': isCB51 ? 'CB51 • Your AI Co-Manager' : 'Universal Frequency 51',
       'og:description': isCB51 
-        ? 'Professional artist management powered by AI51'
-        : 'Heal yourself, heal the planet',
+        ? 'Professional artist management • Gigs • Calendar • Finance • Band coordination'
+        : 'Heal yourself, heal the planet. Free healing frequencies, lossless music, planetary action.',
       'og:image': window.location.origin + '/api/functions/serveOGImage',
       'og:type': 'website'
     };
