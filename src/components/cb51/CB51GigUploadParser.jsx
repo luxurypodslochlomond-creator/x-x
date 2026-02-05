@@ -68,25 +68,24 @@ export default function CB51GigUploadParser({ artistId, onGigCreated }) {
 
   const saveMutation = useMutation({
     mutationFn: async () => {
+      if (!editing.venue_name || !editing.date_start || !editing.promoter_name) {
+        setSaveError('Need: Venue, Date & Promoter name');
+        throw new Error('Missing required fields');
+      }
+
       const gig = await base44.entities.GigOffer.create({
         artist_id: artistId,
         title: editing.venue_name || 'Untitled Gig',
         venue: editing.venue_name,
-        location: editing.location,
+        location: editing.location || '',
         date_start: editing.date_start,
-        time_start: editing.time_start,
-        fee: editing.fee,
+        time_start: editing.time_start || '',
+        fee: editing.fee ? Number(editing.fee) : null,
         promoter_name: editing.promoter_name,
-        promoter_email: editing.promoter_email,
-        promoter_phone: editing.promoter_phone,
-        offer_details: editing.notes,
-        status: 'manager_reviewing',
-        manager_decision: null
-      });
-
-      // Trigger notification
-      await base44.functions.invoke('notifyManagerGigOffer', {
-        gigOfferId: gig.id
+        promoter_email: editing.promoter_email || '',
+        promoter_phone: editing.promoter_phone || '',
+        offer_details: editing.offer_details || editing.notes || '',
+        status: 'manager_reviewing'
       });
 
       return gig;
@@ -96,7 +95,11 @@ export default function CB51GigUploadParser({ artistId, onGigCreated }) {
       setExtracted(null);
       setEditing(null);
       setFile(null);
+      setSaveError(null);
       onGigCreated?.(gig);
+    },
+    onError: (err) => {
+      setSaveError(err.message);
     }
   });
 
