@@ -137,11 +137,29 @@ export default function CB51() {
               )}
 
               {/* MAIN CONTENT */}
-              <div className="px-4 space-y-4 pt-4">
+              <div className="px-4 space-y-3 pt-4">
 
-                {/* GIG UPLOAD - Desktop only */}
+                {/* ALERT BANNER */}
+                <motion.div className="bg-cyan-500/10 border-2 border-cyan-500/40 rounded-lg px-4 py-3 flex items-center gap-3">
+                  <span className="text-cyan-400 text-lg">🔔</span>
+                  <p className="text-cyan-400 font-bold text-sm font-mono">Enable alerts for your team</p>
+                </motion.div>
+
+                {/* AI51 SCAN - Main action */}
+                <button
+                  onClick={() => document.querySelector('input[type="file"]')?.click()}
+                  className="w-full bg-gradient-to-r from-cyan-900/60 to-black border-2 border-cyan-500/50 hover:border-cyan-500 rounded-lg p-4 text-center transition-all group"
+                >
+                  <div className="flex items-center justify-center gap-2 mb-2">
+                    <Sparkles className="w-5 h-5 text-cyan-400 group-hover:scale-110 transition-transform" />
+                    <p className="text-cyan-400 font-black text-sm font-mono">AI51 SCAN</p>
+                  </div>
+                  <p className="text-gray-500 text-xs">Upload PDF contracts or gig offers</p>
+                </button>
+
+                {/* GIG UPLOAD - Hidden file input */}
                 {currentArtistId && (
-                  <div className="hidden lg:block">
+                  <div className="hidden">
                     <CB51GigUploadParser 
                       artistId={currentArtistId}
                       onGigCreated={() => {}}
@@ -149,35 +167,60 @@ export default function CB51() {
                   </div>
                 )}
 
-                {/* QUICK ACTIONS GRID */}
-                <div className="grid grid-cols-3 gap-2">
+                {/* PENDING APPROVALS - Decision hub */}
+                {currentArtistId && <CB51NotificationInbox artistId={currentArtistId} />}
+
+                {/* ACTION SECTIONS WITH BADGES */}
+                <div className="space-y-2 pt-2">
+                  <button
+                    onClick={() => navigate(createPageUrl(currentArtistId ? `ScottMessageInbox?id=${currentArtistId}` : 'ScottMessageInbox'))}
+                    className="w-full flex items-center justify-between px-4 py-3 bg-black border-2 border-cyan-500/30 hover:border-cyan-500 rounded-lg transition-all group"
+                  >
+                    <div className="flex items-center gap-3">
+                      <Mail className="w-5 h-5 text-cyan-400" />
+                      <p className="text-cyan-400 font-bold text-sm font-mono">EMAIL</p>
+                    </div>
+                    <span className="text-gray-600 group-hover:text-cyan-400 transition-colors">→</span>
+                  </button>
+
                   <button
                     onClick={() => navigate(createPageUrl(currentArtistId ? `ScottCalendarView?id=${currentArtistId}` : 'ScottCalendarView'))}
-                    className="bg-gradient-to-br from-cyan-900/40 to-black border-2 border-cyan-500/40 hover:border-cyan-500 rounded-lg p-3 text-center transition-all group"
+                    className="w-full flex items-center justify-between px-4 py-3 bg-black border-2 border-cyan-500/30 hover:border-cyan-500 rounded-lg transition-all group"
                   >
-                    <Calendar className="w-5 h-5 text-cyan-400 mx-auto mb-1 group-hover:scale-110 transition-transform" />
-                    <p className="text-cyan-400 font-black text-[9px] font-mono">CALENDAR</p>
+                    <div className="flex items-center gap-3">
+                      <Calendar className="w-5 h-5 text-cyan-400" />
+                      <p className="text-cyan-400 font-bold text-sm font-mono">CALENDAR</p>
+                    </div>
+                    <span className="text-gray-600 group-hover:text-cyan-400 transition-colors">→</span>
                   </button>
 
                   <button
                     onClick={() => navigate(createPageUrl(currentArtistId ? `ScottToDo?id=${currentArtistId}` : 'ScottToDo'))}
-                    className="bg-gradient-to-br from-cyan-900/40 to-black border-2 border-cyan-500/40 hover:border-cyan-500 rounded-lg p-3 text-center transition-all group"
+                    className="w-full flex items-center justify-between px-4 py-3 bg-black border-2 border-cyan-500/30 hover:border-cyan-500 rounded-lg transition-all group"
                   >
-                    <CheckCircle className="w-5 h-5 text-cyan-400 mx-auto mb-1 group-hover:scale-110 transition-transform" />
-                    <p className="text-cyan-400 font-black text-[9px] font-mono">TASKS</p>
+                    <div className="flex items-center gap-3">
+                      <CheckCircle className="w-5 h-5 text-cyan-400" />
+                      <p className="text-cyan-400 font-bold text-sm font-mono">TASKS</p>
+                    </div>
+                    <span className="inline-block bg-cyan-500/30 text-cyan-400 text-xs font-bold px-2 py-1 rounded">5</span>
                   </button>
 
                   <button
                     onClick={() => navigate(createPageUrl(currentArtistId ? `ScottFinanceAdmin?id=${currentArtistId}` : 'ScottFinanceAdmin'))}
-                    className="bg-gradient-to-br from-green-900/40 to-black border-2 border-green-500/40 hover:border-green-500 rounded-lg p-3 text-center transition-all group"
+                    className="w-full flex items-center justify-between px-4 py-3 bg-black border-2 border-green-500/30 hover:border-green-500 rounded-lg transition-all group"
                   >
-                    <DollarSign className="w-5 h-5 text-green-400 mx-auto mb-1 group-hover:scale-110 transition-transform" />
-                    <p className="text-green-400 font-black text-[9px] font-mono">FINANCE</p>
+                    <div className="flex items-center gap-3">
+                      <DollarSign className="w-5 h-5 text-green-400" />
+                      <p className="text-green-400 font-bold text-sm font-mono">FINANCE</p>
+                    </div>
+                    <span className="text-gray-600 group-hover:text-green-400 transition-colors">→</span>
                   </button>
                 </div>
 
-                {/* PENDING GIGS */}
-                {currentArtistId && <CB51NotificationInbox artistId={currentArtistId} />}
+                {/* ARCHIVED */}
+                <button className="w-full text-left px-4 py-2 text-gray-600 hover:text-gray-400 font-mono text-xs transition-colors">
+                  ▶ Archived (4)
+                </button>
               </div>
             </div>
 
