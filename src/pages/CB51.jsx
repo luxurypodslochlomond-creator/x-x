@@ -47,72 +47,77 @@ export default function CB51() {
     );
   }
 
+  const firstArtistId = artists.length > 0 ? artists[0].id : null;
+
   return (
     <CB51ErrorBoundary>
       <div className="min-h-screen bg-black text-white p-3 pb-20">
         
+        {/* HEADER */}
+        <div className="flex items-center justify-between mb-6">
+          <div>
+            <h1 className="text-2xl font-black text-cyan-400 font-mono">DASHBOARD</h1>
+            <p className="text-gray-600 text-xs font-mono">Manager Overview</p>
+          </div>
+        </div>
+
         {/* NOTIFICATIONS - TOP PRIORITY */}
         <CB51NotificationCenter key={testRole} userEmail={user?.email} userRole={testRole} />
 
-        {/* ARTISTS - COMPACT */}
-        {artists.length > 0 && (
+        {/* ARTISTS SECTION */}
+        {artists.length > 0 ? (
           <div className="mb-6">
-            {artists.slice(0, 1).map((artist) => (
+            <div className="flex items-center justify-between mb-3">
+              <h2 className="text-white font-black text-sm font-mono">YOUR ARTISTS</h2>
+              <button
+                onClick={() => navigate(createPageUrl('ScottAddArtist'))}
+                className="text-green-400 text-xs font-bold font-mono hover:text-green-300"
+              >
+                + ADD
+              </button>
+            </div>
+            {artists.slice(0, 2).map((artist) => (
               <motion.button
                 key={artist.id}
                 onClick={() => navigate(createPageUrl('ScottArtistHome') + `?id=${artist.id}`)}
                 whileTap={{ scale: 0.98 }}
-                className="w-full flex items-center gap-3 mb-3"
+                className="w-full flex items-center gap-3 mb-2 bg-black border-2 border-white/10 hover:border-cyan-500/50 rounded-lg p-3"
               >
                 {artist.profile_pic_url ? (
-                  <img src={artist.profile_pic_url} alt="" className="w-12 h-12 rounded object-cover" />
+                  <img src={artist.profile_pic_url} alt="" className="w-10 h-10 rounded object-cover border border-cyan-500" />
                 ) : (
-                  <div className="w-12 h-12 rounded bg-cyan-500 text-black font-black text-lg flex items-center justify-center">
+                  <div className="w-10 h-10 rounded bg-cyan-500 text-black font-black text-base flex items-center justify-center">
                     {artist.name.charAt(0)}
                   </div>
                 )}
                 <div className="flex-1 text-left">
-                  <p className="text-white font-black text-lg">{artist.name}</p>
-                  <p className="text-gray-600 text-xs font-mono">Operations</p>
+                  <p className="text-white font-bold text-sm">{artist.name}</p>
+                  <p className="text-gray-600 text-xs font-mono">Tap to manage</p>
                 </div>
+                <Sparkles className="w-4 h-4 text-cyan-400" />
               </motion.button>
             ))}
+            {artists.length > 2 && (
+              <p className="text-gray-600 text-xs text-center mt-2">
+                +{artists.length - 2} more artist{artists.length - 2 > 1 ? 's' : ''}
+              </p>
+            )}
+          </div>
+        ) : (
+          <div className="bg-black border-2 border-green-500 rounded-lg p-6 text-center mb-6">
+            <Users className="w-12 h-12 text-green-400 mx-auto mb-3" />
+            <h3 className="text-green-400 font-black text-base mb-2">NO ARTISTS YET</h3>
+            <p className="text-gray-500 text-xs mb-4">Add your first artist to get started</p>
+            <button
+              onClick={() => navigate(createPageUrl('ScottAddArtist'))}
+              className="bg-green-500 hover:bg-green-600 text-black font-bold px-6 py-2 rounded text-sm"
+            >
+              + ADD ARTIST
+            </button>
           </div>
         )}
 
-        {/* 2x2 GRID - LIKE ARTIST PAGE */}
-        <div className="grid grid-cols-2 gap-2 mb-6">
-          {[
-            { icon: Mic2, label: 'LIVE', page: 'ScottLive', color: 'cyan' },
-            { icon: Music, label: 'SESSIONS', page: 'ScottSessions', color: 'orange' },
-            { icon: ClipboardList, label: 'TO-DO', page: 'ScottToDo', color: 'cyan' },
-            { icon: DollarSign, label: 'FINANCE', page: 'ScottFinanceAdmin', color: 'orange' },
-          ].map(({ icon: Icon, label, page, color }) => {
-            const colorMap = {
-              cyan: { border: 'border-cyan-500', bg: 'bg-cyan-500' },
-              orange: { border: 'border-orange-500', bg: 'bg-orange-500' }
-            };
-            const c = colorMap[color];
-            const firstArtistId = artists.length > 0 ? artists[0].id : null;
-            const pageUrl = firstArtistId ? `${page}?id=${firstArtistId}` : page;
-            
-            return (
-              <motion.button
-                key={page}
-                onClick={() => navigate(createPageUrl(pageUrl))}
-                whileTap={{ scale: 0.96 }}
-                className={`bg-black border-2 ${c.border} rounded-lg p-2 text-center`}
-              >
-                <div className={`w-12 h-12 rounded ${c.bg} text-black font-black flex items-center justify-center mx-auto mb-1`}>
-                  <Icon className="w-6 h-6" />
-                </div>
-                <p className="text-white font-black text-[10px] font-mono">{label}</p>
-              </motion.button>
-            );
-          })}
-        </div>
-
-        {/* UPCOMING GIGS SECTION */}
+        {/* UPCOMING GIGS */}
         <div className="bg-black border-2 border-cyan-500 rounded-lg p-3 mb-3">
           <div className="flex items-center gap-2 mb-3">
             <Calendar className="w-5 h-5 text-cyan-400" />
@@ -120,25 +125,32 @@ export default function CB51() {
           </div>
           <p className="text-gray-600 text-xs text-center py-2">No upcoming gigs</p>
           <button
-            onClick={() => navigate(createPageUrl('ScottCalendarView'))}
+            onClick={() => navigate(createPageUrl(firstArtistId ? `ScottCalendarView?id=${firstArtistId}` : 'ScottCalendarView'))}
             className="w-full bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-400 text-xs font-bold font-mono py-2 rounded border border-cyan-500/50"
           >
             VIEW CALENDAR
           </button>
         </div>
 
-        {/* ADD ARTIST SECTION */}
-        <div className="bg-black border-2 border-green-500 rounded-lg p-3">
-          <button
-            onClick={() => navigate(createPageUrl('ScottAddArtist'))}
-            className="w-full flex items-center gap-2"
-          >
-            <Users className="w-4 h-4 text-green-400" />
-            <h2 className="text-green-400 font-black text-xs font-mono flex-1 text-left">
-              ARTISTS ({artists.length})
-            </h2>
-            <div className="text-green-400 text-xl">+</div>
-          </button>
+        {/* QUICK ACTIONS */}
+        <div className="bg-black border-2 border-white/10 rounded-lg p-3">
+          <h2 className="text-white font-black text-sm font-mono mb-3">QUICK ACTIONS</h2>
+          <div className="grid grid-cols-2 gap-2">
+            <button
+              onClick={() => navigate(createPageUrl(firstArtistId ? `ScottToDo?id=${firstArtistId}` : 'ScottToDo'))}
+              className="bg-cyan-900/20 border border-cyan-500/30 rounded p-2 text-left"
+            >
+              <CheckCircle className="w-4 h-4 text-cyan-400 mb-1" />
+              <p className="text-cyan-400 text-[9px] font-bold font-mono">TASKS</p>
+            </button>
+            <button
+              onClick={() => navigate(createPageUrl(firstArtistId ? `ScottFinanceAdmin?id=${firstArtistId}` : 'ScottFinanceAdmin'))}
+              className="bg-green-900/20 border border-green-500/30 rounded p-2 text-left"
+            >
+              <DollarSign className="w-4 h-4 text-green-400 mb-1" />
+              <p className="text-green-400 text-[9px] font-bold font-mono">FINANCE</p>
+            </button>
+          </div>
         </div>
       </div>
       
