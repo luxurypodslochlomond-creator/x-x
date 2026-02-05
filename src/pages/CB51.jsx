@@ -115,6 +115,9 @@ export default function CB51() {
           </div>
         )}
 
+        {/* PENDING GIGS - MANAGER APPROVAL */}
+        {firstArtistId && <CB51PendingGigs artistId={firstArtistId} />}
+
         {/* UPCOMING GIGS */}
         <div className="bg-black border-2 border-cyan-500 rounded-lg p-3 mb-3">
           <div className="flex items-center gap-2 mb-3">
