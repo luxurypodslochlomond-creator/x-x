@@ -137,25 +137,24 @@ export default function CB51() {
               )}
 
               {/* MAIN CONTENT */}
-              <div className="px-4 space-y-3 pt-4">
+              <div className="px-4 space-y-6 pt-6 pb-20">
 
-                {/* ALERT BANNER */}
-                <motion.div className="bg-cyan-500/10 border-2 border-cyan-500/40 rounded-lg px-4 py-3 flex items-center gap-3">
-                  <span className="text-cyan-400 text-lg">🔔</span>
-                  <p className="text-cyan-400 font-bold text-sm font-mono">Enable alerts for your team</p>
-                </motion.div>
-
-                {/* AI51 SCAN - Main action */}
-                <button
+                {/* AI51 SCAN - Hero action */}
+                <motion.button
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
                   onClick={() => document.querySelector('input[type="file"]')?.click()}
-                  className="w-full bg-gradient-to-r from-cyan-900/60 to-black border-2 border-cyan-500/50 hover:border-cyan-500 rounded-lg p-4 text-center transition-all group"
+                  className="w-full relative overflow-hidden rounded-2xl group"
                 >
-                  <div className="flex items-center justify-center gap-2 mb-2">
-                    <Sparkles className="w-5 h-5 text-cyan-400 group-hover:scale-110 transition-transform" />
-                    <p className="text-cyan-400 font-black text-sm font-mono">AI51 SCAN</p>
+                  <div className="absolute inset-0 bg-gradient-to-r from-cyan-600/20 via-cyan-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="relative bg-gradient-to-br from-cyan-950/40 to-black border border-cyan-500/30 hover:border-cyan-500/60 backdrop-blur-sm p-6 transition-all duration-300">
+                    <div className="flex items-center gap-3 mb-2">
+                      <Sparkles className="w-6 h-6 text-cyan-400 group-hover:scale-110 transition-transform" />
+                      <h2 className="text-white font-black text-lg">AI51 SCAN</h2>
+                    </div>
+                    <p className="text-gray-400 text-xs">Upload PDF contracts or gig offers</p>
                   </div>
-                  <p className="text-gray-500 text-xs">Upload PDF contracts or gig offers</p>
-                </button>
+                </motion.button>
 
                 {/* GIG UPLOAD - Hidden file input */}
                 {currentArtistId && (
@@ -167,60 +166,53 @@ export default function CB51() {
                   </div>
                 )}
 
-                {/* PENDING APPROVALS - Decision hub */}
-                {currentArtistId && <CB51NotificationInbox artistId={currentArtistId} />}
+                {/* NOTIFICATIONS FEED */}
+                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }}>
+                  <h3 className="text-gray-500 text-xs font-mono uppercase tracking-wider mb-3">Approvals</h3>
+                  {currentArtistId && <CB51NotificationFeed artistId={currentArtistId} />}
+                </motion.div>
 
-                {/* ACTION SECTIONS WITH BADGES */}
-                <div className="space-y-2 pt-2">
-                  <button
-                    onClick={() => navigate(createPageUrl(currentArtistId ? `ScottMessageInbox?id=${currentArtistId}` : 'ScottMessageInbox'))}
-                    className="w-full flex items-center justify-between px-4 py-3 bg-black border-2 border-cyan-500/30 hover:border-cyan-500 rounded-lg transition-all group"
-                  >
-                    <div className="flex items-center gap-3">
-                      <Mail className="w-5 h-5 text-cyan-400" />
-                      <p className="text-cyan-400 font-bold text-sm font-mono">EMAIL</p>
-                    </div>
-                    <span className="text-gray-600 group-hover:text-cyan-400 transition-colors">→</span>
-                  </button>
-
-                  <button
-                    onClick={() => navigate(createPageUrl(currentArtistId ? `ScottCalendarView?id=${currentArtistId}` : 'ScottCalendarView'))}
-                    className="w-full flex items-center justify-between px-4 py-3 bg-black border-2 border-cyan-500/30 hover:border-cyan-500 rounded-lg transition-all group"
-                  >
-                    <div className="flex items-center gap-3">
-                      <Calendar className="w-5 h-5 text-cyan-400" />
-                      <p className="text-cyan-400 font-bold text-sm font-mono">CALENDAR</p>
-                    </div>
-                    <span className="text-gray-600 group-hover:text-cyan-400 transition-colors">→</span>
-                  </button>
-
-                  <button
-                    onClick={() => navigate(createPageUrl(currentArtistId ? `ScottToDo?id=${currentArtistId}` : 'ScottToDo'))}
-                    className="w-full flex items-center justify-between px-4 py-3 bg-black border-2 border-cyan-500/30 hover:border-cyan-500 rounded-lg transition-all group"
-                  >
-                    <div className="flex items-center gap-3">
-                      <CheckCircle className="w-5 h-5 text-cyan-400" />
-                      <p className="text-cyan-400 font-bold text-sm font-mono">TASKS</p>
-                    </div>
-                    <span className="inline-block bg-cyan-500/30 text-cyan-400 text-xs font-bold px-2 py-1 rounded">5</span>
-                  </button>
-
-                  <button
-                    onClick={() => navigate(createPageUrl(currentArtistId ? `ScottFinanceAdmin?id=${currentArtistId}` : 'ScottFinanceAdmin'))}
-                    className="w-full flex items-center justify-between px-4 py-3 bg-black border-2 border-green-500/30 hover:border-green-500 rounded-lg transition-all group"
-                  >
-                    <div className="flex items-center gap-3">
-                      <DollarSign className="w-5 h-5 text-green-400" />
-                      <p className="text-green-400 font-bold text-sm font-mono">FINANCE</p>
-                    </div>
-                    <span className="text-gray-600 group-hover:text-green-400 transition-colors">→</span>
-                  </button>
+                {/* ACTION SHORTCUTS */}
+                <div className="pt-4">
+                  <h3 className="text-gray-500 text-xs font-mono uppercase tracking-wider mb-3">Quick Access</h3>
+                  <div className="space-y-2">
+                    {[
+                      { icon: Mail, label: 'EMAIL', color: 'cyan', route: 'ScottMessageInbox' },
+                      { icon: Calendar, label: 'CALENDAR', color: 'cyan', route: 'ScottCalendarView' },
+                      { icon: CheckCircle, label: 'TASKS', color: 'cyan', route: 'ScottToDo', badge: '5' },
+                      { icon: DollarSign, label: 'FINANCE', color: 'green', route: 'ScottFinanceAdmin' },
+                    ].map(({ icon: Icon, label, color, route, badge }) => (
+                      <motion.button
+                        key={label}
+                        whileHover={{ x: 4 }}
+                        onClick={() => navigate(createPageUrl(currentArtistId ? `${route}?id=${currentArtistId}` : route))}
+                        className={`w-full flex items-center justify-between px-4 py-3 rounded-xl border transition-all duration-200 group ${
+                          color === 'green'
+                            ? 'bg-green-950/10 border-green-500/20 hover:border-green-500/40 hover:bg-green-950/20'
+                            : 'bg-cyan-950/10 border-cyan-500/20 hover:border-cyan-500/40 hover:bg-cyan-950/20'
+                        }`}
+                      >
+                        <div className="flex items-center gap-3">
+                          <Icon className={`w-4 h-4 ${color === 'green' ? 'text-green-400' : 'text-cyan-400'}`} />
+                          <span className={`font-bold text-sm font-mono ${color === 'green' ? 'text-green-400' : 'text-cyan-400'}`}>
+                            {label}
+                          </span>
+                        </div>
+                        {badge ? (
+                          <span className={`text-xs font-black px-2 py-1 rounded-lg ${
+                            color === 'green'
+                              ? 'bg-green-500/20 text-green-300'
+                              : 'bg-cyan-500/20 text-cyan-300'
+                          }`}>
+                            {badge}
+                          </span>
+                        ) : (
+                          <span className={`text-gray-600 group-hover:${color === 'green' ? 'text-green-400' : 'text-cyan-400'} transition-colors text-sm`}>→</span>
+                        )}
+                      </motion.button>
+                    ))}
+                  </div>
                 </div>
-
-                {/* ARCHIVED */}
-                <button className="w-full text-left px-4 py-2 text-gray-600 hover:text-gray-400 font-mono text-xs transition-colors">
-                  ▶ Archived (4)
-                </button>
               </div>
             </div>
 
