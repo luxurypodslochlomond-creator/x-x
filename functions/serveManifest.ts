@@ -5,9 +5,9 @@ Deno.serve(async (req) => {
     const isCB51 = hostname.includes('cb51.');
 
     const manifest = isCB51 ? {
-      name: "CB51 • AI Co-Manager for Artists",
+      name: "CB51 : CitizenBand51 : Avoid the Noise",
       short_name: "CB51",
-      description: "Gigs • Calendar • Finance • Band votes",
+      description: "CB51 : CitizenBand51 : Avoid the Noise",
       start_url: "/CB51",
       scope: "/",
       display: "standalone",
