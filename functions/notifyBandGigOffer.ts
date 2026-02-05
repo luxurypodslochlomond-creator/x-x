@@ -16,14 +16,13 @@ Deno.serve(async (req) => {
     }
 
     // Get the gig offer
-    const gig = await base44.entities.ScottGigOffer.get(gigOfferId);
+    const gig = await base44.entities.GigOffer.get(gigOfferId);
     if (!gig) {
       return Response.json({ error: 'Gig not found' }, { status: 404 });
     }
 
-    // Get band members (ScottTeamMember with access to this artist)
-    const allMembers = await base44.entities.ScottTeamMember.list();
-    const bandMembers = allMembers.filter(m => m.artist_access?.includes(gig.artist_id));
+    // Get band members for this artist
+    const bandMembers = await base44.asServiceRole.entities.TeamMember.filter({ artist_id: gig.artist_id });
 
     if (bandMembers.length === 0) {
       return Response.json({ 
