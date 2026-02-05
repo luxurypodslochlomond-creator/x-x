@@ -15,9 +15,20 @@ Deno.serve(async (req) => {
       return Response.json({ error: 'No content to parse' }, { status: 400 });
     }
 
-    // Use AI to extract gig details from the content
+    // Use AI to extract ALL gig details from the content
     const parseRes = await base44.integrations.Core.InvokeLLM({
-      prompt: `Extract gig/event details from this document. Return JSON with: venue_name, date_start (YYYY-MM-DD), time_start (HH:MM), location, promoter_name, promoter_email, promoter_phone, fee (number), offer_details (text). Be strict - only extract what's clearly there.
+      prompt: `Extract COMPLETE gig/event details from this document. Return JSON with ALL fields found:
+- venue_name (name of venue/location)
+- date_start (date in YYYY-MM-DD format)
+- time_start (start time in HH:MM format, 24-hour)
+- location (full address or city where gig is)
+- promoter_name (person/company name)
+- promoter_email (email address)
+- promoter_phone (phone number with country code if present)
+- fee (amount in numbers only, no symbols)
+- offer_details (full offer text/description)
+
+Extract EVERYTHING you find. Don't leave fields blank if data exists anywhere in the document.
 
 Content:
 ${content}`,
@@ -31,7 +42,7 @@ ${content}`,
           promoter_name: { type: 'string' },
           promoter_email: { type: 'string' },
           promoter_phone: { type: 'string' },
-          fee: { type: 'number' },
+          fee: { type: ['string', 'number'] },
           offer_details: { type: 'string' }
         }
       }
@@ -51,7 +62,7 @@ ${content}`,
         promoter_name: parseRes.promoter_name || '',
         promoter_email: parseRes.promoter_email || '',
         promoter_phone: parseRes.promoter_phone || '',
-        fee: parseRes.fee || null,
+        fee: parseRes.fee ? String(parseRes.fee).replace(/[^0-9.]/g, '') : null,
         offer_details: parseRes.offer_details || ''
       },
       missingCritical,
