@@ -51,12 +51,15 @@ export default function CB51GigUploadParser({ artistId, onGigCreated }) {
         source: selectedFile.name
       });
 
-      if (parseRes.extracted) {
-        setExtracted(parseRes.extracted);
-        setEditing({ ...parseRes.extracted });
+      const extracted = parseRes.data?.extracted || parseRes.extracted;
+      if (extracted && (extracted.venue_name || extracted.promoter_name)) {
+        setExtracted(extracted);
+        setEditing({ ...extracted });
         if (parseRes.missingCritical?.length > 0) {
           setError(`⚠️ Missing: ${parseRes.missingCritical.join(', ')}`);
         }
+      } else {
+        setError('Could not extract gig details. Try manual entry.');
       }
     } catch (err) {
       setError(err.message || 'Failed to parse file');
