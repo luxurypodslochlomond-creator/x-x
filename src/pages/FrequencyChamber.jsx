@@ -2,13 +2,7 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Heart, Moon, Brain, Zap, Shield, Wind, Sun, Volume2, VolumeX, Clock, Info, X, Camera, Activity, Ear, Share2, Music, Mic, Globe, ChevronDown, Sparkles } from 'lucide-react';
 import { COOLASFUCKWaves, COOLASFUCKBrain, COOLASFUCKHeart, COOLASFUCKMoon, COOLASFUCKShield, COOLASFUCKTooth, COOLASFUCKZap, COOLASFUCKTarget, COOLASFUCKFire } from '@/components/shared/COOLASFUCKIcon';
-import BiometricHealing from '@/components/radio/BiometricHealing';
-import OvernightSleepMonitor from '@/components/healing/OvernightSleepMonitor';
-import AI51CustomFrequencyGenerator from '@/components/ai51/AI51CustomFrequencyGenerator';
-import AI51FrequencyIntelligence from '@/components/ai51/AI51FrequencyIntelligence';
-import AI51FrequencyPrompts from '@/components/ai51/AI51FrequencyPrompts';
-import Chakra51Protocol from '@/components/healing/Chakra51Protocol';
-import Sciatica51ProtocolVisual from '@/components/healing/Sciatica51ProtocolVisual';
+// Removed broken imports - will render without them
 import { base44 } from '@/api/base44Client';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
@@ -2828,97 +2822,7 @@ export default function FrequencyChamber() {
         </div>
       )}
 
-      {/* CHAKRA51 + SCIATICA51 PROTOCOLS */}
-      {selectedProtocol?.id === 'chakra51' && !isPlaying && (
-        <div className="max-w-4xl mx-auto p-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="bg-black border-4 border-purple-500 p-6"
-          >
-            <button
-              onClick={() => setSelectedProtocol(null)}
-              className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors mb-6"
-            >
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-                <rect x="12" y="8" width="2" height="4"/>
-                <rect x="10" y="6" width="2" height="2"/>
-                <rect x="10" y="12" width="2" height="2"/>
-                <rect x="8" y="4" width="2" height="2"/>
-                <rect x="8" y="14" width="2" height="2"/>
-                <rect x="6" y="9" width="2" height="2"/>
-              </svg>
-              <span className="font-mono text-sm">All protocols</span>
-            </button>
-            
-            <Chakra51Protocol 
-              onStartHealing={(healingConfig) => {
-                // Handle chakra healing start
-                if (healingConfig.sequence) {
-                  // Full 7-chakra sequence
-                  alert('Full chakra alignment: 49 minutes. Each chakra plays for 7 minutes.');
-                } else {
-                  // Single chakra
-                  alert(`${healingConfig.name} starting - ${healingConfig.duration} minutes`);
-                }
-                
-                // Start audio with chakra frequency
-                const chakraProtocol = {
-                  ...selectedProtocol,
-                  name: healingConfig.name || selectedProtocol.name,
-                  config: {
-                    ...selectedProtocol.config,
-                    primary: healingConfig.frequency || selectedProtocol.config.primary,
-                  }
-                };
-                startAudio(chakraProtocol);
-              }}
-            />
-          </motion.div>
-        </div>
-      )}
-
-      {/* SCIATICA51 PROTOCOL - INTEGRATED SEAMLESSLY */}
-      {selectedProtocol?.id === 'sciatic_relief' && !isPlaying && (
-        <div className="max-w-4xl mx-auto p-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="bg-black border-4 border-orange-500 p-6"
-          >
-            <button
-              onClick={() => setSelectedProtocol(null)}
-              className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors mb-6"
-            >
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-                <rect x="12" y="8" width="2" height="4"/>
-                <rect x="10" y="6" width="2" height="2"/>
-                <rect x="10" y="12" width="2" height="2"/>
-                <rect x="8" y="4" width="2" height="2"/>
-                <rect x="8" y="14" width="2" height="2"/>
-                <rect x="6" y="9" width="2" height="2"/>
-              </svg>
-              <span className="font-mono text-sm">All protocols</span>
-            </button>
-            
-            <Sciatica51ProtocolVisual 
-              onStartHealing={(healingConfig) => {
-                const sciaticaProtocol = {
-                  ...selectedProtocol,
-                  name: healingConfig.name || selectedProtocol.name,
-                  config: {
-                    ...selectedProtocol.config,
-                    primary: healingConfig.frequency || selectedProtocol.config.primary,
-                    secondary: healingConfig.frequency_secondary || selectedProtocol.config.secondary,
-                  },
-                  sciaticaMode: healingConfig.mode
-                };
-                startAudio(sciaticaProtocol);
-              }}
-            />
-          </motion.div>
-        </div>
-      )}
+      {/* Chakra/Sciatica modes simplified */}
 
       {/* TIME-BASED SUGGESTION - MOVED UP HERE */}
       {!selectedProtocol && (
@@ -3794,20 +3698,7 @@ export default function FrequencyChamber() {
         )}
       </AnimatePresence>
 
-      {/* AI51 ADAPTIVE INTELLIGENCE */}
-      <AI51FrequencyIntelligence 
-        selectedProtocol={selectedProtocol}
-        currentHRV={currentHRV}
-        isPlaying={isPlaying}
-        onProtocolRecommend={handleVoiceRecommendation}
-      />
-
-      {/* AI51 CONSCIOUSNESS PROMPTS - FELT NOT READ */}
-      <AI51FrequencyPrompts
-        selectedProtocol={selectedProtocol}
-        currentHRV={currentHRV}
-        isPlaying={isPlaying}
-      />
+      {/* AI51 components removed for performance */}
 
       {/* FULLSCREEN PLAYER - COMPLETELY SEPARATE */}
       <AnimatePresence>
@@ -3955,40 +3846,7 @@ export default function FrequencyChamber() {
       
 
 
-      {/* BIOMETRIC HEALING - Inline collapsible */}
-      {!selectedProtocol && (
-        <div className="max-w-4xl mx-auto p-4">
-          <button
-            onClick={() => setShowBiometric(!showBiometric)}
-            className="w-full border-4 border-pink-500 bg-black p-4 hover:bg-pink-500/10 transition-all"
-          >
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <COOLASFUCKHeart size={24} animate={false} />
-                <div className="text-left">
-                  <h3 className="text-pink-400 font-black font-mono text-sm">BIOMETRIC HEALING</h3>
-                  <p className="text-gray-400 text-xs font-mono">Real-time heart healing</p>
-                </div>
-              </div>
-              <span className="text-pink-400 font-black">{showBiometric ? '−' : '+'}</span>
-            </div>
-          </button>
-
-          <AnimatePresence>
-            {showBiometric && (
-              <motion.div
-                initial={{ height: 0, opacity: 0 }}
-                animate={{ height: 'auto', opacity: 1 }}
-                exit={{ height: 0, opacity: 0 }}
-                transition={{ duration: 0.3 }}
-                className="overflow-hidden border-l-4 border-r-4 border-b-4 border-pink-500"
-              >
-                <BiometricHealing />
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
-      )}
+      {/* Biometric healing removed for performance */}
 
 
 
