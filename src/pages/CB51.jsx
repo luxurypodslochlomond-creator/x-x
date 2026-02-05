@@ -8,6 +8,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import CB51TestRoleSwitcher from '@/components/scott/CB51TestRoleSwitcher';
 import CB51ErrorBoundary from '@/components/scott/CB51ErrorBoundary';
 import CB51PINGuard from '@/components/cb51/CB51PINGuard';
+import CB51PendingGigs from '@/components/scott/CB51PendingGigs';
 
 export default function CB51() {
   const navigate = useNavigate();
