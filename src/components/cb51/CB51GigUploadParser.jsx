@@ -238,10 +238,34 @@ export default function CB51GigUploadParser({ artistId, onGigCreated }) {
                 />
               </div>
 
+              {/* LOCATION */}
+              <div className="bg-black border-2 border-cyan-500/40 rounded-lg p-3">
+                <label className="text-gray-500 text-[9px] font-mono uppercase block mb-1">LOCATION</label>
+                <input
+                  type="text"
+                  value={editing.location || ''}
+                  onChange={(e) => setEditing({ ...editing, location: e.target.value })}
+                  className="w-full bg-cyan-900/20 border border-cyan-500/30 rounded px-2 py-2 text-white text-xs placeholder-gray-600"
+                  placeholder="Address / City"
+                />
+              </div>
+
+              {/* PHONE */}
+              <div className="bg-black border-2 border-cyan-500/40 rounded-lg p-3">
+                <label className="text-gray-500 text-[9px] font-mono uppercase block mb-1">PHONE</label>
+                <input
+                  type="tel"
+                  value={editing.promoter_phone || ''}
+                  onChange={(e) => setEditing({ ...editing, promoter_phone: e.target.value })}
+                  className="w-full bg-cyan-900/20 border border-cyan-500/30 rounded px-2 py-2 text-white text-xs placeholder-gray-600"
+                  placeholder="+44..."
+                />
+              </div>
+
               {editing.offer_details && (
-                <div className="bg-black border-2 border-cyan-500/20 rounded-lg p-3">
-                  <label className="text-gray-500 text-[9px] font-mono uppercase block mb-1">DETAILS</label>
-                  <div className="bg-cyan-900/10 p-2 rounded text-white text-[11px] max-h-20 overflow-y-auto border border-cyan-500/20">
+                <div className="bg-black border-2 border-cyan-500/20 rounded-lg p-3 col-span-2">
+                  <label className="text-gray-500 text-[9px] font-mono uppercase block mb-1">OFFER DETAILS</label>
+                  <div className="bg-cyan-900/10 p-2 rounded text-white text-[11px] max-h-24 overflow-y-auto border border-cyan-500/20">
                     {editing.offer_details}
                   </div>
                 </div>
