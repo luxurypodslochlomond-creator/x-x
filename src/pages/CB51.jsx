@@ -56,65 +56,26 @@ export default function CB51() {
             <CB51ErrorBoundary>
             <div className="min-h-screen bg-black text-white p-3 pb-20">
         
-        {/* HEADER */}
-        <div className="flex items-center justify-between mb-6">
-          <div>
-            <h1 className="text-2xl font-black text-cyan-400 font-mono">DASHBOARD</h1>
-            <p className="text-gray-600 text-xs font-mono">Manager Overview</p>
-          </div>
-        </div>
-
-        {/* ARTISTS SECTION */}
-        {artists.length > 0 ? (
-          <div className="mb-6">
-            <div className="flex items-center justify-between mb-3">
-              <h2 className="text-white font-black text-sm font-mono">YOUR ARTISTS</h2>
-              <button
-                onClick={() => navigate(createPageUrl('ScottAddArtist'))}
-                className="text-green-400 text-xs font-bold font-mono hover:text-green-300"
-              >
-                + ADD
-              </button>
-            </div>
-            <div className="grid grid-cols-2 gap-3">
-              {artists.slice(0, 2).map((artist) => (
-                <motion.button
-                  key={artist.id}
-                  onClick={() => navigate(createPageUrl('ScottArtistHome') + `?id=${artist.id}`)}
-                  whileTap={{ scale: 0.96 }}
-                  className="bg-black border-2 border-white/10 hover:border-cyan-500/50 rounded-lg p-3 text-center"
-                >
-                  {artist.profile_pic_url ? (
-                    <img src={artist.profile_pic_url} alt="" className="w-16 h-16 rounded-full object-cover border-2 border-cyan-500 mx-auto mb-2" />
-                  ) : (
-                    <div className="w-16 h-16 rounded-full bg-cyan-500 text-black font-black text-xl flex items-center justify-center mx-auto mb-2">
-                      {artist.name.charAt(0)}
-                    </div>
+        {/* HEADER + ARTIST QUICK PICK */}
+                <div className="flex items-center justify-between mb-4">
+                  <h1 className="text-xl font-black text-cyan-400 font-mono">CB51</h1>
+                  {artists.length > 0 && (
+                    <select
+                      onChange={(e) => {
+                        const artist = artists.find(a => a.id === e.target.value);
+                        if (artist && e.target.value !== firstArtistId) {
+                          navigate(createPageUrl('ScottArtistHome') + `?id=${artist.id}`);
+                        }
+                      }}
+                      value={firstArtistId || ''}
+                      className="bg-black border-2 border-cyan-500/50 text-cyan-400 text-xs font-bold rounded px-3 py-1"
+                    >
+                      {artists.map(a => (
+                        <option key={a.id} value={a.id}>{a.name}</option>
+                      ))}
+                    </select>
                   )}
-                  <p className="text-white font-bold text-xs truncate">{artist.name}</p>
-                  <p className="text-gray-600 text-[9px] font-mono">Manage</p>
-                </motion.button>
-              ))}
-            </div>
-            {artists.length > 2 && (
-              <p className="text-gray-600 text-xs text-center mt-2">
-                +{artists.length - 2} more
-              </p>
-            )}
-          </div>
-        ) : (
-          <div className="bg-black border-2 border-green-500 rounded-lg p-6 text-center mb-6">
-            <Users className="w-12 h-12 text-green-400 mx-auto mb-3" />
-            <h3 className="text-green-400 font-black text-base mb-2">NO ARTISTS YET</h3>
-            <p className="text-gray-500 text-xs mb-4">Add your first artist to get started</p>
-            <button
-              onClick={() => navigate(createPageUrl('ScottAddArtist'))}
-              className="bg-green-500 hover:bg-green-600 text-black font-bold px-6 py-2 rounded text-sm"
-            >
-              + ADD ARTIST
-            </button>
-          </div>
-        )}
+                </div>
 
         {/* UPLOAD & PARSE GIG */}
         {firstArtistId && (
