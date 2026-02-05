@@ -77,53 +77,48 @@ export default function CB51() {
                   )}
                 </div>
 
-        {/* UPLOAD & PARSE GIG */}
-        {firstArtistId && (
-          <div className="mb-6">
-            <CB51GigUploadParser 
-              artistId={firstArtistId}
-              onGigCreated={() => {
-                // Notification inbox will auto-refresh
-              }}
-            />
+        {/* TWO COLUMN LAYOUT */}
+        <div className="grid grid-cols-2 gap-3 mb-3">
+          {/* LEFT: UPLOAD & PENDING */}
+          <div className="space-y-3">
+            {firstArtistId && (
+              <>
+                <CB51GigUploadParser 
+                  artistId={firstArtistId}
+                  onGigCreated={() => {}}
+                />
+                {firstArtistId && <CB51NotificationInbox artistId={firstArtistId} />}
+              </>
+            )}
           </div>
-        )}
 
-        {/* NOTIFICATION INBOX - MANAGER APPROVAL */}
-        {firstArtistId && <CB51NotificationInbox artistId={firstArtistId} />}
+          {/* RIGHT: QUICK ACTIONS */}
+          <div className="space-y-3">
+            <button
+              onClick={() => navigate(createPageUrl(firstArtistId ? `ScottCalendarView?id=${firstArtistId}` : 'ScottCalendarView'))}
+              className="w-full bg-gradient-to-br from-cyan-900/40 to-cyan-900/20 border-2 border-cyan-500/50 hover:border-cyan-500 rounded-lg p-4 text-left transition-all"
+            >
+              <Calendar className="w-5 h-5 text-cyan-400 mb-2" />
+              <p className="text-cyan-400 font-black text-xs font-mono">CALENDAR</p>
+              <p className="text-gray-600 text-[9px] mt-1">View all shows</p>
+            </button>
 
-        {/* UPCOMING GIGS */}
-        <div className="bg-black border-2 border-cyan-500 rounded-lg p-3 mb-3">
-          <div className="flex items-center gap-2 mb-3">
-            <Calendar className="w-5 h-5 text-cyan-400" />
-            <h2 className="text-cyan-400 font-black text-sm font-mono">UPCOMING GIGS</h2>
-          </div>
-          <p className="text-gray-600 text-xs text-center py-2">No upcoming gigs</p>
-          <button
-            onClick={() => navigate(createPageUrl(firstArtistId ? `ScottCalendarView?id=${firstArtistId}` : 'ScottCalendarView'))}
-            className="w-full bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-400 text-xs font-bold font-mono py-2 rounded border border-cyan-500/50"
-          >
-            VIEW CALENDAR
-          </button>
-        </div>
-
-        {/* QUICK ACTIONS */}
-        <div className="bg-black border-2 border-white/10 rounded-lg p-3">
-          <h2 className="text-white font-black text-sm font-mono mb-3">QUICK ACTIONS</h2>
-          <div className="grid grid-cols-2 gap-2">
             <button
               onClick={() => navigate(createPageUrl(firstArtistId ? `ScottToDo?id=${firstArtistId}` : 'ScottToDo'))}
-              className="bg-cyan-900/20 border border-cyan-500/30 rounded p-2 text-left"
+              className="w-full bg-gradient-to-br from-cyan-900/40 to-cyan-900/20 border-2 border-cyan-500/50 hover:border-cyan-500 rounded-lg p-4 text-left transition-all"
             >
-              <CheckCircle className="w-4 h-4 text-cyan-400 mb-1" />
-              <p className="text-cyan-400 text-[9px] font-bold font-mono">TASKS</p>
+              <CheckCircle className="w-5 h-5 text-cyan-400 mb-2" />
+              <p className="text-cyan-400 font-black text-xs font-mono">TASKS</p>
+              <p className="text-gray-600 text-[9px] mt-1">To-do list</p>
             </button>
+
             <button
               onClick={() => navigate(createPageUrl(firstArtistId ? `ScottFinanceAdmin?id=${firstArtistId}` : 'ScottFinanceAdmin'))}
-              className="bg-green-900/20 border border-green-500/30 rounded p-2 text-left"
+              className="w-full bg-gradient-to-br from-green-900/40 to-green-900/20 border-2 border-green-500/50 hover:border-green-500 rounded-lg p-4 text-left transition-all"
             >
-              <DollarSign className="w-4 h-4 text-green-400 mb-1" />
-              <p className="text-green-400 text-[9px] font-bold font-mono">FINANCE</p>
+              <DollarSign className="w-5 h-5 text-green-400 mb-2" />
+              <p className="text-green-400 font-black text-xs font-mono">FINANCE</p>
+              <p className="text-gray-600 text-[9px] mt-1">Money tracker</p>
             </button>
           </div>
         </div>
