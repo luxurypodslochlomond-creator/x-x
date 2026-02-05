@@ -5,7 +5,6 @@ import { base44 } from '@/api/base44Client';
 import { useQuery } from '@tanstack/react-query';
 import { Calendar, CheckCircle, DollarSign, Plus, Sparkles, Mic2, Music, ClipboardList, Users } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import CB51NotificationCenter from '@/components/scott/CB51NotificationCenter';
 import CB51TestRoleSwitcher from '@/components/scott/CB51TestRoleSwitcher';
 import CB51ErrorBoundary from '@/components/scott/CB51ErrorBoundary';
 
@@ -60,9 +59,6 @@ export default function CB51() {
             <p className="text-gray-600 text-xs font-mono">Manager Overview</p>
           </div>
         </div>
-
-        {/* NOTIFICATIONS - TOP PRIORITY */}
-        <CB51NotificationCenter key={testRole} userEmail={user?.email} userRole={testRole} />
 
         {/* ARTISTS SECTION */}
         {artists.length > 0 ? (
