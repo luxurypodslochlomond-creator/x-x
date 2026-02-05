@@ -58,6 +58,20 @@ export default function CB51NotificationCenter({ userEmail, userRole = 'manager'
         manager_approved: true,
         sent_to_band_date: new Date().toISOString(),
       });
+      
+      // Send push notifications to band members
+      try {
+        await base44.functions.invoke('notifyBandGigApproval', {
+          gig_offer_id: offer.id,
+          venue: offer.venue,
+          date: offer.date,
+          fee: offer.fee,
+          currency: offer.currency || 'GBP'
+        });
+      } catch (e) {
+        console.log('Push notification failed (non-critical):', e);
+      }
+      
       return offer;
     },
     onSuccess: () => {
@@ -92,6 +106,18 @@ export default function CB51NotificationCenter({ userEmail, userRole = 'manager'
         vote: 'yes',
         responded_at: new Date().toISOString(),
       });
+      
+      // Notify manager of vote
+      try {
+        await base44.functions.invoke('notifyManagerOnBandVote', {
+          gig_offer_id: offer.id,
+          band_member_name: user.full_name,
+          vote: 'yes'
+        });
+      } catch (e) {
+        console.log('Manager notification failed (non-critical):', e);
+      }
+      
       return offer;
     },
     onSuccess: () => {
@@ -116,6 +142,19 @@ export default function CB51NotificationCenter({ userEmail, userRole = 'manager'
         reason: reason,
         responded_at: new Date().toISOString(),
       });
+      
+      // Notify manager of NO vote with reason
+      try {
+        await base44.functions.invoke('notifyManagerOnBandVote', {
+          gig_offer_id: offer.id,
+          band_member_name: user.full_name,
+          vote: 'no',
+          reason: reason
+        });
+      } catch (e) {
+        console.log('Manager notification failed (non-critical):', e);
+      }
+      
       return offer;
     },
     onSuccess: () => {
