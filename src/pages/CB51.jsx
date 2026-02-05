@@ -16,6 +16,7 @@ export default function CB51() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [testRole, setTestRole] = useState('manager');
+  const [showAllArtists, setShowAllArtists] = useState(false);
 
   useEffect(() => {
     const checkAuth = async () => {
