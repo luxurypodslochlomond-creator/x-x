@@ -122,14 +122,14 @@ export default function CB51() {
             <CB51GigUploadParser 
               artistId={firstArtistId}
               onGigCreated={() => {
-                queryClient.invalidateQueries({ queryKey: ['pendingGigs', firstArtistId] });
+                // Notification inbox will auto-refresh
               }}
             />
           </div>
         )}
 
-        {/* PENDING GIGS - MANAGER APPROVAL */}
-        {firstArtistId && <CB51PendingGigs artistId={firstArtistId} />}
+        {/* NOTIFICATION INBOX - MANAGER APPROVAL */}
+        {firstArtistId && <CB51NotificationInbox artistId={firstArtistId} />}
 
         {/* UPCOMING GIGS */}
         <div className="bg-black border-2 border-cyan-500 rounded-lg p-3 mb-3">
