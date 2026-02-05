@@ -18,95 +18,57 @@ export default function CB51NotificationFeed({ artistId }) {
 
   if (pendingGigs.length === 0) {
     return (
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        className="pt-8 pb-16"
-      >
-        <div className="text-center">
-          <Clock className="w-8 h-8 text-gray-600 mx-auto mb-3" />
-          <p className="text-gray-500 text-sm font-mono">No pending approvals</p>
-          <p className="text-gray-700 text-xs mt-1">Waiting for offers...</p>
-        </div>
-      </motion.div>
+      <div className="text-center py-6 text-gray-500">
+        <p className="text-xs">No pending gigs</p>
+      </div>
     );
   }
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      className="space-y-2 pt-2"
-    >
-      {pendingGigs.map((gig, idx) => (
-        <motion.button
+    <div className="space-y-2">
+      {pendingGigs.map((gig) => (
+        <button
           key={gig.id}
-          layout
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: idx * 0.05 }}
           onClick={() => setExpandedId(expandedId === gig.id ? null : gig.id)}
-          className="w-full text-left"
+          className="w-full bg-black border border-cyan-500/30 hover:border-cyan-400 rounded-lg p-3 text-left text-xs transition-colors group"
         >
-          {/* NOTIFICATION CARD */}
-          <div className="bg-gradient-to-r from-cyan-950/20 to-black border border-cyan-500/20 hover:border-cyan-500/40 rounded-xl p-4 transition-all duration-300 group">
-            <div className="flex items-start justify-between gap-3">
-              <div className="flex-1 min-w-0">
-                <h3 className="text-white font-bold text-sm truncate group-hover:text-cyan-300 transition-colors">
-                  {gig.venue || gig.title || 'New Gig'}
-                </h3>
-                <div className="flex items-center gap-2 mt-2 text-xs text-gray-400">
-                  {gig.date_start && (
-                    <span className="px-2 py-1 bg-black/40 rounded text-gray-300">
-                      {gig.date_start}
-                    </span>
-                  )}
-                  {gig.fee && (
-                    <span className="px-2 py-1 bg-green-950/30 rounded text-green-400 font-mono">
-                      £{gig.fee}
-                    </span>
-                  )}
-                </div>
-              </div>
-              <div className="flex-shrink-0">
-                <Zap className="w-4 h-4 text-cyan-400 animate-pulse" />
-              </div>
+          <div className="flex items-start justify-between gap-2">
+            <div className="flex-1 min-w-0">
+              <h4 className="text-white font-bold truncate group-hover:text-cyan-300">{gig.venue || gig.title}</h4>
+              <p className="text-gray-500 text-[11px] mt-1">{gig.date_start} {gig.fee && `• £${gig.fee}`}</p>
             </div>
-
-            {/* EXPANDED */}
-            <AnimatePresence>
-              {expandedId === gig.id && (
-                <motion.div
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: 'auto' }}
-                  exit={{ opacity: 0, height: 0 }}
-                  className="mt-3 pt-3 border-t border-cyan-500/10 space-y-2"
-                >
-                  {gig.promoter_name && (
-                    <div className="text-xs text-gray-300">
-                      <span className="text-gray-500">Promoter:</span> {gig.promoter_name}
-                      {gig.promoter_email && <span className="text-gray-600 block text-[11px] mt-1">{gig.promoter_email}</span>}
-                    </div>
-                  )}
-                  
-                  {gig.offer_details && (
-                    <p className="text-xs text-gray-400 line-clamp-2">{gig.offer_details}</p>
-                  )}
-
-                  <div className="flex gap-2 mt-3">
-                    <button className="flex-1 px-3 py-2 bg-red-950/30 border border-red-500/30 hover:border-red-500 text-red-400 text-xs font-bold rounded-lg transition-colors">
-                      Reject
-                    </button>
-                    <button className="flex-1 px-3 py-2 bg-green-950/30 border border-green-500/30 hover:border-green-500 text-green-400 text-xs font-bold rounded-lg transition-colors">
-                      Approve
-                    </button>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
+            <Zap className="w-3 h-3 text-cyan-400 flex-shrink-0 mt-1" />
           </div>
-        </motion.button>
+
+          {/* EXPANDED */}
+          <AnimatePresence>
+            {expandedId === gig.id && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                className="mt-2 pt-2 border-t border-cyan-500/10 space-y-2"
+              >
+                {gig.promoter_name && (
+                  <div className="text-[11px] text-gray-400">
+                    <p className="text-gray-500">Promoter: {gig.promoter_name}</p>
+                    {gig.promoter_email && <p className="text-gray-600">{gig.promoter_email}</p>}
+                  </div>
+                )}
+                {gig.offer_details && <p className="text-[11px] text-gray-500 line-clamp-2">{gig.offer_details}</p>}
+                <div className="flex gap-1.5 mt-2">
+                  <button className="flex-1 px-2 py-1.5 bg-black border border-red-500/40 hover:border-red-400 text-red-400 text-[10px] font-bold rounded transition-colors">
+                    Reject
+                  </button>
+                  <button className="flex-1 px-2 py-1.5 bg-black border border-green-500/40 hover:border-green-400 text-green-400 text-[10px] font-bold rounded transition-colors">
+                    Approve
+                  </button>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </button>
       ))}
-    </motion.div>
+    </div>
   );
 }
