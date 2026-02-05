@@ -92,7 +92,7 @@ export default function CB51() {
                           initial={{ opacity: 0, y: -10 }}
                           animate={{ opacity: 1, y: 0 }}
                           exit={{ opacity: 0, y: -10 }}
-                          className="absolute top-full left-0 right-0 mt-2 bg-black border-2 border-cyan-500/40 rounded-lg overflow-hidden z-10"
+                          className="absolute top-full left-0 right-0 mt-2 bg-black border-2 border-cyan-500/40 rounded-lg overflow-y-auto z-10 max-h-48"
                         >
                           {artists.map((artist) => (
                             <motion.button
@@ -101,7 +101,7 @@ export default function CB51() {
                                 setActiveArtistId(artist.id);
                                 setShowArtistMenu(false);
                               }}
-                              className={`w-full flex items-center gap-3 p-3 border-b border-cyan-500/20 last:border-b-0 hover:bg-cyan-500/10 transition-colors ${
+                              className={`w-full flex items-center gap-2 px-3 py-2 border-b border-cyan-500/20 last:border-b-0 hover:bg-cyan-500/10 transition-colors ${
                                 artist.id === currentArtistId ? 'bg-cyan-500/20' : ''
                               }`}
                             >
@@ -109,14 +109,14 @@ export default function CB51() {
                                 <img 
                                   src={artist.profile_pic_url} 
                                   alt={artist.name}
-                                  className="w-8 h-8 rounded-full object-cover border border-cyan-500/40"
+                                  className="w-6 h-6 rounded-full object-cover border border-cyan-500/40 flex-shrink-0"
                                 />
                               ) : (
-                                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-cyan-500 to-cyan-600 text-white font-black text-xs flex items-center justify-center border border-cyan-500/40">
+                                <div className="w-6 h-6 rounded-full bg-gradient-to-br from-cyan-500 to-cyan-600 text-white font-black text-[10px] flex items-center justify-center border border-cyan-500/40 flex-shrink-0">
                                   {artist.name.charAt(0).toUpperCase()}
                                 </div>
                               )}
-                              <span className="text-cyan-400 font-bold text-sm">{artist.name}</span>
+                              <span className="text-cyan-400 font-bold text-xs truncate">{artist.name}</span>
                             </motion.button>
                           ))}
                           <motion.button
@@ -124,10 +124,10 @@ export default function CB51() {
                               setShowArtistMenu(false);
                               navigate(createPageUrl('ScottAddArtist'));
                             }}
-                            className="w-full flex items-center justify-center gap-2 p-3 border-t border-cyan-500/20 hover:bg-green-500/10 text-green-400 font-bold text-sm transition-colors"
+                            className="w-full flex items-center justify-center gap-2 px-3 py-2 border-t border-cyan-500/20 hover:bg-green-500/10 text-green-400 font-bold text-xs transition-colors"
                           >
-                            <Plus className="w-4 h-4" />
-                            Add Artist
+                            <Plus className="w-3 h-3" />
+                            Add
                           </motion.button>
                         </motion.div>
                       )}
