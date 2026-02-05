@@ -2,22 +2,21 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { base44 } from '@/api/base44Client';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { Calendar, CheckCircle, DollarSign, Plus, Sparkles, Mic2, Music, ClipboardList, Users } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import CB51NotificationCenter from '@/components/scott/CB51NotificationCenter';
 import CB51TestRoleSwitcher from '@/components/scott/CB51TestRoleSwitcher';
 import CB51ErrorBoundary from '@/components/scott/CB51ErrorBoundary';
 import PushNotificationManager from '@/components/scott/PushNotificationManager';
+import AI51GigCoManager from '@/components/scott/AI51GigCoManager';
 
 export default function CB51() {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [testRole, setTestRole] = useState('manager');
-  const [showGigInput, setShowGigInput] = useState(false);
-  const [gigOfferText, setGigOfferText] = useState('');
-  const [processingGig, setProcessingGig] = useState(false);
+  const queryClient = useQueryClient();
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -53,35 +52,8 @@ export default function CB51() {
 
   const firstArtistId = artists.length > 0 ? artists[0].id : null;
 
-  const handlePasteGigOffer = async () => {
-    if (!gigOfferText.trim()) return;
-    if (!firstArtistId) {
-      alert('Add an artist first');
-      return;
-    }
-    
-    setProcessingGig(true);
-    try {
-      // Simple parse - AI will improve this later
-      const lines = gigOfferText.split('\n');
-      const venue = lines[0] || 'Venue TBC';
-      
-      await base44.entities.ScottGigOffer.create({
-        artist_id: firstArtistId,
-        venue: venue,
-        raw_email: gigOfferText,
-        status: 'pending_manager_review',
-        urgency: 'normal'
-      });
-      
-      setGigOfferText('');
-      setShowGigInput(false);
-      alert('Gig offer added! Check notifications above.');
-    } catch (error) {
-      alert('Error: ' + error.message);
-    } finally {
-      setProcessingGig(false);
-    }
+  const handleGigCreated = () => {
+    queryClient.invalidateQueries({ queryKey: ['cb51PendingOffers'] });
   };
 
   return (
@@ -104,45 +76,8 @@ export default function CB51() {
         {/* NOTIFICATIONS - TOP PRIORITY */}
         <CB51NotificationCenter key={testRole} userEmail={user?.email} userRole={testRole} />
 
-        {/* GIG OFFER INPUT */}
-        <div className="mb-6">
-          {!showGigInput ? (
-            <button
-              onClick={() => setShowGigInput(true)}
-              className="w-full bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-700 hover:to-purple-700 text-white font-black py-4 rounded-lg text-base border-2 border-pink-500"
-            >
-              + PASTE GIG OFFER
-            </button>
-          ) : (
-            <div className="bg-black border-2 border-pink-500 rounded-lg p-4">
-              <h3 className="text-pink-400 font-black text-sm mb-3">PASTE GIG OFFER</h3>
-              <textarea
-                value={gigOfferText}
-                onChange={(e) => setGigOfferText(e.target.value)}
-                placeholder="Paste email or type gig details&#10;Venue name&#10;Date&#10;Fee&#10;City&#10;etc..."
-                className="w-full bg-black border border-pink-500/50 text-white p-3 rounded text-sm font-mono mb-3 min-h-[120px]"
-              />
-              <div className="flex gap-2">
-                <button
-                  onClick={handlePasteGigOffer}
-                  disabled={processingGig || !gigOfferText.trim()}
-                  className="flex-1 bg-pink-600 hover:bg-pink-700 disabled:opacity-50 text-white font-bold py-2 rounded text-sm"
-                >
-                  {processingGig ? 'PROCESSING...' : 'SUBMIT'}
-                </button>
-                <button
-                  onClick={() => {
-                    setShowGigInput(false);
-                    setGigOfferText('');
-                  }}
-                  className="flex-1 bg-gray-700 hover:bg-gray-600 text-white font-bold py-2 rounded text-sm"
-                >
-                  CANCEL
-                </button>
-              </div>
-            </div>
-          )}
-        </div>
+        {/* AI51 CO-MANAGER */}
+        <AI51GigCoManager artistId={firstArtistId} onGigCreated={handleGigCreated} />
 
         {/* ARTISTS SECTION */}
         {artists.length > 0 ? (
