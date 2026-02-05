@@ -15,6 +15,9 @@ export default function CB51() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [testRole, setTestRole] = useState('manager');
+  const [showGigInput, setShowGigInput] = useState(false);
+  const [gigOfferText, setGigOfferText] = useState('');
+  const [processingGig, setProcessingGig] = useState(false);
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -49,9 +52,6 @@ export default function CB51() {
   }
 
   const firstArtistId = artists.length > 0 ? artists[0].id : null;
-  const [showGigInput, setShowGigInput] = useState(false);
-  const [gigOfferText, setGigOfferText] = useState('');
-  const [processingGig, setProcessingGig] = useState(false);
 
   const handlePasteGigOffer = async () => {
     if (!gigOfferText.trim()) return;
