@@ -59,6 +59,7 @@ export default function CB51Login() {
                     <div className="text-center mb-8">
                         <Radio className="w-16 h-16 text-cyan-400 mx-auto mb-4" />
                         <h1 className="text-4xl font-black text-white font-mono mb-2">CB51</h1>
+                        <p className="text-cyan-400 font-mono text-xs mb-2">CitizenBand51 : Avoid the Noise</p>
                         <p className="text-cyan-400 font-mono text-sm">Enter PIN</p>
                     </div>
 
@@ -93,6 +94,7 @@ export default function CB51Login() {
                 <div className="text-center mb-8">
                     <Radio className="w-16 h-16 text-cyan-400 mx-auto mb-4" />
                     <h1 className="text-4xl font-black text-white font-mono mb-2">CB51</h1>
+                    <p className="text-cyan-400 font-mono text-xs">CitizenBand51 : Avoid the Noise</p>
                 </div>
 
                 <button
