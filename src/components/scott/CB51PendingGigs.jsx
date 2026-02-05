@@ -61,7 +61,7 @@ export default function CB51PendingGigs({ artistId }) {
     <div className="space-y-3">
       <h2 className="text-cyan-400 font-black text-sm font-mono mb-3">PENDING GIGS ({pendingGigs.length})</h2>
       
-      {pendingGigs.map((gig) => (
+      {pendingGigs.map(gig => (
         <motion.div
           key={gig.id}
           onClick={() => setExpandedGigId(expandedGigId === gig.id ? null : gig.id)}
