@@ -51,7 +51,8 @@ export default function CB51() {
     );
   }
 
-  const firstArtistId = artists.length > 0 ? artists[0].id : null;
+  const currentArtistId = activeArtistId || (artists.length > 0 ? artists[0].id : null);
+  const currentArtist = artists.find(a => a.id === currentArtistId);
 
   return (
                 <CB51PINGuard>
