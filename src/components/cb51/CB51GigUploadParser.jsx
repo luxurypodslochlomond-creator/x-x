@@ -104,14 +104,13 @@ export default function CB51GigUploadParser({ artistId, onGigCreated }) {
   });
 
   return (
-    <div className="bg-black border-2 border-cyan-500 rounded-lg p-4 mb-4">
-      {/* HEADER */}
-      <div className="flex items-center gap-2 mb-4">
+    <div className="mb-4 space-y-2">
+      <div className="flex items-center gap-2">
         <Zap className="w-5 h-5 text-cyan-400" />
-        <h2 className="text-cyan-400 font-black text-xs font-mono">AI51 PARSER</h2>
+        <h2 className="text-cyan-400 font-black text-sm font-mono">GIG UPLOAD</h2>
       </div>
 
-      {/* UPLOAD INPUT */}
+      {/* UPLOAD AREA */}
       {!extracted && (
         <motion.label
           initial={{ opacity: 0 }}
@@ -123,118 +122,143 @@ export default function CB51GigUploadParser({ artistId, onGigCreated }) {
             onChange={handleFileSelect}
             disabled={parsing}
             className="hidden"
-            accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png,.gif,.eml,.txt"
+            accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png"
           />
-          <div className={`border-2 border-dashed border-cyan-500/40 rounded p-4 text-center transition-all ${
-            parsing ? 'bg-cyan-900/20 border-cyan-500/60' : 'hover:border-cyan-500/70'
+          <div className={`border-2 border-dashed border-cyan-500/40 rounded-lg p-6 text-center transition-all ${
+            parsing ? 'bg-cyan-900/20 border-cyan-500/60' : 'hover:border-cyan-500/70 hover:bg-cyan-900/10'
           }`}>
             {parsing ? (
               <>
-                <Loader className="w-6 h-6 text-cyan-400 mx-auto animate-spin mb-1" />
-                <p className="text-cyan-400 font-bold text-xs">PARSING...</p>
+                <Loader className="w-8 h-8 text-cyan-400 mx-auto animate-spin mb-2" />
+                <p className="text-cyan-400 font-bold text-sm">PARSING PDF...</p>
               </>
             ) : (
               <>
-                <Upload className="w-6 h-6 text-cyan-400 mx-auto mb-1" />
-                <p className="text-white font-bold text-xs">Drop PDF or click</p>
+                <Upload className="w-8 h-8 text-cyan-400 mx-auto mb-2" />
+                <p className="text-white font-bold text-sm">Drop PDF or click</p>
+                <p className="text-gray-500 text-xs mt-1">Contracts, offers, details</p>
               </>
             )}
           </div>
         </motion.label>
       )}
 
-      {/* EXTRACTED DATA REVIEW */}
-      <AnimatePresence>
+      {/* EXTRACTED PREVIEW */}
+      <AnimatePresence mode="wait">
         {extracted && editing && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="bg-cyan-900/10 border border-cyan-500/30 rounded p-3 mt-3 space-y-2"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            className="space-y-3"
           >
             {error && (
-              <div className="bg-yellow-900/20 border border-yellow-500/30 rounded p-2 flex gap-2">
-                <AlertCircle className="w-3 h-3 text-yellow-400 flex-shrink-0 mt-0.5" />
-                <p className="text-yellow-300 text-[10px]">{error}</p>
+              <div className="bg-yellow-900/30 border border-yellow-500/40 rounded-lg p-3 flex gap-2">
+                <AlertCircle className="w-4 h-4 text-yellow-400 flex-shrink-0 mt-0.5" />
+                <p className="text-yellow-300 text-xs">{error}</p>
               </div>
             )}
 
-            {/* QUICK FIELDS */}
-            <div className="space-y-1.5">
-              <div>
-                <label className="text-gray-500 text-[8px] font-mono uppercase block mb-0.5">Venue</label>
+            {/* GRID CARDS */}
+            <div className="grid grid-cols-2 gap-2">
+              {/* VENUE */}
+              <div className="bg-black border-2 border-cyan-500/40 rounded-lg p-3">
+                <label className="text-gray-500 text-[9px] font-mono uppercase block mb-1">VENUE</label>
                 <input
                   type="text"
                   value={editing.venue_name || ''}
                   onChange={(e) => setEditing({ ...editing, venue_name: e.target.value })}
-                  className="w-full bg-black border border-cyan-500/40 rounded px-2 py-1 text-white text-xs"
-                  placeholder="Venue name"
+                  className="w-full bg-cyan-900/20 border border-cyan-500/30 rounded px-2 py-2 text-white text-xs font-bold placeholder-gray-600"
+                  placeholder="Required"
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-2">
-                <div>
-                  <label className="text-gray-500 text-[8px] font-mono uppercase block mb-0.5">Date</label>
-                  <input
-                    type="text"
-                    value={editing.date_start || ''}
-                    onChange={(e) => setEditing({ ...editing, date_start: e.target.value })}
-                    className="w-full bg-black border border-cyan-500/40 rounded px-2 py-1 text-white text-xs"
-                    placeholder="YYYY-MM-DD"
-                  />
-                </div>
-                <div>
-                  <label className="text-gray-500 text-[8px] font-mono uppercase block mb-0.5">Fee £</label>
-                  <input
-                    type="number"
-                    value={editing.fee || ''}
-                    onChange={(e) => setEditing({ ...editing, fee: e.target.value ? Number(e.target.value) : null })}
-                    className="w-full bg-black border border-cyan-500/40 rounded px-2 py-1 text-white text-xs"
-                    placeholder="0"
-                  />
-                </div>
+              {/* DATE */}
+              <div className="bg-black border-2 border-cyan-500/40 rounded-lg p-3">
+                <label className="text-gray-500 text-[9px] font-mono uppercase block mb-1">DATE</label>
+                <input
+                  type="text"
+                  value={editing.date_start || ''}
+                  onChange={(e) => setEditing({ ...editing, date_start: e.target.value })}
+                  className="w-full bg-cyan-900/20 border border-cyan-500/30 rounded px-2 py-2 text-white text-xs font-bold placeholder-gray-600"
+                  placeholder="YYYY-MM-DD"
+                />
               </div>
 
-              <div>
-                <label className="text-gray-500 text-[8px] font-mono uppercase block mb-0.5">Promoter</label>
+              {/* FEE */}
+              <div className="bg-black border-2 border-green-500/40 rounded-lg p-3">
+                <label className="text-gray-500 text-[9px] font-mono uppercase block mb-1">FEE</label>
+                <input
+                  type="text"
+                  value={editing.fee || ''}
+                  onChange={(e) => setEditing({ ...editing, fee: e.target.value })}
+                  className="w-full bg-green-900/20 border border-green-500/30 rounded px-2 py-2 text-white text-xs font-bold placeholder-gray-600"
+                  placeholder="£"
+                />
+              </div>
+
+              {/* PROMOTER */}
+              <div className="bg-black border-2 border-cyan-500/40 rounded-lg p-3">
+                <label className="text-gray-500 text-[9px] font-mono uppercase block mb-1">PROMOTER</label>
                 <input
                   type="text"
                   value={editing.promoter_name || ''}
                   onChange={(e) => setEditing({ ...editing, promoter_name: e.target.value })}
-                  className="w-full bg-black border border-cyan-500/40 rounded px-2 py-1 text-white text-xs"
-                  placeholder="Name"
-                />
-              </div>
-
-              <div>
-                <label className="text-gray-500 text-[8px] font-mono uppercase block mb-0.5">Email</label>
-                <input
-                  type="email"
-                  value={editing.promoter_email || ''}
-                  onChange={(e) => setEditing({ ...editing, promoter_email: e.target.value })}
-                  className="w-full bg-black border border-cyan-500/40 rounded px-2 py-1 text-white text-xs"
-                  placeholder="contact@venue.com"
+                  className="w-full bg-cyan-900/20 border border-cyan-500/30 rounded px-2 py-2 text-white text-xs font-bold placeholder-gray-600"
+                  placeholder="Required"
                 />
               </div>
             </div>
 
+            {/* CONTACT DETAILS - Full width */}
+            <div className="space-y-2">
+              <div className="bg-black border-2 border-cyan-500/40 rounded-lg p-3">
+                <label className="text-gray-500 text-[9px] font-mono uppercase block mb-1">EMAIL</label>
+                <input
+                  type="email"
+                  value={editing.promoter_email || ''}
+                  onChange={(e) => setEditing({ ...editing, promoter_email: e.target.value })}
+                  className="w-full bg-cyan-900/20 border border-cyan-500/30 rounded px-2 py-2 text-white text-xs placeholder-gray-600"
+                  placeholder="promoter@venue.com"
+                />
+              </div>
+
+              {editing.offer_details && (
+                <div className="bg-black border-2 border-cyan-500/20 rounded-lg p-3">
+                  <label className="text-gray-500 text-[9px] font-mono uppercase block mb-1">DETAILS</label>
+                  <div className="bg-cyan-900/10 p-2 rounded text-white text-[11px] max-h-20 overflow-y-auto border border-cyan-500/20">
+                    {editing.offer_details}
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {saveError && (
+              <div className="bg-red-900/30 border border-red-500/40 rounded-lg p-2 text-red-300 text-xs">
+                {saveError}
+              </div>
+            )}
+
             {/* ACTION BUTTONS */}
-            <div className="flex gap-2 pt-2 border-t border-cyan-500/20">
+            <div className="flex gap-2 pt-2">
               <button
                 onClick={() => {
                   setExtracted(null);
                   setEditing(null);
                   setFile(null);
+                  setSaveError(null);
                 }}
-                className="flex-1 bg-white/10 hover:bg-white/20 text-white font-bold py-1.5 rounded text-xs"
+                className="flex-1 bg-white/10 hover:bg-white/20 text-white font-bold py-2 rounded text-xs transition-colors"
               >
                 CANCEL
               </button>
               <button
                 onClick={() => saveMutation.mutate()}
                 disabled={saveMutation.isPending}
-                className="flex-1 bg-cyan-600 hover:bg-cyan-700 disabled:opacity-50 text-white font-bold py-1.5 rounded text-xs"
+                className="flex-1 bg-cyan-600 hover:bg-cyan-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold py-2 rounded text-xs transition-colors flex items-center justify-center gap-2"
               >
-                {saveMutation.isPending ? 'SAVING...' : 'SAVE'}
+                <CheckCircle className="w-3 h-3" />
+                {saveMutation.isPending ? 'SAVING...' : 'SAVE GIG'}
               </button>
             </div>
           </motion.div>
