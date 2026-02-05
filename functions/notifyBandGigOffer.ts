@@ -16,21 +16,14 @@ Deno.serve(async (req) => {
     }
 
     // Get the gig offer
-    const gig = await base44.entities.GigOffer.get(gigOfferId);
+    const gig = await base44.entities.ScottGigOffer.get(gigOfferId);
     if (!gig) {
       return Response.json({ error: 'Gig not found' }, { status: 404 });
     }
 
-    // Get artist to find band members
-    const artist = await base44.entities.ScottArtist.get(gig.artist_id);
-    if (!artist) {
-      return Response.json({ error: 'Artist not found' }, { status: 404 });
-    }
-
-    // Get band members
-    const bandMembers = await base44.entities.BandMember.filter({
-      artist_id: gig.artist_id
-    });
+    // Get band members (ScottTeamMember with access to this artist)
+    const allMembers = await base44.entities.ScottTeamMember.list();
+    const bandMembers = allMembers.filter(m => m.artist_access?.includes(gig.artist_id));
 
     if (bandMembers.length === 0) {
       return Response.json({ 
@@ -39,18 +32,13 @@ Deno.serve(async (req) => {
       });
     }
 
-    // Create notification records for each band member (future: could be push notifications)
-    // For now, they'll see it in CB51 when they log in
-    // Store that voting is pending on this gig
+    // Create vote records for each band member - they'll vote in their dashboard
     const notificationResults = await Promise.all(
       bandMembers.map(member =>
         base44.asServiceRole.entities.GigVote.create({
-          gig_id: gigOfferId,
+          gig_offer_id: gigOfferId,
           band_member_id: member.id,
-          artist_id: gig.artist_id,
-          response: null, // Pending
-          reason: null,
-          created_at: new Date().toISOString()
+          answer: null  // Pending vote
         }).catch(err => {
           // Vote record might already exist, that's fine
           return null;
