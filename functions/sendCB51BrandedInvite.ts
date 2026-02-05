@@ -23,36 +23,25 @@ Deno.serve(async (req) => {
       body: `
 Hi ${name},
 
-${user.full_name} has invited you to join their CB51 artist management team.
+${user.full_name} invited you to join CB51 for ${artistName}.
 
-CB51 is your AI co-manager - handling gigs, votes, calendar, and coordination.
+CB51 is your AI co-manager - gigs, votes, calendar, team coordination.
 
-Ready to get started?
+👉 Join here: https://cb51.io
 
-👉 Sign up here: ${window.location.origin}/CB51
-
-Once you're in, you'll be able to:
+Once you're in:
 • Vote on gig offers
-• View the calendar
-• Coordinate with the team
-• Get push notifications for decisions
+• View calendar
+• Coordinate with team
+• Get push notifications
 
 Questions? Reply to this email.
 
-See you inside,
-CB51 Team
-
----
-Built by UniversalFamily51 ♾️❤️
+CB51 Team ♾️❤️
       `.trim()
     });
 
-    // Also invite through Base44 system (so they can login)
-    try {
-      await base44.users.inviteUser(email, 'user');
-    } catch (e) {
-      console.log('Base44 invite (may already exist):', e.message);
-    }
+    // Don't use Base44 generic invite - they can sign up directly via the CB51 link
 
     return Response.json({ 
       success: true,

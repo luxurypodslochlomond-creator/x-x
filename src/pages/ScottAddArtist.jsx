@@ -84,8 +84,7 @@ export default function ScottAddArtist() {
                         alert(`✓ CB51 invite sent to ${formData.email}`);
                     } catch (inviteError) {
                         console.log('Invite error:', inviteError.message);
-                        // Fallback to Base44 invite
-                        await base44.users.inviteUser(formData.email, 'user');
+                        alert('Email failed - ask them to sign up at cb51.io directly');
                     }
                 }
                 
