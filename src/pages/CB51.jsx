@@ -57,47 +57,75 @@ export default function CB51() {
                   <CB51ErrorBoundary>
                   <div className="min-h-screen bg-black text-white pb-20">
 
-              {/* ARTIST CIRCLES - Horizontal scroll */}
+              {/* ARTIST CIRCLES - Limited display */}
               {artists.length > 0 && (
-                <div className="px-4 py-4 border-b border-cyan-500/20">
-                  <div className="flex gap-3 overflow-x-auto pb-2">
-                    {artists.map((artist) => (
-                      <motion.button
+                <div className="px-4 py-3 border-b border-cyan-500/20">
+                  <div className="flex gap-2 pb-2">
+                    {(showAllArtists ? artists : artists.slice(0, 3)).map((artist) => (
+                      <motion.div
                         key={artist.id}
-                        onClick={() => navigate(createPageUrl('ScottArtistHome') + `?id=${artist.id}`)}
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        className={`flex-shrink-0 relative ${
-                          artist.id === firstArtistId 
-                            ? 'ring-2 ring-cyan-400' 
-                            : 'hover:ring-1 hover:ring-cyan-400/50'
-                        } transition-all`}
+                        className="flex-shrink-0 relative group"
                       >
-                        {artist.profile_pic_url ? (
-                          <img 
-                            src={artist.profile_pic_url} 
-                            alt={artist.name}
-                            className="w-14 h-14 rounded-full object-cover border-2 border-cyan-500/40 hover:border-cyan-500"
-                          />
-                        ) : (
-                          <div className="w-14 h-14 rounded-full bg-gradient-to-br from-cyan-500 to-cyan-600 text-white font-black text-lg flex items-center justify-center border-2 border-cyan-500/40">
-                            {artist.name.charAt(0).toUpperCase()}
-                          </div>
-                        )}
-                        <span className="text-[9px] font-bold text-cyan-400 absolute -bottom-3 left-1/2 -translate-x-1/2 whitespace-nowrap">{artist.name}</span>
-                      </motion.button>
+                        <motion.button
+                          onClick={() => navigate(createPageUrl('ScottArtistHome') + `?id=${artist.id}`)}
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                          className={`flex-shrink-0 relative ${
+                            artist.id === firstArtistId 
+                              ? 'ring-2 ring-cyan-400' 
+                              : 'hover:ring-1 hover:ring-cyan-400/50'
+                          } transition-all`}
+                        >
+                          {artist.profile_pic_url ? (
+                            <img 
+                              src={artist.profile_pic_url} 
+                              alt={artist.name}
+                              className="w-12 h-12 rounded-full object-cover border-2 border-cyan-500/40 hover:border-cyan-500"
+                            />
+                          ) : (
+                            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-cyan-500 to-cyan-600 text-white font-black text-sm flex items-center justify-center border-2 border-cyan-500/40">
+                              {artist.name.charAt(0).toUpperCase()}
+                            </div>
+                          )}
+                        </motion.button>
+                        {/* NAME TOOLTIP */}
+                        <span className="text-[8px] font-bold text-cyan-400 absolute left-1/2 -translate-x-1/2 top-14 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                          {artist.name}
+                        </span>
+                      </motion.div>
                     ))}
-                    {artists.length > 0 && (
+                    
+                    {/* EXPAND BUTTON */}
+                    {artists.length > 3 && !showAllArtists && (
                       <motion.button
+                        onClick={() => setShowAllArtists(true)}
                         whileHover={{ scale: 1.05 }}
-                        onClick={() => navigate(createPageUrl('ScottAddArtist'))}
-                        className="flex-shrink-0 w-14 h-14 rounded-full border-2 border-dashed border-cyan-500/40 hover:border-cyan-500 flex items-center justify-center text-cyan-400 hover:bg-cyan-500/10 transition-all"
+                        className="flex-shrink-0 w-12 h-12 rounded-full border-2 border-dashed border-cyan-500/40 hover:border-cyan-500 flex items-center justify-center text-cyan-400 hover:bg-cyan-500/10 transition-all text-xs font-bold"
                       >
-                        <Plus className="w-5 h-5" />
+                        +{artists.length - 3}
                       </motion.button>
                     )}
+
+                    {/* COLLAPSE BUTTON */}
+                    {showAllArtists && (
+                      <motion.button
+                        onClick={() => setShowAllArtists(false)}
+                        whileHover={{ scale: 1.05 }}
+                        className="flex-shrink-0 w-12 h-12 rounded-full border-2 border-dashed border-cyan-500/40 hover:border-cyan-500 flex items-center justify-center text-cyan-400 hover:bg-cyan-500/10 transition-all text-xs font-bold"
+                      >
+                        −
+                      </motion.button>
+                    )}
+
+                    {/* ADD ARTIST */}
+                    <motion.button
+                      whileHover={{ scale: 1.05 }}
+                      onClick={() => navigate(createPageUrl('ScottAddArtist'))}
+                      className="flex-shrink-0 w-12 h-12 rounded-full border-2 border-dashed border-green-500/40 hover:border-green-500 flex items-center justify-center text-green-400 hover:bg-green-500/10 transition-all"
+                    >
+                      <Plus className="w-5 h-5" />
+                    </motion.button>
                   </div>
-                  <div className="h-6" />
                 </div>
               )}
 
