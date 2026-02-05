@@ -137,39 +137,21 @@ export default function CB51() {
               )}
 
               {/* MAIN CONTENT */}
-              <div className="px-4 space-y-8 pt-8 pb-32">
+              <div className="px-4 pt-6 pb-32 space-y-5">
 
-                {/* HERO - AI51 SCAN with premium feel */}
-                <motion.button
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4 }}
+                {/* AI51 SCAN - Minimal science */}
+                <button
                   onClick={() => document.querySelector('input[type="file"]')?.click()}
-                  className="w-full group relative"
+                  className="w-full bg-black border border-cyan-500/50 hover:border-cyan-400 rounded-lg p-4 transition-all text-left group"
                 >
-                  {/* GLOW BG */}
-                  <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-600 via-cyan-500 to-cyan-400 rounded-3xl blur-2xl opacity-0 group-hover:opacity-40 transition-opacity duration-500" />
-
-                  {/* CARD */}
-                  <div className="relative bg-gradient-to-br from-cyan-950 via-black to-black rounded-3xl p-8 border border-cyan-500/50 group-hover:border-cyan-400/80 backdrop-blur-xl transition-all duration-300 overflow-hidden">
-                    {/* ANIMATED BG ACCENT */}
-                    <div className="absolute top-0 right-0 w-40 h-40 bg-cyan-500/10 rounded-full blur-3xl group-hover:bg-cyan-500/20 transition-all duration-500" />
-
-                    <div className="relative z-10">
-                      <motion.div
-                        animate={{ y: [0, -4, 0] }}
-                        transition={{ duration: 3, repeat: Infinity }}
-                        className="mb-4"
-                      >
-                        <Sparkles className="w-8 h-8 text-cyan-400" />
-                      </motion.div>
-                      <h2 className="text-white font-black text-2xl mb-2 group-hover:text-cyan-300 transition-colors">
-                        AI51 SCAN
-                      </h2>
-                      <p className="text-gray-400 text-sm">Upload contracts • Parse instantly • Auto-create gigs</p>
+                  <div className="flex items-start gap-3">
+                    <Zap className="w-5 h-5 text-cyan-400 flex-shrink-0 mt-0.5" />
+                    <div className="flex-1">
+                      <h2 className="text-white font-bold text-sm">AI51 SCAN</h2>
+                      <p className="text-gray-500 text-xs mt-1">Contracts → Auto-parsed → Ready</p>
                     </div>
                   </div>
-                </motion.button>
+                </button>
 
                 {/* GIG UPLOAD - Hidden file input */}
                 {currentArtistId && (
@@ -181,77 +163,40 @@ export default function CB51() {
                   </div>
                 )}
 
-                {/* APPROVALS SECTION - More inviting */}
-                <motion.div 
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.2, duration: 0.5 }}
-                >
-                  <div className="mb-4">
-                    <h3 className="text-cyan-400 text-xs font-mono uppercase tracking-wider font-black">⚡ Approvals</h3>
-                    <p className="text-gray-500 text-[10px] mt-1">Pending decisions</p>
-                  </div>
+                {/* APPROVALS */}
+                <div>
+                  <h3 className="text-cyan-300 text-xs font-bold uppercase tracking-wider mb-2">Pending</h3>
                   {currentArtistId && <CB51NotificationFeed artistId={currentArtistId} />}
-                </motion.div>
+                </div>
 
-                {/* QUICK ACCESS - Premium layout */}
-                <motion.div 
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.3, duration: 0.5 }}
-                >
-                  <h3 className="text-cyan-400 text-xs font-mono uppercase tracking-wider font-black mb-4">📋 Quick Access</h3>
-                  <div className="space-y-3">
+                {/* QUICK ACCESS - Grid system */}
+                <div>
+                  <h3 className="text-cyan-300 text-xs font-bold uppercase tracking-wider mb-2">Access</h3>
+                  <div className="grid grid-cols-2 gap-2">
                     {[
-                      { icon: Mail, label: 'EMAIL', color: 'cyan', route: 'ScottMessageInbox', desc: 'Messages' },
-                      { icon: Calendar, label: 'CALENDAR', color: 'cyan', route: 'ScottCalendarView', desc: 'Shows' },
-                      { icon: CheckCircle, label: 'TASKS', color: 'cyan', route: 'ScottToDo', badge: '5', desc: 'To-do' },
-                      { icon: DollarSign, label: 'FINANCE', color: 'green', route: 'ScottFinanceAdmin', desc: 'Money' },
-                    ].map(({ icon: Icon, label, color, route, badge, desc }) => (
-                      <motion.button
+                      { icon: Mail, label: 'Email', color: 'cyan', route: 'ScottMessageInbox' },
+                      { icon: Calendar, label: 'Calendar', color: 'cyan', route: 'ScottCalendarView' },
+                      { icon: CheckCircle, label: 'Tasks', color: 'cyan', route: 'ScottToDo', badge: '5' },
+                      { icon: DollarSign, label: 'Finance', color: 'green', route: 'ScottFinanceAdmin' },
+                    ].map(({ icon: Icon, label, color, route, badge }) => (
+                      <button
                         key={label}
-                        whileHover={{ x: 6, scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
                         onClick={() => navigate(createPageUrl(currentArtistId ? `${route}?id=${currentArtistId}` : route))}
-                        className={`w-full flex items-center justify-between px-5 py-4 rounded-2xl border backdrop-blur-sm transition-all duration-300 group ${
+                        className={`flex items-center justify-between px-3 py-2 rounded border text-xs font-bold transition-colors ${
                           color === 'green'
-                            ? 'bg-gradient-to-r from-green-950/30 to-black border-green-500/40 hover:border-green-400 hover:bg-gradient-to-r hover:from-green-950/50 hover:to-black'
-                            : 'bg-gradient-to-r from-cyan-950/30 to-black border-cyan-500/40 hover:border-cyan-400 hover:bg-gradient-to-r hover:from-cyan-950/50 hover:to-black'
+                            ? 'bg-black border-green-500/30 hover:border-green-400 text-green-400'
+                            : 'bg-black border-cyan-500/30 hover:border-cyan-400 text-cyan-400'
                         }`}
                       >
-                        <div className="flex items-center gap-4">
-                          <div className={`p-2 rounded-lg ${
-                            color === 'green'
-                              ? 'bg-green-500/20'
-                              : 'bg-cyan-500/20'
-                          }`}>
-                            <Icon className={`w-5 h-5 ${color === 'green' ? 'text-green-400' : 'text-cyan-400'}`} />
-                          </div>
-                          <div className="text-left">
-                            <span className={`font-black text-sm font-mono ${color === 'green' ? 'text-green-300' : 'text-cyan-300'}`}>
-                              {label}
-                            </span>
-                            <p className="text-gray-600 text-xs mt-0.5">{desc}</p>
-                          </div>
+                        <div className="flex items-center gap-2">
+                          <Icon className="w-4 h-4" />
+                          <span>{label}</span>
                         </div>
-                        {badge ? (
-                          <motion.span
-                            animate={{ scale: [1, 1.1, 1] }}
-                            transition={{ duration: 2, repeat: Infinity }}
-                            className={`text-xs font-black px-3 py-1.5 rounded-lg font-mono ${
-                              color === 'green'
-                                ? 'bg-green-500/30 text-green-300'
-                                : 'bg-cyan-500/30 text-cyan-300'
-                            }`}>
-                            {badge}
-                          </motion.span>
-                        ) : (
-                          <span className={`text-gray-600 group-hover:${color === 'green' ? 'text-green-400' : 'text-cyan-400'} transition-colors text-lg`}>→</span>
-                        )}
-                      </motion.button>
+                        {badge && <span className="text-[10px] bg-white/10 px-1.5 py-0.5 rounded">{badge}</span>}
+                      </button>
                     ))}
                   </div>
-                </motion.div>
+                </div>
               </div>
             </div>
 
