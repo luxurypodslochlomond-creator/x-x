@@ -132,15 +132,28 @@ export default function CB51() {
           )}
         </motion.div>
 
+        {/* ADD ARTIST BUTTON */}
+        <Link to={createPageUrl('ScottAddArtist')}>
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            className="w-full px-6 py-4 bg-gradient-to-r from-cyan-500 to-green-500 text-white rounded-lg font-black text-lg font-mono flex items-center justify-center gap-2 transition-all shadow-lg"
+          >
+            + ADD ARTIST
+          </motion.button>
+        </Link>
+
         {/* ARTISTS CAROUSEL */}
         {artists.length > 0 && (
           <div className="space-y-4">
+            <p className="text-cyan-400 font-mono text-xs font-bold">TAP ARTIST TO MANAGE ↓</p>
             <div className="flex gap-3 overflow-x-auto pb-2">
               {displayedArtists.map((artist) => (
                 <motion.button
                   key={artist.id}
                   onClick={() => navigate(createPageUrl('ScottArtistHome') + `?id=${artist.id}`)}
                   whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                   className="relative flex-shrink-0 w-20 h-20 rounded-full bg-cyan-400 text-black font-black text-xl font-mono flex items-center justify-center transition-all hover:shadow-lg hover:shadow-cyan-500/50"
                 >
                   {artist.name.charAt(0).toUpperCase()}
