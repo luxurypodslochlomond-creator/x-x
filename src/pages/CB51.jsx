@@ -9,6 +9,7 @@ import CB51TestRoleSwitcher from '@/components/scott/CB51TestRoleSwitcher';
 import CB51ErrorBoundary from '@/components/scott/CB51ErrorBoundary';
 import CB51PINGuard from '@/components/cb51/CB51PINGuard';
 import CB51PendingGigs from '@/components/scott/CB51PendingGigs';
+import CB51GigUploadParser from '@/components/cb51/CB51GigUploadParser';
 
 export default function CB51() {
   const navigate = useNavigate();
@@ -112,6 +113,18 @@ export default function CB51() {
             >
               + ADD ARTIST
             </button>
+          </div>
+        )}
+
+        {/* UPLOAD & PARSE GIG */}
+        {firstArtistId && (
+          <div className="mb-6">
+            <CB51GigUploadParser 
+              artistId={firstArtistId}
+              onGigCreated={() => {
+                queryClient.invalidateQueries({ queryKey: ['pendingGigs', firstArtistId] });
+              }}
+            />
           </div>
         )}
 
