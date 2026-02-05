@@ -19,21 +19,22 @@ export default function CB51GigUploadParser({ artistId, onGigCreated }) {
 
     setFile(selectedFile);
     setError(null);
+    setSaveError(null);
     setParsing(true);
 
     try {
-      // Upload file to get URL
       const uploadRes = await base44.integrations.Core.UploadFile({
         file: selectedFile
       });
 
-      // Extract text from uploaded file
       const schema = {
         type: "object",
         properties: {
           venue_name: { type: "string" },
           date_start: { type: "string" },
-          promoter_name: { type: "string" }
+          promoter_name: { type: "string" },
+          fee: { type: "string" },
+          location: { type: "string" }
         }
       };
 
@@ -42,25 +43,20 @@ export default function CB51GigUploadParser({ artistId, onGigCreated }) {
         json_schema: schema
       });
 
-      let content = '';
-      if (extractRes.output) {
-        content = typeof extractRes.output === 'string' 
-          ? extractRes.output 
-          : JSON.stringify(extractRes.output);
-      }
+      let content = extractRes.output ? JSON.stringify(extractRes.output) : '';
 
-      // Parse with AI
       const parseRes = await base44.functions.invoke('parseGigFromContent', {
-        content: content,
+        content,
         contentType: selectedFile.type,
         source: selectedFile.name
       });
 
-      setExtracted(parseRes.extracted);
-      setEditing({ ...parseRes.extracted });
-
-      if (parseRes.missingCritical?.length > 0) {
-        setError(`Missing: ${parseRes.missingCritical.join(', ')}`);
+      if (parseRes.extracted) {
+        setExtracted(parseRes.extracted);
+        setEditing({ ...parseRes.extracted });
+        if (parseRes.missingCritical?.length > 0) {
+          setError(`⚠️ Missing: ${parseRes.missingCritical.join(', ')}`);
+        }
       }
     } catch (err) {
       setError(err.message || 'Failed to parse file');
