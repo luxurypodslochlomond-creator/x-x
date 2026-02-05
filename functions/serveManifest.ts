@@ -7,7 +7,7 @@ Deno.serve(async (req) => {
     const manifest = isCB51 ? {
       name: "CB51 • AI Co-Manager for Artists",
       short_name: "CB51",
-      description: "Professional artist management powered by AI51",
+      description: "Gigs • Calendar • Finance • Band votes",
       start_url: "/CB51",
       scope: "/",
       display: "standalone",
