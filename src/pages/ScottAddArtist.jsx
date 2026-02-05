@@ -76,12 +76,16 @@ export default function ScottAddArtist() {
                 // Send CB51 branded invitation
                 if (formData.email) {
                     try {
-                        await base44.functions.invoke('sendCB51Invite', {
+                        await base44.functions.invoke('sendCB51BrandedInvite', {
                             email: formData.email,
+                            name: formData.name,
                             artistName: formData.name
                         });
+                        alert(`✓ CB51 invite sent to ${formData.email}`);
                     } catch (inviteError) {
                         console.log('Invite error:', inviteError.message);
+                        // Fallback to Base44 invite
+                        await base44.users.inviteUser(formData.email, 'user');
                     }
                 }
                 
