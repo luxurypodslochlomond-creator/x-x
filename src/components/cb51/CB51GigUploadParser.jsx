@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { base44 } from '@/api/base44Client';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { Upload, CheckCircle, AlertCircle, Loader, Zap } from 'lucide-react';
+import { Upload, CheckCircle, AlertCircle, Loader, Zap, MapPin, DollarSign, User, Calendar } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function CB51GigUploadParser({ artistId, onGigCreated }) {
@@ -11,6 +11,7 @@ export default function CB51GigUploadParser({ artistId, onGigCreated }) {
   const [extracted, setExtracted] = useState(null);
   const [editing, setEditing] = useState(null);
   const [error, setError] = useState(null);
+  const [saveError, setSaveError] = useState(null);
 
   const handleFileSelect = async (e) => {
     const selectedFile = e.target.files?.[0];
