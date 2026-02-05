@@ -74,21 +74,33 @@ export default function CB51GigUploadParser({ artistId, onGigCreated }) {
       }
 
       const gig = await base44.entities.GigOffer.create({
-        artist_id: artistId,
-        title: editing.venue_name || 'Untitled Gig',
-        venue: editing.venue_name,
-        location: editing.location || '',
-        date_start: editing.date_start,
-        time_start: editing.time_start || '',
-        fee: editing.fee ? Number(editing.fee) : null,
-        promoter_name: editing.promoter_name,
-        promoter_email: editing.promoter_email || '',
-        promoter_phone: editing.promoter_phone || '',
-        offer_details: editing.offer_details || editing.notes || '',
-        status: 'manager_reviewing'
-      });
+            artist_id: artistId,
+            title: editing.venue_name || 'Untitled Gig',
+            venue: editing.venue_name,
+            location: editing.location || '',
+            date_start: editing.date_start,
+            time_start: editing.time_start || '',
+            fee: editing.fee ? Number(editing.fee) : null,
+            promoter_name: editing.promoter_name,
+            promoter_email: editing.promoter_email || '',
+            promoter_phone: editing.promoter_phone || '',
+            offer_details: editing.offer_details || editing.notes || '',
+            status: 'manager_reviewing'
+          });
 
-      return gig;
+          // Fire notification after gig created
+          try {
+            await base44.functions.invoke('notifyManagerPendingGig', {
+              gigId: gig.id,
+              artistId: artistId,
+              venueName: editing.venue_name,
+              promoterName: editing.promoter_name
+            });
+          } catch (notifyErr) {
+            console.log('Notification send failed (non-critical):', notifyErr.message);
+          }
+
+          return gig;
     },
     onSuccess: (gig) => {
       queryClient.invalidateQueries({ queryKey: ['pendingGigs', artistId] });
