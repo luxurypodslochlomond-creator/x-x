@@ -19,10 +19,8 @@ export default function CB51ManagerGigApproval({ gig, artistId, onApprovalComple
       // Send notification to band
       try {
         await base44.functions.invoke('notifyBandGigOffer', {
-          gigId: gig.id,
-          artistId: artistId,
-          venueName: gig.venue,
-          date: gig.date_start
+          gigOfferId: gig.id,
+          artistId: artistId
         });
       } catch (err) {
         console.log('Band notification queued (will retry):', err.message);
