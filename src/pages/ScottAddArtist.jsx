@@ -3,13 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-
+import { useQueryClient } from '@tanstack/react-query';
 import { ArrowLeft } from 'lucide-react';
 import { Radio } from 'lucide-react';
 import { base44 } from '@/api/base44Client';
 
 export default function ScottAddArtist() {
     const navigate = useNavigate();
+    const queryClient = useQueryClient();
     const urlParams = new URLSearchParams(window.location.search);
     const editId = urlParams.get('edit');
     const [saving, setSaving] = useState(false);
@@ -64,13 +65,12 @@ export default function ScottAddArtist() {
                 });
                 navigate(createPageUrl(`ScottArtistHome?id=${editId}`));
             } else {
-                // CREATE new artist
-                const newArtist = await base44.entities.ScottArtist.create({
+                // CREATE new artist - use Artist entity (migrated schema)
+                const newArtist = await base44.entities.Artist.create({
                     name: formData.name,
                     phone: formData.phone,
                     email: formData.email,
-                    profile_pic_url: formData.profile_pic_url,
-                    type: 'artist'
+                    profile_pic_url: formData.profile_pic_url
                 });
                 
                 // Send CB51 branded invitation (non-blocking - artist already saved)
@@ -82,7 +82,10 @@ export default function ScottAddArtist() {
                     }).catch(e => console.log('Email send failed:', e));
                 }
                 
-                navigate(createPageUrl(`ScottArtistHome?id=${newArtist.id}`));
+                // Invalidate queries so CB51 dashboard updates
+                queryClient.invalidateQueries({ queryKey: ['cb51Artists'] });
+                
+                navigate(createPageUrl('CB51'));
             }
         } catch (error) {
             alert('Error saving: ' + error.message);
