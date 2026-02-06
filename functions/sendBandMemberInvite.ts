@@ -9,16 +9,30 @@ Deno.serve(async (req) => {
       return Response.json({ error: 'Missing required fields' }, { status: 400 });
     }
 
-    // Create magic token (simple: memberId + timestamp)
-    const token = btoa(`${memberId}:${Date.now()}`);
-    const voteLink = `https://app.base44.com/cb51/band-vote?token=${token}&memberId=${memberId}&artistId=${artistId}`;
+    // Create invite link
+    const inviteUrl = `https://cb51.io/accept-invite?memberId=${memberId}&artistId=${artistId}`;
 
-    // For now, just return the link (email sending requires registered users)
-    // Band manager can share this link manually or we save it in TeamMember entity
+    // Send branded CB51 invitation email
+    await base44.asServiceRole.integrations.Core.SendEmail({
+      to: email,
+      from_name: 'CB51',
+      subject: `${memberName}, you're invited to ${artistName}'s CB51 band`,
+      body: `Hey ${memberName},
+
+${artistName} added you to their CB51 band management.
+
+Click below to accept and start voting on gigs:
+
+${inviteUrl}
+
+—
+CB51 • AI Co-Manager for Artists
+Avoid the Noise ♾️❤️`
+    });
+
     return Response.json({ 
-      success: true, 
-      inviteLink: voteLink,
-      message: `Invite link created. Share with ${memberName} at ${email}`
+      success: true,
+      message: `Invite sent to ${email}`
     });
   } catch (error) {
     return Response.json({ error: error.message }, { status: 500 });
