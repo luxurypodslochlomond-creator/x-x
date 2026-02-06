@@ -204,7 +204,7 @@ export default function CB51GigUploadParser({ artistId, onGigCreated }) {
           >
             <CB51ManagerGigApproval
               gig={savedGig}
-              artistId={artistId}
+              artistId={selectedArtistId}
               onApprovalComplete={(result) => {
                 console.log('✅ Approval complete:', result);
                 setSavedGig(null);
