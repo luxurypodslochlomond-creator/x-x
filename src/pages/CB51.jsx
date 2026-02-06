@@ -10,6 +10,7 @@ import CB51ErrorBoundary from '@/components/scott/CB51ErrorBoundary';
 import CB51PINGuard from '@/components/cb51/CB51PINGuard';
 import CB51NotificationFeed from '@/components/cb51/CB51NotificationFeed';
 import CB51GigUploadParser from '@/components/cb51/CB51GigUploadParser';
+import CB51AddBandMemberSheet from '@/components/cb51/CB51AddBandMemberSheet';
 
 export default function CB51() {
   const navigate = useNavigate();
@@ -17,6 +18,7 @@ export default function CB51() {
   const [loading, setLoading] = useState(true);
   const [activeArtistId, setActiveArtistId] = useState(null);
   const [showArtistMenu, setShowArtistMenu] = useState(false);
+  const [showAddMemberSheet, setShowAddMemberSheet] = useState(false);
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -208,11 +210,11 @@ export default function CB51() {
                       { icon: Calendar, label: 'Calendar', color: 'cyan', route: `ScottCalendarView?id=${currentArtistId}` },
                       { icon: CheckCircle, label: 'Tasks', color: 'cyan', route: 'ScottToDo', badge: '5' },
                       { icon: DollarSign, label: 'Finance', color: 'green', route: 'ScottFinanceAdmin' },
-                      { icon: Users, label: 'Band', color: 'cyan', route: `ScottArtistHome?id=${currentArtistId}` },
-                    ].map(({ icon: Icon, label, color, route, badge }) => (
+                      { icon: Users, label: 'Band', color: 'cyan', route: null, action: () => setShowAddMemberSheet(true) },
+                    ].map(({ icon: Icon, label, color, route, badge, action }) => (
                       <button
                         key={label}
-                        onClick={() => navigate(createPageUrl(route))}
+                        onClick={() => action ? action() : navigate(createPageUrl(route))}
                         className={`flex items-center justify-between px-3 py-2 rounded border text-xs font-bold transition-colors ${
                           color === 'green'
                             ? 'bg-black border-green-500/30 hover:border-green-400 text-green-400'
@@ -245,7 +247,13 @@ export default function CB51() {
             )}
           </div>
         </div>
+      <CB51AddBandMemberSheet
+        artistId={currentArtistId}
+        isOpen={showAddMemberSheet}
+        onClose={() => setShowAddMemberSheet(false)}
+        onMemberAdded={() => {}}
+      />
       </CB51ErrorBoundary>
-    </CB51PINGuard>
-  );
-}
+      </CB51PINGuard>
+      );
+      }
