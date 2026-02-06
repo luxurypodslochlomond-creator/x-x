@@ -142,8 +142,27 @@ export default function CB51GigUploadParser({ artistId, onGigCreated }) {
         <h2 className="text-cyan-400 font-black text-sm font-mono">GIG UPLOAD</h2>
       </div>
 
-      {/* UPLOAD AREA */}
+      {/* ARTIST SELECTOR - BEFORE UPLOAD */}
       {!extracted && (
+        <div className="bg-black border-2 border-cyan-500/40 rounded-lg p-3">
+          <label className="text-cyan-400 text-[9px] font-bold font-mono uppercase block mb-2">SELECT ARTIST</label>
+          <select
+            value={selectedArtistId || ''}
+            onChange={(e) => setSelectedArtistId(e.target.value)}
+            className="w-full bg-cyan-900/20 border border-cyan-500/30 rounded px-3 py-2 text-white text-sm font-bold placeholder-gray-600"
+          >
+            <option value="">-- Choose Artist --</option>
+            {artists.map((artist) => (
+              <option key={artist.id} value={artist.id}>
+                {artist.name}
+              </option>
+            ))}
+          </select>
+        </div>
+      )}
+
+      {/* UPLOAD AREA */}
+      {!extracted && selectedArtistId && (
         <motion.label
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
