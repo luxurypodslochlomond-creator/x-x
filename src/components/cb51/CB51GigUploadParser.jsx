@@ -24,6 +24,12 @@ export default function CB51GigUploadParser({ artistId, onGigCreated }) {
     setSaveError(null);
     setParsing(true);
 
+    // 20 second timeout
+    const timeoutId = setTimeout(() => {
+      setParsing(false);
+      setError('Upload taking too long. Try again or enter manually.');
+    }, 20000);
+
     try {
       const uploadRes = await base44.integrations.Core.UploadFile({
         file: selectedFile
@@ -53,6 +59,8 @@ export default function CB51GigUploadParser({ artistId, onGigCreated }) {
         source: selectedFile.name
       });
 
+      clearTimeout(timeoutId);
+
       const extracted = parseRes.data?.extracted || parseRes.extracted;
       if (extracted && (extracted.venue_name || extracted.promoter_name)) {
         setExtracted(extracted);
@@ -64,6 +72,7 @@ export default function CB51GigUploadParser({ artistId, onGigCreated }) {
         setError('Could not extract gig details. Try manual entry.');
       }
     } catch (err) {
+      clearTimeout(timeoutId);
       setError(err.message || 'Failed to parse file');
       console.error(err);
     } finally {
