@@ -35,7 +35,7 @@ export default function CB51() {
 
   const { data: artists = [] } = useQuery({
     queryKey: ['cb51Artists'],
-    queryFn: () => base44.entities.ScottArtist.filter({}),
+    queryFn: () => base44.entities.Artist.filter({}),
     enabled: !!user,
   });
 
