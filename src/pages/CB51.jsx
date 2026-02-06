@@ -3,7 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { base44 } from '@/api/base44Client';
 import { useQuery } from '@tanstack/react-query';
-import { Calendar, CheckCircle, DollarSign, Plus, Mail, Users, ChevronDown, ChevronRight, Minus } from 'lucide-react';
+import { Calendar, CheckCircle, DollarSign, Plus, Mail, Users, Music, Sparkles } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import CB51ErrorBoundary from '@/components/scott/CB51ErrorBoundary';
 import CB51PINGuard from '@/components/cb51/CB51PINGuard';
