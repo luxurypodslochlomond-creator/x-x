@@ -43,7 +43,9 @@ export default function Earth51() {
   const [balanceBeforeCleanup, setBalanceBeforeCleanup] = useState(0);
   const [showParentInfo, setShowParentInfo] = useState(false);
   const [purchaseSuccess, setPurchaseSuccess] = useState(null);
-  const [totalCleanups, setTotalCleanups] = useState(0);
+  const [totalCleanups, setTotalCleanups] = useState(() => {
+    return parseInt(localStorage.getItem('earth51_total_cleanups') || '0');
+  });
 
   // HIDE MAIN NAV FOR KIDS EXPERIENCE
   useEffect(() => {
@@ -694,6 +696,17 @@ export default function Earth51() {
               </div>
             )}
           </motion.div>
+
+          {/* REWARDS + PROGRESSION */}
+          <CleanupRewards 
+            weight={parseFloat(weight) || 0}
+            p51Earned={tokensEarned}
+            nextUnlock={null}
+            progressToNext={50}
+          />
+
+          {/* UNLOCK TRACKER */}
+          <UnlockProgressTracker totalCleanups={totalCleanups} />
 
           {/* WHAT'S NEXT */}
           <div className="bg-cyan-500 border-4 border-cyan-400 p-4" style={{ boxShadow: '4px 4px 0px #000' }}>
