@@ -11,6 +11,8 @@ import PrivacyFirstEngine from '@/components/earth51/PrivacyFirstEngine';
 import Earth518BitIcon from '@/components/earth51/Earth518BitIcon';
 import LiveClock from '@/components/shared/LiveClock';
 import { GameIcon, SafeIcon, EarnIcon, HealIcon, CameraIcon } from '@/components/earth51/Earth51PixelButtons';
+import UnlockProgressTracker from '@/components/earth51/UnlockProgressTracker';
+import CleanupRewards from '@/components/earth51/CleanupRewards';
 
 /**
  * EARTH51 - KIDS EDITION
@@ -41,6 +43,7 @@ export default function Earth51() {
   const [balanceBeforeCleanup, setBalanceBeforeCleanup] = useState(0);
   const [showParentInfo, setShowParentInfo] = useState(false);
   const [purchaseSuccess, setPurchaseSuccess] = useState(null);
+  const [totalCleanups, setTotalCleanups] = useState(0);
 
   // HIDE MAIN NAV FOR KIDS EXPERIENCE
   useEffect(() => {
@@ -143,6 +146,11 @@ export default function Earth51() {
         synced: false
       });
       localStorage.setItem('earth51_local_cleanups', JSON.stringify(localCleanups));
+
+      // Track total cleanups for unlock progression
+      const newCleanupCount = localCleanups.length;
+      setTotalCleanups(newCleanupCount);
+      localStorage.setItem('earth51_total_cleanups', newCleanupCount.toString());
 
       // TRY to sync to server if logged in (optional)
       try {
