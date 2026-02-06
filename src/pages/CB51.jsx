@@ -65,28 +65,37 @@ export default function CB51() {
                         <h3 className="text-cyan-400 text-xs font-bold uppercase tracking-wider mb-3">Artists</h3>
                         <div className="grid grid-cols-3 gap-2 mb-4">
                           {artists.slice(0, 2).map((artist) => (
-                            <button
-                              key={artist.id}
-                              onClick={() => setActiveArtistId(artist.id)}
-                              className={`flex flex-col items-center gap-2 p-2 rounded-lg transition-all ${
-                                artist.id === currentArtistId
-                                  ? 'bg-cyan-500/20 border border-cyan-400'
-                                  : 'bg-black border border-cyan-500/30 hover:border-cyan-400'
-                              }`}
-                            >
-                              {artist.profile_pic_url ? (
-                                <img 
-                                  src={artist.profile_pic_url} 
-                                  alt={artist.name}
-                                  className="w-10 h-10 rounded-full object-cover border border-cyan-500/40"
-                                />
-                              ) : (
-                                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-cyan-500 to-cyan-600 text-white font-black text-xs flex items-center justify-center">
-                                  {artist.name.charAt(0).toUpperCase()}
-                                </div>
-                              )}
-                              <p className="text-cyan-300 font-bold text-[10px] text-center truncate w-full px-1">{artist.name}</p>
-                            </button>
+                            <div key={artist.id} className="relative">
+                              <button
+                                onClick={() => setActiveArtistId(artist.id)}
+                                className={`flex flex-col items-center gap-2 p-2 rounded-lg transition-all w-full ${
+                                  artist.id === currentArtistId
+                                    ? 'bg-cyan-500/20 border border-cyan-400'
+                                    : 'bg-black border border-cyan-500/30 hover:border-cyan-400'
+                                }`}
+                              >
+                                {artist.profile_pic_url ? (
+                                  <img 
+                                    src={artist.profile_pic_url} 
+                                    alt={artist.name}
+                                    className="w-10 h-10 rounded-full object-cover border border-cyan-500/40"
+                                  />
+                                ) : (
+                                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-cyan-500 to-cyan-600 text-white font-black text-xs flex items-center justify-center">
+                                    {artist.name.charAt(0).toUpperCase()}
+                                  </div>
+                                )}
+                                <p className="text-cyan-300 font-bold text-[10px] text-center truncate w-full px-1">{artist.name}</p>
+                              </button>
+                              <button
+                                onClick={() => navigate(createPageUrl(`CB51AddArtist?edit=${artist.id}`))}
+                                className="absolute top-1 right-1 bg-black/80 border border-cyan-500/40 hover:border-cyan-400 rounded p-1 transition-all"
+                              >
+                                <svg className="w-3 h-3 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                                </svg>
+                              </button>
+                            </div>
                           ))}
                           <button
                             onClick={() => navigate(createPageUrl('CB51AddArtist'))}
@@ -128,31 +137,43 @@ export default function CB51() {
                             <h2 className="text-cyan-400 font-bold text-sm mb-3">Select Artist</h2>
                             <div className="space-y-2">
                               {artists.map((artist) => (
-                                <button
-                                  key={artist.id}
-                                  onClick={() => {
-                                    setActiveArtistId(artist.id);
-                                    setShowArtistMenu(false);
-                                  }}
-                                  className={`w-full flex items-center gap-2 px-3 py-2 rounded transition-colors ${
-                                    artist.id === currentArtistId
-                                      ? 'bg-cyan-500/20 border border-cyan-400'
-                                      : 'bg-black border border-cyan-500/20 hover:border-cyan-400'
-                                  }`}
-                                >
-                                  {artist.profile_pic_url ? (
-                                    <img 
-                                      src={artist.profile_pic_url} 
-                                      alt={artist.name}
-                                      className="w-6 h-6 rounded-full object-cover flex-shrink-0"
-                                    />
-                                  ) : (
-                                    <div className="w-6 h-6 rounded-full bg-cyan-500 text-white font-black text-[9px] flex items-center justify-center flex-shrink-0">
-                                      {artist.name.charAt(0).toUpperCase()}
-                                    </div>
-                                  )}
-                                  <span className="text-cyan-300 font-bold text-xs flex-1 text-left truncate">{artist.name}</span>
-                                </button>
+                                <div key={artist.id} className="flex gap-2">
+                                  <button
+                                    onClick={() => {
+                                      setActiveArtistId(artist.id);
+                                      setShowArtistMenu(false);
+                                    }}
+                                    className={`flex-1 flex items-center gap-2 px-3 py-2 rounded transition-colors ${
+                                      artist.id === currentArtistId
+                                        ? 'bg-cyan-500/20 border border-cyan-400'
+                                        : 'bg-black border border-cyan-500/20 hover:border-cyan-400'
+                                    }`}
+                                  >
+                                    {artist.profile_pic_url ? (
+                                      <img 
+                                        src={artist.profile_pic_url} 
+                                        alt={artist.name}
+                                        className="w-6 h-6 rounded-full object-cover flex-shrink-0"
+                                      />
+                                    ) : (
+                                      <div className="w-6 h-6 rounded-full bg-cyan-500 text-white font-black text-[9px] flex items-center justify-center flex-shrink-0">
+                                        {artist.name.charAt(0).toUpperCase()}
+                                      </div>
+                                    )}
+                                    <span className="text-cyan-300 font-bold text-xs flex-1 text-left truncate">{artist.name}</span>
+                                  </button>
+                                  <button
+                                    onClick={() => {
+                                      setShowArtistMenu(false);
+                                      navigate(createPageUrl(`CB51AddArtist?edit=${artist.id}`));
+                                    }}
+                                    className="bg-black border border-cyan-500/30 hover:border-cyan-400 text-cyan-400 rounded px-2 transition-colors"
+                                  >
+                                    <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                                    </svg>
+                                  </button>
+                                </div>
                               ))}
                               <button
                                 onClick={() => {
