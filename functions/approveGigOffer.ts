@@ -18,6 +18,11 @@ Deno.serve(async (req) => {
     // Get existing gig first
     const gig = await base44.asServiceRole.entities.GigOffer.get(gigId);
     
+    // Ensure venue is set (use title if venue is missing)
+    if (!gig.venue) {
+      gig.venue = gig.title;
+    }
+    
     // Update with full object to satisfy required fields
     await base44.asServiceRole.entities.GigOffer.update(gigId, {
       ...gig,
