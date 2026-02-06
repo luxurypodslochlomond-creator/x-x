@@ -233,30 +233,20 @@ export default function CB51() {
                                 </button>
                               </div>
 
-                {/* GIGS SECTION - Full width expandable */}
-                <div>
-                  <button 
-                    onClick={() => setExpandedSections({...expandedSections, gigs: !expandedSections.gigs})}
-                    className="w-full"
-                  >
-                    <div className="bg-black border-2 border-cyan-500/40 hover:border-cyan-500 px-4 py-3 flex items-center justify-between transition-all">
-                      <div className="text-cyan-400 font-mono font-black text-sm tracking-wider flex items-center gap-2">
-                        📅 UPCOMING GIGS
-                      </div>
-                      {expandedSections.gigs ? <Minus className="w-4 h-4" /> : <ChevronRight className="w-4 h-4" />}
+                {/* GIG SCANNED SECTION - Main focus */}
+                <div className="border-2 border-cyan-500/60 rounded-lg p-4 bg-black/60">
+                  <div className="flex items-center gap-2 mb-4">
+                    <div className="w-8 h-8 rounded-full border-2 border-cyan-500 flex items-center justify-center">
+                      <Radio className="w-4 h-4 text-cyan-400" />
                     </div>
-                  </button>
-                  {expandedSections.gigs && (
-                    <div className="border-2 border-cyan-500/40 border-t-0 p-4 bg-black">
-                      <p className="text-gray-400 text-xs text-center mb-3 font-mono">No upcoming gigs</p>
-                      <button
-                        onClick={() => navigate(createPageUrl(`ScottCalendarView?id=${currentArtistId}`))}
-                        className="w-full border-2 border-cyan-500/40 hover:border-cyan-500 px-4 py-3 text-cyan-400 font-mono font-bold text-xs tracking-widest transition-all"
-                      >
-                        VIEW CALENDAR
-                      </button>
-                    </div>
-                  )}
+                    <h2 className="text-cyan-400 font-mono font-bold text-sm tracking-wider">GIG SCANNED</h2>
+                    <span className="text-gray-500 text-xs font-mono">Instant decision needed</span>
+                  </div>
+                  <p className="text-gray-400 text-xs text-center mb-4 font-mono">Upload a PDF to scan for gigs</p>
+                  <CB51GigUploadParser 
+                    artistId={currentArtistId}
+                    onGigCreated={() => {}}
+                  />
                 </div>
 
                 {/* BAND MEMBERS SECTION - Full width expandable */}
