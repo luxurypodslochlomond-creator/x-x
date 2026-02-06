@@ -11,27 +11,27 @@ export default function CB51ManagerGigApproval({ gig, artistId, onApprovalComple
 
   const approveMutation = useMutation({
     mutationFn: async () => {
-      // Update gig status to "band_voting"
-      await base44.entities.GigOffer.update(gig.id, {
-        status: 'band_voting'
+      console.log('🎸 Approving gig:', gig.id, 'for artist:', artistId);
+      
+      // Call backend function to handle approval workflow
+      const result = await base44.functions.invoke('approveGigOffer', {
+        gigId: gig.id,
+        artistId: artistId
       });
-
-      // Send notification to band
-      try {
-        await base44.functions.invoke('notifyBandGigOffer', {
-          gigOfferId: gig.id,
-          artistId: artistId
-        });
-      } catch (err) {
-        console.log('Band notification queued (will retry):', err.message);
-      }
-
-      return gig;
+      
+      console.log('✅ Approval result:', result);
+      return result;
     },
     onSuccess: () => {
+      console.log('✅ Approval success - invalidating queries');
       queryClient.invalidateQueries({ queryKey: ['pendingGigs', artistId] });
       queryClient.invalidateQueries({ queryKey: ['gigOffers'] });
+      queryClient.invalidateQueries({ queryKey: ['cb51Artists'] });
       onApprovalComplete?.('approved');
+    },
+    onError: (error) => {
+      console.error('❌ Approval failed:', error);
+      alert('Approval failed: ' + error.message);
     }
   });
 
