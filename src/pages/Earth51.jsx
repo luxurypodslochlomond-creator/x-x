@@ -222,21 +222,16 @@ export default function Earth51() {
 
         <div className="max-w-xl mx-auto pt-16 p-2 pb-16 space-y-1.5">
           
-          {/* HERO - PIXEL ART CAMERA */}
+          {/* HERO - HOW IT WORKS */}
           <motion.div
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ delay: 0.1 }}
-            className="bg-green-600 border-4 border-green-500 p-2 text-center"
+            className="bg-green-600 border-4 border-green-500 p-3 text-center"
             style={{ boxShadow: '4px 4px 0px #000', imageRendering: 'pixelated' }}
           >
-            <div className="flex items-center justify-center gap-2">
-              <CameraIcon />
-              <div className="text-left">
-                <p className="text-white font-black font-mono text-xs leading-tight">TAKE PHOTO</p>
-                <p className="text-white/80 font-mono text-[7px]">AI verifies</p>
-              </div>
-            </div>
+            <p className="text-white font-black font-mono text-sm mb-1">HOW IT WORKS</p>
+            <p className="text-white/80 font-mono text-[8px]">📸 Photo → 🤖 AI scans → 💰 Earn $P51</p>
           </motion.div>
   
           {/* FLOW STEPS - MINIMAL & CLEAR */}
@@ -273,10 +268,10 @@ export default function Earth51() {
               capture="environment"
               onChange={handlePhotoCapture}
               className="hidden"
-              id="photo-upload-main"
+              id="photo-upload-landing"
             />
             <motion.button
-              onClick={() => document.getElementById('photo-upload-main').click()}
+              onClick={() => document.getElementById('photo-upload-landing').click()}
               disabled={isLoading}
               whileHover={{ scale: 1.06 }}
               whileTap={{ scale: 0.94 }}
@@ -284,7 +279,7 @@ export default function Earth51() {
               style={{ boxShadow: '4px 4px 0px #000', imageRendering: 'pixelated' }}
             >
               <CameraIcon />
-              <span className="text-black font-mono text-sm leading-none">GO</span>
+              <span className="text-black font-mono text-sm leading-none">TAKE PHOTO</span>
             </motion.button>
           </label>
 
