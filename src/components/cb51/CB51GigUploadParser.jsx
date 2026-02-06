@@ -48,7 +48,8 @@ export default function CB51GigUploadParser({ artistId, onGigCreated }) {
           date_start: { type: "string" },
           promoter_name: { type: "string" },
           fee: { type: "string" },
-          location: { type: "string" }
+          location: { type: "string" },
+          artist_name: { type: "string" }
         }
       };
 
@@ -71,6 +72,23 @@ export default function CB51GigUploadParser({ artistId, onGigCreated }) {
       if (extracted && (extracted.venue_name || extracted.promoter_name)) {
         setExtracted(extracted);
         setEditing({ ...extracted });
+        
+        // AI auto-detect artist from PDF
+        if (extracted.artist_name && artists.length > 0) {
+          const possibleMatches = artists.filter(a => 
+            a.name.toLowerCase().includes(extracted.artist_name.toLowerCase()) ||
+            extracted.artist_name.toLowerCase().includes(a.name.toLowerCase())
+          );
+          
+          if (possibleMatches.length === 1) {
+            // Perfect match - auto-select
+            setSelectedArtistId(possibleMatches[0].id);
+          } else if (possibleMatches.length > 1) {
+            // Multiple matches - will show chips below
+            setError(`Found ${possibleMatches.length} possible artists. Pick one below.`);
+          }
+        }
+        
         if (parseRes.missingCritical?.length > 0) {
           setError(`⚠️ Missing: ${parseRes.missingCritical.join(', ')}`);
         }
