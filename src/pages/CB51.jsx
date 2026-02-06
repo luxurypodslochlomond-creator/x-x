@@ -64,7 +64,7 @@ export default function CB51() {
                       <div className="px-4 pt-4 pb-2">
                         <h3 className="text-cyan-400 text-xs font-bold uppercase tracking-wider mb-3">Artists</h3>
                         <div className="grid grid-cols-3 gap-2 mb-4">
-                          {artists.slice(0, 3).map((artist) => (
+                          {artists.slice(0, 2).map((artist) => (
                             <button
                               key={artist.id}
                               onClick={() => setActiveArtistId(artist.id)}
@@ -88,7 +88,14 @@ export default function CB51() {
                               <p className="text-cyan-300 font-bold text-[10px] text-center truncate w-full px-1">{artist.name}</p>
                             </button>
                           ))}
-                          {artists.length > 3 && (
+                          <button
+                            onClick={() => navigate(createPageUrl('ScottAddArtist'))}
+                            className="flex flex-col items-center justify-center gap-1 p-2 rounded-lg bg-black border border-green-500/40 hover:border-green-400 transition-all"
+                          >
+                            <Plus className="w-6 h-6 text-green-400" />
+                            <p className="text-green-300 font-bold text-[10px]">Add</p>
+                          </button>
+                          {artists.length > 2 && (
                             <button
                               onClick={() => setShowArtistMenu(true)}
                               className="flex flex-col items-center justify-center gap-1 p-2 rounded-lg bg-black border border-cyan-500/30 hover:border-cyan-400 transition-all"
