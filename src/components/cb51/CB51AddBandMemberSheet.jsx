@@ -58,7 +58,7 @@ export default function CB51AddBandMemberSheet({ artistId, isOpen, onClose, onMe
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
             placeholder="Full name"
-            className="w-full bg-cyan-900/30 border border-cyan-500 text-white px-4 py-3 rounded text-base"
+            className="w-full bg-white text-black px-4 py-3 rounded text-base font-bold placeholder-gray-500"
           />
         </div>
 
@@ -69,7 +69,7 @@ export default function CB51AddBandMemberSheet({ artistId, isOpen, onClose, onMe
             value={formData.email}
             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
             placeholder="band@email.com"
-            className="w-full bg-cyan-900/30 border border-cyan-500 text-white px-4 py-3 rounded text-base"
+            className="w-full bg-white text-black px-4 py-3 rounded text-base font-bold placeholder-gray-500"
           />
         </div>
 
@@ -78,7 +78,7 @@ export default function CB51AddBandMemberSheet({ artistId, isOpen, onClose, onMe
           <select
             value={formData.role}
             onChange={(e) => setFormData({ ...formData, role: e.target.value })}
-            className="w-full bg-cyan-900/30 border border-cyan-500 text-white px-4 py-3 rounded text-base"
+            className="w-full bg-white text-black px-4 py-3 rounded text-base font-bold"
           >
             <option value="band_member">Band Member</option>
             <option value="crew">Crew</option>
