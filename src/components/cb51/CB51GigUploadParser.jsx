@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { base44 } from '@/api/base44Client';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient, useQuery } from '@tanstack/react-query';
 import { Upload, CheckCircle, AlertCircle, Loader, Zap, MapPin, DollarSign, User, Calendar } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import CB51ManagerGigApproval from './CB51ManagerGigApproval';
 
 export default function CB51GigUploadParser({ artistId, onGigCreated }) {
   const queryClient = useQueryClient();
+  const [selectedArtistId, setSelectedArtistId] = useState(artistId || null);
   const [file, setFile] = useState(null);
   const [parsing, setParsing] = useState(false);
   const [extracted, setExtracted] = useState(null);
@@ -14,6 +15,11 @@ export default function CB51GigUploadParser({ artistId, onGigCreated }) {
   const [error, setError] = useState(null);
   const [saveError, setSaveError] = useState(null);
   const [savedGig, setSavedGig] = useState(null);
+
+  const { data: artists = [] } = useQuery({
+    queryKey: ['cb51Artists'],
+    queryFn: () => base44.entities.Artist.filter({}),
+  });
 
   const handleFileSelect = async (e) => {
     const selectedFile = e.target.files?.[0];
