@@ -447,19 +447,90 @@ export default function Earth51() {
             onAllChecksComplete={setAllChecks}
           />
 
-          {/* AI51 ESTIMATE MESSAGE */}
-          {weight && !fraudBlocked && (
+          {/* AI51 ANALYSIS - KIDS SEE WHAT THEY'RE EARNING! */}
+          {allChecks && !fraudBlocked && (
             <motion.div
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              className="bg-cyan-500 border-4 border-cyan-400 p-3"
-              style={{ boxShadow: '4px 4px 0px #000' }}
+              className="space-y-3"
             >
-              <div className="flex items-center gap-2">
-                <span className="text-2xl">🤖</span>
-                <p className="text-black font-black font-mono text-xs">
-                  I THINK IT'S {weight}KG! YOU CAN CHANGE IT IF I'M WRONG :)
-                </p>
+              {/* AI51 SCANNING HEADER */}
+              <div className="bg-gradient-to-r from-cyan-500 to-purple-500 border-4 border-cyan-400 p-3" style={{ boxShadow: '4px 4px 0px #000' }}>
+                <div className="flex items-center gap-2 mb-2">
+                  <motion.div animate={{ rotate: 360 }} transition={{ duration: 2, repeat: Infinity, ease: "linear" }}>
+                    <span className="text-2xl">🤖</span>
+                  </motion.div>
+                  <p className="text-black font-black font-mono text-xs">AI51 SCANNING YOUR LITTER...</p>
+                </div>
+                {weight && (
+                  <div className="bg-black/30 p-2 rounded">
+                    <p className="text-white font-black font-mono text-sm">TOTAL: {weight}kg = {parseFloat(weight) * 1} $P51</p>
+                  </div>
+                )}
+              </div>
+
+              {/* WHAT AI51 FOUND */}
+              {allChecks.weight?.items_detected?.length > 0 && (
+                <div className="bg-green-500 border-4 border-green-400 p-3" style={{ boxShadow: '4px 4px 0px #000' }}>
+                  <p className="text-black font-black font-mono text-[9px] mb-2">🔍 WHAT I FOUND:</p>
+                  <div className="space-y-1">
+                    {allChecks.weight.items_detected.map((item, i) => (
+                      <div key={i} className="bg-black/20 p-2 rounded flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <span className="text-sm">{item.item_type === 'bottle' ? '🍾' : item.item_type === 'wrapper' ? '🍬' : item.item_type === 'can' ? '🥫' : '🗑️'}</span>
+                          <p className="text-black font-mono text-[8px]">{item.count}x {item.item_type}</p>
+                        </div>
+                        <p className="text-black font-black text-[8px]">~{(item.estimated_kg * 1).toFixed(1)} $P51</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* BRANDS DETECTED - CORPORATE ACCOUNTABILITY */}
+              {allChecks.brands?.brands?.length > 0 && (
+                <div className="bg-yellow-500 border-4 border-yellow-400 p-3" style={{ boxShadow: '4px 4px 0px #000' }}>
+                  <p className="text-black font-black font-mono text-[9px] mb-2">🏢 BRANDS I SAW:</p>
+                  <div className="flex flex-wrap gap-1">
+                    {allChecks.brands.brands.map((brand, i) => (
+                      <div key={i} className="bg-black/20 px-2 py-1 rounded">
+                        <p className="text-black font-mono text-[7px]">{brand.brand_name}</p>
+                      </div>
+                    ))}
+                  </div>
+                  <p className="text-black/70 font-mono text-[6px] mt-2">These companies made this litter - we're tracking it! 📊</p>
+                </div>
+              )}
+
+              {/* AI51 ENCOURAGEMENT */}
+              <div className="bg-pink-500 border-4 border-pink-400 p-3" style={{ boxShadow: '4px 4px 0px #000' }}>
+                <div className="flex items-center gap-2">
+                  <span className="text-xl">💡</span>
+                  <p className="text-black font-black font-mono text-[8px]">
+                    {allChecks.weight?.items_detected?.length > 3 
+                      ? "WOW! That's a big cleanup! You're amazing! 🌟" 
+                      : "Great start! Next time try collecting more - bigger bags = more $P51! 💰"}
+                  </p>
+                </div>
+              </div>
+
+              {/* WHAT YOU COULD EARN */}
+              <div className="bg-purple-500 border-4 border-purple-400 p-3" style={{ boxShadow: '4px 4px 0px #000' }}>
+                <p className="text-black font-black font-mono text-[9px] mb-2">💰 WHAT YOU COULD EARN:</p>
+                <div className="space-y-1">
+                  <div className="bg-black/20 p-2 rounded flex items-center justify-between">
+                    <p className="text-black font-mono text-[8px]">Small bag (0.5kg)</p>
+                    <p className="text-black font-black text-[8px]">0.5 $P51</p>
+                  </div>
+                  <div className="bg-black/20 p-2 rounded flex items-center justify-between">
+                    <p className="text-black font-mono text-[8px]">Full bag (2kg)</p>
+                    <p className="text-black font-black text-[8px]">2 $P51</p>
+                  </div>
+                  <div className="bg-black/20 p-2 rounded flex items-center justify-between">
+                    <p className="text-black font-mono text-[8px]">BIG cleanup (5kg)</p>
+                    <p className="text-black font-black text-[8px]">5 $P51 🌟</p>
+                  </div>
+                </div>
               </div>
             </motion.div>
           )}
