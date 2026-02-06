@@ -30,7 +30,7 @@ Deno.serve(async (req) => {
     });
 
     // Create calendar event so it shows up
-    await base44.asServiceRole.entities.ScottEvent.create({
+    await base44.asServiceRole.entities.Event.create({
       artist_id: artistId,
       title: gig.venue || gig.title,
       date: gig.date_start,
