@@ -22,11 +22,19 @@ export default function CB51ManagerGigApproval({ gig, artistId, onApprovalComple
       console.log('✅ Approval result:', result);
       return result;
     },
-    onSuccess: () => {
-      console.log('✅ Approval success - invalidating queries');
+    onSuccess: (result) => {
+      console.log('✅ Approval result:', result);
       queryClient.invalidateQueries({ queryKey: ['pendingGigs', artistId] });
       queryClient.invalidateQueries({ queryKey: ['gigOffers'] });
       queryClient.invalidateQueries({ queryKey: ['cb51Artists'] });
+      
+      // Show success message
+      if (result.data?.bandMembersNotified === 0) {
+        alert('⚠️ Gig approved! Add band members so they can vote.');
+      } else {
+        alert(`✅ Sent to ${result.data?.bandMembersNotified || 0} band members for voting!`);
+      }
+      
       onApprovalComplete?.('approved');
     },
     onError: (error) => {
