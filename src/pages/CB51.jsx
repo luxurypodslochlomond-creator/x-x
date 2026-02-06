@@ -15,8 +15,6 @@ export default function CB51() {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [testRole, setTestRole] = useState('manager');
-  const [activeArtistId, setActiveArtistId] = useState(null);
   const [showArtistMenu, setShowArtistMenu] = useState(false);
 
   useEffect(() => {
@@ -51,8 +49,7 @@ export default function CB51() {
     );
   }
 
-  const currentArtistId = activeArtistId || (artists.length > 0 ? artists[0].id : null);
-  const currentArtist = artists.find(a => a.id === currentArtistId);
+
 
   return (
     <CB51PINGuard>
@@ -193,52 +190,8 @@ export default function CB51() {
           {/* MAIN CONTENT - Manager-focused flow */}
           <div className="px-4 pt-4 pb-32 space-y-4">
 
-            {/* PENDING APPROVALS BANNER - Urgent first */}
-            {currentArtistId && (
-              <div>
-                <h3 className="text-red-400 text-xs font-bold uppercase tracking-wider mb-2">⚠️ Action Required</h3>
-                <CB51NotificationFeed artistId={currentArtistId} />
-              </div>
-            )}
-
-            {/* QUICK ACTIONS - Grid system */}
-            <div>
-              <h3 className="text-cyan-300 text-xs font-bold uppercase tracking-wider mb-2">Manager Tools</h3>
-              <div className="grid grid-cols-2 gap-2">
-                {[
-                  { icon: Mail, label: 'Email', color: 'cyan', route: 'ScottMessageInbox' },
-                  { icon: Calendar, label: 'Calendar', color: 'cyan', route: `ScottCalendarView?id=${currentArtistId}` },
-                  { icon: CheckCircle, label: 'Tasks', color: 'cyan', route: 'ScottToDo', badge: '5' },
-                  { icon: DollarSign, label: 'Finance', color: 'green', route: 'ScottFinanceAdmin' },
-                ].map(({ icon: Icon, label, color, route, badge }) => (
-                  <button
-                    key={label}
-                    onClick={() => navigate(createPageUrl(currentArtistId ? `${route}?id=${currentArtistId}` : route))}
-                    className={`flex items-center justify-between px-3 py-2 rounded border text-xs font-bold transition-colors ${
-                      color === 'green'
-                        ? 'bg-black border-green-500/30 hover:border-green-400 text-green-400'
-                        : 'bg-black border-cyan-500/30 hover:border-cyan-400 text-cyan-400'
-                    }`}
-                  >
-                    <div className="flex items-center gap-2">
-                      <Icon className="w-4 h-4" />
-                      <span>{label}</span>
-                    </div>
-                    {badge && <span className="text-[10px] bg-white/10 px-1.5 py-0.5 rounded">{badge}</span>}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* GIG UPLOAD */}
-            <div>
-              <h3 className="text-cyan-300 text-xs font-bold uppercase tracking-wider mb-2">New Gig</h3>
-              {currentArtistId && (
-                <CB51GigUploadParser 
-                  artistId={currentArtistId}
-                  onGigCreated={() => {}}
-                />
-              )}
+            <div className="text-center py-8 text-gray-400">
+              <p className="text-sm">Select an artist to get started</p>
             </div>
           </div>
         </div>

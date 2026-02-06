@@ -134,6 +134,7 @@ import BusinessVault from './pages/BusinessVault';
 import CB51 from './pages/CB51';
 import CB51AAA from './pages/CB51AAA';
 import CB51About from './pages/CB51About';
+import CB51AddArtist from './pages/CB51AddArtist';
 import CB51Contact from './pages/CB51Contact';
 import CB51Login from './pages/CB51Login';
 import CB51LoginDirect from './pages/CB51LoginDirect';
@@ -379,7 +380,6 @@ import YoungWarriors from './pages/YoungWarriors';
 import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
-import CB51AddArtist from './pages/CB51AddArtist';
 import __Layout from './Layout.jsx';
 
 
@@ -471,6 +471,7 @@ export const PAGES = {
     "CB51": CB51,
     "CB51AAA": CB51AAA,
     "CB51About": CB51About,
+    "CB51AddArtist": CB51AddArtist,
     "CB51Contact": CB51Contact,
     "CB51Login": CB51Login,
     "CB51LoginDirect": CB51LoginDirect,
@@ -716,7 +717,6 @@ export const PAGES = {
     "ZeroEgoProtocol": ZeroEgoProtocol,
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
-    "CB51AddArtist": CB51AddArtist,
 }
 
 export const pagesConfig = {
