@@ -657,7 +657,7 @@ export default function Earth51() {
     );
   }
 
-  // SHOP - Georgie's idea! Spend $P51 on treats
+  // SHOP - Georgie's royal shop! Blue throne background
   if (step === 'shop') {
     const shopItems = [
       { id: 1, name: '🍫 Chocolate Bar', price: 5, emoji: '🍫' },
@@ -694,9 +694,9 @@ export default function Earth51() {
     };
 
     return (
-      <div className="min-h-screen bg-black text-white" style={{ imageRendering: 'pixelated' }}>
-        {/* HEADER */}
-        <div className="fixed top-0 left-0 right-0 z-50 bg-black border-b-4 border-yellow-500">
+      <div className="min-h-screen bg-gradient-to-b from-blue-900 via-blue-800 to-blue-950 text-white" style={{ imageRendering: 'pixelated' }}>
+        {/* HEADER - ROYAL BLUE */}
+        <div className="fixed top-0 left-0 right-0 z-50 bg-blue-900 border-b-4 border-yellow-400">
           <div className="max-w-xl mx-auto p-3 flex items-center justify-between">
             <motion.button
               onClick={() => setStep('landing')}
@@ -735,33 +735,42 @@ export default function Earth51() {
             )}
           </AnimatePresence>
 
-          {/* SHOP ITEMS GRID */}
+          {/* SHOP ITEMS GRID - ROYAL THRONE BUTTONS */}
           <div className="grid grid-cols-2 gap-3">
             {shopItems.map((item) => {
               const canAfford = localBalance >= item.price;
               return (
                 <motion.button
                   key={item.id}
-                  whileHover={canAfford ? { scale: 1.03 } : {}}
-                  whileTap={canAfford ? { scale: 0.97 } : {}}
+                  whileHover={canAfford ? { scale: 1.05, rotate: 1 } : {}}
+                  whileTap={canAfford ? { scale: 0.95 } : {}}
                   onClick={() => handlePurchase(item)}
                   disabled={!canAfford}
-                  className={`${
+                  className={`relative ${
                     canAfford 
-                      ? 'bg-green-600 border-green-500' 
-                      : 'bg-gray-800 border-gray-700 opacity-60'
-                  } border-3 p-3 flex flex-col items-center justify-center gap-2`}
-                  style={{ boxShadow: '3px 3px 0px #000', imageRendering: 'pixelated' }}
+                      ? 'bg-gradient-to-b from-yellow-400 via-yellow-500 to-yellow-600 border-yellow-300' 
+                      : 'bg-gradient-to-b from-gray-700 to-gray-800 border-gray-600 opacity-50'
+                  } border-4 p-4 flex flex-col items-center justify-center gap-2`}
+                  style={{ 
+                    boxShadow: canAfford 
+                      ? '4px 4px 0px #000, 0 0 20px rgba(250, 204, 21, 0.5)' 
+                      : '4px 4px 0px #000',
+                    imageRendering: 'pixelated' 
+                  }}
                 >
-                  <div className="text-3xl">{item.emoji}</div>
-                  <p className={`font-black font-mono text-[8px] text-center leading-tight ${
-                    canAfford ? 'text-black' : 'text-gray-500'
+                  {/* CROWN DECORATION FOR AFFORDABLE ITEMS */}
+                  {canAfford && (
+                    <div className="absolute -top-2 -right-2 text-xl">👑</div>
+                  )}
+                  <div className="text-4xl drop-shadow-lg">{item.emoji}</div>
+                  <p className={`font-black font-mono text-[9px] text-center leading-tight ${
+                    canAfford ? 'text-black' : 'text-gray-400'
                   }`}>
                     {item.name.split(' ').slice(1).join(' ')}
                   </p>
                   <div className={`${
-                    canAfford ? 'bg-yellow-400' : 'bg-gray-600'
-                  } px-2 py-1 font-black font-mono text-[8px] text-black`}>
+                    canAfford ? 'bg-purple-600 border-2 border-purple-400' : 'bg-gray-700'
+                  } px-3 py-1.5 font-black font-mono text-[9px] text-white rounded-sm`}>
                     {item.price} $P51
                   </div>
                 </motion.button>
@@ -769,10 +778,13 @@ export default function Earth51() {
             })}
           </div>
 
-          {/* INFO BOX */}
-          <div className="bg-cyan-600 border-3 border-cyan-500 p-3" style={{ boxShadow: '3px 3px 0px #000' }}>
-            <p className="text-black font-black font-mono text-[8px] mb-1">HOW IT WORKS:</p>
-            <p className="text-black font-mono text-[7px]">
+          {/* INFO BOX - ROYAL STYLE */}
+          <div className="bg-gradient-to-r from-purple-600 to-blue-600 border-4 border-yellow-400 p-4" style={{ boxShadow: '4px 4px 0px #000, 0 0 20px rgba(250, 204, 21, 0.3)' }}>
+            <div className="flex items-center gap-2 mb-2">
+              <span className="text-xl">👑</span>
+              <p className="text-yellow-300 font-black font-mono text-[9px]">GEORGIE'S ROYAL SHOP</p>
+            </div>
+            <p className="text-white font-mono text-[7px]">
               1. Clean up litter 🌍<br/>
               2. Take photo 📸<br/>
               3. Earn $P51 💰<br/>
