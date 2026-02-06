@@ -15,8 +15,12 @@ Deno.serve(async (req) => {
       return Response.json({ error: 'Missing gigId or artistId' }, { status: 400 });
     }
 
-    // Update gig status to band_voting
+    // Get existing gig first
+    const gig = await base44.asServiceRole.entities.GigOffer.get(gigId);
+    
+    // Update with full object to satisfy required fields
     await base44.asServiceRole.entities.GigOffer.update(gigId, {
+      ...gig,
       status: 'band_voting'
     });
 

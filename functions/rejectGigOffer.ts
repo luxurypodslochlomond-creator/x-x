@@ -15,8 +15,12 @@ Deno.serve(async (req) => {
       return Response.json({ error: 'Missing gigId or reason' }, { status: 400 });
     }
 
-    // Update gig status to manager_rejected
+    // Get existing gig first
+    const gig = await base44.asServiceRole.entities.GigOffer.get(gigId);
+    
+    // Update with full object to satisfy required fields
     await base44.asServiceRole.entities.GigOffer.update(gigId, {
+      ...gig,
       status: 'manager_rejected',
       manager_rejection_reason: reason
     });
