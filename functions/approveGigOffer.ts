@@ -17,16 +17,31 @@ Deno.serve(async (req) => {
 
     // Get existing gig first
     const gig = await base44.asServiceRole.entities.GigOffer.get(gigId);
-    
+
     // Ensure venue is set (use title if venue is missing)
     if (!gig.venue) {
       gig.venue = gig.title;
     }
-    
+
     // Update with full object to satisfy required fields
     await base44.asServiceRole.entities.GigOffer.update(gigId, {
       ...gig,
       status: 'band_voting'
+    });
+
+    // Create calendar event so it shows up
+    await base44.asServiceRole.entities.ScottEvent.create({
+      artist_id: artistId,
+      title: gig.venue || gig.title,
+      date: gig.date_start,
+      time: gig.time_start || '',
+      venue: gig.venue,
+      location: gig.location || '',
+      promoter: gig.promoter_name,
+      promoter_phone: gig.promoter_phone || '',
+      promoter_email: gig.promoter_email || '',
+      fee: gig.fee || null,
+      notes: gig.offer_details || ''
     });
 
     // Notify band members
