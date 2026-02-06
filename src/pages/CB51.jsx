@@ -191,88 +191,121 @@ export default function CB51() {
             )}
           </AnimatePresence>
 
-          {/* MAIN CONTENT - Expandable sections like artist page */}
-          <div className="px-4 pt-4 pb-32 space-y-3">
+          {/* MAIN CONTENT - Quantum perfect minimalist grid like artist page */}
+          <div className="px-4 pt-4 pb-32">
 
             {currentArtistId ? (
-              <>
-                {/* NOTIFICATIONS SECTION */}
-                <div>
-                  <button 
-                    onClick={() => setExpandedSections({...expandedSections, notifications: !expandedSections.notifications})}
-                    className="w-full mb-2"
+              <div className="space-y-4">
+                {/* QUICK ACTIONS GRID - 2x2 like artist page */}
+                <div className="grid grid-cols-2 gap-3">
+                  <button
+                    onClick={() => navigate(createPageUrl(`ScottLive?id=${currentArtistId}`))}
+                    className="aspect-square bg-black border-2 border-cyan-500/40 hover:border-cyan-500 rounded-lg flex flex-col items-center justify-center gap-2 transition-all group"
                   >
-                    <div className="bg-black border-2 border-red-500/40 px-4 py-2 flex items-center justify-between hover:border-red-500/60 transition-all">
-                      <div className="text-red-400 font-black font-mono text-sm tracking-wider">
-                        ⚠️ ACTION REQUIRED
-                      </div>
-                      <ChevronDown className={`w-4 h-4 text-red-400 transition-transform ${expandedSections.notifications ? '' : '-rotate-90'}`} />
+                    <div className="w-12 h-12 bg-cyan-500 rounded flex items-center justify-center group-hover:brightness-110 transition-all">
+                      <span className="text-black font-black text-xl">🎵</span>
                     </div>
+                    <span className="text-cyan-400 font-mono font-bold text-xs tracking-widest">LIVE</span>
                   </button>
-                  {expandedSections.notifications && (
-                    <div className="px-4 py-3 border-2 border-red-500/40 bg-red-900/5 rounded-lg">
-                      <CB51NotificationFeed artistId={currentArtistId} />
+
+                  <button
+                    onClick={() => navigate(createPageUrl(`ScottSessions?id=${currentArtistId}`))}
+                    className="aspect-square bg-black border-2 border-amber-500/40 hover:border-amber-500 rounded-lg flex flex-col items-center justify-center gap-2 transition-all group"
+                  >
+                    <div className="w-12 h-12 bg-amber-500 rounded flex items-center justify-center group-hover:brightness-110 transition-all">
+                      <span className="text-black font-black text-xl">⚡</span>
                     </div>
-                  )}
+                    <span className="text-amber-400 font-mono font-bold text-xs tracking-widest">SESSIONS</span>
+                  </button>
+
+                  <button
+                    onClick={() => navigate(createPageUrl('ScottToDo'))}
+                    className="aspect-square bg-black border-2 border-cyan-500/40 hover:border-cyan-500 rounded-lg flex flex-col items-center justify-center gap-2 transition-all group"
+                  >
+                    <div className="w-12 h-12 bg-cyan-500 rounded flex items-center justify-center group-hover:brightness-110 transition-all">
+                      <span className="text-black font-black text-xl">✓</span>
+                    </div>
+                    <span className="text-cyan-400 font-mono font-bold text-xs tracking-widest">TO-DO</span>
+                  </button>
+
+                  <button
+                    onClick={() => navigate(createPageUrl('ScottFinanceAdmin'))}
+                    className="aspect-square bg-black border-2 border-green-500/40 hover:border-green-500 rounded-lg flex flex-col items-center justify-center gap-2 transition-all group"
+                  >
+                    <div className="w-12 h-12 bg-green-500 rounded flex items-center justify-center group-hover:brightness-110 transition-all">
+                      <span className="text-black font-black text-xl">💰</span>
+                    </div>
+                    <span className="text-green-400 font-mono font-bold text-xs tracking-widest">FINANCE</span>
+                  </button>
                 </div>
 
-                {/* MANAGER TOOLS SECTION */}
-                <div>
-                  <button 
-                    onClick={() => setExpandedSections({...expandedSections, tools: !expandedSections.tools})}
-                    className="w-full mb-2"
-                  >
-                    <div className="bg-black border-2 border-cyan-500/40 px-4 py-2 flex items-center justify-between hover:border-cyan-500/60 transition-all">
-                      <div className="text-cyan-400 font-black font-mono text-sm tracking-wider">
-                        ⚙️ MANAGER TOOLS
-                      </div>
-                      <ChevronDown className={`w-4 h-4 text-cyan-400 transition-transform ${expandedSections.tools ? '' : '-rotate-90'}`} />
-                    </div>
-                  </button>
-                  {expandedSections.tools && (
-                    <div className="grid grid-cols-2 gap-2 p-4 border-2 border-cyan-500/40 bg-cyan-900/5 rounded-lg">
-                      {[
-                        { icon: Mail, label: 'Email', color: 'cyan', route: 'ScottMessageInbox' },
-                        { icon: Calendar, label: 'Calendar', color: 'cyan', route: `ScottCalendarView?id=${currentArtistId}` },
-                        { icon: CheckCircle, label: 'Tasks', color: 'cyan', route: 'ScottToDo', badge: '5' },
-                        { icon: DollarSign, label: 'Finance', color: 'green', route: 'ScottFinanceAdmin' },
-                        { icon: Users, label: 'Band', color: 'cyan', route: null, action: () => setShowAddMemberSheet(true) },
-                      ].map(({ icon: Icon, label, color, route, badge, action }) => (
-                        <button
-                          key={label}
-                          onClick={() => action ? action() : navigate(createPageUrl(route))}
-                          className={`flex items-center justify-between px-3 py-2 rounded border text-xs font-bold transition-colors ${
-                            color === 'green'
-                              ? 'bg-black border-green-500/30 hover:border-green-400 text-green-400'
-                              : 'bg-black border-cyan-500/30 hover:border-cyan-400 text-cyan-400'
-                          }`}
-                        >
-                          <div className="flex items-center gap-2">
-                            <Icon className="w-4 h-4" />
-                            <span>{label}</span>
-                          </div>
-                          {badge && <span className="text-[10px] bg-white/10 px-1.5 py-0.5 rounded">{badge}</span>}
-                        </button>
-                      ))}
-                    </div>
-                  )}
-                </div>
-
-                {/* GIG UPLOAD SECTION */}
+                {/* GIGS SECTION - Full width expandable */}
                 <div>
                   <button 
                     onClick={() => setExpandedSections({...expandedSections, gigs: !expandedSections.gigs})}
-                    className="w-full mb-2"
+                    className="w-full"
                   >
-                    <div className="bg-black border-2 border-cyan-500/40 px-4 py-2 flex items-center justify-between hover:border-cyan-500/60 transition-all">
-                      <div className="text-cyan-400 font-black font-mono text-sm tracking-wider">
-                        🎤 NEW GIG
+                    <div className="bg-black border-2 border-cyan-500/40 hover:border-cyan-500 px-4 py-3 flex items-center justify-between transition-all">
+                      <div className="text-cyan-400 font-mono font-black text-sm tracking-wider flex items-center gap-2">
+                        📅 UPCOMING GIGS
                       </div>
-                      <ChevronDown className={`w-4 h-4 text-cyan-400 transition-transform ${expandedSections.gigs ? '' : '-rotate-90'}`} />
+                      {expandedSections.gigs ? <Minus className="w-4 h-4" /> : <ChevronRight className="w-4 h-4" />}
                     </div>
                   </button>
                   {expandedSections.gigs && (
-                    <div className="p-4 border-2 border-cyan-500/40 bg-cyan-900/5 rounded-lg">
+                    <div className="border-2 border-cyan-500/40 border-t-0 p-4 bg-black">
+                      <p className="text-gray-400 text-xs text-center mb-3 font-mono">No upcoming gigs</p>
+                      <button
+                        onClick={() => navigate(createPageUrl(`ScottCalendarView?id=${currentArtistId}`))}
+                        className="w-full border-2 border-cyan-500/40 hover:border-cyan-500 px-4 py-3 text-cyan-400 font-mono font-bold text-xs tracking-widest transition-all"
+                      >
+                        VIEW CALENDAR
+                      </button>
+                    </div>
+                  )}
+                </div>
+
+                {/* BAND MEMBERS SECTION - Full width expandable */}
+                <div>
+                  <button 
+                    onClick={() => setExpandedSections({...expandedSections, tools: !expandedSections.tools})}
+                    className="w-full"
+                  >
+                    <div className="bg-black border-2 border-green-500/40 hover:border-green-500 px-4 py-3 flex items-center justify-between transition-all">
+                      <div className="text-green-400 font-mono font-black text-sm tracking-wider flex items-center gap-2">
+                        👥 BAND MEMBERS
+                      </div>
+                      {expandedSections.tools ? <Minus className="w-4 h-4" /> : <ChevronRight className="w-4 h-4" />}
+                    </div>
+                  </button>
+                  {expandedSections.tools && (
+                    <div className="border-2 border-green-500/40 border-t-0 p-4 bg-black space-y-2">
+                      <p className="text-gray-400 text-xs text-center font-mono mb-3">Add band members to vote on gigs</p>
+                      <button
+                        onClick={() => setShowAddMemberSheet(true)}
+                        className="w-full border-2 border-green-500/40 hover:border-green-500 px-4 py-2 text-green-400 font-mono font-bold text-xs tracking-widest transition-all"
+                      >
+                        + ADD MEMBER
+                      </button>
+                    </div>
+                  )}
+                </div>
+
+                {/* NEW GIG SECTION - Full width expandable */}
+                <div>
+                  <button 
+                    onClick={() => setExpandedSections({...expandedSections, notifications: !expandedSections.notifications})}
+                    className="w-full"
+                  >
+                    <div className="bg-black border-2 border-cyan-500/40 hover:border-cyan-500 px-4 py-3 flex items-center justify-between transition-all">
+                      <div className="text-cyan-400 font-mono font-black text-sm tracking-wider flex items-center gap-2">
+                        📥 NEW GIG
+                      </div>
+                      {expandedSections.notifications ? <Minus className="w-4 h-4" /> : <ChevronRight className="w-4 h-4" />}
+                    </div>
+                  </button>
+                  {expandedSections.notifications && (
+                    <div className="border-2 border-cyan-500/40 border-t-0 p-4 bg-black">
                       <CB51GigUploadParser 
                         artistId={currentArtistId}
                         onGigCreated={() => {}}
@@ -280,10 +313,20 @@ export default function CB51() {
                     </div>
                   )}
                 </div>
-              </>
+
+                {/* NOTIFICATIONS SECTION */}
+                <div>
+                  <div className="bg-black border-2 border-red-500/40 px-4 py-3">
+                    <div className="text-red-400 font-mono font-black text-sm tracking-wider flex items-center gap-2 mb-3">
+                      ⚠️ ACTION REQUIRED
+                    </div>
+                    <CB51NotificationFeed artistId={currentArtistId} />
+                  </div>
+                </div>
+              </div>
             ) : (
-              <div className="text-center py-8 text-gray-400">
-                <p className="text-sm">Select an artist to get started</p>
+              <div className="text-center py-12 text-gray-400">
+                <p className="text-sm font-mono">Select an artist to get started</p>
               </div>
             )}
           </div>
