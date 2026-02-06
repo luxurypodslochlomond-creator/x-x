@@ -18,6 +18,11 @@ export default function CB51() {
   const [activeArtistId, setActiveArtistId] = useState(null);
   const [showArtistMenu, setShowArtistMenu] = useState(false);
   const [showAddMemberSheet, setShowAddMemberSheet] = useState(false);
+  const [expandedSections, setExpandedSections] = useState({
+    notifications: true,
+    tools: true,
+    gigs: true
+  });
 
   useEffect(() => {
     const checkAuth = async () => {
