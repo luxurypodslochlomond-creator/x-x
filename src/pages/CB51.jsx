@@ -186,19 +186,20 @@ export default function CB51() {
             )}
           </AnimatePresence>
 
-          {/* MAIN CONTENT - Quantum perfect minimalist grid like artist page */}
-          <div className="px-4 pt-4 pb-32">
+          {/* MAIN CONTENT - ONE SCREEN PURE SIMPLICITY */}
+          <div className="px-4 pt-4">
 
             {currentArtistId ? (
-              <div className="space-y-4">
-                {/* QUICK ACTIONS GRID - 2x2 like artist page */}
+              <div className="space-y-4 max-h-[calc(100vh-200px)] overflow-y-auto">
+
+                {/* QUICK ACTIONS - 2x2 Grid */}
                 <div className="grid grid-cols-2 gap-3">
                   <button
                     onClick={() => navigate(createPageUrl(`ScottLive?id=${currentArtistId}`))}
                     className="aspect-square bg-black border-2 border-cyan-500/40 hover:border-cyan-500 rounded-lg flex flex-col items-center justify-center gap-2 transition-all group"
                   >
                     <div className="w-12 h-12 bg-cyan-500 rounded flex items-center justify-center group-hover:brightness-110 transition-all">
-                      <span className="text-black font-black text-xl">🎵</span>
+                      <Music className="w-6 h-6 text-black" />
                     </div>
                     <span className="text-cyan-400 font-mono font-bold text-xs tracking-widest">LIVE</span>
                   </button>
@@ -208,7 +209,7 @@ export default function CB51() {
                     className="aspect-square bg-black border-2 border-amber-500/40 hover:border-amber-500 rounded-lg flex flex-col items-center justify-center gap-2 transition-all group"
                   >
                     <div className="w-12 h-12 bg-amber-500 rounded flex items-center justify-center group-hover:brightness-110 transition-all">
-                      <span className="text-black font-black text-xl">⚡</span>
+                      <Sparkles className="w-6 h-6 text-black" />
                     </div>
                     <span className="text-amber-400 font-mono font-bold text-xs tracking-widest">SESSIONS</span>
                   </button>
@@ -218,7 +219,7 @@ export default function CB51() {
                     className="aspect-square bg-black border-2 border-cyan-500/40 hover:border-cyan-500 rounded-lg flex flex-col items-center justify-center gap-2 transition-all group"
                   >
                     <div className="w-12 h-12 bg-cyan-500 rounded flex items-center justify-center group-hover:brightness-110 transition-all">
-                      <span className="text-black font-black text-xl">✓</span>
+                      <CheckCircle className="w-6 h-6 text-black" />
                     </div>
                     <span className="text-cyan-400 font-mono font-bold text-xs tracking-widest">TO-DO</span>
                   </button>
@@ -228,100 +229,39 @@ export default function CB51() {
                     className="aspect-square bg-black border-2 border-green-500/40 hover:border-green-500 rounded-lg flex flex-col items-center justify-center gap-2 transition-all group"
                   >
                     <div className="w-12 h-12 bg-green-500 rounded flex items-center justify-center group-hover:brightness-110 transition-all">
-                      <span className="text-black font-black text-xl">💰</span>
+                      <DollarSign className="w-6 h-6 text-black" />
                     </div>
                     <span className="text-green-400 font-mono font-bold text-xs tracking-widest">FINANCE</span>
                   </button>
                 </div>
 
-                {/* GIGS SECTION - Full width expandable */}
-                <div>
-                  <button 
-                    onClick={() => setExpandedSections({...expandedSections, gigs: !expandedSections.gigs})}
-                    className="w-full"
+                {/* BAND & GIG COMPACT */}
+                <div className="grid grid-cols-2 gap-3">
+                  <button
+                    onClick={() => setShowAddMemberSheet(true)}
+                    className="border-2 border-green-500/40 hover:border-green-500 bg-black px-4 py-3 rounded transition-all"
                   >
-                    <div className="bg-black border-2 border-cyan-500/40 hover:border-cyan-500 px-4 py-3 flex items-center justify-between transition-all">
-                      <div className="text-cyan-400 font-mono font-black text-sm tracking-wider flex items-center gap-2">
-                        📅 UPCOMING GIGS
-                      </div>
-                      {expandedSections.gigs ? <Minus className="w-4 h-4" /> : <ChevronRight className="w-4 h-4" />}
-                    </div>
+                    <p className="text-green-400 font-mono font-bold text-xs tracking-widest">+ MEMBER</p>
                   </button>
-                  {expandedSections.gigs && (
-                    <div className="border-2 border-cyan-500/40 border-t-0 p-4 bg-black">
-                      <p className="text-gray-400 text-xs text-center mb-3 font-mono">No upcoming gigs</p>
-                      <button
-                        onClick={() => navigate(createPageUrl(`ScottCalendarView?id=${currentArtistId}`))}
-                        className="w-full border-2 border-cyan-500/40 hover:border-cyan-500 px-4 py-3 text-cyan-400 font-mono font-bold text-xs tracking-widest transition-all"
-                      >
-                        VIEW CALENDAR
-                      </button>
-                    </div>
-                  )}
+
+                  <button
+                    onClick={() => navigate(createPageUrl(`ScottCalendarView?id=${currentArtistId}`))}
+                    className="border-2 border-cyan-500/40 hover:border-cyan-500 bg-black px-4 py-3 rounded transition-all"
+                  >
+                    <p className="text-cyan-400 font-mono font-bold text-xs tracking-widest">CALENDAR</p>
+                  </button>
                 </div>
 
-                {/* BAND MEMBERS SECTION - Full width expandable */}
-                <div>
-                  <button 
-                    onClick={() => setExpandedSections({...expandedSections, tools: !expandedSections.tools})}
-                    className="w-full"
-                  >
-                    <div className="bg-black border-2 border-green-500/40 hover:border-green-500 px-4 py-3 flex items-center justify-between transition-all">
-                      <div className="text-green-400 font-mono font-black text-sm tracking-wider flex items-center gap-2">
-                        👥 BAND MEMBERS
-                      </div>
-                      {expandedSections.tools ? <Minus className="w-4 h-4" /> : <ChevronRight className="w-4 h-4" />}
-                    </div>
-                  </button>
-                  {expandedSections.tools && (
-                    <div className="border-2 border-green-500/40 border-t-0 p-4 bg-black space-y-2">
-                      <p className="text-gray-400 text-xs text-center font-mono mb-3">Add band members to vote on gigs</p>
-                      <button
-                        onClick={() => setShowAddMemberSheet(true)}
-                        className="w-full border-2 border-green-500/40 hover:border-green-500 px-4 py-2 text-green-400 font-mono font-bold text-xs tracking-widest transition-all"
-                      >
-                        + ADD MEMBER
-                      </button>
-                    </div>
-                  )}
+                {/* ALERTS ONLY */}
+                <div className="border-2 border-red-500/40 bg-black px-4 py-3 rounded">
+                  <p className="text-red-400 font-mono font-bold text-xs tracking-widest mb-2">ALERTS</p>
+                  <CB51NotificationFeed artistId={currentArtistId} />
                 </div>
 
-                {/* NEW GIG SECTION - Full width expandable */}
-                <div>
-                  <button 
-                    onClick={() => setExpandedSections({...expandedSections, notifications: !expandedSections.notifications})}
-                    className="w-full"
-                  >
-                    <div className="bg-black border-2 border-cyan-500/40 hover:border-cyan-500 px-4 py-3 flex items-center justify-between transition-all">
-                      <div className="text-cyan-400 font-mono font-black text-sm tracking-wider flex items-center gap-2">
-                        📥 NEW GIG
-                      </div>
-                      {expandedSections.notifications ? <Minus className="w-4 h-4" /> : <ChevronRight className="w-4 h-4" />}
-                    </div>
-                  </button>
-                  {expandedSections.notifications && (
-                    <div className="border-2 border-cyan-500/40 border-t-0 p-4 bg-black">
-                      <CB51GigUploadParser 
-                        artistId={currentArtistId}
-                        onGigCreated={() => {}}
-                      />
-                    </div>
-                  )}
-                </div>
-
-                {/* NOTIFICATIONS SECTION */}
-                <div>
-                  <div className="bg-black border-2 border-red-500/40 px-4 py-3">
-                    <div className="text-red-400 font-mono font-black text-sm tracking-wider flex items-center gap-2 mb-3">
-                      ⚠️ ACTION REQUIRED
-                    </div>
-                    <CB51NotificationFeed artistId={currentArtistId} />
-                  </div>
-                </div>
               </div>
             ) : (
               <div className="text-center py-12 text-gray-400">
-                <p className="text-sm font-mono">Select an artist to get started</p>
+                <p className="text-xs font-mono">Select an artist to start</p>
               </div>
             )}
           </div>
