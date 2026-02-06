@@ -181,7 +181,11 @@ export default function CB51GigUploadParser({ artistId, onGigCreated }) {
               gig={savedGig}
               artistId={artistId}
               onApprovalComplete={(result) => {
+                console.log('✅ Approval complete:', result);
                 setSavedGig(null);
+                setExtracted(null);
+                setEditing(null);
+                setFile(null);
                 onGigCreated?.(savedGig);
               }}
             />

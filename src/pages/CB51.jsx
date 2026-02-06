@@ -202,6 +202,17 @@ export default function CB51() {
                   </div>
                 )}
 
+                {/* SCOTT FEEDBACK LINK */}
+                <div className="bg-gradient-to-r from-cyan-500/10 to-green-500/10 border border-cyan-500/30 rounded-lg p-3 mb-4">
+                  <p className="text-white text-xs mb-2">Testing CB51? Give feedback:</p>
+                  <button
+                    onClick={() => navigate(createPageUrl('ScottFeedback'))}
+                    className="w-full bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-400 text-cyan-300 px-3 py-2 rounded text-xs font-bold transition-colors"
+                  >
+                    📝 Submit Feedback
+                  </button>
+                </div>
+
                 {/* QUICK ACTIONS - Grid system */}
                 <div>
                   <h3 className="text-cyan-300 text-xs font-bold uppercase tracking-wider mb-2">Manager Tools</h3>
