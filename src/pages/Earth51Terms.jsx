@@ -1,155 +1,113 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
-import { ArrowLeft, Shield, Heart } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 import { motion } from 'framer-motion';
-
-/**
- * EARTH51 TERMS - KID-FRIENDLY + PARENT SECTION
- * COPPA 2.0 / GDPR / UK Online Safety Act compliant
- */
 
 export default function Earth51Terms() {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-black text-white" style={{ imageRendering: 'pixelated' }}>
       {/* HEADER */}
-      <div className="fixed top-0 left-0 right-0 z-50 bg-black border-b-4 border-cyan-500">
-        <div className="max-w-4xl mx-auto p-3 flex items-center justify-between">
+      <div className="fixed top-0 left-0 right-0 z-50 bg-black border-b-4 border-green-500">
+        <div className="max-w-xl mx-auto p-3 flex items-center justify-between">
           <motion.button
             onClick={() => navigate(createPageUrl('Earth51'))}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-            className="w-12 h-12 bg-pink-500 flex items-center justify-center border-2 border-pink-400"
+            whileHover={{ scale: 1.15 }}
+            whileTap={{ scale: 0.85 }}
+            className="w-10 h-10 bg-pink-500 border-3 border-pink-400 flex items-center justify-center font-black"
+            style={{ boxShadow: '3px 3px 0px #000' }}
           >
-            <ArrowLeft className="w-6 h-6 text-white" />
+            &lt;
           </motion.button>
-
-          <h1 className="text-xl font-black font-mono text-green-400">EARTH.LOVE RULES</h1>
-
-          <div className="w-12"></div>
+          <h1 className="text-lg font-black font-mono text-green-400">TERMS</h1>
+          <div className="w-10"></div>
         </div>
       </div>
 
-      <div className="max-w-4xl mx-auto pt-20 p-6 space-y-6">
-
+      <div className="max-w-xl mx-auto pt-20 p-4 pb-24 space-y-4">
         {/* FOR KIDS */}
-        <div className="bg-green-500 border-4 border-green-400 p-6" style={{ boxShadow: '4px 4px 0px #000' }}>
-          <div className="flex items-center gap-3 mb-4">
-            <span className="text-4xl">🌍</span>
-            <h2 className="text-2xl font-black font-mono text-black">FOR KIDS</h2>
-          </div>
-
-          <div className="space-y-3 text-black font-mono text-sm">
-            <p className="font-bold">✓ BE HONEST</p>
-            <p>Only submit real litter you actually picked up. No old photos.</p>
-
-            <p className="font-bold">✓ BE SAFE</p>
-            <p>Never pick up sharp things or dangerous stuff. Ask a grown-up first.</p>
-
-            <p className="font-bold">✓ BE KIND</p>
-            <p>This is for helping Earth, not tricking the system.</p>
-
-            <p className="font-bold">✓ YOUR PRIVACY</p>
-            <p>We never ask for your name or where you live. Just photos of litter!</p>
-
-            <p className="font-bold">✓ $P51 COINS</p>
-            <p>These are game coins, not real money. Use them in Volckano!</p>
+        <div className="bg-green-600 border-4 border-green-500 p-4" style={{ boxShadow: '4px 4px 0px #000' }}>
+          <p className="text-white font-black font-mono text-sm mb-2">👧👦 FOR KIDS:</p>
+          <div className="space-y-2 text-white font-mono text-xs">
+            <p>✓ Take photos of litter you collect</p>
+            <p>✓ AI51 checks it's real</p>
+            <p>✓ Earn $P51 tokens (1kg = 1 $P51)</p>
+            <p>✓ Spend in shop or save up!</p>
+            <p>✓ Always ask a parent before cleaning</p>
+            <p>✓ Never touch dangerous stuff (needles, glass, etc)</p>
           </div>
         </div>
 
         {/* FOR PARENTS */}
-        <div className="bg-purple-500 border-4 border-purple-400 p-6" style={{ boxShadow: '4px 4px 0px #000' }}>
-          <div className="flex items-center gap-3 mb-4">
-            <Shield className="w-8 h-8 text-black" />
-            <h2 className="text-2xl font-black font-mono text-black">FOR PARENTS</h2>
-          </div>
-
-          <div className="space-y-4 text-black font-mono text-xs">
-            <div>
-              <p className="font-bold mb-2">DATA COLLECTION:</p>
-              <ul className="space-y-1 ml-4">
-                <li>✓ Default: Zero personal data collected</li>
-                <li>✓ Photos checked on device only</li>
-                <li>✓ Optional AI requires explicit consent</li>
-                <li>✓ No names, emails, or locations stored</li>
-                <li>✓ COPPA 2.0 / GDPR / UK Online Safety Act compliant</li>
-              </ul>
-            </div>
-
-            <div>
-              <p className="font-bold mb-2">AI USAGE (OPT-IN ONLY):</p>
-              <ul className="space-y-1 ml-4">
-                <li>• Photo sent to OpenAI for fraud detection</li>
-                <li>• Weight estimation from visible items</li>
-                <li>• Liveness check (real photo vs screenshot)</li>
-                <li>• Photo NOT stored on OpenAI servers</li>
-                <li>• Results returned, then deleted</li>
-              </ul>
-            </div>
-
-            <div>
-              <p className="font-bold mb-2">SAFETY:</p>
-              <ul className="space-y-1 ml-4">
-                <li>✓ Content moderation active</li>
-                <li>✓ Inappropriate images blocked</li>
-                <li>✓ No social features (no messaging)</li>
-                <li>✓ Anonymous by design</li>
-              </ul>
-            </div>
-
-            <div>
-              <p className="font-bold mb-2">$P51 TOKENS:</p>
-              <ul className="space-y-1 ml-4">
-                <li>• Virtual game currency only</li>
-                <li>• Not redeemable for cash (yet)</li>
-                <li>• Named after scientist Rosalind Franklin</li>
-                <li>• Used for in-game progression</li>
-              </ul>
-            </div>
-
-            <div>
-              <p className="font-bold mb-2">YOUR RIGHTS (GDPR):</p>
-              <ul className="space-y-1 ml-4">
-                <li>• Access your data (minimal - just submissions)</li>
-                <li>• Delete your data anytime</li>
-                <li>• Opt out of AI processing</li>
-                <li>• Export your cleanup history</li>
-              </ul>
-            </div>
-
-            <div>
-              <p className="font-bold mb-2">CONTACT:</p>
-              <p>Questions? Email: hello@universalfrequency51.com</p>
-            </div>
+        <div className="bg-cyan-600 border-4 border-cyan-500 p-4" style={{ boxShadow: '4px 4px 0px #000' }}>
+          <p className="text-white font-black font-mono text-sm mb-2">👨‍👩‍👧‍👦 FOR PARENTS:</p>
+          <div className="space-y-2 text-white font-mono text-[10px]">
+            <p><strong>COPPA COMPLIANT:</strong> No personal data collected from under-13s</p>
+            <p><strong>ANONYMOUS BY DEFAULT:</strong> Works without login</p>
+            <p><strong>PRIVACY-FIRST:</strong> Photos processed on-device before upload</p>
+            <p><strong>EDUCATIONAL:</strong> Teaches AI literacy, environmental responsibility</p>
+            <p><strong>NO ADS:</strong> Zero commercial tracking or advertising</p>
+            <p><strong>OPEN SOURCE:</strong> Code publicly auditable</p>
+            <p><strong>TOKENS:</strong> $P51 stored locally, optional account for cloud sync</p>
           </div>
         </div>
 
-        {/* LEGAL ENTITY */}
-        <div className="bg-black border-2 border-white/30 p-4 text-center">
-          <p className="text-white/60 font-mono text-xs">
-            earth.love is part of Universal Frequency 51
-          </p>
-          <p className="text-white/60 font-mono text-xs mt-2">
-            Community Interest Company (UK) • Asset-locked for public good
-          </p>
-          <p className="text-white/60 font-mono text-xs mt-2">
-            Last updated: February 2026
-          </p>
+        {/* THE RULES */}
+        <div className="bg-purple-600 border-4 border-purple-500 p-4" style={{ boxShadow: '4px 4px 0px #000' }}>
+          <p className="text-white font-black font-mono text-sm mb-2">📜 THE RULES:</p>
+          <div className="space-y-2 text-white font-mono text-[10px]">
+            <p><strong>1. Be Honest:</strong> Only submit photos of litter YOU collected</p>
+            <p><strong>2. Be Safe:</strong> Parent supervision recommended, avoid dangerous items</p>
+            <p><strong>3. Be Kind:</strong> Respect nature and your community</p>
+            <p><strong>4. No Cheating:</strong> AI detects fake/duplicate photos</p>
+            <p><strong>5. Have Fun:</strong> You're healing Earth! 🌍</p>
+          </div>
         </div>
 
-        {/* BACK BUTTON */}
-        <motion.button
-          onClick={() => navigate(createPageUrl('Earth51'))}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="w-full bg-green-500 border-4 border-green-400 text-black py-4 font-black font-mono text-lg"
-          style={{ boxShadow: '4px 4px 0px #000' }}
-        >
-          BACK TO GAME
-        </motion.button>
+        {/* ACCOUNT & DATA */}
+        <div className="bg-yellow-600 border-4 border-yellow-500 p-4" style={{ boxShadow: '4px 4px 0px #000' }}>
+          <p className="text-black font-black font-mono text-sm mb-2">💾 YOUR DATA:</p>
+          <div className="space-y-2 text-black font-mono text-[10px]">
+            <p><strong>WITHOUT LOGIN:</strong> Everything stored on YOUR device only</p>
+            <p><strong>WITH LOGIN (optional):</strong> Syncs balance + cleanups to cloud</p>
+            <p><strong>PHOTOS:</strong> Analyzed by AI, then stored securely</p>
+            <p><strong>DELETE ANYTIME:</strong> Contact support@earth51.love</p>
+            <p><strong>NO SELLING:</strong> We never sell your data. Ever.</p>
+          </div>
+        </div>
 
+        {/* LIABILITY */}
+        <div className="bg-red-600 border-4 border-red-500 p-4" style={{ boxShadow: '4px 4px 0px #000' }}>
+          <p className="text-white font-black font-mono text-sm mb-2">⚠️ SAFETY FIRST:</p>
+          <div className="space-y-2 text-white font-mono text-[10px]">
+            <p>Earth51 is an educational tool. Parents/guardians are responsible for supervising children during cleanup activities.</p>
+            <p>We are not liable for injuries during litter collection.</p>
+            <p>Always wear gloves, avoid sharp objects, needles, or hazardous materials.</p>
+            <p>If unsure, leave it and report it to local authorities.</p>
+          </div>
+        </div>
+
+        {/* CONTACT */}
+        <div className="bg-black border-4 border-white p-4" style={{ boxShadow: '4px 4px 0px #000' }}>
+          <p className="text-white font-black font-mono text-sm mb-2">📧 QUESTIONS?</p>
+          <div className="space-y-2 text-white font-mono text-[10px]">
+            <p><strong>General:</strong> hello@earth51.love</p>
+            <p><strong>Support:</strong> support@earth51.love</p>
+            <p><strong>Safeguarding:</strong> safety@earth51.love</p>
+            <p><strong>AI51 Chat:</strong> <button onClick={() => navigate(createPageUrl('AI51'))} className="text-cyan-400 underline">Talk to AI51</button></p>
+          </div>
+        </div>
+
+        {/* UPDATES */}
+        <div className="bg-gray-800 border-4 border-gray-700 p-4" style={{ boxShadow: '4px 4px 0px #000' }}>
+          <p className="text-gray-400 font-mono text-[9px]">
+            Last updated: February 2026<br/>
+            By using Earth51, you agree to these terms.<br/>
+            We may update these terms - we'll notify you if we do.
+          </p>
+        </div>
       </div>
     </div>
   );

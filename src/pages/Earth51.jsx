@@ -379,8 +379,41 @@ export default function Earth51() {
             )}
           </AnimatePresence>
 
+          {/* FOR PARENTS - EXPANDABLE */}
+          <motion.button
+            onClick={() => setShowParentInfo(!showParentInfo)}
+            className="w-full bg-black border-3 border-purple-500 p-2"
+            style={{ boxShadow: '3px 3px 0px #000' }}
+          >
+            <p className="text-purple-400 font-black font-mono text-[9px]">
+              {showParentInfo ? '▼' : '▶'} FOR PARENTS (CLICK)
+            </p>
+          </motion.button>
+
+          <AnimatePresence>
+            {showParentInfo && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: 'auto', opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                className="overflow-hidden"
+              >
+                <div className="bg-purple-600 border-3 border-purple-500 p-2" style={{ boxShadow: '3px 3px 0px #000' }}>
+                  <p className="text-black font-black font-mono text-[7px] mb-1">SAFE ✓ NO DATA ✓ COPPA ✓</p>
+                  <p className="text-black font-mono text-[6px] mb-2">Zero tracking. AI checks photos on-device. Teaches responsibility + AI literacy.</p>
+                  <div className="flex gap-1 flex-wrap">
+                    <button onClick={() => navigate(createPageUrl('Earth51Terms'))} className="bg-black text-purple-400 px-2 py-1 font-mono text-[6px] font-bold">TERMS</button>
+                    <button onClick={() => navigate(createPageUrl('Earth51Privacy'))} className="bg-black text-purple-400 px-2 py-1 font-mono text-[6px] font-bold">PRIVACY</button>
+                    <button onClick={() => navigate(createPageUrl('Earth51Contact'))} className="bg-black text-purple-400 px-2 py-1 font-mono text-[6px] font-bold">CONTACT</button>
+                    <button onClick={() => navigate(createPageUrl('AI51'))} className="bg-black text-purple-400 px-2 py-1 font-mono text-[6px] font-bold">TALK TO AI51</button>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
           {/* FOOTER - LIVE CLOCK + BASE44 */}
-          <div className="bg-black border-3 border-cyan-600 p-2 text-center mt-3" style={{ boxShadow: '3px 3px 0px #0e7490', imageRendering: 'pixelated' }}>
+          <div className="bg-black border-3 border-cyan-600 p-2 text-center" style={{ boxShadow: '3px 3px 0px #0e7490', imageRendering: 'pixelated' }}>
             <LiveClock />
             <p className="text-xs text-gray-500 mt-2">Built on <a href="https://base44.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-cyan-400">Base44</a></p>
           </div>
