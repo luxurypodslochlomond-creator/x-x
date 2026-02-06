@@ -192,54 +192,94 @@ export default function CB51() {
             )}
           </AnimatePresence>
 
-          {/* MAIN CONTENT - Manager-focused flow */}
-          <div className="px-4 pt-4 pb-32 space-y-4">
+          {/* MAIN CONTENT - Expandable sections like artist page */}
+          <div className="px-4 pt-4 pb-32 space-y-3">
 
             {currentArtistId ? (
               <>
-                {/* PENDING APPROVALS BANNER - Urgent first */}
+                {/* NOTIFICATIONS SECTION */}
                 <div>
-                  <h3 className="text-red-400 text-xs font-bold uppercase tracking-wider mb-2">⚠️ Action Required</h3>
-                  <CB51NotificationFeed artistId={currentArtistId} />
+                  <button 
+                    onClick={() => setExpandedSections({...expandedSections, notifications: !expandedSections.notifications})}
+                    className="w-full mb-2"
+                  >
+                    <div className="bg-black border-2 border-red-500/40 px-4 py-2 flex items-center justify-between hover:border-red-500/60 transition-all">
+                      <div className="text-red-400 font-black font-mono text-sm tracking-wider">
+                        ⚠️ ACTION REQUIRED
+                      </div>
+                      <ChevronDown className={`w-4 h-4 text-red-400 transition-transform ${expandedSections.notifications ? '' : '-rotate-90'}`} />
+                    </div>
+                  </button>
+                  {expandedSections.notifications && (
+                    <div className="px-4 py-3 border-2 border-red-500/40 bg-red-900/5 rounded-lg">
+                      <CB51NotificationFeed artistId={currentArtistId} />
+                    </div>
+                  )}
                 </div>
 
-                {/* QUICK ACTIONS - Grid system */}
+                {/* MANAGER TOOLS SECTION */}
                 <div>
-                  <h3 className="text-cyan-300 text-xs font-bold uppercase tracking-wider mb-2">Manager Tools</h3>
-                  <div className="grid grid-cols-2 gap-2">
-                    {[
-                      { icon: Mail, label: 'Email', color: 'cyan', route: 'ScottMessageInbox' },
-                      { icon: Calendar, label: 'Calendar', color: 'cyan', route: `ScottCalendarView?id=${currentArtistId}` },
-                      { icon: CheckCircle, label: 'Tasks', color: 'cyan', route: 'ScottToDo', badge: '5' },
-                      { icon: DollarSign, label: 'Finance', color: 'green', route: 'ScottFinanceAdmin' },
-                      { icon: Users, label: 'Band', color: 'cyan', route: null, action: () => setShowAddMemberSheet(true) },
-                    ].map(({ icon: Icon, label, color, route, badge, action }) => (
-                      <button
-                        key={label}
-                        onClick={() => action ? action() : navigate(createPageUrl(route))}
-                        className={`flex items-center justify-between px-3 py-2 rounded border text-xs font-bold transition-colors ${
-                          color === 'green'
-                            ? 'bg-black border-green-500/30 hover:border-green-400 text-green-400'
-                            : 'bg-black border-cyan-500/30 hover:border-cyan-400 text-cyan-400'
-                        }`}
-                      >
-                        <div className="flex items-center gap-2">
-                          <Icon className="w-4 h-4" />
-                          <span>{label}</span>
-                        </div>
-                        {badge && <span className="text-[10px] bg-white/10 px-1.5 py-0.5 rounded">{badge}</span>}
-                      </button>
-                    ))}
-                  </div>
+                  <button 
+                    onClick={() => setExpandedSections({...expandedSections, tools: !expandedSections.tools})}
+                    className="w-full mb-2"
+                  >
+                    <div className="bg-black border-2 border-cyan-500/40 px-4 py-2 flex items-center justify-between hover:border-cyan-500/60 transition-all">
+                      <div className="text-cyan-400 font-black font-mono text-sm tracking-wider">
+                        ⚙️ MANAGER TOOLS
+                      </div>
+                      <ChevronDown className={`w-4 h-4 text-cyan-400 transition-transform ${expandedSections.tools ? '' : '-rotate-90'}`} />
+                    </div>
+                  </button>
+                  {expandedSections.tools && (
+                    <div className="grid grid-cols-2 gap-2 p-4 border-2 border-cyan-500/40 bg-cyan-900/5 rounded-lg">
+                      {[
+                        { icon: Mail, label: 'Email', color: 'cyan', route: 'ScottMessageInbox' },
+                        { icon: Calendar, label: 'Calendar', color: 'cyan', route: `ScottCalendarView?id=${currentArtistId}` },
+                        { icon: CheckCircle, label: 'Tasks', color: 'cyan', route: 'ScottToDo', badge: '5' },
+                        { icon: DollarSign, label: 'Finance', color: 'green', route: 'ScottFinanceAdmin' },
+                        { icon: Users, label: 'Band', color: 'cyan', route: null, action: () => setShowAddMemberSheet(true) },
+                      ].map(({ icon: Icon, label, color, route, badge, action }) => (
+                        <button
+                          key={label}
+                          onClick={() => action ? action() : navigate(createPageUrl(route))}
+                          className={`flex items-center justify-between px-3 py-2 rounded border text-xs font-bold transition-colors ${
+                            color === 'green'
+                              ? 'bg-black border-green-500/30 hover:border-green-400 text-green-400'
+                              : 'bg-black border-cyan-500/30 hover:border-cyan-400 text-cyan-400'
+                          }`}
+                        >
+                          <div className="flex items-center gap-2">
+                            <Icon className="w-4 h-4" />
+                            <span>{label}</span>
+                          </div>
+                          {badge && <span className="text-[10px] bg-white/10 px-1.5 py-0.5 rounded">{badge}</span>}
+                        </button>
+                      ))}
+                    </div>
+                  )}
                 </div>
 
-                {/* GIG UPLOAD */}
+                {/* GIG UPLOAD SECTION */}
                 <div>
-                  <h3 className="text-cyan-300 text-xs font-bold uppercase tracking-wider mb-2">New Gig</h3>
-                  <CB51GigUploadParser 
-                    artistId={currentArtistId}
-                    onGigCreated={() => {}}
-                  />
+                  <button 
+                    onClick={() => setExpandedSections({...expandedSections, gigs: !expandedSections.gigs})}
+                    className="w-full mb-2"
+                  >
+                    <div className="bg-black border-2 border-cyan-500/40 px-4 py-2 flex items-center justify-between hover:border-cyan-500/60 transition-all">
+                      <div className="text-cyan-400 font-black font-mono text-sm tracking-wider">
+                        🎤 NEW GIG
+                      </div>
+                      <ChevronDown className={`w-4 h-4 text-cyan-400 transition-transform ${expandedSections.gigs ? '' : '-rotate-90'}`} />
+                    </div>
+                  </button>
+                  {expandedSections.gigs && (
+                    <div className="p-4 border-2 border-cyan-500/40 bg-cyan-900/5 rounded-lg">
+                      <CB51GigUploadParser 
+                        artistId={currentArtistId}
+                        onGigCreated={() => {}}
+                      />
+                    </div>
+                  )}
                 </div>
               </>
             ) : (
