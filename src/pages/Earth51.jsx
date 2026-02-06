@@ -38,6 +38,7 @@ export default function Earth51() {
   const [localBalance, setLocalBalance] = useState(() => {
     return parseFloat(localStorage.getItem('earth51_local_balance') || '0');
   });
+  const [balanceBeforeCleanup, setBalanceBeforeCleanup] = useState(0);
   const [showParentInfo, setShowParentInfo] = useState(false);
   const [purchaseSuccess, setPurchaseSuccess] = useState(null);
 
@@ -112,6 +113,9 @@ export default function Earth51() {
       const weightNum = parseFloat(weight);
       const baseTokens = weightNum * 1; // 1 $P51 per kg (1:1 tokenomics)
       const total = baseTokens;
+
+      // SAVE BALANCE BEFORE for comparison (Georgie's request!)
+      setBalanceBeforeCleanup(localBalance);
 
       // TRUST SCORE SPLITS PAYOUT
       const instantPercentage = trustScore?.instant_payout_percentage || 50;
@@ -548,15 +552,21 @@ export default function Earth51() {
               </motion.div>
             </div>
             <div className="bg-green-500 border-4 border-green-400 p-4" style={{ boxShadow: '4px 4px 0px #000' }}>
-              <h1 className="text-4xl font-black font-mono text-black">
-                +{tokensEarned}
-              </h1>
-              <p className="text-2xl font-black font-mono text-black">$P51</p>
-              <p className="text-black font-mono text-xs mt-2">
-                Total: {Math.round(localBalance)} $P51
-              </p>
+              <div className="space-y-2">
+                <div className="bg-black/30 p-2 rounded">
+                  <p className="text-black/70 font-mono text-[9px]">Before:</p>
+                  <p className="text-black font-black font-mono text-lg">{Math.round(balanceBeforeCleanup)} $P51</p>
+                </div>
+                <div className="text-center">
+                  <p className="text-black font-black text-3xl">↓ +{Math.round(tokensEarned)}</p>
+                </div>
+                <div className="bg-yellow-400 p-2 rounded">
+                  <p className="text-black/70 font-mono text-[9px]">Now:</p>
+                  <p className="text-black font-black font-mono text-2xl">{Math.round(localBalance)} $P51</p>
+                </div>
+              </div>
               {trustScore && trustScore.instant_payout_percentage < 100 && (
-                <p className="text-black/60 font-mono text-[9px] mt-1">
+                <p className="text-black/60 font-mono text-[9px] mt-2">
                   ({trustScore.instant_payout_percentage}% now • {100 - trustScore.instant_payout_percentage}% pending)
                 </p>
               )}
@@ -583,6 +593,19 @@ export default function Earth51() {
             <h2 className="text-xl font-black font-mono text-black text-center mb-4">WHAT'S NEXT?</h2>
 
             <div className="space-y-3">
+              {/* SHOP - ONLY IF YOU CAN AFFORD SOMETHING (Georgie's request!) */}
+              {localBalance >= 2 && (
+                <motion.button
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  onClick={() => setStep('shop')}
+                  className="w-full bg-yellow-500 border-4 border-yellow-400 text-black py-4 font-black font-mono text-sm"
+                  style={{ boxShadow: '4px 4px 0px #000' }}
+                >
+                  🛍️ SHOP NOW!
+                </motion.button>
+              )}
+
               <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
