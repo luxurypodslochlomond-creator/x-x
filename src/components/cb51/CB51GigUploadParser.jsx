@@ -112,7 +112,7 @@ export default function CB51GigUploadParser({ artistId, onGigCreated }) {
           try {
             await base44.functions.invoke('notifyManagerPendingGig', {
               gigId: gig.id,
-              artistId: artistId,
+              artistId: selectedArtistId,
               venueName: editing.venue_name,
               promoterName: editing.promoter_name
             });
