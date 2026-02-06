@@ -249,30 +249,16 @@ export default function CB51() {
                   />
                 </div>
 
-                {/* BAND MEMBERS SECTION - Full width expandable */}
-                <div>
-                  <button 
-                    onClick={() => setExpandedSections({...expandedSections, tools: !expandedSections.tools})}
-                    className="w-full"
+                {/* BAND MEMBERS SECTION */}
+                <div className="border-2 border-cyan-500/60 rounded-lg p-4 bg-black/60">
+                  <h2 className="text-cyan-400 font-mono font-bold text-sm tracking-wider mb-3">👥 BAND MEMBERS</h2>
+                  <p className="text-gray-400 text-xs text-center mb-3 font-mono">Add members to vote on gigs</p>
+                  <button
+                    onClick={() => setShowAddMemberSheet(true)}
+                    className="w-full border-2 border-cyan-500/60 hover:border-cyan-400 bg-black px-4 py-2 text-cyan-400 font-mono font-bold text-xs tracking-widest transition-all"
                   >
-                    <div className="bg-black border-2 border-green-500/40 hover:border-green-500 px-4 py-3 flex items-center justify-between transition-all">
-                      <div className="text-green-400 font-mono font-black text-sm tracking-wider flex items-center gap-2">
-                        👥 BAND MEMBERS
-                      </div>
-                      {expandedSections.tools ? <Minus className="w-4 h-4" /> : <ChevronRight className="w-4 h-4" />}
-                    </div>
+                    + ADD MEMBER
                   </button>
-                  {expandedSections.tools && (
-                    <div className="border-2 border-green-500/40 border-t-0 p-4 bg-black space-y-2">
-                      <p className="text-gray-400 text-xs text-center font-mono mb-3">Add band members to vote on gigs</p>
-                      <button
-                        onClick={() => setShowAddMemberSheet(true)}
-                        className="w-full border-2 border-green-500/40 hover:border-green-500 px-4 py-2 text-green-400 font-mono font-bold text-xs tracking-widest transition-all"
-                      >
-                        + ADD MEMBER
-                      </button>
-                    </div>
-                  )}
                 </div>
 
                 {/* NEW GIG SECTION - Full width expandable */}
