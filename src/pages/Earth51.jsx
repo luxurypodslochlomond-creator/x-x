@@ -694,7 +694,7 @@ export default function Earth51() {
     };
 
     return (
-      <div className="min-h-screen bg-blue-600 text-white" style={{ imageRendering: 'pixelated' }}>
+      <div className="min-h-screen bg-black text-white" style={{ imageRendering: 'pixelated' }}>
         {/* HEADER */}
         <div className="fixed top-0 left-0 right-0 z-50 bg-black border-b-4 border-yellow-500">
           <div className="max-w-xl mx-auto p-3 flex items-center justify-between">
@@ -777,6 +777,34 @@ export default function Earth51() {
               2. Take photo 📸<br/>
               3. Earn $P51 (1kg = 1 $P51) 💰<br/>
               4. Buy treats here! 🎁
+            </p>
+          </div>
+
+          {/* BIG DREAMS - REAL REWARDS */}
+          <div className="bg-gradient-to-r from-green-600 to-cyan-600 border-4 border-yellow-400 p-4 mt-3" style={{ boxShadow: '4px 4px 0px #000, 0 0 20px rgba(34, 197, 94, 0.5)' }}>
+            <div className="flex items-center gap-2 mb-2">
+              <span className="text-2xl">🎮</span>
+              <p className="text-yellow-300 font-black font-mono text-[9px]">SAVE FOR BIG THINGS!</p>
+            </div>
+            <p className="text-white font-mono text-[8px] mb-2">
+              $P51 = REAL MONEY 💰
+            </p>
+            <div className="grid grid-cols-3 gap-2">
+              <div className="bg-black/40 p-2 text-center border-2 border-yellow-400/50">
+                <div className="text-xl mb-1">📱</div>
+                <p className="text-white font-black text-[6px]">PHONE</p>
+              </div>
+              <div className="bg-black/40 p-2 text-center border-2 border-yellow-400/50">
+                <div className="text-xl mb-1">🎮</div>
+                <p className="text-white font-black text-[6px]">PLAYSTATION</p>
+              </div>
+              <div className="bg-black/40 p-2 text-center border-2 border-yellow-400/50">
+                <div className="text-xl mb-1">💻</div>
+                <p className="text-white font-black text-[6px]">APPLE</p>
+              </div>
+            </div>
+            <p className="text-cyan-200 font-mono text-[7px] mt-2 text-center">
+              Clean litter → Earn $P51 → Buy ANYTHING! 🌟
             </p>
           </div>
 
