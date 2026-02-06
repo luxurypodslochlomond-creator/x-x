@@ -172,14 +172,20 @@ export default function CB51GigUploadParser({ artistId, onGigCreated }) {
       {/* APPROVAL STEP - After save */}
       <AnimatePresence mode="wait">
         {savedGig && (
-          <CB51ManagerGigApproval
-            gig={savedGig}
-            artistId={artistId}
-            onApprovalComplete={(result) => {
-              setSavedGig(null);
-              onGigCreated?.(savedGig);
-            }}
-          />
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+          >
+            <CB51ManagerGigApproval
+              gig={savedGig}
+              artistId={artistId}
+              onApprovalComplete={(result) => {
+                setSavedGig(null);
+                onGigCreated?.(savedGig);
+              }}
+            />
+          </motion.div>
         )}
       </AnimatePresence>
 
