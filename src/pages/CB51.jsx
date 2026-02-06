@@ -67,20 +67,17 @@ export default function CB51() {
                             <div key={artist.id} className="relative">
                               <Link
                                 to={createPageUrl(`ScottArtistHome?id=${artist.id}`)}
-                                className={`flex flex-col items-center gap-2 p-2 rounded-lg transition-all w-full block ${
-                                  artist.id === currentArtistId
-                                    ? 'bg-cyan-500/20 border border-cyan-400'
-                                    : 'bg-black border border-cyan-500/30 hover:border-cyan-400'
-                                }`}
+                                onClick={() => setActiveArtistId(artist.id)}
+                                className="flex flex-col items-center gap-2 p-2 rounded-lg transition-all w-full block bg-black border border-cyan-500/30 hover:border-cyan-400"
                               >
                                 {artist.profile_pic_url ? (
                                   <img 
                                     src={artist.profile_pic_url} 
                                     alt={artist.name}
-                                    className="w-10 h-10 rounded-full object-cover border border-cyan-500/40"
+                                    className="w-10 h-10 rounded-full object-cover border border-cyan-500/40 hover:border-cyan-400 transition-all cursor-pointer"
                                   />
                                 ) : (
-                                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-cyan-500 to-cyan-600 text-white font-black text-xs flex items-center justify-center">
+                                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-cyan-500 to-cyan-600 text-white font-black text-xs flex items-center justify-center hover:brightness-110 transition-all cursor-pointer">
                                     {artist.name.charAt(0).toUpperCase()}
                                   </div>
                                 )}
