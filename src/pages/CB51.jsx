@@ -64,11 +64,7 @@ export default function CB51() {
                             <div key={artist.id} className="relative">
                               <button
                                 onClick={() => navigate(createPageUrl(`ScottArtistHome?id=${artist.id}`))}
-                                className={`flex flex-col items-center gap-2 p-2 rounded-lg transition-all w-full ${
-                                  artist.id === currentArtistId
-                                    ? 'bg-cyan-500/20 border border-cyan-400'
-                                    : 'bg-black border border-cyan-500/30 hover:border-cyan-400'
-                                }`}
+                                className="flex flex-col items-center gap-2 p-2 rounded-lg transition-all w-full bg-black border border-cyan-500/30 hover:border-cyan-400"
                               >
                                 {artist.profile_pic_url ? (
                                   <img 
@@ -139,11 +135,7 @@ export default function CB51() {
                             setShowArtistMenu(false);
                             navigate(createPageUrl(`ScottArtistHome?id=${artist.id}`));
                           }}
-                          className={`flex-1 flex items-center gap-2 px-3 py-2 rounded transition-colors ${
-                            artist.id === currentArtistId
-                              ? 'bg-cyan-500/20 border border-cyan-400'
-                              : 'bg-black border border-cyan-500/20 hover:border-cyan-400'
-                          }`}
+                          className="flex-1 flex items-center gap-2 px-3 py-2 rounded transition-colors bg-black border border-cyan-500/20 hover:border-cyan-400"
                         >
                           {artist.profile_pic_url ? (
                             <img 
