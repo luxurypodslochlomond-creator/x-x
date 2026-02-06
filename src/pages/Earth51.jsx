@@ -21,7 +21,7 @@ import { GameIcon, SafeIcon, EarnIcon, HealIcon, CameraIcon } from '@/components
 export default function Earth51() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  const [step, setStep] = useState('landing');
+  const [step, setStep] = useState('landing'); // landing | weight | success | shop
   const [photoFile, setPhotoFile] = useState(null);
   const [photoUrl, setPhotoUrl] = useState(null);
   const [weight, setWeight] = useState('');
@@ -39,6 +39,7 @@ export default function Earth51() {
     return parseFloat(localStorage.getItem('earth51_local_balance') || '0');
   });
   const [showParentInfo, setShowParentInfo] = useState(false);
+  const [purchaseSuccess, setPurchaseSuccess] = useState(null);
 
   // HIDE MAIN NAV FOR KIDS EXPERIENCE
   useEffect(() => {
@@ -288,23 +289,23 @@ export default function Earth51() {
             <motion.button
               whileHover={{ scale: 1.06 }}
               whileTap={{ scale: 0.94 }}
+              onClick={() => setStep('shop')}
+              className="bg-yellow-600 border-3 border-yellow-500 py-2 flex flex-col items-center justify-center gap-0.5"
+              style={{ boxShadow: '3px 3px 0px #000', imageRendering: 'pixelated' }}
+            >
+              <div className="text-xl">🛒</div>
+              <p className="text-black font-black font-mono text-[7px]">SHOP</p>
+            </motion.button>
+
+            <motion.button
+              whileHover={{ scale: 1.06 }}
+              whileTap={{ scale: 0.94 }}
               onClick={() => navigate(createPageUrl('Volckano'))}
               className="bg-orange-600 border-3 border-orange-500 py-2 flex flex-col items-center justify-center gap-0.5"
               style={{ boxShadow: '3px 3px 0px #000', imageRendering: 'pixelated' }}
             >
               <GameIcon />
               <p className="text-black font-black font-mono text-[7px]">GAME</p>
-            </motion.button>
-
-            <motion.button
-              whileHover={{ scale: 1.06 }}
-              whileTap={{ scale: 0.94 }}
-              onClick={() => setShowParentInfo(!showParentInfo)}
-              className="bg-blue-600 border-3 border-blue-500 py-2 flex flex-col items-center justify-center gap-0.5"
-              style={{ boxShadow: '3px 3px 0px #000', imageRendering: 'pixelated' }}
-            >
-              <SafeIcon />
-              <p className="text-black font-black font-mono text-[7px]">SAFE?</p>
             </motion.button>
 
             <motion.button
@@ -651,6 +652,147 @@ export default function Earth51() {
               <span className="w-2 h-2 bg-pink-500 animate-pulse"></span>
             </div>
           </motion.div>
+        </div>
+      </div>
+    );
+  }
+
+  // SHOP - Georgie's idea! Spend $P51 on treats
+  if (step === 'shop') {
+    const shopItems = [
+      { id: 1, name: '🍫 Chocolate Bar', price: 5, emoji: '🍫' },
+      { id: 2, name: '🍭 Lollipop', price: 2, emoji: '🍭' },
+      { id: 3, name: '🎮 Volckano Unlock', price: 10, emoji: '🌋' },
+      { id: 4, name: '⭐ Gold Star Badge', price: 8, emoji: '⭐' },
+      { id: 5, name: '🦸 Super Power', price: 15, emoji: '⚡' },
+      { id: 6, name: '🎨 Rainbow Skin', price: 12, emoji: '🌈' },
+      { id: 7, name: '🍕 Pizza Slice', price: 7, emoji: '🍕' },
+      { id: 8, name: '🎁 Mystery Box', price: 20, emoji: '🎁' },
+    ];
+
+    const handlePurchase = (item) => {
+      if (localBalance < item.price) {
+        alert(`Need ${item.price} $P51! You have ${Math.round(localBalance)}`);
+        return;
+      }
+
+      const newBalance = localBalance - item.price;
+      setLocalBalance(newBalance);
+      localStorage.setItem('earth51_local_balance', newBalance.toString());
+
+      // Track purchase locally
+      const purchases = JSON.parse(localStorage.getItem('earth51_purchases') || '[]');
+      purchases.push({
+        item: item.name,
+        price: item.price,
+        date: new Date().toISOString()
+      });
+      localStorage.setItem('earth51_purchases', JSON.stringify(purchases));
+
+      setPurchaseSuccess(item);
+      setTimeout(() => setPurchaseSuccess(null), 2000);
+    };
+
+    return (
+      <div className="min-h-screen bg-black text-white" style={{ imageRendering: 'pixelated' }}>
+        {/* HEADER */}
+        <div className="fixed top-0 left-0 right-0 z-50 bg-black border-b-4 border-yellow-500">
+          <div className="max-w-xl mx-auto p-3 flex items-center justify-between">
+            <motion.button
+              onClick={() => setStep('landing')}
+              whileHover={{ scale: 1.15 }}
+              whileTap={{ scale: 0.85 }}
+              className="w-10 h-10 bg-pink-500 border-3 border-pink-400 flex items-center justify-center font-black"
+              style={{ boxShadow: '3px 3px 0px #000', imageRendering: 'pixelated' }}
+            >
+              &lt;
+            </motion.button>
+
+            <div className="text-center">
+              <h1 className="text-lg font-black font-mono text-yellow-400" style={{ textShadow: '2px 2px #000' }}>🛒 SHOP</h1>
+              <p className="text-[8px] font-black font-mono text-green-400">BALANCE: {Math.round(localBalance)} $P51</p>
+            </div>
+
+            <div className="w-10"></div>
+          </div>
+        </div>
+
+        <div className="max-w-xl mx-auto pt-20 p-3 pb-24 space-y-3">
+          
+          {/* SUCCESS ANIMATION */}
+          <AnimatePresence>
+            {purchaseSuccess && (
+              <motion.div
+                initial={{ scale: 0.5, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.5, opacity: 0 }}
+                className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 bg-green-500 border-4 border-green-400 p-8 text-center"
+                style={{ boxShadow: '6px 6px 0px #000' }}
+              >
+                <div className="text-6xl mb-2">{purchaseSuccess.emoji}</div>
+                <p className="text-black font-black font-mono text-sm">BOUGHT!</p>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* SHOP ITEMS GRID */}
+          <div className="grid grid-cols-2 gap-3">
+            {shopItems.map((item) => {
+              const canAfford = localBalance >= item.price;
+              return (
+                <motion.button
+                  key={item.id}
+                  whileHover={canAfford ? { scale: 1.03 } : {}}
+                  whileTap={canAfford ? { scale: 0.97 } : {}}
+                  onClick={() => handlePurchase(item)}
+                  disabled={!canAfford}
+                  className={`${
+                    canAfford 
+                      ? 'bg-green-600 border-green-500' 
+                      : 'bg-gray-800 border-gray-700 opacity-60'
+                  } border-3 p-3 flex flex-col items-center justify-center gap-2`}
+                  style={{ boxShadow: '3px 3px 0px #000', imageRendering: 'pixelated' }}
+                >
+                  <div className="text-3xl">{item.emoji}</div>
+                  <p className={`font-black font-mono text-[8px] text-center leading-tight ${
+                    canAfford ? 'text-black' : 'text-gray-500'
+                  }`}>
+                    {item.name.split(' ').slice(1).join(' ')}
+                  </p>
+                  <div className={`${
+                    canAfford ? 'bg-yellow-400' : 'bg-gray-600'
+                  } px-2 py-1 font-black font-mono text-[8px] text-black`}>
+                    {item.price} $P51
+                  </div>
+                </motion.button>
+              );
+            })}
+          </div>
+
+          {/* INFO BOX */}
+          <div className="bg-cyan-600 border-3 border-cyan-500 p-3" style={{ boxShadow: '3px 3px 0px #000' }}>
+            <p className="text-black font-black font-mono text-[8px] mb-1">HOW IT WORKS:</p>
+            <p className="text-black font-mono text-[7px]">
+              1. Clean up litter 🌍<br/>
+              2. Take photo 📸<br/>
+              3. Earn $P51 💰<br/>
+              4. Buy treats here! 🎁
+            </p>
+          </div>
+
+          {/* EARN MORE BUTTON */}
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            onClick={() => setStep('landing')}
+            className="w-full bg-green-500 border-4 border-green-400 py-4 font-black font-mono text-sm"
+            style={{ boxShadow: '4px 4px 0px #000' }}
+          >
+            <div className="flex items-center justify-center gap-2">
+              <span>📸</span>
+              <span className="text-black">EARN MORE $P51</span>
+            </div>
+          </motion.button>
         </div>
       </div>
     );
