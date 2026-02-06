@@ -123,7 +123,7 @@ export default function CB51GigUploadParser({ artistId, onGigCreated }) {
           return gig;
     },
     onSuccess: (gig) => {
-      queryClient.invalidateQueries({ queryKey: ['pendingGigs', artistId] });
+      queryClient.invalidateQueries({ queryKey: ['pendingGigs', selectedArtistId] });
       setSavedGig(gig);
       setExtracted(null);
       setEditing(null);
