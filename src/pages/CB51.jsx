@@ -65,9 +65,9 @@ export default function CB51() {
               <div className="grid grid-cols-3 gap-2 mb-4">
                           {artists.slice(0, 2).map((artist) => (
                             <div key={artist.id} className="relative">
-                              <button
-                                onClick={() => setActiveArtistId(artist.id)}
-                                className={`flex flex-col items-center gap-2 p-2 rounded-lg transition-all w-full ${
+                              <Link
+                                to={createPageUrl(`ScottArtistHome?id=${artist.id}`)}
+                                className={`flex flex-col items-center gap-2 p-2 rounded-lg transition-all w-full block ${
                                   artist.id === currentArtistId
                                     ? 'bg-cyan-500/20 border border-cyan-400'
                                     : 'bg-black border border-cyan-500/30 hover:border-cyan-400'
@@ -85,7 +85,7 @@ export default function CB51() {
                                   </div>
                                 )}
                                 <p className="text-cyan-300 font-bold text-[10px] text-center truncate w-full px-1">{artist.name}</p>
-                              </button>
+                              </Link>
                               <button
                                 onClick={() => navigate(createPageUrl(`CB51AddArtist?edit=${artist.id}`))}
                                 className="absolute top-1 right-1 bg-black/80 border border-cyan-500/40 hover:border-cyan-400 rounded p-1 transition-all"
