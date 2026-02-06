@@ -94,7 +94,7 @@ export default function CB51GigUploadParser({ artistId, onGigCreated }) {
       }
 
       const gig = await base44.entities.GigOffer.create({
-            artist_id: artistId,
+            artist_id: selectedArtistId,
             title: editing.venue_name || 'Untitled Gig',
             venue: editing.venue_name,
             location: editing.location || '',
