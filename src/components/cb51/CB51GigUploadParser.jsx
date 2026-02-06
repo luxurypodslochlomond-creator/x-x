@@ -240,7 +240,32 @@ export default function CB51GigUploadParser({ artistId, onGigCreated }) {
             {error && (
               <div className="bg-yellow-900/30 border border-yellow-500/40 rounded-lg p-3 flex gap-2">
                 <AlertCircle className="w-4 h-4 text-yellow-400 flex-shrink-0 mt-0.5" />
-                <p className="text-yellow-300 text-xs">{error}</p>
+                <div className="flex-1">
+                  <p className="text-yellow-300 text-xs">{error}</p>
+                  
+                  {/* Show quick artist chips if multiple matches found */}
+                  {error.includes('possible artists') && extracted.artist_name && (
+                    <div className="flex gap-2 mt-2 flex-wrap">
+                      {artists
+                        .filter(a => 
+                          a.name.toLowerCase().includes(extracted.artist_name.toLowerCase()) ||
+                          extracted.artist_name.toLowerCase().includes(a.name.toLowerCase())
+                        )
+                        .map(artist => (
+                          <button
+                            key={artist.id}
+                            onClick={() => {
+                              setSelectedArtistId(artist.id);
+                              setError(null);
+                            }}
+                            className="bg-cyan-600 hover:bg-cyan-700 text-white px-3 py-1 rounded text-[10px] font-bold transition-colors"
+                          >
+                            {artist.name}
+                          </button>
+                        ))}
+                    </div>
+                  )}
+                </div>
               </div>
             )}
 
