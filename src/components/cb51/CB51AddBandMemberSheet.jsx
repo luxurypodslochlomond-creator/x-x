@@ -12,13 +12,27 @@ export default function CB51AddBandMemberSheet({ artistId, isOpen, onClose, onMe
       if (!formData.name.trim()) throw new Error('Name required');
       if (!formData.email.trim()) throw new Error('Email required');
 
-      return await base44.entities.TeamMember.create({
+      const member = await base44.entities.TeamMember.create({
         artist_id: artistId,
         name: formData.name.trim(),
         email: formData.email.trim(),
         role: formData.role,
         status: 'invited'
       });
+
+      // Get artist name
+      const artist = await base44.entities.Artist.filter({ id: artistId });
+
+      // Send invite email
+      await base44.functions.invoke('sendBandMemberInvite', {
+        memberId: member.id,
+        email: formData.email.trim(),
+        memberName: formData.name.trim(),
+        artistName: artist?.[0]?.name || 'Your Band',
+        artistId: artistId
+      });
+
+      return member;
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['bandMembers', artistId] });
