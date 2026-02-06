@@ -15,24 +15,32 @@ Deno.serve(async (req) => {
       return Response.json({ error: 'No content to parse' }, { status: 400 });
     }
 
-    // Use AI to extract EVERYTHING needed for gigs - zero ego, complete
+    // PLANET-CLASS GIG EXTRACTION - handles emails, WhatsApp, PDFs, contracts
     const parseRes = await base44.integrations.Core.InvokeLLM({
-      prompt: `You are a world-class gig extraction AI. Extract EVERY detail from this gig offer document.
+      prompt: `You are the world's best gig extraction AI. Your job: find EVERY detail about gigs, events, sessions, or anything work-related.
 
-Be thorough. Find every piece of info:
-- venue_name: The actual venue/location name
-- date_start: Date in YYYY-MM-DD format (extract from any format - 15th March 2026 = 2026-03-15)
-- time_start: Start time in HH:MM 24-hour format (8pm = 20:00, 3:30pm = 15:30)
-- location: Full address or city/country
-- promoter_name: Person or company promoting the gig
-- promoter_email: Contact email
-- promoter_phone: Phone number (keep country code if present)
-- fee: Just the number (£800 = 800, €500 = 500)
-- offer_details: Everything about the gig - equipment, setup, duration, requirements, anything relevant
-- artist_name: The band/artist this gig is for (if mentioned)
-- title: Event title if different from venue
+INPUT: Raw text from email, WhatsApp, PDF, contract, or forward
 
-Extract EVERYTHING. Be greedy. If it mentions anything about the gig, include it in offer_details.
+EXTRACT WITH ZERO EGO:
+- venue_name: Exact venue name (check for: "at", "at the", "@", location names)
+- date_start: YYYY-MM-DD format. Parse ANY date format: "15 March", "March 15", "15/3", "3-15", "next Tuesday" (estimate). Must be date.
+- time_start: HH:MM 24-hour. "8pm"=20:00, "3:30pm"=15:30, "8"=08:00, "afternoon"=14:00
+- location: Full address, city, country (check for: street address, city name, postal code, country)
+- promoter_name: Person or company (check for: sender name, contact name, company name, promoter title)
+- promoter_email: Full email address
+- promoter_phone: With country code if present (+44, +1, etc)
+- fee: JUST THE NUMBER (£800="800", €500="500", "5000 PLN"="5000")
+- offer_details: EVERYTHING about the gig - equipment provided, PA system, duration, setup requirements, technical specs, travel, accommodation, meals, load-in time, any special requests
+- artist_name: Who's performing (check for: artist name, band name, who it's for, "for [artist]")
+- title: Event name if different from venue (festival name, event title, gig name)
+
+KEY RULES:
+1. If NO date found, leave date_start empty
+2. If currency mentioned, extract number only
+3. offer_details = be GREEDY. Include EVERYTHING mentioned
+4. Dates: Try to infer year from context. If no year, use 2026
+5. Check subject lines, signatures, headers for contact info
+6. Extract multiple dates if gig repeats (festival with multiple days)
 
 Content:
 ${content}`,
