@@ -9,6 +9,7 @@ import { createPageUrl } from '@/utils';
 import FrequencyShareButton from '@/components/shared/FrequencyShareButton';
 import WiFiDirectMesh from '@/components/shared/WiFiDirectMesh';
 import BluetoothMeshNetwork from '@/components/shared/BluetoothMeshNetwork';
+import { useDestructiveInterference, useVisualDestructiveInterference, shouldUseInverseFrequency, detectFearFrequency } from '@/components/shared/DestructiveInterferenceEngine';
 
 /**
  * UF51 FREQUENCY CHAMBER
@@ -2024,6 +2025,8 @@ export default function FrequencyChamber() {
     const [showBodySection, setShowBodySection] = useState(false);
     const [sessionDuration, setSessionDuration] = useState(20); // minutes
     const [expandedSections, setExpandedSections] = useState({ urgent: true }); // Urgent open by default
+  const [inverseFrequencyEnabled, setInverseFrequencyEnabled] = useState(false);
+  const [fearFrequency, setFearFrequency] = useState(null);
 
     const [voiceAnalysisData, setVoiceAnalysisData] = useState(null);
 
@@ -2519,6 +2522,14 @@ export default function FrequencyChamber() {
 
         nodesRef.current = nodes;
       
+      // ACTIVATE DESTRUCTIVE INTERFERENCE FOR FEAR PROTOCOLS
+      const shouldInvert = shouldUseInverseFrequency(protocol.id);
+      if (shouldInvert && !inverseFrequencyEnabled) {
+        setInverseFrequencyEnabled(true);
+        const detected = detectFearFrequency(voiceAnalysisData?.voiceAnalysis);
+        setFearFrequency(detected);
+      }
+      
       setSessionTime(0);
       sessionTimerRef.current = setInterval(() => {
         setSessionTime(t => t + 1);
@@ -2685,6 +2696,16 @@ export default function FrequencyChamber() {
   const handleVoiceRecommendation = (protocolId, voiceAnalysis, intent) => {
     setSelectedProtocol(PROTOCOLS[protocolId]);
     setVoiceAnalysisData({ voiceAnalysis, intent });
+    
+    // AUTO-DETECT FEAR + ENABLE INVERSE
+    if (shouldUseInverseFrequency(protocolId)) {
+      setInverseFrequencyEnabled(true);
+      const detectedFear = detectFearFrequency(voiceAnalysis);
+      setFearFrequency(detectedFear);
+      console.log(`🔄 Inverse frequency auto-enabled for ${protocolId}`);
+      console.log(`📍 Detected fear frequency: ${detectedFear}Hz`);
+    }
+    
     // Auto-start audio immediately
     setTimeout(() => {
       startAudio(PROTOCOLS[protocolId]);
@@ -2784,6 +2805,21 @@ export default function FrequencyChamber() {
     
     lastHRVRef.current = { bpm, coherence };
   }, [emergencyMode, panicDetected, isPlaying]);
+
+  // DESTRUCTIVE INTERFERENCE HOOKS - Automatic fear cancellation
+  useDestructiveInterference(
+    isPlaying && inverseFrequencyEnabled,
+    fearFrequency || (selectedProtocol?.config?.primary * 0.5), // Fear freq = half of primary
+    selectedProtocol?.config?.primary || 10,
+    ctxRef.current,
+    masterGainRef.current
+  );
+
+  useVisualDestructiveInterference(
+    isPlaying && inverseFrequencyEnabled,
+    fearFrequency || 250,
+    selectedProtocol?.color || '#22c55e'
+  );
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-black via-purple-950/20 to-black text-white">
