@@ -261,37 +261,13 @@ export default function CB51() {
                   </button>
                 </div>
 
-                {/* NEW GIG SECTION - Full width expandable */}
-                <div>
-                  <button 
-                    onClick={() => setExpandedSections({...expandedSections, notifications: !expandedSections.notifications})}
-                    className="w-full"
-                  >
-                    <div className="bg-black border-2 border-cyan-500/40 hover:border-cyan-500 px-4 py-3 flex items-center justify-between transition-all">
-                      <div className="text-cyan-400 font-mono font-black text-sm tracking-wider flex items-center gap-2">
-                        📥 NEW GIG
-                      </div>
-                      {expandedSections.notifications ? <Minus className="w-4 h-4" /> : <ChevronRight className="w-4 h-4" />}
-                    </div>
-                  </button>
-                  {expandedSections.notifications && (
-                    <div className="border-2 border-cyan-500/40 border-t-0 p-4 bg-black">
-                      <CB51GigUploadParser 
-                        artistId={currentArtistId}
-                        onGigCreated={() => {}}
-                      />
-                    </div>
-                  )}
-                </div>
-
-                {/* NOTIFICATIONS SECTION */}
-                <div>
-                  <div className="bg-black border-2 border-red-500/40 px-4 py-3">
-                    <div className="text-red-400 font-mono font-black text-sm tracking-wider flex items-center gap-2 mb-3">
-                      ⚠️ ACTION REQUIRED
-                    </div>
-                    <CB51NotificationFeed artistId={currentArtistId} />
+                {/* PENDING APPROVALS - Critical section */}
+                <div className="border-2 border-red-500/60 rounded-lg p-4 bg-black/60">
+                  <div className="flex items-center gap-2 mb-3">
+                    <AlertTriangle className="w-4 h-4 text-red-400" />
+                    <h2 className="text-red-400 font-mono font-bold text-sm tracking-wider">PENDING APPROVALS</h2>
                   </div>
+                  <CB51NotificationFeed artistId={currentArtistId} />
                 </div>
               </div>
             ) : (
