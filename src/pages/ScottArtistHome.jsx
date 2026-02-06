@@ -85,7 +85,7 @@ export default function ScottArtistHome() {
             navigate(createPageUrl('CB51'));
             return;
         }
-        base44.entities.ScottArtist.list().then(allArtists => {
+        base44.entities.Artist.list().then(allArtists => {
             const found = allArtists.find(a => a.id === artistId);
             if (found) {
                 setArtist(found);
