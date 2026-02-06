@@ -196,48 +196,42 @@ export default function CB51() {
 
             {currentArtistId ? (
               <div className="space-y-4">
-                {/* QUICK ACTIONS GRID - 2x2 like artist page */}
-                <div className="grid grid-cols-2 gap-3">
-                  <button
-                    onClick={() => navigate(createPageUrl(`ScottLive?id=${currentArtistId}`))}
-                    className="aspect-square bg-black border-2 border-cyan-500/40 hover:border-cyan-500 rounded-lg flex flex-col items-center justify-center gap-2 transition-all group"
-                  >
-                    <div className="w-12 h-12 bg-cyan-500 rounded flex items-center justify-center group-hover:brightness-110 transition-all">
-                      <Music className="w-6 h-6 text-black" />
-                    </div>
-                    <span className="text-cyan-400 font-mono font-bold text-xs tracking-widest">LIVE</span>
-                  </button>
+                {/* ALERT BANNER */}
+                              <div className="mb-4 flex items-center gap-2 bg-cyan-600/20 border border-cyan-500/60 rounded-lg px-4 py-3">
+                                <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse" />
+                                <p className="text-cyan-300 font-mono text-sm font-bold">Enable alerts for your team</p>
+                              </div>
 
-                  <button
-                    onClick={() => navigate(createPageUrl(`ScottSessions?id=${currentArtistId}`))}
-                    className="aspect-square bg-black border-2 border-amber-500/40 hover:border-amber-500 rounded-lg flex flex-col items-center justify-center gap-2 transition-all group"
-                  >
-                    <div className="w-12 h-12 bg-amber-500 rounded flex items-center justify-center group-hover:brightness-110 transition-all">
-                      <Sparkles className="w-6 h-6 text-black" />
-                    </div>
-                    <span className="text-amber-400 font-mono font-bold text-xs tracking-widest">SESSIONS</span>
-                  </button>
+                              {/* QUICK ACTIONS GRID - 2x2 */}
+                              <div className="grid grid-cols-2 gap-3">
+                                <button
+                                  onClick={() => navigate(createPageUrl(`ScottLive?id=${currentArtistId}`))}
+                                  className="bg-black border-2 border-cyan-500/60 hover:border-cyan-400 px-4 py-3 rounded-lg text-cyan-400 font-mono font-bold text-xs tracking-widest transition-all"
+                                >
+                                  🎵 LIVE
+                                </button>
 
-                  <button
-                    onClick={() => navigate(createPageUrl('ScottToDo'))}
-                    className="aspect-square bg-black border-2 border-cyan-500/40 hover:border-cyan-500 rounded-lg flex flex-col items-center justify-center gap-2 transition-all group"
-                  >
-                    <div className="w-12 h-12 bg-cyan-500 rounded flex items-center justify-center group-hover:brightness-110 transition-all">
-                      <CheckCircle className="w-6 h-6 text-black" />
-                    </div>
-                    <span className="text-cyan-400 font-mono font-bold text-xs tracking-widest">TO-DO</span>
-                  </button>
+                                <button
+                                  onClick={() => navigate(createPageUrl(`ScottSessions?id=${currentArtistId}`))}
+                                  className="bg-black border-2 border-cyan-500/60 hover:border-cyan-400 px-4 py-3 rounded-lg text-cyan-400 font-mono font-bold text-xs tracking-widest transition-all"
+                                >
+                                  ✨ SESSIONS
+                                </button>
 
-                  <button
-                    onClick={() => navigate(createPageUrl('ScottFinanceAdmin'))}
-                    className="aspect-square bg-black border-2 border-green-500/40 hover:border-green-500 rounded-lg flex flex-col items-center justify-center gap-2 transition-all group"
-                  >
-                    <div className="w-12 h-12 bg-green-500 rounded flex items-center justify-center group-hover:brightness-110 transition-all">
-                      <DollarSign className="w-6 h-6 text-black" />
-                    </div>
-                    <span className="text-green-400 font-mono font-bold text-xs tracking-widest">FINANCE</span>
-                  </button>
-                </div>
+                                <button
+                                  onClick={() => navigate(createPageUrl('ScottToDo'))}
+                                  className="bg-black border-2 border-cyan-500/60 hover:border-cyan-400 px-4 py-3 rounded-lg text-cyan-400 font-mono font-bold text-xs tracking-widest transition-all"
+                                >
+                                  ✓ TO-DO
+                                </button>
+
+                                <button
+                                  onClick={() => navigate(createPageUrl('ScottFinanceAdmin'))}
+                                  className="bg-black border-2 border-cyan-500/60 hover:border-cyan-400 px-4 py-3 rounded-lg text-cyan-400 font-mono font-bold text-xs tracking-widest transition-all"
+                                >
+                                  💰 FINANCE
+                                </button>
+                              </div>
 
                 {/* GIGS SECTION - Full width expandable */}
                 <div>
