@@ -15,20 +15,24 @@ Deno.serve(async (req) => {
       return Response.json({ error: 'No content to parse' }, { status: 400 });
     }
 
-    // Use AI to extract ALL gig details from the content
+    // Use AI to extract EVERYTHING needed for gigs - zero ego, complete
     const parseRes = await base44.integrations.Core.InvokeLLM({
-      prompt: `Extract COMPLETE gig/event details from this document. Return JSON with ALL fields found:
-- venue_name (name of venue/location)
-- date_start (date in YYYY-MM-DD format)
-- time_start (start time in HH:MM format, 24-hour)
-- location (full address or city where gig is)
-- promoter_name (person/company name)
-- promoter_email (email address)
-- promoter_phone (phone number with country code if present)
-- fee (amount in numbers only, no symbols)
-- offer_details (full offer text/description)
+      prompt: `You are a world-class gig extraction AI. Extract EVERY detail from this gig offer document.
 
-Extract EVERYTHING you find. Don't leave fields blank if data exists anywhere in the document.
+Be thorough. Find every piece of info:
+- venue_name: The actual venue/location name
+- date_start: Date in YYYY-MM-DD format (extract from any format - 15th March 2026 = 2026-03-15)
+- time_start: Start time in HH:MM 24-hour format (8pm = 20:00, 3:30pm = 15:30)
+- location: Full address or city/country
+- promoter_name: Person or company promoting the gig
+- promoter_email: Contact email
+- promoter_phone: Phone number (keep country code if present)
+- fee: Just the number (£800 = 800, €500 = 500)
+- offer_details: Everything about the gig - equipment, setup, duration, requirements, anything relevant
+- artist_name: The band/artist this gig is for (if mentioned)
+- title: Event title if different from venue
+
+Extract EVERYTHING. Be greedy. If it mentions anything about the gig, include it in offer_details.
 
 Content:
 ${content}`,
@@ -42,28 +46,37 @@ ${content}`,
           promoter_name: { type: 'string' },
           promoter_email: { type: 'string' },
           promoter_phone: { type: 'string' },
-          fee: { type: ['string', 'number'] },
-          offer_details: { type: 'string' }
+          fee: { type: ['string', 'number', 'null'] },
+          offer_details: { type: 'string' },
+          artist_name: { type: ['string', 'null'] },
+          title: { type: ['string', 'null'] }
         }
       }
     });
 
     const missingCritical = [];
-    if (!parseRes.venue_name) missingCritical.push('Venue');
-    if (!parseRes.date_start) missingCritical.push('Date');
-    if (!parseRes.promoter_name) missingCritical.push('Promoter');
+    if (!parseRes.venue_name?.trim()) missingCritical.push('Venue');
+    if (!parseRes.date_start?.trim()) missingCritical.push('Date');
+    if (!parseRes.promoter_name?.trim()) missingCritical.push('Promoter');
+
+    // Clean fee
+    const feeCleaned = parseRes.fee 
+      ? String(parseRes.fee).replace(/[^0-9.]/g, '').replace(/\.(?=.*\.)/g, '') 
+      : null;
 
     return Response.json({
       extracted: {
-        venue_name: parseRes.venue_name || '',
-        date_start: parseRes.date_start || '',
-        time_start: parseRes.time_start || '',
-        location: parseRes.location || '',
-        promoter_name: parseRes.promoter_name || '',
-        promoter_email: parseRes.promoter_email || '',
-        promoter_phone: parseRes.promoter_phone || '',
-        fee: parseRes.fee ? String(parseRes.fee).replace(/[^0-9.]/g, '') : null,
-        offer_details: parseRes.offer_details || ''
+        venue_name: (parseRes.venue_name || '').trim(),
+        date_start: (parseRes.date_start || '').trim(),
+        time_start: (parseRes.time_start || '').trim(),
+        location: (parseRes.location || '').trim(),
+        promoter_name: (parseRes.promoter_name || '').trim(),
+        promoter_email: (parseRes.promoter_email || '').trim(),
+        promoter_phone: (parseRes.promoter_phone || '').trim(),
+        fee: feeCleaned ? parseFloat(feeCleaned) : null,
+        offer_details: (parseRes.offer_details || '').trim(),
+        artist_name: (parseRes.artist_name || '').trim(),
+        title: (parseRes.title || '').trim()
       },
       missingCritical,
       source
@@ -72,7 +85,7 @@ ${content}`,
     console.error('Parse error:', error);
     return Response.json({ 
       extracted: {},
-      missingCritical: ['Failed to parse'],
+      missingCritical: ['Parse failed - check PDF format'],
       error: error.message 
     }, { status: 200 });
   }
