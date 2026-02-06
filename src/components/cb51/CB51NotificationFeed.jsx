@@ -21,18 +21,10 @@ export default function CB51NotificationFeed({ artistId }) {
 
   const approveMutation = useMutation({
     mutationFn: async (gigId) => {
-      await base44.asServiceRole.entities.GigOffer.update(gigId, {
-        status: 'band_voting'
+      await base44.functions.invoke('approveGigOffer', {
+        gigId: gigId,
+        artistId: artistId
       });
-      
-      try {
-        await base44.functions.invoke('notifyBandGigOffer', {
-          gigOfferId: gigId,
-          artistId: artistId
-        });
-      } catch (err) {
-        console.log('Band notification queued:', err.message);
-      }
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['pendingGigs', artistId] });
@@ -42,9 +34,9 @@ export default function CB51NotificationFeed({ artistId }) {
 
   const rejectMutation = useMutation({
     mutationFn: async ({ gigId, reason }) => {
-      await base44.asServiceRole.entities.GigOffer.update(gigId, {
-        status: 'manager_rejected',
-        manager_rejection_reason: reason
+      await base44.functions.invoke('rejectGigOffer', {
+        gigId: gigId,
+        reason: reason
       });
     },
     onSuccess: () => {
