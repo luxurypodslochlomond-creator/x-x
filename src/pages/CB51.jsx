@@ -35,7 +35,7 @@ export default function CB51() {
 
   const { data: artists = [] } = useQuery({
     queryKey: ['cb51Artists'],
-    queryFn: () => base44.entities.ScottArtist.filter({}),
+    queryFn: () => base44.entities.Artist.filter({}),
     enabled: !!user,
   });
 
@@ -180,7 +180,7 @@ export default function CB51() {
                   <div className="grid grid-cols-2 gap-2">
                     {[
                       { icon: Mail, label: 'Email', color: 'cyan', route: 'ScottMessageInbox' },
-                      { icon: Calendar, label: 'Calendar', color: 'cyan', route: 'ScottCalendarView' },
+                      { icon: Calendar, label: 'Calendar', color: 'cyan', route: `ScottCalendarView?id=${currentArtistId}` },
                       { icon: CheckCircle, label: 'Tasks', color: 'cyan', route: 'ScottToDo', badge: '5' },
                       { icon: DollarSign, label: 'Finance', color: 'green', route: 'ScottFinanceAdmin' },
                     ].map(({ icon: Icon, label, color, route, badge }) => (
