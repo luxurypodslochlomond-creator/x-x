@@ -9,7 +9,7 @@ import CB51ErrorBoundary from '@/components/scott/CB51ErrorBoundary';
 import CB51PINGuard from '@/components/cb51/CB51PINGuard';
 import CB51NotificationFeed from '@/components/cb51/CB51NotificationFeed';
 import CB51GigUploadParser from '@/components/cb51/CB51GigUploadParser';
-import CB51AddBandMemberSheet from '@/components/cb51/CB51AddBandMemberSheet';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 export default function CB51() {
   const navigate = useNavigate();
@@ -18,11 +18,10 @@ export default function CB51() {
   const [activeArtistId, setActiveArtistId] = useState(null);
   const [showArtistMenu, setShowArtistMenu] = useState(false);
   const [showAddMemberSheet, setShowAddMemberSheet] = useState(false);
-  const [expandedSections, setExpandedSections] = useState({
-    notifications: true,
-    tools: true,
-    gigs: true
-  });
+  const [newMemberName, setNewMemberName] = useState('');
+  const [newMemberEmail, setNewMemberEmail] = useState('');
+  const [addingMember, setAddingMember] = useState(false);
+  const queryClient = useQueryClient();
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -57,6 +56,42 @@ export default function CB51() {
   }
 
   const currentArtistId = activeArtistId || (artists.length > 0 ? artists[0].id : null);
+
+  const handleAddMember = async () => {
+    if (!newMemberName.trim() || !newMemberEmail.trim() || !currentArtistId) return;
+    
+    setAddingMember(true);
+    try {
+      const member = await base44.entities.TeamMember.create({
+        artist_id: currentArtistId,
+        name: newMemberName.trim(),
+        email: newMemberEmail.trim(),
+        role: 'band_member',
+        status: 'invited'
+      });
+
+      const artistsList = await base44.entities.Artist.filter({ id: currentArtistId });
+      
+      if (artistsList?.length > 0) {
+        await base44.functions.invoke('sendBandMemberInvite', {
+          memberId: member.id,
+          email: newMemberEmail.trim(),
+          memberName: newMemberName.trim(),
+          artistName: artistsList[0].name,
+          artistId: currentArtistId
+        }).catch(e => console.log('Email send failed:', e));
+      }
+
+      queryClient.invalidateQueries({ queryKey: ['bandMembers', currentArtistId] });
+      setNewMemberName('');
+      setNewMemberEmail('');
+      setShowAddMemberSheet(false);
+    } catch (error) {
+      console.error('Failed to add member:', error);
+    } finally {
+      setAddingMember(false);
+    }
+  };
 
   return (
     <CB51PINGuard>
@@ -213,16 +248,69 @@ export default function CB51() {
 
                 {/* BAND MEMBERS */}
                 <div className="bg-gray-900/50 p-5">
-                  <div className="flex items-center gap-3 mb-3">
-                    <Users className="w-5 h-5 text-cyan-400" />
-                    <h2 className="text-cyan-400 font-mono font-bold text-sm uppercase tracking-wider">Band Members</h2>
-                  </div>
                   <button
-                    onClick={() => setShowAddMemberSheet(true)}
-                    className="w-full border border-gray-700 hover:border-cyan-400 bg-black px-4 py-3 text-cyan-400 font-mono text-xs uppercase tracking-wider transition-colors"
+                    onClick={() => setShowAddMemberSheet(!showAddMemberSheet)}
+                    className="w-full flex items-center justify-between mb-3"
                   >
-                    + Add Member
+                    <div className="flex items-center gap-3">
+                      <Users className="w-5 h-5 text-cyan-400" />
+                      <h2 className="text-cyan-400 font-mono font-bold text-sm uppercase tracking-wider">Band Members</h2>
+                    </div>
+                    <motion.div
+                      animate={{ rotate: showAddMemberSheet ? 180 : 0 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <ChevronDown className="w-5 h-5 text-cyan-400" />
+                    </motion.div>
                   </button>
+                  
+                  <AnimatePresence>
+                    {showAddMemberSheet && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3, ease: "easeInOut" }}
+                        className="overflow-hidden"
+                      >
+                        <div className="pt-3 space-y-3">
+                          <input
+                            type="text"
+                            placeholder="Name"
+                            value={newMemberName}
+                            onChange={(e) => setNewMemberName(e.target.value)}
+                            className="w-full bg-black border border-gray-700 text-white px-3 py-2 font-mono text-sm"
+                          />
+                          <input
+                            type="email"
+                            placeholder="Email"
+                            value={newMemberEmail}
+                            onChange={(e) => setNewMemberEmail(e.target.value)}
+                            className="w-full bg-black border border-gray-700 text-white px-3 py-2 font-mono text-sm"
+                          />
+                          <div className="flex gap-2">
+                            <button
+                              onClick={() => {
+                                setShowAddMemberSheet(false);
+                                setNewMemberName('');
+                                setNewMemberEmail('');
+                              }}
+                              className="flex-1 border border-gray-700 hover:border-gray-500 px-3 py-2 text-gray-400 font-mono text-xs uppercase transition-colors"
+                            >
+                              Cancel
+                            </button>
+                            <button
+                              onClick={handleAddMember}
+                              disabled={!newMemberName.trim() || !newMemberEmail.trim() || addingMember}
+                              className="flex-1 bg-cyan-600 hover:bg-cyan-700 disabled:opacity-50 px-3 py-2 text-white font-mono text-xs uppercase transition-colors"
+                            >
+                              {addingMember ? '...' : 'Add'}
+                            </button>
+                          </div>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
 
                 {/* QUICK NAV */}
@@ -267,12 +355,6 @@ export default function CB51() {
             )}
           </div>
         </div>
-      <CB51AddBandMemberSheet
-        artistId={currentArtistId}
-        isOpen={showAddMemberSheet}
-        onClose={() => setShowAddMemberSheet(false)}
-        onMemberAdded={() => {}}
-      />
       </CB51ErrorBoundary>
       </CB51PINGuard>
       );
