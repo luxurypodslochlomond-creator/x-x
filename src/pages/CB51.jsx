@@ -55,15 +55,14 @@ export default function CB51() {
   const currentArtist = artists.find(a => a.id === currentArtistId);
 
   return (
-                      <CB51PINGuard>
-                        <CB51ErrorBoundary>
-                        <div className="min-h-screen bg-black text-white pb-20">
-
-                    {/* ARTIST GRID - Show 3 */}
-                    {artists.length > 0 && (
-                      <div className="px-4 pt-4 pb-2">
-                        <h3 className="text-cyan-400 text-xs font-bold uppercase tracking-wider mb-3">Artists</h3>
-                        <div className="grid grid-cols-3 gap-2 mb-4">
+    <CB51PINGuard>
+      <CB51ErrorBoundary>
+        <div className="min-h-screen bg-black text-white pb-20">
+          {/* ARTIST GRID - Show 3 */}
+          {artists.length > 0 && (
+            <div className="px-4 pt-4 pb-2">
+              <h3 className="text-cyan-400 text-xs font-bold uppercase tracking-wider mb-3">Artists</h3>
+              <div className="grid grid-cols-3 gap-2 mb-4">
                           {artists.slice(0, 2).map((artist) => (
                             <div key={artist.id} className="relative">
                               <button
@@ -113,138 +112,137 @@ export default function CB51() {
                               <p className="text-cyan-300 font-bold text-[10px]">More</p>
                             </button>
                           )}
-                        </div>
-                      </div>
-                    )}
+              </div>
+            </div>
+          )}
 
-                    {/* ARTIST MENU - Hidden dropdown */}
-                    <AnimatePresence>
-                      {showArtistMenu && (
-                        <motion.div
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          exit={{ opacity: 0 }}
-                          onClick={() => setShowArtistMenu(false)}
-                          className="fixed inset-0 z-40 bg-black/80"
+          {/* ARTIST MENU - Hidden dropdown */}
+          <AnimatePresence>
+            {showArtistMenu && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={() => setShowArtistMenu(false)}
+                className="fixed inset-0 z-40 bg-black/80"
+              >
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 20 }}
+                  onClick={(e) => e.stopPropagation()}
+                  className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-black border border-cyan-500/40 rounded-lg p-4 w-80 max-h-96 overflow-y-auto z-50"
+                >
+                  <h2 className="text-cyan-400 font-bold text-sm mb-3">Select Artist</h2>
+                  <div className="space-y-2">
+                    {artists.map((artist) => (
+                      <div key={artist.id} className="flex gap-2">
+                        <button
+                          onClick={() => {
+                            setActiveArtistId(artist.id);
+                            setShowArtistMenu(false);
+                          }}
+                          className={`flex-1 flex items-center gap-2 px-3 py-2 rounded transition-colors ${
+                            artist.id === currentArtistId
+                              ? 'bg-cyan-500/20 border border-cyan-400'
+                              : 'bg-black border border-cyan-500/20 hover:border-cyan-400'
+                          }`}
                         >
-                          <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: 20 }}
-                            onClick={(e) => e.stopPropagation()}
-                            className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-black border border-cyan-500/40 rounded-lg p-4 w-80 max-h-96 overflow-y-auto z-50"
-                          >
-                            <h2 className="text-cyan-400 font-bold text-sm mb-3">Select Artist</h2>
-                            <div className="space-y-2">
-                              {artists.map((artist) => (
-                                <div key={artist.id} className="flex gap-2">
-                                  <button
-                                    onClick={() => {
-                                      setActiveArtistId(artist.id);
-                                      setShowArtistMenu(false);
-                                    }}
-                                    className={`flex-1 flex items-center gap-2 px-3 py-2 rounded transition-colors ${
-                                      artist.id === currentArtistId
-                                        ? 'bg-cyan-500/20 border border-cyan-400'
-                                        : 'bg-black border border-cyan-500/20 hover:border-cyan-400'
-                                    }`}
-                                  >
-                                    {artist.profile_pic_url ? (
-                                      <img 
-                                        src={artist.profile_pic_url} 
-                                        alt={artist.name}
-                                        className="w-6 h-6 rounded-full object-cover flex-shrink-0"
-                                      />
-                                    ) : (
-                                      <div className="w-6 h-6 rounded-full bg-cyan-500 text-white font-black text-[9px] flex items-center justify-center flex-shrink-0">
-                                        {artist.name.charAt(0).toUpperCase()}
-                                      </div>
-                                    )}
-                                    <span className="text-cyan-300 font-bold text-xs flex-1 text-left truncate">{artist.name}</span>
-                                  </button>
-                                  <button
-                                    onClick={() => {
-                                      setShowArtistMenu(false);
-                                      navigate(createPageUrl(`CB51AddArtist?edit=${artist.id}`));
-                                    }}
-                                    className="bg-black border border-cyan-500/30 hover:border-cyan-400 text-cyan-400 rounded px-2 transition-colors"
-                                  >
-                                    <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-                                    </svg>
-                                  </button>
-                                </div>
-                              ))}
-                              <button
-                                onClick={() => {
-                                  setShowArtistMenu(false);
-                                  navigate(createPageUrl('CB51AddArtist'));
-                                }}
-                                className="w-full flex items-center justify-center gap-2 px-3 py-2 border border-green-500/30 hover:border-green-400 text-green-400 font-bold text-xs rounded transition-colors mt-2"
-                              >
-                                <Plus className="w-3 h-3" />
-                                Add New
-                              </button>
+                          {artist.profile_pic_url ? (
+                            <img 
+                              src={artist.profile_pic_url} 
+                              alt={artist.name}
+                              className="w-6 h-6 rounded-full object-cover flex-shrink-0"
+                            />
+                          ) : (
+                            <div className="w-6 h-6 rounded-full bg-cyan-500 text-white font-black text-[9px] flex items-center justify-center flex-shrink-0">
+                              {artist.name.charAt(0).toUpperCase()}
                             </div>
-                          </motion.div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-
-              {/* MAIN CONTENT - Manager-focused flow */}
-              <div className="px-4 pt-4 pb-32 space-y-4">
-
-                {/* PENDING APPROVALS BANNER - Urgent first */}
-                {currentArtistId && (
-                  <div>
-                    <h3 className="text-red-400 text-xs font-bold uppercase tracking-wider mb-2">⚠️ Action Required</h3>
-                    <CB51NotificationFeed artistId={currentArtistId} />
-                  </div>
-                )}
-
-                {/* QUICK ACTIONS - Grid system */}
-                <div>
-                  <h3 className="text-cyan-300 text-xs font-bold uppercase tracking-wider mb-2">Manager Tools</h3>
-                  <div className="grid grid-cols-2 gap-2">
-                    {[
-                      { icon: Mail, label: 'Email', color: 'cyan', route: 'ScottMessageInbox' },
-                      { icon: Calendar, label: 'Calendar', color: 'cyan', route: `ScottCalendarView?id=${currentArtistId}` },
-                      { icon: CheckCircle, label: 'Tasks', color: 'cyan', route: 'ScottToDo', badge: '5' },
-                      { icon: DollarSign, label: 'Finance', color: 'green', route: 'ScottFinanceAdmin' },
-                    ].map(({ icon: Icon, label, color, route, badge }) => (
-                      <button
-                        key={label}
-                        onClick={() => navigate(createPageUrl(currentArtistId ? `${route}?id=${currentArtistId}` : route))}
-                        className={`flex items-center justify-between px-3 py-2 rounded border text-xs font-bold transition-colors ${
-                          color === 'green'
-                            ? 'bg-black border-green-500/30 hover:border-green-400 text-green-400'
-                            : 'bg-black border-cyan-500/30 hover:border-cyan-400 text-cyan-400'
-                        }`}
-                      >
-                        <div className="flex items-center gap-2">
-                          <Icon className="w-4 h-4" />
-                          <span>{label}</span>
-                        </div>
-                        {badge && <span className="text-[10px] bg-white/10 px-1.5 py-0.5 rounded">{badge}</span>}
-                      </button>
+                          )}
+                          <span className="text-cyan-300 font-bold text-xs flex-1 text-left truncate">{artist.name}</span>
+                        </button>
+                        <button
+                          onClick={() => {
+                            setShowArtistMenu(false);
+                            navigate(createPageUrl(`CB51AddArtist?edit=${artist.id}`));
+                          }}
+                          className="bg-black border border-cyan-500/30 hover:border-cyan-400 text-cyan-400 rounded px-2 transition-colors"
+                        >
+                          <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                          </svg>
+                        </button>
+                      </div>
                     ))}
+                    <button
+                      onClick={() => {
+                        setShowArtistMenu(false);
+                        navigate(createPageUrl('CB51AddArtist'));
+                      }}
+                      className="w-full flex items-center justify-center gap-2 px-3 py-2 border border-green-500/30 hover:border-green-400 text-green-400 font-bold text-xs rounded transition-colors mt-2"
+                    >
+                      <Plus className="w-3 h-3" />
+                      Add New
+                    </button>
                   </div>
-                </div>
+                </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>
 
-                {/* GIG UPLOAD */}
-                <div>
-                  <h3 className="text-cyan-300 text-xs font-bold uppercase tracking-wider mb-2">New Gig</h3>
-                  {currentArtistId && (
-                    <CB51GigUploadParser 
-                      artistId={currentArtistId}
-                      onGigCreated={() => {}}
-                    />
-                  )}
-                </div>
+          {/* MAIN CONTENT - Manager-focused flow */}
+          <div className="px-4 pt-4 pb-32 space-y-4">
+
+            {/* PENDING APPROVALS BANNER - Urgent first */}
+            {currentArtistId && (
+              <div>
+                <h3 className="text-red-400 text-xs font-bold uppercase tracking-wider mb-2">⚠️ Action Required</h3>
+                <CB51NotificationFeed artistId={currentArtistId} />
+              </div>
+            )}
+
+            {/* QUICK ACTIONS - Grid system */}
+            <div>
+              <h3 className="text-cyan-300 text-xs font-bold uppercase tracking-wider mb-2">Manager Tools</h3>
+              <div className="grid grid-cols-2 gap-2">
+                {[
+                  { icon: Mail, label: 'Email', color: 'cyan', route: 'ScottMessageInbox' },
+                  { icon: Calendar, label: 'Calendar', color: 'cyan', route: `ScottCalendarView?id=${currentArtistId}` },
+                  { icon: CheckCircle, label: 'Tasks', color: 'cyan', route: 'ScottToDo', badge: '5' },
+                  { icon: DollarSign, label: 'Finance', color: 'green', route: 'ScottFinanceAdmin' },
+                ].map(({ icon: Icon, label, color, route, badge }) => (
+                  <button
+                    key={label}
+                    onClick={() => navigate(createPageUrl(currentArtistId ? `${route}?id=${currentArtistId}` : route))}
+                    className={`flex items-center justify-between px-3 py-2 rounded border text-xs font-bold transition-colors ${
+                      color === 'green'
+                        ? 'bg-black border-green-500/30 hover:border-green-400 text-green-400'
+                        : 'bg-black border-cyan-500/30 hover:border-cyan-400 text-cyan-400'
+                    }`}
+                  >
+                    <div className="flex items-center gap-2">
+                      <Icon className="w-4 h-4" />
+                      <span>{label}</span>
+                    </div>
+                    {badge && <span className="text-[10px] bg-white/10 px-1.5 py-0.5 rounded">{badge}</span>}
+                  </button>
+                ))}
               </div>
             </div>
 
-            </CB51ErrorBoundary>
-            </CB51PINGuard>
-            );
-  }
+            {/* GIG UPLOAD */}
+            <div>
+              <h3 className="text-cyan-300 text-xs font-bold uppercase tracking-wider mb-2">New Gig</h3>
+              {currentArtistId && (
+                <CB51GigUploadParser 
+                  artistId={currentArtistId}
+                  onGigCreated={() => {}}
+                />
+              )}
+            </div>
+          </div>
+        </div>
+      </CB51ErrorBoundary>
+    </CB51PINGuard>
+  );
+}
