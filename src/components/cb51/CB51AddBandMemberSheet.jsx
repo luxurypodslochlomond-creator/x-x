@@ -35,13 +35,14 @@ export default function CB51AddBandMemberSheet({ artistId, isOpen, onClose, onMe
       const artists = await base44.entities.Artist.filter({ id: artistId });
       
       if (artists?.length > 0) {
+        // Send CB51-branded invite (replaces generic base44 invites)
         await base44.functions.invoke('sendBandMemberInvite', {
           memberId: member.id,
           email: email.trim(),
           memberName: name.trim(),
           artistName: artists[0].name,
           artistId: artistId
-        });
+        }).catch(e => console.log('Custom email failed, member still created:', e));
       }
 
       return member;
