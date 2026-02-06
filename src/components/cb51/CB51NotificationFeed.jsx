@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import { base44 } from '@/api/base44Client';
-import { useQuery } from '@tanstack/react-query';
-import { CheckCircle, XCircle, Clock, Zap } from 'lucide-react';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { CheckCircle, XCircle, Clock, Zap, Loader } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function CB51NotificationFeed({ artistId }) {
   const [expandedId, setExpandedId] = useState(null);
+  const [rejectingId, setRejectingId] = useState(null);
+  const [rejectionReason, setRejectionReason] = useState('');
+  const queryClient = useQueryClient();
 
   const { data: pendingGigs = [] } = useQuery({
     queryKey: ['pendingGigs', artistId],
@@ -14,6 +17,42 @@ export default function CB51NotificationFeed({ artistId }) {
       status: 'manager_reviewing'
     }),
     enabled: !!artistId
+  });
+
+  const approveMutation = useMutation({
+    mutationFn: async (gigId) => {
+      await base44.asServiceRole.entities.GigOffer.update(gigId, {
+        status: 'band_voting'
+      });
+      
+      try {
+        await base44.functions.invoke('notifyBandGigOffer', {
+          gigOfferId: gigId,
+          artistId: artistId
+        });
+      } catch (err) {
+        console.log('Band notification queued:', err.message);
+      }
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['pendingGigs', artistId] });
+      setExpandedId(null);
+    }
+  });
+
+  const rejectMutation = useMutation({
+    mutationFn: async ({ gigId, reason }) => {
+      await base44.asServiceRole.entities.GigOffer.update(gigId, {
+        status: 'manager_rejected',
+        manager_rejection_reason: reason
+      });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['pendingGigs', artistId] });
+      setExpandedId(null);
+      setRejectingId(null);
+      setRejectionReason('');
+    }
   });
 
   if (pendingGigs.length === 0) {
@@ -56,14 +95,54 @@ export default function CB51NotificationFeed({ artistId }) {
                   </div>
                 )}
                 {gig.offer_details && <p className="text-[11px] text-gray-500 line-clamp-2">{gig.offer_details}</p>}
-                <div className="flex gap-1.5 mt-2">
-                  <button className="flex-1 px-2 py-1.5 bg-black border border-red-500/40 hover:border-red-400 text-red-400 text-[10px] font-bold rounded transition-colors">
-                    Reject
-                  </button>
-                  <button className="flex-1 px-2 py-1.5 bg-black border border-green-500/40 hover:border-green-400 text-green-400 text-[10px] font-bold rounded transition-colors">
-                    Approve
-                  </button>
-                </div>
+                
+                {rejectingId === gig.id ? (
+                  <div className="space-y-2 mt-2 bg-red-900/20 border border-red-500/30 rounded p-2">
+                    <textarea
+                      value={rejectionReason}
+                      onChange={(e) => setRejectionReason(e.target.value)}
+                      placeholder="Why reject? (e.g., date conflict, fee too low...)"
+                      className="w-full bg-black border border-red-500/30 rounded px-2 py-1.5 text-white text-[11px] placeholder-gray-600 h-12 resize-none"
+                      onClick={(e) => e.stopPropagation()}
+                    />
+                    <div className="flex gap-1.5">
+                      <button 
+                        onClick={(e) => { e.stopPropagation(); setRejectingId(null); setRejectionReason(''); }}
+                        className="flex-1 px-2 py-1.5 bg-white/10 hover:bg-white/20 text-white text-[10px] font-bold rounded"
+                      >
+                        Cancel
+                      </button>
+                      <button 
+                        onClick={(e) => { 
+                          e.stopPropagation(); 
+                          if (rejectionReason.trim()) {
+                            rejectMutation.mutate({ gigId: gig.id, reason: rejectionReason });
+                          }
+                        }}
+                        disabled={!rejectionReason.trim() || rejectMutation.isPending}
+                        className="flex-1 px-2 py-1.5 bg-red-600 hover:bg-red-700 disabled:opacity-50 text-white text-[10px] font-bold rounded flex items-center justify-center gap-1"
+                      >
+                        {rejectMutation.isPending ? <Loader className="w-3 h-3 animate-spin" /> : 'Confirm'}
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="flex gap-1.5 mt-2">
+                    <button 
+                      onClick={(e) => { e.stopPropagation(); setRejectingId(gig.id); }}
+                      className="flex-1 px-2 py-1.5 bg-black border border-red-500/40 hover:border-red-400 text-red-400 text-[10px] font-bold rounded transition-colors"
+                    >
+                      Reject
+                    </button>
+                    <button 
+                      onClick={(e) => { e.stopPropagation(); approveMutation.mutate(gig.id); }}
+                      disabled={approveMutation.isPending}
+                      className="flex-1 px-2 py-1.5 bg-black border border-green-500/40 hover:border-green-400 text-green-400 text-[10px] font-bold rounded transition-colors disabled:opacity-50 flex items-center justify-center gap-1"
+                    >
+                      {approveMutation.isPending ? <Loader className="w-3 h-3 animate-spin" /> : 'Approve'}
+                    </button>
+                  </div>
+                )}
               </motion.div>
             )}
           </AnimatePresence>
