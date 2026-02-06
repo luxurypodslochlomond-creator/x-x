@@ -271,7 +271,6 @@ import ScottAI51 from './pages/ScottAI51';
 import ScottAICoordinatorArchitecture from './pages/ScottAICoordinatorArchitecture';
 import ScottAbout from './pages/ScottAbout';
 import ScottAccommodation from './pages/ScottAccommodation';
-import ScottAddArtist from './pages/ScottAddArtist';
 import ScottAddShow from './pages/ScottAddShow';
 import ScottArtist from './pages/ScottArtist';
 import ScottArtistHome from './pages/ScottArtistHome';
@@ -380,6 +379,7 @@ import YoungWarriors from './pages/YoungWarriors';
 import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
+import CB51AddArtist from './pages/CB51AddArtist';
 import __Layout from './Layout.jsx';
 
 
@@ -608,7 +608,6 @@ export const PAGES = {
     "ScottAICoordinatorArchitecture": ScottAICoordinatorArchitecture,
     "ScottAbout": ScottAbout,
     "ScottAccommodation": ScottAccommodation,
-    "ScottAddArtist": ScottAddArtist,
     "ScottAddShow": ScottAddShow,
     "ScottArtist": ScottArtist,
     "ScottArtistHome": ScottArtistHome,
@@ -717,6 +716,7 @@ export const PAGES = {
     "ZeroEgoProtocol": ZeroEgoProtocol,
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
+    "CB51AddArtist": CB51AddArtist,
 }
 
 export const pagesConfig = {

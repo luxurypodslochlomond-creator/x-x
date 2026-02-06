@@ -4,11 +4,10 @@ import { createPageUrl } from '@/utils';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useQueryClient } from '@tanstack/react-query';
-import { ArrowLeft } from 'lucide-react';
-import { Radio } from 'lucide-react';
+import { ArrowLeft, Radio } from 'lucide-react';
 import { base44 } from '@/api/base44Client';
 
-export default function ScottAddArtist() {
+export default function CB51AddArtist() {
     const navigate = useNavigate();
     const queryClient = useQueryClient();
     const urlParams = new URLSearchParams(window.location.search);
@@ -27,7 +26,7 @@ export default function ScottAddArtist() {
     React.useEffect(() => {
         if (editId) {
             setLoading(true);
-            base44.entities.ScottArtist.filter({ id: editId })
+            base44.entities.Artist.filter({ id: editId })
                 .then(artists => {
                     if (artists.length > 0) {
                         const artist = artists[0];
@@ -57,23 +56,22 @@ export default function ScottAddArtist() {
         try {
             if (editId) {
                 // UPDATE existing artist
-                await base44.entities.ScottArtist.update(editId, {
+                await base44.entities.Artist.update(editId, {
                     name: formData.name,
                     phone: formData.phone,
                     email: formData.email,
                     profile_pic_url: formData.profile_pic_url
                 });
-                navigate(createPageUrl(`ScottArtistHome?id=${editId}`));
             } else {
-                // CREATE new artist - use Artist entity (migrated schema)
-                const newArtist = await base44.entities.Artist.create({
+                // CREATE new artist
+                await base44.entities.Artist.create({
                     name: formData.name,
                     phone: formData.phone,
                     email: formData.email,
                     profile_pic_url: formData.profile_pic_url
                 });
                 
-                // Send CB51 branded invitation (non-blocking - artist already saved)
+                // Send CB51 branded invitation (non-blocking)
                 if (formData.email) {
                     base44.functions.invoke('sendCB51BrandedInvite', {
                         email: formData.email,
@@ -81,12 +79,11 @@ export default function ScottAddArtist() {
                         artistName: formData.name
                     }).catch(e => console.log('Email send failed:', e));
                 }
-                
-                // Invalidate queries so CB51 dashboard updates
-                queryClient.invalidateQueries({ queryKey: ['cb51Artists'] });
-                
-                navigate(createPageUrl('CB51'));
             }
+            
+            // Invalidate queries so CB51 dashboard updates
+            queryClient.invalidateQueries({ queryKey: ['cb51Artists'] });
+            navigate(createPageUrl('CB51'));
         } catch (error) {
             alert('Error saving: ' + error.message);
             setSaving(false);
@@ -166,7 +163,7 @@ export default function ScottAddArtist() {
                     </div>
                 </div>
 
-                {/* FORM CARD - JUST 3 FIELDS */}
+                {/* FORM CARD */}
                 <div className="bg-black border-2 border-cyan-500/30 rounded-xl p-6 space-y-4">
 
                     {/* NAME */}

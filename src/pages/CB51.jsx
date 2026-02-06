@@ -89,7 +89,7 @@ export default function CB51() {
                             </button>
                           ))}
                           <button
-                            onClick={() => navigate(createPageUrl('ScottAddArtist'))}
+                            onClick={() => navigate(createPageUrl('CB51AddArtist'))}
                             className="flex flex-col items-center justify-center gap-1 p-2 rounded-lg bg-black border border-green-500/40 hover:border-green-400 transition-all"
                           >
                             <Plus className="w-6 h-6 text-green-400" />
@@ -157,7 +157,7 @@ export default function CB51() {
                               <button
                                 onClick={() => {
                                   setShowArtistMenu(false);
-                                  navigate(createPageUrl('ScottAddArtist'));
+                                  navigate(createPageUrl('CB51AddArtist'));
                                 }}
                                 className="w-full flex items-center justify-center gap-2 px-3 py-2 border border-green-500/30 hover:border-green-400 text-green-400 font-bold text-xs rounded transition-colors mt-2"
                               >
