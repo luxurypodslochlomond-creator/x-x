@@ -474,7 +474,7 @@ export default function Earth51() {
                 <div className="bg-green-500 border-4 border-green-400 p-3" style={{ boxShadow: '4px 4px 0px #000' }}>
                   <p className="text-black font-black font-mono text-[9px] mb-2">🔍 WHAT I FOUND:</p>
                   <div className="space-y-1">
-                    {allChecks.weight.items_detected.map((item, i) => (
+                    {allChecks.weight?.items_detected?.map((item, i) => (
                       <div key={i} className="bg-black/20 p-2 rounded flex items-center justify-between">
                         <div className="flex items-center gap-2">
                           <span className="text-sm">{item.item_type === 'bottle' ? '🍾' : item.item_type === 'wrapper' ? '🍬' : item.item_type === 'can' ? '🥫' : '🗑️'}</span>
@@ -492,7 +492,7 @@ export default function Earth51() {
                 <div className="bg-yellow-500 border-4 border-yellow-400 p-3" style={{ boxShadow: '4px 4px 0px #000' }}>
                   <p className="text-black font-black font-mono text-[9px] mb-2">🏢 BRANDS I SAW:</p>
                   <div className="flex flex-wrap gap-1">
-                    {allChecks.brands.brands.map((brand, i) => (
+                    {allChecks.brands?.brands?.map((brand, i) => (
                       <div key={i} className="bg-black/20 px-2 py-1 rounded">
                         <p className="text-black font-mono text-[7px]">{brand.brand_name}</p>
                       </div>
