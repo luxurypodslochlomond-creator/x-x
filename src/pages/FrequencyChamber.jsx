@@ -2824,62 +2824,84 @@ export default function FrequencyChamber() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-black via-purple-950/20 to-black text-white">
       
-      {/* SIMPLE BEAUTIFUL HEADER */}
-      <div className="p-6 md:p-8 bg-black/40 backdrop-blur-sm">
-        <div className="max-w-4xl mx-auto text-center space-y-4">
-          <motion.div
-            animate={{ scale: [1, 1.15, 1] }}
-            transition={{ duration: 3, repeat: Infinity }}
-          >
-            <COOLASFUCKWaves size={48} animate={true} />
-          </motion.div>
-          <h1 className="text-4xl md:text-5xl font-black text-white">Frequency Chamber</h1>
-          <p className="text-gray-300 text-sm">Ask your body what it needs. AI51 finds the frequency.</p>
-
-          {/* VALUE BADGES */}
-          <div className="flex flex-wrap justify-center gap-3 mt-6">
-            <div className="px-4 py-2 bg-green-500/20 border-2 border-green-500 rounded-lg">
-              <span className="text-green-400 font-black text-sm font-mono">OFFLINE</span>
-            </div>
-            <div className="px-4 py-2 bg-cyan-500/20 border-2 border-cyan-500 rounded-lg">
-              <span className="text-cyan-400 font-black text-sm font-mono">NO LOGIN</span>
-            </div>
-            <div className="px-4 py-2 bg-pink-500/20 border-2 border-pink-500 rounded-lg">
-              <span className="text-pink-400 font-black text-sm font-mono">FREE FOREVER</span>
+      {/* CLEAN HEADER */}
+      <div className="p-4 md:p-6 bg-black/60 backdrop-blur-sm border-b border-cyan-500/30">
+        <div className="max-w-4xl mx-auto flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <COOLASFUCKWaves size={32} animate={true} />
+            <h1 className="text-2xl md:text-3xl font-black text-white font-mono">Frequency Chamber</h1>
+          </div>
+          <div className="flex gap-2">
+            <div className="px-3 py-1 bg-green-500/20 border border-green-500 rounded">
+              <span className="text-green-400 font-black text-xs font-mono">OFFLINE</span>
             </div>
           </div>
         </div>
       </div>
       
-      {/* SMART INPUT - ASK YOUR PAIN */}
-      {!selectedProtocol && (
-        <div className="max-w-4xl mx-auto p-4 mb-6">
-          <VoiceHealing onProtocolRecommend={handleVoiceRecommendation} />
-        </div>
-      )}
-
-      {/* Chakra/Sciatica modes simplified */}
-
-      {/* TIME-BASED SUGGESTION - MOVED UP HERE */}
+      {/* TIME-BASED SUGGESTION - FIRST THING */}
       {!selectedProtocol && (
       <div className="max-w-4xl mx-auto p-4">
-        <div className="bg-black border-2 border-cyan-500/50 p-4">
-          <div className="flex items-center gap-3">
-            <Clock className="w-5 h-5 text-cyan-400" />
-            <div className="flex-1">
-              <p className="text-cyan-300 text-sm font-mono">
-                It's <strong className="text-white">{new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })}</strong> your time (GMT{(() => {
-                  const offset = -new Date().getTimezoneOffset() / 60;
-                  return offset >= 0 ? `+${offset}` : offset;
-                })()})
-              </p>
-              <p className="text-gray-500 text-xs font-mono mt-1">
-                We suggest: <strong style={{ color: PROTOCOLS[suggestedProtocol].color }}>{PROTOCOLS[suggestedProtocol].name}</strong> (marked "NOW" below)
-              </p>
-            </div>
+        <div className="bg-black border-2 border-cyan-500 p-4 flex items-center gap-3">
+          <Clock className="w-5 h-5 text-cyan-400 flex-shrink-0" />
+          <div className="flex-1">
+            <p className="text-cyan-300 text-sm font-mono">
+              It's <strong className="text-white">{new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })}</strong> your time (GMT{(() => {
+                const offset = -new Date().getTimezoneOffset() / 60;
+                return offset >= 0 ? `+${offset}` : offset;
+              })()})
+            </p>
+            <p className="text-gray-500 text-xs font-mono mt-1">
+              We suggest: <strong style={{ color: PROTOCOLS[suggestedProtocol].color }}>{PROTOCOLS[suggestedProtocol].name}</strong> (marked "NOW" below)
+            </p>
           </div>
         </div>
       </div>
+      )}
+
+      {/* URGENT HEALING - IMMEDIATE ACCESS */}
+      {!selectedProtocol && (
+        <div className="max-w-4xl mx-auto p-4">
+          <div className="bg-black border-4 border-red-500 p-6">
+            <div className="flex items-center gap-3 mb-4">
+              <COOLASFUCKFire size={28} animate={false} />
+              <h2 className="text-red-400 font-black text-xl font-mono">URGENT HEALING</h2>
+            </div>
+            <p className="text-gray-400 text-xs font-mono mb-4">
+              Pain relief NOW – Sciatica, teeth, brain fog, tinnitus, concussion, chronic pain, migraine, vertigo, TMJ
+            </p>
+            <div className="grid grid-cols-2 gap-3">
+              {['chakra51', 'sciatic_relief', 'dental_emergency', 'chronic_pain', 'brain_fog', 'tinnitus', 'migraine', 'concussion_recovery'].map(protocolId => {
+                const protocol = PROTOCOLS[protocolId];
+                if (!protocol) return null;
+                return (
+                  <motion.button
+                    key={protocolId}
+                    onClick={() => { handleProtocolSelect(protocolId); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                    whileTap={{ scale: 0.96 }}
+                    className="p-4 border-2 bg-black hover:bg-white/5 transition-all text-left"
+                    style={{ borderColor: protocol.color + '60' }}
+                  >
+                    <PixelIcon icon={protocol.icon} color={protocol.color} size={28} />
+                    <p className="text-xs font-black font-mono mt-2 text-white leading-tight">
+                      {protocol.name}
+                    </p>
+                    {protocol.config.isBinaural && (
+                      <p className="text-cyan-400 text-[9px] font-mono mt-1">HEADPHONES</p>
+                    )}
+                  </motion.button>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* SMART INPUT - VOICE/TEXT */}
+      {!selectedProtocol && (
+        <div className="max-w-4xl mx-auto p-4">
+          <VoiceHealing onProtocolRecommend={handleVoiceRecommendation} />
+        </div>
       )}
 
       {/* SPEAKERS vs HEADPHONES - COLLAPSIBLE */}
@@ -3310,39 +3332,7 @@ export default function FrequencyChamber() {
 
 
       
-      {/* FEATURED EMERGENCY - TOP POSITION FOR SPEED */}
-      {!selectedProtocol && (
-        <div className="max-w-4xl mx-auto p-4">
-          <div className="bg-gradient-to-r from-purple-500/30 to-pink-500/30 border-4 border-purple-500 rounded-2xl p-6 mb-6" style={{ boxShadow: '0 0 60px rgba(168, 85, 247, 0.7)' }}>
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <COOLASFUCKZap size={28} animate={true} />
-              <h2 className="text-purple-400 font-black text-2xl font-mono">INSTANT ACCESS</h2>
-            </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-              {['chakra51', 'neural_pathways', 'dental_emergency', 'sciatic_relief'].map(protocolId => {
-                const protocol = PROTOCOLS[protocolId];
-                return (
-                  <motion.button
-                    key={protocolId}
-                    onClick={() => { handleProtocolSelect(protocolId); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-                    whileTap={{ scale: 0.95 }}
-                    className="p-4 border-4 bg-black hover:bg-white/5 transition-all"
-                    style={{ borderColor: protocol.color, boxShadow: `0 0 20px ${protocol.color}60` }}
-                  >
-                    <PixelIcon icon={protocol.icon} color={protocol.color} size={32} />
-                    <p className="text-xs font-black font-mono mt-2" style={{ color: protocol.color }}>
-                      {protocol.name}
-                    </p>
-                  </motion.button>
-                );
-              })}
-            </div>
-            <p className="text-center text-gray-400 text-xs font-mono mt-4">
-              Feel something? Use it again. Your body knows. 
-            </p>
-          </div>
-        </div>
-      )}
+
 
       {/* PROTOCOL GRID - COLLAPSIBLE SECTIONS */}
       {!selectedProtocol && (
