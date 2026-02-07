@@ -12,6 +12,7 @@ import { base44 } from '@/api/base44Client';
  */
 
 const FREQUENCIES = [
+  // ORDER = IMPORTANCE (most universal needs first)
   {
     id: 'anger',
     name: 'ANGER RELEASE',
@@ -20,19 +21,8 @@ const FREQUENCIES = [
     color: '#ef4444',
     visual: 'fire',
     description: 'Rage → Calm power',
-    waveform: 'sawtooth', // Aggressive = distinct sound
-    harmonics: [792, 1188] // 2x, 3x for richness
-  },
-  {
-    id: 'pain',
-    name: 'PAIN RELIEF',
-    hz: 174,
-    icon: COOLASFUCKZap,
-    color: '#f59e0b',
-    visual: 'lightning',
-    description: 'Blocks pain signals',
-    waveform: 'square', // Sharp = blocks pain
-    harmonics: [348, 522]
+    waveform: 'sawtooth',
+    harmonics: [792, 1188, 1584]
   },
   {
     id: 'love',
@@ -42,8 +32,19 @@ const FREQUENCIES = [
     color: '#ec4899',
     visual: 'heart',
     description: 'Heals cells, calms heart',
-    waveform: 'sine', // Pure love = smooth
-    harmonics: [1056, 1584]
+    waveform: 'sine',
+    harmonics: [1056, 1584, 2112]
+  },
+  {
+    id: 'pain',
+    name: 'PAIN RELIEF',
+    hz: 174,
+    icon: COOLASFUCKZap,
+    color: '#f59e0b',
+    visual: 'lightning',
+    description: 'Blocks pain signals',
+    waveform: 'square',
+    harmonics: [348, 522, 696]
   },
   {
     id: 'calm',
@@ -54,19 +55,7 @@ const FREQUENCIES = [
     visual: 'waves',
     description: 'Natural harmony',
     waveform: 'sine',
-    harmonics: [864, 1296]
-  },
-  {
-    id: 'sleep',
-    name: 'DEEP SLEEP',
-    hz: 2,
-    icon: COOLASFUCKMoon,
-    color: '#3b82f6',
-    visual: 'moon',
-    description: 'Delta waves, full rest',
-    waveform: 'sine',
-    carrier: 100, // Make audible
-    harmonics: [4, 6]
+    harmonics: [864, 1296, 1728]
   },
   {
     id: 'focus',
@@ -78,7 +67,7 @@ const FREQUENCIES = [
     description: 'MIT proven, clears fog',
     waveform: 'sine',
     carrier: 200,
-    harmonics: [80, 120]
+    harmonics: [80, 120, 160]
   },
   {
     id: 'earth',
@@ -89,8 +78,20 @@ const FREQUENCIES = [
     visual: 'schumann',
     description: 'Ground to planet',
     waveform: 'sine',
-    carrier: 432, // Schumann × 55
-    harmonics: [15.66, 23.49]
+    carrier: 432,
+    harmonics: [15.66, 23.49, 31.32]
+  },
+  {
+    id: 'sleep',
+    name: 'DEEP SLEEP',
+    hz: 2,
+    icon: COOLASFUCKMoon,
+    color: '#3b82f6',
+    visual: 'moon',
+    description: 'Delta waves, full rest',
+    waveform: 'sine',
+    carrier: 100,
+    harmonics: [4, 6, 8]
   },
   {
     id: 'fear',
@@ -100,8 +101,8 @@ const FREQUENCIES = [
     color: '#06b6d4',
     visual: 'shield',
     description: 'Root chakra, safety',
-    waveform: 'triangle', // Different from anger
-    harmonics: [792, 1188]
+    waveform: 'triangle',
+    harmonics: [792, 1188, 1584]
   }
 ];
 
@@ -139,14 +140,14 @@ export default function FrequencyChamber() {
       masterGain.connect(analyser);
       analyser.connect(ctx.destination);
 
-      // PRIMARY FREQUENCY
+      // PRIMARY FREQUENCY (BOOSTED FOR SPEAKERS)
       const carrier = freq.carrier || freq.hz;
       const osc = ctx.createOscillator();
       osc.type = freq.waveform;
       osc.frequency.value = carrier;
       
       const gain = ctx.createGain();
-      gain.gain.value = 0.4;
+      gain.gain.value = 0.5; // Louder primary
       
       osc.connect(gain);
       gain.connect(masterGain);
