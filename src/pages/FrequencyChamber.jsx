@@ -153,18 +153,30 @@ export default function FrequencyChamber() {
       osc.start();
       nodes.push(osc, gain);
 
-      // HARMONICS (make each frequency richer + distinct)
+      // STACKED HARMONICS (max power, distinct sound per frequency)
       freq.harmonics.forEach((harmonic, i) => {
         const harmOsc = ctx.createOscillator();
-        harmOsc.type = 'sine';
+        harmOsc.type = freq.waveform; // Match waveform for coherence
         harmOsc.frequency.value = harmonic;
         const harmGain = ctx.createGain();
-        harmGain.gain.value = 0.15 / (i + 1);
+        harmGain.gain.value = 0.2 / (i + 1); // Stronger harmonics
         harmOsc.connect(harmGain);
         harmGain.connect(masterGain);
         harmOsc.start();
         nodes.push(harmOsc, harmGain);
       });
+
+      // SUBHARMONICS (depth + body resonance)
+      const subharmonic = carrier * 0.5;
+      const subOsc = ctx.createOscillator();
+      subOsc.type = 'sine';
+      subOsc.frequency.value = subharmonic;
+      const subGain = ctx.createGain();
+      subGain.gain.value = 0.15;
+      subOsc.connect(subGain);
+      subGain.connect(masterGain);
+      subOsc.start();
+      nodes.push(subOsc, subGain);
 
       // BINAURAL LAYER (if not already carrier-based)
       if (!freq.carrier && freq.hz > 10) {
@@ -214,13 +226,23 @@ export default function FrequencyChamber() {
         setTimer(t => t + 1);
       }, 1000);
 
+      console.log('✓ AUDIO ACTIVE');
+      console.log('Primary:', carrier, 'Hz');
+      console.log('Harmonics:', freq.harmonics.join(', '), 'Hz');
+      console.log('Waveform:', freq.waveform);
+      console.log('Total oscillators:', nodes.filter(n => n.frequency).length);
+
       // LOG TO AI51 (learns what you need when)
       try {
+        const user = await base44.auth.me().catch(() => null);
         await base44.entities.FrequencyPlay.create({
           frequency_id: freq.id,
           frequency_hz: freq.hz,
           time_of_day: new Date().getHours(),
-          device_type: /mobile/i.test(navigator.userAgent) ? 'mobile' : 'desktop'
+          device_type: /mobile/i.test(navigator.userAgent) ? 'mobile' : 'desktop',
+          waveform_type: freq.waveform,
+          healing_context: freq.description,
+          session_start: new Date().toISOString()
         });
       } catch (e) {
         console.log('AI51 learning (non-critical):', e);
@@ -326,12 +348,13 @@ export default function FrequencyChamber() {
 
   // VOLUME CHANGE
   useEffect(() => {
-    if (audioCtxRef.current && nodesRef.current.length > 0) {
-      const masterGain = nodesRef.current.find(n => n.gain);
-      if (masterGain?.gain) {
-        masterGain.gain.setTargetAtTime(volume, audioCtxRef.current.currentTime, 0.1);
+    nodesRef.current.forEach(node => {
+      if (node?.gain && audioCtxRef.current) {
+        try {
+          node.gain.setTargetAtTime(volume, audioCtxRef.current.currentTime, 0.1);
+        } catch (e) {}
       }
-    }
+    });
   }, [volume]);
 
   const formatTime = (s) => {
