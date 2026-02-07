@@ -27,8 +27,13 @@ export default function ScottArtistHome() {
     const { data: bandMembers = [] } = useQuery({
         queryKey: ['scottBandMembers', artistId],
         queryFn: async () => {
-            const allMembers = await base44.entities.ScottTeamMember.list();
-            return allMembers.filter(m => m.artist_access?.includes(artistId));
+            try {
+                const allMembers = await base44.entities.ScottTeamMember.list();
+                return allMembers.filter(m => m.artist_access?.includes(artistId));
+            } catch (e) {
+                console.log('Band members fetch error:', e);
+                return [];
+            }
         },
         enabled: !!artistId
     });
@@ -93,8 +98,11 @@ export default function ScottArtistHome() {
             } else {
                 navigate(createPageUrl('CB51'));
             }
+        }).catch(err => {
+            console.error('Artist fetch error:', err);
+            navigate(createPageUrl('CB51'));
         });
-    }, [artistId]);
+    }, [artistId, navigate]);
 
     if (!artist) {
         return (
