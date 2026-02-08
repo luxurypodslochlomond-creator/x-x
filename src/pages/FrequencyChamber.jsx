@@ -489,8 +489,9 @@ export default function FrequencyChamber() {
       const centerX = canvas.width / 2;
       const centerY = canvas.height / 2;
 
-      // MOBILE SCALE FACTOR (smaller rings on mobile)
-      const scaleFactor = Math.min(canvas.width, canvas.height) / 800;
+      // MOBILE SCALE FACTOR (smaller patterns on mobile)
+      const isMobile = canvas.width < 600;
+      const scaleFactor = isMobile ? Math.min(canvas.width, canvas.height) / 1200 : Math.min(canvas.width, canvas.height) / 800;
       const color = selected?.color || '#06b6d4';
       
       // Calculate audio intensity
@@ -513,8 +514,8 @@ export default function FrequencyChamber() {
       
       // OUTER RINGS - DUAL COLOR CHROMOTHERAPY (space medicine)
       for (let ring = 6; ring >= 0; ring--) {
-        const baseRadius = 60 + (ring * 70);
-        const radius = baseRadius + (bass * 150) + (breathIntensity * 80);
+        const baseRadius = (40 + (ring * 50)) * scaleFactor;
+        const radius = baseRadius + (bass * 150 * scaleFactor) + (breathIntensity * 80 * scaleFactor);
         const alpha = (0.4 + (intensity * 0.6) - (ring * 0.04)) * breathIntensity;
 
         // Alternate between primary and harmonic color per ring
@@ -631,7 +632,7 @@ export default function FrequencyChamber() {
         // HEART CHAKRA - expanding love field
         ctx.save();
         ctx.translate(centerX, centerY);
-        ctx.scale(0.8 + (bass * 0.4), 0.8 + (bass * 0.4));
+        ctx.scale((0.5 + (bass * 0.3)) * scaleFactor, (0.5 + (bass * 0.3)) * scaleFactor);
         
         ctx.strokeStyle = color;
         ctx.globalAlpha = 0.5 + (intensity * 0.3);
@@ -652,10 +653,10 @@ export default function FrequencyChamber() {
         for (let i = 0; i < 24; i++) {
           const angle = (i / 24) * Math.PI * 2 + time * 2;
           const spikeIntensity = dataArray[i * 2] / 255;
-          const length = 100 + (spikeIntensity * 200);
+          const length = (100 + (spikeIntensity * 200)) * scaleFactor;
           
-          const x1 = centerX + Math.cos(angle) * 60;
-          const y1 = centerY + Math.sin(angle) * 60;
+          const x1 = centerX + Math.cos(angle) * 60 * scaleFactor;
+          const y1 = centerY + Math.sin(angle) * 60 * scaleFactor;
           const x2 = centerX + Math.cos(angle) * length;
           const y2 = centerY + Math.sin(angle) * length;
           
@@ -678,10 +679,10 @@ export default function FrequencyChamber() {
         ctx.rotate(time * 0.5);
         
         const sides = 6; // Hexagon = strongest geometric form
-        const radius = 100 + (intensity * 100);
+        const radius = (100 + (intensity * 100)) * scaleFactor;
         
         for (let layer = 0; layer < 3; layer++) {
-          const layerRadius = radius - (layer * 40);
+          const layerRadius = radius - (layer * 40 * scaleFactor);
           ctx.strokeStyle = color;
           ctx.globalAlpha = 0.4 - (layer * 0.1) + (intensity * 0.3);
           ctx.lineWidth = 2 + (intensity * 3);
