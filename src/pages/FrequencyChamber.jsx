@@ -796,10 +796,10 @@ export default function FrequencyChamber() {
     <div className="min-h-screen bg-black text-white p-3 sm:p-4">
 
       {/* HEADER */}
-      <div className="max-w-6xl mx-auto mb-4 sm:mb-6 text-center px-2">
-        <div className="flex items-center justify-center gap-3 mb-3">
-          <COOLASFUCKWaves size={40} animate={true} />
-          <h1 className="text-3xl sm:text-5xl font-black bg-gradient-to-r from-cyan-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent">
+      <div className="max-w-6xl mx-auto mb-6 sm:mb-8 text-center px-2">
+        <div className="flex items-center justify-center gap-3 mb-4">
+          <COOLASFUCKWaves size={48} animate={true} />
+          <h1 className="text-4xl sm:text-6xl font-black bg-gradient-to-r from-cyan-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent">
             FREQUENCY CHAMBER
           </h1>
           {!isOnline && (
@@ -808,7 +808,7 @@ export default function FrequencyChamber() {
             </div>
           )}
         </div>
-        <p className="text-gray-300 text-base sm:text-lg">Where does it hurt? I'll send the healing frequency there ♾️❤️</p>
+        <p className="text-gray-200 text-lg sm:text-xl">Where does it hurt? I'll send the healing frequency there ♾️❤️</p>
 
         {/* DEVICE FILTER */}
         <div className="flex flex-wrap items-center justify-center gap-2 mt-4 sm:mt-6">
@@ -958,7 +958,7 @@ export default function FrequencyChamber() {
             onClick={() => play(freq)}
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            className="p-4 border-4 bg-black hover:bg-white/5 transition-all relative text-left"
+            className="p-6 border-4 bg-black hover:bg-white/5 transition-all relative text-left"
             style={{ 
               borderColor: ai51Recommendation?.frequencyId === freq.id ? freq.color : freq.color,
               boxShadow: ai51Recommendation?.frequencyId === freq.id 
@@ -969,64 +969,64 @@ export default function FrequencyChamber() {
           >
             {/* AI51 BADGE */}
             {ai51Recommendation?.frequencyId === freq.id && (
-              <div className="absolute -top-2 -right-2 bg-gradient-to-r from-cyan-500 to-pink-500 text-black text-[10px] font-black px-2 py-1 rounded">
+              <div className="absolute -top-2 -right-2 bg-gradient-to-r from-cyan-500 to-pink-500 text-black text-xs font-black px-3 py-1.5 rounded">
                 AI51 ✓
               </div>
             )}
-            <div className="flex items-start justify-between mb-3">
-              <div className="flex items-center gap-2">
-                <freq.icon size={36} animate={false} />
+            <div className="flex items-start justify-between mb-4">
+              <div className="flex items-center gap-3">
+                <freq.icon size={44} animate={false} />
                 {/* DEVICE INDICATOR */}
-                {freq.device === 'speaker' && <COOLASFUCKSpeaker size={16} animate={false} />}
-                {freq.device === 'headphones' && <COOLASFUCKHeadphones size={16} animate={false} />}
+                {freq.device === 'speaker' && <COOLASFUCKSpeaker size={20} animate={false} />}
+                {freq.device === 'headphones' && <COOLASFUCKHeadphones size={20} animate={false} />}
                 {freq.device === 'both' && (
                   <>
-                    <COOLASFUCKSpeaker size={16} animate={false} />
-                    <COOLASFUCKHeadphones size={16} animate={false} />
+                    <COOLASFUCKSpeaker size={20} animate={false} />
+                    <COOLASFUCKHeadphones size={20} animate={false} />
                   </>
                 )}
               </div>
               {/* TIMER */}
-              <div className="bg-white/10 px-2 py-1 rounded">
-                <p className="text-xs font-black font-mono" style={{ color: freq.color }}>
+              <div className="bg-white/10 px-3 py-1.5 rounded">
+                <p className="text-sm font-black font-mono" style={{ color: freq.color }}>
                   {freq.timer}
                 </p>
               </div>
             </div>
 
-            <p className="text-lg font-black font-mono" style={{ color: freq.color }}>
+            <p className="text-xl font-black" style={{ color: freq.color }}>
               {freq.name}
             </p>
-            <p className="text-gray-500 text-xs font-mono mt-1">
+            <p className="text-gray-500 text-sm font-mono mt-2">
               {freq.hz} Hz • {freq.waveform}
             </p>
-            <p className="text-gray-400 text-xs mt-2 leading-relaxed">
+            <p className="text-gray-300 text-sm mt-3 leading-relaxed">
               {freq.description}
             </p>
 
             {/* WAVEFORM INDICATOR */}
-            <div className="mt-3 flex items-center gap-2">
+            <div className="mt-4 flex items-center gap-3">
               {freq.waveform === 'sine' && (
-                <svg width="40" height="16" viewBox="0 0 40 16">
-                  <path d="M0,8 Q5,2 10,8 T20,8 T30,8 T40,8" stroke={freq.color} strokeWidth="2" fill="none" />
+                <svg width="50" height="20" viewBox="0 0 40 16">
+                  <path d="M0,8 Q5,2 10,8 T20,8 T30,8 T40,8" stroke={freq.color} strokeWidth="2.5" fill="none" />
                 </svg>
               )}
               {freq.waveform === 'square' && (
-                <svg width="40" height="16" viewBox="0 0 40 16">
-                  <path d="M0,12 L0,4 L8,4 L8,12 L16,12 L16,4 L24,4 L24,12 L32,12 L32,4 L40,4" stroke={freq.color} strokeWidth="2" fill="none" />
+                <svg width="50" height="20" viewBox="0 0 40 16">
+                  <path d="M0,12 L0,4 L8,4 L8,12 L16,12 L16,4 L24,4 L24,12 L32,12 L32,4 L40,4" stroke={freq.color} strokeWidth="2.5" fill="none" />
                 </svg>
               )}
               {freq.waveform === 'sawtooth' && (
-                <svg width="40" height="16" viewBox="0 0 40 16">
-                  <path d="M0,12 L8,4 L8,12 L16,4 L16,12 L24,4 L24,12 L32,4 L32,12 L40,4" stroke={freq.color} strokeWidth="2" fill="none" />
+                <svg width="50" height="20" viewBox="0 0 40 16">
+                  <path d="M0,12 L8,4 L8,12 L16,4 L16,12 L24,4 L24,12 L32,4 L32,12 L40,4" stroke={freq.color} strokeWidth="2.5" fill="none" />
                 </svg>
               )}
               {freq.waveform === 'triangle' && (
-                <svg width="40" height="16" viewBox="0 0 40 16">
-                  <path d="M0,12 L4,4 L8,12 L12,4 L16,12 L20,4 L24,12 L28,4 L32,12 L36,4 L40,12" stroke={freq.color} strokeWidth="2" fill="none" />
+                <svg width="50" height="20" viewBox="0 0 40 16">
+                  <path d="M0,12 L4,4 L8,12 L12,4 L16,12 L20,4 L24,12 L28,4 L32,12 L36,4 L40,12" stroke={freq.color} strokeWidth="2.5" fill="none" />
                 </svg>
               )}
-              <span className="text-[10px] text-gray-600 font-mono uppercase">{freq.waveform}</span>
+              <span className="text-xs text-gray-500 font-mono uppercase">{freq.waveform}</span>
             </div>
 
             {/* STACK SUGGESTIONS */}
