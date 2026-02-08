@@ -9,6 +9,7 @@ import CB51ErrorBoundary from '@/components/scott/CB51ErrorBoundary';
 import CB51PINGuard from '@/components/cb51/CB51PINGuard';
 import CB51NotificationFeed from '@/components/cb51/CB51NotificationFeed';
 import CB51GigUploadParser from '@/components/cb51/CB51GigUploadParser';
+import CB51PushSubscriptionManager from '@/components/cb51/CB51PushSubscriptionManager';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 export default function CB51() {
@@ -97,6 +98,9 @@ export default function CB51() {
     <CB51PINGuard>
       <CB51ErrorBoundary>
         <div className="min-h-screen bg-black text-white pb-20">
+          {/* PUSH NOTIFICATIONS - Setup */}
+          {user && <CB51PushSubscriptionManager userEmail={user.email} />}
+
           {/* ARTIST GRID - Show 3 */}
           {artists.length > 0 && (
             <div className="px-6 pt-6 pb-4">
