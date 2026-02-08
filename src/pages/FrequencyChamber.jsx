@@ -540,7 +540,7 @@ export default function FrequencyChamber() {
       ctx.rotate(rotation);
 
       const petalCount = 6;
-      const petalRadius = (70 + (mid * 80)) * scaleFactor;
+      const petalRadius = (50 + (mid * 60)) * scaleFactor;
       
       for (let i = 0; i < petalCount; i++) {
         const angle = (i / petalCount) * Math.PI * 2;
@@ -570,10 +570,10 @@ export default function FrequencyChamber() {
       ctx.restore();
 
       // PARTICLE FIELD - BRIGHT chromotherapy particles against black
-      const particleCount = canvas.width < 600 ? 80 : 150; // Fewer particles on mobile for performance
+      const particleCount = isMobile ? 60 : 120;
       for (let i = 0; i < particleCount; i++) {
         const angle = (i / particleCount) * Math.PI * 2 + time + (breathIntensity * 0.5);
-        const distance = (120 + (Math.sin(time * 2 + i) * 80) + (dataArray[i % bufferLength] / 255) * 180 + (breathIntensity * 50)) * scaleFactor;
+        const distance = (80 + (Math.sin(time * 2 + i) * 50) + (dataArray[i % bufferLength] / 255) * 120 + (breathIntensity * 30)) * scaleFactor;
         const x = centerX + Math.cos(angle) * distance;
         const y = centerY + Math.sin(angle) * distance;
         const size = 3 + (dataArray[i % bufferLength] / 255) * 8 * breathIntensity;
@@ -608,7 +608,7 @@ export default function FrequencyChamber() {
       }
 
       // CENTER CORE - BRIGHT chromotherapy nucleus against black
-      const coreRadius = (60 + (intensity * 120) + (breathIntensity * 100)) * scaleFactor;
+      const coreRadius = (40 + (intensity * 80) + (breathIntensity * 60)) * scaleFactor;
       const gradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, coreRadius);
       gradient.addColorStop(0, '#ffffff');
       gradient.addColorStop(0.15, color);
@@ -975,14 +975,14 @@ export default function FrequencyChamber() {
               <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                 <div className="relative">
                   {/* OUTER BREATHING RINGS */}
-                  {[...Array(4)].map((_, i) => (
+                  {[...Array(3)].map((_, i) => (
                     <motion.div
                       key={i}
                       className="absolute inset-0 rounded-full border-2"
                       style={{ 
                         borderColor: selected.color,
-                        width: 140 + (i * 50),
-                        height: 140 + (i * 50),
+                        width: 100 + (i * 40),
+                        height: 100 + (i * 40),
                         left: '50%',
                         top: '50%',
                         transform: 'translate(-50%, -50%)'
@@ -1002,7 +1002,7 @@ export default function FrequencyChamber() {
                   
                   {/* CENTER BREATHING CIRCLE */}
                   <motion.div 
-                    className="w-32 h-32 sm:w-40 sm:h-40 rounded-full border-4 flex flex-col items-center justify-center backdrop-blur-md relative"
+                    className="w-24 h-24 sm:w-32 sm:h-32 rounded-full border-4 flex flex-col items-center justify-center backdrop-blur-md relative"
                     style={{ 
                       borderColor: selected.color,
                       backgroundColor: `${selected.color}20`,
@@ -1041,7 +1041,7 @@ export default function FrequencyChamber() {
                         key={Math.floor(timer / 4) % 4}
                         initial={{ scale: 0.8, opacity: 0 }}
                         animate={{ scale: 1, opacity: 1 }}
-                        className="text-2xl sm:text-4xl font-black font-mono"
+                        className="text-xl sm:text-3xl font-black font-mono"
                         style={{ color: selected.color, textShadow: `0 0 20px ${selected.color}` }}
                       >
                         {(timer % 21) < 4 ? 'IN' : (timer % 21) < 11 ? 'HOLD' : (timer % 21) < 19 ? 'OUT' : 'PAUSE'}
