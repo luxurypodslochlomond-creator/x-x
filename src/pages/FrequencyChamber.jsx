@@ -542,7 +542,7 @@ export default function FrequencyChamber() {
       ctx.rotate(rotation);
 
       const petalCount = 6;
-      const petalRadius = (40 + (mid * 50)) * scaleFactor;
+      const petalRadius = (35 + (mid * 40)) * scaleFactor;
       
       for (let i = 0; i < petalCount; i++) {
         const angle = (i / petalCount) * Math.PI * 2;
@@ -571,11 +571,11 @@ export default function FrequencyChamber() {
       
       ctx.restore();
 
-      // PARTICLE FIELD - BRIGHT chromotherapy particles against black
-      const particleCount = isMobile ? 40 : 100;
+      // PARTICLE FIELD - golden ratio spiral
+      const particleCount = isMobile ? 30 : 80;
       for (let i = 0; i < particleCount; i++) {
         const angle = (i / particleCount) * Math.PI * 2 + time + (breathIntensity * 0.5);
-        const distance = (60 + (Math.sin(time * 2 + i) * 40) + (dataArray[i % bufferLength] / 255) * 100 + (breathIntensity * 25)) * scaleFactor;
+        const distance = (50 * Math.pow(PHI, i / 30) + (dataArray[i % bufferLength] / 255) * 80) * scaleFactor;
         const x = centerX + Math.cos(angle) * distance;
         const y = centerY + Math.sin(angle) * distance;
         const size = (2 + (dataArray[i % bufferLength] / 255) * 6 * breathIntensity) * (isMobile ? 0.8 : 1);
@@ -609,8 +609,8 @@ export default function FrequencyChamber() {
         ctx.stroke();
       }
 
-      // CENTER CORE - BRIGHT chromotherapy nucleus against black
-      const coreRadius = (30 + (intensity * 60) + (breathIntensity * 50)) * scaleFactor;
+      // CENTER CORE - golden ratio nucleus
+      const coreRadius = (25 * PHI + (intensity * 50) + (breathIntensity * 40)) * scaleFactor;
       const gradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, coreRadius);
       gradient.addColorStop(0, '#ffffff');
       gradient.addColorStop(0.15, color);
@@ -701,19 +701,6 @@ export default function FrequencyChamber() {
         }
         
         ctx.restore();
-      }
-
-      // FREQUENCY BARS - bottom edge
-      const barWidth = canvas.width / bufferLength;
-      for (let i = 0; i < bufferLength; i++) {
-        const barHeight = (dataArray[i] / 255) * 60;
-        const gradient = ctx.createLinearGradient(0, canvas.height - barHeight, 0, canvas.height);
-        gradient.addColorStop(0, color);
-        gradient.addColorStop(1, color + '00');
-        
-        ctx.fillStyle = gradient;
-        ctx.globalAlpha = 0.6;
-        ctx.fillRect(i * barWidth, canvas.height - barHeight, barWidth - 1, barHeight);
       }
 
       ctx.globalAlpha = 1;
