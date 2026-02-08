@@ -505,16 +505,14 @@ export default function FrequencyChamber() {
       const mid = (dataArray.slice(10, 30).reduce((a, b) => a + b) / 20 / 255) * 1.5;
       const high = (dataArray.slice(30, 60).reduce((a, b) => a + b) / 30 / 255) * 1.4;
 
-      // FREQUENCY-MATCHED COLOR PULSING (space medicine)
-      const hzPulse = Math.sin(time * (selected?.hz || 432) * 0.01) * 0.3 + 0.7; // Pulse at actual Hz
+      // FREQUENCY-MATCHED PULSE - actual Hz breathing
+      const hzPulse = Math.sin(time * (selected?.hz || 432) * 0.003) * 0.5 + 0.5; // Slower, deeper
       const primaryColor = selected?.color || '#06b6d4';
       const harmonicColor = selected?.color2 || '#ec4899';
 
-      // DUAL COLOR ENTRAINMENT (quantum biology)
-      const currentColor = hzPulse > 0.5 ? primaryColor : harmonicColor;
-
-      // SACRED GEOMETRY MANDALA - rotates with audio + breathing
-      const rotation = time * 0.4 + (intensity * 3) + (breathIntensity * 0.5);
+      // UNIVERSE BREATHING - deep, slow, alive
+      const universePulse = Math.sin(time * 0.3) * 0.3 + 0.7;
+      const rotation = time * 0.15; // Much slower - meditative
       
       // BREATHING AURA FIELD - soft, alive, warm
       const auraCount = isMobile ? 3 : 4;
