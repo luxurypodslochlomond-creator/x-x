@@ -488,6 +488,9 @@ export default function FrequencyChamber() {
 
       const centerX = canvas.width / 2;
       const centerY = canvas.height / 2;
+
+      // MOBILE SCALE FACTOR (smaller rings on mobile)
+      const scaleFactor = Math.min(canvas.width, canvas.height) / 800;
       const color = selected?.color || '#06b6d4';
       
       // Calculate audio intensity
