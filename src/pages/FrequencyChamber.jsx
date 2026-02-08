@@ -677,38 +677,95 @@ export default function FrequencyChamber() {
               </div>
             </div>
 
-            {/* VISUALIZER - SACRED GEOMETRY HEALING */}
+            {/* VISUALIZER - MATRIX-LEVEL HEALING CHAMBER */}
             <div className="flex-1 relative overflow-hidden bg-black">
+              {/* FULL SCREEN CANVAS */}
               <canvas
                 ref={canvasRef}
                 width={1200}
                 height={800}
                 className="absolute inset-0 w-full h-full"
+                style={{ 
+                  filter: `blur(0px) contrast(1.2) saturate(1.3)`,
+                  mixBlendMode: 'screen'
+                }}
               />
 
-              {/* FREQUENCY INFO - MINIMAL OVERLAY */}
-              <div className="absolute top-6 left-0 right-0 flex justify-center pointer-events-none px-4">
+              {/* DYNAMIC GRADIENT OVERLAY - pulses with audio */}
+              <motion.div
+                className="absolute inset-0 pointer-events-none"
+                animate={{
+                  background: [
+                    `radial-gradient(circle at 50% 50%, ${selected.color}20 0%, transparent 70%)`,
+                    `radial-gradient(circle at 50% 50%, ${selected.color}40 0%, transparent 60%)`,
+                    `radial-gradient(circle at 50% 50%, ${selected.color}20 0%, transparent 70%)`
+                  ]
+                }}
+                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+              />
+
+              {/* SCANLINE EFFECT - sci-fi aesthetic */}
+              <div 
+                className="absolute inset-0 pointer-events-none"
+                style={{
+                  background: `repeating-linear-gradient(
+                    0deg,
+                    rgba(255,255,255,0.03) 0px,
+                    transparent 2px,
+                    transparent 4px,
+                    rgba(255,255,255,0.03) 6px
+                  )`,
+                  animation: 'scanline 8s linear infinite'
+                }}
+              />
+
+              {/* FREQUENCY INFO - HOLOGRAPHIC HUD */}
+              <div className="absolute top-3 left-0 right-0 flex justify-center pointer-events-none px-2">
                 <motion.div
-                  className="text-center"
-                  animate={{ opacity: [0.7, 1, 0.7] }}
-                  transition={{ duration: 4, repeat: Infinity }}
+                  className="text-center backdrop-blur-sm bg-black/40 rounded-lg px-4 py-2 border"
+                  style={{ borderColor: `${selected.color}60` }}
+                  animate={{ opacity: [0.8, 1, 0.8] }}
+                  transition={{ duration: 3, repeat: Infinity }}
                 >
-                  <p className="text-lg sm:text-2xl font-black font-mono mb-1" style={{ color: selected.color, textShadow: `0 0 20px ${selected.color}` }}>
+                  <p className="text-base sm:text-xl font-black font-mono mb-0.5" style={{ color: selected.color, textShadow: `0 0 15px ${selected.color}` }}>
                     {selected.description.toUpperCase()}
                   </p>
-                  <p className="text-xs sm:text-sm text-gray-500 font-mono">
-                    {selected.hz} Hz • {selected.waveform} wave • Sacred geometry amplification
+                  <p className="text-[10px] sm:text-xs text-gray-400 font-mono">
+                    {selected.hz} Hz • {selected.waveform} • Sacred geometry
                   </p>
                 </motion.div>
               </div>
 
-              {/* BREATHING GUIDE - SYNCED WITH VISUALS */}
-              <div className="absolute bottom-24 sm:bottom-28 left-0 right-0 flex justify-center pointer-events-none px-4">
+              {/* PARTICLE FIELD OVERLAY - Matrix rain style */}
+              <div className="absolute inset-0 pointer-events-none overflow-hidden">
+                {[...Array(20)].map((_, i) => (
+                  <motion.div
+                    key={i}
+                    className="absolute w-0.5 h-8 rounded-full opacity-40"
+                    style={{ 
+                      left: `${(i * 5 + 2.5)}%`,
+                      background: `linear-gradient(to bottom, transparent, ${selected.color}, transparent)`
+                    }}
+                    animate={{
+                      y: ['-10%', '110%'],
+                      opacity: [0, 0.6, 0]
+                    }}
+                    transition={{
+                      duration: 3 + (i * 0.2),
+                      repeat: Infinity,
+                      ease: "linear",
+                      delay: i * 0.1
+                    }}
+                  />
+                ))}
+              </div>
+
+              {/* BREATHING GUIDE - CENTERED, PULSING */}
+              <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                 <motion.div
-                  className="w-24 h-24 sm:w-32 sm:h-32 rounded-full border-2 sm:border-4"
-                  style={{ borderColor: selected.color, backgroundColor: `${selected.color}10` }}
+                  className="relative"
                   animate={{
-                    scale: [0.7, 1.3, 0.7],
+                    scale: [0.8, 1.4, 0.8],
                   }}
                   transition={{
                     duration: 6,
@@ -716,11 +773,53 @@ export default function FrequencyChamber() {
                     ease: "easeInOut"
                   }}
                 >
-                  <div className="w-full h-full flex items-center justify-center">
+                  {/* OUTER RINGS */}
+                  {[...Array(3)].map((_, i) => (
+                    <motion.div
+                      key={i}
+                      className="absolute inset-0 rounded-full border-2"
+                      style={{ 
+                        borderColor: selected.color,
+                        width: 120 + (i * 40),
+                        height: 120 + (i * 40),
+                        left: '50%',
+                        top: '50%',
+                        transform: 'translate(-50%, -50%)'
+                      }}
+                      animate={{
+                        scale: [1, 1.2, 1],
+                        opacity: [0.3, 0.6, 0.3]
+                      }}
+                      transition={{
+                        duration: 6,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                        delay: i * 0.3
+                      }}
+                    />
+                  ))}
+                  
+                  {/* CENTER CIRCLE */}
+                  <div 
+                    className="w-28 h-28 sm:w-36 sm:h-36 rounded-full border-4 flex items-center justify-center backdrop-blur-sm relative"
+                    style={{ 
+                      borderColor: selected.color,
+                      backgroundColor: `${selected.color}15`,
+                      boxShadow: `0 0 40px ${selected.color}, inset 0 0 40px ${selected.color}30`
+                    }}
+                  >
+                    {/* INNER GLOW */}
+                    <div 
+                      className="absolute inset-2 rounded-full"
+                      style={{
+                        background: `radial-gradient(circle, ${selected.color}40 0%, transparent 70%)`
+                      }}
+                    />
+                    
                     <motion.p
-                      className="text-lg sm:text-2xl font-black font-mono"
-                      style={{ color: selected.color, textShadow: `0 0 10px ${selected.color}` }}
-                      animate={{ opacity: [0.5, 1, 0.5] }}
+                      className="text-xl sm:text-3xl font-black font-mono relative z-10"
+                      style={{ color: selected.color, textShadow: `0 0 20px ${selected.color}` }}
+                      animate={{ opacity: [0.7, 1, 0.7] }}
                       transition={{ duration: 3, repeat: Infinity }}
                     >
                       BREATHE
@@ -728,7 +827,20 @@ export default function FrequencyChamber() {
                   </div>
                 </motion.div>
               </div>
+
+              {/* CORNER MARKERS - HUD style */}
+              <div className="absolute top-4 left-4 w-8 h-8 border-l-2 border-t-2 pointer-events-none" style={{ borderColor: `${selected.color}60` }} />
+              <div className="absolute top-4 right-4 w-8 h-8 border-r-2 border-t-2 pointer-events-none" style={{ borderColor: `${selected.color}60` }} />
+              <div className="absolute bottom-32 left-4 w-8 h-8 border-l-2 border-b-2 pointer-events-none" style={{ borderColor: `${selected.color}60` }} />
+              <div className="absolute bottom-32 right-4 w-8 h-8 border-r-2 border-b-2 pointer-events-none" style={{ borderColor: `${selected.color}60` }} />
             </div>
+
+            <style>{`
+              @keyframes scanline {
+                0% { transform: translateY(0); }
+                100% { transform: translateY(20px); }
+              }
+            `}</style>
 
             {/* CONTROLS - BOTTOM BAR */}
             <div className="p-6 border-t" style={{ borderColor: `${selected.color}40` }}>
