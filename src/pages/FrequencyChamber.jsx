@@ -798,7 +798,7 @@ export default function FrequencyChamber() {
       <div className="max-w-6xl mx-auto mb-6 sm:mb-8 text-center px-2">
         <div className="flex items-center justify-center gap-3 mb-4">
           <COOLASFUCKWaves size={48} animate={true} />
-          <h1 className="text-4xl sm:text-6xl font-black bg-gradient-to-r from-cyan-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent">
+          <h1 className="text-4xl sm:text-6xl font-black text-cyan-400">
             FREQUENCY CHAMBER
           </h1>
           {!isOnline && (
@@ -807,7 +807,7 @@ export default function FrequencyChamber() {
             </div>
           )}
         </div>
-        <p className="text-gray-200 text-lg sm:text-xl">Where does it hurt? I'll send the healing frequency there ♾️❤️</p>
+        <p className="text-gray-200 text-lg sm:text-xl">Where does it hurt? I'll send the healing frequency there</p>
 
         {/* DEVICE FILTER */}
         <div className="flex flex-wrap items-center justify-center gap-2 mt-4 sm:mt-6">
@@ -931,7 +931,7 @@ export default function FrequencyChamber() {
       {/* FREQUENCY GRID */}
       {!isPlaying && (
       <div className="max-w-6xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {FREQUENCIES
           .filter(freq => {
             if (deviceFilter === 'all') return true;
@@ -945,7 +945,8 @@ export default function FrequencyChamber() {
             onClick={() => play(freq)}
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            className="p-6 border-4 bg-black hover:bg-white/5 transition-all relative text-left"
+            className="p-8 border-4 bg-black hover:bg-white/5 transition-all relative text-left h-full sticky"
+            style={{ top: `${(FREQUENCIES.indexOf(freq) % 3) * 20}px` }}
             style={{ 
               borderColor: ai51Recommendation?.frequencyId === freq.id ? freq.color : freq.color,
               boxShadow: ai51Recommendation?.frequencyId === freq.id 
