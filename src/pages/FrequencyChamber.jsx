@@ -819,21 +819,22 @@ export default function FrequencyChamber() {
 
               {/* REVOLUTIONARY PART */}
               <div className="pt-2 border-t border-pink-500/30">
-                <p className="text-pink-300 font-bold mb-1">🔥 FUCK BIG PHARMA - HERE'S WHY THIS WORKS:</p>
+                <p className="text-pink-300 font-bold mb-1">🔥 WHY THIS CHANGES EVERYTHING:</p>
                 <p>• <strong>Zero chemicals:</strong> Just physics. No pills. No side effects.<br/>
-                • <strong>Instant:</strong> Works in seconds (not weeks like drugs).<br/>
-                • <strong>Free forever:</strong> Can't patent sound waves.<br/>
-                • <strong>Personalized:</strong> AI51 learns YOUR body (drugs treat averages).<br/>
+                • <strong>Instant:</strong> Works in seconds (not weeks).<br/>
+                • <strong>FREE FOREVER:</strong> Can't patent sound waves. Open source (thanks Jack @ BitChat).<br/>
+                • <strong>Personalized:</strong> AI51 learns YOUR body (not averages).<br/>
                 • <strong>No addiction:</strong> Frequencies don't create dependency.<br/>
-                • <strong>Works offline:</strong> Your phone = your healer. No prescriptions needed.</p>
+                • <strong>Works offline:</strong> Your phone = your healer. No internet needed.<br/>
+                • <strong>Share P2P:</strong> BitChat-style mesh sharing. Help friends instantly.</p>
               </div>
 
               {/* THE MATH THEY DON'T TEACH */}
               <div className="pt-2 border-t border-cyan-500/30">
                 <p className="text-cyan-300 font-bold mb-1">📐 THE MATH THEY DON'T TEACH:</p>
-                <p>Pharma uses LINEAR math (one drug = one effect). Nature uses HARMONIC math (frequencies stack geometrically).<br/><br/>
+                <p>Traditional medicine uses LINEAR math (one treatment = one effect). Nature uses HARMONIC math (frequencies stack geometrically).<br/><br/>
                 <strong>Example:</strong> 528 Hz + 396 Hz doesn't equal 924 Hz of healing. It equals 528 × 396 = 209,088 Hz² of resonant amplification.<br/><br/>
-                That's why stacking works. That's why AI51 learns to stack PERFECTLY for YOUR body. That's the revolution.</p>
+                That's why stacking works. That's why AI51 learns to stack PERFECTLY for YOUR body. That's why we open-sourced it (inspired by BitChat - zero barriers to healing).</p>
               </div>
             </div>
 
