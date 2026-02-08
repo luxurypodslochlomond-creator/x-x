@@ -491,8 +491,7 @@ export default function FrequencyChamber() {
 
       // FREQUENCY-MATCHED COLOR PULSING (space medicine)
       const hzPulse = Math.sin(time * (selected?.hz || 432) * 0.01) * 0.3 + 0.7; // Pulse at actual Hz
-      const color = selected?.color || '#06b6d4'; // Primary color (keep for compatibility)
-      const primaryColor = color;
+      const primaryColor = selected?.color || '#06b6d4';
       const harmonicColor = selected?.color2 || '#ec4899';
 
       // DUAL COLOR ENTRAINMENT (quantum biology)
