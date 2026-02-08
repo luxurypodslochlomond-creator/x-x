@@ -932,18 +932,6 @@ export default function FrequencyChamber() {
       {/* FREQUENCY GRID */}
       {!isPlaying && (
       <div className="max-w-6xl mx-auto">
-        {/* AI51 LEARNING */}
-        <AI51FrequencyLearning 
-          onRecommendation={(rec) => {
-            setAI51Recommendation(rec);
-            // Highlight recommended frequency
-            const freq = FREQUENCIES.find(f => f.id === rec.frequencyId);
-            if (freq) {
-              console.log('AI51 recommends:', freq.name, '-', rec.reason);
-            }
-          }}
-        />
-
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {FREQUENCIES
           .filter(freq => {
