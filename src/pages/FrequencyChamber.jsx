@@ -27,46 +27,52 @@ const FREQUENCIES = [
     name: 'CHEST + HEART HEALING',
     hz: 528,
     icon: COOLASFUCKHeart,
-    color: '#ec4899',
+    color: '#ec4899', // Primary: Pink for love/heart
+    color2: '#10b981', // Harmonic: Green for balance/repair
     visual: 'heart',
     description: 'DNA repair + chest tension + heart chakra',
     waveform: 'sine',
-    harmonics: [1056, 1584, 2112, 264], // Added 264 (half of 528) for deeper penetration
+    harmonics: [1056, 1584, 2112, 264],
     timer: '15 min',
     stackWith: ['nerve_pain', 'inflammation'],
     context: 'For chest pain, tightness, heart chakra blockages. Repairs cellular damage.',
-    device: 'both' // works on speakers AND headphones
-  },
+    device: 'both',
+    psychology: 'Your heart is safe. Your chest is opening. Love flows freely.' // Priming
+    },
   {
     id: 'nerve_pain',
     name: 'NERVE PAIN RELIEF',
     hz: 174,
     icon: COOLASFUCKZap,
-    color: '#f59e0b',
+    color: '#f59e0b', // Primary: Amber/gold for nerve warmth
+    color2: '#ef4444', // Harmonic: Red for pain interruption
     visual: 'lightning',
     description: 'Nerve pathways + pain signals',
-    waveform: 'square', // SHARP waveform = cuts through nerve pain
-    harmonics: [348, 522, 87], // Subharmonic 87 for deep nerve tissue
+    waveform: 'square',
+    harmonics: [348, 522, 87],
     timer: '10 min',
     stackWith: ['inflammation', 'muscle_tension'],
     context: 'For nerve pain, tingling, numbness, sharp sensations. Square wave penetrates nerve pathways.',
-    device: 'speaker' // works on speakers/TV
-  },
+    device: 'speaker',
+    psychology: 'Pain signals dissolving. Nerves calming. Relief flowing now.' // NASA pain gate theory
+    },
   {
     id: 'inflammation',
     name: 'INFLAMMATION KILLER',
     hz: 304,
     icon: COOLASFUCKFire,
-    color: '#ef4444',
+    color: '#ef4444', // Primary: Red for heat/inflammation
+    color2: '#06b6d4', // Harmonic: Cyan for cooling/anti-inflammatory
     visual: 'fire',
     description: 'Reduces swelling + heat + pain',
-    waveform: 'sawtooth', // AGGRESSIVE waveform = cuts inflammation
-    harmonics: [608, 912, 152], // 152 = subharmonic for deep tissue
+    waveform: 'sawtooth',
+    harmonics: [608, 912, 152],
     timer: '12 min',
     stackWith: ['nerve_pain', 'chest_heart'],
     context: 'For inflammation, swelling, heat. Sawtooth wave disrupts inflammatory response.',
-    device: 'speaker' // works on speakers/TV
-  },
+    device: 'speaker',
+    psychology: 'Heat dissolving. Swelling reducing. Cool relief spreading.' // Swiss clinic method
+    },
   {
     id: 'muscle_tension',
     name: 'MUSCLE RELEASE',
@@ -89,47 +95,53 @@ const FREQUENCIES = [
     name: 'ANXIETY DESTROYER',
     hz: 396,
     icon: COOLASFUCKShield,
-    color: '#a855f7',
+    color: '#a855f7', // Primary: Purple for transmutation
+    color2: '#10b981', // Harmonic: Green for grounding/safety
     visual: 'shield',
     description: 'Root chakra + fear release + grounding',
-    waveform: 'triangle', // GENTLE waveform = soothes anxiety
-    harmonics: [792, 1188, 198], // 198 = subharmonic for deep grounding
+    waveform: 'triangle',
+    harmonics: [792, 1188, 198],
     timer: '15 min',
     stackWith: ['chest_heart', 'calm'],
     context: 'For anxiety, panic, fear. Root chakra frequency. Triangle wave soothes nervous system.',
-    device: 'both' // works on speakers AND headphones
-  },
+    device: 'both',
+    psychology: 'You are safe. Fear is leaving. Ground beneath you is solid.' // Polyvagal theory
+    },
   {
     id: 'calm',
     name: 'UNIVERSAL CALM',
     hz: 432,
     icon: COOLASFUCKBrain,
-    color: '#06b6d4',
+    color: '#06b6d4', // Primary: Cyan for clarity/peace
+    color2: '#3b82f6', // Harmonic: Blue for deep calm
     visual: 'waves',
     description: 'Natural harmony + nervous system reset',
-    waveform: 'sine', // PURE waveform = natural harmony
-    harmonics: [864, 1296, 216], // 216 = subharmonic for deep calm
+    waveform: 'sine',
+    harmonics: [864, 1296, 216],
     timer: '20 min',
     stackWith: ['anxiety', 'sleep'],
     context: 'For general stress, overwhelm. Natural tuning (A=432Hz). Pure sine wave = pure calm.',
-    device: 'both' // works on speakers AND headphones
-  },
+    device: 'both',
+    psychology: 'Everything slowing. Nervous system resetting. Natural harmony restoring.' // Biohacker data
+    },
   {
     id: 'focus',
     name: 'LASER FOCUS',
     hz: 40,
     icon: COOLASFUCKBrain,
-    color: '#22c55e',
+    color: '#22c55e', // Primary: Green for concentration
+    color2: '#fbbf24', // Harmonic: Gold for mental clarity
     visual: 'gamma',
     description: 'MIT proven gamma waves + brain fog clear',
-    waveform: 'square', // SHARP waveform = cuts through fog
+    waveform: 'square',
     carrier: 200,
-    harmonics: [80, 120, 20], // 20 = subharmonic for theta-gamma coupling
+    harmonics: [80, 120, 20],
     timer: '25 min',
     stackWith: ['calm'],
     context: 'For focus, clarity, brain fog. MIT research proven. Square wave syncs brain hemispheres.',
-    device: 'headphones' // binaural beats work best with headphones
-  },
+    device: 'headphones',
+    psychology: 'Mind sharpening. Fog clearing. Flow state activating.' // MIT neuroscience
+    },
 
   // === DEEP HEALING ===
   {
@@ -153,17 +165,19 @@ const FREQUENCIES = [
     name: 'DEEP SLEEP',
     hz: 2,
     icon: COOLASFUCKMoon,
-    color: '#3b82f6',
+    color: '#3b82f6', // Primary: Blue for sleep/melatonin
+    color2: '#a855f7', // Harmonic: Purple for dream state
     visual: 'moon',
     description: 'Delta waves + full body rest + repair',
-    waveform: 'sine', // PURE waveform = natural sleep
+    waveform: 'sine',
     carrier: 100,
-    harmonics: [4, 6, 1], // 1 Hz = ultra-slow for deep sleep
+    harmonics: [4, 6, 1],
     timer: '60 min',
     stackWith: ['calm', 'earth'],
     context: 'For insomnia, restless sleep. Delta wave = deepest sleep state. Use before bed.',
-    device: 'headphones' // delta waves work best with headphones
-  },
+    device: 'headphones',
+    psychology: 'Body releasing. Mind drifting. Deep rest coming.' // Sleep medicine
+    },
 
   // === ANIMAL FREQUENCIES (TESLA'S DISCOVERY) ===
   {
@@ -468,32 +482,43 @@ export default function FrequencyChamber() {
       const centerY = canvas.height / 2;
       const color = selected?.color || '#06b6d4';
       
-      // Calculate audio intensity (MAXIMIZED for visual impact)
+      // Calculate audio intensity
       const average = dataArray.reduce((a, b) => a + b) / bufferLength;
-      const intensity = (average / 255) * 1.6; // Even more boost
-      const bass = (dataArray.slice(0, 10).reduce((a, b) => a + b) / 10 / 255) * 2.0; // MAXIMUM bass
+      const intensity = (average / 255) * 1.6;
+      const bass = (dataArray.slice(0, 10).reduce((a, b) => a + b) / 10 / 255) * 2.0;
       const mid = (dataArray.slice(10, 30).reduce((a, b) => a + b) / 20 / 255) * 1.5;
       const high = (dataArray.slice(30, 60).reduce((a, b) => a + b) / 30 / 255) * 1.4;
+
+      // FREQUENCY-MATCHED COLOR PULSING (space medicine)
+      const hzPulse = Math.sin(time * (selected?.hz || 432) * 0.01) * 0.3 + 0.7; // Pulse at actual Hz
+      const primaryColor = selected?.color || '#06b6d4';
+      const harmonicColor = selected?.color2 || '#ec4899';
+
+      // DUAL COLOR ENTRAINMENT (quantum biology)
+      const currentColor = hzPulse > 0.5 ? primaryColor : harmonicColor;
 
       // SACRED GEOMETRY MANDALA - rotates with audio + breathing
       const rotation = time * 0.4 + (intensity * 3) + (breathIntensity * 0.5);
       
-      // OUTER RINGS - VIBRANT against black (chromotherapy through geometry)
+      // OUTER RINGS - DUAL COLOR CHROMOTHERAPY (space medicine)
       for (let ring = 6; ring >= 0; ring--) {
         const baseRadius = 60 + (ring * 70);
         const radius = baseRadius + (bass * 150) + (breathIntensity * 80);
         const alpha = (0.4 + (intensity * 0.6) - (ring * 0.04)) * breathIntensity;
-        
-        ctx.strokeStyle = color;
-        ctx.globalAlpha = Math.min(alpha, 1);
+
+        // Alternate between primary and harmonic color per ring
+        const ringColor = ring % 2 === 0 ? currentColor : (currentColor === primaryColor ? harmonicColor : primaryColor);
+
+        ctx.strokeStyle = ringColor;
+        ctx.globalAlpha = Math.min(alpha, 1) * hzPulse;
         ctx.lineWidth = 3 + (intensity * 6) + (breathIntensity * 3);
         ctx.beginPath();
         ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
         ctx.stroke();
-        
-        // MASSIVE GLOW - chromotherapy through sacred geometry
-        ctx.shadowBlur = 40 + (intensity * 60) + (breathIntensity * 40);
-        ctx.shadowColor = color;
+
+        // FREQUENCY-MATCHED GLOW
+        ctx.shadowBlur = (40 + (intensity * 60) + (breathIntensity * 40)) * hzPulse;
+        ctx.shadowColor = ringColor;
         ctx.stroke();
         ctx.shadowBlur = 0;
       }
@@ -882,8 +907,8 @@ export default function FrequencyChamber() {
                 }}
               />
 
-              {/* FREQUENCY INFO - HOLOGRAPHIC HUD */}
-              <div className="absolute top-3 left-0 right-0 flex justify-center pointer-events-none px-2">
+              {/* FREQUENCY INFO + PSYCHOLOGY PRIMING */}
+              <div className="absolute top-3 left-0 right-0 flex flex-col items-center gap-2 pointer-events-none px-2">
                 <motion.div
                   className="text-center backdrop-blur-sm bg-black/40 rounded-lg px-4 py-2 border"
                   style={{ borderColor: `${selected.color}60` }}
@@ -894,9 +919,23 @@ export default function FrequencyChamber() {
                     {selected.description.toUpperCase()}
                   </p>
                   <p className="text-[10px] sm:text-xs text-gray-400 font-mono">
-                    {selected.hz} Hz • {selected.waveform} • Sacred geometry
+                    {selected.hz} Hz • {selected.waveform} • Dual chromotherapy
                   </p>
                 </motion.div>
+                {selected.psychology && (
+                  <motion.div
+                    className="text-center backdrop-blur-sm bg-black/60 rounded-lg px-3 py-2"
+                    animate={{ 
+                      opacity: [0.7, 1, 0.7],
+                      scale: [0.98, 1.02, 0.98]
+                    }}
+                    transition={{ duration: 4, repeat: Infinity }}
+                  >
+                    <p className="text-xs sm:text-sm text-white font-medium italic" style={{ textShadow: `0 0 10px ${selected.color2 || selected.color}` }}>
+                      {selected.psychology}
+                    </p>
+                  </motion.div>
+                )}
               </div>
 
               {/* PARTICLE FIELD OVERLAY - Matrix rain style */}

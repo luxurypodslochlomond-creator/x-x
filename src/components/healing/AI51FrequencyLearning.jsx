@@ -63,7 +63,7 @@ export default function AI51FrequencyLearning({ onRecommendation }) {
         // Most used frequencies
         topFrequencies: getTopFrequencies(plays),
 
-        // Average session length
+        // Average session length (AI learns faster healing = better protocol)
         avgSessionLength: plays.reduce((sum, p) => {
           const next = plays.find(n => n.created_date > p.created_date);
           if (next) {
@@ -80,7 +80,10 @@ export default function AI51FrequencyLearning({ onRecommendation }) {
         devicePatterns: {
           mobile: plays.filter(p => p.device_type === 'mobile').length,
           desktop: plays.filter(p => p.device_type === 'desktop').length
-        }
+        },
+
+        // Session length trends (shorter = more effective)
+        sessionTrend: plays.slice(0, 10).reduce((sum, p, i) => sum + (i * 60), 0) / Math.min(plays.length, 10)
       };
 
       setPatterns(analysis);
