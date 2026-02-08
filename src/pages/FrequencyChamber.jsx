@@ -482,18 +482,21 @@ export default function FrequencyChamber() {
       
       breathingPhaseRef.current = breathPhase;
 
-      // PURE BLACK BACKGROUND - makes geometry VISIBLE for maximum healing
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.2)'; // Slight fade for trails
+      // DEEP BLACK - universe canvas
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.08)'; // Softer fade for organic trails
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       const centerX = canvas.width / 2;
       const centerY = canvas.height / 2;
 
-      // MOBILE SCALE FACTOR + GOLDEN RATIO
+      // SCALE - smaller, more intimate
       const isMobile = canvas.width < 600;
-      const scaleFactor = isMobile ? Math.min(canvas.width, canvas.height) / 2000 : Math.min(canvas.width, canvas.height) / 1200;
-      const PHI = 1.618033988749; // Golden ratio - sacred geometry
+      const scaleFactor = isMobile ? Math.min(canvas.width, canvas.height) / 2400 : Math.min(canvas.width, canvas.height) / 1400;
+      const PHI = 1.618033988749;
       const color = selected?.color || '#06b6d4';
+      
+      // ORGANIC NOISE - nothing perfect in nature
+      const noise = Math.sin(time * 0.5) * 0.1;
       
       // Calculate audio intensity
       const average = dataArray.reduce((a, b) => a + b) / bufferLength;
@@ -513,118 +516,121 @@ export default function FrequencyChamber() {
       // SACRED GEOMETRY MANDALA - rotates with audio + breathing
       const rotation = time * 0.4 + (intensity * 3) + (breathIntensity * 0.5);
       
-      // GOLDEN RATIO RINGS - true sacred geometry
-      const ringCount = isMobile ? 4 : 5;
-      for (let ring = ringCount; ring >= 0; ring--) {
-        const baseRadius = (40 * Math.pow(PHI, ring / 2)) * scaleFactor; // Golden ratio spacing
-        const radius = baseRadius + (bass * 80 * scaleFactor) + (breathIntensity * 50 * scaleFactor);
-        const alpha = (0.4 + (intensity * 0.6) - (ring * 0.04)) * breathIntensity;
-
-        // Alternate between primary and harmonic color per ring
-        const ringColor = ring % 2 === 0 ? currentColor : (currentColor === primaryColor ? harmonicColor : primaryColor);
-
-        ctx.strokeStyle = ringColor;
-        ctx.globalAlpha = Math.min(alpha, 1) * hzPulse;
-        ctx.lineWidth = 3 + (intensity * 6) + (breathIntensity * 3);
+      // BREATHING AURA FIELD - soft, alive, warm
+      const auraCount = isMobile ? 3 : 4;
+      for (let aura = auraCount; aura >= 0; aura--) {
+        const breathScale = 0.7 + (breathIntensity * 0.6); // BIGGER breathing
+        const baseRadius = (60 + (aura * 80)) * scaleFactor * breathScale;
+        const radius = baseRadius + (bass * 40 * scaleFactor) + (noise * 20);
+        
+        // MASSIVE SOFT GLOW - feels warm
+        const gradient = ctx.createRadialGradient(centerX, centerY, radius * 0.3, centerX, centerY, radius);
+        gradient.addColorStop(0, primaryColor + 'ff');
+        gradient.addColorStop(0.3, primaryColor + '80');
+        gradient.addColorStop(0.6, harmonicColor + '40');
+        gradient.addColorStop(1, harmonicColor + '00');
+        
+        ctx.strokeStyle = gradient;
+        ctx.globalAlpha = (0.15 + (intensity * 0.2)) * universePulse * breathIntensity;
+        ctx.lineWidth = 60 + (aura * 40); // THICK = soft
+        ctx.shadowBlur = 120 + (breathIntensity * 100); // MASSIVE blur
+        ctx.shadowColor = aura % 2 === 0 ? primaryColor : harmonicColor;
+        
         ctx.beginPath();
         ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
-        ctx.stroke();
-
-        // FREQUENCY-MATCHED GLOW
-        ctx.shadowBlur = (40 + (intensity * 60) + (breathIntensity * 40)) * hzPulse;
-        ctx.shadowColor = ringColor;
         ctx.stroke();
         ctx.shadowBlur = 0;
       }
 
-      // FLOWER OF LIFE PATTERN - BRIGHT sacred geometry for chromotherapy
+      // CONSCIOUSNESS PETALS - organic, flowing
       ctx.save();
       ctx.translate(centerX, centerY);
-      ctx.rotate(rotation);
+      ctx.rotate(rotation * 0.5); // Slower
 
       const petalCount = 6;
-      const petalRadius = (30 + (mid * 35)) * scaleFactor;
+      const petalRadius = (25 + (mid * 25)) * scaleFactor * (0.9 + breathIntensity * 0.3);
       
       for (let i = 0; i < petalCount; i++) {
         const angle = (i / petalCount) * Math.PI * 2;
-        const x = Math.cos(angle) * petalRadius;
-        const y = Math.sin(angle) * petalRadius;
+        const organicOffset = Math.sin(time * 0.8 + i) * 15 * scaleFactor; // Organic movement
+        const x = Math.cos(angle) * (petalRadius + organicOffset);
+        const y = Math.sin(angle) * (petalRadius + organicOffset);
         
-        // BRIGHT petal circle with glow
-        ctx.strokeStyle = color;
-        ctx.globalAlpha = 0.6 + (intensity * 0.4);
-        ctx.lineWidth = 4 + (intensity * 4);
-        ctx.shadowBlur = 30;
+        // SOFT PETAL with radial gradient
+        const petalGradient = ctx.createRadialGradient(x, y, 0, x, y, petalRadius * 1.5);
+        petalGradient.addColorStop(0, primaryColor + 'ff');
+        petalGradient.addColorStop(0.4, harmonicColor + 'aa');
+        petalGradient.addColorStop(1, color + '00');
+        
+        ctx.fillStyle = petalGradient;
+        ctx.globalAlpha = (0.25 + (intensity * 0.3)) * breathIntensity;
+        ctx.shadowBlur = 80; // Massive soft glow
         ctx.shadowColor = color;
         ctx.beginPath();
         ctx.arc(x, y, petalRadius, 0, Math.PI * 2);
-        ctx.stroke();
-        ctx.shadowBlur = 0;
-        
-        // Inner fill - chromotherapy glow
-        ctx.fillStyle = color;
-        ctx.globalAlpha = 0.15 + (intensity * 0.25);
-        ctx.shadowBlur = 20;
-        ctx.shadowColor = color;
         ctx.fill();
         ctx.shadowBlur = 0;
       }
       
       ctx.restore();
 
-      // PARTICLE FIELD - golden ratio spiral (fibonacci)
-      const particleCount = isMobile ? 25 : 60;
-      for (let i = 0; i < particleCount; i++) {
-        const spiralAngle = i * PHI * 2.4; // Golden angle = 137.5°
-        const angle = spiralAngle + time;
-        const distance = (30 + (Math.sqrt(i) * 15) + (dataArray[i % bufferLength] / 255) * 60) * scaleFactor;
+      // CONSCIOUSNESS ORBS - fireflies, healing spirits, alive
+      const orbCount = isMobile ? 20 : 50;
+      for (let i = 0; i < orbCount; i++) {
+        // Organic spiral motion
+        const spiralAngle = i * PHI * 2.4;
+        const drift = Math.sin(time * 0.5 + i * 0.5) * 30; // Slow drift
+        const angle = spiralAngle + (time * 0.3) + drift;
+        const distance = (40 + (Math.sqrt(i) * 20) + (dataArray[i % bufferLength] / 255) * 40) * scaleFactor * universePulse;
         const x = centerX + Math.cos(angle) * distance;
         const y = centerY + Math.sin(angle) * distance;
-        const size = (2 + (dataArray[i % bufferLength] / 255) * 6 * breathIntensity) * (isMobile ? 0.8 : 1);
         
-        // BRIGHT particle with MASSIVE glow for chromotherapy
-        ctx.fillStyle = color;
-        ctx.globalAlpha = (0.7 + (dataArray[i % bufferLength] / 255) * 0.3) * breathIntensity;
-        ctx.shadowBlur = 20 + (size * 6); // Huge glow
-        ctx.shadowColor = color;
+        // ORB SIZE - breathes with you
+        const baseSize = (3 + (dataArray[i % bufferLength] / 255) * 8) * breathIntensity;
+        const size = baseSize * (isMobile ? 0.7 : 1);
+        
+        // SOFT ORB GLOW - like firefly
+        const orbGradient = ctx.createRadialGradient(x, y, 0, x, y, size * 4);
+        orbGradient.addColorStop(0, '#ffffff');
+        orbGradient.addColorStop(0.2, i % 2 === 0 ? primaryColor : harmonicColor);
+        orbGradient.addColorStop(0.5, color + 'aa');
+        orbGradient.addColorStop(1, color + '00');
+        
+        ctx.fillStyle = orbGradient;
+        ctx.globalAlpha = (0.6 + (dataArray[i % bufferLength] / 255) * 0.4) * breathIntensity * universePulse;
+        ctx.shadowBlur = 40 + (size * 8); // MASSIVE soft glow
+        ctx.shadowColor = i % 2 === 0 ? primaryColor : harmonicColor;
         ctx.beginPath();
         ctx.arc(x, y, size, 0, Math.PI * 2);
         ctx.fill();
         ctx.shadowBlur = 0;
-        
-        // BRIGHT particle trail
-        const prevAngle = angle - 0.2;
-        const prevDist = distance - 20;
-        const prevX = centerX + Math.cos(prevAngle) * prevDist;
-        const prevY = centerY + Math.sin(prevAngle) * prevDist;
-        
-        const trailGradient = ctx.createLinearGradient(prevX, prevY, x, y);
-        trailGradient.addColorStop(0, color + '00');
-        trailGradient.addColorStop(1, color);
-        
-        ctx.strokeStyle = trailGradient;
-        ctx.globalAlpha = 0.6;
-        ctx.lineWidth = 3;
-        ctx.beginPath();
-        ctx.moveTo(prevX, prevY);
-        ctx.lineTo(x, y);
-        ctx.stroke();
       }
 
-      // CENTER CORE - golden ratio nucleus
-      const coreRadius = (25 * PHI + (intensity * 50) + (breathIntensity * 40)) * scaleFactor;
-      const gradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, coreRadius);
-      gradient.addColorStop(0, '#ffffff');
-      gradient.addColorStop(0.15, color);
-      gradient.addColorStop(0.5, color);
-      gradient.addColorStop(1, color + '00');
+      // HEART CENTER - radiant warmth, your soul
+      const breathScale = 0.6 + (breathIntensity * 0.8); // BREATHES BIG
+      const coreRadius = (35 + (intensity * 40)) * scaleFactor * breathScale;
       
-      ctx.fillStyle = gradient;
-      ctx.globalAlpha = 0.9 * breathIntensity;
-      ctx.shadowBlur = 80 + (intensity * 100); // MASSIVE glow for chromotherapy
-      ctx.shadowColor = color;
+      // WARM RADIANT GLOW - feels like being held
+      const coreGradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, coreRadius * 3);
+      coreGradient.addColorStop(0, '#ffffff');
+      coreGradient.addColorStop(0.1, primaryColor + 'ff');
+      coreGradient.addColorStop(0.3, harmonicColor + 'cc');
+      coreGradient.addColorStop(0.6, color + '66');
+      coreGradient.addColorStop(1, color + '00');
+      
+      ctx.fillStyle = coreGradient;
+      ctx.globalAlpha = 0.8 * breathIntensity * universePulse;
+      ctx.shadowBlur = 150 + (intensity * 120); // MASSIVE warmth
+      ctx.shadowColor = hzPulse > 0.5 ? primaryColor : harmonicColor;
       ctx.beginPath();
-      ctx.arc(centerX, centerY, coreRadius, 0, Math.PI * 2);
+      ctx.arc(centerX, centerY, coreRadius * 2, 0, Math.PI * 2);
+      ctx.fill();
+      
+      // INNER BRIGHT CORE - pure light
+      ctx.shadowBlur = 200;
+      ctx.shadowColor = '#ffffff';
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, coreRadius * 0.4, 0, Math.PI * 2);
       ctx.fill();
       ctx.shadowBlur = 0;
 
