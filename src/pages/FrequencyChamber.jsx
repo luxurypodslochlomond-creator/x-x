@@ -797,10 +797,10 @@ export default function FrequencyChamber() {
 
       {/* HEADER */}
       <div className="max-w-6xl mx-auto mb-4 sm:mb-6 text-center px-2">
-        <div className="flex items-center justify-center gap-2 mb-2">
-          <COOLASFUCKWaves size={32} animate={true} />
-          <h1 className="text-2xl sm:text-4xl font-black bg-gradient-to-r from-cyan-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent">
-            I'M HERE TO HEAL YOU
+        <div className="flex items-center justify-center gap-3 mb-3">
+          <COOLASFUCKWaves size={40} animate={true} />
+          <h1 className="text-3xl sm:text-5xl font-black bg-gradient-to-r from-cyan-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent">
+            FREQUENCY CHAMBER
           </h1>
           {!isOnline && (
             <div className="px-2 py-1 bg-green-500/20 border border-green-500 rounded text-[10px] font-bold text-green-400 font-mono">
@@ -808,7 +808,7 @@ export default function FrequencyChamber() {
             </div>
           )}
         </div>
-        <p className="text-gray-400 text-xs sm:text-sm">Where does it hurt? Tell me with your mind, I'll send the frequency ♾️❤️</p>
+        <p className="text-gray-300 text-base sm:text-lg">Where does it hurt? I'll send the healing frequency there ♾️❤️</p>
 
         {/* DEVICE FILTER */}
         <div className="flex flex-wrap items-center justify-center gap-2 mt-4 sm:mt-6">
