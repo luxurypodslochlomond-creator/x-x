@@ -489,9 +489,10 @@ export default function FrequencyChamber() {
       const centerX = canvas.width / 2;
       const centerY = canvas.height / 2;
 
-      // MOBILE SCALE FACTOR (much smaller, modern, minimal)
+      // MOBILE SCALE FACTOR + GOLDEN RATIO
       const isMobile = canvas.width < 600;
-      const scaleFactor = isMobile ? Math.min(canvas.width, canvas.height) / 1800 : Math.min(canvas.width, canvas.height) / 1000;
+      const scaleFactor = isMobile ? Math.min(canvas.width, canvas.height) / 2000 : Math.min(canvas.width, canvas.height) / 1200;
+      const PHI = 1.618033988749; // Golden ratio - sacred geometry
       const color = selected?.color || '#06b6d4';
       
       // Calculate audio intensity
@@ -512,11 +513,11 @@ export default function FrequencyChamber() {
       // SACRED GEOMETRY MANDALA - rotates with audio + breathing
       const rotation = time * 0.4 + (intensity * 3) + (breathIntensity * 0.5);
       
-      // OUTER RINGS - DUAL COLOR CHROMOTHERAPY (space medicine)
-      const ringCount = isMobile ? 4 : 6;
+      // GOLDEN RATIO RINGS - true sacred geometry
+      const ringCount = isMobile ? 4 : 5;
       for (let ring = ringCount; ring >= 0; ring--) {
-        const baseRadius = (30 + (ring * 40)) * scaleFactor;
-        const radius = baseRadius + (bass * 100 * scaleFactor) + (breathIntensity * 60 * scaleFactor);
+        const baseRadius = (40 * Math.pow(PHI, ring / 2)) * scaleFactor; // Golden ratio spacing
+        const radius = baseRadius + (bass * 80 * scaleFactor) + (breathIntensity * 50 * scaleFactor);
         const alpha = (0.4 + (intensity * 0.6) - (ring * 0.04)) * breathIntensity;
 
         // Alternate between primary and harmonic color per ring
@@ -542,7 +543,7 @@ export default function FrequencyChamber() {
       ctx.rotate(rotation);
 
       const petalCount = 6;
-      const petalRadius = (35 + (mid * 40)) * scaleFactor;
+      const petalRadius = (30 + (mid * 35)) * scaleFactor;
       
       for (let i = 0; i < petalCount; i++) {
         const angle = (i / petalCount) * Math.PI * 2;
@@ -571,11 +572,12 @@ export default function FrequencyChamber() {
       
       ctx.restore();
 
-      // PARTICLE FIELD - golden ratio spiral
-      const particleCount = isMobile ? 30 : 80;
+      // PARTICLE FIELD - golden ratio spiral (fibonacci)
+      const particleCount = isMobile ? 25 : 60;
       for (let i = 0; i < particleCount; i++) {
-        const angle = (i / particleCount) * Math.PI * 2 + time + (breathIntensity * 0.5);
-        const distance = (50 * Math.pow(PHI, i / 30) + (dataArray[i % bufferLength] / 255) * 80) * scaleFactor;
+        const spiralAngle = i * PHI * 2.4; // Golden angle = 137.5°
+        const angle = spiralAngle + time;
+        const distance = (30 + (Math.sqrt(i) * 15) + (dataArray[i % bufferLength] / 255) * 60) * scaleFactor;
         const x = centerX + Math.cos(angle) * distance;
         const y = centerY + Math.sin(angle) * distance;
         const size = (2 + (dataArray[i % bufferLength] / 255) * 6 * breathIntensity) * (isMobile ? 0.8 : 1);
