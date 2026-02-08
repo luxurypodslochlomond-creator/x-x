@@ -859,216 +859,23 @@ export default function FrequencyChamber() {
             exit={{ opacity: 0 }}
             className="fixed inset-0 bg-black z-50 flex flex-col"
           >
-            {/* TOP BAR */}
-            <div className="p-4 border-b flex items-center justify-between" style={{ borderColor: `${selected.color}40` }}>
-              <div className="flex items-center gap-3">
-                <selected.icon size={32} animate={true} />
-                <div>
-                  <p className="font-black text-xl" style={{ color: selected.color }}>Healing your {selected.name.toLowerCase()}</p>
-                  <p className="text-gray-400 text-sm">{selected.hz} Hz • I'm with you ♾️</p>
-                </div>
-              </div>
-              <div className="text-3xl font-black font-mono" style={{ color: selected.color }}>
-                {formatTime(timer)}
-              </div>
-            </div>
-
-            {/* VISUALIZER - MATRIX-LEVEL HEALING CHAMBER */}
+            {/* PURE HEALING SPACE - zero distractions */}
             <div className="flex-1 relative overflow-hidden bg-black">
-              {/* FULL SCREEN CANVAS - MOBILE OPTIMIZED */}
+              {/* CANVAS - just the healing frequencies */}
               <canvas
                 ref={canvasRef}
                 className="absolute inset-0 w-full h-full"
                 style={{ 
-                  filter: `blur(0px) contrast(1.2) saturate(1.3)`,
+                  filter: `blur(1px) contrast(1.1) saturate(1.2)`,
                   mixBlendMode: 'screen'
                 }}
               />
 
-              {/* DYNAMIC GRADIENT OVERLAY - pulses with audio */}
-              <motion.div
-                className="absolute inset-0 pointer-events-none"
-                animate={{
-                  background: [
-                    `radial-gradient(circle at 50% 50%, ${selected.color}20 0%, transparent 70%)`,
-                    `radial-gradient(circle at 50% 50%, ${selected.color}40 0%, transparent 60%)`,
-                    `radial-gradient(circle at 50% 50%, ${selected.color}20 0%, transparent 70%)`
-                  ]
-                }}
-                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-              />
-
-              {/* SCANLINE EFFECT - sci-fi aesthetic */}
-              <div 
-                className="absolute inset-0 pointer-events-none"
-                style={{
-                  background: `repeating-linear-gradient(
-                    0deg,
-                    rgba(255,255,255,0.03) 0px,
-                    transparent 2px,
-                    transparent 4px,
-                    rgba(255,255,255,0.03) 6px
-                  )`,
-                  animation: 'scanline 8s linear infinite'
-                }}
-              />
-
-              {/* FREQUENCY INFO + PSYCHOLOGY PRIMING */}
-              <div className="absolute top-3 left-0 right-0 flex flex-col items-center gap-2 pointer-events-none px-2">
-                <motion.div
-                  className="text-center backdrop-blur-sm bg-black/40 rounded-lg px-4 py-2 border"
-                  style={{ borderColor: `${selected.color}60` }}
-                  animate={{ opacity: [0.8, 1, 0.8] }}
-                  transition={{ duration: 3, repeat: Infinity }}
-                >
-                  <p className="text-base sm:text-xl font-black mb-0.5" style={{ color: selected.color, textShadow: `0 0 15px ${selected.color}` }}>
-                    {selected.description}
-                  </p>
-                  <p className="text-[10px] sm:text-xs text-gray-400">
-                    Think about where it hurts • I'll send {selected.hz} Hz there • We do this together ♾️
-                  </p>
-                </motion.div>
-                {selected.psychology && (
-                  <motion.div
-                    className="text-center backdrop-blur-sm bg-black/60 rounded-lg px-3 py-2"
-                    animate={{ 
-                      opacity: [0.7, 1, 0.7],
-                      scale: [0.98, 1.02, 0.98]
-                    }}
-                    transition={{ duration: 4, repeat: Infinity }}
-                  >
-                    <p className="text-xs sm:text-sm text-white font-medium italic" style={{ textShadow: `0 0 10px ${selected.color2 || selected.color}` }}>
-                      {selected.psychology}
-                    </p>
-                  </motion.div>
-                )}
+              {/* SIMPLE TIMER - top corner only */}
+              <div className="absolute top-4 right-4 text-3xl font-black font-mono" style={{ color: selected.color, textShadow: `0 0 20px ${selected.color}` }}>
+                {formatTime(timer)}
               </div>
-
-              {/* PARTICLE FIELD OVERLAY - Matrix rain style */}
-              <div className="absolute inset-0 pointer-events-none overflow-hidden">
-                {[...Array(20)].map((_, i) => (
-                  <motion.div
-                    key={i}
-                    className="absolute w-0.5 h-8 rounded-full opacity-40"
-                    style={{ 
-                      left: `${(i * 5 + 2.5)}%`,
-                      background: `linear-gradient(to bottom, transparent, ${selected.color}, transparent)`
-                    }}
-                    animate={{
-                      y: ['-10%', '110%'],
-                      opacity: [0, 0.6, 0]
-                    }}
-                    transition={{
-                      duration: 3 + (i * 0.2),
-                      repeat: Infinity,
-                      ease: "linear",
-                      delay: i * 0.1
-                    }}
-                  />
-                ))}
-              </div>
-
-              {/* BREATHING GUIDE - 4-7-8 TECHNIQUE */}
-              <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                <div className="relative">
-                  {/* OUTER BREATHING RINGS */}
-                  {[...Array(3)].map((_, i) => (
-                    <motion.div
-                      key={i}
-                      className="absolute inset-0 rounded-full border-2"
-                      style={{ 
-                        borderColor: selected.color,
-                        width: 100 + (i * 40),
-                        height: 100 + (i * 40),
-                        left: '50%',
-                        top: '50%',
-                        transform: 'translate(-50%, -50%)'
-                      }}
-                      animate={{
-                        scale: [0.9, 1.3, 1.0, 0.9],
-                        opacity: [0.2, 0.6, 0.4, 0.2]
-                      }}
-                      transition={{
-                        duration: 21, // 4-7-8 cycle
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                        delay: i * 0.5
-                      }}
-                    />
-                  ))}
-                  
-                  {/* CENTER BREATHING CIRCLE */}
-                  <motion.div 
-                    className="w-24 h-24 sm:w-32 sm:h-32 rounded-full border-4 flex flex-col items-center justify-center backdrop-blur-md relative"
-                    style={{ 
-                      borderColor: selected.color,
-                      backgroundColor: `${selected.color}20`,
-                      boxShadow: `0 0 60px ${selected.color}, inset 0 0 60px ${selected.color}40`
-                    }}
-                    animate={{
-                      scale: [0.8, 1.5, 1.0, 0.8], // Inhale, Hold, Exhale, Pause
-                      borderWidth: [4, 6, 4, 2]
-                    }}
-                    transition={{
-                      duration: 21,
-                      repeat: Infinity,
-                      times: [0, 0.19, 0.52, 0.90], // 4s, 7s, 8s, 2s
-                      ease: "easeInOut"
-                    }}
-                  >
-                    {/* INNER GLOW - pulses with breathing */}
-                    <motion.div 
-                      className="absolute inset-3 rounded-full"
-                      style={{
-                        background: `radial-gradient(circle, ${selected.color}60 0%, transparent 70%)`
-                      }}
-                      animate={{
-                        opacity: [0.4, 1, 0.6, 0.4]
-                      }}
-                      transition={{
-                        duration: 21,
-                        repeat: Infinity,
-                        times: [0, 0.19, 0.52, 0.90]
-                      }}
-                    />
-                    
-                    {/* BREATHING TEXT - changes with phase */}
-                    <div className="relative z-10 text-center">
-                      <motion.p
-                        key={Math.floor(timer / 4) % 4}
-                        initial={{ scale: 0.8, opacity: 0 }}
-                        animate={{ scale: 1, opacity: 1 }}
-                        className="text-xl sm:text-3xl font-black font-mono"
-                        style={{ color: selected.color, textShadow: `0 0 20px ${selected.color}` }}
-                      >
-                        {(timer % 21) < 4 ? 'IN' : (timer % 21) < 11 ? 'HOLD' : (timer % 21) < 19 ? 'OUT' : 'PAUSE'}
-                      </motion.p>
-                      <motion.p
-                        className="text-xs font-mono mt-1"
-                        style={{ color: `${selected.color}cc` }}
-                        animate={{ opacity: [0.6, 1, 0.6] }}
-                        transition={{ duration: 1, repeat: Infinity }}
-                      >
-                        {(timer % 21) < 4 ? '4s' : (timer % 21) < 11 ? '7s' : (timer % 21) < 19 ? '8s' : '2s'}
-                      </motion.p>
-                    </div>
-                  </motion.div>
-                </div>
-              </div>
-
-              {/* CORNER MARKERS - HUD style */}
-              <div className="absolute top-4 left-4 w-8 h-8 border-l-2 border-t-2 pointer-events-none" style={{ borderColor: `${selected.color}60` }} />
-              <div className="absolute top-4 right-4 w-8 h-8 border-r-2 border-t-2 pointer-events-none" style={{ borderColor: `${selected.color}60` }} />
-              <div className="absolute bottom-32 left-4 w-8 h-8 border-l-2 border-b-2 pointer-events-none" style={{ borderColor: `${selected.color}60` }} />
-              <div className="absolute bottom-32 right-4 w-8 h-8 border-r-2 border-b-2 pointer-events-none" style={{ borderColor: `${selected.color}60` }} />
             </div>
-
-            <style>{`
-              @keyframes scanline {
-                0% { transform: translateY(0); }
-                100% { transform: translateY(20px); }
-              }
-            `}</style>
 
             {/* CONTROLS - BOTTOM BAR */}
             <div className="p-6 border-t" style={{ borderColor: `${selected.color}40` }}>
@@ -1100,7 +907,7 @@ export default function FrequencyChamber() {
                   }}
                 >
                   <Share2 className="w-5 h-5" />
-                  SHARE HEALING
+                  SHARE
                 </button>
 
                 {/* STOP */}
@@ -1114,7 +921,7 @@ export default function FrequencyChamber() {
                     boxShadow: `0 0 40px ${selected.color}60`
                   }}
                 >
-                  I'M HEALED ✓
+                  STOP
                 </button>
               </div>
             </div>
