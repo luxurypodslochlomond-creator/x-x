@@ -435,10 +435,18 @@ export default function FrequencyChamber() {
 
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
+
+    // MOBILE OPTIMIZATION: Set canvas size to match container
+    const rect = canvas.getBoundingClientRect();
+    if (canvas.width !== rect.width || canvas.height !== rect.height) {
+      canvas.width = rect.width;
+      canvas.height = rect.height;
+    }
+
     const analyser = analyserRef.current;
     const bufferLength = analyser.frequencyBinCount;
     const dataArray = new Uint8Array(bufferLength);
-    
+
     let time = 0;
     let breathingTime = 0;
 
@@ -527,9 +535,9 @@ export default function FrequencyChamber() {
       ctx.save();
       ctx.translate(centerX, centerY);
       ctx.rotate(rotation);
-      
+
       const petalCount = 6;
-      const petalRadius = 70 + (mid * 80);
+      const petalRadius = (70 + (mid * 80)) * scaleFactor;
       
       for (let i = 0; i < petalCount; i++) {
         const angle = (i / petalCount) * Math.PI * 2;
@@ -559,10 +567,10 @@ export default function FrequencyChamber() {
       ctx.restore();
 
       // PARTICLE FIELD - BRIGHT chromotherapy particles against black
-      const particleCount = 150; // Even more for visual density
+      const particleCount = canvas.width < 600 ? 80 : 150; // Fewer particles on mobile for performance
       for (let i = 0; i < particleCount; i++) {
         const angle = (i / particleCount) * Math.PI * 2 + time + (breathIntensity * 0.5);
-        const distance = 120 + (Math.sin(time * 2 + i) * 80) + (dataArray[i % bufferLength] / 255) * 180 + (breathIntensity * 50);
+        const distance = (120 + (Math.sin(time * 2 + i) * 80) + (dataArray[i % bufferLength] / 255) * 180 + (breathIntensity * 50)) * scaleFactor;
         const x = centerX + Math.cos(angle) * distance;
         const y = centerY + Math.sin(angle) * distance;
         const size = 3 + (dataArray[i % bufferLength] / 255) * 8 * breathIntensity;
@@ -597,7 +605,7 @@ export default function FrequencyChamber() {
       }
 
       // CENTER CORE - BRIGHT chromotherapy nucleus against black
-      const coreRadius = 60 + (intensity * 120) + (breathIntensity * 100);
+      const coreRadius = (60 + (intensity * 120) + (breathIntensity * 100)) * scaleFactor;
       const gradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, coreRadius);
       gradient.addColorStop(0, '#ffffff');
       gradient.addColorStop(0.15, color);
@@ -867,11 +875,9 @@ export default function FrequencyChamber() {
 
             {/* VISUALIZER - MATRIX-LEVEL HEALING CHAMBER */}
             <div className="flex-1 relative overflow-hidden bg-black">
-              {/* FULL SCREEN CANVAS */}
+              {/* FULL SCREEN CANVAS - MOBILE OPTIMIZED */}
               <canvas
                 ref={canvasRef}
-                width={1200}
-                height={800}
                 className="absolute inset-0 w-full h-full"
                 style={{ 
                   filter: `blur(0px) contrast(1.2) saturate(1.3)`,
