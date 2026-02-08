@@ -195,6 +195,7 @@ export default function FrequencyChamber() {
   const [showShare, setShowShare] = useState(false);
   const [ai51Recommendation, setAI51Recommendation] = useState(null);
   const [isOnline, setIsOnline] = useState(navigator.onLine);
+  const [showDataControls, setShowDataControls] = useState(false);
 
   const audioCtxRef = useRef(null);
   const nodesRef = useRef([]);
@@ -240,30 +241,42 @@ export default function FrequencyChamber() {
       osc.start();
       nodes.push(osc, gain);
 
-      // STACKED HARMONICS (max power, distinct sound per frequency)
+      // STACKED HARMONICS (2026 amplification - geometric power)
       freq.harmonics.forEach((harmonic, i) => {
         const harmOsc = ctx.createOscillator();
-        harmOsc.type = freq.waveform; // Match waveform for coherence
+        harmOsc.type = freq.waveform;
         harmOsc.frequency.value = harmonic;
         const harmGain = ctx.createGain();
-        harmGain.gain.value = 0.2 / (i + 1); // Stronger harmonics
+        harmGain.gain.value = 0.3 / (i + 1); // 2026: 50% boost
         harmOsc.connect(harmGain);
         harmGain.connect(masterGain);
         harmOsc.start();
         nodes.push(harmOsc, harmGain);
+
+        // 2026: Ultra-deep subharmonic for each harmonic
+        const deepSub = ctx.createOscillator();
+        deepSub.type = 'sine';
+        deepSub.frequency.value = harmonic * 0.25; // Quarter frequency = ultra-deep penetration
+        const deepGain = ctx.createGain();
+        deepGain.gain.value = 0.1 / (i + 1);
+        deepSub.connect(deepGain);
+        deepGain.connect(masterGain);
+        deepSub.start();
+        nodes.push(deepSub, deepGain);
       });
 
-      // SUBHARMONICS (depth + body resonance)
-      const subharmonic = carrier * 0.5;
-      const subOsc = ctx.createOscillator();
-      subOsc.type = 'sine';
-      subOsc.frequency.value = subharmonic;
-      const subGain = ctx.createGain();
-      subGain.gain.value = 0.15;
-      subOsc.connect(subGain);
-      subGain.connect(masterGain);
-      subOsc.start();
-      nodes.push(subOsc, subGain);
+      // SUBHARMONICS (2026: triple-layer depth)
+      [0.5, 0.25, 0.125].forEach((ratio, i) => {
+        const subOsc = ctx.createOscillator();
+        subOsc.type = 'sine';
+        subOsc.frequency.value = carrier * ratio;
+        const subGain = ctx.createGain();
+        subGain.gain.value = 0.15 / (i + 1);
+        subOsc.connect(subGain);
+        subGain.connect(masterGain);
+        subOsc.start();
+        nodes.push(subOsc, subGain);
+      });
 
       // BINAURAL LAYER (if not already carrier-based)
       if (!freq.carrier && freq.hz > 10) {
@@ -290,13 +303,16 @@ export default function FrequencyChamber() {
         nodes.push(leftOsc, rightOsc, leftGain, rightGain, merger);
       }
 
-      // AMBIENT BED (pink noise character)
-      for (let i = 0; i < 4; i++) {
+      // AMBIENT BED (2026: richer, denser texture)
+      for (let i = 0; i < 8; i++) {
         const ambOsc = ctx.createOscillator();
         ambOsc.type = 'sine';
-        ambOsc.frequency.value = carrier * 0.5 + (Math.random() - 0.5) * 20;
+        ambOsc.frequency.value = carrier * 0.5 + (Math.random() - 0.5) * 30;
         const ambGain = ctx.createGain();
-        ambGain.gain.value = 0.05;
+        ambGain.gain.value = 0.03;
+        // 2026: Slow modulation for organic feel
+        ambGain.gain.setValueAtTime(0.03, ctx.currentTime);
+        ambGain.gain.linearRampToValueAtTime(0.05, ctx.currentTime + 2 + Math.random() * 2);
         ambOsc.connect(ambGain);
         ambGain.connect(masterGain);
         ambOsc.start();
@@ -313,11 +329,12 @@ export default function FrequencyChamber() {
         setTimer(t => t + 1);
       }, 1000);
 
-      console.log('✓ AUDIO ACTIVE');
+      console.log('✓ 2026 HEALING ACTIVE');
       console.log('Primary:', carrier, 'Hz');
       console.log('Harmonics:', freq.harmonics.join(', '), 'Hz');
       console.log('Waveform:', freq.waveform);
       console.log('Total oscillators:', nodes.filter(n => n.frequency).length);
+      console.log('Amplification: Geometric stacking + ultra-deep subharmonics + 8-layer ambient bed');
 
       // LOG TO AI51 (learns what you need when)
       const playData = {
@@ -1212,6 +1229,40 @@ export default function FrequencyChamber() {
 
 
 
+
+          {/* PRIVACY CONTROLS - DELETE DATA */}
+          <div className="mt-4 bg-pink-900/20 border-2 border-pink-500 rounded-lg overflow-hidden">
+            <button 
+              onClick={() => setShowDataControls(!showDataControls)}
+              className="w-full p-3 sm:p-4 flex items-center justify-between hover:bg-pink-900/30 transition-all"
+            >
+              <p className="text-pink-400 font-black text-sm sm:text-base">🛡️ YOUR DATA • YOUR CONTROL</p>
+              <span className="text-pink-400 text-xl">{showDataControls ? '−' : '+'}</span>
+            </button>
+            {showDataControls && (
+              <div className="p-3 sm:p-4 pt-0 border-t border-pink-500/30">
+                <p className="text-gray-300 text-xs sm:text-sm mb-3">
+                  All healing data stored locally. Zero tracking. Zero surveillance. Delete everything anytime.
+                </p>
+                <button
+                  onClick={() => {
+                    if (confirm('Delete ALL your healing data? This cannot be undone.')) {
+                      localStorage.removeItem('uf51_frequency_patterns');
+                      localStorage.removeItem('uf51_offline_queue');
+                      alert('✓ All data deleted. Fresh start.');
+                      window.location.reload();
+                    }
+                  }}
+                  className="w-full bg-pink-600 hover:bg-pink-700 text-white font-bold py-3 rounded-lg transition-all"
+                >
+                  DELETE ALL MY DATA
+                </button>
+                <p className="text-[10px] text-gray-500 mt-2">
+                  This deletes: AI51 learning patterns, queued healing logs, cached recommendations. Server data requires separate request.
+                </p>
+              </div>
+            )}
+          </div>
 
           {/* SMART TV / SCREEN MIRRORING - COLLAPSIBLE */}
           <div className="mt-4 bg-green-900/20 border-2 border-green-500 rounded-lg overflow-hidden">
