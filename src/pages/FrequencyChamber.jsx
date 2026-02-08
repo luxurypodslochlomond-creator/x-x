@@ -1,8 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Play, Pause, Volume2, VolumeX, X } from 'lucide-react';
+import { Play, Pause, Volume2, VolumeX, X, Share2 } from 'lucide-react';
 import { COOLASFUCKWaves, COOLASFUCKFire, COOLASFUCKBrain, COOLASFUCKHeart, COOLASFUCKMoon, COOLASFUCKShield, COOLASFUCKZap, COOLASFUCKHeadphones, COOLASFUCKSpeaker } from '@/components/shared/COOLASFUCKIcon';
 import { base44 } from '@/api/base44Client';
+import AI51FrequencyLearning from '@/components/healing/AI51FrequencyLearning';
+import FrequencyP2PShare from '@/components/healing/FrequencyP2PShare';
 
 /**
  * FREQUENCY CHAMBER - PURE FOUNDATION
@@ -190,6 +192,8 @@ export default function FrequencyChamber() {
   const [showHowItWorks, setShowHowItWorks] = useState(false);
   const [showScience, setShowScience] = useState(false);
   const [showSmartTV, setShowSmartTV] = useState(false);
+  const [showShare, setShowShare] = useState(false);
+  const [ai51Recommendation, setAI51Recommendation] = useState(null);
 
   const audioCtxRef = useRef(null);
   const nodesRef = useRef([]);
@@ -956,19 +960,35 @@ export default function FrequencyChamber() {
                 <span className="text-gray-400 font-mono text-sm w-12">{Math.round(volume * 100)}%</span>
               </div>
 
-              {/* STOP */}
-              <button
-                onClick={stop}
-                className="w-full py-4 text-xl font-black font-mono border-2 transition-all"
-                style={{
-                  backgroundColor: selected.color,
-                  borderColor: selected.color,
-                  color: 'black',
-                  boxShadow: `0 0 40px ${selected.color}60`
-                }}
-              >
-                STOP
-              </button>
+              {/* CONTROLS ROW */}
+              <div className="flex gap-3">
+                {/* SHARE */}
+                <button
+                  onClick={() => setShowShare(true)}
+                  className="px-6 py-4 text-lg font-black font-mono border-2 transition-all flex items-center gap-2"
+                  style={{
+                    borderColor: selected.color,
+                    color: selected.color
+                  }}
+                >
+                  <Share2 className="w-5 h-5" />
+                  SHARE
+                </button>
+
+                {/* STOP */}
+                <button
+                  onClick={stop}
+                  className="flex-1 py-4 text-xl font-black font-mono border-2 transition-all"
+                  style={{
+                    backgroundColor: selected.color,
+                    borderColor: selected.color,
+                    color: 'black',
+                    boxShadow: `0 0 40px ${selected.color}60`
+                  }}
+                >
+                  STOP
+                </button>
+              </div>
             </div>
           </motion.div>
         )}
@@ -977,6 +997,18 @@ export default function FrequencyChamber() {
       {/* FREQUENCY GRID */}
       {!isPlaying && (
       <div className="max-w-6xl mx-auto">
+        {/* AI51 LEARNING */}
+        <AI51FrequencyLearning 
+          onRecommendation={(rec) => {
+            setAI51Recommendation(rec);
+            // Highlight recommended frequency
+            const freq = FREQUENCIES.find(f => f.id === rec.frequencyId);
+            if (freq) {
+              console.log('AI51 recommends:', freq.name, '-', rec.reason);
+            }
+          }}
+        />
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {FREQUENCIES
           .filter(freq => {
@@ -993,10 +1025,19 @@ export default function FrequencyChamber() {
             whileTap={{ scale: 0.98 }}
             className="p-4 border-4 bg-black hover:bg-white/5 transition-all relative text-left"
             style={{ 
-              borderColor: freq.color,
-              boxShadow: `0 0 20px ${freq.color}40`
+              borderColor: ai51Recommendation?.frequencyId === freq.id ? freq.color : freq.color,
+              boxShadow: ai51Recommendation?.frequencyId === freq.id 
+                ? `0 0 40px ${freq.color}, 0 0 60px ${freq.color}80` 
+                : `0 0 20px ${freq.color}40`,
+              backgroundColor: ai51Recommendation?.frequencyId === freq.id ? `${freq.color}10` : 'black'
             }}
           >
+            {/* AI51 BADGE */}
+            {ai51Recommendation?.frequencyId === freq.id && (
+              <div className="absolute -top-2 -right-2 bg-gradient-to-r from-cyan-500 to-pink-500 text-black text-[10px] font-black px-2 py-1 rounded">
+                AI51 ✓
+              </div>
+            )}
             <div className="flex items-start justify-between mb-3">
               <div className="flex items-center gap-2">
                 <freq.icon size={36} animate={false} />
