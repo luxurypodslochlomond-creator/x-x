@@ -5,15 +5,35 @@
 
 Deno.serve((req) => {
   const swCode = `
-// CB51 Service Worker - Push Notifications
+// UF51 Service Worker - Offline Healing + Push Notifications
+const CACHE_NAME = 'uf51-healing-v1';
+const OFFLINE_URLS = [
+  '/pages/FrequencyChamber',
+  '/components/healing/AI51FrequencyLearning',
+  '/components/healing/FrequencyP2PShare'
+];
+
 self.addEventListener('install', (event) => {
-  console.log('[SW] Installing...');
+  console.log('[SW] Installing UF51 Healing...');
+  event.waitUntil(
+    caches.open(CACHE_NAME).then(cache => {
+      return cache.addAll(OFFLINE_URLS).catch(err => {
+        console.log('[SW] Cache failed (non-critical):', err);
+      });
+    })
+  );
   self.skipWaiting();
 });
 
 self.addEventListener('activate', (event) => {
   console.log('[SW] Activating...');
-  event.waitUntil(clients.claim());
+  event.waitUntil(
+    caches.keys().then(keys => {
+      return Promise.all(
+        keys.filter(key => key !== CACHE_NAME).map(key => caches.delete(key))
+      );
+    }).then(() => clients.claim())
+  );
 });
 
 // Handle push notifications
@@ -45,6 +65,40 @@ self.addEventListener('push', (event) => {
   );
 });
 
+// Offline-first fetch strategy
+self.addEventListener('fetch', (event) => {
+  // Only cache GET requests
+  if (event.request.method !== 'GET') return;
+  
+  // Skip non-same-origin requests
+  if (!event.request.url.startsWith(self.location.origin)) return;
+
+  event.respondWith(
+    caches.match(event.request).then(cached => {
+      // Return cached if available
+      if (cached) return cached;
+
+      // Otherwise fetch from network
+      return fetch(event.request).then(response => {
+        // Cache successful responses
+        if (response.ok) {
+          const clone = response.clone();
+          caches.open(CACHE_NAME).then(cache => {
+            cache.put(event.request, clone);
+          });
+        }
+        return response;
+      }).catch(() => {
+        // Offline fallback
+        return new Response('Offline - Healing frequencies still work!', {
+          status: 503,
+          headers: { 'Content-Type': 'text/plain' }
+        });
+      });
+    })
+  );
+});
+
 // Handle notification clicks
 self.addEventListener('notificationclick', (event) => {
   console.log('[SW] Notification clicked');
@@ -54,9 +108,9 @@ self.addEventListener('notificationclick', (event) => {
 
   event.waitUntil(
     clients.matchAll({ type: 'window', includeUncontrolled: true }).then((clientList) => {
-      // Check if CB51 is already open
+      // Check if app is already open
       for (const client of clientList) {
-        if (client.url.includes('CB51') && 'focus' in client) {
+        if ('focus' in client) {
           return client.focus().then(() => client.navigate(urlToOpen));
         }
       }
@@ -68,7 +122,7 @@ self.addEventListener('notificationclick', (event) => {
   );
 });
 
-console.log('[SW] CB51 Service Worker loaded');
+console.log('[SW] UF51 Healing Service Worker loaded');
 `;
 
   return new Response(swCode, {

@@ -194,6 +194,7 @@ export default function FrequencyChamber() {
   const [showSmartTV, setShowSmartTV] = useState(false);
   const [showShare, setShowShare] = useState(false);
   const [ai51Recommendation, setAI51Recommendation] = useState(null);
+  const [isOnline, setIsOnline] = useState(navigator.onLine);
 
   const audioCtxRef = useRef(null);
   const nodesRef = useRef([]);
@@ -319,19 +320,29 @@ export default function FrequencyChamber() {
       console.log('Total oscillators:', nodes.filter(n => n.frequency).length);
 
       // LOG TO AI51 (learns what you need when)
+      const playData = {
+        frequency_id: freq.id,
+        frequency_hz: freq.hz,
+        time_of_day: new Date().getHours(),
+        device_type: /mobile/i.test(navigator.userAgent) ? 'mobile' : 'desktop',
+        waveform_type: freq.waveform,
+        healing_context: freq.description,
+        session_start: new Date().toISOString()
+      };
+
       try {
         const user = await base44.auth.me().catch(() => null);
-        await base44.entities.FrequencyPlay.create({
-          frequency_id: freq.id,
-          frequency_hz: freq.hz,
-          time_of_day: new Date().getHours(),
-          device_type: /mobile/i.test(navigator.userAgent) ? 'mobile' : 'desktop',
-          waveform_type: freq.waveform,
-          healing_context: freq.description,
-          session_start: new Date().toISOString()
-        });
+        await base44.entities.FrequencyPlay.create(playData);
       } catch (e) {
-        console.log('AI51 learning (non-critical):', e);
+        // Offline - queue for later
+        try {
+          const queue = JSON.parse(localStorage.getItem('uf51_offline_queue') || '[]');
+          queue.push({ type: 'FrequencyPlay', data: playData, queued_at: Date.now() });
+          localStorage.setItem('uf51_offline_queue', JSON.stringify(queue));
+          console.log('✓ Queued for sync when online');
+        } catch (queueError) {
+          console.log('Queue save (non-critical):', queueError);
+        }
       }
 
       // START VISUALIZER
@@ -662,6 +673,55 @@ export default function FrequencyChamber() {
     }
   }, [isPlaying, selected]);
 
+  // OFFLINE DETECTION + SYNC QUEUE WHEN BACK ONLINE
+  useEffect(() => {
+    const handleOnline = async () => {
+      setIsOnline(true);
+      // Sync queued data
+      try {
+        const queue = JSON.parse(localStorage.getItem('uf51_offline_queue') || '[]');
+        if (queue.length > 0) {
+          console.log(`Syncing ${queue.length} queued items...`);
+          for (const item of queue) {
+            try {
+              if (item.type === 'FrequencyPlay') {
+                await base44.entities.FrequencyPlay.create(item.data);
+              }
+            } catch (e) {
+              console.log('Sync item failed (non-critical):', e);
+            }
+          }
+          localStorage.removeItem('uf51_offline_queue');
+          console.log('✓ Sync complete');
+        }
+      } catch (e) {
+        console.log('Sync process (non-critical):', e);
+      }
+    };
+    
+    const handleOffline = () => setIsOnline(false);
+    
+    window.addEventListener('online', handleOnline);
+    window.addEventListener('offline', handleOffline);
+    
+    // Sync on mount if online
+    if (navigator.onLine) handleOnline();
+    
+    return () => {
+      window.removeEventListener('online', handleOnline);
+      window.removeEventListener('offline', handleOffline);
+    };
+  }, []);
+
+  // REGISTER SERVICE WORKER (offline cache)
+  useEffect(() => {
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/api/functions/serveServiceWorker')
+        .then(() => console.log('✓ Offline healing ready'))
+        .catch(() => console.log('Service worker skipped (non-critical)'));
+    }
+  }, []);
+
   // CLEANUP
   useEffect(() => {
     return () => stop();
@@ -692,6 +752,11 @@ export default function FrequencyChamber() {
         <div className="flex items-center justify-center gap-2 mb-2">
           <COOLASFUCKWaves size={32} animate={true} />
           <h1 className="text-2xl sm:text-4xl font-black text-white">FREQUENCY CHAMBER</h1>
+          {!isOnline && (
+            <div className="px-2 py-1 bg-green-500/20 border border-green-500 rounded text-[10px] font-bold text-green-400 font-mono">
+              OFFLINE ✓
+            </div>
+          )}
         </div>
         <p className="text-gray-500 text-xs sm:text-sm font-mono">Pure healing • Distinct sounds • Real results</p>
 

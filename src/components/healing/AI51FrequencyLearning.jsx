@@ -21,8 +21,23 @@ export default function AI51FrequencyLearning({ onRecommendation }) {
     try {
       setLearning(true);
       
-      // Get user's frequency history
-      const plays = await base44.entities.FrequencyPlay.list('-created_date', 100);
+      // Get user's frequency history (queue if offline)
+      let plays = [];
+      try {
+        plays = await base44.entities.FrequencyPlay.list('-created_date', 100);
+      } catch (e) {
+        // Offline - load from local cache
+        const cached = localStorage.getItem('uf51_frequency_patterns');
+        if (cached) {
+          const cachedData = JSON.parse(cached);
+          setPatterns(cachedData.patterns);
+          if (onRecommendation && cachedData.recommendation) {
+            onRecommendation(cachedData.recommendation);
+          }
+        }
+        setLearning(false);
+        return;
+      }
       
       if (plays.length < 3) {
         setLearning(false);
@@ -73,6 +88,17 @@ export default function AI51FrequencyLearning({ onRecommendation }) {
       // Generate recommendation
       const recommendation = generateRecommendation(analysis);
       if (onRecommendation) onRecommendation(recommendation);
+
+      // Cache for offline use
+      try {
+        localStorage.setItem('uf51_frequency_patterns', JSON.stringify({
+          patterns: analysis,
+          recommendation,
+          cached_at: new Date().toISOString()
+        }));
+      } catch (e) {
+        console.log('Cache save (non-critical):', e);
+      }
 
       setLearning(false);
     } catch (e) {
