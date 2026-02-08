@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Play, Pause, Volume2, VolumeX, X, Share2 } from 'lucide-react';
 import { COOLASFUCKWaves, COOLASFUCKFire, COOLASFUCKBrain, COOLASFUCKHeart, COOLASFUCKMoon, COOLASFUCKShield, COOLASFUCKZap, COOLASFUCKHeadphones, COOLASFUCKSpeaker } from '@/components/shared/COOLASFUCKIcon';
 import { base44 } from '@/api/base44Client';
-import AI51FrequencyLearning from '@/components/healing/AI51FrequencyLearning';
 import FrequencyP2PShare from '@/components/healing/FrequencyP2PShare';
 
 /**
@@ -932,7 +931,7 @@ export default function FrequencyChamber() {
       {/* FREQUENCY GRID */}
       {!isPlaying && (
       <div className="max-w-6xl mx-auto">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {FREQUENCIES
           .filter(freq => {
             if (deviceFilter === 'all') return true;
@@ -1037,10 +1036,10 @@ export default function FrequencyChamber() {
             )}
           </motion.button>
         ))}
-      </div>
+        </div>
 
-          {/* HOW IT TARGETS YOUR PAIN */}
-          <div className="mt-4 sm:mt-6 bg-gradient-to-br from-pink-900/20 to-cyan-900/20 border-2 border-pink-500 rounded-lg overflow-hidden">
+        {/* HOW IT TARGETS YOUR PAIN */}
+        <div className="mt-4 sm:mt-6 bg-gradient-to-br from-pink-900/20 to-cyan-900/20 border-2 border-pink-500 rounded-lg overflow-hidden">
             <button 
               onClick={() => setShowHowItWorks(!showHowItWorks)}
               className="w-full p-3 sm:p-4 flex items-center justify-between hover:bg-pink-900/30 transition-all"
@@ -1071,14 +1070,10 @@ export default function FrequencyChamber() {
                 </p>
               </div>
             )}
-          </div>
+        </div>
 
-
-
-
-
-          {/* PRIVACY CONTROLS - DELETE DATA */}
-          <div className="mt-4 bg-pink-900/20 border-2 border-pink-500 rounded-lg overflow-hidden">
+        {/* PRIVACY CONTROLS - DELETE DATA */}
+        <div className="mt-4 bg-pink-900/20 border-2 border-pink-500 rounded-lg overflow-hidden">
             <button 
               onClick={() => setShowDataControls(!showDataControls)}
               className="w-full p-3 sm:p-4 flex items-center justify-between hover:bg-pink-900/30 transition-all"
@@ -1109,10 +1104,10 @@ export default function FrequencyChamber() {
                 </p>
               </div>
             )}
-          </div>
+        </div>
 
-          {/* SMART TV / SCREEN MIRRORING - COLLAPSIBLE */}
-          <div className="mt-4 bg-green-900/20 border-2 border-green-500 rounded-lg overflow-hidden">
+        {/* SMART TV / SCREEN MIRRORING - COLLAPSIBLE */}
+        <div className="mt-4 bg-green-900/20 border-2 border-green-500 rounded-lg overflow-hidden">
             <button 
               onClick={() => setShowSmartTV(!showSmartTV)}
               className="w-full p-3 sm:p-4 flex items-center justify-between hover:bg-green-900/30 transition-all"
@@ -1136,12 +1131,10 @@ export default function FrequencyChamber() {
                 </p>
               </div>
             )}
-          </div>
+        </div>
 
-
-
-          {/* REAL SCIENCE + AI51 REVOLUTION - COLLAPSIBLE */}
-          <div className="mt-4 bg-gradient-to-br from-pink-900/20 to-cyan-900/20 border-2 border-pink-500 rounded-lg overflow-hidden">
+        {/* REAL SCIENCE + AI51 REVOLUTION - COLLAPSIBLE */}
+        <div className="mt-4 bg-gradient-to-br from-pink-900/20 to-cyan-900/20 border-2 border-pink-500 rounded-lg overflow-hidden">
             <button 
               onClick={() => setShowScience(!showScience)}
               className="w-full p-3 sm:p-4 flex items-center justify-between hover:bg-pink-900/30 transition-all"
@@ -1226,22 +1219,21 @@ export default function FrequencyChamber() {
                 • Choi et al. (2019). "Multisensory stimulation enhances cognitive performance." Stanford Medicine.
               </p>
             </div>
-            </div>
             )}
-            </div>
+        </div>
 
-      {/* P2P SHARE MODAL */}
-      <AnimatePresence>
-        {showShare && selected && (
-          <FrequencyP2PShare
-            frequency={selected}
-            timer={timer}
-            onClose={() => setShowShare(false)}
-          />
-        )}
-      </AnimatePresence>
-          </div>
+        {/* P2P SHARE MODAL */}
+        <AnimatePresence>
+          {showShare && selected && (
+            <FrequencyP2PShare
+              frequency={selected}
+              timer={timer}
+              onClose={() => setShowShare(false)}
+            />
           )}
+        </AnimatePresence>
+      </div>
+      )}
     </div>
   );
 }
