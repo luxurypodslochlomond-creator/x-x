@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Play, Pause, Volume2, VolumeX, X } from 'lucide-react';
-import { COOLASFUCKWaves, COOLASFUCKFire, COOLASFUCKBrain, COOLASFUCKHeart, COOLASFUCKMoon, COOLASFUCKShield, COOLASFUCKZap } from '@/components/shared/COOLASFUCKIcon';
+import { COOLASFUCKWaves, COOLASFUCKFire, COOLASFUCKBrain, COOLASFUCKHeart, COOLASFUCKMoon, COOLASFUCKShield, COOLASFUCKZap, COOLASFUCKHeadphones, COOLASFUCKSpeaker } from '@/components/shared/COOLASFUCKIcon';
 import { base44 } from '@/api/base44Client';
 
 /**
@@ -32,7 +32,8 @@ const FREQUENCIES = [
     harmonics: [1056, 1584, 2112, 264], // Added 264 (half of 528) for deeper penetration
     timer: '15 min',
     stackWith: ['nerve_pain', 'inflammation'],
-    context: 'For chest pain, tightness, heart chakra blockages. Repairs cellular damage.'
+    context: 'For chest pain, tightness, heart chakra blockages. Repairs cellular damage.',
+    device: 'both' // works on speakers AND headphones
   },
   {
     id: 'nerve_pain',
@@ -46,7 +47,8 @@ const FREQUENCIES = [
     harmonics: [348, 522, 87], // Subharmonic 87 for deep nerve tissue
     timer: '10 min',
     stackWith: ['inflammation', 'muscle_tension'],
-    context: 'For nerve pain, tingling, numbness, sharp sensations. Square wave penetrates nerve pathways.'
+    context: 'For nerve pain, tingling, numbness, sharp sensations. Square wave penetrates nerve pathways.',
+    device: 'speaker' // works on speakers/TV
   },
   {
     id: 'inflammation',
@@ -60,7 +62,8 @@ const FREQUENCIES = [
     harmonics: [608, 912, 152], // 152 = subharmonic for deep tissue
     timer: '12 min',
     stackWith: ['nerve_pain', 'chest_heart'],
-    context: 'For inflammation, swelling, heat. Sawtooth wave disrupts inflammatory response.'
+    context: 'For inflammation, swelling, heat. Sawtooth wave disrupts inflammatory response.',
+    device: 'speaker' // works on speakers/TV
   },
   {
     id: 'muscle_tension',
@@ -74,7 +77,8 @@ const FREQUENCIES = [
     harmonics: [272.2, 408.3, 68], // Subharmonic 68 for deep muscle layers
     timer: '8 min',
     stackWith: ['nerve_pain', 'anxiety'],
-    context: 'For muscle tension, stiffness, knots. Triangle wave gently releases muscle fibers.'
+    context: 'For muscle tension, stiffness, knots. Triangle wave gently releases muscle fibers.',
+    device: 'speaker' // works on speakers/TV
   },
 
   // === MENTAL HEALTH ===
@@ -90,7 +94,8 @@ const FREQUENCIES = [
     harmonics: [792, 1188, 198], // 198 = subharmonic for deep grounding
     timer: '15 min',
     stackWith: ['chest_heart', 'calm'],
-    context: 'For anxiety, panic, fear. Root chakra frequency. Triangle wave soothes nervous system.'
+    context: 'For anxiety, panic, fear. Root chakra frequency. Triangle wave soothes nervous system.',
+    device: 'both' // works on speakers AND headphones
   },
   {
     id: 'calm',
@@ -104,7 +109,8 @@ const FREQUENCIES = [
     harmonics: [864, 1296, 216], // 216 = subharmonic for deep calm
     timer: '20 min',
     stackWith: ['anxiety', 'sleep'],
-    context: 'For general stress, overwhelm. Natural tuning (A=432Hz). Pure sine wave = pure calm.'
+    context: 'For general stress, overwhelm. Natural tuning (A=432Hz). Pure sine wave = pure calm.',
+    device: 'both' // works on speakers AND headphones
   },
   {
     id: 'focus',
@@ -119,7 +125,8 @@ const FREQUENCIES = [
     harmonics: [80, 120, 20], // 20 = subharmonic for theta-gamma coupling
     timer: '25 min',
     stackWith: ['calm'],
-    context: 'For focus, clarity, brain fog. MIT research proven. Square wave syncs brain hemispheres.'
+    context: 'For focus, clarity, brain fog. MIT research proven. Square wave syncs brain hemispheres.',
+    device: 'headphones' // binaural beats work best with headphones
   },
 
   // === DEEP HEALING ===
@@ -136,7 +143,8 @@ const FREQUENCIES = [
     harmonics: [15.66, 23.49, 3.91], // 3.91 = subharmonic for ultra-deep grounding
     timer: '30 min',
     stackWith: ['calm', 'sleep'],
-    context: 'For grounding, disconnection, tech overwhelm. Earth\'s electromagnetic frequency.'
+    context: 'For grounding, disconnection, tech overwhelm. Earth\'s electromagnetic frequency.',
+    device: 'headphones' // low frequency binaural beats need headphones
   },
   {
     id: 'sleep',
@@ -151,7 +159,8 @@ const FREQUENCIES = [
     harmonics: [4, 6, 1], // 1 Hz = ultra-slow for deep sleep
     timer: '60 min',
     stackWith: ['calm', 'earth'],
-    context: 'For insomnia, restless sleep. Delta wave = deepest sleep state. Use before bed.'
+    context: 'For insomnia, restless sleep. Delta wave = deepest sleep state. Use before bed.',
+    device: 'headphones' // delta waves work best with headphones
   },
 
   // === ANIMAL FREQUENCIES (TESLA'S DISCOVERY) ===
@@ -167,7 +176,8 @@ const FREQUENCIES = [
     harmonics: [50, 75, 12.5], // Subharmonic 12.5 for ultra-deep healing
     timer: '20 min',
     stackWith: ['inflammation', 'nerve_pain'],
-    context: 'Cat purr frequency. Heals bones, muscles, tissues. Tesla studied this. Ancient Egyptians knew.'
+    context: 'Cat purr frequency. Heals bones, muscles, tissues. Tesla studied this. Ancient Egyptians knew.',
+    device: 'both' // works on speakers AND headphones
   }
 ];
 
@@ -176,6 +186,7 @@ export default function FrequencyChamber() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(0.3);
   const [timer, setTimer] = useState(0);
+  const [deviceFilter, setDeviceFilter] = useState('all'); // 'all', 'speaker', 'headphones'
 
   const audioCtxRef = useRef(null);
   const nodesRef = useRef([]);
@@ -433,12 +444,51 @@ export default function FrequencyChamber() {
     <div className="min-h-screen bg-black text-white p-4">
       
       {/* HEADER */}
-      <div className="max-w-4xl mx-auto mb-6 text-center">
+      <div className="max-w-6xl mx-auto mb-6 text-center">
         <div className="flex items-center justify-center gap-3 mb-2">
           <COOLASFUCKWaves size={40} animate={true} />
           <h1 className="text-4xl font-black text-white">FREQUENCY CHAMBER</h1>
         </div>
         <p className="text-gray-500 text-sm font-mono">Pure healing • Distinct sounds • Real results</p>
+
+        {/* DEVICE FILTER */}
+        <div className="flex items-center justify-center gap-3 mt-6">
+          <motion.button
+            whileTap={{ scale: 0.95 }}
+            onClick={() => setDeviceFilter('all')}
+            className={`px-4 py-2 rounded-lg font-bold font-mono text-sm border-2 transition-all ${
+              deviceFilter === 'all' 
+                ? 'bg-cyan-500 border-cyan-500 text-black' 
+                : 'bg-black border-cyan-500/30 text-cyan-400 hover:border-cyan-500/60'
+            }`}
+          >
+            ALL
+          </motion.button>
+          <motion.button
+            whileTap={{ scale: 0.95 }}
+            onClick={() => setDeviceFilter('speaker')}
+            className={`px-4 py-2 rounded-lg font-bold font-mono text-sm border-2 transition-all flex items-center gap-2 ${
+              deviceFilter === 'speaker' 
+                ? 'bg-green-500 border-green-500 text-black' 
+                : 'bg-black border-green-500/30 text-green-400 hover:border-green-500/60'
+            }`}
+          >
+            <COOLASFUCKSpeaker size={20} animate={deviceFilter === 'speaker'} />
+            SPEAKERS/TV
+          </motion.button>
+          <motion.button
+            whileTap={{ scale: 0.95 }}
+            onClick={() => setDeviceFilter('headphones')}
+            className={`px-4 py-2 rounded-lg font-bold font-mono text-sm border-2 transition-all flex items-center gap-2 ${
+              deviceFilter === 'headphones' 
+                ? 'bg-pink-500 border-pink-500 text-black' 
+                : 'bg-black border-pink-500/30 text-pink-400 hover:border-pink-500/60'
+            }`}
+          >
+            <COOLASFUCKHeadphones size={20} animate={deviceFilter === 'headphones'} />
+            HEADPHONES
+          </motion.button>
+        </div>
       </div>
 
       {/* PLAYING NOW - FULLSCREEN */}
@@ -568,7 +618,14 @@ export default function FrequencyChamber() {
       {!isPlaying && (
       <div className="max-w-6xl mx-auto">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {FREQUENCIES.map((freq) => (
+        {FREQUENCIES
+          .filter(freq => {
+            if (deviceFilter === 'all') return true;
+            if (deviceFilter === 'speaker') return freq.device === 'speaker' || freq.device === 'both';
+            if (deviceFilter === 'headphones') return freq.device === 'headphones' || freq.device === 'both';
+            return true;
+          })
+          .map((freq) => (
           <motion.button
             key={freq.id}
             onClick={() => play(freq)}
@@ -581,7 +638,18 @@ export default function FrequencyChamber() {
             }}
           >
             <div className="flex items-start justify-between mb-3">
-              <freq.icon size={36} animate={false} />
+              <div className="flex items-center gap-2">
+                <freq.icon size={36} animate={false} />
+                {/* DEVICE INDICATOR */}
+                {freq.device === 'speaker' && <COOLASFUCKSpeaker size={16} animate={false} />}
+                {freq.device === 'headphones' && <COOLASFUCKHeadphones size={16} animate={false} />}
+                {freq.device === 'both' && (
+                  <>
+                    <COOLASFUCKSpeaker size={16} animate={false} />
+                    <COOLASFUCKHeadphones size={16} animate={false} />
+                  </>
+                )}
+              </div>
               {/* TIMER */}
               <div className="bg-white/10 px-2 py-1 rounded">
                 <p className="text-xs font-black font-mono" style={{ color: freq.color }}>
@@ -677,6 +745,23 @@ export default function FrequencyChamber() {
             <p className="text-pink-400 font-black text-sm mb-2">♾️ AI51 LEARNS YOUR PATTERNS</p>
             <p className="text-gray-300 text-sm">
               Every session logged. AI51 learns WHEN you need WHAT. Morning chest pain? Evening anxiety? Patterns emerge. Zero tracking, pure learning. Your body teaches AI51 what works.
+            </p>
+          </div>
+
+          {/* SMART TV / SCREEN MIRRORING */}
+          <div className="mt-4 bg-green-900/20 border-2 border-green-500 p-4">
+            <p className="text-green-400 font-black text-sm mb-2">📺 SMART TV / BIG SCREEN</p>
+            <p className="text-gray-300 text-sm mb-2">
+              Cast this to your TV for MAXIMUM healing. Bigger speakers = more power. Works with AirPlay, Chromecast, or cable.
+            </p>
+            <div className="mt-3 space-y-2 text-xs text-gray-400">
+              <p><strong className="text-green-400">iPhone/iPad:</strong> Swipe down → Screen Mirroring → Select your TV</p>
+              <p><strong className="text-green-400">Android:</strong> Settings → Cast → Select your TV</p>
+              <p><strong className="text-green-400">Cable:</strong> USB-C/Lightning to HDMI adapter → plug into TV</p>
+              <p><strong className="text-green-400">Smart TVs:</strong> Built-in browser works (just open this URL on TV)</p>
+            </div>
+            <p className="text-green-300 text-xs mt-3 font-bold">
+              Filter by "SPEAKERS/TV" above to see which frequencies work best on big screens. Visualizer looks INCREDIBLE on 4K.
             </p>
           </div>
 
