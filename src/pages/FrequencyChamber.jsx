@@ -196,6 +196,8 @@ export default function FrequencyChamber() {
   const timerRef = useRef(null);
   const canvasRef = useRef(null);
   const analyserRef = useRef(null);
+  const hapticIntervalRef = useRef(null);
+  const breathingPhaseRef = useRef('inhale'); // inhale, hold, exhale, pause
 
   // === PLAY FREQUENCY ===
   const play = async (freq) => {
@@ -330,6 +332,24 @@ export default function FrequencyChamber() {
 
       // START VISUALIZER
       drawVisualizer();
+
+      // START HAPTIC FEEDBACK (vibration synced to bass frequencies)
+      if (navigator.vibrate) {
+        hapticIntervalRef.current = setInterval(() => {
+          if (!analyserRef.current) return;
+          
+          const dataArray = new Uint8Array(analyserRef.current.frequencyBinCount);
+          analyserRef.current.getByteFrequencyData(dataArray);
+          
+          // Bass frequencies (0-10) control vibration intensity
+          const bass = dataArray.slice(0, 10).reduce((a, b) => a + b) / 10;
+          const intensity = Math.floor((bass / 255) * 200); // 0-200ms pulse
+          
+          if (intensity > 30) { // Only vibrate if significant bass
+            navigator.vibrate(intensity);
+          }
+        }, 200); // Check every 200ms
+      }
     } catch (err) {
       alert('Audio blocked - tap again');
     }
@@ -351,13 +371,19 @@ export default function FrequencyChamber() {
       timerRef.current = null;
     }
 
+    if (hapticIntervalRef.current) {
+      clearInterval(hapticIntervalRef.current);
+      hapticIntervalRef.current = null;
+    }
+
     analyserRef.current = null;
+    breathingPhaseRef.current = 'inhale';
     setIsPlaying(false);
     setTimer(0);
   };
 
-  // === SACRED GEOMETRY VISUALIZER - Amplifies healing through visual resonance ===
-  // Research: Sacred geometry + chromotherapy + visual entrainment = 40% better outcomes (Stanford 2019)
+  // === MAXIMUM HEALING VISUALIZER ===
+  // Audio-reactive + chromotherapy + haptics + breathing = total device utilization
   const drawVisualizer = () => {
     if (!isPlaying || !canvasRef.current || !analyserRef.current) return;
 
@@ -368,43 +394,81 @@ export default function FrequencyChamber() {
     const dataArray = new Uint8Array(bufferLength);
     
     let time = 0;
+    let breathingTime = 0;
 
     const draw = () => {
       if (!isPlaying) return;
       requestAnimationFrame(draw);
 
       analyser.getByteFrequencyData(dataArray);
-      time += 0.01;
+      time += 0.015;
+      breathingTime += 0.02;
 
-      // FULL CLEAR for clean sacred geometry
-      ctx.fillStyle = 'rgba(0, 0, 0, 1)';
+      // BREATHING CYCLE (4-7-8 technique)
+      // Inhale 4s, Hold 7s, Exhale 8s, Pause 2s
+      const breathCycle = 21; // total seconds
+      const breathProgress = (breathingTime % breathCycle) / breathCycle;
+      
+      let breathPhase = 'inhale';
+      let breathIntensity = 0;
+      
+      if (breathProgress < 0.19) { // 0-4s: INHALE
+        breathPhase = 'inhale';
+        breathIntensity = breathProgress / 0.19;
+      } else if (breathProgress < 0.52) { // 4-11s: HOLD
+        breathPhase = 'hold';
+        breathIntensity = 1;
+      } else if (breathProgress < 0.90) { // 11-19s: EXHALE
+        breathPhase = 'exhale';
+        breathIntensity = 1 - ((breathProgress - 0.52) / 0.38);
+      } else { // 19-21s: PAUSE
+        breathPhase = 'pause';
+        breathIntensity = 0.2;
+      }
+      
+      breathingPhaseRef.current = breathPhase;
+
+      // CLEAR with breathing-synced fade
+      ctx.fillStyle = `rgba(0, 0, 0, ${0.15 + (breathIntensity * 0.1)})`;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       const centerX = canvas.width / 2;
       const centerY = canvas.height / 2;
       const color = selected?.color || '#06b6d4';
       
-      // Calculate audio intensity
+      // Calculate audio intensity (MAXIMIZED for visual impact)
       const average = dataArray.reduce((a, b) => a + b) / bufferLength;
-      const intensity = average / 255;
-      const bass = dataArray.slice(0, 10).reduce((a, b) => a + b) / 10 / 255;
-      const mid = dataArray.slice(10, 30).reduce((a, b) => a + b) / 20 / 255;
-      const high = dataArray.slice(30, 60).reduce((a, b) => a + b) / 30 / 255;
+      const intensity = (average / 255) * 1.4; // Boosted
+      const bass = (dataArray.slice(0, 10).reduce((a, b) => a + b) / 10 / 255) * 1.5;
+      const mid = (dataArray.slice(10, 30).reduce((a, b) => a + b) / 20 / 255) * 1.3;
+      const high = (dataArray.slice(30, 60).reduce((a, b) => a + b) / 30 / 255) * 1.2;
 
-      // SACRED GEOMETRY MANDALA - rotates with audio
-      const rotation = time * 0.3 + (intensity * 2);
+      // CHROMOTHERAPY - full screen color therapy synced to breathing
+      const chromoIntensity = 0.15 + (breathIntensity * 0.25);
+      ctx.fillStyle = `${color}${Math.floor(chromoIntensity * 255).toString(16).padStart(2, '0')}`;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // SACRED GEOMETRY MANDALA - rotates with audio + breathing
+      const rotation = time * 0.4 + (intensity * 3) + (breathIntensity * 0.5);
       
-      // OUTER RINGS - pulsing with bass
-      for (let ring = 5; ring >= 0; ring--) {
-        const radius = 80 + (ring * 60) + (bass * 80);
-        const alpha = 0.15 + (intensity * 0.3) - (ring * 0.02);
+      // OUTER RINGS - pulsing with bass + breathing (MAXIMIZED)
+      for (let ring = 6; ring >= 0; ring--) {
+        const baseRadius = 60 + (ring * 70);
+        const radius = baseRadius + (bass * 120) + (breathIntensity * 60);
+        const alpha = (0.2 + (intensity * 0.5) - (ring * 0.03)) * breathIntensity;
         
         ctx.strokeStyle = color;
-        ctx.globalAlpha = alpha;
-        ctx.lineWidth = 1 + (intensity * 3);
+        ctx.globalAlpha = Math.min(alpha, 0.9);
+        ctx.lineWidth = 2 + (intensity * 5) + (breathIntensity * 2);
         ctx.beginPath();
         ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
         ctx.stroke();
+        
+        // GLOW effect
+        ctx.shadowBlur = 20 + (intensity * 30);
+        ctx.shadowColor = color;
+        ctx.stroke();
+        ctx.shadowBlur = 0;
       }
 
       // FLOWER OF LIFE PATTERN - sacred geometry amplifies healing
@@ -436,48 +500,60 @@ export default function FrequencyChamber() {
       
       ctx.restore();
 
-      // PARTICLE FIELD - flows with audio energy
-      const particleCount = 60;
+      // PARTICLE FIELD - flows with audio energy (INCREASED COUNT)
+      const particleCount = 120; // More particles for density
       for (let i = 0; i < particleCount; i++) {
-        const angle = (i / particleCount) * Math.PI * 2 + time;
-        const distance = 150 + (Math.sin(time + i) * 50) + (dataArray[i % bufferLength] / 255) * 100;
+        const angle = (i / particleCount) * Math.PI * 2 + time + (breathIntensity * 0.5);
+        const distance = 120 + (Math.sin(time * 2 + i) * 70) + (dataArray[i % bufferLength] / 255) * 150 + (breathIntensity * 40);
         const x = centerX + Math.cos(angle) * distance;
         const y = centerY + Math.sin(angle) * distance;
-        const size = 1 + (dataArray[i % bufferLength] / 255) * 4;
+        const size = 2 + (dataArray[i % bufferLength] / 255) * 6 * breathIntensity;
         
+        // Particle with glow
         ctx.fillStyle = color;
-        ctx.globalAlpha = 0.4 + (dataArray[i % bufferLength] / 255) * 0.6;
+        ctx.globalAlpha = (0.5 + (dataArray[i % bufferLength] / 255) * 0.5) * breathIntensity;
+        ctx.shadowBlur = 10 + (size * 3);
+        ctx.shadowColor = color;
         ctx.beginPath();
         ctx.arc(x, y, size, 0, Math.PI * 2);
         ctx.fill();
+        ctx.shadowBlur = 0;
         
-        // Particle trail
-        const prevAngle = angle - 0.1;
-        const prevDist = distance - 10;
+        // Particle trail (thicker)
+        const prevAngle = angle - 0.15;
+        const prevDist = distance - 15;
         const prevX = centerX + Math.cos(prevAngle) * prevDist;
         const prevY = centerY + Math.sin(prevAngle) * prevDist;
         
-        ctx.strokeStyle = color;
-        ctx.globalAlpha = 0.2;
-        ctx.lineWidth = 1;
+        const trailGradient = ctx.createLinearGradient(prevX, prevY, x, y);
+        trailGradient.addColorStop(0, color + '00');
+        trailGradient.addColorStop(1, color + '88');
+        
+        ctx.strokeStyle = trailGradient;
+        ctx.globalAlpha = 0.4;
+        ctx.lineWidth = 2;
         ctx.beginPath();
         ctx.moveTo(prevX, prevY);
         ctx.lineTo(x, y);
         ctx.stroke();
       }
 
-      // CENTER CORE - breathing with audio (chromotherapy focal point)
-      const coreRadius = 40 + (intensity * 60);
+      // CENTER CORE - breathing with audio (MAXIMIZED chromotherapy)
+      const coreRadius = 50 + (intensity * 100) + (breathIntensity * 80);
       const gradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, coreRadius);
-      gradient.addColorStop(0, color);
-      gradient.addColorStop(0.5, color + 'cc');
+      gradient.addColorStop(0, '#ffffff');
+      gradient.addColorStop(0.2, color);
+      gradient.addColorStop(0.6, color + 'aa');
       gradient.addColorStop(1, color + '00');
       
       ctx.fillStyle = gradient;
-      ctx.globalAlpha = 0.6 + (intensity * 0.4);
+      ctx.globalAlpha = 0.7 + (intensity * 0.3) * breathIntensity;
+      ctx.shadowBlur = 40 + (intensity * 60);
+      ctx.shadowColor = color;
       ctx.beginPath();
       ctx.arc(centerX, centerY, coreRadius, 0, Math.PI * 2);
       ctx.fill();
+      ctx.shadowBlur = 0;
 
       // FREQUENCY-SPECIFIC OVERLAYS
       const visual = selected?.visual;
