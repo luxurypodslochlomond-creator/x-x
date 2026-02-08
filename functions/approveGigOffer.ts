@@ -46,12 +46,16 @@ Deno.serve(async (req) => {
 
     // Notify band members
     try {
-      await base44.functions.invoke('notifyBandGigOffer', {
+      await base44.asServiceRole.functions.invoke('notifyBandOnGigOffer', {
         gigOfferId: gigId,
-        artistId: artistId
+        artistId: artistId,
+        venue: gig.venue,
+        date: gig.date_start,
+        promoterName: gig.promoter_name,
+        fee: gig.fee
       });
     } catch (err) {
-      console.log('Band notification queued:', err.message);
+      console.log('Band notification (non-critical):', err.message);
     }
 
     return Response.json({

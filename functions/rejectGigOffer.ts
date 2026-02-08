@@ -30,9 +30,22 @@ Deno.serve(async (req) => {
       manager_rejection_reason: reason
     });
 
+    // Notify promoter of rejection
+    try {
+      await base44.asServiceRole.functions.invoke('notifyPromoterOnBandDecision', {
+        gigOfferId: gigId,
+        promoterEmail: gig.promoter_email,
+        artistName: gig.artist_name || 'Artist',
+        decision: 'rejected',
+        rejectionReason: reason
+      });
+    } catch (err) {
+      console.log('Promoter notification (non-critical):', err.message);
+    }
+
     return Response.json({
       status: 'success',
-      message: 'Gig rejected'
+      message: 'Gig rejected and promoter notified'
     });
   } catch (error) {
     console.error('Reject gig error:', error);
