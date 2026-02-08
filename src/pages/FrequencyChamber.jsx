@@ -1265,6 +1265,17 @@ export default function FrequencyChamber() {
             </div>
             )}
             </div>
+
+      {/* P2P SHARE MODAL */}
+      <AnimatePresence>
+        {showShare && selected && (
+          <FrequencyP2PShare
+            frequency={selected}
+            timer={timer}
+            onClose={() => setShowShare(false)}
+          />
+        )}
+      </AnimatePresence>
           </div>
           )}
     </div>
