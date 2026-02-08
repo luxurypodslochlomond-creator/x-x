@@ -1,0 +1,70 @@
+import { createClientFromRequest } from 'npm:@base44/sdk@0.8.6';
+
+/**
+ * NOTIFY BAND WHEN GIG OFFER ARRIVES
+ * Called when a new gig offer is created
+ * Sends push notification to all band members
+ */
+
+Deno.serve(async (req) => {
+  try {
+    const base44 = createClientFromRequest(req);
+    
+    const {
+      gigOfferId,
+      artistId,
+      venue,
+      date,
+      promoterName,
+      fee
+    } = await req.json();
+
+    if (!gigOfferId || !artistId) {
+      return Response.json(
+        { error: 'Missing gigOfferId or artistId' },
+        { status: 400 }
+      );
+    }
+
+    // Get all band members for this artist
+    const bandMembers = await base44.asServiceRole.entities.TeamMember.filter({
+      artist_id: artistId,
+      status: { $ne: 'inactive' }
+    });
+
+    if (!bandMembers || bandMembers.length === 0) {
+      return Response.json({ sent: 0, message: 'No band members to notify' });
+    }
+
+    // Send push notification to each member
+    const notifyPromises = bandMembers.map(member =>
+      base44.asServiceRole.functions.invoke('sendBrowserPush', {
+        recipient_email: member.email,
+        title: `🎸 GIG OFFER: ${venue || 'New Venue'}`,
+        message: `${promoterName || 'Promoter'} - ${date}${fee ? ` • £${fee}` : ''}`,
+        notification_type: 'gig_offer',
+        gig_offer_id: gigOfferId
+      }).catch(e => {
+        console.log(`Failed to notify ${member.email}:`, e.message);
+        return null;
+      })
+    );
+
+    const results = await Promise.all(notifyPromises);
+    const successful = results.filter(r => r && r.success).length;
+
+    return Response.json({
+      success: true,
+      sent: successful,
+      total: bandMembers.length,
+      message: `Notified ${successful}/${bandMembers.length} band members`
+    });
+
+  } catch (error) {
+    console.error('Band notification error:', error);
+    return Response.json(
+      { error: error.message || 'Failed to notify band' },
+      { status: 500 }
+    );
+  }
+});
