@@ -1143,7 +1143,6 @@ export default function FrequencyChamber() {
               <span className="text-pink-400 text-xl">{showScience ? '−' : '+'}</span>
             </button>
             {showScience && (
-            <>
             <div className="p-3 sm:p-4 pt-0 border-t border-pink-500/30">
             <p className="text-gray-300 text-xs sm:text-sm mb-3">
               This isn't theory. It's proven physics + peer-reviewed research + AI learning. Here's the evidence:
@@ -1164,7 +1163,7 @@ export default function FrequencyChamber() {
                 • Choi et al. (2019). "Multisensory stimulation enhances cognitive performance." Stanford Medicine.
               </p>
             </div>
-            </>
+            </div>
             )}
         </div>
       </div>
