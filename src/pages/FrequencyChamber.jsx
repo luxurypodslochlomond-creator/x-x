@@ -432,8 +432,8 @@ export default function FrequencyChamber() {
       
       breathingPhaseRef.current = breathPhase;
 
-      // CLEAR with breathing-synced fade
-      ctx.fillStyle = `rgba(0, 0, 0, ${0.15 + (breathIntensity * 0.1)})`;
+      // PURE BLACK BACKGROUND - makes geometry VISIBLE for maximum healing
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.2)'; // Slight fade for trails
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       const centerX = canvas.width / 2;
@@ -442,117 +442,118 @@ export default function FrequencyChamber() {
       
       // Calculate audio intensity (MAXIMIZED for visual impact)
       const average = dataArray.reduce((a, b) => a + b) / bufferLength;
-      const intensity = (average / 255) * 1.4; // Boosted
-      const bass = (dataArray.slice(0, 10).reduce((a, b) => a + b) / 10 / 255) * 1.5;
-      const mid = (dataArray.slice(10, 30).reduce((a, b) => a + b) / 20 / 255) * 1.3;
-      const high = (dataArray.slice(30, 60).reduce((a, b) => a + b) / 30 / 255) * 1.2;
-
-      // CHROMOTHERAPY - full screen color therapy synced to breathing
-      const chromoIntensity = 0.15 + (breathIntensity * 0.25);
-      ctx.fillStyle = `${color}${Math.floor(chromoIntensity * 255).toString(16).padStart(2, '0')}`;
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      const intensity = (average / 255) * 1.6; // Even more boost
+      const bass = (dataArray.slice(0, 10).reduce((a, b) => a + b) / 10 / 255) * 2.0; // MAXIMUM bass
+      const mid = (dataArray.slice(10, 30).reduce((a, b) => a + b) / 20 / 255) * 1.5;
+      const high = (dataArray.slice(30, 60).reduce((a, b) => a + b) / 30 / 255) * 1.4;
 
       // SACRED GEOMETRY MANDALA - rotates with audio + breathing
       const rotation = time * 0.4 + (intensity * 3) + (breathIntensity * 0.5);
       
-      // OUTER RINGS - pulsing with bass + breathing (MAXIMIZED)
+      // OUTER RINGS - VIBRANT against black (chromotherapy through geometry)
       for (let ring = 6; ring >= 0; ring--) {
         const baseRadius = 60 + (ring * 70);
-        const radius = baseRadius + (bass * 120) + (breathIntensity * 60);
-        const alpha = (0.2 + (intensity * 0.5) - (ring * 0.03)) * breathIntensity;
+        const radius = baseRadius + (bass * 150) + (breathIntensity * 80);
+        const alpha = (0.4 + (intensity * 0.6) - (ring * 0.04)) * breathIntensity;
         
         ctx.strokeStyle = color;
-        ctx.globalAlpha = Math.min(alpha, 0.9);
-        ctx.lineWidth = 2 + (intensity * 5) + (breathIntensity * 2);
+        ctx.globalAlpha = Math.min(alpha, 1);
+        ctx.lineWidth = 3 + (intensity * 6) + (breathIntensity * 3);
         ctx.beginPath();
         ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
         ctx.stroke();
         
-        // GLOW effect
-        ctx.shadowBlur = 20 + (intensity * 30);
+        // MASSIVE GLOW - chromotherapy through sacred geometry
+        ctx.shadowBlur = 40 + (intensity * 60) + (breathIntensity * 40);
         ctx.shadowColor = color;
         ctx.stroke();
         ctx.shadowBlur = 0;
       }
 
-      // FLOWER OF LIFE PATTERN - sacred geometry amplifies healing
+      // FLOWER OF LIFE PATTERN - BRIGHT sacred geometry for chromotherapy
       ctx.save();
       ctx.translate(centerX, centerY);
       ctx.rotate(rotation);
       
       const petalCount = 6;
-      const petalRadius = 60 + (mid * 60);
+      const petalRadius = 70 + (mid * 80);
       
       for (let i = 0; i < petalCount; i++) {
         const angle = (i / petalCount) * Math.PI * 2;
         const x = Math.cos(angle) * petalRadius;
         const y = Math.sin(angle) * petalRadius;
         
-        // Petal circle
+        // BRIGHT petal circle with glow
         ctx.strokeStyle = color;
-        ctx.globalAlpha = 0.3 + (intensity * 0.4);
-        ctx.lineWidth = 2 + (intensity * 2);
+        ctx.globalAlpha = 0.6 + (intensity * 0.4);
+        ctx.lineWidth = 4 + (intensity * 4);
+        ctx.shadowBlur = 30;
+        ctx.shadowColor = color;
         ctx.beginPath();
         ctx.arc(x, y, petalRadius, 0, Math.PI * 2);
         ctx.stroke();
+        ctx.shadowBlur = 0;
         
-        // Inner fill - pulses with audio
+        // Inner fill - chromotherapy glow
         ctx.fillStyle = color;
-        ctx.globalAlpha = 0.05 + (intensity * 0.15);
+        ctx.globalAlpha = 0.15 + (intensity * 0.25);
+        ctx.shadowBlur = 20;
+        ctx.shadowColor = color;
         ctx.fill();
+        ctx.shadowBlur = 0;
       }
       
       ctx.restore();
 
-      // PARTICLE FIELD - flows with audio energy (INCREASED COUNT)
-      const particleCount = 120; // More particles for density
+      // PARTICLE FIELD - BRIGHT chromotherapy particles against black
+      const particleCount = 150; // Even more for visual density
       for (let i = 0; i < particleCount; i++) {
         const angle = (i / particleCount) * Math.PI * 2 + time + (breathIntensity * 0.5);
-        const distance = 120 + (Math.sin(time * 2 + i) * 70) + (dataArray[i % bufferLength] / 255) * 150 + (breathIntensity * 40);
+        const distance = 120 + (Math.sin(time * 2 + i) * 80) + (dataArray[i % bufferLength] / 255) * 180 + (breathIntensity * 50);
         const x = centerX + Math.cos(angle) * distance;
         const y = centerY + Math.sin(angle) * distance;
-        const size = 2 + (dataArray[i % bufferLength] / 255) * 6 * breathIntensity;
+        const size = 3 + (dataArray[i % bufferLength] / 255) * 8 * breathIntensity;
         
-        // Particle with glow
+        // BRIGHT particle with MASSIVE glow for chromotherapy
         ctx.fillStyle = color;
-        ctx.globalAlpha = (0.5 + (dataArray[i % bufferLength] / 255) * 0.5) * breathIntensity;
-        ctx.shadowBlur = 10 + (size * 3);
+        ctx.globalAlpha = (0.7 + (dataArray[i % bufferLength] / 255) * 0.3) * breathIntensity;
+        ctx.shadowBlur = 20 + (size * 6); // Huge glow
         ctx.shadowColor = color;
         ctx.beginPath();
         ctx.arc(x, y, size, 0, Math.PI * 2);
         ctx.fill();
         ctx.shadowBlur = 0;
         
-        // Particle trail (thicker)
-        const prevAngle = angle - 0.15;
-        const prevDist = distance - 15;
+        // BRIGHT particle trail
+        const prevAngle = angle - 0.2;
+        const prevDist = distance - 20;
         const prevX = centerX + Math.cos(prevAngle) * prevDist;
         const prevY = centerY + Math.sin(prevAngle) * prevDist;
         
         const trailGradient = ctx.createLinearGradient(prevX, prevY, x, y);
         trailGradient.addColorStop(0, color + '00');
-        trailGradient.addColorStop(1, color + '88');
+        trailGradient.addColorStop(1, color);
         
         ctx.strokeStyle = trailGradient;
-        ctx.globalAlpha = 0.4;
-        ctx.lineWidth = 2;
+        ctx.globalAlpha = 0.6;
+        ctx.lineWidth = 3;
         ctx.beginPath();
         ctx.moveTo(prevX, prevY);
         ctx.lineTo(x, y);
         ctx.stroke();
       }
 
-      // CENTER CORE - breathing with audio (MAXIMIZED chromotherapy)
-      const coreRadius = 50 + (intensity * 100) + (breathIntensity * 80);
+      // CENTER CORE - BRIGHT chromotherapy nucleus against black
+      const coreRadius = 60 + (intensity * 120) + (breathIntensity * 100);
       const gradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, coreRadius);
       gradient.addColorStop(0, '#ffffff');
-      gradient.addColorStop(0.2, color);
-      gradient.addColorStop(0.6, color + 'aa');
+      gradient.addColorStop(0.15, color);
+      gradient.addColorStop(0.5, color);
       gradient.addColorStop(1, color + '00');
       
       ctx.fillStyle = gradient;
-      ctx.globalAlpha = 0.7 + (intensity * 0.3) * breathIntensity;
-      ctx.shadowBlur = 40 + (intensity * 60);
+      ctx.globalAlpha = 0.9 * breathIntensity;
+      ctx.shadowBlur = 80 + (intensity * 100); // MASSIVE glow for chromotherapy
       ctx.shadowColor = color;
       ctx.beginPath();
       ctx.arc(centerX, centerY, coreRadius, 0, Math.PI * 2);
