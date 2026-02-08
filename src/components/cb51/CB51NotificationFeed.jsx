@@ -20,11 +20,23 @@ export default function CB51NotificationFeed({ artistId }) {
   });
 
   const approveMutation = useMutation({
-    mutationFn: async (gigId) => {
+    mutationFn: async (gig) => {
       await base44.functions.invoke('approveGigOffer', {
-        gigId: gigId,
+        gigId: gig.id,
         artistId: artistId
       });
+      
+      // Notify promoter gig was approved
+      try {
+        await base44.asServiceRole.functions.invoke('notifyPromoterOnBandDecision', {
+          gigOfferId: gig.id,
+          promoterEmail: gig.promoter_email,
+          artistName: gig.artist_name,
+          decision: 'approved'
+        });
+      } catch (e) {
+        console.log('Promoter notify (non-critical):', e);
+      }
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['pendingGigs', artistId] });
@@ -127,11 +139,11 @@ export default function CB51NotificationFeed({ artistId }) {
                       Reject
                     </button>
                     <button 
-                      onClick={(e) => { e.stopPropagation(); approveMutation.mutate(gig.id); }}
+                      onClick={(e) => { e.stopPropagation(); approveMutation.mutate(gig); }}
                       disabled={approveMutation.isPending}
                       className="flex-1 px-2 py-1.5 bg-black border border-green-500/40 hover:border-green-400 text-green-400 text-[10px] font-bold rounded transition-colors disabled:opacity-50 flex items-center justify-center gap-1"
                     >
-                      {approveMutation.isPending ? <Loader className="w-3 h-3 animate-spin" /> : 'Approve'}
+                      {approveMutation.isPending ? <Loader className="w-3 h-3 animate-spin" /> : '✅ Approve'}
                     </button>
                   </div>
                 )}
