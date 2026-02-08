@@ -7,21 +7,9 @@ Deno.serve((req) => {
   const swCode = `
 // UF51 Service Worker - Offline Healing + Push Notifications
 const CACHE_NAME = 'uf51-healing-v1';
-const OFFLINE_URLS = [
-  '/pages/FrequencyChamber',
-  '/components/healing/AI51FrequencyLearning',
-  '/components/healing/FrequencyP2PShare'
-];
 
 self.addEventListener('install', (event) => {
   console.log('[SW] Installing UF51 Healing...');
-  event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => {
-      return cache.addAll(OFFLINE_URLS).catch(err => {
-        console.log('[SW] Cache failed (non-critical):', err);
-      });
-    })
-  );
   self.skipWaiting();
 });
 
@@ -65,35 +53,29 @@ self.addEventListener('push', (event) => {
   );
 });
 
-// Offline-first fetch strategy
+// Cache assets on fetch (passive caching)
 self.addEventListener('fetch', (event) => {
   // Only cache GET requests
   if (event.request.method !== 'GET') return;
   
-  // Skip non-same-origin requests
-  if (!event.request.url.startsWith(self.location.origin)) return;
+  // Skip API calls and non-same-origin
+  if (event.request.url.includes('/api/') || !event.request.url.startsWith(self.location.origin)) return;
 
+  // Network first, cache fallback
   event.respondWith(
-    caches.match(event.request).then(cached => {
-      // Return cached if available
-      if (cached) return cached;
-
-      // Otherwise fetch from network
-      return fetch(event.request).then(response => {
-        // Cache successful responses
-        if (response.ok) {
-          const clone = response.clone();
-          caches.open(CACHE_NAME).then(cache => {
-            cache.put(event.request, clone);
-          });
-        }
-        return response;
-      }).catch(() => {
-        // Offline fallback
-        return new Response('Offline - Healing frequencies still work!', {
-          status: 503,
-          headers: { 'Content-Type': 'text/plain' }
+    fetch(event.request).then(response => {
+      // Cache successful responses
+      if (response.ok) {
+        const clone = response.clone();
+        caches.open(CACHE_NAME).then(cache => {
+          cache.put(event.request, clone).catch(() => {});
         });
+      }
+      return response;
+    }).catch(() => {
+      // Try cache on network failure
+      return caches.match(event.request).then(cached => {
+        return cached || new Response('Offline', { status: 503 });
       });
     })
   );
