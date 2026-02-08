@@ -937,8 +937,8 @@ export default function FrequencyChamber() {
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             className="p-8 border-4 bg-black hover:bg-white/5 transition-all relative text-left h-full sticky"
-            style={{ top: `${(FREQUENCIES.indexOf(freq) % 3) * 20}px` }}
             style={{ 
+              top: `${(FREQUENCIES.indexOf(freq) % 3) * 20}px`,
               borderColor: ai51Recommendation?.frequencyId === freq.id ? freq.color : freq.color,
               boxShadow: ai51Recommendation?.frequencyId === freq.id 
                 ? `0 0 40px ${freq.color}, 0 0 60px ${freq.color}80` 
