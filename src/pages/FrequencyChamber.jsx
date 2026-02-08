@@ -799,14 +799,16 @@ export default function FrequencyChamber() {
       <div className="max-w-6xl mx-auto mb-4 sm:mb-6 text-center px-2">
         <div className="flex items-center justify-center gap-2 mb-2">
           <COOLASFUCKWaves size={32} animate={true} />
-          <h1 className="text-2xl sm:text-4xl font-black text-white">FREQUENCY CHAMBER</h1>
+          <h1 className="text-2xl sm:text-4xl font-black bg-gradient-to-r from-cyan-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent">
+            I'M HERE TO HEAL YOU
+          </h1>
           {!isOnline && (
             <div className="px-2 py-1 bg-green-500/20 border border-green-500 rounded text-[10px] font-bold text-green-400 font-mono">
               OFFLINE ✓
             </div>
           )}
         </div>
-        <p className="text-gray-500 text-xs sm:text-sm font-mono">Pure healing • Distinct sounds • Real results</p>
+        <p className="text-gray-400 text-xs sm:text-sm">Where does it hurt? Tell me with your mind, I'll send the frequency ♾️❤️</p>
 
         {/* DEVICE FILTER */}
         <div className="flex flex-wrap items-center justify-center gap-2 mt-4 sm:mt-6">
@@ -862,8 +864,8 @@ export default function FrequencyChamber() {
               <div className="flex items-center gap-3">
                 <selected.icon size={32} animate={true} />
                 <div>
-                  <p className="font-black text-xl" style={{ color: selected.color }}>{selected.name}</p>
-                  <p className="text-gray-500 text-sm font-mono">{selected.hz} Hz</p>
+                  <p className="font-black text-xl" style={{ color: selected.color }}>Healing your {selected.name.toLowerCase()}</p>
+                  <p className="text-gray-400 text-sm">{selected.hz} Hz • I'm with you ♾️</p>
                 </div>
               </div>
               <div className="text-3xl font-black font-mono" style={{ color: selected.color }}>
@@ -919,11 +921,11 @@ export default function FrequencyChamber() {
                   animate={{ opacity: [0.8, 1, 0.8] }}
                   transition={{ duration: 3, repeat: Infinity }}
                 >
-                  <p className="text-base sm:text-xl font-black font-mono mb-0.5" style={{ color: selected.color, textShadow: `0 0 15px ${selected.color}` }}>
-                    {selected.description.toUpperCase()}
+                  <p className="text-base sm:text-xl font-black mb-0.5" style={{ color: selected.color, textShadow: `0 0 15px ${selected.color}` }}>
+                    {selected.description}
                   </p>
-                  <p className="text-[10px] sm:text-xs text-gray-400 font-mono">
-                    {selected.hz} Hz • {selected.waveform} • Dual chromotherapy
+                  <p className="text-[10px] sm:text-xs text-gray-400">
+                    Think about where it hurts • I'll send {selected.hz} Hz there • We do this together ♾️
                   </p>
                 </motion.div>
                 {selected.psychology && (
@@ -1098,7 +1100,7 @@ export default function FrequencyChamber() {
                   }}
                 >
                   <Share2 className="w-5 h-5" />
-                  SHARE
+                  SHARE HEALING
                 </button>
 
                 {/* STOP */}
@@ -1112,7 +1114,7 @@ export default function FrequencyChamber() {
                     boxShadow: `0 0 40px ${selected.color}60`
                   }}
                 >
-                  STOP
+                  I'M HEALED ✓
                 </button>
               </div>
             </div>
@@ -1242,29 +1244,36 @@ export default function FrequencyChamber() {
         ))}
       </div>
 
-          {/* HOW TO USE - COLLAPSIBLE */}
-          <div className="mt-4 sm:mt-6 bg-cyan-900/20 border-2 border-cyan-500 rounded-lg overflow-hidden">
+          {/* HOW IT TARGETS YOUR PAIN */}
+          <div className="mt-4 sm:mt-6 bg-gradient-to-br from-pink-900/20 to-cyan-900/20 border-2 border-pink-500 rounded-lg overflow-hidden">
             <button 
               onClick={() => setShowHowItWorks(!showHowItWorks)}
-              className="w-full p-3 sm:p-4 flex items-center justify-between hover:bg-cyan-900/30 transition-all"
+              className="w-full p-3 sm:p-4 flex items-center justify-between hover:bg-pink-900/30 transition-all"
             >
-              <p className="text-cyan-400 font-black text-sm sm:text-base">📱 HOW TO USE</p>
-              <span className="text-cyan-400 text-xl">{showHowItWorks ? '−' : '+'}</span>
+              <p className="text-pink-400 font-black text-sm sm:text-base">❤️ HOW I REACH YOUR PAIN</p>
+              <span className="text-pink-400 text-xl">{showHowItWorks ? '−' : '+'}</span>
             </button>
             {showHowItWorks && (
-              <div className="p-3 sm:p-4 pt-0 border-t border-cyan-500/30">
-                <p className="text-gray-300 text-xs sm:text-sm mb-2">
-                  <strong>1.</strong> Tap the frequency that matches your need<br/>
-                  <strong>2.</strong> Follow the timer recommendation<br/>
-                  <strong>3.</strong> Check "STACK WITH" for combined healing<br/>
-                  <strong>4.</strong> Each waveform SOUNDS different = targets different tissues
+              <div className="p-3 sm:p-4 pt-0 border-t border-pink-500/30">
+                <p className="text-gray-300 text-xs sm:text-sm mb-3 leading-relaxed">
+                  Bro here's the truth about how this reaches your chest, tooth, wherever:
                 </p>
-                <div className="mt-3 space-y-1.5 text-xs text-gray-400">
-                  <p><strong className="text-cyan-400">SINE:</strong> Pure tone, gentle, deep penetration</p>
-                  <p><strong className="text-cyan-400">SQUARE:</strong> Sharp, cuts through pain/fog</p>
-                  <p><strong className="text-cyan-400">SAWTOOTH:</strong> Aggressive, breaks up blockages</p>
-                  <p><strong className="text-cyan-400">TRIANGLE:</strong> Smooth, releases tension</p>
+                <div className="space-y-2 text-xs text-gray-300 leading-relaxed">
+                  <p><strong className="text-cyan-400">1. SOUND VIBRATES YOUR WHOLE BODY</strong><br/>
+                  Physics bro - the Hz goes through ALL of you. Can't be stopped. Every cell feels it.</p>
+                  
+                  <p><strong className="text-pink-400">2. YOUR MIND FOCUSES IT</strong><br/>
+                  When you tap "CHEST PAIN" and THINK about your chest - your brain sends healing energy there. Proven science (mind-body connection is real medicine).</p>
+                  
+                  <p><strong className="text-green-400">3. DAMAGED CELLS ABSORB MORE</strong><br/>
+                  Sick/hurt cells vibrate differently - so they PULL IN more frequency (resonance physics - like opera singer breaking the right glass).</p>
+                  
+                  <p><strong className="text-amber-400">4. COLOR HITS YOUR EYES → BRAIN</strong><br/>
+                  Chromotherapy - the healing colors trigger chemical changes in your brain. Goes straight to the spot you're focusing on.</p>
                 </div>
+                <p className="text-pink-300 text-xs mt-3 font-bold">
+                  So it's YOU + ME + UNIVERSE working together. Not magic - physics + your beautiful consciousness ♾️❤️
+                </p>
               </div>
             )}
           </div>
