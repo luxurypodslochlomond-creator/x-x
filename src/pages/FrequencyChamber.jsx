@@ -489,9 +489,9 @@ export default function FrequencyChamber() {
       const centerX = canvas.width / 2;
       const centerY = canvas.height / 2;
 
-      // MOBILE SCALE FACTOR (smaller patterns on mobile)
+      // MOBILE SCALE FACTOR (much smaller, modern, minimal)
       const isMobile = canvas.width < 600;
-      const scaleFactor = isMobile ? Math.min(canvas.width, canvas.height) / 1200 : Math.min(canvas.width, canvas.height) / 800;
+      const scaleFactor = isMobile ? Math.min(canvas.width, canvas.height) / 1800 : Math.min(canvas.width, canvas.height) / 1000;
       const color = selected?.color || '#06b6d4';
       
       // Calculate audio intensity
@@ -513,9 +513,10 @@ export default function FrequencyChamber() {
       const rotation = time * 0.4 + (intensity * 3) + (breathIntensity * 0.5);
       
       // OUTER RINGS - DUAL COLOR CHROMOTHERAPY (space medicine)
-      for (let ring = 6; ring >= 0; ring--) {
-        const baseRadius = (40 + (ring * 50)) * scaleFactor;
-        const radius = baseRadius + (bass * 150 * scaleFactor) + (breathIntensity * 80 * scaleFactor);
+      const ringCount = isMobile ? 4 : 6;
+      for (let ring = ringCount; ring >= 0; ring--) {
+        const baseRadius = (30 + (ring * 40)) * scaleFactor;
+        const radius = baseRadius + (bass * 100 * scaleFactor) + (breathIntensity * 60 * scaleFactor);
         const alpha = (0.4 + (intensity * 0.6) - (ring * 0.04)) * breathIntensity;
 
         // Alternate between primary and harmonic color per ring
@@ -541,7 +542,7 @@ export default function FrequencyChamber() {
       ctx.rotate(rotation);
 
       const petalCount = 6;
-      const petalRadius = (50 + (mid * 60)) * scaleFactor;
+      const petalRadius = (40 + (mid * 50)) * scaleFactor;
       
       for (let i = 0; i < petalCount; i++) {
         const angle = (i / petalCount) * Math.PI * 2;
@@ -571,13 +572,13 @@ export default function FrequencyChamber() {
       ctx.restore();
 
       // PARTICLE FIELD - BRIGHT chromotherapy particles against black
-      const particleCount = isMobile ? 60 : 120;
+      const particleCount = isMobile ? 40 : 100;
       for (let i = 0; i < particleCount; i++) {
         const angle = (i / particleCount) * Math.PI * 2 + time + (breathIntensity * 0.5);
-        const distance = (80 + (Math.sin(time * 2 + i) * 50) + (dataArray[i % bufferLength] / 255) * 120 + (breathIntensity * 30)) * scaleFactor;
+        const distance = (60 + (Math.sin(time * 2 + i) * 40) + (dataArray[i % bufferLength] / 255) * 100 + (breathIntensity * 25)) * scaleFactor;
         const x = centerX + Math.cos(angle) * distance;
         const y = centerY + Math.sin(angle) * distance;
-        const size = 3 + (dataArray[i % bufferLength] / 255) * 8 * breathIntensity;
+        const size = (2 + (dataArray[i % bufferLength] / 255) * 6 * breathIntensity) * (isMobile ? 0.8 : 1);
         
         // BRIGHT particle with MASSIVE glow for chromotherapy
         ctx.fillStyle = color;
@@ -609,7 +610,7 @@ export default function FrequencyChamber() {
       }
 
       // CENTER CORE - BRIGHT chromotherapy nucleus against black
-      const coreRadius = (40 + (intensity * 80) + (breathIntensity * 60)) * scaleFactor;
+      const coreRadius = (30 + (intensity * 60) + (breathIntensity * 50)) * scaleFactor;
       const gradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, coreRadius);
       gradient.addColorStop(0, '#ffffff');
       gradient.addColorStop(0.15, color);
