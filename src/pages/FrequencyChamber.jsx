@@ -836,72 +836,92 @@ export default function FrequencyChamber() {
                 ))}
               </div>
 
-              {/* BREATHING GUIDE - CENTERED, PULSING */}
+              {/* BREATHING GUIDE - 4-7-8 TECHNIQUE */}
               <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                <motion.div
-                  className="relative"
-                  animate={{
-                    scale: [0.8, 1.4, 0.8],
-                  }}
-                  transition={{
-                    duration: 6,
-                    repeat: Infinity,
-                    ease: "easeInOut"
-                  }}
-                >
-                  {/* OUTER RINGS */}
-                  {[...Array(3)].map((_, i) => (
+                <div className="relative">
+                  {/* OUTER BREATHING RINGS */}
+                  {[...Array(4)].map((_, i) => (
                     <motion.div
                       key={i}
                       className="absolute inset-0 rounded-full border-2"
                       style={{ 
                         borderColor: selected.color,
-                        width: 120 + (i * 40),
-                        height: 120 + (i * 40),
+                        width: 140 + (i * 50),
+                        height: 140 + (i * 50),
                         left: '50%',
                         top: '50%',
                         transform: 'translate(-50%, -50%)'
                       }}
                       animate={{
-                        scale: [1, 1.2, 1],
-                        opacity: [0.3, 0.6, 0.3]
+                        scale: [0.9, 1.3, 1.0, 0.9],
+                        opacity: [0.2, 0.6, 0.4, 0.2]
                       }}
                       transition={{
-                        duration: 6,
+                        duration: 21, // 4-7-8 cycle
                         repeat: Infinity,
                         ease: "easeInOut",
-                        delay: i * 0.3
+                        delay: i * 0.5
                       }}
                     />
                   ))}
                   
-                  {/* CENTER CIRCLE */}
-                  <div 
-                    className="w-28 h-28 sm:w-36 sm:h-36 rounded-full border-4 flex items-center justify-center backdrop-blur-sm relative"
+                  {/* CENTER BREATHING CIRCLE */}
+                  <motion.div 
+                    className="w-32 h-32 sm:w-40 sm:h-40 rounded-full border-4 flex flex-col items-center justify-center backdrop-blur-md relative"
                     style={{ 
                       borderColor: selected.color,
-                      backgroundColor: `${selected.color}15`,
-                      boxShadow: `0 0 40px ${selected.color}, inset 0 0 40px ${selected.color}30`
+                      backgroundColor: `${selected.color}20`,
+                      boxShadow: `0 0 60px ${selected.color}, inset 0 0 60px ${selected.color}40`
+                    }}
+                    animate={{
+                      scale: [0.8, 1.5, 1.0, 0.8], // Inhale, Hold, Exhale, Pause
+                      borderWidth: [4, 6, 4, 2]
+                    }}
+                    transition={{
+                      duration: 21,
+                      repeat: Infinity,
+                      times: [0, 0.19, 0.52, 0.90], // 4s, 7s, 8s, 2s
+                      ease: "easeInOut"
                     }}
                   >
-                    {/* INNER GLOW */}
-                    <div 
-                      className="absolute inset-2 rounded-full"
+                    {/* INNER GLOW - pulses with breathing */}
+                    <motion.div 
+                      className="absolute inset-3 rounded-full"
                       style={{
-                        background: `radial-gradient(circle, ${selected.color}40 0%, transparent 70%)`
+                        background: `radial-gradient(circle, ${selected.color}60 0%, transparent 70%)`
+                      }}
+                      animate={{
+                        opacity: [0.4, 1, 0.6, 0.4]
+                      }}
+                      transition={{
+                        duration: 21,
+                        repeat: Infinity,
+                        times: [0, 0.19, 0.52, 0.90]
                       }}
                     />
                     
-                    <motion.p
-                      className="text-xl sm:text-3xl font-black font-mono relative z-10"
-                      style={{ color: selected.color, textShadow: `0 0 20px ${selected.color}` }}
-                      animate={{ opacity: [0.7, 1, 0.7] }}
-                      transition={{ duration: 3, repeat: Infinity }}
-                    >
-                      BREATHE
-                    </motion.p>
-                  </div>
-                </motion.div>
+                    {/* BREATHING TEXT - changes with phase */}
+                    <div className="relative z-10 text-center">
+                      <motion.p
+                        key={Math.floor(timer / 4) % 4}
+                        initial={{ scale: 0.8, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        className="text-2xl sm:text-4xl font-black font-mono"
+                        style={{ color: selected.color, textShadow: `0 0 20px ${selected.color}` }}
+                      >
+                        {(timer % 21) < 4 ? 'IN' : (timer % 21) < 11 ? 'HOLD' : (timer % 21) < 19 ? 'OUT' : 'PAUSE'}
+                      </motion.p>
+                      <motion.p
+                        className="text-xs font-mono mt-1"
+                        style={{ color: `${selected.color}cc` }}
+                        animate={{ opacity: [0.6, 1, 0.6] }}
+                        transition={{ duration: 1, repeat: Infinity }}
+                      >
+                        {(timer % 21) < 4 ? '4s' : (timer % 21) < 11 ? '7s' : (timer % 21) < 19 ? '8s' : '2s'}
+                      </motion.p>
+                    </div>
+                  </motion.div>
+                </div>
               </div>
 
               {/* CORNER MARKERS - HUD style */}
