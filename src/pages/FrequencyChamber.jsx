@@ -513,94 +513,85 @@ export default function FrequencyChamber() {
       const universePulse = Math.sin(time * 0.3) * 0.3 + 0.7;
       const rotation = time * 0.15; // Much slower - meditative
       
-      // BREATHING AURA FIELD - soft, alive, warm
-      const auraCount = isMobile ? 3 : 4;
-      for (let aura = auraCount; aura >= 0; aura--) {
-        const breathScale = 0.7 + (breathIntensity * 0.6); // BIGGER breathing
-        const baseRadius = (60 + (aura * 80)) * scaleFactor * breathScale;
-        const radius = baseRadius + (bass * 40 * scaleFactor) + (noise * 20);
+      // MATRIX DIGITAL RAIN - COOLASFUCK CODE EFFECT
+      const charSize = isMobile ? 12 : 16;
+      const chars = '01ⒶⒽⒿⓆⓄⓏⓄⓍⓍⓏⒽⒿⒶ◈●◇■□▪▫▬▭▮▯◆◇◈◉◊●○';
+      
+      // Digital rain columns
+      const cols = Math.ceil(canvas.width / charSize);
+      for (let col = 0; col < cols; col++) {
+        const x = col * charSize;
+        const freq = dataArray[col % bufferLength] / 255;
+        const speed = 2 + (freq * 8); // FAST when audio is loud
         
-        // MASSIVE SOFT GLOW - feels warm
-        const gradient = ctx.createRadialGradient(centerX, centerY, radius * 0.3, centerX, centerY, radius);
-        gradient.addColorStop(0, primaryColor + 'ff');
-        gradient.addColorStop(0.3, primaryColor + '80');
-        gradient.addColorStop(0.6, harmonicColor + '40');
-        gradient.addColorStop(1, harmonicColor + '00');
+        // Calculate position with falling effect
+        const yOffset = (time * speed * 40 + col * 123) % (canvas.height + charSize);
+        const y = yOffset - canvas.height;
         
-        ctx.strokeStyle = gradient;
-        ctx.globalAlpha = (0.15 + (intensity * 0.2)) * universePulse * breathIntensity;
-        ctx.lineWidth = 60 + (aura * 40); // THICK = soft
-        ctx.shadowBlur = 120 + (breathIntensity * 100); // MASSIVE blur
-        ctx.shadowColor = aura % 2 === 0 ? primaryColor : harmonicColor;
+        // Character selection based on frequency
+        const charIndex = Math.floor((time * freq * 20 + col) % chars.length);
+        const char = chars[charIndex];
         
+        // Glow intensity based on audio
+        const glowIntensity = freq * 0.8 + 0.2;
+        
+        // Primary color with intensity
+        ctx.font = `bold ${charSize}px 'Courier New', monospace`;
+        ctx.globalAlpha = 0.8 * glowIntensity;
+        ctx.fillStyle = primaryColor;
+        ctx.shadowBlur = 15 * glowIntensity;
+        ctx.shadowColor = primaryColor;
+        ctx.fillText(char, x, y);
+        
+        // Trailing glow effect
+        if (y + charSize < canvas.height) {
+          ctx.globalAlpha = 0.3 * glowIntensity;
+          ctx.shadowBlur = 25 * glowIntensity;
+          ctx.fillText(char, x, y + charSize * 2);
+          ctx.globalAlpha = 0.1 * glowIntensity;
+          ctx.fillText(char, x, y + charSize * 4);
+        }
+      }
+
+      // FREQUENCY SCAN LINES - cyberpunk overlay
+      const scanLineHeight = 4;
+      const scanY = (time * 200) % canvas.height;
+      ctx.globalAlpha = 0.15;
+      ctx.strokeStyle = harmonicColor;
+      ctx.lineWidth = 2;
+      for (let i = -3; i < 3; i++) {
         ctx.beginPath();
-        ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
+        ctx.moveTo(0, scanY + (i * scanLineHeight));
+        ctx.lineTo(canvas.width, scanY + (i * scanLineHeight));
         ctx.stroke();
-        ctx.shadowBlur = 0;
       }
 
-      // CONSCIOUSNESS PETALS - organic, flowing
-      ctx.save();
-      ctx.translate(centerX, centerY);
-      ctx.rotate(rotation * 0.5); // Slower
+      // CORE FREQUENCY PULSE - digital heartbeat
+      ctx.globalAlpha = 0.6 * breathIntensity;
+      ctx.shadowBlur = 100;
+      ctx.shadowColor = primaryColor;
+      ctx.strokeStyle = primaryColor;
+      ctx.lineWidth = 3;
+      const pulseRadius = (40 + (intensity * 60)) * scaleFactor;
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, pulseRadius, 0, Math.PI * 2);
+      ctx.stroke();
+      ctx.shadowBlur = 0;
 
-      const petalCount = 6;
-      const petalRadius = (25 + (mid * 25)) * scaleFactor * (0.9 + breathIntensity * 0.3);
-      
-      for (let i = 0; i < petalCount; i++) {
-        const angle = (i / petalCount) * Math.PI * 2;
-        const organicOffset = Math.sin(time * 0.8 + i) * 15 * scaleFactor; // Organic movement
-        const x = Math.cos(angle) * (petalRadius + organicOffset);
-        const y = Math.sin(angle) * (petalRadius + organicOffset);
+      // FREQUENCY BARS - audio reactive matrix style
+      const barCount = 16;
+      const barWidth = (canvas.width / barCount) * 0.8;
+      for (let i = 0; i < barCount; i++) {
+        const freq = dataArray[Math.floor((i / barCount) * bufferLength)] / 255;
+        const barHeight = freq * canvas.height * 0.4;
+        const x = (canvas.width / barCount) * i + (barWidth * 0.1);
+        const y = centerY - (barHeight / 2);
         
-        // SOFT PETAL with radial gradient
-        const petalGradient = ctx.createRadialGradient(x, y, 0, x, y, petalRadius * 1.5);
-        petalGradient.addColorStop(0, primaryColor + 'ff');
-        petalGradient.addColorStop(0.4, harmonicColor + 'aa');
-        petalGradient.addColorStop(1, color + '00');
-        
-        ctx.fillStyle = petalGradient;
-        ctx.globalAlpha = (0.25 + (intensity * 0.3)) * breathIntensity;
-        ctx.shadowBlur = 80; // Massive soft glow
-        ctx.shadowColor = color;
-        ctx.beginPath();
-        ctx.arc(x, y, petalRadius, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.shadowBlur = 0;
-      }
-      
-      ctx.restore();
-
-      // CONSCIOUSNESS ORBS - fireflies, healing spirits, alive
-      const orbCount = isMobile ? 20 : 50;
-      for (let i = 0; i < orbCount; i++) {
-        // Organic spiral motion
-        const spiralAngle = i * PHI * 2.4;
-        const drift = Math.sin(time * 0.5 + i * 0.5) * 30; // Slow drift
-        const angle = spiralAngle + (time * 0.3) + drift;
-        const distance = (40 + (Math.sqrt(i) * 20) + (dataArray[i % bufferLength] / 255) * 40) * scaleFactor * universePulse;
-        const x = centerX + Math.cos(angle) * distance;
-        const y = centerY + Math.sin(angle) * distance;
-        
-        // ORB SIZE - breathes with you
-        const baseSize = (3 + (dataArray[i % bufferLength] / 255) * 8) * breathIntensity;
-        const size = baseSize * (isMobile ? 0.7 : 1);
-        
-        // SOFT ORB GLOW - like firefly
-        const orbGradient = ctx.createRadialGradient(x, y, 0, x, y, size * 4);
-        orbGradient.addColorStop(0, '#ffffff');
-        orbGradient.addColorStop(0.2, i % 2 === 0 ? primaryColor : harmonicColor);
-        orbGradient.addColorStop(0.5, color + 'aa');
-        orbGradient.addColorStop(1, color + '00');
-        
-        ctx.fillStyle = orbGradient;
-        ctx.globalAlpha = (0.6 + (dataArray[i % bufferLength] / 255) * 0.4) * breathIntensity * universePulse;
-        ctx.shadowBlur = 40 + (size * 8); // MASSIVE soft glow
+        ctx.globalAlpha = 0.7 * freq;
+        ctx.fillStyle = i % 2 === 0 ? primaryColor : harmonicColor;
+        ctx.shadowBlur = 20 * freq;
         ctx.shadowColor = i % 2 === 0 ? primaryColor : harmonicColor;
-        ctx.beginPath();
-        ctx.arc(x, y, size, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.shadowBlur = 0;
+        ctx.fillRect(x, y, barWidth * 0.8, barHeight);
       }
 
       // HEART CENTER - radiant warmth, your soul
