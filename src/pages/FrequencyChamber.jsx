@@ -1143,69 +1143,14 @@ export default function FrequencyChamber() {
               <span className="text-pink-400 text-xl">{showScience ? '−' : '+'}</span>
             </button>
             {showScience && (
+            <>
             <div className="p-3 sm:p-4 pt-0 border-t border-pink-500/30">
             <p className="text-gray-300 text-xs sm:text-sm mb-3">
               This isn't theory. It's proven physics + peer-reviewed research + AI learning. Here's the evidence:
             </p>
 
             <div className="space-y-3 text-xs text-gray-400">
-              {/* PROVEN SCIENCE */}
-              <div>
-                <p className="text-cyan-400 font-bold mb-1">PEER-REVIEWED MEDICAL RESEARCH:</p>
-                <p>• <strong>MIT (2016, Nature journal):</strong> 40 Hz gamma waves reduce Alzheimer's beta-amyloid plaques by 50% in mice<br/>
-                • <strong>NASA Langley Research (1960s):</strong> 7.83 Hz (Schumann resonance) = optimal human circadian rhythm sync<br/>
-                • <strong>FDA Approved (1979):</strong> 20-50 Hz electromagnetic devices for bone fracture healing (used in hospitals worldwide)<br/>
-                • <strong>Mayo Clinic:</strong> TENS machines (2-150 Hz) = standard non-invasive pain management since 1967</p>
-              </div>
-
-              {/* THE PHYSICS */}
-              <div>
-                <p className="text-pink-400 font-bold mb-1">THE PHYSICS (proven):</p>
-                <p>• <strong>Resonance:</strong> Every cell vibrates at specific frequency. Match it = amplify healing (Maxwell's equations).<br/>
-                • <strong>Destructive interference:</strong> Inverted wave cancels pain signals (same physics as noise-cancelling headphones).<br/>
-                • <strong>Binaural beats:</strong> Two frequencies = brain creates third (EEG-verified brainwave entrainment, 1973).<br/>
-                • <strong>Harmonic stacking:</strong> Multiple frequencies = geometric amplification via Fourier analysis (not addition, multiplication).</p>
-              </div>
-
-              {/* VISUAL THERAPY */}
-              <div>
-                <p className="text-green-400 font-bold mb-1">VISUAL HEALING (chromotherapy - 2,500+ year history):</p>
-                <p>• <strong>Color impacts brainwaves:</strong> Red = alertness, Blue = calm, Green = balance (EEG studies, Journal of Photochemistry, 2008)<br/>
-                • <strong>Hospital lighting:</strong> Blue light therapy FDA-approved for neonatal jaundice since 1968<br/>
-                • <strong>Seasonal Affective Disorder:</strong> Light therapy = proven treatment (10,000 lux, American Psychiatric Association)<br/>
-                • <strong>Our visualizer:</strong> Syncs color with frequency for amplified healing (sound + sight = 40% better outcomes, Stanford 2019)</p>
-              </div>
-
-              {/* WHAT AI51 ADDS */}
-              <div>
-                <p className="text-amber-400 font-bold mb-1">WHAT AI51 ADDS (cutting edge, 2025+):</p>
-                <p>• <strong>Pattern learning:</strong> AI learns WHEN you need WHAT. Morning chest pain? It remembers. Patterns humans can't see.<br/>
-                • <strong>Dynamic stacking:</strong> Combines frequencies based on YOUR body's response (not generic protocols).<br/>
-                • <strong>Feedback loops:</strong> Learns which waveforms work for YOUR tissue density, YOUR nerve pathways.<br/>
-                • <strong>Predictive healing:</strong> Detects patterns BEFORE symptoms worsen. Zero tracking, pure learning.<br/>
-                • <strong>P2P sharing:</strong> Share protocols that worked for you. BitChat-inspired mesh (thanks Jack for open source vision).</p>
-              </div>
-
-              {/* REVOLUTIONARY PART */}
-              <div className="pt-2 border-t border-pink-500/30">
-                <p className="text-pink-300 font-bold mb-1">🔥 WHY THIS CHANGES EVERYTHING:</p>
-                <p>• <strong>Zero chemicals:</strong> Just physics. No pills. No side effects. No tolerance build-up.<br/>
-                • <strong>Instant:</strong> Works in seconds (not weeks). Feel relief immediately.<br/>
-                • <strong>FREE FOREVER:</strong> Can't patent sound waves. Open source architecture.<br/>
-                • <strong>Personalized:</strong> AI learns YOUR body (not population averages).<br/>
-                • <strong>No dependency:</strong> Frequencies don't create addiction pathways.<br/>
-                • <strong>Works offline:</strong> Your phone = your healer. No internet needed.<br/>
-                • <strong>Share P2P:</strong> BitChat-inspired mesh. Help friends instantly. Zero barriers to healing.<br/>
-                • <strong>Unstoppable:</strong> Can't be censored, blocked, or taken away. Yours forever.</p>
-              </div>
-
-              {/* THE MATH */}
-              <div className="pt-2 border-t border-cyan-500/30">
-                <p className="text-cyan-300 font-bold mb-1">📐 THE MATH (harmonic amplification):</p>
-                <p>Traditional approaches use LINEAR math (one treatment = one effect). Nature uses HARMONIC math (frequencies interact geometrically).<br/><br/>
-                <strong>Example:</strong> 528 Hz + 396 Hz creates 209,088 Hz² of resonant amplification (not simple addition).<br/><br/>
-                That's why stacking works. That's why AI learns optimal combinations for YOUR body. That's the breakthrough.</p>
-              </div>
+...
             </div>
 
             <div className="mt-4 pt-3 border-t border-pink-500/30">
@@ -1219,6 +1164,7 @@ export default function FrequencyChamber() {
                 • Choi et al. (2019). "Multisensory stimulation enhances cognitive performance." Stanford Medicine.
               </p>
             </div>
+            </>
             )}
         </div>
       </div>
