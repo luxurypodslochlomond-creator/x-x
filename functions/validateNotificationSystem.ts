@@ -44,7 +44,7 @@ Deno.serve(async (req) => {
 
     // TEST 2: Manager notification function exists and responds
     try {
-      await base44.asServiceRole.functions.invoke('notifyManagerOnGigOffer', {
+      await base44.asServiceRole.functions.invoke('notifyManagerGigOffer', {
         gigOfferId: 'test_id',
         artistId: 'test_id',
         managerEmail: 'test@example.com',
