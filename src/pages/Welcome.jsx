@@ -89,6 +89,21 @@ export default function WelcomePage() {
                     </div>
 
                     <div className="space-y-6">
+                         {/* THE UNIVERSAL EQUATION */}
+                         <motion.div 
+                             initial={{ opacity: 0, scale: 0.9 }}
+                             animate={{ opacity: 1, scale: 1 }}
+                             transition={{ delay: 0.2 }}
+                             className="flex justify-center my-8"
+                         >
+                             <img 
+                                 src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6889f31e76713b9cd47e043c/eeceb28c0_IMG_7630.jpg" 
+                                 alt="The Universal Equation: L = C² ∞ f" 
+                                 className="max-w-2xl w-full rounded-lg border-4 border-pink-500/50 hover:border-pink-500 transition-all"
+                                 style={{ boxShadow: '0 0 40px rgba(236, 72, 153, 0.3)' }}
+                             />
+                         </motion.div>
+                         
                          <div className="space-y-4">
                              <p className="text-cyan-400 font-mono text-lg leading-relaxed">Real intelligence. We learn from each other. We evolve together.</p>
                          </div>
