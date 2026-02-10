@@ -213,25 +213,26 @@ const FREQUENCIES = [
     device: 'both' // works on speakers AND headphones
   },
 
-  // === TINNITUS SWEEP (FREQUENCY INVERSION) ===
+  // === TINNITUS PROTOCOLS (MULTI-MODE) ===
   {
-    id: 'tinnitus_sweep',
-    name: 'TINNITUS RESET',
-    hz: 20, // Start frequency
-    icon: COOLASFUCKWaves,
-    color: '#8b5cf6', // Purple for auditory healing
-    color2: '#06b6d4', // Cyan for neural reset
+    id: 'tinnitus_cancellation',
+    name: 'TINNITUS DESTROYER',
+    hz: 0, // User inputs their frequency
+    icon: COOLASFUCKShield,
+    color: '#ef4444', // Red for targeting pain
+    color2: '#06b6d4', // Cyan for silence
     visual: 'waves',
-    description: 'Frequency sweep: low→high→low resets auditory system',
+    description: 'AI noise cancellation: detects YOUR tinnitus → plays inverse wave → SILENCE',
     waveform: 'sine',
-    harmonics: [], // NO harmonics - sweep is the therapy
+    harmonics: [], // Generated dynamically based on detection
     timer: '20 min',
     stackWith: ['calm', 'anxiety'],
-    context: 'For tinnitus, ringing ears. Sweeps 20Hz→20kHz→20Hz to confuse/reset the phantom signal. Pure sine wave.',
-    device: 'headphones', // MUST use headphones for tinnitus
-    psychology: 'Auditory system resetting. Phantom signals fading. Silence returning. Ears healing now.',
-    isSweep: true, // Special flag
-    sweepDuration: 30 // 30 seconds per sweep cycle
+    context: 'DESTRUCTIVE INTERFERENCE: Same physics as AirPods Max. Detects your exact tinnitus frequency (2-5 tones), plays the INVERSE waveform = cancels the ringing. Then Alpha waves (10Hz) calm your auditory cortex. FREE. Medical devices charge £2000-5000.',
+    device: 'headphones', // MUST use headphones
+    psychology: 'Phantom signals cancelling. Brain learning silence. Auditory cortex calming. Tinnitus dissolving.',
+    isTinnitusCancellation: true,
+    modes: ['auto_detect', 'manual_input', 'notched_therapy', 'sweep'],
+    stressReduction: true // Reduces stress = reduces tinnitus intensity
   }
 ];
 
