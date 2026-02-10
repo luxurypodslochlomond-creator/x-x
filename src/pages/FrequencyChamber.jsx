@@ -1140,14 +1140,7 @@ export default function FrequencyChamber() {
         )}
       </AnimatePresence>
 
-      {/* TINNITUS CANCELLATION MODAL */}
-      <AnimatePresence>
-        {showTinnitusCancellation && (
-          <TinnitusCancellation
-            onClose={() => setShowTinnitusCancellation(false)}
-          />
-        )}
-      </AnimatePresence>
+
     </div>
   );
 }
