@@ -45,8 +45,21 @@ Deno.serve(async (req) => {
     const message = `${memberName} ${action} to ${gig.venue}\n${yesCount} YES • ${noCount} NO • ${pending} pending${reasonText}`;
 
     // In production, send push notification to manager
-    // For now, just log and return summary
     console.log(`📢 Manager notification: ${message}`);
+
+    // If all votes are YES, generate draft confirmation email
+    let draftEmail = null;
+    if (yesCount === bandMembers.length && bandMembers.length > 0) {
+      try {
+        const emailRes = await base44.asServiceRole.functions.invoke('generateGigConfirmationEmail', {
+          gigId: gigId,
+          artistId: gig.artist_id
+        });
+        draftEmail = emailRes.data?.draft || emailRes.draft;
+      } catch (emailErr) {
+        console.log('Draft email generation (non-critical):', emailErr.message);
+      }
+    }
 
     return Response.json({
       status: 'success',
@@ -58,7 +71,8 @@ Deno.serve(async (req) => {
         noCount,
         pending,
         total: bandMembers.length
-      }
+      },
+      draftEmail: draftEmail
     });
   } catch (error) {
     console.error('Band vote notification error:', error);
