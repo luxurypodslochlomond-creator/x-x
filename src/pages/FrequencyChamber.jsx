@@ -241,28 +241,39 @@ export default function FrequencyChamber() {
       masterGain.connect(analyser);
       analyser.connect(ctx.destination);
 
-      // PRIMARY FREQUENCY - CLEAN AND POWERFUL
+      // PRIMARY FREQUENCY - AMPLIFIED
       const carrier = freq.carrier || freq.hz;
       const osc = ctx.createOscillator();
       osc.type = freq.waveform;
       osc.frequency.value = carrier;
       const gain = ctx.createGain();
-      gain.gain.value = 0.6;
+      gain.gain.value = 0.7;
       osc.connect(gain);
       gain.connect(masterGain);
       osc.start();
       nodes.push(osc, gain);
 
-      // ONE SUBHARMONIC (octave down for depth)
+      // SUBHARMONIC (depth)
       const subOsc = ctx.createOscillator();
       subOsc.type = 'sine';
       subOsc.frequency.value = carrier * 0.5;
       const subGain = ctx.createGain();
-      subGain.gain.value = 0.4;
+      subGain.gain.value = 0.5;
       subOsc.connect(subGain);
       subGain.connect(masterGain);
       subOsc.start();
       nodes.push(subOsc, subGain);
+
+      // HARMONIC LAYER (richness)
+      const harmOsc = ctx.createOscillator();
+      harmOsc.type = 'sine';
+      harmOsc.frequency.value = carrier * 2;
+      const harmGain = ctx.createGain();
+      harmGain.gain.value = 0.3;
+      harmOsc.connect(harmGain);
+      harmGain.connect(masterGain);
+      harmOsc.start();
+      nodes.push(harmOsc, harmGain);
 
       nodesRef.current = nodes;
       setIsPlaying(true);
@@ -650,12 +661,9 @@ export default function FrequencyChamber() {
       {/* PLAYING NOW - FULLSCREEN */}
       <AnimatePresence>
         {isPlaying && selected && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+          <div
             className="fixed inset-0 z-50 flex flex-col"
-            style={{ backgroundColor: 'black' }}
+            style={{ backgroundColor: 'black', willChange: 'auto' }}
           >
             {/* FULLSCREEN HEALING CANVAS - pure chromotherapy */}
             <canvas
@@ -739,7 +747,7 @@ export default function FrequencyChamber() {
                 </button>
               </div>
             </div>
-          </motion.div>
+          </div>
         )}
       </AnimatePresence>
 
