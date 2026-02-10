@@ -203,26 +203,31 @@ export default function CB51GigUploadParser({ artistId, onGigCreated }) {
         </motion.label>
       )}
 
-      {/* APPROVAL STEP - After save */}
-      <AnimatePresence mode="wait">
+      {/* SAVED CONFIRMATION - Simple */}
+      <AnimatePresence>
         {savedGig && (
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.95 }}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0 }}
+            className="bg-green-900/30 border border-green-500/50 rounded-lg p-3 flex items-center justify-between"
           >
-            <CB51ManagerGigApproval
-              gig={savedGig}
-              artistId={selectedArtistId}
-              onApprovalComplete={(result) => {
-                console.log('✅ Approval complete:', result);
+            <div className="flex items-center gap-2">
+              <CheckCircle className="w-4 h-4 text-green-400" />
+              <p className="text-green-300 text-xs font-bold">{savedGig.title} saved ✓</p>
+            </div>
+            <button
+              onClick={() => {
                 setSavedGig(null);
                 setExtracted(null);
                 setEditing(null);
                 setFile(null);
                 onGigCreated?.(savedGig);
               }}
-            />
+              className="text-green-400 hover:text-green-300 text-xs font-bold"
+            >
+              Done
+            </button>
           </motion.div>
         )}
       </AnimatePresence>
