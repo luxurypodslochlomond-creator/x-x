@@ -63,9 +63,21 @@ export default function CB51PushSubscriptionManager({ userEmail }) {
     try {
       setIsLoading(true);
 
-      // Get VAPID public key
-      const vapidPublicKey = Deno.env?.get?.('VAPID_PUBLIC_KEY') || 
-        localStorage.getItem('VAPID_PUBLIC_KEY');
+      // Get VAPID public key from backend
+      let vapidPublicKey = localStorage.getItem('VAPID_PUBLIC_KEY');
+      
+      if (!vapidPublicKey) {
+        try {
+          const res = await fetch('/api/functions/getVapidPublicKey');
+          const data = await res.json();
+          vapidPublicKey = data.vapidPublicKey;
+          if (vapidPublicKey) {
+            localStorage.setItem('VAPID_PUBLIC_KEY', vapidPublicKey);
+          }
+        } catch (e) {
+          console.log('Failed to fetch VAPID key:', e);
+        }
+      }
 
       if (!vapidPublicKey) {
         console.log('VAPID key not available - push notifications disabled');
