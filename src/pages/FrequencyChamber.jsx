@@ -458,15 +458,19 @@ export default function FrequencyChamber() {
       const centerX = canvas.width / 2;
       const centerY = canvas.height / 2;
 
+      // RESPONSIVE SCALING
+      const isMobile = canvas.width < 600;
+      const maxSize = Math.min(canvas.width, canvas.height) * 0.4;
+
       // CHROMOTHERAPY WASH
       ctx.globalAlpha = 0.05 * breathIntensity;
       ctx.fillStyle = breathColor;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
       ctx.globalAlpha = 1;
 
-      // BIG HEALING CORE - SIMPLE GRADIENT
+      // BIG HEALING CORE - FITS SCREEN
       const pulse = Math.sin(time * 1.5) * 0.5 + 0.5;
-      const coreRadius = 200 + (pulse * 150);
+      const coreRadius = maxSize + (pulse * (maxSize * 0.3));
       
       const gradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, coreRadius);
       gradient.addColorStop(0, selected?.color || '#06b6d4');
@@ -479,28 +483,28 @@ export default function FrequencyChamber() {
       ctx.arc(centerX, centerY, coreRadius, 0, Math.PI * 2);
       ctx.fill();
 
-      // TWO SIMPLE BREATHING RINGS
+      // TWO BREATHING RINGS - FIT SCREEN
       ctx.strokeStyle = breathColor;
-      ctx.lineWidth = 4;
+      ctx.lineWidth = isMobile ? 3 : 4;
       ctx.globalAlpha = breathIntensity * 0.6;
       ctx.beginPath();
-      ctx.arc(centerX, centerY, 150 + (pulse * 100), 0, Math.PI * 2);
+      ctx.arc(centerX, centerY, maxSize * 0.6 + (pulse * maxSize * 0.2), 0, Math.PI * 2);
       ctx.stroke();
 
       ctx.globalAlpha = breathIntensity * 0.4;
       ctx.beginPath();
-      ctx.arc(centerX, centerY, 250 + (pulse * 120), 0, Math.PI * 2);
+      ctx.arc(centerX, centerY, maxSize * 0.9 + (pulse * maxSize * 0.25), 0, Math.PI * 2);
       ctx.stroke();
 
-      // BREATHING TEXT
+      // BREATHING TEXT - RESPONSIVE SIZE
       ctx.globalAlpha = 1;
       ctx.fillStyle = breathColor;
-      ctx.font = 'bold 20px monospace';
+      ctx.font = `bold ${isMobile ? '16px' : '24px'} monospace`;
       ctx.textAlign = 'center';
       const breathText = breathPhase === 'inhale' ? 'BREATHE IN' : 
                         breathPhase === 'hold' ? 'HOLD' :
                         breathPhase === 'exhale' ? 'BREATHE OUT' : 'REST';
-      ctx.fillText(breathText, centerX, centerY + 50);
+      ctx.fillText(breathText, centerX, centerY + (isMobile ? 30 : 60));
 
       ctx.globalAlpha = 1;
     };
