@@ -436,26 +436,26 @@ export default function TinnitusCancellation({ onClose }) {
         style={{ boxShadow: '0 0 60px rgba(239, 68, 68, 0.6)' }}
       >
           {/* HEADER */}
-          <div className="bg-gradient-to-r from-red-600 to-cyan-600 p-6">
+          <div className="bg-gradient-to-r from-red-600 to-cyan-600 p-4 sm:p-6 sticky top-0 z-10">
             <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <Shield className="w-10 h-10 text-white" />
+              <div className="flex items-center gap-2 sm:gap-3">
+                <Shield className="w-8 h-8 sm:w-10 sm:h-10 text-white" />
                 <div>
-                  <h2 className="text-2xl font-black text-white">TINNITUS DESTROYER</h2>
-                  <p className="text-white/80 text-sm font-mono">AirPods Max tech for your brain</p>
+                  <h2 className="text-lg sm:text-2xl font-black text-white">TINNITUS DESTROYER</h2>
+                  <p className="text-white/80 text-xs sm:text-sm font-mono">AirPods Max tech</p>
                 </div>
               </div>
               <button
                 onClick={onClose}
                 className="p-2 hover:bg-white/20 rounded-lg transition-colors"
               >
-                <X className="w-6 h-6 text-white" />
+                <X className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
               </button>
             </div>
           </div>
 
           {/* CONTENT */}
-          <div className="p-6 space-y-6">
+          <div className="p-4 sm:p-6 space-y-4 sm:space-y-6">
             {/* INSTRUCTIONS */}
             {showInstructions && !mode && (
               <div className="bg-cyan-500/10 border-2 border-cyan-500 rounded-lg p-4">
