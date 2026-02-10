@@ -424,18 +424,17 @@ export default function TinnitusCancellation({ onClose }) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 bg-black/95 backdrop-blur-xl z-[70] overflow-y-auto"
+      className="fixed inset-0 bg-black/95 backdrop-blur-xl z-[70] flex items-center justify-center p-3 sm:p-4"
       onClick={onClose}
     >
-      <div className="min-h-screen p-4 flex items-center justify-center">
-        <motion.div
-          initial={{ scale: 0.9, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          exit={{ scale: 0.9, opacity: 0 }}
-          onClick={(e) => e.stopPropagation()}
-          className="bg-black border-4 border-red-500 rounded-xl max-w-2xl w-full overflow-hidden"
-          style={{ boxShadow: '0 0 60px rgba(239, 68, 68, 0.6)' }}
-        >
+      <motion.div
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0.9, opacity: 0 }}
+        onClick={(e) => e.stopPropagation()}
+        className="bg-black border-4 border-red-500 rounded-xl max-w-2xl w-full max-h-[95vh] overflow-y-auto"
+        style={{ boxShadow: '0 0 60px rgba(239, 68, 68, 0.6)' }}
+      >
           {/* HEADER */}
           <div className="bg-gradient-to-r from-red-600 to-cyan-600 p-6">
             <div className="flex items-center justify-between">
