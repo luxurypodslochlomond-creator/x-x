@@ -323,76 +323,76 @@ export default function FrequencyChamber() {
         ultraSubOsc.start();
         nodes.push(ultraSubOsc, ultraSubGain);
 
-      // SUBHARMONIC (half - muscle layers)
-      const subOsc = ctx.createOscillator();
-      subOsc.type = 'sine';
-      subOsc.frequency.value = carrier * 0.5;
-      const subGain = ctx.createGain();
-      subGain.gain.value = 0.4;
-      subOsc.connect(subGain);
-      subGain.connect(masterGain);
-      subOsc.start();
-      nodes.push(subOsc, subGain);
+        // SUBHARMONIC (half - muscle layers)
+        const subOsc = ctx.createOscillator();
+        subOsc.type = 'sine';
+        subOsc.frequency.value = carrier * 0.5;
+        const subGain = ctx.createGain();
+        subGain.gain.value = 0.4;
+        subOsc.connect(subGain);
+        subGain.connect(masterGain);
+        subOsc.start();
+        nodes.push(subOsc, subGain);
 
-      // 2ND HARMONIC (double - surface)
-      const harm2Osc = ctx.createOscillator();
-      harm2Osc.type = 'sine';
-      harm2Osc.frequency.value = carrier * 2;
-      const harm2Gain = ctx.createGain();
-      harm2Gain.gain.value = 0.25;
-      harm2Osc.connect(harm2Gain);
-      harm2Gain.connect(masterGain);
-      harm2Osc.start();
-      nodes.push(harm2Osc, harm2Gain);
+        // 2ND HARMONIC (double - surface)
+        const harm2Osc = ctx.createOscillator();
+        harm2Osc.type = 'sine';
+        harm2Osc.frequency.value = carrier * 2;
+        const harm2Gain = ctx.createGain();
+        harm2Gain.gain.value = 0.25;
+        harm2Osc.connect(harm2Gain);
+        harm2Gain.connect(masterGain);
+        harm2Osc.start();
+        nodes.push(harm2Osc, harm2Gain);
 
-      // 3RD HARMONIC (triple - nerve endings)
-      const harm3Osc = ctx.createOscillator();
-      harm3Osc.type = 'sine';
-      harm3Osc.frequency.value = carrier * 3;
-      const harm3Gain = ctx.createGain();
-      harm3Gain.gain.value = 0.2;
-      harm3Osc.connect(harm3Gain);
-      harm3Gain.connect(masterGain);
-      harm3Osc.start();
-      nodes.push(harm3Osc, harm3Gain);
+        // 3RD HARMONIC (triple - nerve endings)
+        const harm3Osc = ctx.createOscillator();
+        harm3Osc.type = 'sine';
+        harm3Osc.frequency.value = carrier * 3;
+        const harm3Gain = ctx.createGain();
+        harm3Gain.gain.value = 0.2;
+        harm3Osc.connect(harm3Gain);
+        harm3Gain.connect(masterGain);
+        harm3Osc.start();
+        nodes.push(harm3Osc, harm3Gain);
 
-      // 4TH HARMONIC (quad - fine nerves)
-      const harm4Osc = ctx.createOscillator();
-      harm4Osc.type = 'sine';
-      harm4Osc.frequency.value = carrier * 4;
-      const harm4Gain = ctx.createGain();
-      harm4Gain.gain.value = 0.15;
-      harm4Osc.connect(harm4Gain);
-      harm4Gain.connect(masterGain);
-      harm4Osc.start();
-      nodes.push(harm4Osc, harm4Gain);
+        // 4TH HARMONIC (quad - fine nerves)
+        const harm4Osc = ctx.createOscillator();
+        harm4Osc.type = 'sine';
+        harm4Osc.frequency.value = carrier * 4;
+        const harm4Gain = ctx.createGain();
+        harm4Gain.gain.value = 0.15;
+        harm4Osc.connect(harm4Gain);
+        harm4Gain.connect(masterGain);
+        harm4Osc.start();
+        nodes.push(harm4Osc, harm4Gain);
 
-      // AMBIENT BED - 8 overlapping frequencies (healing field)
-      const ambientFreqs = [
-        carrier * 0.125, // ultra ultra deep
-        carrier * 0.33,  // deep grounding
-        carrier * 0.66,  // mid-deep
-        carrier * 1.5,   // mid-high
-        carrier * 2.5,   // high shimmer
-        carrier * 3.5,   // nerve activation
-        carrier * 5,     // fine tissue
-        carrier * 7      // cellular
-      ];
+        // AMBIENT BED - 8 overlapping frequencies (healing field)
+        const ambientFreqs = [
+          carrier * 0.125, // ultra ultra deep
+          carrier * 0.33,  // deep grounding
+          carrier * 0.66,  // mid-deep
+          carrier * 1.5,   // mid-high
+          carrier * 2.5,   // high shimmer
+          carrier * 3.5,   // nerve activation
+          carrier * 5,     // fine tissue
+          carrier * 7      // cellular
+        ];
 
-      ambientFreqs.forEach((f, i) => {
-        const ambOsc = ctx.createOscillator();
-        ambOsc.type = 'sine';
-        ambOsc.frequency.value = f;
-        const ambGain = ctx.createGain();
-        ambGain.gain.value = 0.03 + (i * 0.002); // Very low volume
-        ambOsc.connect(ambGain);
-        ambGain.connect(masterGain);
-        ambOsc.start();
-        nodes.push(ambOsc, ambGain);
+        ambientFreqs.forEach((f, i) => {
+          const ambOsc = ctx.createOscillator();
+          ambOsc.type = 'sine';
+          ambOsc.frequency.value = f;
+          const ambGain = ctx.createGain();
+          ambGain.gain.value = 0.03 + (i * 0.002); // Very low volume
+          ambOsc.connect(ambGain);
+          ambGain.connect(masterGain);
+          ambOsc.start();
+          nodes.push(ambOsc, ambGain);
         });
-        } // End of !freq.isSweep check
+      } // End of !freq.isSweep check
 
-        nodesRef.current = nodes;
+      nodesRef.current = nodes;
       setIsPlaying(true);
       setSelected(freq);
       setTimer(0);
