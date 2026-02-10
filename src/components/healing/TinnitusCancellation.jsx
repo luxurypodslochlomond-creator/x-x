@@ -718,7 +718,6 @@ export default function TinnitusCancellation({ onClose }) {
             )}
           </div>
         </motion.div>
-      </div>
     </motion.div>
   );
 }
