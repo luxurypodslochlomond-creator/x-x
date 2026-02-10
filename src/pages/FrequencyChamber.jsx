@@ -211,6 +211,27 @@ const FREQUENCIES = [
     stackWith: ['inflammation', 'nerve_pain'],
     context: 'Cat purr frequency. Heals bones, muscles, tissues. Tesla studied this. Ancient Egyptians knew.',
     device: 'both' // works on speakers AND headphones
+  },
+
+  // === TINNITUS SWEEP (FREQUENCY INVERSION) ===
+  {
+    id: 'tinnitus_sweep',
+    name: 'TINNITUS RESET',
+    hz: 20, // Start frequency
+    icon: COOLASFUCKWaves,
+    color: '#8b5cf6', // Purple for auditory healing
+    color2: '#06b6d4', // Cyan for neural reset
+    visual: 'waves',
+    description: 'Frequency sweep: low→high→low resets auditory system',
+    waveform: 'sine',
+    harmonics: [], // NO harmonics - sweep is the therapy
+    timer: '20 min',
+    stackWith: ['calm', 'anxiety'],
+    context: 'For tinnitus, ringing ears. Sweeps 20Hz→20kHz→20Hz to confuse/reset the phantom signal. Pure sine wave.',
+    device: 'headphones', // MUST use headphones for tinnitus
+    psychology: 'Auditory system resetting. Phantom signals fading. Silence returning. Ears healing now.',
+    isSweep: true, // Special flag
+    sweepDuration: 30 // 30 seconds per sweep cycle
   }
 ];
 
