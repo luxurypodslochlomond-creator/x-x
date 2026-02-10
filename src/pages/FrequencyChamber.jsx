@@ -851,8 +851,32 @@ export default function FrequencyChamber() {
               </button>
             </div>
 
-            {/* PSYCHOLOGY AFFIRMATION - Top center */}
-            {selected.psychology && (
+            {/* SWEEP FREQUENCY COUNTER - Top center (only for sweep mode) */}
+            {selected.isSweep && (
+              <div className="absolute top-24 left-4 right-4 z-10">
+                <div className="bg-black/60 backdrop-blur-sm px-6 py-4 rounded-lg text-center">
+                  <div className="text-4xl sm:text-6xl font-black font-mono text-green-400 mb-2" style={{ textShadow: '0 0 25px #22c55e' }}>
+                    {currentSweepFreq.toLocaleString()} Hz
+                  </div>
+                  <div className="flex items-center justify-center gap-2 text-green-400 text-xs sm:text-sm font-mono">
+                    <span>20Hz</span>
+                    <div className="flex-1 bg-green-900/30 h-2 rounded-full overflow-hidden max-w-xs">
+                      <div 
+                        className="bg-green-500 h-full transition-all duration-100"
+                        style={{ 
+                          width: `${((Math.log10(currentSweepFreq) - Math.log10(20)) / (Math.log10(20000) - Math.log10(20))) * 100}%`,
+                          boxShadow: '0 0 10px rgba(34, 197, 94, 0.8)'
+                        }}
+                      />
+                    </div>
+                    <span>20kHz</span>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* PSYCHOLOGY AFFIRMATION - Top center (for non-sweep modes) */}
+            {!selected.isSweep && selected.psychology && (
               <div className="absolute top-24 left-4 right-4 z-10">
                 <div className="bg-black/60 backdrop-blur-sm px-4 py-3 rounded-lg text-center">
                   <p className="text-white text-sm sm:text-base font-bold" style={{ textShadow: `0 0 10px ${selected.color}` }}>
