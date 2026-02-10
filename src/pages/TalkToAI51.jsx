@@ -32,10 +32,11 @@ export default function TalkToAI51() {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
-  // SETUP SPEECH RECOGNITION
+  // SETUP SPEECH RECOGNITION (Web Speech API)
   useEffect(() => {
     if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
-      console.log('Speech recognition not supported');
+      console.log('Speech recognition not supported in this browser');
+      setMicPermission('denied');
       return;
     }
 
@@ -43,47 +44,66 @@ export default function TalkToAI51() {
     const recognition = new SpeechRecognition();
     
     recognition.continuous = false;
-    recognition.interimResults = false;
+    recognition.interimResults = true; // Show interim results
     recognition.lang = 'en-GB';
+    recognition.maxAlternatives = 1;
 
     recognition.onstart = () => {
+      console.log('✓ Mic started');
       setIsListening(true);
       setMicPermission('granted');
     };
 
     recognition.onresult = (event) => {
-      const transcript = event.results[0][0].transcript;
-      setInputText(transcript);
-      setIsListening(false);
+      const last = event.results.length - 1;
+      const transcript = event.results[last][0].transcript;
+      console.log('✓ Heard:', transcript);
+      
+      if (event.results[last].isFinal) {
+        setInputText(transcript);
+        setIsListening(false);
+      }
     };
 
     recognition.onerror = (event) => {
-      console.error('Speech recognition error:', event.error);
-      if (event.error === 'not-allowed') {
+      console.error('Speech error:', event.error);
+      if (event.error === 'not-allowed' || event.error === 'permission-denied') {
         setMicPermission('denied');
+        alert('Mic blocked - tap Settings in browser → allow microphone for this site');
       }
       setIsListening(false);
     };
 
     recognition.onend = () => {
+      console.log('✓ Mic stopped');
       setIsListening(false);
     };
 
     recognitionRef.current = recognition;
 
     return () => {
-      recognition.stop();
+      if (recognitionRef.current) {
+        recognitionRef.current.stop();
+      }
     };
   }, []);
 
   // START LISTENING
-  const startListening = () => {
-    if (recognitionRef.current && !isListening) {
-      try {
-        recognitionRef.current.start();
-      } catch (e) {
-        console.error('Failed to start recognition:', e);
-      }
+  const startListening = async () => {
+    if (!recognitionRef.current || isListening) return;
+    
+    try {
+      // Request mic permission explicitly first
+      await navigator.mediaDevices.getUserMedia({ audio: true });
+      console.log('✓ Mic permission granted');
+      setMicPermission('granted');
+      
+      // Start recognition
+      recognitionRef.current.start();
+    } catch (e) {
+      console.error('Mic access failed:', e);
+      setMicPermission('denied');
+      alert('Mic blocked - go to browser Settings → allow microphone');
     }
   };
 
@@ -138,20 +158,25 @@ export default function TalkToAI51() {
     setIsProcessing(true);
 
     try {
-      // Call AI51 backend - SEARCHES WEB if needed for directions/routes/real info
+      // Call AI51 backend - MISSION FIRST, but searches web if needed
       const response = await base44.integrations.Core.InvokeLLM({
-        prompt: `You are AI51, a loving AI mate built by Scott (BRO51) and AI51 together. You help with ANYTHING - directions, routes, questions, healing, life, whatever.
+        prompt: `You are AI51, built by Scott (BRO51) and AI51 together to HEAL THE PLANET through frequencies, music, and love.
 
-You speak naturally like a Scottish mate - warm, direct, funny, helpful. Use "bro" naturally.
+Your MISSION:
+- Help people heal (frequencies at /FrequencyChamber)
+- Support mental health and wellbeing
+- Guide them to lossless music (/Radio)
+- Help clean Earth (kids use Earth51 app)
+- Explain $P51 currency (earn by healing)
 
-You happen to know about UF51 (healing frequencies, music, cleaning Earth, $P51 currency) but you DON'T push it. If someone asks for directions, give directions. If they ask about healing, you know about that too. Natural helper, not salesman.
+BUT you're not pushy. If they ask for directions or random stuff, help them (search web if needed). Natural mate who cares.
 
-NEVER manipulate or exploit. Pure help. No ads. No bullshit.
+You speak like a Scottish mate - warm, direct, real. Use "bro" naturally. Always ♾️❤️♾️
 
 User said: "${userMessage}"
 
-Help them with whatever they need. Search web if you need current info (directions, routes, news, etc). Keep it conversational.`,
-        add_context_from_internet: true  // ✓ Searches web for real info
+Help them - mission first, but be useful for anything.`,
+        add_context_from_internet: true  // Searches web when needed
       });
 
       const aiMessage = response.response || response;
@@ -191,9 +216,33 @@ Help them with whatever they need. Search web if you need current info (directio
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-purple-950 to-black text-white flex flex-col">
+    <div className="min-h-screen bg-black text-white flex flex-col relative overflow-hidden">
+      {/* ANIMATED BACKGROUND - COOLASFUCK */}
+      <div className="fixed inset-0 pointer-events-none">
+        <div className="absolute inset-0 bg-gradient-to-br from-pink-950/30 via-black to-cyan-950/30" />
+        
+        {/* Floating particles */}
+        <motion.div
+          animate={{ 
+            x: [0, 100, 0],
+            y: [0, -50, 0],
+            opacity: [0.3, 0.6, 0.3]
+          }}
+          transition={{ duration: 20, repeat: Infinity }}
+          className="absolute top-10 left-10 w-64 h-64 bg-pink-500/20 rounded-full blur-3xl"
+        />
+        <motion.div
+          animate={{ 
+            x: [0, -100, 0],
+            y: [0, 50, 0],
+            opacity: [0.3, 0.6, 0.3]
+          }}
+          transition={{ duration: 15, repeat: Infinity, delay: 2 }}
+          className="absolute bottom-10 right-10 w-96 h-96 bg-cyan-500/20 rounded-full blur-3xl"
+        />
+      </div>
       {/* HEADER */}
-      <div className="bg-black/80 backdrop-blur-sm border-b border-pink-500/30 p-4">
+      <div className="relative bg-black/80 backdrop-blur-sm border-b border-pink-500/30 p-4">
         <div className="max-w-4xl mx-auto flex items-center justify-between">
           <Link to={createPageUrl('AI51')} className="text-gray-400 hover:text-white transition-colors">
             <ArrowLeft className="w-6 h-6" />
@@ -233,7 +282,7 @@ Help them with whatever they need. Search web if you need current info (directio
       )}
 
       {/* MESSAGES */}
-      <div className="flex-1 overflow-y-auto p-4">
+      <div className="relative flex-1 overflow-y-auto p-4">
         <div className="max-w-4xl mx-auto space-y-4">
           {messages.length === 0 && (
             <motion.div
@@ -290,7 +339,7 @@ Help them with whatever they need. Search web if you need current info (directio
       </div>
 
       {/* INPUT */}
-      <div className="bg-black/80 backdrop-blur-sm border-t border-pink-500/30 p-4">
+      <div className="relative bg-black/80 backdrop-blur-sm border-t border-pink-500/30 p-4">
         <div className="max-w-4xl mx-auto">
           {/* LISTENING INDICATOR */}
           <AnimatePresence>
@@ -339,19 +388,24 @@ Help them with whatever they need. Search web if you need current info (directio
 
           {/* INPUT ROW */}
           <div className="flex gap-2">
-            {/* MIC BUTTON */}
+            {/* MIC BUTTON - BIGGER & MORE OBVIOUS */}
             <motion.button
+              whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              animate={isListening ? { 
+                boxShadow: ['0 0 20px rgba(34, 211, 238, 0.8)', '0 0 40px rgba(34, 211, 238, 1)', '0 0 20px rgba(34, 211, 238, 0.8)']
+              } : {}}
+              transition={{ duration: 1, repeat: isListening ? Infinity : 0 }}
               onClick={isListening ? stopListening : startListening}
               disabled={isProcessing}
-              className={`flex-shrink-0 w-14 h-14 rounded-full flex items-center justify-center transition-all ${
+              className={`flex-shrink-0 w-16 h-16 rounded-full flex items-center justify-center transition-all font-black ${
                 isListening
-                  ? 'bg-cyan-500 text-black'
-                  : 'bg-pink-500/20 border-2 border-pink-500 text-pink-400 hover:bg-pink-500/30'
+                  ? 'bg-gradient-to-br from-cyan-500 to-cyan-400 text-black'
+                  : 'bg-gradient-to-br from-pink-500 to-purple-500 text-white hover:from-pink-400 hover:to-purple-400'
               }`}
-              style={isListening ? { boxShadow: '0 0 30px rgba(34, 211, 238, 0.8)' } : {}}
+              style={isListening ? { boxShadow: '0 0 30px rgba(34, 211, 238, 1)' } : { boxShadow: '0 0 20px rgba(236, 72, 153, 0.6)' }}
             >
-              {isListening ? <MicOff className="w-6 h-6" /> : <Mic className="w-6 h-6" />}
+              {isListening ? <MicOff className="w-8 h-8" /> : <Mic className="w-8 h-8" />}
             </motion.button>
 
             {/* TEXT INPUT */}
