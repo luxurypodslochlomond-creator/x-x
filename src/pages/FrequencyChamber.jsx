@@ -303,14 +303,30 @@ export default function FrequencyChamber() {
         osc.frequency.exponentialRampToValueAtTime(20000, now + sweepTime);
         // Sweep down: 20kHz → 20Hz
         osc.frequency.exponentialRampToValueAtTime(20, now + sweepTime * 2);
+
+        // VISUAL SWEEP TRACKER
+        sweepIntervalRef.current = setInterval(() => {
+          const elapsed = (Date.now() / 1000) % (sweepTime * 2);
+          if (elapsed < sweepTime) {
+            // Going up
+            const progress = elapsed / sweepTime;
+            setCurrentSweepFreq(Math.round(20 * Math.pow(1000, progress)));
+          } else {
+            // Going down
+            const progress = (elapsed - sweepTime) / sweepTime;
+            setCurrentSweepFreq(Math.round(20000 * Math.pow(0.001, progress)));
+          }
+        }, 100);
+
         // Loop the sweep
-        setInterval(() => {
+        const sweepLoopInterval = setInterval(() => {
           const t = ctx.currentTime;
           osc.frequency.cancelScheduledValues(t);
           osc.frequency.setValueAtTime(20, t);
           osc.frequency.exponentialRampToValueAtTime(20000, t + sweepTime);
           osc.frequency.exponentialRampToValueAtTime(20, t + sweepTime * 2);
         }, sweepTime * 2 * 1000);
+        nodes.push(sweepLoopInterval);
       }
 
       // SKIP STACKING FOR SWEEP - sweep IS the therapy
