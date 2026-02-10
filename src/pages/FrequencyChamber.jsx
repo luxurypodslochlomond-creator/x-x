@@ -107,6 +107,24 @@ const FREQUENCIES = [
     psychology: 'You are safe. Fear is leaving. Ground beneath you is solid.' // Polyvagal theory
     },
   {
+    id: 'depression',
+    name: 'DEPRESSION LIFT',
+    hz: 10,
+    icon: COOLASFUCKBrain,
+    color: '#fbbf24', // Primary: Gold for energy/hope
+    color2: '#ec4899', // Harmonic: Pink for love/warmth
+    visual: 'waves',
+    description: 'Alpha waves + mood elevation + energy boost',
+    waveform: 'sine',
+    carrier: 200,
+    harmonics: [20, 30, 5],
+    timer: '20 min',
+    stackWith: ['calm', 'chest_heart'],
+    context: 'For low mood, depression, no energy. Alpha wave proven to elevate mood. Binaural beats wake your brain gently.',
+    device: 'headphones',
+    psychology: 'Light returning. Energy rising. Hope flowing back.' // Clinical depression research
+    },
+  {
     id: 'calm',
     name: 'UNIVERSAL CALM',
     hz: 432,
