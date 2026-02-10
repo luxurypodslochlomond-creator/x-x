@@ -201,7 +201,8 @@ export default function FrequencyChamber() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(0.3);
   const [timer, setTimer] = useState(0);
-  const [deviceFilter, setDeviceFilter] = useState('all'); // 'all', 'speaker', 'headphones'
+  const [timerTarget, setTimerTarget] = useState(null); // Target in seconds (5min = 300)
+  const [deviceFilter, setDeviceFilter] = useState('all');
   const [showHowItWorks, setShowHowItWorks] = useState(false);
   const [showScience, setShowScience] = useState(false);
   const [showSmartTV, setShowSmartTV] = useState(false);
@@ -337,9 +338,17 @@ export default function FrequencyChamber() {
       setSelected(freq);
       setTimer(0);
 
-      // TIMER
+      // TIMER - with auto-stop at target
       timerRef.current = setInterval(() => {
-        setTimer(t => t + 1);
+        setTimer(t => {
+          const newTime = t + 1;
+          // Auto-stop when timer hits target
+          if (timerTarget && newTime >= timerTarget) {
+            stop();
+            return newTime;
+          }
+          return newTime;
+        });
       }, 1000);
 
       console.log('✓ 2026 HEALING ACTIVE');
@@ -523,13 +532,12 @@ export default function FrequencyChamber() {
 
       breathingPhaseRef.current = breathPhase;
 
-      // CHROMOTHERAPY BASE - color heals through retina → brain → body
-      const healingOpacity = 0.03 + (breathIntensity * 0.02); // Pulses with breath
-      ctx.fillStyle = `rgba(0, 0, 0, ${healingOpacity})`;
+      // CHROMOTHERAPY BASE - LESS fade for crisp characters
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.15)'; // Darker fade = sharper trails
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      // SUBTLE CHROMOTHERAPY WASH - your eyes are absorbing healing color
-      ctx.globalAlpha = 0.03 * breathIntensity;
+      // CHROMOTHERAPY WASH - subtle
+      ctx.globalAlpha = 0.02 * breathIntensity;
       ctx.fillStyle = breathColor;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
       ctx.globalAlpha = 1;
@@ -562,113 +570,107 @@ export default function FrequencyChamber() {
       const universePulse = Math.sin(time * 0.3) * 0.3 + 0.7;
       const rotation = time * 0.15; // Much slower - meditative
       
-      // MATRIX DIGITAL RAIN - COOLASFUCK CODE EFFECT
-      const charSize = isMobile ? 12 : 16;
-      const chars = '01ⒶⒽⒿⓆⓄⓏⓄⓍⓍⓏⒽⒿⒶ◈●◇■□▪▫▬▭▮▯◆◇◈◉◊●○';
-      
-      // Digital rain columns
+      // CRISP FREQUENCY NUMBERS - NO BLUR, PIXEL PERFECT
+      ctx.imageSmoothingEnabled = false; // CRITICAL: No smoothing = crisp pixels
+      const charSize = isMobile ? 14 : 18;
+      const hzDisplay = String(selected?.hz || 432);
+      const chars = `0123456789${hzDisplay}Hz♾❤✓`;
+
+      // Digital rain columns - SHARP
       const cols = Math.ceil(canvas.width / charSize);
       for (let col = 0; col < cols; col++) {
         const x = col * charSize;
         const freq = dataArray[col % bufferLength] / 255;
-        const speed = 2 + (freq * 8); // FAST when audio is loud
-        
-        // Calculate position with falling effect
-        const yOffset = (time * speed * 40 + col * 123) % (canvas.height + charSize);
+        const speed = 3 + (freq * 12); // Audio-reactive speed
+
+        // Position
+        const yOffset = (time * speed * 50 + col * 137) % (canvas.height + charSize * 6);
         const y = yOffset - canvas.height;
-        
-        // Character selection based on frequency
-        const charIndex = Math.floor((time * freq * 20 + col) % chars.length);
+
+        // Character - show actual Hz numbers for amplification
+        const charIndex = Math.floor((time * freq * 30 + col) % chars.length);
         const char = chars[charIndex];
-        
-        // Glow intensity based on audio
-        const glowIntensity = freq * 0.8 + 0.2;
-        
-        // Primary color with intensity
+
+        // CRISP rendering - no blur
+        const glowIntensity = freq * 0.9 + 0.1;
         ctx.font = `bold ${charSize}px 'Courier New', monospace`;
-        ctx.globalAlpha = 0.8 * glowIntensity;
+        ctx.globalAlpha = 0.95 * glowIntensity;
         ctx.fillStyle = primaryColor;
-        ctx.shadowBlur = 15 * glowIntensity;
-        ctx.shadowColor = primaryColor;
+        ctx.shadowBlur = 0; // NO BLUR = crisp pixels
         ctx.fillText(char, x, y);
-        
-        // Trailing glow effect
+
+        // Trailing characters - still crisp
         if (y + charSize < canvas.height) {
-          ctx.globalAlpha = 0.3 * glowIntensity;
-          ctx.shadowBlur = 25 * glowIntensity;
-          ctx.fillText(char, x, y + charSize * 2);
-          ctx.globalAlpha = 0.1 * glowIntensity;
-          ctx.fillText(char, x, y + charSize * 4);
+          ctx.globalAlpha = 0.4 * glowIntensity;
+          ctx.fillText(char, x, y + charSize * 3);
+          ctx.globalAlpha = 0.15 * glowIntensity;
+          ctx.fillText(char, x, y + charSize * 6);
         }
       }
 
-      // FREQUENCY SCAN LINES - cyberpunk overlay
-      const scanLineHeight = 4;
-      const scanY = (time * 200) % canvas.height;
-      ctx.globalAlpha = 0.15;
+      // SHARP SCAN LINES - no blur
+      const scanY = (time * 150) % canvas.height;
+      ctx.globalAlpha = 0.2;
       ctx.strokeStyle = harmonicColor;
-      ctx.lineWidth = 2;
-      for (let i = -3; i < 3; i++) {
+      ctx.lineWidth = 1;
+      ctx.shadowBlur = 0;
+      for (let i = -2; i < 2; i++) {
         ctx.beginPath();
-        ctx.moveTo(0, scanY + (i * scanLineHeight));
-        ctx.lineTo(canvas.width, scanY + (i * scanLineHeight));
+        ctx.moveTo(0, scanY + (i * 3));
+        ctx.lineTo(canvas.width, scanY + (i * 3));
         ctx.stroke();
       }
 
-      // CORE FREQUENCY PULSE - digital heartbeat
-      ctx.globalAlpha = 0.6 * breathIntensity;
-      ctx.shadowBlur = 100;
-      ctx.shadowColor = primaryColor;
+      // CORE FREQUENCY PULSE - SHARP rings
+      ctx.globalAlpha = 0.8 * breathIntensity;
+      ctx.shadowBlur = 0; // NO BLUR
       ctx.strokeStyle = primaryColor;
-      ctx.lineWidth = 3;
+      ctx.lineWidth = 4;
       const pulseRadius = (40 + (intensity * 60)) * scaleFactor;
       ctx.beginPath();
       ctx.arc(centerX, centerY, pulseRadius, 0, Math.PI * 2);
       ctx.stroke();
-      ctx.shadowBlur = 0;
 
-      // FREQUENCY BARS - audio reactive matrix style
-      const barCount = 16;
-      const barWidth = (canvas.width / barCount) * 0.8;
+      // FREQUENCY BARS - SHARP audio reactive
+      const barCount = 20;
+      const barWidth = (canvas.width / barCount) * 0.85;
       for (let i = 0; i < barCount; i++) {
         const freq = dataArray[Math.floor((i / barCount) * bufferLength)] / 255;
-        const barHeight = freq * canvas.height * 0.4;
-        const x = (canvas.width / barCount) * i + (barWidth * 0.1);
+        const barHeight = freq * canvas.height * 0.45;
+        const x = (canvas.width / barCount) * i + (barWidth * 0.075);
         const y = centerY - (barHeight / 2);
-        
-        ctx.globalAlpha = 0.7 * freq;
+
+        ctx.globalAlpha = 0.85 * freq;
         ctx.fillStyle = i % 2 === 0 ? primaryColor : harmonicColor;
-        ctx.shadowBlur = 20 * freq;
-        ctx.shadowColor = i % 2 === 0 ? primaryColor : harmonicColor;
-        ctx.fillRect(x, y, barWidth * 0.8, barHeight);
+        ctx.shadowBlur = 0; // NO BLUR = crisp bars
+        ctx.fillRect(x, y, barWidth * 0.85, barHeight);
       }
 
-      // HEALING HEART - breathes with you, radiates chromotherapy
-      const breathScale = 0.6 + (breathIntensity * 0.8);
-      const coreRadius = (35 + (intensity * 40)) * scaleFactor * breathScale;
+      // HEALING CORE - LESS blur, more structure
+      const breathScale = 0.7 + (breathIntensity * 0.6);
+      const coreRadius = (40 + (intensity * 50)) * scaleFactor * breathScale;
 
-      // CHROMOTHERAPY GRADIENT - scientifically matched to frequency type
-      const healingGradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, coreRadius * 3);
-      healingGradient.addColorStop(0, '#ffffff'); // Pure light center
-      healingGradient.addColorStop(0.1, breathColor + 'ff'); // Breathing color
-      healingGradient.addColorStop(0.3, primaryColor + 'cc'); // Frequency color
-      healingGradient.addColorStop(0.5, harmonicColor + '99'); // Harmonic
-      healingGradient.addColorStop(0.7, breathColor + '66'); // Breathing halo
+      // SHARP GRADIENT
+      const healingGradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, coreRadius * 2.5);
+      healingGradient.addColorStop(0, '#ffffff');
+      healingGradient.addColorStop(0.15, breathColor + 'ff');
+      healingGradient.addColorStop(0.4, primaryColor + 'dd');
+      healingGradient.addColorStop(0.7, harmonicColor + '88');
       healingGradient.addColorStop(1, color + '00');
 
       ctx.fillStyle = healingGradient;
-      ctx.globalAlpha = 0.8 * breathIntensity * universePulse;
-      ctx.shadowBlur = 150 + (intensity * 120) + (breathIntensity * 50);
-      ctx.shadowColor = breathColor; // Shadow matches breath phase
+      ctx.globalAlpha = 0.7 * breathIntensity;
+      ctx.shadowBlur = 80; // Less blur
+      ctx.shadowColor = breathColor;
       ctx.beginPath();
       ctx.arc(centerX, centerY, coreRadius * 2, 0, Math.PI * 2);
       ctx.fill();
 
-      // PURE LIGHT CORE - your consciousness
-      ctx.shadowBlur = 200;
+      // PURE CORE
+      ctx.shadowBlur = 100;
       ctx.shadowColor = '#ffffff';
       ctx.beginPath();
-      ctx.arc(centerX, centerY, coreRadius * 0.4, 0, Math.PI * 2);
+      ctx.arc(centerX, centerY, coreRadius * 0.5, 0, Math.PI * 2);
       ctx.fill();
       ctx.shadowBlur = 0;
 
@@ -930,17 +932,28 @@ export default function FrequencyChamber() {
                 }}
               />
 
-              {/* SIMPLE TIMER - top corner only */}
-              <div className="absolute top-4 right-4 text-3xl font-black font-mono" style={{ color: selected.color, textShadow: `0 0 20px ${selected.color}` }}>
-                {formatTime(timer)}
+              {/* TIMER - top corner with target */}
+              <div className="absolute top-4 right-4 flex flex-col items-end">
+                <div className="text-4xl sm:text-5xl font-black font-mono" style={{ 
+                  color: selected.color, 
+                  textShadow: `0 0 25px ${selected.color}, 0 0 50px ${selected.color}80`,
+                  filter: 'drop-shadow(0 0 10px rgba(0,0,0,0.8))'
+                }}>
+                  {formatTime(timer)}
+                </div>
+                {timerTarget && (
+                  <div className="text-sm font-mono text-gray-400 mt-1">
+                    / {formatTime(timerTarget)}
+                  </div>
+                )}
               </div>
             </div>
 
             {/* CONTROLS - BOTTOM BAR */}
-            <div className="p-6 border-t" style={{ borderColor: `${selected.color}40` }}>
+            <div className="p-4 sm:p-6 border-t" style={{ borderColor: `${selected.color}40` }}>
               {/* VOLUME */}
-              <div className="mb-4 flex items-center gap-4">
-                <VolumeX className="w-5 h-5 text-gray-500" />
+              <div className="mb-4 flex items-center gap-3">
+                <VolumeX className="w-4 h-4 text-gray-500" />
                 <input
                   type="range"
                   min="0"
@@ -950,19 +963,48 @@ export default function FrequencyChamber() {
                   onChange={(e) => setVolume(parseFloat(e.target.value))}
                   className="flex-1 h-2 bg-gray-800 rounded-full appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-6 [&::-webkit-slider-thumb]:h-6 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-white"
                 />
-                <Volume2 className="w-5 h-5 text-gray-500" />
-                <span className="text-gray-400 font-mono text-sm w-12">{Math.round(volume * 100)}%</span>
+                <Volume2 className="w-4 h-4 text-gray-500" />
+                <span className="text-gray-400 font-mono text-xs w-10">{Math.round(volume * 100)}%</span>
+              </div>
+
+              {/* TIMER PRESETS */}
+              <div className="mb-4">
+                <p className="text-xs text-gray-500 font-mono mb-2">SET TIMER:</p>
+                <div className="grid grid-cols-4 gap-2">
+                  {[5, 10, 15, 20].map(mins => (
+                    <button
+                      key={mins}
+                      onClick={() => setTimerTarget(mins * 60)}
+                      className={`py-2 px-3 rounded-lg font-black font-mono text-sm border-2 transition-all ${
+                        timerTarget === mins * 60
+                          ? 'bg-white text-black'
+                          : 'bg-black text-white hover:bg-white/10'
+                      }`}
+                      style={{
+                        borderColor: timerTarget === mins * 60 ? selected.color : `${selected.color}40`
+                      }}
+                    >
+                      {mins}m
+                    </button>
+                  ))}
+                </div>
+                {timerTarget && (
+                  <p className="text-xs text-gray-500 font-mono mt-2 text-center">
+                    Stops at {Math.floor(timerTarget / 60)} min
+                  </p>
+                )}
               </div>
 
               {/* CONTROLS ROW */}
-              <div className="flex gap-3">
-                {/* SHARE */}
+              <div className="grid grid-cols-2 gap-2">
+                {/* SHARE - OFFLINE P2P */}
                 <button
                   onClick={() => setShowShare(true)}
-                  className="px-6 py-4 text-lg font-black font-mono border-2 transition-all flex items-center gap-2"
+                  className="py-4 text-base sm:text-lg font-black font-mono border-2 transition-all flex items-center justify-center gap-2"
                   style={{
                     borderColor: selected.color,
-                    color: selected.color
+                    color: selected.color,
+                    boxShadow: `0 0 20px ${selected.color}40`
                   }}
                 >
                   <Share2 className="w-5 h-5" />
@@ -972,12 +1014,12 @@ export default function FrequencyChamber() {
                 {/* STOP */}
                 <button
                   onClick={stop}
-                  className="flex-1 py-4 text-xl font-black font-mono border-2 transition-all"
+                  className="py-4 text-base sm:text-lg font-black font-mono border-2 transition-all"
                   style={{
                     backgroundColor: selected.color,
                     borderColor: selected.color,
                     color: 'black',
-                    boxShadow: `0 0 40px ${selected.color}60`
+                    boxShadow: `0 0 40px ${selected.color}80`
                   }}
                 >
                   STOP
