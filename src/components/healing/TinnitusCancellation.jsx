@@ -394,6 +394,11 @@ export default function TinnitusCancellation({ onClose }) {
       timerRef.current = null;
     }
 
+    if (sweepIntervalRef.current) {
+      clearInterval(sweepIntervalRef.current);
+      sweepIntervalRef.current = null;
+    }
+
     if (micStreamRef.current) {
       micStreamRef.current.getTracks().forEach(track => track.stop());
       micStreamRef.current = null;
@@ -401,6 +406,7 @@ export default function TinnitusCancellation({ onClose }) {
 
     setIsPlaying(false);
     setTimer(0);
+    setCurrentSweepFreq(20);
   };
 
   useEffect(() => {
