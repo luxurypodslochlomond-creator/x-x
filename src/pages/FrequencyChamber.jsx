@@ -259,6 +259,7 @@ export default function FrequencyChamber() {
   const analyserRef = useRef(null);
   const hapticIntervalRef = useRef(null);
   const breathingPhaseRef = useRef('inhale'); // inhale, hold, exhale, pause
+  const sweepIntervalRef = useRef(null);
 
   // === PLAY FREQUENCY ===
   const play = async (freq) => {
