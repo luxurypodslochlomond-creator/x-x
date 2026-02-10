@@ -66,18 +66,21 @@ export default function CB51SmartNotificationManager({ artistId }) {
       });
     }
 
-    // 👥 IMPORTANT: Band votes pending
+    // 👥 IMPORTANT: Band votes IN PROGRESS (with live count)
     if (pendingVotes.length > 0) {
-      newNotifications.push({
-        id: 'pending-votes',
-        type: 'band-vote',
-        title: `Band voting on ${pendingVotes.length} gig${pendingVotes.length > 1 ? 's' : ''}`,
-        message: 'Check votes coming in live',
-        icon: Users,
-        color: '#10b981',
-        priority: 'high',
-        timestamp: now,
-        action: () => navigate(createPageUrl(`CB51BandVotingDashboard?id=${artistId}`))
+      pendingVotes.forEach(gig => {
+        newNotifications.push({
+          id: `band-vote-${gig.id}`,
+          type: 'band-vote',
+          title: `${gig.venue || 'Gig'} - Band voting`,
+          message: 'Live votes coming in...',
+          icon: Users,
+          color: '#10b981',
+          priority: 'high',
+          timestamp: now,
+          gigId: gig.id,
+          action: () => navigate(createPageUrl(`CB51VotingTracker?gigId=${gig.id}`))
+        });
       });
     }
 
