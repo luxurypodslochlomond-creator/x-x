@@ -12,11 +12,21 @@ export default function CB51NotificationFeed({ artistId }) {
 
   const { data: pendingGigs = [] } = useQuery({
     queryKey: ['pendingGigs', artistId],
-    queryFn: () => base44.entities.GigOffer.filter({ 
-      artist_id: artistId,
-      status: 'manager_reviewing'
-    }),
-    enabled: !!artistId
+    queryFn: async () => {
+      const gigs = await base44.entities.GigOffer.filter({ 
+        artist_id: artistId,
+        status: 'manager_reviewing'
+      });
+      // Deduplicate by ID (in case of cache issues)
+      const seen = new Set();
+      return gigs.filter(g => {
+        if (seen.has(g.id)) return false;
+        seen.add(g.id);
+        return true;
+      });
+    },
+    enabled: !!artistId,
+    refetchInterval: 3000 // Poll every 3s for new votes
   });
 
   const approveMutation = useMutation({
