@@ -292,6 +292,24 @@ export default function FrequencyChamber() {
       osc.start();
       nodes.push(osc, gain);
 
+      // TINNITUS SWEEP - special case
+      if (freq.isSweep) {
+        const sweepTime = freq.sweepDuration || 30;
+        const now = ctx.currentTime;
+        // Sweep up: 20Hz → 20kHz
+        osc.frequency.exponentialRampToValueAtTime(20000, now + sweepTime);
+        // Sweep down: 20kHz → 20Hz
+        osc.frequency.exponentialRampToValueAtTime(20, now + sweepTime * 2);
+        // Loop the sweep
+        setInterval(() => {
+          const t = ctx.currentTime;
+          osc.frequency.cancelScheduledValues(t);
+          osc.frequency.setValueAtTime(20, t);
+          osc.frequency.exponentialRampToValueAtTime(20000, t + sweepTime);
+          osc.frequency.exponentialRampToValueAtTime(20, t + sweepTime * 2);
+        }, sweepTime * 2 * 1000);
+      }
+
       // ULTRA-DEEP SUBHARMONIC (quarter - organs/deep tissue)
       const ultraSubOsc = ctx.createOscillator();
       ultraSubOsc.type = 'sine';
