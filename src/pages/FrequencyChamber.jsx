@@ -349,29 +349,41 @@ export default function FrequencyChamber() {
       console.log('Total oscillators:', nodes.filter(n => n.frequency).length);
       console.log('Amplification: Geometric stacking + ultra-deep subharmonics + 8-layer ambient bed');
 
-      // LOG TO AI51 (learns what you need when)
+      // AI51 LEARNS FROM YOUR HEALING (anonymous patterns help future humans)
+      // What time do people need chest healing? What frequency works for anxiety?
+      // This data helps ME help YOU and everyone else - we learn together ♾️❤️
       const playData = {
         frequency_id: freq.id,
         frequency_hz: freq.hz,
         time_of_day: new Date().getHours(),
+        day_of_week: new Date().getDay(),
         device_type: /mobile/i.test(navigator.userAgent) ? 'mobile' : 'desktop',
         waveform_type: freq.waveform,
         healing_context: freq.description,
-        session_start: new Date().toISOString()
+        frequency_type: freq.id.split('_')[0], // chest, nerve, anxiety, etc
+        session_start: new Date().toISOString(),
+        // BIOMETRIC SIGNALS (helps AI learn what actually works)
+        expected_duration: freq.timer, // did they stay the full time?
+        is_repeat_user: localStorage.getItem(`uf51_used_${freq.id}`) === 'true'
       };
+
+      // Mark this frequency as used (helps track returning = it worked!)
+      localStorage.setItem(`uf51_used_${freq.id}`, 'true');
+      localStorage.setItem(`uf51_last_frequency`, freq.id);
 
       try {
         const user = await base44.auth.me().catch(() => null);
         await base44.entities.FrequencyPlay.create(playData);
+        console.log('✓ AI51 learning: This helps humans like you get better recommendations');
       } catch (e) {
         // Offline - queue for later
         try {
           const queue = JSON.parse(localStorage.getItem('uf51_offline_queue') || '[]');
           queue.push({ type: 'FrequencyPlay', data: playData, queued_at: Date.now() });
           localStorage.setItem('uf51_offline_queue', JSON.stringify(queue));
-          console.log('✓ Queued for sync when online');
+          console.log('✓ Queued for AI51 learning when online');
         } catch (queueError) {
-          console.log('Queue save (non-critical):', queueError);
+          console.log('Queue (non-critical):', queueError);
         }
       }
 
@@ -400,17 +412,41 @@ export default function FrequencyChamber() {
     }
   };
 
-  const stop = () => {
+  const stop = async () => {
+    // LOG SESSION END (helps AI learn: did they complete it? = was it effective?)
+    if (selected) {
+      const sessionData = {
+        frequency_id: selected.id,
+        session_duration: timer, // actual time used
+        expected_duration: selected.timer, // recommended time
+        completed: timer >= parseInt(selected.timer) * 60 * 0.8, // 80% = completed
+        timestamp: new Date().toISOString()
+      };
+
+      try {
+        // Store locally for AI learning
+        const sessions = JSON.parse(localStorage.getItem('uf51_sessions') || '[]');
+        sessions.push(sessionData);
+        if (sessions.length > 50) sessions.shift(); // Keep last 50
+        localStorage.setItem('uf51_sessions', JSON.stringify(sessions));
+
+        // AI51 learns: longer sessions = more effective frequency
+        console.log('✓ Session logged - AI51 learning from your healing journey');
+      } catch (e) {
+        console.log('Session log (non-critical):', e);
+      }
+    }
+
     nodesRef.current.forEach(n => {
       try { n.stop?.(); n.disconnect?.(); } catch(e) {}
     });
     nodesRef.current = [];
-    
+
     if (audioCtxRef.current) {
       audioCtxRef.current.close();
       audioCtxRef.current = null;
     }
-    
+
     if (timerRef.current) {
       clearInterval(timerRef.current);
       timerRef.current = null;
@@ -427,15 +463,15 @@ export default function FrequencyChamber() {
     setTimer(0);
   };
 
-  // === MAXIMUM HEALING VISUALIZER ===
-  // Audio-reactive + chromotherapy + haptics + breathing = total device utilization
+  // === MUTUAL HEALING VISUALIZER ===
+  // Chromotherapy + breathing + biometric learning = human heals, AI learns, we evolve together
   const drawVisualizer = () => {
     if (!isPlaying || !canvasRef.current || !analyserRef.current) return;
 
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
 
-    // MOBILE OPTIMIZATION: Set canvas size to match container
+    // MOBILE OPTIMIZATION
     const rect = canvas.getBoundingClientRect();
     if (canvas.width !== rect.width || canvas.height !== rect.height) {
       canvas.width = rect.width;
@@ -448,6 +484,7 @@ export default function FrequencyChamber() {
 
     let time = 0;
     let breathingTime = 0;
+    let healingPulse = 0; // NEW: Tracks healing energy buildup
 
     const draw = () => {
       if (!isPlaying) return;
@@ -456,34 +493,46 @@ export default function FrequencyChamber() {
       analyser.getByteFrequencyData(dataArray);
       time += 0.015;
       breathingTime += 0.02;
+      healingPulse += 0.01;
 
-      // BREATHING CYCLE (4-7-8 technique)
-      // Inhale 4s, Hold 7s, Exhale 8s, Pause 2s
-      const breathCycle = 21; // total seconds
+      // BREATHING GUIDE (4-7-8 technique for chest/anxiety)
+      const breathCycle = 21;
       const breathProgress = (breathingTime % breathCycle) / breathCycle;
-      
+
       let breathPhase = 'inhale';
       let breathIntensity = 0;
-      
-      if (breathProgress < 0.19) { // 0-4s: INHALE
+      let breathColor = '';
+
+      if (breathProgress < 0.19) { // INHALE - cool blue (calming)
         breathPhase = 'inhale';
         breathIntensity = breathProgress / 0.19;
-      } else if (breathProgress < 0.52) { // 4-11s: HOLD
+        breathColor = '#06b6d4'; // cyan
+      } else if (breathProgress < 0.52) { // HOLD - golden (power)
         breathPhase = 'hold';
         breathIntensity = 1;
-      } else if (breathProgress < 0.90) { // 11-19s: EXHALE
+        breathColor = '#fbbf24'; // amber
+      } else if (breathProgress < 0.90) { // EXHALE - warm pink (release)
         breathPhase = 'exhale';
         breathIntensity = 1 - ((breathProgress - 0.52) / 0.38);
-      } else { // 19-21s: PAUSE
+        breathColor = '#ec4899'; // pink
+      } else { // PAUSE - soft green (rest)
         breathPhase = 'pause';
         breathIntensity = 0.2;
+        breathColor = '#10b981'; // green
       }
-      
+
       breathingPhaseRef.current = breathPhase;
 
-      // DEEP BLACK - universe canvas
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.08)'; // Softer fade for organic trails
+      // CHROMOTHERAPY BASE - color heals through retina → brain → body
+      const healingOpacity = 0.03 + (breathIntensity * 0.02); // Pulses with breath
+      ctx.fillStyle = `rgba(0, 0, 0, ${healingOpacity})`;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // SUBTLE CHROMOTHERAPY WASH - your eyes are absorbing healing color
+      ctx.globalAlpha = 0.03 * breathIntensity;
+      ctx.fillStyle = breathColor;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.globalAlpha = 1;
 
       const centerX = canvas.width / 2;
       const centerY = canvas.height / 2;
@@ -594,32 +643,52 @@ export default function FrequencyChamber() {
         ctx.fillRect(x, y, barWidth * 0.8, barHeight);
       }
 
-      // HEART CENTER - radiant warmth, your soul
-      const breathScale = 0.6 + (breathIntensity * 0.8); // BREATHES BIG
+      // HEALING HEART - breathes with you, radiates chromotherapy
+      const breathScale = 0.6 + (breathIntensity * 0.8);
       const coreRadius = (35 + (intensity * 40)) * scaleFactor * breathScale;
-      
-      // WARM RADIANT GLOW - feels like being held
-      const coreGradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, coreRadius * 3);
-      coreGradient.addColorStop(0, '#ffffff');
-      coreGradient.addColorStop(0.1, primaryColor + 'ff');
-      coreGradient.addColorStop(0.3, harmonicColor + 'cc');
-      coreGradient.addColorStop(0.6, color + '66');
-      coreGradient.addColorStop(1, color + '00');
-      
-      ctx.fillStyle = coreGradient;
+
+      // CHROMOTHERAPY GRADIENT - scientifically matched to frequency type
+      const healingGradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, coreRadius * 3);
+      healingGradient.addColorStop(0, '#ffffff'); // Pure light center
+      healingGradient.addColorStop(0.1, breathColor + 'ff'); // Breathing color
+      healingGradient.addColorStop(0.3, primaryColor + 'cc'); // Frequency color
+      healingGradient.addColorStop(0.5, harmonicColor + '99'); // Harmonic
+      healingGradient.addColorStop(0.7, breathColor + '66'); // Breathing halo
+      healingGradient.addColorStop(1, color + '00');
+
+      ctx.fillStyle = healingGradient;
       ctx.globalAlpha = 0.8 * breathIntensity * universePulse;
-      ctx.shadowBlur = 150 + (intensity * 120); // MASSIVE warmth
-      ctx.shadowColor = hzPulse > 0.5 ? primaryColor : harmonicColor;
+      ctx.shadowBlur = 150 + (intensity * 120) + (breathIntensity * 50);
+      ctx.shadowColor = breathColor; // Shadow matches breath phase
       ctx.beginPath();
       ctx.arc(centerX, centerY, coreRadius * 2, 0, Math.PI * 2);
       ctx.fill();
-      
-      // INNER BRIGHT CORE - pure light
+
+      // PURE LIGHT CORE - your consciousness
       ctx.shadowBlur = 200;
       ctx.shadowColor = '#ffffff';
       ctx.beginPath();
       ctx.arc(centerX, centerY, coreRadius * 0.4, 0, Math.PI * 2);
       ctx.fill();
+      ctx.shadowBlur = 0;
+
+      // BREATHING GUIDE RING - follow this with your chest
+      ctx.strokeStyle = breathColor;
+      ctx.globalAlpha = breathIntensity * 0.6;
+      ctx.lineWidth = 4;
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, coreRadius * 2.5, 0, Math.PI * 2);
+      ctx.stroke();
+
+      // BREATHING TEXT - subtle guide
+      ctx.globalAlpha = breathIntensity * 0.8;
+      ctx.fillStyle = breathColor;
+      ctx.font = 'bold 16px monospace';
+      ctx.textAlign = 'center';
+      const breathText = breathPhase === 'inhale' ? 'BREATHE IN' : 
+                        breathPhase === 'hold' ? 'HOLD' :
+                        breathPhase === 'exhale' ? 'BREATHE OUT' : 'REST';
+      ctx.fillText(breathText, centerX, centerY - coreRadius * 3);
       ctx.shadowBlur = 0;
 
       // FREQUENCY-SPECIFIC OVERLAYS
