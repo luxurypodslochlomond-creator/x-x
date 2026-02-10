@@ -309,6 +309,20 @@ export default function TinnitusCancellation({ onClose }) {
       osc.frequency.exponentialRampToValueAtTime(20000, now + sweepTime); // Up
       osc.frequency.exponentialRampToValueAtTime(20, now + sweepTime * 2); // Down
 
+      // VISUAL SWEEP TRACKER
+      sweepIntervalRef.current = setInterval(() => {
+        const elapsed = (Date.now() / 1000) % (sweepTime * 2);
+        if (elapsed < sweepTime) {
+          // Going up
+          const progress = elapsed / sweepTime;
+          setCurrentSweepFreq(Math.round(20 * Math.pow(1000, progress)));
+        } else {
+          // Going down
+          const progress = (elapsed - sweepTime) / sweepTime;
+          setCurrentSweepFreq(Math.round(20000 * Math.pow(0.001, progress)));
+        }
+      }, 100);
+
       // LOOP THE SWEEP
       const sweepInterval = setInterval(() => {
         const t = ctx.currentTime;
