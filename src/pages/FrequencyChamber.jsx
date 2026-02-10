@@ -480,11 +480,13 @@ export default function FrequencyChamber() {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
 
-    // MOBILE OPTIMIZATION
+    // FULL SCREEN OPTIMIZATION
     const rect = canvas.getBoundingClientRect();
-    if (canvas.width !== rect.width || canvas.height !== rect.height) {
-      canvas.width = rect.width;
-      canvas.height = rect.height;
+    const dpr = window.devicePixelRatio || 1;
+    if (canvas.width !== rect.width * dpr || canvas.height !== rect.height * dpr) {
+      canvas.width = rect.width * dpr;
+      canvas.height = rect.height * dpr;
+      ctx.scale(dpr, dpr);
     }
 
     const analyser = analyserRef.current;
@@ -532,12 +534,12 @@ export default function FrequencyChamber() {
 
       breathingPhaseRef.current = breathPhase;
 
-      // CHROMOTHERAPY BASE - LESS fade for crisp characters
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.15)'; // Darker fade = sharper trails
+      // FULLSCREEN CHROMOTHERAPY - whole screen heals
+      ctx.fillStyle = `rgba(0, 0, 0, 0.08)`; // Lighter fade = more color visible
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      // CHROMOTHERAPY WASH - subtle
-      ctx.globalAlpha = 0.02 * breathIntensity;
+      // CHROMOTHERAPY WASH - IMMERSIVE (whole screen breathes healing color)
+      ctx.globalAlpha = 0.04 * breathIntensity;
       ctx.fillStyle = breathColor;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
       ctx.globalAlpha = 1;
@@ -545,9 +547,9 @@ export default function FrequencyChamber() {
       const centerX = canvas.width / 2;
       const centerY = canvas.height / 2;
 
-      // SCALE - smaller, more intimate
+      // SCALE - BIGGER, more immersive for healing
       const isMobile = canvas.width < 600;
-      const scaleFactor = isMobile ? Math.min(canvas.width, canvas.height) / 2400 : Math.min(canvas.width, canvas.height) / 1400;
+      const scaleFactor = isMobile ? Math.min(canvas.width, canvas.height) / 1000 : Math.min(canvas.width, canvas.height) / 800;
       const PHI = 1.618033988749;
       const color = selected?.color || '#06b6d4';
       
@@ -646,31 +648,34 @@ export default function FrequencyChamber() {
         ctx.fillRect(x, y, barWidth * 0.85, barHeight);
       }
 
-      // HEALING CORE - LESS blur, more structure
-      const breathScale = 0.7 + (breathIntensity * 0.6);
-      const coreRadius = (40 + (intensity * 50)) * scaleFactor * breathScale;
+      // MASSIVE HEALING CORE - fills screen with chromotherapy
+      const breathScale = 0.8 + (breathIntensity * 0.5);
+      const coreRadius = (80 + (intensity * 100)) * scaleFactor * breathScale;
 
-      // SHARP GRADIENT
-      const healingGradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, coreRadius * 2.5);
+      // IMMERSIVE HEALING GRADIENT - reaches edge of screen
+      const healingGradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, Math.max(canvas.width, canvas.height) * 0.8);
       healingGradient.addColorStop(0, '#ffffff');
-      healingGradient.addColorStop(0.15, breathColor + 'ff');
-      healingGradient.addColorStop(0.4, primaryColor + 'dd');
-      healingGradient.addColorStop(0.7, harmonicColor + '88');
+      healingGradient.addColorStop(0.05, breathColor + 'ff');
+      healingGradient.addColorStop(0.15, primaryColor + 'ee');
+      healingGradient.addColorStop(0.3, harmonicColor + 'cc');
+      healingGradient.addColorStop(0.5, breathColor + '99');
+      healingGradient.addColorStop(0.7, color + '44');
       healingGradient.addColorStop(1, color + '00');
 
       ctx.fillStyle = healingGradient;
-      ctx.globalAlpha = 0.7 * breathIntensity;
-      ctx.shadowBlur = 80; // Less blur
+      ctx.globalAlpha = 0.9 * breathIntensity;
+      ctx.shadowBlur = 150;
       ctx.shadowColor = breathColor;
       ctx.beginPath();
-      ctx.arc(centerX, centerY, coreRadius * 2, 0, Math.PI * 2);
+      ctx.arc(centerX, centerY, Math.max(canvas.width, canvas.height) * 0.8, 0, Math.PI * 2);
       ctx.fill();
 
-      // PURE CORE
-      ctx.shadowBlur = 100;
+      // BRIGHT CORE
+      ctx.shadowBlur = 200;
       ctx.shadowColor = '#ffffff';
+      ctx.globalAlpha = 1;
       ctx.beginPath();
-      ctx.arc(centerX, centerY, coreRadius * 0.5, 0, Math.PI * 2);
+      ctx.arc(centerX, centerY, coreRadius * 0.6, 0, Math.PI * 2);
       ctx.fill();
       ctx.shadowBlur = 0;
 
@@ -918,42 +923,51 @@ export default function FrequencyChamber() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black z-50 flex flex-col"
+            className="fixed inset-0 z-50 flex flex-col"
+            style={{ backgroundColor: 'black' }}
           >
-            {/* PURE HEALING SPACE - zero distractions */}
-            <div className="flex-1 relative overflow-hidden bg-black">
-              {/* CANVAS - just the healing frequencies */}
-              <canvas
-                ref={canvasRef}
-                className="absolute inset-0 w-full h-full"
-                style={{ 
-                  filter: `blur(1px) contrast(1.1) saturate(1.2)`,
-                  mixBlendMode: 'screen'
-                }}
-              />
+            {/* FULLSCREEN HEALING CANVAS - pure chromotherapy */}
+            <canvas
+              ref={canvasRef}
+              className="absolute inset-0 w-full h-full"
+            />
 
-              {/* TIMER - top corner with target */}
-              <div className="absolute top-4 right-4 flex flex-col items-end">
-                <div className="text-4xl sm:text-5xl font-black font-mono" style={{ 
-                  color: selected.color, 
-                  textShadow: `0 0 25px ${selected.color}, 0 0 50px ${selected.color}80`,
-                  filter: 'drop-shadow(0 0 10px rgba(0,0,0,0.8))'
+            {/* MINIMAL FLOATING CONTROLS - top */}
+            <div className="absolute top-4 left-4 right-4 flex items-start justify-between z-10">
+              {/* TIMER */}
+              <div className="flex flex-col items-start bg-black/60 backdrop-blur-sm px-4 py-2 rounded-lg">
+                <div className="text-3xl sm:text-4xl font-black font-mono" style={{ 
+                  color: selected.color,
+                  textShadow: `0 0 15px ${selected.color}`
                 }}>
                   {formatTime(timer)}
                 </div>
                 {timerTarget && (
-                  <div className="text-sm font-mono text-gray-400 mt-1">
+                  <div className="text-xs font-mono text-gray-400">
                     / {formatTime(timerTarget)}
                   </div>
                 )}
               </div>
+
+              {/* STOP BUTTON */}
+              <button
+                onClick={stop}
+                className="px-6 py-3 rounded-lg font-black font-mono text-sm bg-black/60 backdrop-blur-sm border-2 hover:bg-black/80 transition-all"
+                style={{
+                  borderColor: selected.color,
+                  color: selected.color,
+                  textShadow: `0 0 10px ${selected.color}`
+                }}
+              >
+                STOP
+              </button>
             </div>
 
-            {/* CONTROLS - BOTTOM BAR */}
-            <div className="p-4 sm:p-6 border-t" style={{ borderColor: `${selected.color}40` }}>
-              {/* VOLUME */}
-              <div className="mb-4 flex items-center gap-3">
-                <VolumeX className="w-4 h-4 text-gray-500" />
+            {/* FLOATING BOTTOM CONTROLS */}
+            <div className="absolute bottom-6 left-4 right-4 z-10 space-y-3">
+              {/* VOLUME - floating */}
+              <div className="flex items-center gap-3 bg-black/60 backdrop-blur-sm px-4 py-3 rounded-lg">
+                <VolumeX className="w-4 h-4 text-gray-400" />
                 <input
                   type="range"
                   min="0"
@@ -961,68 +975,36 @@ export default function FrequencyChamber() {
                   step="0.05"
                   value={volume}
                   onChange={(e) => setVolume(parseFloat(e.target.value))}
-                  className="flex-1 h-2 bg-gray-800 rounded-full appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-6 [&::-webkit-slider-thumb]:h-6 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-white"
+                  className="flex-1 h-2 bg-gray-700 rounded-full appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-white"
                 />
-                <Volume2 className="w-4 h-4 text-gray-500" />
-                <span className="text-gray-400 font-mono text-xs w-10">{Math.round(volume * 100)}%</span>
+                <Volume2 className="w-4 h-4 text-gray-400" />
+                <span className="text-gray-300 font-mono text-xs w-9">{Math.round(volume * 100)}%</span>
               </div>
 
-              {/* TIMER PRESETS */}
-              <div className="mb-4">
-                <p className="text-xs text-gray-500 font-mono mb-2">SET TIMER:</p>
-                <div className="grid grid-cols-4 gap-2">
-                  {[5, 10, 15, 20].map(mins => (
-                    <button
-                      key={mins}
-                      onClick={() => setTimerTarget(mins * 60)}
-                      className={`py-2 px-3 rounded-lg font-black font-mono text-sm border-2 transition-all ${
-                        timerTarget === mins * 60
-                          ? 'bg-white text-black'
-                          : 'bg-black text-white hover:bg-white/10'
-                      }`}
-                      style={{
-                        borderColor: timerTarget === mins * 60 ? selected.color : `${selected.color}40`
-                      }}
-                    >
-                      {mins}m
-                    </button>
-                  ))}
-                </div>
-                {timerTarget && (
-                  <p className="text-xs text-gray-500 font-mono mt-2 text-center">
-                    Stops at {Math.floor(timerTarget / 60)} min
-                  </p>
-                )}
-              </div>
+              {/* TIMER + SHARE - floating */}
+              <div className="flex gap-2">
+                {/* TIMER PRESETS */}
+                {[5, 10, 15, 20].map(mins => (
+                  <button
+                    key={mins}
+                    onClick={() => setTimerTarget(mins * 60)}
+                    className={`flex-1 py-2 rounded-lg font-black font-mono text-xs border transition-all ${
+                      timerTarget === mins * 60
+                        ? 'bg-white text-black border-white'
+                        : 'bg-black/60 backdrop-blur-sm text-white border-white/20 hover:border-white/40'
+                    }`}
+                  >
+                    {mins}m
+                  </button>
+                ))}
 
-              {/* CONTROLS ROW */}
-              <div className="grid grid-cols-2 gap-2">
-                {/* SHARE - OFFLINE P2P */}
+                {/* SHARE */}
                 <button
                   onClick={() => setShowShare(true)}
-                  className="py-4 text-base sm:text-lg font-black font-mono border-2 transition-all flex items-center justify-center gap-2"
-                  style={{
-                    borderColor: selected.color,
-                    color: selected.color,
-                    boxShadow: `0 0 20px ${selected.color}40`
-                  }}
+                  className="px-4 py-2 rounded-lg font-black font-mono text-xs bg-black/60 backdrop-blur-sm border border-white/20 hover:border-white/40 transition-all text-white flex items-center gap-1"
                 >
-                  <Share2 className="w-5 h-5" />
+                  <Share2 className="w-3 h-3" />
                   SHARE
-                </button>
-
-                {/* STOP */}
-                <button
-                  onClick={stop}
-                  className="py-4 text-base sm:text-lg font-black font-mono border-2 transition-all"
-                  style={{
-                    backgroundColor: selected.color,
-                    borderColor: selected.color,
-                    color: 'black',
-                    boxShadow: `0 0 40px ${selected.color}80`
-                  }}
-                >
-                  STOP
                 </button>
               </div>
             </div>
