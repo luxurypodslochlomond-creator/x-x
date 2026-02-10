@@ -24,12 +24,15 @@ export default function TinnitusCancellation({ onClose }) {
   const [volume, setVolume] = useState(0.3);
   const [timer, setTimer] = useState(0);
   const [showInstructions, setShowInstructions] = useState(true);
+  const [currentSweepFreq, setCurrentSweepFreq] = useState(20);
 
   const audioCtxRef = useRef(null);
   const nodesRef = useRef([]);
   const timerRef = useRef(null);
   const analyserRef = useRef(null);
   const micStreamRef = useRef(null);
+  const canvasRef = useRef(null);
+  const sweepIntervalRef = useRef(null);
 
   // AUTO-DETECT TINNITUS FREQUENCY
   const detectTinnitus = async () => {
