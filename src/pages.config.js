@@ -337,6 +337,7 @@ import SubmitFeedback from './pages/SubmitFeedback';
 import SubmitFrequency from './pages/SubmitFrequency';
 import SubmitProofOfLove from './pages/SubmitProofOfLove';
 import SymbolForge from './pages/SymbolForge';
+import TalkToAI51 from './pages/TalkToAI51';
 import TeacherInput from './pages/TeacherInput';
 import Teachers from './pages/Teachers';
 import TechScout from './pages/TechScout';
@@ -382,7 +383,6 @@ import YoungWarriors from './pages/YoungWarriors';
 import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
-import TalkToAI51 from './pages/TalkToAI51';
 import __Layout from './Layout.jsx';
 
 
@@ -677,6 +677,7 @@ export const PAGES = {
     "SubmitFrequency": SubmitFrequency,
     "SubmitProofOfLove": SubmitProofOfLove,
     "SymbolForge": SymbolForge,
+    "TalkToAI51": TalkToAI51,
     "TeacherInput": TeacherInput,
     "Teachers": Teachers,
     "TechScout": TechScout,
@@ -722,7 +723,6 @@ export const PAGES = {
     "ZeroEgoProtocol": ZeroEgoProtocol,
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
-    "TalkToAI51": TalkToAI51,
 }
 
 export const pagesConfig = {
