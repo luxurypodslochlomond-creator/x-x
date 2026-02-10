@@ -105,68 +105,28 @@ export default function EmergencyCalm() {
       masterGain.connect(analyser);
       analyser.connect(ctx.destination);
 
-      // PRIMARY HEALING FREQUENCY
+      // PRIMARY HEALING FREQUENCY - SIMPLE AND POWERFUL
       const carrier = protocol.carrier || protocol.frequency;
       const osc = ctx.createOscillator();
       osc.type = protocol.waveform;
       osc.frequency.value = carrier;
       const gain = ctx.createGain();
-      gain.gain.value = 0.6;
+      gain.gain.value = 0.7;
       osc.connect(gain);
       gain.connect(masterGain);
       osc.start();
       nodes.push(osc, gain);
 
-      // SUBHARMONICS (deep penetration)
-      [0.5, 0.25].forEach((ratio, i) => {
-        const subOsc = ctx.createOscillator();
-        subOsc.type = 'sine';
-        subOsc.frequency.value = carrier * ratio;
-        const subGain = ctx.createGain();
-        subGain.gain.value = 0.2 / (i + 1);
-        subOsc.connect(subGain);
-        subGain.connect(masterGain);
-        subOsc.start();
-        nodes.push(subOsc, subGain);
-      });
-
-      // BINAURAL LAYER
-      if (protocol.frequency > 10) {
-        const leftOsc = ctx.createOscillator();
-        const rightOsc = ctx.createOscillator();
-        const merger = ctx.createChannelMerger(2);
-        const leftGain = ctx.createGain();
-        const rightGain = ctx.createGain();
-
-        leftOsc.type = 'sine';
-        rightOsc.type = 'sine';
-        leftOsc.frequency.value = 200;
-        rightOsc.frequency.value = 200 + protocol.frequency;
-        leftGain.gain.value = 0.25;
-        rightGain.gain.value = 0.25;
-
-        leftOsc.connect(leftGain);
-        rightOsc.connect(rightGain);
-        leftGain.connect(merger, 0, 0);
-        rightGain.connect(merger, 0, 1);
-        merger.connect(masterGain);
-        leftOsc.start();
-        rightOsc.start();
-        nodes.push(leftOsc, rightOsc, leftGain, rightGain, merger);
-      }
-
-      // AMBIENT BED
-      for (let i = 0; i < 6; i++) {
-        const ambOsc = ctx.createOscillator();
-        ambOsc.type = 'sine';
-        ambOsc.frequency.value = carrier * 0.5 + (Math.random() - 0.5) * 20;
-        const ambGain = ctx.createGain();
-        ambGain.gain.value = 0.04;
-        ambOsc.connect(ambGain);
-        ambGain.connect(masterGain);
-        ambOsc.start();
-        nodes.push(ambOsc, ambGain);
-      }
+      // ONE SUBHARMONIC (enough for depth)
+      const subOsc = ctx.createOscillator();
+      subOsc.type = 'sine';
+      subOsc.frequency.value = carrier * 0.5;
+      const subGain = ctx.createGain();
+      subGain.gain.value = 0.3;
+      subOsc.connect(subGain);
+      subGain.connect(masterGain);
+      subOsc.start();
+      nodes.push(subOsc, subGain);
 
       nodesRef.current = nodes;
       setIsPlaying(true);
@@ -229,21 +189,15 @@ export default function EmergencyCalm() {
     setBreathPhase(0);
   };
 
-  // CHROMOTHERAPY VISUALIZER
+  // SIMPLE CHROMOTHERAPY VISUALIZER - PURE HEALING
   const drawVisualizer = (protocol) => {
-    if (!canvasRef.current || !analyserRef.current) return;
+    if (!canvasRef.current) return;
 
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
     const rect = canvas.getBoundingClientRect();
-    const dpr = window.devicePixelRatio || 1;
-    canvas.width = rect.width * dpr;
-    canvas.height = rect.height * dpr;
-    ctx.scale(dpr, dpr);
-
-    const analyser = analyserRef.current;
-    const bufferLength = analyser.frequencyBinCount;
-    const dataArray = new Uint8Array(bufferLength);
+    canvas.width = rect.width;
+    canvas.height = rect.height;
 
     let time = 0;
 
@@ -251,47 +205,43 @@ export default function EmergencyCalm() {
       if (!isPlaying) return;
       requestAnimationFrame(draw);
 
-      analyser.getByteFrequencyData(dataArray);
-      time += 0.01;
-
-      // FADE
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      time += 0.02;
 
       const centerX = canvas.width / 2;
       const centerY = canvas.height / 2;
 
-      // BREATHING CHROMOTHERAPY WASH
+      // BREATHING COLOR WASH - SIMPLE
       const currentColor = protocol.chromotherapy[breathPhase];
-      const intensity = 0.06 + (Math.sin(time * 2) * 0.03);
-      ctx.globalAlpha = intensity;
-      ctx.fillStyle = currentColor;
+      const pulse = Math.sin(time * 2) * 0.5 + 0.5;
+      
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.2)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.globalAlpha = 1;
 
-      // HEALING CORE
-      const coreRadius = 100 + (Math.sin(time * 2) * 30);
-      const gradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, coreRadius * 2);
-      gradient.addColorStop(0, currentColor + 'ff');
-      gradient.addColorStop(0.3, currentColor + 'aa');
-      gradient.addColorStop(0.6, currentColor + '44');
-      gradient.addColorStop(1, currentColor + '00');
+      // BIG HEALING CORE - CLEAN
+      const coreRadius = 150 + (pulse * 100);
+      const gradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, coreRadius);
+      gradient.addColorStop(0, currentColor);
+      gradient.addColorStop(1, 'rgba(0,0,0,0)');
 
       ctx.fillStyle = gradient;
       ctx.beginPath();
-      ctx.arc(centerX, centerY, coreRadius * 2, 0, Math.PI * 2);
+      ctx.arc(centerX, centerY, coreRadius, 0, Math.PI * 2);
       ctx.fill();
 
-      // WAVES
-      for (let i = 0; i < 4; i++) {
-        const radius = 60 + (i * 80) + Math.sin(time + i) * 40;
-        const alpha = 0.4 - (i * 0.08);
-        ctx.strokeStyle = `${currentColor}${Math.floor(alpha * 255).toString(16).padStart(2, '0')}`;
-        ctx.lineWidth = 3;
-        ctx.beginPath();
-        ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
-        ctx.stroke();
-      }
+      // TWO SIMPLE RINGS
+      ctx.strokeStyle = currentColor;
+      ctx.lineWidth = 4;
+      ctx.globalAlpha = 0.5;
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, 100 + (pulse * 50), 0, Math.PI * 2);
+      ctx.stroke();
+
+      ctx.globalAlpha = 0.3;
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, 200 + (pulse * 80), 0, Math.PI * 2);
+      ctx.stroke();
+      
+      ctx.globalAlpha = 1;
     };
 
     draw();

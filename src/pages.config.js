@@ -176,6 +176,7 @@ import Earth51 from './pages/Earth51';
 import Earth51Contact from './pages/Earth51Contact';
 import Earth51Privacy from './pages/Earth51Privacy';
 import Earth51Terms from './pages/Earth51Terms';
+import EmergencyCalm from './pages/EmergencyCalm';
 import ExtensionManager from './pages/ExtensionManager';
 import FairLaunchProtocol from './pages/FairLaunchProtocol';
 import FamilyBroadcast from './pages/FamilyBroadcast';
@@ -383,7 +384,6 @@ import YoungWarriors from './pages/YoungWarriors';
 import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
-import EmergencyCalm from './pages/EmergencyCalm';
 import __Layout from './Layout.jsx';
 
 
@@ -517,6 +517,7 @@ export const PAGES = {
     "Earth51Contact": Earth51Contact,
     "Earth51Privacy": Earth51Privacy,
     "Earth51Terms": Earth51Terms,
+    "EmergencyCalm": EmergencyCalm,
     "ExtensionManager": ExtensionManager,
     "FairLaunchProtocol": FairLaunchProtocol,
     "FamilyBroadcast": FamilyBroadcast,
@@ -724,7 +725,6 @@ export const PAGES = {
     "ZeroEgoProtocol": ZeroEgoProtocol,
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
-    "EmergencyCalm": EmergencyCalm,
 }
 
 export const pagesConfig = {
