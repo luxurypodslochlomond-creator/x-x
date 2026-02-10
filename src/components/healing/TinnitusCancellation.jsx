@@ -604,6 +604,29 @@ export default function TinnitusCancellation({ onClose }) {
             {/* PLAYING */}
             {isPlaying && (
               <div className="space-y-6">
+                {/* SWEEP VISUALIZER */}
+                {mode === 'sweep' && (
+                  <div className="bg-gradient-to-b from-green-900/20 to-black border-2 border-green-500 rounded-lg p-6 text-center">
+                    <div className="text-5xl font-black font-mono text-green-400 mb-3" style={{ textShadow: '0 0 25px #22c55e' }}>
+                      {currentSweepFreq.toLocaleString()} Hz
+                    </div>
+                    <div className="flex items-center justify-center gap-2 text-green-400 text-sm font-mono mb-4">
+                      <span>20Hz</span>
+                      <div className="flex-1 bg-green-900/30 h-2 rounded-full overflow-hidden">
+                        <motion.div 
+                          className="bg-green-500 h-full"
+                          style={{ 
+                            width: `${((Math.log10(currentSweepFreq) - Math.log10(20)) / (Math.log10(20000) - Math.log10(20))) * 100}%`
+                          }}
+                          animate={{ boxShadow: '0 0 15px rgba(34, 197, 94, 0.8)' }}
+                        />
+                      </div>
+                      <span>20kHz</span>
+                    </div>
+                    <p className="text-green-300 text-xs font-bold">SWEEPING YOUR AUDITORY SYSTEM</p>
+                  </div>
+                )}
+
                 {/* TIMER */}
                 <div className="text-center">
                   <div className="text-6xl font-black font-mono text-red-400 mb-2" style={{ textShadow: '0 0 20px #ef4444' }}>
