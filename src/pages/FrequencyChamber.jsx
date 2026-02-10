@@ -903,7 +903,7 @@ export default function FrequencyChamber() {
           .map((freq) => (
           <motion.button
             key={freq.id}
-            onClick={() => play(freq)}
+            onClick={() => freq.isTinnitusCancellation ? setShowTinnitusCancellation(true) : play(freq)}
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             className="p-8 border-4 bg-black hover:bg-white/5 transition-all relative text-left h-full sticky"
