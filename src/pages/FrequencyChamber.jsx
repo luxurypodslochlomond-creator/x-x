@@ -560,7 +560,8 @@ export default function FrequencyChamber() {
     breathingPhaseRef.current = 'inhale';
     setIsPlaying(false);
     setTimer(0);
-  };
+    setCurrentSweepFreq(20);
+    };
 
   // PURE CHROMOTHERAPY VISUALIZER - SMOOTH HEALING
   const drawVisualizer = () => {
