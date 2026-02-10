@@ -250,6 +250,7 @@ export default function FrequencyChamber() {
   const [ai51Recommendation, setAI51Recommendation] = useState(null);
   const [isOnline, setIsOnline] = useState(navigator.onLine);
   const [showDataControls, setShowDataControls] = useState(false);
+  const [currentSweepFreq, setCurrentSweepFreq] = useState(20);
 
   const audioCtxRef = useRef(null);
   const nodesRef = useRef([]);
