@@ -36,7 +36,7 @@ const FREQUENCIES = [
     stackWith: ['nerve_pain', 'inflammation'],
     context: 'For chest pain, tightness, heart chakra blockages. Repairs cellular damage.',
     device: 'both',
-    psychology: 'Your heart is safe. Your chest is opening. Love flows freely.' // Priming
+    psychology: 'Your chest is healing. Tension releasing. Heart muscle relaxing. Pain dissolving now.' // Physical focus
     },
   {
     id: 'nerve_pain',
