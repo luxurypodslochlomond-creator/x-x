@@ -214,26 +214,25 @@ const FREQUENCIES = [
     device: 'both' // works on speakers AND headphones
   },
 
-  // === TINNITUS PROTOCOLS (MULTI-MODE) ===
+  // === TINNITUS PROTOCOLS (SWEEP MODE) ===
   {
-    id: 'tinnitus_cancellation',
+    id: 'tinnitus_sweep',
     name: 'TINNITUS DESTROYER',
-    hz: 0, // User inputs their frequency
+    hz: 20, // Start frequency for sweep
     icon: COOLASFUCKShield,
     color: '#ef4444', // Red for targeting pain
     color2: '#06b6d4', // Cyan for silence
     visual: 'waves',
-    description: 'AI noise cancellation: detects YOUR tinnitus → plays inverse wave → SILENCE',
+    description: 'Frequency sweep 20Hz→20kHz→20Hz confuses auditory system + Alpha calming',
     waveform: 'sine',
-    harmonics: [], // Generated dynamically based on detection
+    harmonics: [], // Sweep mode doesn't use harmonics
     timer: '20 min',
     stackWith: ['calm', 'anxiety'],
-    context: 'DESTRUCTIVE INTERFERENCE: Same physics as AirPods Max. Detects your exact tinnitus frequency (2-5 tones), plays the INVERSE waveform = cancels the ringing. Then Alpha waves (10Hz) calm your auditory cortex. FREE. Medical devices charge £2000-5000.',
+    context: 'SWEEP THERAPY: Confuses tinnitus by sweeping through all frequencies. Same physics as AirPods Max. + Alpha waves (10Hz) calm your auditory cortex. FREE. Medical devices charge £2000-5000.',
     device: 'headphones', // MUST use headphones
-    psychology: 'Phantom signals cancelling. Brain learning silence. Auditory cortex calming. Tinnitus dissolving.',
-    isTinnitusCancellation: true,
-    modes: ['auto_detect', 'manual_input', 'notched_therapy', 'sweep'],
-    stressReduction: true // Reduces stress = reduces tinnitus intensity
+    psychology: 'Phantom signals dissolving. Brain learning silence. Auditory cortex calming.',
+    isSweep: true, // Special flag for sweep mode
+    sweepDuration: 30 // 30 seconds per sweep
   }
 ];
 
