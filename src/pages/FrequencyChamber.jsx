@@ -310,16 +310,18 @@ export default function FrequencyChamber() {
         }, sweepTime * 2 * 1000);
       }
 
-      // ULTRA-DEEP SUBHARMONIC (quarter - organs/deep tissue)
-      const ultraSubOsc = ctx.createOscillator();
-      ultraSubOsc.type = 'sine';
-      ultraSubOsc.frequency.value = carrier * 0.25;
-      const ultraSubGain = ctx.createGain();
-      ultraSubGain.gain.value = 0.35;
-      ultraSubOsc.connect(ultraSubGain);
-      ultraSubGain.connect(masterGain);
-      ultraSubOsc.start();
-      nodes.push(ultraSubOsc, ultraSubGain);
+      // SKIP STACKING FOR SWEEP - sweep IS the therapy
+      if (!freq.isSweep) {
+        // ULTRA-DEEP SUBHARMONIC (quarter - organs/deep tissue)
+        const ultraSubOsc = ctx.createOscillator();
+        ultraSubOsc.type = 'sine';
+        ultraSubOsc.frequency.value = carrier * 0.25;
+        const ultraSubGain = ctx.createGain();
+        ultraSubGain.gain.value = 0.35;
+        ultraSubOsc.connect(ultraSubGain);
+        ultraSubGain.connect(masterGain);
+        ultraSubOsc.start();
+        nodes.push(ultraSubOsc, ultraSubGain);
 
       // SUBHARMONIC (half - muscle layers)
       const subOsc = ctx.createOscillator();
