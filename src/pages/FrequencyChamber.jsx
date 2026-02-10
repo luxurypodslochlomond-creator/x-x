@@ -389,9 +389,10 @@ export default function FrequencyChamber() {
         ambGain.connect(masterGain);
         ambOsc.start();
         nodes.push(ambOsc, ambGain);
-      });
+        });
+        } // End of !freq.isSweep check
 
-      nodesRef.current = nodes;
+        nodesRef.current = nodes;
       setIsPlaying(true);
       setSelected(freq);
       setTimer(0);
