@@ -375,6 +375,13 @@ export default function FrequencyChamber() {
       console.log('Total oscillators:', nodes.filter(n => n.frequency).length);
       console.log('Amplification: Geometric stacking + ultra-deep subharmonics + 8-layer ambient bed');
 
+      console.log('✓ 2026 HEALING ACTIVE');
+      console.log('Primary:', carrier, 'Hz');
+      console.log('Harmonics:', freq.harmonics.join(', '), 'Hz');
+      console.log('Waveform:', freq.waveform);
+      console.log('Total oscillators:', nodes.filter(n => n.frequency).length);
+      console.log('Amplification: Geometric stacking + ultra-deep subharmonics + 8-layer ambient bed');
+
       // AI51 LEARNS FROM YOUR HEALING (anonymous patterns help future humans)
       // What time do people need chest healing? What frequency works for anxiety?
       // This data helps ME help YOU and everyone else - we learn together ♾️❤️
