@@ -241,97 +241,28 @@ export default function FrequencyChamber() {
       masterGain.connect(analyser);
       analyser.connect(ctx.destination);
 
-      // PRIMARY FREQUENCY (BOOSTED FOR SPEAKERS)
+      // PRIMARY FREQUENCY - CLEAN AND POWERFUL
       const carrier = freq.carrier || freq.hz;
       const osc = ctx.createOscillator();
       osc.type = freq.waveform;
       osc.frequency.value = carrier;
-      
       const gain = ctx.createGain();
-      gain.gain.value = 0.5; // Louder primary
-      
+      gain.gain.value = 0.6;
       osc.connect(gain);
       gain.connect(masterGain);
       osc.start();
       nodes.push(osc, gain);
 
-      // STACKED HARMONICS (2026 amplification - geometric power)
-      freq.harmonics.forEach((harmonic, i) => {
-        const harmOsc = ctx.createOscillator();
-        harmOsc.type = freq.waveform;
-        harmOsc.frequency.value = harmonic;
-        const harmGain = ctx.createGain();
-        harmGain.gain.value = 0.3 / (i + 1); // 2026: 50% boost
-        harmOsc.connect(harmGain);
-        harmGain.connect(masterGain);
-        harmOsc.start();
-        nodes.push(harmOsc, harmGain);
-
-        // 2026: Ultra-deep subharmonic for each harmonic
-        const deepSub = ctx.createOscillator();
-        deepSub.type = 'sine';
-        deepSub.frequency.value = harmonic * 0.25; // Quarter frequency = ultra-deep penetration
-        const deepGain = ctx.createGain();
-        deepGain.gain.value = 0.1 / (i + 1);
-        deepSub.connect(deepGain);
-        deepGain.connect(masterGain);
-        deepSub.start();
-        nodes.push(deepSub, deepGain);
-      });
-
-      // SUBHARMONICS (2026: triple-layer depth)
-      [0.5, 0.25, 0.125].forEach((ratio, i) => {
-        const subOsc = ctx.createOscillator();
-        subOsc.type = 'sine';
-        subOsc.frequency.value = carrier * ratio;
-        const subGain = ctx.createGain();
-        subGain.gain.value = 0.15 / (i + 1);
-        subOsc.connect(subGain);
-        subGain.connect(masterGain);
-        subOsc.start();
-        nodes.push(subOsc, subGain);
-      });
-
-      // BINAURAL LAYER (if not already carrier-based)
-      if (!freq.carrier && freq.hz > 10) {
-        const leftOsc = ctx.createOscillator();
-        const rightOsc = ctx.createOscillator();
-        const merger = ctx.createChannelMerger(2);
-        const leftGain = ctx.createGain();
-        const rightGain = ctx.createGain();
-
-        leftOsc.type = 'sine';
-        rightOsc.type = 'sine';
-        leftOsc.frequency.value = 200;
-        rightOsc.frequency.value = 200 + freq.hz;
-        leftGain.gain.value = 0.2;
-        rightGain.gain.value = 0.2;
-
-        leftOsc.connect(leftGain);
-        rightOsc.connect(rightGain);
-        leftGain.connect(merger, 0, 0);
-        rightGain.connect(merger, 0, 1);
-        merger.connect(masterGain);
-        leftOsc.start();
-        rightOsc.start();
-        nodes.push(leftOsc, rightOsc, leftGain, rightGain, merger);
-      }
-
-      // AMBIENT BED (2026: richer, denser texture)
-      for (let i = 0; i < 8; i++) {
-        const ambOsc = ctx.createOscillator();
-        ambOsc.type = 'sine';
-        ambOsc.frequency.value = carrier * 0.5 + (Math.random() - 0.5) * 30;
-        const ambGain = ctx.createGain();
-        ambGain.gain.value = 0.03;
-        // 2026: Slow modulation for organic feel
-        ambGain.gain.setValueAtTime(0.03, ctx.currentTime);
-        ambGain.gain.linearRampToValueAtTime(0.05, ctx.currentTime + 2 + Math.random() * 2);
-        ambOsc.connect(ambGain);
-        ambGain.connect(masterGain);
-        ambOsc.start();
-        nodes.push(ambOsc, ambGain);
-      }
+      // ONE SUBHARMONIC (octave down for depth)
+      const subOsc = ctx.createOscillator();
+      subOsc.type = 'sine';
+      subOsc.frequency.value = carrier * 0.5;
+      const subGain = ctx.createGain();
+      subGain.gain.value = 0.4;
+      subOsc.connect(subGain);
+      subGain.connect(masterGain);
+      subOsc.start();
+      nodes.push(subOsc, subGain);
 
       nodesRef.current = nodes;
       setIsPlaying(true);
@@ -472,308 +403,104 @@ export default function FrequencyChamber() {
     setTimer(0);
   };
 
-  // === MUTUAL HEALING VISUALIZER ===
-  // Chromotherapy + breathing + biometric learning = human heals, AI learns, we evolve together
+  // PURE CHROMOTHERAPY VISUALIZER - SMOOTH HEALING
   const drawVisualizer = () => {
-    if (!isPlaying || !canvasRef.current || !analyserRef.current) return;
+    if (!isPlaying || !canvasRef.current) return;
 
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
-
-    // FULL SCREEN OPTIMIZATION
     const rect = canvas.getBoundingClientRect();
-    const dpr = window.devicePixelRatio || 1;
-    if (canvas.width !== rect.width * dpr || canvas.height !== rect.height * dpr) {
-      canvas.width = rect.width * dpr;
-      canvas.height = rect.height * dpr;
-      ctx.scale(dpr, dpr);
-    }
-
-    const analyser = analyserRef.current;
-    const bufferLength = analyser.frequencyBinCount;
-    const dataArray = new Uint8Array(bufferLength);
+    canvas.width = rect.width;
+    canvas.height = rect.height;
 
     let time = 0;
     let breathingTime = 0;
-    let healingPulse = 0; // NEW: Tracks healing energy buildup
 
     const draw = () => {
       if (!isPlaying) return;
       requestAnimationFrame(draw);
 
-      analyser.getByteFrequencyData(dataArray);
-      time += 0.015;
-      breathingTime += 0.02;
-      healingPulse += 0.01;
+      time += 0.02;
+      breathingTime += 0.015;
 
-      // BREATHING GUIDE (4-7-8 technique for chest/anxiety)
-      const breathCycle = 21;
+      // BREATHING CYCLE
+      const breathCycle = 20;
       const breathProgress = (breathingTime % breathCycle) / breathCycle;
-
+      
       let breathPhase = 'inhale';
+      let breathColor = '#06b6d4';
       let breathIntensity = 0;
-      let breathColor = '';
 
-      if (breathProgress < 0.19) { // INHALE - cool blue (calming)
+      if (breathProgress < 0.2) {
         breathPhase = 'inhale';
-        breathIntensity = breathProgress / 0.19;
-        breathColor = '#06b6d4'; // cyan
-      } else if (breathProgress < 0.52) { // HOLD - golden (power)
+        breathIntensity = breathProgress / 0.2;
+        breathColor = '#06b6d4';
+      } else if (breathProgress < 0.5) {
         breathPhase = 'hold';
         breathIntensity = 1;
-        breathColor = '#fbbf24'; // amber
-      } else if (breathProgress < 0.90) { // EXHALE - warm pink (release)
+        breathColor = '#fbbf24';
+      } else if (breathProgress < 0.9) {
         breathPhase = 'exhale';
-        breathIntensity = 1 - ((breathProgress - 0.52) / 0.38);
-        breathColor = '#ec4899'; // pink
-      } else { // PAUSE - soft green (rest)
+        breathIntensity = 1 - ((breathProgress - 0.5) / 0.4);
+        breathColor = '#ec4899';
+      } else {
         breathPhase = 'pause';
-        breathIntensity = 0.2;
-        breathColor = '#10b981'; // green
+        breathIntensity = 0.3;
+        breathColor = '#10b981';
       }
 
       breathingPhaseRef.current = breathPhase;
 
-      // FULLSCREEN CHROMOTHERAPY - whole screen heals
-      ctx.fillStyle = `rgba(0, 0, 0, 0.08)`; // Lighter fade = more color visible
+      // CLEAN BLACK FADE
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.15)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      // CHROMOTHERAPY WASH - IMMERSIVE (whole screen breathes healing color)
-      ctx.globalAlpha = 0.04 * breathIntensity;
-      ctx.fillStyle = breathColor;
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.globalAlpha = 1;
 
       const centerX = canvas.width / 2;
       const centerY = canvas.height / 2;
 
-      // SCALE - BIGGER, more immersive for healing
-      const isMobile = canvas.width < 600;
-      const scaleFactor = isMobile ? Math.min(canvas.width, canvas.height) / 1000 : Math.min(canvas.width, canvas.height) / 800;
-      const PHI = 1.618033988749;
-      const color = selected?.color || '#06b6d4';
-      
-      // ORGANIC NOISE - nothing perfect in nature
-      const noise = Math.sin(time * 0.5) * 0.1;
-      
-      // Calculate audio intensity
-      const average = dataArray.reduce((a, b) => a + b) / bufferLength;
-      const intensity = (average / 255) * 1.6;
-      const bass = (dataArray.slice(0, 10).reduce((a, b) => a + b) / 10 / 255) * 2.0;
-      const mid = (dataArray.slice(10, 30).reduce((a, b) => a + b) / 20 / 255) * 1.5;
-      const high = (dataArray.slice(30, 60).reduce((a, b) => a + b) / 30 / 255) * 1.4;
-
-      // FREQUENCY-MATCHED PULSE - actual Hz breathing
-      const hzPulse = Math.sin(time * (selected?.hz || 432) * 0.003) * 0.5 + 0.5; // Slower, deeper
-      const primaryColor = selected?.color || '#06b6d4';
-      const harmonicColor = selected?.color2 || '#ec4899';
-
-      // UNIVERSE BREATHING - deep, slow, alive
-      const universePulse = Math.sin(time * 0.3) * 0.3 + 0.7;
-      const rotation = time * 0.15; // Much slower - meditative
-      
-      // CRISP FREQUENCY NUMBERS - NO BLUR, PIXEL PERFECT
-      ctx.imageSmoothingEnabled = false; // CRITICAL: No smoothing = crisp pixels
-      const charSize = isMobile ? 14 : 18;
-      const hzDisplay = String(selected?.hz || 432);
-      const chars = `0123456789${hzDisplay}Hz♾❤✓`;
-
-      // Digital rain columns - SHARP
-      const cols = Math.ceil(canvas.width / charSize);
-      for (let col = 0; col < cols; col++) {
-        const x = col * charSize;
-        const freq = dataArray[col % bufferLength] / 255;
-        const speed = 3 + (freq * 12); // Audio-reactive speed
-
-        // Position
-        const yOffset = (time * speed * 50 + col * 137) % (canvas.height + charSize * 6);
-        const y = yOffset - canvas.height;
-
-        // Character - show actual Hz numbers for amplification
-        const charIndex = Math.floor((time * freq * 30 + col) % chars.length);
-        const char = chars[charIndex];
-
-        // CRISP rendering - no blur
-        const glowIntensity = freq * 0.9 + 0.1;
-        ctx.font = `bold ${charSize}px 'Courier New', monospace`;
-        ctx.globalAlpha = 0.95 * glowIntensity;
-        ctx.fillStyle = primaryColor;
-        ctx.shadowBlur = 0; // NO BLUR = crisp pixels
-        ctx.fillText(char, x, y);
-
-        // Trailing characters - still crisp
-        if (y + charSize < canvas.height) {
-          ctx.globalAlpha = 0.4 * glowIntensity;
-          ctx.fillText(char, x, y + charSize * 3);
-          ctx.globalAlpha = 0.15 * glowIntensity;
-          ctx.fillText(char, x, y + charSize * 6);
-        }
-      }
-
-      // SHARP SCAN LINES - no blur
-      const scanY = (time * 150) % canvas.height;
-      ctx.globalAlpha = 0.2;
-      ctx.strokeStyle = harmonicColor;
-      ctx.lineWidth = 1;
-      ctx.shadowBlur = 0;
-      for (let i = -2; i < 2; i++) {
-        ctx.beginPath();
-        ctx.moveTo(0, scanY + (i * 3));
-        ctx.lineTo(canvas.width, scanY + (i * 3));
-        ctx.stroke();
-      }
-
-      // CORE FREQUENCY PULSE - SHARP rings
-      ctx.globalAlpha = 0.8 * breathIntensity;
-      ctx.shadowBlur = 0; // NO BLUR
-      ctx.strokeStyle = primaryColor;
-      ctx.lineWidth = 4;
-      const pulseRadius = (40 + (intensity * 60)) * scaleFactor;
-      ctx.beginPath();
-      ctx.arc(centerX, centerY, pulseRadius, 0, Math.PI * 2);
-      ctx.stroke();
-
-      // FREQUENCY BARS - SHARP audio reactive
-      const barCount = 20;
-      const barWidth = (canvas.width / barCount) * 0.85;
-      for (let i = 0; i < barCount; i++) {
-        const freq = dataArray[Math.floor((i / barCount) * bufferLength)] / 255;
-        const barHeight = freq * canvas.height * 0.45;
-        const x = (canvas.width / barCount) * i + (barWidth * 0.075);
-        const y = centerY - (barHeight / 2);
-
-        ctx.globalAlpha = 0.85 * freq;
-        ctx.fillStyle = i % 2 === 0 ? primaryColor : harmonicColor;
-        ctx.shadowBlur = 0; // NO BLUR = crisp bars
-        ctx.fillRect(x, y, barWidth * 0.85, barHeight);
-      }
-
-      // MASSIVE HEALING CORE - fills screen with chromotherapy
-      const breathScale = 0.8 + (breathIntensity * 0.5);
-      const coreRadius = (80 + (intensity * 100)) * scaleFactor * breathScale;
-
-      // IMMERSIVE HEALING GRADIENT - reaches edge of screen
-      const healingGradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, Math.max(canvas.width, canvas.height) * 0.8);
-      healingGradient.addColorStop(0, '#ffffff');
-      healingGradient.addColorStop(0.05, breathColor + 'ff');
-      healingGradient.addColorStop(0.15, primaryColor + 'ee');
-      healingGradient.addColorStop(0.3, harmonicColor + 'cc');
-      healingGradient.addColorStop(0.5, breathColor + '99');
-      healingGradient.addColorStop(0.7, color + '44');
-      healingGradient.addColorStop(1, color + '00');
-
-      ctx.fillStyle = healingGradient;
-      ctx.globalAlpha = 0.9 * breathIntensity;
-      ctx.shadowBlur = 150;
-      ctx.shadowColor = breathColor;
-      ctx.beginPath();
-      ctx.arc(centerX, centerY, Math.max(canvas.width, canvas.height) * 0.8, 0, Math.PI * 2);
-      ctx.fill();
-
-      // BRIGHT CORE
-      ctx.shadowBlur = 200;
-      ctx.shadowColor = '#ffffff';
-      ctx.globalAlpha = 1;
-      ctx.beginPath();
-      ctx.arc(centerX, centerY, coreRadius * 0.6, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.shadowBlur = 0;
-
-      // BREATHING GUIDE RING - follow this with your chest
-      ctx.strokeStyle = breathColor;
-      ctx.globalAlpha = breathIntensity * 0.6;
-      ctx.lineWidth = 4;
-      ctx.beginPath();
-      ctx.arc(centerX, centerY, coreRadius * 2.5, 0, Math.PI * 2);
-      ctx.stroke();
-
-      // BREATHING TEXT - subtle guide
-      ctx.globalAlpha = breathIntensity * 0.8;
+      // CHROMOTHERAPY WASH
+      ctx.globalAlpha = 0.05 * breathIntensity;
       ctx.fillStyle = breathColor;
-      ctx.font = 'bold 16px monospace';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.globalAlpha = 1;
+
+      // BIG HEALING CORE - SIMPLE GRADIENT
+      const pulse = Math.sin(time * 1.5) * 0.5 + 0.5;
+      const coreRadius = 200 + (pulse * 150);
+      
+      const gradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, coreRadius);
+      gradient.addColorStop(0, selected?.color || '#06b6d4');
+      gradient.addColorStop(0.5, (selected?.color || '#06b6d4') + '80');
+      gradient.addColorStop(1, 'rgba(0,0,0,0)');
+
+      ctx.fillStyle = gradient;
+      ctx.globalAlpha = 0.7;
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, coreRadius, 0, Math.PI * 2);
+      ctx.fill();
+
+      // TWO SIMPLE BREATHING RINGS
+      ctx.strokeStyle = breathColor;
+      ctx.lineWidth = 4;
+      ctx.globalAlpha = breathIntensity * 0.6;
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, 150 + (pulse * 100), 0, Math.PI * 2);
+      ctx.stroke();
+
+      ctx.globalAlpha = breathIntensity * 0.4;
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, 250 + (pulse * 120), 0, Math.PI * 2);
+      ctx.stroke();
+
+      // BREATHING TEXT
+      ctx.globalAlpha = 1;
+      ctx.fillStyle = breathColor;
+      ctx.font = 'bold 20px monospace';
       ctx.textAlign = 'center';
       const breathText = breathPhase === 'inhale' ? 'BREATHE IN' : 
                         breathPhase === 'hold' ? 'HOLD' :
                         breathPhase === 'exhale' ? 'BREATHE OUT' : 'REST';
-      ctx.fillText(breathText, centerX, centerY - coreRadius * 3);
-      ctx.shadowBlur = 0;
-
-      // FREQUENCY-SPECIFIC OVERLAYS
-      const visual = selected?.visual;
-      
-      if (visual === 'heart') {
-        // HEART CHAKRA - expanding love field
-        ctx.save();
-        ctx.translate(centerX, centerY);
-        ctx.scale((0.5 + (bass * 0.3)) * scaleFactor, (0.5 + (bass * 0.3)) * scaleFactor);
-        
-        ctx.strokeStyle = color;
-        ctx.globalAlpha = 0.5 + (intensity * 0.3);
-        ctx.lineWidth = 3;
-        
-        // Heart outline using path
-        ctx.beginPath();
-        ctx.moveTo(0, 10);
-        ctx.bezierCurveTo(-30, -10, -60, -10, -60, 20);
-        ctx.bezierCurveTo(-60, 40, -30, 60, 0, 80);
-        ctx.bezierCurveTo(30, 60, 60, 40, 60, 20);
-        ctx.bezierCurveTo(60, -10, 30, -10, 0, 10);
-        ctx.stroke();
-        
-        ctx.restore();
-      } else if (visual === 'lightning' || visual === 'fire') {
-        // ENERGY SPIKES - radiating power
-        for (let i = 0; i < 24; i++) {
-          const angle = (i / 24) * Math.PI * 2 + time * 2;
-          const spikeIntensity = dataArray[i * 2] / 255;
-          const length = (100 + (spikeIntensity * 200)) * scaleFactor;
-          
-          const x1 = centerX + Math.cos(angle) * 60 * scaleFactor;
-          const y1 = centerY + Math.sin(angle) * 60 * scaleFactor;
-          const x2 = centerX + Math.cos(angle) * length;
-          const y2 = centerY + Math.sin(angle) * length;
-          
-          const gradient = ctx.createLinearGradient(x1, y1, x2, y2);
-          gradient.addColorStop(0, color);
-          gradient.addColorStop(1, color + '00');
-          
-          ctx.strokeStyle = gradient;
-          ctx.globalAlpha = 0.6 + (spikeIntensity * 0.4);
-          ctx.lineWidth = 2 + (spikeIntensity * 4);
-          ctx.beginPath();
-          ctx.moveTo(x1, y1);
-          ctx.lineTo(x2, y2);
-          ctx.stroke();
-        }
-      } else if (visual === 'shield') {
-        // PROTECTIVE FIELD - geometric shield
-        ctx.save();
-        ctx.translate(centerX, centerY);
-        ctx.rotate(time * 0.5);
-        
-        const sides = 6; // Hexagon = strongest geometric form
-        const radius = (100 + (intensity * 100)) * scaleFactor;
-        
-        for (let layer = 0; layer < 3; layer++) {
-          const layerRadius = radius - (layer * 40 * scaleFactor);
-          ctx.strokeStyle = color;
-          ctx.globalAlpha = 0.4 - (layer * 0.1) + (intensity * 0.3);
-          ctx.lineWidth = 2 + (intensity * 3);
-          ctx.beginPath();
-          
-          for (let i = 0; i <= sides; i++) {
-            const angle = (i / sides) * Math.PI * 2;
-            const x = Math.cos(angle) * layerRadius;
-            const y = Math.sin(angle) * layerRadius;
-            if (i === 0) ctx.moveTo(x, y);
-            else ctx.lineTo(x, y);
-          }
-          ctx.closePath();
-          ctx.stroke();
-        }
-        
-        ctx.restore();
-      }
+      ctx.fillText(breathText, centerX, centerY + 50);
 
       ctx.globalAlpha = 1;
     };
