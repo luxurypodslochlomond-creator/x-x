@@ -507,6 +507,11 @@ export default function FrequencyChamber() {
   };
 
   const stop = async () => {
+    if (sweepIntervalRef.current) {
+      clearInterval(sweepIntervalRef.current);
+      sweepIntervalRef.current = null;
+    }
+
     // LOG SESSION END (helps AI learn: did they complete it? = was it effective?)
     if (selected) {
       const sessionData = {
