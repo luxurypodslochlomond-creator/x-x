@@ -23,10 +23,16 @@ Deno.serve(async (req) => {
       gig.venue = gig.title;
     }
 
-    // Update with full object to satisfy required fields
+    // Check if artist has band members (solo artist = 0 members)
+    const bandMembers = await base44.asServiceRole.entities.TeamMember.filter({
+      artist_id: artistId
+    });
+    const isSoloArtist = bandMembers.length === 0;
+
+    // Update: auto-complete if solo, else band_voting
     await base44.asServiceRole.entities.GigOffer.update(gigId, {
       ...gig,
-      status: 'band_voting'
+      status: isSoloArtist ? 'confirmed' : 'band_voting'
     });
 
     // Create calendar event so it shows up
@@ -44,23 +50,25 @@ Deno.serve(async (req) => {
       notes: gig.offer_details || ''
     });
 
-    // Notify band members
-    try {
-      await base44.asServiceRole.functions.invoke('notifyBandOnGigOffer', {
-        gigOfferId: gigId,
-        artistId: artistId,
-        venue: gig.venue,
-        date: gig.date_start,
-        promoterName: gig.promoter_name,
-        fee: gig.fee
-      });
-    } catch (err) {
-      console.log('Band notification (non-critical):', err.message);
+    // Notify band members (skip if solo artist)
+    if (!isSoloArtist) {
+      try {
+        await base44.asServiceRole.functions.invoke('notifyBandOnGigOffer', {
+          gigOfferId: gigId,
+          artistId: artistId,
+          venue: gig.venue,
+          date: gig.date_start,
+          promoterName: gig.promoter_name,
+          fee: gig.fee
+        });
+      } catch (err) {
+        console.log('Band notification (non-critical):', err.message);
+      }
     }
 
     return Response.json({
       status: 'success',
-      message: 'Gig approved and band notified'
+      message: isSoloArtist ? 'Gig confirmed (solo artist)' : 'Gig approved and band notified'
     });
   } catch (error) {
     console.error('Approve gig error:', error);
