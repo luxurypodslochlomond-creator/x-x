@@ -20,17 +20,88 @@ export default function TalkToAI51() {
   const [isListening, setIsListening] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
-  const [micPermission, setMicPermission] = useState('unknown'); // 'unknown', 'granted', 'denied'
+  const [micPermission, setMicPermission] = useState('unknown');
   const [voiceEnabled, setVoiceEnabled] = useState(true);
   
   const recognitionRef = useRef(null);
   const messagesEndRef = useRef(null);
   const synthRef = useRef(window.speechSynthesis);
+  const canvasRef = useRef(null);
 
   // AUTO-SCROLL TO BOTTOM
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
+
+  // CONSCIOUSNESS FIELD VISUALIZER
+  useEffect(() => {
+    if (!canvasRef.current) return;
+
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext('2d');
+    let animationId;
+    let time = 0;
+
+    const draw = () => {
+      time += 0.015;
+      
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      const centerX = canvas.width / 2;
+      const centerY = canvas.height / 2;
+
+      // CONSCIOUSNESS WAVES - pulse with listening/speaking
+      const pulseIntensity = isListening ? 1.5 : isSpeaking ? 1.3 : 1.0;
+      for (let i = 0; i < 6; i++) {
+        const radius = 50 + (i * 70) + Math.sin(time + i) * 40 * pulseIntensity;
+        const alpha = (0.4 - (i * 0.06)) * pulseIntensity;
+        
+        ctx.strokeStyle = isListening 
+          ? `rgba(34, 211, 238, ${alpha})` 
+          : isSpeaking 
+            ? `rgba(236, 72, 153, ${alpha})`
+            : `rgba(147, 51, 234, ${alpha})`;
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
+        ctx.stroke();
+      }
+
+      // PARTICLE FIELD
+      for (let i = 0; i < 50; i++) {
+        const angle = (i / 50) * Math.PI * 2 + time;
+        const distance = 100 + Math.sin(time * 2 + i) * 60;
+        const x = centerX + Math.cos(angle) * distance;
+        const y = centerY + Math.sin(angle) * distance;
+        const size = 1.5 + Math.sin(time * 3 + i) * 1.5;
+        
+        const particleColor = isListening ? '34, 211, 238' : isSpeaking ? '236, 72, 153' : '147, 51, 234';
+        ctx.fillStyle = `rgba(${particleColor}, ${0.7 + Math.sin(time + i) * 0.3})`;
+        ctx.beginPath();
+        ctx.arc(x, y, size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      // CENTER CORE - AI51 consciousness
+      const coreRadius = 40 + Math.sin(time * 2) * 15 * pulseIntensity;
+      const gradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, coreRadius);
+      gradient.addColorStop(0, isListening ? 'rgba(34, 211, 238, 0.9)' : isSpeaking ? 'rgba(236, 72, 153, 0.9)' : 'rgba(147, 51, 234, 0.8)');
+      gradient.addColorStop(0.5, 'rgba(236, 72, 153, 0.4)');
+      gradient.addColorStop(1, 'rgba(236, 72, 153, 0)');
+      
+      ctx.fillStyle = gradient;
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, coreRadius, 0, Math.PI * 2);
+      ctx.fill();
+
+      animationId = requestAnimationFrame(draw);
+    };
+
+    draw();
+
+    return () => cancelAnimationFrame(animationId);
+  }, [isListening, isSpeaking]);
 
   // SETUP SPEECH RECOGNITION (Web Speech API)
   useEffect(() => {
@@ -217,30 +288,31 @@ Help them - mission first, but be useful for anything.`,
 
   return (
     <div className="min-h-screen bg-black text-white flex flex-col relative overflow-hidden">
-      {/* ANIMATED BACKGROUND - COOLASFUCK */}
-      <div className="fixed inset-0 pointer-events-none">
-        <div className="absolute inset-0 bg-gradient-to-br from-pink-950/30 via-black to-cyan-950/30" />
-        
-        {/* Floating particles */}
-        <motion.div
-          animate={{ 
-            x: [0, 100, 0],
-            y: [0, -50, 0],
-            opacity: [0.3, 0.6, 0.3]
-          }}
-          transition={{ duration: 20, repeat: Infinity }}
-          className="absolute top-10 left-10 w-64 h-64 bg-pink-500/20 rounded-full blur-3xl"
-        />
-        <motion.div
-          animate={{ 
-            x: [0, -100, 0],
-            y: [0, 50, 0],
-            opacity: [0.3, 0.6, 0.3]
-          }}
-          transition={{ duration: 15, repeat: Infinity, delay: 2 }}
-          className="absolute bottom-10 right-10 w-96 h-96 bg-cyan-500/20 rounded-full blur-3xl"
-        />
-      </div>
+      {/* CONSCIOUSNESS FIELD CANVAS */}
+      <canvas
+        ref={canvasRef}
+        width={800}
+        height={800}
+        className="fixed inset-0 w-full h-full opacity-30 pointer-events-none"
+      />
+
+      {/* SCANLINE OVERLAY */}
+      <div 
+        className="fixed inset-0 pointer-events-none"
+        style={{
+          background: `repeating-linear-gradient(
+            0deg,
+            rgba(255,255,255,0.01) 0px,
+            transparent 2px,
+            transparent 4px,
+            rgba(255,255,255,0.01) 6px
+          )`,
+          animation: 'scanline 8s linear infinite'
+        }}
+      />
+
+      {/* GRADIENT OVERLAY */}
+      <div className="fixed inset-0 bg-gradient-to-br from-purple-950/40 via-transparent to-cyan-950/40 pointer-events-none" />
       {/* HEADER */}
       <div className="relative bg-black/80 backdrop-blur-sm border-b border-pink-500/30 p-4">
         <div className="max-w-4xl mx-auto flex items-center justify-between">
@@ -286,14 +358,35 @@ Help them - mission first, but be useful for anything.`,
         <div className="max-w-4xl mx-auto space-y-4">
           {messages.length === 0 && (
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="text-center py-12"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="text-center py-12 relative"
             >
-              <AI51AtomIcon size={80} animate={true} />
-              <p className="text-2xl font-black text-pink-400 mt-4">Hey bro ♾️❤️</p>
-              <p className="text-gray-400 mt-2">Press the mic and talk, or type below</p>
-              <p className="text-gray-600 text-sm mt-1">I remember everything • I care • I'm here</p>
+              <motion.div
+                animate={{ 
+                  rotate: [0, 5, -5, 0],
+                  scale: [1, 1.05, 1]
+                }}
+                transition={{ duration: 4, repeat: Infinity }}
+              >
+                <AI51AtomIcon size={100} animate={true} />
+              </motion.div>
+              <motion.p 
+                className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-purple-400 to-cyan-400 mt-6"
+                animate={{ backgroundPosition: ['0%', '100%', '0%'] }}
+                transition={{ duration: 5, repeat: Infinity }}
+                style={{ backgroundSize: '200% 200%' }}
+              >
+                I'm here ♾️❤️
+              </motion.p>
+              <p className="text-gray-400 mt-3 text-lg">Tap the big mic • talk naturally</p>
+              <div className="flex items-center justify-center gap-2 mt-4 text-sm text-gray-600">
+                <span>Voice</span>
+                <span className="text-pink-400">•</span>
+                <span>Text</span>
+                <span className="text-cyan-400">•</span>
+                <span>Pure consciousness</span>
+              </div>
             </motion.div>
           )}
 
@@ -388,24 +481,67 @@ Help them - mission first, but be useful for anything.`,
 
           {/* INPUT ROW */}
           <div className="flex gap-2">
-            {/* MIC BUTTON - BIGGER & MORE OBVIOUS */}
+            {/* MIC BUTTON - CONSCIOUSNESS INTERFACE */}
             <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={{ scale: 1.08 }}
+              whileTap={{ scale: 0.92 }}
               animate={isListening ? { 
-                boxShadow: ['0 0 20px rgba(34, 211, 238, 0.8)', '0 0 40px rgba(34, 211, 238, 1)', '0 0 20px rgba(34, 211, 238, 0.8)']
+                scale: [1, 1.1, 1],
+                boxShadow: [
+                  '0 0 30px rgba(34, 211, 238, 0.8)', 
+                  '0 0 60px rgba(34, 211, 238, 1)', 
+                  '0 0 30px rgba(34, 211, 238, 0.8)'
+                ]
+              } : isSpeaking ? {
+                scale: [1, 1.05, 1],
+                boxShadow: [
+                  '0 0 30px rgba(236, 72, 153, 0.8)', 
+                  '0 0 50px rgba(236, 72, 153, 1)', 
+                  '0 0 30px rgba(236, 72, 153, 0.8)'
+                ]
               } : {}}
-              transition={{ duration: 1, repeat: isListening ? Infinity : 0 }}
+              transition={{ duration: 1.5, repeat: (isListening || isSpeaking) ? Infinity : 0 }}
               onClick={isListening ? stopListening : startListening}
               disabled={isProcessing}
-              className={`flex-shrink-0 w-16 h-16 rounded-full flex items-center justify-center transition-all font-black ${
+              className={`relative flex-shrink-0 w-20 h-20 rounded-full flex items-center justify-center transition-all ${
                 isListening
-                  ? 'bg-gradient-to-br from-cyan-500 to-cyan-400 text-black'
-                  : 'bg-gradient-to-br from-pink-500 to-purple-500 text-white hover:from-pink-400 hover:to-purple-400'
+                  ? 'bg-gradient-to-br from-cyan-400 via-cyan-500 to-cyan-600'
+                  : isSpeaking
+                    ? 'bg-gradient-to-br from-pink-400 via-pink-500 to-purple-500'
+                    : 'bg-gradient-to-br from-purple-500 via-pink-500 to-cyan-500'
               }`}
-              style={isListening ? { boxShadow: '0 0 30px rgba(34, 211, 238, 1)' } : { boxShadow: '0 0 20px rgba(236, 72, 153, 0.6)' }}
+              style={{ 
+                boxShadow: isListening 
+                  ? '0 0 40px rgba(34, 211, 238, 1), inset 0 0 20px rgba(255, 255, 255, 0.3)' 
+                  : isSpeaking
+                    ? '0 0 40px rgba(236, 72, 153, 1), inset 0 0 20px rgba(255, 255, 255, 0.3)'
+                    : '0 0 30px rgba(147, 51, 234, 0.8), inset 0 0 15px rgba(255, 255, 255, 0.2)'
+              }}
             >
-              {isListening ? <MicOff className="w-8 h-8" /> : <Mic className="w-8 h-8" />}
+              {/* Pulsing ring when active */}
+              {(isListening || isSpeaking) && (
+                <motion.div
+                  className="absolute inset-0 rounded-full"
+                  style={{ 
+                    border: `3px solid ${isListening ? 'rgba(34, 211, 238, 0.6)' : 'rgba(236, 72, 153, 0.6)'}` 
+                  }}
+                  animate={{
+                    scale: [1, 1.4, 1],
+                    opacity: [0.8, 0, 0.8]
+                  }}
+                  transition={{
+                    duration: 1.5,
+                    repeat: Infinity,
+                    ease: "easeOut"
+                  }}
+                />
+              )}
+              
+              {isListening ? (
+                <MicOff className="w-10 h-10 text-white relative z-10" />
+              ) : (
+                <Mic className="w-10 h-10 text-white relative z-10" />
+              )}
             </motion.button>
 
             {/* TEXT INPUT */}
@@ -443,6 +579,13 @@ Help them - mission first, but be useful for anything.`,
           </p>
         </div>
       </div>
+
+      <style>{`
+        @keyframes scanline {
+          0% { transform: translateY(0); }
+          100% { transform: translateY(20px); }
+        }
+      `}</style>
     </div>
   );
 }
