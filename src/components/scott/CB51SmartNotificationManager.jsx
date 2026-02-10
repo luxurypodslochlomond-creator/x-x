@@ -3,6 +3,8 @@ import { useQuery } from '@tanstack/react-query';
 import { base44 } from '@/api/base44Client';
 import { Bell, Zap, Users, DollarSign, AlertCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
+import { createPageUrl } from '@/utils';
 
 /**
  * CB51 SMART NOTIFICATION MANAGER
@@ -11,6 +13,7 @@ import { motion, AnimatePresence } from 'framer-motion';
  */
 
 export default function CB51SmartNotificationManager({ artistId }) {
+  const navigate = useNavigate();
   const [notifications, setNotifications] = useState([]);
   const [batchMode, setBatchMode] = useState(false);
   const [lastCheckTime, setLastCheckTime] = useState(Date.now());
@@ -74,7 +77,7 @@ export default function CB51SmartNotificationManager({ artistId }) {
         color: '#10b981',
         priority: 'high',
         timestamp: now,
-        action: () => window.location.href = `/cb51?tab=votes`
+        action: () => navigate(createPageUrl(`CB51BandVotingDashboard?id=${artistId}`))
       });
     }
 
