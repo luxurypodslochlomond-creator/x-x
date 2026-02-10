@@ -784,6 +784,17 @@ export default function FrequencyChamber() {
               </button>
             </div>
 
+            {/* PSYCHOLOGY AFFIRMATION - Top center */}
+            {selected.psychology && (
+              <div className="absolute top-24 left-4 right-4 z-10">
+                <div className="bg-black/60 backdrop-blur-sm px-4 py-3 rounded-lg text-center">
+                  <p className="text-white text-sm sm:text-base font-bold" style={{ textShadow: `0 0 10px ${selected.color}` }}>
+                    {selected.psychology}
+                  </p>
+                </div>
+              </div>
+            )}
+
             {/* FLOATING BOTTOM CONTROLS */}
             <div className="absolute bottom-6 left-4 right-4 z-10 space-y-3">
               {/* VOLUME - floating */}
