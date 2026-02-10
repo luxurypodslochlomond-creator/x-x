@@ -10,6 +10,7 @@ import CB51PINGuard from '@/components/cb51/CB51PINGuard';
 import CB51NotificationFeed from '@/components/cb51/CB51NotificationFeed';
 import CB51GigUploadParser from '@/components/cb51/CB51GigUploadParser';
 import CB51PushSubscriptionManager from '@/components/cb51/CB51PushSubscriptionManager';
+import CB51TestNotification from '@/components/cb51/CB51TestNotification';
 import CB51SmartNotificationManager from '@/components/scott/CB51SmartNotificationManager';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
@@ -244,8 +245,8 @@ export default function CB51() {
                 </div>
 
                 {/* SCAN GIG OFFER */}
-                <div className="bg-gray-900/50 p-5">
-                  <div className="flex items-center gap-3 mb-4">
+                <div className="bg-gray-900/50 p-5 space-y-3">
+                  <div className="flex items-center gap-3">
                     <Radio className="w-5 h-5 text-cyan-400" />
                     <h2 className="text-cyan-400 font-mono font-bold text-sm uppercase tracking-wider">Scan Gig Offer</h2>
                   </div>
@@ -253,6 +254,9 @@ export default function CB51() {
                     artistId={currentArtistId}
                     onGigCreated={() => {}}
                   />
+                  <div className="pt-2 border-t border-cyan-500/20">
+                    <CB51TestNotification />
+                  </div>
                 </div>
 
                 {/* BAND MEMBERS */}
