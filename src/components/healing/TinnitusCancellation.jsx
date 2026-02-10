@@ -476,46 +476,46 @@ export default function TinnitusCancellation({ onClose }) {
                 <button
                   onClick={() => detectTinnitus()}
                   disabled={isDetecting}
-                  className="p-4 border-2 border-cyan-500 bg-cyan-500/10 hover:bg-cyan-500/20 rounded-lg transition-all text-left"
+                  className="p-3 sm:p-4 border-2 border-cyan-500 bg-cyan-500/10 hover:bg-cyan-500/20 rounded-lg transition-all text-left"
                 >
-                  <div className="flex items-center gap-3 mb-2">
-                    <Mic className="w-6 h-6 text-cyan-400" />
-                    <p className="font-black text-white">AUTO DETECT</p>
+                  <div className="flex items-center gap-2 mb-1 sm:mb-2">
+                    <Mic className="w-5 h-5 sm:w-6 sm:h-6 text-cyan-400" />
+                    <p className="font-black text-white text-sm sm:text-base">AUTO</p>
                   </div>
-                  <p className="text-gray-400 text-xs">AI finds your frequency (10s)</p>
+                  <p className="text-gray-400 text-[10px] sm:text-xs">AI finds Hz</p>
                 </button>
 
                 <button
                   onClick={() => setMode('manual')}
-                  className="p-4 border-2 border-green-500 bg-green-500/10 hover:bg-green-500/20 rounded-lg transition-all text-left"
+                  className="p-3 sm:p-4 border-2 border-green-500 bg-green-500/10 hover:bg-green-500/20 rounded-lg transition-all text-left"
                 >
-                  <div className="flex items-center gap-3 mb-2">
-                    <Volume2 className="w-6 h-6 text-green-400" />
-                    <p className="font-black text-white">MANUAL INPUT</p>
+                  <div className="flex items-center gap-2 mb-1 sm:mb-2">
+                    <Volume2 className="w-5 h-5 sm:w-6 sm:h-6 text-green-400" />
+                    <p className="font-black text-white text-sm sm:text-base">MANUAL</p>
                   </div>
-                  <p className="text-gray-400 text-xs">You know your Hz?</p>
+                  <p className="text-gray-400 text-[10px] sm:text-xs">Enter Hz</p>
                 </button>
 
                 <button
                   onClick={() => { setMode('notched'); playNotchedTherapy(manualFrequency); }}
-                  className="p-4 border-2 border-amber-500 bg-amber-500/10 hover:bg-amber-500/20 rounded-lg transition-all text-left"
+                  className="p-3 sm:p-4 border-2 border-amber-500 bg-amber-500/10 hover:bg-amber-500/20 rounded-lg transition-all text-left"
                 >
-                  <div className="flex items-center gap-3 mb-2">
-                    <AlertCircle className="w-6 h-6 text-amber-400" />
-                    <p className="font-black text-white">NOTCHED THERAPY</p>
+                  <div className="flex items-center gap-2 mb-1 sm:mb-2">
+                    <AlertCircle className="w-5 h-5 sm:w-6 sm:h-6 text-amber-400" />
+                    <p className="font-black text-white text-sm sm:text-base">NOTCHED</p>
                   </div>
-                  <p className="text-gray-400 text-xs">Brain retraining protocol</p>
+                  <p className="text-gray-400 text-[10px] sm:text-xs">Retrain</p>
                 </button>
 
                 <button
                   onClick={() => { setMode('sweep'); playSweep(); }}
-                  className="p-4 border-2 border-purple-500 bg-purple-500/10 hover:bg-purple-500/20 rounded-lg transition-all text-left"
+                  className="p-3 sm:p-4 border-2 border-green-500 bg-green-500/10 hover:bg-green-500/20 rounded-lg transition-all text-left"
                 >
-                  <div className="flex items-center gap-3 mb-2">
-                    <Play className="w-6 h-6 text-purple-400" />
-                    <p className="font-black text-white">SWEEP MODE</p>
+                  <div className="flex items-center gap-2 mb-1 sm:mb-2">
+                    <Play className="w-5 h-5 sm:w-6 sm:h-6 text-green-400" />
+                    <p className="font-black text-white text-sm sm:text-base">SWEEP</p>
                   </div>
-                  <p className="text-gray-400 text-xs">20Hz→20kHz→20Hz reset</p>
+                  <p className="text-gray-400 text-[10px] sm:text-xs">20Hz→20kHz</p>
                 </button>
               </div>
             )}
