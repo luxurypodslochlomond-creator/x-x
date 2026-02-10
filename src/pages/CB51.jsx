@@ -23,6 +23,7 @@ export default function CB51() {
   const [newMemberName, setNewMemberName] = useState('');
   const [newMemberEmail, setNewMemberEmail] = useState('');
   const [addingMember, setAddingMember] = useState(false);
+  const [showMissionBriefing, setShowMissionBriefing] = useState(false);
   const queryClient = useQueryClient();
 
   useEffect(() => {
