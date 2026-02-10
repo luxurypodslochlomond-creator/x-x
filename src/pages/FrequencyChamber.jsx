@@ -4,7 +4,7 @@ import { Play, Pause, Volume2, VolumeX, X, Share2 } from 'lucide-react';
 import { COOLASFUCKWaves, COOLASFUCKFire, COOLASFUCKBrain, COOLASFUCKHeart, COOLASFUCKMoon, COOLASFUCKShield, COOLASFUCKZap, COOLASFUCKHeadphones, COOLASFUCKSpeaker } from '@/components/shared/COOLASFUCKIcon';
 import { base44 } from '@/api/base44Client';
 import FrequencyP2PShare from '@/components/healing/FrequencyP2PShare';
-import TinnitusCancellation from '@/components/healing/TinnitusCancellation';
+
 
 /**
  * FREQUENCY CHAMBER - PURE FOUNDATION
