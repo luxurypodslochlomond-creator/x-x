@@ -76,33 +76,16 @@ export default function PetSounds51() {
 
 
 
-            {/* THE SCIENCE (NOT WOO-WOO) */}
-            <div className="max-w-4xl mx-auto mb-16">
-                <h2 className="text-3xl font-black text-center mb-8 text-yellow-400">the science behind it</h2>
+            {/* SCIENCE - MINIMAL */}
+            <div className="max-w-6xl mx-auto mb-8">
                 <div className="grid md:grid-cols-2 gap-6">
-                    <div className="bg-gray-900/40 border border-yellow-500/30 rounded-xl p-6">
-                        <h3 className="font-bold text-white mb-3">🔬 stress hormones &amp; sound</h3>
-                        <p className="text-sm text-gray-400">
-                            NIH research (Thoma et al., 2013): music therapy reduces cortisol (stress hormone) in animals and humans. Lower cortisol = stronger immune system = fewer infections and illnesses.
-                        </p>
+                    <div className="bg-black border border-cyan-500/30 rounded-lg p-6">
+                        <p className="text-xs text-gray-500 font-mono mb-3">STRESS RESEARCH</p>
+                        <p className="text-sm text-gray-400">NIH studies show music therapy reduces cortisol (stress hormone). Stressed animals get sick 2-3x more often.</p>
                     </div>
-                    <div className="bg-gray-900/40 border border-yellow-500/30 rounded-xl p-6">
-                        <h3 className="font-bold text-white mb-3">🐕 animal hearing ranges</h3>
-                        <p className="text-sm text-gray-400">
-                            dogs hear 40Hz-60,000Hz (humans hear 20Hz-20,000Hz). frequencies work because they're in the range animals actually process. no magic, just physics.
-                        </p>
-                    </div>
-                    <div className="bg-gray-900/40 border border-yellow-500/30 rounded-xl p-6">
-                        <h3 className="font-bold text-white mb-3">💰 cost prevention not cure</h3>
-                        <p className="text-sm text-gray-400">
-                            stressed animals get sick 2-3x more often (veterinary research). prevention via stress reduction saves money. average UK pet owner spends £1,000-3,000/year on reactive vet care.
-                        </p>
-                    </div>
-                    <div className="bg-gray-900/40 border border-yellow-500/30 rounded-xl p-6">
-                        <h3 className="font-bold text-white mb-3">📴 offline technology</h3>
-                        <p className="text-sm text-gray-400">
-                            works without internet. barns, stables, remote farms. download once, use forever. no servers needed.
-                        </p>
+                    <div className="bg-black border border-cyan-500/30 rounded-lg p-6">
+                        <p className="text-xs text-gray-500 font-mono mb-3">FREQUENCY PHYSICS</p>
+                        <p className="text-sm text-gray-400">Dogs hear 40Hz-60kHz, we use frequencies in that range. Not magic. Physics. No side effects.</p>
                     </div>
                 </div>
             </div>
