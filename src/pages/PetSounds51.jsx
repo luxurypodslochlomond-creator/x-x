@@ -1,7 +1,8 @@
 import React, { useState, lazy, Suspense } from 'react';
-import { ChevronDown, ChevronUp } from 'lucide-react';
+import { ChevronDown, ChevronUp, Play } from 'lucide-react';
 import { motion } from 'framer-motion';
 import PetSounds51Icon8Bit from '@/components/shared/PetSounds51Icon8Bit';
+import { FireworksIcon, SeparationIcon, ArthritisIcon, SurgeryIcon, TravelIcon, HerdIcon } from '@/components/shared/PetFrequencyIcons';
 
 // Lazy load heavy components
 const AnimalFrequencyEngine = lazy(() => import('@/components/petsounds/AnimalFrequencyEngine'));
