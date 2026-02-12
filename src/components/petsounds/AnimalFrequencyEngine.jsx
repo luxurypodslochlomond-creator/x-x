@@ -59,7 +59,7 @@ export default function AnimalFrequencyEngine({ protocol = 'fireworks', species 
   const [volume, setVolume] = useState(0.3);
   const [timer, setTimer] = useState(0);
   const [timerTarget, setTimerTarget] = useState(null);
-  
+
   const audioCtxRef = useRef(null);
   const nodesRef = useRef([]);
   const timerRef = useRef(null);
