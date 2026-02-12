@@ -1316,27 +1316,6 @@ export default function FrequencyChamber() {
       )}
 
       {/* AI51 BIOMETRIC ENGINE - integrated into fullscreen */}
-      {isPlaying && biometricMode && selected && (
-        <div className="fixed bottom-8 right-6 z-40 bg-black/80 backdrop-blur-xl border-2 rounded-lg p-3" style={{ borderColor: selected.color, boxShadow: `0 0 20px ${selected.color}40` }}>
-          <div className="flex items-center gap-3">
-            <div className="text-xs font-mono space-y-1">
-              {biometricData && (
-                <>
-                  <div className="flex gap-2">
-                    <span className="text-gray-400">HR:</span>
-                    <span className="text-white font-bold" style={{ color: selected.color }}>{biometricData.heartRate || '--'}</span>
-                  </div>
-                  <div className="flex gap-2">
-                    <span className="text-gray-400">Stress:</span>
-                    <span className="text-white font-bold">{biometricData.stress ? Math.round(biometricData.stress) + '%' : '--'}</span>
-                  </div>
-                </>
-              )}
-              {!biometricData && <span className="text-cyan-400 text-[10px] animate-pulse">Scanning...</span>}
-            </div>
-          </div>
-        </div>
-      )}
       <AI51RealtimeBiometricEngine
         isActive={biometricMode && isPlaying}
         currentFrequency={selected}
