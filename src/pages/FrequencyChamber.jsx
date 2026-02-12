@@ -764,6 +764,18 @@ export default function FrequencyChamber() {
   }, []);
 
   // CLEANUP
+  // LOAD FREQUENCY FROM URL (share-links)
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const freqId = params.get('freq');
+    if (freqId && !isPlaying) {
+      const freq = FREQUENCIES.find(f => f.id === freqId);
+      if (freq) {
+        setTimeout(() => play(freq), 500); // Delay so UI renders first
+      }
+    }
+  }, []);
+
   useEffect(() => {
     return () => stop();
   }, []);
