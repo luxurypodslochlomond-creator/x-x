@@ -40,7 +40,7 @@ export default function AI51RealtimeBiometricEngine({
   const peaksRef = useRef([]);
   const lastUpdateRef = useRef(Date.now());
 
-  // REQUEST CAMERA
+  // REQUEST CAMERA - safe fallback if denied
   const requestCamera = async () => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ 
@@ -53,14 +53,21 @@ export default function AI51RealtimeBiometricEngine({
       
       if (videoRef.current) {
         videoRef.current.srcObject = stream;
-        await videoRef.current.play();
+        videoRef.current.onloadedmetadata = () => {
+          videoRef.current.play().catch(e => console.log('Play:', e));
+        };
         setPermission(true);
-        setDetecting(true);
-        startDetection();
+        // Delay detection start to ensure video is playing
+        setTimeout(() => {
+          setDetecting(true);
+          startDetection();
+        }, 500);
       }
     } catch (e) {
-      console.log('Camera access:', e);
+      // User denied OR device doesn't have camera - that's OK
+      console.log('Camera not available:', e.name);
       setPermission(false);
+      // Still show message so user knows why biometric isn't working
     }
   };
 
