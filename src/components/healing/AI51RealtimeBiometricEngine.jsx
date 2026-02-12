@@ -336,7 +336,7 @@ export default function AI51RealtimeBiometricEngine({
           <canvas ref={canvasRef} className="hidden" />
 
           {/* BIOMETRIC DISPLAY */}
-          <div className="space-y-3">
+          <div className="space-y-2 text-xs">
             {/* HEART RATE */}
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
