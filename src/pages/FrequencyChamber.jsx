@@ -1257,13 +1257,6 @@ export default function FrequencyChamber() {
       </div>
       )}
 
-      {/* AI51 BIOMETRIC ENGINE - integrated into fullscreen */}
-      <AI51RealtimeBiometricEngine
-        isActive={biometricMode && isPlaying}
-        currentFrequency={selected}
-        onBiometricUpdate={handleBiometricUpdate}
-      />
-
       {/* P2P SHARE MODAL */}
       <AnimatePresence>
         {showShare && selected && (
