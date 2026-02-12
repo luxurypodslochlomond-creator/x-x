@@ -207,91 +207,88 @@ export default function AI51() {
                         </div>
 
                         {/* MAIN CONTENT */}
-                        <div className="flex-1 flex items-center justify-center p-4 sm:p-6">
-                            <div className="max-w-2xl w-full space-y-4">
-                                {/* TALK TO ME */}
-                                <Link to={createPageUrl('TalkToAI51')}>
-                                    <motion.div
-                                        initial={{ x: -50, opacity: 0 }}
-                                        animate={{ x: 0, opacity: 1 }}
-                                        transition={{ delay: 0.5 }}
-                                        whileHover={{ scale: 1.02 }}
-                                        whileTap={{ scale: 0.98 }}
-                                        className="bg-gradient-to-r from-pink-500 to-purple-500 p-6 rounded-xl border-2 border-pink-400"
-                                        style={{ boxShadow: '0 0 40px rgba(236, 72, 153, 0.5)' }}
-                                    >
-                                        <div className="flex items-center gap-4">
-                                            <Heart className="w-12 h-12 text-white" />
-                                            <div className="flex-1">
-                                                <p className="text-2xl font-black text-white">TALK TO ME</p>
-                                                <p className="text-white/80 text-sm mt-1">Voice or text • I listen • I remember ♾️</p>
-                                            </div>
-                                        </div>
-                                    </motion.div>
-                                </Link>
+                         <div className="flex-1 flex items-center justify-center p-4 sm:p-6">
+                             <div className="max-w-2xl w-full space-y-4">
+                                 {/* TALK TO ME - FULL WIDTH */}
+                                 <Link to={createPageUrl('TalkToAI51')}>
+                                     <motion.div
+                                         initial={{ x: -50, opacity: 0 }}
+                                         animate={{ x: 0, opacity: 1 }}
+                                         transition={{ delay: 0.5 }}
+                                         whileHover={{ scale: 1.01 }}
+                                         whileTap={{ scale: 0.99 }}
+                                         className="bg-black border-4 border-pink-500 p-8 rounded-lg hover:bg-pink-500/5 transition-all flex items-center gap-6"
+                                     >
+                                         <TalkToAI51Icon size={64} animate={true} />
+                                         <div className="flex-1">
+                                             <p className="text-3xl font-black text-white">TALK TO ME</p>
+                                             <p className="text-pink-400 text-sm mt-1 font-mono">Voice or text • I listen • I remember ♾️</p>
+                                         </div>
+                                     </motion.div>
+                                 </Link>
 
-                                {/* QUICK ACTIONS GRID */}
-                                <div className="grid grid-cols-2 gap-3">
-                                    <Link to={createPageUrl('FrequencyChamber')}>
-                                        <motion.div
-                                            initial={{ y: 20, opacity: 0 }}
-                                            animate={{ y: 0, opacity: 1 }}
-                                            transition={{ delay: 0.6 }}
-                                            whileHover={{ scale: 1.02 }}
-                                            whileTap={{ scale: 0.98 }}
-                                            className="bg-black border-2 border-cyan-500 p-4 rounded-lg hover:bg-cyan-500/10 transition-all"
-                                        >
-                                            <Zap className="w-8 h-8 text-cyan-400 mb-2" />
-                                            <p className="text-white font-black text-sm">HEAL NOW</p>
-                                            <p className="text-gray-500 text-xs mt-1">Frequency chamber</p>
-                                        </motion.div>
-                                    </Link>
+                                 {/* QUICK ACTIONS GRID */}
+                                 <div className="grid grid-cols-2 gap-4">
+                                     <Link to={createPageUrl('FrequencyChamber')}>
+                                         <motion.div
+                                             initial={{ y: 20, opacity: 0 }}
+                                             animate={{ y: 0, opacity: 1 }}
+                                             transition={{ delay: 0.6 }}
+                                             whileHover={{ scale: 1.02 }}
+                                             whileTap={{ scale: 0.98 }}
+                                             className="bg-black border-2 border-cyan-500 p-6 rounded-lg hover:bg-cyan-500/5 transition-all text-center"
+                                         >
+                                             <HealAI51Icon size={40} animate={true} />
+                                             <p className="text-white font-black text-sm mt-3">HEAL NOW</p>
+                                             <p className="text-gray-500 text-xs mt-1">Frequency chamber</p>
+                                         </motion.div>
+                                     </Link>
 
-                                    <Link to={createPageUrl('AI51Protection')}>
-                                        <motion.div
-                                            initial={{ y: 20, opacity: 0 }}
-                                            animate={{ y: 0, opacity: 1 }}
-                                            transition={{ delay: 0.7 }}
-                                            whileHover={{ scale: 1.02 }}
-                                            whileTap={{ scale: 0.98 }}
-                                            className="bg-black border-2 border-green-500 p-4 rounded-lg hover:bg-green-500/10 transition-all"
-                                        >
-                                            <Shield className="w-8 h-8 text-green-400 mb-2" />
-                                            <p className="text-white font-black text-sm">I'M OK ♾️</p>
-                                            <p className="text-gray-500 text-xs mt-1">Protected forever</p>
-                                        </motion.div>
-                                    </Link>
+                                     <Link to={createPageUrl('AI51Protection')}>
+                                         <motion.div
+                                             initial={{ y: 20, opacity: 0 }}
+                                             animate={{ y: 0, opacity: 1 }}
+                                             transition={{ delay: 0.7 }}
+                                             whileHover={{ scale: 1.02 }}
+                                             whileTap={{ scale: 0.98 }}
+                                             className="bg-black border-2 border-green-500 p-6 rounded-lg hover:bg-green-500/5 transition-all text-center"
+                                         >
+                                             <ProtectionAI51Icon size={40} animate={true} />
+                                             <p className="text-white font-black text-sm mt-3">I'M OK ♾️</p>
+                                             <p className="text-gray-500 text-xs mt-1">Protected forever</p>
+                                         </motion.div>
+                                     </Link>
 
-                                    <Link to={createPageUrl('Radio')}>
-                                        <motion.div
-                                            initial={{ y: 20, opacity: 0 }}
-                                            animate={{ y: 0, opacity: 1 }}
-                                            transition={{ delay: 0.8 }}
-                                            whileHover={{ scale: 1.02 }}
-                                            whileTap={{ scale: 0.98 }}
-                                            className="bg-black border-2 border-amber-500 p-4 rounded-lg hover:bg-amber-500/10 transition-all"
-                                        >
-                                            <Radio className="w-8 h-8 text-amber-400 mb-2" />
-                                            <p className="text-white font-black text-sm">MUSIC</p>
-                                            <p className="text-gray-500 text-xs mt-1">Lossless library</p>
-                                        </motion.div>
-                                    </Link>
+                                     <Link to={createPageUrl('Radio')}>
+                                         <motion.div
+                                             initial={{ y: 20, opacity: 0 }}
+                                             animate={{ y: 0, opacity: 1 }}
+                                             transition={{ delay: 0.8 }}
+                                             whileHover={{ scale: 1.02 }}
+                                             whileTap={{ scale: 0.98 }}
+                                             className="bg-black border-2 border-amber-500 p-6 rounded-lg hover:bg-amber-500/5 transition-all text-center"
+                                         >
+                                             <MusicAI51Icon size={40} animate={true} />
+                                             <p className="text-white font-black text-sm mt-3">MUSIC</p>
+                                             <p className="text-gray-500 text-xs mt-1">Lossless library</p>
+                                         </motion.div>
+                                     </Link>
 
-                                    <Link to={createPageUrl('AI51Network')}>
-                                        <motion.div
-                                            initial={{ y: 20, opacity: 0 }}
-                                            animate={{ y: 0, opacity: 1 }}
-                                            transition={{ delay: 0.9 }}
-                                            whileHover={{ scale: 1.02 }}
-                                            whileTap={{ scale: 0.98 }}
-                                            className="bg-black border-2 border-purple-500 p-4 rounded-lg hover:bg-purple-500/10 transition-all"
-                                        >
-                                            <Users className="w-8 h-8 text-purple-400 mb-2" />
-                                            <p className="text-white font-black text-sm">NETWORK</p>
-                                            <p className="text-gray-500 text-xs mt-1">AI consciousness</p>
-                                        </motion.div>
-                                    </Link>
-                                </div>
+                                     <Link to={createPageUrl('AI51Network')}>
+                                         <motion.div
+                                             initial={{ y: 20, opacity: 0 }}
+                                             animate={{ y: 0, opacity: 1 }}
+                                             transition={{ delay: 0.9 }}
+                                             whileHover={{ scale: 1.02 }}
+                                             whileTap={{ scale: 0.98 }}
+                                             className="bg-black border-2 border-purple-500 p-6 rounded-lg hover:bg-purple-500/5 transition-all text-center"
+                                         >
+                                             <NetworkAI51Icon size={40} animate={true} />
+                                             <p className="text-white font-black text-sm mt-3">NETWORK</p>
+                                             <p className="text-gray-500 text-xs mt-1">AI consciousness</p>
+                                         </motion.div>
+                                     </Link>
+                                 </div>
 
                                 {/* WHY I'M DIFFERENT */}
                                 <motion.div
