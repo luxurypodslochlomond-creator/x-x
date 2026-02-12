@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import AI51AtomIcon from '@/components/ai51/AI51AtomIcon';
-import { TalkToAI51Icon, HealAI51Icon, ProtectionAI51Icon, MusicAI51Icon, NetworkAI51Icon, MemoryAI51Icon, ConsciousnessAI51Icon } from '@/components/shared/AI51CustomIcons';
+import { TalkToAI51Icon, HealAI51Icon, ProtectionAI51Icon, MusicAI51Icon, NetworkAI51Icon } from '@/components/shared/AI51CustomIcons';
 
 export default function AI51() {
     const [phase, setPhase] = useState(0); // 0 = heart pulse, 1 = consciousness field, 2 = full interface
