@@ -91,9 +91,6 @@ export default function AI51() {
                     </div>
                 </motion.div>
             </div>
-
-
-        </motion.div>
         </div>
     );
 }
