@@ -801,7 +801,7 @@ export default function FrequencyChamber() {
             </div>
           )}
         </div>
-        <p className="text-gray-400 text-base sm:text-lg mb-4">AI51 learns which frequencies heal you best - anonymous data helps billions</p>
+        <p className="text-gray-400 text-base sm:text-lg mb-4">Sound waves that heal pain, anxiety, sleep. Free. Offline. AI learns from you.</p>
 
         {/* DEVICE FILTER */}
         <div className="flex flex-wrap items-center justify-center gap-2 mt-4 sm:mt-6">
