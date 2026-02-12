@@ -802,7 +802,8 @@ export default function FrequencyChamber() {
           )}
         </div>
         <p className="text-gray-400 text-sm sm:text-base mb-3">Free healing frequencies. Works offline. Peer-reviewed science.</p>
-        <p className="text-gray-200 text-lg sm:text-xl">Where does it hurt? Tap a frequency below</p>
+        <p className="text-gray-200 text-lg sm:text-xl">What do you need healing for? Pick a frequency below</p>
+        <p className="text-cyan-400 text-xs sm:text-sm mt-2">AI51 learns from what works for humans like you - helping improve recommendations for everyone ♾️❤️</p>
 
         {/* DEVICE FILTER */}
         <div className="flex flex-wrap items-center justify-center gap-2 mt-4 sm:mt-6">
