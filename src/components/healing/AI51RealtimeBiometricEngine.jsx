@@ -339,12 +339,10 @@ export default function AI51RealtimeBiometricEngine({
           <div className="space-y-2 text-xs">
             {/* HEART RATE */}
             <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <Heart className="w-4 h-4 text-pink-400" />
-                <span className="text-gray-400 text-xs">Heart Rate</span>
-              </div>
-              <span className="text-white font-bold font-mono">
-                {heartRate ? `${heartRate} bpm` : '...'}
+              <Heart className="w-3 h-3 text-pink-400" />
+              <span className="text-gray-400">HR:</span>
+              <span className="text-white font-bold font-mono text-[10px]">
+                {heartRate ? `${heartRate}` : '...'}
               </span>
             </div>
 
