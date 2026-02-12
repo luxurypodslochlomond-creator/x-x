@@ -47,12 +47,12 @@ export default function PetSounds51() {
             <div className="max-w-6xl mx-auto mb-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {[
-                        { name: "Fireworks Anxiety", hz: "40 Hz", desc: "calm during loud noises", color: "#ec4899", protocol: "fireworks" },
-                        { name: "Separation Anxiety", hz: "432 Hz", desc: "safe when away", color: "#06b6d4", protocol: "separation" },
-                        { name: "Arthritis Pain Relief", hz: "174 Hz", desc: "ease joint pain", color: "#f59e0b", protocol: "arthritis" },
-                        { name: "Post-Surgery Recovery", hz: "528 Hz", desc: "speed healing", color: "#10b981", protocol: "surgery" },
-                        { name: "Travel Stress", hz: "396 Hz", desc: "car, vet, flight", color: "#a855f7", protocol: "travel" },
-                        { name: "Farm Herd Health", hz: "7.83 Hz", desc: "stress reduction for many", color: "#22c55e", protocol: "herd" },
+                        { name: "Fireworks Anxiety", hz: "40 Hz", desc: "calm during loud noises", color: "#ec4899", protocol: "fireworks", Icon: FireworksIcon },
+                        { name: "Separation Anxiety", hz: "432 Hz", desc: "safe when away", color: "#06b6d4", protocol: "separation", Icon: SeparationIcon },
+                        { name: "Arthritis Pain Relief", hz: "174 Hz", desc: "ease joint pain", color: "#f59e0b", protocol: "arthritis", Icon: ArthritisIcon },
+                        { name: "Post-Surgery Recovery", hz: "528 Hz", desc: "speed healing", color: "#10b981", protocol: "surgery", Icon: SurgeryIcon },
+                        { name: "Travel Stress", hz: "396 Hz", desc: "car, vet, flight", color: "#a855f7", protocol: "travel", Icon: TravelIcon },
+                        { name: "Farm Herd Health", hz: "7.83 Hz", desc: "stress reduction for many", color: "#22c55e", protocol: "herd", Icon: HerdIcon },
                     ].map((protocol, i) => (
                         <motion.button
                             key={i}
@@ -62,15 +62,18 @@ export default function PetSounds51() {
                             }}
                             whileHover={{ scale: 1.02 }}
                             whileTap={{ scale: 0.98 }}
-                            className="p-8 border-4 bg-black hover:bg-white/5 transition-all text-left"
+                            className="p-6 border-4 bg-black hover:bg-white/5 transition-all text-left flex flex-col items-start"
                             style={{ 
-                                borderColor: protocol.color,
-                                boxShadow: `0 0 20px ${protocol.color}40`
+                                borderColor: protocol.color
                             }}
                         >
-                            <p className="text-sm text-gray-500 font-mono mb-2">{protocol.hz}</p>
-                            <p className="text-xl font-black text-white mb-2">{protocol.name}</p>
-                            <p className="text-sm text-gray-400">{protocol.desc}</p>
+                            <div className="flex items-start justify-between w-full mb-4">
+                                <protocol.Icon size={40} animate={true} />
+                                <Play className="w-6 h-6" style={{ color: protocol.color }} />
+                            </div>
+                            <p className="text-xs text-gray-500 font-mono mb-1">{protocol.hz}</p>
+                            <p className="text-lg font-black text-white mb-2">{protocol.name}</p>
+                            <p className="text-xs text-gray-400">{protocol.desc}</p>
                         </motion.button>
                     ))}
                 </div>
