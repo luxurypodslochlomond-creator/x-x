@@ -93,14 +93,7 @@ export default function AI51() {
             </div>
 
 
-            </AnimatePresence>
-
-            <style>{`
-                @keyframes scanline {
-                    0% { transform: translateY(0); }
-                    100% { transform: translateY(20px); }
-                }
-            `}</style>
+        </motion.div>
         </div>
     );
 }
