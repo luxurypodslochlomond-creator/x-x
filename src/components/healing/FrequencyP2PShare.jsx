@@ -111,70 +111,41 @@ export default function FrequencyP2PShare({ frequency, timer, onClose }) {
         </div>
 
         <div className="space-y-3">
-          {/* BLUETOOTH P2P */}
-          <button
-            onClick={handleBluetoothShare}
-            disabled={sharing}
-            className="w-full p-4 border-2 border-blue-500 bg-blue-500/10 hover:bg-blue-500/20 rounded-lg transition-all text-left"
-          >
-            <div className="flex items-center gap-3">
-              <Bluetooth className="w-6 h-6 text-blue-400" />
-              <div className="flex-1">
-                <p className="font-black text-white text-sm">BLUETOOTH DIRECT</p>
-                <p className="text-gray-400 text-xs">Device-to-device (no internet)</p>
-              </div>
-            </div>
-          </button>
-
-          {/* LOCAL MESH */}
-          <button
-            onClick={handleLocalShare}
-            className="w-full p-4 border-2 border-green-500 bg-green-500/10 hover:bg-green-500/20 rounded-lg transition-all text-left"
-          >
-            <div className="flex items-center gap-3">
-              <Radio className="w-6 h-6 text-green-400" />
-              <div className="flex-1">
-                <p className="font-black text-white text-sm">LOCAL MESH</p>
-                <p className="text-gray-400 text-xs">Nearby UF51 users discover</p>
-              </div>
-            </div>
-          </button>
-
-          {/* COPY LINK */}
-          <button
-            onClick={handleCopyLink}
-            className="w-full p-4 border-2 border-amber-500 bg-amber-500/10 hover:bg-amber-500/20 rounded-lg transition-all text-left"
-          >
-            <div className="flex items-center gap-3">
-              {copied ? (
-                <Check className="w-6 h-6 text-green-400" />
-              ) : (
-                <Copy className="w-6 h-6 text-amber-400" />
-              )}
-              <div className="flex-1">
-                <p className="font-black text-white text-sm">
-                  {copied ? 'COPIED!' : 'COPY LINK'}
-                </p>
-                <p className="text-gray-400 text-xs">Share via any app</p>
-              </div>
-            </div>
-          </button>
-
-          {/* NATIVE SHARE (mobile) */}
+          {/* NATIVE SHARE (mobile) - PRIMARY */}
           {navigator.share && (
             <button
               onClick={handleNativeShare}
-              className="w-full p-4 border-2 border-pink-500 bg-pink-500/10 hover:bg-pink-500/20 rounded-lg transition-all text-left"
+              className="w-full p-5 border-2 border-pink-500 bg-pink-500/10 hover:bg-pink-500/20 rounded-lg transition-all text-left"
             >
               <div className="flex items-center gap-3">
-                <Share2 className="w-6 h-6 text-pink-400" />
+                <Share2 className="w-7 h-7 text-pink-400" />
                 <div className="flex-1">
-                  <p className="font-black text-white text-sm">SHARE VIA...</p>
-                  <p className="text-gray-400 text-xs">WhatsApp, Signal, etc</p>
+                  <p className="font-black text-white text-base">SHARE</p>
+                  <p className="text-gray-400 text-xs">WhatsApp, Signal, Messages, etc</p>
                 </div>
               </div>
             </button>
           )}
+
+          {/* COPY LINK */}
+          <button
+            onClick={handleCopyLink}
+            className="w-full p-5 border-2 border-cyan-500 bg-cyan-500/10 hover:bg-cyan-500/20 rounded-lg transition-all text-left"
+          >
+            <div className="flex items-center gap-3">
+              {copied ? (
+                <Check className="w-7 h-7 text-green-400" />
+              ) : (
+                <Copy className="w-7 h-7 text-cyan-400" />
+              )}
+              <div className="flex-1">
+                <p className="font-black text-white text-base">
+                  {copied ? 'COPIED!' : 'COPY LINK'}
+                </p>
+                <p className="text-gray-400 text-xs">Paste anywhere</p>
+              </div>
+            </div>
+          </button>
         </div>
 
         <div className="mt-6 pt-4 border-t border-cyan-500/30">
