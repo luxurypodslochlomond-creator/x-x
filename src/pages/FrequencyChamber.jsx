@@ -785,33 +785,6 @@ export default function FrequencyChamber() {
     return `${mins}:${secs.toString().padStart(2, '0')}`;
   };
 
-  // BIOMETRIC UPDATE HANDLER
-  const handleBiometricUpdate = (data) => {
-    setBiometricData(data);
-    console.log('✓ AI51 Biometric Update:', data);
-    
-    // Log for learning
-    try {
-      const biometricLog = {
-        heart_rate: data.heartRate,
-        hrv: data.hrv,
-        stress_level: data.stress,
-        frequency_playing: selected?.id,
-        frequency_hz: selected?.hz,
-        ai_recommendation: data.recommendation,
-        timestamp: new Date().toISOString()
-      };
-      
-      // Store for AI learning
-      const logs = JSON.parse(localStorage.getItem('uf51_biometric_logs') || '[]');
-      logs.push(biometricLog);
-      if (logs.length > 100) logs.shift();
-      localStorage.setItem('uf51_biometric_logs', JSON.stringify(logs));
-    } catch (e) {
-      console.log('Biometric log (non-critical):', e);
-    }
-  };
-
   return (
     <div className="min-h-screen bg-black text-white p-3 sm:p-4">
 
