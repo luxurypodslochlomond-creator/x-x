@@ -80,7 +80,7 @@ export default function CB51ActionDashboard({ artistId }) {
       icon: Users,
       color: 'cyan',
       priority: 2,
-      action: () => navigate(createPageUrl(`CB51BandVotingDashboard`))
+      action: () => navigate(createPageUrl(`CB51BandVotingDashboard?id=${artistId}`))
     });
   }
 
