@@ -90,63 +90,29 @@ export default function PetSounds51() {
                 </div>
             </div>
 
-            {/* ABOUT - COLLAPSIBLE */}
-            <div className="max-w-4xl mx-auto mb-16">
+            {/* ABOUT - MINIMAL */}
+            <div className="max-w-6xl mx-auto mb-8">
                 <button 
                     onClick={() => setShowAbout(!showAbout)}
-                    className="w-full bg-gray-900/60 border border-cyan-500/30 rounded-xl p-6 hover:border-cyan-500/60 transition-all flex items-center justify-between"
+                    className="w-full bg-black border border-cyan-500/30 rounded-lg p-6 hover:border-cyan-500/60 transition-all flex items-center justify-between"
                 >
-                    <h2 className="text-2xl font-black text-cyan-400">ABOUT PETSOUNDS51</h2>
-                    {showAbout ? <ChevronUp className="w-6 h-6 text-cyan-400" /> : <ChevronDown className="w-6 h-6 text-cyan-400" />}
+                    <p className="text-cyan-400 font-black">ABOUT</p>
+                    {showAbout ? <ChevronUp className="w-5 h-5 text-cyan-400" /> : <ChevronDown className="w-5 h-5 text-cyan-400" />}
                 </button>
                 
                 {showAbout && (
-                    <div className="bg-gray-900/40 border-x border-b border-cyan-500/30 rounded-b-xl p-8 space-y-6">
+                    <div className="bg-black border-x border-b border-cyan-500/30 rounded-b-lg p-6 space-y-4 text-sm text-gray-400">
                         <div>
-                            <h3 className="font-bold text-white mb-2">🎵 Why "Pet Sounds"?</h3>
-                            <p className="text-gray-400 text-sm">
-                                Named after Brian Wilson's masterpiece. He called it "Pet Sounds" because of his dogs. We honor that by extending healing to ALL animals.
-                            </p>
+                            <p className="text-white font-bold mb-1">Same tech as UF51</p>
+                            <p>Exact same frequency engine, just optimized for animal consciousness.</p>
                         </div>
-
                         <div>
-                            <h3 className="font-bold text-white mb-2">🌍 Same Tech As UF51</h3>
-                            <p className="text-gray-400 text-sm">
-                                PetSounds51 uses the exact same frequency engine, AI analysis, and proof-of-healing system as UF51. Just optimized for animal consciousness.
-                            </p>
+                            <p className="text-white font-bold mb-1">Not medical advice</p>
+                            <p>We're not vets. Works alongside traditional vet care. No side effects.</p>
                         </div>
-
                         <div>
-                            <h3 className="font-bold text-white mb-2">❤️ Not Extraction</h3>
-                            <p className="text-gray-400 text-sm">
-                                10% of revenue goes to animal rescue shelters. Wealthy pet owners (£499 tier) subsidize free tier for rescue animals. Redistribution, not extraction.
-                            </p>
-                        </div>
-
-                        <div>
-                            <h3 className="font-bold text-white mb-2">🔬 Legal & Safe</h3>
-                            <p className="text-gray-400 text-sm">
-                                Not medical advice - we're not vets. AI51 analyzes behavior (stress signs) and recommends frequencies. No side effects. Works alongside traditional vet care.
-                            </p>
-                        </div>
-
-                        <div>
-                            <h3 className="font-bold text-white mb-2">🚀 First In World</h3>
-                            <p className="text-gray-400 text-sm">
-                                Nothing exists like this: AI video analysis + species-specific frequencies + offline mode + proof-of-healing + one-time purchase. We're first.
-                            </p>
-                        </div>
-
-                        <div>
-                            <h3 className="font-bold text-white mb-2">🤝 Who This Helps</h3>
-                            <p className="text-gray-400 text-sm mb-2">
-                                • Anxious rescue dogs finding their forever home<br/>
-                                • Senior pets with arthritis living better<br/>
-                                • Farm animals reducing stress naturally<br/>
-                                • Pet owners saving £1,000s in vet bills<br/>
-                                • Wildlife rehabilitation centers<br/>
-                                • Working dogs (police, service, therapy)
-                            </p>
+                            <p className="text-white font-bold mb-1">Forever free</p>
+                            <p>10% of any revenue goes to animal rescue. No subscriptions. Ever.</p>
                         </div>
                     </div>
                 )}
