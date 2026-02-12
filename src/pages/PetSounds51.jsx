@@ -118,26 +118,7 @@ export default function PetSounds51() {
                 )}
             </div>
 
-            {/* MARKET VALIDATION */}
-            <div className="max-w-4xl mx-auto mb-16">
-                <div className="bg-green-900/20 border-2 border-green-500/30 rounded-xl p-8">
-                    <h2 className="text-2xl font-black text-green-400 mb-6 text-center">THE MARKET IS READY</h2>
-                    <div className="grid md:grid-cols-3 gap-6 text-center">
-                        <div>
-                            <p className="text-4xl font-black text-white mb-2">$427B</p>
-                            <p className="text-sm text-gray-400">Global pet market by 2032</p>
-                        </div>
-                        <div>
-                            <p className="text-4xl font-black text-white mb-2">$39.8B</p>
-                            <p className="text-sm text-gray-400">US vet care spending 2024</p>
-                        </div>
-                        <div>
-                            <p className="text-4xl font-black text-white mb-2">£3,000</p>
-                            <p className="text-sm text-gray-400">Average UK pet vet bills/year</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
 
             {/* ACTIVE VIEW RENDERING */}
             {activeView === 'playing' && (
