@@ -111,10 +111,9 @@ export default function CB51() {
               <div className="grid grid-cols-3 gap-3 mb-4">
                           {artists.slice(0, 2).map((artist) => (
                             <div key={artist.id} className="relative">
-                              <Link
-                                to={createPageUrl(`ScottArtistHome?id=${artist.id}`)}
+                              <button
                                 onClick={() => setActiveArtistId(artist.id)}
-                                className="flex flex-col items-center gap-2 p-3 transition-all w-full block"
+                                className="flex flex-col items-center gap-2 p-3 transition-all w-full"
                               >
                                 {artist.profile_pic_url ? (
                                   <img 
@@ -128,7 +127,7 @@ export default function CB51() {
                                   </div>
                                 )}
                                 <p className="text-white font-mono text-xs text-center truncate w-full">{artist.name}</p>
-                              </Link>
+                              </button>
                             </div>
                           ))}
                           <button
@@ -335,27 +334,11 @@ export default function CB51() {
                 {/* QUICK NAV */}
                 <div className="grid grid-cols-2 gap-3">
                   <button
-                    onClick={() => navigate(createPageUrl(`ScottLive?id=${currentArtistId}`))}
+                    onClick={() => navigate(createPageUrl(`ScottCalendarView`))}
                     className="border border-gray-700 hover:border-cyan-400 px-4 py-3 text-left transition-colors"
                   >
-                    <Music className="w-4 h-4 text-cyan-400 mb-1" />
-                    <div className="text-white font-mono text-xs uppercase">Live</div>
-                  </button>
-
-                  <button
-                    onClick={() => navigate(createPageUrl(`ScottSessions?id=${currentArtistId}`))}
-                    className="border border-gray-700 hover:border-cyan-400 px-4 py-3 text-left transition-colors"
-                  >
-                    <Sparkles className="w-4 h-4 text-cyan-400 mb-1" />
-                    <div className="text-white font-mono text-xs uppercase">Sessions</div>
-                  </button>
-
-                  <button
-                    onClick={() => navigate(createPageUrl('ScottToDo'))}
-                    className="border border-gray-700 hover:border-cyan-400 px-4 py-3 text-left transition-colors"
-                  >
-                    <CheckCircle className="w-4 h-4 text-cyan-400 mb-1" />
-                    <div className="text-white font-mono text-xs uppercase">To-Do</div>
+                    <Calendar className="w-4 h-4 text-cyan-400 mb-1" />
+                    <div className="text-white font-mono text-xs uppercase">Calendar</div>
                   </button>
 
                   <button
@@ -364,6 +347,22 @@ export default function CB51() {
                   >
                     <DollarSign className="w-4 h-4 text-cyan-400 mb-1" />
                     <div className="text-white font-mono text-xs uppercase">Finance</div>
+                  </button>
+
+                  <button
+                    onClick={() => navigate(createPageUrl('ScottToDo'))}
+                    className="border border-gray-700 hover:border-cyan-400 px-4 py-3 text-left transition-colors"
+                  >
+                    <CheckCircle className="w-4 h-4 text-cyan-400 mb-1" />
+                    <div className="text-white font-mono text-xs uppercase">Tasks</div>
+                  </button>
+
+                  <button
+                    onClick={() => navigate(createPageUrl('ScottMessageInbox'))}
+                    className="border border-gray-700 hover:border-cyan-400 px-4 py-3 text-left transition-colors"
+                  >
+                    <Mail className="w-4 h-4 text-cyan-400 mb-1" />
+                    <div className="text-white font-mono text-xs uppercase">Messages</div>
                   </button>
                 </div>
               </>
