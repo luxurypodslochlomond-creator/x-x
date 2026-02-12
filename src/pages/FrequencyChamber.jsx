@@ -287,8 +287,6 @@ export default function FrequencyChamber() {
   const [isOnline, setIsOnline] = useState(navigator.onLine);
   const [showDataControls, setShowDataControls] = useState(false);
   const [currentSweepFreq, setCurrentSweepFreq] = useState(20);
-  const [biometricMode, setBiometricMode] = useState(false);
-  const [biometricData, setBiometricData] = useState(null);
 
   const audioCtxRef = useRef(null);
   const nodesRef = useRef([]);
