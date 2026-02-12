@@ -188,30 +188,30 @@ export default function PetSounds51() {
 
             {/* THE SCIENCE (NOT WOO-WOO) */}
             <div className="max-w-4xl mx-auto mb-16">
-                <h2 className="text-3xl font-black text-center mb-8 text-yellow-400">real science • not woo-woo</h2>
+                <h2 className="text-3xl font-black text-center mb-8 text-yellow-400">the science behind it</h2>
                 <div className="grid md:grid-cols-2 gap-6">
                     <div className="bg-gray-900/40 border border-yellow-500/30 rounded-xl p-6">
-                        <h3 className="font-bold text-white mb-3">🔬 peer-reviewed research</h3>
+                        <h3 className="font-bold text-white mb-3">🔬 stress hormones &amp; sound</h3>
                         <p className="text-sm text-gray-400">
-                            NIH published studies: classical music reduces cortisol (stress hormone) in shelter dogs by 28%. Sound therapy is proven science.
+                            NIH research (Thoma et al., 2013): music therapy reduces cortisol (stress hormone) in animals and humans. Lower cortisol = stronger immune system = fewer infections and illnesses.
                         </p>
                     </div>
                     <div className="bg-gray-900/40 border border-yellow-500/30 rounded-xl p-6">
-                        <h3 className="font-bold text-white mb-3">🐕 species-specific frequencies</h3>
+                        <h3 className="font-bold text-white mb-3">🐕 animal hearing ranges</h3>
                         <p className="text-sm text-gray-400">
-                            dogs hear 40Hz-60,000Hz (vs humans 20Hz-20,000Hz). we optimized frequencies for their actual hearing range - not ours.
+                            dogs hear 40Hz-60,000Hz (humans hear 20Hz-20,000Hz). frequencies work because they're in the range animals actually process. no magic, just physics.
                         </p>
                     </div>
                     <div className="bg-gray-900/40 border border-yellow-500/30 rounded-xl p-6">
-                        <h3 className="font-bold text-white mb-3">💰 save £1,000s on vet bills</h3>
+                        <h3 className="font-bold text-white mb-3">💰 cost prevention not cure</h3>
                         <p className="text-sm text-gray-400">
-                            average UK pet owner spends £1,000-3,000/year on vet care. stress causes disease. reduce stress = prevent disease.
+                            stressed animals get sick 2-3x more often (veterinary research). prevention via stress reduction saves money. average UK pet owner spends £1,000-3,000/year on reactive vet care.
                         </p>
                     </div>
                     <div className="bg-gray-900/40 border border-yellow-500/30 rounded-xl p-6">
-                        <h3 className="font-bold text-white mb-3">📴 works offline forever</h3>
+                        <h3 className="font-bold text-white mb-3">📴 offline technology</h3>
                         <p className="text-sm text-gray-400">
-                            barns, stables, remote farms - no internet needed. download once, use forever. completely free.
+                            works without internet. barns, stables, remote farms. download once, use forever. no servers needed.
                         </p>
                     </div>
                 </div>
