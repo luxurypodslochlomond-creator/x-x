@@ -62,7 +62,7 @@ Deno.serve(async (req) => {
       data: {
         gigOfferId,
         type: 'band_vote',
-        url: `/app/ScottBandVote?gigId=${gigOfferId}`
+        url: `/app/CB51BandVote?gigId=${gigOfferId}`
       },
       actions: [
         {

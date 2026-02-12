@@ -81,11 +81,46 @@ self.addEventListener('fetch', (event) => {
   );
 });
 
-// Handle notification clicks
+// Handle notification clicks + action buttons
 self.addEventListener('notificationclick', (event) => {
-  console.log('[SW] Notification clicked');
+  console.log('[SW] Notification clicked', event.action);
   event.notification.close();
 
+  // Handle action button clicks (YES/NO on gig votes)
+  if (event.action === 'approve' || event.action === 'reject') {
+    const gigId = event.notification.data?.gigOfferId;
+    const vote = event.action === 'approve' ? 'yes' : 'no';
+    
+    event.waitUntil(
+      fetch('/api/functions/handleBandVoteAction', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          gigOfferId: gigId,
+          vote: vote,
+          reason: null // Will prompt for reason if NO
+        })
+      }).then(() => {
+        // Show success notification
+        return self.registration.showNotification(
+          vote === 'yes' ? '✅ Vote recorded' : 'Please add reason',
+          {
+            body: vote === 'yes' ? 'Manager has been notified' : 'Opening app...',
+            icon: '/icon-192x192.png',
+            tag: 'vote-result'
+          }
+        );
+      }).then(() => {
+        // If NO vote, open app for reason
+        if (vote === 'no') {
+          return clients.openWindow('/app/CB51BandVote?gigId=' + gigId);
+        }
+      })
+    );
+    return;
+  }
+
+  // Default click - open URL
   const urlToOpen = event.notification.data?.url || '/';
 
   event.waitUntil(
