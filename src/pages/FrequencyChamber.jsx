@@ -801,7 +801,8 @@ export default function FrequencyChamber() {
             </div>
           )}
         </div>
-        <p className="text-gray-200 text-lg sm:text-xl">Where does it hurt? I'll send the healing frequency there</p>
+        <p className="text-gray-400 text-sm sm:text-base mb-3">Free healing frequencies. Works offline. Peer-reviewed science.</p>
+        <p className="text-gray-200 text-lg sm:text-xl">Where does it hurt? Tap a frequency below</p>
 
         {/* DEVICE FILTER */}
         <div className="flex flex-wrap items-center justify-center gap-2 mt-4 sm:mt-6">
