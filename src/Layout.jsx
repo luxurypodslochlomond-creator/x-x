@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import GlobalErrorBoundary from '@/components/shared/GlobalErrorBoundary';
 import COOLASFUCKErrorMonitor from '@/components/shared/COOLASFUCKErrorMonitor';
 import AutoHealingShield from '@/components/shared/AutoHealingShield';
+import UniversalErrorCatcher from '@/components/shared/UniversalErrorCatcher';
 import FloatingMusicPlayer from '@/components/shared/FloatingMusicPlayer';
 import AI51AtomIcon from '@/components/ai51/AI51AtomIcon';
 import DisasterResilienceMode from '@/components/shared/DisasterResilienceMode';
@@ -441,6 +442,7 @@ const LayoutInner = ({ children, currentPageName }) => {
   };
 
   return (
+      <UniversalErrorCatcher>
       <AutoHealingShield>
       <COOLASFUCKErrorMonitor>
       <DisasterResilienceMode />
@@ -718,6 +720,7 @@ const LayoutInner = ({ children, currentPageName }) => {
     </GlobalErrorBoundary>
     </COOLASFUCKErrorMonitor>
     </AutoHealingShield>
+    </UniversalErrorCatcher>
     );
     };
 
