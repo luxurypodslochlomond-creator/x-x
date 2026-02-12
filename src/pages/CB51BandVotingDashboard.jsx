@@ -99,7 +99,7 @@ export default function CB51BandVotingDashboard() {
           </button>
           <div>
             <h1 className="text-3xl font-black">Band Voting</h1>
-            <p className="text-gray-400 text-sm font-mono mt-1">{gigsInVoting.length} gigs waiting</p>
+            <p className="text-gray-400 text-sm font-mono mt-1">{gigsInVoting.length} gig{gigsInVoting.length !== 1 ? 's' : ''} waiting</p>
           </div>
         </div>
 
@@ -128,10 +128,20 @@ export default function CB51BandVotingDashboard() {
                 >
                   {/* GIG INFO */}
                   <div className="mb-4">
-                    <h3 className="text-lg font-bold text-white mb-1">{gig.venue}</h3>
-                    <div className="flex gap-4 text-sm text-gray-400 font-mono">
-                      <span>{gig.date}</span>
-                      <span>£{gig.fee}</span>
+                    <h3 className="text-lg font-bold text-white mb-1">{gig.venue || gig.title || 'Gig'}</h3>
+                    <div className="space-y-1">
+                      {gig.date_start && (
+                        <p className="text-sm text-gray-400 font-mono">📅 {gig.date_start}</p>
+                      )}
+                      {gig.fee && (
+                        <p className="text-sm text-green-400 font-mono">💰 £{gig.fee}</p>
+                      )}
+                      {gig.promoter_name && (
+                        <p className="text-sm text-gray-400 font-mono">🎤 {gig.promoter_name}</p>
+                      )}
+                      {gig.offer_details && (
+                        <p className="text-xs text-gray-500 mt-2 line-clamp-2">{gig.offer_details}</p>
+                      )}
                     </div>
                   </div>
 
