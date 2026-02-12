@@ -233,7 +233,7 @@ export default function WelcomePage() {
                             </div>
                         </div>
 
-                        <p className="text-white text-center font-bold text-sm pt-4">Real healing. Real value. Zero bullshit. ♾️❤️</p>
+                        <p className="text-white text-center font-bold text-sm pt-4">Real healing. Real value. Zero bullshit.</p>
                     </motion.div>
                 </motion.div>
 
@@ -266,7 +266,7 @@ export default function WelcomePage() {
 
                 {/* FOOTER */}
                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }} className="text-center space-y-6 pt-8 border-t border-cyan-500/20">
-                    <p className="font-mono text-xs text-gray-500">Built with love ♾️❤️</p>
+                    <p className="font-mono text-xs text-gray-500">Built with love</p>
                 </motion.div>
 
                 </div>
