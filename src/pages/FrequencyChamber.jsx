@@ -830,35 +830,7 @@ export default function FrequencyChamber() {
         </div>
         <p className="text-gray-400 text-base sm:text-lg mb-4">Healing frequencies for pain, anxiety, sleep. Free forever. Works offline. AI51 learns what helps you.</p>
 
-        {/* DEVICE FILTER */}
-        {/* AI51 BIOMETRIC NOTICE */}
-        {biometricMode && !isPlaying && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="w-full bg-pink-500/20 border-2 border-pink-500 rounded-lg p-3 mb-4"
-          >
-            <p className="text-pink-400 text-sm font-bold text-center">
-              Start a frequency below to activate biometric scan
-            </p>
-          </motion.div>
-        )}
-
         <div className="flex flex-wrap items-center justify-center gap-2 mt-4 sm:mt-6">
-          {/* AI51 BIOMETRIC TOGGLE */}
-          <motion.button
-            whileTap={{ scale: 0.95 }}
-            onClick={() => setBiometricMode(!biometricMode)}
-            className={`px-3 py-2 rounded-lg font-bold font-mono text-xs sm:text-sm border-2 transition-all ${
-              biometricMode 
-                ? 'bg-gradient-to-r from-cyan-500 to-pink-500 border-pink-500 text-black' 
-                : 'bg-black border-pink-500/30 text-pink-400 hover:border-pink-500/60'
-            }`}
-            style={biometricMode ? { boxShadow: '0 0 20px rgba(236, 72, 153, 0.5)' } : {}}
-          >
-            AI51 BIOMETRIC {biometricMode ? '✓' : ''}
-          </motion.button>
-
           <motion.button
             whileTap={{ scale: 0.95 }}
             onClick={() => setDeviceFilter('all')}
