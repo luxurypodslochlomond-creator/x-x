@@ -20,9 +20,6 @@ export default function CB51BandNotificationInbox() {
   const { data: votingGigs = [], isLoading } = useQuery({
     queryKey: ['myVotingGigs'],
     queryFn: async () => {
-      // Get current user to find their artists
-      const user = await base44.auth.me();
-      
       // Get all gigs in band_voting status
       const allVotingGigs = await base44.entities.GigOffer.filter({
         status: 'band_voting'
