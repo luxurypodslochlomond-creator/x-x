@@ -299,12 +299,9 @@ export default function AI51RealtimeBiometricEngine({
   return (
     <div className="fixed bottom-6 right-6 z-50 bg-black/95 backdrop-blur-xl border-2 border-cyan-500 rounded-lg p-3 max-w-xs" style={{ boxShadow: '0 0 20px rgba(6, 182, 212, 0.4)' }}>
       {/* HEADER */}
-      <div className="flex items-center gap-2 mb-3">
-        <Brain className="w-5 h-5 text-cyan-400" />
-        <div>
-          <p className="text-white font-black text-sm">AI51 BIOMETRIC</p>
-          <p className="text-cyan-400 text-[10px] font-mono">Edge AI • Camera PPG</p>
-        </div>
+      <div className="flex items-center gap-2 mb-2">
+        <Brain className="w-4 h-4 text-cyan-400" />
+        <p className="text-white font-black text-xs">AI51 SCAN</p>
       </div>
 
       {/* REQUEST PERMISSION */}
