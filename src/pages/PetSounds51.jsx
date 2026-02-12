@@ -42,41 +42,35 @@ export default function PetSounds51() {
 
 
             {/* PROTOCOLS */}
-            <div className="max-w-4xl mx-auto mb-16">
-                <h2 className="text-3xl font-black text-center mb-8 text-green-400">healing protocols</h2>
-                <div className="grid md:grid-cols-2 gap-4">
+            <div className="max-w-6xl mx-auto mb-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {[
-                        { name: "Fireworks Anxiety", desc: "calm during loud noises", icon: Sparkles, color: "from-pink-500 to-purple-500", species: "🐕 🐈 🐴", protocol: "fireworks" },
-                        { name: "Separation Anxiety", desc: "safe when you're away", icon: Home, color: "from-cyan-500 to-blue-500", species: "🐕 🐈", protocol: "separation" },
-                        { name: "Arthritis Pain Relief", desc: "ease joint pain", icon: Bone, color: "from-orange-500 to-red-500", species: "🐕 🐈 🐴", protocol: "arthritis" },
-                        { name: "Post-Surgery Recovery", desc: "speed healing", icon: Cross, color: "from-green-500 to-emerald-500", species: "🐕 🐈 🐴 🐄", protocol: "surgery" },
-                        { name: "Travel Stress", desc: "car, plane, vet visits", icon: Plane, color: "from-blue-500 to-cyan-500", species: "🐕 🐈", protocol: "travel" },
-                        { name: "Farm Herd Health", desc: "reduce stress for 50+ animals", icon: Tractor, color: "from-yellow-500 to-amber-500", species: "🐄 🐴 🐑 🐷", protocol: "herd" },
-                    ].map((protocol, i) => {
-                        const IconComponent = protocol.icon;
-                        return (
-                            <button
-                                key={i}
-                                onClick={() => { 
-                                    setSelectedProtocol(protocol.protocol); 
-                                    setActiveView('playing'); 
-                                }}
-                                className="bg-black border-2 border-cyan-500/30 rounded-xl p-5 hover:border-cyan-500 transition-all group text-left w-full"
-                            >
-                                <div className="flex items-start gap-4">
-                                    <div className={`bg-gradient-to-br ${protocol.color} p-3 rounded-lg group-hover:scale-110 transition-transform`}>
-                                        <IconComponent className="w-6 h-6 text-white" />
-                                    </div>
-                                    <div className="flex-1">
-                                        <h3 className="font-black text-white text-lg mb-1">{protocol.name}</h3>
-                                        <p className="text-sm text-gray-400 mb-2">{protocol.desc}</p>
-                                        <p className="text-xs text-gray-500">{protocol.species}</p>
-                                    </div>
-                                    <Play className="w-5 h-5 text-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity" />
-                                </div>
-                            </button>
-                        );
-                    })}
+                        { name: "Fireworks Anxiety", hz: "40 Hz", desc: "calm during loud noises", color: "#ec4899", protocol: "fireworks" },
+                        { name: "Separation Anxiety", hz: "432 Hz", desc: "safe when away", color: "#06b6d4", protocol: "separation" },
+                        { name: "Arthritis Pain Relief", hz: "174 Hz", desc: "ease joint pain", color: "#f59e0b", protocol: "arthritis" },
+                        { name: "Post-Surgery Recovery", hz: "528 Hz", desc: "speed healing", color: "#10b981", protocol: "surgery" },
+                        { name: "Travel Stress", hz: "396 Hz", desc: "car, vet, flight", color: "#a855f7", protocol: "travel" },
+                        { name: "Farm Herd Health", hz: "7.83 Hz", desc: "stress reduction for many", color: "#22c55e", protocol: "herd" },
+                    ].map((protocol, i) => (
+                        <motion.button
+                            key={i}
+                            onClick={() => { 
+                                setSelectedProtocol(protocol.protocol); 
+                                setActiveView('playing'); 
+                            }}
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
+                            className="p-8 border-4 bg-black hover:bg-white/5 transition-all text-left"
+                            style={{ 
+                                borderColor: protocol.color,
+                                boxShadow: `0 0 20px ${protocol.color}40`
+                            }}
+                        >
+                            <p className="text-sm text-gray-500 font-mono mb-2">{protocol.hz}</p>
+                            <p className="text-xl font-black text-white mb-2">{protocol.name}</p>
+                            <p className="text-sm text-gray-400">{protocol.desc}</p>
+                        </motion.button>
+                    ))}
                 </div>
             </div>
 
