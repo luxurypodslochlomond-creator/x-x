@@ -7,11 +7,11 @@ import { Calendar, CheckCircle, DollarSign, Plus, Mail, Users, Music, Sparkles, 
 import { motion, AnimatePresence } from 'framer-motion';
 import CB51ErrorBoundary from '@/components/scott/CB51ErrorBoundary';
 import CB51PINGuard from '@/components/cb51/CB51PINGuard';
+import CB51ActionDashboard from '@/components/cb51/CB51ActionDashboard';
 import CB51NotificationFeed from '@/components/cb51/CB51NotificationFeed';
 import CB51GigUploadParser from '@/components/cb51/CB51GigUploadParser';
 import CB51PushSubscriptionManager from '@/components/cb51/CB51PushSubscriptionManager';
 import CB51TestNotification from '@/components/cb51/CB51TestNotification';
-import CB51SmartNotificationManager from '@/components/scott/CB51SmartNotificationManager';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 export default function CB51() {
@@ -101,9 +101,6 @@ export default function CB51() {
     <CB51PINGuard>
       <CB51ErrorBoundary>
         <div className="min-h-screen bg-black text-white pb-20">
-          {/* SMART NOTIFICATIONS - Innovation */}
-          {currentArtistId && <CB51SmartNotificationManager artistId={currentArtistId} />}
-          
           {/* PUSH NOTIFICATIONS - Setup */}
           {user && <CB51PushSubscriptionManager userEmail={user.email} />}
 
@@ -235,11 +232,20 @@ export default function CB51() {
 
             {currentArtistId ? (
               <>
-                {/* PENDING APPROVALS - Top priority */}
+                {/* ACTION DASHBOARD - What needs doing */}
+                <div className="bg-gray-900/50 border-l-4 border-cyan-500 p-5">
+                  <div className="flex items-center gap-3 mb-4">
+                    <CheckCircle className="w-5 h-5 text-cyan-400" />
+                    <h2 className="text-cyan-400 font-mono font-bold text-sm uppercase tracking-wider">Actions</h2>
+                  </div>
+                  <CB51ActionDashboard artistId={currentArtistId} />
+                </div>
+
+                {/* PENDING APPROVALS - Expandable list */}
                 <div className="bg-gray-900/50 border-l-4 border-red-500 p-5">
                   <div className="flex items-center gap-3 mb-4">
                     <AlertTriangle className="w-5 h-5 text-red-400" />
-                    <h2 className="text-red-400 font-mono font-bold text-sm uppercase tracking-wider">Pending Approvals</h2>
+                    <h2 className="text-red-400 font-mono font-bold text-sm uppercase tracking-wider">Review Gigs</h2>
                   </div>
                   <CB51NotificationFeed artistId={currentArtistId} />
                 </div>
