@@ -771,13 +771,14 @@ export default function FrequencyChamber() {
     const freq = freqId ? FREQUENCIES.find(f => f.id === freqId) : null;
 
     // Set OG meta tags for social sharing
-    const ogTitle = freq 
-      ? `${freq.name} • ${freq.hz} Hz • Free Healing`
-      : 'Frequency Chamber • Free Healing Frequencies • UF51';
-    const ogDescription = freq
-      ? `${freq.description}. Play now, no login needed, works offline.`
-      : 'Healing frequencies for pain, anxiety, sleep, focus + more. Free forever. Works offline.';
-    const ogImage = `${window.location.origin}/api/functions/serveFrequencyOGImage?freq=${freqId || 'generic'}`;
+      const ogTitle = freq 
+        ? `${freq.name} • ${freq.hz} Hz • Free Healing`
+        : 'Frequency Chamber • Free Healing Frequencies • UF51';
+      const ogDescription = freq
+        ? `${freq.description}. Play now, no login needed, works 100% offline.`
+        : 'Free healing frequencies for pain, anxiety, sleep, focus + more. 100% offline. No login. No servers.';
+      const publishedDomain = window.location.hostname.includes('base44.app') ? 'uf51.love' : window.location.origin;
+      const ogImage = `https://${publishedDomain}/api/functions/serveFrequencyOGImage?freq=${freqId || 'generic'}`;
     const ogUrl = window.location.href;
 
     // Update meta tags
