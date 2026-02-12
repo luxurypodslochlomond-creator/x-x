@@ -764,17 +764,49 @@ export default function FrequencyChamber() {
   }, []);
 
   // CLEANUP
-  // LOAD FREQUENCY FROM URL (share-links)
+  // LOAD FREQUENCY FROM URL (share-links) + SET OG TAGS FOR DISCORD/TWITTER
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const freqId = params.get('freq');
-    if (freqId && !isPlaying) {
-      const freq = FREQUENCIES.find(f => f.id === freqId);
-      if (freq) {
-        setTimeout(() => play(freq), 500); // Delay so UI renders first
-      }
+    const freq = freqId ? FREQUENCIES.find(f => f.id === freqId) : null;
+
+    // Set OG meta tags for social sharing
+    const ogTitle = freq 
+      ? `${freq.name} • ${freq.hz} Hz • Free Healing`
+      : 'Frequency Chamber • Free Healing Frequencies • UF51';
+    const ogDescription = freq
+      ? `${freq.description}. Play now, no login needed, works offline.`
+      : 'Healing frequencies for pain, anxiety, sleep, focus + more. Free forever. Works offline.';
+    const ogImage = `${window.location.origin}/api/functions/serveFrequencyOGImage?freq=${freqId || 'generic'}`;
+    const ogUrl = window.location.href;
+
+    // Update meta tags
+    setMetaTag('og:title', ogTitle);
+    setMetaTag('og:description', ogDescription);
+    setMetaTag('og:image', ogImage);
+    setMetaTag('og:url', ogUrl);
+    setMetaTag('og:type', 'website');
+    setMetaTag('twitter:card', 'summary_large_image');
+    setMetaTag('twitter:title', ogTitle);
+    setMetaTag('twitter:description', ogDescription);
+    setMetaTag('twitter:image', ogImage);
+
+    // Auto-play if frequency in URL
+    if (freq && !isPlaying) {
+      setTimeout(() => play(freq), 500);
     }
   }, []);
+
+  // Helper to set meta tags
+  const setMetaTag = (property, content) => {
+    let meta = document.querySelector(`meta[property="${property}"]`) || document.querySelector(`meta[name="${property}"]`);
+    if (!meta) {
+      meta = document.createElement('meta');
+      meta.setAttribute(property.includes(':') ? 'property' : 'name', property);
+      document.head.appendChild(meta);
+    }
+    meta.content = content;
+  };
 
   useEffect(() => {
     return () => stop();
