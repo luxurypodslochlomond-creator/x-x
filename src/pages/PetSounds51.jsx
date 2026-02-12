@@ -39,60 +39,7 @@ export default function PetSounds51() {
                 </div>
             </div>
 
-            {/* THE PROBLEM */}
-            <div className="max-w-4xl mx-auto mb-16">
-                <div className="bg-red-900/20 border-2 border-red-500/30 rounded-xl p-8">
-                    <h2 className="text-3xl font-black text-red-300 mb-6 text-center">THE PROBLEM</h2>
-                    <div className="grid md:grid-cols-2 gap-6 text-gray-300">
-                        <div>
-                            <p className="font-bold text-white mb-2">Pet Owners:</p>
-                            <ul className="space-y-2 text-sm">
-                                <li>• £1,000-3,000/year in vet bills</li>
-                                <li>• Anxiety from fireworks, separation, travel</li>
-                                <li>• £500-2,000/year pain management for older pets</li>
-                                <li>• NO affordable prevention - only treatment</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <p className="font-bold text-white mb-2">Farmers:</p>
-                            <ul className="space-y-2 text-sm">
-                                <li>• £100-300 per vet visit</li>
-                                <li>• Stress causes disease = £1,000s lost</li>
-                                <li>• Lower milk yield from stressed animals</li>
-                                <li>• No scalable wellness solution</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            {/* HOW IT WORKS */}
-            <div className="max-w-4xl mx-auto mb-16">
-                <h2 className="text-3xl font-black text-center mb-8 text-cyan-400">HOW IT WORKS</h2>
-                <div className="grid md:grid-cols-3 gap-6">
-                    <div className="bg-gray-900/40 border border-cyan-500/30 rounded-xl p-6 text-center">
-                        <Video className="w-12 h-12 text-cyan-400 mx-auto mb-4" />
-                        <h3 className="font-bold text-white mb-2">1. AI Analysis</h3>
-                        <p className="text-sm text-gray-400">
-                            AI51 watches your pet via camera, detects stress signs (pacing, ears back, tail position)
-                        </p>
-                    </div>
-                    <div className="bg-gray-900/40 border border-green-500/30 rounded-xl p-6 text-center">
-                        <Zap className="w-12 h-12 text-green-400 mx-auto mb-4" />
-                        <h3 className="font-bold text-white mb-2">2. Frequency Therapy</h3>
-                        <p className="text-sm text-gray-400">
-                            Plays species-specific healing frequencies (dogs hear 40Hz-60kHz, we optimized for that)
-                        </p>
-                    </div>
-                    <div className="bg-gray-900/40 border border-pink-500/30 rounded-xl p-6 text-center">
-                        <Shield className="w-12 h-12 text-pink-400 mx-auto mb-4" />
-                        <h3 className="font-bold text-white mb-2">3. Proven Results</h3>
-                        <p className="text-sm text-gray-400">
-                            Camera verifies behavior change. Calmer pet = less vet visits = you save money
-                        </p>
-                    </div>
-                </div>
-            </div>
 
             {/* PROTOCOLS */}
             <div className="max-w-4xl mx-auto mb-16">
