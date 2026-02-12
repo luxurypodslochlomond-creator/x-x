@@ -84,18 +84,18 @@ export default function CB51ActionDashboard({ artistId }) {
     });
   }
 
-  // READY: Draft emails
-  if (confirmedGigs.length > 0) {
-    actions.push({
-      id: 'draft-email',
-      title: `${confirmedGigs.length} draft email${confirmedGigs.length > 1 ? 's' : ''} ready`,
-      subtitle: 'Tap to copy & send',
-      icon: Mail,
-      color: 'green',
-      priority: 3,
-      action: () => navigate(createPageUrl(`CB51DraftEmails?artistId=${artistId}`))
-    });
-  }
+  // READY: Draft emails (TODO: Create CB51DraftEmails page)
+  // if (confirmedGigs.length > 0) {
+  //   actions.push({
+  //     id: 'draft-email',
+  //     title: `${confirmedGigs.length} draft email${confirmedGigs.length > 1 ? 's' : ''} ready`,
+  //     subtitle: 'Tap to copy & send',
+  //     icon: Mail,
+  //     color: 'green',
+  //     priority: 3,
+  //     action: () => navigate(createPageUrl(`CB51DraftEmails?artistId=${artistId}`))
+  //   });
+  // }
 
   if (actions.length === 0) {
     return (
