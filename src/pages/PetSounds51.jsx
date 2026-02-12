@@ -1,5 +1,6 @@
 import React, { useState, lazy, Suspense } from 'react';
-import { Check, Heart, Video, Wifi, Shield, Zap, ChevronDown, ChevronUp, Play, Sparkles, Home, Bone, Cross, Plane, Tractor } from 'lucide-react';
+import { ChevronDown, ChevronUp } from 'lucide-react';
+import { motion } from 'framer-motion';
 import PetSounds51Icon8Bit from '@/components/shared/PetSounds51Icon8Bit';
 
 // Lazy load heavy components
