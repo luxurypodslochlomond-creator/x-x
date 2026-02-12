@@ -25,7 +25,13 @@ export default function CB51BandVotingDashboard() {
         artist_id: artistId,
         status: 'band_voting'
       });
-      return gigs;
+      // Deduplicate by ID
+      const seen = new Set();
+      return gigs.filter(g => {
+        if (seen.has(g.id)) return false;
+        seen.add(g.id);
+        return true;
+      });
     },
     enabled: !!artistId,
     refetchInterval: 2000 // Poll every 2s for live votes
