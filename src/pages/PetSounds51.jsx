@@ -120,23 +120,20 @@ export default function PetSounds51() {
 
 
 
-            {/* ACTIVE VIEW RENDERING */}
+            {/* PLAYER */}
             {activeView === 'playing' && (
-                <div className="max-w-3xl mx-auto">
+                <div className="max-w-4xl mx-auto">
                     <button 
                         onClick={() => setActiveView('home')}
-                        className="mb-6 text-cyan-400 hover:text-cyan-300 font-bold"
+                        className="mb-6 text-cyan-400 hover:text-cyan-300 text-sm font-bold"
                     >
-                        ← back to protocols
+                        ← back
                     </button>
-                    <Suspense fallback={<div className="text-center text-cyan-400 py-12">loading frequency engine...</div>}>
+                    <Suspense fallback={<div className="text-center text-cyan-400 py-12">loading...</div>}>
                         <AnimalFrequencyEngine 
                             protocol={selectedProtocol || 'fireworks'} 
                             species="dog"
-                            onComplete={() => {
-                                alert('✅ session complete');
-                                setActiveView('home');
-                            }}
+                            onComplete={() => setActiveView('home')}
                         />
                     </Suspense>
                 </div>
