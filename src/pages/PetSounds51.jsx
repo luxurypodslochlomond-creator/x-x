@@ -74,28 +74,7 @@ export default function PetSounds51() {
                 </div>
             </div>
 
-            {/* FREE FOR ALL */}
-            <div className="max-w-4xl mx-auto mb-16">
-                <div className="bg-gradient-to-br from-green-500/30 to-cyan-500/30 border-3 border-green-400 rounded-2xl p-10 text-center" style={{
-                    boxShadow: '0 0 50px rgba(34, 211, 238, 0.4), 0 0 30px rgba(52, 211, 153, 0.3), inset 0 0 30px rgba(34, 211, 238, 0.1)'
-                }}>
-                    <Heart className="w-20 h-20 text-green-300 mx-auto mb-6" style={{
-                        animation: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                        filter: 'drop-shadow(0 0 15px rgba(52, 211, 153, 0.8))'
-                    }} />
-                    <h2 className="text-4xl font-black text-green-300 mb-4" style={{
-                        textShadow: '0 0 20px rgba(52, 211, 153, 0.8)'
-                    }}>COMPLETELY FREE</h2>
-                    <p className="text-white text-xl font-bold mb-3">no login • no payment • no subscription • forever</p>
-                    <div className="bg-black/60 rounded-lg p-4 inline-block mb-3">
-                        <p className="text-cyan-300 font-mono text-sm">✓ all 6 protocols  ✓ unlimited use  ✓ works offline  ✓ all animals</p>
-                    </div>
-                    <p className="text-gray-300 text-sm">
-                        Your dog. Your cat. Your horse. Farm herd. Zoo animals. All heal the same way.<br/>
-                        <span className="text-green-300 font-bold">Click any protocol above now.</span>
-                    </p>
-                </div>
-            </div>
+
 
             {/* THE SCIENCE (NOT WOO-WOO) */}
             <div className="max-w-4xl mx-auto mb-16">
