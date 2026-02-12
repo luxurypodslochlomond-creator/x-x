@@ -378,11 +378,7 @@ export default function CB51() {
                   </button>
                 </div>
               </>
-            ) : (
-              <div className="text-center py-12">
-                <p className="text-gray-500 font-mono text-sm">Select an artist</p>
-              </div>
-            )}
+            ) : null}
           </div>
         </div>
       </CB51ErrorBoundary>
