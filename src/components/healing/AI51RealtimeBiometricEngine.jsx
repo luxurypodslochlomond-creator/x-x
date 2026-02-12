@@ -290,7 +290,7 @@ export default function AI51RealtimeBiometricEngine({
   if (!isActive) return null;
 
   return (
-    <div className="fixed top-20 right-4 z-40 bg-black/90 backdrop-blur-xl border-2 border-cyan-500 rounded-xl p-4 max-w-xs">
+    <div className="fixed top-4 left-4 right-4 md:top-20 md:right-4 md:left-auto z-[70] bg-black/95 backdrop-blur-xl border-2 border-cyan-500 rounded-xl p-4 max-w-xs mx-auto md:mx-0" style={{ boxShadow: '0 0 30px rgba(6, 182, 212, 0.6)' }}>
       {/* HEADER */}
       <div className="flex items-center gap-2 mb-3">
         <Brain className="w-5 h-5 text-cyan-400" />
