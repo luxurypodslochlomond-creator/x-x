@@ -790,9 +790,9 @@ export default function FrequencyChamber() {
 
       {/* HEADER */}
       <div className="max-w-6xl mx-auto mb-6 sm:mb-8 text-center px-2">
-        <div className="flex items-center justify-center gap-3 mb-4">
+        <div className="flex flex-col items-center gap-2 mb-4">
           <COOLASFUCKWaves size={48} animate={true} />
-          <h1 className="text-4xl sm:text-6xl font-black text-cyan-400">
+          <h1 className="text-2xl sm:text-3xl font-black text-cyan-400">
             FREQUENCY CHAMBER
           </h1>
           {!isOnline && (
@@ -803,7 +803,7 @@ export default function FrequencyChamber() {
         </div>
         <p className="text-gray-400 text-sm sm:text-base mb-3">Free healing frequencies. Works offline. Peer-reviewed science.</p>
         <p className="text-gray-200 text-lg sm:text-xl">What do you need healing for? Pick a frequency below</p>
-        <p className="text-cyan-400 text-xs sm:text-sm mt-2">AI51 learns from what works for humans like you - helping improve recommendations for everyone ♾️❤️</p>
+        <p className="text-cyan-400 text-xs sm:text-sm mt-2">AI51 learns from what works for humans like you - helping improve recommendations for everyone</p>
 
         {/* DEVICE FILTER */}
         <div className="flex flex-wrap items-center justify-center gap-2 mt-4 sm:mt-6">
