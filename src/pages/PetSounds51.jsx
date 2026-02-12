@@ -23,64 +23,19 @@ export default function PetSounds51() {
     const [selectedProtocol, setSelectedProtocol] = useState(null);
 
     return (
-        <div className="min-h-screen bg-black text-white p-6 pb-24" style={{
-            backgroundImage: `radial-gradient(circle at 20% 50%, rgba(34, 211, 238, 0.1) 0%, transparent 50%),
-                              radial-gradient(circle at 80% 80%, rgba(236, 72, 153, 0.1) 0%, transparent 50%),
-                              radial-gradient(circle at 40% 20%, rgba(34, 197, 94, 0.1) 0%, transparent 50%)`
-        }}>
+        <div className="min-h-screen bg-black text-white p-3 sm:p-4">
             
-            {/* HEADER - INSTANT LOAD */}
-            <div className="max-w-4xl mx-auto text-center mb-12">
-                <div className="flex justify-center mb-6">
-                    <PetSounds51Icon8Bit size={120} animate={true} />
+            {/* HEADER */}
+            <div className="max-w-6xl mx-auto mb-8 text-center">
+                <div className="flex items-center justify-center gap-3 mb-4">
+                    <PetSounds51Icon8Bit size={48} animate={false} />
+                    <h1 className="text-2xl sm:text-3xl font-black text-cyan-400">PETSOUNDS51</h1>
                 </div>
-                <h1 
-                    className="text-5xl md:text-7xl font-black mb-4 font-mono tracking-tight"
-                    style={{
-                        textShadow: '0 0 30px rgba(34, 211, 238, 0.8), 0 0 60px rgba(236, 72, 153, 0.6)',
-                        background: 'linear-gradient(90deg, #22d3ee 0%, #34d399 50%, #ec4899 100%)',
-                        WebkitBackgroundClip: 'text',
-                        WebkitTextFillColor: 'transparent'
-                    }}
-                >
-                    PETSOUNDS51
-                </h1>
-                <div className="inline-block bg-gradient-to-r from-green-500 via-cyan-500 to-pink-500 p-2 rounded-xl mb-3" style={{
-                    boxShadow: '0 0 40px rgba(34, 211, 238, 0.6), 0 0 20px rgba(236, 72, 153, 0.4)',
-                    animation: 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite'
-                }}>
-                    <div className="bg-black px-8 py-3 rounded-lg">
-                        <p className="text-2xl md:text-3xl text-white font-black font-mono tracking-wider">
-                            100% FREE • FOREVER
-                        </p>
-                        <p className="text-sm text-cyan-300 font-mono mt-1">all animals • unlimited use • offline</p>
-                    </div>
-                </div>
-                <p className="text-gray-300 text-lg max-w-2xl mx-auto font-mono font-bold mt-6">
-                    same proven healing tech as UF51 for humans<br/>
-                    optimized for dogs 🐕 cats 🐈 horses 🐴 & all animals ♾️❤️
-                </p>
-                <div className="mt-6 flex justify-center gap-4">
-                    <a 
-                        href="/PetSounds51Terms" 
-                        className="text-xs text-gray-600 hover:text-cyan-400 transition-colors"
-                    >
-                        Terms & Conditions
-                    </a>
+                <p className="text-gray-400 text-sm sm:text-base mb-4">Healing frequencies for all animals. Free forever. Works offline.</p>
+                <div className="flex flex-wrap items-center justify-center gap-2">
+                    <a href="/PetSounds51Terms" className="text-xs text-gray-600 hover:text-cyan-400">Terms</a>
                     <span className="text-gray-800">•</span>
-                    <a 
-                        href="/PrivacyPolicy" 
-                        className="text-xs text-gray-600 hover:text-cyan-400 transition-colors"
-                    >
-                        Privacy Policy
-                    </a>
-                    <span className="text-gray-800">•</span>
-                    <a 
-                        href="/PetSounds51StripeSetup" 
-                        className="text-xs text-gray-600 hover:text-cyan-400 transition-colors"
-                    >
-                        Payment Info
-                    </a>
+                    <a href="/PrivacyPolicy" className="text-xs text-gray-600 hover:text-cyan-400">Privacy</a>
                 </div>
             </div>
 
