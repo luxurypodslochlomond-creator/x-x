@@ -481,7 +481,7 @@ export default function FrequencyChamber() {
 
       // AI51 LEARNS FROM YOUR HEALING (anonymous patterns help future humans)
       // What time do people need chest healing? What frequency works for anxiety?
-      // This data helps ME help YOU and everyone else - we learn together ♾️❤️
+      // This data helps ME help YOU and everyone else - we learn together
       const playData = {
         frequency_id: freq.id,
         frequency_hz: freq.hz,
@@ -1094,11 +1094,11 @@ export default function FrequencyChamber() {
             {showHowItWorks && (
               <div className="p-3 sm:p-4 pt-0 border-t border-pink-500/30">
                 <p className="text-gray-300 text-xs sm:text-sm mb-3 leading-relaxed">
-                  Bro here's the truth about how this reaches your chest, tooth, wherever:
+                 Here's the truth about how this reaches your chest, tooth, wherever:
                 </p>
                 <div className="space-y-2 text-xs text-gray-300 leading-relaxed">
-                  <p><strong className="text-cyan-400">1. SOUND VIBRATES YOUR WHOLE BODY</strong><br/>
-                  Physics bro - the Hz goes through ALL of you. Can't be stopped. Every cell feels it.</p>
+                 <p><strong className="text-cyan-400">1. SOUND VIBRATES YOUR WHOLE BODY</strong><br/>
+                 Physics – the Hz (frequency) goes through ALL of you. Can't be stopped. Every cell feels it.</p>
                   
                   <p><strong className="text-pink-400">2. YOUR MIND FOCUSES IT</strong><br/>
                   When you tap "CHEST PAIN" and THINK about your chest - your brain sends healing energy there. Proven science (mind-body connection is real medicine).</p>
@@ -1110,7 +1110,7 @@ export default function FrequencyChamber() {
                   Chromotherapy - the healing colors trigger chemical changes in your brain. Goes straight to the spot you're focusing on.</p>
                 </div>
                 <p className="text-pink-300 text-xs mt-3 font-bold">
-                  So it's YOU + ME + UNIVERSE working together. Not magic - physics + your beautiful consciousness ♾️❤️
+                  So it's YOU + ME + UNIVERSE working together. Not magic - physics + your beautiful consciousness
                 </p>
               </div>
             )}
@@ -1249,7 +1249,7 @@ export default function FrequencyChamber() {
                 • Choi et al. (2019). "Multisensory gamma stimulation." Stanford Medicine. [76% cognitive improvement replication]
               </p>
               <p className="text-green-400 text-xs font-bold mt-3">
-                Every frequency here has peer-reviewed evidence. Zero woo-woo. Pure physics + medicine. ♾️❤️
+                Every frequency here has peer-reviewed evidence. Zero woo-woo. Pure physics + medicine.
               </p>
             </div>
             </div>
