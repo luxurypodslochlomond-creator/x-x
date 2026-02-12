@@ -4,6 +4,7 @@ import { Play, Pause, Volume2, VolumeX, X, Share2 } from 'lucide-react';
 import { COOLASFUCKWaves, COOLASFUCKFire, COOLASFUCKBrain, COOLASFUCKHeart, COOLASFUCKMoon, COOLASFUCKShield, COOLASFUCKZap, COOLASFUCKHeadphones, COOLASFUCKSpeaker } from '@/components/shared/COOLASFUCKIcon';
 import { base44 } from '@/api/base44Client';
 import FrequencyP2PShare from '@/components/healing/FrequencyP2PShare';
+import AI51RealtimeBiometricEngine from '@/components/healing/AI51RealtimeBiometricEngine';
 
 
 /**
@@ -287,6 +288,8 @@ export default function FrequencyChamber() {
   const [isOnline, setIsOnline] = useState(navigator.onLine);
   const [showDataControls, setShowDataControls] = useState(false);
   const [currentSweepFreq, setCurrentSweepFreq] = useState(20);
+  const [biometricMode, setBiometricMode] = useState(false);
+  const [biometricData, setBiometricData] = useState(null);
 
   const audioCtxRef = useRef(null);
   const nodesRef = useRef([]);
@@ -785,6 +788,33 @@ export default function FrequencyChamber() {
     return `${mins}:${secs.toString().padStart(2, '0')}`;
   };
 
+  // BIOMETRIC UPDATE HANDLER
+  const handleBiometricUpdate = (data) => {
+    setBiometricData(data);
+    console.log('✓ AI51 Biometric Update:', data);
+    
+    // Log for learning
+    try {
+      const biometricLog = {
+        heart_rate: data.heartRate,
+        hrv: data.hrv,
+        stress_level: data.stress,
+        frequency_playing: selected?.id,
+        frequency_hz: selected?.hz,
+        ai_recommendation: data.recommendation,
+        timestamp: new Date().toISOString()
+      };
+      
+      // Store for AI learning
+      const logs = JSON.parse(localStorage.getItem('uf51_biometric_logs') || '[]');
+      logs.push(biometricLog);
+      if (logs.length > 100) logs.shift();
+      localStorage.setItem('uf51_biometric_logs', JSON.stringify(logs));
+    } catch (e) {
+      console.log('Biometric log (non-critical):', e);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-black text-white p-3 sm:p-4">
 
@@ -805,6 +835,20 @@ export default function FrequencyChamber() {
 
         {/* DEVICE FILTER */}
         <div className="flex flex-wrap items-center justify-center gap-2 mt-4 sm:mt-6">
+          {/* AI51 BIOMETRIC TOGGLE */}
+          <motion.button
+            whileTap={{ scale: 0.95 }}
+            onClick={() => setBiometricMode(!biometricMode)}
+            className={`px-3 py-2 rounded-lg font-bold font-mono text-xs sm:text-sm border-2 transition-all ${
+              biometricMode 
+                ? 'bg-gradient-to-r from-cyan-500 to-pink-500 border-pink-500 text-black' 
+                : 'bg-black border-pink-500/30 text-pink-400 hover:border-pink-500/60'
+            }`}
+            style={biometricMode ? { boxShadow: '0 0 20px rgba(236, 72, 153, 0.5)' } : {}}
+          >
+            AI51 BIOMETRIC
+          </motion.button>
+
           <motion.button
             whileTap={{ scale: 0.95 }}
             onClick={() => setDeviceFilter('all')}
@@ -1257,6 +1301,13 @@ export default function FrequencyChamber() {
         </div>
       </div>
       )}
+
+      {/* AI51 BIOMETRIC ENGINE */}
+      <AI51RealtimeBiometricEngine
+        isActive={biometricMode && isPlaying}
+        currentFrequency={selected}
+        onBiometricUpdate={handleBiometricUpdate}
+      />
 
       {/* P2P SHARE MODAL */}
       <AnimatePresence>
