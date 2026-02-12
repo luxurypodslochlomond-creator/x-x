@@ -968,13 +968,17 @@ export default function FrequencyChamber() {
                   </button>
                 ))}
 
-                {/* SHARE */}
+                {/* SHARE LINK */}
                 <button
-                  onClick={() => setShowShare(true)}
+                  onClick={() => {
+                    const shareUrl = `${window.location.origin}${window.location.pathname}?freq=${selected.id}`;
+                    navigator.clipboard.writeText(shareUrl);
+                    alert(`✓ Copied: ${selected.name}\n\n${shareUrl}`);
+                  }}
                   className="px-4 py-2 rounded-lg font-black font-mono text-xs bg-black/60 backdrop-blur-sm border border-white/20 hover:border-white/40 transition-all text-white flex items-center gap-1"
                 >
                   <Share2 className="w-3 h-3" />
-                  SHARE
+                  SHARE LINK
                 </button>
               </div>
             </div>
