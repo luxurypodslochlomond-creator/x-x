@@ -1,23 +1,15 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Play, Pause, Volume2, VolumeX } from 'lucide-react';
-import { motion } from 'framer-motion';
-
-/**
- * ANIMAL FREQUENCY ENGINE - STACKED FREQUENCIES FOR PETS
- * Uses the same proven stacking as FrequencyChamber
- * Optimized for animal hearing ranges
- */
 
 const ANIMAL_PROTOCOLS = {
   fireworks: {
     name: 'Fireworks Anxiety',
-    hz: 40, // Gamma waves - calming
+    hz: 40,
     carrier: 200,
     waveform: 'sine',
     description: 'Calm during loud noises',
     color: '#ec4899',
-    timer: '15 min',
-    psychology: 'You are safe. The noise cannot hurt you. You are protected.'
+    timer: '15 min'
   },
   separation: {
     name: 'Separation Anxiety',
@@ -25,8 +17,7 @@ const ANIMAL_PROTOCOLS = {
     waveform: 'sine',
     description: 'Safe when you\'re away',
     color: '#06b6d4',
-    timer: '20 min',
-    psychology: 'I always come back. You are loved. This is your safe space.'
+    timer: '20 min'
   },
   arthritis: {
     name: 'Arthritis Pain Relief',
@@ -34,8 +25,7 @@ const ANIMAL_PROTOCOLS = {
     waveform: 'square',
     description: 'Ease joint pain',
     color: '#f59e0b',
-    timer: '12 min',
-    psychology: 'Pain is releasing. Joints are healing. Movement becomes easy.'
+    timer: '12 min'
   },
   surgery: {
     name: 'Post-Surgery Recovery',
@@ -43,8 +33,7 @@ const ANIMAL_PROTOCOLS = {
     waveform: 'sine',
     description: 'Speed healing',
     color: '#10b981',
-    timer: '20 min',
-    psychology: 'Wounds are sealing. Cells are repairing. Healing is happening now.'
+    timer: '20 min'
   },
   travel: {
     name: 'Travel Stress',
@@ -52,18 +41,16 @@ const ANIMAL_PROTOCOLS = {
     waveform: 'triangle',
     description: 'Car, plane, vet visits',
     color: '#a855f7',
-    timer: '10 min',
-    psychology: 'This journey is safe. You are protected. Arrival is close.'
+    timer: '10 min'
   },
   herd: {
     name: 'Herd Calm',
-    hz: 7.83, // Schumann resonance
+    hz: 7.83,
     carrier: 432,
     waveform: 'sine',
     description: 'Reduce stress for many animals',
     color: '#22c55e',
-    timer: '30 min',
-    psychology: 'The herd is calm. Safety is together. Peace surrounds you.'
+    timer: '30 min'
   }
 };
 
