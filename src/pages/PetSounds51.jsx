@@ -25,19 +25,51 @@ export default function PetSounds51() {
     const [selectedProtocol, setSelectedProtocol] = useState(null);
 
     return (
-        <div className="min-h-screen bg-black text-white p-3 sm:p-4">
+        <div className="min-h-screen bg-gradient-to-br from-green-950 via-black to-cyan-950 text-white p-3 sm:p-4 relative overflow-hidden">
             
+            {/* BREATHING BACKGROUND */}
+            <motion.div
+                className="absolute inset-0 opacity-20"
+                animate={{ 
+                    background: [
+                        'radial-gradient(circle at 50% 50%, rgba(34, 197, 94, 0.3) 0%, transparent 50%)',
+                        'radial-gradient(circle at 50% 50%, rgba(6, 182, 212, 0.3) 0%, transparent 50%)',
+                        'radial-gradient(circle at 50% 50%, rgba(34, 197, 94, 0.3) 0%, transparent 50%)'
+                    ]
+                }}
+                transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+            />
+
             {/* HEADER */}
-            <div className="max-w-6xl mx-auto mb-8 text-center">
-                <div className="flex items-center justify-center gap-3 mb-4">
-                    <PetSounds51Icon8Bit size={48} animate={false} />
-                    <h1 className="text-2xl sm:text-3xl font-black text-cyan-400">PETSOUNDS51</h1>
-                </div>
-                <p className="text-gray-400 text-sm sm:text-base mb-4">Healing frequencies for all animals. Free forever. Works offline.</p>
+            <div className="max-w-6xl mx-auto mb-8 text-center relative z-10">
+                <motion.div 
+                    className="flex items-center justify-center gap-3 mb-4"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6 }}
+                >
+                    <motion.div
+                        animate={{ scale: [1, 1.1, 1] }}
+                        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                    >
+                        <PetSounds51Icon8Bit size={56} animate={true} />
+                    </motion.div>
+                    <h1 className="text-3xl sm:text-4xl font-black text-green-400" style={{ textShadow: '0 0 30px rgba(34, 197, 94, 0.6)' }}>
+                        PETSOUNDS51
+                    </h1>
+                </motion.div>
+                <motion.p 
+                    className="text-cyan-400 text-base sm:text-lg font-mono mb-6"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.3 }}
+                >
+                    Healing frequencies for all animals.<br/>Free forever. Works offline.
+                </motion.p>
                 <div className="flex flex-wrap items-center justify-center gap-2">
-                    <a href="/PetSounds51Terms" className="text-xs text-gray-600 hover:text-cyan-400">Terms</a>
-                    <span className="text-gray-800">•</span>
-                    <a href="/PrivacyPolicy" className="text-xs text-gray-600 hover:text-cyan-400">Privacy</a>
+                    <a href="/PetSounds51Terms" className="text-xs text-gray-500 hover:text-cyan-400 transition-colors">Terms</a>
+                    <span className="text-gray-700">•</span>
+                    <a href="/PrivacyPolicy" className="text-xs text-gray-500 hover:text-cyan-400 transition-colors">Privacy</a>
                 </div>
             </div>
 
