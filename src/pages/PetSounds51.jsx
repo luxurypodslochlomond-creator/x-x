@@ -123,44 +123,61 @@ export default function PetSounds51() {
 
 
             {/* SCIENCE - MINIMAL */}
-            <div className="max-w-6xl mx-auto mb-8">
+            <div className="max-w-6xl mx-auto mb-8 relative z-10">
                 <div className="grid md:grid-cols-2 gap-6">
-                    <div className="bg-black border border-cyan-500/30 rounded-lg p-6">
-                        <p className="text-xs text-gray-500 font-mono mb-3">STRESS RESEARCH</p>
-                        <p className="text-sm text-gray-400">NIH studies show music therapy reduces cortisol (stress hormone). Stressed animals get sick 2-3x more often.</p>
-                    </div>
-                    <div className="bg-black border border-cyan-500/30 rounded-lg p-6">
-                        <p className="text-xs text-gray-500 font-mono mb-3">FREQUENCY PHYSICS</p>
-                        <p className="text-sm text-gray-400">Dogs hear 40Hz-60kHz, we use frequencies in that range. Not magic. Physics. No side effects.</p>
-                    </div>
+                    <motion.div 
+                        className="bg-black/60 backdrop-blur-sm border-2 border-cyan-500/50 rounded-xl p-6"
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.6 }}
+                    >
+                        <p className="text-xs text-cyan-400 font-mono font-bold mb-3">STRESS RESEARCH</p>
+                        <p className="text-sm text-gray-300 leading-relaxed">NIH studies show music therapy reduces cortisol (stress hormone). Stressed animals get sick 2-3x more often.</p>
+                    </motion.div>
+                    <motion.div 
+                        className="bg-black/60 backdrop-blur-sm border-2 border-green-500/50 rounded-xl p-6"
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.7 }}
+                    >
+                        <p className="text-xs text-green-400 font-mono font-bold mb-3">FREQUENCY PHYSICS</p>
+                        <p className="text-sm text-gray-300 leading-relaxed">Dogs hear 40Hz-60kHz, we use frequencies in that range. Not magic. Physics. No side effects.</p>
+                    </motion.div>
                 </div>
             </div>
 
             {/* ABOUT - MINIMAL */}
-            <div className="max-w-6xl mx-auto mb-8">
-                <button 
+            <div className="max-w-6xl mx-auto mb-8 relative z-10">
+                <motion.button 
                     onClick={() => setShowAbout(!showAbout)}
-                    className="w-full bg-black border border-cyan-500/30 rounded-lg p-6 hover:border-cyan-500/60 transition-all flex items-center justify-between"
+                    className="w-full bg-black/60 backdrop-blur-sm border-2 border-cyan-500/50 rounded-xl p-6 hover:border-cyan-500 transition-all flex items-center justify-between"
+                    whileHover={{ scale: 1.01 }}
+                    whileTap={{ scale: 0.99 }}
                 >
-                    <p className="text-cyan-400 font-black">ABOUT</p>
-                    {showAbout ? <ChevronUp className="w-5 h-5 text-cyan-400" /> : <ChevronDown className="w-5 h-5 text-cyan-400" />}
-                </button>
+                    <p className="text-cyan-400 font-black text-lg">ABOUT</p>
+                    {showAbout ? <ChevronUp className="w-6 h-6 text-cyan-400" /> : <ChevronDown className="w-6 h-6 text-cyan-400" />}
+                </motion.button>
                 
                 {showAbout && (
-                    <div className="bg-black border-x border-b border-cyan-500/30 rounded-b-lg p-6 space-y-4 text-sm text-gray-400">
+                    <motion.div 
+                        className="bg-black/60 backdrop-blur-sm border-x-2 border-b-2 border-cyan-500/50 rounded-b-xl p-6 space-y-4"
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        transition={{ duration: 0.3 }}
+                    >
                         <div>
-                            <p className="text-white font-bold mb-1">Same tech as UF51</p>
-                            <p>Exact same frequency engine, just optimized for animal consciousness.</p>
+                            <p className="text-white font-bold mb-2 text-base">Same tech as UF51</p>
+                            <p className="text-gray-300 text-sm leading-relaxed">Exact same frequency engine, just optimized for animal consciousness.</p>
                         </div>
                         <div>
-                            <p className="text-white font-bold mb-1">Not medical advice</p>
-                            <p>We're not vets. Works alongside traditional vet care. No side effects.</p>
+                            <p className="text-white font-bold mb-2 text-base">Not medical advice</p>
+                            <p className="text-gray-300 text-sm leading-relaxed">We're not vets. Works alongside traditional vet care. No side effects.</p>
                         </div>
                         <div>
-                            <p className="text-white font-bold mb-1">Forever free</p>
-                            <p>10% of any revenue goes to animal rescue. No subscriptions. Ever.</p>
+                            <p className="text-white font-bold mb-2 text-base">Forever free</p>
+                            <p className="text-gray-300 text-sm leading-relaxed">10% of any revenue goes to animal rescue. No subscriptions. Ever.</p>
                         </div>
-                    </div>
+                    </motion.div>
                 )}
             </div>
 
