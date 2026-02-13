@@ -296,10 +296,21 @@ export default function FrequencyChamber() {
   const hapticIntervalRef = useRef(null);
   const breathingPhaseRef = useRef('inhale'); // inhale, hold, exhale, pause
   const sweepIntervalRef = useRef(null);
+  const wakeLockRef = useRef(null);
 
   // === PLAY FREQUENCY ===
   const play = async (freq) => {
     stop();
+    
+    // KEEP SCREEN ON - Wake Lock API (2026 iOS support)
+    try {
+      if ('wakeLock' in navigator) {
+        wakeLockRef.current = await navigator.wakeLock.request('screen');
+        console.log('✓ Screen will stay on - zero interruption');
+      }
+    } catch (e) {
+      console.log('Wake Lock not supported (non-critical)');
+    }
     
     try {
       const ctx = new (window.AudioContext || window.webkitAudioContext)();
@@ -543,6 +554,15 @@ export default function FrequencyChamber() {
   };
 
   const stop = async () => {
+    // RELEASE WAKE LOCK
+    if (wakeLockRef.current) {
+      try {
+        await wakeLockRef.current.release();
+        wakeLockRef.current = null;
+        console.log('✓ Screen lock released');
+      } catch (e) {}
+    }
+
     if (sweepIntervalRef.current) {
       clearInterval(sweepIntervalRef.current);
       sweepIntervalRef.current = null;
