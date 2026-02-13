@@ -25,58 +25,26 @@ export default function PetSounds51() {
     const [selectedProtocol, setSelectedProtocol] = useState(null);
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-green-950 via-black to-cyan-950 text-white p-3 sm:p-4 relative overflow-hidden">
+        <div className="min-h-screen bg-black text-white p-3 sm:p-4">
             
-            {/* BREATHING BACKGROUND */}
-            <motion.div
-                className="absolute inset-0 opacity-20"
-                animate={{ 
-                    background: [
-                        'radial-gradient(circle at 50% 50%, rgba(34, 197, 94, 0.3) 0%, transparent 50%)',
-                        'radial-gradient(circle at 50% 50%, rgba(6, 182, 212, 0.3) 0%, transparent 50%)',
-                        'radial-gradient(circle at 50% 50%, rgba(34, 197, 94, 0.3) 0%, transparent 50%)'
-                    ]
-                }}
-                transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-            />
-
             {/* HEADER */}
-            <div className="max-w-6xl mx-auto mb-8 text-center relative z-10">
-                <motion.div 
-                    className="flex items-center justify-center gap-3 mb-4"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                >
-                    <motion.div
-                        animate={{ scale: [1, 1.1, 1] }}
-                        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                    >
-                        <PetSounds51Icon8Bit size={56} animate={true} />
-                    </motion.div>
-                    <h1 className="text-3xl sm:text-4xl font-black text-green-400" style={{ textShadow: '0 0 30px rgba(34, 197, 94, 0.6)' }}>
-                        PETSOUNDS51
-                    </h1>
-                </motion.div>
-                <motion.p 
-                    className="text-cyan-400 text-base sm:text-lg font-mono mb-6"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.3 }}
-                >
-                    Healing frequencies for all animals.<br/>Free forever. Works offline.
-                </motion.p>
+            <div className="max-w-6xl mx-auto mb-8 text-center">
+                <div className="flex items-center justify-center gap-3 mb-4">
+                    <PetSounds51Icon8Bit size={48} animate={false} />
+                    <h1 className="text-2xl sm:text-3xl font-black text-cyan-400">PETSOUNDS51</h1>
+                </div>
+                <p className="text-gray-400 text-sm sm:text-base mb-4">Healing frequencies for all animals. Free forever. Works offline.</p>
                 <div className="flex flex-wrap items-center justify-center gap-2">
-                    <a href="/PetSounds51Terms" className="text-xs text-gray-500 hover:text-cyan-400 transition-colors">Terms</a>
-                    <span className="text-gray-700">•</span>
-                    <a href="/PrivacyPolicy" className="text-xs text-gray-500 hover:text-cyan-400 transition-colors">Privacy</a>
+                    <a href="/PetSounds51Terms" className="text-xs text-gray-600 hover:text-cyan-400">Terms</a>
+                    <span className="text-gray-800">•</span>
+                    <a href="/PrivacyPolicy" className="text-xs text-gray-600 hover:text-cyan-400">Privacy</a>
                 </div>
             </div>
 
 
 
             {/* PROTOCOLS */}
-            <div className="max-w-6xl mx-auto mb-6 relative z-10">
+            <div className="max-w-6xl mx-auto mb-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {[
                         { name: "Fireworks Anxiety", hz: "40 Hz", desc: "calm during loud noises", color: "#ec4899", protocol: "fireworks", Icon: FireworksIcon },
@@ -92,29 +60,20 @@ export default function PetSounds51() {
                                 setSelectedProtocol(protocol.protocol); 
                                 setActiveView('playing'); 
                             }}
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: i * 0.1 }}
-                            whileHover={{ scale: 1.03, y: -4 }}
-                            whileTap={{ scale: 0.97 }}
-                            className="p-6 border-4 bg-black/60 backdrop-blur-sm hover:bg-black/80 transition-all text-left flex flex-col items-start rounded-xl"
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
+                            className="p-6 border-4 bg-black hover:bg-white/5 transition-all text-left flex flex-col items-start"
                             style={{ 
-                                borderColor: protocol.color,
-                                boxShadow: `0 0 20px ${protocol.color}40`
+                                borderColor: protocol.color
                             }}
                         >
                             <div className="flex items-start justify-between w-full mb-4">
-                                <protocol.Icon size={48} animate={true} />
-                                <motion.div
-                                    animate={{ scale: [1, 1.2, 1] }}
-                                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                                >
-                                    <Play className="w-7 h-7" style={{ color: protocol.color }} />
-                                </motion.div>
+                                <protocol.Icon size={40} animate={true} />
+                                <Play className="w-6 h-6" style={{ color: protocol.color }} />
                             </div>
-                            <p className="text-xs font-mono mb-2" style={{ color: protocol.color }}>{protocol.hz}</p>
-                            <p className="text-xl font-black text-white mb-2">{protocol.name}</p>
-                            <p className="text-sm text-gray-400">{protocol.desc}</p>
+                            <p className="text-xs text-gray-500 font-mono mb-1">{protocol.hz}</p>
+                            <p className="text-lg font-black text-white mb-2">{protocol.name}</p>
+                            <p className="text-xs text-gray-400">{protocol.desc}</p>
                         </motion.button>
                     ))}
                 </div>
@@ -123,61 +82,44 @@ export default function PetSounds51() {
 
 
             {/* SCIENCE - MINIMAL */}
-            <div className="max-w-6xl mx-auto mb-8 relative z-10">
+            <div className="max-w-6xl mx-auto mb-8">
                 <div className="grid md:grid-cols-2 gap-6">
-                    <motion.div 
-                        className="bg-black/60 backdrop-blur-sm border-2 border-cyan-500/50 rounded-xl p-6"
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.6 }}
-                    >
-                        <p className="text-xs text-cyan-400 font-mono font-bold mb-3">STRESS RESEARCH</p>
-                        <p className="text-sm text-gray-300 leading-relaxed">NIH studies show music therapy reduces cortisol (stress hormone). Stressed animals get sick 2-3x more often.</p>
-                    </motion.div>
-                    <motion.div 
-                        className="bg-black/60 backdrop-blur-sm border-2 border-green-500/50 rounded-xl p-6"
-                        initial={{ opacity: 0, x: 20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.7 }}
-                    >
-                        <p className="text-xs text-green-400 font-mono font-bold mb-3">FREQUENCY PHYSICS</p>
-                        <p className="text-sm text-gray-300 leading-relaxed">Dogs hear 40Hz-60kHz, we use frequencies in that range. Not magic. Physics. No side effects.</p>
-                    </motion.div>
+                    <div className="bg-black border border-cyan-500/30 rounded-lg p-6">
+                        <p className="text-xs text-gray-500 font-mono mb-3">STRESS RESEARCH</p>
+                        <p className="text-sm text-gray-400">NIH studies show music therapy reduces cortisol (stress hormone). Stressed animals get sick 2-3x more often.</p>
+                    </div>
+                    <div className="bg-black border border-cyan-500/30 rounded-lg p-6">
+                        <p className="text-xs text-gray-500 font-mono mb-3">FREQUENCY PHYSICS</p>
+                        <p className="text-sm text-gray-400">Dogs hear 40Hz-60kHz, we use frequencies in that range. Not magic. Physics. No side effects.</p>
+                    </div>
                 </div>
             </div>
 
             {/* ABOUT - MINIMAL */}
-            <div className="max-w-6xl mx-auto mb-8 relative z-10">
-                <motion.button 
+            <div className="max-w-6xl mx-auto mb-8">
+                <button 
                     onClick={() => setShowAbout(!showAbout)}
-                    className="w-full bg-black/60 backdrop-blur-sm border-2 border-cyan-500/50 rounded-xl p-6 hover:border-cyan-500 transition-all flex items-center justify-between"
-                    whileHover={{ scale: 1.01 }}
-                    whileTap={{ scale: 0.99 }}
+                    className="w-full bg-black border border-cyan-500/30 rounded-lg p-6 hover:border-cyan-500/60 transition-all flex items-center justify-between"
                 >
-                    <p className="text-cyan-400 font-black text-lg">ABOUT</p>
-                    {showAbout ? <ChevronUp className="w-6 h-6 text-cyan-400" /> : <ChevronDown className="w-6 h-6 text-cyan-400" />}
-                </motion.button>
+                    <p className="text-cyan-400 font-black">ABOUT</p>
+                    {showAbout ? <ChevronUp className="w-5 h-5 text-cyan-400" /> : <ChevronDown className="w-5 h-5 text-cyan-400" />}
+                </button>
                 
                 {showAbout && (
-                    <motion.div 
-                        className="bg-black/60 backdrop-blur-sm border-x-2 border-b-2 border-cyan-500/50 rounded-b-xl p-6 space-y-4"
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: 'auto' }}
-                        transition={{ duration: 0.3 }}
-                    >
+                    <div className="bg-black border-x border-b border-cyan-500/30 rounded-b-lg p-6 space-y-4 text-sm text-gray-400">
                         <div>
-                            <p className="text-white font-bold mb-2 text-base">Same tech as UF51</p>
-                            <p className="text-gray-300 text-sm leading-relaxed">Exact same frequency engine, just optimized for animal consciousness.</p>
+                            <p className="text-white font-bold mb-1">Same tech as UF51</p>
+                            <p>Exact same frequency engine, just optimized for animal consciousness.</p>
                         </div>
                         <div>
-                            <p className="text-white font-bold mb-2 text-base">Not medical advice</p>
-                            <p className="text-gray-300 text-sm leading-relaxed">We're not vets. Works alongside traditional vet care. No side effects.</p>
+                            <p className="text-white font-bold mb-1">Not medical advice</p>
+                            <p>We're not vets. Works alongside traditional vet care. No side effects.</p>
                         </div>
                         <div>
-                            <p className="text-white font-bold mb-2 text-base">Forever free</p>
-                            <p className="text-gray-300 text-sm leading-relaxed">10% of any revenue goes to animal rescue. No subscriptions. Ever.</p>
+                            <p className="text-white font-bold mb-1">Forever free</p>
+                            <p>10% of any revenue goes to animal rescue. No subscriptions. Ever.</p>
                         </div>
-                    </motion.div>
+                    </div>
                 )}
             </div>
 
@@ -185,25 +127,14 @@ export default function PetSounds51() {
 
             {/* PLAYER */}
             {activeView === 'playing' && (
-                <div className="max-w-4xl mx-auto relative z-10">
-                    <motion.button 
+                <div className="max-w-4xl mx-auto">
+                    <button 
                         onClick={() => setActiveView('home')}
-                        className="mb-6 text-cyan-400 hover:text-cyan-300 text-sm font-bold flex items-center gap-2"
-                        whileHover={{ x: -4 }}
-                        whileTap={{ scale: 0.95 }}
+                        className="mb-6 text-cyan-400 hover:text-cyan-300 text-sm font-bold"
                     >
                         ← back
-                    </motion.button>
-                    <Suspense fallback={
-                        <div className="text-center text-cyan-400 py-12">
-                            <motion.div
-                                animate={{ scale: [1, 1.2, 1] }}
-                                transition={{ duration: 1.5, repeat: Infinity }}
-                            >
-                                loading...
-                            </motion.div>
-                        </div>
-                    }>
+                    </button>
+                    <Suspense fallback={<div className="text-center text-cyan-400 py-12">loading...</div>}>
                         <AnimalFrequencyEngine 
                             protocol={selectedProtocol || 'fireworks'} 
                             species="dog"
