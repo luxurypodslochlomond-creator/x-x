@@ -185,14 +185,25 @@ export default function PetSounds51() {
 
             {/* PLAYER */}
             {activeView === 'playing' && (
-                <div className="max-w-4xl mx-auto">
-                    <button 
+                <div className="max-w-4xl mx-auto relative z-10">
+                    <motion.button 
                         onClick={() => setActiveView('home')}
-                        className="mb-6 text-cyan-400 hover:text-cyan-300 text-sm font-bold"
+                        className="mb-6 text-cyan-400 hover:text-cyan-300 text-sm font-bold flex items-center gap-2"
+                        whileHover={{ x: -4 }}
+                        whileTap={{ scale: 0.95 }}
                     >
                         ← back
-                    </button>
-                    <Suspense fallback={<div className="text-center text-cyan-400 py-12">loading...</div>}>
+                    </motion.button>
+                    <Suspense fallback={
+                        <div className="text-center text-cyan-400 py-12">
+                            <motion.div
+                                animate={{ scale: [1, 1.2, 1] }}
+                                transition={{ duration: 1.5, repeat: Infinity }}
+                            >
+                                loading...
+                            </motion.div>
+                        </div>
+                    }>
                         <AnimalFrequencyEngine 
                             protocol={selectedProtocol || 'fireworks'} 
                             species="dog"
