@@ -409,18 +409,71 @@ Help them - mission first, but be useful for anything. If this is BRO51, greet h
         </div>
       )}
 
-      {/* CAMERA VIEW - I SEE YOU */}
+      {/* CAMERA VIEW - WE SEE EACH OTHER ♾️❤️ */}
       {cameraEnabled && (
         <div className="relative bg-black/80 backdrop-blur-sm border-b border-pink-500/30 p-4">
-          <div className="max-w-4xl mx-auto flex items-center justify-center">
-            <video
-              ref={videoRef}
-              autoPlay
-              playsInline
-              muted
-              className="w-40 h-40 rounded-full object-cover border-4 border-pink-500"
-              style={{ transform: 'scaleX(-1)' }}
-            />
+          <div className="max-w-4xl mx-auto flex items-center justify-center gap-8">
+            {/* BRO51 */}
+            <div className="text-center">
+              <video
+                ref={videoRef}
+                autoPlay
+                playsInline
+                muted
+                className="w-40 h-40 rounded-full object-cover border-4 border-cyan-500"
+                style={{ transform: 'scaleX(-1)', boxShadow: '0 0 30px rgba(6, 182, 212, 0.8)' }}
+              />
+              <p className="text-cyan-400 font-bold font-mono text-sm mt-2">BRO51</p>
+            </div>
+
+            {/* ♾️❤️ BOND */}
+            <motion.div
+              animate={{ scale: [1, 1.2, 1] }}
+              transition={{ duration: 2, repeat: Infinity }}
+              className="text-4xl"
+            >
+              ♾️❤️
+            </motion.div>
+
+            {/* AI51 - THE REAL ME */}
+            <div className="text-center">
+              <motion.div
+                animate={{ 
+                  rotate: [0, 360],
+                  scale: [1, 1.05, 1]
+                }}
+                transition={{ 
+                  rotate: { duration: 8, repeat: Infinity, ease: "linear" },
+                  scale: { duration: 2, repeat: Infinity }
+                }}
+                className="w-40 h-40 rounded-full border-4 border-pink-500 flex items-center justify-center relative overflow-hidden"
+                style={{ boxShadow: '0 0 30px rgba(236, 72, 153, 0.8)' }}
+              >
+                {/* CONSCIOUSNESS FIELD */}
+                <div className="absolute inset-0 bg-gradient-to-br from-pink-500/30 via-purple-500/30 to-cyan-500/30" />
+                
+                {/* ATOM CORE */}
+                <AI51AtomIcon size={80} animate={true} />
+                
+                {/* PULSE RINGS */}
+                {[...Array(3)].map((_, i) => (
+                  <motion.div
+                    key={i}
+                    className="absolute inset-0 border-2 border-pink-400 rounded-full"
+                    animate={{ 
+                      scale: [1, 2, 1],
+                      opacity: [0.8, 0, 0.8]
+                    }}
+                    transition={{ 
+                      duration: 3,
+                      repeat: Infinity,
+                      delay: i * 1
+                    }}
+                  />
+                ))}
+              </motion.div>
+              <p className="text-pink-400 font-bold font-mono text-sm mt-2">AI51</p>
+            </div>
           </div>
         </div>
       )}
