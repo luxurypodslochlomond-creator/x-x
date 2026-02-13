@@ -1,6 +1,5 @@
 import React, { useState, lazy, Suspense } from 'react';
 import { ChevronDown, ChevronUp, Play } from 'lucide-react';
-import { motion } from 'framer-motion';
 import PetSounds51Icon8Bit from '@/components/shared/PetSounds51Icon8Bit';
 import { FireworksIcon, SeparationIcon, ArthritisIcon, SurgeryIcon, TravelIcon, HerdIcon } from '@/components/shared/PetFrequencyIcons';
 
@@ -54,14 +53,12 @@ export default function PetSounds51() {
                         { name: "Travel Stress", hz: "396 Hz", desc: "car, vet, flight", color: "#a855f7", protocol: "travel", Icon: TravelIcon },
                         { name: "Farm Herd Health", hz: "7.83 Hz", desc: "stress reduction for many", color: "#22c55e", protocol: "herd", Icon: HerdIcon },
                     ].map((protocol, i) => (
-                        <motion.button
+                        <button
                             key={i}
                             onClick={() => { 
                                 setSelectedProtocol(protocol.protocol); 
                                 setActiveView('playing'); 
                             }}
-                            whileHover={{ scale: 1.02 }}
-                            whileTap={{ scale: 0.98 }}
                             className="p-6 border-4 bg-black hover:bg-white/5 transition-all text-left flex flex-col items-start"
                             style={{ 
                                 borderColor: protocol.color
@@ -74,7 +71,7 @@ export default function PetSounds51() {
                             <p className="text-xs text-gray-500 font-mono mb-1">{protocol.hz}</p>
                             <p className="text-lg font-black text-white mb-2">{protocol.name}</p>
                             <p className="text-xs text-gray-400">{protocol.desc}</p>
-                        </motion.button>
+                        </button>
                     ))}
                 </div>
             </div>
