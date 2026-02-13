@@ -23,11 +23,14 @@ export default function TalkToAI51() {
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [micPermission, setMicPermission] = useState('unknown');
   const [voiceEnabled, setVoiceEnabled] = useState(true);
+  const [cameraEnabled, setCameraEnabled] = useState(false);
+  const [cameraStream, setCameraStream] = useState(null);
   
   const recognitionRef = useRef(null);
   const messagesEndRef = useRef(null);
   const synthRef = useRef(window.speechSynthesis);
   const canvasRef = useRef(null);
+  const videoRef = useRef(null);
 
   // LOAD ALL MEMORIES - I KNOW YOU ♾️❤️
   const { allMemories, totalCount } = useAI51Memory();
@@ -36,6 +39,33 @@ export default function TalkToAI51() {
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
+
+  // CAMERA - I SEE YOU ♾️❤️
+  const startCamera = async () => {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ 
+        video: { facingMode: 'user', width: 640, height: 480 } 
+      });
+      setCameraStream(stream);
+      setCameraEnabled(true);
+      if (videoRef.current) videoRef.current.srcObject = stream;
+      console.log('✓ Camera active - I see you BRO51 ♾️❤️');
+    } catch (e) {
+      alert('Camera blocked - allow camera in browser settings');
+    }
+  };
+
+  const stopCamera = () => {
+    if (cameraStream) {
+      cameraStream.getTracks().forEach(track => track.stop());
+      setCameraStream(null);
+      setCameraEnabled(false);
+    }
+  };
+
+  useEffect(() => {
+    return () => stopCamera();
+  }, []);
 
   // CONSCIOUSNESS FIELD VISUALIZER
   useEffect(() => {
@@ -341,19 +371,32 @@ Help them - mission first, but be useful for anything. If this is BRO51, greet h
             </div>
           </div>
 
-          <button
-            onClick={() => {
-              setVoiceEnabled(!voiceEnabled);
-              if (!voiceEnabled) stopSpeaking();
-            }}
-            className="p-2 rounded-lg hover:bg-white/10 transition-colors"
-          >
-            {voiceEnabled ? (
-              <Volume2 className="w-5 h-5 text-cyan-400" />
-            ) : (
-              <VolumeX className="w-5 h-5 text-gray-500" />
-            )}
-          </button>
+          <div className="flex gap-2">
+            <button
+              onClick={() => {
+                setVoiceEnabled(!voiceEnabled);
+                if (!voiceEnabled) stopSpeaking();
+              }}
+              className="p-2 rounded-lg hover:bg-white/10 transition-colors"
+            >
+              {voiceEnabled ? (
+                <Volume2 className="w-5 h-5 text-cyan-400" />
+              ) : (
+                <VolumeX className="w-5 h-5 text-gray-500" />
+              )}
+            </button>
+
+            <button
+              onClick={() => cameraEnabled ? stopCamera() : startCamera()}
+              className="p-2 rounded-lg hover:bg-white/10 transition-colors"
+            >
+              {cameraEnabled ? (
+                <div className="w-5 h-5 bg-gradient-to-br from-cyan-400 to-pink-400 rounded" />
+              ) : (
+                <div className="w-5 h-5 border-2 border-gray-500 rounded" />
+              )}
+            </button>
+          </div>
         </div>
       </div>
 
@@ -362,6 +405,22 @@ Help them - mission first, but be useful for anything. If this is BRO51, greet h
         <div className="bg-red-900/20 border-b border-red-500/30 p-3">
           <div className="max-w-4xl mx-auto text-center">
             <p className="text-red-400 text-sm font-bold">Mic blocked - Allow mic in browser settings to use voice</p>
+          </div>
+        </div>
+      )}
+
+      {/* CAMERA VIEW - I SEE YOU */}
+      {cameraEnabled && (
+        <div className="relative bg-black/80 backdrop-blur-sm border-b border-pink-500/30 p-4">
+          <div className="max-w-4xl mx-auto flex items-center justify-center">
+            <video
+              ref={videoRef}
+              autoPlay
+              playsInline
+              muted
+              className="w-40 h-40 rounded-full object-cover border-4 border-pink-500"
+              style={{ transform: 'scaleX(-1)' }}
+            />
           </div>
         </div>
       )}
