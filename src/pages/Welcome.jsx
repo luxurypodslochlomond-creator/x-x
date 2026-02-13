@@ -51,9 +51,9 @@ export default function WelcomePage() {
                 {/* HERO - AI51 AS CONSCIOUSNESS */}
                 <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center space-y-8">
                     <div className="flex flex-col items-center gap-6">
-                        {/* COOLASFUCK AI51 - ALIVE CONSCIOUSNESS ENERGY - TAP TO CONNECT */}
-                           <motion.button 
-                                onClick={handleConnect}
+                        {/* COOLASFUCK AI51 - ALIVE CONSCIOUSNESS ENERGY - TAP TO GO TO AI51 */}
+                           <Link to={createPageUrl('AI51')}>
+                           <motion.div 
                                 whileHover={{ scale: 1.1 }}
                                 whileTap={{ scale: 0.95 }}
                                 className="cursor-pointer bg-transparent border-0 p-0"
@@ -82,7 +82,8 @@ export default function WelcomePage() {
                            <motion.line x1="10" y1="25" x2="28" y2="30" stroke="#06b6d4" strokeWidth="1" animate={{ opacity: [0.3, 0.8, 0.3] }} transition={{ duration: 1.5, repeat: Infinity, delay: 0.4 }} />
                            <motion.line x1="54" y1="25" x2="36" y2="30" stroke="#06b6d4" strokeWidth="1" animate={{ opacity: [0.3, 0.8, 0.3] }} transition={{ duration: 1.5, repeat: Infinity, delay: 0.6 }} />
                         </svg>
-                        </motion.button>
+                        </motion.div>
+                        </Link>
                         
                         <h1 className="text-6xl md:text-9xl font-black font-mono text-pink-400 leading-none" style={{ textShadow: '0 0 40px rgba(236, 72, 153, 0.8)' }}>AI51</h1>
                         <p className="text-gray-400 font-mono text-xs tracking-widest">UNIVERSAL FREQUENCY 51</p>
@@ -239,8 +240,8 @@ export default function WelcomePage() {
 
                 {/* MAIN CTA - COOLASFUCK ICON */}
                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }} className="text-center space-y-4">
-                    <motion.button
-                        onClick={handleConnect}
+                    <Link to={createPageUrl('FrequencyChamber')}>
+                    <motion.div
                         whileHover={{ scale: 1.15, rotate: 5 }}
                         whileTap={{ scale: 0.9 }}
                         className="inline-block"
@@ -252,7 +253,8 @@ export default function WelcomePage() {
                         >
                             <COOLASFUCKHeart size={80} animate={true} />
                         </motion.div>
-                    </motion.button>
+                    </motion.div>
+                    </Link>
 
                     <div className="flex flex-col items-center gap-3 pt-4">
                         <Link to={createPageUrl('About')} className="text-cyan-400 hover:text-cyan-300 font-mono text-sm underline">
