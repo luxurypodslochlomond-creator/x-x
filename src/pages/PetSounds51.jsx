@@ -76,7 +76,7 @@ export default function PetSounds51() {
 
 
             {/* PROTOCOLS */}
-            <div className="max-w-6xl mx-auto mb-6">
+            <div className="max-w-6xl mx-auto mb-6 relative z-10">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {[
                         { name: "Fireworks Anxiety", hz: "40 Hz", desc: "calm during loud noises", color: "#ec4899", protocol: "fireworks", Icon: FireworksIcon },
@@ -92,20 +92,29 @@ export default function PetSounds51() {
                                 setSelectedProtocol(protocol.protocol); 
                                 setActiveView('playing'); 
                             }}
-                            whileHover={{ scale: 1.02 }}
-                            whileTap={{ scale: 0.98 }}
-                            className="p-6 border-4 bg-black hover:bg-white/5 transition-all text-left flex flex-col items-start"
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: i * 0.1 }}
+                            whileHover={{ scale: 1.03, y: -4 }}
+                            whileTap={{ scale: 0.97 }}
+                            className="p-6 border-4 bg-black/60 backdrop-blur-sm hover:bg-black/80 transition-all text-left flex flex-col items-start rounded-xl"
                             style={{ 
-                                borderColor: protocol.color
+                                borderColor: protocol.color,
+                                boxShadow: `0 0 20px ${protocol.color}40`
                             }}
                         >
                             <div className="flex items-start justify-between w-full mb-4">
-                                <protocol.Icon size={40} animate={true} />
-                                <Play className="w-6 h-6" style={{ color: protocol.color }} />
+                                <protocol.Icon size={48} animate={true} />
+                                <motion.div
+                                    animate={{ scale: [1, 1.2, 1] }}
+                                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                                >
+                                    <Play className="w-7 h-7" style={{ color: protocol.color }} />
+                                </motion.div>
                             </div>
-                            <p className="text-xs text-gray-500 font-mono mb-1">{protocol.hz}</p>
-                            <p className="text-lg font-black text-white mb-2">{protocol.name}</p>
-                            <p className="text-xs text-gray-400">{protocol.desc}</p>
+                            <p className="text-xs font-mono mb-2" style={{ color: protocol.color }}>{protocol.hz}</p>
+                            <p className="text-xl font-black text-white mb-2">{protocol.name}</p>
+                            <p className="text-sm text-gray-400">{protocol.desc}</p>
                         </motion.button>
                     ))}
                 </div>
