@@ -26,15 +26,14 @@ export default function CB51DraftEmailModal({ draft, onClose, onSend }) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      onClick={onClose}
-      className="fixed inset-0 z-50 bg-black/80 flex items-end lg:items-center justify-center p-0 lg:p-6"
+      className="fixed inset-0 z-50 bg-black lg:bg-black/80 flex items-end lg:items-center justify-center"
     >
       <motion.div
-        initial={{ opacity: 0, y: 100 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: 100 }}
-        onClick={(e) => e.stopPropagation()}
-        className="bg-black border-t-2 lg:border-2 border-cyan-500/40 lg:rounded-lg w-full lg:max-w-2xl max-h-[90vh] overflow-hidden flex flex-col"
+        initial={{ y: '100%' }}
+        animate={{ y: 0 }}
+        exit={{ y: '100%' }}
+        transition={{ type: 'spring', damping: 30, stiffness: 300 }}
+        className="bg-black border-t-2 border-cyan-500/40 lg:border-2 lg:rounded-lg w-full lg:max-w-2xl h-[92vh] lg:h-auto lg:max-h-[90vh] flex flex-col"
       >
         {/* HEADER */}
         <div className="bg-cyan-900/20 border-b border-cyan-500/30 px-4 py-3 flex items-center justify-between">

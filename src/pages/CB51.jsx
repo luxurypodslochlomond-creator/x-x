@@ -164,11 +164,12 @@ export default function CB51() {
                 className="fixed inset-0 z-40 bg-black/80"
               >
                 <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 20 }}
+                  initial={{ y: '100%' }}
+                  animate={{ y: 0 }}
+                  exit={{ y: '100%' }}
+                  transition={{ type: 'spring', damping: 30, stiffness: 300 }}
                   onClick={(e) => e.stopPropagation()}
-                  className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-black border border-cyan-500/40 rounded-lg p-4 w-80 max-h-96 overflow-y-auto z-50"
+                  className="fixed bottom-0 left-0 right-0 lg:top-1/2 lg:left-1/2 lg:-translate-x-1/2 lg:-translate-y-1/2 lg:bottom-auto lg:right-auto bg-black border-t-2 lg:border-2 border-cyan-500/40 lg:rounded-lg p-4 w-full lg:w-80 max-h-[80vh] overflow-y-auto z-50"
                 >
                   <h2 className="text-cyan-400 font-bold text-sm mb-3">Select Artist</h2>
                   <div className="space-y-2">
