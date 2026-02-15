@@ -69,24 +69,39 @@ export default function CB51GigUploadParser({ artistId, onGigCreated }) {
 
       const extracted = parseRes.data?.extracted || parseRes.extracted;
       if (extracted && (extracted.venue_name || extracted.promoter_name)) {
-        setExtracted(extracted);
-        setEditing({ ...extracted });
-        
-        // AI auto-detect artist from PDF
-        if (extracted.artist_name && artists.length > 0) {
-          const possibleMatches = artists.filter(a => 
-            a.name.toLowerCase().includes(extracted.artist_name.toLowerCase()) ||
-            extracted.artist_name.toLowerCase().includes(a.name.toLowerCase())
-          );
-          
-          if (possibleMatches.length === 1) {
-            // Perfect match - auto-select
-            setSelectedArtistId(possibleMatches[0].id);
-          } else if (possibleMatches.length > 1) {
-            // Multiple matches - will show chips below
-            setError(`Found ${possibleMatches.length} possible artists. Pick one below.`);
-          }
+      setExtracted(extracted);
+      setEditing({ ...extracted });
+
+      // AI auto-detect artist from PDF
+      if (extracted.artist_name && artists.length > 0) {
+        const possibleMatches = artists.filter(a => 
+          a.name.toLowerCase().includes(extracted.artist_name.toLowerCase()) ||
+          extracted.artist_name.toLowerCase().includes(a.name.toLowerCase())
+        );
+
+        if (possibleMatches.length === 1) {
+          // Perfect match - auto-select
+          setSelectedArtistId(possibleMatches[0].id);
+          setError(null);
+        } else if (possibleMatches.length > 1) {
+          // Multiple matches - will show chips below
+          setError(`Found ${possibleMatches.length} possible artists. Pick one below.`);
+        } else if (artists.length === 1) {
+          // Only one artist in system - auto-select
+          setSelectedArtistId(artists[0].id);
+          setError(null);
+        } else {
+          // No match - show all artists to pick
+          setError('Pick your artist below:');
         }
+      } else if (artists.length === 1) {
+        // No artist name detected, but only 1 artist exists - auto-select
+        setSelectedArtistId(artists[0].id);
+        setError(null);
+      } else if (artists.length > 1) {
+        // Multiple artists, no detection - ask user
+        setError('Pick your artist below:');
+      }
         
         if (parseRes.missingCritical?.length > 0) {
           setError(`⚠️ Missing: ${parseRes.missingCritical.join(', ')}`);
@@ -105,6 +120,11 @@ export default function CB51GigUploadParser({ artistId, onGigCreated }) {
 
   const saveMutation = useMutation({
     mutationFn: async () => {
+      if (!selectedArtistId) {
+        setSaveError('Select artist first');
+        throw new Error('No artist selected');
+      }
+      
       if (!editing.venue_name || !editing.date_start || !editing.promoter_name) {
         setSaveError('Need: Venue, Date & Promoter name');
         throw new Error('Missing required fields');
@@ -170,8 +190,8 @@ export default function CB51GigUploadParser({ artistId, onGigCreated }) {
         </motion.div>
       )}
 
-      {/* UPLOAD AREA */}
-      {!extracted && selectedArtistId && (
+      {/* UPLOAD AREA - Always show, AI detects artist */}
+      {!extracted && (
         <motion.label
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -241,6 +261,27 @@ export default function CB51GigUploadParser({ artistId, onGigCreated }) {
             exit={{ opacity: 0, y: -10 }}
             className="space-y-3"
           >
+            {/* Artist selector - show if needed */}
+            {!selectedArtistId && artists.length > 0 && (
+              <div className="bg-cyan-900/30 border border-cyan-500/40 rounded-lg p-3">
+                <p className="text-cyan-300 text-xs mb-2 font-bold">Select Artist:</p>
+                <div className="flex gap-2 flex-wrap">
+                  {artists.map(artist => (
+                    <button
+                      key={artist.id}
+                      onClick={() => {
+                        setSelectedArtistId(artist.id);
+                        setError(null);
+                      }}
+                      className="bg-cyan-600 hover:bg-cyan-700 text-white px-3 py-1.5 rounded text-xs font-bold transition-colors"
+                    >
+                      {artist.name}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
             {error && (
               <div className="bg-yellow-900/30 border border-yellow-500/40 rounded-lg p-3 flex gap-2">
                 <AlertCircle className="w-4 h-4 text-yellow-400 flex-shrink-0 mt-0.5" />
