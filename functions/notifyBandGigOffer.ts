@@ -31,25 +31,34 @@ Deno.serve(async (req) => {
       });
     }
 
-    // Create vote records for each band member - they'll vote in their dashboard
-    const notificationResults = await Promise.all(
-      bandMembers.map(member =>
-        base44.asServiceRole.entities.GigVote.create({
-          gig_offer_id: gigOfferId,
-          band_member_id: member.id,
-          answer: null  // Pending vote
-        }).catch(err => {
-          // Vote record might already exist, that's fine
-          return null;
-        })
-      )
+    // Send push notification to each band member
+    const pushResults = await Promise.all(
+      bandMembers.map(async (member) => {
+        if (!member.email) return null;
+        
+        try {
+          await base44.asServiceRole.functions.invoke('sendBrowserPush', {
+            recipient_email: member.email,
+            title: '🎸 Vote on Gig',
+            message: `${gig.venue || 'New gig'} - Manager approved`,
+            notification_type: 'band_vote_request',
+            gig_offer_id: gigOfferId
+          });
+          return { success: true, email: member.email };
+        } catch (err) {
+          console.error(`Failed to notify ${member.email}:`, err.message);
+          return { success: false, email: member.email };
+        }
+      })
     );
+
+    const successCount = pushResults.filter(r => r?.success).length;
 
     return Response.json({
       status: 'success',
       gigOfferId,
-      bandMembersNotified: bandMembers.length,
-      message: `Notified ${bandMembers.length} band members to vote`
+      bandMembersNotified: successCount,
+      message: `Notified ${successCount}/${bandMembers.length} band members to vote`
     });
   } catch (error) {
     console.error('Error notifying band:', error);
