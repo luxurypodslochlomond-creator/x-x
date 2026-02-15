@@ -6,6 +6,7 @@ import { createPageUrl } from '@/utils';
 import { ArrowLeft, Mail, CheckCircle, Loader, Send } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import CB51DraftEmailModal from '@/components/cb51/CB51DraftEmailModal';
+import CB51CalendarSync from '@/components/cb51/CB51CalendarSync';
 
 export default function CB51DraftEmails() {
   const navigate = useNavigate();
@@ -133,23 +134,30 @@ export default function CB51DraftEmails() {
                   </div>
                 </div>
 
-                <button
-                  onClick={() => handleGenerateDraft(gig)}
-                  disabled={loadingDraft === gig.id}
-                  className="w-full bg-cyan-600 hover:bg-cyan-700 disabled:opacity-50 text-white px-4 py-2 rounded font-mono text-xs font-bold transition-colors flex items-center justify-center gap-2"
-                >
-                  {loadingDraft === gig.id ? (
-                    <>
-                      <Loader className="w-3 h-3 animate-spin" />
-                      GENERATING...
-                    </>
-                  ) : (
-                    <>
-                      <Mail className="w-3 h-3" />
-                      DRAFT EMAIL
-                    </>
-                  )}
-                </button>
+                <div className="space-y-2">
+                  <button
+                    onClick={() => handleGenerateDraft(gig)}
+                    disabled={loadingDraft === gig.id}
+                    className="w-full bg-cyan-600 hover:bg-cyan-700 disabled:opacity-50 text-white px-4 py-2 rounded font-mono text-xs font-bold transition-colors flex items-center justify-center gap-2"
+                  >
+                    {loadingDraft === gig.id ? (
+                      <>
+                        <Loader className="w-3 h-3 animate-spin" />
+                        GENERATING...
+                      </>
+                    ) : (
+                      <>
+                        <Mail className="w-3 h-3" />
+                        DRAFT EMAIL
+                      </>
+                    )}
+                  </button>
+                  <CB51CalendarSync 
+                    gigId={gig.id} 
+                    isConfirmed={gig.status === 'confirmed'} 
+                    hasCalendarEvent={!!gig.google_calendar_event_id} 
+                  />
+                </div>
               </motion.div>
             ))}
           </div>
