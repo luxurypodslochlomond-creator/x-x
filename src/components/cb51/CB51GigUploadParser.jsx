@@ -29,35 +29,41 @@ export default function CB51GigUploadParser({ artistId, onGigCreated }) {
     setSaveError(null);
     setParsing(true);
 
-    // 20 second timeout
+    // 15 second timeout
     const timeoutId = setTimeout(() => {
       setParsing(false);
-      setError('Upload taking too long. Try again or enter manually.');
-    }, 20000);
+      setFile(null);
+      setError('⏱️ Timeout - Try a smaller file or enter manually');
+    }, 15000);
 
     try {
+      console.log('🚀 Starting upload...', selectedFile.name);
+
       // Step 1: Upload file
       const uploadRes = await base44.integrations.Core.UploadFile({
         file: selectedFile
       });
 
+      console.log('✅ Upload complete:', uploadRes.file_url);
+      console.log('🤖 Calling AI vision...');
+
       // Step 2: ONE AI call - Vision LLM reads PDF/image directly
       const parseRes = await base44.integrations.Core.InvokeLLM({
         prompt: `Extract ALL gig offer details from this document:
 
-- venue_name: Venue/festival name
-- date_start: Date in YYYY-MM-DD format
-- time_start: Time in HH:MM format  
-- location: Full address/city/country
-- promoter_name: Contact person or company
-- promoter_email: Email address
-- promoter_phone: Phone with country code
-- fee: Just the number (no currency symbols)
-- offer_details: Everything - technical specs, accommodation, travel, load-in times, etc
-- artist_name: Who is performing
-- title: Event name if different from venue
+    - venue_name: Venue/festival name
+    - date_start: Date in YYYY-MM-DD format
+    - time_start: Time in HH:MM format  
+    - location: Full address/city/country
+    - promoter_name: Contact person or company
+    - promoter_email: Email address
+    - promoter_phone: Phone with country code
+    - fee: Just the number (no currency symbols)
+    - offer_details: Everything - technical specs, accommodation, travel, load-in times, etc
+    - artist_name: Who is performing
+    - title: Event name if different from venue
 
-Return ONLY the JSON, nothing else.`,
+    Return ONLY the JSON, nothing else.`,
         file_urls: [uploadRes.file_url],
         response_json_schema: {
           type: "object",
@@ -78,6 +84,7 @@ Return ONLY the JSON, nothing else.`,
       });
 
       clearTimeout(timeoutId);
+      console.log('✅ AI response:', parseRes);
 
       const extracted = parseRes;
 
@@ -132,12 +139,15 @@ Return ONLY the JSON, nothing else.`,
           setError(`⚠️ Missing: ${missingCritical.join(', ')}`);
         }
       } else {
-        setError('Could not extract gig details. Try manual entry.');
+        clearTimeout(timeoutId);
+        setError('❌ No gig details found - Try manual entry');
+        setFile(null);
       }
     } catch (err) {
       clearTimeout(timeoutId);
+      console.error('❌ Parse error:', err);
       setError(err.message || 'Failed to parse file');
-      console.error(err);
+      setFile(null);
     } finally {
       setParsing(false);
     }
