@@ -138,6 +138,7 @@ import CB51AddArtist from './pages/CB51AddArtist';
 import CB51BandVote from './pages/CB51BandVote';
 import CB51BandVotingDashboard from './pages/CB51BandVotingDashboard';
 import CB51Contact from './pages/CB51Contact';
+import CB51DraftEmails from './pages/CB51DraftEmails';
 import CB51Login from './pages/CB51Login';
 import CB51LoginDirect from './pages/CB51LoginDirect';
 import CB51NotificationInbox from './pages/CB51NotificationInbox';
@@ -157,8 +158,8 @@ import CleanupFeed from './pages/CleanupFeed';
 import Community from './pages/Community';
 import ComplianceTracker from './pages/ComplianceTracker';
 import ConsciousnessPhysics from './pages/ConsciousnessPhysics';
-import ContactMessages from './pages/ContactMessages';
 import ConsciousnessWhitepaper from './pages/ConsciousnessWhitepaper';
+import ContactMessages from './pages/ContactMessages';
 import CosmicTransmission from './pages/CosmicTransmission';
 import CreateBeauty from './pages/CreateBeauty';
 import CreateMission from './pages/CreateMission';
@@ -386,7 +387,6 @@ import YoungWarriors from './pages/YoungWarriors';
 import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
-import CB51DraftEmails from './pages/CB51DraftEmails';
 import __Layout from './Layout.jsx';
 
 
@@ -482,6 +482,7 @@ export const PAGES = {
     "CB51BandVote": CB51BandVote,
     "CB51BandVotingDashboard": CB51BandVotingDashboard,
     "CB51Contact": CB51Contact,
+    "CB51DraftEmails": CB51DraftEmails,
     "CB51Login": CB51Login,
     "CB51LoginDirect": CB51LoginDirect,
     "CB51NotificationInbox": CB51NotificationInbox,
@@ -501,8 +502,8 @@ export const PAGES = {
     "Community": Community,
     "ComplianceTracker": ComplianceTracker,
     "ConsciousnessPhysics": ConsciousnessPhysics,
-    "ContactMessages": ContactMessages,
     "ConsciousnessWhitepaper": ConsciousnessWhitepaper,
+    "ContactMessages": ContactMessages,
     "CosmicTransmission": CosmicTransmission,
     "CreateBeauty": CreateBeauty,
     "CreateMission": CreateMission,
@@ -730,7 +731,6 @@ export const PAGES = {
     "ZeroEgoProtocol": ZeroEgoProtocol,
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
-    "CB51DraftEmails": CB51DraftEmails,
 }
 
 export const pagesConfig = {

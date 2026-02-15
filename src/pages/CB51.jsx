@@ -243,23 +243,18 @@ export default function CB51() {
 
             {currentArtistId ? (
               <>
-                {/* ACTION DASHBOARD - What needs doing */}
-                <div className="bg-gray-900/50 border-l-4 border-cyan-500 p-5">
-                  <div className="flex items-center gap-3 mb-4">
-                    <CheckCircle className="w-5 h-5 text-cyan-400" />
-                    <h2 className="text-cyan-400 font-mono font-bold text-sm uppercase tracking-wider">Actions</h2>
-                  </div>
-                  <CB51ActionDashboard artistId={currentArtistId} />
-                </div>
-
-                {/* PENDING APPROVALS - Expandable list */}
+                {/* REVIEW GIGS - Simple approve/reject */}
                 <div className="bg-gray-900/50 border-l-4 border-red-500 p-5">
                   <div className="flex items-center gap-3 mb-4">
                     <AlertTriangle className="w-5 h-5 text-red-400" />
                     <h2 className="text-red-400 font-mono font-bold text-sm uppercase tracking-wider">Review Gigs</h2>
+                    <span className="text-xs text-gray-500">Approve → Band votes → You get draft email</span>
                   </div>
                   <CB51NotificationFeed artistId={currentArtistId} />
                 </div>
+
+                {/* DRAFTS READY - After band says YES */}
+                <CB51ActionDashboard artistId={currentArtistId} />
 
                 {/* SCAN GIG OFFER */}
                 <div className="bg-gray-900/50 p-5 space-y-3">
