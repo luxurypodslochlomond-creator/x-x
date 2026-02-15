@@ -212,13 +212,40 @@ export default function CB51PushSubscriptionManager({ userEmail }) {
     );
   }
 
-  // Minimized version
+  // Minimized version - always show full UI in CB51
   return (
-    <button
-      onClick={() => setShowUI(true)}
-      className="text-xs text-gray-500 hover:text-cyan-400 font-mono underline"
-    >
-      {isSubscribed ? '🔔 push on' : '🔕 push off'}
-    </button>
+    <div className="bg-cyan-900/20 border border-cyan-500/30 rounded-lg p-3 mb-4">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          {isSubscribed ? (
+            <>
+              <Bell className="w-4 h-4 text-green-400" />
+              <div>
+                <p className="text-xs text-green-400 font-bold">Notifications ON</p>
+                <p className="text-[10px] text-gray-500">You'll get gig alerts</p>
+              </div>
+            </>
+          ) : (
+            <>
+              <BellOff className="w-4 h-4 text-yellow-500" />
+              <div>
+                <p className="text-xs text-yellow-400 font-bold">Notifications OFF</p>
+                <p className="text-[10px] text-gray-500">Tap Enable to get alerts</p>
+              </div>
+            </>
+          )}
+        </div>
+
+        {!isSubscribed && (
+          <button
+            onClick={requestNotificationPermission}
+            disabled={isLoading}
+            className="px-3 py-1.5 bg-green-600 hover:bg-green-700 disabled:opacity-50 text-white text-xs font-bold rounded transition-colors flex items-center gap-1"
+          >
+            {isLoading ? <Loader className="w-3 h-3 animate-spin" /> : 'Enable'}
+          </button>
+        )}
+      </div>
+    </div>
   );
 }

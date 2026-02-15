@@ -17,19 +17,23 @@ export default function CB51TestNotification() {
     setSuccess(false);
     
     try {
-      await base44.functions.invoke('sendCB51Notification', {
-        title: '🎸 TEST GIG OFFER',
-        body: 'This is a test notification - notifications are working!',
-        tag: 'test-notification',
-        url: '/api/functions/CB51'
+      // Get current user email
+      const user = await base44.auth.me();
+      
+      // Send test push notification using sendBrowserPush
+      await base44.asServiceRole.functions.invoke('sendBrowserPush', {
+        recipient_email: user.email,
+        title: '🎸 CB51 TEST',
+        message: 'Notifications working! You will get real gig alerts like this.',
+        notification_type: 'test'
       });
       
       setSuccess(true);
       setTimeout(() => setSuccess(false), 3000);
-      console.log('✓ Test notification sent');
+      console.log('✓ Test notification sent to:', user.email);
     } catch (error) {
       console.error('Test notification failed:', error);
-      alert('Failed to send test notification');
+      alert(`Test failed: ${error.message}\n\nCheck if notifications are enabled in your phone settings.`);
     } finally {
       setIsSending(false);
     }
