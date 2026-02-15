@@ -44,19 +44,23 @@ Deno.serve(async (req) => {
 
     const message = `${memberName} ${action} to ${gig.venue}\n${yesCount} YES • ${noCount} NO • ${pending} pending${reasonText}`;
 
-    // Send push notification to manager
-    const artist = await base44.asServiceRole.entities.Artist.get(gig.artist_id);
-    if (artist?.primary_manager_email) {
-      try {
-        await base44.asServiceRole.functions.invoke('sendBrowserPush', {
-          recipient_email: artist.primary_manager_email,
-          title: allVotesIn ? '✅ All Votes In!' : '📊 Band Vote Update',
-          message,
-          notification_type: allVotesIn ? 'votes_complete' : 'vote_update',
-          gig_offer_id: gigId
-        });
-      } catch (pushErr) {
-        console.error('Manager push notification failed:', pushErr.message);
+    // ONLY notify manager when ALL votes are in (not after every single vote)
+    const allVotesIn = (yesCount + noCount) === bandMembers.length;
+    
+    if (allVotesIn) {
+      const artist = await base44.asServiceRole.entities.Artist.get(gig.artist_id);
+      if (artist?.primary_manager_email) {
+        try {
+          await base44.asServiceRole.functions.invoke('sendBrowserPush', {
+            recipient_email: artist.primary_manager_email,
+            title: yesCount === bandMembers.length ? '✅ All YES - Draft Ready!' : '⚠️ Some NO votes',
+            message,
+            notification_type: 'votes_complete',
+            gig_offer_id: gigId
+          });
+        } catch (pushErr) {
+          console.error('Manager push notification failed:', pushErr.message);
+        }
       }
     }
 
