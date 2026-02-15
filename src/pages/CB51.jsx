@@ -13,6 +13,7 @@ import CB51GigUploadParser from '@/components/cb51/CB51GigUploadParser';
 import CB51PushSubscriptionManager from '@/components/cb51/CB51PushSubscriptionManager';
 import CB51TestNotification from '@/components/cb51/CB51TestNotification';
 import CB51BandNotificationInbox from '@/components/cb51/CB51BandNotificationInbox';
+import CB51BadgeManager from '@/components/cb51/CB51BadgeManager';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 export default function CB51() {
@@ -104,6 +105,9 @@ export default function CB51() {
         <div className="min-h-screen bg-black text-white pb-20">
           {/* PUSH NOTIFICATIONS - Setup */}
           {user && <CB51PushSubscriptionManager userEmail={user.email} />}
+
+          {/* BADGE MANAGER - Show unread count on app icon */}
+          {currentArtistId && <CB51BadgeManager artistId={currentArtistId} />}
 
           {/* ARTIST GRID - Show 3 */}
           {artists.length > 0 && (

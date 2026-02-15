@@ -20,7 +20,43 @@ Deno.serve(async (req) => {
         { src: "/icon-maskable-192x192.png", sizes: "192x192", type: "image/png", purpose: "maskable" },
         { src: "/icon-maskable-512x512.png", sizes: "512x512", type: "image/png", purpose: "maskable" }
       ],
-      categories: ["productivity", "business"]
+      categories: ["productivity", "business"],
+      shortcuts: [
+        {
+          name: "Upload Gig",
+          short_name: "Upload",
+          description: "Scan a new gig offer",
+          url: "/CB51?action=upload",
+          icons: [{ src: "/icon-192x192.png", sizes: "192x192" }]
+        },
+        {
+          name: "Calendar",
+          short_name: "Calendar",
+          description: "View all shows",
+          url: "/ScottCalendarView",
+          icons: [{ src: "/icon-192x192.png", sizes: "192x192" }]
+        },
+        {
+          name: "Messages",
+          short_name: "Messages",
+          description: "Check inbox",
+          url: "/ScottMessageInbox",
+          icons: [{ src: "/icon-192x192.png", sizes: "192x192" }]
+        }
+      ],
+      share_target: {
+        action: "/CB51?share=true",
+        method: "POST",
+        enctype: "multipart/form-data",
+        params: {
+          files: [
+            {
+              name: "file",
+              accept: ["application/pdf", "image/*"]
+            }
+          ]
+        }
+      }
     } : {
       name: "Universal Frequency 51",
       short_name: "UF51",

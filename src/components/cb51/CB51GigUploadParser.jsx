@@ -31,6 +31,17 @@ export default function CB51GigUploadParser({ artistId, onGigCreated }) {
     setParsing(true);
     setDebugLog(['🚀 Starting...']);
 
+    // Keep screen awake during upload
+    let wakeLock = null;
+    if ('wakeLock' in navigator) {
+      try {
+        wakeLock = await navigator.wakeLock.request('screen');
+        console.log('Screen wake lock active');
+      } catch (err) {
+        console.log('Wake lock request failed:', err);
+      }
+    }
+
     // 15 second timeout
     const timeoutId = setTimeout(() => {
       setParsing(false);
@@ -177,6 +188,17 @@ export default function CB51GigUploadParser({ artistId, onGigCreated }) {
       setParsing(false);
       console.log('✅ Parsing complete');
       setDebugLog(prev => [...prev, '✅ Done']);
+      
+      // Release wake lock
+      if (wakeLock) {
+        await wakeLock.release();
+        console.log('Screen wake lock released');
+      }
+      
+      // Vibrate on completion
+      if ('vibrate' in navigator) {
+        navigator.vibrate([100, 50, 100]);
+      }
     }
   };
 

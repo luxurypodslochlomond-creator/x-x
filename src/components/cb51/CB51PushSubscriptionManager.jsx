@@ -111,6 +111,11 @@ export default function CB51PushSubscriptionManager({ userEmail }) {
 
       setIsSubscribed(true);
       console.log('✓ Subscribed to push notifications');
+      
+      // Vibrate on successful subscription
+      if ('vibrate' in navigator) {
+        navigator.vibrate(200);
+      }
     } catch (error) {
       console.error('Push subscription failed:', error);
     } finally {
