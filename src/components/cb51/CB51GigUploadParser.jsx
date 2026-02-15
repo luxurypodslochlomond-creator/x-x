@@ -36,41 +36,60 @@ export default function CB51GigUploadParser({ artistId, onGigCreated }) {
     }, 20000);
 
     try {
+      // Step 1: Upload file
       const uploadRes = await base44.integrations.Core.UploadFile({
         file: selectedFile
       });
 
-      const schema = {
-        type: "object",
-        properties: {
-          venue_name: { type: "string" },
-          date_start: { type: "string" },
-          promoter_name: { type: "string" },
-          fee: { type: "string" },
-          location: { type: "string" },
-          artist_name: { type: "string" }
+      // Step 2: ONE AI call - Vision LLM reads PDF/image directly
+      const parseRes = await base44.integrations.Core.InvokeLLM({
+        prompt: `Extract ALL gig offer details from this document:
+
+- venue_name: Venue/festival name
+- date_start: Date in YYYY-MM-DD format
+- time_start: Time in HH:MM format  
+- location: Full address/city/country
+- promoter_name: Contact person or company
+- promoter_email: Email address
+- promoter_phone: Phone with country code
+- fee: Just the number (no currency symbols)
+- offer_details: Everything - technical specs, accommodation, travel, load-in times, etc
+- artist_name: Who is performing
+- title: Event name if different from venue
+
+Return ONLY the JSON, nothing else.`,
+        file_urls: [uploadRes.file_url],
+        response_json_schema: {
+          type: "object",
+          properties: {
+            venue_name: { type: "string" },
+            date_start: { type: "string" },
+            time_start: { type: "string" },
+            location: { type: "string" },
+            promoter_name: { type: "string" },
+            promoter_email: { type: "string" },
+            promoter_phone: { type: "string" },
+            fee: { type: ["string", "number", "null"] },
+            offer_details: { type: "string" },
+            artist_name: { type: "string" },
+            title: { type: "string" }
+          }
         }
-      };
-
-      const extractRes = await base44.integrations.Core.ExtractDataFromUploadedFile({
-        file_url: uploadRes.file_url,
-        json_schema: schema
-      });
-
-      let content = extractRes.output ? JSON.stringify(extractRes.output) : '';
-
-      const parseRes = await base44.functions.invoke('parseGigFromContent', {
-        content,
-        contentType: selectedFile.type,
-        source: selectedFile.name
       });
 
       clearTimeout(timeoutId);
 
-      const extracted = parseRes.data?.extracted || parseRes.extracted;
+      const extracted = parseRes;
+
+      // Clean fee
+      if (extracted.fee) {
+        const feeCleaned = String(extracted.fee).replace(/[^0-9.]/g, '');
+        extracted.fee = feeCleaned ? parseFloat(feeCleaned) : null;
+      }
+
       if (extracted && (extracted.venue_name || extracted.promoter_name)) {
-      setExtracted(extracted);
-      setEditing({ ...extracted });
+        setExtracted(extracted);
+        setEditing({ ...extracted });
 
       // AI auto-detect artist from PDF
       if (extracted.artist_name && artists.length > 0) {
@@ -103,8 +122,14 @@ export default function CB51GigUploadParser({ artistId, onGigCreated }) {
         setError('Pick your artist below:');
       }
         
-        if (parseRes.missingCritical?.length > 0) {
-          setError(`⚠️ Missing: ${parseRes.missingCritical.join(', ')}`);
+        // Check for missing critical fields
+        const missingCritical = [];
+        if (!extracted.venue_name?.trim()) missingCritical.push('Venue');
+        if (!extracted.date_start?.trim()) missingCritical.push('Date');
+        if (!extracted.promoter_name?.trim()) missingCritical.push('Promoter');
+        
+        if (missingCritical.length > 0) {
+          setError(`⚠️ Missing: ${missingCritical.join(', ')}`);
         }
       } else {
         setError('Could not extract gig details. Try manual entry.');
