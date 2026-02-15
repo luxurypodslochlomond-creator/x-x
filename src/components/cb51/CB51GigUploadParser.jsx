@@ -84,9 +84,15 @@ export default function CB51GigUploadParser({ artistId, onGigCreated }) {
       });
 
       clearTimeout(timeoutId);
-      console.log('✅ AI response:', parseRes);
+      console.log('✅ AI response:', JSON.stringify(parseRes, null, 2));
 
       const extracted = parseRes;
+
+      // ALWAYS show what we got - even if empty
+      console.log('📋 Extracted venue:', extracted?.venue_name);
+      console.log('📋 Extracted promoter:', extracted?.promoter_name);
+      console.log('📋 Extracted artist:', extracted?.artist_name);
+      console.log('📋 Extracted date:', extracted?.date_start);
 
       // Clean fee
       if (extracted.fee) {
@@ -94,7 +100,8 @@ export default function CB51GigUploadParser({ artistId, onGigCreated }) {
         extracted.fee = feeCleaned ? parseFloat(feeCleaned) : null;
       }
 
-      if (extracted && (extracted.venue_name || extracted.promoter_name)) {
+      // Show SOMETHING even if partial
+      if (extracted) {
         setExtracted(extracted);
         setEditing({ ...extracted });
 
@@ -134,22 +141,31 @@ export default function CB51GigUploadParser({ artistId, onGigCreated }) {
         if (!extracted.venue_name?.trim()) missingCritical.push('Venue');
         if (!extracted.date_start?.trim()) missingCritical.push('Date');
         if (!extracted.promoter_name?.trim()) missingCritical.push('Promoter');
-        
+
+        console.log('⚠️ Missing fields:', missingCritical);
+
         if (missingCritical.length > 0) {
-          setError(`⚠️ Missing: ${missingCritical.join(', ')}`);
+        setError(`⚠️ Missing: ${missingCritical.join(', ')} - Fill them in below`);
         }
-      } else {
+        } else {
         clearTimeout(timeoutId);
-        setError('❌ No gig details found - Try manual entry');
+        console.error('❌ NO DATA AT ALL from AI');
+        setError('❌ Could not read PDF - Try photo or manual entry');
         setFile(null);
-      }
+        }
     } catch (err) {
       clearTimeout(timeoutId);
-      console.error('❌ Parse error:', err);
-      setError(err.message || 'Failed to parse file');
+      console.error('❌ FULL ERROR:', err);
+      console.error('❌ Error message:', err.message);
+      console.error('❌ Error stack:', err.stack);
+      
+      // Show user-friendly error
+      const errorMsg = err.message || 'Failed to parse file';
+      setError(`❌ ${errorMsg.substring(0, 100)}`);
       setFile(null);
     } finally {
       setParsing(false);
+      console.log('✅ Parsing complete');
     }
   };
 
