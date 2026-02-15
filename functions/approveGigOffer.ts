@@ -23,6 +23,11 @@ Deno.serve(async (req) => {
       gig.venue = gig.title;
     }
 
+    // Validate gig belongs to this artist
+    if (gig.artist_id !== artistId) {
+      return Response.json({ error: 'Gig does not belong to this artist' }, { status: 403 });
+    }
+
     // Check if artist has band members (solo artist = 0 members)
     const bandMembers = await base44.asServiceRole.entities.TeamMember.filter({
       artist_id: artistId

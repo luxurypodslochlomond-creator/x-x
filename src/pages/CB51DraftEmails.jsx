@@ -26,13 +26,18 @@ export default function CB51DraftEmails() {
         status: 'band_voting'
       });
 
-      // Filter to only show gigs where ALL votes are YES
+      // Filter to only show gigs where ALL votes are YES and band members exist
       const gigsWithVotes = await Promise.all(
         gigs.map(async (gig) => {
           const votes = await base44.entities.GigVote.filter({ gig_id: gig.id });
+          const bandMembers = await base44.entities.TeamMember.filter({ artist_id: gig.artist_id });
+          
+          // All votes must be YES, and vote count must match band size
           const allYes = votes.every(v => v.vote_type === 'yes');
+          const allVotedIn = votes.length === bandMembers.length;
           const hasVotes = votes.length > 0;
-          return allYes && hasVotes ? gig : null;
+          
+          return allYes && allVotedIn && hasVotes ? gig : null;
         })
       );
 

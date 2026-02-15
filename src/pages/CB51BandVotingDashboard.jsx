@@ -111,8 +111,8 @@ export default function CB51BandVotingDashboard() {
           <div className="space-y-4">
             {gigsInVoting.map((gig) => {
               const votes = getVoteCount(gig.id);
-              const bandSize = 4; // TODO: Get actual band member count
-              const pending = bandSize - votes.total;
+              const bandSize = votes.yes + votes.no + 1; // Estimate from votes + pending
+              const pending = Math.max(1, bandSize - votes.total);
               const allConfirmed = votes.yes === bandSize;
               const hasRejection = votes.no > 0;
 
