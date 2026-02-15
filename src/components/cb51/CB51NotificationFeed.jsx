@@ -31,17 +31,23 @@ export default function CB51NotificationFeed({ artistId }) {
 
   const approveMutation = useMutation({
     mutationFn: async (gig) => {
+      // Validate gig belongs to this artist
+      if (gig.artist_id !== artistId) {
+        throw new Error('Gig does not belong to this artist');
+      }
+
       await base44.functions.invoke('approveGigOffer', {
         gigId: gig.id,
-        artistId: artistId
+        artistId: gig.artist_id
       });
       
       // Notify promoter gig was approved
       try {
+        const artist = await base44.entities.Artist.get(gig.artist_id);
         await base44.asServiceRole.functions.invoke('notifyPromoterOnBandDecision', {
           gigOfferId: gig.id,
           promoterEmail: gig.promoter_email,
-          artistName: gig.artist_name,
+          artistName: artist?.name || 'Artist',
           decision: 'approved'
         });
       } catch (e) {
@@ -56,8 +62,15 @@ export default function CB51NotificationFeed({ artistId }) {
 
   const rejectMutation = useMutation({
     mutationFn: async ({ gigId, reason }) => {
+      // Get gig to validate artist_id
+      const gig = await base44.entities.GigOffer.get(gigId);
+      if (gig.artist_id !== artistId) {
+        throw new Error('Gig does not belong to this artist');
+      }
+
       await base44.functions.invoke('rejectGigOffer', {
         gigId: gigId,
+        artistId: gig.artist_id,
         reason: reason
       });
     },

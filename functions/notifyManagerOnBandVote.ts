@@ -66,7 +66,6 @@ Deno.serve(async (req) => {
 
     // If all votes are YES, generate draft confirmation email
     let draftEmail = null;
-    const allVotesIn = (yesCount + noCount) === bandMembers.length;
     if (yesCount === bandMembers.length && bandMembers.length > 0) {
       try {
         const emailRes = await base44.asServiceRole.functions.invoke('generateGigConfirmationEmail', {
