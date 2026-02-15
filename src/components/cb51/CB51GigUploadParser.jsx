@@ -14,6 +14,7 @@ export default function CB51GigUploadParser({ artistId, onGigCreated }) {
   const [error, setError] = useState(null);
   const [saveError, setSaveError] = useState(null);
   const [savedGig, setSavedGig] = useState(null);
+  const [debugLog, setDebugLog] = useState([]);
 
   const { data: artists = [] } = useQuery({
     queryKey: ['cb51Artists'],
@@ -28,6 +29,7 @@ export default function CB51GigUploadParser({ artistId, onGigCreated }) {
     setError(null);
     setSaveError(null);
     setParsing(true);
+    setDebugLog(['🚀 Starting...']);
 
     // 15 second timeout
     const timeoutId = setTimeout(() => {
@@ -38,6 +40,7 @@ export default function CB51GigUploadParser({ artistId, onGigCreated }) {
 
     try {
       console.log('🚀 Starting upload...', selectedFile.name);
+      setDebugLog(prev => [...prev, `📤 Uploading ${selectedFile.name}...`]);
 
       // Step 1: Upload file
       const uploadRes = await base44.integrations.Core.UploadFile({
@@ -45,6 +48,7 @@ export default function CB51GigUploadParser({ artistId, onGigCreated }) {
       });
 
       console.log('✅ Upload complete:', uploadRes.file_url);
+      setDebugLog(prev => [...prev, '✅ Upload complete', '🤖 Calling AI...']);
       console.log('🤖 Calling AI vision...');
 
       // Step 2: ONE AI call - Vision LLM reads PDF/image directly
@@ -85,6 +89,7 @@ export default function CB51GigUploadParser({ artistId, onGigCreated }) {
 
       clearTimeout(timeoutId);
       console.log('✅ AI response:', JSON.stringify(parseRes, null, 2));
+      setDebugLog(prev => [...prev, '✅ AI responded!', `Venue: ${parseRes?.venue_name || 'MISSING'}`, `Date: ${parseRes?.date_start || 'MISSING'}`, `Promoter: ${parseRes?.promoter_name || 'MISSING'}`]);
 
       const extracted = parseRes;
 
@@ -148,16 +153,19 @@ export default function CB51GigUploadParser({ artistId, onGigCreated }) {
         setError(`⚠️ Missing: ${missingCritical.join(', ')} - Fill them in below`);
         }
         } else {
-        clearTimeout(timeoutId);
-        console.error('❌ NO DATA AT ALL from AI');
-        setError('❌ Could not read PDF - Try photo or manual entry');
-        setFile(null);
+          clearTimeout(timeoutId);
+          console.error('❌ NO DATA AT ALL from AI');
+          setDebugLog(prev => [...prev, '❌ AI returned nothing']);
+          setError('❌ Could not read PDF - Try photo or manual entry');
+          setFile(null);
         }
     } catch (err) {
       clearTimeout(timeoutId);
       console.error('❌ FULL ERROR:', err);
       console.error('❌ Error message:', err.message);
       console.error('❌ Error stack:', err.stack);
+      
+      setDebugLog(prev => [...prev, `❌ ERROR: ${err.message}`]);
       
       // Show user-friendly error
       const errorMsg = err.message || 'Failed to parse file';
@@ -166,6 +174,7 @@ export default function CB51GigUploadParser({ artistId, onGigCreated }) {
     } finally {
       setParsing(false);
       console.log('✅ Parsing complete');
+      setDebugLog(prev => [...prev, '✅ Done']);
     }
   };
 
@@ -262,6 +271,13 @@ export default function CB51GigUploadParser({ artistId, onGigCreated }) {
               <>
                 <Loader className="w-8 h-8 text-cyan-400 mx-auto animate-spin mb-2" />
                 <p className="text-cyan-400 font-bold text-sm">PARSING PDF...</p>
+                {debugLog.length > 0 && (
+                  <div className="mt-3 bg-black/50 rounded p-2 text-left max-h-24 overflow-y-auto">
+                    {debugLog.map((log, i) => (
+                      <p key={i} className="text-cyan-300 text-[10px] font-mono">{log}</p>
+                    ))}
+                  </div>
+                )}
               </>
             ) : (
               <>
