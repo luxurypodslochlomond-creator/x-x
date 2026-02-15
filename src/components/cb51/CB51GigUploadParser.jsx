@@ -110,35 +110,37 @@ export default function CB51GigUploadParser({ artistId, onGigCreated }) {
         setExtracted(extracted);
         setEditing({ ...extracted });
 
-      // AI auto-detect artist from PDF
-      if (extracted.artist_name && artists.length > 0) {
-        const possibleMatches = artists.filter(a => 
-          a.name.toLowerCase().includes(extracted.artist_name.toLowerCase()) ||
-          extracted.artist_name.toLowerCase().includes(a.name.toLowerCase())
-        );
+      // ONLY auto-detect artist if user hasn't already selected one
+      if (!selectedArtistId) {
+        if (extracted.artist_name && artists.length > 0) {
+          const possibleMatches = artists.filter(a => 
+            a.name.toLowerCase().includes(extracted.artist_name.toLowerCase()) ||
+            extracted.artist_name.toLowerCase().includes(a.name.toLowerCase())
+          );
 
-        if (possibleMatches.length === 1) {
-          // Perfect match - auto-select
-          setSelectedArtistId(possibleMatches[0].id);
-          setError(null);
-        } else if (possibleMatches.length > 1) {
-          // Multiple matches - will show chips below
-          setError(`Found ${possibleMatches.length} possible artists. Pick one below.`);
+          if (possibleMatches.length === 1) {
+            // Perfect match - auto-select
+            setSelectedArtistId(possibleMatches[0].id);
+            setError(null);
+          } else if (possibleMatches.length > 1) {
+            // Multiple matches - will show chips below
+            setError(`Found ${possibleMatches.length} possible artists. Pick one below.`);
+          } else if (artists.length === 1) {
+            // Only one artist in system - auto-select
+            setSelectedArtistId(artists[0].id);
+            setError(null);
+          } else {
+            // No match - show all artists to pick
+            setError('Pick your artist below:');
+          }
         } else if (artists.length === 1) {
-          // Only one artist in system - auto-select
+          // No artist name detected, but only 1 artist exists - auto-select
           setSelectedArtistId(artists[0].id);
           setError(null);
-        } else {
-          // No match - show all artists to pick
+        } else if (artists.length > 1) {
+          // Multiple artists, no detection - ask user
           setError('Pick your artist below:');
         }
-      } else if (artists.length === 1) {
-        // No artist name detected, but only 1 artist exists - auto-select
-        setSelectedArtistId(artists[0].id);
-        setError(null);
-      } else if (artists.length > 1) {
-        // Multiple artists, no detection - ask user
-        setError('Pick your artist below:');
       }
         
         // Check for missing critical fields
