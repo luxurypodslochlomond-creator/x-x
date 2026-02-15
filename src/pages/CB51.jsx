@@ -284,7 +284,12 @@ export default function CB51() {
                   >
                     <div className="flex items-center gap-3">
                       <Users className="w-5 h-5 text-cyan-400" />
-                      <h2 className="text-cyan-400 font-mono font-bold text-sm uppercase tracking-wider">Band Members</h2>
+                      <div>
+                        <h2 className="text-cyan-400 font-mono font-bold text-sm uppercase tracking-wider">Band Members</h2>
+                        <p className="text-gray-500 text-[10px] font-mono mt-0.5">
+                          {artists.find(a => a.id === currentArtistId)?.name || 'Unknown'}
+                        </p>
+                      </div>
                     </div>
                     <motion.div
                       animate={{ rotate: showAddMemberSheet ? 180 : 0 }}
