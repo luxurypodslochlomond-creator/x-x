@@ -24,11 +24,37 @@ Deno.serve(async (req) => {
     // Get artist details for signature
     const artist = await base44.entities.Artist.get(artistId);
 
-    // Draft professional confirmation email
+    // Use AI to generate professional confirmation email
+    const llmPrompt = `Generate a professional gig confirmation email to the promoter.
+
+DETAILS:
+- Artist: ${artist?.name || 'The Band'}
+- Venue: ${gig.venue || gig.title}
+- Date: ${gig.date_start}
+- Time: ${gig.time_start || 'TBC'}
+- Fee: ${gig.fee ? '£' + gig.fee : 'As discussed'}
+- Location: ${gig.location || 'As discussed'}
+- Promoter: ${gig.promoter_name}
+${gig.offer_details ? `- Notes: ${gig.offer_details}` : ''}
+
+Write a warm, professional confirmation. Keep it short. Confirm the details above. Ask them to confirm receipt.
+
+Sign off: "Best, ${artist?.name || 'The Band'}"`;
+
+    let aiBody = null;
+    try {
+      const llmRes = await base44.asServiceRole.integrations.Core.InvokeLLM({
+        prompt: llmPrompt
+      });
+      aiBody = llmRes;
+    } catch (llmErr) {
+      console.log('AI draft failed, using template:', llmErr.message);
+    }
+
     const draftEmail = {
       to: gig.promoter_email,
       subject: `Confirmed: ${gig.venue || gig.title} - ${gig.date_start}`,
-      body: `Dear ${gig.promoter_name},
+      body: aiBody || `Dear ${gig.promoter_name},
 
 Thank you for the offer to play at ${gig.venue || gig.title}.
 
