@@ -64,6 +64,19 @@ export default function CB51BandVotingDashboard() {
     refetchInterval: 2000
   });
 
+  const { data: bandMembers = [] } = useQuery({
+    queryKey: ['bandMembers', artistId],
+    queryFn: async () => {
+      if (!artistId) return [];
+      return await base44.entities.TeamMember.filter({
+        artist_id: artistId,
+        role: 'band_member'
+      });
+    },
+    enabled: !!artistId,
+    refetchInterval: 2000
+  });
+
   const getVoteCount = (gigId) => {
     const gigVotes = allVotes.filter(v => v.gig_id === gigId);
     return {
@@ -71,6 +84,16 @@ export default function CB51BandVotingDashboard() {
       no: gigVotes.filter(v => v.vote_type === 'no').length,
       total: gigVotes.length
     };
+  };
+
+  const getVoteDetails = (gigId) => {
+    const gigVotes = allVotes.filter(v => v.gig_id === gigId);
+    const votedEmails = new Set(gigVotes.map(v => v.created_by));
+    
+    const voted = bandMembers.filter(m => votedEmails.has(m.email));
+    const pending = bandMembers.filter(m => !votedEmails.has(m.email));
+    
+    return { voted, pending };
   };
 
   if (isLoading) {
@@ -112,9 +135,9 @@ export default function CB51BandVotingDashboard() {
           <div className="space-y-4">
             {gigsInVoting.map((gig) => {
               const votes = getVoteCount(gig.id);
-              const bandSize = votes.yes + votes.no + 1; // Estimate from votes + pending
-              const pending = Math.max(1, bandSize - votes.total);
-              const allConfirmed = votes.yes === bandSize;
+              const { voted, pending: pendingMembers } = getVoteDetails(gig.id);
+              const bandSize = bandMembers.length;
+              const allConfirmed = votes.total === bandSize && votes.no === 0;
               const hasRejection = votes.no > 0;
 
               const isExpanded = expandedGigs.has(gig.id);
@@ -190,10 +213,19 @@ export default function CB51BandVotingDashboard() {
                       )}
 
                       {/* Pending */}
-                      {pending > 0 && (
+                      {pendingMembers.length > 0 && (
                         <div className="flex items-center gap-3">
-                          <Users className="w-4 h-4 text-gray-500" />
-                          <span className="text-sm text-gray-500 font-mono">{pending} waiting...</span>
+                          <Users className="w-4 h-4 text-yellow-500" />
+                          <div className="flex-1">
+                            <p className="text-sm text-yellow-400 font-mono mb-1">Waiting on:</p>
+                            <div className="flex flex-wrap gap-1">
+                              {pendingMembers.map(member => (
+                                <span key={member.id} className="text-xs bg-yellow-900/30 text-yellow-300 px-2 py-1 rounded font-mono">
+                                  {member.name}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
                         </div>
                       )}
                     </div>
@@ -205,7 +237,7 @@ export default function CB51BandVotingDashboard() {
                       ) : hasRejection ? (
                         <p className="text-sm text-red-400 font-bold">⚠ Discuss rejections with band</p>
                       ) : (
-                        <p className="text-sm text-amber-400 font-bold">Waiting on {pending}...</p>
+                        <p className="text-sm text-amber-400 font-bold">Waiting on {pendingMembers.length}...</p>
                       )}
                     </div>
                   </div>
