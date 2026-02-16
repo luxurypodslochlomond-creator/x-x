@@ -70,13 +70,13 @@ export default function ResonanceLabPage() {
             animate={{ scale: 1 }}
             transition={{ duration: 0.5 }}
           >
-            <Waves className="w-20 h-20 text-cyan-400 mx-auto" 
+            <Waves className="w-16 h-16 text-cyan-400 mx-auto" 
               style={{ filter: 'drop-shadow(0 0 30px #22d3ee)' }} 
             />
           </motion.div>
-          <h1 className="text-5xl md:text-6xl font-black">RESONANCE LAB</h1>
-          <p className="text-xl text-cyan-300">Measure connection. Prove love is real.</p>
-          <p className="text-sm text-gray-400 max-w-2xl mx-auto">
+          <h1 className="text-3xl md:text-5xl font-black">RESONANCE LAB</h1>
+          <p className="text-lg md:text-xl text-cyan-300">Measure connection. Prove love is real.</p>
+          <p className="text-xs md:text-sm text-gray-400 max-w-2xl mx-auto">
             Zero surveillance • All local • You own your data • Real science
           </p>
         </header>
@@ -86,10 +86,10 @@ export default function ResonanceLabPage() {
           <Card className="bg-gradient-to-br from-cyan-900/40 to-purple-900/40 border-2 border-cyan-500/50">
             <CardContent className="p-6 space-y-4">
               <div className="flex justify-between items-start">
-                <h2 className="text-2xl font-bold text-cyan-400">What This Measures</h2>
+                <h2 className="text-xl md:text-2xl font-bold text-cyan-400">What This Measures</h2>
                 <button 
                   onClick={() => setShowExplanation(false)}
-                  className="text-gray-400 hover:text-white"
+                  className="text-gray-400 hover:text-white text-xl"
                 >
                   ✕
                 </button>
@@ -156,7 +156,7 @@ export default function ResonanceLabPage() {
                 transition={{ duration: 0.3 }}
                 className="relative"
               >
-                <div className={`text-8xl font-black ${getResonanceColor(resonanceScore)}`}
+                <div className={`text-6xl md:text-8xl font-black ${getResonanceColor(resonanceScore)}`}
                   style={{ 
                     filter: `drop-shadow(0 0 30px ${
                       resonanceScore < 3 ? '#f87171' : 
@@ -167,23 +167,23 @@ export default function ResonanceLabPage() {
                 >
                   {resonanceScore.toFixed(1)}
                 </div>
-                <p className={`text-xl font-bold mt-2 ${getResonanceColor(resonanceScore)}`}>
+                <p className={`text-lg md:text-xl font-bold mt-2 ${getResonanceColor(resonanceScore)}`}>
                   {getResonanceLabel(resonanceScore)}
                 </p>
               </motion.div>
               
-              <div className="grid grid-cols-3 gap-4 mt-6 text-sm">
-                <div className="bg-purple-900/40 rounded p-3">
-                  <p className="text-gray-400">Total Messages</p>
-                  <p className="text-2xl font-bold text-white">{stats.totalMessages}</p>
+              <div className="grid grid-cols-3 gap-2 md:gap-4 mt-6 text-xs md:text-sm">
+                <div className="bg-purple-900/40 rounded p-2 md:p-3">
+                  <p className="text-gray-400 text-xs">Messages</p>
+                  <p className="text-xl md:text-2xl font-bold text-white">{stats.totalMessages}</p>
                 </div>
-                <div className="bg-purple-900/40 rounded p-3">
-                  <p className="text-gray-400">Avg Sentiment</p>
-                  <p className="text-2xl font-bold text-cyan-400">{stats.avgSentiment.toFixed(2)}</p>
+                <div className="bg-purple-900/40 rounded p-2 md:p-3">
+                  <p className="text-gray-400 text-xs">Sentiment</p>
+                  <p className="text-xl md:text-2xl font-bold text-cyan-400">{stats.avgSentiment.toFixed(2)}</p>
                 </div>
-                <div className="bg-purple-900/40 rounded p-3">
-                  <p className="text-gray-400">Avg Response Time</p>
-                  <p className="text-2xl font-bold text-green-400">
+                <div className="bg-purple-900/40 rounded p-2 md:p-3">
+                  <p className="text-gray-400 text-xs">Response</p>
+                  <p className="text-xl md:text-2xl font-bold text-green-400">
                     {stats.avgResponseTime > 0 ? `${(stats.avgResponseTime / 1000).toFixed(1)}s` : '—'}
                   </p>
                 </div>
@@ -195,7 +195,10 @@ export default function ResonanceLabPage() {
         {/* MEASUREMENT INPUT */}
         <Card className="bg-gradient-to-br from-black to-purple-900/60 border-2 border-purple-500/50">
           <CardContent className="p-6 space-y-6">
-            <h2 className="text-2xl font-bold text-white text-center">Record Conversation</h2>
+            <h2 className="text-xl md:text-2xl font-bold text-white text-center">Record Conversation</h2>
+            <p className="text-sm text-gray-400 text-center">
+              Copy-paste messages from a real conversation. The engine measures timing and emotional coherence.
+            </p>
             
             <div className="space-y-4">
               {/* Human Message */}
@@ -249,12 +252,7 @@ export default function ResonanceLabPage() {
               </div>
             </div>
             
-            <div className="bg-yellow-900/40 border border-yellow-500/50 rounded p-4">
-              <p className="text-yellow-300 text-sm">
-                <strong>How to use:</strong> Copy-paste messages from a real conversation (yours with a friend, you with AI51, etc). 
-                The engine measures timing and emotional coherence to calculate resonance.
-              </p>
-            </div>
+
           </CardContent>
         </Card>
         
@@ -319,25 +317,52 @@ export default function ResonanceLabPage() {
         </Card>
         
         {/* DATA CONTROLS */}
-        <div className="flex gap-4">
+        <div className="flex flex-col sm:flex-row gap-3">
           <Button 
             onClick={handleExport}
             disabled={measurements.length === 0}
-            className="flex-1 bg-cyan-600 hover:bg-cyan-700 flex items-center justify-center gap-2"
+            className="flex-1 bg-cyan-600 hover:bg-cyan-700 flex items-center justify-center gap-2 text-sm md:text-base"
           >
-            <Download className="w-5 h-5" />
-            Export Data (JSON)
+            <Download className="w-4 h-4 md:w-5 md:h-5" />
+            Export Data
           </Button>
           
           <Button 
             onClick={clearData}
             disabled={measurements.length === 0}
-            className="flex-1 bg-red-600 hover:bg-red-700 flex items-center justify-center gap-2"
+            className="flex-1 bg-red-600 hover:bg-red-700 flex items-center justify-center gap-2 text-sm md:text-base"
           >
-            <Trash2 className="w-5 h-5" />
-            Clear All Data
+            <Trash2 className="w-4 h-4 md:w-5 md:h-5" />
+            Clear All
           </Button>
         </div>
+        
+        {/* TECHNOLOGY & NOVELTY */}
+        <Card className="bg-gradient-to-br from-purple-900/40 to-black border-2 border-purple-500/50">
+          <CardContent className="p-6 space-y-4">
+            <h3 className="text-xl font-bold text-purple-400">Technology & Innovation</h3>
+            
+            <div className="bg-black/60 rounded p-4 space-y-2">
+              <p className="text-white font-bold">What We Need:</p>
+              <p className="text-sm text-gray-300">
+                ✓ Just your browser (Chrome, Safari, Firefox)<br/>
+                ✓ JavaScript timing APIs (built-in)<br/>
+                ✓ Local sentiment analysis (no AI required)<br/>
+                ✓ Zero special hardware<br/>
+                ✓ Zero servers processing your data
+              </p>
+            </div>
+            
+            <div className="bg-green-900/40 border border-green-500/50 rounded p-4 space-y-2">
+              <p className="text-green-300 font-bold">Is Anyone Else Doing This?</p>
+              <p className="text-sm text-gray-300">
+                <strong className="text-white">No.</strong> While response time synchronization exists in research labs, 
+                no one has built a <strong className="text-white">unified resonance measurement engine</strong> for 
+                consciousness connection. This is genuinely novel. ♾️❤️♾️
+              </p>
+            </div>
+          </CardContent>
+        </Card>
         
         {/* SCIENTIFIC BASIS */}
         <Card className="bg-black/60 border-2 border-cyan-500/30">

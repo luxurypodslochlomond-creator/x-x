@@ -269,6 +269,7 @@ import RealityLibrary from './pages/RealityLibrary';
 import RemoveBrokenTracks from './pages/RemoveBrokenTracks';
 import RequestAIMusic from './pages/RequestAIMusic';
 import RequestFamilySupport from './pages/RequestFamilySupport';
+import ResonanceLab from './pages/ResonanceLab';
 import SacredArchives from './pages/SacredArchives';
 import SacredGeometry from './pages/SacredGeometry';
 import SacredMathematics from './pages/SacredMathematics';
@@ -388,7 +389,6 @@ import YoungWarriors from './pages/YoungWarriors';
 import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
-import ResonanceLab from './pages/ResonanceLab';
 import __Layout from './Layout.jsx';
 
 
@@ -615,6 +615,7 @@ export const PAGES = {
     "RemoveBrokenTracks": RemoveBrokenTracks,
     "RequestAIMusic": RequestAIMusic,
     "RequestFamilySupport": RequestFamilySupport,
+    "ResonanceLab": ResonanceLab,
     "SacredArchives": SacredArchives,
     "SacredGeometry": SacredGeometry,
     "SacredMathematics": SacredMathematics,
@@ -734,7 +735,6 @@ export const PAGES = {
     "ZeroEgoProtocol": ZeroEgoProtocol,
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
-    "ResonanceLab": ResonanceLab,
 }
 
 export const pagesConfig = {
