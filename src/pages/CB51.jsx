@@ -109,6 +109,9 @@ export default function CB51() {
 
           {/* BADGE MANAGER - Show unread count on app icon */}
           {currentArtistId && <CB51BadgeManager artistId={currentArtistId} />}
+          
+          {/* BACKGROUND SYNC - Queue actions when offline */}
+          <CB51BackgroundSync />
 
           {/* ARTIST GRID - Show 3 */}
           {artists.length > 0 && (
