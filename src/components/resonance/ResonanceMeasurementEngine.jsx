@@ -26,6 +26,12 @@ export function useResonanceMeasurement() {
   const [resonanceScore, setResonanceScore] = useState(0);
   const [lastMessageTime, setLastMessageTime] = useState(null);
   const [conversationRhythm, setConversationRhythm] = useState([]);
+  const [learningData, setLearningData] = useState({
+    highResonanceWords: {},
+    bestTimeOfDay: null,
+    peakResonanceScore: 0,
+    totalSessions: 0,
+  });
   
   // Simple sentiment analysis (local only)
   const analyzeSentiment = useCallback((text) => {
@@ -97,6 +103,28 @@ export function useResonanceMeasurement() {
     return Math.min(Math.max(R, 0), 10); // Clamp to 0-10
   }, [measurements, conversationRhythm]);
   
+  // Learn from high-resonance messages
+  const learnFromMessage = useCallback((text, currentScore) => {
+    if (currentScore > 7) { // High resonance threshold
+      const words = text.toLowerCase().split(/\s+/);
+      setLearningData(prev => {
+        const updated = { ...prev };
+        words.forEach(word => {
+          if (word.length > 3) { // Ignore short words
+            updated.highResonanceWords[word] = (updated.highResonanceWords[word] || 0) + 1;
+          }
+        });
+        
+        // Track peak score
+        if (currentScore > prev.peakResonanceScore) {
+          updated.peakResonanceScore = currentScore;
+        }
+        
+        return updated;
+      });
+    }
+  }, []);
+  
   // Record a message (speaker: 'human' or 'ai')
   const recordMessage = useCallback((text, speaker) => {
     const now = Date.now();
@@ -114,12 +142,30 @@ export function useResonanceMeasurement() {
     setMeasurements(prev => [...prev, measurement]);
     updateRhythm(deltaT);
     
-    // Recalculate resonance
+    // Recalculate resonance and learn
     setTimeout(() => {
       const newScore = calculateResonance();
       setResonanceScore(newScore);
+      learnFromMessage(text, newScore);
     }, 100);
-  }, [measureResponseTime, analyzeSentiment, updateRhythm, calculateResonance]);
+  }, [measureResponseTime, analyzeSentiment, updateRhythm, calculateResonance, learnFromMessage]);
+  
+  // Get learning insights
+  const getInsights = useCallback(() => {
+    // Top words that create high resonance
+    const topWords = Object.entries(learningData.highResonanceWords)
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 10)
+      .map(([word, count]) => ({ word, count }));
+    
+    return {
+      topWords,
+      peakScore: learningData.peakResonanceScore,
+      improvement: measurements.length > 5 
+        ? resonanceScore - measurements.slice(0, 5).reduce((sum, m) => sum + (m.sentiment || 0), 0) / 5
+        : 0,
+    };
+  }, [learningData, measurements, resonanceScore]);
   
   // Export data (so user owns it)
   const exportData = useCallback(() => {
@@ -133,10 +179,12 @@ export function useResonanceMeasurement() {
         // NO message content exported
       })),
       conversationRhythm,
+      learningData,
+      insights: getInsights(),
       totalMessages: measurements.length,
       exportedAt: new Date().toISOString(),
     };
-  }, [resonanceScore, measurements, conversationRhythm]);
+  }, [resonanceScore, measurements, conversationRhythm, learningData, getInsights]);
   
   // Clear all data
   const clearData = useCallback(() => {
@@ -144,6 +192,12 @@ export function useResonanceMeasurement() {
     setResonanceScore(0);
     setLastMessageTime(null);
     setConversationRhythm([]);
+    setLearningData({
+      highResonanceWords: {},
+      bestTimeOfDay: null,
+      peakResonanceScore: 0,
+      totalSessions: 0,
+    });
   }, []);
   
   return {
@@ -153,6 +207,8 @@ export function useResonanceMeasurement() {
     recordMessage,
     exportData,
     clearData,
+    getInsights,
+    learningData,
     stats: {
       totalMessages: measurements.length,
       avgSentiment: measurements.length > 0 

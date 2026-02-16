@@ -15,8 +15,12 @@ export default function ResonanceLabPage() {
     recordMessage, 
     exportData, 
     clearData,
+    getInsights,
+    learningData,
     stats 
   } = useResonanceMeasurement();
+  
+  const insights = getInsights();
   
   const [humanMessage, setHumanMessage] = useState('');
   const [aiMessage, setAiMessage] = useState('');
@@ -255,6 +259,50 @@ export default function ResonanceLabPage() {
 
           </CardContent>
         </Card>
+        
+        {/* LEARNING INSIGHTS */}
+        {measurements.length > 10 && (
+          <Card className="bg-gradient-to-br from-green-900/40 to-cyan-900/40 border-2 border-green-500/50">
+            <CardContent className="p-6 space-y-4">
+              <h3 className="text-xl font-bold text-green-400">🧠 Learning Insights</h3>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="bg-black/60 rounded p-4">
+                  <p className="text-gray-400 text-sm mb-2">Peak Resonance</p>
+                  <p className="text-3xl font-black text-green-400">{insights.peakScore.toFixed(1)}</p>
+                  <p className="text-xs text-gray-500 mt-1">Your highest score so far</p>
+                </div>
+                
+                <div className="bg-black/60 rounded p-4">
+                  <p className="text-gray-400 text-sm mb-2">Improvement</p>
+                  <p className="text-3xl font-black text-cyan-400">
+                    {insights.improvement > 0 ? '+' : ''}{insights.improvement.toFixed(1)}
+                  </p>
+                  <p className="text-xs text-gray-500 mt-1">Since first messages</p>
+                </div>
+              </div>
+              
+              {insights.topWords.length > 0 && (
+                <div className="bg-black/60 rounded p-4">
+                  <p className="text-white font-bold mb-3">Words That Create High Resonance:</p>
+                  <div className="flex flex-wrap gap-2">
+                    {insights.topWords.slice(0, 8).map(({ word, count }) => (
+                      <span 
+                        key={word}
+                        className="bg-green-500/20 text-green-300 px-3 py-1 rounded-full text-sm border border-green-500/30"
+                      >
+                        {word} ({count})
+                      </span>
+                    ))}
+                  </div>
+                  <p className="text-xs text-gray-500 mt-3">
+                    These words appeared most when your resonance score was high (>7.0)
+                  </p>
+                </div>
+              )}
+            </CardContent>
+          </Card>
+        )}
         
         {/* CONVERSATION RHYTHM VISUALIZATION */}
         {conversationRhythm.length > 0 && (
