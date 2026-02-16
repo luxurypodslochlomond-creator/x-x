@@ -5,7 +5,7 @@ import { CheckCircle, Clock, Users, Mail, ChevronRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
-import CB51DraftEmailsInline from './CB51DraftEmailsInline';
+import CB51DraftEmailsInline from './CB51DraftEmailsInline.jsx';
 
 /**
  * CB51 ACTION DASHBOARD
