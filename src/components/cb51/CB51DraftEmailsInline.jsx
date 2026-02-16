@@ -125,8 +125,7 @@ export default function CB51DraftEmailsInline({ artistId, onClose }) {
         </div>
 
         {/* CONTENT */}
-        <div className="overflow-y-auto flex-1 p-4"
-
+        <div className="overflow-y-auto flex-1 p-4">
           {confirmedGigs.length === 0 ? (
             <div className="bg-black border border-cyan-500/20 rounded-lg p-8 text-center">
               <CheckCircle className="w-8 h-8 text-green-400 mx-auto mb-3" />
