@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
@@ -10,6 +10,30 @@ export default function CB51DraftEmailsInline({ artistId, onClose }) {
   const [selectedGig, setSelectedGig] = useState(null);
   const [draftEmail, setDraftEmail] = useState(null);
   const [loadingDraft, setLoadingDraft] = useState(null);
+  const sheetRef = useRef(null);
+  const [dragStart, setDragStart] = useState(0);
+
+  // Back button handler for PWA
+  useEffect(() => {
+    const handlePopState = () => onClose();
+    window.addEventListener('popstate', handlePopState);
+    window.history.pushState({ modal: true }, '');
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+    };
+  }, [onClose]);
+
+  // Swipe-to-dismiss for mobile
+  const handleDragStart = (e) => {
+    setDragStart(e.clientY || e.touches?.[0]?.clientY || 0);
+  };
+
+  const handleDragEnd = (e) => {
+    const dragEnd = e.clientY || e.changedTouches?.[0]?.clientY || 0;
+    if (dragEnd - dragStart > 100) {
+      onClose();
+    }
+  };
 
   // Get confirmed gigs
   const { data: confirmedGigs = [] } = useQuery({
@@ -19,6 +43,7 @@ export default function CB51DraftEmailsInline({ artistId, onClose }) {
       status: 'confirmed'
     }),
     enabled: !!artistId,
+    staleTime: 30000,
   });
 
   const handleGenerateDraft = async (gig) => {
@@ -71,64 +96,79 @@ export default function CB51DraftEmailsInline({ artistId, onClose }) {
       />
 
       <motion.div
+        ref={sheetRef}
         initial={{ y: '100%' }}
         animate={{ y: 0 }}
         exit={{ y: '100%' }}
         transition={{ type: 'spring', damping: 30, stiffness: 300 }}
+        onMouseDown={handleDragStart}
+        onMouseUp={handleDragEnd}
+        onTouchStart={handleDragStart}
+        onTouchEnd={handleDragEnd}
         onClick={(e) => e.stopPropagation()}
-        className="fixed bottom-0 left-0 right-0 lg:top-1/2 lg:left-1/2 lg:-translate-x-1/2 lg:-translate-y-1/2 lg:bottom-auto lg:right-auto bg-black border-t-2 lg:border-2 border-cyan-500/40 lg:rounded-lg p-4 w-full lg:w-96 max-h-[80vh] overflow-y-auto z-50"
+        className="fixed bottom-0 left-0 right-0 lg:top-1/2 lg:left-1/2 lg:-translate-x-1/2 lg:-translate-y-1/2 lg:bottom-auto lg:right-auto bg-black border-t-2 lg:border-2 border-cyan-500/40 lg:rounded-lg w-full lg:w-96 max-h-[85vh] lg:max-h-[80vh] flex flex-col z-50 cursor-grab active:cursor-grabbing"
       >
-        <div className="flex items-center justify-between mb-4">
+        {/* DRAG HANDLE */}
+        <div className="flex justify-center pt-2 lg:hidden">
+          <div className="w-8 h-1 bg-gray-600 rounded-full" />
+        </div>
+
+        {/* HEADER */}
+        <div className="flex items-center justify-between px-4 py-3 border-b border-cyan-500/20 flex-shrink-0">
           <h2 className="text-cyan-400 font-bold text-sm font-mono">DRAFT EMAILS</h2>
           <button
             onClick={onClose}
-            className="text-gray-500 hover:text-white transition-colors"
+            className="text-gray-500 hover:text-white transition-colors p-1"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
-        {confirmedGigs.length === 0 ? (
-          <div className="bg-black border border-cyan-500/20 rounded-lg p-6 text-center">
-            <CheckCircle className="w-8 h-8 text-green-400 mx-auto mb-3" />
-            <p className="text-gray-500 text-sm">No gigs ready to confirm</p>
-          </div>
-        ) : (
-          <div className="space-y-3">
-            {confirmedGigs.map((gig) => (
-              <motion.div
-                key={gig.id}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="bg-black border border-green-500/40 rounded-lg p-3"
-              >
-                <div className="mb-2">
-                  <h3 className="text-white font-bold text-xs mb-1">{gig.venue || gig.title}</h3>
-                  <p className="text-gray-500 text-[11px]">{gig.date_start} • £{gig.fee || '0'}</p>
-                  <p className="text-gray-600 text-[11px] mt-0.5">{gig.promoter_name}</p>
-                </div>
+        {/* CONTENT */}
+        <div className="overflow-y-auto flex-1 p-4"
 
-                <button
-                  onClick={() => handleGenerateDraft(gig)}
-                  disabled={loadingDraft === gig.id}
-                  className="w-full bg-cyan-600 hover:bg-cyan-700 disabled:opacity-50 text-white px-3 py-2 rounded font-mono text-xs font-bold transition-colors flex items-center justify-center gap-2"
+          {confirmedGigs.length === 0 ? (
+            <div className="bg-black border border-cyan-500/20 rounded-lg p-8 text-center">
+              <CheckCircle className="w-8 h-8 text-green-400 mx-auto mb-3" />
+              <p className="text-gray-500 text-sm">No gigs ready to confirm</p>
+            </div>
+          ) : (
+            <div className="space-y-3">
+              {confirmedGigs.map((gig) => (
+                <motion.div
+                  key={gig.id}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="bg-black border border-green-500/40 rounded-lg p-4"
                 >
-                  {loadingDraft === gig.id ? (
-                    <>
-                      <Loader className="w-3 h-3 animate-spin" />
-                      GENERATING...
-                    </>
-                  ) : (
-                    <>
-                      <Mail className="w-3 h-3" />
-                      DRAFT EMAIL
-                    </>
-                  )}
-                </button>
-              </motion.div>
-            ))}
-          </div>
-        )}
+                  <div className="mb-3">
+                    <h3 className="text-white font-bold text-sm mb-1">{gig.venue || gig.title}</h3>
+                    <p className="text-gray-500 text-xs">{gig.date_start} • £{gig.fee || '0'}</p>
+                    <p className="text-gray-600 text-xs mt-1">{gig.promoter_name}</p>
+                  </div>
+
+                  <button
+                    onClick={() => handleGenerateDraft(gig)}
+                    disabled={loadingDraft === gig.id}
+                    className="w-full bg-cyan-600 hover:bg-cyan-700 disabled:opacity-50 text-white px-4 py-3 rounded font-mono text-xs font-bold transition-colors flex items-center justify-center gap-2 active:scale-95"
+                  >
+                    {loadingDraft === gig.id ? (
+                      <>
+                        <Loader className="w-4 h-4 animate-spin" />
+                        GENERATING...
+                      </>
+                    ) : (
+                      <>
+                        <Mail className="w-4 h-4" />
+                        DRAFT EMAIL
+                      </>
+                    )}
+                  </button>
+                </motion.div>
+              ))}
+            </div>
+          )}
+        </div>
       </motion.div>
 
       {draftEmail && (
