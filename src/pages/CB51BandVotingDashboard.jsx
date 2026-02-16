@@ -212,7 +212,24 @@ export default function CB51BandVotingDashboard() {
                         </div>
                       )}
 
-                      {/* Pending */}
+                      {/* WHO VOTED */}
+                      {voted.length > 0 && (
+                        <div className="flex items-center gap-3">
+                          <CheckCircle className="w-4 h-4 text-green-400" />
+                          <div className="flex-1">
+                            <p className="text-sm text-green-400 font-mono mb-1">Voted:</p>
+                            <div className="flex flex-wrap gap-1">
+                              {voted.map(member => (
+                                <span key={member.id} className="text-xs bg-green-900/30 text-green-300 px-2 py-1 rounded font-mono">
+                                  {member.name}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      )}
+
+                      {/* PENDING */}
                       {pendingMembers.length > 0 && (
                         <div className="flex items-center gap-3">
                           <Users className="w-4 h-4 text-yellow-500" />
