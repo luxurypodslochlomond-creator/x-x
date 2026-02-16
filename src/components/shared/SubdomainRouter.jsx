@@ -46,6 +46,15 @@ export default function SubdomainRouter({ children }) {
                 navigate(createPageUrl('Prof51'), { replace: true });
             }
         }
+        
+        // STAY on CB51 - Don't redirect if already on CB51 pages
+        if (isCB51Domain || subdomain === 'cb51') {
+            const isCB51Page = location.pathname.includes('CB51') || location.pathname.includes('Scott');
+            if (location.pathname === '/' && !isCB51Page) {
+                navigate(createPageUrl('CB51'), { replace: true });
+            }
+        }
+        
         // uf51.love or www = stay on main site
         // Future: other domains/subdomains can route to other love-first apps ♾️
     }, [location.pathname]);

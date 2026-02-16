@@ -43,5 +43,20 @@ export default function CB51BadgeManager({ artistId }) {
     }
   }, [pendingCount]);
 
+  // Auto-clear badge when user opens CB51
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'visible' && 'clearAppBadge' in navigator) {
+        // Give user 2 seconds to see the page, then clear
+        setTimeout(() => {
+          navigator.clearAppBadge().catch(() => {});
+        }, 2000);
+      }
+    };
+    
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
+  }, []);
+
   return null;
 }

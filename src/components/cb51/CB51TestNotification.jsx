@@ -20,13 +20,18 @@ export default function CB51TestNotification() {
       // Get current user email
       const user = await base44.auth.me();
       
-      // Send test push notification using sendBrowserPush
-      await base44.asServiceRole.functions.invoke('sendBrowserPush', {
+      // Send test push notification (NO service role needed from frontend)
+      await base44.functions.invoke('sendBrowserPush', {
         recipient_email: user.email,
         title: '🎸 CB51 TEST',
         message: 'Notifications working! You will get real gig alerts like this.',
         notification_type: 'test'
       });
+      
+      // Haptic feedback on success
+      if ('vibrate' in navigator) {
+        navigator.vibrate(200);
+      }
       
       setSuccess(true);
       setTimeout(() => setSuccess(false), 3000);
