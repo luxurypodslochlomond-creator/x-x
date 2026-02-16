@@ -230,10 +230,34 @@ export default function CB51BandVotingDashboard() {
                       )}
                     </div>
 
-                    {/* STATUS */}
-                    <div className="mt-4 pt-4 border-t border-white/10">
+                    {/* STATUS & ACTION */}
+                    <div className="mt-4 pt-4 border-t border-white/10 space-y-3">
                       {allConfirmed ? (
-                        <p className="text-sm text-green-400 font-bold">✓ Ready to send to agent</p>
+                        <>
+                          <p className="text-sm text-green-400 font-bold">✓ All band members said YES</p>
+                          <button
+                            onClick={async () => {
+                              if (confirm(`Send confirmation email to ${gig.promoter_name}?`)) {
+                                try {
+                                  await base44.entities.GigOffer.update(gig.id, {
+                                    status: 'confirmed'
+                                  });
+                                  
+                                  await base44.functions.invoke('generateGigConfirmationEmail', {
+                                    gigId: gig.id
+                                  });
+                                  
+                                  alert('✓ Email sent to promoter!');
+                                } catch (err) {
+                                  alert('Failed to send: ' + err.message);
+                                }
+                              }
+                            }}
+                            className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-lg transition-colors"
+                          >
+                            📧 Send Confirmation to Promoter
+                          </button>
+                        </>
                       ) : hasRejection ? (
                         <p className="text-sm text-red-400 font-bold">⚠ Discuss rejections with band</p>
                       ) : (
