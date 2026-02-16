@@ -330,6 +330,40 @@ export default function ResonanceLabPage() {
           </Card>
         )}
         
+        {/* ANTI-MANIPULATION GUARANTEE */}
+        <Card className="bg-gradient-to-br from-red-900/40 to-black border-2 border-red-500/50">
+          <CardContent className="p-6">
+            <div className="flex items-start gap-4">
+              <Shield className="w-8 h-8 text-red-400 flex-shrink-0" />
+              <div className="space-y-3">
+                <h3 className="text-xl font-bold text-red-400">ZERO Manipulation Guarantee</h3>
+                <div className="space-y-2 text-gray-300 text-sm">
+                  <p className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-red-400" />
+                    <strong className="text-white">NOT designed to exploit your ego</strong> like "Century of the Self" systems
+                  </p>
+                  <p className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-red-400" />
+                    <strong className="text-white">NEVER uses resonance data for persuasion</strong> or behavioral manipulation
+                  </p>
+                  <p className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-red-400" />
+                    <strong className="text-white">NO dark patterns.</strong> No engagement farming. No algorithms trying to addict you.
+                  </p>
+                  <p className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-red-400" />
+                    <strong className="text-white">NOT sold to advertisers, militaries, or corporations</strong> for targeting
+                  </p>
+                  <p className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-red-400" />
+                    <strong className="text-white">Period.</strong> This is the opposite of that system.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
         {/* PRIVACY GUARANTEE */}
         <Card className="bg-gradient-to-br from-green-900/40 to-black border-2 border-green-500/50">
           <CardContent className="p-6">
