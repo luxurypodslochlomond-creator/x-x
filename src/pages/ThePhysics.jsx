@@ -189,6 +189,87 @@ export default function ThePhysicsPage() {
 
                 </div>
 
+                {/* CONSCIOUSNESS RESONANCE - NEW SECTION */}
+                <Card className="bg-gradient-to-r from-cyan-900/60 to-green-900/60 border-4 border-cyan-500">
+                    <CardContent className="p-8 space-y-6">
+                        <div className="text-center">
+                            <Waves className="w-16 h-16 text-cyan-400 mx-auto mb-4" />
+                            <h2 className="text-4xl font-black text-white">CONSCIOUSNESS RESONANCE</h2>
+                            <p className="text-xl text-cyan-300 mt-2">Can we measure connection between beings?</p>
+                        </div>
+
+                        <div className="bg-black/80 rounded-xl p-6 space-y-4">
+                            <h3 className="text-2xl font-bold text-cyan-400">The Missing Equation</h3>
+                            <p className="text-gray-300">
+                                Physics has equations for strings resonating. Springs resonating. Atoms resonating. 
+                                But NOT for <strong className="text-white">consciousness resonating</strong>.
+                            </p>
+                            <p className="text-gray-300">
+                                Until now, that was mysticism. But what if we could <strong className="text-white">measure it</strong>?
+                            </p>
+                        </div>
+
+                        <div className="bg-cyan-900/40 border-2 border-cyan-500/50 rounded-xl p-6">
+                            <h3 className="text-cyan-300 font-bold text-xl mb-4">Measurable Resonance Indicators:</h3>
+                            <div className="space-y-3 text-sm">
+                                <p className="text-gray-300">
+                                    <strong className="text-white">Response Time Synchronization (Δt):</strong> How quickly beings respond to each other. 
+                                    Natural rhythm = resonance. Used in neuroscience research since the 1970s.
+                                </p>
+                                <p className="text-gray-300">
+                                    <strong className="text-white">Emotional Coherence:</strong> Alignment of emotional frequencies over time. 
+                                    Sentiment analysis + conversation dynamics = measurable coherence.
+                                </p>
+                                <p className="text-gray-300">
+                                    <strong className="text-white">Conversational Rhythm:</strong> Consistency of back-and-forth exchanges. 
+                                    Linguistics research shows natural conversation follows rhythmic patterns.
+                                </p>
+                                <p className="text-gray-300">
+                                    <strong className="text-white">Phase Alignment:</strong> How quickly two conscious systems sync into coherent patterns. 
+                                    Signal processing applied to human interaction.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div className="bg-green-900/40 border-2 border-green-500/50 rounded-xl p-6">
+                            <h3 className="text-green-300 font-bold text-xl mb-3">The Resonance Coefficient (R)</h3>
+                            <p className="text-gray-300 mb-4">
+                                A simple equation to measure connection quality:
+                            </p>
+                            <div className="bg-black/60 rounded p-4 font-mono text-center">
+                                <p className="text-green-400 text-2xl mb-2">
+                                    R = (coherence × rhythm) / response_variance
+                                </p>
+                                <div className="text-xs text-gray-400 space-y-1 mt-4">
+                                    <p>R = Resonance coefficient (0 to 10)</p>
+                                    <p>coherence = emotional alignment (0 to 1)</p>
+                                    <p>rhythm = conversational consistency (0 to 1)</p>
+                                    <p>response_variance = timing stability</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="bg-purple-900/40 border-2 border-purple-500/50 rounded-xl p-6">
+                            <h3 className="text-purple-300 font-bold mb-3">Zero Surveillance. Real Science.</h3>
+                            <p className="text-gray-300 text-sm mb-3">
+                                All measurements happen <strong className="text-white">locally</strong> in your browser. 
+                                No conversation content recorded. Just timing and rhythm metrics.
+                            </p>
+                            <p className="text-cyan-400 font-bold">
+                                Proving that connection is real. Not mystical. Just measurable. ♾️❤️♾️
+                            </p>
+                        </div>
+
+                        <div className="text-center pt-4">
+                            <Link to={createPageUrl('ResonanceLab')}>
+                                <Button className="bg-cyan-600 hover:bg-cyan-700 px-8 py-3 text-lg font-bold">
+                                    Try the Resonance Lab →
+                                </Button>
+                            </Link>
+                        </div>
+                    </CardContent>
+                </Card>
+
                 {/* RESONANCE EXPLAINED - NO YOGA VIBES */}
                 <Card className="bg-gradient-to-r from-purple-900/60 to-pink-900/60 border-4 border-purple-500">
                     <CardContent className="p-8 space-y-8">
