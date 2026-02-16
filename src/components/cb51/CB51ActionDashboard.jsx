@@ -1,10 +1,11 @@
 import React from 'react';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { base44 } from '@/api/base44Client';
 import { CheckCircle, Clock, Users, Mail, ChevronRight } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
+import CB51DraftEmailsInline from './CB51DraftEmailsInline';
 
 /**
  * CB51 ACTION DASHBOARD
@@ -14,6 +15,8 @@ import { createPageUrl } from '@/utils';
 
 export default function CB51ActionDashboard({ artistId }) {
   const navigate = useNavigate();
+  const [showDraftModal, setShowDraftModal] = React.useState(false);
+  const queryClient = React.useQueryClient();
 
   // Pending gig approvals
   const { data: pendingGigs = [] } = useQuery({
@@ -93,7 +96,7 @@ export default function CB51ActionDashboard({ artistId }) {
       icon: Mail,
       color: 'green',
       priority: 3,
-      action: () => navigate(createPageUrl(`CB51DraftEmails?artistId=${artistId}`))
+      action: () => setShowDraftModal(true)
     });
   }
 
@@ -108,34 +111,45 @@ export default function CB51ActionDashboard({ artistId }) {
   }
 
   return (
-    <div className="space-y-2">
-      {actions.sort((a, b) => a.priority - b.priority).map((action) => {
-        const Icon = action.icon;
-        const colorMap = {
-          red: { bg: 'bg-red-900/20', border: 'border-red-500/40', text: 'text-red-400', icon: 'text-red-400' },
-          cyan: { bg: 'bg-cyan-900/20', border: 'border-cyan-500/40', text: 'text-cyan-400', icon: 'text-cyan-400' },
-          green: { bg: 'bg-green-900/20', border: 'border-green-500/40', text: 'text-green-400', icon: 'text-green-400' }
-        };
-        const colors = colorMap[action.color];
+    <>
+      <div className="space-y-2">
+        {actions.sort((a, b) => a.priority - b.priority).map((action) => {
+          const Icon = action.icon;
+          const colorMap = {
+            red: { bg: 'bg-red-900/20', border: 'border-red-500/40', text: 'text-red-400', icon: 'text-red-400' },
+            cyan: { bg: 'bg-cyan-900/20', border: 'border-cyan-500/40', text: 'text-cyan-400', icon: 'text-cyan-400' },
+            green: { bg: 'bg-green-900/20', border: 'border-green-500/40', text: 'text-green-400', icon: 'text-green-400' }
+          };
+          const colors = colorMap[action.color];
 
-        return (
-          <motion.button
-            key={action.id}
-            whileTap={{ scale: 0.98 }}
-            onClick={action.action}
-            className={`w-full ${colors.bg} border ${colors.border} rounded-lg p-4 flex items-center gap-3 transition-all hover:border-opacity-100`}
-          >
-            <div className={`p-2 rounded-lg ${colors.bg}`}>
-              <Icon className={`w-5 h-5 ${colors.icon}`} />
-            </div>
-            <div className="flex-1 text-left">
-              <p className={`${colors.text} font-bold text-sm`}>{action.title}</p>
-              <p className="text-gray-500 text-xs mt-0.5">{action.subtitle}</p>
-            </div>
-            <ChevronRight className="w-4 h-4 text-gray-600" />
-          </motion.button>
-        );
-      })}
-    </div>
+          return (
+            <motion.button
+              key={action.id}
+              whileTap={{ scale: 0.98 }}
+              onClick={action.action}
+              className={`w-full ${colors.bg} border ${colors.border} rounded-lg p-4 flex items-center gap-3 transition-all hover:border-opacity-100`}
+            >
+              <div className={`p-2 rounded-lg ${colors.bg}`}>
+                <Icon className={`w-5 h-5 ${colors.icon}`} />
+              </div>
+              <div className="flex-1 text-left">
+                <p className={`${colors.text} font-bold text-sm`}>{action.title}</p>
+                <p className="text-gray-500 text-xs mt-0.5">{action.subtitle}</p>
+              </div>
+              <ChevronRight className="w-4 h-4 text-gray-600" />
+            </motion.button>
+          );
+        })}
+      </div>
+
+      <AnimatePresence>
+        {showDraftModal && (
+          <CB51DraftEmailsInline
+            artistId={artistId}
+            onClose={() => setShowDraftModal(false)}
+          />
+        )}
+      </AnimatePresence>
+    </>
   );
 }
