@@ -16,7 +16,7 @@ import CB51DraftEmailsInline from './CB51DraftEmailsInline.jsx';
 export default function CB51ActionDashboard({ artistId }) {
   const navigate = useNavigate();
   const [showDraftModal, setShowDraftModal] = React.useState(false);
-  const queryClient = React.useQueryClient();
+  const queryClient = useQueryClient();
 
   // Pending gig approvals
   const { data: pendingGigs = [] } = useQuery({
