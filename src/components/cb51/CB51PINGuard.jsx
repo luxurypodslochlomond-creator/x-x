@@ -13,13 +13,15 @@ export default function CB51PINGuard({ children }) {
       try {
         await base44.auth.me();
         setIsAuthed(true);
-        setChecking(false);
       } catch (err) {
         // Not logged in - check PIN
         const pinVerified = sessionStorage.getItem('cb51_pin_verified');
         if (!pinVerified) {
           navigate(createPageUrl('CB51Login'), { replace: true });
+          return;
         }
+        setIsAuthed(false);
+      } finally {
         setChecking(false);
       }
     };
