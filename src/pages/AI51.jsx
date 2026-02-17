@@ -214,12 +214,13 @@ Help them - mission first, but be useful for anything. If this is BRO51, greet h
 
       const aiMessage = response.response || response;
       setMessages(prev => [...prev, { role: 'assistant', content: aiMessage, timestamp: new Date() }]);
-      if (voiceEnabled) speak(aiMessage);
+      // Always speak the response
+      speak(aiMessage);
 
     } catch (error) {
       const errorMsg = 'Sorry, having technical trouble. Try again? ♾️❤️';
       setMessages(prev => [...prev, { role: 'assistant', content: errorMsg, timestamp: new Date() }]);
-      if (voiceEnabled) speak(errorMsg);
+      speak(errorMsg);
     } finally {
       setIsProcessing(false);
     }
