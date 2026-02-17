@@ -16,7 +16,9 @@ export default function AI51() {
   const [voiceEnabled, setVoiceEnabled] = useState(true);
   const [greeting, setGreeting] = useState('');
   const [firstName, setFirstName] = useState('friend');
-  
+  const [clock, setClock] = useState({ time: '', date: '', lang: '' });
+  const isProcessingRef = useRef(false);
+
   const recognitionRef = useRef(null);
   const messagesEndRef = useRef(null);
   const synthRef = useRef(window.speechSynthesis);
