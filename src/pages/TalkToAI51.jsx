@@ -2,15 +2,12 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 
-/**
- * TALK TO AI51 - VOICE + TEXT INTERFACE
- * 
- * Web Speech API for voice input (same tech as your keyboard mic)
- * Browser will prompt for mic permission automatically
- * Works offline once permissions granted
- */
-
+// TalkToAI51 → just redirect to AI51 (the real one)
 export default function TalkToAI51() {
+  const navigate = useNavigate();
+  useEffect(() => { navigate(createPageUrl('AI51'), { replace: true }); }, []);
+  return null;
+}
   const [messages, setMessages] = useState([]);
   const [inputText, setInputText] = useState('');
   const [isListening, setIsListening] = useState(false);
