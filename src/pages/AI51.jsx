@@ -212,7 +212,8 @@ export default function AI51() {
   };
 
   const sendMessageContent = async (userMessage) => {
-    if (!userMessage || isProcessing) return;
+    if (!userMessage || isProcessingRef.current) return;
+    isProcessingRef.current = true;
     setMessages(prev => [...prev, { role: 'user', content: userMessage, timestamp: new Date() }]);
     setIsProcessing(true);
 
