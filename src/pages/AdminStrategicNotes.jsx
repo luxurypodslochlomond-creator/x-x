@@ -148,13 +148,12 @@ export default function AdminStrategicNotes() {
             </div>
             <div className="space-y-4 text-white">
               <div className="bg-orange-900/40 border-2 border-orange-500 rounded-xl p-6">
-                <p className="text-orange-300 font-bold text-xl mb-3">📅 UPDATE 17 FEB 2026</p>
-                <p className="text-white text-base mb-3">
-                  They responded same day (05 Feb). They got your email and updated file. Now asking: "Please contact us so we can discuss your circumstances"
-                </p>
-                <p className="text-gray-300 text-sm">
-                  From: N Ahmad, Specialised Support Team. They're ready to talk. 30-day breathing space expired ~16 Feb.
-                </p>
+                <p className="text-orange-300 font-bold text-xl mb-3">📅 TIMELINE:</p>
+                <ul className="text-white text-base space-y-2">
+                  <li>• <strong className="text-cyan-400">5 Feb:</strong> You emailed them about your situation</li>
+                  <li>• <strong className="text-green-400">16 Feb (yesterday):</strong> N Ahmad replied - acknowledged email, updated file, asking to discuss</li>
+                  <li>• <strong className="text-orange-400">Now (17 Feb):</strong> Need to reply requesting another 30-day breathing space</li>
+                </ul>
               </div>
 
               <div className="bg-cyan-900/30 border border-cyan-500/50 rounded-lg p-4">
