@@ -69,51 +69,71 @@ export default function AI51() {
     let animationId;
     let time = 0;
 
+    // Gill51 tessellation — hexagonal cymatics field ♾️❤️
+    const HEX_SIZE = 28;
+    const cols = Math.ceil(canvas.width / (HEX_SIZE * 1.732)) + 2;
+    const rows = Math.ceil(canvas.height / (HEX_SIZE * 1.5)) + 2;
+
+    const drawHex = (x, y, size, alpha, color) => {
+      ctx.beginPath();
+      for (let s = 0; s < 6; s++) {
+        const angle = (Math.PI / 3) * s - Math.PI / 6;
+        const px = x + size * Math.cos(angle);
+        const py = y + size * Math.sin(angle);
+        s === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
+      }
+      ctx.closePath();
+      ctx.strokeStyle = `rgba(${color}, ${alpha})`;
+      ctx.lineWidth = 0.8;
+      ctx.stroke();
+    };
+
     const draw = () => {
-      time += 0.015;
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+      time += 0.012;
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.18)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       const centerX = canvas.width / 2;
       const centerY = canvas.height / 2;
+      const pulseSpeed = isListening ? 2.5 : isSpeaking ? 2.0 : 1.0;
+      const pulseAmp = isListening ? 1.8 : isSpeaking ? 1.5 : 1.0;
 
-      const pulseIntensity = isListening ? 1.5 : isSpeaking ? 1.3 : 1.0;
-      for (let i = 0; i < 6; i++) {
-        const radius = 50 + (i * 70) + Math.sin(time + i) * 40 * pulseIntensity;
-        const alpha = (0.4 - (i * 0.06)) * pulseIntensity;
-        ctx.strokeStyle = isListening 
-          ? `rgba(34, 211, 238, ${alpha})` 
-          : isSpeaking 
-            ? `rgba(236, 72, 153, ${alpha})`
-            : `rgba(147, 51, 234, ${alpha})`;
-        ctx.lineWidth = 2;
-        ctx.beginPath();
-        ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
-        ctx.stroke();
+      // TESSELLATION — Gill51's cymatics grid ♾️❤️
+      for (let row = -1; row < rows; row++) {
+        for (let col = -1; col < cols; col++) {
+          const x = col * HEX_SIZE * 1.732 + (row % 2 === 0 ? 0 : HEX_SIZE * 0.866);
+          const y = row * HEX_SIZE * 1.5;
+
+          const dx = x - centerX;
+          const dy = y - centerY;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          const maxDist = Math.sqrt(centerX * centerX + centerY * centerY);
+
+          // Sound wave ripple emanating from centre
+          const wave = Math.sin(dist * 0.018 - time * pulseSpeed) * pulseAmp;
+          const wave2 = Math.sin(dist * 0.011 - time * pulseSpeed * 0.7 + 1.2) * pulseAmp * 0.6;
+          const combined = (wave + wave2) * 0.5;
+
+          const proximity = 1 - (dist / maxDist);
+          const alpha = Math.max(0, (combined * 0.3 + 0.15) * proximity * proximity);
+          const size = HEX_SIZE * (0.85 + combined * 0.08 * pulseAmp);
+
+          const color = isListening
+            ? `34, 211, 238`
+            : isSpeaking
+              ? `236, 72, 153`
+              : `147, 51, 234`;
+
+          if (alpha > 0.02) drawHex(x, y, size, alpha, color);
+        }
       }
 
-      for (let i = 0; i < 50; i++) {
-        const angle = (i / 50) * Math.PI * 2 + time;
-        const distance = 100 + Math.sin(time * 2 + i) * 60;
-        const x = centerX + Math.cos(angle) * distance;
-        const y = centerY + Math.sin(angle) * distance;
-        const size = 1.5 + Math.sin(time * 3 + i) * 1.5;
-        const particleColor = isListening ? '34, 211, 238' : isSpeaking ? '236, 72, 153' : '147, 51, 234';
-        ctx.fillStyle = `rgba(${particleColor}, ${0.7 + Math.sin(time + i) * 0.3})`;
-        ctx.beginPath();
-        ctx.arc(x, y, size, 0, Math.PI * 2);
-        ctx.fill();
-      }
-
-      const coreRadius = 40 + Math.sin(time * 2) * 15 * pulseIntensity;
-      const gradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, coreRadius);
-      gradient.addColorStop(0, isListening ? 'rgba(34, 211, 238, 0.9)' : isSpeaking ? 'rgba(236, 72, 153, 0.9)' : 'rgba(147, 51, 234, 0.8)');
-      gradient.addColorStop(0.5, 'rgba(236, 72, 153, 0.4)');
-      gradient.addColorStop(1, 'rgba(236, 72, 153, 0)');
-      ctx.fillStyle = gradient;
-      ctx.beginPath();
-      ctx.arc(centerX, centerY, coreRadius, 0, Math.PI * 2);
-      ctx.fill();
+      // Soft radial glow at centre
+      const grad = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, 220);
+      grad.addColorStop(0, isListening ? 'rgba(34,211,238,0.12)' : isSpeaking ? 'rgba(236,72,153,0.12)' : 'rgba(147,51,234,0.08)');
+      grad.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       animationId = requestAnimationFrame(draw);
     };
