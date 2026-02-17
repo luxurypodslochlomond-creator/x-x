@@ -1,11 +1,6 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Mic, MicOff, Send, Loader2, Volume2, VolumeX, ArrowLeft } from 'lucide-react';
-import { base44 } from '@/api/base44Client';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
-import AI51AtomIcon from '@/components/ai51/AI51AtomIcon';
-import { useAI51Memory } from '@/components/ai51/AI51MemoryLoader';
 
 /**
  * TALK TO AI51 - VOICE + TEXT INTERFACE
