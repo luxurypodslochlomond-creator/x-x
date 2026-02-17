@@ -278,9 +278,9 @@ Help them - mission first, but be useful for anything. If this is BRO51, greet h
               >
                 <AI51AtomIcon size={100} animate={true} />
               </motion.div>
-              <p className="text-cyan-400 text-lg font-mono mt-6">{greeting}, {firstName}.</p>
+              <p className="text-cyan-400 text-lg font-sans mt-6">{greeting}, {firstName}.</p>
               <motion.p 
-                className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-purple-400 to-cyan-400 mt-4"
+                className="text-3xl font-sans font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-purple-400 to-cyan-400 mt-4"
                 animate={{ backgroundPosition: ['0%', '100%', '0%'] }}
                 transition={{ duration: 5, repeat: Infinity }}
                 style={{ backgroundSize: '200% 200%' }}
