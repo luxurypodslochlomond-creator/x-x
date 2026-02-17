@@ -199,7 +199,7 @@ export default function AI51() {
   };
 
   const sendVoiceMessage = async (transcript) => {
-    if (!transcript?.trim() || isProcessing) return;
+    if (!transcript?.trim() || isProcessingRef.current) return;
     setInputText('');
     await sendMessageContent(transcript.trim());
   };
