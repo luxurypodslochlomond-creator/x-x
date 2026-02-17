@@ -169,13 +169,13 @@ export default function AdminStrategicNotes() {
               </div>
 
               <div className="bg-black/60 border-2 border-white/30 rounded-xl p-6">
-                <p className="text-white font-bold text-xl mb-4 text-center">EMAIL DRAFT - COPY THIS:</p>
+                <p className="text-white font-bold text-xl mb-4 text-center">RESPONSE EMAIL - COPY THIS:</p>
                 <div className="bg-gray-900/60 p-4 rounded-lg border border-white/20">
                   <p className="text-sm text-gray-300 mb-3"><strong className="text-white">Subject:</strong> Re: Reference 5521482 - Update Request</p>
                   <div className="text-sm text-white space-y-3">
-                    <p>Dear Raj / Specialised Support Team,</p>
-                    <p>Thank you for the 30-day breathing space and for working with me through this difficult time.</p>
-                    <p>I'm writing to update you as we approach the end of February. I'm still rebuilding after the bereavement and managing my mental health, but I'm making steady progress. The combination of caring for my kids and the relationship situation means I need a bit more time to get back on solid ground sustainably.</p>
+                    <p>Dear N Ahmad / Specialised Support Team,</p>
+                    <p>Thank you for getting back to me and updating my file.</p>
+                    <p>As we discussed, I'm still rebuilding after the bereavement and managing my mental health. I'm making steady progress with my family, but the combination of caring for my kids and the relationship situation means I need a bit more time to get back on solid ground sustainably.</p>
                     <p>Would it be possible to arrange another 30-day breathing space? I'm fully committed to resolving this - I just need to do it in a way that's sustainable for my family and my wellbeing.</p>
                     <p>I really appreciate your understanding that written communication works better for me during this time.</p>
                     <p>Thank you for your continued support.</p>
