@@ -257,8 +257,12 @@ Help them - mission first, but be useful for anything. If this is BRO51, greet h
       speak(errorMsg);
     } finally {
       setIsProcessing(false);
+      isProcessingRef.current = false;
     }
   };
+
+  // Keep ref in sync
+  sendMessageContentRef.current = sendMessageContent;
 
   const handleKeyPress = (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
