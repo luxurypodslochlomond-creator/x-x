@@ -427,12 +427,24 @@ Help them - mission first, but be useful for anything. If this is BRO51, greet h
             animate={{ scale: [1, 1.05, 1], opacity: [0.2, 0.5, 0.2] }}
             transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }} />
 
-          {isProcessing
-            ? <Loader2 className="w-10 h-10 text-white relative z-10" style={{ opacity: 0.9 }} />
-            : isListening
-              ? <MicOff className="w-10 h-10 text-white relative z-10" style={{ filter: 'drop-shadow(0 0 8px rgba(255,255,255,0.8))' }} />
-              : <Mic className="w-10 h-10 text-white relative z-10" style={{ filter: 'drop-shadow(0 0 8px rgba(255,255,255,0.6))' }} />
-          }
+          {isProcessing ? (
+            <Loader2 className="w-10 h-10 text-white relative z-10 animate-spin" style={{ opacity: 0.9 }} />
+          ) : (
+            <motion.div
+              className="relative z-10"
+              animate={isListening ? { scale: [1, 1.2, 1] } : { scale: 1 }}
+              transition={{ duration: 0.6, repeat: isListening ? Infinity : 0 }}
+            >
+              {/* Clean pure dot — no mic icon, just presence */}
+              <div style={{
+                width: 20,
+                height: 20,
+                borderRadius: '50%',
+                background: isListening ? 'rgba(255,255,255,1)' : 'rgba(255,255,255,0.85)',
+                boxShadow: isListening ? '0 0 20px rgba(255,255,255,0.9)' : '0 0 12px rgba(255,255,255,0.5)',
+              }} />
+            </motion.div>
+          )}
         </motion.button>
 
         {/* TYPE INPUT */}
