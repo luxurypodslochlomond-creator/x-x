@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Mic, MicOff, Send, Loader2, Volume2, VolumeX } from 'lucide-react';
+import { Mic, MicOff, Send, Loader2, Volume2, VolumeX, ChevronLeft } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { createPageUrl } from '@/utils';
 import { base44 } from '@/api/base44Client';
 import AI51AtomIcon from '@/components/ai51/AI51AtomIcon';
 import { useAI51Memory } from '@/components/ai51/AI51MemoryLoader';
