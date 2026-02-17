@@ -372,10 +372,12 @@ Help them - mission first, but be useful for anything. If this is BRO51, greet h
           <div className="flex gap-2 items-center">
             <button
               onClick={() => {
-                setVoiceEnabled(!voiceEnabled);
-                if (!voiceEnabled) stopSpeaking();
+                const next = !voiceEnabled;
+                setVoiceEnabled(next);
+                if (!next) stopSpeaking();
               }}
               className="p-3 rounded-lg hover:bg-white/10 transition-colors"
+              title={voiceEnabled ? 'Mute voice' : 'Enable voice'}
             >
               {voiceEnabled ? (
                 <Volume2 className="w-5 h-5 text-cyan-400" />
