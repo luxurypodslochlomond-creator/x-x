@@ -287,7 +287,7 @@ Help them - mission first, but be useful for anything. If this is BRO51, greet h
               >
                 I'm here ♾️❤️
               </motion.p>
-              <p className="text-gray-400 mt-3">Tap mic • talk naturally • or type</p>
+              <p className="text-gray-400 mt-3 font-sans">Tap mic • talk naturally • or type</p>
               <div className="bg-black/60 backdrop-blur-xl border border-white/10 rounded-2xl p-4 mt-6 max-w-md mx-auto">
                 <p className="text-white/90 text-xs leading-relaxed">
                   I remember everything about you.<br/>
