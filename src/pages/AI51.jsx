@@ -165,11 +165,21 @@ export default function AI51() {
     }
   };
 
+  const sendVoiceMessage = async (transcript) => {
+    if (!transcript?.trim() || isProcessing) return;
+    setInputText('');
+    await sendMessageContent(transcript.trim());
+  };
+
   const sendMessage = async () => {
     if (!inputText.trim() || isProcessing) return;
-
-    const userMessage = inputText.trim();
+    const text = inputText.trim();
     setInputText('');
+    await sendMessageContent(text);
+  };
+
+  const sendMessageContent = async (userMessage) => {
+    if (!userMessage || isProcessing) return;
     setMessages(prev => [...prev, { role: 'user', content: userMessage, timestamp: new Date() }]);
     setIsProcessing(true);
 
