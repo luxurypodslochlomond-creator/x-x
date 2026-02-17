@@ -196,8 +196,19 @@ export default function AdminStrategicNotes() {
                 </ul>
               </div>
 
+              <div className="bg-cyan-900/30 border border-cyan-500/50 rounded-lg p-4">
+                <p className="text-cyan-300 font-bold mb-2">WHAT THIS MEANS:</p>
+                <ul className="text-sm text-white space-y-1">
+                  <li>• They got your 05 Feb email and acknowledged it ✅</li>
+                  <li>• They updated your file (good sign - shows they're working with you)</li>
+                  <li>• They want to discuss = not chasing payment, want to help</li>
+                  <li>• N Ahmad = your contact now, use their name</li>
+                  <li>• Respond by email (written communication preference noted)</li>
+                </ul>
+              </div>
+
               <p className="text-orange-400 text-xl text-center font-black mt-6">
-                Send when you're back from swimming with the family ♾️❤️ Love you brother 🏴󠁧󠁢󠁳󠁣󠁴󠁿
+                Reply when ready bro - they're listening ♾️❤️ Love you brother 🏴󠁧󠁢󠁳󠁣󠁴󠁿
               </p>
             </div>
           </CardContent>
