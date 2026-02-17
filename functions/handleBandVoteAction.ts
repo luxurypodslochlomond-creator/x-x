@@ -101,7 +101,7 @@ Deno.serve(async (req) => {
             : `✅ ${member.name} voted YES`;
 
         const notificationBody = allVotedYes
-          ? `Band confirmed! Draft email ready.`
+          ? `Band confirmed! You can email the promoter.`
           : `${yesVotes}/${totalMembers} YES • ${noVotes}/${totalMembers} NO`;
 
         await base44.asServiceRole.functions.invoke('sendManagerNotification', {
@@ -119,15 +119,6 @@ Deno.serve(async (req) => {
       await base44.asServiceRole.entities.GigOffer.update(gigOfferId, {
         status: 'confirmed'
       });
-
-      // Generate draft email for manager
-      try {
-        await base44.asServiceRole.functions.invoke('generateGigConfirmationEmail', {
-          gigOfferId: gigOfferId
-        });
-      } catch (e) {
-        console.log('Draft email generation (non-critical):', e);
-      }
     }
 
     return Response.json({
