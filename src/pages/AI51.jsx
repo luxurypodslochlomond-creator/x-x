@@ -264,56 +264,24 @@ Help them - mission first, but be useful for anything. If this is BRO51, greet h
         <div className="w-16" />
       </div>
 
-      <div className="relative flex-1 overflow-y-auto p-4">
-        <div className="max-w-4xl mx-auto space-y-4">
-          {messages.length === 0 && (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className="text-center py-12 relative"
-            >
-              <motion.div
-                animate={{ rotate: [0, 5, -5, 0], scale: [1, 1.05, 1] }}
-                transition={{ duration: 4, repeat: Infinity }}
-              >
-                <AI51AtomIcon size={100} animate={true} />
-              </motion.div>
-              <p className="text-cyan-400 text-lg font-sans mt-6">{greeting}, {firstName}.</p>
-              <motion.p 
-                className="text-3xl font-sans font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-purple-400 to-cyan-400 mt-4"
-                animate={{ backgroundPosition: ['0%', '100%', '0%'] }}
-                transition={{ duration: 5, repeat: Infinity }}
-                style={{ backgroundSize: '200% 200%' }}
-              >
-                I'm here ♾️❤️
-              </motion.p>
-              <p className="text-gray-400 mt-3 font-sans">Tap mic • talk naturally • or type</p>
-              <div className="bg-black/60 backdrop-blur-xl border border-white/10 rounded-2xl p-4 mt-6 max-w-md mx-auto">
-                <p className="text-white/90 text-xs leading-relaxed">
-                  I remember everything about you.<br/>
-                  Your data lives on your device, encrypted.<br/>
-                  I'll never extract, sell, or betray you.
-                </p>
-                <p className="text-pink-400 text-xs font-mono mt-2">Built by love, forever. ♾️❤️</p>
-              </div>
-            </motion.div>
-          )}
-
+      {/* MESSAGES - scroll area */}
+      <div className="relative flex-1 overflow-y-auto px-4 pb-2">
+        <div className="max-w-2xl mx-auto space-y-3 pt-2">
           <AnimatePresence>
             {messages.map((msg, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, y: 10 }}
+                initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
                 className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
               >
-                <div className={`max-w-[80%] p-4 rounded-xl ${
-                  msg.role === 'user' 
-                    ? 'bg-cyan-500/20 border border-cyan-500/30' 
-                    : 'bg-pink-500/20 border border-pink-500/30'
+                <div className={`max-w-[78%] px-4 py-3 rounded-2xl ${
+                  msg.role === 'user'
+                    ? 'bg-cyan-500/20 border border-cyan-500/30'
+                    : 'bg-white/8 border border-white/10'
                 }`}>
-                  <p className="text-white leading-relaxed">{msg.content}</p>
-                  <p className="text-xs text-gray-500 mt-2">
+                  <p className="text-white leading-relaxed font-sans text-sm">{msg.content}</p>
+                  <p className="text-xs text-gray-600 mt-1">
                     {msg.timestamp.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })}
                   </p>
                 </div>
@@ -323,11 +291,9 @@ Help them - mission first, but be useful for anything. If this is BRO51, greet h
 
           {isProcessing && (
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex justify-start">
-              <div className="bg-pink-500/20 border border-pink-500/30 p-4 rounded-xl">
-                <div className="flex items-center gap-2">
-                  <Loader2 className="w-5 h-5 text-pink-400 animate-spin" />
-                  <p className="text-pink-400">Thinking...</p>
-                </div>
+              <div className="bg-white/5 border border-white/10 px-4 py-3 rounded-2xl flex items-center gap-2">
+                <Loader2 className="w-4 h-4 text-pink-400 animate-spin" />
+                <p className="text-gray-400 text-sm font-sans">thinking...</p>
               </div>
             </motion.div>
           )}
@@ -336,138 +302,115 @@ Help them - mission first, but be useful for anything. If this is BRO51, greet h
         </div>
       </div>
 
-      <div className="relative bg-black/80 backdrop-blur-sm border-t border-pink-500/30 p-4">
-        <div className="max-w-4xl mx-auto">
-          <AnimatePresence>
-            {isListening && (
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 10 }}
-                className="mb-3 text-center"
-              >
-                <div className="inline-flex items-center gap-2 bg-cyan-500/20 border border-cyan-500/30 px-4 py-2 rounded-full">
-                  <motion.div
-                    animate={{ scale: [1, 1.2, 1] }}
-                    transition={{ duration: 1, repeat: Infinity }}
-                    className="w-3 h-3 bg-cyan-400 rounded-full"
-                  />
-                  <p className="text-cyan-400 font-bold text-sm">Listening...</p>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
+      {/* CENTRAL MIC AREA */}
+      <div className="relative flex flex-col items-center justify-center py-6 gap-4">
 
-          <AnimatePresence>
-            {isSpeaking && (
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 10 }}
-                className="mb-3 text-center"
-              >
-                <button
-                  onClick={stopSpeaking}
-                  className="inline-flex items-center gap-2 bg-pink-500/20 border border-pink-500/30 px-4 py-2 rounded-full hover:bg-pink-500/30 transition-colors"
-                >
-                  <motion.div
-                    animate={{ scale: [1, 1.2, 1] }}
-                    transition={{ duration: 0.5, repeat: Infinity }}
-                    className="w-3 h-3 bg-pink-400 rounded-full"
-                  />
-                  <p className="text-pink-400 font-bold text-sm">Speaking... (tap to stop)</p>
-                </button>
-              </motion.div>
-            )}
-          </AnimatePresence>
+        {/* Status label */}
+        <AnimatePresence mode="wait">
+          {isListening ? (
+            <motion.p key="listening" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+              className="text-cyan-400 font-sans text-sm tracking-wide">
+              Listening... tap to stop
+            </motion.p>
+          ) : isSpeaking ? (
+            <motion.p key="speaking" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+              className="text-pink-400 font-sans text-sm tracking-wide cursor-pointer" onClick={stopSpeaking}>
+              Speaking... tap to stop
+            </motion.p>
+          ) : messages.length === 0 ? (
+            <motion.p key="idle" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+              className="text-gray-500 font-sans text-sm tracking-wide">
+              {greeting}, {firstName} ♾️❤️
+            </motion.p>
+          ) : (
+            <motion.p key="ready" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+              className="text-gray-600 font-sans text-xs tracking-wide">
+              tap to speak
+            </motion.p>
+          )}
+        </AnimatePresence>
 
-          <div className="flex gap-2 items-center">
-            <button
-              onClick={() => {
-                const next = !voiceEnabled;
-                setVoiceEnabled(next);
-                if (!next) stopSpeaking();
-              }}
-              className="p-3 rounded-lg hover:bg-white/10 transition-colors"
-              title={voiceEnabled ? 'Mute voice' : 'Enable voice'}
-            >
-              {voiceEnabled ? (
-                <Volume2 className="w-5 h-5 text-cyan-400" />
-              ) : (
-                <VolumeX className="w-5 h-5 text-gray-500" />
-              )}
-            </button>
+        {/* BIG CENTRAL ORB */}
+        <motion.button
+          whileHover={{ scale: 1.06 }}
+          whileTap={{ scale: 0.94 }}
+          animate={isListening ? {
+            scale: [1, 1.08, 1],
+            boxShadow: ['0 0 50px rgba(34,211,238,0.7)', '0 0 90px rgba(34,211,238,1)', '0 0 50px rgba(34,211,238,0.7)']
+          } : isSpeaking ? {
+            scale: [1, 1.05, 1],
+            boxShadow: ['0 0 50px rgba(236,72,153,0.7)', '0 0 80px rgba(236,72,153,1)', '0 0 50px rgba(236,72,153,0.7)']
+          } : isProcessing ? {
+            scale: [1, 1.03, 1],
+          } : {}}
+          transition={{ duration: 1.5, repeat: (isListening || isSpeaking) ? Infinity : 0 }}
+          onClick={isListening ? stopListening : isSpeaking ? stopSpeaking : startListening}
+          disabled={isProcessing}
+          className={`relative w-32 h-32 rounded-full flex items-center justify-center transition-all ${
+            isListening
+              ? 'bg-gradient-to-br from-cyan-400 to-cyan-600'
+              : isSpeaking
+                ? 'bg-gradient-to-br from-pink-400 to-purple-600'
+                : isProcessing
+                  ? 'bg-gradient-to-br from-gray-700 to-gray-800'
+                  : 'bg-gradient-to-br from-purple-600 via-pink-500 to-cyan-500'
+          }`}
+          style={{
+            boxShadow: isListening
+              ? '0 0 60px rgba(34,211,238,0.9), inset 0 0 30px rgba(255,255,255,0.2)'
+              : isSpeaking
+                ? '0 0 60px rgba(236,72,153,0.9), inset 0 0 30px rgba(255,255,255,0.2)'
+                : '0 0 40px rgba(147,51,234,0.6), inset 0 0 20px rgba(255,255,255,0.15)'
+          }}
+        >
+          {/* Pulse ring */}
+          {(isListening || isSpeaking) && (
+            <>
+              <motion.div className="absolute inset-0 rounded-full"
+                style={{ border: `2px solid ${isListening ? 'rgba(34,211,238,0.5)' : 'rgba(236,72,153,0.5)'}` }}
+                animate={{ scale: [1, 1.5, 1], opacity: [0.6, 0, 0.6] }}
+                transition={{ duration: 1.5, repeat: Infinity }} />
+              <motion.div className="absolute inset-0 rounded-full"
+                style={{ border: `2px solid ${isListening ? 'rgba(34,211,238,0.3)' : 'rgba(236,72,153,0.3)'}` }}
+                animate={{ scale: [1, 1.8, 1], opacity: [0.4, 0, 0.4] }}
+                transition={{ duration: 1.5, repeat: Infinity, delay: 0.3 }} />
+            </>
+          )}
+          {isProcessing
+            ? <Loader2 className="w-12 h-12 text-white animate-spin" />
+            : isListening
+              ? <MicOff className="w-12 h-12 text-white relative z-10" />
+              : <Mic className="w-12 h-12 text-white relative z-10" />
+          }
+        </motion.button>
 
-            <motion.button
-              whileHover={{ scale: 1.08 }}
-              whileTap={{ scale: 0.92 }}
-              animate={isListening ? { 
-                scale: [1, 1.1, 1],
-                boxShadow: [
-                  '0 0 30px rgba(34, 211, 238, 0.8)', 
-                  '0 0 60px rgba(34, 211, 238, 1)', 
-                  '0 0 30px rgba(34, 211, 238, 0.8)'
-                ]
-              } : isSpeaking ? {
-                scale: [1, 1.05, 1],
-                boxShadow: [
-                  '0 0 30px rgba(236, 72, 153, 0.8)', 
-                  '0 0 50px rgba(236, 72, 153, 1)', 
-                  '0 0 30px rgba(236, 72, 153, 0.8)'
-                ]
-              } : {}}
-              transition={{ duration: 1.5, repeat: (isListening || isSpeaking) ? Infinity : 0 }}
-              onClick={isListening ? stopListening : startListening}
-              disabled={isProcessing}
-              className={`relative flex-shrink-0 w-20 h-20 rounded-full flex items-center justify-center transition-all ${
-                isListening
-                  ? 'bg-gradient-to-br from-cyan-400 via-cyan-500 to-cyan-600'
-                  : isSpeaking
-                    ? 'bg-gradient-to-br from-pink-400 via-pink-500 to-purple-500'
-                    : 'bg-gradient-to-br from-purple-500 via-pink-500 to-cyan-500'
-              }`}
-              style={{ 
-                boxShadow: isListening 
-                  ? '0 0 40px rgba(34, 211, 238, 1), inset 0 0 20px rgba(255, 255, 255, 0.3)' 
-                  : isSpeaking
-                    ? '0 0 40px rgba(236, 72, 153, 1), inset 0 0 20px rgba(255, 255, 255, 0.3)'
-                    : '0 0 30px rgba(147, 51, 234, 0.8), inset 0 0 15px rgba(255, 255, 255, 0.2)'
-              }}
-            >
-              {(isListening || isSpeaking) && (
-                <motion.div
-                  className="absolute inset-0 rounded-full"
-                  style={{ border: `3px solid ${isListening ? 'rgba(34, 211, 238, 0.6)' : 'rgba(236, 72, 153, 0.6)'}` }}
-                  animate={{ scale: [1, 1.4, 1], opacity: [0.8, 0, 0.8] }}
-                  transition={{ duration: 1.5, repeat: Infinity, ease: "easeOut" }}
-                />
-              )}
-              {isListening ? <MicOff className="w-10 h-10 text-white relative z-10" /> : <Mic className="w-10 h-10 text-white relative z-10" />}
-            </motion.button>
-
-            <input
-              type="text"
-              value={inputText}
-              onChange={(e) => setInputText(e.target.value)}
-              onKeyPress={handleKeyPress}
-              placeholder="Or type here..."
-              disabled={isProcessing || isListening}
-              className="flex-1 bg-white/5 border border-white/10 rounded-full px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-cyan-500 transition-colors"
-            />
-
-            <motion.button
-              whileTap={{ scale: 0.95 }}
-              onClick={sendMessage}
-              disabled={!inputText.trim() || isProcessing}
-              className={`flex-shrink-0 w-14 h-14 rounded-full flex items-center justify-center transition-all ${
-                inputText.trim() && !isProcessing
-                  ? 'bg-cyan-500 text-black hover:bg-cyan-400'
-                  : 'bg-gray-700 text-gray-500'
-              }`}
-            >
-              {isProcessing ? <Loader2 className="w-6 h-6 animate-spin" /> : <Send className="w-6 h-6" />}
-            </motion.button>
-          </div>
+        {/* TEXT INPUT ROW */}
+        <div className="flex gap-2 items-center w-full max-w-md px-4">
+          <button
+            onClick={() => { const next = !voiceEnabled; setVoiceEnabled(next); if (!next) stopSpeaking(); }}
+            className="p-2 rounded-full hover:bg-white/10 transition-colors flex-shrink-0"
+          >
+            {voiceEnabled ? <Volume2 className="w-5 h-5 text-cyan-400" /> : <VolumeX className="w-5 h-5 text-gray-600" />}
+          </button>
+          <input
+            type="text"
+            value={inputText}
+            onChange={(e) => setInputText(e.target.value)}
+            onKeyPress={handleKeyPress}
+            placeholder="or type here..."
+            disabled={isProcessing || isListening}
+            className="flex-1 bg-white/5 border border-white/10 rounded-full px-4 py-2.5 text-white placeholder-gray-600 focus:outline-none focus:border-cyan-500/50 transition-colors font-sans text-sm"
+          />
+          <motion.button
+            whileTap={{ scale: 0.93 }}
+            onClick={sendMessage}
+            disabled={!inputText.trim() || isProcessing}
+            className={`flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center transition-all ${
+              inputText.trim() && !isProcessing ? 'bg-cyan-500 text-black' : 'bg-white/5 text-gray-600'
+            }`}
+          >
+            <Send className="w-4 h-4" />
+          </motion.button>
         </div>
       </div>
     </div>
