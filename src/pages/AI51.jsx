@@ -34,12 +34,26 @@ export default function AI51() {
     else if (hour >= 17 && hour < 22) timeGreeting = "Evening";
     else timeGreeting = "Late night";
     setGreeting(timeGreeting);
-    
+
     base44.auth.me()
       .then(user => {
         if (user?.full_name) setFirstName(user.full_name.split(' ')[0]);
       })
       .catch(() => {});
+  }, []);
+
+  // LIVING CLOCK — local time + date in detected language
+  useEffect(() => {
+    const tick = () => {
+      const now = new Date();
+      const locale = navigator.language || 'en';
+      const time = now.toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+      const date = now.toLocaleDateString(locale, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+      setClock({ time, date, lang: locale });
+    };
+    tick();
+    const id = setInterval(tick, 1000);
+    return () => clearInterval(id);
   }, []);
 
   useEffect(() => {
