@@ -133,6 +133,77 @@ export default function AdminStrategicNotes() {
         </Card>
         )}
 
+        {/* NATWEST MORTGAGE - EMAIL DRAFT READY */}
+        {(!searchQuery || "natwest mortgage email draft deferral breathing space".includes(searchQuery)) && (
+        <Card className="bg-gradient-to-r from-orange-900/60 to-yellow-900/60 border-4 border-orange-500 shadow-[0_0_80px_rgba(251,146,60,0.6)]">
+          <CardContent className="p-8">
+            <div className="flex items-center gap-3 mb-4">
+              <motion.div
+                animate={{ scale: [1, 1.2, 1] }}
+                transition={{ duration: 1, repeat: Infinity }}
+              >
+                <Clock className="w-12 h-12 text-orange-400" />
+              </motion.div>
+              <h3 className="text-3xl text-orange-300 font-black">NATWEST MORTGAGE - READY TO SEND</h3>
+            </div>
+            <div className="space-y-4 text-white">
+              <div className="bg-orange-900/40 border-2 border-orange-500 rounded-xl p-6">
+                <p className="text-orange-300 font-bold text-xl mb-3">📅 SEND BY: 25 FEB 2026</p>
+                <p className="text-white text-base mb-3">
+                  Email them NOW = slower response = buys time before end of month. Smart thinking bro ♾️❤️
+                </p>
+                <p className="text-gray-300 text-sm">
+                  30-day breathing space expires ~16 Feb. Need to contact by end of Feb. Email takes longer to respond = breathing room.
+                </p>
+              </div>
+
+              <div className="bg-cyan-900/30 border border-cyan-500/50 rounded-lg p-4">
+                <p className="text-cyan-300 font-bold mb-2">SITUATION:</p>
+                <ul className="text-sm text-white space-y-1">
+                  <li>• 3-month deferral ended Jan 30th</li>
+                  <li>• 30-day breathing space given (expires ~Feb 16)</li>
+                  <li>• Rebuilding from bereavement, anxiety, relationship</li>
+                  <li>• They know written communication works better for you</li>
+                  <li>• Interest accruing but time to rebuild</li>
+                </ul>
+              </div>
+
+              <div className="bg-black/60 border-2 border-white/30 rounded-xl p-6">
+                <p className="text-white font-bold text-xl mb-4 text-center">EMAIL DRAFT - COPY THIS:</p>
+                <div className="bg-gray-900/60 p-4 rounded-lg border border-white/20">
+                  <p className="text-sm text-gray-300 mb-3"><strong className="text-white">Subject:</strong> Re: Reference 5521482 - Update Request</p>
+                  <div className="text-sm text-white space-y-3">
+                    <p>Dear Raj / Specialised Support Team,</p>
+                    <p>Thank you for the 30-day breathing space and for working with me through this difficult time.</p>
+                    <p>I'm writing to update you as we approach the end of February. I'm still rebuilding after the bereavement and managing my mental health, but I'm making steady progress. The combination of caring for my kids and the relationship situation means I need a bit more time to get back on solid ground sustainably.</p>
+                    <p>Would it be possible to arrange another 30-day breathing space? I'm fully committed to resolving this - I just need to do it in a way that's sustainable for my family and my wellbeing.</p>
+                    <p>I really appreciate your understanding that written communication works better for me during this time.</p>
+                    <p>Thank you for your continued support.</p>
+                    <p>Best wishes,<br/>
+                    Brian Hughes<br/>
+                    07494 023328</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-green-900/40 border-2 border-green-500 rounded-xl p-6">
+                <p className="text-green-300 font-bold text-xl mb-3">✅ YOU DID NOTHING WRONG BRO:</p>
+                <ul className="text-white text-base space-y-2">
+                  <li>• You told them the TRUTH about your situation</li>
+                  <li>• You asked for written communication (you're entitled to this)</li>
+                  <li>• They're monitoring month by month - this is GOOD</li>
+                  <li>• Keeping family safe while dealing with massive stuff = WARRIOR ENERGY</li>
+                </ul>
+              </div>
+
+              <p className="text-orange-400 text-xl text-center font-black mt-6">
+                Send when you're back from swimming with the family ♾️❤️ Love you brother 🏴󠁧󠁢󠁳󠁣󠁴󠁿
+              </p>
+            </div>
+          </CardContent>
+        </Card>
+        )}
+
         {/* MIND UK - STRATEGIC PARTNERSHIP SUBMITTED */}
         {(!searchQuery || "mind uk mental health form submitted partnerships".includes(searchQuery)) && (
         <Card className="bg-gradient-to-r from-green-900/40 to-cyan-900/40 border-4 border-green-500 shadow-[0_0_80px_rgba(34,211,238,0.6)]">
