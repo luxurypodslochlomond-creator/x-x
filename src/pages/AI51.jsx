@@ -118,9 +118,12 @@ export default function AI51() {
     recognition.onresult = (event) => {
       const last = event.results.length - 1;
       const transcript = event.results[last][0].transcript;
+      // Show live transcript as you speak
+      setInputText(transcript);
       if (event.results[last].isFinal) {
-        setInputText(transcript);
         setIsListening(false);
+        // Auto-send when done speaking
+        sendVoiceMessage(transcript);
       }
     };
     recognition.onerror = () => setIsListening(false);
