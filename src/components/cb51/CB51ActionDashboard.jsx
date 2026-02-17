@@ -5,7 +5,7 @@ import { CheckCircle, Clock, Users, Mail, ChevronRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
-import CB51DraftEmailsInline from './CB51DraftEmailsInline.jsx';
+
 
 /**
  * CB51 ACTION DASHBOARD
@@ -15,7 +15,7 @@ import CB51DraftEmailsInline from './CB51DraftEmailsInline.jsx';
 
 export default function CB51ActionDashboard({ artistId }) {
   const navigate = useNavigate();
-  const [showDraftModal, setShowDraftModal] = React.useState(false);
+
   const queryClient = useQueryClient();
 
   // Pending gig approvals
@@ -48,7 +48,7 @@ export default function CB51ActionDashboard({ artistId }) {
     refetchInterval: 5000
   });
 
-  // Confirmed gigs waiting for email
+  // Confirmed gigs (no longer showing as action - manager handles email)
   const { data: confirmedGigs = [] } = useQuery({
     queryKey: ['confirmedGigs', artistId],
     queryFn: () => base44.entities.GigOffer.filter({ 
@@ -87,18 +87,7 @@ export default function CB51ActionDashboard({ artistId }) {
     });
   }
 
-  // READY: Draft emails
-  if (confirmedGigs.length > 0) {
-    actions.push({
-      id: 'draft-email',
-      title: `${confirmedGigs.length} draft email${confirmedGigs.length > 1 ? 's' : ''} ready`,
-      subtitle: 'Tap to copy & send',
-      icon: Mail,
-      color: 'green',
-      priority: 3,
-      action: () => setShowDraftModal(true)
-    });
-  }
+  // Confirmed gigs removed from actions - manager handles email himself
 
   if (actions.length === 0) {
     return (
@@ -142,14 +131,7 @@ export default function CB51ActionDashboard({ artistId }) {
         })}
       </div>
 
-      <AnimatePresence>
-        {showDraftModal && (
-          <CB51DraftEmailsInline
-            artistId={artistId}
-            onClose={() => setShowDraftModal(false)}
-          />
-        )}
-      </AnimatePresence>
+
     </>
   );
 }
