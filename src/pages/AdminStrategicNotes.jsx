@@ -148,12 +148,12 @@ export default function AdminStrategicNotes() {
             </div>
             <div className="space-y-4 text-white">
               <div className="bg-orange-900/40 border-2 border-orange-500 rounded-xl p-6">
-                <p className="text-orange-300 font-bold text-xl mb-3">📅 SEND BY: 25 FEB 2026</p>
+                <p className="text-orange-300 font-bold text-xl mb-3">📅 UPDATE 17 FEB 2026</p>
                 <p className="text-white text-base mb-3">
-                  Email them NOW = slower response = buys time before end of month. Smart thinking bro ♾️❤️
+                  They responded same day (05 Feb). They got your email and updated file. Now asking: "Please contact us so we can discuss your circumstances"
                 </p>
                 <p className="text-gray-300 text-sm">
-                  30-day breathing space expires ~16 Feb. Need to contact by end of Feb. Email takes longer to respond = breathing room.
+                  From: N Ahmad, Specialised Support Team. They're ready to talk. 30-day breathing space expired ~16 Feb.
                 </p>
               </div>
 
