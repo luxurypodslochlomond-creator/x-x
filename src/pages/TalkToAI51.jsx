@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 
-// Redirects to AI51 (the real one)
 export default function TalkToAI51() {
   const navigate = useNavigate();
   useEffect(() => { navigate(createPageUrl('AI51'), { replace: true }); }, []);
