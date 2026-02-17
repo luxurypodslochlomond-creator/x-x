@@ -122,7 +122,10 @@ export default function AI51() {
     return () => cancelAnimationFrame(animationId);
   }, [isListening, isSpeaking]);
 
-  // SPEECH RECOGNITION
+  // Keep a ref to sendMessageContent so speech recognition always calls latest version
+  const sendMessageContentRef = useRef(null);
+
+  // SPEECH RECOGNITION — built once, uses ref to avoid stale closure
   useEffect(() => {
     if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) return;
 
@@ -130,25 +133,29 @@ export default function AI51() {
     const recognition = new SpeechRecognition();
     recognition.continuous = false;
     recognition.interimResults = true;
-    recognition.lang = 'en-GB';
+    recognition.lang = navigator.language || 'en-GB';
 
     recognition.onstart = () => setIsListening(true);
     recognition.onresult = (event) => {
       const last = event.results.length - 1;
       const transcript = event.results[last][0].transcript;
-      // Show live transcript as you speak
       setInputText(transcript);
       if (event.results[last].isFinal) {
         setIsListening(false);
-        // Auto-send when done speaking
-        sendVoiceMessage(transcript);
+        setInputText('');
+        if (sendMessageContentRef.current) {
+          sendMessageContentRef.current(transcript.trim());
+        }
       }
     };
-    recognition.onerror = () => setIsListening(false);
+    recognition.onerror = (e) => {
+      console.warn('Speech error:', e.error);
+      setIsListening(false);
+    };
     recognition.onend = () => setIsListening(false);
 
     recognitionRef.current = recognition;
-    return () => { if (recognitionRef.current) recognitionRef.current.stop(); };
+    return () => { try { recognition.stop(); } catch(_) {} };
   }, []);
 
   const startListening = async () => {
