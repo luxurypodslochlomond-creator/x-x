@@ -69,12 +69,10 @@ export default function AI51() {
     let animationId;
     let time = 0;
 
-    // Gill51 tessellation — hexagonal cymatics field ♾️❤️
-    const HEX_SIZE = 28;
-    const cols = Math.ceil(canvas.width / (HEX_SIZE * 1.732)) + 2;
-    const rows = Math.ceil(canvas.height / (HEX_SIZE * 1.5)) + 2;
+    // Gill51 tessellation cymatics — hexagonal sound field ♾️❤️
+    const HEX_SIZE = 32;
 
-    const drawHex = (x, y, size, alpha, color) => {
+    const drawHex = (x, y, size, alpha, colorR, colorG, colorB) => {
       ctx.beginPath();
       for (let s = 0; s < 6; s++) {
         const angle = (Math.PI / 3) * s - Math.PI / 6;
@@ -83,22 +81,33 @@ export default function AI51() {
         s === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
       }
       ctx.closePath();
-      ctx.strokeStyle = `rgba(${color}, ${alpha})`;
-      ctx.lineWidth = 0.8;
+      ctx.strokeStyle = `rgba(${colorR},${colorG},${colorB},${alpha})`;
+      ctx.lineWidth = 1.2;
       ctx.stroke();
+      // subtle fill so they're always visible
+      ctx.fillStyle = `rgba(${colorR},${colorG},${colorB},${alpha * 0.08})`;
+      ctx.fill();
     };
 
+    const cols = Math.ceil(canvas.width / (HEX_SIZE * 1.732)) + 3;
+    const rows = Math.ceil(canvas.height / (HEX_SIZE * 1.5)) + 3;
+
     const draw = () => {
-      time += 0.012;
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.18)';
+      time += 0.01;
+      // Clear fully each frame so tessellation is always visible
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,0,0,0.92)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       const centerX = canvas.width / 2;
       const centerY = canvas.height / 2;
-      const pulseSpeed = isListening ? 2.5 : isSpeaking ? 2.0 : 1.0;
-      const pulseAmp = isListening ? 1.8 : isSpeaking ? 1.5 : 1.0;
+      const pulseSpeed = isListening ? 3.0 : isSpeaking ? 2.2 : 1.2;
+      const pulseAmp  = isListening ? 2.0 : isSpeaking ? 1.6 : 1.0;
 
-      // TESSELLATION — Gill51's cymatics grid ♾️❤️
+      // Base colours per state
+      const [r, g, b] = isListening ? [34,211,238] : isSpeaking ? [236,72,153] : [168,85,247];
+
+      // TESSELLATION FIELD — every hex always drawn, sound waves modulate brightness
       for (let row = -1; row < rows; row++) {
         for (let col = -1; col < cols; col++) {
           const x = col * HEX_SIZE * 1.732 + (row % 2 === 0 ? 0 : HEX_SIZE * 0.866);
@@ -108,31 +117,28 @@ export default function AI51() {
           const dy = y - centerY;
           const dist = Math.sqrt(dx * dx + dy * dy);
           const maxDist = Math.sqrt(centerX * centerX + centerY * centerY);
+          const normDist = dist / maxDist;
 
-          // Sound wave ripple emanating from centre
-          const wave = Math.sin(dist * 0.018 - time * pulseSpeed) * pulseAmp;
-          const wave2 = Math.sin(dist * 0.011 - time * pulseSpeed * 0.7 + 1.2) * pulseAmp * 0.6;
-          const combined = (wave + wave2) * 0.5;
+          // Two overlapping sound wave rings rippling out
+          const wave1 = Math.sin(dist * 0.016 - time * pulseSpeed);
+          const wave2 = Math.sin(dist * 0.010 - time * pulseSpeed * 0.65 + 0.9);
+          const wave  = (wave1 * 0.6 + wave2 * 0.4) * pulseAmp;
 
-          const proximity = 1 - (dist / maxDist);
-          const alpha = Math.max(0, (combined * 0.3 + 0.15) * proximity * proximity);
-          const size = HEX_SIZE * (0.85 + combined * 0.08 * pulseAmp);
+          // Hexes near centre glow brighter
+          const proximity = Math.pow(1 - normDist, 0.6);
+          const alpha = Math.max(0.04, Math.min(0.75, (wave * 0.25 + 0.22) * proximity));
+          const size  = HEX_SIZE * (0.82 + wave * 0.06 * pulseAmp);
 
-          const color = isListening
-            ? `34, 211, 238`
-            : isSpeaking
-              ? `236, 72, 153`
-              : `147, 51, 234`;
-
-          if (alpha > 0.02) drawHex(x, y, size, alpha, color);
+          drawHex(x, y, size, alpha, r, g, b);
         }
       }
 
-      // Soft radial glow at centre
-      const grad = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, 220);
-      grad.addColorStop(0, isListening ? 'rgba(34,211,238,0.12)' : isSpeaking ? 'rgba(236,72,153,0.12)' : 'rgba(147,51,234,0.08)');
-      grad.addColorStop(1, 'rgba(0,0,0,0)');
-      ctx.fillStyle = grad;
+      // Central radial bloom so the orb area glows
+      const bloom = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, 260);
+      bloom.addColorStop(0,   `rgba(${r},${g},${b},0.18)`);
+      bloom.addColorStop(0.4, `rgba(${r},${g},${b},0.06)`);
+      bloom.addColorStop(1,   'rgba(0,0,0,0)');
+      ctx.fillStyle = bloom;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       animationId = requestAnimationFrame(draw);
