@@ -254,6 +254,16 @@ Help them - mission first, but be useful for anything. If this is BRO51, greet h
 
       <div className="fixed inset-0 bg-gradient-to-br from-purple-950/40 via-transparent to-cyan-950/40 pointer-events-none" />
 
+      {/* TOP BAR - back button + clean font */}
+      <div className="relative flex items-center justify-between px-4 pt-4 pb-2 z-10">
+        <Link to={createPageUrl('Welcome')} className="flex items-center gap-1 text-gray-500 hover:text-white transition-colors">
+          <ChevronLeft className="w-5 h-5" />
+          <span className="text-sm font-sans">UF51</span>
+        </Link>
+        <span className="text-white font-sans font-semibold tracking-wide text-sm">AI51</span>
+        <div className="w-16" />
+      </div>
+
       <div className="relative flex-1 overflow-y-auto p-4">
         <div className="max-w-4xl mx-auto space-y-4">
           {messages.length === 0 && (
