@@ -464,6 +464,26 @@ Help them - mission first, but be useful for anything. If this is BRO51, greet h
             </motion.button>
           )}
         </div>
+
+        {/* LIVING CLOCK — local time + date in device language */}
+        <div className="text-center pb-2" style={{ userSelect: 'none' }}>
+          <motion.p
+            className="font-sans tabular-nums"
+            style={{ 
+              fontSize: '11px',
+              letterSpacing: '0.25em',
+              color: 'rgba(255,255,255,0.18)',
+              fontVariantNumeric: 'tabular-nums'
+            }}
+            animate={{ opacity: [0.18, 0.32, 0.18] }}
+            transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+          >
+            {clock.time}
+          </motion.p>
+          <p className="font-sans mt-0.5" style={{ fontSize: '9px', letterSpacing: '0.15em', color: 'rgba(255,255,255,0.1)' }}>
+            {clock.date}
+          </p>
+        </div>
       </div>
     </div>
   );
