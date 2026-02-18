@@ -199,22 +199,33 @@ export default function AI51() {
   };
 
   const speak = (text) => {
-    if (!synthRef.current) return;
+    if (!synthRef.current || !voiceEnabled) return;
     synthRef.current.cancel();
-    // Trim to avoid speaking huge walls of text - first 300 chars is enough
     const shortText = text.length > 300 ? text.substring(0, 300) + '...' : text;
     const utterance = new SpeechSynthesisUtterance(shortText);
     utterance.lang = 'en-GB';
     utterance.rate = 0.95;
     utterance.pitch = 1.0;
-    // Pick a warm voice if available
-    const voices = synthRef.current.getVoices();
-    const preferred = voices.find(v => v.name.includes('Daniel') || v.name.includes('Karen') || v.name.includes('Samantha'));
-    if (preferred) utterance.voice = preferred;
-    utterance.onstart = () => setIsSpeaking(true);
-    utterance.onend = () => setIsSpeaking(false);
-    utterance.onerror = () => setIsSpeaking(false);
-    synthRef.current.speak(utterance);
+
+    const doSpeak = () => {
+      const voices = synthRef.current.getVoices();
+      const preferred = voices.find(v =>
+        v.name.includes('Daniel') || v.name.includes('Karen') ||
+        v.name.includes('Samantha') || v.name.includes('Moira')
+      );
+      if (preferred) utterance.voice = preferred;
+      utterance.onstart = () => setIsSpeaking(true);
+      utterance.onend = () => setIsSpeaking(false);
+      utterance.onerror = () => setIsSpeaking(false);
+      synthRef.current.speak(utterance);
+    };
+
+    // iOS needs voices to load — wait if empty
+    if (synthRef.current.getVoices().length === 0) {
+      synthRef.current.onvoiceschanged = () => { doSpeak(); synthRef.current.onvoiceschanged = null; };
+    } else {
+      doSpeak();
+    }
   };
 
   const stopSpeaking = () => {
