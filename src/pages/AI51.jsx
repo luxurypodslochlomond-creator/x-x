@@ -772,13 +772,19 @@ Science first. Love always. ♾️❤️`,
                 exit={{ opacity: 0 }}
                 className="text-center pt-12 space-y-3"
               >
-                <p className="text-white/25 font-sans text-xs tracking-[0.25em] uppercase">always here • tap the line to speak</p>
-                <div className="flex justify-center gap-2 flex-wrap px-4">
-                  {["How are you feeling?", "I need help", "Talk to me"].map((prompt) => (
+                <p className="text-white/25 font-sans text-xs tracking-[0.25em] uppercase">always here • voice or type • any language</p>
+                <div className="flex justify-center gap-2 flex-wrap px-4 max-w-sm mx-auto">
+                  {[
+                    "I'm struggling right now",
+                    "I'm in pain",
+                    "Just want to talk",
+                    "Help me think something through",
+                    "I feel alone",
+                  ].map((prompt) => (
                     <button
                       key={prompt}
-                      onClick={() => { setInputText(prompt); }}
-                      className="text-xs px-3 py-1.5 rounded-full border border-white/10 text-white/30 hover:text-white/60 hover:border-white/25 transition-all font-sans"
+                      onClick={() => sendMessageContent(prompt)}
+                      className="text-xs px-3 py-1.5 rounded-full border border-white/10 text-white/25 hover:text-white/60 hover:border-white/30 transition-all font-sans"
                     >
                       {prompt}
                     </button>
