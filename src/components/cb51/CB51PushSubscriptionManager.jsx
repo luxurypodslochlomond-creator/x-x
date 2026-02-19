@@ -183,12 +183,12 @@ self.addEventListener('notificationclick', (event) => {
         await subscription.unsubscribe();
 
         // Mark as inactive in database
-        const subs = await base44.entities.ScottPushSubscription.filter({
+        const subs = await base44.entities.UserPushSubscription.filter({
           user_email: userEmail
         });
 
         if (subs.length > 0) {
-          await base44.entities.ScottPushSubscription.update(subs[0].id, {
+          await base44.entities.UserPushSubscription.update(subs[0].id, {
             is_active: false
           });
         }
