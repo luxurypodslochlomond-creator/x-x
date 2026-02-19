@@ -809,9 +809,12 @@ Science first. Love always. ♾️❤️`,
                 <div className={`max-w-[80%] px-4 py-3 rounded-2xl backdrop-blur-md ${
                   msg.role === 'user'
                     ? 'bg-white/8 border border-white/15 rounded-br-sm'
-                    : 'bg-purple-950/50 border border-purple-400/20 rounded-bl-sm'
+                    : msg.offline
+                      ? 'bg-yellow-950/40 border border-yellow-500/20 rounded-bl-sm'
+                      : 'bg-purple-950/50 border border-purple-400/20 rounded-bl-sm'
                 }`}>
-                  <p className="text-white/90 leading-relaxed font-sans text-sm">{msg.content}</p>
+                  <p className="text-white/90 leading-relaxed font-sans text-sm whitespace-pre-wrap">{msg.content}</p>
+                  {msg.offline && <p className="text-yellow-400/40 font-sans text-xs mt-1">offline response</p>}
                 </div>
               </motion.div>
             ))}
