@@ -119,31 +119,34 @@ const NavSection = ({ title, color, emoji, items, isActivePage, isMobile = false
         </div>
       </button>
 
-      {isOpen && items.map(item => {
-        const IconComponent = item.icon;
-        const isActive = isActivePage(item.url);
-        
-        return (
-          <Link 
-            key={item.url} 
-            to={item.url} 
-            className={`flex items-center gap-3 ${isMobile ? 'p-3' : 'p-4'} transition-all w-full ${
-              item.highlight 
-                ? 'border-4 border-pink-500 text-white' 
-                : isActive 
-                  ? 'border-2 bg-cyan-500/20 text-white border-cyan-500' 
-                  : 'border-2 border-white/10 hover:border-white/30 text-white'
-            }`}
-            style={item.highlight ? { boxShadow: '0 0 25px rgba(236, 72, 153, 0.5)' } : isActive ? { boxShadow: '0 0 20px rgba(34, 211, 238, 0.3)' } : {}}
-          >
-            <IconComponent className={`${isMobile ? 'w-5 h-5' : 'w-6 h-6'} flex-shrink-0`} />
-            <div className="flex-1">
-              <span className={`${isMobile ? 'text-sm' : 'text-sm'} font-bold block`}>{item.title}</span>
-              {item.description && <span className="text-xs text-cyan-300 block mt-1">{item.description}</span>}
-            </div>
-          </Link>
-        );
-      })}
+      {isOpen && (
+        <div className="flex flex-col gap-1 mb-2">
+          {items.map(item => {
+            const IconComponent = item.icon;
+            const isActive = isActivePage(item.url);
+            return (
+              <Link 
+                key={item.url} 
+                to={item.url} 
+                className={`flex items-center gap-3 ${isMobile ? 'p-3' : 'p-3'} transition-all w-full rounded ${
+                  item.highlight 
+                    ? 'border-2 border-pink-500 text-white bg-pink-500/10' 
+                    : isActive 
+                      ? 'border-2 bg-cyan-500/20 text-white border-cyan-500' 
+                      : 'border border-white/10 hover:border-white/30 text-white hover:bg-white/5'
+                }`}
+                style={item.highlight ? { boxShadow: '0 0 15px rgba(236, 72, 153, 0.3)' } : isActive ? { boxShadow: '0 0 10px rgba(34, 211, 238, 0.2)' } : {}}
+              >
+                <IconComponent className={`${isMobile ? 'w-4 h-4' : 'w-5 h-5'} flex-shrink-0`} />
+                <div className="flex-1 min-w-0">
+                  <span className="text-sm font-bold block truncate">{item.title}</span>
+                  {item.description && <span className="text-xs text-cyan-300 block truncate">{item.description}</span>}
+                </div>
+              </Link>
+            );
+          })}
+        </div>
+      )}
     </>
   );
 };
