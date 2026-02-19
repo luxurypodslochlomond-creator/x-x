@@ -138,17 +138,19 @@ self.addEventListener('notificationclick', (event) => {
       });
 
       // Save subscription to database
-      const existingSub = await base44.entities.ScottPushSubscription.filter({
+      // Always use UserPushSubscription - single source of truth
+      const existingSub = await base44.entities.UserPushSubscription.filter({
         user_email: userEmail
       });
 
       if (existingSub.length > 0) {
-        await base44.entities.ScottPushSubscription.update(existingSub[0].id, {
+        await base44.entities.UserPushSubscription.update(existingSub[0].id, {
           subscription_data: JSON.stringify(subscription),
+          is_active: true,
           last_active: new Date().toISOString()
         });
       } else {
-        await base44.entities.ScottPushSubscription.create({
+        await base44.entities.UserPushSubscription.create({
           user_email: userEmail,
           subscription_data: JSON.stringify(subscription),
           is_active: true,
