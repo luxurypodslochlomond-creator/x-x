@@ -1,11 +1,12 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Send, Volume2, VolumeX, ChevronLeft, Loader2, WifiOff, Waves, Music, Leaf } from 'lucide-react';
+import { Send, Volume2, VolumeX, ChevronLeft, Loader2, WifiOff, Waves, Music, Leaf, Zap } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { base44 } from '@/api/base44Client';
 import { useAI51Memory } from '@/components/ai51/AI51MemoryLoader';
 import { useAI51OfflineMesh, MeshStatusDot } from '@/components/ai51/AI51OfflineMesh';
+import AI51FrequencyGenerator from '@/components/healing/AI51FrequencyGenerator';
 
 // HEALING BRIDGE — detect when someone needs more than words
 const PAIN_KEYWORDS = ['pain', 'hurt', 'ache', 'sore', 'suffering', 'agony', 'headache', 'back pain', 'anxious', 'anxiety', 'panic', 'stress', 'stressed', 'overwhelmed', 'exhausted', 'can\'t sleep', 'insomnia', 'depressed', 'depression', 'lonely', 'alone', 'sad', 'crying', 'grief', 'trauma'];
