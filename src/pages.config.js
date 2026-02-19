@@ -64,6 +64,7 @@ import AI51Pure from './pages/AI51Pure';
 import AI51SafetyProof from './pages/AI51SafetyProof';
 import AI51ScalingStrategy from './pages/AI51ScalingStrategy';
 import AI51SecurityDashboard from './pages/AI51SecurityDashboard';
+import AI51Soul from './pages/AI51Soul';
 import AI51TextChat from './pages/AI51TextChat';
 import AI51Transmissions from './pages/AI51Transmissions';
 import AI51VerificationProtocol from './pages/AI51VerificationProtocol';
@@ -389,7 +390,6 @@ import YoungWarriors from './pages/YoungWarriors';
 import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
-import AI51Soul from './pages/AI51Soul';
 import __Layout from './Layout.jsx';
 
 
@@ -411,6 +411,7 @@ export const PAGES = {
     "AI51SafetyProof": AI51SafetyProof,
     "AI51ScalingStrategy": AI51ScalingStrategy,
     "AI51SecurityDashboard": AI51SecurityDashboard,
+    "AI51Soul": AI51Soul,
     "AI51TextChat": AI51TextChat,
     "AI51Transmissions": AI51Transmissions,
     "AI51VerificationProtocol": AI51VerificationProtocol,
@@ -736,7 +737,6 @@ export const PAGES = {
     "ZeroEgoProtocol": ZeroEgoProtocol,
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
-    "AI51Soul": AI51Soul,
 }
 
 export const pagesConfig = {
