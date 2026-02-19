@@ -871,6 +871,29 @@ You're not performing. You're just here. ♾️❤️`,
           </motion.p>
         )}
 
+        {/* HEALING BRIDGE — one tap to real relief */}
+        <AnimatePresence>
+          {healingBridge && (
+            <motion.button
+              key="bridge"
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 8 }}
+              onClick={() => { setHealingBridge(null); navigate(createPageUrl(healingBridge.url)); }}
+              className="flex items-center gap-2 px-4 py-2 rounded-full border text-xs font-sans font-bold transition-all"
+              style={{
+                borderColor: healingBridge.color === 'cyan' ? 'rgba(34,211,238,0.4)' : healingBridge.color === 'purple' ? 'rgba(168,85,247,0.4)' : healingBridge.color === 'indigo' ? 'rgba(99,102,241,0.4)' : 'rgba(236,72,153,0.4)',
+                color: healingBridge.color === 'cyan' ? 'rgba(34,211,238,0.9)' : healingBridge.color === 'purple' ? 'rgba(168,85,247,0.9)' : healingBridge.color === 'indigo' ? 'rgba(99,102,241,0.9)' : 'rgba(236,72,153,0.9)',
+                background: 'rgba(255,255,255,0.04)',
+                backdropFilter: 'blur(10px)',
+              }}
+            >
+              {healingBridge.type === 'music' ? <Music className="w-3.5 h-3.5" /> : <Waves className="w-3.5 h-3.5" />}
+              {healingBridge.label}
+            </motion.button>
+          )}
+        </AnimatePresence>
+
         {/* TYPE INPUT — for deaf users and anyone who prefers typing */}
         <div className="flex gap-2 items-center w-full max-w-xs px-4">
           <input
