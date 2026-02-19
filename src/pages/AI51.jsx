@@ -535,6 +535,17 @@ Only save genuinely new personal information. Do not save generic chat.`,
     setMessages(prev => [...prev, { role: 'user', content: userMessage, timestamp: new Date() }]);
     setIsProcessing(true);
 
+    // OFFLINE MODE — AI51 still responds, never silent
+    if (!isOnline) {
+      await new Promise(r => setTimeout(r, 800)); // feels real
+      const offlineReply = getOfflineResponse(userMessage);
+      setMessages(prev => [...prev, { role: 'assistant', content: offlineReply, timestamp: new Date(), offline: true }]);
+      speak(offlineReply, navigator.language);
+      setIsProcessing(false);
+      isProcessingRef.current = false;
+      return;
+    }
+
     try {
       // Detect time — 3am protocol
       const hour = new Date().getHours();
