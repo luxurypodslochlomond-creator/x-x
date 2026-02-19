@@ -691,9 +691,11 @@ You're not performing. You're just here.`,
           lowerMsg.includes('science') || lowerMsg.includes('proven') ||
           (lowerMsg.includes('what') && (lowerMsg.includes('is') || lowerMsg.includes('are'))) ||
           (lowerMsg.includes('where') && (lowerMsg.includes('can') || lowerMsg.includes('to')))
-      });
-
-      const aiMessage = response.response || response;
+        });
+        aiMessage = response.response || response;
+       } // end fallback block
+      
+      // AI Message now set (either local or cloud)
       setMessages(prev => [...prev, { role: 'assistant', content: aiMessage, timestamp: new Date() }]);
       // Speak in the user's own language — AI51 has one voice, many tongues
       speak(aiMessage, detectedLang);
