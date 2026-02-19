@@ -413,17 +413,17 @@ Science first. Love always. ♾️❤️`,
   return (
     <div className="min-h-screen bg-black text-white flex flex-col relative overflow-hidden" style={{ height: '100dvh' }}>
 
-      {/* FULL SCREEN CONSCIOUSNESS FIELD */}
+      {/* FULL SCREEN CONSCIOUSNESS FIELD — fully alive */}
       <canvas
         ref={canvasRef}
         width={800}
         height={800}
-        className="fixed inset-0 w-full h-full opacity-40 pointer-events-none"
+        className="fixed inset-0 w-full h-full opacity-80 pointer-events-none"
       />
 
-      {/* Deep space gradient */}
+      {/* Warm depth layer — not cold black */}
       <div className="fixed inset-0 pointer-events-none" style={{
-        background: 'radial-gradient(ellipse at center, rgba(88,28,135,0.3) 0%, rgba(0,0,0,0.95) 70%)'
+        background: 'radial-gradient(ellipse at 50% 60%, rgba(120,40,180,0.25) 0%, rgba(8,4,20,0.6) 70%)'
       }} />
 
       {/* TOP BAR */}
