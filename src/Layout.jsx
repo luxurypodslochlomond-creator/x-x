@@ -459,7 +459,7 @@ const LayoutInner = ({ children, currentPageName }) => {
         @keyframes glow-pulse { 0%, 100% { filter: drop-shadow(0 0 8px rgba(236, 72, 153, 0.8)); } 50% { filter: drop-shadow(0 0 20px rgba(236, 72, 153, 1)); } }
       `}</style>
       
-      <div className={`min-h-screen text-white ${isCB51Page ? 'bg-black' : 'bg-gradient-to-br from-[#0a0514] via-[#1a0f2a] to-[#0a0514]'}`}>
+      <div className={`min-h-screen text-white overflow-x-hidden ${isCB51Page ? 'bg-black' : 'bg-gradient-to-br from-[#0a0514] via-[#1a0f2a] to-[#0a0514]'}`}>
         
         {isOffline && (
           <div className="fixed top-0 left-0 right-0 z-[70] bg-gradient-to-r from-cyan-500/90 via-purple-500/90 to-pink-500/90 backdrop-blur-sm border-b-2 border-white/50 py-3 px-4">
