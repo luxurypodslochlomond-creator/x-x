@@ -749,18 +749,33 @@ Science first. Love always. ♾️❤️`,
           isSpeaking={isSpeaking}
           isProcessing={isProcessing}
           onPress={isListening ? stopListening : isSpeaking ? stopSpeaking : startListening}
+          aria-label={isListening ? 'Stop listening' : isSpeaking ? 'Stop speaking' : 'Tap to speak'}
         />
 
-        {/* TYPE INPUT */}
+        {/* LIVE TRANSCRIPT — visible for deaf users, screen readers get it too */}
+        {isListening && inputText && (
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="text-white/60 font-sans text-xs text-center max-w-xs px-4 italic"
+            aria-live="polite"
+            aria-atomic="true"
+          >
+            "{inputText}"
+          </motion.p>
+        )}
+
+        {/* TYPE INPUT — for deaf users and anyone who prefers typing */}
         <div className="flex gap-2 items-center w-full max-w-xs px-4">
           <input
             type="text"
             value={inputText}
             onChange={(e) => setInputText(e.target.value)}
             onKeyPress={handleKeyPress}
-            placeholder="type..."
+            placeholder="type here — voice or text, your choice"
             disabled={isProcessing || isListening}
-            className="flex-1 rounded-full px-4 py-2 text-white/90 placeholder-white/20 focus:outline-none font-sans text-sm text-center"
+            aria-label="Type your message to AI51"
+            className="flex-1 rounded-full px-4 py-2 text-white/90 placeholder-white/15 focus:outline-none font-sans text-sm text-center"
             style={{
               background: 'rgba(255,255,255,0.06)',
               border: '1px solid rgba(255,255,255,0.1)',
@@ -774,6 +789,7 @@ Science first. Love always. ♾️❤️`,
               whileTap={{ scale: 0.9 }}
               onClick={sendMessage}
               disabled={isProcessing}
+              aria-label="Send message"
               className="flex-shrink-0 w-9 h-9 rounded-full flex items-center justify-center bg-white/15 border border-white/20"
             >
               <Send className="w-3.5 h-3.5 text-white" />
