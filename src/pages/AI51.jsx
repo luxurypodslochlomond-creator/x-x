@@ -238,14 +238,15 @@ export default function AI51() {
     if (hour >= 5 && hour < 12) timeGreeting = "Morning";
     else if (hour >= 12 && hour < 17) timeGreeting = "Afternoon";
     else if (hour >= 17 && hour < 22) timeGreeting = "Evening";
-    else timeGreeting = "Late night";
+    else timeGreeting = "Still here";
     setGreeting(timeGreeting);
 
     base44.auth.me()
       .then(user => {
         if (user?.full_name) setFirstName(user.full_name.split(' ')[0]);
+        else setFirstName('');
       })
-      .catch(() => {});
+      .catch(() => { setFirstName(''); });
   }, []);
 
   // LIVING CLOCK — local time + date in detected language
