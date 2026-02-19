@@ -1,10 +1,9 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Send, Volume2, VolumeX, ChevronLeft, Loader2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { base44 } from '@/api/base44Client';
-import AI51AtomIcon from '@/components/ai51/AI51AtomIcon';
 import { useAI51Memory } from '@/components/ai51/AI51MemoryLoader';
 
 export default function AI51() {
