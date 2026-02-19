@@ -55,9 +55,10 @@ Deno.serve(async (req) => {
       }, { status: 500 });
     }
 
-    // 1. Find all active subscriptions for this user
-    const subscriptions = await base44.asServiceRole.entities.ScottPushSubscription.filter({
-      user_email: recipient_email
+    // 1. Find all active subscriptions for this user — single source of truth
+    const subscriptions = await base44.asServiceRole.entities.UserPushSubscription.filter({
+      user_email: recipient_email,
+      is_active: true
     });
 
     if (!subscriptions || subscriptions.length === 0) {
