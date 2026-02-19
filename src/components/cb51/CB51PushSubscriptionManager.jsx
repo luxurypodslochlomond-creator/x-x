@@ -20,16 +20,63 @@ export default function CB51PushSubscriptionManager({ userEmail }) {
   const initPushSubscription = async () => {
     try {
       // Check if service worker is available
-      if (!('serviceWorker' in navigator)) {
-        console.log('Service Workers not supported');
+      if (!('serviceWorker' in navigator) || !('PushManager' in window)) {
+        console.log('Push notifications not supported in this browser');
         setIsLoading(false);
         return;
       }
 
-      // Register service worker
-      const registration = await navigator.serviceWorker.register('/api/functions/serveServiceWorker', {
-        scope: '/'
-      });
+      // Inject inline service worker via blob URL - avoids MIME/scope issues with /api/ path
+      const swCode = `
+self.addEventListener('install', () => self.skipWaiting());
+self.addEventListener('activate', (e) => e.waitUntil(clients.claim()));
+self.addEventListener('push', (event) => {
+  let data = {};
+  try { data = event.data ? event.data.json() : {}; } catch(e) { data = { title: 'CB51', body: event.data?.text() || 'New notification' }; }
+  event.waitUntil(
+    self.registration.showNotification(data.title || 'CB51', {
+      body: data.body || 'You have a new update',
+      icon: '/icon-192x192.png',
+      badge: '/icon-192x192.png',
+      tag: data.tag || 'cb51-notification',
+      data: { url: data.data?.url || '/CB51' },
+      requireInteraction: true,
+      vibrate: [200, 100, 200],
+    })
+  );
+});
+self.addEventListener('notificationclick', (event) => {
+  event.notification.close();
+  const url = event.notification.data?.url || '/CB51';
+  event.waitUntil(
+    clients.matchAll({ type: 'window', includeUncontrolled: true }).then((list) => {
+      for (const client of list) {
+        if ('focus' in client) return client.focus().then(() => client.navigate(url));
+      }
+      if (clients.openWindow) return clients.openWindow(url);
+    })
+  );
+});
+`;
+
+      // Try to use a pre-existing registration first, then fall back to blob
+      let registration;
+      const existing = await navigator.serviceWorker.getRegistration('/');
+      if (existing) {
+        registration = existing;
+      } else {
+        // Write SW as a blob and register from there
+        const blob = new Blob([swCode], { type: 'application/javascript' });
+        const swUrl = URL.createObjectURL(blob);
+        try {
+          registration = await navigator.serviceWorker.register(swUrl, { scope: '/' });
+        } catch {
+          // Blob SW registration blocked (Firefox) - silently skip push on unsupported env
+          console.log('SW blob registration not supported - push unavailable');
+          setIsLoading(false);
+          return;
+        }
+      }
 
       // Get current subscription
       const subscription = await registration.pushManager.getSubscription();
