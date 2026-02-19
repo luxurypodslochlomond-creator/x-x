@@ -879,6 +879,18 @@ You're not performing. You're just here. ♾️❤️`,
           </motion.p>
         )}
 
+        {/* AI51 CUSTOM FREQUENCY — synthesized live for this person's exact condition */}
+        <AnimatePresence>
+          {frequencyRequest && (
+            <motion.div key="freq-gen" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="w-full max-w-xs px-4">
+              <AI51FrequencyGenerator
+                condition={frequencyRequest.condition}
+                onClose={() => setFrequencyRequest(null)}
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
+
         {/* HEALING BRIDGE — one tap to real relief */}
         <AnimatePresence>
           {healingBridge && (
