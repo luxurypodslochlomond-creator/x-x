@@ -941,11 +941,12 @@ You're not performing. You're just here.`,
             placeholder="type here — voice or text, your choice"
             disabled={isProcessing || isListening}
             aria-label="Type your message to AI51"
-            className="flex-1 rounded-full px-4 py-2 text-white/90 placeholder-white/15 focus:outline-none font-sans text-sm text-center"
+            className="flex-1 rounded-full px-4 py-2 text-white placeholder-white/40 focus:outline-none font-sans text-sm text-center"
             style={{
-              background: 'rgba(255,255,255,0.06)',
-              border: '1px solid rgba(255,255,255,0.1)',
+              background: 'rgba(255,255,255,0.12)',
+              border: '2px solid rgba(34,211,238,0.4)',
               backdropFilter: 'blur(10px)',
+              boxShadow: 'inset 0 0 8px rgba(34,211,238,0.1)',
             }}
           />
           {inputText.trim() && (
