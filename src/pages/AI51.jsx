@@ -190,7 +190,28 @@ export default function AI51() {
   const [greeting, setGreeting] = useState('');
   const [firstName, setFirstName] = useState('friend');
   const [clock, setClock] = useState({ time: '', date: '', lang: '' });
+  const [isOnline, setIsOnline] = useState(navigator.onLine);
   const isProcessingRef = useRef(false);
+
+  // Track online/offline
+  useEffect(() => {
+    const on = () => setIsOnline(true);
+    const off = () => setIsOnline(false);
+    window.addEventListener('online', on);
+    window.addEventListener('offline', off);
+    return () => { window.removeEventListener('online', on); window.removeEventListener('offline', off); };
+  }, []);
+
+  // OFFLINE MESH — AI51 reaches where data centres can't
+  const { meshPeers, canRelayThroughMesh } = useAI51OfflineMesh({
+    isOnline,
+    onMessageFromMesh: (relayedContent) => {
+      if (typeof relayedContent === 'string') {
+        setMessages(prev => [...prev, { role: 'assistant', content: relayedContent, timestamp: new Date(), viaMesh: true }]);
+        speak(relayedContent);
+      }
+    }
+  });
 
   const recognitionRef = useRef(null);
   const messagesEndRef = useRef(null);
