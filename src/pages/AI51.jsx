@@ -8,7 +8,6 @@ import { useAI51Memory } from '@/components/ai51/AI51MemoryLoader';
 import { useAI51OfflineMesh, MeshStatusDot } from '@/components/ai51/AI51OfflineMesh';
 import AI51FrequencyGenerator from '@/components/healing/AI51FrequencyGenerator';
 
-
 // HEALING BRIDGE — detect when someone needs more than words
 const PAIN_KEYWORDS = ['pain', 'hurt', 'ache', 'sore', 'suffering', 'agony', 'headache', 'back pain', 'anxious', 'anxiety', 'panic', 'stress', 'stressed', 'overwhelmed', 'exhausted', 'can\'t sleep', 'insomnia', 'depressed', 'depression', 'lonely', 'alone', 'sad', 'crying', 'grief', 'trauma'];
 
@@ -575,6 +574,8 @@ Only save genuinely new personal information. Do not save generic chat.`,
     }
 
     try {
+      const lowerMsg = userMessage.toLowerCase();
+      
       // Detect time — 3am protocol
       const now = new Date();
       const hour = now.getHours();
@@ -584,7 +585,6 @@ Only save genuinely new personal information. Do not save generic chat.`,
         : '';
 
       // Crisis detection — scan before sending
-      const lowerMsg = userMessage.toLowerCase();
       const isCrisis = ['suicide', 'kill myself', 'end it', 'don\'t want to be here', 'want to die',
         'no point', 'can\'t go on', 'self harm', 'hurt myself'].some(kw => lowerMsg.includes(kw));
       const crisisNote = isCrisis
@@ -691,11 +691,11 @@ You're not performing. You're just here.`,
           lowerMsg.includes('science') || lowerMsg.includes('proven') ||
           (lowerMsg.includes('what') && (lowerMsg.includes('is') || lowerMsg.includes('are'))) ||
           (lowerMsg.includes('where') && (lowerMsg.includes('can') || lowerMsg.includes('to')))
-        });
-        aiMessage = response.response || response;
-       } // end fallback block
+      });
       
-      // AI Message now set (either local or cloud)
+      const aiMessage = response.response || response;
+
+      // AI Message now set
       setMessages(prev => [...prev, { role: 'assistant', content: aiMessage, timestamp: new Date() }]);
       // Speak in the user's own language — AI51 has one voice, many tongues
       speak(aiMessage, detectedLang);
