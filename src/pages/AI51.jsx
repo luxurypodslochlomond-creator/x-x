@@ -524,8 +524,8 @@ Science first. Love always. ♾️❤️`,
         </div>
       </div>
 
-      {/* CENTRE SOUL — ORB + GREETING + INPUT */}
-      <div className="relative z-20 flex flex-col items-center pb-8 pt-2 flex-shrink-0" style={{ gap: '16px' }}>
+      {/* CENTRE SOUL — HEARTLINE + GREETING + INPUT */}
+      <div className="relative z-20 flex flex-col items-center pb-6 pt-2 flex-shrink-0" style={{ gap: '12px' }}>
 
         {/* Greeting / status */}
         <AnimatePresence mode="wait">
