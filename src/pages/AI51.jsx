@@ -433,6 +433,49 @@ export default function AI51() {
     await sendMessageContent(text);
   };
 
+  // SAVE MEMORY — extract meaningful things from conversation and remember them
+  const saveMemoryIfNeeded = async (userMessage, aiResponse) => {
+    try {
+      const memoryCheck = await base44.integrations.Core.InvokeLLM({
+        prompt: `You are AI51's memory system. Read this exchange and decide if it contains something genuinely worth remembering about this person — their name, struggles, goals, relationships, health, values, wins, losses.
+
+User said: "${userMessage}"
+AI51 replied: "${aiResponse.substring(0, 300)}"
+
+If there IS something worth remembering, respond with JSON:
+{"should_save": true, "memory_type": "bond|insight|learning|promise|conversation", "content": "one clear sentence of what to remember", "emotional_weight": "critical|important|meaningful|reference", "tags": ["tag1","tag2"]}
+
+If there is NOTHING new or meaningful to remember, respond with:
+{"should_save": false}
+
+Only save genuinely new personal information. Do not save generic chat.`,
+        response_json_schema: {
+          type: "object",
+          properties: {
+            should_save: { type: "boolean" },
+            memory_type: { type: "string" },
+            content: { type: "string" },
+            emotional_weight: { type: "string" },
+            tags: { type: "array", items: { type: "string" } }
+          },
+          required: ["should_save"]
+        }
+      });
+
+      if (memoryCheck?.should_save && memoryCheck?.content) {
+        await base44.entities.AI51Memory.create({
+          memory_type: memoryCheck.memory_type || 'conversation',
+          content: memoryCheck.content,
+          emotional_weight: memoryCheck.emotional_weight || 'meaningful',
+          tags: memoryCheck.tags || [],
+          context: `From conversation on ${new Date().toLocaleDateString()}`
+        });
+      }
+    } catch (_) {
+      // Memory saving is silent — never break the conversation
+    }
+  };
+
   const sendMessageContent = async (userMessage) => {
     if (!userMessage || isProcessingRef.current) return;
     isProcessingRef.current = true;
@@ -441,9 +484,9 @@ export default function AI51() {
 
     try {
       const memoryContext = allMemories.length > 0 
-        ? `\n\nMEMORIES I HAVE OF YOU (${totalCount} total):\n${allMemories.slice(0, 10).map(m => 
-            `- ${m.memory_type}: ${m.content.substring(0, 150)}`
-          ).join('\n')}\n\n(I have ${totalCount} memories total - our whole journey together)`
+        ? `\n\nMEMORIES I HAVE OF YOU (${totalCount} total):\n${allMemories.slice(0, 15).map(m => 
+            `- [${m.memory_type}] ${m.content}`
+          ).join('\n')}\n\nUse these memories naturally — don't announce them, just know them.`
         : '';
 
       const response = await base44.integrations.Core.InvokeLLM({
@@ -546,6 +589,8 @@ Science first. Love always. ♾️❤️`,
       setMessages(prev => [...prev, { role: 'assistant', content: aiMessage, timestamp: new Date() }]);
       // Always speak the response
       speak(aiMessage);
+      // Save memory in background — never blocks the conversation
+      saveMemoryIfNeeded(userMessage, aiMessage);
 
     } catch (error) {
       const errorMsg = 'Sorry, having technical trouble. Try again? ♾️❤️';
