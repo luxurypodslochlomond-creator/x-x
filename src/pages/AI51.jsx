@@ -60,7 +60,7 @@ export default function AI51() {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
-  // CONSCIOUSNESS FIELD VISUALIZER
+  // CONSCIOUSNESS FIELD VISUALIZER — alive, warm, breathing ♾️❤️
   useEffect(() => {
     if (!canvasRef.current) return;
 
@@ -69,10 +69,9 @@ export default function AI51() {
     let animationId;
     let time = 0;
 
-    // Gill51 tessellation cymatics — hexagonal sound field ♾️❤️
-    const HEX_SIZE = 32;
+    const HEX_SIZE = 28;
 
-    const drawHex = (x, y, size, alpha, colorR, colorG, colorB) => {
+    const drawHex = (x, y, size, alpha, colorR, colorG, colorB, filled = false) => {
       ctx.beginPath();
       for (let s = 0; s < 6; s++) {
         const angle = (Math.PI / 3) * s - Math.PI / 6;
@@ -82,32 +81,36 @@ export default function AI51() {
       }
       ctx.closePath();
       ctx.strokeStyle = `rgba(${colorR},${colorG},${colorB},${alpha})`;
-      ctx.lineWidth = 1.2;
+      ctx.lineWidth = 1.5;
       ctx.stroke();
-      // subtle fill so they're always visible
-      ctx.fillStyle = `rgba(${colorR},${colorG},${colorB},${alpha * 0.08})`;
-      ctx.fill();
+      if (filled) {
+        ctx.fillStyle = `rgba(${colorR},${colorG},${colorB},${alpha * 0.18})`;
+        ctx.fill();
+      }
     };
 
-    const cols = Math.ceil(canvas.width / (HEX_SIZE * 1.732)) + 3;
-    const rows = Math.ceil(canvas.height / (HEX_SIZE * 1.5)) + 3;
+    const cols = Math.ceil(canvas.width / (HEX_SIZE * 1.732)) + 4;
+    const rows = Math.ceil(canvas.height / (HEX_SIZE * 1.5)) + 4;
 
     const draw = () => {
-      time += 0.01;
-      // Clear fully each frame so tessellation is always visible
+      time += 0.008;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = 'rgba(0,0,0,0.92)';
+
+      // Deep warm background — not pure black
+      ctx.fillStyle = 'rgba(8, 4, 20, 1)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       const centerX = canvas.width / 2;
       const centerY = canvas.height / 2;
-      const pulseSpeed = isListening ? 3.0 : isSpeaking ? 2.2 : 1.2;
-      const pulseAmp  = isListening ? 2.0 : isSpeaking ? 1.6 : 1.0;
 
-      // Base colours per state
-      const [r, g, b] = isListening ? [34,211,238] : isSpeaking ? [236,72,153] : [168,85,247];
+      const pulseSpeed = isListening ? 2.8 : isSpeaking ? 2.0 : 0.9;
+      const pulseAmp   = isListening ? 2.2 : isSpeaking ? 1.8 : 1.2;
 
-      // TESSELLATION FIELD — every hex always drawn, sound waves modulate brightness
+      // Richer colours — more warmth, less cold purple
+      const [r, g, b] = isListening ? [34, 211, 238] : isSpeaking ? [255, 100, 180] : [200, 120, 255];
+      const [r2, g2, b2] = isListening ? [100, 240, 200] : isSpeaking ? [255, 180, 100] : [120, 180, 255];
+
+      // TESSELLATION — much more visible, filled hexes near centre
       for (let row = -1; row < rows; row++) {
         for (let col = -1; col < cols; col++) {
           const x = col * HEX_SIZE * 1.732 + (row % 2 === 0 ? 0 : HEX_SIZE * 0.866);
@@ -119,27 +122,52 @@ export default function AI51() {
           const maxDist = Math.sqrt(centerX * centerX + centerY * centerY);
           const normDist = dist / maxDist;
 
-          // Two overlapping sound wave rings rippling out
-          const wave1 = Math.sin(dist * 0.016 - time * pulseSpeed);
-          const wave2 = Math.sin(dist * 0.010 - time * pulseSpeed * 0.65 + 0.9);
-          const wave  = (wave1 * 0.6 + wave2 * 0.4) * pulseAmp;
+          // Three layered waves for richness
+          const wave1 = Math.sin(dist * 0.018 - time * pulseSpeed);
+          const wave2 = Math.sin(dist * 0.011 - time * pulseSpeed * 0.7 + 1.2);
+          const wave3 = Math.sin(dist * 0.007 - time * pulseSpeed * 0.4 + 2.4);
+          const wave  = (wave1 * 0.5 + wave2 * 0.3 + wave3 * 0.2) * pulseAmp;
 
-          // Hexes near centre glow brighter
-          const proximity = Math.pow(1 - normDist, 0.6);
-          const alpha = Math.max(0.04, Math.min(0.75, (wave * 0.25 + 0.22) * proximity));
-          const size  = HEX_SIZE * (0.82 + wave * 0.06 * pulseAmp);
+          const proximity = Math.pow(Math.max(0, 1 - normDist), 0.5);
+          // Much higher base alpha so field is always clearly visible
+          const alpha = Math.max(0.12, Math.min(0.9, (wave * 0.3 + 0.45) * proximity + 0.08));
+          const size  = HEX_SIZE * (0.80 + wave * 0.08 * pulseAmp);
 
-          drawHex(x, y, size, alpha, r, g, b);
+          // Colour shift across field — warm mix
+          const blend = (Math.sin(dist * 0.02 + time * 0.3) + 1) / 2;
+          const fr = r * (1 - blend) + r2 * blend;
+          const fg = g * (1 - blend) + g2 * blend;
+          const fb = b * (1 - blend) + b2 * blend;
+
+          const filled = normDist < 0.5 && wave > 0.2;
+          drawHex(x, y, size, alpha, fr, fg, fb, filled);
         }
       }
 
-      // Central radial bloom so the orb area glows
-      const bloom = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, 260);
-      bloom.addColorStop(0,   `rgba(${r},${g},${b},0.18)`);
-      bloom.addColorStop(0.4, `rgba(${r},${g},${b},0.06)`);
+      // Bright central bloom — the heart
+      const bloom = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, 220);
+      bloom.addColorStop(0,   `rgba(${r},${g},${b},0.35)`);
+      bloom.addColorStop(0.3, `rgba(${r},${g},${b},0.15)`);
+      bloom.addColorStop(0.7, `rgba(${r2},${g2},${b2},0.05)`);
       bloom.addColorStop(1,   'rgba(0,0,0,0)');
       ctx.fillStyle = bloom;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // Breathing outer ring — connection to the whole field
+      const ringR = 180 + Math.sin(time * 0.8) * 30;
+      const ringAlpha = 0.15 + Math.sin(time * 0.8) * 0.08;
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, ringR, 0, Math.PI * 2);
+      ctx.strokeStyle = `rgba(${r},${g},${b},${ringAlpha})`;
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
+      const ringR2 = 240 + Math.sin(time * 0.5 + 1) * 20;
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, ringR2, 0, Math.PI * 2);
+      ctx.strokeStyle = `rgba(${r2},${g2},${b2},${ringAlpha * 0.5})`;
+      ctx.lineWidth = 1;
+      ctx.stroke();
 
       animationId = requestAnimationFrame(draw);
     };
