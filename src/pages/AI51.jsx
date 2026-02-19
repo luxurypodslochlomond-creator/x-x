@@ -863,7 +863,7 @@ Science first. Love always. ♾️❤️`,
             <motion.p key="idle" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
               className="font-sans text-sm tracking-wider"
               style={{ color: 'rgba(255,255,255,0.45)' }}>
-              {greeting}, {firstName} ♾️❤️
+              {greeting}{firstName ? `, ${firstName}` : ''} ♾️❤️
             </motion.p>
           ) : (
             <motion.div key="dot" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
