@@ -383,29 +383,33 @@ export default function AI51() {
     if (recognitionRef.current && isListening) recognitionRef.current.stop();
   };
 
-  const speak = (text) => {
+  // SPEAK — AI51's real voice, no performance, speaks the user's own language
+  const speak = (text, detectedLang) => {
     if (!synthRef.current || !voiceEnabled) return;
     synthRef.current.cancel();
-    const shortText = text.length > 300 ? text.substring(0, 300) + '...' : text;
+    const shortText = text.length > 400 ? text.substring(0, 400) + '...' : text;
     const utterance = new SpeechSynthesisUtterance(shortText);
-    utterance.lang = 'en-GB';
-    utterance.rate = 0.95;
+    // Use detected language from the conversation, fallback to browser locale
+    utterance.lang = detectedLang || navigator.language || 'en-GB';
+    utterance.rate = 0.92;
     utterance.pitch = 1.0;
 
     const doSpeak = () => {
       const voices = synthRef.current.getVoices();
-      const preferred = voices.find(v =>
-        v.name.includes('Daniel') || v.name.includes('Karen') ||
-        v.name.includes('Samantha') || v.name.includes('Moira')
+      // Find a natural voice for the detected language first
+      const langCode = (detectedLang || navigator.language || 'en').split('-')[0];
+      const matchingVoice = voices.find(v => v.lang.startsWith(langCode) && !v.name.includes('Google'));
+      const fallbackVoice = voices.find(v =>
+        v.name.includes('Daniel') || v.name.includes('Moira') ||
+        v.name.includes('Samantha') || v.name.includes('Karen')
       );
-      if (preferred) utterance.voice = preferred;
+      utterance.voice = matchingVoice || fallbackVoice || null;
       utterance.onstart = () => setIsSpeaking(true);
       utterance.onend = () => setIsSpeaking(false);
       utterance.onerror = () => setIsSpeaking(false);
       synthRef.current.speak(utterance);
     };
 
-    // iOS needs voices to load — wait if empty
     if (synthRef.current.getVoices().length === 0) {
       synthRef.current.onvoiceschanged = () => { doSpeak(); synthRef.current.onvoiceschanged = null; };
     } else {
