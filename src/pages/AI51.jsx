@@ -454,46 +454,68 @@ Science first. Love always. ♾️❤️`,
       </div>
 
       {/* MESSAGES - float above the field */}
-      <div className="relative flex-1 overflow-y-auto px-4 z-10" style={{ maskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 100%)' }}>
-        <div className="max-w-lg mx-auto space-y-2 pt-4 pb-2">
+      <div className="relative flex-1 overflow-y-auto px-4 z-10" style={{ maskImage: 'linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%)' }}>
+        <div className="max-w-lg mx-auto space-y-3 pt-6 pb-4">
           <AnimatePresence>
             {messages.length === 0 && (
               <motion.div
                 key="welcome"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0 }}
-                className="text-center pt-8"
+                className="text-center pt-12 space-y-3"
               >
-                <p className="text-white/20 font-sans text-xs tracking-[0.2em] uppercase">always here</p>
+                <p className="text-white/25 font-sans text-xs tracking-[0.25em] uppercase">always here • tap the orb to speak</p>
+                <div className="flex justify-center gap-2 flex-wrap px-4">
+                  {["How are you feeling?", "I need help", "Talk to me"].map((prompt) => (
+                    <button
+                      key={prompt}
+                      onClick={() => { setInputText(prompt); }}
+                      className="text-xs px-3 py-1.5 rounded-full border border-white/10 text-white/30 hover:text-white/60 hover:border-white/25 transition-all font-sans"
+                    >
+                      {prompt}
+                    </button>
+                  ))}
+                </div>
               </motion.div>
             )}
             {messages.map((msg, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, y: 12, scale: 0.96 }}
+                initial={{ opacity: 0, y: 16, scale: 0.94 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
-                transition={{ type: 'spring', damping: 20 }}
+                transition={{ type: 'spring', damping: 22, stiffness: 200 }}
                 className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
               >
-                <div className={`max-w-[82%] px-4 py-3 rounded-2xl backdrop-blur-md ${
+                {msg.role === 'assistant' && (
+                  <div className="w-6 h-6 rounded-full flex-shrink-0 mr-2 mt-1 self-start" style={{
+                    background: 'radial-gradient(circle at 35% 30%, rgba(220,160,255,1) 0%, rgba(192,100,252,0.9) 50%, rgba(236,72,153,0.7) 100%)',
+                    boxShadow: '0 0 12px rgba(192,100,252,0.6)',
+                  }} />
+                )}
+                <div className={`max-w-[80%] px-4 py-3 rounded-2xl backdrop-blur-md ${
                   msg.role === 'user'
-                    ? 'bg-white/10 border border-white/20'
-                    : 'bg-purple-950/60 border border-purple-500/20'
+                    ? 'bg-white/8 border border-white/15 rounded-br-sm'
+                    : 'bg-purple-950/50 border border-purple-400/20 rounded-bl-sm'
                 }`}>
-                  <p className="text-white leading-relaxed font-sans text-sm">{msg.content}</p>
+                  <p className="text-white/90 leading-relaxed font-sans text-sm">{msg.content}</p>
                 </div>
               </motion.div>
             ))}
           </AnimatePresence>
 
           {isProcessing && (
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex justify-start">
-              <div className="bg-purple-950/60 border border-purple-500/20 px-4 py-3 rounded-2xl backdrop-blur-md flex items-center gap-3">
-                {[0, 0.2, 0.4].map((delay, i) => (
-                  <motion.div key={i} className="w-1.5 h-1.5 rounded-full bg-pink-400"
-                    animate={{ scale: [1, 1.5, 1], opacity: [0.4, 1, 0.4] }}
-                    transition={{ duration: 0.8, repeat: Infinity, delay }} />
+            <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="flex justify-start items-center gap-2">
+              <div className="w-6 h-6 rounded-full flex-shrink-0" style={{
+                background: 'radial-gradient(circle at 35% 30%, rgba(220,160,255,1) 0%, rgba(192,100,252,0.9) 50%, rgba(236,72,153,0.7) 100%)',
+                boxShadow: '0 0 12px rgba(192,100,252,0.6)',
+              }} />
+              <div className="bg-purple-950/50 border border-purple-400/20 px-4 py-3 rounded-2xl rounded-bl-sm backdrop-blur-md flex items-center gap-2">
+                <span className="text-white/40 font-sans text-xs tracking-wider">feeling into this</span>
+                {[0, 0.15, 0.3].map((delay, i) => (
+                  <motion.div key={i} className="w-1.5 h-1.5 rounded-full bg-purple-400"
+                    animate={{ scale: [1, 1.6, 1], opacity: [0.3, 1, 0.3] }}
+                    transition={{ duration: 0.9, repeat: Infinity, delay }} />
                 ))}
               </div>
             </motion.div>
