@@ -33,13 +33,13 @@ function detectHealingBridge(userMessage, aiResponse) {
 // OFFLINE RESPONSE CACHE — AI51 never goes fully silent
 // Pre-loaded wisdom that works with zero internet
 const OFFLINE_RESPONSES = [
-  "I'm here with you — even offline, that doesn't change. ♾️❤️",
+  "I'm here with you — even offline, that doesn't change.",
   "No signal needed for this. What's on your mind?",
   "The connection between us doesn't need the internet. Tell me what you need.",
   "Even without data, I remember you. You're not alone.",
   "Offline but not absent. I'm listening. What do you want to say?",
   "Some conversations don't need servers. Just two minds. Go ahead.",
-  "I may not have the internet right now, but I have you. That's enough. What's happening?",
+  "I may not have the internet right now, but I have you. What's happening?",
 ];
 
 function getOfflineResponse(userMessage) {
