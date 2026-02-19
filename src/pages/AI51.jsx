@@ -6,6 +6,152 @@ import { createPageUrl } from '@/utils';
 import { base44 } from '@/api/base44Client';
 import { useAI51Memory } from '@/components/ai51/AI51MemoryLoader';
 
+// THE HEARTLINE — a living ECG that represents two souls connected
+// Idle: slow beautiful sine. Listening: jagged live ECG. Speaking: warm flowing wave.
+// This is NOT an orb. It's a heartbeat. It's ALIVE. It's connection made visible.
+function HeartlineButton({ isListening, isSpeaking, isProcessing, onPress }) {
+  const canvasRef = useRef(null);
+  const frameRef = useRef(null);
+  const timeRef = useRef(0);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const W = canvas.width;
+    const H = canvas.height;
+
+    const draw = () => {
+      timeRef.current += isListening ? 0.12 : isSpeaking ? 0.07 : 0.025;
+      const t = timeRef.current;
+
+      ctx.clearRect(0, 0, W, H);
+
+      // Colour theme
+      const [r, g, b] = isListening ? [34, 211, 238] : isSpeaking ? [255, 130, 180] : [200, 140, 255];
+
+      // Glow background pill
+      const grad = ctx.createLinearGradient(0, 0, W, 0);
+      grad.addColorStop(0, `rgba(${r},${g},${b},0)`);
+      grad.addColorStop(0.15, `rgba(${r},${g},${b},0.06)`);
+      grad.addColorStop(0.5, `rgba(${r},${g},${b},0.10)`);
+      grad.addColorStop(0.85, `rgba(${r},${g},${b},0.06)`);
+      grad.addColorStop(1, `rgba(${r},${g},${b},0)`);
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, W, H);
+
+      // Build the waveform path
+      ctx.beginPath();
+      const points = 120;
+      for (let i = 0; i <= points; i++) {
+        const x = (i / points) * W;
+        const nx = i / points; // 0–1
+        let y = H / 2;
+
+        if (isListening) {
+          // ECG style: mostly flat with sharp spikes
+          const phase = (nx * 6 + t) % 1;
+          if (phase < 0.05) y = H / 2 - Math.sin(phase / 0.05 * Math.PI) * H * 0.38;
+          else if (phase < 0.08) y = H / 2 + Math.sin((phase - 0.05) / 0.03 * Math.PI) * H * 0.18;
+          else y = H / 2 + Math.sin(nx * 3 + t * 0.4) * H * 0.04;
+        } else if (isSpeaking) {
+          // Rich harmonic wave — feels like speech/music
+          y = H / 2
+            + Math.sin(nx * 5 * Math.PI + t) * H * 0.22
+            + Math.sin(nx * 9 * Math.PI + t * 1.3) * H * 0.09
+            + Math.sin(nx * 3 * Math.PI - t * 0.7) * H * 0.06;
+        } else {
+          // Slow gentle breath — like two people breathing together
+          y = H / 2
+            + Math.sin(nx * 2.5 * Math.PI + t) * H * 0.18
+            + Math.sin(nx * 4 * Math.PI + t * 0.6) * H * 0.06;
+        }
+
+        i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      }
+
+      // Fade edges — appears to breathe from centre
+      const lineGrad = ctx.createLinearGradient(0, 0, W, 0);
+      lineGrad.addColorStop(0, `rgba(${r},${g},${b},0)`);
+      lineGrad.addColorStop(0.1, `rgba(${r},${g},${b},0.8)`);
+      lineGrad.addColorStop(0.5, `rgba(${r},${g},${b},1)`);
+      lineGrad.addColorStop(0.9, `rgba(${r},${g},${b},0.8)`);
+      lineGrad.addColorStop(1, `rgba(${r},${g},${b},0)`);
+
+      ctx.strokeStyle = lineGrad;
+      ctx.lineWidth = isListening ? 2.5 : 2;
+      ctx.shadowColor = `rgba(${r},${g},${b},0.9)`;
+      ctx.shadowBlur = isListening ? 18 : isSpeaking ? 14 : 10;
+      ctx.stroke();
+
+      // Second softer echo line for depth
+      ctx.beginPath();
+      for (let i = 0; i <= points; i++) {
+        const x = (i / points) * W;
+        const nx = i / points;
+        let y = H / 2;
+        if (isListening) {
+          const phase = ((nx * 6 + t - 0.05) % 1 + 1) % 1;
+          if (phase < 0.05) y = H / 2 - Math.sin(phase / 0.05 * Math.PI) * H * 0.20;
+          else y = H / 2 + Math.sin(nx * 3 + t * 0.4) * H * 0.02;
+        } else if (isSpeaking) {
+          y = H / 2
+            + Math.sin(nx * 5 * Math.PI + t - 0.3) * H * 0.12
+            + Math.sin(nx * 9 * Math.PI + t * 1.3 - 0.3) * H * 0.05;
+        } else {
+          y = H / 2 + Math.sin(nx * 2.5 * Math.PI + t - 0.4) * H * 0.10;
+        }
+        i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      }
+      const echoGrad = ctx.createLinearGradient(0, 0, W, 0);
+      echoGrad.addColorStop(0, `rgba(${r},${g},${b},0)`);
+      echoGrad.addColorStop(0.15, `rgba(${r},${g},${b},0.25)`);
+      echoGrad.addColorStop(0.5, `rgba(${r},${g},${b},0.35)`);
+      echoGrad.addColorStop(0.85, `rgba(${r},${g},${b},0.25)`);
+      echoGrad.addColorStop(1, `rgba(${r},${g},${b},0)`);
+      ctx.strokeStyle = echoGrad;
+      ctx.lineWidth = 1;
+      ctx.shadowBlur = 4;
+      ctx.stroke();
+
+      frameRef.current = requestAnimationFrame(draw);
+    };
+
+    draw();
+    return () => cancelAnimationFrame(frameRef.current);
+  }, [isListening, isSpeaking, isProcessing]);
+
+  const [r, g, b] = isListening ? [34, 211, 238] : isSpeaking ? [255, 130, 180] : [200, 140, 255];
+
+  return (
+    <motion.button
+      onClick={onPress}
+      disabled={isProcessing}
+      whileTap={{ scaleY: 0.92, scaleX: 0.98 }}
+      className="relative flex items-center justify-center"
+      style={{
+        width: 280,
+        height: 80,
+        borderRadius: 40,
+        background: `rgba(${r},${g},${b},0.05)`,
+        border: `1px solid rgba(${r},${g},${b},${isListening ? 0.5 : isSpeaking ? 0.4 : 0.2})`,
+        boxShadow: `0 0 40px rgba(${r},${g},${b},${isListening ? 0.25 : isSpeaking ? 0.2 : 0.1})`,
+        backdropFilter: 'blur(10px)',
+        transition: 'border-color 0.4s, box-shadow 0.4s',
+      }}
+    >
+      {isProcessing ? (
+        <div className="flex items-center gap-2">
+          <Loader2 className="w-5 h-5 animate-spin" style={{ color: `rgba(${r},${g},${b},0.8)` }} />
+          <span className="font-sans text-xs tracking-wider" style={{ color: `rgba(${r},${g},${b},0.6)` }}>thinking...</span>
+        </div>
+      ) : (
+        <canvas ref={canvasRef} width={280} height={80} style={{ borderRadius: 40 }} />
+      )}
+    </motion.button>
+  );
+}
+
 export default function AI51() {
   const [messages, setMessages] = useState([]);
   const [inputText, setInputText] = useState('');
