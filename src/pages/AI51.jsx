@@ -24,6 +24,18 @@ export default function AI51() {
   const synthRef = useRef(window.speechSynthesis);
   const canvasRef = useRef(null);
 
+  // Resize canvas to fill screen
+  useEffect(() => {
+    const resize = () => {
+      if (!canvasRef.current) return;
+      canvasRef.current.width = window.innerWidth;
+      canvasRef.current.height = window.innerHeight;
+    };
+    resize();
+    window.addEventListener('resize', resize);
+    return () => window.removeEventListener('resize', resize);
+  }, []);
+
   const { allMemories, totalCount } = useAI51Memory();
 
   useEffect(() => {
