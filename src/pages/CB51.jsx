@@ -239,16 +239,8 @@ export default function CB51() {
           {/* MAIN CONTENT - Clean, focused, calm */}
           <div className="px-6 pb-32 space-y-6">
 
-            {/* BAND MEMBER INBOX - Show if no artist selected */}
-            {!currentArtistId && (
-              <div className="bg-gray-900/50 border-l-4 border-amber-500 p-5">
-                <div className="flex items-center gap-3 mb-4">
-                  <Users className="w-5 h-5 text-amber-400" />
-                  <h2 className="text-amber-400 font-mono font-bold text-sm uppercase tracking-wider">Your Votes</h2>
-                </div>
-                <CB51BandNotificationInbox />
-              </div>
-            )}
+            {/* BAND MEMBER VOTES - Always visible at top for anyone with pending votes */}
+            <CB51BandNotificationInbox alwaysShow={true} />
 
             {currentArtistId ? (
               <>
