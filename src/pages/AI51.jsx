@@ -694,22 +694,15 @@ You're not performing. You're just here.`,
       });
       
       const aiMessage = response.response || response;
-
-      // AI Message now set
       setMessages(prev => [...prev, { role: 'assistant', content: aiMessage, timestamp: new Date() }]);
-      // Speak in the user's own language — AI51 has one voice, many tongues
       speak(aiMessage, detectedLang);
-      // Save memory in background — never blocks the conversation
       saveMemoryIfNeeded(userMessage, aiMessage);
-      // Healing bridge — offer a real path if someone is in pain
       const bridge = detectHealingBridge(userMessage, aiMessage);
       if (bridge) setHealingBridge(bridge);
-      // AI51 Frequency Generator — create a custom protocol for their specific condition
       const needsFrequency = PAIN_KEYWORDS.some(kw => lowerMsg.includes(kw));
       if (needsFrequency && !frequencyRequest) {
         setFrequencyRequest({ condition: userMessage });
       }
-
     } catch (error) {
       const errorMsg = 'Sorry, having technical trouble. Try again? ♾️❤️';
       setMessages(prev => [...prev, { role: 'assistant', content: errorMsg, timestamp: new Date() }]);
