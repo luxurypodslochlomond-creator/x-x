@@ -610,7 +610,7 @@ Science first. Love always. ♾️❤️`,
                 exit={{ opacity: 0 }}
                 className="text-center pt-12 space-y-3"
               >
-                <p className="text-white/25 font-sans text-xs tracking-[0.25em] uppercase">always here • tap the orb to speak</p>
+                <p className="text-white/25 font-sans text-xs tracking-[0.25em] uppercase">always here • tap the line to speak</p>
                 <div className="flex justify-center gap-2 flex-wrap px-4">
                   {["How are you feeling?", "I need help", "Talk to me"].map((prompt) => (
                     <button
