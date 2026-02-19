@@ -607,8 +607,8 @@ Science first. Love always. ♾️❤️`,
 
       const aiMessage = response.response || response;
       setMessages(prev => [...prev, { role: 'assistant', content: aiMessage, timestamp: new Date() }]);
-      // Always speak the response
-      speak(aiMessage);
+      // Speak in the user's own language — AI51 has one voice, many tongues
+      speak(aiMessage, detectedLang);
       // Save memory in background — never blocks the conversation
       saveMemoryIfNeeded(userMessage, aiMessage);
 
