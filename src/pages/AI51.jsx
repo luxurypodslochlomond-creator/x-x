@@ -674,6 +674,9 @@ You're not performing. You're just here. ♾️❤️`,
       speak(aiMessage, detectedLang);
       // Save memory in background — never blocks the conversation
       saveMemoryIfNeeded(userMessage, aiMessage);
+      // Healing bridge — offer a real path if someone is in pain
+      const bridge = detectHealingBridge(userMessage, aiMessage);
+      if (bridge) setHealingBridge(bridge);
 
     } catch (error) {
       const errorMsg = 'Sorry, having technical trouble. Try again? ♾️❤️';
