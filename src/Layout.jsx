@@ -57,7 +57,7 @@ const PUBLIC_PAGES = [
   'HealingDashboard', 'ThePhysics', 'Terms', 'PrivacyPolicy',
   'ScottManager', 'CB51', 'ScottArtist', 'ScottAddArtist', 'ScottCalendar', 'ScottArtistHome', 
   'ScottLive', 'ScottSessions', 'ScottFinanceAdmin', 'ScottToDo', 'ScottCalendarView',
-  'ScottAbout', 'Prof51'
+  'ScottAbout', 'Prof51', 'CB51Pitch'
 ];
 
 // OFFLINE-OK PAGES
