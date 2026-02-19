@@ -770,16 +770,17 @@ Science first. Love always. ♾️❤️`,
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0 }}
-                className="text-center pt-12 space-y-3"
+                className="text-center pt-12 space-y-4"
               >
                 <p className="text-white/25 font-sans text-xs tracking-[0.25em] uppercase">always here • voice or type • any language</p>
                 <div className="flex justify-center gap-2 flex-wrap px-4 max-w-sm mx-auto">
                   {[
+                    "Just checking in",
                     "I'm struggling right now",
-                    "I'm in pain",
-                    "Just want to talk",
-                    "Help me think something through",
                     "I feel alone",
+                    "Help me think something through",
+                    "Tell me something true",
+                    "I'm in pain",
                   ].map((prompt) => (
                     <button
                       key={prompt}
