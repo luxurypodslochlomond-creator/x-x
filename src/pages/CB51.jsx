@@ -245,23 +245,8 @@ export default function CB51() {
 
             {currentArtistId ? (
               <>
-                {/* ACTIONS - Everything you need to do */}
-                <div className="bg-gray-900/50 border-l-4 border-cyan-500 p-5">
-                  <div className="flex items-center gap-3 mb-4">
-                    <CheckCircle className="w-5 h-5 text-cyan-400" />
-                    <h2 className="text-cyan-400 font-mono font-bold text-sm uppercase tracking-wider">What needs doing</h2>
-                  </div>
-                  <CB51ActionDashboard artistId={currentArtistId} />
-                </div>
-
-                {/* REVIEW GIGS - Approve/Reject interface */}
-                <div className="bg-gray-900/50 border-l-4 border-red-500 p-5">
-                  <div className="flex items-center gap-3 mb-4">
-                    <AlertTriangle className="w-5 h-5 text-red-400" />
-                    <h2 className="text-red-400 font-mono font-bold text-sm uppercase tracking-wider">New Gigs</h2>
-                  </div>
-                  <CB51NotificationFeed artistId={currentArtistId} />
-                </div>
+                {/* THE DECISION ENGINE - Zero effort YES/NO */}
+                <CB51GigDecisionEngine artistId={currentArtistId} />
 
                 {/* SCAN GIG OFFER */}
                 <div className="bg-gray-900/50 p-5 space-y-3">
