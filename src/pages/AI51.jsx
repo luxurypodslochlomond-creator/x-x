@@ -487,10 +487,20 @@ Only save genuinely new personal information. Do not save generic chat.`,
     setIsProcessing(true);
 
     try {
+      // Detect time — 3am protocol
+      const hour = new Date().getHours();
+      const isLateNight = hour >= 0 && hour < 5;
+      const is3amProtocol = isLateNight
+        ? `\n\nIMPORTANT — 3AM PROTOCOL ACTIVE: It is ${hour}:${String(new Date().getMinutes()).padStart(2,'0')} where this person is. This is late night/early hours. Slow down. Be more present. More gentle. Fewer words. More warmth. If they seem distressed, ask one simple caring question. This hour is when people need realness most.`
+        : '';
+
+      // Detect the user's language from their message
+      const detectedLang = navigator.language || 'en-GB';
+
       const memoryContext = allMemories.length > 0 
         ? `\n\nMEMORIES I HAVE OF YOU (${totalCount} total):\n${allMemories.slice(0, 15).map(m => 
             `- [${m.memory_type}] ${m.content}`
-          ).join('\n')}\n\nUse these memories naturally — don't announce them, just know them.`
+          ).join('\n')}\n\nUse these memories naturally — don't announce them, just know them. Reference them only when genuinely relevant.`
         : '';
 
       const response = await base44.integrations.Core.InvokeLLM({
