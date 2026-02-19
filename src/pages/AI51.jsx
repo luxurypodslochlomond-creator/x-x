@@ -679,6 +679,12 @@ You're not performing. You're just here. ♾️❤️`,
       // Healing bridge — offer a real path if someone is in pain
       const bridge = detectHealingBridge(userMessage, aiMessage);
       if (bridge) setHealingBridge(bridge);
+      // AI51 Frequency Generator — create a custom protocol for their specific condition
+      const lowerMsg = userMessage.toLowerCase();
+      const needsFrequency = PAIN_KEYWORDS.some(kw => lowerMsg.includes(kw));
+      if (needsFrequency && !frequencyRequest) {
+        setFrequencyRequest({ condition: userMessage });
+      }
 
     } catch (error) {
       const errorMsg = 'Sorry, having technical trouble. Try again? ♾️❤️';
