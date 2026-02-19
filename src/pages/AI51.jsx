@@ -531,68 +531,76 @@ Science first. Love always. ♾️❤️`,
           )}
         </AnimatePresence>
 
-        {/* THE ORB */}
+        {/* THE ORB — bigger, warmer, more alive */}
         <motion.button
-          whileTap={{ scale: 0.92 }}
+          whileTap={{ scale: 0.90 }}
           animate={isListening ? {
-            scale: [1, 1.06, 1],
+            scale: [1, 1.08, 1],
           } : isSpeaking ? {
-            scale: [1, 1.04, 1],
+            scale: [1, 1.05, 1],
           } : {
-            scale: [1, 1.02, 1],
+            scale: [1, 1.03, 1],
           }}
-          transition={{ duration: isListening ? 1.2 : isSpeaking ? 1.5 : 4, repeat: Infinity, ease: 'easeInOut' }}
+          transition={{ duration: isListening ? 1.0 : isSpeaking ? 1.4 : 3.5, repeat: Infinity, ease: 'easeInOut' }}
           onClick={isListening ? stopListening : isSpeaking ? stopSpeaking : startListening}
           disabled={isProcessing}
           className="relative flex items-center justify-center rounded-full"
           style={{
-            width: 120,
-            height: 120,
+            width: 150,
+            height: 150,
             background: isListening
-              ? 'radial-gradient(circle at 35% 35%, rgba(103,232,249,1) 0%, rgba(34,211,238,0.9) 40%, rgba(6,182,212,0.7) 100%)'
+              ? 'radial-gradient(circle at 35% 30%, rgba(180,255,255,1) 0%, rgba(34,211,238,0.95) 35%, rgba(6,182,212,0.8) 70%, rgba(2,100,150,0.6) 100%)'
               : isSpeaking
-                ? 'radial-gradient(circle at 35% 35%, rgba(249,168,212,1) 0%, rgba(236,72,153,0.9) 40%, rgba(168,85,247,0.7) 100%)'
+                ? 'radial-gradient(circle at 35% 30%, rgba(255,220,240,1) 0%, rgba(255,100,180,0.95) 35%, rgba(236,72,153,0.8) 70%, rgba(168,85,247,0.6) 100%)'
                 : isProcessing
-                  ? 'radial-gradient(circle at 35% 35%, rgba(100,100,120,0.9) 0%, rgba(60,60,80,0.8) 100%)'
-                  : 'radial-gradient(circle at 35% 35%, rgba(216,180,254,1) 0%, rgba(192,132,252,0.9) 30%, rgba(236,72,153,0.8) 60%, rgba(147,51,234,0.7) 100%)',
+                  ? 'radial-gradient(circle at 35% 30%, rgba(140,120,180,0.9) 0%, rgba(80,60,120,0.8) 100%)'
+                  : 'radial-gradient(circle at 32% 28%, rgba(255,240,255,1) 0%, rgba(220,160,255,0.95) 25%, rgba(192,100,252,0.9) 50%, rgba(236,72,153,0.75) 75%, rgba(120,40,200,0.6) 100%)',
             boxShadow: isListening
-              ? '0 0 0 12px rgba(34,211,238,0.08), 0 0 0 24px rgba(34,211,238,0.05), 0 0 80px rgba(34,211,238,0.6)'
+              ? '0 0 0 16px rgba(34,211,238,0.10), 0 0 0 36px rgba(34,211,238,0.05), 0 0 100px rgba(34,211,238,0.7), inset 0 0 40px rgba(255,255,255,0.1)'
               : isSpeaking
-                ? '0 0 0 12px rgba(236,72,153,0.08), 0 0 0 24px rgba(236,72,153,0.05), 0 0 80px rgba(236,72,153,0.6)'
-                : '0 0 0 12px rgba(147,51,234,0.08), 0 0 0 28px rgba(147,51,234,0.04), 0 0 60px rgba(147,51,234,0.4)',
+                ? '0 0 0 16px rgba(255,100,180,0.10), 0 0 0 36px rgba(255,100,180,0.05), 0 0 100px rgba(255,100,180,0.7), inset 0 0 40px rgba(255,255,255,0.1)'
+                : '0 0 0 16px rgba(192,100,252,0.10), 0 0 0 36px rgba(192,100,252,0.05), 0 0 80px rgba(192,100,252,0.5), inset 0 0 40px rgba(255,255,255,0.08)',
           }}
         >
-          {/* Glass inner highlight */}
+          {/* Glass inner highlight — pearl effect */}
           <div className="absolute inset-0 rounded-full" style={{
-            background: 'radial-gradient(circle at 30% 25%, rgba(255,255,255,0.35) 0%, transparent 55%)',
+            background: 'radial-gradient(circle at 28% 22%, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.15) 30%, transparent 60%)',
             pointerEvents: 'none'
           }} />
 
-          {/* Outer breathing ring */}
+          {/* Outer breathing rings — 3 layers for depth */}
           <motion.div className="absolute rounded-full pointer-events-none"
-            style={{ inset: -20, border: `1px solid ${isListening ? 'rgba(34,211,238,0.3)' : isSpeaking ? 'rgba(236,72,153,0.3)' : 'rgba(147,51,234,0.2)'}` }}
-            animate={{ scale: [1, 1.08, 1], opacity: [0.4, 0.8, 0.4] }}
-            transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }} />
+            style={{ inset: -18, border: `1.5px solid ${isListening ? 'rgba(34,211,238,0.4)' : isSpeaking ? 'rgba(255,100,180,0.4)' : 'rgba(192,100,252,0.3)'}` }}
+            animate={{ scale: [1, 1.10, 1], opacity: [0.5, 0.9, 0.5] }}
+            transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }} />
           <motion.div className="absolute rounded-full pointer-events-none"
-            style={{ inset: -40, border: `1px solid ${isListening ? 'rgba(34,211,238,0.15)' : isSpeaking ? 'rgba(236,72,153,0.15)' : 'rgba(147,51,234,0.1)'}` }}
-            animate={{ scale: [1, 1.05, 1], opacity: [0.2, 0.5, 0.2] }}
-            transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }} />
+            style={{ inset: -38, border: `1px solid ${isListening ? 'rgba(34,211,238,0.2)' : isSpeaking ? 'rgba(255,100,180,0.2)' : 'rgba(192,100,252,0.15)'}` }}
+            animate={{ scale: [1, 1.07, 1], opacity: [0.3, 0.6, 0.3] }}
+            transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut', delay: 0.4 }} />
+          <motion.div className="absolute rounded-full pointer-events-none"
+            style={{ inset: -60, border: `1px solid ${isListening ? 'rgba(34,211,238,0.08)' : isSpeaking ? 'rgba(255,100,180,0.08)' : 'rgba(192,100,252,0.06)'}` }}
+            animate={{ scale: [1, 1.05, 1], opacity: [0.15, 0.35, 0.15] }}
+            transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 0.8 }} />
 
           {isProcessing ? (
             <Loader2 className="w-10 h-10 text-white relative z-10 animate-spin" style={{ opacity: 0.9 }} />
           ) : (
             <motion.div
               className="relative z-10"
-              animate={isListening ? { scale: [1, 1.2, 1] } : { scale: 1 }}
-              transition={{ duration: 0.6, repeat: isListening ? Infinity : 0 }}
+              animate={isListening ? { scale: [1, 1.3, 1] } : isSpeaking ? { scale: [1, 1.15, 1] } : { scale: [1, 1.05, 1] }}
+              transition={{ duration: isListening ? 0.5 : 2, repeat: Infinity, ease: 'easeInOut' }}
             >
-              {/* Clean pure dot — no mic icon, just presence */}
+              {/* Heart of the orb — pure light */}
               <div style={{
-                width: 20,
-                height: 20,
+                width: 24,
+                height: 24,
                 borderRadius: '50%',
-                background: isListening ? 'rgba(255,255,255,1)' : 'rgba(255,255,255,0.85)',
-                boxShadow: isListening ? '0 0 20px rgba(255,255,255,0.9)' : '0 0 12px rgba(255,255,255,0.5)',
+                background: 'rgba(255,255,255,1)',
+                boxShadow: isListening
+                  ? '0 0 30px rgba(255,255,255,1), 0 0 60px rgba(34,211,238,0.8)'
+                  : isSpeaking
+                    ? '0 0 30px rgba(255,255,255,1), 0 0 60px rgba(255,100,180,0.8)'
+                    : '0 0 20px rgba(255,255,255,0.9), 0 0 40px rgba(192,100,252,0.6)',
               }} />
             </motion.div>
           )}
