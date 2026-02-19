@@ -390,6 +390,7 @@ import YoungWarriors from './pages/YoungWarriors';
 import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
+import CB51Pitch from './pages/CB51Pitch';
 import __Layout from './Layout.jsx';
 
 
@@ -737,6 +738,7 @@ export const PAGES = {
     "ZeroEgoProtocol": ZeroEgoProtocol,
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
+    "CB51Pitch": CB51Pitch,
 }
 
 export const pagesConfig = {
