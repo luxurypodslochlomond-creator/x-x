@@ -12,7 +12,7 @@ import { motion } from 'framer-motion';
  * Simple, clean, actionable
  */
 
-export default function CB51BandNotificationInbox() {
+export default function CB51BandNotificationInbox({ alwaysShow = false }) {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
