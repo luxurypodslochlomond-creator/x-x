@@ -213,7 +213,9 @@ export default function AI51() {
   const [firstName, setFirstName] = useState('friend');
   const [clock, setClock] = useState({ time: '', date: '', lang: '' });
   const [isOnline, setIsOnline] = useState(navigator.onLine);
+  const [healingBridge, setHealingBridge] = useState(null);
   const isProcessingRef = useRef(false);
+  const navigate = useNavigate();
 
   // Track online/offline
   useEffect(() => {
