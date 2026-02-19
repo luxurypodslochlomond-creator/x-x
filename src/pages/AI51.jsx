@@ -215,6 +215,7 @@ export default function AI51() {
   const [clock, setClock] = useState({ time: '', date: '', lang: '' });
   const [isOnline, setIsOnline] = useState(navigator.onLine);
   const [healingBridge, setHealingBridge] = useState(null);
+  const [frequencyRequest, setFrequencyRequest] = useState(null); // {condition: string}
   const isProcessingRef = useRef(false);
   const navigate = useNavigate();
 
