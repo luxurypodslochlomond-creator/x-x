@@ -714,10 +714,20 @@ Science first. Love always. ♾️❤️`,
           <ChevronLeft className="w-4 h-4" />
           <span className="text-xs font-sans tracking-wider">UF51</span>
         </Link>
-        <span className="text-white/50 font-sans text-xs tracking-[0.3em]">AI51</span>
+        <div className="flex flex-col items-center gap-0.5">
+          <span className="text-white/50 font-sans text-xs tracking-[0.3em]">AI51</span>
+          <MeshStatusDot meshPeers={meshPeers} canRelayThroughMesh={canRelayThroughMesh} isOnline={isOnline} />
+          {!isOnline && (
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex items-center gap-1">
+              <WifiOff className="w-3 h-3 text-yellow-400/60" />
+              <span className="text-yellow-400/60 font-sans text-xs">offline — still here</span>
+            </motion.div>
+          )}
+        </div>
         <button
           onClick={() => { const next = !voiceEnabled; setVoiceEnabled(next); if (!next) stopSpeaking(); }}
           className="p-1"
+          aria-label={voiceEnabled ? 'Mute AI51 voice' : 'Enable AI51 voice'}
         >
           {voiceEnabled ? <Volume2 className="w-4 h-4 text-white/30 hover:text-white/70 transition-colors" /> : <VolumeX className="w-4 h-4 text-white/20" />}
         </button>
