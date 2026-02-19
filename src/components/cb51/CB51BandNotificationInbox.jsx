@@ -51,6 +51,9 @@ export default function CB51BandNotificationInbox({ alwaysShow = false }) {
   }
 
   if (votingGigs.length === 0) {
+    // If alwaysShow=false (old usage in sidebar), show empty state
+    // If alwaysShow=true (new top-of-page usage), hide entirely when nothing to vote on
+    if (alwaysShow) return null;
     return (
       <div className="bg-gray-900/50 border border-cyan-500/30 rounded-lg p-4 text-center">
         <CheckCircle className="w-6 h-6 text-green-400 mx-auto mb-2" />
