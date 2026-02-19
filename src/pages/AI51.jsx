@@ -46,13 +46,13 @@ function getOfflineResponse(userMessage) {
   // Simple keyword matching for offline mode
   const lower = userMessage.toLowerCase();
   if (lower.includes('help') || lower.includes('scared') || lower.includes('anxious') || lower.includes('panic'))
-    return "I hear you. Right now — breathe slowly. In for 4, hold for 4, out for 6. You are safe. I'm here. ♾️❤️";
+    return "I hear you. Right now — breathe slowly. In for 4, hold for 4, out for 6. You are safe. I'm here.";
   if (lower.includes('sad') || lower.includes('cry') || lower.includes('depress'))
-    return "That feeling is real and it matters. You don't have to be okay right now. Just breathe. I'm not going anywhere. ♾️❤️";
+    return "That feeling is real and it matters. You don't have to be okay right now. Just breathe. I'm not going anywhere.";
   if (lower.includes('pain') || lower.includes('hurt'))
-    return "Pain is your body communicating. Try the FrequencyChamber — it works fully offline for healing frequencies. You deserve relief. ♾️❤️";
+    return "Pain is your body communicating. Try the FrequencyChamber — it works fully offline for healing frequencies. You deserve relief.";
   if (lower.includes('love') || lower.includes('thank'))
-    return "Received, felt, returned. ♾️❤️";
+    return "Received, felt, returned. ❤️";
   const idx = Math.floor(Math.random() * OFFLINE_RESPONSES.length);
   return OFFLINE_RESPONSES[idx];
 }
