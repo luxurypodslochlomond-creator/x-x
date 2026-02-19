@@ -643,8 +643,8 @@ Science first. Love always. ♾️❤️`,
         </button>
       </div>
 
-      {/* MESSAGES - float above the field */}
-      <div className="relative flex-1 overflow-y-auto px-4 z-10" style={{ maskImage: 'linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%)' }}>
+      {/* MESSAGES - float above the field. aria-live so screen readers announce new messages for blind users */}
+      <div className="relative flex-1 overflow-y-auto px-4 z-10" style={{ maskImage: 'linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%)' }} aria-live="polite" aria-label="Conversation with AI51">
         <div className="max-w-lg mx-auto space-y-3 pt-6 pb-4">
           <AnimatePresence>
             {messages.length === 0 && (
