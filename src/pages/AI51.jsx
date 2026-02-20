@@ -1144,7 +1144,7 @@ You're not performing. You're just here.`,
                 onClick={() => setShowGoLiveIt(false)}
                 className="text-white/25 font-sans text-xs hover:text-white/50 transition-colors"
               >
-                stay a bit longer
+                {t.stayABitLonger}
               </button>
             </motion.div>
           )}
