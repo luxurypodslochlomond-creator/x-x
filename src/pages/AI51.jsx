@@ -974,8 +974,8 @@ You're not performing. You're just here.`,
                       ? '1px solid rgba(255,255,255,0.3)'
                       : msg.offline
                         ? '1px solid rgba(245,158,11,0.45)'
-                        : '1px solid rgba(192,100,252,0.4)',
-                    boxShadow: msg.role === 'assistant' ? '0 2px 24px rgba(130,40,180,0.25)' : 'none',
+                        : '1px solid rgba(34,211,238,0.4)',
+                    boxShadow: msg.role === 'assistant' ? '0 2px 24px rgba(34,211,238,0.25)' : 'none',
                     backdropFilter: 'blur(12px)',
                   }}
                 >
