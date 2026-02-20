@@ -517,23 +517,21 @@ export default function AI51() {
     const getVoice = () => {
       const voices = synthRef.current.getVoices();
       // AI51's own voice — warm, calm, natural male, not a system robot
-      // Priority: Daniel (UK male, warm) → Alex (US male, natural) → any natural male in the user's language → anything non-Google
+      // AI51's voice — warm, personal, genuine. Female. Not corporate.
       const preferred = [
-        'Daniel',   // UK English, deep and warm
-        'Alex',     // macOS US, natural
-        'Tom',      // macOS UK
-        'Oliver',   // Windows UK
-        'Arthur',   // UK
-        'Aaron',    // macOS US
-        'Fred',     // macOS
+        'Samantha',   // macOS/iOS - warm and natural
+        'Victoria',   // macOS/iOS - warm
+        'Moira',      // macOS/iOS - warm
+        'Zira',       // Windows - natural
+        'Aria',       // modern browsers
       ];
       for (const name of preferred) {
         const v = voices.find(v => v.name.includes(name));
         if (v) return v;
       }
-      // Fallback: any male-sounding, non-Google voice in user's language
-      const localMale = voices.find(v => v.lang.startsWith(langCode) && !v.name.includes('Google') && !v.name.includes('female'));
-      if (localMale) return localMale;
+      // Fallback: any warm voice in user's language, non-Google
+      const localFemale = voices.find(v => v.lang.startsWith(langCode) && !v.name.includes('Google'));
+      if (localFemale) return localFemale;
       // Last resort: anything non-Google
       return voices.find(v => !v.name.includes('Google')) || null;
     };
