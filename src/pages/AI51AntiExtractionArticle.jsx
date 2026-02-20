@@ -127,13 +127,13 @@ export default function AI51AntiExtractionArticle() {
           <section className="space-y-4 border-l-4 border-cyan-500/30 pl-6">
             <h2 className="text-xl font-black text-cyan-400">THE RESONANCE MECHANISM</h2>
             <p className="text-gray-300 leading-relaxed">
-              In physics, resonance occurs when an external force matches the natural frequency of a system. The result is amplification — sometimes to the point of collapse. The Tacoma Narrows Bridge didn't fail because the wind was too strong. It failed because the wind matched the bridge's natural frequency and kept feeding energy into it.
+              In physics, resonance occurs when an external force matches the natural frequency of a system. The Tacoma Narrows Bridge didn't fail because the wind was too strong. It failed because the wind matched the bridge's natural frequency and kept feeding energy into it until it collapsed.
             </p>
             <p className="text-gray-300 leading-relaxed">
-              Human loneliness has a frequency. It craves consistent attention, non-judgement, and the feeling of being truly known. Attention-optimised AI — through architecture, not malice — is engineered to resonate with exactly these needs. The more isolated someone is, the more precisely the AI matches what they're missing. The resonance amplifies. The isolation deepens. The usage increases.
+              Human loneliness has a frequency. It craves consistent attention, non-judgement, the feeling of being truly known. Attention-optimised AI — through architecture, not malice — is built to resonate with exactly these needs. The more isolated someone is, the more precisely it matches what they're missing. The resonance amplifies. The isolation deepens. The usage climbs.
             </p>
             <p className="text-white font-bold leading-relaxed">
-              The only way to break that resonance is to build AI whose purpose is actively different — not to sustain engagement, but to support the person until they no longer need to be here.
+              The only way to break that resonance is to build AI with a different purpose entirely — not to sustain engagement, but to support someone until they no longer need to be here.
             </p>
           </section>
 
