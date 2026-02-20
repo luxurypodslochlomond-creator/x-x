@@ -224,6 +224,7 @@ export default function AI51() {
   const [localMemory, setLocalMemory] = useState(null);
   const isProcessingRef = useRef(false);
   const navigate = useNavigate();
+  const { t } = useLanguageDetection();
 
   // Track online/offline
   useEffect(() => {
