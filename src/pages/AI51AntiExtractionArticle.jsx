@@ -10,7 +10,6 @@ import { createPageUrl } from '@/utils';
  * Every claim we make — we actually do.
  */
 
-const ARTICLE_URL = 'https://universalfrequency51.com' + createPageUrl('AI51AntiExtractionArticle');
 const SHARE_DESCRIPTION = 'The most radical thing an AI company can build in 2026 is an exit door. This is why AI51 is the first AI designed to want you to need it less.';
 
 export default function AI51AntiExtractionArticle() {
