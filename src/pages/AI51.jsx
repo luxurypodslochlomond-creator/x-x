@@ -436,38 +436,8 @@ export default function AI51() {
   // Keep a ref to sendMessageContent so speech recognition always calls latest version
   const sendMessageContentRef = useRef(null);
 
-  // SPEECH RECOGNITION — built once, uses ref to avoid stale closure
-  useEffect(() => {
-    if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) return;
-
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-    const recognition = new SpeechRecognition();
-    recognition.continuous = false;
-    recognition.interimResults = true;
-    recognition.lang = navigator.language || 'en-GB';
-
-    recognition.onstart = () => setIsListening(true);
-    recognition.onresult = (event) => {
-      const last = event.results.length - 1;
-      const transcript = event.results[last][0].transcript;
-      setInputText(transcript);
-      if (event.results[last].isFinal) {
-        setIsListening(false);
-        setInputText('');
-        if (sendMessageContentRef.current) {
-          sendMessageContentRef.current(transcript.trim());
-        }
-      }
-    };
-    recognition.onerror = (e) => {
-      console.warn('Speech error:', e.error);
-      setIsListening(false);
-    };
-    recognition.onend = () => setIsListening(false);
-
-    recognitionRef.current = recognition;
-    return () => { try { recognition.stop(); } catch(_) {} };
-  }, []);
+  // Speech recognition instances are created fresh on each startListening call
+  // to avoid stale state bugs across browsers. No static setup needed here.
 
   const startListening = async () => {
     if (isListening) return;
