@@ -956,8 +956,8 @@ You're not performing. You're just here.`,
               >
                 {msg.role === 'assistant' && (
                   <div className="w-6 h-6 rounded-full flex-shrink-0 mr-2 mt-1 self-start" style={{
-                    background: 'radial-gradient(circle at 35% 30%, rgba(220,160,255,1) 0%, rgba(192,100,252,0.9) 50%, rgba(236,72,153,0.7) 100%)',
-                    boxShadow: '0 0 12px rgba(192,100,252,0.6)',
+                    background: 'radial-gradient(circle at 35% 30%, rgba(34,211,238,1) 0%, rgba(6,182,212,0.9) 50%, rgba(34,211,238,0.7) 100%)',
+                    boxShadow: '0 0 12px rgba(34,211,238,0.6)',
                   }} />
                 )}
                 <div
