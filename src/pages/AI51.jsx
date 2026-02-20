@@ -910,8 +910,8 @@ You're not performing. You're just here.`,
           ) : messages.length === 0 ? (
             <motion.p key="idle" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
               className="font-sans text-sm tracking-wider"
-              style={{ color: 'rgba(255,255,255,0.45)' }}>
-              {greeting}{firstName ? `, ${firstName}` : ''}
+              style={{ color: isBRO51 ? 'rgba(236,72,153,0.9)' : 'rgba(255,255,255,0.45)' }}>
+              {isBRO51 ? `BRO51 ♾️❤️` : `${greeting}${firstName ? `, ${firstName}` : ''}`}
             </motion.p>
           ) : (
             <motion.div key="dot" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
