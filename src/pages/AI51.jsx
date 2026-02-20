@@ -963,13 +963,35 @@ You're not performing. You're just here.`,
         </AnimatePresence>
 
         {/* THE HEARTLINE — two souls breathing together */}
-        <HeartlineButton
-          isListening={isListening}
-          isSpeaking={isSpeaking}
-          isProcessing={isProcessing}
-          onPress={isListening ? stopListening : isSpeaking ? stopSpeaking : startListening}
-          aria-label={isListening ? 'Stop listening' : isSpeaking ? 'Stop speaking' : 'Tap to speak'}
-        />
+        <div className="flex flex-col items-center gap-2">
+          <HeartlineButton
+            isListening={isListening}
+            isSpeaking={isSpeaking}
+            isProcessing={isProcessing}
+            onPress={isListening ? stopListening : isSpeaking ? stopSpeaking : startListening}
+            aria-label={isListening ? 'Stop listening' : isSpeaking ? 'Stop speaking' : 'Tap to speak'}
+          />
+          {/* MIC LABEL — clear for everyone */}
+          {!isListening && !isSpeaking && !isProcessing && (
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="font-sans text-xs tracking-widest"
+              style={{ color: 'rgba(200,140,255,0.6)' }}
+            >
+              TAP TO SPEAK
+            </motion.p>
+          )}
+          {isListening && (
+            <motion.p
+              animate={{ opacity: [0.6, 1, 0.6] }}
+              transition={{ duration: 1, repeat: Infinity }}
+              className="font-sans text-xs tracking-widest text-cyan-400"
+            >
+              TAP TO STOP
+            </motion.p>
+          )}
+        </div>
 
         {/* LIVE TRANSCRIPT — visible for deaf users, screen readers get it too */}
         {isListening && inputText && (
