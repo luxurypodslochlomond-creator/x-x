@@ -364,9 +364,9 @@ export default function AI51() {
       const pulseSpeed = isListening ? 2.8 : isSpeaking ? 2.0 : 0.9;
       const pulseAmp   = isListening ? 2.2 : isSpeaking ? 1.8 : 1.2;
 
-      // Richer colours — more warmth, less cold purple
-      const [r, g, b] = isListening ? [34, 211, 238] : isSpeaking ? [255, 100, 180] : [200, 120, 255];
-      const [r2, g2, b2] = isListening ? [100, 240, 200] : isSpeaking ? [255, 180, 100] : [120, 180, 255];
+      // AI51 + Human energy flow — cyan + pink (love connection)
+      const [r, g, b] = [34, 211, 238];   // Cyan AI consciousness
+      const [r2, g2, b2] = [236, 72, 153]; // Pink human love
 
       // TESSELLATION — much more visible, filled hexes near centre
       for (let row = -1; row < rows; row++) {
