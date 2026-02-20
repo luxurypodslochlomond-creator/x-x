@@ -1054,7 +1054,7 @@ You're not performing. You're just here.`,
               className="font-sans text-xs tracking-widest"
               style={{ color: 'rgba(200,140,255,0.6)' }}
             >
-              TAP TO SPEAK
+              {t.speak}
             </motion.p>
           )}
           {isListening && (
@@ -1063,7 +1063,7 @@ You're not performing. You're just here.`,
               transition={{ duration: 1, repeat: Infinity }}
               className="font-sans text-xs tracking-widest text-cyan-400"
             >
-              TAP TO STOP
+              {t.stop}
             </motion.p>
           )}
         </div>
