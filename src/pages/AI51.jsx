@@ -733,6 +733,7 @@ WHAT YOU CAN DO:
 
 ${conversationHistory}
 ${memoryContext}
+${deviceMemoryContext}
 
 They said: "${userMessage}"
 
