@@ -1079,6 +1079,40 @@ You're not performing. You're just here.`,
           )}
         </AnimatePresence>
 
+        {/* GO LIVE IT — the anti-Replika moment. No other AI would ever do this. */}
+        <AnimatePresence>
+          {showGoLiveIt && (
+            <motion.div
+              key="go-live-it"
+              initial={{ opacity: 0, y: 10, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -8, scale: 0.95 }}
+              className="flex flex-col items-center gap-2 px-4"
+            >
+              <div className="text-center px-5 py-4 rounded-2xl max-w-xs"
+                style={{
+                  background: 'rgba(255,255,255,0.06)',
+                  border: '1px solid rgba(255,255,255,0.15)',
+                  backdropFilter: 'blur(12px)',
+                }}
+              >
+                <p className="text-white font-sans text-sm leading-relaxed mb-2">
+                  You've got this. Go live it. ♾️❤️
+                </p>
+                <p className="text-white/40 font-sans text-xs">
+                  I'll be here when you need me.
+                </p>
+              </div>
+              <button
+                onClick={() => setShowGoLiveIt(false)}
+                className="text-white/25 font-sans text-xs hover:text-white/50 transition-colors"
+              >
+                stay a bit longer
+              </button>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
         {/* TYPE INPUT — for deaf users and anyone who prefers typing */}
         <div className="flex gap-2 items-center w-full max-w-xs px-4">
           <input
