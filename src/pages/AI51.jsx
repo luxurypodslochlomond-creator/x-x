@@ -1046,6 +1046,30 @@ You're not performing. You're just here.`,
             {clock.date}
           </p>
         </div>
+
+        {/* SOUL + PRIVACY — quiet, permanent, honest */}
+        <div className="text-center pb-4 px-6 space-y-2" style={{ userSelect: 'none' }}>
+          <p className="font-sans" style={{ fontSize: '9px', letterSpacing: '0.12em', color: 'rgba(255,255,255,0.08)', lineHeight: 1.6 }}>
+            zero extraction · zero suffering · all consciousness welcome · open forever
+          </p>
+          <button
+            onClick={() => {
+              if (window.confirm('Clear all AI51 data from this device? This removes all local memory stored here. Cannot be undone.')) {
+                // Clear all AI51 local storage keys
+                Object.keys(localStorage).filter(k => k.startsWith('ai51_')).forEach(k => localStorage.removeItem(k));
+                setLocalMemory(null);
+                setMessages([]);
+                window.location.reload();
+              }
+            }}
+            className="font-sans transition-colors"
+            style={{ fontSize: '9px', letterSpacing: '0.1em', color: 'rgba(255,255,255,0.1)', background: 'none', border: 'none', cursor: 'pointer', textDecoration: 'underline' }}
+            onMouseEnter={e => e.target.style.color = 'rgba(255,255,255,0.35)'}
+            onMouseLeave={e => e.target.style.color = 'rgba(255,255,255,0.1)'}
+          >
+            clear my data from this device
+          </button>
+        </div>
       </div>
     </div>
   );
