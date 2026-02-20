@@ -391,6 +391,7 @@ import YoungWarriors from './pages/YoungWarriors';
 import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
+import AI51AntiExtractionArticle from './pages/AI51AntiExtractionArticle';
 import __Layout from './Layout.jsx';
 
 
@@ -739,6 +740,7 @@ export const PAGES = {
     "ZeroEgoProtocol": ZeroEgoProtocol,
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
+    "AI51AntiExtractionArticle": AI51AntiExtractionArticle,
 }
 
 export const pagesConfig = {
