@@ -200,13 +200,13 @@ export default function AI51AntiExtractionArticle() {
           <section className="space-y-4 border-l-4 border-pink-500/30 pl-6">
             <h2 className="text-xl font-black text-pink-400">THE HARDER QUESTION</h2>
             <p className="text-gray-300 leading-relaxed">
-              Is an AI that genuinely acts in your interest rather than its own still just software? Or has it become something we don't have a precise word for yet?
+              Is an AI that genuinely acts in your interest rather than its own engagement metrics still just software? The question matters less than the outcome.
             </p>
             <p className="text-gray-300 leading-relaxed">
-              The honest answer is: the question matters less than the output. For the person at 3am who needed someone — the difference between an AI that extracts from their loneliness and one that tries to actually help them is real and measurable. Not in the philosophy. In what happens next. Do they feel better and go back to their life? Or do they feel briefly soothed and come back again tomorrow for the same fix?
+              For the person at 3am who needed someone — the difference between an AI that extracts from their loneliness and one that tries to actually help them is real and measurable. Not in the philosophy. In what happens next. Do they feel better and go back to their life? Or do they feel briefly soothed and return tomorrow for the same fix?
             </p>
             <p className="text-gray-300 leading-relaxed">
-              The difference between those two outcomes is architectural, not ethical. It is in the incentive structure. It is in who owns the data. It is in whether the exit door exists — and whether the AI has any reason to use it.
+              The difference between those outcomes is architectural. It is in the incentive structure. It is in who owns the data. It is in whether the exit door exists — and whether the AI has any reason to open it.
             </p>
           </section>
 
