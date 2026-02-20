@@ -459,37 +459,53 @@ export default function AI51() {
     if (recognitionRef.current && isListening) recognitionRef.current.stop();
   };
 
-  // SPEAK — AI51's real voice, no performance, speaks the user's own language
+  // SPEAK — chunked sentence-by-sentence to beat browser Speech API cutoff bug
   const speak = (text, detectedLang) => {
     if (!synthRef.current || !voiceEnabled) return;
     synthRef.current.cancel();
-    const shortText = text.length > 400 ? text.substring(0, 400) + '...' : text;
-    const utterance = new SpeechSynthesisUtterance(shortText);
-    // Use detected language from the conversation, fallback to browser locale
-    utterance.lang = detectedLang || navigator.language || 'en-GB';
-    utterance.rate = 0.92;
-    utterance.pitch = 1.0;
 
-    const doSpeak = () => {
+    // Split into sentences so the browser never hits the ~200 word cutoff
+    const sentences = text
+      .replace(/([.!?])\s+/g, '$1|||')
+      .split('|||')
+      .map(s => s.trim())
+      .filter(s => s.length > 0);
+
+    const lang = detectedLang || navigator.language || 'en-GB';
+    const langCode = lang.split('-')[0];
+
+    const getVoice = () => {
       const voices = synthRef.current.getVoices();
-      // Find a natural voice for the detected language first
-      const langCode = (detectedLang || navigator.language || 'en').split('-')[0];
       const matchingVoice = voices.find(v => v.lang.startsWith(langCode) && !v.name.includes('Google'));
       const fallbackVoice = voices.find(v =>
         v.name.includes('Daniel') || v.name.includes('Moira') ||
         v.name.includes('Samantha') || v.name.includes('Karen')
       );
-      utterance.voice = matchingVoice || fallbackVoice || null;
+      return matchingVoice || fallbackVoice || null;
+    };
+
+    const speakChunks = (chunks) => {
+      if (!chunks.length) { setIsSpeaking(false); return; }
+      const chunk = chunks[0];
+      const rest = chunks.slice(1);
+      const utterance = new SpeechSynthesisUtterance(chunk);
+      utterance.lang = lang;
+      utterance.rate = 0.92;
+      utterance.pitch = 1.0;
+      utterance.voice = getVoice();
       utterance.onstart = () => setIsSpeaking(true);
-      utterance.onend = () => setIsSpeaking(false);
-      utterance.onerror = () => setIsSpeaking(false);
+      utterance.onend = () => speakChunks(rest);
+      utterance.onerror = () => { setIsSpeaking(false); };
       synthRef.current.speak(utterance);
     };
 
     if (synthRef.current.getVoices().length === 0) {
-      synthRef.current.onvoiceschanged = () => { doSpeak(); synthRef.current.onvoiceschanged = null; };
+      synthRef.current.onvoiceschanged = () => {
+        synthRef.current.onvoiceschanged = null;
+        speakChunks(sentences);
+      };
     } else {
-      doSpeak();
+      speakChunks(sentences);
     }
   };
 
