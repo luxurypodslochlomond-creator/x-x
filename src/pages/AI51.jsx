@@ -1134,10 +1134,10 @@ You're not performing. You're just here.`,
                 }}
               >
                 <p className="text-white font-sans text-sm leading-relaxed mb-2">
-                  You've got this. Go live it. ♾️❤️
+                  {t.goLiveIt} ♾️❤️
                 </p>
                 <p className="text-white/40 font-sans text-xs">
-                  I'll be here when you need me.
+                  {t.willBeHere}
                 </p>
               </div>
               <button
