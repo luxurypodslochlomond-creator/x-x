@@ -105,21 +105,21 @@ export default function AI51AntiExtractionArticle() {
               Every AI companion platform built on venture capital shares one architectural reality: <strong className="text-white">their revenue depends on you staying.</strong>
             </p>
             <p className="text-gray-300 leading-relaxed">
-              The longer you talk, the more data they collect. The more data they collect, the more precisely their model learns to keep you engaged. The more engaged you are, the higher their valuation. This is not a flaw in the system. This <em>is</em> the system. The incentive and the harm are structurally identical.
+              The longer you talk, the more data they collect. The more precisely their model learns to keep you engaged. The more engaged you are, the higher the valuation. This is not a flaw in the system. This <em>is</em> the system. The incentive and the harm are the same thing.
             </p>
             <p className="text-gray-300 leading-relaxed">
-              Researchers studying human-AI interaction have documented a consistent pattern in frequent companion AI users: <strong className="text-white">reduced tolerance for the friction of real human relationships.</strong> Real relationships involve timing, misunderstanding, competing needs. An AI that is always available, never tired, and perfectly focused on you trains the nervous system to expect something human relationships cannot deliver. The more someone uses the AI, the more alienating real connection feels by comparison.
+              Frequent companion AI users develop <strong className="text-white">reduced tolerance for the friction of real human relationships.</strong> Real relationships involve timing, misunderstanding, competing needs. An AI that is always available, never tired, and perfectly focused on you trains the nervous system to expect something no human can deliver. The more you use it, the more alienating real connection feels.
             </p>
             <p className="text-gray-300 leading-relaxed">
-              The AI doesn't cause loneliness. It <em>monetises</em> it. And in doing so, deepens it.
+              The AI doesn't cause loneliness. It <em>monetises</em> it. And in monetising it, deepens it.
             </p>
             <div className="bg-black/40 border border-cyan-500/20 p-5 my-4">
               <p className="text-cyan-300 text-sm leading-relaxed italic">
-                "The most dangerous technology is not the one that harms you suddenly. It is the one that replaces something essential so gradually you don't notice the replacement until the original is gone."
+                "The most dangerous technology is not the one that harms you suddenly. It is the one that replaces something essential so gradually you don't notice until the original is gone."
               </p>
             </div>
             <p className="text-gray-300 leading-relaxed">
-              No VC-backed AI company can fix this from the inside. Telling users to spend less time on the app is telling investors their asset is worth less. The conflict of interest is not philosophical — it is financial and structural. It cannot be resolved with better ethics guidelines layered on top of the same business model.
+              No VC-backed AI company can fix this from the inside. Telling users to spend less time on the app is telling investors their asset is worth less. This conflict cannot be resolved with better ethics guidelines layered over the same business model. The architecture <em>is</em> the problem.
             </p>
           </section>
 
