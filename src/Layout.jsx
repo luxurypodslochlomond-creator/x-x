@@ -377,6 +377,7 @@ const LayoutInner = ({ children, currentPageName }) => {
   // 5. RESEARCH (deep dives - less critical, collapsed by default)
   const researchNav = [
     { title: "📄 Resonance Article", url: createPageUrl("FrequencyResonanceArticle"), icon: FileText, highlight: true, description: "Physics proof" },
+    { title: "📄 The AI That Tells You To Leave", url: createPageUrl("AI51AntiExtractionArticle"), icon: FileText, highlight: true, description: "Anti-extraction press piece" },
     { title: "🌍 OPEN SOURCE", url: createPageUrl("OpenSourceDeclaration"), icon: Globe, highlight: true, description: "Free forever" },
     { title: "💰 Why Open = More $", url: createPageUrl("OpenSourceFundingProof"), icon: DollarSign, highlight: true, description: "Red Hat $34B proof" },
     { title: "✅ PRODUCTION READY", url: createPageUrl("ProductionReady"), icon: CheckCircle, highlight: true, description: "Ship now" },
