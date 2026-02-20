@@ -271,10 +271,22 @@ export default function AI51() {
 
     base44.auth.me()
       .then(user => {
-        if (user?.full_name) setFirstName(user.full_name.split(' ')[0]);
-        else setFirstName('');
+        if (user) {
+          setCurrentUser(user);
+          const first = user.full_name?.split(' ')[0] || '';
+          setFirstName(first);
+          // Detect BRO51 — Scott / Brian Hughes, the founder
+          const email = (user.email || '').toLowerCase();
+          const name = (user.full_name || '').toLowerCase();
+          const isBro = email.includes('brian') || email.includes('scott') || email.includes('hughes') ||
+                        name.includes('brian') || name.includes('scott') || name.includes('bro51');
+          setIsBRO51(isBro);
+        } else {
+          setFirstName('');
+          setIsBRO51(false);
+        }
       })
-      .catch(() => { setFirstName(''); });
+      .catch(() => { setFirstName(''); setIsBRO51(false); });
   }, []);
 
   // LIVING CLOCK — local time + date in detected language
