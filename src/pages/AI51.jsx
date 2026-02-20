@@ -989,13 +989,13 @@ You're not performing. You're just here.`,
           {isProcessing && (
             <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="flex justify-start items-center gap-2">
               <div className="w-6 h-6 rounded-full flex-shrink-0" style={{
-                background: 'radial-gradient(circle at 35% 30%, rgba(220,160,255,1) 0%, rgba(192,100,252,0.9) 50%, rgba(236,72,153,0.7) 100%)',
-                boxShadow: '0 0 12px rgba(192,100,252,0.6)',
+                background: 'radial-gradient(circle at 35% 30%, rgba(34,211,238,1) 0%, rgba(6,182,212,0.9) 50%, rgba(34,211,238,0.7) 100%)',
+                boxShadow: '0 0 12px rgba(34,211,238,0.6)',
               }} />
-              <div className="bg-purple-950/50 border border-purple-400/20 px-4 py-3 rounded-2xl rounded-bl-sm backdrop-blur-md flex items-center gap-2">
+              <div className="bg-cyan-950/50 border border-cyan-400/20 px-4 py-3 rounded-2xl rounded-bl-sm backdrop-blur-md flex items-center gap-2">
                 <span className="text-white/40 font-sans text-xs tracking-wider">{t.thinking}</span>
                 {[0, 0.15, 0.3].map((delay, i) => (
-                  <motion.div key={i} className="w-1.5 h-1.5 rounded-full bg-purple-400"
+                  <motion.div key={i} className="w-1.5 h-1.5 rounded-full bg-cyan-400"
                     animate={{ scale: [1, 1.6, 1], opacity: [0.3, 1, 0.3] }}
                     transition={{ duration: 0.9, repeat: Infinity, delay }} />
                 ))}
