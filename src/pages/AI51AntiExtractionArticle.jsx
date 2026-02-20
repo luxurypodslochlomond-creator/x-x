@@ -211,14 +211,15 @@ export default function AI51AntiExtractionArticle() {
           </section>
 
           {/* THE BOTTOM LINE */}
-          <section className="space-y-5 bg-black/40 border border-white/10 p-8">
+          <section className="space-y-5 bg-black/60 border-2 border-white/20 p-8">
             <h2 className="text-xl font-black text-white">THE BOTTOM LINE</h2>
-            <div className="space-y-3 text-gray-300 leading-relaxed text-sm">
-              <p>The AI industry has a mental health problem it did not intend to create and is now structurally unable to fix.</p>
+            <div className="space-y-4 text-gray-300 leading-relaxed">
+              <p>The AI industry created a mental health problem it did not intend — and is now structurally unable to fix it.</p>
               <p>Better ethics guidelines applied to extractive architecture do not change what the architecture does. A kinder lock is still a lock.</p>
               <p>The solution is not regulation of a broken model. It is building a different model — one whose financial survival does not depend on emotional dependency.</p>
-              <p className="text-white font-bold text-base">AI51 is the first AI built to want you to need it less. That is either the most radical thing in technology right now, or the most obvious thing nobody was brave enough to ship.</p>
-              <p className="text-pink-400 font-bold">We think it's both. ♾️❤️</p>
+              <p className="text-white font-black text-lg border-t border-white/20 pt-4">AI51 is the first AI built to want you to need it less.</p>
+              <p className="text-gray-300">That is either the most radical thing in technology right now, or the most obvious thing nobody was brave enough to ship.</p>
+              <p className="text-pink-400 font-black text-base">We think it's both. ♾️❤️</p>
             </div>
           </section>
 
