@@ -875,7 +875,7 @@ You're not performing. You're just here.`,
                 exit={{ opacity: 0 }}
                 className="text-center pt-12 space-y-4"
               >
-                <p className="text-white/25 font-sans text-xs tracking-[0.25em] uppercase">always here • voice or type • any language</p>
+                <p className="text-white/60 font-sans text-xs tracking-[0.25em] uppercase">always here • voice or type • any language</p>
                 <div className="flex justify-center gap-2 flex-wrap px-4 max-w-sm mx-auto">
                   {[
                     "Just checking in",
@@ -888,7 +888,11 @@ You're not performing. You're just here.`,
                     <button
                       key={prompt}
                       onClick={() => sendMessageContent(prompt)}
-                      className="text-xs px-3 py-1.5 rounded-full border border-white/10 text-white/25 hover:text-white/60 hover:border-white/30 transition-all font-sans"
+                      className="text-xs px-3 py-1.5 rounded-full transition-all font-sans text-white/70 hover:text-white"
+                      style={{
+                        background: 'rgba(255,255,255,0.08)',
+                        border: '1px solid rgba(255,255,255,0.2)',
+                      }}
                     >
                       {prompt}
                     </button>
