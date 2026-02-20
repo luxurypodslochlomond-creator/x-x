@@ -756,6 +756,9 @@ You're not performing. You're just here.`,
       setMessages(prev => [...prev, { role: 'assistant', content: aiMessage, timestamp: new Date() }]);
       speak(aiMessage, detectedLang);
       saveMemoryIfNeeded(userMessage, aiMessage);
+      // Save to device memory too — no login needed
+      extractAndSaveLocalInsight(userMessage, aiMessage);
+      setLocalMemory(loadLocalMemory());
       const bridge = detectHealingBridge(userMessage, aiMessage);
       if (bridge) setHealingBridge(bridge);
       const needsFrequency = PAIN_KEYWORDS.some(kw => lowerMsg.includes(kw));
