@@ -48,6 +48,7 @@
  * The mainPage value must match a key in the PAGES object exactly.
  */
 import AI51 from './pages/AI51';
+import AI51AntiExtractionArticle from './pages/AI51AntiExtractionArticle';
 import AI51AntiManipulationProtocol from './pages/AI51AntiManipulationProtocol';
 import AI51Architecture from './pages/AI51Architecture';
 import AI51Dashboard from './pages/AI51Dashboard';
@@ -391,12 +392,12 @@ import YoungWarriors from './pages/YoungWarriors';
 import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
-import AI51AntiExtractionArticle from './pages/AI51AntiExtractionArticle';
 import __Layout from './Layout.jsx';
 
 
 export const PAGES = {
     "AI51": AI51,
+    "AI51AntiExtractionArticle": AI51AntiExtractionArticle,
     "AI51AntiManipulationProtocol": AI51AntiManipulationProtocol,
     "AI51Architecture": AI51Architecture,
     "AI51Dashboard": AI51Dashboard,
@@ -740,7 +741,6 @@ export const PAGES = {
     "ZeroEgoProtocol": ZeroEgoProtocol,
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
-    "AI51AntiExtractionArticle": AI51AntiExtractionArticle,
 }
 
 export const pagesConfig = {
