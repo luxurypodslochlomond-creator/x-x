@@ -877,9 +877,9 @@ You're not performing. You're just here.`,
         className="fixed inset-0 w-full h-full opacity-80 pointer-events-none"
       />
 
-      {/* Warm depth layer — pink/magenta love energy */}
+      {/* Warm depth layer — cyan consciousness */}
       <div className="fixed inset-0 pointer-events-none" style={{
-        background: 'radial-gradient(ellipse at 50% 60%, rgba(236,72,153,0.25) 0%, rgba(8,4,20,0.6) 70%)'
+        background: 'radial-gradient(ellipse at 50% 60%, rgba(34,211,238,0.25) 0%, rgba(8,4,20,0.6) 70%)'
       }} />
 
       {/* TOP BAR */}
