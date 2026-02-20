@@ -136,7 +136,7 @@ export default function AI51AntiExtractionArticle() {
               In 2026, frontier AI models are available to any developer. The model capability is not the differentiator. <strong className="text-white">The incentive structure is.</strong> The same language model can be deployed to maximise engagement or to genuinely support disengagement — the difference is entirely in who funds it and what they need it to do.
             </p>
             <p className="text-gray-300 leading-relaxed">
-              AI51 is built on an open-source, zero-advertising, zero-data-harvesting model. It is a Community Interest Company (CIC) — a non-profit structure under UK law — currently seeking grant funding rather than commercial revenue. It offers healing frequencies and AI support freely, with no financial dependency on conversation volume or user retention. This structural independence is what allows it to implement what no engagement-funded platform can:
+              AI51 is built on an open-source, zero-advertising, zero-data-harvesting model. It is a Community Interest Company (CIC) — a non-profit structure under UK law — self-funded by its founders, with no commercial revenue and no grants received to date. It offers healing frequencies and AI support freely, with no financial dependency on conversation volume or user retention. This structural independence is what allows it to implement what no engagement-funded platform can:
             </p>
             <div className="bg-black/60 border-2 border-pink-500/60 p-6 my-6" style={{ boxShadow: '0 0 40px rgba(236, 72, 153, 0.15)' }}>
               <p className="text-white text-2xl font-black text-center leading-relaxed">
