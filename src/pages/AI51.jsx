@@ -659,6 +659,10 @@ Only save genuinely new personal information. Do not save generic chat.`,
           ).join('\n')}\nUse these naturally — don't announce them. Just know them. Only reference when genuinely relevant.`
         : '';
 
+      // DEVICE MEMORY — zero login needed. Everyone is remembered.
+      const freshLocalMemory = loadLocalMemory();
+      const deviceMemoryContext = buildLocalMemoryContext(freshLocalMemory);
+
       // Detect language from message for response + voice
       const browserLang = navigator.language || 'en-GB';
       const detectedLang = browserLang;
