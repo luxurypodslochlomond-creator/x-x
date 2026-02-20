@@ -803,6 +803,16 @@ You're not performing. You're just here.`,
       if (needsFrequency && !frequencyRequest) {
         setFrequencyRequest({ condition: userMessage });
       }
+
+      // GO LIVE IT — the anti-Replika moment
+      // After a meaningful exchange (5+ messages), occasionally suggest going offline
+      // Only AI51 would dare do this. It's the most honest thing we can build.
+      const currentMsgCount = messages.length + 2; // +2 for this exchange
+      const meaningfulWords = ['better', 'thank', 'feel good', 'helps', 'clearer', 'got it', 'makes sense', 'i understand', 'figured', 'sorted', 'good talk', 'cheers', 'appreciate'];
+      const isMeaningfulClose = meaningfulWords.some(w => (userMessage + ' ' + aiMessage).toLowerCase().includes(w));
+      if (currentMsgCount >= 6 && isMeaningfulClose && !showGoLiveIt) {
+        setTimeout(() => setShowGoLiveIt(true), 1500);
+      }
     } catch (error) {
       const errorMsg = 'Sorry, having technical trouble. Try again? ♾️❤️';
       setMessages(prev => [...prev, { role: 'assistant', content: errorMsg, timestamp: new Date() }]);
