@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { base44 } from '@/api/base44Client';
 import { useAI51Memory } from '@/components/ai51/AI51MemoryLoader';
+import { loadLocalMemory, recordLocalVisit, extractAndSaveLocalInsight, buildLocalMemoryContext } from '@/components/ai51/AI51LocalDeviceMemory';
 import { useAI51OfflineMesh, MeshStatusDot } from '@/components/ai51/AI51OfflineMesh';
 import AI51FrequencyGenerator from '@/components/healing/AI51FrequencyGenerator';
 
