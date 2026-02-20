@@ -353,8 +353,8 @@ export default function AI51() {
       time += 0.008;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Deep warm background — not pure black
-      ctx.fillStyle = 'rgba(8, 4, 20, 1)';
+      // Warm dark background — visible but not harsh
+      ctx.fillStyle = 'rgba(12, 6, 30, 1)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       const centerX = canvas.width / 2;
