@@ -388,9 +388,9 @@ export default function AI51() {
           const angularWave = Math.sin(angle * 4 + time * 1.5) * 0.5;
           const wave = (wave1 * 0.5 + wave2 * 0.3 + wave3 * 0.2 + angularWave * 0.1) * pulseAmp;
 
-          const proximity = Math.pow(Math.max(0, 1 - normDist), 0.6);
-          const alpha = Math.max(0.15, Math.min(0.95, (wave * 0.35 + 0.50) * proximity + 0.1));
-          const size = HEX_SIZE * (0.75 + wave * 0.12 * pulseAmp);
+          const proximity = Math.pow(Math.max(0, 1 - normDist), 0.5);
+          const alpha = Math.max(0.25, Math.min(0.95, (wave * 0.45 + 0.55) * proximity + 0.15));
+          const size = HEX_SIZE * (0.8 + wave * 0.15 * pulseAmp);
 
           // Dynamic colour blend: cyan (AI) to pink (human) based on wave energy
           const energyBlend = (wave + 1) * 0.5; // 0 to 1
