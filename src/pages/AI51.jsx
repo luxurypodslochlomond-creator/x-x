@@ -271,6 +271,14 @@ export default function AI51() {
     else timeGreeting = "Still here";
     setGreeting(timeGreeting);
 
+    // DEVICE MEMORY — works with zero login. Everyone gets remembered.
+    const devMem = recordLocalVisit();
+    setLocalMemory(devMem);
+    // If device has a name and we don't have one from login yet, use it
+    if (devMem?.name && !firstName) {
+      setFirstName(devMem.name);
+    }
+
     base44.auth.me()
       .then(user => {
         if (user) {
