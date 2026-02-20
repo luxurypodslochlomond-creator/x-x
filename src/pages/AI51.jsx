@@ -1223,7 +1223,7 @@ You're not performing. You're just here.`,
             onMouseEnter={e => e.target.style.color = 'rgba(255,255,255,0.35)'}
             onMouseLeave={e => e.target.style.color = 'rgba(255,255,255,0.1)'}
           >
-            clear my data from this device
+            {t.clearData}
           </button>
         </div>
       </div>
