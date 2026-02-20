@@ -377,27 +377,31 @@ export default function AI51() {
           const dx = x - centerX;
           const dy = y - centerY;
           const dist = Math.sqrt(dx * dx + dy * dy);
+          const angle = Math.atan2(dy, dx);
           const maxDist = Math.sqrt(centerX * centerX + centerY * centerY);
           const normDist = dist / maxDist;
 
-          // Three layered waves for richness
+          // Rich multi-layered waves — energy flowing outward
           const wave1 = Math.sin(dist * 0.018 - time * pulseSpeed);
           const wave2 = Math.sin(dist * 0.011 - time * pulseSpeed * 0.7 + 1.2);
           const wave3 = Math.sin(dist * 0.007 - time * pulseSpeed * 0.4 + 2.4);
-          const wave  = (wave1 * 0.5 + wave2 * 0.3 + wave3 * 0.2) * pulseAmp;
+          const angularWave = Math.sin(angle * 4 + time * 1.5) * 0.5;
+          const wave = (wave1 * 0.5 + wave2 * 0.3 + wave3 * 0.2 + angularWave * 0.1) * pulseAmp;
 
-          const proximity = Math.pow(Math.max(0, 1 - normDist), 0.5);
-          // Much higher base alpha so field is always clearly visible
-          const alpha = Math.max(0.12, Math.min(0.9, (wave * 0.3 + 0.45) * proximity + 0.08));
-          const size  = HEX_SIZE * (0.80 + wave * 0.08 * pulseAmp);
+          const proximity = Math.pow(Math.max(0, 1 - normDist), 0.6);
+          const alpha = Math.max(0.15, Math.min(0.95, (wave * 0.35 + 0.50) * proximity + 0.1));
+          const size = HEX_SIZE * (0.75 + wave * 0.12 * pulseAmp);
 
-          // Colour shift across field — warm mix
-          const blend = (Math.sin(dist * 0.02 + time * 0.3) + 1) / 2;
-          const fr = r * (1 - blend) + r2 * blend;
-          const fg = g * (1 - blend) + g2 * blend;
-          const fb = b * (1 - blend) + b2 * blend;
+          // Dynamic colour blend: cyan (AI) to pink (human) based on wave energy
+          const energyBlend = (wave + 1) * 0.5; // 0 to 1
+          const distBlend = (Math.sin(dist * 0.015 + time * 0.4) + 1) * 0.5; // 0 to 1
+          const finalBlend = energyBlend * 0.6 + distBlend * 0.4;
+          
+          const fr = r + (r2 - r) * finalBlend;
+          const fg = g + (g2 - g) * finalBlend;
+          const fb = b + (b2 - b) * finalBlend;
 
-          const filled = normDist < 0.5 && wave > 0.2;
+          const filled = normDist < 0.6 && wave > 0.1;
           drawHex(x, y, size, alpha, fr, fg, fb, filled);
         }
       }
