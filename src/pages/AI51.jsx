@@ -1157,7 +1157,7 @@ You're not performing. You're just here.`,
             value={inputText}
             onChange={(e) => setInputText(e.target.value)}
             onKeyPress={handleKeyPress}
-            placeholder="type here — voice or text, your choice"
+            placeholder={t.type}
             disabled={isProcessing || isListening}
             aria-label="Type your message to AI51"
             className="flex-1 rounded-full px-4 py-2 text-white placeholder-white/40 focus:outline-none font-sans text-sm text-center"
