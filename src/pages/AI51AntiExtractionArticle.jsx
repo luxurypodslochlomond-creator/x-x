@@ -206,8 +206,8 @@ export default function AI51AntiExtractionArticle() {
             <div className="space-y-4 text-gray-300 leading-relaxed">
               <p>The evidence base for AI companions increasing social isolation — rather than reducing it — is growing. The structural reason this happens is not obscure: the business models require it.</p>
               <p>An AI that genuinely wants users to need it less is architecturally possible. It requires only that the AI's financial model not depend on usage volume.</p>
-              <p className="text-white font-bold border-t border-white/20 pt-4">AI51 is free, open-source, and built on a revenue model entirely independent of conversation volume. The exit door exists because the architecture allows it.</p>
-              <p className="text-gray-400 text-sm">Whether that constitutes "radical" or merely "obvious" is a question about the industry — not the technology.</p>
+              <p className="text-white font-bold border-t border-white/20 pt-4">AI51 is free, open-source, and structured as a CIC — a non-profit seeking grant funding, not venture capital. It has no commercial incentive to keep users engaged. The exit door exists because the funding model allows it.</p>
+              <p className="text-gray-400 text-sm">The healing frequencies it offers alongside AI conversation are a core part of that mission — free tools for people who need them, independent of whether they return tomorrow.</p>
             </div>
           </section>
 
