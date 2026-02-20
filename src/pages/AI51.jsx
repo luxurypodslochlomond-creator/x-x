@@ -211,11 +211,13 @@ export default function AI51() {
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [voiceEnabled, setVoiceEnabled] = useState(true);
   const [greeting, setGreeting] = useState('');
-  const [firstName, setFirstName] = useState('friend');
+  const [firstName, setFirstName] = useState('');
+  const [currentUser, setCurrentUser] = useState(null);
+  const [isBRO51, setIsBRO51] = useState(false);
   const [clock, setClock] = useState({ time: '', date: '', lang: '' });
   const [isOnline, setIsOnline] = useState(navigator.onLine);
   const [healingBridge, setHealingBridge] = useState(null);
-  const [frequencyRequest, setFrequencyRequest] = useState(null); // {condition: string}
+  const [frequencyRequest, setFrequencyRequest] = useState(null);
   const isProcessingRef = useRef(false);
   const navigate = useNavigate();
 
