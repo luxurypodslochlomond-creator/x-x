@@ -1,4 +1,4 @@
-// Force rebuild - Radio error fix ♾️❤️♾️
+// Force rebuild - white screen fix ♾️❤️♾️
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
