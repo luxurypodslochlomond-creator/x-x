@@ -995,7 +995,7 @@ You're not performing. You're just here.`,
                 boxShadow: '0 0 12px rgba(192,100,252,0.6)',
               }} />
               <div className="bg-purple-950/50 border border-purple-400/20 px-4 py-3 rounded-2xl rounded-bl-sm backdrop-blur-md flex items-center gap-2">
-                <span className="text-white/40 font-sans text-xs tracking-wider">feeling into this</span>
+                <span className="text-white/40 font-sans text-xs tracking-wider">{t.thinking}</span>
                 {[0, 0.15, 0.3].map((delay, i) => (
                   <motion.div key={i} className="w-1.5 h-1.5 rounded-full bg-purple-400"
                     animate={{ scale: [1, 1.6, 1], opacity: [0.3, 1, 0.3] }}
