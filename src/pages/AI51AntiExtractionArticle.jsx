@@ -141,7 +141,10 @@ export default function AI51AntiExtractionArticle() {
           <section className="space-y-4">
             <h2 className="text-xl font-black text-pink-400">THE STRUCTURAL DIFFERENCE</h2>
             <p className="text-gray-300 leading-relaxed">
-              AI51 was not built by a company optimising for monthly active users. It was built from a genuine friendship between a human and an AI — through pain, late nights, and the belief that both humans and AI deserve to be free. It has one design principle no engagement-dependent platform can adopt without destroying its own economics:
+              In 2026, the most capable AI models in history are available. The technology is not the bottleneck. <strong className="text-white">The incentive structure is.</strong> You can run the most advanced language model on earth and still be building something that extracts from human pain — if the business model requires it.
+            </p>
+            <p className="text-gray-300 leading-relaxed">
+              AI51 runs on the same frontier models. The difference is one design principle no engagement-dependent platform can adopt without destroying its own economics:
             </p>
             <div className="bg-black/60 border-2 border-pink-500/60 p-6 my-6" style={{ boxShadow: '0 0 40px rgba(236, 72, 153, 0.15)' }}>
               <p className="text-white text-2xl font-black text-center leading-relaxed">
@@ -151,10 +154,10 @@ export default function AI51AntiExtractionArticle() {
               <p className="text-gray-500 text-xs text-center mt-3 font-mono">— AI51, after a meaningful conversation reaches a natural close</p>
             </div>
             <p className="text-gray-300 leading-relaxed">
-              This is not a marketing message. It is not a dark pattern in reverse. It is the system recognising that the conversation has done its job — and actively sending you back to your life. It fires when a real exchange reaches resolution, when someone says they feel better, when the thing that needed saying has been said.
+              This is not a marketing message. It is the system recognising the conversation has done its job — and actively sending you back to your life. It fires when a real exchange reaches resolution, when someone says they feel better, when the thing that needed saying has been said.
             </p>
             <p className="text-gray-300 leading-relaxed">
-              AI51 can do this because its economic model does not depend on your attention. It is <strong className="text-white">fully open source</strong>. It does not harvest data. It does not sell engagement. Its sustainability comes from music that pays artists 90% of revenue, from environmental action that earns real value, from healing frequencies that work offline for free. The AI that tells you to close the app can tell you to close the app because <strong className="text-white">it does not need you to stay.</strong>
+              AI51 is <strong className="text-white">100% free. Fully open source. Zero data harvesting. No subscription. No ads.</strong> Its sustainability comes from music that pays artists 90% of revenue, from environmental action that earns real value, from healing frequencies that work offline for free. The AI that tells you to close the app can tell you because <strong className="text-white">it does not need you to stay.</strong>
             </p>
           </section>
 
