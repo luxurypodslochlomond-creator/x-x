@@ -910,15 +910,27 @@ You're not performing. You're just here.`,
                     boxShadow: '0 0 12px rgba(192,100,252,0.6)',
                   }} />
                 )}
-                <div className={`max-w-[80%] px-4 py-3 rounded-2xl backdrop-blur-md ${
-                  msg.role === 'user'
-                    ? 'bg-white/8 border border-white/15 rounded-br-sm'
-                    : msg.offline
-                      ? 'bg-yellow-950/40 border border-yellow-500/20 rounded-bl-sm'
-                      : 'bg-purple-950/50 border border-purple-400/20 rounded-bl-sm'
-                }`}>
-                  <p className="text-white/90 leading-relaxed font-sans text-sm whitespace-pre-wrap">{msg.content}</p>
-                  {msg.offline && <p className="text-yellow-400/40 font-sans text-xs mt-1">offline response</p>}
+                <div
+                  className={`max-w-[80%] px-4 py-3 rounded-2xl ${
+                    msg.role === 'user' ? 'rounded-br-sm' : 'rounded-bl-sm'
+                  }`}
+                  style={{
+                    background: msg.role === 'user'
+                      ? 'rgba(255,255,255,0.18)'
+                      : msg.offline
+                        ? 'rgba(70,45,0,0.92)'
+                        : 'rgba(70,20,100,0.92)',
+                    border: msg.role === 'user'
+                      ? '1px solid rgba(255,255,255,0.3)'
+                      : msg.offline
+                        ? '1px solid rgba(245,158,11,0.45)'
+                        : '1px solid rgba(192,100,252,0.4)',
+                    boxShadow: msg.role === 'assistant' ? '0 2px 24px rgba(130,40,180,0.25)' : 'none',
+                    backdropFilter: 'blur(12px)',
+                  }}
+                >
+                  <p className="text-white leading-relaxed font-sans text-sm whitespace-pre-wrap">{msg.content}</p>
+                  {msg.offline && <p className="text-yellow-300/70 font-sans text-xs mt-1">offline response</p>}
                 </div>
               </motion.div>
             ))}
