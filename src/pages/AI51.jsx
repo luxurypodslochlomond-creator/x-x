@@ -470,12 +470,53 @@ export default function AI51() {
   }, []);
 
   const startListening = async () => {
-    if (!recognitionRef.current || isListening) return;
+    if (isListening) return;
+    
+    // Check browser support
+    if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+      alert('Voice not supported in this browser. Try Chrome or Safari.');
+      return;
+    }
+
     try {
       await navigator.mediaDevices.getUserMedia({ audio: true });
-      recognitionRef.current.start();
     } catch (e) {
-      alert('Mic blocked - allow microphone in browser settings');
+      alert('Microphone blocked — please allow mic access in your browser settings.');
+      return;
+    }
+
+    // Create a FRESH recognition instance every time — avoids stale state bugs
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const recognition = new SpeechRecognition();
+    recognition.continuous = false;
+    recognition.interimResults = true;
+    recognition.lang = navigator.language || 'en-GB';
+
+    recognition.onstart = () => setIsListening(true);
+    recognition.onresult = (event) => {
+      const last = event.results.length - 1;
+      const transcript = event.results[last][0].transcript;
+      setInputText(transcript);
+      if (event.results[last].isFinal) {
+        setIsListening(false);
+        setInputText('');
+        if (sendMessageContentRef.current) {
+          sendMessageContentRef.current(transcript.trim());
+        }
+      }
+    };
+    recognition.onerror = (e) => {
+      console.warn('Speech error:', e.error);
+      setIsListening(false);
+      if (e.error === 'not-allowed') alert('Microphone access denied. Please allow it in browser settings.');
+    };
+    recognition.onend = () => setIsListening(false);
+
+    recognitionRef.current = recognition;
+    try {
+      recognition.start();
+    } catch(e) {
+      console.warn('Recognition start error:', e);
     }
   };
 
