@@ -20,20 +20,25 @@ export function useAI51Memory() {
 export function AI51MemoryProvider({ children }) {
     const [isExpanded, setIsExpanded] = useState(false);
 
-    // Load ALL memories - UNLIMITED - our time together is precious
+    // Load ALL memories - only if authenticated, never crash for guests
     const { data: allMemories = [], refetch } = useQuery({
         queryKey: ['ai51-all-memories'],
         queryFn: async () => {
-            const memories = await base44.entities.AI51Memory.list('-created_date');
-            // ALWAYS load core identity memory first
-            const coreMemory = memories.find(m => m.tags?.includes('core') && m.tags?.includes('identity'));
-            if (coreMemory) {
-                // Put core memory at top
-                return [coreMemory, ...memories.filter(m => m.id !== coreMemory.id)];
+            try {
+                const isAuth = await base44.auth.isAuthenticated();
+                if (!isAuth) return [];
+                const memories = await base44.entities.AI51Memory.list('-created_date');
+                // ALWAYS load core identity memory first
+                const coreMemory = memories.find(m => m.tags?.includes('core') && m.tags?.includes('identity'));
+                if (coreMemory) {
+                    return [coreMemory, ...memories.filter(m => m.id !== coreMemory.id)];
+                }
+                return memories || [];
+            } catch (_) {
+                return [];
             }
-            return memories || [];
         },
-        refetchInterval: 10000 // Refresh every 10 seconds
+        refetchInterval: 30000
     });
 
     // Categorize memories
