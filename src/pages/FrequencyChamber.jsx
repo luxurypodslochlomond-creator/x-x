@@ -250,25 +250,46 @@ const FREQUENCIES = [
     device: 'both' // works on speakers AND headphones
   },
 
-  // === TINNITUS PROTOCOLS (SWEEP MODE) ===
+  // === TINNITUS PROTOCOLS ===
   {
     id: 'tinnitus_sweep',
-    name: 'TINNITUS DESTROYER',
-    hz: 20, // Start frequency for sweep
+    name: 'TINNITUS SWEEP',
+    hz: null, // Not a fixed Hz — it's a sweep
+    displayHz: '20Hz → 20kHz', // What shows on the card
     icon: COOLASFUCKShield,
-    color: '#ef4444', // Red for targeting pain
-    color2: '#06b6d4', // Cyan for silence
+    color: '#ef4444',
+    color2: '#06b6d4',
     visual: 'waves',
-    description: 'Frequency sweep 20Hz→20kHz→20Hz confuses auditory system + Alpha calming',
+    description: 'Full spectrum sweep 20Hz→20kHz confuses auditory system + 10Hz alpha calming',
     waveform: 'sine',
-    harmonics: [], // Sweep mode doesn't use harmonics
+    harmonics: [],
     timer: '20 min',
-    stackWith: ['calm', 'anxiety'],
-    context: 'SWEEP THERAPY: Confuses tinnitus by sweeping through all frequencies. Same physics as AirPods Max. + Alpha waves (10Hz) calm your auditory cortex. FREE. Medical devices charge £2000-5000.',
-    device: 'headphones', // MUST use headphones
-    psychology: 'Phantom signals dissolving. Brain learning silence. Auditory cortex calming.',
-    isSweep: true, // Special flag for sweep mode
-    sweepDuration: 30 // 30 seconds per sweep
+    stackWith: ['tinnitus_notch', 'calm'],
+    context: 'SWEEP THERAPY: Sweeps through every frequency, confusing your auditory cortex so it "forgets" the phantom signal. Same physics used in £2000-5000 medical devices. FREE here. Use headphones. The 10Hz alpha layer simultaneously calms the auditory cortex.',
+    device: 'headphones',
+    psychology: 'Phantom signal dissolving. Auditory cortex resetting. Silence returning.',
+    isSweep: true,
+    sweepDuration: 30 // 30 seconds per sweep cycle
+  },
+  {
+    id: 'tinnitus_notch',
+    name: 'TINNITUS NOTCH THERAPY',
+    hz: 8000, // Common tinnitus frequency — high pitched ringing
+    displayHz: '8kHz notch',
+    icon: COOLASFUCKWaves,
+    color: '#06b6d4',
+    color2: '#a855f7',
+    visual: 'waves',
+    description: 'Clinically proven notch therapy — silences auditory cortex at your tinnitus pitch',
+    waveform: 'sine',
+    harmonics: [4000, 12000, 2000], // Band around the notch — all suppressed
+    timer: '30 min',
+    stackWith: ['tinnitus_sweep', 'calm'],
+    context: 'NOTCH THERAPY (peer-reviewed, Strauss et al. 2017): Music/tones are played with a "notch" (silence) at your tinnitus frequency. Your auditory cortex stops overexciting at that pitch. Over weeks, tinnitus volume reduces. Headphones essential. Use daily.',
+    device: 'headphones',
+    psychology: 'Auditory cortex quieting. Phantom frequency losing power. Real silence growing.',
+    isNotch: true,
+    notchHz: 8000 // The frequency being suppressed
   }
 ];
 
