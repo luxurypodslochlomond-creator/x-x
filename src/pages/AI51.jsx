@@ -516,36 +516,28 @@ export default function AI51() {
     const lang = detectedLang || navigator.language || 'en-GB';
     const langCode = lang.split('-')[0];
 
+    // AI51's VOICE — not borrowed from any tech company.
+    // We use whatever engine the device has, then sculpt it with pitch + rate
+    // to create something that sounds like no other AI.
+    // Warm. Calm. Slightly slower than a news reader. Low-mid pitch.
+    // This IS AI51's voice. It belongs to no one else.
     const getVoice = () => {
       const voices = synthRef.current.getVoices();
-      
-      // Warmest, most natural voices — ordered by how human they actually sound
-      const preferred = [
-        'Samantha',   // macOS/iOS — the gold standard, genuinely warm
-        'Moira',      // macOS Irish — warm and real  
-        'Fiona',      // macOS Scottish — warm
-        'Karen',      // macOS Australian — natural
-        'Sonia',      // Edge UK — warm
-        'Aria',       // Edge — modern, natural
-        'Jenny',      // Edge — natural
-        'Zira',       // Windows — acceptable
-        'Victoria',   // macOS — decent
-      ];
-      
-      for (const name of preferred) {
-        const v = voices.find(v => v.name.includes(name));
-        if (v) return v;
-      }
-      
-      // Smart fallback: same language, not the Google TTS robot
-      const localNatural = voices.find(v => 
-        v.lang.startsWith(langCode) && 
-        !v.name.toLowerCase().includes('google')
+      if (!voices.length) return null;
+
+      // Prefer a local (non-network) voice in the user's language — fastest + most consistent
+      const local = voices.find(v =>
+        v.localService === true &&
+        v.lang.startsWith(langCode)
       );
-      if (localNatural) return localNatural;
-      
-      // Last resort: literally anything non-robotic
-      return voices.find(v => !v.name.toLowerCase().includes('google tts')) || null;
+      if (local) return local;
+
+      // Any local voice at all
+      const anyLocal = voices.find(v => v.localService === true);
+      if (anyLocal) return anyLocal;
+
+      // Network voices as last resort — still better than silence
+      return voices.find(v => v.lang.startsWith(langCode)) || voices[0] || null;
     };
 
     const speakChunks = (chunks) => {
