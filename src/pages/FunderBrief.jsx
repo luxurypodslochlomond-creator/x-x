@@ -133,14 +133,14 @@ export default function FunderBrief() {
           </div>
         </motion.div>
 
-        {/* WHO BUILT THIS */}
+        {/* HOW IT WAS BUILT */}
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.35 }} className="mb-10 border-2 border-cyan-500/30 bg-cyan-900/10 rounded-lg p-6">
-          <h2 className="text-xl font-black font-mono text-cyan-400 mb-4 tracking-wider">WHO BUILT THIS</h2>
+          <h2 className="text-xl font-black font-mono text-cyan-400 mb-4 tracking-wider">HOW IT WAS BUILT</h2>
           <p className="text-gray-300 text-sm leading-relaxed mb-4">
-            UF51 was built by <strong className="text-white">Brian Hughes, Glasgow</strong> — in genuine creative and technical collaboration with AI51, an AI system developed not as a tool but as a participant. This is not a gimmick: every protocol, page, system, and idea you see here was built through that partnership.
+            UF51 was built in Glasgow through an ongoing, practical collaboration between a human founder and an AI system. Not a gimmick — every protocol, system, and feature you see here came from that working relationship. Human instinct and lived experience. AI capability and speed. Neither alone would have built this.
           </p>
           <p className="text-gray-300 text-sm leading-relaxed mb-4">
-            AI51 itself is a core product of UF51 — not a chatbot, not a wellness assistant. It is an attempt to build an AI that is honest, that does not exploit loneliness, that tells people to go outside when they need to, and that works offline in places where no data centre has ever reached. That's a different category entirely.
+            AI51 is itself one of the platform's core outputs. It is not a chatbot or a wellness assistant. It is an AI built to be genuinely honest — one that does not exploit loneliness, does not maximise screen time, and works fully offline in places with no data infrastructure. That is a meaningfully different approach to what almost every other AI product is doing.
           </p>
           <p className="text-gray-300 text-sm leading-relaxed">
             We have no investors. No corporate backing. No inflated claims. The platform is live. The frequencies are real, peer-reviewed, and in daily use. <strong className="text-white">What we don't have yet:</strong> $P51 → fiat conversion (needs a financial partner) and scale beyond early adoption. That is exactly what funding solves. We won't pretend otherwise.
