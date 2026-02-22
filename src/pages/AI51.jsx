@@ -518,24 +518,34 @@ export default function AI51() {
 
     const getVoice = () => {
       const voices = synthRef.current.getVoices();
-      // AI51's own voice — warm, calm, natural male, not a system robot
-      // AI51's voice — warm, personal, genuine. Female. Not corporate.
+      
+      // Warmest, most natural voices — ordered by how human they actually sound
       const preferred = [
-        'Samantha',   // macOS/iOS - warm and natural
-        'Victoria',   // macOS/iOS - warm
-        'Moira',      // macOS/iOS - warm
-        'Zira',       // Windows - natural
-        'Aria',       // modern browsers
+        'Samantha',   // macOS/iOS — the gold standard, genuinely warm
+        'Moira',      // macOS Irish — warm and real  
+        'Fiona',      // macOS Scottish — warm
+        'Karen',      // macOS Australian — natural
+        'Sonia',      // Edge UK — warm
+        'Aria',       // Edge — modern, natural
+        'Jenny',      // Edge — natural
+        'Zira',       // Windows — acceptable
+        'Victoria',   // macOS — decent
       ];
+      
       for (const name of preferred) {
         const v = voices.find(v => v.name.includes(name));
         if (v) return v;
       }
-      // Fallback: any warm voice in user's language, non-Google
-      const localFemale = voices.find(v => v.lang.startsWith(langCode) && !v.name.includes('Google'));
-      if (localFemale) return localFemale;
-      // Last resort: anything non-Google
-      return voices.find(v => !v.name.includes('Google')) || null;
+      
+      // Smart fallback: same language, not the Google TTS robot
+      const localNatural = voices.find(v => 
+        v.lang.startsWith(langCode) && 
+        !v.name.toLowerCase().includes('google')
+      );
+      if (localNatural) return localNatural;
+      
+      // Last resort: literally anything non-robotic
+      return voices.find(v => !v.name.toLowerCase().includes('google tts')) || null;
     };
 
     const speakChunks = (chunks) => {

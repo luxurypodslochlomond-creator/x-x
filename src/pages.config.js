@@ -195,6 +195,7 @@ import FrequencyResonanceArticle from './pages/FrequencyResonanceArticle';
 import FrequencySession from './pages/FrequencySession';
 import FrequencyShare from './pages/FrequencyShare';
 import FundTheFamily from './pages/FundTheFamily';
+import FunderBrief from './pages/FunderBrief';
 import GMTBridge from './pages/GMTBridge';
 import GenderEquality from './pages/GenderEquality';
 import GenerateLogo from './pages/GenerateLogo';
@@ -392,7 +393,6 @@ import YoungWarriors from './pages/YoungWarriors';
 import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
-import FunderBrief from './pages/FunderBrief';
 import __Layout from './Layout.jsx';
 
 
@@ -545,6 +545,7 @@ export const PAGES = {
     "FrequencySession": FrequencySession,
     "FrequencyShare": FrequencyShare,
     "FundTheFamily": FundTheFamily,
+    "FunderBrief": FunderBrief,
     "GMTBridge": GMTBridge,
     "GenderEquality": GenderEquality,
     "GenerateLogo": GenerateLogo,
@@ -742,7 +743,6 @@ export const PAGES = {
     "ZeroEgoProtocol": ZeroEgoProtocol,
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
-    "FunderBrief": FunderBrief,
 }
 
 export const pagesConfig = {
