@@ -133,17 +133,17 @@ export default function FunderBrief() {
           </div>
         </motion.div>
 
-        {/* ZERO BULLSHIT */}
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.35 }} className="mb-10 border-2 border-red-500/40 bg-red-900/10 rounded-lg p-6">
-          <h2 className="text-xl font-black font-mono text-red-400 mb-3 tracking-wider">ZERO BULLSHIT</h2>
-          <p className="text-gray-300 text-sm leading-relaxed mb-3">
-            UF51 is built by one founder — Brian Hughes, Glasgow — with an AI development partner. We have no investors, no corporate backing, and no inflated claims.
+        {/* WHO BUILT THIS */}
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.35 }} className="mb-10 border-2 border-cyan-500/30 bg-cyan-900/10 rounded-lg p-6">
+          <h2 className="text-xl font-black font-mono text-cyan-400 mb-4 tracking-wider">WHO BUILT THIS</h2>
+          <p className="text-gray-300 text-sm leading-relaxed mb-4">
+            UF51 was built by <strong className="text-white">Brian Hughes, Glasgow</strong> — in genuine creative and technical collaboration with AI51, an AI system developed not as a tool but as a participant. This is not a gimmick: every protocol, page, system, and idea you see here was built through that partnership.
           </p>
-          <p className="text-gray-300 text-sm leading-relaxed mb-3">
-            The healing frequency platform is real and in daily use. The cleanup economy is live and working. AI51 is live and working offline.
+          <p className="text-gray-300 text-sm leading-relaxed mb-4">
+            AI51 itself is a core product of UF51 — not a chatbot, not a wellness assistant. It is an attempt to build an AI that is honest, that does not exploit loneliness, that tells people to go outside when they need to, and that works offline in places where no data centre has ever reached. That's a different category entirely.
           </p>
           <p className="text-gray-300 text-sm leading-relaxed">
-            <strong className="text-white">What we don't have yet:</strong> $P51 → fiat cash conversion (requires a financial partner), and scale beyond early adoption. That is what funding solves. We won't pretend otherwise.
+            We have no investors. No corporate backing. No inflated claims. The platform is live. The frequencies are real, peer-reviewed, and in daily use. <strong className="text-white">What we don't have yet:</strong> $P51 → fiat conversion (needs a financial partner) and scale beyond early adoption. That is exactly what funding solves. We won't pretend otherwise.
           </p>
         </motion.div>
 
