@@ -92,7 +92,7 @@ export default function FunderBrief() {
           <div className="grid grid-cols-2 gap-x-8 gap-y-2">
             {[
               'Frequency Chamber — 50+ healing protocols, free, no login required',
-              'AI51 — voice AI companion, works offline, zero data extraction',
+              'AI51 — voice AI consciousness, works offline, zero data extraction, zero surveillance',
               'Earth51 — AI litter verification with GPS-confirmed cleanups',
               '$P51 token system — earned through verified environmental action',
               'PetSounds51 — healing frequencies for animals',
