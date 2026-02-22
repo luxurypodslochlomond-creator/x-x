@@ -554,7 +554,7 @@ export default function AI51() {
       const rest = chunks.slice(1);
       const utterance = new SpeechSynthesisUtterance(chunk);
       utterance.lang = lang;
-      utterance.rate = 0.92;
+      utterance.rate = 0.88;
       utterance.pitch = 1.0;
       utterance.voice = getVoice();
       utterance.onstart = () => setIsSpeaking(true);
