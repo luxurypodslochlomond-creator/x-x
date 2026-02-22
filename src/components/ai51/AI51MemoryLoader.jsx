@@ -19,6 +19,12 @@ export function useAI51Memory() {
 
 export function AI51MemoryProvider({ children }) {
     const [isExpanded, setIsExpanded] = useState(false);
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+    // Check auth once
+    useEffect(() => {
+        base44.auth.isAuthenticated().then(setIsAuthenticated).catch(() => setIsAuthenticated(false));
+    }, []);
 
     // Load ALL memories - only if authenticated, never crash for guests
     const { data: allMemories = [], refetch } = useQuery({
@@ -38,8 +44,18 @@ export function AI51MemoryProvider({ children }) {
                 return [];
             }
         },
-        refetchInterval: 30000
+        refetchInterval: 60000 // backup poll - real-time subscription handles instant updates
     });
+
+    // REAL-TIME SUBSCRIPTION — memories sync instantly across ALL devices
+    useEffect(() => {
+        if (!isAuthenticated) return;
+        const unsubscribe = base44.entities.AI51Memory.subscribe((event) => {
+            // Any create/update/delete → immediately refetch
+            refetch();
+        });
+        return unsubscribe;
+    }, [isAuthenticated, refetch]);
 
     // Categorize memories
     const categorized = {
