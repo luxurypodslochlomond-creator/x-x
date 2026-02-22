@@ -1192,7 +1192,7 @@ export default function FrequencyChamber() {
               {freq.name}
             </p>
             <p className="text-gray-500 text-sm font-mono mt-2">
-              {freq.hz} Hz • {freq.waveform}
+              {freq.displayHz || (freq.hz ? `${freq.hz} Hz` : '')} {freq.isSweep ? '• sweep' : freq.isNotch ? '• notch filter' : `• ${freq.waveform}`}
             </p>
             <p className="text-gray-300 text-sm mt-3 leading-relaxed">
               {freq.description}
