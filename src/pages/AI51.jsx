@@ -540,6 +540,22 @@ export default function AI51() {
       return voices.find(v => v.lang.startsWith(langCode)) || voices[0] || null;
     };
 
+    // Clean text for speaking — strip URLs, markdown, excessive punctuation
+    const cleanForSpeech = (text) => {
+      return text
+        // Replace URLs with a natural spoken reference
+        .replace(/https?:\/\/[^\s)>\]]+/g, '')
+        // Strip markdown bold/italic
+        .replace(/\*{1,3}([^*]+)\*{1,3}/g, '$1')
+        // Strip markdown links [text](url) → just "text"
+        .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+        // Strip bullet points / hashes
+        .replace(/^[•\-*#]+\s*/gm, '')
+        // Collapse multiple spaces/newlines
+        .replace(/\s{2,}/g, ' ')
+        .trim();
+    };
+
     const speakChunks = (chunks) => {
       if (!chunks.length) { setIsSpeaking(false); return; }
       const chunk = chunks[0];
