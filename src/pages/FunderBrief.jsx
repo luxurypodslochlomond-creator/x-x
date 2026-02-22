@@ -117,7 +117,7 @@ export default function FunderBrief() {
                 <li>→ Offline mesh network — zero internet required</li>
                 <li>→ Multi-language healing protocols</li>
                 <li>→ SMS-based participation for feature phones</li>
-                <li>→ CIC registration (underway)</li>
+                <li>→ CIC registration (application submitted, resubmission in progress)</li>
               </ul>
             </div>
             <div>
