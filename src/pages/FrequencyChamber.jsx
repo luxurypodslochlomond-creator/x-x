@@ -352,12 +352,69 @@ export default function FrequencyChamber() {
       analyser.connect(ctx.destination);
 
       // PRIMARY FREQUENCY
-      const carrier = freq.carrier || freq.hz;
+      const carrier = freq.carrier || freq.hz || 20; // fallback to 20 for sweep
+
+      // === TINNITUS NOTCH THERAPY ===
+      if (freq.isNotch) {
+        // Notch therapy: play broadband noise, cut out the tinnitus frequency
+        // Uses a biquad notch filter centred on the tinnitus Hz
+        const bufferSize = ctx.sampleRate * 2;
+        const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+        const data = buffer.getChannelData(0);
+        for (let i = 0; i < bufferSize; i++) data[i] = Math.random() * 2 - 1;
+
+        const noise = ctx.createBufferSource();
+        noise.buffer = buffer;
+        noise.loop = true;
+
+        // Notch filter at tinnitus frequency
+        const notchFilter = ctx.createBiquadFilter();
+        notchFilter.type = 'notch';
+        notchFilter.frequency.value = freq.notchHz || 8000;
+        notchFilter.Q.value = 5; // Narrow notch — precise suppression
+
+        // Gentle bandpass so we don't hear frequencies the ear can't help with
+        const bandpass = ctx.createBiquadFilter();
+        bandpass.type = 'bandpass';
+        bandpass.frequency.value = 4000;
+        bandpass.Q.value = 0.3;
+
+        noise.connect(bandpass);
+        bandpass.connect(notchFilter);
+        notchFilter.connect(masterGain);
+        noise.start();
+        nodes.push(noise, notchFilter, bandpass);
+
+        // Also layer in gentle alpha wave (10Hz binaural) to calm the auditory cortex
+        const alphaL = ctx.createOscillator();
+        alphaL.frequency.value = 200;
+        alphaL.type = 'sine';
+        const alphaR = ctx.createOscillator();
+        alphaR.frequency.value = 210; // 10Hz binaural beat
+        alphaR.type = 'sine';
+        const alphaGain = ctx.createGain();
+        alphaGain.gain.value = 0.1;
+        alphaL.connect(alphaGain);
+        alphaR.connect(alphaGain);
+        alphaGain.connect(masterGain);
+        alphaL.start();
+        alphaR.start();
+        nodes.push(alphaL, alphaR, alphaGain);
+
+        nodesRef.current = nodes;
+        setIsPlaying(true);
+        setSelected(freq);
+        setTimer(0);
+        timerRef.current = setInterval(() => setTimer(t => t + 1), 1000);
+        drawVisualizer();
+        return; // Skip standard oscillator path
+      }
+
       const osc = ctx.createOscillator();
       osc.type = freq.waveform;
       osc.frequency.value = carrier;
       const gain = ctx.createGain();
-      gain.gain.value = 0.4; // Reduced for more layers
+      gain.gain.value = 0.4;
       osc.connect(gain);
       gain.connect(masterGain);
       osc.start();
@@ -367,26 +424,27 @@ export default function FrequencyChamber() {
       if (freq.isSweep) {
         const sweepTime = freq.sweepDuration || 30;
         const now = ctx.currentTime;
+        // Start at 20Hz
+        osc.frequency.setValueAtTime(20, now);
         // Sweep up: 20Hz → 20kHz
         osc.frequency.exponentialRampToValueAtTime(20000, now + sweepTime);
         // Sweep down: 20kHz → 20Hz
         osc.frequency.exponentialRampToValueAtTime(20, now + sweepTime * 2);
 
         // VISUAL SWEEP TRACKER
+        const sweepStartTime = Date.now();
         sweepIntervalRef.current = setInterval(() => {
-          const elapsed = (Date.now() / 1000) % (sweepTime * 2);
+          const elapsed = ((Date.now() - sweepStartTime) / 1000) % (sweepTime * 2);
           if (elapsed < sweepTime) {
-            // Going up
             const progress = elapsed / sweepTime;
             setCurrentSweepFreq(Math.round(20 * Math.pow(1000, progress)));
           } else {
-            // Going down
             const progress = (elapsed - sweepTime) / sweepTime;
             setCurrentSweepFreq(Math.round(20000 * Math.pow(0.001, progress)));
           }
-        }, 100);
+        }, 200);
 
-        // Loop the sweep
+        // Loop the sweep indefinitely
         const sweepLoopInterval = setInterval(() => {
           const t = ctx.currentTime;
           osc.frequency.cancelScheduledValues(t);
@@ -394,7 +452,23 @@ export default function FrequencyChamber() {
           osc.frequency.exponentialRampToValueAtTime(20000, t + sweepTime);
           osc.frequency.exponentialRampToValueAtTime(20, t + sweepTime * 2);
         }, sweepTime * 2 * 1000);
-        nodes.push(sweepLoopInterval);
+        nodes.push({ stop: () => clearInterval(sweepLoopInterval), disconnect: () => {} });
+
+        // Add a gentle 10Hz alpha binaural layer alongside the sweep
+        const alphaL = ctx.createOscillator();
+        alphaL.frequency.value = 200;
+        alphaL.type = 'sine';
+        const alphaR = ctx.createOscillator();
+        alphaR.frequency.value = 210;
+        alphaR.type = 'sine';
+        const alphaGain = ctx.createGain();
+        alphaGain.gain.value = 0.08;
+        alphaL.connect(alphaGain);
+        alphaR.connect(alphaGain);
+        alphaGain.connect(masterGain);
+        alphaL.start();
+        alphaR.start();
+        nodes.push(alphaL, alphaR, alphaGain);
       }
 
       // SKIP STACKING FOR SWEEP - sweep IS the therapy
