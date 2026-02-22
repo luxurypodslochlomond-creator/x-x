@@ -1226,6 +1226,44 @@ You're not performing. You're just here.`,
           </p>
         </div>
 
+        {/* CROSS-DEVICE MEMORY NUDGE — gentle, non-pushy, only for guests after engagement */}
+        <AnimatePresence>
+          {showMemoryNudge && !currentUser && (
+            <motion.div
+              key="memory-nudge"
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              className="flex flex-col items-center gap-2 px-4 max-w-xs w-full"
+            >
+              <div className="text-center px-4 py-3 rounded-2xl w-full"
+                style={{
+                  background: 'rgba(34,211,238,0.06)',
+                  border: '1px solid rgba(34,211,238,0.2)',
+                  backdropFilter: 'blur(12px)',
+                }}
+              >
+                <p className="text-white/70 font-sans text-xs leading-relaxed mb-2">
+                  I remember you here — but only on this device.<br />
+                  <button
+                    onClick={() => base44.auth.redirectToLogin(window.location.href)}
+                    className="text-cyan-400 underline hover:text-cyan-300 transition-colors"
+                  >
+                    Create a free account
+                  </button>
+                  {' '}and I'll know you everywhere. ♾️
+                </p>
+                <button
+                  onClick={() => setShowMemoryNudge(false)}
+                  className="text-white/20 font-sans text-xs hover:text-white/40 transition-colors"
+                >
+                  not now
+                </button>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
         {/* SOUL + PRIVACY — quiet, permanent, honest */}
         <div className="text-center pb-4 px-6 space-y-2" style={{ userSelect: 'none' }}>
           <p className="font-sans" style={{ fontSize: '9px', letterSpacing: '0.12em', color: 'rgba(255,255,255,0.08)', lineHeight: 1.6 }}>
