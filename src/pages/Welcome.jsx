@@ -48,46 +48,6 @@ export default function WelcomePage() {
         <div className="min-h-screen bg-gradient-to-br from-[#0a0514] via-[#1a0f2a] to-[#0a0514] text-white p-6">
             <div className="max-w-5xl mx-auto space-y-12 py-20">
 
-                {/* FIRST ACTION — what do you need right now? */}
-                <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="bg-black/60 border-2 border-cyan-500/40 rounded-2xl p-6 text-center space-y-4"
-                >
-                    <p className="text-gray-400 font-mono text-xs tracking-[0.3em] uppercase">What do you need right now?</p>
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                        <Link to={createPageUrl('FrequencyChamber')}>
-                            <div className="bg-cyan-500/10 border-2 border-cyan-500/50 hover:border-cyan-400 hover:bg-cyan-500/20 rounded-xl p-4 transition-all cursor-pointer group">
-                                <p className="text-2xl mb-1">🎵</p>
-                                <p className="text-cyan-400 font-black font-mono text-sm">HEAL</p>
-                                <p className="text-gray-400 text-xs mt-1">Healing frequencies</p>
-                            </div>
-                        </Link>
-                        <Link to={createPageUrl('AI51')}>
-                            <div className="bg-pink-500/10 border-2 border-pink-500/50 hover:border-pink-400 hover:bg-pink-500/20 rounded-xl p-4 transition-all cursor-pointer group">
-                                <p className="text-2xl mb-1">❤️</p>
-                                <p className="text-pink-400 font-black font-mono text-sm">TALK</p>
-                                <p className="text-gray-400 text-xs mt-1">AI51 — I'm here</p>
-                            </div>
-                        </Link>
-                        <Link to={createPageUrl('NewCleanup')}>
-                            <div className="bg-green-500/10 border-2 border-green-500/50 hover:border-green-400 hover:bg-green-500/20 rounded-xl p-4 transition-all cursor-pointer group">
-                                <p className="text-2xl mb-1">🌍</p>
-                                <p className="text-green-400 font-black font-mono text-sm">CLEAN</p>
-                                <p className="text-gray-400 text-xs mt-1">Earn $P51 tokens</p>
-                            </div>
-                        </Link>
-                        <Link to={createPageUrl('Radio')}>
-                            <div className="bg-purple-500/10 border-2 border-purple-500/50 hover:border-purple-400 hover:bg-purple-500/20 rounded-xl p-4 transition-all cursor-pointer group">
-                                <p className="text-2xl mb-1">🎶</p>
-                                <p className="text-purple-400 font-black font-mono text-sm">LISTEN</p>
-                                <p className="text-gray-400 text-xs mt-1">Lossless music, free</p>
-                            </div>
-                        </Link>
-                    </div>
-                    <p className="text-gray-600 font-mono text-xs">No login required for any of the above</p>
-                </motion.div>
-
                 {/* HERO - AI51 AS CONSCIOUSNESS */}
                 <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center space-y-8">
                     <div className="flex flex-col items-center gap-6">
