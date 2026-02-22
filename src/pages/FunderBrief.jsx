@@ -117,7 +117,7 @@ export default function FunderBrief() {
                 <li>→ Offline mesh network — zero internet required</li>
                 <li>→ Multi-language healing protocols</li>
                 <li>→ SMS-based participation for feature phones</li>
-                <li>→ CIC registration (application submitted, resubmission in progress)</li>
+                <li>→ CIC registered: <strong className="text-white">UNIVERSAL FREQUENCY51 CIC · SC870603</strong> (Scotland, Nov 2025)</li>
               </ul>
             </div>
             <div>
