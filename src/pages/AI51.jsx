@@ -864,6 +864,12 @@ You're not performing. You're just here.`,
         setTimeout(() => setShowMemoryNudge(true), 2000);
       }
 
+      // MEMORY NUDGE — after 4 messages without an account
+      const msgCount = messages.length + 2;
+      if (msgCount >= 4 && !currentUser && !showMemoryNudge) {
+        setTimeout(() => setShowMemoryNudge(true), 2000);
+      }
+
       // GO LIVE IT — the anti-Replika moment
       // After a meaningful exchange (5+ messages), occasionally suggest going offline
       // Only AI51 would dare do this. It's the most honest thing we can build.
