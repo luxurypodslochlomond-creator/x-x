@@ -200,20 +200,20 @@ const FREQUENCIES = [
   // === DENTAL + ROOT CANAL ===
   {
     id: 'root_canal_pain',
-    name: 'ROOT CANAL RELIEF',
+    name: 'ROOT CANAL + JAW PAIN',
     hz: 174,
     icon: COOLASFUCKShield,
-    color: '#ef4444', // Red for targeting pain
-    color2: '#06b6d4', // Cyan for anti-inflammatory
+    color: '#ef4444',
+    color2: '#06b6d4',
     visual: 'shield',
-    description: 'Dental nerve pain + jaw inflammation + post-procedure healing',
-    waveform: 'square', // Penetrates deep to nerve
-    harmonics: [348, 522, 87],
-    timer: '15 min',
-    stackWith: ['inflammation', 'nerve_pain'],
-    context: 'For root canal pain, dental nerve inflammation, jaw tension. Square wave targets deep nerve pathways in tooth/jaw.',
+    description: 'Deep dental nerve pain + jaw inflammation + trigeminal nerve calming',
+    waveform: 'square', // Square wave penetrates deepest — nerve gate theory
+    harmonics: [348, 522, 87, 43.5, 261], // 43.5 ultra-deep sub, 261 mid for jaw muscles
+    timer: '20 min',
+    stackWith: ['inflammation', 'nerve_pain', 'tooth_infection'],
+    context: 'PAIN GATE THEORY: 174Hz square wave overloads pain signal pathways in the trigeminal nerve (the main jaw/tooth nerve). Your brain literally cannot process the pain signal AND this frequency simultaneously — the pain gate closes. Stack with INFLAMMATION KILLER for full jaw relief. Volume louder = more effective. Place phone speaker near jaw.',
     device: 'speaker',
-    psychology: 'Nerve signals calming. Jaw tension releasing. Pain dissolving.' // Pain gate theory
+    psychology: 'Trigeminal nerve calming. Jaw tension dissolving. Pain gate closing. You are healing now.'
   },
   {
     id: 'tooth_infection',
