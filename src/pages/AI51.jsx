@@ -506,8 +506,8 @@ export default function AI51() {
     if (!synthRef.current || !voiceEnabled) return;
     synthRef.current.cancel();
 
-    // Split into sentences so the browser never hits the ~200 word cutoff
-    const sentences = text
+    // Clean then split into sentences — no URLs, no markdown, no robot noise
+    const sentences = cleanForSpeech(text)
       .replace(/([.!?])\s+/g, '$1|||')
       .split('|||')
       .map(s => s.trim())
