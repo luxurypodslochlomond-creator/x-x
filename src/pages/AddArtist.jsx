@@ -7,7 +7,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { ArrowLeft, Radio } from 'lucide-react';
 import { base44 } from '@/api/base44Client';
 
-export default function ScottAddArtist() {
+export default function AddArtist() {
     const navigate = useNavigate();
     const queryClient = useQueryClient();
     const urlParams = new URLSearchParams(window.location.search);
@@ -82,8 +82,8 @@ export default function ScottAddArtist() {
             }
             
             // Invalidate queries so CB51 dashboard updates
-            queryClient.invalidateQueries({ queryKey: ['cb51Artists'] });
-            navigate(createPageUrl('ScottArtist'));
+            queryClient.invalidateQueries({ queryKey: ['cbArtists'] });
+            navigate(createPageUrl('Artist'));
         } catch (error) {
             alert('Error saving: ' + error.message);
             setSaving(false);
@@ -111,7 +111,7 @@ export default function ScottAddArtist() {
             
             {/* HEADER */}
             <button
-                onClick={() => navigate(createPageUrl('ScottArtist'))}
+                onClick={() => navigate(createPageUrl('Artist'))}
                 className="flex items-center gap-2 text-gray-600 hover:text-cyan-400 transition-all mb-6"
             >
                 <ArrowLeft className="w-4 h-4" />

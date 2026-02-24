@@ -123,7 +123,7 @@ export default function CB51() {
                             <div key={artist.id} className="relative">
                               <button
                                 onClick={() => navigate(createPageUrl(`ScottArtistHome?id=${artist.id}`))}
-                                className="flex flex-col items-center gap-2 p-3 transition-all w-full hover:bg-cyan-500/10 rounded-lg"
+                                className="flex flex-col items-center gap-2 p-3 transition-all w-full hover:bg-cyan-500/10 rounded-lg cursor-pointer"
                               >
                                 {artist.profile_pic_url ? (
                                   <img 
@@ -141,8 +141,8 @@ export default function CB51() {
                             </div>
                           ))}
                           <button
-                            onClick={() => navigate(createPageUrl('ScottAddArtist'))}
-                            className="flex flex-col items-center justify-center gap-2 p-3"
+                            onClick={() => navigate(createPageUrl('AddArtist'))}
+                            className="flex flex-col items-center justify-center gap-2 p-3 cursor-pointer"
                           >
                             <div className="w-14 h-14 rounded-full border-2 border-dashed border-gray-600 flex items-center justify-center">
                               <Plus className="w-6 h-6 text-gray-500" />
