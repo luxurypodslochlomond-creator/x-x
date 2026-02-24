@@ -29,31 +29,45 @@ export default function CB51BandVotingWidget({ gigId, memberId }) {
   }, [gigId, memberId]);
 
   const handleVote = async (decision) => {
+    // If NO and no reason yet, show reason prompt
+    if (decision === 'rejected' && !showReasonPrompt) {
+      setShowReasonPrompt(true);
+      return;
+    }
+
     if (loading) return;
     setLoading(true);
     setError(null);
 
     try {
-      // Check if vote exists
       const existing = await base44.entities.GigVote.filter({
         gig_id: gigId,
         member_id: memberId
       });
 
+      const voteData = {
+        decision,
+        voted_at: new Date().toISOString()
+      };
+
+      // Add reason if it's a NO vote
+      if (decision === 'rejected' && reason) {
+        voteData.reason = reason;
+      }
+
       if (existing.length > 0) {
-        // Update existing vote
-        await base44.entities.GigVote.update(existing[0].id, { decision });
+        await base44.entities.GigVote.update(existing[0].id, voteData);
       } else {
-        // Create new vote
         await base44.entities.GigVote.create({
           gig_id: gigId,
           member_id: memberId,
-          decision,
-          voted_at: new Date().toISOString()
+          ...voteData
         });
       }
 
       setVoted(decision);
+      setShowReasonPrompt(false);
+      setReason('');
       queryClient.invalidateQueries({ queryKey: ['cb51-gig-votes', gigId] });
       queryClient.invalidateQueries({ queryKey: ['cb51-pending-gigs'] });
 
@@ -61,7 +75,8 @@ export default function CB51BandVotingWidget({ gigId, memberId }) {
       await base44.functions.invoke('notifyManagerOnBandVote', {
         gigId,
         memberName: memberId,
-        decision
+        decision,
+        reason: decision === 'rejected' ? reason : undefined
       }).catch(e => console.log('Notification sent'));
 
     } catch (err) {
