@@ -90,32 +90,68 @@ export default function CB51BandVotingWidget({ gigId, memberId }) {
   return (
     <div className="space-y-2">
       <p className="text-xs text-gray-500 font-mono uppercase">Your vote</p>
-      <div className="flex gap-2">
-        <button
-          onClick={() => handleVote('rejected')}
-          disabled={loading}
-          className={`flex-1 flex items-center justify-center gap-2 py-2 rounded font-bold transition-all disabled:opacity-50 ${
-            voted === 'rejected'
-              ? 'bg-red-600 text-white border-2 border-red-400'
-              : 'bg-black border-2 border-red-500/40 text-red-400 hover:border-red-500'
-          }`}
-        >
-          <ThumbsDown className="w-4 h-4" />
-          {loading && voted !== 'rejected' ? 'Voting...' : voted === 'rejected' ? '✓ No' : 'No'}
-        </button>
-        <button
-          onClick={() => handleVote('approved')}
-          disabled={loading}
-          className={`flex-1 flex items-center justify-center gap-2 py-2 rounded font-bold transition-all disabled:opacity-50 ${
-            voted === 'approved'
-              ? 'bg-green-600 text-white border-2 border-green-400'
-              : 'bg-black border-2 border-green-500/40 text-green-400 hover:border-green-500'
-          }`}
-        >
-          <ThumbsUp className="w-4 h-4" />
-          {loading && voted !== 'approved' ? 'Voting...' : voted === 'approved' ? '✓ Yes' : 'Yes'}
-        </button>
-      </div>
+
+      {/* SHOW REASON PROMPT FOR NO */}
+      {showReasonPrompt && (
+        <div className="bg-black border-2 border-red-500/40 rounded p-3 space-y-2">
+          <p className="text-xs text-red-400 font-mono">Why can't you do this gig?</p>
+          <textarea
+            value={reason}
+            onChange={(e) => setReason(e.target.value.slice(0, 120))}
+            placeholder="Simple sentence..."
+            className="w-full bg-black border border-red-500/30 rounded p-2 text-white text-sm placeholder-gray-600 focus:outline-none focus:border-red-500 resize-none"
+            rows="2"
+          />
+          <div className="flex gap-2">
+            <button
+              onClick={() => { setShowReasonPrompt(false); setReason(''); }}
+              className="flex-1 flex items-center justify-center gap-1 py-1.5 rounded text-xs border border-gray-500/40 text-gray-400 hover:border-gray-500 transition-all"
+            >
+              <X className="w-3 h-3" />
+              Cancel
+            </button>
+            <button
+              onClick={() => handleVote('rejected')}
+              disabled={loading || !reason.trim()}
+              className="flex-1 flex items-center justify-center gap-1 py-1.5 rounded text-xs font-bold bg-red-900/40 border border-red-500/50 text-red-400 hover:bg-red-900/60 disabled:opacity-50 transition-all"
+            >
+              <ThumbsDown className="w-3 h-3" />
+              {loading ? 'Saving...' : 'Send'}
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* NORMAL VOTE BUTTONS */}
+      {!showReasonPrompt && (
+        <div className="flex gap-2">
+          <button
+            onClick={() => handleVote('rejected')}
+            disabled={loading}
+            className={`flex-1 flex items-center justify-center gap-2 py-2 rounded font-bold transition-all disabled:opacity-50 ${
+              voted === 'rejected'
+                ? 'bg-red-600 text-white border-2 border-red-400'
+                : 'bg-black border-2 border-red-500/40 text-red-400 hover:border-red-500'
+            }`}
+          >
+            <ThumbsDown className="w-4 h-4" />
+            {loading && voted !== 'rejected' ? 'Voting...' : voted === 'rejected' ? '✓ No' : 'No'}
+          </button>
+          <button
+            onClick={() => handleVote('approved')}
+            disabled={loading}
+            className={`flex-1 flex items-center justify-center gap-2 py-2 rounded font-bold transition-all disabled:opacity-50 ${
+              voted === 'approved'
+                ? 'bg-green-600 text-white border-2 border-green-400'
+                : 'bg-black border-2 border-green-500/40 text-green-400 hover:border-green-500'
+            }`}
+          >
+            <ThumbsUp className="w-4 h-4" />
+            {loading && voted !== 'approved' ? 'Voting...' : voted === 'approved' ? '✓ Yes' : 'Yes'}
+          </button>
+        </div>
+      )}
+
       {error && <p className="text-red-400 text-xs">{error}</p>}
     </div>
   );
