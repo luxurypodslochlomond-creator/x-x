@@ -41,8 +41,9 @@ export default function ArtistProfileSheet({ artistId, onClose }) {
   if (!artist) return null;
 
   return (
-    <AnimatePresence>
+    <AnimatePresence mode="wait">
       <motion.div
+        key={`sheet-backdrop-${artistId}`}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
@@ -51,6 +52,7 @@ export default function ArtistProfileSheet({ artistId, onClose }) {
       />
 
       <motion.div
+        key={`sheet-content-${artistId}`}
         initial={{ y: '100%' }}
         animate={{ y: 0 }}
         exit={{ y: '100%' }}
