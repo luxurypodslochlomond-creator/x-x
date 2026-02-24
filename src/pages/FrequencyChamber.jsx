@@ -1399,7 +1399,10 @@ export default function FrequencyChamber() {
               onClick={() => setShowScience(!showScience)}
               className="w-full p-3 sm:p-4 flex items-center justify-between hover:bg-pink-900/30 transition-all"
             >
-              <p className="text-pink-400 font-black text-sm sm:text-base">⚡ REAL SCIENCE + PEER-REVIEWED PROOF</p>
+              <div className="flex items-center gap-2">
+                <FlaskConical className="w-4 h-4 text-pink-400" />
+                <p className="text-pink-400 font-black text-sm sm:text-base">REAL SCIENCE + PEER-REVIEWED PROOF</p>
+              </div>
               <span className="text-pink-400 text-xl">{showScience ? '−' : '+'}</span>
             </button>
             {showScience && (
