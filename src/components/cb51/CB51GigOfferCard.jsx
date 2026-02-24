@@ -3,7 +3,7 @@ import { base44 } from '@/api/base44Client';
 import { useQueryClient } from '@tanstack/react-query';
 import { ThumbsUp, ThumbsDown, Users } from 'lucide-react';
 import { motion } from 'framer-motion';
-import CB51BandVotingWidget from './CB51BandVotingWidget';
+import CB51BandVote from './CB51BandVotingWidget';
 
 export default function CB51GigOfferCard({ gig, userRole = 'manager' }) {
   const queryClient = useQueryClient();

@@ -3,7 +3,7 @@ import { base44 } from '@/api/base44Client';
 import { useQueryClient } from '@tanstack/react-query';
 import { ThumbsUp, ThumbsDown, X } from 'lucide-react';
 
-export default function CB51BandVotingWidget({ gigId, memberId }) {
+export default function CB51BandVote({ gigId, memberId }) {
   const queryClient = useQueryClient();
   const [loading, setLoading] = useState(false);
   const [voted, setVoted] = useState(null);
