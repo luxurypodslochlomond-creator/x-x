@@ -1009,13 +1009,20 @@ export default function FrequencyChamber() {
             Mind · Body · Soul
           </h1>
           <p className="text-cyan-400 font-bold text-sm sm:text-base font-mono tracking-widest">HEALING FREQUENCIES</p>
+          
+          {/* PRIVACY BADGE - anti-stigma, front and centre */}
+          <div className="flex items-center gap-2 mt-2 px-4 py-2 bg-white/5 border border-white/10 rounded-full">
+            <span className="text-green-400 text-sm">🔒</span>
+            <span className="text-white/70 text-xs sm:text-sm font-medium">No login. No account. <span className="text-white font-bold">Nobody knows you were here.</span></span>
+          </div>
+
           {!isOnline && (
             <div className="px-2 py-1 bg-green-500/20 border border-green-500 rounded text-[10px] font-bold text-green-400 font-mono">
               OFFLINE ✓
             </div>
           )}
         </div>
-        <p className="text-gray-400 text-base sm:text-lg mb-4">Healing frequencies for pain, anxiety, sleep. Free forever. Works offline. AI51 learns what helps you.</p>
+        <p className="text-gray-400 text-base sm:text-lg mb-4">Free healing frequencies for pain, anxiety, sleep, grief and more. Works offline. Forever free.</p>
 
         <div className="flex flex-wrap items-center justify-center gap-2 mt-4 sm:mt-6">
           <motion.button
