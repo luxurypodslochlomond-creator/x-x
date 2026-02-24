@@ -1372,7 +1372,10 @@ export default function FrequencyChamber() {
               onClick={() => setShowSmartTV(!showSmartTV)}
               className="w-full p-3 sm:p-4 flex items-center justify-between hover:bg-green-900/30 transition-all"
             >
-              <p className="text-green-400 font-black text-sm sm:text-base">📺 CAST TO SMART TV / BIG SCREEN</p>
+              <div className="flex items-center gap-2">
+                <Tv className="w-4 h-4 text-green-400" />
+                <p className="text-green-400 font-black text-sm sm:text-base">CAST TO SMART TV / BIG SCREEN</p>
+              </div>
               <span className="text-green-400 text-xl">{showSmartTV ? '−' : '+'}</span>
             </button>
             {showSmartTV && (
