@@ -74,47 +74,47 @@ export default function ScottArtistProfile() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-black via-gray-900 to-black p-6">
+    <div className="min-h-screen bg-gradient-to-b from-black via-gray-900 to-black p-4 lg:p-6">
       {/* HEADER */}
       <div className="mb-6">
         <button
           onClick={() => navigate(createPageUrl('CB51'))}
-          className="flex items-center gap-2 text-cyan-400 hover:text-cyan-300 mb-4"
+          className="flex items-center gap-2 text-cyan-400 hover:text-cyan-300 mb-4 text-sm"
         >
-          <ArrowLeft className="w-5 h-5" />
+          <ArrowLeft className="w-4 h-4" />
           Back to Dashboard
         </button>
 
-        <div className="bg-black border border-cyan-500/30 rounded-lg p-6">
-          <div className="flex gap-6 items-start">
+        <div className="bg-black border border-cyan-500/30 rounded-lg p-4 lg:p-6">
+          <div className="flex flex-col lg:flex-row gap-4 lg:gap-6 items-start">
             <div className="flex-shrink-0">
               {artist.profile_pic_url ? (
                 <img 
                   src={artist.profile_pic_url} 
                   alt={artist.name}
-                  className="w-24 h-24 rounded-full object-cover border-2 border-cyan-500"
+                  className="w-20 h-20 lg:w-24 lg:h-24 rounded-full object-cover border-2 border-cyan-500"
                 />
               ) : (
-                <div className="w-24 h-24 rounded-full bg-cyan-500 text-black font-black text-4xl flex items-center justify-center border-2 border-cyan-500">
+                <div className="w-20 h-20 lg:w-24 lg:h-24 rounded-full bg-cyan-500 text-black font-black text-3xl lg:text-4xl flex items-center justify-center border-2 border-cyan-500 flex-shrink-0">
                   {artist.name.charAt(0).toUpperCase()}
                 </div>
               )}
             </div>
 
-            <div className="flex-1">
-              <h1 className="text-3xl font-black text-white mb-2">{artist.name}</h1>
-              {artist.bio && <p className="text-cyan-300 text-sm mb-4">{artist.bio}</p>}
+            <div className="flex-1 w-full min-w-0">
+              <h1 className="text-xl lg:text-3xl font-black text-white mb-2 break-words">{artist.name}</h1>
+              {artist.bio && <p className="text-cyan-300 text-xs lg:text-sm mb-4 line-clamp-2">{artist.bio}</p>}
               
-              <div className="flex flex-col gap-2 text-sm">
+              <div className="flex flex-col gap-2 text-xs lg:text-sm">
                 {artist.email && (
-                  <div className="flex items-center gap-2 text-gray-300">
-                    <Mail className="w-4 h-4 text-cyan-400" />
-                    <a href={`mailto:${artist.email}`} className="hover:text-cyan-400">{artist.email}</a>
+                  <div className="flex items-center gap-2 text-gray-300 min-w-0">
+                    <Mail className="w-4 h-4 text-cyan-400 flex-shrink-0" />
+                    <a href={`mailto:${artist.email}`} className="hover:text-cyan-400 truncate">{artist.email}</a>
                   </div>
                 )}
                 {artist.phone && (
                   <div className="flex items-center gap-2 text-gray-300">
-                    <Phone className="w-4 h-4 text-cyan-400" />
+                    <Phone className="w-4 h-4 text-cyan-400 flex-shrink-0" />
                     <a href={`tel:${artist.phone}`} className="hover:text-cyan-400">{artist.phone}</a>
                   </div>
                 )}
