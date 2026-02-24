@@ -128,18 +128,18 @@ export default function ScottArtistProfile() {
       {pendingGigs.length > 0 && (
         <div className="mb-6">
           <div className="flex items-center gap-2 mb-3">
-            <AlertCircle className="w-5 h-5 text-amber-400" />
-            <h2 className="text-lg font-bold text-amber-400">Pending Decisions ({pendingGigs.length})</h2>
+            <AlertCircle className="w-4 h-4 lg:w-5 lg:h-5 text-amber-400" />
+            <h2 className="text-base lg:text-lg font-bold text-amber-400">Pending Decisions ({pendingGigs.length})</h2>
           </div>
           <div className="space-y-2">
             {pendingGigs.map(gig => (
-              <div key={gig.id} className="bg-black border border-amber-500/30 rounded p-4">
-                <div className="flex items-start justify-between mb-2">
-                  <div>
-                    <p className="font-bold text-white">{gig.venue}</p>
-                    <p className="text-sm text-gray-400">{gig.date}</p>
+              <div key={gig.id} className="bg-black border border-amber-500/30 rounded p-3 lg:p-4">
+                <div className="flex items-start justify-between gap-2 mb-2">
+                  <div className="min-w-0 flex-1">
+                    <p className="font-bold text-white text-sm lg:text-base break-words">{gig.venue}</p>
+                    <p className="text-xs text-gray-400">{gig.date}</p>
                   </div>
-                  <span className={`text-xs font-bold px-2 py-1 rounded ${
+                  <span className={`text-xs font-bold px-2 py-1 rounded flex-shrink-0 ${
                     gig.status === 'pending' ? 'bg-yellow-500/20 text-yellow-400' : 'bg-blue-500/20 text-blue-400'
                   }`}>
                     {gig.status}
