@@ -1338,7 +1338,10 @@ export default function FrequencyChamber() {
               onClick={() => setShowDataControls(!showDataControls)}
               className="w-full p-3 sm:p-4 flex items-center justify-between hover:bg-pink-900/30 transition-all"
             >
-              <p className="text-pink-400 font-black text-sm sm:text-base">🛡️ YOUR DATA • YOUR CONTROL</p>
+              <div className="flex items-center gap-2">
+                <Shield className="w-4 h-4 text-pink-400" />
+                <p className="text-pink-400 font-black text-sm sm:text-base">YOUR DATA • YOUR CONTROL</p>
+              </div>
               <span className="text-pink-400 text-xl">{showDataControls ? '−' : '+'}</span>
             </button>
             {showDataControls && (
