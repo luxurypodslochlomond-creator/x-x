@@ -16,7 +16,6 @@ import CB51BandNotificationInbox from '@/components/cb51/CB51BandNotificationInb
 import CB51BadgeManager from '@/components/cb51/CB51BadgeManager';
 import CB51BackgroundSync from '@/components/cb51/CB51BackgroundSync';
 import CB51GigDecisionEngine from '@/components/cb51/CB51GigDecisionEngine';
-import ArtistProfileSheet from '@/components/cb51/ArtistProfileSheet';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 export default function CB51() {
@@ -24,7 +23,6 @@ export default function CB51() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [activeArtistId, setActiveArtistId] = useState(null);
-  const [expandedArtistId, setExpandedArtistId] = useState(null);
   const [showArtistMenu, setShowArtistMenu] = useState(false);
   const [showAddMemberSheet, setShowAddMemberSheet] = useState(false);
   const [newMemberName, setNewMemberName] = useState('');
@@ -124,7 +122,7 @@ export default function CB51() {
                           {artists.slice(0, 2).map((artist) => (
                             <div key={artist.id} className="relative">
                               <button
-                                onClick={() => setExpandedArtistId(artist.id)}
+                                onClick={() => navigate(createPageUrl(`ScottArtist?id=${artist.id}`))}
                                 className="flex flex-col items-center gap-2 p-3 transition-all w-full hover:bg-cyan-500/10 rounded-lg"
                               >
                                 {artist.profile_pic_url ? (
@@ -372,14 +370,6 @@ export default function CB51() {
             ) : null}
           </div>
         </div>
-
-        {/* ARTIST PROFILE SHEET - Expandable modal */}
-        {expandedArtistId && (
-          <ArtistProfileSheet 
-            artistId={expandedArtistId} 
-            onClose={() => setExpandedArtistId(null)}
-          />
-        )}
         </CB51ErrorBoundary>
         </CB51PINGuard>
         );

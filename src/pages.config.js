@@ -124,6 +124,7 @@ import AdminUnLtdApplication from './pages/AdminUnLtdApplication';
 import AllyBridge from './pages/AllyBridge';
 import AnimalLoveChamber from './pages/AnimalLoveChamber';
 import Artist from './pages/Artist';
+import ArtistProfile from './pages/ArtistProfile';
 import ArtistSoulCard from './pages/ArtistSoulCard';
 import AudioSteganographyDemo from './pages/AudioSteganographyDemo';
 import AxiomaticTruth from './pages/AxiomaticTruth';
@@ -393,7 +394,6 @@ import YoungWarriors from './pages/YoungWarriors';
 import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
-import ArtistProfile from './pages/ArtistProfile';
 import __Layout from './Layout.jsx';
 
 
@@ -475,6 +475,7 @@ export const PAGES = {
     "AllyBridge": AllyBridge,
     "AnimalLoveChamber": AnimalLoveChamber,
     "Artist": Artist,
+    "ArtistProfile": ArtistProfile,
     "ArtistSoulCard": ArtistSoulCard,
     "AudioSteganographyDemo": AudioSteganographyDemo,
     "AxiomaticTruth": AxiomaticTruth,
@@ -744,7 +745,6 @@ export const PAGES = {
     "ZeroEgoProtocol": ZeroEgoProtocol,
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
-    "ArtistProfile": ArtistProfile,
 }
 
 export const pagesConfig = {
