@@ -1483,7 +1483,10 @@ export default function FrequencyChamber() {
 
         {/* REQUEST A FREQUENCY */}
         <div className="mt-4 bg-gradient-to-br from-green-900/20 to-cyan-900/20 border-2 border-green-500 rounded-lg p-4 text-center">
-          <p className="text-green-400 font-black text-base mb-1">🎯 NEED A FREQUENCY WE DON'T HAVE?</p>
+          <div className="flex items-center justify-center gap-2 mb-1">
+            <Target className="w-5 h-5 text-green-400" />
+            <p className="text-green-400 font-black text-base">NEED A FREQUENCY WE DON'T HAVE?</p>
+          </div>
           <p className="text-gray-300 text-sm mb-3">
             Every frequency here was built for a real person's real need. If you're suffering from something not covered — tell us. We'll research it, build it, and add it for everyone.
           </p>
