@@ -250,6 +250,59 @@ const FREQUENCIES = [
     device: 'both' // works on speakers AND headphones
   },
 
+  // === BRO51 FULL BODY RECOVERY PROTOCOL ===
+  {
+    id: 'bro51_heart_boost',
+    name: '❤️ HEART HEAL + CHEST RELEASE',
+    hz: 528,
+    icon: COOLASFUCKHeart,
+    color: '#ec4899',
+    color2: '#10b981',
+    visual: 'heart',
+    description: 'BOOSTED: 528Hz DNA repair + 285Hz tissue rebuild + chest tension release',
+    waveform: 'sine',
+    harmonics: [285, 1056, 174, 432, 264], // 285 = tissue repair, 174 = pain relief, 432 = calm
+    timer: '20 min',
+    stackWith: ['bro51_full_body', 'inflammation'],
+    context: 'BOOSTED HEART PROTOCOL: Layers 528Hz (DNA/cellular repair) with 285Hz tissue regeneration and 174Hz natural pain relief. Triple-stacked for chest tension, left-side pain, and heart chakra opening. Place phone on chest if possible. Close eyes. Breathe slowly.',
+    device: 'both',
+    psychology: 'Your heart is strong. Chest releasing. Left side tension dissolving. Every breath heals you more. Your body knows how to repair itself — you are giving it the exact frequency it needs right now.'
+  },
+  {
+    id: 'bro51_full_body',
+    name: '🌟 FULL BODY RECOVERY',
+    hz: 285,
+    icon: COOLASFUCKShield,
+    color: '#10b981',
+    color2: '#ec4899',
+    visual: 'waves',
+    description: 'After illness: tissue repair + inflammation + gut healing + energy restore',
+    waveform: 'sine',
+    harmonics: [528, 174, 396, 432, 639], // Full solfeggio stack
+    timer: '30 min',
+    stackWith: ['bro51_heart_boost', 'calm'],
+    context: 'FULL SOLFEGGIO RECOVERY STACK: 285Hz (tissue + organ repair) layered with the full healing solfeggio scale. Designed for post-illness recovery — gut healing, inflammation reduction, energy restoration, and immune system boost. The most complete healing frequency in UF51. Use lying down with eyes closed.',
+    device: 'both',
+    psychology: 'Your entire body is repairing. Gut healing. Inflammation clearing. Energy returning. You are stronger than this illness. Your family needs you and you are healing RIGHT NOW. Every cell in your body is working for you.'
+  },
+  {
+    id: 'bro51_gut_repair',
+    name: '🌿 GUT + DIGESTIVE REPAIR',
+    hz: 492,
+    icon: COOLASFUCKWaves,
+    color: '#22c55e',
+    color2: '#06b6d4',
+    visual: 'waves',
+    description: 'Post-constipation gut healing + digestive restoration + abdominal calm',
+    waveform: 'triangle',
+    harmonics: [246, 738, 984, 123],
+    timer: '15 min',
+    stackWith: ['inflammation', 'bro51_full_body'],
+    context: 'GUT HEALING: After severe constipation and illness, your gut lining needs repair. 492Hz (between the solfeggio 528 and 432 repair frequencies) with triangle wave gently stimulates parasympathetic "rest and digest" nervous system. Reduces gut inflammation, soothes gut-brain axis. Lie on your left side while playing for maximum effect.',
+    device: 'both',
+    psychology: 'Gut calming. Stomach soothing. Digestive system resetting to natural rhythm. Your gut is healing from the inside. You will feel normal again soon.'
+  },
+
   // === TINNITUS PROTOCOLS ===
   {
     id: 'tinnitus_sweep',
