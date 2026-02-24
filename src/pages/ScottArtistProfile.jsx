@@ -155,23 +155,23 @@ export default function ScottArtistProfile() {
       {/* BAND MEMBERS */}
       <div>
         <div className="flex items-center gap-2 mb-3">
-          <Users className="w-5 h-5 text-cyan-400" />
-          <h2 className="text-lg font-bold text-cyan-400">Band Members ({bandMembers.length})</h2>
+          <Users className="w-4 h-4 lg:w-5 lg:h-5 text-cyan-400" />
+          <h2 className="text-base lg:text-lg font-bold text-cyan-400">Band Members ({bandMembers.length})</h2>
         </div>
         {bandMembers.length > 0 ? (
           <div className="space-y-2">
             {bandMembers.map(member => (
-              <div key={member.id} className="bg-black border border-cyan-500/20 rounded p-4 hover:border-cyan-500/50 transition-all">
-                <div className="flex items-center justify-between">
-                  <div className="flex-1">
-                    <p className="font-bold text-white">{member.name}</p>
+              <div key={member.id} className="bg-black border border-cyan-500/20 rounded p-3 lg:p-4 hover:border-cyan-500/50 transition-all">
+                <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-2">
+                  <div className="flex-1 min-w-0">
+                    <p className="font-bold text-white text-sm lg:text-base break-words">{member.name}</p>
                     <p className="text-xs text-gray-400 capitalize">{member.role || 'band member'}</p>
                   </div>
-                  <div className="text-right">
+                  <div className="text-left lg:text-right">
                     {member.email && (
                       <a 
                         href={`mailto:${member.email}`}
-                        className="text-xs text-cyan-400 hover:text-cyan-300"
+                        className="text-xs text-cyan-400 hover:text-cyan-300 block truncate"
                       >
                         {member.email}
                       </a>
@@ -187,7 +187,7 @@ export default function ScottArtistProfile() {
             ))}
           </div>
         ) : (
-          <div className="bg-black border border-cyan-500/20 rounded p-4 text-center text-gray-400 text-sm">
+          <div className="bg-black border border-cyan-500/20 rounded p-3 lg:p-4 text-center text-gray-400 text-sm">
             No band members yet
           </div>
         )}
