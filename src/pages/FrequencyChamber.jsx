@@ -1005,9 +1005,10 @@ export default function FrequencyChamber() {
       <div className="max-w-6xl mx-auto mb-6 sm:mb-8 text-center px-2">
         <div className="flex flex-col items-center gap-2 mb-4">
           <COOLASFUCKWaves size={48} animate={true} />
-          <h1 className="text-2xl sm:text-3xl font-black text-cyan-400">
-            FREQUENCY CHAMBER
+          <h1 className="text-2xl sm:text-3xl font-black text-white">
+            Mind · Body · Soul
           </h1>
+          <p className="text-cyan-400 font-bold text-sm sm:text-base font-mono tracking-widest">HEALING FREQUENCIES</p>
           {!isOnline && (
             <div className="px-2 py-1 bg-green-500/20 border border-green-500 rounded text-[10px] font-bold text-green-400 font-mono">
               OFFLINE ✓
