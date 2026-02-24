@@ -7,7 +7,7 @@ import { useQuery } from '@tanstack/react-query';
 import { ArrowLeft, Mail, Phone, Users, AlertCircle, Music } from 'lucide-react';
 import { motion } from 'framer-motion';
 
-export default function ScottArtistProfile() {
+export default function ArtistProfile() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const artistId = searchParams.get('id');
