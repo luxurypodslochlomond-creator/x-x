@@ -16,6 +16,7 @@ import CB51BandNotificationInbox from '@/components/cb51/CB51BandNotificationInb
 import CB51BadgeManager from '@/components/cb51/CB51BadgeManager';
 import CB51BackgroundSync from '@/components/cb51/CB51BackgroundSync';
 import CB51GigDecisionEngine from '@/components/cb51/CB51GigDecisionEngine';
+import ArtistProfileSheet from '@/components/cb51/ArtistProfileSheet';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 export default function CB51() {
@@ -23,6 +24,7 @@ export default function CB51() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [activeArtistId, setActiveArtistId] = useState(null);
+  const [expandedArtistId, setExpandedArtistId] = useState(null);
   const [showArtistMenu, setShowArtistMenu] = useState(false);
   const [showAddMemberSheet, setShowAddMemberSheet] = useState(false);
   const [newMemberName, setNewMemberName] = useState('');
