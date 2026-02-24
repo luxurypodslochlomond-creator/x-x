@@ -1471,6 +1471,23 @@ export default function FrequencyChamber() {
             </div>
             )}
         </div>
+
+        {/* REQUEST A FREQUENCY */}
+        <div className="mt-4 bg-gradient-to-br from-green-900/20 to-cyan-900/20 border-2 border-green-500 rounded-lg p-4 text-center">
+          <p className="text-green-400 font-black text-base mb-1">🎯 NEED A FREQUENCY WE DON'T HAVE?</p>
+          <p className="text-gray-300 text-sm mb-3">
+            Every frequency here was built for a real person's real need. If you're suffering from something not covered — tell us. We'll research it, build it, and add it for everyone.
+          </p>
+          <a
+            href="mailto:family@uf51.love?subject=Frequency Request&body=Hi UF51 family, I'd love a frequency for..."
+            className="inline-flex items-center gap-2 bg-green-600 hover:bg-green-500 text-white font-black px-6 py-3 rounded-lg transition-all text-sm"
+            style={{ boxShadow: '0 0 20px rgba(34, 197, 94, 0.4)' }}
+          >
+            ✉️ family@uf51.love
+          </a>
+          <p className="text-gray-500 text-xs mt-3">Every request gets read. Every person matters. Free forever. ♾️❤️</p>
+        </div>
+
       </div>
       )}
 
