@@ -230,32 +230,6 @@ self.addEventListener('notificationclick', (event) => {
     return outputArray;
   };
 
-  // Only show UI if notifications are available
-  if (isLoading || !('Notification' in window)) {
-    return null;
-  }
-
-  // Only show banner if notifications are OFF - non-blocking, compact
-  if (!isSubscribed) {
-    return (
-      <div className="fixed top-0 left-0 right-0 z-[40] lg:static bg-yellow-900/40 border-b border-yellow-500/50 px-4 py-2 lg:mb-4 lg:rounded-lg">
-        <div className="max-w-7xl mx-auto flex items-center justify-between gap-3">
-          <div className="flex items-center gap-2 min-w-0">
-            <BellOff className="w-4 h-4 text-yellow-400 flex-shrink-0" />
-            <p className="text-xs text-yellow-300 font-bold truncate">Notifications OFF</p>
-          </div>
-          <button
-            onClick={requestNotificationPermission}
-            disabled={isLoading}
-            className="px-3 py-1 bg-green-600 hover:bg-green-700 disabled:opacity-50 text-white text-xs font-bold rounded transition-colors flex-shrink-0 flex items-center gap-1"
-          >
-            {isLoading ? <Loader className="w-3 h-3 animate-spin" /> : 'Enable'}
-          </button>
-        </div>
-      </div>
-    );
-  }
-
-  // If subscribed, don't show anything - they're good
+  // Don't render anything - let the page load freely
   return null;
 }
