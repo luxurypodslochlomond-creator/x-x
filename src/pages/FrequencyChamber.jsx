@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Play, Pause, Volume2, VolumeX, X, Share2 } from 'lucide-react';
+import { Play, Pause, Volume2, VolumeX, X, Share2, Mail, Shield, Tv, FlaskConical, Target } from 'lucide-react';
 import { COOLASFUCKWaves, COOLASFUCKFire, COOLASFUCKBrain, COOLASFUCKHeart, COOLASFUCKMoon, COOLASFUCKShield, COOLASFUCKZap, COOLASFUCKHeadphones, COOLASFUCKSpeaker } from '@/components/shared/COOLASFUCKIcon';
 import { base44 } from '@/api/base44Client';
 import FrequencyP2PShare from '@/components/healing/FrequencyP2PShare';
