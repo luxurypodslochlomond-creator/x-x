@@ -964,7 +964,7 @@ You're not performing. You're just here.`,
                   ].map((prompt) => (
                     <button
                       key={prompt}
-                      onClick={() => handlePromptTap(prompt)}
+                      onClick={() => sendMessageContentRef.current && sendMessageContentRef.current(prompt)}
                       className="text-xs px-3 py-1.5 rounded-full transition-all font-sans text-white/70 hover:text-white"
                       style={{
                         background: 'rgba(255,255,255,0.08)',
