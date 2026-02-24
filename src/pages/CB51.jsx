@@ -122,7 +122,7 @@ export default function CB51() {
                           {artists.slice(0, 2).map((artist) => (
                             <div key={artist.id} className="relative">
                               <button
-                                onClick={() => navigate(createPageUrl(`ScottArtist?id=${artist.id}`))}
+                                onClick={() => navigate(createPageUrl(`ScottArtistHome?id=${artist.id}`))}
                                 className="flex flex-col items-center gap-2 p-3 transition-all w-full hover:bg-cyan-500/10 rounded-lg"
                               >
                                 {artist.profile_pic_url ? (
@@ -141,7 +141,7 @@ export default function CB51() {
                             </div>
                           ))}
                           <button
-                            onClick={() => navigate(createPageUrl('CB51AddArtist'))}
+                            onClick={() => navigate(createPageUrl('ScottAddArtist'))}
                             className="flex flex-col items-center justify-center gap-2 p-3"
                           >
                             <div className="w-14 h-14 rounded-full border-2 border-dashed border-gray-600 flex items-center justify-center">

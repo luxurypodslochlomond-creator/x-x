@@ -394,6 +394,7 @@ import YoungWarriors from './pages/YoungWarriors';
 import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
+import ScottAddArtist from './pages/ScottAddArtist';
 import __Layout from './Layout.jsx';
 
 
@@ -745,6 +746,7 @@ export const PAGES = {
     "ZeroEgoProtocol": ZeroEgoProtocol,
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
+    "ScottAddArtist": ScottAddArtist,
 }
 
 export const pagesConfig = {
