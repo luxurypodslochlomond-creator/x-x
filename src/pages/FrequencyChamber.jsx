@@ -1010,11 +1010,8 @@ export default function FrequencyChamber() {
           </h1>
           <p className="text-cyan-400 font-bold text-sm sm:text-base font-mono tracking-widest">HEALING FREQUENCIES</p>
           
-          {/* PRIVACY BADGE - anti-stigma, front and centre */}
-          <div className="flex items-center gap-2 mt-2 px-4 py-2 bg-white/5 border border-white/10 rounded-full">
-            <span className="text-green-400 text-sm">🔒</span>
-            <span className="text-white/70 text-xs sm:text-sm font-medium">No login. No account. <span className="text-white font-bold">Nobody knows you were here.</span></span>
-          </div>
+          {/* ANONYMITY BADGE - warm, human, zero stigma */}
+          <p className="text-white/50 text-xs sm:text-sm mt-1 italic">Just you. We collect nothing. Nobody knows you're here.</p>
 
           {!isOnline && (
             <div className="px-2 py-1 bg-green-500/20 border border-green-500 rounded text-[10px] font-bold text-green-400 font-mono">
