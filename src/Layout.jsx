@@ -465,27 +465,9 @@ const LayoutInner = ({ children, currentPageName }) => {
       <div className={`min-h-screen text-white overflow-x-hidden ${isCB51Page ? 'bg-black' : 'bg-gradient-to-br from-[#0a0514] via-[#1a0f2a] to-[#0a0514]'}`}>
         
         {isOffline && (
-          <div className="fixed top-0 left-0 right-0 z-[70] bg-gradient-to-r from-cyan-500/90 via-purple-500/90 to-pink-500/90 backdrop-blur-sm border-b-2 border-white/50 py-3 px-4">
-            <div className="flex items-center justify-between max-w-4xl mx-auto">
-              <div className="flex items-center gap-2">
-                <WifiOff className="w-5 h-5 text-white animate-pulse" />
-                <div>
-                  <p className="text-white font-bold text-sm font-mono">OFFLINE MODE ACTIVE</p>
-                  <p className="text-white/80 text-xs font-mono">These still work ✓</p>
-                </div>
-              </div>
-              <div className="flex gap-2">
-                <Link to={createPageUrl("FrequencyChamber")} className="bg-white/20 hover:bg-white/30 text-white text-xs font-bold px-3 py-1 rounded font-mono">
-                  HEAL
-                </Link>
-                <Link to={createPageUrl("Radio")} className="bg-white/20 hover:bg-white/30 text-white text-xs font-bold px-3 py-1 rounded font-mono">
-                  MUSIC
-                </Link>
-                <Link to={createPageUrl("NewCleanup")} className="bg-white/20 hover:bg-white/30 text-white text-xs font-bold px-3 py-1 rounded font-mono">
-                  CLEAN
-                </Link>
-              </div>
-            </div>
+          <div className="fixed top-0 left-0 right-0 z-[70] flex items-center justify-center gap-2 py-1 px-4 bg-black/70 backdrop-blur-sm border-b border-white/10">
+            <WifiOff className="w-3 h-3 text-white/40" />
+            <span className="text-white/40 text-xs font-mono tracking-widest">offline mode</span>
           </div>
         )}
 
