@@ -10,27 +10,28 @@ Deno.serve(async (req) => {
     }
 
     // Get the gig
-    const gig = await base44.asServiceRole.entities.GigOffer.get(gigId);
+    const gigs = await base44.asServiceRole.entities.ScottGigOffer.filter({ id: gigId });
+    const gig = gigs?.[0];
     if (!gig) {
       return Response.json({ error: 'Gig not found' }, { status: 404 });
     }
 
     // Get band member name
     const member = bandMemberId 
-      ? await base44.asServiceRole.entities.TeamMember.get(bandMemberId)
+      ? await base44.asServiceRole.entities.ScottTeamMember.filter({ id: bandMemberId }).then(m => m?.[0])
       : null;
 
     // Get vote summary to show progress
-    const votes = await base44.asServiceRole.entities.GigVote.filter({ 
-      gig_id: gigId 
+    const votes = await base44.asServiceRole.entities.ScottBandResponse.filter({ 
+      gig_offer_id: gigId 
     });
 
-    const bandMembers = await base44.asServiceRole.entities.TeamMember.filter({ 
-      artist_id: gig.artist_id 
+    const bandMembers = await base44.asServiceRole.entities.ScottTeamMember.filter({ 
+      artist_access: { $in: [gig.artist_id] } 
     });
 
-    const yesCount = votes.filter(v => v.vote_type === 'yes').length;
-    const noCount = votes.filter(v => v.vote_type === 'no').length;
+    const yesCount = votes.filter(v => v.vote === 'yes' || v.vote_type === 'yes').length;
+    const noCount = votes.filter(v => v.vote === 'no' || v.vote_type === 'no').length;
     const pending = bandMembers.length - votes.length;
 
     // Build notification message
@@ -48,33 +49,41 @@ Deno.serve(async (req) => {
     const allVotesIn = (yesCount + noCount) === bandMembers.length;
     
     if (allVotesIn) {
-      const artist = await base44.asServiceRole.entities.Artist.get(gig.artist_id);
-      if (artist?.primary_manager_email) {
+      const artists = await base44.asServiceRole.entities.ScottArtist.filter({ id: gig.artist_id });
+      const artist = artists?.[0];
+      if (artist?.email || gig.manager_email) {
         try {
-          await base44.asServiceRole.functions.invoke('sendBrowserPush', {
-            recipient_email: artist.primary_manager_email,
-            title: yesCount === bandMembers.length ? '✅ All YES - Draft Ready!' : '⚠️ Some NO votes',
+          // Create notification in CB51 inbox
+          await base44.asServiceRole.entities.ScottNotification.create({
+            artist_id: gig.artist_id,
+            title: yesCount === bandMembers.length ? '✅ All YES - Ready to confirm!' : '⚠️ Mixed votes',
             message,
-            notification_type: 'votes_complete',
-            gig_offer_id: gigId
+            type: 'votes_complete',
+            gig_offer_id: gigId,
+            read: false
           });
         } catch (pushErr) {
-          console.error('Manager push notification failed:', pushErr.message);
+          console.error('Manager notification failed:', pushErr.message);
         }
       }
     }
 
-    // If all votes are YES, generate draft confirmation email
+    // All votes in - auto-confirm and sync to calendar
     let draftEmail = null;
-    if (yesCount === bandMembers.length && bandMembers.length > 0) {
+    if (yesCount === bandMembers.length && bandMembers.length > 0 && allVotesIn) {
       try {
-        const emailRes = await base44.asServiceRole.functions.invoke('generateGigConfirmationEmail', {
-          gigId: gigId,
+        // Auto-confirm gig
+        await base44.asServiceRole.entities.ScottGigOffer.update(gigId, {
+          status: 'confirmed'
+        });
+
+        // Sync to calendar
+        await base44.asServiceRole.functions.invoke('syncGigToCalendar', {
+          gigId,
           artistId: gig.artist_id
         });
-        draftEmail = emailRes.data?.draft || emailRes.draft;
-      } catch (emailErr) {
-        console.log('Draft email generation (non-critical):', emailErr.message);
+      } catch (err) {
+        console.log('Auto-confirm (non-critical):', err.message);
       }
     }
 
