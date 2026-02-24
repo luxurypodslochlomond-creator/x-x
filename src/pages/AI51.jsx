@@ -443,6 +443,12 @@ export default function AI51() {
 
   // Keep a ref to sendMessageContent so speech recognition always calls latest version
   const sendMessageContentRef = useRef(null);
+  // Also expose sendMessageContent directly for prompt buttons (before ref is set)
+  const handlePromptTap = useCallback((prompt) => {
+    if (sendMessageContentRef.current) {
+      sendMessageContentRef.current(prompt);
+    }
+  }, []);
 
   // Speech recognition instances are created fresh on each startListening call
   // to avoid stale state bugs across browsers. No static setup needed here.
