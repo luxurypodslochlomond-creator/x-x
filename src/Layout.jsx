@@ -401,7 +401,6 @@ const LayoutInner = ({ children, currentPageName }) => {
   // STUDENT & ARTIST TOOLS
   const scottNav = [
       { title: "CB51", url: createPageUrl("CB51"), icon: Radio, highlight: true, description: "Your AI co-manager" },
-      { title: "Add Artist", url: createPageUrl("CB51AddArtist"), icon: Users, description: "Add or edit artists" },
       { title: "Prof51", url: createPageUrl("Prof51"), icon: GraduationCap, highlight: true, description: "AI co-manager for students" },
   ];
 
