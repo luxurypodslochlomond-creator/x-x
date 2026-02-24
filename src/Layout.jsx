@@ -666,7 +666,7 @@ const LayoutInner = ({ children, currentPageName }) => {
                             </aside>
                             )}
 
-        <main className={`${currentPageName !== 'AI51' && currentPageName !== 'Earth51' ? 'lg:ml-80' : ''} ${currentPageName !== 'AI51' && currentPageName !== 'Earth51' ? (isOffline ? 'pt-[122px] lg:pt-10' : 'pt-[72px] lg:pt-0') : ''} min-h-screen w-full`} style={{ willChange: 'contents', maxWidth: '100vw', overflowX: 'hidden' }}>
+        <main className={`${currentPageName !== 'AI51' && currentPageName !== 'Earth51' ? 'lg:ml-80' : ''} ${currentPageName !== 'AI51' && currentPageName !== 'Earth51' ? (isOffline ? 'pt-[90px] lg:pt-6' : 'pt-[72px] lg:pt-0') : ''} min-h-screen w-full`} style={{ willChange: 'contents', maxWidth: '100vw', overflowX: 'hidden' }}>
           <AnimatePresence mode="wait">
             <motion.div
               key={location.pathname}
