@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { base44 } from '@/api/base44Client';
 import { useQueryClient } from '@tanstack/react-query';
-import { ThumbsUp, ThumbsDown } from 'lucide-react';
+import { ThumbsUp, ThumbsDown, X } from 'lucide-react';
 
 export default function CB51BandVotingWidget({ gigId, memberId }) {
   const queryClient = useQueryClient();
   const [loading, setLoading] = useState(false);
   const [voted, setVoted] = useState(null);
   const [error, setError] = useState(null);
+  const [showReasonPrompt, setShowReasonPrompt] = useState(false);
+  const [reason, setReason] = useState('');
 
   useEffect(() => {
     const checkVote = async () => {
