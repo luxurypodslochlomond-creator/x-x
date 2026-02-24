@@ -592,14 +592,14 @@ export default function AI51() {
   const sendVoiceMessage = async (transcript) => {
     if (!transcript?.trim() || isProcessingRef.current) return;
     setInputText('');
-    await sendMessageContent(transcript.trim());
+    if (sendMessageContentRef.current) await sendMessageContentRef.current(transcript.trim());
   };
 
   const sendMessage = async () => {
     if (!inputText.trim() || isProcessing) return;
     const text = inputText.trim();
     setInputText('');
-    await sendMessageContent(text);
+    if (sendMessageContentRef.current) await sendMessageContentRef.current(text);
   };
 
   // SAVE MEMORY — extract meaningful things from conversation and remember them
