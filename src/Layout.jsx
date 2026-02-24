@@ -534,7 +534,7 @@ const LayoutInner = ({ children, currentPageName }) => {
 
         {/* MOBILE MENU (UF51 ONLY) */}
                   {isMobileMenuOpen && !currentPageName.startsWith('Scott') && !currentPageName.startsWith('CB51') && (
-                    <div className={`lg:hidden fixed inset-0 ${isOffline ? 'top-[122px]' : 'top-[72px]'} bg-[#0a0f1a]/95 backdrop-blur-xl z-[50] overflow-y-auto pb-6`}>
+                    <div className={`lg:hidden fixed inset-0 ${isOffline ? 'top-[90px]' : 'top-[72px]'} bg-[#0a0f1a]/95 backdrop-blur-xl z-[50] overflow-y-auto pb-6`}>
                       <div className="p-3 pt-6 space-y-2 flex flex-col items-stretch">
                           {isCB51Page ? (
                             <NavSection title="ARTIST MANAGEMENT" color="cyan" items={cb51Nav} isActivePage={isActivePage} isMobile defaultOpen={true} />
