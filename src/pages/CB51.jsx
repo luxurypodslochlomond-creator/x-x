@@ -372,7 +372,15 @@ export default function CB51() {
             ) : null}
           </div>
         </div>
-      </CB51ErrorBoundary>
-      </CB51PINGuard>
-      );
-      }
+
+        {/* ARTIST PROFILE SHEET - Expandable modal */}
+        {expandedArtistId && (
+          <ArtistProfileSheet 
+            artistId={expandedArtistId} 
+            onClose={() => setExpandedArtistId(null)}
+          />
+        )}
+        </CB51ErrorBoundary>
+        </CB51PINGuard>
+        );
+        }
