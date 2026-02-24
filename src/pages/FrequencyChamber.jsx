@@ -1492,12 +1492,16 @@ export default function FrequencyChamber() {
           </p>
           <a
             href="mailto:family@uf51.love?subject=Frequency Request&body=Hi UF51 family, I'd love a frequency for..."
-            className="inline-flex items-center gap-2 bg-green-600 hover:bg-green-500 text-white font-black px-6 py-3 rounded-lg transition-all text-sm"
+            onClick={(e) => {
+              window.location.href = "mailto:family@uf51.love?subject=Frequency Request&body=Hi UF51 family, I'd love a frequency for...";
+            }}
+            className="inline-flex items-center gap-2 bg-green-600 hover:bg-green-500 text-white font-black px-6 py-3 rounded-lg transition-all text-sm cursor-pointer"
             style={{ boxShadow: '0 0 20px rgba(34, 197, 94, 0.4)' }}
           >
-            ✉️ family@uf51.love
+            <Mail className="w-4 h-4" />
+            family@uf51.love
           </a>
-          <p className="text-gray-500 text-xs mt-3">Every request gets read. Every person matters. Free forever. ♾️❤️</p>
+          <p className="text-gray-500 text-xs mt-3">Every request gets read. Every person matters. Free forever.</p>
         </div>
 
       </div>
