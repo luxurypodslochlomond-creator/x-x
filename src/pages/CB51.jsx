@@ -122,7 +122,7 @@ export default function CB51() {
                           {artists.slice(0, 2).map((artist) => (
                             <div key={artist.id} className="relative">
                               <button
-                                onClick={() => navigate(createPageUrl(`ScottArtistProfile?id=${artist.id}`))}
+                                onClick={() => navigate(createPageUrl(`ArtistProfile?id=${artist.id}`))}
                                 className="flex flex-col items-center gap-2 p-3 transition-all w-full hover:bg-cyan-500/10 rounded-lg"
                               >
                                 {artist.profile_pic_url ? (
