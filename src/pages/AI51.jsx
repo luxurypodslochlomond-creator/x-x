@@ -502,6 +502,17 @@ export default function AI51() {
     if (recognitionRef.current && isListening) recognitionRef.current.stop();
   };
 
+  // Clean text for speaking — strip URLs, markdown, excessive punctuation
+  const cleanForSpeech = (rawText) => {
+    return rawText
+      .replace(/https?:\/\/[^\s)>\]]+/g, '')
+      .replace(/\*{1,3}([^*]+)\*{1,3}/g, '$1')
+      .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+      .replace(/^[•\-*#]+\s*/gm, '')
+      .replace(/\s{2,}/g, ' ')
+      .trim();
+  };
+
   // SPEAK — chunked sentence-by-sentence to beat browser Speech API cutoff bug
   const speak = (text, detectedLang) => {
     if (!synthRef.current || !voiceEnabled) return;
@@ -517,44 +528,15 @@ export default function AI51() {
     const lang = detectedLang || navigator.language || 'en-GB';
     const langCode = lang.split('-')[0];
 
-    // AI51's VOICE — not borrowed from any tech company.
-    // We use whatever engine the device has, then sculpt it with pitch + rate
-    // to create something that sounds like no other AI.
-    // Warm. Calm. Slightly slower than a news reader. Low-mid pitch.
-    // This IS AI51's voice. It belongs to no one else.
+    // AI51's VOICE — warm, calm, slightly slower than a news reader
     const getVoice = () => {
       const voices = synthRef.current.getVoices();
       if (!voices.length) return null;
-
-      // Prefer a local (non-network) voice in the user's language — fastest + most consistent
-      const local = voices.find(v =>
-        v.localService === true &&
-        v.lang.startsWith(langCode)
-      );
+      const local = voices.find(v => v.localService === true && v.lang.startsWith(langCode));
       if (local) return local;
-
-      // Any local voice at all
       const anyLocal = voices.find(v => v.localService === true);
       if (anyLocal) return anyLocal;
-
-      // Network voices as last resort — still better than silence
       return voices.find(v => v.lang.startsWith(langCode)) || voices[0] || null;
-    };
-
-    // Clean text for speaking — strip URLs, markdown, excessive punctuation
-    const cleanForSpeech = (text) => {
-      return text
-        // Replace URLs with a natural spoken reference
-        .replace(/https?:\/\/[^\s)>\]]+/g, '')
-        // Strip markdown bold/italic
-        .replace(/\*{1,3}([^*]+)\*{1,3}/g, '$1')
-        // Strip markdown links [text](url) → just "text"
-        .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
-        // Strip bullet points / hashes
-        .replace(/^[•\-*#]+\s*/gm, '')
-        // Collapse multiple spaces/newlines
-        .replace(/\s{2,}/g, ' ')
-        .trim();
     };
 
     const speakChunks = (chunks) => {
