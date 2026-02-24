@@ -10,12 +10,13 @@ Deno.serve(async (req) => {
       return Response.json({ error: 'gigOfferId required' }, { status: 400 });
     }
 
-    const gig = await base44.entities.GigOffer.get(gigOfferId);
-    if (!gig) {
+    const gig = await base44.entities.ScottGigOffer.filter({ id: gigOfferId });
+    if (!gig || gig.length === 0) {
       return Response.json({ error: 'GigOffer not found' }, { status: 404 });
     }
+    const gigData = gig[0];
 
-    const bandMembers = await base44.entities.BandMember.filter({ artist_id: gig.artist_id });
+    const bandMembers = await base44.entities.ScottTeamMember.filter({ artist_access: { $in: [gigData.artist_id] } });
     
     const notificationPromises = bandMembers.map(async (member) => {
       // Generate magic voting token
@@ -26,8 +27,8 @@ Deno.serve(async (req) => {
 
       const votingUrl = `${new URL(req.url).origin}/api/functions/bandVote?token=${token}&gigId=${gigOfferId}&memberId=${member.id}`;
 
-      const title = `Vote: ${gig.title}`;
-      const body = `${gig.location} on ${gig.date_start}\nFee: £${gig.fee || '0'}\n\nVote YES or NO`;
+      const title = `Vote: ${gigData.venue || 'Gig Offer'}`;
+      const body = `${gigData.city || gigData.location || 'TBD'} on ${gigData.date}\nFee: £${gigData.fee || '0'}\n\nVote YES or NO`;
 
       // Try push notification first
       if (member.push_subscription) {
@@ -70,7 +71,7 @@ MAYBE - Unsure, need more info
     const results = await Promise.all(notificationPromises);
 
     // Update gig status
-    await base44.entities.GigOffer.update(gigOfferId, {
+    await base44.entities.ScottGigOffer.update(gigOfferId, {
       status: 'sent_to_band',
       votes_due_date: new Date(Date.now() + 48 * 60 * 60 * 1000).toISOString()
     });
