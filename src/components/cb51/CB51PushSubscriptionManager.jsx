@@ -80,18 +80,9 @@ self.addEventListener('notificationclick', (event) => {
 
       // Get current subscription
       const subscription = await registration.pushManager.getSubscription();
-      
+
       if (subscription) {
         setIsSubscribed(true);
-        // Update last seen in database
-        try {
-          await base44.asServiceRole.entities.ScottPushSubscription.filter({
-            user_email: userEmail,
-            subscription_data: JSON.stringify(subscription)
-          });
-        } catch (e) {
-          console.log('Update subscription timestamp (non-critical):', e);
-        }
       } else {
         // Check if notification permission is granted
         if (Notification.permission === 'granted') {
