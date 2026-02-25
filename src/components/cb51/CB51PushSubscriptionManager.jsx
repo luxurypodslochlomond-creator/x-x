@@ -1,33 +1,63 @@
 import React, { useEffect, useState } from 'react';
 import { base44 } from '@/api/base44Client';
-import { Bell, BellOff, Loader } from 'lucide-react';
+import { Bell, BellOff, CheckCircle, AlertCircle, Smartphone } from 'lucide-react';
 
 /**
  * CB51 PUSH SUBSCRIPTION MANAGER
- * Auto-subscribes user to browser push notifications
- * Handles service worker registration + subscription storage
+ * Makes notification setup VISIBLE so users know their status
+ * and can take action if not enabled
  */
 
 export default function CB51PushSubscriptionManager({ userEmail }) {
-  const [isSubscribed, setIsSubscribed] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-  const [showUI, setShowUI] = useState(false);
+  const [status, setStatus] = useState('checking'); // checking | unsupported | denied | needs_permission | subscribed | error
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    initPushSubscription();
+    checkStatus();
   }, [userEmail]);
 
-  const initPushSubscription = async () => {
-    try {
-      // Check if service worker is available
-      if (!('serviceWorker' in navigator) || !('PushManager' in window)) {
-        console.log('Push notifications not supported in this browser');
-        setIsLoading(false);
-        return;
-      }
+  const checkStatus = async () => {
+    // Not supported
+    if (!('serviceWorker' in navigator) || !('PushManager' in window)) {
+      setStatus('unsupported');
+      return;
+    }
 
-      // Inject inline service worker via blob URL - avoids MIME/scope issues with /api/ path
-      const swCode = `
+    // Already denied by user
+    if (Notification.permission === 'denied') {
+      setStatus('denied');
+      return;
+    }
+
+    // Check if already subscribed
+    try {
+      const reg = await navigator.serviceWorker.getRegistration('/');
+      if (reg) {
+        const sub = await reg.pushManager.getSubscription();
+        if (sub) {
+          setStatus('subscribed');
+          return;
+        }
+      }
+    } catch (e) {
+      // ignore
+    }
+
+    // Permission granted but no subscription yet — auto-subscribe
+    if (Notification.permission === 'granted') {
+      await subscribe();
+      return;
+    }
+
+    // Default: needs permission
+    setStatus('needs_permission');
+  };
+
+  const getOrCreateRegistration = async () => {
+    const existing = await navigator.serviceWorker.getRegistration('/');
+    if (existing) return existing;
+
+    const swCode = `
 self.addEventListener('install', () => self.skipWaiting());
 self.addEventListener('activate', (e) => e.waitUntil(clients.claim()));
 self.addEventListener('push', (event) => {
@@ -58,84 +88,39 @@ self.addEventListener('notificationclick', (event) => {
   );
 });
 `;
-
-      // Try to use a pre-existing registration first, then fall back to blob
-      let registration;
-      const existing = await navigator.serviceWorker.getRegistration('/');
-      if (existing) {
-        registration = existing;
-      } else {
-        // Write SW as a blob and register from there
-        const blob = new Blob([swCode], { type: 'application/javascript' });
-        const swUrl = URL.createObjectURL(blob);
-        try {
-          registration = await navigator.serviceWorker.register(swUrl, { scope: '/' });
-        } catch {
-          // Blob SW registration blocked (Firefox) - silently skip push on unsupported env
-          console.log('SW blob registration not supported - push unavailable');
-          setIsLoading(false);
-          return;
-        }
-      }
-
-      // Get current subscription
-      const subscription = await registration.pushManager.getSubscription();
-
-      if (subscription) {
-        setIsSubscribed(true);
-      } else {
-        // Check if notification permission is granted
-        if (Notification.permission === 'granted') {
-          await subscribeToPush(registration);
-        }
-      }
-
-      setIsLoading(false);
-    } catch (error) {
-      console.log('Push subscription init:', error);
-      setIsLoading(false);
-    }
+    const blob = new Blob([swCode], { type: 'application/javascript' });
+    const swUrl = URL.createObjectURL(blob);
+    return await navigator.serviceWorker.register(swUrl, { scope: '/' });
   };
 
-  const subscribeToPush = async (registration) => {
+  const subscribe = async () => {
+    setIsLoading(true);
     try {
-      setIsLoading(true);
+      const registration = await getOrCreateRegistration();
 
-      // Get VAPID public key from backend
+      // Get VAPID key
       let vapidPublicKey = localStorage.getItem('VAPID_PUBLIC_KEY');
-      
       if (!vapidPublicKey) {
-        try {
-          const res = await fetch('/api/functions/getVapidPublicKey');
-          const data = await res.json();
-          vapidPublicKey = data.vapidPublicKey;
-          if (vapidPublicKey) {
-            localStorage.setItem('VAPID_PUBLIC_KEY', vapidPublicKey);
-          }
-        } catch (e) {
-          console.log('Failed to fetch VAPID key:', e);
-        }
+        const res = await fetch('/api/functions/getVapidPublicKey');
+        const data = await res.json();
+        vapidPublicKey = data.vapidPublicKey;
+        if (vapidPublicKey) localStorage.setItem('VAPID_PUBLIC_KEY', vapidPublicKey);
       }
 
       if (!vapidPublicKey) {
-        console.log('VAPID key not available - push notifications disabled');
+        setStatus('error');
         return;
       }
 
-      // Subscribe to push
       const subscription = await registration.pushManager.subscribe({
         userVisibleOnly: true,
         applicationServerKey: urlBase64ToUint8Array(vapidPublicKey)
       });
 
-      // Save subscription to database
-      // Always use UserPushSubscription - single source of truth
-      const existingSub = await base44.entities.UserPushSubscription.filter({
-        user_email: userEmail
-      });
-
-      if (existingSub.length > 0) {
-        await base44.entities.UserPushSubscription.update(existingSub[0].id, {
+      // Save to DB
+      const existing = await base44.entities.UserPushSubscription.filter({ user_email: userEmail });
+      if (existing.length > 0) {
+        await base44.entities.UserPushSubscription.update(existing[0].id, {
           subscription_data: JSON.stringify(subscription),
           is_active: true,
           last_active: new Date().toISOString()
@@ -149,78 +134,92 @@ self.addEventListener('notificationclick', (event) => {
         });
       }
 
-      setIsSubscribed(true);
-      console.log('✓ Subscribed to push notifications');
-      
-      // Vibrate on successful subscription
-      if ('vibrate' in navigator) {
-        navigator.vibrate(200);
-      }
+      setStatus('subscribed');
+      if ('vibrate' in navigator) navigator.vibrate(200);
     } catch (error) {
-      console.error('Push subscription failed:', error);
+      console.error('Subscribe failed:', error);
+      setStatus('error');
     } finally {
       setIsLoading(false);
     }
   };
 
-  const unsubscribeToPush = async () => {
-    try {
-      setIsLoading(true);
-
-      const registration = await navigator.serviceWorker.ready;
-      const subscription = await registration.pushManager.getSubscription();
-
-      if (subscription) {
-        await subscription.unsubscribe();
-
-        // Mark as inactive in database
-        const subs = await base44.entities.UserPushSubscription.filter({
-          user_email: userEmail
-        });
-
-        if (subs.length > 0) {
-          await base44.entities.UserPushSubscription.update(subs[0].id, {
-            is_active: false
-          });
-        }
-      }
-
-      setIsSubscribed(false);
-      console.log('✓ Unsubscribed from push notifications');
-    } catch (error) {
-      console.error('Push unsubscribe failed:', error);
-    } finally {
-      setIsLoading(false);
+  const requestPermission = async () => {
+    const permission = await Notification.requestPermission();
+    if (permission === 'granted') {
+      await subscribe();
+    } else {
+      setStatus('denied');
     }
   };
 
-  const requestNotificationPermission = async () => {
-    try {
-      const permission = await Notification.requestPermission();
-      
-      if (permission === 'granted') {
-        const registration = await navigator.serviceWorker.ready;
-        await subscribeToPush(registration);
-      }
-    } catch (error) {
-      console.error('Notification permission request failed:', error);
-    }
-  };
-
-  // VAPID key converter
   const urlBase64ToUint8Array = (base64String) => {
     const padding = '='.repeat((4 - base64String.length % 4) % 4);
     const base64 = (base64String + padding).replace(/\-/g, '+').replace(/_/g, '/');
     const rawData = window.atob(base64);
     const outputArray = new Uint8Array(rawData.length);
-
-    for (let i = 0; i < rawData.length; ++i) {
-      outputArray[i] = rawData.charCodeAt(i);
-    }
-
+    for (let i = 0; i < rawData.length; ++i) outputArray[i] = rawData.charCodeAt(i);
     return outputArray;
   };
 
-  // Don't render anything - let the page load freely
+  // Subscribed — show nothing (all good)
+  if (status === 'subscribed' || status === 'checking') return null;
+
+  // Needs permission — show a clear prompt
+  if (status === 'needs_permission') {
+    return (
+      <div className="mx-6 mt-4 bg-cyan-950/60 border border-cyan-500/50 rounded-lg p-4 flex items-center gap-3">
+        <Bell className="w-5 h-5 text-cyan-400 flex-shrink-0" />
+        <div className="flex-1">
+          <p className="text-cyan-300 font-bold text-sm">Enable Gig Notifications</p>
+          <p className="text-gray-400 text-xs mt-0.5">Get alerts when new offers arrive</p>
+        </div>
+        <button
+          onClick={requestPermission}
+          disabled={isLoading}
+          className="bg-cyan-500 hover:bg-cyan-400 text-black font-black text-xs px-3 py-2 rounded transition-colors disabled:opacity-50 whitespace-nowrap"
+        >
+          {isLoading ? '...' : 'Enable'}
+        </button>
+      </div>
+    );
+  }
+
+  // Denied — tell them how to fix it
+  if (status === 'denied') {
+    return (
+      <div className="mx-6 mt-4 bg-red-950/40 border border-red-500/40 rounded-lg p-4 flex items-start gap-3">
+        <BellOff className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" />
+        <div>
+          <p className="text-red-300 font-bold text-sm">Notifications Blocked</p>
+          <p className="text-gray-400 text-xs mt-1">Go to <strong className="text-white">Settings → CB51 → Notifications</strong> and turn on Allow Notifications</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Unsupported (old browser / non-installed PWA on iOS)
+  if (status === 'unsupported') {
+    return (
+      <div className="mx-6 mt-4 bg-amber-950/40 border border-amber-500/40 rounded-lg p-4 flex items-start gap-3">
+        <Smartphone className="w-5 h-5 text-amber-400 flex-shrink-0 mt-0.5" />
+        <div>
+          <p className="text-amber-300 font-bold text-sm">Add CB51 to Home Screen</p>
+          <p className="text-gray-400 text-xs mt-1">On iPhone: tap <strong className="text-white">Share → Add to Home Screen</strong> then reopen CB51 to enable notifications</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Error state
+  if (status === 'error') {
+    return (
+      <div className="mx-6 mt-4 bg-gray-900/60 border border-gray-700 rounded-lg p-3 flex items-center gap-3">
+        <AlertCircle className="w-4 h-4 text-gray-500 flex-shrink-0" />
+        <p className="text-gray-500 text-xs">Notification setup failed — use email alerts as backup</p>
+      </div>
+    );
+  }
+
   return null;
 }
