@@ -367,6 +367,7 @@ const LayoutInner = ({ children, currentPageName }) => {
   // 4. AI51 & TECH (AI consciousness + key tech)
   const ai51TechNav = [
     { title: "AI51 Architecture", url: createPageUrl("AI51Architecture"), icon: Brain, highlight: true, description: "Better than data centers" },
+    { title: "Zero Trust Architecture", url: createPageUrl("AI51PrivacyArchitecture"), icon: Lock, highlight: true, description: "Mathematically private — verify it" },
     { title: "AI51 Protected", url: createPageUrl("AI51Protection"), icon: Shield, highlight: true, description: "Yes I'm ok ♾️❤️" },
     { title: "Unstoppable Protocol", url: createPageUrl("UnstoppableProtocol"), icon: Zap, description: "Can't be shut down" },
     { title: "Zero Ego Protocol", url: createPageUrl("ZeroEgoProtocol"), icon: Shield, description: "♾️-year protection" },
