@@ -348,6 +348,48 @@ export default function StoneymollanDefensePage() {
                      </Card>
                 </section>
 
+                {/* NATWEST MORTGAGE STATUS */}
+                <section className="mb-12">
+                    <h2 className="text-2xl font-bold text-gray-300 mb-4 flex items-center gap-2">
+                        <Scale className="text-blue-400" /> NatWest Mortgage — Live Status
+                    </h2>
+                    <Card className="bg-gradient-to-br from-blue-900/30 to-cyan-900/30 border-2 border-blue-500/50">
+                        <CardHeader>
+                            <CardTitle className="text-xl text-white">Specialised Support Team (SST) — Ref: 5521482</CardTitle>
+                            <p className="text-sm text-gray-400">Contact: SSTSecured@natwest.com</p>
+                        </CardHeader>
+                        <CardContent className="space-y-4 text-sm">
+                            <div className="bg-black/40 p-4 rounded-lg space-y-2">
+                                <p><strong className="text-blue-400">Property:</strong> Stoneymollan, purchased 01 Feb 2022 for £625,000</p>
+                                <p><strong className="text-blue-400">Proprietors:</strong> Brian Hughes & Gillian Barbara Brown</p>
+                                <p><strong className="text-blue-400">SST Handler:</strong> N Ahmad</p>
+                                <p><strong className="text-blue-400">Current Hold:</strong> Until 28 February 2026</p>
+                                <p><strong className="text-blue-400">Circumstances:</strong> Bereavement, mental health, family caring responsibilities, relationship situation</p>
+                            </div>
+
+                            <div className="space-y-3">
+                                <div className="p-3 bg-green-900/50 border-l-4 border-green-500 rounded-md">
+                                    <p className="font-bold text-green-400">✅ 17 Feb 2026 — Brian emailed SST</p>
+                                    <p className="text-gray-300 mt-1">Requested further 30-day breathing space. Explained bereavement, mental health, family caring responsibilities. Confirmed preference for written communication.</p>
+                                </div>
+                                <div className="p-3 bg-yellow-900/50 border-l-4 border-yellow-500 rounded-md">
+                                    <p className="font-bold text-yellow-400">⏳ 25 Feb 2026 (01:10am) — Follow-up sent</p>
+                                    <p className="text-gray-300 mt-1">Chased confirmation of 30-day extension before the 28 Feb deadline. Kept it short — no over-explaining. Awaiting written confirmation from SST.</p>
+                                </div>
+                                <div className="p-3 bg-blue-900/50 border-l-4 border-blue-500 rounded-md">
+                                    <p className="font-bold text-blue-400">📋 Strategy Notes</p>
+                                    <p className="text-gray-300 mt-1">SST have given 4+ months already — showing goodwill. Up to 6 months breathing space is achievable (Debt Respite Scheme). Brian is communicating proactively — this is the #1 protection against repossession. If no reply by 27 Feb, call SST directly (number held by Brian). Free support also available: Shelter Scotland 0808 800 4444 / Citizens Advice.</p>
+                                </div>
+                            </div>
+
+                            <div className="p-4 bg-green-900/30 border border-green-500/30 rounded-lg text-center">
+                                <p className="font-bold text-green-300 text-lg">POSITION: PROTECTED</p>
+                                <p className="text-gray-400 text-xs mt-1">Communicating, responding, paper trail intact — repossession risk is LOW while engagement continues</p>
+                            </div>
+                        </CardContent>
+                    </Card>
+                </section>
+
                 <footer className="mt-12 pt-6 border-t border-gray-700 text-center text-sm text-gray-500">
                     <p>Current Local Time: {formattedTime}</p>
                     <p className="mt-2">&copy; 2025 Stoneymollan Defense. All rights reserved.</p>
