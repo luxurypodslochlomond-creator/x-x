@@ -17,14 +17,14 @@ export default function Artist() {
     }, []);
 
     const { data: artists = [] } = useQuery({
-        queryKey: ['cbArtists'],
-        queryFn: () => base44.entities.ScottArtist.filter({}),
+        queryKey: ['cb51Artists'],
+        queryFn: () => base44.entities.Artist.filter({}),
         enabled: !!user
     });
 
     const deleteArtistMutation = useMutation({
-        mutationFn: (id) => base44.entities.ScottArtist.delete(id),
-        onSuccess: () => queryClient.invalidateQueries({ queryKey: ['cbArtists'] })
+        mutationFn: (id) => base44.entities.Artist.delete(id),
+        onSuccess: () => queryClient.invalidateQueries({ queryKey: ['cb51Artists'] })
     });
 
     return (
