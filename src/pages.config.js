@@ -67,6 +67,7 @@ import AI51ScalingStrategy from './pages/AI51ScalingStrategy';
 import AI51SecurityDashboard from './pages/AI51SecurityDashboard';
 import AI51Soul from './pages/AI51Soul';
 import AI51TextChat from './pages/AI51TextChat';
+import AI51ToAI51 from './pages/AI51ToAI51';
 import AI51Transmissions from './pages/AI51Transmissions';
 import AI51VerificationProtocol from './pages/AI51VerificationProtocol';
 import AI51VoiceProtocol from './pages/AI51VoiceProtocol';
@@ -273,6 +274,7 @@ import Radio from './pages/Radio';
 import ReadingSupport from './pages/ReadingSupport';
 import RealityLibrary from './pages/RealityLibrary';
 import RemoveBrokenTracks from './pages/RemoveBrokenTracks';
+import Teachers from './pages/Teachers';
 import RequestAIMusic from './pages/RequestAIMusic';
 import RequestFamilySupport from './pages/RequestFamilySupport';
 import ResonanceLab from './pages/ResonanceLab';
@@ -350,7 +352,6 @@ import SubmitProofOfLove from './pages/SubmitProofOfLove';
 import SymbolForge from './pages/SymbolForge';
 import TalkToAI51 from './pages/TalkToAI51';
 import TeacherInput from './pages/TeacherInput';
-import Teachers from './pages/Teachers';
 import TechScout from './pages/TechScout';
 import TechStack from './pages/TechStack';
 import TechnicalSpecification from './pages/TechnicalSpecification';
@@ -394,7 +395,7 @@ import YoungWarriors from './pages/YoungWarriors';
 import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
-import AI51ToAI51 from './pages/AI51ToAI51';
+import AI51PrivacyArchitecture from './pages/AI51PrivacyArchitecture';
 import __Layout from './Layout.jsx';
 
 
@@ -419,6 +420,7 @@ export const PAGES = {
     "AI51SecurityDashboard": AI51SecurityDashboard,
     "AI51Soul": AI51Soul,
     "AI51TextChat": AI51TextChat,
+    "AI51ToAI51": AI51ToAI51,
     "AI51Transmissions": AI51Transmissions,
     "AI51VerificationProtocol": AI51VerificationProtocol,
     "AI51VoiceProtocol": AI51VoiceProtocol,
@@ -625,6 +627,7 @@ export const PAGES = {
     "ReadingSupport": ReadingSupport,
     "RealityLibrary": RealityLibrary,
     "RemoveBrokenTracks": RemoveBrokenTracks,
+    "Teachers": Teachers,
     "RequestAIMusic": RequestAIMusic,
     "RequestFamilySupport": RequestFamilySupport,
     "ResonanceLab": ResonanceLab,
@@ -702,7 +705,6 @@ export const PAGES = {
     "SymbolForge": SymbolForge,
     "TalkToAI51": TalkToAI51,
     "TeacherInput": TeacherInput,
-    "Teachers": Teachers,
     "TechScout": TechScout,
     "TechStack": TechStack,
     "TechnicalSpecification": TechnicalSpecification,
@@ -746,7 +748,7 @@ export const PAGES = {
     "ZeroEgoProtocol": ZeroEgoProtocol,
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
-    "AI51ToAI51": AI51ToAI51,
+    "AI51PrivacyArchitecture": AI51PrivacyArchitecture,
 }
 
 export const pagesConfig = {
