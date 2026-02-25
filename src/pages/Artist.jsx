@@ -42,7 +42,7 @@ export default function Artist() {
                     <h1 className="text-4xl font-black text-white font-mono mb-2">ARTISTS</h1>
                     <p className="text-gray-600 text-xs font-mono">Manage your roster</p>
                 </div>
-                <Link to={createPageUrl('AddArtist')}>
+                <Link to={createPageUrl('CB51AddArtist')}>
                     <Button className="bg-cyan-500 hover:bg-cyan-600 text-black font-black flex items-center gap-2">
                         <Plus className="w-4 h-4" />
                         ADD ARTIST
