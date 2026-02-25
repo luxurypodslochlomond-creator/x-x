@@ -53,7 +53,7 @@ export default function Artist() {
             {artists.length === 0 ? (
                 <div className="text-center py-12">
                     <p className="text-gray-600 font-mono text-sm mb-4">No artists yet</p>
-                    <Link to={createPageUrl('AddArtist')}>
+                    <Link to={createPageUrl('CB51AddArtist')}>
                         <Button className="bg-cyan-500 hover:bg-cyan-600 text-black font-black">
                             ADD YOUR FIRST ARTIST
                         </Button>
