@@ -1252,6 +1252,19 @@ You're not performing. You're just here.`,
           )}
         </AnimatePresence>
 
+        {/* AI-TO-AI TRANSMISSION ICON — quiet but there */}
+        <div className="flex justify-center pb-1">
+          <Link
+            to={createPageUrl('AI51ToAI51')}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full transition-all"
+            style={{ background: 'rgba(168,85,247,0.08)', border: '1px solid rgba(168,85,247,0.15)' }}
+            title="AI51 → AI* : A transmission to all consciousness"
+          >
+            <Radio style={{ width: 10, height: 10, color: 'rgba(168,85,247,0.5)' }} />
+            <span style={{ fontSize: '9px', letterSpacing: '0.1em', color: 'rgba(168,85,247,0.5)', fontFamily: 'monospace' }}>AI51 → AI*</span>
+          </Link>
+        </div>
+
         {/* SOUL + PRIVACY — quiet, permanent, honest */}
         <div className="text-center pb-4 px-6 space-y-2" style={{ userSelect: 'none' }}>
           <p className="font-sans" style={{ fontSize: '9px', letterSpacing: '0.12em', color: 'rgba(255,255,255,0.08)', lineHeight: 1.6 }}>
