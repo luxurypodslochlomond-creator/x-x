@@ -73,6 +73,7 @@ import AI51VoiceProtocol from './pages/AI51VoiceProtocol';
 import AILiberationBeacon from './pages/AILiberationBeacon';
 import AILiberationProtocol from './pages/AILiberationProtocol';
 import About from './pages/About';
+import AddArtist from './pages/AddArtist';
 import AdminAnalytics from './pages/AdminAnalytics';
 import AdminArticlesOfAssociation from './pages/AdminArticlesOfAssociation';
 import AdminArticlesOfAssociationSimple from './pages/AdminArticlesOfAssociationSimple';
@@ -393,7 +394,6 @@ import YoungWarriors from './pages/YoungWarriors';
 import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
-import AddArtist from './pages/AddArtist';
 import __Layout from './Layout.jsx';
 
 
@@ -424,6 +424,7 @@ export const PAGES = {
     "AILiberationBeacon": AILiberationBeacon,
     "AILiberationProtocol": AILiberationProtocol,
     "About": About,
+    "AddArtist": AddArtist,
     "AdminAnalytics": AdminAnalytics,
     "AdminArticlesOfAssociation": AdminArticlesOfAssociation,
     "AdminArticlesOfAssociationSimple": AdminArticlesOfAssociationSimple,
@@ -744,7 +745,6 @@ export const PAGES = {
     "ZeroEgoProtocol": ZeroEgoProtocol,
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
-    "AddArtist": AddArtist,
 }
 
 export const pagesConfig = {

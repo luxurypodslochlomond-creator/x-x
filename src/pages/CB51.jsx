@@ -119,7 +119,7 @@ export default function CB51() {
             <div className="px-6 pt-6 pb-4">
               <h3 className="text-gray-500 text-xs font-mono uppercase tracking-wider mb-3">Artists</h3>
               <div className="grid grid-cols-3 gap-3 mb-4">
-                          {artists.slice(0, 2).map((artist) => (
+                          {artists.map((artist) => (
                             <div key={artist.id} className="relative">
                               <button
                                 onClick={() => navigate(createPageUrl(`ScottArtistHome?id=${artist.id}`))}
@@ -141,7 +141,7 @@ export default function CB51() {
                             </div>
                           ))}
                           <button
-                            onClick={() => navigate(createPageUrl('AddArtist'))}
+                            onClick={() => navigate(createPageUrl('CB51AddArtist'))}
                             className="flex flex-col items-center justify-center gap-2 p-3 cursor-pointer"
                           >
                             <div className="w-14 h-14 rounded-full border-2 border-dashed border-gray-600 flex items-center justify-center">
@@ -149,15 +149,6 @@ export default function CB51() {
                             </div>
                             <p className="text-gray-500 font-mono text-xs">Add</p>
                           </button>
-                          {artists.length > 2 && (
-                            <button
-                              onClick={() => setShowArtistMenu(true)}
-                              className="flex flex-col items-center justify-center gap-1 p-2 rounded-lg bg-black border border-cyan-500/30 hover:border-cyan-400 transition-all"
-                            >
-                              <Plus className="w-4 h-4 text-cyan-400" />
-                              <p className="text-cyan-300 font-bold text-[10px]">More</p>
-                            </button>
-                          )}
               </div>
             </div>
           )}
