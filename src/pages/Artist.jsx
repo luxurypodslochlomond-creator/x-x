@@ -81,7 +81,7 @@ export default function Artist() {
                                 </div>
                                 <div className="flex gap-2">
                                     <Link to={createPageUrl(`ScottArtistHome?id=${artist.id}`)}>
-                                        <Button className="bg-cyan-500 hover:bg-cyan-600 text-black font-black text-xs px-3">
+                                        <Button className="bg-cyan-500 hover:bg-cyan-600 text-black font-black text-xs px-3" onClick={(e) => { e.preventDefault(); navigate(createPageUrl(`ScottArtistHome?id=${artist.id}`)); }}>
                                             VIEW
                                         </Button>
                                     </Link>
