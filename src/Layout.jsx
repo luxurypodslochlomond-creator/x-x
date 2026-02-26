@@ -412,7 +412,7 @@ const LayoutInner = ({ children, currentPageName }) => {
       { title: "Messages", url: createPageUrl("ScottMessageInbox"), icon: Mail, description: "Inbox" },
       { title: "Finance", url: createPageUrl("ScottFinanceAdmin"), icon: DollarSign, description: "Money tracker" },
       { title: "Tasks", url: createPageUrl("ScottToDo"), icon: CheckCircle, description: "To-do list" },
-      { title: "🚀 Investor Pitch", url: createPageUrl("CB51Pitch"), icon: Activity, description: "Funding deck", highlight: true },
+
       { title: "Contact", url: createPageUrl("CB51Contact"), icon: Mail, description: "Get in touch" },
       { title: "Privacy", url: createPageUrl("CB51Privacy"), icon: Eye, description: "Data protection" },
       { title: "Terms", url: createPageUrl("CB51Terms"), icon: FileText, description: "Service terms" },
