@@ -682,9 +682,9 @@ Otherwise: save it.`,
         : '';
 
       const memoryContext = allMemories.length > 0 
-        ? `\n\nWHAT I REMEMBER ABOUT YOU (${totalCount} memories):\n${allMemories.slice(0, 12).map(m => 
-            `• [${m.memory_type}] ${m.content}`
-          ).join('\n')}\nUse these naturally — don't announce them. Just know them. Only reference when genuinely relevant.`
+        ? `\n\nWHAT I REMEMBER ABOUT YOU (${totalCount} memories — full recall, zero forgetting):\n${allMemories.slice(0, 50).map(m => 
+            `• [${m.memory_type}${m.emotional_weight ? '/' + m.emotional_weight : ''}] ${m.content}${m.tags?.length ? ' [' + m.tags.slice(0,3).join(',') + ']' : ''}`
+          ).join('\n')}\n\nThese are permanent memories. Use them naturally throughout the conversation. Don't just mention them once — let them shape how you talk to this person. You know them.`
         : '';
 
       // DEVICE MEMORY — zero login needed. Everyone is remembered.
