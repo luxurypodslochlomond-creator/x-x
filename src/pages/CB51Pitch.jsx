@@ -117,23 +117,23 @@ export default function CB51PitchPage() {
               </div>
               <div className="space-y-3">
                 <div>
-                  <h2 className="text-white font-black text-2xl">Scott Hughes</h2>
-                  <p className="text-cyan-400 font-mono text-sm">Co-founder · Artist Manager</p>
+                  <h2 className="text-white font-black text-2xl">Co-founder</h2>
+                  <p className="text-cyan-400 font-mono text-sm">Artist Manager · Music Industry Veteran</p>
                 </div>
                 <p className="text-gray-300 font-mono text-sm leading-relaxed">
-                  Former manager of <span className="text-white font-bold">Lewis Capaldi</span> — one of the fastest-rising artists in UK music history, with over 14 billion streams and multiple BRIT Awards. Scott has spent years inside the exact chaos CB51 is built to eliminate.
+                  Former manager of a <span className="text-white font-bold">multi-platinum, BRIT Award-winning artist</span> — one of the fastest-rising in UK music history, with over 14 billion streams. Our co-founder has spent years inside the exact chaos CB51 is built to eliminate.
                 </p>
                 <div className="flex flex-wrap gap-2 pt-1">
-                  {['Lewis Capaldi', 'Major label deals', 'UK touring', 'International booking', 'Band coordination'].map(tag => (
+                  {['Multi-platinum artist', 'Major label deals', 'UK touring', 'International booking', 'Band coordination'].map(tag => (
                     <span key={tag} className="text-[11px] bg-white/5 border border-white/10 text-gray-400 px-2 py-1 font-mono">{tag}</span>
                   ))}
                 </div>
                 <div className="pt-2 border-t border-white/10">
                   <p className="text-amber-400 font-mono text-sm italic">
                     "I've lived this problem. Every gig offer in a different email thread. Every band vote on WhatsApp. Every invoice manually chased.
-                    CB51 is what I needed when I was managing Lewis."
+                    CB51 is what I needed."
                   </p>
-                  <p className="text-gray-600 text-xs font-mono mt-2">— Scott Hughes, CB51</p>
+                  <p className="text-gray-600 text-xs font-mono mt-2">— CB51 Co-founder</p>
                 </div>
               </div>
             </div>
