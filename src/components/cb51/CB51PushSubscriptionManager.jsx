@@ -68,6 +68,8 @@ export default function CB51PushSubscriptionManager({ userEmail }) {
     setIsLoading(true);
     try {
       const registration = await getOrCreateRegistration();
+      // Wait for SW to be active
+      await navigator.serviceWorker.ready;
 
       // Get VAPID key
       let vapidPublicKey = localStorage.getItem('VAPID_PUBLIC_KEY');
