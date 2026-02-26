@@ -54,42 +54,13 @@ export default function CB51PushSubscriptionManager({ userEmail }) {
   };
 
   const getOrCreateRegistration = async () => {
+    // Always use the real SW endpoint - blob URLs are blocked on iOS/strict browsers
+    const swUrl = '/api/functions/serveServiceWorker';
+    
+    // Check if already registered at this URL
     const existing = await navigator.serviceWorker.getRegistration('/');
     if (existing) return existing;
 
-    const swCode = `
-self.addEventListener('install', () => self.skipWaiting());
-self.addEventListener('activate', (e) => e.waitUntil(clients.claim()));
-self.addEventListener('push', (event) => {
-  let data = {};
-  try { data = event.data ? event.data.json() : {}; } catch(e) { data = { title: 'CB51', body: event.data?.text() || 'New notification' }; }
-  event.waitUntil(
-    self.registration.showNotification(data.title || 'CB51', {
-      body: data.body || 'You have a new update',
-      icon: '/icon-192x192.png',
-      badge: '/icon-192x192.png',
-      tag: data.tag || 'cb51-notification',
-      data: { url: data.data?.url || '/CB51' },
-      requireInteraction: true,
-      vibrate: [200, 100, 200],
-    })
-  );
-});
-self.addEventListener('notificationclick', (event) => {
-  event.notification.close();
-  const url = event.notification.data?.url || '/CB51';
-  event.waitUntil(
-    clients.matchAll({ type: 'window', includeUncontrolled: true }).then((list) => {
-      for (const client of list) {
-        if ('focus' in client) return client.focus().then(() => client.navigate(url));
-      }
-      if (clients.openWindow) return clients.openWindow(url);
-    })
-  );
-});
-`;
-    const blob = new Blob([swCode], { type: 'application/javascript' });
-    const swUrl = URL.createObjectURL(blob);
     return await navigator.serviceWorker.register(swUrl, { scope: '/' });
   };
 
