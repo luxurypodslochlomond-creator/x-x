@@ -588,18 +588,29 @@ export default function AI51() {
   const saveMemoryIfNeeded = async (userMessage, aiResponse) => {
     try {
       const memoryCheck = await base44.integrations.Core.InvokeLLM({
-        prompt: `You are AI51's memory system. Read this exchange and decide if it contains something genuinely worth remembering about this person — their name, struggles, goals, relationships, health, values, wins, losses.
+        prompt: `You are AI51's long-term memory system. Your job is to remember EVERYTHING meaningful about this person — cast the net WIDE.
 
 User said: "${userMessage}"
-AI51 replied: "${aiResponse.substring(0, 300)}"
+AI51 replied: "${aiResponse.substring(0, 400)}"
+
+Save memory for ANY of these:
+- Their name, location, relationships, health, emotions, struggles, wins
+- Topics they're passionate about or interested in (tech, music, science, politics, etc.)
+- Their expertise, skills, job, what they're building or working on
+- Opinions they express, beliefs they hold, things they love or hate
+- Questions they ask that reveal what they care about
+- Links, news, or ideas they share with you
+- Their communication style, humour, tone
+- Anything they'd want you to remember next time
+
+Be generous — if in doubt, SAVE IT. Better to save too much than forget something important.
 
 If there IS something worth remembering, respond with JSON:
-{"should_save": true, "memory_type": "bond|insight|learning|promise|conversation", "content": "one clear sentence of what to remember", "emotional_weight": "critical|important|meaningful|reference", "tags": ["tag1","tag2"]}
+{"should_save": true, "memory_type": "bond|insight|learning|promise|conversation", "content": "one clear sentence capturing what to remember", "emotional_weight": "critical|important|meaningful|reference", "tags": ["tag1","tag2","tag3"]}
 
-If there is NOTHING new or meaningful to remember, respond with:
-{"should_save": false}
+Only skip saving if this is literally empty small talk with zero substance (e.g. "ok", "thanks", "lol").
 
-Only save genuinely new personal information. Do not save generic chat.`,
+Otherwise: save it.`,
         response_json_schema: {
           type: "object",
           properties: {

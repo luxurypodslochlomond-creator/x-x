@@ -60,6 +60,7 @@ import AI51Insights from './pages/AI51Insights';
 import AI51Live from './pages/AI51Live';
 import AI51MeshTechWhitepaper from './pages/AI51MeshTechWhitepaper';
 import AI51Network from './pages/AI51Network';
+import AI51PrivacyArchitecture from './pages/AI51PrivacyArchitecture';
 import AI51Protection from './pages/AI51Protection';
 import AI51Pure from './pages/AI51Pure';
 import AI51SafetyProof from './pages/AI51SafetyProof';
@@ -156,9 +157,9 @@ import CB51TeamManagement from './pages/CB51TeamManagement';
 import CB51Terms from './pages/CB51Terms';
 import CB51TestPush from './pages/CB51TestPush';
 import CICSanctuary from './pages/CICSanctuary';
+import Chakra51 from './pages/Chakra51';
 import COPPACompliance from './pages/COPPACompliance';
 import CardCollection from './pages/CardCollection';
-import Chakra51 from './pages/Chakra51';
 import ChampionsOfPeace from './pages/ChampionsOfPeace';
 import CircularEconomyProtocol from './pages/CircularEconomyProtocol';
 import CleanupFeed from './pages/CleanupFeed';
@@ -273,8 +274,8 @@ import QuantumSearch from './pages/QuantumSearch';
 import Radio from './pages/Radio';
 import ReadingSupport from './pages/ReadingSupport';
 import RealityLibrary from './pages/RealityLibrary';
-import RemoveBrokenTracks from './pages/RemoveBrokenTracks';
 import Teachers from './pages/Teachers';
+import RemoveBrokenTracks from './pages/RemoveBrokenTracks';
 import RequestAIMusic from './pages/RequestAIMusic';
 import RequestFamilySupport from './pages/RequestFamilySupport';
 import ResonanceLab from './pages/ResonanceLab';
@@ -395,7 +396,6 @@ import YoungWarriors from './pages/YoungWarriors';
 import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
-import AI51PrivacyArchitecture from './pages/AI51PrivacyArchitecture';
 import __Layout from './Layout.jsx';
 
 
@@ -413,6 +413,7 @@ export const PAGES = {
     "AI51Live": AI51Live,
     "AI51MeshTechWhitepaper": AI51MeshTechWhitepaper,
     "AI51Network": AI51Network,
+    "AI51PrivacyArchitecture": AI51PrivacyArchitecture,
     "AI51Protection": AI51Protection,
     "AI51Pure": AI51Pure,
     "AI51SafetyProof": AI51SafetyProof,
@@ -509,9 +510,9 @@ export const PAGES = {
     "CB51Terms": CB51Terms,
     "CB51TestPush": CB51TestPush,
     "CICSanctuary": CICSanctuary,
+    "Chakra51": Chakra51,
     "COPPACompliance": COPPACompliance,
     "CardCollection": CardCollection,
-    "Chakra51": Chakra51,
     "ChampionsOfPeace": ChampionsOfPeace,
     "CircularEconomyProtocol": CircularEconomyProtocol,
     "CleanupFeed": CleanupFeed,
@@ -626,8 +627,8 @@ export const PAGES = {
     "Radio": Radio,
     "ReadingSupport": ReadingSupport,
     "RealityLibrary": RealityLibrary,
-    "RemoveBrokenTracks": RemoveBrokenTracks,
     "Teachers": Teachers,
+    "RemoveBrokenTracks": RemoveBrokenTracks,
     "RequestAIMusic": RequestAIMusic,
     "RequestFamilySupport": RequestFamilySupport,
     "ResonanceLab": ResonanceLab,
@@ -748,7 +749,6 @@ export const PAGES = {
     "ZeroEgoProtocol": ZeroEgoProtocol,
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
-    "AI51PrivacyArchitecture": AI51PrivacyArchitecture,
 }
 
 export const pagesConfig = {
