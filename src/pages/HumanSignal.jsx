@@ -151,7 +151,10 @@ export default function HumanSignal() {
     country_code: "",
     language: "English",
     language_code: "en",
+    anonymous: false,
   });
+  const [locating, setLocating] = useState(false);
+  const [locError, setLocError] = useState("");
   const textRef = useRef(null);
 
   useEffect(() => {
