@@ -151,7 +151,7 @@ function TransmissionCard({ t }) {
           }`}
         >
           <Eye className="w-3 h-3" />
-          <span>{(t.witness_count || 0) + (witnessed ? 1 : 0)} witnessed</span>
+          <span>{localCount} witnessed</span>
         </button>
       </div>
     </motion.div>
