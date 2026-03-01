@@ -321,6 +321,12 @@ export default function HumanSignal() {
             </motion.div>
           )}
 
+          {/* Species selector */}
+          <div className="mb-4">
+            <p className="text-white/25 text-xs font-mono tracking-wider mb-2">SENDING AS</p>
+            <SpeciesSelector value={form.species} onChange={s => setForm(f => ({ ...f, species: s }))} />
+          </div>
+
           <textarea
             value={form.message}
             onChange={e => setForm(f => ({ ...f, message: e.target.value }))}
