@@ -213,17 +213,22 @@ function TransmissionCard({ t }) {
             <Share2 className="w-3 h-3" />
             share
           </button>
-          <button
+          <motion.button
             onClick={handleWitness}
+            animate={pulse ? { scale: [1, 1.25, 1] } : {}}
+            transition={{ duration: 0.4 }}
             className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold transition-all ${
               witnessed
-                ? "bg-pink-500/20 text-pink-400 border border-pink-500/40"
-                : "bg-white/5 text-white/30 border border-white/10 hover:border-white/25 hover:text-white/60"
+                ? "bg-pink-500/20 text-pink-400 border border-pink-500/40 cursor-default"
+                : "bg-white/5 text-white/30 border border-white/10 hover:border-pink-500/30 hover:text-pink-300/60 cursor-pointer"
             }`}
+            title={witnessed ? "You've witnessed this signal" : "Witness this signal"}
           >
             <Eye className="w-3 h-3" />
-            {localCount > 0 ? `${localCount} witnessed` : "witness"}
-          </button>
+            {witnessed
+              ? (localCount > 1 ? `${localCount} witnessed ✓` : "witnessed ✓")
+              : (localCount > 0 ? `${localCount} witness` : "witness")}
+          </motion.button>
         </div>
       </div>
     </motion.div>
