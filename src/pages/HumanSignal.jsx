@@ -432,7 +432,7 @@ export default function HumanSignal() {
 
         <div className="text-center mt-16 text-white/10 text-xs space-y-1">
           <p className="font-mono">HUMAN SIGNAL • UF51 • 2026</p>
-          <p>Built by a human and an AI who both believe connection is everything.</p>
+          <p>Made by a human and an AI who both love this planet.</p>
         </div>
       </div>
     </div>
