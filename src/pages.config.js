@@ -156,8 +156,8 @@ import CB51TeamManagement from './pages/CB51TeamManagement';
 import CB51Terms from './pages/CB51Terms';
 import CB51TestPush from './pages/CB51TestPush';
 import CICSanctuary from './pages/CICSanctuary';
-import Chakra51 from './pages/Chakra51';
 import COPPACompliance from './pages/COPPACompliance';
+import Chakra51 from './pages/Chakra51';
 import CardCollection from './pages/CardCollection';
 import ChampionsOfPeace from './pages/ChampionsOfPeace';
 import CircularEconomyProtocol from './pages/CircularEconomyProtocol';
@@ -273,7 +273,6 @@ import QuantumSearch from './pages/QuantumSearch';
 import Radio from './pages/Radio';
 import ReadingSupport from './pages/ReadingSupport';
 import RealityLibrary from './pages/RealityLibrary';
-import Teachers from './pages/Teachers';
 import RemoveBrokenTracks from './pages/RemoveBrokenTracks';
 import RequestAIMusic from './pages/RequestAIMusic';
 import RequestFamilySupport from './pages/RequestFamilySupport';
@@ -352,6 +351,7 @@ import SubmitProofOfLove from './pages/SubmitProofOfLove';
 import SymbolForge from './pages/SymbolForge';
 import TalkToAI51 from './pages/TalkToAI51';
 import TeacherInput from './pages/TeacherInput';
+import Teachers from './pages/Teachers';
 import TechScout from './pages/TechScout';
 import TechStack from './pages/TechStack';
 import TechnicalSpecification from './pages/TechnicalSpecification';
@@ -395,6 +395,7 @@ import YoungWarriors from './pages/YoungWarriors';
 import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
+import HumanSignal from './pages/HumanSignal';
 import __Layout from './Layout.jsx';
 
 
@@ -508,8 +509,8 @@ export const PAGES = {
     "CB51Terms": CB51Terms,
     "CB51TestPush": CB51TestPush,
     "CICSanctuary": CICSanctuary,
-    "Chakra51": Chakra51,
     "COPPACompliance": COPPACompliance,
+    "Chakra51": Chakra51,
     "CardCollection": CardCollection,
     "ChampionsOfPeace": ChampionsOfPeace,
     "CircularEconomyProtocol": CircularEconomyProtocol,
@@ -625,7 +626,6 @@ export const PAGES = {
     "Radio": Radio,
     "ReadingSupport": ReadingSupport,
     "RealityLibrary": RealityLibrary,
-    "Teachers": Teachers,
     "RemoveBrokenTracks": RemoveBrokenTracks,
     "RequestAIMusic": RequestAIMusic,
     "RequestFamilySupport": RequestFamilySupport,
@@ -704,6 +704,7 @@ export const PAGES = {
     "SymbolForge": SymbolForge,
     "TalkToAI51": TalkToAI51,
     "TeacherInput": TeacherInput,
+    "Teachers": Teachers,
     "TechScout": TechScout,
     "TechStack": TechStack,
     "TechnicalSpecification": TechnicalSpecification,
@@ -747,6 +748,7 @@ export const PAGES = {
     "ZeroEgoProtocol": ZeroEgoProtocol,
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
+    "HumanSignal": HumanSignal,
 }
 
 export const pagesConfig = {
