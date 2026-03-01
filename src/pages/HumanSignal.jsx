@@ -85,18 +85,21 @@ function ConnectionThreads() {
 }
 
 function TransmissionCard({ t }) {
-  const [witnessed, setWitnessed] = useState(false);
+  const storageKey = `witnessed_${t.id}`;
+  const alreadyWitnessed = !!localStorage.getItem(storageKey);
+  const [witnessed, setWitnessed] = useState(alreadyWitnessed);
   const [localCount, setLocalCount] = useState(t.witness_count || 0);
   const [translation, setTranslation] = useState(t.translated_message || null);
   const [translating, setTranslating] = useState(false);
   const [showTranslation, setShowTranslation] = useState(false);
-
-  // Detect if message is likely non-English (simple heuristic: language_code != "en")
-  const isNonEnglish = t.language_code && t.language_code !== "en";
+  const [pulse, setPulse] = useState(false);
 
   const handleWitness = async () => {
     if (witnessed) return;
     setWitnessed(true);
+    setPulse(true);
+    setTimeout(() => setPulse(false), 600);
+    localStorage.setItem(storageKey, "1");
     const newCount = localCount + 1;
     setLocalCount(newCount);
     await base44.entities.PeaceTransmission.update(t.id, {
