@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from "react";
 import { base44 } from "@/api/base44Client";
 import { motion, AnimatePresence } from "framer-motion";
 import { Heart, Globe, Send, Clock, Eye, Wifi, MapPin, UserX } from "lucide-react";
-import { MapPin as MapPinIcon } from "lucide-react";
 
 const COUNTRY_COORDS = {
   "GB": { lat: 54.0, lng: -2.0 }, "US": { lat: 38.0, lng: -97.0 },
