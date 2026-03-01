@@ -425,13 +425,7 @@ export default function HumanSignal() {
           <div className="space-y-3">
             <AnimatePresence>
               {transmissions.map(t => (
-                <TransmissionCard
-                  key={t.id}
-                  t={t}
-                  onWitness={(id) => setTransmissions(prev => prev.map(tx =>
-                    tx.id === id ? { ...tx, witness_count: (tx.witness_count || 0) + 1 } : tx
-                  ))}
-                />
+                <TransmissionCard key={t.id} t={t} />
               ))}
             </AnimatePresence>
             {transmissions.length === 0 && (
