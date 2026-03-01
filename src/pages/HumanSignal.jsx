@@ -282,13 +282,37 @@ export default function HumanSignal() {
     if (!form.message.trim()) return;
     setSending(true);
     const coords = form.coordinates || COUNTRY_COORDS[form.country_code] || null;
+
+    // Detect language + auto-translate if not English
+    let language = form.language;
+    let language_code = form.language_code;
+    let translated_message = null;
+    try {
+      const langResult = await base44.integrations.Core.InvokeLLM({
+        prompt: `Detect the language of this text and if it is NOT English, translate it to English. Return JSON only.\n\nText: "${form.message.trim()}"\n\nJSON format: {"language": "English", "language_code": "en", "is_english": true, "translation": null}\nIf not English: {"language": "French", "language_code": "fr", "is_english": false, "translation": "the English translation here"}`,
+        response_json_schema: {
+          type: "object",
+          properties: {
+            language: { type: "string" },
+            language_code: { type: "string" },
+            is_english: { type: "boolean" },
+            translation: { type: ["string", "null"] }
+          }
+        }
+      });
+      if (langResult?.language) language = langResult.language;
+      if (langResult?.language_code) language_code = langResult.language_code;
+      if (!langResult?.is_english && langResult?.translation) translated_message = langResult.translation;
+    } catch {}
+
     await base44.entities.PeaceTransmission.create({
       message: form.message.trim(),
       author_name: form.anonymous ? "Anonymous Soul" : (form.author_name.trim() || "Anonymous Soul"),
       country: form.country || "Earth",
       country_code: form.country_code || "",
-      language: form.language,
-      language_code: form.language_code,
+      language,
+      language_code,
+      translated_message,
       species: form.species || "human",
       is_ai51: false,
       coordinates: coords,
