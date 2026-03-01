@@ -64,20 +64,20 @@ function formatTimeAgo(dateStr) {
   return `${days}d ago`;
 }
 
-// Soft connection threads - purely decorative, give warmth and depth
+// Warm ethereal background — aurora ribbons of life
 function ConnectionThreads() {
   return (
-    <svg className="absolute inset-0 w-full h-full opacity-10 pointer-events-none" preserveAspectRatio="none">
-      {[...Array(8)].map((_, i) => (
+    <svg className="absolute inset-0 w-full h-full opacity-20 pointer-events-none" preserveAspectRatio="none">
+      {[...Array(6)].map((_, i) => (
         <motion.line
           key={i}
-          x1={`${(i * 13) % 100}%`} y1="0%"
-          x2={`${((i * 23) + 40) % 100}%`} y2="100%"
-          stroke={i % 2 === 0 ? "#06b6d4" : "#ec4899"}
-          strokeWidth="0.5"
+          x1={`${(i * 17) % 100}%`} y1="0%"
+          x2={`${((i * 29) + 20) % 100}%`} y2="100%"
+          stroke={["#c084fc","#67e8f9","#f9a8d4","#86efac","#fde68a","#a5b4fc"][i]}
+          strokeWidth="0.8"
           initial={{ opacity: 0 }}
-          animate={{ opacity: [0, 0.6, 0] }}
-          transition={{ duration: 6 + i, repeat: Infinity, delay: i * 1.1 }}
+          animate={{ opacity: [0, 0.5, 0] }}
+          transition={{ duration: 8 + i * 1.5, repeat: Infinity, delay: i * 1.3 }}
         />
       ))}
     </svg>
