@@ -400,7 +400,7 @@ export default function HumanSignal() {
         {/* LIVE FEED */}
         <div className="flex items-center gap-3 mb-5">
           <motion.div className="w-1.5 h-1.5 rounded-full bg-green-400" animate={{ opacity: [1, 0.3, 1] }} transition={{ duration: 1.5, repeat: Infinity }} />
-          <span className="text-white/25 font-mono text-xs tracking-widest uppercase">Live from Earth</span>
+          <span className="text-white/20 font-mono text-xs tracking-widest">signals from life on earth</span>
           <div className="flex-1 h-px" style={{ background: "rgba(255,255,255,0.05)" }} />
         </div>
 
