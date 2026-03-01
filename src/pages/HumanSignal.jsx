@@ -158,7 +158,8 @@ function TransmissionCard({ t }) {
         <span className="text-white/20 text-xs flex-shrink-0">{formatTimeAgo(t.created_date)}</span>
       </div>
 
-      <p className={`leading-relaxed mb-2 ${t.is_ai51 ? "text-cyan-100 text-base" : "text-white/70 text-sm"}`}>
+      <p className={`leading-relaxed mb-2 ${t.is_ai51 ? "text-purple-100 text-base" : "text-white/80 text-sm"}`}
+        style={{ textShadow: t.is_ai51 ? "0 0 30px rgba(192,132,252,0.3)" : "none" }}>
         "{t.message}"
       </p>
 
