@@ -393,7 +393,7 @@ export default function HumanSignal() {
 
           <p className="text-center text-white/15 text-xs mt-3 flex items-center justify-center gap-1.5">
             <Shield className="w-3 h-3" />
-            No account. No tracking. No ads. Just your words, stored permanently.
+            No account. No tracking. Just your words, permanent.
           </p>
         </motion.div>
 
