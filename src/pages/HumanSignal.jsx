@@ -113,10 +113,14 @@ function TransmissionCard({ t, onWitness }) {
 
       <div className="flex items-start justify-between gap-3 mb-3">
         <div className="flex items-center gap-2.5">
-          <span className="text-2xl">{FLAG(t.country_code)}</span>
+          <SpeciesIcon species={t.species || "human"} size={18} animate={false} />
+          <span className="text-xl">{FLAG(t.country_code)}</span>
           <div>
             <p className="text-white/90 font-semibold text-sm">{t.author_name || "Anonymous Soul"}</p>
-            <p className="text-white/30 text-xs">{t.country || "Earth"}</p>
+            <p className="text-white/30 text-xs flex items-center gap-1">
+              {(() => { const s = SPECIES.find(sp => sp.id === (t.species || "human")); return <span style={{ color: s?.color + "80" }}>{s?.label}</span>; })()}
+              {(t.country && t.country !== "Earth") && <><span>·</span><span>{t.country}</span></>}
+            </p>
           </div>
         </div>
         <span className="text-white/20 text-xs flex-shrink-0">{formatTimeAgo(t.created_date)}</span>
