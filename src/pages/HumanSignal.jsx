@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import { base44 } from "@/api/base44Client";
 import { motion, AnimatePresence } from "framer-motion";
 import { Heart, Globe, Send, Clock, Eye, Shield, UserX, Languages, Share2 } from "lucide-react";
+import { Link } from "react-router-dom";
+import { createPageUrl } from "@/utils";
 import { SpeciesSelector, SpeciesIcon, SPECIES } from "@/components/shared/SpeciesIcons";
 
 const COUNTRY_COORDS = {
