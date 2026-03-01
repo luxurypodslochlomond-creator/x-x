@@ -82,16 +82,18 @@ function ConnectionThreads() {
   );
 }
 
-function TransmissionCard({ t, onWitness }) {
+function TransmissionCard({ t }) {
   const [witnessed, setWitnessed] = useState(false);
+  const [localCount, setLocalCount] = useState(t.witness_count || 0);
 
   const handleWitness = async () => {
     if (witnessed) return;
     setWitnessed(true);
+    const newCount = localCount + 1;
+    setLocalCount(newCount);
     await base44.entities.PeaceTransmission.update(t.id, {
-      witness_count: (t.witness_count || 0) + 1
+      witness_count: newCount
     });
-    if (onWitness) onWitness(t.id);
   };
 
   return (
