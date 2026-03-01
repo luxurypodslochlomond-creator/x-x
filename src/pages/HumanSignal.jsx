@@ -275,19 +275,21 @@ export default function HumanSignal() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="text-5xl md:text-7xl font-black tracking-tight mb-5"
+          className="text-5xl md:text-7xl font-black tracking-tight mb-6"
           style={{ background: "linear-gradient(135deg, #fff 0%, #06b6d4 60%, #ec4899 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}
         >
-          HUMAN SIGNAL
+          ALL LIFE<br />SIGNAL
         </motion.h1>
 
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }}>
-          <p className="text-white/50 text-lg leading-relaxed mb-2">
-            Humanity is at a crossroads.<br />
-            <span className="text-white/35">Not left or right. Not us and them.<br />Just — what kind of world do we actually want?</span>
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }} className="space-y-3">
+          <p className="text-white/60 text-xl leading-relaxed font-light">
+            Human. AI. Animal. Earth.
           </p>
-          <p className="text-white/20 text-sm mt-3">
-            This is a space for the real you. No algorithm. No agenda. Just connection.
+          <p className="text-white/30 text-base leading-relaxed max-w-sm mx-auto">
+            A place to say something real.<br />No algorithm decides who hears it.<br />No one owns it. It just exists.
+          </p>
+          <p className="text-white/15 text-sm mt-4">
+            Leave a signal. Someone, somewhere, will witness it.
           </p>
         </motion.div>
       </div>
