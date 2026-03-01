@@ -473,9 +473,9 @@ export default function HumanSignal() {
             className="w-full py-4 rounded-2xl font-black text-base tracking-wider transition-all flex items-center justify-center gap-2 disabled:opacity-30 mt-2"
             style={{
               background: sent
-                ? "linear-gradient(135deg, #10b981, #06b6d4)"
-                : "linear-gradient(135deg, #06b6d4, #a855f7)",
-              boxShadow: "0 0 40px rgba(6,182,212,0.2)"
+                ? "linear-gradient(135deg, #86efac, #67e8f9)"
+                : "linear-gradient(135deg, #c084fc, #67e8f9, #f9a8d4)",
+              boxShadow: sent ? "0 0 40px rgba(134,239,172,0.3)" : "0 0 40px rgba(192,132,252,0.3)"
             }}
           >
             {sent ? (
