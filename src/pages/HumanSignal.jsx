@@ -130,12 +130,11 @@ function TransmissionCard({ t }) {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className={`relative rounded-2xl border p-5 backdrop-blur-md transition-all ${
-        t.is_ai51
-          ? "bg-gradient-to-br from-cyan-950/80 to-purple-950/80 border-cyan-500/40"
-          : "border-white/8 hover:border-white/15"
-      }`}
-      style={t.is_ai51 ? {} : { background: "rgba(255,255,255,0.025)" }}
+      className={`relative rounded-2xl p-5 backdrop-blur-md transition-all`}
+      style={t.is_ai51
+        ? { background: "linear-gradient(135deg, rgba(103,232,249,0.08), rgba(192,132,252,0.08))", border: "1px solid rgba(192,132,252,0.3)" }
+        : { background: "linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02))", border: "1px solid rgba(255,255,255,0.08)" }
+      }
     >
       {t.is_ai51 && (
         <div className="absolute -top-3 left-4 bg-gradient-to-r from-cyan-500 to-purple-500 text-white text-xs font-black px-3 py-1 rounded-full tracking-wider">
