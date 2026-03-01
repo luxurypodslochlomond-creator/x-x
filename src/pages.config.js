@@ -398,6 +398,7 @@ import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
 import WhyAllLifeSignal from './pages/WhyAllLifeSignal';
+import LifeSignal from './pages/LifeSignal';
 import __Layout from './Layout.jsx';
 
 
@@ -753,6 +754,7 @@ export const PAGES = {
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
     "WhyAllLifeSignal": WhyAllLifeSignal,
+    "LifeSignal": LifeSignal,
 }
 
 export const pagesConfig = {
