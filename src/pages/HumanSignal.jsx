@@ -21,12 +21,14 @@ const COUNTRY_COORDS = {
 const FLAG = (code) => code ? code.toUpperCase().replace(/./g, c => String.fromCodePoint(127397 + c.charCodeAt(0))) : "🌍";
 
 const PLACEHOLDERS = [
-  "What does being human mean to you right now?",
-  "What do you love most about being alive on this planet?",
-  "If the whole world could hear one thing from you today...",
-  "What gives you hope when everything feels heavy?",
-  "Something you want to say to a stranger on the other side of Earth...",
-  "What would you protect if you could protect anything?",
+  "Something you'd say to a stranger on the other side of the planet...",
+  "What does this planet mean to you?",
+  "A thought you've never said out loud...",
+  "What do you love?",
+  "If all life could hear one thing from you today...",
+  "What would you protect?",
+  "Something beautiful you noticed recently...",
+  "A message to 2050...",
 ];
 
 const COUNTRIES = [
