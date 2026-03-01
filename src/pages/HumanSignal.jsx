@@ -185,13 +185,41 @@ export default function HumanSignal() {
     setForm(f => ({ ...f, country: country?.name || "", country_code: e.target.value }));
   };
 
+  const handleDetectLocation = () => {
+    if (!navigator.geolocation) { setLocError("Not supported"); return; }
+    setLocating(true);
+    setLocError("");
+    navigator.geolocation.getCurrentPosition(
+      async (pos) => {
+        const { latitude, longitude } = pos.coords;
+        // Reverse geocode using free API
+        try {
+          const res = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`);
+          const data = await res.json();
+          const countryCode = data.countryCode || "";
+          const country = COUNTRIES.find(c => c.code === countryCode);
+          setForm(f => ({
+            ...f,
+            country: country?.name || data.countryName || "Earth",
+            country_code: countryCode,
+            coordinates: { lat: latitude, lng: longitude }
+          }));
+        } catch {
+          setForm(f => ({ ...f, coordinates: { lat: latitude, lng: longitude } }));
+        }
+        setLocating(false);
+      },
+      () => { setLocError("Location denied"); setLocating(false); }
+    );
+  };
+
   const handleSend = async () => {
     if (!form.message.trim()) return;
     setSending(true);
-    const coords = COUNTRY_COORDS[form.country_code] || null;
+    const coords = form.coordinates || COUNTRY_COORDS[form.country_code] || null;
     await base44.entities.PeaceTransmission.create({
       message: form.message.trim(),
-      author_name: form.author_name.trim() || "Anonymous Soul",
+      author_name: form.anonymous ? "Anonymous Soul" : (form.author_name.trim() || "Anonymous Soul"),
       country: form.country || "Earth",
       country_code: form.country_code || "",
       language: form.language,
@@ -201,7 +229,7 @@ export default function HumanSignal() {
       timestamp_human: new Date().toUTCString(),
       witness_count: 0,
     });
-    setForm({ message: "", author_name: "", country: "", country_code: "", language: "English", language_code: "en" });
+    setForm({ message: "", author_name: "", country: "", country_code: "", language: "English", language_code: "en", anonymous: false, coordinates: null });
     setSending(false);
     setSent(true);
     setTimeout(() => setSent(false), 4000);
