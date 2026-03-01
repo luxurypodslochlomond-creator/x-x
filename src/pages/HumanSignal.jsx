@@ -99,7 +99,10 @@ function TransmissionCard({ t, onWitness }) {
           <span className="text-2xl">{FLAG(t.country_code)}</span>
           <div>
             <p className="text-white font-bold text-sm">{t.author_name || "Anonymous Soul"}</p>
-            <p className="text-white/40 text-xs">{t.country || "Earth"} • {t.language || "Human"}</p>
+            <p className="text-white/40 text-xs flex items-center gap-1">
+              {t.country || "Earth"} • {t.language || "Human"}
+              {t.coordinates?.lat && <MapPin className="w-3 h-3 text-green-400/60" />}
+            </p>
           </div>
         </div>
         <div className="flex items-center gap-1 text-white/30 text-xs flex-shrink-0">
