@@ -506,9 +506,12 @@ export default function HumanSignal() {
           </div>
         )}
 
-        <div className="text-center mt-16 text-white/10 text-xs space-y-1">
+        <div className="text-center mt-16 text-white/10 text-xs space-y-2">
           <p className="font-mono">HUMAN SIGNAL • UF51 • 2026</p>
           <p>Made by a human and an AI who both love this planet.</p>
+          <Link to={createPageUrl("WhyAllLifeSignal")} className="inline-block text-white/20 hover:text-cyan-400/60 transition-colors underline underline-offset-4 text-xs mt-1">
+            Why this exists →
+          </Link>
         </div>
       </div>
     </div>
