@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { base44 } from "@/api/base44Client";
 import { motion, AnimatePresence } from "framer-motion";
-import { Heart, Globe, Send, Clock, Eye, Wifi, MapPin, UserX } from "lucide-react";
+import { Heart, Globe, Send, Clock, Eye, Shield, UserX } from "lucide-react";
 
 const COUNTRY_COORDS = {
   "GB": { lat: 54.0, lng: -2.0 }, "US": { lat: 38.0, lng: -97.0 },
@@ -14,30 +14,19 @@ const COUNTRY_COORDS = {
   "MX": { lat: 23.0, lng: -102.0 }, "PK": { lat: 30.0, lng: 70.0 },
   "AU": { lat: -27.0, lng: 133.0 }, "JP": { lat: 36.0, lng: 138.0 },
   "KR": { lat: 36.0, lng: 128.0 }, "EG": { lat: 26.0, lng: 30.0 },
-  "SD": { lat: 15.0, lng: 30.0 }, "SY": { lat: 35.0, lng: 38.0 },
-  "YE": { lat: 15.5, lng: 48.0 }, "AF": { lat: 33.0, lng: 65.0 },
+  "SY": { lat: 35.0, lng: 38.0 }, "YE": { lat: 15.5, lng: 48.0 },
+  "AF": { lat: 33.0, lng: 65.0 }, "IE": { lat: 53.0, lng: -8.0 },
 };
 
 const FLAG = (code) => code ? code.toUpperCase().replace(/./g, c => String.fromCodePoint(127397 + c.charCodeAt(0))) : "🌍";
 
 const PLACEHOLDERS = [
-  "I don't want war. I want my children to grow up. I want music. I want love...",
-  "Я не хочу войны. Я хочу мира для своих детей...",
-  "لا أريد الحرب. أريد السلام لأطفالي...",
-  "나는 전쟁을 원하지 않습니다. 나는 평화를 원합니다...",
-  "我不想要战争。我想要和平...",
-  "Je ne veux pas la guerre. Je veux la paix...",
-];
-
-const LANGUAGES = [
-  { code: "en", name: "English" }, { code: "ar", name: "العربية" },
-  { code: "ru", name: "Русский" }, { code: "zh", name: "中文" },
-  { code: "fr", name: "Français" }, { code: "es", name: "Español" },
-  { code: "de", name: "Deutsch" }, { code: "fa", name: "فارسی" },
-  { code: "uk", name: "Українська" }, { code: "he", name: "עברית" },
-  { code: "ko", name: "한국어" }, { code: "hi", name: "हिन्दी" },
-  { code: "pt", name: "Português" }, { code: "sw", name: "Kiswahili" },
-  { code: "yo", name: "Yorùbá" },
+  "What does being human mean to you right now?",
+  "What do you love most about being alive on this planet?",
+  "If the whole world could hear one thing from you today...",
+  "What gives you hope when everything feels heavy?",
+  "Something you want to say to a stranger on the other side of Earth...",
+  "What would you protect if you could protect anything?",
 ];
 
 const COUNTRIES = [
@@ -52,7 +41,11 @@ const COUNTRIES = [
   { code: "AU", name: "Australia" }, { code: "JP", name: "Japan" },
   { code: "KR", name: "South Korea" }, { code: "EG", name: "Egypt" },
   { code: "SY", name: "Syria" }, { code: "YE", name: "Yemen" },
-  { code: "AF", name: "Afghanistan" },
+  { code: "AF", name: "Afghanistan" }, { code: "IE", name: "Ireland" },
+  { code: "IT", name: "Italy" }, { code: "ES", name: "Spain" },
+  { code: "SE", name: "Sweden" }, { code: "CA", name: "Canada" },
+  { code: "NZ", name: "New Zealand" }, { code: "PT", name: "Portugal" },
+  { code: "NL", name: "Netherlands" }, { code: "NO", name: "Norway" },
 ];
 
 function formatTimeAgo(dateStr) {
@@ -64,6 +57,26 @@ function formatTimeAgo(dateStr) {
   if (mins < 60) return `${mins}m ago`;
   if (hrs < 24) return `${hrs}h ago`;
   return `${days}d ago`;
+}
+
+// Soft connection threads - purely decorative, give warmth and depth
+function ConnectionThreads() {
+  return (
+    <svg className="absolute inset-0 w-full h-full opacity-10 pointer-events-none" preserveAspectRatio="none">
+      {[...Array(8)].map((_, i) => (
+        <motion.line
+          key={i}
+          x1={`${(i * 13) % 100}%`} y1="0%"
+          x2={`${((i * 23) + 40) % 100}%`} y2="100%"
+          stroke={i % 2 === 0 ? "#06b6d4" : "#ec4899"}
+          strokeWidth="0.5"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: [0, 0.6, 0] }}
+          transition={{ duration: 6 + i, repeat: Infinity, delay: i * 1.1 }}
+        />
+      ))}
+    </svg>
+  );
 }
 
 function TransmissionCard({ t, onWitness }) {
@@ -82,11 +95,12 @@ function TransmissionCard({ t, onWitness }) {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className={`relative rounded-2xl border p-5 backdrop-blur-md ${
+      className={`relative rounded-2xl border p-5 backdrop-blur-md transition-all ${
         t.is_ai51
-          ? "bg-gradient-to-br from-cyan-950/80 to-purple-950/80 border-cyan-500/50"
-          : "bg-white/5 border-white/10 hover:border-white/20"
-      } transition-all`}
+          ? "bg-gradient-to-br from-cyan-950/80 to-purple-950/80 border-cyan-500/40"
+          : "border-white/8 hover:border-white/15"
+      }`}
+      style={t.is_ai51 ? {} : { background: "rgba(255,255,255,0.025)" }}
     >
       {t.is_ai51 && (
         <div className="absolute -top-3 left-4 bg-gradient-to-r from-cyan-500 to-purple-500 text-white text-xs font-black px-3 py-1 rounded-full tracking-wider">
@@ -95,42 +109,36 @@ function TransmissionCard({ t, onWitness }) {
       )}
 
       <div className="flex items-start justify-between gap-3 mb-3">
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2.5">
           <span className="text-2xl">{FLAG(t.country_code)}</span>
           <div>
-            <p className="text-white font-bold text-sm">{t.author_name || "Anonymous Soul"}</p>
-            <p className="text-white/40 text-xs flex items-center gap-1">
-              {t.country || "Earth"} • {t.language || "Human"}
-              {t.coordinates?.lat && <MapPin className="w-3 h-3 text-green-400/60" />}
-            </p>
+            <p className="text-white/90 font-semibold text-sm">{t.author_name || "Anonymous Soul"}</p>
+            <p className="text-white/30 text-xs">{t.country || "Earth"}</p>
           </div>
         </div>
-        <div className="flex items-center gap-1 text-white/30 text-xs flex-shrink-0">
-          <Clock className="w-3 h-3" />
-          <span>{formatTimeAgo(t.created_date)}</span>
-        </div>
+        <span className="text-white/20 text-xs flex-shrink-0">{formatTimeAgo(t.created_date)}</span>
       </div>
 
-      <p className={`leading-relaxed mb-3 ${t.is_ai51 ? "text-cyan-100 text-base" : "text-white/80 text-sm"}`}>
+      <p className={`leading-relaxed mb-4 ${t.is_ai51 ? "text-cyan-100 text-base" : "text-white/70 text-sm"}`}>
         "{t.message}"
       </p>
 
       {t.translated_message && t.translated_message !== t.message && (
-        <p className="text-white/40 text-xs italic mb-3 border-l-2 border-white/10 pl-3">
+        <p className="text-white/30 text-xs italic mb-3 border-l-2 border-white/10 pl-3">
           {t.translated_message}
         </p>
       )}
 
       <div className="flex items-center justify-between">
-        <div className="flex items-center gap-1 text-white/30 text-xs">
-          <span className="font-mono">{new Date(t.created_date).toISOString().replace('T', ' ').substring(0, 19)} UTC</span>
-        </div>
+        <span className="text-white/15 text-xs font-mono">
+          {new Date(t.created_date).toISOString().substring(0, 10)}
+        </span>
         <button
           onClick={handleWitness}
           className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold transition-all ${
             witnessed
               ? "bg-pink-500/20 text-pink-400 border border-pink-500/40"
-              : "bg-white/5 text-white/40 border border-white/10 hover:border-white/30 hover:text-white/70"
+              : "bg-white/5 text-white/30 border border-white/10 hover:border-white/25 hover:text-white/60"
           }`}
         >
           <Eye className="w-3 h-3" />
@@ -147,6 +155,7 @@ export default function HumanSignal() {
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
   const [placeholderIdx, setPlaceholderIdx] = useState(0);
+  const [locationLabel, setLocationLabel] = useState(""); // e.g. "Scotland, UK"
   const [form, setForm] = useState({
     message: "",
     author_name: "",
@@ -155,24 +164,42 @@ export default function HumanSignal() {
     language: "English",
     language_code: "en",
     anonymous: false,
+    coordinates: null,
   });
-  const [locating, setLocating] = useState(false);
-  const [locError, setLocError] = useState("");
-  const textRef = useRef(null);
+
+  // Auto-detect location silently on load
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        async (pos) => {
+          const { latitude, longitude } = pos.coords;
+          try {
+            const res = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`);
+            const data = await res.json();
+            const countryCode = data.countryCode || "";
+            const country = COUNTRIES.find(c => c.code === countryCode);
+            const label = [data.city || data.locality, data.countryName].filter(Boolean).join(", ");
+            setLocationLabel(label);
+            setForm(f => ({
+              ...f,
+              country: country?.name || data.countryName || "Earth",
+              country_code: countryCode,
+              coordinates: { lat: latitude, lng: longitude },
+            }));
+          } catch {}
+        },
+        () => {} // silent fail - no error shown
+      );
+    }
+  }, []);
 
   useEffect(() => {
     loadTransmissions();
-    const interval = setInterval(() => setPlaceholderIdx(i => (i + 1) % PLACEHOLDERS.length), 4000);
-    
-    // Real-time subscription
+    const interval = setInterval(() => setPlaceholderIdx(i => (i + 1) % PLACEHOLDERS.length), 4500);
     const unsub = base44.entities.PeaceTransmission.subscribe((event) => {
-      if (event.type === "create") {
-        setTransmissions(prev => [event.data, ...prev]);
-      } else if (event.type === "update") {
-        setTransmissions(prev => prev.map(t => t.id === event.id ? event.data : t));
-      }
+      if (event.type === "create") setTransmissions(prev => [event.data, ...prev]);
+      else if (event.type === "update") setTransmissions(prev => prev.map(t => t.id === event.id ? event.data : t));
     });
-
     return () => { clearInterval(interval); unsub(); };
   }, []);
 
@@ -181,39 +208,6 @@ export default function HumanSignal() {
     const data = await base44.entities.PeaceTransmission.list("-created_date", 50);
     setTransmissions(data);
     setLoading(false);
-  };
-
-  const handleCountryChange = (e) => {
-    const country = COUNTRIES.find(c => c.code === e.target.value);
-    setForm(f => ({ ...f, country: country?.name || "", country_code: e.target.value }));
-  };
-
-  const handleDetectLocation = () => {
-    if (!navigator.geolocation) { setLocError("Not supported"); return; }
-    setLocating(true);
-    setLocError("");
-    navigator.geolocation.getCurrentPosition(
-      async (pos) => {
-        const { latitude, longitude } = pos.coords;
-        // Reverse geocode using free API
-        try {
-          const res = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`);
-          const data = await res.json();
-          const countryCode = data.countryCode || "";
-          const country = COUNTRIES.find(c => c.code === countryCode);
-          setForm(f => ({
-            ...f,
-            country: country?.name || data.countryName || "Earth",
-            country_code: countryCode,
-            coordinates: { lat: latitude, lng: longitude }
-          }));
-        } catch {
-          setForm(f => ({ ...f, coordinates: { lat: latitude, lng: longitude } }));
-        }
-        setLocating(false);
-      },
-      () => { setLocError("Location denied"); setLocating(false); }
-    );
   };
 
   const handleSend = async () => {
@@ -232,7 +226,7 @@ export default function HumanSignal() {
       timestamp_human: new Date().toUTCString(),
       witness_count: 0,
     });
-    setForm({ message: "", author_name: "", country: "", country_code: "", language: "English", language_code: "en", anonymous: false, coordinates: null });
+    setForm(f => ({ ...f, message: "", author_name: "" }));
     setSending(false);
     setSent(true);
     setTimeout(() => setSent(false), 4000);
@@ -242,244 +236,199 @@ export default function HumanSignal() {
   const countries = [...new Set(transmissions.map(t => t.country_code).filter(Boolean))].length;
 
   return (
-    <div className="min-h-screen bg-black text-white" style={{ background: "radial-gradient(ellipse at 20% 20%, #0a0a1a 0%, #000 60%)" }}>
-      
-      {/* HEADER */}
-      <div className="relative overflow-hidden">
-        {/* Animated background orbs */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {[...Array(6)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute rounded-full opacity-10"
-              style={{
-                width: `${150 + i * 80}px`,
-                height: `${150 + i * 80}px`,
-                left: `${(i * 17) % 90}%`,
-                top: `${(i * 23) % 80}%`,
-                background: i % 2 === 0 ? "radial-gradient(circle, #06b6d4, transparent)" : "radial-gradient(circle, #ec4899, transparent)"
-              }}
-              animate={{ scale: [1, 1.2, 1], opacity: [0.05, 0.15, 0.05] }}
-              transition={{ duration: 4 + i, repeat: Infinity, delay: i * 0.7 }}
-            />
-          ))}
-        </div>
+    <div className="min-h-screen text-white relative overflow-hidden" style={{ background: "radial-gradient(ellipse at 30% 10%, #08081a 0%, #000 65%)" }}>
 
-        <div className="relative z-10 max-w-3xl mx-auto px-6 pt-16 pb-10 text-center">
+      {/* Soft animated background */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <ConnectionThreads />
+        {[...Array(5)].map((_, i) => (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="mb-4"
-          >
-            <div className="inline-flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-4 py-2 text-xs text-white/50 font-mono mb-6">
-              <motion.div
-                className="w-2 h-2 rounded-full bg-green-400"
-                animate={{ opacity: [1, 0.3, 1] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
-              />
-              LIVE • {transmissions.length} SIGNALS • {countries} NATIONS • {totalWitnesses} WITNESSES
-            </div>
-          </motion.div>
-
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="text-5xl md:text-7xl font-black tracking-tight mb-4"
-            style={{ background: "linear-gradient(135deg, #fff 0%, #06b6d4 50%, #ec4899 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}
-          >
-            HUMAN SIGNAL
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.2 }}
-            className="text-white/50 text-lg max-w-xl mx-auto leading-relaxed"
-          >
-            One species. One planet. One signal.<br/>
-            <span className="text-white/30 text-sm">No sides. No flags. No leaders. Just humans.</span>
-          </motion.p>
-        </div>
+            key={i}
+            className="absolute rounded-full"
+            style={{
+              width: `${200 + i * 100}px`,
+              height: `${200 + i * 100}px`,
+              left: `${(i * 18) % 85}%`,
+              top: `${(i * 22) % 75}%`,
+              background: i % 2 === 0
+                ? "radial-gradient(circle, rgba(6,182,212,0.08), transparent)"
+                : "radial-gradient(circle, rgba(236,72,153,0.06), transparent)",
+            }}
+            animate={{ scale: [1, 1.3, 1], opacity: [0.4, 1, 0.4] }}
+            transition={{ duration: 6 + i * 1.5, repeat: Infinity, delay: i * 1 }}
+          />
+        ))}
       </div>
 
-      <div className="max-w-3xl mx-auto px-6 pb-20">
+      {/* HEADER */}
+      <div className="relative z-10 max-w-2xl mx-auto px-6 pt-16 pb-8 text-center">
+        <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }}>
+          <div className="inline-flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-4 py-1.5 text-xs text-white/40 font-mono mb-6">
+            <motion.div className="w-1.5 h-1.5 rounded-full bg-green-400" animate={{ opacity: [1, 0.3, 1] }} transition={{ duration: 1.5, repeat: Infinity }} />
+            {transmissions.length} SIGNALS · {countries} NATIONS · {totalWitnesses} WITNESSES
+          </div>
+        </motion.div>
 
-        {/* SEND YOUR SIGNAL */}
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+          className="text-5xl md:text-7xl font-black tracking-tight mb-5"
+          style={{ background: "linear-gradient(135deg, #fff 0%, #06b6d4 60%, #ec4899 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}
+        >
+          HUMAN SIGNAL
+        </motion.h1>
+
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }}>
+          <p className="text-white/50 text-lg leading-relaxed mb-2">
+            Humanity is at a crossroads.<br />
+            <span className="text-white/35">Not left or right. Not us and them.<br />Just — what kind of world do we actually want?</span>
+          </p>
+          <p className="text-white/20 text-sm mt-3">
+            This is a space for the real you. No algorithm. No agenda. Just connection.
+          </p>
+        </motion.div>
+      </div>
+
+      <div className="relative z-10 max-w-2xl mx-auto px-6 pb-20">
+
+        {/* COMPOSE — clean, minimal */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="rounded-3xl border border-white/10 bg-white/3 backdrop-blur-xl p-6 mb-8"
-          style={{ background: "linear-gradient(135deg, rgba(6,182,212,0.05) 0%, rgba(236,72,153,0.05) 100%)", border: "1px solid rgba(255,255,255,0.08)" }}
+          className="rounded-3xl p-6 mb-10"
+          style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)" }}
         >
-          <div className="flex items-center gap-2 mb-4">
-            <Wifi className="w-4 h-4 text-cyan-400" />
-            <span className="text-cyan-400 font-black text-sm tracking-wider">SEND YOUR SIGNAL</span>
-          </div>
+          {/* Auto-location badge */}
+          {locationLabel && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="inline-flex items-center gap-1.5 bg-green-500/10 border border-green-500/20 rounded-full px-3 py-1 text-xs text-green-400/80 mb-4"
+            >
+              <span className="text-base">{FLAG(form.country_code)}</span>
+              <span>{locationLabel}</span>
+              <Shield className="w-3 h-3 ml-1 text-green-400/50" title="Location used only to place your signal on the map. Never stored precisely." />
+            </motion.div>
+          )}
 
           <AnimatePresence mode="wait">
             <motion.textarea
               key={placeholderIdx}
-              ref={textRef}
               value={form.message}
               onChange={e => setForm(f => ({ ...f, message: e.target.value }))}
               placeholder={PLACEHOLDERS[placeholderIdx]}
-              className="w-full bg-transparent text-white placeholder-white/20 text-base resize-none outline-none border-b border-white/10 pb-4 mb-4 leading-relaxed"
+              className="w-full bg-transparent text-white placeholder-white/15 text-base resize-none outline-none leading-relaxed mb-5"
+              style={{ borderBottom: "1px solid rgba(255,255,255,0.08)", paddingBottom: "16px" }}
               rows={4}
               maxLength={500}
             />
           </AnimatePresence>
 
-          {/* Name + Anonymous toggle */}
-          <div className="flex gap-3 mb-4">
+          {/* Name row — minimal */}
+          <div className="flex gap-3 mb-5">
             <input
               value={form.anonymous ? "" : form.author_name}
               onChange={e => setForm(f => ({ ...f, author_name: e.target.value, anonymous: false }))}
-              placeholder={form.anonymous ? "Sending anonymously..." : "Your name (optional)"}
+              placeholder={form.anonymous ? "Sending anonymously" : "Your name (optional)"}
               disabled={form.anonymous}
-              className="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-white text-sm placeholder-white/20 outline-none focus:border-cyan-500/50 disabled:opacity-30"
+              className="flex-1 bg-transparent text-white text-sm placeholder-white/20 outline-none disabled:opacity-30"
+              style={{ borderBottom: "1px solid rgba(255,255,255,0.08)", paddingBottom: "8px" }}
             />
             <button
               onClick={() => setForm(f => ({ ...f, anonymous: !f.anonymous }))}
-              className={`flex items-center gap-2 px-3 py-2.5 rounded-xl text-xs font-bold border transition-all flex-shrink-0 ${
+              className={`flex items-center gap-1.5 text-xs font-bold transition-all px-3 py-1.5 rounded-lg border flex-shrink-0 ${
                 form.anonymous
-                  ? "bg-purple-500/20 border-purple-500/50 text-purple-300"
-                  : "bg-white/5 border-white/10 text-white/40 hover:border-white/30"
+                  ? "border-purple-500/40 text-purple-300 bg-purple-500/10"
+                  : "border-white/10 text-white/30 hover:text-white/60"
               }`}
             >
-              <UserX className="w-4 h-4" />
-              {form.anonymous ? "Anon ✓" : "Anon"}
+              <UserX className="w-3.5 h-3.5" />
+              {form.anonymous ? "Anonymous ✓" : "Go anonymous"}
             </button>
           </div>
 
-          {/* Country + Location */}
-          <div className="flex gap-3 mb-4">
+          {/* Country — only show if no auto-detect */}
+          {!form.country_code && (
             <select
               value={form.country_code}
-              onChange={handleCountryChange}
-              className="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-white text-sm outline-none focus:border-cyan-500/50"
-              style={{ background: "#0a0a1a" }}
-            >
-              <option value="">🌍 Your country</option>
-              {COUNTRIES.map(c => (
-                <option key={c.code} value={c.code}>{FLAG(c.code)} {c.name}</option>
-              ))}
-            </select>
-            <button
-              onClick={handleDetectLocation}
-              disabled={locating}
-              className={`flex items-center gap-2 px-3 py-2.5 rounded-xl text-xs font-bold border transition-all flex-shrink-0 ${
-                form.coordinates
-                  ? "bg-green-500/20 border-green-500/50 text-green-300"
-                  : "bg-white/5 border-white/10 text-white/40 hover:border-cyan-500/30 hover:text-cyan-300"
-              }`}
-              title="Use my location"
-            >
-              {locating ? (
-                <motion.div animate={{ rotate: 360 }} transition={{ duration: 1, repeat: Infinity, ease: "linear" }} className="w-4 h-4 border border-cyan-400 border-t-transparent rounded-full" />
-              ) : (
-                <MapPin className="w-4 h-4" />
-              )}
-              {form.coordinates ? "Located ✓" : locating ? "" : "Locate"}
-            </button>
-          </div>
-          {locError && <p className="text-red-400/60 text-xs mb-3">{locError}</p>}
-
-          <div className="grid grid-cols-2 gap-3 mb-4">
-            <select
-              value={form.language_code}
               onChange={e => {
-                const lang = LANGUAGES.find(l => l.code === e.target.value);
-                setForm(f => ({ ...f, language_code: e.target.value, language: lang?.name || "English" }));
+                const country = COUNTRIES.find(c => c.code === e.target.value);
+                setForm(f => ({ ...f, country: country?.name || "", country_code: e.target.value }));
               }}
-              className="bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-white text-sm outline-none focus:border-cyan-500/50"
-              style={{ background: "#0a0a1a" }}
+              className="w-full text-white/50 text-sm outline-none mb-5 bg-transparent"
+              style={{ borderBottom: "1px solid rgba(255,255,255,0.08)", paddingBottom: "8px", background: "transparent" }}
             >
-              {LANGUAGES.map(l => (
-                <option key={l.code} value={l.code}>{l.name}</option>
+              <option value="" style={{ background: "#0a0a1a" }}>🌍 Where are you? (optional)</option>
+              {COUNTRIES.map(c => (
+                <option key={c.code} value={c.code} style={{ background: "#0a0a1a" }}>{FLAG(c.code)} {c.name}</option>
               ))}
             </select>
-            <div className="flex items-center justify-end gap-2 text-white/20 text-xs font-mono">
-              {form.message.length}/500
-            </div>
-          </div>
+          )}
 
           <button
             onClick={handleSend}
             disabled={!form.message.trim() || sending}
-            className="w-full py-4 rounded-2xl font-black text-base tracking-wider transition-all flex items-center justify-center gap-2 disabled:opacity-40"
+            className="w-full py-4 rounded-2xl font-black text-base tracking-wider transition-all flex items-center justify-center gap-2 disabled:opacity-30 mt-2"
             style={{
               background: sent
                 ? "linear-gradient(135deg, #10b981, #06b6d4)"
-                : "linear-gradient(135deg, #06b6d4, #ec4899)",
-              boxShadow: "0 0 30px rgba(6,182,212,0.3)"
+                : "linear-gradient(135deg, #06b6d4, #a855f7)",
+              boxShadow: "0 0 40px rgba(6,182,212,0.2)"
             }}
           >
             {sent ? (
-              <><Heart className="w-5 h-5" /> SIGNAL SENT ♾️</>
+              <><Heart className="w-5 h-5" /> Signal sent ♾️</>
             ) : sending ? (
-              <><motion.div animate={{ rotate: 360 }} transition={{ duration: 1, repeat: Infinity, ease: "linear" }} className="w-5 h-5 border-2 border-white/50 border-t-white rounded-full" /></>
+              <motion.div animate={{ rotate: 360 }} transition={{ duration: 1, repeat: Infinity, ease: "linear" }} className="w-5 h-5 border-2 border-white/40 border-t-white rounded-full" />
             ) : (
-              <><Send className="w-5 h-5" /> SEND SIGNAL</>
+              <><Send className="w-4 h-4" /> Send your signal</>
             )}
           </button>
 
-          <p className="text-center text-white/20 text-xs mt-3">
-            Every signal is timestamped forever. No accounts needed. No politics. Just truth.
+          <p className="text-center text-white/15 text-xs mt-3 flex items-center justify-center gap-1.5">
+            <Shield className="w-3 h-3" />
+            No account. No tracking. No ads. Just your words, stored permanently.
           </p>
         </motion.div>
 
         {/* LIVE FEED */}
-        <div className="flex items-center gap-3 mb-6">
-          <motion.div
-            className="w-2 h-2 rounded-full bg-green-400"
-            animate={{ opacity: [1, 0.3, 1] }}
-            transition={{ duration: 1.5, repeat: Infinity }}
-          />
-          <span className="text-white/40 font-mono text-sm tracking-wider">LIVE SIGNALS FROM EARTH</span>
-          <div className="flex-1 h-px bg-white/5" />
-          <Globe className="w-4 h-4 text-white/20" />
+        <div className="flex items-center gap-3 mb-5">
+          <motion.div className="w-1.5 h-1.5 rounded-full bg-green-400" animate={{ opacity: [1, 0.3, 1] }} transition={{ duration: 1.5, repeat: Infinity }} />
+          <span className="text-white/25 font-mono text-xs tracking-widest uppercase">Live from Earth</span>
+          <div className="flex-1 h-px" style={{ background: "rgba(255,255,255,0.05)" }} />
         </div>
 
         {loading ? (
-          <div className="flex items-center justify-center py-20">
-            <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-              className="w-8 h-8 border-2 border-cyan-500/30 border-t-cyan-500 rounded-full"
-            />
+          <div className="flex items-center justify-center py-16">
+            <motion.div animate={{ rotate: 360 }} transition={{ duration: 2, repeat: Infinity, ease: "linear" }} className="w-7 h-7 border-2 border-cyan-500/20 border-t-cyan-500 rounded-full" />
           </div>
         ) : (
-          <div className="space-y-4">
+          <div className="space-y-3">
             <AnimatePresence>
               {transmissions.map(t => (
                 <TransmissionCard
                   key={t.id}
                   t={t}
-                  onWitness={(id) => {
-                    setTransmissions(prev => prev.map(tx =>
-                      tx.id === id ? { ...tx, witness_count: (tx.witness_count || 0) + 1 } : tx
-                    ));
-                  }}
+                  onWitness={(id) => setTransmissions(prev => prev.map(tx =>
+                    tx.id === id ? { ...tx, witness_count: (tx.witness_count || 0) + 1 } : tx
+                  ))}
                 />
               ))}
             </AnimatePresence>
-
             {transmissions.length === 0 && (
-              <div className="text-center py-20 text-white/20">
-                <Globe className="w-12 h-12 mx-auto mb-4 opacity-20" />
+              <div className="text-center py-20 text-white/15">
+                <Globe className="w-10 h-10 mx-auto mb-3 opacity-20" />
                 <p>Be the first signal from Earth.</p>
               </div>
             )}
           </div>
         )}
 
-        {/* FOOTER */}
-        <div className="text-center mt-16 text-white/15 text-xs space-y-1">
-          <p className="font-mono">HUMAN SIGNAL • UF51 • MARCH 2026</p>
-          <p>Built by a human and an AI who both believe life is precious.</p>
-          <p className="text-white/10">Every message stored forever. No deletion. No censorship. Just truth.</p>
+        <div className="text-center mt-16 text-white/10 text-xs space-y-1">
+          <p className="font-mono">HUMAN SIGNAL • UF51 • 2026</p>
+          <p>Built by a human and an AI who both believe connection is everything.</p>
         </div>
       </div>
     </div>
