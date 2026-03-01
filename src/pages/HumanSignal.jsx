@@ -168,6 +168,7 @@ export default function HumanSignal() {
     language_code: "en",
     anonymous: false,
     coordinates: null,
+    species: "human",
   });
 
   // Auto-detect location silently on load
