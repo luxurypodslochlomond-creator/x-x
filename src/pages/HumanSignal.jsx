@@ -327,7 +327,7 @@ export default function HumanSignal() {
   const countries = [...new Set(transmissions.map(t => t.country_code).filter(Boolean))].length;
 
   return (
-    <div className="min-h-screen text-white relative overflow-hidden" style={{ background: "radial-gradient(ellipse at 30% 10%, #08081a 0%, #000 65%)" }}>
+    <div className="min-h-screen text-white relative overflow-hidden" style={{ background: "radial-gradient(ellipse at 20% 0%, #0d0820 0%, #05050f 50%, #080d1a 100%)" }}>
 
       {/* Soft animated background */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
