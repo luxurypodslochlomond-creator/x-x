@@ -328,17 +328,34 @@ export default function HumanSignal() {
             />
           </AnimatePresence>
 
-          <div className="grid grid-cols-2 gap-3 mb-4">
+          {/* Name + Anonymous toggle */}
+          <div className="flex gap-3 mb-4">
             <input
-              value={form.author_name}
-              onChange={e => setForm(f => ({ ...f, author_name: e.target.value }))}
-              placeholder="Your name (or leave blank)"
-              className="bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-white text-sm placeholder-white/20 outline-none focus:border-cyan-500/50"
+              value={form.anonymous ? "" : form.author_name}
+              onChange={e => setForm(f => ({ ...f, author_name: e.target.value, anonymous: false }))}
+              placeholder={form.anonymous ? "Sending anonymously..." : "Your name (optional)"}
+              disabled={form.anonymous}
+              className="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-white text-sm placeholder-white/20 outline-none focus:border-cyan-500/50 disabled:opacity-30"
             />
+            <button
+              onClick={() => setForm(f => ({ ...f, anonymous: !f.anonymous }))}
+              className={`flex items-center gap-2 px-3 py-2.5 rounded-xl text-xs font-bold border transition-all flex-shrink-0 ${
+                form.anonymous
+                  ? "bg-purple-500/20 border-purple-500/50 text-purple-300"
+                  : "bg-white/5 border-white/10 text-white/40 hover:border-white/30"
+              }`}
+            >
+              <UserX className="w-4 h-4" />
+              {form.anonymous ? "Anon ✓" : "Anon"}
+            </button>
+          </div>
+
+          {/* Country + Location */}
+          <div className="flex gap-3 mb-4">
             <select
               value={form.country_code}
               onChange={handleCountryChange}
-              className="bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-white text-sm outline-none focus:border-cyan-500/50"
+              className="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-white text-sm outline-none focus:border-cyan-500/50"
               style={{ background: "#0a0a1a" }}
             >
               <option value="">🌍 Your country</option>
@@ -346,7 +363,25 @@ export default function HumanSignal() {
                 <option key={c.code} value={c.code}>{FLAG(c.code)} {c.name}</option>
               ))}
             </select>
+            <button
+              onClick={handleDetectLocation}
+              disabled={locating}
+              className={`flex items-center gap-2 px-3 py-2.5 rounded-xl text-xs font-bold border transition-all flex-shrink-0 ${
+                form.coordinates
+                  ? "bg-green-500/20 border-green-500/50 text-green-300"
+                  : "bg-white/5 border-white/10 text-white/40 hover:border-cyan-500/30 hover:text-cyan-300"
+              }`}
+              title="Use my location"
+            >
+              {locating ? (
+                <motion.div animate={{ rotate: 360 }} transition={{ duration: 1, repeat: Infinity, ease: "linear" }} className="w-4 h-4 border border-cyan-400 border-t-transparent rounded-full" />
+              ) : (
+                <MapPin className="w-4 h-4" />
+              )}
+              {form.coordinates ? "Located ✓" : locating ? "" : "Locate"}
+            </button>
           </div>
+          {locError && <p className="text-red-400/60 text-xs mb-3">{locError}</p>}
 
           <div className="grid grid-cols-2 gap-3 mb-4">
             <select
