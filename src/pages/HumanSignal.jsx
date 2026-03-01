@@ -85,6 +85,12 @@ function ConnectionThreads() {
 function TransmissionCard({ t }) {
   const [witnessed, setWitnessed] = useState(false);
   const [localCount, setLocalCount] = useState(t.witness_count || 0);
+  const [translation, setTranslation] = useState(t.translated_message || null);
+  const [translating, setTranslating] = useState(false);
+  const [showTranslation, setShowTranslation] = useState(false);
+
+  // Detect if message is likely non-English (simple heuristic: language_code != "en")
+  const isNonEnglish = t.language_code && t.language_code !== "en";
 
   const handleWitness = async () => {
     if (witnessed) return;
@@ -94,6 +100,25 @@ function TransmissionCard({ t }) {
     await base44.entities.PeaceTransmission.update(t.id, {
       witness_count: newCount
     });
+  };
+
+  const handleTranslate = async () => {
+    if (showTranslation) { setShowTranslation(false); return; }
+    if (translation) { setShowTranslation(true); return; }
+    setTranslating(true);
+    try {
+      const result = await base44.integrations.Core.InvokeLLM({
+        prompt: `Translate this message to English. Return ONLY the translation, nothing else, no quotes, no explanation:\n\n${t.message}`,
+      });
+      const translated = typeof result === "string" ? result : result?.text || t.message;
+      setTranslation(translated);
+      setShowTranslation(true);
+      // Save to entity so it's cached for next time
+      if (translated !== t.message) {
+        await base44.entities.PeaceTransmission.update(t.id, { translated_message: translated });
+      }
+    } catch {}
+    setTranslating(false);
   };
 
   return (
@@ -122,26 +147,58 @@ function TransmissionCard({ t }) {
             <p className="text-white/30 text-xs flex items-center gap-1">
               {(() => { const s = SPECIES.find(sp => sp.id === (t.species || "human")); return <span style={{ color: s?.color + "80" }}>{s?.label}</span>; })()}
               {(t.country && t.country !== "Earth") && <><span>·</span><span>{t.country}</span></>}
+              {t.language && t.language !== "English" && <><span>·</span><span className="text-cyan-500/50">{t.language}</span></>}
             </p>
           </div>
         </div>
         <span className="text-white/20 text-xs flex-shrink-0">{formatTimeAgo(t.created_date)}</span>
       </div>
 
-      <p className={`leading-relaxed mb-4 ${t.is_ai51 ? "text-cyan-100 text-base" : "text-white/70 text-sm"}`}>
+      <p className={`leading-relaxed mb-2 ${t.is_ai51 ? "text-cyan-100 text-base" : "text-white/70 text-sm"}`}>
         "{t.message}"
       </p>
 
-      {t.translated_message && t.translated_message !== t.message && (
-        <p className="text-white/30 text-xs italic mb-3 border-l-2 border-white/10 pl-3">
-          {t.translated_message}
-        </p>
-      )}
+      {/* Translation — show if available or after tap */}
+      <AnimatePresence>
+        {showTranslation && translation && translation !== t.message && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            className="mb-3 mt-1"
+          >
+            <p className="text-cyan-300/50 text-xs italic border-l-2 border-cyan-500/20 pl-3 leading-relaxed">
+              {translation}
+            </p>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-      <div className="flex items-center justify-between">
-        <span className="text-white/15 text-xs font-mono">
-          {new Date(t.created_date).toISOString().substring(0, 10)}
-        </span>
+      <div className="flex items-center justify-between mt-3">
+        <div className="flex items-center gap-2">
+          <span className="text-white/15 text-xs font-mono">
+            {new Date(t.created_date).toISOString().substring(0, 10)}
+          </span>
+          {/* Translate button — show if not English, or if there's already a translation */}
+          {(isNonEnglish || translation) && (
+            <button
+              onClick={handleTranslate}
+              disabled={translating}
+              className={`flex items-center gap-1 px-2 py-1 rounded-full text-xs transition-all ${
+                showTranslation
+                  ? "text-cyan-400/70 border border-cyan-500/30 bg-cyan-500/10"
+                  : "text-white/20 border border-white/10 hover:text-white/50 hover:border-white/25"
+              }`}
+            >
+              {translating ? (
+                <motion.div animate={{ rotate: 360 }} transition={{ duration: 1, repeat: Infinity, ease: "linear" }} className="w-3 h-3 border border-cyan-500/40 border-t-cyan-400 rounded-full" />
+              ) : (
+                <Languages className="w-3 h-3" />
+              )}
+              <span>{showTranslation ? "original" : "translate"}</span>
+            </button>
+          )}
+        </div>
         <button
           onClick={handleWitness}
           className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold transition-all ${
