@@ -395,7 +395,7 @@ export default function HumanSignal() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
           className="rounded-3xl p-6 mb-10"
-          style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)" }}
+          style={{ background: "linear-gradient(135deg, rgba(192,132,252,0.05), rgba(103,232,249,0.04), rgba(249,168,212,0.04))", border: "1px solid rgba(192,132,252,0.15)" }}
         >
           {/* Auto-location badge */}
           {locationLabel && (
