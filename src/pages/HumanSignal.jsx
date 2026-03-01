@@ -332,21 +332,25 @@ export default function HumanSignal() {
       {/* Soft animated background */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <ConnectionThreads />
-        {[...Array(5)].map((_, i) => (
+        {/* Aurora orbs — warm, alive, not doom */}
+        {[
+          { color: "rgba(192,132,252,0.12)", size: 500, x: "10%", y: "5%" },
+          { color: "rgba(103,232,249,0.09)", size: 400, x: "60%", y: "20%" },
+          { color: "rgba(249,168,212,0.10)", size: 350, x: "75%", y: "60%" },
+          { color: "rgba(134,239,172,0.08)", size: 300, x: "15%", y: "65%" },
+          { color: "rgba(253,230,138,0.07)", size: 250, x: "45%", y: "80%" },
+        ].map((orb, i) => (
           <motion.div
             key={i}
-            className="absolute rounded-full"
+            className="absolute rounded-full pointer-events-none"
             style={{
-              width: `${200 + i * 100}px`,
-              height: `${200 + i * 100}px`,
-              left: `${(i * 18) % 85}%`,
-              top: `${(i * 22) % 75}%`,
-              background: i % 2 === 0
-                ? "radial-gradient(circle, rgba(6,182,212,0.08), transparent)"
-                : "radial-gradient(circle, rgba(236,72,153,0.06), transparent)",
+              width: orb.size, height: orb.size,
+              left: orb.x, top: orb.y,
+              background: `radial-gradient(circle, ${orb.color}, transparent 70%)`,
+              filter: "blur(40px)",
             }}
-            animate={{ scale: [1, 1.3, 1], opacity: [0.4, 1, 0.4] }}
-            transition={{ duration: 6 + i * 1.5, repeat: Infinity, delay: i * 1 }}
+            animate={{ scale: [1, 1.2, 1], opacity: [0.6, 1, 0.6] }}
+            transition={{ duration: 7 + i * 2, repeat: Infinity, delay: i * 1.2 }}
           />
         ))}
       </div>
