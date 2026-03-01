@@ -226,6 +226,7 @@ export default function HumanSignal() {
       country_code: form.country_code || "",
       language: form.language,
       language_code: form.language_code,
+      species: form.species || "human",
       is_ai51: false,
       coordinates: coords,
       timestamp_human: new Date().toUTCString(),
