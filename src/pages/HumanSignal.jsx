@@ -174,53 +174,50 @@ function TransmissionCard({ t }) {
         )}
       </AnimatePresence>
 
-      <div className="flex items-center justify-between mt-3">
-        <div className="flex items-center gap-2">
-          <span className="text-white/15 text-xs font-mono">
-            {new Date(t.created_date).toISOString().substring(0, 10)}
-          </span>
-          {/* Translate button — lazy, only on tap */}
-          <button
-            onClick={handleTranslate}
-            disabled={translating}
-            className={`flex items-center gap-1 px-2 py-1 rounded-full text-xs transition-all ${
-              showTranslation
-                ? "text-cyan-400/70 border border-cyan-500/30 bg-cyan-500/10"
-                : "text-white/20 border border-white/10 hover:text-white/50 hover:border-white/25"
-            }`}
-          >
-            {translating ? (
-              <motion.div animate={{ rotate: 360 }} transition={{ duration: 1, repeat: Infinity, ease: "linear" }} className="w-3 h-3 border border-cyan-500/40 border-t-cyan-400 rounded-full" />
-            ) : (
-              <Languages className="w-3 h-3" />
-            )}
-            <span>{showTranslation ? "original" : "translate"}</span>
-          </button>
-        </div>
+      <div className="flex items-center justify-between mt-4 pt-3" style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}>
+        <button
+          onClick={handleTranslate}
+          disabled={translating}
+          className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-medium transition-all ${
+            showTranslation
+              ? "text-cyan-400 border border-cyan-500/40 bg-cyan-500/10"
+              : "text-white/25 border border-white/10 hover:text-white/50"
+          }`}
+        >
+          {translating ? (
+            <motion.div animate={{ rotate: 360 }} transition={{ duration: 1, repeat: Infinity, ease: "linear" }} className="w-3 h-3 border border-cyan-500/40 border-t-cyan-400 rounded-full" />
+          ) : (
+            <Languages className="w-3 h-3" />
+          )}
+          {showTranslation ? "original" : "translate"}
+        </button>
+
         <div className="flex items-center gap-2">
           <button
             onClick={() => {
-              const text = `"${t.message}" — ${t.author_name || "Anonymous Soul"}, ${t.country || "Earth"}\n\nALL LIFE SIGNAL • uf51.com/HumanSignal`;
+              const url = `${window.location.origin}/HumanSignal`;
+              const title = `"${t.message}" — ${t.author_name || "Anonymous Soul"}, ${t.country || "Earth"}`;
               if (navigator.share) {
-                navigator.share({ text });
+                navigator.share({ title, text: title, url });
               } else {
-                navigator.clipboard.writeText(text);
+                navigator.clipboard.writeText(`${title}\n\n${url}`);
               }
             }}
-            className="flex items-center gap-1 px-2 py-1 rounded-full text-xs text-white/20 border border-white/10 hover:text-white/50 hover:border-white/25 transition-all"
+            className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs text-white/25 border border-white/10 hover:text-white/50 transition-all"
           >
             <Share2 className="w-3 h-3" />
+            share
           </button>
           <button
             onClick={handleWitness}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold transition-all ${
+            className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold transition-all ${
               witnessed
                 ? "bg-pink-500/20 text-pink-400 border border-pink-500/40"
                 : "bg-white/5 text-white/30 border border-white/10 hover:border-white/25 hover:text-white/60"
             }`}
           >
             <Eye className="w-3 h-3" />
-            <span>{localCount} witnessed</span>
+            {localCount > 0 ? `${localCount} witnessed` : "witness"}
           </button>
         </div>
       </div>
