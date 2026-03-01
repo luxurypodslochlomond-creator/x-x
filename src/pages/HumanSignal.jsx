@@ -318,18 +318,15 @@ export default function HumanSignal() {
             </motion.div>
           )}
 
-          <AnimatePresence mode="wait">
-            <motion.textarea
-              key={placeholderIdx}
-              value={form.message}
-              onChange={e => setForm(f => ({ ...f, message: e.target.value }))}
-              placeholder={PLACEHOLDERS[placeholderIdx]}
-              className="w-full bg-transparent text-white placeholder-white/15 text-base resize-none outline-none leading-relaxed mb-5"
-              style={{ borderBottom: "1px solid rgba(255,255,255,0.08)", paddingBottom: "16px" }}
-              rows={4}
-              maxLength={500}
-            />
-          </AnimatePresence>
+          <textarea
+            value={form.message}
+            onChange={e => setForm(f => ({ ...f, message: e.target.value }))}
+            placeholder={PLACEHOLDERS[placeholderIdx]}
+            className="w-full bg-transparent text-white placeholder-white/20 text-base resize-none outline-none leading-relaxed mb-5"
+            style={{ borderBottom: "1px solid rgba(255,255,255,0.1)", paddingBottom: "16px" }}
+            rows={4}
+            maxLength={500}
+          />
 
           {/* Name row — minimal */}
           <div className="flex gap-3 mb-5">

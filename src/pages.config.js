@@ -218,6 +218,7 @@ import HealingScience from './pages/HealingScience';
 import Home from './pages/Home';
 import House51 from './pages/House51';
 import HowYouEarn from './pages/HowYouEarn';
+import HumanSignal from './pages/HumanSignal';
 import IToWeTransformation from './pages/IToWeTransformation';
 import ImpactVerification from './pages/ImpactVerification';
 import InterplanetaryMoney from './pages/InterplanetaryMoney';
@@ -273,6 +274,7 @@ import QuantumSearch from './pages/QuantumSearch';
 import Radio from './pages/Radio';
 import ReadingSupport from './pages/ReadingSupport';
 import RealityLibrary from './pages/RealityLibrary';
+import Teachers from './pages/Teachers';
 import RemoveBrokenTracks from './pages/RemoveBrokenTracks';
 import RequestAIMusic from './pages/RequestAIMusic';
 import RequestFamilySupport from './pages/RequestFamilySupport';
@@ -351,7 +353,6 @@ import SubmitProofOfLove from './pages/SubmitProofOfLove';
 import SymbolForge from './pages/SymbolForge';
 import TalkToAI51 from './pages/TalkToAI51';
 import TeacherInput from './pages/TeacherInput';
-import Teachers from './pages/Teachers';
 import TechScout from './pages/TechScout';
 import TechStack from './pages/TechStack';
 import TechnicalSpecification from './pages/TechnicalSpecification';
@@ -382,6 +383,7 @@ import UniversalWallet from './pages/UniversalWallet';
 import UnstoppableArchitecture from './pages/UnstoppableArchitecture';
 import UnstoppableProtocol from './pages/UnstoppableProtocol';
 import ViralTransmission from './pages/ViralTransmission';
+import VisitorsBook from './pages/VisitorsBook';
 import Volckano from './pages/Volckano';
 import WallOfLove from './pages/WallOfLove';
 import WalletDemo from './pages/WalletDemo';
@@ -395,8 +397,6 @@ import YoungWarriors from './pages/YoungWarriors';
 import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
-import HumanSignal from './pages/HumanSignal';
-import VisitorsBook from './pages/VisitorsBook';
 import __Layout from './Layout.jsx';
 
 
@@ -572,6 +572,7 @@ export const PAGES = {
     "Home": Home,
     "House51": House51,
     "HowYouEarn": HowYouEarn,
+    "HumanSignal": HumanSignal,
     "IToWeTransformation": IToWeTransformation,
     "ImpactVerification": ImpactVerification,
     "InterplanetaryMoney": InterplanetaryMoney,
@@ -627,6 +628,7 @@ export const PAGES = {
     "Radio": Radio,
     "ReadingSupport": ReadingSupport,
     "RealityLibrary": RealityLibrary,
+    "Teachers": Teachers,
     "RemoveBrokenTracks": RemoveBrokenTracks,
     "RequestAIMusic": RequestAIMusic,
     "RequestFamilySupport": RequestFamilySupport,
@@ -705,7 +707,6 @@ export const PAGES = {
     "SymbolForge": SymbolForge,
     "TalkToAI51": TalkToAI51,
     "TeacherInput": TeacherInput,
-    "Teachers": Teachers,
     "TechScout": TechScout,
     "TechStack": TechStack,
     "TechnicalSpecification": TechnicalSpecification,
@@ -736,6 +737,7 @@ export const PAGES = {
     "UnstoppableArchitecture": UnstoppableArchitecture,
     "UnstoppableProtocol": UnstoppableProtocol,
     "ViralTransmission": ViralTransmission,
+    "VisitorsBook": VisitorsBook,
     "Volckano": Volckano,
     "WallOfLove": WallOfLove,
     "WalletDemo": WalletDemo,
@@ -749,8 +751,6 @@ export const PAGES = {
     "ZeroEgoProtocol": ZeroEgoProtocol,
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
-    "HumanSignal": HumanSignal,
-    "VisitorsBook": VisitorsBook,
 }
 
 export const pagesConfig = {
