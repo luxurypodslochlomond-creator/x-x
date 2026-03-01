@@ -180,7 +180,8 @@ export default function HumanSignal() {
             const data = await res.json();
             const countryCode = data.countryCode || "";
             const country = COUNTRIES.find(c => c.code === countryCode);
-            const label = [data.city || data.locality, data.countryName].filter(Boolean).join(", ");
+            // Just show country (or continent region) — no city, no surveillance feel
+            const label = data.countryName || "Earth";
             setLocationLabel(label);
             setForm(f => ({
               ...f,
