@@ -267,7 +267,7 @@ export default function HumanSignal() {
         <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }}>
           <div className="inline-flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-4 py-1.5 text-xs text-white/40 font-mono mb-6">
             <motion.div className="w-1.5 h-1.5 rounded-full bg-green-400" animate={{ opacity: [1, 0.3, 1] }} transition={{ duration: 1.5, repeat: Infinity }} />
-            {transmissions.length} SIGNALS · {countries} NATIONS · {totalWitnesses} WITNESSES
+            {transmissions.length} signals · {countries} places · {totalWitnesses} witnessed
           </div>
         </motion.div>
 
