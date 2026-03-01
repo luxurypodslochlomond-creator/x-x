@@ -333,6 +333,7 @@ const LayoutInner = ({ children, currentPageName }) => {
   // 1. HEAL (most important - immediate value)
   const healNav = [
     { title: "🕊️ HUMAN SIGNAL", url: createPageUrl("HumanSignal"), icon: Globe, highlight: true, description: "One planet. One signal." },
+    { title: "🌍 VISITORS BOOK", url: createPageUrl("VisitorsBook"), icon: Globe, highlight: true, description: "Sign Earth's guestbook" },
     { title: "Frequency Chamber", url: createPageUrl("FrequencyChamber"), icon: COOLASFUCKWaves, highlight: true, description: "FREE healing frequencies" },
     { title: "Type1 AI51 Protocol", url: createPageUrl("Type1AI51"), icon: Heart, highlight: true, description: "T1D guidance + frequencies" },
     { title: "Chakra51 Pain Relief", url: createPageUrl("Chakra51"), icon: Zap, highlight: true, description: "Target pain - back, neck, etc" },
