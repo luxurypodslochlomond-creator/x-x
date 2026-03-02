@@ -171,6 +171,14 @@ export default function KidneyStoneShatter({ isPlaying, phase, hz }) {
     };
   };
 
+  // Exponential crack accumulation — starts slow, goes supercritical
+  const crackRef = useRef(0); // 0 to 1 — fracture buildup
+  const cycleRef = useRef(0); // which wave cycle we're in
+
+  useEffect(() => {
+    if (!isPlaying) { crackRef.current = 0; cycleRef.current = 0; }
+  }, [isPlaying]);
+
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -184,6 +192,15 @@ export default function KidneyStoneShatter({ isPlaying, phase, hz }) {
 
     const draw = () => {
       frameRef.current++;
+
+      // EXPONENTIAL CRACK GROWTH — each wave compounds on the last
+      // This IS the real physics: resonance fatigue = exponential fracture propagation
+      if (isPlaying) {
+        const growthRate = 0.0008 * Math.pow(1 + crackRef.current, 2.5); // exponential
+        crackRef.current = Math.min(crackRef.current + growthRate, 1);
+      }
+      const crack = crackRef.current;
+
       ctx.fillStyle = 'rgba(0,0,0,0.18)';
       ctx.fillRect(0, 0, W, H);
 
