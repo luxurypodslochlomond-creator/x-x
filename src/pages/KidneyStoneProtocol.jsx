@@ -411,10 +411,30 @@ Write him a SHORT (3-4 sentences max), warm, personal, genuinely hopeful message
               </div>
             </div>
 
+            {/* BREATHING PACER — synced to phase frequency */}
+            {isPlaying && (
+              <div className="flex flex-col items-center mb-4">
+                <motion.div
+                  animate={{ scale: breathPhase === 'in' ? 1.4 : 0.9, opacity: breathPhase === 'in' ? 1 : 0.5 }}
+                  transition={{ duration: (phase.breathRate || 5), ease: 'easeInOut' }}
+                  className="w-16 h-16 rounded-full border-2 flex items-center justify-center mb-1"
+                  style={{ borderColor: phase.color, background: `${phase.glow}` }}
+                >
+                  <span className="text-xs font-black" style={{ color: phase.color }}>
+                    {breathPhase === 'in' ? 'IN' : 'OUT'}
+                  </span>
+                </motion.div>
+                <p className="text-gray-600 text-xs">Breathe with it</p>
+              </div>
+            )}
+
             {/* INSTRUCTION BOX */}
             <div className="bg-gray-900/80 border border-gray-700 rounded-xl p-4 mb-4">
               <p className="text-yellow-400 text-xs font-black uppercase tracking-widest mb-1">📍 Gary — do this now:</p>
               <p className="text-white text-sm">{phase.instruction}</p>
+              {phase.harmonicHz && (
+                <p className="text-gray-600 text-xs mt-2">Playing: {phase.hz}Hz + {phase.harmonicHz}Hz harmonic</p>
+              )}
             </div>
 
             {/* PROGRESS BAR */}
