@@ -237,6 +237,9 @@ export default function AI51() {
   }, []);
 
   // OFFLINE MESH — AI51 reaches where data centres can't
+  // If online peer exists: relay message through mesh → real response
+  // If no peer: fallback to local cache (intelligent but pre-computed)
+  // Never silent. Always responds.
   const { meshPeers, canRelayThroughMesh } = useAI51OfflineMesh({
     isOnline,
     onMessageFromMesh: (relayedContent) => {
