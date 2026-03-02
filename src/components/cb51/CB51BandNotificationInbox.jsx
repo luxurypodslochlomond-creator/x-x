@@ -25,18 +25,20 @@ export default function CB51BandNotificationInbox({ alwaysShow = false }) {
         status: 'band_voting'
       });
 
-      // Check which ones I haven't voted on yet
-      const user = await base44.auth.me();
-      const myVotes = await base44.entities.GigVote.filter({
-        voted_by_role: 'band_member'
-      });
-
-      const myVoteGigIds = new Set(
-        myVotes.filter(v => v.created_by === user.email).map(v => v.gig_id)
-      );
-
-      // Return gigs I haven't voted on
-      return allVotingGigs.filter(g => !myVoteGigIds.has(g.id));
+      // Try to filter by user votes if logged in, otherwise show all voting gigs
+      try {
+        const user = await base44.auth.me();
+        const myVotes = await base44.entities.GigVote.filter({
+          voted_by_role: 'band_member'
+        });
+        const myVoteGigIds = new Set(
+          myVotes.filter(v => v.created_by === user.email).map(v => v.gig_id)
+        );
+        return allVotingGigs.filter(g => !myVoteGigIds.has(g.id));
+      } catch {
+        // PIN-only user (Scott/manager) — just show all band_voting gigs
+        return allVotingGigs;
+      }
     },
     refetchInterval: 3000 // Poll every 3s
   });
