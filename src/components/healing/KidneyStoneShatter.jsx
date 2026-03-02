@@ -416,6 +416,10 @@ export default function KidneyStoneShatter({ isPlaying, phase, hz }) {
       {!isPlaying && (
         <p className="text-xs font-mono text-gray-700 text-center">STONE AT 2/3</p>
       )}
+      {/* SCIENCE CAPTION */}
+      <p className="text-xs text-gray-700 text-center max-w-[90px] leading-tight" style={{ fontSize: '9px' }}>
+        Each wave compounds. Fracture = exponential.
+      </p>
     </div>
   );
 }
