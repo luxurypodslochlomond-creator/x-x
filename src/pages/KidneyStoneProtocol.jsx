@@ -11,11 +11,14 @@ const PHASES = [
     id: 'relax',
     name: 'URETER RELAX',
     hz: 194.18,
+    harmonicHz: 388.36, // octave harmonic — ancient doubling
     color: '#06b6d4',
     glow: 'rgba(6,182,212,0.4)',
-    duration: 300, // 5 mins
-    description: 'Ancient kidney meridian frequency. Relaxes the ureter wall so the stone can move.',
-    instruction: 'Lie on your RIGHT side. Place phone speaker against your lower right back.',
+    duration: 300,
+    breathRate: 4, // 4 second inhale/exhale cycle
+    hapticPattern: [200, 100, 200], // vibrate pattern ms
+    description: 'Ancient kidney meridian frequency (194.18Hz) + octave harmonic. Relaxes the ureter wall so the stone can move.',
+    instruction: 'Lie on your RIGHT side. Place phone speaker against your lower right back. Follow the breathing circle.',
     waveType: 'sine',
     binaural: false
   },
@@ -23,36 +26,45 @@ const PHASES = [
     id: 'dissolve',
     name: 'STONE BREAKDOWN',
     hz: 174,
+    harmonicHz: 528, // Solfeggio cellular repair — the ancients' healing chord
     color: '#f59e0b',
     glow: 'rgba(245,158,11,0.4)',
     duration: 300,
-    description: 'Deep pain relief + tissue resonance. Same principle as medical lithotripsy.',
-    instruction: 'Stay on your right side. Breathe slowly and deeply. Let the vibration do the work.',
+    breathRate: 5,
+    hapticPattern: [300, 150, 300],
+    description: '174Hz pain/dissolution + 528Hz Solfeggio (cellular repair). The exact chord ancient healers used. Same physics as hospital lithotripsy.',
+    instruction: 'Stay on your right side. Phone on your back. Follow the breath. Feel the vibration in your lower back.',
     waveType: 'sine',
     binaural: false
   },
   {
     id: 'move',
-    name: 'MOVEMENT PULSE',
+    name: 'STONE MOVEMENT',
     hz: 285,
+    harmonicHz: 417, // Solfeggio — facilitates change, clears blockages
     color: '#10b981',
     glow: 'rgba(16,185,129,0.4)',
     duration: 300,
-    description: 'Organ repair + encourages downward stone movement toward bladder.',
-    instruction: 'Drink a full glass of water NOW. Keep phone on your back.',
+    breathRate: 6,
+    hapticPattern: [100, 50, 100, 50, 100],
+    description: '285Hz organ repair + 417Hz Solfeggio (clears blockages). Ancient formula for moving stuck things.',
+    instruction: 'Drink a full glass of water RIGHT NOW. Then back on your right side. Phone on your back.',
     waveType: 'sine',
     binaural: false
   },
   {
     id: 'binaural',
-    name: 'DEEP HEALING',
+    name: 'DEEP GAMMA HEALING',
     hz: 40,
     carrierHz: 200,
+    harmonicHz: null,
     color: '#8b5cf6',
     glow: 'rgba(139,92,246,0.4)',
     duration: 300,
-    description: 'Binaural beat at 40Hz (gamma healing). Left ear + right ear creates internal resonance throughout the body.',
-    instruction: 'Switch to HEADPHONES for this phase. Lie still. This works best with eyes closed.',
+    breathRate: 7,
+    hapticPattern: [500, 500],
+    description: '40Hz gamma binaural — left ear 200Hz, right ear 240Hz. Your brain creates the 40Hz internally. Deepest healing state possible.',
+    instruction: 'HEADPHONES required for this phase. Eyes closed. Lie still. Let it work.',
     waveType: 'sine',
     binaural: true
   }
