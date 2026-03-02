@@ -503,9 +503,11 @@ Write him a SHORT (3-4 sentences max), warm, personal, genuinely hopeful message
             <p className="text-gray-400 text-xs">✓ Tell the doctor tomorrow you want Tamsulosin</p>
           </div>
 
+          <OutcomeTracker protocol="kidney_stone" />
+
           <button
             onClick={() => { setCompleted(false); setPhase(null); setPhaseIndex(0); setTimeLeft(0); setIsPlaying(false); }}
-            className="w-full py-4 bg-cyan-500 text-black font-black rounded-xl"
+            className="w-full py-4 bg-cyan-500 text-black font-black rounded-xl mt-4"
           >
             RUN AGAIN
           </button>
