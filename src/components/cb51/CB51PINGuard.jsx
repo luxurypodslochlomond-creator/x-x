@@ -11,7 +11,7 @@ export default function CB51PINGuard({ children }) {
   useEffect(() => {
     const checkAuth = async () => {
       // First check PIN - Scott just needs PIN, no account required
-      const pinVerified = sessionStorage.getItem('cb51_pin_verified');
+      const pinVerified = sessionStorage.getItem('cb51_pin_verified') || localStorage.getItem('cb51_pin_verified');
       if (pinVerified) {
         setIsAuthed(true);
         setChecking(false);
