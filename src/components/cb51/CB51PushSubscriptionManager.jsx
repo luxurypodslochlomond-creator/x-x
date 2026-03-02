@@ -54,12 +54,14 @@ export default function CB51PushSubscriptionManager({ userEmail }) {
   };
 
   const getOrCreateRegistration = async () => {
-    // Always use the real SW endpoint - blob URLs are blocked on iOS/strict browsers
     const swUrl = '/api/functions/serveServiceWorker';
     
-    // Check if already registered at this URL
+    // Always re-register to pick up SW updates
     const existing = await navigator.serviceWorker.getRegistration('/');
-    if (existing) return existing;
+    if (existing) {
+      existing.update().catch(() => {}); // non-blocking update check
+      return existing;
+    }
 
     return await navigator.serviceWorker.register(swUrl, { scope: '/' });
   };
