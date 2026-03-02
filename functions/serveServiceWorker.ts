@@ -5,11 +5,11 @@
 
 Deno.serve((req) => {
   const swCode = `
-// UF51 Service Worker - Offline Healing + Push Notifications
-const CACHE_NAME = 'uf51-healing-v1';
+// CB51 Service Worker - Push Notifications + Offline
+const CACHE_NAME = 'cb51-v2';
 
 self.addEventListener('install', (event) => {
-  console.log('[SW] Installing UF51 Healing...');
+  console.log('[SW] CB51 installing...');
   self.skipWaiting();
 });
 
@@ -46,6 +46,7 @@ self.addEventListener('push', (event) => {
     },
     requireInteraction: true,
     vibrate: [200, 100, 200],
+    actions: data.actions || [],
   };
 
   event.waitUntil(
@@ -121,17 +122,17 @@ self.addEventListener('notificationclick', (event) => {
   }
 
   // Default click - open URL
-  const urlToOpen = event.notification.data?.url || '/';
+  const urlToOpen = event.notification.data?.url || '/app/CB51';
 
   event.waitUntil(
     clients.matchAll({ type: 'window', includeUncontrolled: true }).then((clientList) => {
-      // Check if app is already open
+      // If app already open — focus + navigate
       for (const client of clientList) {
-        if ('focus' in client) {
+        if (client.url.includes(self.location.origin) && 'focus' in client) {
           return client.focus().then(() => client.navigate(urlToOpen));
         }
       }
-      // Open new window
+      // Open fresh
       if (clients.openWindow) {
         return clients.openWindow(urlToOpen);
       }
