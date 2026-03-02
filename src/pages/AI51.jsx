@@ -225,9 +225,11 @@ export default function AI51() {
   const [showGoLiveIt, setShowGoLiveIt] = useState(false);
   const [showMemoryNudge, setShowMemoryNudge] = useState(false);
   const [localMemory, setLocalMemory] = useState(null);
+  const [preferLocalInference, setPreferLocalInference] = useState(false);
   const isProcessingRef = useRef(false);
   const navigate = useNavigate();
   const { t } = useLanguageDetection();
+  const { isReady: localInferenceReady, isLoading: localInferenceLoading, generate: generateLocal } = useLocalInference();
 
   // Track online/offline
   useEffect(() => {
