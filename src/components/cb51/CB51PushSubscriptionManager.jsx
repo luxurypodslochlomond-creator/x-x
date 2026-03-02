@@ -135,8 +135,36 @@ export default function CB51PushSubscriptionManager({ userEmail }) {
     return outputArray;
   };
 
+  // Detect iOS
+  const isIOS = /iPhone|iPad|iPod/.test(navigator.userAgent);
+  const isInStandaloneMode = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+  const isAndroid = /Android/.test(navigator.userAgent);
+
   // Subscribed — show nothing (all good)
   if (status === 'subscribed' || status === 'checking') return null;
+
+  // iOS in browser (not installed) — must install first
+  if (isIOS && !isInStandaloneMode) {
+    return (
+      <div className="mx-6 mt-4 bg-amber-950/50 border-2 border-amber-500/60 rounded-lg p-4">
+        <div className="flex items-start gap-3">
+          <Smartphone className="w-5 h-5 text-amber-400 flex-shrink-0 mt-0.5" />
+          <div>
+            <p className="text-amber-300 font-black text-sm">📲 Install CB51 on your iPhone</p>
+            <p className="text-gray-300 text-xs mt-1 leading-relaxed">
+              To get push notifications on iPhone you need to install the app first:
+            </p>
+            <ol className="text-amber-200 text-xs mt-2 space-y-1 leading-relaxed">
+              <li>1. Tap the <strong>Share button</strong> (box with arrow) at the bottom of Safari</li>
+              <li>2. Scroll down and tap <strong>"Add to Home Screen"</strong></li>
+              <li>3. Tap <strong>Add</strong> — then open CB51 from your home screen</li>
+              <li>4. Notifications will work automatically ✓</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   // Needs permission — show a clear prompt
   if (status === 'needs_permission') {
@@ -165,20 +193,30 @@ export default function CB51PushSubscriptionManager({ userEmail }) {
         <BellOff className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" />
         <div>
           <p className="text-red-300 font-bold text-sm">Notifications Blocked</p>
-          <p className="text-gray-400 text-xs mt-1">Go to <strong className="text-white">Settings → CB51 → Notifications</strong> and turn on Allow Notifications</p>
+          <p className="text-gray-400 text-xs mt-1">
+            {isIOS 
+              ? 'Go to Settings → CB51 → Notifications → Allow Notifications'
+              : 'Go to your browser settings and allow notifications for this site, then refresh'
+            }
+          </p>
         </div>
       </div>
     );
   }
 
-  // Unsupported (old browser / non-installed PWA on iOS)
+  // Unsupported
   if (status === 'unsupported') {
     return (
       <div className="mx-6 mt-4 bg-amber-950/40 border border-amber-500/40 rounded-lg p-4 flex items-start gap-3">
         <Smartphone className="w-5 h-5 text-amber-400 flex-shrink-0 mt-0.5" />
         <div>
-          <p className="text-amber-300 font-bold text-sm">Add CB51 to Home Screen</p>
-          <p className="text-gray-400 text-xs mt-1">On iPhone: tap <strong className="text-white">Share → Add to Home Screen</strong> then reopen CB51 to enable notifications</p>
+          <p className="text-amber-300 font-bold text-sm">Notifications not supported</p>
+          <p className="text-gray-400 text-xs mt-1">
+            {isIOS 
+              ? 'Add CB51 to your Home Screen first (Share → Add to Home Screen), then reopen the app'
+              : 'Try Chrome or Firefox on Android for full notification support'
+            }
+          </p>
         </div>
       </div>
     );
@@ -189,7 +227,7 @@ export default function CB51PushSubscriptionManager({ userEmail }) {
     return (
       <div className="mx-6 mt-4 bg-gray-900/60 border border-gray-700 rounded-lg p-3 flex items-center gap-3">
         <AlertCircle className="w-4 h-4 text-gray-500 flex-shrink-0" />
-        <p className="text-gray-500 text-xs">Notification setup failed — use email alerts as backup</p>
+        <p className="text-gray-500 text-xs">Notification setup failed — email alerts will be used as backup</p>
       </div>
     );
   }
