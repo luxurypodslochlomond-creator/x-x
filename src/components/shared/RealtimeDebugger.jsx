@@ -15,6 +15,11 @@ export default function RealtimeDebugger() {
     useEffect(() => {
         // CATCH ALL ERRORS
         const handleError = (event) => {
+            // Skip Lock errors — they're browser internals
+            if (event.message?.includes('Illegal constructor') || event.error?.toString?.().includes('Lock')) {
+                return;
+            }
+
             const error = {
                 message: event.message || event.error?.message,
                 stack: event.error?.stack,
@@ -33,6 +38,11 @@ export default function RealtimeDebugger() {
 
         // CATCH UNHANDLED PROMISE REJECTIONS
         const handleRejection = (event) => {
+            // Skip Lock errors
+            if (event.reason?.toString?.().includes('Lock') || event.reason?.message?.includes('Illegal constructor')) {
+                return;
+            }
+
             const error = {
                 message: event.reason?.message || String(event.reason),
                 stack: event.reason?.stack,
