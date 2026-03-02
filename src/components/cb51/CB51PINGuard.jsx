@@ -10,17 +10,19 @@ export default function CB51PINGuard({ children }) {
 
   useEffect(() => {
     const checkAuth = async () => {
+      // First check PIN - Scott just needs PIN, no account required
+      const pinVerified = sessionStorage.getItem('cb51_pin_verified');
+      if (pinVerified) {
+        setIsAuthed(true);
+        setChecking(false);
+        return;
+      }
+      // Also allow base44 admin login
       try {
         await base44.auth.me();
         setIsAuthed(true);
       } catch (err) {
-        // Not logged in - check PIN
-        const pinVerified = sessionStorage.getItem('cb51_pin_verified');
-        if (!pinVerified) {
-          navigate(createPageUrl('CB51Login'), { replace: true });
-          return;
-        }
-        setIsAuthed(false);
+        navigate(createPageUrl('CB51Login'), { replace: true });
       } finally {
         setChecking(false);
       }
@@ -28,7 +30,6 @@ export default function CB51PINGuard({ children }) {
     checkAuth();
   }, [navigate]);
 
-  // Show nothing while checking
   if (checking) {
     return (
       <div className="min-h-screen bg-black flex items-center justify-center">
@@ -37,9 +38,7 @@ export default function CB51PINGuard({ children }) {
     );
   }
 
-  // If authenticated OR PIN verified, show content
-  const pinVerified = sessionStorage.getItem('cb51_pin_verified');
-  if (!isAuthed && !pinVerified) return null;
+  if (!isAuthed) return null;
 
   return children;
 }
