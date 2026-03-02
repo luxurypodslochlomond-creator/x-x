@@ -8,7 +8,6 @@ import { base44 } from '@/api/base44Client';
 
 export default function OutcomeTracker({ protocol }) {
   const [voted, setVoted] = useState(false);
-  const [count, setCount] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const handleVote = async (helped) => {
