@@ -51,57 +51,43 @@ export default function CB51Login() {
         );
     }
 
-    // Show PIN screen for logged-in users
-    if (isLoggedIn) {
-        return (
-            <div className="min-h-screen bg-black flex items-center justify-center p-4">
-                <div className="max-w-md w-full">
-                    <div className="text-center mb-8">
-                        <Radio className="w-16 h-16 text-cyan-400 mx-auto mb-4" />
-                        <h1 className="text-4xl font-black text-white font-mono mb-2">CB51</h1>
-                        <p className="text-cyan-400 font-mono text-xs mb-2">CitizenBand51 : Avoid the Noise</p>
-                        <p className="text-cyan-400 font-mono text-sm">Enter PIN</p>
-                    </div>
-
-                    <input
-                        type="password"
-                        inputMode="numeric"
-                        value={pinEntered}
-                        onChange={(e) => setPinEntered(e.target.value.slice(0, 4))}
-                        onKeyDown={(e) => e.key === 'Enter' && handlePinSubmit()}
-                        placeholder="••••"
-                        autoFocus
-                        className="w-full bg-black border-2 border-cyan-500 text-white text-center text-4xl font-black py-4 rounded-lg font-mono mb-4 placeholder-gray-700"
-                    />
-
-                    {error && <p className="text-red-400 font-mono text-sm text-center mb-4">{error}</p>}
-
-                    <button
-                        onClick={handlePinSubmit}
-                        className="w-full bg-cyan-500 hover:bg-cyan-600 text-black font-black py-4 rounded-lg text-lg font-mono"
-                    >
-                        ENTER
-                    </button>
-                </div>
-            </div>
-        );
-    }
-
-    // Show login button for non-logged-in users
+    // ALWAYS show PIN screen - Scott doesn't need a base44 account
     return (
-        <div className="min-h-screen bg-black flex items-center justify-center">
+        <div className="min-h-screen bg-black flex items-center justify-center p-4">
             <div className="max-w-md w-full">
                 <div className="text-center mb-8">
                     <Radio className="w-16 h-16 text-cyan-400 mx-auto mb-4" />
                     <h1 className="text-4xl font-black text-white font-mono mb-2">CB51</h1>
-                    <p className="text-cyan-400 font-mono text-xs">CitizenBand51 : Avoid the Noise</p>
+                    <p className="text-cyan-400 font-mono text-xs mb-2">CitizenBand51 : Avoid the Noise</p>
+                    <p className="text-cyan-400 font-mono text-sm">Enter PIN</p>
                 </div>
 
+                <input
+                    type="password"
+                    inputMode="numeric"
+                    value={pinEntered}
+                    onChange={(e) => setPinEntered(e.target.value.slice(0, 4))}
+                    onKeyDown={(e) => e.key === 'Enter' && handlePinSubmit()}
+                    placeholder="••••"
+                    autoFocus
+                    className="w-full bg-black border-2 border-cyan-500 text-white text-center text-4xl font-black py-4 rounded-lg font-mono mb-4 placeholder-gray-700"
+                />
+
+                {error && <p className="text-red-400 font-mono text-sm text-center mb-4">{error}</p>}
+
                 <button
-                    onClick={handleLogin}
+                    onClick={handlePinSubmit}
                     className="w-full bg-cyan-500 hover:bg-cyan-600 text-black font-black py-4 rounded-lg text-lg font-mono"
                 >
-                    LOGIN
+                    ENTER
+                </button>
+
+                {/* Admin login - hidden at bottom for app owner only */}
+                <button
+                    onClick={handleLogin}
+                    className="w-full mt-4 text-gray-700 hover:text-gray-500 font-mono text-xs py-2 transition-colors"
+                >
+                    admin login
                 </button>
             </div>
         </div>

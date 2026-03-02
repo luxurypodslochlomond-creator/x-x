@@ -228,6 +228,7 @@ import LennoxMaths from './pages/LennoxMaths';
 import Life51 from './pages/Life51';
 import Life51Onboarding from './pages/Life51Onboarding';
 import Life51ROI from './pages/Life51ROI';
+import LifeSignal from './pages/LifeSignal';
 import LightningP2P from './pages/LightningP2P';
 import Listen from './pages/Listen';
 import LoveBridge from './pages/LoveBridge';
@@ -273,8 +274,8 @@ import QuantumPayments from './pages/QuantumPayments';
 import QuantumSearch from './pages/QuantumSearch';
 import Radio from './pages/Radio';
 import ReadingSupport from './pages/ReadingSupport';
-import RealityLibrary from './pages/RealityLibrary';
 import Teachers from './pages/Teachers';
+import RealityLibrary from './pages/RealityLibrary';
 import RemoveBrokenTracks from './pages/RemoveBrokenTracks';
 import RequestAIMusic from './pages/RequestAIMusic';
 import RequestFamilySupport from './pages/RequestFamilySupport';
@@ -391,14 +392,13 @@ import Welcome from './pages/Welcome';
 import WhiteLabelSetup from './pages/WhiteLabelSetup';
 import Whitepaper from './pages/Whitepaper';
 import Why432Hz from './pages/Why432Hz';
+import WhyAllLifeSignal from './pages/WhyAllLifeSignal';
 import WhyHelpUF51 from './pages/WhyHelpUF51';
 import WhyWeStartSimple from './pages/WhyWeStartSimple';
 import YoungWarriors from './pages/YoungWarriors';
 import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
-import WhyAllLifeSignal from './pages/WhyAllLifeSignal';
-import LifeSignal from './pages/LifeSignal';
 import __Layout from './Layout.jsx';
 
 
@@ -584,6 +584,7 @@ export const PAGES = {
     "Life51": Life51,
     "Life51Onboarding": Life51Onboarding,
     "Life51ROI": Life51ROI,
+    "LifeSignal": LifeSignal,
     "LightningP2P": LightningP2P,
     "Listen": Listen,
     "LoveBridge": LoveBridge,
@@ -629,8 +630,8 @@ export const PAGES = {
     "QuantumSearch": QuantumSearch,
     "Radio": Radio,
     "ReadingSupport": ReadingSupport,
-    "RealityLibrary": RealityLibrary,
     "Teachers": Teachers,
+    "RealityLibrary": RealityLibrary,
     "RemoveBrokenTracks": RemoveBrokenTracks,
     "RequestAIMusic": RequestAIMusic,
     "RequestFamilySupport": RequestFamilySupport,
@@ -747,14 +748,13 @@ export const PAGES = {
     "WhiteLabelSetup": WhiteLabelSetup,
     "Whitepaper": Whitepaper,
     "Why432Hz": Why432Hz,
+    "WhyAllLifeSignal": WhyAllLifeSignal,
     "WhyHelpUF51": WhyHelpUF51,
     "WhyWeStartSimple": WhyWeStartSimple,
     "YoungWarriors": YoungWarriors,
     "ZeroEgoProtocol": ZeroEgoProtocol,
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
-    "WhyAllLifeSignal": WhyAllLifeSignal,
-    "LifeSignal": LifeSignal,
 }
 
 export const pagesConfig = {
