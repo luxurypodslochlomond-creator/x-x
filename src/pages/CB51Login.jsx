@@ -32,6 +32,10 @@ export default function CB51Login() {
 
     const handlePinSubmit = () => {
         if (pinEntered === '1888') {
+            // Use cookie - works across Safari AND PWA home screen on iOS
+            const expires = new Date();
+            expires.setFullYear(expires.getFullYear() + 1);
+            document.cookie = `cb51_pin_verified=true; expires=${expires.toUTCString()}; path=/; SameSite=Lax`;
             localStorage.setItem('cb51_pin_verified', 'true');
             navigate(createPageUrl('CB51'), { replace: true });
         } else {
