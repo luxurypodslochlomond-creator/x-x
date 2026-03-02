@@ -357,12 +357,22 @@ export default function KidneyStoneShatter({ isPlaying, phase, hz }) {
         }
       });
 
-      // HZ label
+      // HZ label + exponential state label
       if (isPlaying && hz) {
-        ctx.fillStyle = `rgba(${colorRGB},0.6)`;
-        ctx.font = 'bold 10px monospace';
+        ctx.fillStyle = `rgba(${colorRGB},0.7)`;
+        ctx.font = 'bold 9px monospace';
         ctx.textAlign = 'center';
-        ctx.fillText(`${hz}Hz`, W / 2, stoneCY - 18);
+        ctx.fillText(`${hz}Hz`, W / 2, stoneCY - 20);
+
+        // Dynamic state label based on crack level
+        const stateLabel = crack < 0.2 ? 'RESONATING'
+          : crack < 0.45 ? 'FRACTURING'
+          : crack < 0.7 ? 'SHATTERING'
+          : crack < 0.9 ? 'SUPERCRITICAL'
+          : '→ BLADDER';
+        ctx.fillStyle = crack > 0.7 ? `rgba(34,197,94,0.9)` : `rgba(${colorRGB},0.5)`;
+        ctx.font = 'bold 7px monospace';
+        ctx.fillText(stateLabel, W / 2, stoneCY - 10);
       }
 
       // "2/3 to bladder" position marker
