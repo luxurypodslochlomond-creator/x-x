@@ -947,6 +947,20 @@ You're not performing. You're just here.`,
           <ChevronLeft className="w-4 h-4" />
           <span className="text-xs font-sans tracking-wider">UF51</span>
         </Link>
+        {localInferenceReady && (
+          <button
+            onClick={() => setPreferLocalInference(!preferLocalInference)}
+            className="text-[10px] px-2 py-1 rounded font-mono transition-all"
+            style={{
+              background: preferLocalInference ? 'rgba(34,211,238,0.2)' : 'rgba(200,140,255,0.1)',
+              border: preferLocalInference ? '1px solid rgba(34,211,238,0.4)' : '1px solid rgba(200,140,255,0.2)',
+              color: preferLocalInference ? 'rgba(34,211,238,0.8)' : 'rgba(200,140,255,0.5)'
+            }}
+            title="Use local inference (on-device, zero transmission)"
+          >
+            {preferLocalInference ? 'LOCAL' : 'cloud'}
+          </button>
+        )}
         <div className="flex flex-col items-center gap-0.5">
           <span className="text-white/50 font-sans text-xs tracking-[0.3em]">AI51</span>
           <MeshStatusDot meshPeers={meshPeers} canRelayThroughMesh={canRelayThroughMesh} isOnline={isOnline} />
