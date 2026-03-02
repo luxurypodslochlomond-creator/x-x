@@ -399,6 +399,7 @@ import YoungWarriors from './pages/YoungWarriors';
 import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
+import KidneyStoneProtocol from './pages/KidneyStoneProtocol';
 import __Layout from './Layout.jsx';
 
 
@@ -755,6 +756,7 @@ export const PAGES = {
     "ZeroEgoProtocol": ZeroEgoProtocol,
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
+    "KidneyStoneProtocol": KidneyStoneProtocol,
 }
 
 export const pagesConfig = {
