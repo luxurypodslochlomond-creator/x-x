@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
+import KidneyStoneShatter from '@/components/healing/KidneyStoneShatter';
 
 // THE GARY PROTOCOL ♾️❤️
 // Frequencies specifically for kidney stone dissolution + ureter relaxation
