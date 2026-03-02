@@ -392,7 +392,7 @@ export default function KidneyStoneShatter({ isPlaying, phase, hz }) {
 
     animRef.current = requestAnimationFrame(draw);
     return () => cancelAnimationFrame(animRef.current);
-  }, [isPlaying, color, hz, colorRGB]);
+  }, [isPlaying, color, hz, colorRGB, crackRef]);
 
   return (
     <div className="flex flex-col items-center gap-2">
