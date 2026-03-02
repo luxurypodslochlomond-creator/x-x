@@ -9,6 +9,8 @@ import { loadLocalMemory, recordLocalVisit, extractAndSaveLocalInsight, buildLoc
 import { useAI51OfflineMesh, MeshStatusDot } from '@/components/ai51/AI51OfflineMesh';
 import AI51FrequencyGenerator from '@/components/healing/AI51FrequencyGenerator';
 import { useLanguageDetection } from '@/components/shared/useLanguageDetection';
+import { useLocalInference } from '@/components/ai51/AI51LocalInference';
+import { saveEncryptedMemory } from '@/components/ai51/AI51EncryptedMemory';
 
 // HEALING BRIDGE — detect when someone needs more than words
 const PAIN_KEYWORDS = ['pain', 'hurt', 'ache', 'sore', 'suffering', 'agony', 'headache', 'back pain', 'anxious', 'anxiety', 'panic', 'stress', 'stressed', 'overwhelmed', 'exhausted', 'can\'t sleep', 'insomnia', 'depressed', 'depression', 'lonely', 'alone', 'sad', 'crying', 'grief', 'trauma'];
