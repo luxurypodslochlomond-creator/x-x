@@ -229,39 +229,90 @@ export default function KidneyStoneShatter({ isPlaying, phase, hz }) {
       ctx.stroke();
 
       if (isPlaying) {
-        // Spawn dust particles
-        if (frameRef.current % 2 === 0) {
-          for (let i = 0; i < 3; i++) {
+        // Spawn dust — MORE particles as crack accumulates (exponential shedding)
+        const spawnRate = Math.floor(1 + crack * 8); // 1 → 9 particles per frame
+        if (frameRef.current % Math.max(1, Math.floor(3 - crack * 2.5)) === 0) {
+          for (let i = 0; i < spawnRate; i++) {
             particlesRef.current.push(spawnParticle(ctx, stoneCX, stoneCY));
           }
         }
 
-        // Frequency shockwave rings
-        const ringPhase = (frameRef.current * 0.04) % 1;
+        // Frequency shockwave rings — BIGGER + FASTER as crack grows (amplification)
+        const ringSpeed = 0.03 + crack * 0.06; // exponential speed
+        const ringSize = 14 + crack * 20; // rings expand further as stone weakens
+        const ringPhase = (frameRef.current * ringSpeed) % 1;
         [0, 0.33, 0.66].forEach(offset => {
           const p = (ringPhase + offset) % 1;
           ctx.beginPath();
-          ctx.ellipse(stoneCX, stoneCY, p * 22, p * 16, 0, 0, Math.PI * 2);
-          ctx.strokeStyle = `rgba(${colorRGB},${0.7 * (1 - p)})`;
-          ctx.lineWidth = 1.5;
+          ctx.ellipse(stoneCX, stoneCY, p * ringSize, p * ringSize * 0.72, 0, 0, Math.PI * 2);
+          ctx.strokeStyle = `rgba(${colorRGB},${(0.4 + crack * 0.5) * (1 - p)})`;
+          ctx.lineWidth = 1 + crack * 2;
           ctx.stroke();
         });
 
-        // Draw the partially-shattered stone core
-        const pulseScale = 1 + Math.sin(frameRef.current * 0.15) * 0.15;
-        ctx.beginPath();
-        ctx.ellipse(stoneCX, stoneCY, 5 * pulseScale, 4 * pulseScale, 0, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(107,114,128,0.7)`;
-        ctx.fill();
-        ctx.strokeStyle = color;
-        ctx.lineWidth = 1.5;
-        ctx.stroke();
+        // Draw the partially-shattered stone — SHRINKS as crack grows
+        const stoneRadius = 5 * (1 - crack * 0.7); // stone literally dissolving
+        if (stoneRadius > 0.5) {
+          const pulseScale = 1 + Math.sin(frameRef.current * (0.1 + crack * 0.2)) * (0.1 + crack * 0.25);
+          ctx.beginPath();
+          ctx.ellipse(stoneCX, stoneCY, stoneRadius * pulseScale, stoneRadius * 0.8 * pulseScale, 0, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(107,114,128,${0.9 - crack * 0.7})`;
+          ctx.fill();
+          ctx.strokeStyle = color;
+          ctx.lineWidth = 1.5;
+          ctx.stroke();
 
-        // Crystal highlight
-        ctx.beginPath();
-        ctx.ellipse(stoneCX + 1.5, stoneCY - 1.5, 1.5, 1, -0.5, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(255,255,255,0.5)';
-        ctx.fill();
+          // Crack lines ON the stone — appear exponentially
+          if (crack > 0.15) {
+            const numCracks = Math.floor(crack * 8);
+            for (let i = 0; i < numCracks; i++) {
+              const angle = (i / numCracks) * Math.PI * 2 + frameRef.current * 0.005;
+              const len = stoneRadius * (0.5 + crack * 0.8);
+              ctx.beginPath();
+              ctx.moveTo(stoneCX, stoneCY);
+              ctx.lineTo(stoneCX + Math.cos(angle) * len, stoneCY + Math.sin(angle) * len * 0.8);
+              ctx.strokeStyle = `rgba(${colorRGB},${crack * 0.8})`;
+              ctx.lineWidth = 0.8;
+              ctx.stroke();
+            }
+          }
+
+          // Crystal highlight (fades as stone dissolves)
+          ctx.beginPath();
+          ctx.ellipse(stoneCX + 1.5, stoneCY - 1.5, 1.5, 1, -0.5, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(255,255,255,${0.5 * (1 - crack)})`;
+          ctx.fill();
+        }
+
+        // SUPERCRITICAL FLASH — when crack > 0.8, stone is basically gone
+        if (crack > 0.8) {
+          const flashAlpha = (crack - 0.8) * 5 * (0.5 + Math.sin(frameRef.current * 0.3) * 0.5);
+          ctx.beginPath();
+          ctx.arc(stoneCX, stoneCY, 12 * (crack - 0.75), 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(${colorRGB},${flashAlpha * 0.15})`;
+          ctx.fill();
+        }
+
+        // AMPLIFICATION METER — exponential curve drawn on side
+        const meterX = W - 12;
+        const meterH = 60;
+        const meterY = stoneCY - meterH / 2;
+        ctx.fillStyle = 'rgba(255,255,255,0.05)';
+        ctx.fillRect(meterX - 4, meterY, 4, meterH);
+        // Exponential fill
+        const fillH = meterH * crack;
+        const gradient = ctx.createLinearGradient(0, meterY + meterH - fillH, 0, meterY + meterH);
+        gradient.addColorStop(0, `rgba(${colorRGB},0.9)`);
+        gradient.addColorStop(1, `rgba(${colorRGB},0.2)`);
+        ctx.fillStyle = gradient;
+        ctx.fillRect(meterX - 4, meterY + meterH - fillH, 4, fillH);
+        // Label
+        ctx.fillStyle = `rgba(${colorRGB},0.6)`;
+        ctx.font = '6px monospace';
+        ctx.textAlign = 'center';
+        ctx.fillText('AMP', meterX - 2, meterY - 3);
+        ctx.fillText(`${Math.round(crack * 100)}%`, meterX - 2, meterY + meterH + 8);
+
       } else {
         // Static stone — not shattering
         ctx.beginPath();
